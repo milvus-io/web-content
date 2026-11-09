@@ -116,7 +116,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-kubectl">
-<p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行します。</p>
+<p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>インストール処理が終了すると、次のような出力が表示されます。</p>
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v3.0.3 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>（v3.0.5で推奨）を使用し、Streaming Nodeを含むすべての新しいアーキテクチャコンポーネントを備えたMilvusクラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャの主な特徴:</strong></p>
 <ul>
 <li><strong>メッセージキュー</strong>：<a href="/docs/ja/woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
@@ -249,7 +249,7 @@ my-release-minio-1                               1/1     Running   0          2m
 my-release-minio-2                               1/1     Running   0          2m35s
 my-release-minio-3                               1/1     Running   0          2m35s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. ローカルポートを Milvus に転送する<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. ローカルポートをMilvusに転送する<button data-href="#3-Forward-a-local-port-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,7 +269,7 @@ my-release-minio-3                               1/1     Running   0          2m
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>出力結果から、Milvusインスタンスがデフォルトポートの<strong>19530</strong>でサービスを提供していることがわかります。</p>
+<p>出力結果から、Milvus インスタンスがデフォルトのポート<strong>19530</strong> でサービスを提供していることがわかります。</p>
 <div class="alert note">
 <p>Milvusをスタンドアロンモードでデプロイした場合は、Pod名を `<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> ` から `<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>` に変更してください。</p>
 </div>
@@ -278,7 +278,7 @@ my-release-minio-3                               1/1     Running   0          2m
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
 <p>オプションとして、上記のコマンドで `<code translate="no">27017:19530</code> ` の代わりに `<code translate="no">:19530</code> ` を使用すると、<code translate="no">kubectl</code> がローカルポートを自動的に割り当ててくれるため、ポートの競合を管理する必要がなくなります。</p>
-<p>デフォルトでは、kubectl のポート転送は<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポート転送がホストマシンのすべての IP アドレスでリスニングするようになります。</p>
+<p>デフォルトでは、kubectl のポートフォワーディングは<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポートフォワーディングがホストマシンのすべての IP アドレスでリスニングするようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>

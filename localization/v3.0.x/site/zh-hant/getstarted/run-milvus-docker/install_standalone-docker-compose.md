@@ -56,9 +56,9 @@ title: 使用 Docker Compose 執行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其儲存庫中提供了一個 Docker Compose 配置檔案。請下載 v3.0.3 的配置檔案並啟動新的部署：</p>
+    </button></h2><p>Milvus 在其儲存庫中提供了一個 Docker Compose 配置檔案。請下載 v3.0.5 的配置檔案並啟動新的部署：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,7 +68,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>預設部署（v3.0.3）：</strong> <code translate="no">docker compose up -d</code> 會啟動三個長期運行的容器 —<code translate="no">milvus-etcd</code> （元資料）、<code translate="no">milvus-minio</code> （物件儲存）以及<code translate="no">milvus-standalone</code> 。訊息佇列採用<strong>Woodpecker（內嵌式，以 MinIO / 物件儲存作為其 WAL 後端）</strong>，因此無需額外建立訊息佇列容器。</p>
+<p><strong>預設部署（v3.0.5）：</strong> <code translate="no">docker compose up -d</code> 會啟動三個長期運行的容器 —<code translate="no">milvus-etcd</code> （元資料）、<code translate="no">milvus-minio</code> （物件儲存）以及<code translate="no">milvus-standalone</code> 。訊息佇列採用<strong>Woodpecker（內嵌式，以 MinIO / 物件儲存作為其 WAL 後端）</strong>，因此無需額外建立訊息佇列容器。</p>
 <p>此設定還會執行一次性的<code translate="no">milvus-volume-init</code> 服務，以準備資料目錄的所有權。完成該任務後，該服務即會退出。</p>
 <p><strong>各版本的訊息佇列預設值：</strong></p>
 <ul>
@@ -169,14 +169,14 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>對於 Milvus 2.6.x 獨立部署，請參閱《<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立部署</a>》。在變更 Milvus 映像檔之前，請備份元資料和持久化資料、保留現有的依賴項和設定，並驗證文件中所述的「來源至目標」升級路徑。 請勿將舊版部署的 Compose 檔案替換為上述新安裝的配置。</p>
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0.3 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+    </button></h2><p>對於 Milvus 2.6.x 獨立部署，請參閱《<a href="/docs/zh-hant/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升級 Milvus 獨立部署</a>》。在變更 Milvus 映像檔之前，請備份元資料和持久化資料、保留現有的依賴項和設定，並驗證文件中記載的「來源至目標」升級路徑。 請勿將舊版部署的 Compose 檔案替換為上述新安裝的配置。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v3.0.5 時，您必須維持當前的訊息佇列選擇。升級過程中不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 <p>Milvus 2.6.x 及後續版本預設使用 Woodpecker，而 2.5.x 部署則預設使用<strong>RocksMQ</strong>。若您正在升級的部署仍運行 RocksMQ，請在變更 Milvus 映像檔之前，於 `<code translate="no">user.yaml</code> ` 中將其固定，以便升級後的實例保留現有的訊息佇列，而非採用新的預設值：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>當升級後的實例已在 v3.0.3 上運行後，您可以透過「<a href="/docs/zh-hant/switch-mq-type.md">切換訊息佇列」（Switch Message Queue</a>）功能從 RocksMQ 切換至 Woodpecker，此功能自 Milvus 3.0 及後續版本起提供。</p>
+<p>當升級後的實例已在 v3.0.5 上運行後，您可以透過「<a href="/docs/zh-hant/switch-mq-type.md">切換訊息佇列」（Switch Message Queue</a>）功能從 RocksMQ 切換至 Woodpecker，此功能自 Milvus 3.0 及後續版本起提供。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">可選依賴項<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>此部署使用<strong>Woodpecker</strong>（內嵌式，MinIO WAL 後端）處理訊息傳遞、<strong>etcd</strong>管理元資料，以及<strong>MinIO</strong>作為物件儲存。若要使用其他訊息佇列或連接外部物件儲存／元資料，請參閱：</p>
+    </button></h2><p>此部署使用<strong>Woodpecker</strong>（嵌入式，MinIO WAL 後端）處理訊息傳遞，使用<strong>etcd</strong>管理元資料，並使用<strong>MinIO</strong>作為物件儲存。若要使用其他訊息佇列或連接外部物件儲存／元資料，請參閱：</p>
 <ul>
 <li>訊息佇列：<a href="/docs/zh-hant/woodpecker.md">Woodpecker</a>（預設）·<a href="/docs/zh-hant/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh-hant/mq_kafka.md">Kafka</a>·<a href="/docs/zh-hant/mq_rocksmq.md">RocksMQ</a></li>
 <li>物件儲存：<a href="/docs/zh-hant/deploy_s3.md">MinIO</a>（預設）·<a href="/docs/zh-hant/deploy_s3.md">AWS S3</a>·<a href="/docs/zh-hant/abs.md">Azure Blob</a>·<a href="/docs/zh-hant/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh-hant/deploy_s3.md">阿里雲 OSS</a>·<a href="/docs/zh-hant/deploy_s3.md">騰訊 COS</a>·<a href="/docs/zh-hant/deploy_s3.md">華為 OBS</a>·<a href="/docs/zh-hant/deploy_s3.md">S3 相容</a></li>
@@ -236,7 +236,7 @@ EOF
 <li><a href="/docs/zh-hant/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/zh-hant/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直覺式網頁介面。</p></li>
+<li><p>探索<a href="/docs/zh-hant/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
 <li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>

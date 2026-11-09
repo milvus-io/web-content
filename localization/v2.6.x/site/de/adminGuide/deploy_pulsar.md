@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus nutzt Pulsar oder Kafka zur Verwaltung von Protokollen der letzten Änderungen, zur Ausgabe von Stream-Protokollen und zur Bereitstellung von Protokollabonnements. Pulsar ist das standardmäßige Nachrichtenspeichersystem. In diesem Abschnitt wird erläutert, wie Sie den Nachrichtenspeicher mit Docker Compose oder Helm konfigurieren.</p>
 <p>Sie können Pulsar mit <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> oder auf K8s konfigurieren und Kafka auf K8s einrichten.</p>
 <div class="alert note">
-<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.25 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.26 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Pulsar mit Docker Compose konfigurieren<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -298,7 +298,7 @@ summary: >-
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>Ein Wechsel des Message-Stores wird nicht empfohlen. Wenn Sie dies dennoch tun möchten, stellen Sie zunächst alle DDL-Operationen ein, rufen Sie dann die FlushAll-API auf, um alle Sammlungen zu leeren, und beenden Sie schließlich Milvus, bevor Sie den Message-Store tatsächlich ändern.</p>
+<p>Ein Wechsel des Nachrichtenspeichers wird nicht empfohlen. Wenn Sie dies dennoch tun möchten, stellen Sie zunächst alle DDL-Vorgänge ein, rufen Sie dann die FlushAll-API auf, um alle Sammlungen zu leeren, und beenden Sie schließlich Milvus, bevor Sie den Nachrichtenspeicher tatsächlich wechseln.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

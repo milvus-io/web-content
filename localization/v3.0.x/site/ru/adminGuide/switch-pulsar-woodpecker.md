@@ -72,7 +72,7 @@ summary: >-
 <p>В случае успешного переключения в журнале регистрируется сообщение « <code translate="no">[mqTypeValue=woodpecker]</code> ».</p>
 <p><strong>Шаг 4: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar отключите Pulsar и включите Woodpecker, затем удалите PVC Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -118,7 +118,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Дождитесь, пока все поды будут готовы, затем убедитесь, что конфигурация доступа к Pulsar была отражена в конфигурации Milvus.</p>
 <p><strong>Шаг 3: Выполните переключение MQ.</strong></p>
 <div class="alert note">
-<p>Убедитесь, что целевой Pulsar не содержит тем Milvus из предыдущей конфигурации. Если это ваш первый переход на Pulsar, пропустите это примечание; в противном случае сначала удалите остаточные темы Milvus с такими же именами.</p>
+<p>Убедитесь, что целевой Pulsar не содержит тем Milvus из предыдущей конфигурации. Если это ваш первый переход на Pulsar, пропустите это примечание; в противном случае сначала удалите оставшиеся темы Milvus с такими же именами.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl port-forward --address 0.0.0.0 service/my-release-milvus-mixcoord 29091:9091
 <button class="copy-code-btn"></button></code></pre>
@@ -186,7 +186,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Шаг 5: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar удалите релиз Pulsar и его PVC:</p>
+<p><strong>Шаг 5: (Необязательно) Остановите Pulsar и выполните очистку.</strong> Для <strong>встроенного</strong> Pulsar удалите релиз Pulsar и удалите его PVC:</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
@@ -211,7 +211,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Шаг 1: Убедитесь, что экземпляр Milvus работает.</strong></p>
-<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Добавьте подключение к Pulsar в файл <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и установите тип MQ; при применении CR поды будут перезапущены с новой конфигурацией.</p>
+<p><strong>Шаг 2: Настройте подключение к целевому Pulsar и перезапустите Milvus.</strong> Добавьте подключение к Pulsar в файл <code translate="no">spec.config</code> (оператор преобразует <code translate="no">spec.config</code> в <code translate="no">user.yaml</code>) и установите тип MQ; приложение CR приведет к перезапуску под с новой конфигурацией.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change_configmap.yaml</span>
 <span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

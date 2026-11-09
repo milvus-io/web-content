@@ -1,18 +1,18 @@
 ---
 id: multi-vector-search.md
-title: البحث الهجين متعدد النواقل
+title: البحث الهجين متعدد المحاور
 summary: >-
-  في العديد من التطبيقات، يمكن البحث عن كائن ما من خلال مجموعة غنية من المعلومات
-  مثل العنوان والوصف، أو بطرائق متعددة مثل النص والصور والصوت. على سبيل المثال،
-  يتم البحث عن تغريدة تحتوي على نص وصورة إذا كان النص أو الصورة يتطابقان مع
-  دلالات استعلام البحث. يعزز البحث الهجين تجربة البحث من خلال الجمع بين عمليات
-  البحث عبر هذه المجالات المتنوعة. يدعم Milvus هذا الأمر من خلال السماح بالبحث
-  في حقول متجهات متعددة، وإجراء العديد من عمليات البحث في أقرب جار تقريبي (ANN)
-  في وقت واحد. يعد البحث الهجين متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في
-  البحث في كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الكائن، أو في
-  متجهات كثيفة ومتناثرة لتحسين جودة البحث.
+  في العديد من التطبيقات، يمكن البحث عن كائن ما باستخدام مجموعة غنية من
+  المعلومات مثل العنوان والوصف، أو باستخدام وسائط متعددة مثل النص والصور والصوت.
+  على سبيل المثال، يجب البحث عن تغريدة تحتوي على نص وصورة إذا تطابق النص أو
+  الصورة مع المعنى الدلالي لطلب البحث. يعزز البحث الهجين تجربة البحث من خلال
+  الجمع بين عمليات البحث عبر هذه الحقول المتنوعة. يدعم Milvus ذلك من خلال السماح
+  بالبحث في حقول متجهة متعددة، وإجراء عدة عمليات بحث باستخدام طريقة «أقرب جار
+  تقريبي» (ANN) في وقت واحد. يُعد البحث الهجين متعدد المتجهات مفيدًا بشكل خاص
+  إذا كنت ترغب في البحث عن النصوص والصور معًا، أو في حقول نصية متعددة تصف نفس
+  الكائن، أو في متجهات كثيفة ومتفرقة لتحسين جودة البحث.
 ---
-<h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">البحث الهجين متعدد النواقل<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
+<h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">البحث الهجين متعدد المحاور<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,15 +27,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في العديد من التطبيقات، يمكن البحث عن كائن ما من خلال مجموعة غنية من المعلومات مثل العنوان والوصف، أو بطرائق متعددة مثل النص والصور والصوت. على سبيل المثال، يتم البحث عن تغريدة تحتوي على نص وصورة إذا كان النص أو الصورة يتطابقان مع دلالات استعلام البحث. يعزز البحث الهجين تجربة البحث من خلال الجمع بين عمليات البحث عبر هذه المجالات المتنوعة. يدعم Milvus ذلك من خلال السماح بالبحث في حقول متجهات متعددة، وإجراء العديد من عمليات البحث في أقرب جار تقريبي (ANN) في وقت واحد. يعد البحث المختلط متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في البحث في كل من النصوص والصور، أو في حقول نصية متعددة تصف نفس الشيء، أو في متجهات كثيفة ومتناثرة لتحسين جودة البحث.</p>
-<p>
+    </button></h1><p>في العديد من التطبيقات، يمكن البحث عن كائن ما باستخدام مجموعة غنية من المعلومات مثل العنوان والوصف، أو باستخدام وسائط متعددة مثل النص والصور والصوت. على سبيل المثال، يجب البحث عن تغريدة تحتوي على نص وصورة إذا كان النص أو الصورة يتطابق مع دلالة استعلام البحث. يعزز البحث الهجين تجربة البحث من خلال الجمع بين عمليات البحث عبر هذه الحقول المتنوعة. يدعم Milvus ذلك من خلال السماح بالبحث في حقول متجهة متعددة، وإجراء عدة عمليات بحث تقريبية لأقرب جار (ANN) في وقت واحد. يُعد البحث الهجين متعدد المتجهات مفيدًا بشكل خاص إذا كنت ترغب في البحث عن النصوص والصور معًا، أو عن حقول نصية متعددة تصف نفس الكائن، أو عن متجهات كثيفة ومتفرقة لتحسين جودة البحث.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>سير عمل البحث المختلط</span> </span></p>
-<p>يدمج البحث الهجين متعدد المتجهات بين طرق بحث مختلفة أو يمتد على نطاق واسع من طرائق مختلفة:</p>
+   <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>سير عمل البحث الهجين</span>
+  
+ </span></p>
+<p>يدمج البحث الهجين متعدد المتجهات طرق بحث مختلفة أو يمتد ليشمل التضمينات من طرق عرض متنوعة:</p>
 <ul>
-<li><p><strong>بحث المتجهات المتفرقة والكثيفة</strong>: تعتبر <a href="/docs/ar/v2.6.x/dense-vector.md">المتجهات الكثيفة</a> ممتازة لالتقاط العلاقات الدلالية، في حين أن <a href="/docs/ar/v2.6.x/sparse_vector.md">المتجهات المتفرقة</a> فعالة للغاية لمطابقة الكلمات المفتاحية بدقة. ويجمع البحث الهجين بين هذه الأساليب لتوفير فهم مفاهيمي واسع النطاق وملاءمة دقيقة للمصطلحات، وبالتالي تحسين نتائج البحث. من خلال الاستفادة من نقاط القوة في كل طريقة، يتغلب البحث المختلط على قيود الأساليب المستقلة، مما يوفر أداءً أفضل للاستعلامات المعقدة. فيما يلي <a href="/docs/ar/v2.6.x/full_text_search_with_milvus.md">دليل</a> أكثر تفصيلاً حول الاسترجاع الهجين الذي يجمع بين البحث الدلالي والبحث في النص الكامل.</p></li>
-<li><p><strong>البحث المتجه متعدد الوسائط</strong>: البحث المتجه متعدد الوسائط هو تقنية قوية تتيح لك البحث عبر أنواع مختلفة من البيانات، بما في ذلك النصوص والصور والصوت وغيرها. الميزة الرئيسية لهذا النهج هي قدرته على توحيد الطرائق المختلفة في تجربة بحث سلسة ومتماسكة. على سبيل المثال، في البحث عن المنتجات، قد يقوم المستخدم بإدخال استعلام نصي للعثور على المنتجات الموصوفة بالنصوص والصور. من خلال الجمع بين هذه الطرائق من خلال طريقة بحث مختلطة، يمكنك تحسين دقة البحث أو إثراء نتائج البحث.</p></li>
+<li><p><strong>البحث بالمتجهات المتفرقة والكثيفة</strong>: تعد <a href="/docs/ar/v2.6.x/dense-vector.md">المتجهات الكثيفة</a> ممتازة لالتقاط العلاقات الدلالية، في حين أن <a href="/docs/ar/v2.6.x/sparse_vector.md">المتجهات المتفرقة</a> فعالة للغاية في مطابقة الكلمات المفتاحية بدقة. يجمع البحث الهجين بين هذه الأساليب لتوفير فهم مفاهيمي واسع وملاءمة دقيقة للمصطلحات، مما يؤدي إلى تحسين نتائج البحث. من خلال الاستفادة من نقاط القوة في كل طريقة، يتغلب البحث الهجين على قيود الأساليب الفردية، ويقدم أداءً أفضل للاستعلامات المعقدة. فيما يلي <a href="/docs/ar/v2.6.x/full_text_search_with_milvus.md">دليل</a> أكثر تفصيلاً حول الاسترجاع الهجين الذي يجمع بين البحث الدلالي والبحث عن النص الكامل.</p></li>
+<li><p><strong>البحث المتعدد الوسائط باستخدام المتجهات</strong>: يُعد البحث المتعدد الوسائط باستخدام المتجهات تقنية قوية تتيح لك البحث عبر أنواع مختلفة من البيانات، بما في ذلك النصوص والصور والصوت وغيرها. وتتمثل الميزة الرئيسية لهذا النهج في قدرته على توحيد الوسائط المختلفة في تجربة بحث سلسة ومتماسكة. على سبيل المثال، في البحث عن المنتجات، قد يقوم المستخدم بإدخال استعلام نصي للعثور على المنتجات الموصوفة بالنص والصور معًا. ومن خلال دمج هذه الوسائط باستخدام طريقة البحث الهجين، يمكنك تحسين دقة البحث أو إثراء نتائج البحث.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">مثال<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,13 +54,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لنفكر في حالة استخدام واقعية حيث يتضمن كل منتج وصفًا نصيًا وصورة. بناءً على البيانات المتاحة، يمكننا إجراء ثلاثة أنواع من عمليات البحث:</p>
+    </button></h2><p>لنأخذ حالة استخدام واقعية حيث يتضمن كل منتج وصفًا نصيًّا وصورة. استنادًا إلى البيانات المتاحة، يمكننا إجراء ثلاثة أنواع من عمليات البحث:</p>
 <ul>
-<li><p><strong>البحث النصي الدلالي:</strong> يتضمن ذلك الاستعلام عن الوصف النصي للمنتج باستخدام متجهات كثيفة. يمكن إنشاء تضمينات النص باستخدام نماذج مثل <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> و <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> أو خدمات مثل <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
-<li><p><strong>البحث عن النص الكامل</strong>: هنا، نستعلم عن الوصف النصي للمنتج باستخدام مطابقة الكلمات الرئيسية مع متجهات متناثرة. يمكن استخدام خوارزميات مثل <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> أو نماذج التضمين المتناثرة مثل <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> أو <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> لهذا الغرض.</p></li>
-<li><p><strong>البحث متعدد الوسائط عن الصور:</strong> تستعلم هذه الطريقة عن الصورة باستخدام استعلام نصي مع متجهات كثيفة. يمكن إنشاء تضمينات الصور باستخدام نماذج مثل <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
+<li><p><strong>البحث النصي الدلالي:</strong> يتضمن هذا البحث الاستعلام عن الوصف النصي للمنتج باستخدام المتجهات الكثيفة. يمكن إنشاء تضمينات نصية باستخدام نماذج مثل <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">وTransformers</a> أو خدمات مثل <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
+<li><p><strong>البحث عن النص الكامل</strong>: هنا، نستعلم عن الوصف النصي للمنتج باستخدام مطابقة الكلمات المفتاحية مع المتجهات المتفرقة. يمكن استخدام خوارزميات مثل <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> أو نماذج التضمين المتفرقة مثل <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> أو <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> لهذا الغرض.</p></li>
+<li><p><strong>البحث متعدد الوسائط عن الصور:</strong> تستند هذه الطريقة إلى البحث في الصورة باستخدام استعلام نصي مع متجهات كثيفة. يمكن إنشاء تضمينات الصور باستخدام نماذج مثل <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
-<p>سيرشدك هذا الدليل إلى مثال على بحث هجين متعدد الوسائط يجمع بين طرق البحث المذكورة أعلاه، بالنظر إلى الوصف النصي الخام وتضمينات الصور للمنتجات. سنوضح كيفية تخزين البيانات متعددة المتجهات وإجراء عمليات بحث هجينة باستخدام استراتيجية إعادة الترتيب.</p>
+<p>سيرشدك هذا الدليل عبر مثال للبحث الهجين متعدد الوسائط الذي يجمع بين طرق البحث المذكورة أعلاه، بناءً على الوصف النصي الأولي وتضمينات الصور للمنتجات. سنوضح كيفية تخزين البيانات متعددة المتجهات وإجراء عمليات البحث الهجينة باستخدام استراتيجية إعادة الترتيب.</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">إنشاء مجموعة ذات حقول متجهات متعددة<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +76,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتضمن عملية إنشاء مجموعة ثلاث خطوات رئيسية: تحديد مخطط المجموعة، وتكوين معلمات الفهرس، وإنشاء المجموعة.</p>
+    </button></h2><p>تتضمن عملية إنشاء المجموعة ثلاث خطوات رئيسية: تحديد مخطط المجموعة، وتكوين معلمات الفهرس، وإنشاء المجموعة.</p>
 <h3 id="Define-schema" class="common-anchor-header">تحديد المخطط<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,18 +92,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بالنسبة للبحث المختلط متعدد المتجهات، يجب تحديد حقول متجهات متعددة ضمن مخطط المجموعة. للحصول على تفاصيل حول الحدود المفروضة على عدد الحقول المتجهة المسموح بها في المجموعة، راجع <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">حدود Zilliz Cloud Limits</a>.  ومع ذلك، إذا لزم الأمر، يمكنك ضبط <a href="/docs/ar/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> لتضمين ما يصل إلى 10 حقول متجهة في مجموعة حسب الحاجة.</p>
-<p>يدمج هذا المثال الحقول التالية في المخطط:</p>
+    </button></h3><p>بالنسبة للبحث الهجين متعدد المتجهات، يجب تعريف حقول متجهة متعددة ضمن مخطط المجموعة. للحصول على تفاصيل حول الحدود المفروضة على عدد الحقول المتجهة المسموح بها في المجموعة، راجع <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">حدود Zilliz Cloud</a>. ومع ذلك، إذا لزم الأمر، يمكنك تعديل <a href="/docs/ar/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> لتضمين ما يصل إلى 10 حقول متجهة في المجموعة حسب الحاجة.</p>
+<p>يتضمن هذا المثال الحقول التالية في المخطط:</p>
 <ul>
-<li><p><code translate="no">id</code>: يعمل كمفتاح أساسي لتخزين المعرفات النصية. هذا الحقل من نوع البيانات <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: يستخدم لتخزين المحتوى النصي. هذا الحقل من نوع البيانات <code translate="no">VARCHAR</code> بحد أقصى للطول 1000 بايت. يتم تعيين الخيار <code translate="no">enable_analyzer</code> على <code translate="no">True</code> لتسهيل البحث في النص الكامل.</p></li>
-<li><p><code translate="no">text_dense</code>: يستخدم لتخزين المتجهات الكثيفة للنصوص. هذا الحقل من نوع البيانات <code translate="no">FLOAT_VECTOR</code> مع بُعد متجه يبلغ 768.</p></li>
-<li><p><code translate="no">text_sparse</code>: يستخدم لتخزين المتجهات المتفرقة للنصوص. هذا الحقل من نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: يستخدم لتخزين المتجهات الكثيفة لصور المنتج. هذا الحقل هو من نوع البيانات <code translate="no">FLOAT_VETOR</code> مع بُعد متجه يبلغ 512.</p></li>
+<li><p><code translate="no">id</code>: يُستخدم كمفتاح أساسي لتخزين معرّفات النصوص. هذا الحقل من نوع البيانات <code translate="no">INT64</code>.</p></li>
+<li><p><code translate="no">text</code>: يُستخدم لتخزين المحتوى النصي. هذا الحقل من نوع البيانات <code translate="no">VARCHAR</code> بطول أقصى يبلغ 1000 بايت. يتم تعيين الخيار « <code translate="no">enable_analyzer</code> » على « <code translate="no">True</code> » لتسهيل البحث عن النص الكامل.</p></li>
+<li><p><code translate="no">text_dense</code>: يُستخدم لتخزين المتجهات الكثيفة للنصوص. هذا الحقل من نوع البيانات <code translate="no">FLOAT_VECTOR</code> مع بُعد متجه يبلغ 768.</p></li>
+<li><p><code translate="no">text_sparse</code>: يُستخدم لتخزين المتجهات المتفرقة للنصوص. هذا الحقل من نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">image_dense</code>: يُستخدم لتخزين المتجهات الكثيفة لصور المنتجات. هذا الحقل من نوع البيانات <code translate="no">FLOAT_VECTOR</code> بأبعاد متجهة تبلغ 512.</p></li>
 </ul>
-<p>نظرًا لأننا سوف نستخدم خوارزمية BM25 المدمجة لإجراء بحث عن النص الكامل في حقل النص، فمن الضروري إضافة ميلفوس <code translate="no">Function</code> إلى المخطط. لمزيد من التفاصيل، يرجى الرجوع إلى <a href="/docs/ar/v2.6.x/full-text-search.md">البحث عن النص الكامل</a>.</p>
+<p>نظرًا لأننا سنستخدم خوارزمية BM25 المدمجة لإجراء بحث نصي كامل في حقل النص، فمن الضروري إضافة Milvus <code translate="no">Function</code> إلى المخطط. لمزيد من التفاصيل، يرجى الرجوع إلى <a href="/docs/ar/v2.6.x/full-text-search.md">البحث النصي الكامل</a>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -332,7 +339,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">إنشاء فهرس<button data-href="#Create-index" class="anchor-icon" translate="no">
+<h3 id="Create-index" class="common-anchor-header">إنشاء الفهرس<button data-href="#Create-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -347,15 +354,20 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بعد تحديد مخطط المجموعة، فإن الخطوة التالية هي تكوين فهارس المتجهات وتحديد مقاييس التشابه. في المثال المعطى</p>
+    </button></h3><p>بعد تعريف مخطط المجموعة، تتمثل الخطوة التالية في تكوين الفهارس المتجهة وتحديد مقاييس التشابه. في المثال الموضح:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: يتم إنشاء فهرس من النوع <code translate="no">AUTOINDEX</code> بنوع مقياس <code translate="no">IP</code> لحقل المتجه الكثيف النصي.</p></li>
-<li><p><code translate="no">text_sparse_index</code>: يتم استخدام فهرس من النوع<code translate="no">SPARSE_INVERTED_INDEX</code>مع النوع المتري <code translate="no">BM25</code> لحقل المتجه النصي المتناثر.</p></li>
-<li><p><code translate="no">image_dense_index</code>:: يتم إنشاء فهرس من النوع <code translate="no">AUTOINDEX</code> مع النوع المتري <code translate="no">IP</code> لحقل متجه كثيف الصورة.</p></li>
+<li><p><code translate="no">text_dense_index</code>: يتم إنشاء فهرس من النوع <code translate="no">AUTOINDEX</code> بنوع المقياس <code translate="no">IP</code> لحقل المتجهات النصية الكثيفة.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: يتم استخدام فهرس من النوع<code translate="no">SPARSE_INVERTED_INDEX</code>مع نوع المقياس <code translate="no">BM25</code> لحقل المتجهات النصية المتفرقة.</p></li>
+<li><p><code translate="no">image_dense_index</code>: يتم إنشاء فهرس من النوع <code translate="no">AUTOINDEX</code> بنوع المقياس <code translate="no">IP</code> لحقل المتجهات الكثيف الخاص بالصورة.</p></li>
 </ul>
-<p>يمكنك اختيار أنواع أخرى من الفهارس حسب الضرورة لتناسب احتياجاتك وأنواع البيانات. لمزيد من المعلومات حول أنواع الفهارس المدعومة، يرجى الرجوع إلى الوثائق الخاصة <a href="/docs/ar/v2.6.x/index-vector-fields.md">بأنواع الفهارس المتاحة</a>.</p>
+<p>يمكنك اختيار أنواع فهارس أخرى حسب الضرورة لتناسب احتياجاتك وأنواع بياناتك على النحو الأمثل. لمزيد من المعلومات حول أنواع الفهارس المدعومة، يرجى الرجوع إلى الوثائق الخاصة <a href="/docs/ar/v2.6.x/index-vector-fields.md">بأنواع الفهارس المتاحة</a>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -481,9 +493,14 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بإنشاء مجموعة باسم <code translate="no">demo</code> مع مخطط المجموعة والفهارس التي تم تكوينها في الخطوتين السابقتين.</p>
+    </button></h3><p>قم بإنشاء مجموعة باسم <code translate="no">demo</code> باستخدام مخطط المجموعة والفهارس التي تم تكوينها في الخطوتين السابقتين.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -540,17 +557,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يقوم هذا القسم بإدراج البيانات في المجموعة <code translate="no">my_collection</code> استنادًا إلى المخطط المحدد مسبقًا. أثناء الإدراج، تأكد من تزويد جميع الحقول، باستثناء تلك التي تحتوي على قيم مُنشأة تلقائيًا، بالبيانات بالتنسيق الصحيح. في هذا المثال</p>
+    </button></h2><p>يقوم هذا القسم بإدراج البيانات في مجموعة " <code translate="no">my_collection</code> " استنادًا إلى المخطط المحدد سابقًا. أثناء الإدراج، تأكد من تزويد جميع الحقول، باستثناء تلك التي تحتوي على قيم مُنشأة تلقائيًا، بالبيانات بالصيغة الصحيحة. في هذا المثال:</p>
 <ul>
-<li><p><code translate="no">id</code>: عدد صحيح يمثل معرف المنتج</p></li>
+<li><p><code translate="no">id</code>: عدد صحيح يمثل معرّف المنتج</p></li>
 <li><p><code translate="no">text</code>: سلسلة تحتوي على وصف المنتج</p></li>
-<li><p><code translate="no">text_dense</code>: قائمة مكونة من 768 قيمة فاصلة عائمة تمثل التضمين الكثيف للوصف النصي</p></li>
-<li><p><code translate="no">image_dense</code>: قائمة مكونة من 512 قيمة فاصلة عائمة تمثل التضمين الكثيف لصورة المنتج</p></li>
+<li><p><code translate="no">text_dense</code>: قائمة مكونة من 768 قيمة عائمة تمثل التضمين الكثيف للوصف النصي</p></li>
+<li><p><code translate="no">image_dense</code>: قائمة مكونة من 512 قيمة عائمة تمثل التضمين الكثيف لصورة المنتج</p></li>
 </ul>
-<p>يمكنك استخدام نفس النماذج أو نماذج مختلفة لإنشاء تضمينات كثيفة لكل حقل. في هذا المثال، يحتوي التضمينان الكثيفان في هذا المثال على أبعاد مختلفة، مما يشير إلى أنه تم إنشاؤهما بواسطة نماذج مختلفة. عند تحديد كل عملية بحث لاحقًا، تأكد من استخدام النموذج المقابل لإنشاء تضمين الاستعلام المناسب.</p>
-<p>نظرًا لأن هذا المثال يستخدم دالة BM25 المدمجة لتوليد تضمينات متناثرة من حقل النص، فلن تحتاج إلى توفير متجهات متناثرة يدويًا. ومع ذلك، إذا اخترت عدم استخدام BM25، فيجب عليك حساب التضمينات المتفرقة مسبقًا وتوفيرها بنفسك.</p>
+<p>يمكنك استخدام نفس النموذج أو نماذج مختلفة لتوليد التضمينات الكثيفة لكل حقل. في هذا المثال، للتضمينين الكثيفين أبعاد مختلفة، مما يشير إلى أنهما تم توليدهما بواسطة نماذج مختلفة. عند تعريف كل عملية بحث لاحقًا، تأكد من استخدام النموذج المقابل لتوليد تضمين الاستعلام المناسب.</p>
+<p>نظرًا لأن هذا المثال يستخدم الدالة المدمجة BM25 لتوليد التضمينات المتفرقة من حقل النص، فلن تحتاج إلى توفير المتجهات المتفرقة يدويًّا. ومع ذلك، إذا اخترت عدم استخدام BM25، فيجب عليك حساب التضمينات المتفرقة مسبقًا وتوفيرها بنفسك.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -679,7 +701,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">الخطوة 1: إنشاء مثيلات AnnSearchRequest متعددة<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">الخطوة 1: إنشاء مثيلات متعددة لـ AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -694,19 +716,24 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يتم تنفيذ البحث الهجين من خلال إنشاء عدة <code translate="no">AnnSearchRequest</code> في الدالة <code translate="no">hybrid_search()</code> ، حيث يمثل كل <code translate="no">AnnSearchRequest</code> طلب بحث ANN أساسي لحقل متجه معين. لذلك، قبل إجراء البحث الهجين، من الضروري إنشاء <code translate="no">AnnSearchRequest</code> لكل حقل متجه.</p>
-<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية للبحث الهجين الخاص بك. يُرجى الرجوع إلى <a href="/docs/ar/v2.6.x/boolean.md">شرح</a> <a href="/docs/ar/v2.6.x/filtered-search.md">البحث المختلط</a> والتصفية.</p>
+    </button></h3><p>يتم تنفيذ البحث الهجين عن طريق إنشاء عدة مثيلات لـ ` <code translate="no">AnnSearchRequest</code> ` في الدالة ` <code translate="no">hybrid_search()</code> `، حيث يمثل كل مثيل ` <code translate="no">AnnSearchRequest</code> ` طلب بحث ANN أساسي لحقل متجه معين. لذلك، قبل إجراء البحث الهجين، من الضروري إنشاء مثيل ` <code translate="no">AnnSearchRequest</code> ` لكل حقل متجه.</p>
+<p>بالإضافة إلى ذلك، من خلال تكوين المعلمة <code translate="no">expr</code> في <code translate="no">AnnSearchRequest</code> ، يمكنك تعيين شروط التصفية لعملية البحث الهجين الخاصة بك. يرجى الرجوع إلى <a href="/docs/ar/v2.6.x/filtered-search.md">«البحث المُصفى</a> » <a href="/docs/ar/v2.6.x/boolean.md">و«شرح التصفية</a>».</p>
 <div class="alert note">
-<p>في البحث المختلط، يدعم كل <code translate="no">AnnSearchRequest</code> بيانات استعلام واحدة فقط في البحث المختلط.</p>
+<p>في البحث الهجين، يدعم كل <code translate="no">AnnSearchRequest</code> بيانات استعلام واحدة فقط.</p>
 </div>
-<p>لتوضيح إمكانيات حقول متجهات البحث المختلفة، سنقوم بإنشاء ثلاثة <code translate="no">AnnSearchRequest</code> طلبات بحث باستخدام نموذج استعلام. سنستخدم أيضًا متجهاته الكثيفة المحسوبة مسبقًا لهذه العملية. ستستهدف طلبات البحث حقول المتجهات التالية:</p>
+<p>لتوضيح إمكانيات حقول البحث المتجهة المختلفة، سنقوم بإنشاء ثلاثة طلبات بحث <code translate="no">AnnSearchRequest</code> باستخدام استعلام نموذجي. سنستخدم أيضًا متجهاتها الكثيفة المحسوبة مسبقًا في هذه العملية. ستستهدف طلبات البحث حقول المتجهات التالية:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> للبحث الدلالي عن النص الدلالي، مما يسمح بفهم السياق واسترجاعه بناءً على المعنى بدلاً من المطابقة المباشرة للكلمات المفتاحية</p></li>
-<li><p><code translate="no">text_sparse</code>للبحث في النص الكامل أو مطابقة الكلمات المفتاحية، مع التركيز على مطابقة الكلمات أو العبارات الدقيقة داخل النص.</p></li>
-<li><p><code translate="no">image_dense</code>للبحث متعدد الوسائط من نص إلى صورة، لاسترداد صور المنتجات ذات الصلة بناءً على المحتوى الدلالي للاستعلام.</p></li>
+<li><p><code translate="no">text_dense</code> للبحث الدلالي عن النصوص، مما يتيح الفهم السياقي والاسترجاع بناءً على المعنى بدلاً من المطابقة المباشرة للكلمات المفتاحية.</p></li>
+<li><p><code translate="no">text_sparse</code>للبحث عن النص الكامل أو مطابقة الكلمات الرئيسية، مع التركيز على المطابقات الدقيقة للكلمات أو العبارات داخل النص.</p></li>
+<li><p><code translate="no">image_dense</code>للبحث متعدد الوسائط من النص إلى الصورة، لاسترجاع صور المنتجات ذات الصلة بناءً على المحتوى الدلالي للاستعلام.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -833,7 +860,7 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بالنظر إلى أن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> يُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 3 مثيلات <code translate="no">AnnSearchRequest</code> ، مما ينتج عنه إجمالي 6 نتائج بحث.</p>
+<p>نظرًا لأن المعلمة <code translate="no">limit</code> مضبوطة على 2، فإن كل <code translate="no">AnnSearchRequest</code> تُرجع نتيجتي بحث. في هذا المثال، يتم إنشاء 3 مثيلات لـ <code translate="no">AnnSearchRequest</code> ، مما ينتج عنه إجمالي 6 نتائج بحث.</p>
 <h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">الخطوة 2: تكوين استراتيجية إعادة الترتيب<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -849,10 +876,15 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لدمج وإعادة ترتيب مجموعات نتائج بحث الشبكة النشطة ANN، من الضروري اختيار استراتيجية إعادة ترتيب مناسبة. يقدم ميلفوس عدة أنواع من استراتيجيات إعادة الترتيب. للمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يُرجى الرجوع إلى <a href="/docs/ar/v2.6.x/weighted-ranker.md">مصنف مرجح</a> أو <a href="/docs/ar/v2.6.x/rrf-ranker.md">مصنف RRF</a>.</p>
-<p>في هذا المثال، بما أنه لا يوجد تركيز خاص على استعلامات بحث محددة، سنمضي قدمًا في استراتيجية RRFRanker.</p>
+    </button></h3><p>لدمج مجموعات نتائج البحث ANN وإعادة ترتيبها، من الضروري اختيار استراتيجية إعادة ترتيب مناسبة. يوفر Milvus عدة أنواع من استراتيجيات إعادة الترتيب. لمزيد من التفاصيل حول آليات إعادة الترتيب هذه، يرجى الرجوع إلى <a href="/docs/ar/v2.6.x/weighted-ranker.md">Weighted Ranker</a> أو <a href="/docs/ar/v2.6.x/rrf-ranker.md">RRF Ranker</a>.</p>
+<p>في هذا المثال، نظرًا لعدم وجود تركيز خاص على استعلامات بحث محددة، سنستخدم استراتيجية RRFRanker.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -927,7 +959,12 @@ ranker := entity.NewFunction().
       </svg>
     </button></h3><p>قبل بدء البحث الهجين، تأكد من تحميل المجموعة. إذا كانت أي حقول متجهة داخل المجموعة تفتقر إلى فهرس أو لم يتم تحميلها في الذاكرة، فسيحدث خطأ عند تنفيذ طريقة البحث الهجين.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -999,10 +1036,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>فيما يلي الإخراج:</p>
+<p>فيما يلي الناتج:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>باستخدام المعلمة <code translate="no">limit=2</code> المحددة لـ "البحث الهجين"، سيعيد ميلفوس ترتيب النتائج الست التي تم الحصول عليها من عمليات البحث الثلاث. في النهاية، ستُعيد فقط أعلى نتيجتين متشابهتين.</p>
+<p>مع تحديد المعلمة <code translate="no">limit=2</code> للبحث المختلط، سيقوم Milvus بإعادة ترتيب النتائج الست التي تم الحصول عليها من عمليات البحث الثلاث. وفي النهاية، سيتم إرجاع النتيجتين الأكثر تشابهًا فقط.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">الاستخدام المتقدم<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1018,7 +1055,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">تعيين منطقة زمنية مؤقتًا للبحث الهجين مؤقتًا<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">تعيين منطقة زمنية مؤقتًا لعملية البحث المختلط<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1033,9 +1070,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، يمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء البحث المختلط. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
-<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحة لـ <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA</a> (على سبيل المثال، <strong>آسيا/شنغهاي،</strong> أو <strong>أمريكا/شيكاغو،</strong> أو <strong>التوقيت العالمي المنسق</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/v2.6.x/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
-<p>يوضح المثال أدناه كيفية تعيين منطقة زمنية مؤقتًا لعملية بحث مختلط:</p>
+    </button></h3><p>إذا كانت مجموعتك تحتوي على حقل <code translate="no">TIMESTAMPTZ</code> ، فيمكنك تجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات أو المجموعة مؤقتًا لعملية واحدة عن طريق تعيين المعلمة <code translate="no">timezone</code> في استدعاء البحث الهجين. يتحكم هذا في كيفية عرض قيم <code translate="no">TIMESTAMPTZ</code> ومقارنتها أثناء العملية.</p>
+<p>يجب أن تكون قيمة <code translate="no">timezone</code> <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحًا <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">وفقًا لمعايير IANA</a> (على سبيل المثال، <strong>Asia/Shanghai</strong> أو <strong>America/Chicago</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/v2.6.x/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p>
+<p>يوضح المثال أدناه كيفية تعيين منطقة زمنية مؤقتًا لعملية بحث مختلطة:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,

@@ -172,14 +172,14 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Как только под Milvus Operator запустится, вы сможете развернуть кластер Milvus следующим образом.</p>
+    </button></h3><p>Как только под Milvus Operator запущен, вы можете развернуть кластер Milvus следующим образом.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Приведенная выше команда развертывает кластер Milvus с использованием <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии v2.6.25) и всех новых архитектурных компонентов, включая Streaming Node.</p>
+<p>Приведенная выше команда развертывает кластер Milvus с использованием <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии v2.6.26) и всех новых архитектурных компонентов, включая Streaming Node.</p>
 <p><strong>Основные особенности архитектуры в данном развертывании:</strong></p>
 <ul>
 <li><strong>Очередь сообщений</strong>: <a href="/docs/ru/v2.6.x/use-woodpecker.md">используется Woodpecker</a> (упрощает обслуживание инфраструктуры)</li>
-<li><strong>Узел потоковой обработки</strong>: включён для усовершенствованной обработки данных</li>
+<li><strong>Узел потоковой обработки</strong>: включён для расширенной обработки данных</li>
 <li><strong>Координатор Mix</strong>: объединенные компоненты координатора для повышения эффективности</li>
 </ul>
 <p>Для настройки этих параметров мы рекомендуем воспользоваться инструментом <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>, чтобы скорректировать конфигурацию с учётом фактического объёма ваших данных, а затем загрузить соответствующий файл YAML. Подробнее о параметрах конфигурации см. в документе <a href="https://milvus.io/docs/system_configuration.md">«Контрольный список системных настроек Milvus</a>».</p>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Выполните следующую команду, чтобы проверить состояние кластера Milvus</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Как только ваш кластер Milvus будет готов, вывод вышеуказанной команды должен будет выглядеть примерно так. Если поле « <code translate="no">status.status</code> » (Статус кластера) по-прежнему содержит значение « <code translate="no">Unhealthy</code> », ваш кластер Milvus все еще находится в процессе создания.</p>
+<p>Как только ваш кластер Milvus будет готов, вывод вышеуказанной команды должен будет выглядеть примерно так. Если поле « <code translate="no">status.status</code> » (Статус кластера) по-прежнему содержит значение « <code translate="no">Unhealthy</code> », ваш кластер Milvus ещё находится в процессе создания.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>При удалении кластера Milvus с использованием конфигурации по умолчанию такие зависимости, как etcd, Pulsar и MinIO, не удаляются. Поэтому при следующей установке того же экземпляра кластера Milvus эти зависимости будут использоваться повторно.</li>
+<li>При удалении кластера Milvus с использованием конфигурации по умолчанию такие зависимости, как etcd, Pulsar и MinIO, не удаляются. Поэтому при следующей установке того же экземпляра кластера Milvus эти зависимости будут использоваться снова.</li>
 <li>Чтобы удалить зависимости и заявки на постоянные тома (PVC) вместе с кластером Milvus, см. <a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">файл конфигурации</a>.</li>
 </ul>
 </div>
@@ -403,12 +403,12 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Установив Milvus в Docker, вы можете:</p>
 <ul>
-<li><p>Ознакомьтесь с <a href="/docs/ru/v2.6.x/quickstart.md">Hello Milvus</a>, чтобы увидеть, на что способен Milvus.</p></li>
+<li><p>Посетить страницу <a href="/docs/ru/v2.6.x/quickstart.md">«Hello Milvus»</a>, чтобы узнать, на что способен Milvus.</p></li>
 <li><p>Ознакомиться с основными операциями Milvus:</p>
 <ul>
 <li><a href="/docs/ru/v2.6.x/manage_databases.md">Управление базами данных</a></li>
 <li><a href="/docs/ru/v2.6.x/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управлять разделами</a></li>
+<li><a href="/docs/ru/v2.6.x/manage-partitions.md">Управление разделами</a></li>
 <li><a href="/docs/ru/v2.6.x/insert-update-delete.md">Вставка, обновление и удаление</a></li>
 <li><a href="/docs/ru/v2.6.x/single-vector-search.md">Поиск по одному вектору</a></li>
 <li><a href="/docs/ru/v2.6.x/multi-vector-search.md">Гибридный поиск</a></li>

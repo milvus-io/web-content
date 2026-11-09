@@ -63,7 +63,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.25:</strong></p>
+<p><strong>Apa yang baru di v2.6.26:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
 <li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan beban pemeliharaan yang lebih rendah; lihat " <a href="/docs/id/v2.6.x/use-woodpecker.md">Gunakan Woodpecker</a> " untuk detailnya</li>
@@ -195,7 +195,7 @@ EOF
 </ul></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk mendebug Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>
 <li><p><a href="/docs/id/v2.6.x/monitor.md">Pantau Milvus dengan Prometheus</a>.</p></li>
 </ul>

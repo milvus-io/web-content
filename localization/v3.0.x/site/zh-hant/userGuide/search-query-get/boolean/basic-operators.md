@@ -2,8 +2,8 @@
 id: basic-operators.md
 title: 基本運算子
 summary: >-
-  Milvus
-  提供了一套豐富的基本運算子，可協助您高效地篩選和查詢資料。透過這些運算子，您可以根據標量欄位、數值運算、邏輯條件等來精確調整搜尋條件。了解如何使用這些運算子，對於建立精確的查詢並將搜尋效率最大化至關重要。
+  使用比較運算子、範圍運算子、算術運算子、邏輯運算子及 NULL 運算子來篩選實體。自 Milvus 3.0.3 起，IS NULL 和 IS NOT
+  NULL 亦支援一般向量欄位。
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">基本運算子<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供豐富的基本運算子，協助您高效地篩選與查詢資料。透過這些運算子，您可以根據標量欄位、數值運算、邏輯條件等來精確調整搜尋條件。掌握這些運算子的使用方法，對於建立精確的查詢並最大化搜尋效率至關重要。</p>
+    </button></h1><p>Milvus 提供比較運算子、範圍運算子、算術運算子、邏輯運算子及 NULL 運算子，用於篩選實體。每個運算子皆支援特定的欄位類型。</p>
+<div class="alert note">
+<p>篩選表達式左側的字面量可以是集合欄位名稱（例如下文範例中的<code translate="no">status</code> 、<code translate="no">color</code> 等），或是 StructArray 子欄位在特定元素索引處的名稱（例如<code translate="no">filter = 'struct[0][subfield] &gt; 10'</code> ）。</p>
+<p>有關 StructArray 欄位中標量篩選的詳細資訊，請參閱《<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>》。</p>
+</div>
 <h2 id="Comparison-operators" class="common-anchor-header">比較運算子<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>比較運算子用於根據等於、不等於或數值大小來篩選資料。它們適用於數值和文字欄位。</p>
+    </button></h2><p>比較運算子用於根據相等、不等或大小來篩選資料。它們適用於數值和文字欄位。</p>
 <h3 id="Supported-comparison-operators" class="common-anchor-header">支援的比較運算子<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,9 +80,33 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>假設您有一個名為<code translate="no">status</code> 的欄位，且您想找出所有<code translate="no">status</code> 為「active」的實體。您可以使用等於運算子<code translate="no">==</code> ：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">範例 2：使用「不等於」進行篩選（<code translate="no">!=</code> ）<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-2-Filtering-with-not-equal-to-" class="common-anchor-header">範例 2：使用「不等於」進行篩選 (<code translate="no">!=</code>)<button data-href="#Example-2-Filtering-with-not-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,10 +121,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要找出<code translate="no">status</code> 並非「inactive」的實體：</p>
+    </button></h3><p>要找出<code translate="no">status</code> 並非「inactive」的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">範例 3：使用「大於」條件篩選（<code translate="no">&gt;</code> ）<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status != \&quot;inactive\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;status != \&quot;inactive\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;status != \&quot;inactive\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;status != \&quot;inactive\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;status != \&quot;inactive\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">範例 3：使用「大於」條件進行篩選（<code translate="no">&gt;</code> ）<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,7 +164,31 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>若要找出所有<code translate="no">age</code> 大於 30 的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;age &gt; 30&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;age &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;age &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;age &gt; 30&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;age &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;age &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-4-Filtering-with-less-than" class="common-anchor-header">範例 4：使用「小於」進行篩選<button data-href="#Example-4-Filtering-with-less-than" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,10 +205,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要找出<code translate="no">price</code> 小於 100 的實體：</p>
+    </button></h3><p>若要找出<code translate="no">price</code> 小於 100 的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-greater-than-or-equal-to-" class="common-anchor-header">範例 5：使用大於或等於 (<code translate="no">&gt;=</code>) 進行篩選<button data-href="#Example-5-Filtering-with-greater-than-or-equal-to-" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;price &lt; 100&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;price &lt; 100&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;price &lt; 100&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;price &lt; 100&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;price &lt; 100&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;price &lt; 100&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-5-Filtering-with-greater-than-or-equal-to-" class="common-anchor-header">範例 5：使用「大於或等於」進行篩選 (<code translate="no">&gt;=</code>)<button data-href="#Example-5-Filtering-with-greater-than-or-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,7 +248,31 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>若要找出所有<code translate="no">rating</code> 大於或等於 4 的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;rating &gt;= 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;rating &gt;= 4&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;rating &gt;= 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;rating &gt;= 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;rating &gt;= 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;rating &gt;= 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-6-Filtering-with-less-than-or-equal-to" class="common-anchor-header">範例 6：使用「小於或等於」進行篩選<button data-href="#Example-6-Filtering-with-less-than-or-equal-to" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +290,31 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>若要找出<code translate="no">discount</code> 小於或等於 10% 的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;discount &lt;= 10&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;discount &lt;= 10&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;discount &lt;= 10&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;discount &lt;= 10&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;discount &lt;= 10&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;discount &lt;= 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Range-operators" class="common-anchor-header">範圍運算子<button data-href="#Range-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -184,10 +332,34 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>範圍運算子可協助根據特定值集篩選資料。Milvus 支援使用<code translate="no">IN</code> 進行集合成員資格檢查。</p>
-<p>若要找出所有「<code translate="no">color</code> 」為「red」、「green」或「blue」的實體：</p>
+<p>若要找出所有<code translate="no">color</code> 為「red」、「green」或「blue」的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>當您需要檢查資料是否屬於一組特定值時，此功能非常實用。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;, \&quot;blue\&quot;]&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;, \&quot;blue\&quot;]&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;, \&quot;blue\&quot;]&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;, \&quot;blue\&quot;]&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;, \&quot;blue\&quot;]&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>當您需要檢查實體是否屬於一組特定值時，此功能非常實用。</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">模式匹配運算子<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,22 +375,94 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>模式匹配運算子可協助根據通配符模式或正規表達式篩選字串值。</p>
+    </button></h2><p>模式匹配運算子可協助根據萬用字元模式或正規表達式篩選字串值。</p>
 <ul>
 <li><p><code translate="no">LIKE</code>: 用於根據字串值匹配簡單的萬用字元模式。例如，<code translate="no">name LIKE &quot;Prod%&quot;</code> 會匹配以<code translate="no">Prod</code> 開頭的值。</p></li>
-<li><p><code translate="no">=~</code>: 用於將字串值與 RE2 正規表達式進行比對。例如，<code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> 會匹配包含錯誤代碼的值，例如<code translate="no">E1001</code> 。</p></li>
+<li><p><code translate="no">=~</code>: 用於將字串值與 RE2 正規表達式進行比對。例如，<code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> 會比對包含錯誤代碼的值，例如<code translate="no">E1001</code> 。</p></li>
 <li><p><code translate="no">!~</code>: 用於排除與 RE2 正規表達式相符的字串值。這等同於<code translate="no">NOT (field =~ &quot;pattern&quot;)</code> 。</p></li>
 </ul>
-<p>若要找出<code translate="no">name</code> 以<code translate="no">Prod</code> 開頭的實體：</p>
+<p>若要找出以<code translate="no">Prod</code> 開頭且符合<code translate="no">name</code> 的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要尋找其 `<code translate="no">code</code> ` 包含錯誤代碼（例如<code translate="no">E1001</code> ）的實體：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;name LIKE \&quot;Prod%\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;name LIKE \&quot;Prod%\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;name LIKE \&quot;Prod%\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;name LIKE \&quot;Prod%\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;name LIKE \&quot;Prod%\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;name LIKE &quot;Prod%&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>若要找出其<code translate="no">code</code> 包含錯誤代碼（例如<code translate="no">E1001</code> ）的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;code =~ \&quot;E[0-9]{4}\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;code =~ \&quot;E[0-9]{4}\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;code =~ \&quot;E[0-9]{4}\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;code =~ \&quot;E[0-9]{4}\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;code =~ &quot;E[0-9]{4}&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;code =~ \&quot;E[0-9]{4}\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;code =~ &quot;E[0-9]{4}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>若要排除<code translate="no">message</code> 以<code translate="no">DEBUG</code> 開頭的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關如何在<code translate="no">LIKE</code> 與正規表達式之間進行選擇、受支援的欄位類型、正規表達式語法、轉義規則及效能等詳細資訊，請參閱<a href="/docs/zh-hant/pattern-matching.md">《模式比對》</a>。Milvus 亦允許您針對<code translate="no">VARCHAR</code> 欄位或 JSON 字串路徑建立<code translate="no">NGRAM</code> 索引，以加速符合條件的模式比對篩選器。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">《NGRAM》</a>。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>有關如何在<code translate="no">LIKE</code> 與正規表達式之間進行選擇、支援的欄位類型、正規表達式語法、轉義規則及效能等詳細資訊，請參閱<a href="/docs/zh-hant/pattern-matching.md">《模式匹配</a>》。Milvus 亦允許您針對<code translate="no">VARCHAR</code> 欄位或 JSON 字串路徑建立<code translate="no">NGRAM</code> 索引，以加速符合條件的模式匹配篩選器。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">《NGRAM》</a>。</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">算術運算子<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,10 +517,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>找出使<code translate="no">id</code> 為偶數（即能被 2 整除）的數：</p>
+    </button></h3><p>要找出<code translate="no">id</code> 為偶數（即能被 2 整除）的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">範例 2：使用冪運算（<code translate="no">**</code> ）<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;id % 2 == 0&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;id % 2 == 0&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;id % 2 == 0&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;id % 2 == 0&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;id % 2 == 0&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;id % 2 == 0&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-2-Using-exponentiation-" class="common-anchor-header">範例 2：使用冪運算 (<code translate="no">**</code>)<button data-href="#Example-2-Using-exponentiation-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -292,10 +560,34 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>要找出<code translate="no">price</code> 提升至 2 次方後大於 1000 的實體：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;price ** 2 &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;price ** 2 &gt; 1000&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;price ** 2 &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;price ** 2 &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;price ** 2 &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>算術運算子僅支援涉及<strong>單一欄位與常數的</strong>運算式。目前不支援將兩個欄位進行算術運算的運算式（例如<code translate="no">price * quantity &gt; 100</code> ），此類運算式將產生錯誤。若需根據由多個欄位計算而得的衍生值進行篩選，請考慮在插入資料時，將預先計算好的值儲存為獨立的標量欄位。</p>
+<p>算術運算子僅支援涉及<strong>單一欄位與常數的</strong>運算式。目前不支援將兩個欄位進行算術運算的運算式（例如<code translate="no">price * quantity &gt; 100</code> ），此類運算式將返回錯誤。若需根據由多個欄位計算得出的衍生值進行篩選，請考慮在插入資料時，將預先計算好的值儲存為獨立的標量欄位。</p>
 </div>
 <h2 id="Bitwise-operators" class="common-anchor-header">位元運算子<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,17 +659,89 @@ summary: >-
 </tbody>
 </table>
 <p>例如，<code translate="no">permissions = 5</code> 表示<code translate="no">READ</code> 和<code translate="no">SHARE</code> 位元已設定，因為<code translate="no">5 = 1 + 4</code> 。</p>
-<p>若要找出<code translate="no">SHARE</code> 位元已設定的實體，請使用位元與運算 (<code translate="no">&amp;</code>)：</p>
+<p>若要找出<code translate="no">SHARE</code> 位元被設定的實體，請使用位元與運算 (<code translate="no">&amp;</code>)：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">|</code>若要找出設定<code translate="no">WRITE</code> 位元後會產生<code translate="no">READ + WRITE + SHARE</code> 權限集的實體，請使用位元與 ( )：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;(permissions &amp; 4) == 4&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;(permissions &amp; 4) == 4&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions &amp; 4) == 4&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">|</code>若要找出設定「<code translate="no">WRITE</code> 」位元後會產生「<code translate="no">READ + WRITE + SHARE</code> 」權限集的實體，請使用位元與 ( )：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;(permissions | 2) == 7&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>若要找出其權限位元與 `<code translate="no">READ + WRITE + SHARE</code> ` 僅在 `<code translate="no">WRITE</code> ` 位元上有所不同的實體，請使用位元異或 (<code translate="no">^</code>)：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;(permissions ^ 7) == 2&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;(permissions ^ 7) == 2&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions ^ 7) == 2&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>在比較結果之前，請務必將位元運算用括號包起來，例如<code translate="no">(permissions &amp; 4) == 4</code> 。Milvus 3.0.0 在篩選表達式中支援<code translate="no">&amp;</code> 、<code translate="no">|</code> 以及<code translate="no">^</code> 。位元非（<code translate="no">~</code> ）和移位運算子（<code translate="no">&lt;&lt;</code> 及<code translate="no">&gt;&gt;</code> ）則不被支援。</p>
+<p>在比較結果（例如<code translate="no">(permissions &amp; 4) == 4</code> ）之前，請務必將位元運算用括號包起來。Milvus 在篩選表達式中支援<code translate="no">&amp;</code> 、<code translate="no">|</code> 以及<code translate="no">^</code> 。位元非（<code translate="no">~</code> ）與位移運算子（<code translate="no">&lt;&lt;</code> 和<code translate="no">&gt;&gt;</code> ）則不被支援。</p>
 </div>
 <h2 id="Logical-operators" class="common-anchor-header">邏輯運算子<button data-href="#Logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -430,10 +794,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要找出所有「<code translate="no">price</code> 」大於 100 且「<code translate="no">stock</code> 」大於 50 的產品：</p>
+    </button></h3><p>要找出所有<code translate="no">price</code> 大於 100 且<code translate="no">stock</code> 大於 50 的產品：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">範例 2：使用「<code translate="no">OR</code> 」來組合條件<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;price &gt; 100 AND stock &gt; 50&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;price &gt; 100 AND stock &gt; 50&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;price &gt; 100 AND stock &gt; 50&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;price &gt; 100 AND stock &gt; 50&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;price &gt; 100 AND stock &gt; 50&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price &gt; 100 AND stock &gt; 50&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-2-Using-OR-to-combine-conditions" class="common-anchor-header">範例 2：使用<code translate="no">OR</code> 組合條件<button data-href="#Example-2-Using-OR-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -448,10 +836,34 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要找出所有「<code translate="no">color</code> 」為「red」或「blue」的商品：</p>
+    </button></h3><p>要找出所有<code translate="no">color</code> 為「red」或「blue」的商品：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">範例 3：使用<code translate="no">NOT</code> 排除某個條件<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;color == \&quot;red\&quot; OR color == \&quot;blue\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;color == \&quot;red\&quot; OR color == \&quot;blue\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;color == \&quot;red\&quot; OR color == \&quot;blue\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;color == \&quot;red\&quot; OR color == \&quot;blue\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;color == \&quot;red\&quot; OR color == \&quot;blue\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">範例 3：使用 `<code translate="no">NOT</code> ` 排除某個條件<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -466,8 +878,32 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要找出所有<code translate="no">color</code> 並非「綠色」的產品：</p>
+    </button></h3><p>要找出所有<code translate="no">color</code> 並非「green」的產品：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;NOT color == \&quot;green\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;NOT color == \&quot;green\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;NOT color == \&quot;green\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;NOT color == \&quot;green\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;NOT color == \&quot;green\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;NOT color == &quot;green&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="IS-NULL-and-IS-NOT-NULL-operators" class="common-anchor-header">IS NULL 與 IS NOT NULL 運算子<button data-href="#IS-NULL-and-IS-NOT-NULL-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -484,15 +920,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> 運算子用於根據欄位是否包含空值（無資料）來篩選欄位。</p>
-<ul>
-<li><p><code translate="no">IS NULL</code>: 識別特定欄位包含空值的實體，即該欄位無值或未定義。</p></li>
-<li><p><code translate="no">IS NOT NULL</code>：識別特定欄位包含 null 以外任何值的實體，意即該欄位具有有效且已定義的值。</p></li>
-</ul>
-<div class="alert note">
-<p>這些運算子不區分大小寫，因此您可以使用<code translate="no">IS NULL</code> 或<code translate="no">is null</code> ，以及<code translate="no">IS NOT NULL</code> 或<code translate="no">is not null</code> 。</p>
-</div>
-<h3 id="Regular-scalar-fields-with-null-values" class="common-anchor-header">具有 null 值的常量標量欄位<button data-href="#Regular-scalar-fields-with-null-values" class="anchor-icon" translate="no">
+    </button></h2><p>使用 `<code translate="no">IS NULL</code> ` 和 `<code translate="no">IS NOT NULL</code> ` 來查找字段值缺失或可用的實體。例如，您可以查找沒有類別的產品，或是其嵌入資料已準備好供搜尋的實體。這兩種運算子皆適用於受支援的標量和向量字段，且具有相同的含義：</p>
+<table>
+<thead>
+<tr><th>運算子</th><th>匹配條件</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">&lt;field&gt; IS NULL</code></td><td>指定欄位為 NULL 值的實體</td></tr>
+<tr><td><code translate="no">&lt;field&gt; IS NOT NULL</code></td><td>指定欄位值為非 NULL 的實體</td></tr>
+</tbody>
+</table>
+<p>受支援的標量欄位包括布林型、數值型、<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> 以及<code translate="no">ARRAY</code> 欄位。這些運算子不支援<a href="/docs/zh-hant/text.md">TEXT 欄位</a>。</p>
+<p>自 Milvus 3.0.3 起，這些運算子亦支援一般向量欄位：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 以及<code translate="no">INT8_VECTOR</code> 。</p>
+<p>這些運算子不區分大小寫：<code translate="no">IS NULL</code> 與<code translate="no">is null</code> 效果相同，<code translate="no">IS NOT NULL</code> 與<code translate="no">is not null</code> 亦然。</p>
+<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">範例：查找值缺失或可用的實體<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -507,20 +948,207 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 允許針對具有 null 值的常規標量欄位（例如字串或數字）進行篩選。</p>
-<div class="alert note">
-<p>對於<code translate="no">VARCHAR</code> 欄位，空字串<code translate="no">&quot;&quot;</code> 不會被視為 null 值。</p>
+    </button></h3><p>假設一個名為<code translate="no">products</code> 的集合已建立索引並載入。該集合具有一個名為<code translate="no">id</code> 的<code translate="no">INT64</code> 主鍵、一個名為<code translate="no">category</code> 的可為空<code translate="no">VARCHAR</code> 欄位，以及一個名為<code translate="no">embedding</code> 的可為空三維<code translate="no">FLOAT_VECTOR</code> 欄位。它已包含以下實體：</p>
+<table>
+<thead>
+<tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">1</code></td><td><code translate="no">&quot;book&quot;</code></td><td><code translate="no">[0.1, 0.2, 0.3]</code></td></tr>
+<tr><td><code translate="no">2</code></td><td>NULL</td><td><code translate="no">[0.4, 0.5, 0.6]</code></td></tr>
+<tr><td><code translate="no">3</code></td><td><code translate="no">&quot;book&quot;</code></td><td>NULL</td></tr>
+</tbody>
+</table>
+<p>此處省略集合的建立與資料插入步驟。有關這些步驟，請參閱《<a href="/docs/zh-hant/nullable-and-default.md">可為空欄位</a>》。</p>
+<p>若要找出仍需進行嵌入的實體，請查詢 `<code translate="no">embedding IS NULL</code>`。請根據您的伺服器調整連線設定。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
-<p>若要擷取<code translate="no">description</code> 欄位為 null 的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NULL&#x27;</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+
+results = client.query(
+    collection_name=<span class="hljs-string">&quot;products&quot;</span>,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;embedding IS NULL&quot;</span>,
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
+    limit=<span class="hljs-number">10</span>,
+)
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">sorted</span>(entity[<span class="hljs-string">&quot;id&quot;</span>] <span class="hljs-keyword">for</span> entity <span class="hljs-keyword">in</span> results))
+<span class="hljs-comment"># Expected: [3]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要擷取<code translate="no">description</code> 欄位不為空的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL&#x27;</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;products&quot;</span>)
+        .filter(<span class="hljs-string">&quot;embedding IS NULL&quot;</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;id&quot;</span>))
+        .limit(<span class="hljs-number">10</span>)
+        .build();
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
+System.out.println(queryResp.getQueryResults());
 <button class="copy-code-btn"></button></code></pre>
-<p>若要擷取<code translate="no">description</code> 欄位不為空，且<code translate="no">price</code> 欄位大於 10 的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;description IS NOT NULL AND price &gt; 10&#x27;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+rs, err := cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;products&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;embedding IS NULL&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>).
+    WithLimit(<span class="hljs-number">10</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to query: &quot;</span>, err.Error())
+}
+ids := rs.GetColumn(<span class="hljs-string">&quot;id&quot;</span>)
+<span class="hljs-keyword">var</span> result []<span class="hljs-type">int64</span>
+<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; ids.Len(); i++ {
+    v, _ := ids.GetAsInt64(i)
+    result = <span class="hljs-built_in">append</span>(result, v)
+}
+fmt.Println(result)
+<span class="hljs-comment">// Expected: [3]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="JSON-fields-with-null-values" class="common-anchor-header">含有 null 值的 JSON 欄位<button data-href="#JSON-fields-with-null-values" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(
+    &amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>),
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">request</span> = QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;products&quot;</span>)
+    .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">&quot;embedding IS NULL&quot;</span>)
+    .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>])
+    .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?;
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client.<span class="hljs-title function_ invoke__">query</span>(request).<span class="hljs-keyword">await</span>?;
+<span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">rows</span>()? {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">get_i64</span>(<span class="hljs-string">&quot;id&quot;</span>)?);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;products&quot;</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;embedding IS NULL&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;products&quot;</span>,
+  <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;embedding IS NULL&quot;</span>,
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>],
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(results);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+};
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;products&quot;</span>,
+    Expression = <span class="hljs-string">&quot;embedding IS NULL&quot;</span>,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span> },
+        Limit = <span class="hljs-number">10</span>
+    }
+});
+
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; results.RowCount; i++)
+{
+    Console.WriteLine(results.GetRow(i)[<span class="hljs-string">&quot;id&quot;</span>]);
+}
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// 3</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
+  <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/query&#x27;</span> \
+  -H <span class="hljs-string">&#x27;accept: application/json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Authorization: Bearer root:Milvus&#x27;</span> \
+  -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;products&quot;,
+    &quot;filter&quot;: &quot;embedding IS NULL&quot;,
+    &quot;outputFields&quot;: [&quot;id&quot;],
+    &quot;limit&quot;: 10
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>在同一查詢中替換<code translate="no">filter</code> ，即可檢查特定欄位或組合多個條件：</p>
+<table>
+<thead>
+<tr><th>篩選表達式</th><th>匹配 ID</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>尋找沒有類別的實體</td></tr>
+<tr><td><code translate="no">category IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">3</code></td><td>尋找具有類別的實體</td></tr>
+<tr><td><code translate="no">embedding IS NULL</code></td><td><code translate="no">3</code></td><td>尋找沒有嵌入內容的實體</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>尋找具有嵌入的實體</td></tr>
+<tr><td><code translate="no">category IS NOT NULL AND embedding IS NOT NULL</code></td><td><code translate="no">1</code></td><td>搜尋同時具備兩項值的實體</td></tr>
+</tbody>
+</table>
+<p><a id="Regular-scalar-fields-with-null-values"></a>
+<a id="JSON-fields-with-null-values"></a>
+<a id="ARRAY-fields-with-null-values"></a></p>
+<h3 id="How-field-values-are-treated" class="common-anchor-header">欄位值的處理方式<button data-href="#How-field-values-are-treated" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -535,58 +1163,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 允許針對包含 null 值的 JSON 欄位進行篩選。JSON 欄位在以下情況下會被視為 null：</p>
-<ul>
-<li><p>整個 JSON 物件被明確設定為 None（null），例如<code translate="no">{&quot;metadata&quot;: None}</code> 。</p></li>
-<li><p>該 JSON 欄位在實體中完全缺失。</p></li>
-</ul>
-<div class="alert note">
-<p>若 JSON 物件中的某些元素為 null（例如個別鍵），該欄位仍被視為非 null。例如，<code translate="no">\{&quot;metadata&quot;: \{&quot;category&quot;: None, &quot;price&quot;: 99.99}}</code> 即使<code translate="no">category</code> 鍵為 null，也不會被視為 null。</p>
-</div>
-<p>為了進一步說明 Milvus 如何處理具有 null 值的 JSON 欄位，請參考以下包含 JSON 欄位<code translate="no">metadata</code> 的範例資料：</p>
-<pre><code translate="no" class="language-python">data = [
-  {
-      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>},
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
-  },
-  {
-      <span class="hljs-string">&quot;metadata&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-comment"># Entire JSON object is null</span>
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.78</span>, <span class="hljs-number">0.90</span>]
-  },
-  {  <span class="hljs-comment"># JSON field `metadata` is completely missing</span>
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.91</span>, <span class="hljs-number">0.18</span>, <span class="hljs-number">0.23</span>]
-  },
-  {
-      <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-literal">None</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>}, <span class="hljs-comment"># Individual key value is null</span>
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">4</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.56</span>, <span class="hljs-number">0.38</span>, <span class="hljs-number">0.21</span>]
-  }
-]
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>範例 1：擷取元資料為 null 的實體</strong></p>
-<p>要查找<code translate="no">metadata</code> 欄位缺失或明確設定為 None 的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: None, &#x27;pk&#x27;: 3}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>範例 2：擷取元資料不為 null 的實體</strong></p>
-<p>若要查找 `<code translate="no">metadata</code> ` 欄位不為 null 的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata IS NOT NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="ARRAY-fields-with-null-values" class="common-anchor-header">含有 null 值的 ARRAY 欄位<button data-href="#ARRAY-fields-with-null-values" class="anchor-icon" translate="no">
+    </button></h3><p>運算子會檢查儲存的欄位值。對於沒有預設值的可為空欄位，若在插入時省略該欄位或明確將其設定為 NULL，則會儲存 NULL。已設定的預設值可能會改變實際儲存的內容。詳細資訊請參閱《<a href="/docs/zh-hant/default-values.md">可為空欄位與預設值</a>》。</p>
+<table>
+<thead>
+<tr><th>欄位類型</th><th>NULL 行為</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">VARCHAR</code></td><td>空字串<code translate="no">&quot;&quot;</code> 屬於非 NULL 值。</td></tr>
+<tr><td><code translate="no">JSON</code></td><td>整個欄位的 NULL 值會與<code translate="no">IS NULL</code> 相符。例如<code translate="no">{&quot;category&quot;: null}</code> 這樣的 JSON 物件即使其內部某個值為 NULL，仍屬非 NULL 值。</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>整個欄位的 NULL 值會與<code translate="no">IS NULL</code> 相符。個別元素不能為 NULL，且<code translate="no">IS NULL</code> /<code translate="no">IS NOT NULL</code> 不支援如<code translate="no">tags[0]</code> 這類的陣列元素存取。請參閱「<a href="/docs/zh-hant/array_data_type.md">陣列欄位</a>」。</td></tr>
+<tr><td>一般向量類型</td><td>NULL 表示向量值不存在。其分量皆為零的向量不被視為 NULL。</td></tr>
+</tbody>
+</table>
+<p>對於以<code translate="no">nullable=False</code> 定義且受支援的欄位，<code translate="no">IS NULL</code> 將不匹配任何實體，而<code translate="no">IS NOT NULL</code> 則會匹配所有可見實體。篩選器中的其他條件仍會生效。</p>
+<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">在向量搜尋中使用 NULL 篩選器<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -601,55 +1191,20 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 允許針對包含 null 值的 ARRAY 欄位進行篩選。ARRAY 欄位在以下情況下會被視為 null：</p>
-<ul>
-<li><p>整個 ARRAY 欄位被明確設定為 None（null），例如<code translate="no">&quot;tags&quot;: None</code> 。</p></li>
-<li><p>該 ARRAY 欄位在實體中完全缺失。</p></li>
-</ul>
-<div class="alert note">
-<p>陣列欄位無法包含部分 null 值，因為陣列欄位中的所有元素必須具有相同資料類型。詳細資訊請參閱「<a href="/docs/zh-hant/array_data_type.md">陣列欄位</a>」。</p>
-</div>
-<p>為進一步說明 Milvus 如何處理含有 null 值的 ARRAY 欄位，請參閱以下包含 ARRAY 欄位<code translate="no">tags</code> 的範例資料：</p>
-<pre><code translate="no" class="language-python">data = [
-  {
-      <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],
-      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.56</span>]
-  },
-  {
-      <span class="hljs-string">&quot;tags&quot;</span>: <span class="hljs-literal">None</span>,  <span class="hljs-comment"># Entire ARRAY is null</span>
-      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>],
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.78</span>, <span class="hljs-number">0.91</span>, <span class="hljs-number">0.23</span>]
-  },
-  {  <span class="hljs-comment"># The tags field is completely missing</span>
-      <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">9</span>, <span class="hljs-number">5</span>],
-      <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">3</span>,
-      <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.18</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.23</span>]
-  }
-]
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>範例 1：擷取 `tags` 為 null 的實體</strong></p>
-<p>若要擷取<code translate="no">tags</code> 欄位缺失或明確設定為<code translate="no">None</code> 的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [4, 5], &#x27;embedding&#x27;: [0.78, 0.91, 0.23], &#x27;pk&#x27;: 2}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;tags&#x27;: None, &#x27;ratings&#x27;: [9, 5], &#x27;embedding&#x27;: [0.18, 0.11, 0.23], &#x27;pk&#x27;: 3}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>範例 2：擷取 `tags` 非空的實體</strong></p>
-<p>若要擷取 `<code translate="no">tags</code> ` 欄位不為空的實體：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags IS NOT NULL&#x27;</span>
-
-<span class="hljs-comment"># Example output:</span>
-<span class="hljs-comment"># data: [</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: &#x27;electronics&#x27;, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 1}&quot;,</span>
-<span class="hljs-comment">#     &quot;{&#x27;metadata&#x27;: {&#x27;category&#x27;: None, &#x27;price&#x27;: 99.99, &#x27;brand&#x27;: &#x27;BrandA&#x27;}, &#x27;pk&#x27;: 4}&quot;</span>
-<span class="hljs-comment"># ]</span>
-<button class="copy-code-btn"></button></code></pre>
+    </button></h3><p>搜尋篩選器中可使用相同的運算子，但實體若要參與相似度搜尋，其被搜尋的欄位中也必須包含向量。</p>
+<p>以上述範例資料為例，考慮使用<code translate="no">anns_field=&quot;embedding&quot;</code> 進行搜尋：</p>
+<table>
+<thead>
+<tr><th>篩選表達式</th><th>符合相似度搜尋資格的實體</th><th>原因</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>實體<code translate="no">2</code> 沒有類別，但擁有<code translate="no">embedding</code> 向量。</td></tr>
+<tr><td><code translate="no">embedding IS NULL</code></td><td>無</td><td>實體<code translate="no">3</code> 符合篩選條件，但沒有<code translate="no">embedding</code> 向量可用來與查詢向量進行比對。</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>兩個實體皆具備<code translate="no">embedding</code> 向量。</td></tr>
+</tbody>
+</table>
+<p>這三個篩選條件均有效。若使用<code translate="no">embedding</code> 搭配<code translate="no">embedding IS NULL</code> 進行搜尋，將不會有搜尋結果，因為沒有任何實體能同時滿足這兩項要求。若要擷取缺少嵌入向量的實體，請如上所述使用<code translate="no">query()</code> 。</p>
+<p>向量搜尋會自動跳過其搜尋向量欄位為 NULL 的實體，因此<code translate="no">embedding IS NOT NULL</code> 並不會進一步縮小<code translate="no">embedding</code> 搜尋的候選範圍。排名、其他篩選條件以及搜尋限制仍會決定最終回傳哪些候選結果。</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">關於在 JSON 和 ARRAY 欄位中使用基本運算子的提示<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -666,11 +1221,59 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>雖然 Milvus 中的基本運算子用途廣泛且可套用至標量欄位，但它們也能有效應用於 JSON 和 ARRAY 欄位中的鍵與索引。</p>
-<p>例如，若您有一個<code translate="no">product</code> 欄位，其中包含多個鍵，如<code translate="no">price</code> 、<code translate="no">model</code> 及<code translate="no">tags</code> ，請務必直接引用該鍵：</p>
+<p>例如，若您有一個名為 `<code translate="no">product</code> ` 的欄位，其中包含多個鍵，例如 `<code translate="no">price</code>`、`<code translate="no">model</code>` 及 `<code translate="no">tags</code>`，請務必直接引用該鍵：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要查找陣列中首個溫度值超過特定數值的記錄，請使用：</p>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;product[\&quot;price\&quot;] &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;product[\&quot;price\&quot;] &gt; 1000&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;product[\&quot;price\&quot;] &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;product[\&quot;price\&quot;] &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;product[\&quot;price\&quot;] &gt; 1000&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>若要找出記錄的溫度陣列中，第一個溫度超過特定數值的記錄，請使用：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;history_temperatures[0] &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;history_temperatures[0] &gt; 30&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;history_temperatures[0] &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;history_temperatures[0] &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;history_temperatures[0] &gt; 30&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -687,7 +1290,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供一系列基本運算子，讓您能靈活地篩選和查詢資料。透過結合比較運算子、範圍運算子、算術運算子及邏輯運算子，您可以建立強大的篩選表達式，藉此縮小搜尋範圍，並高效地擷取所需資料。</p>
+    </button></h2><p>Milvus 提供一系列基本運算子，讓您能靈活地篩選和查詢資料。透過結合比較運算子、範圍運算子、算術運算子及邏輯運算子，您可以建立強大的篩選表達式，藉此縮小搜尋結果範圍，並高效地擷取所需資料。</p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -704,5 +1307,5 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>篩選條件中的匹配值清單長度是否有上限（例如：filter=’color in ["red", "green", “blue”]’）？若清單過長該如何處理？</strong></p>
-<p>Zilliz Cloud 並未對篩選條件中的匹配值清單長度設限。然而，過長的清單可能會顯著影響查詢效能。
-若您的篩選條件包含冗長的匹配值清單，或含有許多元素的複雜表達式，我們建議您使用<a href="/docs/zh-hant/filtering-templating.md">「篩選範本</a>」功能來提升查詢效能。</p>
+<p>Milvus 並未對篩選條件中的匹配值清單長度設限。然而，過長的清單可能會顯著影響查詢效能。
+若您的篩選條件包含冗長的匹配值清單，或含有眾多元素的複雜表達式，我們建議使用<a href="/docs/zh-hant/filtering-templating.md">「篩選模板</a>」來提升查詢效能。</p>

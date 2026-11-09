@@ -93,7 +93,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.7/milvus-operator-1.3.7.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>インストール処理が完了すると、次のような出力が表示されます。</p>
+<p>インストール処理が終了すると、次のような出力が表示されます。</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -108,7 +108,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<p>以前にMilvus Operatorをインストール済みの場合は、次のコマンドを使用してアップグレードしてください。</p>
+<p>以前にMilvus Operatorをインストールしたことがある場合は、次のコマンドを使用してアップグレードしてください。</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
@@ -116,7 +116,7 @@ CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-kubectl">
-<p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行してください。</p>
+<p><code translate="no">kubectl</code> を使用してMilvus Operatorをインストールするには、次のコマンドを実行します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>インストール処理が終了すると、次のような出力が表示されます。</p>
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus OperatorのPodが実行されている状態になったら、次のようにMilvusクラスタをデプロイできます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v2.6.25 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
+<p>上記のコマンドは、メッセージキューとして<strong>Woodpecker</strong>を使用し（v2.6.26 では推奨）、Streaming Node を含むすべての新しいアーキテクチャコンポーネントを備えた Milvus クラスタをデプロイします。</p>
 <p><strong>このデプロイにおけるアーキテクチャの主な特徴:</strong></p>
 <ul>
 <li><strong>メッセージキュー</strong>：<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpecker を使用</a>（インフラのメンテナンス負担を軽減）</li>
@@ -236,7 +236,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを構築します。</p>
+<p>Milvus Operatorは、etcd、Pulsar、MinIOなどのMilvus依存関係を構築した後、プロキシ、コーディネーター、ノードなどのMilvusコンポーネントを作成します。</p>
 <p>Milvusクラスタの準備が完了すると、Milvusクラスタ内のすべてのポッドのステータスは以下のようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -278,11 +278,11 @@ my-release-minio-3                               1/1     Running   0          2m
 <div class="alert note">
 <p>Milvusをスタンドアロンモードでデプロイした場合は、Pod名を `<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> ` から `<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>` に変更してください。</p>
 </div>
-<p>その後、次のコマンドを実行して、ローカルポートをMilvusがサービスを提供しているポートに転送します。</p>
+<p>次に、以下のコマンドを実行して、ローカルポートをMilvusがサービスを提供しているポートに転送します。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>オプションとして、上記のコマンドで `<code translate="no">27017:19530</code> ` の代わりに `<code translate="no">:19530</code> ` を使用すると、<code translate="no">kubectl</code> がローカルポートを自動的に割り当ててくれるため、ポートの競合を管理する必要がなくなります。</p>
+<p>オプションとして、上記のコマンドで<code translate="no">27017:19530</code> の代わりに<code translate="no">:19530</code> を使用すると、<code translate="no">kubectl</code> がローカルポートを自動的に割り当ててくれるため、ポートの競合を管理する必要がなくなります。</p>
 <p>デフォルトでは、kubectl のポート転送は<code translate="no">localhost</code> でのみリスニングします。Milvus に選択した IP アドレスまたはすべての IP アドレスでリスニングさせたい場合は、<code translate="no">address</code> フラグを使用してください。次のコマンドを実行すると、ポート転送がホストマシンのすべての IP アドレスでリスニングするようになります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530

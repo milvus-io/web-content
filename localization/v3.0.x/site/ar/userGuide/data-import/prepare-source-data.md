@@ -1,12 +1,12 @@
 ---
 id: prepare-source-data.md
 order: 0
-title: إعداد بيانات المصدر
+title: تحضير البيانات المصدرية
 summary: >-
-  تناقش هذه الصفحة شيئًا يجب أن تضعه في اعتبارك قبل البدء في إدراج البيانات
-  بالجملة في مجموعتك.
+  تتناول هذه الصفحة بعض الأمور التي يجب أن تضعها في اعتبارك قبل البدء في إدراج
+  البيانات بشكل مجمّع في مجموعتك.
 ---
-<h1 id="Prepare-Source-Data" class="common-anchor-header">إعداد بيانات المصدر<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
+<h1 id="Prepare-Source-Data" class="common-anchor-header">تحضير البيانات المصدرية<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تناقش هذه الصفحة شيئًا يجب أن تضعه في اعتبارك قبل البدء في إدراج البيانات المجمعة في مجموعتك.</p>
-<h2 id="Before-you-start" class="common-anchor-header">قبل أن تبدأ<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>تتناول هذه الصفحة بعض الأمور التي يجب مراعاتها قبل البدء في إدراج البيانات بشكل مجمّع في مجموعتك.</p>
+<h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,29 +37,33 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتطلب المجموعة المستهدفة تعيين بيانات المصدر إلى مخططها. يوضح الرسم البياني أدناه كيفية تعيين بيانات المصدر المقبولة إلى مخطط المجموعة المستهدفة.</p>
-<p>
+    </button></h2><p>تتطلب المجموعة الهدف تعيين بيانات المصدر إلى مخططها. يوضح الرسم البياني أدناه كيفية تعيين بيانات المصدر المقبولة إلى مخطط المجموعة الهدف.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
-   </span> <span class="img-wrapper"> <span>تعيين البيانات إلى المخطط</span> </span></p>
-<p>يجب عليك فحص بياناتك بعناية وتصميم مخطط المجموعة الهدف وفقًا لذلك.</p>
-<p>بأخذ بيانات JSON في الرسم البياني أعلاه كمثال، هناك كيانان في قائمة الصفوف، كل صف يحتوي على ستة حقول. يتضمن مخطط المجموعة بشكل انتقائي أربعة حقول: <strong>المعرف،</strong> <strong>والمتجه،</strong> <strong>والمقدار_1،</strong> <strong>والمقدار_2</strong>.</p>
-<p>هناك أمران آخران يجب مراعاتهما عند تصميم المخطط:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" /> 
+   <span>ربط البيانات بالمخطط</span>
+  
+ </span></p>
+<p>يجب عليك فحص بياناتك بعناية وتصميم مخطط المجموعة المستهدفة وفقًا لذلك.</p>
+<p>بأخذ بيانات JSON الواردة في الرسم التخطيطي أعلاه كمثال، توجد كيانان في قائمة الصفوف، ويحتوي كل صف على ستة حقول. يتضمن مخطط المجموعة أربعة حقول بشكل انتقائي: <strong>id</strong> و <strong>vector</strong> و <strong>scalar_1</strong> و <strong>scalar_2</strong>.</p>
+<p>هناك أمران آخران يجب أخذهما في الاعتبار عند تصميم المخطط:</p>
 <ul>
-<li><p><strong>ما إذا كنت تريد تمكين المعرف التلقائي</strong></p>
-<p>يعمل حقل <strong>المعرف</strong> كحقل أساسي للمجموعة. لجعل الحقل الأساسي يتزايد تلقائيًا، يمكنك تمكين <strong>المعرف التلقائي</strong> في المخطط. في هذه الحالة، يجب استبعاد حقل <strong>المعرف</strong> من كل صف في البيانات المصدر.</p></li>
-<li><p><strong>ما إذا كنت تريد تمكين الحقول الديناميكية</strong></p>
-<p>يمكن للمجموعة المستهدفة أيضًا تخزين الحقول غير المضمنة في مخططها المحدد مسبقًا إذا كان المخطط يمكّن الحقول الديناميكية. الحقل <strong>$meta</strong> هو حقل JSON محجوز للاحتفاظ بالحقول الديناميكية وقيمها في أزواج قيمة المفتاح. في الرسم البياني أعلاه، سيتم حفظ الحقلين <strong>الديناميكي_الحقل_1</strong> <strong>والديناميكي_الحقل_2</strong> والقيم كأزواج قيمة مفتاح في حقل <strong>$meta</strong>.</p></li>
+<li><p><strong>ما إذا كان يجب تمكين AutoID</strong></p>
+<p>يعمل الحقل <strong>id</strong> كحقل أساسي للمجموعة. لجعل الحقل الأساسي يتزايد تلقائيًا، يمكنك تمكين <strong>ميزة AutoID</strong> في المخطط. في هذه الحالة، يجب استبعاد الحقل <strong>id</strong> من كل صف في البيانات المصدر.</p></li>
+<li><p><strong>ما إذا كان يجب تمكين الحقول الديناميكية</strong></p>
+<p>يمكن للمجموعة الهدف أيضًا تخزين الحقول غير المضمنة في مخططها المحدد مسبقًا إذا كان المخطط يتيح الحقول الديناميكية. يُعد الحقل <strong>$meta</strong> حقل JSON محجوزًا لتخزين الحقول الديناميكية وقيمها في أزواج المفتاح-القيمة. في الرسم التخطيطي أعلاه، سيتم حفظ الحقول <strong>dynamic_field_1</strong> و <strong>dynamic_field_2</strong> والقيم كأزواج المفتاح-القيمة في الحقل <strong>$meta</strong>.</p></li>
 </ul>
-<p>يوضح الرمز التالي كيفية إعداد المخطط للمجموعة الموضحة في الرسم البياني أعلاه.</p>
+<p>يوضح الكود التالي كيفية إعداد المخطط للمجموعة الموضحة في الرسم البياني أعلاه.</p>
 <div class="language-python">
-<p>للحصول على مزيد من المعلومات، ارجع إلى <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> في مرجع SDK.</p>
+<p>للحصول على مزيد من المعلومات، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> في مرجع SDK.</p>
 </div>
 <div class="language-java">
-<p>للحصول على مزيد من المعلومات، ارجع إلى <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> في مرجع SDK.</p>
+<p>للحصول على مزيد من المعلومات، راجع <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> في مرجع SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># You need to work out a collection schema out of your dataset.</span>
@@ -206,7 +210,7 @@ schema.verify()
     <span class="hljs-keyword">return</span> schema;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-BulkWriter" class="common-anchor-header">إعداد BulkWriter بالجملة<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
+<h2 id="StructArray-fields-in-source-files" class="common-anchor-header">حقول StructArray في ملفات المصدر<button data-href="#StructArray-fields-in-source-files" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -221,13 +225,25 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong> هي أداة مصممة لتحويل مجموعات البيانات الخام إلى تنسيق مناسب للاستيراد عبر واجهة برمجة تطبيقات الاستيراد RESTful Import. تقدم نوعين من الكتّاب:</p>
+    </button></h2><p>يتم نقل حقل <a href="/docs/ar/array-of-structs.md">StructArray</a> بشكل مختلف حسب كل تنسيق ملف مصدر. يتوقع قارئ الاستيراد أحد الأشكال التالية:</p>
+<table>
+<thead>
+<tr><th>التنسيق</th><th>شكل حقل StructArray</th></tr>
+</thead>
+<tbody>
+<tr><td>JSON، JSONL</td><td>قيمة الحقل عبارة عن قائمة من الكائنات، كائن واحد لكل عنصر Struct، مرتبة حسب اسم الحقل الفرعي: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
+<tr><td>CSV</td><td>تحتوي الخلية على نفس نص JSON الموجود في تنسيق JSON.</td></tr>
+<tr><td>Parquet</td><td>عمود واحد لكل حقل في StructArray من النوع <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ، وعنصر فرعي واحد لكل حقل فرعي. الحقل الفرعي القياسي هو عنصر فرعي قياسي، أما الحقل الفرعي المتجه فهو قائمة من نوع عناصره، مثل <code translate="no">list&lt;float32&gt;</code>.</td></tr>
+<tr><td>NumPy</td><td>غير مدعوم. تحتوي ملفات NumPy على ملف واحد لكل حقل من المستوى الأعلى ولا تحتوي على تمثيل لحقل StructArray. استخدم ملفات JSON أو CSV أو Parquet للمجموعات التي تحتوي على حقل StructArray.</td></tr>
+</tbody>
+</table>
+<p>تنطبق القواعد التالية على قيم StructArray في جميع التنسيقات المدعومة:</p>
 <ul>
-<li><strong>LocalBulkWriter</strong>: يقرأ مجموعة البيانات المعينة ويحولها إلى تنسيق سهل الاستخدام.</li>
-<li><strong>RemoteBulkWriter</strong>: يؤدي نفس مهمة LocalBulkWriter ولكنه ينقل بالإضافة إلى ذلك ملفات البيانات المحولة إلى مجموعة تخزين كائنات محددة عن بعد.</li>
+<li><p>استخدم أسماء الحقول الفرعية داخل كل عنصر Struct، وليس المسارات مثل <code translate="no">chunks[text]</code>. يتم رفض الأعمدة المسطحة أو المفاتيح المسماة <code translate="no">chunks[text]</code>.</p></li>
+<li><p>يجب أن يوفر كل عنصر Struct كل حقل فرعي من مخطط Struct، ولا يمكن أن يكون عنصر Struct نفسه فارغًا، مثل <code translate="no">[null, {...}]</code>. لا يمكن أن تكون قيمة StructArray بأكملها فارغة إلا عندما يكون حقل StructArray قابلاً للفراغ.</p></li>
 </ul>
-<p>يختلف<strong>RemoteBulkWriter</strong> عن <strong>LocalBulkWriter</strong> في أن <strong>RemoteBulkWriter</strong> ينقل ملفات البيانات المحولة إلى دلو تخزين كائن مستهدف.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">إعداد LocalBulkWriter المحلي<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+<p>للاطلاع على الحدود المتعلقة بمخطط البيانات، راجع <a href="/docs/ar/structarray-limits.md#Import-limits">حدود StructArray</a>.</p>
+<h2 id="Set-up-BulkWriter" class="common-anchor-header">إعداد BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,9 +258,32 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يقوم <strong>LocalBulkWriter</strong> بإلحاق الصفوف من مجموعة البيانات المصدر وينقلها إلى ملف محلي بالتنسيق المحدد.</p>
+    </button></h2><p><strong>BulkWriter</strong> هي أداة مصممة لتحويل مجموعات البيانات الأولية إلى تنسيق مناسب للاستيراد عبر واجهة برمجة تطبيقات الاستيراد RESTful. وهي توفر نوعين من أدوات الكتابة:</p>
+<ul>
+<li><strong>LocalBulkWriter</strong>: يقرأ مجموعة البيانات المحددة ويحولها إلى تنسيق سهل الاستخدام.</li>
+<li><strong>RemoteBulkWriter</strong>: يؤدي نفس المهمة التي يؤديها LocalBulkWriter، لكنه ينقل أيضًا ملفات البيانات المحولة إلى دلو تخزين كائنات بعيد محدد.</li>
+</ul>
+<p>يختلف<strong>RemoteBulkWriter</strong> عن <strong>LocalBulkWriter</strong> في أن <strong>RemoteBulkWriter</strong> ينقل ملفات البيانات المحولة إلى دلو تخزين كائنات مستهدف.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">إعداد LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يقوم <strong>LocalBulkWriter</strong> بإلحاق الصفوف من مجموعة البيانات المصدر وتسجيلها في ملف محلي بالتنسيق المحدد.</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -270,22 +309,22 @@ writer = LocalBulkWriter(
 <span class="hljs-type">LocalBulkWriter</span> <span class="hljs-variable">localBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LocalBulkWriter</span>(localBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>عند إنشاء <strong>LocalBulkWriter Local</strong>BulkWriter، يجب عليك:</p>
+<p>عند إنشاء <strong>LocalBulkWriter</strong>، يجب عليك:</p>
 <ul>
 <li>الإشارة إلى المخطط الذي تم إنشاؤه في <code translate="no">schema</code>.</li>
 <li>تعيين <code translate="no">local_path</code> إلى دليل الإخراج.</li>
 <li>تعيين <code translate="no">file_type</code> إلى نوع ملف الإخراج.</li>
-<li>إذا كانت مجموعة البيانات الخاصة بك تحتوي على عدد كبير من السجلات، يُنصح بتجزئة بياناتك عن طريق تعيين <code translate="no">segment_size</code> إلى قيمة مناسبة.</li>
+<li>إذا كانت مجموعة البيانات الخاصة بك تحتوي على عدد كبير من السجلات، يُنصح بتقسيم البيانات عن طريق تعيين <code translate="no">segment_size</code> إلى قيمة مناسبة.</li>
 </ul>
 <p>للحصول على تفاصيل حول إعدادات المعلمات، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> في مرجع SDK.</p>
 </div>
 <div class="language-java">
-<p>عند إنشاء <strong>LocalBulkWriter،</strong> يجب عليك:</p>
+<p>عند إنشاء <strong>LocalBulkWriter</strong>، يجب عليك:</p>
 <ul>
-<li>الرجوع إلى المخطط الذي تم إنشاؤه في <code translate="no">CollectionSchema()</code>.</li>
+<li>الإشارة إلى المخطط الذي تم إنشاؤه في <code translate="no">CollectionSchema()</code>.</li>
 <li>تعيين دليل الإخراج في <code translate="no">withLocalPath()</code>.</li>
 <li>تعيين نوع ملف الإخراج في <code translate="no">withFileType()</code>.</li>
-<li>إذا كانت مجموعة البيانات الخاصة بك تحتوي على عدد كبير من السجلات، يُنصح بتجزئة بياناتك عن طريق تعيين <code translate="no">withChunkSize()</code> إلى قيمة مناسبة.</li>
+<li>إذا كانت مجموعة البيانات الخاصة بك تحتوي على عدد كبير من السجلات، يُنصح بتقسيم البيانات عن طريق تعيين <code translate="no">withChunkSize()</code> إلى قيمة مناسبة.</li>
 </ul>
 <p>للحصول على تفاصيل حول إعدادات المعلمات، راجع LocalBulkWriter في مرجع SDK.</p>
 </div>
@@ -304,9 +343,11 @@ writer = LocalBulkWriter(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بدلاً من ارتكاب البيانات المُلحقة إلى ملف محلي، يقوم <strong>RemoteBulkWriter</strong> بارتكابها إلى دلو بعيد. لذلك، يجب عليك إعداد كائن <strong>ConnectParam</strong> قبل إنشاء <strong>RemoteBulkWriter</strong>.</p>
+    </button></h3><p>بدلاً من تسجيل البيانات المضافة في ملف محلي، يقوم <strong>RemoteBulkWriter</strong> بتسجيلها في دلو بعيد. لذلك، يجب عليك إعداد كائن <strong>ConnectParam</strong> قبل إنشاء <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -354,9 +395,11 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد أن تكون معلمات الاتصال جاهزة، يمكنك الرجوع إليها في <strong>RemoteBulkWriter</strong> على النحو التالي:</p>
+<p>بمجرد أن تصبح معلمات الاتصال جاهزة، يمكنك الإشارة إليها في <strong>RemoteBulkWriter</strong> على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -382,10 +425,10 @@ writer = RemoteBulkWriter(
 <span class="hljs-type">RemoteBulkWriter</span> <span class="hljs-variable">remoteBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(remoteBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>بالكاد تكون معلمات إنشاء <strong>RemoteBulkWriter</strong> هي نفسها تلك الخاصة بـ <strong>LocalBulkWriter،</strong> باستثناء <code translate="no">connect_param</code>. للحصول على تفاصيل حول إعدادات المعلمات، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> في مرجع SDK.</p>
+<p>تتطابق معلمات إنشاء <strong>RemoteBulkWriter</strong> تقريبًا مع تلك الخاصة بـ <strong>LocalBulkWriter،</strong> باستثناء <code translate="no">connect_param</code>. للحصول على تفاصيل حول إعدادات المعلمات، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">وConnectParam</a> في مرجع SDK.</p>
 </div>
 <div class="language-java">
-<p>تكاد تكون معلمات إنشاء <strong>RemoteBulkWriter</strong> مماثلة لتلك الخاصة بـ <strong>LocalBulkWriter،</strong> باستثناء <code translate="no">StorageConnectParam</code>. للحصول على تفاصيل حول إعدادات المعلمات، راجع RemoteBulkWriter و StorageConnectParam في مرجع SDK.</p>
+<p>معلمات إنشاء كائن <strong>RemoteBulkWriter</strong> هي نفسها تقريبًا معلمات إنشاء <strong>كائن LocalBulkWriter،</strong> باستثناء المعلمة <code translate="no">StorageConnectParam</code>. للحصول على تفاصيل حول إعدادات المعلمات، راجع كائني RemoteBulkWriter وStorageConnectParam في مرجع SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">بدء الكتابة<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,14 +446,16 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>يحتوي <strong>BulkWriter BulkWriter</strong> على طريقتين: <code translate="no">append_row()</code> إضافة صف من مجموعة بيانات مصدر، و <code translate="no">commit()</code> يرتكب الصفوف المضافة إلى ملف محلي أو دلو بعيد.</p>
+<p>يحتوي <strong>BulkWriter</strong> على طريقتين: <code translate="no">append_row()</code> التي تضيف صفًا من مجموعة بيانات المصدر، و <code translate="no">commit()</code> التي تلتزم بالصفوف المضافة إلى ملف محلي أو دلو بعيد.</p>
 </div>
 <div class="language-java">
-<p>يحتوي <strong>BulkWriter بالجملة</strong> على طريقتين: <code translate="no">appendRow()</code> يضيف صفًا من مجموعة بيانات مصدر، و <code translate="no">commit()</code> يرتكب الصفوف المضافة إلى ملف محلي أو دلو بعيد.</p>
+<p>يحتوي <strong>BulkWriter</strong> على طريقتين: <code translate="no">appendRow()</code> لإضافة صف من مجموعة بيانات المصدر، و <code translate="no">commit()</code> لتثبيت الصفوف المضافة في ملف محلي أو دلو بعيد.</p>
 </div>
-<p>لأغراض العرض التوضيحي، تلحق الشيفرة التالية البيانات التي تم إنشاؤها عشوائيًا.</p>
+<p>لأغراض التوضيح، يقوم الكود التالي بإلحاق بيانات تم إنشاؤها عشوائيًا.</p>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
@@ -607,7 +652,7 @@ writer = RemoteBulkWriter(
     List&lt;List&lt;String&gt;&gt; batchFiles = uploadData();
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-the-results" class="common-anchor-header">التحقّق من النتائج<button data-href="#Verify-the-results" class="anchor-icon" translate="no">
+<h2 id="Verify-the-results" class="common-anchor-header">التحقق من النتائج<button data-href="#Verify-the-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -623,13 +668,15 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>للتحقق من النتائج، يمكنك الحصول على مسار الإخراج الفعلي عن طريق طباعة الخاصية <code translate="no">batch_files</code> للكاتب.</p>
+<p>للتحقق من النتائج، يمكنك الحصول على مسار الإخراج الفعلي عن طريق طباعة خاصية <code translate="no">batch_files</code> الخاصة بـ writer.</p>
 </div>
 <div class="language-java">
-<p>للتحقق من النتائج، يمكنك الحصول على مسار الإخراج الفعلي عن طريق طباعة الخاصية <code translate="no">getBatchFiles()</code> للكاتب.</p>
+<p>للتحقق من النتائج، يمكنك الحصول على مسار الإخراج الفعلي عن طريق طباعة طريقة <code translate="no">getBatchFiles()</code> الخاصة بالكاتب.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">بايثون </a> <a href="#java">جافا</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
 <span class="hljs-comment"># [[&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/1.parquet&#x27;],</span>
@@ -649,8 +696,8 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>ينشئ<strong>BulkWriter BulkWriter</strong> معرّف UUID، وينشئ مجلدًا فرعيًا باستخدام معرّف UUID في دليل الإخراج المُقدَّم، ويضع جميع الملفات التي تم إنشاؤها في المجلد الفرعي. <a href="https://assets.zilliz.com/bulk_writer.zip">انقر هنا</a> لتنزيل نموذج البيانات المعد.</p>
-<p>هياكل المجلدات الممكنة هي كما يلي:</p>
+<p>يقوم<strong>BulkWriter</strong> بإنشاء معرّف فريد (UUID)، وإنشاء مجلد فرعي باستخدام هذا المعرّف في دليل الإخراج المحدد، ووضع جميع الملفات التي تم إنشاؤها في المجلد الفرعي. <a href="https://assets.zilliz.com/bulk_writer.zip">انقر هنا</a> لتنزيل البيانات النموذجية المعدة مسبقًا.</p>
+<p>فيما يلي هياكل المجلدات المحتملة:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b

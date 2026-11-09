@@ -60,7 +60,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
 </ul></li>
 <li>L'archivio messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
 <li>Sono supportate solo le versioni 2.x o 3.x di Kafka.</li>
-<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.25, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v2.6.26, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurazione di RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
       </svg>
     </button></h2><p>RocksMQ è l’archivio messaggi predefinito in Milvus standalone.</p>
 <div class="alert note">
-<p>Attualmente, è possibile configurare RocksMQ come archivio messaggi per Milvus standalone solo tramite Milvus Operator.</p>
+<p>Attualmente, è possibile configurare RocksMQ come archivio dei messaggi per Milvus standalone solo tramite Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Esempio</h4><p>L'esempio seguente illustra la configurazione di un servizio RocksMQ.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>

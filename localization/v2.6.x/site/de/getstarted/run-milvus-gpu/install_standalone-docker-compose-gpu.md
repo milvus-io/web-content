@@ -74,12 +74,12 @@ title: Milvus mit GPU-Unterstützung über Docker Compose ausführen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Laden Sie <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie manuell oder mit dem folgenden Befehl als „docker-compose.yml“.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>Laden Sie <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie manuell oder mit dem folgenden Befehl als „docker-compose.yml“.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie müssen einige Änderungen an den Umgebungsvariablen des Standalone-Dienstes in der YAML-Datei wie folgt vornehmen:</p>
 <ul>
-<li>Um Milvus ein bestimmtes GPU-Gerät zuzuweisen, suchen Sie das Feld „ <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> “ in der Definition des Dienstes „ <code translate="no">standalone</code> “ und ersetzen Sie dessen Wert durch die ID der gewünschten GPU. Mit dem Tool „ <code translate="no">nvidia-smi</code> “, das im Lieferumfang der NVIDIA-GPU-Grafiktreiber enthalten ist, können Sie die ID eines GPU-Geräts ermitteln. Milvus unterstützt mehrere GPU-Geräte.</li>
+<li>Um Milvus ein bestimmtes GPU-Gerät zuzuweisen, suchen Sie das Feld „ <code translate="no">deploy.resources.reservations.devices[0].devices_ids</code> “ in der Definition des Dienstes „ <code translate="no">standalone</code> “ und ersetzen Sie dessen Wert durch die ID der gewünschten GPU. Sie können das Tool „ <code translate="no">nvidia-smi</code> “, das im Lieferumfang der NVIDIA-GPU-Grafiktreiber enthalten ist, verwenden, um die ID eines GPU-Geräts zu ermitteln. Milvus unterstützt mehrere GPU-Geräte.</li>
 </ul>
 <p>Ein einzelnes GPU-Gerät Milvus zuweisen:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>

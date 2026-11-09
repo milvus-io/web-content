@@ -20,7 +20,7 @@ summary: 사용자 정의 필드 또는 함수와 이에 따라 생성된 벡터
       </svg>
     </button></h1><p>컬렉션이 개발 환경에서 운영 환경으로 이동함에 따라 스키마가 변경되는 경우가 많습니다. 필터링 및 애플리케이션 로직을 위해 ` <code translate="no">source_uri</code> `이나 ` <code translate="no">review_status</code> `과 같은 스칼라 필드를 추가하거나, 애플리케이션에서 생성된 임베딩을 위한 새로운 벡터 필드를 추가하거나, 기존 텍스트에 대한 어휘 검색을 위해 BM25 함수와 이에 의해 생성된 스파스 벡터 필드를 추가하거나, 더 이상 사용되지 않는 필드와 함수를 제거할 수 있습니다. '컬렉션 스키마 변경(Alter Collection Schema)'을 사용하면 컬렉션을 다시 생성하지 않고도 지원되는 필드 및 함수 변경을 그 자리에서 수행할 수 있습니다.</p>
 <div class="alert note">
-<p>이 가이드에서는 관리형 컬렉션에서 사용자 정의 필드 및 해당 필드가 생성한 벡터 필드를 가진 함수에 대한 스키마 변경 사항을 다룹니다. 외부 컬렉션에 필드를 추가하려면 <a href="/docs/ko/alter-external-collection-schema.md">‘Alter External Collection Schema’를</a> 참조하십시오. <code translate="no">VARCHAR</code> 필드의 ‘ <code translate="no">max_length</code> ’ 변경이나 <code translate="no">ARRAY</code> 필드의 ‘ <code translate="no">max_capacity</code> ’ 변경과 같은 필드 속성 변경에 대해서는 <a href="/docs/ko/alter-collection-field.md">‘Alter Collection Field’를</a> 참조하십시오. 동적 필드 동작에 대해서는 <a href="/docs/ko/enable-dynamic-field.md">‘동적 필드(Dynamic Field</a> )’ 및 <a href="/docs/ko/modify-collection.md">‘컬렉션 수정(Modify Collection</a>)’을 참조하십시오.</p>
+<p>이 가이드에서는 관리형 컬렉션에서 사용자 정의 필드 및 해당 필드에서 생성된 벡터 필드를 가진 함수에 대한 스키마 변경 사항을 다룹니다. 외부 컬렉션에 필드를 추가하려면 <a href="/docs/ko/alter-external-collection-schema.md">‘Alter External Collection Schema’를</a> 참조하십시오. <code translate="no">VARCHAR</code> 필드의 ‘ <code translate="no">max_length</code> ’ 변경이나 <code translate="no">ARRAY</code> 필드의 ‘ <code translate="no">max_capacity</code> ’ 변경과 같은 필드 속성 변경에 대해서는 <a href="/docs/ko/alter-collection-field.md">‘Alter Collection Field’를</a> 참조하십시오. 동적 필드 동작에 대해서는 <a href="/docs/ko/enable-dynamic-field.md">‘동적 필드(Dynamic Field</a> )’ 및 <a href="/docs/ko/modify-collection.md">‘컬렉션 수정(Modify Collection</a>)’을 참조하십시오.</p>
 </div>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,17 +41,21 @@ summary: 사용자 정의 필드 또는 함수와 이에 따라 생성된 벡터
 <ul>
 <li><p>추가된 사용자 정의 필드는 null이 허용되어야 합니다. <code translate="no">add_collection_field()</code> 를 호출할 때 <code translate="no">nullable=True</code> 를 설정하십시오. 기존 엔티티의 경우, <code translate="no">default_value</code> 를 사용하여 스칼라 필드를 추가하지 않는 한 추가된 필드는 <code translate="no">NULL</code> 가 됩니다.</p></li>
 <li><p>사용자 정의 스칼라 필드 추가는 Milvus 2.6.x 이상에서 지원됩니다. 사용자 정의 벡터 필드 추가는 Milvus 2.6.18 이상에서 지원됩니다.</p></li>
-<li><p>StructArray 필드 추가는 Milvus 3.0.0 이상에서 지원됩니다. 추가된 StructArray 필드는 null 허용형이어야 합니다.</p></li>
-<li><p>필드 이름은 컬렉션 내의 다른 필드와 중복되지 않아야 합니다.</p></li>
+</ul>
+<ul>
+<li>StructArray 필드 추가는 Milvus 3.0.0 이상에서 지원됩니다. 추가된 StructArray 필드는 null 허용형이어야 합니다.</li>
+</ul>
+<ul>
+<li>필드 이름은 컬렉션 내의 다른 필드와 중복되지 않아야 합니다.</li>
 </ul>
 <p><strong>함수 및 해당 함수에 의해 생성된 벡터 필드 추가</strong></p>
 <ul>
-<li><p>스키마 업데이트 시에는 함수 하나와 생성된 벡터 필드 하나만 추가할 수 있습니다.</p></li>
+<li><p>스키마 업데이트마다 하나의 함수와 하나의 생성된 벡터 필드만 추가할 수 있습니다.</p></li>
 <li><p>지원되는 함수에 따라 생성되는 벡터 필드 유형이 결정됩니다. 즉, ` <code translate="no">BM25</code> `는 ` <code translate="no">SPARSE_FLOAT_VECTOR</code> ` 필드를 생성하고, ` <code translate="no">MINHASH</code> `는 ` <code translate="no">BINARY_VECTOR</code> ` 필드를 생성합니다.</p></li>
 <li><p>생성된 벡터 필드는 반드시 새로운 필드여야 합니다. 컬렉션 스키마에 이미 존재하는 필드를 가리킬 수는 없습니다.</p></li>
 <li><p>생성된 벡터 필드는 null 허용 필드일 수 없습니다.</p></li>
 <li><p>함수에서 사용하는 입력 필드는 컬렉션에 이미 존재해야 합니다.</p></li>
-<li><p>기존 컬렉션에 BM25 또는 MinHash 함수를 추가할 때, 함수 입력은 <code translate="no">VARCHAR</code> 필드여야 합니다. Milvus는 해당 입력 유형을 사용하여 기존 엔티티에 대해 생성된 출력을 백필할 수 없기 때문에, 이 워크플로우에서는 <code translate="no">TEXT</code> 입력을 지원하지 않습니다.</p></li>
+<li><p>기존 컬렉션에 BM25 또는 MinHash 함수를 추가할 때, 함수 입력은 <code translate="no">VARCHAR</code> 필드여야 합니다. Milvus는 해당 입력 유형을 사용하여 기존 엔티티에 대해 생성된 출력을 백필할 수 없기 때문에, 이 워크플로에서는 <code translate="no">TEXT</code> 입력을 지원하지 않습니다.</p></li>
 </ul>
 <p><strong>사용자 정의 필드 삭제</strong></p>
 <ul>
@@ -85,13 +89,13 @@ summary: 사용자 정의 필드 또는 함수와 이에 따라 생성된 벡터
       </svg>
     </button></h2><p>사용자 정의 필드를 추가하는지, 아니면 벡터 필드를 생성하는 함수를 추가하는지에 따라 워크플로를 선택하십시오:</p>
 <ul>
-<li><p>필터링, 쿼리 출력 또는 애플리케이션 로직을 위한 새로운 메타데이터가 필요한 경우<a href="#add-user-defined-scalar-fields--milvus-26x">사용자 정의 스칼라 필드를 추가하십시오</a>.</p></li>
-<li><p>요소들이 동일한 Struct 스키마를 공유하는 배열 필드가 필요한 경우<a href="#add-structarray-fields--milvus-300">StructArray 필드를 추가하십시오</a>.</p></li>
-<li><p>애플리케이션에서 임베딩을 생성하고 벡터 값을 Milvus에 기록하는 경우<a href="#add-user-defined-vector-fields--milvus-2618">사용자 정의 벡터 필드를 추가하십시오</a>.</p></li>
-<li><p>Milvus가 기존 필드(예: 텍스트의 BM25 스파스 벡터 또는 MinHash 시그니처)로부터 벡터 값을 생성해야 하는 경우,<a href="#add-a-function-and-its-generated-vector-field--milvus-30x">함수와 해당 함수가 생성하는 벡터 필드를 추가하십시오</a>.</p></li>
+<li><p>필터링, 쿼리 출력 또는 애플리케이션 로직을 위한 새로운 메타데이터가 필요한 경우<a href="#Add-user-defined-scalar-fields--Milvus-26x">사용자 정의 스칼라 필드를 추가하십시오</a>.</p></li>
+<li><p>요소들이 동일한 Struct 스키마를 공유하는 배열 필드가 필요한 경우<a href="#Add-StructArray-fields--Milvus-300">StructArray 필드를 추가하십시오</a>.</p></li>
+<li><p>애플리케이션에서 임베딩을 생성하고 벡터 값을 Milvus에 기록하는 경우<a href="#Add-user-defined-vector-fields--Milvus-2618">사용자 정의 벡터 필드를 추가하십시오</a>.</p></li>
+<li><p>Milvus가 기존 필드(예: 텍스트의 BM25 스파스 벡터 또는 MinHash 시그니처)로부터 벡터 값을 생성해야 하는 경우,<a href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x">함수와 해당 함수가 생성하는 벡터 필드를 추가하십시오</a>.</p></li>
 </ul>
 <p>모든 경우에 있어, 새 필드 이름은 컬렉션 내에 이미 존재해서는 안 되며, 필드의 총 개수는 Milvus의 필드 수 제한을 초과할 수 없습니다. 자세한 내용은 <a href="/docs/ko/limitations.md#number-of-resources-in-a-collection">Milvus 제한 사항을</a> 참조하십시오.</p>
-<h3 id="Add-user-defined-scalar-fields--Milvus-26x" class="common-anchor-header">사용자 정의 스칼라 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields--Milvus-26x" class="anchor-icon" translate="no">
+<h3 id="Add-user-defined-scalar-fields" class="common-anchor-header">사용자 정의 스칼라 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,18 +111,28 @@ summary: 사용자 정의 필드 또는 함수와 이에 따라 생성된 벡터
         ></path>
       </svg>
     </button></h3><p><code translate="no">add_collection_field()</code> 를 사용하여 기존 컬렉션에 사용자 정의 스칼라 필드를 추가할 수 있습니다.</p>
-<p>이는 동적 필드에 임의의 키를 저장하는 것과는 다릅니다. 스키마 업데이트가 적용된 후에는 새로운 스칼라 필드가 컬렉션 스키마의 정식 구성 요소가 됩니다. 이 필드에 값을 삽입하거나 업서트(upsert)할 수 있으며, 지원되는 경우 인덱스를 생성하고, 쿼리 및 검색 필터에서 사용할 수 있으며, 쿼리 또는 검색 결과로 반환할 수 있습니다.</p>
-<p>기존 엔티티는 새 필드가 생성되기 전에 삽입되었기 때문에, 추가되는 모든 사용자 정의 스칼라 필드는 null 허용 가능해야 합니다:</p>
+<p>이는 동적 필드에 임의의 키를 저장하는 것과는 다릅니다. 스키마 업데이트가 적용된 후에는 새로운 스칼라 필드가 컬렉션 스키마의 정식 구성 요소가 됩니다. 이 필드에 값을 삽입하거나 업데이트할 수 있고, 지원되는 경우 인덱스를 생성할 수 있으며, 쿼리 및 검색 필터에서 사용할 수 있고, 쿼리 또는 검색 결과로 반환할 수 있습니다.</p>
+<p>기존 엔티티는 새 필드가 생성되기 전에 삽입되었기 때문에, 추가되는 모든 사용자 정의 스칼라 필드는 null 허용(nullable)이어야 합니다:</p>
 <ul>
 <li><p><code translate="no">nullable=True</code> 를 사용하고 <code translate="no">default_value</code> 를 지정하지 않은 채 스칼라 필드를 추가하면, 기존 엔티티는 새 필드에 대해 <code translate="no">NULL</code> 를 반환합니다.</p></li>
-<li><p><code translate="no">nullable=True</code> 를 지정하고 <code translate="no">default_value</code> 를 함께 사용하여 스칼라 필드를 추가하면, 기존 엔티티는 새 필드에 대해 <code translate="no">NULL</code> 를 반환합니다.</p></li>
+<li><p><code translate="no">nullable=True</code> 를 지정하고 <code translate="no">default_value</code> 를 함께 지정한 스칼라 필드를 추가하면, 기존 엔티티는 새 필드에 대해 <code translate="no">NULL</code> 를 반환합니다.</p></li>
 </ul>
 <p>스칼라 필터 표현식은 <code translate="no">NULL</code> 스칼라 값과 일치하지 않습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">'Nullable Fields'를</a> 참조하십시오.</p>
 <p><strong>예: null 허용 스칼라 필드 추가</strong></p>
-<p>다음 예제는 <code translate="no">product_catalog</code> 라는 기존 컬렉션에 null이 허용되는 <code translate="no">source</code> 필드를 추가합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+<p>다음 예제는 <code translate="no">product_catalog</code> 라는 기존 컬렉션에 null 허용 <code translate="no">source</code> 필드를 추가합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient, Function, FunctionType
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="highlighted-comment-line">client.add_collection_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
@@ -128,14 +142,159 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>필드가 추가된 후, 컬렉션에 이미 존재하던 엔티티는 <code translate="no">source</code> 에 대해 <code translate="no">NULL</code> 을 반환합니다. 새 엔티티는 삽입(insert) 또는 업데이트(upsert) 시 <code translate="no">source</code> 을 설정할 수 있습니다.</p>
-<p><strong>예: 기본값이 있는 스칼라 필드 추가</strong></p>
-<p>기존 엔티티가 ` <code translate="no">NULL</code>` 대신 구체적인 값을 반환해야 하는 경우, 스칼라 필드를 추가할 때 ` <code translate="no">default_value</code> `을 지정하십시오. 다음 예제는 ` <code translate="no">review_status</code> ` 필드를 추가하고 ` <code translate="no">&quot;unreviewed&quot;</code> `을 기본값으로 사용합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddCollectionFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddCollectionStructFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFunctionFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropFunctionFieldReq;
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
+client.addCollectionField(AddCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;source&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">128</span>)
+        .isNullable(<span class="hljs-literal">true</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
 
-<span class="highlighted-comment-line">client.add_collection_field(</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+)
+
+ctx := context.Background()
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+}
+
+newField := entity.NewField().
+    WithName(<span class="hljs-string">&quot;source&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithNullable(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">128</span>)
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, newField))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to add field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+client
+    .<span class="hljs-title function_ invoke__">add_collection_field</span>(
+        AddCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field</span>(
+                FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;source&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+                    .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">128</span>)
+                    .<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::FieldSchema field = milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;source&quot;</span>, milvus::DataType::VARCHAR)
+                                .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">128</span>)
+                                .<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>);
+status = client-&gt;<span class="hljs-built_in">AddCollectionField</span>(
+    milvus::<span class="hljs-built_in">AddCollectionFieldRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>).<span class="hljs-built_in">WithField</span>(std::<span class="hljs-built_in">move</span>(field)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">field</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;source&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;VarChar&quot;</span>,
+        <span class="hljs-attr">max_length</span>: <span class="hljs-number">128</span>,
+        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
+    },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig { Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">await</span> client.AddCollectionFieldAsync(<span class="hljs-keyword">new</span> AddCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Field = FieldSchema.CreateVarchar(<span class="hljs-string">&quot;source&quot;</span>, maxLength: <span class="hljs-number">128</span>, nullable: <span class="hljs-literal">true</span>)
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+       &quot;collectionName&quot;: &quot;product_catalog&quot;,
+       &quot;schema&quot;: {
+         &quot;fieldName&quot;: &quot;source&quot;,
+         &quot;dataType&quot;: &quot;VarChar&quot;,
+         &quot;nullable&quot;: true,
+         &quot;elementTypeParams&quot;: {
+           &quot;max_length&quot;: 128
+         }
+       }
+     }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>필드가 추가된 후, 컬렉션에 이미 존재하던 엔티티는 <code translate="no">source</code> 에 대해 <code translate="no">NULL</code> 를 반환합니다. 새로운 엔티티는 삽입(insert) 또는 업데이트(upsert) 시 <code translate="no">source</code> 를 설정할 수 있습니다.</p>
+<p><strong>예시: 기본값이 있는 스칼라 필드 추가</strong></p>
+<p>기존 엔티티가 ` <code translate="no">NULL</code>` 대신 구체적인 값을 반환해야 하는 경우, 스칼라 필드를 추가할 때 ` <code translate="no">default_value</code> `를 지정하십시오. 다음 예제는 ` <code translate="no">review_status</code> ` 필드를 추가하고 ` <code translate="no">&quot;unreviewed&quot;</code> `를 기본값으로 사용합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="highlighted-comment-line">client.add_collection_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;review_status&quot;</span>,</span>
 <span class="highlighted-comment-line">    data_type=DataType.VARCHAR,</span>
@@ -144,8 +303,88 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">    default_value=<span class="hljs-string">&quot;unreviewed&quot;</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>필드가 추가된 후, 컬렉션에 이미 존재하던 엔티티는 ` <code translate="no">review_status</code>`에 대해 ` <code translate="no">&quot;unreviewed&quot;</code> `을 반환합니다. 새로 생성된 엔티티는 다른 값을 설정하거나, 값이 제공되지 않을 경우 기본값을 사용할 수 있습니다.</p>
-<h3 id="Add-StructArray-fields--Milvus-300" class="common-anchor-header">StructArray 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields--Milvus-300" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java">client.addCollectionField(AddCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;review_status&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">32</span>)
+        .isNullable(<span class="hljs-literal">true</span>)
+        .defaultValue(<span class="hljs-string">&quot;unreviewed&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">newField := entity.NewField().
+    WithName(<span class="hljs-string">&quot;review_status&quot;</span>).
+    WithDataType(entity.FieldTypeVarChar).
+    WithNullable(<span class="hljs-literal">true</span>).
+    WithMaxLength(<span class="hljs-number">32</span>).
+    WithDefaultValueString(<span class="hljs-string">&quot;unreviewed&quot;</span>)
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, newField))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to add field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">add_collection_field</span>(
+        AddCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field</span>(
+                FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;review_status&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+                    .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">32</span>)
+                    .<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>)
+                    .<span class="hljs-title function_ invoke__">default_value</span>(DefaultValue::<span class="hljs-title function_ invoke__">String</span>(<span class="hljs-string">&quot;unreviewed&quot;</span>.<span class="hljs-title function_ invoke__">into</span>())),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::FieldSchema field = milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;review_status&quot;</span>, milvus::DataType::VARCHAR)
+                                .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">32</span>)
+                                .<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>)
+                                .<span class="hljs-built_in">WithDefaultValue</span>(<span class="hljs-string">&quot;unreviewed&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">AddCollectionField</span>(
+    milvus::<span class="hljs-built_in">AddCollectionFieldRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>).<span class="hljs-built_in">WithField</span>(std::<span class="hljs-built_in">move</span>(field)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">field</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;review_status&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;VarChar&quot;</span>,
+        <span class="hljs-attr">max_length</span>: <span class="hljs-number">32</span>,
+        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">default_value</span>: <span class="hljs-string">&quot;unreviewed&quot;</span>,
+    },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AddCollectionFieldAsync(<span class="hljs-keyword">new</span> AddCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Field = FieldSchema.CreateVarchar(<span class="hljs-string">&quot;review_status&quot;</span>, maxLength: <span class="hljs-number">32</span>, nullable: <span class="hljs-literal">true</span>, defaultValue: <span class="hljs-string">&quot;unreviewed&quot;</span>)
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+       &quot;collectionName&quot;: &quot;product_catalog&quot;,
+       &quot;schema&quot;: {
+         &quot;fieldName&quot;: &quot;review_status&quot;,
+         &quot;dataType&quot;: &quot;VarChar&quot;,
+         &quot;nullable&quot;: true,
+         &quot;defaultValue&quot;: &quot;unreviewed&quot;,
+         &quot;elementTypeParams&quot;: {
+           &quot;max_length&quot;: 32
+         }
+       }
+     }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>필드가 추가된 후, 컬렉션에 이미 존재하던 엔티티는 ` <code translate="no">review_status</code>`에 대해 ` <code translate="no">&quot;unreviewed&quot;</code> `를 반환합니다. 새로운 엔티티는 다른 값을 설정하거나, 값이 제공되지 않은 경우 기본값을 사용할 수 있습니다.</p>
+<h3 id="Add-StructArray-fields" class="common-anchor-header">StructArray 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0</span><button data-href="#Add-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,18 +406,23 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <li><p>요청에서 ` <code translate="no">nullable=True</code> `을 설정합니다.</p></li>
 </ol>
 <p><strong>예: null 허용 StructArray 필드 추가</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-<span class="hljs-comment"># Create a Struct schema.</span>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create a struct schema</span>
 struct_schema = client.create_struct_field_schema()
 
-<span class="hljs-comment"># Add scalar fields to the Struct.</span>
+<span class="hljs-comment"># add a scalar field to the struct</span>
 struct_schema.add_field(<span class="hljs-string">&quot;text&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>)
 struct_schema.add_field(<span class="hljs-string">&quot;chapter&quot;</span>, DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
 
-<span class="hljs-comment"># Add vector fields to the Struct with mmap enabled.</span>
+<span class="hljs-comment"># add a vector field to the struct with mmap enabled</span>
 struct_schema.add_field(<span class="hljs-string">&quot;text_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
 struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</span>, DataType.FLOAT_VECTOR, mmap_enabled=<span class="hljs-literal">True</span>, dim=<span class="hljs-number">5</span>)
 
@@ -187,11 +431,169 @@ struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</sp
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
 <span class="highlighted-comment-line">    struct_schema=struct_schema,</span>
 <span class="highlighted-comment-line">    max_capacity=<span class="hljs-number">1024</span>,</span>
-<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
+<span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span></span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>StructArray 필드가 추가된 후, 컬렉션에 이미 존재하는 엔티티는 모든 하위 필드에 대해 ` <code translate="no">chunks</code> `에 대해 ` <code translate="no">NULL</code> `을 반환합니다. 새 엔티티를 삽입할 때는 모든 하위 필드가 ` <code translate="no">NULL</code> `이거나 유효한 값을 갖도록 해야 합니다. 일부 하위 필드는 ` <code translate="no">NULL</code> `으로 설정하고 다른 필드는 유효한 값으로 설정한 엔티티를 삽입하면 오류가 발생합니다.</p>
-<h3 id="Add-user-defined-vector-fields--Milvus-2618+" class="common-anchor-header">사용자 정의 벡터 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields--Milvus-2618+" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Create a struct schema and add its subfields</span>
+<span class="hljs-comment">// add a vector subfield with mmap enabled</span>
+Map&lt;String, String&gt; mmapParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+mmapParams.put(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
+client.addCollectionStructField(AddCollectionStructFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;books&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;chunks&quot;</span>)
+        .maxCapacity(<span class="hljs-number">1024</span>)
+        .nullable(<span class="hljs-literal">true</span>)
+        .addStructField(AddFieldReq.builder()
+                .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
+                .dataType(DataType.VarChar)
+                .maxLength(<span class="hljs-number">65535</span>)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName(<span class="hljs-string">&quot;chapter&quot;</span>)
+                .dataType(DataType.VarChar)
+                .maxLength(<span class="hljs-number">512</span>)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName(<span class="hljs-string">&quot;text_vector&quot;</span>)
+                .dataType(DataType.FloatVector)
+                .dimension(<span class="hljs-number">5</span>)
+                .typeParams(mmapParams)
+                .build())
+        .addStructField(AddFieldReq.builder()
+                .fieldName(<span class="hljs-string">&quot;chapter_vector&quot;</span>)
+                .dataType(DataType.FloatVector)
+                .dimension(<span class="hljs-number">5</span>)
+                .typeParams(mmapParams)
+                .build())
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// Create a struct schema and add its subfields</span>
+<span class="hljs-comment">// add a vector subfield with mmap enabled</span>
+structSchema := entity.NewStructSchema().
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;text&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;chapter&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">512</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;text_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">5</span>).WithTypeParams(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;chapter_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">5</span>).WithTypeParams(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>))
+newField := entity.NewField().
+    WithName(<span class="hljs-string">&quot;chunks&quot;</span>).
+    WithDataType(entity.FieldTypeArray).
+    WithElementType(entity.FieldTypeStruct).
+    WithNullable(<span class="hljs-literal">true</span>).
+    WithMaxCapacity(<span class="hljs-number">1024</span>).
+    WithStructSchema(structSchema)
+err = client.AddCollectionStructField(ctx, milvusclient.NewAddCollectionStructFieldOption(<span class="hljs-string">&quot;books&quot;</span>, newField))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to add struct field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Create a struct schema and add its subfields</span>
+<span class="hljs-comment">// add a vector subfield with mmap enabled</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">struct_schema</span> = StructFieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;chunks&quot;</span>)
+    .<span class="hljs-title function_ invoke__">max_capacity</span>(<span class="hljs-number">1024</span>)
+    .<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+            .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">65535</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;chapter&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+            .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">512</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">5</span>)
+            .<span class="hljs-title function_ invoke__">type_params</span>(
+                std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;mmap.enabled&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;true&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]),
+            ),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;chapter_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">5</span>)
+            .<span class="hljs-title function_ invoke__">type_params</span>(
+                std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;mmap.enabled&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;true&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]),
+            ),
+    );
+client
+    .<span class="hljs-title function_ invoke__">add_collection_struct_field</span>(
+        AddCollectionStructFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;books&quot;</span>)
+            .<span class="hljs-title function_ invoke__">struct_field</span>(struct_schema)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Create a struct schema and add its subfields</span>
+<span class="hljs-comment">// add a vector subfield with mmap enabled</span>
+milvus::StructFieldSchema struct_schema = milvus::<span class="hljs-built_in">StructFieldSchema</span>(<span class="hljs-string">&quot;chunks&quot;</span>)
+                                              .<span class="hljs-built_in">WithMaxCapacity</span>(<span class="hljs-number">1024</span>)
+                                              .<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>)
+                                              .<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">65535</span>))
+                                              .<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;chapter&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">512</span>))
+                                              .<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text_vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>).<span class="hljs-built_in">AddTypeParam</span>(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>))
+                                              .<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;chapter_vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>).<span class="hljs-built_in">AddTypeParam</span>(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>));
+status = client-&gt;<span class="hljs-built_in">AddCollectionStructField</span>(
+    milvus::<span class="hljs-built_in">AddCollectionStructFieldRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;books&quot;</span>).<span class="hljs-built_in">WithStructField</span>(std::<span class="hljs-built_in">move</span>(struct_schema)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Create a struct schema and add its subfields</span>
+<span class="hljs-comment">// add a vector subfield with mmap enabled</span>
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;books&quot;</span>,
+    <span class="hljs-attr">field</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chunks&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;Array&quot;</span>,
+        <span class="hljs-attr">element_type</span>: <span class="hljs-string">&quot;Struct&quot;</span>,
+        <span class="hljs-attr">max_capacity</span>: <span class="hljs-number">1024</span>,
+        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">fields</span>: [
+            { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;VarChar&quot;</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">65535</span> },
+            { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chapter&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;VarChar&quot;</span>, <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span> },
+            { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_vector&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;FloatVector&quot;</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">true</span> },
+            { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;chapter_vector&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;FloatVector&quot;</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>, <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">true</span> },
+        ],
+    },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Create a struct schema</span>
+<span class="hljs-keyword">var</span> structSchema = <span class="hljs-keyword">new</span> StructFieldSchema(<span class="hljs-string">&quot;chunks&quot;</span>)
+{
+    MaxCapacity = <span class="hljs-number">1024</span>,
+    Nullable = <span class="hljs-literal">true</span>
+};
+
+<span class="hljs-comment">// add a scalar field to the struct</span>
+structSchema.Fields.Add(FieldSchema.CreateVarchar(<span class="hljs-string">&quot;text&quot;</span>, maxLength: <span class="hljs-number">65535</span>));
+structSchema.Fields.Add(FieldSchema.CreateVarchar(<span class="hljs-string">&quot;chapter&quot;</span>, maxLength: <span class="hljs-number">512</span>));
+
+<span class="hljs-comment">// add a vector field to the struct with mmap enabled</span>
+<span class="hljs-keyword">var</span> textVector = FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;text_vector&quot;</span>, dimension: <span class="hljs-number">5</span>);
+textVector.TypeParams[<span class="hljs-string">&quot;mmap.enabled&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span>;
+structSchema.Fields.Add(textVector);
+
+<span class="hljs-keyword">var</span> chapterVector = FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;chapter_vector&quot;</span>, dimension: <span class="hljs-number">5</span>);
+chapterVector.TypeParams[<span class="hljs-string">&quot;mmap.enabled&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span>;
+structSchema.Fields.Add(chapterVector);
+
+<span class="hljs-keyword">await</span> client.AddCollectionStructFieldAsync(<span class="hljs-keyword">new</span> AddCollectionStructFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;books&quot;</span>,
+    StructField = structSchema
+});
+<button class="copy-code-btn"></button></code></pre>
+<p>StructArray 필드가 추가된 후, 컬렉션에 이미 존재하는 엔티티는 모든 하위 필드에 대해 ` <code translate="no">chunks</code> `에 대해 ` <code translate="no">NULL</code> `를 반환합니다. 새 엔티티를 삽입할 때는 모든 하위 필드가 ` <code translate="no">NULL</code> `이거나 유효한 값을 갖도록 해야 합니다. 일부 하위 필드는 ` <code translate="no">NULL</code> `로 설정하고 다른 필드는 유효한 값으로 설정한 엔티티를 삽입하면 오류가 발생합니다.</p>
+<h3 id="Add-user-defined-vector-fields" class="common-anchor-header">사용자 정의 벡터 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,15 +608,21 @@ struct_schema.add_field(<span class="hljs-string">&quot;chapter_vector&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>애플리케이션에서 임베딩을 생성하고 벡터 값을 Milvus에 기록할 때, ` <code translate="no">add_collection_field()</code> `를 사용하여 사용자 정의 벡터 필드를 추가하십시오.</p>
-<p>추가된 모든 사용자 정의 벡터 필드는 nullable이어야 합니다. 기존 엔티티의 경우, upsert 또는 백필(backfill) 워크플로를 통해 벡터 값을 기록할 때까지 새 벡터 필드에 대해 <code translate="no">NULL</code> 가 적용됩니다. 새 엔티티는 삽입 시 해당 벡터 필드를 포함할 수 있습니다. 벡터 검색은 벡터 값이 <code translate="no">NULL</code> 인 엔티티를 건너뜁니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">'Nullable Fields'를</a> 참조하십시오.</p>
-<p><strong>예: null 허용 벡터 필드 추가</strong></p>
-<p>다음 예제는 <code translate="no">embedding_v2</code> 이라는 이름의 nullable dense 벡터 필드를 기존 컬렉션에 추가합니다. <code translate="no">dim</code> 을 애플리케이션에서 생성한 임베딩의 차원으로 설정하십시오.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-<span class="highlighted-comment-line">client.add_collection_field(</span>
+    </button></h3><p>애플리케이션에서 임베딩을 생성하고 벡터 값을 Milvus에 기록할 때 <code translate="no">add_collection_field()</code> 를 사용하여 사용자 정의 벡터 필드를 추가하십시오.</p>
+<p>추가된 모든 사용자 정의 벡터 필드는 nullable이어야 합니다. 기존 엔티티의 경우, upsert 또는 백필(backfill) 워크플로를 통해 벡터 값을 기록할 때까지 새 벡터 필드에 대해 <code translate="no">NULL</code> 가 적용됩니다. 새 엔티티는 삽입 시 해당 벡터 필드를 포함할 수 있습니다. 벡터 검색은 벡터 값이 <code translate="no">NULL</code> 인 엔티티를 건너뜁니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Nullable Fields를</a> 참조하십시오.</p>
+<p><strong>예: nullable 벡터 필드 추가</strong></p>
+<p>다음 예제는 <code translate="no">embedding_v2</code> 라는 이름의 nullable 밀집 벡터 필드를 기존 컬렉션에 추가합니다. <code translate="no">dim</code> 값은 애플리케이션에서 생성된 임베딩의 차원으로 설정하십시오.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="highlighted-comment-line">client.add_collection_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;embedding_v2&quot;</span>,</span>
 <span class="highlighted-comment-line">    data_type=DataType.FLOAT_VECTOR,</span>
@@ -222,7 +630,94 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">    nullable=<span class="hljs-literal">True</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>필드가 추가된 후, 검색을 수행하기 전에 새 벡터 필드에 대한 인덱스를 생성하십시오:</p>
+<pre><code translate="no" class="language-java">client.addCollectionField(AddCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;embedding_v2&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">768</span>)
+        .isNullable(<span class="hljs-literal">true</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">newField := entity.NewField().
+    WithName(<span class="hljs-string">&quot;embedding_v2&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithNullable(<span class="hljs-literal">true</span>).
+    WithDim(<span class="hljs-number">768</span>)
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, newField))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to add field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">add_collection_field</span>(
+        AddCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field</span>(
+                FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;embedding_v2&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+                    .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">768</span>)
+                    .<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::FieldSchema field = milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embedding_v2&quot;</span>, milvus::DataType::FLOAT_VECTOR)
+                                .<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">768</span>)
+                                .<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>);
+status = client-&gt;<span class="hljs-built_in">AddCollectionField</span>(
+    milvus::<span class="hljs-built_in">AddCollectionFieldRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>).<span class="hljs-built_in">WithField</span>(std::<span class="hljs-built_in">move</span>(field)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">field</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding_v2&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;FloatVector&quot;</span>,
+        <span class="hljs-attr">dim</span>: <span class="hljs-number">768</span>,
+        <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
+    },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">var</span> embeddingV2 = FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;embedding_v2&quot;</span>, dimension: <span class="hljs-number">768</span>);
+embeddingV2.Nullable = <span class="hljs-literal">true</span>;
+
+<span class="hljs-keyword">await</span> client.AddCollectionFieldAsync(<span class="hljs-keyword">new</span> AddCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Field = embeddingV2
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+       &quot;collectionName&quot;: &quot;product_catalog&quot;,
+       &quot;schema&quot;: {
+         &quot;fieldName&quot;: &quot;embedding_v2&quot;,
+         &quot;dataType&quot;: &quot;FloatVector&quot;,
+         &quot;nullable&quot;: true,
+         &quot;elementTypeParams&quot;: {
+           &quot;dim&quot;: 768
+         }
+       }
+     }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>필드가 추가된 후, 검색을 수행하기 전에 새로운 벡터 필드에 인덱스를 생성하십시오:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -236,9 +731,76 @@ client.create_index(
     index_params=index_params,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>기존 엔티티는 <code translate="no">embedding_v2</code> 에 대해 <code translate="no">NULL</code> 값을 가지며, 이 필드로 검색할 때 건너뜁니다. 기존 엔티티를 <code translate="no">embedding_v2</code> 를 통해 검색 가능하게 하려면, 업서트(upsert) 또는 백필(backfill) 워크플로를 통해 NULL이 아닌 벡터 값을 기록하십시오. 새 엔티티는 삽입 시 <code translate="no">embedding_v2</code> 를 포함할 수 있습니다.</p>
+<pre><code translate="no" class="language-java">client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .indexParams(Collections.singletonList(IndexParam.builder()
+                .fieldName(<span class="hljs-string">&quot;embedding_v2&quot;</span>)
+                .indexType(IndexParam.IndexType.AUTOINDEX)
+                .metricType(IndexParam.MetricType.COSINE)
+                .build()))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">indexOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-string">&quot;embedding_v2&quot;</span>, index.NewAutoIndex(entity.COSINE))
+_, err = client.CreateIndex(ctx, indexOpt)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to create index: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">create_index</span>(
+        CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_param</span>(
+                IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;embedding_v2&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+                    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-function">milvus::IndexDesc <span class="hljs-title">index_desc</span><span class="hljs-params">(<span class="hljs-string">&quot;embedding_v2&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)</span></span>;
+status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(
+    milvus::<span class="hljs-built_in">CreateIndexRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>).<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(index_desc)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embedding_v2&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.CreateIndexAsync(<span class="hljs-keyword">new</span> CreateIndexReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Indexes = <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;embedding_v2&quot;</span>, <span class="hljs-string">&quot;embedding_v2&quot;</span>, IndexType.AutoIndex, MetricType.Cosine)
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+     --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/indexes/create&quot;</span> \
+     --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+     --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+     -d <span class="hljs-string">&#x27;{
+       &quot;collectionName&quot;: &quot;product_catalog&quot;,
+       &quot;indexParams&quot;: [
+         {
+           &quot;fieldName&quot;: &quot;embedding_v2&quot;,
+           &quot;params&quot;: {&quot;index_type&quot;: &quot;AUTOINDEX&quot;},
+           &quot;metricType&quot;: &quot;COSINE&quot;
+         }
+       ]
+     }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>기존 엔티티의 경우 <code translate="no">embedding_v2</code> 에 대한 <code translate="no">NULL</code> 가 설정되어 있으며, 이 필드로 검색할 때 해당 엔티티는 건너뜁니다. <code translate="no">embedding_v2</code> 를 통해 기존 엔티티를 검색 가능하게 하려면, upsert 또는 백필(backfill) 워크플로를 통해 NULL이 아닌 벡터 값을 기록하십시오. 새 엔티티는 삽입 시 <code translate="no">embedding_v2</code> 를 포함할 수 있습니다.</p>
 <p><a id="add-vector-fields-generated-by-functions--milvus-30x"></a></p>
-<h3 id="Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">함수 및 해당 함수가 생성한 벡터 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Add-a-Function-and-its-generated-vector-field" class="common-anchor-header">함수 및 생성된 벡터 필드 추가<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -270,19 +832,24 @@ client.create_index(
 <tr><th>함수</th><th>생성된 벡터 필드 유형</th><th>일반적인 입력 필드</th><th>일반적인 사용 사례</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BM25</code></td><td><code translate="no">SPARSE_FLOAT_VECTOR</code></td><td>분석기가 활성화된 <code translate="no">VARCHAR</code> 장</td><td>어휘 검색 및 키워드 관련성</td></tr>
+<tr><td><code translate="no">BM25</code></td><td><code translate="no">SPARSE_FLOAT_VECTOR</code></td><td>분석기가 활성화된 ‘ <code translate="no">VARCHAR</code> ’ 필드</td><td>어휘 검색 및 키워드 관련성</td></tr>
 <tr><td><code translate="no">MINHASH</code></td><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">VARCHAR</code> 필드</td><td>준중복 감지</td></tr>
 </tbody>
 </table>
 <p>각 함수의 작동 방식에 대한 자세한 내용은 <a href="/docs/ko/bm25-function.md">BM25 함수</a> 및 <a href="/docs/ko/minhash-function.md">MinHash 함수를</a> 참조하십시오.</p>
-<p>생성된 벡터 필드는 컬렉션에 이미 존재해서는 안 되며, null 허용 필드일 수 없습니다. 함수 입력 필드는 이미 존재해야 합니다.</p>
-<p><strong>예: BM25 함수 및 해당 함수에 의해 생성된 스파스 벡터 필드 추가</strong></p>
-<p>다음 예제는 <code translate="no">text_bm25</code> 이라는 이름의 BM25 함수와 <code translate="no">text_sparse</code> 이라는 이름의 생성된 스파스 벡터 필드를 기존 컬렉션에 추가합니다. 컬렉션에는 이미 분석기가 활성화된 <code translate="no">text</code> 이라는 이름의 <code translate="no">VARCHAR</code> 필드가 존재해야 합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, Function, FunctionType, MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-sparse_field = client.create_field_schema(
+<p>생성된 벡터 필드는 컬렉션에 이미 존재해서는 안 되며, null이 허용되는 필드일 수 없습니다. 함수 입력 필드는 이미 존재해야 합니다.</p>
+<p><strong>예: BM25 함수와 해당 함수가 생성한 스파스 벡터 필드 추가</strong></p>
+<p>다음 예제는 <code translate="no">text_bm25</code> 이라는 이름의 BM25 함수와 <code translate="no">text_sparse</code> 이라는 이름의 생성된 스파스 벡터 필드를 기존 컬렉션에 추가합니다. 해당 컬렉션에는 이미 분석기가 활성화된 <code translate="no">text</code> 이라는 이름의 <code translate="no">VARCHAR</code> 필드가 존재해야 합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+</div>
+<pre><code translate="no" class="language-python">sparse_field = client.create_field_schema(
     name=<span class="hljs-string">&quot;text_sparse&quot;</span>,
     data_type=DataType.SPARSE_FLOAT_VECTOR,
     desc=<span class="hljs-string">&quot;BM25-generated sparse vector field&quot;</span>,
@@ -315,7 +882,118 @@ index_params.add_index(
 <span class="highlighted-comment-line">    index_params=index_params,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">index_params</code> 객체에는 새 함수 출력 필드에 대한 인덱스 정의가 정확히 하나만 포함되어 있어야 합니다. Milvus는 함수, 생성된 벡터 필드 및 바운드 인덱스 정의를 동일한 스키마 변경 사항에 추가합니다. <code translate="no">add_function_field()</code> 명령어 실행 후 <code translate="no">create_index()</code> 명령어를 별도로 호출하지 마십시오.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Add a BM25 function, its generated sparse vector field, and the bound index</span>
+client.addFunctionField(AddFunctionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+        .dataType(DataType.SparseFloatVector)
+        .indexParam(IndexParam.builder()
+                .fieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+                .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+                .metricType(IndexParam.MetricType.BM25)
+                .build())
+        .function(CreateCollectionReq.Function.builder()
+                .name(<span class="hljs-string">&quot;text_bm25&quot;</span>)
+                .functionType(FunctionType.BM25)
+                .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text&quot;</span>))
+                .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;text_sparse&quot;</span>))
+                .build())
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// Add a BM25 function, its generated sparse vector field, and the bound index</span>
+field := entity.NewField().
+    WithName(<span class="hljs-string">&quot;text_sparse&quot;</span>).
+    WithDataType(entity.FieldTypeSparseVector)
+function := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;text_bm25&quot;</span>).
+    WithType(entity.FunctionTypeBM25).
+    WithInputFields(<span class="hljs-string">&quot;text&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+boundIndex := index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.2</span>)
+err = client.AddFunctionField(ctx, milvusclient.NewAddFunctionFieldOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, field, function, boundIndex))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to add function field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Add a BM25 function, its generated sparse vector field, and the bound index</span>
+client
+    .<span class="hljs-title function_ invoke__">add_function_field</span>(
+        AddFunctionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field</span>(
+                FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">data_type</span>(DataType::SparseFloatVector),
+            )
+            .<span class="hljs-title function_ invoke__">function</span>(
+                Function::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text_bm25&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Bm25)
+                    .<span class="hljs-title function_ invoke__">input_fields</span>([<span class="hljs-string">&quot;text&quot;</span>])
+                    .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;text_sparse&quot;</span>]),
+            )
+            .<span class="hljs-title function_ invoke__">index</span>(
+                IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::SparseInvertedIndex)
+                    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Bm25),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Add a BM25 function, its generated sparse vector field, and the bound index</span>
+<span class="hljs-function">milvus::FieldSchema <span class="hljs-title">sparse_field</span><span class="hljs-params">(<span class="hljs-string">&quot;text_sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR)</span></span>;
+milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25&quot;</span>, milvus::FunctionType::BM25);
+function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;text_sparse&quot;</span>);
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">index</span><span class="hljs-params">(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25)</span></span>;
+status = client-&gt;<span class="hljs-built_in">AddFunctionField</span>(milvus::<span class="hljs-built_in">AddFunctionFieldRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                                      .<span class="hljs-built_in">WithField</span>(std::<span class="hljs-built_in">move</span>(sparse_field))
+                                      .<span class="hljs-built_in">WithFunction</span>(function)
+                                      .<span class="hljs-built_in">WithIndex</span>(std::<span class="hljs-built_in">move</span>(index)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Add a BM25 function, its generated sparse vector field, and the bound index</span>
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addFunctionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">field</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-string">&quot;SparseFloatVector&quot;</span>,
+    },
+    <span class="hljs-attr">function</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text_bm25&quot;</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+        <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;text&quot;</span>],
+        <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&quot;text_sparse&quot;</span>],
+    },
+    <span class="hljs-attr">extra_params</span>: {
+        <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+        <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+        <span class="hljs-attr">params</span>: {
+            <span class="hljs-attr">inverted_index_algo</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>,
+            <span class="hljs-attr">bm25_k1</span>: <span class="hljs-number">1.2</span>,
+            <span class="hljs-attr">bm25_b</span>: <span class="hljs-number">0.75</span>,
+        },
+    },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AddFunctionFieldAsync(<span class="hljs-keyword">new</span> AddFunctionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Field = FieldSchema.CreateSparseFloatVector(<span class="hljs-string">&quot;text_sparse&quot;</span>, description: <span class="hljs-string">&quot;BM25-generated sparse vector field&quot;</span>),
+    Function = FunctionSchema.CreateBm25(<span class="hljs-string">&quot;text_bm25&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;text_sparse&quot;</span>),
+    IndexParam = <span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;text_sparse&quot;</span>, <span class="hljs-string">&quot;text_sparse&quot;</span>, IndexType.SparseInvertedIndex, MetricType.Bm25)
+    {
+        ExtraParams = { [<span class="hljs-string">&quot;inverted_index_algo&quot;</span>] = <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>, [<span class="hljs-string">&quot;bm25_k1&quot;</span>] = <span class="hljs-string">&quot;1.2&quot;</span>, [<span class="hljs-string">&quot;bm25_b&quot;</span>] = <span class="hljs-string">&quot;0.75&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">index_params</code> 객체에는 새로운 Function 출력 필드에 대한 인덱스 정의가 정확히 하나만 포함되어야 합니다. Milvus는 동일한 스키마 변경 사항에 Function, 생성된 벡터 필드 및 바인딩된 인덱스 정의를 추가합니다. <code translate="no">add_function_field()</code> 을 호출한 후 <code translate="no">create_index()</code> 을 별도로 호출하지 마십시오.</p>
 <p>개념적으로, 이 작업은 다음의 Function, 생성된 출력 필드 및 바인딩된 인덱스 정의를 추가합니다:</p>
 <pre><code translate="no" class="language-plaintext">New Function:
   name: &quot;text_bm25&quot;
@@ -333,7 +1011,7 @@ Bound index:
   index_type: SPARSE_INVERTED_INDEX
   metric_type: BM25
 <button class="copy-code-btn"></button></code></pre>
-<p>요청이 성공하면, ` <code translate="no">describe_collection()</code> `는 컬렉션 스키마 내에서 새로운 ` <code translate="no">text_bm25</code> ` 함수와 이에 의해 생성된 ` <code translate="no">text_sparse</code> ` 벡터 필드를 모두 반환합니다. Milvus는 새로운 엔티티가 기록될 때마다 해당 함수 출력을 생성합니다. 기존 엔티티의 경우, Milvus는 백그라운드 압축을 통해 생성된 벡터 필드를 비동기적으로 채웁니다. 스키마 가시성은 스키마 업데이트가 성공했음을 확인해 주지만, 모든 기존 엔티티에 대한 백필이 완료되었음을 나타내지는 않습니다. 전체 BM25 검색 워크플로에 대해서는 <a href="/docs/ko/full-text-search.md">‘전체 텍스트 검색(Full Text Search</a>)’을 참조하십시오.</p>
+<p>요청이 성공하면, ` <code translate="no">describe_collection()</code> `는 컬렉션 스키마 내에서 새로운 ` <code translate="no">text_bm25</code> ` 함수와 해당 함수에서 생성된 ` <code translate="no">text_sparse</code> ` 벡터 필드를 모두 반환합니다. Milvus는 새로운 엔티티가 기록될 때 해당 함수 출력을 생성합니다. 기존 엔티티의 경우, Milvus는 백그라운드 압축을 통해 생성된 벡터 필드를 비동기적으로 채웁니다. 스키마 가시성은 스키마 업데이트가 성공했음을 확인해 주지만, 모든 기존 엔티티에 대한 백필이 완료되었음을 나타내지는 않습니다. 전체 BM25 검색 워크플로에 대해서는 <a href="/docs/ko/full-text-search.md">‘전체 텍스트 검색(Full Text Search</a>)’을 참조하십시오.</p>
 <p>Milvus는 또한 근사 중복 탐지를 위한 MinHash 함수와 이에 의해 생성된 이진 벡터 필드를 지원합니다. MinHash 함수는 <code translate="no">FunctionType.MINHASH</code> 를 사용하며, 새로운 <code translate="no">BINARY_VECTOR</code> 출력 필드에 데이터를 기록합니다. 구성에 대한 자세한 내용은 <a href="/docs/ko/minhash-function.md">MinHash 함수를</a> 참조하십시오.</p>
 <p><a id="drop-fields-from-an-existing-collection"></a></p>
 <h2 id="Drop-fields-and-Functions-from-an-existing-collection" class="common-anchor-header">기존 컬렉션에서 필드 및 함수 삭제<button data-href="#Drop-fields-and-Functions-from-an-existing-collection" class="anchor-icon" translate="no">
@@ -351,8 +1029,8 @@ Bound index:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>사용자 정의 필드가 더 이상 컬렉션 모델의 일부가 아닌 경우, 해당 필드를 직접 제거할 수 있습니다. 함수와 생성된 벡터 필드를 제거하려면 함수를 삭제하십시오. Milvus는 동일한 스키마 변경 과정에서 생성된 필드와 해당 인덱스를 제거합니다.</p>
-<h3 id="Drop-user-defined-fields--Milvus-30x" class="common-anchor-header">사용자 정의 필드 삭제<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields--Milvus-30x" class="anchor-icon" translate="no">
+    </button></h2><p>사용자 정의 필드가 더 이상 컬렉션 모델의 일부가 아닐 경우, 해당 필드를 직접 제거할 수 있습니다. 함수와 생성된 벡터 필드를 제거하려면 함수를 삭제하십시오. Milvus는 동일한 스키마 변경 과정에서 생성된 필드와 해당 인덱스를 제거합니다.</p>
+<h3 id="Drop-user-defined-fields" class="common-anchor-header">사용자 정의 필드 삭제<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-user-defined-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -373,45 +1051,171 @@ Bound index:
 <li><p><code translate="no">drop_collection_field()</code> 이 성공적으로 완료되면 컬렉션 스키마가 업데이트됩니다. <code translate="no">describe_collection()</code> 는 더 이상 삭제된 필드를 반환하지 않으며, <code translate="no">output_fields</code> 에서 쿼리나 검색을 통해 해당 필드를 반환하거나 표현식에서 사용할 수 없게 됩니다.</p></li>
 <li><p>삭제된 필드를 기반으로 생성된 인덱스는 스키마 업데이트의 일환으로 정리됩니다.</p></li>
 </ul>
-<p>저장소 정리는 스키마 정리와 별도로 처리됩니다. 자세한 내용은 <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">‘필드를 삭제한 후 저장 공간은 언제 회수되나요?</a>’를 참조하십시오.</p>
+<p>저장소 정리는 스키마 정리와 별도로 처리됩니다. 자세한 내용은 <a href="#When-is-storage-space-reclaimed-after-dropping-a-field">'필드를 삭제한 후 저장 공간은 언제 회수되나요?</a>'를 참조하십시오.</p>
 <p><strong>예: 사용자 정의 스칼라 필드 삭제</strong></p>
-<p>다음 예제는 <code translate="no">experiment_tag</code> 가 <code translate="no">product_catalog</code> 에 있는 사용자 정의 스칼라 필드라고 가정하고, 이 필드를 컬렉션에서 삭제합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<p>다음 예제는 <code translate="no">experiment_tag</code> 가 <code translate="no">product_catalog</code> 의 사용자 정의 스칼라 필드라고 가정하고, 해당 필드를 컬렉션에서 삭제합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="highlighted-comment-line">client.drop_collection_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;experiment_tag&quot;</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java">client.dropCollectionField(DropCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;experiment_tag&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-string">&quot;experiment_tag&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">drop_collection_field</span>(
+        DropCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;experiment_tag&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">DropCollectionField</span>(milvus::<span class="hljs-built_in">DropCollectionFieldRequest</span>()
+                                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                                         .<span class="hljs-built_in">WithFieldName</span>(<span class="hljs-string">&quot;experiment_tag&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;experiment_tag&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.DropCollectionFieldAsync(<span class="hljs-keyword">new</span> DropCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    FieldName = <span class="hljs-string">&quot;experiment_tag&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
 <p>필드를 삭제한 후, ` <code translate="no">describe_collection()</code> `를 호출하여 해당 필드가 더 이상 스키마의 일부가 아닌지 확인할 수 있습니다.</p>
-<p><strong>예: StructArray 필드 삭제</strong></p>
-<p>다음 예제는 <code translate="no">chunks</code> 가 <code translate="no">my_collection</code> 에 있는 StructArray 필드라고 가정하고, 이 필드를 컬렉션에서 삭제합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<p><strong>예시: StructArray 필드 삭제</strong></p>
+<p>다음 예제는 ` <code translate="no">chunks</code> `가 ` <code translate="no">my_collection</code>`의 StructArray 필드라고 가정하고, 이를 컬렉션에서 제거합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="highlighted-comment-line">client.drop_collection_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;chunks&quot;</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>예: 사용자 정의 벡터 필드 삭제</strong></p>
-<p><code translate="no">drop_collection_field()</code> 메서드를 사용하여 벡터 필드를 삭제할 수 있지만, 삭제 후에도 컬렉션에는 최소한 하나의 벡터 필드가 남아 있어야 합니다. 이는 일시적으로 여러 벡터 표현을 포함하다가 나중에 그중 하나로 표준화하는 컬렉션에 유용합니다.</p>
-<p>다음 예제는 ` <code translate="no">image_vector</code> `가 ` <code translate="no">hybrid_catalog</code>`에 있는 사용자 정의 벡터 필드이며, 컬렉션에 ` <code translate="no">text_vector</code>`와 같은 다른 벡터 필드가 여전히 남아 있다고 가정합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-<span class="highlighted-comment-line">client.drop_collection_field(</span>
+<pre><code translate="no" class="language-java">client.dropCollectionField(DropCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;chunks&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;chunks&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">drop_collection_field</span>(
+        DropCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;chunks&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">DropCollectionField</span>(milvus::<span class="hljs-built_in">DropCollectionFieldRequest</span>()
+                                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                         .<span class="hljs-built_in">WithFieldName</span>(<span class="hljs-string">&quot;chunks&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;chunks&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.DropCollectionFieldAsync(<span class="hljs-keyword">new</span> DropCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    FieldName = <span class="hljs-string">&quot;chunks&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>예제: 사용자 정의 벡터 필드 제거</strong></p>
+<p>동일한 <code translate="no">drop_collection_field()</code> 메서드를 사용하여 벡터 필드를 제거할 수 있지만, 제거 후에도 컬렉션에는 최소한 하나의 벡터 필드가 남아 있어야 합니다. 이는 일시적으로 여러 벡터 표현을 포함하다가 나중에 그중 하나로 표준화하는 컬렉션에 유용합니다.</p>
+<p>다음 예제는 ` <code translate="no">image_vector</code> `가 ` <code translate="no">hybrid_catalog</code>`에 정의된 사용자 정의 벡터 필드이며, 컬렉션에 ` <code translate="no">text_vector</code>`와 같은 다른 벡터 필드가 여전히 남아 있다고 가정합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="highlighted-comment-line">client.drop_collection_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;hybrid_catalog&quot;</span>,</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;image_vector&quot;</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">image_vector</code> 가 컬렉션의 마지막 벡터 필드인 경우, 삭제 작업은 거부됩니다.</p>
+<pre><code translate="no" class="language-java">client.dropCollectionField(DropCollectionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;hybrid_catalog&quot;</span>)
+        .fieldName(<span class="hljs-string">&quot;image_vector&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption(<span class="hljs-string">&quot;hybrid_catalog&quot;</span>, <span class="hljs-string">&quot;image_vector&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">drop_collection_field</span>(
+        DropCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;hybrid_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;image_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">DropCollectionField</span>(milvus::<span class="hljs-built_in">DropCollectionFieldRequest</span>()
+                                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;hybrid_catalog&quot;</span>)
+                                         .<span class="hljs-built_in">WithFieldName</span>(<span class="hljs-string">&quot;image_vector&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;hybrid_catalog&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;image_vector&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.DropCollectionFieldAsync(<span class="hljs-keyword">new</span> DropCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;hybrid_catalog&quot;</span>,
+    FieldName = <span class="hljs-string">&quot;image_vector&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">image_vector</code> 가 컬렉션의 마지막 벡터 필드인 경우, drop 연산은 거부됩니다.</p>
 <p><a id="drop-vector-fields-generated-by-functions--milvus-30x"></a></p>
-<h3 id="Drop-a-Function-and-its-generated-vector-field--Milvus-30x" class="common-anchor-header">함수 및 해당 함수가 생성한 벡터 필드 삭제<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-a-Function-and-its-generated-vector-field--Milvus-30x" class="anchor-icon" translate="no">
+<h3 id="Drop-a-Function-and-its-generated-vector-field" class="common-anchor-header">함수 및 해당 함수가 생성한 벡터 필드 삭제<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -427,20 +1231,62 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
         ></path>
       </svg>
     </button></h3><p>BM25 함수 및 해당 함수가 생성한 스파스 벡터 필드와 같이, 더 이상 함수나 해당 함수가 생성한 벡터 필드가 필요하지 않을 때 이 작업을 사용합니다.</p>
-<p><code translate="no">drop_function_field()</code> 를 호출할 때 함수 이름을 지정하십시오. Milvus는 함수 입력 필드는 보존한 채로 함수, 생성된 벡터 필드 및 관련 인덱스를 제거합니다.</p>
+<p>함수 이름을 지정하여 ` <code translate="no">drop_function_field()</code> `를 호출합니다. Milvus는 함수 입력 필드는 유지한 채로 함수, 생성된 벡터 필드 및 관련 인덱스를 제거합니다.</p>
 <p><strong>예: BM25 함수 및 생성된 스파스 벡터 필드 삭제</strong></p>
 <p>다음 예제는 ` <code translate="no">text_bm25</code> `가 ` <code translate="no">product_catalog</code> `에 있는 BM25 함수이며, ` <code translate="no">text_sparse</code>`라는 이름의 스파스 벡터 출력 필드를 생성한다고 가정합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-<span class="highlighted-comment-line">client.drop_function_field(</span>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="highlighted-comment-line">client.drop_function_field(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,</span>
 <span class="highlighted-comment-line">    function_name=<span class="hljs-string">&quot;text_bm25&quot;</span>,</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>작업이 성공적으로 완료된 후, ` <code translate="no">describe_collection()</code> `은 삭제된 함수나 해당 함수가 생성한 벡터 필드를 더 이상 반환하지 않습니다. 함수 입력 필드는 스키마에 그대로 유지됩니다.</p>
-<p>함수 출력 필드를 제거하면 컬렉션에 벡터 필드가 하나도 남지 않게 되는 경우, 해당 작업은 거부됩니다.</p>
+<pre><code translate="no" class="language-java">client.dropFunctionField(DropFunctionFieldReq.builder()
+        .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+        .functionName(<span class="hljs-string">&quot;text_bm25&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.DropFunctionField(ctx, milvusclient.NewDropFunctionFieldOption(<span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-string">&quot;text_bm25&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop function field: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">drop_function_field</span>(
+        DropFunctionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">function_name</span>(<span class="hljs-string">&quot;text_bm25&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">DropFunctionField</span>(milvus::<span class="hljs-built_in">DropFunctionFieldRequest</span>()
+                                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                                       .<span class="hljs-built_in">WithFunctionName</span>(<span class="hljs-string">&quot;text_bm25&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropFunctionField</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">function_name</span>: <span class="hljs-string">&quot;text_bm25&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.DropFunctionFieldAsync(<span class="hljs-keyword">new</span> DropFunctionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    FunctionName = <span class="hljs-string">&quot;text_bm25&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<p>작업이 성공한 후, ` <code translate="no">describe_collection()</code> `는 삭제된 함수나 해당 함수가 생성한 벡터 필드를 더 이상 반환하지 않습니다. 함수의 입력 필드는 스키마에 그대로 유지됩니다.</p>
+<p>Function 출력 필드를 제거하면 컬렉션에 벡터 필드가 하나도 남지 않게 되는 경우, 해당 작업은 거부됩니다.</p>
 <h2 id="FAQ" class="common-anchor-header">자주 묻는 질문<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,9 +1317,9 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">add_collection_field()</code> 을 사용하여 사용자 정의 스칼라 또는 벡터 필드를 추가하십시오.</p>
+    </button></h3><p>사용자 정의 스칼라 또는 벡터 필드를 추가하려면 ` <code translate="no">add_collection_field()</code> `를 사용하십시오.</p>
 <p>요소들이 동일한 Struct 스키마를 공유하는 배열 필드가 필요한 경우, ` <code translate="no">add_collection_struct_field()</code> `를 사용하여 StructArray 필드를 추가하십시오.</p>
-<p><code translate="no">add_function_field()</code> 를 사용하여 함수, 생성된 벡터 필드 및 바인딩된 인덱스 정의를 동일한 스키마 변경 사항에 추가하십시오.</p>
+<p><code translate="no">add_function_field()</code> 를 사용하여 함수, 생성된 벡터 필드 및 바인딩된 인덱스 정의를 동일한 스키마 변경에 추가하십시오.</p>
 <h3 id="Why-must-added-user-defined-fields-be-nullable" class="common-anchor-header">추가된 사용자 정의 필드는 왜 null 허용이어야 합니까?<button data-href="#Why-must-added-user-defined-fields-be-nullable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -489,7 +1335,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>기존 엔티티는 새 필드가 생성되기 전에 삽입되었으므로 해당 필드에 대한 값이 없습니다. ` <code translate="no">nullable=True</code> `를 설정하면, 애플리케이션이 값을 기록하거나(스칼라 필드의 경우 기본값이 적용될 때까지) Milvus가 누락된 값을 ` <code translate="no">NULL</code> `로 표현할 수 있습니다.</p>
+    </button></h3><p>기존 엔티티는 새 필드가 생성되기 전에 삽입되었으므로 해당 필드에 대한 값이 없습니다. ` <code translate="no">nullable=True</code> `를 설정하면, 애플리케이션이 값을 기록할 때까지(스칼라 필드의 경우 기본값이 적용될 때까지) Milvus가 누락된 값을 ` <code translate="no">NULL</code> `로 표현할 수 있습니다.</p>
 <p>이 규칙은 ` <code translate="no">add_collection_field()</code>`로 추가된 사용자 정의 스칼라 필드 및 사용자 정의 벡터 필드와, ` <code translate="no">add_collection_struct_field()</code>`로 추가된 StructArray 필드에 적용됩니다. 이 규칙은 nullable로 설정될 수 없는 함수(Function)의 생성된 벡터 필드에는 적용되지 않습니다.</p>
 <h3 id="What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="common-anchor-header">사용자 정의 필드를 추가한 후 기존 엔티티에는 어떤 변화가 발생합니까?<button data-href="#What-happens-to-existing-entities-after-I-add-a-user-defined-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -506,10 +1352,10 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>사용자 정의 스칼라 필드의 경우, <code translate="no">default_value</code> 를 설정하지 않는 한 기존 엔티티는 <code translate="no">NULL</code> 를 반환합니다. <code translate="no">default_value</code> 를 설정하면 기존 엔티티는 해당 기본값을 반환합니다.</p>
-<p>사용자 정의 벡터 필드의 경우, 기존 엔티티는 새로운 벡터 필드에 대해 ` <code translate="no">NULL</code> ` 값을 갖습니다. 추가된 필드에 대한 벡터 검색은 벡터 값이 ` <code translate="no">NULL</code>`인 엔티티를 건너뜁니다. 기존 엔티티가 새로운 벡터 필드를 통해 검색 가능하도록 하려면, upsert 또는 백필(backfill) 워크플로를 통해 NULL이 아닌 벡터 값을 기록해야 합니다. 새 엔티티는 삽입 시 새로운 벡터 필드를 포함할 수 있습니다.</p>
-<p>StructArray 필드의 경우, 기존 엔티티는 해당 StructArray 필드의 모든 하위 필드에 대해 <code translate="no">NULL</code> 를 반환합니다. 새 엔티티는 모든 하위 필드에 대해 <code translate="no">NULL</code> 를 제공하거나, 모든 하위 필드에 유효한 값을 제공해야 합니다.</p>
-<h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">기존 컬렉션에 BM25 어휘 검색을 추가할 수 있나요?<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
+    </button></h3><p>사용자 정의 스칼라 필드의 경우, <code translate="no">default_value</code> 를 설정하지 않으면 기존 엔티티는 <code translate="no">NULL</code> 를 반환합니다. <code translate="no">default_value</code> 를 설정하면 기존 엔티티는 해당 기본값을 반환합니다.</p>
+<p>사용자 정의 벡터 필드의 경우, 기존 엔티티는 새로운 벡터 필드에 대해 ` <code translate="no">NULL</code> ` 값을 갖습니다. 추가된 필드에 대한 벡터 검색은 벡터 값이 ` <code translate="no">NULL</code>`인 엔티티를 건너뜁니다. 기존 엔티티가 새로운 벡터 필드를 통해 검색 가능하도록 하려면, `upsert` 또는 백필(backfill) 워크플로를 통해 `NULL`이 아닌 벡터 값을 기록해야 합니다. 새 엔티티는 삽입 시 새로운 벡터 필드를 포함할 수 있습니다.</p>
+<p>StructArray 필드의 경우, 기존 엔티티는 새로운 StructArray 필드의 모든 하위 필드에 대해 <code translate="no">NULL</code> 을 반환합니다. 새로운 엔티티는 모든 하위 필드에 대해 <code translate="no">NULL</code> 을 제공하거나, 모든 하위 필드에 유효한 값을 제공해야 합니다.</p>
+<h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">기존 컬렉션에 BM25 어휘 검색을 추가할 수 있습니까?<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -541,7 +1387,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Function 이름을 지정하여 ` <code translate="no">drop_function_field()</code> `를 호출하십시오. 이 스키마 변경 워크플로우에서 Milvus는 Function의 입력 필드는 유지한 채, 해당 Function과 생성된 벡터 필드, 그리고 관련 인덱스를 함께 제거합니다.</p>
+    </button></h3><p><code translate="no">drop_function_field()</code> 를 호출하고 함수 이름을 전달하십시오. 이 스키마 변경 워크플로우에서 Milvus는 함수 입력 필드는 유지한 채, 함수와 생성된 벡터 필드, 관련 인덱스를 함께 제거합니다.</p>
 <h3 id="Do-I-need-to-wait-after-altering-a-collection-schema" class="common-anchor-header">컬렉션 스키마를 변경한 후 기다려야 하나요?<button data-href="#Do-I-need-to-wait-after-altering-a-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -575,7 +1421,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
         ></path>
       </svg>
     </button></h3><p>필드를 삭제하면 해당 필드가 현재 스키마 및 일반 쿼리/검색 범위에서 제거되지만, 해당 필드의 과거 데이터는 오브젝트 스토리지에서 즉시 물리적으로 삭제되지는 않습니다.</p>
-<p>저장 공간은 나중에 압축 과정에서 회수될 수 있습니다. 압축은 기존 데이터 파일을 더 간결한 새 파일로 재구성하는 백그라운드 프로세스입니다. 필드가 삭제된 후, 새로 압축된 파일은 현재 스키마를 따르며 삭제된 필드는 제외됩니다. Milvus는 필드 삭제 후 저장 공간의 즉각적이거나 정해진 시점의 감소를 보장하지 않습니다.</p>
+<p>저장 공간은 나중에 압축 과정에서 회수될 수 있습니다. 압축은 기존 데이터 파일을 더 간결한 새 파일로 재구성하는 백그라운드 프로세스입니다. 필드가 삭제된 후, 새로 압축된 파일은 현재 스키마를 따르며 삭제된 필드는 제외됩니다. Milvus는 필드 삭제 후 저장 공간이 즉시 또는 정해진 시간 내에 감소할 것을 보장하지 않습니다.</p>
 <h3 id="What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="common-anchor-header">동적 필드 키와 이름이 동일한 스칼라 필드를 추가하면 어떻게 되나요?<button data-href="#What-happens-if-I-add-a-scalar-field-with-the-same-name-as-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -592,4 +1438,4 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
         ></path>
       </svg>
     </button></h3><p>동적 필드가 활성화된 경우, 기존 동적 필드 키와 동일한 이름을 가진 스칼라 필드를 추가할 수 있습니다. 새로운 스칼라 필드는 일반 쿼리 출력에서 동적 필드 키를 가립니다만, 원본 동적 데이터는 <code translate="no">$meta</code> 에 보존됩니다.</p>
-<p>예를 들어, 기존 엔티티에 <code translate="no">source</code> 라는 동적 키가 저장되어 있고, 나중에 <code translate="no">source</code> 라는 스칼라 필드를 추가하는 경우, <code translate="no">source</code> 에 대한 일반 출력에서는 스칼라 필드를 참조합니다. 원래의 동적 값에 액세스하려면 <code translate="no">$meta[&quot;source&quot;]</code> 와 같이 <code translate="no">$meta</code> 경로 구문을 사용하십시오.</p>
+<p>예를 들어, 기존 엔티티에 <code translate="no">source</code> 라는 동적 키가 저장되어 있고, 나중에 <code translate="no">source</code> 라는 스칼라 필드를 추가한 경우, <code translate="no">source</code> 에 대한 일반 출력에서는 스칼라 필드를 참조합니다. 원래의 동적 값에 액세스하려면 <code translate="no">$meta[&quot;source&quot;]</code> 와 같이 <code translate="no">$meta</code> 경로 구문을 사용하십시오.</p>

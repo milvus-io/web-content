@@ -222,9 +222,9 @@ title: カフカ
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0.3 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
+<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0.5 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
 Kafka を実行しており、それを継続して使用したい場合は、アップグレード中にメッセージキューを変更しないでください。</li>
-<li>サポートされている<strong>のはKafka 2.xおよび3.x</strong>のみです。</li>
+<li>サポートされているのは<strong>Kafka 2.x および 3.x</strong>のみです。</li>
 <li>SASL/SSL 接続については、「<a href="/docs/ja/connect_kafka_ssl.md">SASL/SSL を使用した Kafka への接続</a>」を参照してください。</li>
 </ul>
 <h2 id="Whats-next" class="common-anchor-header">今後の予定<button data-href="#Whats-next" class="anchor-icon" translate="no">

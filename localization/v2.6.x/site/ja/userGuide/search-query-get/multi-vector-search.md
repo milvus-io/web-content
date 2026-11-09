@@ -1,10 +1,12 @@
 ---
 id: multi-vector-search.md
-title: マルチベクトル・ハイブリッド検索
+title: マルチベクトルハイブリッド検索
 summary: >-
-  多くのアプリケーションにおいて、オブジェクトは、タイトルや説明などの豊富な情報セット、またはテキスト、画像、音声などの複数のモダリティで検索することができる。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。
+  多くのアプリケーションでは、タイトルや説明文といった豊富な情報、あるいはテキスト、画像、音声といった複数のモダリティを用いてオブジェクトを検索することができます。例えば、テキストと画像を含むツイートについては、テキストまたは画像のいずれかが検索クエリの意味内容と一致する場合、そのツイートが検索対象となります。
+  ハイブリッド検索は、こうした多様なフィールドにわたる検索を組み合わせることで、検索体験を向上させます。Milvusは、複数のベクトルフィールドでの検索を可能にし、複数の近似最近傍法（ANN）検索を同時に実行することで、これをサポートしています。
+  マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、あるいは検索品質を向上させるために高密度ベクトルと疎ベクトルを検索したい場合に特に有用です。
 ---
-<h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">マルチベクトル・ハイブリッド検索<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
+<h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">マルチベクトルハイブリッド検索<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,15 +21,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文などの豊富な情報セット、あるいはテキスト、画像、音声などの複数のモダリティによって検索される。例えば、テキストと画像を含むツイートは、テキストか画像のどちらかが検索クエリのセマンティックにマッチすれば検索される。ハイブリッド検索は、これらの多様な分野にわたる検索を組み合わせることによって、検索体験を向上させる。Milvusは、複数のベクトルフィールドの検索を可能にし、複数の近似最近傍（ANN）検索を同時に行うことで、これをサポートしている。マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、または検索品質を向上させるために密なベクトルと疎なベクトルを検索したい場合に特に便利です。</p>
-<p>
+    </button></h1><p>多くのアプリケーションにおいて、オブジェクトはタイトルや説明文といった豊富な情報、あるいはテキスト、画像、音声といった複数のモダリティを用いて検索することができます。例えば、テキストと画像を含むツイートについては、テキストまたは画像のいずれかが検索クエリの意味内容と一致する場合に検索対象となります。 ハイブリッド検索は、こうした多様なフィールドにわたる検索を組み合わせることで、検索体験を向上させます。Milvusは、複数のベクトルフィールドでの検索を可能にし、複数の近似最近傍法（ANN）検索を同時に実行することで、これをサポートしています。 マルチベクトルハイブリッド検索は、テキストと画像の両方を検索したい場合、同じオブジェクトを記述する複数のテキストフィールドを検索したい場合、あるいは検索品質を向上させるために高密度ベクトルと疎ベクトルを検索したい場合に特に有用です。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>ハイブリッド検索ワークフロー</span> </span></p>
-<p>マルチ・ベクトル・ハイブリッド検索は、さまざまな検索方法を統合したり、さまざまなモダリティからの埋め込みにまたがります：</p>
+   <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>ハイブリッド検索のワークフロー</span>
+  
+ </span></p>
+<p>マルチベクトルハイブリッド検索は、異なる検索手法を統合したり、さまざまなモダリティの埋め込みを横断したりします：</p>
 <ul>
-<li><p><strong>スパース-デンス・ベクトル検索</strong>：<a href="/docs/ja/v2.6.x/sparse_vector.md">スパース</a>-<a href="/docs/ja/v2.6.x/dense-vector.md">デンス・ベクトル</a>検索：<a href="/docs/ja/v2.6.x/dense-vector.md">デンス・ベクトルは</a>意味的関係を捉えるのに優れ、<a href="/docs/ja/v2.6.x/sparse_vector.md">スパース・ベクトルは</a>正確なキーワード・マッチングに非常に効果的である。ハイブリッド検索は、これらのアプローチを組み合わせることで、広範な概念的理解と正確な用語の関連性の両方を提供し、検索結果を向上させる。それぞれの手法の長所を活用することで、ハイブリッド検索は個々のアプローチの限界を克服し、複雑なクエリに対してより良いパフォーマンスを提供します。ここでは、セマンティック検索とフルテキスト検索を組み合わせたハイブリッド検索について、より詳しく<a href="/docs/ja/v2.6.x/full_text_search_with_milvus.md">説明</a>する。</p></li>
-<li><p><strong>マルチモーダルベクトル検索</strong>マルチモーダルベクトル検索は、テキスト、画像、音声など様々なデータタイプを横断的に検索できる強力な手法である。このアプローチの主な利点は、異なるモダリティをシームレスでまとまりのある検索体験に統一できることだ。例えば、商品検索において、ユーザーはテキストクエリを入力し、テキストと画像の両方で説明された商品を見つけるかもしれない。ハイブリッド検索手法によってこれらのモダリティを組み合わせることで、検索精度を高めたり、検索結果を充実させたりすることができます。</p></li>
+<li><p><strong>疎・密ベクトル検索</strong>：<a href="/docs/ja/v2.6.x/dense-vector.md">密ベクトルは</a>意味的な関係を捉えるのに優れており、一方、<a href="/docs/ja/v2.6.x/sparse_vector.md">疎ベクトルは</a>正確なキーワードマッチングに非常に効果的です。 ハイブリッド検索は、これらのアプローチを組み合わせることで、広範な概念的理解と正確な用語の関連性の両方を提供し、検索結果の品質を向上させます。各手法の強みを活用することで、ハイブリッド検索は個々のアプローチの限界を克服し、複雑なクエリに対してより優れたパフォーマンスを発揮します。ここでは、セマンティック検索と全文検索を組み合わせたハイブリッド検索に関するより詳細な<a href="/docs/ja/v2.6.x/full_text_search_with_milvus.md">ガイド</a>をご紹介します。</p></li>
+<li><p><strong>マルチモーダルベクトル検索</strong>：マルチモーダルベクトル検索は、テキスト、画像、音声など、さまざまなデータタイプを横断して検索できる強力な技術です。このアプローチの主な利点は、異なるモダリティを統合し、シームレスで一貫性のある検索体験を実現できる点にあります。 例えば、商品検索において、ユーザーはテキストクエリを入力して、テキストと画像の両方で説明されている商品を検索することがあります。ハイブリッド検索手法を通じてこれらのモダリティを組み合わせることで、検索精度を高めたり、検索結果を充実させたりすることができます。</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,14 +48,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>各商品にテキストの説明と画像が含まれている、実際のユースケースを考えてみましょう。利用可能なデータに基づいて、3つのタイプの検索を行うことができます：</p>
+    </button></h2><p>各商品にテキストによる説明と画像が含まれているという実世界のユースケースを考えてみましょう。利用可能なデータに基づいて、以下の3種類の検索を行うことができます：</p>
 <ul>
-<li><p><strong>セマンティック・テキスト検索：</strong>これは、密なベクトルを使って商品のテキスト説明をクエリすることを含む。テキスト埋め込みは、<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERTや</a> <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformersなどの</a>モデルや、<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAIの</a>ようなサービスを使用して生成することができる。</p></li>
-<li><p><strong>全文検索</strong>：ここでは、疎なベクトルとのキーワードマッチを使用して、商品のテキスト説明をクエリする。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25の</a>ようなアルゴリズムや、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3や</a> <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADEの</a>ようなスパース埋め込みモデルをこの目的に利用することができる。</p></li>
-<li><p><strong>マルチモーダル画像検索：</strong>この手法は、密なベクトルを持つテキストクエリを用いて画像に対してクエリを行う。画像埋め込みは<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIPの</a>ようなモデルで生成できます。</p></li>
+<li><p><strong>セマンティックテキスト検索：</strong>これは、高密度ベクトルを用いて商品のテキスト説明を検索するものです。テキスト埋め込みは、<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">BERTやTransformersといった</a>モデル、<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">あるいはOpenAIのような</a>サービスを使用して生成できます。</p></li>
+<li><p><strong>全文検索</strong>：ここでは、スパースベクトルを用いたキーワードマッチングにより、商品のテキスト説明を検索します。この目的には、<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>のようなアルゴリズムや、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>などのスパース埋め込みモデルを活用できます。</p></li>
+<li><p><strong>マルチモーダル画像検索：</strong>この手法では、高密度ベクトルを用いたテキストクエリを使用して画像を検索します。画像の埋め込みは、<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>などのモデルで生成できます。</p></li>
 </ul>
-<p>このガイドでは、商品の生のテキスト記述と画像埋め込みが与えられた場合、上記の検索方法を組み合わせたマルチモーダルハイブリッド検索の例を説明します。マルチ・ベクトル・データを格納し、リランキング戦略でハイブリッド検索を実行する方法を示します。</p>
-<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">複数のベクトル・フィールドを持つコレクションの作成<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+<p>本ガイドでは、製品の生のテキスト説明と画像埋め込みデータを用いて、上記の検索手法を組み合わせたマルチモーダルハイブリッド検索の例を解説します。マルチベクトルデータの保存方法と、再ランク付け戦略を用いたハイブリッド検索の実行方法について説明します。</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">複数のベクトルフィールドを持つコレクションを作成する<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,7 +70,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成するプロセスには、コレクションスキーマの定義、インデックスパラメータの構 成、コレクションの作成の3つの重要なステップがあります。</p>
+    </button></h2><p>コレクションの作成プロセスには、コレクションスキーマの定義、インデックスパラメータの設定、コレクションの作成という3つの主要なステップがあります。</p>
 <h3 id="Define-schema" class="common-anchor-header">スキーマの定義<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,18 +86,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>マルチベクターハイブリッド検索では、コレクションスキーマ内に複数のベクターフィールドを定義する必要があります。コレクション内で許可されるベクターフィールド数の制限の詳細については、<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limitsを</a>参照してください。  ただし、必要に応じて <a href="/docs/ja/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>を調整して、必要に応じてコレクションに最大 10 のベクトル・フィールドを含めることができます。</p>
+    </button></h3><p>マルチベクトルハイブリッド検索を行うには、コレクションスキーマ内で複数のベクトルフィールドを定義する必要があります。コレクションで許可されるベクトルフィールド数の制限に関する詳細については、<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">「Zilliz Cloud Limits</a>」を参照してください。ただし、必要に応じて、 <a href="/docs/ja/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> 調整して、必要に応じてコレクションに最大10個のベクトルフィールドを含めることができます。</p>
 <p>この例では、以下のフィールドをスキーマに組み込んでいます：</p>
 <ul>
-<li><p><code translate="no">id</code>:テキスト ID を格納するプライマリ・キーとして機能する。このフィールドのデータ型は<code translate="no">INT64</code> です。</p></li>
-<li><p><code translate="no">text</code>:テキスト・コンテンツの格納に使用される。このフィールドのデータ型は<code translate="no">VARCHAR</code> で、最大長は1000バイトである。全文検索を容易にするため、<code translate="no">enable_analyzer</code> オプションは<code translate="no">True</code> に設定される。</p></li>
-<li><p><code translate="no">text_dense</code>:テキストの密なベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、ベクトル次元は 768 である。</p></li>
-<li><p><code translate="no">text_sparse</code>:テキストの疎ベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> である。</p></li>
-<li><p><code translate="no">image_dense</code>:商品画像の密なベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">FLOAT_VETOR</code> で、ベクトル次元は 512 である。</p></li>
+<li><p><code translate="no">id</code>: テキスト ID を格納するための主キーとして機能します。このフィールドのデータ型は `<code translate="no">INT64</code>` です。</p></li>
+<li><p><code translate="no">text</code>: テキストコンテンツを格納するために使用されます。このフィールドのデータ型は<code translate="no">VARCHAR</code> で、最大長は1000バイトです。全文検索を容易にするため、<code translate="no">enable_analyzer</code> オプションは<code translate="no">True</code> に設定されています。</p></li>
+<li><p><code translate="no">text_dense</code>: テキストの密ベクトルを格納するために使用されます。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、ベクトルの次元は768です。</p></li>
+<li><p><code translate="no">text_sparse</code>: テキストの疎ベクトルを格納するために使用されます。このフィールドのデータ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> です。</p></li>
+<li><p><code translate="no">image_dense</code>: 商品画像の密ベクトルを格納するために使用されます。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、ベクトルの次元は512です。</p></li>
 </ul>
-<p>テキスト・フィールドの全文検索には、組み込みの BM25 アルゴリズムを使用するため、スキーマに Milvus<code translate="no">Function</code> を追加する必要があります。詳細は<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索を</a>参照。</p>
+<p>テキストフィールドに対して全文検索を実行するために組み込みのBM25アルゴリズムを使用するため、スキーマにMilvusの<code translate="no">Function</code> を追加する必要があります。詳細については、「<a href="/docs/ja/v2.6.x/full-text-search.md">全文検索</a>」を参照してください。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -339,15 +348,20 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクション・スキーマを定義したら、次はベクトル・インデックスを設定し、類似度メトリクスを指定する。与えられた例では</p>
+    </button></h3><p>コレクションスキーマを定義した後、次のステップとしてベクトルインデックスを設定し、類似度メトリックを指定します。以下の例では：</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code> <code translate="no">IP</code> メトリック・タイプを持つ タイプのインデックスが、テキスト密ベクトル・フィールド用に作成されます。<code translate="no">AUTOINDEX</code> </p></li>
-<li><p><code translate="no">text_sparse_index</code> <code translate="no">BM25</code> メトリック型を持つ 型のインデックスが、テキスト疎ベクトル・フィールドに使用されます。<code translate="no">SPARSE_INVERTED_INDEX</code></p></li>
-<li><p><code translate="no">image_dense_index</code>画像密ベクトル・フィールドには、<code translate="no">IP</code> メトリック型を持つ<code translate="no">AUTOINDEX</code> 型のインデックスが作成されます。</p></li>
+<li><p><code translate="no">text_dense_index</code>: テキストの密ベクトルフィールドに対して、メトリックタイプが「<code translate="no">IP</code> 」の<code translate="no">AUTOINDEX</code> 型インデックスが作成されます。</p></li>
+<li><p><code translate="no">text_sparse_index</code>: テキストのスパースベクトルフィールドには、タイプが<code translate="no">SPARSE_INVERTED_INDEX</code>で、メトリックタイプが<code translate="no">BM25</code> のインデックスが使用されます。</p></li>
+<li><p><code translate="no">image_dense_index</code>: 画像の密ベクトルフィールドに対して、メトリックタイプが<code translate="no">IP</code> の<code translate="no">AUTOINDEX</code> 型のインデックスが作成されます。</p></li>
 </ul>
-<p>ニーズやデータ型に合わせて、必要に応じて他のインデックス型を選択することができます。サポートされているインデックス・タイプの詳細については、<a href="/docs/ja/v2.6.x/index-vector-fields.md">利用可能なインデックス・タイプに関する</a>ドキュメントを参照してください。</p>
+<p>必要に応じて、要件やデータ型に最適な他のインデックス型を選択できます。サポートされているインデックス型の詳細については、<a href="/docs/ja/v2.6.x/index-vector-fields.md">利用可能なインデックス型</a>に関するドキュメントを参照してください。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -473,9 +487,14 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>前の2つのステップで設定したコレクションスキーマとインデックスを使用して、<code translate="no">demo</code> という名前のコレクションを作成します。</p>
+    </button></h3><p>前の2つの手順で設定したコレクションスキーマとインデックスを使用して、「<code translate="no">demo</code> 」という名前のコレクションを作成します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -532,17 +551,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、先に定義したスキーマに基づいて、<code translate="no">my_collection</code> コレクションにデータを挿入する。挿入中に、自動生成された値を持つフィールドを除くすべてのフィールドに、正しい形式のデータが提供されることを確認する。この例では</p>
+    </button></h2><p>このセクションでは、先に定義したスキーマに基づいて、<code translate="no">my_collection</code> コレクションにデータを挿入します。挿入の際は、自動生成される値を持つフィールドを除き、すべてのフィールドに正しい形式のデータが指定されていることを確認してください。この例では：</p>
 <ul>
-<li><p><code translate="no">id</code>商品IDを表す整数</p></li>
-<li><p><code translate="no">text</code>商品の説明を含む文字列</p></li>
-<li><p><code translate="no">text_dense</code>テキスト説明の密な埋め込みを表す768浮動小数点値のリスト</p></li>
-<li><p><code translate="no">image_dense</code>製品画像の密な埋め込みを表す512個の浮動小数点値のリスト。</p></li>
+<li><p><code translate="no">id</code>: 製品IDを表す整数</p></li>
+<li><p><code translate="no">text</code>: 製品の説明を含む文字列</p></li>
+<li><p><code translate="no">text_dense</code>: テキスト説明の密な埋め込みを表す 768 個の浮動小数点値のリスト</p></li>
+<li><p><code translate="no">image_dense</code>: 商品画像の密な埋め込みを表す512個の浮動小数点値のリスト</p></li>
 </ul>
-<p>各フィールドの密な埋め込みを生成するために、同じモデルまたは異なるモデルを使用することができます。この例では、2つの密な埋め込みは次元が異なっており、異なるモデルによって生成されたことを示唆しています。後でそれぞれの検索を定義するとき、適切なクエリ埋め込みを生成するために対応するモデルを使用するようにしてください。</p>
-<p>この例では、テキストフィールドからスパース埋め込みを生成するために組み込みのBM25関数を使用しているので、手動でスパースベクトルを与える必要はありません。しかし、BM25を使用しない場合は、スパース埋め込みを事前に計算し、自分で提供する必要があります。</p>
+<p>各フィールドの密な埋め込みを生成するために、同じモデルを使用しても、異なるモデルを使用しても構いません。この例では、2つの密な埋め込みの次元が異なっており、異なるモデルによって生成されたことを示唆しています。後で各検索を定義する際は、適切なクエリ埋め込みを生成するために、対応するモデルを必ず使用してください。</p>
+<p>この例では、テキストフィールドからスパース埋め込みを生成するために組み込みの BM25 関数を使用しているため、スパースベクトルを手動で指定する必要はありません。ただし、BM25 を使用しない場合は、スパース埋め込みを事前に計算して、自身で提供する必要があります。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -671,7 +695,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">ステップ1：複数のAnnSearchRequestインスタンスの作成<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">ステップ 1: 複数の AnnSearchRequest インスタンスを作成する<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -686,19 +710,24 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ハイブリッド・サーチは、<code translate="no">hybrid_search()</code> 関数で複数の<code translate="no">AnnSearchRequest</code> を作成することで実装される。各<code translate="no">AnnSearchRequest</code> は、特定のベクトル・フィールドに対する基本的なANNサーチ・リクエストを表す。従って、ハイブリッド・サーチを行う前に、各ベクトル場に対して<code translate="no">AnnSearchRequest</code> を作成する必要がある。</p>
-<p>また、<code translate="no">AnnSearchRequest</code> の<code translate="no">expr</code> パラメータを設定することで、ハイブリッドサーチのフィルタリング条件を設定することができます。<a href="/docs/ja/v2.6.x/filtered-search.md">フィルタリング検索と</a> <a href="/docs/ja/v2.6.x/boolean.md">フィルタリングの</a>説明を参照してください。</p>
+    </button></h3><p>ハイブリッド検索は、<code translate="no">hybrid_search()</code> 関数内で複数の<code translate="no">AnnSearchRequest</code> を作成することで実装されます。各<code translate="no">AnnSearchRequest</code> は、特定のベクトルフィールドに対する基本的なANN検索リクエストを表します。したがって、ハイブリッド検索を実行する前に、各ベクトルフィールドに対して<code translate="no">AnnSearchRequest</code> を作成する必要があります。</p>
+<p>さらに、<code translate="no">AnnSearchRequest</code> 内の<code translate="no">expr</code> パラメータを設定することで、ハイブリッド検索のフィルタリング条件を設定できます。「<a href="/docs/ja/v2.6.x/filtered-search.md">フィルタリング検索</a>」および「<a href="/docs/ja/v2.6.x/boolean.md">フィルタリングの解説</a>」を参照してください。</p>
 <div class="alert note">
-<p>ハイブリッド検索では、<code translate="no">AnnSearchRequest</code> 、それぞれ1つのクエリーデータのみをサポートします。</p>
+<p>ハイブリッド検索では、各<code translate="no">AnnSearchRequest</code> は1つのクエリデータのみをサポートします。</p>
 </div>
-<p>様々な検索ベクトル・フィールドの能力を示すために、サンプルのクエリを使って3つの検索リクエスト（<code translate="no">AnnSearchRequest</code> ）を作成します。また、このプロセスには事前に計算された密なベクトルを使用する。検索リクエストは以下のベクトルフィールドを対象とする：</p>
+<p>さまざまな検索ベクトルフィールドの機能を実証するために、サンプルクエリを使用して3つの<code translate="no">AnnSearchRequest</code> 検索リクエストを作成します。また、このプロセスでは、事前に計算された密ベクトルも使用します。検索リクエストは、以下のベクトルフィールドを対象とします：</p>
 <ul>
-<li><p><code translate="no">text_dense</code> セマンティックテキスト検索では、直接的なキーワードマッチングではなく、意味に基づいて文脈の理解と検索を可能にする。</p></li>
-<li><p><code translate="no">text_sparse</code>テキスト内の単語やフレーズの完全一致に焦点を当てた、全文検索またはキーワードマッチング。</p></li>
-<li><p><code translate="no">image_dense</code>マルチモーダルなテキストから画像への検索では、クエリの意味内容に基づいて関連する商品画像を検索します。</p></li>
+<li><p><code translate="no">text_dense</code> セマンティックテキスト検索：文脈を理解し、単純なキーワードの一致ではなく、意味に基づいた検索・抽出を可能にします。</p></li>
+<li><p><code translate="no">text_sparse</code>全文検索またはキーワードマッチング用。テキスト内の単語やフレーズの完全一致に焦点を当てます。</p></li>
+<li><p><code translate="no">image_dense</code>マルチモーダルなテキストから画像への検索用。クエリのセマンティックな内容に基づいて、関連する商品画像を検索します。</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -825,8 +854,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>パラメータ<code translate="no">limit</code> が2に設定されているとすると、<code translate="no">AnnSearchRequest</code> はそれぞれ2つの検索結果を返す。この例では、3つの<code translate="no">AnnSearchRequest</code> インスタンスが作成され、合計6つの検索結果が得られる。</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">ステップ2：再ランク付け戦略の設定<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<p>パラメータ `<code translate="no">limit</code> ` が 2 に設定されているため、各 `<code translate="no">AnnSearchRequest</code> ` は 2 件の検索結果を返します。この例では、3 つの `<code translate="no">AnnSearchRequest</code> ` インスタンスが作成されるため、合計 6 件の検索結果が得られます。</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">ステップ 2: 再ランク付け戦略の設定<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -841,10 +870,15 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ANN 検索結果のセットをマージしてランク付けし直すには、適切な再ランク付け戦略を選択することが 不可欠である。Milvusは数種類のリランキング戦略を提供しています。これらのリランキングメカニズムの詳細については、<a href="/docs/ja/v2.6.x/weighted-ranker.md">Weighted Ranker</a>または<a href="/docs/ja/v2.6.x/rrf-ranker.md">RRF Rankerを</a>参照してください。</p>
-<p>この例では、特定の検索クエリに特に重点を置いていないので、RRFRanker戦略で進めます。</p>
+    </button></h3><p>ANNの検索結果セットを統合して再ランク付けするには、適切な再ランク付け戦略を選択することが不可欠です。Milvusでは、いくつかの種類の再ランク付け戦略が用意されています。これらの再ランク付けメカニズムの詳細については、「<a href="/docs/ja/v2.6.x/weighted-ranker.md">Weighted Ranker</a>」または「<a href="/docs/ja/v2.6.x/rrf-ranker.md">RRF Ranker</a>」を参照してください。</p>
+<p>この例では、特定の検索クエリを特に重視するわけではないため、RRFRanker戦略を採用します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -902,7 +936,7 @@ ranker := entity.NewFunction().
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">ステップ3：ハイブリッド検索の実行<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">ステップ 3: ハイブリッド検索の実行<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -917,9 +951,14 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ハイブリッド検索を開始する前に、コレクションがロードされていることを確認する。コレクション内のベクトル・フィールドにインデックスがない、またはメモリにロードされていない場合、ハイブリッド検索メソッドの実行時にエラーが発生します。</p>
+    </button></h3><p>ハイブリッド検索を開始する前に、コレクションが読み込まれていることを確認してください。コレクション内のベクトルフィールドにインデックスがない場合や、メモリに読み込まれていない場合、ハイブリッド検索メソッドの実行時にエラーが発生します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -991,11 +1030,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下はその出力である：</p>
+<p>出力は以下の通りです：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>ハイブリッド検索に<code translate="no">limit=2</code> パラメータを指定すると、milvusは3つの検索で得られた6つの結果を再ランク付けします。最終的に、最も類似した上位2つの結果のみが返されます。</p>
-<h2 id="Advanced-usage" class="common-anchor-header">高度な使用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+<p>ハイブリッド検索で<code translate="no">limit=2</code> パラメータを指定すると、Milvusは3つの検索から得られた6つの結果を再ランク付けします。最終的に、最も類似度の高い上位2つの結果のみが返されます。</p>
+<h2 id="Advanced-usage" class="common-anchor-header">高度な使い方<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1010,7 +1049,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">ハイブリッド検索にタイムゾーンを一時的に設定する<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">ハイブリッド検索でタイムゾーンを一時的に設定する<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1025,9 +1064,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、ハイブリッド検索呼び出しで<code translate="no">timezone</code> パラメータを設定することで、1 回の操作でデータベースまたはコレクションのデフォルトタイムゾーンを一時的にオーバーライドできます。これは、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかを制御します。</p>
-<p><code translate="no">timezone</code> 、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>UTCなど</strong>）を指定する必要があります。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、「<a href="/docs/ja/v2.6.x/timestamptz-field.md">TIMESTAMPTZフィールド</a>」を参照のこと。</p>
-<p>以下の例は、ハイブリッド検索操作でタイムゾーンを一時的に設定する方法を示しています：</p>
+    </button></h3><p>コレクションに<code translate="no">TIMESTAMPTZ</code> フィールドがある場合、ハイブリッド検索の呼び出しで<code translate="no">timezone</code> パラメータを設定することで、単一の操作においてデータベースまたはコレクションのデフォルトのタイムゾーンを一時的に上書きできます。これにより、操作中に<code translate="no">TIMESTAMPTZ</code> の値がどのように表示され、比較されるかが制御されます。</p>
+<p><code translate="no">timezone</code> の値は、有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（例：<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>またはUTC</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、<a href="/docs/ja/v2.6.x/timestamptz-field.md">「TIMESTAMPTZフィールド</a>」を参照してください。</p>
+<p>以下の例は、ハイブリッド検索操作に対してタイムゾーンを一時的に設定する方法を示しています：</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,

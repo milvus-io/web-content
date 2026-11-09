@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>Milvus utiliza una cola de mensajes para gestionar los registros de los cambios recientes, generar registros de flujo y ofrecer suscripciones a registros. A partir de la versión 3.0.x de Milvus, Woodpecker es la cola de mensajes recomendada por defecto; en este tema se explica cómo configurar Pulsar o Kafka con Docker Compose o Helm.</p>
 <p>Puedes configurar Pulsar con <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> o en K8s, y configurar Kafka en K8s.</p>
 <div class="alert note">
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.3, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.5, debes mantener la cola de mensajes que tengas elegida actualmente. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Configurar Pulsar con Docker Compose<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +133,7 @@ summary: >-
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">Configurar Woodpecker con Helm<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
+<h2 id="Configure-Woodpecker-with-Helm" class="common-anchor-header">Configuración de Woodpecker con Helm<button data-href="#Configure-Woodpecker-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

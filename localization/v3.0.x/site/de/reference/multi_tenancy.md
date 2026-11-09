@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus bedeutet Mandantenfähigkeit, dass mehrere Kunden oder Teams – sogenannte <strong>Mandanten</strong>– denselben Cluster gemeinsam nutzen, wobei isolierte Datenumgebungen gewährleistet sind.</p>
+    </button></h1><p>In Milvus bedeutet Mandantenfähigkeit, dass mehrere Kunden oder Teams – sogenannte <strong>Mandanten</strong>– denselben Cluster gemeinsam nutzen, wobei die Datenumgebungen voneinander isoliert bleiben.</p>
 <p>Milvus unterstützt vier Multi-Tenancy-Strategien, die jeweils unterschiedliche Kompromisse zwischen Skalierbarkeit, Datenisolierung und Flexibilität bieten. Dieser Leitfaden führt Sie durch die einzelnen Optionen und hilft Ihnen dabei, die für Ihren Anwendungsfall am besten geeignete Strategie auszuwählen.</p>
 <h2 id="Multi-tenancy-strategies" class="common-anchor-header">Mandantenfähigkeitsstrategien<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ summary: >-
 <li><p><strong>Skalierbarkeit</strong>: Die Multi-Tenancy-Strategie auf Datenbankebene unterstützt standardmäßig maximal 64 Mandanten.</p></li>
 <li><p><strong>Datenisolierung</strong>: Die Daten in jeder Datenbank sind vollständig voneinander getrennt, was eine Datenisolierung auf Unternehmensniveau bietet, die ideal für regulierte Umgebungen oder Kunden mit strengen Compliance-Anforderungen ist.</p></li>
 <li><p><strong>Flexibilität</strong>: Jede Datenbank kann Sammlungen mit unterschiedlichen Schemata enthalten, was eine äußerst flexible Datenorganisation ermöglicht und es jedem Mandanten erlaubt, sein eigenes Datenschema zu nutzen.</p></li>
-<li><p><strong>Sonstiges</strong>: Diese Strategie unterstützt zudem RBAC und ermöglicht so eine fein abgestufte Steuerung des Benutzerzugriffs pro Mandant. Darüber hinaus können Sie Daten für bestimmte Mandanten flexibel laden oder freigeben, um „heiße“ und „kalte“ Daten effektiv zu verwalten.</p></li>
+<li><p><strong>Sonstiges</strong>: Diese Strategie unterstützt zudem RBAC und ermöglicht so eine fein abgestufte Kontrolle des Benutzerzugriffs pro Mandant. Darüber hinaus können Sie Daten für bestimmte Mandanten flexibel laden oder freigeben, um „heiße“ und „kalte“ Daten effektiv zu verwalten.</p></li>
 </ul>
 <h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Mandantenfähigkeit auf Collection-Ebene<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +169,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die folgende Tabelle bietet einen umfassenden Vergleich der vier Ebenen von Multi-Tenancy-Strategien.</p>
+    </button></h2><p>Die folgende Tabelle bietet einen umfassenden Vergleich der vier Ebenen von Mandantenverwaltungsstrategien.</p>
 <table>
    <tr>
      <th></th>

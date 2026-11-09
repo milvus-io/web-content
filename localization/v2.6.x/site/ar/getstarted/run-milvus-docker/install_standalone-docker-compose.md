@@ -57,7 +57,7 @@ title: تشغيل Milvus باستخدام Docker Compose (لينكس)
       </svg>
     </button></h2><p>يوفر Milvus ملف تكوين Docker Compose في مستودع Milvus. لتثبيت Milvus باستخدام Docker Compose، ما عليك سوى تشغيل</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار v2.6.25:</strong></p>
+<p><strong>ما الجديد في الإصدار v2.6.26:</strong></p>
 <ul>
 <li><strong>بنية محسّنة</strong>: تتضمن عقدة البث الجديدة والمكونات المُحسّنة</li>
 <li><strong>التبعيات المحدثة</strong>: تتضمن أحدث إصدارات MinIO و etcd</li>
-<li><strong>تكوين محسّن</strong>: إعدادات مُحسّنة لتحقيق أداء أفضل</li>
+<li><strong>تكوين محسّن</strong>: إعدادات مُحسّنة لأداء أفضل</li>
 </ul>
-<p>قم دائمًا بتنزيل أحدث تكوين لـ Docker Compose لضمان التوافق مع ميزات الإصدار v2.6.25.</p>
+<p>قم دائمًا بتنزيل أحدث تكوين لـ Docker Compose لضمان التوافق مع ميزات الإصدار v2.6.26.</p>
 <ul>
 <li><p>إذا فشلت في تشغيل الأمر أعلاه، يرجى التحقق مما إذا كان نظامك يحتوي على Docker Compose V1 مثبتًا. إذا كان الأمر كذلك، يُنصح بالترحيل إلى Docker Compose V2 وفقًا للملاحظات الواردة في <a href="https://docs.docker.com/compose/">هذه الصفحة</a>.</p></li>
 <li><p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p></li>
@@ -113,7 +113,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لتحديث إعدادات Milvus لتناسب احتياجاتك، تحتاج إلى تعديل ملف <code translate="no">/milvus/configs/user.yaml</code> الموجود داخل حاوية <code translate="no">milvus-standalone</code>.</p>
+    </button></h2><p>لتحديث تكوين Milvus ليناسب احتياجاتك، تحتاج إلى تعديل ملف <code translate="no">/milvus/configs/user.yaml</code> الموجود داخل حاوية <code translate="no">milvus-standalone</code>.</p>
 <ol>
 <li><p>قم بالوصول إلى الحاوية <code translate="no">milvus-standalone</code>.</p>
 <pre><code translate="no" class="language-shell">docker exec -it milvus-standalone bash

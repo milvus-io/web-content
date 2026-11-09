@@ -12,8 +12,8 @@ summary: >-
   múltiples campos vectoriales, realizando varias búsquedas de «vecino más
   cercano aproximado» (ANN) simultáneamente. La búsqueda híbrida multivectorial
   resulta especialmente útil si se desea buscar tanto en texto como en imágenes,
-  en múltiples campos de texto que describen el mismo objeto, o en vectores
-  densos y dispersos para mejorar la calidad de la búsqueda.
+  en varios campos de texto que describan el mismo objeto, o en vectores densos
+  y dispersos para mejorar la calidad de la búsqueda.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">Búsqueda híbrida multivectorial<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -30,7 +30,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En muchas aplicaciones, un objeto puede buscarse mediante un amplio conjunto de información, como el título y la descripción, o mediante múltiples modalidades, como texto, imágenes y audio. Por ejemplo, un tuit que contenga un fragmento de texto y una imagen deberá aparecer en los resultados de búsqueda si el texto o la imagen coinciden con la semántica de la consulta de búsqueda. La búsqueda híbrida mejora la experiencia de búsqueda al combinar búsquedas en estos diversos campos. Milvus permite esto al facilitar la búsqueda en múltiples campos vectoriales, realizando varias búsquedas de «vecino más cercano aproximado» (ANN) simultáneamente. La búsqueda híbrida multivectorial resulta especialmente útil si se desea buscar tanto en texto como en imágenes, en múltiples campos de texto que describen el mismo objeto, o en vectores densos y dispersos para mejorar la calidad de la búsqueda.</p>
+    </button></h1><p>En muchas aplicaciones, un objeto puede buscarse mediante un amplio conjunto de información, como el título y la descripción, o mediante múltiples modalidades, como texto, imágenes y audio. Por ejemplo, un tuit que contenga un fragmento de texto y una imagen deberá aparecer en los resultados de búsqueda si el texto o la imagen coinciden con la semántica de la consulta de búsqueda. La búsqueda híbrida mejora la experiencia de búsqueda al combinar búsquedas en estos diversos campos. Milvus permite esto al facilitar la búsqueda en múltiples campos vectoriales, realizando varias búsquedas de «vecino más cercano aproximado» (ANN) simultáneamente. La búsqueda híbrida multivectorial resulta especialmente útil si se desea buscar tanto en texto como en imágenes, en varios campos de texto que describan el mismo objeto, o en vectores densos y dispersos para mejorar la calidad de la búsqueda.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
@@ -39,8 +39,8 @@ summary: >-
  </span></p>
 <p>La búsqueda híbrida multivectorial integra diferentes métodos de búsqueda o abarca representaciones de diversas modalidades:</p>
 <ul>
-<li><p><strong>Búsqueda con vectores densos y dispersos</strong>: <a href="/docs/es/dense-vector.md">los vectores densos</a> son excelentes para captar relaciones semánticas, mientras que <a href="/docs/es/sparse_vector.md">los vectores dispersos</a> son muy eficaces para la coincidencia precisa de palabras clave. La búsqueda híbrida combina estos enfoques para proporcionar tanto una comprensión conceptual amplia como una relevancia exacta de los términos, mejorando así los resultados de la búsqueda. Al aprovechar los puntos fuertes de cada método, la búsqueda híbrida supera las limitaciones de los enfoques individuales, ofreciendo un mejor rendimiento para consultas complejas. Aquí tienes <a href="/docs/es/full_text_search_with_milvus.md">una guía</a> más detallada sobre la recuperación híbrida que combina la búsqueda semántica con la búsqueda de texto completo.</p></li>
-<li><p><strong>Búsqueda vectorial multimodal</strong>: La búsqueda vectorial multimodal es una técnica potente que permite buscar en diversos tipos de datos, como texto, imágenes, audio y otros. La principal ventaja de este enfoque es su capacidad para unificar diferentes modalidades en una experiencia de búsqueda fluida y cohesionada. Por ejemplo, en la búsqueda de productos, un usuario podría introducir una consulta de texto para encontrar productos descritos tanto con texto como con imágenes. Al combinar estas modalidades mediante un método de búsqueda híbrida, se puede mejorar la precisión de la búsqueda o enriquecer los resultados de la misma.</p></li>
+<li><p><strong>Búsqueda con vectores densos y dispersos</strong>: <a href="/docs/es/dense-vector.md">los vectores densos</a> son excelentes para captar relaciones semánticas, mientras que <a href="/docs/es/sparse_vector.md">los vectores dispersos</a> son muy eficaces para la coincidencia precisa de palabras clave. La búsqueda híbrida combina estos enfoques para proporcionar tanto una amplia comprensión conceptual como una relevancia exacta de los términos, mejorando así los resultados de la búsqueda. Al aprovechar los puntos fuertes de cada método, la búsqueda híbrida supera las limitaciones de los enfoques individuales, ofreciendo un mejor rendimiento para consultas complejas. Aquí tienes <a href="/docs/es/full_text_search_with_milvus.md">una guía</a> más detallada sobre la recuperación híbrida que combina la búsqueda semántica con la búsqueda de texto completo.</p></li>
+<li><p><strong>Búsqueda vectorial multimodal</strong>: La búsqueda vectorial multimodal es una técnica potente que permite realizar búsquedas en diversos tipos de datos, como texto, imágenes, audio y otros. La principal ventaja de este enfoque es su capacidad para unificar diferentes modalidades en una experiencia de búsqueda fluida y cohesionada. Por ejemplo, en la búsqueda de productos, un usuario podría introducir una consulta de texto para encontrar productos descritos tanto con texto como con imágenes. Al combinar estas modalidades mediante un método de búsqueda híbrida, se puede mejorar la precisión de la búsqueda o enriquecer los resultados de la misma.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Ejemplo<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,8 +60,8 @@ summary: >-
     </button></h2><p>Consideremos un caso de uso real en el que cada producto incluye una descripción de texto y una imagen. A partir de los datos disponibles, podemos realizar tres tipos de búsquedas:</p>
 <ul>
 <li><p><strong>Búsqueda semántica de texto:</strong> consiste en consultar la descripción textual del producto utilizando vectores densos. Las incrustaciones de texto pueden generarse mediante modelos como <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> y <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> o servicios como <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
-<li><p><strong>Búsqueda de texto completo</strong>: en este caso, se consulta la descripción textual del producto mediante una coincidencia de palabras clave con vectores dispersos. Para este fin, pueden utilizarse algoritmos como <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> o modelos de incrustación dispersa como <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> o <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>.</p></li>
-<li><p><strong>Búsqueda multimodal por imagen:</strong> este método consulta la imagen mediante una consulta de texto con vectores densos. Las incrustaciones de imágenes se pueden generar con modelos como <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
+<li><p><strong>Búsqueda de texto completo</strong>: en este caso, se consulta la descripción textual del producto mediante una coincidencia de palabras clave con vectores dispersos. Para ello, se pueden utilizar algoritmos como <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> o modelos de incrustación dispersa como <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> o <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>.</p></li>
+<li><p><strong>Búsqueda multimodal por imagen:</strong> este método realiza la búsqueda en la imagen mediante una consulta de texto con vectores densos. Las incrustaciones de imágenes se pueden generar con modelos como <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
 <p>Esta guía te guiará a través de un ejemplo de búsqueda híbrida multimodal que combina los métodos de búsqueda anteriores, partiendo de la descripción de texto sin procesar y las incrustaciones de imagen de los productos. Demostraremos cómo almacenar datos multivectoriales y realizar búsquedas híbridas con una estrategia de reordenación.</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Crear una colección con múltiples campos vectoriales<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
@@ -99,12 +99,12 @@ summary: >-
 <p>Este ejemplo incorpora los siguientes campos en el esquema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Sirve como clave principal para almacenar identificadores de texto. Este campo es de tipo de datos <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: Se utiliza para almacenar contenido textual. Este campo es de tipo de datos <code translate="no">VARCHAR</code> con una longitud máxima de 1000 bytes. La opción « <code translate="no">enable_analyzer</code> » está configurada en « <code translate="no">True</code> » para facilitar la búsqueda de texto completo.</p></li>
-<li><p><code translate="no">text_dense</code>: Se utiliza para almacenar vectores densos de los textos. Este campo es de tipo de datos « <code translate="no">FLOAT_VECTOR</code> », con una dimensión vectorial de 768.</p></li>
+<li><p><code translate="no">text</code>: Se utiliza para almacenar contenido textual. Este campo es de tipo de datos « <code translate="no">VARCHAR</code> » con una longitud máxima de 1000 bytes. La opción « <code translate="no">enable_analyzer</code> » está configurada en « <code translate="no">True</code> » para facilitar la búsqueda de texto completo.</p></li>
+<li><p><code translate="no">text_dense</code>: Se utiliza para almacenar vectores densos de los textos. Este campo es de tipo de datos « <code translate="no">FLOAT_VECTOR</code> » con una dimensión vectorial de 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Se utiliza para almacenar vectores dispersos de los textos. Este campo es de tipo de datos <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Se utiliza para almacenar vectores densos de las imágenes de los productos. Este campo es de tipo <code translate="no">FLOAT_VETOR</code> con una dimensión vectorial de 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Se utiliza para almacenar vectores densos de las imágenes de los productos. Este campo es de tipo de datos « <code translate="no">FLOAT_VECTOR</code> » con una dimensión vectorial de 512.</p></li>
 </ul>
-<p>Dado que utilizaremos el algoritmo BM25 integrado para realizar una búsqueda de texto completo en el campo de texto, es necesario añadir el campo « <code translate="no">Function</code> » de Milvus al esquema. Para obtener más detalles, consulta la sección <a href="/docs/es/full-text-search.md">«Búsqueda de texto completo</a>».</p>
+<p>Dado que utilizaremos el algoritmo BM25 integrado para realizar una búsqueda de texto completo en el campo de texto, es necesario añadir el campo « <code translate="no">Function</code> » de Milvus al esquema. Para obtener más detalles, consulta <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -382,9 +382,9 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
       </svg>
     </button></h3><p>Tras definir el esquema de la colección, el siguiente paso es configurar los índices vectoriales y especificar las métricas de similitud. En el ejemplo dado:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: se crea un índice de tipo « <code translate="no">AUTOINDEX</code> » con el tipo de métric <code translate="no">IP</code> » para el campo de texto de vector denso.</p></li>
-<li><p><code translate="no">text_sparse_index</code>: se utiliza un índice de tipo «<code translate="no">SPARSE_INVERTED_INDEX</code>» con el tipo de métric <code translate="no">BM25</code> » para el campo vectorial de texto disperso.</p></li>
-<li><p><code translate="no">image_dense_index</code>: se crea un índice de tipo ` <code translate="no">AUTOINDEX</code> ` con tipo de métrica ` <code translate="no">IP</code> ` para el campo vectorial denso de imagen.</p></li>
+<li><p><code translate="no">text_dense_index</code>: se crea un índice de tipo « <code translate="no">AUTOINDEX</code> » con el tipo de métrica « <code translate="no">IP</code> » para el campo de texto de vector denso.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: se utiliza un índice de tipo «<code translate="no">SPARSE_INVERTED_INDEX</code>» con el tipo de métrica « <code translate="no">BM25</code> » para el campo vectorial de texto disperso.</p></li>
+<li><p><code translate="no">image_dense_index</code>: se crea un índice de tipo « <code translate="no">AUTOINDEX</code> » con el tipo de métrica « <code translate="no">IP</code> » para el campo vectorial de imagen denso.</p></li>
 </ul>
 <p>Puede elegir otros tipos de índice según sea necesario para adaptarse mejor a sus necesidades y tipos de datos. Para obtener más información sobre los tipos de índice compatibles, consulte la documentación sobre <a href="/docs/es/index-vector-fields.md">los tipos de índice disponibles</a>.</p>
 <div class="multipleCode">
@@ -604,12 +604,12 @@ curl --request POST \
       </svg>
     </button></h2><p>En esta sección se insertan datos en la colección « <code translate="no">my_collection</code> » según el esquema definido anteriormente. Durante la inserción, asegúrate de que todos los campos, excepto aquellos con valores generados automáticamente, contengan datos en el formato correcto. En este ejemplo:</p>
 <ul>
-<li><p><code translate="no">id</code>: un número entero que representa el ID del producto</p></li>
+<li><p><code translate="no">id</code>: un entero que representa el ID del producto</p></li>
 <li><p><code translate="no">text</code>: una cadena que contiene la descripción del producto</p></li>
 <li><p><code translate="no">text_dense</code>: una lista de 768 valores de coma flotante que representan la incrustación densa de la descripción del texto</p></li>
 <li><p><code translate="no">image_dense</code>: una lista de 512 valores de coma flotante que representan la incrustación densa de la imagen del producto</p></li>
 </ul>
-<p>Puedes utilizar el mismo modelo o modelos diferentes para generar incrustaciones densas para cada campo. En este ejemplo, las dos incrustaciones densas tienen dimensiones diferentes, lo que sugiere que fueron generadas por modelos distintos. Cuando definas cada búsqueda más adelante, asegúrate de utilizar el modelo correspondiente para generar la incrustación de consulta adecuada.</p>
+<p>Puedes utilizar el mismo modelo o modelos diferentes para generar representaciones densas para cada campo. En este ejemplo, las dos representaciones densas tienen dimensiones diferentes, lo que sugiere que fueron generadas por modelos distintos. Cuando definas cada búsqueda más adelante, asegúrate de utilizar el modelo correspondiente para generar la representación de consulta adecuada.</p>
 <p>Dado que este ejemplo utiliza la función integrada BM25 para generar incrustaciones dispersas a partir del campo de texto, no es necesario proporcionar vectores dispersos manualmente. Sin embargo, si decides no utilizar BM25, deberás precalcular y proporcionar tú mismo las incrustaciones dispersas.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -795,11 +795,11 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
     </button></h3><p>La búsqueda híbrida se implementa creando varias instancias de ` <code translate="no">AnnSearchRequest</code> ` en la función ` <code translate="no">hybrid_search()</code> `, donde cada ` <code translate="no">AnnSearchRequest</code> ` representa una solicitud de búsqueda ANN básica para un campo vectorial específico. Por lo tanto, antes de realizar una búsqueda híbrida, es necesario crear una ` <code translate="no">AnnSearchRequest</code> ` para cada campo vectorial.</p>
 <p>Además, al configurar el parámetro <code translate="no">expr</code> en un <code translate="no">AnnSearchRequest</code>, puede establecer las condiciones de filtrado para su búsqueda híbrida. Consulte <a href="/docs/es/filtered-search.md">«Búsqueda filtrada</a> » y <a href="/docs/es/boolean.md">«Explicación del filtrado</a>».</p>
 <div class="alert note">
-<p>En la búsqueda híbrida, cada <code translate="no">AnnSearchRequest</code> solo admite un conjunto de datos de consulta.</p>
+<p>En la búsqueda híbrida, cada <code translate="no">AnnSearchRequest</code> admite únicamente un conjunto de datos de consulta.</p>
 </div>
 <p>Para demostrar las capacidades de diversos campos vectoriales de búsqueda, construiremos tres solicitudes de búsqueda de « <code translate="no">AnnSearchRequest</code> » utilizando una consulta de ejemplo. También utilizaremos sus vectores densos precalculados para este proceso. Las solicitudes de búsqueda se centrarán en los siguientes campos vectoriales:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> para la búsqueda semántica de texto, que permite la comprensión contextual y la recuperación basada en el significado, en lugar de la coincidencia directa de palabras clave;</p></li>
+<li><p><code translate="no">text_dense</code> para la búsqueda semántica de texto, lo que permite la comprensión contextual y la recuperación basada en el significado, en lugar de la coincidencia directa de palabras clave;</p></li>
 <li><p><code translate="no">text_sparse</code>para la búsqueda de texto completo o la coincidencia de palabras clave, centrándose en coincidencias exactas de palabras o frases dentro del texto.</p></li>
 <li><p><code translate="no">image_dense</code>para la búsqueda multimodal de texto a imagen, con el fin de recuperar imágenes de productos relevantes basadas en el contenido semántico de la consulta.</p></li>
 </ul>
@@ -962,7 +962,7 @@ sub_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraPa
                     .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
 sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<p>Dado que el parámetro ` <code translate="no">limit</code> ` está establecido en 2, cada ` <code translate="no">AnnSearchRequest</code> ` devuelve 2 resultados de búsqueda. En este ejemplo, se crean 3 instancias de ` <code translate="no">AnnSearchRequest</code> `, lo que da como resultado un total de 6 resultados de búsqueda.</p>
+<p>Dado que el parámetro <code translate="no">limit</code> está establecido en 2, cada <code translate="no">AnnSearchRequest</code> devuelve 2 resultados de búsqueda. En este ejemplo, se crean 3 instancias de <code translate="no">AnnSearchRequest</code>, lo que da como resultado un total de 6 resultados de búsqueda.</p>
 <h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Paso 2: Configurar una estrategia de reordenación<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1145,7 +1145,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación se muestra el resultado:</p>
+<p>El resultado es el siguiente:</p>
 <pre><code translate="no" class="language-text">[&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Al especificar el parámetro « <code translate="no">limit=2</code> » para la búsqueda híbrida, Milvus volverá a clasificar los seis resultados obtenidos de las tres búsquedas. Finalmente, solo se mostrarán los dos resultados más similares.</p>

@@ -74,8 +74,8 @@ title: 使用 Docker Compose 執行具備 GPU 支援的 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 並手動將其儲存為 docker-compose.yml，或使用以下指令執行。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>下載 <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 並手動將其儲存為 docker-compose.yml，或使用以下指令執行。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要對 YAML 檔案中獨立服務的環境變數進行以下修改：</p>
 <ul>
@@ -180,7 +180,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 啟動並運行後，您可以透過修改 `<code translate="no">milvus.yaml</code> ` 檔案中的 `<code translate="no">initMemSize</code> ` 和 `<code translate="no">maxMemSize</code> ` 設定來自訂記憶體池。</p>
+    </button></h2><p>Milvus 啟動並運行後，您可以透過修改 `<code translate="no">milvus.yaml</code> ` 檔案中的 `<code translate="no">initMemSize</code> ` 和 `<code translate="no">maxMemSize</code> ` 設定，來自訂記憶體池。</p>
 <div class="alert note">
 <p><code translate="no">milvus.yaml</code> 檔案位於 Milvus 容器內的<code translate="no">/milvus/configs/</code> 目錄中。</p>
 </div>
@@ -229,7 +229,7 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>在 Docker 中安裝 Milvus 後，您可以：</p>
 <ul>
 <li><p>參閱<a href="/docs/zh-hant/v2.6.x/quickstart.md">《快速入門》</a>以了解 Milvus 的功能。</p></li>
-<li><p>瀏覽<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>以進一步了解該 Milvus 實例。</p></li>
+<li><p>查看<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>以進一步了解該 Milvus 實例。</p></li>
 <li><p>學習 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh-hant/v2.6.x/manage_databases.md">管理資料庫</a></li>
@@ -239,7 +239,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/zh-hant/v2.6.x/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 圖表升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
 <li><p>在雲端部署您的 Milvus 叢集：</p>
 <ul>

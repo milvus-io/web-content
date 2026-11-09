@@ -2,17 +2,18 @@
 id: multi-vector-search.md
 title: Ricerca ibrida multivettoriale
 summary: >-
-  In molte applicazioni, un oggetto può essere ricercato in base a un ricco
-  insieme di informazioni, come titolo e descrizione, o con modalità multiple,
-  come testo, immagini e audio. Ad esempio, un tweet con un testo e un'immagine
-  viene cercato se il testo o l'immagine corrispondono alla semantica della
-  query di ricerca. La ricerca ibrida migliora l'esperienza di ricerca
-  combinando le ricerche in questi diversi campi. Milvus supporta questo aspetto
-  consentendo la ricerca su più campi vettoriali, effettuando simultaneamente
-  diverse ricerche di tipo Approximate Nearest Neighbor (RNA). La ricerca ibrida
-  multivettoriale è particolarmente utile se si desidera cercare sia nel testo
-  che nelle immagini, in più campi di testo che descrivono lo stesso oggetto o
-  in vettori densi e radi per migliorare la qualità della ricerca.
+  In molte applicazioni, è possibile effettuare la ricerca di un oggetto sulla
+  base di un ampio insieme di informazioni, quali titolo e descrizione, oppure
+  utilizzando diverse modalità, quali testo, immagini e audio. Ad esempio, un
+  tweet contenente un testo e un’immagine dovrà essere individuato se il testo o
+  l’immagine corrispondono alla semantica della query di ricerca. La ricerca
+  ibrida migliora l’esperienza di ricerca combinando le ricerche tra questi
+  diversi campi. Milvus supporta questa funzionalità consentendo la ricerca su
+  più campi vettoriali, effettuando contemporaneamente diverse ricerche di tipo
+  Approximate Nearest Neighbor (ANN). La ricerca ibrida multivettoriale è
+  particolarmente utile se si desidera cercare sia testo che immagini, più campi
+  di testo che descrivono lo stesso oggetto, oppure vettori densi e sparsi per
+  migliorare la qualità della ricerca.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">Ricerca ibrida multivettoriale<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -29,15 +30,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In molte applicazioni, un oggetto può essere ricercato in base a un ricco insieme di informazioni, come titolo e descrizione, o con modalità multiple, come testo, immagini e audio. Ad esempio, un tweet con un testo e un'immagine viene cercato se il testo o l'immagine corrispondono alla semantica della query di ricerca. La ricerca ibrida migliora l'esperienza di ricerca combinando le ricerche in questi diversi campi. Milvus supporta questo aspetto consentendo la ricerca su più campi vettoriali, effettuando simultaneamente diverse ricerche di tipo Approximate Nearest Neighbor (RNA). La ricerca ibrida multivettoriale è particolarmente utile se si desidera cercare sia nel testo che nelle immagini, in più campi di testo che descrivono lo stesso oggetto o in vettori densi e radi per migliorare la qualità della ricerca.</p>
-<p>
+    </button></h1><p>In molte applicazioni, è possibile effettuare la ricerca di un oggetto utilizzando un ampio insieme di informazioni, quali titolo e descrizione, oppure ricorrendo a diverse modalità, quali testo, immagini e audio. Ad esempio, un tweet contenente un testo e un'immagine dovrà essere individuato se il testo o l'immagine corrispondono al significato della query di ricerca. La ricerca ibrida migliora l’esperienza di ricerca combinando le ricerche in questi diversi campi. Milvus supporta questa funzionalità consentendo la ricerca su più campi vettoriali, effettuando contemporaneamente diverse ricerche con l’algoritmo Approximate Nearest Neighbor (ANN). La ricerca ibrida multivettoriale è particolarmente utile se si desidera cercare sia testo che immagini, più campi di testo che descrivono lo stesso oggetto, oppure vettori densi e sparsi per migliorare la qualità della ricerca.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>Flusso di lavoro della ricerca ibrida</span> </span></p>
-<p>La ricerca ibrida multivettoriale integra diversi metodi di ricerca o abbraccia embeddings di varie modalità:</p>
+   <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>Flusso di lavoro della ricerca ibrida</span>
+  
+ </span></p>
+<p>La ricerca ibrida multivettoriale integra diversi metodi di ricerca o abbraccia embedding provenienti da varie modalità:</p>
 <ul>
-<li><p><strong>Ricerca vettoriale sparsa e densa</strong>: I <a href="/docs/it/v2.6.x/dense-vector.md">vettori densi</a> sono eccellenti per catturare le relazioni semantiche, mentre i <a href="/docs/it/v2.6.x/sparse_vector.md">vettori sparsi</a> sono molto efficaci per una corrispondenza precisa delle parole chiave. La ricerca ibrida combina questi approcci per fornire sia un'ampia comprensione concettuale sia l'esatta pertinenza dei termini, migliorando così i risultati della ricerca. Sfruttando i punti di forza di ciascun metodo, la ricerca ibrida supera i limiti dei singoli approcci, offrendo migliori prestazioni per le query complesse. Ecco una <a href="/docs/it/v2.6.x/full_text_search_with_milvus.md">guida</a> più dettagliata sul reperimento ibrido che combina la ricerca semantica con la ricerca full-text.</p></li>
-<li><p><strong>Ricerca vettoriale multimodale</strong>: La ricerca vettoriale multimodale è una tecnica potente che consente di effettuare ricerche su vari tipi di dati, tra cui testo, immagini, audio e altri. Il vantaggio principale di questo approccio è la capacità di unificare diverse modalità in un'esperienza di ricerca omogenea e coesa. Ad esempio, nella ricerca di prodotti, un utente potrebbe inserire una query testuale per trovare prodotti descritti sia con testo che con immagini. Combinando queste modalità attraverso un metodo di ricerca ibrido, è possibile migliorare l'accuratezza della ricerca o arricchire i risultati.</p></li>
+<li><p><strong>Ricerca con vettori sparsi e densi</strong>: <a href="/docs/it/v2.6.x/dense-vector.md">i vettori densi</a> sono eccellenti per cogliere le relazioni semantiche, mentre <a href="/docs/it/v2.6.x/sparse_vector.md">i vettori sparsi</a> sono altamente efficaci per la corrispondenza precisa delle parole chiave. La ricerca ibrida combina questi approcci per fornire sia un'ampia comprensione concettuale sia l'esatta rilevanza dei termini, migliorando così i risultati di ricerca. Sfruttando i punti di forza di ciascun metodo, la ricerca ibrida supera i limiti dei singoli approcci, offrendo prestazioni migliori per le query complesse. Ecco <a href="/docs/it/v2.6.x/full_text_search_with_milvus.md">una guida</a> più dettagliata sul recupero ibrido che combina la ricerca semantica con la ricerca full-text.</p></li>
+<li><p><strong>Ricerca vettoriale multimodale</strong>: la ricerca vettoriale multimodale è una tecnica potente che consente di effettuare ricerche su vari tipi di dati, tra cui testo, immagini, audio e altro. Il vantaggio principale di questo approccio è la sua capacità di unificare diverse modalità in un’esperienza di ricerca fluida e coerente. Ad esempio, nella ricerca di prodotti, un utente potrebbe inserire una query testuale per trovare prodotti descritti sia con testo che con immagini. Combinando queste modalità attraverso un metodo di ricerca ibrida, è possibile migliorare la precisione della ricerca o arricchire i risultati.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Esempio<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,14 +57,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Consideriamo un caso d'uso reale in cui ogni prodotto include una descrizione testuale e un'immagine. Sulla base dei dati disponibili, possiamo condurre tre tipi di ricerca:</p>
+    </button></h2><p>Consideriamo un caso d’uso reale in cui ogni prodotto include una descrizione testuale e un’immagine. Sulla base dei dati disponibili, possiamo effettuare tre tipi di ricerca:</p>
 <ul>
-<li><p><strong>Ricerca testuale semantica:</strong> Si tratta di interrogare la descrizione testuale del prodotto utilizzando vettori densi. Le incorporazioni testuali possono essere generate utilizzando modelli come <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> e <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> o servizi come <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
-<li><p><strong>Ricerca full-text</strong>: In questo caso, si interroga la descrizione testuale del prodotto utilizzando una corrispondenza di parole chiave con vettori radi. A questo scopo si possono utilizzare algoritmi come <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> o modelli di incorporazione rada come <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> o <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>.</p></li>
-<li><p><strong>Ricerca multimodale dell'immagine:</strong> Questo metodo interroga l'immagine utilizzando una query testuale con vettori densi. Le incorporazioni di immagini possono essere generate con modelli come <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
+<li><p><strong>Ricerca testuale semantica:</strong> consiste nell’effettuare una query sulla descrizione testuale del prodotto utilizzando vettori densi. Gli embedding testuali possono essere generati utilizzando modelli come <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> e <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> o servizi come <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
+<li><p><strong>Ricerca full-text</strong>: in questo caso, si effettua la ricerca nella descrizione testuale del prodotto utilizzando una corrispondenza per parole chiave con vettori sparsi. A questo scopo si possono utilizzare algoritmi come <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> o modelli di embedding sparsi quali <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> o <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>.</p></li>
+<li><p><strong>Ricerca multimodale per immagini:</strong> questo metodo effettua la ricerca sull’immagine utilizzando una query testuale con vettori densi. Gli embedding delle immagini possono essere generati con modelli come <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
-<p>Questa guida illustra un esempio di ricerca ibrida multimodale che combina i metodi di ricerca di cui sopra, data la descrizione testuale grezza e le incorporazioni di immagini dei prodotti. Dimostreremo come memorizzare i dati multivettoriali ed eseguire ricerche ibride con una strategia di reranking.</p>
-<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Creare una collezione con più campi vettoriali<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+<p>Questa guida illustrerà un esempio di ricerca ibrida multimodale che combina i metodi di ricerca sopra descritti, partendo dalla descrizione testuale grezza e dagli embedding delle immagini dei prodotti. Mostreremo come memorizzare dati multivettoriali ed eseguire ricerche ibride con una strategia di riclassificazione.</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Creazione di una collezione con più campi vettoriali<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,8 +79,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il processo di creazione di una collezione prevede tre fasi fondamentali: la definizione dello schema della collezione, la configurazione dei parametri dell'indice e la creazione della collezione.</p>
-<h3 id="Define-schema" class="common-anchor-header">Definire lo schema<button data-href="#Define-schema" class="anchor-icon" translate="no">
+    </button></h2><p>Il processo di creazione di una collezione prevede tre passaggi chiave: definizione dello schema della collezione, configurazione dei parametri dell’indice e creazione della collezione.</p>
+<h3 id="Define-schema" class="common-anchor-header">Definizione dello schema<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,18 +95,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per la ricerca ibrida multivettoriale, è necessario definire più campi vettoriali all'interno di uno schema di raccolta. Per i dettagli sui limiti del numero di campi vettoriali consentiti in una collezione, vedere <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Limiti di Zilliz Cloud</a>.  Tuttavia, se necessario, è possibile regolare l'opzione <a href="/docs/it/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> per includere fino a 10 campi vettoriali in una raccolta, se necessario.</p>
+    </button></h3><p>Per la ricerca ibrida multiveettoriale, è necessario definire più campi vettoriali all’interno dello schema della collezione. Per i dettagli sui limiti relativi al numero di campi vettoriali consentiti in una collezione, consulta <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">i Limiti di Zilliz Cloud</a>. Tuttavia, se necessario, è possibile modificare le <a href="/docs/it/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> per includere fino a 10 campi vettoriali in una collezione, a seconda delle esigenze.</p>
 <p>Questo esempio incorpora i seguenti campi nello schema:</p>
 <ul>
-<li><p><code translate="no">id</code>: Serve come chiave primaria per memorizzare gli ID del testo. Questo campo è di tipo dati <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: Utilizzato per memorizzare il contenuto testuale. Questo campo è del tipo di dati <code translate="no">VARCHAR</code> con una lunghezza massima di 1000 byte. L'opzione <code translate="no">enable_analyzer</code> è impostata su <code translate="no">True</code> per facilitare la ricerca full-text.</p></li>
-<li><p><code translate="no">text_dense</code>: Utilizzato per memorizzare vettori densi dei testi. Questo campo è del tipo di dati <code translate="no">FLOAT_VECTOR</code> con una dimensione del vettore di 768.</p></li>
-<li><p><code translate="no">text_sparse</code>: Utilizzato per memorizzare vettori radi dei testi. Questo campo è del tipo di dati <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Utilizzato per memorizzare vettori densi delle immagini dei prodotti. Questo campo è del tipo di dati <code translate="no">FLOAT_VETOR</code> con una dimensione di vettore di 512.</p></li>
+<li><p><code translate="no">id</code>: Funge da chiave primaria per l’archiviazione degli ID di testo. Questo campo è di tipo <code translate="no">INT64</code>.</p></li>
+<li><p><code translate="no">text</code>: Utilizzato per memorizzare il contenuto testuale. Questo campo è di tipo <code translate="no">VARCHAR</code> con una lunghezza massima di 1000 byte. L’opzione <code translate="no">enable_analyzer</code> è impostata su <code translate="no">True</code> per facilitare la ricerca full-text.</p></li>
+<li><p><code translate="no">text_dense</code>: Utilizzato per memorizzare vettori densi dei testi. Questo campo è di tipo <code translate="no">FLOAT_VECTOR</code> con una dimensione vettoriale pari a 768.</p></li>
+<li><p><code translate="no">text_sparse</code>: Utilizzato per memorizzare vettori sparsi dei testi. Questo campo è di tipo <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">image_dense</code>: Utilizzato per memorizzare i vettori densi delle immagini dei prodotti. Questo campo è di tipo <code translate="no">FLOAT_VECTOR</code> con una dimensione vettoriale pari a 512.</p></li>
 </ul>
-<p>Poiché si utilizzerà l'algoritmo integrato BM25 per eseguire una ricerca full-text sul campo di testo, è necessario aggiungere il Milvus <code translate="no">Function</code> allo schema. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/full-text-search.md">Ricerca a tutto testo</a>.</p>
+<p>Poiché utilizzeremo l’algoritmo BM25 integrato per eseguire una ricerca full-text sul campo di testo, è necessario aggiungere il campo Milvus <code translate="no">Function</code> allo schema. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/full-text-search.md">Ricerca full-text</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -334,7 +342,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Creare l'indice<button data-href="#Create-index" class="anchor-icon" translate="no">
+<h3 id="Create-index" class="common-anchor-header">Creazione dell’indice<button data-href="#Create-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,15 +357,20 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Dopo aver definito lo schema della collezione, il passo successivo è configurare gli indici vettoriali e specificare le metriche di similarità. Nell'esempio dato:</p>
+    </button></h3><p>Dopo aver definito lo schema della collezione, il passo successivo consiste nel configurare gli indici vettoriali e specificare le metriche di similarità. Nell’esempio riportato:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: per il campo vettoriale denso di testo viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con metrica <code translate="no">IP</code>.</p></li>
-<li><p><code translate="no">text_sparse_index</code>: un indice di tipo<code translate="no">SPARSE_INVERTED_INDEX</code>con metrica <code translate="no">BM25</code> viene utilizzato per il campo vettoriale di testo rado.</p></li>
-<li><p><code translate="no">image_dense_index</code>: per il campo vettoriale denso dell'immagine viene creato un indice del tipo <code translate="no">AUTOINDEX</code> con il tipo metrico <code translate="no">IP</code>.</p></li>
+<li><p><code translate="no">text_dense_index</code>: viene creato un indice di tipo ` <code translate="no">AUTOINDEX</code> ` con tipo di metrica ` <code translate="no">IP</code> ` per il campo vettoriale denso di testo.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: per il campo vettoriale a densità elevata di testo viene utilizzato un indice di tipo<code translate="no">SPARSE_INVERTED_INDEX</code>con tipo di metrica <code translate="no">BM25</code>.</p></li>
+<li><p><code translate="no">image_dense_index</code>: viene creato un indice di tipo <code translate="no">AUTOINDEX</code> con tipo di metrica <code translate="no">IP</code> per il campo vettoriale denso di immagini.</p></li>
 </ul>
-<p>È possibile scegliere altri tipi di indice, a seconda delle esigenze e dei tipi di dati. Per ulteriori informazioni sui tipi di indice supportati, consultare la documentazione sui <a href="/docs/it/v2.6.x/index-vector-fields.md">tipi di indice disponibili</a>.</p>
+<p>È possibile scegliere altri tipi di indice, se necessario, per adattarsi al meglio alle proprie esigenze e ai tipi di dati. Per ulteriori informazioni sui tipi di indice supportati, consultare la documentazione sui <a href="/docs/it/v2.6.x/index-vector-fields.md">tipi di indice disponibili</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -468,7 +481,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">Creare una raccolta<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h3 id="Create-collection" class="common-anchor-header">Creazione di una raccolta<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -483,9 +496,14 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Creare una collezione chiamata <code translate="no">demo</code> con lo schema della collezione e gli indici configurati nei due passi precedenti.</p>
+    </button></h3><p>Creare una collezione denominata <code translate="no">demo</code> con lo schema della collezione e gli indici configurati nei due passaggi precedenti.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -527,7 +545,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Inserimento dei dati<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,17 +560,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa sezione inserisce i dati nella raccolta <code translate="no">my_collection</code> in base allo schema definito in precedenza. Durante l'inserimento, assicurarsi che tutti i campi, eccetto quelli con valori autogenerati, siano forniti di dati nel formato corretto. In questo esempio:</p>
+    </button></h2><p>Questa sezione inserisce i dati nella collezione " <code translate="no">my_collection</code> " in base allo schema definito in precedenza. Durante l'inserimento, assicurarsi che tutti i campi, ad eccezione di quelli con valori generati automaticamente, siano compilati con dati nel formato corretto. In questo esempio:</p>
 <ul>
-<li><p><code translate="no">id</code>: un numero intero che rappresenta l'ID del prodotto</p></li>
+<li><p><code translate="no">id</code>: un numero intero che rappresenta l’ID del prodotto</p></li>
 <li><p><code translate="no">text</code>: una stringa contenente la descrizione del prodotto</p></li>
-<li><p><code translate="no">text_dense</code>: un elenco di 768 valori in virgola mobile che rappresentano l'incorporazione densa della descrizione del testo</p></li>
-<li><p><code translate="no">image_dense</code>: un elenco di 512 valori in virgola mobile che rappresentano l'incorporazione densa dell'immagine del prodotto.</p></li>
+<li><p><code translate="no">text_dense</code>: un elenco di 768 valori in virgola mobile che rappresentano l’embedding denso della descrizione testuale</p></li>
+<li><p><code translate="no">image_dense</code>: un elenco di 512 valori in virgola mobile che rappresentano l’embedding denso dell’immagine del prodotto</p></li>
 </ul>
-<p>Si possono usare gli stessi modelli o modelli diversi per generare le incorporazioni dense per ogni campo. In questo esempio, le due incorporazioni dense hanno dimensioni diverse, il che suggerisce che sono state generate da modelli diversi. Quando si definisce ogni ricerca in un secondo momento, assicurarsi di utilizzare il modello corrispondente per generare l'incorporamento appropriato della query.</p>
-<p>Poiché questo esempio utilizza la funzione BM25 integrata per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precompilare e fornire autonomamente gli embedding sparsi.</p>
+<p>È possibile utilizzare modelli uguali o diversi per generare embedding densi per ciascun campo. In questo esempio, i due embedding densi hanno dimensioni diverse, il che suggerisce che siano stati generati da modelli diversi. Quando in seguito si definirà ciascuna ricerca, assicurarsi di utilizzare il modello corrispondente per generare l’embedding di query appropriato.</p>
+<p>Poiché questo esempio utilizza la funzione integrata BM25 per generare embedding sparsi dal campo di testo, non è necessario fornire manualmente i vettori sparsi. Tuttavia, se si sceglie di non utilizzare BM25, è necessario precalcolare e fornire autonomamente gli embedding sparsi.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -666,7 +689,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Perform-Hybrid-Search" class="common-anchor-header">Eseguire la ricerca ibrida<button data-href="#Perform-Hybrid-Search" class="anchor-icon" translate="no">
+<h2 id="Perform-Hybrid-Search" class="common-anchor-header">Eseguire una ricerca ibrida<button data-href="#Perform-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -681,7 +704,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Passo 1: Creare istanze multiple di AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">Passaggio 1: Creare più istanze di AnnSearchRequest<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -696,19 +719,24 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La ricerca ibrida viene implementata creando più <code translate="no">AnnSearchRequest</code> nella funzione <code translate="no">hybrid_search()</code>, dove ogni <code translate="no">AnnSearchRequest</code> rappresenta una richiesta di ricerca ANN di base per uno specifico campo vettoriale. Pertanto, prima di effettuare una ricerca ibrida, è necessario creare un <code translate="no">AnnSearchRequest</code> per ogni campo vettoriale.</p>
-<p>Inoltre, configurando il parametro <code translate="no">expr</code> in un <code translate="no">AnnSearchRequest</code>, è possibile impostare le condizioni di filtraggio per la ricerca ibrida. Fare riferimento a <a href="/docs/it/v2.6.x/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/v2.6.x/boolean.md">Filtraggio spiegati</a>.</p>
+    </button></h3><p>La ricerca ibrida viene implementata creando più istanze di ` <code translate="no">AnnSearchRequest</code> ` nella funzione ` <code translate="no">hybrid_search()</code> `, dove ogni ` <code translate="no">AnnSearchRequest</code> ` rappresenta una richiesta di ricerca ANN di base per un campo vettoriale specifico. Pertanto, prima di eseguire una ricerca ibrida, è necessario creare un ` <code translate="no">AnnSearchRequest</code> ` per ciascun campo vettoriale.</p>
+<p>Inoltre, configurando il parametro <code translate="no">expr</code> in un <code translate="no">AnnSearchRequest</code>, è possibile impostare le condizioni di filtraggio per la ricerca ibrida. Si prega di fare riferimento alle sezioni <a href="/docs/it/v2.6.x/filtered-search.md">Ricerca filtrata</a> e <a href="/docs/it/v2.6.x/boolean.md">Spiegazione del filtraggio</a>.</p>
 <div class="alert note">
-<p>Nella ricerca ibrida, ogni <code translate="no">AnnSearchRequest</code> supporta solo una query di dati.</p>
+<p>Nella ricerca ibrida, ogni <code translate="no">AnnSearchRequest</code> supporta un solo set di dati di query.</p>
 </div>
-<p>Per dimostrare le capacità dei vari campi vettoriali di ricerca, costruiremo tre richieste di ricerca <code translate="no">AnnSearchRequest</code> utilizzando una query campione. Per questo processo utilizzeremo anche i suoi vettori densi precalcolati. Le richieste di ricerca riguarderanno i seguenti campi vettoriali:</p>
+<p>Per dimostrare le capacità dei vari campi vettoriali di ricerca, costruiremo tre richieste di ricerca " <code translate="no">AnnSearchRequest</code> " utilizzando una query di esempio. Per questo processo utilizzeremo anche i suoi vettori densi precalcolati. Le richieste di ricerca avranno come obiettivo i seguenti campi vettoriali:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> per la ricerca semantica del testo, che consente la comprensione contestuale e il recupero basato sul significato piuttosto che sulla corrispondenza diretta con le parole chiave.</p></li>
-<li><p><code translate="no">text_sparse</code>per la ricerca full-text o per la corrispondenza di parole chiave, concentrandosi sulle corrispondenze esatte di parole o frasi all'interno del testo.</p></li>
-<li><p><code translate="no">image_dense</code>per la ricerca multimodale da testo a immagine, per recuperare immagini di prodotti rilevanti in base al contenuto semantico della query.</p></li>
+<li><p><code translate="no">text_dense</code> per la ricerca semantica nel testo, che consente la comprensione contestuale e il recupero basato sul significato piuttosto che sulla corrispondenza diretta delle parole chiave;</p></li>
+<li><p><code translate="no">text_sparse</code>per la ricerca full-text o la corrispondenza delle parole chiave, concentrandosi sulle corrispondenze esatte di parole o frasi all’interno del testo.</p></li>
+<li><p><code translate="no">image_dense</code>per la ricerca multimodale da testo a immagine, per recuperare immagini di prodotti pertinenti in base al contenuto semantico della query.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -835,8 +863,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dato che il parametro <code translate="no">limit</code> è impostato su 2, ogni <code translate="no">AnnSearchRequest</code> restituisce 2 risultati di ricerca. In questo esempio, vengono create 3 istanze di <code translate="no">AnnSearchRequest</code>, per un totale di 6 risultati di ricerca.</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Passo 2: Configurare una strategia di reranking<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<p>Dato che il parametro ` <code translate="no">limit</code> ` è impostato su 2, ogni ` <code translate="no">AnnSearchRequest</code> ` restituisce 2 risultati di ricerca. In questo esempio, vengono create 3 istanze di ` <code translate="no">AnnSearchRequest</code> `, per un totale di 6 risultati di ricerca.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Fase 2: Configurazione di una strategia di riclassificazione<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -851,10 +879,15 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per unire e classificare gli insiemi di risultati di ricerca di RNA, è essenziale selezionare una strategia di reranking appropriata. Milvus offre diversi tipi di strategie di reranking. Per maggiori dettagli su questi meccanismi di reranking, consultare <a href="/docs/it/v2.6.x/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/it/v2.6.x/rrf-ranker.md">RRF Ranker</a>.</p>
-<p>In questo esempio, poiché non c'è un'enfasi particolare su specifiche query di ricerca, procederemo con la strategia RRFRanker.</p>
+    </button></h3><p>Per unire e riclassificare gli insiemi di risultati di ricerca ANN, è essenziale selezionare una strategia di riclassificazione appropriata. Milvus offre diversi tipi di strategie di riclassificazione. Per maggiori dettagli su questi meccanismi di riclassificazione, fare riferimento a <a href="/docs/it/v2.6.x/weighted-ranker.md">Weighted Ranker</a> o <a href="/docs/it/v2.6.x/rrf-ranker.md">RRF Ranker</a>.</p>
+<p>In questo esempio, poiché non vi è particolare enfasi su specifiche query di ricerca, procederemo con la strategia RRFRanker.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -912,7 +945,7 @@ ranker := entity.NewFunction().
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Passo 3: Eseguire una ricerca ibrida<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Passaggio 3: Eseguire una ricerca ibrida<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -927,9 +960,14 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Prima di avviare una ricerca ibrida, assicurarsi che l'insieme sia caricato. Se i campi vettoriali dell'insieme non hanno un indice o non sono caricati in memoria, si verificherà un errore durante l'esecuzione del metodo Hybrid Search.</p>
+    </button></h3><p>Prima di avviare una ricerca ibrida, assicurarsi che la collezione sia caricata. Se alcuni campi vettoriali all’interno della collezione non dispongono di un indice o non sono caricati in memoria, si verificherà un errore durante l’esecuzione del metodo di ricerca ibrida.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -1001,10 +1039,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'output è il seguente:</p>
+<p>Di seguito è riportato il risultato:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Con il parametro <code translate="no">limit=2</code> specificato per la ricerca ibrida, Milvus classifica i sei risultati ottenuti dalle tre ricerche. Alla fine verranno restituiti solo i primi due risultati più simili.</p>
+<p>Con il parametro ` <code translate="no">limit=2</code> ` specificato per la ricerca ibrida, Milvus riclassificherà i sei risultati ottenuti dalle tre ricerche. Alla fine, verranno restituiti solo i due risultati più simili.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Utilizzo avanzato<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1020,7 +1058,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Impostare temporaneamente un fuso orario per una ricerca ibrida<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Impostazione temporanea di un fuso orario per una ricerca ibrida<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1035,9 +1073,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se la vostra collezione ha un campo <code translate="no">TIMESTAMPTZ</code>, potete temporaneamente sovrascrivere il fuso orario predefinito del database o della collezione per una singola operazione impostando il parametro <code translate="no">timezone</code> nella chiamata di ricerca ibrida. Questo parametro controlla il modo in cui i valori di <code translate="no">TIMESTAMPTZ</code> vengono visualizzati e confrontati durante l'operazione.</p>
-<p>Il valore di <code translate="no">timezone</code> deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Per informazioni dettagliate sull'utilizzo del campo <code translate="no">TIMESTAMPTZ</code>, consultare la sezione <a href="/docs/it/v2.6.x/timestamptz-field.md">Campo TIMESTAMPTZ</a>.</p>
-<p>L'esempio seguente mostra come impostare temporaneamente un fuso orario per un'operazione di ricerca ibrida:</p>
+    </button></h3><p>Se la collezione dispone di un campo " <code translate="no">TIMESTAMPTZ</code> ", è possibile sovrascrivere temporaneamente il fuso orario predefinito del database o della collezione per una singola operazione impostando il parametro " <code translate="no">timezone</code> " nella chiamata di ricerca ibrida. Ciò determina la modalità di visualizzazione e confronto dei valori " <code translate="no">TIMESTAMPTZ</code> " durante l'operazione.</p>
+<p>Il valore di ` <code translate="no">timezone</code> ` deve essere un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificatore di fuso orario IANA</a> valido (ad esempio, <strong>`Asia/Shanghai`</strong>, <strong>`America/Chicago</strong>` o <strong>`UTC`</strong>). Per ulteriori dettagli su come utilizzare il campo ` <code translate="no">TIMESTAMPTZ</code> `, consultare <a href="/docs/it/v2.6.x/timestamptz-field.md">la sezione Campo `TIMESTAMPTZ`</a>.</p>
+<p>L'esempio riportato di seguito mostra come impostare temporaneamente un fuso orario per un'operazione di ricerca ibrida:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,

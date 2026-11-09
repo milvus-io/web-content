@@ -56,7 +56,7 @@ title: 在 Docker 中运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供了一个安装脚本，用于将其作为 Docker 容器进行安装。在 Microsoft Windows 上安装 Docker Desktop 后，您可以通过<strong>管理员模式</strong>下的 PowerShell 或 Windows 命令提示符，以及 WSL 2 访问 Docker CLI。​</p>
+    </button></h2><p>Milvus 提供了一个安装脚本，用于将其作为 Docker 容器进行安装。在 Microsoft Windows 上安装 Docker Desktop 后，您可以通过<strong>管理员模式</strong>下的 PowerShell 或 Windows 命令提示符，以及通过 WSL 2 访问 Docker CLI。​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">通过 PowerShell 或 Windows 命令提示符​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +119,7 @@ Delete successfully. # Data has been removed.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果您希望在 Windows 上使用 Linux 命令和 shell 脚本启动 Milvus，请确保已安装 WSL 2。有关如何安装 WSL 2 的详细信息，请参阅这篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 文章</a>。</p>
+    </button></h3><p>如果您希望在 Windows 上使用 Linux 命令和 shell 脚本启动 Milvus，请确保已安装 WSL 2。有关如何安装 WSL 2 的详细信息，请参阅这篇<a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft 文章</a>。​</p>
 <ol>
 <li><p>启动 WSL 2。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -187,9 +187,9 @@ Delete successfully.​
       </svg>
     </button></h3><ol>
 <li><p>右键单击 Docker Desktop 并选择<strong>“以管理员身份运行</strong>”，以管理员模式打开 Docker Desktop。​</p></li>
-<li><p>在 PowerShell 或 Windows 命令提示符中运行以下命令，以下载 Milvus Standalone 版本的 Docker Compose 配置文件并启动 Milvus。​</p>
+<li><p>在 PowerShell 或 Windows 命令提示符中运行以下命令，以下载 Milvus Standalone（独立版）的 Docker Compose 配置文件并启动 Milvus。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -200,7 +200,7 @@ Creating milvus-standalone ... done​
 </code></pre>
 <p>根据您的网络连接情况，下载 Milvus 安装所需的镜像可能需要一段时间。一旦名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器启动，您将看到 ​</p>
 <ul>
-<li><p><strong>milvus-etcd</strong>容器不会向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>目录下。​</p></li>
+<li><p><strong>milvus-etcd</strong>容器不会向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>目录中。​</p></li>
 <li><p><strong>milvus-minio</strong>容器在本地监听<strong>9090</strong>和<strong>9091</strong>端口，使用默认身份验证凭据，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>目录。​</p></li>
 <li><p><strong>Milvus Standalone</strong>容器使用默认设置在本地提供<strong>19530</strong>端口服务，并将数据映射到当前文件夹中的<strong>volumes/milvus</strong>目录。​</p></li>
 </ul></li>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>下载 Milvus 配置文件。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>启动 Milvus。​</p>
@@ -272,14 +272,14 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Windows 上安装 Docker Desktop 后，如果计算机配置不正确，可能会遇到“<code translate="no">Docker Engine stopped</code> ”错误。此时，您可能需要进行以下检查：​</p>
+    </button></h3><p>在 Windows 中安装 Docker Desktop 后，如果计算机配置不正确，可能会遇到“<code translate="no">Docker Engine stopped</code> ”错误。此时，您可能需要进行以下检查：​</p>
 <ol>
 <li><p>检查虚拟化功能是否已启用。​</p>
 <p>您可以通过查看<strong>“任务管理器</strong>”中的<strong>“性能</strong>”选项卡来检查虚拟化功能是否已启用。​</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" /> 
-   <span>任务管理器中的虚拟化</span>
+   <span>任务管理器中的虚拟化</span> </span>设置<span class="img-wrapper">
   
  </span></p>
 <p>如果虚拟化功能已禁用，您可能需要检查主板固件的 BIOS 设置。在 BIOS 设置中启用虚拟化的方法因主板厂商而异。以华硕（ASUS）<a href="https://www.asus.com/support/faq/1043786/">主板为例，您可以参考这篇</a>关于启用虚拟<a href="https://www.asus.com/support/faq/1043786/">化的文章</a>。​</p>
@@ -298,14 +298,14 @@ Checking for updates.​
 The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
-<li><p>检查 Docker 守护进程是否已启动。</p>
+<li><p>检查 Docker Daemon 是否已启动。</p>
 <p>您需要进入 Docker Desktop 的安装目录，并运行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 来启动 Docker 守护进程。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
-<li><p>检查您是否以<strong>管理员</strong>模式启动了 Docker Desktop。​</p>
+<li><p>请检查您是否以<strong>管理员</strong>模式启动了 Docker Desktop。​</p>
 <p>请确保已以管理员模式启动 Docker Desktop。要做到这一点，请右键单击<strong>Docker Desktop</strong>，然后选择<strong>“以管理员身份运行”</strong>。​</p>
 <p><span class="img-wrapper">
   

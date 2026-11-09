@@ -121,7 +121,7 @@ summary: >-
 <li><p><strong>Escalabilidade</strong>: Uma coleção pode conter até 1 024 partições por coleção, permitindo o mesmo número de inquilinos no seu interior.</p></li>
 <li><p><strong>Isolamento de dados</strong>: Os dados de cada inquilino estão fisicamente separados por partições.</p></li>
 <li><p><strong>Flexibilidade</strong>: Esta estratégia exige que todos os inquilinos partilhem o mesmo esquema de dados. Além disso, as partições têm de ser criadas manualmente.</p></li>
-<li><p><strong>Outros</strong>: O RBAC não é suportado ao nível da partição. Os inquilinos podem ser consultados individualmente ou em várias partições, o que torna esta abordagem adequada para cenários que envolvam consultas agregadas ou análises entre segmentos de inquilinos. Além disso, é possível carregar ou libertar dados de forma flexível para inquilinos específicos, de modo a gerir eficazmente os dados ativos e inativos.</p></li>
+<li><p><strong>Outros</strong>: O RBAC não é suportado ao nível da partição. Os inquilinos podem ser consultados individualmente ou em várias partições, o que torna esta abordagem adequada para cenários que envolvam consultas agregadas ou análises entre segmentos de inquilinos. Além disso, é possível carregar ou libertar dados de forma flexível para inquilinos específicos, a fim de gerir eficazmente os dados ativos e inativos.</p></li>
 </ul>
 <h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Multilocação ao nível da chave de partição<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1,9 +1,9 @@
 ---
 id: set-collection-ttl.md
-title: 세트 컬렉션 TTL
-summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉션 수준 또는 엔티티 수준 TTL 정책을 구성하세요.
+title: Set Collection TTL
+summary: 오래된 데이터가 자동으로 만료되도록 컬렉션 수준 또는 엔티티 수준의 TTL 정책을 구성합니다.
 ---
-<h1 id="Set-Collection-TTL" class="common-anchor-header">세트 컬렉션 TTL<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
+<h1 id="Set-Collection-TTL" class="common-anchor-header">Set Collection TTL<button data-href="#Set-Collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,16 +18,16 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 <strong>TTL(Time-to-Live)</strong> 정책을 통해 엔티티를 자동으로 만료시킬 수 있습니다. 만료된 엔티티는 쿼리 및 검색 결과에 즉시 표시되지 않으며, 다음 압축 주기(일반적으로 24시간 이내)에 스토리지에서 물리적으로 제거됩니다.</p>
-<p>TTL 모드에는 두 가지가 있습니다:</p>
+    </button></h1><p>Milvus can automatically expire entities through a <strong>Time-to-Live (TTL)</strong> policy. Expired entities stop appearing in query and search results immediately, and are physically removed from storage on the next compaction cycle — typically within 24 hours.</p>
+<p>There are two TTL modes:</p>
 <ul>
-<li><p><strong>컬렉션 수준 TTL</strong> - 모든 엔티티가 공유하는 하나의 보존 기간으로, <code translate="no">collection.ttl.seconds</code> 속성을 통해 설정합니다.</p></li>
-<li><p><strong>엔티티 수준 TTL</strong> - 각 엔티티는 <code translate="no">ttl_field</code> 속성을 통해 TTL 필드로 표시된 전용 <code translate="no">TIMESTAMPTZ</code> 필드에 고유한 절대 만료 시간을 보유합니다.</p></li>
+<li><p><strong>Collection-level TTL</strong> — one retention window shared by every entity, set through the <code translate="no">collection.ttl.seconds</code> property.</p></li>
+<li><p><strong>Entity-level TTL</strong> — each entity carries its own absolute expiration time in a dedicated <code translate="no">TIMESTAMPTZ</code> field, marked as the TTL field through the <code translate="no">ttl_field</code> property.</p></li>
 </ul>
 <div class="alert note">
-<p>이 기능은 관리되는 컬렉션에만 적용됩니다.</p>
+<p>This feature applies only to managed collections.</p>
 </div>
-<h2 id="Limits" class="common-anchor-header">제한<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,13 +43,13 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>두 가지 TTL 모드는 상호 배타적입니다. 컬렉션에 <code translate="no">collection.ttl.seconds</code> 와 <code translate="no">ttl_field</code> 을 동시에 설정할 수 없습니다. 전환하려면 <a href="/docs/ko/set-collection-ttl.md#Migrate-between-the-two-modes">두 모드 간 마이그레이션을</a> 참조하세요.</p></li>
-<li><p>컬렉션 수준 TTL은 전체 컬렉션에 하나의 창을 적용합니다. 단일 행에 다른 수명이 필요한 경우 엔티티 수준 TTL을 사용합니다.</p></li>
-<li><p>엔티티 수준 TTL의 필드는 <code translate="no">TIMESTAMPTZ</code> 여야 합니다. 다른 유형은 거부됩니다.</p></li>
-<li><p>컬렉션당 하나의 TTL 필드. 스키마에는 여러 개의 <code translate="no">TIMESTAMPTZ</code> 필드가 포함될 수 있지만 <code translate="no">ttl_field</code> 으로 하나만 명명할 수 있습니다.</p></li>
-<li><p><code translate="no">ttl_field</code> 을 삭제해도 만료된 엔터티는 다시 표시되지 않습니다. 만료된 엔티티를 복원하려면 <code translate="no">NULL</code> 또는 향후 만료 타임스탬프를 사용하여 다시 삽입하세요.</p></li>
+<li><p>The two TTL modes are mutually exclusive. A collection cannot have both <code translate="no">collection.ttl.seconds</code> and <code translate="no">ttl_field</code> set at the same time. To switch, see <a href="/docs/ko/set-collection-ttl.md#Migrate-between-the-two-modes">Migrate between the two modes</a>.</p></li>
+<li><p>Collection-level TTL applies one window to the whole collection. If a single row needs a different lifetime, use entity-level TTL.</p></li>
+<li><p>The field for entity-level TTL must be <code translate="no">TIMESTAMPTZ</code>. Other types are rejected.</p></li>
+<li><p>One TTL field per collection. The schema may contain multiple <code translate="no">TIMESTAMPTZ</code> fields, but only one can be named in <code translate="no">ttl_field</code>.</p></li>
+<li><p>Dropping <code translate="no">ttl_field</code> does not resurface expired entities. To restore an expired entity, upsert it with a <code translate="no">NULL</code> or future expiration timestamp.</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,8 +65,8 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
         ></path>
       </svg>
     </button></h2><p><details></p>
-<p><summary>확장</summary></p>
-<h3 id="When-to-use-TTL" class="common-anchor-header">TTL을 사용하는 경우<button data-href="#When-to-use-TTL" class="anchor-icon" translate="no">
+<p><summary>Expand</summary></p>
+<h3 id="When-to-use-TTL" class="common-anchor-header">When to use TTL<button data-href="#When-to-use-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,22 +81,22 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>TTL은 특정 엔터티가 결국 사라져야 한다는 것을 미리 알고 있고, 사용자가 크론 작업을 작성하지 않고도 클러스터가 이를 적용하도록 하려는 경우에 적합한 도구입니다.</p>
-<p>일반적인 시나리오:</p>
+    </button></h3><p>TTL is the right tool when retention is a <strong>policy</strong> — you know ahead of time that certain entities should eventually go away, and you want the cluster to enforce it without you writing a cron job.</p>
+<p>Typical scenarios:</p>
 <ul>
-<li><p><strong>시간 창 데이터 세트.</strong> 지난 N일 동안의 로그, 메트릭, 이벤트 또는 수명이 짧은 기능 캐시만 유지합니다.</p></li>
-<li><p><strong>멀티테넌트 컬렉션.</strong> 테넌트마다 동일한 컬렉션에 대해 서로 다른 보존 기간을 갖습니다.</p></li>
-<li><p><strong>기록별 보존 정책.</strong> IoT 파이프라인, 문서 저장소 또는 MLOps 기능 저장소의 문서별 수명.</p></li>
-<li><p><strong>핫/콜드 데이터 혼합.</strong> 수명이 짧은 엔티티와 수명이 긴 엔티티가 동일한 컬렉션에 공존합니다.</p></li>
-<li><p><strong>규정 준수에 따른 만료.</strong> 각 레코드에 고유한 '삭제 기한'이 있는 GDPR 스타일의 데이터 최소화.</p></li>
-<li><p><strong>업무 시간 만료.</strong> 엔티티는 어떤 절대적인 순간(캠페인 종료, 세션 만료)까지만 유효한 레코드를 나타냅니다.</p></li>
+<li><p><strong>Time-windowed datasets.</strong> Keep only the last N days of logs, metrics, events, or short-lived feature caches.</p></li>
+<li><p><strong>Multi-tenant collections.</strong> Different tenants have different retention windows in the same collection.</p></li>
+<li><p><strong>Per-record retention policies.</strong> Per-document lifetime in IoT pipelines, document stores, or MLOps feature stores.</p></li>
+<li><p><strong>Hot / cold data mix.</strong> Short-lived entities coexist with long-term ones in the same collection.</p></li>
+<li><p><strong>Compliance-driven expiration.</strong> GDPR-style data minimization where each record carries its own “delete by” date.</p></li>
+<li><p><strong>Business-time expiration.</strong> An entity represents a record that is only valid until some absolute moment (a campaign ending, a session expiring).</p></li>
 </ul>
 <div class="alert note">
-<p>만료된 엔티티는 검색 또는 쿼리 결과에 표시되지 않습니다. 그러나 다음 24시간 이내에 수행되어야 하는 후속 데이터 압축이 수행될 때까지 저장소에 남아있을 수 있습니다.</p>
-<p>Milvus 구성 파일에서 <code translate="no">dataCoord.compaction.expiry.tolerance</code> 구성 항목을 설정하여 데이터 압축을 트리거할 시기를 제어할 수 있습니다.</p>
-<p>이 구성 항목의 기본값은 <code translate="no">-1</code> 으로, 기존 데이터 압축 간격이 적용됨을 나타냅니다. 그러나 <code translate="no">12</code> 과 같이 값을 양의 정수로 변경하면 엔티티가 만료된 후 지정된 시간만큼 데이터 압축이 트리거됩니다.</p>
+<p>Expired entities will not appear in any search or query results. However, they may stay in the storage until the subsequent data compaction, which should be carried out within the next 24 hours.</p>
+<p>You can control when to trigger the data compaction by setting the <code translate="no">dataCoord.compaction.expiry.tolerance</code> configuration item in your Milvus configuration file.</p>
+<p>This configuration item defaults to <code translate="no">-1</code>, indicating that the existing data compaction interval applies. However, when you change its value to a positive integer, like <code translate="no">12</code>, data compaction will be triggered the specified number of hours after any entities become expired.</p>
 </div>
-<h3 id="TTL-modes" class="common-anchor-header">TTL 모드<button data-href="#TTL-modes" class="anchor-icon" translate="no">
+<h3 id="TTL-modes" class="common-anchor-header">TTL modes<button data-href="#TTL-modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,49 +111,49 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>두 모드는 서로 다른 보존 질문에 답합니다:</p>
+    </button></h3><p>The two modes answer different retention questions:</p>
 <ul>
-<li><p><strong>컬렉션 수준 TTL은</strong> 모든 엔티티에 단일 보존 기간을 적용합니다. 각 엔티티는 <code translate="no">insert_ts + ttl_seconds</code> 에서 만료됩니다.</p></li>
-<li><p><strong>엔티티 수준 TTL에서는</strong> 모든 엔티티가 <code translate="no">TIMESTAMPTZ</code> 필드에 고유한 절대 만료 시간을 저장할 수 있습니다. 해당 필드에 <code translate="no">NULL</code> 가 있으면 엔티티가 만료되지 않는다는 뜻입니다.</p></li>
+<li><p><strong>Collection-level TTL</strong> applies a single retention duration to every entity. Each entity expires at <code translate="no">insert_ts + ttl_seconds</code>.</p></li>
+<li><p><strong>Entity-level TTL</strong> lets every entity store its own absolute expiration time in a <code translate="no">TIMESTAMPTZ</code> field. A <code translate="no">NULL</code> in that field means the entity never expires.</p></li>
 </ul>
-<p>컬렉션은 한 번에 <strong>한 가지</strong> 모드만 사용하며 두 모드는 상호 배타적입니다. 두 모드 사이를 전환하려면 여러 단계의 작업이 필요하므로 두 모드 사이 마이그레이션을 참조하세요.</p>
-<p>이 표를 사용하여 모드를 선택하세요:</p>
+<p>A collection uses <strong>one</strong> mode at a time — the two are mutually exclusive. Switching between them is a multi-step operation; see Migrate between the two modes.</p>
+<p>Use this table to pick a mode:</p>
 <table>
    <tr>
-     <th><p><strong>다음과 같은 상황이라면...</strong></p></th>
-     <th><p><strong>사용</strong></p></th>
+     <th><p><strong>If your situation is…</strong></p></th>
+     <th><p><strong>Use</strong></p></th>
    </tr>
    <tr>
-     <td><p>컬렉션의 모든 엔티티는 동일한 보존 기간을 따라야 합니다.</p></td>
-     <td><p>컬렉션 수준 TTL</p></td>
+     <td><p>Every entity in the collection should follow the same retention window</p></td>
+     <td><p>Collection-level TTL</p></td>
    </tr>
    <tr>
-     <td><p>보존은 "삽입한 순간부터 N초 동안 유지"입니다.</p></td>
-     <td><p>컬렉션 수준 TTL</p></td>
+     <td><p>Retention is "from the moment of insert, keep N seconds"</p></td>
+     <td><p>Collection-level TTL</p></td>
    </tr>
    <tr>
-     <td><p>동일한 컬렉션에서 엔티티마다 다른 수명이 필요합니다(테넌트별, 핫/콜드, 문서별).</p></td>
-     <td><p>엔티티 수준 TTL</p></td>
+     <td><p>Different entities need different lifetimes in the same collection (per-tenant, hot/cold, per-document)</p></td>
+     <td><p>Entity-level TTL</p></td>
    </tr>
    <tr>
-     <td><p>보존은 절대 벽시계 시간입니다(예: 2027-01-01T00:00:00Z).</p></td>
-     <td><p>엔티티 수준 TTL</p></td>
+     <td><p>Retention is an absolute wall-clock time (for example, 2027-01-01T00:00:00Z)</p></td>
+     <td><p>Entity-level TTL</p></td>
    </tr>
    <tr>
-     <td><p>보존은 삽입 타임스탬프가 아닌 비즈니스 타임스탬프에 의해 결정됩니다.</p></td>
-     <td><p>엔티티 수준 TTL</p></td>
+     <td><p>Retention is driven by a business timestamp, not the insert timestamp</p></td>
+     <td><p>Entity-level TTL</p></td>
    </tr>
    <tr>
-     <td><p>삽입 후 엔티티의 수명을 새로 고치거나 연장하려는 경우</p></td>
-     <td><p>엔티티 수준 TTL</p></td>
+     <td><p>You want to refresh or extend an entity's lifetime after insert</p></td>
+     <td><p>Entity-level TTL</p></td>
    </tr>
    <tr>
-     <td><p>일부 엔티티는 만료되지 않아야 하지만 다른 엔티티는 만료되어야 합니다.</p></td>
-     <td><p>엔티티 수준 TTL(불멸의 엔티티에는 NULL 사용)</p></td>
+     <td><p>Some entities should never expire while others should</p></td>
+     <td><p>Entity-level TTL (use NULL for the immortal ones)</p></td>
    </tr>
 </table>
 <p></details></p>
-<h2 id="Set-collection-level-TTL" class="common-anchor-header">컬렉션 수준 TTL 설정<button data-href="#Set-collection-level-TTL" class="anchor-icon" translate="no">
+<h2 id="Set-collection-level-TTL" class="common-anchor-header">Set collection-level TTL<button data-href="#Set-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,8 +168,8 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션의 모든 엔티티가 동일한 보존 기간을 따라야 하는 경우 컬렉션 수준 TTL을 사용합니다.</p>
-<h3 id="Enable-on-a-new-collection" class="common-anchor-header">새 컬렉션에서 사용 설정<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
+    </button></h2><p>Use collection-level TTL when every entity in the collection should follow the same retention window.</p>
+<h3 id="Enable-on-a-new-collection" class="common-anchor-header">Enable on a new collection<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,12 +184,20 @@ summary: Milvus에서 오래된 데이터를 자동으로 만료하도록 컬렉
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>생성 시 <code translate="no">properties</code> 맵에 <code translate="no">collection.ttl.seconds</code> (정수, 초 단위)를 전달합니다.</p>
+    </button></h3><p>Pass <code translate="no">collection.ttl.seconds</code> (integer, in seconds) through the <code translate="no">properties</code> map at creation time.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 schema = client.create_schema(auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">False</span>)
@@ -222,6 +230,7 @@ client.create_collection(
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder().build();
@@ -244,9 +253,92 @@ schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;
 <span class="highlighted-comment-line">        .properties(properties)</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/common&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+        WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithIsAutoID(<span class="hljs-literal">false</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+        WithField(entity.NewField().WithName(<span class="hljs-string">&quot;vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">128</span>))
+
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, index.NewAutoIndex(entity.COSINE)),
+}
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+    WithIndexOptions(indexOptions...).
+    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">1209600</span>)) <span class="hljs-comment">// TTL in seconds</span>
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">enable_dynamic_field</span>(<span class="hljs-literal">false</span>)
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64).<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">false</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;vector&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector).<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">128</span>));
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">index_params</span> = <span class="hljs-built_in">vec!</span>[
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;vector&quot;</span>).<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex).<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+];
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">schema</span>(schema)
+    .<span class="hljs-title function_ invoke__">index_params</span>(index_params)
+    .<span class="hljs-title function_ invoke__">properties</span>(std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;1209600&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">128</span>));
+
+std::vector&lt;milvus::IndexDesc&gt; indexes = {
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)};
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(indexes))
+                                      .<span class="hljs-built_in">AddProperty</span>(milvus::COLLECTION_TTL_SECONDS, <span class="hljs-string">&quot;1209600&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -262,15 +354,64 @@ schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;
 <span class="highlighted-comment-line">  },</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
-    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">1209600</span>)) <span class="hljs-comment">//  TTL in seconds</span>
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+
+CollectionSchema schema = <span class="hljs-keyword">new</span>()
+{
+    EnableDynamicFields = <span class="hljs-literal">false</span>,
+    Fields =
+    {
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>),
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FloatVector) { Dimension = <span class="hljs-number">128</span> }
+    }
+};
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    Indexes = [<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-literal">null</span>, IndexType.AutoIndex, MetricType.Cosine)],
+    Properties = { [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>] = <span class="hljs-string">&quot;1209600&quot;</span> } <span class="hljs-comment">// 14 days</span>
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
-    &quot;ttlSeconds&quot;: 1209600
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+        &quot;autoId&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;128&quot;
+                }
+            }
+        ]
+    }&#x27;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]&#x27;</span>
+
+<span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;ttlSeconds&quot;: &quot;1209600&quot;
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -284,10 +425,11 @@ curl --request POST \
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>,
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-on-an-existing-collection" class="common-anchor-header">기존 컬렉션에서 사용 설정<button data-href="#Enable-on-an-existing-collection" class="anchor-icon" translate="no">
+<h3 id="Enable-on-an-existing-collection" class="common-anchor-header">Enable on an existing collection<button data-href="#Enable-on-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -302,12 +444,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">properties</code> 맵에서 <code translate="no">collection.ttl.seconds</code> 으로 <code translate="no">alter_collection_properties</code> 을 호출하여 이미 사용 중인 컬렉션에 TTL을 적용합니다.</p>
+    </button></h3><p>Call <code translate="no">alter_collection_properties</code> with <code translate="no">collection.ttl.seconds</code> in the <code translate="no">properties</code> map to apply TTL to a collection that is already in use.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="hljs-comment"># Assumes &quot;my_collection&quot; was created earlier without TTL</span>
 schema = client.create_schema(auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
@@ -331,18 +481,40 @@ index_params.add_index(
 <span class="highlighted-comment-line">    properties={<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span>},</span>
 <span class="highlighted-comment-line">)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.HashMap;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
 <span class="hljs-keyword">import</span> java.util.Map;
 
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionPropertiesReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.HasCollectionReq;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier without TTL.</span>
+<span class="hljs-keyword">if</span> (!client.hasCollection(HasCollectionReq.builder().collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>).build())) {
+    CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder().build();
+    schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;id&quot;</span>).dataType(DataType.Int64)
+            .isPrimaryKey(<span class="hljs-literal">true</span>).autoID(<span class="hljs-literal">false</span>).build());
+    schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;vector&quot;</span>).dataType(DataType.FloatVector)
+            .dimension(<span class="hljs-number">128</span>).build());
+    <span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParam</span> <span class="hljs-operator">=</span> IndexParam.builder().fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+            .indexType(IndexParam.IndexType.AUTOINDEX)
+            .metricType(IndexParam.MetricType.COSINE).build();
+    client.createCollection(CreateCollectionReq.builder()
+            .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .collectionSchema(schema)
+            .indexParams(Collections.singletonList(indexParam))
+            .build());
+}
 
 <span class="highlighted-comment-line">Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();</span>
 <span class="highlighted-comment-line">properties.put(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>, <span class="hljs-string">&quot;1209600&quot;</span>);</span>
@@ -352,24 +524,215 @@ index_params.add_index(
 <span class="highlighted-comment-line">        .properties(properties)</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/common&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
 <span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier without TTL.</span>
-<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({</span>
-<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
-<span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: { <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span> },</span>
-<span class="highlighted-comment-line">});</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">60</span>))
+exists, err := client.HasCollection(ctx, milvusclient.NewHasCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">if</span> !exists {
+    schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+            WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithIsAutoID(<span class="hljs-literal">false</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+            WithField(entity.NewField().WithName(<span class="hljs-string">&quot;vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">128</span>))
+    indexOptions := []milvusclient.CreateIndexOption{
+        milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, index.NewAutoIndex(entity.COSINE)),
+    }
+    err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+        WithIndexOptions(indexOptions...))
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        fmt.Println(err.Error())
+        <span class="hljs-comment">// handle error</span>
+    }
+}
+
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">1209600</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">has</span> = client.<span class="hljs-title function_ invoke__">has_collection</span>(HasCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<span class="hljs-keyword">if</span> !has.<span class="hljs-title function_ invoke__">exists</span>() {
+    <span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">enable_dynamic_field</span>(<span class="hljs-literal">false</span>)
+        .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64).<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">false</span>))
+        .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;vector&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector).<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">128</span>));
+    <span class="hljs-keyword">let</span> <span class="hljs-variable">index_params</span> = <span class="hljs-built_in">vec!</span>[
+        IndexParam::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;vector&quot;</span>).<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex).<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+    ];
+    client.<span class="hljs-title function_ invoke__">create_collection</span>(CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">index_params</span>(index_params)
+        .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+}
+
+client.<span class="hljs-title function_ invoke__">alter_collection_properties</span>(AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">properties</span>(std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;1209600&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+milvus::HasCollectionResponse has_response;
+status = client-&gt;<span class="hljs-built_in">HasCollection</span>(milvus::<span class="hljs-built_in">HasCollectionRequest</span>()
+                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>),
+                               has_response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">if</span> (!has_response.<span class="hljs-built_in">Has</span>()) {
+    milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+    schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>));
+    schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">128</span>));
+    std::vector&lt;milvus::IndexDesc&gt; indexes = {
+        milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)};
+    status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                          .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                          .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(indexes)));
+    <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+        std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    }
+}
+
+status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                               .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                               .<span class="hljs-built_in">AddProperty</span>(milvus::COLLECTION_TTL_SECONDS, <span class="hljs-string">&quot;1209600&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier without TTL.</span>
+<span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span> })).<span class="hljs-property">value</span>) {
+  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">fields</span>: [
+      { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span> },
+      { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">dim</span>: <span class="hljs-number">128</span> },
+    ],
+    <span class="hljs-attr">index_params</span>: [
+      { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span> },
+    ],
+  });
+}
+
+<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: { <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span> },</span>
+<span class="highlighted-comment-line">});</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier without TTL</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> client.HasCollectionAsync(<span class="hljs-keyword">new</span> HasCollectionReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span> }) <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> { Has: <span class="hljs-literal">true</span> })
+{
+    <span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+    {
+        CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+        Schema = schema,
+        Indexes = [<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-literal">null</span>, IndexType.AutoIndex, MetricType.Cosine)]
+    });
+}
+
+<span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>] = <span class="hljs-string">&quot;1209600&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+        &quot;autoId&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;128&quot;
+                }
+            }
+        ]
+    }&#x27;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]&#x27;</span>
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Assumes &quot;my_collection&quot; was created earlier without TTL.</span>
+<span class="hljs-keyword">if</span> ! curl --silent --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/has&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
+}&quot;</span> | grep -q <span class="hljs-string">&#x27;&quot;has&quot;:true&#x27;</span>; <span class="hljs-keyword">then</span>
+    curl --request POST \
+    --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+    --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+    -d <span class="hljs-string">&quot;{
+        \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+        \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+        \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+    }&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -377,11 +740,11 @@ index_params.add_index(
 -d <span class="hljs-string">&quot;{
     \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
     \&quot;properties\&quot;: {
-        \&quot;collection.ttl.seconds\&quot;: 1209600
+        \&quot;collection.ttl.seconds\&quot;: \&quot;1209600\&quot;
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-the-TTL-setting" class="common-anchor-header">TTL 설정 삭제<button data-href="#Drop-the-TTL-setting" class="anchor-icon" translate="no">
+<h3 id="Drop-the-TTL-setting" class="common-anchor-header">Drop the TTL setting<button data-href="#Drop-the-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -396,12 +759,20 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션의 데이터를 무기한 보관하기로 결정한 경우 해당 컬렉션에서 TTL 설정을 삭제하면 됩니다.</p>
+    </button></h3><p>If you decide to keep the data in a collection indefinitely, you can simply drop the TTL setting from that collection.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="highlighted-comment-line">client.drop_collection_properties(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
@@ -416,6 +787,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="highlighted-comment-line">client.dropCollectionProperties(DropCollectionPropertiesReq.builder()</span>
@@ -423,22 +795,78 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>))</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/common&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, common.CollectionTTLConfigKey))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">drop_collection_properties</span>(DropCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">property_key</span>(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+status = client-&gt;<span class="hljs-built_in">DropCollectionProperties</span>(milvus::<span class="hljs-built_in">DropCollectionPropertiesRequest</span>()
+                                              .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                              .<span class="hljs-built_in">AddPropertyKey</span>(milvus::COLLECTION_TTL_SECONDS));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionProperties</span>({</span>
 <span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
 <span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>],</span>
 <span class="highlighted-comment-line">});</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, common.CollectionTTLConfigKey))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">await</span> client.DropCollectionPropertiesAsync(<span class="hljs-keyword">new</span> DropCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    DeleteKeys = [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -450,7 +878,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-entity-level-TTL--Milvus-30x" class="common-anchor-header">엔티티 수준 TTL 설정<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Set-entity-level-TTL--Milvus-30x" class="anchor-icon" translate="no">
+<h2 id="Set-entity-level-TTL" class="common-anchor-header">Set entity-level TTL<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Set-entity-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -465,8 +893,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>엔티티 수준 TTL을 사용하면 각 엔티티가 고유한 절대 만료 시간을 가질 수 있습니다. 시간은 스키마에 선언한 전용 <code translate="no">TIMESTAMPTZ</code> 열에 저장되며, <code translate="no">ttl_field</code> 컬렉션 속성을 통해 해당 열을 TTL 필드로 표시합니다.</p>
-<h3 id="Enable-on-a-new-collection" class="common-anchor-header">새 컬렉션에서 사용 설정<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
+    </button></h2><p>Entity-level TTL lets each entity carry its own absolute expiration time. The time is stored in a dedicated <code translate="no">TIMESTAMPTZ</code> column that you declare in the schema, and you mark that column as the TTL field through the <code translate="no">ttl_field</code> collection property.</p>
+<h3 id="Enable-on-a-new-collection" class="common-anchor-header">Enable on a new collection<button data-href="#Enable-on-a-new-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -481,12 +909,20 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>생성 시 엔티티 수준 TTL을 사용 설정하려면 스키마의 <code translate="no">TIMESTAMPTZ</code> 필드와 해당 필드를 가리키는 <code translate="no">ttl_field</code> 속성을 동일한 <code translate="no">create_collection</code> 호출에 두 개 추가해야 합니다.</p>
+    </button></h3><p>Enabling entity-level TTL at creation time takes two additions in the same <code translate="no">create_collection</code> call: a <code translate="no">TIMESTAMPTZ</code> field in the schema, and the <code translate="no">ttl_field</code> property pointing to that field.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 schema = client.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
 schema.add_field(<span class="hljs-string">&quot;id&quot;</span>, DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">False</span>)
@@ -517,6 +953,7 @@ client.create_collection(
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder().build();
@@ -541,9 +978,94 @@ client.createCollection(CreateCollectionReq.builder()
         .properties(properties)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+        WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithIsAutoID(<span class="hljs-literal">false</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+        WithField(entity.NewField().WithName(<span class="hljs-string">&quot;expire_at&quot;</span>).WithDataType(entity.FieldTypeTimestamptz).WithNullable(<span class="hljs-literal">true</span>)).
+        WithField(entity.NewField().WithName(<span class="hljs-string">&quot;vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">128</span>))
+
+indexOptions := []milvusclient.CreateIndexOption{
+    milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, index.NewAutoIndex(entity.COSINE)),
+}
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+    WithIndexOptions(indexOptions...).
+    WithProperty(<span class="hljs-string">&quot;ttl_field&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">enable_dynamic_field</span>(<span class="hljs-literal">false</span>)
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64).<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">false</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;expire_at&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Timestamptz).<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;vector&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector).<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">128</span>));
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">index_params</span> = <span class="hljs-built_in">vec!</span>[
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;vector&quot;</span>).<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex).<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+];
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">schema</span>(schema)
+    .<span class="hljs-title function_ invoke__">index_params</span>(index_params)
+    .<span class="hljs-title function_ invoke__">properties</span>(std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;ttl_field&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;expire_at&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;expire_at&quot;</span>, milvus::DataType::TIMESTAMPTZ).<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">128</span>));
+
+std::vector&lt;milvus::IndexDesc&gt; indexes = {
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)};
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(indexes))
+                                      .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -558,17 +1080,102 @@ client.createCollection(CreateCollectionReq.builder()
 <span class="highlighted-wrapper-line">  <span class="hljs-attr">properties</span>: { <span class="hljs-attr">ttl_field</span>: <span class="hljs-string">&quot;expire_at&quot;</span> },</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+
+CollectionSchema schema = <span class="hljs-keyword">new</span>()
+{
+    EnableDynamicFields = <span class="hljs-literal">false</span>,
+    Fields =
+    {
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>),
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;expire_at&quot;</span>, DataType.Timestamptz) { Nullable = <span class="hljs-literal">true</span> },
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;vector&quot;</span>, DataType.FloatVector) { Dimension = <span class="hljs-number">128</span> }
+    }
+};
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    Indexes = [<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-literal">null</span>, IndexType.AutoIndex, MetricType.Cosine)],
+    Properties = { [<span class="hljs-string">&quot;ttl_field&quot;</span>] = <span class="hljs-string">&quot;expire_at&quot;</span> }
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+        &quot;autoId&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;expire_at&quot;,
+                &quot;dataType&quot;: &quot;Timestamptz&quot;,
+                &quot;nullable&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: &quot;128&quot;
+                }
+            }
+        ]
+    }&#x27;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+        {
+            &quot;fieldName&quot;: &quot;vector&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexName&quot;: &quot;vector&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]&#x27;</span>
+
+<span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
+    &quot;ttlField&quot;: &quot;expire_at&quot;
+}&#x27;</span>
+
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>,
+    \&quot;params\&quot;: <span class="hljs-variable">$params</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>컬렉션이 존재하면 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 타임스탬프 문자열로 엔티티를 삽입합니다.</p>
+<p>Once the collection exists, insert entities with <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> timestamp strings.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="hljs-comment"># Assumes &quot;my_collection&quot; was created earlier with `ttl_field`: &quot;expire_at&quot;</span>
 <span class="highlighted-comment-line">rows = [</span>
@@ -599,6 +1206,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier with `ttl_field`: &quot;expire_at&quot;.</span>
@@ -636,9 +1244,105 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
 <span class="highlighted-comment-line">        .data(rows)</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;math/rand&quot;</span>
+    <span class="hljs-string">&quot;time&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier with `ttl_field`: &quot;expire_at&quot;.</span>
+vector1 := <span class="hljs-built_in">make</span>([]<span class="hljs-type">float32</span>, <span class="hljs-number">128</span>)
+vector2 := <span class="hljs-built_in">make</span>([]<span class="hljs-type">float32</span>, <span class="hljs-number">128</span>)
+vector3 := <span class="hljs-built_in">make</span>([]<span class="hljs-type">float32</span>, <span class="hljs-number">128</span>)
+<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> vector1 {
+    vector1[i] = rand.Float32()
+    vector2[i] = rand.Float32()
+    vector3[i] = rand.Float32()
+}
+
+expireAt, err := column.NewNullableColumnTimestamptz(<span class="hljs-string">&quot;expire_at&quot;</span>,
+    []time.Time{
+        {},
+        time.Date(<span class="hljs-number">2026</span>, <span class="hljs-number">12</span>, <span class="hljs-number">31</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, time.UTC),
+        time.Date(<span class="hljs-number">2027</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, time.FixedZone(<span class="hljs-string">&quot;CST&quot;</span>, <span class="hljs-number">8</span>*<span class="hljs-number">3600</span>)),
+    },
+    []<span class="hljs-type">bool</span>{<span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>,
+    column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}),
+    expireAt,
+    column.NewColumnFloatVector(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-number">128</span>, [][]<span class="hljs-type">float32</span>{vector1, vector2, vector3}),
+))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">vector</span>: <span class="hljs-type">Vec</span>&lt;<span class="hljs-type">f32</span>&gt; = (<span class="hljs-number">0</span>..<span class="hljs-number">128</span>).<span class="hljs-title function_ invoke__">map</span>(|_| rand::random::&lt;<span class="hljs-type">f32</span>&gt;()).<span class="hljs-title function_ invoke__">collect</span>();
+client.<span class="hljs-title function_ invoke__">insert</span>(InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[
+        serde_json::json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;expire_at&quot;</span>: serde_json::Value::Null, <span class="hljs-string">&quot;vector&quot;</span>: vector.<span class="hljs-title function_ invoke__">clone</span>()}),
+        serde_json::json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;expire_at&quot;</span>: <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>: vector.<span class="hljs-title function_ invoke__">clone</span>()}),
+        serde_json::json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&quot;expire_at&quot;</span>: <span class="hljs-string">&quot;2027-01-01T00:00:00+08:00&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>: vector.<span class="hljs-title function_ invoke__">clone</span>()}),
+    ])
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+<span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">vector</span><span class="hljs-params">(<span class="hljs-number">128</span>)</span></span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; v : vector) {
+    v = <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">float</span>&gt;(<span class="hljs-built_in">rand</span>()) / RAND_MAX;
+}
+milvus::EntityRows rows;
+rows.<span class="hljs-built_in">push_back</span>({{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>}, {<span class="hljs-string">&quot;expire_at&quot;</span>, <span class="hljs-literal">nullptr</span>}, {<span class="hljs-string">&quot;vector&quot;</span>, vector}});
+rows.<span class="hljs-built_in">push_back</span>({{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>}, {<span class="hljs-string">&quot;expire_at&quot;</span>, <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>}, {<span class="hljs-string">&quot;vector&quot;</span>, vector}});
+rows.<span class="hljs-built_in">push_back</span>({{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>}, {<span class="hljs-string">&quot;expire_at&quot;</span>, <span class="hljs-string">&quot;2027-01-01T00:00:00+08:00&quot;</span>}, {<span class="hljs-string">&quot;vector&quot;</span>, vector}});
+
+milvus::InsertResponse response;
+status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(rows)),
+                        response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="hljs-keyword">const</span> vector = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">length</span>: <span class="hljs-number">128</span> }, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>());
 
@@ -655,16 +1359,48 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
 <span class="highlighted-comment-line">  ],</span>
 <span class="highlighted-comment-line">});</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+
+<span class="hljs-keyword">var</span> vector = Enumerable.Repeat(<span class="hljs-number">0.1f</span>, <span class="hljs-number">128</span>).ToArray();
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; was created earlier with `ttl_field`: &quot;expire_at&quot;</span>
+<span class="hljs-keyword">await</span> client.InsertAsync(<span class="hljs-keyword">new</span> InsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">1L</span>, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-literal">null</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector }, <span class="hljs-comment">// Never expires</span>
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">2L</span>, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector }, <span class="hljs-comment">// Expires at 2026-12-31 UTC midnight</span>
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">3L</span>, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2027-01-01T00:00:00+08:00&quot;</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector } <span class="hljs-comment">// Shanghai local time — normalized to UTC internally</span>
+    ]
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;data\&quot;: [
+        {\&quot;id\&quot;: 1, \&quot;expire_at\&quot;: null, \&quot;vector\&quot;: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]},
+        {\&quot;id\&quot;: 2, \&quot;expire_at\&quot;: \&quot;2026-12-31T00:00:00Z\&quot;, \&quot;vector\&quot;: [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]},
+        {\&quot;id\&quot;: 3, \&quot;expire_at\&quot;: \&quot;2027-01-01T00:00:00+08:00\&quot;, \&quot;vector\&quot;: [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]}
+    ]
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>모든 쿼리 및 벡터 검색에서 서버가 TTL 필터를 자동으로 삽입하므로 사용자가 직접 작성하지 않아도 되며 만료된 엔티티는 결과에 표시되지 않습니다:</p>
+<p>On every query and vector search, the server auto-injects the TTL filter — you never write one yourself, and expired entities never appear in the results:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
@@ -687,6 +1423,7 @@ client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 client.loadCollection(LoadCollectionReq.builder()
@@ -702,9 +1439,90 @@ client.loadCollection(LoadCollectionReq.builder()
 <span class="highlighted-comment-line">        .build());</span>
 <span class="highlighted-comment-line">System.out.println(results.getQueryResults());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-comment">// Expired rows are filtered out automatically</span>
+resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;id &gt;= 0&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>).
+    WithLimit(<span class="hljs-number">10</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">load_collection</span>(LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">results</span> = client.<span class="hljs-title function_ invoke__">query</span>(QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">&quot;id &gt;= 0&quot;</span>)
+    .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>])
+    .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, results);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+status = client-&gt;<span class="hljs-built_in">LoadCollection</span>(milvus::<span class="hljs-built_in">LoadCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(milvus::<span class="hljs-built_in">QueryRequest</span>()
+                           .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                           .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;id &gt;= 0&quot;</span>)
+                           .<span class="hljs-built_in">WithOutputFields</span>({<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>})
+                           .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>),
+                       response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+milvus::EntityRows rows;
+response.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">OutputRows</span>(rows);
+std::cout &lt;&lt; rows.<span class="hljs-built_in">size</span>() &lt;&lt; <span class="hljs-string">&quot; rows&quot;</span> &lt;&lt; std::endl;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span> });
 
@@ -717,18 +1535,64 @@ client.loadCollection(LoadCollectionReq.builder()
 <span class="highlighted-comment-line">});</span>
 <span class="highlighted-comment-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(results.<span class="hljs-property">data</span>);</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">await</span> client.LoadCollectionAsync(<span class="hljs-keyword">new</span> LoadCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+
+<span class="hljs-comment">// Expired rows are filtered out automatically</span>
+QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Expression = <span class="hljs-string">&quot;id &gt;= 0&quot;</span>,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters { OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span> }, Limit = <span class="hljs-number">10</span> }
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;
+}&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;filter\&quot;: \&quot;id &gt;= 0\&quot;,
+    \&quot;outputFields\&quot;: [\&quot;id\&quot;, \&quot;expire_at\&quot;],
+    \&quot;limit\&quot;: 10
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">client.search()</code> 에도 동일한 자동 필터가 적용됩니다.</p>
-<p>압축으로 인해 물리적으로 제거되기 전에 엔티티의 수명을 연장하려면 나중에 만료 타임스탬프(또는 <code translate="no">None</code> )를 삽입하여 엔티티를 쿼리 가능한 집합으로 반환합니다.</p>
+<p>The same auto-filter applies to <code translate="no">client.search()</code>.</p>
+<p>To extend an entity’s lifetime before compaction physically removes it, upsert with a later expiration timestamp — or <code translate="no">None</code> — to return the entity to the queryable set.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="highlighted-comment-line">client.upsert(<span class="hljs-string">&quot;my_collection&quot;</span>, [</span>
 <span class="highlighted-comment-line">    {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>,</span>
@@ -750,6 +1614,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
@@ -767,9 +1632,85 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
 <span class="highlighted-comment-line">        .data(Collections.singletonList(row))</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;math/rand&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+vector := <span class="hljs-built_in">make</span>([]<span class="hljs-type">float32</span>, <span class="hljs-number">128</span>)
+<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> vector {
+    vector[i] = rand.Float32()
+}
+
+_, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>,
+    column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">2</span>}),
+    column.NewColumnFloatVector(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-number">128</span>, [][]<span class="hljs-type">float32</span>{vector}),
+    column.NewColumnTimestamptzIsoString(<span class="hljs-string">&quot;expire_at&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;2028-01-01T00:00:00Z&quot;</span>}),
+))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">vector</span>: <span class="hljs-type">Vec</span>&lt;<span class="hljs-type">f32</span>&gt; = (<span class="hljs-number">0</span>..<span class="hljs-number">128</span>).<span class="hljs-title function_ invoke__">map</span>(|_| rand::random::&lt;<span class="hljs-type">f32</span>&gt;()).<span class="hljs-title function_ invoke__">collect</span>();
+client.<span class="hljs-title function_ invoke__">upsert</span>(UpsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">insert</span>(InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[
+            serde_json::json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: vector, <span class="hljs-string">&quot;expire_at&quot;</span>: <span class="hljs-string">&quot;2028-01-01T00:00:00Z&quot;</span>}),
+        ])
+        .<span class="hljs-title function_ invoke__">build</span>()?)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+<span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">vector</span><span class="hljs-params">(<span class="hljs-number">128</span>)</span></span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; v : vector) {
+    v = <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">float</span>&gt;(<span class="hljs-built_in">rand</span>()) / RAND_MAX;
+}
+milvus::EntityRows rows;
+rows.<span class="hljs-built_in">push_back</span>({{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>}, {<span class="hljs-string">&quot;vector&quot;</span>, vector}, {<span class="hljs-string">&quot;expire_at&quot;</span>, <span class="hljs-string">&quot;2028-01-01T00:00:00Z&quot;</span>}});
+
+milvus::UpsertResponse response;
+status = client-&gt;<span class="hljs-built_in">Upsert</span>(milvus::<span class="hljs-built_in">UpsertRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(rows)),
+                        response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="hljs-keyword">const</span> vector = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">length</span>: <span class="hljs-number">128</span> }, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>());
 
@@ -780,11 +1721,28 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
 <span class="highlighted-comment-line">  ],</span>
 <span class="highlighted-comment-line">});</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+
+<span class="hljs-keyword">await</span> client.UpsertAsync(<span class="hljs-keyword">new</span> UpsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">2L</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2028-01-01T00:00:00Z&quot;</span> }
+    ]
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;data\&quot;: [
+        {\&quot;id\&quot;: 2, \&quot;vector\&quot;: [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8], \&quot;expire_at\&quot;: \&quot;2028-01-01T00:00:00Z\&quot;}
+    ]
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-on-an-existing-collection" class="common-anchor-header">기존 컬렉션에서 사용 설정<button data-href="#Enable-on-an-existing-collection" class="anchor-icon" translate="no">
+<h3 id="Enable-on-an-existing-collection" class="common-anchor-header">Enable on an existing collection<button data-href="#Enable-on-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -799,13 +1757,21 @@ List&lt;Float&gt; vector = <span class="hljs-keyword">new</span> <span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션이 이미 존재하고 <code translate="no">collection.ttl.seconds</code> 가 설정되어 있지 않은 경우 <code translate="no">add_collection_field</code> 를 사용하여 <code translate="no">TIMESTAMPTZ</code> 열을 추가한 다음 <code translate="no">alter_collection_properties</code> 를 사용하여 TTL 필드로 표시합니다. 선택적으로 기록 행을 업서트하여 만료 타임스탬프를 다시 채울 수 있습니다. 다시 채우지 않는 행은 <code translate="no">NULL</code> 을 유지하며 만료되지 않습니다.</p>
+    </button></h3><p>If the collection already exists and does not have <code translate="no">collection.ttl.seconds</code> set, add a <code translate="no">TIMESTAMPTZ</code> column with <code translate="no">add_collection_field</code>, then mark it as the TTL field with <code translate="no">alter_collection_properties</code>. Optionally upsert historical rows to backfill their expiration timestamps — rows you do not backfill keep <code translate="no">NULL</code> and never expire.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="highlighted-comment-line"><span class="hljs-comment"># Step 1 — add a TIMESTAMPTZ column to the schema</span></span>
 <span class="highlighted-comment-line">client.add_collection_field(</span>
@@ -847,6 +1813,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="highlighted-comment-line"><span class="hljs-comment">// Step 1 — add a TIMESTAMPTZ column to the schema</span></span>
@@ -881,9 +1848,131 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">        .data(Collections.singletonList(row))</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;math/rand&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+<span class="hljs-comment">// Step 1 — add a TIMESTAMPTZ column to the schema</span>
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;my_collection&quot;</span>,
+    entity.NewField().WithName(<span class="hljs-string">&quot;expire_at&quot;</span>).WithDataType(entity.FieldTypeTimestamptz).WithNullable(<span class="hljs-literal">true</span>)))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-comment">// Step 2 — mark the new column as the TTL field</span>
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithProperty(<span class="hljs-string">&quot;ttl_field&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-comment">// Step 3 (optional) — backfill expiration timestamps for historical rows</span>
+vector := <span class="hljs-built_in">make</span>([]<span class="hljs-type">float32</span>, <span class="hljs-number">128</span>)
+<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> vector {
+    vector[i] = rand.Float32()
+}
+_, err = client.Upsert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>,
+    column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>}),
+    column.NewColumnFloatVector(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-number">128</span>, [][]<span class="hljs-type">float32</span>{vector}),
+    column.NewColumnTimestamptzIsoString(<span class="hljs-string">&quot;expire_at&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>}),
+))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Step 1 — add a TIMESTAMPTZ column to the schema</span>
+client.<span class="hljs-title function_ invoke__">add_collection_field</span>(AddCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;expire_at&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Timestamptz).<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Step 2 — mark the new column as the TTL field</span>
+client.<span class="hljs-title function_ invoke__">alter_collection_properties</span>(AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">properties</span>(std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;ttl_field&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;expire_at&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Step 3 (optional) — backfill expiration timestamps for historical rows</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">vector</span>: <span class="hljs-type">Vec</span>&lt;<span class="hljs-type">f32</span>&gt; = (<span class="hljs-number">0</span>..<span class="hljs-number">128</span>).<span class="hljs-title function_ invoke__">map</span>(|_| rand::random::&lt;<span class="hljs-type">f32</span>&gt;()).<span class="hljs-title function_ invoke__">collect</span>();
+client.<span class="hljs-title function_ invoke__">upsert</span>(UpsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">insert</span>(InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[
+            serde_json::json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: vector, <span class="hljs-string">&quot;expire_at&quot;</span>: <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>}),
+        ])
+        .<span class="hljs-title function_ invoke__">build</span>()?)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+<span class="hljs-comment">// Step 1 — add a TIMESTAMPTZ column to the schema</span>
+status = client-&gt;<span class="hljs-built_in">AddCollectionField</span>(milvus::<span class="hljs-built_in">AddCollectionFieldRequest</span>()
+                                        .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                        .<span class="hljs-built_in">WithField</span>(std::<span class="hljs-built_in">move</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;expire_at&quot;</span>, milvus::DataType::TIMESTAMPTZ).<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>))));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Step 2 — mark the new column as the TTL field</span>
+status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                               .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                               .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Step 3 (optional) — backfill expiration timestamps for historical rows</span>
+<span class="hljs-function">std::vector&lt;<span class="hljs-type">float</span>&gt; <span class="hljs-title">vector</span><span class="hljs-params">(<span class="hljs-number">128</span>)</span></span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; v : vector) {
+    v = <span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">float</span>&gt;(<span class="hljs-built_in">rand</span>()) / RAND_MAX;
+}
+milvus::EntityRows rows;
+rows.<span class="hljs-built_in">push_back</span>({{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>}, {<span class="hljs-string">&quot;vector&quot;</span>, vector}, {<span class="hljs-string">&quot;expire_at&quot;</span>, <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>}});
+milvus::UpsertResponse response;
+status = client-&gt;<span class="hljs-built_in">Upsert</span>(milvus::<span class="hljs-built_in">UpsertRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(rows)),
+                        response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="hljs-keyword">const</span> vector = <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>({ <span class="hljs-attr">length</span>: <span class="hljs-number">128</span> }, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>());
 
@@ -907,11 +1996,62 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">  ],</span>
 <span class="highlighted-comment-line">});</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Step 1 — add a TIMESTAMPTZ column to the schema</span>
+<span class="hljs-keyword">await</span> client.AddCollectionFieldAsync(<span class="hljs-keyword">new</span> AddCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Field = <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;expire_at&quot;</span>, DataType.Timestamptz) { Nullable = <span class="hljs-literal">true</span> }
+});
+
+<span class="hljs-comment">// Step 2 — mark the new column as the TTL field</span>
+<span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;ttl_field&quot;</span>] = <span class="hljs-string">&quot;expire_at&quot;</span> }
+});
+<span class="hljs-comment">// Step 3 (optional) — backfill expiration timestamps for historical rows</span>
+<span class="hljs-keyword">var</span> vector = Enumerable.Repeat(<span class="hljs-number">0.1f</span>, <span class="hljs-number">128</span>).ToArray();
+<span class="hljs-keyword">await</span> client.UpsertAsync(<span class="hljs-keyword">new</span> UpsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">1L</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span> }
+    ]
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Step 1 — add a TIMESTAMPTZ column to the schema</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/add&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;schema\&quot;: {
+        \&quot;fieldName\&quot;: \&quot;expire_at\&quot;,
+        \&quot;dataType\&quot;: \&quot;Timestamptz\&quot;,
+        \&quot;nullable\&quot;: true
+    }
+}&quot;</span>
+
+<span class="hljs-comment"># Step 2 — mark the new column as the TTL field</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;properties\&quot;: {
+        \&quot;ttl_field\&quot;: \&quot;expire_at\&quot;
+    }
+}&quot;</span>
+<span class="hljs-comment"># Step 3 (optional) — backfill expiration timestamps for historical rows</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/upsert&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;data\&quot;: [
+        {\&quot;id\&quot;: 1, \&quot;vector\&quot;: [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9], \&quot;expire_at\&quot;: \&quot;2026-12-31T00:00:00Z\&quot;}
+    ]
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-the-TTL-setting" class="common-anchor-header">TTL 설정 삭제<button data-href="#Drop-the-TTL-setting" class="anchor-icon" translate="no">
+<h3 id="Drop-the-TTL-setting" class="common-anchor-header">Drop the TTL setting<button data-href="#Drop-the-TTL-setting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -926,12 +2066,20 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">property_keys</code> 에서 <code translate="no">ttl_field</code> 을 사용하여 <code translate="no">drop_collection_properties</code> 으로 호출하여 엔티티별 만료를 중지합니다. <code translate="no">TIMESTAMPTZ</code> 열 자체는 스키마에 그대로 유지되므로 일반 필드로 계속 쿼리할 수 있습니다.</p>
+    </button></h3><p>Call <code translate="no">drop_collection_properties</code> with <code translate="no">ttl_field</code> in <code translate="no">property_keys</code> to stop per-entity expiration. The <code translate="no">TIMESTAMPTZ</code> column itself remains on the schema — you can still query on it as a regular field.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="highlighted-comment-line">client.drop_collection_properties(</span>
 <span class="highlighted-comment-line">    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,</span>
@@ -946,6 +2094,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="highlighted-comment-line">client.dropCollectionProperties(DropCollectionPropertiesReq.builder()</span>
@@ -953,21 +2102,90 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">        .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;ttl_field&quot;</span>))</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>);
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;ttl_field&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">drop_collection_properties</span>(DropCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">property_key</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+status = client-&gt;<span class="hljs-built_in">DropCollectionProperties</span>(milvus::<span class="hljs-built_in">DropCollectionPropertiesRequest</span>()
+                                              .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                              .<span class="hljs-built_in">AddPropertyKey</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
 <span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionProperties</span>({</span>
 <span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
 <span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;ttl_field&quot;</span>],</span>
 <span class="highlighted-comment-line">});</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">await</span> client.DropCollectionPropertiesAsync(<span class="hljs-keyword">new</span> DropCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    DeleteKeys = [<span class="hljs-string">&quot;ttl_field&quot;</span>]
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;propertyKeys\&quot;: [
+        \&quot;ttl_field\&quot;
+    ]
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ttl_field</code> 을 삭제하면 향후 쿼리에 대한 자동 필터가 비활성화되지만 이미 만료된 엔티티는 자동으로 다시 표시되지 않습니다. 이전에 만료된 엔티티를 표시하려면 <code translate="no">None</code> 또는 향후 만료 타임스탬프를 삽입해야 하며, 이는 동일한 로드 세션 내에서 만료된 행에 대한 액세스를 복원할 수 있는 유일한 방법입니다.</p>
-<h2 id="Migrate-between-the-two-modes" class="common-anchor-header">두 모드 간 마이그레이션<button data-href="#Migrate-between-the-two-modes" class="anchor-icon" translate="no">
+<p>Dropping <code translate="no">ttl_field</code> disables the automatic filter for future queries, but entities that had already expired are not automatically surfaced again. To make a previously-expired entity visible, upsert it with a <code translate="no">None</code> or future expiration timestamp — that is the only way to restore access to expired rows within the same load session.</p>
+<h2 id="Migrate-between-the-two-modes" class="common-anchor-header">Migrate between the two modes<button data-href="#Migrate-between-the-two-modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -982,8 +2200,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>두 가지 TTL 모드는 상호 배타적이므로 두 모드 사이를 전환하려면 여러 단계의 작업이 필요합니다.</p>
-<h3 id="Switch-from-collection-level-to-entity-level-TTL" class="common-anchor-header">컬렉션 수준에서 엔티티 수준 TTL로 전환하기<button data-href="#Switch-from-collection-level-to-entity-level-TTL" class="anchor-icon" translate="no">
+    </button></h2><p>The two TTL modes are mutually exclusive, so switching between them is a multi-step operation.</p>
+<h3 id="Switch-from-collection-level-to-entity-level-TTL" class="common-anchor-header">Switch from collection-level to entity-level TTL<button data-href="#Switch-from-collection-level-to-entity-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -998,13 +2216,24 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션이 <code translate="no">collection.ttl.seconds</code> 으로 생성된 경우 엔티티별 만료로 전환하려면 다음 4단계를 따르세요. 1단계를 건너뛰면 3단계가 <code translate="no">collection TTL is already set, cannot be set ttl field</code> 로 실패합니다.</p>
+    </button></h3><p>If your collection was created with <code translate="no">collection.ttl.seconds</code> and you want to switch to per-entity expiration, follow the steps below. Skipping Step 1 causes Step 3 to fail with <code translate="no">collection TTL is already set, cannot be set ttl field</code>.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 
 <span class="hljs-comment"># Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
 <span class="highlighted-comment-line"><span class="hljs-comment"># Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span></span>
@@ -1054,6 +2283,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
@@ -1095,14 +2325,211 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">        .data(Collections.singletonList(row))</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
+<span class="hljs-comment">// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span>
+err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-comment">// Step 2 — add a TIMESTAMPTZ column to the schema</span>
+err = client.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;my_collection&quot;</span>,
+    entity.NewField().WithName(<span class="hljs-string">&quot;expire_at&quot;</span>).WithDataType(entity.FieldTypeTimestamptz).WithNullable(<span class="hljs-literal">true</span>)))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-comment">// Step 3 — set the ttl_field property on the column you just added</span>
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithProperty(<span class="hljs-string">&quot;ttl_field&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-comment">// Step 4 (optional) — backfill expiration timestamps with a column-based upsert.</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
+<span class="hljs-comment">// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span>
+client.<span class="hljs-title function_ invoke__">drop_collection_properties</span>(DropCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">property_key</span>(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Step 2 — add a TIMESTAMPTZ column to the schema</span>
+client.<span class="hljs-title function_ invoke__">add_collection_field</span>(AddCollectionFieldRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;expire_at&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Timestamptz).<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Step 3 — set the ttl_field property on the column you just added</span>
+client.<span class="hljs-title function_ invoke__">alter_collection_properties</span>(AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">properties</span>(std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;ttl_field&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;expire_at&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Step 4 (optional) — backfill expiration timestamps for historical entities</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">vector</span>: <span class="hljs-type">Vec</span>&lt;<span class="hljs-type">f32</span>&gt; = (<span class="hljs-number">0</span>..<span class="hljs-number">128</span>).<span class="hljs-title function_ invoke__">map</span>(|_| rand::random::&lt;<span class="hljs-type">f32</span>&gt;()).<span class="hljs-title function_ invoke__">collect</span>();
+client.<span class="hljs-title function_ invoke__">upsert</span>(UpsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">insert</span>(InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[
+            serde_json::json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: vector, <span class="hljs-string">&quot;expire_at&quot;</span>: <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span>}),
+        ])
+        .<span class="hljs-title function_ invoke__">build</span>()?)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
+<span class="hljs-comment">// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span>
+status = client-&gt;<span class="hljs-built_in">DropCollectionProperties</span>(milvus::<span class="hljs-built_in">DropCollectionPropertiesRequest</span>()
+                                              .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                              .<span class="hljs-built_in">AddPropertyKey</span>(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Step 2 — add a TIMESTAMPTZ column to the schema</span>
+status = client-&gt;<span class="hljs-built_in">AddCollectionField</span>(milvus::<span class="hljs-built_in">AddCollectionFieldRequest</span>()
+                                        .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                        .<span class="hljs-built_in">WithField</span>(std::<span class="hljs-built_in">move</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;expire_at&quot;</span>, milvus::DataType::TIMESTAMPTZ).<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>))));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Step 3 — set the ttl_field property on the column you just added</span>
+status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                               .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                               .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>, <span class="hljs-string">&quot;expire_at&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">expire_at</code> 을 다시 채우지 않는 기록 엔터티는 해당 열에 <code translate="no">NULL</code> 이 있으므로 만료되지 않습니다. 수명이 유한해야 하는 행만 다시 채우세요.</p>
-<h3 id="Switch-from-entity-level-to-collection-level-TTL" class="common-anchor-header">엔티티 수준에서 컬렉션 수준 TTL로 전환하기<button data-href="#Switch-from-entity-level-to-collection-level-TTL" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
+<span class="highlighted-comment-line"><span class="hljs-comment">// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span></span>
+<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionProperties</span>({</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>],</span>
+<span class="highlighted-comment-line">});</span>
+<span class="highlighted-comment-line"></span>
+<span class="highlighted-comment-line"><span class="hljs-comment">// Step 2 — add a TIMESTAMPTZ column to the schema</span></span>
+<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addCollectionField</span>({</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">field</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;expire_at&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Timestamptz</span>, <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span> },</span>
+<span class="highlighted-comment-line">});</span>
+<span class="highlighted-comment-line"></span>
+<span class="highlighted-comment-line"><span class="hljs-comment">// Step 3 — set the ttl_field property on the column you just added</span></span>
+<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: { <span class="hljs-attr">ttl_field</span>: <span class="hljs-string">&quot;expire_at&quot;</span> },</span>
+<span class="highlighted-comment-line">});</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `collection.ttl.seconds` set.</span>
+<span class="hljs-comment">// Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span>
+<span class="hljs-keyword">await</span> client.DropCollectionPropertiesAsync(<span class="hljs-keyword">new</span> DropCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    DeleteKeys = [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>]
+});
+
+<span class="hljs-comment">// Step 2 — add a TIMESTAMPTZ column to the schema</span>
+<span class="hljs-keyword">await</span> client.AddCollectionFieldAsync(<span class="hljs-keyword">new</span> AddCollectionFieldReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Field = <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;expire_at&quot;</span>, DataType.Timestamptz) { Nullable = <span class="hljs-literal">true</span> }
+});
+
+<span class="hljs-comment">// Step 3 — set the ttl_field property on the column you just added</span>
+<span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;ttl_field&quot;</span>] = <span class="hljs-string">&quot;expire_at&quot;</span> }
+});
+<span class="hljs-comment">// Step 4 (optional) — backfill expiration timestamps for historical entities</span>
+<span class="hljs-keyword">var</span> vector = Enumerable.Repeat(<span class="hljs-number">0.1f</span>, <span class="hljs-number">128</span>).ToArray();
+<span class="hljs-keyword">await</span> client.UpsertAsync(<span class="hljs-keyword">new</span> UpsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">1L</span>, [<span class="hljs-string">&quot;vector&quot;</span>] = vector, [<span class="hljs-string">&quot;expire_at&quot;</span>] = <span class="hljs-string">&quot;2026-12-31T00:00:00Z&quot;</span> }
+    ]
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Assumes &quot;my_collection&quot; already exists with collection.ttl.seconds set.</span>
+<span class="hljs-comment"># Step 1 — disable collection-level TTL (mandatory; the two modes are mutually exclusive)</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;propertyKeys\&quot;: [
+        \&quot;collection.ttl.seconds\&quot;
+    ]
+}&quot;</span>
+
+<span class="hljs-comment"># Step 2 — add a TIMESTAMPTZ column to the schema</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/fields/add&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;schema\&quot;: {
+        \&quot;fieldName\&quot;: \&quot;expire_at\&quot;,
+        \&quot;dataType\&quot;: \&quot;Timestamptz\&quot;,
+        \&quot;nullable\&quot;: true
+    }
+}&quot;</span>
+
+<span class="hljs-comment"># Step 3 — set the ttl_field property on the column you just added</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;properties\&quot;: {
+        \&quot;ttl_field\&quot;: \&quot;expire_at\&quot;
+    }
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Historical entities for which you do not backfill <code translate="no">expire_at</code> will have <code translate="no">NULL</code> in that column, meaning they never expire. Backfill only the rows that should have a finite lifetime.</p>
+<h3 id="Switch-from-entity-level-to-collection-level-TTL" class="common-anchor-header">Switch from entity-level to collection-level TTL<button data-href="#Switch-from-entity-level-to-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1117,12 +2544,23 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다른 방향으로 이동하려면 <code translate="no">ttl_field</code> 을 삭제하고 <code translate="no">collection.ttl.seconds</code> 을 설정합니다:</p>
+    </button></h3><p>To move in the other direction, drop <code translate="no">ttl_field</code> and set <code translate="no">collection.ttl.seconds</code>:</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 
 <span class="hljs-comment"># Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
 <span class="highlighted-comment-line">client.drop_collection_properties(</span>
@@ -1145,6 +2583,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
 
 <span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
@@ -1160,13 +2599,127 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 <span class="highlighted-comment-line">        .properties(properties)</span>
 <span class="highlighted-comment-line">        .build());</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/common&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
+err = client.DropCollectionProperties(ctx, milvusclient.NewDropCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;ttl_field&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithProperty(common.CollectionTTLConfigKey, <span class="hljs-number">1209600</span>)) <span class="hljs-comment">// 14 days</span>
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
+client.<span class="hljs-title function_ invoke__">drop_collection_properties</span>(DropCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">property_key</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">alter_collection_properties</span>(AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-title function_ invoke__">properties</span>(std::collections::HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;1209600&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
+status = client-&gt;<span class="hljs-built_in">DropCollectionProperties</span>(milvus::<span class="hljs-built_in">DropCollectionPropertiesRequest</span>()
+                                              .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                              .<span class="hljs-built_in">AddPropertyKey</span>(<span class="hljs-string">&quot;ttl_field&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                               .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                               .<span class="hljs-built_in">AddProperty</span>(milvus::COLLECTION_TTL_SECONDS, <span class="hljs-string">&quot;1209600&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="FAQs" class="common-anchor-header">자주 묻는 질문<button data-href="#FAQs" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
+<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollectionProperties</span>({</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;ttl_field&quot;</span>],</span>
+<span class="highlighted-comment-line">});</span>
+<span class="highlighted-comment-line"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,</span>
+<span class="highlighted-comment-line">  <span class="hljs-attr">properties</span>: { <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">1209600</span> }, <span class="hljs-comment">// 14 days</span></span>
+<span class="highlighted-comment-line">});</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-comment">// Assumes &quot;my_collection&quot; already exists with `ttl_field` set.</span>
+<span class="hljs-keyword">await</span> client.DropCollectionPropertiesAsync(<span class="hljs-keyword">new</span> DropCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    DeleteKeys = [<span class="hljs-string">&quot;ttl_field&quot;</span>]
+});
+
+<span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>] = <span class="hljs-string">&quot;1209600&quot;</span> } <span class="hljs-comment">// 14 days</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Assumes &quot;my_collection&quot; already exists with ttl_field set.</span>
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/drop_properties&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;propertyKeys\&quot;: [
+        \&quot;ttl_field\&quot;
+    ]
+}&quot;</span>
+
+curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;my_collection\&quot;,
+    \&quot;properties\&quot;: {
+        \&quot;collection.ttl.seconds\&quot;: \&quot;1209600\&quot;
+    }
+}&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="FAQs" class="common-anchor-header">FAQs<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1181,7 +2734,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-does-data-expire-due-to-TTL-settings" class="common-anchor-header">TTL 설정으로 인해 데이터가 언제 만료되나요?<button data-href="#When-does-data-expire-due-to-TTL-settings" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-does-data-expire-due-to-TTL-settings" class="common-anchor-header">When does data expire due to TTL settings?<button data-href="#When-does-data-expire-due-to-TTL-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1196,8 +2749,8 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>현재 데이터는 삽입 또는 업서트된 시점을 기준으로 만료됩니다. 만료된 데이터는 검색 결과에 표시되지 않습니다. 자세한 내용은 <a href="/docs/ko/set-collection-ttl.md#Dyq9dQUmwoAk9WxwEuEcSDkPnoc">예시를</a> 참조하세요.</p>
-<h3 id="When-will-the-expired-data-be-physically-deleted" class="common-anchor-header">만료된 데이터는 언제 물리적으로 삭제되나요?<button data-href="#When-will-the-expired-data-be-physically-deleted" class="anchor-icon" translate="no">
+    </button></h3><p>The data expires based on the time point at which it was inserted or upserted. Expired data will not be displayed in search results. For details, refer to <a href="/docs/ko/set-collection-ttl.md#Set-collection-level-TTL">Examples</a>.</p>
+<h3 id="When-will-the-expired-data-be-physically-deleted" class="common-anchor-header">When will the expired data be physically deleted?<button data-href="#When-will-the-expired-data-be-physically-deleted" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1212,4 +2765,4 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>데이터가 만료되면 검색 결과에 포함되지 않습니다. 그러나 클러스터의 압축 정책에 따라 후속 시스템 압축 이후에만 물리적으로 삭제됩니다.</p>
+    </button></h3><p>Once the data expires, it will not be included in any search results. However, it will be physically deleted only after the subsequent system compaction, according to your cluster’s compaction policies.</p>

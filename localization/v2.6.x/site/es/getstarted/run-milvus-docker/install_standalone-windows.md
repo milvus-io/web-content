@@ -90,7 +90,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>Tras ejecutar el script de instalación:​</p>
 <ul>
-<li><p>Se ha iniciado un contenedor de Docker llamado <strong>«milvus-standalone»</strong> en el puerto <strong>19530</strong>.​</p></li>
+<li><p>Se ha iniciado un contenedor de Docker llamado <strong>milvus-standalone</strong> en el puerto <strong>19530</strong>.​</p></li>
 <li><p>Se ha instalado un etcd integrado junto con Milvus en el mismo contenedor y está disponible en el puerto <strong>2379</strong>. Su archivo de configuración está asignado a <strong>embedEtcd.yaml</strong> en la carpeta actual.​</p></li>
 <li><p>El volumen de datos de Milvus está asignado a <strong>«volumes/milvus</strong> » en la carpeta actual.​</p></li>
 </ul>
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Abre Docker Desktop en modo administrador haciendo clic con el botón derecho del ratón y seleccionando <strong>«Ejecutar como administrador</strong>».​</p></li>
 <li><p>Ejecuta los siguientes comandos en PowerShell o en el símbolo del sistema de Windows para descargar el archivo de configuración de Docker Compose para Milvus Standalone e iniciar Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -204,7 +204,7 @@ Creating milvus-standalone ... done​
 <ul>
 <li><p>El contenedor <strong>milvus-etcd</strong> no expone ningún puerto al host y asigna sus datos a <strong>volumes/etcd</strong> en la carpeta actual.</p></li>
 <li><p>El contenedor <strong>milvus-minio</strong> sirve los puertos <strong>9090</strong> y <strong>9091</strong> localmente con las credenciales de autenticación predeterminadas y asigna sus datos a <strong>volumes/minio</strong> en la carpeta actual.</p></li>
-<li><p>El contenedor <strong>«milvus-standalone»</strong> sirve los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>«volumes/milvus»</strong> en la carpeta actual.​</p></li>
+<li><p>El contenedor <strong>milvus-standalone</strong> sirve los puertos <strong>19530</strong> localmente con la configuración predeterminada y asigna sus datos a <strong>volumes/milvus</strong> en la carpeta actual.​</p></li>
 </ul></li>
 </ol>
 <p>También puedes ejecutar la versión para Linux de los comandos de Docker Compose si tienes instalado WSL 2.​</p>
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Descarga el archivo de configuración de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicia Milvus.</p>
@@ -284,7 +284,7 @@ Creating milvus-standalone ... done​
    <span>Virtualización en el Administrador de tareas</span>
   
  </span></p>
-<p>Si la virtualización está desactivada, es posible que tengas que comprobar la configuración de la BIOS del firmware de tu placa base. La forma de habilitar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. Para las placas base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.​</p>
+<p>Si la virtualización está desactivada, es posible que tengas que comprobar la configuración de la BIOS del firmware de tu placa base. La forma de habilitar la virtualización en la configuración de la BIOS varía según el fabricante de la placa base. En el caso de las placas base ASUS, por ejemplo, puedes consultar <a href="https://www.asus.com/support/faq/1043786/">este artículo</a> sobre cómo habilitar la virtualización.​</p>
 <p>A continuación, deberá reiniciar el ordenador y habilitar Hyper-V. Para obtener más información, consulte este <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">artículo</a> de <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft</a>.​</p></li>
 <li><p>Comprueba si se ha iniciado el servicio Docker Desktop.</p>
 <p>Puede ejecutar el siguiente comando para iniciar el servicio Docker Desktop.</p>
@@ -340,7 +340,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span>Utilizar el motor basado en WSL 2 en la configuración de Docker Desktop</span>
   
  </span></p></li>
-<li><p>Selecciona, entre las distribuciones de WSL 2 que tengas instaladas, aquellas en las que desees habilitar la integración con Docker accediendo a: <strong>Configuración</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integración con WSL</strong>.</p>
+<li><p>Selecciona, entre las distribuciones de WSL 2 instaladas, aquellas en las que deseas habilitar la integración con Docker accediendo a: <strong>Configuración</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integración con WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 

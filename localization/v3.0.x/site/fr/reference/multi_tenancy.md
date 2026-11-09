@@ -62,7 +62,7 @@ summary: >-
   
  </span></p>
 <ul>
-<li><p><strong>Évolutivité</strong>: la stratégie de multi-locataires au niveau de la base de données prend en charge jusqu’à 64 locataires par défaut.</p></li>
+<li><p><strong>Évolutivité</strong>: la stratégie de multi-location au niveau de la base de données prend en charge jusqu’à 64 locataires par défaut.</p></li>
 <li><p><strong>Isolation des données</strong>: les données de chaque base de données sont entièrement séparées, offrant une isolation des données de niveau entreprise, idéale pour les environnements réglementés ou les clients ayant des exigences strictes en matière de conformité.</p></li>
 <li><p><strong>Flexibilité</strong>: chaque base de données peut contenir des collections avec des schémas différents, ce qui offre une organisation des données très flexible et permet à chaque locataire de disposer de son propre schéma de données.</p></li>
 <li><p><strong>Autres</strong>: cette stratégie prend également en charge le modèle RBAC (RBAC), permettant un contrôle granulaire des accès utilisateur par locataire. De plus, vous pouvez charger ou décharger de manière flexible des données pour des locataires spécifiques afin de gérer efficacement les données « chaudes » et « froides ».</p></li>
@@ -152,7 +152,7 @@ summary: >-
 <li><p><strong>Autres</strong>: le RBAC n’est pas pris en charge au niveau de la clé de partition. Les locataires peuvent faire l’objet de requêtes soit individuellement, soit sur plusieurs partitions, ce qui rend cette approche particulièrement adaptée aux scénarios impliquant des requêtes agrégées ou des analyses sur plusieurs segments de locataires.</p></li>
 </ul>
 <div class="alert note">
-<p>Nous vous recommandons de créer un index scalaire sur le champ de la clé de partition. Chaque partition physique hébergeant plusieurs locataires, Milvus évalue le filtre de locataire par rapport à chaque entité des partitions recherchées ; sans index, cela implique un balayage complet. Pour plus de détails, consultez la section « <a href="/docs/fr/use-partition-key.md#Index-Partition-Key">Indexer la clé de partition</a> ».</p>
+<p>Nous vous recommandons de créer un index scalaire sur le champ de clé de partition. Chaque partition physique hébergeant plusieurs locataires, Milvus évalue le filtre de locataire par rapport à chaque entité des partitions recherchées ; sans index, cela implique un balayage complet. Pour plus de détails, consultez la section « <a href="/docs/fr/use-partition-key.md#Index-Partition-Key">Indexer la clé de partition</a> ».</p>
 </div>
 <h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">Choisir la bonne stratégie de multi-locataires<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +211,7 @@ summary: >-
      <td><p>Élevées</p></td>
      <td><p>Élevées</p></td>
      <td><p>Moyens</p></td>
-     <td><p>Moyens</p></td>
+     <td><p>Moyenne</p></td>
    </tr>
    <tr>
      <td><p><strong>Prise en charge de la recherche inter-locataires</strong></p></td>
@@ -238,7 +238,7 @@ summary: >-
 <p>Les stratégies au niveau de la base de données et de la collection offrent une flexibilité totale en matière de schémas de données. Si les structures de données de vos locataires sont différentes, optez pour la multi-location au niveau de la base de données ou de la collection.</p></li>
 <li><p><strong>Autres</strong></p>
 <ol>
-<li><p><strong>Performances :</strong> les performances de recherche dépendent de divers facteurs, notamment les index, les paramètres de recherche et les configurations matérielles. Milvus prend également en charge l’optimisation des performances. Il est recommandé de tester les performances réelles avant de choisir une stratégie de multi-locataires.</p></li>
+<li><p><strong>Performances :</strong> les performances de recherche dépendent de divers facteurs, notamment les index, les paramètres de recherche et les configurations matérielles. Milvus prend également en charge l’optimisation des performances. Il est recommandé de tester les performances réelles avant de choisir une stratégie de multi-location.</p></li>
 <li><p><strong>Gestion efficace des données « chaudes » et « froides »</strong>: Actuellement, les stratégies au niveau de la base de données, au niveau de la collection et au niveau de la partition prennent toutes en charge la gestion des données « chaudes » et « froides ».</p></li>
 <li><p><strong>Recherches inter-locataires</strong>: seules les stratégies au niveau des partitions et au niveau des clés de partition prennent en charge les requêtes inter-locataires.</p></li>
 </ol></li>

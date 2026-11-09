@@ -72,7 +72,7 @@ summary: >-
 <p>Bei einem erfolgreichen Wechsel wird „ <code translate="no">[mqTypeValue=woodpecker]</code> “ protokolliert.</p>
 <p><strong>Schritt 4: (Optional) Pulsar anhalten und bereinigen.</strong> Deaktivieren Sie bei <strong>integriertem</strong> Pulsar Pulsar und aktivieren Sie Woodpecker; löschen Sie anschließend die Pulsar-PVCs:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \

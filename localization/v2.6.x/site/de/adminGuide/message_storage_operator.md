@@ -62,7 +62,7 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es werden nur die Versionen Kafka 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.25 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Einschränkungen bei den Nachrichtenwarteschlangen</strong>: Beim Upgrade auf Milvus v2.6.26 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ konfigurieren<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,7 +265,7 @@ Zu den Feldern zur Konfiguration eines externen Pulsar-Dienstes gehören:</p>
       </svg>
     </button></h2><p>Pulsar ist der Standard-Nachrichtenspeicher in einem Milvus-Cluster. Wenn Sie Kafka verwenden möchten, fügen Sie das optionale Feld „ <code translate="no">msgStreamType</code> “ hinzu, um Kafka zu konfigurieren.</p>
 <p><code translate="no">kafka</code> Unterstützt <code translate="no">external</code> und <code translate="no">inCluster</code>.</p>
-<h3 id="External-Kafka" class="common-anchor-header">Externes Kafka<button data-href="#External-Kafka" class="anchor-icon" translate="no">
+<h3 id="External-Kafka" class="common-anchor-header">„External Kafka“<button data-href="#External-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

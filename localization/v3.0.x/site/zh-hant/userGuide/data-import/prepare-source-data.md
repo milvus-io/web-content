@@ -1,10 +1,10 @@
 ---
 id: prepare-source-data.md
 order: 0
-title: 準備原始資料
-summary: 本頁討論您在開始大量插入資料到您的資料集中之前應該考慮的事項。
+title: 準備來源資料
+summary: 本頁說明在開始將資料批量插入您的集合之前，您應考慮的事項。
 ---
-<h1 id="Prepare-Source-Data" class="common-anchor-header">準備原始資料<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
+<h1 id="Prepare-Source-Data" class="common-anchor-header">準備來源資料<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: 本頁討論您在開始大量插入資料到您的資料集中之前�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本頁討論您在開始大量插入資料到您的資料集中之前應該考慮的事項。</p>
+    </button></h1><p>本頁說明在開始將資料批量插入您的集合之前，您應考慮的事項。</p>
 <h2 id="Before-you-start" class="common-anchor-header">開始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,29 +35,33 @@ summary: 本頁討論您在開始大量插入資料到您的資料集中之前�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>目標集合需要將源資料對應到其模式。下圖顯示可接受的來源資料如何映射到目標集合的模式。</p>
-<p>
+    </button></h2><p>目標集合需要將來源資料映射至其資料結構。下圖顯示了符合要求的來源資料如何映射至目標集合的資料結構。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
-   </span> <span class="img-wrapper"> <span>將資料對應到模式</span> </span></p>
-<p>您應該仔細檢查您的資料，並據此設計目標資料集的模式。</p>
-<p>以上圖中的 JSON 資料為例，行清單中有兩個實體，每一行有六個欄位。集合模式選擇性地包含四個：<strong>id</strong>、<strong>向量</strong>、<strong>標量_1</strong> 和<strong>標量_2</strong>。</p>
-<p>在設計模式時，還有兩件事情需要考慮：</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" /> 
+   <span>將資料映射至資料結構</span>
+  
+ </span></p>
+<p>您應仔細檢視您的資料，並據此設計目標集合的資料結構。</p>
+<p>以上圖中的 JSON 資料為例，行清單中有兩個實體，每行包含六個欄位。集合模式有選擇性地包含其中四個：<strong>id</strong>、<strong>vector</strong>、<strong>scalar_1</strong> 以及<strong>scalar_2</strong>。</p>
+<p>設計資料結構時，還有兩點需要考慮：</p>
 <ul>
 <li><p><strong>是否啟用 AutoID</strong></p>
-<p><strong>id 欄位</strong>是集合的主要欄位。要使主欄位自動遞增，您可以在模式中啟用<strong>AutoID</strong>。在這種情況下，您應該從來源資料的每一行中排除<strong>id 欄位</strong>。</p></li>
+<p><strong>id</strong>欄位是集合的主要欄位。若要讓主要欄位自動遞增，您可以在資料結構中啟用<strong>AutoID</strong>。在此情況下，您應將來源資料中每筆記錄的<strong>id</strong>欄位排除在外。</p></li>
 <li><p><strong>是否啟用動態欄位</strong></p>
-<p>如果模式啟用動態欄位，目標集合也可以儲存未包含在其預先定義的模式中的欄位。<strong>$meta</strong>欄位是保留的 JSON 欄位，用來保存動態欄位及其鍵值對中的值。在上圖中，欄位<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值將以鍵值對的方式儲存於<strong>$meta</strong>欄位中。</p></li>
+<p>若模式啟用動態欄位，目標集合亦可儲存未包含於其預定義模式中的欄位。<strong>$meta</strong>欄位是一個預留的 JSON 欄位，用於以鍵值對的形式儲存動態欄位及其值。在上圖中，欄位<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值將以鍵值對的形式儲存於<strong>$meta</strong>欄位中。</p></li>
 </ul>
-<p>以下程式碼顯示如何為上圖所示的集合設定模式。</p>
+<p>以下程式碼示範如何為上圖所示的集合設定資料結構。</p>
 <div class="language-python">
-<p>若要取得更多資訊，請參考 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>在 SDK 參考資料中。</p>
+<p>如需更多資訊，請參閱 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 以及 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> SDK 參考文件。</p>
 </div>
 <div class="language-java">
-<p>要獲得更多資訊，請參考 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a>在 SDK 參考資料中。</p>
+<p>如需更多資訊，請參閱SDK 參考文件中的 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> SDK 參考文件中的相關內容。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># You need to work out a collection schema out of your dataset.</span>
@@ -204,6 +208,39 @@ schema.verify()
     <span class="hljs-keyword">return</span> schema;
 }
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="StructArray-fields-in-source-files" class="common-anchor-header">原始檔中的 StructArray 欄位<button data-href="#StructArray-fields-in-source-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>不同來源檔案格式對<a href="/docs/zh-hant/array-of-structs.md">StructArray</a>欄位的處理方式各不相同。匯入讀取器預期會遇到以下其中一種形狀：</p>
+<table>
+<thead>
+<tr><th>格式</th><th>StructArray 欄位形狀</th></tr>
+</thead>
+<tbody>
+<tr><td>JSON、JSONL</td><td>該欄位值為一組物件清單，每個 Struct 元素對應一個物件，並以子欄位名稱作為鍵值：<code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code> 。</td></tr>
+<tr><td>CSV</td><td>該儲存格包含與 JSON 格式相同的 JSON 文字。</td></tr>
+<tr><td>Parquet</td><td>每個 StructArray 欄位對應一欄，資料型別為<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ，每個子欄位對應一個結構體子元素。標量子欄位為標量子元素，向量子欄位則為其元素型別的清單，例如<code translate="no">list&lt;float32&gt;</code> 。</td></tr>
+<tr><td>NumPy</td><td>不支援。NumPy 檔案會針對每個頂層欄位建立一個檔案，且無法表示 StructArray 欄位。若集合包含 StructArray 欄位，請使用 JSON、CSV 或 Parquet 檔案。</td></tr>
+</tbody>
+</table>
+<p>以下規則適用於所有受支援格式中的 StructArray 值：</p>
+<ul>
+<li><p>在每個 Struct 元素內應使用子欄位名稱，而非路徑（例如<code translate="no">chunks[text]</code> ）。名稱<code translate="no">chunks[text]</code> 的扁平欄位或鍵將被拒絕。</p></li>
+<li><p>每個 Struct 元素必須提供 Struct 模式中的所有子欄位，且 Struct 元素本身不得為 null，例如<code translate="no">[null, {...}]</code> 。只有當 StructArray 欄位為可為 null 時，整個 StructArray 值才可為 null。</p></li>
+</ul>
+<p>有關架構層面的限制，請參閱<a href="/docs/zh-hant/structarray-limits.md#Import-limits">StructArray 限制</a>。</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">設定 BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,12 +256,12 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong>是用來將原始資料集轉換成適合透過 RESTful Import API 匯入的格式的工具。它提供兩種類型的寫入程式：</p>
+    </button></h2><p><strong>BulkWriter</strong>是一款專為將原始資料集轉換為適合透過 RESTful 匯入 API 匯入的格式而設計的工具。它提供兩種寫入器類型：</p>
 <ul>
-<li><strong>LocalBulkWriter</strong>：讀取指定的資料集，並將其轉換成容易使用的格式。</li>
+<li><strong>LocalBulkWriter</strong>：讀取指定的資料集，並將其轉換為易於使用的格式。</li>
 <li><strong>RemoteBulkWriter</strong>：執行與 LocalBulkWriter 相同的任務，但會額外將轉換後的資料檔案傳輸至指定的遠端物件儲存桶。</li>
 </ul>
-<p><strong>RemoteBulkWriter</strong>與<strong>LocalBulkWriter</strong>的不同之處在於<strong>RemoteBulkWriter</strong>會將轉換後的資料檔案傳輸至目標物件儲存空間。</p>
+<p><strong>RemoteBulkWriter</strong>與<strong>LocalBulkWriter</strong>的差異在於<strong>，RemoteBulkWriter</strong>會將轉換後的資料檔案傳輸至目標物件儲存桶。</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">設定 LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -240,9 +277,11 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>LocalBulkWriter</strong>會追加來源資料集的資料列，並將它們提交到指定格式的本機檔案。</p>
+    </button></h3><p><strong>LocalBulkWriter</strong>會將來源資料集的資料列依序追加，並將其寫入指定格式的本地檔案中。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -268,24 +307,24 @@ writer = LocalBulkWriter(
 <span class="hljs-type">LocalBulkWriter</span> <span class="hljs-variable">localBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LocalBulkWriter</span>(localBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>在建立<strong>LocalBulkWriter</strong> 時，您應該</p>
+<p>建立<strong>LocalBulkWriter</strong> 時，您應：</p>
 <ul>
-<li>在<code translate="no">schema</code> 中引用已建立的模式。</li>
-<li>將<code translate="no">local_path</code> 設為輸出目錄。</li>
-<li>將<code translate="no">file_type</code> 設為輸出檔案類型。</li>
-<li>如果您的資料集包含大量記錄，建議您將<code translate="no">segment_size</code> 設定為適當的值，以分割資料。</li>
+<li>在 `<code translate="no">schema</code>` 中引用已建立的資料結構。</li>
+<li>將 `<code translate="no">local_path</code> ` 設定為輸出目錄。</li>
+<li>將 `<code translate="no">file_type</code> ` 設定為輸出檔案類型。</li>
+<li>若您的資料集包含大量記錄，建議您透過將 `<code translate="no">segment_size</code> ` 設定為適當的值來對資料進行分段。</li>
 </ul>
-<p>有關參數設定的詳細資訊，請參閱 SDK 參考資料中的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a>。</p>
+<p>有關參數設定的詳細資訊，請參閱 SDK 參考文件中的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a>。</p>
 </div>
 <div class="language-java">
-<p>建立<strong>LocalBulkWriter</strong> 時，您應該</p>
+<p>建立<strong>LocalBulkWriter</strong> 時，您應：</p>
 <ul>
-<li>在<code translate="no">CollectionSchema()</code> 中參考已建立的模式。</li>
-<li>在<code translate="no">withLocalPath()</code> 中設定輸出目錄。</li>
-<li>在<code translate="no">withFileType()</code> 中設定輸出檔案類型。</li>
-<li>如果您的資料集包含大量記錄，建議您將<code translate="no">withChunkSize()</code> 設定為適當的值來分割資料。</li>
+<li>在 `<code translate="no">CollectionSchema()</code>` 中引用已建立的架構。</li>
+<li>在 `<code translate="no">withLocalPath()</code>` 中設定輸出目錄。</li>
+<li>在 `<code translate="no">withFileType()</code>` 中設定輸出檔案類型。</li>
+<li>若您的資料集包含大量記錄，建議您將 `<code translate="no">withChunkSize()</code> ` 設定為適當的值，以對資料進行分段處理。</li>
 </ul>
-<p>有關參數設定的詳細資訊，請參閱 SDK 參考資料中的 LocalBulkWriter。</p>
+<p>有關參數設定的詳細資訊，請參閱 SDK 參考手冊中的 LocalBulkWriter。</p>
 </div>
 <h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">設定 RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -302,9 +341,11 @@ writer = LocalBulkWriter(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>RemoteBulkWriter</strong>不會將附加的資料提交到本機檔案，而是提交到遠端資料桶。因此，您應該在建立<strong>RemoteBulkWriter</strong> 之前設定<strong>ConnectParam</strong>物件。</p>
+    </button></h3><p><strong>RemoteBulkWriter</strong>不會將追加的資料提交至本機檔案，而是提交至遠端儲存桶。因此，您應在建立<strong>RemoteBulkWriter</strong> 之前先設定一個<strong>ConnectParam</strong>物件。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -352,9 +393,11 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>一旦連線參數準備就緒，您就可以在<strong>RemoteBulkWriter</strong>中引用它，如下所示：</p>
+<p>準備好連線參數後，即可在<strong>RemoteBulkWriter</strong>中如下所示進行引用：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -380,10 +423,10 @@ writer = RemoteBulkWriter(
 <span class="hljs-type">RemoteBulkWriter</span> <span class="hljs-variable">remoteBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(remoteBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>除了<code translate="no">connect_param</code> 之外，建立<strong>RemoteBulkWriter</strong>的參數幾乎與<strong>LocalBulkWriter</strong> 的參數相同。有關參數設定的詳細資訊，請參閱 SDK 參考資料中的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a>與<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a>。</p>
+<p>建立<strong>RemoteBulkWriter</strong>的參數與<strong>LocalBulkWriter</strong> 幾乎相同，唯獨<code translate="no">connect_param</code> 參數有所不同。有關參數設定的詳細資訊，請參閱 SDK 參考文件中的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a>和<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a>。</p>
 </div>
 <div class="language-java">
-<p>創建<strong>RemoteBulkWriter</strong>的參數與<strong>LocalBulkWriter</strong> 的參數幾乎相同，除了<code translate="no">StorageConnectParam</code> 。有關參數設定的詳細資訊，請參閱 SDK 參考資料中的 RemoteBulkWriter 和 StorageConnectParam。</p>
+<p>建立<strong>RemoteBulkWriter</strong>的參數與<strong>LocalBulkWriter</strong> 幾乎相同，唯獨<code translate="no">StorageConnectParam</code> 不同。有關參數設定的詳細資訊，請參閱 SDK 參考文件中的 RemoteBulkWriter 和 StorageConnectParam。</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">開始寫入<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -401,14 +444,16 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p><strong>BulkWriter</strong>有兩個方法：<code translate="no">append_row()</code> 從來源資料集新增一條記錄，以及<code translate="no">commit()</code> 將新增的記錄提交到本機檔案或遠端資料桶。</p>
+<p><strong>BulkWriter</strong>具有兩個方法：<code translate="no">append_row()</code> 用於從來源資料集新增一行，以及<code translate="no">commit()</code> 用於將新增的行提交至本機檔案或遠端儲存桶。</p>
 </div>
 <div class="language-java">
-<p><strong>BulkWriter</strong>有兩個方法：<code translate="no">appendRow()</code> 從原始資料集新增一條記錄，以及<code translate="no">commit()</code> 將新增的記錄提交到本機檔案或遠端資料桶。</p>
+<p><strong>BulkWriter</strong>具有兩個方法：<code translate="no">appendRow()</code> 會從來源資料集新增一行資料，而<code translate="no">commit()</code> 則會將新增的資料行提交至本機檔案或遠端儲存桶。</p>
 </div>
-<p>為了示範目的，以下程式碼會追加隨機產生的資料。</p>
+<p>為示範之目的，以下程式碼會追加隨機生成的資料。</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
@@ -621,13 +666,15 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>若要檢查結果，您可以透過列印寫入者的<code translate="no">batch_files</code> 屬性來取得實際的輸出路徑。</p>
+<p>若要檢查結果，您可以透過列印寫入器的<code translate="no">batch_files</code> 屬性來取得實際的輸出路徑。</p>
 </div>
 <div class="language-java">
-<p>若要檢查結果，您可以透過列印寫入者的<code translate="no">getBatchFiles()</code> 方法來取得實際的輸出路徑。</p>
+<p>若要檢查結果，您可以透過印出寫入器的<code translate="no">getBatchFiles()</code> 方法來取得實際的輸出路徑。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
 <span class="hljs-comment"># [[&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/1.parquet&#x27;],</span>
@@ -647,7 +694,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong>會產生 UUID，在提供的輸出路徑中使用 UUID 建立子資料夾，並將所有產生的檔案放入子資料夾中。<a href="https://assets.zilliz.com/bulk_writer.zip">點選此</a>處下載準備好的範例資料。</p>
+<p><strong>BulkWriter</strong>會產生一個 UUID，並使用該 UUID 在指定的輸出目錄中建立子資料夾，將所有生成的檔案放置於該子資料夾中。<a href="https://assets.zilliz.com/bulk_writer.zip">請點擊此處</a>下載已準備好的範例資料。</p>
 <p>可能的資料夾結構如下：</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

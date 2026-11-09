@@ -74,8 +74,8 @@ title: Eseguire Milvus con supporto GPU utilizzando Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Scarica <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose-gpu.yaml"><code translate="no">milvus-standalone-docker-compose-gpu.yaml</code></a> e salvalo come docker-compose.yml manualmente o con il seguente comando.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose-gpu.yaml -O docker-compose.yml</span>
+    </button></h3><p>Scarica <a href="https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose-gpu.yaml"><code translate="no">milvus-standalone-docker-compose-gpu.yaml</code></a> e salvalo come docker-compose.yml manualmente o con il seguente comando.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose-gpu.yaml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>È necessario apportare alcune modifiche alle variabili d’ambiente del servizio standalone nel file YAML come segue:</p>
 <ul>
@@ -206,7 +206,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <li><p>Utilizza il seguente comando per copiare il file <code translate="no">milvus.yaml</code> modificato nuovamente nel container Milvus. Sostituisci <code translate="no">&lt;milvus_container_id&gt;</code> con l’ID effettivo del tuo container Milvus.</p>
 <pre><code translate="no" class="language-shell">docker cp milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Riavviare il container Milvus per applicare le modifiche:</p>
+<li><p>Riavvia il container Milvus per applicare le modifiche:</p>
 <pre><code translate="no" class="language-shell">docker stop &lt;milvus_container_id&gt;
 docker start &lt;milvus_container_id&gt;
 <button class="copy-code-btn"></button></code></pre></li>
@@ -236,7 +236,7 @@ docker start &lt;milvus_container_id&gt;
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/manage-collections.md">Gestire le raccolte</a></li>
+<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
 <li><a href="/docs/it/single-vector-search.md">Ricerca su singolo vettore</a></li>

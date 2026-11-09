@@ -66,7 +66,7 @@ title: Eseguire Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Lo script viene scaricato dal ramo " <code translate="no">master</code> " di Milvus. Il tag dell'immagine Docker è definito nello script e può differire dalla versione v3.0.3. Per installare esattamente quella versione, utilizzare la configurazione con versione specificata nella sezione " <a href="/docs/it/install_standalone-docker-compose.md">Eseguire Milvus con Docker Compose</a>".</p>
+<p>Lo script viene scaricato dal ramo " <code translate="no">master</code> " di Milvus. Il tag dell'immagine Docker è definito nello script e può differire dalla versione v3.0.5. Per installare esattamente quella versione, utilizzare la configurazione con versione specificata in " <a href="/docs/it/install_standalone-docker-compose.md">Eseguire Milvus con Docker Compose</a>".</p>
 <p>Questa distribuzione Docker esegue <strong>Woodpecker</strong> utilizzando il <strong>filesystem locale</strong> come backend WAL, pertanto non è richiesto alcun servizio esterno di coda dei messaggi. Vedere <a href="/docs/it/woodpecker.md">Woodpecker</a>.</p>
 <p>Se si desidera utilizzare <a href="/docs/it/milvus_backup_overview.md">Backup</a> in modalità di distribuzione autonoma, si consiglia di utilizzare il metodo di distribuzione <a href="/docs/it/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Se si riscontrano problemi durante il download dell’immagine, contattarci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e forniremo l’assistenza necessaria.</p>
@@ -78,12 +78,12 @@ title: Eseguire Milvus in Docker (Linux)
 <li>Per modificare la configurazione predefinita di Milvus, aggiungi le tue impostazioni al file <strong>user.yaml</strong> nella cartella corrente, quindi riavvia il servizio.</li>
 <li>Il volume di dati di Milvus è mappato su <strong>volumes/milvus</strong> nella cartella corrente.</li>
 </ul>
-<p>Verificare l’immagine effettiva e lo stato di integrità:</p>
+<p>Verifica l'immagine effettiva e lo stato di integrità:</p>
 <pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
 docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Attendere che venga visualizzato il messaggio " <code translate="no">healthy</code> " prima di seguire <a href="/docs/it/quickstart.md">la guida rapida</a>. Quando si utilizza questo server, collegare l'SDK a <code translate="no">http://localhost:19530</code>; un URI locale <code translate="no">.db</code> avvia invece Milvus Lite.</p>
-<p>È possibile accedere all’interfaccia utente web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ulteriori informazioni sull’istanza di Milvus. Per i dettagli, consultare <a href="/docs/it/milvus-webui.md">l’interfaccia utente web di Milvus</a>.</p>
+<p>È possibile accedere all’interfaccia utente web di Milvus all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per ottenere ulteriori informazioni sull’istanza di Milvus in uso. Per i dettagli, consultare la documentazione relativa <a href="/docs/it/milvus-webui.md">all’interfaccia utente web di Milvus</a>.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facoltativo) Aggiornamento delle configurazioni di Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +99,7 @@ docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <strong>user.yaml</strong> presente nella cartella corrente. Ad esempio, per cambiare l'URI <code translate="no">proxy.healthCheckTimeout</code> in <code translate="no">1000</code> ms, è possibile modificare il file come segue:</p>
+    </button></h2><p>È possibile modificare le configurazioni di Milvus nel file <strong>user.yaml</strong> presente nella cartella corrente. Ad esempio, per cambiare l'URI da <code translate="no">proxy.healthCheckTimeout</code> a <code translate="no">1000</code> ms, è possibile modificare il file come segue:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -125,7 +125,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il comando <code translate="no">upgrade</code> dello script scarica lo script da <code translate="no">master</code> e ricrea il container utilizzando l’immagine selezionata da tale script. Non verifica la validità del percorso di versione da origine a destinazione supportato e può ricreare i file di configurazione generati. Non considerarlo una garanzia che una distribuzione precedente arbitraria possa essere aggiornata in modo sicuro alla versione v3.0.3.</p>
+    </button></h2><p>Il comando <code translate="no">upgrade</code> dello script scarica lo script da <code translate="no">master</code> e ricrea il container utilizzando l’immagine selezionata da tale script. Non verifica la validità del percorso di versione da origine a destinazione supportato e può ricreare i file di configurazione generati. Non considerarlo una garanzia che una distribuzione precedente arbitraria possa essere aggiornata in modo sicuro alla versione v3.0.5.</p>
 <p>Prima di un aggiornamento, eseguire il backup dei metadati, dei dati persistenti, di <code translate="no">embedEtcd.yaml</code> e di <code translate="no">user.yaml</code>. Verificare la versione di destinazione, la coda dei messaggi e la compatibilità dello storage, e verificare il ripristino in un ambiente non di produzione. Per le distribuzioni gestite con Docker Compose, seguire <a href="/docs/it/upgrade_milvus_standalone-docker.md">la procedura "Aggiornamento di Milvus Standalone con Docker Compose</a>"; non applicare tale procedura direttamente a un container gestito tramite script.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Arrestare ed eliminare Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -194,7 +194,7 @@ EOF
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/manage-collections.md">Gestire le raccolte</a></li>
+<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
 <li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
 <li><a href="/docs/it/single-vector-search.md">Ricerca su singolo vettore</a></li>

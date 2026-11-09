@@ -92,7 +92,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <ul>
 <li><p>Контейнер Docker с именем <strong>milvus-standalone</strong> запущен на порту <strong>19530</strong>.​</p></li>
 <li><p>Вместе с Milvus в том же контейнере установлен встроенный etcd, работающий на порту <strong>2379</strong>. Его файл конфигурации сопоставлен файлу <strong>embedEtcd.yaml</strong> в текущей папке.​</p></li>
-<li><p>Том данных Milvus сопоставлен с <strong>папкой volumes/milvus</strong> в текущей папке.​</p></li>
+<li><p>Том данных Milvus сопоставлен папке <strong>volumes/milvus</strong> в текущей папке.​</p></li>
 </ul>
 <p>Для управления контейнером Milvus и хранящимися данными можно использовать следующие команды.​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
@@ -171,7 +171,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После установки Docker Desktop в Microsoft Windows вы можете получить доступ к командной строке Docker из PowerShell или командной строки Windows в режиме <strong>администратора</strong>. Для запуска Milvus вы можете запустить Docker Compose в PowerShell, командной строке Windows или WSL 2.​</p>
+    </button></h2><p>После установки Docker Desktop в Microsoft Windows вы можете получить доступ к командной строке Docker (CLI) из PowerShell или командной строки Windows в режиме <strong>администратора</strong>. Для запуска Milvus вы можете запустить Docker Compose в PowerShell, командной строке Windows или WSL 2.​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Из PowerShell или командной строки Windows​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Откройте Docker Desktop в режиме администратора, щелкнув правой кнопкой мыши и выбрав <strong>«Запуск от имени администратора</strong>».​</p></li>
 <li><p>Выполните следующие команды в PowerShell или командной строке Windows, чтобы загрузить файл конфигурации Docker Compose для Milvus Standalone и запустить Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Загрузите файл конфигурации Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Запустите Milvus.</p>

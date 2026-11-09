@@ -60,7 +60,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
 </ul></li>
 <li>Milvus 시스템이 실행 중인 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
-<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v2.6.25로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
+<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v2.6.26으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -81,7 +81,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
 <div class="alert note">
 <p>현재 Milvus Operator를 통해서만 Milvus 독립 실행형 버전의 메시지 저장소로 RocksMQ를 구성할 수 있습니다.</p>
 </div>
-<h4 id="Example" class="common-anchor-header">예</h4><p>다음 예제는 RocksMQ 서비스를 구성하는 방법입니다.</p>
+<h4 id="Example" class="common-anchor-header">예시</h4><p>다음 예제는 RocksMQ 서비스를 구성하는 방법입니다.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -145,7 +145,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
         ></path>
       </svg>
     </button></h2><p>Pulsar는 최근 변경 사항에 대한 로그를 관리하고, 스트림 로그를 출력하며, 로그 구독 기능을 제공합니다. 메시지 저장을 위한 Pulsar 구성은 Milvus 독립 실행형 및 Milvus 클러스터 모두에서 지원됩니다. 그러나 Milvus Operator를 사용하는 경우, Milvus 클러스터의 메시지 저장소로만 Pulsar를 구성할 수 있습니다. Pulsar를 구성하려면 ‘ <code translate="no">spec.dependencies.pulsar</code> ’ 아래에 필수 필드를 추가하십시오.</p>
-<p><code translate="no">pulsar</code> <code translate="no">external</code> 및 을 지원합니다. <code translate="no">inCluster</code></p>
+<p><code translate="no">pulsar</code> <code translate="no">external</code> 및 를 지원합니다. <code translate="no">inCluster</code></p>
 <h3 id="External-Pulsar" class="common-anchor-header">외부 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +242,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">이 예제에서는 Pulsar의 각 구성 요소에 대한 복제본 수, Pulsar BookKeeper의 컴퓨팅 리소스 및 기타 구성을 지정합니다.</div>
-<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a>에서 내부 Pulsar 서비스를 구성하기 위한 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
+<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml에서</a> 내부 Pulsar 서비스를 구성하기 위한 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
 <p>구성 파일의 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정하고, 다음 명령을 실행하여 구성을 적용하십시오.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -346,7 +346,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>내부 Kafka 서비스를 구성하는 데 필요한 전체 구성 항목은 <a href="https://artifacthub.io/packages/helm/bitnami/kafka">여기에서</a> 확인할 수 있습니다. 필요에 따라 ` <code translate="no">kafka.inCluster.values</code>` 아래에 구성 항목을 추가하십시오.</p>
+<p>내부 Kafka 서비스를 구성하는 데 필요한 전체 구성 항목은 <a href="https://artifacthub.io/packages/helm/bitnami/kafka">여기에서</a> 확인할 수 있습니다. 필요에 따라 <code translate="no">kafka.inCluster.values</code> 아래에 구성 항목을 추가하십시오.</p>
 <p>구성 파일 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정할 때, 다음 명령을 실행하여 구성을 적용하십시오.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

@@ -75,7 +75,7 @@ title: 펄서
       </svg>
     </button></h3><p>(Woodpecker 대신) 번들된 Pulsar를 사용하는 Milvus 클러스터를 배포하려면, Streaming Node가 활성화된 Helm 차트를 설치하십시오:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
+<li><strong>2.5.x에서 2.6.x로 업그레이드:</strong> <strong>메시지 큐 제한 사항</strong>: Milvus v3.0.5로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.
 Pulsar를 실행 중이며 계속 사용하려는 경우, 업그레이드 중에 메시지 큐를 변경하지 마십시오.</li>
 <li><strong>Pulsar v2 → v3:</strong> <a href="/docs/ko/upgrade-pulsar-v3.md">‘Pulsar v2에서 v3로 업그레이드’를</a> 참조하십시오. v2를 계속 사용하려면 <a href="/docs/ko/use-pulsar-v2.md">‘Pulsar v2 계속 사용하기’를</a> 참조하십시오.</li>
 </ul>

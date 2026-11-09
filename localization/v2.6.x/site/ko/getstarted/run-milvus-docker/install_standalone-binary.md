@@ -55,7 +55,7 @@ title: RPM/DEB 패키지를 사용하여 Milvus 독립형 버전 설치
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">Milvus 릴리스 페이지에서</a> 시스템 아키텍처에 맞는 RPM/DEB 패키지를 다운로드할 수 있습니다.</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.26">Milvus 릴리스 페이지에서</a> 시스템 아키텍처에 맞는 RPM/DEB 패키지를 다운로드할 수 있습니다.</p>
 <ul>
 <li>x86_64/amd64의 경우, <strong>milvus_2.6.24-1_amd64.deb</strong> 또는 <strong>milvus_2.6.24-1_amd64.rpm</strong> 패키지를 다운로드하십시오.</li>
 <li>ARM64의 경우, <strong>milvus_2.6.24-1_arm64.deb</strong> 또는 <strong>milvus_2.6.24-1_arm64.rpm</strong> 패키지를 다운로드하십시오.</li>
@@ -133,7 +133,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 target 매개변수를 검색하여 해당 내용을 수정하면 됩니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
+    </button></h2><p><code translate="no">/etc/milvus/configs/milvus.yaml</code> 파일에서 Milvus 구성을 수정할 수 있습니다. 예를 들어, <code translate="no">proxy.healthCheckTimeout</code> 을 <code translate="no">1000</code> ms로 변경하려면 target 매개변수를 검색하여 적절히 수정하면 됩니다. 적용 가능한 구성 항목에 대해서는 <a href="/docs/ko/v2.6.x/system_configuration.md">시스템 구성을</a> 참조하십시오.</p>
 <h2 id="Stop-Milvus-Standalone" class="common-anchor-header">Milvus Standalone 중지<button data-href="#Stop-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

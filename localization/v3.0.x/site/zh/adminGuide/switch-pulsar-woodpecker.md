@@ -1,7 +1,7 @@
 ---
 id: switch-pulsar-woodpecker.md
 title: 在 Pulsar 和 Woodpecker 之间切换
-summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 Pulsar 和 Woodpecker 之间进行切换。
+summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 Pulsar 和 Woodpecker 之间切换。
 ---
 <h1 id="Switch-between-Pulsar-and-Woodpecker" class="common-anchor-header">在 Pulsar 和 Woodpecker 之间切换<button data-href="#Switch-between-Pulsar-and-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,9 +68,9 @@ summary: 使用 Helm 或 Milvus Operator，将 Milvus 集群的消息队列在 P
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切换成功时会记录<code translate="no">[mqTypeValue=woodpecker]</code> 。</p>
-<p><strong>步骤 4：（可选）停止 Pulsar 并进行清理。</strong>对于<strong>内置</strong>Pulsar，请禁用 Pulsar 并启用 Woodpecker，然后删除 Pulsar PVC：</p>
+<p><strong>步骤 4：（可选）停止 Pulsar 并进行清理。</strong>对于<strong>内置</strong>Pulsar，请禁用 Pulsar 并启用 Woodpecker，然后删除 Pulsar 的 PVC：</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 </thead>
 <tbody>
 <tr><td>内置 Pulsar</td><td>Woodpecker（MinIO）</td><td><strong>已支持</strong></td><td><strong>受支持</strong></td></tr>
-<tr><td>外部 Pulsar</td><td>Woodpecker (MinIO)</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
+<tr><td>外部 Pulsar</td><td>Woodpecker（MinIO）</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>外部 Pulsar</td><td><strong>已支持</strong></td><td><strong>已支持</strong></td></tr>
 <tr><td>Pulsar</td><td>Woodpecker（本地）</td><td><strong>支持但不推荐</strong>（所有 pod 都需要共享文件系统）</td><td><strong>不支持</strong></td></tr>
 </tbody>

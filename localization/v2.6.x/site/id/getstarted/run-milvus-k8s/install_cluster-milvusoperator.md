@@ -177,10 +177,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat mendistribusikan kluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas mengimplementasikan kluster Milvus dengan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk v2.6.25) dan semua komponen arsitektur baru, termasuk Streaming Node.</p>
+<p>Perintah di atas mengimplementasikan kluster Milvus dengan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk v2.6.26) dan semua komponen arsitektur baru, termasuk Streaming Node.</p>
 <p><strong>Fitur utama arsitektur dalam penyebaran ini:</strong></p>
 <ul>
-<li><strong>Antrian Pesan</strong>: <a href="/docs/id/v2.6.x/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
+<li><strong>Antrian Pesan</strong>: <a href="/docs/id/v2.6.x/use-woodpecker.md">Menggunakan Woodpecker</a> (mengurangi beban pemeliharaan infrastruktur)</li>
 <li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang lebih baik</li>
 <li><strong>Mix Coordinator</strong>: Komponen koordinator yang terkonsolidasi untuk meningkatkan efisiensi</li>
 </ul>
@@ -238,7 +238,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">endpoint:</span> <span class="hljs-string">my-release-milvus.default:19530</span>
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus Operator membuat dependensi Milvus, seperti etcd, Pulsar, dan MinIO, kemudian komponen Milvus, seperti proxy, koordinator, dan node.</p>
+<p>Milvus Operator membuat dependensi Milvus, seperti etcd, Pulsar, dan MinIO, lalu komponen Milvus, seperti proxy, koordinator, dan node.</p>
 <p>Setelah kluster Milvus Anda siap, status semua pod di kluster Milvus seharusnya mirip dengan berikut ini.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
@@ -411,7 +411,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/id/v2.6.x/manage_databases.md">Mengelola Basis Data</a></li>
 <li><a href="/docs/id/v2.6.x/manage-collections.md">Mengelola Koleksi</a></li>
 <li><a href="/docs/id/v2.6.x/manage-partitions.md">Mengelola partisi</a></li>
-<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert, &amp; Hapus</a></li>
+<li><a href="/docs/id/v2.6.x/insert-update-delete.md">Sisipkan, Upsert &amp; Hapus</a></li>
 <li><a href="/docs/id/v2.6.x/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/v2.6.x/multi-vector-search.md">Pencarian Hibrida</a></li>
 </ul></li>

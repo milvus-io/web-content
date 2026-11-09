@@ -1,6 +1,6 @@
 ---
 id: json-indexing.md
-title: Indexation JSON
+title: JSON Indexing
 summary: >-
   Les champs JSON offrent un moyen flexible de stocker des métadonnées
   structurées dans Milvus. Sans indexation, les requêtes portant sur des champs
@@ -10,7 +10,7 @@ summary: >-
   permet d'accélérer l'exécution des requêtes de comparaison d'égalité, de plage
   et d'autres requêtes de filtrage portant sur ces chemins.
 ---
-<h1 id="JSON-Indexing" class="common-anchor-header">Indexation JSON<button data-href="#JSON-Indexing" class="anchor-icon" translate="no">
+<h1 id="JSON-Indexing" class="common-anchor-header">JSON Indexing<button data-href="#JSON-Indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,15 +25,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Les champs JSON offrent un moyen flexible de stocker des métadonnées structurées dans Milvus. Sans indexation, les requêtes sur les champs JSON nécessitent un balayage complet de la collection, ce qui ralentit les opérations à mesure que votre ensemble de données s'étoffe. L'indexation JSON crée un index sur un chemin spécifique au sein de vos données JSON afin que les requêtes d'égalité, de plage et autres requêtes de filtrage sur ce chemin s'exécutent rapidement.</p>
-<p>L'indexation JSON est idéale pour :</p>
+    </button></h1><p>JSON fields provide a flexible way to store structured metadata in Milvus. Without indexing, queries on JSON fields require full collection scans, which become slow as your dataset grows. JSON indexing creates an index on a specific path within your JSON data so equality, range, and other filter queries on that path run fast.</p>
+<p>JSON indexing is ideal for:</p>
 <ul>
-<li><p>Les schémas structurés avec des clés cohérentes et connues</p></li>
-<li><p>Les requêtes d’égalité, d’ <code translate="no">IN</code>, de plage et de correspondance de texte sur des chemins JSON spécifiques</p></li>
-<li><p>Les scénarios dans lesquels vous avez besoin d’un contrôle précis sur les clés à indexer</p></li>
+<li><p>Structured schemas with consistent, known keys</p></li>
+<li><p>Equality, <code translate="no">IN</code>, range, and text-match queries on specific JSON paths</p></li>
+<li><p>Scenarios where you need precise control over which keys are indexed</p></li>
 </ul>
-<p>Pour les documents JSON complexes présentant des modèles de requêtes variés, envisagez <a href="/docs/fr/json-shredding.md">le « JSON Shredding</a> » comme alternative.</p>
-<h2 id="Index-type-overview" class="common-anchor-header">Présentation des types d’index<button data-href="#Index-type-overview" class="anchor-icon" translate="no">
+<p>For complex JSON documents with diverse query patterns, consider <a href="/docs/fr/json-shredding.md">JSON Shredding</a> as an alternative.</p>
+<h2 id="Index-type-overview" class="common-anchor-header">Index type overview<button data-href="#Index-type-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,9 +48,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus propose quatre types d’index pour les chemins JSON. Chacun est adapté à un modèle de requête différent.</p>
-<p>Avant de choisir un type d’index, identifiez le <strong>type de conversion (cast)</strong> du chemin JSON. Le type de conversion détermine la manière dont Milvus interprète la valeur à ce chemin et les types d’index disponibles.</p>
-<h3 id="Understand-cast-types" class="common-anchor-header">Comprendre les types de conversion<button data-href="#Understand-cast-types" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus offers four index types for JSON paths. Each is suited to a different query pattern.</p>
+<p>Before choosing an index type, identify the <strong>cast type</strong> for the JSON path. The cast type determines how Milvus interprets the value at that path and which index types are available.</p>
+<h3 id="Understand-cast-types" class="common-anchor-header">Understand cast types<button data-href="#Understand-cast-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,24 +65,26 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">json_cast_type</code> Il s'agit du type de données utilisé pour interpréter et indexer la valeur située à l'adresse <code translate="no">json_path</code>. Il diffère du type de schéma du champ : le champ reste un champ de type « <code translate="no">JSON</code> », mais chaque chemin indexé est traité comme un type spécifique (scalaire, tableau ou objet JSON).</p>
-<p>Choisissez le type de conversion qui correspond aux valeurs stockées à ce chemin. Pour vérifier si un type de conversion est compatible avec un type d’index spécifique, consultez <a href="/docs/fr/json-indexing.md#compatibility-reference">la référence de compatibilité</a>.</p>
+    </button></h3><p><code translate="no">json_cast_type</code> is the data type used to interpret and index the value at <code translate="no">json_path</code>. It is different from the field schema type: the field is still a <code translate="no">JSON</code> field, but each indexed path is treated as a specific scalar, array, or JSON object type.</p>
+<p>Choose the cast type that matches the values stored at the path. To check whether a cast type works with a specific index type, see <a href="/docs/fr/json-indexing.md#Compatibility-reference">Compatibility reference</a>.</p>
 <table>
 <thead>
-<tr><th>Type de conversion</th><th>À utiliser lorsque la valeur du chemin est…</th><th>Exemple de valeur</th></tr>
+<tr><th>Cast type</th><th>Use when the path value is…</th><th>Example value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code></td><td>Une valeur booléenne</td><td><code translate="no">true</code></td></tr>
-<tr><td><code translate="no">DOUBLE</code></td><td>Une valeur numérique</td><td><code translate="no">99.99</code></td></tr>
-<tr><td><code translate="no">VARCHAR</code></td><td>Une valeur de type chaîne</td><td><code translate="no">&quot;electronics&quot;</code></td></tr>
-<tr><td><code translate="no">ARRAY_BOOL</code></td><td>Un tableau de valeurs booléennes</td><td><code translate="no">[true, false]</code></td></tr>
-<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>Un tableau de valeurs numériques</td><td><code translate="no">[1.2, 3.14]</code></td></tr>
-<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>Un tableau de chaînes de caractères</td><td><code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td>Un objet JSON entier ou un sous-objet. L'indexation d'objets JSON entiers est obsolète à partir de Milvus 3.0.0.</td><td><code translate="no">{&quot;supplier&quot;: {&quot;country&quot;: &quot;USA&quot;}}</code></td></tr>
+<tr><td><code translate="no">BOOL</code></td><td>A Boolean value</td><td><code translate="no">true</code></td></tr>
+<tr><td><code translate="no">DOUBLE</code></td><td>A numeric value</td><td><code translate="no">99.99</code></td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>A string value</td><td><code translate="no">&quot;electronics&quot;</code></td></tr>
+<tr><td><code translate="no">ARRAY_BOOL</code></td><td>An array of Boolean values</td><td><code translate="no">[true, false]</code></td></tr>
+<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>An array of numeric values</td><td><code translate="no">[1.2, 3.14]</code></td></tr>
+<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>An array of string values</td><td><code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td></tr>
 </tbody>
 </table>
-<p>Si les valeurs situées au même chemin ont des types incompatibles, seules les valeurs correspondant au type de conversion sont indexées. Par exemple, si <code translate="no">metadata[&quot;price&quot;]</code> contient à la fois <code translate="no">99.99</code> et <code translate="no">&quot;99.99&quot;</code>, un index de type <code translate="no">DOUBLE</code> inclut la valeur numérique et ignore la valeur de type chaîne de caractères. Pour convertir des valeurs de type chaîne de caractères lors de l’indexation, utilisez <code translate="no">json_cast_function</code>; voir <a href="/docs/fr/json-indexing.md#example-5-convert-data-type-at-index-time">Exemple 5 : Conversion du type de données au moment de l’indexation</a>.</p>
-<h3 id="Choose-an-index-type" class="common-anchor-header">Choisissez un type d’index<button data-href="#Choose-an-index-type" class="anchor-icon" translate="no">
+<p>If values at the same path have inconsistent types, only values that match the cast type are indexed. For example, if <code translate="no">metadata[&quot;price&quot;]</code> contains both <code translate="no">99.99</code> and <code translate="no">&quot;99.99&quot;</code>, an index of the <code translate="no">DOUBLE</code> cast type includes the numeric value and skips the string value. To convert string values during indexing, use <code translate="no">json_cast_function</code>; see <a href="/docs/fr/json-indexing.md#Example-5-Convert-data-type-at-index-time">Example 5: Convert data type at index time</a>.</p>
+<div class="alert warning">
+<p>Whole-object JSON indexing (<code translate="no">json_cast_type=&quot;JSON&quot;</code>), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Create JSON path indexes for known query paths, or consider <a href="/docs/fr/json-shredding.md">JSON Shredding</a> for broad query acceleration.</p>
+</div>
+<h3 id="Choose-an-index-type" class="common-anchor-header">Choose an index type<button data-href="#Choose-an-index-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,20 +99,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir choisi un type de conversion, sélectionnez le type d’index en fonction de votre modèle de requête.</p>
+    </button></h3><p>After you choose a cast type, choose the index type according to your query pattern.</p>
 <table>
 <thead>
-<tr><th>Modèle de requête</th><th>Type d’index recommandé</th><th>Exigences relatives au type de conversion</th><th>Remarques</th></tr>
+<tr><th>Query pattern</th><th>Recommended index type</th><th>Cast type requirement</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr><td>Filtres mixtes d’égalité et de plage sur des valeurs scalaires</td><td><code translate="no">AUTOINDEX</code></td><td>Utilisez <code translate="no">BOOL</code>, <code translate="no">DOUBLE</code> ou <code translate="no">VARCHAR</code>.</td><td>Laissez Milvus choisir la structure interne de l'index en fonction de la cardinalité des valeurs.</td></tr>
-<tr><td>Filtres sur les valeurs contenues dans des tableaux JSON</td><td><code translate="no">INVERTED</code></td><td>Utilisez <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code> ou <code translate="no">ARRAY_VARCHAR</code>.</td><td>Obligatoire pour tous les types de conversion de tableaux.</td></tr>
-<tr><td>Indexation d’objets entiers ou de sous-objets (obsolète)</td><td><code translate="no">INVERTED</code> ou <code translate="no">AUTOINDEX</code> (à des fins de compatibilité uniquement)</td><td>Utilisez <code translate="no">JSON</code>.</td><td>Prise en charge à des fins de compatibilité. Pour les nouvelles charges de travail, créez des index spécifiques au chemin d’accès ou envisagez <a href="/docs/fr/json-shredding.md">le « JSON Shredding</a> ».</td></tr>
-<tr><td>Filtres de plage sur des nombres ou des chaînes triables</td><td><code translate="no">STL_SORT</code> ou <code translate="no">AUTOINDEX</code></td><td>Utilisez <code translate="no">DOUBLE</code> ou <code translate="no">VARCHAR</code>.</td><td>Utilisez <code translate="no">STL_SORT</code> pour forcer une disposition triée ; utilisez <code translate="no">AUTOINDEX</code> lorsque vous souhaitez une sélection automatique.</td></tr>
-<tr><td>Filtres d’égalité ou d’ <code translate="no">IN</code> sur des valeurs à faible cardinalité</td><td><code translate="no">BITMAP</code> ou <code translate="no">AUTOINDEX</code></td><td>Utilisez <code translate="no">BOOL</code> ou <code translate="no">VARCHAR</code>.</td><td>Utilisez <code translate="no">BITMAP</code> pour forcer une disposition de type bitmap. Pour les valeurs numériques, utilisez <code translate="no">AUTOINDEX</code> ou <code translate="no">STL_SORT</code>.</td></tr>
+<tr><td>Mixed equality and range filters on scalar values</td><td><code translate="no">AUTOINDEX</code></td><td>Use <code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, or <code translate="no">VARCHAR</code>.</td><td>Lets Milvus choose the internal index layout based on value cardinality.</td></tr>
+<tr><td>Filters on values inside JSON arrays</td><td><code translate="no">INVERTED</code></td><td>Use <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, or <code translate="no">ARRAY_VARCHAR</code>.</td><td>Required for all array cast types.</td></tr>
+<tr><td>Range filters on numbers or sortable strings</td><td><code translate="no">STL_SORT</code> or <code translate="no">AUTOINDEX</code></td><td>Use <code translate="no">DOUBLE</code> or <code translate="no">VARCHAR</code>.</td><td>Use <code translate="no">STL_SORT</code> to force a sorted layout; use <code translate="no">AUTOINDEX</code> when you want automatic selection.</td></tr>
+<tr><td>Equality or <code translate="no">IN</code> filters on low-cardinality values</td><td><code translate="no">BITMAP</code> or <code translate="no">AUTOINDEX</code></td><td>Use <code translate="no">BOOL</code> or <code translate="no">VARCHAR</code>.</td><td>Use <code translate="no">BITMAP</code> to force a bitmap layout. For numeric values, use <code translate="no">AUTOINDEX</code> or <code translate="no">STL_SORT</code>.</td></tr>
 </tbody>
 </table>
-<p>En cas de doute, commencez par <code translate="no">AUTOINDEX</code> pour les chemins scalaires. Utilisez explicitement <code translate="no">INVERTED</code> pour les types de conversion de tableaux et les requêtes de correspondance de texte. L’indexation JSON d’objets entiers avec <code translate="no">INVERTED</code> ou <code translate="no">AUTOINDEX</code> reste prise en charge, mais elle est dépréciée à partir de Milvus 3.0.0.</p>
+<p>When in doubt, start with <code translate="no">AUTOINDEX</code> for scalar paths. Use <code translate="no">INVERTED</code> explicitly for array cast types and text-match queries.</p>
 <h3 id="AUTOINDEX" class="common-anchor-header">AUTOINDEX<button data-href="#AUTOINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,26 +127,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">AUTOINDEX</code> dépend de l’ <code translate="no">json_cast_type</code> que vous spécifiez. Dans Milvus 3.0, <code translate="no">AUTOINDEX</code> ne se résout plus systématiquement en <code translate="no">INVERTED</code> pour les index de chemins JSON.</p>
+    </button></h3><p><code translate="no">AUTOINDEX</code> behavior depends on the <code translate="no">json_cast_type</code> you specify. In Milvus 3.0, <code translate="no">AUTOINDEX</code> no longer always resolves to <code translate="no">INVERTED</code> for JSON path indexes.</p>
 <table>
 <thead>
-<tr><th>Composition de type</th><th><code translate="no">AUTOINDEX</code> comportement</th></tr>
+<tr><th>Cast type</th><th><code translate="no">AUTOINDEX</code> behavior</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code></td><td>Choisis entre <code translate="no">BITMAP</code> et <code translate="no">STL_SORT</code> en fonction de la cardinalité de la valeur.</td></tr>
-<tr><td><code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, <code translate="no">ARRAY_VARCHAR</code></td><td>Non pris en charge. Utilisez explicitement « <code translate="no">INVERTED</code> » comme type d’index.</td></tr>
-<tr><td><code translate="no">JSON</code></td><td>Utilise ` <code translate="no">INVERTED</code> ` pour l'indexation d'objets entiers ou de sous-objets. Ce mode est obsolète à partir de Milvus 3.0.0.</td></tr>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code></td><td>Chooses between <code translate="no">BITMAP</code> and <code translate="no">STL_SORT</code> based on value cardinality.</td></tr>
+<tr><td><code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, <code translate="no">ARRAY_VARCHAR</code></td><td>Not supported. Use <code translate="no">INVERTED</code> explicitly as the index type.</td></tr>
 </tbody>
 </table>
-<p>Pour les types de conversion scalaire (<code translate="no">BOOL</code>, <code translate="no">DOUBLE</code> et <code translate="no">VARCHAR</code>), <code translate="no">AUTOINDEX</code> est le point de départ recommandé lorsque vous souhaitez que Milvus choisisse la structure d’index interne. Lors de la création de l’index, Milvus mesure la <strong>cardinalité</strong> des valeurs au chemin JSON. La cardinalité correspond au nombre de valeurs distinctes à ce chemin.</p>
-<p>En fonction de cette cardinalité, Milvus choisit l’une des deux structures internes suivantes :</p>
+<p>For scalar cast types (<code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, and <code translate="no">VARCHAR</code>), <code translate="no">AUTOINDEX</code> is the recommended starting point when you want Milvus to choose the internal index layout. During index build, Milvus measures the <strong>cardinality</strong> of the values at the JSON path. Cardinality means the number of distinct values at that path.</p>
+<p>Based on cardinality, Milvus chooses one of two internal layouts:</p>
 <ul>
-<li><p><strong>Faible cardinalité</strong>: les valeurs se répètent souvent, comme <code translate="no">metadata[&quot;in_stock&quot;]</code> avec <code translate="no">true</code> et <code translate="no">false</code>, ou <code translate="no">metadata[&quot;status&quot;]</code> avec un petit ensemble de chaînes de statut. Milvus construit en interne un index de type « <code translate="no">BITMAP</code> » pour des filtres d’égalité et d’ <code translate="no">IN</code> s rapides.</p></li>
-<li><p><strong>Cardinalité élevée</strong>: la plupart des valeurs sont distinctes, telles que <code translate="no">metadata[&quot;price&quot;]</code>, <code translate="no">metadata[&quot;created_at&quot;]</code> ou <code translate="no">metadata[&quot;product_id&quot;]</code>. Milvus crée en interne un index <code translate="no">STL_SORT</code> pour accélérer les filtres de plage tels que <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code> et <code translate="no">&lt;=</code>.</p></li>
+<li><p><strong>Low cardinality</strong>: Values repeat often, such as <code translate="no">metadata[&quot;in_stock&quot;]</code> with <code translate="no">true</code> and <code translate="no">false</code>, or <code translate="no">metadata[&quot;status&quot;]</code> with a small set of status strings. Milvus builds a <code translate="no">BITMAP</code> index internally for fast equality and <code translate="no">IN</code> filters.</p></li>
+<li><p><strong>High cardinality</strong>: Most values are distinct, such as <code translate="no">metadata[&quot;price&quot;]</code>, <code translate="no">metadata[&quot;created_at&quot;]</code>, or <code translate="no">metadata[&quot;product_id&quot;]</code>. Milvus builds an <code translate="no">STL_SORT</code> index internally for fast range filters such as <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, and <code translate="no">&lt;=</code>.</p></li>
 </ul>
-<p>Le seuil par défaut pour « <code translate="no">BITMAP</code> » par rapport à «<code translate="no">STL_SORT</code> » est de <strong>100 valeurs distinctes</strong>. Vous pouvez ajuster ce seuil à l’aide de ` <code translate="no">bitmap_cardinality_limit</code>` ; voir « <a href="/docs/fr/json-indexing.md#how-do-i-tune-autoindexs-bitmap-vs-stl-sort-threshold">Comment ajuster le seuil BITMAP-vs-STL_SORT d’AUTOINDEX ?</a> ».</p>
+<p>The default <code translate="no">BITMAP</code>-vs-<code translate="no">STL_SORT</code> threshold is <strong>100 distinct values</strong>. You can tune this threshold with <code translate="no">bitmap_cardinality_limit</code>; see <a href="/docs/fr/json-indexing.md#How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold">How do I tune AUTOINDEX’s BITMAP-vs-STL_SORT threshold?</a>.</p>
 <div class="alert note">
-<p><strong>Changement de comportement dans Milvus 3.0</strong>. Dans les versions antérieures, l’ <code translate="no">AUTOINDEX</code> sur des chemins JSON créait toujours un index <code translate="no">INVERTED</code>. À partir de Milvus 3.0, <code translate="no">AUTOINDEX</code> choisit entre <code translate="no">BITMAP</code> et <code translate="no">STL_SORT</code> pour les types de conversion scalaires. Pour <code translate="no">JSON</code>, <code translate="no">AUTOINDEX</code> utilise toujours <code translate="no">INVERTED</code>, bien que l’indexation JSON d’objets entiers soit dépréciée. Pour les types de conversion de tableaux et les requêtes de correspondance de texte, spécifiez explicitement <code translate="no">INVERTED</code>.</p>
+<p><strong>Behavior change in Milvus 3.0</strong>. In earlier versions, <code translate="no">AUTOINDEX</code> on JSON paths always built an <code translate="no">INVERTED</code> index. From Milvus 3.0, <code translate="no">AUTOINDEX</code> picks between <code translate="no">BITMAP</code> and <code translate="no">STL_SORT</code> for scalar cast types. For array cast types and text-match queries, specify <code translate="no">INVERTED</code> explicitly.</p>
 </div>
 <h3 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,15 +162,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">INVERTED</code> est la solution la plus adaptée lorsque vous avez besoin de requêtes de correspondance de texte ou d’indexation de tableaux. Elle reste également disponible pour l’indexation JSON d’objets entiers, bien que celle-ci soit obsolète.</p>
-<p>Spécifiez explicitement <code translate="no">INVERTED</code> lorsque :</p>
+    </button></h3><p><code translate="no">INVERTED</code> is the best fit when you need text-match queries or array indexing.</p>
+<p>Specify <code translate="no">INVERTED</code> explicitly when:</p>
 <ul>
-<li><p>Vous devez indexer des valeurs à l’intérieur de tableaux JSON.</p></li>
-<li><p>Vous gérez un index existant sur un objet JSON entier ou un sous-objet et souhaitez rendre explicite le comportement « <code translate="no">INVERTED</code> ».</p></li>
-<li><p>Vous souhaitez disposer d’un type d’index unique prenant en charge les requêtes d’égalité, d’ <code translate="no">IN</code>, de plage, de correspondance de texte et de tableau. La prise en charge de l’objet entier reste disponible à des fins de compatibilité, au prix d’une taille d’index plus importante.</p></li>
+<li><p>You need to index values inside JSON arrays.</p></li>
+<li><p>You want one index type that handles equality, <code translate="no">IN</code>, range, text-match, and array queries.</p></li>
 </ul>
-<p>Pour les index existants sur des objets JSON entiers (<code translate="no">json_cast_type=&quot;JSON&quot;</code>), vous pouvez continuer à utiliser soit <code translate="no">INVERTED</code>, soit <code translate="no">AUTOINDEX</code>. <code translate="no">AUTOINDEX</code> utilise <code translate="no">INVERTED</code> pour ce type de conversion. L’indexation JSON d’objets entiers n’est plus recommandée pour les nouvelles charges de travail.</p>
-<p>Pour plus de détails, consultez la section <a href="/docs/fr/inverted.md">INVERTED</a>.</p>
+<p>For details, refer to <a href="/docs/fr/inverted.md">INVERTED</a>.</p>
 <h3 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -186,15 +184,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">STL_SORT</code> stocke les valeurs d’un chemin JSON dans un ordre trié. Il est optimisé pour les filtres de plage sur des valeurs numériques ou des chaînes de caractères triables.</p>
-<p><code translate="no">STL_SORT</code> Ne prend en charge que les types de conversion <code translate="no">DOUBLE</code> et <code translate="no">VARCHAR</code>. À utiliser lorsque :</p>
+    </button></h3><p><code translate="no">STL_SORT</code> stores values from a JSON path in sorted order. It is optimized for range filters on numeric values or sortable string values.</p>
+<p><code translate="no">STL_SORT</code> supports only <code translate="no">DOUBLE</code> and <code translate="no">VARCHAR</code> cast types. Use it when:</p>
 <ul>
-<li><p>Vos filtres comparent des valeurs de type ` <code translate="no">&gt;</code>`, ` <code translate="no">&lt;</code>`, ` <code translate="no">&gt;=</code>` ou ` <code translate="no">&lt;=</code>`.</p></li>
-<li><p>Les valeurs indexées présentent une cardinalité élevée, comme les prix, les horodatages, les identifiants ou les codes triables.</p></li>
-<li><p>Vous souhaitez forcer une mise en page triée au lieu de laisser <code translate="no">AUTOINDEX</code> choisir.</p></li>
+<li><p>Your filters compare values with <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, or <code translate="no">&lt;=</code>.</p></li>
+<li><p>The indexed values have high cardinality, such as prices, timestamps, IDs, or sortable codes.</p></li>
+<li><p>You want to force a sorted layout instead of letting <code translate="no">AUTOINDEX</code> choose.</p></li>
 </ul>
-<p><code translate="no">STL_SORT</code> Ne prend pas en charge les types de conversion <code translate="no">BOOL</code>, <code translate="no">ARRAY_*</code> ou <code translate="no">JSON</code>. Utilisez <code translate="no">INVERTED</code> pour les tableaux. Les index d’objets entiers existants peuvent continuer à utiliser <code translate="no">INVERTED</code> ou <code translate="no">AUTOINDEX</code>, mais l’indexation JSON d’objets entiers est obsolète.</p>
-<p>Pour plus de détails, reportez-vous à <a href="/docs/fr/stl-sort.md">STL_SORT</a>.</p>
+<p><code translate="no">STL_SORT</code> does not support <code translate="no">BOOL</code> or <code translate="no">ARRAY_*</code> cast types. Use <code translate="no">INVERTED</code> for arrays.</p>
+<p>For details, refer to <a href="/docs/fr/stl-sort.md">STL_SORT</a>.</p>
 <h3 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,16 +208,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">BITMAP</code> crée un bitmap compact pour chaque valeur distincte d’un chemin JSON. Il est optimisé pour les filtres d’égalité et de type « <code translate="no">IN</code> » sur les valeurs qui se répètent souvent.</p>
-<p><code translate="no">BITMAP</code> Ne prend en charge que les types de conversion <code translate="no">BOOL</code> et <code translate="no">VARCHAR</code>. À utiliser lorsque :</p>
+    </button></h3><p><code translate="no">BITMAP</code> creates a compact bitmap for each distinct value at a JSON path. It is optimized for equality and <code translate="no">IN</code> filters on values that repeat often.</p>
+<p><code translate="no">BITMAP</code> supports only <code translate="no">BOOL</code> and <code translate="no">VARCHAR</code> cast types. Use it when:</p>
 <ul>
-<li><p>Vos filtres utilisent des types de conversion « <code translate="no">==</code> » ou « <code translate="no">IN</code> ».</p></li>
-<li><p>Les valeurs indexées ont une faible cardinalité, comme les valeurs booléennes, les valeurs d’état ou un petit ensemble de catégories.</p></li>
-<li><p>Vous souhaitez forcer une disposition en bitmap plutôt que de laisser <code translate="no">AUTOINDEX</code> choisir.</p></li>
+<li><p>Your filters use <code translate="no">==</code> or <code translate="no">IN</code>.</p></li>
+<li><p>The indexed values have low cardinality, such as booleans, status values, or a small set of categories.</p></li>
+<li><p>You want to force a bitmap layout instead of letting <code translate="no">AUTOINDEX</code> choose.</p></li>
 </ul>
-<p><code translate="no">BITMAP</code> ne prend pas en charge les types de conversion <code translate="no">DOUBLE</code>, <code translate="no">ARRAY_*</code> ou <code translate="no">JSON</code>. Pour les valeurs numériques, utilisez plutôt <code translate="no">AUTOINDEX</code>, <code translate="no">STL_SORT</code> ou <code translate="no">INVERTED</code>.</p>
-<p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/bitmap.md">BITMAP</a>.</p>
-<h3 id="Compatibility-reference" class="common-anchor-header">Référence de compatibilité<button data-href="#Compatibility-reference" class="anchor-icon" translate="no">
+<p><code translate="no">BITMAP</code> does not support <code translate="no">DOUBLE</code> or <code translate="no">ARRAY_*</code> cast types. For numeric values, use <code translate="no">AUTOINDEX</code>, <code translate="no">STL_SORT</code>, or <code translate="no">INVERTED</code> instead.</p>
+<p>For details, refer to <a href="/docs/fr/bitmap.md">BITMAP</a>.</p>
+<h3 id="Compatibility-reference" class="common-anchor-header">Compatibility reference<button data-href="#Compatibility-reference" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -234,23 +232,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilisez le tableau suivant comme référence rapide pour les combinaisons d'<code translate="no">(cast type, index type)</code> s prises en charge.</p>
+    </button></h3><p>Use the following matrix as a quick reference for supported <code translate="no">(cast type, index type)</code> combinations.</p>
 <table>
 <thead>
-<tr><th>Type de conversion</th><th>Description</th><th>Exemple de valeur</th><th>AUTOINDEX</th><th>INVERTED</th><th>STL_SORT</th><th>BITMAP</th></tr>
+<tr><th>Cast type</th><th>Description</th><th>Example value</th><th>AUTOINDEX</th><th>INVERTED</th><th>STL_SORT</th><th>BITMAP</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code></td><td>Valeurs booléennes (<code translate="no">true</code>/<code translate="no">false</code>).</td><td><code translate="no">true</code></td><td>Oui</td><td>Oui</td><td>Non</td><td>Oui</td></tr>
-<tr><td><code translate="no">DOUBLE</code></td><td>Valeurs numériques (entiers ou flottants).</td><td><code translate="no">99.99</code></td><td>Oui</td><td>Oui</td><td>Oui</td><td>Non</td></tr>
-<tr><td><code translate="no">VARCHAR</code></td><td>Valeurs de type chaîne.</td><td><code translate="no">&quot;electronics&quot;</code></td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
-<tr><td><code translate="no">ARRAY_BOOL</code></td><td>Tableau de valeurs booléennes.</td><td><code translate="no">[true, false]</code></td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
-<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>Tableau de nombres.</td><td><code translate="no">[1.2, 3.14]</code></td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
-<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>Tableau de chaînes de caractères.</td><td><code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
-<tr><td><code translate="no">JSON</code></td><td>Un objet JSON complet ou un sous-objet avec inférence de type et aplatissement automatiques. Obsolète à partir de Milvus 3.0.0.</td><td>tout objet imbriqué</td><td>Oui (obsolète)</td><td>Oui (obsolète)</td><td>Non</td><td>Non</td></tr>
+<tr><td><code translate="no">BOOL</code></td><td>Boolean values (<code translate="no">true</code>/<code translate="no">false</code>).</td><td><code translate="no">true</code></td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+<tr><td><code translate="no">DOUBLE</code></td><td>Numeric values (integers or floats).</td><td><code translate="no">99.99</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>String values.</td><td><code translate="no">&quot;electronics&quot;</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><code translate="no">ARRAY_BOOL</code></td><td>Array of booleans.</td><td><code translate="no">[true, false]</code></td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>Array of numbers.</td><td><code translate="no">[1.2, 3.14]</code></td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>Array of strings.</td><td><code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
 </tbody>
 </table>
-<p>Pour les cellules marquées « <code translate="no">No</code> », Milvus rejette la requête au moment de la création de l’index. Pour les types de conversion de tableaux, utilisez explicitement « <code translate="no">INVERTED</code> » (la fonction «<code translate="no">AUTOINDEX</code> » ne prend pas en charge les tableaux).</p>
-<h2 id="Create-a-JSON-index" class="common-anchor-header">Créer un index JSON<button data-href="#Create-a-JSON-index" class="anchor-icon" translate="no">
+<p>For cells marked <code translate="no">No</code>, Milvus rejects the request at index-creation time. For array cast types, use <code translate="no">INVERTED</code> explicitly (<code translate="no">AUTOINDEX</code> does not cover arrays).</p>
+<h2 id="Create-a-JSON-index" class="common-anchor-header">Create a JSON index<button data-href="#Create-a-JSON-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -265,8 +262,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cette section explique comment indexer différentes formes de données JSON. Tous les exemples utilisent la structure d'exemple ci-dessous et partent du principe que vous disposez déjà d'une collection comprenant un champ de type « <code translate="no">JSON</code> » nommé « <code translate="no">metadata</code> ».</p>
-<h3 id="Sample-JSON-structure" class="common-anchor-header">Exemple de structure JSON<button data-href="#Sample-JSON-structure" class="anchor-icon" translate="no">
+    </button></h2><p>This section walks through indexing different shapes of JSON data. All examples use the sample structure below and assume you already have a collection that includes a <code translate="no">JSON</code> field named <code translate="no">metadata</code>.</p>
+<h3 id="Sample-JSON-structure" class="common-anchor-header">Sample JSON structure<button data-href="#Sample-JSON-structure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -300,7 +297,7 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Basic-setup" class="common-anchor-header">Configuration de base<button data-href="#Basic-setup" class="anchor-icon" translate="no">
+<h3 id="Basic-setup" class="common-anchor-header">Basic setup<button data-href="#Basic-setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,12 +312,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les exemples ci-dessous partent du principe que vous disposez d’un <code translate="no">MilvusClient</code> nommé <code translate="no">client</code> connecté à votre déploiement Milvus, ainsi que d’une collection comprenant déjà un champ <code translate="no">JSON</code> nommé <code translate="no">metadata</code>. Si vous devez les configurer à partir de zéro, développez le bloc ci-dessous.</p>
+    </button></h3><p>The examples below assume you have a <code translate="no">MilvusClient</code> named <code translate="no">client</code> connected to your Milvus deployment, and a collection that already includes a <code translate="no">JSON</code> field named <code translate="no">metadata</code>. If you need to set those up from scratch, expand the block below.</p>
 <p><details></p>
-<p><summary>Se connecter et créer une collection d’exemple</summary></p>
+<p><summary>Connect and create a sample collection</summary></p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="hljs-comment"># Define a schema with a JSON field</span>
 schema = client.create_schema(enable_dynamic_field=<span class="hljs-literal">False</span>)
@@ -363,12 +370,427 @@ client.insert(
     }],
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(connectConfig);
+
+<span class="hljs-comment">// Define a schema with a JSON field</span>
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
+schema.setEnableDynamicField(<span class="hljs-literal">false</span>);
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;pk&quot;</span>).dataType(DataType.Int64).isPrimaryKey(<span class="hljs-literal">true</span>).autoID(<span class="hljs-literal">false</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;vec&quot;</span>).dataType(DataType.FloatVector).dimension(<span class="hljs-number">4</span>).build());
+schema.addField(AddFieldReq.builder().fieldName(<span class="hljs-string">&quot;metadata&quot;</span>).dataType(DataType.JSON).isNullable(<span class="hljs-literal">true</span>).build());
+
+<span class="hljs-comment">// Minimal vector index so the collection can be loaded</span>
+List&lt;IndexParam&gt; vecIndex = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+vecIndex.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;vec&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.L2)
+        .build());
+
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(vecIndex)
+        .build());
+
+<span class="hljs-comment">// Insert one row that matches the sample JSON structure above</span>
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">metadata</span> <span class="hljs-operator">=</span> gson.fromJson(<span class="hljs-string">&quot;{&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;category\&quot;: \&quot;electronics\&quot;,&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;brand\&quot;: \&quot;BrandA\&quot;,&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;in_stock\&quot;: true,&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;price\&quot;: 99.99,&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;string_price\&quot;: \&quot;99.99\&quot;,&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;tags\&quot;: [\&quot;clearance\&quot;, \&quot;summer_sale\&quot;],&quot;</span>
+        + <span class="hljs-string">&quot;\&quot;supplier\&quot;: {&quot;</span>
+        + <span class="hljs-string">&quot;    \&quot;name\&quot;: \&quot;SupplierX\&quot;,&quot;</span>
+        + <span class="hljs-string">&quot;    \&quot;country\&quot;: \&quot;USA\&quot;,&quot;</span>
+        + <span class="hljs-string">&quot;    \&quot;contact\&quot;: {&quot;</span>
+        + <span class="hljs-string">&quot;        \&quot;email\&quot;: \&quot;support@supplierx.com\&quot;,&quot;</span>
+        + <span class="hljs-string">&quot;        \&quot;phone\&quot;: \&quot;+1-800-555-0199\&quot;&quot;</span>
+        + <span class="hljs-string">&quot;    }&quot;</span>
+        + <span class="hljs-string">&quot;}&quot;</span>
+        + <span class="hljs-string">&quot;}&quot;</span>, JsonObject.class);
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row.addProperty(<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-number">1L</span>);
+row.add(<span class="hljs-string">&quot;vec&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>)));
+row.add(<span class="hljs-string">&quot;metadata&quot;</span>, metadata);
+
+client.insert(InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .data(Collections.singletonList(row))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+<span class="hljs-comment">// Define a schema with a JSON field</span>
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;pk&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>).WithIsAutoID(<span class="hljs-literal">false</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;vec&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">4</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;metadata&quot;</span>).WithDataType(entity.FieldTypeJSON).WithNullable(<span class="hljs-literal">true</span>))
+
+<span class="hljs-comment">// Minimal vector index so the collection can be loaded</span>
+vecIndex := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>, index.NewAutoIndex(entity.L2))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, schema).
+    WithIndexOptions(vecIndex))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+
+<span class="hljs-comment">// Insert one row that matches the sample JSON structure above</span>
+metadata := []<span class="hljs-type">byte</span>(<span class="hljs-string">`{
+    &quot;category&quot;: &quot;electronics&quot;,
+    &quot;brand&quot;: &quot;BrandA&quot;,
+    &quot;in_stock&quot;: true,
+    &quot;price&quot;: 99.99,
+    &quot;string_price&quot;: &quot;99.99&quot;,
+    &quot;tags&quot;: [&quot;clearance&quot;, &quot;summer_sale&quot;],
+    &quot;supplier&quot;: {
+        &quot;name&quot;: &quot;SupplierX&quot;,
+        &quot;country&quot;: &quot;USA&quot;,
+        &quot;contact&quot;: {
+            &quot;email&quot;: &quot;support@supplierx.com&quot;,
+            &quot;phone&quot;: &quot;+1-800-555-0199&quot;
+        }
+    }
+}`</span>)
+result, err := cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>).
+    WithInt64Column(<span class="hljs-string">&quot;pk&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>}).
+    WithFloatVectorColumn(<span class="hljs-string">&quot;vec&quot;</span>, <span class="hljs-number">4</span>, [][]<span class="hljs-type">float32</span>{{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>}}).
+    WithColumns(column.NewColumnJSONBytes(<span class="hljs-string">&quot;metadata&quot;</span>, [][]<span class="hljs-type">byte</span>{metadata})))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+log.Printf(<span class="hljs-string">&quot;inserted %d rows&quot;</span>, result.InsertCount)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Define a schema with a JSON field</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;pk&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64).<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">false</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;vec&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector).<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">4</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;metadata&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Json).<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>));
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Minimal vector index so the collection can be loaded</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">vec_index</span> = IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;vec&quot;</span>)
+    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::L2);
+
+client.<span class="hljs-title function_ invoke__">create_index</span>(
+    CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_params</span>(<span class="hljs-built_in">vec!</span>[vec_index])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Insert one row that matches the sample JSON structure above</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">row</span> = json!({
+    <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">&quot;vec&quot;</span>: [<span class="hljs-number">0.1f32</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>],
+    <span class="hljs-string">&quot;metadata&quot;</span>: {
+        <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>,
+        <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>,
+        <span class="hljs-string">&quot;in_stock&quot;</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>,
+        <span class="hljs-string">&quot;string_price&quot;</span>: <span class="hljs-string">&quot;99.99&quot;</span>,
+        <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;clearance&quot;</span>, <span class="hljs-string">&quot;summer_sale&quot;</span>],
+        <span class="hljs-string">&quot;supplier&quot;</span>: {
+            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;SupplierX&quot;</span>,
+            <span class="hljs-string">&quot;country&quot;</span>: <span class="hljs-string">&quot;USA&quot;</span>,
+            <span class="hljs-string">&quot;contact&quot;</span>: {
+                <span class="hljs-string">&quot;email&quot;</span>: <span class="hljs-string">&quot;support@supplierx.com&quot;</span>,
+                <span class="hljs-string">&quot;phone&quot;</span>: <span class="hljs-string">&quot;+1-800-555-0199&quot;</span>
+            }
+        }
+    }
+});
+client.<span class="hljs-title function_ invoke__">insert</span>(
+    InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[row])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Define a schema with a JSON field</span>
+<span class="hljs-function">milvus::CollectionSchema <span class="hljs-title">schema</span><span class="hljs-params">(<span class="hljs-string">&quot;your_collection_name&quot;</span>)</span></span>;
+schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;pk&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>));
+schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;vec&quot;</span>, milvus::DataType::FLOAT_VECTOR, <span class="hljs-string">&quot;&quot;</span>).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">4</span>));
+schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;metadata&quot;</span>, milvus::DataType::JSON, <span class="hljs-string">&quot;&quot;</span>).<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>));
+
+<span class="hljs-comment">// Minimal vector index so the collection can be loaded</span>
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">vec_index</span><span class="hljs-params">(<span class="hljs-string">&quot;vec&quot;</span>, <span class="hljs-string">&quot;vec_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::L2)</span></span>;
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+    .<span class="hljs-built_in">WithCollectionSchema</span>(std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;(schema)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+    .<span class="hljs-built_in">WithIndexes</span>({std::<span class="hljs-built_in">move</span>(vec_index)})
+    .<span class="hljs-built_in">WithSync</span>(<span class="hljs-literal">true</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Insert one row that matches the sample JSON structure above</span>
+milvus::InsertRequest insert_req;
+insert_req.<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>);
+insert_req.<span class="hljs-built_in">AddRowData</span>({{<span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-number">1</span>},
+                       {<span class="hljs-string">&quot;vec&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>}},
+                       {<span class="hljs-string">&quot;metadata&quot;</span>, nlohmann::json::<span class="hljs-built_in">parse</span>(<span class="hljs-string">R&quot;({
+                            &quot;category&quot;: &quot;electronics&quot;,
+                            &quot;brand&quot;: &quot;BrandA&quot;,
+                            &quot;in_stock&quot;: true,
+                            &quot;price&quot;: 99.99,
+                            &quot;string_price&quot;: &quot;99.99&quot;,
+                            &quot;tags&quot;: [&quot;clearance&quot;, &quot;summer_sale&quot;],
+                            &quot;supplier&quot;: {
+                                &quot;name&quot;: &quot;SupplierX&quot;,
+                                &quot;country&quot;: &quot;USA&quot;,
+                                &quot;contact&quot;: {
+                                    &quot;email&quot;: &quot;support@supplierx.com&quot;,
+                                    &quot;phone&quot;: &quot;+1-800-555-0199&quot;
+                                }
+                            }
+                        })&quot;</span>)}});
+milvus::InsertResponse insert_resp;
+status = client-&gt;<span class="hljs-built_in">Insert</span>(insert_req, insert_resp);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+
+<span class="hljs-comment">// Define a schema with a JSON field</span>
+<span class="hljs-keyword">const</span> fields = [
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;pk&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>, <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span> },
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;vec&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>, <span class="hljs-attr">type_params</span>: { <span class="hljs-attr">dim</span>: <span class="hljs-string">&quot;4&quot;</span> } },
+  { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">JSON</span>, <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span> },
+];
+
+<span class="hljs-comment">// Minimal vector index so the collection can be loaded</span>
+<span class="hljs-keyword">const</span> indexParams = [
+  { <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;vec&quot;</span>, <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;vec_index&quot;</span>, <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;L2&quot;</span> },
+];
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  fields,
+  <span class="hljs-attr">index_params</span>: indexParams,
+});
+
+<span class="hljs-comment">// Insert one row that matches the sample JSON structure above</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">data</span>: [
+    {
+      <span class="hljs-attr">pk</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">vec</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>],
+      <span class="hljs-attr">metadata</span>: {
+        <span class="hljs-attr">category</span>: <span class="hljs-string">&quot;electronics&quot;</span>,
+        <span class="hljs-attr">brand</span>: <span class="hljs-string">&quot;BrandA&quot;</span>,
+        <span class="hljs-attr">in_stock</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">price</span>: <span class="hljs-number">99.99</span>,
+        <span class="hljs-attr">string_price</span>: <span class="hljs-string">&quot;99.99&quot;</span>,
+        <span class="hljs-attr">tags</span>: [<span class="hljs-string">&quot;clearance&quot;</span>, <span class="hljs-string">&quot;summer_sale&quot;</span>],
+        <span class="hljs-attr">supplier</span>: {
+          <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;SupplierX&quot;</span>,
+          <span class="hljs-attr">country</span>: <span class="hljs-string">&quot;USA&quot;</span>,
+          <span class="hljs-attr">contact</span>: {
+            <span class="hljs-attr">email</span>: <span class="hljs-string">&quot;support@supplierx.com&quot;</span>,
+            <span class="hljs-attr">phone</span>: <span class="hljs-string">&quot;+1-800-555-0199&quot;</span>,
+          },
+        },
+      },
+    },
+  ],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig { Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>, ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span> });
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-comment">// Define a schema with a JSON field</span>
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema
+{
+    Fields =
+    {
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;pk&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>, autoId: <span class="hljs-literal">false</span>),
+        FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;vec&quot;</span>, dimension: <span class="hljs-number">4</span>),
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;metadata&quot;</span>, DataType.Json) { Nullable = <span class="hljs-literal">true</span> }
+    }
+};
+
+<span class="hljs-comment">// Minimal vector index so the collection can be loaded</span>
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+    Schema = schema,
+    Indexes = <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;vec&quot;</span>, <span class="hljs-string">&quot;vec_index&quot;</span>, IndexType.AutoIndex, MetricType.L2)
+    }
+});
+
+<span class="hljs-comment">// Insert one row that matches the sample JSON structure above</span>
+<span class="hljs-keyword">await</span> client.InsertAsync(<span class="hljs-keyword">new</span> InsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+    RowsData = <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+        {
+            [<span class="hljs-string">&quot;pk&quot;</span>] = <span class="hljs-number">1L</span>,
+            [<span class="hljs-string">&quot;vec&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span> },
+            [<span class="hljs-string">&quot;metadata&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+            {
+                [<span class="hljs-string">&quot;category&quot;</span>] = <span class="hljs-string">&quot;electronics&quot;</span>,
+                [<span class="hljs-string">&quot;brand&quot;</span>] = <span class="hljs-string">&quot;BrandA&quot;</span>,
+                [<span class="hljs-string">&quot;in_stock&quot;</span>] = <span class="hljs-literal">true</span>,
+                [<span class="hljs-string">&quot;price&quot;</span>] = <span class="hljs-number">99.99</span>,
+                [<span class="hljs-string">&quot;string_price&quot;</span>] = <span class="hljs-string">&quot;99.99&quot;</span>,
+                [<span class="hljs-string">&quot;tags&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;clearance&quot;</span>, <span class="hljs-string">&quot;summer_sale&quot;</span> },
+                [<span class="hljs-string">&quot;supplier&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+                {
+                    [<span class="hljs-string">&quot;name&quot;</span>] = <span class="hljs-string">&quot;SupplierX&quot;</span>,
+                    [<span class="hljs-string">&quot;country&quot;</span>] = <span class="hljs-string">&quot;USA&quot;</span>,
+                    [<span class="hljs-string">&quot;contact&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+                    {
+                        [<span class="hljs-string">&quot;email&quot;</span>] = <span class="hljs-string">&quot;support@supplierx.com&quot;</span>,
+                        [<span class="hljs-string">&quot;phone&quot;</span>] = <span class="hljs-string">&quot;+1-800-555-0199&quot;</span>
+                    }
+                }
+            }
+        }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection_name&quot;,
+    &quot;schema&quot;: {
+      &quot;autoID&quot;: false,
+      &quot;enableDynamicField&quot;: false,
+      &quot;fields&quot;: [
+        {&quot;fieldName&quot;: &quot;pk&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;isPrimary&quot;: true},
+        {&quot;fieldName&quot;: &quot;vec&quot;, &quot;dataType&quot;: &quot;FloatVector&quot;, &quot;elementTypeParams&quot;: {&quot;dim&quot;: 4}},
+        {&quot;fieldName&quot;: &quot;metadata&quot;, &quot;dataType&quot;: &quot;JSON&quot;, &quot;nullable&quot;: true}
+      ]
+    },
+    &quot;indexParams&quot;: [
+      {&quot;fieldName&quot;: &quot;vec&quot;, &quot;indexName&quot;: &quot;vec_index&quot;, &quot;indexType&quot;: &quot;AUTOINDEX&quot;, &quot;metricType&quot;: &quot;L2&quot;}
+    ]
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Préparez un objet `index-params` pour collecter les définitions d’index ajoutées dans les exemples ci-dessous :</p>
+<p>Prepare an index-params object to collect the index definitions added in the examples below:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 <button class="copy-code-btn"></button></code></pre>
-<p>Chaque exemple ci-dessous présente un appel ` <code translate="no">index_params.add_index(...)</code> `. Choisissez ceux qui correspondent à vos données et appelez-les sur le même objet ` <code translate="no">index_params</code> `. Appliquez ensuite l’ensemble dans un seul appel ` <code translate="no">client.create_index(...)</code> ` à la fin. Pour plus de détails, consultez la section « <a href="/docs/fr/json-indexing.md#apply-the-index">Appliquer l’index</a> ».</p>
-<h3 id="Example-1-Index-a-top-level-key-with-AUTOINDEX" class="common-anchor-header">Exemple 1 : indexer une clé de niveau supérieur avec AUTOINDEX<button data-href="#Example-1-Index-a-top-level-key-with-AUTOINDEX" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java">List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">var</span> indexOpts []milvusclient.CreateIndexOption
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">index_params</span> = <span class="hljs-type">Vec</span>::<span class="hljs-title function_ invoke__">new</span>();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;milvus::IndexDesc&gt; index_params;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = [];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> indexParams = <span class="hljs-keyword">new</span> List&lt;IndexParam&gt;();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST creates one index per request; collect the definitions below</span>
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&quot;[]&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Each example that follows shows one <code translate="no">index_params.add_index(...)</code> call. Pick the ones that match your data and call them on the same <code translate="no">index_params</code> object. Then apply everything in a single <code translate="no">client.create_index(...)</code> call at the end. For details, see <a href="/docs/fr/json-indexing.md#Apply-the-index">Apply the index</a>.</p>
+<h3 id="Example-1-Index-a-top-level-key-with-AUTOINDEX" class="common-anchor-header">Example 1: Index a top-level key with AUTOINDEX<button data-href="#Example-1-Index-a-top-level-key-with-AUTOINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -383,7 +805,17 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Indexez le champ « <code translate="no">category</code> » pour permettre un filtrage rapide par catégorie de produit. Avec « <code translate="no">AUTOINDEX</code> », Milvus choisit « <code translate="no">BITMAP</code> » ou « <code translate="no">STL_SORT</code> » en fonction du nombre de catégories distinctes présentes dans vos données.</p>
+    </button></h3><p>Index the <code translate="no">category</code> field for fast filtering by product category. With <code translate="no">AUTOINDEX</code>, Milvus picks <code translate="no">BITMAP</code> or <code translate="no">STL_SORT</code> based on how many distinct categories exist in your data.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
 <span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
@@ -394,7 +826,86 @@ client.insert(
 <span class="highlighted-comment-line">    }</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Index-a-nested-key" class="common-anchor-header">Exemple 2 : indexer une clé imbriquée<button data-href="#Example-2-Index-a-nested-key" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;VARCHAR&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;category_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`metadata[&quot;category&quot;]`</span>).
+    WithIndexName(<span class="hljs-string">&quot;category_index&quot;</span>)
+indexOpts = <span class="hljs-built_in">append</span>(indexOpts, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex1).
+    WithIndexName(<span class="hljs-string">&quot;category_index&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;category_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;VARCHAR&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">category_index</span><span class="hljs-params">(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;category_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+category_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>);
+category_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;VARCHAR&quot;</span>);
+index_params.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(category_index));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;metadata&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;category_index&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">extra_params</span>: {
+    <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;metadata[&quot;category&quot;]&#x27;</span>,
+    <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&quot;VARCHAR&quot;</span>,
+  },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;category_index&quot;</span>, IndexType.AutoIndex)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;VARCHAR&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> categoryIndex=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;metadata&quot;,
+  &quot;indexName&quot;: &quot;category_index&quot;,
+  &quot;params&quot;: {
+    &quot;index_type&quot;: &quot;AUTOINDEX&quot;,
+    &quot;json_path&quot;: &quot;metadata[\\\&quot;category\\\&quot;]&quot;,
+    &quot;json_cast_type&quot;: &quot;VARCHAR&quot;
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-2-Index-a-nested-key" class="common-anchor-header">Example 2: Index a nested key<button data-href="#Example-2-Index-a-nested-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -409,7 +920,17 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Indexez le champ « <code translate="no">email</code> », fortement imbriqué, pour permettre la recherche des contacts des fournisseurs. Le paramètre « <code translate="no">json_path</code> » accepte toute profondeur de notation entre crochets.</p>
+    </button></h3><p>Index the deeply nested <code translate="no">email</code> field for supplier contact lookups. The <code translate="no">json_path</code> parameter accepts any depth of bracket notation.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
 <span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
@@ -420,7 +941,86 @@ client.insert(
 <span class="highlighted-comment-line">    }</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Range-queries-with-STLSORT" class="common-anchor-header">Exemple 3 : requêtes sur des plages avec STL_SORT<button data-href="#Example-3-Range-queries-with-STLSORT" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;supplier\&quot;][\&quot;contact\&quot;][\&quot;email\&quot;]&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;VARCHAR&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;email_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`metadata[&quot;supplier&quot;][&quot;contact&quot;][&quot;email&quot;]`</span>).
+    WithIndexName(<span class="hljs-string">&quot;email_index&quot;</span>)
+indexOpts = <span class="hljs-built_in">append</span>(indexOpts, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex2).
+    WithIndexName(<span class="hljs-string">&quot;email_index&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;email_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;metadata[\&quot;supplier\&quot;][\&quot;contact\&quot;][\&quot;email\&quot;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;VARCHAR&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">email_index</span><span class="hljs-params">(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;email_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+email_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;supplier\&quot;][\&quot;contact\&quot;][\&quot;email\&quot;]&quot;</span>);
+email_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;VARCHAR&quot;</span>);
+index_params.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(email_index));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;metadata&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;email_index&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">extra_params</span>: {
+    <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;metadata[&quot;supplier&quot;][&quot;contact&quot;][&quot;email&quot;]&#x27;</span>,
+    <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&quot;VARCHAR&quot;</span>,
+  },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;email_index&quot;</span>, IndexType.AutoIndex)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;supplier\&quot;][\&quot;contact\&quot;][\&quot;email\&quot;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;VARCHAR&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> emailIndex=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;metadata&quot;,
+  &quot;indexName&quot;: &quot;email_index&quot;,
+  &quot;params&quot;: {
+    &quot;index_type&quot;: &quot;AUTOINDEX&quot;,
+    &quot;json_path&quot;: &quot;metadata[\\\&quot;supplier\\\&quot;][\\\&quot;contact\\\&quot;][\\\&quot;email\\\&quot;]&quot;,
+    &quot;json_cast_type&quot;: &quot;VARCHAR&quot;
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-3-Range-queries-with-STLSORT" class="common-anchor-header">Example 3: Range queries with STL_SORT<button data-href="#Example-3-Range-queries-with-STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -435,7 +1035,17 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Lorsque vous savez que vos requêtes sur un chemin seront principalement constituées de comparaisons de plages (<code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code>), sélectionnez directement l’option « <code translate="no">STL_SORT</code> ». Cela permet de contourner la mesure de cardinalité et de créer immédiatement la structure triée.</p>
+    </button></h3><p>When you know your queries on a path will be dominated by range comparisons (<code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code>), pick <code translate="no">STL_SORT</code> directly. This bypasses cardinality measurement and builds the sorted layout immediately.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
 <span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>,</span>
@@ -446,8 +1056,87 @@ client.insert(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Après l’indexation, les requêtes par plage telles que <code translate="no">metadata[&quot;price&quot;] &gt; 50 AND metadata[&quot;price&quot;] &lt; 100</code> utilisent la recherche binaire au lieu d’un balayage complet.</p>
-<h3 id="Example-4-Equality-queries-with-BITMAP" class="common-anchor-header">Exemple 4 : requêtes d’égalité avec BITMAP<button data-href="#Example-4-Equality-queries-with-BITMAP" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;DOUBLE&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;price_index&quot;</span>)
+        .indexType(IndexParam.IndexType.STL_SORT)
+        .extraParams(extraParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+jsonIndex3 := index.NewJSONPathIndex(index.Sorted, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`metadata[&quot;price&quot;]`</span>).
+    WithIndexName(<span class="hljs-string">&quot;price_index&quot;</span>)
+indexOpts = <span class="hljs-built_in">append</span>(indexOpts, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex3).
+    WithIndexName(<span class="hljs-string">&quot;price_index&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;price_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::StlSort)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;DOUBLE&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">price_index</span><span class="hljs-params">(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;price_index&quot;</span>, milvus::IndexType::STL_SORT)</span></span>;
+price_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>);
+price_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;DOUBLE&quot;</span>);
+index_params.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(price_index));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;metadata&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;price_index&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;STL_SORT&quot;</span>,
+  <span class="hljs-attr">extra_params</span>: {
+    <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;metadata[&quot;price&quot;]&#x27;</span>,
+    <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&quot;DOUBLE&quot;</span>,
+  },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;price_index&quot;</span>, IndexType.StlSort)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;price\&quot;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;DOUBLE&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> priceIndex=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;metadata&quot;,
+  &quot;indexName&quot;: &quot;price_index&quot;,
+  &quot;params&quot;: {
+    &quot;index_type&quot;: &quot;STL_SORT&quot;,
+    &quot;json_path&quot;: &quot;metadata[\\\&quot;price\\\&quot;]&quot;,
+    &quot;json_cast_type&quot;: &quot;DOUBLE&quot;
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>After indexing, range queries like <code translate="no">metadata[&quot;price&quot;] &gt; 50 AND metadata[&quot;price&quot;] &lt; 100</code> use binary search instead of a full scan.</p>
+<h3 id="Example-4-Equality-queries-with-BITMAP" class="common-anchor-header">Example 4: Equality queries with BITMAP<button data-href="#Example-4-Equality-queries-with-BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -462,7 +1151,17 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour les clés à faible cardinalité, telles que les codes d’état, les valeurs booléennes ou les chaînes de type énumération, choisissez directement <code translate="no">BITMAP</code>. Les requêtes d’égalité et de type « <code translate="no">IN</code> » deviennent des opérations bitmap.</p>
+    </button></h3><p>For low-cardinality keys, such as status codes, booleans, or enum-like strings, pick <code translate="no">BITMAP</code> directly. Equality and <code translate="no">IN</code> queries become bitmap operations.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
 <span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;BITMAP&quot;</span>,</span>
@@ -473,8 +1172,87 @@ client.insert(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">BITMAP</code> Cette option convient également parfaitement aux champs tels qu’une colonne de type « <code translate="no">status</code> » ne comportant qu’une poignée de valeurs de chaîne distinctes.</p>
-<h3 id="Example-5-Convert-data-type-at-index-time" class="common-anchor-header">Exemple 5 : Conversion du type de données lors de la création de l’index<button data-href="#Example-5-Convert-data-type-at-index-time" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;in_stock\&quot;]&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;BOOL&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;in_stock_index&quot;</span>)
+        .indexType(IndexParam.IndexType.BITMAP)
+        .extraParams(extraParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+jsonIndex4 := index.NewJSONPathIndex(index.BITMAP, <span class="hljs-string">&quot;bool&quot;</span>, <span class="hljs-string">`metadata[&quot;in_stock&quot;]`</span>).
+    WithIndexName(<span class="hljs-string">&quot;in_stock_index&quot;</span>)
+indexOpts = <span class="hljs-built_in">append</span>(indexOpts, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex4).
+    WithIndexName(<span class="hljs-string">&quot;in_stock_index&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;in_stock_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::Bitmap)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;metadata[\&quot;in_stock\&quot;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;BOOL&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">in_stock_index</span><span class="hljs-params">(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;in_stock_index&quot;</span>, milvus::IndexType::BITMAP)</span></span>;
+in_stock_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;in_stock\&quot;]&quot;</span>);
+in_stock_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;BOOL&quot;</span>);
+index_params.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(in_stock_index));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;metadata&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;in_stock_index&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;BITMAP&quot;</span>,
+  <span class="hljs-attr">extra_params</span>: {
+    <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;metadata[&quot;in_stock&quot;]&#x27;</span>,
+    <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&quot;BOOL&quot;</span>,
+  },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;in_stock_index&quot;</span>, IndexType.Bitmap)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;in_stock\&quot;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;BOOL&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> inStockIndex=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;metadata&quot;,
+  &quot;indexName&quot;: &quot;in_stock_index&quot;,
+  &quot;params&quot;: {
+    &quot;index_type&quot;: &quot;BITMAP&quot;,
+    &quot;json_path&quot;: &quot;metadata[\\\&quot;in_stock\\\&quot;]&quot;,
+    &quot;json_cast_type&quot;: &quot;BOOL&quot;
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">BITMAP</code> is also a strong fit for fields like a <code translate="no">status</code> column with a handful of distinct string values.</p>
+<h3 id="Example-5-Convert-data-type-at-index-time" class="common-anchor-header">Example 5: Convert data type at index time<button data-href="#Example-5-Convert-data-type-at-index-time" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -489,7 +1267,17 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Lorsque des données numériques sont stockées par erreur sous forme de chaînes de caractères, utilisez « <code translate="no">STRING_TO_DOUBLE</code> » pour convertir la valeur en nombre lors de la création de l’index.</p>
+    </button></h3><p>When numeric data is mistakenly stored as strings, use <code translate="no">STRING_TO_DOUBLE</code> to convert the value to a number during index build.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
 <span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
@@ -501,8 +1289,95 @@ client.insert(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Si la conversion échoue pour une ligne (par exemple, une chaîne non numérique telle que « <code translate="no">&quot;invalid&quot;</code> »), cette ligne est ignorée lors de l’indexation.</p>
-<h3 id="Example-6-Index-entire-JSON-objects" class="common-anchor-header">Exemple 6 : Indexation d’objets JSON entiers<button data-href="#Example-6-Index-entire-JSON-objects" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;string_price\&quot;]&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;DOUBLE&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_function&quot;</span>, <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;string_to_double_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`metadata[&quot;string_price&quot;]`</span>).
+    WithIndexName(<span class="hljs-string">&quot;string_to_double_index&quot;</span>)
+opt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex5).
+    WithIndexName(<span class="hljs-string">&quot;string_to_double_index&quot;</span>)
+opt5.WithExtraParam(<span class="hljs-string">&quot;json_cast_function&quot;</span>, <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>)
+indexOpts = <span class="hljs-built_in">append</span>(indexOpts, opt5)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;string_to_double_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;metadata[\&quot;string_price\&quot;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;DOUBLE&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_function&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">string_to_double_index</span><span class="hljs-params">(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;string_to_double_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+string_to_double_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;string_price\&quot;]&quot;</span>);
+string_to_double_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;DOUBLE&quot;</span>);
+string_to_double_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_function&quot;</span>, <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>);
+index_params.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(string_to_double_index));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;metadata&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;string_to_double_index&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">extra_params</span>: {
+    <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;metadata[&quot;string_price&quot;]&#x27;</span>,
+    <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&quot;DOUBLE&quot;</span>,
+    <span class="hljs-attr">json_cast_function</span>: <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>,
+  },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;string_to_double_index&quot;</span>, IndexType.AutoIndex)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;string_price\&quot;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;DOUBLE&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_function&quot;</span>] = <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> stringToDoubleIndex=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;metadata&quot;,
+  &quot;indexName&quot;: &quot;string_to_double_index&quot;,
+  &quot;params&quot;: {
+    &quot;index_type&quot;: &quot;AUTOINDEX&quot;,
+    &quot;json_path&quot;: &quot;metadata[\\\&quot;string_price\\\&quot;]&quot;,
+    &quot;json_cast_type&quot;: &quot;DOUBLE&quot;,
+    &quot;json_cast_function&quot;: &quot;STRING_TO_DOUBLE&quot;
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>If conversion fails for a row (for example, a non-numeric string like <code translate="no">&quot;invalid&quot;</code>), that row is skipped during indexing.</p>
+<h3 id="Apply-the-index" class="common-anchor-header">Apply the index<button data-href="#Apply-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -517,62 +1392,170 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><div class="alert warning">
-<p>À partir de Milvus 3.0.0, l’indexation d’objets JSON entiers (<code translate="no">json_cast_type=&quot;JSON&quot;</code>), également appelée indexation JSON plate, est dépréciée. Les index existants et les nouvelles demandes de création d’index restent pris en charge à des fins de compatibilité, mais ce mode n’est plus recommandé pour les nouvelles charges de travail. Créez des index de chemin JSON pour les chemins de requête connus. Pour les documents JSON complexes ou évolutifs présentant des modèles de requêtes variés, envisagez <a href="/docs/fr/json-shredding.md">le « JSON Shredding</a> ». Le « JSON Shredding » n’accélère pas les valeurs contenues dans les tableaux ; utilisez des index de chemin JSON avec des types de conversion de tableau pour ces requêtes.</p>
+    </button></h3><p>After adding all your index parameters, apply them to your collection:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
-<p>Pour les charges de travail existantes compatibles, le paramètre « <code translate="no">json_cast_type=&quot;JSON&quot;</code> » indexe la structure complète au chemin donné. Milvus aplatit les objets imbriqués en chemins et déduit automatiquement le type de chaque valeur. Toutes les clés situées sous ce chemin deviennent consultables.</p>
-<p><code translate="no">AUTOINDEX</code> utilise de manière transparente l’ <code translate="no">INVERTED</code> pour le type de conversion « <code translate="no">JSON</code> », car l’aplatissement et la déduction de type sont des fonctionnalités de l’index inversé.</p>
-<p>Indexer l’objet « <code translate="no">metadata</code> » dans son intégralité :</p>
-<pre><code translate="no" class="language-python">index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
-    index_name=<span class="hljs-string">&quot;metadata_full_index&quot;</span>,
-    params={
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&quot;metadata&quot;</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;JSON&quot;</span>,</span>
-    }
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>Ou indexez un sous-objet, tel que toutes les informations d’ <code translate="no">supplier</code>:</p>
-<pre><code translate="no" class="language-python">index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-<span class="highlighted-wrapper-line">    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,</span>
-    index_name=<span class="hljs-string">&quot;supplier_index&quot;</span>,
-    params={
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&#x27;metadata[&quot;supplier&quot;]&#x27;</span>,</span>
-<span class="highlighted-comment-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;JSON&quot;</span>,</span>
-    }
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>L'indexation d'objets entiers augmente la taille de l'index. Pour les nouvelles charges de travail comportant des documents profondément imbriqués et des modèles de requêtes variés, utilisez des index spécifiques à un chemin d'accès ou envisagez <a href="/docs/fr/json-shredding.md">le « JSON Shredding</a> ».</p>
-<h3 id="Apply-the-index" class="common-anchor-header">Appliquer l’index<button data-href="#Apply-the-index" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Après avoir ajouté tous vos paramètres d’index, appliquez-les à votre collection :</p>
 <pre><code translate="no" class="language-python">client.create_index(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Les constructions d’index s’exécutent de manière asynchrone. Utilisez <code translate="no">client.describe_index(...)</code> pour vérifier l’état de construction d’un index spécifique. Le champ « <code translate="no">state</code> » affiche « <code translate="no">Finished</code> » une fois la construction terminée, tandis que « <code translate="no">total_rows</code> », « <code translate="no">indexed_rows</code> » et « <code translate="no">pending_index_rows</code> » indiquent la progression au fur et à mesure.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .indexParams(indexParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;log&quot;</span>
+
+<span class="hljs-keyword">for</span> _, opt := <span class="hljs-keyword">range</span> indexOpts {
+    _, err := cli.CreateIndex(ctx, opt)
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        log.Fatal(err)
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client.<span class="hljs-title function_ invoke__">create_index</span>(
+    CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_params</span>(index_params)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+    .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(index_params))
+    .<span class="hljs-built_in">WithSync</span>(<span class="hljs-literal">true</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(indexParams);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">await</span> client.CreateIndexAsync(<span class="hljs-keyword">new</span> CreateIndexReq
+{
+    CollectionName = <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+    Indexes = indexParams
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&quot;[
+  <span class="hljs-variable">$categoryIndex</span>,
+  <span class="hljs-variable">$emailIndex</span>,
+  <span class="hljs-variable">$priceIndex</span>,
+  <span class="hljs-variable">$inStockIndex</span>,
+  <span class="hljs-variable">$stringToDoubleIndex</span>,
+  <span class="hljs-variable">$metadataFullIndex</span>,
+  <span class="hljs-variable">$supplierIndex</span>
+]&quot;</span>
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;your_collection_name\&quot;,
+    \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
+  }&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Index builds run asynchronously. Use <code translate="no">client.describe_index(...)</code> to check the build state of a specific index. The <code translate="no">state</code> field shows <code translate="no">Finished</code> once the build is done, and <code translate="no">total_rows</code>, <code translate="no">indexed_rows</code>, and <code translate="no">pending_index_rows</code> show progress along the way.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.describe_index(
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,
     index_name=<span class="hljs-string">&quot;category_index&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Exemple de réponse :</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.DescribeIndexReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.response.DescribeIndexResp;
+
+<span class="hljs-type">DescribeIndexResp</span> <span class="hljs-variable">descResp</span> <span class="hljs-operator">=</span> client.describeIndex(DescribeIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;category_index&quot;</span>)
+        .build());
+System.out.println(descResp);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+desc, err := cli.DescribeIndex(ctx, milvusclient.NewDescribeIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;category_index&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+log.Printf(<span class="hljs-string">&quot;state=%s totalRows=%d indexedRows=%d&quot;</span>, desc.State, desc.TotalRows, desc.IndexedRows)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">desc</span> = client
+    .<span class="hljs-title function_ invoke__">describe_index</span>(
+        DescribeIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;category_index&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, desc);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+milvus::DescribeIndexRequest describe_req;
+describe_req.<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;your_collection_name&quot;</span>);
+describe_req.<span class="hljs-built_in">WithIndexName</span>(<span class="hljs-string">&quot;category_index&quot;</span>);
+milvus::DescribeIndexResponse describe_resp;
+status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(describe_req, describe_resp);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeIndex</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;category_index&quot;</span> });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+
+<span class="hljs-keyword">var</span> describeResp = <span class="hljs-keyword">await</span> client.DescribeIndexAsync(<span class="hljs-keyword">new</span> DescribeIndexReq
+{
+    CollectionName = <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+    IndexName = <span class="hljs-string">&quot;category_index&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/describe&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection_name&quot;,
+    &quot;indexName&quot;: &quot;category_index&quot;
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Sample response:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;json_path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;json_cast_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;VARCHAR&quot;</span><span class="hljs-punctuation">,</span>
@@ -585,8 +1568,8 @@ client.insert(
   <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Finished&quot;</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dès que <code translate="no">state</code> renvoie <code translate="no">Finished</code>, les requêtes portant sur le chemin indexé utilisent automatiquement le nouvel index.</p>
-<p>Pour les entrées de type « <code translate="no">AUTOINDEX</code> », le champ « <code translate="no">index_type</code> » de cette réponse est indiqué comme suit : « <code translate="no">AUTOINDEX</code> ». Milvus n’indique pas actuellement quelle structure sous-jacente (<code translate="no">BITMAP</code> ou <code translate="no">STL_SORT</code>) a été choisie lors de la compilation. Considérez ce choix comme une optimisation interne : les requêtes d’égalité, de type « <code translate="no">IN</code> » et de plage portant sur le chemin fonctionneront quelle que soit la structure sélectionnée.</p>
+<p>Once <code translate="no">state</code> reports <code translate="no">Finished</code>, queries against the indexed path use the new index automatically.</p>
+<p>For <code translate="no">AUTOINDEX</code> entries, the <code translate="no">index_type</code> field in this response is reported as <code translate="no">AUTOINDEX</code>. Milvus does not expose which underlying layout (<code translate="no">BITMAP</code> or <code translate="no">STL_SORT</code>) was chosen at build time. Treat the choice as an internal optimization: equality, <code translate="no">IN</code>, and range queries against the path will work regardless of which layout was selected.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -602,7 +1585,7 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type" class="common-anchor-header">Comment choisir entre AUTOINDEX et un type d’index explicite ?<button data-href="#How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type" class="anchor-icon" translate="no">
+    </button></h2><h3 id="How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type" class="common-anchor-header">How do I choose between AUTOINDEX and an explicit index type?<button data-href="#How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -617,14 +1600,13 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Commencez par <code translate="no">AUTOINDEX</code>. Il sélectionne la structure adaptée en fonction de la cardinalité de vos données et couvre la plupart des requêtes d’égalité, <code translate="no">IN</code>, et de plage sur les chemins JSON. Optez pour un type explicite lorsque :</p>
+    </button></h3><p>Start with <code translate="no">AUTOINDEX</code>. It picks the right layout from your data’s cardinality, and it covers most equality, <code translate="no">IN</code>, and range queries on JSON paths. Pick an explicit type when:</p>
 <ul>
-<li><p>Vous connaissez votre modèle de requête (par exemple, utilisez toujours « <code translate="no">STL_SORT</code> » pour les requêtes de plage et « <code translate="no">BITMAP</code> » pour les requêtes d’égalité sur des valeurs à faible cardinalité) et souhaitez éviter la mesure de la cardinalité.</p></li>
-<li><p>Vous avez besoin de requêtes de correspondance de texte ou de sous-chaîne. Utilisez <code translate="no">INVERTED</code>.</p></li>
-<li><p>Vous indexez des types de conversion de tableau. Utilisez explicitement ` <code translate="no">INVERTED</code> `.</p></li>
-<li><p>Vous gérez un index JSON d’objet entier existant. Les expressions <code translate="no">INVERTED</code> et <code translate="no">AUTOINDEX</code> restent prises en charge à des fins de compatibilité, mais l’indexation JSON d’objet entier est dépréciée à partir de Milvus 3.0.0.</p></li>
+<li><p>You know your query pattern (for example, always range queries use <code translate="no">STL_SORT</code>, and always equality queries on low-cardinality values use <code translate="no">BITMAP</code>) and want to skip cardinality measurement.</p></li>
+<li><p>You need text-match or substring queries. Use <code translate="no">INVERTED</code>.</p></li>
+<li><p>You’re indexing array cast types. Use <code translate="no">INVERTED</code> explicitly.</p></li>
 </ul>
-<h3 id="What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Que se passe-t-il si l’expression de filtrage d’une requête utilise un type différent du type de conversion indexé ?<button data-href="#What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">What happens if a query’s filter expression uses a different type than the indexed cast type?<button data-href="#What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -639,8 +1621,8 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si votre expression de filtrage utilise un type différent de celui de l’ <code translate="no">json_cast_type</code> de l’index, Milvus n’utilise pas l’index et peut recourir à un balayage par force brute plus lent si les données le permettent. Pour des performances optimales, veillez à toujours aligner votre expression de filtrage sur le type de conversion de l’index. Par exemple, si un index numérique est créé avec ` <code translate="no">json_cast_type=&quot;DOUBLE&quot;</code>`, seules les conditions de filtrage numériques exploiteront l’index.</p>
-<h3 id="What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="common-anchor-header">Que se passe-t-il si une clé JSON présente des types de données incohérents entre différentes entités ?<button data-href="#What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="anchor-icon" translate="no">
+    </button></h3><p>If your filter expression uses a different type than the index’s <code translate="no">json_cast_type</code>, Milvus does not use the index and may fall back to a slower brute-force scan if the data allows. For best performance, always align your filter expression with the cast type of the index. For example, if a numeric index is created with <code translate="no">json_cast_type=&quot;DOUBLE&quot;</code>, only numeric filter conditions will leverage the index.</p>
+<h3 id="What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="common-anchor-header">What if a JSON key has inconsistent data types across different entities?<button data-href="#What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -655,8 +1637,8 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Des types incohérents peuvent entraîner <strong>une indexation partielle</strong>. Par exemple, si <code translate="no">metadata[&quot;price&quot;]</code> est stocké à la fois sous forme de nombre (<code translate="no">99.99</code>) et de chaîne de caractères (<code translate="no">&quot;99.99&quot;</code>) et que vous créez un index avec <code translate="no">json_cast_type=&quot;DOUBLE&quot;</code>, seules les valeurs numériques seront indexées. Les entrées sous forme de chaîne de caractères seront ignorées et n’apparaîtront pas dans les résultats du filtrage. Utilisez ` <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> ` pour convertir les chaînes de caractères en nombres au moment de l’indexation, ou modifiez les données sources afin que toutes les entrées soient du même type.</p>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-key" class="common-anchor-header">Puis-je créer plusieurs index sur la même clé JSON ?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-key" class="anchor-icon" translate="no">
+    </button></h3><p>Inconsistent types can lead to <strong>partial indexing</strong>. For example, if <code translate="no">metadata[&quot;price&quot;]</code> is stored as both a number (<code translate="no">99.99</code>) and a string (<code translate="no">&quot;99.99&quot;</code>) and you create an index with <code translate="no">json_cast_type=&quot;DOUBLE&quot;</code>, only the numeric values are indexed. String-form entries are skipped and won’t appear in filter results. Use <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> to coerce strings to numbers at index time, or fix the source data so all entries share one type.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-key" class="common-anchor-header">Can I create multiple indexes on the same JSON key?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -671,8 +1653,8 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non. Milvus autorise au maximum un index par paire « <code translate="no">(field, json_path)</code> », quel que soit le type de conversion ou le type d’index. Vous ne pouvez pas créer à la fois un index « <code translate="no">INVERTED</code> » et un index « <code translate="no">BITMAP</code> » sur le même chemin, ni deux index sur le même chemin avec des types de conversion différents. Vous pouvez toutefois créer un index sur l’objet JSON entier et un index distinct sur une clé imbriquée au sein de cet objet, car il s’agit de chemins différents.</p>
-<h3 id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold" class="common-anchor-header">Comment régler le seuil BITMAP/STL_SORT d’AUTOINDEX ?<button data-href="#How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold" class="anchor-icon" translate="no">
+    </button></h3><p>No. Milvus allows at most one index per <code translate="no">(field, json_path)</code> pair, regardless of cast type or index type. You cannot create both an <code translate="no">INVERTED</code> and a <code translate="no">BITMAP</code> index on the same path, or two indexes on the same path with different cast types.</p>
+<h3 id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold" class="common-anchor-header">How do I tune AUTOINDEX’s BITMAP-vs-STL_SORT threshold?<button data-href="#How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -687,7 +1669,17 @@ client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Par défaut, <code translate="no">AUTOINDEX</code> choisit « <code translate="no">BITMAP</code> » lorsque les valeurs indexées comportent <strong>100 valeurs distinctes ou moins</strong>, et « <code translate="no">STL_SORT</code> » dans le cas contraire. Vous pouvez remplacer ce seuil en ajoutant « <code translate="no">&quot;bitmap_cardinality_limit&quot;</code> » à vos paramètres d’index (plage : 1-1 000) :</p>
+    </button></h3><p>By default, <code translate="no">AUTOINDEX</code> picks <code translate="no">BITMAP</code> when the indexed values have <strong>100 or fewer distinct values</strong> and <code translate="no">STL_SORT</code> otherwise. You can override this threshold by adding <code translate="no">&quot;bitmap_cardinality_limit&quot;</code> to your index parameters (range: 1-1000):</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
     index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
@@ -699,4 +1691,91 @@ client.insert(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>La plupart des utilisateurs n’ont pas besoin de régler ce paramètre. Augmentez-le si vous disposez d’un champ de cardinalité modérée que vous préférez voir traité en bitmap ; diminuez-le pour que <code translate="no">AUTOINDEX</code> soit remplacé plus rapidement par <code translate="no">STL_SORT</code>. Ce paramètre est ignoré lorsque vous spécifiez explicitement <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code> ou <code translate="no">BITMAP</code>.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; extraParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+extraParams.put(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;VARCHAR&quot;</span>);
+extraParams.put(<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>, <span class="hljs-number">200</span>);
+indexParams.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;category_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .extraParams(extraParams)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+jsonIndex8 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`metadata[&quot;category&quot;]`</span>).
+    WithIndexName(<span class="hljs-string">&quot;category_index&quot;</span>)
+opt8 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>, jsonIndex8).
+    WithIndexName(<span class="hljs-string">&quot;category_index&quot;</span>)
+opt8.WithExtraParam(<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>, <span class="hljs-string">&quot;200&quot;</span>)
+indexOpts = <span class="hljs-built_in">append</span>(indexOpts, opt8)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;metadata&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;category_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;VARCHAR&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;200&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">category_limit_index</span><span class="hljs-params">(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;category_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+category_limit_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>);
+category_limit_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;VARCHAR&quot;</span>);
+category_limit_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>, <span class="hljs-string">&quot;200&quot;</span>);
+index_params.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">move</span>(category_limit_index));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;your_collection_name&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;metadata&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;category_index&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">extra_params</span>: {
+    <span class="hljs-attr">json_path</span>: <span class="hljs-string">&#x27;metadata[&quot;category&quot;]&#x27;</span>,
+    <span class="hljs-attr">json_cast_type</span>: <span class="hljs-string">&quot;VARCHAR&quot;</span>,
+    <span class="hljs-attr">bitmap_cardinality_limit</span>: <span class="hljs-number">200</span>,
+  },
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;metadata&quot;</span>, <span class="hljs-string">&quot;category_index&quot;</span>, IndexType.AutoIndex)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;VARCHAR&quot;</span>,
+        [<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>] = <span class="hljs-string">&quot;200&quot;</span> <span class="hljs-comment">// use BITMAP up to 200 distinct values</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> categoryLimitIndex=<span class="hljs-string">&#x27;{
+  &quot;fieldName&quot;: &quot;metadata&quot;,
+  &quot;indexName&quot;: &quot;category_index&quot;,
+  &quot;params&quot;: {
+    &quot;index_type&quot;: &quot;AUTOINDEX&quot;,
+    &quot;json_path&quot;: &quot;metadata[\\\&quot;category\\\&quot;]&quot;,
+    &quot;json_cast_type&quot;: &quot;VARCHAR&quot;,
+    &quot;bitmap_cardinality_limit&quot;: 200
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Most users don’t need to tune this. Raise it if you have a moderate-cardinality field you’d prefer bitmapped; lower it to push <code translate="no">AUTOINDEX</code> toward <code translate="no">STL_SORT</code> sooner. The setting is ignored when you specify <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>, or <code translate="no">BITMAP</code> explicitly.</p>

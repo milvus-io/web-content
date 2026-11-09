@@ -1,12 +1,12 @@
 ---
 id: grant_privileges.md
-title: Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran
+title: Memberikan Hak Akses atau Kelompok Hak Akses kepada Peran
 summary: >-
-  Setelah peran dibuat, Anda dapat memberikan hak istimewa pada peran tersebut.
-  Panduan ini memperkenalkan cara memberikan hak istimewa atau grup hak istimewa
-  ke peran.
+  Setelah sebuah peran dibuat, Anda dapat memberikan hak akses kepada peran
+  tersebut. Panduan ini menjelaskan cara memberikan hak akses atau kelompok hak
+  akses kepada sebuah peran.
 ---
-<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Memberikan Hak Istimewa atau Grup Hak Istimewa ke Peran<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
+<h1 id="Grant-Privilege-or-Privilege-Group-to-Roles" class="common-anchor-header">Memberikan Hak Akses atau Kelompok Hak Akses kepada Peran<button data-href="#Grant-Privilege-or-Privilege-Group-to-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Setelah peran dibuat, Anda dapat memberikan hak istimewa pada peran tersebut. Panduan ini memperkenalkan cara memberikan hak istimewa atau grup hak istimewa ke peran.</p>
-<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">Memberikan hak istimewa atau grup hak istimewa ke peran<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
+    </button></h1><p>Setelah peran dibuat, Anda dapat memberikan hak akses kepada peran tersebut. Panduan ini menjelaskan cara memberikan hak akses atau kelompok hak akses kepada suatu peran.</p>
+<h2 id="Grant-a-privilege-or-a-privilege-group-to-a-role" class="common-anchor-header">Memberikan hak akses atau grup hak akses kepada suatu peran<button data-href="#Grant-a-privilege-or-a-privilege-group-to-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 2.5 memperkenalkan versi baru API yang menyederhanakan operasi pemberian hak istimewa. Anda tidak perlu lagi mencari tipe objek ketika memberikan hak istimewa kepada sebuah role. Berikut ini adalah parameter dan penjelasan terkait.</p>
+    </button></h2><p>Milvus 2.5 memperkenalkan versi baru API yang menyederhanakan proses pemberian hak akses. Anda tidak perlu lagi mencari jenis objek saat memberikan hak akses kepada suatu peran. Berikut adalah parameter dan penjelasannya.</p>
 <ul>
-<li><p><strong>role_name:</strong> Nama peran target yang perlu diberikan hak istimewa atau grup hak istimewa.</p></li>
-<li><p><strong>Resource</strong>: Sumber daya target hak istimewa, yang dapat berupa instance, database, atau koleksi tertentu.</p></li>
+<li><p><strong>role_name:</strong> Nama peran target yang akan diberikan hak akses atau grup hak akses.</p></li>
+<li><p><strong>Resource</strong>: Sumber daya target dari suatu hak akses, yang dapat berupa instance tertentu, database, atau koleksi.</p></li>
 </ul>
-<p>Tabel berikut ini menjelaskan cara menentukan sumber daya dalam metode <code translate="no">client.grantV2()</code>.</p>
+<p>Tabel berikut menjelaskan cara menentukan sumber daya dalam metode ` <code translate="no">client.grantV2()</code> `.</p>
 <table>
    <tr>
-     <th><p><strong>Tingkat</strong></p></th>
+     <th><p><strong>Level</strong></p></th>
      <th><p><strong>Sumber Daya</strong></p></th>
      <th><p><strong>Metode Pemberian</strong></p></th>
      <th><p><strong>Catatan</strong></p></th>
@@ -60,10 +60,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Masukkan nama koleksi target Anda dan nama pangkalan data tempat koleksi target berada.</p></td>
+     <td><p>Masukkan nama koleksi tujuan Anda dan nama basis data tempat koleksi tujuan tersebut berada.</p></td>
    </tr>
    <tr>
-     <td><p>Semua koleksi di bawah pangkalan data tertentu</p></td>
+     <td><p>Semua koleksi di bawah basis data tertentu</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -71,11 +71,11 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Masukkan nama pangkalan data target Anda dan karakter pengganti <code translate="no">*</code> sebagai nama koleksi.</p></td>
+     <td><p>Masukkan nama basis data yang Anda tuju dan karakter pengganti <code translate="no">*</code> sebagai nama koleksi.</p></td>
    </tr>
    <tr>
-     <td rowspan="2"><p><strong>Basis data</strong></p></td>
-     <td><p>Basis data tertentu</p></td>
+     <td rowspan="2"><p><strong>Database</strong></p></td>
+     <td><p>Database tertentu</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -83,10 +83,10 @@ summary: >-
      db_name="db1"
  )
 </code></pre></td>
-     <td><p>Masukkan nama basis data target Anda dan wildcard <code translate="no">*</code> sebagai nama koleksi.</p></td>
+     <td><p>Masukkan nama basis data target Anda dan karakter pengganti <code translate="no">*</code> sebagai nama koleksi.</p></td>
    </tr>
    <tr>
-     <td><p>Semua basis data di bawah contoh saat ini</p></td>
+     <td><p>Semua basis data di bawah instans saat ini</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="DatabaseAdmin", 
@@ -97,8 +97,8 @@ summary: >-
      <td><p>Masukkan <code translate="no">*</code> sebagai nama basis data dan <code translate="no">*</code> sebagai nama koleksi.</p></td>
    </tr>
    <tr>
-     <td><p><strong>Instance</strong></p></td>
-     <td><p>Instance saat ini</p></td>
+     <td><p><strong>Instan</strong></p></td>
+     <td><p>Instan saat ini</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="ClusterAdmin", 
@@ -110,309 +110,314 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li><p><strong>Privilege</strong>: Hak istimewa atau <a href="/docs/id/privilege_group.md">kelompok hak istimewa</a> tertentu yang perlu Anda berikan kepada suatu peran. Saat ini, Milvus menyediakan 56 jenis privilese yang dapat Anda berikan. Tabel di bawah ini mencantumkan daftar hak istimewa di Milvus.</p>
+<li><p><strong>Hak Akses</strong>: Hak akses spesifik atau <a href="/docs/id/privilege_group.md">grup hak akses</a> yang perlu Anda berikan kepada suatu peran. Saat ini, Milvus menyediakan 56 jenis hak akses yang dapat Anda berikan. Tabel di bawah ini mencantumkan hak akses di Milvus.</p>
 <p><div class="alert note"></p>
-<p>Kolom jenis pada tabel di bawah ini digunakan untuk memudahkan anda mencari hak istimewa dengan cepat dan hanya digunakan untuk tujuan klasifikasi. Ketika memberikan hak istimewa, anda tidak perlu memahami jenisnya. Anda hanya perlu memasukkan hak istimewa yang sesuai.</p>
+<p>Kolom jenis pada tabel di bawah ini disediakan untuk memudahkan Anda mencari hak akses dengan cepat dan hanya digunakan untuk tujuan klasifikasi. Saat memberikan hak akses, Anda tidak perlu memahami jenis-jenisnya. Anda hanya perlu memasukkan hak akses yang sesuai.</p>
 <p></div></p>
 <p><table>
 <tr>
 <th><p><strong>Jenis</strong></p></th>
-<th><p><strong>Hak istimewa</strong></p></th>
+<th><p><strong>Hak Akses</strong></p></th>
 <th><p><strong>Deskripsi</strong></p></th>
 <th><p><strong>Deskripsi API yang relevan di sisi klien</strong></p></th>
 </tr>
 <tr>
-<td rowspan="5"><p>Hak Istimewa Basis Data</p></td>
-<td><p>DaftarDatabase</p></td>
-<td><p>Melihat semua database dalam instance saat ini</p></td>
-<td><p><a href="/docs/id/manage_databases.md">DaftarDatabase</a></p></td>
+<td rowspan="5"><p>Hak Akses Database</p></td>
+<td><p>ListDatabases</p></td>
+<td><p>Lihat semua basis data di instance saat ini</p></td>
+<td><p><a href="/docs/id/manage_databases.md">ListDatabases</a></p></td>
 </tr>
 <tr>
-<td><p>JelaskanDatabase</p></td>
-<td><p>Melihat detail database</p></td>
-<td><p><a href="/docs/id/manage_databases.md">JelaskanDatabase</a></p></td>
+<td><p>DescribeDatabase</p></td>
+<td><p>Melihat detail suatu basis data</p></td>
+<td><p><a href="/docs/id/manage_databases.md">Jelaskan Basis Data</a></p></td>
 </tr>
 <tr>
-<td><p>CreateDatabase</p></td>
-<td><p>Membuat basis data</p></td>
+<td><p>Buat Database</p></td>
+<td><p>Buat basis data</p></td>
 <td><p><a href="/docs/id/manage_databases.md">BuatDatabase</a></p></td>
 </tr>
 <tr>
-<td><p>JatuhkanDatabase</p></td>
-<td><p>Menjatuhkan basis data</p></td>
-<td><p><a href="/docs/id/manage_databases.md">Jatuhkan basis data</a></p></td>
+<td><p>Hapus Database</p></td>
+<td><p>Hapus basis data</p></td>
+<td><p><a href="/docs/id/manage_databases.md">Hapus Database</a></p></td>
 </tr>
 <tr>
-<td><p>UbahDatabase</p></td>
-<td><p>Memodifikasi properti database</p></td>
+<td><p>Ubah Basis Data</p></td>
+<td><p>Mengubah properti basis data</p></td>
 <td><p><a href="/docs/id/manage_databases.md">AlterDatabase</a></p></td>
 </tr>
 <tr>
-<td rowspan="18"><p>Keistimewaan Koleksi</p></td>
+<td rowspan="18"><p>Hak Akses Koleksi</p></td>
 <td><p>GetFlushState</p></td>
-<td><p>Memeriksa status operasi flush koleksi</p></td>
+<td><p>Periksa status operasi pembersihan koleksi</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadState</p></td>
-<td><p>Memeriksa status pemuatan koleksi</p></td>
+<td><p>Periksa status pemuatan suatu koleksi</p></td>
 <td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadingProgress</p></td>
-<td><p>Memeriksa kemajuan pemuatan koleksi</p></td>
+<td><p>Periksa kemajuan pemuatan suatu koleksi</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
 </tr>
 <tr>
-<td><p>TampilkanKoleksi</p></td>
-<td><p>Melihat semua koleksi dengan hak istimewa koleksi</p></td>
+<td><p>Tampilkan Koleksi</p></td>
+<td><p>Lihat semua koleksi dengan hak akses koleksi</p></td>
 <td><p><a href="/docs/id/view-collections.md">TampilkanKoleksi</a></p></td>
 </tr>
 <tr>
-<td><p>DaftarAlias</p></td>
-<td><p>Melihat semua alias dari sebuah koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">DaftarAliases</a></p></td>
+<td><p>ListAliases</p></td>
+<td><p>Lihat semua alias dari sebuah koleksi</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">DaftarAlias</a></p></td>
 </tr>
 <tr>
-<td><p>JelaskanKoleksi</p></td>
-<td><p>Melihat detail dari sebuah koleksi</p></td>
+<td><p>Jelaskan Koleksi</p></td>
+<td><p>Lihat detail koleksi</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">JelaskanKoleksi</a></p></td>
 </tr>
 <tr>
-<td><p>JelaskanAlias</p></td>
-<td><p>Melihat detail sebuah alias</p></td>
+<td><p>Jelaskan Alias</p></td>
+<td><p>Lihat detail alias</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">JelaskanAlias</a></p></td>
 </tr>
 <tr>
-<td><p>DapatkanStatistik</p></td>
-<td><p>Mendapatkan statistik koleksi (misalnya jumlah entitas dalam koleksi)</p></td>
+<td><p>GetStatistics</p></td>
+<td><p>Mendapatkan statistik suatu koleksi (misalnya, jumlah entitas dalam suatu koleksi)</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
 </tr>
 <tr>
 <td><p>BuatKoleksi</p></td>
-<td><p>Membuat koleksi</p></td>
+<td><p>Buat Koleksi</p></td>
 <td><p><a href="/docs/id/create-collection.md">BuatKoleksi</a></p></td>
 </tr>
 <tr>
-<td><p>DropCollection</p></td>
-<td><p>Jatuhkan koleksi</p></td>
-<td><p><a href="/docs/id/drop-collection.md">JatuhkanKoleksi</a></p></td>
+<td><p>HapusKoleksi</p></td>
+<td><p>Hapus koleksi</p></td>
+<td><p><a href="/docs/id/drop-collection.md">Hapus Koleksi</a></p></td>
 </tr>
 <tr>
-<td><p>Memuat</p></td>
-<td><p>Memuat koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">LoadCollection/GetLoadingProgress/GetLoadState</a></p></td>
+<td><p>Muat</p></td>
+<td><p>Muat koleksi</p></td>
+<td><p><a href="/docs/id/load-and-release.md">M</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">uat</a> Koleksi/Dapatkan Kemajuan Pemuatan/Dapatkan Status Pemuatan</p></td>
 </tr>
 <tr>
-<td><p>Melepaskan</p></td>
-<td><p>Melepaskan koleksi</p></td>
-<td><p><a href="/docs/id/load-and-release.md">ReleaseCollection</a></p></td>
+<td><p>Lepaskan</p></td>
+<td><p>Lepaskan koleksi</p></td>
+<td><p><a href="/docs/id/load-and-release.md">LepaskanKoleksi</a></p></td>
 </tr>
 <tr>
 <td><p>Flush</p></td>
-<td><p>Mempertahankan semua entitas dalam koleksi ke dalam segmen tertutup. Setiap entitas yang disisipkan setelah operasi flush akan disimpan dalam segmen baru.</p></td>
+<td><p>Menyimpan semua entitas dalam sebuah koleksi ke segmen yang telah disegel. Setiap entitas yang dimasukkan setelah operasi flush akan disimpan di segmen baru.</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush/GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>Pemadatan</p></td>
-<td><p>Memicu pemadatan secara manual</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Memadatkan</a></p></td>
+<td><p>Memicu kompaksi secara manual</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Kompaksi</a></p></td>
 </tr>
 <tr>
-<td><p>Ganti NamaKoleksi</p></td>
-<td><p>Mengganti nama koleksi</p></td>
-<td><p><a href="/docs/id/modify-collection.md">Ubah NamaKoleksi</a></p></td>
+<td><p>Ganti Nama Koleksi</p></td>
+<td><p>Ganti nama koleksi</p></td>
+<td><p><a href="/docs/id/modify-collection.md">GantiNamaKoleksi</a></p></td>
 </tr>
 <tr>
 <td><p>BuatAlias</p></td>
-<td><p>Membuat alias untuk sebuah koleksi</p></td>
+<td><p>Buat alias untuk koleksi</p></td>
 <td><p><a href="/docs/id/manage-aliases.md">BuatAlias</a></p></td>
 </tr>
 <tr>
-<td><p>DropAlias</p></td>
-<td><p>Menghilangkan alias dari sebuah koleksi</p></td>
-<td><p><a href="/docs/id/manage-aliases.md">DropAlias</a></p></td>
+<td><p>HapusAlias</p></td>
+<td><p>Hapus alias koleksi</p></td>
+<td><p><a href="/docs/id/manage-aliases.md">HapusAlias</a></p></td>
 </tr>
 <tr>
 <td><p>FlushAll</p></td>
-<td><p>Mengosongkan semua koleksi dalam basis data</p></td>
+<td><p>Kosongkan semua koleksi dalam sebuah basis data</p></td>
 <td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
 </tr>
 <tr>
-<td rowspan="4"><p>Keistimewaan Partisi</p></td>
+<td rowspan="4"><p>Hak Akses Partisi</p></td>
 <td><p>HasPartition</p></td>
-<td><p>Memeriksa apakah sebuah partisi ada</p></td>
+<td><p>Periksa apakah suatu partisi ada</p></td>
 <td><p><a href="/docs/id/manage-partitions.md">HasPartition</a></p></td>
 </tr>
 <tr>
-<td><p>TampilkanPartisi</p></td>
-<td><p>Melihat semua partisi dalam sebuah koleksi</p></td>
+<td><p>Tampilkan Partisi</p></td>
+<td><p>Lihat semua partisi dalam sebuah koleksi</p></td>
 <td><p><a href="/docs/id/manage-partitions.md">TampilkanPartisi</a></p></td>
 </tr>
 <tr>
-<td><p>BuatPartisi</p></td>
-<td><p>Membuat partisi</p></td>
-<td><p><a href="/docs/id/manage-partitions.md">BuatPartisi</a></p></td>
+<td><p>Buat Partisi</p></td>
+<td><p>Buat partisi</p></td>
+<td><p><a href="/docs/id/manage-partitions.md">Buat Partisi</a></p></td>
 </tr>
 <tr>
-<td><p>JatuhkanPartisi</p></td>
-<td><p>Menghapus partisi</p></td>
-<td><p><a href="/docs/id/manage-partitions.md">JatuhkanPartisi</a></p></td>
+<td><p>Hapus Partisi</p></td>
+<td><p>Hapus partisi</p></td>
+<td><p><a href="/docs/id/manage-partitions.md">Hapus Partisi</a></p></td>
 </tr>
 <tr>
-<td rowspan="3"><p>Hak Istimewa Indeks</p></td>
-<td><p>IndexDetail</p></td>
-<td><p>Melihat detail indeks</p></td>
-<td><p><a href="/docs/id/index-vector-fields.md">JelaskanIndeks / Dapatkan Status Indeks / Dapatkan Kemajuan Pembuatan Indeks</a></p></td>
+<td rowspan="3"><p>Hak Akses Indeks</p></td>
+<td><p>Detail Indeks</p></td>
+<td><p>Lihat detail indeks</p></td>
+<td><p><a href="/docs/id/index-vector-fields.md">JelaskanIndeks/DapatkanStatusIndeks/DapatkanKemajuanPembuatanIndeks</a></p></td>
 </tr>
 <tr>
 <td><p>BuatIndeks</p></td>
-<td><p>Membuat indeks</p></td>
+<td><p>Buat indeks</p></td>
 <td><p><a href="/docs/id/index-vector-fields.md">BuatIndeks</a></p></td>
 </tr>
 <tr>
-<td><p>JatuhkanIndeks</p></td>
-<td><p>Jatuhkan indeks</p></td>
-<td><p><a href="/docs/id/index-vector-fields.md">Jatuhkan indeks</a></p></td>
+<td><p>HapusIndeks</p></td>
+<td><p>Hapus indeks</p></td>
+<td><p><a href="/docs/id/index-vector-fields.md">HapusIndeks</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>Hak Istimewa Manajemen Sumber Daya</p></td>
-<td><p>LoadBalance</p></td>
+<td rowspan="10"><p>Hak Akses Manajemen Sumber Daya</p></td>
+<td><p>Menyeimbangkan Beban</p></td>
 <td><p>Mencapai keseimbangan beban</p></td>
 <td><p><a href="/docs/id/resource_group.md">LoadBalance</a></p></td>
 </tr>
 <tr>
-<td><p>Buat Grup Sumber Daya</p></td>
-<td><p>Membuat grup sumber daya</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">Membuat Grup Sumber Daya</a></p></td>
+<td><p>BuatGrupSumberDaya</p></td>
+<td><p>Buat grup sumber daya</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">BuatGrupSumberDaya</a></p></td>
 </tr>
 <tr>
-<td><p>Menghapus Grup Sumber Daya</p></td>
-<td><p>Menghapus grup sumber daya</p></td>
-<td><p><a href="/docs/id/resource_group.md">Jatuhkan Grup Sumber Daya</a></p></td>
+<td><p>Hapus Grup Sumber Daya</p></td>
+<td><p>Hapus grup sumber daya</p></td>
+<td><p><a href="/docs/id/resource_group.md">HapusGrupSumberDaya</a></p></td>
 </tr>
 <tr>
-<td><p>Memperbarui Grup Sumber Daya</p></td>
-<td><p>Memperbarui grup sumber daya</p></td>
-<td><p><a href="/docs/id/resource_group.md">Memperbarui Grup Sumber Daya</a></p></td>
+<td><p>Perbarui Kelompok Sumber Daya</p></td>
+<td><p>Perbarui grup sumber daya</p></td>
+<td><p><a href="/docs/id/resource_group.md">Perbarui Kelompok Sumber Daya</a></p></td>
 </tr>
 <tr>
-<td><p>JelaskanGrup Sumber Daya</p></td>
-<td><p>Melihat detail grup sumber daya</p></td>
-<td><p><a href="/docs/id/resource_group.md">Jelaskan Grup Sumber Daya</a></p></td>
+<td><p>Jelaskan Grup Sumber Daya</p></td>
+<td><p>Lihat detail grup sumber daya</p></td>
+<td><p><a href="/docs/id/resource_group.md">Jelaskan Kelompok Sumber Daya</a></p></td>
 </tr>
 <tr>
-<td><p>DaftarGrupSumberDaya</p></td>
-<td><p>Melihat semua grup sumber daya dari instance saat ini</p></td>
-<td><p><a href="/docs/id/resource_group.md">ListResourceGroups</a></p></td>
+<td><p>ListResourceGroups</p></td>
+<td><p>Lihat semua grup sumber daya pada instans saat ini</p></td>
+<td><p><a href="/docs/id/resource_group.md">DaftarGrupSumberDaya</a></p></td>
 </tr>
 <tr>
 <td><p>TransferNode</p></td>
-<td><p>Mentransfer simpul di antara grup sumber daya</p></td>
+<td><p>Transfer node antar grup sumber daya</p></td>
 <td><p><a href="/docs/id/resource_group.md">TransferNode</a></p></td>
 </tr>
 <tr>
-<td><p>TransferReplika</p></td>
-<td><p>Mentransfer replika antar grup sumber daya</p></td>
-<td><p><a href="/docs/id/resource_group.md">TransferReplika</a></p></td>
+<td><p>TransferReplica</p></td>
+<td><p>Memindahkan replika antar kelompok sumber daya</p></td>
+<td><p><a href="/docs/id/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
-<td><p>Pencadangan RBAC</p></td>
-<td><p>Membuat cadangan untuk semua operasi terkait RBAC dalam instance saat ini</p></td>
-<td><p>BackupRBAC</p></td>
+<td><p>Cadangkan RBAC</p></td>
+<td><p>Buat cadangan untuk semua operasi terkait RBAC di instans saat ini</p></td>
+<td><p>Cadangan RBAC</p></td>
 </tr>
 <tr>
-<td><p>PulihkanRBAC</p></td>
-<td><p>Memulihkan cadangan semua operasi terkait RBAC dalam instans saat ini</p></td>
-<td><p>PulihkanRBAC</p></td>
+<td><p>RestoreRBAC</p></td>
+<td><p>Memulihkan cadangan dari semua operasi yang terkait dengan RBAC di instans saat ini</p></td>
+<td><p>PemulihanRBAC</p></td>
 </tr>
 <tr>
-<td rowspan="6"><p>Hak Istimewa Entitas</p></td>
+<td rowspan="6"><p>Hak Akses Entitas</p></td>
 <td><p>Kueri</p></td>
 <td><p>Melakukan kueri</p></td>
 <td><p><a href="/docs/id/get-and-scalar-query.md">Kueri</a></p></td>
 </tr>
 <tr>
-<td><p>Pencarian</p></td>
+<td><p>Cari</p></td>
 <td><p>Melakukan pencarian</p></td>
-<td><p><a href="/docs/id/single-vector-search.md">Cari</a></p></td>
+<td><p><a href="/docs/id/single-vector-search.md">Pencarian</a></p></td>
 </tr>
 <tr>
-<td><p>Menyisipkan</p></td>
-<td><p>Menyisipkan entitas</p></td>
-<td><p><a href="/docs/id/insert-update-delete.md">Menyisipkan</a></p></td>
+<td><p>Sisipkan</p></td>
+<td><p>Sisipkan entitas</p></td>
+<td><p><a href="/docs/id/insert-update-delete.md">Sisipkan</a></p></td>
 </tr>
 <tr>
-<td><p>Menghapus</p></td>
-<td><p>Menghapus entitas</p></td>
-<td><p><a href="/docs/id/delete-entities.md">Menghapus</a></p></td>
+<td><p>Hapus</p></td>
+<td><p>Hapus entitas</p></td>
+<td><p><a href="/docs/id/delete-entities.md">Hapus</a></p></td>
 </tr>
 <tr>
-<td><p>Menyisipkan</p></td>
-<td><p>Menyisipkan entitas</p></td>
-<td><p><a href="/docs/id/upsert-entities.md">Menyisipkan</a></p></td>
+<td><p>Upsert</p></td>
+<td><p>Upsert entitas</p></td>
+<td><p><a href="/docs/id/upsert-entities.md">Upsert</a></p></td>
 </tr>
 <tr>
 <td><p>Impor</p></td>
-<td><p>Menyisipkan atau mengimpor entitas secara massal</p></td>
-<td><p><a href="/docs/id/import-data.md">Sisipkan/Impor Massal</a></p></td>
+<td><p>Penyisipan massal atau impor entitas</p></td>
+<td><p><a href="/docs/id/import-data.md">Penyisipan Massal/Impor</a></p></td>
 </tr>
 <tr>
-<td rowspan="10"><p>Hak Istimewa RBAC</p></td>
-<td><p>BuatKepemilikan</p></td>
-<td><p>Membuat pengguna atau peran</p></td>
-<td><p><a href="/docs/id/users_and_roles.md">BuatPengguna/BuatPeran</a></p></td>
+<td rowspan="10"><p>Hak Akses RBAC</p></td>
+<td><p>Buat Kepemilikan</p></td>
+<td><p>Buat pengguna atau peran</p></td>
+<td><p><a href="/docs/id/users_and_roles.md">CreateUser/CreateRole</a></p></td>
 </tr>
 <tr>
-<td><p>PerbaruiPengguna</p></td>
-<td><p>Memperbarui kata sandi pengguna</p></td>
-<td><p><a href="/docs/id/users_and_roles.md">PerbaruiKredensial</a></p></td>
+<td><p>UpdateUser</p></td>
+<td><p>Perbarui kata sandi pengguna</p></td>
+<td><p><a href="/docs/id/users_and_roles.md">Perbarui Kredensial</a></p></td>
 </tr>
 <tr>
-<td><p>HapusKepemilikan</p></td>
-<td><p>Menghapus kata sandi pengguna atau peran</p></td>
-<td><p><a href="/docs/id/drop_users_roles.md">HapusKredensial/JatuhkanPeran</a></p></td>
+<td><p>Hapus Kepemilikan</p></td>
+<td><p>Hapus kata sandi pengguna atau peran</p></td>
+<td><p><a href="/docs/id/drop_users_roles.md">Hapus Kredensial/Hapus Peran</a></p></td>
 </tr>
 <tr>
-<td><p>PilihKepemilikan</p></td>
-<td><p>Melihat semua pengguna yang diberikan peran tertentu</p></td>
-<td><p><a href="/docs/id/grant_roles.md">PilihPeran/PilihHibah</a></p></td>
+<td><p>Pilih Kepemilikan</p></td>
+<td><p>Lihat semua pengguna yang diberi peran tertentu</p></td>
+<td><p><a href="/docs/id/grant_roles.md">Pilih Peran/Pilih Pemberian</a></p></td>
 </tr>
 <tr>
-<td><p>KelolaKepemilikan</p></td>
-<td><p>Mengelola pengguna atau peran atau memberikan peran kepada pengguna</p></td>
-<td><p><a href="/docs/id/privilege_group.md">OperateUserRole/OperatePrivilege/OperatePrivilegeV2</a></p></td>
+<td><p>Kelola Kepemilikan</p></td>
+<td><p>Kelola pengguna atau peran, atau berikan peran kepada pengguna</p></td>
+<td><p><a href="/docs/id/privilege_group.md">OperasikanPeranPengguna/OperasikanHak Akses/OperasikanHak Akses V2</a></p></td>
 </tr>
 <tr>
-<td><p>PilihPengguna</p></td>
-<td><p>Melihat semua peran yang diberikan kepada pengguna</p></td>
-<td><p><a href="/docs/id/grant_roles.md">PilihPengguna</a></p></td>
+<td><p>Pilih Pengguna</p></td>
+<td><p>Lihat semua peran yang diberikan kepada pengguna</p></td>
+<td><p><a href="/docs/id/grant_roles.md">Pilih Pengguna</a></p></td>
 </tr>
 <tr>
-<td><p>BuatKelompokKeistimewaan (CreatePrivilegeGroup)</p></td>
-<td><p>Membuat grup hak istimewa</p></td>
-<td><p><a href="/docs/id/privilege_group.md">Buat Grup Hak Istimewa (CreatePrivilegeGroup)</a></p></td>
+<td><p>BuatGrupHakAkses</p></td>
+<td><p>Buat grup hak akses</p></td>
+<td><p><a href="/docs/id/privilege_group.md">BuatGrupHakAkses</a></p></td>
 </tr>
 <tr>
-<td><p>Hapus Grup Hak Istimewa</p></td>
-<td><p>Menghapus grup hak istimewa</p></td>
-<td><p><a href="/docs/id/privilege_group.md">Jatuhkan Grup Hak Istimewa</a></p></td>
+<td><p>HapusGrupHakAkses</p></td>
+<td><p>Hapus grup hak istimewa</p></td>
+<td><p><a href="/docs/id/privilege_group.md">HapusGrupHakAkses</a></p></td>
 </tr>
 <tr>
-<td><p>DaftarGrup Hak Istimewa</p></td>
-<td><p>Melihat semua grup hak istimewa dalam instance saat ini</p></td>
-<td><p><a href="/docs/id/privilege_group.md">Daftar Grup Hak Istimewa</a></p></td>
+<td><p>ListPrivilegeGroups</p></td>
+<td><p>Lihat semua grup hak istimewa di instance saat ini</p></td>
+<td><p><a href="/docs/id/privilege_group.md">ListPrivilegeGroups</a></p></td>
 </tr>
 <tr>
-<td><p>OperatePrivilegeGroup</p></td>
-<td><p>Menambahkan hak istimewa atau menghapus hak istimewa dari grup hak istimewa</p></td>
-<td><p><a href="/docs/id/privilege_group.md">OperatePrivilegeGroup</a></p></td>
+<td><p>Mengelola Grup Hak Akses</p></td>
+<td><p>Menambahkan atau menghapus hak istimewa dari suatu grup hak istimewa</p></td>
+<td><p><a href="/docs/id/privilege_group.md">MengelolaKelompokHakAkses</a></p></td>
 </tr>
 </table></p></li>
 </ul>
-<p>Contoh berikut ini menunjukkan cara memberikan hak istimewa <code translate="no">PrivilegeSearch</code> pada <code translate="no">collection_01</code> di bawah basis data <code translate="no">default</code> serta grup hak istimewa bernama <code translate="no">privilege_group_1</code> ke peran <code translate="no">role_a</code>.</p>
+<p>Contoh berikut menunjukkan cara memberikan hak akses ` <code translate="no">PrivilegeSearch</code> ` pada ` <code translate="no">collection_01</code> ` di bawah database ` <code translate="no">default</code> `, serta grup hak akses bernama ` <code translate="no">privilege_group_1</code> ` kepada peran ` <code translate="no">role_a</code>`.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -566,7 +571,7 @@ curl --request POST \
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-a-role" class="common-anchor-header">Mendeskripsikan peran<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
+<h2 id="Describe-a-role" class="common-anchor-header">Menjelaskan peran<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -581,9 +586,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh berikut ini menunjukkan cara melihat hak istimewa yang diberikan kepada role <code translate="no">role_a</code> menggunakan metode <code translate="no">describe_role</code>.</p>
+    </button></h2><p>Contoh berikut menunjukkan cara melihat hak akses yang diberikan kepada peran <code translate="no">role_a</code> menggunakan metode <code translate="no">describe_role</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -616,22 +626,22 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Di bawah ini adalah contoh keluaran.</p>
-<pre><code translate="no" class="language-python">{
-     <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-     <span class="hljs-string">&quot;privileges&quot;</span>: [
-         {
-             <span class="hljs-string">&quot;collection_name&quot;</span>: <span class="hljs-string">&quot;collection_01&quot;</span>,
-             <span class="hljs-string">&quot;db_name&quot;</span>: <span class="hljs-string">&quot;default&quot;</span>,
-             <span class="hljs-string">&quot;role_name&quot;</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-             <span class="hljs-string">&quot;privilege&quot;</span>: <span class="hljs-string">&quot;Search&quot;</span>,
-             <span class="hljs-string">&quot;grantor_name&quot;</span>: <span class="hljs-string">&quot;root&quot;</span>
-         },
+<p>Berikut adalah contoh hasilnya.</p>
+<pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
+     <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;role_a&quot;</span><span class="hljs-punctuation">,</span>
+     <span class="hljs-attr">&quot;privileges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+         <span class="hljs-punctuation">{</span>
+             <span class="hljs-attr">&quot;collection_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;collection_01&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;db_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;role_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;role_a&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;privilege&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Search&quot;</span><span class="hljs-punctuation">,</span>
+             <span class="hljs-attr">&quot;grantor_name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span>
+         <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
          <span class="hljs-string">&quot;privilege_group_1&quot;</span>
-     ]
-}
+     <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">Mencabut hak istimewa atau kelompok hak istimewa dari suatu peran<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
+<h2 id="Revoke-a-privilege-or-a-privilege-group-from-a-role" class="common-anchor-header">Mencabut hak akses atau grup hak akses dari suatu peran<button data-href="#Revoke-a-privilege-or-a-privilege-group-from-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -646,9 +656,14 @@ role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh berikut ini menunjukkan cara mencabut hak istimewa <code translate="no">PrivilegeSearch</code> pada <code translate="no">collection_01</code> di bawah basis data <code translate="no">default</code> serta grup hak istimewa <code translate="no">privilege_group_1</code> yang telah diberikan kepada role <code translate="no">role_a</code>.</p>
+    </button></h2><p>Contoh berikut menunjukkan cara mencabut hak akses <code translate="no">PrivilegeSearch</code> pada <code translate="no">collection_01</code> di bawah database <code translate="no">default</code> serta grup hak akses <code translate="no">privilege_group_1</code> yang telah diberikan kepada peran <code translate="no">role_a</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.revoke_privilege_v2(
     role_name=<span class="hljs-string">&quot;role_a&quot;</span>,
     privilege=<span class="hljs-string">&quot;Search&quot;</span>,

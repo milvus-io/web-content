@@ -25,7 +25,7 @@ summary: >-
 <p><strong>Prasyarat:</strong> Fitur Beralih MQ tersedia di <strong>Milvus 3.0 dan versi yang lebih baru</strong>. Tingkatkan instance Milvus Anda ke Milvus 3.0 atau versi yang lebih baru sebelum memulai — fitur ini tidak tersedia pada versi sebelumnya.</p>
 </div>
 <div class="alert warning">
-<p>Mengganti antrian pesan adalah <strong>operasi berisiko tinggi</strong>. Pilih bagian yang sesuai dengan metode penyebaran <strong>Anda</strong> — <strong>Dengan Helm</strong> atau <strong>Dengan Milvus Operator</strong> — dan ikuti langkah-langkahnya dari awal hingga akhir. Jangan mencampurkan perintah Helm dan Operator.</p>
+<p>Mengganti antrian pesan adalah <strong>operasi berisiko tinggi</strong>. Pilih bagian yang sesuai dengan metode penerapan <strong>Anda</strong> — <strong>Dengan Helm</strong> atau <strong>Dengan Milvus Operator</strong> — dan ikuti langkah-langkahnya dari awal hingga akhir. Jangan mencampurkan perintah Helm dan Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Dengan Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ summary: >-
 <p>Peralihan yang berhasil akan mencatat pesan " <code translate="no">[mqTypeValue=woodpecker]</code>".</p>
 <p><strong>Langkah 4: (Opsional) Hentikan Pulsar dan lakukan pembersihan.</strong> Untuk Pulsar <strong>bawaan</strong>, nonaktifkan Pulsar dan aktifkan Woodpecker, lalu hapus PVC Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Langkah 1: Pastikan instance Milvus sedang berjalan.</strong></p>
-<p><strong>Langkah 2: Konfigurasikan koneksi Pulsar tujuan dan mulai ulang Milvus.</strong> Proses peralihan ini memerlukan Milvus untuk sudah mengetahui koneksi Pulsar, jadi masukkan konfigurasinya ke dalam ` <code translate="no">user.yaml</code> ` melalui ` <code translate="no">extraConfigFiles</code> ` dan terapkan dengan ` <code translate="no">helm upgrade</code> ` (yang akan me-roll pod-pod tersebut). ` <code translate="no">streaming.enabled=true</code> ` diperlukan untuk fitur Switch MQ.</p>
+<p><strong>Langkah 2: Konfigurasikan koneksi Pulsar tujuan dan mulai ulang Milvus.</strong> Proses peralihan ini memerlukan Milvus untuk sudah mengetahui koneksi Pulsar, jadi masukkan konfigurasi tersebut ke dalam ` <code translate="no">user.yaml</code> ` melalui ` <code translate="no">extraConfigFiles</code> ` dan terapkan dengan ` <code translate="no">helm upgrade</code> ` (yang akan me-roll pod-pod). ` <code translate="no">streaming.enabled=true</code> ` diperlukan untuk fitur Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -115,7 +115,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   --set streaming.enabled=true \
   -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke dalam konfigurasi Milvus.</p>
+<p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke konfigurasi Milvus.</p>
 <p><strong>Langkah 3: Jalankan peralihan MQ.</strong></p>
 <div class="alert note">
 <p>Pastikan Pulsar tujuan tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu sisa topik Milvus dengan nama yang sama.</p>
@@ -131,7 +131,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Peralihan yang berhasil akan mencatat pesan " <code translate="no">[mqTypeValue=pulsar]</code>".</p>
-<p><strong>Langkah 5: (Opsional) Bersihkan data Woodpecker.</strong> Hapus data Woodpecker di MinIO/S3 (di bawah <code translate="no">&lt;rootPath&gt;/wp/...</code>, biasanya <code translate="no">files/wp/...</code>) dan metadata Woodpecker di etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Jika Anda berencana untuk beralih kembali ke Woodpecker nanti, bersihkan file-file ini terlebih dahulu.</p>
+<p><strong>Langkah 5: (Opsional) Bersihkan data Woodpecker.</strong> Hapus data Woodpecker di MinIO/S3 (di bawah <code translate="no">&lt;rootPath&gt;/wp/...</code>, biasanya <code translate="no">files/wp/...</code>) dan metadata Woodpecker di etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Jika Anda berencana untuk kembali ke Woodpecker nanti, bersihkan file-file ini terlebih dahulu.</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Dengan Milvus Operator<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +232,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p>Tunggu hingga semua pod siap, lalu pastikan konfigurasi akses Pulsar telah diterapkan ke dalam konfigurasi Milvus.</p>
 <p><strong>Langkah 3: Jalankan peralihan MQ.</strong></p>
 <div class="alert note">
-<p>Pastikan Pulsar tujuan tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, abaikan catatan ini; jika tidak, bersihkan terlebih dahulu topik Milvus sisa dengan nama yang sama.</p>
+<p>Pastikan Pulsar tujuan tidak berisi topik Milvus dari konfigurasi sebelumnya. Jika ini adalah peralihan pertama Anda ke Pulsar, lewati catatan ini; jika tidak, bersihkan terlebih dahulu sisa topik Milvus dengan nama yang sama.</p>
 </div>
 <pre><code translate="no" class="language-shell">kubectl exec -it &lt;mixcoord-pod&gt; -- \
   curl -X POST http://localhost:9091/management/wal/alter \

@@ -56,9 +56,9 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Unduh konfigurasi untuk v3.0.3 dan mulai penyebaran baru:</p>
+    </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Unduh konfigurasi untuk v3.0.5 dan mulai penyebaran baru:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,8 +68,8 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Deploymen default (v3.0.3):</strong> <code translate="no">docker compose up -d</code> memulai tiga kontainer yang berjalan dalam jangka panjang — <code translate="no">milvus-etcd</code> (metadata), <code translate="no">milvus-minio</code> (penyimpanan objek), dan <code translate="no">milvus-standalone</code>. Antrian pesan menggunakan <strong>Woodpecker (terintegrasi, dengan MinIO / penyimpanan objek sebagai backend WAL-nya)</strong>, sehingga tidak diperlukan kontainer antrian pesan terpisah.</p>
-<p>Konfigurasi ini juga menjalankan layanan satu kali <code translate="no">milvus-volume-init</code> untuk mempersiapkan kepemilikan direktori data. Layanan ini akan berhenti setelah menyelesaikan tugas tersebut.</p>
+<p><strong>Deploymen default (v3.0.5):</strong> <code translate="no">docker compose up -d</code> memulai tiga kontainer yang berjalan dalam jangka panjang — <code translate="no">milvus-etcd</code> (metadata), <code translate="no">milvus-minio</code> (penyimpanan objek), dan <code translate="no">milvus-standalone</code>. Antrian pesan menggunakan <strong>Woodpecker (terintegrasi, dengan MinIO / penyimpanan objek sebagai backend WAL-nya)</strong>, sehingga tidak diperlukan kontainer antrian pesan terpisah.</p>
+<p>Konfigurasi ini juga menjalankan layanan satu kali <code translate="no">milvus-volume-init</code> untuk menyiapkan kepemilikan direktori data. Layanan ini akan berhenti setelah menyelesaikan tugas tersebut.</p>
 <p><strong>Antrian pesan default berdasarkan versi:</strong></p>
 <ul>
 <li><strong>2.5.x</strong> — antrian pesan default adalah <strong>RocksMQ</strong>.</li>
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>Untuk penyebaran Milvus 2.6.x mandiri, ikuti <a href="/docs/id/upgrade_milvus_standalone-docker.md">Panduan Peningkatan Milvus Mandiri dengan Docker Compose</a>. Cadangkan metadata dan data persisten, pertahankan dependensi dan konfigurasi yang ada, serta validasi jalur peningkatan dari sumber ke tujuan yang terdokumentasi sebelum mengubah gambar Milvus. Jangan mengganti berkas Compose dari deployment versi lama dengan konfigurasi instalasi baru di atas.</p>
-<p><strong>Batasan Antrian Pesan</strong>: Saat melakukan peningkatan ke Milvus v3.0.3, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
-<p>Milvus 2.6.x dan versi selanjutnya secara default menggunakan Woodpecker, sedangkan deployment 2.5.x secara default menggunakan <strong>RocksMQ</strong>. Jika deployment yang Anda perbarui masih menggunakan RocksMQ, tetapkan sistem antrian pesan tersebut di ` <code translate="no">user.yaml</code> ` sebelum mengubah gambar Milvus, sehingga instance yang telah diperbarui tetap menggunakan antrian pesan yang ada alih-alih memulai dengan default baru:</p>
+<p><strong>Batasan antrian pesan</strong>: Saat melakukan pembaruan ke Milvus v3.0.5, Anda harus mempertahankan pilihan antrian pesan saat ini. Beralih antara sistem antrian pesan yang berbeda selama proses pembaruan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia di versi mendatang.</p>
+<p>Milvus 2.6.x dan yang lebih baru secara default menggunakan Woodpecker, sedangkan deployment 2.5.x secara default menggunakan <strong>RocksMQ</strong>. Jika deployment yang Anda perbarui masih menggunakan RocksMQ, tetapkan sistem antrian pesan tersebut di ` <code translate="no">user.yaml</code> ` sebelum mengubah gambar Milvus, sehingga instance yang telah diperbarui tetap menggunakan antrian pesan yang ada alih-alih memulai dengan default baru:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah instance yang telah ditingkatkan berjalan pada v3.0.3, Anda dapat beralih dari RocksMQ ke Woodpecker menggunakan fitur <a href="/docs/id/switch-mq-type.md">"Switch Message Queue</a>", yang tersedia di Milvus 3.0 dan versi selanjutnya.</p>
+<p>Setelah instance yang telah ditingkatkan berjalan pada v3.0.5, Anda dapat beralih dari RocksMQ ke Woodpecker menggunakan fitur <a href="/docs/id/switch-mq-type.md">"Switch Message Queue</a>", yang tersedia di Milvus 3.0 dan versi selanjutnya.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Ketergantungan opsional<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -192,7 +192,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Deploy ini menjalankan <strong>Woodpecker</strong> (terintegrasi, backend WAL MinIO) untuk pesan, <strong>etcd</strong> untuk metadata, dan <strong>MinIO</strong> untuk penyimpanan objek. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek/metadata eksternal, lihat:</p>
+    </button></h2><p>Deploy ini menjalankan <strong>Woodpecker</strong> (terintegrasi, backend WAL MinIO) untuk pengiriman pesan, <strong>etcd</strong> untuk metadata, dan <strong>MinIO</strong> untuk penyimpanan objek. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek/metadata eksternal, lihat:</p>
 <ul>
 <li>Antrian pesan: <a href="/docs/id/woodpecker.md">Woodpecker</a> (default) · <a href="/docs/id/mq_pulsar.md">Pulsar</a> · <a href="/docs/id/mq_kafka.md">Kafka</a> · <a href="/docs/id/mq_rocksmq.md">RocksMQ</a></li>
 <li>Penyimpanan objek: <a href="/docs/id/deploy_s3.md">MinIO</a> (default) · <a href="/docs/id/deploy_s3.md">AWS S3</a> · <a href="/docs/id/abs.md">Azure Blob</a> · <a href="/docs/id/gcs.md">GCP Cloud Storage</a> · <a href="/docs/id/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/id/deploy_s3.md">Tencent COS</a> · <a href="/docs/id/deploy_s3.md">Huawei OBS</a> · <a href="/docs/id/deploy_s3.md">S3-compatible</a></li>

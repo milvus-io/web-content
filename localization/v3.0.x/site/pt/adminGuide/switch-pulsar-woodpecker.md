@@ -72,7 +72,7 @@ summary: >-
 <p>Uma mudança bem-sucedida regista « <code translate="no">[mqTypeValue=woodpecker]</code> ».</p>
 <p><strong>Passo 4: (Opcional) Parar o Pulsar e limpar.</strong> Para o Pulsar <strong>integrado</strong>, desative o Pulsar e ative o Woodpecker; em seguida, elimine os PVCs do Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -239,7 +239,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;pulsar&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Passo 4: Verifique se a transição está concluída.</strong></p>
+<p><strong>Passo 4: Verifique se a mudança está concluída.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Uma transição bem-sucedida regista « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>

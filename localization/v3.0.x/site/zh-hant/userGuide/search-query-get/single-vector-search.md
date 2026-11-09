@@ -1,7 +1,7 @@
 ---
 id: single-vector-search.md
 title: Basic Vector Search
-summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選條件、範圍和迭代器執行基本的 ANN 搜尋。
+summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選條件、範圍及迭代器，執行基本的 ANN 搜尋。
 ---
 <h1 id="Basic-Vector-Search" class="common-anchor-header">Basic Vector Search<button data-href="#Basic-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,11 +45,12 @@ summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選條件、範圍
 <ul>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Single-Vector-Search">Single-vector search</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Bulk-Vector-Search">Bulk-vector search</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Primary-Key-Search">Primary-key search</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#ANN-Search-in-Partition">ANN search in partitions</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Output-Fields">Use output fields</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Sort-Search-Results-by-Scalar-Fields">Sort search results by scalar fields</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Limit-and-Offset">Use limit and offset</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Use-Level">Use level</a></p></li>
-<li><p><a href="/docs/zh-hant/single-vector-search.md#Get-Recall-Rate">Get Recall Rate</a></p></li>
+<li><p><a href="/docs/zh-hant/single-vector-search.md#Temporarily-set-a-timezone-for-a-search">Temporarily set a timezone for a search</a></p></li>
 <li><p><a href="/docs/zh-hant/single-vector-search.md#Enhancing-ANN-Search">Enhancing ANN search</a></p></li>
 </ul>
 <h2 id="Single-Vector-Search" class="common-anchor-header">Single-Vector Search<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
@@ -73,7 +74,9 @@ summary: 在 Milvus 中使用查詢向量、輸出欄位、篩選條件、範圍
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -130,7 +133,7 @@ res = client.search(
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
         .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build());
-    
+
 <span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -166,7 +169,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
@@ -197,6 +200,30 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 }
 
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// 4. Single vector search</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
@@ -219,6 +246,36 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.0800950899720192, id: &#x27;296&#x27; },</span>
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; }</span>
 <span class="hljs-comment">// ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-comment">// 4. Single vector search</span>
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">3</span>
+});
+
+<span class="hljs-keyword">var</span> single = res.SingleResults?.FirstOrDefault();
+<span class="hljs-keyword">if</span> (single <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>)
+{
+    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; single.Scores.Count; i++)
+    {
+        Console.WriteLine(<span class="hljs-string">$&quot;id=<span class="hljs-subst">{single.Ids.LongIds?[i]}</span>, score=<span class="hljs-subst">{single.Scores[i]}</span>&quot;</span>);
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
@@ -346,7 +403,9 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -409,10 +468,12 @@ res = client.search(
 <span class="hljs-comment"># ]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.BaseVector;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.List;
 
 List&lt;BaseVector&gt; queryVectors = Arrays.asList(
         <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.041732933f</span>, <span class="hljs-number">0.013779674f</span>, -<span class="hljs-number">0.027564144f</span>, -<span class="hljs-number">0.013061441f</span>, <span class="hljs-number">0.009748648f</span>}),
@@ -465,9 +526,37 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 7. Search with multiple vectors</span>
+<span class="hljs-comment">// 7.1. Prepare query vectors</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vectors</span> = <span class="hljs-built_in">vec!</span>[
+    <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.041732933</span>, <span class="hljs-number">0.013779674</span>, -<span class="hljs-number">0.027564144</span>, -<span class="hljs-number">0.013061441</span>, <span class="hljs-number">0.009748648</span>],
+    <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.0039737443</span>, <span class="hljs-number">0.003020432</span>, -<span class="hljs-number">0.0006188639</span>, <span class="hljs-number">0.03913546</span>, -<span class="hljs-number">0.00089768134</span>],
+];
+
+<span class="hljs-comment">// 7.2. Start search</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(query_vectors))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 7. Search with multiple vectors</span>
 <span class="hljs-keyword">const</span> query_vectors = [
-    [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], 
+    [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
     [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>]
 ]
 
@@ -480,7 +569,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 
 <span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
+<span class="hljs-comment">//</span>
 <span class="hljs-comment">// [</span>
 <span class="hljs-comment">//   [</span>
 <span class="hljs-comment">//     { score: 0.08821295201778412, id: &#x27;551&#x27; },</span>
@@ -493,6 +582,26 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//     { score: 0.04221535101532936, id: &#x27;232&#x27; },</span>
 <span class="hljs-comment">//   ]</span>
 <span class="hljs-comment">// ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// 7. Search with multiple vectors</span>
+<span class="hljs-comment">// 7.1. Prepare query vectors</span>
+<span class="hljs-keyword">var</span> queryVectors = <span class="hljs-keyword">new</span>[]
+{
+    <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.041732933f</span>, <span class="hljs-number">0.013779674f</span>, <span class="hljs-number">-0.027564144f</span>, <span class="hljs-number">-0.013061441f</span>, <span class="hljs-number">0.009748648f</span> }),
+    <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.0039737443f</span>, <span class="hljs-number">0.003020432f</span>, <span class="hljs-number">-0.0006188639f</span>, <span class="hljs-number">0.03913546f</span>, <span class="hljs-number">-0.00089768134f</span> })
+};
+
+<span class="hljs-comment">// 7.2. Start search</span>
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = queryVectors,
+    Limit = <span class="hljs-number">3</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::vector&lt;std::vector&lt;<span class="hljs-type">float</span>&gt;&gt; queryVectors = {
     {<span class="hljs-number">0.041732933F</span>, <span class="hljs-number">0.013779674F</span>, <span class="hljs-number">-0.027564144F</span>, <span class="hljs-number">-0.013061441F</span>, <span class="hljs-number">0.009748648F</span>},
@@ -573,7 +682,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Primary-Key-Search" class="common-anchor-header">Primary-Key Search<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search" class="anchor-icon" translate="no">
+<h2 id="Primary-Key-Search" class="common-anchor-header">Primary-Key Search<button data-href="#Primary-Key-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -593,7 +702,9 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -635,6 +746,18 @@ System.out.println(searchResp.getSearchResults());
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Ids = <span class="hljs-keyword">new</span> <span class="hljs-built_in">object</span>[] { <span class="hljs-number">551L</span>, <span class="hljs-number">296L</span>, <span class="hljs-number">43L</span> },
+    Limit = <span class="hljs-number">3</span>,
+    MetricType = MetricType.Ip
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;fmt&quot;</span>
 
@@ -657,6 +780,25 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchByIDsOption(
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
     fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
     fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">ids</span>(Ids::<span class="hljs-title function_ invoke__">Int64</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
@@ -716,7 +858,9 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -754,9 +898,11 @@ res = client.search(
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
 
 <span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
@@ -801,6 +947,29 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 4. Single vector search</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">partition_names</span>([<span class="hljs-string">&quot;partitionA&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Single vector search</span>
 <span class="hljs-keyword">var</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -818,6 +987,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.0800950899720192, id: &#x27;296&#x27; },</span>
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; }</span>
 <span class="hljs-comment">// ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">3</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters { PartitionNames = { <span class="hljs-string">&quot;partitionA&quot;</span> } }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -897,18 +1079,20 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search</span>
-query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
+query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     data=[query_vector],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}，
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>},
 <span class="highlighted-wrapper-line">    output_fields=[<span class="hljs-string">&quot;color&quot;</span>]</span>
 )
 
@@ -940,9 +1124,11 @@ res = client.search(
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
 
 <span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
@@ -988,6 +1174,28 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;color&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 4. Single vector search</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;color&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Single vector search</span>
 <span class="hljs-keyword">var</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -1005,6 +1213,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   { score: 0.0800950899720192, id: &#x27;296&#x27; entity: {&quot;color&quot;: &quot;red_4794&quot;}},</span>
 <span class="hljs-comment">//   { score: 0.07794742286205292, id: &#x27;43&#x27; entity: {&quot;color&quot;: &quot;grey_8510&quot;}}</span>
 <span class="hljs-comment">// ]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">3</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters { OutputFields = { <span class="hljs-string">&quot;color&quot;</span> } }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -1070,7 +1291,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Sort-Search-Results-by-Scalar-Fields" class="common-anchor-header">Sort Search Results by Scalar Fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Sort-Search-Results-by-Scalar-Fields" class="anchor-icon" translate="no">
+<h2 id="Sort-Search-Results-by-Scalar-Fields" class="common-anchor-header">Sort Search Results by Scalar Fields<button data-href="#Sort-Search-Results-by-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1092,7 +1313,9 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1146,6 +1369,23 @@ System.out.println(searchResp.getSearchResults());
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.35803764f</span>, <span class="hljs-number">-0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, <span class="hljs-number">-0.26286206f</span>, <span class="hljs-number">0.90294385f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;embedding&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">20</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span> },
+        ExtraParameters = { [<span class="hljs-string">&quot;order_by_fields&quot;</span>] = <span class="hljs-string">&quot;price:asc&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;fmt&quot;</span>
 
@@ -1169,6 +1409,28 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
     fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
     fmt.Println(<span class="hljs-string">&quot;Prices: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.35803764</span>, -<span class="hljs-number">0.6023496</span>, <span class="hljs-number">0.18414013</span>, -<span class="hljs-number">0.26286206</span>, <span class="hljs-number">0.90294385</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">20</span>)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>])
+            .<span class="hljs-title function_ invoke__">order_by_fields</span>(<span class="hljs-built_in">vec!</span>[OrderByField::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;price&quot;</span>).<span class="hljs-title function_ invoke__">direction</span>(AggDirection::Asc)])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
@@ -1202,7 +1464,9 @@ milvus::SearchResponse searchResponse;
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1262,6 +1526,23 @@ System.out.println(searchResp.getSearchResults());
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.35803764f</span>, <span class="hljs-number">-0.6023496f</span>, <span class="hljs-number">0.18414013f</span>, <span class="hljs-number">-0.26286206f</span>, <span class="hljs-number">0.90294385f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;embedding&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">20</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span> },
+        ExtraParameters = { [<span class="hljs-string">&quot;order_by_fields&quot;</span>] = <span class="hljs-string">&quot;price:asc,rating:desc&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;fmt&quot;</span>
 
@@ -1286,6 +1567,31 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
     fmt.Println(<span class="hljs-string">&quot;Prices: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
     fmt.Println(<span class="hljs-string">&quot;Ratings: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;rating&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.35803764</span>, -<span class="hljs-number">0.6023496</span>, <span class="hljs-number">0.18414013</span>, -<span class="hljs-number">0.26286206</span>, <span class="hljs-number">0.90294385</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">20</span>)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>, <span class="hljs-string">&quot;category&quot;</span>])
+            .<span class="hljs-title function_ invoke__">order_by_fields</span>(<span class="hljs-built_in">vec!</span>[
+                OrderByField::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;price&quot;</span>).<span class="hljs-title function_ invoke__">direction</span>(AggDirection::Asc),
+                OrderByField::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;rating&quot;</span>).<span class="hljs-title function_ invoke__">direction</span>(AggDirection::Desc),
+            ])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
@@ -1369,7 +1675,9 @@ milvus::SearchResponse searchResponse;
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1381,14 +1689,16 @@ res = client.search(
     data=[query_vector],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># The number of results to return</span>
     search_params={
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, 
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
 <span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;offset&quot;</span>: <span class="hljs-number">10</span> <span class="hljs-comment"># The records to skip</span></span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
 
 <span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>});
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
@@ -1433,6 +1743,28 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 4. Single vector search</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">offset</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Single vector search</span>
 <span class="hljs-keyword">var</span> query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>],
 
@@ -1442,6 +1774,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>, <span class="hljs-comment">// The number of results to return,</span>
 <span class="highlighted-wrapper-line">    <span class="hljs-attr">offset</span>: <span class="hljs-number">10</span> <span class="hljs-comment">// The record to skip.</span></span>
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">3</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters { Offset = <span class="hljs-number">10</span> }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
                          .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -1504,7 +1849,9 @@ curl --request POST \
     <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
     <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#bash">cURL</a>
 </div>
@@ -1547,6 +1894,19 @@ System.out.println(searchResp.getSearchResults());
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span> }) };
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;quick_setup&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = queryVector,
+    Limit = <span class="hljs-number">3</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters { Timezone = <span class="hljs-string">&quot;America/Havana&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;fmt&quot;</span>
 
@@ -1571,6 +1931,27 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
     fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
     fmt.Println(<span class="hljs-string">&quot;Event times: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;event_time&quot;</span>).FieldData().GetScalars())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.35803764</span>, -<span class="hljs-number">0.6023496</span>, <span class="hljs-number">0.18414013</span>, -<span class="hljs-number">0.26286206</span>, <span class="hljs-number">0.90294385</span>];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+            .<span class="hljs-title function_ invoke__">timezone</span>(<span class="hljs-string">&quot;America/Havana&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()

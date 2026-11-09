@@ -42,7 +42,7 @@ title: Docker で Milvus を実行する（Windows）
     </button></h2><ul>
 <li><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Docker Desktop をインストールし</a>、Windows およびハードウェアの要件を満たしている必要があります。</li>
 <li><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Windows Subsystem for Linux 2 (WSL 2) をインストールしてください</a>。</li>
-<li>Docker Desktop を起動し、<strong>「WSL 2 ベースのエンジンを使用する」を</strong>有効にして、「Linux コンテナ」を選択します。WSL ディストリビューション内でコマンドを実行する場合は、<strong>[設定]</strong>&gt;<strong>[リソース]</strong>&gt;<strong>[WSL 統合</strong>] でそのディストリビューションも有効にしてください。<a href="https://docs.docker.com/desktop/features/wsl/">Docker Desktop WSL 2 バックエンドを</a>参照してください。</li>
+<li>Docker Desktop を起動し、<strong>「WSL 2 ベースのエンジンを使用する」を</strong>有効にして、Linux コンテナを選択します。WSL ディストリビューション内でコマンドを実行する場合は、<strong>[設定]</strong>&gt;<strong>[リソース]</strong>&gt;<strong>[WSL 統合]</strong> でそのディストリビューションも有効にしてください。<a href="https://docs.docker.com/desktop/features/wsl/">Docker Desktop の WSL 2 バックエンドを</a>参照してください。</li>
 </ul>
 <p>Milvus ファイルをダウンロードする前に、PowerShell または Windows コマンドプロンプトで以下の確認を行ってください：</p>
 <pre><code translate="no" class="language-powershell">wsl --version
@@ -66,7 +66,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>以下のターミナルのいずれかを選択してください。書き込み可能な作業ディレクトリでコマンドを実行してください。スクリプトは、そのディレクトリに設定ファイルと<code translate="no">volumes</code> ディレクトリを保存します。</p>
-<p>このスクリプトは、Milvusの<code translate="no">master</code> ブランチからダウンロードされます。Dockerイメージのタグはスクリプト内で定義されており、v3.0.3とは異なる場合があります。その特定のリリースをデプロイするには、以下のバージョン指定されたDocker Compose設定を使用してください。</p>
+<p>このスクリプトは、Milvusの<code translate="no">master</code> ブランチからダウンロードされます。Dockerイメージのタグはスクリプト内で定義されており、v3.0.5とは異なる場合があります。その特定のリリースをデプロイするには、以下のバージョン指定されたDocker Compose設定を使用してください。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">PowerShell から<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +102,7 @@ docker compose version
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">curl.exe</code> を使用してスクリプトをダウンロードしてください。<code translate="no">Invoke-WebRequest</code> は PowerShell コマンドであり、コマンドプロンプトでは実行されません:</p>
+    </button></h3><p><code translate="no">curl.exe</code> を使用してスクリプトをダウンロードします。<code translate="no">Invoke-WebRequest</code> は PowerShell コマンドであり、コマンドプロンプトでは実行されません:</p>
 <pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.bat&quot; -o standalone.bat
 standalone.bat start
 </code></pre>
@@ -110,7 +110,7 @@ standalone.bat start
 <ul>
 <li>「<strong>milvus-standalone</strong>」という名前の Docker コンテナがポート<strong>19530</strong> でサービスを提供します。</li>
 <li>組み込みの etcd は、同じコンテナ内のポート<strong>2379</strong> で実行されます。その設定ファイルは、作業ディレクトリ内の<strong>embedEtcd.yaml</strong>に対応しています。</li>
-<li>Milvus は、作業ディレクトリ内の `<strong>volumes/milvus</strong>` にデータを保存します。</li>
+<li>Milvus は、作業ディレクトリ内の<strong>volumes/milvus</strong>にデータを保存します。</li>
 <li>設定のオーバーライドは、作業ディレクトリ内の<strong>user.yaml</strong>に記述します。変更後はコンテナを再起動してください。</li>
 </ul>
 <p>いずれかのターミナルでイメージとコンテナのステータスを確認してください:</p>
@@ -156,7 +156,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>リリース v3.0.3 に付属の設定を使用してください。お使いのターミナルに対応したコマンドシーケンスのみを実行してください。</p>
+    </button></h2><p>リリース v3.0.5 に付属の設定を使用してください。お使いのターミナルに対応したコマンドシーケンスのみを実行してください。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">PowerShell から<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>設定ファイルをダウンロードし、Milvusを起動します:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -193,7 +193,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>設定ファイルをダウンロードし、Milvus を起動します:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -213,7 +213,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>WSL ディストリビューションを開き、以下の Linux コマンドを実行します:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -277,7 +277,7 @@ wsl --update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>WSL 2 から Milvus を実行中に WSL 関連の問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているかどうかを、次のように確認する必要があります：</p>
+    </button></h3><p>WSL 2 から Milvus を実行中に WSL 関連の問題が発生した場合は、Docker Desktop が WSL 2 ベースのエンジンを使用するように設定されているか、次のように確認する必要があります：</p>
 <ol>
 <li><p><strong>[設定]</strong>&gt;<strong>[全般]</strong> で、「WSL 2 ベースのエンジンを使用する」にチェックが入っていることを確認してください。</p>
 <p><span class="img-wrapper">
@@ -344,7 +344,7 @@ wsl --update
 <p>また、以下のことも可能です：</p>
 <ul>
 <li><p><a href="/docs/ja/quickstart.md">クイックスタートを</a>参照して、Milvusの機能を確認してください。</p></li>
-<li><p>Milvusの基本的な操作を学ぶには：</p>
+<li><p>Milvusの基本的な操作を学ぶ：</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
 <li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>

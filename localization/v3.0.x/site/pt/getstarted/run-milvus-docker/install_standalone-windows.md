@@ -68,7 +68,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>Escolha um dos seguintes terminais. Execute os comandos num diretório de trabalho gravável; o script armazena os ficheiros de configuração e o diretório <code translate="no">volumes</code> nesse local.</p>
-<p>O script é descarregado a partir do ramo « <code translate="no">master</code> » do Milvus. A etiqueta da imagem do Docker está definida no script e pode diferir da v3.0.3. Para implementar essa versão exata, utilize a configuração do Docker Compose com versão especificada abaixo.</p>
+<p>O script é descarregado a partir do ramo « <code translate="no">master</code> » do Milvus. A etiqueta da imagem do Docker está definida no script e pode diferir da v3.0.5. Para implementar essa versão exata, utilize a configuração do Docker Compose com versão especificada abaixo.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">A partir do PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ docker compose version
 .\standalone.bat start
 </code></pre>
 <p>O PowerShell requer o prefixo « <code translate="no">.\</code> » para executar um script a partir do diretório de trabalho.</p>
-<h3 id="From-Windows-Command-Prompt" class="common-anchor-header">A partir do Prompt de Comando do Windows<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
+<h3 id="From-Windows-Command-Prompt" class="common-anchor-header">A partir do Prompt de Comandos do Windows<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,7 +158,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilize a configuração anexada à versão v3.0.3. Execute apenas a sequência de comandos adequada ao seu terminal.</p>
+    </button></h2><p>Utilize a configuração anexada à versão v3.0.5. Execute apenas a sequência de comandos adequada ao seu terminal.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">A partir do PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>Descarregue a configuração e inicie o Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -195,7 +195,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Descarregue a configuração e inicie o Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -215,11 +215,11 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Abra a sua distribuição WSL e, em seguida, execute os comandos Linux:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
-<p>A configuração inicia três contentores de execução prolongada: <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong>. Também executa o serviço «one-shot» <code translate="no">milvus-volume-init</code> para preparar a propriedade do diretório de dados. Os seus dados correspondem a <strong>volumes/milvus</strong>, <strong>volumes/minio</strong> e <strong>volumes/etcd</strong> no diretório de trabalho. O MinIO expõe as portas <strong>9000</strong> e <strong>9001</strong>; o Milvus expõe as portas <strong>19530</strong> e <strong>9091</strong>. Para comandos de configuração e de ciclo de vida, consulte <a href="/docs/pt/install_standalone-docker-compose.md">Executar o Milvus com o Docker Compose</a>.</p>
+<p>A configuração inicia três contentores de execução prolongada: <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> e <strong>milvus-etcd</strong>. Também executa o serviço «one-shot» <code translate="no">milvus-volume-init</code> para preparar a propriedade do diretório de dados. Os respetivos dados correspondem a <strong>volumes/milvus</strong>, <strong>volumes/minio</strong> e <strong>volumes/etcd</strong> no diretório de trabalho. O MinIO expõe as portas <strong>9000</strong> e <strong>9001</strong>; o Milvus expõe as portas <strong>19530</strong> e <strong>9091</strong>. Para comandos de configuração e de ciclo de vida, consulte <a href="/docs/pt/install_standalone-docker-compose.md">Executar o Milvus com o Docker Compose</a>.</p>
 <h2 id="FAQs" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -342,7 +342,7 @@ wsl --update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de instalar o Milvus no Docker, siga o caminho <strong>«Utilizar um servidor Milvus existente»</strong> no <a href="/docs/pt/quickstart.md">Guia de Início Rápido</a> e ligue o SDK a <code translate="no">http://localhost:19530</code>. Este caminho do servidor não necessita do Milvus Lite; o bloco de ligação local <code translate="no">.db</code> iniciaria uma base de dados local separada em vez de utilizar este contentor.</p>
+    </button></h2><p>Depois de instalar o Milvus no Docker, siga o caminho <strong>«Utilizar um servidor Milvus existente»</strong> no <a href="/docs/pt/quickstart.md">Guia de Início Rápido</a> e ligue o SDK a <code translate="no">http://localhost:19530</code>. Este caminho do servidor não necessita do Milvus Lite; o bloco de ligação local <code translate="no">.db</code> iniciaria uma base de dados local separada, em vez de utilizar este contentor.</p>
 <p>Também pode:</p>
 <ul>
 <li><p>Consultar <a href="/docs/pt/quickstart.md">o Guia de Início Rápido</a> para ver o que o Milvus pode fazer.</p></li>

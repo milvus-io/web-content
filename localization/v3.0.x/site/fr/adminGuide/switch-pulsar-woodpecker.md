@@ -25,7 +25,7 @@ summary: >-
 <p><strong>Prérequis :</strong> la fonctionnalité « Switch MQ » est disponible dans <strong>Milvus 3.0 et versions ultérieures</strong>. Mettez à niveau votre instance Milvus vers Milvus 3.0 ou une version ultérieure avant de commencer — cette fonctionnalité n’est pas disponible dans les versions antérieures.</p>
 </div>
 <div class="alert warning">
-<p>Le changement de file d’attente de messages est une <strong>opération à haut risque</strong>. Choisissez la section qui correspond <strong>à votre</strong> méthode de déploiement — « <strong>Avec Helm</strong> » ou <strong>« Avec Milvus Operator</strong> » — et suivez-la dans son intégralité. Ne mélangez pas les commandes Helm et Operator.</p>
+<p>Le changement de file d’attente de messages est une <strong>opération à haut risque</strong>. Choisissez la section qui correspond <strong>à votre</strong> méthode de déploiement — <strong>« Avec Helm</strong> » ou <strong>« Avec Milvus Operator</strong> » — et suivez-la de A à Z. Ne mélangez pas les commandes Helm et Operator.</p>
 </div>
 <h2 id="With-Helm" class="common-anchor-header">Avec Helm<button data-href="#With-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,7 +72,7 @@ summary: >-
 <p>Une migration réussie génère le message « <code translate="no">[mqTypeValue=woodpecker]</code> ».</p>
 <p><strong>Étape 4 : (Facultatif) Arrêtez Pulsar et effectuez le nettoyage.</strong> Pour Pulsar <strong>intégré</strong>, désactivez Pulsar et activez Woodpecker, puis supprimez les PVC Pulsar :</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -101,7 +101,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>Étape 1 : Vérifiez que l’instance Milvus est en cours d’exécution.</strong></p>
-<p><strong>Étape 2 : Configurez la connexion Pulsar cible et redémarrez Milvus.</strong> Pour effectuer cette transition, Milvus doit déjà connaître la connexion Pulsar ; vous devez donc l'enregistrer dans « <code translate="no">user.yaml</code> » via <code translate="no">extraConfigFiles</code>, puis l'appliquer avec <code translate="no">helm upgrade</code> (ce qui redémarre les pods). La commande « <code translate="no">streaming.enabled=true</code> » est requise pour la fonctionnalité Switch MQ.</p>
+<p><strong>Étape 2 : Configurez la connexion Pulsar cible et redémarrez Milvus.</strong> Pour effectuer cette transition, Milvus doit déjà connaître la connexion Pulsar ; vous devez donc l’enregistrer dans « <code translate="no">user.yaml</code> » via <code translate="no">extraConfigFiles</code>, puis appliquer les modifications avec <code translate="no">helm upgrade</code> (ce qui redémarre les pods). La commande « <code translate="no">streaming.enabled=true</code> » est requise pour la fonctionnalité Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -265,7 +265,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 </thead>
 <tbody>
 <tr><td>Pulsar intégré</td><td>Woodpecker (MinIO)</td><td><strong>Prise en charge</strong></td><td><strong>Prise en charge</strong></td></tr>
-<tr><td>Pulsar externe</td><td>Woodpecker (MinIO)</td><td><strong>Pris en charge</strong></td><td><strong>Pris en charge</strong></td></tr>
+<tr><td>Pulsar externe</td><td>Woodpecker (MinIO)</td><td><strong>Pris en charge</strong></td><td><strong>Prise en charge</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>Pulsar externe</td><td><strong>Pris en charge</strong></td><td><strong>Prise en charge</strong></td></tr>
 <tr><td>Pulsar</td><td>Woodpecker (local)</td><td><strong>Pris en charge mais non recommandé</strong> (tous les pods doivent partager un système de fichiers)</td><td><strong>Non pris en charge</strong></td></tr>
 </tbody>

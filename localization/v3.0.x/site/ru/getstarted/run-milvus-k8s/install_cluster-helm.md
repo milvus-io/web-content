@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Перед установкой проверьте <a href="/docs/ru/prerequisite-helm.md">требования к аппаратному и программному обеспечению</a>.</p></li>
-<li><p>Перед установкой Milvus рекомендуется воспользоваться инструментом <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> для оценки требований к аппаратному обеспечению с учетом объема ваших данных. Это поможет обеспечить оптимальную производительность и распределение ресурсов для вашей установки Milvus.</p></li>
+<li><p>Перед установкой Milvus рекомендуется воспользоваться инструментом <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> для оценки аппаратных требований с учетом объема ваших данных. Это поможет обеспечить оптимальную производительность и распределение ресурсов для вашей установки Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Если у вас возникнут проблемы с загрузкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, указав подробности проблемы, и мы предоставим вам необходимую поддержку.</p>
@@ -91,7 +91,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p>Затем загрузите диаграммы Milvus из репозитория следующим образом:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
 <button class="copy-code-btn"></button></code></pre>
-<p>Вы всегда можете выполнить эту команду, чтобы загрузить последние версии диаграмм Milvus Helm.</p>
+<p>Вы всегда можете выполнить эту команду, чтобы загрузить последние диаграммы Milvus Helm.</p>
 <h2 id="Online-install" class="common-anchor-header">Установка через Интернет<button data-href="#Online-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Вам нужно автономное развертывание?</strong></p>
 <p>Если вы предпочитаете развернуть Milvus в автономном режиме (на одном узле) для разработки или тестирования, используйте следующую команду:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -138,11 +138,11 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </div>
 <p><strong>Развертывание кластера Milvus:</strong></p>
 <div class="alert note">
-<p>Для режима службы Woodpecker рекомендуется использовать Milvus версии 3.0.3 или более поздней с Woodpecker версии v0.1.46 или более поздней.</p>
+<p>Для режима службы Woodpecker мы рекомендуем использовать Milvus версии 3.0.3 или более поздней с Woodpecker версии v0.1.46 или более поздней.</p>
 </div>
-<p>Следующая команда развертывает кластер Milvus с оптимизированными настройками для версии 3.0.3, используя Woodpecker в качестве рекомендуемой очереди сообщений:</p>
+<p>Следующая команда развертывает кластер Milvus с оптимизированными настройками для версии 3.0.5, используя Woodpecker в качестве рекомендуемой очереди сообщений:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -197,7 +197,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Убедитесь, что развертывание прошло успешно, проверив статус подов:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Дождитесь, пока все поды не покажут статус «Running».</strong> При конфигурации v3.0.3 вы должны увидеть поды, похожие на следующие:</p>
+<p><strong>Дождитесь, пока все поды не перейдут в состояние «Running».</strong> При конфигурации v3.0.5 вы должны увидеть поды, похожие на следующие:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Зависимости</strong>: <code translate="no">etcd</code> (метаданные), <code translate="no">minio</code> (объектное хранилище), <code translate="no">woodpecker</code> (очередь сообщений)</li>
 </ul>
 <div class="alert note">
-<p>С <code translate="no">streaming.woodpecker.embedded=false</code> Woodpecker работает как <strong>выделенный StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>, по умолчанию 4 реплики — кворум из 3 узлов плюс один резервный для отказоустойчивости; не устанавливайте значение <code translate="no">woodpecker.replicaCount</code> ниже 3), за которым стоит сервис без интерфейса пользователя, использующий MinIO в качестве бэкэнда хранилища — таким образом, у кластера есть отдельный набор под <code translate="no">woodpecker</code>, отличающийся от потокового узла.</p>
+<p>С <code translate="no">streaming.woodpecker.embedded=false</code> Woodpecker работает как <strong>выделенный StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>, по умолчанию 4 реплики — кворум из 3 узлов плюс один запасной для отказоустойчивости; не устанавливайте значение <code translate="no">woodpecker.replicaCount</code> ниже 3), за которым стоит сервис без интерфейса пользователя, использующий MinIO в качестве бэкэнда хранилища — таким образом, у кластера есть отдельный набор под <code translate="no">woodpecker</code>, отличающийся от потокового узла.</p>
 </div>
 <p>Вы также можете получить доступ к <strong>веб-интерфейсу Milvus</strong> по адресу <code translate="no">http://127.0.0.1:9091/webui/</code> после настройки перенаправления портов (см. следующий шаг). Подробности см. в разделе <a href="/docs/ru/milvus-webui.md">«Веб-интерфейс Milvus</a>».</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Подключение к Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -519,7 +519,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <ul>
 <li><a href="/docs/ru/manage_databases.md">Управление базами данных</a></li>
 <li><a href="/docs/ru/manage-collections.md">Управлять коллекциями</a></li>
-<li><a href="/docs/ru/manage-partitions.md">Управление разделами</a></li>
+<li><a href="/docs/ru/manage-partitions.md">Управлять разделами</a></li>
 <li><a href="/docs/ru/insert-update-delete.md">Вставка, обновление и удаление</a></li>
 <li><a href="/docs/ru/single-vector-search.md">Поиск по одному вектору</a></li>
 <li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>

@@ -23,9 +23,9 @@ title: Atualizar o cluster Milvus com o Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia descreve como atualizar um cluster Milvus 2.6.x para a versão 3.0.3 com o Milvus Operator.</p>
+    </button></h1><p>Este guia descreve como atualizar um cluster Milvus 2.6.x para a versão 3.0.5 com o Milvus Operator.</p>
 <div class="alert note">
-<p>Este procedimento foi validado da versão Milvus 2.6.20 para a v3.0.3 com o Milvus Operator 1.3.0, MixCoord, StreamingNode, Woodpecker, etcd no cluster e MinIO no cluster. Se utilizar outra versão de patch do Milvus 2.6.x, versão do Operator, topologia de componentes, fila de mensagens ou configuração de dependências, valide primeiro a atualização num ambiente que não seja de produção.</p>
+<p>Este procedimento foi validado da versão Milvus 2.6.20 para a v3.0.5 com o Milvus Operator 1.3.0, MixCoord, StreamingNode, Woodpecker, etcd no cluster e MinIO no cluster. Se utilizar outra versão de patch do Milvus 2.6.x, versão do Operator, topologia de componentes, fila de mensagens ou configuração de dependências, valide primeiro a atualização num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,10 +49,10 @@ title: Atualizar o cluster Milvus com o Milvus Operator
 <li>O método de instalação e os manifestos utilizados para o Milvus Operator existente</li>
 <li>Uma cópia de segurança atualizada dos metadados e dados persistentes do Milvus</li>
 </ul>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.3, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.5, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <div class="alert warning">
-<p>Aplique o CR completo do Milvus para esta atualização. Não utilize um patch de fusão apenas de imagem. O Operator pode preencher por predefinição campos de componentes omitidos com zero réplicas, o que pode reativar um componente que a implementação 2.6.x existente tenha desativado.</p>
-<p>Este procedimento não valida um downgrade ou uma reversão que consista em alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.3 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados pré-atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
+<p>Aplique o CR completo do Milvus para esta atualização. Não utilize um patch de fusão apenas de imagem. O Operator pode preencher por defeito campos de componentes omitidos com zero réplicas, o que pode reativar um componente que a implementação 2.6.x existente tenha desativado.</p>
+<p>Este procedimento não valida um downgrade ou uma reversão que consista em alterar a imagem do Milvus de volta para a versão 2.6.x. Depois de a v3.0.5 gravar dados, uma reversão apenas da imagem pode não conseguir ler o estado atualizado. Se a atualização falhar, interrompa as gravações e utilize um plano de recuperação que restaure os metadados pré-atualização e as cópias de segurança dos dados persistentes. Valide primeiro o plano de recuperação num ambiente que não seja de produção.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Processo de atualização<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,7 +135,7 @@ title: Atualizar o cluster Milvus com o Milvus Operator
   <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.3</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.5</span>
     <span class="hljs-attr">indexNode:</span>
       <span class="hljs-attr">replicas:</span> <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -167,4 +167,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verifique se o CR do Milvus apresenta « <code translate="no">Healthy</code> », se todos os componentes do Milvus utilizam « <code translate="no">milvusdb/milvus:v3.0.3</code> », se nenhum Pod do IndexNode está em execução e se as coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.3.</p>
+<p>Verifique se o CR do Milvus indica « <code translate="no">Healthy</code> », se todos os componentes do Milvus utilizam « <code translate="no">milvusdb/milvus:v3.0.5</code> », se nenhum Pod do IndexNode está em execução e se as coleções existentes continuam a poder ser consultadas e pesquisadas. Conclua estas verificações antes de ativar qualquer funcionalidade específica da versão 3.0.5.</p>

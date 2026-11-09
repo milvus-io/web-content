@@ -72,7 +72,7 @@ summary: >-
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=woodpecker]</code> というログが出力されます。</p>
 <p><strong>ステップ 4: (オプション) Pulsar を停止し、クリーンアップを行います。</strong> <strong>組み込みの</strong>Pulsar の場合、Pulsar を無効にして Woodpecker を有効にし、Pulsar の PVC を削除します:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -131,7 +131,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>切り替えが成功すると、<code translate="no">[mqTypeValue=pulsar]</code> というログが出力されます。</p>
-<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップ。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
+<p><strong>ステップ 5: (オプション) Woodpecker データのクリーンアップを行います。</strong>MinIO/S3 上の Woodpecker データ（<code translate="no">&lt;rootPath&gt;/wp/...</code> 配下、通常は<code translate="no">files/wp/...</code> ）および etcd 内の Woodpecker メタデータ（<code translate="no">etcdctl get woodpecker --prefix</code> ）を削除します。後で Woodpecker に戻す予定がある場合は、まずこれらのファイルをクリーンアップしてください。</p>
 <h2 id="With-Milvus-Operator" class="common-anchor-header">Milvus Operator を使用する場合<button data-href="#With-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>外部</strong>Pulsarの場合は、Milvusトピックをクリーンアップします（<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> 形式）。</p>
+<p><strong>外部</strong>Pulsarの場合は、Milvusのトピックをクリーンアップします（<code translate="no">&lt;cluster_prefix&gt;-dml_&lt;seqNo&gt;_&lt;TimeTick&gt;&lt;Version&gt;</code> 形式）。</p>
 <div class="alert note">
 <p>後でPulsarに戻す予定がある場合は、競合を避けるために、まずデータやトピックをクリーンアップしてください。Helmチャートの制限により、現在、<strong>組み込みの</strong>Pulsarインスタンスに戻すことはできません。</p>
 </div>
@@ -267,6 +267,6 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <tr><td>組み込みPulsar</td><td>Woodpecker (MinIO)</td><td><strong>サポート対象</strong></td><td><strong>サポート対象</strong></td></tr>
 <tr><td>外部 Pulsar</td><td>Woodpecker (MinIO)</td><td><strong>対応</strong></td><td><strong>対応</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>External Pulsar</td><td><strong>対応</strong></td><td><strong>対応</strong></td></tr>
-<tr><td>Pulsar</td><td>Woodpecker (ローカル)</td><td><strong>サポートされていますが、推奨されません</strong>（すべてのポッドで共有ファイルシステムが必要です）</td><td><strong>未対応</strong></td></tr>
+<tr><td>Pulsar</td><td>Woodpecker（ローカル）</td><td><strong>サポートされていますが、推奨されません</strong>（すべてのポッドで共有ファイルシステムが必要です）</td><td><strong>未対応</strong></td></tr>
 </tbody>
 </table>

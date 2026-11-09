@@ -128,7 +128,7 @@ summary: >-
 </ul></li>
 <li><code translate="no">woodpecker.logstore</code>
 <ul>
-<li>Steuert die Richtlinien für Synchronisierung, Flush, Komprimierung und Lesen von Protokollsegmenten. Dies sind die wichtigsten Einstellmöglichkeiten für die Optimierung von Durchsatz und Latenz.</li>
+<li>Steuert die Richtlinien für Synchronisierung, Flush, Komprimierung und Lesen von Protokollsegmenten. Dies sind die wichtigsten Einstellmöglichkeiten zur Optimierung von Durchsatz und Latenz.</li>
 </ul></li>
 <li><code translate="no">woodpecker.storage</code>
 <ul>
@@ -282,7 +282,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>Führen Sie anschließend die Bereitstellung anhand eines der folgenden Beispiele durch:</p>
 <p>– Cluster-Bereitstellung (empfohlene Einstellungen mit aktiviertem Woodpecker und Streaming Node):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -290,7 +290,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p>– Standalone-Bereitstellung (Woodpecker aktiviert):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -342,7 +342,7 @@ bash standalone_embed.sh start
       </svg>
     </button></h3><p>Befolgen Sie die Anleitung <a href="/docs/de/install_standalone-docker-compose.md">„Milvus mit Docker Compose ausführen</a>“. Beispiel:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
-wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
 <span class="hljs-built_in">sudo</span> docker compose up -d
 <span class="hljs-comment"># If you need to change Woodpecker parameters further, write an override:</span>
@@ -376,11 +376,11 @@ docker restart milvus-standalone
         ></path>
       </svg>
     </button></h3><div class="alert note">
-<p>Für den Woodpecker-Dienstmodus empfehlen wir die Verwendung von Milvus 3.0.3 oder höher zusammen mit Woodpecker v0.1.46 oder höher.</p>
+<p>Für den Woodpecker-Dienstmodus empfehlen wir die Verwendung von Milvus 3.0.3 oder höher in Kombination mit Woodpecker v0.1.46 oder höher.</p>
 </div>
 <p><strong>Der Woodpecker-Dienstmodus</strong> ist eine Funktion <strong>von Milvus 3.0</strong>. Bei verteilten/Cluster-Bereitstellungen können Sie Woodpecker als <strong>dedizierten Dienst</strong> (separate Pods) ausführen, anstatt ihn in den Streaming-Knoten einzubetten, indem Sie „ <code translate="no">streaming.woodpecker.embedded=false</code> “ festlegen:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -554,11 +554,11 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Der Service-Modus bietet <strong>eine Schreiblatenz im Millisekundenbereich</strong> – in derselben Größenordnung wie ein herkömmliches WAL mit drei Replikaten auf lokalen Festplatten – bei gleichzeitig geringen Kosten. In einer typischen Bereitstellung mit drei Replikaten über mehrere AZs hinweg bleibt die Schreiblatenz im Millisekundenbereich. Dies wird erreicht durch:</p>
 <ul>
 <li><strong>Quorum-Schreibvorgänge mit einer RTT</strong> – die clientgesteuerte Replikation schließt einen Quorum-Schreibvorgang innerhalb einer einzigen Round-Trip-Zeit ab, wobei der AZ-übergreifende Datenverkehr auf das Datenvolumen von zwei Replikaten begrenzt ist (im Gegensatz zu dem zusätzlichen AZ-übergreifenden Datenverkehr von etwa einem Drittel, der bei broker-/leader-basierter Replikation typisch ist).</li>
-<li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – Jeder Lesevorgang erfolgt direkt an die nächstgelegene Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen Lesevorgänge über AZ-Grenzen hinweg (≈2/3 des Leseverkehrs über AZ-Grenzen hinweg) von Broker-basierten Systemen vermieden werden.</li>
-<li><strong>Sofortiges Hochladen in den Objektspeicher nach Segment-Rolling</strong> – jedes Segment verfolgt seinen gesamten Lebenszyklus und wird sofort nach dem Rolling in den Objektspeicher hochgeladen, wodurch der Speicherplatzbedarf auf der lokalen Festplatte und die Speicherkosten niedrig gehalten werden, ohne dass dabei Kompromisse bei der Latenz eingegangen werden müssen.</li>
-<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht durch die Replikationsbandbreite zwischen den Knoten begrenzt, und ein groß angelegter Knotenaustausch verursacht keine Replikationsstürme.</li>
+<li><strong>Topologiebewusste Single-Hop-Lesevorgänge</strong> – jeder Lesevorgang erfolgt direkt an die nächstgelegene Replik, anstatt über einen Broker weitergeleitet zu werden, wodurch die zufälligen Lesevorgänge über AZ-Grenzen hinweg (≈2/3 des Leseverkehrs über AZ-Grenzen hinweg) von Broker-basierten Systemen vermieden werden.</li>
+<li><strong>Sofortiges Hochladen in den Objektspeicher nach Segment-Rolling</strong> – jedes Segment verfolgt seinen gesamten Lebenszyklus und wird sofort nach dem Rolling in den Objektspeicher hochgeladen, wodurch der Speicherbedarf auf der lokalen Festplatte und die Speicherkosten niedrig gehalten werden, ohne dass dies zu Lasten der Latenz geht.</li>
+<li><strong>Keine kontinuierliche Replikation von Knoten zu Knoten</strong> – Protokolle werden im Objektspeicher als gemeinsamer Speicher persistent gespeichert, sodass beim Failover nur die überlebenden Replikate erneut hochgeladen werden (keine Kopie des gesamten Knotens); die Skalierung ist nicht an die Bandbreite der Replikation zwischen den Knoten gebunden, und der groß angelegte Austausch von Knoten verursacht keine Replikationsstürme.</li>
 </ul>
-<p>Bei bereichsübergreifenden Bereitstellungen spart der Servicemodus im Vergleich zu brokerbasierten Protokollsystemen zudem etwa <strong>1/3 des Schreib-</strong> und <strong>2/3 des Lese-Netzwerkverkehrs</strong> zwischen den Verfügbarkeitszonen ein. Die vollständige Entwurfs- und Kostenanalyse finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
+<p>Bei bereichsübergreifenden Bereitstellungen spart der Servicemodus im Vergleich zu brokerbasierten Protokollsystemen zudem etwa <strong>1/3 des Schreib-</strong> und <strong>2/3 des Lese-Netzwerkverkehrs</strong> zwischen den Verfügbarkeitszonen ein. Die vollständige Design- und Kostenanalyse finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <p>Einzelheiten zur Architektur, zu den Bereitstellungsmodi (MemoryBuffer / QuorumBuffer) und zur Leistung finden Sie unter <a href="/docs/de/woodpecker_architecture.md">„Woodpecker-Architektur</a>“.</p>
 <p>Weitere Informationen zu den Parametern finden Sie im Woodpecker <a href="https://github.com/zilliztech/woodpecker">-GitHub-Repository</a>.</p>
 <h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">Milvus- und Woodpecker-Versionen<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">
@@ -625,7 +625,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der Woodpecker-Servicemodus wird ab Milvus 3.0 unterstützt. Die <strong>Woodpecker-Client-Bibliothek</strong> ist im Milvus-Image enthalten, während das <strong>Woodpecker-Server-Image</strong> separat veröffentlicht und bereitgestellt wird. Konfigurieren Sie die Server-Image-Version mit <code translate="no">woodpecker.image.tag</code>.</p>
+    </button></h3><p>Der Woodpecker-Service-Modus wird ab Milvus 3.0 unterstützt. Die <strong>Woodpecker-Client-Bibliothek</strong> ist im Milvus-Image enthalten, während das <strong>Woodpecker-Server-Image</strong> separat veröffentlicht und bereitgestellt wird. Konfigurieren Sie die Server-Image-Version mit <code translate="no">woodpecker.image.tag</code>.</p>
 <p>Der Client ist abwärtskompatibel mit älteren Serverversionen. Bei einem Upgrade von Milvus empfehlen wir, auch das Woodpecker-Service-Image auf die entsprechende Version (siehe unten) zu aktualisieren, damit sowohl Client als auch Server die Korrekturen für diese Version erhalten. In der Spalte „Server“ sind die empfohlenen Kombinationen aufgeführt; eine Mindestversion für die Serverkompatibilität wird dort nicht angegeben.</p>
 <table>
 <thead>
@@ -657,13 +657,13 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Stand <strong>12. Oktober 2026</strong> sind die neuesten stabilen Versionen der Serien 2.6.x und 3.x:</p>
 <table>
 <thead>
-<tr><th>Milvus-Serie</th><th>Aktuellste stabile Milvus-Version</th><th>Mitgelieferte Woodpecker-Bibliothek/Client</th><th>Empfohlenes Service-Image-Tag</th></tr>
+<tr><th>Milvus-Serie</th><th>Aktuellste stabile Milvus-Version</th><th>Mitgelieferte Woodpecker-Bibliothek/Client</th><th>Empfohlener Service-Image-Tag</th></tr>
 </thead>
 <tbody>
 <tr><td>2.6.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">v2.6.25</a></td><td><code translate="no">v0.1.44</code> (eingebettet)</td><td>Nicht zutreffend</td></tr>
 <tr><td>3.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.3">v3.0.3</a></td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td></tr>
 </tbody>
 </table>
-<p>Wir empfehlen ein Upgrade auf die <strong>neueste stabile Patch-Version Ihrer gewählten Milvus-Release-Serie,</strong> um die neuesten Fehlerbehebungen zu erhalten, einschließlich Updates für die mitgelieferte Woodpecker-Bibliothek. Informationen zu neueren Versionen finden Sie in den <a href="https://github.com/milvus-io/milvus/releases">Milvus-Releases</a> und unter „ <code translate="no">pkg/go.mod</code> “ der jeweiligen Zielversion; die obigen Tabellen beschreiben die zum angegebenen Datum verfügbaren Versionen.</p>
+<p>Wir empfehlen ein Upgrade auf die <strong>neueste stabile Patch-Version Ihrer gewählten Milvus-Release-Serie,</strong> um die neuesten Fehlerbehebungen zu erhalten, einschließlich Updates für die mitgelieferte Woodpecker-Bibliothek. Informationen zu neueren Versionen finden Sie in den <a href="https://github.com/milvus-io/milvus/releases">Milvus-Releases</a> und unter <code translate="no">pkg/go.mod</code> für die jeweilige Zielversion; die obigen Tabellen beschreiben die zum angegebenen Datum verfügbaren Versionen.</p>
 <p>Für <strong>den Woodpecker-Servicemodus</strong> empfehlen wir <strong>Milvus 3.0.3 oder höher mit Woodpecker v0.1.46 oder höher</strong>. Wenn Sie Milvus im Servicemodus aktualisieren, aktualisieren Sie auch das separat bereitgestellte Woodpecker-Server-Image auf die entsprechende empfohlene Version.</p>
 <p>Informationen zu den Upgrade-Verfahren finden Sie unter <a href="/docs/de/upgrade_milvus_cluster-helm.md">„Milvus-Cluster mit Helm aktualisieren</a>“, <a href="/docs/de/upgrade_milvus_cluster-operator.md">„Milvus-Cluster mit Milvus Operator aktualisieren</a>“ oder <a href="/docs/de/upgrade_milvus_standalone-docker.md">„Milvus Standalone mit Docker Compose aktualisieren</a>“.</p>

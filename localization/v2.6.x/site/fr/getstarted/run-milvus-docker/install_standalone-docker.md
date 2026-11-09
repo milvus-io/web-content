@@ -55,7 +55,7 @@ title: Exécuter Milvus dans Docker (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fournit un script d'installation permettant de l'installer sous forme de conteneur Docker. Ce script est disponible dans le <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">dépôt Milvus</a>. Pour installer Milvus dans Docker, il suffit d'exécuter</p>
+    </button></h2><p>Milvus fournit un script d'installation permettant de l'installer en tant que conteneur Docker. Ce script est disponible dans le <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">dépôt Milvus</a>. Pour installer Milvus dans Docker, il suffit d'exécuter</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -63,17 +63,17 @@ title: Exécuter Milvus dans Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Nouveautés de la version 2.6.25 :</strong></p>
+<p><strong>Nouveautés de la version 2.6.26 :</strong></p>
 <ul>
 <li><strong>Nœud de streaming</strong>: capacités de traitement des données améliorées</li>
 <li><strong>Woodpecker MQ</strong>: file d’attente de messages améliorée avec une charge de maintenance réduite ; voir « <a href="/docs/fr/v2.6.x/use-woodpecker.md">Utiliser Woodpecker</a> » pour plus de détails</li>
-<li><strong>Architecture optimisée</strong>: composants regroupés pour de meilleures performances</li>
+<li><strong>Architecture optimisée</strong>: composants consolidés pour de meilleures performances</li>
 </ul>
 <p>Téléchargez toujours le script le plus récent pour bénéficier des dernières configurations et améliorations architecturales.</p>
 <p>Si vous souhaitez utiliser <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> en mode de déploiement autonome, il est recommandé d’utiliser la méthode de déploiement <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Si vous rencontrez des difficultés pour récupérer l’image, contactez-nous à <a href="mailto:community@zilliz.com">l’adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l’assistance nécessaire.</p>
 </div>
-<p>Après l’exécution du script d’installation :</p>
+<p>Après l'exécution du script d'installation :</p>
 <ul>
 <li>Un conteneur Docker nommé « milvus » a été lancé sur le port <strong>19530</strong>.</li>
 <li>Un embed etcd est installé avec Milvus dans le même conteneur et est accessible sur le port <strong>2379</strong>. Son fichier de configuration correspond au <strong>fichier embedEtcd.yaml</strong> situé dans le dossier actuel.</li>

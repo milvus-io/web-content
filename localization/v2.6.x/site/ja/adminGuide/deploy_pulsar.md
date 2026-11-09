@@ -20,9 +20,9 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
         ></path>
       </svg>
     </button></h1><p>Milvus は、最近の変更履歴のログ管理、ストリームログの出力、およびログのサブスクリプションの提供に Pulsar または Kafka を使用します。Pulsar がデフォルトのメッセージストレージシステムです。このトピックでは、Docker Compose または Helm を使用したメッセージストレージの設定方法について説明します。</p>
-<p>Pulsar は<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>または K8s 上で設定でき、Kafka は K8s 上で設定できます。</p>
+<p>Pulsarは<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>またはK8s上で設定でき、KafkaはK8s上で設定できます。</p>
 <div class="alert note">
-<p><strong>メッセージキューの制限事項</strong>：Milvus v2.6.25 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に関するサポートは、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>：Milvus v2.6.26 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose を使用した Pulsar の設定<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
     </button></h2><p>Milvus スタンドアロン版では、デフォルトのメッセージストレージとして RocksMQ が使用されます。Helm を使用して Milvus を設定する詳細な手順については、「<a href="/docs/ja/v2.6.x/configure-helm.md">Helm チャートを使用した Milvus の設定</a>」を参照してください。RocksMQ に関連する設定項目の詳細については、「<a href="/docs/ja/v2.6.x/configure_rocksmq.md">RocksMQ に関連する設定</a>」を参照してください。</p>
 <ul>
 <li><p>RocksMQ を使用して Milvus を起動し、その設定を変更したい場合は、変更後の設定を以下の YAML ファイルに記述して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
-<li><p>Helm を使用して Milvus をスタンドアロンでインストールし、RocksMQ 以外のメッセージストアを使用している場合、これを RocksMQ に戻したいときは、すべてのコレクションをフラッシュし、Milvus を停止した後、以下の YAML ファイルを使用して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
+<li><p>Helm を使用して RocksMQ 以外のメッセージストアで Milvus をスタンドアロンでインストールしており、これを RocksMQ に戻したい場合は、すべてのコレクションをフラッシュし、Milvus を停止した後、以下の YAML ファイルを使用して `<code translate="no">helm upgrade -f</code> ` を実行してください。</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+

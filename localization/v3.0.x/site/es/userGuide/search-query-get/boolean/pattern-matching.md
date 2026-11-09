@@ -2,11 +2,11 @@
 id: pattern-matching.md
 title: Coincidencia de patrones
 summary: >-
-  Milvus admite la búsqueda de coincidencias en cadenas mediante patrones
-  comodín LIKE y expresiones regulares RE2. Utiliza filtros de patrones para
-  buscar prefijos, sufijos, subcadenas, códigos estructurados, dominios de
-  correo electrónico, rutas URL y otros patrones de cadena en campos VARCHAR,
-  rutas de cadenas JSON o elementos ARRAY.
+  Milvus admite la coincidencia de patrones de cadenas con patrones comodín LIKE
+  y expresiones regulares RE2. Utiliza filtros de patrones para encontrar
+  coincidencias con prefijos, sufijos, subcadenas, códigos estructurados,
+  dominios de correo electrónico, rutas de URL y otros patrones de cadenas en
+  campos VARCHAR, rutas de cadenas JSON o elementos ARRAY.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Coincidencia de patrones<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -30,12 +30,14 @@ summary: >-
 </div>
 <p>Las expresiones de coincidencia de patrones se escriben en el parámetro « <code translate="no">filter</code> ». Por ejemplo, la siguiente consulta encuentra mensajes de registro que contienen un código de error como « <code translate="no">E1001</code> »:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -67,12 +69,12 @@ res = client.query(
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx := context.Background()
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
@@ -87,36 +89,22 @@ res, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-stri
 }
 fmt.Println(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span> });
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
 
-  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;log_events&#x27;</span>,
-<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>,</span>
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-string">&#x27;severity&#x27;</span>],
-  });
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client.<span class="hljs-title function_ invoke__">query</span>(
+    QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;log_events&quot;</span>)
+<span class="highlighted-wrapper-line">        .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">r#&quot;message =~ &quot;E[0-9]{4}&quot;&quot;#</span>)</span>
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> res.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">rows</span>()? {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
 }
-
-<span class="hljs-title function_">main</span>().<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
-  process.<span class="hljs-property">exitCode</span> = <span class="hljs-number">1</span>;
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-curl --request POST \
-  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
-  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
-  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --data <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;log_events&quot;,
-    &quot;filter&quot;: &quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;,
-    &quot;outputFields&quot;: [&quot;message&quot;, &quot;severity&quot;]
-  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
@@ -141,7 +129,64 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Los ejemplos de esta página se centran en la expresión asignada a « <code translate="no">filter</code> ». Puede utilizar la misma sintaxis de expresión de filtro en operaciones de Milvus que acepten un filtro escalar, como « <code translate="no">query</code> », « <code translate="no">search</code> » y la búsqueda híbrida.</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span> });
+
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;log_events&#x27;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>,</span>
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-string">&#x27;severity&#x27;</span>],
+  });
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+}
+
+<span class="hljs-title function_">main</span>().<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+  process.<span class="hljs-property">exitCode</span> = <span class="hljs-number">1</span>;
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+};
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+QueryResp res = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;log_events&quot;</span>,
+    Expression = <span class="hljs-string">&quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;</span>,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;log_events&quot;,
+    &quot;filter&quot;: &quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;,
+    &quot;outputFields&quot;: [&quot;message&quot;, &quot;severity&quot;]
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Los ejemplos de esta página se centran en la expresión asignada a ` <code translate="no">filter</code>`. Puede utilizar la misma sintaxis de expresión de filtro en operaciones de Milvus que acepten un filtro escalar, como ` <code translate="no">query</code>`, ` <code translate="no">search</code>` y la búsqueda híbrida.</p>
+<div class="alert note">
+<p>El literal situado a la izquierda de una expresión de filtrado puede ser un nombre de campo de colección, como <code translate="no">message</code>, <code translate="no">email</code>, etc., utilizados en los ejemplos siguientes, o el nombre de un subcampo de StructArray en un índice de elemento específico, como en <code translate="no">filter = 'struct[0][subfield] =~ &quot;E[0-9]{4}&quot;'</code>.</p>
+<p>Para obtener más información sobre el filtrado escalar en un campo StructArray, consulta <a href="/docs/es/struct-array-operators.md">Operadores</a> de <a href="/docs/es/struct-array-operators.md">StructArray</a>.</p>
+</div>
 <h2 id="Supported-field-types" class="common-anchor-header">Tipos de campo admitidos<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -160,13 +205,13 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     </button></h2><p>La coincidencia de patrones está disponible para valores de cadena.</p>
 <table>
 <thead>
-<tr><th>Objetivo</th><th><code translate="no">LIKE</code></th><th>Expresión regular <code translate="no">=~</code> / <code translate="no">!~</code></th><th>Notas</th></tr>
+<tr><th>Destino</th><th><code translate="no">LIKE</code></th><th>Expresión regular <code translate="no">=~</code> / <code translate="no">!~</code></th><th>Notas</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> campo</td><td>Sí</td><td>Sí</td><td>Objetivo típico para la coincidencia de patrones en campos de cadena.</td></tr>
-<tr><td><code translate="no">JSON</code> ruta con tipo de conversión « <code translate="no">VARCHAR</code> »</td><td>Sí</td><td>Sí</td><td>El valor de la ruta JSON debe ser una cadena para que las coincidencias sean positivas. Si creas un índice en la ruta JSON para acelerar el proceso, establece <code translate="no">json_cast_type=&quot;varchar&quot;</code>.</td></tr>
+<tr><td><code translate="no">JSON</code> ruta con tipo de conversión « <code translate="no">VARCHAR</code> »</td><td>Sí</td><td>Sí</td><td>El valor de la ruta JSON debe ser una cadena para que las coincidencias sean positivas. Si creas un índice en la ruta JSON para acelerar el proceso, establece « <code translate="no">json_cast_type=&quot;varchar&quot;</code> ».</td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> elemento</td><td>Sí</td><td>Sí</td><td>Coincide con un elemento específico por índice, como <code translate="no">tags[0]</code>. La coincidencia de patrones <strong>no</strong> analiza todos los elementos; solo se aplica al elemento del índice especificado.</td></tr>
-<tr><td>Números, valores booleanos, vectores, <code translate="no">TEXT</code> u otros objetivos que no sean de tipo «<code translate="no">VARCHAR</code> »</td><td>No</td><td>No</td><td>La coincidencia de patrones solo está disponible para valores de tipo « <code translate="no">VARCHAR</code> », rutas JSON que se resuelven en cadenas o elementos indexados de tipo « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
+<tr><td>Objetivos numéricos, booleanos, vectoriales, « <code translate="no">TEXT</code> » u otros que no sean de tipo «<code translate="no">VARCHAR</code> »</td><td>No</td><td>No</td><td>La coincidencia de patrones solo está disponible para valores de tipo « <code translate="no">VARCHAR</code> », rutas JSON que se resuelven en cadenas o elementos indexados de tipo « <code translate="no">ARRAY&lt;VARCHAR&gt;</code> ».</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Elige «LIKE» o una expresión regular<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -185,7 +230,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
         ></path>
       </svg>
     </button></h2><p>Elige el operador más sencillo que exprese el patrón que necesitas.</p>
-<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o expresiones regulares solo cuando el filtro tenga que coincidir con un patrón.</p>
+<p>Si necesitas una coincidencia exacta de cadena, te recomendamos que utilices « <code translate="no">==</code> » en lugar de la coincidencia de patrones. Utiliza « <code translate="no">LIKE</code> » o «regex» solo cuando el filtro tenga que coincidir con un patrón.</p>
 <table>
 <thead>
 <tr><th>Requisito</th><th>Operador recomendado</th><th>Ejemplo</th><th>Descripción</th></tr>
@@ -195,9 +240,9 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <tr><td>Coincidencia simple de prefijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">name LIKE &quot;Prod%&quot;</code></td><td>Coincide con cadenas que empiezan por « <code translate="no">Prod</code> ».</td></tr>
 <tr><td>Coincidencia simple de sufijo</td><td><code translate="no">LIKE</code></td><td><code translate="no">filename LIKE &quot;%.json&quot;</code></td><td>Coincide con cadenas que terminan en « <code translate="no">.json</code> ».</td></tr>
 <tr><td>Coincidencia simple «contiene»</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Coincide con valores que contengan « <code translate="no">vector database</code> » en cualquier parte de la cadena.</td></tr>
-<tr><td>Coincidencia con un código estructurado o un patrón de longitud fija</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Coincide con cadenas que, distinguiendo entre mayúsculas y minúsculas, contengan « <code translate="no">E</code> » seguido de cuatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
-<tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con <code translate="no">error</code>, <code translate="no">ERROR</code> u otras variantes con mayúsculas o minúsculas.</td></tr>
-<tr><td>Excluir valores que coincidan con un patrón de expresión regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Excluye las cadenas que empiezan por <code translate="no">DEBUG</code>.</td></tr>
+<tr><td>Búsqueda de un código estructurado o un patrón de longitud fija</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Coincide con cadenas que, distinguiendo entre mayúsculas y minúsculas, contengan « <code translate="no">E</code> » seguido de cuatro dígitos, como « <code translate="no">E1001</code> ».</td></tr>
+<tr><td>Coincidencia de patrones sin distinción entre mayúsculas y minúsculas</td><td><code translate="no">=~</code> con <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Coincide con <code translate="no">error</code>, <code translate="no">ERROR</code> u otras variantes con mayúsculas y minúsculas.</td></tr>
+<tr><td>Excluir valores que coincidan con un patrón de expresión regular</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Excluye las cadenas que comienzan por <code translate="no">DEBUG</code>.</td></tr>
 </tbody>
 </table>
 <p>Utiliza « <code translate="no">LIKE</code> » para una coincidencia sencilla con comodines. Utiliza expresiones regulares cuando el patrón requiera clases de caracteres, repeticiones, alternativas como « <code translate="no">error|failed</code> », anclajes o coincidencias que no distingan entre mayúsculas y minúsculas.</p>
@@ -219,14 +264,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     </button></h2><p>El operador <code translate="no">LIKE</code> sirve para la coincidencia simple con comodines en valores de cadena. Solo admite los siguientes comodines:</p>
 <table>
 <thead>
-<tr><th>Carácter comodín</th><th>Descripción</th></tr>
+<tr><th>Comodín</th><th>Descripción</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">%</code></td><td>Coincide con cero o más caracteres.</td></tr>
 <tr><td><code translate="no">_</code></td><td>Coincide con exactamente un carácter.</td></tr>
 </tbody>
 </table>
-<h3 id="Common-LIKE-patterns" class="common-anchor-header">Patrones LIKE habituales<button data-href="#Common-LIKE-patterns" class="anchor-icon" translate="no">
+<h3 id="Common-LIKE-patterns" class="common-anchor-header">Patrones comunes de LIKE<button data-href="#Common-LIKE-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,8 +313,8 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utiliza « <code translate="no">LIKE</code> » para coincidencias de prefijo, sufijo, contenido y un solo carácter en una posición fija. « <code translate="no">LIKE</code> » no admite clases de caracteres como « <code translate="no">[0-9]</code> », alternancias como « <code translate="no">error|failed</code> », recuentos de repeticiones como « <code translate="no">{4}</code> », anclajes como « <code translate="no">^</code> » o « <code translate="no">$</code> », ni indicadores de no distinción entre mayúsculas y minúsculas como « <code translate="no">(?i)</code> ». Utiliza expresiones regulares para esos patrones.</p>
-<p>Utiliza « <code translate="no">==</code> » para la igualdad exacta de una cadena completa. Utiliza « <code translate="no">LIKE</code> » solo cuando el filtro requiera una coincidencia con comodines.</p>
+    </button></h3><p>Utiliza « <code translate="no">LIKE</code> » para coincidencias de prefijo, sufijo, contenido y un solo carácter en una posición fija. « <code translate="no">LIKE</code> » no admite clases de caracteres como « <code translate="no">[0-9]</code> », alternancias como « <code translate="no">error|failed</code> », recuentos de repeticiones como « <code translate="no">{4}</code> », anclajes como « <code translate="no">^</code> » o « <code translate="no">$</code> », ni indicadores de no distinción entre mayúsculas y minúsculas como « <code translate="no">(?i)</code> ». Utiliza expresiones regulares (regex) para esos patrones.</p>
+<p>Utiliza « <code translate="no">==</code> » para la igualdad exacta de una cadena completa. Utiliza « <code translate="no">LIKE</code> » solo cuando el filtro necesite una coincidencia con comodines.</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escapar los comodines en un patrón LIKE<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -285,7 +330,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>En los patrones <code translate="no">LIKE</code>, <code translate="no">%</code> coincide con cero o más caracteres y <code translate="no">_</code> coincide exactamente con un carácter. Para que <code translate="no">%</code>, <code translate="no">_</code> o <code translate="no">\</code> coincidan literalmente, escapa el carácter con una barra invertida (<code translate="no">\</code>):</p>
+    </button></h3><p>En los patrones « <code translate="no">LIKE</code> », « <code translate="no">%</code> » coincide con cero o más caracteres y « <code translate="no">_</code> » coincide exactamente con un carácter. Para que coincidan literalmente « <code translate="no">%</code> », « <code translate="no">_</code> » o « <code translate="no">\</code> », escapa el carácter con una barra invertida (<code translate="no">\</code>):</p>
 <ul>
 <li><code translate="no">name LIKE r&quot;\%&quot;</code> coincide con el valor literal <code translate="no">%</code>.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> coincide con valores que empiezan por el carácter literal « <code translate="no">_</code> ».</li>
@@ -318,7 +363,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <tr><td><code translate="no">!~</code></td><td>Excluye los valores que cumplen el patrón de expresión regular.</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
-<h3 id="Use-raw-string-literals" class="common-anchor-header">Utiliza literales de cadena sin formato<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
+<h3 id="Using-raw-string-literals" class="common-anchor-header">Uso de literales de cadena sin formato<button data-href="#Using-raw-string-literals" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -333,15 +378,17 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se recomienda el uso de literales de cadena sin escapar para patrones de expresiones regulares que contengan barras invertidas. En una cadena sin escapar, escrita como <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, las barras invertidas se pasan al motor de expresiones regulares tal cual. Esto evita el escape adicional que requieren los literales de cadena normales.</p>
+    </button></h3><p>Se recomienda el uso de literales de cadena sin formato para los patrones de expresiones regulares que contengan barras invertidas. En una cadena sin formato, escrita como <code translate="no">r&quot;...&quot;</code> o <code translate="no">r'...'</code>, las barras invertidas se pasan tal cual al motor de expresiones regulares. Esto evita el escape adicional que requieren los literales de cadena normales.</p>
 <p>Por ejemplo:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">r&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -349,15 +396,19 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`filename =~ r&quot;\.json$&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;filename =~ r&quot;\\.json$&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;filename =~ r&quot;\.json$&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(filename =~ r&quot;\.json$&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;filename =~ r&quot;\\.json$&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;filename =~ r\&quot;\\.json$\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>Esto coincide con cadenas que terminan en <code translate="no">.json</code>, como <code translate="no">report.json</code>.</p>
 <p>Sin una cadena sin formato en la expresión del filtro de Milvus, las cadenas literales normales procesan las secuencias de escape antes de que se evalúe el patrón de expresión regular. Por lo tanto, los caracteres literales escapados pueden requerir barras invertidas adicionales en la cadena del lenguaje de host.</p>
-<h3 id="Common-regex-patterns" class="common-anchor-header">Patrones de expresiones regulares comunes<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
+<h3 id="Common-regex-patterns" class="common-anchor-header">Patrones comunes de expresiones regulares<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -372,14 +423,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Los siguientes ejemplos utilizan la sintaxis RE2 habitual en las expresiones de filtro de Milvus. Para consultar la sintaxis completa de expresiones regulares, véase la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
+    </button></h3><p>Los siguientes ejemplos utilizan la sintaxis RE2 habitual en las expresiones de filtro de Milvus. Para conocer la sintaxis completa de expresiones regulares, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
 <table>
 <thead>
 <tr><th>Requisito</th><th>Patrón</th><th>Ejemplo de filtro</th></tr>
 </thead>
 <tbody>
 <tr><td>Contiene texto literal</td><td><code translate="no">error</code></td><td><code translate="no">filter = 'message =~ &quot;error&quot;'</code></td></tr>
-<tr><td>Empieza por un prefijo</td><td><code translate="no">^ERR</code></td><td><code translate="no">filter = 'code =~ &quot;^ERR&quot;'</code></td></tr>
+<tr><td>Empieza con un prefijo</td><td><code translate="no">^ERR</code></td><td><code translate="no">filter = 'code =~ &quot;^ERR&quot;'</code></td></tr>
 <tr><td>Termina con un sufijo</td><td><code translate="no">\.json$</code></td><td><code translate="no">filter = 'filename =~ &quot;\\.json$&quot;'</code></td></tr>
 <tr><td>Coincide con una secuencia de dígitos</td><td><code translate="no">[0-9]+</code></td><td><code translate="no">filter = 'message =~ &quot;[0-9]+&quot;'</code></td></tr>
 <tr><td>Coincide con un número fijo de dígitos</td><td><code translate="no">[0-9]{4}</code></td><td><code translate="no">filter = 'code =~ &quot;[0-9]{4}&quot;'</code></td></tr>
@@ -390,12 +441,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 </table>
 <p>Para buscar una de varias palabras, utiliza la alternancia con « <code translate="no">|</code> »:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -403,20 +456,26 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`message =~ &quot;error|failed|timeout&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;message =~ &quot;error|failed|timeout&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(message =~ &quot;error|failed|timeout&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>Al buscar metacaracteres de expresiones regulares de forma literal, escápalos en el patrón de expresión regular. Por ejemplo, para buscar un punto literal (<code translate="no">\.</code> en una expresión regular), escribe <code translate="no">\\.</code> en una cadena de código fuente de Python, Java, Go o Node.js:</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message =~ \&quot;error|failed|timeout\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Cuando se busquen metacaracteres de expresiones regulares de forma literal, hay que escaparlos en el patrón de expresión regular. Por ejemplo, para buscar un punto literal (<code translate="no">\.</code> en una expresión regular), escribe <code translate="no">\\.</code> en una cadena de código fuente de Python, Java, Go o Node.js:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -424,13 +483,17 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`email =~ &quot;@gmail\\.com$&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;email =~ &quot;@gmail\.com$&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(email =~ &quot;@gmail\\.com$&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que no es válida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres de las expresiones regulares, los indicadores y el comportamiento de coincidencia, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis de RE2</a>.</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;email =~ \&quot;@gmail\\.com$\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Nota: Los filtros de expresiones regulares de Milvus siguen la sintaxis RE2. Si un patrón de expresión regular utiliza una sintaxis que RE2 no admite o que no es válida por cualquier otro motivo, Milvus rechaza la expresión del filtro. Para obtener más detalles sobre los metacaracteres, los indicadores y el comportamiento de coincidencia de las expresiones regulares, consulta la referencia <a href="https://github.com/google/re2/wiki/syntax">de sintaxis RE2</a>.</p>
 <h3 id="Matching-behavior" class="common-anchor-header">Comportamiento de coincidencia<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -449,12 +512,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     </button></h3><p><strong>Coincidencia de subcadenas</strong></p>
 <p>La coincidencia de expresiones regulares de Milvus utiliza la semántica de subcadenas. No es necesario que el patrón coincida con el valor completo del campo. Por ejemplo, el siguiente filtro coincide tanto con <code translate="no">E1001</code> como con <code translate="no">failed with E1001 after retry</code>:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -462,20 +527,26 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`message =~ &quot;E[0-9]{4}&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;message =~ &quot;E[0-9]{4}&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(message =~ &quot;E[0-9]{4}&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>Para coincidir con el valor completo del campo, utiliza los anclajes <code translate="no">^</code> y <code translate="no">$</code>:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
@@ -486,23 +557,31 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
 filter := <span class="hljs-string">`code =~ &quot;^E[0-9]{4}$&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;code =~ &quot;^E[0-9]{4}$&quot;&quot;#</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(code =~ &quot;^E[0-9]{4}$&quot;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;code =~ \&quot;^E[0-9]{4}$\&quot;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(code =~ &quot;^E[0-9]{4}$&quot;)&quot;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Campos VARCHAR que admiten valores nulos</strong></p>
-<p>Los filtros de expresiones regulares no coinciden con valores nulos. Esto se aplica tanto a « <code translate="no">=~</code> » como a « <code translate="no">!~</code> ». Si deseas excluir un patrón de expresión regular pero conservar los valores nulos, añade explícitamente « <code translate="no">OR field IS NULL</code> »:</p>
+<p><strong>Campos VARCHAR nulos</strong></p>
+<p>Los filtros de expresiones regulares no coinciden con valores nulos. Esto se aplica tanto a <code translate="no">=~</code> como a <code translate="no">!~</code>. Si quieres excluir un patrón de expresión regular pero conservar los valores nulos, añade explícitamente <code translate="no">OR field IS NULL</code>:</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -510,11 +589,15 @@ filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`message !~ &quot;^DEBUG&quot; OR message IS NULL`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;message !~ &quot;^DEBUG&quot; OR message IS NULL&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(message !~ &quot;^DEBUG&quot; OR message IS NULL)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot; OR message IS NULL&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Rutas JSON</strong></p>
 <p>En el caso de las rutas JSON, los filtros de expresiones regulares se comportan de forma diferente cuando la ruta falta, es nula o se resuelve en un valor que no es una cadena:</p>
@@ -547,11 +630,11 @@ filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</sp
 <p>Utilice la siguiente tabla como punto de partida y, a continuación, realice pruebas de rendimiento con su propia carga de trabajo:</p>
 <table>
 <thead>
-<tr><th>Patrón o característica de los datos</th><th>Índice a considerar</th><th>Notas</th></tr>
+<tr><th>Patrón o característica de los datos</th><th>Índice a tener en cuenta</th><th>Notas</th></tr>
 </thead>
 <tbody>
 <tr><td>Contiene subcadenas literales fijas, como <code translate="no">message =~ &quot;error.*timeout&quot;</code> o <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Resulta útil cuando Milvus puede extraer subcadenas literales significativas del patrón. Para más detalles, consulta <a href="/docs/es/ngram.md">NGRAM</a>.</td></tr>
-<tr><td>Filtros de cadenas de tipo prefijo, exactos o de igualdad, especialmente en campos con cardinalidad baja o moderada</td><td><code translate="no">STL_SORT</code>, <code translate="no">INVERTED</code> o <code translate="no">BITMAP</code></td><td>Puede resultar más eficaz cuando el campo tiene valores repetidos o cuando el filtro se aproxima a una coincidencia exacta. Para más detalles, consulta <a href="/docs/es/stl-sort.md">STL_SORT</a>, <a href="/docs/es/inverted.md">INVERTED</a> y <a href="/docs/es/bitmap.md">BITMAP</a>.</td></tr>
+<tr><td>Filtros de cadenas de tipo prefijo, exactos o de igualdad, especialmente en campos con cardinalidad baja o moderada</td><td><code translate="no">STL_SORT</code>, « <code translate="no">INVERTED</code> » o <code translate="no">BITMAP</code></td><td>Puede resultar más eficaz cuando el campo tiene valores repetidos o cuando el filtro se aproxima a una coincidencia exacta. Para más detalles, consulta <a href="/docs/es/stl-sort.md">STL_SORT</a>, <a href="/docs/es/inverted.md">INVERTED</a> y <a href="/docs/es/bitmap.md">BITMAP</a>.</td></tr>
 <tr><td>Patrones Regex sin literales fijos, o patrones dominados por clases de caracteres, tokens cortos o comodines</td><td>Realice pruebas de rendimiento antes de confiar en la aceleración por índice</td><td>Estos patrones pueden ofrecer una selectividad de índice limitada y pueden recurrir a exploraciones más amplias.</td></tr>
 </tbody>
 </table>

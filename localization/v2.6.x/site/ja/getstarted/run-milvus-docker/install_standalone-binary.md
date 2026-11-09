@@ -2,7 +2,7 @@
 id: install_standalone-binary.md
 label: RPM/DEB Package
 related_key: RPM/DEB Package
-summary: あらかじめビルド済みのRPM/DEBパッケージを使用して、Milvusスタンドアロンをインストールする方法をご覧ください。
+summary: あらかじめビルド済みのRPM/DEBパッケージを使用して、Milvusスタンドアロンをインストールする方法について学びましょう。
 title: RPM/DEB パッケージを使用した Milvus スタンドアロンのインストール
 ---
 <h1 id="Install-Milvus-Standalone-with-RPMDEB-Package" class="common-anchor-header">RPM/DEB パッケージを使用した Milvus スタンドアロンのインストール<button data-href="#Install-Milvus-Standalone-with-RPMDEB-Package" class="anchor-icon" translate="no">
@@ -55,7 +55,7 @@ title: RPM/DEB パッケージを使用した Milvus スタンドアロンのイ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">Milvus のリリースページ</a>から、お使いのシステムアーキテクチャに応じた RPM/DEB パッケージをダウンロードできます。</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.26">Milvus のリリースページ</a>から、お使いのシステムアーキテクチャに応じた RPM/DEB パッケージをダウンロードできます。</p>
 <ul>
 <li>x86_64/amd64 の場合は、<strong>milvus_2.6.24-1_amd64.deb</strong>または<strong>milvus_2.6.24-1_amd64.rpm</strong>パッケージをダウンロードしてください。</li>
 <li>ARM64 の場合は、<strong>milvus_2.6.24-1_arm64.deb</strong>または<strong>milvus_2.6.24-1_arm64.rpm</strong>パッケージをダウンロードしてください。</li>
@@ -152,7 +152,7 @@ dpkg -l | grep milvus
     </button></h2><p>Milvus Standaloneを停止するには、次のコマンドを使用します。</p>
 <pre><code translate="no" class="language-shell">systemctl stop milvus
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Milvus Standalone のアンインストール<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Standalone" class="common-anchor-header">Milvus Standaloneのアンインストール<button data-href="#Uninstall-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -189,7 +189,7 @@ dpkg -l | grep milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Standalone をインストールしたら、次のことができます:</p>
+    </button></h2><p>Milvus Standalone のインストールが完了したら、次の操作が可能です:</p>
 <ul>
 <li><p><a href="/docs/ja/v2.6.x/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作方法を学びましょう：</p>

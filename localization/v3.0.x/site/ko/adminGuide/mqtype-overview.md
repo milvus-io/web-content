@@ -42,13 +42,13 @@ summary: 'Milvus가 지원하는 메시지 큐(mqType) 옵션에 대한 개요�
 <tr><td><a href="/docs/ko/woodpecker.md">Woodpecker</a></td><td style="text-align:center">✔️ (임베디드)</td><td style="text-align:center">✔️ (내장형 또는 서비스)</td><td><strong>Milvus 3.x</strong> (두 모드 모두)</td><td>기본값이며 권장됩니다. 오브젝트 스토리지에 저장되는 클라우드 네이티브 WAL; 외부 서비스가 필요하지 않습니다.</td></tr>
 <tr><td><a href="/docs/ko/mq_pulsar.md">펄사</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>≤ 2.5.x (클러스터 기본값)</td><td>지원됨(외부 또는 번들).</td></tr>
 <tr><td><a href="/docs/ko/mq_kafka.md">카프카</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td>—</td><td>지원됨. Kafka 2.x 또는 3.x만 지원됩니다.</td></tr>
-<tr><td><a href="/docs/ko/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (스탠드얼론 기본값)</td><td><strong>스탠드얼론</strong> 환경 <strong>에서만</strong> 지원됩니다.</td></tr>
+<tr><td><a href="/docs/ko/mq_rocksmq.md">RocksMQ</a></td><td style="text-align:center">✔️</td><td style="text-align:center">✖️</td><td>≤ 2.5.x (독립 실행형 기본값)</td><td><strong>스탠드얼론</strong> 환경 <strong>에서만</strong> 지원됩니다.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
 <ul>
 <li><p>각 Milvus 인스턴스는 정확히 하나의 메시지 큐를 사용합니다.</p></li>
-<li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
+<li><p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.5로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</p></li>
 <li><p>실행 중인 인스턴스의 메시지 큐를 변경하려면 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환’을</a> 참조하십시오. ‘메시지 큐 전환’ 기능은 <strong>Milvus 3.0 이상에서</strong> 사용할 수 있으므로, 먼저 Milvus 3.0 이상으로 업그레이드해야 합니다.</p></li>
 </ul>
 </div>

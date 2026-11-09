@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Uma partição é um subconjunto de uma coleção. Cada partição partilha a mesma estrutura de dados com a sua coleção principal, mas contém apenas um subconjunto dos dados da coleção. Esta página ajuda-o a compreender como gerir partições.</p>
+    </button></h1><p>Uma partição é um subconjunto de uma coleção. Cada partição partilha a mesma estrutura de dados com a sua coleção-pai, mas contém apenas um subconjunto dos dados da coleção. Esta página ajuda-o a compreender como gerir partições.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,14 +38,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao criar uma coleção, o Milvus cria também uma partição com o nome <strong>_default</strong> na coleção. Se não adicionar outras partições, todas as entidades inseridas na coleção vão para a partição predefinida, e todas as pesquisas e consultas são também efectuadas na partição predefinida.</p>
-<p>Pode adicionar mais partições e inserir entidades nas mesmas com base em determinados critérios. Em seguida, pode restringir as suas pesquisas e consultas a determinadas partições, melhorando o desempenho da pesquisa.</p>
-<p>Uma coleção pode ter um máximo de 1024 partições.</p>
+    </button></h2><p>Ao criar uma coleção, o Milvus também cria uma partição denominada <strong>_default</strong> na coleção. Se não pretender adicionar quaisquer outras partições, todas as entidades inseridas na coleção vão para a partição predefinida, e todas as pesquisas e consultas são também realizadas dentro da partição predefinida.</p>
+<p>Pode adicionar mais partições e inserir entidades nas mesmas com base em determinados critérios. Depois, pode restringir as suas pesquisas e consultas a determinadas partições, melhorando o desempenho da pesquisa.</p>
+<p>Uma coleção pode ter um máximo de 1 024 partições.</p>
 <div class="alert note">
-<p>A funcionalidade <strong>Chave de partição</strong> é uma otimização de pesquisa baseada em partições e permite ao Milvus distribuir entidades em diferentes partições com base nos valores de um campo escalar específico. Esta funcionalidade ajuda a implementar o multi-tenancy orientado para a partição e melhora o desempenho da pesquisa.</p>
-<p>Esta funcionalidade não será abordada nesta página. Para saber mais, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</p>
+<p>A funcionalidade <strong>«Partition Key»</strong> é uma otimização de pesquisa baseada em partições e permite que o Milvus distribua entidades por diferentes partições com base nos valores de um campo escalar específico. Esta funcionalidade ajuda a implementar a multilocação orientada para partições e melhora o desempenho da pesquisa.</p>
+<p>Esta funcionalidade não será abordada nesta página. Para saber mais, consulte <a href="/docs/pt/use-partition-key.md">«Utilizar a Chave de Partição</a>».</p>
 </div>
-<h2 id="List-Partitions" class="common-anchor-header">Listar partições<button data-href="#List-Partitions" class="anchor-icon" translate="no">
+<h2 id="List-Partitions" class="common-anchor-header">Listar Partições<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,9 +60,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao criar uma coleção, o Milvus também cria uma partição com o nome <strong>_default</strong> na coleção. Você pode listar as partições em uma coleção da seguinte forma.</p>
+    </button></h2><p>Ao criar uma coleção, o Milvus também cria uma partição denominada <strong>_default</strong> na coleção. Pode listar as partições de uma coleção da seguinte forma.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -89,7 +97,7 @@ res = client.list_partitions(
 <span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-type">String</span> <span class="hljs-variable">TOKEN</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 
-<span class="hljs-comment">// 1. Connect to Milvus server</span>
+<span class="hljs-comment">// 1. Connect to Milvus</span>
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -107,31 +115,16 @@ System.out.println(partitionNames);
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [_default]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
-
-<span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listPartitions</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// [&quot;_default&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
@@ -149,6 +142,86 @@ partitionNames, err := client.ListPartitions(ctx, milvusclient.NewListPartitionO
 }
 
 fmt.Println(partitionNames)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(
+    &amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>),
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">partitions</span> = client
+    .<span class="hljs-title function_ invoke__">list_partitions</span>(
+        ListPartitionsRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, partitions.<span class="hljs-title function_ invoke__">partition_names</span>());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [&quot;_default&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::ListPartitionsResponse response;
+status = client-&gt;<span class="hljs-built_in">ListPartitions</span>(milvus::<span class="hljs-built_in">ListPartitionsRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>),
+                                response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; info : response.<span class="hljs-built_in">PartitionInfos</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; info.<span class="hljs-built_in">Name</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
+
+<span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listPartitions</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// [&quot;_default&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Partition;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.ListPartitionsAsync(<span class="hljs-keyword">new</span> ListPartitionsReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> name <span class="hljs-keyword">in</span> res.PartitionNames)
+{
+    Console.WriteLine(name);
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -169,7 +242,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-Partition" class="common-anchor-header">Criar partição<button data-href="#Create-Partition" class="anchor-icon" translate="no">
+<h2 id="Create-Partition" class="common-anchor-header">Criar Partição<button data-href="#Create-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,9 +257,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível adicionar mais partições à coleção e inserir entidades nessas partições com base em determinados critérios.</p>
+    </button></h2><p>Pode adicionar mais partições à coleção e inserir entidades nessas partições com base em determinados critérios.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_partition(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
@@ -221,24 +302,10 @@ System.out.println(partitionNames);
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [_default, partitionA]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createPartition</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>
-})
-
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listPartitions</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// [&quot;_default&quot;, &quot;partitionA&quot;]</span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;fmt&quot;</span>
     
-    client <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    milvusclient <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -259,6 +326,78 @@ partitionNames, err := client.ListPartitions(ctx, milvusclient.NewListPartitionO
 fmt.Println(partitionNames)
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// [&quot;_default&quot;, &quot;partitionA&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">create_partition</span>(
+        CreatePartitionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_name</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">partitions</span> = client
+    .<span class="hljs-title function_ invoke__">list_partitions</span>(
+        ListPartitionsRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, partitions.<span class="hljs-title function_ invoke__">partition_names</span>());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [&quot;_default&quot;, &quot;partitionA&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreatePartition</span>(milvus::<span class="hljs-built_in">CreatePartitionRequest</span>()
+                                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                         .<span class="hljs-built_in">WithPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::ListPartitionsResponse response;
+status = client-&gt;<span class="hljs-built_in">ListPartitions</span>(milvus::<span class="hljs-built_in">ListPartitionsRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>), response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; info : response.<span class="hljs-built_in">PartitionInfos</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; info.<span class="hljs-built_in">Name</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createPartition</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>
+})
+
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listPartitions</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// [&quot;_default&quot;, &quot;partitionA&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Partition;
+
+<span class="hljs-keyword">await</span> client.CreatePartitionAsync(<span class="hljs-keyword">new</span> CreatePartitionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionName = <span class="hljs-string">&quot;partitionA&quot;</span>
+});
+
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.ListPartitionsAsync(<span class="hljs-keyword">new</span> ListPartitionsReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> name <span class="hljs-keyword">in</span> res.PartitionNames)
+{
+    Console.WriteLine(name);
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -295,7 +434,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">Verificar se há uma partição específica<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
+<h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">Verificar se existe uma partição específica<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -310,9 +449,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os trechos de código a seguir demonstram como verificar se uma partição existe em uma coleção específica.</p>
+    </button></h2><p>Os trechos de código seguintes demonstram como verificar se uma partição existe numa coleção específica.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.has_partition(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
@@ -337,16 +484,6 @@ System.out.println(hasPartitionRes);
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// true</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasPartition</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">value</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// true</span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">result, err := client.HasPartition(ctx, milvusclient.NewHasPartitionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -357,6 +494,51 @@ fmt.Println(result)
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// true</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">has</span> = client
+    .<span class="hljs-title function_ invoke__">has_partition</span>(
+        HasPartitionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_name</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{}&quot;</span>, has.<span class="hljs-title function_ invoke__">exists</span>());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// true</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::HasPartitionResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">HasPartition</span>(milvus::<span class="hljs-built_in">HasPartitionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                    .<span class="hljs-built_in">WithPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>),
+                                   response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+std::cout &lt;&lt; response.<span class="hljs-built_in">Has</span>() &lt;&lt; std::endl;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasPartition</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">value</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// true</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Partition;
+
+<span class="hljs-keyword">var</span> hasResp = <span class="hljs-keyword">await</span> client.HasPartitionAsync(<span class="hljs-keyword">new</span> HasPartitionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionName = <span class="hljs-string">&quot;partitionA&quot;</span>
+});
+Console.WriteLine(hasResp.Has);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -378,7 +560,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-and-Release-Partitions" class="common-anchor-header">Carregar e liberar partições<button data-href="#Load-and-Release-Partitions" class="anchor-icon" translate="no">
+<h2 id="Load-and-Release-Partitions" class="common-anchor-header">Carregar e libertar partições<button data-href="#Load-and-Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -393,7 +575,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Você pode carregar ou liberar separadamente uma ou algumas partições.</p>
+    </button></h2><p>Pode carregar ou libertar separadamente uma ou várias partições.</p>
 <h3 id="Load-Partitions" class="common-anchor-header">Carregar partições<button data-href="#Load-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -409,9 +591,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Você pode carregar separadamente partições específicas em uma coleção. É importante notar que o estado de carregamento de uma coleção permanece descarregado se existir uma partição descarregada na coleção.</p>
+    </button></h3><p>É possível carregar separadamente partições específicas numa coleção. Vale a pena referir que o estado de carregamento de uma coleção permanece como «não carregada» se houver uma partição não carregada na coleção.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.load_partitions(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -449,23 +639,6 @@ System.out.println(getLoadStateRes);
 
 <span class="hljs-comment">// True</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadPartitions</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">partition_names</span>: [<span class="hljs-string">&quot;partitionA&quot;</span>]
-})
-
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">getLoadState</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// LoadStateLoaded</span>
-<span class="hljs-comment">// </span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">task, err := client.LoadPartitions(ctx, milvusclient.NewLoadPartitionsOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -485,6 +658,81 @@ state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption(<span 
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(state)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">load_partitions</span>(
+        LoadPartitionsRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_names</span>([<span class="hljs-string">&quot;partitionA&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">state</span> = client
+    .<span class="hljs-title function_ invoke__">get_load_state</span>(
+        GetLoadStateRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_names</span>([<span class="hljs-string">&quot;partitionA&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, state.<span class="hljs-title function_ invoke__">state</span>());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Loaded</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">LoadPartitions</span>(milvus::<span class="hljs-built_in">LoadPartitionsRequest</span>()
+                                        .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                        .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client-&gt;<span class="hljs-built_in">GetLoadState</span>(milvus::<span class="hljs-built_in">GetLoadStateRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>),
+                              response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+std::cout &lt;&lt; milvus::<span class="hljs-built_in">to_string</span>(response.<span class="hljs-built_in">State</span>()) &lt;&lt; std::endl;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadPartitions</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">partition_names</span>: [<span class="hljs-string">&quot;partitionA&quot;</span>]
+})
+
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">getLoadState</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">partition_name</span>: <span class="hljs-string">&quot;partitionA&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// LoadStateLoaded</span>
+<span class="hljs-comment">//</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Partition;
+
+<span class="hljs-keyword">await</span> client.LoadPartitionsAsync(<span class="hljs-keyword">new</span> LoadPartitionsReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionNames = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;partitionA&quot;</span> }
+});
+
+<span class="hljs-keyword">var</span> loadStateResp = <span class="hljs-keyword">await</span> client.GetLoadStateAsync(<span class="hljs-keyword">new</span> GetLoadStateReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionNames = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;partitionA&quot;</span> }
+});
+Console.WriteLine(loadStateResp.State);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -523,7 +771,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">Liberar partições<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
+<h3 id="Release-Partitions" class="common-anchor-header">Libertação de partições<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -538,9 +786,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Você também pode liberar partições específicas.</p>
+    </button></h3><p>Também é possível libertar partições específicas.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -578,6 +834,61 @@ System.out.println(getLoadStateRes);
 
 <span class="hljs-comment">// False</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(state)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">release_partitions</span>(
+        ReleasePartitionsRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_names</span>([<span class="hljs-string">&quot;partitionA&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">state</span> = client
+    .<span class="hljs-title function_ invoke__">get_load_state</span>(
+        GetLoadStateRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_names</span>([<span class="hljs-string">&quot;partitionA&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, state.<span class="hljs-title function_ invoke__">state</span>());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// NotLoad</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">ReleasePartitions</span>(milvus::<span class="hljs-built_in">ReleasePartitionsRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::GetLoadStateResponse response;
+status = client-&gt;<span class="hljs-built_in">GetLoadState</span>(milvus::<span class="hljs-built_in">GetLoadStateRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>),
+                              response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+std::cout &lt;&lt; milvus::<span class="hljs-built_in">to_string</span>(response.<span class="hljs-built_in">State</span>()) &lt;&lt; std::endl;
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">releasePartitions</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">partition_names</span>: [<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -595,18 +906,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateNotLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Partition;
 
-state, err := client.GetLoadState(ctx, milvusclient.NewGetLoadStateOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-fmt.Println(state)
+<span class="hljs-keyword">await</span> client.ReleasePartitionsAsync(<span class="hljs-keyword">new</span> ReleasePartitionsReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionNames = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;partitionA&quot;</span> }
+});
+
+<span class="hljs-keyword">var</span> loadStateResp = <span class="hljs-keyword">await</span> client.GetLoadStateAsync(<span class="hljs-keyword">new</span> GetLoadStateReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionNames = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;partitionA&quot;</span> }
+});
+Console.WriteLine(loadStateResp.State);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -645,7 +959,7 @@ curl --request POST \
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Data-Operations-Within-Partitions" class="common-anchor-header">Operações de dados em partições<button data-href="#Data-Operations-Within-Partitions" class="anchor-icon" translate="no">
+<h2 id="Data-Operations-Within-Partitions" class="common-anchor-header">Operações de dados dentro das partições<button data-href="#Data-Operations-Within-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -675,11 +989,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>É possível executar operações de inserção, upsert e exclusão em operações específicas. Para obter detalhes, consulte</p>
+    </button></h3><p>Pode realizar operações de inserção, upsert e eliminação em partições específicas. Para mais detalhes, consulte</p>
 <ul>
-<li><p><a href="/docs/pt/insert-update-delete.md#Insert-Entities-into-a-Partition">Inserir entidades na partição</a></p></li>
-<li><p><a href="/docs/pt/upsert-entities.md#Upsert-Entities-in-a-Partition">Inserir entidades na partição</a></p></li>
-<li><p><a href="/docs/pt/delete-entities.md#Delete-Entities-from-Partitions">Excluir entidades da partição</a></p></li>
+<li><p><a href="/docs/pt/insert-update-delete.md#Insert-Entities-into-a-Partition">Inserir entidades numa partição</a></p></li>
+<li><p><a href="/docs/pt/upsert-entities.md#Upsert-entities-in-a-partition">Atualizar e inserir entidades numa partição</a></p></li>
+<li><p><a href="/docs/pt/delete-entities.md#Delete-Entities-from-Partitions">Excluir entidades de uma partição</a></p></li>
 </ul>
 <h3 id="Search-and-Query" class="common-anchor-header">Pesquisa e consulta<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -696,10 +1010,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>É possível realizar pesquisas e consultas em partições específicas. Para obter detalhes, consulte</p>
+    </button></h3><p>É possível realizar pesquisas e consultas em partições específicas. Para mais detalhes, consulte</p>
 <ul>
 <li><p><a href="/docs/pt/single-vector-search.md#ANN-Search-in-Partition">Realizar pesquisas ANN dentro de partições</a></p></li>
-<li><p><a href="/docs/pt/get-and-scalar-query.md#Queries-in-Partitions">Realizar filtragem de metadados em partições</a></p></li>
+<li><p><a href="/docs/pt/get-and-scalar-query.md#Queries-in-Partitions">Realizar filtragem de metadados dentro de partições</a></p></li>
 </ul>
 <h2 id="Drop-Partition" class="common-anchor-header">Eliminar partição<button data-href="#Drop-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -716,9 +1030,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível eliminar partições que já não são necessárias. Antes de eliminar uma partição, certifique-se de que a partição foi libertada.</p>
+    </button></h2><p>Pode eliminar partições que já não sejam necessárias. Antes de eliminar uma partição, certifique-se de que a partição foi libertada.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -765,6 +1087,84 @@ System.out.println(partitionNames);
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [_default]</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+err = client.DropPartition(ctx, milvusclient.NewDropPartitionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+partitionNames, err := client.ListPartitions(ctx, milvusclient.NewListPartitionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(partitionNames)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">release_partitions</span>(
+        ReleasePartitionsRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_names</span>([<span class="hljs-string">&quot;partitionA&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_partition</span>(
+        DropPartitionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">partition_name</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">partitions</span> = client
+    .<span class="hljs-title function_ invoke__">list_partitions</span>(
+        ListPartitionsRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, partitions.<span class="hljs-title function_ invoke__">partition_names</span>());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [&quot;_default&quot;]</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">ReleasePartitions</span>(milvus::<span class="hljs-built_in">ReleasePartitionsRequest</span>()
+                                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                            .<span class="hljs-built_in">AddPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">DropPartition</span>(milvus::<span class="hljs-built_in">DropPartitionRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">WithPartitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::ListPartitionsResponse response;
+status = client-&gt;<span class="hljs-built_in">ListPartitions</span>(milvus::<span class="hljs-built_in">ListPartitionsRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>),
+                                response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; info : response.<span class="hljs-built_in">PartitionInfos</span>()) {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; info.<span class="hljs-built_in">Name</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">releasePartitions</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">partition_names</span>: [<span class="hljs-string">&quot;partitionA&quot;</span>]
@@ -784,24 +1184,28 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = client.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Partition;
 
-err = client.DropPartition(ctx, milvusclient.NewDropPartitionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
+<span class="hljs-keyword">await</span> client.ReleasePartitionsAsync(<span class="hljs-keyword">new</span> ReleasePartitionsReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionNames = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;partitionA&quot;</span> }
+});
 
-partitionNames, err := client.ListPartitions(ctx, milvusclient.NewListPartitionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+<span class="hljs-keyword">await</span> client.DropPartitionAsync(<span class="hljs-keyword">new</span> DropPartitionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    PartitionName = <span class="hljs-string">&quot;partitionA&quot;</span>
+});
+
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.ListPartitionsAsync(<span class="hljs-keyword">new</span> ListPartitionsReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>
+});
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> name <span class="hljs-keyword">in</span> res.PartitionNames)
+{
+    Console.WriteLine(name);
 }
-fmt.Println(partitionNames)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>

@@ -79,10 +79,12 @@ summary: >-
 <tbody>
 <tr><td>Struct ليس نوع حقل من المستوى الأعلى.</td><td>قم بإنشاء حقل StructArray كـ <code translate="no">datatype=DataType.ARRAY</code> مع <code translate="no">element_type=DataType.STRUCT</code> و <code translate="no">struct_schema</code>.</td></tr>
 <tr><td>تشترك جميع العناصر في مخطط واحد.</td><td>يتبع كل عنصر Struct في حقل StructArray نفس قائمة الحقول الفرعية وأنواع بيانات الحقول الفرعية.</td></tr>
-<tr><td><code translate="no">max_capacity</code> مطلوب.</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد عدد <code translate="no">max_capacity</code> المُعد لحقل StructArray.</td></tr>
-<tr><td>الحقول الفرعية الموجودة ثابتة.</td><td>لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray موجود. لتغيير مخطط الحقول الفرعية، قم بإزالة حقل StructArray ثم أضفه مرة أخرى باستخدام المخطط المحدث.</td></tr>
-<tr><td>لا يتم دعم StructArray المتداخلة.</td><td>لا يمكن أن يحتوي حقل StructArray على حقول فرعية متداخلة من نوع <code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code>.</td></tr>
+<tr><td><code translate="no">max_capacity</code> مطلوب.</td><td>يجب ألا يتجاوز عدد عناصر Struct في كيان واحد قيمة <code translate="no">max_capacity</code> المُعدة لحقل StructArray.</td></tr>
+<tr><td>تشترك جميع الحقول الفرعية في قيمة واحدة لـ <code translate="no">max_capacity</code>.</td><td>يجب أن تعلن كل حقل فرعي عن الحد الأقصى لعدد العناصر ( <code translate="no">max_capacity</code>)، ويجب أن تعلن جميع الحقول الفرعية لحقل StructArray عن نفس القيمة. يجب أن تكون القيمة أكبر من 0 وألا تتجاوز الحد الأقصى لعدد العناصر ( <code translate="no">proxy.maxArrayCapacity</code>)، والذي يبلغ 4096 افتراضيًا.</td></tr>
+<tr><td>الحقول الفرعية الموجودة ثابتة.</td><td>لا يمكنك إضافة حقول فرعية جديدة إلى حقل StructArray موجود. لتغيير مخطط الحقل الفرعي، قم بإزالة حقل StructArray وأضفه مرة أخرى بالمخطط المحدث.</td></tr>
+<tr><td>لا يتم دعم StructArray المتداخل.</td><td>لا يمكن أن يحتوي حقل StructArray على حقول فرعية متداخلة من نوع <code translate="no">Array</code> أو <code translate="no">ArrayOfVector</code> أو <code translate="no">Struct</code> أو <code translate="no">ArrayOfStruct</code>.</td></tr>
 <tr><td>لا يتم دعم الدوال داخل StructArray.</td><td>لا تقم بتعريف دوال الحقول لحقول StructArray أو حقولها الفرعية.</td></tr>
+<tr><td>لا يتم دعم تحليل النص في الحقول الفرعية.</td><td><code translate="no">enable_match</code> ولا تؤثر إعدادات " <code translate="no">enable_analyzer</code> " على الحقول الفرعية لـ Struct لأن فهارس النص تُنشأ فقط للحقول ذات المستوى الأعلى.</td></tr>
 </tbody>
 </table>
 <p>للاطلاع على أمثلة لإنشاء المخطط، راجع <a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a>.</p>
@@ -104,7 +106,7 @@ summary: >-
     </button></h2><p>يتم تعيين الحقول الفرعية لـ StructArray إلى تخزين مادي على غرار المصفوفات. يسرد الجدول التالي الأنواع المادية المدعومة وغير المدعومة:</p>
 <table>
 <thead>
-<tr><th>النوع المادي للحقل الفرعي في Struct</th><th>الدعم</th><th>ملاحظات</th></tr>
+<tr><th>النوع المادي للحقول الفرعية في Struct</th><th>الدعم</th><th>ملاحظات</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>مدعوم</td><td>قم بتعريف الحقل الفرعي على النحو التالي: <code translate="no">DataType.BOOL</code>.</td></tr>
@@ -212,8 +214,8 @@ summary: >-
 </tbody>
 </table>
 <p>استخدم حقول فرعية متجهة منفصلة عندما يكون كلا الوضعين مطلوبين. على سبيل المثال، استخدم <code translate="no">chunks[emb_list_vector]</code> للبحث في EmbeddingList و <code translate="no">chunks[emb]</code> للبحث على مستوى العنصر.</p>
-<p>تُعتبر الحقول الفرعية المتجهة لـ StructArray حقولًا فرعية متجهة عند تخطيط مخطط المجموعة. حافظ على إجمالي عدد الحقول المتجهة والحقول الفرعية المتجهة ضمن حدود الإصدار المستهدف ومستوى الخدمة.</p>
-<p>للاطلاع على مصفوفة أنواع الفهارس وأنواع المقاييس المدعومة، راجع <a href="/docs/ar/index-structarray-fields.md">حقول StructArray للفهرس</a>.</p>
+<p>يُحتسب عدد الحقول الفرعية المتجهة لـ StructArray كحقول متجهة ضمن الحد الأقصى على مستوى المجموعة <code translate="no">proxy.maxVectorFieldNum</code> ، والذي يبلغ 10 بشكل افتراضي. يُعتبر حقل StructArray الذي تكون حقوله الفرعية المتجهة هي الحقول المتجهة الوحيدة في المجموعة صالحًا، ويتم رفض حذف مثل هذا الحقل إذا أدى ذلك إلى ترك المجموعة بدون حقل متجه. احرص على أن يظل العدد الإجمالي للحقول المتجهة والحقول الفرعية المتجهة ضمن حدود الإصدار المستهدف ومستوى الخدمة.</p>
+<p>للاطلاع على مصفوفات أنواع الفهارس والمقاييس المدعومة، راجع <a href="/docs/ar/index-structarray-fields.md">حقول StructArray للفهرس</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">حدود البحث<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,8 +240,8 @@ summary: >-
 <tr><td>البحث الأساسي في EmbeddingList</td><td>مدعوم في الحقول الفرعية للمتجهات في StructArray المفهرسة باستخدام مقاييس <code translate="no">MAX_SIM*</code>. يُرجع نتائج على مستوى الكيان.</td></tr>
 <tr><td>البحث الأساسي على مستوى العناصر</td><td>مدعوم في الحقول الفرعية للمتجهات StructArray المفهرسة باستخدام مقاييس المتجهات العادية. يمكن أن يعرض إزاحات العناصر المطابقة.</td></tr>
 <tr><td>البحث في النطاق</td><td>مدعوم وفقًا لوضع البحث ودعم الفهرس/المقياس في الإصدار المستهدف. لمعرفة سلوك نطاق البحث المختلط في طلبات StructArray على مستوى العناصر، تحقق من الإصدار المستهدف.</td></tr>
-<tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر الإزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
-<tr><td>البحث المختلط</td><td>يمكن أن يتضمن طلب البحث الهجين طلبات الحقول الفرعية للمتجه StructArray فقط عندما يدعم الإصدار المستهدف تركيبة البحث تلك. ولا يزال كل طلب يتبع عائلة المقاييس الخاصة بالحقل الفرعي للمتجه المفهرس.</td></tr>
+<tr><td>البحث بالتجميع</td><td>يمكن أن يُرجع البحث المجمّع على مستوى العناصر إزاحات. يعتمد سلوك التجميع في البحث المختلط لطلبات StructArray على مستوى العناصر على الإصدار.</td></tr>
+<tr><td>البحث المختلط</td><td>يمكن أن يتضمن طلب البحث الهجين طلبات الحقول الفرعية للمتجه StructArray فقط عندما يدعم الإصدار المستهدف تركيبة البحث هذه. ولا يزال كل طلب يتبع عائلة المقاييس الخاصة بالحقل الفرعي للمتجه المفهرس.</td></tr>
 <tr><td>إخراج الإزاحة</td><td>يتوفر الإزاحة لنتائج البحث على مستوى العنصر. يُرجع بحث EmbeddingList نتائج على مستوى الكيان ولا يستخدم إزاحات العناصر كوحدة النتيجة الأساسية.</td></tr>
 </tbody>
 </table>
@@ -268,6 +270,29 @@ summary: >-
 <li><p>لا يتم دعم صيغة مسار JSON، ووظائف JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، ووظائف الهندسة / نظم المعلومات الجغرافية، وتعبيرات Timestamptz للمسلّطات على مستوى عناصر StructArray.</p></li>
 <li><p>يفضل استخدام المقارنات المنطقية الصريحة مثل <code translate="no">$[has_code] == true</code> بدلاً من التعبيرات المنطقية المجردة.</p></li>
 </ul>
+<h2 id="Import-limits" class="common-anchor-header">حدود الاستيراد<button data-href="#Import-limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>الحد</th><th>التفاصيل</th></tr>
+</thead>
+<tbody>
+<tr><td>تنسيقات الملفات المصدرية</td><td>يمكن أن تحتوي ملفات JSON و JSONL و CSV و Parquet على حقول StructArray. تحتوي ملفات NumPy على ملف واحد لكل حقل من المستوى الأعلى ولا يمكنها توفير بيانات StructArray؛ استخدم ملفات JSON أو CSV أو Parquet للمجموعات التي تحتوي على حقل StructArray. لمعرفة أشكال الملفات، راجع <a href="/docs/ar/prepare-source-data.md#StructArray-fields-in-source-files">"تحضير البيانات المصدرية</a>".</td></tr>
+</tbody>
+</table>
 <h2 id="Related-pages" class="common-anchor-header">الصفحات ذات الصلة<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -286,6 +311,6 @@ summary: >-
     </button></h2><ol>
 <li><p>لإنشاء حقل StructArray، اقرأ <a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a>.</p></li>
 <li><p>لإدراج البيانات، اقرأ " <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>".</p></li>
-<li><p>لإنشاء فهارس متجهة وعلمية، اقرأ <a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a>.</p></li>
-<li><p>لمراجعة صيغة مرشح StructArray، اقرأ " <a href="/docs/ar/struct-array-operators.md">عوامل StructArray</a>".</p></li>
+<li><p>لإنشاء فهارس متجهة وعددية، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
+<li><p>لمراجعة صيغة مرشح StructArray، اقرأ <a href="/docs/ar/struct-array-operators.md">«عوامل StructArray</a>».</p></li>
 </ol>

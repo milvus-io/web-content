@@ -55,7 +55,7 @@ title: 在 Docker 中运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供了一个安装脚本，用于将其作为 Docker 容器进行安装。该脚本可在<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 代码库中</a>获取。在开始新部署之前，请先下载并检查该脚本：</p>
+    </button></h2><p>Milvus 提供了一个安装脚本，用于将其作为 Docker 容器进行安装。该脚本可在<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus 代码库中</a>找到。在开始新部署之前，请先下载并检查该脚本：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -66,7 +66,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>该脚本从 Milvus 的<code translate="no">master</code> 分支下载。脚本中定义了其 Docker 镜像标签，该标签可能与 v3.0.3 不同。若要安装该确切版本，请使用《<a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a>》中的带版本号的配置。</p>
+<p>该脚本从 Milvus 的<code translate="no">master</code> 分支下载。脚本中定义了其 Docker 镜像标签，该标签可能与 v3.0.5 不同。若要安装该确切版本，请使用《<a href="/docs/zh/install_standalone-docker-compose.md">使用 Docker Compose 运行 Milvus</a>》中的带版本号的配置。</p>
 <p>此 Docker 部署将<strong>Woodpecker</strong>的 WAL 后端设置为<strong>本地文件系统</strong>，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
 <p>如果您希望在独立部署模式下使用<a href="/docs/zh/milvus_backup_overview.md">Backup，</a>建议采用<a href="/docs/zh/install_standalone-docker-compose.md">Docker Compose</a>部署方式。</p>
 <p>若在拉取镜像时遇到任何问题，请将问题详情发送至<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，我们将为您提供必要的支持。</p>
@@ -74,7 +74,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <p>运行安装脚本后：</p>
 <ul>
 <li>一个名为 Milvus Standalone 的 Docker 容器已在<strong>19530</strong> 端口启动。</li>
-<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并在<strong>2379</strong> 端口提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
+<li>一个嵌入式 etcd 已随 Milvus 一起安装在同一容器中，并通过端口<strong>2379</strong> 提供服务。其配置文件映射到当前文件夹中的<strong>embedEtcd.yaml</strong>。</li>
 <li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
 <li>Milvus 数据卷已映射到当前文件夹中的<strong>volumes/milvus</strong>目录。</li>
 </ul>
@@ -125,7 +125,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>脚本中的 `<code translate="no">upgrade</code> ` 命令会从<code translate="no">master</code> 下载脚本，并使用该脚本选定的镜像重新创建容器。该命令不会验证源版本到目标版本的兼容性路径，且可能会重新生成已生成的配置文件。请勿将其视为任意旧版部署均可安全升级至 v3.0.3 的保证。</p>
+    </button></h2><p>脚本中的<code translate="no">upgrade</code> 命令会从<code translate="no">master</code> 下载脚本，并使用该脚本选定的镜像重新创建容器。该命令不会验证源版本到目标版本的兼容性路径，且可能会重新生成已生成的配置文件。请勿将其视为任意旧版本部署均可安全升级至 v3.0.5 的保证。</p>
 <p>升级前，请备份元数据、持久化数据、<code translate="no">embedEtcd.yaml</code> 以及<code translate="no">user.yaml</code> 。请检查目标版本、消息队列和存储的兼容性，并在非生产环境中验证恢复功能。对于使用 Docker Compose 管理的部署，请遵循<a href="/docs/zh/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升级 Milvus Standalone</a>》<a href="/docs/zh/upgrade_milvus_standalone-docker.md">中的</a>说明；请勿将该流程直接应用于由脚本管理的容器。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止并删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,7 +191,7 @@ EOF
     </button></h2><p>在 Docker 中安装 Milvus 后，您可以：</p>
 <ul>
 <li><p>查看<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
-<li><p>学习 Milvus 的基本操作：</p>
+<li><p>了解 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
 <li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>

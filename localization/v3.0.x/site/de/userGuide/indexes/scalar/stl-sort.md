@@ -2,10 +2,10 @@
 id: stl-sort.md
 title: STL_SORT
 summary: >-
-  Der STL_SORT-Index ist ein Indextyp, der speziell entwickelt wurde, um die
-  Abfrageleistung für numerische Felder (INT8, INT16 usw.), VARCHAR-Felder oder
-  TIMESTAMPTZ-Felder innerhalb von Milvus zu verbessern, indem die Daten in
-  einer sortierten Reihenfolge organisiert werden.
+  Der STL_SORT-Index ist ein Indextyp, der speziell dafür entwickelt wurde, die
+  Abfrageleistung bei numerischen Feldern (INT8, INT16 usw.), VARCHAR-Feldern
+  oder TIMESTAMPTZ-Feldern zu verbessern, indem die Daten in sortierter
+  Reihenfolge angeordnet werden.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,11 +22,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der <code translate="no">STL_SORT</code> Index ist ein Index-Typ, der speziell entwickelt wurde, um die Abfrageleistung auf numerischen Feldern (INT8, INT16, etc.), <code translate="no">VARCHAR</code> Feldern oder <code translate="no">TIMESTAMPTZ</code> Feldern innerhalb von Milvus zu verbessern, indem die Daten in einer sortierten Reihenfolge organisiert werden.</p>
-<p>Verwenden Sie den <code translate="no">STL_SORT</code> Index, wenn Sie häufig Abfragen mit:</p>
+    </button></h1><p>Der „ <code translate="no">STL_SORT</code> “-Index ist ein Indextyp, der speziell dafür entwickelt wurde, die Abfrageleistung für numerische Felder (INT8, INT16 usw.), „ <code translate="no">VARCHAR</code> “-Felder oder „ <code translate="no">TIMESTAMPTZ</code> “-Felder in Milvus zu verbessern, indem die Daten in sortierter Reihenfolge organisiert werden.</p>
+<p>Verwenden Sie den „ <code translate="no">STL_SORT</code> “-Index, wenn Sie häufig Abfragen mit folgenden Funktionen ausführen:</p>
 <ul>
-<li><p>Vergleichsfilterung mit den Operatoren <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, und <code translate="no">&lt;=</code> </p></li>
-<li><p>Bereichsfilterung mit den Operatoren <code translate="no">IN</code> und <code translate="no">LIKE</code> </p></li>
+<li><p>Vergleichsfiltern mit den Operatoren „ <code translate="no">==</code> “, „ <code translate="no">!=</code> “, „ <code translate="no">&gt;</code> “, „ <code translate="no">&lt;</code> “, „ <code translate="no">&gt;=</code> “ und „ <code translate="no">&lt;=</code> “</p></li>
+<li><p>Bereichsfilterung mit den Operatoren „ <code translate="no">IN</code> “ und „ <code translate="no">LIKE</code> “</p></li>
 </ul>
 <h2 id="Supported-data-types" class="common-anchor-header">Unterstützte Datentypen<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,11 +44,11 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Numerische Felder (z. B. <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Einzelheiten finden Sie unter <a href="/docs/de/number.md">Boolesche &amp; Zahlen</a>.</p></li>
-<li><p><code translate="no">VARCHAR</code> Felder. Weitere Informationen finden Sie unter <a href="/docs/de/string.md">String-Feld</a>.</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> Felder. Weitere Informationen finden Sie unter <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p></li>
+<li><p>Numerische Felder (z. B. <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Weitere Informationen finden Sie unter <a href="/docs/de/number.md">„Boolean &amp; Number</a>“.</p></li>
+<li><p><code translate="no">VARCHAR</code> Felder. Weitere Informationen finden Sie unter <a href="/docs/de/string.md">„String-Feld</a>“.</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> Felder. Weitere Informationen finden Sie unter <a href="/docs/de/timestamptz-field.md">„TIMESTAMPTZ-Feld</a>“.</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">Wie es funktioniert<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<h2 id="How-it-works" class="common-anchor-header">So funktioniert es<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,24 +63,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus implementiert <code translate="no">STL_SORT</code> in zwei Phasen:</p>
+    </button></h2><p>Milvus führt das „ <code translate="no">STL_SORT</code> “ in zwei Phasen durch:</p>
 <ol>
-<li><p><strong>Index aufbauen</strong></p>
+<li><p><strong>Index erstellen</strong></p>
 <ul>
-<li><p>Während der Aufnahme sammelt Milvus alle Werte für das indizierte Feld.</p></li>
-<li><p>Die Werte werden in aufsteigender Reihenfolge mit <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> der C++ STL sortiert.</p></li>
-<li><p>Jeder Wert wird mit seiner Entitäts-ID gepaart, und das sortierte Array wird als Index persistiert.</p></li>
+<li><p>Während der Datenaufnahme sammelt Milvus alle Werte für das indizierte Feld.</p></li>
+<li><p>Die Werte werden mithilfe von <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">„std::sort“</a> aus der C++-STL in aufsteigender Reihenfolge sortiert.</p></li>
+<li><p>Jeder Wert wird mit seiner Entitäts-ID verknüpft, und das sortierte Array wird als Index gespeichert.</p></li>
 </ul></li>
-<li><p><strong>Abfragen bescheunigen</strong></p>
+<li><p><strong>Abfragen beschleunigen</strong></p>
 <ul>
-<li><p>Zur Abfragezeit verwendet Milvus eine <strong>binäre Suche</strong><a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">(std::lower_bound</a> und <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) für das sortierte Array.</p></li>
-<li><p>Bei Gleichheit findet Milvus schnell alle übereinstimmenden Werte.</p></li>
-<li><p>Bei Bereichen findet Milvus die Start- und Endpositionen und gibt alle Werte dazwischen zurück.</p></li>
-<li><p>Die übereinstimmenden Entitäts-IDs werden zur endgültigen Zusammenstellung der Ergebnisse an den Abfrageexecutor weitergeleitet.</p></li>
+<li><p>Bei der Abfrage führt Milvus <strong>eine binäre Suche</strong> (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> und <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) im sortierten Array durch.</p></li>
+<li><p>Bei Gleichheitsabfragen findet Milvus schnell alle übereinstimmenden Werte.</p></li>
+<li><p>Bei Bereichsabfragen ermittelt Milvus die Start- und Endpositionen und gibt alle dazwischen liegenden Werte zurück.</p></li>
+<li><p>Übereinstimmende Entitäts-IDs werden an den Abfrage-Executor zur endgültigen Ergebniszusammenstellung übergeben.</p></li>
 </ul></li>
 </ol>
-<p>Dies reduziert die Abfragekomplexität von <strong>O(n)</strong> (vollständiger Scan) auf <strong>O(log n + m)</strong>, wobei <em>m</em> die Anzahl der Übereinstimmungen ist.</p>
-<h2 id="Create-an-STLSORT-index" class="common-anchor-header">Einen STL_SORT-Index erstellen<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
+<p>Dadurch wird die Abfragekomplexität von <strong>O(n)</strong> (Vollscan) auf <strong>O(log n + m)</strong> reduziert, wobei <em>m</em> die Anzahl der Übereinstimmungen ist.</p>
+<h2 id="Create-an-STLSORT-index" class="common-anchor-header">Erstellen eines STL_SORT-Index<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,18 +95,27 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können einen <code translate="no">STL_SORT</code> Index für ein numerisches oder <code translate="no">TIMESTAMPTZ</code> Feld erstellen. Es sind keine zusätzlichen Parameter erforderlich.</p>
-<p>Das folgende Beispiel zeigt, wie Sie einen <code translate="no">STL_SORT</code> Index für ein <code translate="no">TIMESTAMPTZ</code> Feld erstellen:</p>
+    </button></h2><p>Sie können einen „ <code translate="no">STL_SORT</code> “-Index für ein numerisches Feld, ein „ <code translate="no">VARCHAR</code> “-Feld oder ein „ <code translate="no">TIMESTAMPTZ</code> “-Feld erstellen. Es sind keine zusätzlichen Parameter erforderlich.</p>
+<p>Das folgende Beispiel zeigt, wie ein „ <code translate="no">STL_SORT</code> “-Index für ein Feld vom Typ „ <code translate="no">TIMESTAMPTZ</code> “ erstellt wird:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>) <span class="hljs-comment"># Replace with your server address</span>
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 <span class="hljs-comment"># Assume you have defined a TIMESTAMPTZ field named &quot;tsz&quot; in your collection schema</span>
 
 <span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
-<span class="hljs-comment"># Add RTREE index on the &quot;tsz&quot; field</span>
+<span class="hljs-comment"># Add STL_SORT index on the &quot;tsz&quot; field</span>
 <span class="highlighted-comment-line">index_params.add_index(</span>
 <span class="highlighted-comment-line">    field_name=<span class="hljs-string">&quot;tsz&quot;</span>,</span>
 <span class="highlighted-comment-line">    index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>,   <span class="hljs-comment"># Index for TIMESTAMPTZ</span></span>
@@ -120,7 +129,123 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-an-index" class="common-anchor-header">Löschen eines Index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tsz_demo&quot;</span>)
+        .indexParams(Collections.singletonList(IndexParam.builder()
+                .fieldName(<span class="hljs-string">&quot;tsz&quot;</span>)
+                .indexType(IndexParam.IndexType.STL_SORT)
+                .indexName(<span class="hljs-string">&quot;tsz_index&quot;</span>)
+                .build()))
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+})
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+}
+
+_, err = cli.CreateIndex(ctx, milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;tsz_demo&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>, index.NewSortedIndex()).WithIndexName(<span class="hljs-string">&quot;tsz_index&quot;</span>))
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to create index: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">create_index</span>(
+        CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tsz_demo&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_param</span>(
+                IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;tsz&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::StlSort)
+                    .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;tsz_index&quot;</span>),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tsz_demo&quot;</span>)
+        .<span class="hljs-built_in">AddIndex</span>(milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;tsz&quot;</span>, <span class="hljs-string">&quot;tsz_index&quot;</span>, milvus::IndexType::STL_SORT)));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tsz_demo&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;tsz&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;STL_SORT&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;tsz_index&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tsz_demo&quot;,
+    &quot;indexParams&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;tsz&quot;,
+            &quot;indexName&quot;: &quot;tsz_index&quot;,
+            &quot;indexType&quot;: &quot;STL_SORT&quot;
+        }
+    ]
+}&#x27;</span>
+
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
+<span class="hljs-comment">#     &quot;data&quot;: {}</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-an-index" class="common-anchor-header">Index löschen<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -135,13 +260,123 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie die Methode <code translate="no">drop_index()</code>, um einen bestehenden Index aus einer Sammlung zu entfernen.</p>
+    </button></h2><p>Verwenden Sie die Methode „ <code translate="no">drop_index()</code> “, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
 <div class="alert note">
+<ul>
+<li><p>In <strong>Version 2.6.3</strong> oder früher müssen Sie die Sammlung freigeben, bevor Sie einen skalaren Index löschen können.</p></li>
+<li><p>Ab <strong>Version 2.6.4</strong> können Sie einen skalaren Index direkt löschen, sobald er nicht mehr benötigt wird – es ist nicht erforderlich, die Sammlung zuvor freizugeben.</p></li>
+</ul>
+</div>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
     collection_name=<span class="hljs-string">&quot;tsz_demo&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
     index_name=<span class="hljs-string">&quot;tsz_index&quot;</span> <span class="hljs-comment"># Name of the index to drop</span>
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.DropIndexReq;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+client.dropIndex(DropIndexReq.builder()
+        .collectionName(<span class="hljs-string">&quot;tsz_demo&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;tsz_index&quot;</span>)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;log&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+})
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to connect to milvus server: &quot;</span>, err.Error())
+}
+
+err = cli.DropIndex(ctx, milvusclient.NewDropIndexOption(<span class="hljs-string">&quot;tsz_demo&quot;</span>, <span class="hljs-string">&quot;tsz_index&quot;</span>))
+
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(<span class="hljs-string">&quot;failed to drop index: &quot;</span>, err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_index</span>(
+        DropIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tsz_demo&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;tsz_index&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">DropIndex</span>(milvus::<span class="hljs-built_in">DropIndexRequest</span>()
+        .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tsz_demo&quot;</span>)
+        .<span class="hljs-built_in">WithIndexName</span>(<span class="hljs-string">&quot;tsz_index&quot;</span>));
+
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropIndex</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tsz_demo&quot;</span>,
+    <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;tsz_index&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/drop&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tsz_demo&quot;,
+    &quot;indexName&quot;: &quot;tsz_index&quot;
+}&#x27;</span>
+
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;code&quot;: 0,</span>
+<span class="hljs-comment">#     &quot;data&quot;: {}</span>
+<span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Usage-notes" class="common-anchor-header">Hinweise zur Verwendung<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -159,7 +394,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Feldtypen:</strong> Funktioniert mit numerischen und <code translate="no">TIMESTAMPTZ</code> Feldern. Weitere Informationen zu den Datentypen finden Sie unter <a href="/docs/de/number.md">Boolesche und numerische</a> <a href="/docs/de/timestamptz-field.md">Felder</a> und <a href="/docs/de/timestamptz-field.md">TIMESTAMPTZ-Felder</a>.</p></li>
-<li><p><strong>Parameter:</strong> Es werden keine Indexparameter benötigt.</p></li>
-<li><p><strong>Mmap wird nicht unterstützt:</strong> Der Modus "Memory-mapped" ist für <code translate="no">STL_SORT</code> nicht verfügbar.</p></li>
+<li><p><strong>Feldtypen:</strong> Funktioniert mit numerischen Feldern, Feldern vom Typ „ <code translate="no">VARCHAR</code> “ und „ <code translate="no">TIMESTAMPTZ</code> “. Weitere Informationen zu Datentypen finden Sie unter <a href="/docs/de/number.md">„Boolean &amp; Number</a> “ und <a href="/docs/de/timestamptz-field.md">„TIMESTAMPTZ-Feld</a>“.</p></li>
+<li><p><strong>Parameter:</strong> Es sind keine Indexparameter erforderlich.</p></li>
+<li><p><strong>Mmap nicht unterstützt:</strong> Der Memory-Mapped-Modus ist für „ <code translate="no">STL_SORT</code> “ nicht verfügbar.</p></li>
 </ul>

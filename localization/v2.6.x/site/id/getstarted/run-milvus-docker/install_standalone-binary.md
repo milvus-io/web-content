@@ -57,7 +57,7 @@ title: Menginstal Milvus Standalone dengan Paket RPM/DEB
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat mengunduh paket RPM/DEB sesuai dengan arsitektur sistem Anda dari <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.25">halaman Rilis Milvus</a>.</p>
+    </button></h2><p>Anda dapat mengunduh paket RPM/DEB sesuai dengan arsitektur sistem Anda dari <a href="https://github.com/milvus-io/milvus/releases/tag/v2.6.26">halaman Rilis Milvus</a>.</p>
 <ul>
 <li>Untuk x86_64/amd64, unduh paket <strong>milvus_2.6.24-1_amd64.deb</strong> atau <strong>milvus_2.6.24-1_amd64.rpm</strong>.</li>
 <li>Untuk ARM64, unduh paket <strong>milvus_2.6.24-1_arm64.deb</strong> atau <strong>milvus_2.6.24-1_arm64.rpm</strong>.</li>
@@ -211,7 +211,7 @@ dpkg -l | grep milvus
 <li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

@@ -1,7 +1,7 @@
 ---
 id: manage_databases.md
 title: 資料庫
-summary: Milvus 在集合之上引進資料庫層，提供更有效率的方式來管理和組織資料，同時支援多重租用。
+summary: Milvus 在集合之上引入了一個資料庫層，不僅能以更有效率的方式管理與組織您的資料，同時也支援多租戶架構。
 ---
 <h1 id="Database" class="common-anchor-header">資料庫<button data-href="#Database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: Milvus 在集合之上引進資料庫層，提供更有效率的方式�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 在集合之上引進資料<strong>庫層</strong>，提供更有效率的方式來管理和組織資料，同時支援多租用。</p>
+    </button></h1><p>Milvus 在集合之上引入了一個<strong>資料庫層</strong>，不僅能以更有效率的方式管理與組織您的資料，同時也支援多租戶架構。</p>
 <h2 id="What-is-a-database" class="common-anchor-header">什麼是資料庫<button data-href="#What-is-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +34,7 @@ summary: Milvus 在集合之上引進資料庫層，提供更有效率的方式�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，資料庫是組織和管理資料的邏輯單位。為了增強資料安全性並實現多租戶，您可以建立多個資料庫，為不同的應用程式或租戶在邏輯上隔離資料。例如，您建立一個資料庫儲存使用者 A 的資料，另一個資料庫則儲存使用者 B 的資料。</p>
+    </button></h2><p>在 Milvus 中，資料庫是組織與管理資料的邏輯單位。為了提升資料安全性並實現多租戶功能，您可以建立多個資料庫，以邏輯方式隔離不同應用程式或租戶的資料。例如，您可以建立一個資料庫來儲存使用者 A 的資料，並建立另一個資料庫來儲存使用者 B 的資料。</p>
 <h2 id="Create-database" class="common-anchor-header">建立資料庫<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,9 +50,17 @@ summary: Milvus 在集合之上引進資料庫層，提供更有效率的方式�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用 Milvus RESTful API 或 SDK 程式化地建立資料。</p>
+    </button></h2><p>您可以使用 Milvus RESTful API 或 SDK 透過程式化方式建立資料庫。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -79,20 +87,17 @@ client.create_database(
         .build();
 client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">MilvusClient</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ 
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span> 
-});
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
 
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>
- });
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
-    Username: <span class="hljs-string">&quot;Milvus&quot;</span>,
-    Password: <span class="hljs-string">&quot;root&quot;</span>,
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
@@ -102,6 +107,63 @@ err = cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption(<span class="
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(
+    &amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>),
+)
+.<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">create_database</span>(
+        CreateDatabaseRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">database_name</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">CreateDatabaseRequest</span>().<span class="hljs-built_in">WithDatabaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">CreateDatabase</span>(request);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> {<span class="hljs-title class_">MilvusClient</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span>
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>
+ });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Database;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+
+<span class="hljs-keyword">await</span> client.CreateDatabaseAsync(<span class="hljs-keyword">new</span> CreateDatabaseReq
+{
+    DatabaseName = <span class="hljs-string">&quot;my_database_1&quot;</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -115,9 +177,17 @@ curl --request POST \
     &quot;dbName&quot;: &quot;my_database_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您也可以在建立資料庫時設定資料庫的屬性。以下範例設定資料庫的複製本數量。</p>
+<p>您亦可在建立資料庫時設定其屬性。以下範例設定了資料庫的複本數量。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>,
     properties={
@@ -133,6 +203,33 @@ properties.put(<span class="hljs-string">&quot;database.replica.number&quot;</sp
         .build();
 client.createDatabase(createDatabaseReq);
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err := cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>).WithProperty(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-number">3</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-comment">// handle err</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+client
+    .<span class="hljs-title function_ invoke__">create_database</span>(
+        CreateDatabaseRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">database_name</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+            .<span class="hljs-title function_ invoke__">properties</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+                (<span class="hljs-string">&quot;database.replica.number&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;3&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+            ]))
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">CreateDatabaseRequest</span>()
+    .<span class="hljs-built_in">WithDatabaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+    .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">CreateDatabase</span>(request);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createDatabase</span>({
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
     <span class="hljs-attr">properties</span>: {
@@ -140,10 +237,16 @@ client.createDatabase(createDatabaseReq);
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err := cli.CreateDatabase(ctx, milvusclient.NewCreateDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>).WithProperty(<span class="hljs-string">&quot;database.replica.number&quot;</span>, <span class="hljs-number">3</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-comment">// handle err</span>
-}
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Database;
+
+<span class="hljs-keyword">await</span> client.CreateDatabaseAsync(<span class="hljs-keyword">new</span> CreateDatabaseReq
+{
+    DatabaseName = <span class="hljs-string">&quot;my_database_2&quot;</span>,
+    Properties =
+    {
+        [<span class="hljs-string">&quot;database.replica.number&quot;</span>] = <span class="hljs-string">&quot;3&quot;</span>
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -175,9 +278,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以使用 Milvus RESTful API 或 SDK 來列出所有現有資料庫，並檢視其詳細資料。</p>
+    </button></h2><p>您可以使用 Milvus RESTful API 或 SDK 列出所有現有資料庫並檢視其詳細資訊。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># List all existing databases</span>
 client.list_databases()
 
@@ -200,10 +311,6 @@ client.describe_database(
         .databaseName(<span class="hljs-string">&quot;default&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeDatabase</span>({ 
-    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>
-});
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// List all existing databases</span>
 databases, err := cli.ListDatabase(ctx, milvusclient.NewListDatabaseOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -216,6 +323,52 @@ db, err := cli.DescribeDatabase(ctx, milvusclient.NewDescribeDatabaseOption(<spa
     <span class="hljs-comment">// handle err</span>
 }
 log.Println(db)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">databases</span> = client
+    .<span class="hljs-title function_ invoke__">list_databases</span>(ListDatabasesRequest::<span class="hljs-title function_ invoke__">builder</span>().<span class="hljs-title function_ invoke__">build</span>()?)
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, databases);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">database</span> = client
+    .<span class="hljs-title function_ invoke__">describe_database</span>(
+        DescribeDatabaseRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">database_name</span>(<span class="hljs-string">&quot;default&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, database);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::ListDatabasesResponse listResponse;
+status = client-&gt;<span class="hljs-built_in">ListDatabases</span>(milvus::<span class="hljs-built_in">ListDatabasesRequest</span>(), listResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::DescribeDatabaseResponse describeResponse;
+status = client-&gt;<span class="hljs-built_in">DescribeDatabase</span>(
+    milvus::<span class="hljs-built_in">DescribeDatabaseRequest</span>().<span class="hljs-built_in">WithDatabaseName</span>(<span class="hljs-string">&quot;default&quot;</span>),
+    describeResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeDatabase</span>({
+    <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Database;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Database;
+
+ListDatabasesResp databases = <span class="hljs-keyword">await</span> client.ListDatabasesAsync(<span class="hljs-keyword">new</span> ListDatabasesReq());
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;,&quot;</span>, databases.DatabaseNames));
+
+DescribeDatabaseResp database = <span class="hljs-keyword">await</span> client.DescribeDatabaseAsync(<span class="hljs-keyword">new</span> DescribeDatabaseReq
+{
+    DatabaseName = <span class="hljs-string">&quot;default&quot;</span>
+});
+Console.WriteLine(database.DatabaseName);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -244,51 +397,51 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>每個資料庫都有自己的屬性，您可以在<a href="/docs/zh-hant/manage_databases.md#Create-database">建立資料</a>庫時設定資料庫的屬性，如建立資料庫所述，也可以更改和刪除任何現有資料庫的屬性。</p>
-<p>下表列出了可能的資料庫屬性。</p>
+    </button></h2><p>每個資料庫都有其專屬的屬性，您可以在建立資料庫時（如「<a href="/docs/zh-hant/manage_databases.md#Create-database">建立資料庫</a>」所述）設定資料庫的屬性，亦可變更或刪除任何現有資料庫的屬性。</p>
+<p>下表列出了可用的資料庫屬性。</p>
 <table>
    <tr>
      <th><p>屬性名稱</p></th>
      <th><p>類型</p></th>
-     <th><p>屬性 描述</p></th>
+     <th><p>屬性說明</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">database.replica.number</code></p></td>
      <td><p>整數</p></td>
-     <td><p>指定資料庫的複製數。</p></td>
+     <td><p>指定資料庫的複本數量。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.resource_groups</code></p></td>
      <td><p>字串</p></td>
-     <td><p>與指定資料庫關聯的資源群組的名稱，以逗號分隔的清單。</p></td>
+     <td><p>以逗號分隔的清單，列出與指定資料庫相關聯的資源群組名稱。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.diskQuota.mb</code></p></td>
      <td><p>整數</p></td>
-     <td><p>指定資料庫的最大磁碟空間大小，單位為 MB。</p></td>
+     <td><p>指定資料庫的磁碟空間最大容量，單位為百萬位元組 (MB)。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.max.collections</code></p></td>
      <td><p>整數</p></td>
-     <td><p>指定資料庫允許的最大收藏集數量。</p></td>
+     <td><p>指定資料庫中允許的集合最大數量。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.force.deny.writing</code></p></td>
-     <td><p>布林</p></td>
-     <td><p>是否強制指定資料庫拒絕寫入作業。</p></td>
+     <td><p>布林值</p></td>
+     <td><p>是否強制指定資料庫拒絕寫入操作。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">database.force.deny.reading</code></p></td>
-     <td><p>布林</p></td>
+     <td><p>布林值</p></td>
      <td><p>是否強制指定資料庫拒絕讀取操作。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>字串</p></td>
-     <td><p>指定應用於資料庫內時間敏感作業的預設時區，尤其是<code translate="no">TIMESTAMPTZ</code> 欄位。除非設定了集合層級的時區，否則集合會繼承資料庫的時區。查詢層級的時區參數可以暫時覆寫資料庫和集合的預設時區。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
+     <td><p>指定適用於資料庫內對時間敏感之操作（特別是針對 `<code translate="no">TIMESTAMPTZ</code> ` 欄位）的預設時區。除非已設定集合層級的時區，否則集合會繼承資料庫的時區。 查詢層級的時區參數可暫時覆寫資料庫和集合的預設值。該值必須為有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有關如何使用 `<code translate="no">TIMESTAMPTZ</code> ` 欄位的詳細資訊，請參閱「<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>」。</p></td>
    </tr>
 </table>
-<h3 id="Alter-database-properties" class="common-anchor-header">變更資料庫的屬性<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
+<h3 id="Alter-database-properties" class="common-anchor-header">變更資料庫屬性<button data-href="#Alter-database-properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -303,9 +456,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以按以下方式更改現有資料庫的屬性。以下範例限制您可以在資料庫中建立的集合數量。</p>
+    </button></h3><p>您可以依照以下方式變更現有資料庫的屬性。以下範例會限制您在資料庫中可建立的集合數量。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_database_properties(
     db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
     properties={
@@ -313,21 +474,55 @@ curl --request POST \
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.database.request.AlterDatabasePropertiesReq;
+
+client.alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
         .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
         .property(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">alterDatabaseProperties</span>({
-  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
-  <span class="hljs-attr">properties</span>: {<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span> },
-})
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err := cli.AlterDatabaseProperties(ctx, milvusclient.NewAlterDatabasePropertiesOption(<span class="hljs-string">&quot;my_database_1&quot;</span>).
-    WithProperty(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-number">1</span>))
+    WithProperty(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-number">10</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">alter_database_properties</span>(
+        AlterDatabasePropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">database_name</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">AlterDatabasePropertiesRequest</span>()
+    .<span class="hljs-built_in">WithDatabaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+    .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">AlterDatabaseProperties</span>(request);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterDatabaseProperties</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+  <span class="hljs-attr">properties</span>: {
+    <span class="hljs-string">&quot;database.max.collections&quot;</span>: <span class="hljs-number">10</span>,
+  },
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Database;
+
+<span class="hljs-keyword">await</span> client.AlterDatabasePropertiesAsync(<span class="hljs-keyword">new</span> AlterDatabasePropertiesReq
+{
+    DatabaseName = <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    Properties =
+    {
+        [<span class="hljs-string">&quot;database.max.collections&quot;</span>] = <span class="hljs-string">&quot;10&quot;</span>
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -338,7 +533,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;dbName&quot;: &quot;my_database_1&quot;,
     &quot;properties&quot;: {
         &quot;database.max.collections&quot;: 10
     }
@@ -359,9 +554,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您也可以透過以下方式丟除資料庫的屬性，重新設定資料庫的屬性。以下範例移除您可以在資料庫中建立的集合數量限制。</p>
+    </button></h3><p>您亦可透過以下方式刪除資料庫屬性來重設該屬性。以下範例將移除資料庫中可建立的集合數量限制。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_database_properties(
     db_name=<span class="hljs-string">&quot;my_database_1&quot;</span>,
     property_keys=[
@@ -369,20 +572,50 @@ curl --request POST \
     ]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">client.dropDatabaseProperties(DropDatabasePropertiesReq.builder()
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.database.request.DropDatabasePropertiesReq;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+client.dropDatabaseProperties(DropDatabasePropertiesReq.builder()
         .databaseName(<span class="hljs-string">&quot;my_database_1&quot;</span>)
         .propertyKeys(Collections.singletonList(<span class="hljs-string">&quot;database.max.collections&quot;</span>))
         .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabaseProperties</span>({
-  <span class="hljs-attr">db_name</span>: my_database_1,
-  <span class="hljs-attr">properties</span>: [<span class="hljs-string">&quot;database.max.collections&quot;</span>],
-});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err := cli.DropDatabaseProperties(ctx, milvusclient.NewDropDatabasePropertiesOption(<span class="hljs-string">&quot;my_database_1&quot;</span>, <span class="hljs-string">&quot;database.max.collections&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_database_properties</span>(
+        DropDatabasePropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">database_name</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property_keys</span>([<span class="hljs-string">&quot;database.max.collections&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">DropDatabasePropertiesRequest</span>()
+    .<span class="hljs-built_in">WithDatabaseName</span>(<span class="hljs-string">&quot;my_database_1&quot;</span>)
+    .<span class="hljs-built_in">AddPropertyKey</span>(<span class="hljs-string">&quot;database.max.collections&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">DropDatabaseProperties</span>(request);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropDatabaseProperties</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_1&quot;</span>,
+  <span class="hljs-attr">property_keys</span>: [<span class="hljs-string">&quot;database.max.collections&quot;</span>],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Database;
+
+<span class="hljs-keyword">await</span> client.DropDatabasePropertiesAsync(<span class="hljs-keyword">new</span> DropDatabasePropertiesReq
+{
+    DatabaseName = <span class="hljs-string">&quot;my_database_1&quot;</span>,
+    DeleteKeys = [<span class="hljs-string">&quot;database.max.collections&quot;</span>]
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -393,7 +626,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;dbName&quot;: &quot;my_database&quot;,
+    &quot;dbName&quot;: &quot;my_database_1&quot;,
     &quot;propertyKeys&quot;: [
         &quot;database.max.collections&quot;
     ]
@@ -414,31 +647,53 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以從一個資料庫切換到另一個資料庫，而不用中斷 Milvus 的連線。</p>
+    </button></h2><p>您可以在不中斷與 Milvus 連線的情況下，在不同資料庫之間切換。</p>
 <div class="alert note">
-<p>RESTful API 不支援此操作。</p>
+<p>RESTful API 不支援在持久連線狀態下切換資料庫。對於 RESTful API 請求，當操作支援 `<code translate="no">dbName</code>` 時，請在每個請求正文中指定目標資料庫。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.use_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">client.useDatabase(<span class="hljs-string">&quot;my_database_2&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">useDatabase</span>({
-  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
-});
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = cli.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client.<span class="hljs-title function_ invoke__">use_database</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">UseDatabase</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">useDatabase</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+
+<span class="hljs-keyword">await</span> client.UseDatabaseAsync(<span class="hljs-keyword">new</span> UseDatabaseReq
+{
+    DatabaseName = <span class="hljs-string">&quot;my_database_2&quot;</span>
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># This operation is unsupported because RESTful does not provide a persistent connection.</span>
 <span class="hljs-comment"># As a workaround, initiate the required request again with the target database.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-database" class="common-anchor-header">丟棄資料庫<button data-href="#Drop-database" class="anchor-icon" translate="no">
+<h2 id="Drop-database" class="common-anchor-header">刪除資料庫<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -453,14 +708,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦不再需要資料庫，您可以丟棄資料庫。請注意</p>
+    </button></h2><p>當不再需要某個資料庫時，您可以刪除該資料庫。請注意：</p>
 <ul>
-<li><p>無法丟棄預設資料庫。</p></li>
-<li><p>在丟棄資料庫之前，您需要先丟棄資料庫中的所有集合。</p></li>
+<li><p>預設資料庫無法被刪除。</p></li>
+<li><p>在刪除資料庫之前，您必須先刪除該資料庫中的所有集合。</p></li>
 </ul>
-<p>您可以使用 Milvus RESTful API 或 SDK 程式化建立資料。</p>
+<p>您可以使用 Milvus RESTful API 或 SDK 透過程式化方式刪除資料庫。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_database(
     db_name=<span class="hljs-string">&quot;my_database_2&quot;</span>
 )
@@ -469,14 +732,37 @@ curl --request POST \
         .databaseName(<span class="hljs-string">&quot;my_database_2&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropDatabase</span>({
-  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
-});
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = cli.DropDatabase(ctx, milvusclient.NewDropDatabaseOption(<span class="hljs-string">&quot;my_database_2&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle err</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_database</span>(
+        DropDatabaseRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">database_name</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">DropDatabaseRequest</span>().<span class="hljs-built_in">WithDatabaseName</span>(<span class="hljs-string">&quot;my_database_2&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">DropDatabase</span>(request);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropDatabase</span>({
+  <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database_2&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Database;
+
+<span class="hljs-keyword">await</span> client.DropDatabaseAsync(<span class="hljs-keyword">new</span> DropDatabaseReq
+{
+    DatabaseName = <span class="hljs-string">&quot;my_database_2&quot;</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -487,7 +773,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
-    &quot;dbName&quot;: &quot;my_database&quot;
+    &quot;dbName&quot;: &quot;my_database_2&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -520,8 +806,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 使用基於角色的存取控制 (RBAC) 來管理權限。您可以創建具有特定權限的角色，並將其分配給用戶，從而控制他們對不同資料庫的訪問。如需詳細資訊，請參閱<a href="/docs/zh-hant/rbac.md">RBAC 文件</a>。</p>
-<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">資料庫有配額限制嗎？<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
+    </button></h3><p>Milvus 採用基於角色的存取控制（RBAC）來管理權限。您可以建立具有特定權限的角色，並將其指派給使用者，藉此控制他們對不同資料庫的存取權限。如需更多詳細資訊，請參閱<a href="/docs/zh-hant/rbac.md">RBAC 文件</a>。</p>
+<h3 id="Are-there-any-quota-limitations-for-a-database" class="common-anchor-header">資料庫是否有配額限制？<button data-href="#Are-there-any-quota-limitations-for-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -536,4 +822,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>是的，Milvus允許您為數據庫設置配額限制，例如最大收藏集數量。有關限制的全面列表，請參閱<a href="/docs/zh-hant/limitations.md">Milvus Limits 文檔</a>。</p>
+    </button></h3><p>是的，Milvus 允許您為資料庫設定配額限制，例如集合的最大數量。如需完整的限制清單，請參閱<a href="/docs/zh-hant/limitations.md">Milvus 限制說明文件</a>。</p>

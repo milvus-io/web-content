@@ -125,24 +125,24 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Helm 차트를 설치하면 Kubernetes에서 Milvus를 시작할 수 있습니다. 이 섹션에서는 Milvus 클러스터 배포 과정을 안내합니다.</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>대신 독립형(스탠드얼론) 배포를 원하시나요?</strong></p>
-<p>개발이나 테스트를 위해 Milvus를 독립형 모드(단일 노드)로 배포하려는 경우 다음 명령어를 사용하십시오:</p>
+<p>개발이나 테스트를 위해 Milvus를 독립형 모드(단일 노드)로 배포하려는 경우 다음 명령어를 사용하십시오.</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>참고</strong>: 독립 실행 모드에서는 Woodpecker를 기본 메시지 큐로 사용하며, Streaming Node 구성 요소를 활성화합니다. 독립 실행 모드 배포에서는 Woodpecker가 Milvus 포드에 <strong>내장된 형태로</strong> 실행되며, 전용 Woodpecker <strong>서비스</strong> (별도의 포드)는 <strong>분산/클러스터</strong> 배포 시에만 사용됩니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/woodpecker.md">Woodpecker</a> 문서를 참조하십시오.</p>
+<p><strong>참고</strong>: 독립 실행 모드에서는 Woodpecker를 기본 메시지 큐로 사용하며, Streaming Node 구성 요소를 활성화합니다. 독립 실행 모드 배포에서는 Woodpecker가 Milvus 포드에 <strong>내장된 형태로</strong> 실행되며, 전용 Woodpecker <strong>서비스</strong> (별도의 포드)는 <strong>분산/클러스터</strong> 배포에서만 사용됩니다. 자세한 내용은 <a href="/docs/ko/architecture_overview.md">아키텍처 개요</a> 및 <a href="/docs/ko/woodpecker.md">Woodpecker를</a> 참조하십시오.</p>
 </div>
 <p><strong>Milvus 클러스터 배포:</strong></p>
 <div class="alert note">
 <p>Woodpecker 서비스 모드의 경우, Milvus 3.0.3 이상과 Woodpecker v0.1.46 이상을 함께 사용하는 것을 권장합니다.</p>
 </div>
-<p>다음 명령어는 Woodpecker를 권장 메시지 큐로 사용하여 v3.0.3에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
+<p>다음 명령어는 Woodpecker를 권장 메시지 큐로 사용하여 v3.0.5에 최적화된 설정으로 Milvus 클러스터를 배포합니다:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -175,7 +175,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p><strong>중요 사항:</strong></p>
 <ul>
-<li><strong>릴리스 명명</strong> 규칙: 영문자, 숫자 및 대시만 사용하십시오(점은 허용되지 않음).</li>
+<li><strong>릴리스 이름 지정</strong>: 영문자, 숫자 및 하이픈만 사용하십시오(점은 허용되지 않음).</li>
 </ul>
 <p>자세한 내용은 <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm 차트</a> 및 <a href="https://helm.sh/docs/">Helm 문서를</a> 참조하십시오.</p>
 </div>
@@ -197,7 +197,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>팟 상태를 확인하여 배포가 성공적으로 완료되었는지 확인하십시오:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>모든 파드가 “Running” 상태를 표시할 때까지 기다리십시오.</strong> v3.0.3 구성의 경우 다음과 유사한 파드가 표시되어야 합니다:</p>
+<p><strong>모든 파드가 “Running” 상태를 표시할 때까지 기다리십시오.</strong> v3.0.5 구성에서는 다음과 유사한 파드가 표시되어야 합니다:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>의존성</strong>: <code translate="no">etcd</code> (메타데이터), <code translate="no">minio</code> (오브젝트 스토리지), <code translate="no">woodpecker</code> (메시지 큐)</li>
 </ul>
 <div class="alert note">
-<p><code translate="no">streaming.woodpecker.embedded=false</code> 를 사용하면 Woodpecker는 <strong>전용 StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>)으로 실행되며, 기본적으로 4개의 복제본(3노드의 쿼럼에 내결함성을 위한 예비 노드 1개 추가)을 갖습니다. <code translate="no">woodpecker.replicaCount</code> 값을 3 미만으로 설정하지 마십시오)으로, 헤드리스 서비스가 전면에 배치되어 있으며 MinIO를 스토리지 백엔드로 사용합니다. 따라서 클러스터에는 스트리밍 노드와 별개의 <code translate="no">woodpecker</code> 포드 세트가 존재합니다.</p>
+<p><code translate="no">streaming.woodpecker.embedded=false</code> 를 사용하면 Woodpecker는 <strong>전용 StatefulSet</strong> (<code translate="no">my-release-milvus-woodpecker</code>)으로 실행되며, 기본적으로 4개의 복제본(3노드의 쿼럼에 내결함성을 위한 예비 노드 1개 추가)을 갖습니다. <code translate="no">woodpecker.replicaCount</code> 값을 3 미만으로 설정하지 마십시오)으로, 헤드리스 서비스가 전면에 배치되고 MinIO를 스토리지 백엔드로 사용합니다. 따라서 클러스터에는 스트리밍 노드와 별개의 <code translate="no">woodpecker</code> 포드 세트가 존재합니다.</p>
 </div>
 <p>포트 포워딩이 설정되면(다음 단계 참조) <code translate="no">http://127.0.0.1:9091/webui/</code> 에서 <strong>Milvus 웹 UI</strong> 에 액세스할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/milvus-webui.md">Milvus 웹 UI를</a> 참조하십시오.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Milvus에 연결하기<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -358,7 +358,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <div class="alert note">
 <ul>
 <li>모든 Milvus 구성 요소가 단일 파드에 포함되는 독립 실행 모드(standalone mode)로 Milvus 인스턴스를 설치하려면, 대신 ` <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false --set standalone.messageQueue=woodpecker --set woodpecker.enabled=true --set streaming.enabled=true zilliztech/milvus &gt; milvus_manifest.yaml</code> `을 실행하여 독립 실행 모드의 Milvus 인스턴스에 대한 차트 템플릿을 생성해야 합니다.</li>
-<li>Milvus 구성을 변경하려면 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 템플릿을 다운로드한 후 원하는 설정을 입력하고, <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 를 사용하여 해당 설정에 맞게 매니페스트를 생성하십시오.</li>
+<li>Milvus 구성을 변경하려면 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> 템플릿을 다운로드하고, 원하는 설정을 입력한 다음, <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> 를 사용하여 해당 설정에 맞게 매니페스트를 생성하십시오.</li>
 </ul>
 </div>
 <h3 id="2-Download-image-pulling-script" class="common-anchor-header">2. 이미지 가져오기 스크립트 다운로드<button data-href="#2-Download-image-pulling-script" class="anchor-icon" translate="no">

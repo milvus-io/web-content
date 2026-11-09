@@ -2,7 +2,7 @@
 id: jieba-tokenizer.md
 title: Jieba
 summary: >-
-  O tokenizador jieba processa o texto chinês dividindo-o nas palavras que o
+  O tokenizador jieba processa texto em chinês, dividindo-o nas palavras que o
   compõem.
 ---
 <h1 id="Jieba" class="common-anchor-header">Jieba<button data-href="#Jieba" class="anchor-icon" translate="no">
@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O tokenizador <code translate="no">jieba</code> processa o texto chinês dividindo-o nas palavras que o compõem.</p>
+    </button></h1><p>O tokenizador « <code translate="no">jieba</code> » processa texto em chinês, dividindo-o nas palavras que o compõem.</p>
 <div class="alert note">
-<p>O tokenizador <code translate="no">jieba</code> preserva os sinais de pontuação como tokens separados na saída. Por exemplo, <code translate="no">&quot;你好！世界。&quot;</code> torna-se <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code>. Para remover esses tokens de pontuação independentes, use o filtro <a href="/docs/pt/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
+<p>O tokenizador « <code translate="no">jieba</code> » preserva os sinais de pontuação como tokens separados na saída. Por exemplo, « <code translate="no">&quot;你好！世界。&quot;</code> » torna-se « <code translate="no">[&quot;你好&quot;, &quot;！&quot;, &quot;世界&quot;, &quot;。&quot;]</code> ». Para remover estes tokens de pontuação independentes, utilize o <a href="/docs/pt/removepunct-filter.md"><code translate="no">removepunct</code></a> filtro.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus suporta duas abordagens de configuração para o tokenizador <code translate="no">jieba</code>: uma configuração simples e uma configuração personalizada.</p>
+    </button></h2><p>O Milvus suporta duas abordagens de configuração para o tokenizador « <code translate="no">jieba</code> »: uma configuração simples e uma configuração personalizada.</p>
 <h3 id="Simple-configuration" class="common-anchor-header">Configuração simples<button data-href="#Simple-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,9 +55,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Com a configuração simples, só é necessário definir o tokenizador para <code translate="no">&quot;jieba&quot;</code>. Por exemplo:</p>
+    </button></h3><p>Com a configuração simples, basta definir o tokenizador como « <code translate="no">&quot;jieba&quot;</code> ». Por exemplo:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Simple configuration: only specifying the tokenizer name</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,  <span class="hljs-comment"># Use the default settings: dict=[&quot;_default_&quot;], mode=&quot;search&quot;, hmm=True</span>
@@ -66,11 +74,25 @@ analyzer_params = {
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>}
+};
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>}
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Simple configuration: only specifying the tokenizer name</span>
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span> <span class="hljs-comment">// Use the default settings: dict=[&quot;_default_&quot;], mode=&quot;search&quot;, hmm=True</span>
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 analyzerParams=<span class="hljs-string">&#x27;{
@@ -79,28 +101,94 @@ analyzerParams=<span class="hljs-string">&#x27;{
 <button class="copy-code-btn"></button></code></pre>
 <p>Esta configuração simples é equivalente à seguinte configuração personalizada:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration equivalent to the simple configuration above</span>
 analyzer_params = {
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,          <span class="hljs-comment"># Tokenizer type, fixed as &quot;jieba&quot;</span>
-    <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],     <span class="hljs-comment"># Use the default dictionary</span>
-    <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,          <span class="hljs-comment"># Use search mode for improved recall (see mode details below)</span>
-    <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">True</span>                <span class="hljs-comment"># Enable HMM for probabilistic segmentation</span>
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {                 <span class="hljs-comment"># Tokenizer configuration</span>
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,           <span class="hljs-comment"># Tokenizer type, fixed as &quot;jieba&quot;</span>
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],     <span class="hljs-comment"># Use the default dictionary</span>
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,          <span class="hljs-comment"># Use search mode for improved recall (see mode details below)</span>
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">True</span>                <span class="hljs-comment"># Enable HMM for probabilistic segmentation</span>
+    }
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
-analyzerParams.put(<span class="hljs-string">&quot;dict&quot;</span>, Collections.singletonList(<span class="hljs-string">&quot;_default_&quot;</span>));
-analyzerParams.put(<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>);
-analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">true</span>);
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+  put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+  put(<span class="hljs-string">&quot;dict&quot;</span>, Collections.singletonList(<span class="hljs-string">&quot;_default_&quot;</span>));
+  put(<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>);
+  put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">true</span>);
+}});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+  <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-string">&quot;dict&quot;</span>: []any{<span class="hljs-string">&quot;_default_&quot;</span>},
+    <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+    <span class="hljs-string">&quot;hmm&quot;</span>:  <span class="hljs-literal">true</span>,
+  },
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>, <span class="hljs-string">&quot;dict&quot;</span>: []any{<span class="hljs-string">&quot;_default_&quot;</span>}, <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">true</span>}
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">true</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, {
+        {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+        {<span class="hljs-string">&quot;dict&quot;</span>, {<span class="hljs-string">&quot;_default_&quot;</span>}},
+        {<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;search&quot;</span>},
+        {<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">true</span>}
+    }}
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+  <span class="hljs-attr">tokenizer</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">dict</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&quot;search&quot;</span>,
+    <span class="hljs-attr">hmm</span>: <span class="hljs-literal">true</span>,
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Custom configuration equivalent to the simple configuration above</span>
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt; <span class="hljs-comment">// Tokenizer configuration</span>
+    {
+        [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,               <span class="hljs-comment">// Tokenizer type, fixed as &quot;jieba&quot;</span>
+        [<span class="hljs-string">&quot;dict&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;_default_&quot;</span> }, <span class="hljs-comment">// Use the default dictionary</span>
+        [<span class="hljs-string">&quot;mode&quot;</span>] = <span class="hljs-string">&quot;search&quot;</span>,              <span class="hljs-comment">// Use search mode for improved recall (see mode details below)</span>
+        [<span class="hljs-string">&quot;hmm&quot;</span>] = <span class="hljs-literal">true</span>                    <span class="hljs-comment">// Enable HMM for probabilistic segmentation</span>
+    }
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+analyzerParams=<span class="hljs-string">&#x27;{
+  &quot;tokenizer&quot;: {
+    &quot;type&quot;: &quot;jieba&quot;,
+    &quot;dict&quot;: [&quot;_default_&quot;],
+    &quot;mode&quot;: &quot;search&quot;,
+    &quot;hmm&quot;: true
+  }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter detalhes sobre os parâmetros, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration">Configuração personalizada</a>.</p>
+<p>Para mais informações sobre os parâmetros, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration">«Configuração personalizada</a>».</p>
 <h3 id="Custom-configuration" class="common-anchor-header">Configuração personalizada<button data-href="#Custom-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,9 +204,17 @@ analyzerParams.put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para obter mais controle, é possível fornecer uma configuração personalizada que permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
+    </button></h3><p>Para um maior controlo, pode fornecer uma configuração personalizada que lhe permite especificar um dicionário personalizado, selecionar o modo de segmentação e ativar ou desativar o Modelo de Markov Oculto (HMM). Por exemplo:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Custom configuration with user-defined settings</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
@@ -129,19 +225,16 @@ analyzer_params = {
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();                                                                          
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
-  put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);                                                                                                      
-  put(<span class="hljs-string">&quot;dict&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;customDictionary&quot;</span>));             
+  put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+  put(<span class="hljs-string">&quot;dict&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;customDictionary&quot;</span>));
   put(<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;exact&quot;</span>);
   put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">false</span>);
 }});
-
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>{}{
-  <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>{}{
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+  <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
       <span class="hljs-string">&quot;dict&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;customDictionary&quot;</span>},
       <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
@@ -149,63 +242,110 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
   },
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;customDictionary&quot;</span>],
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">false</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+  {<span class="hljs-string">&quot;tokenizer&quot;</span>, {
+      {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+      {<span class="hljs-string">&quot;dict&quot;</span>, {<span class="hljs-string">&quot;customDictionary&quot;</span>}},
+      {<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;exact&quot;</span>},
+      {<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">false</span>}
+  }}
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+  <span class="hljs-attr">tokenizer</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">dict</span>: [<span class="hljs-string">&quot;customDictionary&quot;</span>],
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+    <span class="hljs-attr">hmm</span>: <span class="hljs-literal">false</span>,
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Custom configuration with user-defined settings</span>
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+    {
+        [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,                  <span class="hljs-comment">// Fixed tokenizer type</span>
+        [<span class="hljs-string">&quot;dict&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;customDictionary&quot;</span> }, <span class="hljs-comment">// Custom dictionary list; replace with your own terms</span>
+        [<span class="hljs-string">&quot;mode&quot;</span>] = <span class="hljs-string">&quot;exact&quot;</span>,                  <span class="hljs-comment">// Use exact mode (non-overlapping tokens)</span>
+        [<span class="hljs-string">&quot;hmm&quot;</span>] = <span class="hljs-literal">false</span>                      <span class="hljs-comment">// Disable HMM; unmatched text will be split into individual characters</span>
+    }
+};
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+analyzerParams=<span class="hljs-string">&#x27;{
+  &quot;tokenizer&quot;: {
+    &quot;type&quot;: &quot;jieba&quot;,
+    &quot;dict&quot;: [&quot;customDictionary&quot;],
+    &quot;mode&quot;: &quot;exact&quot;,
+    &quot;hmm&quot;: false
+  }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Parâmetro</p></th>
      <th><p>Descrição</p></th>
-     <th><p>Valor padrão</p></th>
+     <th><p>Valor por predefinição</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>O tipo de tokenizador. Este é fixado em <code translate="no">"jieba"</code>.</p></td>
+     <td><p>O tipo de tokenizador. Está definido como « <code translate="no">"jieba"</code> ».</p></td>
      <td><p><code translate="no">"jieba"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dict</code></p></td>
-     <td><p>Uma lista de dicionários que o analisador carregará como sua fonte de vocabulário. Opções incorporadas:</p><ul><li><p><code translate="no">"_default_"</code>: Carrega o dicionário de chinês simplificado incorporado no motor. Para mais detalhes, consulte <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Carrega tudo em <code translate="no">"_default_"</code> mais um suplemento adicional de Chinês Tradicional. Para mais detalhes, consulte <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Também pode misturar o dicionário incorporado com qualquer número de dicionários personalizados. Exemplo: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
+     <td><p>Uma lista de dicionários que o analisador irá carregar como fonte de vocabulário. Opções integradas:</p><ul><li><p><code translate="no">"_default_"</code>: Carrega o dicionário de chinês simplificado integrado no motor. Para mais detalhes, consulte o ficheiro <a href="https://github.com/messense/jieba-rs/blob/v0.6.8/src/data/dict.txt">dict.txt</a>.</p></li><li><p><code translate="no">"_extend_default_"</code>: Carrega todo o conteúdo de <code translate="no">"_default_"</code>, além de um suplemento adicional de chinês tradicional. Para mais detalhes, consulte o ficheiro <a href="https://github.com/milvus-io/milvus/blob/v2.5.11/internal/core/thirdparty/tantivy/tantivy-binding/src/analyzer/data/jieba/dict.txt.big">dict.txt.big</a>.</p><p>Também é possível combinar o dicionário integrado com qualquer número de dicionários personalizados. Exemplo: <code translate="no">["_default_", "结巴分词器"]</code>.</p></li></ul></td>
      <td><p><code translate="no">["_default_"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mode</code></p></td>
-     <td><p>O modo de segmentação. Valores possíveis:</p><ul><li><p><code translate="no">"exact"</code>: Tenta segmentar a frase da maneira mais precisa, tornando-a ideal para análise de texto.</p></li><li><p><code translate="no">"search"</code>: Baseia-se no modo exato, decompondo ainda mais as palavras longas para melhorar a recuperação, tornando-o adequado para a tokenização de motores de busca.</p><p>Para obter mais informações, consulte <a href="https://github.com/fxsjy/jieba">Jieba GitHub Project</a>.</p></li></ul></td>
+     <td><p>O modo de segmentação. Valores possíveis:</p><ul><li><p><code translate="no">"exact"</code>: Tenta segmentar a frase da forma mais precisa, tornando-o ideal para análise de texto.</p></li><li><p><code translate="no">"search"</code>: Baseia-se no modo exato, dividindo ainda mais as palavras longas para melhorar a recuperação, tornando-o adequado para a tokenização em motores de busca.</p><p>Para mais informações, consulte <a href="https://github.com/fxsjy/jieba">o projeto Jieba</a> no <a href="https://github.com/fxsjy/jieba">GitHub</a>.</p></li></ul></td>
      <td><p><code translate="no">"search"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">hmm</code></p></td>
-     <td><p>Um sinalizador booleano que indica se deve ativar o Modelo de Markov Oculto (HMM) para segmentação probabilística de palavras não encontradas no dicionário.</p></td>
+     <td><p>Um sinalizador booleano que indica se se deve ativar o Modelo de Markov Oculto (HMM) para a segmentação probabilística de palavras não encontradas no dicionário.</p></td>
      <td><p><code translate="no">true</code></p></td>
    </tr>
 </table>
-<p>Para carregar um grande vocabulário personalizado a partir de um ficheiro externo em vez de o incorporar através de <code translate="no">dict</code>, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file">Configuração personalizada com um ficheiro de dicionário</a> abaixo.</p>
-<p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
-<h3 id="Custom-configuration-with-a-dictionary-file--Milvus-30x" class="common-anchor-header">Configuração personalizada com um ficheiro de dicionário<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Custom-configuration-with-a-dictionary-file--Milvus-30x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Para grandes vocabulários personalizados - glossários de domínios, terminologia de produtos ou listas de nomes próprios - armazene as palavras em um arquivo e registre o arquivo como um recurso de arquivo remoto e, em seguida, faça referência a ele no tokenizador por meio do parâmetro <code translate="no">extra_dict_file</code>. O analisador carrega estas palavras no seu vocabulário, para além do dicionário incorporado.</p>
-<p>O ficheiro é um texto UTF-8 simples com um termo por linha. Por exemplo:</p>
+<p>Para carregar um vocabulário personalizado de grande dimensão a partir de um ficheiro externo, em vez de o incluir diretamente através de ` <code translate="no">dict</code>`, consulte <a href="/docs/pt/jieba-tokenizer.md#Custom-configuration-with-a-dictionary-file">«Configuração personalizada com um ficheiro de dicionário</a> » abaixo.</p>
+<p>Após definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais detalhes, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
+<!-- This section is published to both Cloud manuals, so the heading stays product-neutral. -->
+### Configuração personalizada com um ficheiro de dicionário
+<p>Para vocabulários personalizados de grande dimensão — glossários de domínio, terminologia de produtos ou listas de nomes próprios — guarde as palavras num ficheiro e registe-o como um recurso de ficheiro remoto; em seguida, faça referência a ele a partir do tokenizador através do parâmetro ` <code translate="no">extra_dict_file</code> `. O analisador carrega estas palavras no seu vocabulário, além do dicionário integrado.</p>
+<p>O ficheiro é texto simples em UTF‑8, com um termo por linha. Por exemplo:</p>
 <pre><code translate="no" class="language-plaintext">结巴分词器
 向量数据库
 <button class="copy-code-btn"></button></code></pre>
-<p>Carregue o ficheiro para o armazenamento de objectos que o seu cluster Milvus está configurado para utilizar e, em seguida, registe-o:</p>
+<p>Carregue o ficheiro para o armazenamento de objetos que o seu cluster Milvus está configurado para utilizar e, em seguida, registe-o:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 
 <span class="hljs-comment"># Register the uploaded file under a name you&#x27;ll reference from analyzer configs.</span>
 client.add_file_resource(
@@ -213,17 +353,124 @@ client.add_file_resource(
     path=<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>,    <span class="hljs-comment"># full S3 object key, including the rootPath prefix</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.AddFileResourceReq;
+
+<span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build();
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
+
+client.addFileResource(AddFileResourceReq.builder()
+        .name(<span class="hljs-string">&quot;zh_terms&quot;</span>)
+        .path(<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+err = client.AddFileResource(ctx, milvusclient.NewAddFileResourceOption(<span class="hljs-string">&quot;zh_terms&quot;</span>, <span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">add_file_resource</span>(AddFileResourceRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;zh_terms&quot;</span>)
+    .<span class="hljs-title function_ invoke__">path</span>(<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::AddFileResourceRequest add_file_request;
+add_file_request.<span class="hljs-built_in">WithName</span>(<span class="hljs-string">&quot;zh_terms&quot;</span>);
+add_file_request.<span class="hljs-built_in">WithPath</span>(<span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>);
+status = client-&gt;<span class="hljs-built_in">AddFileResource</span>(add_file_request);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addFileResource</span>({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;zh_terms&quot;</span>,
+  <span class="hljs-attr">path</span>: <span class="hljs-string">&quot;file/zh_terms.txt&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-comment">// Register the uploaded file under a name you&#x27;ll reference from analyzer configs.</span>
+<span class="hljs-keyword">await</span> client.AddFileResourceAsync(<span class="hljs-keyword">new</span> AddFileResourceReq
+{
+    Name = <span class="hljs-string">&quot;zh_terms&quot;</span>,
+    Path = <span class="hljs-string">&quot;file/zh_terms.txt&quot;</span> <span class="hljs-comment">// full S3 object key, including the rootPath prefix</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/file_resources/add&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;zh_terms&quot;,
+    &quot;path&quot;: &quot;file/zh_terms.txt&quot;
+  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Referenciar o recurso registado no tokenizer através de <code translate="no">extra_dict_file</code>:</p>
+<p>Faça referência ao recurso registado no tokenizador através de <code translate="no">extra_dict_file</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
@@ -238,18 +485,168 @@ client.add_file_resource(
     },
 }
 
-client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>], analyzer_params)
-<span class="hljs-comment"># → [[&#x27;milvus&#x27;, &#x27;结巴&#x27;, &#x27;分词器&#x27;, &#x27;中文&#x27;, &#x27;测试&#x27;]]</span>
+result = client.run_analyzer(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>, analyzer_params)
+<span class="hljs-built_in">print</span>(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+  put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+  put(<span class="hljs-string">&quot;dict&quot;</span>, Collections.singletonList(<span class="hljs-string">&quot;_default_&quot;</span>));
+  put(<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;exact&quot;</span>);
+  put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">false</span>);
+  put(<span class="hljs-string">&quot;extra_dict_file&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
+    put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;remote&quot;</span>);
+    put(<span class="hljs-string">&quot;resource_name&quot;</span>, <span class="hljs-string">&quot;zh_terms&quot;</span>);
+    put(<span class="hljs-string">&quot;file_name&quot;</span>, <span class="hljs-string">&quot;zh_terms.txt&quot;</span>);
+  }});
+}});
+
+List&lt;String&gt; texts = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+texts.add(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>);
+
+<span class="hljs-type">RunAnalyzerResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.runAnalyzer(RunAnalyzerReq.builder()
+        .texts(texts)
+        .analyzerParams(analyzerParams)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>}
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
+
+result, err := client.RunAnalyzer(ctx, option)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+
+<span class="hljs-keyword">for</span> _, r := <span class="hljs-keyword">range</span> result {
+    <span class="hljs-keyword">for</span> _, token := <span class="hljs-keyword">range</span> r.Tokens {
+        fmt.Println(<span class="hljs-string">&quot;Jieba analyzer output:&quot;</span>, token.Text)
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = serde_json::json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-string">&quot;extra_dict_file&quot;</span>: {
+            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;remote&quot;</span>,
+            <span class="hljs-string">&quot;resource_name&quot;</span>: <span class="hljs-string">&quot;zh_terms&quot;</span>,
+            <span class="hljs-string">&quot;file_name&quot;</span>: <span class="hljs-string">&quot;zh_terms.txt&quot;</span>
+        }
+    }
+});
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client.<span class="hljs-title function_ invoke__">run_analyzer</span>(RunAnalyzerRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">texts</span>([<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>])
+    .<span class="hljs-title function_ invoke__">analyzer_params</span>(analyzer_params)
+    .<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, response.<span class="hljs-title function_ invoke__">results</span>());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+nlohmann::json analyzer_params = {
+    {<span class="hljs-string">&quot;tokenizer&quot;</span>, {
+        {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+        {<span class="hljs-string">&quot;dict&quot;</span>, {<span class="hljs-string">&quot;_default_&quot;</span>}},
+        {<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;exact&quot;</span>},
+        {<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">false</span>},
+        {<span class="hljs-string">&quot;extra_dict_file&quot;</span>, {
+            {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;remote&quot;</span>},
+            {<span class="hljs-string">&quot;resource_name&quot;</span>, <span class="hljs-string">&quot;zh_terms&quot;</span>},
+            {<span class="hljs-string">&quot;file_name&quot;</span>, <span class="hljs-string">&quot;zh_terms.txt&quot;</span>}
+        }}
+    }}
+};
+
+milvus::RunAnalyzerRequest request;
+request.<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params);
+request.<span class="hljs-built_in">AddText</span>(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>);
+
+milvus::RunAnalyzerResponse response;
+status = client-&gt;<span class="hljs-built_in">RunAnalyzer</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
-<p>O parâmetro <code translate="no">extra_dict_file</code> aceita um objeto com os seguintes campos:</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+  <span class="hljs-attr">tokenizer</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">dict</span>: [<span class="hljs-string">&quot;_default_&quot;</span>],
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+    <span class="hljs-attr">hmm</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">extra_dict_file</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;remote&quot;</span>,
+      <span class="hljs-attr">resource_name</span>: <span class="hljs-string">&quot;zh_terms&quot;</span>,
+      <span class="hljs-attr">file_name</span>: <span class="hljs-string">&quot;zh_terms.txt&quot;</span>,
+    },
+  },
+};
+
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">runAnalyzer</span>({
+  <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>,
+  analyzer_params,
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result.<span class="hljs-property">results</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+    {
+        [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+        [<span class="hljs-string">&quot;dict&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;_default_&quot;</span> }, <span class="hljs-comment">// keep the built-in dictionary</span>
+        [<span class="hljs-string">&quot;mode&quot;</span>] = <span class="hljs-string">&quot;exact&quot;</span>,
+        [<span class="hljs-string">&quot;hmm&quot;</span>] = <span class="hljs-literal">false</span>,
+        [<span class="hljs-string">&quot;extra_dict_file&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+        {
+            [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;remote&quot;</span>,
+            [<span class="hljs-string">&quot;resource_name&quot;</span>] = <span class="hljs-string">&quot;zh_terms&quot;</span>,
+            [<span class="hljs-string">&quot;file_name&quot;</span>] = <span class="hljs-string">&quot;zh_terms.txt&quot;</span>
+        }
+    }
+};
+
+<span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> client.RunAnalyzerAsync(<span class="hljs-keyword">new</span> RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/common/run_analyzer&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;text&quot;: [&quot;milvus结巴分词器中文测试&quot;],
+    &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;:{\&quot;type\&quot;:\&quot;jieba\&quot;,\&quot;dict\&quot;:[\&quot;_default_\&quot;],\&quot;mode\&quot;:\&quot;exact\&quot;,\&quot;hmm\&quot;:false,\&quot;extra_dict_file\&quot;:{\&quot;type\&quot;:\&quot;remote\&quot;,\&quot;resource_name\&quot;:\&quot;zh_terms\&quot;,\&quot;file_name\&quot;:\&quot;zh_terms.txt\&quot;}}}&quot;
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>O parâmetro « <code translate="no">extra_dict_file</code> » aceita um objeto com os seguintes campos:</p>
 <table>
    <tr>
      <th><p>Campo</p></th>
@@ -257,7 +654,7 @@ client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文
    </tr>
    <tr>
      <td><p><code translate="no">type</code></p></td>
-     <td><p>O tipo de recurso. Utilize <code translate="no">"remote"</code> para um ficheiro registado através de <code translate="no">add_file_resource</code>. Para a variante <code translate="no">"local"</code> utilizada em implementações auto-hospedadas, consulte <a href="/docs/pt/manage-file-resources.md">Gerir Recursos de Ficheiros</a>.</p></td>
+     <td><p>O tipo de recurso. Utilize « <code translate="no">"remote"</code> » para um ficheiro registado através de « <code translate="no">add_file_resource</code> ». Para a variante « <code translate="no">"local"</code> » utilizada em implementações auto-hospedadas, consulte <a href="/docs/pt/manage-file-resources.md">«Gerir recursos de ficheiros</a>».</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">resource_name</code></p></td>
@@ -265,10 +662,10 @@ client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文
    </tr>
    <tr>
      <td><p><code translate="no">file_name</code></p></td>
-     <td><p>A parte do nome do ficheiro do caminho do armazenamento de objectos do recurso registado (por exemplo, <code translate="no">"zh_terms.txt"</code> se o recurso tiver sido registado com <code translate="no">path="file/zh_terms.txt"</code>).</p></td>
+     <td><p>A parte do nome do ficheiro do caminho do armazenamento de objetos do recurso registado (por exemplo, <code translate="no">"zh_terms.txt"</code> se o recurso tiver sido registado em <code translate="no">path="file/zh_terms.txt"</code>).</p></td>
    </tr>
 </table>
-<p>As palavras adicionadas através de <code translate="no">extra_dict_file</code> são fundidas com o dicionário incorporado, pelo que o algoritmo de segmentação da jieba as vê juntamente com as entradas existentes. Se um termo específico surge como um token autónomo depende da seleção DAG ponderada pela probabilidade da jieba - um termo personalizado longo como <code translate="no">向量数据库</code> pode ainda ser dividido em <code translate="no">向量</code> + <code translate="no">数据库</code> se essas entradas mais curtas tiverem frequências mais elevadas no dicionário incorporado.</p>
+<p>As palavras adicionadas através de <code translate="no">extra_dict_file</code> são incorporadas no dicionário integrado, pelo que o algoritmo de segmentação do jieba as considera juntamente com as entradas existentes. O facto de um termo específico surgir como um token independente depende da seleção do DAG ponderada por probabilidade do jieba — um termo personalizado longo, como <code translate="no">向量数据库</code>, pode ainda assim ser dividido em <code translate="no">向量</code> + <code translate="no">数据库</code> se essas entradas mais curtas tiverem frequências mais elevadas no dicionário integrado.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -284,7 +681,7 @@ client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de aplicar a configuração do analisador ao seu esquema de coleção, verifique o seu comportamento utilizando o método <code translate="no">run_analyzer</code>.</p>
+    </button></h2><p>Antes de aplicar a configuração do analisador ao esquema da sua coleção, verifique o seu comportamento utilizando o método ` <code translate="no">run_analyzer</code> `.</p>
 <h3 id="Analyzer-configuration" class="common-anchor-header">Configuração do analisador<button data-href="#Analyzer-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +698,15 @@ client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
@@ -311,18 +716,16 @@ client.run_analyzer([<span class="hljs-string">&quot;milvus结巴分词器中文
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();                                                                          
+<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, Object&gt;() {{
-  put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);                                                                                                      
-  put(<span class="hljs-string">&quot;dict&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;结巴分词器&quot;</span>));                   
+  put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>);
+  put(<span class="hljs-string">&quot;dict&quot;</span>, Arrays.asList(<span class="hljs-string">&quot;结巴分词器&quot;</span>));
   put(<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;exact&quot;</span>);
   put(<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">false</span>);
 }});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>{}{
-  <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]<span class="hljs-keyword">interface</span>{}{
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
+  <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
       <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
       <span class="hljs-string">&quot;dict&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;结巴分词器&quot;</span>},
       <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
@@ -330,9 +733,57 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
   },
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = json!({
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: {
+        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+        <span class="hljs-string">&quot;dict&quot;</span>: [<span class="hljs-string">&quot;结巴分词器&quot;</span>],
+        <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+        <span class="hljs-string">&quot;hmm&quot;</span>: <span class="hljs-literal">false</span>
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificação usando <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {
+  {<span class="hljs-string">&quot;tokenizer&quot;</span>, {
+      {<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;jieba&quot;</span>},
+      {<span class="hljs-string">&quot;dict&quot;</span>, {<span class="hljs-string">&quot;结巴分词器&quot;</span>}},
+      {<span class="hljs-string">&quot;mode&quot;</span>, <span class="hljs-string">&quot;exact&quot;</span>},
+      {<span class="hljs-string">&quot;hmm&quot;</span>, <span class="hljs-literal">false</span>}
+  }}
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> analyzer_params = {
+  <span class="hljs-attr">tokenizer</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
+    <span class="hljs-attr">dict</span>: [<span class="hljs-string">&quot;结巴分词器&quot;</span>],
+    <span class="hljs-attr">mode</span>: <span class="hljs-string">&quot;exact&quot;</span>,
+    <span class="hljs-attr">hmm</span>: <span class="hljs-literal">false</span>,
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+{
+    [<span class="hljs-string">&quot;tokenizer&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt;
+    {
+        [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;jieba&quot;</span>,
+        [<span class="hljs-string">&quot;dict&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-string">&quot;结巴分词器&quot;</span> },
+        [<span class="hljs-string">&quot;mode&quot;</span>] = <span class="hljs-string">&quot;exact&quot;</span>,
+        [<span class="hljs-string">&quot;hmm&quot;</span>] = <span class="hljs-literal">false</span>
+    }
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+analyzerParams=<span class="hljs-string">&#x27;{
+  &quot;tokenizer&quot;: {
+    &quot;type&quot;: &quot;jieba&quot;,
+    &quot;dict&quot;: [&quot;结巴分词器&quot;],
+    &quot;mode&quot;: &quot;exact&quot;,
+    &quot;hmm&quot;: false
+  }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Verification-using-runanalyzer" class="common-anchor-header">Verificação utilizando <code translate="no">run_analyzer</code><button data-href="#Verification-using-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -348,7 +799,15 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
         ></path>
       </svg>
     </button></h3><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
 )
@@ -361,11 +820,12 @@ client = MilvusClient(
 <span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>
 
-<span class="hljs-comment"># Run the standard analyzer with the defined configuration</span>
+<span class="hljs-comment"># Run the jieba tokenizer with the defined configuration</span>
 result = client.run_analyzer(sample_text, analyzer_params)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Standard analyzer output:&quot;</span>, result)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Jieba analyzer output:&quot;</span>, result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.RunAnalyzerReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.RunAnalyzerResp;
@@ -384,19 +844,24 @@ texts.add(<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot
         .analyzerParams(analyzerParams)
         .build());
 List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// javascript</span>
+
+<span class="hljs-keyword">for</span> (RunAnalyzerResp.AnalyzerResult result : results) {
+    <span class="hljs-keyword">for</span> (RunAnalyzerResp.AnalyzerToken token : result.getTokens()) {
+        System.out.println(<span class="hljs-string">&quot;Jieba analyzer output: &quot;</span> + token.getToken());
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
-    <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
+ctx := context.Background()
+
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
     APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -404,20 +869,126 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     <span class="hljs-comment">// handle error</span>
 }
 
-bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParams(analyzerParams)
 
 result, err := client.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+<span class="hljs-keyword">for</span> _, r := <span class="hljs-keyword">range</span> result {
+    <span class="hljs-keyword">for</span> _, token := <span class="hljs-keyword">range</span> r.Tokens {
+        fmt.Println(<span class="hljs-string">&quot;Jieba analyzer output:&quot;</span>, token.Text)
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">run_analyzer</span>(
+        RunAnalyzerRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">texts</span>([<span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>])
+            .<span class="hljs-title function_ invoke__">analyzer_params</span>(analyzer_params)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">token</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">get_tokens</span>() {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Jieba analyzer output: {}&quot;</span>, token.<span class="hljs-title function_ invoke__">get_text</span>());
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expected-output" class="common-anchor-header">Saída esperada<button data-href="#Expected-output" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+std::string text = <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>;
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">RunAnalyzerRequest</span>()
+                       .<span class="hljs-built_in">AddText</span>(text)
+                       .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params);
+
+milvus::RunAnalyzerResponse response;
+status = client-&gt;<span class="hljs-built_in">RunAnalyzer</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : response.<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; token : result.<span class="hljs-built_in">Tokens</span>()) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;Jieba analyzer output: &quot;</span> &lt;&lt; token.token_ &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&#x27;root:Milvus&#x27;</span>,
+});
+
+<span class="hljs-keyword">const</span> sample_text = <span class="hljs-string">&#x27;milvus结巴分词器中文测试&#x27;</span>;
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">runAnalyzer</span>({
+  <span class="hljs-attr">text</span>: sample_text,
+  analyzer_params,
+});
+<span class="hljs-keyword">const</span> tokens = result.<span class="hljs-property">results</span>.<span class="hljs-title function_">flatMap</span>(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> r.<span class="hljs-property">tokens</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">t</span> =&gt;</span> t.<span class="hljs-property">token</span>));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Jieba analyzer output:&#x27;</span>, tokens);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-comment">// Sample text to analyze</span>
+<span class="hljs-keyword">var</span> sampleText = <span class="hljs-string">&quot;milvus结巴分词器中文测试&quot;</span>;
+
+<span class="hljs-comment">// Run the jieba tokenizer with the defined configuration</span>
+RunAnalyzerResp result = <span class="hljs-keyword">await</span> client.RunAnalyzerAsync(<span class="hljs-keyword">new</span> RunAnalyzerReq
+{
+    AnalyzerParams = analyzerParams,
+    Texts = <span class="hljs-keyword">new</span>[] { sampleText }
+});
+
+<span class="hljs-keyword">foreach</span> (AnalyzerResult r <span class="hljs-keyword">in</span> result.Results)
+{
+    <span class="hljs-keyword">foreach</span> (AnalyzerToken t <span class="hljs-keyword">in</span> r.Tokens)
+    {
+        Console.WriteLine(<span class="hljs-string">$&quot;Jieba analyzer output: <span class="hljs-subst">{t.Token}</span>&quot;</span>);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/common/run_analyzer&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;text&quot;: [&quot;milvus结巴分词器中文测试&quot;],
+    &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;:{\&quot;type\&quot;:\&quot;jieba\&quot;,\&quot;dict\&quot;:[\&quot;结巴分词器\&quot;],\&quot;mode\&quot;:\&quot;exact\&quot;,\&quot;hmm\&quot;:false}}&quot;
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Expected-output" class="common-anchor-header">Resultado esperado<button data-href="#Expected-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -432,5 +1003,6 @@ result, err := client.RunAnalyzer(ctx, option)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no" class="language-python">[<span class="hljs-string">&#x27;milvus&#x27;</span>, <span class="hljs-string">&#x27;结巴分词器&#x27;</span>, <span class="hljs-string">&#x27;中&#x27;</span>, <span class="hljs-string">&#x27;文&#x27;</span>, <span class="hljs-string">&#x27;测&#x27;</span>, <span class="hljs-string">&#x27;试&#x27;</span>]
+    </button></h3><p>Para o texto de exemplo, o analisador produz os seguintes tokens por ordem. Os objetos de resposta do SDK e a formatação da saída variam consoante a linguagem; a resposta REST contém estes tokens em <code translate="no">data.results[].tokens[].token</code>.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;milvus&#x27;, &#x27;结巴分词器&#x27;, &#x27;中&#x27;, &#x27;文&#x27;, &#x27;测&#x27;, &#x27;试&#x27;]
 <button class="copy-code-btn"></button></code></pre>

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A pesquisa de texto completo recupera documentos que contenham os termos ou frases da sua consulta e ordena os resultados por relevância. Complementa a pesquisa semântica, que pode ignorar termos precisos, e é especialmente útil em cenários de geração aumentada por recuperação (RAG), onde os documentos que correspondem de forma mais precisa a termos de pesquisa específicos são os mais importantes.</p>
+    </button></h1><p>A pesquisa de texto completo recupera documentos que contenham os termos ou frases da sua consulta e classifica os resultados por relevância. Complementa a pesquisa semântica, que pode ignorar termos precisos, e é especialmente útil em cenários de geração aumentada por recuperação (RAG), onde os documentos que correspondem de forma mais precisa a termos de pesquisa específicos são os mais importantes.</p>
 <p>Com a pesquisa de texto completo, também pode dispensar os modelos de incorporação: basta fornecer o texto bruto e o Milvus converte-o automaticamente em incorporações esparsas.</p>
 <div class="alert note">
 <p>Ao integrar a pesquisa de texto completo com a pesquisa de vetores densos baseada em semântica, pode melhorar a precisão e a relevância dos resultados da pesquisa. Para mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa Híbrida</a>.</p>
@@ -46,7 +46,7 @@ summary: >-
 <ol>
 <li><p><strong>Introdução de texto bruto</strong>: insere documentos de texto ou introduz uma consulta utilizando texto simples, sem necessidade de modelos de incorporação.</p></li>
 <li><p><strong>Análise de texto</strong>: O Milvus utiliza um <a href="/docs/pt/analyzer-overview.md">analisador</a> para processar o seu texto em termos significativos que possam ser indexados e pesquisados.</p></li>
-<li><p><strong>Processamento da função BM25</strong>: Uma função integrada transforma estes termos em representações vetoriais esparsas otimizadas para a pontuação BM25.</p></li>
+<li><p><strong>Processamento da função BM25</strong>: Uma função integrada transforma estes termos em representações vetoriais esparsas, otimizadas para a pontuação BM25.</p></li>
 <li><p><strong>Armazenamento na coleção</strong>: O Milvus armazena as incorporações esparsas resultantes numa coleção para uma recuperação e classificação rápidas.</p></li>
 <li><p><strong>Pontuação de relevância BM25</strong>: No momento da pesquisa, o Milvus aplica a função de pontuação BM25 para calcular a relevância do documento e devolver resultados classificados que melhor correspondam aos termos da consulta.</p></li>
 </ol>
@@ -96,7 +96,7 @@ summary: >-
     </button></h3><p>O esquema da sua coleção deve incluir, pelo menos, três campos obrigatórios:</p>
 <ul>
 <li><p><strong>Campo primário</strong>: identifica de forma única cada entidade na coleção.</p></li>
-<li><p><strong>Campo de cadeia de caracteres</strong> (<code translate="no">VARCHAR</code> ou <code translate="no">TEXT</code>): armazena documentos de texto bruto. Deve definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância do BM25. Por predefinição, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md">analisador<code translate="no">standard</code> </a>; para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">a Visão geral do analisador</a>. Os exemplos nesta página utilizam <code translate="no">VARCHAR</code>; para textos longos, defina o campo como <code translate="no">TEXT</code> e omita <code translate="no">max_length</code>. Para um exemplo completo, consulte <a href="/docs/pt/text.md">«Campo de texto</a>».</p></li>
+<li><p><strong>Campo de cadeia de caracteres</strong> (<code translate="no">VARCHAR</code> ou <code translate="no">TEXT</code>): Armazena documentos de texto bruto. Deve definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância do BM25. Por predefinição, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md">analisador<code translate="no">standard</code> </a>; para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">a Visão geral do analisador</a>. Os exemplos nesta página utilizam <code translate="no">VARCHAR</code>; para textos longos, defina o campo como <code translate="no">TEXT</code> e omita <code translate="no">max_length</code>. Para um exemplo completo, consulte <a href="/docs/pt/text.md">«Campo de texto</a>».</p></li>
 <li><p><strong>Campo de vetor esparso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Armazena incorporações esparsas geradas automaticamente pela função BM25.</p></li>
 </ul>
 <div class="multipleCode">
@@ -147,16 +147,16 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -208,6 +208,21 @@ schema.WithField(entity.NewField().
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(schema);
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR));
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
         &quot;enabledDynamicField&quot;: false,
@@ -231,21 +246,6 @@ schema.WithField(entity.NewField().
             }
         ]
     }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
-
-<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
-
-milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
-<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
-
-milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
-schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
-schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>));
-schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR));
 <button class="copy-code-btn"></button></code></pre>
 <p>Na configuração anterior,</p>
 <ul>
@@ -317,6 +317,11 @@ schema.WithFunction(function)
     },
 ];
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, milvus::FunctionType::BM25);
+function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>);
+schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
         &quot;enabledDynamicField&quot;: false,
@@ -349,11 +354,6 @@ schema.WithFunction(function)
             }
         ]
     }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp">milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, milvus::FunctionType::BM25);
-function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
-function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>);
-schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -429,16 +429,16 @@ params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hlj
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
         .extraParams(params)
         .build());    
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
-    index.NewAutoIndex(entity.MetricType(entity.BM25)))
-    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
+    index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.05</span>))
+indexOption.WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -453,11 +453,16 @@ indexes.add(IndexParam.builder()
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> index_params = milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-string">&quot;1.2&quot;</span>);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-string">&quot;0.75&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
             &quot;params&quot;:{
                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
                &quot;bm25_k1&quot;: 1.2,
@@ -465,11 +470,6 @@ indexes.add(IndexParam.builder()
             }
         }
     ]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> index_params = milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndexType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
-index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
-index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-string">&quot;1.2&quot;</span>);
-index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-string">&quot;0.75&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -502,7 +502,7 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
    </tr>
    <tr>
      <td><p><code translate="no">params.bm25_b</code></p></td>
-     <td><p>Controla o grau de normalização do comprimento do documento. Normalmente, são utilizados valores entre 0 e 1, sendo o valor predefinido 0,75. Um valor de 0 significa que não há normalização do comprimento, enquanto um valor de 1 significa normalização total do comprimento.</p></td>
+     <td><p>Controla o grau de normalização do comprimento do documento. Normalmente, são utilizados valores entre 0 e 1, sendo o valor por predefinição 0,75. Um valor de 0 significa que não há normalização do comprimento, enquanto um valor de 1 significa normalização total do comprimento.</p></td>
    </tr>
 </table>
 <h3 id="Create-the-collection" class="common-anchor-header">Criar a coleção<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
@@ -534,8 +534,11 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
     schema=schema, 
     index_params=index_params
 )
+
+client.load_collection(<span class="hljs-string">&#x27;my_collection&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -543,6 +546,9 @@ index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
@@ -551,13 +557,29 @@ client.createCollection(requestCreate);
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>({
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: index_params,
-    <span class="hljs-attr">functions</span>: functions
+    <span class="hljs-attr">functions</span>: functions,
 });
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span> });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                    .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(index_params)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -572,14 +594,14 @@ curl --request POST \
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
-                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
-                                    .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(index_params)));
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Insert-text-data" class="common-anchor-header">Inserir dados de texto<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -649,21 +671,6 @@ client.insert(InsertReq.builder()
     ],
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
---url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
---header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
---header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
---header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
--d <span class="hljs-string">&#x27;{
-    &quot;data&quot;: [
-        {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
-        {&quot;text&quot;: &quot;information retrieval focuses on finding relevant information in large datasets.&quot;},
-        {&quot;text&quot;: &quot;data mining and information retrieval overlap in research.&quot;}       
-    ],
-    &quot;collectionName&quot;: &quot;my_collection&quot;
-}&#x27;</span>
-
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">milvus::EntityRows data = {
     {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>}},
     {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>}},
@@ -678,6 +685,21 @@ milvus::InsertResponse response;
 <span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;data&quot;: [
+        {&quot;text&quot;: &quot;information retrieval is a field of study.&quot;},
+        {&quot;text&quot;: &quot;information retrieval focuses on finding relevant information in large datasets.&quot;},
+        {&quot;text&quot;: &quot;data mining and information retrieval overlap in research.&quot;}       
+    ],
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
+
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Perform-full-text-search" class="common-anchor-header">Efetuar pesquisa de texto completo<button data-href="#Perform-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -712,6 +734,7 @@ milvus::InsertResponse response;
 <span class="highlighted-comment-line">    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,</span>
 <span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>], <span class="hljs-comment"># Fields to return in search results; sparse field cannot be output</span></span>
     limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>},
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -721,6 +744,7 @@ milvus::InsertResponse response;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -732,6 +756,7 @@ Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <s
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
@@ -756,8 +781,23 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;BM25&#x27;</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
 });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                       .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)
+                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                       .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+                       .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
@@ -775,22 +815,10 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
         &quot;text&quot;
     ],
     &quot;searchParams&quot;:{
+        &quot;metric_type&quot;: &quot;BM25&quot;,
         &quot;params&quot;:{}
     }
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
-                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-                       .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)
-                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
-                       .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
-
-milvus::SearchResponse response;
-<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -867,7 +895,9 @@ milvus::SearchResponse response;
  <a href="#cpp">   C++</a>
  <a href="#bash">   cURL</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
+<pre><code translate="no" class="language-python">search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>}
+
+<span class="hljs-comment"># ❌ This throws an error - you cannot output the sparse field</span>
 client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
     data=[<span class="hljs-string">&#x27;query text&#x27;</span>],
@@ -918,6 +948,15 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Searching with the sparse field in output_fields throws an error.</span>
+<span class="hljs-comment">// Only output the original text and metadata fields.</span>
+milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+    .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;query text&quot;</span>)
+    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
@@ -930,15 +969,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     &quot;limit&quot;: 3,
     &quot;outputFields&quot;: [&quot;text&quot;]
 }&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Searching with the sparse field in output_fields throws an error.</span>
-<span class="hljs-comment">// Only output the original text and metadata fields.</span>
-milvus::SearchRequest request = milvus::<span class="hljs-built_in">SearchRequest</span>()
-    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
-    .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;query text&quot;</span>)
-    .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
-    .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="common-anchor-header">Por que razão preciso de definir um campo de vetores esparsos se não posso aceder a ele?<button data-href="#Why-do-I-need-to-define-a-sparse-vector-field-if-I-cant-access-it" class="anchor-icon" translate="no">
       <svg translate="no"

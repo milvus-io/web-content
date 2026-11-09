@@ -56,9 +56,9 @@ title: Запуск Milvus с помощью Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus предоставляет файл конфигурации Docker Compose в репозитории Milvus. Загрузите конфигурацию для версии v3.0.3 и запустите новое развертывание:</p>
+    </button></h2><p>Milvus предоставляет файл конфигурации Docker Compose в репозитории Milvus. Загрузите конфигурацию для версии v3.0.5 и запустите новое развертывание:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,7 +68,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Развертывание по умолчанию (v3.0.3):</strong> <code translate="no">docker compose up -d</code> запускает три контейнера длительного выполнения — <code translate="no">milvus-etcd</code> (метаданные), <code translate="no">milvus-minio</code> (объектное хранилище) и <code translate="no">milvus-standalone</code>. В качестве очереди сообщений используется <strong>Woodpecker (встроенный, с MinIO / объектным хранилищем в качестве бэкэнда WAL)</strong>, поэтому отдельный контейнер для очереди сообщений не требуется.</p>
+<p><strong>Развертывание по умолчанию (v3.0.5):</strong> <code translate="no">docker compose up -d</code> запускает три контейнера длительного выполнения — <code translate="no">milvus-etcd</code> (метаданные), <code translate="no">milvus-minio</code> (объектное хранилище) и <code translate="no">milvus-standalone</code>. В качестве очереди сообщений используется <strong>Woodpecker (встроенный, с MinIO / объектным хранилищем в качестве бэкэнда WAL)</strong>, поэтому отдельный контейнер очереди сообщений не требуется.</p>
 <p>Конфигурация также запускает однократную службу <code translate="no">milvus-volume-init</code> для подготовки прав владения каталогом данных. После завершения этой задачи служба завершается.</p>
 <p><strong>Очередь сообщений по умолчанию в зависимости от версии:</strong></p>
 <ul>
@@ -87,7 +87,7 @@ Creating milvus-standalone ... done
 <ul>
 <li>Контейнер <strong>milvus-etcd</strong> не открывает никаких портов для хоста и сопоставляет свои данные с <strong>папкой volumes/etcd</strong> в текущем каталоге.</li>
 <li>Контейнер <strong>milvus-minio</strong> обслуживает локальные порты <strong>9000</strong> и <strong>9001</strong> с учетными данными аутентификации по умолчанию и сопоставляет свои данные с <strong>папкой volumes/minio</strong> в текущем каталоге.</li>
-<li>Контейнер <strong>milvus-standalone</strong> обслуживает локально порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>каталогом volumes/milvus</strong> в текущей папке.</li>
+<li>Контейнер <strong>milvus-standalone</strong> обслуживает локально порты <strong>19530</strong> с настройками по умолчанию и сопоставляет свои данные с <strong>папкой volumes/milvus</strong> в текущем каталоге.</li>
 </ul></li>
 </ul>
 <p>Вы можете проверить, запущены ли контейнеры, с помощью следующей команды:</p>
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>Для автономного развертывания Milvus 2.6.x следуйте инструкциям в разделе <a href="/docs/ru/upgrade_milvus_standalone-docker.md">«Обновление автономной версии Milvus с помощью Docker Compose</a>». Сделайте резервную копию метаданных и постоянных данных, сохраните существующие зависимости и конфигурацию, а также проверьте описанный в документации путь обновления от исходной версии к целевой, прежде чем изменять образ Milvus. Не заменяйте файл Compose старого развертывания конфигурацией для новой установки, приведённой выше.</p>
-<p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v3.0.3 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</p>
-<p>В Milvus 2.6.x и более поздних версиях по умолчанию используется Woodpecker, а в развертываниях версии 2.5.x — <strong>RocksMQ</strong>. Если развертывание, которое вы обновляете, по-прежнему использует RocksMQ, зафиксируйте его в файле ` <code translate="no">user.yaml</code> ` перед изменением образа Milvus, чтобы обновлённый экземпляр сохранил существующую очередь сообщений вместо запуска с новым значением по умолчанию:</p>
+<p><strong>Ограничения</strong>, связанные с<strong>очередью сообщений</strong>: при обновлении до Milvus v3.0.5 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</p>
+<p>В Milvus 2.6.x и более поздних версиях по умолчанию используется Woodpecker, а в развертываниях версии 2.5.x — <strong>RocksMQ</strong>. Если в развертывании, которое вы обновляете, по-прежнему используется RocksMQ, зафиксируйте его в файле ` <code translate="no">user.yaml</code> ` перед изменением образа Milvus, чтобы обновлённый экземпляр сохранил существующую очередь сообщений вместо того, чтобы запускаться с новой очередью по умолчанию:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>После того как обновленный экземпляр начнёт работать на версии 3.0.3, вы сможете перейти с RocksMQ на Woodpecker с помощью <a href="/docs/ru/switch-mq-type.md">функции «Switch Message Queue»</a>, доступной в Milvus 3.0 и более поздних версиях.</p>
+<p>После того как обновленный экземпляр начнёт работать на версии 3.0.5, вы сможете перейти с RocksMQ на Woodpecker с помощью <a href="/docs/ru/switch-mq-type.md">функции «Switch Message Queue»</a>, доступной в Milvus 3.0 и более поздних версиях.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Дополнительные зависимости<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

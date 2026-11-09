@@ -63,10 +63,10 @@ title: 在 Docker 中執行 Milvus（Linux）
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.25 的新功能：</strong></p>
+<p><strong>v2.6.26 的新功能：</strong></p>
 <ul>
 <li><strong>串流節點</strong>：增強資料處理能力</li>
-<li><strong>Woodpecker MQ</strong>：改進訊息佇列並降低維護負擔，詳情請參閱《<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》</li>
+<li><strong>Woodpecker MQ</strong>：改進訊息佇列，降低維護負擔，詳情請參閱《<a href="/docs/zh-hant/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》</li>
 <li><strong>架構優化</strong>：整合組件以提升效能</li>
 </ul>
 <p>請務必下載最新版本的腳本，以確保您能獲得最新的配置與架構改進。</p>
@@ -185,7 +185,7 @@ EOF
 <li><a href="/docs/zh-hant/v2.6.x/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">混合搜尋</a></li>
 </ul></li>
-<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm Chart 升級 Milvus</a>。</p></li>
+<li><p><a href="/docs/zh-hant/v2.6.x/upgrade_milvus_cluster-helm.md">使用 Helm 圖表升級 Milvus</a>。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/scaleout.md">擴展您的 Milvus 叢集</a>。</p></li>
 <li><p>在雲端部署您的 Milvus 叢集：</p>
 <ul>

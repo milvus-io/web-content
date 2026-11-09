@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 포드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.25 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v2.6.26 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이번 배포의 아키텍처 주요 특징:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/v2.6.x/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 부담 감소)</li>
@@ -237,7 +237,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
   <span class="hljs-attr">status:</span> <span class="hljs-string">Healthy</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Operator는 etcd, Pulsar, MinIO와 같은 Milvus 종속성을 생성한 다음, 프록시, 코디네이터, 노드와 같은 Milvus 구성 요소를 생성합니다.</p>
-<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 포드의 상태는 다음과 비슷해야 합니다.</p>
+<p>Milvus 클러스터가 준비되면, Milvus 클러스터 내 모든 파드의 상태는 다음과 비슷해야 합니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods</span>
 
 NAME                                             READY   STATUS    RESTARTS   AGE

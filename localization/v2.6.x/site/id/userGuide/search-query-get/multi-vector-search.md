@@ -2,17 +2,18 @@
 id: multi-vector-search.md
 title: Pencarian Hibrida Multi-Vektor
 summary: >-
-  Di banyak aplikasi, sebuah objek dapat dicari dengan sekumpulan informasi yang
-  kaya seperti judul dan deskripsi, atau dengan berbagai modalitas seperti teks,
-  gambar, dan audio. Sebagai contoh, sebuah tweet dengan sepotong teks dan
-  gambar akan dicari jika teks atau gambar tersebut sesuai dengan semantik
-  permintaan pencarian. Pencarian hibrida meningkatkan pengalaman pencarian
-  dengan menggabungkan pencarian di berbagai bidang ini. Milvus mendukung hal
-  ini dengan memungkinkan pencarian pada beberapa bidang vektor, melakukan
-  beberapa pencarian Approximate Nearest Neighbor (ANN) secara bersamaan.
-  Pencarian hibrida multi-vektor sangat berguna jika Anda ingin mencari teks dan
-  gambar, beberapa bidang teks yang mendeskripsikan objek yang sama, atau vektor
-  padat dan jarang untuk meningkatkan kualitas pencarian.
+  Dalam banyak aplikasi, suatu objek dapat dicari berdasarkan serangkaian
+  informasi yang beragam, seperti judul dan deskripsi, atau menggunakan berbagai
+  jenis data seperti teks, gambar, dan audio. Misalnya, sebuah tweet yang berisi
+  teks dan gambar akan muncul dalam hasil pencarian jika baik teks maupun
+  gambarnya sesuai dengan makna kueri pencarian. Pencarian hibrida meningkatkan
+  pengalaman pencarian dengan menggabungkan pencarian di berbagai bidang yang
+  beragam ini. Milvus mendukung hal ini dengan memungkinkan pencarian pada
+  beberapa bidang vektor, serta melakukan beberapa pencarian Approximate Nearest
+  Neighbor (ANN) secara bersamaan. Pencarian hibrida multi-vektor sangat berguna
+  jika Anda ingin mencari teks dan gambar, beberapa bidang teks yang
+  mendeskripsikan objek yang sama, atau vektor padat dan jarang untuk
+  meningkatkan kualitas pencarian.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">Pencarian Hibrida Multi-Vektor<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -29,15 +30,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam banyak aplikasi, sebuah objek dapat dicari dengan sekumpulan informasi yang kaya seperti judul dan deskripsi, atau dengan berbagai modalitas seperti teks, gambar, dan audio. Sebagai contoh, sebuah tweet dengan sepotong teks dan gambar akan dicari jika teks atau gambar tersebut sesuai dengan semantik permintaan pencarian. Pencarian hibrida meningkatkan pengalaman pencarian dengan menggabungkan pencarian di berbagai bidang ini. Milvus mendukung hal ini dengan memungkinkan pencarian pada beberapa bidang vektor, melakukan beberapa pencarian Approximate Nearest Neighbor (ANN) secara bersamaan. Pencarian hibrida multi-vektor sangat berguna jika Anda ingin mencari teks dan gambar, beberapa bidang teks yang mendeskripsikan objek yang sama, atau vektor yang padat dan jarang untuk meningkatkan kualitas pencarian.</p>
-<p>
+    </button></h1><p>Dalam banyak aplikasi, suatu objek dapat dicari berdasarkan kumpulan informasi yang beragam, seperti judul dan deskripsi, atau menggunakan berbagai jenis data seperti teks, gambar, dan audio. Misalnya, sebuah tweet yang berisi teks dan gambar akan ditemukan jika teks atau gambarnya sesuai dengan makna kueri pencarian. Pencarian hibrida meningkatkan pengalaman pencarian dengan menggabungkan pencarian di berbagai bidang yang beragam ini. Milvus mendukung hal ini dengan memungkinkan pencarian pada beberapa bidang vektor, serta melakukan beberapa pencarian Approximate Nearest Neighbor (ANN) secara bersamaan. Pencarian hibrida multi-vektor sangat berguna jika Anda ingin mencari teks dan gambar, beberapa bidang teks yang mendeskripsikan objek yang sama, atau vektor padat dan jarang untuk meningkatkan kualitas pencarian.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>Alur Kerja Pencarian Hibrida</span> </span></p>
-<p>Pencarian hibrida multi-vektor mengintegrasikan berbagai metode pencarian atau menjangkau sematan dari berbagai modalitas:</p>
+   <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>Alur Kerja Pencarian Hibrida</span>
+  
+ </span></p>
+<p>Pencarian hibrida multi-vektor mengintegrasikan berbagai metode pencarian atau mencakup embedding dari berbagai modalitas:</p>
 <ul>
-<li><p><strong>Pencarian Vektor Jarang-Padat</strong>: <a href="/docs/id/v2.6.x/dense-vector.md">Vektor Padat</a> sangat baik untuk menangkap hubungan semantik, sedangkan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor</a> Jarang sangat efektif untuk pencocokan kata kunci yang tepat. Pencarian hibrida menggabungkan pendekatan ini untuk memberikan pemahaman konseptual yang luas dan relevansi istilah yang tepat, sehingga meningkatkan hasil pencarian. Dengan memanfaatkan kekuatan dari masing-masing metode, pencarian hybrid mengatasi keterbatasan pendekatan individual, menawarkan kinerja yang lebih baik untuk kueri yang kompleks. Berikut ini adalah <a href="/docs/id/v2.6.x/full_text_search_with_milvus.md">panduan</a> lebih rinci tentang pencarian hibrida yang menggabungkan pencarian semantik dengan pencarian teks lengkap.</p></li>
-<li><p><strong>Pencarian Vektor Multimodal</strong>: Pencarian vektor multimodal adalah teknik canggih yang memungkinkan Anda untuk mencari di berbagai jenis data, termasuk teks, gambar, audio, dan lainnya. Keuntungan utama dari pendekatan ini adalah kemampuannya untuk menyatukan modalitas yang berbeda ke dalam pengalaman pencarian yang mulus dan kohesif. Misalnya, dalam pencarian produk, pengguna dapat memasukkan kueri teks untuk menemukan produk yang dideskripsikan dengan teks dan gambar. Dengan menggabungkan modalitas ini melalui metode pencarian hibrida, Anda dapat meningkatkan akurasi pencarian atau memperkaya hasil pencarian.</p></li>
+<li><p><strong>Pencarian Vektor Jarang-Padat</strong>: <a href="/docs/id/v2.6.x/dense-vector.md">Vektor Padat</a> sangat baik untuk menangkap hubungan semantik, sedangkan <a href="/docs/id/v2.6.x/sparse_vector.md">Vektor Jarang</a> sangat efektif untuk pencocokan kata kunci yang tepat. Pencarian hibrida menggabungkan pendekatan-pendekatan ini untuk memberikan pemahaman konseptual yang luas sekaligus relevansi istilah yang tepat, sehingga meningkatkan hasil pencarian. Dengan memanfaatkan kelebihan masing-masing metode, pencarian hibrida mengatasi keterbatasan pendekatan individual, sehingga menawarkan kinerja yang lebih baik untuk kueri yang kompleks. Berikut adalah <a href="/docs/id/v2.6.x/full_text_search_with_milvus.md">panduan</a> lebih rinci mengenai pengambilan data hibrida yang menggabungkan pencarian semantik dengan pencarian teks lengkap.</p></li>
+<li><p><strong>Pencarian Vektor Multimodal</strong>: Pencarian vektor multimodal adalah teknik yang kuat yang memungkinkan Anda melakukan pencarian di berbagai jenis data, termasuk teks, gambar, audio, dan lainnya. Keunggulan utama pendekatan ini adalah kemampuannya untuk menyatukan berbagai modalitas menjadi pengalaman pencarian yang mulus dan terpadu. Misalnya, dalam pencarian produk, pengguna mungkin memasukkan kueri teks untuk menemukan produk yang dijelaskan baik dengan teks maupun gambar. Dengan menggabungkan modalitas-modalitas ini melalui metode pencarian hibrida, Anda dapat meningkatkan akurasi pencarian atau memperkaya hasil pencarian.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,12 +59,12 @@ summary: >-
       </svg>
     </button></h2><p>Mari kita pertimbangkan kasus penggunaan di dunia nyata di mana setiap produk menyertakan deskripsi teks dan gambar. Berdasarkan data yang tersedia, kita dapat melakukan tiga jenis pencarian:</p>
 <ul>
-<li><p><strong>Pencarian Teks Semantik:</strong> Pencarian ini melibatkan kueri deskripsi teks produk menggunakan vektor padat. Penyematan teks dapat dibuat dengan menggunakan model seperti <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> dan <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> atau layanan seperti <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
-<li><p><strong>Pencarian Teks Lengkap</strong>: Di sini, kami menanyakan deskripsi teks produk menggunakan kata kunci yang cocok dengan vektor jarang. Algoritme seperti <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> atau model penyematan jarang seperti <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> atau <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> dapat digunakan untuk tujuan ini.</p></li>
-<li><p><strong>Pencarian Gambar Multimodal:</strong> Metode ini menanyakan gambar menggunakan kueri teks dengan vektor padat. Penyematan gambar dapat dibuat dengan model seperti <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
+<li><p><strong>Pencarian Teks Semantik:</strong> Ini melibatkan pencarian deskripsi teks produk menggunakan vektor padat. Embedding teks dapat dihasilkan menggunakan model seperti <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> dan <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a> atau layanan seperti <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
+<li><p><strong>Pencarian Teks Penuh</strong>: Di sini, kita melakukan pencarian pada deskripsi teks produk menggunakan pencocokan kata kunci dengan vektor jarang. Algoritma seperti <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> atau model embedding jarang seperti <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> atau <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> dapat digunakan untuk tujuan ini.</p></li>
+<li><p><strong>Pencarian Gambar Multimodal:</strong> Metode ini melakukan pencarian pada gambar menggunakan kueri teks dengan vektor padat. Embedding gambar dapat dihasilkan dengan model seperti <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
-<p>Panduan ini akan memandu Anda melalui contoh pencarian hibrida multimodal yang menggabungkan metode pencarian di atas, dengan deskripsi teks mentah dan sematan gambar produk. Kami akan mendemonstrasikan cara menyimpan data multi-vektor dan melakukan pencarian hibrida dengan strategi pemeringkatan ulang.</p>
-<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Membuat koleksi dengan beberapa bidang vektor<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+<p>Panduan ini akan memandu Anda melalui contoh pencarian hibrida multimodal yang menggabungkan metode pencarian di atas, dengan menggunakan deskripsi teks mentah dan embedding gambar produk. Kami akan mendemonstrasikan cara menyimpan data multi-vektor dan melakukan pencarian hibrida dengan strategi peranking ulang.</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Buat koleksi dengan beberapa bidang vektor<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,7 +79,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Proses membuat koleksi melibatkan tiga langkah utama: mendefinisikan skema koleksi, mengonfigurasi parameter indeks, dan membuat koleksi.</p>
+    </button></h2><p>Proses pembuatan koleksi melibatkan tiga langkah utama: mendefinisikan skema koleksi, mengonfigurasi parameter indeks, dan membuat koleksi.</p>
 <h3 id="Define-schema" class="common-anchor-header">Tentukan skema<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,18 +95,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus menentukan beberapa bidang vektor dalam skema koleksi. Untuk detail tentang batasan jumlah bidang vektor yang diizinkan dalam koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batas Zilliz Cloud</a>.  Namun, jika perlu, Anda dapat menyesuaikan parameter <a href="/docs/id/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam koleksi sesuai kebutuhan.</p>
-<p>Contoh ini memasukkan bidang berikut ke dalam skema:</p>
+    </button></h3><p>Untuk pencarian hibrida multi-vektor, kita harus mendefinisikan beberapa bidang vektor dalam skema koleksi. Untuk detail mengenai batasan jumlah bidang vektor yang diperbolehkan dalam sebuah koleksi, lihat <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Batasan Zilliz Cloud</a>. Namun, jika diperlukan, Anda dapat menyesuaikan <a href="/docs/id/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> untuk menyertakan hingga 10 bidang vektor dalam sebuah koleksi sesuai kebutuhan.</p>
+<p>Contoh ini memasukkan bidang-bidang berikut ke dalam skema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Berfungsi sebagai kunci utama untuk menyimpan ID teks. Bidang ini bertipe data <code translate="no">INT64</code>.</p></li>
-<li><p><code translate="no">text</code>: Digunakan untuk menyimpan konten tekstual. Bidang ini bertipe data <code translate="no">VARCHAR</code> dengan panjang maksimum 1000 byte. Opsi <code translate="no">enable_analyzer</code> diatur ke <code translate="no">True</code> untuk memfasilitasi pencarian teks lengkap.</p></li>
-<li><p><code translate="no">text_dense</code>: Digunakan untuk menyimpan vektor teks yang padat. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor 768.</p></li>
-<li><p><code translate="no">text_sparse</code>: Digunakan untuk menyimpan vektor jarang dari teks. Field ini bertipe data <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VETOR</code> dengan dimensi vektor 512.</p></li>
+<li><p><code translate="no">text</code>: Digunakan untuk menyimpan konten teks. Bidang ini bertipe data <code translate="no">VARCHAR</code> dengan panjang maksimum 1000 byte. Opsi ` <code translate="no">enable_analyzer</code> ` diatur ke ` <code translate="no">True</code> ` untuk memfasilitasi pencarian teks lengkap.</p></li>
+<li><p><code translate="no">text_dense</code>: Digunakan untuk menyimpan vektor padat dari teks-teks tersebut. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor sebesar 768.</p></li>
+<li><p><code translate="no">text_sparse</code>: Digunakan untuk menyimpan vektor langka dari teks-teks tersebut. Bidang ini bertipe data <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor sebesar 512.</p></li>
 </ul>
-<p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan Milvus <code translate="no">Function</code> ke skema. Untuk detail lebih lanjut, silakan merujuk ke <a href="/docs/id/v2.6.x/full-text-search.md">Pencarian Teks Penuh</a>.</p>
+<p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan Milvus <code translate="no">Function</code> ke skema. Untuk detail lebih lanjut, silakan lihat <a href="/docs/id/v2.6.x/full-text-search.md">Pencarian Teks Lengkap</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -334,7 +342,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-index" class="common-anchor-header">Membuat indeks<button data-href="#Create-index" class="anchor-icon" translate="no">
+<h3 id="Create-index" class="common-anchor-header">Buat indeks<button data-href="#Create-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -349,15 +357,20 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah mendefinisikan skema koleksi, langkah selanjutnya adalah mengonfigurasi indeks vektor dan menentukan metrik kemiripan. Dalam contoh yang diberikan:</p>
+    </button></h3><p>Setelah mendefinisikan skema koleksi, langkah selanjutnya adalah mengonfigurasi indeks vektor dan menentukan metrik kesamaan. Dalam contoh berikut:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: sebuah indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat teks.</p></li>
-<li><p><code translate="no">text_sparse_index</code>: indeks bertipe<code translate="no">SPARSE_INVERTED_INDEX</code>dengan tipe metrik <code translate="no">BM25</code> digunakan untuk bidang vektor teks jarang.</p></li>
-<li><p><code translate="no">image_dense_index</code>indeks bertipe <code translate="no">AUTOINDEX</code> dengan tipe metrik <code translate="no">IP</code> dibuat untuk bidang vektor padat gambar.</p></li>
+<li><p><code translate="no">text_dense_index</code>: indeks bertipe ` <code translate="no">AUTOINDEX</code> ` dengan tipe metrik ` <code translate="no">IP</code> ` dibuat untuk bidang vektor teks padat.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: indeks bertipe `<code translate="no">SPARSE_INVERTED_INDEX</code>` dengan jenis metrik ` <code translate="no">BM25</code> ` digunakan untuk bidang vektor teks yang padat.</p></li>
+<li><p><code translate="no">image_dense_index</code>: indeks bertipe ` <code translate="no">AUTOINDEX</code> ` dengan tipe metrik ` <code translate="no">IP</code> ` dibuat untuk bidang vektor gambar padat.</p></li>
 </ul>
-<p>Anda dapat memilih jenis indeks lain yang diperlukan untuk menyesuaikan dengan kebutuhan dan jenis data Anda. Untuk informasi lebih lanjut tentang jenis indeks yang didukung, silakan lihat dokumentasi tentang <a href="/docs/id/v2.6.x/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
+<p>Anda dapat memilih jenis indeks lain sesuai kebutuhan untuk menyesuaikan dengan kebutuhan dan tipe data Anda. Untuk informasi lebih lanjut mengenai jenis indeks yang didukung, silakan merujuk ke dokumentasi mengenai <a href="/docs/id/v2.6.x/index-vector-fields.md">jenis indeks yang tersedia</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -468,7 +481,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">Membuat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h3 id="Create-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -483,9 +496,14 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buat koleksi bernama <code translate="no">demo</code> dengan skema koleksi dan indeks yang telah dikonfigurasikan di dua langkah sebelumnya.</p>
+    </button></h3><p>Buat koleksi bernama <code translate="no">demo</code> dengan skema koleksi dan indeks yang telah dikonfigurasi pada dua langkah sebelumnya.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -527,7 +545,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Menyisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Sisipkan data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -542,17 +560,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bagian ini menyisipkan data ke dalam koleksi <code translate="no">my_collection</code> berdasarkan skema yang telah ditentukan sebelumnya. Selama penyisipan, pastikan semua bidang, kecuali bidang dengan nilai yang dibuat secara otomatis, disediakan dengan data dalam format yang benar. Dalam contoh ini:</p>
+    </button></h2><p>Bagian ini menyisipkan data ke dalam koleksi <code translate="no">my_collection</code> berdasarkan skema yang telah ditentukan sebelumnya. Selama proses penyisipan, pastikan semua bidang, kecuali yang memiliki nilai yang dihasilkan secara otomatis, diisi dengan data dalam format yang benar. Dalam contoh ini:</p>
 <ul>
-<li><p><code translate="no">id</code>: sebuah bilangan bulat yang mewakili ID produk</p></li>
+<li><p><code translate="no">id</code>: bilangan bulat yang mewakili ID produk</p></li>
 <li><p><code translate="no">text</code>: string yang berisi deskripsi produk</p></li>
-<li><p><code translate="no">text_dense</code>: daftar 768 nilai floating-point yang mewakili penyematan deskripsi teks yang padat</p></li>
-<li><p><code translate="no">image_dense</code>: daftar 512 nilai floating-point yang mewakili penyematan padat gambar produk</p></li>
+<li><p><code translate="no">text_dense</code>: daftar berisi 768 nilai bilangan floating-point yang mewakili embedding padat dari deskripsi teks</p></li>
+<li><p><code translate="no">image_dense</code>: daftar 512 nilai floating-point yang mewakili embedding padat dari gambar produk</p></li>
 </ul>
-<p>Anda dapat menggunakan model yang sama atau berbeda untuk menghasilkan sematan padat untuk setiap bidang. Dalam contoh ini, dua sematan padat memiliki dimensi yang berbeda, yang menunjukkan bahwa keduanya dihasilkan oleh model yang berbeda. Saat menentukan setiap pencarian nanti, pastikan untuk menggunakan model yang sesuai untuk menghasilkan sematan kueri yang sesuai.</p>
-<p>Karena contoh ini menggunakan fungsi BM25 bawaan untuk menghasilkan sematan jarang dari bidang teks, Anda tidak perlu memasok vektor jarang secara manual. Namun, jika Anda memilih untuk tidak menggunakan BM25, Anda harus melakukan prakomputasi dan menyediakan sematan jarang sendiri.</p>
+<p>Anda dapat menggunakan model yang sama atau berbeda untuk menghasilkan embedding padat untuk setiap bidang. Dalam contoh ini, kedua embedding padat tersebut memiliki dimensi yang berbeda, yang menunjukkan bahwa keduanya dihasilkan oleh model yang berbeda. Saat mendefinisikan setiap pencarian nanti, pastikan untuk menggunakan model yang sesuai guna menghasilkan embedding kueri yang tepat.</p>
+<p>Karena contoh ini menggunakan fungsi BM25 bawaan untuk menghasilkan embedding jarang dari bidang teks, Anda tidak perlu menyediakan vektor jarang secara manual. Namun, jika Anda memilih untuk tidak menggunakan BM25, Anda harus menghitung terlebih dahulu dan menyediakan embedding jarang tersebut sendiri.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -696,19 +719,24 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa <code translate="no">AnnSearchRequest</code> dalam fungsi <code translate="no">hybrid_search()</code>, di mana setiap <code translate="no">AnnSearchRequest</code> mewakili permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, perlu untuk membuat <code translate="no">AnnSearchRequest</code> untuk setiap bidang vektor.</p>
-<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> di <code translate="no">AnnSearchRequest</code>, Anda dapat mengatur kondisi pemfilteran untuk pencarian hybrid Anda. Silakan lihat <a href="/docs/id/v2.6.x/filtered-search.md">Pencarian yang Difilter</a> dan <a href="/docs/id/v2.6.x/boolean.md">Penjelasan Pemfilteran</a>.</p>
+    </button></h3><p>Pencarian Hibrida diimplementasikan dengan membuat beberapa objek ` <code translate="no">AnnSearchRequest</code> ` dalam fungsi ` <code translate="no">hybrid_search()</code> `, di mana setiap ` <code translate="no">AnnSearchRequest</code> ` mewakili permintaan pencarian ANN dasar untuk bidang vektor tertentu. Oleh karena itu, sebelum melakukan Pencarian Hibrida, Anda perlu membuat ` <code translate="no">AnnSearchRequest</code> ` untuk setiap bidang vektor.</p>
+<p>Selain itu, dengan mengonfigurasi parameter <code translate="no">expr</code> dalam <code translate="no">AnnSearchRequest</code>, Anda dapat menetapkan kondisi penyaringan untuk pencarian hibrida Anda. Silakan merujuk ke <a href="/docs/id/v2.6.x/boolean.md">Penjelasan tentang</a> <a href="/docs/id/v2.6.x/filtered-search.md">Pencarian yang Disaring</a> dan <a href="/docs/id/v2.6.x/boolean.md">Penyaringan</a>.</p>
 <div class="alert note">
-<p>Dalam Pencarian Hibrid, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
+<p>Dalam Pencarian Hibrida, setiap <code translate="no">AnnSearchRequest</code> hanya mendukung satu data kueri.</p>
 </div>
-<p>Untuk mendemonstrasikan kemampuan berbagai bidang vektor pencarian, kami akan membuat tiga permintaan pencarian <code translate="no">AnnSearchRequest</code> menggunakan contoh kueri. Kami juga akan menggunakan vektor padat yang telah dihitung sebelumnya untuk proses ini. Permintaan pencarian akan menargetkan bidang vektor berikut ini:</p>
+<p>Untuk mendemonstrasikan kemampuan berbagai bidang vektor pencarian, kami akan membuat tiga permintaan pencarian " <code translate="no">AnnSearchRequest</code> " menggunakan kueri contoh. Kami juga akan menggunakan vektor padat yang telah dihitung sebelumnya untuk proses ini. Permintaan pencarian tersebut akan menargetkan bidang vektor berikut:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> untuk pencarian teks semantik, yang memungkinkan pemahaman kontekstual dan pengambilan berdasarkan makna daripada pencocokan kata kunci secara langsung.</p></li>
-<li><p><code translate="no">text_sparse</code>untuk pencarian teks lengkap atau pencocokan kata kunci, dengan fokus pada pencocokan kata atau frasa yang tepat di dalam teks.</p></li>
-<li><p><code translate="no">image_dense</code>untuk pencarian teks-ke-gambar multimodal, untuk mengambil gambar produk yang relevan berdasarkan konten semantik kueri.</p></li>
+<li><p><code translate="no">text_dense</code> untuk pencarian teks semantik, yang memungkinkan pemahaman kontekstual dan pengambilan berdasarkan makna, bukan pencocokan kata kunci secara langsung.</p></li>
+<li><p><code translate="no">text_sparse</code>untuk pencarian teks lengkap atau pencocokan kata kunci, yang berfokus pada kecocokan kata atau frasa yang tepat dalam teks.</p></li>
+<li><p><code translate="no">image_dense</code>untuk pencarian teks-ke-gambar multimodal, guna mengambil gambar produk yang relevan berdasarkan konten semantik dari kueri.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -835,8 +863,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dengan parameter <code translate="no">limit</code> yang disetel ke 2, setiap <code translate="no">AnnSearchRequest</code> mengembalikan 2 hasil pencarian. Dalam contoh ini, 3 contoh <code translate="no">AnnSearchRequest</code> dibuat, menghasilkan total 6 hasil pencarian.</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Langkah 2: Konfigurasikan strategi perankingan ulang<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<p>Mengingat parameter ` <code translate="no">limit</code> ` diatur ke 2, setiap ` <code translate="no">AnnSearchRequest</code> ` mengembalikan 2 hasil pencarian. Dalam contoh ini, 3 instance ` <code translate="no">AnnSearchRequest</code> ` dibuat, sehingga menghasilkan total 6 hasil pencarian.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Langkah 2: Konfigurasi strategi penataan ulang peringkat<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -851,10 +879,15 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menggabungkan dan memberi peringkat ulang kumpulan hasil pencarian ANN, memilih strategi peringkat ulang yang sesuai sangatlah penting. Milvus menawarkan beberapa jenis strategi pemeringkatan ulang. Untuk detail lebih lanjut tentang mekanisme pemeringkatan ulang ini, silakan lihat Pemeringkat <a href="/docs/id/v2.6.x/weighted-ranker.md">Tertimbang</a> atau Pemeringkat <a href="/docs/id/v2.6.x/rrf-ranker.md">RRF</a>.</p>
-<p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri penelusuran tertentu, kita akan melanjutkan dengan strategi RRFRanker.</p>
+    </button></h3><p>Untuk menggabungkan dan menyusun ulang urutan kumpulan hasil pencarian ANN, pemilihan strategi penyusun ulang urutan yang tepat sangatlah penting. Milvus menawarkan beberapa jenis strategi penyusun ulang urutan. Untuk detail lebih lanjut mengenai mekanisme penyusun ulang urutan ini, silakan lihat <a href="/docs/id/v2.6.x/weighted-ranker.md">Weighted Ranker</a> atau <a href="/docs/id/v2.6.x/rrf-ranker.md">RRF Ranker</a>.</p>
+<p>Dalam contoh ini, karena tidak ada penekanan khusus pada kueri pencarian tertentu, kami akan melanjutkan dengan strategi RRFRanker.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -912,7 +945,7 @@ ranker := entity.NewFunction().
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Langkah 3: Lakukan Pencarian Hibrida<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
+<h3 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">Langkah 3: Melakukan Pencarian Hibrida<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -927,9 +960,14 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sebelum memulai Pencarian Hibrida, pastikan koleksi sudah dimuat. Jika ada bidang vektor di dalam koleksi yang tidak memiliki indeks atau tidak dimuat ke dalam memori, maka akan terjadi kesalahan saat menjalankan metode Pencarian Hibrida.</p>
+    </button></h3><p>Sebelum memulai Pencarian Hibrida, pastikan koleksi telah dimuat. Jika ada bidang vektor dalam koleksi yang tidak memiliki indeks atau tidak dimuat ke dalam memori, kesalahan akan terjadi saat metode Pencarian Hibrida dijalankan.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -1001,10 +1039,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Berikut ini adalah keluarannya:</p>
+<p>Berikut ini adalah hasilnya:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Dengan parameter <code translate="no">limit=2</code> yang ditentukan untuk Pencarian Hibrida, Milvus akan mengurutkan ulang enam hasil yang diperoleh dari tiga pencarian. Pada akhirnya, Milvus hanya akan mengembalikan dua hasil yang paling mirip.</p>
+<p>Dengan parameter ` <code translate="no">limit=2</code> ` yang ditentukan untuk Pencarian Hibrida, Milvus akan menyusun ulang peringkat enam hasil yang diperoleh dari ketiga pencarian tersebut. Pada akhirnya, Milvus hanya akan mengembalikan dua hasil teratas yang paling mirip.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Penggunaan lanjutan<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1020,7 +1058,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Menetapkan zona waktu untuk sementara untuk pencarian gabungan<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">Menetapkan zona waktu sementara untuk pencarian hybrid<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1035,9 +1073,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Jika koleksi Anda memiliki bidang <code translate="no">TIMESTAMPTZ</code>, Anda dapat mengganti sementara zona waktu default basis data atau koleksi untuk satu operasi dengan menetapkan parameter <code translate="no">timezone</code> dalam panggilan pencarian hibrida. Ini mengontrol bagaimana nilai <code translate="no">TIMESTAMPTZ</code> ditampilkan dan dibandingkan selama operasi.</p>
-<p>Nilai <code translate="no">timezone</code> harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>Amerika/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang <code translate="no">TIMESTAMPTZ</code>, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
-<p>Contoh di bawah ini menunjukkan cara menetapkan zona waktu sementara untuk operasi pencarian gabungan:</p>
+    </button></h3><p>Jika koleksi Anda memiliki bidang ` <code translate="no">TIMESTAMPTZ</code> `, Anda dapat mengganti zona waktu default basis data atau koleksi secara sementara untuk satu operasi dengan mengatur parameter ` <code translate="no">timezone</code> ` dalam panggilan pencarian hibrida. Hal ini mengontrol cara nilai ` <code translate="no">TIMESTAMPTZ</code> ` ditampilkan dan dibandingkan selama operasi.</p>
+<p>Nilai ` <code translate="no">timezone</code> ` harus berupa <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">pengenal zona waktu IANA</a> yang valid (misalnya, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, atau <strong>UTC</strong>). Untuk detail tentang cara menggunakan bidang ` <code translate="no">TIMESTAMPTZ</code> `, lihat <a href="/docs/id/v2.6.x/timestamptz-field.md">Bidang TIMESTAMPTZ</a>.</p>
+<p>Contoh di bawah ini menunjukkan cara mengatur zona waktu secara sementara untuk operasi pencarian hibrida:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,

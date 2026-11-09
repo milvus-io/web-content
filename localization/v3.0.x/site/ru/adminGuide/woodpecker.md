@@ -41,7 +41,7 @@ summary: >-
     </button></h2><ul>
 <li>В Milvus 3.x Woodpecker является WAL/очередью сообщений <strong>по умолчанию</strong>, обеспечивающей упорядоченную запись и восстановление в качестве службы ведения журнала. Внешняя служба очереди сообщений (такая как Pulsar или Kafka) не требуется.</li>
 <li>Woodpecker может работать <strong>встроенным</strong> в узел Milvus/streaming (по умолчанию) или в качестве <strong>отдельного сервиса</strong> со своими собственными под (только в распределённом режиме/кластере).</li>
-<li>Он поддерживает три режима хранения данных ( <code translate="no">storage.type</code> ): объектное хранилище (<code translate="no">minio</code>, по умолчанию), локальную файловую систему (<code translate="no">local</code>) и выделенное хранилище <code translate="no">service</code>. См. <a href="#Deployment-modes">раздел «Режимы развертывания</a>».</li>
+<li>Он поддерживает три режима хранения данных ( <code translate="no">storage.type</code> ): объектное хранилище (<code translate="no">minio</code>, по умолчанию), локальную файловую систему (<code translate="no">local</code>) и выделенное хранилище ( <code translate="no">service</code>). См. <a href="#Deployment-modes">раздел «Режимы развертывания</a>».</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">Быстрый старт<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,7 +196,7 @@ summary: >-
 <tr><td>Tencent COS</td><td>Поддерживается</td><td>Поддерживается через интерфейс, совместимый с S3.</td></tr>
 <tr><td>Google Cloud Storage (GCS)</td><td>Поддерживается</td><td>Поддерживается через режим взаимодействия с S3.</td></tr>
 <tr><td>Huawei Cloud OBS</td><td>Не поддерживается</td><td>Отсутствует необходимая семантика условной записи.</td></tr>
-<tr><td>VAST Data</td><td>Поддерживается</td><td>Проверено сообществом; работает только с корзинами без управления версиями.</td></tr>
+<tr><td>VAST Data</td><td>Поддерживается</td><td>Проверено сообществом; работает только с бакетами без управления версиями.</td></tr>
 <tr><td>Другие хранилища, совместимые с S3</td><td>Частично</td><td>Зависит от полной поддержки семантики условной записи S3.</td></tr>
 </tbody>
 </table>
@@ -282,7 +282,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>Затем выполните развертывание, воспользовавшись одним из следующих примеров:</p>
 <p>– Развертывание кластера (рекомендуемые настройки с включенными Woodpecker и Streaming Node):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -290,7 +290,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p>– Автономное развертывание (с включенным Woodpecker):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -342,7 +342,7 @@ bash standalone_embed.sh start
       </svg>
     </button></h3><p>Следуйте инструкциям <a href="/docs/ru/install_standalone-docker-compose.md">по запуску Milvus с помощью Docker Compose</a>. Пример:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
-wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
 <span class="hljs-built_in">sudo</span> docker compose up -d
 <span class="hljs-comment"># If you need to change Woodpecker parameters further, write an override:</span>
@@ -380,7 +380,7 @@ docker restart milvus-standalone
 </div>
 <p><strong>Режим службы</strong> Woodpecker — это функция <strong>Milvus 3.0</strong>. Для распределенных/кластерных развертываний вы можете запускать Woodpecker в качестве <strong>выделенной службы</strong> (отдельные поды) вместо встраивания в узел потоковой передачи, установив параметр ` <code translate="no">streaming.woodpecker.embedded=false</code>`:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -460,7 +460,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Режим службы сохраняет высокую пропускную способность записи WAL, опирающегося на объектное хранилище, одновременно обеспечивая низкую задержку (см. <a href="#Latency">раздел «Задержка»</a>). Вышеуказанная настройка со стороны хранилища и со стороны клиента по-прежнему применима; кроме того, поскольку Woodpecker работает как отдельный сервис, вы можете горизонтально масштабировать емкость записи, добавляя реплики (<code translate="no">woodpecker.replicaCount</code>, по умолчанию 4), а записи получают преимущества от кворумной репликации с одним RTT и чтений с учетом топологии, которые позволяют избежать пересылки через брокер.</p>
+    </button></h3><p>Режим службы сохраняет высокую пропускную способность записи WAL, опирающегося на объектное хранилище, при этом обеспечивая низкую задержку (см. <a href="#Latency">раздел «Задержка»</a>). Вышеуказанная настройка со стороны хранилища и со стороны клиента по-прежнему применима; кроме того, поскольку Woodpecker работает как отдельный сервис, вы можете горизонтально масштабировать емкость записи путем добавления реплик (<code translate="no">woodpecker.replicaCount</code>, по умолчанию 4), а записи получают преимущества от кворумной репликации с одним RTT и чтений с учетом топологии, которые позволяют избежать пересылки через брокер.</p>
 <p><strong>Демонстрация пакетной вставки</strong> — используйте следующее для измерения пропускной способности записи:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -554,7 +554,7 @@ batch_count = <span class="hljs-number">2000</span>
     </button></h3><p>Режим службы обеспечивает <strong>задержку записи на уровне миллисекунд</strong> — того же порядка, что и у традиционного WAL с тремя репликами на локальном диске — при низких затратах. В типичном развертывании с тремя репликами, распределённом между зонами доступности (AZ), задержка записи остаётся в диапазоне миллисекунд. Это достигается за счёт:</p>
 <ul>
 <li><strong>Записи с кворумом за один RTT</strong> — репликация, управляемая клиентом, завершает запись с кворумом за один цикл обмена данными, при этом трафик между зонами ограничивается объемом данных двух реплик (по сравнению с дополнительным трафиком между зонами, составляющим примерно 1/3, характерным для репликации на основе брокера или лидера).</li>
-<li><strong>Чтение с одним прыжком с учётом топологии</strong> — каждое чтение направляется непосредственно на ближайшую реплику, а не пересылается через брокер, что позволяет избежать случайных чтений между зонами (≈2/3 трафика чтения между зонами), характерных для систем на основе брокера.</li>
+<li><strong>Чтение с одним прыжком с учётом топологии</strong> — каждое чтение направляется непосредственно на ближайшую реплику, а не пересылается через брокер, что позволяет избежать случайных чтений между зонами (≈2/3 трафика чтения между зонами) в системах на основе брокера.</li>
 <li><strong>Немедленная загрузка в объектное хранилище после смены сегмента</strong> — каждый сегмент отслеживает весь свой жизненный цикл и загружается в объектное хранилище сразу после смены, что позволяет снизить занимаемое место на локальном диске и затраты на хранение без ухудшения задержки.</li>
 <li><strong>Отсутствие непрерывной репликации между узлами</strong> — журналы сохраняются в объектном хранилище, выступающем в качестве общего хранилища, поэтому при отработке отказа повторно загружаются только уцелевшие реплики (без копирования всего узла), масштабирование не ограничивается пропускной способностью межузловой репликации, а замена большого количества узлов не вызывает «репликационных штормов».</li>
 </ul>
@@ -591,7 +591,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>В Milvus 2.6.x Woodpecker работает встроенно в Milvus и входит в <strong>образ Milvus</strong>. В таблице ниже приведены библиотеки Woodpecker, используемые в каждом выпуске Milvus; отдельного образа сервера Woodpecker для развертывания или обновления нет. Обновите Milvus, чтобы обновить встроенную библиотеку Woodpecker. Каждый диапазон версий включает оба конечных пункта.</p>
+    </button></h3><p>В Milvus 2.6.x Woodpecker работает встроенным в Milvus и входит в <strong>образ Milvus</strong>. В таблице ниже приведены библиотеки Woodpecker, используемые в каждом выпуске Milvus; отдельного образа сервера Woodpecker для развертывания или обновления нет. Обновите Milvus, чтобы обновить встроенную библиотеку Woodpecker. Каждый диапазон версий включает оба конечных пункта.</p>
 <table>
 <thead>
 <tr><th>Версии Milvus</th><th>Встроенная библиотека Woodpecker</th><th>Источник зависимости</th></tr>
@@ -609,7 +609,7 @@ batch_count = <span class="hljs-number">2000</span>
 <tr><td>v2.6.24–v2.6.25</td><td><code translate="no">v0.1.44</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod">Первый выпуск</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod">Последний выпуск</a></td></tr>
 </tbody>
 </table>
-<p>Версии типа <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> — это псевдоверсии Go, которые идентифицируют конкретный коммит Woodpecker. Они сохраняются в полном виде в таблице встроенного режима, чтобы различать обновления зависимостей между выпусками патчей Milvus.</p>
+<p>Версии типа <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> — это псевдоверсии Go, которые идентифицируют конкретный коммит в репозитории Woodpecker. Они сохраняются в полном виде в таблице встроенного режима, чтобы различать обновления зависимостей между выпусками патчей Milvus.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Сервисный режим (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -654,7 +654,7 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>По состоянию на <strong>12 октября 2026 года</strong> последними стабильными выпусками серий 2.6.x и 3.x являются:</p>
+    </button></h3><p>По состоянию на <strong>12 октября 2026 года</strong> последними стабильными выпусками в сериях 2.6.x и 3.x являются:</p>
 <table>
 <thead>
 <tr><th>Серия Milvus</th><th>Последний стабильный выпуск Milvus</th><th>Входящая в комплект библиотека/клиент Woodpecker</th><th>Рекомендуемый тег образа сервиса</th></tr>

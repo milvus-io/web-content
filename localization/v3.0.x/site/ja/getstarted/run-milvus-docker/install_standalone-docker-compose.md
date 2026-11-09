@@ -56,9 +56,9 @@ title: Docker Compose を使用して Milvus を実行する（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusのリポジトリには、Docker Composeの設定ファイルが用意されています。v3.0.3用の設定ファイルをダウンロードし、新しいデプロイを開始してください：</p>
+    </button></h2><p>Milvusのリポジトリには、Docker Composeの設定ファイルが用意されています。v3.0.5用の設定ファイルをダウンロードし、新しいデプロイを開始してください：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,14 +68,14 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>デフォルトのデプロイ（v3.0.3）：</strong> <code translate="no">docker compose up -d</code> は、<code translate="no">milvus-etcd</code> （メタデータ）、<code translate="no">milvus-minio</code> （オブジェクトストレージ）、<code translate="no">milvus-standalone</code> の 3 つの長時間実行コンテナを起動します。メッセージキューは<strong>Woodpecker（組み込み型、WAL バックエンドとして MinIO / オブジェクトストレージを使用）</strong>であるため、別途メッセージキュー用コンテナは必要ありません。</p>
+<p><strong>デフォルトのデプロイ（v3.0.5）：</strong> <code translate="no">docker compose up -d</code> は、<code translate="no">milvus-etcd</code> （メタデータ）、<code translate="no">milvus-minio</code> （オブジェクトストレージ）、<code translate="no">milvus-standalone</code> の 3 つの長期稼働コンテナを起動します。メッセージキューには<strong>Woodpecker（組み込み型、WAL バックエンドとして MinIO / オブジェクトストレージを使用）が</strong>使用されるため、別途メッセージキュー用コンテナは必要ありません。</p>
 <p>また、この設定では、データディレクトリの所有権を設定するために、ワンショットで<code translate="no">milvus-volume-init</code> サービスも実行されます。このタスクが完了すると、サービスは終了します。</p>
 <p><strong>バージョンごとのメッセージキューのデフォルト設定：</strong></p>
 <ul>
-<li><strong>2.5.x</strong>— デフォルトのメッセージキューは<strong>RocksMQ</strong> です。</li>
+<li><strong>2.5.x</strong>— デフォルトのメッセージキューは<strong>RocksMQ</strong>です。</li>
 <li><strong>2.6.x 以降</strong>— デフォルトのメッセージキューは<strong>Woodpecker（組み込み型）</strong>です。</li>
 </ul>
-<p>インストールするリリースに付属の設定ファイルを使用してください。既存のデプロイメントについては、設定ファイルを新規インストール用ファイルで置き換えるのではなく、アップグレード手順に従ってください。</p>
+<p>インストールするリリースに付属する設定を使用してください。既存のデプロイメントについては、設定を新規インストール用ファイルで置き換えるのではなく、アップグレード手順に従ってください。</p>
 <ul>
 <li><p><code translate="no">docker compose</code> が利用できない場合は、<a href="https://docs.docker.com/compose/install/linux/">Dockerの手順</a>に従ってComposeプラグインをインストールしてください。</p></li>
 <li><p>イメージの取得で問題が発生した場合は、問題の詳細を明記の上、<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p></li>
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>Milvus 2.6.x スタンドアロンデプロイメントの場合は、「<a href="/docs/ja/upgrade_milvus_standalone-docker.md">Docker Compose を使用した Milvus スタンドアロンのアップグレード</a>」の手順に従ってください。Milvus イメージを変更する前に、メタデータと永続データをバックアップし、既存の依存関係と設定を保持し、文書化されているソースからターゲットへのアップグレードパスを検証してください。 古いデプロイメントの Compose ファイルを、上記の新規インストール用設定で置き換えないでください。</p>
-<p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.3 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に対するサポートは、将来のバージョンで提供される予定です。</p>
-<p>Milvus 2.6.x 以降では Woodpecker がデフォルトとなり、2.5.x のデプロイメントでは<strong>RocksMQ が</strong>デフォルトとなります。アップグレード対象のデプロイメントがまだ RocksMQ を実行している場合は、Milvus イメージを変更する前に `<code translate="no">user.yaml</code> ` でこれを固定してください。これにより、アップグレード後のインスタンスは新しいデフォルトで起動するのではなく、既存のメッセージキューを維持します:</p>
+<p><strong>メッセージキューの制限事項</strong>: Milvus v3.0.5 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に対するサポートは、将来のバージョンで提供される予定です。</p>
+<p>Milvus 2.6.x 以降では Woodpecker がデフォルトとなり、2.5.x のデプロイメントでは<strong>RocksMQ が</strong>デフォルトとなります。アップグレード対象のデプロイメントがまだ RocksMQ を実行している場合は、Milvus イメージを変更する前に `<code translate="no">user.yaml</code> ` でこれを固定してください。これにより、アップグレード後のインスタンスは新しいデフォルトで起動するのではなく、既存のメッセージキューを維持します。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>アップグレード後のインスタンスが v3.0.3 で稼働し始めたら、Milvus 3.0 以降で利用可能な「<a href="/docs/ja/switch-mq-type.md">メッセージキューの切り替え</a>」機能を使用して、RocksMQ から Woodpecker へ移行できます。</p>
+<p>アップグレード後のインスタンスが v3.0.5 で稼働し始めたら、Milvus 3.0 以降で利用可能な「<a href="/docs/ja/switch-mq-type.md">メッセージキューの切り替え</a>」機能を使用して、RocksMQ から Woodpecker へ移行できます。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">オプションの依存関係<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -201,7 +201,7 @@ EOF
 <div class="alert note">
 <p>Storage V3はデフォルトで無効になっています。Storage V3に依存する機能を使用する前に、有効にしてください。要件および互換性に関する考慮事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次の手順<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

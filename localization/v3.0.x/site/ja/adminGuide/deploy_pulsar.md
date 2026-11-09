@@ -22,7 +22,7 @@ summary: Docker Compose または Helm を使用してメッセージストレ�
     </button></h1><p>Milvus は、最近の変更のログ管理、ストリームログの出力、およびログのサブスクリプションの提供にメッセージキューを使用します。Milvus 3.0.x 以降、Woodpecker がデフォルトで推奨されるメッセージキューとなっています。このトピックでは、Docker Compose または Helm を使用して Pulsar または Kafka を設定する方法について説明します。</p>
 <p>Pulsar は<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>または K8s 上で設定でき、Kafka は K8s 上で設定できます。</p>
 <div class="alert note">
-<p><strong>メッセージキューの制限事項</strong>：Milvus v3.0.3 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に関するサポートは、将来のバージョンで提供される予定です。</p>
+<p><strong>メッセージキューの制限事項</strong>：Milvus v3.0.5 へのアップグレード時には、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更に関するサポートは、将来のバージョンで提供される予定です。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Docker Compose を使用した Pulsar の設定<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

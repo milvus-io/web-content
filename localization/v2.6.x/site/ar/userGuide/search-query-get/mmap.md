@@ -2,12 +2,12 @@
 id: mmap.md
 title: استخدام mmap
 summary: >-
-  يتيح تخطيط الذاكرة (Mmap) الوصول المباشر للذاكرة إلى الملفات الكبيرة على
+  تتيح ميزة تعيين الذاكرة (Mmap) الوصول المباشر إلى الملفات الكبيرة الموجودة على
   القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص
-  الصلبة. يساعد هذا النهج في تحسين سياسة وضع البيانات استناداً إلى تكرار الوصول،
-  مما يزيد من سعة التخزين للمجموعات دون التأثير بشكل كبير على أداء البحث. تساعدك
-  هذه الصفحة على فهم كيفية استخدام Milvus لـ mmap لتمكين تخزين البيانات
-  واسترجاعها بسرعة وكفاءة.
+  الصلبة. تساعد هذه الطريقة على تحسين سياسة توزيع البيانات بناءً على تكرار
+  الوصول إليها، مما يوسع سعة التخزين للمجموعات دون التأثير بشكل كبير على أداء
+  البحث. تساعدك هذه الصفحة على فهم كيفية استخدام Milvus لتقنية mmap لتمكين تخزين
+  البيانات واسترجاعها بسرعة وكفاءة.
 ---
 <h1 id="Use-mmap" class="common-anchor-header">استخدام mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يتيح تعيين الذاكرة (Mmap) الوصول المباشر من الذاكرة إلى الملفات الكبيرة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. يساعد هذا النهج في تحسين سياسة وضع البيانات استناداً إلى تكرار الوصول، مما يزيد من سعة التخزين للمجموعات دون التأثير بشكل كبير على أداء البحث. تساعدك هذه الصفحة على فهم كيفية استخدام Milvus لـ mmap لتمكين تخزين البيانات واسترجاعها بسرعة وكفاءة.</p>
+    </button></h1><p>تتيح خريطة الذاكرة (Mmap) الوصول المباشر إلى الملفات الكبيرة الموجودة على القرص، مما يسمح لـ Milvus بتخزين الفهارس والبيانات في كل من الذاكرة والأقراص الصلبة. تساعد هذه الطريقة على تحسين سياسة وضع البيانات بناءً على تكرار الوصول، مما يوسع سعة التخزين للمجموعات دون التأثير بشكل كبير على أداء البحث. تساعدك هذه الصفحة على فهم كيفية استخدام Milvus لـ mmap لتمكين تخزين البيانات واسترجاعها بسرعة وكفاءة.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,16 +40,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم Milvus المجموعات لتنظيم تضمينات المتجهات وبياناتها الوصفية، ويمثل كل صف في المجموعة كيانًا. كما هو موضح في الشكل الأيسر أدناه، يخزن الحقل المتجه التضمينات المتجهة، بينما تخزن الحقول القياسية بياناتها الوصفية. عندما تقوم بإنشاء فهارس على حقول معينة وتحميل المجموعة، يقوم ميلفوس بتحميل الفهارس التي تم إنشاؤها والبيانات الأولية للحقل في الذاكرة.</p>
-<p>
+    </button></h2><p>يستخدم Milvus المجموعات لتنظيم التضمينات المتجهة وبياناتها الوصفية، ويمثل كل صف في المجموعة كيانًا. كما هو موضح في الشكل الأيسر أدناه، يخزن الحقل المتجه التضمينات المتجهة، بينما تخزن الحقول القياسية بياناتها الوصفية. عند إنشاء فهارس على حقول معينة وتحميل المجموعة، يقوم Milvus بتحميل الفهارس التي تم إنشاؤها والبيانات الأولية للحقول إلى الذاكرة.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
-   </span> <span class="img-wrapper"> <span>الخريطة المصورة</span> </span></p>
-<p>ميلفوس هو نظام قاعدة بيانات كثيف الذاكرة، ويحدد حجم الذاكرة المتاحة سعة المجموعة. من المستحيل تحميل الحقول التي تحتوي على حجم كبير من البيانات في الذاكرة إذا تجاوز حجم البيانات سعة الذاكرة، وهي الحالة المعتادة للتطبيقات التي تعتمد على الذكاء الاصطناعي.</p>
-<p>لحل مثل هذه المشكلات، يقدم Milvus نظام mmap لموازنة تحميل البيانات الساخنة والباردة في المجموعات. كما هو موضح في الشكل الأيمن أعلاه، يمكنك تهيئة Milvus لتعيين خرائط الذاكرة للبيانات الأولية في حقول معينة بدلاً من تحميلها بالكامل في الذاكرة. بهذه الطريقة، يمكنك الحصول على وصول مباشر للذاكرة إلى الحقول دون القلق بشأن مشاكل الذاكرة وتوسيع سعة المجموعة.</p>
-<p>من خلال مقارنة إجراءات وضع البيانات في الشكلين الأيسر والأيمن، يمكنك معرفة أن استخدام الذاكرة أعلى بكثير في الشكل الأيسر منه في الشكل الأيمن. مع تمكين mmap، يتم إلغاء تحميل البيانات التي كان يجب تحميلها في الذاكرة إلى القرص الصلب وتخزينها مؤقتًا في ذاكرة التخزين المؤقت للصفحات في نظام التشغيل، مما يقلل من بصمة الذاكرة. ومع ذلك، قد يؤدي فشل الوصول إلى ذاكرة التخزين المؤقت إلى تدهور الأداء. لمزيد من التفاصيل، راجع <a href="https://en.wikipedia.org/wiki/Mmap">هذه المقالة</a>.</p>
-<p>عندما تقوم بتكوين mmap على Milvus، هناك دائمًا مبدأ يجب عليك الالتزام به: احتفظ دائمًا بالبيانات والفهارس التي يتم الوصول إليها بشكل متكرر محملة بالكامل في الذاكرة واستخدم mmap لتلك الموجودة في الحقول المتبقية.</p>
-<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">استخدام mmap في ملفوس<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
+   <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" /> 
+   <span>توضيح mmap</span>
+  
+ </span></p>
+<p>يُعد Milvus نظام قاعدة بيانات كثيف الاستخدام للذاكرة، ويحدد حجم الذاكرة المتاحة سعة المجموعة. ويُعد تحميل الحقول التي تحتوي على حجم كبير من البيانات إلى الذاكرة أمرًا مستحيلًا إذا تجاوز حجم البيانات سعة الذاكرة، وهو ما يحدث عادةً في التطبيقات التي تعتمد على الذكاء الاصطناعي.</p>
+<p>لحل هذه المشكلات، يقدم Milvus ميزة mmap لتحقيق التوازن بين تحميل البيانات الساخنة والباردة في المجموعات. كما هو موضح في الشكل الأيمن أعلاه، يمكنك تكوين Milvus لتعيين خريطة ذاكرة للبيانات الأولية في حقول معينة بدلاً من تحميلها بالكامل في الذاكرة. وبهذه الطريقة، يمكنك الوصول المباشر إلى الحقول عبر الذاكرة دون القلق بشأن مشكلات الذاكرة وتوسيع سعة المجموعة.</p>
+<p>من خلال مقارنة إجراءات وضع البيانات في الشكلين الأيمن والأيسر، يمكنك ملاحظة أن استخدام الذاكرة أعلى بكثير في الشكل الأيسر مقارنةً بالشكل الأيمن. عند تمكين mmap، يتم تفريغ البيانات التي كان من المفترض تحميلها إلى الذاكرة إلى القرص الصلب وتخزينها مؤقتًا في ذاكرة التخزين المؤقت للصفحات الخاصة بنظام التشغيل، مما يقلل من حجم الذاكرة المستخدمة. ومع ذلك، قد تؤدي حالات الفشل في الوصول إلى ذاكرة التخزين المؤقت إلى انخفاض الأداء. لمزيد من التفاصيل، راجع <a href="https://en.wikipedia.org/wiki/Mmap">هذه المقالة</a>.</p>
+<p>عند تكوين mmap على Milvus، هناك مبدأ يجب عليك الالتزام به دائمًا: احرص دائمًا على إبقاء البيانات والفهارس التي يتم الوصول إليها بشكل متكرر محملة بالكامل في الذاكرة، واستخدم mmap لتلك الموجودة في الحقول المتبقية.</p>
+<h2 id="Use-mmap-in-Milvus" class="common-anchor-header">استخدام mmap في Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,7 +66,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus إعدادات mmap هرمية على المستويات العامة والحقل والفهرس والتجميع، حيث تكون الأولوية لمستوى الفهرس والحقل على مستوى التجميع، ومستوى التجميع على المستوى العام.</p>
+    </button></h2><p>يوفر Milvus إعدادات mmap هرمية على المستويات العامة، والحقل، والفهرس، والمجموعة، حيث تكون مستويات الفهرس والحقل لها الأسبقية على مستوى المجموعة، ومستوى المجموعة له الأسبقية على المستوى العام.</p>
 <h3 id="Global-mmap-settings" class="common-anchor-header">إعدادات mmap العامة<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>الإعداد على مستوى المجموعة هو الإعداد العام وله الأسبقية الأدنى. يوفر Milvus العديد من الإعدادات المتعلقة ب mmap في <code translate="no">milvus.yaml</code>. سيتم تطبيق هذه الإعدادات على جميع المجموعات في المجموعة.</p>
+    </button></h3><p>يُعد الإعداد على مستوى المجموعة هو الإعداد العام وله الأولوية الأدنى. يوفر Milvus عدة إعدادات متعلقة بـ mmap في <code translate="no">milvus.yaml</code>. ستنطبق هذه الإعدادات على جميع المجموعات في المجموعة.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -100,32 +102,32 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
-     <td><p>تحديد ما إذا كان سيتم تعيين تعيين البيانات الأولية لجميع الحقول القياسية في الذاكرة. يؤدي تعيين هذا إلى <code translate="no">true</code> إلى جعل Milvus يقوم بتعيين البيانات الأولية لبيانات الحقول القياسية للمجموعة في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل مقابل هذه المجموعة.</p></td>
+     <td><p>يحدد ما إذا كان سيتم تعيين البيانات الأولية لجميع الحقول القياسية في الذاكرة. يؤدي تعيين هذا الإعداد إلى <code translate="no">true</code> إلى قيام Milvus بتعيين البيانات الأولية للحقول القياسية لمجموعة ما في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل لهذه المجموعة.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarIndex</code></p></td>
-     <td><p>يحدد ما إذا كان سيتم تعيين تعيين جميع فهارس الحقول العددية في الذاكرة. يؤدي تعيين هذا إلى <code translate="no">true</code> إلى جعل Milvus يقوم بتعيين فهارس الحقول العددية للمجموعة في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل مقابل هذه المجموعة.</p><p>حاليًا، يتم دعم الحقل العددي فقط باستخدام نوع الفهرس التالي:</p><ul><li>مقلوب</li></ul></td>
+     <td><p>يحدد ما إذا كان سيتم تعيين جميع فهارس الحقول القياسية في الذاكرة. يؤدي تعيين هذا الخيار إلى " <code translate="no">true</code> " إلى قيام Milvus بتعيين فهارس الحقول القياسية لمجموعة ما في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل لهذه المجموعة.</p><p>حاليًا، لا يُدعم سوى الحقل القياسي الذي يستخدم نوع الفهرس التالي:</p><ul><li>INVERTED</li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorField</code></p></td>
-     <td><p>يحدد ما إذا كان سيتم تعيين البيانات الأولية لجميع الحقول المتجهة إلى الذاكرة. يؤدي تعيين هذا إلى <code translate="no">true</code> إلى جعل Milvus يقوم بتعيين البيانات الأولية لبيانات الحقل المتجه لمجموعة ما في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل مقابل هذه المجموعة.</p></td>
+     <td><p>يحدد ما إذا كان سيتم تعيين البيانات الأولية لجميع الحقول المتجهة في الذاكرة. يؤدي تعيين هذه القيمة إلى <code translate="no">true</code> إلى قيام Milvus بتعيين البيانات الأولية للحقول المتجهة لمجموعة ما في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل لهذه المجموعة.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
-     <td><p>يحدد ما إذا كان سيتم تعيين تعيين جميع فهارس الحقول المتجهة إلى الذاكرة. يؤدي تعيين هذا الخيار إلى <code translate="no">true</code> إلى جعل Milvus يقوم بتعيين فهارس الحقول المتجهة للمجموعة في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل مقابل هذه المجموعة.</p><p>حاليًا، يتم دعم الحقول المتجهة التي تستخدم أنواع الفهارس التالية فقط:</p><ul><li><p>مسطحة</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>متفرق_مقلوب_الفهرس</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p>يحدد ما إذا كان سيتم تعيين جميع فهارس الحقول المتجهة إلى الذاكرة. يؤدي تعيين هذه القيمة إلى <code translate="no">true</code> إلى قيام Milvus بتعيين فهارس الحقول المتجهة لمجموعة ما إلى الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل لهذه المجموعة.</p><p>حاليًا، لا يتم دعم سوى الحقول المتجهة التي تستخدم أنواع الفهارس التالية:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>SPARSE_INVERTED_INDEX</p></li><li><p>SPARSE_WAND</p></li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>يحدد المسار إلى الملفات المعينة بالذاكرة. تطبق القيمة الافتراضية إذا تُركت غير محددة. </p><p>يشير العنصر النائب <code translate="no">localStorage.path</code> في القيمة الافتراضية إلى محرك الأقراص الثابتة لـ Milvus QueryNodes. تأكد من احتواء QueryNodes الخاصة بك على محرك أقراص ثابتة عالية الأداء للحصول على مزايا mmap المثلى.</p></td>
+     <td><p>يحدد المسار إلى الملفات المخططة في الذاكرة. يتم تطبيق القيمة الافتراضية إذا لم يتم تحديد هذا. </p><p>يشير العنصر النائب « <code translate="no">localStorage.path</code> » في القيمة الافتراضية إلى القرص الصلب الخاص بـ Milvus QueryNodes. تأكد من أن QueryNodes لديك مزودة بقرص صلب عالي الأداء للاستفادة المثلى من مزايا mmap.</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>لتطبيق الإعدادات المذكورة أعلاه على مجموعة Milvus العنقودية الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/v2.6.x/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
-<p>في بعض الأحيان، تكون إعدادات mmap العامة غير مرنة عند مواجهة حالات استخدام معينة. ولتطبيق إعدادات بديلة على مجموعة معينة أو فهارسها، فكر في تكوين mmap خاص بمجموعة أو حقل أو فهرس معين. تحتاج إلى تحرير مجموعة وتحميلها قبل أن تدخل التغييرات على إعدادات mmap حيز التنفيذ.</p>
+<p>لتطبيق الإعدادات المذكورة أعلاه على مجموعة Milvus الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">"تكوين Milvus باستخدام Helm</a> " و" <a href="/docs/ar/v2.6.x/configure_operator.md">تكوين Milvus باستخدام Milvus Operators</a>".</p>
+<p>في بعض الأحيان، لا تكون إعدادات mmap العامة مرنة عند التعامل مع حالات استخدام معينة. لتطبيق إعدادات بديلة على مجموعة معينة أو فهارسها، ضع في اعتبارك تكوين mmap خاص بمجموعة أو حقل أو فهرس. تحتاج إلى تحرير مجموعة وتحميلها قبل أن تصبح التغييرات في إعدادات mmap سارية المفعول.</p>
 <h3 id="Field-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالحقل<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,10 +143,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتكوين mmap الخاص بالحقل، تحتاج إلى تضمين المعلمة <code translate="no">mmap_enabled</code> عند إضافة حقل. يمكنك تمكين mmap mmap على هذا الحقل المحدد عن طريق تعيين هذه المعلمة إلى <code translate="no">True</code>.</p>
+    </button></h3><p>لتكوين mmap الخاص بالحقل، تحتاج إلى تضمين المعلمة <code translate="no">mmap_enabled</code> عند إضافة حقل. يمكنك تمكين mmap في هذا الحقل المحدد عن طريق تعيين هذه المعلمة إلى <code translate="no">True</code>.</p>
 <p>يوضح المثال التالي كيفية تكوين mmap الخاص بالحقل عند إضافة حقل.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -276,7 +283,7 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         &quot;max_length&quot;: 512
     },
     &quot;isPrimary&quot;: true,
-    &quot;auto_id&quot;: false
+    &quot;autoId&quot;: false
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
@@ -330,9 +337,9 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>ضع في اعتبارك تمكين mmap للحقول التي تخزن بيانات كبيرة الحجم. كل من الحقول القياسية والحقول المتجهة مدعومة.</p>
+<p>ضع في اعتبارك تمكين mmap للحقول التي تخزن بيانات ذات حجم كبير. يتم دعم كل من الحقول القياسية والحقول المتجهة.</p>
 </div>
-<p>بعد ذلك، يمكنك إنشاء مجموعة باستخدام المخطط الذي تم إنشاؤه أعلاه. عند تلقي طلب لتحميل المجموعة، يستخدم Milvus خرائط الذاكرة البيانات الأولية لحقل <strong>doc_chunk</strong> في الذاكرة.</p>
+<p>بعد ذلك، يمكنك إنشاء مجموعة باستخدام المخطط الذي تم إنشاؤه أعلاه. عند تلقي طلب لتحميل المجموعة، يستخدم Milvus خرائط الذاكرة لتخزين البيانات الأولية لحقل <strong>doc_chunk</strong> في الذاكرة.</p>
 <h3 id="Index-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالفهرس<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,7 +358,12 @@ curl --request POST \
     </button></h3><p>لتكوين mmap الخاص بالفهرس، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enable</code> في معلمات الفهرس عند إضافة الفهرس. يمكنك تمكين mmap على هذا الفهرس المحدد عن طريق تعيين الخاصية إلى <code translate="no">true</code>.</p>
 <p>يوضح المثال التالي كيفية تكوين mmap الخاص بالفهرس عند إضافة فهرس.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a varchar field</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;title&quot;</span>,
@@ -450,9 +462,9 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>ينطبق هذا على فهارس كل من الحقول المتجهة والقياسية.</p>
+<p>ينطبق هذا على فهارس الحقول المتجهة والقيمية على حد سواء.</p>
 </div>
-<p>ثم يمكنك الرجوع إلى معلمات الفهرس في مجموعة. عند تلقي طلب لتحميل المجموعة، يقوم ميلفوس بتعيين ذاكرة فهرس حقل <strong>العنوان</strong> في الذاكرة.</p>
+<p>ثم يمكنك الرجوع إلى معلمات الفهرس في المجموعة. عند تلقي طلب لتحميل المجموعة، يقوم Milvus بتعيين فهرس حقل <strong>العنوان</strong> في الذاكرة.</p>
 <h3 id="Collection-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالمجموعة<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -468,10 +480,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لتكوين إستراتيجية mmap على مستوى المجموعة، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enabled</code> في طلب إنشاء مجموعة. يمكنك تمكين mmap لمجموعة من خلال تعيين هذه الخاصية إلى <code translate="no">true</code>.</p>
-<p>يوضح المثال التالي كيفية تمكين mmap في مجموعة تسمى <strong>my_collection</strong> عند إنشائها. عند تلقي طلب لتحميل المجموعة، يقوم Milvus بتعيين ذاكرة Milvus للبيانات الأولية لجميع الحقول في الذاكرة.</p>
+    </button></h3><p>لتكوين استراتيجية mmap على مستوى المجموعة، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enabled</code> في طلب إنشاء المجموعة. يمكنك تمكين mmap لمجموعة ما عن طريق تعيين هذه الخاصية إلى <code translate="no">true</code>.</p>
+<p>يوضح المثال التالي كيفية تمكين mmap في مجموعة تُسمى <strong>my_collection</strong> عند إنشائها. عند تلقي طلب لتحميل المجموعة، يقوم Milvus بتعيين خريطة ذاكرة للبيانات الأولية لجميع الحقول في الذاكرة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Enable mmap when creating a collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -507,9 +524,14 @@ client.createCollection(req);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك أيضًا تغيير إعدادات mmap لمجموعة موجودة.</p>
+<p>يمكنك أيضًا تغيير إعدادات mmap لمجموعة موجودة بالفعل.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">نودجيز</a> <a href="#go">جو</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Release collection before change mmap settings</span>
 client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
@@ -594,4 +616,4 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تحتاج إلى تحرير المجموعة لإجراء تغييرات على خصائصها وإعادة تحميل المجموعة لجعل التغييرات نافذة المفعول.</p>
+<p>تحتاج إلى تحرير المجموعة لإجراء تغييرات على خصائصها وإعادة تحميل المجموعة لتصبح التغييرات سارية المفعول.</p>

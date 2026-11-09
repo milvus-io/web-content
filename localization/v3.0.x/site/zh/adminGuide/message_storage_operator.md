@@ -25,7 +25,7 @@ summary: 了解如何使用 Milvus Operator 配置消息存储。
 <p>您需要指定一个配置文件，以便使用 Milvus Operator 启动 Milvus 集群。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您只需编辑 `<code translate="no">milvus_cluster_default.yaml</code> ` 中的代码模板即可配置第三方依赖项。以下各节将分别介绍如何配置对象存储、etcd 和 Pulsar。</p>
+<p>您只需编辑<code translate="no">milvus_cluster_default.yaml</code> 中的代码模板即可配置第三方依赖项。以下各节将分别介绍如何配置对象存储、etcd 和 Pulsar。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ summary: 了解如何使用 Milvus Operator 配置消息存储。
 </ul></li>
 <li>Milvus 系统运行期间无法更改消息存储。</li>
 <li>仅支持 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级至 Milvus v3.0.3 时，必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</li>
+<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级至 Milvus v3.0.5 时，必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">配置 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -128,7 +128,7 @@ summary: 了解如何使用 Milvus Operator 配置消息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker 是一款专为对象存储设计的云原生预写日志（WAL）。它具有高吞吐量、低操作开销和无缝可扩展性。更多详细信息，请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
+    </button></h2><p>Woodpecker 是一款专为对象存储设计的云原生预写日志（WAL）。它具有高吞吐量、低运维开销和无缝可扩展性。更多详情，请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">配置 Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -312,7 +312,7 @@ summary: 了解如何使用 Milvus Operator 配置消息存储。
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Operator v0.8.5 及更高版本支持 SASL 配置。</p>
+<p>Operator v0.8.5 或更高版本支持 SASL 配置。</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">内部 Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"

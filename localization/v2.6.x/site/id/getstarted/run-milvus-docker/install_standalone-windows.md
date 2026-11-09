@@ -90,7 +90,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 </code></pre>
 <p>Setelah menjalankan skrip instalasi:​</p>
 <ul>
-<li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai di port <strong>19530</strong>.​</p></li>
+<li><p>Sebuah kontainer Docker bernama <strong>milvus-standalone</strong> telah dimulai pada port <strong>19530</strong>.​</p></li>
 <li><p>Embed etcd diinstal bersama Milvus dalam kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke ` <strong>embedEtcd.yaml</strong> ` di folder saat ini.​</p></li>
 <li><p>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.​</p></li>
 </ul>
@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Buka Docker Desktop dalam mode administrator dengan mengklik kanan dan memilih <strong>Jalankan sebagai administrator</strong>.</p></li>
 <li><p>Jalankan perintah berikut di PowerShell atau Command Prompt Windows untuk mengunduh berkas konfigurasi Docker Compose untuk Milvus Standalone dan memulai Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Unduh berkas konfigurasi Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Jalankan Milvus.​</p>
@@ -307,7 +307,7 @@ C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
 
 </code></pre></li>
-<li><p>Pastikan Anda telah menjalankan Docker Desktop dalam mode <strong>administrator</strong>.</p>
+<li><p>Pastikan Anda telah menjalankan Docker Desktop dalam mode <strong>administrator</strong>.​</p>
 <p>Pastikan Anda telah menjalankan Docker Desktop dalam mode administrator. Untuk melakukannya, klik kanan pada <strong>Docker Desktop</strong> dan pilih " <strong>Jalankan sebagai administrator</strong>".​</p>
 <p><span class="img-wrapper">
   
@@ -412,7 +412,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><a href="/docs/id/v2.6.x/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/v2.6.x/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

@@ -37,7 +37,7 @@ title: Docker（Linux）でMilvusを実行する
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">Dockerをインストールしてください</a>。</li>
+<li><a href="https://docs.docker.com/get-docker/">Docker をインストールしてください</a>。</li>
 <li>インストール前に、<a href="/docs/ja/prerequisite-docker.md">ハードウェアおよびソフトウェアの要件を確認してください</a>。</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Docker での Milvus のインストール<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
@@ -55,7 +55,7 @@ title: Docker（Linux）でMilvusを実行する
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusには、Dockerコンテナとしてインストールするためのインストールスクリプトが用意されています。このスクリプトは<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvusのリポジトリ</a>から入手できます。新しいデプロイを開始する前に、スクリプトをダウンロードして内容を確認してください:</p>
+    </button></h2><p>Milvus には、Docker コンテナとしてインストールするためのインストールスクリプトが用意されています。このスクリプトは<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh">Milvus リポジトリ</a>から入手できます。新しいデプロイを開始する前に、スクリプトをダウンロードして内容を確認してください:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the installation script</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh</span>
 <span class="hljs-meta prompt_">
@@ -66,7 +66,7 @@ title: Docker（Linux）でMilvusを実行する
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>スクリプトは、Milvusの<code translate="no">master</code> ブランチからダウンロードされます。Dockerイメージのタグはスクリプト内で定義されており、v3.0.3とは異なる場合があります。その特定のリリースをインストールするには、「<a href="/docs/ja/install_standalone-docker-compose.md">Docker ComposeでMilvusを実行する</a>」に記載されているバージョン指定の設定を使用してください。</p>
+<p>スクリプトは、Milvusの<code translate="no">master</code> ブランチからダウンロードされます。Dockerイメージのタグはスクリプト内で定義されており、v3.0.5とは異なる場合があります。その特定のリリースをインストールするには、「<a href="/docs/ja/install_standalone-docker-compose.md">Docker ComposeでMilvusを実行する</a>」に記載されているバージョン指定の設定を使用してください。</p>
 <p>この Docker デプロイでは、<strong>Woodpecker</strong> <strong>をローカルファイルシステム</strong>を WAL バックエンドとして実行するため、外部のメッセージキューサービスは必要ありません。<a href="/docs/ja/woodpecker.md">Woodpecker を</a>参照してください。</p>
 <p><a href="/docs/ja/milvus_backup_overview.md">Backupを</a>スタンドアロン展開モードで使用する場合は、<a href="/docs/ja/install_standalone-docker-compose.md">Docker Composeによる</a>展開方法を使用することを推奨します。</p>
 <p>イメージの取得で問題が発生した場合は、問題の詳細を明記の上、<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p>
@@ -75,15 +75,15 @@ title: Docker（Linux）でMilvusを実行する
 <ul>
 <li>「milvus-standalone」という名前の Docker コンテナがポート<strong>19530</strong> で起動しました。</li>
 <li>Milvus とともに、同じコンテナ内に埋め込み型の etcd がインストールされ、ポート<strong>2379</strong> で動作しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。</li>
-<li>Milvusのデフォルト設定を変更するには、現在のフォルダ内の<strong>user.yamlファイル</strong>に設定を追加し、サービスを再起動してください。</li>
+<li>Milvusのデフォルト設定を変更するには、現在のフォルダ内の<strong>user.yamlファイルに</strong>設定を追加し、サービスを再起動してください。</li>
 <li>Milvusのデータボリュームは、現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングされています。</li>
 </ul>
 <p>実際のイメージと正常性を確認してください:</p>
 <pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
 docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="/docs/ja/quickstart.md">クイックスタート</a>の手順に進む前に、<code translate="no">healthy</code> が表示されるまでお待ちください。このサーバーを使用する場合は、SDKを<code translate="no">http://localhost:19530</code> に接続してください。ローカルの<code translate="no">.db</code> URIに接続すると、代わりにMilvus Liteが起動します。</p>
-<p><code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスして、お使いの Milvus インスタンスに関する詳細を確認できます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
+<p><a href="/docs/ja/quickstart.md">クイックスタートの手</a>順に進む前に、<code translate="no">healthy</code> が表示されるまでお待ちください。このサーバーを使用する場合は、SDKを<code translate="no">http://localhost:19530</code> に接続してください。ローカルの<code translate="no">.db</code> URIに接続すると、代わりにMilvus Liteが起動します。</p>
+<p><code translate="no">http://127.0.0.1:9091/webui/</code> から Milvus WebUI にアクセスし、お使いの Milvus インスタンスに関する詳細を確認できます。詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUI</a> を参照してください。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（オプション）Milvusの設定を更新する<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スクリプトの `<code translate="no">upgrade</code> ` コマンドは、<code translate="no">master</code> からスクリプトをダウンロードし、そのスクリプトで選択されたイメージを使用してコンテナを再作成します。このコマンドは、サポートされているソースからターゲットへのバージョンパスを検証せず、生成された設定ファイルを再作成する場合があります。任意の古いデプロイメントが v3.0.3 へ安全にアップグレードできることを保証するものではないため、そのように扱わないでください。</p>
+    </button></h2><p>スクリプトの `<code translate="no">upgrade</code> ` コマンドは、<code translate="no">master</code> からスクリプトをダウンロードし、そのスクリプトで選択されたイメージを使用してコンテナを再作成します。このコマンドは、サポートされているソースからターゲットへのバージョンパスを検証せず、生成された設定ファイルを再作成する場合があります。任意の古いデプロイメントが v3.0.5 へ安全にアップグレードできることを保証するものではないため、そのように扱わないでください。</p>
 <p>アップグレードの前に、メタデータ、永続データ、<code translate="no">embedEtcd.yaml</code> 、および<code translate="no">user.yaml</code> をバックアップしてください。ターゲットバージョン、メッセージキュー、ストレージの互換性を確認し、本番環境以外で復旧動作を検証してください。Docker Compose で管理されているデプロイメントについては、「<a href="/docs/ja/upgrade_milvus_standalone-docker.md">Docker Compose を使用した Milvus スタンドアロンのアップグレード</a>」の手順に従ってください。スクリプトで管理されているコンテナには、その手順を直接適用しないでください。</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvusの停止と削除<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,7 +164,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>デフォルトでは、このデプロイメントはメッセージキューとして<strong>Woodpecker</strong>（ローカルファイルシステム WAL）<strong>を</strong>、メタデータ用に<strong>組み込みの etcd</strong>を実行します。他にインストールする必要はありません。別のメッセージキューを使用する場合、または外部オブジェクトストレージ／メタデータに接続する場合は、以下を参照してください：</p>
+    </button></h2><p>デフォルトでは、このデプロイメントはメッセージキューとして<strong>Woodpecker</strong>（ローカルファイルシステム WAL）、メタデータ用に<strong>組み込みの etcd</strong>を実行しており、他にインストールする必要はありません。別のメッセージキューを使用する場合、または外部オブジェクトストレージ／メタデータに接続する場合は、以下を参照してください：</p>
 <ul>
 <li>メッセージキュー：<a href="/docs/ja/woodpecker.md">Woodpecker</a>（デフォルト） ·<a href="/docs/ja/mq_pulsar.md">Pulsar</a>·<a href="/docs/ja/mq_kafka.md">Kafka</a>·<a href="/docs/ja/mq_rocksmq.md">RocksMQ</a></li>
 <li>オブジェクトストレージ：<a href="/docs/ja/deploy_s3.md">MinIO</a>（デフォルト） ·<a href="/docs/ja/deploy_s3.md">AWS S3</a>·<a href="/docs/ja/abs.md">Azure Blob</a>·<a href="/docs/ja/gcs.md">GCP Cloud Storage</a>·<a href="/docs/ja/deploy_s3.md">Aliyun OSS</a>·<a href="/docs/ja/deploy_s3.md">Tencent COS</a>·<a href="/docs/ja/deploy_s3.md">Huawei OBS</a>·<a href="/docs/ja/deploy_s3.md">S3互換</a></li>
@@ -190,7 +190,7 @@ EOF
       </svg>
     </button></h2><p>Docker に Milvus をインストールしたら、次のことができます:</p>
 <ul>
-<li><p><a href="/docs/ja/quickstart.md">「クイックスタート」を</a>参照して、Milvusの機能を確認してください。</p></li>
+<li><p><a href="/docs/ja/quickstart.md">「クイックスタート</a>」を参照して、Milvusの機能を確認してください。</p></li>
 <li><p>Milvusの基本的な操作を学びましょう：</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>

@@ -5,9 +5,9 @@ related_key: Docker
 summary: >-
   تعرف على كيفية تثبيت Milvus بشكل مستقل باستخدام Docker Desktop لنظام التشغيل
   Windows.
-title: تشغيل Milvus في Docker (Windows)
+title: تشغيل Milvus في Docker (ويندوز)
 ---
-<h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">تشغيل Milvus في Docker (Windows)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Windows" class="common-anchor-header">تشغيل Milvus في Docker (ويندوز)<button data-href="#Run-Milvus-in-Docker-Windows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,7 +68,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>اختر أحد المحطات الطرفية التالية. قم بتشغيل الأوامر في دليل عمل قابل للكتابة؛ حيث يقوم البرنامج النصي بتخزين ملفات التكوين ودليل <code translate="no">volumes</code> هناك.</p>
-<p>يتم تنزيل البرنامج النصي من فرع Milvus <code translate="no">master</code>. يتم تعريف علامة صورة Docker الخاصة به في البرنامج النصي وقد تختلف عن الإصدار v3.0.3. لنشر هذا الإصدار بالضبط، استخدم تكوين Docker Compose المحدد بالإصدار أدناه.</p>
+<p>يتم تنزيل البرنامج النصي من فرع Milvus <code translate="no">master</code>. يتم تعريف علامة صورة Docker الخاصة به في البرنامج النصي وقد تختلف عن الإصدار v3.0.5. لنشر هذا الإصدار بالضبط، استخدم تكوين Docker Compose المحدد الإصدار أدناه.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">من PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,7 +158,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم التكوين المرفق بالإصدار v3.0.3. قم بتشغيل تسلسل الأوامر الخاص بمحطة العمل الخاصة بك فقط.</p>
+    </button></h2><p>استخدم التكوين المرفق بالإصدار v3.0.5. قم بتشغيل تسلسل الأوامر الخاص بمحطة العمل الخاصة بك فقط.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">من PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>قم بتنزيل التكوين وابدأ تشغيل Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -195,7 +195,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>قم بتنزيل ملف التكوين وابدأ تشغيل Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -215,7 +215,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>افتح توزيع WSL الخاص بك، ثم قم بتشغيل أوامر Linux التالية:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -253,12 +253,12 @@ docker compose ps
     </button></h3><p>يستخدم Milvus حاويات Linux. تحقق من Docker Desktop ووحدة WSL 2 الخلفية الخاصة به قبل إعادة محاولة التثبيت:</p>
 <ol>
 <li><p>قم بتمكين المحاكاة الافتراضية للأجهزة في BIOS/UEFI إذا أظهر <strong>«مدير المهام»</strong> &gt; <strong>«الأداء»</strong> أنها معطلة. راجع <a href="https://docs.docker.com/desktop/setup/install/windows-install/#system-requirements">متطلبات Docker Desktop لنظام Windows</a>.</p></li>
-<li><p>ابدأ تشغيل Docker Desktop من قائمة «ابدأ» في Windows وانتظر حتى يتم تشغيل محركه. قد تكون امتيازات المسؤول مطلوبة لتثبيت WSL أو تحديثه أو لأوضاع تثبيت Docker Desktop محددة؛ وهي ليست متطلبًا عامًا لتشغيل حاويات Linux باستخدام الخلفية WSL 2.</p></li>
+<li><p>ابدأ تشغيل Docker Desktop من قائمة «ابدأ» في Windows وانتظر حتى يتم تشغيل محركه. قد تكون امتيازات المسؤول مطلوبة لتثبيت أو تحديث WSL أو لأوضاع تثبيت Docker Desktop محددة؛ وهي ليست متطلبًا عامًا لتشغيل حاويات Linux باستخدام الخلفية WSL 2.</p></li>
 <li><p>تحقق من WSL من محطة Windows. إذا كان يحتاج إلى تحديث، فقم بتشغيل أمر التحديث باستخدام الامتيازات التي يطلبها Windows:</p>
 <pre><code translate="no" class="language-powershell">wsl --version
 wsl --update
 </code></pre></li>
-<li><p>قم بتمكين <strong>استخدام المحرك المستند إلى WSL 2</strong> في Docker Desktop. إذا كانت قائمة Docker تعرض خيار <strong>«التبديل إلى حاويات Linux</strong>»، فحدد هذا الخيار. لا تقم بالتبديل إلى حاويات Windows لاستكشاف أخطاء صورة Milvus Linux وإصلاحها.</p></li>
+<li><p>قم بتمكين <strong>استخدام المحرك المستند إلى WSL 2</strong> في Docker Desktop. إذا كانت قائمة Docker تعرض خ <strong>يار «التبديل إلى حاويات Linux</strong>»، فحدد هذا الخيار. لا تقم بالتبديل إلى حاويات Windows لاستكشاف أخطاء صورة Milvus Linux وإصلاحها.</p></li>
 <li><p>قم بتشغيل الفحص التالي في محطة العمل التي تستخدمها للتثبيت:</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>

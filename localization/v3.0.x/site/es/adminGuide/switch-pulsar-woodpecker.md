@@ -72,7 +72,7 @@ summary: >-
 <p>Si el cambio se ha realizado correctamente, se registrará el mensaje « <code translate="no">[mqTypeValue=woodpecker]</code> ».</p>
 <p><strong>Paso 4: (Opcional) Detén Pulsar y realiza la limpieza.</strong> Para Pulsar <strong>integrado</strong>, desactiva Pulsar y activa Woodpecker; a continuación, elimina los PVC de Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -172,7 +172,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Paso 3: Comprueba que el cambio se haya completado.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Si el cambio se ha realizado correctamente, se registra en <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
+<p>Si el cambio se realiza correctamente, se registra en <code translate="no">[mqTypeValue=woodpecker]</code>.</p>
 <p><strong>Paso 4: Actualiza el tipo de MQ en el Operator.</strong> Actualiza la configuración gestionada por el Operator para que este no revierta el cambio. Crea <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -239,7 +239,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
   -H &quot;Content-Type: application/json&quot; \
   -d &#x27;{&quot;target_wal_name&quot;: &quot;pulsar&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Paso 4: Verifica que el cambio se haya completado.</strong></p>
+<p><strong>Paso 4: Verifica que la migración se haya completado.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>Si la migración se ha realizado correctamente, se registrará en el archivo de registro <code translate="no">[mqTypeValue=pulsar]</code>.</p>

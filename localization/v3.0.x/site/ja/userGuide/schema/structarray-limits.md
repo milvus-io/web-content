@@ -79,9 +79,11 @@ summary: >-
 <tr><td>Structはトップレベルのフィールド型にはできません。</td><td>StructArrayフィールドを、`<code translate="no">datatype=DataType.ARRAY</code> `として、`<code translate="no">element_type=DataType.STRUCT</code> `および`<code translate="no">struct_schema</code>`を指定して作成します。</td></tr>
 <tr><td>すべての要素は 1 つのスキーマを共有します。</td><td>StructArray フィールド内のすべての Struct 要素は、同じサブフィールドリストおよびサブフィールドのデータ型に従います。</td></tr>
 <tr><td><code translate="no">max_capacity</code> は必須です。</td><td>1 つのエンティティに含まれる Struct 要素の数は、StructArray フィールドに設定された<code translate="no">max_capacity</code> を超えてはなりません。</td></tr>
-<tr><td>既存のサブフィールドは固定されています。</td><td>既存のサブフィールドは固定されています。既存の StructArray フィールドに新しいサブフィールドを追加することはできません。サブフィールドのスキーマを変更するには、StructArray フィールドを削除し、更新されたスキーマで再度追加してください。</td></tr>
-<tr><td>ネストされた StructArray はサポートされていません。</td><td>StructArray フィールドには、ネストされた<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code> サブフィールドを含めることはできません。</td></tr>
+<tr><td>すべてのサブフィールドは、1 つの<code translate="no">max_capacity</code> を共有します。</td><td>すべてのサブフィールドは<code translate="no">max_capacity</code> を宣言する必要があり、StructArrayフィールドのすべてのサブフィールドは同じ値を宣言する必要があります。この値は0より大きく、<code translate="no">proxy.maxArrayCapacity</code> （デフォルトは4096）を超えてはなりません。</td></tr>
+<tr><td>既存のサブフィールドは固定されています。</td><td>既存の StructArray フィールドに新しいサブフィールドを追加することはできません。サブフィールドのスキーマを変更するには、StructArray フィールドを削除し、更新されたスキーマで再度追加してください。</td></tr>
+<tr><td>ネストされた StructArray はサポートされていません。</td><td>StructArrayフィールドには、ネストされた<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 、または<code translate="no">ArrayOfStruct</code> サブフィールドを含めることはできません。</td></tr>
 <tr><td>StructArray 内の関数はサポートされていません。</td><td>StructArray フィールドまたはそのサブフィールドに対して、フィールド関数を定義しないでください。</td></tr>
+<tr><td>サブフィールドではテキスト解析はサポートされていません。</td><td><code translate="no">enable_match</code> また、Struct サブフィールドの<code translate="no">enable_analyzer</code> 設定は、テキストインデックスがトップレベルのフィールドに対してのみ構築されるため、効果はありません。</td></tr>
 </tbody>
 </table>
 <p>スキーマ作成の例については、「<a href="/docs/ja/create-structarray-field.md">StructArray フィールドの作成」を</a>参照してください。</p>
@@ -148,7 +150,7 @@ summary: >-
 <tr><td>Null可能な StructArray フィールド</td><td>以下の可用性に関する注意事項に従い、StructArrayの親に対して<code translate="no">nullable=True</code> を設定してください。Structのサブフィールドを個別にNULL許容として設定しないでください。</td></tr>
 <tr><td>Python における NULL 値</td><td>PythonでStructArrayのNULL値を挿入するには、<code translate="no">None</code> を使用してください。<code translate="no">Null</code> や<code translate="no">null</code> は使用しないでください。</td></tr>
 <tr><td>NULLの適用範囲</td><td>NULLはStructArrayフィールド全体に適用されます。たとえば、<code translate="no">chunks=None</code> は、<code translate="no">chunks</code> がNULL可能である場合にのみ有効です。</td></tr>
-<tr><td>部分的にNullなStructArrayの値</td><td>StructArrayフィールドに有効な配列値が含まれている場合、同じ値内でNULLのサブフィールド配列と有効なサブフィールド配列を混在させないでください。</td></tr>
+<tr><td>部分的にNullなStructArrayの値</td><td>StructArrayフィールドに有効な配列値が含まれている場合、同じ値内でNULLのサブフィールド配列と有効なサブフィールド配列を混在させてはなりません。</td></tr>
 <tr><td>動的に追加される StructArray フィールド</td><td>以下の利用可能性に関する記述に従います。</td></tr>
 <tr><td>動的追加におけるNullable要件</td><td>既存のコレクションに追加される StructArray フィールドは、既存のエンティティには新しいフィールドの値がないため、null 許容でなければなりません。</td></tr>
 <tr><td>動的追加後の既存のエンティティ</td><td>既存エンティティは、追加されたStructArrayフィールドに対して<code translate="no">null</code> を返します。</td></tr>
@@ -171,7 +173,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray の挿入ペイロードには、以下の制限があります。</p>
+    </button></h2><p>StructArray の挿入ペイロードには、以下の制限があります：</p>
 <table>
 <thead>
 <tr><th>制限</th><th>詳細</th></tr>
@@ -185,7 +187,7 @@ summary: >-
 <tr><td>検索モードの重複</td><td>EmbeddingList 検索と要素レベルの検索の両方が必要な場合は、ベクトルを 2 つの別々のベクトルサブフィールドに書き込んでください。</td></tr>
 </tbody>
 </table>
-<h2 id="Index-and-metric-limits" class="common-anchor-header">インデックスおよびメトリックの制限<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
+<h2 id="Index-and-metric-limits" class="common-anchor-header">インデックスとメトリックの制限<button data-href="#Index-and-metric-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -211,8 +213,8 @@ summary: >-
 </tbody>
 </table>
 <p>両方のモードが必要な場合は、別々のベクトルサブフィールドを使用してください。たとえば、EmbeddingList 検索には<code translate="no">chunks[emb_list_vector]</code> を、要素レベルの検索には<code translate="no">chunks[emb]</code> を使用します。</p>
-<p>コレクションスキーマを設計する際、StructArray のベクトルサブフィールドはベクトルサブフィールドとしてカウントされます。ベクトルフィールドとベクトルサブフィールドの合計数が、対象のバージョンおよびサービスティアの制限内になるようにしてください。</p>
-<p>サポートされているインデックス型およびメトリック型のマトリックスについては、「<a href="/docs/ja/index-structarray-fields.md">インデックスの StructArray フィールド</a>」を参照してください。</p>
+<p>StructArray のベクトルサブフィールドは、コレクションレベルの制限<code translate="no">proxy.maxVectorFieldNum</code> （デフォルトは 10）に対するベクトルフィールドとしてカウントされます。ベクトルサブフィールドがコレクション内の唯一のベクトルフィールドである StructArray フィールドは有効であり、そのようなフィールドを削除するとコレクションにベクトルフィールドがなくなるため、削除は拒否されます。 ベクトルフィールドおよびベクトルサブフィールドの総数は、対象のバージョンおよびサービスティアの制限範囲内に収めてください。</p>
+<p>サポートされているインデックス型およびメトリック型の行列については、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス</a>」を参照してください。</p>
 <h2 id="Search-limits" class="common-anchor-header">検索の制限<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -231,7 +233,7 @@ summary: >-
     </button></h2><p>StructArray の検索動作には、以下の制限があります。</p>
 <table>
 <thead>
-<tr><th>検索の動作</th><th>サポートと制限</th></tr>
+<tr><th>検索動作</th><th>サポートと制限</th></tr>
 </thead>
 <tbody>
 <tr><td>基本的な EmbeddingList 検索</td><td><code translate="no">MAX_SIM*</code> メトリクスでインデックス付けされたStructArrayベクトルサブフィールドでサポートされています。エンティティレベルの結果を返します。</td></tr>
@@ -267,6 +269,29 @@ summary: >-
 <li><p>JSON パス構文、JSON 関数、配列コンテナ関数、テキスト一致関数、Geometry / GIS 関数、および Timestamptz 式は、StructArray の要素レベルの述語ではサポートされていません。</p></li>
 <li><p>単純なブール式ではなく、<code translate="no">$[has_code] == true</code> などの明示的なブール比較を使用することを推奨します。</p></li>
 </ul>
+<h2 id="Import-limits" class="common-anchor-header">インポートの制限<button data-href="#Import-limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>制限</th><th>詳細</th></tr>
+</thead>
+<tbody>
+<tr><td>ソースファイル形式</td><td>JSON、JSONL、CSV、および Parquet ファイルは、StructArray フィールドを含めることができます。NumPy ファイルは、トップレベルフィールドごとに 1 つのファイルで構成されており、StructArray データを提供することはできません。StructArray フィールドを含むコレクションには、JSON、CSV、または Parquet ファイルを使用してください。ファイルの形状については、「<a href="/docs/ja/prepare-source-data.md#StructArray-fields-in-source-files">ソースデータの準備</a>」を参照してください。</td></tr>
+</tbody>
+</table>
 <h2 id="Related-pages" class="common-anchor-header">関連ページ<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -283,8 +308,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>StructArray フィールドを作成するには、「<a href="/docs/ja/create-structarray-field.md">StructArray フィールドの作成</a>」を参照してください。</p></li>
-<li><p>データを挿入するには、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArray フィールドへのデータの挿入</a>」を参照してください。</p></li>
-<li><p>ベクトルおよびスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス作成</a>」を参照してください。</p></li>
-<li><p>StructArray のフィルタ構文を確認するには、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p></li>
+<li><p>StructArrayフィールドを作成するには、「<a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a>」を参照してください。</p></li>
+<li><p>データを挿入するには、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArrayフィールドへのデータの挿入</a>」を参照してください。</p></li>
+<li><p>ベクトルインデックスおよびスカラーインデックスを作成するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドへのインデックス付け</a>」を参照してください。</p></li>
+<li><p>StructArray フィルターの構文を確認するには、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p></li>
 </ol>

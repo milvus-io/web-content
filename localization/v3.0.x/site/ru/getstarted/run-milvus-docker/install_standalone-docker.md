@@ -66,8 +66,8 @@ title: Запуск Milvus в Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Скрипт загружается из ветки Milvus « <code translate="no">master</code> ». Тег образа Docker указан в скрипте и может отличаться от v3.0.3. Чтобы установить именно этот выпуск, воспользуйтесь конфигурацией с указанием версии, описанной в разделе <a href="/docs/ru/install_standalone-docker-compose.md">«Запуск Milvus с помощью Docker Compose</a>».</p>
-<p>При этом развертывании в Docker <strong>Woodpecker</strong> работает с <strong>локальной файловой системой</strong> в качестве бэкэнда WAL, поэтому внешний сервис очереди сообщений не требуется. См. раздел <a href="/docs/ru/woodpecker.md">«Woodpecker</a>».</p>
+<p>Скрипт загружается из ветки Milvus « <code translate="no">master</code> ». Тег образа Docker указан в скрипте и может отличаться от v3.0.5. Чтобы установить именно этот выпуск, воспользуйтесь конфигурацией с указанием версии, описанной в разделе <a href="/docs/ru/install_standalone-docker-compose.md">«Запуск Milvus с помощью Docker Compose</a>».</p>
+<p>При этом развертывании с помощью Docker <strong>Woodpecker</strong> работает с <strong>локальной файловой системой</strong> в качестве бэкэнда WAL, поэтому внешний сервис очереди сообщений не требуется. См. раздел <a href="/docs/ru/woodpecker.md">«Woodpecker</a>».</p>
 <p>Если вы хотите использовать <a href="/docs/ru/milvus_backup_overview.md">Backup</a> в автономном режиме развертывания, рекомендуется использовать метод развертывания с помощью <a href="/docs/ru/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Если у вас возникнут проблемы с загрузкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, указав подробности проблемы, и мы предоставим вам необходимую поддержку.</p>
 </div>
@@ -99,7 +99,7 @@ docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете изменить настройки Milvus в файле <strong>user.yaml</strong>, расположенном в текущей папке. Например, чтобы изменить адрес <code translate="no">proxy.healthCheckTimeout</code> на <code translate="no">1000</code> ms, можно изменить файл следующим образом:</p>
+    </button></h2><p>Вы можете изменить настройки Milvus в файле <strong>user.yaml</strong>, расположенном в текущей папке. Например, чтобы изменить адрес <code translate="no">proxy.healthCheckTimeout</code> на <code translate="no">1000</code> ms, можно отредактировать файл следующим образом:</p>
 <pre><code translate="no" class="language-shell">cat &lt;&lt; EOF &gt; user.yaml
 <span class="hljs-meta prompt_"># </span><span class="language-bash">Extra config to override default milvus.yaml</span>
 proxy:
@@ -125,8 +125,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Команда <code translate="no">upgrade</code> скрипта загружает скрипт с сайта <code translate="no">master</code> и заново создает контейнер с использованием образа, выбранного этим скриптом. Она не проверяет, поддерживается ли путь от исходной версии к целевой, и может заново создать сгенерированные файлы конфигурации. Не следует рассматривать это как гарантию того, что любое старое развертывание можно безопасно обновить до версии v3.0.3.</p>
-<p>Перед обновлением создайте резервные копии метаданных, постоянных данных, файла <code translate="no">embedEtcd.yaml</code> и файла <code translate="no">user.yaml</code>. Проверьте совместимость целевой версии, очереди сообщений и хранилища, а также проверьте возможность восстановления в тестовой среде. Для развертываний, управляемых с помощью Docker Compose, следуйте инструкциям из документа <a href="/docs/ru/upgrade_milvus_standalone-docker.md">«Обновление автономной версии Milvus с помощью Docker Compose»</a>; не применяйте эту процедуру напрямую к контейнеру, управляемому скриптом.</p>
+    </button></h2><p>Команда <code translate="no">upgrade</code> скрипта загружает скрипт с сайта <code translate="no">master</code> и заново создает контейнер, используя образ, выбранный этим скриптом. Она не проверяет, поддерживается ли путь от исходной версии к целевой, и может заново создать сгенерированные файлы конфигурации. Не следует рассматривать это как гарантию того, что любое старое развертывание можно безопасно обновить до версии v3.0.5.</p>
+<p>Перед обновлением создайте резервные копии метаданных, постоянных данных, файла <code translate="no">embedEtcd.yaml</code> и файла <code translate="no">user.yaml</code>. Проверьте совместимость целевой версии, очереди сообщений и хранилища, а также проверьте восстановление в тестовой среде. Для развертываний, управляемых с помощью Docker Compose, следуйте инструкциям <a href="/docs/ru/upgrade_milvus_standalone-docker.md">в</a> разделе <a href="/docs/ru/upgrade_milvus_standalone-docker.md">«Обновление автономной версии Milvus с помощью Docker Compose»</a>; не применяйте эту процедуру напрямую к контейнеру, управляемому скриптом.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Остановка и удаление Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -201,7 +201,7 @@ EOF
 <li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
 </ul></li>
 <li><p>Перед сменой версии Milvus ознакомьтесь с рекомендациями по обновлению на этой странице.</p></li>
-<li><p><a href="/docs/ru/scaleout.md">Масштабируйте кластер Milvus</a>.</p></li>
+<li><p><a href="/docs/ru/scaleout.md">Масштабируйте свой кластер Milvus</a>.</p></li>
 <li><p>Разверните кластер Milvus в облаке:</p>
 <ul>
 <li><a href="/docs/ru/eks.md">Amazon EKS</a></li>

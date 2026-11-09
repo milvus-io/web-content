@@ -63,11 +63,11 @@ title: 在 Docker 中运行 Milvus（Linux）
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.25 版本更新内容：</strong></p>
+<p><strong>v2.6.26 版本的新功能：</strong></p>
 <ul>
 <li><strong>流式处理节点</strong>：增强了数据处理能力</li>
 <li><strong>Woodpecker MQ</strong>：改进的消息队列，降低了维护开销，详情请参阅《<a href="/docs/zh/v2.6.x/use-woodpecker.md">使用 Woodpecker</a>》</li>
-<li><strong>架构优化</strong>：整合组件以提升性能</li>
+<li><strong>优化架构</strong>：整合组件以提升性能</li>
 </ul>
 <p>请务必下载最新脚本，以确保获得最新的配置和架构改进。</p>
 <p>如果您希望在独立部署模式下使用<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup，</a>建议采用<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>部署方式。</p>
@@ -80,7 +80,7 @@ title: 在 Docker 中运行 Milvus（Linux）
 <li>若要修改 Milvus 的默认配置，请在当前文件夹中的<strong>user.yaml</strong>文件中添加您的设置，然后重启服务。</li>
 <li>Milvus 数据卷已映射到当前目录下的<strong>volumes/milvus</strong>目录中。</li>
 </ul>
-<p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>您可以通过<code translate="no">http://127.0.0.1:9091/webui/</code> 访问 Milvus WebUI，以了解有关您的 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/v2.6.x/milvus-webui.md">Milvus WebUI</a>。</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">（可选）更新 Milvus 配置<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

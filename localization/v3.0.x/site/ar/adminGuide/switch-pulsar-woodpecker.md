@@ -72,7 +72,7 @@ summary: >-
 <p>يتم تسجيل " <code translate="no">[mqTypeValue=woodpecker]</code>" عند نجاح عملية التبديل.</p>
 <p><strong>الخطوة 4: (اختياري) إيقاف Pulsar وتنظيف النظام.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بتعطيل Pulsar وتمكين Woodpecker، ثم احذف PVCs الخاصة بـ Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -186,7 +186,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">kubectl patch -f change_configmap.yaml --patch-file change_configmap.yaml --type merge
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>الخطوة 5: (اختياري) أوقف Pulsar وقم بالتنظيف.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بإلغاء تثبيت إصدار Pulsar وحذف PVCs الخاصة به:</p>
+<p><strong>الخطوة 5: (اختياري) إيقاف Pulsar وتنظيف النظام.</strong> بالنسبة لـ Pulsar <strong>المدمج،</strong> قم بإلغاء تثبيت إصدار Pulsar وحذف PVCs الخاصة به:</p>
 <pre><code translate="no" class="language-shell">helm uninstall my-release-pulsar
 kubectl get pvc | grep my-release-pulsar
 kubectl delete pvc &lt;pulsar-pvc-name&gt; ...

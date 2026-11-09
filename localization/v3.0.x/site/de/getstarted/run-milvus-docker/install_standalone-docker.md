@@ -66,15 +66,15 @@ title: Milvus in Docker ausführen (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Das Skript wird aus dem Milvus- <code translate="no">master</code> -Zweig heruntergeladen. Sein Docker-Image-Tag ist im Skript definiert und kann von v3.0.3 abweichen. Um genau diese Version zu installieren, verwenden Sie die versionsspezifische Konfiguration unter <a href="/docs/de/install_standalone-docker-compose.md">„Milvus mit Docker Compose ausführen</a>“.</p>
+<p>Das Skript wird aus dem Milvus- <code translate="no">master</code> -Zweig heruntergeladen. Sein Docker-Image-Tag ist im Skript definiert und kann von v3.0.5 abweichen. Um genau diese Version zu installieren, verwenden Sie die versionsspezifische Konfiguration unter <a href="/docs/de/install_standalone-docker-compose.md">„Milvus mit Docker Compose ausführen</a>“.</p>
 <p>Bei dieser Docker-Bereitstellung wird <strong>Woodpecker</strong> mit dem <strong>lokalen Dateisystem</strong> als WAL-Backend ausgeführt, sodass kein externer Message-Queue-Dienst erforderlich ist. Siehe <a href="/docs/de/woodpecker.md">Woodpecker</a>.</p>
-<p>Wenn Sie <a href="/docs/de/milvus_backup_overview.md">„Backup“</a> im eigenständigen Bereitstellungsmodus nutzen möchten, wird die Verwendung der <a href="/docs/de/install_standalone-docker-compose.md">Docker-Compose-Bereitstellungsmethode</a> empfohlen.</p>
-<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
+<p>Wenn Sie <a href="/docs/de/milvus_backup_overview.md">„Backup“</a> im eigenständigen Bereitstellungsmodus verwenden möchten, wird die <a href="/docs/de/install_standalone-docker-compose.md">Docker-Compose-Bereitstellungsmethode</a> empfohlen.</p>
+<p>Sollten beim Abrufen des Images Probleme auftreten, kontaktieren Sie uns bitte unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit detaillierten Angaben zum Problem, und wir werden Ihnen die erforderliche Unterstützung zukommen lassen.</p>
 </div>
 <p>Nach Ausführung des Installationsskripts:</p>
 <ul>
 <li>Ein Docker-Container namens „milvus-standalone“ wurde am Port <strong>19530</strong> gestartet.</li>
-<li>Ein „embed etcd“ ist zusammen mit Milvus im selben Container installiert und läuft am Port <strong>2379</strong>. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner verweist.</li>
+<li>Ein „embed etcd“ ist zusammen mit Milvus im selben Container installiert und läuft am Port <strong>2379</strong>. Seine Konfigurationsdatei ist auf <strong>„embedEtcd.yaml“</strong> im aktuellen Ordner abgebildet.</li>
 <li>Um die Standardkonfiguration von Milvus zu ändern, fügen Sie Ihre Einstellungen zur Datei <strong>„user.yaml“</strong> im aktuellen Ordner hinzu und starten Sie den Dienst anschließend neu.</li>
 <li>Das Milvus-Datenvolume ist auf <strong>„volumes/milvus“</strong> im aktuellen Ordner abgebildet.</li>
 </ul>
@@ -125,7 +125,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Befehl „ <code translate="no">upgrade</code> “ des Skripts lädt das Skript von <code translate="no">master</code> herunter und erstellt den Container anhand des von diesem Skript ausgewählten Images neu. Dabei wird kein unterstützter Versionspfad von der Quelle zum Ziel überprüft, und generierte Konfigurationsdateien können neu erstellt werden. Betrachten Sie dies nicht als Garantie dafür, dass eine beliebige ältere Bereitstellung sicher auf Version 3.0.3 aktualisiert werden kann.</p>
+    </button></h2><p>Der Befehl „ <code translate="no">upgrade</code> “ des Skripts lädt das Skript von <code translate="no">master</code> herunter und erstellt den Container anhand des von diesem Skript ausgewählten Images neu. Er überprüft nicht, ob der Versionspfad von der Quelle zum Ziel unterstützt wird, und kann generierte Konfigurationsdateien neu erstellen. Betrachten Sie dies nicht als Garantie dafür, dass eine beliebige ältere Bereitstellung sicher auf Version 3.0.5 aktualisiert werden kann.</p>
 <p>Sichern Sie vor einem Upgrade Metadaten, persistente Daten, „ <code translate="no">embedEtcd.yaml</code> “ und „ <code translate="no">user.yaml</code> “. Überprüfen Sie die Kompatibilität der Zielversion, der Nachrichtenwarteschlange und des Speichers und validieren Sie die Wiederherstellung in einer Nicht-Produktionsumgebung. Bei mit Docker Compose verwalteten Bereitstellungen befolgen Sie <a href="/docs/de/upgrade_milvus_standalone-docker.md">die Anleitung „Upgrade von Milvus Standalone mit Docker Compose“</a>; wenden Sie dieses Verfahren nicht direkt auf einen skriptverwalteten Container an.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Milvus anhalten und löschen<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,7 +164,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Standardmäßig verwendet diese Bereitstellung <strong>Woodpecker</strong> (WAL im lokalen Dateisystem) als Nachrichtenwarteschlange und ein <strong>eingebettetes etcd</strong> für Metadaten – es muss nichts weiter installiert werden. Um eine andere Nachrichtenwarteschlange zu verwenden oder einen externen Objektspeicher bzw. Metadaten anzubinden, siehe:</p>
+    </button></h2><p>Standardmäßig verwendet diese Bereitstellung <strong>Woodpecker</strong> (WAL im lokalen Dateisystem) als Nachrichtenwarteschlange und ein <strong>eingebettetes etcd</strong> für Metadaten – es muss nichts weiter installiert werden. Informationen zur Verwendung einer anderen Nachrichtenwarteschlange oder zur Anbindung eines externen Objektspeichers bzw. von Metadaten finden Sie hier:</p>
 <ul>
 <li>Nachrichtenwarteschlange: <a href="/docs/de/woodpecker.md">Woodpecker</a> (Standard) · <a href="/docs/de/mq_pulsar.md">Pulsar</a> · <a href="/docs/de/mq_kafka.md">Kafka</a> · <a href="/docs/de/mq_rocksmq.md">RocksMQ</a></li>
 <li>Objektspeicher: <a href="/docs/de/deploy_s3.md">MinIO</a> (Standard) · <a href="/docs/de/deploy_s3.md">AWS S3</a> · <a href="/docs/de/abs.md">Azure Blob</a> · <a href="/docs/de/gcs.md">GCP Cloud Storage</a> · <a href="/docs/de/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/de/deploy_s3.md">Tencent COS</a> · <a href="/docs/de/deploy_s3.md">Huawei OBS</a> · <a href="/docs/de/deploy_s3.md">S3-kompatibel</a></li>
@@ -210,7 +210,7 @@ EOF
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool für die Fehlerbehebung in Milvus und dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

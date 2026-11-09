@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 中的文字比對功能可根據特定術語進行精確的文件檢索。此功能主要用於篩選搜尋以滿足特定條件，並可整合標量篩選來精確化查詢結果，從而允許在符合標量標準的向量內進行相似度搜尋。</p>
+    </button></h1><p>Milvus 中的文字匹配功能可根據特定術語進行精確的文件檢索。此功能主要用於篩選搜尋以滿足特定條件，並可結合標量篩選來精細化查詢結果，從而允許在符合標量標準的向量內進行相似度搜尋。</p>
 <div class="alert note">
-<p><code translate="no">TEXT_MATCH</code> 可搜尋完全相符的已分析術語，而「<code translate="no">TEXT_MATCH_FUZZY</code> 」則能容許查詢標記與索引標記之間存在微小的編輯距離。兩者皆屬布林篩選操作，且不會對匹配文件的相關性進行評分。若您希望根據查詢術語的語義含義與重要性來檢索最相關的文件，我們建議您使用「<a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>」。</p>
+<p><code translate="no">TEXT_MATCH</code> 可搜尋完全相符的已分析詞彙，而「<code translate="no">TEXT_MATCH_FUZZY</code> 」則能容許查詢標記與索引標記之間存在微小的編輯距離。兩者皆為布林篩選運算，且不會對匹配文件的相關性進行評分。若您希望根據查詢詞彙的語義含義與重要性來檢索最相關的文件，我們建議您使用<a href="/docs/zh-hant/full-text-search.md">「全文搜尋</a>」。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,12 +39,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 整合了<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>，以驅動其底層的反向索引及基於術語的文字搜尋功能。對於每筆文字輸入，Milvus 會依照以下程序進行索引：</p>
+    </button></h2><p>Milvus 整合了<a href="https://github.com/quickwit-oss/tantivy">Tantivy，</a>以驅動其底層的反向索引及基於術語的文字搜尋。對於每則文字輸入，Milvus 會依照以下程序進行索引：</p>
 <ol>
-<li><p><a href="/docs/zh-hant/analyzer-overview.md">分析器</a>：分析器會將輸入的文字切分成單詞（或稱詞元），並根據需要套用過濾器。這使 Milvus 能基於這些詞元建立索引。</p></li>
+<li><p><a href="/docs/zh-hant/analyzer-overview.md">分析器</a>：分析器會將輸入的文字切分為單一詞彙（即標記），並視需要套用篩選器。這使 Milvus 能根據這些標記建立索引。</p></li>
 <li><p><a href="/docs/zh-hant/index-explained.md">建立索引</a>：完成文字分析後，Milvus 會建立一個倒排索引，將每個唯一的詞元映射至包含該詞元的文件。</p></li>
 </ol>
-<p>當使用者執行文字比對時，系統會利用倒排索引快速檢索所有包含該術語的文件。此方法遠比逐一掃描每份文件來得迅速。</p>
+<p>當使用者執行文字比對時，系統會利用倒排索引快速檢索所有包含該術語的文件。此方式遠比逐一掃描每份文件來得快速。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -66,7 +66,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>文字比對功能適用於已啟用比對功能的字串欄位。本頁的範例使用 <a href="/docs/zh-hant/string.md"><code translate="no">VARCHAR</code></a>，該字段在所有客戶端 SDK 中均受支援。在 Milvus 3.0.x 中， <a href="/docs/zh-hant/text.md"><code translate="no">TEXT</code></a> 當啟用 Storage V3 時，字段亦支援文字比對。無論使用何種字段類型，請將 `<code translate="no">enable_analyzer</code> ` 與 `<code translate="no">enable_match</code> ` 皆設定為 `<code translate="no">True</code>`，並可在定義集合架構時選擇性地配置<a href="/docs/zh-hant/analyzer-overview.md">分析器</a>。</p>
+    </button></h2><p>文字比對功能適用於已啟用比對功能的字串欄位。本頁面的範例使用 <a href="/docs/zh-hant/string.md"><code translate="no">VARCHAR</code></a>，該字段在所有客戶端 SDK 中均受支援。在 Milvus 3.0.x 中， <a href="/docs/zh-hant/text.md"><code translate="no">TEXT</code></a> 當啟用 Storage V3 時，字段亦支援文字比對。無論是哪種字段類型，請將 `<code translate="no">enable_analyzer</code> ` 與 `<code translate="no">enable_match</code> ` 皆設定為 `<code translate="no">True</code>`，並可在定義集合架構時選擇性地配置<a href="/docs/zh-hant/analyzer-overview.md">分析器</a>。</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">設定<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要為特定的<code translate="no">VARCHAR</code> 欄位啟用文字比對功能，請在定義欄位架構時，將<code translate="no">enable_analyzer</code> 與<code translate="no">enable_match</code> 兩項參數皆設定為<code translate="no">True</code> 。此設定會指示 Milvus 將文字進行分詞，並為指定欄位建立倒排索引，從而實現快速且高效的文字比對。</p>
+    </button></h3><p>若要為特定的<code translate="no">VARCHAR</code> 欄位啟用文字比對功能，請在定義欄位架構時，將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 兩個參數皆設定為<code translate="no">True</code> 。此設定會指示 Milvus 對指定欄位進行文字分詞並建立倒排索引，從而實現快速且高效的文字比對。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -139,7 +139,7 @@ schema.addField(AddFieldReq.builder()
         .dimension(<span class="hljs-number">5</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
 schema.WithField(entity.NewField().
@@ -251,7 +251,12 @@ schema.add_field(
     enable_match = <span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, Object&gt; analyzerParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
 analyzerParams.put(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>);
 schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;text&quot;</span>)
@@ -341,7 +346,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在您的集合架構中為 `<code translate="no">VARCHAR</code> ` 或 `<code translate="no">TEXT</code> ` 欄位啟用文字比對功能後，即可使用 `<code translate="no">TEXT_MATCH</code> ` 表達式執行文字比對。</p>
+    </button></h2><p>一旦在集合架構中為 `<code translate="no">VARCHAR</code> ` 或 `<code translate="no">TEXT</code> ` 欄位啟用文字比對功能，即可使用 `<code translate="no">TEXT_MATCH</code> ` 表達式執行文字比對。</p>
 <h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">TEXT_MATCH 表達式語法<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -366,9 +371,9 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: 需進行搜尋的、已啟用比對功能的<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 欄位名稱。</p></li>
-<li><p><code translate="no">text</code>: 要搜尋的術語。多個術語可使用空格分隔，或根據語言及已配置的分析器使用其他適當的分隔符。</p></li>
+<li><p><code translate="no">text</code>: 要搜尋的術語。多個術語可使用空格，或根據語言及已配置的分析器，使用其他適當的分隔符號進行分隔。</p></li>
 </ul>
-<p>預設情況下，<code translate="no">TEXT_MATCH</code> 會採用「<strong>或 (OR)</strong>」匹配邏輯，這表示它會回傳包含任何指定搜尋詞的文件。例如，若要在<code translate="no">text</code> 欄位中搜尋包含<code translate="no">machine</code> 或<code translate="no">deep</code> 其中任一搜尋詞的文件，請使用以下表達式：</p>
+<p>預設情況下，<code translate="no">TEXT_MATCH</code> 採用「<strong>或 (OR)</strong>」匹配邏輯，這表示它會回傳包含任何指定搜尋詞的文件。例如，若要搜尋在<code translate="no">text</code> 欄位中包含<code translate="no">machine</code> 或<code translate="no">deep</code> 其中任一搜尋詞的文件，請使用以下表達式：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -391,15 +396,16 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <p>您也可以使用邏輯運算子組合多個<code translate="no">TEXT_MATCH</code> 表達式，以執行<strong>「AND</strong>」匹配。</p>
 <ul>
-<li><p>若要搜尋在「<code translate="no">text</code> 」欄位中同時包含「<code translate="no">machine</code> 」和「<code translate="no">deep</code> 」的文件，請使用以下表達式：</p>
-<p><div class="multipleCode">
-<a href="#python">Python</a>
-<a href="#java">Java</a>
-<a href="#go">Go</a>
-<a href="#javascript">NodeJS</a>
-<a href="#bash">cURL</a>
-<a href="#cpp">C++</a>
-</div></p>
+<li>若要搜尋在「<code translate="no">text</code> 」欄位中同時包含「<code translate="no">machine</code> 」和「<code translate="no">deep</code> 」的文件，請使用以下表達式：</li>
+</ul>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -411,16 +417,18 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>若要搜尋在<code translate="no">text</code> 欄位中同時包含<code translate="no">machine</code> 和<code translate="no">learning</code> ，但不包含<code translate="no">deep</code> 的文件，請使用以下表達式：</p>
-<p><div class="multipleCode">
-<a href="#python">Python</a>
-<a href="#java">Java</a>
-<a href="#go">Go</a>
-<a href="#javascript">NodeJS</a>
-<a href="#bash">cURL</a>
-<a href="#cpp">C++</a>
-</div></p>
+<button class="copy-code-btn"></button></code></pre>
+<ul>
+<li>若要搜尋在<code translate="no">text</code> 欄位中同時包含<code translate="no">machine</code> 和<code translate="no">learning</code> ，但不包含<code translate="no">deep</code> 的文件，請使用以下表達式：</li>
+</ul>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+ <a href="#cpp">   C++</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
@@ -432,8 +440,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
-<button class="copy-code-btn"></button></code></pre></li>
-</ul>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="TEXTMATCHFUZZY-expression-syntax" class="common-anchor-header">TEXT_MATCH_FUZZY 表達式語法<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#TEXTMATCHFUZZY-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -449,7 +456,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用 `<code translate="no">TEXT_MATCH_FUZZY</code> ` 可容許查詢標記與索引標記之間的拼寫差異。Milvus 會使用該欄位的分析器來分析查詢文字，並對每個產生的標記套用模糊匹配。若查詢產生多個標記，當任何一個標記符合設定的編輯距離時，該表達式即會匹配該實體。</p>
+    </button></h3><p>使用 `<code translate="no">TEXT_MATCH_FUZZY</code> ` 可容許查詢詞元與索引詞元之間的拼寫差異。Milvus 會使用該欄位的分析器來分析查詢文字，並對每個產生的詞元套用模糊比對。若查詢產生多個詞元，當任何一個詞元符合設定的編輯距離時，該表達式即會匹配該實體。</p>
 <p>語法如下：</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = <span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -458,11 +465,11 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: 需搜尋的、已啟用匹配功能的 `<code translate="no">VARCHAR</code> ` 或 `<code translate="no">TEXT</code> ` 欄位名稱。</p></li>
+<li><p><code translate="no">field_name</code>: 需搜尋的、已啟用匹配功能的<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 欄位名稱。</p></li>
 <li><p><code translate="no">text</code>: 需進行分析並與索引標記進行比對的查詢文字。</p></li>
-<li><p><code translate="no">max_edit_distance</code>: 每個查詢標記允許的最大編輯距離。此選項名稱必須精確為<code translate="no">max_edit_distance</code> ，其值必須為<code translate="no">0</code> 、<code translate="no">1</code> 或<code translate="no">2</code> 。若值為<code translate="no">0</code> ，則執行精確標記比對，等同於<code translate="no">TEXT_MATCH</code> 。</p></li>
+<li><p><code translate="no">max_edit_distance</code>: 每個查詢標記允許的最大編輯距離。此選項名稱必須精確為<code translate="no">max_edit_distance</code> ，且其值必須為<code translate="no">0</code> 、<code translate="no">1</code> 或<code translate="no">2</code> 。若值為<code translate="no">0</code> ，則執行精確標記比對，等同於<code translate="no">TEXT_MATCH</code> 。</p></li>
 </ul>
-<p>例如，以下表達式會匹配與<code translate="no">machne</code> 僅相差一個編輯操作的標記，包括<code translate="no">machine</code> ：</p>
+<p>例如，以下表達式會匹配與<code translate="no">machne</code> 僅差一個編輯操作的標記，包括<code translate="no">machine</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -483,8 +490,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">TEXT_MATCH_FUZZY</code> 屬於篩選表達式語法的一部分，因此客戶端 SDK 無需提供專用的模糊匹配方法。請在搜尋或查詢操作中，透過與<code translate="no">TEXT_MATCH</code> 相同的<code translate="no">filter</code> 參數傳遞該表達式。</p>
-<h3 id="Search-with-text-match" class="common-anchor-header">使用文字匹配進行搜尋<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+<p><code translate="no">TEXT_MATCH_FUZZY</code> 屬於篩選表達式語法的一部分，因此客戶端 SDK 無需提供專用的模糊匹配方法。請將該表達式傳遞至搜尋或查詢操作中，與<code translate="no">TEXT_MATCH</code> 所使用的相同<code translate="no">filter</code> 參數。</p>
+<h3 id="Search-with-text-match" class="common-anchor-header">使用文字比對進行搜尋<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -499,10 +506,10 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>文字比對可與向量相似度搜尋結合使用，以縮小搜尋範圍並提升搜尋效能。透過在執行向量相似度搜尋前，先使用文字比對對集合進行篩選，可減少需搜尋的文件數量，從而加快查詢速度。</p>
+    </button></h3><p>文字比對可與向量相似度搜尋結合使用，以縮小搜尋範圍並提升搜尋效能。透過在進行向量相似度搜尋前，先使用文字比對過濾資料集，可減少需要搜尋的文件數量，從而加快查詢速度。</p>
 <p>在此範例中，<code translate="no">filter</code> 表達式會篩選搜尋結果，僅包含與指定詞彙<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 相符的文件。隨後，系統會針對這組已篩選的文件子集執行向量相似度搜尋。</p>
 <div class="alert note">
-<p>您可以透過配置文字高亮顯示功能，在搜尋結果中標示出匹配的關鍵字。詳情請參閱「<a href="/docs/zh-hant/text-highlighter.md">文字高亮顯示功能</a>」。</p>
+<p>您可以透過設定文字高亮工具，在搜尋結果中標示出匹配的詞彙。詳情請參閱「<a href="/docs/zh-hant/text-highlighter.md">文字高亮工具</a>」。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -526,12 +533,17 @@ result = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embeddings&quot;</span>)
-        .data(Collections.singletonList(queryVector)))
+        .data(Collections.singletonList(queryVector))
 <span class="highlighted-wrapper-line">        .filter(filter)</span>
         .topK(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
@@ -555,7 +567,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-comment">// Assuming &#x27;embeddings&#x27; is the vector field and &#x27;text&#x27; is the VARCHAR field</span>
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>(
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// Your collection name</span>
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment">// Vector field name</span>
     <span class="hljs-attr">data</span>: [query_vector], <span class="hljs-comment">// Query vector</span>
@@ -563,7 +575,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Max. number of results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment">//Fields to return</span>
-);
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)\&quot;&quot;</span>
 
@@ -609,7 +621,7 @@ milvus::SearchResponse response;
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-text-match" class="common-anchor-header">使用文字匹配進行查詢<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
+<h3 id="Query-with-text-match" class="common-anchor-header">使用文字比對進行查詢<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -624,7 +636,7 @@ milvus::SearchResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>文字匹配亦可用於查詢操作中的標量過濾。透過在<code translate="no">query()</code> 方法的<code translate="no">expr</code> 參數中指定<code translate="no">TEXT_MATCH</code> 表達式，即可擷取與指定詞彙相符的文件。</p>
+    </button></h3><p>文字匹配亦可用於查詢操作中的標量篩選。透過在<code translate="no">query()</code> 方法的<code translate="no">expr</code> 參數中指定<code translate="no">TEXT_MATCH</code> 表達式，即可擷取與指定術語相符的文件。</p>
 <p>以下範例會檢索<code translate="no">text</code> 欄位同時包含<code translate="no">keyword1</code> 和<code translate="no">keyword2</code> 這兩項術語的文件。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -643,7 +655,11 @@ result = client.query(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -665,11 +681,11 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Match entities with both `keyword1` and `keyword2`</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>;
 
-<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
+<span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter, </span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
-)
+})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)\&quot;&quot;</span>
 
@@ -718,12 +734,12 @@ milvus::QueryResponse response;
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>為某個欄位啟用術語匹配功能會觸發建立倒排索引，這會消耗儲存資源。在決定是否啟用此功能時，請考量其對儲存空間的影響，因為這會因文字大小、唯一詞元以及所使用的分析器而異。</p></li>
-<li><p>一旦在資料結構中定義了分析器，其設定即對該集合永久生效。若您認為其他分析器更能滿足需求，可考慮刪除現有集合，並使用所需的分析器設定建立新的集合。</p></li>
+<li><p>為某個欄位啟用詞彙匹配功能會觸發建立倒排索引，這會消耗儲存資源。在決定是否啟用此功能時，請考量其對儲存空間的影響，因為此影響會因文字大小、唯一詞元以及所使用的分析器而異。</p></li>
+<li><p>一旦在資料結構中定義了分析器，其設定將對該集合永久生效。若您認為其他分析器更能滿足需求，可考慮刪除現有集合，並使用所需的分析器設定建立新的集合。</p></li>
 <li><p><code translate="no">filter</code> 表達式中的轉義規則：</p>
 <ul>
-<li><p>在表達式中，以雙引號或單引號包圍的字元將被解釋為字串常數。若字串常數包含轉義字元，則必須使用轉義序列來表示該轉義字元。例如，使用<code translate="no">\\</code> 來表示<code translate="no">\</code> ，使用<code translate="no">\\t</code> 來表示制表符<code translate="no">\t</code> ，以及使用<code translate="no">\\n</code> 來表示換行符。</p></li>
-<li><p>若字串常數以單引號包圍，則常數內的單引號應以<code translate="no">\\'</code> 表示，而雙引號則可使用<code translate="no">&quot;</code> 或<code translate="no">\\&quot;</code> 表示。範例：<code translate="no">'It\\'s milvus'</code> 。</p></li>
-<li><p>若字串常數以雙引號包圍，則常數內的雙引號應表示為<code translate="no">\\&quot;</code> ，而單引號則可表示為<code translate="no">'</code> 或<code translate="no">\\'</code> 。範例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</p></li>
+<li><p>在表達式中，以雙引號或單引號包圍的字元將被解釋為字串常數。若字串常數包含轉義字元，則必須使用轉義序列來表示這些轉義字元。例如，使用<code translate="no">\\</code> 來表示<code translate="no">\</code> ，使用<code translate="no">\\t</code> 來表示制表符<code translate="no">\t</code> ，以及使用<code translate="no">\\n</code> 來表示換行符。</p></li>
+<li><p>若字串常數以單引號包圍，常數內的單引號應以<code translate="no">\\'</code> 表示，而雙引號則可使用<code translate="no">&quot;</code> 或<code translate="no">\\&quot;</code> 表示。範例：<code translate="no">'It\\'s milvus'</code> 。</p></li>
+<li><p>若字串常數以雙引號包圍，則常數內的雙引號應以<code translate="no">\\&quot;</code> 表示，而單引號則可表示為<code translate="no">'</code> 或<code translate="no">\\'</code> 。範例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</p></li>
 </ul></li>
 </ul>

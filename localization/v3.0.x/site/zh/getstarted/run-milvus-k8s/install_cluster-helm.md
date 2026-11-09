@@ -36,7 +36,7 @@ title: 使用 Helm 安装 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Helm 使用一种名为“图表”（charts）的打包格式。图表是一组文件的集合，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一组图表，以帮助您部署 Milvus 的依赖项和组件。</p>
+    </button></h2><p>Helm 使用一种名为“图表”（charts）的打包格式。图表是一组文件的集合，用于描述一组相关的 Kubernetes 资源。Milvus 提供了一套图表，以帮助您部署 Milvus 的依赖项和组件。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,22 +127,22 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>需要独立部署吗？</strong></p>
 <p>如果您希望以独立模式（单节点）部署 Milvus 用于开发或测试，请使用以下命令：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>注意</strong>：独立模式默认使用 Woodpecker 作为消息队列，并启用流式处理节点（Streaming Node）组件。独立部署中，Woodpecker<strong>嵌入在</strong>Milvus Pod 中运行；而专用 Woodpecker<strong>服务</strong>（独立 Pod）仅用于<strong>分布式/集群部署</strong>。详情请参阅《<a href="/docs/zh/architecture_overview.md">架构概述</a>》和<a href="/docs/zh/woodpecker.md">《Woodpecker》</a>。</p>
+<p><strong>注意</strong>：独立模式默认使用 Woodpecker 作为消息队列，并启用流式处理节点（Streaming Node）组件。独立部署中，Woodpecker<strong>嵌入在</strong>Milvus Pod 中运行；而专用的 Woodpecker<strong>服务</strong>（独立 Pod）仅用于<strong>分布式/集群部署</strong>。详情请参阅《<a href="/docs/zh/architecture_overview.md">架构概述</a>》和<a href="/docs/zh/woodpecker.md">《Woodpecker》</a>。</p>
 </div>
 <p><strong>部署 Milvus 集群：</strong></p>
 <div class="alert note">
 <p>对于 Woodpecker 服务模式，建议使用 Milvus 3.0.3 或更高版本，并搭配 Woodpecker v0.1.46 或更高版本。</p>
 </div>
-<p>以下命令将部署一个针对 v3.0.3 进行过优化设置的 Milvus 集群，并使用 Woodpecker 作为推荐的消息队列：</p>
+<p>以下命令将部署一个针对 v3.0.5 进行过优化设置的 Milvus 集群，并使用 Woodpecker 作为推荐的消息队列：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -152,7 +152,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>该命令的作用：</strong></p>
 <ul>
 <li>使用<strong>Woodpecker</strong>作为消息队列（推荐使用，可减少维护工作）</li>
-<li>将<strong>Woodpecker 作为专用服务</strong>（独立的 StatefulSet）运行，而非嵌入流处理节点中</li>
+<li>将<strong>Woodpecker 作为专用服务</strong>（独立的 StatefulSet）运行，而非嵌入流式处理节点中</li>
 <li>启用新的<strong>流式处理节点</strong>组件以提升性能</li>
 <li>禁用旧版<strong>索引节点</strong>（其功能现由数据节点处理）</li>
 </ul>
@@ -197,7 +197,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>通过检查 Pod 状态来验证部署是否成功：</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>等待所有 Pod 显示“Running”状态。</strong>采用 v3.0.3 配置时，您应看到类似以下的 Pod：</p>
+<p><strong>等待所有 Pod 显示“Running”状态。</strong>采用 v3.0.5 配置时，您应看到类似以下的 Pod 状态：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -491,7 +491,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
     </button></h2><p>此部署使用<strong>Woodpecker</strong>作为消息队列<strong>，etcd</strong>作为元数据存储<strong>，MinIO</strong>作为对象存储。若要使用其他消息队列或连接外部对象存储/元数据存储，请参阅：</p>
 <ul>
 <li>消息队列：<a href="/docs/zh/woodpecker.md">Woodpecker</a>（默认）·<a href="/docs/zh/mq_pulsar.md">Pulsar</a>·<a href="/docs/zh/mq_kafka.md">Kafka</a>·<a href="/docs/zh/mq_rocksmq.md">RocksMQ</a></li>
-<li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">兼容 S3</a></li>
+<li>对象存储：<a href="/docs/zh/deploy_s3.md">MinIO</a>（默认）·<a href="/docs/zh/deploy_s3.md">AWS S3</a>·<a href="/docs/zh/abs.md">Azure Blob</a>·<a href="/docs/zh/gcs.md">GCP Cloud Storage</a>·<a href="/docs/zh/deploy_s3.md">阿里云 OSS</a>·<a href="/docs/zh/deploy_s3.md">腾讯 COS</a>·<a href="/docs/zh/deploy_s3.md">华为 OBS</a>·<a href="/docs/zh/deploy_s3.md">S3 兼容</a></li>
 <li>元数据：<a href="/docs/zh/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">

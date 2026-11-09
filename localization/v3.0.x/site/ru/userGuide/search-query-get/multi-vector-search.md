@@ -30,7 +30,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Во многих приложениях поиск объекта может осуществляться по обширному набору информации, такой как заголовок и описание, или с использованием нескольких модальностей, таких как текст, изображения и аудио. Например, твит, содержащий фрагмент текста и изображение, должен быть найден, если либо текст, либо изображение соответствует семантике поискового запроса. Гибридный поиск улучшает пользовательский опыт за счет объединения поисковых запросов по этим разнообразным полям. Milvus поддерживает эту функцию, позволяя выполнять поиск по нескольким векторным полям и одновременно проводить несколько поисков по методу приближенного ближайшего соседа (ANN). Многовекторный гибридный поиск особенно полезен, если вам нужно искать как по тексту, так и по изображениям, по нескольким текстовым полям, описывающим один и тот же объект, или по плотным и разреженным векторам для повышения качества поиска.</p>
+    </button></h1><p>Во многих приложениях поиск объекта может осуществляться по обширному набору информации, такой как заголовок и описание, или с использованием нескольких типов данных, таких как текст, изображения и аудио. Например, твит, содержащий текст и изображение, должен быть найден, если либо текст, либо изображение соответствует семантике поискового запроса. Гибридный поиск улучшает качество поиска за счет объединения запросов по этим разнообразным полям. Milvus поддерживает эту функцию, позволяя выполнять поиск по нескольким векторным полям и одновременно проводить несколько поисков по методу приближенного ближайшего соседа (ANN). Многовекторный гибридный поиск особенно полезен, если вам нужно искать как по тексту, так и по изображениям, по нескольким текстовым полям, описывающим один и тот же объект, или по плотным и разреженным векторам для повышения качества поиска.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
@@ -39,8 +39,8 @@ summary: >-
  </span></p>
 <p>Многовекторный гибридный поиск объединяет различные методы поиска или охватывает вложения из различных модальностей:</p>
 <ul>
-<li><p><strong>Поиск по разреженным и плотным векторам</strong>: <a href="/docs/ru/dense-vector.md">плотные векторы</a> отлично подходят для выявления семантических связей, тогда как <a href="/docs/ru/sparse_vector.md">разреженные векторы</a> весьма эффективны для точного сопоставления ключевых слов. Гибридный поиск сочетает эти подходы, обеспечивая как широкое концептуальное понимание, так и точную релевантность терминов, что позволяет улучшить результаты поиска. Используя сильные стороны каждого метода, гибридный поиск преодолевает ограничения отдельных подходов, обеспечивая более высокую эффективность при обработке сложных запросов. Здесь представлено более подробное <a href="/docs/ru/full_text_search_with_milvus.md">руководство</a> по гибридному поиску, сочетающему семантический поиск с полнотекстовым.</p></li>
-<li><p><strong>Мультимодальный векторный поиск</strong>: мультимодальный векторный поиск — это мощная технология, позволяющая осуществлять поиск по различным типам данных, включая текст, изображения, аудио и другие. Главным преимуществом этого подхода является его способность объединять различные модальности в единый и целостный поисковый опыт. Например, при поиске товаров пользователь может ввести текстовый запрос, чтобы найти товары, описанные как текстом, так и изображениями. Объединяя эти модальности с помощью гибридного поиска, можно повысить точность поиска или обогатить результаты поиска.</p></li>
+<li><p><strong>Поиск по разреженным и плотным векторам</strong>: <a href="/docs/ru/dense-vector.md">плотные векторы</a> отлично подходят для отражения семантических связей, в то время как <a href="/docs/ru/sparse_vector.md">разреженные векторы</a> очень эффективны для точного сопоставления ключевых слов. Гибридный поиск сочетает эти подходы, обеспечивая как широкое концептуальное понимание, так и точную релевантность терминов, что позволяет улучшить результаты поиска. Используя сильные стороны каждого метода, гибридный поиск преодолевает ограничения отдельных подходов, предлагая более высокую эффективность при обработке сложных запросов. Здесь представлено более подробное <a href="/docs/ru/full_text_search_with_milvus.md">руководство</a> по гибридному поиску, сочетающему семантический поиск с полнотекстовым.</p></li>
+<li><p><strong>Мультимодальный векторный поиск</strong>: мультимодальный векторный поиск — это мощная технология, позволяющая осуществлять поиск по различным типам данных, включая текст, изображения, аудио и другие. Главным преимуществом этого подхода является способность объединять различные модальности в единый и целостный поисковый опыт. Например, при поиске товаров пользователь может ввести текстовый запрос, чтобы найти товары, описанные как текстом, так и изображениями. Объединяя эти модальности с помощью гибридного поиска, можно повысить точность поиска или обогатить результаты поиска.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Пример<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,13 +57,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Рассмотрим реальный пример использования, в котором каждый товар сопровождается текстовым описанием и изображением. На основе имеющихся данных мы можем проводить три типа поиска:</p>
+    </button></h2><p>Рассмотрим реальный пример использования, в котором каждый товар сопровождается текстовым описанием и изображением. На основе имеющихся данных можно выполнить три типа поиска:</p>
 <ul>
-<li><p><strong>Семантический текстовый поиск:</strong> он предполагает запрос по текстовому описанию товара с использованием плотных векторов. Вложения текста можно генерировать с помощью моделей, таких как <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> и <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>, или сервисов вроде <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
-<li><p><strong>Полнотекстовый поиск</strong>: в данном случае мы выполняем запрос по текстовому описанию товара с помощью сопоставления по ключевым словам с использованием разреженных векторов. Для этой цели можно использовать алгоритмы, такие как <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, или модели разреженного вложения, например <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> или <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>.</p></li>
+<li><p><strong>Семантический текстовый поиск:</strong> он предполагает запрос по текстовому описанию товара с использованием плотных векторов. Вложения текста можно генерировать с помощью таких моделей, как <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> и <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>, или сервисов, подобных <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a>.</p></li>
+<li><p><strong>Полнотекстовый поиск</strong>: в этом случае мы осуществляем поиск по текстовому описанию товара с помощью сопоставления по ключевым словам с использованием разреженных векторов. Для этой цели можно использовать алгоритмы, такие как <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, или модели разреженных вложений, например <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> или <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>.</p></li>
 <li><p><strong>Мультимодальный поиск по изображениям:</strong> этот метод осуществляет поиск по изображению с помощью текстового запроса с использованием плотных векторов. Вложения изображений можно генерировать с помощью моделей, таких как <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
-<p>В этом руководстве мы рассмотрим пример мультимодального гибридного поиска, сочетающего вышеуказанные методы поиска, на основе исходного текстового описания и вложений изображений товаров. Мы продемонстрируем, как хранить многовекторные данные и выполнять гибридный поиск с использованием стратегии переранжирования.</p>
+<p>В этом руководстве мы рассмотрим пример мультимодального гибридного поиска, сочетающего вышеуказанные методы поиска, на основе исходного текстового описания и вложений изображений товаров. Мы продемонстрируем, как хранить мультивекторные данные и выполнять гибридный поиск с использованием стратегии переранжирования.</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Создание коллекции с несколькими векторными полями<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,14 +95,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Для гибридного поиска с использованием нескольких векторных полей необходимо определить несколько таких полей в схеме коллекции. Подробности об ограничениях на количество векторных полей, допускаемых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">«Ограничения Zilliz Cloud</a>». Однако при необходимости вы можете настроить <a href="/docs/ru/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> настроить схему так, чтобы в коллекции было до 10 векторных полей.</p>
+    </button></h3><p>Для гибридного поиска с использованием нескольких векторных полей необходимо определить несколько таких полей в схеме коллекции. Подробности об ограничениях на количество векторных полей, допускаемых в коллекции, см. в разделе <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">«Ограничения Zilliz Cloud</a>».  Однако при необходимости вы можете настроить <a href="/docs/ru/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> настроить схему так, чтобы в коллекции могло содержаться до 10 векторных полей.</p>
 <p>В данном примере в схему включены следующие поля:</p>
 <ul>
 <li><p><code translate="no">id</code>: Служит в качестве первичного ключа для хранения текстовых идентификаторов. Это поле имеет тип данных « <code translate="no">INT64</code> ».</p></li>
-<li><p><code translate="no">text</code>: Используется для хранения текстового контента. Это поле имеет тип данных « <code translate="no">VARCHAR</code> » с максимальной длиной 1000 байт. Параметр « <code translate="no">enable_analyzer</code> » (Сжатие текста) установлен в значение « <code translate="no">True</code> » (Не сжимать) для облегчения полнотекстового поиска.</p></li>
+<li><p><code translate="no">text</code>: Используется для хранения текстового контента. Это поле имеет тип данных « <code translate="no">VARCHAR</code> » с максимальной длиной 1000 байт. Параметр « <code translate="no">enable_analyzer</code> » установлен в значение « <code translate="no">True</code> » для облегчения полнотекстового поиска.</p></li>
 <li><p><code translate="no">text_dense</code>: Используется для хранения плотных векторов текстов. Это поле имеет тип данных <code translate="no">FLOAT_VECTOR</code> с размерностью вектора 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Используется для хранения разреженных векторов текстов. Это поле имеет тип данных <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Используется для хранения плотных векторов изображений товаров. Это поле имеет тип данных <code translate="no">FLOAT_VETOR</code> с размерностью вектора 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Используется для хранения плотных векторов изображений товаров. Это поле имеет тип данных <code translate="no">FLOAT_VECTOR</code> с размерностью вектора 512.</p></li>
 </ul>
 <p>Поскольку для полнотекстового поиска по текстовому полю мы будем использовать встроенный алгоритм BM25, необходимо добавить в схему Milvus <code translate="no">Function</code>. Более подробную информацию см. в разделе <a href="/docs/ru/full-text-search.md">«Полнотекстовый поиск</a>».</p>
 <div class="multipleCode">
@@ -380,11 +380,11 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После определения схемы коллекции следующим шагом является настройка векторных индексов и указание метрик сходства. В приведённом примере:</p>
+    </button></h3><p>После определения схемы коллекции следующим шагом является настройка векторных индексов и указание метрик схожести. В приведённом примере:</p>
 <ul>
 <li><p><code translate="no">text_dense_index</code>: для поля плотного текстового вектора создаётся индекс типа « <code translate="no">AUTOINDEX</code> » с типом метрики « <code translate="no">IP</code> ».</p></li>
-<li><p><code translate="no">text_sparse_index</code>: для поля векторов с низкой плотностью текста используется индекс типа «<code translate="no">SPARSE_INVERTED_INDEX</code>» с типом метрики « <code translate="no">BM25</code> ».</p></li>
-<li><p><code translate="no">image_dense_index</code>: для плотного векторного поля изображений создается индекс типа <code translate="no">AUTOINDEX</code> с типом метрики <code translate="no">IP</code>.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: для векторного поля с редким содержанием текста используется индекс типа «<code translate="no">SPARSE_INVERTED_INDEX</code>» с типом метрики « <code translate="no">BM25</code> ».</p></li>
+<li><p><code translate="no">image_dense_index</code>: для плотного векторного поля изображений создаётся индекс типа « <code translate="no">AUTOINDEX</code> » с типом метрики « <code translate="no">IP</code> ».</p></li>
 </ul>
 <p>При необходимости вы можете выбрать другие типы индексов, наиболее подходящие для ваших задач и типов данных. Дополнительную информацию о поддерживаемых типах индексов см. в документации по <a href="/docs/ru/index-vector-fields.md">доступным типам индексов</a>.</p>
 <div class="multipleCode">
@@ -528,7 +528,7 @@ std::vector&lt;milvus::IndexDesc&gt; indexes = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Создайте коллекцию с именем « <code translate="no">demo</code> » с использованием схемы коллекции и индексов, настроенных в предыдущих двух шагах.</p>
+    </button></h3><p>Создайте коллекцию с именем <code translate="no">demo</code>, используя схему коллекции и индексы, настроенные в предыдущих двух шагах.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -602,10 +602,10 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе данные вставляются в коллекцию « <code translate="no">my_collection</code> » в соответствии с ранее определённой схемой. При вставке убедитесь, что все поля, за исключением полей с автоматически сгенерированными значениями, заполнены данными в правильном формате. В данном примере:</p>
+    </button></h2><p>В этом разделе выполняется вставка данных в коллекцию « <code translate="no">my_collection</code> » на основе ранее определённой схемы. При вставке убедитесь, что все поля, за исключением полей с автоматически сгенерированными значениями, заполнены данными в правильном формате. В данном примере:</p>
 <ul>
-<li><p><code translate="no">id</code>: целое число, представляющее ID продукта</p></li>
-<li><p><code translate="no">text</code>: строка, содержащая описание товара</p></li>
+<li><p><code translate="no">id</code>: целое число, обозначающее идентификатор продукта</p></li>
+<li><p><code translate="no">text</code>: строка, содержащая описание продукта</p></li>
 <li><p><code translate="no">text_dense</code>: список из 768 значений с плавающей запятой, представляющий плотное вложение текстового описания</p></li>
 <li><p><code translate="no">image_dense</code>: список из 512 чисел с плавающей запятой, представляющий плотное вложение изображения товара</p></li>
 </ul>
@@ -792,12 +792,12 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Гибридный поиск реализуется путем создания нескольких экземпляров ` <code translate="no">AnnSearchRequest</code> ` в функции ` <code translate="no">hybrid_search()</code> `, где каждый ` <code translate="no">AnnSearchRequest</code> ` представляет собой базовый запрос на поиск с использованием искусственной нейронной сети (ANN) для конкретного векторного поля. Поэтому перед выполнением гибридного поиска необходимо создать экземпляр ` <code translate="no">AnnSearchRequest</code> ` для каждого векторного поля.</p>
+    </button></h3><p>Гибридный поиск реализуется путем создания нескольких экземпляров ` <code translate="no">AnnSearchRequest</code> ` в функции ` <code translate="no">hybrid_search()</code> `, где каждый ` <code translate="no">AnnSearchRequest</code> ` представляет собой базовый запрос поиска ANN для конкретного векторного поля. Поэтому перед выполнением гибридного поиска необходимо создать ` <code translate="no">AnnSearchRequest</code> ` для каждого векторного поля.</p>
 <p>Кроме того, настроив параметр <code translate="no">expr</code> в <code translate="no">AnnSearchRequest</code>, вы можете задать условия фильтрации для гибридного поиска. См. разделы <a href="/docs/ru/filtered-search.md">«Фильтрованный поиск</a> » и <a href="/docs/ru/boolean.md">«Объяснение фильтрации</a>».</p>
 <div class="alert note">
 <p>В гибридном поиске каждое поле векторных данных ( <code translate="no">AnnSearchRequest</code> ) поддерживает только один набор данных запроса.</p>
 </div>
-<p>Чтобы продемонстрировать возможности различных векторных полей поиска, мы построим три поисковых запроса с использованием параметра « <code translate="no">AnnSearchRequest</code> » на основе примерного запроса. В этом процессе мы также будем использовать его заранее вычисленные плотные векторы. Поисковые запросы будут направлены на следующие векторные поля:</p>
+<p>Чтобы продемонстрировать возможности различных векторных полей поиска, мы построим три запроса поиска с использованием параметра « <code translate="no">AnnSearchRequest</code> » на основе примерного запроса. Для этого процесса мы также будем использовать его заранее вычисленные плотные векторы. Запросы поиска будут направлены на следующие векторные поля:</p>
 <ul>
 <li><p><code translate="no">text_dense</code> для семантического текстового поиска, позволяющего понимать контекст и находить результаты на основе смысла, а не прямого совпадения ключевых слов;</p></li>
 <li><p><code translate="no">text_sparse</code>для полнотекстового поиска или сопоставления по ключевым словам, ориентированного на точное совпадение слов или фраз в тексте.</p></li>
@@ -962,7 +962,7 @@ sub_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraPa
                     .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
 sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<p>Учитывая, что параметр <code translate="no">limit</code> установлен в значение 2, каждый объект <code translate="no">AnnSearchRequest</code> возвращает 2 результата поиска. В данном примере создано 3 экземпляра <code translate="no">AnnSearchRequest</code>, в результате чего получается в общей сложности 6 результатов поиска.</p>
+<p>Учитывая, что параметр <code translate="no">limit</code> установлен в значение 2, каждый объект <code translate="no">AnnSearchRequest</code> возвращает 2 результата поиска. В данном примере созданы 3 экземпляра <code translate="no">AnnSearchRequest</code>, в результате чего получается в общей сложности 6 результатов поиска.</p>
 <h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">Шаг 2: Настройка стратегии переранжирования<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -979,7 +979,7 @@ sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraPa
         ></path>
       </svg>
     </button></h3><p>Для объединения и переранжирования наборов результатов поиска ANN необходимо выбрать подходящую стратегию переранжирования. Milvus предлагает несколько типов стратегий переранжирования. Более подробную информацию об этих механизмах переранжирования см. в разделах <a href="/docs/ru/weighted-ranker.md">«Weighted Ranker</a> » или <a href="/docs/ru/rrf-ranker.md">«RRF Ranker</a>».</p>
-<p>В данном примере, поскольку нет необходимости уделять особое внимание конкретным поисковым запросам, мы будем использовать стратегию RRFRanker.</p>
+<p>В данном примере, поскольку нет особого акцента на конкретные поисковые запросы, мы будем использовать стратегию RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1149,7 +1149,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
 <pre><code translate="no" class="language-text">[&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Если для гибридного поиска указан параметр « <code translate="no">limit=2</code> », Milvus переранжирует шесть результатов, полученных в ходе трёх поисков. В итоге будут возвращены только два наиболее похожих результата.</p>
-<h2 id="Advanced-usage" class="common-anchor-header">Расширенные возможности<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
+<h2 id="Advanced-usage" class="common-anchor-header">Расширенное использование<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1179,7 +1179,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если в вашей коллекции есть поле « <code translate="no">TIMESTAMPTZ</code> », вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, установив параметр « <code translate="no">timezone</code> » в вызове гибридного поиска. Это определяет, как значения « <code translate="no">TIMESTAMPTZ</code> » отображаются и сравниваются во время операции.</p>
+    </button></h3><p>Если в вашей коллекции есть поле « <code translate="no">TIMESTAMPTZ</code> », вы можете временно переопределить часовой пояс по умолчанию базы данных или коллекции для одной операции, установив параметр « <code translate="no">timezone</code> » в вызове гибридного поиска. Это определяет, как значения « <code translate="no">TIMESTAMPTZ</code> » будут отображаться и сравниваться во время операции.</p>
 <p>Значение <code translate="no">timezone</code> должно быть допустимым <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">идентификатором часового пояса IANA</a> (например, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> или <strong>UTC</strong>). Подробные сведения об использовании поля <code translate="no">TIMESTAMPTZ</code> см. в <a href="/docs/ru/timestamptz-field.md">разделе «Поле TIMESTAMPTZ</a>».</p>
 <p>В приведенном ниже примере показано, как временно установить часовой пояс для операции гибридного поиска:</p>
 <div class="multipleCode">

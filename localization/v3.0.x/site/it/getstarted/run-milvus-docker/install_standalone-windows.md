@@ -68,7 +68,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>Scegliere uno dei seguenti terminali. Eseguire i comandi in una directory di lavoro scrivibile; lo script memorizza lì i file di configurazione e la directory <code translate="no">volumes</code>.</p>
-<p>Lo script viene scaricato dal ramo <code translate="no">master</code> di Milvus. Il tag dell’immagine Docker è definito nello script e può differire dalla versione v3.0.3. Per distribuire quella versione esatta, utilizzare la configurazione Docker Compose con versione specificata riportata di seguito.</p>
+<p>Lo script viene scaricato dal ramo <code translate="no">master</code> di Milvus. Il tag dell’immagine Docker è definito nello script e può differire dalla versione v3.0.5. Per distribuire esattamente quella versione, utilizzare la configurazione Docker Compose con versione specificata riportata di seguito.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Da PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,7 +158,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizza la configurazione allegata alla versione v3.0.3. Esegui solo la sequenza di comandi relativa al tuo terminale.</p>
+    </button></h2><p>Utilizza la configurazione allegata alla versione v3.0.5. Esegui solo la sequenza di comandi relativa al tuo terminale.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Da PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>Scaricare la configurazione e avviare Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -195,7 +195,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Scarica la configurazione e avvia Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -215,7 +215,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Apri la tua distribuzione WSL, quindi esegui i comandi Linux:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -288,7 +288,7 @@ wsl --update
    <span>Utilizza il motore basato su WSL 2 nelle impostazioni di Docker Desktop</span>
   
  </span></p></li>
-<li><p>Seleziona tra le distribuzioni WSL 2 installate quelle su cui desideri abilitare l’integrazione con Docker andando su: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
+<li><p>Selezionare tra le distribuzioni WSL 2 installate quelle su cui si desidera abilitare l’integrazione con Docker andando su: <strong>Impostazioni</strong> &gt; <strong>Risorse</strong> &gt; <strong>Integrazione WSL</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" /> 
@@ -349,13 +349,13 @@ wsl --update
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/manage_databases.md">Gestire i database</a></li>
-<li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
+<li><a href="/docs/it/manage-collections.md">Gestire le raccolte</a></li>
 <li><a href="/docs/it/manage-partitions.md">Gestire le partizioni</a></li>
 <li><a href="/docs/it/insert-update-delete.md">Inserimento, aggiornamento e cancellazione</a></li>
 <li><a href="/docs/it/single-vector-search.md">Ricerca su singolo vettore</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p>Per le distribuzioni con Compose, seguire <a href="/docs/it/upgrade_milvus_standalone-docker.md">la</a> procedura " <a href="/docs/it/upgrade_milvus_standalone-docker.md">Aggiornamento di Milvus Standalone con Docker Compose</a>"; verificare la procedura nel proprio ambiente prima di procedere all'aggiornamento.</p></li>
+<li><p>Per le distribuzioni con Compose, seguire la procedura " <a href="/docs/it/upgrade_milvus_standalone-docker.md">Aggiornamento di Milvus Standalone con Docker Compose</a>"; verificare la procedura nel proprio ambiente prima di procedere all'aggiornamento.</p></li>
 <li><p><a href="/docs/it/scaleout.md">Scalare il cluster Milvus</a>.</p></li>
 <li><p>Distribuite il vostro cluster Milvus su cloud:</p>
 <ul>

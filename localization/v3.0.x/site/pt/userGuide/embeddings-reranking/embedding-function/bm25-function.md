@@ -2,11 +2,12 @@
 id: bm25-function.md
 title: Função BM25
 summary: >-
-  A função BM25 permite a pesquisa de texto completo, transformando o texto em
-  bruto em vectores esparsos e pontuando os documentos com base na relevância
-  lexical. Aplica a correspondência baseada em termos e a ponderação sensível à
-  frequência para suportar a recuperação eficiente de documentos de texto que
-  correspondem aos termos da consulta.
+  A função BM25 permite a pesquisa de texto completo, transformando texto bruto
+  em vetores esparsos e atribuindo pontuações aos documentos com base na
+  relevância lexical. Aplica a correspondência baseada em termos e uma
+  ponderação que tem em conta a frequência, para facilitar a recuperação
+  eficiente de documentos de texto que correspondam estreitamente aos termos da
+  consulta.
 ---
 <h1 id="BM25-Function" class="common-anchor-header">Função BM25<button data-href="#BM25-Function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A <strong>função BM25</strong> permite <a href="/docs/pt/full-text-search.md">a pesquisa de texto completo</a>, transformando o texto em bruto em <strong>vectores esparsos</strong> e pontuando os documentos com base na relevância lexical. Aplica a correspondência baseada em termos e a ponderação sensível à frequência para apoiar a recuperação eficiente de documentos de texto que correspondem aos termos da consulta.</p>
-<p>Como uma função de texto local, a função BM25 é executada no Milvus e não requer inferência de modelos ou integrações externas. Fornece um mecanismo de recuperação determinístico e transparente para cenários de pesquisa baseados em texto.</p>
+    </button></h1><p><strong>A função BM25</strong> permite <a href="/docs/pt/full-text-search.md">a pesquisa de texto completo</a>, transformando texto bruto em <strong>vetores esparsos</strong> e atribuindo pontuações aos documentos com base na relevância lexical. Aplica a correspondência baseada em termos e a ponderação com consideração da frequência para permitir a recuperação eficiente de documentos de texto que correspondam estreitamente aos termos da consulta.</p>
+<p>Enquanto função de texto local, a função BM25 é executada no Milvus e não requer inferência de modelos nem integrações externas. Proporciona um mecanismo de recuperação determinístico e transparente para cenários de pesquisa baseados em texto.</p>
 <h2 id="How-BM25-works" class="common-anchor-header">Como funciona o BM25<button data-href="#How-BM25-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,9 +41,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O algoritmo <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> é um algoritmo de pontuação de relevância baseado em termos, amplamente utilizado na recuperação de textos completos. Em Milvus, o BM25 é implementado como um pipeline de recuperação esparso que converte o texto em representações de peso de termo e recupera os <em>K</em> documentos principais usando índices esparsos distribuídos.</p>
-<p>O fluxo de trabalho global consiste em dois caminhos simétricos: <strong>ingestão de documentos</strong> e <strong>processamento de texto de consulta</strong>, que partilham a mesma lógica de análise de texto.</p>
-<h3 id="Document-ingestion-From-text-to-sparse-representation" class="common-anchor-header">Ingestão de documentos: Do texto à representação esparsa<button data-href="#Document-ingestion-From-text-to-sparse-representation" class="anchor-icon" translate="no">
+    </button></h2><p>O algoritmo <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> é um algoritmo de pontuação de relevância baseado em termos, amplamente utilizado na recuperação de texto completo. No Milvus, o BM25 é implementado como um pipeline de recuperação esparsa que converte texto em representações ponderadas por termos e recupera <em>os K</em> documentos principais utilizando índices esparsos distribuídos.</p>
+<p>O fluxo de trabalho global consiste em dois percursos simétricos: <strong>a ingestão de documentos</strong> e <strong>o processamento do texto da consulta</strong>, que partilham a mesma lógica de análise de texto.</p>
+<h3 id="Document-ingestion-From-text-to-sparse-representation" class="common-anchor-header">Ingestão de documentos: do texto à representação esparsa<button data-href="#Document-ingestion-From-text-to-sparse-representation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,28 +58,28 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando um documento é inserido, o seu texto em bruto é primeiro processado por um <strong><a href="/docs/pt/analyzer-overview.md">analisador</a></strong>, que o converte em termos individuais.</p>
+    </button></h3><p>Quando um documento é inserido, o seu texto bruto é primeiro processado por um <strong><a href="/docs/pt/analyzer-overview.md">analisador</a></strong>, que tokeniza o texto em termos individuais.</p>
 <p>Por exemplo, o documento:</p>
 <pre><code translate="no" class="language-plaintext">&quot;We are loving Milvus!&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>pode ser analisado nos seguintes termos:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;we&quot;, &quot;love&quot;, &quot;milvus&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Cada documento é então representado como uma representação de frequência de termos (TF), que regista o número de vezes que cada termo aparece no documento. Por exemplo:</p>
+<p>Cada documento é então representado como uma representação de frequência de termos (TF), que regista quantas vezes cada termo aparece no documento. Por exemplo:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;we&quot;: 1,
   &quot;love&quot;: 1,
   &quot;milvus&quot;: 1
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Ao mesmo tempo, o Milvus actualiza as estatísticas ao nível do corpus, incluindo:</p>
+<p>Ao mesmo tempo, o Milvus atualiza as estatísticas ao nível do corpus, incluindo:</p>
 <ul>
-<li><p>a frequência de documentos (DF) de cada termo</p></li>
-<li><p>o comprimento médio do documento</p></li>
-<li><p>listas de lançamento que mapeiam cada termo para os documentos que o contêm</p></li>
+<li><p>a frequência do documento (DF) de cada termo</p></li>
+<li><p>o comprimento médio dos documentos</p></li>
+<li><p>listas de postagem que mapeiam cada termo para os documentos que o contêm</p></li>
 </ul>
-<p>A representação TF do documento é inserida em <strong>embeddings esparsos</strong>, onde os lançamentos de termos são particionados entre nós para uma recuperação escalável.</p>
-<h3 id="Query-text-process-Apply-IDF-weighting" class="common-anchor-header">Processo de texto de consulta: Aplicar a ponderação IDF<button data-href="#Query-text-process-Apply-IDF-weighting" class="anchor-icon" translate="no">
+<p>A representação TF do documento é inserida em <strong>embeddings esparsas</strong>, onde as postagens de termos são repartidas pelos nós para permitir uma recuperação escalável.</p>
+<h3 id="Query-text-process-Apply-IDF-weighting" class="common-anchor-header">Processo de texto da consulta: aplicar ponderação IDF<button data-href="#Query-text-process-Apply-IDF-weighting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,22 +94,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando é emitida uma consulta baseada em texto, esta é processada pelo <strong>mesmo analisador</strong> utilizado durante a <a href="/docs/pt/bm25-function.md#Document-ingestion-From-text-to-sparse-representation">ingestão de documentos</a>, garantindo uma segmentação consistente dos termos.</p>
+    </button></h3><p>Quando é emitida uma consulta baseada em texto, esta é processada pelo <strong>mesmo analisador</strong> utilizado durante <a href="/docs/pt/bm25-function.md#Document-ingestion-From-text-to-sparse-representation">a ingestão de documentos</a>, garantindo uma segmentação consistente dos termos.</p>
 <p>Por exemplo, a consulta:</p>
 <pre><code translate="no" class="language-plaintext">&quot;who loves Milvus?&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>pode ser analisada em:</p>
+<p>pode ser analisada da seguinte forma:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;who&quot;, &quot;love&quot;, &quot;milvus&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Para cada termo da consulta, o Milvus procura a sua <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">frequência inversa de documentos</a> (IDF) nas estatísticas do corpus. A IDF reflecte o grau de informação de um termo em todo o conjunto de dados: os termos mais raros recebem pesos mais elevados, enquanto os termos comuns recebem pesos mais baixos.</p>
-<p>Conceptualmente, isto produz um conjunto de termos de consulta ponderados por IDF, tais como:</p>
+<p>Para cada termo da consulta, o Milvus consulta a sua <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">frequência inversa do documento</a> (IDF) a partir das estatísticas do corpus. O IDF reflete o quão informativo um termo é em todo o conjunto de dados: os termos mais raros recebem pesos mais elevados, enquanto os termos comuns recebem pesos mais baixos.</p>
+<p>Conceitualmente, isto produz um conjunto de termos de consulta ponderados por IDF, tais como:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;who&quot;: 0.1,
   &quot;love&quot;: 0.5,
   &quot;milvus&quot;: 1.2
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="BM25-scoring-and-top-K-retrieval" class="common-anchor-header">Pontuação BM25 e recuperação do top K<button data-href="#BM25-scoring-and-top-K-retrieval" class="anchor-icon" translate="no">
+<h3 id="BM25-scoring-and-top-K-retrieval" class="common-anchor-header">Pontuação BM25 e recuperação dos K melhores<button data-href="#BM25-scoring-and-top-K-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -123,7 +124,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O BM25 classifica os documentos calculando uma pontuação de relevância com base nos termos de consulta correspondentes. A pontuação é efectuada ao <strong>nível</strong> do <strong>termo</strong> e agregada ao <strong>nível do documento</strong>.</p>
+    </button></h3><p>O BM25 classifica os documentos calculando uma pontuação de relevância com base nos termos da consulta correspondentes. A pontuação é realizada ao <strong>nível</strong> do <strong>termo</strong> e agregada ao <strong>nível</strong> do <strong>documento</strong>.</p>
 <p><strong>Pontuação ao nível do termo</strong></p>
 <p>Para cada termo de consulta que aparece num documento, o BM25 calcula uma pontuação ao nível do termo:</p>
 <pre><code translate="no" class="language-plaintext">term_score =
@@ -133,16 +134,16 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Onde:</p>
 <ul>
-<li><p><strong>IDF(termo)</strong> reflecte a raridade do termo na coleção</p></li>
-<li><p><strong>TF_boost(..., k1)</strong> aumenta com a frequência do termo mas satura à medida que a frequência aumenta</p></li>
-<li><p><strong>length_normalization(..., b)</strong> ajusta a pontuação com base no comprimento do documento</p></li>
+<li><p><strong>IDF(termo)</strong> reflete a raridade do termo na coleção</p></li>
+<li><p><strong>TF_boost(…, k1)</strong> aumenta com a frequência do termo, mas satura à medida que a frequência cresce</p></li>
+<li><p><strong>length_normalization(…, b)</strong> ajusta a pontuação com base no comprimento do documento</p></li>
 </ul>
 <p><strong>Pontuação ao nível do documento e recuperação Top-K</strong></p>
 <p>A pontuação final do documento é a soma das pontuações ao nível do termo para todos os termos da consulta correspondentes:</p>
 <pre><code translate="no" class="language-plaintext">document_score =
   sum of term_score over all matched query terms
 <button class="copy-code-btn"></button></code></pre>
-<p>Os documentos são classificados por suas pontuações finais e os K documentos com as pontuações mais altas são retornados.</p>
+<p>Os documentos são classificados de acordo com as suas pontuações finais, e são devolvidos os K documentos com pontuação mais elevada.</p>
 <h2 id="Before-you-start" class="common-anchor-header">Antes de começar<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,18 +159,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Antes de utilizar a função BM25, planeie o esquema da coleção para garantir que suporta a pesquisa lexical de texto integral:</p>
+    </button></h2><p>Antes de utilizar a função BM25, planeie o esquema da sua coleção para garantir que suporta a pesquisa lexical de texto completo:</p>
 <ul>
-<li><p><strong>Um campo de texto para conteúdo em bruto</strong></p>
-<p>A sua coleção deve incluir um campo <code translate="no">VARCHAR</code> para armazenar texto em bruto. Este campo é a fonte do texto que será processado para a pesquisa de texto integral.</p></li>
+<li><p><strong>Um campo de texto para conteúdo bruto</strong></p>
+<p>A sua coleção deve incluir um campo « <code translate="no">VARCHAR</code> » para armazenar texto bruto. Este campo é a fonte do texto que será processado para a pesquisa de texto completo.</p></li>
 <li><p><strong>Um analisador para o campo de texto</strong></p>
-<p>O campo de texto tem de ter um analisador ativado. O analisador define a forma como o texto é tokenizado e normalizado antes de a relevância lexical ser calculada pela função BM25.</p>
-<p>Por predefinição, o Milvus fornece um analisador incorporado que tokeniza o texto com base no espaço em branco e na pontuação. Se a sua aplicação requer um comportamento personalizado de tokenização ou normalização, pode definir um analisador personalizado. Consulte <a href="/docs/pt/choose-the-right-analyzer-for-your-use-case.md">Escolha o analisador certo para seu caso de uso</a> para obter detalhes.</p></li>
+<p>O campo de texto deve ter um analisador ativado. O analisador define como o texto é tokenizado e normalizado antes de a relevância lexical ser calculada pela função BM25.</p>
+<p>Por predefinição, o Milvus fornece um analisador integrado que tokeniza o texto com base em espaços em branco e pontuação. Se a sua aplicação exigir um comportamento personalizado de tokenização ou normalização, pode definir um analisador personalizado. Consulte <a href="/docs/pt/choose-the-right-analyzer-for-your-use-case.md">«Escolher o analisador certo para o seu caso de utilização</a> » para obter mais detalhes.</p></li>
 <li><p><strong>Um vetor esparso para a saída do BM25</strong></p>
-<p>Sua coleção deve incluir um campo <code translate="no">SPARSE_FLOAT_VECTOR</code> para armazenar as representações esparsas geradas pela função BM25. Esse campo é usado para indexação e recuperação durante a pesquisa de texto completo.</p></li>
+<p>A sua coleção deve incluir um campo « <code translate="no">SPARSE_FLOAT_VECTOR</code> » para armazenar as representações esparsas geradas pela função BM25. Este campo é utilizado para indexação e recuperação durante a pesquisa de texto completo.</p></li>
 </ul>
-<p>Após estas considerações ao nível do esquema terem sido definidas, proceda à criação da coleção e utilize a função BM25.</p>
-<h2 id="Step-1-Create-a-collection-with-a-BM25-function" class="common-anchor-header">Passo 1: Criar uma coleção com uma função BM25<button data-href="#Step-1-Create-a-collection-with-a-BM25-function" class="anchor-icon" translate="no">
+<p>Depois de esclarecidas estas considerações ao nível do esquema, avance para a criação da coleção e utilize a função BM25.</p>
+<h2 id="Step-1-Create-a-collection-with-a-BM25-function" class="common-anchor-header">Passo 1: Criar uma coleção com a função BM25<button data-href="#Step-1-Create-a-collection-with-a-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,15 +185,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar a função BM25, tem de a definir ao criar a coleção. A função torna-se parte do esquema da coleção e é aplicada automaticamente durante a inserção e pesquisa de dados.</p>
-<h4 id="Define-schema-fields" class="common-anchor-header">Definir campos de esquema</h4><p>O esquema da coleção deve incluir pelo menos três campos obrigatórios:</p>
+    </button></h2><p>Para utilizar a função BM25, deve defini-la ao criar a coleção. A função passa a fazer parte do esquema da coleção e é aplicada automaticamente durante a inserção de dados e a pesquisa.</p>
+<h4 id="Define-schema-fields" class="common-anchor-header">Definir campos do esquema</h4><p>O esquema da sua coleção deve incluir, pelo menos, três campos obrigatórios:</p>
 <ul>
-<li><p><strong>Campo primário</strong>: Identifica de forma única cada entidade na coleção.</p></li>
-<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): Armazena documentos de texto em bruto. Deve definir <code translate="no">enable_analyzer=True</code> para que o Milvus possa processar o texto para a classificação de relevância BM25. Por defeito, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md"><code translate="no">standard</code></a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
-<li><p><strong>Campo de vetor esparso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Armazena embeddings esparsos gerados automaticamente pela função BM25.</p></li>
+<li><p><strong>Campo primário</strong>: identifica de forma única cada entidade na coleção.</p></li>
+<li><p><strong>Campo de texto</strong> (<code translate="no">VARCHAR</code>): Armazena documentos de texto em bruto. É necessário definir « <code translate="no">enable_analyzer=True</code> » para que o Milvus possa processar o texto para a classificação de relevância BM25. Por predefinição, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/pt/standard-analyzer.md"> analisador</a> para a análise de texto. Para configurar um analisador diferente, consulte a <a href="/docs/pt/analyzer-overview.md">Visão Geral do Analisador</a>.</p></li>
+<li><p><strong>Campo de vetor esparso</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): Armazena embeddings esparsas geradas automaticamente pela função BM25.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
@@ -233,10 +240,10 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -271,6 +278,26 @@ schema.WithField(entity.NewField().
     WithDataType(entity.FieldTypeSparseVector),
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64).<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar).<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">1000</span>).<span class="hljs-title function_ invoke__">enable_analyzer</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;sparse&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::SparseFloatVector));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR));
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
@@ -295,7 +322,7 @@ schema.WithField(entity.NewField().
   },
 ];
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -323,6 +350,14 @@ schema.WithField(entity.NewField().
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Define-the-BM25-function" class="common-anchor-header">Definir a função BM25</h4><p>A função BM25 converte texto tokenizado em vetores esparsos que suportam a pontuação BM25.</p>
 <p>Defina a função e adicione-a ao seu esquema:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
@@ -351,6 +386,19 @@ schema.addFunction(Function.builder()
     WithType(entity.FunctionTypeBM25)
 schema.WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">bm25_function</span> = Function::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
+    .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Bm25)
+    .<span class="hljs-title function_ invoke__">input_fields</span>([<span class="hljs-string">&quot;text&quot;</span>])
+    .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;sparse&quot;</span>]);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = schema.<span class="hljs-title function_ invoke__">add_function</span>(bm25_function);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, milvus::FunctionType::BM25);
+function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>);
+schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> functions = [
     {
       <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
@@ -360,7 +408,7 @@ schema.WithFunction(function)
       <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       <span class="hljs-attr">params</span>: {},
     },
-]；
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -395,7 +443,15 @@ schema.WithFunction(function)
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Configure-the-index" class="common-anchor-header">Configurar o índice</h4><p>Depois de definir o esquema com os campos necessários e a função incorporada, configure o índice para a sua coleção.</p>
+<h4 id="Configure-the-index" class="common-anchor-header">Configure o índice</h4><p>Depois de definir o esquema com os campos necessários e a função integrada, configure o índice para a sua coleção.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -421,16 +477,31 @@ params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hlj
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
         .extraParams(params)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
-    index.NewAutoIndex(entity.MetricType(entity.BM25)))
-    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
+    index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.05</span>))
+indexOption.WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">index_params</span> = IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::SparseInvertedIndex)
+    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Bm25)
+    .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+        (<span class="hljs-string">&quot;inverted_index_algo&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+        (<span class="hljs-string">&quot;bm25_k1&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;1.2&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+        (<span class="hljs-string">&quot;bm25_b&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;0.75&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+    ]));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> index_params = milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndxType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-string">&quot;1.2&quot;</span>);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-string">&quot;0.75&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -449,7 +520,7 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
             &quot;params&quot;:{
                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
                &quot;bm25_k1&quot;: 1.2,
@@ -458,14 +529,25 @@ indexes.add(IndexParam.builder()
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-the-collection" class="common-anchor-header">Criar a coleção</h4><p>Crie agora a coleção utilizando o esquema e os parâmetros de índice definidos:</p>
+<h4 id="Create-the-collection" class="common-anchor-header">Crie a coleção</h4><p>Agora, crie a coleção utilizando o esquema e os parâmetros de índice definidos:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
     schema=schema,
     index_params=index_params
 )
+
+client.load_collection(<span class="hljs-string">&#x27;my_collection&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -473,6 +555,9 @@ indexes.add(IndexParam.builder()
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
@@ -481,13 +566,44 @@ client.createCollection(requestCreate);
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>(
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+<span class="hljs-keyword">use</span> serde_json::json;
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">index_param</span>(index_params)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">load_collection</span>(LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>().<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>).<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema))
+                                    .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(index_params));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: index_params,
-    <span class="hljs-attr">functions</span>: functions
-);
+    <span class="hljs-attr">functions</span>: functions,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -502,8 +618,16 @@ curl --request POST \
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Uma vez criada a coleção com uma função BM25, pode inserir texto e efetuar pesquisas lexicais com base na consulta de texto.</p>
+<p>Assim que a coleção com uma função BM25 estiver criada, pode inserir texto e realizar pesquisas lexicais com base numa consulta de texto.</p>
 <h2 id="Step-2-Insert-text-data-into-the-collection" class="common-anchor-header">Passo 2: Inserir dados de texto na coleção<button data-href="#Step-2-Insert-text-data-into-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -519,7 +643,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de configurar a coleção e o índice, está pronto para inserir dados de texto. Neste processo, só precisa de fornecer o texto em bruto. A função BM25 que definimos anteriormente gera automaticamente o vetor esparso para cada entrada de texto.</p>
+    </button></h2><p>Depois de configurar a sua coleção e o índice, está pronto para inserir dados de texto. Neste processo, basta fornecer o texto bruto. A função BM25 que definimos anteriormente gera automaticamente o vetor esparso para cada entrada de texto.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.insert(<span class="hljs-string">&#x27;my_collection&#x27;</span>, [
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
@@ -543,15 +675,53 @@ client.insert(InsertReq.builder()
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithVarcharColumn(<span class="hljs-string">&quot;text&quot;</span>, []<span class="hljs-type">string</span>{
+        <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
+        <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
+        <span class="hljs-string">&quot;data mining and information retrieval overlap in research.&quot;</span>,
+    }),
+)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client.<span class="hljs-title function_ invoke__">insert</span>(
+    InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[
+            json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>}),
+            json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>}),
+            json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;data mining and information retrieval overlap in research.&quot;</span>}),
+        ])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::EntityRows data = {
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;data mining and information retrieval overlap in research.&quot;</span>}}
+};
+
+milvus::InsertResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data))
+                                , response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-<span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-<span class="hljs-attr">data</span>: [
-    {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
-    {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
-    {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;data mining and information retrieval overlap in research.&#x27;</span>},
-]);
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+    <span class="hljs-attr">data</span>: [
+        {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
+        {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
+        {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;data mining and information retrieval overlap in research.&#x27;</span>},
+    ],
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
@@ -568,7 +738,7 @@ client.insert(InsertReq.builder()
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Step-3-Search-with-text-query" class="common-anchor-header">Passo 3: Pesquisar com consulta de texto<button data-href="#Step-3-Search-with-text-query" class="anchor-icon" translate="no">
+<h2 id="Step-3-Search-with-text-query" class="common-anchor-header">Passo 3: Pesquisar com uma consulta de texto<button data-href="#Step-3-Search-with-text-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -583,9 +753,17 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma vez inseridos os dados na sua coleção, pode efetuar pesquisas de texto completo utilizando consultas de texto em bruto. Milvus converte automaticamente a sua consulta num vetor esparso e classifica os resultados de pesquisa correspondentes utilizando o algoritmo BM25, e depois devolve os resultados topK (<code translate="no">limit</code>).</p>
+    </button></h2><p>Depois de inserir dados na sua coleção, pode realizar pesquisas de texto completo utilizando consultas de texto bruto. O Milvus converte automaticamente a sua consulta num vetor esparso e classifica os resultados de pesquisa correspondentes utilizando o algoritmo BM25, devolvendo em seguida os resultados topK (<code translate="no">limit</code>).</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">search_params = {
-
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
 }
 
 res = client.search(
@@ -604,6 +782,7 @@ res = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -615,6 +794,7 @@ Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <s
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
@@ -634,14 +814,41 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;text: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;text&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>(
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client.<span class="hljs-title function_ invoke__">search</span>(
+    SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">EmbeddedText</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()]))
+        .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Bm25)
+        .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;text&quot;</span>])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                       .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)
+                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                       .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;BM25&#x27;</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-
-)
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
@@ -659,6 +866,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
         &quot;text&quot;
     ],
     &quot;searchParams&quot;:{
+        &quot;metric_type&quot;: &quot;BM25&quot;,
         &quot;params&quot;:{}
     }
 }&#x27;</span>

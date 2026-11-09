@@ -95,7 +95,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
   --<span class="hljs-built_in">wait</span> --wait-for-jobs \
   https://github.com/zilliztech/milvus-operator/releases/download/v1.3.7/milvus-operator-1.3.7.tgz</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verá um resultado semelhante ao seguinte após a conclusão do processo de instalação.</p>
+<p>Verá um resultado semelhante ao seguinte após o término do processo de instalação.</p>
 <pre><code translate="no" class="language-shell">NAME: milvus-operator
 LAST DEPLOYED: Thu Jul  7 13:18:40 2022
 NAMESPACE: milvus-operator
@@ -110,7 +110,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<p>Se já tiver instalado o Milvus Operator anteriormente, atualize-o utilizando o seguinte comando:</p>
+<p>Se já tiver instalado o Milvus Operator anteriormente, atualize-o utilizando o comando seguinte:</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
@@ -177,12 +177,12 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Assim que o pod do Milvus Operator estiver a funcionar, pode implementar um cluster do Milvus da seguinte forma.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O comando acima implementa um cluster Milvus com <strong>o Woodpecker</strong> como fila de mensagens (recomendado para a v3.0.3) e todos os novos componentes arquitetónicos, incluindo o Streaming Node.</p>
+<p>O comando acima implementa um cluster Milvus com <strong>o Woodpecker</strong> como fila de mensagens (recomendado para a v3.0.5) e todos os novos componentes arquitetónicos, incluindo o Streaming Node.</p>
 <p><strong>Destaques da arquitetura nesta implementação:</strong></p>
 <ul>
 <li><strong>Fila de mensagens</strong>: <a href="/docs/pt/woodpecker.md">utiliza o Woodpecker</a> (reduz a manutenção da infraestrutura)</li>
 <li><strong>Nó de streaming</strong>: ativado para um processamento de dados melhorado</li>
-<li><strong>Coordenador Mix</strong>: Componentes de coordenação consolidados para maior eficiência</li>
+<li><strong>Coordenador Mix</strong>: Componentes do coordenador consolidados para maior eficiência</li>
 </ul>
 <p>Para personalizar estas definições, recomendamos que utilize a <a href="https://milvus.io/tools/sizing">Ferramenta de Dimensionamento do Milvus</a> para ajustar as configurações com base no tamanho real dos seus dados e, em seguida, descarregue o ficheiro YAML correspondente. Para saber mais sobre os parâmetros de configuração, consulte <a href="https://milvus.io/docs/system_configuration.md">a Lista de Verificação de Configurações do Sistema Milvus</a>.</p>
 <div class="alert note">
@@ -314,7 +314,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span></span> 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Aceda à Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Aceda à interface web do Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

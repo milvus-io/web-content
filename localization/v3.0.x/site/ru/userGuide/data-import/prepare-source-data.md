@@ -3,8 +3,8 @@ id: prepare-source-data.md
 order: 0
 title: Подготовка исходных данных
 summary: >-
-  На этой странице рассказывается о том, что следует учесть, прежде чем начать
-  массово вставлять данные в свою коллекцию.
+  На этой странице рассматриваются моменты, которые следует учесть, прежде чем
+  приступить к массовой вставке данных в вашу коллекцию.
 ---
 <h1 id="Prepare-Source-Data" class="common-anchor-header">Подготовка исходных данных<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>На этой странице рассказывается о том, что следует учесть перед тем, как начать массово вставлять данные в коллекцию.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Перед началом работы<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>На этой странице рассматриваются моменты, которые следует учесть перед началом массовой вставки данных в коллекцию.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Перед началом<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,29 +37,33 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Целевая коллекция требует сопоставления исходных данных с ее схемой. На диаграмме ниже показано, как допустимые исходные данные сопоставляются со схемой целевой коллекции.</p>
-<p>
+    </button></h2><p>Целевая коллекция требует сопоставления исходных данных её схеме. На приведённой ниже схеме показано, как допустимые исходные данные сопоставляются схеме целевой коллекции.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
-   </span> <span class="img-wrapper"> <span>Сопоставление данных со схемой</span> </span></p>
-<p>Вам следует внимательно изучить свои данные и в соответствии с ними разработать схему целевой коллекции.</p>
-<p>Если взять в качестве примера данные JSON на приведенной выше диаграмме, то в списке строк есть две сущности, каждая строка имеет шесть полей. Схема коллекции выборочно включает четыре: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> и <strong>scalar_2</strong>.</p>
-<p>При разработке схемы необходимо учитывать еще два момента:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" /> 
+   <span>Сопоставление данных со схемой</span>
+  
+ </span></p>
+<p>Вам следует тщательно проанализировать свои данные и соответствующим образом разработать схему целевой коллекции.</p>
+<p>Если взять в качестве примера данные JSON на приведенной выше схеме, то в списке строк присутствуют две сущности, каждая из которых содержит шесть полей. Схема коллекции выборочно включает четыре из них: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> и <strong>scalar_2</strong>.</p>
+<p>При разработке схемы необходимо учитывать ещё два момента:</p>
 <ul>
-<li><p><strong>Включать ли автоидентификацию.</strong></p>
-<p>Поле <strong>id</strong> служит первичным полем коллекции. Чтобы первичное поле автоматически увеличивалось, можно включить в схему функцию <strong>AutoID</strong>. В этом случае необходимо исключить поле <strong>id</strong> из каждой строки исходных данных.</p></li>
+<li><p><strong>Включать ли функцию AutoID</strong></p>
+<p>Поле <strong>id</strong> служит первичным полем коллекции. Чтобы первичное поле автоматически увеличивалось, можно включить <strong>функцию AutoID</strong> в схеме. В этом случае необходимо исключить поле <strong>id</strong> из каждой строки исходных данных.</p></li>
 <li><p><strong>Включать ли динамические поля</strong></p>
-<p>Целевая коллекция также может хранить поля, не включенные в ее предопределенную схему, если схема включает динамические поля. Поле <strong>$meta</strong> - это зарезервированное поле JSON для хранения динамических полей и их значений в виде пар ключ-значение. На приведенной выше схеме поля <strong>dynamic_field_1</strong> и <strong>dynamic_field_2</strong> и их значения будут сохранены как пары ключ-значение в поле <strong>$meta</strong>.</p></li>
+<p>Целевая коллекция также может хранить поля, не включенные в её заранее определённую схему, если в схеме разрешены динамические поля. Поле <strong>$meta</strong> — это зарезервированное поле JSON, предназначенное для хранения динамических полей и их значений в виде пар «ключ-значение». На приведенной выше схеме поля <strong>dynamic_field_1</strong> и <strong>dynamic_field_2</strong>, а также их значения будут сохранены в виде пар «ключ-значение» в поле <strong>$meta</strong>.</p></li>
 </ul>
-<p>В следующем коде показано, как настроить схему для коллекции, показанной на рисунке выше.</p>
+<p>В приведенном ниже коде показано, как настроить схему для коллекции, изображённой на приведенной выше схеме.</p>
 <div class="language-python">
-<p>Для получения дополнительной информации обратитесь к <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> в справочнике SDK.</p>
+<p>Для получения дополнительной информации см. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> в справочнике по SDK.</p>
 </div>
 <div class="language-java">
-<p>Чтобы получить дополнительную информацию, обратитесь к <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> в справочнике SDK.</p>
+<p>Для получения дополнительной информации см. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> в справочнике по SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># You need to work out a collection schema out of your dataset.</span>
@@ -206,6 +210,39 @@ schema.verify()
     <span class="hljs-keyword">return</span> schema;
 }
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="StructArray-fields-in-source-files" class="common-anchor-header">Поля StructArray в исходных файлах<button data-href="#StructArray-fields-in-source-files" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Поле <a href="/docs/ru/array-of-structs.md">StructArray</a> передаётся по-разному в зависимости от формата исходного файла. Модуль импорта ожидает одну из следующих структур:</p>
+<table>
+<thead>
+<tr><th>Формат</th><th>Формат поля StructArray</th></tr>
+</thead>
+<tbody>
+<tr><td>JSON, JSONL</td><td>Значение поля представляет собой список объектов, по одному на каждый элемент Struct, с ключами, соответствующими именам подполей: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
+<tr><td>CSV</td><td>Ячейка содержит тот же текст JSON, что и в формате JSON.</td></tr>
+<tr><td>Parquet</td><td>По одному столбцу на каждое поле StructArray с типом <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, по одному дочернему объекту struct на каждое подполе. Скалярное подполе представляет собой скалярный дочерний объект, а векторное подполе — список элементов соответствующего типа, например <code translate="no">list&lt;float32&gt;</code>.</td></tr>
+<tr><td>NumPy</td><td>Не поддерживается. Файлы NumPy содержат по одному файлу на каждое поле верхнего уровня и не имеют представления для поля StructArray. Для коллекций, содержащих поле StructArray, используйте файлы JSON, CSV или Parquet.</td></tr>
+</tbody>
+</table>
+<p>К значениям StructArray во всех поддерживаемых форматах применяются следующие правила:</p>
+<ul>
+<li><p>Внутри каждого элемента Struct используйте имена подполей, а не пути, такие как <code translate="no">chunks[text]</code>. Плоские столбцы или ключи с именами <code translate="no">chunks[text]</code> отклоняются.</p></li>
+<li><p>Каждый элемент Struct должен содержать все подполя схемы Struct, а сам элемент Struct не может быть нулевым, например <code translate="no">[null, {...}]</code>. Все значение StructArray может быть нулевым только в том случае, если поле StructArray допускает нулевые значения.</p></li>
+</ul>
+<p>О ограничениях со стороны схемы см. раздел <a href="/docs/ru/structarray-limits.md#Import-limits">«Ограничения StructArray</a>».</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Настройка BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -221,12 +258,12 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong> - это инструмент, предназначенный для преобразования необработанных наборов данных в формат, подходящий для импорта через RESTful Import API. Он предлагает два типа писателей:</p>
+    </button></h2><p><strong>BulkWriter</strong> — это инструмент, предназначенный для преобразования необработанных наборов данных в формат, подходящий для импорта через RESTful Import API. Он предлагает два типа записывающих модулей:</p>
 <ul>
-<li><strong>LocalBulkWriter</strong>: Считывает указанный набор данных и преобразует его в удобный для использования формат.</li>
-<li><strong>RemoteBulkWriter</strong>: Выполняет ту же задачу, что и LocalBulkWriter, но дополнительно передает преобразованные файлы данных в указанное удаленное хранилище объектов.</li>
+<li><strong>LocalBulkWriter</strong>: считывает указанный набор данных и преобразует его в удобный для использования формат.</li>
+<li><strong>RemoteBulkWriter</strong>: выполняет ту же задачу, что и LocalBulkWriter, но дополнительно передает преобразованные файлы данных в указанный удалённый корзину хранилища объектов.</li>
 </ul>
-<p><strong>RemoteBulkWriter</strong> отличается от <strong>LocalBulkWriter</strong> тем, что <strong>RemoteBulkWriter</strong> передает преобразованные файлы данных в целевое ведро хранения объектов.</p>
+<p><strong>RemoteBulkWriter</strong> отличается от <strong>LocalBulkWriter</strong> тем, что <strong>RemoteBulkWriter</strong> передаёт преобразованные файлы данных в целевой контейнер объектного хранилища.</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Настройка LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,9 +279,11 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>LocalBulkWriter</strong> добавляет строки из исходного набора данных и фиксирует их в локальном файле указанного формата.</p>
+    </button></h3><p><strong>LocalBulkWriter</strong> добавляет строки из исходного набора данных и записывает их в локальный файл указанного формата.</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -273,21 +312,21 @@ writer = LocalBulkWriter(
 <p>При создании <strong>LocalBulkWriter</strong> необходимо:</p>
 <ul>
 <li>Ссылаться на созданную схему в <code translate="no">schema</code>.</li>
-<li>Задать <code translate="no">local_path</code> в качестве выходного каталога.</li>
-<li>Установить <code translate="no">file_type</code> в качестве типа выходного файла.</li>
-<li>Если ваш набор данных содержит большое количество записей, рекомендуется сегментировать данные, установив для параметра <code translate="no">segment_size</code> соответствующее значение.</li>
+<li>Указать <code translate="no">local_path</code> в качестве каталога вывода.</li>
+<li>Установить для параметра ` <code translate="no">file_type</code> ` тип выходного файла.</li>
+<li>Если ваш набор данных содержит большое количество записей, рекомендуется сегментировать данные, установив для параметра ` <code translate="no">segment_size</code> ` соответствующее значение.</li>
 </ul>
-<p>Подробнее о настройках параметров см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> в справке SDK.</p>
+<p>Подробные сведения о настройках параметров см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">«LocalBulkWriter»</a> справочника по SDK.</p>
 </div>
 <div class="language-java">
-<p>При создании <strong>LocalBulkWriter</strong> необходимо:</p>
+<p>При создании объекта <strong>LocalBulkWriter</strong> необходимо:</p>
 <ul>
-<li>Ссылаться на созданную схему в <code translate="no">CollectionSchema()</code>.</li>
-<li>Задать выходной каталог в <code translate="no">withLocalPath()</code>.</li>
-<li>Задать тип выходного файла в <code translate="no">withFileType()</code>.</li>
-<li>Если ваш набор данных содержит большое количество записей, рекомендуется сегментировать данные, установив подходящее значение параметра <code translate="no">withChunkSize()</code>.</li>
+<li>Ссылаться на созданную схему в параметре ` <code translate="no">CollectionSchema()</code>`.</li>
+<li>Указать каталог вывода в параметре ` <code translate="no">withLocalPath()</code>`.</li>
+<li>Указать тип выходного файла в параметре ` <code translate="no">withFileType()</code>`.</li>
+<li>Если ваш набор данных содержит большое количество записей, рекомендуется сегментировать данные, установив для параметра ` <code translate="no">withChunkSize()</code> ` подходящее значение.</li>
 </ul>
-<p>Подробнее о настройках параметров см. в разделе LocalBulkWriter в справке SDK.</p>
+<p>Подробные сведения о настройках параметров см. в разделе «LocalBulkWriter» в справочнике по SDK.</p>
 </div>
 <h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Настройка RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -304,9 +343,11 @@ writer = LocalBulkWriter(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Вместо того чтобы фиксировать добавленные данные в локальный файл, <strong>RemoteBulkWriter</strong> фиксирует их в удаленном бакете. Поэтому перед созданием <strong>RemoteBulkWriter</strong> необходимо настроить объект <strong>ConnectParam</strong>.</p>
+    </button></h3><p>Вместо фиксации добавленных данных в локальный файл <strong>RemoteBulkWriter</strong> фиксирует их в удалённом бакете. Поэтому перед созданием <strong>RemoteBulkWriter</strong> необходимо настроить объект <strong>ConnectParam</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -354,9 +395,11 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Когда параметры соединения готовы, вы можете ссылаться на них в <strong>RemoteBulkWriter</strong> следующим образом:</p>
+<p>После подготовки параметров подключения вы можете использовать их в <strong>RemoteBulkWriter</strong> следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
@@ -382,10 +425,10 @@ writer = RemoteBulkWriter(
 <span class="hljs-type">RemoteBulkWriter</span> <span class="hljs-variable">remoteBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(remoteBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Параметры для создания <strong>RemoteBulkWriter</strong> почти не отличаются от параметров для <strong>LocalBulkWriter</strong>, за исключением <code translate="no">connect_param</code>. Подробнее о настройках параметров см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> в справке SDK.</p>
+<p>Параметры для создания <strong>RemoteBulkWriter</strong> практически не отличаются от параметров <strong>LocalBulkWriter</strong>, за исключением параметра ` <code translate="no">connect_param</code>`. Подробные сведения о настройках параметров см. в <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">разделах «RemoteBulkWriter»</a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">«ConnectParam»</a> в справочнике по SDK.</p>
 </div>
 <div class="language-java">
-<p>Параметры для создания <strong>RemoteBulkWriter</strong> почти не отличаются от параметров для <strong>LocalBulkWriter</strong>, за исключением <code translate="no">StorageConnectParam</code>. Подробнее о настройках параметров см. в разделах RemoteBulkWriter и StorageConnectParam в справке SDK.</p>
+<p>Параметры для создания <strong>RemoteBulkWriter</strong> практически не отличаются от параметров для <strong>LocalBulkWriter</strong>, за исключением параметра ` <code translate="no">StorageConnectParam</code>`. Подробности о настройках параметров см. в разделах «RemoteBulkWriter» и «StorageConnectParam» в справочнике по SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Начало записи<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -403,14 +446,16 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>У <strong>BulkWriter</strong> есть два метода: <code translate="no">append_row()</code> добавляет строку из исходного набора данных и <code translate="no">commit()</code> фиксирует добавленные строки в локальный файл или удаленный бакет.</p>
+<p>Объект <strong>BulkWriter</strong> имеет два метода: <code translate="no">append_row()</code> добавляет строку из исходного набора данных, а <code translate="no">commit()</code> фиксирует добавленные строки в локальном файле или удаленном хранилище.</p>
 </div>
 <div class="language-java">
-<p>У <strong>BulkWriter</strong> есть два метода: <code translate="no">appendRow()</code> добавляет строку из исходного набора данных и <code translate="no">commit()</code> фиксирует добавленные строки в локальный файл или удаленный бакет.</p>
+<p>Объект <strong>BulkWriter</strong> имеет два метода: <code translate="no">appendRow()</code> добавляет строку из исходного набора данных, а <code translate="no">commit()</code> фиксирует добавленные строки в локальном файле или удаленном бакете.</p>
 </div>
-<p>В демонстрационных целях следующий код добавляет случайно сгенерированные данные.</p>
+<p>В демонстрационных целях в приведённом ниже коде добавляются случайно сгенерированные данные.</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
@@ -623,13 +668,15 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Чтобы проверить результаты, вы можете получить фактический путь вывода, распечатав свойство <code translate="no">batch_files</code> писателя.</p>
+<p>Чтобы проверить результаты, можно получить фактический путь вывода, выведя на печать свойство <code translate="no">batch_files</code> записывающего модуля.</p>
 </div>
 <div class="language-java">
-<p>Чтобы проверить результаты, вы можете получить фактический путь вывода, распечатав метод <code translate="no">getBatchFiles()</code> писателя.</p>
+<p>Чтобы проверить результаты, можно получить фактический путь вывода, выведя на печать метод <code translate="no">getBatchFiles()</code> объекта записи.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
+ <a href="#python">Python 
+ </a> <a href="#java"> Java</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
 <span class="hljs-comment"># [[&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/1.parquet&#x27;],</span>
@@ -649,7 +696,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong> генерирует UUID, создает вложенную папку с UUID в предоставленном каталоге вывода и помещает все сгенерированные файлы в эту вложенную папку. <a href="https://assets.zilliz.com/bulk_writer.zip">Щелкните здесь</a>, чтобы загрузить готовый пример данных.</p>
+<p><strong>BulkWriter</strong> генерирует UUID, создает подпапку с использованием этого UUID в указанном каталоге вывода и помещает все сгенерированные файлы в эту подпапку. <a href="https://assets.zilliz.com/bulk_writer.zip">Нажмите здесь</a>, чтобы загрузить подготовленные примеры данных.</p>
 <p>Возможные структуры папок следующие:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

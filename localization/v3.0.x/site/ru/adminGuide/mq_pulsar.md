@@ -75,7 +75,7 @@ title: Пульсар
       </svg>
     </button></h3><p>Чтобы развернуть кластер Milvus, использующий входящий в состав дистрибутива Pulsar (вместо Woodpecker), установите диаграмму Helm с включенным Streaming Node:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -103,7 +103,7 @@ title: Пульсар
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы подключить Milvus к <strong>внешнему</strong> сервису Pulsar, отключите встроенный Pulsar и включите « <code translate="no">externalPulsar</code> » в переопределении « <code translate="no">values.yaml</code> »:</p>
+    </button></h3><p>Чтобы подключить Milvus к <strong>внешнему</strong> сервису Pulsar, отключите встроенный Pulsar и включите « <code translate="no">externalPulsar</code> » в переопределении файла « <code translate="no">values.yaml</code> »:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">pulsarv3:</span>
   <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-attr">externalPulsar:</span>
@@ -263,7 +263,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные <strong>с очередью сообщений</strong>: При обновлении до Milvus v3.0.3 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.
+<li><strong>Обновление с версии 2.5.x до 2.6.x:</strong> <strong>Ограничения</strong>, связанные <strong>с очередью сообщений</strong>: При обновлении до Milvus v3.0.5 необходимо сохранить текущий выбор системы очереди сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.
 Если вы используете Pulsar и хотите продолжить его использование, не меняйте систему очередей сообщений во время обновления.</li>
 <li><strong>Pulsar v2 → v3:</strong> см. раздел <a href="/docs/ru/upgrade-pulsar-v3.md">«Обновление Pulsar с версии v2 до v3</a>»; чтобы остаться на версии v2, см. раздел <a href="/docs/ru/use-pulsar-v2.md">«Продолжение использования Pulsar v2</a>».</li>
 </ul>

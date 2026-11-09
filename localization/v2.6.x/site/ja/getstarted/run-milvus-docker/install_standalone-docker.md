@@ -37,7 +37,7 @@ title: Docker（Linux）でMilvusを実行する
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">Dockerをインストールしてください</a>。</li>
+<li><a href="https://docs.docker.com/get-docker/">Docker をインストールしてください</a>。</li>
 <li>インストール前に、<a href="/docs/ja/v2.6.x/prerequisite-docker.md">ハードウェアおよびソフトウェアの要件を確認してください</a>。</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">Docker での Milvus のインストール<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
@@ -63,20 +63,20 @@ title: Docker（Linux）でMilvusを実行する
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>v2.6.25の新機能:</strong></p>
+<p><strong>v2.6.26の新機能：</strong></p>
 <ul>
 <li><strong>ストリーミングノード</strong>：データ処理機能の強化</li>
 <li><strong>Woodpecker MQ</strong>: メンテナンスのオーバーヘッドを低減したメッセージキューの改善。詳細については「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpeckerの使用</a>」を参照してください</li>
-<li><strong>アーキテクチャの最適化</strong>：パフォーマンス向上のためにコンポーネントを統合</li>
+<li><strong>アーキテクチャの最適化</strong>：パフォーマンス向上のためにコンポーネントを統合しました</li>
 </ul>
-<p>常に最新のスクリプトをダウンロードし、最新の設定およびアーキテクチャの改善を確実に適用してください。</p>
+<p>常に最新のスクリプトをダウンロードし、最新の設定とアーキテクチャの改善を確実に適用してください。</p>
 <p>スタンドアロン展開モードで<a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a>を使用する場合は、<a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Composeによる</a>展開方法の使用を推奨します。</p>
 <p>イメージの取得で問題が発生した場合は、問題の詳細を<a href="mailto:community@zilliz.com">community@zilliz.com</a>までご連絡ください。必要なサポートを提供いたします。</p>
 </div>
 <p>インストールスクリプトの実行後：</p>
 <ul>
 <li>「milvus」という名前の Docker コンテナがポート<strong>19530</strong> で起動しました。</li>
-<li>Milvus とともに、同じコンテナ内に埋め込み型の etcd がインストールされ、ポート<strong>2379</strong> で動作しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。</li>
+<li>Milvus と同じコンテナ内に embed etcd がインストールされており、ポート<strong>2379</strong> で動作しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマッピングされています。</li>
 <li>Milvusのデフォルト設定を変更するには、現在のフォルダ内の<strong>user.yamlファイル</strong>に設定を追加し、サービスを再起動してください。</li>
 <li>Milvusのデータボリュームは、現在のフォルダ内の<strong>volumes/milvus</strong>にマッピングされています。</li>
 </ul>

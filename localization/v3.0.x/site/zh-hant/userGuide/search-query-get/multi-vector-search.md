@@ -2,9 +2,8 @@
 id: multi-vector-search.md
 title: 多向量混合搜尋
 summary: >-
-  在許多應用情境中，可透過豐富的多樣化資訊（例如標題和描述）或多種模態（例如文字、圖片和音訊）來搜尋物件。舉例來說，若某則包含文字與圖片的推文，只要其中文字或圖片任一項與搜尋查詢的語義相符，該推文即應被搜尋到。
-  混合搜尋透過整合這些不同領域的搜尋功能，從而提升搜尋體驗。Milvus
-  透過支援在多個向量場中進行搜尋，並同時執行數次近似最近鄰（ANN）搜尋，來實現此功能。
+  在許多應用情境中，可透過豐富的資訊（例如標題和描述）或多種模態（例如文字、圖片和音訊）來搜尋物件。舉例來說，若某則包含文字與圖片的推文，只要其中的文字或圖片與搜尋查詢的語義相符，便應被納入搜尋結果。
+  混合搜尋透過整合這些不同領域的搜尋功能，從而提升搜尋體驗。Milvus 支援此功能，允許在多個向量場中進行搜尋，並同時執行數次近似最近鄰（ANN）搜尋。
   若您希望同時搜尋文字與圖片、描述同一物件的多個文字欄位，或是同時搜尋密集向量與稀疏向量以提升搜尋品質，多向量混合搜尋將特別有用。
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜尋<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
@@ -22,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在許多應用中，物件可透過豐富的資訊（例如標題和描述）或多種模態（例如文字、圖片和音訊）進行搜尋。舉例來說，若某則包含文字與圖片的推文，只要文字或圖片其中任一項與搜尋查詢的語義相符，便應被搜尋到。 混合搜尋透過整合這些多元領域的搜尋功能，從而提升搜尋體驗。Milvus 透過支援多向量場搜尋，並同時執行數次近似最近鄰（ANN）搜尋來實現此功能。 若您希望同時搜尋文字與圖片、描述同一物件的多個文字欄位，或是同時搜尋密集向量與稀疏向量以提升搜尋品質，多向量混合搜尋將特別有用。</p>
+    </button></h1><p>在許多應用中，物件可透過豐富的資訊（例如標題和描述）或多種模態（例如文字、圖片和音訊）進行搜尋。舉例來說，若某則包含文字與圖片的推文，只要其文字或圖片與搜尋查詢的語義相符，便應被搜尋到。 混合搜尋透過整合這些多元領域的搜尋功能，從而提升搜尋體驗。Milvus 支援此功能，允許在多個向量場中進行搜尋，並同時執行數次近似最近鄰（ANN）搜尋。 若您希望同時搜尋文字與圖片、描述同一物件的多個文字欄位，或是同時搜尋密集向量與稀疏向量以提升搜尋品質，多向量混合搜尋將特別有用。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
@@ -31,8 +30,8 @@ summary: >-
  </span></p>
 <p>多向量混合搜尋整合了不同的搜尋方法，或涵蓋來自各種模態的嵌入向量：</p>
 <ul>
-<li><p><strong>稀疏-稠密向量搜尋</strong>：<a href="/docs/zh-hant/dense-vector.md">稠密向量</a>非常適合捕捉語義關係，而<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>則在精確的關鍵字匹配方面極為有效。 混合搜尋結合了這些方法，既能提供廣泛的概念理解，又能確保精確的術語相關性，從而提升搜尋結果品質。透過發揮每種方法的優勢，混合搜尋克服了單一方法的限制，在處理複雜查詢時能提供更佳的表現。以下是關於將語義搜尋與全文搜尋結合的混合檢索更詳細<a href="/docs/zh-hant/full_text_search_with_milvus.md">指南</a>。</p></li>
-<li><p><strong>多模態向量搜尋</strong>：多模態向量搜尋是一項強大的技術，可讓您橫跨各種資料類型（包括文字、圖片、音訊等）進行搜尋。此方法的主要優勢在於能夠將不同模態整合為無縫且連貫的搜尋體驗。 舉例來說，在產品搜尋中，使用者可能會輸入文字查詢來尋找同時以文字和圖片描述的產品。透過混合搜尋方法將這些模態結合起來，您可以提升搜尋準確度或豐富搜尋結果。</p></li>
+<li><p><strong>稀疏-密集向量搜尋</strong>：<a href="/docs/zh-hant/dense-vector.md">密集向量</a>非常適合捕捉語義關係，而<a href="/docs/zh-hant/sparse_vector.md">稀疏向量</a>則在精確的關鍵字匹配方面極為有效。 混合搜尋結合了這些方法，既能提供廣泛的概念性理解，又能確保術語的精確相關性，從而提升搜尋結果品質。透過發揮各方法的優勢，混合搜尋克服了單一方法的限制，在處理複雜查詢時能展現更佳的效能。以下是關於結合語義搜尋與全文檢索的混合檢索更詳細<a href="/docs/zh-hant/full_text_search_with_milvus.md">指南</a>。</p></li>
+<li><p><strong>多模態向量搜尋</strong>：多模態向量搜尋是一項強大的技術，可讓您橫跨多種資料類型進行搜尋，包括文字、圖片、音訊等。此方法的主要優勢在於能夠將不同模態整合為無縫且連貫的搜尋體驗。 舉例來說，在產品搜尋中，使用者可能會輸入文字查詢，以尋找同時包含文字與圖片描述的產品。透過混合搜尋方法將這些模態結合起來，您便能提升搜尋準確度或豐富搜尋結果。</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,13 +48,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>讓我們以一個實際應用案例為例，其中每項產品都包含文字描述和圖片。根據現有資料，我們可以進行三種搜尋：</p>
+    </button></h2><p>讓我們以一個實際應用案例為例，其中每項產品都包含文字描述和圖片。根據現有資料，我們可以進行三種類型的搜尋：</p>
 <ul>
-<li><p><strong>語義文字搜尋：</strong>此方法涉及使用密集向量查詢產品的文字描述。文字嵌入可透過<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型，或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來生成。</p></li>
-<li><p><strong>全文檢索</strong>：此處透過稀疏向量進行關鍵字比對，以查詢產品的文字描述。可運用<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等演算法，或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型來達成此目的。</p></li>
-<li><p><strong>多模態圖像搜尋：</strong>此方法透過密集向量進行文字查詢，以檢索圖像資訊。圖像嵌入可透過<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型生成。</p></li>
+<li><p><strong>語義文字搜尋：</strong>此方法是透過稠密向量對產品的文字描述進行查詢。文字嵌入可透過<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型，或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服務來生成。</p></li>
+<li><p><strong>全文搜尋</strong>：此處透過稀疏向量進行關鍵字比對，以查詢產品的文字描述。可運用<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等演算法，或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型來達成此目的。</p></li>
+<li><p><strong>多模態圖像搜尋：</strong>此方法是透過密集向量進行文字查詢來檢索圖像。圖像嵌入可透過<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型生成。</p></li>
 </ul>
-<p>本指南將以產品原始文字描述與影像嵌入向量為例，帶您逐步了解結合上述搜尋方法的多模態混合搜尋實例。我們將示範如何儲存多向量資料，並透過重新排序策略執行混合搜尋。</p>
+<p>本指南將透過一個範例，引導您了解如何結合上述搜尋方法，在給定產品的原始文字描述與影像嵌入向量的情況下，進行多模態混合搜尋。我們將示範如何儲存多向量資料，並透過重新排序策略執行混合搜尋。</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">建立包含多個向量欄位的集合<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,16 +86,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>對於多向量混合搜尋，我們應在集合架構中定義多個向量欄位。有關集合中允許的向量欄位數量限制的詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud 限制</a>。 不過，如有需要，您可以調整 <a href="/docs/zh-hant/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> ，視需求在集合中包含最多 10 個向量欄位。</p>
-<p>此範例將以下欄位納入架構中：</p>
+    </button></h3><p>對於多向量混合搜尋，我們應在集合架構中定義多個向量欄位。有關集合中允許的向量欄位數量限制的詳細資訊，請參閱<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud 限制</a>。不過，如有需要，您可以調整 <a href="/docs/zh-hant/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> ，視需求在集合中包含最多 10 個向量欄位。</p>
+<p>此範例將以下欄位納入模式中：</p>
 <ul>
-<li><p><code translate="no">id</code>: 作為儲存文字 ID 的主鍵。此欄位的資料型別為<code translate="no">INT64</code> 。</p></li>
-<li><p><code translate="no">text</code>: 用於儲存文字內容。此欄位的資料型別為<code translate="no">VARCHAR</code> ，最大長度為 1000 位元組。<code translate="no">enable_analyzer</code> 選項設定為<code translate="no">True</code> ，以利進行全文檢索。</p></li>
+<li><p><code translate="no">id</code>: 作為儲存文字 ID 的主鍵。此欄位的資料類型為 `<code translate="no">INT64</code>`。</p></li>
+<li><p><code translate="no">text</code>: 用於儲存文字內容。此欄位的資料類型為<code translate="no">VARCHAR</code> ，最大長度為 1000 位元組。<code translate="no">enable_analyzer</code> 選項設定為<code translate="no">True</code> ，以利進行全文檢索。</p></li>
 <li><p><code translate="no">text_dense</code>: 用於儲存文本的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VECTOR</code> ，向量維度為 768。</p></li>
-<li><p><code translate="no">text_sparse</code>: 用於儲存文本的稀疏向量。此欄位的資料類型為<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
-<li><p><code translate="no">image_dense</code>: 用於儲存產品圖片的密集向量。此欄位的資料型別為<code translate="no">FLOAT_VETOR</code> ，向量維度為 512。</p></li>
+<li><p><code translate="no">text_sparse</code>: 用於儲存文本的稀疏向量。此欄位的資料型別為<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">image_dense</code>: 用於儲存產品圖片的密集向量。此欄位的資料類型為 `<code translate="no">FLOAT_VECTOR</code> `，向量維度為 512。</p></li>
 </ul>
-<p>由於我們將使用內建的 BM25 演算法對文字欄位進行全文檢索，因此必須將 Milvus 的<code translate="no">Function</code> 加入資料結構中。更多詳細資訊，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>」。</p>
+<p>由於我們將使用內建的 BM25 演算法對文字欄位進行全文檢索，因此必須將 Milvus<code translate="no">Function</code> 新增至資料結構。如需更多詳細資訊，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文檢索</a>」。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -372,13 +371,13 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定義集合模式後，下一步是配置向量索引並指定相似度度量。以本範例為例：</p>
+    </button></h3><p>定義集合模式後，下一步是配置向量索引並指定相似度度量。在以下範例中：</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>：針對文字密集向量欄位，建立類型為 `<code translate="no">AUTOINDEX</code> ` 且度量類型為 `<code translate="no">IP</code> ` 的索引。</p></li>
-<li><p><code translate="no">text_sparse_index</code>：針對文字稀疏向量欄位，使用類型為<code translate="no">SPARSE_INVERTED_INDEX</code>且度量類型為<code translate="no">BM25</code> 的索引。</p></li>
-<li><p><code translate="no">image_dense_index</code>: 針對密集型影像向量場，建立類型為 `<code translate="no">AUTOINDEX</code> ` 且度量類型為 `<code translate="no">IP</code> ` 的索引。</p></li>
+<li><p><code translate="no">text_dense_index</code>：針對文字密集向量欄位，建立類型為<code translate="no">AUTOINDEX</code> 且度量類型為<code translate="no">IP</code> 的索引。</p></li>
+<li><p><code translate="no">text_sparse_index</code>：針對文字稀疏向量欄位，使用類型為 `<code translate="no">SPARSE_INVERTED_INDEX</code>` 且度量類型為 `<code translate="no">BM25</code> ` 的索引。</p></li>
+<li><p><code translate="no">image_dense_index</code>: 針對密集型影像向量場，建立一個類型為 `<code translate="no">AUTOINDEX</code> ` 且度量類型為 `<code translate="no">IP</code> ` 的索引。</p></li>
 </ul>
-<p>您可以根據需要選擇其他索引類型，以最佳方式滿足您的需求和資料類型。有關受支援索引類型的更多資訊，請參閱<a href="/docs/zh-hant/index-vector-fields.md">可用索引類型的</a>文件。</p>
+<p>您可以根據實際需求和資料類型，選擇其他索引類型以獲得最佳效果。有關支援的索引類型的更多資訊，請參閱<a href="/docs/zh-hant/index-vector-fields.md">可用索引類型的</a>文件。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -520,7 +519,7 @@ std::vector&lt;milvus::IndexDesc&gt; indexes = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>建立名為<code translate="no">demo</code> 的集合，並採用前兩個步驟中設定的集合架構與索引。</p>
+    </button></h3><p>建立名為<code translate="no">demo</code> 的集合，並採用前兩步所設定的集合架構與索引。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -594,14 +593,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本節將根據先前定義的結構，將資料插入至 `<code translate="no">my_collection</code> ` 集合中。插入時，請確保除自動產生值的欄位外，所有欄位均以正確格式填入資料。在此範例中：</p>
+    </button></h2><p>本節將根據先前定義的結構，將資料插入至<code translate="no">my_collection</code> 集合中。插入時，請確保除自動產生值的欄位外，所有欄位均以正確格式填入資料。在此範例中：</p>
 <ul>
 <li><p><code translate="no">id</code>：一個整數，代表產品 ID</p></li>
 <li><p><code translate="no">text</code>: 包含產品描述的字串</p></li>
-<li><p><code translate="no">text_dense</code>：由 768 個浮點數組成的清單，代表文字描述的密集嵌入向量</p></li>
-<li><p><code translate="no">image_dense</code>: 一個包含 512 個浮點數值的清單，代表產品圖片的密集嵌入向量</p></li>
+<li><p><code translate="no">text_dense</code>: 由 768 個浮點數組成的清單，代表文字描述的密集嵌入向量</p></li>
+<li><p><code translate="no">image_dense</code>：一個包含 512 個浮點數值的清單，代表產品圖片的密集嵌入向量</p></li>
 </ul>
-<p>您可以使用相同或不同的模型來為每個欄位產生密集嵌入向量。在此範例中，這兩個密集嵌入向量的維度不同，這表示它們是由不同的模型所產生。稍後在定義每個搜尋時，請務必使用對應的模型來產生適當的查詢嵌入向量。</p>
+<p>您可以使用相同或不同的模型來為每個欄位產生密集嵌入向量。在此範例中，這兩個密集嵌入向量的維度不同，這表示它們是由不同的模型產生的。稍後在定義每個搜尋時，請務必使用對應的模型來產生適當的查詢嵌入向量。</p>
 <p>由於此範例使用內建的 BM25 函式從文字欄位產生稀疏嵌入向量，因此您無需手動提供稀疏向量。然而，若您選擇不使用 BM25，則必須自行預先計算並提供稀疏嵌入向量。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -791,8 +790,8 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 </div>
 <p>為展示各種搜尋向量欄位的機能，我們將使用一個範例查詢來建構三個<code translate="no">AnnSearchRequest</code> 搜尋請求。在此過程中，我們亦將使用其預先計算的密集向量。這些搜尋請求將針對以下向量欄位：</p>
 <ul>
-<li><p><code translate="no">text_dense</code> 用於語義文本搜尋，可實現語境理解，並基於意義而非直接關鍵字匹配進行檢索。</p></li>
-<li><p><code translate="no">text_sparse</code>用於全文檢索或關鍵字比對，著重於文本中單字或短語的精確匹配。</p></li>
+<li><p><code translate="no">text_dense</code> 用於語義文本搜尋，可實現語境理解，並基於語義而非直接關鍵字匹配進行檢索。</p></li>
+<li><p><code translate="no">text_sparse</code>用於全文搜尋或關鍵字比對，著重於文本中單字或短語的精確匹配。</p></li>
 <li><p><code translate="no">image_dense</code>用於多模態文字轉圖像搜尋，依據查詢的語義內容檢索相關產品圖片。</p></li>
 </ul>
 <div class="multipleCode">
@@ -954,7 +953,7 @@ sub_req<span class="hljs-number">1.</span><span class="hljs-built_in">AddExtraPa
                     .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">2</span>);
 sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
-<p>由於參數<code translate="no">limit</code> 設定為 2，每個<code translate="no">AnnSearchRequest</code> 會返回 2 個搜尋結果。在此範例中，共建立 3 個<code translate="no">AnnSearchRequest</code> 實例，因此總共產生 6 個搜尋結果。</p>
+<p>由於參數 `<code translate="no">limit</code> ` 設定為 2，每個 `<code translate="no">AnnSearchRequest</code> ` 會返回 2 個搜尋結果。在此範例中，共建立 3 個 `<code translate="no">AnnSearchRequest</code> ` 實例，因此總共產生 6 個搜尋結果。</p>
 <h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">步驟 2：設定重新排序策略<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -970,7 +969,7 @@ sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraPa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要合併並重新排序各組 ANN 搜尋結果，選擇適當的重新排序策略至關重要。Milvus 提供數種重新排序策略。有關這些重新排序機制的詳細資訊，請參閱「<a href="/docs/zh-hant/weighted-ranker.md">加權排序器 (Weighted Ranker</a>)」或「<a href="/docs/zh-hant/rrf-ranker.md">RRF 排序器 (RRF Ranker</a>)」。</p>
+    </button></h3><p>要合併並重新排序多組 ANN 搜尋結果，選擇適當的重新排序策略至關重要。Milvus 提供數種重新排序策略。有關這些重新排序機制的更多詳細資訊，請參閱「<a href="/docs/zh-hant/weighted-ranker.md">加權排序器 (Weighted Ranker</a>)」或「<a href="/docs/zh-hant/rrf-ranker.md">RRF 排序器 (RRF Ranker</a>)」。</p>
 <p>在此範例中，由於並未特別強調特定的搜尋查詢，因此我們將採用 RRFRanker 策略。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1034,7 +1033,7 @@ sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraPa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在啟動混合搜尋之前，請確保已載入資料集。若資料集內的任何向量欄位缺少索引或未載入至記憶體中，執行混合搜尋方法時將會發生錯誤。</p>
+    </button></h3><p>在啟動混合搜尋之前，請確保已載入資料集。若資料集內的任何向量欄位缺少索引或未載入記憶體中，執行混合搜尋方法時將會發生錯誤。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1140,7 +1139,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
 <p>以下是輸出結果：</p>
 <pre><code translate="no" class="language-text">[&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>當為混合搜尋指定 `<code translate="no">limit=2</code> ` 參數時，Milvus 會重新排序從三次搜尋中獲得的六項結果，最終僅會回傳相似度最高的兩項結果。</p>
+<p>當為混合搜尋指定 `<code translate="no">limit=2</code> ` 參數時，Milvus 會重新排序從三次搜尋中獲得的六項結果。最終，系統將僅返回相似度最高的兩項結果。</p>
 <h2 id="Advanced-usage" class="common-anchor-header">進階用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1171,7 +1170,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若您的資料集具有<code translate="no">TIMESTAMPTZ</code> 欄位，您可以透過在混合搜尋呼叫中設定<code translate="no">timezone</code> 參數，針對單一操作暫時覆寫資料庫或資料集的預設時區。此設定將控制操作過程中<code translate="no">TIMESTAMPTZ</code> 值的顯示與比較方式。</p>
+    </button></h3><p>若您的資料集具有<code translate="no">TIMESTAMPTZ</code> 欄位，您可透過在混合搜尋呼叫中設定<code translate="no">timezone</code> 參數，針對單一操作暫時覆寫資料庫或資料集的預設時區。此設定將控制操作過程中<code translate="no">TIMESTAMPTZ</code> 值的顯示與比對方式。</p>
 <p><code translate="no">timezone</code> 的值必須為有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱「<a href="/docs/zh-hant/timestamptz-field.md">TIMESTAMPTZ 欄位</a>」。</p>
 <p>以下範例展示如何為混合搜尋操作暫時設定時區：</p>
 <div class="multipleCode">

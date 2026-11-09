@@ -60,7 +60,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
 </ul></li>
 <li>Хранилище сообщений нельзя изменить во время работы системы Milvus.</li>
 <li>Поддерживаются только версии Kafka 2.x или 3.x.</li>
-<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные с <strong>очередями сообщений</strong>: при обновлении до Milvus v3.0.3 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</li>
+<li><strong>Ограничения при обновлении</strong>: <strong>Ограничения</strong>, связанные с <strong>очередями сообщений</strong>: при обновлении до Milvus v3.0.5 необходимо сохранить текущий выбор системы очередей сообщений. Переключение между различными системами очередей сообщений во время обновления не поддерживается. Поддержка смены систем очередей сообщений будет доступна в будущих версиях.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Настройка RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +107,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
 <h5 id="Key-configuration-options" class="common-anchor-header">Ключевые параметры конфигурации:</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: явно задаёт RocksMQ в качестве очереди сообщений</li>
 <li><code translate="no">persistence.enabled</code>: Включает постоянное хранение данных RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удалено при удалении экземпляра Milvus</li>
+<li><code translate="no">persistence.pvcDeletion</code>: Если значение true, PVC будет удалена при удалении экземпляра Milvus</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>: Стандартная спецификация PVC в Kubernetes</li>
 <li><code translate="no">accessModes</code>: Обычно используется « <code translate="no">ReadWriteOnce</code> » для блочного хранилища</li>
 <li><code translate="no">storageClassName</code>: Класс хранения вашего кластера</li>
@@ -146,7 +146,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
       </svg>
     </button></h2><p>Pulsar управляет журналами недавних изменений, выводит потоковые журналы и обеспечивает подписку на журналы. Настройка Pulsar в качестве хранилища сообщений поддерживается как в автономном режиме Milvus, так и в кластере Milvus. Однако с помощью Milvus Operator вы можете настроить Pulsar в качестве хранилища сообщений только для кластера Milvus. Добавьте необходимые поля в разделе « <code translate="no">spec.dependencies.pulsar</code> » (Настройки хранилища), чтобы настроить Pulsar.</p>
 <p><code translate="no">pulsar</code> Поддерживаются <code translate="no">external</code> и <code translate="no">inCluster</code>.</p>
-<h3 id="External-Pulsar" class="common-anchor-header">«External Pulsar»<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
+<h3 id="External-Pulsar" class="common-anchor-header">External Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -346,7 +346,7 @@ summary: 'Узнайте, как настроить хранилище сооб�
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>Полный список элементов конфигурации для настройки внутреннего сервиса Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации в файле « <code translate="no">kafka.inCluster.values</code> ».</p>
+<p>Полный список элементов конфигурации для настройки внутреннего сервиса Kafka можно найти <a href="https://artifacthub.io/packages/helm/bitnami/kafka">здесь</a>. Добавьте необходимые элементы конфигурации в файле ` <code translate="no">kafka.inCluster.values</code>`.</p>
 <p>Предполагая, что файл конфигурации называется « <code translate="no">milvuscluster.yaml</code> », выполните следующую команду для применения конфигурации.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

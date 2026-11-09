@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>スタンドアロンでのデプロイをご希望ですか？</strong></p>
 <p>開発やテストのために Milvus をスタンドアロンモード（シングルノード）でデプロイしたい場合は、次のコマンドを使用してください：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,19 +137,19 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>注</strong>：スタンドアロンモードでは、デフォルトのメッセージキューとしてWoodpeckerが使用され、Streaming Nodeコンポーネントが有効になります。詳細については、「<a href="/docs/ja/v2.6.x/architecture_overview.md">アーキテクチャの概要</a>」および「<a href="/docs/ja/v2.6.x/use-woodpecker.md">Woodpeckerの使用</a>」を参照してください。</p>
 </div>
 <p><strong>Milvusクラスタのデプロイ:</strong></p>
-<p>次のコマンドは、v2.6.25向けに最適化された設定で、推奨されるメッセージキューとしてWoodpeckerを使用するMilvusクラスタをデプロイします：</p>
+<p>次のコマンドは、v2.6.26向けに最適化された設定で、推奨されるメッセージキューとしてWoodpeckerを使用するMilvusクラスタをデプロイします：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>このコマンドの動作:</strong></p>
+<p><strong>このコマンドの機能：</strong></p>
 <ul>
 <li>メッセージキューとして<strong>Woodpecker</strong>を使用します（メンテナンス負担の軽減に推奨）</li>
 <li>パフォーマンス向上のために、新しい<strong>Streaming Node</strong>コンポーネントを有効にします</li>
-<li>従来の<strong>Index Node</strong>を無効化（機能はData Nodeによって処理されるようになりました）</li>
+<li>従来の<strong>インデックスノード</strong>を無効化（機能は現在、データノードによって処理される）</li>
 <li>Pulsar を無効化し、代わりに Woodpecker を使用する</li>
 </ul>
 <div class="alert note">
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>メッセージキューの代替オプション:</strong></p>
 <p>Woodpeckerの<strong>代わりにPulsar</strong>（従来の選択肢）を使用したい場合：</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Podのステータスを確認し、デプロイが正常に完了していることを確認してください:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>すべてのポッドのステータスが「Running」になるまで待ちます。</strong>v2.6.25 の設定では、次のようなポッドが表示されるはずです：</p>
+<p><strong>すべてのポッドのステータスが「Running」になるまで待ちます。</strong>v2.6.26 の設定では、次のようなポッド<strong>の状態が表示される</strong>はずです：</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -253,7 +253,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>ポートフォワーディングの設定：</strong></p>
 <pre><code translate="no" class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre>
-<p>このコマンドは、ローカルポート<code translate="no">27017</code> を Milvus ポート<code translate="no">19530</code> に転送します。次のような出力が表示されるはずです：</p>
+<p>このコマンドは、ローカルポート<code translate="no">27017</code> を Milvus ポート<code translate="no">19530</code> へ転送します。次のような出力が表示されるはずです：</p>
 <pre><code translate="no"><span class="hljs-attribute">Forwarding</span> from <span class="hljs-number">127.0.0.1:27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>接続の詳細：</strong></p>
@@ -265,10 +265,10 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>ポートフォワーディングのオプション:</strong></p>
 <ul>
 <li><strong>ローカルポートの自動割り当て</strong>:<code translate="no">27017:19530</code> の代わりに<code translate="no">:19530</code> を使用し、kubectl に利用可能なポートを選ばせる</li>
-<li><strong>すべてのインターフェースでリスニング</strong>: 他のマシンからの接続を許可するには、<code translate="no">--address 0.0.0.0</code> を追加します:
+<li><strong>すべてのインターフェースでリスニング</strong>:<code translate="no">--address 0.0.0.0</code> を追加して、他のマシンからの接続を許可します:
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
-<li><strong>スタンドアロン展開</strong>: スタンドアロンモードを使用する場合、サービス名は変わりません</li>
+<li><strong>スタンドアロン展開</strong>: スタンドアロンモードを使用する場合、サービス名は変更されません</li>
 </ul>
 </div>
 <p>Milvus を使用中は、<strong>このターミナルを開いたままにしておいてください</strong>。これで、任意の Milvus SDK を使用して<code translate="no">localhost:27017</code> から Milvus に接続できるようになります。</p>
@@ -289,7 +289,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       </svg>
     </button></h2><p><code translate="no">values.yaml</code> ファイルを編集して再度適用することで、Milvus クラスタの設定を更新できます。</p>
 <ol>
-<li><p>希望の設定を記載した<code translate="no">values.yaml</code> ファイルを作成します。</p>
+<li><p>希望する設定を含む<code translate="no">values.yaml</code> ファイルを作成します。</p>
 <p>以下では、<code translate="no">proxy.http</code> を有効にする場合を想定しています。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -366,7 +366,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <p>上記のコマンドは、Milvus クラスタ用のチャートテンプレートを生成し、その出力を `<code translate="no">milvus_manifest.yaml</code>` という名前のマニフェストファイルに保存します。このマニフェストを使用すると、Milvus クラスタを、そのコンポーネントと依存関係を別々のポッドに配置してインストールできます。</p>
 <div class="alert note">
 <ul>
-<li>すべての Milvus コンポーネントが単一のポッド内に含まれるスタンドアロンモードで Milvus インスタンスをインストールする場合は、代わりに `<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` を実行し、スタンドアロンモードの Milvus インスタンス用のチャートテンプレートを生成する必要があります。</li>
+<li>すべての Milvus コンポーネントが単一のポッド内に含まれるスタンドアロンモードで Milvus インスタンスをインストールするには、代わりに `<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false zilliztech/milvus &gt; milvus_manifest.yaml</code> ` を実行し、スタンドアロンモードの Milvus インスタンス用のチャートテンプレートを生成する必要があります。</li>
 <li>Milvusの設定を変更するには、 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> テンプレートをダウンロードし、希望の設定を記述した上で、<code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> を実行して、それに応じてマニフェストを生成してください。</li>
 </ul>
 </div>
@@ -510,7 +510,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/ja/v2.6.x/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/docs/ja/v2.6.x/upgrade_milvus_cluster-helm.md">Helmチャートを使用したMilvusのアップグレード</a></p></li>
-<li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスタのスケーリング</a></p></li>
+<li><p><a href="/docs/ja/v2.6.x/scaleout.md">Milvusクラスターのスケーリング</a></p></li>
 <li><p>クラウド上に Milvus クラスターをデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/v2.6.x/eks.md">Amazon EKS</a></li>

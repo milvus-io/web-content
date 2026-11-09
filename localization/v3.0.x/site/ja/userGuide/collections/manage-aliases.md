@@ -1,7 +1,7 @@
 ---
 id: manage-aliases.md
 title: エイリアスの管理
-summary: Milvusにはエイリアス管理機能があります。このページでは、エイリアスの作成、一覧表示、変更、削除の手順を説明します。
+summary: Milvus にはエイリアス管理機能があります。このページでは、エイリアスの作成、一覧表示、変更、および削除の手順について説明します。
 ---
 <h1 id="Manage-Aliases" class="common-anchor-header">エイリアスの管理<button data-href="#Manage-Aliases" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ summary: Milvusにはエイリアス管理機能があります。このペー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、エイリアスとはコレクションの二次的で変更可能な名前です。エイリアスを使用することで、抽象化されたレイヤーを提供し、アプリケーションコードを変更することなくコレクションを動的に切り替えることができます。これは、シームレスなデータ更新、A/Bテスト、その他の運用タスクのための実運用環境で特に有用です。</p>
-<p>このページでは、コレクションエイリアスの作成、一覧表示、再割り当て、削除の方法を示します。</p>
+    </button></h1><p>Milvus において、エイリアスとはコレクションの代替となる変更可能な名前です。エイリアスを使用することで、アプリケーションのコードを変更することなく、コレクション間を動的に切り替えることができる抽象化レイヤーが提供されます。これは、本番環境において、シームレスなデータ更新、A/B テスト、その他の運用タスクを行う際に特に役立ちます。</p>
+<p>このページでは、コレクションのエイリアスの作成、一覧表示、再割り当て、および削除の方法について説明します。</p>
 <h2 id="Why-Use-an-Alias" class="common-anchor-header">エイリアスを使用する理由<button data-href="#Why-Use-an-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,19 +35,19 @@ summary: Milvusにはエイリアス管理機能があります。このペー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>エイリアスを使用する主な利点は、クライアントアプリケーションを特定の物理的なコレクション名から切り離すことです。</p>
-<p><code translate="no">prod_data</code> という名前のコレクションをクエリするライブアプリケーションがあるとします。基礎となるデータを更新する必要がある場合、サービスを中断することなく更新を実行できます。ワークフローは次のようになります：</p>
+    </button></h2><p>エイリアスを使用する主な利点は、クライアントアプリケーションを特定の物理的なコレクション名から切り離せることです。</p>
+<p><code translate="no">prod_data</code> というエイリアスを介してコレクションをクエリする本番アプリケーションがあると仮定します。基盤となるデータを更新する必要がある場合でも、サービスを中断することなく更新を実行できます。そのワークフローは次のようになります。</p>
 <ol>
-<li><strong>新しいコレクションを作成</strong>します：新しいコレクションの作成: 新しいコレクションを作成します。例えば、<code translate="no">prod_data_v2</code> 。</li>
-<li><strong>データを準備する</strong>：<code translate="no">prod_data_v2</code> に新しいデータをロードし、インデックスを作成します。</li>
-<li><strong>エイリアスを切り替える</strong>：新しいコレクションがサービスできるようになったら、エイリアス<code translate="no">prod_data</code> を古いコレクションから<code translate="no">prod_data_v2</code> にアトミックに再割り当てします。</li>
+<li><strong>新しいコレクションの作成</strong>：新しいコレクション（例：<code translate="no">prod_data_v2</code> ）を作成します。</li>
+<li><strong>データの準備</strong>：<code translate="no">prod_data_v2</code> に新しいデータのインデックス作成とロードを行います。</li>
+<li><strong>エイリアスの切り替え</strong>：新しいコレクションがサービス提供可能な状態になったら、エイリアス `<code translate="no">prod_data</code> ` を古いコレクションから `<code translate="no">prod_data_v2</code>` へアトミックに再割り当てします。</li>
 </ol>
-<p>アプリケーションはエイリアス<code translate="no">prod_data</code> へのリクエスト送信を継続し、ダウンタイムはゼロになります。このメカニズムはシームレスなアップデートを可能にし、ベクター検索サービスのブルーグリーンデプロイメントのようなオペレーションを簡素化します。</p>
-<p><strong>エイリアスの主な特性</strong></p>
+<p>アプリケーションは引き続きエイリアス<code translate="no">prod_data</code> へリクエストを送信し、ダウンタイムは発生しません。この仕組みにより、ベクトル検索サービスのシームレスな更新が可能になり、ブルー・グリーンデプロイメントなどの運用が簡素化されます。</p>
+<p><strong>エイリアスの主な特性：</strong></p>
 <ul>
-<li>コレクションは複数のエイリアスを持つことができる。</li>
-<li>エイリアスは一度に一つのコレクションのみを指すことができます。</li>
-<li>リクエストを処理する際、Milvusはまず指定された名前のコレクションが存在するかどうかをチェックします。存在しない場合、その名前がコレクションのエイリアスであるかどうかをチェックします。</li>
+<li>1つのコレクションには複数のエイリアスを設定できます。</li>
+<li>1つのエイリアスは、一度に1つのコレクションのみを指すことができます。</li>
+<li>リクエストを処理する際、Milvusはまず、指定された名前のコレクションが存在するかどうかを確認します。存在しない場合、その名前がコレクションのエイリアスであるかどうかを確認します。</li>
 </ul>
 <h2 id="Create-Alias" class="common-anchor-header">エイリアスの作成<button data-href="#Create-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,7 +66,15 @@ summary: Milvusにはエイリアス管理機能があります。このペー�
       </svg>
     </button></h2><p>以下のコードスニペットは、コレクションのエイリアスを作成する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -93,7 +101,7 @@ client.create_alias(
 <span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-type">String</span> <span class="hljs-variable">TOKEN</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 
-<span class="hljs-comment">// 1. Connect to Milvus server</span>
+<span class="hljs-comment">// 1. Connect to Milvus</span>
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(CLUSTER_ENDPOINT)
         .token(TOKEN)
@@ -118,50 +126,22 @@ createAliasReq = CreateAliasReq.builder()
 
 client.createAlias(createAliasReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
-<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
-
-<span class="hljs-comment">// 9. Manage aliases</span>
-<span class="hljs-comment">// 9.1 Create aliases</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createAlias</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>,
-    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;bob&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Success</span>
-<span class="hljs-comment">// </span>
-
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createAlias</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>,
-    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;alice&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Success</span>
-<span class="hljs-comment">// </span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
-    
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
+
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+token := <span class="hljs-string">&quot;root:Milvus&quot;</span>
+
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey:  token,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -180,6 +160,117 @@ err = client.CreateAlias(ctx, milvusclient.NewCreateAliasOption(<span class="hlj
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(
+    &amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>),
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// 9.1 Create aliases</span>
+client
+    .<span class="hljs-title function_ invoke__">create_alias</span>(
+        CreateAliasRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
+            .<span class="hljs-title function_ invoke__">alias</span>(<span class="hljs-string">&quot;bob&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">create_alias</span>(
+        CreateAliasRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
+            .<span class="hljs-title function_ invoke__">alias</span>(<span class="hljs-string">&quot;alice&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">CreateAlias</span>(milvus::<span class="hljs-built_in">CreateAliasRequest</span>()
+                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
+                                 .<span class="hljs-built_in">WithAlias</span>(<span class="hljs-string">&quot;bob&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">CreateAlias</span>(milvus::<span class="hljs-built_in">CreateAliasRequest</span>()
+                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
+                                 .<span class="hljs-built_in">WithAlias</span>(<span class="hljs-string">&quot;alice&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
+
+<span class="hljs-comment">// 9.1 Create aliases</span>
+<span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createAlias</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>,
+    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;bob&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Success</span>
+<span class="hljs-comment">//</span>
+
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createAlias</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>,
+    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;alice&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Success</span>
+<span class="hljs-comment">//</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = CLUSTER_ENDPOINT,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-comment">// 9.1 Create aliases</span>
+<span class="hljs-keyword">await</span> client.CreateAliasAsync(<span class="hljs-keyword">new</span> CreateAliasReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection_1&quot;</span>,
+    Alias = <span class="hljs-string">&quot;bob&quot;</span>
+});
+
+<span class="hljs-keyword">await</span> client.CreateAliasAsync(<span class="hljs-keyword">new</span> CreateAliasReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection_1&quot;</span>,
+    Alias = <span class="hljs-string">&quot;alice&quot;</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -214,7 +305,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Aliases" class="common-anchor-header">エイリアスのリスト<button data-href="#List-Aliases" class="anchor-icon" translate="no">
+<h2 id="List-Aliases" class="common-anchor-header">エイリアスの一覧表示<button data-href="#List-Aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,9 +320,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次のコードスニペットは、特定のコレクションに割り当てられているエイリアスをリストする手順を示します。</p>
+    </button></h2><p>以下のコードスニペットは、特定のコレクションに割り当てられたエイリアスを一覧表示する手順を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>
 res = client.list_aliases(
     collection_name=<span class="hljs-string">&quot;my_collection_1&quot;</span>
@@ -253,7 +352,7 @@ res = client.list_aliases(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.ListAliasesReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.ListAliasResp;
 
-<span class="hljs-comment">// 9.2 List alises</span>
+<span class="hljs-comment">// 9.2 List aliases</span>
 <span class="hljs-type">ListAliasesReq</span> <span class="hljs-variable">listAliasesReq</span> <span class="hljs-operator">=</span> ListAliasesReq.builder()
     .collectionName(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
     .build();
@@ -265,24 +364,58 @@ System.out.println(listAliasRes.getAlias());
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [bob, alice]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.2 List aliases</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listAliases</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">aliases</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// [ &#x27;bob&#x27;, &#x27;alice&#x27; ]</span>
-<span class="hljs-comment">// </span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">aliases, err := client.ListAliases(ctx, milvusclient.NewListAliasesOption(<span class="hljs-string">&quot;my_collection_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(aliases)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 9.2 List aliases</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">list_aliases</span>(
+        ListAliasesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, res.<span class="hljs-title function_ invoke__">aliases</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::ListAliasesResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">ListAliases</span>(milvus::<span class="hljs-built_in">ListAliasesRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection_1&quot;</span>),
+                                  response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; alias : response.<span class="hljs-built_in">Aliases</span>()) {
+    std::cout &lt;&lt; alias &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.2 List aliases</span>
+<span class="hljs-keyword">const</span> listRes = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listAliases</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(listRes.<span class="hljs-property">aliases</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [ &#x27;bob&#x27;, &#x27;alice&#x27; ]</span>
+<span class="hljs-comment">//</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+
+<span class="hljs-comment">// 9.2 List aliases</span>
+<span class="hljs-keyword">var</span> listRes = <span class="hljs-keyword">await</span> client.ListAliasesAsync(<span class="hljs-keyword">new</span> ListAliasesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection_1&quot;</span>
+});
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, listRes.Aliases));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -292,7 +425,9 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
--d <span class="hljs-string">&#x27;{}&#x27;</span>
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection_1&quot;
+}&#x27;</span>
 
 <span class="hljs-comment"># {</span>
 <span class="hljs-comment">#     &quot;code&quot;: 0,</span>
@@ -302,7 +437,7 @@ curl --request POST \
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-Alias" class="common-anchor-header">エイリアスの記述<button data-href="#Describe-Alias" class="anchor-icon" translate="no">
+<h2 id="Describe-Alias" class="common-anchor-header">エイリアスの詳細表示<button data-href="#Describe-Alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -317,9 +452,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次のコード・スニペットは、特定のエイリアスを、それが割り当てられているコレクションの名前を含めて詳細に説明します。</p>
+    </button></h2><p>以下のコードスニペットは、特定のエイリアスについて、それが割り当てられているコレクションの名前を含め、詳細に説明します。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
     alias=<span class="hljs-string">&quot;bob&quot;</span>
@@ -350,16 +493,43 @@ System.out.println(describeAliasRes);
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// DescribeAliasResp(collectionName=my_collection_1, alias=bob)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.3 Describe aliases</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeAlias</span>({
+<pre><code translate="no" class="language-go">alias, err := client.DescribeAlias(ctx, milvusclient.NewDescribeAliasOption(<span class="hljs-string">&quot;bob&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+fmt.Println(alias)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 9.3 Describe alias</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">describe_alias</span>(
+        DescribeAliasRequest::<span class="hljs-title function_ invoke__">builder</span>().<span class="hljs-title function_ invoke__">alias</span>(<span class="hljs-string">&quot;bob&quot;</span>).<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, res);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::DescribeAliasResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">DescribeAlias</span>(milvus::<span class="hljs-built_in">DescribeAliasRequest</span>()
+                                        .<span class="hljs-built_in">WithAlias</span>(<span class="hljs-string">&quot;bob&quot;</span>),
+                                    response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+std::cout &lt;&lt; response.<span class="hljs-built_in">Desc</span>().<span class="hljs-built_in">CollectionName</span>() &lt;&lt; std::endl;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.3 Describe alias</span>
+<span class="hljs-keyword">const</span> describeRes = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">describeAlias</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>,
     <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;bob&quot;</span>
 })
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(describeRes)
 
 <span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
+<span class="hljs-comment">//</span>
 <span class="hljs-comment">// {</span>
 <span class="hljs-comment">//   status: {</span>
 <span class="hljs-comment">//     extra_info: {},</span>
@@ -373,14 +543,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   alias: &#x27;bob&#x27;,</span>
 <span class="hljs-comment">//   collection: &#x27;my_collection_1&#x27;</span>
 <span class="hljs-comment">// }</span>
-<span class="hljs-comment">// </span>
+<span class="hljs-comment">//</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">alias, err := client.DescribeAlias(ctx, milvusclient.NewDescribeAliasOption(<span class="hljs-string">&quot;bob&quot;</span>))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
-}
-fmt.Println(alias)
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Utility;
+
+<span class="hljs-comment">// 9.3 Describe alias</span>
+<span class="hljs-keyword">var</span> describeRes = <span class="hljs-keyword">await</span> client.DescribeAliasAsync(<span class="hljs-keyword">new</span> DescribeAliasReq
+{
+    Alias = <span class="hljs-string">&quot;bob&quot;</span>
+});
+Console.WriteLine(describeRes.CollectionName);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -418,9 +591,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>すでに特定のコレクションに割り当てられているエイリアスを、別のコレクションに再割り当てすることができます。</p>
+    </button></h2><p>特定のコレクションにすでに割り当てられているエイリアスを、別のコレクションに再割り当てすることができます。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.4 Reassign aliases to other collections</span>
 client.alter_alias(
     collection_name=<span class="hljs-string">&quot;my_collection_2&quot;</span>,
@@ -477,6 +658,9 @@ client.alterAlias(alterAliasReq);
 
 System.out.println(listAliasRes.getAlias());
 
+<span class="hljs-comment">// Output:</span>
+<span class="hljs-comment">// [alice]</span>
+
 listAliasesReq = ListAliasesReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection_1&quot;</span>)
         .build();
@@ -487,42 +671,6 @@ System.out.println(listAliasRes.getAlias());
 
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// [bob]</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.4 Reassign aliases to other collections</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterAlias</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_2&quot;</span>,
-    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;alice&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Success</span>
-<span class="hljs-comment">// </span>
-
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listAliases</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_2&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">aliases</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// [ &#x27;alice&#x27; ]</span>
-<span class="hljs-comment">// </span>
-
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listAliases</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">aliases</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// [ &#x27;bob&#x27; ]</span>
-<span class="hljs-comment">// </span>
-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.AlterAlias(ctx, milvusclient.NewAlterAliasOption(<span class="hljs-string">&quot;alice&quot;</span>, <span class="hljs-string">&quot;my_collection_2&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -543,6 +691,96 @@ aliases, err = client.ListAliases(ctx, milvusclient.NewListAliasesOption(<span c
     <span class="hljs-comment">// handle error</span>
 }
 fmt.Println(aliases)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 9.4 Reassign an alias to another collection</span>
+client
+    .<span class="hljs-title function_ invoke__">alter_alias</span>(
+        AlterAliasRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection_2&quot;</span>)
+            .<span class="hljs-title function_ invoke__">alias</span>(<span class="hljs-string">&quot;alice&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">list_aliases</span>(
+        ListAliasesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection_2&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, res.<span class="hljs-title function_ invoke__">aliases</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterAlias</span>(milvus::<span class="hljs-built_in">AlterAliasRequest</span>()
+                                     .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection_2&quot;</span>)
+                                     .<span class="hljs-built_in">WithAlias</span>(<span class="hljs-string">&quot;alice&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::ListAliasesResponse response;
+status = client-&gt;<span class="hljs-built_in">ListAliases</span>(milvus::<span class="hljs-built_in">ListAliasesRequest</span>()
+                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection_2&quot;</span>),
+                             response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; alias : response.<span class="hljs-built_in">Aliases</span>()) {
+    std::cout &lt;&lt; alias &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.4 Reassign aliases to other collections</span>
+<span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterAlias</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_2&quot;</span>,
+    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;alice&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Success</span>
+<span class="hljs-comment">//</span>
+
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listAliases</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_2&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">aliases</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [ &#x27;alice&#x27; ]</span>
+<span class="hljs-comment">//</span>
+
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listAliases</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection_1&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">aliases</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [ &#x27;bob&#x27; ]</span>
+<span class="hljs-comment">//</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// 9.4 Reassign the alias to another collection</span>
+<span class="hljs-keyword">await</span> client.AlterAliasAsync(<span class="hljs-keyword">new</span> AlterAliasReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection_2&quot;</span>,
+    Alias = <span class="hljs-string">&quot;alice&quot;</span>
+});
+
+<span class="hljs-keyword">var</span> listRes = <span class="hljs-keyword">await</span> client.ListAliasesAsync(<span class="hljs-keyword">new</span> ListAliasesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection_2&quot;</span>
+});
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, listRes.Aliases));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -592,7 +830,7 @@ curl --request POST \
 <span class="hljs-comment"># {</span>
 <span class="hljs-comment">#     &quot;code&quot;: 0,</span>
 <span class="hljs-comment">#     &quot;data&quot;: {</span>
-<span class="hljs-comment">#         &quot;aliasName&quot;: &quot;alice&quot;,</span>
+<span class="hljs-comment">#         &quot;aliasName&quot;: &quot;bob&quot;,</span>
 <span class="hljs-comment">#         &quot;collectionName&quot;: &quot;my_collection_1&quot;,</span>
 <span class="hljs-comment">#         &quot;dbName&quot;: &quot;default&quot;</span>
 <span class="hljs-comment">#     }</span>
@@ -613,9 +851,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次のコード・スニペットは、エイリアスを削除する手順を示しています。</p>
+    </button></h2><p>以下のコードスニペットは、エイリアスを削除する手順を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
     alias=<span class="hljs-string">&quot;bob&quot;</span>
@@ -640,29 +886,6 @@ dropAliasReq = DropAliasReq.builder()
 
 client.dropAlias(dropAliasReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.5 Drop aliases</span>
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropAlias</span>({
-    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;bob&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Success</span>
-<span class="hljs-comment">// </span>
-
-res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropAlias</span>({
-    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;alice&quot;</span>
-})
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">// </span>
-<span class="hljs-comment">// Success</span>
-<span class="hljs-comment">// </span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.DropAlias(ctx, milvusclient.NewDropAliasOption(<span class="hljs-string">&quot;bob&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -674,6 +897,57 @@ err = client.DropAlias(ctx, milvusclient.NewDropAliasOption(<span class="hljs-st
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// 9.5 Drop aliases</span>
+client
+    .<span class="hljs-title function_ invoke__">drop_alias</span>(DropAliasRequest::<span class="hljs-title function_ invoke__">builder</span>().<span class="hljs-title function_ invoke__">alias</span>(<span class="hljs-string">&quot;bob&quot;</span>).<span class="hljs-title function_ invoke__">build</span>()?)
+    .<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">drop_alias</span>(DropAliasRequest::<span class="hljs-title function_ invoke__">builder</span>().<span class="hljs-title function_ invoke__">alias</span>(<span class="hljs-string">&quot;alice&quot;</span>).<span class="hljs-title function_ invoke__">build</span>()?)
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">DropAlias</span>(milvus::<span class="hljs-built_in">DropAliasRequest</span>().<span class="hljs-built_in">WithAlias</span>(<span class="hljs-string">&quot;bob&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">DropAlias</span>(milvus::<span class="hljs-built_in">DropAliasRequest</span>().<span class="hljs-built_in">WithAlias</span>(<span class="hljs-string">&quot;alice&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 9.5 Drop aliases</span>
+<span class="hljs-keyword">let</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropAlias</span>({
+    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;bob&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Success</span>
+<span class="hljs-comment">//</span>
+
+res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropAlias</span>({
+    <span class="hljs-attr">alias</span>: <span class="hljs-string">&quot;alice&quot;</span>
+})
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">error_code</span>)
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// Success</span>
+<span class="hljs-comment">//</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Utility;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// 9.5 Drop aliases</span>
+<span class="hljs-keyword">await</span> client.DropAliasAsync(<span class="hljs-keyword">new</span> DropAliasReq { Alias = <span class="hljs-string">&quot;bob&quot;</span> });
+<span class="hljs-keyword">await</span> client.DropAliasAsync(<span class="hljs-keyword">new</span> DropAliasReq { Alias = <span class="hljs-string">&quot;alice&quot;</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>

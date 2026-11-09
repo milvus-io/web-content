@@ -63,13 +63,13 @@ title: Запуск Milvus в Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Что нового в версии 2.6.25:</strong></p>
+<p><strong>Что нового в версии 2.6.26:</strong></p>
 <ul>
 <li><strong>Узел потоковой передачи</strong>: расширенные возможности обработки данных</li>
 <li><strong>Woodpecker MQ</strong>: усовершенствованная очередь сообщений с уменьшенными затратами на обслуживание; подробности см. в разделе <a href="/docs/ru/v2.6.x/use-woodpecker.md">«Использование Woodpecker»</a> </li>
 <li><strong>Оптимизированная архитектура</strong>: объединение компонентов для повышения производительности</li>
 </ul>
-<p>Всегда загружайте последнюю версию скрипта, чтобы получить самые свежие настройки и улучшения архитектуры.</p>
+<p>Всегда загружайте последнюю версию скрипта, чтобы гарантированно получить самые свежие настройки и улучшения архитектуры.</p>
 <p>Если вы хотите использовать <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> в автономном режиме развертывания, рекомендуется использовать метод развертывания <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Если у вас возникнут проблемы с загрузкой образа, свяжитесь с нами по адресу <a href="mailto:community@zilliz.com">community@zilliz.com</a>, указав подробности проблемы, и мы предоставим вам необходимую поддержку.</p>
 </div>

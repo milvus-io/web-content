@@ -81,9 +81,11 @@ summary: >-
 <tr><td>„Struct“ ist kein Feldtyp auf oberster Ebene.</td><td>Erstellen Sie ein StructArray-Feld als „ <code translate="no">datatype=DataType.ARRAY</code> “ mit „ <code translate="no">element_type=DataType.STRUCT</code> “ und „ <code translate="no">struct_schema</code> “.</td></tr>
 <tr><td>Alle Elemente teilen sich ein gemeinsames Schema.</td><td>Jedes „Struct“-Element in einem „StructArray“-Feld folgt derselben Unterfeldliste und denselben Unterfelddatentypen.</td></tr>
 <tr><td><code translate="no">max_capacity</code> ist erforderlich.</td><td>Die Anzahl der Struct-Elemente in einer Entität darf das für das StructArray-Feld konfigurierte „ <code translate="no">max_capacity</code> “ nicht überschreiten.</td></tr>
-<tr><td>Vorhandene Unterfelder sind fest vorgegeben.</td><td>Sie können einem bestehenden StructArray-Feld keine neuen Unterfelder anhängen. Um das Unterfeldschema zu ändern, löschen Sie das StructArray-Feld und fügen Sie es mit dem aktualisierten Schema erneut hinzu.</td></tr>
-<tr><td>Verschachtelte StructArrays werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
+<tr><td>Alle Unterfelder teilen sich ein gemeinsames „ <code translate="no">max_capacity</code> “.</td><td>Jedes Unterfeld muss „ <code translate="no">max_capacity</code> “ deklarieren, und alle Unterfelder eines StructArray-Feldes müssen denselben Wert deklarieren. Der Wert muss größer als 0 sein und darf „ <code translate="no">proxy.maxArrayCapacity</code> “ nicht überschreiten, dessen Standardwert 4096 ist.</td></tr>
+<tr><td>Vorhandene Unterfelder sind fest vorgegeben.</td><td>Sie können einem bestehenden StructArray-Feld keine neuen Unterfelder anhängen. Um das Schema eines Unterfelds zu ändern, löschen Sie das StructArray-Feld und fügen Sie es mit dem aktualisierten Schema erneut hinzu.</td></tr>
+<tr><td>Verschachtelte „StructArray“-Felder werden nicht unterstützt.</td><td>Ein „StructArray“-Feld darf keine verschachtelten „ <code translate="no">Array</code> “- „ <code translate="no">ArrayOfVector</code> “- „ <code translate="no">Struct</code> “- oder „ <code translate="no">ArrayOfStruct</code> “-Unterfelder enthalten.</td></tr>
 <tr><td>Funktionen werden innerhalb von „StructArray“ nicht unterstützt.</td><td>Definieren Sie keine Feldfunktionen für „StructArray“-Felder oder deren Unterfelder.</td></tr>
+<tr><td>Die Textanalyse wird für Unterfelder nicht unterstützt.</td><td><code translate="no">enable_match</code> Die Einstellungen „ <code translate="no">enable_analyzer</code> “ für Struct-Unterfelder haben keine Auswirkung, da Textindizes nur für Felder der obersten Ebene erstellt werden.</td></tr>
 </tbody>
 </table>
 <p>Beispiele zur Schemaerstellung finden Sie unter <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“.</p>
@@ -105,10 +107,10 @@ summary: >-
     </button></h2><p>StructArray-Unterfelder werden physisch im Array-Stil gespeichert. Die folgende Tabelle listet unterstützte und nicht unterstützte physische Typen auf:</p>
 <table>
 <thead>
-<tr><th>Physikalischer Typ des Struct-Unterfelds</th><th>Unterstützung</th><th>Hinweise</th></tr>
+<tr><th>Physikalischer Typ eines Struct-Unterfelds</th><th>Unterstützung</th><th>Hinweise</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als ` <code translate="no">DataType.BOOL</code>`.</td></tr>
+<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BOOL</code> “.</td></tr>
 <tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8</code> “, „ <code translate="no">DataType.INT16</code> “, „ <code translate="no">DataType.INT32</code> “ oder „ <code translate="no">DataType.INT64</code> “.</td></tr>
 <tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.FLOAT</code> “ oder „ <code translate="no">DataType.DOUBLE</code> “.</td></tr>
 <tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.VARCHAR</code> “ und legen Sie „ <code translate="no">max_length</code> “ fest.</td></tr>
@@ -117,7 +119,7 @@ summary: >-
 <tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BFLOAT16_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
 <tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.INT8_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
 <tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>Unterstützt</td><td>Definieren Sie das Unterfeld als „ <code translate="no">DataType.BINARY_VECTOR</code> “ und legen Sie „ <code translate="no">dim</code> “ fest.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>Nicht unterstützt</td><td>Sparse-Vektor-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>Nicht unterstützt</td><td>Sparse-Vektor-Teilfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
 <tr><td><code translate="no">Array&lt;String&gt;</code></td><td>Nicht unterstützt</td><td>Verwenden Sie „ <code translate="no">VARCHAR</code> “ und nicht „ <code translate="no">String</code> “.</td></tr>
 <tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>Nicht unterstützt</td><td>JSON-Unterfelder werden in StructArray-Feldern nicht unterstützt.</td></tr>
 <tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>Nicht unterstützt</td><td>Geometrie-Unterfelder und GIS-Funktionen werden in StructArray-Feldern nicht unterstützt.</td></tr>
@@ -213,8 +215,8 @@ summary: >-
 </tbody>
 </table>
 <p>Verwenden Sie separate Vektor-Unterfelder, wenn beide Modi erforderlich sind. Verwenden Sie beispielsweise „ <code translate="no">chunks[emb_list_vector]</code> “ für die EmbeddingList-Suche und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
-<p>StructArray-Vektor-Unterfelder zählen bei der Planung Ihres Sammlungsschemas als Vektor-Unterfelder. Halten Sie die Gesamtzahl der Vektorfelder und Vektor-Unterfelder innerhalb der Grenzen Ihrer Zielversion und Ihrer Service-Stufe.</p>
-<p>Informationen zur unterstützten Matrix aus Index- und Metriktypen finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index-StructArray-Felder</a>“.</p>
+<p>Vektor-Unterfelder von „StructArray“ werden als Vektorfelder auf die Begrenzung auf Sammlungsebene angerechnet <code translate="no">proxy.maxVectorFieldNum</code>, deren Standardwert 10 beträgt. Ein „StructArray“-Feld, dessen Vektor-Unterfelder die einzigen Vektorfelder der Sammlung sind, ist gültig, und das Entfernen eines solchen Feldes wird abgelehnt, wenn die Sammlung dadurch kein Vektorfeld mehr hätte. Halten Sie die Gesamtzahl der Vektorfelder und Vektorunterfelder innerhalb der Grenzen Ihrer Zielversion und Ihrer Service-Stufe ein.</p>
+<p>Informationen zu den unterstützten Matrix-Typen für Indizes und Metriken finden Sie unter <a href="/docs/de/index-structarray-fields.md">„Index-StructArray-Felder</a>“.</p>
 <h2 id="Search-limits" class="common-anchor-header">Suchbeschränkungen<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -236,7 +238,7 @@ summary: >-
 <tr><th>Suchverhalten</th><th>Unterstützung und Einschränkungen</th></tr>
 </thead>
 <tbody>
-<tr><td>Grundlegende Suche in „EmbeddingList“</td><td>Wird für StructArray-Vektor-Teilfelder unterstützt, die mit „ <code translate="no">MAX_SIM*</code> “-Metriken indiziert sind. Liefert Ergebnisse auf Entitätsebene.</td></tr>
+<tr><td>Grundlegende EmbeddingList-Suche</td><td>Wird für StructArray-Vektor-Teilfelder unterstützt, die mit „ <code translate="no">MAX_SIM*</code> “-Metriken indiziert sind. Liefert Ergebnisse auf Entitätsebene.</td></tr>
 <tr><td>Einfache Suche auf Elementebene</td><td>Wird für StructArray-Vektor-Teilfelder unterstützt, die mit regulären Vektormetriken indiziert sind. Kann Offsets der übereinstimmenden Elemente zurückgeben.</td></tr>
 <tr><td>Bereichssuche</td><td>Wird je nach Suchmodus und Index-/Metrikunterstützung der Zielversion unterstützt. Für das Verhalten bei der hybriden Bereichssuche bei StructArray-Anfragen auf Elementebene überprüfen Sie bitte Ihre Zielversion.</td></tr>
 <tr><td>Gruppierte Suche</td><td>Die gruppierte Suche auf Elementebene kann Offsets zurückgeben. Das Verhalten der hybriden Gruppierungssuche bei StructArray-Anfragen auf Elementebene ist versionsabhängig.</td></tr>
@@ -269,6 +271,29 @@ summary: >-
 <li><p>JSON-Path-Syntax, JSON-Funktionen, Array-Container-Funktionen, Textabgleichsfunktionen, Geometrie-/GIS-Funktionen und Timestamptz-Ausdrücke werden für Prädikate auf StructArray-Ebene nicht unterstützt.</p></li>
 <li><p>Verwenden Sie vorzugsweise explizite boolesche Vergleiche wie „ <code translate="no">$[has_code] == true</code> “ anstelle von einfachen booleschen Ausdrücken.</p></li>
 </ul>
+<h2 id="Import-limits" class="common-anchor-header">Importbeschränkungen<button data-href="#Import-limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>Limit</th><th>Details</th></tr>
+</thead>
+<tbody>
+<tr><td>Quelldateiformate</td><td>JSON-, JSONL-, CSV- und Parquet-Dateien können StructArray-Felder enthalten. NumPy-Dateien enthalten eine Datei pro Feld auf oberster Ebene und können keine StructArray-Daten bereitstellen; verwenden Sie JSON-, CSV- oder Parquet-Dateien für Sammlungen, die ein StructArray-Feld enthalten. Informationen zu Dateiformaten finden Sie unter <a href="/docs/de/prepare-source-data.md#StructArray-fields-in-source-files">„Quelldaten vorbereiten</a>“.</td></tr>
+</tbody>
+</table>
 <h2 id="Related-pages" class="common-anchor-header">Verwandte Seiten<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

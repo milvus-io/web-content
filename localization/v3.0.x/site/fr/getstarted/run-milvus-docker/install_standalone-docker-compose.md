@@ -56,9 +56,9 @@ title: Exécuter Milvus avec Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Téléchargez la configuration pour la version 3.0.3 et lancez un nouveau déploiement :</p>
+    </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Téléchargez la configuration pour la version 3.0.5 et lancez un nouveau déploiement :</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,7 +68,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Déploiement par défaut (v3.0.3) :</strong> <code translate="no">docker compose up -d</code> lance trois conteneurs à exécution longue : <code translate="no">milvus-etcd</code> (métadonnées), <code translate="no">milvus-minio</code> (stockage d’objets) et <code translate="no">milvus-standalone</code>. La file d’attente de messages est <strong>Woodpecker (intégrée, avec MinIO / stockage d’objets comme backend WAL)</strong>; aucun conteneur de file d’attente de messages distinct n’est donc nécessaire.</p>
+<p><strong>Déploiement par défaut (v3.0.5) :</strong> <code translate="no">docker compose up -d</code> lance trois conteneurs à exécution longue : <code translate="no">milvus-etcd</code> (métadonnées), <code translate="no">milvus-minio</code> (stockage d’objets) et <code translate="no">milvus-standalone</code>. La file d’attente de messages est <strong>Woodpecker (intégrée, avec MinIO / stockage d’objets comme backend WAL)</strong>; aucun conteneur de file d’attente de messages distinct n’est donc nécessaire.</p>
 <p>La configuration exécute également le service « one-shot » <code translate="no">milvus-volume-init</code> afin de préparer la propriété du répertoire de données. Elle se termine une fois cette tâche accomplie.</p>
 <p><strong>File d’attente de messages par défaut selon la version :</strong></p>
 <ul>
@@ -85,8 +85,8 @@ Creating milvus-standalone ... done
 <ul>
 <li>les conteneurs nommés <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en cours d’exécution.
 <ul>
-<li>Le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le répertoire volumes/etcd</strong> du dossier actuel.</li>
-<li>Le conteneur <strong>milvus-minio</strong> expose localement les ports <strong>9000</strong> et <strong>9001</strong> avec les identifiants d’authentification par défaut et mappe ses données vers <strong>le</strong> répertoire <strong>volumes/minio</strong> du dossier actuel.</li>
+<li>Le conteneur <strong>milvus-etcd</strong> n’expose aucun port vers l’hôte et mappe ses données vers <strong>le</strong> répertoire <strong>volumes/etcd</strong> du dossier actuel.</li>
+<li>Le conteneur <strong>milvus-minio</strong> expose localement les ports <strong>9000</strong> et <strong>9001</strong> avec les identifiants d’authentification par défaut et mappe ses données vers le répertoire <strong>volumes/minio</strong> du dossier actuel.</li>
 <li>Le conteneur <strong>milvus-standalone</strong> expose localement les ports <strong>19530</strong> avec les paramètres par défaut et stocke ses données dans <strong>le répertoire volumes/milvus</strong> du dossier actuel.</li>
 </ul></li>
 </ul>
@@ -99,7 +99,7 @@ milvus-minio        …       &quot;/usr/bin/docker-ent…&quot;   minio        
 milvus-standalone   …       &quot;/tini -- milvus run…&quot;   standalone   2 minutes ago   Up 2 minutes (healthy)   0.0.0.0:9091-&gt;9091/tcp, 0.0.0.0:19530-&gt;19530/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez également accéder à l’interface Web de Milvus à l’adresse <code translate="no">http://127.0.0.1:9091/webui/</code> pour en savoir plus sur votre instance Milvus. Pour plus de détails, consultez la section <a href="/docs/fr/milvus-webui.md">Interface Web de Milvus</a>.</p>
-<p>Pour tester le serveur en cours d’exécution, suivez la procédure <strong>« Utiliser un serveur Milvus existant</strong> » dans <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> et connectez-vous à <code translate="no">http://localhost:19530</code>. N’utilisez pas le bloc de connexion local <code translate="no">.db</code>, qui démarre une base de données Milvus Lite distincte.</p>
+<p>Pour tester le serveur en cours d’exécution, suivez la procédure <strong>« Utiliser un serveur Milvus existant</strong> » décrite dans <a href="/docs/fr/quickstart.md">le guide de démarrage rapide</a> et connectez-vous à <code translate="no">http://localhost:19530</code>. N’utilisez pas le bloc de connexion local <code translate="no">.db</code>, qui démarre une base de données Milvus Lite distincte.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Facultatif) Mise à jour des configurations Milvus<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>Pour un déploiement autonome de Milvus 2.6.x, suivez la procédure « <a href="/docs/fr/upgrade_milvus_standalone-docker.md">Mise à niveau de Milvus Standalone avec Docker Compose</a> ». Sauvegardez les métadonnées et les données persistantes, conservez les dépendances et la configuration existantes, puis validez le chemin de mise à niveau de la source vers la cible documenté avant de modifier l’image Milvus. Ne remplacez pas le fichier Compose d’un ancien déploiement par la configuration de nouvelle installation ci-dessus.</p>
-<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.3, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
+<p><strong>Limitations relatives aux files d’attente de messages</strong>: lors de la mise à niveau vers Milvus v3.0.5, vous devez conserver votre choix actuel de file d’attente de messages. Le passage d’un système de file d’attente de messages à un autre pendant la mise à niveau n’est pas pris en charge. La prise en charge du changement de système de file d’attente de messages sera disponible dans les versions futures.</p>
 <p>Milvus 2.6.x et versions ultérieures utilisent Woodpecker par défaut, tandis que les déploiements 2.5.x utilisent <strong>RocksMQ</strong> par défaut. Si le déploiement que vous mettez à niveau utilise encore RocksMQ, fixez-le dans ` <code translate="no">user.yaml</code> ` avant de modifier l’image Milvus, afin que l’instance mise à niveau conserve sa file d’attente de messages existante au lieu de démarrer avec la nouvelle valeur par défaut :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Une fois que l’instance mise à niveau fonctionne sous la version 3.0.3, vous pouvez passer de RocksMQ à Woodpecker à l’aide de la fonction « <a href="/docs/fr/switch-mq-type.md">Switch Message Queue</a> », disponible dans Milvus 3.0 et versions ultérieures.</p>
+<p>Une fois que l’instance mise à niveau fonctionne sous la version 3.0.5, vous pouvez passer de RocksMQ à Woodpecker à l’aide de la fonction « <a href="/docs/fr/switch-mq-type.md">Switch Message Queue</a> », disponible dans Milvus 3.0 et versions ultérieures.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Dépendances facultatives<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -70,7 +70,7 @@ summary: Helm 또는 Milvus Operator를 사용하여 Milvus 클러스터의 메�
 <p>전환이 성공하면 <code translate="no">[mqTypeValue=woodpecker]</code> 로깅됩니다.</p>
 <p><strong>4단계: (선택 사항) Pulsar를 중지하고 정리합니다.</strong> <strong>내장형</strong> Pulsar의 경우, Pulsar를 비활성화하고 Woodpecker를 활성화한 다음, Pulsar PVC를 삭제합니다:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -99,7 +99,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
         ></path>
       </svg>
     </button></h3><p><strong>1단계: Milvus 인스턴스가 실행 중인지 확인합니다.</strong></p>
-<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> 전환을 위해서는 Milvus가 이미 Pulsar 연결을 인식하고 있어야 하므로, <code translate="no">extraConfigFiles</code> 을 통해 <code translate="no">user.yaml</code> 에 내용을 작성하고 <code translate="no">helm upgrade</code> (포드를 롤링)을 실행하여 적용하십시오. Switch MQ 기능을 사용하려면 <code translate="no">streaming.enabled=true</code> 가 필요합니다.</p>
+<p><strong>2단계: 대상 Pulsar 연결을 구성하고 Milvus를 다시 시작합니다.</strong> 전환을 위해서는 Milvus가 이미 Pulsar 연결을 인식하고 있어야 하므로, <code translate="no">extraConfigFiles</code> 을 통해 <code translate="no">user.yaml</code> 에 내용을 작성하고 <code translate="no">helm upgrade</code> (포드를 롤링합니다)를 실행하여 적용하십시오. Switch MQ 기능을 사용하려면 <code translate="no">streaming.enabled=true</code> 가 필요합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -171,7 +171,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
 <p>전환이 성공하면 <code translate="no">[mqTypeValue=woodpecker]</code> 로깅됩니다.</p>
-<p><strong>4단계: Operator의 MQ 유형을 업데이트합니다.</strong> Operator가 전환을 되돌리지 않도록 Operator가 관리하는 구성을 업데이트합니다. ` <code translate="no">change_configmap.yaml</code>`를 생성합니다:</p>
+<p><strong>4단계: Operator의 MQ 유형을 업데이트합니다.</strong> Operator가 전환을 되돌리지 않도록 Operator가 관리하는 구성을 업데이트합니다<strong>.</strong> <code translate="no">change_configmap.yaml</code> 를 생성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -265,6 +265,6 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <tr><td>내장형 Pulsar</td><td>Woodpecker (MinIO)</td><td><strong>지원됨</strong></td><td><strong>지원됨</strong></td></tr>
 <tr><td>외부 Pulsar</td><td>Woodpecker (MinIO)</td><td><strong>지원됨</strong></td><td><strong>지원됨</strong></td></tr>
 <tr><td>Woodpecker (MinIO)</td><td>외부 Pulsar</td><td><strong>지원됨</strong></td><td><strong>지원됨</strong></td></tr>
-<tr><td>Pulsar</td><td>Woodpecker (로컬)</td><td><strong>지원되지만 권장하지 않음</strong> (모든 포드에 공유 파일 시스템이 필요함)</td><td><strong>지원되지 않음</strong></td></tr>
+<tr><td>펄서</td><td>Woodpecker (로컬)</td><td><strong>지원되지만 권장하지 않음</strong> (모든 포드에 공유 파일 시스템이 필요함)</td><td><strong>지원되지 않음</strong></td></tr>
 </tbody>
 </table>

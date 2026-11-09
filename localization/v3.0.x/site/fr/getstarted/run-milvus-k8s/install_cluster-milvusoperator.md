@@ -177,7 +177,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Une fois que le pod Milvus Operator est en cours d'exécution, vous pouvez déployer un cluster Milvus comme suit.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La commande ci-dessus déploie un cluster Milvus avec <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour la version 3.0.3) et tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
+<p>La commande ci-dessus déploie un cluster Milvus avec <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour la version 3.0.5) et tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
 <p><strong>Points forts de l'architecture dans ce déploiement :</strong></p>
 <ul>
 <li><strong>File d’attente de messages</strong>: <a href="/docs/fr/woodpecker.md">utilise Woodpecker</a> (réduit la maintenance de l’infrastructure)</li>
@@ -275,7 +275,7 @@ my-release-minio-3                               1/1     Running   0          2m
 <div class="alert note">
 <p>Si vous avez déployé Milvus en mode autonome, remplacez le nom du pod « <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> » par « <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> ».</p>
 </div>
-<p>Exécutez ensuite la commande suivante pour rediriger un port local vers le port sur lequel Milvus est accessible.</p>
+<p>Ensuite, exécutez la commande suivante pour rediriger un port local vers le port sur lequel Milvus est accessible.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward service/my-release-milvus 27017:19530</span>
 Forwarding from 127.0.0.1:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
@@ -303,7 +303,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>Vous pouvez afficher et mettre à jour les configurations de votre cluster Milvus en exécutant la commande ` <code translate="no">patch</code> ` comme suit :</p>
 <ol>
 <li><p>Exécutez la commande suivante pour prévisualiser les configurations proposées.</p>
-<p>L'exemple suivant part du principe que vous souhaitez mettre à jour le paramètre ` <code translate="no">spec.components.disableMetric</code> ` pour le définir à ` <code translate="no">false</code> ` ms.</p>
+<p>L'exemple suivant part du principe que vous souhaitez mettre à jour le paramètre ` <code translate="no">spec.components.disableMetric</code> ` pour le définir à <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>
@@ -398,10 +398,10 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ce déploiement utilise <strong>Woodpecker</strong> comme file d'attente de messages, <strong>etcd</strong> pour les métadonnées et <strong>MinIO</strong> pour le stockage d'objets, tous provisionnés par Milvus Operator. Pour utiliser un autre backend avec l'Operator, consultez :</p>
+    </button></h2><p>Ce déploiement utilise <strong>Woodpecker</strong> comme file d’attente de messages, <strong>etcd</strong> pour les métadonnées et <strong>MinIO</strong> pour le stockage d’objets, tous provisionnés par Milvus Operator. Pour utiliser un autre backend avec l’Operator, consultez :</p>
 <ul>
 <li>File d'attente de messages : <a href="/docs/fr/woodpecker.md">Woodpecker</a> (par défaut) · <a href="/docs/fr/message_storage_operator.md#Configure-Pulsar">Pulsar</a> · <a href="/docs/fr/message_storage_operator.md#Configure-Kafka">Kafka</a> · <a href="/docs/fr/message_storage_operator.md#Configure-RocksMQ">RocksMQ</a></li>
-<li>Stockage d'objets : <a href="/docs/fr/object_storage_operator.md">Configurer le stockage d'objets avec Milvus Operator</a></li>
+<li>Stockage d'objets : <a href="/docs/fr/object_storage_operator.md">configurer le stockage d'objets avec Milvus Operator</a></li>
 <li>Métadonnées : <a href="/docs/fr/meta_storage_operator.md">Configurer etcd avec Milvus Operator</a></li>
 </ul>
 <div class="alert note">
@@ -444,7 +444,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul></li>
 <li><p>Découvrez <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour la surveillance et la gestion de Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open source dédié aux sauvegardes de données Milvus.</p></li>
-<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open source permettant le débogage de Milvus et la mise à jour dynamique des configurations.</p></li>
 <li><p>Découvrez <a href="https://github.com/zilliztech/attu">Attu</a>, un outil GUI open source permettant une gestion intuitive de Milvus.</p></li>
 <li><p><a href="/docs/fr/monitor.md">Surveillez Milvus avec Prometheus</a>.</p></li>
 </ul>

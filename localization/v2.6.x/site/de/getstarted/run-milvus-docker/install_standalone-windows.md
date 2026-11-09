@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste darauf klicken und <strong>„Als Administrator ausführen“</strong> auswählen.</p></li>
 <li><p>Führen Sie die folgenden Befehle in der PowerShell oder der Windows-Eingabeaufforderung aus, um die Docker-Compose-Konfigurationsdatei für Milvus Standalone herunterzuladen und Milvus zu starten.​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -225,14 +225,14 @@ Creating milvus-standalone ... done​
       </svg>
     </button></h3><p>Die Vorgehensweise ähnelt der Installation von Milvus auf Linux-Systemen mit Docker Compose.​</p>
 <ol>
-<li><p>Starten Sie WSL 2.</p>
+<li><p>Starten Sie WSL 2.​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
 Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Laden Sie die Milvus-Konfigurationsdatei herunter.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Starten Sie Milvus.​</p>
@@ -414,7 +414,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool für die Fehlerbehebung bei Milvus und dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/v2.6.x/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

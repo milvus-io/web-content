@@ -57,7 +57,7 @@ title: Menjalankan Milvus dengan Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus menyediakan berkas konfigurasi Docker Compose di repositori Milvus. Untuk menginstal Milvus menggunakan Docker Compose, cukup jalankan</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.25:</strong></p>
+<p><strong>Apa yang baru di v2.6.26:</strong></p>
 <ul>
-<li><strong>Arsitektur yang Ditingkatkan</strong>: Menampilkan Streaming Node baru dan komponen yang dioptimalkan</li>
+<li><strong>Arsitektur yang Ditingkatkan</strong>: Dilengkapi dengan Streaming Node baru dan komponen yang dioptimalkan</li>
 <li><strong>Dependensi yang Diperbarui</strong>: Termasuk versi terbaru MinIO dan etcd</li>
 <li><strong>Konfigurasi yang Ditingkatkan</strong>: Pengaturan yang dioptimalkan untuk kinerja yang lebih baik</li>
 </ul>
-<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur-fitur v2.6.25.</p>
+<p>Selalu unduh konfigurasi Docker Compose terbaru untuk memastikan kompatibilitas dengan fitur-fitur v2.6.26.</p>
 <ul>
 <li><p>Jika Anda gagal menjalankan perintah di atas, silakan periksa apakah sistem Anda telah menginstal Docker Compose V1. Jika demikian, Anda disarankan untuk bermigrasi ke Docker Compose V2 sesuai dengan catatan di <a href="https://docs.docker.com/compose/">halaman ini</a>.</p></li>
 <li><p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p></li>

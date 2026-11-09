@@ -20,19 +20,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在基于代理的搜索应用中，向量搜索和 grep 风格的模式匹配通常相辅相成。向量搜索可检索语义相关的实体，而模式匹配则通过精确的字符串结构（如错误代码、日志前缀、电子邮件域名、URL 路径或标识符）进一步缩小搜索结果范围。</p>
-<p>在 Milvus 中，您可以在标量过滤器中使用<code translate="no">LIKE</code> 进行简单的通配符匹配，或使用<code translate="no">=~</code> 及<code translate="no">!~</code> 进行<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正则表达式匹配，来表达这些模式约束。您可以将这些过滤器与<code translate="no">query</code> 、<code translate="no">search</code> 或混合搜索结合使用。</p>
+    </button></h1><p>在基于代理的搜索应用中，向量搜索和 grep 风格的模式匹配通常相辅相成。向量搜索可检索语义相关的实体，而模式匹配则通过精确的字符串结构（如错误代码、日志前缀、电子邮件域名、URL 路径或标识符）来缩小搜索结果范围。</p>
+<p>在 Milvus 中，您可以在标量过滤器中使用<code translate="no">LIKE</code> 进行简单的通配符匹配，或使用<code translate="no">=~</code> 或<code translate="no">!~</code> 进行<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正则表达式匹配，来表达这些模式约束。您可以将这些过滤器与<code translate="no">query</code> 、<code translate="no">search</code> 或混合搜索相结合。</p>
 <div class="alert note">
-<p>本页面介绍了<code translate="no">query</code> 、<code translate="no">search</code> 以及混合搜索所使用的标量过滤器表达式中的模式匹配。这些表达式用于评估字段值，不会更改分析器生成的令牌。若要在文本分析过程中过滤令牌，请参阅<a href="/docs/zh/regex-filter.md">“正则表达式分析器过滤器”</a>。</p>
+<p>本页面介绍了<code translate="no">query</code> 、<code translate="no">search</code> 以及混合搜索所使用的标量过滤器表达式中的模式匹配。这些表达式对字段值进行评估，但不会更改分析器生成的令牌。若要在文本分析过程中过滤令牌，请参阅<a href="/docs/zh/regex-filter.md">“正则表达式分析器过滤器”</a>。</p>
 </div>
 <p>模式匹配表达式写在<code translate="no">filter</code> 参数中。例如，以下查询可匹配包含<code translate="no">E1001</code> 等错误代码的日志消息：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -64,12 +66,12 @@ res = client.query(
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx := context.Background()
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-comment">// handle error</span>
@@ -84,36 +86,22 @@ res, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-stri
 }
 fmt.Println(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span> });
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
 
-  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;log_events&#x27;</span>,
-<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>,</span>
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-string">&#x27;severity&#x27;</span>],
-  });
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client.<span class="hljs-title function_ invoke__">query</span>(
+    QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;log_events&quot;</span>)
+<span class="highlighted-wrapper-line">        .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">r#&quot;message =~ &quot;E[0-9]{4}&quot;&quot;#</span>)</span>
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span>])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> res.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">rows</span>()? {
+    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
 }
-
-<span class="hljs-title function_">main</span>().<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
-  process.<span class="hljs-property">exitCode</span> = <span class="hljs-number">1</span>;
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-
-curl --request POST \
-  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
-  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
-  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
-  --data <span class="hljs-string">&#x27;{
-    &quot;collectionName&quot;: &quot;log_events&quot;,
-    &quot;filter&quot;: &quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;,
-    &quot;outputFields&quot;: [&quot;message&quot;, &quot;severity&quot;]
-  }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
@@ -138,7 +126,64 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>);
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span> });
+
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;log_events&#x27;</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>,</span>
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-string">&#x27;severity&#x27;</span>],
+  });
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+}
+
+<span class="hljs-title function_">main</span>().<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+  process.<span class="hljs-property">exitCode</span> = <span class="hljs-number">1</span>;
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+};
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+QueryResp res = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;log_events&quot;</span>,
+    Expression = <span class="hljs-string">&quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;</span>,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;message&quot;</span>, <span class="hljs-string">&quot;severity&quot;</span> }
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+  --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;log_events&quot;,
+    &quot;filter&quot;: &quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;,
+    &quot;outputFields&quot;: [&quot;message&quot;, &quot;severity&quot;]
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>本页面的示例重点介绍分配给 `<code translate="no">filter</code>` 的表达式。在支持标量过滤器的 Milvus 操作中（例如 `<code translate="no">query</code>`、`<code translate="no">search</code>` 和混合搜索），您可以使用相同的过滤表达式语法。</p>
+<div class="alert note">
+<p>过滤表达式左侧的字面量可以是 Collection 字段名（如下文示例中使用的<code translate="no">message</code> 、<code translate="no">email</code> 等），也可以是 StructArray 子字段在特定元素索引处的名称，例如<code translate="no">filter = 'struct[0][subfield] =~ &quot;E[0-9]{4}&quot;'</code> 。</p>
+<p>有关 StructArray 字段中标量过滤的详细信息，请参阅《<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>》。</p>
+</div>
 <h2 id="Supported-field-types" class="common-anchor-header">支持的字段类型<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,12 +202,12 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     </button></h2><p>模式匹配适用于字符串值。</p>
 <table>
 <thead>
-<tr><th>目标</th><th><code translate="no">LIKE</code></th><th>正则表达式<code translate="no">=~</code> /<code translate="no">!~</code></th><th>注</th></tr>
+<tr><th>目标</th><th><code translate="no">LIKE</code></th><th>正则表达式<code translate="no">=~</code> /<code translate="no">!~</code></th><th>注释</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">VARCHAR</code> 字段</td><td>是</td><td>是</td><td>字符串字段模式匹配的典型目标。</td></tr>
-<tr><td><code translate="no">JSON</code> 路径，使用<code translate="no">VARCHAR</code> 类型转换</td><td>是</td><td>是</td><td>JSON 路径值必须为字符串才能匹配成功。若要在 JSON 路径上创建索引以提高性能，请设置 `<code translate="no">json_cast_type=&quot;varchar&quot;</code>`。</td></tr>
-<tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> element</td><td>是</td><td>是</td><td>按索引匹配特定元素，例如<code translate="no">tags[0]</code> 。模式匹配<strong>不会</strong>扫描所有元素；它仅适用于指定索引处的元素。</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 字段</td><td>是</td><td>是</td><td>字符串字段上进行模式匹配的典型目标。</td></tr>
+<tr><td><code translate="no">JSON</code> 路径，使用<code translate="no">VARCHAR</code> 类型转换</td><td>是</td><td>是</td><td>JSON路径值必须为字符串才能进行正向匹配。若要在JSON路径上创建索引以提高性能，请设置<code translate="no">json_cast_type=&quot;varchar&quot;</code> 。</td></tr>
+<tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素</td><td>是</td><td>是</td><td>按索引匹配特定元素，例如<code translate="no">tags[0]</code> 。模式匹配<strong>不会</strong>扫描所有元素；它仅适用于指定索引处的元素。</td></tr>
 <tr><td>数字、布尔值、向量、<code translate="no">TEXT</code> 或其他非<code translate="no">VARCHAR</code> 目标</td><td>否</td><td>否</td><td>模式匹配仅适用于<code translate="no">VARCHAR</code> 值、解析为字符串的JSON路径，或带索引的<code translate="no">ARRAY&lt;VARCHAR&gt;</code> 元素。</td></tr>
 </tbody>
 </table>
@@ -182,7 +227,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
         ></path>
       </svg>
     </button></h2><p>请选择能表达所需模式的最简单操作符。</p>
-<p>如果您需要精确的字符串匹配，建议使用<code translate="no">==</code> 而非模式匹配。仅当筛选器需要匹配特定模式时，才应使用<code translate="no">LIKE</code> 或regex。</p>
+<p>如果您需要精确的字符串匹配，建议使用<code translate="no">==</code> 而非模式匹配。仅当过滤器需要匹配特定模式时，才使用<code translate="no">LIKE</code> 或正则表达式。</p>
 <table>
 <thead>
 <tr><th>要求</th><th>推荐操作符</th><th>示例</th><th>说明</th></tr>
@@ -265,7 +310,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用<code translate="no">LIKE</code> 进行前缀、后缀、包含以及固定位置单字符匹配。<code translate="no">LIKE</code> 不支持字符类（如<code translate="no">[0-9]</code> ）、选择关系（如<code translate="no">error|failed</code> ）、重复计数（如<code translate="no">{4}</code> ）、锚点（如<code translate="no">^</code> 或<code translate="no">$</code> ）或不区分大小写的标志（如<code translate="no">(?i)</code> ）。对于此类模式，请使用正则表达式。</p>
+    </button></h3><p>使用<code translate="no">LIKE</code> 进行前缀、后缀、包含以及固定位置单字符的匹配。<code translate="no">LIKE</code> 不支持字符类（如<code translate="no">[0-9]</code> ）、交替（如<code translate="no">error|failed</code> ）、重复计数（如<code translate="no">{4}</code> ）、锚点（如<code translate="no">^</code> 或<code translate="no">$</code> ）以及不区分大小写的标志（如<code translate="no">(?i)</code> ）。对于此类模式，请使用正则表达式。</p>
 <p>使用<code translate="no">==</code> 进行精确的全字符串相等比较。仅当过滤器需要通配符匹配时，才使用<code translate="no">LIKE</code> 。</p>
 <h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">在 LIKE 模式中转义通配符<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -305,7 +350,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
         ></path>
       </svg>
     </button></h2><p>当模式需要正则表达式功能（如字符类、重复、选择、锚点或不区分大小写的匹配）时，请使用正则表达式过滤器。Milvus 会对字符串值应用<a href="https://github.com/google/re2/wiki/syntax">RE2</a>正则表达式。</p>
-<p><code translate="no">=~</code> 或<code translate="no">!~</code> 的右侧必须是一个字符串字面量。</p>
+<p><code translate="no">=~</code> 或<code translate="no">!~</code> 的右侧必须为字符串字面量。</p>
 <table>
 <thead>
 <tr><th>操作符</th><th>含义</th><th>示例</th></tr>
@@ -315,7 +360,7 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <tr><td><code translate="no">!~</code></td><td>排除满足正则表达式模式的值。</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
-<h3 id="Use-raw-string-literals" class="common-anchor-header">使用原始字符串字面量<button data-href="#Use-raw-string-literals" class="anchor-icon" translate="no">
+<h3 id="Using-raw-string-literals" class="common-anchor-header">使用原始字符串字面量<button data-href="#Using-raw-string-literals" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -333,12 +378,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     </button></h3><p>对于包含反斜杠的正则表达式模式，建议使用原始字符串字面量。在原始字符串中（写法为<code translate="no">r&quot;...&quot;</code> 或<code translate="no">r'...'</code> ），反斜杠会原样传递给正则表达式引擎。这避免了普通字符串字面量所需的额外转义操作。</p>
 <p>例如：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">r&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -346,14 +393,18 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`filename =~ r&quot;\.json$&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;filename =~ r&quot;\\.json$&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;filename =~ r&quot;\.json$&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(filename =~ r&quot;\.json$&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;filename =~ r&quot;\\.json$&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;filename =~ r\&quot;\\.json$\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p>这将匹配以<code translate="no">.json</code> 结尾的字符串，例如<code translate="no">report.json</code> 。</p>
-<p>如果在 Milvus 过滤器表达式中未使用原始字符串，普通字符串字面量会在评估正则表达式模式之前处理转义序列。因此，经过转义的字面量字符可能需要在宿主语言的字符串中添加额外的反斜杠。</p>
+<p>如果在 Milvus 过滤器表达式中未使用原始字符串，普通字符串字面量会在正则表达式模式被评估之前处理转义序列。因此，转义后的字面量字符可能需要在宿主语言的字符串中添加额外的反斜杠。</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">常见的正则表达式模式<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -387,12 +438,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 </table>
 <p>若要匹配多个单词中的任意一个，请使用<code translate="no">|</code> 进行选择：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -400,20 +453,26 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`message =~ &quot;error|failed|timeout&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;message =~ &quot;error|failed|timeout&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(message =~ &quot;error|failed|timeout&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>当需要匹配正则表达式中的字面元字符时，请在正则表达式模式中对其进行转义。例如，要匹配字面上的点（正则表达式中的 `<code translate="no">\.</code> `），请在 Python、Java、Go 或 Node.js 的源字符串中写为 `<code translate="no">\\.</code> `：</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message =~ \&quot;error|failed|timeout\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;error|failed|timeout&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>当需要匹配正则表达式中的字面元字符时，请在正则表达式模式中对其进行转义。例如，要匹配字面上的点（正则表达式中的 `<code translate="no">\.</code> `），请在 Python、Java、Go 或 Node.js 源字符串中写为 `<code translate="no">\\.</code> `：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -421,13 +480,17 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`email =~ &quot;@gmail\\.com$&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;email =~ &quot;@gmail\.com$&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(email =~ &quot;@gmail\\.com$&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>注意：Milvus 的正则表达式过滤器遵循 RE2 语法。如果正则表达式模式使用了 RE2 不支持的语法，或者存在其他无效情况，Milvus 会拒绝该过滤器表达式。有关正则表达式元字符、标志和匹配行为的详细信息，请参阅<a href="https://github.com/google/re2/wiki/syntax">RE2 语法</a>参考。</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;email =~ \&quot;@gmail\\.com$\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>注意：Milvus 的正则表达式过滤器遵循 RE2 语法。如果正则表达式模式使用了 RE2 不支持的语法，或者存在其他无效情况，Milvus 将拒绝该过滤器表达式。有关正则表达式元字符、标志和匹配行为的详细信息，请参阅<a href="https://github.com/google/re2/wiki/syntax">RE2 语法</a>参考。</p>
 <h3 id="Matching-behavior" class="common-anchor-header">匹配行为<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -446,12 +509,14 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
     </button></h3><p><strong>子字符串匹配</strong></p>
 <p>Milvus 的正则表达式匹配采用子字符串语义。模式无需与整个字段值完全匹配。例如，以下过滤器既匹配<code translate="no">E1001</code> ，也匹配<code translate="no">failed with E1001 after retry</code> ：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -459,20 +524,26 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`message =~ &quot;E[0-9]{4}&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;message =~ &quot;E[0-9]{4}&quot;&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(message =~ &quot;E[0-9]{4}&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>若要匹配整个字段值，请使用锚点<code translate="no">^</code> 和<code translate="no">$</code> ：</p>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message =~ \&quot;E[0-9]{4}\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>若要匹配整个字段值，请使用<code translate="no">^</code> 和<code translate="no">$</code> 锚点：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
@@ -483,23 +554,31 @@ status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
 filter := <span class="hljs-string">`code =~ &quot;^E[0-9]{4}$&quot;`</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;code =~ &quot;^E[0-9]{4}$&quot;&quot;#</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(code =~ &quot;^E[0-9]{4}$&quot;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Match only values that are exactly E followed by four digits</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;code =~ \&quot;^E[0-9]{4}$\&quot;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Match only values that are exactly E followed by four digits</span>
 filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(code =~ &quot;^E[0-9]{4}$&quot;)&quot;</span>;
-<button class="copy-code-btn"></button></code></pre>
 <p><strong>可为空的 VARCHAR 字段</strong></p>
 <p>正则表达式过滤器不会匹配空值。这适用于<code translate="no">=~</code> 和<code translate="no">!~</code> 两种锚点。若要排除某个正则表达式模式但保留空值，请显式添加<code translate="no">OR field IS NULL</code> ：</p>
 <div class="multipleCode">
- <a href="#python">Python</a>
- <a href="#java"> Java</a>
- <a href="#go"> Go</a>
- <a href="#javascript"> Node.js</a>
- <a href="#cpp"> C++</a>
- <a href="#bash"> cURL</a>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -507,17 +586,21 @@ filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</sp
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">`message !~ &quot;^DEBUG&quot; OR message IS NULL`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>;
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;message !~ &quot;^DEBUG&quot; OR message IS NULL&quot;#</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(message !~ &quot;^DEBUG&quot; OR message IS NULL)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;message !~ \&quot;^DEBUG\&quot; OR message IS NULL&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot; OR message IS NULL&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <p><strong>JSON 路径</strong></p>
-<p>对于 JSON 路径，当路径缺失、为空或解析为非字符串值时，正则表达式过滤器的行为会有所不同：</p>
+<p>对于 JSON 路径，当路径缺失、为 null 或解析为非字符串值时，正则表达式过滤器的行为会有所不同：</p>
 <table>
 <thead>
-<tr><th>过滤器</th><th>是否包含缺失/null/非字符串值？</th><th>备注</th></tr>
+<tr><th>过滤器</th><th>是否包含缺失/空值/非字符串值？</th><th>备注</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">json_field[&quot;path&quot;] =~ &quot;pattern&quot;</code></td><td>否</td><td>仅匹配满足正则表达式模式的字符串值。</td></tr>
@@ -548,7 +631,7 @@ filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</sp
 </thead>
 <tbody>
 <tr><td>包含固定的字面量子字符串，例如<code translate="no">message =~ &quot;error.*timeout&quot;</code> 或<code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>当 Milvus 能从模式中提取有意义的字面量子字符串时，此项会有所帮助。详情请参阅<a href="/docs/zh/ngram.md">NGRAM</a>。</td></tr>
-<tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤条件接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
-<tr><td>不包含固定字面量的正则表达式模式，或以字符类、短令牌或通配符为主的模式</td><td>在依赖索引加速之前请进行基准测试</td><td>这些模式可能提供的索引选择性有限，并可能退化为更广泛的扫描。</td></tr>
+<tr><td>前缀、精确或等值类型的字符串过滤器，特别适用于基数较低至中等的字段</td><td><code translate="no">STL_SORT</code>、<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code></td><td>当字段包含重复值或过滤器接近精确匹配时，此方法可能更有效。详情请参阅<a href="/docs/zh/stl-sort.md">STL_SORT</a>、<a href="/docs/zh/inverted.md">INVERTED</a> 和<a href="/docs/zh/bitmap.md">BITMAP</a>。</td></tr>
+<tr><td>不包含固定字符的正则表达式模式，或以字符类、短令牌或通配符为主的模式</td><td>在依赖索引加速之前请先进行基准测试</td><td>这些模式可能提供的索引选择性有限，并可能退化为更广泛的扫描。</td></tr>
 </tbody>
 </table>

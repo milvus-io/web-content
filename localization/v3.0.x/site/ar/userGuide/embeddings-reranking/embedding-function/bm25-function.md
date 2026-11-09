@@ -1,13 +1,13 @@
 ---
 id: bm25-function.md
-title: دالة BM25
+title: وظيفة BM25
 summary: >-
-  تتيح الدالة BM25 البحث في النص الكامل من خلال تحويل النص الخام إلى متجهات
-  متفرقة وتسجيل المستندات بناءً على الصلة المعجمية. وهي تطبق المطابقة القائمة
-  على المصطلحات والترجيح المدرك للتردد لدعم الاسترجاع الفعال للمستندات النصية
-  التي تتطابق بشكل وثيق مع مصطلحات الاستعلام.
+  تتيح وظيفة BM25 إمكانية البحث عن النص الكامل من خلال تحويل النص الخام إلى
+  متجهات متفرقة وتقييم المستندات بناءً على مدى صلتها المعجمية. وتطبق هذه الوظيفة
+  مطابقةً قائمةً بالمصطلحات وترجيحًا يراعي التكرار لدعم الاسترجاع الفعال
+  للمستندات النصية التي تتطابق بشكل وثيق مع مصطلحات الاستعلام.
 ---
-<h1 id="BM25-Function" class="common-anchor-header">دالة BM25<button data-href="#BM25-Function" class="anchor-icon" translate="no">
+<h1 id="BM25-Function" class="common-anchor-header">وظيفة BM25<button data-href="#BM25-Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تتيح الدالة <strong>BM25</strong> إمكانية <a href="/docs/ar/full-text-search.md">البحث في النص الكامل عن</a> طريق تحويل النص الخام إلى <strong>متجهات متفرقة</strong> وتسجيل المستندات بناءً على الصلة المعجمية. وهي تطبق المطابقة القائمة على المصطلحات والترجيح المدرك للتردد لدعم الاسترجاع الفعال للمستندات النصية التي تتطابق بشكل وثيق مع مصطلحات الاستعلام.</p>
-<p>وباعتبارها دالة نصية محلية، تعمل دالة BM25 داخل Milvus ولا تتطلب استدلالًا نموذجيًا أو عمليات تكامل خارجية. وهي توفر آلية استرجاع حتمية وشفافة لسيناريوهات البحث المستندة إلى النص.</p>
+    </button></h1><p>تتيح <strong>وظيفة BM25</strong> إمكانية <a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a> من خلال تحويل النص الخام إلى <strong>متجهات متفرقة</strong> وتقييم المستندات بناءً على الصلة المعجمية. وتطبق هذه الوظيفة مطابقةً قائمةً على المصطلحات وترجيحًا يراعي التكرار لدعم الاسترجاع الفعال للمستندات النصية التي تتطابق بشكل وثيق مع مصطلحات الاستعلام.</p>
+<p>باعتبارها وظيفة نصية محلية، تعمل وظيفة BM25 داخل Milvus ولا تتطلب استدلال النموذج أو عمليات تكامل خارجية. وهي توفر آلية استرجاع حتمية وشفافة لسيناريوهات البحث النصي.</p>
 <h2 id="How-BM25-works" class="common-anchor-header">كيف تعمل BM25<button data-href="#How-BM25-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,9 +39,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>خوارزمية <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> هي خوارزمية لتسجيل الملاءمة القائمة على المصطلحات والمستخدمة على نطاق واسع في استرجاع النص الكامل. في Milvus، يتم تنفيذ BM25 في Milvus كخط أنابيب استرجاع متناثر يحول النص إلى تمثيلات مرجحة للمصطلح ويسترجع أفضل <em>K من</em> المستندات باستخدام فهارس متفرقة موزعة.</p>
-<p>يتألف سير العمل الكلي من مسارين متماثلين: <strong>استيعاب المستند</strong> <strong>ومعالجة نص الاستعلام،</strong> وهما يشتركان في نفس منطق تحليل النص.</p>
-<h3 id="Document-ingestion-From-text-to-sparse-representation" class="common-anchor-header">استيعاب المستند: من النص إلى التمثيل المتناثر<button data-href="#Document-ingestion-From-text-to-sparse-representation" class="anchor-icon" translate="no">
+    </button></h2><p>خوارزمية <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> هي خوارزمية لتقييم الصلة استنادًا إلى المصطلحات تُستخدم على نطاق واسع في استرجاع النص الكامل. في Milvus، يتم تنفيذ BM25 كمسار استرجاع متفرق يحول النص إلى تمثيلات مرجحة بالمصطلحات ويسترجع أفضل <em>K</em> مستندات باستخدام فهارس متفرقة موزعة.</p>
+<p>يتكون سير العمل الإجمالي من مسارين متماثلين: <strong>استيعاب المستندات</strong> <strong>ومعالجة نص الاستعلام</strong>، اللذين يشتركان في نفس منطق تحليل النص.</p>
+<h3 id="Document-ingestion-From-text-to-sparse-representation" class="common-anchor-header">استيعاب المستندات: من النص إلى التمثيل المتفرق<button data-href="#Document-ingestion-From-text-to-sparse-representation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,28 +56,28 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عندما يتم إدراج مستند، تتم معالجة نصه الخام أولاً بواسطة <strong><a href="/docs/ar/analyzer-overview.md">محلل،</a></strong> والذي يقوم بترميز النص إلى مصطلحات فردية.</p>
-<p>على سبيل المثال، المستند:</p>
+    </button></h3><p>عند إدراج مستند، تتم معالجة نصه الخام أولاً بواسطة <strong><a href="/docs/ar/analyzer-overview.md">محلل</a></strong>، يقوم بتقسيم النص إلى مصطلحات فردية.</p>
+<p>على سبيل المثال، يمكن تحليل المستند:</p>
 <pre><code translate="no" class="language-plaintext">&quot;We are loving Milvus!&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكن تحليلها إلى المصطلحات التالية:</p>
+<p>يمكن تحليله إلى المصطلحات التالية:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;we&quot;, &quot;love&quot;, &quot;milvus&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>ثم يتم تمثيل كل مستند بعد ذلك كتمثيل لتكرار المصطلح (TF)، والذي يسجل عدد مرات ظهور كل مصطلح في المستند. على سبيل المثال:</p>
+<p>ثم يتم تمثيل كل مستند على شكل تمثيل لتكرار المصطلحات (TF)، الذي يسجل عدد مرات ظهور كل مصطلح في المستند. على سبيل المثال:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;we&quot;: 1,
   &quot;love&quot;: 1,
   &quot;milvus&quot;: 1
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>في الوقت نفسه، يقوم برنامج Milvus بتحديث الإحصائيات على مستوى مجموعة المستندات، بما في ذلك:</p>
+<p>في الوقت نفسه، يقوم Milvus بتحديث الإحصائيات على مستوى المجموعة النصية، بما في ذلك:</p>
 <ul>
-<li><p>تكرار المستند (DF) لكل مصطلح</p></li>
-<li><p>متوسط طول المستند</p></li>
-<li><p>قوائم الترحيل التي تربط كل مصطلح بالمستندات التي تحتوي عليه</p></li>
+<li><p>تكرار المصطلح في الوثيقة (DF)</p></li>
+<li><p>متوسط طول الوثيقة</p></li>
+<li><p>قوائم النشر التي تربط كل مصطلح بالوثائق التي تحتوي عليه</p></li>
 </ul>
-<p>يتم إدراج تمثيل TF الخاص بالوثيقة في <strong>التضمينات المتناثرة،</strong> حيث يتم تقسيم نشرات المصطلحات عبر العقد لاسترجاعها بشكل قابل للتطوير.</p>
-<h3 id="Query-text-process-Apply-IDF-weighting" class="common-anchor-header">عملية نص الاستعلام: تطبيق ترجيح IDF<button data-href="#Query-text-process-Apply-IDF-weighting" class="anchor-icon" translate="no">
+<p>يتم إدراج تمثيل TF للوثيقة في <strong>التضمينات المتفرقة</strong>، حيث يتم تقسيم نشر المصطلحات عبر العقد من أجل استرجاع قابل للتوسع.</p>
+<h3 id="Query-text-process-Apply-IDF-weighting" class="common-anchor-header">عملية معالجة نص الاستعلام: تطبيق ترجيح IDF<button data-href="#Query-text-process-Apply-IDF-weighting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,22 +92,22 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند إصدار استعلام يستند إلى نص، تتم معالجته بواسطة <strong>نفس المحلل</strong> المستخدم أثناء <a href="/docs/ar/bm25-function.md#Document-ingestion-From-text-to-sparse-representation">استيعاب المستند،</a> مما يضمن تجزئة المصطلحات بشكل متسق.</p>
-<p>على سبيل المثال، الاستعلام</p>
+    </button></h3><p>عند إصدار استعلام نصي، تتم معالجته بواسطة <strong>نفس أداة التحليل</strong> المستخدمة أثناء <a href="/docs/ar/bm25-function.md#Document-ingestion-From-text-to-sparse-representation">استيعاب المستندات</a>، مما يضمن تجزئة متسقة للمصطلحات.</p>
+<p>على سبيل المثال، الاستعلام:</p>
 <pre><code translate="no" class="language-plaintext">&quot;who loves Milvus?&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكن تحليله إلى</p>
+<p>يمكن تحليله إلى:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;who&quot;, &quot;love&quot;, &quot;milvus&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>لكل مصطلح استعلام، يبحث ميلفوس عن <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">تردد المستند العكسي</a> (IDF) الخاص به من إحصائيات مجموعة المستندات. يعكس IDF مدى إفادة المصطلح عبر مجموعة البيانات بأكملها: تحصل المصطلحات النادرة على أوزان أعلى، بينما تحصل المصطلحات الشائعة على أوزان أقل.</p>
-<p>من الناحية النظرية، ينتج عن ذلك مجموعة من مصطلحات الاستعلام الموزونة بـ IDF، مثل</p>
+<p>بالنسبة لكل مصطلح في الاستعلام، يبحث Milvus عن <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">تردد الوثيقة العكسي</a> (IDF) الخاص به من إحصائيات المجموعة النصية. يعكس IDF مدى إفادة المصطلح عبر مجموعة البيانات بأكملها: حيث تحصل المصطلحات الأقل شيوعًا على أوزان أعلى، بينما تحصل المصطلحات الشائعة على أوزان أقل.</p>
+<p>من الناحية النظرية، ينتج عن ذلك مجموعة من مصطلحات الاستعلام المرجحة بـ IDF، مثل:</p>
 <pre><code translate="no" class="language-plaintext">{
   &quot;who&quot;: 0.1,
   &quot;love&quot;: 0.5,
   &quot;milvus&quot;: 1.2
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="BM25-scoring-and-top-K-retrieval" class="common-anchor-header">تسجيل BM25 واسترجاع أعلى K<button data-href="#BM25-scoring-and-top-K-retrieval" class="anchor-icon" translate="no">
+<h3 id="BM25-scoring-and-top-K-retrieval" class="common-anchor-header">تقييم BM25 واسترجاع أفضل K<button data-href="#BM25-scoring-and-top-K-retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,9 +122,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يقوم BM25 بتصنيف المستندات عن طريق حساب درجة الملاءمة بناءً على مصطلحات الاستعلام المتطابقة. يتم تسجيل الدرجات على <strong>مستوى</strong> المصطلح ويتم تجميعها على <strong>مستوى المستند</strong>.</p>
-<p><strong>تسجيل الدرجات على مستوى المصطلح</strong></p>
-<p>لكل مصطلح استعلام يظهر في مستند، يحسب BM25 درجة على مستوى المصطلح:</p>
+    </button></h3><p>يقوم BM25 بترتيب الوثائق عن طريق حساب درجة الصلة بناءً على مصطلحات الاستعلام المتطابقة. يتم إجراء التقييم على <strong>مستوى المصطلح</strong> ويتم تجميعه على <strong>مستوى الوثيقة</strong>.</p>
+<p><strong>التقييم على مستوى المصطلح</strong></p>
+<p>لكل مصطلح استعلام يظهر في وثيقة ما، يحسب BM25 درجة على مستوى المصطلح:</p>
 <pre><code translate="no" class="language-plaintext">term_score =
   IDF(term) ×
   TF_boost(term, document, k1) ×
@@ -132,16 +132,16 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>حيث:</p>
 <ul>
-<li><p>يعكس<strong>IDF(مصطلح)</strong> مدى ندرة المصطلح في المجموعة</p></li>
-<li><p>يزيد<strong>TF_boost(...، k1)</strong> مع تكرار المصطلح ولكنه يتشبع مع زيادة التكرار</p></li>
-<li><p><strong>الطول_التطبيع(...، ب)</strong> يعدل الدرجة بناءً على طول المستند</p></li>
+<li><p><strong>IDF(المصطلح)</strong> يعكس مدى ندرة المصطلح في المجموعة</p></li>
+<li><p><strong>TF_boost(…, k1)</strong> يزداد مع تكرار المصطلح ولكنه يصل إلى حد أقصى مع زيادة التكرار</p></li>
+<li><p><strong>length_normalization(…, b)</strong> يضبط التقييم بناءً على طول الوثيقة</p></li>
 </ul>
-<p><strong>تسجيل النقاط على مستوى المستند واسترجاع أعلى K</strong></p>
-<p>درجة المستند النهائية هي مجموع الدرجات على مستوى المصطلح لجميع مصطلحات الاستعلام المتطابقة:</p>
+<p><strong>التقييم على مستوى المستند واسترجاع أفضل K نتائج</strong></p>
+<p>الدرجة النهائية للوثيقة هي مجموع الدرجات على مستوى المصطلحات لجميع مصطلحات الاستعلام المطابقة:</p>
 <pre><code translate="no" class="language-plaintext">document_score =
   sum of term_score over all matched query terms
 <button class="copy-code-btn"></button></code></pre>
-<p>يتم ترتيب المستندات حسب درجاتها النهائية، ويتم إرجاع أعلى K-المستندات التي حصلت على أعلى الدرجات.</p>
+<p>يتم ترتيب الوثائق حسب درجاتها النهائية، ويتم إرجاع الوثائق ذات أعلى K درجات.</p>
 <h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,18 +157,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل استخدام الدالة BM25، قم بتخطيط مخطط مجموعتك للتأكد من أنه يدعم البحث المعجمي عن النص الكامل:</p>
+    </button></h2><p>قبل استخدام دالة BM25، قم بتخطيط مخطط مجموعتك للتأكد من أنه يدعم البحث النصي الكامل المعجمي:</p>
 <ul>
 <li><p><strong>حقل نصي للمحتوى الخام</strong></p>
-<p>يجب أن تتضمن مجموعتك حقلاً <code translate="no">VARCHAR</code> لتخزين النص الخام. هذا الحقل هو مصدر النص الذي ستتم معالجته للبحث عن النص الكامل.</p></li>
+<p>يجب أن تتضمن مجموعتك حقل « <code translate="no">VARCHAR</code> » لتخزين النص الخام. هذا الحقل هو مصدر النص الذي سيتم معالجته من أجل البحث النصي الكامل.</p></li>
 <li><p><strong>محلل لحقل النص</strong></p>
-<p>يجب أن يحتوي حقل النص على محلل ممكّن. يحدد المحلل كيفية ترميز النص وتطبيعه قبل أن يتم حساب الصلة المعجمية بواسطة دالة BM25.</p>
-<p>بشكل افتراضي، يوفر ميلفوس محللًا مدمجًا يقوم بترميز النص استنادًا إلى المسافات البيضاء وعلامات الترقيم. إذا كان تطبيقك يتطلب سلوك ترميز أو تطبيع مخصص، يمكنك تحديد محلل مخصص. راجع <a href="/docs/ar/choose-the-right-analyzer-for-your-use-case.md">اختيار المحلل المناسب لحالة الاستخدام الخاصة بك</a> للحصول على التفاصيل.</p></li>
-<li><p><strong>متجه متناثر لإخراج BM25</strong></p>
-<p>يجب أن تتضمن مجموعتك حقلاً <code translate="no">SPARSE_FLOAT_VECTOR</code> لتخزين التمثيلات المتفرقة التي تم إنشاؤها بواسطة دالة BM25. يُستخدم هذا الحقل للفهرسة والاسترجاع أثناء البحث عن النص الكامل.</p></li>
+<p>يجب أن يكون محلل النص مفعلًا في حقل النص. يحدد المحلل كيفية تقطيع النص إلى رموز وتوحيدها قبل أن تحسب وظيفة BM25 مدى الصلة المعجمية.</p>
+<p>بشكل افتراضي، يوفر Milvus محللًا مدمجًا يقوم بتقسيم النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم. إذا كان تطبيقك يتطلب سلوكًا مخصصًا لتقسيم النص إلى رموز أو تطبيعه، فيمكنك تعريف محلل مخصص. راجع <a href="/docs/ar/choose-the-right-analyzer-for-your-use-case.md">«اختيار المحلل المناسب لحالة الاستخدام الخاصة بك» للحصول على</a> التفاصيل.</p></li>
+<li><p><strong>متجه متفرق لإخراج BM25</strong></p>
+<p>يجب أن تتضمن مجموعتك حقل « <code translate="no">SPARSE_FLOAT_VECTOR</code> » لتخزين التمثيلات المتفرقة التي تولدها دالة BM25. يُستخدم هذا الحقل للفهرسة والاسترجاع أثناء البحث عن النص الكامل.</p></li>
 </ul>
-<p>بعد معرفة هذه الاعتبارات على مستوى المخطط، تابع إنشاء المجموعة واستخدام دالة BM25.</p>
-<h2 id="Step-1-Create-a-collection-with-a-BM25-function" class="common-anchor-header">الخطوة 1: إنشاء مجموعة مع دالة BM25<button data-href="#Step-1-Create-a-collection-with-a-BM25-function" class="anchor-icon" translate="no">
+<p>بعد تحديد هذه الاعتبارات على مستوى المخطط، تابع إنشاء المجموعة واستخدام دالة BM25.</p>
+<h2 id="Step-1-Create-a-collection-with-a-BM25-function" class="common-anchor-header">الخطوة 1: إنشاء مجموعة باستخدام دالة BM25<button data-href="#Step-1-Create-a-collection-with-a-BM25-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -183,15 +183,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام دالة BM25، يجب عليك تعريفها عند إنشاء المجموعة. تصبح الدالة جزءًا من مخطط المجموعة ويتم تطبيقها تلقائيًا أثناء إدراج البيانات والبحث عنها.</p>
-<h4 id="Define-schema-fields" class="common-anchor-header">تحديد حقول المخطط</h4><p>يجب أن يتضمن مخطط مجموعتك ثلاثة حقول مطلوبة على الأقل:</p>
+    </button></h2><p>لاستخدام دالة BM25، يجب تعريفها عند إنشاء المجموعة. تصبح الدالة جزءًا من مخطط المجموعة ويتم تطبيقها تلقائيًا أثناء إدراج البيانات والبحث.</p>
+<h4 id="Define-schema-fields" class="common-anchor-header">تحديد حقول المخطط</h4><p>يجب أن يتضمن مخطط المجموعة الخاص بك ثلاثة حقول إلزامية على الأقل:</p>
 <ul>
 <li><p><strong>الحقل الأساسي</strong>: يحدد بشكل فريد كل كيان في المجموعة.</p></li>
-<li><p><strong>حقل نصي</strong> (<code translate="no">VARCHAR</code>): يخزن المستندات النصية الخام. يجب تعيين <code translate="no">enable_analyzer=True</code> حتى يتمكن ميلفوس من معالجة النص لترتيب صلة BM25. بشكل افتراضي، يستخدم Milvus <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ar/standard-analyzer.md"> محلل</a> لتحليل النص. لتكوين محلل مختلف، ارجع إلى <a href="/docs/ar/analyzer-overview.md">نظرة عامة على المحلل</a>.</p></li>
-<li><p><strong>حقل متجه متناثر</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): يخزن التضمينات المتناثرة التي يتم إنشاؤها تلقائيًا بواسطة دالة BM25.</p></li>
+<li><p><strong>حقل النص</strong> (<code translate="no">VARCHAR</code>): يخزن المستندات النصية الأولية. يجب تعيين <code translate="no">enable_analyzer=True</code> حتى يتمكن Milvus من معالجة النص لترتيب الصلة باستخدام BM25. بشكل افتراضي، يستخدم Milvus <a href="/docs/ar/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ar/standard-analyzer.md"> المحلل</a> لتحليل النص. لتكوين محلل مختلف، راجع <a href="/docs/ar/analyzer-overview.md">نظرة عامة</a> على <a href="/docs/ar/analyzer-overview.md">المحلل</a>.</p></li>
+<li><p><strong>حقل المتجهات المتفرقة</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): يخزن التضمينات المتفرقة التي يتم إنشاؤها تلقائيًا بواسطة دالة BM25.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
 
 client = MilvusClient(
@@ -232,10 +238,10 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -270,6 +276,26 @@ schema.WithField(entity.NewField().
     WithDataType(entity.FieldTypeSparseVector),
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64).<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>).<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar).<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">1000</span>).<span class="hljs-title function_ invoke__">enable_analyzer</span>(<span class="hljs-literal">true</span>))
+    .<span class="hljs-title function_ invoke__">add_field</span>(FieldSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;sparse&quot;</span>).<span class="hljs-title function_ invoke__">data_type</span>(DataType::SparseFloatVector));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;sparse&quot;</span>, milvus::DataType::SPARSE_FLOAT_VECTOR));
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
@@ -294,7 +320,7 @@ schema.WithField(entity.NewField().
   },
 ];
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(schema)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -320,8 +346,16 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Define-the-BM25-function" class="common-anchor-header">تعريف دالة BM25</h4><p>تقوم الدالة BM25 بتحويل النص الرمزي إلى متجهات متناثرة تدعم تسجيل BM25.</p>
-<p>عرّف الدالة وأضفها إلى مخططك:</p>
+<h4 id="Define-the-BM25-function" class="common-anchor-header">تحديد دالة BM25</h4><p>تقوم دالة BM25 بتحويل النص المقسم إلى رموز إلى متجهات متفرقة تدعم نظام التقييم BM25.</p>
+<p>قم بتعريف الدالة وإضافتها إلى مخططك:</p>
+<div class="multipleCode">
+   <a href="#python">بايثون</a>
+ <a href="#java">   جافا</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
@@ -350,6 +384,19 @@ schema.addFunction(Function.builder()
     WithType(entity.FunctionTypeBM25)
 schema.WithFunction(function)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">bm25_function</span> = Function::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>)
+    .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Bm25)
+    .<span class="hljs-title function_ invoke__">input_fields</span>([<span class="hljs-string">&quot;text&quot;</span>])
+    .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;sparse&quot;</span>]);
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = schema.<span class="hljs-title function_ invoke__">add_function</span>(bm25_function);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::FunctionPtr function = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, milvus::FunctionType::BM25);
+function-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;text&quot;</span>);
+function-&gt;<span class="hljs-built_in">AddOutputFieldName</span>(<span class="hljs-string">&quot;sparse&quot;</span>);
+schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> functions = [
     {
       <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;text_bm25_emb&#x27;</span>,
@@ -359,7 +406,7 @@ schema.WithFunction(function)
       <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&#x27;sparse&#x27;</span>],
       <span class="hljs-attr">params</span>: {},
     },
-]；
+];
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -395,6 +442,14 @@ schema.WithFunction(function)
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Configure-the-index" class="common-anchor-header">تكوين الفهرس</h4><p>بعد تعريف المخطط بالحقول الضرورية والدالة المدمجة، قم بإعداد الفهرس لمجموعتك.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -420,16 +475,31 @@ params.put(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hlj
 List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;sparse&quot;</span>)
-        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
         .metricType(IndexParam.MetricType.BM25)
         .extraParams(params)
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>,
-    index.NewAutoIndex(entity.MetricType(entity.BM25)))
-    .WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
-    .WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
+    index.NewSparseInvertedIndex(entity.BM25, <span class="hljs-number">0.05</span>))
+indexOption.WithExtraParam(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-number">1.2</span>)
+indexOption.WithExtraParam(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-number">0.75</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">index_params</span> = IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::SparseInvertedIndex)
+    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Bm25)
+    .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+        (<span class="hljs-string">&quot;inverted_index_algo&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+        (<span class="hljs-string">&quot;bm25_k1&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;1.2&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+        (<span class="hljs-string">&quot;bm25_b&quot;</span>.<span class="hljs-title function_ invoke__">into</span>(), <span class="hljs-string">&quot;0.75&quot;</span>.<span class="hljs-title function_ invoke__">into</span>()),
+    ]));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> index_params = milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;sparse&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndxType::SPARSE_INVERTED_INDEX, milvus::MetricType::BM25);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;inverted_index_algo&quot;</span>, <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_k1&quot;</span>, <span class="hljs-string">&quot;1.2&quot;</span>);
+index_params.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;bm25_b&quot;</span>, <span class="hljs-string">&quot;0.75&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
@@ -448,7 +518,7 @@ indexes.add(IndexParam.builder()
         {
             &quot;fieldName&quot;: &quot;sparse&quot;,
             &quot;metricType&quot;: &quot;BM25&quot;,
-            &quot;indexType&quot;: &quot;AUTOINDEX&quot;,
+            &quot;indexType&quot;: &quot;SPARSE_INVERTED_INDEX&quot;,
             &quot;params&quot;:{
                &quot;inverted_index_algo&quot;: &quot;DAAT_MAXSCORE&quot;,
                &quot;bm25_k1&quot;: 1.2,
@@ -457,14 +527,25 @@ indexes.add(IndexParam.builder()
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة</h4><p>الآن قم بإنشاء المجموعة باستخدام المخطط ومعلمات الفهرس المحددة:</p>
+<h4 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة</h4><p>الآن قم بإنشاء المجموعة باستخدام معلمات المخطط والفهرس المحددة:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>,
     schema=schema,
     index_params=index_params
 )
+
+client.load_collection(<span class="hljs-string">&#x27;my_collection&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -472,6 +553,9 @@ indexes.add(IndexParam.builder()
         .indexParams(indexes)
         .build();
 client.createCollection(requestCreate);
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
@@ -480,13 +564,44 @@ client.createCollection(requestCreate);
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>(
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+<span class="hljs-keyword">use</span> serde_json::json;
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">index_param</span>(index_params)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">load_collection</span>(LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>().<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>).<span class="hljs-title function_ invoke__">build</span>()?).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema))
+                                    .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(index_params));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">schema</span>: schema,
     <span class="hljs-attr">index_params</span>: index_params,
-    <span class="hljs-attr">functions</span>: functions
-);
+    <span class="hljs-attr">functions</span>: functions,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -501,9 +616,17 @@ curl --request POST \
     \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>,
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بمجرد إنشاء المجموعة التي تحتوي على دالة BM25، يمكنك إدراج النص وإجراء عمليات بحث معجمية استنادًا إلى استعلام نصي.</p>
-<h2 id="Step-2-Insert-text-data-into-the-collection" class="common-anchor-header">الخطوة 2: إدراج بيانات نصية في المجموعة<button data-href="#Step-2-Insert-text-data-into-the-collection" class="anchor-icon" translate="no">
+<p>بمجرد إنشاء المجموعة باستخدام دالة BM25، يمكنك إدراج نص وإجراء عمليات بحث لغوية استنادًا إلى استعلام نصي.</p>
+<h2 id="Step-2-Insert-text-data-into-the-collection" class="common-anchor-header">الخطوة 2: إدراج البيانات النصية في المجموعة<button data-href="#Step-2-Insert-text-data-into-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -518,7 +641,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد إعداد المجموعة والفهرس، تكون جاهزًا لإدراج البيانات النصية. في هذه العملية، تحتاج فقط إلى توفير النص الخام. تقوم دالة BM25 التي حددناها سابقًا بإنشاء متجه متناثر تلقائيًا لكل إدخال نصي.</p>
+    </button></h2><p>بعد إعداد المجموعة والفهرس، تكون جاهزًا لإدراج البيانات النصية. في هذه العملية، ما عليك سوى توفير النص الخام. تقوم دالة BM25 التي حددناها سابقًا بإنشاء المتجه المتفرق تلقائيًا لكل إدخال نصي.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.insert(<span class="hljs-string">&#x27;my_collection&#x27;</span>, [
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
@@ -542,15 +673,53 @@ client.insert(InsertReq.builder()
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithVarcharColumn(<span class="hljs-string">&quot;text&quot;</span>, []<span class="hljs-type">string</span>{
+        <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>,
+        <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>,
+        <span class="hljs-string">&quot;data mining and information retrieval overlap in research.&quot;</span>,
+    }),
+)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client.<span class="hljs-title function_ invoke__">insert</span>(
+    InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(<span class="hljs-built_in">vec!</span>[
+            json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>}),
+            json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>}),
+            json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;data mining and information retrieval overlap in research.&quot;</span>}),
+        ])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::EntityRows data = {
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval is a field of study.&quot;</span>}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;information retrieval focuses on finding relevant information in large datasets.&quot;</span>}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;data mining and information retrieval overlap in research.&quot;</span>}}
+};
+
+milvus::InsertResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data))
+                                , response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-<span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-<span class="hljs-attr">data</span>: [
-    {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
-    {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
-    {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;data mining and information retrieval overlap in research.&#x27;</span>},
-]);
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+    <span class="hljs-attr">data</span>: [
+        {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval is a field of study.&#x27;</span>},
+        {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;information retrieval focuses on finding relevant information in large datasets.&#x27;</span>},
+        {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;data mining and information retrieval overlap in research.&#x27;</span>},
+    ],
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
@@ -582,9 +751,17 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد إدراج البيانات في مجموعتك، يمكنك إجراء عمليات بحث نصية كاملة باستخدام استعلامات نصية أولية. يقوم Milvus تلقائيًا بتحويل استعلامك إلى متجه متناثر وترتيب نتائج البحث المتطابقة باستخدام خوارزمية BM25، ثم يُرجع أعلىK (<code translate="no">limit</code>) النتائج.</p>
+    </button></h2><p>بمجرد إدراج البيانات في مجموعتك، يمكنك إجراء عمليات بحث نصية كاملة باستخدام استعلامات نصية أولية. يقوم Milvus تلقائيًّا بتحويل استعلامك إلى متجه متفرق وترتيب نتائج البحث المطابقة باستخدام خوارزمية BM25، ثم يعرض النتائج topK (<code translate="no">limit</code>).</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">search_params = {
-
+    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
 }
 
 res = client.search(
@@ -603,6 +780,7 @@ res = client.search(
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+searchParams.put(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>);
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -614,6 +792,7 @@ Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <s
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">annSearchParams := index.NewCustomAnnParam()
+annSearchParams.WithExtraParam(<span class="hljs-string">&quot;metric_type&quot;</span>, <span class="hljs-string">&quot;BM25&quot;</span>)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
@@ -633,14 +812,41 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;text: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;text&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>(
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client.<span class="hljs-title function_ invoke__">search</span>(
+    SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">EmbeddedText</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()]))
+        .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Bm25)
+        .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;text&quot;</span>])
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                       .<span class="hljs-built_in">AddEmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)
+                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                       .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;sparse&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">data</span>: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
+    <span class="hljs-attr">params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&#x27;BM25&#x27;</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-
-)
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
@@ -658,6 +864,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
         &quot;text&quot;
     ],
     &quot;searchParams&quot;:{
+        &quot;metric_type&quot;: &quot;BM25&quot;,
         &quot;params&quot;:{}
     }
 }&#x27;</span>

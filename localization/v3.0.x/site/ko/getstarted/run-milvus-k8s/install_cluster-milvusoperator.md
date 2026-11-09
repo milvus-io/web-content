@@ -175,12 +175,12 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 포드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v3.0.3 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령어는 <strong>Woodpecker를</strong> 메시지 큐로 사용하고(v3.0.5 권장), 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 갖춘 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이번 배포의 아키텍처 주요 특징:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 부담 감소)</li>
 <li><strong>스트리밍 노드</strong>: 향상된 데이터 처리를 위해 활성화됨</li>
-<li><strong>Mix 코디네이터</strong>: 효율성 향상을 위해 코디네이터 구성 요소가 통합됨</li>
+<li><strong>Mix 코디네이터</strong>: 효율성 향상을 위해 통합된 코디네이터 구성 요소</li>
 </ul>
 <p>이러한 설정을 사용자 정의하려면 <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool을</a> 사용하여 실제 데이터 크기에 따라 구성을 조정한 후, 해당 YAML 파일을 다운로드하는 것을 권장합니다. 구성 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/docs/system_configuration.md">Milvus 시스템 구성 체크리스트를</a> 참조하십시오.</p>
 <div class="alert note">

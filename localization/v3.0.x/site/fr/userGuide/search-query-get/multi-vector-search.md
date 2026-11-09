@@ -5,16 +5,16 @@ summary: >-
   Dans de nombreuses applications, la recherche d’un objet peut s’appuyer sur un
   ensemble riche d’informations, telles que le titre et la description, ou sur
   plusieurs modalités, comme le texte, les images et l’audio. Par exemple, un
-  tweet contenant un texte et une image sera trouvé si le texte ou l’image
+  tweet contenant un texte et une image doit être trouvé si le texte ou l’image
   correspond à la sémantique de la requête de recherche. La recherche hybride
-  améliore l’expérience de recherche en combinant des recherches dans ces
-  différents domaines. Milvus prend en charge cette fonctionnalité en permettant
+  améliore l’expérience de recherche en combinant les recherches sur ces
+  différents champs. Milvus prend en charge cette fonctionnalité en permettant
   d’effectuer des recherches sur plusieurs champs vectoriels, en lançant
   simultanément plusieurs recherches par « voisin le plus proche approximatif »
   (ANN). La recherche hybride multivectorielle est particulièrement utile si
-  vous souhaitez effectuer des recherches à la fois sur du texte et des images,
-  sur plusieurs champs de texte décrivant le même objet, ou sur des vecteurs
-  denses et clairsemés afin d’améliorer la qualité de la recherche.
+  vous souhaitez rechercher à la fois du texte et des images, plusieurs champs
+  de texte décrivant le même objet, ou encore des vecteurs denses et clairsemés
+  afin d’améliorer la qualité de la recherche.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">Recherche hybride multivectorielle<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -31,7 +31,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans de nombreuses applications, un objet peut faire l’objet d’une recherche à partir d’un ensemble riche d’informations, telles que le titre et la description, ou à l’aide de plusieurs modalités, telles que le texte, les images et l’audio. Par exemple, un tweet comportant un texte et une image doit être trouvé si le texte ou l’image correspond à la sémantique de la requête de recherche. La recherche hybride améliore l'expérience de recherche en combinant les recherches sur ces différents champs. Milvus prend en charge cette fonctionnalité en permettant d'effectuer des recherches sur plusieurs champs vectoriels, en lançant simultanément plusieurs recherches par « voisin le plus proche approximatif » (ANN). La recherche hybride multivectorielle est particulièrement utile si vous souhaitez rechercher à la fois du texte et des images, plusieurs champs de texte décrivant le même objet, ou encore des vecteurs denses et clairsemés afin d’améliorer la qualité de la recherche.</p>
+    </button></h1><p>Dans de nombreuses applications, un objet peut faire l’objet d’une recherche à partir d’un ensemble riche d’informations, telles que le titre et la description, ou à l’aide de plusieurs modalités, telles que le texte, les images et l’audio. Par exemple, un tweet contenant un texte et une image doit être trouvé si le texte ou l’image correspond à la sémantique de la requête de recherche. La recherche hybride améliore l’expérience de recherche en combinant les recherches sur ces différents champs. Milvus prend en charge cette fonctionnalité en permettant d’effectuer des recherches sur plusieurs champs vectoriels, en lançant simultanément plusieurs recherches par « voisin le plus proche approximatif » (ANN). La recherche hybride multivectorielle est particulièrement utile si vous souhaitez effectuer une recherche à la fois sur du texte et des images, sur plusieurs champs de texte décrivant le même objet, ou sur des vecteurs denses et clairsemés afin d’améliorer la qualité de la recherche.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
@@ -64,7 +64,7 @@ summary: >-
 <li><p><strong>Recherche en texte intégral</strong>: ici, on interroge la description textuelle du produit à l’aide d’une correspondance par mot-clé avec des vecteurs clairsemés. Des algorithmes tels que <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a> ou des modèles d’embedding clairsemés comme <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> ou <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a> peuvent être utilisés à cette fin.</p></li>
 <li><p><strong>Recherche multimodale par image :</strong> cette méthode interroge l’image à l’aide d’une requête textuelle avec des vecteurs denses. Les représentations d’images peuvent être générées à l’aide de modèles tels que <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a>.</p></li>
 </ul>
-<p>Ce guide vous présentera un exemple de recherche hybride multimodale combinant les méthodes de recherche ci-dessus, à partir de la description textuelle brute et des représentations vectorielles des images des produits. Nous vous montrerons comment stocker des données multivectorielles et effectuer des recherches hybrides à l’aide d’une stratégie de reclassement.</p>
+<p>Ce guide vous présentera un exemple de recherche hybride multimodale combinant les méthodes de recherche ci-dessus, à partir de la description textuelle brute et des représentations d’images des produits. Nous montrerons comment stocker des données multivectorielles et effectuer des recherches hybrides à l’aide d’une stratégie de reclassement.</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Créer une collection avec plusieurs champs vectoriels<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,16 +96,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour la recherche hybride multivectorielle, il convient de définir plusieurs champs vectoriels au sein d’un schéma de collection. Pour plus de détails sur les limites relatives au nombre de champs vectoriels autorisés dans une collection, consultez la section « <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Limites de Zilliz Cloud</a> ».  Toutefois, si nécessaire, vous pouvez ajuster la <a href="/docs/fr/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> pour inclure jusqu’à 10 champs vectoriels dans une collection selon vos besoins.</p>
+    </button></h3><p>Pour la recherche hybride multivectorielle, il convient de définir plusieurs champs vectoriels au sein d’un schéma de collection. Pour plus de détails sur les limites relatives au nombre de champs vectoriels autorisés dans une collection, consultez <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">la page Limites de Zilliz Cloud</a>. Toutefois, si nécessaire, vous pouvez ajuster les <a href="/docs/fr/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> pour inclure jusqu’à 10 champs vectoriels dans une collection, selon vos besoins.</p>
 <p>Cet exemple intègre les champs suivants dans le schéma :</p>
 <ul>
-<li><p><code translate="no">id</code>: Sert de clé primaire pour le stockage des identifiants de texte. Ce champ est de type <code translate="no">INT64</code>.</p></li>
+<li><p><code translate="no">id</code>: Sert de clé primaire pour le stockage des identifiants de texte. Ce champ est de type « <code translate="no">INT64</code> ».</p></li>
 <li><p><code translate="no">text</code>: Utilisé pour stocker du contenu textuel. Ce champ est de type « <code translate="no">VARCHAR</code> » avec une longueur maximale de 1 000 octets. L’option « <code translate="no">enable_analyzer</code> » est définie sur « <code translate="no">True</code> » afin de faciliter la recherche en texte intégral.</p></li>
 <li><p><code translate="no">text_dense</code>: Utilisé pour stocker les vecteurs denses des textes. Ce champ est de type « <code translate="no">FLOAT_VECTOR</code> » et possède une dimension vectorielle de 768.</p></li>
-<li><p><code translate="no">text_sparse</code>: Utilisé pour stocker les vecteurs clairsemés des textes. Ce champ est de type <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Utilisé pour stocker les vecteurs denses des images de produits. Ce champ est de type <code translate="no">FLOAT_VETOR</code> avec une dimension vectorielle de 512.</p></li>
+<li><p><code translate="no">text_sparse</code>: Utilisé pour stocker les vecteurs creux des textes. Ce champ est de type <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">image_dense</code>: Utilisé pour stocker les vecteurs denses des images de produits. Ce champ est de type <code translate="no">FLOAT_VECTOR</code> avec une dimension vectorielle de 512.</p></li>
 </ul>
-<p>Comme nous allons utiliser l'algorithme BM25 intégré pour effectuer une recherche en texte intégral sur le champ de texte, il est nécessaire d'ajouter l'<code translate="no">Function</code> Milvus au schéma. Pour plus de détails, veuillez vous reporter à <a href="/docs/fr/full-text-search.md">la section Recherche en texte intégral</a>.</p>
+<p>Étant donné que nous utiliserons l’algorithme BM25 intégré pour effectuer une recherche en texte intégral sur le champ de texte, il est nécessaire d’ajouter le champ « Milvus <code translate="no">Function</code> » au schéma. Pour plus de détails, veuillez vous reporter à <a href="/docs/fr/full-text-search.md">la section Recherche en texte intégral</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -529,7 +529,7 @@ std::vector&lt;milvus::IndexDesc&gt; indexes = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Créez une collection nommée <code translate="no">demo</code> avec le schéma de collection et les index configurés lors des deux étapes précédentes.</p>
+    </button></h3><p>Créez une collection nommée « <code translate="no">demo</code> » avec le schéma de collection et les index configurés lors des deux étapes précédentes.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -608,7 +608,7 @@ curl --request POST \
 <li><p><code translate="no">id</code>: un entier représentant l’ID du produit</p></li>
 <li><p><code translate="no">text</code>: une chaîne de caractères contenant la description du produit</p></li>
 <li><p><code translate="no">text_dense</code>: une liste de 768 valeurs à virgule flottante représentant l’embedding dense de la description textuelle</p></li>
-<li><p><code translate="no">image_dense</code>: une liste de 512 valeurs à virgule flottante représentant l'embeddement dense de l'image du produit</p></li>
+<li><p><code translate="no">image_dense</code>: une liste de 512 valeurs à virgule flottante représentant l’embedding dense de l’image du produit</p></li>
 </ul>
 <p>Vous pouvez utiliser le même modèle ou des modèles différents pour générer des représentations denses pour chaque champ. Dans cet exemple, les deux représentations denses ont des dimensions différentes, ce qui suggère qu’elles ont été générées par des modèles différents. Lorsque vous définirez chaque recherche ultérieurement, veillez à utiliser le modèle correspondant pour générer la représentation de requête appropriée.</p>
 <p>Comme cet exemple utilise la fonction BM25 intégrée pour générer des représentations clairsemées à partir du champ de texte, vous n’avez pas besoin de fournir manuellement des vecteurs clairsemés. Cependant, si vous choisissez de ne pas utiliser BM25, vous devez précalculer et fournir vous-même les représentations clairsemées.</p>
@@ -794,9 +794,9 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
         ></path>
       </svg>
     </button></h3><p>La recherche hybride est mise en œuvre en créant plusieurs instances ` <code translate="no">AnnSearchRequest</code> ` dans la fonction ` <code translate="no">hybrid_search()</code> `, chaque ` <code translate="no">AnnSearchRequest</code> ` représentant une requête de recherche ANN de base pour un champ vectoriel spécifique. Par conséquent, avant d’effectuer une recherche hybride, il est nécessaire de créer une instance ` <code translate="no">AnnSearchRequest</code> ` pour chaque champ vectoriel.</p>
-<p>De plus, en configurant le paramètre <code translate="no">expr</code> dans un <code translate="no">AnnSearchRequest</code>, vous pouvez définir les conditions de filtrage pour votre recherche hybride. Veuillez vous reporter aux sections « <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> » et « <a href="/docs/fr/boolean.md">Explication du filtrage</a> ».</p>
+<p>De plus, en configurant le paramètre « <code translate="no">expr</code> » dans un « <code translate="no">AnnSearchRequest</code> », vous pouvez définir les conditions de filtrage pour votre recherche hybride. Veuillez vous reporter aux sections « <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> » et « <a href="/docs/fr/boolean.md">Explication du filtrage</a> ».</p>
 <div class="alert note">
-<p>Dans la recherche hybride, chaque <code translate="no">AnnSearchRequest</code> ne prend en charge qu’une seule requête.</p>
+<p>Dans la recherche hybride, chaque « <code translate="no">AnnSearchRequest</code> » ne prend en charge qu’une seule requête.</p>
 </div>
 <p>Afin d’illustrer les capacités des différents champs vectoriels de recherche, nous allons construire trois requêtes de recherche « <code translate="no">AnnSearchRequest</code> » à partir d’un exemple de requête. Nous utiliserons également ses vecteurs denses précalculés pour ce processus. Les requêtes de recherche cibleront les champs vectoriels suivants :</p>
 <ul>
@@ -1149,7 +1149,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
 <p>Voici le résultat :</p>
 <pre><code translate="no" class="language-text">[&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Lorsque le paramètre ` <code translate="no">limit=2</code> ` est spécifié pour la recherche hybride, Milvus reclasse les six résultats obtenus à partir des trois recherches. Au final, seuls les deux résultats les plus similaires seront renvoyés.</p>
+<p>Lorsque le paramètre « <code translate="no">limit=2</code> » est spécifié pour la recherche hybride, Milvus reclasse les six résultats obtenus à partir des trois recherches. Au final, seuls les deux résultats les plus similaires seront renvoyés.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Utilisation avancée<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1182,7 +1182,7 @@ status = client-&gt;<span class="hljs-built_in">HybridSearch</span>(request, res
       </svg>
     </button></h3><p>Si votre collection dispose d’un champ « <code translate="no">TIMESTAMPTZ</code> », vous pouvez temporairement remplacer le fuseau horaire par défaut de la base de données ou de la collection pour une opération unique en définissant le paramètre « <code translate="no">timezone</code> » dans l’appel de recherche hybride. Cela contrôle la manière dont les valeurs « <code translate="no">TIMESTAMPTZ</code> » sont affichées et comparées pendant l’opération.</p>
 <p>La valeur de <code translate="no">timezone</code> doit être un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identifiant de fuseau horaire IANA</a> valide (par exemple, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> ou <strong>UTC</strong>). Pour plus de détails sur l’utilisation du champ <code translate="no">TIMESTAMPTZ</code>, reportez-vous à <a href="/docs/fr/timestamptz-field.md">la section Champ TIMESTAMPTZ</a>.</p>
-<p>L'exemple ci-dessous montre comment définir temporairement un fuseau horaire pour une opération de recherche hybride :</p>
+<p>L’exemple ci-dessous montre comment définir temporairement un fuseau horaire pour une opération de recherche hybride :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

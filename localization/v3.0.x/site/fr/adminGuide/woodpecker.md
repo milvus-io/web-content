@@ -158,7 +158,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">minio</code> (par défaut)</td><td>Intégré au nœud Milvus/streaming</td><td>Stockage objet (compatible MinIO/S3)</td><td>Prise en charge</td><td>Prise en charge</td></tr>
-<tr><td><code translate="no">local</code></td><td>Intégré au nœud Milvus/streaming</td><td>Système de fichiers local</td><td>Pris en charge</td><td>Limité (tous les nœuds ont besoin d’un système de fichiers partagé, par exemple NFS)</td></tr>
+<tr><td><code translate="no">local</code></td><td>Intégré au nœud Milvus/streaming</td><td>Système de fichiers local</td><td>Pris en charge</td><td>Limité (tous les nœuds ont besoin d'un système de fichiers partagé, par exemple NFS)</td></tr>
 <tr><td><code translate="no">service</code></td><td><strong>Service Woodpecker dédié</strong> (ses propres pods)</td><td>Stockage objet (compatible MinIO/S3)</td><td><strong>Non pris en charge</strong></td><td>Prise en charge</td></tr>
 </tbody>
 </table>
@@ -282,7 +282,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>Déployez ensuite à l’aide de l’un des exemples suivants :</p>
 <p>– Déploiement en cluster (paramètres recommandés avec Woodpecker et Streaming Node activés) :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -290,7 +290,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p>– Déploiement autonome (Woodpecker activé) :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -318,7 +318,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour optimiser Woodpecker, modifiez le fichier généré <code translate="no">user.yaml</code> après le premier démarrage, puis exécutez <code translate="no">bash standalone_embed.sh restart</code> pour appliquer les modifications (une nouvelle commande « <code translate="no">start</code> » régénère le fichier <code translate="no">user.yaml</code>; appliquez donc les modifications avec <code translate="no">restart</code>) :</p>
+<p>Pour optimiser Woodpecker, modifiez le fichier généré ` <code translate="no">user.yaml</code> ` après le premier démarrage, puis exécutez ` <code translate="no">bash standalone_embed.sh restart</code> ` pour appliquer les modifications (une nouvelle commande ` <code translate="no">start</code> ` régénère le fichier ` <code translate="no">user.yaml</code>` ; appliquez donc les modifications à l’aide de ` <code translate="no">restart</code>` ) :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml</span>
 <span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">logstore:</span>
@@ -342,7 +342,7 @@ bash standalone_embed.sh start
       </svg>
     </button></h3><p>Suivez les instructions de la section « <a href="/docs/fr/install_standalone-docker-compose.md">Exécuter Milvus avec Docker Compose</a> ». Exemple :</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
-wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
 <span class="hljs-built_in">sudo</span> docker compose up -d
 <span class="hljs-comment"># If you need to change Woodpecker parameters further, write an override:</span>
@@ -378,9 +378,9 @@ docker restart milvus-standalone
     </button></h3><div class="alert note">
 <p>Pour le mode service de Woodpecker, nous recommandons d’utiliser Milvus 3.0.3 ou une version ultérieure avec Woodpecker v0.1.46 ou une version ultérieure.</p>
 </div>
-<p><strong>Le mode service</strong> de Woodpecker est une fonctionnalité <strong>de Milvus 3.0</strong>. Pour les déploiements distribués/en cluster, vous pouvez exécuter Woodpecker en tant que <strong>service dédié</strong> (pods séparés) plutôt que de l’intégrer au nœud de streaming en configurant <code translate="no">streaming.woodpecker.embedded=false</code>:</p>
+<p><strong>Le mode service</strong> de Woodpecker est une fonctionnalité <strong>de Milvus 3.0</strong>. Pour les déploiements distribués/en cluster, vous pouvez exécuter Woodpecker en tant que <strong>service dédié</strong> (pods séparés) plutôt que de l’intégrer au nœud de streaming en configurant ` <code translate="no">streaming.woodpecker.embedded=false</code>` :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -445,7 +445,7 @@ docker restart milvus-standalone
 <li>Contrôlez le moment de l’actualisation/de la construction de l’index (regroupez les lots avant de déclencher l’opération) pour éviter les petites écritures fréquentes.</li>
 </ul></li>
 </ul>
-<h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode Service (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
+<h3 id="Service-mode-Milvus-30+" class="common-anchor-header">Mode service (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -558,7 +558,7 @@ batch_count = <span class="hljs-number">2000</span>
 <li><strong>Téléchargement immédiat vers le stockage d’objets après le roulement d’un segment</strong> — chaque segment suit l’intégralité de son cycle de vie et est téléchargé vers le stockage d’objets dès son roulement, ce qui permet de maintenir un encombrement minimal sur le disque local et de faibles coûts de stockage sans compromettre la latence.</li>
 <li><strong>Pas de réplication continue de nœud à nœud</strong> — les journaux sont conservés dans le stockage objet, qui fait office de stockage partagé ; ainsi, en cas de basculement, seules les répliques survivantes sont réimportées (pas de copie intégrale du nœud), la scalabilité n’est pas limitée par la bande passante de réplication inter-nœuds, et le remplacement de nœuds à grande échelle ne provoque pas de « tempêtes de réplication ».</li>
 </ul>
-<p>Dans les déploiements inter-zones de disponibilité (AZ), le mode service permet également d’économiser environ <strong>un tiers du</strong> trafic réseau inter-AZ <strong>en</strong> <strong>écriture</strong> et <strong>deux tiers en lecture</strong> par rapport aux systèmes de journaux basés sur un courtier. Pour une analyse complète de la conception et des coûts, consultez <a href="/docs/fr/woodpecker_architecture.md">l’architecture Woodpecker</a>.</p>
+<p>Dans les déploiements inter-zones de disponibilité (AZ), le mode service permet également d’économiser environ <strong>1/3 du</strong> trafic réseau inter-AZ <strong>en</strong> <strong>écriture</strong> et <strong>2/3 en lecture</strong> par rapport aux systèmes de journaux basés sur un courtier. Pour une analyse complète de la conception et des coûts, consultez <a href="/docs/fr/woodpecker_architecture.md">l’architecture Woodpecker</a>.</p>
 <p>Pour plus de détails sur l’architecture, les modes de déploiement (MemoryBuffer / QuorumBuffer) et les performances, consultez <a href="/docs/fr/woodpecker_architecture.md">l’architecture Woodpecker</a>.</p>
 <p>Pour plus de détails sur les paramètres, consultez le <a href="https://github.com/zilliztech/woodpecker">dépôt GitHub</a> de Woodpecker.</p>
 <h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">Versions de Milvus et Woodpecker<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">

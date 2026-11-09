@@ -44,7 +44,7 @@ title: Запуск Milvus в Docker (Windows)
     </button></h2><ul>
 <li><a href="https://docs.docker.com/desktop/setup/install/windows-install/">Установите Docker Desktop</a> и убедитесь, что ваша система соответствует требованиям к Windows и аппаратному обеспечению.</li>
 <li><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Установите подсистему Windows для Linux 2 (WSL 2)</a>.</li>
-<li>Запустите Docker Desktop, включите параметр <strong>«Использовать движок на основе WSL 2</strong>» и выберите «Контейнеры Linux». Для команд, выполняемых внутри дистрибутива WSL, также включите этот дистрибутив в разделе <strong>«Настройки»</strong> &gt; <strong>«Ресурсы</strong> » &gt; <strong>«Интеграция с WSL</strong>». См. <a href="https://docs.docker.com/desktop/features/wsl/">раздел «Бэкэнд Docker Desktop WSL 2</a>».</li>
+<li>Запустите Docker Desktop, включите параметр <strong>«Использовать движок на основе WSL 2</strong>» и выберите «Контейнеры Linux». Для команд, выполняемых внутри дистрибутива WSL, также включите этот дистрибутив в разделе <strong>«Настройки»</strong> &gt; <strong>«Ресурсы</strong> » &gt; <strong>«Интеграция с WSL</strong>». См. раз <a href="https://docs.docker.com/desktop/features/wsl/">дел «Бэкенд Docker Desktop WSL 2</a>».</li>
 </ul>
 <p>Перед загрузкой файлов Milvus выполните следующие проверки в PowerShell или командной строке Windows:</p>
 <pre><code translate="no" class="language-powershell">wsl --version
@@ -68,7 +68,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>Выберите один из следующих терминалов. Запустите команды в рабочем каталоге с правами на запись; скрипт сохраняет в нём файлы конфигурации и каталог <code translate="no">volumes</code>.</p>
-<p>Скрипт загружается из ветки Milvus <code translate="no">master</code>. Тег образа Docker определён в скрипте и может отличаться от v3.0.3. Чтобы развернуть именно этот выпуск, используйте приведённую ниже конфигурацию Docker Compose с указанием версии.</p>
+<p>Скрипт загружается из ветки Milvus <code translate="no">master</code>. Тег образа Docker определён в скрипте и может отличаться от v3.0.5. Чтобы развернуть именно этот выпуск, используйте приведённую ниже конфигурацию Docker Compose с указанием версии.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Из PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -158,7 +158,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте конфигурацию, прилагаемую к версии v3.0.3. Выполните только ту последовательность команд, которая подходит для вашего терминала.</p>
+    </button></h2><p>Используйте конфигурацию, прилагаемую к версии v3.0.5. Выполните только ту последовательность команд, которая подходит для вашего терминала.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Из PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>Загрузите конфигурацию и запустите Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -195,7 +195,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Загрузите конфигурацию и запустите Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -215,7 +215,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Откройте дистрибутив WSL, затем выполните следующие команды Linux:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -285,7 +285,7 @@ wsl --update
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" /> 
-   <span>Использование движка на базе WSL 2 в настройках Docker Desktop</span>
+   <span>Использование движка на основе WSL 2 в настройках Docker Desktop</span>
   
  </span></p></li>
 <li><p>Выберите из установленных дистрибутивов WSL 2 те, для которых вы хотите включить интеграцию с Docker, перейдя в: <strong>«Настройки»</strong> &gt; <strong>«Ресурсы</strong> » &gt; <strong>«Интеграция с WSL</strong>».</p>
@@ -296,7 +296,7 @@ wsl --update
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="common-anchor-header">Как устранить ошибку, связанную с томом, возникающую при запуске Milvus: « <code translate="no">Read config failed</code> »?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="common-anchor-header">Как устранить ошибку, связанную с томом, возникающую при запуске Milvus с сообщением « <code translate="no">Read config failed</code> »?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -317,7 +317,7 @@ wsl --update
    <span>Сообщение об ошибке «Read config failed» при запуске Milvus</span>
   
  </span></p>
-<p>Чтобы устранить ошибку «Read config failed», возникающую при запуске Milvus, необходимо проверить, правильно ли смонтирован том в контейнере Milvus. Если том смонтирован в контейнере правильно, вы можете использовать команду <code translate="no">docker exec</code>, чтобы войти в контейнер и отобразить содержимое папки <strong>/milvus/configs</strong> следующим образом:</p>
+<p>Чтобы устранить ошибку «Read config failed», возникающую при запуске Milvus, необходимо проверить, правильно ли смонтирован том в контейнере Milvus. Если том смонтирован в контейнере правильно, можно использовать команду <code translate="no">docker exec</code> для входа в контейнер и просмотра содержимого папки <strong>/milvus/configs</strong> следующим образом:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

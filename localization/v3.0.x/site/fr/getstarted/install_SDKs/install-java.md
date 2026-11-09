@@ -63,13 +63,13 @@ title: Installer le SDK Java de Milvus
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.12<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.10&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.12&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Et ensuite<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ title: Installer le SDK Java de Milvus
 <ul>
 <li><p>Découvrir les opérations de base de Milvus :</p>
 <ul>
-<li><a href="/docs/fr/manage-collections.md">Gérer des collections</a></li>
+<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
 <li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
 <li><a href="/docs/fr/insert-update-delete.md">Insérer, mettre à jour ou supprimer</a></li>
 <li><a href="/docs/fr/single-vector-search.md">Effectuer une recherche sur un vecteur unique</a></li>

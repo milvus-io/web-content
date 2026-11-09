@@ -19,6 +19,89 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2626" class="common-anchor-header">v2.6.26<button data-href="#v2626" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: October 26, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.26</td><td>2.6.17</td><td>2.6.17</td><td>2.6.27</td><td>2.6.5</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.26! This release speeds up RPC message decoding, cuts Proxy memory usage for large search and query requests, and fixes QueryNode crashes in nullable and NGRAM filtering, hangs during collection loading and import jobs, and timestamps that could go backward after coordinator startup.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Sped up decoding of search, query, insert, and upsert RPC messages with a faster protobuf decoder, enabled by default and switchable via <code translate="no">common.enableFastPB</code> (<a href="https://github.com/milvus-io/milvus/pull/53994">#53994</a>, <a href="https://github.com/milvus-io/milvus/pull/54002">#54002</a>)</li>
+<li>Pinned the text analyzer stemmer independently of Tantivy so that Tantivy upgrades do not change stemming results or cause missed matches on existing text indexes and BM25 data (<a href="https://github.com/milvus-io/milvus/pull/54029">#54029</a>, <a href="https://github.com/milvus-io/milvus/pull/54098">#54098</a>)</li>
+<li>Reduced the delay between an async segcore operation completing and its caller receiving the result under heavy load, so completed results no longer wait behind queued work while holding memory (<a href="https://github.com/milvus-io/milvus/pull/54128">#54128</a>)</li>
+<li>Reduced Proxy memory usage for large search and query requests by sharing request payloads across shards instead of deep-copying them per shard; live heap dropped from 8.7 GB to 5.85 GB in a test with 50 concurrent nq=10000 searches (<a href="https://github.com/milvus-io/milvus/pull/54224">#54224</a>)</li>
+<li>Merged same-column array_contains conditions in OR/AND chains into array_contains_any/array_contains_all during plan compilation, reducing compilation overhead for filters with thousands of conditions (<a href="https://github.com/milvus-io/milvus/pull/54435">#54435</a>)</li>
+<li>Improved null-check filtering on JSON path indexes in sealed segments by caching the validity bitmap instead of rescanning the index for every query (<a href="https://github.com/milvus-io/milvus/pull/54422">#54422</a>)</li>
+<li>Added the <code translate="no">queryNode.segcore.interimIndex.sparseIPIndexAlgo</code> and <code translate="no">sparseBM25IndexAlgo</code> settings to choose the interim index algorithm (TAAT_NAIVE, DAAT_WAND, or DAAT_MAXSCORE) for sparse IP and BM25 search on growing and unindexed sealed segments (<a href="https://github.com/milvus-io/milvus/pull/54443">#54443</a>)</li>
+<li>Reduced repeated Parquet footer reads and parsing when loading StorageV2 segments in multiple batches, and picked up a milvus-storage fix for the endpoint URL format on Azure sovereign clouds (<a href="https://github.com/milvus-io/milvus/pull/54488">#54488</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed an issue where grouping search with strict group size could return groups with fewer than <code translate="no">group_size</code> results even when enough matching entities existed; added <code translate="no">queryNode.groupBy.strictGroupStrategy</code> and related settings to tune this behavior (<a href="https://github.com/milvus-io/milvus/pull/53451">#53451</a>)</li>
+<li>Fixed an issue where filtering on a nullable field while inserts or upserts were running could crash the QueryNode or misread null values in growing segments (<a href="https://github.com/milvus-io/milvus/pull/53870">#53870</a>)</li>
+<li>Fixed an issue where filters that combine AND/OR with out-of-range integer comparisons on nullable integer fields could crash the QueryNode or return incorrect results (<a href="https://github.com/milvus-io/milvus/pull/53897">#53897</a>)</li>
+<li>Fixed an issue where LIKE queries on fields with an NGRAM index could crash the QueryNode or return non-matching rows when the pattern contained NUL characters (<a href="https://github.com/milvus-io/milvus/pull/53710">#53710</a>)</li>
+<li>Fixed an issue where a failed read of the persisted TSO window during coordinator startup could cause newly allocated timestamps and IDs to go backward (<a href="https://github.com/milvus-io/milvus/pull/51795">#51795</a>)</li>
+<li>Fixed an issue where canceled or timed-out search and query requests stayed in the Proxy queue and were still executed, delaying other requests under load (<a href="https://github.com/milvus-io/milvus/pull/52938">#52938</a>)</li>
+<li>Reduced peak memory of clustering compaction, which could OOM-kill DataNodes on large partitions (<a href="https://github.com/milvus-io/milvus/pull/54078">#54078</a>)</li>
+<li>Fixed an issue where import jobs could hang indefinitely when a single request needed more memory than the DataNode import memory limit, and where dropped import jobs kept waiting for memory instead of exiting (<a href="https://github.com/milvus-io/milvus/pull/54112">#54112</a>)</li>
+<li>Fixed an issue where filters on JSON fields that mix integer and floating-point literals (e.g. <code translate="no">p == 1 OR p == 2.0</code>) returned incomplete results when JSON stats were loaded (<a href="https://github.com/milvus-io/milvus/pull/54157">#54157</a>)</li>
+<li>Fixed an issue where collection loading and balancing could stall indefinitely when a QueryNode load or watch RPC hung; QueryCoord task timeouts are now enforced, with defaults raised to 2 minutes for channel tasks and 5 minutes for segment and leader tasks (<a href="https://github.com/milvus-io/milvus/pull/54218">#54218</a>)</li>
+<li>Fixed an issue where segment loading on QueryNode could hang indefinitely because concurrent waiters missed load-completion or cancellation notifications (<a href="https://github.com/milvus-io/milvus/pull/54455">#54455</a>)</li>
+<li>Fixed an issue where low-priority segment loads, such as those triggered by balancing or index updates, loaded raw field data at high priority and competed with urgent loads for resources (<a href="https://github.com/milvus-io/milvus/pull/54336">#54336</a>)</li>
+<li>Fixed an issue where paginated queries returning an empty page failed with “FieldData type not matched” in the Go SDK when the output included vector array or StructArray vector fields (<a href="https://github.com/milvus-io/milvus/pull/54360">#54360</a>)</li>
+<li>Fixed an issue where dropping an import job did not stop its import tasks already running on DataNodes (<a href="https://github.com/milvus-io/milvus/pull/54433">#54433</a>)</li>
+<li>Fixed an issue where partitions created after LoadCollection stayed unloaded on CDC standby clusters, so their data could not be queried until the collection was released and reloaded (<a href="https://github.com/milvus-io/milvus/pull/54567">#54567</a>)</li>
+<li>Fixed an issue where the <code translate="no">milvus_proxy_report_value</code> metric counted successful upserts twice, overstating the reported value (<a href="https://github.com/milvus-io/milvus/pull/54606">#54606</a>)</li>
+</ul>
 <h2 id="v2625" class="common-anchor-header">v2.6.25<button data-href="#v2625" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

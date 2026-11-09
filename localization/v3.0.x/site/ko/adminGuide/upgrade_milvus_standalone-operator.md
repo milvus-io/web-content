@@ -23,9 +23,9 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 Milvus Operator를 사용하여 Milvus 2.6.x 독립형 배포 환경을 v3.0.3으로 업그레이드하는 방법을 설명합니다.</p>
+    </button></h1><p>이 가이드에서는 Milvus Operator를 사용하여 Milvus 2.6.x 독립형 배포 환경을 v3.0.5로 업그레이드하는 방법을 설명합니다.</p>
 <div class="alert note">
-<p>이 절차는 Milvus Operator 1.3.0(Woodpecker), 클러스터 내 etcd 및 클러스터 내 MinIO를 사용하여 Milvus 2.6.20에서 Milvus v3.0.3으로 업그레이드하는 경우 검증되었습니다. 다른 Milvus 2.6.x 패치 릴리스, Operator 버전, 메시지 큐 또는 종속성 구성을 사용하는 경우, 먼저 비생산 환경에서 업그레이드를 검증하십시오.</p>
+<p>이 절차는 Milvus Operator 1.3.0(Woodpecker), 클러스터 내 etcd 및 클러스터 내 MinIO를 사용하여 Milvus 2.6.20에서 Milvus v3.0.5로 업그레이드하는 경우 검증되었습니다. 다른 Milvus 2.6.x 패치 릴리스, Operator 버전, 메시지 큐 또는 종속성 구성을 사용하는 경우, 먼저 비생산 환경에서 업그레이드를 검증하십시오.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,9 +49,9 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
 <li>기존 Milvus Operator에 사용된 설치 방법 및 매니페스트</li>
 <li>Milvus 메타데이터 및 영구 데이터의 최신 백업</li>
 </ul>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.5로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <div class="alert warning">
-<p>이 절차는 Milvus 이미지를 2.6.x 버전으로 되돌리는 다운그레이드 또는 롤백을 검증하지 않습니다. v3.0.3이 데이터를 기록한 후에는, 이미지만을 대상으로 하는 롤백 시 업데이트된 상태를 읽지 못할 수 있습니다. 업그레이드가 실패할 경우, 쓰기 작업을 중지하고 업그레이드 이전의 메타데이터 및 영구 데이터 백업을 복원하는 복구 계획을 사용하십시오. 복구 계획은 먼저 비생산 환경에서 검증하십시오.</p>
+<p>이 절차는 Milvus 이미지를 2.6.x 버전으로 되돌리는 다운그레이드 또는 롤백을 검증하지 않습니다. v3.0.5에서 데이터를 기록한 후, 이미지 전용 롤백을 수행할 경우 업데이트된 상태를 읽지 못할 수 있습니다. 업그레이드가 실패하면 쓰기 작업을 중지하고, 업그레이드 전의 메타데이터 및 영구 데이터 백업을 복원하는 복구 계획을 사용하십시오. 먼저 비생산 환경에서 복구 계획을 검증하십시오.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">업그레이드 절차<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +133,7 @@ title: Milvus Operator를 사용하여 Milvus 독립형 버전 업그레이드
   <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.3</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.5</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>전체 CR 매니페스트 적용:</p>
 <pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
@@ -163,4 +163,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus CR에 <code translate="no">Healthy</code> 가 보고되는지, 현재 이미지가 <code translate="no">milvusdb/milvus:v3.0.3</code> 인지, 기존 컬렉션을 계속 쿼리하고 검색할 수 있는지 확인하십시오. v3.0.3 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>
+<p>Milvus CR에 <code translate="no">Healthy</code> 가 보고되고, 현재 이미지가 <code translate="no">milvusdb/milvus:v3.0.5</code> 이며, 기존 컬렉션을 계속 쿼리하고 검색할 수 있는지 확인하십시오. v3.0.5 전용 기능을 활성화하기 전에 이러한 확인 작업을 완료하십시오.</p>

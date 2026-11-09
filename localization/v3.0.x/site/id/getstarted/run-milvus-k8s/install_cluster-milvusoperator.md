@@ -177,14 +177,14 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Setelah pod Milvus Operator berjalan, Anda dapat mendistribusikan kluster Milvus sebagai berikut.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Perintah di atas mengimplementasikan kluster Milvus dengan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk v3.0.3) dan semua komponen arsitektur baru, termasuk Streaming Node.</p>
+<p>Perintah di atas mengimplementasikan kluster Milvus dengan <strong>Woodpecker</strong> sebagai antrian pesan (direkomendasikan untuk v3.0.5) dan semua komponen arsitektur baru, termasuk Streaming Node.</p>
 <p><strong>Fitur utama arsitektur dalam penyebaran ini:</strong></p>
 <ul>
-<li><strong>Antrian Pesan</strong>: <a href="/docs/id/woodpecker.md">Menggunakan Woodpecker</a> (mengurangi pemeliharaan infrastruktur)</li>
+<li><strong>Antrian Pesan</strong>: <a href="/docs/id/woodpecker.md">Menggunakan Woodpecker</a> (mengurangi beban pemeliharaan infrastruktur)</li>
 <li><strong>Streaming Node</strong>: Diaktifkan untuk pemrosesan data yang lebih baik</li>
-<li><strong>Mix Coordinator</strong>: Komponen koordinator yang terkonsolidasi untuk meningkatkan efisiensi</li>
+<li><strong>Mix Coordinator</strong>: Komponen koordinator yang digabungkan untuk meningkatkan efisiensi</li>
 </ul>
-<p>Untuk menyesuaikan pengaturan ini, kami menyarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data aktual Anda, lalu mengunduh berkas YAML yang sesuai. Untuk informasi lebih lanjut mengenai parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>
+<p>Untuk menyesuaikan pengaturan ini, kami menyarankan Anda menggunakan <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> untuk menyesuaikan konfigurasi berdasarkan ukuran data aktual Anda, lalu mengunduh berkas YAML yang sesuai. Untuk informasi lebih lanjut tentang parameter konfigurasi, lihat <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>
 <div class="alert note">
 <ul>
 <li>Nama rilis hanya boleh berisi huruf, angka, dan tanda hubung. Titik tidak diperbolehkan dalam nama rilis.</li>
@@ -381,7 +381,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 </ul>
 <h4 id="Uninstall-with-Helm" class="common-anchor-header">Hapus instalasi dengan Helm</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm -n milvus-operator uninstall milvus-operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Hapus instalasi dengan kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml</span>
+<h4 id="Uninstall-with-kubectl" class="common-anchor-header">Hapus Instalasi dengan kubectl</h4><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.7/deploy/manifests/deployment.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Optional-dependencies" class="common-anchor-header">Dependensi opsional<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -442,7 +442,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/id/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

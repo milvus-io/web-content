@@ -3,7 +3,7 @@ id: structarray-limits.md
 title: StructArray 제한 사항
 summary: >-
   StructArray 지원 기능은 스키마 정의, 삽입 페이로드, 인덱싱, 검색 모드 및 StructArray 전용 필터에 걸쳐 있습니다.
-  실제 운영 환경에서 StructArray의 동작을 활용하기 전에 이 페이지를 제한 사항 참조 자료로 활용하시기 바랍니다.
+  프로덕션 환경에서 StructArray의 동작을 활용하기 전에 이 페이지를 제한 사항 참조 자료로 활용하십시오.
 ---
 <h1 id="StructArray-Limits" class="common-anchor-header">StructArray 제한 사항<button data-href="#StructArray-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,9 +79,11 @@ summary: >-
 <tr><td>Struct는 최상위 필드 유형이 아닙니다.</td><td>StructArray 필드를 ` <code translate="no">datatype=DataType.ARRAY</code> `로 생성하고, ` <code translate="no">element_type=DataType.STRUCT</code> ` 및 ` <code translate="no">struct_schema</code>`을 지정하십시오.</td></tr>
 <tr><td>모든 요소는 하나의 스키마를 공유합니다.</td><td>StructArray 필드의 모든 Struct 요소는 동일한 하위 필드 목록과 하위 필드 데이터 유형을 따릅니다.</td></tr>
 <tr><td><code translate="no">max_capacity</code> 는 필수입니다.</td><td>하나의 엔티티에 포함된 Struct 요소의 수는 StructArray 필드에 대해 구성된 <code translate="no">max_capacity</code> 을 초과해서는 안 됩니다.</td></tr>
-<tr><td>기존 하위 필드는 고정되어 있습니다.</td><td>기존 StructArray 필드에는 새로운 하위 필드를 추가할 수 없습니다. 하위 필드 스키마를 변경하려면 StructArray 필드를 삭제한 다음, 업데이트된 스키마로 다시 추가하십시오.</td></tr>
-<tr><td>중첩된 StructArray는 지원되지 않습니다.</td><td>StructArray 필드에는 중첩된 <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> 또는 <code translate="no">ArrayOfStruct</code> 하위 필드를 포함할 수 없습니다.</td></tr>
-<tr><td>StructArray 내부에서는 함수가 지원되지 않습니다.</td><td>StructArray 필드나 그 하위 필드에 대한 필드 함수를 정의하지 마십시오.</td></tr>
+<tr><td>모든 하위 필드는 하나의 <code translate="no">max_capacity</code> 를 공유합니다.</td><td>모든 하위 필드는 <code translate="no">max_capacity</code> 를 선언해야 하며, StructArray 필드의 모든 하위 필드는 동일한 값을 선언해야 합니다. 이 값은 0보다 커야 하며, 기본값이 4096인 <code translate="no">proxy.maxArrayCapacity</code> 를 초과해서는 안 됩니다.</td></tr>
+<tr><td>기존 하위 필드는 고정되어 있습니다.</td><td>기존 StructArray 필드에 새로운 하위 필드를 추가할 수는 없습니다. 하위 필드 스키마를 변경하려면 StructArray 필드를 삭제한 후 업데이트된 스키마로 다시 추가해야 합니다.</td></tr>
+<tr><td>중첩된 StructArray는 지원되지 않습니다.</td><td>StructArray 필드에는 중첩된 <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code> 또는 <code translate="no">ArrayOfStruct</code> 하위 필드가 포함될 수 없습니다.</td></tr>
+<tr><td>StructArray 내부에서는 함수가 지원되지 않습니다.</td><td>StructArray 필드나 그 하위 필드에 대해 필드 함수를 정의하지 마십시오.</td></tr>
+<tr><td>서브필드에서는 텍스트 분석이 지원되지 않습니다.</td><td><code translate="no">enable_match</code> Struct 하위 필드에 대한 <code translate="no">enable_analyzer</code> 설정은 최상위 필드에 대해서만 텍스트 인덱스가 생성되므로 아무런 효과가 없습니다.</td></tr>
 </tbody>
 </table>
 <p>스키마 생성 예제는 <a href="/docs/ko/create-structarray-field.md">StructArray 필드 생성을</a> 참조하십시오.</p>
@@ -103,7 +105,7 @@ summary: >-
     </button></h2><p>StructArray 하위 필드는 물리적 배열 형식의 저장 공간에 매핑됩니다. 다음 표에는 지원되는 물리적 유형과 지원되지 않는 물리적 유형이 나열되어 있습니다.</p>
 <table>
 <thead>
-<tr><th>Struct 하위 필드의 물리적 데이터 유형</th><th>지원</th><th>비고</th></tr>
+<tr><th>Struct 하위 필드의 물리적 유형</th><th>지원</th><th>비고</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>지원됨</td><td>서브필드를 ` <code translate="no">DataType.BOOL</code>` 형태로 정의합니다.</td></tr>
@@ -111,7 +113,7 @@ summary: >-
 <tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>지원됨</td><td><code translate="no">DataType.FLOAT</code> 또는 <code translate="no">DataType.DOUBLE</code> 로 하위 필드를 정의합니다.</td></tr>
 <tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>지원됨서브필드를 xml-ph-0000@deepl.internal 또는 xml-ph-0001@deepl.internal로 정의합니다.</td><td><code translate="no">DataType.VARCHAR</code> 으로 하위 필드를 정의하고 <code translate="no">max_length</code> 을 설정합니다.</td></tr>
 <tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>지원됨</td><td>하위 필드를 <code translate="no">DataType.FLOAT_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>지원됨</td><td>하위 필드를 <code translate="no">DataType.FLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
+<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.FLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>지원됨</td><td>하위 필드를 <code translate="no">DataType.BFLOAT16_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>지원됨</td><td>하위 필드를 <code translate="no">DataType.INT8_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
 <tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>지원됨</td><td>서브 필드를 <code translate="no">DataType.BINARY_VECTOR</code> 로 정의하고 <code translate="no">dim</code> 를 설정하십시오.</td></tr>
@@ -211,9 +213,9 @@ summary: >-
 </tbody>
 </table>
 <p>두 모드가 모두 필요한 경우 별도의 벡터 하위 필드를 사용하십시오. 예를 들어, EmbeddingList 검색에는 <code translate="no">chunks[emb_list_vector]</code> 를, 요소 수준 검색에는 <code translate="no">chunks[emb]</code> 를 사용하십시오.</p>
-<p>컬렉션 스키마를 설계할 때 StructArray 벡터 하위 필드는 벡터 하위 필드로 간주됩니다. 벡터 필드와 벡터 하위 필드의 총 개수가 대상 버전 및 서비스 계층의 제한 범위 내에 있도록 유지하십시오.</p>
-<p>지원되는 인덱스 유형 및 메트릭 유형 행렬에 대해서는 <a href="/docs/ko/index-structarray-fields.md">‘인덱스 StructArray 필드’를</a> 참조하십시오.</p>
-<h2 id="Search-limits" class="common-anchor-header">검색 제한 사항<button data-href="#Search-limits" class="anchor-icon" translate="no">
+<p>StructArray 벡터 하위 필드는 컬렉션 수준 제한 <code translate="no">proxy.maxVectorFieldNum</code>(기본값은 10)에 대한 벡터 필드로 계산됩니다. 벡터 하위 필드가 컬렉션의 유일한 벡터 필드인 StructArray 필드는 유효하며, 해당 필드를 삭제할 경우 컬렉션에 벡터 필드가 하나도 남지 않게 되는 상황에서는 삭제 요청이 거부됩니다. 벡터 필드 및 벡터 하위 필드의 총 개수를 대상 버전 및 서비스 계층의 제한 범위 내에 유지하십시오.</p>
+<p>지원되는 인덱스 유형 및 메트릭 유형 행렬에 대해서는 <a href="/docs/ko/index-structarray-fields.md">‘StructArray 필드 인덱싱’을</a> 참조하십시오.</p>
+<h2 id="Search-limits" class="common-anchor-header">검색 제한<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -236,8 +238,8 @@ summary: >-
 <tbody>
 <tr><td>기본 EmbeddingList 검색</td><td><code translate="no">MAX_SIM*</code> 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 엔티티 수준의 결과를 반환합니다.</td></tr>
 <tr><td>기본 요소 수준 검색</td><td>일반 벡터 메트릭으로 인덱싱된 StructArray 벡터 하위 필드에서 지원됩니다. 일치하는 요소의 오프셋을 반환할 수 있습니다.</td></tr>
-<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작은 대상 버전을 확인하십시오.</td></tr>
-<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 다릅니다.</td></tr>
+<tr><td>범위 검색</td><td>대상 버전의 검색 모드 및 인덱스/메트릭 지원 여부에 따라 지원됩니다. 요소 수준 StructArray 요청에 대한 하이브리드 범위 검색 동작 여부는 대상 버전을 확인하십시오.</td></tr>
+<tr><td>그룹화 검색</td><td>요소 수준 그룹화 검색은 오프셋을 반환할 수 있습니다. 요소 수준 StructArray 요청에 대한 하이브리드 검색의 그룹화 동작은 버전에 따라 달라집니다.</td></tr>
 <tr><td>하이브리드 검색</td><td>하이브리드 검색 요청은 대상 버전이 해당 검색 조합을 지원하는 경우에만 StructArray 벡터 하위 필드 요청을 포함할 수 있습니다. 각 요청은 여전히 인덱싱된 벡터 하위 필드의 메트릭 패밀리를 따릅니다.</td></tr>
 <tr><td>오프셋 출력</td><td>오프셋은 요소 수준 검색 결과에 사용할 수 있습니다. EmbeddingList 검색은 엔티티 수준 결과를 반환하며, 요소 오프셋을 주요 결과 단위로 사용하지 않습니다.</td></tr>
 </tbody>
@@ -267,6 +269,29 @@ summary: >-
 <li><p>JSON 경로 구문, JSON 함수, 배열 컨테이너 함수, 텍스트 일치 함수, Geometry/GIS 함수 및 Timestamptz 표현식은 StructArray 요소 수준 술어에서 지원되지 않습니다.</p></li>
 <li><p>단순한 부울 표현식 대신 <code translate="no">$[has_code] == true</code> 와 같은 명시적인 부울 비교를 사용하는 것이 좋습니다.</p></li>
 </ul>
+<h2 id="Import-limits" class="common-anchor-header">가져오기 제한<button data-href="#Import-limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>제한</th><th>세부 정보</th></tr>
+</thead>
+<tbody>
+<tr><td>소스 파일 형식</td><td>JSON, JSONL, CSV 및 Parquet 파일은 StructArray 필드를 포함할 수 있습니다. NumPy 파일은 최상위 필드당 하나의 파일을 포함하며 StructArray 데이터를 제공할 수 없습니다. StructArray 필드가 있는 컬렉션의 경우 JSON, CSV 또는 Parquet 파일을 사용하십시오. 파일 형식에 대해서는 <a href="/docs/ko/prepare-source-data.md#StructArray-fields-in-source-files">소스 데이터 준비를</a> 참조하십시오.</td></tr>
+</tbody>
+</table>
 <h2 id="Related-pages" class="common-anchor-header">관련 페이지<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -283,8 +308,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>StructArray 필드를 생성하려면 <a href="/docs/ko/create-structarray-field.md">StructArray 필드 생성을</a> 참조하십시오.</p></li>
-<li><p>데이터를 삽입하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">StructArray 필드에 데이터 삽입을</a> 참조하십시오.</p></li>
-<li><p>벡터 및 스칼라 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱을</a> 참조하십시오.</p></li>
+<li><p>StructArray 필드를 생성하려면 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 생성’을</a> 참조하십시오.</p></li>
+<li><p>데이터를 삽입하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">‘StructArray 필드에 데이터 삽입’을</a> 참조하십시오.</p></li>
+<li><p>벡터 및 스칼라 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">‘StructArray 필드 인덱싱’을</a> 참조하십시오.</p></li>
 <li><p>StructArray 필터 구문을 확인하려면 <a href="/docs/ko/struct-array-operators.md">‘StructArray 연산자’를</a> 참조하십시오.</p></li>
 </ol>

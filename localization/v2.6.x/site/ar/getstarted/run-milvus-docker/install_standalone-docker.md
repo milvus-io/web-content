@@ -63,14 +63,14 @@ title: تشغيل Milvus في Docker (لينكس)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>ما الجديد في الإصدار v2.6.25:</strong></p>
+<p><strong>ما الجديد في الإصدار v2.6.26:</strong></p>
 <ul>
 <li><strong>عقدة البث</strong>: قدرات معالجة بيانات محسّنة</li>
 <li><strong>Woodpecker MQ</strong>: قائمة انتظار رسائل محسّنة مع تقليل أعباء الصيانة، انظر <a href="/docs/ar/v2.6.x/use-woodpecker.md">استخدام Woodpecker</a> لمزيد من التفاصيل</li>
 <li><strong>بنية محسّنة</strong>: مكونات مدمجة لتحسين الأداء</li>
 </ul>
 <p>احرص دائمًا على تنزيل أحدث نسخة من البرنامج النصي لضمان حصولك على أحدث التكوينات وتحسينات البنية.</p>
-<p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، يُنصح باستخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
+<p>إذا كنت ترغب في استخدام <a href="https://milvus.io/docs/milvus_backup_overview.md">Backup</a> في وضع النشر المستقل، فمن المستحسن استخدام طريقة النشر <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>إذا واجهت أي مشكلات في سحب الصورة، فاتصل بنا على <a href="mailto:community@zilliz.com">community@zilliz.com</a> مع تفاصيل حول المشكلة، وسنقدم لك الدعم اللازم.</p>
 </div>
 <p>بعد تشغيل البرنامج النصي للتثبيت:</p>

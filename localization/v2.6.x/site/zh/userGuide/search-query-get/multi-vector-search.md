@@ -2,8 +2,9 @@
 id: multi-vector-search.md
 title: 多向量混合搜索
 summary: >-
-  在许多应用中，可以通过标题和描述等丰富的信息集或文本、图像和音频等多种模式来搜索对象。例如，如果文本或图像符合搜索查询的语义，就可以搜索包含一段文本和一幅图像的推文。混合搜索将这些不同领域的搜索结合在一起，从而增强了搜索体验。Milvus
-  允许在多个向量场上进行搜索，同时进行多个近似近邻（ANN）搜索，从而支持这种搜索。如果您想同时搜索文本和图像、描述同一对象的多个文本字段，或同时搜索密集向量和稀疏向量以提高搜索质量，多向量混合搜索就特别有用。
+  在许多应用场景中，可以通过丰富的信息（如标题和描述）或多种模态（如文本、图像和音频）来搜索对象。例如，如果一条包含文本和图像的推文中，其文本或图像与搜索查询的语义匹配，则该推文应被检索到。
+  混合搜索通过整合这些不同领域的搜索功能，从而提升搜索体验。Milvus 支持这一功能，允许在多个向量字段上进行搜索，并同时执行多次近似最近邻（ANN）搜索。
+  如果您希望同时搜索文本和图像、描述同一对象的多个文本字段，或者搜索密集向量和稀疏向量以提升搜索质量，多向量混合搜索将特别有用。
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜索<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,15 +21,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在许多应用中，可以通过标题和描述等丰富的信息集或文本、图像和音频等多种模式来搜索对象。例如，如果文本或图片与搜索查询的语义相符，就可以搜索包含一段文本和一张图片的推文。混合搜索将这些不同领域的搜索结合在一起，从而增强了搜索体验。Milvus 允许在多个向量场上进行搜索，同时进行多个近似近邻（ANN）搜索，从而支持这种搜索。如果要同时搜索文本和图像、描述同一对象的多个文本字段或密集和稀疏向量以提高搜索质量，多向量混合搜索尤其有用。</p>
-<p>
+    </button></h1><p>在许多应用场景中，可以通过丰富的信息（如标题和描述）或多种模态（如文本、图像和音频）来搜索对象。例如，如果一条包含文本和图像的推文中，其文本或图像与搜索查询的语义匹配，则应将其检索出来。 混合搜索通过整合这些不同领域的搜索，从而提升搜索体验。Milvus 支持这一功能，允许在多个向量字段上进行搜索，并同时执行多次近似最近邻（ANN）搜索。 若您希望同时搜索文本和图像、描述同一对象的多个文本字段，或同时搜索稠密向量和稀疏向量以提升搜索质量，多向量混合搜索将特别有用。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>混合搜索工作流程</span> </span></p>
-<p>多向量混合搜索集成了不同的搜索方法或跨越了各种模态的 Embeddings：</p>
+   <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>混合搜索工作流</span>
+  
+ </span></p>
+<p>多向量混合搜索整合了不同的搜索方法，或涵盖了来自多种模态的Embeddings：</p>
 <ul>
-<li><p><strong>稀疏-密集向量搜索</strong>：<a href="/docs/zh/v2.6.x/dense-vector.md">密集向量</a>是捕捉语义关系的绝佳方法，而<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>则是精确匹配关键词的高效方法。混合搜索结合了这些方法，既能提供广泛的概念理解，又能提供精确的术语相关性，从而改善搜索结果。通过利用每种方法的优势，混合搜索克服了单独方法的局限性，为复杂查询提供了更好的性能。以下是结合语义搜索和全文搜索的混合检索的详细<a href="/docs/zh/v2.6.x/full_text_search_with_milvus.md">指南</a>。</p></li>
-<li><p><strong>多模态向量搜索</strong>：多模态向量搜索是一种功能强大的技术，可以跨文本、图像、音频等各种数据类型进行搜索。这种方法的主要优势在于它能将不同的模式统一为一种无缝、连贯的搜索体验。例如，在产品搜索中，用户可能会输入一个文本查询来查找用文本和图像描述的产品。通过混合搜索方法将这些模式结合起来，可以提高搜索准确性或丰富搜索结果。</p></li>
+<li><p><strong>稀疏-稠密向量搜索</strong>：<a href="/docs/zh/v2.6.x/dense-vector.md">稠密向量</a>非常适合捕捉语义关系，而<a href="/docs/zh/v2.6.x/sparse_vector.md">稀疏向量</a>则在精确关键词匹配方面极为有效。 混合检索将这些方法结合起来，既能提供广泛的概念理解，又能确保术语的精确相关性，从而提升搜索结果质量。通过发挥每种方法的优势，混合检索克服了单一方法的局限性，在处理复杂查询时表现更佳。以下是关于将语义搜索与全文搜索相结合的混合检索的更详细<a href="/docs/zh/v2.6.x/full_text_search_with_milvus.md">指南</a>。</p></li>
+<li><p><strong>多模态向量搜索</strong>：多模态向量搜索是一种强大的技术，允许您跨多种数据类型（包括文本、图像、音频及其他类型）进行搜索。该方法的主要优势在于能够将不同模态整合为无缝且连贯的搜索体验。 例如，在产品搜索中，用户可能输入文本查询来查找同时包含文本和图片描述的产品。通过混合搜索方法将这些模态结合起来，可以提高搜索准确性或丰富搜索结果。</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,14 +48,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>让我们考虑一个真实世界的使用案例，其中每个产品都包含文字描述和图片。根据可用数据，我们可以进行三种类型的搜索：</p>
+    </button></h2><p>让我们考虑一个现实世界中的用例：每个产品都包含文字描述和图片。基于现有数据，我们可以进行三种类型的搜索：</p>
 <ul>
-<li><p><strong>语义文本搜索：</strong>这涉及使用密集向量查询产品的文本描述。可以使用<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服务生成文本嵌入。</p></li>
-<li><p><strong>全文搜索</strong>：在这里，我们使用稀疏向量的关键词匹配来查询产品的文本描述。<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等算法或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型可用于此目的。</p></li>
-<li><p><strong>多模态图像搜索：</strong>这种方法使用带有密集向量的文本查询对图像进行查询。可以使用<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型生成图像嵌入。</p></li>
+<li><p><strong>语义文本搜索：</strong>这涉及使用稠密向量对产品的文本描述进行查询。文本Embeddings可通过<a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>和<a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers</a>等模型，或<a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI</a> 等服务生成。</p></li>
+<li><p><strong>全文搜索</strong>：在此，我们使用稀疏向量通过关键词匹配来查询产品的文字描述。为此，可以利用<a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>等算法，或<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>、<a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE</a>等稀疏嵌入模型。</p></li>
+<li><p><strong>多模态图像搜索：</strong>该方法使用基于稠密向量的文本查询对图像进行检索。图像 Embeddings 可通过<a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP</a> 等模型生成。</p></li>
 </ul>
-<p>本指南将引导您通过一个结合上述搜索方法的多模态混合搜索示例，给出产品的原始文本描述和图像嵌入。我们将演示如何存储多向量数据并使用 Rerankers 策略执行混合搜索。</p>
-<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">创建具有多个向量场的 Collections<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+<p>本指南将通过一个示例，向您详细介绍如何结合上述搜索方法，基于产品的原始文本描述和图像Embeddings，实现多模态混合搜索。我们将演示如何存储多向量数据，并采用重新排序策略进行混合搜索。</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">创建包含多个向量字段的Collection<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,8 +70,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建 Collections 的过程包括三个关键步骤：定义 Collections Schema、配置索引参数和创建 Collections。</p>
-<h3 id="Define-schema" class="common-anchor-header">定义 Schema<button data-href="#Define-schema" class="anchor-icon" translate="no">
+    </button></h2><p>创建Collection的过程包括三个关键步骤：定义Collection Schema、配置索引参数以及创建Collection。</p>
+<h3 id="Define-schema" class="common-anchor-header">定义Schema<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,18 +86,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>对于多向量混合搜索，我们应该在一个 Collection 模式中定义多个向量字段。有关集合中允许的向量字段数量限制的详细信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud Limits</a>。  不过，如有必要，您可以调整 <a href="/docs/zh/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>以根据需要在集合中最多包含 10 个向量字段。</p>
-<p>此示例将以下字段纳入 Schema 模式：</p>
+    </button></h3><p>对于多向量混合搜索，我们应在 Collection Schema 中定义多个向量字段。有关 Collection 中允许的向量字段数量限制的详细信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud 限制</a>。不过，如有必要，您可以调整 <a href="/docs/zh/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> ，根据需要将 Collection 中的向量字段数量增加至最多 10 个。</p>
+<p>本示例将以下字段纳入Schema：</p>
 <ul>
-<li><p><code translate="no">id</code>:作为存储文本 ID 的主键。该字段的数据类型为<code translate="no">INT64</code> 。</p></li>
-<li><p><code translate="no">text</code>:用于存储文本内容。该字段的数据类型为<code translate="no">VARCHAR</code> ，最大长度为 1000 字节。<code translate="no">enable_analyzer</code> 选项设置为<code translate="no">True</code> ，以便于全文检索。</p></li>
-<li><p><code translate="no">text_dense</code>:用于存储文本的密集向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维数为 768。</p></li>
-<li><p><code translate="no">text_sparse</code>:用于存储文本的稀疏向量。该字段的数据类型为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
-<li><p><code translate="no">image_dense</code>:用于存储产品图像的密集向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维数为 512。</p></li>
+<li><p><code translate="no">id</code>: 用作存储文本 ID 的主键。该字段的数据类型为<code translate="no">INT64</code> 。</p></li>
+<li><p><code translate="no">text</code>: 用于存储文本内容。该字段的数据类型为<code translate="no">VARCHAR</code> ，最大长度为1000字节。<code translate="no">enable_analyzer</code> 选项已设置为<code translate="no">True</code> ，以支持全文搜索。</p></li>
+<li><p><code translate="no">text_dense</code>: 用于存储文本的稠密向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维度为768。</p></li>
+<li><p><code translate="no">text_sparse</code>: 用于存储文本的稠密向量。该字段的数据类型为<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">image_dense</code>: 用于存储产品图片的稠密向量。该字段的数据类型为<code translate="no">FLOAT_VECTOR</code> ，向量维度为512。</p></li>
 </ul>
-<p>由于我们将使用内置的 BM25 算法对文本字段进行全文检索，因此有必要在 Schema 中添加 Milvus<code translate="no">Function</code> 。有关详细信息，请参阅<a href="/docs/zh/v2.6.x/full-text-search.md">全文搜索</a>。</p>
+<p>由于我们将使用内置的 BM25 算法对文本字段进行全文检索，因此有必要将 Milvus 的<code translate="no">Function</code> 添加到 Schema 中。更多详细信息，请参阅《<a href="/docs/zh/v2.6.x/full-text-search.md">全文检索</a>》。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -340,15 +348,20 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定义完 Collections Schema 后，下一步就是配置向量索引并指定相似度指标。在给出的示例中</p>
+    </button></h3><p>定义Collection Schema后，下一步是配置向量索引并指定相似度度量。在给定的示例中：</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>：为文本密集向量字段创建了<code translate="no">AUTOINDEX</code> 类型的索引，其度量类型为<code translate="no">IP</code> 。</p></li>
-<li><p><code translate="no">text_sparse_index</code>：为文本稀疏向量场创建了<code translate="no">SPARSE_INVERTED_INDEX</code>类型的索引，其度量类型为<code translate="no">BM25</code> 。</p></li>
-<li><p><code translate="no">image_dense_index</code>：为图像密集向量场创建了<code translate="no">AUTOINDEX</code> 类型的索引，其公制类型为<code translate="no">IP</code> 。</p></li>
+<li><p><code translate="no">text_dense_index</code>：为文本密集向量字段创建了一个类型为<code translate="no">AUTOINDEX</code> 、度量类型为<code translate="no">IP</code> 的索引。</p></li>
+<li><p><code translate="no">text_sparse_index</code>：为文本稀疏向量字段创建了一个类型为<code translate="no">SPARSE_INVERTED_INDEX</code>、度量类型为<code translate="no">BM25</code> 的索引。</p></li>
+<li><p><code translate="no">image_dense_index</code>: 为图像密集向量场创建了一个类型为<code translate="no">AUTOINDEX</code> 、度量类型为<code translate="no">IP</code> 的索引。</p></li>
 </ul>
-<p>您可以根据需要选择其他索引类型，以最适合您的需求和数据类型。有关支持的索引类型的详细信息，请参阅<a href="/docs/zh/v2.6.x/index-vector-fields.md">可用索引类型</a>文档。</p>
+<p>您可以根据需要选择其他索引类型，以最好地满足您的需求和数据类型。有关支持的索引类型的更多信息，请参阅<a href="/docs/zh/v2.6.x/index-vector-fields.md">可用索引类型的</a>文档。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -459,7 +472,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">创建 Collections<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h3 id="Create-collection" class="common-anchor-header">创建Collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -474,9 +487,14 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用前两个步骤中配置的 Collection Schema 和索引创建名为<code translate="no">demo</code> 的 Collection。</p>
+    </button></h3><p>创建一个名为<code translate="no">demo</code> 的 Collection，其 Collection Schema 和索引配置与前两个步骤中设置的一致。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -533,17 +551,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本节根据前面定义的 Schema 将数据插入<code translate="no">my_collection</code> Collection。在插入过程中，确保所有字段（有自动生成值的字段除外）的数据格式正确。在本例中</p>
+    </button></h2><p>本节将根据之前定义的 Schema 向<code translate="no">my_collection</code> Collection 插入数据。插入时，请确保除自动生成的字段外，所有字段均以正确格式提供数据。在此示例中：</p>
 <ul>
-<li><p><code translate="no">id</code>代表产品 ID 的整数</p></li>
-<li><p><code translate="no">text</code>：包含产品描述的字符串</p></li>
-<li><p><code translate="no">text_dense</code>：768 个浮点数值的列表，代表文本描述的密集 Embeddings</p></li>
-<li><p><code translate="no">image_dense</code>代表产品图片密集嵌入的 512 个浮点数值的列表</p></li>
+<li><p><code translate="no">id</code>：一个整数，表示产品 ID</p></li>
+<li><p><code translate="no">text</code>: 包含产品描述的字符串</p></li>
+<li><p><code translate="no">text_dense</code>: 由768个浮点数组成的列表，表示文本描述的密集嵌入</p></li>
+<li><p><code translate="no">image_dense</code>: 一个包含 512 个浮点数的列表，表示产品图片的稠密嵌入</p></li>
 </ul>
-<p>您可以使用相同或不同的模型为每个字段生成密集嵌入。在本例中，两个高密度嵌入的维度不同，说明它们是由不同的模型生成的。以后定义每个查询时，请务必使用相应的模型生成相应的查询嵌入。</p>
-<p>由于本示例使用内置的 BM25 函数从文本字段生成稀疏嵌入，因此无需手动提供稀疏向量。但是，如果您选择不使用 BM25，则必须自己预先计算并提供稀疏嵌入。</p>
+<p>您可以使用相同或不同的模型为每个字段生成稠密Embeddings。在此示例中，这两个稠密Embeddings的维度不同，这表明它们是由不同的模型生成的。稍后在定义每个搜索时，请务必使用相应的模型来生成合适的查询Embedding。</p>
+<p>由于本示例使用内置的 BM25 函数从文本字段生成稀疏 Embeddings，因此您无需手动提供稀疏向量。但是，如果您选择不使用 BM25，则必须自行预先计算并提供稀疏 Embeddings。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -687,19 +710,24 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>混合搜索是通过在<code translate="no">hybrid_search()</code> 函数中创建多个<code translate="no">AnnSearchRequest</code> 来实现的，其中每个<code translate="no">AnnSearchRequest</code> 代表一个特定向量场的基本 ANN 搜索请求。因此，在进行混合搜索之前，有必要为每个向量场创建一个<code translate="no">AnnSearchRequest</code> 。</p>
-<p>此外，通过在<code translate="no">AnnSearchRequest</code> 中配置<code translate="no">expr</code> 参数，可以为混合搜索设置过滤条件。请参阅<a href="/docs/zh/v2.6.x/filtered-search.md">过滤搜索</a>和<a href="/docs/zh/v2.6.x/boolean.md">过滤说明</a>。</p>
+    </button></h3><p>混合搜索的实现是在<code translate="no">hybrid_search()</code> 函数中创建多个<code translate="no">AnnSearchRequest</code> ，其中每个<code translate="no">AnnSearchRequest</code> 代表针对特定向量字段的基本ANN搜索请求。因此，在执行混合搜索之前，必须为每个向量字段创建一个<code translate="no">AnnSearchRequest</code> 。</p>
+<p>此外，通过在<code translate="no">AnnSearchRequest</code> 中配置<code translate="no">expr</code> 参数，您可以为混合搜索设置过滤条件。请参阅《<a href="/docs/zh/v2.6.x/filtered-search.md">过滤搜索</a>》和《<a href="/docs/zh/v2.6.x/boolean.md">过滤原理说明</a>》。</p>
 <div class="alert note">
-<p>在混合搜索中，每个<code translate="no">AnnSearchRequest</code> 只支持一个查询数据。</p>
+<p>在混合搜索中，每个<code translate="no">AnnSearchRequest</code> 仅支持一组查询数据。</p>
 </div>
-<p>为了演示各种搜索向量字段的功能，我们将使用一个示例查询构建三个<code translate="no">AnnSearchRequest</code> 搜索请求。在此过程中，我们还将使用其预先计算的密集向量。搜索请求将针对以下向量场：</p>
+<p>为了演示各种搜索向量字段的功能，我们将使用一个示例查询构建三个<code translate="no">AnnSearchRequest</code> 搜索请求。在此过程中，我们还将使用其预计算的稠密向量。这些搜索请求将针对以下向量字段：</p>
 <ul>
-<li><p><code translate="no">text_dense</code> 语义文本搜索，允许基于意义而非直接关键词匹配进行上下文理解和检索。</p></li>
-<li><p><code translate="no">text_sparse</code>全文搜索或关键词匹配，侧重于文本中精确匹配的单词或短语。</p></li>
-<li><p><code translate="no">image_dense</code>多模态文本到图片搜索，根据查询的语义内容检索相关产品图片。</p></li>
+<li><p><code translate="no">text_dense</code> 用于语义文本搜索，支持上下文理解，并基于语义而非直接关键词匹配进行检索。</p></li>
+<li><p><code translate="no">text_sparse</code>用于全文搜索或关键词匹配，侧重于文本中单词或短语的精确匹配。</p></li>
+<li><p><code translate="no">image_dense</code>用于多模态文本到图像搜索，根据查询的语义内容检索相关的产品图像。</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -826,8 +854,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>参数<code translate="no">limit</code> 设置为 2 时，每个<code translate="no">AnnSearchRequest</code> 会返回 2 个搜索结果。在本示例中，创建了 3 个<code translate="no">AnnSearchRequest</code> 实例，总共产生了 6 个搜索结果。</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">步骤 2：配置 Rerankers 策略<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<p>鉴于参数<code translate="no">limit</code> 设置为2，每个<code translate="no">AnnSearchRequest</code> 将返回2个搜索结果。在此示例中，创建了3个<code translate="no">AnnSearchRequest</code> 实例，因此总共会返回6个搜索结果。</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">步骤 2：配置重新排序策略<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -842,10 +870,15 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要对 ANN 搜索结果集进行合并和重新排序，选择适当的重新排序策略至关重要。Milvus 提供多种重排策略。有关这些重排机制的更多详情，请参阅<a href="/docs/zh/v2.6.x/weighted-ranker.md">加权排名器</a>或<a href="/docs/zh/v2.6.x/rrf-ranker.md">RRF 排名器</a>。</p>
-<p>在本例中，由于没有特别强调特定的搜索查询，我们将采用 RRFRanker 策略。</p>
+    </button></h3><p>要合并并重新排序多组 ANN 搜索结果，选择合适的重新排序策略至关重要。Milvus 提供了多种类型的重新排序策略。有关这些重新排序机制的更多详细信息，请参阅<a href="/docs/zh/v2.6.x/weighted-ranker.md">“加权排序器</a>”或<a href="/docs/zh/v2.6.x/rrf-ranker.md">“RRF 排序器”</a>。</p>
+<p>在本示例中，由于没有特别强调特定的搜索查询，我们将采用 RRFRanker 策略。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -918,9 +951,14 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在启动混合搜索之前，请确保已加载 Collections。如果集合中的任何向量字段缺少索引或未加载到内存中，执行混合搜索方法时就会出错。</p>
+    </button></h3><p>在启动混合搜索之前，请确保已加载Collection。如果Collection中的任何向量字段缺少索引或未加载到内存中，执行混合搜索方法时将发生错误。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -992,10 +1030,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果如下：</p>
+<p>以下是输出结果：</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>在为混合搜索指定<code translate="no">limit=2</code> 参数后，Milvus 将对三次搜索得到的六个结果进行 Rerankers 排序。最终，它们将只返回最相似的前两个结果。</p>
+<p>当为混合搜索指定<code translate="no">limit=2</code> 参数时，Milvus将对从三次搜索中获得的六个结果进行重新排序。最终，系统将仅返回相似度最高的两个结果。</p>
 <h2 id="Advanced-usage" class="common-anchor-header">高级用法<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1026,9 +1064,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果您的 Collections 有<code translate="no">TIMESTAMPTZ</code> 字段，您可以通过在混合搜索调用中设置<code translate="no">timezone</code> 参数，为单次操作临时覆盖数据库或 Collections 的默认时区。这可以控制在操作过程中如何显示和比较<code translate="no">TIMESTAMPTZ</code> 值。</p>
-<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>亚洲/上海</strong>、<strong>美国/芝加哥</strong>或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p>
-<p>下面的示例展示了如何为混合搜索操作临时设置时区：</p>
+    </button></h3><p>如果您的Collection包含<code translate="no">TIMESTAMPTZ</code> 字段，您可以通过在混合搜索调用中设置<code translate="no">timezone</code> 参数，针对单次操作临时覆盖数据库或Collection的默认时区。这将控制操作过程中<code translate="no">TIMESTAMPTZ</code> 值的显示和比较方式。</p>
+<p><code translate="no">timezone</code> 的值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如，<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p>
+<p>下面的示例演示了如何为混合搜索操作临时设置时区：</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,

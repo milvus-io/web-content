@@ -51,7 +51,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Cada instancia de Milvus utiliza exactamente una cola de mensajes.</p></li>
-<li><p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.3, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p></li>
+<li><p><strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0.5, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p></li>
 <li><p>Para cambiar la cola de mensajes de una instancia en ejecución, consulta <a href="/docs/es/switch-mq-type.md">«Cambiar cola de mensajes</a>». La función «Cambiar cola de mensajes» está disponible en <strong>Milvus 3.0 y versiones posteriores</strong>; actualiza primero a Milvus 3.0 o una versión posterior.</p></li>
 </ul>
 </div>

@@ -67,8 +67,8 @@ docker compose version
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wählen Sie eines der folgenden Terminale aus. Führen Sie die Befehle in einem beschreibbaren Arbeitsverzeichnis aus; das Skript speichert dort Konfigurationsdateien und das Verzeichnis „ <code translate="no">volumes</code> “.</p>
-<p>Das Skript wird aus dem Milvus-Zweig „ <code translate="no">master</code> “ heruntergeladen. Sein Docker-Image-Tag ist im Skript definiert und kann von v3.0.3 abweichen. Um genau diese Version bereitzustellen, verwenden Sie die unten stehende versionierte Docker-Compose-Konfiguration.</p>
+    </button></h2><p>Wählen Sie eines der folgenden Terminals aus. Führen Sie die Befehle in einem beschreibbaren Arbeitsverzeichnis aus; das Skript speichert dort Konfigurationsdateien und das Verzeichnis „ <code translate="no">volumes</code> “.</p>
+<p>Das Skript wird aus dem Milvus-Zweig „ <code translate="no">master</code> “ heruntergeladen. Sein Docker-Image-Tag ist im Skript definiert und kann von v3.0.5 abweichen. Um genau diese Version bereitzustellen, verwenden Sie die unten stehende versionierte Docker-Compose-Konfiguration.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Über PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -115,7 +115,7 @@ standalone.bat start
 <li>Milvus speichert Daten im Verzeichnis <strong>„volumes/milvus“</strong> im Arbeitsverzeichnis.</li>
 <li>Konfigurationsüberschreibungen gehören in die Datei <strong>„user.yaml“</strong> im Arbeitsverzeichnis. Starten Sie den Container nach Änderungen neu.</li>
 </ul>
-<p>Überprüfen Sie den Status des Images und des Containers in einem der beiden Terminals:</p>
+<p>Überprüfen Sie den Status des Images und des Containers in einem beliebigen Terminal:</p>
 <pre><code translate="no" class="language-powershell">docker inspect --format &quot;{{.Config.Image}}&quot; milvus-standalone
 docker ps --filter name=milvus-standalone
 </code></pre>
@@ -158,7 +158,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie die der Version v3.0.3 beigefügte Konfiguration. Führen Sie nur die für Ihr Terminal geltende Befehlsfolge aus.</p>
+    </button></h2><p>Verwenden Sie die der Version v3.0.5 beiliegende Konfiguration. Führen Sie nur die für Ihr Terminal zutreffende Befehlsfolge aus.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Über PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>Laden Sie die Konfiguration herunter und starten Sie Milvus:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -195,7 +195,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Laden Sie die Konfiguration herunter und starten Sie Milvus:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -215,7 +215,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Öffnen Sie Ihre WSL-Distribution und führen Sie anschließend die folgenden Linux-Befehle aus:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -296,7 +296,7 @@ wsl --update
   
  </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="common-anchor-header">Wie kann ich mit den volumenbezogenen Fehlern umgehen, die beim Start von Milvus angezeigt werden und lauten: „ <code translate="no">Read config failed</code> “?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="common-anchor-header">Wie kann ich mit den beim Start von Milvus angezeigten volumenbezogenen Fehlern umgehen, die lauten: „ <code translate="no">Read config failed</code> “?<button data-href="#How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -357,7 +357,7 @@ wsl --update
 </ul></li>
 <li><p>Für Compose-Bereitstellungen befolgen Sie die <a href="/docs/de/upgrade_milvus_standalone-docker.md">Anleitung „Upgrade von Milvus Standalone mit Docker Compose“</a>; überprüfen Sie die Vorgehensweise in Ihrer Umgebung, bevor Sie das Upgrade durchführen.</p></li>
 <li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
-<li><p>Stellen Sie Ihren Milvus-Cluster in Clouds bereit:</p>
+<li><p>Stellen Sie Ihren Milvus-Cluster in folgenden Clouds bereit:</p>
 <ul>
 <li><a href="/docs/de/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/de/gcp.md">Google Cloud</a></li>
@@ -365,7 +365,7 @@ wsl --update
 </ul></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Weboberfläche für die Überwachung und Verwaltung von Milvus.</p></li>
 <li><p>Entdecken Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlerbehebung in Milvus und für dynamische Konfigurationsaktualisierungen.</p></li>
+<li><p>Entdecken Sie <a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool für die Fehlerbehebung bei Milvus und dynamische Konfigurationsaktualisierungen.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Verwaltung von Milvus.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

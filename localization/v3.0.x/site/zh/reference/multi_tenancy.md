@@ -1,7 +1,7 @@
 ---
 id: multi_tenancy.md
 title: 实现多租户功能
-summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“租户”）共享同一个集群，同时保持各自数据环境的隔离。
+summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“租户”）共享同一个集群，同时保持数据环境的隔离。
 ---
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">实现多租户功能<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,11 +60,11 @@ summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“
  </span></p>
 <ul>
 <li><p><strong>可扩展性</strong>：数据库级多租户策略默认最多支持 64 个租户。</p></li>
-<li><p><strong>数据隔离</strong>：每个数据库中的数据完全隔离，提供企业级数据隔离，非常适合受监管的环境或具有严格合规需求的客户。</p></li>
+<li><p><strong>数据隔离</strong>：每个数据库中的数据完全分离，提供企业级数据隔离，非常适合受监管的环境或具有严格合规需求的客户。</p></li>
 <li><p><strong>灵活性</strong>：每个数据库可以包含具有不同Schema的Collection，提供高度灵活的数据组织方式，并允许每个租户拥有自己的数据Schema。</p></li>
 <li><p><strong>其他</strong>：该策略还支持基于角色的访问控制（RBAC），可对每个租户的用户访问权限进行精细控制。此外，您可以灵活地为特定租户加载或释放数据，从而有效管理热数据和冷数据。</p></li>
 </ul>
-<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Collection级多租户<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
+<h3 id="Collection-level-multi-tenancy" class="common-anchor-header">集合级多租户<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,7 +117,7 @@ summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“
 <ul>
 <li><p><strong>可扩展性</strong>：每个 Collection 最多可包含 1,024 个分区，从而支持相同数量的租户。</p></li>
 <li><p><strong>数据隔离</strong>：每个租户的数据通过分区在物理上相互隔离。</p></li>
-<li><p><strong>灵活性</strong>：此策略要求所有租户共享相同的数据Schema。此外，分区需要手动创建。</p></li>
+<li><p><strong>灵活性</strong>：此策略要求所有租户共享相同的数据Schema。并且分区需要手动创建。</p></li>
 <li><p><strong>其他</strong>：分区级别不支持基于角色的访问控制（RBAC）。租户数据既可以单独查询，也可以跨多个分区进行查询，这使得该方法非常适合涉及跨租户分段的聚合查询或分析的场景。此外，您可以灵活地为特定租户加载或释放数据，从而有效管理热数据和冷数据。</p></li>
 </ul>
 <h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">Partition Key级多租户<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
@@ -135,7 +135,7 @@ summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>采用此策略时，所有租户共享同一个 Collection 和 Schema，但每个租户的数据会根据<a href="/docs/zh/use-partition-key.md">Partition Key</a>值自动路由到 16 个物理隔离的分区中。尽管每个物理分区可能包含多个租户，但来自不同租户的数据在逻辑上仍然相互隔离。</p>
+    </button></h3><p>采用此策略时，所有租户共享同一个 Collection 和 Schema，但每个租户的数据会根据<a href="/docs/zh/use-partition-key.md">Partition Key</a>值自动路由到 16 个物理隔离的分区中。尽管每个物理分区可能包含多个租户，但不同租户的数据在逻辑上仍然相互隔离。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" /> 
@@ -143,13 +143,13 @@ summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“
   
  </span></p>
 <ul>
-<li><p><strong>可扩展性</strong>：Partition Key 级策略提供了最具可扩展性的方案，可支持数百万个租户。</p></li>
+<li><p><strong>可扩展性</strong>：Partition Key 级策略提供了最具可扩展性的方案，支持数百万个租户。</p></li>
 <li><p><strong>数据隔离</strong>：由于多个租户可能共享一个物理分区，因此该策略提供的数据隔离性相对较弱。</p></li>
 <li><p><strong>灵活性</strong>：由于所有租户必须共享相同的数据Schema，因此该策略的数据灵活性有限。</p></li>
 <li><p><strong>其他</strong>：Partition Key级别不支持基于角色的访问控制（RBAC）。租户数据既可单独查询，也可跨多个分区进行查询，这使得该方法非常适合涉及跨租户分段的聚合查询或分析场景。</p></li>
 </ul>
 <div class="alert note">
-<p>建议您在 Partition Key 字段上创建标量索引。由于每个物理分区包含多个租户，Milvus 会对搜索分区中的每个实体评估租户过滤条件，若无索引，则会进行全表扫描。详情请参阅《<a href="/docs/zh/use-partition-key.md#Index-Partition-Key">索引 Partition Key</a>》。</p>
+<p>建议您在 Partition Key 字段上创建标量索引。由于每个物理分区包含多个租户，Milvus 会对搜索分区中的每个实体评估租户过滤条件，若无索引，这将导致全表扫描。详情请参阅《<a href="/docs/zh/use-partition-key.md#Index-Partition-Key">索引 Partition Key</a>》。</p>
 </div>
 <h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">选择合适的多租户策略<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -190,7 +190,7 @@ summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“
      <td><p>数百万</p></td>
    </tr>
    <tr>
-     <td><p><strong>数据模式灵活性</strong></p></td>
+     <td><p><strong>数据模式的灵活性</strong></p></td>
      <td><p>高</p></td>
      <td><p>中等</p></td>
      <td><p>低</p></td>
@@ -232,7 +232,7 @@ summary: 在 Milvus 中，多租户模式是指多个客户或团队（称为“
 <li><p><strong>严格的数据隔离要求</strong>：数据库 = Collection &gt; 分区 &gt; Partition Key</p>
 <p>如果您有严格的物理数据隔离要求，请选择数据库、Collection或分区级策略。</p></li>
 <li><p><strong>每个租户数据具有灵活的数据Schema：</strong>数据库 &gt; Collection &gt; 分区 = Partition Key</p>
-<p>Database级和Collection级策略在Schema方面提供了完全的灵活性。如果您的租户数据结构各不相同，请选择Database级或Collection级多租户方案。</p></li>
+<p>数据库级和Collection级策略在Schema方面提供了完全的灵活性。如果您的租户数据结构各不相同，请选择数据库级或Collection级多租户方案。</p></li>
 <li><p><strong>其他</strong></p>
 <ol>
 <li><p><strong>性能：</strong>搜索性能由多种因素决定，包括索引、搜索参数和机器配置。Milvus 还支持性能调优。建议在选择多租户策略之前，先测试实际性能。</p></li>

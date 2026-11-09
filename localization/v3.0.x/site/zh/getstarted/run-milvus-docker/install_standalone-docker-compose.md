@@ -56,9 +56,9 @@ title: 使用 Docker Compose 运行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 在其代码库中提供了一个 Docker Compose 配置文件。请下载 v3.0.3 版本的配置文件并启动新的部署：</p>
+    </button></h2><p>Milvus 在其仓库中提供了一个 Docker Compose 配置文件。请下载 v3.0.5 版本的配置文件并启动新的部署：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,7 +68,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>默认部署（v3.0.3）：</strong> <code translate="no">docker compose up -d</code> 将启动三个长期运行的容器——<code translate="no">milvus-etcd</code> （元数据）、<code translate="no">milvus-minio</code> （对象存储）和<code translate="no">milvus-standalone</code> 。消息队列使用<strong>Woodpecker（嵌入式，以 MinIO / 对象存储作为其 WAL 后端）</strong>，因此无需单独的消息队列容器。</p>
+<p><strong>默认部署（v3.0.5）：</strong> <code translate="no">docker compose up -d</code> 将启动三个长期运行的容器——<code translate="no">milvus-etcd</code> （元数据）、<code translate="no">milvus-minio</code> （对象存储）和<code translate="no">milvus-standalone</code> 。消息队列使用<strong>Woodpecker（嵌入式，以 MinIO / 对象存储作为其 WAL 后端）</strong>，因此无需单独的消息队列容器。</p>
 <p>该配置还会运行一次性的<code translate="no">milvus-volume-init</code> 服务，以准备数据目录的所有权。该服务在完成该任务后即退出。</p>
 <p><strong>各版本的消息队列默认设置：</strong></p>
 <ul>
@@ -83,10 +83,10 @@ Creating milvus-standalone ... done
 </div>
 <p>启动 Milvus 后，</p>
 <ul>
-<li>名为<strong>milvus-standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
+<li>名为<strong>Milvus Standalone</strong>、<strong>milvus-minio</strong> 和<strong>milvus-etcd</strong>的容器已启动。
 <ul>
 <li><strong>milvus-etcd</strong>容器未向主机暴露任何端口，并将数据映射到当前文件夹中的<strong>volumes/etcd</strong>。</li>
-<li><strong>milvus-minio</strong>容器在本地监听<strong>9000</strong>和<strong>9001</strong>端口，使用默认身份验证凭据，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
+<li><strong>milvus-minio</strong>容器使用默认身份验证凭据在本地监听<strong>9000</strong>和<strong>9001</strong>端口，并将数据映射到当前文件夹中的<strong>volumes/minio</strong>。</li>
 <li><strong>Milvus Standalone</strong>容器在本地通过默认设置提供<strong>19530</strong>端口服务，并将数据映射到当前目录下的<strong>volumes/milvus</strong>卷中。</li>
 </ul></li>
 </ul>
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>对于 Milvus 2.6.x 独立部署，请遵循<a href="/docs/zh/upgrade_milvus_standalone-docker.md">《使用 Docker Compose 升级 Milvus Standalone</a>》中的说明。在更改 Milvus 镜像之前，请备份元数据和持久化数据，保留现有的依赖项和配置，并验证文档中记录的源到目标的升级路径。 请勿用上述新安装配置替换旧部署的 Compose 文件。</p>
-<p><strong>消息队列限制</strong>：升级至 Milvus v3.0.3 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
-<p>Milvus 2.6.x 及更高版本默认使用 Woodpecker，而 2.5.x 部署默认使用<strong>RocksMQ</strong>。如果您要升级的部署仍在使用 RocksMQ，请在更改 Milvus 镜像之前，通过 `<code translate="no">user.yaml</code> ` 将其固定，以便升级后的实例保留现有的消息队列，而不是使用新的默认值：</p>
+<p><strong>消息队列限制</strong>：升级至 Milvus v3.0.5 时，必须保留当前的消息队列选择。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</p>
+<p>Milvus 2.6.x 及更高版本默认使用 Woodpecker，而 2.5.x 部署默认使用<strong>RocksMQ</strong>。如果您要升级的部署仍在使用 RocksMQ，请在更改 Milvus 镜像之前，通过 `<code translate="no">user.yaml</code> ` 将其固定，以便升级后的实例保留现有的消息队列，而不是使用新的默认设置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>当升级后的实例在 v3.0.3 上运行后，您可以使用<a href="/docs/zh/switch-mq-type.md">“切换消息队列”（Switch Message Queue</a>）功能从 RocksMQ 迁移至 Woodpecker，该功能在 Milvus 3.0 及更高版本中可用。</p>
+<p>当升级后的实例在 v3.0.5 上运行后，您可以使用 Milvus 3.0 及更高版本中提供的<a href="/docs/zh/switch-mq-type.md">“切换消息队列”</a>功能，将<a href="/docs/zh/switch-mq-type.md">消息队列</a>从 RocksMQ 迁移至 Woodpecker。</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">可选依赖项<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +219,7 @@ EOF
     </button></h2><p>在 Docker 中安装 Milvus 后，您可以：</p>
 <ul>
 <li><p>查看<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
-<li><p>了解 Milvus 的基本操作：</p>
+<li><p>学习 Milvus 的基本操作：</p>
 <ul>
 <li><a href="/docs/zh/manage_databases.md">管理数据库</a></li>
 <li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>

@@ -66,7 +66,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>請選擇以下其中一個終端機。請在可寫入的工作目錄中執行命令；該腳本會將配置檔案及<code translate="no">volumes</code> 目錄儲存於此處。</p>
-<p>此腳本下載自 Milvus 的<code translate="no">master</code> 分支。其 Docker 映像標籤在腳本中已定義，可能與 v3.0.3 不同。若要部署該特定版本，請使用下方的帶有版本標記的 Docker Compose 配置。</p>
+<p>此腳本從 Milvus 的<code translate="no">master</code> 分支下載。其 Docker 映像標籤在腳本中已定義，可能與 v3.0.5 不同。若要部署該特定版本，請使用下方的帶有版本標記的 Docker Compose 配置。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">透過 PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用 v3.0.3 版本隨附的設定檔。僅執行適用於您所用終端的指令序列。</p>
+    </button></h2><p>請使用 v3.0.5 版本隨附的設定檔。僅執行適用於您所用終端的指令序列。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">透過 PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>下載設定檔並啟動 Milvus：</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -193,7 +193,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>下載設定檔並啟動 Milvus：</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -213,7 +213,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>開啟您的 WSL 發行版，然後執行以下 Linux 指令：</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -256,7 +256,7 @@ docker compose ps
 <pre><code translate="no" class="language-powershell">wsl --version
 wsl --update
 </code></pre></li>
-<li><p>在 Docker Desktop 中啟用<strong>「使用基於 WSL 2 的引擎」</strong>。若 Docker 選單提供「<strong>切換至 Linux 容器</strong>」選項，請點選該選項。請勿為排除 Milvus Linux 映像檔的故障而切換至 Windows 容器。</p></li>
+<li><p>在 Docker Desktop 中啟用<strong>「使用基於 WSL 2 的引擎」</strong>。若 Docker 選單提供「<strong>切換至 Linux 容器</strong>」選項，請點選該選項。請勿切換至 Windows 容器來排除 Milvus Linux 映像檔的故障。</p></li>
 <li><p>在您用於安裝的終端機中執行以下檢查：</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>
@@ -340,7 +340,7 @@ wsl --update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Docker 中安裝 Milvus 後，請依照<a href="/docs/zh-hant/quickstart.md">《快速入門》</a>中的<strong>「使用現有 Milvus 伺服器路徑</strong>」步驟，並將 SDK 連線至<code translate="no">http://localhost:19530</code> 。此伺服器路徑無需 Milvus Lite；「<code translate="no">.db</code> 」的本地連線區塊會啟動獨立的本地資料庫，而非使用此容器。</p>
+    </button></h2><p>在 Docker 中安裝 Milvus 後，請依照<a href="/docs/zh-hant/quickstart.md">《快速入門》</a>中的<strong>「使用現有 Milvus 伺服器路徑</strong>」步驟，並將 SDK 連線至<code translate="no">http://localhost:19530</code> 。此伺服器路徑無需 Milvus Lite；本地端的<code translate="no">.db</code> 連線區塊會啟動獨立的本地資料庫，而非使用此容器。</p>
 <p>您也可以：</p>
 <ul>
 <li><p>查閱<a href="/docs/zh-hant/quickstart.md">《快速入門》</a>以了解 Milvus 的功能。</p></li>

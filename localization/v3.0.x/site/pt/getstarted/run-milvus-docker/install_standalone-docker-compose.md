@@ -56,9 +56,9 @@ title: Executar o Milvus com o Docker Compose (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus disponibiliza um ficheiro de configuração do Docker Compose no repositório do Milvus. Descarregue a configuração para a versão 3.0.3 e inicie uma nova implementação:</p>
+    </button></h2><p>O Milvus disponibiliza um ficheiro de configuração do Docker Compose no repositório do Milvus. Descarregue a configuração para a versão 3.0.5 e inicie uma nova implementação:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,7 +68,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Implantação padrão (v3.0.3):</strong> <code translate="no">docker compose up -d</code> inicia três contentores de execução prolongada — <code translate="no">milvus-etcd</code> (metadados), <code translate="no">milvus-minio</code> (armazenamento de objetos) e <code translate="no">milvus-standalone</code>. A fila de mensagens é <strong>o Woodpecker (incorporado, com o MinIO / armazenamento de objetos como backend WAL)</strong>, pelo que não é necessário um contentor separado para a fila de mensagens.</p>
+<p><strong>Implantação padrão (v3.0.5):</strong> <code translate="no">docker compose up -d</code> inicia três contentores de execução prolongada — <code translate="no">milvus-etcd</code> (metadados), <code translate="no">milvus-minio</code> (armazenamento de objetos) e <code translate="no">milvus-standalone</code>. A fila de mensagens é <strong>o Woodpecker (incorporado, com o MinIO / armazenamento de objetos como backend WAL)</strong>, pelo que não é necessário um contentor separado para a fila de mensagens.</p>
 <p>A configuração também executa o serviço «one-shot» <code translate="no">milvus-volume-init</code> para preparar a propriedade do diretório de dados. Este serviço encerra após concluir essa tarefa.</p>
 <p><strong>Fila de mensagens predefinida por versão:</strong></p>
 <ul>
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>Para uma implementação autónoma do Milvus 2.6.x, siga as instruções <a href="/docs/pt/upgrade_milvus_standalone-docker.md">em Atualizar o Milvus autónomo com o Docker Compose</a>. Faça uma cópia de segurança dos metadados e dos dados persistentes, preserve as dependências e a configuração existentes e valide o caminho de atualização documentado de origem para destino antes de alterar a imagem do Milvus. Não substitua o ficheiro Compose de uma implementação mais antiga pela configuração de nova instalação acima referida.</p>
-<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.3, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
+<p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.5, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p>
 <p>O Milvus 2.6.x e versões posteriores utilizam o Woodpecker por predefinição, enquanto as implementações 2.5.x utilizam <strong>o RocksMQ</strong> por predefinição. Se a implementação que está a atualizar ainda utilizar o RocksMQ, fixe-o em « <code translate="no">user.yaml</code> » antes de alterar a imagem do Milvus, para que a instância atualizada mantenha a sua fila de mensagens existente em vez de iniciar com a nova predefinição:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Depois de a instância atualizada estar a funcionar na v3.0.3, pode mudar do RocksMQ para o Woodpecker com a funcionalidade <a href="/docs/pt/switch-mq-type.md">«Switch Message Queue»</a>, disponível no Milvus 3.0 e versões posteriores.</p>
+<p>Depois de a instância atualizada estar a funcionar na v3.0.5, pode mudar do RocksMQ para o Woodpecker com a funcionalidade <a href="/docs/pt/switch-mq-type.md">«Switch Message Queue»</a>, disponível no Milvus 3.0 e versões posteriores.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">Dependências opcionais<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

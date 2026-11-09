@@ -2,13 +2,14 @@
 id: mmap.md
 title: Gunakan mmap
 summary: >-
-  Pemetaan memori (Mmap) memungkinkan akses memori langsung ke file besar di
-  disk, sehingga Milvus dapat menyimpan indeks dan data di memori dan hard
-  drive. Pendekatan ini membantu mengoptimalkan kebijakan penempatan data
-  berdasarkan frekuensi akses, memperluas kapasitas penyimpanan untuk koleksi
-  tanpa memengaruhi kinerja pencarian secara signifikan. Halaman ini membantu
-  Anda memahami bagaimana Milvus menggunakan mmap untuk memungkinkan penyimpanan
-  dan pengambilan data yang cepat dan efisien.
+  Pemetaan memori (Mmap) memungkinkan akses memori langsung ke berkas-berkas
+  berukuran besar di disk, sehingga Milvus dapat menyimpan indeks dan data baik
+  di memori maupun di hard drive. Pendekatan ini membantu mengoptimalkan
+  kebijakan penempatan data berdasarkan frekuensi akses, sekaligus memperluas
+  kapasitas penyimpanan untuk koleksi tanpa secara signifikan memengaruhi
+  kinerja pencarian. Halaman ini membantu Anda memahami bagaimana Milvus
+  menggunakan mmap untuk memungkinkan penyimpanan dan pengambilan data yang
+  cepat dan efisien.
 ---
 <h1 id="Use-mmap" class="common-anchor-header">Gunakan mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pemetaan memori (Mmap) memungkinkan akses memori langsung ke file besar di disk, sehingga Milvus dapat menyimpan indeks dan data di memori dan hard drive. Pendekatan ini membantu mengoptimalkan kebijakan penempatan data berdasarkan frekuensi akses, memperluas kapasitas penyimpanan untuk koleksi tanpa memengaruhi kinerja pencarian secara signifikan. Halaman ini membantu Anda memahami bagaimana Milvus menggunakan mmap untuk memungkinkan penyimpanan dan pengambilan data yang cepat dan efisien.</p>
+    </button></h1><p>Pemetaan memori (mmap) memungkinkan akses langsung ke memori untuk file berukuran besar di disk, sehingga Milvus dapat menyimpan indeks dan data baik di memori maupun di hard drive. Pendekatan ini membantu mengoptimalkan kebijakan penempatan data berdasarkan frekuensi akses, memperluas kapasitas penyimpanan untuk koleksi tanpa secara signifikan memengaruhi kinerja pencarian. Halaman ini membantu Anda memahami bagaimana Milvus menggunakan mmap untuk memungkinkan penyimpanan dan pengambilan data yang cepat dan efisien.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,15 +42,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menggunakan koleksi untuk mengatur penyematan vektor dan metadata mereka, dan setiap baris dalam koleksi mewakili sebuah entitas. Seperti yang ditunjukkan pada gambar kiri di bawah ini, bidang vektor menyimpan embedding vektor, dan bidang skalar menyimpan metadata mereka. Ketika Anda telah membuat indeks pada field tertentu dan memuat koleksi, Milvus akan memuat indeks yang telah dibuat dan data mentah field ke dalam memori.</p>
-<p>
+    </button></h2><p>Milvus menggunakan koleksi untuk mengatur embedding vektor dan metadata-nya, dan setiap baris dalam koleksi mewakili sebuah entitas. Seperti yang ditunjukkan pada gambar kiri di bawah ini, bidang vektor menyimpan embedding vektor, sedangkan bidang skalar menyimpan metadata-nya. Saat Anda telah membuat indeks pada bidang tertentu dan memuat koleksi, Milvus memuat indeks yang dibuat serta data mentah bidang ke dalam memori.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" />
-   </span> <span class="img-wrapper"> <span>Ilustrasi Mmap</span> </span></p>
-<p>Milvus adalah sistem basis data yang intensif memori, dan ukuran memori yang tersedia menentukan kapasitas koleksi. Memuat field yang berisi data dalam jumlah besar ke dalam memori tidak mungkin dilakukan jika ukuran data melebihi kapasitas memori, yang biasa terjadi pada aplikasi yang digerakkan oleh AI.</p>
-<p>Untuk mengatasi masalah tersebut, Milvus memperkenalkan mmap untuk menyeimbangkan pemuatan data panas dan data dingin dalam koleksi. Seperti yang ditunjukkan pada gambar kanan di atas, Anda dapat mengonfigurasi Milvus untuk memetakan memori data mentah di bidang tertentu alih-alih memuatnya secara penuh ke dalam memori. Dengan cara ini, Anda dapat memperoleh akses memori langsung ke field tanpa mengkhawatirkan masalah memori dan memperluas kapasitas koleksi.</p>
-<p>Dengan membandingkan prosedur penempatan data pada gambar kiri dan kanan, Anda dapat mengetahui bahwa penggunaan memori jauh lebih tinggi pada gambar kiri daripada gambar kanan. Dengan mmap diaktifkan, data yang seharusnya dimuat ke dalam memori akan dibuang ke dalam hard drive dan di-cache dalam cache halaman sistem operasi, sehingga mengurangi jejak memori. Namun demikian, kegagalan hit cache dapat mengakibatkan penurunan performa. Untuk detailnya, lihat <a href="https://en.wikipedia.org/wiki/Mmap">artikel ini</a>.</p>
-<p>Ketika Anda mengonfigurasi mmap pada Milvus, selalu ada prinsip yang harus Anda patuhi: Selalu simpan data dan indeks yang sering diakses secara penuh ke dalam memori dan gunakan mmap untuk data dan indeks yang tersisa.</p>
+   <img translate="no" src="/docs/v2.6.x/assets/mmap-illustrated.png" alt="Mmap Illustrated" class="doc-image" id="mmap-illustrated" /> 
+   <span>Ilustrasi mmap</span>
+  
+ </span></p>
+<p>Milvus adalah sistem basis data yang intensif memori, dan ukuran memori yang tersedia menentukan kapasitas suatu koleksi. Memuat bidang yang berisi volume data besar ke dalam memori tidak mungkin dilakukan jika ukuran data melebihi kapasitas memori, yang umumnya terjadi pada aplikasi berbasis AI.</p>
+<p>Untuk mengatasi masalah tersebut, Milvus memperkenalkan mmap guna menyeimbangkan pemuatan data "hot" dan "cold" dalam koleksi. Seperti yang ditunjukkan pada gambar di sebelah kanan di atas, Anda dapat mengonfigurasi Milvus untuk memetakan data mentah pada bidang-bidang tertentu ke memori alih-alih memuatnya sepenuhnya ke dalam memori. Dengan cara ini, Anda dapat memperoleh akses memori langsung ke bidang-bidang tersebut tanpa perlu khawatir tentang masalah memori dan memperluas kapasitas koleksi.</p>
+<p>Dengan membandingkan prosedur penempatan data pada gambar kiri dan kanan, Anda dapat menyimpulkan bahwa penggunaan memori pada gambar kiri jauh lebih tinggi daripada pada gambar kanan. Dengan mmap diaktifkan, data yang seharusnya dimuat ke dalam memori dialihkan ke hard drive dan disimpan dalam cache halaman sistem operasi, sehingga mengurangi penggunaan memori. Namun, kegagalan cache hit dapat mengakibatkan penurunan kinerja. Untuk detailnya, lihat <a href="https://en.wikipedia.org/wiki/Mmap">artikel ini</a>.</p>
+<p>Saat Anda mengonfigurasi mmap di Milvus, ada prinsip yang harus selalu Anda patuhi: Selalu jaga agar data dan indeks yang sering diakses tetap dimuat sepenuhnya ke dalam memori, dan gunakan mmap untuk data dan indeks di bidang-bidang lainnya.</p>
 <h2 id="Use-mmap-in-Milvus" class="common-anchor-header">Menggunakan mmap di Milvus<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,8 +68,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menyediakan pengaturan mmap secara hirarkis pada tingkat global, field, indeks, dan koleksi, di mana tingkat indeks dan field didahulukan daripada tingkat koleksi, dan tingkat koleksi daripada tingkat global.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">Pengaturan peta global<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus menyediakan pengaturan mmap hierarkis pada tingkat global, bidang, indeks, dan koleksi, di mana tingkat indeks dan bidang memiliki prioritas lebih tinggi daripada tingkat koleksi, dan tingkat koleksi lebih tinggi daripada tingkat global.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">Pengaturan mmap global<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,7 +84,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pengaturan tingkat klaster adalah pengaturan global dan memiliki prioritas terendah. Milvus menyediakan beberapa pengaturan terkait mmap di <code translate="no">milvus.yaml</code>. Pengaturan ini akan berlaku untuk semua koleksi di dalam cluster.</p>
+    </button></h3><p>Pengaturan tingkat klaster adalah pengaturan global dan memiliki prioritas terendah. Milvus menyediakan beberapa pengaturan terkait mmap di <code translate="no">milvus.yaml</code>. Pengaturan ini akan berlaku untuk semua koleksi di klaster.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -95,38 +98,38 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
-     <th><p>Mengonfigurasi Item</p></th>
+     <th><p>Konfigurasi Item</p></th>
      <th><p>Deskripsi</p></th>
      <th><p>Nilai Default</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
-     <td><p>Menentukan apakah akan memetakan data mentah dari semua bidang skalar ke dalam memori. Mengatur ini ke <code translate="no">true</code> akan membuat Milvus memetakan data mentah dari data bidang skalar koleksi ke dalam memori, alih-alih memuatnya secara penuh saat menerima permintaan muat terhadap koleksi ini.</p></td>
+     <td><p>Menentukan apakah data mentah dari semua bidang skalar akan dimapping ke memori. Mengatur ini ke <code translate="no">true</code> membuat Milvus memapping data mentah bidang skalar dari sebuah koleksi ke memori, alih-alih memuatnya sepenuhnya saat menerima permintaan pemuatan terhadap koleksi tersebut.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarIndex</code></p></td>
-     <td><p>Menentukan apakah akan memetakan semua indeks bidang skalar ke dalam memori. Mengatur ini ke <code translate="no">true</code> membuat Milvus memetakan indeks bidang skalar dari sebuah koleksi ke dalam memori alih-alih memuatnya secara penuh saat menerima permintaan pemuatan terhadap koleksi ini.</p><p>Saat ini, hanya bidang skalar yang menggunakan tipe indeks berikut yang didukung:</p><ul><li>INVERTED</li></ul></td>
+     <td><p>Menentukan apakah semua indeks bidang skalar akan dimapping ke memori. Mengatur nilai ini ke ` <code translate="no">true</code> ` membuat Milvus memetakan indeks bidang skalar dari suatu koleksi ke memori, alih-alih memuatnya sepenuhnya saat menerima permintaan pemuatan terhadap koleksi tersebut.</p><p>Saat ini, hanya bidang skalar yang menggunakan tipe indeks berikut yang didukung:</p><ul><li>INVERTED</li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorField</code></p></td>
-     <td><p>Menentukan apakah akan memetakan data mentah dari semua bidang vektor ke dalam memori. Mengatur ini ke <code translate="no">true</code> akan membuat Milvus memetakan data mentah dari data bidang vektor koleksi ke dalam memori, alih-alih memuatnya secara penuh saat menerima permintaan muat terhadap koleksi ini.</p></td>
+     <td><p>Menentukan apakah data mentah semua bidang vektor akan dimapping ke memori. Mengatur nilai ini ke ` <code translate="no">true</code> ` membuat Milvus memetakan data mentah bidang vektor dari suatu koleksi ke memori, alih-alih memuatnya sepenuhnya saat menerima permintaan pemuatan terhadap koleksi tersebut.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
-     <td><p>Menentukan apakah akan memetakan semua indeks bidang vektor ke dalam memori. Mengatur ini ke <code translate="no">true</code> akan membuat Milvus memetakan indeks bidang vektor dari sebuah koleksi ke dalam memori alih-alih memuatnya secara penuh saat menerima permintaan pemuatan terhadap koleksi ini.</p><p>Saat ini, hanya bidang vektor yang menggunakan jenis indeks berikut yang didukung:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>INDEKS_TERBALIK_JARANG</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p>Menentukan apakah semua indeks bidang vektor akan dimapping ke memori. Mengatur nilai ini ke ` <code translate="no">true</code> ` membuat Milvus memetakan indeks bidang vektor dari suatu koleksi ke memori, alih-alih memuatnya sepenuhnya saat menerima permintaan pemuatan terhadap koleksi tersebut.</p><p>Saat ini, hanya bidang vektor yang menggunakan jenis indeks berikut yang didukung:</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>SPARSE_INVERTED_INDEX</p></li><li><p>SPARSE_WAND</p></li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>Menentukan jalur ke file yang dipetakan dalam memori. Nilai default berlaku jika tidak ditentukan. </p><p>Penampung <code translate="no">localStorage.path</code> pada nilai default menunjukkan hard drive Milvus QueryNodes. Pastikan bahwa QueryNodes Anda memiliki hard drive berkinerja tinggi untuk mendapatkan keuntungan mmap yang optimal.</p></td>
+     <td><p>Menentukan jalur ke berkas yang dipetakan ke memori. Nilai default akan diterapkan jika parameter ini tidak ditentukan. </p><p>Tanda tempat " <code translate="no">localStorage.path</code> " dalam nilai default menunjukkan hard drive pada Milvus QueryNodes. Pastikan QueryNodes Anda dilengkapi dengan hard drive berkinerja tinggi untuk memaksimalkan manfaat pemetaan memori (mmap).</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
-<p>Untuk menerapkan pengaturan di atas pada cluster Milvus Anda, silakan ikuti langkah-langkah di <a href="/docs/id/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/v2.6.x/configure_operator.md">Konfigurasi Milvus dengan Operator Milvus</a>.</p>
-<p>Terkadang, pengaturan mmap global tidak fleksibel ketika menghadapi kasus penggunaan tertentu. Untuk menerapkan pengaturan alternatif pada koleksi tertentu atau indeksnya, pertimbangkan untuk mengonfigurasi mmap khusus untuk koleksi, bidang, atau indeks. Anda harus melepaskan dan memuat koleksi sebelum perubahan pada pengaturan mmap diterapkan.</p>
+<p>Untuk menerapkan pengaturan di atas ke kluster Milvus Anda, ikuti langkah-langkah dalam <a href="/docs/id/v2.6.x/configure-helm.md#Configure-Milvus-via-configuration-file">Konfigurasi Milvus dengan Helm</a> dan <a href="/docs/id/v2.6.x/configure_operator.md">Konfigurasi Milvus dengan Milvus Operators</a>.</p>
+<p>Terkadang, pengaturan mmap global tidak fleksibel saat menghadapi kasus penggunaan tertentu. Untuk menerapkan pengaturan alternatif ke koleksi tertentu atau indeksnya, pertimbangkan untuk mengonfigurasi mmap khusus untuk koleksi, bidang, atau indeks. Anda perlu merilis dan memuat koleksi sebelum perubahan pada pengaturan mmap berlaku.</p>
 <h3 id="Field-specific-mmap-settings" class="common-anchor-header">Pengaturan mmap khusus bidang<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -142,10 +145,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengonfigurasi mmap khusus bidang, Anda perlu menyertakan parameter <code translate="no">mmap_enabled</code> saat menambahkan bidang. Anda dapat mengaktifkan mmap pada bidang khusus ini dengan mengatur parameter ini ke <code translate="no">True</code>.</p>
-<p>Contoh berikut ini menunjukkan cara mengonfigurasi mmap khusus bidang ketika Anda menambahkan bidang.</p>
+    </button></h3><p>Untuk mengonfigurasi mmap khusus bidang, Anda perlu menyertakan parameter ` <code translate="no">mmap_enabled</code> ` saat menambahkan bidang. Anda dapat mengaktifkan mmap pada bidang spesifik ini dengan mengatur parameter ini ke ` <code translate="no">True</code>`.</p>
+<p>Contoh berikut menunjukkan cara mengonfigurasi mmap khusus bidang saat Anda menambahkan bidang.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -277,7 +285,7 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
         &quot;max_length&quot;: 512
     },
     &quot;isPrimary&quot;: true,
-    &quot;auto_id&quot;: false
+    &quot;autoId&quot;: false
 }&#x27;</span>
 
 <span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
@@ -331,9 +339,9 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Pertimbangkan untuk mengaktifkan mmap untuk bidang yang menyimpan data bervolume besar. Baik bidang skalar maupun bidang vektor didukung.</p>
+<p>Pertimbangkan untuk mengaktifkan mmap pada bidang yang menyimpan data dalam volume besar. Baik bidang skalar maupun bidang vektor didukung.</p>
 </div>
-<p>Kemudian, Anda dapat membuat koleksi menggunakan skema yang telah dibuat di atas. Setelah menerima permintaan untuk memuat koleksi, Milvus menggunakan memori-memetakan data mentah dari bidang <strong>doc_chunk</strong> ke dalam memori.</p>
+<p>Kemudian, Anda dapat membuat koleksi menggunakan skema yang dibuat di atas. Saat menerima permintaan untuk memuat koleksi, Milvus memetakan data mentah dari bidang ` <strong>doc_chunk</strong> ` ke dalam memori menggunakan `memory-maps`.</p>
 <h3 id="Index-specific-mmap-settings" class="common-anchor-header">Pengaturan mmap khusus indeks<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -349,10 +357,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengonfigurasi mmap khusus indeks, Anda harus menyertakan properti <code translate="no">mmap.enable</code> dalam parameter indeks ketika Anda menambahkan indeks. Anda dapat mengaktifkan mmap pada indeks khusus ini dengan mengatur properti ke <code translate="no">true</code>.</p>
-<p>Contoh berikut ini mendemonstrasikan cara mengonfigurasi mmap khusus indeks ketika Anda menambahkan indeks.</p>
+    </button></h3><p>Untuk mengonfigurasi mmap khusus indeks, Anda perlu menyertakan properti ` <code translate="no">mmap.enable</code> ` dalam parameter indeks saat menambahkan indeks. Anda dapat mengaktifkan mmap pada indeks khusus ini dengan mengatur properti tersebut ke ` <code translate="no">true</code>`.</p>
+<p>Contoh berikut menunjukkan cara mengonfigurasi mmap khusus indeks saat Anda menambahkan indeks.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a varchar field</span>
 schema.add_field(
     field_name=<span class="hljs-string">&quot;title&quot;</span>,
@@ -451,9 +464,9 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Hal ini berlaku untuk indeks bidang vektor dan skalar.</p>
+<p>Hal ini berlaku untuk indeks bidang vektor maupun skalar.</p>
 </div>
-<p>Kemudian Anda dapat mereferensikan parameter indeks di dalam koleksi. Setelah menerima permintaan untuk memuat koleksi, Milvus memetakan indeks bidang <strong>judul</strong> ke dalam memori.</p>
+<p>Kemudian, Anda dapat merujuk parameter indeks dalam sebuah koleksi. Saat menerima permintaan untuk memuat koleksi, Milvus memetakan indeks bidang <strong>judul</strong> ke dalam memori.</p>
 <h3 id="Collection-specific-mmap-settings" class="common-anchor-header">Pengaturan mmap khusus koleksi<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -469,10 +482,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mengonfigurasi strategi mmap seluruh koleksi, Anda harus menyertakan properti <code translate="no">mmap.enabled</code> dalam permintaan untuk membuat koleksi. Anda dapat mengaktifkan mmap untuk koleksi dengan mengatur properti ini ke <code translate="no">true</code>.</p>
-<p>Contoh berikut ini menunjukkan cara mengaktifkan mmap dalam koleksi bernama <strong>my_collection</strong> pada saat pembuatannya. Setelah menerima permintaan untuk memuat koleksi, Milvus akan memetakan data mentah dari semua field ke dalam memori.</p>
+    </button></h3><p>Untuk mengonfigurasi strategi mmap di seluruh koleksi, Anda perlu menyertakan properti ` <code translate="no">mmap.enabled</code> ` dalam permintaan untuk membuat koleksi. Anda dapat mengaktifkan mmap untuk sebuah koleksi dengan mengatur properti ini menjadi ` <code translate="no">true</code>`.</p>
+<p>Contoh berikut menunjukkan cara mengaktifkan mmap pada koleksi bernama <strong>`my_collection</strong> ` saat dibuat. Saat menerima permintaan untuk memuat koleksi, Milvus memetakan data mentah dari semua bidang ke dalam memori.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Enable mmap when creating a collection</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -508,9 +526,14 @@ client.createCollection(req);
     }
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda juga dapat mengubah pengaturan mmap dari koleksi yang sudah ada.</p>
+<p>Anda juga dapat mengubah pengaturan mmap pada koleksi yang sudah ada.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Release collection before change mmap settings</span>
 client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 
@@ -595,4 +618,4 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda perlu melepaskan koleksi untuk membuat perubahan pada propertinya dan memuat ulang koleksi untuk membuat perubahan berlaku.</p>
+<p>Anda perlu melepaskan koleksi tersebut untuk mengubah propertinya dan memuat ulang koleksi tersebut agar perubahan berlaku.</p>

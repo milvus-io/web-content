@@ -56,9 +56,9 @@ title: Docker Compose를 사용하여 Milvus 실행하기 (Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 Milvus 저장소에서 Docker Compose 구성 파일을 제공합니다. v3.0.3용 구성 파일을 다운로드하고 새로운 배포를 시작하십시오:</p>
+    </button></h2><p>Milvus는 Milvus 저장소에서 Docker Compose 구성 파일을 제공합니다. v3.0.5용 구성 파일을 다운로드하고 새로운 배포를 시작하십시오:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yaml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -68,7 +68,7 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>기본 배포(v3.0.3):</strong> <code translate="no">docker compose up -d</code> 는 <code translate="no">milvus-etcd</code> (메타데이터), <code translate="no">milvus-minio</code> (오브젝트 스토리지), <code translate="no">milvus-standalone</code> 등 세 개의 장기 실행 컨테이너를 시작합니다. 메시지 큐는 <strong>Woodpecker(임베디드형, WAL 백엔드로 MinIO/오브젝트 스토리지 사용)</strong>이므로 별도의 메시지 큐 컨테이너는 필요하지 않습니다.</p>
+<p><strong>기본 배포(v3.0.5):</strong> <code translate="no">docker compose up -d</code> 는 <code translate="no">milvus-etcd</code> (메타데이터), <code translate="no">milvus-minio</code> (오브젝트 스토리지), <code translate="no">milvus-standalone</code> 등 세 개의 장기 실행 컨테이너를 시작합니다. 메시지 큐는 <strong>Woodpecker(임베디드형, WAL 백엔드로 MinIO/오브젝트 스토리지 사용)</strong>이므로 별도의 메시지 큐 컨테이너는 필요하지 않습니다.</p>
 <p>또한 이 구성은 데이터 디렉터리의 소유권 설정을 준비하기 위해 일회성 <code translate="no">milvus-volume-init</code> 서비스를 실행합니다. 이 서비스는 해당 작업을 완료한 후 종료됩니다.</p>
 <p><strong>버전별 메시지 큐 기본값:</strong></p>
 <ul>
@@ -170,13 +170,13 @@ EOF
         ></path>
       </svg>
     </button></h2><p>Milvus 2.6.x 독립형 배포의 경우, <a href="/docs/ko/upgrade_milvus_standalone-docker.md">‘Docker Compose를 사용하여 Milvus 독립형 업그레이드’를</a> 따르십시오. 메타데이터와 영구 데이터를 백업하고, 기존 종속성과 구성을 보존하며, Milvus 이미지를 변경하기 전에 문서화된 소스에서 대상으로의 업그레이드 경로를 확인하십시오. 이전 배포의 Compose 파일을 위의 새 설치 구성으로 대체하지 마십시오.</p>
-<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
+<p><strong>메시지 큐 제한 사항</strong>: Milvus v3.0.5로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 서로 다른 메시지 큐 시스템 간 전환은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</p>
 <p>Milvus 2.6.x 이상은 기본적으로 Woodpecker를 사용하며, 2.5.x 배포 환경은 기본적으로 <strong>RocksMQ를</strong> 사용합니다. 업그레이드하려는 배포 환경에서 여전히 RocksMQ가 실행 중이라면, Milvus 이미지를 변경하기 전에 ` <code translate="no">user.yaml</code> `에서 이를 고정하여, 업그레이드된 인스턴스가 새로운 기본값으로 시작하는 대신 기존 메시지 큐를 유지하도록 하십시오.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># user.yaml — keep RocksMQ across the upgrade</span>
 <span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">rocksmq</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>업그레이드된 인스턴스가 v3.0.3에서 실행되고 나면, Milvus 3.0 이상에서 사용할 수 있는 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환(Switch Message Queue</a>)’ 기능을 통해 RocksMQ에서 Woodpecker로 전환할 수 있습니다.</p>
+<p>업그레이드된 인스턴스가 v3.0.5에서 실행되고 나면, Milvus 3.0 이상에서 사용할 수 있는 <a href="/docs/ko/switch-mq-type.md">‘메시지 큐 전환(Switch Message Queue</a>)’ 기능을 통해 RocksMQ에서 Woodpecker로 전환할 수 있습니다.</p>
 <h2 id="Optional-dependencies" class="common-anchor-header">선택적 종속성<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

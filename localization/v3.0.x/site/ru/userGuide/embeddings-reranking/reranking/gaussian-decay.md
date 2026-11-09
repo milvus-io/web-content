@@ -1,18 +1,19 @@
 ---
 id: gaussian-decay.md
-title: Гауссово распадениеCompatible with Milvus 2.6.x
+title: Гауссово затуханиеCompatible with Milvus 2.6.x
 summary: >-
-  Гауссово затухание, также известное как нормальное затухание, создает наиболее
-  естественную корректировку результатов поиска. Подобно человеческому зрению,
-  которое постепенно размывается с расстоянием, гауссово затухание создает
-  плавную, колоколообразную кривую, которая плавно снижает релевантность по мере
-  удаления элементов от вашей идеальной точки. Такой подход идеален, когда вам
-  нужно сбалансированное затухание, которое не будет сильно наказывать объекты,
-  находящиеся за пределами предпочтительного диапазона, но при этом значительно
-  снизит релевантность удаленных объектов.
+  Гауссово затухание, также известное как нормальное затухание, обеспечивает
+  наиболее естественную корректировку результатов поиска. Подобно человеческому
+  зрению, которое постепенно ухудшается с увеличением расстояния, гауссово
+  затухание формирует плавную колоколообразную кривую, которая плавно снижает
+  релевантность по мере удаления элементов от идеальной точки. Этот подход
+  идеально подходит, когда требуется сбалансированное затухание, которое не
+  наказывает слишком строго элементы, находящиеся чуть за пределами
+  предпочтительного диапазона, но при этом значительно снижает релевантность
+  более удаленных элементов.
 beta: Milvus 2.6.x
 ---
-<h1 id="Gaussian-Decay" class="common-anchor-header">Гауссово распадение<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
+<h1 id="Gaussian-Decay" class="common-anchor-header">Гауссово затухание<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Gaussian-Decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,13 +28,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Гауссово распадение, также известное как нормальное распадение, создает наиболее естественную корректировку результатов поиска. Подобно человеческому зрению, которое постепенно размывается с расстоянием, гауссово затухание создает плавную, колоколообразную кривую, которая плавно снижает релевантность по мере удаления объектов от вашей идеальной точки. Такой подход идеален, когда вам нужен сбалансированный распад, который не будет сильно наказывать объекты, находящиеся за пределами предпочтительного диапазона, но при этом значительно снизит релевантность удаленных объектов.</p>
-<p>В отличие от других ранжировщиков распада:</p>
+    </button></h1><p>Гауссово затухание, также известное как нормальное затухание, обеспечивает наиболее естественную корректировку результатов поиска. Подобно человеческому зрению, которое постепенно ухудшается с увеличением расстояния, гауссово затухание формирует плавную колоколообразную кривую, которая плавно снижает релевантность по мере удаления элементов от идеальной точки. Этот подход идеально подходит, когда требуется сбалансированное затухание, которое не наказывает слишком строго элементы, находящиеся чуть за пределами предпочтительного диапазона, но при этом значительно снижает релевантность более удаленных элементов.</p>
+<p>В отличие от других алгоритмов ранжирования с затуханием:</p>
 <ul>
-<li><p>Экспоненциальный распад сначала резко снижается, создавая более сильное начальное наказание.</p></li>
-<li><p>Линейный спад уменьшается с постоянной скоростью, пока не достигнет нуля, создавая четкую границу</p></li>
+<li><p>Экспоненциальный спад сначала резко падает, создавая более сильное начальное снижение релевантности</p></li>
+<li><p>Линейное затухание снижается с постоянной скоростью до достижения нуля, создавая четкую границу</p></li>
 </ul>
-<p>Гауссово распадение обеспечивает более сбалансированный, интуитивный подход, который кажется естественным для пользователей.</p>
+<p>Гауссово затухание обеспечивает более сбалансированный и интуитивный подход, который воспринимается пользователями как естественный.</p>
 <h2 id="When-to-use-Gaussian-decay" class="common-anchor-header">Когда использовать гауссово затухание<button data-href="#When-to-use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,35 +50,35 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Гауссово затухание особенно эффективно для:</p>
+    </button></h2><p>Гауссово затухание особенно эффективно в следующих случаях:</p>
 <table>
    <tr>
-     <th><p>Пример использования</p></th>
+     <th><p>Вариант использования</p></th>
      <th><p>Пример</p></th>
-     <th><p>Почему гауссово разложение хорошо работает</p></th>
+     <th><p>Почему гауссовый спад работает хорошо</p></th>
    </tr>
    <tr>
      <td><p>Поиск по местоположению</p></td>
-     <td><p>Поиск ресторанов, локаторы магазинов</p></td>
-     <td><p>Имитирует естественное человеческое восприятие релевантности расстояния</p></td>
+     <td><p>Поиск ресторанов, поиск магазинов</p></td>
+     <td><p>Имитирует естественное восприятие человеком значимости расстояния</p></td>
    </tr>
    <tr>
-     <td><p>Рекомендации по содержанию</p></td>
+     <td><p>Рекомендации по контенту</p></td>
      <td><p>Предложения статей на основе даты публикации</p></td>
      <td><p>Постепенное снижение релевантности по мере старения контента</p></td>
    </tr>
    <tr>
-     <td><p>Объявления о товарах</p></td>
-     <td><p>Товары, цены на которые близки к целевым</p></td>
-     <td><p>Плавное снижение релевантности по мере отклонения цены от целевой</p></td>
+     <td><p>Списки товаров</p></td>
+     <td><p>Товары, цена которых близка к целевой</p></td>
+     <td><p>Плавное снижение релевантности по мере отклонения цен от целевого значения</p></td>
    </tr>
    <tr>
-     <td><p>Подбор специалистов</p></td>
-     <td><p>Поиск профессионалов с соответствующим опытом</p></td>
+     <td><p>Соответствие профессиональной квалификации</p></td>
+     <td><p>Поиск специалистов с соответствующим опытом</p></td>
      <td><p>Сбалансированная оценка релевантности опыта</p></td>
    </tr>
 </table>
-<p>Если вашему приложению требуется естественное ощущение снижения релевантности без жестких наказаний или строгих отсечек, то лучшим выбором, скорее всего, станет гауссово распадение.</p>
+<p>Если вашему приложению требуется естественное снижение релевантности без резких штрафов или строгих пороговых значений, гауссово затухание, вероятно, станет вашим лучшим выбором.</p>
 <h2 id="Bell-curve-principle" class="common-anchor-header">Принцип колоколообразной кривой<button data-href="#Bell-curve-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,20 +94,22 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Гауссово затухание создает плавную, колоколообразную кривую, которая постепенно снижает релевантность по мере удаления от идеальной точки. Названное в честь математика Карла Фридриха Гаусса, это распределение часто встречается в природе и статистике, что объясняет, почему оно так интуитивно понятно для человеческого восприятия.</p>
-<p>
+    </button></h2><p>Гауссово затухание создает плавную кривую в форме колокола, которая постепенно снижает релевантность по мере увеличения расстояния от идеальной точки. Названное в честь математика Карла Фридриха Гаусса, это распределение часто встречается в природе и статистике, что объясняет, почему оно кажется столь интуитивно понятным для человеческого восприятия.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" />
-   </span> <span class="img-wrapper"> <span>Гауссово распадение</span> </span></p>
-<p>На графике выше показано, как гауссово затухание повлияет на рейтинг ресторанов в мобильном поисковом приложении:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/gaussian-decay.png" alt="Gaussian Decay" class="doc-image" id="gaussian-decay" /> 
+   <span>Гауссово затухание</span>
+  
+ </span></p>
+<p>На графике выше показано, как гауссово затухание повлияло бы на рейтинг ресторанов в мобильном поисковом приложении:</p>
 <ul>
-<li><p><code translate="no">origin</code> (0 км): Ваше текущее местоположение, где релевантность максимальна (1,0).</p></li>
-<li><p><code translate="no">offset</code> (±300 m): "Зона идеальной оценки" вокруг вас - все рестораны в радиусе 300 метров сохраняют полную оценку релевантности (1,0), гарантируя, что очень близкие варианты не будут подвергаться ненужному наказанию за крошечную разницу в расстоянии.</p></li>
-<li><p><code translate="no">scale</code> (±2 км): Расстояние, на котором релевантность снижается до значения распада - рестораны, расположенные на расстоянии ровно 2 км, получают вдвое меньше баллов релевантности (0,5).</p></li>
-<li><p><code translate="no">decay</code> (0.5): Оценка на расстоянии шкалы - этот параметр, по сути, управляет тем, как быстро снижаются оценки с расстоянием.</p></li>
+<li><p><code translate="no">origin</code> (0 км): ваше текущее местоположение, где релевантность максимальна (1,0).</p></li>
+<li><p><code translate="no">offset</code> (±300 м): «Зона идеального показателя» вокруг вас — все рестораны в радиусе 300 метров сохраняют максимальный показатель релевантности (1,0), что гарантирует, что ближайшие варианты не будут необоснованно наказаны за незначительные различия в расстоянии.</p></li>
+<li><p><code translate="no">scale</code> (±2 км): расстояние, на котором релевантность снижается до значения затухания — у ресторанов, расположенных ровно в 2 километрах, показатели релевантности уменьшаются вдвое (0,5).</p></li>
+<li><p><code translate="no">decay</code> (0,5): показатель на эталонном расстоянии — этот параметр, по сути, определяет, насколько быстро показатели снижаются с увеличением расстояния.</p></li>
 </ul>
-<p>Как видно из кривой, рестораны, расположенные дальше 2 км, продолжают снижать свою релевантность, но так и не достигают нуля. Даже рестораны, расположенные на расстоянии 4-5 км, сохраняют минимальную релевантность, что позволяет отличным, но удаленным ресторанам по-прежнему появляться в результатах (хотя и занимать более низкие места).</p>
-<p>Такое поведение имитирует естественное восприятие людьми релевантности расстояния - близлежащие заведения предпочтительнее, но мы готовы отправиться дальше, чтобы получить исключительные варианты.</p>
+<p>Как видно из кривой, релевантность ресторанов, расположенных дальше 2 км, продолжает снижаться, но никогда не опускается до нуля. Даже рестораны, находящиеся на расстоянии 4–5 километров, сохраняют минимальную релевантность, что позволяет отличным, но удаленным заведениям по-прежнему появляться в ваших результатах (хотя и с более низким рейтингом).</p>
+<p>Такое поведение имитирует естественное восприятие людьми значимости расстояния: предпочтение отдаётся близлежащим заведениям, но ради исключительных вариантов мы готовы проехать дальше.</p>
 <h2 id="Formula" class="common-anchor-header">Формула<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,20 +125,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Математическая формула для расчета показателя гауссова распада выглядит следующим образом:</p>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>d</mi><mi>o</mi><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>exp</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><msup><mrow><mo fence="true">(</mo><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mrow><mo fence="true">∣</mo><mi>f</mi><mi>i</mi><mi>e</mi><mi>l</mi><mi>d</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><msub><mi>e</mi><mrow><mi>d</mi><mi>o</mi><mi>c</mi></mrow></msub><mo>−</mo><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo fence="true">∣</mo></mrow><mo>−</mo><mi>o</mi><mi>f</mi><mi>f</mi><mi>s</mi><mi>e</mi><mi>t</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(doc) = \exp\left( -\frac{\left( \max\left(0, \left|fieldvalue_{doc} - origin\right| - offset \right) \right)^2}{2\sigma^2} \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">oc</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="mop">exp</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.631em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mop">max</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">∣</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">oc</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">in</span><span class="mclose delimcenter" style="top:0em;">∣</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.10764em;">ff</span><span class="mord mathnormal">se</span><span class="mord mathnormal">t</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></p>
+    </button></h2><p>Математическая формула для расчёта показателя гауссового затухания выглядит следующим образом:</p>
+<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>d</mi><mi>o</mi><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>exp</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mo>−</mo><mfrac><msup><mrow><mo fence="true">(</mo><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mn>0</mn><mo separator="true">,</mo><mrow><mo fence="true">∣</mo><mi>f</mi><mi>i</mi><mi>e</mi><mi>l</mi><mi>d</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><msub><mi>e</mi><mrow><mi>d</mi><mi>o</mi><mi>c</mi></mrow></msub><mo>−</mo><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi><mo fence="true">∣</mo></mrow><mo>−</mo><mi>o</mi><mi>f</mi><mi>f</mi><mi>s</mi><mi>e</mi><mi>t</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(doc) = \exp\left( -\frac{\left( \max\left(0, \left|fieldvalue_{doc} - origin\right| - offset \right) \right)^2}{2\sigma^2} \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">oc</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:3em;vertical-align:-1.25em;"></span><span class="mop">exp</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.631em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7401em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mop">max</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">∣</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">u</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">oc</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">in</span><span class="mclose delimcenter" style="top:0em;">∣</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal">se</span><span class="mord mathnormal">t</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.954em;"><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></p>
 <p>Где:</p>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mo>−</mo><mfrac><mrow><mi>s</mi><mi>c</mi><mi>a</mi><mi>l</mi><msup><mi>e</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mo>⋅</mo><mi>ln</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>d</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>y</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sigma^2 = -\frac{scale^2}{2 \cdot \ln(decay)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4271em;vertical-align:-0.936em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">ln</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">sc</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>Выражаясь простым языком:</p>
+<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mo>−</mo><mfrac><mrow><mi>s</mi><mi>c</mi><mi>a</mi><mi>l</mi><msup><mi>e</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mo>⋅</mo><mi>ln</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>d</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>y</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sigma^2 = -\frac{scale^2}{2 \cdot \ln(decay)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.4271em;vertical-align:-0.936em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">ln</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">sc</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>Разберем это простым языком:</p>
 <ol>
-<li><p>Вычислите, как далеко значение поля находится от начала: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣fieldvaluedoc-origin∣|fieldvalue_{doc}</mi></mrow></semantics></math></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">- origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">origin∣</span></span></span></span>.</p></li>
-<li><p>Вычтите смещение (если оно есть), но никогда не опускайтесь ниже нуля: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>расстояние-смещение</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\max <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(0, расстояние - смещение)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">расстояние</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">смещение</span><span class="mclose">)</span></span></span></span></p></li>
-<li><p>Возведите в квадрат это скорректированное расстояние: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>скорректированное_расстояние</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(скорректированное\расстояние)^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1241em;vertical-align:-0.31em;"></span><span class="mord mathnormal">(</span><span class="mord mathnormal">скорректированное_расстояние</span><span class="mclose"><span class="mclose">)</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2</p></li>
-<li><p>Разделите на <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2σ22\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">2σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span></span></span></span></span></span></span></span></span></span> 2, которая рассчитывается из параметров масштаба и распада.</p></li>
-<li><p>Возьмите отрицательную экспоненту, которая дает значение между 0 и 1: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>exp</mi><mo>(</mo><mi>-value</mi><mo stretchy="false">)</mo></mrow></semantics></math></span></span>\exp <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">(-value)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mord">(</span><span class="mord mathnormal">-value</span><span class="mclose">)</span></span></span></span>.</p></li>
+<li><p>Вычислите, на какое расстояние значение поля удалено от начала координат: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> ∣fieldvaluedoc−origin∣|fieldvalue_{doc} - origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight"></span></span></span></span></span><span class="vlist-s">doc​</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span><span class="mbin"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"> −</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex-base"><span class="mord mathnormal" style="margin-right:0.0278em;"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;"> </span><span class="mord">origin∣</span></span></span></span></p></li>
+<li><p>Вычесть смещение (если оно есть), но никогда не опускаться ниже нуля: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>distance−offset</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\max(0, distance - offset)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal"></span><span class="mord mathnormal">distance</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex-base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal"> </span><span class="mord mathnormal">offset</span><span class="mclose">)</span></span></span></span></p></li>
+<li><p>Возведите это скорректированное расстояние в квадрат: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>adjusted_distance</mi><msup><mo stretchy="false">)</mo><mn>²</mn></msup></mrow><annotation encoding="application/x-tex">(adjusted\_distance)^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.1241em;vertical-align:-0.31em;"></span><span class="mopen">(</span><span class="mord mathnormal">adjusted_distance</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p></li>
+<li><p>Разделить на <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2σ22\sigma^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8141em;"></span><span class="mord"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">2σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>, которое вычисляется на основе ваших параметров масштаба и затухания</p></li>
+<li><p>Возьмите отрицательную экспоненту, что даст вам значение от 0 до 1: <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>exp⁡</mo><mo stretchy="false">(</mo><mi>−value</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\exp(-value)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord mathnormal">−value</span><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p>Расчет <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex"> σ2\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> 2 преобразует ваши параметры масштаба и затухания в квадрат стандартного отклонения для гауссова распределения. Именно это придает функции характерную колоколообразную форму.</p>
-<h2 id="Use-Gaussian-decay" class="common-anchor-header">Использование гауссова затухания<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
+<p>Вычисление <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>σ2</mn></msup></mrow><annotation encoding="application/x-tex">\sigma^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> преобразует ваши параметры масштаба и затухания в квадрат стандартного отклонения для гауссова распределения. Именно это придаёт функции её характерную форму колокола.</p>
+<h2 id="Use-Gaussian-decay" class="common-anchor-header">Использование гауссового затухания<button data-href="#Use-Gaussian-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,11 +153,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Гауссово затухание можно применять как к стандартному векторному поиску, так и к гибридным операциям поиска в Milvus. Ниже приведены ключевые фрагменты кода для реализации этой функции.</p>
+    </button></h2><p>Гауссовое затухание можно применять как к стандартному векторному поиску, так и к гибридным операциям поиска в Milvus. Ниже приведены ключевые фрагменты кода для реализации этой функции.</p>
 <div class="alert note">
-<p>Прежде чем использовать функции распада, необходимо создать коллекцию с соответствующими числовыми полями (например, временными метками, расстояниями и т. д.), которые будут использоваться для расчетов распада. Полные рабочие примеры, включающие настройку коллекции, определение схемы и вставку данных, см. в разделе <a href="/docs/ru/tutorial-implement-a-time-based-ranking-in-milvus.md">Учебник: Реализация ранжирования по времени в Milvus</a>.</p>
+<p>Перед использованием функций затухания необходимо сначала создать коллекцию с соответствующими числовыми полями (такими как временные метки, расстояния и т. д.), которые будут использоваться для вычислений затухания. Полные рабочие примеры, включая настройку коллекции, определение схемы и вставку данных, см. в <a href="/docs/ru/tutorial-implement-a-time-based-ranking-in-milvus.md">руководстве «Реализация ранжирования по времени в Milvus</a>».</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">Создание ранжировщика распада<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">Создание рангера с затуханием<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -169,13 +172,21 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После того как коллекция настроена с числовым полем (в данном примере <code translate="no">distance</code> в метрах от пользователя), создайте ранжировщик с гауссовым распадом:</p>
+    </button></h3><p>После настройки коллекции с числовым полем (в данном примере — « <code translate="no">distance</code> » в метрах от пользователя) создайте ранжировщик с гауссовым затуханием:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 
 <span class="hljs-comment"># Create a Gaussian decay ranker for location-based restaurant search</span>
-ranker = Function(
+rerank = Function(
     name=<span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>,     <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;distance&quot;</span>],       <span class="hljs-comment"># Numeric field for distance in meters</span>
     function_type=FunctionType.RERANK,    <span class="hljs-comment"># Function type. Must be RERANK</span>
@@ -190,8 +201,9 @@ ranker = Function(
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
-<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> DecayRanker.builder()
         .name(<span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;distance&quot;</span>))
         .function(<span class="hljs-string">&quot;gauss&quot;</span>)
@@ -201,12 +213,46 @@ ranker = Function(
         .scale(<span class="hljs-number">2000</span>)
         .build();
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+
+rerank := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;distance&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;gauss&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;origin&quot;</span>, <span class="hljs-string">&quot;0&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;offset&quot;</span>, <span class="hljs-string">&quot;300&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;scale&quot;</span>, <span class="hljs-string">&quot;2000&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">rerank</span> = Function::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>)
+    .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Rerank)
+    .<span class="hljs-title function_ invoke__">input_fields</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-string">&quot;distance&quot;</span>])
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;gauss&quot;</span>)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;origin&quot;</span>, <span class="hljs-string">&quot;0&quot;</span>)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;offset&quot;</span>, <span class="hljs-string">&quot;300&quot;</span>)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-string">&quot;0.5&quot;</span>)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;scale&quot;</span>, <span class="hljs-string">&quot;2000&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> rerank = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::DecayRerank&gt;(<span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;distance&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">SetFunction</span>(<span class="hljs-string">&quot;gauss&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">SetOrigin</span>(<span class="hljs-number">0</span>);
+rerank-&gt;<span class="hljs-built_in">SetScale</span>(<span class="hljs-number">2000</span>);
+rerank-&gt;<span class="hljs-built_in">SetOffset</span>(<span class="hljs-number">300</span>);
+rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number">0.5</span>);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
-<span class="hljs-keyword">const</span> ranker = {
+<span class="hljs-keyword">const</span> rerank = {
   <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>,
   <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;distance&quot;</span>],
-  <span class="hljs-attr">function_type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
   <span class="hljs-attr">params</span>: {
     <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;decay&quot;</span>,
     <span class="hljs-attr">function</span>: <span class="hljs-string">&quot;gauss&quot;</span>,
@@ -216,11 +262,31 @@ ranker = Function(
     <span class="hljs-attr">scale</span>: <span class="hljs-number">2000</span>,
   },
 };
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
 
+<span class="hljs-comment">// Create a Gaussian decay ranker for location-based restaurant search</span>
+DecayRerank rerank = <span class="hljs-keyword">new</span> DecayRerank(<span class="hljs-string">&quot;restaurant_distance_decay&quot;</span>) <span class="hljs-comment">// Function identifier</span>
+    .WithInputField(<span class="hljs-string">&quot;distance&quot;</span>)                        <span class="hljs-comment">// Numeric field for distance in meters</span>
+    .WithFunction(<span class="hljs-string">&quot;gauss&quot;</span>)                             <span class="hljs-comment">// Choose Gaussian decay</span>
+    .WithOrigin(<span class="hljs-number">0</span>)                                     <span class="hljs-comment">// Your current location (0 meters)</span>
+    .WithOffset(<span class="hljs-number">300</span>)                                   <span class="hljs-comment">// 300m no-decay zone</span>
+    .WithDecay(<span class="hljs-number">0.5f</span>)                                   <span class="hljs-comment">// Half score at scale distance</span>
+    .WithScale(<span class="hljs-number">2000</span>);                                  <span class="hljs-comment">// 2 km scale (2000 meters)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash">rerank=<span class="hljs-string">&#x27;{
+  &quot;name&quot;: &quot;restaurant_distance_decay&quot;,
+  &quot;type&quot;: &quot;Rerank&quot;,
+  &quot;inputFieldNames&quot;: [&quot;distance&quot;],
+  &quot;params&quot;: {
+    &quot;reranker&quot;: &quot;decay&quot;,
+    &quot;function&quot;: &quot;gauss&quot;,
+    &quot;origin&quot;: 0,
+    &quot;offset&quot;: 300,
+    &quot;decay&quot;: 0.5,
+    &quot;scale&quot;: 2000
+  }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -237,9 +303,17 @@ ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Определив ранжировщик распада, вы можете применить его во время поисковых операций, передав его в параметр <code translate="no">ranker</code>:</p>
+    </button></h3><p>После определения рангера с затуханием вы можете применять его во время операций поиска, передавая его в параметр « <code translate="no">ranker</code> »:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to restaurant vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -247,39 +321,145 @@ result = milvus_client.search(
     anns_field=<span class="hljs-string">&quot;dense&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],  <span class="hljs-comment"># Fields to return</span>
-<span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
+<span class="highlighted-wrapper-line">    ranker=rerank,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.FunctionScore;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(COLLECTION_NAME)
-        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;italian restaurants&quot;</span>)))
-        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>}))) <span class="hljs-comment">// Replace with your query vector</span>
+        .annsField(<span class="hljs-string">&quot;dense&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>))
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)
                 .build())
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+results, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;restaurant_db&quot;</span>, <span class="hljs-number">10</span>,
+    []entity.Vector{entity.FloatVector{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>}}). <span class="hljs-comment">// Replace with your query vector</span>
+    WithANNSField(<span class="hljs-string">&quot;dense&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>).
+    WithFunctionReranker(rerank).
+    WithConsistencyLevel(entity.ClStrong))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">search_req</span> = SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;restaurant_db&quot;</span>)
+    .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;dense&quot;</span>)
+    .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1f32</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]]))
+    .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+    .<span class="hljs-title function_ invoke__">output_fields</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>])
+    .<span class="hljs-title function_ invoke__">rerank</span>(FunctionScore::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">add_function</span>(rerank))
+    .<span class="hljs-title function_ invoke__">consistency_level</span>(ConsistencyLevel::Strong)
+    .<span class="hljs-title function_ invoke__">build</span>()?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client.<span class="hljs-title function_ invoke__">search</span>(search_req).<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> function_score = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::FunctionScore&gt;();
+function_score-&gt;<span class="hljs-built_in">AddFunction</span>(rerank);
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(collection_name)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;dense&quot;</span>)
+                   .<span class="hljs-built_in">WithRerank</span>(function_score)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;name&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;cuisine&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;distance&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(your_query_vector)
+                   .<span class="hljs-built_in">WithConsistencyLevel</span>(milvus::ConsistencyLevel::STRONG);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: collection_name,
   <span class="hljs-attr">data</span>: [your_query_vector], <span class="hljs-comment">// Replace with your query vector</span>
   <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
   <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span>],
-  <span class="hljs-attr">rerank</span>: ranker,
+  <span class="hljs-attr">rerank</span>: rerank,
   <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>]; <span class="hljs-comment">// Replace with your query vector</span>
+
+<span class="hljs-comment">// Apply decay ranker to restaurant vector search</span>
+SearchResp resp = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;restaurant_db&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;dense&quot;</span>,
+    Vectors = [queryVector],
+    Limit = <span class="hljs-number">10</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;cuisine&quot;</span>, <span class="hljs-string">&quot;distance&quot;</span> },
+        FunctionScoreReranker = rerank,
+        ConsistencyLevel = ConsistencyLevel.Strong
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;restaurant_db&quot;,
+    &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4]],
+    &quot;annsField&quot;: &quot;dense&quot;,
+    &quot;limit&quot;: 10,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;cuisine&quot;, &quot;distance&quot;],
+    &quot;functionScore&quot;: {
+        &quot;functions&quot;: [
+            {
+                &quot;name&quot;: &quot;restaurant_distance_decay&quot;,
+                &quot;type&quot;: &quot;Rerank&quot;,
+                &quot;inputFieldNames&quot;: [&quot;distance&quot;],
+                &quot;params&quot;: {&quot;reranker&quot;: &quot;decay&quot;, &quot;function&quot;: &quot;gauss&quot;, &quot;origin&quot;: 0, &quot;offset&quot;: 300, &quot;decay&quot;: 0.5, &quot;scale&quot;: 2000}
+            }
+        ]
+    },
+    &quot;consistencyLevel&quot;: &quot;Strong&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

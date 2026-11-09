@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Preferisci invece una distribuzione in modalità standalone?</strong></p>
 <p>Se preferisci distribuire Milvus in modalità standalone (singolo nodo) per lo sviluppo o il test, utilizza questo comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Nota</strong>: la modalità autonoma utilizza Woodpecker come coda di messaggi predefinita e abilita il componente Streaming Node. Per ulteriori dettagli, consultare la <a href="/docs/it/v2.6.x/architecture_overview.md">Panoramica dell'architettura</a> e <a href="/docs/it/v2.6.x/use-woodpecker.md">Utilizzo di Woodpecker</a>.</p>
 </div>
 <p><strong>Distribuzione del cluster Milvus:</strong></p>
-<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.25, utilizzando Woodpecker come coda di messaggi consigliata:</p>
+<p>Il comando seguente distribuisce un cluster Milvus con impostazioni ottimizzate per la versione 2.6.26, utilizzando Woodpecker come coda di messaggi consigliata:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -149,7 +149,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <ul>
 <li>Utilizza <strong>Woodpecker</strong> come coda di messaggi (consigliato per ridurre la manutenzione)</li>
 <li>Abilita il nuovo componente <strong>Streaming Node</strong> per migliorare le prestazioni</li>
-<li>Disabilita il vecchio <strong>Index Node</strong> (la funzionalità è ora gestita dal Data Node)</li>
+<li>Disattiva il vecchio <strong>Index Node</strong> (la funzionalità è ora gestita dal Data Node)</li>
 <li>Disabilita Pulsar per utilizzare invece Woodpecker</li>
 </ul>
 <div class="alert note">
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Opzioni alternative per la coda dei messaggi:</strong></p>
 <p>Se si preferisce utilizzare <strong>Pulsar</strong> (scelta tradizionale) anziché Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ Il comando sopra riportato distribuisce Milvus con le configurazioni consigliate
     </button></h3><p>Verifica che la distribuzione sia andata a buon fine controllando lo stato dei pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Attendere che tutti i pod mostrino lo stato “Running”.</strong> Con la configurazione v2.6.25, dovresti vedere pod simili a:</p>
+<p><strong>Attendere che tutti i pod mostrino lo stato “Running”.</strong> Con la configurazione v2.6.26, dovresti vedere pod simili a:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -499,7 +499,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Dopo aver installato Milvus in Docker, puoi:</p>
 <ul>
-<li><p>Consultare la guida " <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> " per scoprire le funzionalità di Milvus.</p></li>
+<li><p>Consultare <a href="/docs/it/v2.6.x/quickstart.md">Hello Milvus</a> per scoprire le funzionalità di Milvus.</p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/v2.6.x/manage_databases.md">Gestire i database</a></li>

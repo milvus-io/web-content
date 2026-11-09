@@ -135,7 +135,7 @@ service/milvus-operator-controller-manager-metrics-service created
 service/milvus-operator-webhook-service created
 deployment.apps/milvus-operator-controller-manager created
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك التحقق مما إذا كان بود Milvus Operator قيد التشغيل على النحو التالي:</p>
+<p>يمكنك التحقق مما إذا كان pod Milvus Operator قيد التشغيل على النحو التالي:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -n milvus-operator</span>
 
 NAME                               READY   STATUS    RESTARTS   AGE
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>بمجرد تشغيل بود Milvus Operator، يمكنك نشر مجموعة Milvus على النحو التالي.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v3.0.3) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
+<p>يقوم الأمر أعلاه بنشر مجموعة Milvus باستخدام <strong>Woodpecker</strong> كقائمة انتظار الرسائل (موصى به للإصدار v3.0.5) وجميع المكونات المعمارية الجديدة بما في ذلك Streaming Node.</p>
 <p><strong>أبرز ميزات البنية في هذا النشر:</strong></p>
 <ul>
 <li><strong>قائمة انتظار الرسائل</strong>: <a href="/docs/ar/woodpecker.md">تستخدم Woodpecker</a> (تقلل من صيانة البنية التحتية)</li>
@@ -403,7 +403,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>البيانات الوصفية: <a href="/docs/ar/meta_storage_operator.md">تكوين etcd باستخدام Milvus Operator</a></li>
 </ul>
 <div class="alert note">
-<p>يتم تعطيل التخزين V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">التخزين V3</a>.</p>
+<p>يتم تعطيل Storage V3 افتراضيًا. قم بتمكينه قبل استخدام الميزات التي تعتمد عليه. للاطلاع على المتطلبات واعتبارات التوافق، راجع <a href="/docs/ar/storage-v3.md">Storage V3</a>.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

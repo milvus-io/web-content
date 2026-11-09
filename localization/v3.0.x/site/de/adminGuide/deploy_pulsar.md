@@ -21,10 +21,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus verwendet eine Nachrichtenwarteschlange, um Protokolle der letzten Änderungen zu verwalten, Stream-Protokolle auszugeben und Protokollabonnements bereitzustellen. Ab Milvus 3.0.x ist Woodpecker die standardmäßig empfohlene Nachrichtenwarteschlange; in diesem Thema wird erläutert, wie Sie Pulsar oder Kafka mit Docker Compose oder Helm konfigurieren.</p>
+    </button></h1><p>Milvus verwendet eine Nachrichtenwarteschlange zur Verwaltung von Protokollen der letzten Änderungen, zur Ausgabe von Stream-Protokollen und zur Bereitstellung von Protokollabonnements. Ab Milvus 3.0.x ist Woodpecker die standardmäßig empfohlene Nachrichtenwarteschlange; in diesem Thema wird erläutert, wie Sie Pulsar oder Kafka mit Docker Compose oder Helm konfigurieren.</p>
 <p>Sie können Pulsar mit <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> oder auf K8s konfigurieren und Kafka auf K8s einrichten.</p>
 <div class="alert note">
-<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.3 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
+<p><strong>Einschränkungen bei der Nachrichtenwarteschlange</strong>: Beim Upgrade auf Milvus v3.0.5 müssen Sie Ihre aktuelle Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Nachrichtenwarteschlangensystemen während des Upgrades wird nicht unterstützt. Die Unterstützung für den Wechsel des Nachrichtenwarteschlangensystems wird in zukünftigen Versionen verfügbar sein.</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">Pulsar mit Docker Compose konfigurieren<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -298,7 +298,7 @@ summary: >-
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>Ein Wechsel des Message-Stores wird nicht empfohlen. Wenn Sie dies dennoch tun möchten, stellen Sie zunächst alle DDL-Operationen ein, rufen Sie dann die FlushAll-API auf, um alle Sammlungen zu leeren, und beenden Sie schließlich Milvus, bevor Sie den Message-Store tatsächlich ändern.</p>
+<p>Ein Wechsel des Nachrichtenspeichers wird nicht empfohlen. Wenn Sie dies dennoch tun möchten, stellen Sie zunächst alle DDL-Operationen ein, rufen Sie dann die FlushAll-API auf, um alle Sammlungen zu leeren, und beenden Sie schließlich Milvus, bevor Sie den Nachrichtenspeicher tatsächlich ändern.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

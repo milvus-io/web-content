@@ -110,7 +110,7 @@ Quick start with `kubectl apply -f https://raw.githubusercontent.com/zilliztech/
 More samples can be found in https://github.com/zilliztech/milvus-operator/tree/main/config/samples
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 <button class="copy-code-btn"></button></code></pre>
-<p>Se já tiver instalado o Milvus Operator anteriormente, atualize-o utilizando o seguinte comando:</p>
+<p>Se já tiver instalado o Milvus Operator anteriormente, atualize-o utilizando o comando seguinte:</p>
 <pre><code translate="no" class="language-shell">helm upgrade milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
@@ -174,15 +174,15 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Assim que o pod do Milvus Operator estiver a funcionar, pode implementar um cluster do Milvus da seguinte forma.</p>
+    </button></h3><p>Assim que o pod do Milvus Operator estiver a funcionar, pode implementar um cluster Milvus da seguinte forma.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O comando acima implementa um cluster Milvus com <strong>o Woodpecker</strong> como fila de mensagens (recomendado para a v2.6.25) e todos os novos componentes arquitetónicos, incluindo o Streaming Node.</p>
+<p>O comando acima implementa um cluster Milvus com <strong>o Woodpecker</strong> como fila de mensagens (recomendado para a v2.6.26) e todos os novos componentes arquitetónicos, incluindo o Streaming Node.</p>
 <p><strong>Destaques da arquitetura nesta implementação:</strong></p>
 <ul>
 <li><strong>Fila de mensagens</strong>: <a href="/docs/pt/v2.6.x/use-woodpecker.md">utiliza o Woodpecker</a> (reduz a manutenção da infraestrutura)</li>
 <li><strong>Nó de streaming</strong>: ativado para um processamento de dados melhorado</li>
-<li><strong>Coordenador Mix</strong>: Componentes do coordenador consolidados para maior eficiência</li>
+<li><strong>Mix Coordinator</strong>: Componentes do coordenador consolidados para maior eficiência</li>
 </ul>
 <p>Para personalizar estas definições, recomendamos que utilize a <a href="https://milvus.io/tools/sizing">Ferramenta de Dimensionamento do Milvus</a> para ajustar as configurações com base no tamanho real dos seus dados e, em seguida, descarregue o ficheiro YAML correspondente. Para saber mais sobre os parâmetros de configuração, consulte <a href="https://milvus.io/docs/system_configuration.md">a Lista de Verificação de Configurações do Sistema Milvus</a>.</p>
 <div class="alert note">

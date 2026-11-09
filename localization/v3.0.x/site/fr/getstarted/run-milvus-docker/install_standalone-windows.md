@@ -67,8 +67,8 @@ docker compose version
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Choisissez l’un des terminaux suivants. Exécutez les commandes dans un répertoire de travail accessible en écriture ; le script y stocke les fichiers de configuration ainsi que le répertoire <code translate="no">volumes</code>.</p>
-<p>Le script est téléchargé depuis la branche « <code translate="no">master</code> » de Milvus. Le tag de son image Docker est défini dans le script et peut différer de la version v3.0.3. Pour déployer cette version précise, utilisez la configuration Docker Compose versionnée ci-dessous.</p>
+    </button></h2><p>Choisissez l’un des terminaux suivants. Exécutez les commandes dans un répertoire de travail accessible en écriture ; le script y stocke les fichiers de configuration et le répertoire <code translate="no">volumes</code>.</p>
+<p>Le script est téléchargé depuis la branche « <code translate="no">master</code> » de Milvus. Le tag de son image Docker est défini dans le script et peut différer de la version v3.0.5. Pour déployer cette version précise, utilisez la configuration Docker Compose versionnée ci-dessous.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Depuis PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ docker compose version
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilisez <code translate="no">curl.exe</code> pour télécharger le script ; la commande « <code translate="no">Invoke-WebRequest</code> » est une commande PowerShell et ne s'exécute pas dans l'invite de commandes :</p>
+    </button></h3><p>Utilisez <code translate="no">curl.exe</code> pour télécharger le script ; la commande <code translate="no">Invoke-WebRequest</code> est une commande PowerShell et ne s'exécute pas dans l'invite de commandes :</p>
 <pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.bat&quot; -o standalone.bat
 standalone.bat start
 </code></pre>
@@ -158,7 +158,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez la configuration jointe à la version v3.0.3. Exécutez uniquement la séquence de commandes correspondant à votre terminal.</p>
+    </button></h2><p>Utilisez la configuration jointe à la version v3.0.5. Exécutez uniquement la séquence de commandes correspondant à votre terminal.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">Depuis PowerShell<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -175,7 +175,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>Téléchargez la configuration et lancez Milvus :</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -195,7 +195,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Téléchargez la configuration et lancez Milvus :</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -215,7 +215,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>Ouvrez votre distribution WSL, puis exécutez les commandes Linux suivantes :</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -262,7 +262,7 @@ wsl --update
 <li><p>Exécutez la commande suivante dans le terminal que vous utilisez pour l’installation :</p>
 <pre><code translate="no" class="language-powershell">docker info --format &quot;{{.OSType}}&quot;
 </code></pre>
-<p>La commande doit renvoyer « <code translate="no">linux</code> ». Si elle ne parvient pas à se connecter au démon, suivez <a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/">les instructions de dépannage de Docker Desktop</a> avant de réexécuter le script Milvus. Le simple fait de lancer « <code translate="no">com.docker.service</code> » ne garantit pas que le moteur Linux WSL 2 est en cours d’exécution.</p></li>
+<p>La commande doit renvoyer « <code translate="no">linux</code> ». Si elle ne parvient pas à se connecter au démon, suivez <a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/">les instructions de dépannage de Docker Desktop</a> avant de réexécuter le script Milvus. Le simple fait de démarrer « <code translate="no">com.docker.service</code> » ne garantit pas que le moteur Linux WSL 2 est en cours d’exécution.</p></li>
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="common-anchor-header">Comment résoudre les problèmes liés à WSL lors du déploiement de Milvus ?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"

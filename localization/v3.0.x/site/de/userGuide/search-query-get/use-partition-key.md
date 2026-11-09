@@ -2,8 +2,8 @@
 id: use-partition-key.md
 title: Partitionsschlüssel verwenden
 summary: >-
-  Der Partitionsschlüssel ist eine Lösung zur Suchoptimierung auf Basis von
-  Partitionen. Indem ein bestimmtes Skalarfeld als Partitionsschlüssel
+  Der Partitionsschlüssel ist eine auf Partitionen basierende Lösung zur
+  Suchoptimierung. Indem ein bestimmtes Skalarfeld als Partitionsschlüssel
   festgelegt und bei der Suche Filterbedingungen auf Basis des
   Partitionsschlüssels angegeben werden, lässt sich der Suchbereich auf mehrere
   Partitionen eingrenzen, wodurch die Sucheffizienz verbessert wird. In diesem
@@ -105,7 +105,10 @@ summary: >-
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -173,18 +176,17 @@ schema.addField(AddFieldReq.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -208,22 +210,96 @@ schema.WithField(entity.NewField().
     WithDim(<span class="hljs-number">5</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+    .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64)
+            .<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">5</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;my_varchar&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+            .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">512</span>)
+            .<span class="hljs-title function_ invoke__">partition_key</span>(<span class="hljs-literal">true</span>), <span class="hljs-comment">// Add the partition key</span>
+    );
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;my_varchar&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithPartitionKey</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">512</span>));
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 <span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
 
-<span class="hljs-comment">// 3. Create a collection in customized setup mode</span>
-<span class="hljs-comment">// 3.1 Define fields</span>
+<span class="hljs-comment">// Define fields</span>
 <span class="hljs-keyword">const</span> fields = [
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;id&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+    <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;vector&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+    <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,
+  },
+  {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;my_varchar&#x27;</span>,
+    <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+    <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>,</span>
+  },
+];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> config = <span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+};
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(config);
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema
+{
+    Fields =
     {
-        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
-        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
-        <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>),
+        FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;vector&quot;</span>, dimension: <span class="hljs-number">5</span>),
+        <span class="hljs-comment">// Add the partition key</span>
+        FieldSchema.CreateVarchar(<span class="hljs-string">&quot;my_varchar&quot;</span>, maxLength: <span class="hljs-number">512</span>, isPartitionKey: <span class="hljs-literal">true</span>)
     }
-]
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -268,12 +344,15 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h3><p>Wenn Sie ein Skalarfeld in einer Sammlung als Partitionsschlüssel festlegen, erstellt Milvus automatisch 16 Partitionen in der Sammlung. Beim Empfang einer Entität wählt Milvus anhand des Partitionsschlüsselwerts dieser Entität eine Partition aus und speichert die Entität in dieser Partition, was dazu führt, dass einige oder alle Partitionen Entitäten mit unterschiedlichen Partitionsschlüsselwerten enthalten.</p>
-<p>Sie können auch die Anzahl der zu erstellenden Partitionen zusammen mit der Sammlung festlegen. Dies gilt nur, wenn Sie ein Skalarfeld als Partitionsschlüssel festgelegt haben.</p>
+<p>Sie können auch die Anzahl der zu erstellenden Partitionen zusammen mit der Sammlung festlegen. Dies ist nur möglich, wenn Sie ein Skalarfeld als Partitionsschlüssel festgelegt haben.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -299,11 +378,42 @@ schema.WithField(entity.NewField().
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">num_partitions</span>(<span class="hljs-number">128</span>)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">WithNumPartitions</span>(<span class="hljs-number">128</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">schema</span>: schema,
+    <span class="hljs-attr">fields</span>: fields,
     <span class="hljs-attr">num_partitions</span>: <span class="hljs-number">128</span>
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    NumPartitions = <span class="hljs-number">128</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
     &quot;partitionsNum&quot;: 128
@@ -338,14 +448,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bei der Durchführung von ANN-Suchen in einer Sammlung, bei der die Partitionsschlüssel-Funktion aktiviert ist, müssen Sie einen Filterausdruck, der den Partitionsschlüssel einbezieht, in die Suchanfrage aufnehmen. In diesem Filterausdruck können Sie den Wert des Partitionsschlüssels auf einen bestimmten Bereich beschränken, sodass Milvus den Suchbereich auf die entsprechenden Partitionen einschränkt.</p>
-<p>Bei Löschvorgängen empfiehlt es sich, einen Filterausdruck einzufügen, der einen einzelnen Partitionsschlüssel angibt, um eine effizientere Löschung zu erreichen. Dieser Ansatz beschränkt den Löschvorgang auf eine bestimmte Partition, wodurch die Schreibverstärkung während der Kompaktierung reduziert und Ressourcen für die Kompaktierung und Indizierung geschont werden.</p>
-<p>Die folgenden Beispiele veranschaulichen die partitionierungsschlüsselbasierte Filterung anhand eines bestimmten Partitionsschlüsselwerts und einer Menge von Partitionsschlüsselwerten.</p>
+    </button></h3><p>Bei der Durchführung von ANN-Suchen in einer Sammlung, bei der die Partitionsschlüssel-Funktion aktiviert ist, müssen Sie einen Filterausdruck, der den Partitionsschlüssel einbezieht, in die Suchanfrage aufnehmen. Im Filterausdruck können Sie den Wert des Partitionsschlüssels auf einen bestimmten Bereich beschränken, sodass Milvus den Suchbereich auf die entsprechenden Partitionen einschränkt.</p>
+<p>Bei Löschvorgängen empfiehlt es sich, einen Filterausdruck einzufügen, der einen einzelnen Partitionsschlüssel angibt, um eine effizientere Löschung zu erreichen. Dieser Ansatz beschränkt den Löschvorgang auf eine bestimmte Partition, reduziert die Schreibverstärkung während der Kompaktierung und schont Ressourcen für die Kompaktierung und Indizierung.</p>
+<p>Die folgenden Beispiele veranschaulichen die Partitionsschlüssel-basierte Filterung anhand eines bestimmten Partitionsschlüsselwerts und einer Menge von Partitionsschlüsselwerten.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
@@ -358,19 +471,37 @@ curl --request POST \
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
 <span class="hljs-comment">// Filter based on multiple partition key values</span>
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
-filter = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>
+filter := <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>
 
 <span class="hljs-comment">// Filter based on multiple partition key values</span>
 filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+
+<span class="hljs-comment">// Filter based on multiple partition key values</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
+std::string filter = <span class="hljs-string">R&quot;(partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;)&quot;</span>;
+
+<span class="hljs-comment">// Filter based on multiple partition key values</span>
+filter = <span class="hljs-string">R&quot;(partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 
 <span class="hljs-comment">// Filter based on multiple partition key values</span>
-<span class="hljs-keyword">const</span> filter = <span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
+filter = <span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
+
+<span class="hljs-comment">// Filter based on multiple partition key values</span>
+filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Filter based on a single partition key value, or</span>
 <span class="hljs-built_in">export</span> filter=<span class="hljs-string">&#x27;partition_key == &quot;x&quot; &amp;&amp; &lt;other conditions&gt;&#x27;</span>
@@ -397,7 +528,7 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
         ></path>
       </svg>
     </button></h3><p>Wir empfehlen, einen skalaren Index für das Partitionsschlüsselfeld anzulegen.</p>
-<p>Der Partitionsschlüssel grenzt eine Suche auf die Partitionen ein, die möglicherweise die passenden Partitionsschlüsselwerte enthalten. Da jede Partition jedoch in der Regel Entitäten mit vielen verschiedenen Partitionsschlüsselwerten enthält, wertet Milvus den Partitionsschlüssel-basierten Filter weiterhin für jede Entität in den durchsuchten Partitionen aus. Ohne einen skalaren Index für das Feld erfolgt diese Auswertung durch einen vollständigen Durchlauf der Feldwerte, was bei großen Sammlungen einen großen Teil der Suchlatenz ausmachen kann. Mit einem skalaren Index sucht Milvus stattdessen die passenden Entitäten im Index.</p>
+<p>Der Partitionsschlüssel grenzt eine Suche auf die Partitionen ein, die möglicherweise die passenden Partitionsschlüsselwerte enthalten. Da jede Partition jedoch in der Regel Entitäten mit vielen verschiedenen Partitionsschlüsselwerten enthält, wertet Milvus den auf dem Partitionsschlüssel basierenden Filter weiterhin für jede Entität in den durchsuchten Partitionen aus. Ohne einen skalaren Index für das Feld erfolgt diese Auswertung durch einen vollständigen Durchlauf der Feldwerte, was bei großen Sammlungen einen großen Teil der Suchlatenz ausmachen kann. Mit einem skalaren Index sucht Milvus stattdessen die passenden Entitäten im Index.</p>
 <p>Diese Auswertung erfolgt unabhängig vom Typ des Vektorindexes. Milvus kann Partitionsschlüsselwerte in Vektorindizes der HNSW-Familie einbetten, sodass eine nach dem Partitionsschlüssel gefilterte Suche nur die relevanten Teilindizes durchläuft; diese Optimierung schränkt jedoch lediglich den Vektordurchlauf ein – sie beseitigt nicht die Filterauswertung. Für Suchvorgänge, die ausschließlich nach skalaren Feldern filtern, gibt es keine entsprechende Abkürzung. In beiden Fällen sorgt ein skalarer Index auf dem Partitionsschlüsselfeld dafür, dass die Auswertung schnell bleibt.</p>
 <p>Wählen Sie den Indextyp basierend auf dem Partitionsschlüsselfeld aus:</p>
 <ul>
@@ -485,7 +616,10 @@ client.createIndex(CreateIndexReq.builder()
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(index_params)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
             &quot;fieldName&quot;: &quot;vector&quot;,
             &quot;metricType&quot;: &quot;COSINE&quot;,
@@ -525,7 +659,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In einem Multi-Tenancy-Szenario können Sie das Skalarfeld, das sich auf die Mandantenidentitäten bezieht, als Partitionsschlüssel festlegen und einen Filter basierend auf einem bestimmten Wert in diesem Skalarfeld erstellen. Um die Suchleistung in ähnlichen Szenarien weiter zu verbessern, führt Milvus die Funktion „Partition Key Isolation“ ein.</p>
+    </button></h2><p>Im Multi-Tenancy-Szenario können Sie das Skalarfeld, das sich auf Mandantenidentitäten bezieht, als Partitionsschlüssel festlegen und einen Filter basierend auf einem bestimmten Wert in diesem Skalarfeld erstellen. Um die Suchleistung in ähnlichen Szenarien weiter zu verbessern, führt Milvus die Funktion „Partition Key Isolation“ ein.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-isolation.png" alt="Partition Key Isolation" class="doc-image" id="partition-key-isolation" /> 
@@ -535,9 +669,9 @@ curl --request POST \
 <p>Wie in der obigen Abbildung dargestellt, gruppiert Milvus Entitäten anhand des Partitionsschlüsselwerts und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage ermittelt Milvus den Index anhand des in der Filterbedingung angegebenen Partitionsschlüsselwerts und beschränkt den Suchumfang auf die im Index enthaltenen Entitäten. Dadurch wird vermieden, dass während der Suche irrelevante Entitäten durchsucht werden, was die Suchleistung erheblich verbessert.</p>
 <p>Sobald Sie die Partitionsschlüssel-Isolation aktiviert haben, müssen Sie nur einen bestimmten Wert in den Partitionsschlüssel-basierten Filter aufnehmen, damit Milvus den Suchbereich auf die im Index enthaltenen Entitäten beschränken kann, die diesem Wert entsprechen.</p>
 <div class="alert note">
-<p>Derzeit gilt die Funktion „Partition-Key-Isolation“ nur für Suchvorgänge, bei denen der Indextyp auf „HNSW“ gesetzt ist.</p>
+<p>Derzeit gilt die Funktion „Partition-Key-Isolation“ nur für Suchvorgänge, bei denen der Index-Typ auf „HNSW“ gesetzt ist.</p>
 </div>
-<p>Die Partitionsschlüssel-Isolation ersetzt nicht den skalaren Index für das Partitionsschlüsselfeld. Der Partitionsschlüsselwert im Filter lokalisiert zwar den passenden Unterindex, Milvus wertet jedoch weiterhin den Filter selbst aus, um die passenden Entitäten zu identifizieren. Daher empfehlen wir, auch <a href="/docs/de/use-partition-key.md#Index-Partition-Key">den Partitionsschlüssel zu indizieren</a>.</p>
+<p>Die Partitionsschlüssel-Isolation ersetzt nicht den skalaren Index auf dem Partitionsschlüsselfeld. Der Partitionsschlüsselwert im Filter lokalisiert zwar den passenden Unterindex, aber Milvus wertet den Filter selbst weiterhin aus, um die passenden Entitäten zu identifizieren. Daher empfehlen wir, auch <a href="/docs/de/use-partition-key.md#Index-Partition-Key">den Partitionsschlüssel zu indizieren</a>.</p>
 <h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Partitionsschlüssel-Isolation aktivieren<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -558,7 +692,10 @@ curl --request POST \
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -587,12 +724,47 @@ client.createCollection(createCollectionReq);
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">properties</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([(
+            <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(),
+            <span class="hljs-string">&quot;true&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(),
+        )]))
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+)
+.<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                      .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                      .<span class="hljs-built_in">WithCollectionSchema</span>(schema)
+                                      .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
     <span class="hljs-attr">properties</span>: {
         <span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">true</span>
     }
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    Properties = { [<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>] = <span class="hljs-string">&quot;true&quot;</span> }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> params=<span class="hljs-string">&#x27;{
     &quot;partitionKeyIsolation&quot;: true

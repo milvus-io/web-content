@@ -66,7 +66,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Skrip ini diunduh dari cabang Milvus <code translate="no">master</code>. Tag gambar Docker-nya ditentukan dalam skrip dan dapat berbeda dari v3.0.3. Untuk menginstal rilis tersebut secara tepat, gunakan konfigurasi berversi di <a href="/docs/id/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>.</p>
+<p>Skrip tersebut diunduh dari cabang Milvus <code translate="no">master</code>. Tag gambar Docker-nya ditentukan dalam skrip dan dapat berbeda dari v3.0.5. Untuk menginstal rilis tersebut secara tepat, gunakan konfigurasi berversi di <a href="/docs/id/install_standalone-docker-compose.md">Jalankan Milvus dengan Docker Compose</a>.</p>
 <p>Deploymen Docker ini menjalankan <strong>Woodpecker</strong> dengan <strong>sistem file lokal</strong> sebagai backend WAL-nya, sehingga tidak diperlukan layanan antrian pesan eksternal. Lihat <a href="/docs/id/woodpecker.md">Woodpecker</a>.</p>
 <p>Jika Anda ingin menggunakan <a href="/docs/id/milvus_backup_overview.md">Backup</a> dalam mode penyebaran mandiri, disarankan untuk menggunakan metode penyebaran <a href="/docs/id/install_standalone-docker-compose.md">Docker Compose</a>.</p>
 <p>Jika Anda mengalami masalah saat menarik gambar, hubungi kami di <a href="mailto:community@zilliz.com">community@zilliz.com</a> dengan detail mengenai masalah tersebut, dan kami akan memberikan dukungan yang diperlukan.</p>
@@ -74,7 +74,7 @@ title: Menjalankan Milvus di Docker (Linux)
 <p>Setelah menjalankan skrip instalasi:</p>
 <ul>
 <li>Sebuah kontainer Docker bernama milvus-standalone telah dimulai pada port <strong>19530</strong>.</li>
-<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan berjalan di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
+<li>Embed etcd telah diinstal bersama Milvus di kontainer yang sama dan beroperasi di port <strong>2379</strong>. Berkas konfigurasinya dipetakan ke <strong>`embedEtcd.yaml</strong> ` di folder saat ini.</li>
 <li>Untuk mengubah konfigurasi Milvus default, tambahkan pengaturan Anda ke berkas <strong>user.yaml</strong> di folder saat ini, lalu mulai ulang layanan.</li>
 <li>Volume data Milvus dipetakan ke ` <strong>volumes/milvus</strong> ` di folder saat ini.</li>
 </ul>
@@ -125,8 +125,8 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Perintah ` <code translate="no">upgrade</code> ` pada skrip ini mengunduh skrip dari <code translate="no">master</code> dan membuat ulang kontainer menggunakan gambar yang dipilih oleh skrip tersebut. Perintah ini tidak memvalidasi jalur versi sumber-ke-tujuan yang didukung dan dapat membuat ulang berkas konfigurasi yang dihasilkan. Jangan anggap ini sebagai jaminan bahwa deployment versi lama sembarang dapat diperbarui dengan aman ke v3.0.3.</p>
-<p>Sebelum melakukan peningkatan versi, buat cadangan metadata, data persisten, <code translate="no">embedEtcd.yaml</code>, dan <code translate="no">user.yaml</code>. Periksa versi tujuan, antrian pesan, dan kompatibilitas penyimpanan, serta validasi pemulihan di lingkungan non-produksi. Untuk deployment yang dikelola dengan Docker Compose, ikuti <a href="/docs/id/upgrade_milvus_standalone-docker.md">panduan "Upgrade Milvus Standalone with Docker Compose</a>"; jangan terapkan prosedur tersebut secara langsung pada kontainer yang dikelola oleh skrip.</p>
+    </button></h2><p>Perintah ` <code translate="no">upgrade</code> ` pada skrip ini mengunduh skrip dari <code translate="no">master</code> dan membuat ulang kontainer menggunakan gambar yang dipilih oleh skrip tersebut. Perintah ini tidak memvalidasi jalur versi sumber ke tujuan yang didukung dan dapat membuat ulang berkas konfigurasi yang dihasilkan. Jangan anggap ini sebagai jaminan bahwa deployment versi lama apa pun dapat diperbarui dengan aman ke v3.0.5.</p>
+<p>Sebelum melakukan peningkatan versi, buat cadangan metadata, data persisten, <code translate="no">embedEtcd.yaml</code>, dan <code translate="no">user.yaml</code>. Periksa kompatibilitas versi tujuan, antrian pesan, dan penyimpanan, serta validasi pemulihan di lingkungan non-produksi. Untuk deployment yang dikelola dengan Docker Compose, ikuti <a href="/docs/id/upgrade_milvus_standalone-docker.md">panduan "Upgrade Milvus Standalone with Docker Compose</a>"; jangan terapkan prosedur tersebut secara langsung pada kontainer yang dikelola oleh skrip.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Hentikan dan hapus Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,7 +164,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Secara default, penyebaran ini menjalankan <strong>Woodpecker</strong> (WAL sistem file lokal) sebagai antrian pesan dan <strong>etcd tertanam</strong> untuk metadata — tidak ada yang perlu diinstal lagi. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek eksternal / metadata, lihat:</p>
+    </button></h2><p>Secara default, penyebaran ini menjalankan <strong>Woodpecker</strong> (WAL sistem file lokal) sebagai antrian pesan dan <strong>etcd tertanam</strong> untuk metadata — tidak perlu menginstal apa pun lagi. Untuk menggunakan antrian pesan yang berbeda atau menghubungkan penyimpanan objek eksternal / metadata, lihat:</p>
 <ul>
 <li>Antrian pesan: <a href="/docs/id/woodpecker.md">Woodpecker</a> (default) · <a href="/docs/id/mq_pulsar.md">Pulsar</a> · <a href="/docs/id/mq_kafka.md">Kafka</a> · <a href="/docs/id/mq_rocksmq.md">RocksMQ</a></li>
 <li>Penyimpanan objek: <a href="/docs/id/deploy_s3.md">MinIO</a> (default) · <a href="/docs/id/deploy_s3.md">AWS S3</a> · <a href="/docs/id/abs.md">Azure Blob</a> · <a href="/docs/id/gcs.md">GCP Cloud Storage</a> · <a href="/docs/id/deploy_s3.md">Aliyun OSS</a> · <a href="/docs/id/deploy_s3.md">Tencent COS</a> · <a href="/docs/id/deploy_s3.md">Huawei OBS</a> · <a href="/docs/id/deploy_s3.md">S3-compatible</a></li>
@@ -208,7 +208,7 @@ EOF
 <li><a href="/docs/id/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/id/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web yang intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
+<li><p>Jelajahi <a href="/docs/id/milvus-webui.md">Milvus WebUI</a>, antarmuka web intuitif untuk pemantauan dan pengelolaan Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/milvus_backup_overview.md">Milvus Backup</a>, alat sumber terbuka untuk pencadangan data Milvus.</p></li>
 <li><p>Jelajahi <a href="/docs/id/birdwatcher_overview.md">Birdwatcher</a>, alat sumber terbuka untuk debugging Milvus dan pembaruan konfigurasi dinamis.</p></li>
 <li><p>Jelajahi <a href="https://github.com/zilliztech/attu">Attu</a>, alat GUI sumber terbuka untuk pengelolaan Milvus yang intuitif.</p></li>

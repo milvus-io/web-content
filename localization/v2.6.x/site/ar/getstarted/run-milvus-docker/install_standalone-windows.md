@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن واختيار <strong>«تشغيل كمسؤول</strong>».​</p></li>
 <li><p>قم بتشغيل الأوامر التالية في PowerShell أو موجه أوامر Windows لتنزيل ملف تكوين Docker Compose لـ Milvus Standalone وتشغيل Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -203,7 +203,7 @@ Creating milvus-standalone ... done​
 <p>اعتمادًا على اتصالك بالشبكة، قد يستغرق تنزيل الصور الخاصة بتثبيت Milvus بعض الوقت. بمجرد تشغيل الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd،</strong> ستلاحظ أن​</p>
 <ul>
 <li><p>أن حاوية <strong>milvus-etcd</strong> لا تكشف أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>volumes/etcd</strong> في المجلد الحالي.​</p></li>
-<li><p>تقدم الحاوية <strong>milvus-minio</strong> المنافذ <strong>9090</strong> <strong>و9091</strong> محليًّا باستخدام بيانات اعتماد المصادقة الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/minio</strong> في المجلد الحالي.</p></li>
+<li><p>تقدم حاوية <strong>milvus-minio</strong> المنافذ <strong>9090</strong> <strong>و9091</strong> محليًّا باستخدام بيانات اعتماد المصادقة الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/minio</strong> في المجلد الحالي.</p></li>
 <li><p>تقدم حاوية <strong>milvus-standalone</strong> المنافذ <strong>19530</strong> محليًّا باستخدام الإعدادات الافتراضية وتقوم بتعيين بياناتها إلى <strong>volumes/milvus</strong> في المجلد الحالي.​</p></li>
 </ul></li>
 </ol>
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>قم بتنزيل ملف تكوين Milvus.​</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>قم بتشغيل Milvus.</p>

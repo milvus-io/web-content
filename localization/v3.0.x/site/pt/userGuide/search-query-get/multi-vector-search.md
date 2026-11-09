@@ -2,14 +2,14 @@
 id: multi-vector-search.md
 title: Pesquisa híbrida multivectorial
 summary: >-
-  Em muitas aplicações, é possível pesquisar um objeto através de um vasto
-  conjunto de informações, como o título e a descrição, ou utilizando várias
-  modalidades, tais como texto, imagens e áudio. Por exemplo, um tweet que
-  contenha um texto e uma imagem deve ser encontrado se o texto ou a imagem
+  Em muitas aplicações, um objeto pode ser pesquisado através de um vasto
+  conjunto de informações, tais como título e descrição, ou com várias
+  modalidades, como texto, imagens e áudio. Por exemplo, um tweet que contenha
+  um trecho de texto e uma imagem deve ser encontrado se o texto ou a imagem
   corresponderem à semântica da consulta de pesquisa. A pesquisa híbrida melhora
   a experiência de pesquisa ao combinar pesquisas nestes diversos campos. O
   Milvus suporta esta funcionalidade, permitindo a pesquisa em vários campos
-  vetoriais e realizando simultaneamente várias pesquisas do tipo «Vizinho Mais
+  vetoriais e realizando simultaneamente várias pesquisas de «Vizinho Mais
   Próximo Aproximado» (ANN). A pesquisa híbrida multivetorial é particularmente
   útil se pretender pesquisar tanto texto como imagens, vários campos de texto
   que descrevem o mesmo objeto ou vetores densos e esparsos para melhorar a
@@ -30,7 +30,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Em muitas aplicações, um objeto pode ser pesquisado através de um vasto conjunto de informações, tais como título e descrição, ou através de múltiplas modalidades, como texto, imagens e áudio. Por exemplo, um tweet que contenha um texto e uma imagem deve ser encontrado se o texto ou a imagem corresponderem à semântica da consulta de pesquisa. A pesquisa híbrida melhora a experiência de pesquisa ao combinar pesquisas nestes diversos campos. O Milvus suporta esta funcionalidade, permitindo a pesquisa em vários campos vetoriais e realizando simultaneamente várias pesquisas do tipo «Vizinho Mais Próximo Aproximado» (ANN). A pesquisa híbrida multivetorial é particularmente útil se pretender pesquisar tanto texto como imagens, vários campos de texto que descrevem o mesmo objeto ou vetores densos e esparsos para melhorar a qualidade da pesquisa.</p>
+    </button></h1><p>Em muitas aplicações, um objeto pode ser pesquisado através de um conjunto abrangente de informações, tais como título e descrição, ou com múltiplas modalidades, como texto, imagens e áudio. Por exemplo, um tweet que contenha um texto e uma imagem deve ser encontrado se o texto ou a imagem corresponderem à semântica da consulta de pesquisa. A pesquisa híbrida melhora a experiência de pesquisa ao combinar pesquisas nestes diversos campos. O Milvus suporta esta funcionalidade, permitindo a pesquisa em vários campos vetoriais e realizando simultaneamente várias pesquisas de «Vizinho Mais Próximo Aproximado» (ANN). A pesquisa híbrida multivectorial é particularmente útil se pretender pesquisar tanto texto como imagens, vários campos de texto que descrevem o mesmo objeto ou vetores densos e esparsos para melhorar a qualidade da pesquisa.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
@@ -39,8 +39,8 @@ summary: >-
  </span></p>
 <p>A pesquisa híbrida multivetorial integra diferentes métodos de pesquisa ou abrange representações de várias modalidades:</p>
 <ul>
-<li><p><strong>Pesquisa de vetores esparsos e densos</strong>: <a href="/docs/pt/dense-vector.md">os vetores densos</a> são excelentes para captar relações semânticas, enquanto <a href="/docs/pt/sparse_vector.md">os vetores esparsos</a> são altamente eficazes para a correspondência precisa de palavras-chave. A pesquisa híbrida combina estas abordagens para proporcionar tanto uma compreensão conceptual ampla como a relevância exata dos termos, melhorando assim os resultados da pesquisa. Ao tirar partido dos pontos fortes de cada método, a pesquisa híbrida supera as limitações das abordagens individuais, oferecendo um melhor desempenho para consultas complexas. Aqui está <a href="/docs/pt/full_text_search_with_milvus.md">um guia</a> mais detalhado sobre a recuperação híbrida que combina a pesquisa semântica com a pesquisa de texto completo.</p></li>
-<li><p><strong>Pesquisa vetorial multimodal</strong>: A pesquisa vetorial multimodal é uma técnica poderosa que permite pesquisar em vários tipos de dados, incluindo texto, imagens, áudio e outros. A principal vantagem desta abordagem é a sua capacidade de unificar diferentes modalidades numa experiência de pesquisa integrada e coesa. Por exemplo, na pesquisa de produtos, um utilizador pode introduzir uma consulta de texto para encontrar produtos descritos tanto por texto como por imagens. Ao combinar estas modalidades através de um método de pesquisa híbrida, é possível melhorar a precisão da pesquisa ou enriquecer os resultados da pesquisa.</p></li>
+<li><p><strong>Pesquisa de vetores esparsos e densos</strong>: <a href="/docs/pt/dense-vector.md">os vetores densos</a> são excelentes para captar relações semânticas, enquanto <a href="/docs/pt/sparse_vector.md">os vetores esparsos</a> são altamente eficazes para a correspondência precisa de palavras-chave. A pesquisa híbrida combina estas abordagens para proporcionar tanto uma compreensão conceptual ampla como a relevância exata dos termos, melhorando assim os resultados da pesquisa. Ao tirar partido dos pontos fortes de cada método, a pesquisa híbrida supera as limitações das abordagens individuais, oferecendo um melhor desempenho para consultas complexas. Aqui encontra <a href="/docs/pt/full_text_search_with_milvus.md">um guia</a> mais detalhado sobre a recuperação híbrida que combina a pesquisa semântica com a pesquisa de texto completo.</p></li>
+<li><p><strong>Pesquisa vetorial multimodal</strong>: A pesquisa vetorial multimodal é uma técnica poderosa que permite pesquisar em vários tipos de dados, incluindo texto, imagens, áudio e outros. A principal vantagem desta abordagem é a sua capacidade de unificar diferentes modalidades numa experiência de pesquisa integrada e coesa. Por exemplo, na pesquisa de produtos, um utilizador pode introduzir uma consulta de texto para encontrar produtos descritos tanto com texto como com imagens. Ao combinar estas modalidades através de um método de pesquisa híbrida, é possível melhorar a precisão da pesquisa ou enriquecer os resultados da pesquisa.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Exemplo<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,10 +60,10 @@ summary: >-
     </button></h2><p>Consideremos um caso de utilização do mundo real em que cada produto inclui uma descrição textual e uma imagem. Com base nos dados disponíveis, podemos realizar três tipos de pesquisas:</p>
 <ul>
 <li><p><strong>Pesquisa semântica de texto:</strong> isto envolve consultar a descrição textual do produto utilizando vetores densos. As incorporações de texto podem ser geradas utilizando modelos como <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">o BERT</a> e <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">o Transformers</a> ou serviços como <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">o OpenAI</a>.</p></li>
-<li><p><strong>Pesquisa de texto completo</strong>: aqui, pesquisamos a descrição textual do produto utilizando uma correspondência de palavras-chave com vetores esparsos. Para este efeito, podem ser utilizados algoritmos como <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">o BM25</a> ou modelos de incorporação esparsa, tais como <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">o BGE-M3</a> ou <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">o SPLADE</a>.</p></li>
-<li><p><strong>Pesquisa multimodal por imagem:</strong> Este método pesquisa a imagem através de uma consulta de texto com vetores densos. As incorporações de imagem podem ser geradas com modelos como <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">o CLIP</a>.</p></li>
+<li><p><strong>Pesquisa de texto completo</strong>: Aqui, consultamos a descrição textual do produto utilizando uma correspondência de palavras-chave com vetores esparsos. Para este efeito, podem ser utilizados algoritmos como <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">o BM25</a> ou modelos de incorporação esparsa, tais como <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">o BGE-M3</a> ou <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">o SPLADE</a>.</p></li>
+<li><p><strong>Pesquisa multimodal por imagem:</strong> Este método consulta a imagem utilizando uma consulta de texto com vetores densos. As incorporações de imagem podem ser geradas com modelos como <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">o CLIP</a>.</p></li>
 </ul>
-<p>Este guia irá guiá-lo através de um exemplo de pesquisa híbrida multimodal que combina os métodos de pesquisa acima referidos, partindo da descrição textual bruta e das incorporações de imagem dos produtos. Iremos demonstrar como armazenar dados multivetoriais e realizar pesquisas híbridas com uma estratégia de reclassificação.</p>
+<p>Este guia irá guiá-lo através de um exemplo de pesquisa híbrida multimodal que combina os métodos de pesquisa acima referidos, partindo da descrição textual bruta e das incorporações de imagens dos produtos. Iremos demonstrar como armazenar dados multivetoriais e realizar pesquisas híbridas com uma estratégia de reclassificação.</p>
 <h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">Criar uma coleção com vários campos vetoriais<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,14 +95,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para a pesquisa híbrida multivectorial, devemos definir vários campos vetoriais dentro de um esquema de coleção. Para obter detalhes sobre os limites relativos ao número de campos vetoriais permitidos numa coleção, consulte <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">os Limites da Zilliz Cloud</a>. No entanto, se necessário, pode ajustar o <a href="/docs/pt/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> para incluir até 10 campos vetoriais numa coleção, conforme necessário.</p>
+    </button></h3><p>Para a pesquisa híbrida multivetorial, devemos definir vários campos vetoriais no esquema de uma coleção. Para obter detalhes sobre os limites relativos ao número de campos vetoriais permitidos numa coleção, consulte <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">os Limites da Zilliz Cloud</a>. No entanto, se necessário, pode ajustar a <a href="/docs/pt/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> para incluir até 10 campos vetoriais numa coleção, conforme necessário.</p>
 <p>Este exemplo incorpora os seguintes campos no esquema:</p>
 <ul>
 <li><p><code translate="no">id</code>: Serve como chave primária para armazenar IDs de texto. Este campo é do tipo de dados ` <code translate="no">INT64</code>`.</p></li>
-<li><p><code translate="no">text</code>: Utilizado para armazenar conteúdo textual. Este campo é do tipo de dados « <code translate="no">VARCHAR</code> », com um comprimento máximo de 1 000 bytes. A opção « <code translate="no">enable_analyzer</code> » está definida como « <code translate="no">True</code> » para facilitar a pesquisa de texto completo.</p></li>
+<li><p><code translate="no">text</code>: Utilizado para armazenar conteúdo textual. Este campo é do tipo de dados « <code translate="no">VARCHAR</code> », com um comprimento máximo de 1000 bytes. A opção « <code translate="no">enable_analyzer</code> » está definida como « <code translate="no">True</code> » para facilitar a pesquisa de texto completo.</p></li>
 <li><p><code translate="no">text_dense</code>: Utilizado para armazenar vetores densos dos textos. Este campo é do tipo de dados ` <code translate="no">FLOAT_VECTOR</code> `, com uma dimensão de vetor de 768.</p></li>
-<li><p><code translate="no">text_sparse</code>: Utilizado para armazenar vetores esparsos dos textos. Este campo é do tipo de dados <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Utilizado para armazenar vetores densos das imagens dos produtos. Este campo é do tipo de dados ` <code translate="no">FLOAT_VETOR</code> `, com uma dimensão de vetor de 512.</p></li>
+<li><p><code translate="no">text_sparse</code>: Utilizado para armazenar vetores esparsos dos textos. Este campo é do tipo de dados « <code translate="no">SPARSE_FLOAT_VECTOR</code> ».</p></li>
+<li><p><code translate="no">image_dense</code>: Utilizado para armazenar vetores densos das imagens dos produtos. Este campo é do tipo de dados ` <code translate="no">FLOAT_VECTOR</code> `, com uma dimensão de vetor de 512.</p></li>
 </ul>
 <p>Uma vez que iremos utilizar o algoritmo BM25 integrado para realizar uma pesquisa de texto completo no campo de texto, é necessário adicionar o Milvus <code translate="no">Function</code> ao esquema. Para mais detalhes, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de Texto Completo</a>.</p>
 <div class="multipleCode">
@@ -382,9 +382,9 @@ schema-&gt;<span class="hljs-built_in">AddFunction</span>(function);
       </svg>
     </button></h3><p>Após definir o esquema da coleção, o próximo passo é configurar os índices vetoriais e especificar as métricas de similaridade. No exemplo apresentado:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>: é criado um índice do tipo « <code translate="no">AUTOINDEX</code> » com o tipo de métric <code translate="no">IP</code> » para o campo de vetor denso de texto.</p></li>
+<li><p><code translate="no">text_dense_index</code>: é criado um índice do tipo « <code translate="no">AUTOINDEX</code> » com o tipo de métrica « <code translate="no">IP</code> » para o campo de texto de vetor denso.</p></li>
 <li><p><code translate="no">text_sparse_index</code>: é utilizado um índice do tipo «<code translate="no">SPARSE_INVERTED_INDEX</code>» com o tipo de métrica « <code translate="no">BM25</code> » para o campo de vetores de texto esparso.</p></li>
-<li><p><code translate="no">image_dense_index</code>: é criado um índice do tipo « <code translate="no">AUTOINDEX</code> » com o tipo de métrica « <code translate="no">IP</code> » para o campo vetorial denso de imagens.</p></li>
+<li><p><code translate="no">image_dense_index</code>: é criado um índice do tipo « <code translate="no">AUTOINDEX</code> » com o tipo de métrica « <code translate="no">IP</code> » para o campo vetorial de imagem denso.</p></li>
 </ul>
 <p>Pode escolher outros tipos de índice, conforme necessário, para melhor se adequarem às suas necessidades e tipos de dados. Para mais informações sobre os tipos de índice suportados, consulte a documentação sobre <a href="/docs/pt/index-vector-fields.md">os tipos de índice disponíveis</a>.</p>
 <div class="multipleCode">
@@ -528,7 +528,7 @@ std::vector&lt;milvus::IndexDesc&gt; indexes = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Crie uma coleção com o nome « <code translate="no">demo</code> » com o esquema da coleção e os índices configurados nos dois passos anteriores.</p>
+    </button></h3><p>Crie uma coleção denominada « <code translate="no">demo</code> » com o esquema da coleção e os índices configurados nos dois passos anteriores.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -609,8 +609,8 @@ curl --request POST \
 <li><p><code translate="no">text_dense</code>: uma lista de 768 valores de ponto flutuante que representam a incorporação densa da descrição do texto</p></li>
 <li><p><code translate="no">image_dense</code>: uma lista de 512 valores de ponto flutuante que representam a incorporação densa da imagem do produto</p></li>
 </ul>
-<p>Pode utilizar modelos iguais ou diferentes para gerar incorporações densas para cada campo. Neste exemplo, as duas incorporações densas têm dimensões diferentes, o que sugere que foram geradas por modelos distintos. Ao definir cada pesquisa posteriormente, certifique-se de que utiliza o modelo correspondente para gerar a incorporação de consulta adequada.</p>
-<p>Uma vez que este exemplo utiliza a função BM25 incorporada para gerar incorporações esparsas a partir do campo de texto, não é necessário fornecer vetores esparsos manualmente. No entanto, se optar por não utilizar o BM25, terá de pré-calcular e fornecer as incorporações esparsas por si próprio.</p>
+<p>Pode utilizar modelos iguais ou diferentes para gerar representações densas para cada campo. Neste exemplo, as duas representações densas têm dimensões diferentes, o que sugere que foram geradas por modelos diferentes. Ao definir cada pesquisa posteriormente, certifique-se de que utiliza o modelo correspondente para gerar a representação de consulta adequada.</p>
+<p>Uma vez que este exemplo utiliza a função BM25 integrada para gerar incorporações esparsas a partir do campo de texto, não é necessário fornecer vetores esparsos manualmente. No entanto, se optar por não utilizar o BM25, terá de pré-calcular e fornecer as incorporações esparsas por si próprio.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -793,13 +793,13 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
         ></path>
       </svg>
     </button></h3><p>A Pesquisa Híbrida é implementada através da criação de várias instâncias de ` <code translate="no">AnnSearchRequest</code> ` na função ` <code translate="no">hybrid_search()</code> `, em que cada ` <code translate="no">AnnSearchRequest</code> ` representa um pedido de pesquisa ANN básico para um campo vetorial específico. Por conseguinte, antes de realizar uma Pesquisa Híbrida, é necessário criar uma instância de ` <code translate="no">AnnSearchRequest</code> ` para cada campo vetorial.</p>
-<p>Além disso, ao configurar o parâmetro <code translate="no">expr</code> numa <code translate="no">AnnSearchRequest</code>, pode definir as condições de filtragem para a sua pesquisa híbrida. Consulte <a href="/docs/pt/filtered-search.md">«Pesquisa Filtrada</a> » e <a href="/docs/pt/boolean.md">«Explicação da Filtragem</a>».</p>
+<p>Além disso, ao configurar o parâmetro <code translate="no">expr</code> num <code translate="no">AnnSearchRequest</code>, pode definir as condições de filtragem para a sua pesquisa híbrida. Consulte <a href="/docs/pt/filtered-search.md">«Pesquisa Filtrada</a> » e <a href="/docs/pt/boolean.md">«Explicação da Filtragem</a>».</p>
 <div class="alert note">
-<p>Na Pesquisa Híbrida, cada « <code translate="no">AnnSearchRequest</code> » suporta apenas um conjunto de dados de consulta.</p>
+<p>Na Pesquisa Híbrida, cada <code translate="no">AnnSearchRequest</code> suporta apenas um conjunto de dados de consulta.</p>
 </div>
 <p>Para demonstrar as capacidades de vários campos vetoriais de pesquisa, iremos construir três pedidos de pesquisa « <code translate="no">AnnSearchRequest</code> » utilizando uma consulta de exemplo. Iremos também utilizar os seus vetores densos pré-calculados para este processo. Os pedidos de pesquisa terão como alvo os seguintes campos vetoriais:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> para a pesquisa semântica de texto, permitindo a compreensão contextual e a recuperação com base no significado, em vez da correspondência direta de palavras-chave;</p></li>
+<li><p><code translate="no">text_dense</code> para pesquisa semântica de texto, permitindo a compreensão contextual e a recuperação com base no significado, em vez da correspondência direta de palavras-chave;</p></li>
 <li><p><code translate="no">text_sparse</code>para pesquisa de texto completo ou correspondência de palavras-chave, com foco em correspondências exatas de palavras ou frases dentro do texto.</p></li>
 <li><p><code translate="no">image_dense</code>para pesquisa multimodal de texto para imagem, para recuperar imagens de produtos relevantes com base no conteúdo semântico da consulta.</p></li>
 </ul>
@@ -978,7 +978,7 @@ sub_req<span class="hljs-number">3.</span><span class="hljs-built_in">AddExtraPa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para fundir e reordenar os conjuntos de resultados de pesquisa da ANN, é essencial selecionar uma estratégia de reordenação adequada. O Milvus oferece vários tipos de estratégias de reordenação. Para mais detalhes sobre estes mecanismos de reordenação, consulte o <a href="/docs/pt/weighted-ranker.md">«Weighted Ranker</a> » ou <a href="/docs/pt/rrf-ranker.md">o «RRF Ranker</a>».</p>
+    </button></h3><p>Para fundir e reclassificar os conjuntos de resultados de pesquisa da ANN, é essencial selecionar uma estratégia de reclassificação adequada. O Milvus oferece vários tipos de estratégias de reclassificação. Para mais detalhes sobre estes mecanismos de reclassificação, consulte o <a href="/docs/pt/weighted-ranker.md">«Weighted Ranker</a> » ou <a href="/docs/pt/rrf-ranker.md">o «RRF Ranker</a>».</p>
 <p>Neste exemplo, uma vez que não há ênfase particular em consultas de pesquisa específicas, iremos avançar com a estratégia RRFRanker.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

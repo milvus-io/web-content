@@ -60,7 +60,7 @@ summary: 了解如何使用 Milvus Operator 配置消息存储。
 </ul></li>
 <li>Milvus 系统运行期间无法更改消息存储。</li>
 <li>仅支持 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级至 Milvus v2.6.25 时，必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</li>
+<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级至 Milvus v2.6.26 时，必须保留当前选择的消息队列。升级过程中不支持在不同的消息队列系统之间切换。未来版本将支持更改消息队列系统。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">配置 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -312,7 +312,7 @@ summary: 了解如何使用 Milvus Operator 配置消息存储。
         <span class="hljs-comment"># ...</span>
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>Operator v0.8.5 或更高版本支持 SASL 配置。</p>
+<p>Operator v0.8.5 及更高版本支持 SASL 配置。</p>
 </blockquote>
 <h3 id="Internal-Kafka" class="common-anchor-header">内部 Kafka<button data-href="#Internal-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"

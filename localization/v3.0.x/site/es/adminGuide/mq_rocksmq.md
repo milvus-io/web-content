@@ -150,7 +150,7 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0.3, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
+<li><strong>Actualización de la versión 2.5.x a la 2.6.x:</strong> <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v3.0.5, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.
 Dado que la versión 2.6.x cambia la configuración predeterminada para la versión independiente a Woodpecker, fije <code translate="no">mq.type: rocksmq</code> en su archivo <code translate="no">user.yaml</code> <strong>antes de</strong> actualizar si desea conservar RocksMQ.</li>
 <li>Para cambiar la cola de mensajes de una instancia en ejecución, consulta <a href="/docs/es/switch-rocksmq-woodpecker.md">«Cambiar de RocksMQ a Woodpecker</a>».</li>
 </ul>

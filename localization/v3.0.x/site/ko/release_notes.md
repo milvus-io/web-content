@@ -19,6 +19,197 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 확인해 보세요! 이 페이지에서는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항을 요약하여 제공합니다. 업데이트 내용을 확인하려면 이 페이지를 정기적으로 방문하시기 바랍니다.</p>
+<h2 id="v305" class="common-anchor-header">v3.0.5<button data-href="#v305" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>출시일: 2026년 10월 30일</p>
+<table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Node.js SDK 버전</th><th>Java SDK 버전</th><th>Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>3.0.5</td><td>3.0.2</td><td>3.0.6</td><td>3.0.12</td><td>3.0.0</td></tr>
+</tbody>
+</table>
+<p>Milvus v3.0.5의 출시를 발표하게 되어 기쁩니다! 이번 릴리스에서는 QueryCoord에 리소스 그룹을 고려한 로드 상태가 추가되었으며, 여러 경로에서 메모리 사용량이 감소했습니다. 또한 코디네이터 재시작, 롤링 업그레이드 및 일시적인 etcd 오류와 관련된 안정성 문제도 수정되었습니다.</p>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>QueryCoord에 리소스 그룹별 부하 비율 및 샤드 리더 준비 상태를 추가하고, 각 샤드 리더에 해당 레플리카의 리소스 그룹을 태그하여 쿼리가 단일 리소스 그룹 내에서 라우팅될 수 있도록 했습니다(<a href="https://github.com/milvus-io/milvus/pull/52500">#52500</a>, <a href="https://github.com/milvus-io/milvus/pull/52711">#52711</a>)</li>
+<li>디코딩된 포스팅 블록을 직접 차용하여, 점수가 매겨지지 않은 Tantivy 용어 쿼리에서 복사 작업을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54469">#54469</a>)</li>
+<li>Knowhere를 v3.0.17로 업그레이드하고, Knowhere API 뒤에서 null이 허용되는 벡터 오프셋 매핑을 처리하도록 변경했습니다(<a href="https://github.com/milvus-io/milvus/pull/54473">#54473</a>)</li>
+<li>요청별 인코딩 버퍼를 재사용하여 일괄 처리된 RESTful 쿼리 및 검색 응답을 인코딩할 때 메모리 할당량을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54540">#54540</a>).</li>
+<li>분석기 필터에서 컴파일된 정규식 및 필터별 검색 캐시를 재사용하여 텍스트 분석기 성능 개선 (<a href="https://github.com/milvus-io/milvus/pull/54570">#54570</a>)</li>
+<li>압축 쓰기 증폭을 줄이기 위해 선택적 2단계 혼합 압축 플래너(<code translate="no">dataCoord.compaction.twoTierCompaction</code>, 기본값: 꺼짐)를 추가했습니다(<a href="https://github.com/milvus-io/milvus/pull/54589">#54589</a>)</li>
+<li>작은 씰된 세그먼트를 로드할 때 타임스탬프 인덱스의 메모리 사용량을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54659">#54659</a>)</li>
+<li>실패한 <code translate="no">get</code> 작업에 대해 <code translate="no">internal_storage_op_count</code> 메트릭에 누락되었던 <code translate="no">status=&quot;fail&quot;</code> 레이블을 추가했습니다. 기존 레이블이 없는 시리즈는 중단되고, 새로운 시리즈는 0부터 시작합니다(<a href="https://github.com/milvus-io/milvus/pull/54637">#54637</a>)</li>
+<li>파티션의 명명 규칙과 일치하도록 리소스 그룹 이름에서 첫 번째 문자 이후 하이픈 사용 허용 (<a href="https://github.com/milvus-io/milvus/pull/54679">#54679</a>)</li>
+<li>레코드 간 출력 열을 재사용하여 압축 병합 정렬 시 메모리 할당량을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54718">#54718</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>구조체 배열 필드가 있는 컬렉션이 첫 번째 검색 시 또는 캐시 제거 후 원시 임베딩 목록 벡터를 강제 로드하여 메모리 사용량과 쿼리 지연 시간을 증가시키는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54167">#54167</a>).</li>
+<li>CMEK가 활성화된 컬렉션에 대한 업서트(upsert)가 삭제 부분(기본 키 및 타임스탬프)을 암호화하지 않고 WAL에 기록하던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54478">#54478</a>).</li>
+<li><code translate="no">ST_DWITHIN</code> 필터가 RTREE 인덱스가 있는 세그먼트에서 인덱스가 없는 세그먼트보다 더 적은 행을 반환하던 문제를 수정했습니다. 이제 빈 지오메트리는 PostGIS와 일관되게 <code translate="no">ST_DWITHIN</code> 와 일치하지 않습니다(<a href="https://github.com/milvus-io/milvus/pull/54611">#54611</a>).</li>
+<li>코디네이터 재시작 후 다음 플러시가 커밋된 매니페스트와 충돌하는 컬럼 레이아웃을 사용하여 Storage V3 세그먼트에 대한 쓰기 작업이 중단되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54652">#54652</a>)</li>
+<li>QueryNode가 다른 컬렉션과 물리적 채널을 공유하던 삭제된 데이터베이스의 암호화된 WAL 메시지를 재현하는 동안 패닉 상태에 빠지는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54640">#54640</a>).</li>
+<li>필드가 생략되고 배치에 새로운 기본 키가 포함된 경우, null이 허용되는 구조체 배열 필드가 있는 컬렉션에서 부분 업서트가 실패하던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54619">#54619</a>)</li>
+<li>인덱스 상태를 조회하는 중에 파티션이 삭제되면 인덱스 상태가 'Failed'로 잘못 보고되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54670">#54670</a>).</li>
+<li>작업 실행과 동시에 동기화 작업 통계를 직렬화할 때 발생하는 데이터 경합을 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54610">#54610</a>)</li>
+<li>필드에 정수가 아닌 max_length를 지정했을 때, 해당 필드 이름을 명시하는 '무효한 매개변수' 오류 대신 원시 구문 분석 오류가 반환되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54694">#54694</a>).</li>
+<li>롤링 업그레이드 중에 MixCoord를 중지할 때 코어 덤프가 발생하고 기존 포드가 몇 분 동안 'Terminating' 상태에 머물러 있던 패닉 현상을 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54732">#54732</a>)</li>
+<li>Milvus Backup이 FlushAll에서 반환된 플러시 위치를 복제할 수 없던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54745">#54745</a>)</li>
+<li>리더 변경과 같은 일시적인 etcd 오류로 인해 MixCoord 및 기타 구성 요소가 중단되어 스케일다운이 지연되던 문제를 수정했습니다. 이제 etcd가 복구될 때까지 재시도하고 재감시합니다(<a href="https://github.com/milvus-io/milvus/pull/54754">#54754</a>)</li>
+<li>클러스터의 모든 쿼리 노드를 동시에 중지할 때 그레이스풀 중지 타임아웃(기본값 30분)까지 응답이 멈출 수 있던 문제를 수정했습니다. <code translate="no">queryNode.standaloneMigrateDataTimeout</code> 을 <code translate="no">queryNode.migrateDataTimeout</code> 으로 이름 변경했으며, 기존 키도 여전히 작동합니다(<a href="https://github.com/milvus-io/milvus/pull/54813">#54813</a>)</li>
+<li>메시지 큐를 전환한 후(예: Pulsar에서 Woodpecker로), 쿼리 노드가 호환되지 않는 위치에서 계속 재연결되어 데이터 소비가 중단되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54811">#54811</a>)</li>
+<li><code translate="no">iso</code> 이나 <code translate="no">interval</code> 과 같이 문맥상 키워드 이름을 딴 필드는 생성할 수는 있지만 필터 표현식에서는 사용할 수 없던 문제를 수정했습니다. 이제 컬렉션을 생성하거나 필드를 추가할 때 대소문자에 관계없이 <code translate="no">LIKE</code>, <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 및 <code translate="no">IN</code> 은 필드 이름으로 허용되지 않습니다(<a href="https://github.com/milvus-io/milvus/pull/54770">#54770</a>)</li>
+<li>etcd 쓰기 작업이 재시도되는 동안 SuspendNode 요청 중에 클라이언트가 연결이 끊어지면 코디네이터가 충돌할 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54802">#54802</a>)</li>
+</ul>
+<h2 id="v304" class="common-anchor-header">v3.0.4<button data-href="#v304" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>출시일: 2026년 10월 26일</p>
+<table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Node.js SDK 버전</th><th>Java SDK 버전</th><th>Go SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>3.0.4</td><td>3.0.2</td><td>3.0.6</td><td>3.0.10</td><td>3.0.0</td></tr>
+</tbody>
+</table>
+<p>Milvus v3.0.4의 출시를 발표하게 되어 기쁩니다! 이번 릴리스에서는 대량 가져오기, 압축, 필터링 및 그룹화 검색 속도가 향상되었으며, Storage V3에 대한 지연 열 그룹 로딩 기능이 추가되었습니다. 또한 가져오기, 컬렉션 로딩, 부분 업데이트 쓰기 시 발생하는 멈춤 현상을 수정하고, 여러 액세스 제어 문제와 CVE를 해결했습니다.</p>
+<h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>입력 청크를 병렬로 읽고 바이트 범위를 미리 가져옴으로써 정렬 압축 읽기 처리량을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/53437">#53437</a>).</li>
+<li>Parquet, Lance 및 Vortex 파일을 기반으로 하는 외부 컬렉션에서 사전 계산된 스파스 벡터에 대한 지원을 추가했습니다(<a href="https://github.com/milvus-io/milvus/pull/53894">#53894</a>)</li>
+<li>프로xy DML 태스크를 전용 패키지로 리팩토링하여 태스크의 책임을 분리했습니다(<a href="https://github.com/milvus-io/milvus/pull/54064">#54064</a>)</li>
+<li>봉인된 세그먼트에 대한 검색의 모든 출력 필드가 검색 자체와 동일한 세그먼트 스냅샷에서 채워지도록 보장했습니다(<a href="https://github.com/milvus-io/milvus/pull/54074">#54074</a>).</li>
+<li>첫 번째 액세스 시까지 Storage V3 열 그룹 로딩을 연기하여 세그먼트 로딩 시간과 메모리 사용량을 줄이는 <code translate="no">queryNode.segcore.tieredStorage.lazyColumnGroupEnabled</code> 옵션(기본적으로 비활성화됨)을 추가했습니다(<a href="https://github.com/milvus-io/milvus/pull/54169">#54169</a>)</li>
+<li>IP 및 BM25 메트릭에 대해 스파스 AutoIndex 구축 매개변수를 별도로 구성할 수 있도록 ` <code translate="no">autoIndex.params.sparse.ip.build</code> ` 및 ` <code translate="no">autoIndex.params.sparse.bm25.build</code> `를 추가하고, 그렇지 않은 경우 ` <code translate="no">autoIndex.params.sparse.build</code> `로 대체되도록 했습니다 (<a href="https://github.com/milvus-io/milvus/pull/54212">#54212</a>)</li>
+<li>CheckHealth 실행 중 DataCoord 자체 메트릭 수집을 중단하여, 대규모 세그먼트 메타데이터를 보유한 클러스터의 상태 점검 지연 시간을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54214">#54214</a>)</li>
+<li>작업 ID별로 가져오기 작업을 인덱싱하여 가져오기 작업이 많은 클러스터의 DataCoord 가져오기 스케줄링 성능을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/54202">#54202</a>).</li>
+<li>가비지 컬렉션(GC) 주기당 세그먼트별로 한 번씩이 아닌, 한 번씩만 더 이상 사용되지 않는 JSON 통계 접두사를 스캔하여 가비지 컬렉션 중 오브젝트 스토리지 목록 요청을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54207">#54207</a>).</li>
+<li>기존 배열 청크 오프셋에서 길이를 읽어옴으로써 씰된 세그먼트에서 ` <code translate="no">ARRAY_LENGTH</code> ` 필터 성능을 개선하여, 고객 필터 워크로드에서 QPS를 102에서 270으로 높였습니다(<a href="https://github.com/milvus-io/milvus/pull/54321">#54321</a>)</li>
+<li>grpc-go를 v1.84.0으로 업그레이드하여 프록시가 디코딩 직후 원시 요청 버퍼를 해제하도록 함으로써, 처리 중인 대규모 검색(nq=10000, 1536차원 검색 기준)의 힙 공간을 절약하도록 개선 (<a href="https://github.com/milvus-io/milvus/pull/54271">#54271</a>)</li>
+<li>StreamingNode의 부분 업데이트에 대한 compare-and-swap 검사를 비활성화하는 숨겨진 <code translate="no">streaming.partialUpdate.enableCAS</code> 옵션(기본적으로 활성화됨)을 추가하여, 동시적인 오래된 업데이트에 대한 보호 기능을 희생하는 대신 쓰기 오버헤드를 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/54249">#54249</a>)</li>
+<li>Proxy가 쿼리 성공 시마다 기록하던 잘못된 “status is nil” 경고 메시지를 제거했습니다(<a href="https://github.com/milvus-io/milvus/pull/54247">#54247</a>)</li>
+<li>RESTful V2 삽입 및 업셋(upsert) 요청을 디코딩할 때 메모리 할당량을 줄이고, 변환 실패 시 전체 요청 페이로드 로깅을 중단했습니다(<a href="https://github.com/milvus-io/milvus/pull/54403">#54403</a>)</li>
+<li>대량 가져오기 기능을 재설계하여 사전 가져오기 후 파일별 정확한 ID 범위를 할당함으로써, 가져오기 요청이 파일 크기를 미리 측정하지 않고 즉시 반환되도록 했으며, 가져오기 쓰기 재시도 중 로그 ID 고갈 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54416">#54416</a>).</li>
+<li>IP 및 BM25 스파스 벡터 필드에 대한 임시 인덱스 알고리즘을 재정의할 수 있는 시작 구성 옵션을 추가했습니다(<a href="https://github.com/milvus-io/milvus/pull/54441">#54441</a>)</li>
+<li>CVE-2026-78667, CVE-2026-97031 및 CVE-2026-78669를 해결하기 위해 Go를 1.26.9로, golang.org/x/net를 v0.60.0으로 업그레이드했습니다(<a href="https://github.com/milvus-io/milvus/pull/54451">#54451</a>)</li>
+<li>원시 JSON을 파싱하는 대신 JSON 분할 통계에서 VARCHAR, BOOL 및 정수 그룹 키를 읽어, 씰된 세그먼트 내 타입 지정된 JSON 경로에 대한 그룹별 검색을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/54456">#54456</a>)</li>
+<li>OpenTelemetry를 1.45.0으로, cilium/ebpf를 0.22.0으로 업그레이드하고, CVE-2026-81870 및 CVE-2026-10722를 해결하기 위해 런타임 이미지의 curl, tar, zlib 및 glibc를 업데이트했습니다 (<a href="https://github.com/milvus-io/milvus/pull/54461">#54461</a>)</li>
+<li>캐시 미스 시에만 검색어를 변환함으로써 인덱싱된 ARRAY_CONTAINS 필터에 대한 중복 검색어 변환을 줄였습니다 (<a href="https://github.com/milvus-io/milvus/pull/54459">#54459</a>, <a href="https://github.com/milvus-io/milvus/pull/54465">#54465</a>)</li>
+<li>각 배치의 완료를 기다리지 않고 가져오기 작업을 지속적으로 스케줄링하여 가져오기 처리량을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/54471">#54471</a>)</li>
+<li>CDC 복제 환경에서 주 클러스터와 보조 클러스터 모두에 클러스터 로컬 Flush 및 FlushAll 지원 추가 (<a href="https://github.com/milvus-io/milvus/pull/54502">#54502</a>)</li>
+<li>검색 팬아웃 작업(PK 채우기, 거리 정밀화 및 출력 필드 구체화)을 전용 스레드 풀로 분리하여, 검색이 더 이상 필드 및 인덱스 로딩 뒤에 대기열에 쌓이지 않도록 했습니다(<a href="https://github.com/milvus-io/milvus/pull/54524">#54524</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>시작 시 일시적인 etcd 읽기 오류로 인해 타임스탬프 할당기가 이전에 할당된 타임스탬프보다 오래된 타임스탬프를 발급하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/51762">#51762</a>).</li>
+<li>가져오기 작업이 무한정 중단되어 pchannel의 체크포인트를 차단하는 문제를 수정했습니다. 이전에는 이 문제를 해결하기 위해 수동으로 etcd를 복구하고 StreamingNode를 재시작해야 했습니다(<a href="https://github.com/milvus-io/milvus/pull/54111">#54111</a>).</li>
+<li>Timestamptz 또는 Geometry 필드가 포함된 컬렉션에 행을 삽입할 때 발생하던 Go SDK 패닉을 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54131">#54131</a>).</li>
+<li>부분 업데이트가 실행 중일 때 샤드에서 발생하는 높은 쓰기 지연 시간 및 쓰기 백로그 문제를 수정했습니다. 이전에는 각 부분 업데이트 커밋이 동일한 vchannel의 다른 모든 쓰기를 차단했으나, 이제 부분 업데이트는 동일한 기본 키를 다루는 쓰기만 차단합니다(<a href="https://github.com/milvus-io/milvus/pull/54215">#54215</a>)</li>
+<li>세그먼트 로드 또는 채널 감시 요청이 멈춘 경우 컬렉션 로딩이 무한정 중단될 수 있던 문제를 수정했습니다. 이제 QueryCoord는 작업 단계별로 <code translate="no">queryCoord.channelTaskTimeout</code> (기본값 2분) 및 <code translate="no">queryCoord.segmentTaskTimeout</code> (기본값 5분)을 강제 적용하므로, 개별 세그먼트 로딩에 더 오랜 시간이 소요될 경우 세그먼트 타임아웃을 늘리십시오(<a href="https://github.com/milvus-io/milvus/pull/54217">#54217</a>)</li>
+<li>Storage V3에서 L0 압축 매니페스트 커밋이 느려져 DataCoord의 플러시 및 세그먼트 정보 요청이 중단되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54186">#54186</a>)</li>
+<li>네이티브 라이브러리가 AWS 런타임의 별도 사본을 번들로 포함함으로써 발생하는 AWS S3 스토리지에 액세스할 때 발생할 수 있는 잠재적 충돌을 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54192">#54192</a>).</li>
+<li>낮은 우선순위의 세그먼트 로드(예: 스케일 다운 또는 밸런싱 중)가 원시 필드 데이터를 높은 우선순위로 로드하여 다른 로드와 경합을 일으키고 검색 지연 시간을 증가시키던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54335">#54335</a>)</li>
+<li>StorageV3 압축 스칼라 인덱스(STL_SORT, MARISA)를 로드할 때 할당된 메모리보다 더 많은 메모리를 사용하거나, 로드 실패 시 진행 중인 다운로드가 즉시 중단되지 않던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54359">#54359</a>)</li>
+<li>결과가 세그먼트 및 노드 간에 병합될 때 ORDER BY 및 LIMIT이 포함된 GROUP BY 집계 쿼리가 불완전하거나 잘못된 집계 값을 반환할 수 있는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54393">#54393</a>)</li>
+<li>권한 부여가 활성화된 상태에서 비루트 사용자가 클라이언트 텔레메트리 관리 API에 액세스할 수 있던 문제를 수정했습니다. 이제 해당 API를 사용하려면 루트 사용자 권한이 필요합니다(<a href="https://github.com/milvus-io/milvus/pull/54408">#54408</a>)</li>
+<li>사용자가 다른 데이터베이스나 과거 컬렉션 이름을 지정하여, 가져오기 권한이 없는 컬렉션의 가져오기 작업 세부 정보를 볼 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54449">#54449</a>).</li>
+<li>QueryNode 세그먼트 로드를 대기 중인 요청이 로드 완료나 취소 없이 무기한으로 멈춰 버리는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54452">#54452</a>)</li>
+<li>버킷이 잘린 경우, L2 및 해밍 메트릭에 대해 검색 집계 <code translate="no">top_hits</code> 가 가장 유사한 결과 대신 가장 유사하지 않은 결과를 반환할 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54458">#54458</a>).</li>
+<li>여러 샤드에서 출력 필드가 반환될 때 그룹화(group-by)가 포함된 하이브리드 검색이 실패할 수 있는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54457">#54457</a>)</li>
+<li>null 허용 또는 기본값이 지정된 TIMESTAMPTZ 필드를 생략한 부분 업서트(upsert)가 새로운 기본 키가 존재할 때 실패하거나 유효한 요청을 거부하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54460">#54460</a>, <a href="https://github.com/milvus-io/milvus/pull/54464">#54464</a>)</li>
+<li>단어 수준 MinHash 서명을 계산할 때 발생하는 메모리 누수 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54463">#54463</a>)</li>
+<li>RESTful v2 검색에서 <code translate="no">groupSize</code> 또는 <code translate="no">strictGroupSize</code> 와 같이 양수가 아닌 명시적 그룹화 매개변수를 아무런 오류 메시지 없이 무시하던 문제를 수정했습니다. 이제 유효하지 않은 값은 기본값으로 대체되지 않고 거부됩니다(<a href="https://github.com/milvus-io/milvus/pull/54466">#54466</a>)</li>
+<li>이전 쓰기 작업이 이미 적용된 후에도 Strong-consistency 쿼리가 다음 주기적 시간 틱을 기다리는 문제가 수정되었습니다(<a href="https://github.com/milvus-io/milvus/pull/54501">#54501</a>)</li>
+<li>세그먼트가 Growing 상태인 동안 삽입된 데이터가 영구 저장된 후, TEXT 필드가 포함된 유휴 컬렉션에 대해 채널 체크포인트 진행이 중단되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54538">#54538</a>)</li>
+<li>한 Milvus 버전에서 작성된 스냅샷 매니페스트가 다른 버전에서는 디코딩에 실패할 수 있던 문제를 수정했습니다. 이제 스냅샷 매니페스트는 자체 설명형 Avro 파일입니다(<a href="https://github.com/milvus-io/milvus/pull/54549">#54549</a>).</li>
+<li>복제가 구성되지 않은 클러스터에서 복제 구성을 쿼리할 때 요청이 타임아웃될 때까지 차단되던 문제를 수정했으며, 세컨더리가 모든 메시지를 거부할 경우 복제 스트림이 백오프되도록 변경했습니다(<a href="https://github.com/milvus-io/milvus/pull/54555">#54555</a>)</li>
+<li>CDC 보조 클러스터에서 LoadCollection 후 생성된 파티션이 로드되지 않아 보조 클러스터의 쿼리에서 해당 데이터를 누락하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54561">#54561</a>)</li>
+<li>성공적인 업서트(upsert)가 프록시 메트릭에서 보고된 값을 두 번 계산하여 보고된 수치가 과대 평가되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/54605">#54605</a>)</li>
+</ul>
 <h2 id="v303" class="common-anchor-header">v3.0.3<button data-href="#v303" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +254,7 @@ title: 릴리스 노트
 <li>하이브리드 검색에 함수 체인(Function Chain) 지원이 추가되어, ` <code translate="no">merge</code> `로 시작하는 최상위 L2 체인이 융합 및 재순위를 정의하고, 각 하위 검색이 융합 전에 자체 L0/L1 체인을 실행할 수 있게 되었습니다(<a href="https://github.com/milvus-io/milvus/pull/53541">#53541</a>)</li>
 <li>부분 업데이트에서 개별 배열 요소, 구조체 배열 요소 또는 그 하위 필드, JSON 경로를 대체하는 기능이 추가되었으며, Go SDK 및 REST v2에서 사용할 수 있습니다(<a href="https://github.com/milvus-io/milvus/pull/53746">#53746</a>)</li>
 <li>검색 및 하이브리드 검색의 함수 체인에 동적 필드 지원이 추가되었습니다(<a href="https://github.com/milvus-io/milvus/pull/54011">#54011</a>)</li>
-<li>null이 허용되는 벡터 필드에 대한 ` <code translate="no">IS NULL</code> ` 및 ` <code translate="no">IS NOT NULL</code> ` 필터 표현식 지원이 추가되었으며, 효율적인 평가를 위해 유효성 검사가 일괄 처리됩니다(<a href="https://github.com/milvus-io/milvus/pull/54020">#54020</a>)</li>
+<li>null이 허용되는 벡터 필드에 대한 ` <code translate="no">IS NULL</code> ` 및 ` <code translate="no">IS NOT NULL</code> ` 필터 표현식 지원을 추가하고, 효율적인 평가를 위해 유효성 검사를 일괄 처리하도록 했습니다(<a href="https://github.com/milvus-io/milvus/pull/54020">#54020</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항<button data-href="#Improvements" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,8 +278,8 @@ title: 릴리스 노트
 <li>Milvus의 내부 스토리지 디렉터리를 가리키는 임포트 경로를 차단하고, binlog(<code translate="no">backup=true</code>) 및 L0 임포트에 대해 새로운 클러스터 수준 <code translate="no">ImportBinlog</code> 권한을 필수로 지정했습니다. 이로 인해 컬렉션 수준 <code translate="no">Import</code> 권한만 가진 비관리자 역할은 <code translate="no">ImportBinlog</code> 권한이 부여될 때까지 작동하지 않습니다 (<a href="https://github.com/milvus-io/milvus/pull/53680">#53680</a>)</li>
 <li>Tantivy 기반 인덱스 조회에 대한 비트셋 쓰기 작업을 최적화하여, 마이크로 벤치마크에서 연속적인 문서 ID의 쓰기 속도가 약 7배 빨라졌습니다(<a href="https://github.com/milvus-io/milvus/pull/53700">#53700</a>).</li>
 <li>C++ 쿼리 실행 경로에서 중복된 페이로드 및 메타데이터 복사 횟수를 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/53756">#53756</a>).</li>
-<li>웜업이 비활성화된 경우, 씰된 세그먼트에 대한 JSON 통계 로딩을 첫 사용 시까지 연기하여, JSON 통계가 쿼리되지 않는 세그먼트가 더 이상 로딩 비용을 부담하지 않도록 했습니다 (<a href="https://github.com/milvus-io/milvus/pull/53888">#53888</a>)</li>
-<li>컬렉션이나 파티션을 로드하기 전에 메모리 및 로컬 디스크 수요를 추정하는 선택적 QueryCoord 사전 확인 기능을 추가했으며, 리소스 그룹별 수요 메트릭을 제공합니다 (<a href="https://github.com/milvus-io/milvus/pull/53905">#53905</a>)</li>
+<li>웜업이 비활성화된 경우, 씰된 세그먼트에 대한 JSON 통계 로딩을 첫 사용 시까지 연기하여, JSON 통계가 쿼리되지 않는 세그먼트가 더 이상 로딩 비용을 부담하지 않도록 했습니다(<a href="https://github.com/milvus-io/milvus/pull/53888">#53888</a>)</li>
+<li>컬렉션이나 파티션을 로드하기 전에 메모리 및 로컬 디스크 요구량을 추정하는 선택적 QueryCoord 사전 확인 기능을 추가했으며, 리소스 그룹별 요구량 메트릭을 제공합니다(<a href="https://github.com/milvus-io/milvus/pull/53905">#53905</a>)</li>
 <li>요청 고정(request-pinned) 열 스냅샷을 통해 데이터를 읽음으로써, 씰된 세그먼트에 대한 필터 표현식 및 그룹별 검색에서 청크당 오버헤드를 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/53984">#53984</a>)</li>
 <li>검색, 쿼리, 삽입 및 업서트 경로에 대해 fastPB 디코더를 사용하여 RPC protobuf 디코딩 속도를 높였으며, 이 기능은 기본적으로 활성화되어 있고 <code translate="no">common.enableFastPB</code> 을 통해 제어할 수 있습니다 (<a href="https://github.com/milvus-io/milvus/pull/53995">#53995</a>, <a href="https://github.com/milvus-io/milvus/pull/54003">#54003</a>)</li>
 <li>메트릭 포트에서 구식(밑줄이 없는) <code translate="no">/api/v1/*</code> REST 경로( <code translate="no">/api/v1/health</code> 포함)를 제거하고, 남아 있는 V1 API를 비활성화하기 위해 <code translate="no">proxy.http.enableV1</code> 를 추가했습니다. 이는 호환성을 깨는 변경 사항이므로, 클라이언트는 V2 REST API 또는 gRPC SDK로 마이그레이션하고, 상태 확인을 위해 <code translate="no">/healthz</code> 또는 <code translate="no">/livez</code> 를 사용해야 합니다(<a href="https://github.com/milvus-io/milvus/pull/54028">#54028</a>)</li>
@@ -121,7 +312,7 @@ title: 릴리스 노트
 <li>유효하지 않은 Milvus 스냅샷 소스나, 형식이 잘못되었거나 지원되지 않는 버전을 사용하는 스냅샷 메타데이터에서 외부 컬렉션을 새로 고칠 때 즉시 실패하지 않고 타임아웃까지 보류 상태로 남아 있을 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53695">#53695</a>, <a href="https://github.com/milvus-io/milvus/pull/54034">#54034</a>)</li>
 <li>ngram 인덱싱된 필드에 NUL 문자가 포함된 LIKE 쿼리로 인해 QueryNode가 중단되거나 잘못된 일치 결과를 반환하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53711">#53711</a>)</li>
 <li>모든 구성 요소의 등록이 완료되기 전에 상태 확인 엔드포인트가 노드를 준비 완료 상태로 보고하던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53735">#53735</a>)</li>
-<li>커밋된 V3 매니페스트만 있는 복구된 세그먼트를 건너뛰면서 컬렉션 로딩이 완료된 것으로 보고되어, 쿼리 결과에서 해당 데이터가 누락되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53782">#53782</a>).</li>
+<li>커밋된 V3 매니페스트만 있는 복구된 세그먼트를 건너뛰면서 컬렉션 로딩이 완료된 것으로 보고되어, 쿼리 결과에서 해당 데이터가 누락되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53782">#53782</a>)</li>
 <li>OSS에서 대용량 객체(약 2 GB)의 버킷 간 스냅샷 복사 시 타임아웃이 발생하던 문제를 수정했습니다. 이제 새로 설정 가능한 ‘ <code translate="no">minio.multipartCopyThreshold</code> ’(기본값 1 GiB)를 초과하는 객체는 서버 측 멀티파트 복사 방식으로 복사됩니다(<a href="https://github.com/milvus-io/milvus/pull/53789">#53789</a>)</li>
 <li>스냅샷 작업(생성, 삭제, 고정, 고정 해제, 내보내기 및 복원)이 컬렉션 DDL 속도 제한 및 DDL 강제 거부로 인해 제한되거나 거부될 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53791">#53791</a>)</li>
 <li>Null이 허용되는 Timestamptz 필드에서 NULL 행에 대해 Parquet 가져오기가 필드의 기본값 대신 NULL을 저장하던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53808">#53808</a>)</li>
@@ -177,7 +368,7 @@ title: 릴리스 노트
     </button></h3><ul>
 <li>쿼리 플래너에서 연쇄된 contains 술어를 단일 <code translate="no">ContainsAny</code>/<code translate="no">ContainsAll</code> 표현식으로 병합하여 ARRAY 필터링을 최적화했습니다(<a href="https://github.com/milvus-io/milvus/pull/52365">#52365</a>).</li>
 <li><code translate="no">extfs.endpoint_url</code> 옵션을 통해 외부 컬렉션에서 사용자 정의 S3 호환 엔드포인트에 대한 지원을 추가하고, 안전하지 않거나 충돌하는 엔드포인트 설정에 대한 유효성 검사를 수행합니다(<a href="https://github.com/milvus-io/milvus/pull/52814">#52814</a>)</li>
-<li>Bloom 및 Roaring 멤버십 필터를 단일 <code translate="no">membership_match</code> 표현식으로 통합하고, 두 필터 유형 모두를 생성 및 쿼리할 수 있도록 Go 클라이언트 지원을 추가했습니다(<a href="https://github.com/milvus-io/milvus/pull/53019">#53019</a>)</li>
+<li>단일 <code translate="no">membership_match</code> 표현식을 통해 Bloom 및 Roaring 멤버십 필터를 통합하고, 두 필터 유형 모두를 생성 및 쿼리할 수 있도록 Go 클라이언트 지원을 추가했습니다(<a href="https://github.com/milvus-io/milvus/pull/53019">#53019</a>)</li>
 <li>Tantivy 기반 인덱스 구축 시 쓰기 증폭을 줄여, 텍스트 매치, NGRAM 및 JSON 키 통계 인덱스에 대한 디스크 I/O를 감소시켰습니다(<a href="https://github.com/milvus-io/milvus/pull/53057">#53057</a>)</li>
 <li>RESTful v2 DQL 엔드포인트에 액세스 제어 기능을 추가하여, 프록시 쿼리 큐가 가득 찼을 때 요청 디코딩 전에 <code translate="no">Retry-After</code> 와 함께 HTTP 429를 반환합니다(<a href="https://github.com/milvus-io/milvus/pull/53111">#53111</a>)</li>
 <li>검색 시 리프 CPU 시간의 약 48%를 차지하던 스칼라 필터 평가 경로의 원자적 참조 카운트 핫스팟을 줄여, 필터링된 검색 처리량을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/53167">#53167</a>)</li>
@@ -214,12 +405,12 @@ title: 릴리스 노트
 <li>지속적인 데이터 입력 시 몇 분마다 PChannel의 쓰기 작업이 45~60초 동안 중단되던 반복적인 WAL 펜싱 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53118">#53118</a>)</li>
 <li>Storage V2 압축 과정에서 유효한 물리적 그룹 경로가 삭제되어, 압축된 세그먼트 내의 압축된 컬럼 인덱스 정렬이 어긋날 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53202">#53202</a>)</li>
 <li>압축 로그에 컬렉션 암호화 키 및 오브젝트 스토리지 자격 증명이 출력되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53226">#53226</a>).</li>
-<li>봉인된 세그먼트가 다시 열렸을 때 잘못된 데이터가 노출될 수 있었던 오래된 구조체 배열 오프셋 별칭 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53154">#53154</a>).</li>
+<li>봉인된 세그먼트가 다시 열렸을 때 잘못된 데이터가 노출될 수 있는 오래된 구조체 배열 오프셋 별칭 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53154">#53154</a>).</li>
 <li>리소스가 추가되기 전에 파일 리소스 동기화가 실행되어, 시작 시 또는 노드 등록 시 노드 로컬 파일이 지워질 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53170">#53170</a>).</li>
-<li>불완전한 빈 로그 청크가 아무런 경고 없이 완전히 읽힌 것으로 처리되어 쿼리 및 압축 결과에서 데이터 누락이 발생할 수 있는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53263">#53263</a>).</li>
+<li>불완전한 빈 로그 청크가 아무런 경고 없이 완전히 읽힌 것으로 처리되어 쿼리 및 압축 결과에서 데이터가 누락될 위험이 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53263">#53263</a>).</li>
 <li>활성 인덱스가 없는 컬렉션의 경우, 삭제된 세그먼트의 저장 공간이 절대 회수되지 않던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53252">#53252</a>)</li>
 <li>스파스 벡터 인덱스를 로드할 때 리소스 추정치가 부정확하여 원시 데이터 처리가 잘못되거나 QueryNode에서 경고가 반복적으로 발생하던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53249">#53249</a>)</li>
-<li>재조정(rebalancing) 중에 기본 리소스 그룹 외부의 동결된 스트리밍 노드가 예기치 않게 동결 해제될 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53229">#53229</a>)</li>
+<li>재조정(rebalancing) 중에 기본 리소스 그룹 외부의 동결된 스트리밍 노드가 예기치 않게 동결 해제될 수 있는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53229">#53229</a>)</li>
 <li>청크 관리자 사전 검사 전에 GCP 자격 증명(IAM 및 HMAC)이 등록되지 않은 경우 Google Cloud Storage에 연결하지 못하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53288">#53288</a>)</li>
 <li>C++ 로그가 통합 로그 출력으로 전달되지 않고 예기치 않게 ` <code translate="no">/tmp</code> ` 디렉터리에 기록되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53293">#53293</a>).</li>
 <li>Spark 결과가 여러 파티션에 걸쳐 있을 때 백필 커밋이 HTTP 500 오류로 실패하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53346">#53346</a>)</li>
@@ -227,9 +418,9 @@ title: 릴리스 노트
 <li>Null 허용 벡터 필드에 바이너리 로그 파일이 없을 때 바이너리 로그 가져오기가 실패하던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53363">#53363</a>).</li>
 <li>검색 및 쿼리 요청이 외부 테이블 데이터를 읽을 때 출력 필드가 불완전하거나 잘못된 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53372">#53372</a>, <a href="https://github.com/milvus-io/milvus/pull/53385">#53385</a>).</li>
 <li>REST 요청에서 중복된 스파스 벡터 행 및 파티션 ID 문제와, 쿼리가 조기에 종료될 때 충돌이나 메모리 누수를 유발할 수 있는 메모리 소유권 및 정리 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53402">#53402</a>)</li>
-<li>결과 페이로드 없이 압축 작업이 완료되었다고 보고될 경우 DataCoord가 충돌하거나, 압축 작업이 정상적으로 재시도되지 않고 멈춰버리는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53443">#53443</a>)</li>
+<li>결과 페이로드 없이 압축 작업이 완료되었다고 보고하는 경우 DataCoord가 중단되거나, 압축 작업이 정상적으로 재시도되지 않고 멈춰 버리는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53443">#53443</a>)</li>
 <li>세그먼트 매니페스트를 생성할 때 외부 데이터 파일의 속성이 삭제되어 외부 컬렉션에서 소스 파일 메타데이터가 손실되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53444">#53444</a>)</li>
-<li>디버그 로그 수준에서, 특히 롤링 업그레이드 중에 <code translate="no">count(*)</code> 요청을 처리할 때 발생할 수 있는 QueryNode 충돌 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53474">#53474</a>)</li>
+<li>디버그 로그 수준에서, 특히 롤링 업그레이드 중에 <code translate="no">count(*)</code> 요청을 처리할 때 발생할 수 있는 QueryNode 충돌을 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53474">#53474</a>)</li>
 <li>세그먼트, 인덱스 또는 컬렉션이 삭제된 후에도 인덱스 및 통계 생성 작업이 계속 워커 리소스를 소모하던 문제를 수정하고, 고아 인덱스 파일의 정리 기능을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/53515">#53515</a>).</li>
 <li>로컬 스토리지 경로 처리를 수정하여, 서로 다른 구성 요소가 작성한 데이터가 항상 리더 및 가비지 컬렉션이 예상하는 위치에 저장되도록 했으며, 기존 로컬 배포 환경에 대해서는 자동 업그레이드가 적용됩니다(<a href="https://github.com/milvus-io/milvus/pull/53530">#53530</a>)</li>
 <li>세그먼트에 형식이 잘못된 JSON 문서가 포함된 경우 인덱스 생성 태스크가 무한히 재시도되던 문제를 수정했습니다. 이제 이러한 생성 작업은 작업자 리소스를 무기한으로 소모하지 않고 즉시 실패합니다(<a href="https://github.com/milvus-io/milvus/pull/53531">#53531</a>)</li>
@@ -304,13 +495,13 @@ title: 릴리스 노트
 <li>지오메트리 RTree 인덱스 및 캐시의 메모리 안전성을 개선하고, 구문 분석할 수 없는 WKB 및 빈 지오메트리 쿼리 처리를 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/51312">#51312</a>).</li>
 <li>프로세스 전체의 일시 메모리 할당량 관리 기능을 복원하고, 동시 Storage V2/V3 필드 로딩 및 스칼라 V3 인덱스 로딩에 대한 메모리 추정치를 수정하여 메모리 관리 기능을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/51405">#51405</a>).</li>
 <li>읽기 작업을 병렬화하고 원시 벡터 데이터를 디스크로 스트리밍하여 외부 컬렉션 인덱스 구축 중 발생하는 다운로드 병목 현상과 메모리 사용량을 줄였습니다(<a href="https://github.com/milvus-io/milvus/pull/51651">#51651</a>).</li>
-<li>클라이언트 추가 작업을 일괄 처리하고 동기화 설정을 노출하여 소량 배치, 고동시성 워크로드에 대한 Woodpecker 처리량 향상 (<a href="https://github.com/milvus-io/milvus/pull/51810">#51810</a>)</li>
+<li>클라이언트 추가 작업을 일괄 처리하고 동기화 설정을 노출하여 소규모 배치, 고동시성 워크로드에 대한 Woodpecker 처리량 향상 (<a href="https://github.com/milvus-io/milvus/pull/51810">#51810</a>)</li>
 <li>스토리지 및 압축 경로 전반에 걸쳐 레코드 리더 소유권 및 수명 일관성, 빈 블롭 처리, 읽기 오류 보고 기능을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/51891">#51891</a>).</li>
 <li>4방향 인터리브 파이프라인과 충돌 및 재해시 경계에 대한 안전 장치를 통해 그룹화 해시 프로브 효율성을 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/51977">#51977</a>).</li>
 <li>BM25 또는 MinHash 출력 필드가 없는 컬렉션에 대해 WAL 삽입 본문 구문 분석을 건너뛰어 삽입 처리 오버헤드 감소 (<a href="https://github.com/milvus-io/milvus/pull/51986">#51986</a>)</li>
 <li>실행 계층 전반에 걸쳐 일시적 및 영구적 오류 분류를 유지함으로써 스토리지 오류 보고 및 재시도 처리를 개선했습니다(<a href="https://github.com/milvus-io/milvus/pull/51990">#51990</a>)</li>
 <li>기본적으로 GIS 거친/정밀 분할 및 동일 열 술어 융합을 활성화하여 공간 쿼리 성능 향상 (<a href="https://github.com/milvus-io/milvus/pull/52008">#52008</a>)</li>
-<li>공유 백로그 기반 입장 제어 및 교대 제출 우선순위를 통해 텍스트 인덱싱 및 JSON 분할 작업 스케줄링 개선 (<a href="https://github.com/milvus-io/milvus/pull/52010">#52010</a>)</li>
+<li>공유 백로그 기반 입실 제어 및 교대 제출 우선순위를 통해 텍스트 인덱싱 및 JSON 분할 작업 스케줄링 개선 (<a href="https://github.com/milvus-io/milvus/pull/52010">#52010</a>)</li>
 <li>전용 로딩 옵션 및 디스크 리소스 계산을 통해 씰된 세그먼트 오프셋 매핑에 대한 mmap 지원 추가 (<a href="https://github.com/milvus-io/milvus/pull/52035">#52035</a>)</li>
 <li>요청 시 열별 청크 메모리 추정을 실행하여 Storage V2 데이터 로딩을 최적화했습니다(<a href="https://github.com/milvus-io/milvus/pull/52037">#52037</a>)</li>
 <li>새로운 함수 출력 필드에 바인딩된 인덱스에 대한 서버 측 AutoIndex 지원을 추가하여, add_function_field 요청에서 인덱스 매개변수를 생략하거나 AUTOINDEX를 지정할 수 있도록 했습니다 (<a href="https://github.com/milvus-io/milvus/pull/52109">#52109</a>)</li>
@@ -370,14 +561,14 @@ title: 릴리스 노트
 <li>백필 실패 세그먼트에 대해 명시적인 ok=false 상태가 생략되던 HTTP JSON 응답 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52082">#52082</a>)</li>
 <li>전송 또는 저속 타임아웃 후 재시도 시 HTTP 400 XAmzContentChecksumMismatch 오류로 인해 MinIO 객체 업로드가 실패하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52128">#52128</a>, <a href="https://github.com/milvus-io/milvus/pull/52194">#52194</a>).</li>
 <li>스트리밍 서비스가 활성화된 상태에서 QueryNode 간 세그먼트 균형 조정이 중단되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52147">#52147</a>, <a href="https://github.com/milvus-io/milvus/pull/52169">#52169</a>)</li>
-<li>보존된 레코드를 재구축할 수 없을 때 믹스 압축 중에 발생하는 무증상 데이터 손실 문제 수정 (<a href="https://github.com/milvus-io/milvus/pull/52200">#52200</a>)</li>
+<li>보존된 레코드를 재구성할 수 없을 때 믹스 압축 중에 발생하는 무증상 데이터 손실 문제 수정 (<a href="https://github.com/milvus-io/milvus/pull/52200">#52200</a>)</li>
 <li>스냅샷 복원 시 컬렉션 설정이 손실되고 예기치 않게 ‘강력한 일관성(Strong consistency)’으로 기본 설정되던 문제 수정 (<a href="https://github.com/milvus-io/milvus/pull/52206">#52206</a>)</li>
 <li>스트리밍 삭제 시 새로 로드된 봉인된 세그먼트가 누락되어 삭제된 데이터를 계속 쿼리할 수 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52218">#52218</a>).</li>
 <li>빈 데이터에 대해 중첩 인덱스가 올바르게 생성되지 않던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52247">#52247</a>).</li>
 <li>스트리밍 서비스로 전환할 때 작업이 무기한 대기 상태로 남아 데드락이 발생하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52292">#52292</a>)</li>
 <li>압축 및 레코드 재구축 시 잘못된 지오메트리 기본값 문제와, Parquet 가져오기에서 기본값으로 채워진 지오메트리 값에 대한 잘못된 null 표시 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52350">#52350</a>)</li>
 <li>DataCoord 재시작 후 압축 및 복구 과정에서 유효한 V3 세그먼트가 거부되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52383">#52383</a>, <a href="https://github.com/milvus-io/milvus/pull/52389">#52389</a>, <a href="https://github.com/milvus-io/milvus/pull/52390">#52390</a>, <a href="https://github.com/milvus-io/milvus/pull/52391">#52391</a>, <a href="https://github.com/milvus-io/milvus/pull/52392">#52392</a>, <a href="https://github.com/milvus-io/milvus/pull/52393">#52393</a>)</li>
-<li>구조체(struct)의 VARCHAR 배열 하위 필드에 하이브리드 스칼라 인덱스를 사용할 때 버전 메타데이터 누락 오류로 인한 세그먼트 로딩 실패 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52385">#52385</a>)</li>
+<li>구조체(struct)의 VARCHAR 배열 하위 필드에 하이브리드 스칼라 인덱스를 사용할 때 버전 메타데이터 누락 오류로 인해 세그먼트 로딩이 실패하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52385">#52385</a>)</li>
 <li>업데이트된 매니페스트를 다시 열었을 때 외부 열이 새로 고침되지 않는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52397">#52397</a>)</li>
 <li>시간 기반 조건이 포함된 검색에서 시간대 처리가 올바르지 않았던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52407">#52407</a>).</li>
 <li>검색 요청에서 ArrayOfVector 입력에 대한 잘못된 처리를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52408">#52408</a>).</li>
@@ -389,7 +580,7 @@ title: 릴리스 노트
 <li>신뢰할 수 없는 워커 버전 확인 또는 지원되지 않는 워커에 대해 타임아웃이 발생할 때까지 반복적으로 재시도하여 외부 스냅샷 복원이 중단되던 문제 수정 (<a href="https://github.com/milvus-io/milvus/pull/52639">#52639</a>)</li>
 <li>3.0.0 버전의 레거시 STLSORT 파일이 포함된 구조체 배열 하위 필드에 대한 HYBRID 인덱스의 세그먼트 로딩 오류를 수정했으며, 재인덱싱이 필요하지 않습니다(<a href="https://github.com/milvus-io/milvus/pull/52643">#52643</a>)</li>
 <li>길이가 0인 Arrow C 데이터 버퍼를 처리할 때 발생하는 충돌을 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52652">#52652</a>).</li>
-<li>매니페스트 오류 발생 후 Storage V3 세그먼트를 로드하거나 다시 열 때 오류 처리가 올바르지 않았던 문제를 수정하여, 안전한 재시도를 위해 기존 세그먼트 상태를 보존하도록 했습니다(<a href="https://github.com/milvus-io/milvus/pull/52678">#52678</a>)</li>
+<li>매니페스트 오류 발생 후 Storage V3 세그먼트를 로드하거나 다시 열 때 오류 처리가 올바르지 않았던 문제를 수정하고, 안전한 재시도를 위해 기존 세그먼트 상태를 보존하도록 했습니다(<a href="https://github.com/milvus-io/milvus/pull/52678">#52678</a>)</li>
 <li>ARRAY 요소 필터가 뒤따르는 요소들보다 먼저 NULL 또는 빈 배열로만 구성된 전체 배치를 발견했을 때 발생하는 쿼리 오류를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52720">#52720</a>).</li>
 <li>컬렉션 스키마가 변경된 후 백필 작업이 오래된 임베딩을 커밋하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52789">#52789</a>)</li>
 <li>Storage V3 레코드에서 누락된 필드가 선언된 기본값 대신 NULL로 반환되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52790">#52790</a>, <a href="https://github.com/milvus-io/milvus/pull/52807">#52807</a>, <a href="https://github.com/milvus-io/milvus/pull/52888">#52888</a>)</li>
@@ -397,12 +588,12 @@ title: 릴리스 노트
 <li>외부 프록시 포트에서 gRPC 스트리밍 호출을 통한 인증되지 않은 액세스 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52854">#52854</a>)</li>
 <li>클러스터링 압축 후 데이터의 원래 커밋 타임스탬프가 손실되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52859">#52859</a>).</li>
 <li>기존 Storage V2 세그먼트가 있는 컬렉션에 TEXT 필드를 추가한 후 반복되는 플러시 오류로 인해 발생하는 스트리밍 노드 충돌 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52897">#52897</a>).</li>
-<li>Storage V3 세그먼트에서 만료된 행이 TTL 필드 기반 압축을 트리거하지 못하고 다른 압축 조건이 충족될 때까지 저장되어 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52931">#52931</a>).</li>
+<li>Storage V3 세그먼트에서 만료된 행이 TTL 필드 기반 압축을 트리거하지 못하고, 다른 압축 조건이 충족될 때까지 저장된 채로 남아 있던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52931">#52931</a>).</li>
 <li>CDC 복제 가져오기 과정에서 소스 및 대상 컬렉션 간에 자동 생성된 기본 키가 일관되지 않던 문제 수정 (<a href="https://github.com/milvus-io/milvus/pull/52941">#52941</a>)</li>
 <li>WAL 백엔드 마이그레이션 중 동시 쓰기 작업이 손실되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52947">#52947</a>, <a href="https://github.com/milvus-io/milvus/pull/52951">#52951</a>, <a href="https://github.com/milvus-io/milvus/pull/52955">#52955</a>)</li>
 <li>카디널리티가 높은 데이터가 포함된 재구축되거나 압축된 중첩 HYBRID 인덱스가 이전 버전으로 롤백된 후 읽을 수 없게 되는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52959">#52959</a>)</li>
 <li>모든 값이 null인 null 허용 행을 허용하고, 부분적으로 null인 행에 대한 구성 가능한 처리 방식을 추가하여 외부 고밀도 벡터 행 내 null 요소 처리를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52968">#52968</a>)</li>
-<li>스트리밍 노드 장애 조치 후 V3 세그먼트 행 수가 잘못 계산되고 정렬 압축이 반복적으로 실패하는 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52970">#52970</a>)</li>
+<li>스트리밍 노드 장애 조치 후 V3 세그먼트 행 수 오류 및 반복되는 정렬 압축 실패 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52970">#52970</a>)</li>
 <li>범위 조건과 OR 연산자를 결합한 쿼리에서 포함 하한값의 레코드가 누락되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52998">#52998</a>)</li>
 <li>주키를 사용한 검색 시 요청된 ID 순서가 유지되지 않던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/52999">#52999</a>)</li>
 <li>Storage V3를 활성화한 후 TEXT 필드를 추가하면 기존 Storage V2 확장 세그먼트가 로드되지 않아 플러시, 정렬 및 인덱스 작업이 중단되던 문제를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/53002">#53002</a>).</li>
@@ -452,12 +643,12 @@ title: 릴리스 노트
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="External-Collection-more-complete-lakehouse-workflows" class="common-anchor-header">외부 컬렉션: 더욱 완성도 높은 레이크하우스 워크플로우</h4><p>3.0-beta에서는 ‘외부 컬렉션(External Collection)’ 기능이 도입되어, 데이터를 Milvus로 복사하지 않고도 기존 레이크 파일을 참조하고, 인덱스를 생성하며, 검색할 수 있게 되었습니다. 이번 릴리스에서는 이를 확장하여 완전한 레이크하우스 검색 워크플로우를 지원합니다. 이제 외부 필드는 BM25 스파스 벡터, MinHash 시그니처, 텍스트 임베딩과 같은 함수 출력 필드에 데이터를 제공할 수 있으므로, 소스 테이블을 복사하지 않고도 Milvus 내에서 텍스트 및 모델 기반 검색 필드를 생성할 수 있습니다. Refresh는 또한 추가형 스키마 진화를 지원합니다. 외부 테이블에 새로운 열이 추가되면 Milvus는 컬렉션을 재구축하는 대신 영향을 받는 세그먼트만 패치합니다.</p>
+    </button></h3><h4 id="External-Collection-more-complete-lakehouse-workflows" class="common-anchor-header">외부 컬렉션: 더욱 완성도 높은 레이크하우스 워크플로우</h4><p>3.0-beta에서는 ‘외부 컬렉션(External Collection)’ 기능이 도입되어, 데이터를 Milvus로 복사하지 않고도 기존 레이크 파일을 참조하고, 인덱스를 생성하며, 검색할 수 있게 되었습니다. 이번 릴리스에서는 이를 확장하여 완전한 레이크하우스 검색 워크플로우를 지원합니다. 이제 외부 필드는 BM25 스파스 벡터, MinHash 시그니처, 텍스트 임베딩과 같은 함수 출력 필드에 입력으로 제공될 수 있으므로, 소스 테이블을 복사하지 않고도 Milvus 내에서 텍스트 및 모델 기반 검색 필드를 생성할 수 있습니다. Refresh는 또한 추가형 스키마 진화를 지원합니다. 외부 테이블에 새로운 열이 추가되면 Milvus는 컬렉션을 재구축하는 대신 영향을 받는 세그먼트만 패치합니다.</p>
 <p>또한 이번 릴리스에서는 Milvus 스냅샷 메타데이터와 Storage V3 매니페스트를 외부 소스로 취급하는 ‘ <code translate="no">milvus-table</code> ’ 외부 형식이 추가되어, 컬렉션 스냅샷 자체가 외부 테이블로 제공될 수 있습니다. 이를 통해 배치 및 서빙 시스템은 동일한 데이터에 대한 매니페스트 기반의 공유 뷰를 확보할 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/create-an-external-collection.md">‘외부 컬렉션</a> 및 <a href="/docs/ko/snapshots.md">스냅샷</a> 생성’을 참조하십시오.</p>
-<h4 id="Flexible-schema-add-backfill-and-drop-columns-online" class="common-anchor-header">유연한 스키마: 온라인에서 열 추가, 백필 및 삭제</h4><p>프로덕션 환경에서 스키마는 정적이지 않습니다. 내장 모델이 교체되고, 기능이 반복적으로 개선되며, 필드가 더 이상 사용되지 않게 되는 등 변화가 발생하는데, 과거에는 이러한 변경으로 인해 다운타임이나 이중 쓰기가 수반되는 전체 컬렉션 재구축이 필요했습니다. 3.0.0 버전은 이러한 문제를 해결하여, 서비스 제공이 계속되는 동안에도 열을 추가, 채우기 및 삭제할 수 있게 되었습니다.</p>
+<h4 id="Flexible-schema-add-backfill-and-drop-columns-online" class="common-anchor-header">유연한 스키마: 온라인에서 열 추가, 백필 및 삭제</h4><p>프로덕션 환경에서 스키마는 정적이지 않습니다. 모델이 교체되고, 기능이 반복적으로 개선되며, 필드가 더 이상 사용되지 않게 되는 등 변화가 발생하는데, 과거에는 이러한 변경으로 인해 다운타임이나 이중 쓰기가 수반되는 전체 컬렉션 재구축이 필요했습니다. 3.0.0 버전은 이러한 문제를 해결하여, 서비스 제공이 계속되는 동안에도 열을 추가, 채우기 및 삭제할 수 있게 되었습니다.</p>
 <p>백필은 양방향으로 작동합니다. 외부 백필은 Milvus 외부에서 계산된 값을 처리합니다. 열을 추가하고, 일관된 시작점으로 컬렉션의 스냅샷을 생성한 다음, 오프라인에서 작업을 실행하고, 값을 다시 기록하면 Milvus가 새 열을 증분 방식으로 인덱싱합니다. 이를 통해 수억 행에 걸친 임베딩 모델 업그레이드도 다운타임 없이 원활하게 처리됩니다. 내부 백필(Inner backfill)은 커널에서 파생된 값을 처리합니다. 기존 컬렉션에 BM25 또는 MinHash 함수를 연결하면, 해당 출력 필드가 기존 데이터를 기반으로 자동으로 계산됩니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">‘기존 컬렉션에 필드 추가’를</a> 참조하십시오.</p>
+<p>자세한 내용은 <a href="/docs/ko/add-fields-to-an-existing-collection.md">‘기존 컬렉션에 필드 추가’</a>를 참조하십시오.</p>
 <h4 id="Sparse-index-overhaul-SINDI-Block-Max-WAND-and-Block-Max-MaxScore" class="common-anchor-header">스파스 인덱스 전면 개편: SINDI, Block-Max WAND 및 Block-Max MaxScore</h4><p>Milvus 3.0은 스파스 벡터 인덱스를 전반적으로 업그레이드했습니다. <a href="https://arxiv.org/abs/2509.08395">SINDI</a>, Block-Max WAND, Block-Max MaxScore와 같은 새로운 검색 알고리즘을 도입했으며, 역목록 압축, 구성 가능한 양자화, 워크로드별 검색 알고리즘 선택 기능을 추가했습니다. 또한 mmap 로딩, 직렬화 및 BM25 스코어링이 최적화되어 대규모 스파스 벡터 및 전체 텍스트 검색 시 인덱스 저장 공간과 로딩 오버헤드가 감소합니다. 내부 벤치마크 결과, 압축된 BM25 인덱스는 유사한 리콜률에서 2.6 스파스 인덱스보다 크기가 약 3배 더 작으며, SINDI는 학습된 스파스 임베딩에서 MaxScore 대비 최대 약 10배의 QPS를 달성합니다. 새로운 인덱스 버전이 활성화되면(호환성 및 동작 참고 사항 참조), SINDI는 스파스 IP 검색의 기본값이 되고, MaxScore는 BM25의 기본값이 됩니다.</p>
 <h4 id="StructArray-coverage" class="common-anchor-header">StructArray 지원 범위</h4><p>StructArray는 이제 null 값, 비트맵 인덱스, 활성 컬렉션에 대한 동적 필드 추가, upsert를 통한 구조체 필드의 부분 업데이트를 지원하며, 이에 상응하는 REST 및 대량 가져오기 기능도 지원합니다.</p>
 <p>요소 수준 검색에는 엔티티별로 구성 가능한 집계(최대값/합계/평균/상위 k개 변형)를 지원하는 벡터 하위 필드에 걸친 하이브리드 검색과, 범위 검색 및 그룹화 기능이 추가되었습니다. 중첩 필터링은 ` <code translate="no">element_filter</code> ` 술어, ` <code translate="no">MATCH_ANY</code> `/` <code translate="no">MATCH_ALL</code> `/` <code translate="no">MATCH_LEAST</code> `/` <code translate="no">MATCH_MOST</code> `/` <code translate="no">MATCH_EXACT</code> ` 양화자, ` <code translate="no">tags[0][name]</code>`와 같은 위치 기반 하위 필드 액세스, 그리고 구조체 열에 대한 ` <code translate="no">array_length()</code> `를 지원합니다.</p>
@@ -466,7 +657,7 @@ title: 릴리스 노트
 <h4 id="Function-Chain-reranking" class="common-anchor-header">함수 체인 재순위 지정</h4><p>재순위는 이제 Function Chain API를 통해 조합할 수 있으며, 이는 단일 검색 요청의 일부로 순서 지정되고 유형이 지정된 파이프라인을 실행합니다. 하나의 체인은 QueryNode에서의 초기 L0 재점수와 Proxy에서의 L2 사후 축소 재순위를 결합할 수 있으며, 클라이언트 측 오케스트레이션 없이 점수 변환 및 결합, 모델 기반 재순위 지정, 정렬, 후보 트리밍을 지원합니다. 또한 이번 릴리스에서는 FileResources로 등록된 UBJ 모델을 사용하는 L0 재순위를 위한 네이티브 XGBoost 스코어링과, 서버에서 관리되는 텍스트 임베딩 및 문장 유사도 재순위를 위한 Hugging Face 추론 제공자가 추가되었습니다.</p>
 <h4 id="TEXT-long-text-fields" class="common-anchor-header">TEXT 장문 필드</h4><p>TEXT 필드는 저장소 측의 길이 제한을 제거하여 긴 텍스트를 1급 데이터로 처리합니다. 이 필드는 <code translate="no">text_match</code>, <code translate="no">phrase_match</code> 및 BM25를 지원합니다. 64KB 미만의 값은 인라인으로 유지되며, 그보다 큰 값은 Vortex 형식의 파티션 수준 LOB 파일로 이동하고, 해당 열에는 <code translate="no">(file_id, offset)</code> 참조만 저장됩니다. LOB 파일은 세그먼트 간에 공유되므로, 압축 시 텍스트를 다시 쓰지 않고 참조만 이동시킵니다. RAG의 경우, 이는 하나의 I/O로 동일한 저장소에서 벡터와 소스 텍스트를 모두 가져올 수 있음을 의미하며, 별도의 외부 BLOB 저장소를 운영할 필요가 없습니다.</p>
 <h4 id="FAISS-index-passthrough" class="common-anchor-header">FAISS 인덱스 패스스루</h4><p>새로운 ` <code translate="no">FAISS</code> ` 인덱스 유형은 ` <code translate="no">faiss_index_name</code> ` 매개변수( <code translate="no">IVF64,Flat</code>, <code translate="no">HNSW16,Flat</code>, <code translate="no">OPQ16,IVF64,PQ16x4</code> )를 통해 임의의 Faiss 인덱스 팩토리 문자열을 수용하며, 검색 매개변수가 그대로 전달되므로 Faiss 레시피가 Milvus에서 직접 재현됩니다.</p>
-<h4 id="Vortex-and-Lance-format-support" class="common-anchor-header">Vortex 및 Lance 형식 지원</h4><p>저장소 계층에는 두 가지 오픈 컬럼나 형식이 추가되었습니다. 차세대 내부 형식인 Vortex(적응형 인코딩(사전, RLE, 비트 패킹, 부동 소수점 전용 압축), 제로 카피 압축 해제, 벡터와 스칼라 워크로드 혼합에 최적화됨)와, 오픈 생태계 간 교환을 위해 Parquet와 함께 제공되는 Lance가 그것입니다. Vortex는 기본 내부 형식으로 채택될 예정이며, 필터 푸시다운 및 로컬 변형 기능도 로드맵에 포함되어 있습니다.</p>
+<h4 id="Vortex-and-Lance-format-support" class="common-anchor-header">Vortex 및 Lance 형식 지원</h4><p>저장소 계층에는 두 가지 개방형 컬럼형 형식이 추가되었습니다. 차세대 내부 형식인 Vortex(적응형 인코딩(사전, RLE, 비트 패킹, 부동 소수점 전용 압축), 제로 카피 압축 해제, 벡터 및 스칼라 혼합 워크로드에 최적화됨)와, 개방형 생태계 간 교환을 위해 Parquet과 함께 제공되는 Lance가 있습니다. Vortex는 기본 내부 형식으로 채택될 예정이며, 필터 푸시다운 및 로컬 변형 기능도 로드맵에 포함되어 있습니다.</p>
 <h4 id="Woodpecker-standalone-deployment" class="common-anchor-header">Woodpecker 독립형 배포</h4><p>스트리밍 쓰기 경로의 핵심인 WAL인 Woodpecker는 이제 다른 노드에 내장되는 대신 독립적인 서비스로 배포될 수 있습니다. 이는 다른 마이크로서비스와 마찬가지로 독립적인 확장성, 장애 격리 및 가시성을 제공합니다. 이는 대규모 클러스터와 쓰기 부하가 높은 워크로드에서 특히 중요합니다.</p>
 <h3 id="Core-30-features-recall" class="common-anchor-header">Core 3.0 주요 기능 정리<button data-href="#Core-30-features-recall" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -487,7 +678,7 @@ title: 릴리스 노트
 <ul>
 <li><strong>외부 컬렉션</strong> — 레이크하우스 데이터(Parquet, Lance, Iceberg, Vortex)를 원위치에서 쿼리: 제로 카피, 읽기 전용, 증분 갱신을 통해 동기화됩니다.</li>
 <li><strong>스냅샷</strong> — 세그먼트 참조를 통한 특정 시점의 읽기 전용 컬렉션 뷰로, 추가 저장 공간 사용량이 거의 제로에 가깝습니다.</li>
-<li><strong>Storage V3 (Loon)</strong> — 오브젝트 스토리지 상의 매니페스트 기반 컬럼형 스토리지; 스냅샷 및 외부 컬렉션의 기반이 됩니다.</li>
+<li><strong>스토리지 V3(Loon)</strong> — 오브젝트 스토리지에 기반한 매니페스트 기반 열 기반 스토리지; 스냅샷 및 외부 컬렉션의 기반이 됩니다.</li>
 <li><strong>쿼리/검색 ORDER BY</strong> — 필드별 ASC/DESC를 지원하는 서버 측 다중 필드 정렬.</li>
 <li><strong>쿼리 집계</strong> — 그룹화(group-by)가 포함된 COUNT / SUM / AVG / MIN / MAX 연산으로, 서버 측에서 평가됩니다.</li>
 <li><strong>EmbList + DiskANN</strong> — StructArray 임베딩 목록을 위한 온디스크 다중 벡터 인덱싱으로, Muvera 및 Lemur와 같은 가속 경로를 제공합니다.</li>
@@ -542,7 +733,7 @@ title: 릴리스 노트
 <tr><td>3.0-beta</td><td>3.0.0</td><td>3.0.0</td></tr>
 </tbody>
 </table>
-<p>Milvus 3.0-beta는 오픈 레이크 생태계와의 새로운 통합을 통해 Milvus 벡터 데이터베이스를 확장합니다. External Collection을 통해 Milvus는 제로 카피 방식으로 외부 레이크 테이블을 쿼리할 수 있으며, Spark는 스냅샷을 통해 Milvus 컬렉션을 직접 읽을 수 있습니다. 또한 이번 릴리스에서는 더욱 풍부한 검색 기능, 더 표현력 있는 스키마, 심화된 텍스트 검색 사용자 지정, 세밀한 데이터 및 모델 수명 주기 제어, 그리고 더 많은 운영자 측 제어 기능을 제공합니다. Milvus 3.0은 Zilliz Lakebase의 핵심 커널로, 통합 서비스, 검색 및 배치 기능을 지원합니다.</p>
+<p>Milvus 3.0-beta는 오픈 레이크 생태계와의 새로운 통합 기능을 통해 Milvus 벡터 데이터베이스를 확장합니다. External Collection을 통해 Milvus는 제로 카피 방식으로 외부 레이크 테이블을 쿼리할 수 있으며, Spark는 스냅샷을 통해 Milvus 컬렉션을 직접 읽을 수 있습니다. 또한 이번 릴리스에서는 더욱 풍부한 검색 기능, 표현력이 뛰어난 스키마, 심화된 텍스트 검색 사용자 지정, 세밀한 데이터 및 모델 수명 주기 제어, 그리고 더 많은 운영자 측 제어 기능을 제공합니다. Milvus 3.0은 Zilliz Lakebase의 핵심 커널로, 통합 서비스, 검색 및 배치 기능을 지원합니다.</p>
 <h3 id="Key-Features" class="common-anchor-header">주요 기능<button data-href="#Key-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

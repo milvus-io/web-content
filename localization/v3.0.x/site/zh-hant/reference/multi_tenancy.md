@@ -1,7 +1,7 @@
 ---
 id: multi_tenancy.md
 title: 實作多租戶架構
-summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「租戶」）共用同一個叢集，同時維持各自隔離的資料環境。
+summary: 在 Milvus 中，多租戶（multi-tenancy）意指多個客戶或團隊（稱為「租戶」）共用同一個叢集，同時維持各自隔離的資料環境。
 ---
 <h1 id="Implement-Multi-tenancy" class="common-anchor-header">實作多租戶架構<button data-href="#Implement-Multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，多租戶意指多個客戶或團隊（稱為「<strong>租戶</strong>」）共用同一個叢集，同時維持各自隔離的資料環境。</p>
-<p>Milvus 支援四種多租戶策略，每種策略在可擴展性、資料隔離性與靈活性之間都有不同的權衡取捨。本指南將帶您逐步了解每種選項，協助您為您的使用情境選擇最適合的策略。</p>
+<p>Milvus 支援四種多租戶策略，每種策略在可擴展性、資料隔離與靈活性之間都有不同的權衡取捨。本指南將帶您逐步了解每種選項，協助您為您的使用情境選擇最適合的策略。</p>
 <h2 id="Multi-tenancy-strategies" class="common-anchor-header">多租戶策略<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「
 <ul>
 <li><p><strong>可擴展性</strong>：預設情況下，資料庫層級的多租戶策略最多可支援 64 個租戶。</p></li>
 <li><p><strong>資料隔離</strong>：每個資料庫中的資料完全分離，提供企業級的資料隔離，非常適合受監管的環境或具有嚴格合規需求的客戶。</p></li>
-<li><p><strong>靈活性</strong>：每個資料庫可包含具有不同資料結構的集合，提供高度靈活的資料組織方式，並允許每個租戶擁有專屬的資料結構。</p></li>
+<li><p><strong>靈活性</strong>：每個資料庫可包含具有不同資料結構的集合，提供高度靈活的資料組織方式，並允許每個租戶擁有自己的資料結構。</p></li>
 <li><p><strong>其他</strong>：此策略亦支援基於角色的存取控制（RBAC），可針對每個租戶進行細粒度的使用者存取控制。此外，您可針對特定租戶靈活載入或釋放資料，以有效管理熱資料與冷資料。</p></li>
 </ul>
 <h3 id="Collection-level-multi-tenancy" class="common-anchor-header">集合層級的多租戶架構<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
@@ -117,7 +117,7 @@ summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「
 <ul>
 <li><p><strong>可擴展性</strong>：每個集合最多可包含 1,024 個分區，因此可容納相同數量的租戶。</p></li>
 <li><p><strong>資料隔離</strong>：各租戶的資料透過分區在物理層面上相互隔離。</p></li>
-<li><p><strong>靈活性</strong>：此策略要求所有租戶共用相同的数据模式。此外，分區需手動建立。</p></li>
+<li><p><strong>靈活性</strong>：此策略要求所有租戶共用相同的数据模式，且分區需手動建立。</p></li>
 <li><p><strong>其他</strong>：分區層級不支援基於角色的存取控制（RBAC）。租戶資料可單獨查詢，亦可跨多個分區進行查詢，這使得此方法非常適合涉及跨租戶區段的彙總查詢或分析情境。此外，您可以靈活地為特定租戶載入或釋放資料，以有效管理熱資料與冷資料。</p></li>
 </ul>
 <h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">分區鍵層級的多租戶架構<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
@@ -135,7 +135,7 @@ summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>採用此策略時，所有租戶共用單一集合與資料結構，但每個租戶的資料會根據<a href="/docs/zh-hant/use-partition-key.md">分區鍵值</a>，自動路由至 16 個物理上相互隔離的分區。雖然每個物理分區可能包含多個租戶，但來自不同租戶的資料在邏輯上仍保持分離。</p>
+    </button></h3><p>採用此策略時，所有租戶共用單一集合與資料結構，但每個租戶的資料會根據<a href="/docs/zh-hant/use-partition-key.md">分區鍵值</a>，自動路由至 16 個物理上相互隔離的分區。雖然每個物理分區可包含多個租戶，但不同租戶的資料在邏輯上仍保持分離。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/partition-key-level-multi-tenancy.png" alt="Partition Key Level Multi Tenancy" class="doc-image" id="partition-key-level-multi-tenancy" /> 
@@ -166,7 +166,7 @@ summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表針對四種層級的多租戶策略提供了全面的比較。</p>
+    </button></h2><p>下表針對四種層級的多租戶策略進行了全面比較。</p>
 <table>
    <tr>
      <th></th>
@@ -183,9 +183,9 @@ summary: 在 Milvus 中，多租戶模式意指多個客戶或團隊（稱為「
      <td><p>物理 + 邏輯</p></td>
    </tr>
    <tr>
-     <td><p><strong>最大租戶數</strong></p></td>
+     <td><p><strong>租戶最大數量</strong></p></td>
      <td><p>預設為 64。您可以透過修改 Milvus.yaml 配置檔案中的<code translate="no">maxDatabaseNum</code> 參數來增加此數值。 </p></td>
-     <td><p>預設為 65,536。您可以透過修改 Milvus.yaml 設定檔中的<code translate="no">maxCollectionNum</code> 參數來增加此數值。</p></td>
+     <td><p>預設為 65,536。您可以透過修改 Milvus.yaml 配置檔案中的<code translate="no">maxCollectionNum</code> 參數來增加此數值。</p></td>
      <td><p>每個集合最多 1,024 個。 </p></td>
      <td><p>數百萬</p></td>
    </tr>

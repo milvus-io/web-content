@@ -40,7 +40,7 @@ summary: >-
     </button></h2><ul>
 <li>في Milvus 3.x، يُعد Woodpecker سجل الكتابة المسبق/قائمة انتظار الرسائل <strong>الافتراضية،</strong> حيث يوفر عمليات كتابة مرتبة واستعادة البيانات بصفته خدمة التسجيل. ولا توجد حاجة إلى خدمة قائمة انتظار رسائل خارجية (مثل Pulsar أو Kafka).</li>
 <li>يمكن تشغيل Woodpecker <strong>مدمجًا</strong> في عقدة Milvus/البث (افتراضيًا)، أو <strong>كخدمة مخصصة</strong> مع وحدات pod الخاصة بها (الموزعة/المجموعة فقط).</li>
-<li>وهي تدعم ثلاثة أوضاع لـ « <code translate="no">storage.type</code> »: تخزين الكائنات (<code translate="no">minio</code> ، الوضع الافتراضي)، ونظام الملفات المحلي (<code translate="no">local</code>)، و <code translate="no">service</code> المخصص. راجع <a href="#Deployment-modes">أوضاع النشر</a>.</li>
+<li>وهي تدعم ثلاثة أوضاع لـ « <code translate="no">storage.type</code> »: تخزين الكائنات (<code translate="no">minio</code> ، الوضع الافتراضي)، ونظام الملفات المحلي (<code translate="no">local</code>)، و <code translate="no">service</code> المخصص. انظر <a href="#Deployment-modes">أوضاع النشر</a>.</li>
 </ul>
 <h2 id="Quick-start" class="common-anchor-header">البداية السريعة<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,7 +164,7 @@ summary: >-
 <p>ملاحظات:</p>
 <ul>
 <li>مع <code translate="no">minio</code> ، يشارك Woodpecker نفس تخزين الكائنات مع Milvus (MinIO/S3/GCS/OSS، إلخ).</li>
-<li>مع وضع "التخزين المباشر" ( <code translate="no">local</code>)، لا يُعد القرص المحلي ذو العقدة الواحدة مناسبًا إلا لوضع "المستقل" (Standalone). إذا كان بإمكان جميع الوحدات (pods) الوصول إلى نظام ملفات مشترك (مثل NFS)، فيمكن لوضع "العنقود" (Cluster) أيضًا استخدام وضع "التخزين المباشر" ( <code translate="no">local</code>).</li>
+<li>مع وضع "التخزين المباشر" ( <code translate="no">local</code>)، لا يُعد القرص المحلي ذو العقدة الواحدة مناسبًا إلا لوضع "المستقل" (Standalone). إذا كان بإمكان جميع البودات الوصول إلى نظام ملفات مشترك (مثل NFS)، فيمكن لوضع "العنقود" (Cluster) أيضًا استخدام وضع "التخزين المباشر" ( <code translate="no">local</code>).</li>
 <li><strong><code translate="no">service</code> يعمل هذا الوضع على تشغيل Woodpecker كخدمة منفصلة وقابلة للتوسع بشكل مستقل، وهو متاح فقط لعمليات النشر الموزعة/العنقودية.</strong> تستخدم عمليات النشر المستقلة الأوضاع المدمجة (<code translate="no">minio</code> أو <code translate="no">local</code>).</li>
 </ul>
 <h2 id="Object-storage-compatibility-for-storagetypeminio" class="common-anchor-header">توافق تخزين الكائنات مع <code translate="no">storage.type=minio</code><button data-href="#Object-storage-compatibility-for-storagetypeminio" class="anchor-icon" translate="no">
@@ -190,12 +190,12 @@ summary: >-
 <tbody>
 <tr><td>تخزين Azure Blob</td><td>مدعوم</td><td>يستخدم Azure SDK الأصلي.</td></tr>
 <tr><td>AWS S3</td><td>مدعوم</td><td>S3 الأصلي مع دعم كامل للكتابة المشروطة.</td></tr>
-<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>مدعوم</td><td>دعم كامل للكتابة المشروطة لـ S3.</td></tr>
+<tr><td>MinIO (<code translate="no">&gt;= 2024-12</code>)</td><td>مدعوم</td><td>دعم كامل للكتابة الشرطية لـ S3.</td></tr>
 <tr><td>Aliyun OSS</td><td>مدعوم</td><td>مدعوم من خلال واجهته المتوافقة مع S3.</td></tr>
 <tr><td>Tencent COS</td><td>مدعوم</td><td>مدعوم من خلال واجهته المتوافقة مع S3.</td></tr>
 <tr><td>Google Cloud Storage (GCS)</td><td>مدعوم</td><td>مدعوم من خلال وضع التوافق مع S3.</td></tr>
 <tr><td>Huawei Cloud OBS</td><td>غير مدعوم</td><td>يفتقر إلى دلالات الكتابة الشرطية المطلوبة.</td></tr>
-<tr><td>VAST Data</td><td>مدعوم</td><td>تم التحقق منه من قبل المجتمع؛ يعمل مع المجموعات غير المُصنفة حسب الإصدار فقط.</td></tr>
+<tr><td>VAST Data</td><td>مدعوم</td><td>تم التحقق منه من قبل المجتمع؛ يعمل مع المجموعات غير المُصنّفة حسب الإصدار فقط.</td></tr>
 <tr><td>وسائط تخزين أخرى متوافقة مع S3</td><td>جزئي</td><td>يعتمد على الدعم الكامل لدلالات الكتابة المشروطة لـ S3.</td></tr>
 </tbody>
 </table>
@@ -281,7 +281,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p>ثم قم بالنشر باستخدام أحد الأمثلة التالية:</p>
 <p>– نشر الكتلة (الإعدادات الموصى بها مع تمكين Woodpecker و Streaming Node):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -289,7 +289,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <button class="copy-code-btn"></button></code></pre>
 <p>– النشر المستقل (مع تمكين Woodpecker):</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -312,7 +312,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>في Milvus 3.x، يستخدم النشر المستقل في Docker Woodpecker مع <strong>نظام الملفات المحلي</strong> كخلفية WAL <strong>بشكل افتراضي</strong> — ولا يتطلب الأمر أي تكوين إضافي. اتبع <a href="/docs/ar/install_standalone-docker.md">إرشادات تشغيل Milvus في Docker</a>:</p>
+    </button></h3><p>في Milvus 3.x، يستخدم النشر المستقل في Docker Woodpecker مع <strong>نظام الملفات المحلي</strong> كخلفية WAL <strong>بشكل افتراضي</strong> — ولا يلزم إجراء أي تكوين إضافي. اتبع <a href="/docs/ar/install_standalone-docker.md">إرشادات تشغيل Milvus في Docker</a>:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp
 curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 bash standalone_embed.sh start
@@ -341,7 +341,7 @@ bash standalone_embed.sh start
       </svg>
     </button></h3><p>اتبع <a href="/docs/ar/install_standalone-docker-compose.md">إرشادات تشغيل Milvus باستخدام Docker Compose</a>. مثال:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">mkdir</span> milvus-wp-compose &amp;&amp; <span class="hljs-built_in">cd</span> milvus-wp-compose
-wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 <span class="hljs-comment"># By default, the Docker Compose standalone uses Woodpecker</span>
 <span class="hljs-built_in">sudo</span> docker compose up -d
 <span class="hljs-comment"># If you need to change Woodpecker parameters further, write an override:</span>
@@ -379,7 +379,7 @@ docker restart milvus-standalone
 </div>
 <p>يُعد <strong>وضع خدمة</strong> Woodpecker إحدى ميزات <strong>Milvus 3.0</strong>. بالنسبة لعمليات النشر الموزعة/المجمعة، يمكنك تشغيل Woodpecker <strong>كخدمة مخصصة</strong> (pods منفصلة) بدلاً من تضمينه في عقدة البث عن طريق تعيين <code translate="no">streaming.woodpecker.embedded=false</code>:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -425,18 +425,18 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بناءً على المعايير المرجعية والحدود الخلفية في <a href="/docs/ar/woodpecker_architecture.md">Woodpecker</a>، قم بتحسين معدل نقل البيانات للكتابة من البداية إلى النهاية من الجوانب التالية:</p>
+    </button></h3><p>استنادًا إلى المعايير المرجعية والحدود الخلفية في <a href="/docs/ar/woodpecker_architecture.md">Woodpecker</a>، قم بتحسين معدل نقل البيانات للكتابة من البداية إلى النهاية من الجوانب التالية:</p>
 <ul>
 <li>جانب التخزين
 <ul>
-<li><strong>تخزين الكائنات (متوافق مع MinIO/S3)</strong>: قم بزيادة التزامن وحجم الكائنات (تجنب الكائنات الصغيرة جدًا). راقب حدود عرض النطاق الترددي للشبكة ووحدة التخزين. غالبًا ما يبلغ الحد الأقصى لعقدة MinIO واحدة على SSD حوالي 100 ميجابايت/ثانية محليًّا؛ بينما يمكن أن تصل سرعة نقل البيانات من EC2 إلى S3 إلى جيجابايت/ثانية.</li>
+<li><strong>تخزين الكائنات (متوافق مع MinIO/S3)</strong>: قم بزيادة التزامن وحجم الكائنات (تجنب الكائنات الصغيرة جدًا). راقب حدود عرض النطاق الترددي للشبكة وحاوية التخزين. غالبًا ما يبلغ الحد الأقصى لعقدة MinIO واحدة على SSD حوالي 100 ميجابايت/ثانية محليًّا؛ بينما يمكن أن تصل سرعة نقل البيانات من EC2 إلى S3 إلى جيجابايت/ثانية.</li>
 <li><strong>أنظمة الملفات المحلية/المشتركة (محلية)</strong>: يُفضل استخدام NVMe/الأقراص السريعة. تأكد من أن نظام الملفات يتعامل جيدًا مع عمليات الكتابة الصغيرة وزمن انتقال fsync.</li>
 </ul></li>
 <li>أدوات ضبط Woodpecker
 <ul>
 <li>قم بزيادة القيم <code translate="no">logstore.segmentSyncPolicy.maxFlushSize</code> و <code translate="no">maxFlushThreads</code> للحصول على عمليات مسح أكبر وتوازي أعلى.</li>
 <li>اضبط <code translate="no">maxInterval</code> وفقًا لخصائص الوسائط (استبدل زمن الوصول بالإنتاجية مع تجميع أطول).</li>
-<li>بالنسبة لتخزين الكائنات، ضع في اعتبارك زيادة <code translate="no">segmentRollingPolicy.maxSize</code> لتقليل تبديل المقاطع.</li>
+<li>بالنسبة لتخزين الكائنات، ضع في اعتبارك زيادة <code translate="no">segmentRollingPolicy.maxSize</code> لتقليل عمليات تبديل المقاطع.</li>
 </ul></li>
 <li>جانب العميل/التطبيق
 <ul>
@@ -459,7 +459,7 @@ docker restart milvus-standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يحافظ وضع الخدمة على معدل نقل الكتابة العالي لـ WAL المدعوم بتخزين الكائنات مع إضافة زمن انتقال منخفض (انظر <a href="#Latency">زمن الانتقال</a>). لا يزال الضبط المذكور أعلاه من جانب التخزين وجانب العميل ساريًا؛ بالإضافة إلى ذلك، نظرًا لأن Woodpecker يعمل كخدمة مستقلة، يمكنك توسيع سعة الكتابة أفقيًا عن طريق إضافة نسخ متماثلة (<code translate="no">woodpecker.replicaCount</code> ، الافتراضي 4)، وتستفيد عمليات الكتابة من النسخ المتماثل بنظام النصاب القانوني ذي RTT واحد وعمليات القراءة التي تراعي الطوبولوجيا والتي تتجنب إعادة التوجيه عبر الوسيط.</p>
+    </button></h3><p>يحافظ وضع الخدمة على معدل نقل الكتابة العالي لـ WAL المدعوم بتخزين الكائنات مع إضافة زمن انتقال منخفض (انظر <a href="#Latency">زمن الانتقال</a>). لا تزال عمليات الضبط المذكورة أعلاه من جانب التخزين وجانب العميل سارية؛ بالإضافة إلى ذلك، نظرًا لأن Woodpecker يعمل كخدمة مستقلة، يمكنك توسيع سعة الكتابة أفقيًا عن طريق إضافة نسخ متماثلة (<code translate="no">woodpecker.replicaCount</code> ، الافتراضي 4)، وتستفيد عمليات الكتابة من النسخ المتماثل بنظام النصاب القانوني ذي RTT واحد وعمليات القراءة التي تراعي الطوبولوجيا والتي تتجنب إعادة التوجيه بواسطة الوسيط.</p>
 <p><strong>عرض توضيحي للإدراج الدفعي</strong> — استخدم ما يلي لقياس معدل نقل البيانات للكتابة:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
@@ -533,8 +533,8 @@ batch_count = <span class="hljs-number">2000</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Woodpecker هو WAL سحابي أصلي مصمم لتخزين الكائنات مع توازن بين معدل النقل والتكلفة وزمن الوصول. يعطي الوضع المدمج خفيف الوزن الأولوية لتحسين التكلفة ومعدل النقل، حيث تتطلب معظم السيناريوهات كتابة البيانات في غضون وقت معين فقط بدلاً من المطالبة بزمن وصول منخفض لطلبات الكتابة الفردية. لذلك، يستخدم Woodpecker عمليات الكتابة المجمعة، بفواصل زمنية افتراضية تبلغ 10 مللي ثانية لخلفية تخزين نظام الملفات المحلي و200 مللي ثانية لخلفية التخزين من نوع MinIO. أثناء عمليات الكتابة البطيئة، يساوي زمن الوصول الأقصى الفاصل الزمني مضافًا إليه وقت التفريغ.</p>
-<p>لاحظ أن الإدراج الدفعي لا يتم تشغيله فقط بواسطة الفواصل الزمنية، بل أيضًا بحجم الدفعة، الذي يبلغ 2 ميغابايت افتراضيًا.</p>
+    </button></h3><p>Woodpecker هو WAL سحابي أصلي مصمم لتخزين الكائنات مع توازن بين معدل النقل والتكلفة وزمن الوصول. يعطي الوضع المدمج الخفيف الأولوية لتحسين التكلفة ومعدل النقل، حيث تتطلب معظم السيناريوهات كتابة البيانات في غضون وقت معين فقط بدلاً من المطالبة بزمن وصول منخفض لطلبات الكتابة الفردية. لذلك، يستخدم Woodpecker عمليات الكتابة المجمعة، بفواصل زمنية افتراضية تبلغ 10 مللي ثانية لخلفية تخزين نظام الملفات المحلي و200 مللي ثانية لخلفية التخزين من نوع MinIO. أثناء عمليات الكتابة البطيئة، يساوي زمن الوصول الأقصى الفاصل الزمني مضافًا إليه وقت التفريغ.</p>
+<p>لاحظ أن الإدراج المجمّع لا يتم تشغيله فقط بواسطة الفواصل الزمنية، بل أيضًا بحجم الدفعة، الذي يبلغ 2 ميغابايت افتراضيًا.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">وضع الخدمة (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -557,7 +557,7 @@ batch_count = <span class="hljs-number">2000</span>
 <li><strong>التحميل الفوري إلى تخزين الكائنات بعد تدوير المقطع</strong> — يتتبع كل مقطع دورة حياته الكاملة ويتم تحميله إلى تخزين الكائنات فور تدويره، مما يحافظ على انخفاض الحجم على القرص المحلي وتكلفة التخزين دون المساومة على زمن الوصول.</li>
 <li><strong>لا يوجد تكرار مستمر من عقدة إلى أخرى</strong> — يتم الاحتفاظ بالسجلات في تخزين الكائنات الذي يعمل كوحدة تخزين مشتركة، لذا فإن عملية التحويل التلقائي في حالة الفشل تعيد تحميل النسخ المتبقية فقط (بدون نسخ العقدة بأكملها)، ولا يكون التوسع مقيدًا بعرض النطاق الترددي للتكرار بين العقد، ولا يتسبب استبدال العقد على نطاق واسع في حدوث «عواصف تكرار».</li>
 </ul>
-<p>في عمليات النشر عبر مناطق التوفر (AZ)، يوفر وضع الخدمة أيضًا ما يقارب <strong>ثلث حركة مرور الكتابة</strong> <strong>وثلثي حركة مرور القراءة</strong> عبر شبكة مناطق التوفر مقارنةً بأنظمة السجلات القائمة على الوسيط. للاطلاع على التصميم الكامل وتحليل التكلفة، راجع <a href="/docs/ar/woodpecker_architecture.md">بنية Woodpecker</a>.</p>
+<p>في عمليات النشر عبر مناطق التوفر (AZ)، يوفر وضع الخدمة أيضًا ما يقارب <strong>ثلث حركة مرور الكتابة</strong> <strong>وثلثي حركة مرور القراءة</strong> عبر شبكة مناطق التوفر مقارنةً بأنظمة السجلات القائمة على الوسيط. للاطلاع على التصميم الكامل وتحليل التكلفة، راجع <a href="/docs/ar/woodpecker_architecture.md">«بنية Woodpecker</a>».</p>
 <p>للحصول على تفاصيل حول البنية وأوضاع النشر (MemoryBuffer / QuorumBuffer) والأداء، راجع <a href="/docs/ar/woodpecker_architecture.md">«بنية Woodpecker</a>».</p>
 <p>لمزيد من التفاصيل حول المعلمات، راجع <a href="https://github.com/zilliztech/woodpecker">مستودع</a> Woodpecker على <a href="https://github.com/zilliztech/woodpecker">GitHub</a>.</p>
 <h2 id="Milvus-and-Woodpecker-versions" class="common-anchor-header">إصدارات Milvus و Woodpecker<button data-href="#Milvus-and-Woodpecker-versions" class="anchor-icon" translate="no">
@@ -608,7 +608,7 @@ batch_count = <span class="hljs-number">2000</span>
 <tr><td>v2.6.24–v2.6.25</td><td><code translate="no">v0.1.44</code></td><td><a href="https://github.com/milvus-io/milvus/blob/v2.6.24/pkg/go.mod">الإصدار الأول</a> · <a href="https://github.com/milvus-io/milvus/blob/v2.6.25/pkg/go.mod">الإصدار الأخير</a></td></tr>
 </tbody>
 </table>
-<p>الإصدارات مثل <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> هي إصدارات زائفة في لغة Go تحدد التزامًا معينًا في Woodpecker. يتم الاحتفاظ بها بالكامل في جدول الوضع المدمج لتمييز تحديثات التبعية بين إصدارات تصحيحات Milvus.</p>
+<p>الإصدارات مثل <code translate="no">v0.1.14-0.20260519022627-fdf34b23e0d7</code> هي إصدارات زائفة في لغة Go تحدد التزامًا معينًا في Woodpecker. يتم الاحتفاظ بها بالكامل في جدول الوضع المدمج لتمييز تحديثات التبعيات بين إصدارات تصحيحات Milvus.</p>
 <h3 id="Service-mode-Milvus-30+" class="common-anchor-header">وضع الخدمة (Milvus 3.0+)<button data-href="#Service-mode-Milvus-30+" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -663,6 +663,6 @@ batch_count = <span class="hljs-number">2000</span>
 <tr><td>3.x</td><td><a href="https://github.com/milvus-io/milvus/releases/tag/v3.0.3">الإصدار 3.0.3</a></td><td><code translate="no">v0.1.46</code></td><td><code translate="no">v0.1.46</code></td></tr>
 </tbody>
 </table>
-<p>نوصي بالترقية إلى <strong>أحدث إصدار تصحيح مستقر في سلسلة إصدارات Milvus التي اخترتها</strong> للحصول على أحدث الإصلاحات، بما في ذلك تحديثات مكتبة Woodpecker المدمجة. بالنسبة للإصدارات الأحدث، تحقق من <a href="https://github.com/milvus-io/milvus/releases">إصدارات Milvus</a> و <code translate="no">pkg/go.mod</code> الخاص بالإصدار المستهدف؛ تصف الجداول أعلاه الإصدارات المتاحة في التاريخ المذكور.</p>
+<p>نوصي بالترقية إلى <strong>أحدث إصدار تصحيح مستقر في سلسلة إصدارات Milvus التي اخترتها</strong> للحصول على أحدث الإصلاحات، بما في ذلك تحديثات مكتبة Woodpecker المدمجة. بالنسبة للإصدارات الأحدث، تحقق من <a href="https://github.com/milvus-io/milvus/releases">إصدارات Milvus</a> و <code translate="no">pkg/go.mod</code> للإصدار المستهدف؛ تصف الجداول أعلاه الإصدارات المتاحة في التاريخ المذكور.</p>
 <p>بالنسبة <strong>لوضع خدمة Woodpecker،</strong> نوصي <strong>باستخدام Milvus 3.0.3 أو أحدث مع Woodpecker v0.1.46 أو أحدث</strong>. عند ترقية Milvus في وضع الخدمة، قم أيضًا بتحديث صورة خادم Woodpecker التي تم نشرها بشكل منفصل إلى الإصدار الموصى به المقابل.</p>
-<p>للاطلاع على إجراءات الترقية، راجع <a href="/docs/ar/upgrade_milvus_cluster-helm.md">«ترقية مجموعة Milvus باستخدام Helm</a>»، أو <a href="/docs/ar/upgrade_milvus_cluster-operator.md">«ترقية مجموعة Milvus باستخدام Milvus Operator</a>»، أو <a href="/docs/ar/upgrade_milvus_standalone-docker.md">«ترقية Milvus المستقل باستخدام Docker Compose</a>».</p>
+<p>للاطلاع على إجراءات الترقية، راجع <a href="/docs/ar/upgrade_milvus_cluster-helm.md">«ترقية مجموعة Milvus باستخدام Helm</a>» أو <a href="/docs/ar/upgrade_milvus_cluster-operator.md">«ترقية مجموعة Milvus باستخدام Milvus Operator</a>» أو <a href="/docs/ar/upgrade_milvus_standalone-docker.md">«ترقية Milvus المستقل باستخدام Docker Compose</a>».</p>

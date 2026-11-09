@@ -1,6 +1,6 @@
 ---
 id: phrase-match.md
-title: Corrispondenza fraseCompatible with Milvus 2.5.17+
+title: Phrase MatchCompatible with Milvus 2.5.17+
 summary: >-
   La ricerca per frase consente di cercare documenti che contengano i termini
   della query come frase esatta. Per impostazione predefinita, le parole devono
@@ -11,7 +11,7 @@ summary: >-
   parole tra di esse.
 beta: Milvus 2.5.17+
 ---
-<h1 id="Phrase-Match" class="common-anchor-header">Corrispondenza frase<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
+<h1 id="Phrase-Match" class="common-anchor-header">Phrase Match<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,9 +26,9 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La corrispondenza di frase consente di cercare documenti che contengano i termini della query come frase esatta. Per impostazione predefinita, le parole devono apparire nello stesso ordine e essere direttamente adiacenti l'una all'altra. Ad esempio, una query come <strong>“robotica machine learning”</strong> trova corrispondenze in testi del tipo <em>“…modelli tipici di machine learning nella robotica…”</em>, dove le parole <strong>“robotica”</strong>, <strong>“machine”</strong> e <strong>“learning”</strong> compaiono in sequenza senza altre parole tra di esse.</p>
-<p>Tuttavia, in scenari reali, la corrispondenza esatta delle frasi può risultare troppo rigida. Potrebbe essere necessario trovare corrispondenze con testi del tipo <em>“…modelli di machine learning ampiamente adottati nella robotica…”.</em> In questo caso, le stesse parole chiave sono presenti ma non una accanto all’altra né nell’ordine originale. Per gestire questa situazione, la corrispondenza per frase supporta il parametro “ <code translate="no">slop</code> ”, che introduce una maggiore flessibilità. Il valore « <code translate="no">slop</code> » definisce quanti spostamenti posizionali sono consentiti tra i termini della frase. Ad esempio, con un « <code translate="no">slop</code> » pari a 1, una query per <strong>«machine learning»</strong> può trovare corrispondenze con testi come <em>«…machine deep learning…»</em>, dove una parola (<strong>«deep»</strong>) separa i termini originali.</p>
-<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Phrase match lets you search for documents containing your query terms as an exact phrase. By default, the words must appear in the same order and directly adjacent to one another. For example, a query for <strong>“robotics machine learning”</strong> matches text like <em>“…typical robotics machine learning models…”</em>, where the words <strong>“robotics”</strong>, <strong>“machine”</strong>, and <strong>“learning”</strong> appear in sequence with no other words between them.</p>
+<p>However, in real-world scenarios, strict phrase matching can be too rigid. You might want to match text like <em>“…machine learning models widely adopted in robotics…”</em>. Here, the same keywords are present but not side-by-side or in the original order. To handle this, phrase match supports a <code translate="no">slop</code> parameter, which introduces flexibility. The <code translate="no">slop</code> value defines how many positional shifts are allowed between the terms in the phrase. For example, with a <code translate="no">slop</code> of 1, a query for <strong>“machine learning”</strong> can match text like <em>“…machine deep learning…”</em>, where one word (<strong>“deep”</strong>) separates the original terms.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,30 +43,30 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Basata sulla libreria del motore di ricerca <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, la corrispondenza per frase funziona analizzando le informazioni posizionali delle parole all’interno dei documenti. Il diagramma seguente illustra il processo:</p>
-<p><span class="img-wrapper">
-  
-   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" /> 
-   <span>Flusso di lavoro della corrispondenza di frasi</span>
-  
- </span></p>
+    </button></h2><p>Powered by the <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> search engine library, phrase match works by analyzing the positional information of words within documents. The diagram below illustrates the process:</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/phrase-match-workflow.png" alt="Phrase Match Workflow" class="doc-image" id="phrase-match-workflow" />
+    <span>Phrase Match Workflow</span>
+  </span>
+</p>
 <ol>
-<li><p><strong>Tokenizzazione del documento</strong>: quando si inseriscono documenti in Milvus, il testo viene suddiviso in token (singole parole o termini) tramite un analizzatore, con la registrazione delle informazioni posizionali per ciascun token. Ad esempio, <strong>doc_1</strong> viene tokenizzato in <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. Per ulteriori informazioni sugli analizzatori, consultare <a href="/docs/it/analyzer-overview.md">la Panoramica sugli analizzatori</a>.</p></li>
-<li><p><strong>Creazione dell’indice invertito</strong>: Milvus crea un indice invertito, mappando ogni token ai documenti in cui compare e alle posizioni del token all’interno di tali documenti.</p></li>
-<li><p><strong>Corrispondenza delle frasi</strong>: quando viene eseguita una query per frase, Milvus cerca ogni token nell’indice invertito e ne verifica le posizioni per determinare se compaiono nell’ordine e nella vicinanza corretti. Il parametro ` <code translate="no">slop</code> ` controlla il numero massimo di posizioni consentite tra i token corrispondenti:</p>
+<li><p><strong>Document Tokenization</strong>: When you insert documents into Milvus, the text is split into tokens (individual words or terms) using an analyzer, with positional information recorded for each token. For example, <strong>doc_1</strong> is tokenized into <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. For more information on analyzers, refer to <a href="/docs/it/analyzer-overview.md">Analyzer Overview</a>.</p></li>
+<li><p><strong>Inverted Index Creation</strong>: Milvus builds an inverted index, mapping each token to the document(s) in which it appears and the token’s positions in those documents.</p></li>
+<li><p><strong>Phrase Matching</strong>: When a phrase query is executed, Milvus looks up each token in the inverted index and checks their positions to determine if they appear in the correct order and proximity. The <code translate="no">slop</code> parameter controls the maximum number of positions allowed between matching tokens:</p>
 <ul>
-<li><p><strong>slop = 0</strong> significa che i token devono apparire <strong>nell’ordine esatto ed essere immediatamente adiacenti</strong> (cioè senza parole extra in mezzo).</p>
+<li><p><strong>slop = 0</strong> means the tokens must appear <strong>in the exact order and immediately adjacent</strong> (i.e., no extra words in between).</p>
 <ul>
-<li>Nell’esempio, solo <strong>doc_1</strong> (<strong>“machine”</strong> in <strong>pos=0</strong>, <strong>“learning”</strong> in <strong>pos=1</strong>) corrisponde esattamente.</li>
+<li>In the example, only <strong>doc_1</strong> (<strong>“machine”</strong> at <strong>pos=0</strong>, <strong>“learning”</strong> at <strong>pos=1</strong>) matches exactly.</li>
 </ul></li>
-<li><p><strong>slop = 2</strong> consente fino a due posizioni di flessibilità o riorganizzazioni tra i token corrispondenti.</p>
+<li><p><strong>slop = 2</strong> allows up to two positions of flexibility or rearrangements between matching tokens.</p>
 <ul>
-<li><p>Ciò consente l’ordine invertito (<strong>“learning machine”</strong>) o un piccolo spazio tra i token.</p></li>
-<li><p>Di conseguenza, <strong>doc_1</strong>, <strong>doc_2</strong> (<strong>“learning”</strong> in <strong>pos=0</strong>, <strong>“machine”</strong> in <strong>pos=1</strong>) e <strong>doc_3</strong> (<strong>“learning”</strong> in <strong>pos=1</strong>, <strong>“machine”</strong> in <strong>pos=2</strong>) corrispondono tutti.</p></li>
+<li><p>This allows reversed order (<strong>“learning machine”</strong>) or a small gap between the tokens.</p></li>
+<li><p>Consequently, <strong>doc_1</strong>, <strong>doc_2</strong> (<strong>“learning”</strong> at <strong>pos=0</strong>, <strong>“machine”</strong> at <strong>pos=1</strong>), and <strong>doc_3</strong> (<strong>“learning”</strong> at <strong>pos=1</strong>, <strong>“machine”</strong> at <strong>pos=2</strong>) all match.</p></li>
 </ul></li>
 </ul></li>
 </ol>
-<h2 id="Enable-phrase-match" class="common-anchor-header">Abilita la corrispondenza per frase<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
+<h2 id="Enable-phrase-match" class="common-anchor-header">Enable phrase match<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,8 +81,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La corrispondenza per frase funziona con il tipo di campo ` <code translate="no">VARCHAR</code> `, il tipo di dati stringa in Milvus. Per abilitare la corrispondenza per frase, configurare lo schema della collezione impostando entrambi i parametri ` <code translate="no">enable_analyzer</code> ` e ` <code translate="no">enable_match</code> ` su ` <code translate="no">True</code>`, analogamente alla <a href="/docs/it/keyword-match.md">corrispondenza testuale</a>.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Impostare <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+    </button></h2><p>Phrase match works with the <code translate="no">VARCHAR</code> field type, the string data type in Milvus. To enable phrase matching, configure your collection schema by setting both <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> parameters to <code translate="no">True</code>, similar to <a href="/docs/it/keyword-match.md">text match</a>.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">Set <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,15 +97,17 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Per abilitare la corrispondenza per frase per un campo specifico <code translate="no">VARCHAR</code>, impostare entrambi i parametri <code translate="no">enable_analyzer</code> e <code translate="no">enable_match</code> su <code translate="no">True</code> durante la definizione dello schema del campo. Questa configurazione indica a Milvus di tokenizzare il testo e creare un indice invertito con le informazioni posizionali necessarie per una corrispondenza per frase efficiente.</p>
-<p>Ecco un esempio di definizione dello schema per abilitare la corrispondenza delle frasi:</p>
+    </button></h3><p>To enable phrase match for a specific <code translate="no">VARCHAR</code> field, set both <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> parameters to <code translate="no">True</code> when defining the field schema. This configuration instructs Milvus to tokenize the text and create an inverted index with positional information required for efficient phrase matching.</p>
+<p>Here’s an example schema definition to enable phrase match:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -159,7 +161,7 @@ schema.addField(AddFieldReq.builder()
         .dimension(<span class="hljs-number">5</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
 
 <span class="hljs-comment">// Create a schema for a new collection</span>
 schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
@@ -179,6 +181,48 @@ schema.WithField(entity.NewField().
     WithDataType(entity.FieldTypeFloatVector).
     WithDim(<span class="hljs-number">5</span>),
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// Create a schema for a new collection</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">enable_dynamic_field</span>(<span class="hljs-literal">false</span>)
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64)
+            .<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>)
+            .<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">true</span>),
+    )
+    <span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text&quot;</span>)                   <span class="hljs-comment">// Name of the field</span>
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)   <span class="hljs-comment">// Field data type set as VARCHAR (string)</span>
+            .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">1000</span>)               <span class="hljs-comment">// Maximum length of the string in bytes</span>
+            .<span class="hljs-title function_ invoke__">enable_analyzer</span>(<span class="hljs-literal">true</span>)          <span class="hljs-comment">// Enables text analysis (tokenization)</span>
+            .<span class="hljs-title function_ invoke__">enable_match</span>(<span class="hljs-literal">true</span>),            <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">5</span>),
+    );
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-comment">// Create a schema for a new collection</span>
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>});
+<span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string in bytes</span>
+                    .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)   <span class="hljs-comment">// Enables text analysis (tokenization)</span>
+                    .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));    <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR)
+                    .<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -204,6 +248,22 @@ schema.WithField(entity.NewField().
     <span class="hljs-attr">dim</span>: <span class="hljs-number">5</span>,
   },
 ];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Create a schema for a new collection</span>
+CollectionSchema schema = <span class="hljs-keyword">new</span>()
+{
+    EnableDynamicFields = <span class="hljs-literal">false</span>,
+    Fields =
+    {
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>, autoId: <span class="hljs-literal">true</span>),
+        <span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
+        FieldSchema.CreateVarchar(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-number">1000</span>, enableAnalyzer: <span class="hljs-literal">true</span>, enableMatch: <span class="hljs-literal">true</span>),
+        <span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;embeddings&quot;</span>, DataType.FloatVector) { Dimension = <span class="hljs-number">5</span> }
+    }
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -233,21 +293,7 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/types/CollectionSchema.h&quot;</span></span>
-
-<span class="hljs-comment">// Create a schema for a new collection</span>
-<span class="hljs-function">milvus::CollectionSchema <span class="hljs-title">schema</span><span class="hljs-params">(<span class="hljs-string">&quot;tech_articles&quot;</span>)</span></span>;
-schema.<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">false</span>);
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>));
-<span class="hljs-comment">// Add a VARCHAR field configured for phrase matching</span>
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
-                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)    <span class="hljs-comment">// Maximum length of the string in bytes</span>
-                    .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)   <span class="hljs-comment">// Enables text analysis (tokenization)</span>
-                    .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));    <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embeddings&quot;</span>, milvus::DataType::FLOAT_VECTOR)
-                    .<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: configurare un analizzatore<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Optional: Configure an analyzer<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -262,16 +308,18 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La precisione della corrispondenza delle frasi dipende in modo significativo dall’analizzatore utilizzato per tokenizzare i dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il proprio caso d’uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
-<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per ulteriori dettagli, consultare <a href="/docs/it/standard-analyzer.md">Analizzatore standard</a>.</p>
-<p>Se la propria applicazione richiede un analizzatore specifico, è possibile configurarlo utilizzando il parametro ` <code translate="no">analyzer_params</code> `. Ad esempio, ecco come configurare l’analizzatore ` <code translate="no">english</code> ` per la corrispondenza delle frasi in un testo in inglese:</p>
+    </button></h3><p>Phrase matching accuracy depends significantly on the analyzer used to tokenize your text data. Different analyzers suit different languages and text formats, affecting tokenization and positional accuracy. Selecting an appropriate analyzer for your specific use case will optimize your phrase matching results.</p>
+<p>By default, Milvus uses the standard analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are required for default usage. Refer to <a href="/docs/it/standard-analyzer.md">Standard Analyzer</a> for details.</p>
+<p>If your application requires a specific analyzer, configure it using the <code translate="no">analyzer_params</code> parameter. For example, here’s how to configure the <code translate="no">english</code> analyzer for phrase matching in English text:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -315,6 +363,30 @@ schema.WithField(entity.NewField().
     WithEnableMatch(<span class="hljs-literal">true</span>),                 <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Define analyzer parameters for English-language tokenization</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">analyzer_params</span> = serde_json::json!({<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>});
+
+<span class="hljs-comment">// Add the VARCHAR field with the English analyzer enabled</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">add_field</span>(
+    FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;text&quot;</span>)                   <span class="hljs-comment">// Name of the field</span>
+        .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)   <span class="hljs-comment">// Field data type set as VARCHAR</span>
+        .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">1000</span>)               <span class="hljs-comment">// Maximum length of the string in bytes</span>
+        .<span class="hljs-title function_ invoke__">enable_analyzer</span>(<span class="hljs-literal">true</span>)          <span class="hljs-comment">// Enables text analysis</span>
+        .<span class="hljs-title function_ invoke__">analyzer_params</span>(analyzer_params) <span class="hljs-comment">// Specifies the analyzer configuration</span>
+        .<span class="hljs-title function_ invoke__">enable_match</span>(<span class="hljs-literal">true</span>),            <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Define analyzer parameters for English-language tokenization</span>
+nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>}};
+
+<span class="hljs-comment">// Add the VARCHAR field with the English analyzer enabled</span>
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
+                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)                 <span class="hljs-comment">// Maximum length of the string in bytes</span>
+                    .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)                <span class="hljs-comment">// Enables text analysis</span>
+                    .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params) <span class="hljs-comment">// Specifies the analyzer configuration</span>
+                    .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));                 <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Define analyzer parameters for English-language tokenization</span>
 <span class="hljs-keyword">const</span> analyzer_params = { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;english&quot;</span> };
 
@@ -329,6 +401,24 @@ schema.WithField(entity.NewField().
     <span class="hljs-attr">enable_match</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
   },
 ];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Define analyzer parameters for English-language tokenization</span>
+<span class="hljs-keyword">var</span> analyzerParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>&gt; { [<span class="hljs-string">&quot;type&quot;</span>] = <span class="hljs-string">&quot;english&quot;</span> };
+
+<span class="hljs-comment">// Add the VARCHAR field with the English analyzer enabled</span>
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema
+{
+    Fields =
+    {
+        FieldSchema.CreateVarchar(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-number">1000</span>,
+            enableAnalyzer: <span class="hljs-literal">true</span>,           <span class="hljs-comment">// Enables text analysis</span>
+            analyzerParams: analyzerParams,  <span class="hljs-comment">// Specifies the analyzer configuration</span>
+            enableMatch: <span class="hljs-literal">true</span>)               <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
+    }
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
         &quot;autoId&quot;: true,
@@ -347,18 +437,8 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Define analyzer parameters for English-language tokenization</span>
-nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>}};
-
-<span class="hljs-comment">// Add the VARCHAR field with the English analyzer enabled</span>
-schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR)  <span class="hljs-comment">// Name of the field</span>
-                    .<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">1000</span>)                <span class="hljs-comment">// Maximum length of the string in bytes</span>
-                    .<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>)               <span class="hljs-comment">// Enables text analysis</span>
-                    .<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params) <span class="hljs-comment">// Specifies the analyzer configuration</span>
-                    .<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));                <span class="hljs-comment">// Enables inverted indexing for phrase matching</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Milvus supporta diversi analizzatori su misura per diversi linguaggi e casi d’uso. Per informazioni dettagliate, consultare <a href="/docs/it/analyzer-overview.md">la Panoramica degli analizzatori</a>.</p>
-<h2 id="Use-phrase-match" class="common-anchor-header">Utilizzo della corrispondenza delle frasi<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
+<p>Milvus supports several analyzers tailored for different languages and use cases. For detailed information, refer to <a href="/docs/it/analyzer-overview.md">Analyzer Overview</a>.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Create the collection<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -373,57 +453,613 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver abilitato la corrispondenza per un campo <code translate="no">VARCHAR</code> nello schema della collezione, è possibile eseguire corrispondenze di frasi utilizzando l’espressione <code translate="no">PHRASE_MATCH</code>.</p>
-<div class="alert note">
-<p>L’espressione <code translate="no">PHRASE_MATCH</code> non fa distinzione tra maiuscole e minuscole. È possibile utilizzare sia <code translate="no">PHRASE_MATCH</code> che <code translate="no">phrase_match</code>.</p>
-</div>
-<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">Sintassi dell’espressione PHRASE_MATCH<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Utilizzare l’espressione <code translate="no">PHRASE_MATCH</code> per specificare il campo, la frase e la flessibilità opzionale (<code translate="no">slop</code>) durante la ricerca. La sintassi è la seguente:</p>
+    </button></h3><p>Once the necessary fields are defined, use the following code to create the collection:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create the collection</span>
+COLLECTION_NAME = <span class="hljs-string">&quot;tech_articles&quot;</span>  <span class="hljs-comment"># Name your collection</span>
+
+<span class="hljs-keyword">if</span> client.has_collection(COLLECTION_NAME):
+    client.drop_collection(COLLECTION_NAME)
+
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    schema=schema
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.HasCollectionReq;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">COLLECTION_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;tech_articles&quot;</span>;  <span class="hljs-comment">// Name your collection</span>
+
+<span class="hljs-keyword">if</span> (client.hasCollection(
+        HasCollectionReq.builder()
+            .collectionName(COLLECTION_NAME)
+            .build()
+    )) {
+    client.dropCollection(
+        DropCollectionReq.builder()
+            .collectionName(COLLECTION_NAME)
+            .build()
+    );
+}
+
+client.createCollection(
+    CreateCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .collectionSchema(schema)
+        .build()
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">collectionName := <span class="hljs-string">&quot;tech_articles&quot;</span>  <span class="hljs-comment">// Name your collection</span>
+
+has, err := client.HasCollection(ctx, milvusclient.NewHasCollectionOption(collectionName))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+<span class="hljs-keyword">if</span> has {
+    _ = client.DropCollection(ctx, milvusclient.NewDropCollectionOption(collectionName))
+}
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(collectionName, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">collection_name</span> = <span class="hljs-string">&quot;tech_articles&quot;</span>;  <span class="hljs-comment">// Name your collection</span>
+
+<span class="hljs-keyword">if</span> client
+    .<span class="hljs-title function_ invoke__">has_collection</span>(
+        HasCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?
+    .<span class="hljs-title function_ invoke__">exists</span>()
+{
+    client
+        .<span class="hljs-title function_ invoke__">drop_collection</span>(
+            DropCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+                .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+                .<span class="hljs-title function_ invoke__">build</span>()?,
+        )
+        .<span class="hljs-keyword">await</span>?;
+}
+
+client
+    .<span class="hljs-title function_ invoke__">create_collection</span>(
+        CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+            .<span class="hljs-title function_ invoke__">schema</span>(schema)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-type">const</span> std::string collection_name = <span class="hljs-string">&quot;tech_articles&quot;</span>;  <span class="hljs-comment">// Name your collection</span>
+
+milvus::HasCollectionResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">HasCollection</span>(milvus::<span class="hljs-built_in">HasCollectionRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(collection_name), response);
+<span class="hljs-keyword">if</span> (response.<span class="hljs-built_in">Has</span>()) {
+    status = client-&gt;<span class="hljs-built_in">DropCollection</span>(milvus::<span class="hljs-built_in">DropCollectionRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(collection_name));
+}
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(collection_name)
+                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Create or recreate the collection if it already exists</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">COLLECTION_NAME</span> = <span class="hljs-string">&quot;tech_articles&quot;</span>; <span class="hljs-comment">// Name your collection</span>
+
+<span class="hljs-keyword">const</span> hasCollection = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">hasCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span> });
+
+<span class="hljs-keyword">if</span> (hasCollection.<span class="hljs-property">value</span>) {
+    <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropCollection</span>({ <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span> });
+}
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>(schema);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+
+<span class="hljs-comment">// Create the collection</span>
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> COLLECTION_NAME = <span class="hljs-string">&quot;tech_articles&quot;</span>; <span class="hljs-comment">// Name your collection</span>
+
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">await</span> client.HasCollectionAsync(<span class="hljs-keyword">new</span> HasCollectionReq { CollectionName = COLLECTION_NAME }) <span class="hljs-keyword">is</span> { Has: <span class="hljs-literal">true</span> })
+{
+    <span class="hljs-keyword">await</span> client.DropCollectionAsync(<span class="hljs-keyword">new</span> DropCollectionReq { CollectionName = COLLECTION_NAME });
+}
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = COLLECTION_NAME,
+    Schema = schema
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Check whether the collection exists</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/has&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;
+  }&#x27;</span>
+
+<span class="hljs-comment"># Drop the existing collection</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/drop&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;
+  }&#x27;</span>
+
+<span class="hljs-comment"># Create the new collection</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;tech_articles\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$schema</span>
+  }&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>After the collection is created, make sure the following necessary steps are performed before <a href="#use-phrase-match">using phrase match</a>:</p>
+<ul>
+<li><p>Entities are inserted into the collection;</p></li>
+<li><p>You have created an index on each vector field;</p></li>
+<li><p>The collection is loaded into memory.</p></li>
+</ul>
+<p><details></p>
+<p><summary>Show example code</summary></p>
+<p>The following self-contained example creates a separate <code translate="no">phrase_match_demo</code> collection, inserts five documents, builds a vector index, and loads the collection. The query and search examples later on this page use the <code translate="no">tech_articles</code> dataset described in <a href="#example-dataset">Example dataset</a>.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert sample data with text containing &quot;machine learning&quot; phrases</span>
+COLLECTION_NAME = <span class="hljs-string">&quot;phrase_match_demo&quot;</span>
+
+sample_data = [
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>,
+        <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]
+    },
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>,
+        <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]
+    },
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>,
+        <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>]
+    },
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>,
+        <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>]
+    },
+    {
+        <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>,
+        <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>]
+    }
+]
+
+client.insert(collection_name=COLLECTION_NAME, data=sample_data)
+
+<span class="hljs-comment"># Index the vector field and load the collection</span>
+index_params = client.prepare_index_params()
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;embeddings&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    index_name=<span class="hljs-string">&quot;embeddings_index&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
+)
+
+client.create_index(collection_name=COLLECTION_NAME, index_params=index_params)
+client.load_collection(collection_name=COLLECTION_NAME)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">COLLECTION_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;phrase_match_demo&quot;</span>;
+
+<span class="hljs-comment">// Build the sample rows</span>
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row1.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>);
+row1.add(<span class="hljs-string">&quot;embeddings&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>)));
+data.add(row1);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row2.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>);
+row2.add(<span class="hljs-string">&quot;embeddings&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>)));
+data.add(row2);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row3.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>);
+row3.add(<span class="hljs-string">&quot;embeddings&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.7f</span>)));
+data.add(row3);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row4</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row4.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>);
+row4.add(<span class="hljs-string">&quot;embeddings&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.7f</span>, <span class="hljs-number">0.8f</span>)));
+data.add(row4);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row5</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row5.addProperty(<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>);
+row5.add(<span class="hljs-string">&quot;embeddings&quot;</span>, gson.toJsonTree(Arrays.asList(<span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.7f</span>, <span class="hljs-number">0.8f</span>, <span class="hljs-number">0.9f</span>)));
+data.add(row5);
+
+client.insert(InsertReq.builder().collectionName(COLLECTION_NAME).data(data).build());
+
+<span class="hljs-comment">// Index the vector field and load the collection</span>
+<span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParam</span> <span class="hljs-operator">=</span> IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;embeddings&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;embeddings_index&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build();
+
+client.createIndex(CreateIndexReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .indexParams(Collections.singletonList(indexParam))
+        .build());
+
+client.loadCollection(LoadCollectionReq.builder()
+        .collectionName(COLLECTION_NAME)
+        .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">collectionName := <span class="hljs-string">&quot;phrase_match_demo&quot;</span>
+
+texts := []<span class="hljs-type">string</span>{
+    <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>,
+    <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>,
+    <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>,
+    <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>,
+    <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>,
+}
+embeddings := [][]<span class="hljs-type">float32</span>{
+    {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>},
+    {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>},
+    {<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>},
+    {<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>},
+    {<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>},
+}
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(collectionName).
+    WithVarcharColumn(<span class="hljs-string">&quot;text&quot;</span>, texts).
+    WithFloatVectorColumn(<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-number">5</span>, embeddings))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+
+<span class="hljs-comment">// Index the vector field and load the collection</span>
+indexOption := milvusclient.NewCreateIndexOption(collectionName, <span class="hljs-string">&quot;embeddings&quot;</span>, index.NewAutoIndex(entity.COSINE)).
+    WithIndexName(<span class="hljs-string">&quot;embeddings_index&quot;</span>)
+_, err = client.CreateIndex(ctx, indexOption)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(collectionName))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    log.Fatal(err)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">collection_name</span> = <span class="hljs-string">&quot;phrase_match_demo&quot;</span>;
+
+<span class="hljs-comment">// Insert sample data with text containing &quot;machine learning&quot; phrases</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">data</span> = <span class="hljs-built_in">vec!</span>[
+    json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]}),
+    json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]}),
+    json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>]}),
+    json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>]}),
+    json!({<span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>: [<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>]}),
+];
+
+client
+    .<span class="hljs-title function_ invoke__">insert</span>(
+        InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+            .<span class="hljs-title function_ invoke__">rows</span>(data)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Index the vector field and load the collection</span>
+client
+    .<span class="hljs-title function_ invoke__">create_index</span>(
+        CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+            .<span class="hljs-title function_ invoke__">index_param</span>(
+                IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+                    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;embeddings_index&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+                    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+            )
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+client
+    .<span class="hljs-title function_ invoke__">load_collection</span>(
+        LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-type">const</span> std::string collection_name = <span class="hljs-string">&quot;phrase_match_demo&quot;</span>;
+
+milvus::EntityRows data = {
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>}, {<span class="hljs-string">&quot;embeddings&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>}}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>}, {<span class="hljs-string">&quot;embeddings&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>}}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>}, {<span class="hljs-string">&quot;embeddings&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>}}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>}, {<span class="hljs-string">&quot;embeddings&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>}}},
+    {{<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>}, {<span class="hljs-string">&quot;embeddings&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>}}}
+};
+
+milvus::InsertResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(collection_name)
+                                .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data)),
+                            response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Index the vector field and load the collection</span>
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">embeddings_index</span><span class="hljs-params">(<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-string">&quot;embeddings_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)</span></span>;
+status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(collection_name)
+                                .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(embeddings_index)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">LoadCollection</span>(milvus::<span class="hljs-built_in">LoadCollectionRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(collection_name));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Insert sample data with text containing &quot;machine learning&quot; phrases</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">COLLECTION_NAME</span> = <span class="hljs-string">&quot;phrase_match_demo&quot;</span>;
+
+<span class="hljs-keyword">const</span> sampleData = [
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>,
+    <span class="hljs-attr">embeddings</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>],
+  },
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>,
+    <span class="hljs-attr">embeddings</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>],
+  },
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>,
+    <span class="hljs-attr">embeddings</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>],
+  },
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>,
+    <span class="hljs-attr">embeddings</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>],
+  },
+  {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>,
+    <span class="hljs-attr">embeddings</span>: [<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>],
+  },
+];
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">data</span>: sampleData,
+});
+
+<span class="hljs-comment">// Create an index on the vector field and load the collection</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embeddings&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;embeddings_index&quot;</span>,
+  <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-variable constant_">COLLECTION_NAME</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span> COLLECTION_NAME = <span class="hljs-string">&quot;phrase_match_demo&quot;</span>;
+
+<span class="hljs-comment">// Insert sample data with text containing &quot;machine learning&quot; phrases</span>
+<span class="hljs-keyword">await</span> client.InsertAsync(<span class="hljs-keyword">new</span> InsertReq
+{
+    CollectionName = COLLECTION_NAME,
+    RowsData =
+    [
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;text&quot;</span>] = <span class="hljs-string">&quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;</span>, [<span class="hljs-string">&quot;embeddings&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span> } },
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;text&quot;</span>] = <span class="hljs-string">&quot;Deep learning machine algorithms require large datasets for training.&quot;</span>, [<span class="hljs-string">&quot;embeddings&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span> } },
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;text&quot;</span>] = <span class="hljs-string">&quot;The machine learning model showed excellent performance on the test set.&quot;</span>, [<span class="hljs-string">&quot;embeddings&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.7f</span> } },
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;text&quot;</span>] = <span class="hljs-string">&quot;Natural language processing and machine learning go hand in hand.&quot;</span>, [<span class="hljs-string">&quot;embeddings&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.7f</span>, <span class="hljs-number">0.8f</span> } },
+        <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;text&quot;</span>] = <span class="hljs-string">&quot;This article discusses various learning machine techniques and applications.&quot;</span>, [<span class="hljs-string">&quot;embeddings&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.6f</span>, <span class="hljs-number">0.7f</span>, <span class="hljs-number">0.8f</span>, <span class="hljs-number">0.9f</span> } }
+    ]
+});
+
+<span class="hljs-comment">// Index the vector field and load the collection</span>
+<span class="hljs-keyword">await</span> client.CreateIndexAsync(<span class="hljs-keyword">new</span> CreateIndexReq
+{
+    CollectionName = COLLECTION_NAME,
+    Indexes = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-string">&quot;embeddings_index&quot;</span>, IndexType.AutoIndex, MetricType.Cosine) }
+});
+
+<span class="hljs-keyword">await</span> client.LoadCollectionAsync(<span class="hljs-keyword">new</span> LoadCollectionReq { CollectionName = COLLECTION_NAME });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Insert the data into the collection</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/entities/insert&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;phrase_match_demo&quot;,
+    &quot;data&quot;: [
+      {
+        &quot;text&quot;: &quot;Machine learning is a subset of artificial intelligence that focuses on algorithms.&quot;,
+        &quot;embeddings&quot;: [0.1, 0.2, 0.3, 0.4, 0.5]
+      },
+      {
+        &quot;text&quot;: &quot;Deep learning machine algorithms require large datasets for training.&quot;,
+        &quot;embeddings&quot;: [0.2, 0.3, 0.4, 0.5, 0.6]
+      },
+      {
+        &quot;text&quot;: &quot;The machine learning model showed excellent performance on the test set.&quot;,
+        &quot;embeddings&quot;: [0.3, 0.4, 0.5, 0.6, 0.7]
+      },
+      {
+        &quot;text&quot;: &quot;Natural language processing and machine learning go hand in hand.&quot;,
+        &quot;embeddings&quot;: [0.4, 0.5, 0.6, 0.7, 0.8]
+      },
+      {
+        &quot;text&quot;: &quot;This article discusses various learning machine techniques and applications.&quot;,
+        &quot;embeddings&quot;: [0.5, 0.6, 0.7, 0.8, 0.9]
+      }
+    ]
+  }&#x27;</span>
+
+<span class="hljs-comment"># Create an index on the vector field and load the collection</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/indexes/create&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;phrase_match_demo&quot;,
+    &quot;indexParams&quot;: [
+      {
+        &quot;fieldName&quot;: &quot;embeddings&quot;,
+        &quot;indexName&quot;: &quot;embeddings_index&quot;,
+        &quot;metricType&quot;: &quot;COSINE&quot;,
+        &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+      }
+    ]
+  }&#x27;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/load&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;phrase_match_demo&quot;
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p></details></p>
+<h2 id="Use-phrase-match" class="common-anchor-header">Use phrase match<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Once you’ve enabled match for a <code translate="no">VARCHAR</code> field in your collection schema, you can perform phrase matches using the <code translate="no">PHRASE_MATCH</code> expression.</p>
+<div class="alert note">
+<p>The <code translate="no">PHRASE_MATCH</code> expression is case-insensitive. You can use either <code translate="no">PHRASE_MATCH</code> or <code translate="no">phrase_match</code>.</p>
+</div>
+<h3 id="PHRASEMATCH-expression-syntax" class="common-anchor-header">PHRASE_MATCH expression syntax<button data-href="#PHRASEMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Use the <code translate="no">PHRASE_MATCH</code> expression to specify the field, phrase, and optional flexibility (<code translate="no">slop</code>) when searching. The syntax is:</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">PHRASE_MATCH(field_name, phrase, slop)
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">PHRASE_MATCH(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> filter = <span class="hljs-string">R&quot;(PHRASE_MATCH(text, &#x27;machine learning&#x27;))&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-title function_">PHRASE_MATCH</span>(field_name, phrase, slop)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">PHRASE_MATCH(field_name, phrase, slop)
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-built_in">PHRASE_MATCH</span>(field_name, phrase, slop)
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;PHRASE_MATCH(field_name, phrase, slop)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code><strong>:</strong> Il nome del campo " <code translate="no">VARCHAR</code> " su cui si eseguono le corrispondenze di frase.</p></li>
-<li><p><code translate="no">phrase</code><strong>:</strong> La frase esatta da cercare.</p></li>
-<li><p><code translate="no">slop</code> (opzionale)<strong>:</strong> un numero intero che specifica il numero massimo di posizioni consentite nei token corrispondenti.</p>
+<li><p><code translate="no">field_name</code><strong>:</strong> The name of the <code translate="no">VARCHAR</code> field on which you perform phrase matches.</p></li>
+<li><p><code translate="no">phrase</code><strong>:</strong> The exact phrase to search for.</p></li>
+<li><p><code translate="no">slop</code> (optional)<strong>:</strong> An integer specifying the maximum number of positions allowed in matching tokens.</p>
 <ul>
-<li><p><code translate="no">0</code> (impostazione predefinita): Effettua corrispondenze solo con frasi esatte. Esempio: un filtro per <strong>“machine learning”</strong> troverà una corrispondenza esatta <strong>con “machine learning”</strong>, ma non con <strong>“machine boosts learning”</strong> o <strong>“learning machine”.</strong></p></li>
-<li><p><code translate="no">1</code>: Consente variazioni minori, come un termine in più o un leggero spostamento di posizione. Esempio: un filtro per <strong>“machine learning”</strong> troverà una corrispondenza con <strong>“machine boosts learning”</strong> (un token tra <strong>“machine”</strong> e <strong>“learning”</strong>), ma non con <strong>“learning machine”</strong> (termini invertiti).</p></li>
-<li><p><code translate="no">2</code>: Consente maggiore flessibilità, compreso l’ordine inverso dei termini o fino a due token intermedi. Esempio: un filtro per <strong>“machine learning”</strong> troverà corrispondenze con <strong>“learning machine”</strong> (termini invertiti) o <strong>“machine quickly boosts learning”</strong> (due token tra <strong>“machine”</strong> e <strong>“learning”</strong>).</p></li>
+<li><p><code translate="no">0</code> (default): Matches exact phrases only. Example: A filter for <strong>“machine learning”</strong> will match <strong>“machine learning”</strong> exactly, but not <strong>“machine boosts learning”</strong> or <strong>“learning machine”</strong>.</p></li>
+<li><p><code translate="no">1</code>: Allows minor variation, such as one extra term or minor shift in position. Example: A filter for <strong>“machine learning”</strong> will match <strong>“machine boosts learning”</strong> (one token between <strong>“machine”</strong> and <strong>“learning”</strong>) but not <strong>“learning machine”</strong> (terms reversed).</p></li>
+<li><p><code translate="no">2</code>: Allows more flexibility, including reversed term order or up to two tokens in between. Example: A filter for <strong>“machine learning”</strong> will match <strong>“learning machine”</strong> (terms reversed) or <strong>“machine quickly boosts learning”</strong> (two tokens between <strong>“machine”</strong> and <strong>“learning”</strong>).</p></li>
 </ul></li>
 </ul>
-<h3 id="Example-dataset" class="common-anchor-header">Set di dati di esempio<button data-href="#Example-dataset" class="anchor-icon" translate="no">
+<h3 id="Example-dataset" class="common-anchor-header">Example dataset<button data-href="#Example-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -438,7 +1074,7 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Supponiamo di avere una raccolta denominata <strong>tech_articles</strong> contenente le seguenti cinque entità:</p>
+    </button></h3><p>Suppose you have a collection named <strong>tech_articles</strong> containing the following five entities:</p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -446,26 +1082,27 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"L’apprendimento automatico migliora l’efficienza nell’analisi dei dati su larga scala"</p></td>
+     <td><p>"Machine learning boosts efficiency in large-scale data analysis"</p></td>
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"L'apprendimento di un approccio basato sulle macchine è fondamentale per il progresso dell'IA moderna"</p></td>
+     <td><p>"Learning a machine-based approach is vital for modern AI progress"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"Le architetture di deep learning ottimizzano i carichi computazionali"</p></td>
+     <td><p>"Deep learning machine architectures optimize computational loads"</p></td>
    </tr>
    <tr>
      <td><p>4</p></td>
-     <td><p>"La macchina migliora rapidamente le prestazioni del modello per un apprendimento continuo"</p></td>
+     <td><p>"Machine swiftly improves model performance for ongoing learning"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"L'apprendimento di algoritmi avanzati espande le capacità dell'IA"</p></td>
+     <td><p>"Learning advanced machine algorithms expands AI capabilities"</p></td>
    </tr>
 </table>
-<h3 id="Query-with-phrase-match" class="common-anchor-header">Query con corrispondenza di frase<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
+<p>The query and search examples below use this dataset. The runnable example in <a href="#create-the-collection">Create the collection</a> inserts its own rows into a separate <code translate="no">phrase_match_demo</code> collection, so its printed output differs from the expected results below.</p>
+<h3 id="Query-with-phrase-match" class="common-anchor-header">Query with phrase match<button data-href="#Query-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -480,15 +1117,17 @@ schema.<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-bui
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando si utilizza il metodo ` <code translate="no">query()</code> `, <strong>`PHRASE_MATCH</strong> ` agisce come un filtro scalare. Vengono restituiti solo i documenti che contengono la frase specificata (nel rispetto della tolleranza consentita).</p>
-<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Esempio: slop = 0 (corrispondenza esatta)</h4><p>Questo esempio restituisce i documenti contenenti la frase esatta <strong>“machine learning”</strong> senza alcun token aggiuntivo in mezzo.</p>
+    </button></h3><p>When using the <code translate="no">query()</code> method, <strong>PHRASE_MATCH</strong> acts as a scalar filter. Only documents that contain the specified phrase (subject to the allowed slop) are returned.</p>
+<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Example: slop = 0 (exact match)</h4><p>This example returns documents containing the exact phrase <strong>“machine learning”</strong> without any extra tokens in between.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
@@ -519,6 +1158,31 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Match documents containing exactly &quot;machine learning&quot;</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">query</span>(
+        QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">filter</span>(filter)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Match documents containing exactly &quot;machine learning&quot;</span>
+milvus::QueryResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Query</span>(milvus::<span class="hljs-built_in">QueryRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+                                .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>)
+                                .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                                .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
+                            response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>;
 
@@ -526,6 +1190,16 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;tech_articles&quot;</span>,
     <span class="hljs-attr">filter</span>: filter,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Match documents containing exactly &quot;machine learning&quot;</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>;
+
+QueryResp result = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    Expression = filter,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters { OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span> } }
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)\&quot;&quot;</span>
@@ -544,19 +1218,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Match documents containing exactly &quot;machine learning&quot;</span>
-milvus::QueryResponse response;
-<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Query</span>(milvus::<span class="hljs-built_in">QueryRequest</span>()
-                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
-                                .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>)
-                                .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
-                                .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
-                            response);
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Risultati di corrispondenza previsti:</strong></p>
+<p><strong>Expected match results:</strong></p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -564,11 +1226,11 @@ milvus::QueryResponse response;
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"L’apprendimento automatico aumenta l’efficienza nell’analisi dei dati su larga scala"</p></td>
+     <td><p>"Machine learning boosts efficiency in large-scale data analysis"</p></td>
    </tr>
 </table>
-<p>Solo il documento 1 contiene la frase esatta <strong>“machine learning”</strong> nell’ordine specificato senza token aggiuntivi.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">Ricerca con corrispondenza di frase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+<p>Only document 1 contains the exact phrase <strong>“machine learning”</strong> in the specified order with no additional tokens.</p>
+<h3 id="Search-with-phrase-match" class="common-anchor-header">Search with phrase match<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -583,15 +1245,17 @@ milvus::QueryResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nelle operazioni di ricerca, <strong>PHRASE_MATCH</strong> viene utilizzato per filtrare i documenti prima di applicare il ranking di similarità vettoriale. Questo approccio in due fasi restringe innanzitutto l’insieme dei candidati tramite la corrispondenza testuale e poi riorganizza il ranking di tali candidati in base agli embedding vettoriali.</p>
-<h4 id="Example-slop--1" class="common-anchor-header">Esempio: slop = 1</h4><p>In questo caso, si consente uno slop pari a 1. Il filtro viene applicato ai documenti che contengono la frase <strong>“learning machine”</strong> con una leggera flessibilità.</p>
+    </button></h3><p>In search operations, <strong>PHRASE_MATCH</strong> is used to filter documents before applying vector similarity ranking. This two-step approach first narrows the candidate set by textual matching and then re-ranks those candidates based on vector embeddings.</p>
+<h4 id="Example-slop--1" class="common-anchor-header">Example: slop = 1</h4><p>Here, we allow a slop of 1. The filter is applied to documents that contain the phrase <strong>“learning machine”</strong> with slight flexibility.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
@@ -606,7 +1270,14 @@ result_slop1 = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>;
 
 Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -638,6 +1309,39 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1f32</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">filter</span>(filter)
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
+                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+                                 .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
+                                 .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
+                                 .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>)
+                                 .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+                                 .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
+                             response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>;
 
@@ -649,6 +1353,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">params</span>: { <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>;
+
+SearchResp result = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;embeddings&quot;</span>,
+    Vectors = [<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span> }],
+    Limit = <span class="hljs-number">10</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Expression = filter,
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span> }
+    }
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)\&quot;&quot;</span>
@@ -675,23 +1395,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
-milvus::SearchResponse response;
-<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
-                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
-                                 .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)
-                                 .<span class="hljs-built_in">AddFloatVector</span>(query_vector)
-                                 .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>)
-                                 .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
-                                 .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
-                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
-                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
-                             response);
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Risultati della corrispondenza:</strong></p>
+<p><strong>Match results:</strong></p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -699,25 +1403,27 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"L'apprendimento di un approccio basato sulle macchine è fondamentale per il progresso dell'IA moderna"</p></td>
+     <td><p>"Learning a machine-based approach is vital for modern AI progress"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"Le architetture di deep learning ottimizzano i carichi computazionali"</p></td>
+     <td><p>"Deep learning machine architectures optimize computational loads"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"L'apprendimento di algoritmi avanzati espande le capacità dell'IA"</p></td>
+     <td><p>"Learning advanced machine algorithms expands AI capabilities"</p></td>
    </tr>
 </table>
-<h4 id="Example-slop--2" class="common-anchor-header">Esempio: slop = 2</h4><p>Questo esempio consente uno slop pari a 2, il che significa che tra le parole <strong>“machine”</strong> e <strong>“learning”</strong> sono ammessi fino a due token aggiuntivi (o termini invertiti) <strong>.</strong></p>
+<h4 id="Example-slop--2" class="common-anchor-header">Example: slop = 2</h4><p>This example allows a slop of 2, meaning that up to two extra tokens (or reversed terms) are allowed between the words <strong>“machine”</strong> and <strong>“learning”</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
 filter_slop2 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>
@@ -732,7 +1438,14 @@ result_slop2 = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>;
 
 Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -764,6 +1477,39 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1f32</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)     <span class="hljs-comment">// Vector field name</span>
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector])) <span class="hljs-comment">// Query vector</span>
+            .<span class="hljs-title function_ invoke__">filter</span>(filter)                 <span class="hljs-comment">// Filter expression</span>
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)                      <span class="hljs-comment">// Maximum results to return</span>
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
+                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+                                 .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>) <span class="hljs-comment">// Vector field name</span>
+                                 .<span class="hljs-built_in">AddFloatVector</span>(query_vector) <span class="hljs-comment">// Query vector</span>
+                                 .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>) <span class="hljs-comment">// Filter expression</span>
+                                 .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+                                 .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>) <span class="hljs-comment">// Maximum results to return</span>
+                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
+                             response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>;
 
@@ -775,6 +1521,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">params</span>: { <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Maximum results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>;
+
+SearchResp result = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;embeddings&quot;</span>,          <span class="hljs-comment">// Vector field name</span>
+    Vectors = [<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span> }], <span class="hljs-comment">// Query vector</span>
+    Limit = <span class="hljs-number">10</span>,                              <span class="hljs-comment">// Maximum results to return</span>
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Expression = filter,                 <span class="hljs-comment">// Filter expression</span>
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span> }
+    }
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)\&quot;&quot;</span>
@@ -801,23 +1563,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=2</span>
-milvus::SearchResponse response;
-<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
-                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
-                                 .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>) <span class="hljs-comment">// Vector field name</span>
-                                 .<span class="hljs-built_in">AddFloatVector</span>(query_vector) <span class="hljs-comment">// Query vector</span>
-                                 .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 2)&quot;</span>) <span class="hljs-comment">// Filter expression</span>
-                                 .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
-                                 .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>) <span class="hljs-comment">// Maximum results to return</span>
-                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
-                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
-                             response);
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Risultati della ricerca:</strong></p>
+<p><strong>Match results:</strong></p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -825,26 +1571,28 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"L’apprendimento automatico aumenta l’efficienza nell’analisi dei dati su larga scala"</p></td>
+     <td><p>"Machine learning boosts efficiency in large-scale data analysis"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"Le architetture di deep learning ottimizzano i carichi computazionali"</p></td>
+     <td><p>"Deep learning machine architectures optimize computational loads"</p></td>
    </tr>
 </table>
-<h4 id="Example-slop--3" class="common-anchor-header">Esempio: slop = 3</h4><p>In questo esempio, un valore di slop pari a 3 offre una flessibilità ancora maggiore. Il filtro cerca <strong>"machine learning"</strong> consentendo fino a tre posizioni di token tra le parole.</p>
+<h4 id="Example-slop--3" class="common-anchor-header">Example: slop = 3</h4><p>In this example, a slop of 3 provides even more flexibility. The filter searches for <strong>“machine learning”</strong> with up to three token positions allowed between the words.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#bash">   cURL</a>
- <a href="#cpp">   C++</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
 filter_slop3 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>
 
-result_slop2 = client.search(
+result_slop3 = client.search(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
     anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>,             <span class="hljs-comment"># Vector field name</span>
     data=[query_vector],                 <span class="hljs-comment"># Query vector</span>
@@ -854,7 +1602,14 @@ result_slop2 = client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+<span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>;
 
 Map&lt;String, Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
@@ -886,6 +1641,39 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1f32</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;embeddings&quot;</span>)     <span class="hljs-comment">// Vector field name</span>
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector])) <span class="hljs-comment">// Query vector</span>
+            .<span class="hljs-title function_ invoke__">filter</span>(filter)                 <span class="hljs-comment">// Filter expression</span>
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)                      <span class="hljs-comment">// Maximum results to return</span>
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
+                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
+                                 .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>) <span class="hljs-comment">// Vector field name</span>
+                                 .<span class="hljs-built_in">AddFloatVector</span>(query_vector) <span class="hljs-comment">// Query vector</span>
+                                 .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>) <span class="hljs-comment">// Filter expression</span>
+                                 .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+                                 .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>) <span class="hljs-comment">// Maximum results to return</span>
+                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
+                             response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
 <span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>;
 
@@ -897,6 +1685,22 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">params</span>: { <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span> },
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Maximum results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>;
+
+SearchResp result = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;tech_articles&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;embeddings&quot;</span>,          <span class="hljs-comment">// Vector field name</span>
+    Vectors = [<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span> }], <span class="hljs-comment">// Query vector</span>
+    Limit = <span class="hljs-number">10</span>,                              <span class="hljs-comment">// Maximum results to return</span>
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Expression = filter,                 <span class="hljs-comment">// Filter expression</span>
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span> }
+    }
 });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)\&quot;&quot;</span>
@@ -923,23 +1727,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;id&quot;, &quot;text&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// Example: Filter documents containing &quot;machine learning&quot; with slop=3</span>
-milvus::SearchResponse response;
-<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
-                                 .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;tech_articles&quot;</span>)
-                                 .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embeddings&quot;</span>) <span class="hljs-comment">// Vector field name</span>
-                                 .<span class="hljs-built_in">AddFloatVector</span>(query_vector) <span class="hljs-comment">// Query vector</span>
-                                 .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;, 3)&quot;</span>) <span class="hljs-comment">// Filter expression</span>
-                                 .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
-                                 .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>) <span class="hljs-comment">// Maximum results to return</span>
-                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
-                                 .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;text&quot;</span>),
-                             response);
-<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
-    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
-}
-<button class="copy-code-btn"></button></code></pre>
-<p><strong>Risultati della corrispondenza:</strong></p>
+<p><strong>Match results:</strong></p>
 <table>
    <tr>
      <th><p><code translate="no">doc_id</code></p></th>
@@ -947,22 +1735,22 @@ milvus::SearchResponse response;
    </tr>
    <tr>
      <td><p>1</p></td>
-     <td><p>"L'apprendimento automatico aumenta l'efficienza nell'analisi dei dati su larga scala"</p></td>
+     <td><p>"Machine learning boosts efficiency in large-scale data analysis"</p></td>
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>"L'apprendimento di un approccio basato sulle macchine è fondamentale per il progresso dell'IA moderna"</p></td>
+     <td><p>"Learning a machine-based approach is vital for modern AI progress"</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>"Le architetture di deep learning ottimizzano i carichi computazionali"</p></td>
+     <td><p>"Deep learning machine architectures optimize computational loads"</p></td>
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>"L'apprendimento di algoritmi avanzati espande le capacità dell'IA"</p></td>
+     <td><p>"Learning advanced machine algorithms expands AI capabilities"</p></td>
    </tr>
 </table>
-<h2 id="Considerations" class="common-anchor-header">Considerazioni<button data-href="#Considerations" class="anchor-icon" translate="no">
+<h2 id="Considerations" class="common-anchor-header">Considerations<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -978,13 +1766,13 @@ milvus::SearchResponse response;
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>L’abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l’impatto sull’archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all’analizzatore utilizzato.</p></li>
-<li><p>Una volta definito un analizzatore nello schema, le relative impostazioni diventano permanenti per quella raccolta. Se si ritiene che un analizzatore diverso sia più adatto alle proprie esigenze, è possibile eliminare la raccolta esistente e crearne una nuova con la configurazione dell’analizzatore desiderata.</p></li>
-<li><p>Le prestazioni della corrispondenza delle frasi dipendono dal modo in cui il testo viene tokenizzato. Prima di applicare un analizzatore all’intera raccolta, utilizzare il metodo ` <code translate="no">run_analyzer</code> ` per esaminare l’output della tokenizzazione. Per ulteriori informazioni, consultare <a href="/docs/it/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">la Panoramica sull’analizzatore</a>.</p></li>
-<li><p>Regole di escape nelle espressioni di <code translate="no">filter</code>:</p>
+<li><p>Enabling phrase matching for a field triggers the creation of an inverted index, which consumes storage resources. Consider storage impact when deciding to enable this feature, as it varies based on text size, unique tokens, and the analyzer used.</p></li>
+<li><p>Once you’ve defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.</p></li>
+<li><p>Phrase match performance depends on how text is tokenized. Before applying an analyzer to your entire collection, use the <code translate="no">run_analyzer</code> method to review the tokenization output. For more information, refer to <a href="/docs/it/analyzer-overview.md#Example-use">Example use</a>.</p></li>
+<li><p>Escape rules in <code translate="no">filter</code> expressions:</p>
 <ul>
-<li><p>I caratteri racchiusi tra virgolette doppie o singole all’interno delle espressioni vengono interpretati come costanti stringa. Se la costante stringa include caratteri di escape, questi devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare <code translate="no">\\</code> per rappresentare <code translate="no">\</code>, <code translate="no">\\t</code> per rappresentare un tabulatore <code translate="no">\t</code> e <code translate="no">\\n</code> per rappresentare un carattere di nuova riga.</p></li>
-<li><p>Se una costante stringa è racchiusa tra virgolette singole, una virgoletta singola all’interno della costante deve essere rappresentata come <code translate="no">\\'</code>, mentre una virgoletta doppia può essere rappresentata sia come <code translate="no">&quot;</code> che come <code translate="no">\\&quot;</code>. Esempio: <code translate="no">'It\\'s milvus'</code>.</p></li>
-<li><p>Se una costante stringa è racchiusa tra virgolette doppie, una virgoletta doppia all’interno della costante deve essere rappresentata come <code translate="no">\\&quot;</code>, mentre una virgoletta singola può essere rappresentata sia come <code translate="no">'</code> che come <code translate="no">\\'</code>. Esempio: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
+<li><p>Characters enclosed in double quotes or single quotes within expressions are interpreted as string constants. If the string constant includes escape characters, the escape characters must be represented with escape sequence. For example, use <code translate="no">\\</code> to represent <code translate="no">\</code>, <code translate="no">\\t</code> to represent a tab <code translate="no">\t</code>, and <code translate="no">\\n</code> to represent a newline.</p></li>
+<li><p>If a string constant is enclosed by single quotes, a single quote within the constant should be represented as <code translate="no">\\'</code> while a double quote can be represented as either <code translate="no">&quot;</code> or <code translate="no">\\&quot;</code>. Example: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>If a string constant is enclosed by double quotes, a double quote within the constant should be represented as <code translate="no">\\&quot;</code> while a single quote can be represented as either <code translate="no">'</code> or <code translate="no">\\'</code>. Example: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

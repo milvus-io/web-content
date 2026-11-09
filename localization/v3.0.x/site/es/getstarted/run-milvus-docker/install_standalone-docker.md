@@ -66,10 +66,10 @@ title: Ejecutar Milvus en Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>El script se descarga de la rama « <code translate="no">master</code> » de Milvus. Su etiqueta de imagen de Docker se define en el script y puede diferir de la v3.0.3. Para instalar esa versión concreta, utiliza la configuración con versión especificada en <a href="/docs/es/install_standalone-docker-compose.md">«Ejecutar Milvus con Docker Compose</a>».</p>
+<p>El script se descarga de la rama « <code translate="no">master</code> » de Milvus. Su etiqueta de imagen de Docker se define en el script y puede diferir de la v3.0.5. Para instalar esa versión concreta, utiliza la configuración con versión especificada en <a href="/docs/es/install_standalone-docker-compose.md">«Ejecutar Milvus con Docker Compose</a>».</p>
 <p>Esta implementación de Docker ejecuta <strong>Woodpecker</strong> utilizando el <strong>sistema de archivos local</strong> como backend de WAL, por lo que no se requiere ningún servicio externo de colas de mensajes. Consulta <a href="/docs/es/woodpecker.md">Woodpecker</a>.</p>
-<p>Si desea utilizar <a href="/docs/es/milvus_backup_overview.md">Backup</a> en modo de implementación independiente, se recomienda utilizar el método de implementación <a href="/docs/es/install_standalone-docker-compose.md">de Docker Compose</a>.</p>
-<p>Si tiene algún problema al descargar la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y le proporcionaremos la asistencia necesaria.</p>
+<p>Si deseas utilizar <a href="/docs/es/milvus_backup_overview.md">Backup</a> en modo de implementación independiente, se recomienda utilizar el método de implementación <a href="/docs/es/install_standalone-docker-compose.md">de Docker Compose</a>.</p>
+<p>Si tienes algún problema al descargar la imagen, ponte en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con los detalles del problema y te proporcionaremos la asistencia necesaria.</p>
 </div>
 <p>Tras ejecutar el script de instalación:</p>
 <ul>
@@ -125,7 +125,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El comando <code translate="no">upgrade</code> del script descarga el script desde <code translate="no">master</code> y vuelve a crear el contenedor utilizando la imagen seleccionada por dicho script. No comprueba que la ruta de versión de origen a destino sea compatible y puede volver a crear los archivos de configuración generados. No lo consideres una garantía de que cualquier implementación anterior pueda actualizarse de forma segura a la versión 3.0.3.</p>
+    </button></h2><p>El comando <code translate="no">upgrade</code> del script descarga el script desde <code translate="no">master</code> y vuelve a crear el contenedor utilizando la imagen seleccionada por dicho script. No valida si la ruta de versión de origen a destino es compatible y puede volver a crear los archivos de configuración generados. No lo consideres una garantía de que cualquier implementación anterior pueda actualizarse de forma segura a la versión 3.0.5.</p>
 <p>Antes de realizar una actualización, haz una copia de seguridad de los metadatos, los datos persistentes, <code translate="no">embedEtcd.yaml</code> y <code translate="no">user.yaml</code>. Comprueba la versión de destino, la cola de mensajes y la compatibilidad del almacenamiento, y valida la recuperación en un entorno que no sea de producción. Para implementaciones gestionadas con Docker Compose, sigue <a href="/docs/es/upgrade_milvus_standalone-docker.md">las instrucciones de «Actualizar Milvus Standalone con Docker Compose»</a>; no apliques ese procedimiento directamente a un contenedor gestionado mediante scripts.</p>
 <h2 id="Stop-and-delete-Milvus" class="common-anchor-header">Detener y eliminar Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -196,7 +196,7 @@ EOF
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
 <li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o insertar y eliminar</a></li>
+<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o eliminar</a></li>
 <li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>

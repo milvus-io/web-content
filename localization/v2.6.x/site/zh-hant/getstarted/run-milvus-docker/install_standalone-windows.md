@@ -56,7 +56,7 @@ title: 在 Docker 中執行 Milvus（Linux）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供安裝腳本，可將其安裝為 Docker 容器。在 Microsoft Windows 上安裝 Docker Desktop 後，您即可透過 PowerShell 或 Windows 命令提示字元（以<strong>系統管理員模式</strong>執行），以及透過 WSL 2 存取 Docker CLI。​</p>
+    </button></h2><p>Milvus 提供安裝腳本，可將其安裝為 Docker 容器。在 Microsoft Windows 上安裝 Docker Desktop 後，您即可透過以<strong>系統管理員模式</strong>執行的 PowerShell 或 Windows 命令提示字元，以及透過 WSL 2 存取 Docker CLI。​</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">透過 PowerShell 或 Windows 命令提示字元​<button data-href="#From-PowerShell-or-Windows-Command-Prompt​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,7 +92,7 @@ To change the default Milvus configuration, edit user.yaml and restart the servi
 <li><p>一個嵌入式 etcd 已隨 Milvus 一起安裝在同一個容器中，並在<strong>2379</strong> 埠提供服務。其設定檔已映射至當前資料夾中的<strong>embedEtcd.yaml</strong>。​</p></li>
 <li><p>Milvus 資料卷已映射至當前資料夾中的<strong>volumes/milvus​</strong></p></li>
 </ul>
-<p>您可以使用以下指令來管理 Milvus 容器及其儲存的資料。​</p>
+<p>您可以使用以下指令來管理 Milvus 容器及儲存的資料。​</p>
 <pre><code translate="no" class="language-powershell"># Stop Milvus​
 C:\&gt;standalone.bat stop​
 Stop successfully.​
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>以管理員模式開啟 Docker Desktop：右鍵點擊並選擇「<strong>以管理員身分執行</strong>」。​</p></li>
 <li><p>在 PowerShell 或 Windows 命令提示字元中執行以下指令，以下載 Milvus 獨立版（Standalone）的 Docker Compose 配置檔案並啟動 Milvus。​</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -229,8 +229,8 @@ Ubuntu already installed.​
 Starting Ubuntu...​
 
 </code></pre></li>
-<li><p>下載 Milvus 設定檔。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<li><p>下載 Milvus 配置檔。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>啟動 Milvus。​</p>
@@ -272,7 +272,7 @@ Creating milvus-standalone ... done​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Windows 上安裝 Docker Desktop 後，若電腦設定不正確，可能會遇到「<code translate="no">Docker Engine stopped</code> 」錯誤。此時，您可能需要進行以下檢查：​</p>
+    </button></h3><p>在 Windows 上安裝 Docker Desktop 後，若電腦未正確設定，可能會遇到「<code translate="no">Docker Engine stopped</code> 」錯誤。此時，您可能需要進行以下檢查：​</p>
 <ol>
 <li><p>檢查虛擬化功能是否已啟用。​</p>
 <p>您可透過「<strong>工作管理員</strong>」中的「<strong>效能</strong>」分頁，確認虛擬化功能是否已啟用。​</p>
@@ -282,7 +282,7 @@ Creating milvus-standalone ... done​
    <span>「工作管理員」中的虛擬化設定</span>
   
  </span></p>
-<p>若虛擬化功能已停用，您可能需要檢查主機板韌體的 BIOS 設定。在 BIOS 設定中啟用虛擬化的方法因主機板廠商而異。以華碩（ASUS）<a href="https://www.asus.com/support/faq/1043786/">主機板為例，您可以參考這篇關於啟用虛擬化的文章</a>。​</p>
+<p>若虛擬化功能已停用，您可能需要檢查主機板韌體的 BIOS 設定。在 BIOS 設定中啟用虛擬化的方法因主機板廠商而異。以 ASUS<a href="https://www.asus.com/support/faq/1043786/">主機板為例，您可以參考這篇關於</a>啟用<a href="https://www.asus.com/support/faq/1043786/">虛擬化的文章</a>。​</p>
 <p>接著，您需要重新啟動電腦並啟用 Hyper-V。詳細資訊請參閱這篇<a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">Microsoft 文章</a>。​</p></li>
 <li><p>檢查 Docker Desktop 服務是否已啟動。​</p>
 <p>您可以執行以下指令來啟動 Docker Desktop 服務。</p>
@@ -299,7 +299,7 @@ The most recent version of Windows Subsystem for Linux is already installed.​
 
 </code></pre></li>
 <li><p>檢查 Docker Daemon 是否已啟動。</p>
-<p>您需要前往 Docker Desktop 的安裝目錄，並執行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 來啟動 Docker 守護程序。​</p>
+<p>您需要前往 Docker Desktop 的安裝目錄，並執行 `<code translate="no">.\DockerCli.exe -SwitchDaemon</code> ` 來啟動 Docker 守護程式。​</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;cd &quot;C:\Program Files\Docker\Docker&quot;​
 C:\Program Files\Docker\Docker&gt;.\DockerCli.exe -SwitchDaemon​
 Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.\pipe\dockerBackendApiServer: The system cannot find the file specified.​
@@ -413,6 +413,6 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus-webui.md">Milvus WebUI</a>，這是專為 Milvus 可觀察性與管理而設計的直觀網頁介面。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>，這是一款用於 Milvus 資料備份的開源工具。</p></li>
 <li><p>探索<a href="/docs/zh-hant/v2.6.x/birdwatcher_overview.md">Birdwatcher，這</a>是一款用於 Milvus 除錯與動態配置更新的開源工具。</p></li>
-<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，這</a>是一款用於直觀管理 Milvus 的開源圖形化介面工具。</p></li>
+<li><p>探索<a href="https://github.com/zilliztech/attu">Attu，</a>這是一款用於直觀管理 Milvus 的開源 GUI 工具。</p></li>
 <li><p><a href="/docs/zh-hant/v2.6.x/monitor.md">透過 Prometheus 監控 Milvus</a>。</p></li>
 </ul>

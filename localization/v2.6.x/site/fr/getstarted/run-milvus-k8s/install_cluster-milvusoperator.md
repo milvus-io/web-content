@@ -177,12 +177,12 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Une fois que le pod Milvus Operator est en cours d'exécution, vous pouvez déployer un cluster Milvus comme suit.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>La commande ci-dessus déploie un cluster Milvus utilisant <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour la version 2.6.25) et intégrant tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
+<p>La commande ci-dessus déploie un cluster Milvus utilisant <strong>Woodpecker</strong> comme file d’attente de messages (recommandé pour la version 2.6.26) et intégrant tous les nouveaux composants architecturaux, y compris le nœud de streaming.</p>
 <p><strong>Points forts de l'architecture dans ce déploiement :</strong></p>
 <ul>
 <li><strong>File d’attente de messages</strong>: <a href="/docs/fr/v2.6.x/use-woodpecker.md">utilise Woodpecker</a> (réduit la maintenance de l’infrastructure)</li>
-<li><strong>Nœud de streaming</strong>: activé pour un traitement amélioré des données</li>
-<li><strong>Coordinateur Mix</strong>: composants de coordination consolidés pour une efficacité améliorée</li>
+<li><strong>Nœud de streaming</strong>: activé pour un traitement des données amélioré</li>
+<li><strong>Coordinateur Mix</strong>: composants de coordination consolidés pour une efficacité accrue</li>
 </ul>
 <p>Pour personnaliser ces paramètres, nous vous recommandons d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> afin d’ajuster les configurations en fonction de la taille réelle de vos données, puis de télécharger le fichier YAML correspondant. Pour en savoir plus sur les paramètres de configuration, consultez <a href="https://milvus.io/docs/system_configuration.md">la liste de contrôle des configurations système Milvus</a>.</p>
 <div class="alert note">
@@ -308,7 +308,7 @@ Forwarding from 0.0.0.0:27017 -&gt; 19530
     </button></h2><p>Vous pouvez afficher et mettre à jour les configurations de votre cluster Milvus en exécutant la commande ` <code translate="no">patch</code> ` comme suit :</p>
 <ol>
 <li><p>Exécutez la commande suivante pour prévisualiser les configurations proposées.</p>
-<p>L'exemple suivant part du principe que vous souhaitez mettre à jour le paramètre ` <code translate="no">spec.components.disableMetric</code> ` pour le définir à ` <code translate="no">false</code> ` ms.</p>
+<p>L'exemple suivant part du principe que vous souhaitez mettre à jour le paramètre ` <code translate="no">spec.components.disableMetric</code> ` pour le définir à <code translate="no">false</code> ms.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl patch milvus my-release --<span class="hljs-built_in">type</span>=<span class="hljs-string">&#x27;merge&#x27;</span>\
   -p <span class="hljs-string">&#x27;{&quot;spec&quot;:{&quot;components&quot;:{&quot;disableMetric&quot;:false}}}&#x27;</span> \
   --dry-run=client -o yaml</span>

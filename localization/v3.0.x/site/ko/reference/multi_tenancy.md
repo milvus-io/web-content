@@ -91,7 +91,7 @@ summary: >-
 <ul>
 <li><p><strong>확장성</strong>: 클러스터는 기본적으로 최대 65,536개의 컬렉션을 보유할 수 있으므로, 이 전략을 통해 클러스터 내에 동일한 수의 테넌트를 수용할 수 있습니다.</p></li>
 <li><p><strong>데이터 격리</strong>: 컬렉션은 서로 물리적으로 격리되어 있습니다. 이 전략은 강력한 데이터 격리를 제공합니다.</p></li>
-<li><p><strong>유연성</strong>: 이 전략을 사용하면 각 컬렉션이 고유한 스키마를 가질 수 있어, 서로 다른 데이터 스키마를 가진 테넌트를 수용할 수 있습니다.</p></li>
+<li><p><strong>유연성</strong>: 이 전략을 통해 각 컬렉션은 고유한 스키마를 가질 수 있어, 서로 다른 데이터 스키마를 가진 테넌트를 수용할 수 있습니다.</p></li>
 <li><p><strong>기타</strong>: 이 전략은 RBAC도 지원하여 테넌트에 대한 세분화된 액세스 제어가 가능합니다. 또한 특정 테넌트의 데이터를 유연하게 로드하거나 해제하여 핫 데이터와 콜드 데이터를 효과적으로 관리할 수 있습니다.</p></li>
 </ul>
 <h3 id="Partition-level-multi-tenancy" class="common-anchor-header">파티션 수준 멀티테넌시<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
@@ -117,10 +117,10 @@ summary: >-
   
  </span></p>
 <ul>
-<li><p><strong>확장성</strong>: 컬렉션당 최대 1,024개의 파티션을 보유할 수 있으며, 이에 따라 동일한 수의 테넌트를 수용할 수 있습니다.</p></li>
+<li><p><strong>확장성</strong>: 컬렉션당 최대 1,024개의 파티션을 보유할 수 있으므로, 그 안에 동일한 수의 테넌트를 수용할 수 있습니다.</p></li>
 <li><p><strong>데이터 격리</strong>: 각 테넌트의 데이터는 파티션을 통해 물리적으로 분리됩니다.</p></li>
 <li><p><strong>유연성</strong>: 이 전략을 사용하려면 모든 테넌트가 동일한 데이터 스키마를 공유해야 합니다. 또한 파티션을 수동으로 생성해야 합니다.</p></li>
-<li><p><strong>기타</strong>: 파티션 수준에서는 RBAC가 지원되지 않습니다. 테넌트에 대한 쿼리는 개별적으로 또는 여러 파티션에 걸쳐 수행할 수 있으므로, 이 접근 방식은 테넌트 세그먼트 전반에 걸친 집계 쿼리나 분석이 필요한 시나리오에 적합합니다. 또한, 특정 테넌트의 데이터를 유연하게 로드하거나 해제하여 핫 데이터와 콜드 데이터를 효과적으로 관리할 수 있습니다.</p></li>
+<li><p><strong>기타</strong>: 파티션 수준에서는 RBAC가 지원되지 않습니다. 테넌트에 대한 쿼리는 개별적으로 또는 여러 파티션에 걸쳐 수행할 수 있으므로, 이 접근 방식은 테넌트 세그먼트 전반에 걸친 집계 쿼리나 분석이 필요한 시나리오에 적합합니다. 또한 특정 테넌트의 데이터를 유연하게 로드하거나 해제하여 핫 데이터와 콜드 데이터를 효과적으로 관리할 수 있습니다.</p></li>
 </ul>
 <h3 id="Partition-key-level-multi-tenancy" class="common-anchor-header">파티션 키 수준 멀티테넌시<button data-href="#Partition-key-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,7 +151,7 @@ summary: >-
 <li><p><strong>기타</strong>: 파티션 키 수준에서는 RBAC가 지원되지 않습니다. 테넌트는 개별적으로 또는 여러 파티션에 걸쳐 쿼리할 수 있으므로, 이 접근 방식은 테넌트 세그먼트 전반에 걸친 집계 쿼리나 분석이 필요한 시나리오에 적합합니다.</p></li>
 </ul>
 <div class="alert note">
-<p>파티션 키 필드에 스칼라 인덱스를 생성할 것을 권장합니다. 각 물리적 파티션에는 여러 테넌트가 포함되어 있으므로, Milvus는 검색된 파티션 내의 모든 엔티티에 대해 테넌트 필터를 평가하며, 인덱스가 없으면 전체 스캔이 수행됩니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md#Index-Partition-Key">파티션 키 인덱스</a> 지정을 참조하십시오.</p>
+<p>파티션 키 필드에 스칼라 인덱스를 생성할 것을 권장합니다. 각 물리적 파티션에는 여러 테넌트가 포함되어 있으므로, Milvus는 검색된 파티션 내의 모든 엔티티에 대해 테넌트 필터를 평가하며, 인덱스가 없으면 전체 스캔이 수행됩니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md#Index-Partition-Key">파티션 키 인덱스</a> 문서를 참조하십시오.</p>
 </div>
 <h2 id="Choosing-the-right-multi-tenancy-strategy" class="common-anchor-header">적절한 멀티테넌시 전략 선택<button data-href="#Choosing-the-right-multi-tenancy-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -186,8 +186,8 @@ summary: >-
    </tr>
    <tr>
      <td><p><strong>최대 테넌트 수</strong></p></td>
-     <td><p>기본값은 64입니다. Milvus.yaml 구성 파일에서 <code translate="no">maxDatabaseNum</code> 매개변수를 수정하여 이 수치를 늘릴 수 있습니다. </p></td>
-     <td><p>기본값은 65,536개입니다. Milvus.yaml 구성 파일에서 <code translate="no">maxCollectionNum</code> 매개변수를 수정하여 이 수치를 늘릴 수 있습니다.</p></td>
+     <td><p>기본값은 64입니다. Milvus.yaml 구성 파일에서 <code translate="no">maxDatabaseNum</code> 매개변수를 수정하여 이 값을 늘릴 수 있습니다. </p></td>
+     <td><p>기본값은 65,536개입니다. Milvus.yaml 구성 파일에서 <code translate="no">maxCollectionNum</code> 매개변수를 수정하여 이 값을 늘릴 수 있습니다.</p></td>
      <td><p>컬렉션당 최대 1,024개. </p></td>
      <td><p>수백만</p></td>
    </tr>

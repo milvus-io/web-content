@@ -38,7 +38,7 @@ title: Milvus-Cluster mit Milvus Operator installieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Milvus Operator ist eine Lösung, die Ihnen hilft, einen vollständigen Milvus-Service-Stack für Kubernetes-Cluster (K8s) bereitzustellen und zu verwalten. Der Stack umfasst alle Milvus-Komponenten und relevante Abhängigkeiten wie etcd und MinIO, wobei Woodpecker als integrierte Nachrichtenwarteschlange dient.</p>
+    </button></h2><p>Der Milvus Operator ist eine Lösung, die Ihnen dabei hilft, einen vollständigen Milvus-Service-Stack für Kubernetes-Cluster (K8s) bereitzustellen und zu verwalten. Der Stack umfasst alle Milvus-Komponenten und relevante Abhängigkeiten wie etcd und MinIO, wobei Woodpecker als integrierte Nachrichtenwarteschlange dient.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -177,7 +177,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus-Operator-Pod läuft, können Sie wie folgt einen Milvus-Cluster bereitstellen.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Der obige Befehl stellt einen Milvus-Cluster bereit, bei dem <strong>Woodpecker</strong> als Nachrichtenwarteschlange verwendet wird (empfohlen für v3.0.3) und der alle neuen Architekturkomponenten einschließlich des Streaming-Knotens enthält.</p>
+<p>Der obige Befehl stellt einen Milvus-Cluster bereit, bei dem <strong>Woodpecker</strong> als Nachrichtenwarteschlange verwendet wird (empfohlen für v3.0.5) und alle neuen Architekturkomponenten einschließlich des Streaming-Knotens enthalten sind.</p>
 <p><strong>Architektur-Highlights dieser Bereitstellung:</strong></p>
 <ul>
 <li><strong>Nachrichtenwarteschlange</strong>: <a href="/docs/de/woodpecker.md">Verwendet Woodpecker</a> (reduziert den Wartungsaufwand für die Infrastruktur)</li>

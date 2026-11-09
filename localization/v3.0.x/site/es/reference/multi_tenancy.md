@@ -65,7 +65,7 @@ summary: >-
 <li><p><strong>Escalabilidad</strong>: la estrategia de multitenencia a nivel de base de datos admite un máximo de 64 inquilinos de forma predeterminada.</p></li>
 <li><p><strong>Aislamiento de datos</strong>: Los datos de cada base de datos están totalmente separados, lo que ofrece un aislamiento de datos de nivel empresarial ideal para entornos regulados o clientes con estrictas necesidades de cumplimiento normativo.</p></li>
 <li><p><strong>Flexibilidad</strong>: cada base de datos puede contener colecciones con esquemas diferentes, lo que ofrece una organización de datos muy flexible y permite que cada inquilino tenga su propio esquema de datos.</p></li>
-<li><p><strong>Otros</strong>: Esta estrategia también admite RBAC, lo que permite un control minucioso del acceso de los usuarios por inquilino. Además, se pueden cargar o liberar datos de forma flexible para inquilinos específicos, con el fin de gestionar eficazmente los datos activos y los inactivos.</p></li>
+<li><p><strong>Otros</strong>: Esta estrategia también admite RBAC, lo que permite un control minucioso del acceso de los usuarios por inquilino. Además, se pueden cargar o liberar datos de forma flexible para inquilinos específicos, con el fin de gestionar eficazmente los datos activos y los datos inactivos.</p></li>
 </ul>
 <h3 id="Collection-level-multi-tenancy" class="common-anchor-header">Multitenencia a nivel de colección<button data-href="#Collection-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -93,7 +93,7 @@ summary: >-
 <li><p><strong>Escalabilidad</strong>: dado que un clúster puede albergar hasta 65 536 colecciones de forma predeterminada, esta estrategia puede dar cabida al mismo número de inquilinos dentro del clúster.</p></li>
 <li><p><strong>Aislamiento de datos</strong>: Las colecciones están físicamente aisladas unas de otras. Esta estrategia proporciona un fuerte aislamiento de datos.</p></li>
 <li><p><strong>Flexibilidad</strong>: esta estrategia permite que cada colección tenga su propio esquema, lo que da cabida a inquilinos con diferentes esquemas de datos.</p></li>
-<li><p><strong>Otros</strong>: esta estrategia también es compatible con RBAC, lo que permite un control de acceso granular sobre los inquilinos. Además, permite cargar o liberar datos de forma flexible para inquilinos específicos, con el fin de gestionar eficazmente los datos activos y los datos inactivos.</p></li>
+<li><p><strong>Otros</strong>: esta estrategia también es compatible con RBAC, lo que permite un control de acceso granular sobre los inquilinos. Además, permite cargar o liberar datos de forma flexible para inquilinos específicos, con el fin de gestionar eficazmente los datos activos y los inactivos.</p></li>
 </ul>
 <h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multitenencia a nivel de partición<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,7 +149,7 @@ summary: >-
 <li><p><strong>Escalabilidad</strong>: La estrategia a nivel de clave de partición ofrece el enfoque más escalable, ya que admite millones de inquilinos.</p></li>
 <li><p><strong>Aislamiento de datos</strong>: esta estrategia ofrece un aislamiento de datos relativamente débil, ya que varios inquilinos pueden compartir una partición física.</p></li>
 <li><p><strong>Flexibilidad</strong>: dado que todos los inquilinos deben compartir el mismo esquema de datos, esta estrategia ofrece una flexibilidad de datos limitada.</p></li>
-<li><p><strong>Otros</strong>: No se admite RBAC a nivel de clave de partición. Las consultas a los inquilinos pueden realizarse de forma individual o a través de varias particiones, lo que hace que este enfoque sea muy adecuado para escenarios que impliquen consultas agregadas o análisis entre segmentos de inquilinos.</p></li>
+<li><p><strong>Otros</strong>: El modelo RBAC no es compatible a nivel de clave de partición. Las consultas sobre los inquilinos pueden realizarse de forma individual o a través de varias particiones, lo que hace que este enfoque sea muy adecuado para escenarios que impliquen consultas agregadas o análisis entre segmentos de inquilinos.</p></li>
 </ul>
 <div class="alert note">
 <p>Recomendamos crear un índice escalar en el campo de la clave de partición. Dado que cada partición física contiene varios inquilinos, Milvus evalúa el filtro de inquilinos con respecto a cada entidad de las particiones buscadas y, sin un índice, esto supone un escaneo completo. Para obtener más detalles, consulta <a href="/docs/es/use-partition-key.md#Index-Partition-Key">«Indexar la clave de partición</a>».</p>
@@ -239,7 +239,7 @@ summary: >-
 <li><p><strong>Otros</strong></p>
 <ol>
 <li><p><strong>Rendimiento:</strong> El rendimiento de las búsquedas viene determinado por diversos factores, entre los que se incluyen los índices, los parámetros de búsqueda y las configuraciones de los equipos. Milvus también admite el ajuste del rendimiento. Se recomienda comprobar el rendimiento real antes de seleccionar una estrategia de multitenencia.</p></li>
-<li><p><strong>Gestión eficaz de datos activos y inactivos</strong>: Actualmente, las estrategias a nivel de base de datos, de colección y de partición admiten la gestión de datos activos e inactivos.</p></li>
+<li><p><strong>Gestión eficaz de datos activos e inactivos</strong>: Actualmente, las estrategias a nivel de base de datos, de colección y de partición admiten la gestión de datos activos e inactivos.</p></li>
 <li><p><strong>Búsquedas entre inquilinos</strong>: Solo las estrategias a nivel de partición y a nivel de clave de partición admiten consultas entre inquilinos.</p></li>
 </ol></li>
 </ol>

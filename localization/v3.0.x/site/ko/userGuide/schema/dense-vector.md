@@ -2,11 +2,11 @@
 id: dense-vector.md
 title: 밀집 벡터
 summary: >-
-  밀집 벡터는 기계 학습 및 데이터 분석 분야에서 널리 사용되는 수치 데이터 표현 방식입니다. 밀집 벡터는 실수로 구성된 배열로 이루어져
-  있으며, 대부분의 요소 또는 모든 요소가 0이 아닙니다. 희소 벡터와 비교할 때, 밀집 벡터는 각 차원이 의미 있는 값을 포함하고 있으므로
-  동일한 차원 수준에서 더 많은 정보를 담고 있습니다. 이러한 표현 방식은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어, 고차원 공간에서
-  데이터를 더 쉽게 분석하고 처리할 수 있게 해줍니다. 밀집 벡터는 일반적으로 고정된 차원 수를 가지며, 구체적인 적용 분야와 요구 사항에
-  따라 수십 개에서 수백 개, 심지어 수천 개에 이르기까지 다양합니다.
+  밀집 벡터는 기계 학습 및 데이터 분석 분야에서 널리 사용되는 수치 데이터 표현 방식입니다. 이는 실수로 구성된 배열로 이루어져 있으며,
+  대부분의 요소 또는 모든 요소가 0이 아닙니다. 희소 벡터와 비교할 때, 밀집 벡터는 각 차원이 의미 있는 값을 포함하고 있으므로 동일한
+  차원 수준에서 더 많은 정보를 담고 있습니다. 이러한 표현 방식은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어, 고차원 공간에서 데이터를
+  더 쉽게 분석하고 처리할 수 있게 해줍니다. 밀집 벡터는 일반적으로 고정된 차원 수를 가지며, 구체적인 용도와 요구 사항에 따라 수십 개에서
+  수백 개, 심지어 수천 개에 이르기까지 다양합니다.
 ---
 <h1 id="Dense-Vector" class="common-anchor-header">밀집 벡터<button data-href="#Dense-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>밀집 벡터는 기계 학습 및 데이터 분석 분야에서 널리 사용되는 수치 데이터 표현 방식입니다. 밀집 벡터는 실수로 구성된 배열로, 대부분의 요소 또는 모든 요소가 0이 아닙니다. 스파스 벡터와 비교할 때, 밀집 벡터는 각 차원이 의미 있는 값을 포함하고 있으므로 동일한 차원 수준에서 더 많은 정보를 담고 있습니다. 이러한 표현 방식은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어, 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있게 해줍니다. 밀집 벡터는 일반적으로 고정된 차원 수를 가지며, 구체적인 응용 분야와 요구 사항에 따라 수십 개에서 수백 개, 심지어 수천 개에 이르기까지 다양합니다.</p>
-<p>밀집 벡터는 주로 시맨틱 검색이나 추천 시스템과 같이 데이터의 의미론을 이해해야 하는 상황에서 사용됩니다. 시맨틱 검색에서 밀집 벡터는 쿼리와 문서 간의 근본적인 연관성을 파악하는 데 도움을 주어 검색 결과의 관련성을 높입니다. 추천 시스템에서는 사용자와 항목 간의 유사성을 식별하는 데 기여하여, 더욱 개인화된 추천을 제공합니다.</p>
+    </button></h1><p>밀집 벡터는 기계 학습 및 데이터 분석 분야에서 널리 사용되는 수치 데이터 표현 방식입니다. 이는 실수로 구성된 배열로 이루어져 있으며, 대부분의 요소 또는 모든 요소가 0이 아닙니다. 희소 벡터와 비교할 때, 밀집 벡터는 각 차원이 의미 있는 값을 포함하고 있으므로 동일한 차원 수준에서 더 많은 정보를 담고 있습니다. 이러한 표현 방식은 복잡한 패턴과 관계를 효과적으로 포착할 수 있어, 고차원 공간에서 데이터를 더 쉽게 분석하고 처리할 수 있게 해줍니다. 밀집 벡터는 일반적으로 고정된 차원 수를 가지며, 구체적인 용도와 요구 사항에 따라 수십 개에서 수백 개, 심지어 수천 개에 이르기까지 다양합니다.</p>
+<p>밀집 벡터는 주로 시맨틱 검색이나 추천 시스템과 같이 데이터의 의미론을 이해해야 하는 상황에서 사용됩니다. 시맨틱 검색에서 밀집 벡터는 쿼리와 문서 간의 근본적인 연관성을 파악하는 데 도움을 주어 검색 결과의 관련성을 높입니다. 추천 시스템에서는 사용자와 항목 간의 유사성을 식별하는 데 기여하여 더욱 개인화된 제안을 제공합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>밀집 벡터는 일반적으로 <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 과 같이 고정 길이의 부동 소수점 숫자 배열로 표현됩니다. 이러한 벡터의 차원은 대개 128, 256, 768, 1024와 같이 수백에서 수천에 이릅니다. 각 차원은 객체의 특정 의미적 특징을 포착하므로, 유사도 계산을 통해 다양한 시나리오에 적용될 수 있습니다.</p>
+    </button></h2><p>밀집 벡터는 일반적으로 <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code> 와 같이 고정 길이의 부동 소수점 숫자 배열로 표현됩니다. 이러한 벡터의 차원은 보통 128, 256, 768, 1024와 같이 수백에서 수천에 이릅니다. 각 차원은 객체의 특정 의미적 특징을 포착하므로, 유사도 계산을 통해 다양한 시나리오에 적용될 수 있습니다.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dense-vector.png" alt="Dense Vector" class="doc-image" id="dense-vector" /> 
@@ -51,7 +51,7 @@ summary: >-
 <ul>
 <li><p><strong>다차원 표현:</strong> 각 점은 개념적 객체( <strong>Milvus</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong> 등)를 나타내며, 그 위치는 차원의 값에 의해 결정됩니다.</p></li>
 <li><p><strong>의미적 관계:</strong> 점들 간의 거리는 개념 간의 의미적 유사성을 반영합니다. 서로 가까운 점일수록 의미적으로 더 밀접하게 관련된 개념임을 나타냅니다.</p></li>
-<li><p><strong>클러스터링 효과:</strong> 관련 개념( <strong>Milvus</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong> 등)은 공간상에서 서로 가까이 배치되어 의미적 클러스터를 형성합니다.</p></li>
+<li><p><strong>클러스터링 효과:</strong> 관련 개념(예: <strong>Milvus</strong>, <strong>벡터 데이터베이스</strong>, <strong>검색 시스템</strong>)은 공간상에서 서로 가까이 배치되어 의미적 클러스터를 형성합니다.</p></li>
 </ul>
 <p>다음은 “ <code translate="no">&quot;Milvus is an efficient vector database&quot;</code> ”라는 텍스트를 나타내는 실제 고밀도 벡터의 예시입니다:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
@@ -67,7 +67,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>밀도 벡터는 이미지의 경우 <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG와</a> 같은 CNN 모델이나 텍스트의 경우 <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec과</a> 같은 언어 모델 등 다양한 <a href="https://en.wikipedia.org/wiki/Embedding">임베딩</a> 모델을 사용하여 생성할 수 있습니다. 이러한 모델은 원시 데이터를 고차원 공간의 점으로 변환하여 데이터의 의미적 특징을 포착합니다. 또한 Milvus는 ‘임베딩’ 섹션에 자세히 설명된 대로, 사용자가 밀집 벡터를 생성하고 처리할 수 있도록 편리한 방법을 제공합니다.</p>
+<p>밀도 벡터는 이미지의 경우 <a href="https://pytorch.org/hub/pytorch_vision_resnet/">ResNet</a>, <a href="https://pytorch.org/vision/stable/models/vgg.html">VGG와</a> 같은 CNN 모델이나 텍스트의 경우 <a href="https://en.wikipedia.org/wiki/BERT_(language_model)">BERT</a>, <a href="https://en.wikipedia.org/wiki/Word2vec">Word2Vec과</a> 같은 언어 모델 등 다양한 <a href="https://en.wikipedia.org/wiki/Embedding">임베딩</a> 모델을 사용하여 생성할 수 있습니다. 이러한 모델은 원시 데이터를 고차원 공간의 점으로 변환하여 데이터의 의미적 특징을 포착합니다. 또한 Milvus는 ‘임베딩(Embeddings)’ 섹션에 자세히 설명된 대로, 사용자가 밀집 벡터를 생성하고 처리할 수 있도록 편리한 방법을 제공합니다.</p>
 <p>데이터가 벡터화되면 Milvus에 저장하여 관리 및 벡터 검색이 가능합니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p><span class="img-wrapper">
   
@@ -76,7 +76,7 @@ summary: >-
   
  </span></p>
 <div class="alert note">
-<p>밀집 벡터 외에도 Milvus는 스파스 벡터와 이진 벡터를 지원합니다. 스파스 벡터는 키워드 검색이나 용어 일치와 같이 특정 용어를 기반으로 한 정밀한 일치에 적합하며, 이진 벡터는 이미지 패턴 일치나 특정 해싱 응용 프로그램과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/binary-vector.md">‘이진</a> <a href="/docs/ko/sparse_vector.md">벡터’</a> 및 <a href="/docs/ko/sparse_vector.md">‘스파스 벡터’를</a> 참조하십시오.</p>
+<p>밀집 벡터 외에도 Milvus는 스파스 벡터와 이진 벡터를 지원합니다. 스파스 벡터는 키워드 검색이나 용어 일치와 같이 특정 용어를 기반으로 한 정밀한 일치에 적합하며, 이진 벡터는 이미지 패턴 일치나 특정 해싱 응용 프로그램과 같이 이진화된 데이터를 효율적으로 처리하는 데 일반적으로 사용됩니다. 자세한 내용은 <a href="/docs/ko/binary-vector.md">이진 벡터</a> 및 <a href="/docs/ko/sparse_vector.md">스파스 벡터</a> 섹션을 참조하십시오.</p>
 </div>
 <h2 id="Use-dense-vectors" class="common-anchor-header">밀집 벡터 사용<button data-href="#Use-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -113,12 +113,15 @@ summary: >-
 <li><p><code translate="no">datatype</code> 를 지원되는 밀집 벡터 데이터 유형으로 설정합니다. 지원되는 밀집 벡터 데이터 유형에 대해서는 ‘데이터 유형’을 참조하십시오.</p></li>
 <li><p><code translate="no">dim</code> 매개변수를 사용하여 밀집 벡터의 차원을 지정합니다.</p></li>
 </ol>
-<p>아래 예제에서는 밀집 벡터를 저장하기 위해 <code translate="no">dense_vector</code> 라는 이름의 벡터 필드를 추가합니다. 이 필드의 데이터 유형은 ` <code translate="no">FLOAT_VECTOR</code>`이며, 차원은 ` <code translate="no">4</code>`입니다.</p>
+<p>아래 예제에서는 밀집 벡터를 저장하기 위해 <code translate="no">dense_vector</code> 이라는 이름의 벡터 필드를 추가합니다. 이 필드의 데이터 유형은 ` <code translate="no">FLOAT_VECTOR</code>`이며, 차원은 ` <code translate="no">4</code>`입니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -127,7 +130,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
 
 schema = client.create_schema(
     auto_id=<span class="hljs-literal">True</span>,
-    enable_dynamic_fields=<span class="hljs-literal">True</span>,
+    enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
@@ -160,31 +163,20 @@ schema.addField(AddFieldReq.builder()
         .dimension(<span class="hljs-number">4</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-schema.<span class="hljs-title function_">push</span>({
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
-  <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
-  <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
-});
-
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: milvusAddr,
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -192,7 +184,7 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 }
 <span class="hljs-keyword">defer</span> client.Close(ctx)
 
-schema := entity.NewSchema()
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">true</span>)
 schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;pk&quot;</span>).
     WithDataType(entity.FieldTypeVarChar).
@@ -204,6 +196,90 @@ schema.WithField(entity.NewField().
     WithDataType(entity.FieldTypeFloatVector).
     WithDim(<span class="hljs-number">4</span>),
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(
+    &amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>),
+)
+.<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">enable_dynamic_field</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;pk&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::VarChar)
+            .<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>)
+            .<span class="hljs-title function_ invoke__">auto_id</span>(<span class="hljs-literal">true</span>)
+            .<span class="hljs-title function_ invoke__">max_length</span>(<span class="hljs-number">100</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">4</span>),
+    );
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">true</span>);
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;pk&quot;</span>, milvus::DataType::VARCHAR, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">100</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">4</span>));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+});
+
+<span class="hljs-keyword">const</span> schema = [
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;pk&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+        <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">autoID</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">max_length</span>: <span class="hljs-number">100</span>
+    },
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+        <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>
+    }
+];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema
+{
+    EnableDynamicFields = <span class="hljs-literal">true</span>,
+    Fields =
+    {
+        FieldSchema.CreateVarchar(<span class="hljs-string">&quot;pk&quot;</span>, maxLength: <span class="hljs-number">100</span>, isPrimaryKey: <span class="hljs-literal">true</span>, autoId: <span class="hljs-literal">true</span>),
+        FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;dense_vector&quot;</span>, dimension: <span class="hljs-number">4</span>)
+    }
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> primaryField=<span class="hljs-string">&#x27;{
     &quot;fieldName&quot;: &quot;pk&quot;,
@@ -242,15 +318,15 @@ schema.WithField(entity.NewField().
    </tr>
    <tr>
      <td><p><code translate="no">FLOAT16_VECTOR</code></p></td>
-     <td><p>16비트 반정밀도 부동소수점을 저장하며, 딥러닝 및 GPU 계산에 사용됩니다. 추천 시스템의 저정밀도 리콜 단계와 같이 정밀도가 그다지 중요하지 않은 상황에서 저장 공간을 절약해 줍니다.</p></td>
+     <td><p>16비트 반정밀도 부동소수점 숫자를 저장하며, 딥러닝 및 GPU 계산에 사용됩니다. 추천 시스템의 저정밀도 리콜 단계와 같이 정밀도가 그리 중요하지 않은 상황에서 저장 공간을 절약해 줍니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">BFLOAT16_VECTOR</code></p></td>
-     <td><p>16비트 Brain Floating Point(bfloat16) 숫자를 저장하며, Float32와 동일한 지수 범위를 제공하지만 정밀도는 낮습니다. 대규모 이미지 검색과 같이 대량의 벡터를 빠르게 처리해야 하는 시나리오에 적합합니다.</p></td>
+     <td><p>16비트 Brain 부동소수점(bfloat16) 숫자를 저장하며, Float32와 동일한 지수 범위를 제공하지만 정밀도는 낮습니다. 대규모 이미지 검색과 같이 대량의 벡터를 빠르게 처리해야 하는 시나리오에 적합합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">INT8_VECTOR</code></p></td>
-     <td><p>각 차원의 개별 요소가 8비트 정수(int8)인 벡터를 저장하며, 각 요소의 범위는 –128에서 127까지입니다. 양자화된 딥 러닝 모델(예: ResNet, EfficientNet)을 위해 설계된 INT8_VECTOR는 정밀도 손실을 최소화하면서 모델 크기를 줄이고 추론 속도를 높입니다.<br><strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에서만 지원됩니다.</p></td>
+     <td><p>각 차원의 개별 요소가 8비트 정수(int8)인 벡터를 저장하며, 각 요소의 범위는 –128에서 127까지입니다. 양자화된 딥 러닝 모델(예: ResNet, EfficientNet)을 위해 설계된 INT8_VECTOR는 정밀도 손실을 최소화하면서 모델 크기를 줄이고 추론 속도를 높입니다.<br/><strong>참고</strong>: 이 벡터 유형은 HNSW 인덱스에서만 지원됩니다.</p></td>
    </tr>
 </table>
 <h3 id="Set-index-params-for-vector-field" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정<button data-href="#Set-index-params-for-vector-field" class="anchor-icon" translate="no">
@@ -272,8 +348,11 @@ schema.WithField(entity.NewField().
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -292,9 +371,34 @@ List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span cla
 
 indexes.add(IndexParam.builder()
         .fieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+        .indexName(<span class="hljs-string">&quot;dense_vector_index&quot;</span>)
         .indexType(IndexParam.IndexType.AUTOINDEX)
         .metricType(IndexParam.MetricType.IP)
         .build());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+idx := index.NewAutoIndex(entity.IP)
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dense_vector&quot;</span>, idx)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">index_params</span> = <span class="hljs-built_in">vec!</span>[IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+    .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;dense_vector_index&quot;</span>)
+    .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+    .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Ip)];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+std::vector&lt;milvus::IndexDesc&gt; indexes = {
+    milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>, <span class="hljs-string">&quot;dense_vector_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::IP)
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MetricType</span>, <span class="hljs-title class_">IndexType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -305,8 +409,17 @@ indexes.add(IndexParam.builder()
     <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">idx := index.NewAutoIndex(index.MetricType(entity.IP))
-indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dense_vector&quot;</span>, idx)
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> indexParams = <span class="hljs-keyword">new</span>[]
+{
+    <span class="hljs-keyword">new</span> IndexParam(
+        fieldName: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+        indexName: <span class="hljs-string">&quot;dense_vector_index&quot;</span>,
+        indexType: IndexType.AutoIndex,
+        metricType: MetricType.Ip)
+};
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
         {
@@ -339,8 +452,11 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_collection(
@@ -349,12 +465,7 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
-
-<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
-        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-        .build());
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -363,28 +474,74 @@ indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
-});
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
 
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">schema</span>: schema,
-    <span class="hljs-attr">index_params</span>: indexParams
-});
-
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
+err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle error</span>
 }
+
+loadTask, err := client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">if</span> err := loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client
+    .<span class="hljs-title function_ invoke__">create_collection</span>(
+        CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">schema</span>(schema)
+            .<span class="hljs-title function_ invoke__">index_params</span>(index_params)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-comment">// CreateCollection creates the configured indexes and loads the collection automatically.</span>
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                            .<span class="hljs-built_in">WithIndexes</span>(std::<span class="hljs-built_in">move</span>(indexes))
+                                            .<span class="hljs-built_in">WithCollectionSchema</span>(schema));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> createRes = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">schema</span>: schema,
+    <span class="hljs-attr">index_params</span>: indexParams
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(createRes);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Schema = schema,
+    Indexes = indexParams
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -410,12 +567,15 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션을 생성한 후, ` <code translate="no">insert</code> ` 메서드를 사용하여 밀집 벡터가 포함된 데이터를 추가합니다. 삽입되는 밀집 벡터의 차원이 밀집 벡터 필드를 추가할 때 정의된 ` <code translate="no">dim</code> ` 값과 일치하는지 확인하십시오.</p>
+    </button></h3><p>컬렉션을 생성한 후, ` <code translate="no">insert</code> ` 메서드를 사용하여 밀집 벡터가 포함된 데이터를 추가합니다. 삽입하는 밀집 벡터의 차원이 밀집 벡터 필드를 추가할 때 정의한 ` <code translate="no">dim</code> ` 값과 일치하는지 확인하십시오.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">data = [
@@ -435,25 +595,21 @@ client.insert(
 
 List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 <span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quot;: [0.1, 0.2, 0.3, 0.4]}&quot;</span>, JsonObject.class));
-rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quot;: [0.2, 0.3, 0.4, 0.5]}&quot;</span>, JsonObject.class));
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quot;: [0.1, 0.2, 0.3, 0.7]}&quot;</span>, JsonObject.class));
+rows.add(gson.fromJson(<span class="hljs-string">&quot;{\&quot;dense_vector\&quot;: [0.2, 0.3, 0.4, 0.8]}&quot;</span>, JsonObject.class));
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(rows)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
-  { <span class="hljs-attr">dense_vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>] },
-  { <span class="hljs-attr">dense_vector</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>] },
-];
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: data,
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
     WithFloatVectorColumn(<span class="hljs-string">&quot;dense_vector&quot;</span>, <span class="hljs-number">4</span>, [][]<span class="hljs-type">float32</span>{
         {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>},
         {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>},
@@ -463,16 +619,97 @@ client.<span class="hljs-title function_">insert</span>({
     fmt.Println(err.Error())
     <span class="hljs-comment">// handle err</span>
 }
+
+flushTask, err := client.Flush(ctx, milvusclient.NewFlushOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
+<span class="hljs-keyword">if</span> err := flushTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle err</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">rows</span> = <span class="hljs-built_in">vec!</span>[
+    serde_json::json!({<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]}),
+    serde_json::json!({<span class="hljs-string">&quot;dense_vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>]}),
+];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">insert</span> = client
+    .<span class="hljs-title function_ invoke__">insert</span>(
+        InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">rows</span>(rows)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{} rows inserted&quot;</span>, insert.<span class="hljs-title function_ invoke__">insert_count</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::EntityRows data = {{{<span class="hljs-string">&quot;dense_vector&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>}}},
+                           {{<span class="hljs-string">&quot;dense_vector&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>}}}};
+
+milvus::InsertResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data)),
+                             response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">Flush</span>(milvus::<span class="hljs-built_in">FlushRequest</span>().<span class="hljs-built_in">AddCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
+    { <span class="hljs-attr">dense_vector</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>] },
+    { <span class="hljs-attr">dense_vector</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.8</span>] }
+];
+
+<span class="hljs-keyword">const</span> insertRes = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">data</span>: data
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(insertRes);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> data = <span class="hljs-keyword">new</span>[]
+{
+    <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+    {
+        [<span class="hljs-string">&quot;dense_vector&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.7f</span> }
+    },
+    <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+    {
+        [<span class="hljs-string">&quot;dense_vector&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.8f</span> }
+    }
+};
+
+<span class="hljs-keyword">await</span> client.InsertAsync(<span class="hljs-keyword">new</span> InsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData = data
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;data&quot;: [
-        {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.4]},
-        {&quot;dense_vector&quot;: [0.2, 0.3, 0.4, 0.5]}        
+        {&quot;dense_vector&quot;: [0.1, 0.2, 0.3, 0.7]},
+        {&quot;dense_vector&quot;: [0.2, 0.3, 0.4, 0.8]}
     ],
     &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
@@ -494,12 +731,15 @@ client.<span class="hljs-title function_">insert</span>({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>밀집 벡터를 기반으로 한 시맨틱 검색은 Milvus의 핵심 기능 중 하나로, 벡터 간의 거리를 기반으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있게 해줍니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비한 후 <code translate="no">search</code> 메서드를 호출하십시오.</p>
+    </button></h3><p>밀집 벡터를 기반으로 한 시맨틱 검색은 Milvus의 핵심 기능 중 하나로, 벡터 간의 거리를 바탕으로 쿼리 벡터와 가장 유사한 데이터를 빠르게 찾을 수 있게 해줍니다. 유사도 검색을 수행하려면 쿼리 벡터와 검색 매개변수를 준비한 다음, <code translate="no">search</code> 메서드를 호출하십시오.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">search_params = {
@@ -522,12 +762,14 @@ res = client.search(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172271&#x27;, &#x27;distance&#x27;: 0.7599999904632568, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172271&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172270&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172270&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class="hljs-number">10</span>);
+searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>);
 
-<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>});
+<span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.7f</span>});
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchR</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
@@ -537,26 +779,18 @@ searchParams.put(<span class="hljs-string">&quot;nprobe&quot;</span>,<span class
         .topK(<span class="hljs-number">5</span>)
         .outputFields(Collections.singletonList(<span class="hljs-string">&quot;pk&quot;</span>))
         .build());
-        
+
 System.out.println(searchR.getSearchResults());
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">// [[SearchResp.SearchResult(entity={pk=453444327741536779}, score=0.65, id=453444327741536779), SearchResp.SearchResult(entity={pk=453444327741536778}, score=0.65, id=453444327741536778)]]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>];
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    <span class="hljs-attr">data</span>: query_vector,
-    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;pk&#x27;</span>],
-    <span class="hljs-attr">params</span>: {
-        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span>
-    }
-});
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>}
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>}
 
 annParam := index.NewCustomAnnParam()
 annParam.WithExtraParam(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-number">10</span>)
@@ -578,7 +812,89 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;Pks: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;pk&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash">curl --request POST \
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">search</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([(<span class="hljs-string">&quot;nprobe&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;10&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>())]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;pk&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, search.<span class="hljs-title function_ invoke__">results</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;dense_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                   .<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;nprobe&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;pk&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<span class="hljs-keyword">auto</span> search_results = response.<span class="hljs-built_in">Results</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : search_results.<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>];
+
+<span class="hljs-keyword">const</span> searchRes = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">data</span>: query_vector,
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense_vector&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;pk&quot;</span>],
+    <span class="hljs-attr">params</span>: {
+        <span class="hljs-attr">nprobe</span>: <span class="hljs-number">10</span>
+    }
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(searchRes);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> queryVector = <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.7f</span> });
+
+SearchResp res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;dense_vector&quot;</span>,
+    Vectors = <span class="hljs-keyword">new</span>[] { queryVector },
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Nprobe = <span class="hljs-number">10</span>,
+        OutputFields = { <span class="hljs-string">&quot;pk&quot;</span> }
+    }
+});
+Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, res.SingleResults.SelectMany(r =&gt; r.Scores)));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
 --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \

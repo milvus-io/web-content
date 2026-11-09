@@ -222,7 +222,7 @@ title: Kafka
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Meningkatkan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan Antrian Pesan</strong>: Saat meningkatkan versi ke Milvus v3.0.3, Anda harus mempertahankan pilihan antrian pesan Anda saat ini. Beralih di antara sistem antrian pesan yang berbeda selama peningkatan versi tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.
+<li><strong>Peningkatan versi dari 2.5.x ke 2.6.x:</strong> <strong>Batasan antrian pesan</strong>: Saat melakukan peningkatan ke Milvus v3.0.5, Anda harus mempertahankan pilihan antrian pesan saat ini. Pergantian antara sistem antrian pesan yang berbeda selama proses peningkatan tidak didukung. Dukungan untuk mengganti sistem antrian pesan akan tersedia pada versi mendatang.
 Jika Anda menjalankan Kafka dan ingin tetap menggunakannya, jangan ubah antrian pesan selama proses peningkatan versi.</li>
 <li>Hanya <strong>Kafka 2.x dan 3.x</strong> yang didukung.</li>
 <li>Untuk konektivitas SASL/SSL, lihat <a href="/docs/id/connect_kafka_ssl.md">Menghubungkan ke Kafka dengan SASL/SSL</a>.</li>

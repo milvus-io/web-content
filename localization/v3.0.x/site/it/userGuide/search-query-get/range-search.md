@@ -2,10 +2,10 @@
 id: range-search.md
 title: Ricerca per intervallo
 summary: >-
-  Una ricerca per intervallo migliora la pertinenza dei risultati di ricerca
-  limitando la distanza o il punteggio delle entità restituite entro un
-  intervallo specifico. Questa pagina aiuta a capire cos'è la ricerca per
-  intervallo e le procedure per condurre una ricerca per intervallo.
+  La ricerca per intervallo migliora la pertinenza dei risultati limitando la
+  distanza o il punteggio delle entità restituite entro un intervallo specifico.
+  Questa pagina ti aiuta a capire cos’è la ricerca per intervallo e quali sono
+  le procedure per effettuarla.
 ---
 <h1 id="Range-Search" class="common-anchor-header">Ricerca per intervallo<button data-href="#Range-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una ricerca per intervallo migliora la pertinenza dei risultati della ricerca limitando la distanza o il punteggio delle entità restituite all'interno di un intervallo specifico. Questa pagina aiuta a capire cos'è la ricerca per intervallo e le procedure per condurre una ricerca per intervallo.</p>
+    </button></h1><p>La ricerca per intervallo migliora la pertinenza dei risultati limitando la distanza o il punteggio delle entità restituite entro un intervallo specifico. Questa pagina ti aiuta a comprendere cos'è la ricerca per intervallo e le procedure per effettuarla.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,48 +38,50 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando si esegue una richiesta di ricerca per intervallo, Milvus utilizza i vettori più simili al vettore della query dai risultati della ricerca RNA come centro, con il <strong>raggio</strong> specificato nella richiesta di ricerca come raggio del cerchio esterno e il <strong>range_filter</strong> come raggio del cerchio interno per disegnare due cerchi concentrici. Verranno restituiti tutti i vettori con punteggi di somiglianza che rientrano nell'area anulare formata da questi due cerchi concentrici. In questo caso, <strong>range_filter</strong> può essere impostato a <strong>0</strong>, indicando che verranno restituite tutte le entità che rientrano nel punteggio di somiglianza (raggio) specificato.</p>
-<p>
+    </button></h2><p>Quando si esegue una richiesta di ricerca per intervallo, Milvus utilizza come centro i vettori più simili al vettore di query tra i risultati della ricerca ANN, con il <strong>raggio</strong> specificato nella richiesta di ricerca come raggio del cerchio esterno e il <strong>parametro range_filter</strong> come raggio del cerchio interno, per tracciare due cerchi concentrici. Verranno restituiti tutti i vettori con punteggi di similarità che rientrano nella regione anulare formata da questi due cerchi concentrici. In questo caso, il parametro <strong>`range_filter`</strong> può essere impostato su <strong>0</strong>, indicando che verranno restituite tutte le entità che rientrano nel punteggio di similarità specificato (raggio).</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
-   </span> <span class="img-wrapper"> <span>Ricerca per intervallo</span> </span></p>
-<p>Il diagramma precedente mostra che una richiesta di ricerca per intervallo contiene due parametri: <strong>radius</strong> e <strong>range_filter</strong>. Quando riceve una richiesta di ricerca per raggio, Milvus esegue le seguenti operazioni:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" /> 
+   <span>Ricerca per intervallo</span>
+  
+ </span></p>
+<p>Il diagramma sopra riportato mostra che una richiesta di ricerca per intervallo comporta due parametri: <strong>radius</strong> e <strong>range_filter</strong>. Alla ricezione di una richiesta di ricerca per intervallo, Milvus esegue le seguenti operazioni:</p>
 <ul>
-<li><p>Utilizza il tipo di metrica specificato<strong>(COSINE</strong>) per trovare tutte le incorporazioni vettoriali più simili al vettore interrogato.</p></li>
-<li><p>Filtra le incorporazioni vettoriali le cui <strong>distanze</strong> o <strong>punteggi</strong> rispetto al vettore di interrogazione rientrano nell'intervallo specificato dai parametri <strong>radius</strong> e <strong>range_filter</strong>.</p></li>
-<li><p>Restituire le entità <strong>top-K</strong> tra quelle filtrate.</p></li>
+<li><p>Utilizza il tipo di metrica specificato (<strong>COSINE</strong>) per individuare tutte le rappresentazioni vettoriali più simili al vettore di query.</p></li>
+<li><p>Filtra le rappresentazioni vettoriali le cui <strong>distanze</strong> o <strong>punteggi</strong> rispetto al vettore di query rientrano nell’intervallo specificato dai parametri <strong>radius</strong> e <strong>range_filter</strong>.</p></li>
+<li><p>Restituisce le <strong>prime K</strong> entità tra quelle filtrate.</p></li>
 </ul>
-<p>Il modo in cui impostare <strong>radius</strong> e <strong>range_filter</strong> varia a seconda del tipo di metrica della ricerca. La tabella seguente elenca i requisiti per l'impostazione di questi due parametri con diversi tipi di metrica.</p>
+<p>La modalità di impostazione <strong>di radius</strong> e <strong>range_filter</strong> varia a seconda del tipo di metrica della ricerca. La tabella seguente elenca i requisiti per l’impostazione di questi due parametri con diversi tipi di metrica.</p>
 <table>
    <tr>
      <th><p>Tipo di metrica</p></th>
-     <th><p>Denotazioni</p></th>
-     <th><p>Requisiti per l'impostazione di radius e range_filter</p></th>
+     <th><p>Significati</p></th>
+     <th><p>Requisiti per l’impostazione di radius e range_filter</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">L2</code></p></td>
-     <td><p>Una distanza L2 più piccola indica una maggiore somiglianza.</p></td>
-     <td><p>Per ignorare le incorporazioni vettoriali più simili, assicurarsi che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
+     <td><p>Una distanza L2 minore indica una maggiore somiglianza.</p></td>
+     <td><p>Per ignorare gli embedding vettoriali più simili, assicurarsi che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>Una distanza IP maggiore indica una maggiore somiglianza.</p></td>
-     <td><p>Per ignorare le incorporazioni vettoriali più simili, assicurarsi che</p><p><code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Per ignorare gli embedding vettoriali più simili, assicurarsi che</p><p><code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Una distanza COSINE maggiore indica una maggiore somiglianza.</p></td>
-     <td><p>Per ignorare le incorporazioni vettoriali più simili, assicurarsi che</p><p><code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Per ignorare gli embedding vettoriali più simili, assicurarsi che</p><p><code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Una distanza di Jaccard minore indica una maggiore somiglianza.</p></td>
-     <td><p>Per ignorare le incorporazioni vettoriali più simili, assicurarsi che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
+     <td><p>Per ignorare gli embedding vettoriali più simili, assicurarsi che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Una distanza di Hamming più piccola indica una maggiore somiglianza.</p></td>
-     <td><p>Per ignorare le incorporazioni vettoriali più simili, verificare che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
+     <td><p>Una distanza di Hamming minore indica una maggiore somiglianza.</p></td>
+     <td><p>Per ignorare gli embedding vettoriali più simili, assicurarsi che</p><p><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -97,10 +99,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa sezione mostra come effettuare una ricerca per intervallo. Le richieste di ricerca nei seguenti frammenti di codice non riportano un tipo di metrica, indicando che si applica il tipo di metrica predefinito <strong>COSINE</strong>. In questo caso, assicurarsi che il valore del <strong>raggio</strong> sia inferiore al valore di <strong>range_filter</strong>.</p>
-<p>Nei seguenti frammenti di codice, impostare <code translate="no">radius</code> su <code translate="no">0.4</code> e <code translate="no">range_filter</code> su <code translate="no">0.6</code> in modo che Milvus restituisca tutte le entità le cui distanze o punteggi rispetto al vettore di interrogazione siano compresi tra <strong>0,4</strong> e <strong>0,6</strong>.</p>
+    </button></h2><p>Questa sezione illustra come eseguire una ricerca per intervallo. Le richieste di ricerca nei seguenti frammenti di codice non specificano un tipo di metrica, il che indica che viene applicato il tipo di metrica predefinito <strong>COSINE</strong>. In questo caso, assicurarsi che il valore <strong>del raggio</strong> sia inferiore al valore <strong>di range_filter</strong>.</p>
+<p>Nei frammenti di codice seguenti, impostare ` <code translate="no">radius</code> ` su ` <code translate="no">0.4</code> ` e ` <code translate="no">range_filter</code> ` su ` <code translate="no">0.6</code> `, in modo che Milvus restituisca tutte le entità le cui distanze o punteggi rispetto al vettore di query rientrino tra <strong>0,4</strong> e <strong>0,6</strong>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -129,9 +139,13 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
- io.milvus.v2.service.vector.request.SearchReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -167,7 +181,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
-    
+
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
@@ -176,7 +190,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -208,6 +222,71 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+            .<span class="hljs-title function_ invoke__">radius</span>(<span class="hljs-number">0.4</span>)
+            .<span class="hljs-title function_ invoke__">range_filter</span>(<span class="hljs-number">0.6</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to connect: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; queryVector = {
+    <span class="hljs-number">0.35803764F</span>, <span class="hljs-number">-0.60234958F</span>, <span class="hljs-number">0.18414013F</span>, <span class="hljs-number">-0.26286206F</span>, <span class="hljs-number">0.90294385F</span>
+};
+
+<span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                         .<span class="hljs-built_in">WithRadius</span>(<span class="hljs-number">0.4</span>)
+                         .<span class="hljs-built_in">WithRangeFilter</span>(<span class="hljs-number">0.6</span>)
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
@@ -225,6 +304,33 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-comment-line">        <span class="hljs-string">&quot;range_filter&quot;</span>: <span class="hljs-number">0.6</span></span>
 <span class="highlighted-comment-line">    }</span>
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>];
+
+SearchResp res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = [queryVector],
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+<span class="highlighted-comment-line">        Radius = <span class="hljs-string">&quot;0.4&quot;</span>,</span>
+<span class="highlighted-comment-line">        RangeFilter = <span class="hljs-string">&quot;0.6&quot;</span>,</span>
+        OutputFields = { <span class="hljs-string">&quot;color&quot;</span> }
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -251,5 +357,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se i vettori di query esistono già nella collezione di destinazione, si può usare <code translate="no">ids</code> invece di recuperarli prima della ricerca. Per maggiori dettagli, consultare la sezione <a href="/docs/it/primary-key-search.md">Ricerca con chiave primaria</a>.</p>
+<p>Se i vettori di query esistono già nella raccolta di destinazione, valuta la possibilità di utilizzare <code translate="no">ids</code> invece di recuperarli prima delle ricerche. Per ulteriori dettagli, consulta <a href="/docs/it/primary-key-search.md">Ricerca per chiave primaria</a>.</p>
 </div>

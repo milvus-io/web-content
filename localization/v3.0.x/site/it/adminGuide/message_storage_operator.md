@@ -53,14 +53,14 @@ summary: Scopri come configurare l'archiviazione dei messaggi con Milvus Operato
 </table>
 <p>Esistono anche altre limitazioni relative alla specificazione dell'archivio messaggi:</p>
 <ul>
-<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con la configurazione di più archivi messaggi per una singola istanza. L’ordine di priorità è il seguente:
+<li>È supportato un solo archivio messaggi per ogni istanza di Milvus. Tuttavia, è ancora garantita la retrocompatibilità con la configurazione di più archivi messaggi per una singola istanza. L'ordine di priorità è il seguente:
 <ul>
 <li>modalità standalone: Woodpecker (predefinito) &gt; RocksMQ &gt; Pulsar &gt; Kafka</li>
 <li>modalità cluster: Woodpecker (predefinito) &gt; Pulsar &gt; Kafka</li>
 </ul></li>
 <li>L'archivio messaggi non può essere modificato mentre il sistema Milvus è in esecuzione.</li>
 <li>Sono supportate solo le versioni 2.x o 3.x di Kafka.</li>
-<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v3.0.3, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limiti dell’aggiornamento</strong>: <strong>Limiti relativi alle code di messaggi</strong>: durante l’aggiornamento a Milvus v3.0.5, è necessario mantenere la scelta attuale della coda di messaggi. Il passaggio da un sistema di code di messaggi a un altro durante l’aggiornamento non è supportato. Il supporto per la modifica dei sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurazione di RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -367,6 +367,6 @@ I campi utilizzati per configurare un servizio Pulsar esterno includono:</p>
       </svg>
     </button></h2><p>Scopri come configurare altre dipendenze di Milvus con Milvus Operator:</p>
 <ul>
-<li><a href="/docs/it/object_storage_operator.md">Configurare l’Object Storage con Milvus Operator</a></li>
+<li><a href="/docs/it/object_storage_operator.md">Configurazione dell’Object Storage con Milvus Operator</a></li>
 <li><a href="/docs/it/meta_storage_operator.md">Configurare Meta Storage con Milvus Operator</a></li>
 </ul>

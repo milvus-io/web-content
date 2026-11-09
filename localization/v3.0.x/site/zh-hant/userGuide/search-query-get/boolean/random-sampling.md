@@ -2,7 +2,7 @@
 id: random-sampling.md
 title: 隨機抽樣Compatible with Milvus 2.6.x
 summary: >-
-  在處理大規模資料集時，您通常不需要處理所有資料來獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。
+  在處理大規模資料集時，您通常無需處理所有資料即可獲得洞見或測試篩選邏輯。隨機抽樣提供了一種解決方案，讓您能夠針對資料中具有統計代表性的子集進行處理，從而顯著減少查詢時間和資源消耗。
 beta: Milvus 2.6.x
 ---
 <h1 id="Random-Sampling" class="common-anchor-header">隨機抽樣<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Random-Sampling" class="anchor-icon" translate="no">
@@ -20,13 +20,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在處理大規模資料集時，您通常不需要處理所有資料，就能獲得洞察力或測試篩選邏輯。隨機抽樣提供了一個解決方案，讓您可以處理具有統計代表性的資料子集，大幅減少查詢時間和資源消耗。</p>
-<p>隨機抽樣在區段層級運作，可確保高效的效能，同時在您的集合資料分佈中維持抽樣的隨機性。</p>
-<p><strong>主要用例：</strong></p>
+    </button></h1><p>在處理大規模資料集時，您通常無需處理所有資料即可獲得洞見或測試篩選邏輯。隨機抽樣提供了一種解決方案，讓您能夠針對資料中具有統計代表性的子集進行處理，從而顯著減少查詢時間並降低資源消耗。</p>
+<p>隨機抽樣在分段層級運作，在確保高效能的同時，亦能維持樣本在整個資料集分佈中的隨機性。</p>
+<p><strong>主要應用情境：</strong></p>
 <ul>
-<li><p><strong>資料探索</strong>：以最少的資源使用量快速預覽資料集結構和內容</p></li>
-<li><p><strong>開發測試</strong>：在全面部署之前，在可管理的資料樣本上測試複雜的篩選邏輯</p></li>
-<li><p><strong>資源最佳化</strong>：降低探索性查詢和統計分析的計算成本</p></li>
+<li><p><strong>資料探索</strong>：以最低的資源消耗快速預覽資料集的結構與內容</p></li>
+<li><p><strong>開發測試</strong>：在全面部署前，於可管理的資料樣本上測試複雜的篩選邏輯</p></li>
+<li><p><strong>資源優化</strong>：降低探索性查詢與統計分析的運算成本</p></li>
 </ul>
 <h2 id="Syntax" class="common-anchor-header">語法<button data-href="#Syntax" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,27 +44,42 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> filter = <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;RANDOM_SAMPLE(sampling_factor)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> filterRandomSample=<span class="hljs-string">&#x27;RANDOM_SAMPLE(sampling_factor)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>參數：</strong></p>
 <ul>
-<li><code translate="no">sampling_factor</code>:取樣係數，範圍為 (0，1)，不包括邊界。例如，<code translate="no">RANDOM_SAMPLE(0.001)</code> 會選取約 0.1% 的結果。</li>
+<li><code translate="no">sampling_factor</code>：取樣因子，範圍為 (0, 1)，不包含邊界。例如，<code translate="no">RANDOM_SAMPLE(0.001)</code> 會選取約 0.1% 的結果。</li>
 </ul>
 <p><strong>重要規則：</strong></p>
 <ul>
-<li><p>表達式不區分大小寫 (<code translate="no">RANDOM_SAMPLE</code> 或<code translate="no">random_sample</code>)</p></li>
-<li><p>取樣係數必須在 (0, 1) 的範圍內，不包括邊界</p></li>
+<li><p>此表達式不區分大小寫（<code translate="no">RANDOM_SAMPLE</code> 或<code translate="no">random_sample</code> ）</p></li>
+<li><p>抽樣因子必須位於 (0, 1) 範圍內，且不包含邊界</p></li>
 </ul>
-<h2 id="Combine-with-other-filters" class="common-anchor-header">與其他篩選器結合<button data-href="#Combine-with-other-filters" class="anchor-icon" translate="no">
+<h2 id="Combine-with-other-filters" class="common-anchor-header">與其他篩選器結合使用<button data-href="#Combine-with-other-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,9 +94,17 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>隨機抽樣運算符號必須與其他篩選表達式結合，使用邏輯<code translate="no">AND</code> 。結合篩選器時，Milvus 會先套用其他條件，然後在結果集上執行隨機抽樣。</p>
+    </button></h2><p>隨機抽樣運算子必須透過邏輯運算子<code translate="no">AND</code> 與其他篩選表達式結合使用。在組合篩選器時，Milvus 會先套用其他條件，然後對結果集進行隨機抽樣。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Correct: Filter first, then sample</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>
 <span class="hljs-comment"># Processing: Find all red items → Sample 0.1% of those red items</span>
@@ -91,23 +114,55 @@ beta: Milvus 2.6.x
 <span class="hljs-comment"># This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Correct: Filter first, then sample</span>
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;color == \&quot;red\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>;
 <span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
 
 <span class="hljs-comment">// Incorrect: OR doesn&#x27;t make logical sense</span>
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span>;  <span class="hljs-comment">// ❌ Invalid logic</span>
+<span class="hljs-type">String</span> <span class="hljs-variable">filterIncorrect</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;color == \&quot;red\&quot; OR RANDOM_SAMPLE(0.001)&quot;</span>;  <span class="hljs-comment">// ❌ Invalid logic</span>
 <span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// Correct: Filter first, then sample</span>
-filter := <span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>
+filter := <span class="hljs-string">&quot;color == \&quot;red\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>
 <span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
 
-filter := <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span> <span class="hljs-comment">// ❌ Invalid logic</span>
+filter = <span class="hljs-string">&quot;color == \&quot;red\&quot; OR RANDOM_SAMPLE(0.001)&quot;</span> <span class="hljs-comment">// ❌ Invalid logic</span>
 <span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Correct: Filter first, then sample</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter_correct</span> = <span class="hljs-string">r#&quot;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&quot;#</span>;
+<span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
+
+<span class="hljs-comment">// Incorrect: OR doesn&#x27;t make logical sense</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter_incorrect</span> = <span class="hljs-string">r#&quot;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&quot;#</span>;  <span class="hljs-comment">// ❌ Invalid logic</span>
+<span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> filter_sample_correct = <span class="hljs-string">R&quot;(color == &quot;red&quot; AND RANDOM_SAMPLE(0.001))&quot;</span>;
+<span class="hljs-keyword">auto</span> filter_sample_incorrect = <span class="hljs-string">R&quot;(color == &quot;red&quot; OR RANDOM_SAMPLE(0.001))&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Correct: Filter first, then sample</span>
+<span class="hljs-keyword">const</span> filterCorrect = <span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>;
+<span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
+
+<span class="hljs-comment">// Incorrect: OR doesn&#x27;t make logical sense</span>
+<span class="hljs-keyword">const</span> filterIncorrect = <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span>;  <span class="hljs-comment">// ❌ Invalid logic</span>
+<span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-comment">// Correct: Filter first, then sample</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;color == \&quot;red\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>;
+<span class="hljs-comment">// Processing: Find all red items → Sample 0.1% of those red items</span>
+
+<span class="hljs-comment">// Incorrect: OR doesn&#x27;t make logical sense</span>
+<span class="hljs-built_in">string</span> filterIncorrect = <span class="hljs-string">&quot;color == \&quot;red\&quot; OR RANDOM_SAMPLE(0.001)&quot;</span>; <span class="hljs-comment">// ❌ Invalid logic</span>
+<span class="hljs-comment">// This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-comment"># Correct: Filter first, then sample</span>
+<span class="hljs-built_in">export</span> filterSampleCorrect=<span class="hljs-string">&#x27;color == &quot;red&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>
+<span class="hljs-comment"># Processing: Find all red items → Sample 0.1% of those red items</span>
+
+<span class="hljs-comment"># Incorrect: OR doesn&#x27;t make logical sense</span>
+<span class="hljs-built_in">export</span> filterSampleIncorrect=<span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAMPLE(0.001)&#x27;</span>  <span class="hljs-comment"># ❌ Invalid logic</span>
+<span class="hljs-comment"># This would mean: &quot;Either red items OR sample everything&quot; - which is meaningless</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,9 +194,17 @@ filter := <span class="hljs-string">&#x27;color == &quot;red&quot; OR RANDOM_SAM
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>快速預覽您的集合結構：</p>
+    </button></h3><p>快速預覽您的資料集結構：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -156,9 +219,12 @@ result = client.query(
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Sampled <span class="hljs-subst">{<span class="hljs-built_in">len</span>(result)}</span> products from collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.*;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryResp
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.List;
 
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -183,14 +249,14 @@ List&lt;QueryResp.QueryResult&gt; results = queryResp.getQueryResults();
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -211,9 +277,102 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 fmt.Println(<span class="hljs-string">&quot;id: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;id&quot;</span>).FieldData().GetScalars())
 fmt.Println(<span class="hljs-string">&quot;product_name: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;product_name&quot;</span>).FieldData().GetScalars())
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Sample approximately 1% of the entire collection</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">query</span>(
+        QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;product_name&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Sampled {} products from collection&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">get_row_count</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                       .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;id&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;product_name&quot;</span>)
+                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>);
+
+milvus::QueryResponse response;
+status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span> });
+
+<span class="hljs-comment">// Sample approximately 1% of the entire collection</span>
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;product_name&quot;</span>],
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Sampled <span class="hljs-subst">${res.data.length}</span> products from collection`</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    Username = <span class="hljs-string">&quot;root&quot;</span>,
+    Password = <span class="hljs-string">&quot;Milvus&quot;</span>
+});
+
+<span class="hljs-comment">// Sample approximately 1% of the entire collection</span>
+QueryResp resp = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Expression = <span class="hljs-string">&quot;RANDOM_SAMPLE(0.01)&quot;</span>,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;product_name&quot;</span> },
+        Limit = <span class="hljs-number">10</span>
+    }
+});
+
+Console.WriteLine(<span class="hljs-string">$&quot;Sampled <span class="hljs-subst">{resp.FieldsData.FirstOrDefault()?.RowCount ?? <span class="hljs-number">0</span>}</span> products from collection&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> filterSample=<span class="hljs-string">&#x27;RANDOM_SAMPLE(0.01)&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&quot;{
+  \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
+  \&quot;filter\&quot;: \&quot;<span class="hljs-variable">$filterSample</span>\&quot;,
+  \&quot;outputFields\&quot;: [\&quot;id\&quot;, \&quot;product_name\&quot;],
+  \&quot;limit\&quot;: 10
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-2-Combined-filtering-with-random-sampling" class="common-anchor-header">範例 2：結合篩選與隨機抽樣<button data-href="#Example-2-Combined-filtering-with-random-sampling" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,9 +389,17 @@ fmt.Println(<span class="hljs-string">&quot;product_name: &quot;</span>, resultS
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在可管理的子集中測試篩選邏輯：</p>
+    </button></h3><p>在可管理的子集上測試篩選邏輯：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># First filter by category and price, then sample 0.5% of results</span>
 filter_expression = <span class="hljs-string">&#x27;category == &quot;electronics&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&#x27;</span>
 
@@ -245,7 +412,11 @@ result = client.query(
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Found <span class="hljs-subst">{<span class="hljs-built_in">len</span>(result)}</span> electronics products in sample&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>;
 
 <span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;product_catalog&quot;</span>)
@@ -256,9 +427,15 @@ result = client.query(
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;product_catalog&quot;</span>).
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+filter := <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>
+
+_, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;product_catalog&quot;</span>).
     WithFilter(filter).
     WithOutputFields(<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -266,9 +443,91 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// First filter by category and price, then sample 0.5% of results</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter_expression</span> = <span class="hljs-string">r#&quot;category == &quot;electronics&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;#</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">query</span>(
+        QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">filter</span>(filter_expression)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Found {} electronics products in sample&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">get_row_count</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> filter = <span class="hljs-string">R&quot;(category == &quot;electronics&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005))&quot;</span>;
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                       .<span class="hljs-built_in">WithFilter</span>(filter)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;product_name&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;rating&quot;</span>)
+                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>);
+
+milvus::QueryResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// First filter by category and price, then sample 0.5% of results</span>
+<span class="hljs-keyword">const</span> filter_expression = <span class="hljs-string">&#x27;category == &quot;electronics&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&#x27;</span>;
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">filter</span>: filter_expression,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span>],
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Found <span class="hljs-subst">${res.data.length}</span> electronics products in sample`</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    Username = <span class="hljs-string">&quot;root&quot;</span>,
+    Password = <span class="hljs-string">&quot;Milvus&quot;</span>
+});
+
+<span class="hljs-comment">// First filter by category and price, then sample 0.5% of results</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;category == \&quot;electronics\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>;
+
+QueryResp resp = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    Expression = filter,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;product_name&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>, <span class="hljs-string">&quot;rating&quot;</span> },
+        Limit = <span class="hljs-number">10</span>
+    }
+});
+
+Console.WriteLine(<span class="hljs-string">$&quot;Found <span class="hljs-subst">{resp.FieldsData.FirstOrDefault()?.RowCount ?? <span class="hljs-number">0</span>}</span> electronics products in sample&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> filterComplex=<span class="hljs-string">&quot;category == \\\&quot;electronics\\\&quot; AND price &gt; 100 AND RANDOM_SAMPLE(0.005)&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&quot;{
+  \&quot;collectionName\&quot;: \&quot;product_catalog\&quot;,
+  \&quot;filter\&quot;: \&quot;<span class="hljs-variable">$filterComplex</span>\&quot;,
+  \&quot;outputFields\&quot;: [\&quot;product_name\&quot;, \&quot;price\&quot;, \&quot;rating\&quot;]
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-3-Quick-analytics" class="common-anchor-header">範例 3：快速分析<button data-href="#Example-3-Quick-analytics" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -285,11 +544,19 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在篩選過的資料上執行快速統計分析：</p>
+    </button></h3><p>對已過濾的資料進行快速統計分析：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get insights from ~0.1% of premium customer data</span>
-filter_expression = <span class="hljs-string">&#x27;customer_tier == &quot;premium&quot; AND region == &#x27;</span>North America<span class="hljs-string">&#x27; AND RANDOM_SAMPLE(0.001)&#x27;</span>
+filter_expression = <span class="hljs-string">&#x27;customer_tier == &quot;premium&quot; AND region == &quot;North America&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>
 
 result = client.query(
     collection_name=<span class="hljs-string">&quot;customer_profiles&quot;</span>,
@@ -302,12 +569,16 @@ result = client.query(
 <span class="hljs-keyword">if</span> result:
     average_purchase = <span class="hljs-built_in">sum</span>(r[<span class="hljs-string">&quot;purchase_amount&quot;</span>] <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> result) / <span class="hljs-built_in">len</span>(result)
     average_satisfaction = <span class="hljs-built_in">sum</span>(r[<span class="hljs-string">&quot;satisfaction_score&quot;</span>] <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> result) / <span class="hljs-built_in">len</span>(result)
-    
+
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Sample size: <span class="hljs-subst">{<span class="hljs-built_in">len</span>(result)}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Average purchase amount: $<span class="hljs-subst">{average_purchase:<span class="hljs-number">.2</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Average satisfaction score: <span class="hljs-subst">{average_satisfaction:<span class="hljs-number">.2</span>f}</span>&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.QueryReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>;
 
 <span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;customer_profiles&quot;</span>)
@@ -318,9 +589,15 @@ result = client.query(
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;customer_profiles&quot;</span>).
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+filter := <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>
+
+_, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;customer_profiles&quot;</span>).
     WithFilter(filter).
     WithOutputFields(<span class="hljs-string">&quot;purchase_amount&quot;</span>, <span class="hljs-string">&quot;satisfaction_score&quot;</span>, <span class="hljs-string">&quot;last_purchase_date&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -328,9 +605,100 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Get insights from ~0.1% of premium customer data</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter_expression</span> = <span class="hljs-string">r#&quot;customer_tier == &quot;premium&quot; AND region == &quot;North America&quot; AND RANDOM_SAMPLE(0.001)&quot;#</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">query</span>(
+        QueryRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;customer_profiles&quot;</span>)
+            .<span class="hljs-title function_ invoke__">filter</span>(filter_expression)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;purchase_amount&quot;</span>, <span class="hljs-string">&quot;satisfaction_score&quot;</span>, <span class="hljs-string">&quot;last_purchase_date&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Sample size: {}&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">get_row_count</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> filter = <span class="hljs-string">R&quot;(customer_tier == &quot;premium&quot; AND region == &quot;North America&quot; AND RANDOM_SAMPLE(0.001))&quot;</span>;
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">QueryRequest</span>()
+                       .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;customer_profiles&quot;</span>)
+                       .<span class="hljs-built_in">WithFilter</span>(filter)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;purchase_amount&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;satisfaction_score&quot;</span>)
+                       .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;last_purchase_date&quot;</span>)
+                       .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>);
+
+milvus::QueryResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Query</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Get insights from ~0.1% of premium customer data</span>
+<span class="hljs-keyword">const</span> filter_expression = <span class="hljs-string">&#x27;customer_tier == &quot;premium&quot; AND region == &quot;North America&quot; AND RANDOM_SAMPLE(0.001)&#x27;</span>;
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;customer_profiles&quot;</span>,
+    <span class="hljs-attr">filter</span>: filter_expression,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;purchase_amount&quot;</span>, <span class="hljs-string">&quot;satisfaction_score&quot;</span>, <span class="hljs-string">&quot;last_purchase_date&quot;</span>],
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>
+});
+
+<span class="hljs-comment">// Analyze sample for quick insights</span>
+<span class="hljs-keyword">if</span> (res.<span class="hljs-property">data</span>.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">const</span> average_purchase = res.<span class="hljs-property">data</span>.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, r</span>) =&gt;</span> sum + r.<span class="hljs-property">purchase_amount</span>, <span class="hljs-number">0</span>) / res.<span class="hljs-property">data</span>.<span class="hljs-property">length</span>;
+    <span class="hljs-keyword">const</span> average_satisfaction = res.<span class="hljs-property">data</span>.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, r</span>) =&gt;</span> sum + r.<span class="hljs-property">satisfaction_score</span>, <span class="hljs-number">0</span>) / res.<span class="hljs-property">data</span>.<span class="hljs-property">length</span>;
+
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Sample size: <span class="hljs-subst">${res.data.length}</span>`</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Average purchase amount: $<span class="hljs-subst">${average_purchase.toFixed(<span class="hljs-number">2</span>)}</span>`</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Average satisfaction score: <span class="hljs-subst">${average_satisfaction.toFixed(<span class="hljs-number">2</span>)}</span>`</span>);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    Username = <span class="hljs-string">&quot;root&quot;</span>,
+    Password = <span class="hljs-string">&quot;Milvus&quot;</span>
+});
+
+<span class="hljs-comment">// Get insights from ~0.1% of premium customer data</span>
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;customer_tier == \&quot;premium\&quot; AND region == \&quot;North America\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>;
+
+QueryResp resp = <span class="hljs-keyword">await</span> client.QueryAsync(<span class="hljs-keyword">new</span> QueryReq
+{
+    CollectionName = <span class="hljs-string">&quot;customer_profiles&quot;</span>,
+    Expression = filter,
+    Parameters = <span class="hljs-keyword">new</span> QueryParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;purchase_amount&quot;</span>, <span class="hljs-string">&quot;satisfaction_score&quot;</span>, <span class="hljs-string">&quot;last_purchase_date&quot;</span> },
+        Limit = <span class="hljs-number">10</span>
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> filterCustomer=<span class="hljs-string">&quot;customer_tier == \\\&quot;premium\\\&quot; AND region == \\\&quot;North America\\\&quot; AND RANDOM_SAMPLE(0.001)&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&quot;{
+  \&quot;collectionName\&quot;: \&quot;customer_profiles\&quot;,
+  \&quot;filter\&quot;: \&quot;<span class="hljs-variable">$filterCustomer</span>\&quot;,
+  \&quot;outputFields\&quot;: [\&quot;purchase_amount\&quot;, \&quot;satisfaction_score\&quot;, \&quot;last_purchase_date\&quot;],
+  \&quot;limit\&quot;: 10
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-4-Combined-with-vector-search" class="common-anchor-header">範例 4：結合向量搜尋<button data-href="#Example-4-Combined-with-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -349,22 +717,40 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
       </svg>
     </button></h3><p>在篩選搜尋情境中使用隨機抽樣：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search for similar products within a sampled subset</span>
 search_results = client.search(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># query vector</span>
 <span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;category == &quot;books&quot; AND RANDOM_SAMPLE(0.01)&#x27;</span>,</span>
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}},
+    search_params={<span class="hljs-string">&quot;params&quot;</span>: {}},
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>],
     limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Found <span class="hljs-subst">{<span class="hljs-built_in">len</span>(search_results[<span class="hljs-number">0</span>])}</span> similar books in sample&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
+        .build());
 
 <span class="hljs-type">FloatVec</span> <span class="hljs-variable">queryVector</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>});
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
@@ -384,9 +770,15 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
         System.out.println(result);
     }
 }
-
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>}
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>}
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;product_catalog&quot;</span>, <span class="hljs-comment">// collectionName</span>
@@ -406,9 +798,97 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;price: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;price&quot;</span>).FieldData().GetScalars())
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-comment">// Search for similar products within a sampled subset</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">res</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]]))
+            .<span class="hljs-title function_ invoke__">filter</span>(<span class="hljs-string">r#&quot;category == &quot;books&quot; AND RANDOM_SAMPLE(0.01)&quot;#</span>)
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Found {} similar books in sample&quot;</span>, res.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">len</span>());
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;product_catalog&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(<span class="hljs-string">R&quot;(category == &quot;books&quot; AND RANDOM_SAMPLE(0.01))&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;author&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;price&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Search for similar products within a sampled subset</span>
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    <span class="hljs-attr">data</span>: [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment">// query vector</span>
+    <span class="hljs-attr">filter</span>: <span class="hljs-string">&#x27;category == &quot;books&quot; AND RANDOM_SAMPLE(0.01)&#x27;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;price&quot;</span>]
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Found <span class="hljs-subst">${res.results.length}</span> similar books in sample`</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    Username = <span class="hljs-string">&quot;root&quot;</span>,
+    Password = <span class="hljs-string">&quot;Milvus&quot;</span>
+});
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>];
+
+<span class="hljs-comment">// Search for similar products within a sampled subset</span>
+SearchResp resp = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;product_catalog&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = [queryVector],
+    Limit = <span class="hljs-number">10</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Expression = <span class="hljs-string">&quot;category == \&quot;books\&quot; AND RANDOM_SAMPLE(0.01)&quot;</span>,
+        OutputFields = { <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;author&quot;</span>, <span class="hljs-string">&quot;price&quot;</span> }
+    }
+});
+
+Console.WriteLine(<span class="hljs-string">$&quot;Found <span class="hljs-subst">{resp.Ids.LongIds?.Count ?? <span class="hljs-number">0</span>}</span> similar books in sample&quot;</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+<span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--data <span class="hljs-string">&#x27;{
+  &quot;collectionName&quot;: &quot;product_catalog&quot;,
+  &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4, 0.5]],
+  &quot;annsField&quot;: &quot;vector&quot;,
+  &quot;limit&quot;: 10,
+  &quot;filter&quot;: &quot;category == \&quot;books\&quot; AND RANDOM_SAMPLE(0.01)&quot;,
+  &quot;outputFields&quot;: [&quot;title&quot;, &quot;author&quot;, &quot;price&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Best-practices" class="common-anchor-header">最佳實務<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -426,8 +906,8 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>從小處開始</strong>：從較小的採樣因子 (0.001-0.01)<strong>開始</strong>進行初步探索</p></li>
-<li><p><strong>開發工作流程</strong>：在開發過程中使用取樣，在生產查詢中移除取樣</p></li>
-<li><p><strong>統計有效性</strong>：較大的樣本可提供更精確的統計表現</p></li>
-<li><p><strong>效能測試</strong>：監控查詢效能，並視需要調整取樣因子</p></li>
+<li><p><strong>從小處著手</strong>：初期探索時，先採用較小的抽樣因子（0.001–0.01）</p></li>
+<li><p><strong>開發工作流程</strong>：開發階段使用取樣，正式運作時的查詢則移除取樣機制</p></li>
+<li><p><strong>統計有效性</strong>：較大的樣本量能提供更精確的統計結果</p></li>
+<li><p><strong>效能測試</strong>：監控查詢效能，並視需要調整抽樣因子</p></li>
 </ul>

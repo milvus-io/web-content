@@ -62,10 +62,10 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Vérifiez <a href="/docs/fr/prerequisite-helm.md">la configuration matérielle et logicielle requise</a> avant l’installation.</p></li>
-<li><p>Avant d’installer Milvus, il est recommandé d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> pour estimer la configuration matérielle requise en fonction du volume de vos données. Cela permet de garantir des performances optimales et une allocation optimale des ressources pour votre installation Milvus.</p></li>
+<li><p>Avant d’installer Milvus, il est recommandé d’utiliser <a href="https://milvus.io/tools/sizing">l’outil de dimensionnement Milvus</a> pour estimer la configuration matérielle requise en fonction de la taille de vos données. Cela permet de garantir des performances optimales et une allocation optimale des ressources pour votre installation Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Si vous rencontrez des difficultés pour récupérer l’image, contactez-nous à <a href="mailto:community@zilliz.com">l’adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l’assistance nécessaire.</p>
+<p>Si vous rencontrez des difficultés pour récupérer l'image, contactez-nous à <a href="mailto:community@zilliz.com">l'adresse community@zilliz.com</a> en précisant les détails du problème, et nous vous fournirons l'assistance nécessaire.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Installer le Helm Chart Milvus<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Vous préférez un déploiement autonome ?</strong></p>
 <p>Si vous préférez déployer Milvus en mode autonome (un seul nœud) à des fins de développement ou de test, utilisez cette commande :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -140,9 +140,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <div class="alert note">
 <p>Pour le mode de service Woodpecker, nous recommandons d’utiliser Milvus 3.0.3 ou une version ultérieure avec Woodpecker v0.1.46 ou une version ultérieure.</p>
 </div>
-<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 3.0.3, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
+<p>La commande suivante déploie un cluster Milvus avec des paramètres optimisés pour la version 3.0.5, en utilisant Woodpecker comme file d’attente de messages recommandée :</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.3 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v3.0.5 \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> woodpecker.image.tag=v0.1.46 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -163,7 +163,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><strong>Nouveau composant</strong>: <strong>le nœud de streaming</strong> est introduit et activé par défaut</li>
 <li><strong>Composants fusionnés</strong>: <strong>le nœud d’index</strong> et <strong>le nœud de données</strong> sont regroupés en un seul <strong>nœud de données</strong></li>
 </ul>
-<p>Pour plus de détails sur l'architecture, consultez la <a href="/docs/fr/architecture_overview.md">présentation</a> de <a href="/docs/fr/architecture_overview.md">l'architecture</a>.</p>
+<p>Pour plus de détails sur l’architecture, consultez la <a href="/docs/fr/architecture_overview.md">présentation</a> de <a href="/docs/fr/architecture_overview.md">l’architecture</a>.</p>
 </div>
 <p><strong>Files d’attente de messages alternatives :</strong> pour effectuer un déploiement avec Pulsar, Kafka ou RocksMQ à la place de Woodpecker, consultez la section « <a href="#Optional-dependencies">Dépendances facultatives</a> ».</p>
 <p><strong>Étapes suivantes :</strong>
@@ -194,10 +194,10 @@ La commande ci-dessus déploie Milvus avec les configurations recommandées. Pou
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vérifiez que votre déploiement s'est bien déroulé en vérifiant l'état des pods :</p>
+    </button></h3><p>Vérifiez que votre déploiement a bien abouti en vérifiant l’état des pods :</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v3.0.3, vous devriez voir des pods similaires à ceux-ci :</p>
+<p><strong>Attendez que tous les pods affichent le statut « Running ».</strong> Avec la configuration v3.0.5, vous devriez voir des pods similaires à ceux-ci :</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -278,7 +278,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez mettre à jour les configurations de votre cluster Milvus en modifiant le fichier <code translate="no">values.yaml</code> et en l’appliquant à nouveau.</p>
+    </button></h2><p>Vous pouvez mettre à jour les configurations de votre cluster Milvus en modifiant le fichier <code translate="no">values.yaml</code> et en l'appliquant à nouveau.</p>
 <ol>
 <li><p>Créez un fichier ` <code translate="no">values.yaml</code> ` contenant les configurations souhaitées.</p>
 <p>La procédure suivante part du principe que vous souhaitez activer la fonctionnalité « <code translate="no">proxy.http</code> ».</p>
@@ -514,7 +514,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h2><p>Une fois Milvus installé dans Docker, vous pouvez :</p>
 <ul>
-<li><p>Consulter <a href="/docs/fr/quickstart.md">Hello Milvus</a> pour découvrir les capacités de Milvus.</p></li>
+<li><p>Consulter la page « <a href="/docs/fr/quickstart.md">Hello Milvus</a> » pour découvrir les capacités de Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>

@@ -79,9 +79,11 @@ summary: >-
 <tr><td>Struct 不能作为顶级字段类型。</td><td>创建一个 StructArray 字段，其定义为 `<code translate="no">datatype=DataType.ARRAY</code> `，并包含 `<code translate="no">element_type=DataType.STRUCT</code> ` 以及 `<code translate="no">struct_schema</code>`。</td></tr>
 <tr><td>所有元素共享一个Schema。</td><td>StructArray 字段中的每个 Struct 元素都遵循相同的子字段列表和子字段数据类型。</td></tr>
 <tr><td><code translate="no">max_capacity</code> 是必需的。</td><td>一个实体中的 Struct 元素数量不得超过为 StructArray 字段配置的<code translate="no">max_capacity</code> 。</td></tr>
-<tr><td>现有的子字段是固定的。</td><td>您无法将新子字段追加到现有的 StructArray 字段中。要更改子字段 Schema，请删除 StructArray 字段，然后使用更新的 Schema 再次添加该字段。</td></tr>
-<tr><td>不支持嵌套的 StructArray。</td><td>StructArray 字段不能包含嵌套的<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 或<code translate="no">ArrayOfStruct</code> 子字段。</td></tr>
+<tr><td>所有子字段共享一个<code translate="no">max_capacity</code> 。</td><td>每个子字段都必须声明<code translate="no">max_capacity</code> ，并且 StructArray 字段的所有子字段都必须声明相同的值。该值必须大于 0，且不得超过<code translate="no">proxy.maxArrayCapacity</code> （默认值为 4096）。</td></tr>
+<tr><td>现有的子字段是固定的。</td><td>您无法向现有的 StructArray 字段追加新的子字段。若要更改子字段 Schema，请先删除该 StructArray 字段，然后使用更新后的 Schema 重新添加。</td></tr>
+<tr><td>不支持嵌套的StructArray。</td><td>StructArray字段不能包含嵌套的<code translate="no">Array</code> 、<code translate="no">ArrayOfVector</code> 、<code translate="no">Struct</code> 或<code translate="no">ArrayOfStruct</code> 子字段。</td></tr>
 <tr><td>StructArray内部不支持函数。</td><td>请勿为 StructArray 字段或其子字段定义字段函数。</td></tr>
+<tr><td>不支持对子字段进行文本分析。</td><td><code translate="no">enable_match</code> Struct 子字段上的<code translate="no">enable_analyzer</code> 设置无效，因为文本索引仅针对顶级字段构建。</td></tr>
 </tbody>
 </table>
 <p>有关 Schema 创建示例，请参阅<a href="/docs/zh/create-structarray-field.md">“创建 StructArray 字段”</a>。</p>
@@ -100,7 +102,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 子字段映射到物理数组风格的存储空间。下表列出了受支持和不受支持的物理类型：</p>
+    </button></h2><p>StructArray 子字段映射到物理数组风格的存储。下表列出了受支持和不受支持的物理类型：</p>
 <table>
 <thead>
 <tr><th>Struct 子字段的物理类型</th><th>支持</th><th>备注</th></tr>
@@ -148,10 +150,10 @@ summary: >-
 <tr><td>可空 StructArray 字段</td><td>在遵守以下可用性声明的前提下，请在 StructArray 父对象上设置 `<code translate="no">nullable=True</code> `；请勿单独将 Struct 子字段配置为可空。</td></tr>
 <tr><td>Python 中的 NULL 值</td><td>在 Python 中，请使用 `<code translate="no">None</code> ` 插入空的 StructArray 值。请勿使用 `<code translate="no">Null</code> ` 或 `<code translate="no">null</code>`。</td></tr>
 <tr><td>空值作用域</td><td>NULL 适用于整个 StructArray 字段。例如，<code translate="no">chunks=None</code> 仅在<code translate="no">chunks</code> 可为空时才有效。</td></tr>
-<tr><td>部分为空的 StructArray 值</td><td>当 StructArray 字段包含有效的数组值时，请勿在同一值中将空子字段数组与有效的子字段数组混合使用。</td></tr>
+<tr><td>部分为空的 StructArray 值</td><td>当 StructArray 字段包含有效的数组值时，请勿在同一值中将空子字段数组与有效子字段数组混合使用。</td></tr>
 <tr><td>动态添加 StructArray 字段</td><td>受下文可用性声明的约束。</td></tr>
 <tr><td>动态添加的空值要求</td><td>添加到现有 Collection 中 StructArray 字段必须为可为空的，因为现有实体对于新字段尚无值。</td></tr>
-<tr><td>动态添加后的现有实体</td><td>现有实体对于新增的 StructArray 字段将返回<code translate="no">null</code> 。</td></tr>
+<tr><td>动态添加后的现有实体</td><td>现有实体对于新增的 StructArray 字段将返回 `<code translate="no">null</code> `。</td></tr>
 </tbody>
 </table>
 <p>Milvus 3.0.0 及后续版本在独立部署和分布式部署中均支持可为空的 StructArray 字段、可为空的向量数组以及动态添加 StructArray 字段。较早版本的 Milvus 不支持这些功能。</p>
@@ -177,7 +179,7 @@ summary: >-
 <tr><th>限制</th><th>详细信息</th></tr>
 </thead>
 <tbody>
-<tr><td>有效载荷形状</td><td>将 StructArray 字段作为 Struct 对象的数组进行插入，例如<code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code> 。</td></tr>
+<tr><td>有效负载形状</td><td>将 StructArray 字段作为 Struct 对象的数组进行插入，例如<code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code> 。</td></tr>
 <tr><td>子字段名称</td><td>在每个 Struct 对象内部，请使用子字段名称（例如<code translate="no">text</code> 和<code translate="no">emb</code> ），而不是路径（例如<code translate="no">chunks[text]</code> ）。</td></tr>
 <tr><td>Schema对齐</td><td>每个 Struct 元素必须与 Struct Schema 相匹配。</td></tr>
 <tr><td>容量</td><td>一个实体中的 Struct 元素数量不得超过<code translate="no">max_capacity</code> 。</td></tr>
@@ -210,8 +212,8 @@ summary: >-
 <tr><td>元素级搜索</td><td>常规向量指标，例如<code translate="no">L2</code> 、<code translate="no">IP</code> 、<code translate="no">COSINE</code> 、<code translate="no">HAMMING</code> 或<code translate="no">JACCARD</code></td><td>可包含匹配元素偏移量的元素级结果。</td></tr>
 </tbody>
 </table>
-<p>当需要同时使用这两种模式时，请使用独立的向量字段。例如，使用<code translate="no">chunks[emb_list_vector]</code> 进行 EmbeddingList 搜索，使用<code translate="no">chunks[emb]</code> 进行元素级搜索。</p>
-<p>在规划 Collection 架构时，StructArray 向量字段应计入向量字段的总数。请确保向量字段和向量子字段的总数在目标版本和服务层级的限制范围内。</p>
+<p>当需要同时使用这两种模式时，请使用单独的向量字段。例如，使用<code translate="no">chunks[emb_list_vector]</code> 进行 EmbeddingList 搜索，使用<code translate="no">chunks[emb]</code> 进行元素级搜索。</p>
+<p>StructArray 向量子字段计入 Collection 级限制<code translate="no">proxy.maxVectorFieldNum</code> 的向量字段数量，该限制默认值为 10。如果某个 StructArray 字段的向量子字段是 Collection 中唯一的向量字段，则该字段有效；当删除此类字段会导致 Collection 中没有向量字段时，系统将拒绝删除该字段。 请确保向量字段和向量子字段的总数在目标版本和服务层级的限制范围内。</p>
 <p>有关受支持的索引类型和指标类型的矩阵，请参阅《<a href="/docs/zh/index-structarray-fields.md">索引 StructArray 字段</a>》。</p>
 <h2 id="Search-limits" class="common-anchor-header">搜索限制<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,8 +267,31 @@ summary: >-
 <li><p>请使用标量子字段作为标量谓词的输入。</p></li>
 <li><p>请勿将向量字段用作<code translate="no">$[...]</code> 标量谓词的输入。</p></li>
 <li><p>StructArray 元素级谓词不支持 JSON 路径语法、JSON 函数、数组容器函数、文本匹配函数、几何/GIS 函数以及 Timestamptz 表达式。</p></li>
-<li><p>建议使用显式的布尔比较（如 `<code translate="no">$[has_code] == true</code> `），而非简单的布尔表达式。</p></li>
+<li><p>请优先使用显式的布尔比较（如<code translate="no">$[has_code] == true</code> ），而不是简单的布尔表达式。</p></li>
 </ul>
+<h2 id="Import-limits" class="common-anchor-header">导入限制<button data-href="#Import-limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><table>
+<thead>
+<tr><th>限制</th><th>详细信息</th></tr>
+</thead>
+<tbody>
+<tr><td>源文件格式</td><td>JSON、JSONL、CSV 和 Parquet 文件可以包含 StructArray 字段。NumPy 文件为每个顶级字段单独保存一个文件，且无法提供 StructArray 数据；对于包含 StructArray 字段的 Collections，请使用 JSON、CSV 或 Parquet 文件。有关文件形状的信息，请<a href="/docs/zh/prepare-source-data.md#StructArray-fields-in-source-files">参阅“准备源数据”</a>。</td></tr>
+</tbody>
+</table>
 <h2 id="Related-pages" class="common-anchor-header">相关页面<button data-href="#Related-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -283,8 +308,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>要创建 StructArray 字段，请参阅《<a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段》</a>。</p></li>
+<li><p>要创建 StructArray 字段，请阅读《<a href="/docs/zh/create-structarray-field.md">创建 StructArray 字段》</a>。</p></li>
 <li><p>要插入数据，请参阅《<a href="/docs/zh/insert-data-into-structarray-fields.md">将数据插入 StructArray 字段</a>》。</p></li>
-<li><p>要创建向量和标量索引，请参阅《<a href="/docs/zh/index-structarray-fields.md">索引 StructArray 字段</a>》。</p></li>
+<li><p>要创建向量和标量索引，请参阅《为<a href="/docs/zh/index-structarray-fields.md">StructArray 字段建立索引</a>》。</p></li>
 <li><p>要复习 StructArray 过滤器语法，请参阅《<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>》。</p></li>
 </ol>

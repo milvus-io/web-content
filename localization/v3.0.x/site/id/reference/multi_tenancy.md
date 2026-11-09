@@ -93,7 +93,7 @@ summary: >-
 <li><p><strong>Skalabilitas</strong>: Karena sebuah cluster dapat menampung hingga 65.536 koleksi secara default, strategi ini dapat mengakomodasi jumlah penyewa yang sama di dalam cluster tersebut.</p></li>
 <li><p><strong>Isolasi data</strong>: Koleksi-koleksi tersebut terisolasi secara fisik satu sama lain. Strategi ini memberikan isolasi data yang kuat.</p></li>
 <li><p><strong>Fleksibilitas</strong>: Strategi ini memungkinkan setiap koleksi memiliki skema sendiri, sehingga dapat mengakomodasi penyewa dengan skema data yang berbeda-beda.</p></li>
-<li><p><strong>Lainnya</strong>: Strategi ini juga mendukung RBAC, sehingga memungkinkan kontrol akses yang terperinci terhadap penyewa. Selain itu, Anda dapat secara fleksibel memuat atau melepaskan data untuk penyewa tertentu guna mengelola data panas dan dingin secara efektif.</p></li>
+<li><p><strong>Lainnya</strong>: Strategi ini juga mendukung RBAC, sehingga memungkinkan kontrol akses yang terperinci terhadap penyewa. Selain itu, Anda dapat secara fleksibel memuat atau melepaskan data untuk penyewa tertentu guna mengelola data aktif dan tidak aktif secara efektif.</p></li>
 </ul>
 <h3 id="Partition-level-multi-tenancy" class="common-anchor-header">Multi-tenancy tingkat partisi<button data-href="#Partition-level-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -188,7 +188,7 @@ summary: >-
    <tr>
      <td><p><strong>Jumlah penyewa maksimum</strong></p></td>
      <td><p>Secara default, 64. Anda dapat menaikkannya dengan mengubah parameter ` <code translate="no">maxDatabaseNum</code> ` di berkas konfigurasi `Milvus.yaml`. </p></td>
-     <td><p>Secara default, 65.536. Anda dapat menaikkan jumlah ini dengan mengubah parameter ` <code translate="no">maxCollectionNum</code> ` di berkas konfigurasi `Milvus.yaml`.</p></td>
+     <td><p>Secara default, 65.536. Anda dapat menaikkannya dengan mengubah parameter ` <code translate="no">maxCollectionNum</code> ` di berkas konfigurasi `Milvus.yaml`.</p></td>
      <td><p>Hingga 1.024 per koleksi. </p></td>
      <td><p>Jutaan</p></td>
    </tr>
@@ -235,7 +235,7 @@ summary: >-
 <li><p><strong>Persyaratan isolasi data yang ketat</strong>: Database = Koleksi &gt; Partisi &gt; Kunci Partisi</p>
 <p>Pilih strategi tingkat database, koleksi, atau partisi jika Anda memiliki persyaratan isolasi data fisik yang ketat.</p></li>
 <li><p><strong>Skema data yang fleksibel untuk data setiap penyewa:</strong> Database &gt; Koleksi &gt; Partisi = Kunci Partisi</p>
-<p>Strategi tingkat basis data dan tingkat koleksi memberikan fleksibilitas penuh dalam skema data. Jika struktur data penyewa Anda berbeda-beda, pilih multi-tenancy tingkat basis data atau tingkat koleksi.</p></li>
+<p>Strategi tingkat database dan tingkat koleksi memberikan fleksibilitas penuh dalam skema data. Jika struktur data penyewa Anda berbeda-beda, pilih multi-tenancy tingkat database atau tingkat koleksi.</p></li>
 <li><p><strong>Lain-lain</strong></p>
 <ol>
 <li><p><strong>Kinerja:</strong> Kinerja pencarian ditentukan oleh berbagai faktor, termasuk indeks, parameter pencarian, dan konfigurasi mesin. Milvus juga mendukung penyetelan kinerja. Disarankan untuk menguji kinerja aktual sebelum Anda memilih strategi multi-tenancy.</p></li>

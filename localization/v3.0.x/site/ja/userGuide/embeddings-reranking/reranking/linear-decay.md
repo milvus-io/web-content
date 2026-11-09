@@ -2,7 +2,8 @@
 id: linear-decay.md
 title: 線形減衰Compatible with Milvus 2.6.x
 summary: >-
-  線形減衰は、検索結果の絶対的なゼロポイントで終了する直線的な減少を作成します。イベントが過ぎ去るまで関連性が徐々に薄れていくイベントのカウントダウンのように、リニア減衰はアイテムが完全に消えるまで、理想的なポイントから遠ざかるにつれて予測可能で着実な関連性の減少を適用します。このアプローチは、特定の境界を超えたアイテムが検索結果から完全に除外されるように、明確なカットオフで一貫した減衰率を求める場合に理想的です。
+  線形減衰では、検索結果において、絶対ゼロ点で終了する直線的な減少が生まれます。
+  イベント開催までのカウントダウンのように、イベントが終了するまで関連性が徐々に薄れていくのと同様に、線形減衰では、項目が理想的なポイントから遠ざかるにつれて、関連性が予測可能かつ着実に低下し、最終的に完全に消え去ります。このアプローチは、明確なカットオフを伴う一貫した減衰率を求め、特定の境界を超えた項目を検索結果から完全に除外したい場合に最適です。
 beta: Milvus 2.6.x
 ---
 <h1 id="Linear-Decay" class="common-anchor-header">線形減衰<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Linear-Decay" class="anchor-icon" translate="no">
@@ -20,14 +21,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>線形減衰は、検索結果の絶対的なゼロポイントで終了する直線的な減少を作成します。イベントが過ぎ去るまで関連性が徐々に薄れていくイベントカウントダウンのように、リニアディケイはアイテムが完全に消えるまで、理想的なポイントから離れるにつれて予測可能で着実な関連性の減少を適用します。このアプローチは、特定の境界を超えたアイテムが結果から完全に除外されるように、明確なカットオフで一貫した減衰率を求める場合に最適です。</p>
-<p>他の減衰関数とは異なります：</p>
+    </button></h1><p>線形減衰は、検索結果において絶対ゼロ点で終了する直線的な減少曲線を生み出します。 イベント開催までのカウントダウンのように、イベントが終了するまで関連性が徐々に薄れていくのと同様に、線形減衰では、項目が理想的なポイントから遠ざかるにつれて、予測可能で安定した関連性の低下が適用され、最終的に項目が完全に消えます。このアプローチは、明確なカットオフを伴う一貫した減衰率を求め、特定の境界を超えた項目を検索結果から完全に除外したい場合に最適です。</p>
+<p>他の減衰関数とは異なり：</p>
 <ul>
-<li><p>ガウス減衰は、徐々にゼロに近づくが決してゼロにはならないベル曲線に従います。</p></li>
-<li><p>指数関数的減衰は、最小限の関連性のロングテールを維持し、無限に広がります。</p></li>
+<li><p>ガウス減衰は、ゼロに徐々に近づくものの決してゼロには達しないベルカーブに従います</p></li>
+<li><p>指数関数的減衰は、関連性が最小限の「ロングテール」を無期限に維持します</p></li>
 </ul>
-<p>線形減衰は、明確な終点を独自に作成するため、自然な境界や期限を持つアプリケーションに特に効果的です。</p>
-<h2 id="When-to-use-linear-decay" class="common-anchor-header">リニアディケイを使用する場合<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
+<p>線形減衰は明確な終点を唯一生成するため、自然な境界や期限がある用途において特に効果的です。</p>
+<h2 id="When-to-use-linear-decay" class="common-anchor-header">線形減衰を使用すべき場合<button data-href="#When-to-use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,42 +43,42 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>リニア減衰は特に次のような場合に効果的です：</p>
+    </button></h2><p>線形減衰は、特に次のような場合に効果的です：</p>
 <table>
    <tr>
-     <th><p>使用例</p></th>
-     <th><p>使用例</p></th>
-     <th><p>リニアが効果的な理由</p></th>
+     <th><p>ユースケース</p></th>
+     <th><p>例</p></th>
+     <th><p>線形減衰が効果的な理由</p></th>
    </tr>
    <tr>
-     <td><p>イベントリスト</p></td>
-     <td><p>コンサートチケットのプラットフォーム</p></td>
-     <td><p>遠すぎる未来のイベントに対する明確なカットオフを作成します。</p></td>
+     <td><p>イベント情報</p></td>
+     <td><p>コンサートチケット販売プラットフォーム</p></td>
+     <td><p>将来過ぎるイベントに対して明確な区切りを設ける</p></td>
    </tr>
    <tr>
      <td><p>期間限定オファー</p></td>
      <td><p>フラッシュセール、プロモーション</p></td>
-     <td><p>期限切れや期限間近のオファーが表示されないようにします。</p></td>
+     <td><p>有効期限が切れた、またはまもなく切れるオファーが表示されないようにします</p></td>
    </tr>
    <tr>
-     <td><p>配達範囲</p></td>
+     <td><p>配送可能範囲</p></td>
      <td><p>フードデリバリー、宅配サービス</p></td>
-     <td><p>厳しい地理的境界を強制</p></td>
+     <td><p>厳格な地理的境界を適用</p></td>
    </tr>
    <tr>
-     <td><p>年齢制限コンテンツ</p></td>
-     <td><p>出会い系プラットフォーム、メディアサービス</p></td>
-     <td><p>年齢のしきい値の設定</p></td>
+     <td><p>年齢制限のあるコンテンツ</p></td>
+     <td><p>マッチングアプリ、メディアサービス</p></td>
+     <td><p>明確な年齢制限を設定</p></td>
    </tr>
 </table>
-<p>次のような場合にリニアディケイを選択します：</p>
+<p>以下の場合は「線形減衰」を選択してください：</p>
 <ul>
-<li><p>アプリケーションに自然な境界、期限、しきい値がある場合</p></li>
-<li><p>あるポイントを超えたアイテムは、結果から完全に除外する必要がある。</p></li>
-<li><p>予測可能で一貫した関連性の低下率が必要な場合。</p></li>
-<li><p>関連性のある項目と関連性のない項目を明確に区別する必要がある。</p></li>
+<li><p>アプリケーションに自然な境界、期限、または閾値がある場合</p></li>
+<li><p>特定のポイントを超えた項目は、検索結果から完全に除外する必要がある場合</p></li>
+<li><p>関連性の低下率を予測可能かつ一貫したものにしたい場合</p></li>
+<li><p>ユーザーに、関連性の高い項目と関連性の低い項目の明確な区別を認識させる必要がある場合</p></li>
 </ul>
-<h2 id="Steady-decline-principle" class="common-anchor-header">安定した減少の原則<button data-href="#Steady-decline-principle" class="anchor-icon" translate="no">
+<h2 id="Steady-decline-principle" class="common-anchor-header">「着実な減少」の原則<button data-href="#Steady-decline-principle" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,23 +93,25 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>線形減衰は、正確にゼロに達するまで一定の割合で減少する直線的なドロップを作成します。このパターンは、カウントダウンタイマー、在庫の枯渇、関連性に明確な期限がある期限アプローチなど、多くの日常的なシナリオに現れる。</p>
+    </button></h2><p>線形減衰では、一定率で減少する直線的な低下曲線が描かれ、最終的に正確にゼロに達します。このパターンは、カウントダウンタイマー、在庫の枯渇、締め切りの接近など、関連性に明確な有効期限がある多くの日常的なシナリオで見られます。</p>
 <div class="alert note">
-<p>すべての時間パラメータ (<code translate="no">origin</code>,<code translate="no">offset</code>,<code translate="no">scale</code>) は、コレクションデータと同じ単位を使用する必要があります。コレクションが異なる単位(ミリ秒、マイクロ秒)でタイムスタンプを保存する場合、すべてのパラメータをそれに応じて調整します。</p>
+<p>すべての時間パラメータ（<code translate="no">origin</code> 、<code translate="no">offset</code> 、<code translate="no">scale</code> ）は、コレクションデータと同じ単位を使用する必要があります。コレクションがタイムスタンプを異なる単位（ミリ秒、マイクロ秒）で保存している場合は、すべてのパラメータをそれに応じて調整してください。</p>
 </div>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" />
-   </span> <span class="img-wrapper"> <span>線形減衰</span> </span></p>
-<p>上のグラフは、線形減衰がチケット販売プラットフォームのイベントリストにどのように影響するかを示しています：</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/linear-decay.png" alt="Linear Decay" class="doc-image" id="linear-decay" /> 
+   <span>線形減衰</span>
+  
+ </span></p>
+<p>上のグラフは、チケット販売プラットフォーム上のイベント一覧に線形減衰がどのように影響するかを示しています：</p>
 <ul>
-<li><p><code translate="no">origin</code> (現在の日付）：現在の日付）：関連性が最大（1.0）になる現在。</p></li>
-<li><p><code translate="no">offset</code> (1日）：(1日): "直近のイベントウィンドウ"-翌日中に開催されるすべてのイベントは、関連性のスコア(1.0)を維持し、非常に差し迫ったイベントがわずかな時間差でペナルティを受けないようにします。</p></li>
-<li><p><code translate="no">decay</code> (0.5):このパラメータは関連性の低下率をコントロールします。</p></li>
-<li><p><code translate="no">scale</code> (10日）：関連性が減衰値まで低下する期間。10日先のイベントの関連性スコアは半分（0.5）になる。</p></li>
+<li><p><code translate="no">origin</code> （当日）：現在時点。関連性が最大値（1.0）となります。</p></li>
+<li><p><code translate="no">offset</code> (1日): 「直近のイベントウィンドウ」—翌日までに行われるすべてのイベントは、関連性スコアが最大値（1.0）を維持し、ごく差し迫ったイベントがわずかな時間差によって評価を下げられることがないようにします。</p></li>
+<li><p><code translate="no">decay</code> (0.5)：スケール距離におけるスコア。このパラメータは、関連性の低下率を制御します。</p></li>
+<li><p><code translate="no">scale</code> (10日)：関連性が減衰値まで低下する時点。10日後のイベントの関連性スコアは半分（0.5）になります。</p></li>
 </ul>
-<p>直線カーブからわかるように、約16日以上先のイベントは関連性が完全にゼロとなり、検索結果にまったく表示されなくなります。これは、ユーザーが定義された時間ウィンドウ内で関連する今後のイベントのみを見ることを保証する明確な境界線を作成します。</p>
-<p>この動作は、イベントプランニングの一般的な仕組みを反映したもので、直近のイベントは最も関連性が高く、今後数週間のイベントは重要性が低下し、あまりにも未来の（またはすでに過去の）イベントはまったく表示されないはずです。</p>
+<p>直線的な曲線からもわかるように、約16日以上先にあるイベントの関連性は正確にゼロとなり、検索結果には一切表示されません。これにより明確な境界が設けられ、ユーザーには定義された時間枠内の関連性の高い今後のイベントのみが表示されるようになります。</p>
+<p>この挙動は、イベント計画の一般的な流れを反映しています。つまり、差し迫ったイベントが最も関連性が高く、今後数週間のイベントは重要度が徐々に低下し、将来（またはすでに過去）のイベントはまったく表示されるべきではないということです。</p>
 <h2 id="Formula" class="common-anchor-header">計算式<button data-href="#Formula" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -124,20 +127,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>線形減衰スコアの計算式は以下の通りです：</p>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>d</mi><mi>o</mi><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mrow><mi>s</mi><mo>−</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∣</mi><mi>f</mi><mi>i</mi><mi>e</mi><mi>l</mi><mi>d</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><msub><mi>e</mi><mrow><mi>d</mi><mi>o</mi><mi>c</mi></mrow></msub><mo>−</mo><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi><mi mathvariant="normal">∣</mi><mo>−</mo><mi>o</mi><mi>f</mi><mi>f</mi><mi>s</mi><mi>e</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><mi>s</mi></mfrac><mo separator="true">,</mo><mn>0</mn><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(doc) = \max\left( \frac{s - \max(0, |fieldvalue_{doc} - origin| - offset)}{s}, 0 \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">oc</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mop">max</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">oc</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">in</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.10764em;">ff</span><span class="mord mathnormal">se</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
-<p>となる：</p>
-<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mo>=</mo><mfrac><mrow><mi>s</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>e</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1.0</mn><mo>−</mo><mi>d</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>y</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">s = \frac{scale}{(1.0 - decay)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3074em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1.0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">sc</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
-<p>これをわかりやすく説明すると</p>
+    </button></h2><p>線形減衰スコアを計算するための数式は次のとおりです：</p>
+<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mo stretchy="false">(</mo><mi>d</mi><mi>o</mi><mi>c</mi><mo stretchy="false">)</mo><mo>=</mo><mi>max</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mrow><mi>s</mi><mo>−</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∣</mi><mi>f</mi><mi>i</mi><mi>e</mi><mi>l</mi><mi>d</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><msub><mi>e</mi><mrow><mi>d</mi><mi>o</mi><mi>c</mi></mrow></msub><mo>−</mo><mi>o</mi><mi>r</mi><mi>i</mi><mi>g</mi><mi>i</mi><mi>n</mi><mi mathvariant="normal">∣</mi><mo>−</mo><mi>o</mi><mi>f</mi><mi>f</mi><mi>s</mi><mi>e</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><mi>s</mi></mfrac><mo separator="true">,</mo><mn>0</mn><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(doc) = \max\left( \frac{s - \max(0, |fieldvalue_{doc} - origin| - offset)}{s}, 0 \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0576em;">S</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">oc</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mop">max</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">u</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">oc</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">in</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mord mathnormal">se</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
+<p>ここで：</p>
+<p><span class="katex-display" translate="no"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mo>=</mo><mfrac><mrow><mi>s</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>e</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1.0</mn><mo>−</mo><mi>d</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>y</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">s = \frac{scale}{(1.0 - decay)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.3074em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1.0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">sc</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>これを平易な言葉で解説すると：</p>
 <ol>
-<li><p>フィールド値が原点からどれだけ離れているかを計算：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣fieldvaluedoc-origin∣|fieldvalue_{doc}</mi></mrow></semantics></math></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">- origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span></span></span></span></span><span class="pstrut" style="height:2.7em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist-s">doc</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">origin∣</span><span class="mord mathnormal">∣</span></span><span class="base"><span class="mord">フィールド値から</span></span></span></span>オフセット（もしあれば）を引く。</p></li>
-<li><p>オフセット（もしあれば）を引くが、ゼロ以下にはならない：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>distance-offset</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\max(0, distance - offset)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">distance</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">-</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">offset</span><span class="mclose">)</span></span></span></span></p></li>
-<li><p>パラメータ<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s をスケールとディケイ値から決定する。</p></li>
-<li><p>調整した距離を<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s から引き、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s で割る。</p></li>
-<li><p>結果がゼロ以下にならないようにする：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>max</mi><mo stretchy="false">(</mo><mi>result</mi><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\max(result, 0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord mathnormal">result</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span></span></span></span>0<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mclose">)</span></span></span></span></p></li>
+<li><p>フィールド値が原点からどれだけ離れているかを計算します：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">∣fieldvaluedoc−origin∣|fieldvalue_{doc} - origin|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"></span><span class="mord"><span class="mord mathnormal">∣fieldvalue</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight"></span></span></span></span></span><span class="vlist-s">doc​</span></span></span></span></span></span></span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span><span class="mbin"></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin"> −</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex-base"><span class="mord mathnormal" style="margin-right:0.0278em;"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;"> </span><span class="mord">origin∣</span></span></span></span></p></li>
+<li><p>オフセット（ある場合）を差し引きますが、決してゼロを下回らないようにします：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>distance−offset</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\max(0, distance - offset)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal"></span><span class="mord mathnormal">distance</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="katex-base"><span class="mord mathnormal"></span></span> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal"> </span><span class="mord mathnormal">offset</span><span class="mclose">)</span></span></span></span></p></li>
+<li><p>スケール値とディケイ値からパラメータ<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>を決定します。</p></li>
+<li><p>調整後の距離を<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>から差し引き、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>で割ります</p></li>
+<li><p>結果がゼロを下回らないようにします：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max⁡</mo><mo stretchy="false">(</mo><mi>result</mi><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\max(result, 0)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord mathnormal">result</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">)</span></span></span></span></p></li>
 </ol>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span></span></span></span>s の計算は、スケールとディケイパラメータをスコアがゼロになるポイントに変換します。例えば、decay=0.5、scale=7 の場合、distance=14(scale の 2 倍)でスコアはちょうどゼロになります。</p>
-<h2 id="Use-linear-decay" class="common-anchor-header">リニアディケイを使用する<button data-href="#Use-linear-decay" class="anchor-icon" translate="no">
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">ss</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span>の計算により、スケールおよびディケイパラメータは、スコアがゼロに達する点に変換されます。例えば、decay=0.5 および scale=7 の場合、スコアは distance=14（スケール値の 2 倍）の時点で正確にゼロに達します。</p>
+<h2 id="Use-linear-decay" class="common-anchor-header">線形減衰の使用<button data-href="#Use-linear-decay" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -152,11 +155,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>リニアディケイはmilvusの標準的なベクトルサーチとハイブリッドサーチの両方に適用することができます。以下にこの機能を実装するための主要なコードスニペットを示します。</p>
+    </button></h2><p>Milvusでは、標準のベクトル検索およびハイブリッド検索の両方に線形減衰を適用できます。以下に、この機能を実装するための主要なコードスニペットを示します。</p>
 <div class="alert note">
-<p>減衰関数を使用する前に、まず減衰計算に使用する適切な数値フィールド（タイムスタンプ、距離など）を持つコレクションを作成する必要があります。コレクションのセットアップ、スキーマ定義、データ挿入を含む完全な作業例については、<a href="/docs/ja/tutorial-implement-a-time-based-ranking-in-milvus.md">ディケイランカーチュートリアルを</a>参照してください。</p>
+<p>ディケイ関数を使用する前に、まずディケイ計算に使用される適切な数値フィールド（タイムスタンプ、距離など）を含むコレクションを作成する必要があります。コレクションの設定、スキーマの定義、データの挿入を含む完全な動作例については、「<a href="/docs/ja/tutorial-implement-a-time-based-ranking-in-milvus.md">Decay Ranker チュートリアル</a>」を参照してください。</p>
 </div>
-<h3 id="Create-a-decay-ranker" class="common-anchor-header">ディケイランカーの作成<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
+<h3 id="Create-a-decay-ranker" class="common-anchor-header">減衰ランカーの作成<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -171,12 +174,20 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションに数値フィールド（この例では、<code translate="no">event_date</code> as seconds from now）を設定したら、線形ディケイランカーを作成します：</p>
+    </button></h3><p>数値フィールド（この例では、現在からの秒数を表す `<code translate="no">event_date</code> `）を含むコレクションの設定が完了したら、線形減衰ランカーを作成します：</p>
 <div class="alert note">
-<p><strong>時間単位の一貫性</strong>時間ベースのディケイを使用する場合、<code translate="no">origin</code> 、<code translate="no">scale</code> 、<code translate="no">offset</code> パラメータがコレクションデータと同じ時間単位を使用していることを確認します。コレクションがタイムスタンプを秒単位で保存する場合、すべてのパラメータに秒を使用します。ミリ秒を使用する場合は、すべてのパラメータにミリ秒を使用する。</p>
+<p><strong>時間単位の一貫性</strong>：時間ベースの減衰を使用する場合は、<code translate="no">origin</code> 、<code translate="no">scale</code> 、および<code translate="no">offset</code> の各パラメータが、コレクションのデータと同じ時間単位を使用していることを確認してください。コレクションがタイムスタンプを秒単位で保存している場合は、すべてのパラメータで秒を使用します。ミリ秒を使用している場合は、すべてのパラメータでミリ秒を使用します。</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
 <span class="hljs-keyword">import</span> time
 
@@ -185,7 +196,7 @@ current_time = <span class="hljs-built_in">int</span>(time.time())
 
 <span class="hljs-comment"># Create a linear decay ranker for event listings</span>
 <span class="hljs-comment"># Note: All time parameters must use the same unit as your collection data</span>
-ranker = Function(
+rerank = Function(
     name=<span class="hljs-string">&quot;event_relevance&quot;</span>,               <span class="hljs-comment"># Function identifier</span>
     input_field_names=[<span class="hljs-string">&quot;event_date&quot;</span>],     <span class="hljs-comment"># Numeric field to use</span>
     function_type=FunctionType.RERANK,    <span class="hljs-comment"># Function type. Must be RERANK</span>
@@ -200,39 +211,96 @@ ranker = Function(
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.ranker.DecayRanker;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
-<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">ranker</span> <span class="hljs-operator">=</span> DecayRanker.builder()
+<span class="hljs-type">DecayRanker</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> DecayRanker.builder()
         .name(<span class="hljs-string">&quot;event_relevance&quot;</span>)
         .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;event_date&quot;</span>))
         .function(<span class="hljs-string">&quot;linear&quot;</span>)
-        .origin(System.currentTimeMillis())
-        .offset(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
-        .decay(<span class="hljs-number">0.5</span>)
-        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+        .origin(System.currentTimeMillis() / <span class="hljs-number">1000</span>)  <span class="hljs-comment">// Current time (seconds, matching collection data)</span>
+        .offset(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)            <span class="hljs-comment">// 12 hour immediate events window (seconds)</span>
+        .decay(<span class="hljs-number">0.5</span>)                      <span class="hljs-comment">// Half score at scale distance</span>
+        .scale(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)         <span class="hljs-comment">// 7 days (in seconds, matching collection data)</span>
         .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;time&quot;</span>
 
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+)
+
+currentTime := time.Now().Unix()
+
+rerank := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;event_relevance&quot;</span>).
+    WithInputFields(<span class="hljs-string">&quot;event_date&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;function&quot;</span>, <span class="hljs-string">&quot;linear&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;origin&quot;</span>, currentTime).
+    WithParam(<span class="hljs-string">&quot;scale&quot;</span>, <span class="hljs-number">7</span>*<span class="hljs-number">24</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>).
+    WithParam(<span class="hljs-string">&quot;offset&quot;</span>, <span class="hljs-number">12</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>).
+    WithParam(<span class="hljs-string">&quot;decay&quot;</span>, <span class="hljs-number">0.5</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">rerank</span> = DecayRerank::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">function</span>(Function::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;event_relevance&quot;</span>)
+        .<span class="hljs-title function_ invoke__">input_fields</span>([<span class="hljs-string">&quot;event_date&quot;</span>])
+        .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Rerank)
+        .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;decay&quot;</span>))
+    .<span class="hljs-title function_ invoke__">decay_function</span>(<span class="hljs-string">&quot;linear&quot;</span>)
+    .<span class="hljs-title function_ invoke__">origin</span>(std::time::SystemTime::<span class="hljs-title function_ invoke__">now</span>().<span class="hljs-title function_ invoke__">duration_since</span>(std::time::UNIX_EPOCH).<span class="hljs-title function_ invoke__">unwrap</span>().<span class="hljs-title function_ invoke__">as_secs</span>())
+    .<span class="hljs-title function_ invoke__">scale</span>(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+    .<span class="hljs-title function_ invoke__">offset</span>(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)
+    .<span class="hljs-title function_ invoke__">decay</span>(<span class="hljs-number">0.5</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> rerank = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::DecayRerank&gt;(<span class="hljs-string">&quot;event_relevance&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">AddInputFieldName</span>(<span class="hljs-string">&quot;event_date&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">SetFunction</span>(<span class="hljs-string">&quot;linear&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">SetOrigin</span>(<span class="hljs-number">1736870400</span>);
+rerank-&gt;<span class="hljs-built_in">SetScale</span>(<span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>);
+rerank-&gt;<span class="hljs-built_in">SetOffset</span>(<span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>);
+rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number">0.5</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
-<span class="hljs-keyword">const</span> ranker = {
+<span class="hljs-keyword">const</span> rerank = {
   <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;event_relevance&quot;</span>,
   <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;event_date&quot;</span>],
   <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
   <span class="hljs-attr">params</span>: {
     <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;decay&quot;</span>,
     <span class="hljs-attr">function</span>: <span class="hljs-string">&quot;linear&quot;</span>,
-    <span class="hljs-attr">origin</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2025</span>, <span class="hljs-number">1</span>, <span class="hljs-number">15</span>).<span class="hljs-title function_">getTime</span>(),
+    <span class="hljs-attr">origin</span>: <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>() / <span class="hljs-number">1000</span>), <span class="hljs-comment">// Current time (seconds)</span>
     <span class="hljs-attr">offset</span>: <span class="hljs-number">12</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
     <span class="hljs-attr">decay</span>: <span class="hljs-number">0.5</span>,
     <span class="hljs-attr">scale</span>: <span class="hljs-number">7</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>,
   },
 };
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Calculate current time</span>
+<span class="hljs-built_in">long</span> currentTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+<span class="hljs-comment">// Create a linear decay ranker for event listings</span>
+<span class="hljs-comment">// Note: All time parameters must use the same unit as your collection data</span>
+<span class="hljs-keyword">var</span> rerank = <span class="hljs-keyword">new</span> DecayRerank(<span class="hljs-string">&quot;event_relevance&quot;</span>) <span class="hljs-comment">// Function identifier</span>
+    .WithInputField(<span class="hljs-string">&quot;event_date&quot;</span>) <span class="hljs-comment">// Numeric field to use</span>
+    .WithFunction(<span class="hljs-string">&quot;linear&quot;</span>) <span class="hljs-comment">// Choose linear decay</span>
+    .WithOrigin(currentTime) <span class="hljs-comment">// Current time (seconds, matching collection data)</span>
+    .WithOffset(<span class="hljs-number">12L</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>) <span class="hljs-comment">// 12 hour immediate events window (seconds)</span>
+    .WithDecay(<span class="hljs-number">0.5f</span>) <span class="hljs-comment">// Half score at scale distance</span>
+    .WithScale(<span class="hljs-number">7L</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>); <span class="hljs-comment">// 7 days (in seconds, matching collection data)</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Note: The RESTful API does not expose the decay/rerank operation as of Milvus v3.0.x.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索への適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準のベクトル検索への適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -247,9 +315,17 @@ ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>減衰ランカーを定義した後、<code translate="no">ranker</code> パラメータに渡すことで、検索操作中に適用できます：</p>
+    </button></h3><p>デケイ・ランカーを定義したら、<code translate="no">ranker</code> パラメータにそれを渡すことで、検索操作中に適用できます:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Apply decay ranker to vector search</span>
 result = milvus_client.search(
     collection_name,
@@ -257,14 +333,17 @@ result = milvus_client.search(
     anns_field=<span class="hljs-string">&quot;dense&quot;</span>,                   <span class="hljs-comment"># Vector field to search</span>
     limit=<span class="hljs-number">10</span>,                             <span class="hljs-comment"># Number of results</span>
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>], <span class="hljs-comment"># Fields to return</span>
-<span class="highlighted-wrapper-line">    ranker=ranker,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
+<span class="highlighted-wrapper-line">    ranker=rerank,                        <span class="hljs-comment"># Apply the decay ranker</span></span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.FunctionScore;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(COLLECTION_NAME)
@@ -273,24 +352,93 @@ result = milvus_client.search(
         .limit(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>))
         .functionScore(FunctionScore.builder()
-                .addFunction(ranker)
+                .addFunction(rerank)
                 .build())
         .consistencyLevel(ConsistencyLevel.STRONG)
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+functionScore := entity.NewFunctionScore().AddFunction(rerank)
+
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    collection_name, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
+    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+).WithANNSField(<span class="hljs-string">&quot;dense&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithOutputFields(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">function_score</span> = FunctionScore::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">add_function</span>(rerank);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">request</span> = SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+    .<span class="hljs-title function_ invoke__">collection_name</span>(collection_name)
+    .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[your_query_vector]))
+    .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;dense&quot;</span>)
+    .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+    .<span class="hljs-title function_ invoke__">output_fields</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>])
+    .<span class="hljs-title function_ invoke__">rerank</span>(function_score)
+    .<span class="hljs-title function_ invoke__">build</span>()?;
+<span class="hljs-keyword">let</span> <span class="hljs-variable">resp</span> = client.<span class="hljs-title function_ invoke__">search</span>(request).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> function_score = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::FunctionScore&gt;();
+function_score-&gt;<span class="hljs-built_in">AddFunction</span>(rerank);
+
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(collection_name)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;dense&quot;</span>)
+                   .<span class="hljs-built_in">WithRerank</span>(function_score)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;title&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;venue&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;event_date&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(your_query_vector)
+                   .<span class="hljs-built_in">WithConsistencyLevel</span>(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">search</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;collection_name&quot;</span>,
+  <span class="hljs-attr">collection_name</span>: collection_name,
   <span class="hljs-attr">data</span>: [your_query_vector], <span class="hljs-comment">// Replace with your query vector</span>
   <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
   <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>,
   <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>],
-  <span class="hljs-attr">rerank</span>: ranker,
+  <span class="hljs-attr">rerank</span>: rerank,
   <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&quot;Strong&quot;</span>,
 });
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
 
+<span class="hljs-comment">// Apply decay ranker to vector search</span>
+<span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = collectionName,
+    VectorFieldName = <span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-comment">// Vector field to search</span>
+    Vectors = <span class="hljs-keyword">new</span>[] { yourQueryVector }, <span class="hljs-comment">// Replace with your query vector</span>
+    Limit = <span class="hljs-number">10</span>, <span class="hljs-comment">// Number of results</span>
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        OutputFields = { <span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span> }, <span class="hljs-comment">// Fields to return</span>
+        FunctionScoreReranker = rerank, <span class="hljs-comment">// Apply the decay ranker</span>
+        ConsistencyLevel = ConsistencyLevel.Strong
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Note: The RESTful API does not expose the decay/rerank operation as of Milvus v3.0.x.</span>
 <button class="copy-code-btn"></button></code></pre>

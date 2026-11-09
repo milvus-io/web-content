@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Запрос на массовый импорт может завершиться успешно, но при этом ответ может быть утерян: истек таймаут вызова, прервалось соединение или ваш оркестратор завершил работу до того, как сохранил возвращенный объект <code translate="no">jobId</code>. Невозможно отличить состояние «не завершено» от состояния «завершено, ответ утерян». Повторная попытка запускает второе задание, и каждая строка попадает в базу дважды; отказ от повторной попытки может привести к потере данных импорта.</p>
-<p>Ключ идемпотентности устраняет необходимость выбора. Пометьте запрос таким ключом, и повторная попытка с тем же ключом вернет исходный файл <code translate="no">jobId</code> вместо создания второго задания.</p>
-<p>Для идемпотентного массового импорта требуется Milvus версии 3.0.2 или более поздней, либо версии 2.6.24 или более поздней из линейки 2.6. Более старая версия сервера игнорирует этот заголовок, и каждый запрос, независимо от повторной попытки, запускает новую задачу.</p>
+    </button></h1><p>Запрос на массовый импорт может завершиться успешно, но его ответ может быть утерян: истек таймаут вызова, сорвалось соединение или ваш оркестратор завершил работу до того, как сохранил возвращенный <code translate="no">jobId</code>. Невозможно отличить состояние «не завершено» от «завершено, ответ утерян». Повторная попытка запускает второе задание, и каждая строка попадает дважды; отказ от повторной попытки может привести к потере импорта.</p>
+<p>Ключ идемпотентности устраняет эту дилемму. Пометьте запрос таким ключом, и повторная попытка с тем же ключом вернет исходный файл <code translate="no">jobId</code> вместо создания второго задания.</p>
+<p>Для идемпотентного массового импорта требуется Milvus 3.0.2 или более поздней версии, либо версия 2.6.24 или более поздней версии из линейки 2.6. Более старые версии сервера игнорируют этот заголовок, и каждый запрос, независимо от того, повторяется он или нет, запускает новую задачу.</p>
 <h2 id="Sending-the-key" class="common-anchor-header">Отправка ключа<button data-href="#Sending-the-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,53 +47,103 @@ summary: >-
   -d <span class="hljs-string">&#x27;{&quot;collectionName&quot;: &quot;events&quot;, &quot;files&quot;: [[&quot;events/2026-09-07/part-0.parquet&quot;]]}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <!-- TODO: the `headers` parameter and `IDEMPOTENCY_KEY_HEADER` are merged but not released: milvus-io/pymilvus#3784 (master), milvus-io/pymilvus#3807 (3.0), milvus-io/pymilvus#3808 (2.6). They are expected in pymilvus v3.0.3 and v2.6.18. After those tags exist, verify this example against the released API. -->
-```python
-from pymilvus.bulk_writer import IDEMPOTENCY_KEY_HEADER, bulk_import
-<p>resp = bulk_import(
-url="http://localhost:19530",
-collection_name="events",
-files=[[“events/2026-09-07/part-0.parquet”]],
-headers={IDEMPOTENCY_KEY_HEADER: "nightly-2026-09-07-batch-3"},
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> IDEMPOTENCY_KEY_HEADER, bulk_import
+
+resp = bulk_import(
+    url=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;events&quot;</span>,
+    files=[[<span class="hljs-string">&quot;events/2026-09-07/part-0.parquet&quot;</span>]],
+    headers={IDEMPOTENCY_KEY_HEADER: <span class="hljs-string">&quot;nightly-2026-09-07-batch-3&quot;</span>},
 )
-resp.json()[“data”][“jobId”]   # одинаковый идентификатор при каждой повторной попытке</p>
-<pre><code translate="no">
-`IDEMPOTENCY_KEY_HEADER` <span class="hljs-built_in">is</span> `<span class="hljs-string">&quot;Idempotency-Key&quot;</span>`; the raw <span class="hljs-type">string</span> works too. The `headers` parameter <span class="hljs-built_in">and</span> `IDEMPOTENCY_KEY_HEADER` require pymilvus v3.<span class="hljs-number">0.3</span> <span class="hljs-built_in">or</span> later <span class="hljs-keyword">on</span> the <span class="hljs-number">3</span>.x line, <span class="hljs-built_in">or</span> v2.<span class="hljs-number">6.18</span> <span class="hljs-built_in">or</span> later <span class="hljs-keyword">on</span> the <span class="hljs-number">2.6</span> line. <span class="hljs-keyword">On</span> an older pymilvus, the `import` line above fails <span class="hljs-keyword">with</span> an `ImportError` at the `IDEMPOTENCY_KEY_HEADER` lookup, <span class="hljs-built_in">and</span> passing `headers` <span class="hljs-keyword">to</span> `bulk_import` has undefined behavior — the <span class="hljs-keyword">call</span> may <span class="hljs-keyword">error</span>, <span class="hljs-built_in">or</span> the import may be submitted without the <span class="hljs-keyword">key</span>.
-
-Poll `/v2/vectordb/jobs/import/describe` <span class="hljs-keyword">with</span> the returned `jobId` <span class="hljs-keyword">as</span> usual. A retry that arrives <span class="hljs-keyword">while</span> the original <span class="hljs-built_in">is</span> still being registered waits <span class="hljs-keyword">for</span> it, so a retry never observes a half-registered job.
-
-## Choosing a <span class="hljs-keyword">key</span>
-
-- **One <span class="hljs-keyword">key</span> per logical request.** Name the unit <span class="hljs-keyword">of</span> work, such <span class="hljs-keyword">as</span> `orders-<span class="hljs-number">2026</span>-<span class="hljs-number">09</span>-<span class="hljs-number">07</span>-batch-<span class="hljs-number">3</span>`, <span class="hljs-built_in">or</span> generate a UUID <span class="hljs-built_in">and</span> store it <span class="hljs-keyword">with</span> the work item before you send the request. Include an attempt number <span class="hljs-keyword">if</span> you may need <span class="hljs-keyword">to</span> re-run the same work.
-- **Retry <span class="hljs-keyword">with</span> the same <span class="hljs-keyword">key</span>.** Minting a <span class="hljs-built_in">new</span> <span class="hljs-keyword">key</span> <span class="hljs-keyword">on</span> a retry <span class="hljs-built_in">is</span> what duplicates data. The exceptions are listed under [<span class="hljs-keyword">When</span> <span class="hljs-keyword">to</span> send a <span class="hljs-built_in">new</span> <span class="hljs-keyword">key</span>](#<span class="hljs-keyword">when</span>-<span class="hljs-keyword">to</span>-send-a-<span class="hljs-built_in">new</span>-<span class="hljs-keyword">key</span>).
-- **Never reuse a <span class="hljs-keyword">key</span> <span class="hljs-keyword">for</span> different files.** Milvus does <span class="hljs-built_in">not</span> <span class="hljs-keyword">compare</span> the two requests. You <span class="hljs-keyword">get</span> the original `jobId` back, <span class="hljs-built_in">and</span> the <span class="hljs-built_in">new</span> files are <span class="hljs-built_in">not</span> imported.
-- **Keep it <span class="hljs-type">short</span> <span class="hljs-built_in">and</span> printable.** Printable ASCII, at most <span class="hljs-number">256</span> bytes <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span> (`streaming.idempotency.maxKeyLength`). Anything <span class="hljs-keyword">else</span> <span class="hljs-built_in">is</span> rejected <span class="hljs-keyword">with</span> <span class="hljs-keyword">error</span> `<span class="hljs-number">1100</span>`.
-- **<span class="hljs-keyword">Do</span> <span class="hljs-built_in">not</span> put secrets <span class="hljs-keyword">in</span> it.** The <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> stored <span class="hljs-keyword">with</span> your data.
-
-## How <span class="hljs-type">long</span> a <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> remembered
-
-The <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> scoped <span class="hljs-keyword">to</span> the collection <span class="hljs-keyword">by</span> its internal ID, so renaming the collection does <span class="hljs-built_in">not</span> break a retry, <span class="hljs-keyword">as</span> <span class="hljs-type">long</span> <span class="hljs-keyword">as</span> the retry names the collection <span class="hljs-keyword">by</span> its <span class="hljs-built_in">new</span> name. Dropping <span class="hljs-built_in">and</span> recreating the collection under the same name does break it, <span class="hljs-built_in">and</span> a fresh job <span class="hljs-built_in">is</span> the right answer there.
-
-Milvus remembers an import <span class="hljs-keyword">key</span> <span class="hljs-keyword">for</span> about a day. Treat that <span class="hljs-keyword">as</span> nominal rather than guaranteed: heavy DDL <span class="hljs-built_in">or</span> import traffic shortens it, <span class="hljs-built_in">and</span> a coordinator restart lengthens it. A retry after the <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> forgotten starts a fresh job.
-
-## <span class="hljs-keyword">When</span> <span class="hljs-keyword">to</span> send a <span class="hljs-built_in">new</span> <span class="hljs-keyword">key</span>
-
-Two cases, <span class="hljs-built_in">and</span> only two:
-
-- **The original job failed <span class="hljs-built_in">or</span> was aborted.** Describe returns `state: Failed` <span class="hljs-keyword">with</span> a reason. Retrying the <span class="hljs-keyword">key</span> returns that same `jobId` <span class="hljs-keyword">for</span> <span class="hljs-keyword">as</span> <span class="hljs-type">long</span> <span class="hljs-keyword">as</span> the <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> remembered. Fix the cause, <span class="hljs-keyword">then</span> send a <span class="hljs-built_in">new</span> <span class="hljs-keyword">key</span>.
-- **The original job was cleaned up.** Milvus keeps finished jobs <span class="hljs-keyword">for</span> `dataCoord.import.taskRetention` (<span class="hljs-number">48</span> hours <span class="hljs-keyword">by</span> <span class="hljs-keyword">default</span>). <span class="hljs-keyword">If</span> that expires <span class="hljs-keyword">while</span> the <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> still remembered, the retry returns the old `jobId`, <span class="hljs-built_in">and</span> describe answers <span class="hljs-keyword">with</span> the <span class="hljs-keyword">error</span> `import job does <span class="hljs-built_in">not</span> exist` instead <span class="hljs-keyword">of</span> a job state. That job may have succeeded. Confirm the data <span class="hljs-built_in">is</span> missing before you send a <span class="hljs-built_in">new</span> <span class="hljs-keyword">key</span>.
-
-A retry that <span class="hljs-built_in">is</span> rejected, <span class="hljs-keyword">for</span> example because the import job limit <span class="hljs-built_in">is</span> full, <span class="hljs-built_in">is</span> <span class="hljs-built_in">not</span> one <span class="hljs-keyword">of</span> these cases. Retry it later <span class="hljs-keyword">with</span> the same <span class="hljs-keyword">key</span>.
-
-## Configuration
-
-Four parameters bound the behavior <span class="hljs-keyword">on</span> this page. None <span class="hljs-keyword">of</span> them needs changing <span class="hljs-keyword">for</span> the <span class="hljs-keyword">key</span> <span class="hljs-keyword">to</span> work.
-
-| Parameter | <span class="hljs-keyword">Default</span> | What it does |
-|---|---|---|
-| `streaming.walBroadcaster.tombstone.maxLifetime` | `<span class="hljs-number">24</span>h` | How <span class="hljs-type">long</span> an import <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> remembered. <span class="hljs-built_in">Not</span> present <span class="hljs-keyword">in</span> the <span class="hljs-keyword">default</span> `milvus.yaml`; add it explicitly <span class="hljs-keyword">to</span> change it. The same store also rejects duplicate DDL submissions, so <span class="hljs-keyword">do</span> <span class="hljs-built_in">not</span> lower it just <span class="hljs-keyword">to</span> shorten the import window. |
-| `streaming.walBroadcaster.tombstone.maxCount` | `<span class="hljs-number">8192</span>` | How many keys <span class="hljs-built_in">and</span> DDL records the same store holds before the oldest are dropped, whatever their age. This <span class="hljs-built_in">is</span> what lets heavy DDL <span class="hljs-built_in">or</span> import traffic forget a <span class="hljs-keyword">key</span> before `maxLifetime`. <span class="hljs-built_in">Not</span> present <span class="hljs-keyword">in</span> the <span class="hljs-keyword">default</span> `milvus.yaml`. |
-| `dataCoord.import.taskRetention` | `<span class="hljs-number">172800</span>` (<span class="hljs-number">48</span> hours) since <span class="hljs-number">2.6</span>.<span class="hljs-number">24</span> <span class="hljs-built_in">and</span> <span class="hljs-number">3.0</span>.<span class="hljs-number">2</span>; `<span class="hljs-number">10800</span>` before | How <span class="hljs-type">long</span> a finished import job stays queryable. Keep it at least twice `maxLifetime`. |
-| `streaming.idempotency.maxKeyLength` | `<span class="hljs-number">256</span>` | The maximum <span class="hljs-keyword">key</span> length <span class="hljs-keyword">in</span> bytes. A longer <span class="hljs-keyword">key</span> <span class="hljs-built_in">is</span> rejected <span class="hljs-keyword">with</span> <span class="hljs-keyword">error</span> `<span class="hljs-number">1100</span>`. `<span class="hljs-number">0</span>` disables the bound. <span class="hljs-built_in">Not</span> present <span class="hljs-keyword">in</span> the <span class="hljs-keyword">default</span> `milvus.yaml`. |
-
-The `milvus.yaml` shipped before <span class="hljs-number">2.6</span>.<span class="hljs-number">24</span> <span class="hljs-built_in">and</span> <span class="hljs-number">3.0</span>.<span class="hljs-number">2</span> sets `taskRetention: <span class="hljs-number">10800</span>` explicitly, <span class="hljs-built_in">and</span> an upgrade does <span class="hljs-built_in">not</span> override a value <span class="hljs-keyword">in</span> your file. <span class="hljs-keyword">If</span> you upgraded <span class="hljs-keyword">with</span> that file, raise `taskRetention` <span class="hljs-keyword">to</span> at least twice `maxLifetime`. The <span class="hljs-built_in">new</span> value applies only <span class="hljs-keyword">to</span> jobs that finish after the change.
+resp.json()[<span class="hljs-string">&quot;data&quot;</span>][<span class="hljs-string">&quot;jobId&quot;</span>]   <span class="hljs-comment"># the same id on every retry</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">IDEMPOTENCY_KEY_HEADER</code> <code translate="no">&quot;Idempotency-Key&quot;</code>; необработанная строка также работает. Параметр и требуют pymilvus версии 3.0.3 или более поздней в линейке 3.x, либо версии 2.6.18 или более поздней в линейке 2.6. В более старых версиях pymilvus приведенная выше строка завершается ошибкой с сообщением « » при поиске , а передача в приводит к неопределенному поведению — вызов может завершиться ошибкой, либо импорт может быть отправлен без ключа. <code translate="no">headers</code> <code translate="no">IDEMPOTENCY_KEY_HEADER</code> <code translate="no">import</code> <code translate="no">ImportError</code> <code translate="no">IDEMPOTENCY_KEY_HEADER</code> <code translate="no">headers</code> <code translate="no">bulk_import</code> </p>
+<p>Опрашивайте <code translate="no">/v2/vectordb/jobs/import/describe</code> с возвращённым <code translate="no">jobId</code>, как обычно. Повторный запрос, поступивший в то время, когда исходный запрос ещё регистрируется, будет ждать его завершения, поэтому повторный запрос никогда не обнаружит частично зарегистрированное задание.</p>
+<h2 id="Choosing-a-key" class="common-anchor-header">Выбор ключа<button data-href="#Choosing-a-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><strong>Один ключ на один логический запрос.</strong> Назовите единицу работы, например <code translate="no">orders-2026-09-07-batch-3</code>, или сгенерируйте UUID и сохраните его вместе с рабочим элементом перед отправкой запроса. Включите номер попытки, если вам может понадобиться повторно выполнить ту же работу.</li>
+<li><strong>При повторной попытке используйте тот же ключ.</strong> Создание нового ключа при повторной попытке приводит к дублированию данных. Исключения перечислены в разделе <a href="#when-to-send-a-new-key">«Когда следует отправлять новый ключ</a>».</li>
+<li><strong>Никогда не используйте один и тот же ключ для разных файлов.</strong> Milvus не сравнивает эти два запроса. Вы получите обратно исходный файл <code translate="no">jobId</code>, а новые файлы не будут импортированы.</li>
+<li><strong>Ключ должен быть коротким и пригодным для печати.</strong> По умолчанию допускаются печатные ASCII-символы, максимальный размер — 256 байт (<code translate="no">streaming.idempotency.maxKeyLength</code>). Все остальные варианты отклоняются с ошибкой <code translate="no">1100</code>.</li>
+<li><strong>Не включайте в него секретные данные.</strong> Ключ хранится вместе с вашими данными.</li>
+</ul>
+<h2 id="How-long-a-key-is-remembered" class="common-anchor-header">Как долго сохраняется ключ<button data-href="#How-long-a-key-is-remembered" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Ключ привязан к коллекции по её внутреннему ID, поэтому переименование коллекции не прерывает повторную попытку, если в ней коллекция указана под новым именем. Удаление и повторное создание коллекции под тем же именем прерывает процесс, и в этом случае правильным решением будет запуск нового задания.</p>
+<p>Milvus запоминает ключ импорта примерно на сутки. Рассматривайте это как ориентировочное, а не гарантированное значение: интенсивный трафик DDL или импорта сокращает этот срок, а перезапуск координатора — удлиняет. Повторная попытка после того, как ключ будет забыт, запускает новое задание.</p>
+<h2 id="When-to-send-a-new-key" class="common-anchor-header">Когда отправлять новый ключ<button data-href="#When-to-send-a-new-key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Два случая, и только два:</p>
+<ul>
+<li><strong>Исходное задание завершилось сбоем или было прервано.</strong> Команда `Describe` возвращает ` <code translate="no">state: Failed</code> ` с указанием причины. Повторная попытка с использованием того же ключа возвращает тот же ` <code translate="no">jobId</code> `, пока ключ сохраняется в памяти. Устраните причину, а затем отправьте новый ключ.</li>
+<li><strong>Исходное задание было удалено.</strong> Milvus хранит завершённые задания в течение <code translate="no">dataCoord.import.taskRetention</code> (по умолчанию 48 часов). Если этот срок истек, пока ключ ещё запомнен, повторная попытка возвращает старый <code translate="no">jobId</code>, а команда `describe` отвечает ошибкой <code translate="no">import job does not exist</code> вместо состояния задания. Это задание могло завершиться успешно. Убедитесь, что данные действительно отсутствуют, прежде чем отправлять новый ключ.</li>
+</ul>
+<p>Повторная попытка, которая отклоняется, например, из-за того, что лимит заданий импорта исчерпан, не относится к этим случаям. Повторите попытку позже с тем же ключом.</p>
+<h2 id="Configuration" class="common-anchor-header">Настройка<button data-href="#Configuration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Поведение этой страницы определяется четырьмя параметрами. Ни один из них не требует изменения для работы ключа.</p>
+<table>
+<thead>
+<tr><th>Параметр</th><th>По умолчанию</th><th>Описание</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">streaming.walBroadcaster.tombstone.maxLifetime</code></td><td><code translate="no">24h</code></td><td>Срок хранения ключа импорта. Отсутствует в файле по умолчанию <code translate="no">milvus.yaml</code>; добавьте его явно, чтобы изменить значение. Данное хранилище также отклоняет дубликаты запросов DDL, поэтому не уменьшайте это значение только для сокращения окна импорта.</td></tr>
+<tr><td><code translate="no">streaming.walBroadcaster.tombstone.maxCount</code></td><td><code translate="no">8192</code></td><td>Количество ключей и записей DDL, которые хранит одно и то же хранилище, прежде чем самые старые из них будут удалены, независимо от их возраста. Именно это позволяет при интенсивном трафике DDL или импорта забыть ключ до <code translate="no">maxLifetime</code>. Отсутствует в файле по умолчанию <code translate="no">milvus.yaml</code>.</td></tr>
+<tr><td><code translate="no">dataCoord.import.taskRetention</code></td><td><code translate="no">172800</code> (48 часов) начиная с версий 2.6.24 и 3.0.2; до этого — <code translate="no">10800</code> </td><td>Срок, в течение которого завершённое задание импорта остаётся доступным для запросов. Установите значение не менее чем в два раза больше, чем <code translate="no">maxLifetime</code>.</td></tr>
+<tr><td><code translate="no">streaming.idempotency.maxKeyLength</code></td><td><code translate="no">256</code></td><td>Максимальная длина ключа в байтах. Более длинный ключ отклоняется с ошибкой <code translate="no">1100</code>. Параметр <code translate="no">0</code> отключает это ограничение. Отсутствует в файле по умолчанию <code translate="no">milvus.yaml</code>.</td></tr>
+</tbody>
+</table>
+<p><code translate="no">milvus.yaml</code>, поставлявшийся до версий 2.6.24 и 3.0.2, явно устанавливает значение <code translate="no">taskRetention: 10800</code>, и обновление не переопределяет значение в вашем файле. Если вы выполнили обновление с использованием этого файла, увеличьте значение <code translate="no">taskRetention</code> как минимум вдвое <code translate="no">maxLifetime</code>. Новое значение применяется только к заданиям, завершающимся после внесения изменения.</p>

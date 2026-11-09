@@ -85,7 +85,7 @@ EOF
 bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-この方法で<code translate="no">mq.type</code> を切り替えるのは、<b>まったく新しい</b>インスタンス（まだコレクションがない状態）を対象としています。すでにデータを保持しているインスタンスのメッセージキューを変更する場合は、<a href="/docs/ja/switch-rocksmq-woodpecker.md">代わりにswitch手順に従ってください</a>。
+この方法で<code translate="no">mq.type</code> を切り替えるのは、<b>まったく新しい</b>インスタンス（まだコレクションが存在しない状態）を対象としています。すでにデータを保持しているインスタンスのメッセージキューを変更する場合は、<a href="/docs/ja/switch-rocksmq-woodpecker.md">代わりにswitch手順</a>に従ってください。
 </div>
 <h3 id="Configure" class="common-anchor-header">設定<button data-href="#Configure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,7 +150,7 @@ bash standalone_embed.sh delete
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0.3 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステム間で切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
+<li><strong>2.5.x から 2.6.x へのアップグレード:</strong> <strong>メッセージキューの制限事項</strong>: Milvus v3.0.5 へアップグレードする際は、現在のメッセージキューの選択を維持する必要があります。アップグレード中に異なるメッセージキューシステムへ切り替えることはサポートされていません。メッセージキューシステムの変更機能は、将来のバージョンで提供される予定です。
 2.6.x ではスタンドアロンのデフォルトが Woodpecker に変更されるため、RocksMQ を継続して使用したい場合は、<strong>アップグレード前に</strong>`<code translate="no">user.yaml</code> ` 内の `<code translate="no">mq.type: rocksmq</code> ` を固定してください。</li>
 <li>実行中のインスタンスのメッセージキューを変更するには、「<a href="/docs/ja/switch-rocksmq-woodpecker.md">RocksMQ から Woodpecker への切り替え</a>」を参照してください。</li>
 </ul>

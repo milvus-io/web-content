@@ -21,7 +21,7 @@ title: 在 Docker 中运行 Milvus（Windows）
         ></path>
       </svg>
     </button></h1><blockquote>
-<p>默认情况下，此部署使用<strong>Woodpecker</strong>（本地文件系统）作为消息队列，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
+<p>默认情况下，此部署将<strong>Woodpecker</strong>（本地文件系统）用作消息队列，因此无需外部消息队列服务。请参阅<a href="/docs/zh/woodpecker.md">Woodpecker</a>。</p>
 </blockquote>
 <p>本页面演示了如何在 Windows 上使用 Docker Desktop（基于 WSL 2 后端和 Linux 容器）运行 Milvus。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ title: 在 Docker 中运行 Milvus（Windows）
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/desktop/setup/install/windows-install/">安装 Docker Desktop</a>并满足其 Windows 系统及硬件要求。</li>
+<li><a href="https://docs.docker.com/desktop/setup/install/windows-install/">安装 Docker Desktop</a>并满足其 Windows 及硬件要求。</li>
 <li><a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">安装 Windows 子系统 for Linux 2（WSL 2）</a>。</li>
 <li>启动 Docker Desktop，启用<strong>“使用基于 WSL 2 的引擎</strong>”，并选择“Linux 容器”。若要在 WSL 发行版内运行命令，还需在<strong>“设置”</strong>&gt;<strong>“资源</strong>”&gt;<strong>“WSL 集成</strong>”下启用该发行版。请参阅<a href="https://docs.docker.com/desktop/features/wsl/">Docker Desktop WSL 2 后端</a>。</li>
 </ul>
@@ -66,7 +66,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>请选择以下任一终端。请在可写入的工作目录中运行命令；脚本会将配置文件和<code translate="no">volumes</code> 目录存储在此处。</p>
-<p>该脚本从 Milvus 的<code translate="no">master</code> 分支下载而来。其 Docker 镜像标签在脚本中已定义，可能与 v3.0.3 不同。若要部署该确切版本，请使用下方的带版本号的 Docker Compose 配置。</p>
+<p>该脚本从 Milvus 的<code translate="no">master</code> 分支下载而来。其 Docker 镜像标签在脚本中已定义，可能与 v3.0.5 不同。若要部署该确切版本，请使用下方的带版本号的 Docker Compose 配置。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">在 PowerShell 中<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用 v3.0.3 版本附带的配置。仅运行适用于您终端的命令序列。</p>
+    </button></h2><p>使用 v3.0.5 版本附带的配置。仅运行适用于您终端的命令序列。</p>
 <h3 id="From-PowerShell" class="common-anchor-header">在 PowerShell 中<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,11 +173,11 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>下载配置文件并启动 Milvus：</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
-<h3 id="From-Windows-Command-Prompt" class="common-anchor-header">通过 Windows 命令提示符<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
+<h3 id="From-Windows-Command-Prompt" class="common-anchor-header">在 Windows 命令提示符下<button data-href="#From-Windows-Command-Prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,7 +193,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>下载配置文件并启动 Milvus：</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -213,7 +213,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>打开您的 WSL 发行版，然后运行以下 Linux 命令：</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -340,7 +340,7 @@ wsl --update
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Docker 中安装 Milvus 后，请按照<a href="/docs/zh/quickstart.md">《快速入门》</a> <strong>中的“使用现有 Milvus 服务器”路径</strong>操作，并将 SDK 连接到<code translate="no">http://localhost:19530</code> 。此服务器路径无需 Milvus Lite；本地<code translate="no">.db</code> 连接块将启动一个独立的本地数据库，而非使用此容器。</p>
+    </button></h2><p>在 Docker 中安装 Milvus 后，请按照<a href="/docs/zh/quickstart.md">《快速入门》</a> <strong>中的“使用现有 Milvus 服务器”路径</strong>操作，并将 SDK 连接到<code translate="no">http://localhost:19530</code> 。此服务器路径不需要 Milvus Lite；本地<code translate="no">.db</code> 连接块将启动一个独立的本地数据库，而不是使用此容器。</p>
 <p>您还可以：</p>
 <ul>
 <li><p>查阅<a href="/docs/zh/quickstart.md">《快速入门》</a>了解 Milvus 的功能。</p></li>
@@ -355,7 +355,7 @@ wsl --update
 </ul></li>
 <li><p>对于 Compose 部署，请参阅《<a href="/docs/zh/upgrade_milvus_standalone-docker.md">使用 Docker Compose 升级 Milvus Standalone</a>》；升级前请在您的环境中验证该操作流程。</p></li>
 <li><p><a href="/docs/zh/scaleout.md">扩展您的 Milvus 集群</a>。</p></li>
-<li><p>在云端部署您的 Milvus 集群：</p>
+<li><p>在云平台上部署您的 Milvus 集群：</p>
 <ul>
 <li><a href="/docs/zh/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/zh/gcp.md">Google Cloud</a></li>

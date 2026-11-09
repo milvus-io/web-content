@@ -20,11 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus mendukung bidang yang dapat bernilai NULL, yang memungkinkan nilai bidang tersebut tidak ada atau secara eksplisit ditetapkan ke NULL. Kemampuan untuk bernilai NULL ditentukan pada tingkat skema dan berlaku secara konsisten di seluruh operasi pengambilan data, pengindeksan, pencarian, dan kueri.</p>
+    </button></h1><p>Milvus mendukung bidang yang dapat bernilai null, yang memungkinkan nilai bidang tidak ada atau secara eksplisit ditetapkan ke NULL. Kemampuan bernilai null ditentukan pada tingkat skema dan berlaku secara konsisten di seluruh operasi pengambilan data, pengindeksan, pencarian, dan kueri.</p>
 <p>Gunakan kolom yang dapat bernilai NULL jika:</p>
 <ul>
-<li>Data diimpor dari sistem eksternal yang mengizinkan nilai yang kosong.</li>
-<li>Beberapa metadata bersifat opsional atau hanya tersedia untuk sebagian dari dataset.</li>
+<li>Data diimpor dari sistem eksternal yang mengizinkan nilai kosong.</li>
+<li>Beberapa metadata bersifat opsional atau hanya tersedia untuk sebagian dari kumpulan data.</li>
 <li>Embedding vektor dihasilkan secara asinkron dan disisipkan kemudian.</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
@@ -44,7 +44,7 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Kolom vektor yang mengizinkan nilai NULL tidak mendukung ekspresi filter ` <code translate="no">IS NULL</code> ` atau ` <code translate="no">IS NOT NULL</code> `. Anda tidak dapat secara eksplisit menyaring entitas berdasarkan apakah nilai kolom vektor tersebut NULL.</p></li>
-<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat dinyatakan sebagai nullable. Tetapkan " <code translate="no">nullable=True</code> " pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat nullable dari induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus bersifat nullable agar entitas yang sudah ada dapat mengembalikan nilai NULL untuk bidang baru tersebut. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
+<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat dinonaktifkan. Tetapkan " <code translate="no">nullable=True</code> " pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat " " induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus bersifat nullable agar entitas yang sudah ada dapat mengembalikan nilai NULL untuk bidang baru tersebut. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
 <li><p>Atribut nullable ditentukan saat bidang dibuat dan tidak dapat diubah setelahnya. Anda tidak dapat mengaktifkan atau menonaktifkan nullability untuk bidang yang sudah ada.</p></li>
 <li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan tidak null. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
 </ul>
@@ -64,18 +64,18 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Di Milvus, apakah suatu bidang diizinkan menyimpan nilai NULL dikendalikan oleh atribut bidang tingkat skema bernama ` <code translate="no">nullable</code>`.</p>
-<p>Ketika sebuah bidang didefinisikan dengan ` <code translate="no">nullable=True</code>`, Milvus mengizinkan nilai bidang tersebut tidak ada selama proses pengambilan data. Dalam praktiknya, Milvus memperlakukan dua masukan berikut sebagai setara dan menyimpan nilai bidang sebagai `NULL`:</p>
+<p>Ketika sebuah bidang didefinisikan dengan ` <code translate="no">nullable=True</code>`, Milvus mengizinkan nilai bidang tersebut tidak ada selama proses pengambilan data. Dalam praktiknya, Milvus memperlakukan dua masukan berikut sebagai setara dan menyimpan nilai bidang sebagai NULL:</p>
 <ul>
-<li>Kolom tersebut dihilangkan dari entitas masukan.</li>
-<li>Kolom tersebut secara eksplisit ditetapkan ke NULL (misalnya, ` <code translate="no">None</code> ` dalam Python).</li>
+<li>Kolom tersebut diabaikan dari entitas masukan.</li>
+<li>Bidang tersebut secara eksplisit ditetapkan ke NULL (misalnya, ` <code translate="no">None</code> ` dalam Python).</li>
 </ul>
 <p>Jika suatu bidang tidak didefinisikan sebagai nullable (perilaku default), setiap entitas harus menyediakan nilai yang valid untuk bidang tersebut. Mengabaikan bidang atau secara eksplisit menetapkan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
-<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai dari Milvus 3.0.0, atribut ini juga didukung pada bidang induk StructArray. Jangan mengonfigurasi subbidang Struct sebagai nullable secara terpisah; tentukan nullability pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal.</p>
+<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai Milvus 3.0.0, atribut ini juga didukung pada bidang induk StructArray. Jangan mengonfigurasi subbidang Struct sebagai nullable secara terpisah; tentukan nullability pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal.</p>
 <div class="alert note">
 <p>Nullability menentukan apakah nilai bidang boleh tidak ada; hal ini tidak menentukan nilai apa yang digunakan ketika suatu bidang tidak ada.</p>
 <ul>
 <li>Jika bidang yang dapat bernilai null dikonfigurasi tanpa nilai default, mengabaikan bidang tersebut akan menghasilkan nilai NULL yang disimpan.</li>
-<li>Jika nilai default telah dikonfigurasi, Milvus mungkin akan menyimpan nilai default tersebut sebagai gantinya. Untuk detailnya, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</li>
+<li>Jika nilai default dikonfigurasi, Milvus mungkin menyimpan nilai default tersebut sebagai gantinya. Untuk detailnya, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</li>
 </ul>
 </div>
 <h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Tentukan bidang yang dapat bernilai null dalam skema koleksi<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
@@ -94,12 +94,15 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Untuk menggunakan bidang nullable, Anda harus mengaktifkan atribut nullable saat mendefinisikan skema koleksi.</p>
-<p>Dalam contoh ini, skema koleksi mendefinisikan bidang vektor bernama ` <code translate="no">embedding</code> ` dengan ` <code translate="no">nullable=True</code>`. Hal ini memungkinkan entitas dalam koleksi untuk mengosongkan nilai vektor atau secara eksplisit menetapkannya ke `NULL` selama proses pengambilan data.</p>
+<p>Dalam contoh ini, skema koleksi mendefinisikan bidang vektor bernama ` <code translate="no">embedding</code> ` dengan ` <code translate="no">nullable=True</code>`. Hal ini memungkinkan entitas dalam koleksi untuk mengabaikan nilai vektor atau secara eksplisit menetapkannya ke `NULL` selama proses pengambilan data.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -155,31 +158,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(schema)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-  <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
-});
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">fields</span>: [
-    {
-      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
-      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
-      <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
-      <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>,
-    },
-    {
-      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
-      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
-      <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
-      <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
-    },
-  ],
-});
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
@@ -192,7 +170,8 @@ ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
@@ -219,6 +198,100 @@ err = client.CreateCollection(ctx,
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::error::<span class="hljs-type">Result</span>;
+<span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;id&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64)
+            .<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">4</span>)
+<span class="highlighted-wrapper-line">            .<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>),</span>
+    );
+
+client.<span class="hljs-title function_ invoke__">create_collection</span>(
+    CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">schema</span>(schema)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-built_in">WithToken</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;id&quot;</span>, milvus::DataType::INT64).<span class="hljs-built_in">WithPrimaryKey</span>(<span class="hljs-literal">true</span>));
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;embedding&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">4</span>).<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>));
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">fields</span>: [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
+      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+      <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>,
+    },
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+      <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+      <span class="hljs-attr">dim</span>: <span class="hljs-number">4</span>,
+      <span class="hljs-attr">nullable</span>: <span class="hljs-literal">true</span>,
+    },
+  ],
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+
+<span class="hljs-comment">// Define schema fields</span>
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema { Name = <span class="hljs-string">&quot;my_collection&quot;</span> };
+schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>)); <span class="hljs-comment">// Primary field</span>
+schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;embedding&quot;</span>, DataType.FloatVector) { Dimension = <span class="hljs-number">4</span>, Nullable = <span class="hljs-literal">true</span> }); <span class="hljs-comment">// Enable the nullable attribute; defaults to false</span>
+
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>, Schema = schema });
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 
@@ -231,7 +304,7 @@ err = client.CreateCollection(ctx,
 <span class="hljs-built_in">export</span> embeddingField=<span class="hljs-string">&#x27;{
   &quot;fieldName&quot;: &quot;embedding&quot;,
   &quot;dataType&quot;: &quot;FloatVector&quot;,
-  &quot;typeParams&quot;: {&quot;dim&quot;: &quot;4&quot;},
+  &quot;elementTypeParams&quot;: {&quot;dim&quot;: 4},
   &quot;nullable&quot;: true
 }&#x27;</span>
 
@@ -253,7 +326,7 @@ curl --request POST \
 <p>Dalam skema ini:</p>
 <ul>
 <li>Bidang ` <code translate="no">embedding</code> ` secara eksplisit ditandai sebagai nullable.</li>
-<li>Entitas dapat mengabaikan bidang ` <code translate="no">embedding</code> ` atau menetapkan nilainya menjadi NULL selama proses penyisipan.</li>
+<li>Entitas dapat mengabaikan bidang ` <code translate="no">embedding</code> ` atau menetapkan nilainya menjadi `NULL` selama proses penyisipan.</li>
 <li>Keputusan untuk mengizinkan nilai NULL ditetapkan pada saat pembuatan koleksi.</li>
 </ul>
 <p>Untuk kejelasan, contoh-contoh berikut berfokus pada bidang vektor yang dapat bernilai NULL (<code translate="no">embedding</code>). Mendefinisikan bidang skalar yang dapat bernilai NULL bersifat opsional dan tidak wajib untuk mengikuti sisa panduan ini.</p>
@@ -263,8 +336,11 @@ curl --request POST \
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(
@@ -279,14 +355,34 @@ curl --request POST \
 <span class="highlighted-wrapper-line">        .isNullable(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Add to the fields array when calling createCollection:</span>
-<span class="hljs-comment">// { name: &quot;age&quot;, data_type: DataType.Int64, nullable: true },</span>
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">schema.WithField(entity.NewField().
     WithName(<span class="hljs-string">&quot;age&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
     WithNullable(<span class="hljs-literal">true</span>),
 )
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = schema.<span class="hljs-title function_ invoke__">add_field</span>(
+    FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;age&quot;</span>)
+        .<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64)
+<span class="highlighted-wrapper-line">        .<span class="hljs-title function_ invoke__">nullable</span>(<span class="hljs-literal">true</span>),</span>
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;age&quot;</span>, milvus::DataType::INT64).<span class="hljs-built_in">WithNullable</span>(<span class="hljs-literal">true</span>));
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Add to the fields array when calling createCollection:</span>
+<span class="hljs-comment">// { name: &quot;age&quot;, data_type: DataType.Int64, nullable: true },</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;age&quot;</span>, DataType.Int64) { Nullable = <span class="hljs-literal">true</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Add another field object to the schema &quot;fields&quot; array, for example:</span>
 <span class="hljs-comment"># { &quot;fieldName&quot;: &quot;age&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;nullable&quot;: true }</span>
@@ -308,12 +404,15 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Setelah suatu bidang didefinisikan sebagai nullable dalam skema koleksi, Milvus mengizinkan nilai bidang tersebut hilang atau secara eksplisit ditetapkan ke NULL selama proses ingestion data.</p>
-<p>Contoh di bawah ini menyisipkan tiga entitas ke dalam koleksi yang dibuat dalam bagian " <a href="#define-a-nullable-field-in-the-collection-schema">Mendefinisikan bidang yang dapat bernilai NULL" dalam skema koleksi</a>, yang menunjukkan berbagai kasus ini.</p>
+<p>Contoh di bawah ini menyisipkan tiga entitas ke dalam koleksi yang dibuat pada bagian " <a href="#Define-a-nullable-field-in-the-collection-schema">Tentukan bidang yang dapat bernilai NULL dalam skema koleksi</a>", yang menunjukkan berbagai kasus tersebut.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">data = [
@@ -363,17 +462,6 @@ client.insert(InsertReq.builder()
         .data(data)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
-  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>] },
-  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">embedding</span>: <span class="hljs-literal">null</span> },
-  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span> },
-];
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: data,
-});
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
@@ -395,6 +483,71 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
     fmt.Println(err.Error())
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">rows</span> = <span class="hljs-built_in">vec!</span>[
+    json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]}),
+    json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: None::&lt;<span class="hljs-type">Vec</span>&lt;<span class="hljs-type">f32</span>&gt;&gt;}),
+    json!({<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">3</span>}),
+];
+
+client.<span class="hljs-title function_ invoke__">insert</span>(
+    InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">rows</span>(rows)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+milvus::EntityRows data = {
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">1</span>}, {<span class="hljs-string">&quot;embedding&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>}}},
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>}, {<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-literal">nullptr</span>}},
+    {{<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">3</span>}},
+};
+
+milvus::InsertResponse insert_response;
+status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data)),
+                        insert_response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">embedding</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>] },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">embedding</span>: <span class="hljs-literal">null</span> },
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span> },
+];
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: data,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> data = <span class="hljs-keyword">new</span> List&lt;IDictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;&gt;
+{
+    <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">1L</span>, [<span class="hljs-string">&quot;embedding&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span> } },
+    <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">2L</span>, [<span class="hljs-string">&quot;embedding&quot;</span>] = <span class="hljs-literal">null</span> },   <span class="hljs-comment">// Explicitly set to NULL</span>
+    <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;id&quot;</span>] = <span class="hljs-number">3L</span> },                         <span class="hljs-comment">// Field omitted; stored as NULL</span>
+};
+
+<span class="hljs-keyword">await</span> client.InsertAsync(<span class="hljs-keyword">new</span> InsertReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    RowsData = data
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
@@ -412,8 +565,8 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
 <p>Dalam contoh ini:</p>
 <ul>
 <li>Entitas <strong>id = 1</strong> menyediakan nilai vektor yang valid.</li>
-<li>Entitas <strong>dengan ID = 2</strong> secara eksplisit menetapkan nilai NULL ke bidang ` <code translate="no">embedding</code> `.</li>
-<li>Entitas <strong>dengan ID = 3</strong> mengabaikan bidang ` <code translate="no">embedding</code> ` sepenuhnya; Milvus menyimpannya sebagai NULL.</li>
+<li>Entitas <strong>id = 2</strong> secara eksplisit menetapkan nilai NULL ke bidang ` <code translate="no">embedding</code> `.</li>
+<li>Entitas <strong>id = 3</strong> mengabaikan bidang ` <code translate="no">embedding</code> ` sepenuhnya; Milvus menyimpannya sebagai NULL.</li>
 </ul>
 <h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">Perilaku indeks pada bidang yang dapat bernilai NULL<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -439,8 +592,11 @@ _, err := client.Insert(ctx, milvusclient.NewRowBasedInsertOption(<span class="h
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set index parameters</span>
@@ -482,18 +638,6 @@ client.loadCollection(LoadCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
-  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;embedding_idx&quot;</span>,
-  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-  <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
-});
-
-<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-});
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
@@ -518,6 +662,68 @@ _, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span c
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
 }
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+client.<span class="hljs-title function_ invoke__">create_index</span>(
+    CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_param</span>(
+            IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+                .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+                .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+        )
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+
+client.<span class="hljs-title function_ invoke__">load_collection</span>(
+    LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">AddIndex</span>(milvus::<span class="hljs-built_in">IndexDesc</span>(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE))
+                                .<span class="hljs-built_in">WithSync</span>(<span class="hljs-literal">true</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+status = client-&gt;<span class="hljs-built_in">LoadCollection</span>(milvus::<span class="hljs-built_in">LoadCollectionRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">index_name</span>: <span class="hljs-string">&quot;embedding_idx&quot;</span>,
+  <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+  <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
+});
+
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">loadCollection</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">await</span> client.CreateIndexAsync(<span class="hljs-keyword">new</span> CreateIndexReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Indexes = [<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-string">&quot;embedding_index&quot;</span>, IndexType.AutoIndex, MetricType.Cosine)]
+});
+
+<span class="hljs-comment">// Load collection for future search operations</span>
+<span class="hljs-keyword">await</span> client.LoadCollectionAsync(<span class="hljs-keyword">new</span> LoadCollectionReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span> });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
@@ -544,10 +750,10 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>Pada tahap ini:</p>
 <ul>
-<li>Entitas dengan nilai embedding yang valid diindeks dan siap untuk pencarian.</li>
+<li>Entitas dengan nilai embedding yang valid diindeks dan siap untuk dicari.</li>
 <li>Entitas yang embedding-nya NULL tetap berada dalam koleksi, tetapi tidak dimasukkan ke dalam indeks vektor.</li>
 </ul>
-<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Perilaku pencarian dengan bidang yang dapat bernilai NULL<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
+<h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Perilaku pencarian dengan bidang yang dapat bernilai null<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -567,14 +773,17 @@ curl --request POST \
 <ul>
 <li>Hanya entitas dengan nilai vektor yang valid yang dievaluasi dan diberi peringkat.</li>
 <li>Entitas dengan vektor NULL tidak menyebabkan kesalahan.</li>
-<li>Jika jumlah vektor yang valid lebih kecil dari <code translate="no">topK</code> yang diminta (<code translate="no">limit</code>), Milvus mungkin mengembalikan hasil yang lebih sedikit daripada <code translate="no">limit</code>.</li>
+<li>Jika jumlah vektor yang valid lebih kecil daripada <code translate="no">topK</code> yang diminta (<code translate="no">limit</code>), Milvus mungkin mengembalikan hasil yang lebih sedikit daripada <code translate="no">limit</code>.</li>
 </ul>
-<p>Contoh berikut melakukan pencarian vektor pada bidang vektor yang dapat bernilai NULL ( <code translate="no">embedding</code>):</p>
+<p>Contoh berikut melakukan pencarian vektor pada bidang vektor yang dapat bernilai NULL, yaitu ` <code translate="no">embedding</code>`:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">res = client.search(
@@ -605,17 +814,6 @@ curl --request POST \
 
 System.out.println(res);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
-  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-  <span class="hljs-attr">data</span>: [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
-  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
-  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span> },
-  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;embedding&quot;</span>],
-});
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
-<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
@@ -639,6 +837,68 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
 }
 fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">search_results</span> = client.<span class="hljs-title function_ invoke__">search</span>(
+    SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+        .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1f32</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]]))
+        .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;embedding&quot;</span>])
+        .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">3</span>)
+        .<span class="hljs-title function_ invoke__">build</span>()?,
+).<span class="hljs-keyword">await</span>?;
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> search_results.<span class="hljs-title function_ invoke__">results</span>().<span class="hljs-title function_ invoke__">iter</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">get_output_rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>};
+milvus::SearchResponse search_response;
+status = client-&gt;<span class="hljs-built_in">Search</span>(milvus::<span class="hljs-built_in">SearchRequest</span>()
+                            .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                            .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                            .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">3</span>)
+                            .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;embedding&quot;</span>)
+                            .<span class="hljs-built_in">AddFloatVector</span>(query_vector),
+                        search_response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+  <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+  <span class="hljs-attr">data</span>: [[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>]],
+  <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embedding&quot;</span>,
+  <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">search_params</span>: { <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;COSINE&quot;</span> },
+  <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;embedding&quot;</span>],
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;embedding&quot;</span>,
+    Vectors = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span> }) },
+    Limit = <span class="hljs-number">3</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters { OutputFields = { <span class="hljs-string">&quot;embedding&quot;</span> } }
+});
+
+Console.WriteLine(res);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
   --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
   --header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
@@ -655,8 +915,8 @@ fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <p>Dalam pencarian ini:</p>
 <ul>
-<li>Hanya entitas dengan nilai <code translate="no">embedding</code> yang tidak null yang dipertimbangkan sebagai kandidat.</li>
-<li>Entitas dengan nilai NULL untuk <code translate="no">embedding</code> tidak dimasukkan dalam evaluasi.</li>
+<li>Hanya entitas dengan nilai <code translate="no">embedding</code> yang tidak null yang dianggap sebagai kandidat.</li>
+<li>Entitas dengan nilai NULL untuk ` <code translate="no">embedding</code> ` dikecualikan dari evaluasi.</li>
 <li>Jumlah hasil yang dikembalikan bergantung pada berapa banyak vektor valid yang ada dalam koleksi.</li>
 </ul>
 <h2 id="Query-and-filtering-implications" class="common-anchor-header">Implikasi kueri dan penyaringan<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
@@ -675,46 +935,78 @@ fmt.Println(resultSets)
         ></path>
       </svg>
     </button></h2><p>Contoh-contoh sebelumnya berfokus pada bidang vektor. Bagian ini menjelaskan bagaimana nilai NULL berperilaku dalam <strong>ekspresi penyaringan skalar</strong>.</p>
-<p>Bidang skalar dapat didefinisikan dengan <code translate="no">nullable=True</code> dan mengikuti aturan pengambilan data yang sama seperti bidang vektor. Namun, <strong>nilai skalar NULL selalu dievaluasi sebagai false dalam ekspresi penyaringan</strong>.</p>
+<p>Bidang skalar dapat didefinisikan dengan <code translate="no">nullable=True</code> dan mengikuti aturan pengambilan data yang sama seperti bidang vektor. Namun, <strong>nilai skalar NULL selalu dievaluasi sebagai false dalam ekspresi penyaringan</strong>. Gunakan <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code> untuk memilih entitas berdasarkan apakah bidang skalar bernilai NULL.</p>
 <p>Misalnya, dengan bidang skalar yang dapat bernilai NULL <code translate="no">age</code>, filter berikut memilih entitas yang usianya lebih dari 18:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;age &gt; 18&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">expr</span> = <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> expr = <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&quot;age &gt; 18&quot;</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;age &gt; 18&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Entitas yang memiliki nilai ` <code translate="no">age</code> ` sebagai `NULL` dikecualikan dari hasil karena nilai `NULL` tidak memenuhi kondisi filter.</p>
+<p>Entitas yang memiliki nilai ` <code translate="no">age</code> ` sebagai NULL akan dikecualikan dari hasil karena nilai NULL tidak memenuhi kondisi filter.</p>
 <p>Demikian pula, pemeriksaan kesamaan tidak cocok dengan nilai NULL. Contohnya:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 <pre><code translate="no" class="language-python">expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">filter := <span class="hljs-string">`status == &quot;active&quot;`</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">expr</span> = <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string expr = <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> expr = <span class="hljs-string">&#x27;status == &quot;active&quot;&#x27;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">filter := <span class="hljs-string">`status == &quot;active&quot;`</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;status == \&quot;active\&quot;&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># &quot;filter&quot;: &quot;status == \&quot;active\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Entitas yang memiliki nilai ` <code translate="no">status</code> ` sebagai `NULL` dikecualikan dari hasil.</p>
+<p>Entitas yang memiliki nilai ` <code translate="no">status</code> ` sebagai NULL dikecualikan dari hasil.</p>
 <h2 id="Nullable-fields-and-default-values" class="common-anchor-header">Kolom yang dapat bernilai NULL dan nilai default<button data-href="#Nullable-fields-and-default-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -730,7 +1022,7 @@ fmt.Println(resultSets)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ketika baik ` <code translate="no">nullable</code> ` maupun ` <code translate="no">default_value</code> ` dikonfigurasi untuk suatu bidang, aturan berikut menentukan cara Milvus menangani input `NULL` atau nilai bidang yang hilang selama penyisipan.</p>
+    </button></h2><p>Ketika baik " <code translate="no">nullable</code> " maupun " <code translate="no">default_value</code> " dikonfigurasi untuk suatu bidang, aturan berikut menentukan cara Milvus menangani masukan NULL atau nilai bidang yang hilang selama penyisipan.</p>
 <table>
 <thead>
 <tr><th>Nullable diaktifkan</th><th>Nilai default</th><th>Masukan pengguna (NULL atau diabaikan)</th><th>Hasil</th></tr>
@@ -739,15 +1031,15 @@ fmt.Println(resultSets)
 <tr><td>Ya</td><td>Ya (bukan NULL)</td><td>NULL atau diabaikan</td><td>Menggunakan nilai default</td></tr>
 <tr><td>Ya</td><td>Tidak</td><td>NULL atau diabaikan</td><td>Disimpan sebagai NULL</td></tr>
 <tr><td>Tidak</td><td>Ya (bukan NULL)</td><td>NULL atau diabaikan</td><td>Menggunakan nilai default</td></tr>
-<tr><td>Tidak</td><td>Tidak</td><td>NULL atau tidak ditentukan</td><td>Menimbulkan kesalahan</td></tr>
-<tr><td>Tidak</td><td>Ya (NULL secara default)</td><td>NULL atau diabaikan</td><td>Menimbulkan kesalahan</td></tr>
+<tr><td>Tidak</td><td>Tidak</td><td>NULL atau diabaikan</td><td>Menimbulkan kesalahan</td></tr>
+<tr><td>Tidak</td><td>Ya (default NULL)</td><td>NULL atau diabaikan</td><td>Menyebabkan kesalahan</td></tr>
 </tbody>
 </table>
 <p><strong>Poin-poin penting:</strong></p>
 <ul>
-<li>Jika suatu kolom memiliki nilai default yang bukan NULL, nilai tersebut akan digunakan terlepas dari apakah opsi " <code translate="no">nullable</code> " diaktifkan atau tidak.</li>
-<li>Jika " <code translate="no">nullable=True</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, bidang tersebut akan menyimpan nilai NULL.</li>
-<li>Jika opsi " <code translate="no">nullable=False</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, proses penyisipan akan gagal dan menimbulkan kesalahan.</li>
-<li>Menetapkan nilai default NULL pada kolom yang tidak boleh NULL adalah tidak valid dan menyebabkan kesalahan.</li>
+<li>Jika suatu bidang memiliki nilai default non-NULL, nilai tersebut akan digunakan terlepas dari apakah opsi " <code translate="no">nullable</code> " diaktifkan atau tidak.</li>
+<li>Jika " <code translate="no">nullable=True</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, kolom tersebut akan menyimpan nilai NULL.</li>
+<li>Jika " <code translate="no">nullable=False</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, proses penyisipan akan gagal dan menimbulkan kesalahan.</li>
+<li>Menetapkan nilai default NULL pada bidang yang tidak boleh NULL adalah tidak valid dan menyebabkan kesalahan.</li>
 </ul>
 <p>Untuk contoh lengkap dan penggunaan API terkait nilai default, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</p>

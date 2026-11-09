@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>هل تحتاج إلى نشر مستقل بدلاً من ذلك؟</strong></p>
 <p>إذا كنت تفضل نشر Milvus في الوضع المستقل (عقدة واحدة) لأغراض التطوير أو الاختبار، فاستخدم هذا الأمر:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>ملاحظة</strong>: يستخدم الوضع المستقل Woodpecker كقائمة انتظار الرسائل الافتراضية ويقوم بتمكين مكون Streaming Node. لمزيد من التفاصيل، راجع <a href="/docs/ar/v2.6.x/architecture_overview.md">نظرة عامة</a> على <a href="/docs/ar/v2.6.x/architecture_overview.md">البنية</a> <a href="/docs/ar/v2.6.x/use-woodpecker.md">واستخدام Woodpecker</a>.</p>
 </div>
 <p><strong>نشر مجموعة Milvus:</strong></p>
-<p>ينشر الأمر التالي مجموعة Milvus بإعدادات مُحسَّنة للإصدار v2.6.25، باستخدام Woodpecker كقائمة انتظار الرسائل الموصى بها:</p>
+<p>ينشر الأمر التالي مجموعة Milvus بإعدادات مُحسّنة للإصدار v2.6.26، باستخدام Woodpecker كقائمة انتظار الرسائل الموصى بها:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>خيارات بديلة لقائمة انتظار الرسائل:</strong></p>
 <p>إذا كنت تفضل استخدام <strong>Pulsar</strong> (الخيار التقليدي) بدلاً من Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.25 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.26 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -206,7 +206,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>تأكد من نجاح عملية النشر عن طريق التحقق من حالة البودات:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>انتظر حتى تظهر حالة «قيد التشغيل» لجميع البودات.</strong> مع التكوين v2.6.25، من المفترض أن ترى بودات مشابهة لما يلي:</p>
+<p><strong>انتظر حتى تظهر حالة «قيد التشغيل» لجميع البودات.</strong> مع التكوين v2.6.26، من المفترض أن ترى بودات مشابهة لما يلي:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

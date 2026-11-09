@@ -1,6 +1,6 @@
 ---
 id: enable-dynamic-field.md
-title: Champ dynamique
+title: Dynamic Field
 summary: >-
   Milvus vous permet d'insérer des entités dotées de structures flexibles et
   évolutives grâce à une fonctionnalité spéciale appelée « champ dynamique ». Ce
@@ -8,7 +8,7 @@ summary: >-
   stocke automatiquement tous les champs de vos données qui ne sont pas
   explicitement définis dans le schéma de la collection.
 ---
-<h1 id="Dynamic-Field" class="common-anchor-header">Champ dynamique<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field" class="common-anchor-header">Dynamic Field<button data-href="#Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus vous permet d'insérer des entités dotées de structures flexibles et évolutives grâce à une fonctionnalité spéciale appelée « <strong>champ dynamique</strong> ». Ce champ est implémenté sous la forme d'un champ JSON masqué nommé « <code translate="no">$meta</code> », qui stocke automatiquement tous les champs de vos données qui <strong>ne</strong> sont <strong>pas explicitement définis</strong> dans le schéma de la collection.</p>
-<h2 id="How-it-works" class="common-anchor-header">Fonctionnement<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus allows you to insert entities with flexible, evolving structures through a special feature called the <strong>dynamic field</strong>. This field is implemented as a hidden JSON field named <code translate="no">$meta</code>, which automatically stores any fields in your data that are <strong>not explicitly defined</strong> in the collection schema.</p>
+<h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,10 +39,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lorsque le champ dynamique est activé, Milvus ajoute un champ caché « <code translate="no">$meta</code> » à chaque entité. Ce champ est de type JSON, ce qui signifie qu’il peut stocker n’importe quelle structure de données compatible avec JSON et qu’il peut être indexé à l’aide de la syntaxe JSON Path.</p>
-<p>Lors de l’insertion des données, tout champ non déclaré dans le schéma est automatiquement stocké sous forme de paire clé-valeur au sein de ce champ dynamique.</p>
-<p>Vous n’avez pas besoin de gérer « <code translate="no">$meta</code> » manuellement : Milvus s’en charge de manière transparente.</p>
-<p>Par exemple, si le schéma de votre collection ne définit que les champs « <code translate="no">id</code> » et « <code translate="no">vector</code> », et que vous insérez l’entité suivante :</p>
+    </button></h2><p>When the dynamic field is enabled, Milvus adds a hidden <code translate="no">$meta</code> field to each entity. This field is of JSON type, which means it can store any JSON-compatible data structure and can be indexed using JSON path syntax.</p>
+<p>During data insertion, any field not declared in the schema is automatically stored as a key-value pair inside this dynamic field.</p>
+<p>You don’t need to manage <code translate="no">$meta</code> manually—Milvus handles it transparently.</p>
+<p>For example, if your collection schema defines only <code translate="no">id</code> and <code translate="no">vector</code>, and you insert the following entity:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -50,7 +50,7 @@ summary: >-
   <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;books&quot;</span>  <span class="hljs-comment">// Not in schema</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Lorsque la fonctionnalité de champ dynamique est activée, Milvus la stocke en interne sous la forme suivante :</p>
+<p>With the dynamic field feature enabled, Milvus stores it internally as:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.1</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.3</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
@@ -60,14 +60,14 @@ summary: >-
 <span class="highlighted-comment-line">  <span class="hljs-punctuation">}</span></span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Cela vous permet de faire évoluer votre structure de données sans modifier le schéma.</p>
-<p>Parmi les cas d’utilisation courants, on peut citer :</p>
+<p>This allows you to evolve your data structure without altering the schema.</p>
+<p>Common use cases include:</p>
 <ul>
-<li><p>Le stockage de champs facultatifs ou rarement consultés</p></li>
-<li><p>La capture de métadonnées qui varient selon les entités</p></li>
-<li><p>Prise en charge d'un filtrage flexible via des index sur des clés de champs dynamiques spécifiques</p></li>
+<li><p>Storing optional or infrequently retrieved fields</p></li>
+<li><p>Capturing metadata that varies by entity</p></li>
+<li><p>Supporting flexible filtering via indexes on specific dynamic field keys</p></li>
 </ul>
-<h2 id="Supported-data-types" class="common-anchor-header">Types de données pris en charge<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+<h2 id="Supported-data-types" class="common-anchor-header">Supported data types<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,17 +82,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le champ dynamique prend en charge tous les types de données scalaires fournis par Milvus, y compris les valeurs simples et complexes. Ces types de données s’appliquent aux **valeurs des clés stockées dans <code translate="no">$meta</code>.</p>
-<p><strong>Les types pris en charge sont les suivants :</strong></p>
+    </button></h2><p>The dynamic field supports all scalar data types provided by Milvus, including both simple and complex values. These data types apply to the **values of keys stored in <code translate="no">$meta</code>.</p>
+<p><strong>Supported types include:</strong></p>
 <ul>
-<li><p>Chaîne de caractères (<code translate="no">VARCHAR</code>)</p></li>
-<li><p>Entier (<code translate="no">INT8</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</p></li>
-<li><p>Nombre à virgule flottante (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
-<li><p>Booléen (<code translate="no">BOOL</code>)</p></li>
-<li><p>Tableau de valeurs scalaires (<code translate="no">ARRAY</code>)</p></li>
-<li><p>Objets JSON (<code translate="no">JSON</code>)</p></li>
+<li><p>String (<code translate="no">VARCHAR</code>)</p></li>
+<li><p>Integer (<code translate="no">INT8</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</p></li>
+<li><p>Floating point (<code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</p></li>
+<li><p>Boolean (<code translate="no">BOOL</code>)</p></li>
+<li><p>Array of scalar values (<code translate="no">ARRAY</code>)</p></li>
+<li><p>JSON objects (<code translate="no">JSON</code>)</p></li>
 </ul>
-<p><strong>Exemple :</strong></p>
+<p><strong>Example:</strong></p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;brand&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Acme&quot;</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">29.99</span><span class="hljs-punctuation">,</span>
@@ -104,8 +104,8 @@ summary: >-
   <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Chacune des clés et valeurs ci-dessus serait stockée dans le champ « <code translate="no">$meta</code> ».</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">Activer le champ dynamique<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+<p>Each of the above keys and values would be stored inside the <code translate="no">$meta</code> field.</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">Enable dynamic field<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -120,18 +120,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser la fonctionnalité de champ dynamique, définissez ` <code translate="no">enable_dynamic_field=True</code> ` lors de la création du schéma de collection :</p>
+    </button></h2><p>To use the dynamic field feature, set <code translate="no">enable_dynamic_field=True</code> when creating the collection schema:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Initialize client</span>
-client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 
 <span class="hljs-comment"># Create schema with dynamic field enabled</span>
 schema = client.create_schema(
@@ -155,6 +158,7 @@ client.create_collection(
 
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">config</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .token(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
         .build();
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(config);
 
@@ -178,10 +182,97 @@ schema.addField(AddFieldReq.builder()
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">true</span>)
+schema.WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;my_id&quot;</span>).pk
+    WithDataType(entity.FieldTypeInt64).
+    WithIsPrimaryKey(<span class="hljs-literal">true</span>),
+).WithField(entity.NewField().
+    WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
+    WithDataType(entity.FieldTypeFloatVector).
+    WithDim(<span class="hljs-number">5</span>),
+)
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// Initialize client</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Create schema with dynamic field enabled</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">schema</span> = CollectionSchema::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">enable_dynamic_field</span>(<span class="hljs-literal">true</span>)
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;my_id&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::Int64)
+            .<span class="hljs-title function_ invoke__">primary_key</span>(<span class="hljs-literal">true</span>),
+    )
+    .<span class="hljs-title function_ invoke__">add_field</span>(
+        FieldSchema::<span class="hljs-title function_ invoke__">new</span>()
+            .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;my_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">data_type</span>(DataType::FloatVector)
+            .<span class="hljs-title function_ invoke__">dimension</span>(<span class="hljs-number">5</span>),
+    );
+
+<span class="hljs-comment">// Create the collection</span>
+client
+    .<span class="hljs-title function_ invoke__">create_collection</span>(
+        CreateCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">schema</span>(schema)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+
+milvus::ConnectParam connect_param{<span class="hljs-string">&quot;http://localhost:19530&quot;</span>};
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(connect_param);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+milvus::CollectionSchemaPtr schema = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::CollectionSchema&gt;();
+schema-&gt;<span class="hljs-built_in">SetEnableDynamicField</span>(<span class="hljs-literal">true</span>);
+schema-&gt;<span class="hljs-built_in">AddField</span>({<span class="hljs-string">&quot;my_id&quot;</span>, milvus::DataType::INT64, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>});
+schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;my_vector&quot;</span>, milvus::DataType::FLOAT_VECTOR).<span class="hljs-built_in">WithDimension</span>(<span class="hljs-number">5</span>));
+
+status = client-&gt;<span class="hljs-built_in">CreateCollection</span>(milvus::<span class="hljs-built_in">CreateCollectionRequest</span>()
+                                    .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                    .<span class="hljs-built_in">WithCollectionSchema</span>(schema));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">CreateCollectionReq</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
 
 <span class="hljs-comment">// Initialize client</span>
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span> });
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span> });
 
 <span class="hljs-comment">// Create collection</span>
 <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
@@ -204,38 +295,30 @@ client.createCollection(requestCreate);
 });
 
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;context&quot;</span>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
-)
+<span class="hljs-comment">// Initialize client</span>
+<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> MilvusClientV2(<span class="hljs-keyword">new</span> ConnectConfig { Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span> });
 
-ctx, cancel := context.WithCancel(context.Background())
-<span class="hljs-keyword">defer</span> cancel()
+<span class="hljs-comment">// Create schema with dynamic field enabled</span>
+<span class="hljs-keyword">var</span> schema = <span class="hljs-keyword">new</span> CollectionSchema
+{
+    Name = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    EnableDynamicFields = <span class="hljs-literal">true</span>
+};
 
-client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
-})
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-keyword">return</span> err
-}
+<span class="hljs-comment">// Add explicitly defined fields</span>
+schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class="hljs-string">&quot;my_id&quot;</span>, DataType.Int64, isPrimaryKey: <span class="hljs-literal">true</span>));
+schema.Fields.Add(FieldSchema.CreateFloatVector(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-number">5</span>));
 
-schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">true</span>)
-schema.WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;my_id&quot;</span>).pk
-    WithDataType(entity.FieldTypeInt64).
-    WithIsPrimaryKey(<span class="hljs-literal">true</span>),
-).WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;my_vector&quot;</span>).
-    WithDataType(entity.FieldTypeFloatVector).
-    WithDim(<span class="hljs-number">5</span>),
-)
-
-err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-keyword">return</span> err
-}
+<span class="hljs-comment">// Create the collection</span>
+<span class="hljs-keyword">await</span> client.CreateCollectionAsync(<span class="hljs-keyword">new</span> CreateCollectionReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>, Schema = schema });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -276,7 +359,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-entities-to-the-collection" class="common-anchor-header">Insérer des entités dans la collection<button data-href="#Insert-entities-to-the-collection" class="anchor-icon" translate="no">
+<h2 id="Insert-entities-to-the-collection" class="common-anchor-header">Insert entities to the collection<button data-href="#Insert-entities-to-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,13 +374,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le champ dynamique vous permet d’insérer des champs supplémentaires non définis dans le schéma. Ces champs seront automatiquement stockés dans ` <code translate="no">$meta</code>`.</p>
+    </button></h2><p>The dynamic field allows you to insert extra fields not defined in the schema. These fields will be stored automatically in <code translate="no">$meta</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">entities = [
     {
@@ -344,6 +430,74 @@ client.insert(InsertReq.builder()
         .data(Collections.singletonList(row))
         .build());
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+    WithInt64Column(<span class="hljs-string">&quot;my_id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>}).
+    WithFloatVectorColumn(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
+        {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>},
+    }).WithColumns(
+    column.NewColumnVarChar(<span class="hljs-string">&quot;overview&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Great product&quot;</span>}),
+    column.NewColumnInt32(<span class="hljs-string">&quot;words&quot;</span>, []<span class="hljs-type">int32</span>{<span class="hljs-number">150</span>}),
+    column.NewColumnJSONBytes(<span class="hljs-string">&quot;dynamic_json&quot;</span>, [][]<span class="hljs-type">byte</span>{
+        []<span class="hljs-type">byte</span>(<span class="hljs-string">`{
+            varchar: &#x27;some text&#x27;,
+            nested: {
+                value: 42.5,
+            },
+            string_price: &#x27;99.99&#x27;,
+        }`</span>),
+    }),
+))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> serde_json::json;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">insert</span> = client
+    .<span class="hljs-title function_ invoke__">insert</span>(
+        InsertRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">columns</span>(<span class="hljs-built_in">vec!</span>[
+                FieldData::<span class="hljs-title function_ invoke__">int64</span>(<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-built_in">vec!</span>[<span class="hljs-number">1</span>]),
+                FieldData::<span class="hljs-title function_ invoke__">float_vector</span>(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]]),
+                FieldData::<span class="hljs-title function_ invoke__">json</span>(
+                    <span class="hljs-string">&quot;$meta&quot;</span>,
+                    <span class="hljs-built_in">vec!</span>[json!({
+                        <span class="hljs-string">&quot;overview&quot;</span>: <span class="hljs-string">&quot;Great product&quot;</span>,
+                        <span class="hljs-string">&quot;words&quot;</span>: <span class="hljs-number">150</span>,
+                        <span class="hljs-string">&quot;dynamic_json&quot;</span>: {<span class="hljs-string">&quot;varchar&quot;</span>: <span class="hljs-string">&quot;some text&quot;</span>, <span class="hljs-string">&quot;nested&quot;</span>: {<span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-number">42.5</span>}, <span class="hljs-string">&quot;string_price&quot;</span>: <span class="hljs-string">&quot;99.99&quot;</span>},
+                    })],
+                ),
+            ])
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">milvus::EntityRows data = {
+    {
+        {<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-number">1</span>},
+        {<span class="hljs-string">&quot;my_vector&quot;</span>, std::vector&lt;<span class="hljs-type">float</span>&gt;{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>}},
+        {<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;Great product&quot;</span>},
+        {<span class="hljs-string">&quot;words&quot;</span>, <span class="hljs-number">150</span>},
+        {<span class="hljs-string">&quot;dynamic_json&quot;</span>, {
+                {<span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">&quot;some text&quot;</span>},
+                {<span class="hljs-string">&quot;nested&quot;</span>, {<span class="hljs-string">&quot;value&quot;</span>, <span class="hljs-number">42.5</span>}},
+                {<span class="hljs-string">&quot;string_price&quot;</span>, <span class="hljs-string">&quot;99.99&quot;</span>},
+            }
+        }
+    }
+};
+
+milvus::InsertResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span class="hljs-built_in">InsertRequest</span>()
+                                .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                .<span class="hljs-built_in">WithRowsData</span>(std::<span class="hljs-built_in">move</span>(data)),
+                             response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">const</span> entities = [
   {
@@ -365,26 +519,31 @@ client.insert(InsertReq.builder()
     <span class="hljs-attr">data</span>: entities,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">_, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
-    WithInt64Column(<span class="hljs-string">&quot;my_id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>}).
-    WithFloatVectorColumn(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-number">5</span>, [][]<span class="hljs-type">float32</span>{
-        {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>},
-    }).WithColumns(
-    column.NewColumnVarChar(<span class="hljs-string">&quot;overview&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Great product&quot;</span>}),
-    column.NewColumnInt32(<span class="hljs-string">&quot;words&quot;</span>, []<span class="hljs-type">int32</span>{<span class="hljs-number">150</span>}),
-    column.NewColumnJSONBytes(<span class="hljs-string">&quot;dynamic_json&quot;</span>, [][]<span class="hljs-type">byte</span>{
-        []<span class="hljs-type">byte</span>(<span class="hljs-string">`{
-            varchar: &#x27;some text&#x27;,
-            nested: {
-                value: 42.5,
-            },
-            string_price: &#x27;99.99&#x27;,
-        }`</span>),
-    }),
-))
-<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    <span class="hljs-keyword">return</span> err
-}
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> entities = <span class="hljs-keyword">new</span> List&lt;IDictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;&gt;
+{
+    <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;
+    {
+        [<span class="hljs-string">&quot;my_id&quot;</span>] = <span class="hljs-number">1L</span>,  <span class="hljs-comment">// Explicitly defined primary field</span>
+        [<span class="hljs-string">&quot;my_vector&quot;</span>] = <span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span> },  <span class="hljs-comment">// Explicitly defined vector field</span>
+        [<span class="hljs-string">&quot;overview&quot;</span>] = <span class="hljs-string">&quot;Great product&quot;</span>,        <span class="hljs-comment">// Scalar key not defined in schema</span>
+        [<span class="hljs-string">&quot;words&quot;</span>] = <span class="hljs-number">150</span>,                       <span class="hljs-comment">// Scalar key not defined in schema</span>
+        [<span class="hljs-string">&quot;dynamic_json&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt;  <span class="hljs-comment">// JSON key not defined in schema</span>
+        {
+            [<span class="hljs-string">&quot;varchar&quot;</span>] = <span class="hljs-string">&quot;some text&quot;</span>,
+            [<span class="hljs-string">&quot;nested&quot;</span>] = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">object</span>?&gt; { [<span class="hljs-string">&quot;value&quot;</span>] = <span class="hljs-number">42.5</span> },
+            [<span class="hljs-string">&quot;string_price&quot;</span>] = <span class="hljs-string">&quot;99.99&quot;</span>         <span class="hljs-comment">// Number stored as string</span>
+        }
+    }
+};
+
+<span class="hljs-keyword">await</span> client.InsertAsync(<span class="hljs-keyword">new</span> InsertReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>, RowsData = entities });
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 curl --request POST \
@@ -411,7 +570,7 @@ curl --request POST \
   &quot;collectionName&quot;: &quot;my_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-keys-in-the-dynamic-field--Milvus-2511+" class="common-anchor-header">Indexer des clés dans le champ dynamique<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field--Milvus-2511+" class="anchor-icon" translate="no">
+<h2 id="Index-keys-in-the-dynamic-field" class="common-anchor-header">Index keys in the dynamic field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Index-keys-in-the-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -426,11 +585,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus vous permet d’utiliser <strong>l’indexation par chemin JSON</strong> pour créer des index sur des clés spécifiques au sein du champ dynamique. Il peut s’agir de valeurs scalaires ou de valeurs imbriquées dans des objets JSON.</p>
+    </button></h2><p>Milvus allows you to use <strong>JSON path indexing</strong> to create indexes on specific keys inside the dynamic field. These can be scalar values or nested values in JSON objects.</p>
 <div class="alert note">
-<p>L'indexation des clés du champ dynamique est <strong>facultative</strong>. Vous pouvez toujours effectuer des requêtes ou des filtrages à l'aide des clés du champ dynamique sans index, mais cela peut entraîner une baisse de performances en raison d'une recherche par force brute.</p>
+<p>Indexing dynamic field keys is <strong>optional</strong>. You can still query or filter by dynamic field keys without an index, but it may result in slower performance due to brute-force search.</p>
 </div>
-<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">Syntaxe de l'indexation par chemin JSON<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
+<h3 id="JSON-path-indexing-syntax" class="common-anchor-header">JSON path indexing syntax<button data-href="#JSON-path-indexing-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -445,20 +604,20 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour créer un index de chemin JSON, spécifiez :</p>
+    </button></h3><p>To create a JSON path index, specify:</p>
 <ul>
-<li><p><strong>Chemin JSON</strong> (<code translate="no">json_path</code>) : le chemin d'accès à la clé ou au champ imbriqué de votre objet JSON que vous souhaitez indexer.</p>
+<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>): The path to the key or nested field within your JSON object that you want to index.</p>
 <ul>
-<li><p>Exemple : <code translate="no">metadata[&quot;category&quot;]</code></p>
-<p>Cela définit l'emplacement où le moteur d'indexation doit chercher au sein de la structure JSON.</p></li>
+<li><p>Example: <code translate="no">metadata[&quot;category&quot;]</code></p>
+<p>This defines where the indexing engine should look inside the JSON structure.</p></li>
 </ul></li>
-<li><p><strong>Type de conversion JSON</strong> (<code translate="no">json_cast_type</code>) : le type de données que Milvus doit utiliser pour interpréter et indexer la valeur située au chemin spécifié.</p>
+<li><p><strong>JSON cast type</strong> (<code translate="no">json_cast_type</code>): The data type that Milvus should use when interpreting and indexing the value at the specified path.</p>
 <ul>
-<li><p>Ce type doit correspondre au type de données réel du champ indexé.</p></li>
-<li><p>Pour une liste complète, consultez la section « <a href="/docs/fr/use-json-fields.md#Supported-JSON-cast-types">Types de conversion JSON pris en charge</a> ».</p></li>
+<li><p>This type must match the actual data type of the field being indexed.</p></li>
+<li><p>For a complete list, refer to <a href="/docs/fr/use-json-fields.md#Supported-JSON-cast-types">Supported JSON cast types</a>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Utilisation du chemin JSON pour indexer les clés de champs dynamiques<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-path-to-index-dynamic-field-keys" class="common-anchor-header">Use JSON path to index dynamic field keys<button data-href="#Use-JSON-path-to-index-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -473,18 +632,21 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Le champ dynamique étant un champ JSON, vous pouvez indexer n'importe quelle clé qu'il contient à l'aide de la syntaxe de chemin JSON. Cela fonctionne aussi bien pour les valeurs scalaires simples que pour les structures imbriquées complexes.</p>
-<p><strong>Exemples de chemins JSON :</strong></p>
+    </button></h3><p>Since the dynamic field is a JSON field, you can index any key within it using JSON path syntax. This works for both simple scalar values and complex nested structures.</p>
+<p><strong>JSON path examples:</strong></p>
 <ul>
-<li><p>Pour les clés simples : <code translate="no">overview</code>, <code translate="no">words</code></p></li>
-<li><p>Pour les clés imbriquées : <code translate="no">dynamic_json['varchar']</code>, <code translate="no">dynamic_json['nested']['value']</code></p></li>
+<li><p>For simple keys: <code translate="no">overview</code>, <code translate="no">words</code></p></li>
+<li><p>For nested keys: <code translate="no">dynamic_json['varchar']</code>, <code translate="no">dynamic_json['nested']['value']</code></p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
@@ -574,6 +736,78 @@ indexParams.add(IndexParam.builder()
         .extraParams(extraParams4)
         .build());
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
+)
+
+jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>)
+    .WithIndexName(<span class="hljs-string">&quot;overview_index&quot;</span>)
+jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>)
+    .WithIndexName(<span class="hljs-string">&quot;words_index&quot;</span>)
+jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;varchar&#x27;]`</span>)
+    .WithIndexName(<span class="hljs-string">&quot;json_varchar_index&quot;</span>)
+jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]`</span>)
+    .WithIndexName(<span class="hljs-string">&quot;json_nested_index&quot;</span>)
+
+indexOpt1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>, jsonIndex1)
+indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>, jsonIndex2)
+indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex3)
+indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex4)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">index_params</span> = <span class="hljs-built_in">vec!</span>[
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;overview&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;overview_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;varchar&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;overview&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;words&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;words_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;double&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;words&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;json_varchar_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;varchar&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;json_nested_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;double&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+];
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-function">milvus::IndexDesc <span class="hljs-title">overview_index</span><span class="hljs-params">(<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;overview_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+overview_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;varchar&quot;</span>);
+overview_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>);
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">words_index</span><span class="hljs-params">(<span class="hljs-string">&quot;words&quot;</span>, <span class="hljs-string">&quot;words_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+words_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;double&quot;</span>);
+words_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>);
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">json_varchar_index</span><span class="hljs-params">(<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-string">&quot;json_varchar_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+json_varchar_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;varchar&quot;</span>);
+json_varchar_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span>);
+
+<span class="hljs-function">milvus::IndexDesc <span class="hljs-title">json_nested_index</span><span class="hljs-params">(<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-string">&quot;json_nested_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+json_nested_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;double&quot;</span>);
+json_nested_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> indexParams = [
     {
       <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
@@ -621,23 +855,38 @@ indexParams.add(IndexParam.builder()
     },
   ];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-)
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
 
-jsonIndex1 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>)
-    .WithIndexName(<span class="hljs-string">&quot;overview_index&quot;</span>)
-jsonIndex2 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>)
-    .WithIndexName(<span class="hljs-string">&quot;words_index&quot;</span>)
-jsonIndex3 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;varchar&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;varchar&#x27;]`</span>)
-    .WithIndexName(<span class="hljs-string">&quot;json_varchar_index&quot;</span>)
-jsonIndex4 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]`</span>)
-    .WithIndexName(<span class="hljs-string">&quot;json_nested_index&quot;</span>)
+<span class="hljs-keyword">var</span> indexParams = <span class="hljs-keyword">new</span> List&lt;IndexParam&gt;();
 
-indexOpt1 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;overview&quot;</span>, jsonIndex1)
-indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;words&quot;</span>, jsonIndex2)
-indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex3)
-indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex4)
+<span class="hljs-comment">// Index a simple string key</span>
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;overview_index&quot;</span>, IndexType.AutoIndex, <span class="hljs-literal">null</span>)
+{
+    ExtraParams = { [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;varchar&quot;</span>, [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;overview&quot;</span> }
+});
+
+<span class="hljs-comment">// Index a simple numeric key</span>
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;words&quot;</span>, <span class="hljs-string">&quot;words_index&quot;</span>, IndexType.AutoIndex, <span class="hljs-literal">null</span>)
+{
+    ExtraParams = { [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;double&quot;</span>, [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;words&quot;</span> }
+});
+
+<span class="hljs-comment">// Index a nested key within a JSON object</span>
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-string">&quot;json_varchar_index&quot;</span>, IndexType.AutoIndex, <span class="hljs-literal">null</span>)
+{
+    ExtraParams = { [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;varchar&quot;</span>, [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span> }
+});
+
+<span class="hljs-comment">// Index a deeply nested key</span>
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-string">&quot;json_nested_index&quot;</span>, IndexType.AutoIndex, <span class="hljs-literal">null</span>)
+{
+    ExtraParams = { [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;double&quot;</span>, [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;dynamic_json[&#x27;nested&#x27;][&#x27;value&#x27;]&quot;</span> }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -682,7 +931,7 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Utilisez les fonctions de conversion JSON pour la conversion de types<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="anchor-icon" translate="no">
+<h3 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">Use JSON cast functions for type conversion<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span><button data-href="#Use-JSON-cast-functions-for-type-conversion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -697,13 +946,16 @@ indexOpt4 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si une clé de champ dynamique contient des valeurs dans un format incorrect (par exemple, des nombres stockés sous forme de chaînes de caractères), vous pouvez utiliser une fonction de conversion pour la convertir :</p>
+    </button></h3><p>If a dynamic field key contains values in an incorrect format, (e.g. numbers stored as strings), you can use a cast function to convert it:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert a string to double before indexing</span>
 index_params.add_index(
@@ -727,6 +979,30 @@ indexParams.add(IndexParam.builder()
         .extraParams(extraParams5)
         .build());
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;string_price&#x27;]`</span>)
+    .WithIndexName(<span class="hljs-string">&quot;json_string_price_index&quot;</span>)
+indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex5)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+<span class="hljs-keyword">use</span> std::collections::HashMap;
+
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;json_string_price_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">extra_params</span>(HashMap::<span class="hljs-title function_ invoke__">from</span>([
+            (<span class="hljs-string">&quot;json_cast_type&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;double&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_path&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;dynamic_json[&#x27;string_price&#x27;]&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+            (<span class="hljs-string">&quot;json_cast_function&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>(), <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>.<span class="hljs-title function_ invoke__">to_string</span>()),
+        ])),
+);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-function">milvus::IndexDesc <span class="hljs-title">string_price_index</span><span class="hljs-params">(<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-string">&quot;json_string_price_index&quot;</span>, milvus::IndexType::AUTOINDEX)</span></span>;
+string_price_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_type&quot;</span>, <span class="hljs-string">&quot;double&quot;</span>);
+string_price_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_path&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;string_price&#x27;]&quot;</span>);
+string_price_index.<span class="hljs-built_in">AddExtraParam</span>(<span class="hljs-string">&quot;json_cast_function&quot;</span>, <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">indexParams.<span class="hljs-title function_">push</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
     <span class="hljs-attr">field_name</span>: <span class="hljs-string">&#x27;dynamic_json&#x27;</span>,
@@ -740,9 +1016,23 @@ indexParams.add(IndexParam.builder()
     },
   });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">jsonIndex5 := index.NewJSONPathIndex(index.AUTOINDEX, <span class="hljs-string">&quot;double&quot;</span>, <span class="hljs-string">`dynamic_json[&#x27;string_price&#x27;]`</span>)
-    .WithIndexName(<span class="hljs-string">&quot;json_string_price_index&quot;</span>)
-indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>, jsonIndex5)
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Convert a string to double before indexing</span>
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;dynamic_json&quot;</span>, <span class="hljs-string">&quot;json_string_price_index&quot;</span>, IndexType.AutoIndex, <span class="hljs-literal">null</span>)
+{
+    ExtraParams =
+    {
+        [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;dynamic_json[&#x27;string_price&#x27;]&quot;</span>,
+        [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;double&quot;</span>,        <span class="hljs-comment">// Must be the output type of the cast function</span>
+        [<span class="hljs-string">&quot;json_cast_function&quot;</span>] = <span class="hljs-string">&quot;STRING_TO_DOUBLE&quot;</span>  <span class="hljs-comment">// Case insensitive; convert string to double</span>
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -761,11 +1051,11 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Si la conversion de type échoue (par exemple, la valeur <code translate="no">&quot;not_a_number&quot;</code> ne peut pas être convertie en nombre), la valeur est ignorée et n'est pas indexée.</p></li>
-<li><p>Pour plus de détails sur les paramètres des fonctions de conversion, reportez-vous à la section <a href="/docs/fr/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">Champ JSON</a>.</p></li>
+<li><p>If type conversion fails (e.g. value <code translate="no">&quot;not_a_number&quot;</code> cannot be converted to a number), the value is skipped and unindexed.</p></li>
+<li><p>For details on cast function parameters, refer to <a href="/docs/fr/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">JSON Field</a>.</p></li>
 </ul>
 </div>
-<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Appliquer des index à la collection<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
+<h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Apply indexes to the collection<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -780,13 +1070,16 @@ indexOpt5 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir défini les paramètres d’index, vous pouvez les appliquer à la collection à l’aide de la commande ` <code translate="no">create_index()</code>` :</p>
+    </button></h3><p>After defining the index parameters, you can apply them to the collection using <code translate="no">create_index()</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.create_index(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
@@ -799,8 +1092,6 @@ client.createIndex(CreateIndexReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .indexParams(indexParams)
         .build());
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(indexParams);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">indexTask1, err := client.CreateIndex(ctx, indexOpt1)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -823,6 +1114,72 @@ indexTask5, err := client.CreateIndex(ctx, indexOpt5)
     <span class="hljs-keyword">return</span> err
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// Add a vector index on the vector field so the collection can be loaded</span>
+index_params.<span class="hljs-title function_ invoke__">push</span>(
+    IndexParam::<span class="hljs-title function_ invoke__">new</span>()
+        .<span class="hljs-title function_ invoke__">field_name</span>(<span class="hljs-string">&quot;my_vector&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_name</span>(<span class="hljs-string">&quot;my_vector_index&quot;</span>)
+        .<span class="hljs-title function_ invoke__">index_type</span>(IndexType::AutoIndex)
+        .<span class="hljs-title function_ invoke__">metric_type</span>(MetricType::Cosine),
+);
+
+client
+    .<span class="hljs-title function_ invoke__">create_index</span>(
+        CreateIndexRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">index_params</span>(index_params)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-comment">// Load the collection before searching</span>
+client
+    .<span class="hljs-title function_ invoke__">load_collection</span>(
+        LoadCollectionRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-function">milvus::IndexDesc <span class="hljs-title">my_vector_index</span><span class="hljs-params">(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-string">&quot;my_vector_index&quot;</span>, milvus::IndexType::AUTOINDEX, milvus::MetricType::COSINE)</span></span>;
+
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(milvus::<span class="hljs-built_in">CreateIndexRequest</span>()
+                                     .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                     .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(overview_index))
+                                     .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(words_index))
+                                     .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(json_varchar_index))
+                                     .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(json_nested_index))
+                                     .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(string_price_index))
+                                     .<span class="hljs-built_in">AddIndex</span>(std::<span class="hljs-built_in">move</span>(my_vector_index)));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-comment">// Load the collection before searching</span>
+status = client-&gt;<span class="hljs-built_in">LoadCollection</span>(milvus::<span class="hljs-built_in">LoadCollectionRequest</span>().<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">  <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createIndex</span>(indexParams);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Add a vector index on the vector field so the collection can be loaded</span>
+indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hljs-string">&quot;my_vector&quot;</span>, <span class="hljs-literal">null</span>, IndexType.AutoIndex, MetricType.Cosine));
+
+<span class="hljs-keyword">await</span> client.CreateIndexAsync(<span class="hljs-keyword">new</span> CreateIndexReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>, Indexes = indexParams });
+
+<span class="hljs-comment">// Load the collection before searching</span>
+<span class="hljs-keyword">await</span> client.LoadCollectionAsync(<span class="hljs-keyword">new</span> LoadCollectionReq { CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span> });
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&quot;[
   <span class="hljs-variable">$varcharIndex</span>,
@@ -843,7 +1200,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">Filtrer par clés de champ dynamiques<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
+<h2 id="Filter-by-dynamic-field-keys" class="common-anchor-header">Filter by dynamic field keys<button data-href="#Filter-by-dynamic-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -858,47 +1215,72 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir inséré des entités comportant des clés de champ dynamiques, vous pouvez les filtrer à l'aide d'expressions de filtrage standard.</p>
+    </button></h2><p>After inserting entities with dynamic field keys, you can filter them using standard filter expressions.</p>
 <ul>
-<li><p>Pour les clés non JSON (par exemple, chaînes de caractères, nombres, booléens), vous pouvez les référencer directement par leur nom de clé.</p></li>
-<li><p>Pour les clés stockant des objets JSON, utilisez la syntaxe JSON Path pour accéder aux valeurs imbriquées.</p></li>
+<li><p>For non-JSON keys (e.g. strings, numbers, booleans), you can reference them by key name directly.</p></li>
+<li><p>For keys storing JSON objects, use JSON path syntax to access nested values.</p></li>
 </ul>
-<p>En se basant sur<a href="/docs/fr/enable-dynamic-field.md#Insert-entities-to-the-collection">l’exemple d’entité</a> de la section précédente, voici quelques expressions de filtrage valides :</p>
+<p>Based on <a href="/docs/fr/enable-dynamic-field.md#Insert-entities-to-the-collection">the </a><a href="/docs/fr/enable-dynamic-field.md#Insert-entities-to-the-collection">example entity</a> from the previous section, valid filter expressions include:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               <span class="hljs-comment"># Non-JSON key</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       <span class="hljs-comment"># JSON object key</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filterOverview</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;overview == \&quot;Great product\&quot;&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filterWords</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;words &gt;= 100&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filterNestedValue</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;dynamic_json[\&quot;nested\&quot;][\&quot;value\&quot;] &lt; 50&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript">filter = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>                <span class="hljs-comment">// Non-JSON key</span>
-filter = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>                               <span class="hljs-comment">// Non-JSON key</span>
-filter = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>       <span class="hljs-comment">// JSON object key</span>
+<pre><code translate="no" class="language-go">filterOverview := <span class="hljs-string">`overview == &quot;Great product&quot;`</span>
+filterWords := <span class="hljs-string">`words &gt;= 100`</span>
+filterNestedValue := <span class="hljs-string">`dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50`</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>
-filter := <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
-filter := <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">let</span> <span class="hljs-variable">filter</span> = <span class="hljs-string">r#&quot;overview == &quot;Great product&quot;&quot;#</span>;  <span class="hljs-comment">// Non-JSON key</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter1</span> = <span class="hljs-string">&quot;words &gt;= 100&quot;</span>;                  <span class="hljs-comment">// Non-JSON key</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">filter2</span> = <span class="hljs-string">r#&quot;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&quot;#</span>;  <span class="hljs-comment">// JSON object key</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">R&quot;(overview == &quot;Great product&quot;)&quot;</span>;   <span class="hljs-comment">// Non-JSON key</span>
+std::string filter1 = <span class="hljs-string">R&quot;(words &gt;= 100)&quot;</span>;                  <span class="hljs-comment">// Non-JSON key</span>
+std::string filter2 = <span class="hljs-string">R&quot;(dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50)&quot;</span>;  <span class="hljs-comment">// JSON object key</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filterOverview = <span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>; <span class="hljs-comment">// Non-JSON key</span>
+<span class="hljs-keyword">const</span> filterWords = <span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>; <span class="hljs-comment">// Non-JSON key</span>
+<span class="hljs-keyword">const</span> filterNestedValue = <span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>; <span class="hljs-comment">// JSON object key</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-built_in">string</span> filter = <span class="hljs-string">&quot;overview == \&quot;Great product\&quot;&quot;</span>;             <span class="hljs-comment">// Non-JSON key</span>
+<span class="hljs-built_in">string</span> filter1 = <span class="hljs-string">&quot;words &gt;= 100&quot;</span>;                             <span class="hljs-comment">// Non-JSON key</span>
+<span class="hljs-built_in">string</span> filter2 = <span class="hljs-string">&quot;dynamic_json[\&quot;nested\&quot;][\&quot;value\&quot;] &gt; 10&quot;</span>; <span class="hljs-comment">// Nested JSON key</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> filterOverview=<span class="hljs-string">&#x27;overview == &quot;Great product&quot;&#x27;</span>
 <span class="hljs-built_in">export</span> filterWords=<span class="hljs-string">&#x27;words &gt;= 100&#x27;</span>
 <span class="hljs-built_in">export</span> filterNestedValue=<span class="hljs-string">&#x27;dynamic_json[&quot;nested&quot;][&quot;value&quot;] &lt; 50&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Récupération des clés de champ dynamiques</strong>: Pour renvoyer des clés de champ dynamiques dans les résultats de recherche ou de requête, vous devez les spécifier explicitement dans le paramètre ` <code translate="no">output_fields</code> ` en utilisant la même syntaxe de chemin JSON que pour le filtrage :</p>
+<p><strong>Retrieving dynamic field keys</strong>: To return dynamic field keys in search or query results, you must explicitly specify them in the <code translate="no">output_fields</code> parameter using the same JSON path syntax as filtering:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#go">   Go</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Include dynamic field keys in search results</span>
 results = client.search(
@@ -933,22 +1315,6 @@ results = client.search(
         .build();
 
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
-
-<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;YOUR_CLUSTER_ENDPOINT&quot;</span>;
-<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;YOUR_CLUSTER_TOKEN&quot;</span>;
-<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
-
-<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]
-
-<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">data</span>: [query_vector],
-    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
-    <span class="hljs-attr">filters</span>: filter,
-    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span>]
-})
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
@@ -989,6 +1355,83 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">search</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;my_vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]]))
+            .<span class="hljs-title function_ invoke__">filter</span>(filter)
+            .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span>])
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">10</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp">std::vector&lt;<span class="hljs-type">float</span>&gt; query_vector = {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>};
+<span class="hljs-keyword">auto</span> request = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                   .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;my_vector&quot;</span>)
+                   .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">10</span>)
+                   .<span class="hljs-built_in">WithFilter</span>(filter)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;overview&quot;</span>)
+                   .<span class="hljs-built_in">AddOutputField</span>(<span class="hljs-string">&quot;dynamic_json&quot;</span>)
+                   .<span class="hljs-built_in">AddFloatVector</span>(query_vector);
+
+milvus::SearchResponse response;
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Search</span>(request, response);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+
+<span class="hljs-keyword">auto</span> search_results = response.<span class="hljs-built_in">Results</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp; result : search_results.<span class="hljs-built_in">Results</span>()) {
+    milvus::EntityRows output_rows;
+    status = result.<span class="hljs-built_in">OutputRows</span>(output_rows);
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; row : output_rows) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;\t&quot;</span> &lt;&lt; row &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;YOUR_CLUSTER_ENDPOINT&quot;</span>;
+<span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;YOUR_CLUSTER_TOKEN&quot;</span>;
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
+
+<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]
+
+<span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">data</span>: [query_vector],
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-attr">filters</span>: filter,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;dynamic_json[&#x27;varchar&#x27;]&quot;</span>]
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Collection;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dml;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Index;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-comment">// Example: Include dynamic field keys in search results</span>
+<span class="hljs-keyword">var</span> results = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;my_vector&quot;</span>,
+    Vectors = <span class="hljs-keyword">new</span>[] { <span class="hljs-keyword">new</span> ReadOnlyMemory&lt;<span class="hljs-built_in">float</span>&gt;(<span class="hljs-keyword">new</span>[] { <span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span> }) },
+    Limit = <span class="hljs-number">10</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+        Expression = filter,  <span class="hljs-comment">// Filter expression defined earlier</span>
+        OutputFields = { <span class="hljs-string">&quot;overview&quot;</span>, <span class="hljs-string">&quot;dynamic_json&quot;</span> }  <span class="hljs-comment">// Simple and nested dynamic field keys</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;YOUR_CLUSTER_ENDPOINT&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;YOUR_CLUSTER_TOKEN&quot;</span>
 <span class="hljs-built_in">export</span> FILTER=<span class="hljs-string">&#x27;color like &quot;red%&quot; and likes &gt; 50&#x27;</span>
@@ -1010,10 +1453,10 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Les clés de champ dynamiques ne sont pas incluses par défaut dans les résultats et doivent être explicitement demandées.</p>
+<p>Dynamic field keys are not included in results by default and must be explicitly requested.</p>
 </div>
-<p>Pour obtenir la liste complète des opérateurs et des expressions de filtrage pris en charge, consultez la section « <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> ».</p>
-<h2 id="Put-it-all-together" class="common-anchor-header">Mise en pratique<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
+<p>For a full list of supported operators and filter expressions, refer to <a href="/docs/fr/filtered-search.md">Filtered Search</a>.</p>
+<h2 id="Put-it-all-together" class="common-anchor-header">Put it all together<button data-href="#Put-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1028,15 +1471,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>À ce stade, vous avez appris à utiliser le champ dynamique pour stocker et indexer de manière flexible des clés qui ne sont pas définies dans le schéma. Une fois qu’une clé de champ dynamique est insérée, vous pouvez l’utiliser comme n’importe quel autre champ dans les expressions de filtrage — aucune syntaxe particulière n’est requise.</p>
-<p>Pour finaliser le workflow dans une application concrète, vous devrez également :</p>
+    </button></h2><p>By now, you’ve learned how to use the dynamic field to flexibly store and index keys that are not defined in the schema. Once a dynamic field key is inserted, you can use it just like any other field in filter expressions—no special syntax required.</p>
+<p>To complete the workflow in a real-world application, you’ll also need to:</p>
 <ul>
-<li><p><strong>Créer un index sur votre champ vectoriel</strong> (obligatoire pour chaque collection)</p>
-<p>Reportez-vous à la section <a href="/docs/fr/create-collection.md#Optional-Set-Index-Parameters">Définir les paramètres d’index</a></p></li>
-<li><p><strong>Charger la collection</strong></p>
-<p>Reportez-vous à la section « <a href="/docs/fr/load-and-release.md">Chargement et libération</a> »</p></li>
-<li><p><strong>Effectuer une recherche ou une requête à l’aide de filtres de chemin JSON</strong></p>
-<p>Voir « <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/json-operators.md">opérateurs JSON</a> »</p></li>
+<li><p><strong>Create an index on your vector field</strong> (mandatory for each collection)</p>
+<p>Refer to <a href="/docs/fr/create-collection.md#Optional-Set-Index-Parameters">Set Index Parameters</a></p></li>
+<li><p><strong>Load the collection</strong></p>
+<p>Refer to <a href="/docs/fr/load-and-release.md">Load & Release</a></p></li>
+<li><p><strong>Search or query using JSON path filters</strong></p>
+<p>Refer to <a href="/docs/fr/filtered-search.md">Filtered Search</a> and <a href="/docs/fr/json-operators.md">JSON Operators</a></p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1053,7 +1496,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">Quand dois-je définir explicitement un champ dans le schéma plutôt que d'utiliser une clé de champ dynamique ?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="common-anchor-header">When should I define a field explicitly in the schema instead of using a dynamic field key?<button data-href="#When-should-I-define-a-field-explicitly-in-the-schema-instead-of-using-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1068,15 +1511,15 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vous devez définir un champ explicitement dans le schéma plutôt que d’utiliser une clé de champ dynamique lorsque :</p>
+    </button></h3><p>You should define a field explicitly in the schema instead of using a dynamic field key when:</p>
 <ul>
-<li><p><strong>Le champ est fréquemment inclus dans `output_fields</strong>` : seuls les champs explicitement définis sont garantis d'être récupérables efficacement via ` <code translate="no">output_fields</code>`. Les clés de champ dynamiques ne sont pas optimisées pour les récupérations à haute fréquence et peuvent entraîner une perte de performances.</p></li>
-<li><p><strong>Le champ est fréquemment consulté ou filtré</strong>: bien que l’indexation d’une clé de champ dynamique puisse offrir des performances de filtrage similaires à celles des champs de schéma fixes, les champs définis explicitement offrent une structure plus claire et une meilleure maintenabilité.</p></li>
-<li><p><strong>Vous avez besoin d’un contrôle total sur le comportement des champs</strong>: les champs explicites prennent en charge les contraintes au niveau du schéma, les validations et un typage plus clair, ce qui peut s’avérer utile pour gérer l’intégrité et la cohérence des données.</p></li>
-<li><p><strong>Vous souhaitez éviter les incohérences d’indexation</strong>: les données contenues dans les clés de champ dynamiques sont plus sujettes à des incohérences de type ou de structure. L’utilisation d’un schéma fixe permet de garantir la qualité des données, en particulier si vous prévoyez d’utiliser l’indexation ou la conversion de type.</p></li>
+<li><p><strong>The field is frequently included in output_fields</strong>: Only explicitly defined fields are guaranteed to be efficiently retrievable through <code translate="no">output_fields</code>. Dynamic field keys are not optimized for high-frequency retrieval and may incur performance overhead.</p></li>
+<li><p><strong>The field is accessed or filtered frequently</strong>: While indexing a dynamic field key can provide similar filtering performance to fixed schema fields, explicitly defined fields offer clearer structure and better maintainability.</p></li>
+<li><p><strong>You need full control over field behavior</strong>: Explicit fields support schema-level constraints, validations, and clearer typing, which can be useful for managing data integrity and consistency.</p></li>
+<li><p><strong>You want to avoid indexing inconsistencies</strong>: Data in dynamic field keys is more prone to inconsistency in type or structure. Using a fixed schema helps ensure data quality, especially if you plan to use indexing or casting.</p></li>
 </ul>
-<p>Si vous décidez qu’une clé de champ dynamique doit devenir un champ scalaire explicite dans une collection existante, reportez-vous à <a href="/docs/fr/add-fields-to-an-existing-collection.md">la section Modifier le schéma d’une collection</a>. Les paramètres existants des champs dynamiques au niveau de la collection sont gérés via les propriétés de la collection ; pour plus de détails, reportez-vous à la section <a href="/docs/fr/modify-collection.md">Modifier une collection</a>.</p>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Puis-je créer plusieurs index sur la même clé de champ dynamique avec des types de données différents ?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
+<p>If you decide that a dynamic field key should become an explicit scalar field in an existing collection, refer to <a href="/docs/fr/add-fields-to-an-existing-collection.md">Alter Collection Schema</a>. Existing collection-level dynamic field settings are managed through collection properties; for details, refer to <a href="/docs/fr/modify-collection.md">Modify Collection</a>.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="common-anchor-header">Can I create multiple indexes on the same dynamic field key with different data types?<button data-href="#Can-I-create-multiple-indexes-on-the-same-dynamic-field-key-with-different-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1091,8 +1534,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non, vous <strong>ne</strong> pouvez créer <strong>qu’un seul index par chemin JSON</strong>. Même si une clé de champ dynamique contient des valeurs de types mixtes (par exemple, des chaînes de caractères et des nombres), vous devez choisir un seul type de données ( <code translate="no">json_cast_type</code> ) lors de l’indexation de ce chemin. La création de plusieurs index sur la même clé avec des types différents n’est pas prise en charge pour le moment.</p>
-<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">Lors de l’indexation d’une clé de champ dynamique, que se passe-t-il si la conversion de données échoue ?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
+    </button></h3><p>No, you can create <strong>only one index per JSON path</strong>. Even if a dynamic field key contains mixed-type values (e.g., some strings and some numbers), you must choose a single <code translate="no">json_cast_type</code> when indexing that path. Multiple indexes on the same key with different types are not supported at this time.</p>
+<h3 id="When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="common-anchor-header">When indexing a dynamic field key, what if the data casting fails?<button data-href="#When-indexing-a-dynamic-field-key-what-if-the-data-casting-fails" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1107,14 +1550,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si vous avez créé un index sur une clé de champ dynamique et que la conversion des données échoue (par exemple, si une valeur censée être convertie en « <code translate="no">double</code> » est en réalité une chaîne de caractères non numérique telle que « <code translate="no">&quot;abc&quot;</code>»), ces valeurs spécifiques seront <strong>ignorées sans message d’erreur lors de la création de l’index</strong>. Elles n’apparaîtront pas dans l’index et <strong>ne seront</strong> donc <strong>pas renvoyées dans les résultats de recherche par filtre ou de requêtes</strong> s’appuyant sur cet index.</p>
-<p>Cela a plusieurs implications importantes :</p>
+    </button></h3><p>If you’ve created an index on a dynamic field key and the data casting fails—e.g., a value meant to be cast to <code translate="no">double</code> is a non-numeric string like <code translate="no">&quot;abc&quot;</code>—those specific values will be <strong>silently skipped during index creation</strong>. They won’t appear in the index and therefore <strong>won’t be returned in filter-based search or query results</strong> that rely on the index.</p>
+<p>This has a few important implications:</p>
 <ul>
-<li><p><strong>Pas de recours à un balayage complet</strong>: si la majorité des entités sont indexées avec succès, les requêtes de filtrage s'appuieront entièrement sur l'index. Les entités présentant des échecs de conversion seront exclues de l'ensemble de résultats, même si elles correspondent logiquement à la condition de filtrage.</p></li>
-<li><p><strong>Risque lié à la précision de la recherche</strong>: dans les grands ensembles de données où la qualité des données est inégale (en particulier dans les clés de champ dynamiques), ce comportement peut entraîner l’absence inattendue de résultats. Il est essentiel de s’assurer que le formatage des données est cohérent et valide avant l’indexation.</p></li>
-<li><p><strong>Utilisez les fonctions de conversion avec prudence</strong>: si vous utilisez une fonction « <code translate="no">json_cast_function</code> » pour convertir des chaînes de caractères en nombres lors de l’indexation, assurez-vous que les valeurs des chaînes sont convertibles de manière fiable. Une incompatibilité entre le type « <code translate="no">json_cast_type</code> » et le type réellement converti entraînera des erreurs ou des entrées ignorées.</p></li>
+<li><p><strong>No fallback to full scan</strong>: If the majority of entities are successfully indexed, filtering queries will rely entirely on the index. Entities with casting failures will be excluded from the result set—even if they logically match the filter condition.</p></li>
+<li><p><strong>Search accuracy risk</strong>: In large datasets where data quality is inconsistent (especially in dynamic field keys), this behavior can lead to unexpected missing results. It’s critical to ensure consistent and valid data formatting before indexing.</p></li>
+<li><p><strong>Use cast functions cautiously</strong>: If you use a <code translate="no">json_cast_function</code> to convert strings to numbers during indexing, ensure the string values are reliably convertible. A mismatch between <code translate="no">json_cast_type</code> and the actual converted type will result in errors or skipped entries.</p></li>
 </ul>
-<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">Que se passe-t-il si ma requête utilise un type de données différent du type de conversion indexé ?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="common-anchor-header">What happens if my query uses a different data type than the indexed cast type?<button data-href="#What-happens-if-my-query-uses-a-different-data-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1129,4 +1572,4 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si votre requête compare une clé de champ dynamique en utilisant un <strong>type de données différent</strong> de celui utilisé dans l’index (par exemple, une requête avec une comparaison de chaînes alors que l’index a été converti en « <code translate="no">double</code> »), le système <strong>n’utilisera pas l’index</strong> et pourra recourir à un balayage complet <em>uniquement si cela est possible</em>. Pour optimiser les performances et la précision, assurez-vous que le type de votre requête correspond à l’ <code translate="no">json_cast_type</code> e utilisé lors de la création de l’index.</p>
+    </button></h3><p>If your query compares a dynamic field key using a <strong>different data type</strong> than what was used in the index (e.g., querying with a string comparison when the index was cast to <code translate="no">double</code>), the system will <strong>not use the index</strong>, and may fall back to a full scan <em>only if possible</em>. For best performance and accuracy, ensure your query type matches the <code translate="no">json_cast_type</code> used during index creation.</p>

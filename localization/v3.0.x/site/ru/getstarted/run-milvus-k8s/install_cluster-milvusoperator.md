@@ -175,11 +175,11 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Как только под Milvus Operator запущен, вы можете развернуть кластер Milvus следующим образом.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Приведенная выше команда развертывает кластер Milvus с использованием <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии v3.0.3) и всех новых архитектурных компонентов, включая Streaming Node.</p>
+<p>Приведенная выше команда развертывает кластер Milvus с использованием <strong>Woodpecker</strong> в качестве очереди сообщений (рекомендуется для версии v3.0.5) и всех новых архитектурных компонентов, включая Streaming Node.</p>
 <p><strong>Основные особенности архитектуры в данном развертывании:</strong></p>
 <ul>
 <li><strong>Очередь сообщений</strong>: <a href="/docs/ru/woodpecker.md">используется Woodpecker</a> (упрощает обслуживание инфраструктуры)</li>
-<li><strong>Узел потоковой обработки</strong>: включён для расширенной обработки данных</li>
+<li><strong>Узел потоковой обработки</strong>: включён для усовершенствованной обработки данных</li>
 <li><strong>Координатор Mix</strong>: объединенные компоненты координатора для повышения эффективности</li>
 </ul>
 <p>Для настройки этих параметров мы рекомендуем воспользоваться инструментом <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a>, чтобы скорректировать конфигурацию с учётом фактического объёма ваших данных, а затем загрузить соответствующий файл YAML. Подробнее о параметрах конфигурации см. в документе <a href="https://milvus.io/docs/system_configuration.md">«Контрольный список системных настроек Milvus</a>».</p>

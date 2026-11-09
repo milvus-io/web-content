@@ -66,7 +66,7 @@ docker compose version
         ></path>
       </svg>
     </button></h2><p>다음 터미널 중 하나를 선택하십시오. 쓰기 권한이 있는 작업 디렉터리에서 명령을 실행하십시오. 스크립트는 해당 디렉터리에 구성 파일과 <code translate="no">volumes</code> 디렉터리를 저장합니다.</p>
-<p>이 스크립트는 Milvus의 <code translate="no">master</code> 브랜치에서 다운로드됩니다. 스크립트 내에 Docker 이미지 태그가 정의되어 있으며, v3.0.3과 다를 수 있습니다. 해당 릴리스를 정확히 배포하려면 아래의 버전 지정된 Docker Compose 구성을 사용하십시오.</p>
+<p>이 스크립트는 Milvus의 <code translate="no">master</code> 브랜치에서 다운로드됩니다. Docker 이미지 태그는 스크립트 내에 정의되어 있으며 v3.0.5와 다를 수 있습니다. 해당 릴리스를 정확히 배포하려면 아래의 버전 지정된 Docker Compose 구성을 사용하십시오.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">PowerShell에서<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ bash standalone_embed.sh start
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>v3.0.3 릴리스에 포함된 구성을 사용하십시오. 사용 중인 터미널에 해당하는 명령어 순서만 실행하십시오.</p>
+    </button></h2><p>v3.0.5 릴리스에 포함된 구성을 사용하십시오. 사용 중인 터미널에 해당하는 명령어 순서만 실행하십시오.</p>
 <h3 id="From-PowerShell" class="common-anchor-header">PowerShell에서<button data-href="#From-PowerShell" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +173,7 @@ bash standalone_embed.sh start
         ></path>
       </svg>
     </button></h3><p>구성 파일을 다운로드하고 Milvus를 시작하십시오:</p>
-<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
+<pre><code translate="no" class="language-powershell">Invoke-WebRequest -Uri &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -OutFile docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -193,7 +193,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>구성 파일을 다운로드하고 Milvus를 시작하세요:</p>
-<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
+<pre><code translate="no" class="language-bat">curl.exe -fL &quot;https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml&quot; -o docker-compose.yml
 docker compose up -d
 docker compose ps
 </code></pre>
@@ -213,7 +213,7 @@ docker compose ps
         ></path>
       </svg>
     </button></h3><p>WSL 배포판을 열고 다음 Linux 명령을 실행합니다:</p>
-<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.3/milvus-standalone-docker-compose.yaml -O docker-compose.yml
+<pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v3.0.5/milvus-standalone-docker-compose.yaml -O docker-compose.yml
 docker compose up -d
 docker compose ps
 <button class="copy-code-btn"></button></code></pre>
@@ -262,7 +262,7 @@ wsl --update
 </code></pre>
 <p><code translate="no">linux</code> 가 반환되어야 합니다. 데몬에 연결할 수 없는 경우, Milvus 스크립트를 다시 실행하기 전에 <a href="https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/">Docker Desktop 문제 해결 단계를</a> 따르십시오. <code translate="no">com.docker.service</code> 를 실행하는 것만으로는 WSL 2 리눅스 엔진이 실행 중임을 확인할 수 없습니다.</p></li>
 </ol>
-<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="common-anchor-header">Milvus 배포 중 WSL 관련 문제는 어떻게 해결하나요?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="anchor-icon" translate="no">
+<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="common-anchor-header">Milvus 배포 중 WSL 관련 문제를 어떻게 해결할 수 있나요?<button data-href="#How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,7 +315,7 @@ wsl --update
    <span>Milvus 시작 시 발생하는 ‘Read config failed’ 오류 메시지</span>
   
  </span></p>
-<p>Milvus 시작 시 “Read config failed”라는 오류 메시지가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트된 경우, ` <code translate="no">docker exec</code> ` 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>`/milvus/configs</strong> ` 폴더의 내용을 확인할 수 있습니다:</p>
+<p>Milvus 시작 시 “Read config failed”라는 오류 메시지가 표시될 경우, Milvus 컨테이너에 마운트된 볼륨이 올바른지 확인해야 합니다. 볼륨이 컨테이너에 올바르게 마운트되어 있다면, <code translate="no">docker exec</code> 명령어를 사용하여 컨테이너로 진입한 후 다음과 같이 <strong>/milvus/configs</strong> 폴더의 내용을 확인할 수 있습니다:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" /> 

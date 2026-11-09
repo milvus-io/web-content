@@ -1,7 +1,7 @@
 ---
 id: range-search.md
 title: 範圍搜尋
-summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍內，從而改善搜尋結果的相關性。本頁可協助您瞭解何謂範圍搜尋，以及執行範圍搜尋的程序。
+summary: 範圍搜尋透過將回傳實體的距離或分數限制在特定範圍內，來提升搜尋結果的相關性。本頁面將協助您了解何謂範圍搜尋，以及進行範圍搜尋的步驟。
 ---
 <h1 id="Range-Search" class="common-anchor-header">範圍搜尋<button data-href="#Range-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>範圍搜尋可將返回實體的距離或分數限制在特定範圍內，從而改善搜尋結果的相關性。本頁可協助您瞭解何謂範圍搜尋，以及執行範圍搜尋的程序。</p>
+    </button></h1><p>範圍搜尋透過將回傳實體的距離或分數限制在特定範圍內，來提升搜尋結果的相關性。本頁面將協助您了解何謂範圍搜尋，以及執行範圍搜尋的步驟。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,22 +34,24 @@ summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當執行範圍搜尋請求時，Milvus 以 ANN 搜尋結果中與查詢向量最相似的向量為中心，以搜尋請求中指定的<strong>半徑</strong>為外圈半徑，以<strong>range_filter</strong>為內圈半徑，畫出兩個同心圓。所有相似度分數落在這兩個同心圓所形成的環狀區域內的向量都會被傳回。在這裡，<strong>range_filter</strong>可以設定為<strong>0</strong>，表示將傳送指定相似度得分（半徑）範圍內的所有實體。</p>
-<p>
+    </button></h2><p>執行範圍搜尋請求時，Milvus 會以 ANN 搜尋結果中與查詢向量最相似的向量作為中心，並以搜尋請求中指定的<strong>半徑</strong>作為外圈半徑，以及<strong>range_filter</strong>作為內圈半徑，藉此繪製兩個同心圓。 所有相似度分數落在由這兩條同心圓所形成的環狀區域內的向量，都會被回傳。在此<strong>，range_filter</strong>可設定為<strong>0</strong>，表示將回傳所有在指定相似度分數（半徑）範圍內的實體。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" />
-   </span> <span class="img-wrapper"> <span>範圍搜尋</span> </span></p>
-<p>上圖顯示範圍搜尋請求包含兩個參數：<strong>半徑</strong>和<strong>range_filter</strong>。收到範圍搜尋請求後，Milvus 會執行下列動作：</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/range-search.png" alt="Range Search" class="doc-image" id="range-search" /> 
+   <span>範圍搜尋</span>
+  
+ </span></p>
+<p>上圖顯示，範圍搜尋請求包含兩個參數：<strong>半徑 (radius)</strong>與<strong>範圍篩選器 (range_filter)</strong>。收到範圍搜尋請求後，Milvus 會執行以下步驟：</p>
 <ul>
-<li><p>使用指定的度量類型<strong>(COSINE</strong>) 來尋找與查詢向量最相似的所有向量內嵌。</p></li>
-<li><p>篩選與查詢向量的<strong>距離</strong>或<strong>分數</strong>在<strong>半徑</strong>和<strong>range_filter</strong>參數指定範圍內的向量內嵌。</p></li>
-<li><p>從篩選出的實體中傳<strong>回前 K</strong>個實體。</p></li>
+<li><p>使用指定的度量類型（<strong>COSINE</strong>）找出與查詢向量最相似的所有向量嵌入。</p></li>
+<li><p>篩選那些與查詢向量的<strong>距離或</strong> <strong>分數</strong>落在<strong>radius</strong>和<strong>range_filter</strong>參數所指定範圍內的向量嵌入。</p></li>
+<li><p>從篩選後的結果中返回<strong>前 K</strong>個實體。</p></li>
 </ul>
-<p>設定<strong>radius</strong>和<strong>range_filter</strong>的方式會因搜尋的度量類型而異。下表列出了在不同公制類型下設定這兩個參數的要求。</p>
+<p><strong>radius</strong>和<strong>range_filter</strong>的設定方式會因搜尋的度量類型而異。下表列出了針對不同度量類型設定這兩個參數的要求。</p>
 <table>
    <tr>
-     <th><p>公制類型</p></th>
-     <th><p>符號</p></th>
+     <th><p>度量類型</p></th>
+     <th><p>符號說明</p></th>
      <th><p>設定 radius 和 range_filter 的要求</p></th>
    </tr>
    <tr>
@@ -60,21 +62,21 @@ summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍�
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>IP 距離越大，表示相似度越高。</p></td>
-     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
+     <td><p>若要忽略最相似的向量嵌入，請確保</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>COSINE 距離越大，表示相似度越高。</p></td>
-     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
+     <td><p>若要忽略最相似的向量嵌入，請確保</p><p><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
-     <td><p>較小的 Jaccard 距離表示較高的相似度。</p></td>
-     <td><p>若要忽略最相似的向量內嵌，請確保</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
+     <td><p>較小的雅卡德距離表示相似度較高。</p></td>
+     <td><p>若要忽略最相似的向量嵌入，請確保</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
-     <td><p>Hamming 距離越小，表示相似度越高。</p></td>
+     <td><p>哈明距離越小，表示相似度越高。</p></td>
      <td><p>若要忽略最相似的向量嵌入，請確保</p><p><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p></td>
    </tr>
 </table>
@@ -93,10 +95,18 @@ summary: 範圍搜尋可將返回實體的距離或分數限制在特定範圍�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本節示範如何進行範圍搜尋。以下程式碼片段中的搜尋請求並不包含度量類型，這表示預設的度量類型<strong>COSINE</strong>適用。在這種情況下，請確<strong>保半徑</strong>值小於<strong>range_filter</strong>值。</p>
-<p>在下列程式碼片段中，請將<code translate="no">radius</code> 設定為<code translate="no">0.4</code> ，並將<code translate="no">range_filter</code> 設定為<code translate="no">0.6</code> ，以便 Milvus 會傳回所有與查詢向量的距離或分數在<strong>0.4</strong>至<strong>0.6</strong> 之間的實體。</p>
+    </button></h2><p>本節將示範如何進行範圍搜尋。以下程式碼片段中的搜尋請求未指定度量類型，表示將套用預設度量類型<strong>COSINE</strong>。在此情況下，請確保<strong>半徑值</strong>小於<strong>range_filter</strong>的值。</p>
+<p>在以下程式碼片段中，將 `<code translate="no">radius</code> ` 設定為 `<code translate="no">0.4</code> `，並將 `<code translate="no">range_filter</code> ` 設定為 `<code translate="no">0.6</code> `，以便 Milvus 返回所有與查詢向量距離或分數介於<strong>0.4</strong>至<strong>0.6</strong> 之間的實體。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -125,9 +135,13 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
- io.milvus.v2.service.vector.request.SearchReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+<span class="hljs-keyword">import</span> java.util.Collections;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Map;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -163,7 +177,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
-    
+
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
     <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
@@ -172,7 +186,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSe
 ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
-milvusAddr := <span class="hljs-string">&quot;localhost:19530&quot;</span>
+milvusAddr := <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: milvusAddr,
 })
@@ -204,6 +218,71 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
 }
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">config</span> = ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;config).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vector</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>];
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">response</span> = client
+    .<span class="hljs-title function_ invoke__">search</span>(
+        SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+            .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(<span class="hljs-built_in">vec!</span>[query_vector]))
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">5</span>)
+            .<span class="hljs-title function_ invoke__">radius</span>(<span class="hljs-number">0.4</span>)
+            .<span class="hljs-title function_ invoke__">range_filter</span>(<span class="hljs-number">0.6</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+<span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> response.<span class="hljs-title function_ invoke__">results</span>() {
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-keyword">auto</span> client = milvus::MilvusClientV2::<span class="hljs-built_in">Create</span>();
+<span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">Connect</span>(milvus::<span class="hljs-built_in">ConnectParam</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, <span class="hljs-string">&quot;root:Milvus&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Failed to connect: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+std::vector&lt;<span class="hljs-type">float</span>&gt; queryVector = {
+    <span class="hljs-number">0.35803764F</span>, <span class="hljs-number">-0.60234958F</span>, <span class="hljs-number">0.18414013F</span>, <span class="hljs-number">-0.26286206F</span>, <span class="hljs-number">0.90294385F</span>
+};
+
+<span class="hljs-keyword">auto</span> searchRequest = milvus::<span class="hljs-built_in">SearchRequest</span>()
+                         .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                         .<span class="hljs-built_in">WithAnnsField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                         .<span class="hljs-built_in">WithLimit</span>(<span class="hljs-number">5</span>)
+                         .<span class="hljs-built_in">WithRadius</span>(<span class="hljs-number">0.4</span>)
+                         .<span class="hljs-built_in">WithRangeFilter</span>(<span class="hljs-number">0.6</span>)
+                         .<span class="hljs-built_in">AddFloatVector</span>(queryVector);
+
+milvus::SearchResponse searchResponse;
+status = client-&gt;<span class="hljs-built_in">Search</span>(searchRequest, searchResponse);
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cerr &lt;&lt; <span class="hljs-string">&quot;Search failed: &quot;</span> &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+    <span class="hljs-keyword">return</span>;
+}
+
+<span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span>&amp; result : searchResponse.<span class="hljs-built_in">Results</span>().<span class="hljs-built_in">Results</span>()) {
+    <span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> ids = result.<span class="hljs-built_in">Ids</span>().<span class="hljs-built_in">IntIDArray</span>();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i &lt; result.<span class="hljs-built_in">Scores</span>().<span class="hljs-built_in">size</span>(); ++i) {
+        std::cout &lt;&lt; <span class="hljs-string">&quot;id=&quot;</span> &lt;&lt; ids[i] &lt;&lt; <span class="hljs-string">&quot;, score=&quot;</span> &lt;&lt; result.<span class="hljs-built_in">Scores</span>()[i] &lt;&lt; std::endl;
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> address = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
@@ -221,6 +300,33 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="highlighted-comment-line">        <span class="hljs-string">&quot;range_filter&quot;</span>: <span class="hljs-number">0.6</span></span>
 <span class="highlighted-comment-line">    }</span>
 })
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    ApiKey = <span class="hljs-string">&quot;root:Milvus&quot;</span>
+});
+<span class="hljs-keyword">await</span> client.ConnectAsync();
+
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>];
+
+SearchResp res = <span class="hljs-keyword">await</span> client.SearchAsync(<span class="hljs-keyword">new</span> SearchReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = [queryVector],
+    Limit = <span class="hljs-number">5</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters
+    {
+<span class="highlighted-comment-line">        Radius = <span class="hljs-string">&quot;0.4&quot;</span>,</span>
+<span class="highlighted-comment-line">        RangeFilter = <span class="hljs-string">&quot;0.6&quot;</span>,</span>
+        OutputFields = { <span class="hljs-string">&quot;color&quot;</span> }
+    }
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -247,5 +353,5 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果查詢向量已經存在於目標集合中，請考慮使用<code translate="no">ids</code> 來取代在搜尋前擷取它們。詳情請參閱<a href="/docs/zh-hant/primary-key-search.md">Primary-Key Search</a>。</p>
+<p>若查詢向量已存在於目標集合中，請考慮使用<code translate="no">ids</code> ，而非在搜尋前先將其擷取出來。詳細資訊請參閱《<a href="/docs/zh-hant/primary-key-search.md">主鍵搜尋</a>》。</p>
 </div>

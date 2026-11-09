@@ -57,7 +57,7 @@ title: Executar o Milvus com o Docker Compose (Linux)
       </svg>
     </button></h2><p>O Milvus disponibiliza um ficheiro de configuração do Docker Compose no repositório do Milvus. Para instalar o Milvus utilizando o Docker Compose, basta executar</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Download the configuration file</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.25/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.26/milvus-standalone-docker-compose.yml -O docker-compose.yml</span>
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">Start Milvus</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d</span>
@@ -67,13 +67,13 @@ Creating milvus-minio ... done
 Creating milvus-standalone ... done
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novidades na versão 2.6.25:</strong></p>
+<p><strong>Novidades na versão 2.6.26:</strong></p>
 <ul>
 <li><strong>Arquitetura melhorada</strong>: inclui o novo Nodo de Streaming e componentes otimizados</li>
 <li><strong>Dependências atualizadas</strong>: Inclui as versões mais recentes do MinIO e do etcd</li>
 <li><strong>Configuração melhorada</strong>: definições otimizadas para um melhor desempenho</li>
 </ul>
-<p>Descarregue sempre a configuração mais recente do Docker Compose para garantir a compatibilidade com as funcionalidades da v2.6.25.</p>
+<p>Descarregue sempre a configuração mais recente do Docker Compose para garantir a compatibilidade com as funcionalidades da v2.6.26.</p>
 <ul>
 <li><p>Se não conseguir executar o comando acima, verifique se o seu sistema tem o Docker Compose V1 instalado. Se for esse o caso, recomendamos que migre para o Docker Compose V2, de acordo com as notas <a href="https://docs.docker.com/compose/">nesta página</a>.</p></li>
 <li><p>Se tiver alguma dificuldade ao descarregar a imagem, contacte-nos através do endereço <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e iremos prestar-lhe o apoio necessário.</p></li>

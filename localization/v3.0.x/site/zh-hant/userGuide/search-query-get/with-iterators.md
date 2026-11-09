@@ -2,7 +2,7 @@
 id: with-iterators.md
 title: 搜尋迭代器
 summary: >-
-  ANN Search 對單次查詢中可檢索的實體數量設有上限，僅使用基本的 ANN Search 可能無法滿足大規模檢索的需求。 對於 topK 超過
+  ANN Search 對單次查詢中可檢索到的實體數量設有上限，僅使用基本的 ANN Search 可能無法滿足大規模檢索的需求。 對於 topK 超過
   16,384 的 ANN Search 請求，建議考慮使用 SearchIterator。本節將介紹如何使用 SearchIterator
   以及相關注意事項。
 ---
@@ -38,7 +38,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Search 請求會傳回搜尋結果，而 SearchIterator 則會傳回一個迭代器。您可以呼叫此迭代器的<strong>next()</strong>方法來取得搜尋結果。</p>
-<p>具體而言，您可以按照以下方式使用 SearchIterator：</p>
+<p>具體而言，您可以透過以下方式使用 SearchIterator：</p>
 <ol>
 <li><p>建立一個 SearchIterator，並設定<strong>每次搜尋請求要回傳的實體數量</strong>以及<strong>總共要回傳的實體數量</strong>。</p></li>
 <li><p>在迴圈中呼叫 SearchIterator 的<strong>next()</strong>方法，以分頁方式取得搜尋結果。</p></li>
@@ -64,7 +64,9 @@ summary: >-
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
  <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
  <a href="#cpp">   C++</a>
 </div>
@@ -93,10 +95,11 @@ iterator = collection.search_iterator(
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.orm.iterator.SearchIterator;
-<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam.MetricType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchIteratorReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
 
-<span class="hljs-keyword">import</span> java.util.*;
+<span class="hljs-keyword">import</span> java.util.Collections;
 
 <span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -109,12 +112,68 @@ iterator = collection.search_iterator(
         .vectors(Collections.singletonList(queryVector))
         .vectorFieldName(<span class="hljs-string">&quot;vector&quot;</span>)
         .batchSize(<span class="hljs-number">500L</span>)
-        .outputFields(Lists.newArrayList(<span class="hljs-string">&quot;color&quot;</span>))
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;color&quot;</span>))
         .topK(<span class="hljs-number">20000</span>)
-        .metricType(IndexParam.MetricType.COSINE)
+        .metricType(IndexParam.MetricType.L2)
         .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}
+
+<span class="hljs-comment">// create iterator</span>
+iterator, err := client.SearchIterator(ctx, milvusclient.NewSearchIteratorOption(<span class="hljs-string">&quot;iterator_collection&quot;</span>, entity.FloatVector(queryVector)).
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithAnnParam(index.NewIvfAnnParam(<span class="hljs-number">16</span>)).
+<span class="highlighted-wrapper-line">    WithBatchSize(<span class="hljs-number">50</span>).</span>
+    WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>).
+<span class="highlighted-wrapper-line">    WithIteratorLimit(<span class="hljs-number">20000</span>))</span>
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">client</span> = ClientV2::<span class="hljs-title function_ invoke__">new</span>(&amp;ConnectConfig::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">uri</span>(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>).<span class="hljs-title function_ invoke__">token</span>(<span class="hljs-string">&quot;root:Milvus&quot;</span>)).<span class="hljs-keyword">await</span>?;
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">query_vectors</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]];
+<span class="hljs-keyword">let</span> <span class="hljs-variable">iterator</span> = client
+    .<span class="hljs-title function_ invoke__">search_iterator</span>(
+        SearchIteratorRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">search</span>(
+                SearchRequest::<span class="hljs-title function_ invoke__">builder</span>()
+                    .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;iterator_collection&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">vector_field</span>(<span class="hljs-string">&quot;vector&quot;</span>)
+                    .<span class="hljs-title function_ invoke__">vectors</span>(SearchVectors::<span class="hljs-title function_ invoke__">Float</span>(query_vectors))
+                    .<span class="hljs-title function_ invoke__">output_fields</span>([<span class="hljs-string">&quot;color&quot;</span>])
+                    .<span class="hljs-title function_ invoke__">build</span>()?,
+            )
+            .<span class="hljs-title function_ invoke__">batch_size</span>(<span class="hljs-number">50</span>)
+            .<span class="hljs-title function_ invoke__">limit</span>(<span class="hljs-number">20000</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
 
@@ -128,7 +187,7 @@ iterator = collection.search_iterator(
 ];
 <span class="hljs-keyword">const</span> collectionName = <span class="hljs-string">&#x27;iterator_collection&#x27;</span>;
 
-<span class="hljs-keyword">const</span> iterator = milvusClient.<span class="hljs-title function_">searchIterator</span>({
+<span class="hljs-keyword">const</span> iterator = <span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">searchIterator</span>({
     <span class="hljs-attr">collection_name</span>: collectionName,
     <span class="hljs-attr">vectors</span>: queryVectors,
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;vector&#x27;</span>,
@@ -138,6 +197,31 @@ iterator = collection.search_iterator(
     <span class="hljs-attr">limit</span>: <span class="hljs-number">20000</span>,
 });
 
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Requests.Dql;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+MilvusClientV2 client = <span class="hljs-keyword">new</span>(<span class="hljs-keyword">new</span> ConnectConfig
+{
+    Uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    Username = <span class="hljs-string">&quot;root&quot;</span>,
+    Password = <span class="hljs-string">&quot;Milvus&quot;</span>
+});
+
+<span class="hljs-comment">// create iterator</span>
+<span class="hljs-built_in">float</span>[] queryVector = [<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>];
+
+SearchIterator iterator = client.SearchIteratorAsync(<span class="hljs-keyword">new</span> SearchIteratorReq
+{
+    CollectionName = <span class="hljs-string">&quot;iterator_collection&quot;</span>,
+    VectorFieldName = <span class="hljs-string">&quot;vector&quot;</span>,
+    Vectors = [queryVector],
+    MetricType = MetricType.L2,
+    BatchSize = <span class="hljs-number">50</span>,
+    Parameters = <span class="hljs-keyword">new</span> SearchParameters { OutputFields = { <span class="hljs-string">&quot;color&quot;</span> } },
+    Limit = <span class="hljs-number">20000</span>
+});
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -218,7 +302,9 @@ status = client-&gt;<span class="hljs-built_in">SearchIterator</span>(request, i
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
  <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
  <a href="#cpp">   C++</a>
 </div>
@@ -229,11 +315,13 @@ status = client-&gt;<span class="hljs-built_in">SearchIterator</span>(request, i
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> result:
 <span class="highlighted-wrapper-line">        iterator.close()</span>
         <span class="hljs-keyword">break</span>
-    
+
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> result:
         results.append(hit.to_dict())
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.response.QueryResultsWrapper;
+
+<span class="hljs-keyword">import</span> java.util.List;
 
 <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
     List&lt;QueryResultsWrapper.RowRecord&gt; res = searchIterator.next();
@@ -247,10 +335,39 @@ status = client-&gt;<span class="hljs-built_in">SearchIterator</span>(request, i
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">for</span> {
+<span class="highlighted-wrapper-line">    resultSet, err := iterator.Next(ctx)</span>
+    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+        <span class="hljs-comment">// io.EOF marks the end of the iterator</span>
+        <span class="hljs-keyword">break</span>
+    }
+
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">loop</span> {
+    <span class="hljs-keyword">let</span> <span class="hljs-variable">Some</span>(batch) = iterator.<span class="hljs-title function_ invoke__">next</span>().<span class="hljs-keyword">await</span>? <span class="hljs-keyword">else</span> {
+        iterator.<span class="hljs-title function_ invoke__">close</span>().<span class="hljs-keyword">await</span>?;
+        <span class="hljs-keyword">break</span>;
+    };
+    <span class="hljs-keyword">for</span> <span class="hljs-variable">result</span> <span class="hljs-keyword">in</span> batch.<span class="hljs-title function_ invoke__">results</span>() {
+        <span class="hljs-keyword">for</span> <span class="hljs-variable">row</span> <span class="hljs-keyword">in</span> result.<span class="hljs-title function_ invoke__">rows</span>()? {
+            <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;{:?}&quot;</span>, row.<span class="hljs-title function_ invoke__">to_entity_row</span>()?);
+        }
+    }
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">for</span> <span class="hljs-title function_">await</span> (<span class="hljs-keyword">const</span> result <span class="hljs-keyword">of</span> iterator) {
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> Milvus.Client.V2.Responses.Dql;
+
+<span class="hljs-comment">// Use SearchIterator</span>
+<span class="hljs-keyword">await</span> <span class="hljs-keyword">foreach</span> (SingleResult result <span class="hljs-keyword">in</span> iterator)
+{
+    Console.WriteLine(result.Scores);
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -316,4 +433,4 @@ offset=0
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述程式碼範例中，您已建立一個無限迴圈，並在迴圈中呼叫<strong>next()</strong>方法，將搜尋結果儲存至變數中，並在<strong>next()</strong>未返回任何結果時關閉迭代器。</p>
+<p>在上述程式碼範例中，您建立了一個無限迴圈，並在迴圈內呼叫<strong>next()</strong>方法，將搜尋結果儲存至變數中；當<strong>next()</strong>返回空值時，則關閉迭代器。</p>

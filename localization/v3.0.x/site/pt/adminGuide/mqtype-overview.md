@@ -50,7 +50,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li><p>Cada instância do Milvus utiliza exatamente uma fila de mensagens.</p></li>
-<li><p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.3, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p></li>
+<li><p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v3.0.5, deve manter a sua escolha atual de fila de mensagens. A alternância entre diferentes sistemas de filas de mensagens durante a atualização não é suportada. O suporte à alteração de sistemas de filas de mensagens estará disponível em versões futuras.</p></li>
 <li><p>Para alterar a fila de mensagens de uma instância em execução, consulte <a href="/docs/pt/switch-mq-type.md">«Alterar fila de mensagens</a>». A funcionalidade «Alterar MQ» está disponível no <strong>Milvus 3.0 e versões posteriores</strong> — atualize primeiro para o Milvus 3.0 ou uma versão posterior.</p></li>
 </ul>
 </div>
@@ -70,7 +70,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Novas implementações (Milvus 3.x):</strong> utilize <strong>o Woodpecker</strong> (a opção predefinida). Na versão autónoma, este é executado de forma incorporada; para a versão distribuída (cluster), a opção predefinida recomendada é um <a href="/docs/pt/woodpecker.md#Deployment-modes">serviço</a> dedicado implementado com o Helm, sendo que a execução incorporada também é suportada.</li>
+<li><strong>Novas implementações (Milvus 3.x):</strong> utilize <strong>o Woodpecker</strong> (a opção predefinida). Na versão autónoma, este é executado de forma incorporada; para a versão distribuída (cluster), a opção predefinida recomendada é um <a href="/docs/pt/woodpecker.md#Deployment-modes">serviço</a> dedicado implementado com o Helm, sendo também suportada a execução incorporada.</li>
 <li><strong>Utilizadores existentes do Pulsar ou do Kafka:</strong> o Pulsar e o Kafka continuam a ser totalmente suportados. Mantenha-os ou <a href="/docs/pt/switch-mq-type.md">mude para o Woodpecker</a>.</li>
 <li><strong>RocksMQ:</strong> apenas na versão autónoma e substituído pelo Woodpecker incorporado no Milvus 3.x.</li>
 </ul>

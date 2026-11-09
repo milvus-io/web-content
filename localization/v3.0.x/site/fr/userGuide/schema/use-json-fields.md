@@ -2,10 +2,10 @@
 id: use-json-fields.md
 title: Champ JSON
 summary: >-
-  Milvus vous permet de stocker et d'indexer des données structurées dans un
-  champ unique à l'aide du type de données JSON. Cela permet des schémas
-  flexibles avec des attributs imbriqués tout en permettant un filtrage efficace
-  via l'indexation JSON.
+  Milvus vous permet de stocker et d'indexer des données structurées au sein
+  d'un même champ à l'aide du type de données JSON. Cela permet de créer des
+  schémas flexibles comportant des attributs imbriqués, tout en garantissant un
+  filtrage efficace grâce à l'indexation JSON.
 ---
 <h1 id="JSON-Field" class="common-anchor-header">Champ JSON<button data-href="#JSON-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus vous permet de stocker et d'indexer des données structurées dans un champ unique à l'aide du type de données <code translate="no">JSON</code>. Cela permet des schémas flexibles avec des attributs imbriqués tout en permettant un filtrage efficace via l'indexation JSON.</p>
+    </button></h1><p>Milvus vous permet de stocker et d'indexer des données structurées au sein d'un seul champ à l'aide du type de données « <code translate="no">JSON</code> ». Cela permet de créer des schémas flexibles avec des attributs imbriqués, tout en garantissant un filtrage efficace grâce à l'indexation JSON.</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">Qu'est-ce qu'un champ JSON ?<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +38,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ JSON est un champ défini par un schéma dans Milvus qui stocke des données clé-valeur structurées. Les valeurs peuvent être des chaînes, des nombres, des booléens, des tableaux ou des objets profondément imbriqués.</p>
-<p>Voici un exemple de ce à quoi peut ressembler un champ JSON dans un document :</p>
+    </button></h2><p>Un champ JSON est un champ défini par un schéma dans Milvus qui stocke des données structurées de type clé-valeur. Les valeurs peuvent inclure des chaînes de caractères, des nombres, des valeurs booléennes, des tableaux ou des objets profondément imbriqués.</p>
+<p>Voici un exemple illustrant à quoi peut ressembler un champ JSON dans un document :</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electronics&quot;</span><span class="hljs-punctuation">,</span>
@@ -62,7 +62,7 @@ summary: >-
 <p>Dans cet exemple :</p>
 <ul>
 <li><p><code translate="no">metadata</code> est le champ JSON défini dans le schéma.</p></li>
-<li><p>Vous pouvez stocker des valeurs plates (par exemple <code translate="no">category</code>, <code translate="no">in_stock</code>), des tableaux (<code translate="no">tags</code>) et des objets imbriqués (<code translate="no">supplier</code>).</p></li>
+<li><p>Vous pouvez stocker des valeurs simples (par exemple <code translate="no">category</code>, <code translate="no">in_stock</code>), des tableaux (<code translate="no">tags</code>) et des objets imbriqués (<code translate="no">supplier</code>).</p></li>
 </ul>
 <h2 id="Define-a-JSON-field-in-the-schema" class="common-anchor-header">Définir un champ JSON dans le schéma<button data-href="#Define-a-JSON-field-in-the-schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,14 +80,19 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Pour utiliser un champ JSON, définissez-le explicitement dans le schéma de la collection en spécifiant <code translate="no">DataType</code> comme <code translate="no">JSON</code>.</p>
-<p>L'exemple ci-dessous crée une collection dont le schéma contient ces champs :</p>
+<p>L'exemple ci-dessous crée une collection dont le schéma contient les champs suivants :</p>
 <ul>
 <li><p>La clé primaire (<code translate="no">product_id</code>)</p></li>
-<li><p>Un champ <code translate="no">vector</code> (obligatoire pour chaque collection)</p></li>
-<li><p>Un champ <code translate="no">metadata</code> de type <code translate="no">JSON</code>, qui peut stocker des données structurées telles que des valeurs plates, des tableaux ou des objets imbriqués.</p></li>
+<li><p>Un champ « <code translate="no">vector</code> » (obligatoire pour chaque collection)</p></li>
+<li><p>Un champ « <code translate="no">metadata</code> » de type « <code translate="no">JSON</code> », pouvant stocker des données structurées telles que des valeurs plates, des tableaux ou des objets imbriqués</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -142,7 +147,7 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@zilliz/milvus2-sdk-node&#x27;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;localhost:19530&#x27;</span>
+  <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
 });
 
 <span class="hljs-comment">// Create collection</span>
@@ -181,7 +186,7 @@ ctx, cancel := context.WithCancel(context.Background())
 <span class="hljs-keyword">defer</span> cancel()
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-keyword">return</span> err
@@ -189,7 +194,7 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 
 schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">true</span>)
 schema.WithField(entity.NewField().
-    WithName(<span class="hljs-string">&quot;product_id&quot;</span>).pk
+    WithName(<span class="hljs-string">&quot;product_id&quot;</span>).
     WithDataType(entity.FieldTypeInt64).
     WithIsPrimaryKey(<span class="hljs-literal">true</span>),
 ).WithField(entity.NewField().
@@ -222,7 +227,7 @@ err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span 
 <span class="hljs-built_in">export</span> vectorField=<span class="hljs-string">&#x27;{
   &quot;fieldName&quot;: &quot;vector&quot;,
   &quot;dataType&quot;: &quot;FloatVector&quot;,
-  &quot;typeParams&quot;: {
+  &quot;elementTypeParams&quot;: {
     &quot;dim&quot;: 5
   }
 }&#x27;</span>
@@ -257,7 +262,7 @@ curl --request POST \
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Vous pouvez également activer la fonctionnalité de champ dynamique pour stocker des champs non déclarés de manière flexible, mais cela n'est pas nécessaire pour que les champs JSON fonctionnent. Pour plus d'informations, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
+<p>Vous pouvez également activer la fonctionnalité de champ dynamique pour stocker de manière flexible des champs non déclarés, mais cela n’est pas obligatoire pour que les champs JSON fonctionnent. Pour plus d’informations, consultez la section <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
 </div>
 <h2 id="Insert-entities-with-JSON-data" class="common-anchor-header">Insérer des entités avec des données JSON<button data-href="#Insert-entities-with-JSON-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -274,9 +279,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois la collection créée, insérez des entités contenant des objets JSON structurés dans le champ JSON <code translate="no">metadata</code>.</p>
+    </button></h2><p>Une fois la collection créée, insérez des entités contenant des objets JSON structurés dans le champ JSON « <code translate="no">metadata</code> ».</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">entities = [
     {
         <span class="hljs-string">&quot;product_id&quot;</span>: <span class="hljs-number">1</span>,
@@ -344,7 +354,7 @@ client.insert(InsertReq.builder()
         <span class="hljs-string">&quot;metadata&quot;</span>: {
             <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>,
             <span class="hljs-string">&quot;brand&quot;</span>: <span class="hljs-string">&quot;BrandA&quot;</span>,
-            <span class="hljs-string">&quot;in_stock&quot;</span>: <span class="hljs-title class_">True</span>,
+            <span class="hljs-string">&quot;in_stock&quot;</span>: <span class="hljs-literal">true</span>,
             <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>,
             <span class="hljs-string">&quot;string_price&quot;</span>: <span class="hljs-string">&quot;99.99&quot;</span>,
             <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;clearance&quot;</span>, <span class="hljs-string">&quot;summer_sale&quot;</span>],
@@ -374,7 +384,7 @@ client.insert(InsertReq.builder()
         []<span class="hljs-type">byte</span>(<span class="hljs-string">`{
             &quot;category&quot;: &quot;electronics&quot;,
             &quot;brand&quot;: &quot;BrandA&quot;,
-            &quot;in_stock&quot;: True,
+            &quot;in_stock&quot;: true,
             &quot;price&quot;: 99.99,
             &quot;string_price&quot;: &quot;99.99&quot;,
             &quot;tags&quot;: [&quot;clearance&quot;, &quot;summer_sale&quot;],
@@ -430,7 +440,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-values-inside-the-JSON-field" class="common-anchor-header">Indexer les valeurs à l'intérieur du champ JSON<button data-href="#Index-values-inside-the-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-values-inside-the-JSON-field" class="common-anchor-header">Indexer des valeurs dans le champ JSON<button data-href="#Index-values-inside-the-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -445,79 +455,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour accélérer le filtrage scalaire sur les champs JSON, Milvus prend en charge les types d'index suivants :</p>
-<ul>
-<li><p><strong>Index de chemin JSON</strong> - indexe des chemins JSON spécifiques avec un type de scalaire déclaré.</p></li>
-<li><p><strong>Index plat JSON</strong> - indexe un objet JSON entier (ou un sous-arbre) avec inférence automatique du type.</p></li>
-</ul>
+    </button></h2><p>Pour accélérer le filtrage scalaire sur les champs JSON, Milvus prend en charge <strong>l’indexation par chemin JSON</strong>, qui indexe des chemins JSON spécifiques avec un type scalaire déclaré.</p>
 <div class="alert note">
-<p>L'indexation des champs JSON est <strong>facultative</strong>. Il est toujours possible d'interroger ou de filtrer les chemins JSON sans index, mais les performances risquent d'être réduites en raison d'une recherche par force brute.</p>
+<p>L'indexation des champs JSON est <strong>facultative</strong>. Vous pouvez toujours effectuer des requêtes ou des filtrages par chemins JSON sans index, mais cela peut entraîner une baisse de performances en raison d'une recherche par force brute.</p>
 </div>
-<h3 id="Choose-between-path-index-and-flat-index--Milvus-26x" class="common-anchor-header">Choisissez entre l'index de chemin et l'index plat<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Choose-between-path-index-and-flat-index--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><table>
-   <tr>
-     <th><p><strong>Capacité</strong></p></th>
-     <th><p><strong>Index de chemin JSON</strong></p></th>
-     <th><p><strong>Index plat JSON</strong></p></th>
-   </tr>
-   <tr>
-     <td><p>Ce qu'il indexe</p></td>
-     <td><p>Le(s) chemin(s) spécifique(s) que vous avez nommé(s)</p></td>
-     <td><p>Tous les chemins aplatis sous un chemin d'objet</p></td>
-   </tr>
-   <tr>
-     <td><p>Gestion des types</p></td>
-     <td><p>Vous déclarez <code translate="no">json_cast_type</code> (types scalaires)</p></td>
-     <td><p>Doit être JSON (inférence de type automatique)</p></td>
-   </tr>
-   <tr>
-     <td><p>Tableaux en tant que LHS¹</p></td>
-     <td><p>Pris en charge</p></td>
-     <td><p>Non supporté</p></td>
-   </tr>
-   <tr>
-     <td><p>Vitesse d'interrogation</p></td>
-     <td><p><strong>Élevée</strong> sur les chemins indexés</p></td>
-     <td><p><strong>Élevée</strong>, légèrement inférieure en moyenne</p></td>
-   </tr>
-   <tr>
-     <td><p>Utilisation du disque</p></td>
-     <td><p>Plus faible</p></td>
-     <td><p>Plus élevée</p></td>
-   </tr>
-</table>
-<p>¹ <em>Tableaux en tant que LHS</em> signifie que le côté gauche de l'expression du filtre est un tableau JSON, par exemple :</p>
-<pre><code translate="no" class="language-plaintext">metadata[&quot;tags&quot;] == [&quot;clearance&quot;, &quot;summer_sale&quot;]
-json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
-<button class="copy-code-btn"></button></code></pre>
-<p>Dans ces cas, <code translate="no">metadata[&quot;tags&quot;]</code> est un tableau. L'indexation plate JSON n'accélère pas de tels filtres - utilisez plutôt un index de chemin JSON avec un type de cast de tableau.</p>
-<p><strong>Utilisez l'index de chemin JSON lorsque :</strong></p>
-<ul>
-<li><p>Vous connaissez à l'avance les raccourcis clavier à interroger.</p></li>
-<li><p>Vous devez filtrer lorsque le côté gauche est un tableau.</p></li>
-<li><p>Vous voulez minimiser l'utilisation du disque.</p></li>
-</ul>
-<p><strong>Utilisez l'index plat JSON lorsque :</strong></p>
-<ul>
-<li><p>Vous voulez indexer un sous-arbre entier (y compris la racine).</p></li>
-<li><p>Votre structure JSON change fréquemment.</p></li>
-<li><p>Vous souhaitez élargir la couverture des requêtes sans avoir à déclarer chaque chemin.</p></li>
-</ul>
-<h3 id="JSON-path-indexing" class="common-anchor-header">Indexation des chemins JSON<button data-href="#JSON-path-indexing" class="anchor-icon" translate="no">
+<h3 id="JSON-path-indexing" class="common-anchor-header">Indexation par chemin JSON<button data-href="#JSON-path-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -534,25 +476,25 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
       </svg>
     </button></h3><p>Pour créer un index de chemin JSON, spécifiez :</p>
 <ul>
-<li><p><strong>JSON path</strong> (<code translate="no">json_path</code>) : Le chemin d'accès à la clé ou au champ imbriqué de votre objet JSON que vous souhaitez indexer.</p>
+<li><p><strong>Chemin JSON</strong> (<code translate="no">json_path</code>) : le chemin d'accès à la clé ou au champ imbriqué de votre objet JSON que vous souhaitez indexer.</p>
 <ul>
 <li><p>Exemple :</p>
 <ul>
 <li><p>Pour une clé, <code translate="no">metadata[&quot;category&quot;]</code></p></li>
 <li><p>Pour un champ imbriqué, <code translate="no">metadata[&quot;contact&quot;][&quot;email&quot;]</code></p></li>
 </ul>
-<p>Ceci définit l'endroit où le moteur d'indexation doit regarder à l'intérieur de la structure JSON.</p></li>
+<p>Cela définit l'emplacement où le moteur d'indexation doit chercher au sein de la structure JSON.</p></li>
 </ul></li>
-<li><p><strong>JSON cast type</strong> (<code translate="no">json_cast_type</code>) : Le type de données que Milvus doit utiliser lors de l'interprétation et de l'indexation de la valeur au niveau du chemin spécifié.</p>
+<li><p><strong>Type de conversion JSON</strong> (<code translate="no">json_cast_type</code>) : type de données que Milvus doit utiliser pour interpréter et indexer la valeur située au chemin spécifié.</p>
 <ul>
-<li><p>Ce type doit correspondre au type de données réel du champ indexé. Si vous souhaitez convertir le type de données en un autre type lors de l'indexation, envisagez d'<a href="/docs/fr/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion">utiliser une fonction de conversion</a>.</p></li>
+<li><p>Ce type doit correspondre au type de données réel du champ indexé. Si vous souhaitez convertir le type de données en un autre lors de l’indexation, envisagez <a href="/docs/fr/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">d’utiliser une fonction de conversion</a>.</p></li>
 <li><p>Pour une liste complète, voir <a href="/docs/fr/use-json-fields.md#Supported-JSON-cast-types">ci-dessous</a>.</p></li>
 </ul></li>
 </ul>
-<h4 id="Supported-JSON-cast-types" class="common-anchor-header">Types de cast JSON pris en charge</h4><p>Les types de cast ne sont pas sensibles à la casse. Les types suivants sont pris en charge :</p>
+<h4 id="Supported-JSON-cast-types" class="common-anchor-header">Types de conversion JSON pris en charge</h4><p>Les types de conversion ne sont pas sensibles à la casse. Les types suivants sont pris en charge :</p>
 <table>
    <tr>
-     <th><p>Type de fonte</p></th>
+     <th><p>Type de conversion</p></th>
      <th><p>Description</p></th>
      <th><p>Exemple de valeur JSON</p></th>
    </tr>
@@ -563,12 +505,12 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
    <tr>
      <td><p><code translate="no">double</code></p></td>
-     <td><p>Valeur numérique (entier ou flottant)</p></td>
+     <td><p>Valeur numérique (entier ou nombre à virgule flottante)</p></td>
      <td><p><code translate="no">42</code>, <code translate="no">99.99</code>, <code translate="no">-15.5</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">varchar</code></p></td>
-     <td><p>Valeur de chaîne</p></td>
+     <td><p>Valeur de type chaîne</p></td>
      <td><p><code translate="no">"electronics"</code>, <code translate="no">"BrandA"</code></p></td>
    </tr>
    <tr>
@@ -588,11 +530,16 @@ json_contains(metadata[&quot;tags&quot;], &quot;clearance&quot;)
    </tr>
 </table>
 <div class="alert note">
-<p>Les tableaux doivent contenir des éléments du même type pour une indexation optimale. Pour plus d'informations, voir <a href="/docs/fr/array_data_type.md">Champ de tableau</a>.</p>
+<p>Les tableaux doivent contenir des éléments de même type pour une indexation optimale. Pour plus d’informations, reportez-vous à <a href="/docs/fr/array_data_type.md">la section</a> « <a href="/docs/fr/array_data_type.md">Champ de type tableau</a> ».</p>
 </div>
-<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Exemple : Créer des index de chemin JSON</h4><p>En utilisant la structure JSON <code translate="no">metadata</code> de notre introduction, voici des exemples de création d'index sur différents chemins JSON :</p>
+<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Exemple : création d’index de chemin JSON</h4><p>À l'aide de la structure JSON <code translate="no">metadata</code> de notre introduction, voici des exemples illustrant comment créer des index sur différents chemins JSON :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Index the category field as a string</span>
 index_params = client.prepare_index_params()
 
@@ -696,7 +643,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Use-JSON-cast-functions-for-type-conversion--Milvus-2514+" class="common-anchor-header">Utiliser les fonctions JSON cast pour la conversion de type<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>Si votre clé de champ JSON contient des valeurs dans un format incorrect (par exemple, des nombres stockés sous forme de chaînes), vous pouvez utiliser des fonctions cast pour convertir les valeurs lors de l'indexation.</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">Utilisez les fonctions de conversion JSON pour la conversion de types<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>Si la clé de votre champ JSON contient des valeurs dans un format incorrect (par exemple, des nombres stockés sous forme de chaînes de caractères), vous pouvez utiliser des fonctions de conversion pour convertir les valeurs lors de l’indexation.</p>
 <h5 id="Supported-cast-functions" class="common-anchor-header">Fonctions de conversion prises en charge</h5><p>Les fonctions de conversion ne sont pas sensibles à la casse. Les types suivants sont pris en charge :</p>
 <table>
    <tr>
@@ -706,12 +653,17 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
    </tr>
    <tr>
      <td><p><code translate="no">"STRING_TO_DOUBLE"</code></p></td>
-     <td><p>Chaîne → Numérique (double)</p></td>
-     <td><p>Convertir <code translate="no">"99.99"</code> en <code translate="no">99.99</code></p></td>
+     <td><p>Chaîne → Nombre (double)</p></td>
+     <td><p>Convertit l'<code translate="no">"99.99"</code> e en <code translate="no">99.99</code></p></td>
    </tr>
 </table>
-<h5 id="Example-Cast-string-numbers-to-double" class="common-anchor-header">Exemple : Convertir une chaîne de chiffres en double</h5><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<h5 id="Example-Cast-string-numbers-to-double" class="common-anchor-header">Exemple : conversion de chaînes de caractères représentant des nombres en double</h5><div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Convert string numbers to double for indexing</span>
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
@@ -768,84 +720,10 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Le paramètre <code translate="no">json_cast_type</code> est obligatoire et doit être identique au type de sortie de la fonction de conversion.</p></li>
-<li><p>Si la conversion échoue (par exemple, chaîne non numérique), la valeur est ignorée et n'est pas indexée.</p></li>
+<li><p>Le paramètre « <code translate="no">json_cast_type</code> » est obligatoire et doit correspondre au type de sortie de la fonction de conversion.</p></li>
+<li><p>Si la conversion échoue (par exemple, chaîne non numérique), la valeur est ignorée et n’est pas indexée.</p></li>
 </ul>
 </div>
-<h3 id="JSON-flat-indexing--Milvus-26x" class="common-anchor-header">Indexation plate JSON<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#JSON-flat-indexing--Milvus-26x" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Pour l'<strong>indexation plate JSON</strong>, Milvus indexe toutes les paires clé-valeur dans un chemin d'accès d'objet JSON (y compris les objets imbriqués) en <em>aplatissant</em> la structure JSON et en déduisant automatiquement le type de chaque valeur.</p>
-<h4 id="How-flattening-and-type-inference-work" class="common-anchor-header">Fonctionnement de l'aplatissement et de l'inférence de type</h4><p>Lorsque vous créez un index plat JSON sur un chemin d'objets, Milvus procède à</p>
-<ol>
-<li><p><strong>Aplatir</strong> - Parcourir récursivement l'objet à partir de l'adresse <code translate="no">json_path</code> spécifiée et extraire les paires clé-valeur imbriquées sous forme de chemins d'accès entièrement qualifiés. En utilisant l'exemple précédent <code translate="no">metadata</code>:</p>
-<pre><code translate="no" class="language-json"><span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;category&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;electronics&quot;</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;price&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">99.99</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">&quot;supplier&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;country&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;USA&quot;</span> <span class="hljs-punctuation">}</span>
-<span class="hljs-punctuation">}</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>devient :</p>
-<pre><code translate="no" class="language-plaintext">metadata[&quot;category&quot;] = &quot;electronics&quot;
-metadata[&quot;price&quot;] = 99.99
-metadata[&quot;supplier&quot;][&quot;country&quot;] = &quot;USA&quot;
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Déduire automatiquement les types</strong> - Pour chaque valeur, Milvus détermine son type dans l'ordre suivant :</p>
-<pre><code translate="no" class="language-plaintext">unsigned integer → signed integer → floating-point → string
-<button class="copy-code-btn"></button></code></pre>
-<p>Le premier type qui correspond à la valeur est utilisé pour l'indexation.</p>
-<p>Cela signifie que le type déduit sera toujours l'<strong>un de ces quatre</strong>.</p>
-<p>L'inférence de type est effectuée <strong>par document</strong>, de sorte que le même chemin peut avoir des types inférés différents d'un document à l'autre.</p>
-<p>Après l'inférence de type, les données aplaties sont représentées en interne sous forme de termes avec leurs types inférés, par exemple :</p>
-<pre><code translate="no" class="language-plaintext">(&quot;category&quot;, Text, &quot;electronics&quot;)
-(&quot;price&quot;, Double, 99.99)
-(&quot;supplier.country&quot;, Text, &quot;USA&quot;)
-<button class="copy-code-btn"></button></code></pre></li>
-</ol>
-<h4 id="Example-Create-JSON-flat-index" class="common-anchor-header">Exemple : Créer un index plat JSON</h4><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Create a flat index on the root object of the JSON column (covers the entire JSON subtree)</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,          <span class="hljs-comment"># Or &quot;INVERTED&quot;, same as Path Index</span>
-    index_name=<span class="hljs-string">&quot;metadata_flat&quot;</span>,      <span class="hljs-comment"># Unique index name</span>
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&#x27;metadata&#x27;</span>,     <span class="hljs-comment"># Object path: the root object of the column</span>
-<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;JSON&quot;</span>     <span class="hljs-comment"># Key difference: must be &quot;JSON&quot; for Flat Index; case-insensitive</span></span>
-    }
-)
-
-<span class="hljs-comment"># 2. Optionally, create a flat index on a sub-object (e.g., supplier subtree)</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;metadata&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-    index_name=<span class="hljs-string">&quot;metadata_supplier_flat&quot;</span>,
-    params={
-        <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&#x27;metadata[&quot;supplier&quot;]&#x27;</span>,  <span class="hljs-comment"># Object path: sub-object path</span>
-<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;JSON&quot;</span></span>
-    }
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
 <h3 id="Apply-indexes-to-the-collection" class="common-anchor-header">Appliquer des index à la collection<button data-href="#Apply-indexes-to-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -861,9 +739,14 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir défini les paramètres de l'index, vous pouvez les appliquer à la collection en utilisant <code translate="no">create_index()</code>:</p>
+    </button></h3><p>Après avoir défini les paramètres d'index, vous pouvez les appliquer à la collection à l'aide de ` <code translate="no">create_index()</code>` :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_index(
     collection_name=<span class="hljs-string">&quot;product_catalog&quot;</span>,
     index_params=index_params
@@ -890,6 +773,14 @@ indexTask3, err := client.CreateIndex(ctx, indexOpt3)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     <span class="hljs-keyword">return</span> err
 }
+indexTask4, err := client.CreateIndex(ctx, indexOpt4)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
+indexTask5, err := client.CreateIndex(ctx, indexOpt5)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-keyword">return</span> err
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&quot;[
@@ -907,7 +798,7 @@ curl --request POST \
   \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Filter-by-JSON-field-values" class="common-anchor-header">Filtrer sur les valeurs des champs JSON<button data-href="#Filter-by-JSON-field-values" class="anchor-icon" translate="no">
+<h2 id="Filter-by-JSON-field-values" class="common-anchor-header">Filtrer selon les valeurs des champs JSON<button data-href="#Filter-by-JSON-field-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -922,38 +813,43 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir inséré et indexé les champs JSON, vous pouvez les filtrer à l'aide d'expressions de filtrage standard avec la syntaxe du chemin JSON.</p>
-<p>Par exemple, vous pouvez filtrer les valeurs des champs JSON :</p>
+    </button></h2><p>Après avoir inséré et indexé des champs JSON, vous pouvez les filtrer à l'aide d'expressions de filtrage standard utilisant la syntaxe JSON Path.</p>
+<p>Par exemple :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>;
-<span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">filterCategory</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata[\&quot;category\&quot;] == \&quot;electronics\&quot;&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filterPrice</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;metadata[\&quot;price\&quot;] &gt; 50&quot;</span>;
+<span class="hljs-type">String</span> <span class="hljs-variable">filterTags</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;json_contains(metadata[\&quot;tags\&quot;], \&quot;featured\&quot;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">let</span> filter = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
-<span class="hljs-keyword">let</span> filter = <span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>
-<span class="hljs-keyword">let</span> filter = <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filterCategory = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>;
+<span class="hljs-keyword">const</span> filterPrice = <span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>;
+<span class="hljs-keyword">const</span> filterTags = <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">filter := <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
-filter := <span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>
-filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>
+<pre><code translate="no" class="language-go">filterCategory := <span class="hljs-string">`metadata[&quot;category&quot;] == &quot;electronics&quot;`</span>
+filterPrice := <span class="hljs-string">`metadata[&quot;price&quot;] &gt; 50`</span>
+filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)`</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> filterCategory=<span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot;&#x27;</span>
 <span class="hljs-built_in">export</span> filterPrice=<span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>
 <span class="hljs-built_in">export</span> filterTags=<span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour utiliser ces expressions dans une recherche ou une requête, assurez-vous que</p>
+<p>Pour utiliser ces expressions dans une recherche ou une requête, assurez-vous que :</p>
 <ul>
-<li><p>Vous avez créé un index sur chaque champ vectoriel.</p></li>
+<li><p>Vous ayez créé un index sur chaque champ vectoriel.</p></li>
 <li><p>La collection est chargée en mémoire.</p></li>
 </ul>
-<p>Pour obtenir la liste complète des opérateurs et expressions pris en charge, reportez-vous à <a href="/docs/fr/json-operators.md">Opérateurs JSON</a>.</p>
-<h2 id="Pull-it-all-together" class="common-anchor-header">Rassembler tous les éléments<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
+<p>Pour obtenir la liste complète des opérateurs et expressions pris en charge, consultez la section <a href="/docs/fr/json-operators.md">Opérateurs JSON</a>.</p>
+<h2 id="Pull-it-all-together" class="common-anchor-header">Rassemblez le tout<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -968,15 +864,15 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous avez maintenant appris à définir, insérer et éventuellement indexer des valeurs structurées à l'intérieur d'un champ JSON.</p>
-<p>Pour compléter le flux de travail dans une application réelle, vous devrez également :</p>
+    </button></h2><p>À ce stade, vous avez appris à définir, insérer et, si vous le souhaitez, indexer des valeurs structurées dans un champ JSON.</p>
+<p>Pour finaliser le workflow dans une application concrète, vous devrez également :</p>
 <ul>
-<li><p><strong>Créer un index sur vos champs vectoriels</strong> (obligatoire pour chaque champ vectoriel d'une collection)</p>
-<p>Se référer à <a href="/docs/fr/create-collection.md#Optional-Set-Index-Parameters">Définir les paramètres de l'index</a></p></li>
+<li><p><strong>Créer un index sur vos champs vectoriels</strong> (obligatoire pour chaque champ vectoriel d’une collection)</p>
+<p>Consultez la section <a href="/docs/fr/create-collection.md#Optional-Set-Index-Parameters">Définir les paramètres d’index</a></p></li>
 <li><p><strong>Charger la collection</strong></p>
-<p>Voir <a href="/docs/fr/load-and-release.md">Charger et libérer</a></p></li>
-<li><p><strong>Effectuer des recherches ou des requêtes à l'aide de filtres de chemin JSON</strong></p>
-<p>Voir <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/json-operators.md">opérateurs JSON</a></p></li>
+<p>Reportez-vous à la section « <a href="/docs/fr/load-and-release.md">Chargement et libération</a> »</p></li>
+<li><p><strong>Effectuer une recherche ou une requête à l’aide de filtres de chemin JSON</strong></p>
+<p>Voir « <a href="/docs/fr/filtered-search.md">Recherche filtrée</a> et <a href="/docs/fr/json-operators.md">opérateurs JSON</a> »</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1009,12 +905,12 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
         ></path>
       </svg>
     </button></h3><ul>
-<li><p>Le<strong>champ JSON</strong> est défini par le schéma. Vous devez déclarer explicitement le champ dans le schéma.</p></li>
-<li><p>Le<strong>champ dynamique</strong> est un objet JSON caché (<code translate="no">$meta</code>) qui stocke automatiquement tout champ non défini dans le schéma.</p></li>
+<li><p><strong>Un champ JSON</strong> est défini dans le schéma. Vous devez déclarer explicitement ce champ dans le schéma.</p></li>
+<li><p><strong>Un champ dynamique</strong> est un objet JSON masqué (<code translate="no">$meta</code>) qui stocke automatiquement tout champ non défini dans le schéma.</p></li>
 </ul>
-<p>Les deux types de champs prennent en charge les structures imbriquées et l'indexation des chemins JSON, mais les champs dynamiques conviennent mieux aux structures de données facultatives ou évolutives.</p>
-<p>Pour plus de détails, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
-<h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Y a-t-il des limites à la taille d'un champ JSON ?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
+<p>Les deux prennent en charge les structures imbriquées et l'indexation par chemin JSON, mais les champs dynamiques sont plus adaptés aux structures de données facultatives ou évolutives.</p>
+<p>Pour plus de détails, consultez la section « <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a> ».</p>
+<h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">Y a-t-il des limitations concernant la taille d'un champ JSON ?<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1045,9 +941,9 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non, les champs JSON ne prennent pas en charge les valeurs par défaut. Toutefois, vous pouvez définir <code translate="no">nullable=True</code> lors de la définition du champ afin d'autoriser les entrées vides.</p>
-<p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p>
-<h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Existe-t-il des conventions de dénomination pour les clés des champs JSON ?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
+    </button></h3><p>Non, les champs JSON ne prennent pas en charge les valeurs par défaut. Cependant, vous pouvez définir l'<code translate="no">nullable=True</code> lors de la définition du champ pour autoriser les entrées vides.</p>
+<p>Pour plus d'informations, consultez la section « <a href="/docs/fr/nullable-and-default.md">Valeurs nulles et valeurs par défaut</a> ».</p>
+<h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Existe-t-il des conventions de nommage pour les clés des champs JSON ?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1062,13 +958,13 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui, pour assurer la compatibilité avec les requêtes et l'indexation :</p>
+    </button></h3><p>Oui, afin de garantir la compatibilité avec les requêtes et l'indexation :</p>
 <ul>
-<li><p>Utilisez uniquement des lettres, des chiffres et des traits de soulignement dans les clés JSON.</p></li>
+<li><p>N'utilisez que des lettres, des chiffres et des traits de soulignement dans les clés JSON.</p></li>
 <li><p>Évitez d'utiliser des caractères spéciaux, des espaces ou des points (<code translate="no">.</code>, <code translate="no">/</code>, etc.).</p></li>
-<li><p>Les clés incompatibles peuvent entraîner des problèmes d'analyse dans les expressions de filtre.</p></li>
+<li><p>Des clés incompatibles peuvent entraîner des problèmes d'analyse dans les expressions de filtrage.</p></li>
 </ul>
-<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Comment Milvus gère-t-il les valeurs de chaîne dans les champs JSON ?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
+<h3 id="How-does-Milvus-handle-string-values-in-JSON-fields" class="common-anchor-header">Comment Milvus gère-t-il les valeurs de type chaîne de caractères dans les champs JSON ?<button data-href="#How-does-Milvus-handle-string-values-in-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1083,7 +979,7 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus stocke les valeurs de chaîne exactement comme elles apparaissent dans l'entrée JSON, sans transformation sémantique. Les chaînes mal citées peuvent entraîner des erreurs lors de l'analyse.</p>
+    </button></h3><p>Milvus stocke les valeurs de type chaîne exactement telles qu’elles apparaissent dans le fichier JSON d’entrée, sans transformation sémantique. Les chaînes mal mises entre guillemets peuvent entraîner des erreurs lors de l’analyse.</p>
 <p><strong>Exemples de chaînes valides</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>
@@ -1107,13 +1003,13 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
       </svg>
     </button></h3><ul>
 <li><p><strong>Indexation numérique</strong>:</p>
-<p>Si un index est créé avec <code translate="no">json_cast_type=&quot;double&quot;</code>, seules les conditions de filtrage numériques (par exemple, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) tireront parti de l'index. Les conditions non numériques peuvent revenir à un balayage par force brute.</p></li>
-<li><p><strong>Indexation des chaînes de caractères</strong>:</p>
-<p>Si un index utilise <code translate="no">json_cast_type=&quot;varchar&quot;</code>, seules les conditions de filtrage de chaînes de caractères bénéficieront de l'index ; les autres types de conditions risquent d'aboutir à une analyse par force brute.</p></li>
+<p>Si un index est créé avec l'option « <code translate="no">json_cast_type=&quot;double&quot;</code> », seules les conditions de filtrage numériques (par exemple, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) exploiteront cet index. Les conditions non numériques peuvent recourir à un balayage par force brute.</p></li>
+<li><p><strong>Indexation de chaînes</strong>:</p>
+<p>Si un index utilise <code translate="no">json_cast_type=&quot;varchar&quot;</code>, seules les conditions de filtrage de chaînes de caractères bénéficieront de l’index ; les autres types peuvent recourir à une analyse par force brute.</p></li>
 <li><p><strong>Indexation booléenne</strong>:</p>
-<p>L'indexation booléenne se comporte de la même manière que l'indexation de chaînes de caractères, l'index n'étant utilisé que lorsque la condition correspond strictement à vrai ou faux.</p></li>
+<p>L'indexation booléenne se comporte de manière similaire à l'indexation de chaînes de caractères : l'index n'est utilisé que lorsque la condition correspond strictement à « vrai » ou « faux ».</p></li>
 </ul>
-<h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Qu'en est-il de la précision numérique lors de l'indexation des champs JSON ?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
+<h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Qu’en est-il de la précision numérique lors de l’indexation des champs JSON ?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1128,9 +1024,9 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus stocke toutes les valeurs numériques indexées sous forme de doubles.</p>
-<p>Si une valeur numérique dépasse <strong>2^53</strong>, elle peut perdre en précision. Cette perte de précision peut avoir pour conséquence que les requêtes de filtrage ne correspondent pas exactement aux valeurs hors plage.</p>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Puis-je créer plusieurs index sur le même chemin JSON avec différents types de cast ?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="anchor-icon" translate="no">
+    </button></h3><p>Milvus stocke toutes les valeurs numériques indexées sous forme de nombres à virgule flottante (double).</p>
+<p>Si une valeur numérique dépasse <strong>2^53</strong>, elle peut perdre en précision. Cette perte de précision peut empêcher les requêtes de filtrage de correspondre exactement aux valeurs hors plage.</p>
+<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Puis-je créer plusieurs index sur un même chemin JSON avec différents types de conversion ?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1145,8 +1041,8 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non, chaque chemin JSON <strong>ne</strong> prend en charge <strong>qu'un seul index</strong>. Vous devez choisir un seul <code translate="no">json_cast_type</code> qui correspond à vos données. La création de plusieurs index sur le même chemin avec des types de distribution différents n'est pas prise en charge.</p>
-<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Que se passe-t-il si les valeurs d'un chemin JSON ont des types incohérents ?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
+    </button></h3><p>Non, chaque chemin JSON <strong>ne</strong> prend en charge <strong>qu’un seul index</strong>. Vous devez choisir un seul type de conversion ( <code translate="no">json_cast_type</code> ) correspondant à vos données. La création de plusieurs index sur un même chemin avec des types de conversion différents n’est pas prise en charge.</p>
+<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Que se passe-t-il si les valeurs d’un chemin JSON ont des types incohérents ?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1161,8 +1057,8 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les types incohérents entre les entités peuvent entraîner une <strong>indexation partielle</strong>. Par exemple, si <code translate="no">metadata[&quot;price&quot;]</code> est stocké à la fois sous la forme d'un nombre (<code translate="no">99.99</code>) et d'une chaîne de caractères (<code translate="no">&quot;99.99&quot;</code>), et que l'index est défini avec <code translate="no">json_cast_type=&quot;double&quot;</code>, seules les valeurs numériques seront indexées. Les entrées sous forme de chaîne de caractères seront ignorées et n'apparaîtront pas dans les résultats du filtre.</p>
-<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Puis-je utiliser des filtres d'un type différent de celui de la distribution indexée ?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+    </button></h3><p>Des types incohérents entre les entités peuvent entraîner <strong>une indexation partielle</strong>. Par exemple, si l’ <code translate="no">metadata[&quot;price&quot;]</code> est stockée à la fois sous forme de nombre (<code translate="no">99.99</code>) et de chaîne de caractères (<code translate="no">&quot;99.99&quot;</code>), et que l’index est défini avec <code translate="no">json_cast_type=&quot;double&quot;</code>, seules les valeurs numériques seront indexées. Les entrées sous forme de chaîne de caractères seront ignorées et n’apparaîtront pas dans les résultats du filtre.</p>
+<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Puis-je utiliser des filtres avec un type différent de celui de l’index ?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1177,4 +1073,4 @@ filter := <span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si l'expression de votre filtre utilise un type différent de celui de l'index <code translate="no">json_cast_type</code>, le système <strong>n'utilisera pas l'index</strong> et pourra revenir à un balayage brut plus lent, si les données le permettent. Pour des performances optimales, alignez toujours votre expression de filtrage sur le type de distribution de l'index.</p>
+    </button></h3><p>Si votre expression de filtrage utilise un type différent de celui de l’ <code translate="no">json_cast_type</code> de l’index, le système <strong>n’utilisera pas l’index</strong> et pourra recourir à un balayage par force brute, plus lent, si les données le permettent. Pour des performances optimales, veillez à toujours aligner votre expression de filtrage sur le type de conversion de l’index.</p>

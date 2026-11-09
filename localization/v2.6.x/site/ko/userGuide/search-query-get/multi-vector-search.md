@@ -2,11 +2,12 @@
 id: multi-vector-search.md
 title: 다중 벡터 하이브리드 검색
 summary: >-
-  많은 애플리케이션에서 개체는 제목, 설명과 같은 다양한 정보 또는 텍스트, 이미지, 오디오와 같은 여러 양식으로 검색할 수 있습니다. 예를
-  들어, 텍스트와 이미지가 포함된 트윗의 경우 텍스트나 이미지 중 하나가 검색 쿼리의 의미와 일치하면 검색됩니다. 하이브리드 검색은 이러한
-  다양한 분야의 검색을 결합하여 검색 경험을 향상시킵니다. 밀버스는 여러 벡터 필드에 대한 검색을 허용하고 여러 개의 근사 이웃(ANN)
-  검색을 동시에 수행함으로써 이를 지원합니다. 다중 벡터 하이브리드 검색은 텍스트와 이미지, 동일한 객체를 설명하는 여러 텍스트 필드 또는
-  검색 품질을 개선하기 위해 조밀하고 희박한 벡터를 모두 검색하려는 경우에 특히 유용합니다.
+  많은 애플리케이션에서, 객체는 제목이나 설명과 같은 다양한 정보나 텍스트, 이미지, 오디오와 같은 여러 모달리티를 통해 검색될 수 있습니다.
+  예를 들어, 텍스트와 이미지가 포함된 트윗의 경우, 텍스트나 이미지 중 하나라도 검색 쿼리의 의미와 일치하면 검색 대상이 됩니다. 하이브리드
+  검색은 이러한 다양한 영역에 걸친 검색을 결합하여 검색 경험을 향상시킵니다. Milvus는 여러 벡터 필드에 대한 검색을 허용하고, 여러
+  개의 근사 최인접 이웃(ANN) 검색을 동시에 수행함으로써 이를 지원합니다. 다중 벡터 하이브리드 검색은 텍스트와 이미지를 모두 검색하거나,
+  동일한 객체를 설명하는 여러 텍스트 필드를 검색하거나, 검색 품질을 높이기 위해 밀집 벡터와 희소 벡터를 함께 검색하려는 경우에 특히
+  유용합니다.
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">다중 벡터 하이브리드 검색<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,15 +24,17 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>많은 애플리케이션에서 개체는 제목, 설명과 같은 다양한 정보 또는 텍스트, 이미지, 오디오와 같은 여러 양식으로 검색될 수 있습니다. 예를 들어, 텍스트와 이미지가 포함된 트윗의 경우 텍스트나 이미지 중 하나가 검색 쿼리의 의미와 일치하면 검색됩니다. 하이브리드 검색은 이러한 다양한 분야의 검색을 결합하여 검색 경험을 향상시킵니다. 밀버스는 여러 벡터 필드에 대한 검색을 허용하고 여러 개의 근사 이웃(ANN) 검색을 동시에 수행함으로써 이를 지원합니다. 다중 벡터 하이브리드 검색은 텍스트와 이미지, 동일한 객체를 설명하는 여러 텍스트 필드 또는 검색 품질을 개선하기 위해 조밀하고 희박한 벡터를 모두 검색하려는 경우에 특히 유용합니다.</p>
-<p>
+    </button></h1><p>많은 응용 분야에서, 객체는 제목이나 설명과 같은 다양한 정보 세트나 텍스트, 이미지, 오디오와 같은 여러 모달리티를 통해 검색될 수 있습니다. 예를 들어, 텍스트와 이미지가 포함된 트윗은 텍스트나 이미지 중 어느 하나라도 검색 쿼리의 의미와 일치할 경우 검색 대상이 됩니다. 하이브리드 검색은 이러한 다양한 영역에 걸친 검색을 결합하여 검색 경험을 향상시킵니다. Milvus는 여러 벡터 필드에 대한 검색을 허용하고, 여러 개의 근사 최인접 이웃(ANN) 검색을 동시에 수행함으로써 이를 지원합니다. 다중 벡터 하이브리드 검색은 텍스트와 이미지를 모두 검색하거나, 동일한 객체를 설명하는 여러 텍스트 필드를 검색하거나, 검색 품질을 높이기 위해 밀집 벡터와 희소 벡터를 함께 검색하려는 경우에 특히 유용합니다.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-   </span> <span class="img-wrapper"> <span>하이브리드 검색 워크플로</span> </span></p>
-<p>다중 벡터 하이브리드 검색은 서로 다른 검색 방법을 통합하거나 다양한 양식의 임베딩을 포괄합니다:</p>
+   <img translate="no" src="/docs/v2.6.x/assets/hybrid-search-workflow.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" /> 
+   <span>하이브리드 검색 워크플로우</span>
+  
+ </span></p>
+<p>다중 벡터 하이브리드 검색은 서로 다른 검색 방법을 통합하거나 다양한 모달리티의 임베딩을 아우릅니다:</p>
 <ul>
-<li><p><strong>스파스-밀도 벡터 검색</strong>: <a href="/docs/ko/v2.6.x/dense-vector.md">고밀도 벡터는</a> 의미론적 관계를 포착하는 데 탁월한 반면, <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터는</a> 정확한 키워드 매칭에 매우 효과적입니다. 하이브리드 검색은 이러한 접근 방식을 결합하여 폭넓은 개념 이해와 정확한 용어 관련성을 모두 제공함으로써 검색 결과를 개선합니다. 하이브리드 검색은 각 방법의 강점을 활용함으로써 개별 접근 방식의 한계를 극복하고 복잡한 쿼리에 대해 더 나은 성능을 제공합니다. 시맨틱 검색과 전체 텍스트 검색을 결합한 하이브리드 검색에 대한 자세한 <a href="/docs/ko/v2.6.x/full_text_search_with_milvus.md">가이드는</a> 다음과 같습니다.</p></li>
-<li><p><strong>멀티모달 벡터 검색</strong>: 멀티모달 벡터 검색은 텍스트, 이미지, 오디오 등 다양한 데이터 유형에 걸쳐 검색할 수 있는 강력한 기술입니다. 이 접근 방식의 가장 큰 장점은 다양한 방식을 매끄럽고 일관된 검색 환경으로 통합할 수 있다는 점입니다. 예를 들어, 제품 검색에서 사용자가 텍스트 쿼리를 입력하면 텍스트와 이미지로 설명된 제품을 모두 찾을 수 있습니다. 하이브리드 검색 방식을 통해 이러한 검색 방식을 결합하면 검색 정확도를 높이거나 검색 결과를 더욱 풍부하게 만들 수 있습니다.</p></li>
+<li><p><strong>스파스-덴스 벡터 검색</strong>: <a href="/docs/ko/v2.6.x/dense-vector.md">덴스 벡터는</a> 의미적 관계를 포착하는 데 탁월한 반면, <a href="/docs/ko/v2.6.x/sparse_vector.md">스파스 벡터는</a> 정확한 키워드 일치에 매우 효과적입니다. 하이브리드 검색은 이러한 접근 방식을 결합하여 광범위한 개념적 이해와 정확한 용어 관련성을 모두 제공함으로써 검색 결과를 개선합니다. 각 방법의 장점을 활용함으로써 하이브리드 검색은 개별 접근 방식의 한계를 극복하고, 복잡한 쿼리에 대해 더 나은 성능을 제공합니다. 다음은 의미 검색과 전체 텍스트 검색을 결합한 하이브리드 검색에 대한 보다 자세한 <a href="/docs/ko/v2.6.x/full_text_search_with_milvus.md">가이드입니다</a>.</p></li>
+<li><p><strong>다중 모달 벡터 검색</strong>: 다중 모달 벡터 검색은 텍스트, 이미지, 오디오 등 다양한 데이터 유형을 아우르는 검색을 가능하게 하는 강력한 기술입니다. 이 접근 방식의 주요 장점은 서로 다른 모달리티를 통합하여 매끄럽고 일관된 검색 경험을 제공한다는 점입니다. 예를 들어, 상품 검색에서 사용자는 텍스트와 이미지로 모두 설명된 상품을 찾기 위해 텍스트 쿼리를 입력할 수 있습니다. 하이브리드 검색 방식을 통해 이러한 모달리티를 결합함으로써 검색 정확도를 높이거나 검색 결과를 더욱 풍부하게 만들 수 있습니다.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">예시<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,14 +51,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>각 제품에 텍스트 설명과 이미지가 포함되어 있는 실제 사용 사례를 고려해 보겠습니다. 사용 가능한 데이터를 기반으로 세 가지 유형의 검색을 수행할 수 있습니다:</p>
+    </button></h2><p>각 제품에 텍스트 설명과 이미지가 포함된 실제 사용 사례를 살펴보겠습니다. 이용 가능한 데이터를 바탕으로 다음 세 가지 유형의 검색을 수행할 수 있습니다:</p>
 <ul>
-<li><p><strong>시맨틱 텍스트 검색:</strong> 여기에는 고밀도 벡터를 사용하여 제품의 텍스트 설명을 쿼리하는 것이 포함됩니다. 텍스트 임베딩은 <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a>, <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers와</a> 같은 모델이나 <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI와</a> 같은 서비스를 사용하여 생성할 수 있습니다.</p></li>
-<li><p><strong>전체 텍스트 검색</strong>: 여기서는 희소 벡터와 키워드 일치를 사용하여 제품의 텍스트 설명을 쿼리합니다. 이를 위해 <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25와</a> 같은 알고리즘이나 <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a> 또는 <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE와</a> 같은 스파스 임베딩 모델을 활용할 수 있습니다.</p></li>
-<li><p><strong>멀티모달 이미지 검색:</strong> 이 방법은 고밀도 벡터가 포함된 텍스트 쿼리를 사용하여 이미지를 쿼리합니다. 이미지 임베딩은 <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP과</a> 같은 모델을 사용하여 생성할 수 있습니다.</p></li>
+<li><p><strong>의미론적 텍스트 검색:</strong> 이는 밀집 벡터를 사용하여 제품의 텍스트 설명을 검색하는 방식입니다. 텍스트 임베딩은 <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#A-Quick-Recap-of-BERT">BERT</a> 및 <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI?_gl=1*d243m9*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.">Transformers와</a> 같은 모델이나 <a href="https://zilliz.com/learn/guide-to-using-openai-text-embedding-models">OpenAI와</a> 같은 서비스를 통해 생성할 수 있습니다.</p></li>
+<li><p><strong>전체 텍스트 검색</strong>: 이 경우, 스파스 벡터를 활용한 키워드 매칭을 통해 제품의 텍스트 설명을 검색합니다. 이를 위해 <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25와</a> 같은 알고리즘이나 <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*1cde1oq*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#BGE-M3">BGE-M3</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings?_gl=1*ov2die*_gcl_au*MjcyNTAwMzUyLjE3NDMxMzE1MjY.*_ga*MTQ3OTI4MDc5My4xNzQzMTMxNTI2*_ga_KKMVYG8YF2*MTc0NTkwODU0Mi45NC4xLjE3NDU5MDg4MzcuMC4wLjA.#SPLADE">SPLADE와</a> 같은 스파스 임베딩 모델을 활용할 수 있습니다.</p></li>
+<li><p><strong>다중 모달 이미지 검색:</strong> 이 방법은 밀집 벡터를 활용한 텍스트 쿼리를 통해 이미지를 검색합니다. 이미지 임베딩은 <a href="https://zilliz.com/learn/exploring-openai-clip-the-future-of-multimodal-ai-learning">CLIP과</a> 같은 모델을 사용하여 생성할 수 있습니다.</p></li>
 </ul>
-<p>이 가이드에서는 제품의 원시 텍스트 설명과 이미지 임베딩이 주어졌을 때 위의 검색 방법을 결합한 멀티모달 하이브리드 검색의 예시를 안내합니다. 다중 벡터 데이터를 저장하고 재랭크 전략으로 하이브리드 검색을 수행하는 방법을 보여드리겠습니다.</p>
-<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">여러 벡터 필드가 있는 컬렉션 만들기<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
+<p>이 가이드에서는 제품의 원본 텍스트 설명과 이미지 임베딩을 바탕으로, 위의 검색 방법을 결합한 다중 모달 하이브리드 검색의 예시를 단계별로 안내합니다. 다중 벡터 데이터를 저장하는 방법과 재순위 지정 전략을 활용한 하이브리드 검색 수행 방법을 시연할 것입니다.</p>
+<h2 id="Create-a-collection-with-multiple-vector-fields" class="common-anchor-header">여러 벡터 필드가 포함된 컬렉션 생성<button data-href="#Create-a-collection-with-multiple-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,7 +73,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션을 만드는 과정에는 컬렉션 스키마 정의, 인덱스 매개변수 구성, 컬렉션 생성의 세 가지 주요 단계가 포함됩니다.</p>
+    </button></h2><p>컬렉션을 생성하는 과정에는 컬렉션 스키마 정의, 인덱스 매개변수 구성, 컬렉션 생성이라는 세 가지 주요 단계가 포함됩니다.</p>
 <h3 id="Define-schema" class="common-anchor-header">스키마 정의<button data-href="#Define-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,18 +89,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다중 벡터 하이브리드 검색의 경우 컬렉션 스키마 내에 여러 개의 벡터 필드를 정의해야 합니다. 컬렉션에 허용되는 벡터 필드 개수 제한에 대한 자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">질리즈 클라우드 제한을</a> 참조하세요.  그러나 필요한 경우, 컬렉션에 최대 10개까지 벡터 필드를 포함하도록 <a href="/docs/ko/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> 를 조정하여 필요에 따라 컬렉션에 최대 10개까지 벡터 필드를 포함할 수 있습니다.</p>
+    </button></h3><p>다중 벡터 하이브리드 검색을 위해서는 컬렉션 스키마 내에 여러 벡터 필드를 정의해야 합니다. 컬렉션에 허용되는 벡터 필드 수에 대한 제한 사항은 <a href="https://zilliverse.feishu.cn/wiki/PuxkwMWvbiHxvTkHsVkcMZP9n5f#E5yxdHM16okh57xV3WKcTJsYn0f">Zilliz Cloud 사용 제한을</a> 참조하십시오.  그러나 필요한 경우, <a href="/docs/ko/v2.6.x/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a> 설정을 조정하여 필요에 따라 컬렉션에 최대 10개의 벡터 필드를 포함시킬 수 있습니다.</p>
 <p>이 예제에서는 다음 필드를 스키마에 포함합니다:</p>
 <ul>
-<li><p><code translate="no">id</code>: 텍스트 ID를 저장하는 기본 키 역할을 합니다. 이 필드의 데이터 유형은 <code translate="no">INT64</code> 입니다.</p></li>
-<li><p><code translate="no">text</code>: 텍스트 콘텐츠를 저장하는 데 사용됩니다. 이 필드는 최대 길이가 1000바이트인 <code translate="no">VARCHAR</code> 데이터 유형입니다. <code translate="no">enable_analyzer</code> 옵션은 전체 텍스트 검색을 용이하게 하기 위해 <code translate="no">True</code> 으로 설정됩니다.</p></li>
-<li><p><code translate="no">text_dense</code>: 텍스트의 고밀도 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 크기가 768인 데이터 유형 <code translate="no">FLOAT_VECTOR</code> 입니다.</p></li>
-<li><p><code translate="no">text_sparse</code>: 텍스트의 스파스 벡터를 저장하는 데 사용됩니다. 이 필드는 데이터 유형 <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: 제품 이미지의 고밀도 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 차원이 512인 데이터 유형 <code translate="no">FLOAT_VETOR</code> 입니다.</p></li>
+<li><p><code translate="no">id</code>: 텍스트 ID를 저장하기 위한 기본 키 역할을 합니다. 이 필드의 데이터 유형은 ` <code translate="no">INT64</code>`입니다.</p></li>
+<li><p><code translate="no">text</code>: 텍스트 콘텐츠를 저장하는 데 사용됩니다. 이 필드의 데이터 유형은 ` <code translate="no">VARCHAR</code> `이며 최대 길이는 1000바이트입니다. 전체 텍스트 검색을 용이하게 하기 위해 ` <code translate="no">enable_analyzer</code> ` 옵션이 ` <code translate="no">True</code> `로 설정되어 있습니다.</p></li>
+<li><p><code translate="no">text_dense</code>: 텍스트의 밀집 벡터를 저장하는 데 사용됩니다. 이 필드의 데이터 유형은 ` <code translate="no">FLOAT_VECTOR</code> `이며, 벡터 차원은 768입니다.</p></li>
+<li><p><code translate="no">text_sparse</code>: 텍스트의 스파스 벡터를 저장하는 데 사용됩니다. 이 필드의 데이터 유형은 <code translate="no">SPARSE_FLOAT_VECTOR</code> 입니다.</p></li>
+<li><p><code translate="no">image_dense</code>: 상품 이미지의 밀집 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 차원이 512인 <code translate="no">FLOAT_VECTOR</code> 데이터 유형입니다.</p></li>
 </ul>
-<p>텍스트 필드에서 전체 텍스트 검색을 수행하기 위해 기본 제공 BM25 알고리즘을 사용하므로 스키마에 Milvus <code translate="no">Function</code> 를 추가해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+<p>텍스트 필드에 대해 내장된 BM25 알고리즘을 사용하여 전체 텍스트 검색을 수행할 예정이므로, 스키마에 Milvus <code translate="no">Function</code> 를 추가해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.6.x/full-text-search.md">전체 텍스트 검색을</a> 참조하십시오.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient, DataType, Function, FunctionType
 )
@@ -343,15 +351,20 @@ schema.WithField(entity.NewField().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션 스키마를 정의한 후 다음 단계는 벡터 인덱스를 구성하고 유사도 메트릭을 지정하는 것입니다. 주어진 예제에서는</p>
+    </button></h3><p>컬렉션 스키마를 정의한 후, 다음 단계는 벡터 인덱스를 구성하고 유사도 메트릭을 지정하는 것입니다. 주어진 예시에서는:</p>
 <ul>
-<li><p><code translate="no">text_dense_index</code>텍스트 밀도 벡터 필드에 대해 <code translate="no">IP</code> 메트릭 유형을 가진 <code translate="no">AUTOINDEX</code> 유형의 인덱스가 생성됩니다.</p></li>
-<li><p><code translate="no">text_sparse_index</code>: <code translate="no">BM25</code> 메트릭 유형이<code translate="no">SPARSE_INVERTED_INDEX</code>유형의 인덱스가 텍스트 스파스 벡터 필드에 사용됩니다.</p></li>
-<li><p><code translate="no">image_dense_index</code>이미지 고밀도 벡터 필드에 대해 <code translate="no">IP</code> 메트릭 유형이 포함된 <code translate="no">AUTOINDEX</code> 유형의 인덱스가 생성됩니다.</p></li>
+<li><p><code translate="no">text_dense_index</code>: 텍스트 밀집 벡터 필드에 대해 <code translate="no">AUTOINDEX</code> 유형의 인덱스가 <code translate="no">IP</code> 메트릭 유형으로 생성됩니다.</p></li>
+<li><p><code translate="no">text_sparse_index</code>: 텍스트 스파스 벡터 필드에는<code translate="no">SPARSE_INVERTED_INDEX</code>유형에 <code translate="no">BM25</code> 메트릭 유형을 가진 인덱스가 사용됩니다.</p></li>
+<li><p><code translate="no">image_dense_index</code>: 이미지 밀집 벡터 필드에 대해 ` <code translate="no">AUTOINDEX</code> ` 유형의 인덱스와 ` <code translate="no">IP</code> ` 메트릭 유형이 생성됩니다.</p></li>
 </ul>
-<p>필요와 데이터 유형에 가장 적합하도록 필요에 따라 다른 인덱스 유형을 선택할 수 있습니다. 지원되는 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/index-vector-fields.md">사용 가능한 인덱스 유형에</a> 대한 설명서를 참조하세요.</p>
+<p>필요에 따라 사용 환경과 데이터 유형에 가장 적합한 다른 인덱스 유형을 선택할 수 있습니다. 지원되는 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/index-vector-fields.md">사용 가능한 인덱스 유형에</a> 대한 문서를 참조하십시오.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -462,7 +475,7 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h3 id="Create-collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -477,9 +490,14 @@ indexOption3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>앞의 두 단계에서 구성한 컬렉션 스키마와 인덱스를 사용하여 <code translate="no">demo</code> 이라는 이름의 컬렉션을 만듭니다.</p>
+    </button></h3><p>앞서 두 단계에서 구성한 컬렉션 스키마 및 인덱스를 사용하여 <code translate="no">demo</code> 라는 이름의 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
@@ -536,17 +554,22 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 앞서 정의한 스키마에 따라 <code translate="no">my_collection</code> 컬렉션에 데이터를 삽입합니다. 삽입하는 동안 자동 생성된 값이 있는 필드를 제외한 모든 필드에 올바른 형식의 데이터가 제공되는지 확인합니다. 이 예제에서는</p>
+    </button></h2><p>이 섹션에서는 앞서 정의한 스키마에 따라 <code translate="no">my_collection</code> 컬렉션에 데이터를 삽입합니다. 삽입 시, 자동 생성된 값을 가진 필드를 제외한 모든 필드에 올바른 형식의 데이터가 제공되도록 해야 합니다. 이 예시에서:</p>
 <ul>
 <li><p><code translate="no">id</code>: 제품 ID를 나타내는 정수</p></li>
-<li><p><code translate="no">text</code>: 제품 설명이 포함된 문자열</p></li>
-<li><p><code translate="no">text_dense</code>텍스트 설명의 밀집 임베딩을 나타내는 768개의 부동 소수점 값 목록</p></li>
-<li><p><code translate="no">image_dense</code>제품 이미지의 조밀 임베딩을 나타내는 512개의 부동 소수점 값 목록입니다.</p></li>
+<li><p><code translate="no">text</code>: 상품 설명을 포함하는 문자열</p></li>
+<li><p><code translate="no">text_dense</code>: 텍스트 설명의 밀집 임베딩을 나타내는 768개의 부동 소수점 값 목록</p></li>
+<li><p><code translate="no">image_dense</code>: 상품 이미지의 밀집 임베딩을 나타내는 512개의 부동 소수점 값 목록</p></li>
 </ul>
-<p>각 필드에 대해 동일하거나 다른 모델을 사용하여 고밀도 임베딩을 생성할 수 있습니다. 이 예제에서는 두 개의 고밀도 임베딩의 크기가 다르므로 서로 다른 모델에서 생성되었음을 알 수 있습니다. 나중에 각 검색을 정의할 때는 해당 모델을 사용하여 적절한 쿼리 임베딩을 생성해야 합니다.</p>
-<p>이 예에서는 기본 제공 BM25 함수를 사용하여 텍스트 필드에서 스파스 임베딩을 생성하므로 스파스 벡터를 수동으로 제공할 필요가 없습니다. 그러나 BM25를 사용하지 않으려면 스파스 임베딩을 직접 미리 계산하여 제공해야 합니다.</p>
+<p>각 필드의 밀집 임베딩을 생성할 때 동일한 모델을 사용하거나 서로 다른 모델을 사용할 수 있습니다. 이 예시에서 두 밀집 임베딩은 차원이 서로 다르므로, 서로 다른 모델로 생성되었음을 시사합니다. 나중에 각 검색을 정의할 때는 해당 모델을 사용하여 적절한 쿼리 임베딩을 생성해야 합니다.</p>
+<p>이 예제에서는 내장된 BM25 함수를 사용하여 텍스트 필드에서 스파스 임베딩을 생성하므로, 스파스 벡터를 수동으로 제공할 필요가 없습니다. 그러나 BM25를 사용하지 않기로 선택한 경우, 스파스 임베딩을 직접 사전 계산하여 제공해야 합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Generate example vectors</span>
@@ -675,7 +698,7 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">1단계: 여러 개의 AnnSearchRequest 인스턴스 만들기<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Create-multiple-AnnSearchRequest-instances" class="common-anchor-header">1단계: 여러 개의 AnnSearchRequest 인스턴스 생성<button data-href="#Step-1-Create-multiple-AnnSearchRequest-instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -690,19 +713,24 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>하이브리드 검색은 <code translate="no">hybrid_search()</code> 함수에서 여러 개의 <code translate="no">AnnSearchRequest</code> 을 생성하여 구현되며, 각 <code translate="no">AnnSearchRequest</code> 은 특정 벡터 필드에 대한 기본 ANN 검색 요청을 나타냅니다. 따라서 하이브리드 검색을 수행하기 전에 각 벡터 필드에 대해 <code translate="no">AnnSearchRequest</code> 을 생성해야 합니다.</p>
-<p>또한 <code translate="no">AnnSearchRequest</code> 에서 <code translate="no">expr</code> 파라미터를 구성하여 하이브리드 검색의 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/v2.6.x/filtered-search.md">필터링된 검색</a> 및 <a href="/docs/ko/v2.6.x/boolean.md">필터링 설명을</a> 참조하세요.</p>
+    </button></h3><p>하이브리드 검색은 ` <code translate="no">hybrid_search()</code> ` 함수 내에서 여러 개의 ` <code translate="no">AnnSearchRequest</code> `를 생성하여 구현되며, 각 ` <code translate="no">AnnSearchRequest</code> `는 특정 벡터 필드에 대한 기본 ANN 검색 요청을 나타냅니다. 따라서 하이브리드 검색을 수행하기 전에 각 벡터 필드에 대해 ` <code translate="no">AnnSearchRequest</code> `를 생성해야 합니다.</p>
+<p>또한, <code translate="no">AnnSearchRequest</code> 내의 <code translate="no">expr</code> 매개변수를 구성하여 하이브리드 검색에 대한 필터링 조건을 설정할 수 있습니다. <a href="/docs/ko/v2.6.x/filtered-search.md">‘필터링된 검색’</a> 및 <a href="/docs/ko/v2.6.x/boolean.md">‘필터링 설명’을</a> 참조하십시오.</p>
 <div class="alert note">
-<p>하이브리드 검색에서 각 <code translate="no">AnnSearchRequest</code> 은 하나의 쿼리 데이터만 지원합니다.</p>
+<p>하이브리드 검색에서 각 <code translate="no">AnnSearchRequest</code> 는 하나의 쿼리 데이터만 지원합니다.</p>
 </div>
-<p>다양한 검색 벡터 필드의 기능을 보여드리기 위해 샘플 쿼리를 사용하여 세 개의 <code translate="no">AnnSearchRequest</code> 검색 요청을 구성하겠습니다. 또한 이 과정에서 미리 계산된 고밀도 벡터를 사용할 것입니다. 검색 요청은 다음 벡터 필드를 대상으로 합니다:</p>
+<p>다양한 검색 벡터 필드의 기능을 시연하기 위해, 샘플 쿼리를 사용하여 세 가지 <code translate="no">AnnSearchRequest</code> 검색 요청을 구성해 보겠습니다. 또한 이 과정에서 미리 계산된 밀집 벡터(dense vectors)를 사용할 것입니다. 검색 요청은 다음 벡터 필드를 대상으로 합니다:</p>
 <ul>
-<li><p><code translate="no">text_dense</code> 시맨틱 텍스트 검색의 경우, 직접적인 키워드 매칭이 아닌 의미를 기반으로 문맥을 이해하고 검색할 수 있도록 합니다.</p></li>
-<li><p><code translate="no">text_sparse</code>전체 텍스트 검색 또는 키워드 검색의 경우, 텍스트 내의 정확한 단어나 구문 일치에 중점을 둡니다.</p></li>
-<li><p><code translate="no">image_dense</code>멀티모달 텍스트-이미지 검색의 경우 쿼리의 의미론적 내용을 기반으로 관련 제품 이미지를 검색합니다.</p></li>
+<li><p><code translate="no">text_dense</code> 의미론적 텍스트 검색: 직접적인 키워드 일치보다는 문맥을 이해하고 의미를 기반으로 한 검색을 가능하게 합니다.</p></li>
+<li><p><code translate="no">text_sparse</code>전체 텍스트 검색 또는 키워드 일치: 텍스트 내의 정확한 단어 또는 구문 일치에 중점을 둡니다.</p></li>
+<li><p><code translate="no">image_dense</code>다중 모달 텍스트-이미지 검색용으로, 쿼리의 시맨틱 콘텐츠를 기반으로 관련 제품 이미지를 검색합니다.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
 
 query_text = <span class="hljs-string">&quot;white headphones, quiet and comfortable&quot;</span>
@@ -829,8 +857,8 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     }
  ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">limit</code> 매개 변수가 2로 설정되어 있으면 <code translate="no">AnnSearchRequest</code> 각각 2개의 검색 결과를 반환합니다. 이 예에서는 3개의 <code translate="no">AnnSearchRequest</code> 인스턴스가 생성되어 총 6개의 검색 결과가 생성됩니다.</p>
-<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">2단계: 순위 재조정 전략 구성하기<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
+<p><code translate="no">limit</code> 매개변수가 2로 설정되어 있으므로, 각 <code translate="no">AnnSearchRequest</code> 는 2개의 검색 결과를 반환합니다. 이 예제에서는 3개의 <code translate="no">AnnSearchRequest</code> 인스턴스가 생성되어 총 6개의 검색 결과가 산출됩니다.</p>
+<h3 id="Step-2-Configure-a-reranking-strategy" class="common-anchor-header">2단계: 재순위 지정 전략 구성<button data-href="#Step-2-Configure-a-reranking-strategy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -845,10 +873,15 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ANN 검색 결과 집합을 병합하고 재랭크하려면 적절한 재랭크 전략을 선택하는 것이 필수적입니다. Milvus는 여러 유형의 재랭크 전략을 제공합니다. 이러한 재랭크 메커니즘에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/weighted-ranker.md">가중치 랭커</a> 또는 <a href="/docs/ko/v2.6.x/rrf-ranker.md">RRF 랭커를</a> 참조하세요.</p>
-<p>이 예제에서는 특정 검색어에 특별히 중점을 두지 않으므로 RRFRanker 전략으로 진행하겠습니다.</p>
+    </button></h3><p>ANN 검색 결과 집합을 병합하고 재순위를 매기려면 적절한 재순위 지정 전략을 선택하는 것이 필수적입니다. Milvus는 여러 유형의 재순위 지정 전략을 제공합니다. 이러한 재순위 지정 메커니즘에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/weighted-ranker.md">가중치 순위 지정기(Weighted Ranker</a> ) 또는 <a href="/docs/ko/v2.6.x/rrf-ranker.md">RRF 순위 지정기(RRF Ranker</a>)를 참조하십시오.</p>
+<p>이 예제에서는 특정 검색 쿼리에 특별히 중점을 두지 않으므로 RRFRanker 전략을 사용하겠습니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">ranker = Function(
     name=<span class="hljs-string">&quot;rrf&quot;</span>,
     input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
@@ -921,9 +954,14 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>하이브리드 검색을 시작하기 전에 컬렉션이 로드되었는지 확인합니다. 컬렉션 내의 벡터 필드에 인덱스가 없거나 메모리에 로드되지 않은 경우 하이브리드 검색 메서드를 실행할 때 오류가 발생합니다.</p>
+    </button></h3><p>하이브리드 검색을 시작하기 전에 컬렉션이 로드되었는지 확인하십시오. 컬렉션 내의 벡터 필드 중 인덱스가 없거나 메모리에 로드되지 않은 것이 있다면, 하이브리드 검색 메서드를 실행할 때 오류가 발생합니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,
@@ -995,10 +1033,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     \&quot;limit\&quot;: 2
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>다음은 출력입니다:</p>
+<p>다음은 출력 결과입니다:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>하이브리드 검색에 <code translate="no">limit=2</code> 파라미터를 지정하면 Milvus는 세 가지 검색에서 얻은 여섯 가지 결과의 순위를 다시 매깁니다. 궁극적으로 가장 유사한 상위 두 개의 결과만 반환합니다.</p>
+<p>하이브리드 검색에 ` <code translate="no">limit=2</code> ` 매개변수가 지정되면, Milvus는 세 번의 검색에서 얻은 여섯 개의 결과를 재순위화합니다. 최종적으로 가장 유사한 상위 두 개의 결과만 반환됩니다.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">고급 사용법<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1014,7 +1052,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">하이브리드 검색의 시간대를 임시로 설정하기<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Temporarily-set-a-timezone-for-a-hybrid-search" class="common-anchor-header">하이브리드 검색에 대한 시간대를 일시적으로 설정하기<button data-href="#Temporarily-set-a-timezone-for-a-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1029,9 +1067,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션에 <code translate="no">TIMESTAMPTZ</code> 필드가 있는 경우 하이브리드 검색 호출에서 <code translate="no">timezone</code> 매개변수를 설정하여 단일 작업에 대해 데이터베이스 또는 컬렉션 기본 시간대를 일시적으로 재정의할 수 있습니다. 이렇게 하면 작업 중에 <code translate="no">TIMESTAMPTZ</code> 값이 표시되고 비교되는 방식이 제어됩니다.</p>
-<p><code translate="no">timezone</code> 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 표준 시간대 식별자</a> (예: <strong>아시아/상하이</strong>, <strong>미국/시카고</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하세요.</p>
-<p>아래 예는 하이브리드 검색 작업을 위해 임시로 시간대를 설정하는 방법을 보여줍니다:</p>
+    </button></h3><p>컬렉션에 ` <code translate="no">TIMESTAMPTZ</code> ` 필드가 있는 경우, 하이브리드 검색 호출 시 ` <code translate="no">timezone</code> ` 매개변수를 설정하여 단일 작업에 대해 데이터베이스나 컬렉션의 기본 시간대를 일시적으로 재정의할 수 있습니다. 이는 작업 중에 ` <code translate="no">TIMESTAMPTZ</code> ` 값이 표시되고 비교되는 방식을 제어합니다.</p>
+<p><code translate="no">timezone</code> 의 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 시간대 식별자</a> (예: <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> 또는 <strong>UTC</strong>)여야 합니다. <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하십시오.</p>
+<p>아래 예제는 하이브리드 검색 작업에 대해 시간대를 일시적으로 설정하는 방법을 보여줍니다:</p>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     reqs=reqs,

@@ -72,7 +72,7 @@ summary: >-
 <p>Se il passaggio va a buon fine, viene registrato il messaggio « <code translate="no">[mqTypeValue=woodpecker]</code> ».</p>
 <p><strong>Passaggio 4: (Facoltativo) Arrestare Pulsar ed eseguire la pulizia.</strong> Per Pulsar <strong>integrato</strong>, disabilitare Pulsar e abilitare Woodpecker, quindi eliminare i PVC di Pulsar:</p>
 <pre><code translate="no" class="language-shell">helm upgrade my-release zilliztech/milvus \
-  --set image.all.tag=v3.0.3 \
+  --set image.all.tag=v3.0.5 \
   --set pulsarv3.enabled=false \
   --set woodpecker.enabled=true \
   --set streaming.enabled=true \
@@ -100,7 +100,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Passaggio 1: Verifica che l’istanza di Milvus sia in esecuzione.</strong></p>
+    </button></h3><p><strong>Passaggio 1: Verificare che l’istanza di Milvus sia in esecuzione.</strong></p>
 <p><strong>Passaggio 2: configurare la connessione Pulsar di destinazione e riavviare Milvus.</strong> Il passaggio richiede che Milvus conosca già la connessione Pulsar, quindi inserirla in <code translate="no">user.yaml</code> tramite <code translate="no">extraConfigFiles</code> e applicare con <code translate="no">helm upgrade</code> (che esegue il rollover dei pod). <code translate="no">streaming.enabled=true</code> è necessario per la funzionalità Switch MQ.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># values.yaml</span>
 <span class="hljs-attr">extraConfigFiles:</span>
@@ -172,7 +172,7 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Passaggio 3: Verificare che il passaggio sia stato completato.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Se il cambio va a buon fine, viene registrato un log con il messaggio " <code translate="no">[mqTypeValue=woodpecker]</code>".</p>
+<p>Se il cambio va a buon fine, viene registrato il messaggio " <code translate="no">[mqTypeValue=woodpecker]</code>".</p>
 <p><strong>Passaggio 4: aggiornare il tipo di MQ nell’Operator.</strong> Aggiornare la configurazione gestita dall’Operator in modo che l’Operator non annulli il passaggio. Creare <code translate="no">change_configmap.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -242,8 +242,8 @@ kubectl delete pvc &lt;pulsar-pvc-name&gt; ...
 <p><strong>Passaggio 4: verificare che il passaggio sia stato completato.</strong></p>
 <pre><code translate="no" class="language-shell">kubectl logs &lt;mixcoord-pod&gt; | grep &quot;successfully updated mq.type configuration in etcd&quot;
 <button class="copy-code-btn"></button></code></pre>
-<p>Se il passaggio va a buon fine, viene registrato il messaggio « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
-<p><strong>Passaggio 5: (Facoltativo) Rimuovere i dati di Woodpecker.</strong> Eliminare i dati di Woodpecker su MinIO/S3 (nella directory <code translate="no">&lt;rootPath&gt;/wp/...</code>, in genere <code translate="no">files/wp/...</code>) e i metadati di Woodpecker in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Se si prevede di tornare a Woodpecker in un secondo momento, rimuovere prima questi file.</p>
+<p>Se il passaggio ha esito positivo, viene registrato il messaggio « <code translate="no">[mqTypeValue=pulsar]</code> ».</p>
+<p><strong>Passaggio 5: (Facoltativo) Eliminare i dati di Woodpecker.</strong> Eliminare i dati di Woodpecker su MinIO/S3 (nella directory <code translate="no">&lt;rootPath&gt;/wp/...</code>, in genere <code translate="no">files/wp/...</code>) e i metadati di Woodpecker in etcd (<code translate="no">etcdctl get woodpecker --prefix</code>). Se si prevede di tornare a Woodpecker in un secondo momento, eliminare prima questi file.</p>
 <h2 id="Supported-scenarios" class="common-anchor-header">Scenari supportati<button data-href="#Supported-scenarios" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,9 +3,9 @@ id: install-java.md
 label: Install Java SDK
 related_key: SDK
 summary: تعرف على كيفية تثبيت حزمة تطوير تطبيقات جافا (Java SDK) الخاصة بـ Milvus.
-title: تثبيت Milvus Java SDK
+title: تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Java
 ---
-<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
+<h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">تثبيت حزمة أدوات تطوير البرامج (SDK) لـ Milvus بلغة Java<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ title: تثبيت Milvus Java SDK
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية تثبيت Milvus Java SDK لـ Milvus.</p>
-<p>يدعم الإصدار الحالي من Milvus حزم SDK بلغات Python و Node.js و GO و Java.</p>
+<p>يدعم الإصدار الحالي من Milvus حزم SDK بلغات Python وNode.js وGO وJava.</p>
 <h2 id="Requirement" class="common-anchor-header">المتطلبات<button data-href="#Requirement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,13 +63,13 @@ title: تثبيت Milvus Java SDK
 <pre><code translate="no" class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.milvus<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>milvus-sdk-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.12<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.10&#x27;</span>
+<pre><code translate="no"><span class="hljs-attribute">implementation</span> <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:3.0.12&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -96,5 +96,5 @@ title: تثبيت Milvus Java SDK
 <li><a href="/docs/ar/single-vector-search.md">البحث عن متجه واحد</a></li>
 <li><a href="/docs/ar/multi-vector-search.md">البحث المختلط</a></li>
 </ul></li>
-<li><p>استكشاف <a href="/api-reference/java/v3.0.x/About.md">مرجع واجهة برمجة تطبيقات Milvus لـ Java</a></p></li>
+<li><p>استكشاف <a href="/api-reference/java/v3.0.x/About.md">مرجع واجهة برمجة تطبيقات Milvus Java</a></p></li>
 </ul>

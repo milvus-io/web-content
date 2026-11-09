@@ -60,7 +60,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
 </ul></li>
 <li>Milvus 시스템이 실행 중인 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
-<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v3.0.3으로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
+<li><strong>업그레이드 제한 사항</strong>: <strong>메시지 큐 제한 사항</strong>: Milvus v3.0.5로 업그레이드할 때는 현재 사용 중인 메시지 큐를 유지해야 합니다. 업그레이드 과정에서 다른 메시지 큐 시스템으로 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경 기능은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,7 +77,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ는 2.5.x 버전까지 Milvus 독립 실행형(standalone)의 기본 메시지 저장소였습니다(2.6.x 버전부터 Woodpecker로 대체됨).</p>
+    </button></h2><p>RocksMQ는 2.5.x 버전까지 Milvus 독립 실행형(standalone)의 기본 메시지 저장소였습니다(2.6.x 버전부터는 Woodpecker로 대체됨).</p>
 <div class="alert note">
 <p>현재 Milvus Operator를 사용하는 Milvus 독립 실행형 환경에서만 RocksMQ를 메시지 저장소로 구성할 수 있습니다.</p>
 </div>
@@ -242,8 +242,8 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">이 예제에서는 Pulsar의 각 구성 요소에 대한 복제본 수, Pulsar BookKeeper의 컴퓨팅 리소스 및 기타 구성을 지정합니다.</div>
-<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml에서</a> 내부 Pulsar 서비스를 구성하기 위한 전체 구성 항목을 확인하십시오. 앞의 예제와 같이 <code translate="no">pulsar.inCluster.values</code> 아래에 필요에 따라 구성 항목을 추가하십시오.</div>
-<p>구성 파일의 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정하고, 다음 명령을 실행하여 구성을 적용합니다.</p>
+<div class="alert note"><a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml에서</a> 내부 Pulsar 서비스를 구성하기 위한 전체 구성 항목을 확인하십시오. 앞의 예제에서 볼 수 있듯이, 필요에 따라 <code translate="no">pulsar.inCluster.values</code> 아래에 구성 항목을 추가하십시오.</div>
+<p>구성 파일의 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정하고, 다음 명령을 실행하여 구성을 적용하십시오.</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Kafka" class="common-anchor-header">Kafka 구성<button data-href="#Configure-Kafka" class="anchor-icon" translate="no">
@@ -346,7 +346,7 @@ summary: Milvus Operator를 사용하여 메시지 저장소를 구성하는 방
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>내부 Kafka 서비스를 구성하는 데 필요한 전체 구성 항목은 <a href="https://artifacthub.io/packages/helm/bitnami/kafka">여기에서</a> 확인할 수 있습니다. 필요에 따라 ` <code translate="no">kafka.inCluster.values</code>` 아래에 구성 항목을 추가하십시오.</p>
+<p>내부 Kafka 서비스를 구성하는 데 필요한 전체 구성 항목은 <a href="https://artifacthub.io/packages/helm/bitnami/kafka">여기에서</a> 확인할 수 있습니다. 필요에 따라 <code translate="no">kafka.inCluster.values</code> 아래에 구성 항목을 추가하십시오.</p>
 <p>구성 파일 이름이 <code translate="no">milvuscluster.yaml</code> 라고 가정할 때, 다음 명령을 실행하여 구성을 적용하십시오.</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

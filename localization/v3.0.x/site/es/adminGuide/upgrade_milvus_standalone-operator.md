@@ -25,9 +25,9 @@ title: Actualizar Milvus Standalone con Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta guía describe cómo actualizar una implementación independiente de Milvus 2.6.x a la versión 3.0.3 con Milvus Operator.</p>
+    </button></h1><p>Esta guía describe cómo actualizar una implementación independiente de Milvus 2.6.x a la versión 3.0.5 con Milvus Operator.</p>
 <div class="alert note">
-<p>Este procedimiento se ha validado desde Milvus 2.6.20 hasta Milvus v3.0.3 con Milvus Operator 1.3.0, Woodpecker, etcd dentro del clúster y MinIO dentro del clúster. Si utilizas otra versión de parche de Milvus 2.6.x, otra versión de Operator, otra cola de mensajes o una configuración de dependencias diferente, comprueba primero la actualización en un entorno que no sea de producción.</p>
+<p>Este procedimiento se ha validado desde Milvus 2.6.20 hasta Milvus v3.0.5 con Milvus Operator 1.3.0, Woodpecker, etcd dentro del clúster y MinIO dentro del clúster. Si utilizas otra versión de parche de Milvus 2.6.x, otra versión de Operator, otra cola de mensajes o una configuración de dependencias diferente, comprueba primero la actualización en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,9 +51,9 @@ title: Actualizar Milvus Standalone con Milvus Operator
 <li>El método de instalación y los manifiestos utilizados para el Milvus Operator existente</li>
 <li>Una copia de seguridad actualizada de los metadatos y los datos persistentes de Milvus</li>
 </ul>
-<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.3, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
+<p><strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v3.0.5, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</p>
 <div class="alert warning">
-<p>Este procedimiento no valida una degradación o una reversión mediante el cambio de la imagen de Milvus a la versión 2.6.x. Una vez que la versión v3.0.3 haya escrito datos, una reversión que afecte únicamente a la imagen podría no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure las copias de seguridad de los metadatos y los datos persistentes anteriores a la actualización. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
+<p>Este procedimiento no valida una degradación o una reversión que implique volver a la imagen de Milvus 2.6.x. Una vez que la versión v3.0.5 haya escrito datos, una reversión que afecte únicamente a la imagen podría no leer correctamente el estado actualizado. Si la actualización falla, detén las escrituras y utiliza un plan de recuperación que restaure las copias de seguridad de los metadatos y los datos persistentes anteriores a la actualización. Valida primero el plan de recuperación en un entorno que no sea de producción.</p>
 </div>
 <h2 id="Upgrade-process" class="common-anchor-header">Proceso de actualización<button data-href="#Upgrade-process" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,7 +135,7 @@ title: Actualizar Milvus Standalone con Milvus Operator
   <span class="hljs-attr">namespace:</span> <span class="hljs-string">&lt;namespace&gt;</span>
 <span class="hljs-attr">spec:</span>
   <span class="hljs-attr">components:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.3</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">milvusdb/milvus:v3.0.5</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Aplica el manifiesto CR completo:</p>
 <pre><code translate="no" class="language-bash">kubectl apply --filename milvus.yaml
@@ -165,4 +165,4 @@ kubectl get pods --namespace &lt;namespace&gt;
 kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Comprueba que el CR de Milvus indique <code translate="no">Healthy</code>, que la imagen actual sea <code translate="no">milvusdb/milvus:v3.0.3</code> y que las colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier función específica de la versión 3.0.3.</p>
+<p>Comprueba que el CR de Milvus indique « <code translate="no">Healthy</code> », que la imagen actual sea « <code translate="no">milvusdb/milvus:v3.0.5</code> » y que las colecciones existentes sigan siendo consultables y buscables. Realiza estas comprobaciones antes de habilitar cualquier función específica de la versión 3.0.5.</p>

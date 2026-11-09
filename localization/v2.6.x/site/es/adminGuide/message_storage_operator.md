@@ -20,7 +20,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
         ></path>
       </svg>
     </button></h1><p>Milvus utiliza RocksMQ, Pulsar o Kafka para gestionar los registros de cambios recientes, generar registros de flujo y proporcionar suscripciones a registros. En este tema se explica cómo configurar las dependencias de almacenamiento de mensajes al instalar Milvus con Milvus Operator. Para obtener más información, consulta <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">«Configurar el almacenamiento de mensajes con Milvus Operator</a> » en el repositorio de Milvus Operator.</p>
-<p>En este tema se da por hecho que ya ha implementado Milvus Operator.</p>
+<p>Este tema da por hecho que ya ha implementado Milvus Operator.</p>
 <div class="alert note">Consulte <a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">«Implementar Milvus Operator</a> » para obtener más información. </div>
 <p>Es necesario especificar un archivo de configuración para utilizar Milvus Operator y poner en marcha un clúster de Milvus.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -60,7 +60,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
 </ul></li>
 <li>El almacenamiento de mensajes no se puede cambiar mientras el sistema Milvus está en ejecución.</li>
 <li>Solo se admiten las versiones 2.x o 3.x de Kafka.</li>
-<li><strong>Limitaciones de la actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.25, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
+<li><strong>Limitaciones de la actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: al actualizar a Milvus v2.6.26, debes mantener tu elección actual de cola de mensajes. No se admite el cambio entre diferentes sistemas de colas de mensajes durante la actualización. La compatibilidad con el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,7 +162,7 @@ summary: Descubre cómo configurar el almacenamiento de mensajes con Milvus Oper
         ></path>
       </svg>
     </button></h3><p><code translate="no">external</code> indica que se utiliza un servicio Pulsar externo.
-Los campos utilizados para configurar un servicio Pulsar externo son los siguientes:</p>
+Los campos utilizados para configurar un servicio Pulsar externo incluyen:</p>
 <ul>
 <li><code translate="no">external</code>:  Un valor de <code translate="no">true</code> indica que Milvus utiliza un servicio Pulsar externo.</li>
 <li><code translate="no">endpoints</code>: Los puntos de conexión de Pulsar.</li>
@@ -202,7 +202,7 @@ Los campos utilizados para configurar un servicio Pulsar externo son los siguien
         ></path>
       </svg>
     </button></h3><p><code translate="no">inCluster</code> indica que, al iniciarse un clúster de Milvus, se inicia automáticamente un servicio de Pulsar en el clúster.</p>
-<h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio Pulsar interno.</p>
+<h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo muestra cómo configurar un servicio Pulsar interno.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
