@@ -8,7 +8,7 @@ This operation describes a specific role.
 describe_role(
     role_name: str,
     timeout: Optional[float] = None
-) -> List[Dict]
+) -> Dict
 ```
 
 **PARAMETERS:**
@@ -27,21 +27,27 @@ describe_role(
 
 **RETURN TYPE:**
 
-*list*
+*dict*
 
 **RETURNS:**
 
-A list of dictionaries containing the permissions assigned to the role. The structure of each dictionary reassembles the following:
+A dictionary containing the role name, its description, and the permissions assigned to the role. The structure of the dictionary reassembles the following:
 
 ```python
-#  {
-#      'object_type': str, 
-#      'object_name': str, 
-#      'db_name': str, 
-#      'role_name': str, 
-#      'privilege': str, 
-#      'grantor_name': str
-#  }
+{
+    'role': str,
+    'description': str,
+    'privileges': [
+        {
+            'object_type': str,
+            'object_name': str,
+            'db_name': str,
+            'role_name': str,
+            'privilege': str,
+            'grantor_name': str
+        }
+    ]
+}
 ```
 
 **PARAMETERS:**

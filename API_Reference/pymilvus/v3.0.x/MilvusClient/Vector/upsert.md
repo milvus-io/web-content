@@ -11,7 +11,7 @@ upsert(
     timeout: Optional[float] = None,
     partition_name: Optional[str] = "",
     **kwargs,
-) -> MutationResult
+) -> Dict
 ```
 
 **PARAMETERS:**
@@ -45,11 +45,15 @@ The per-field merge operations applied during a partial update. Each value can b
 
 **RETURN TYPE:**
 
-*MutationResult*
+*dict*
 
 **RETURNS:**
 
-Mutation result containing the primary keys and counts reported for the upsert operation.
+A dictionary containing the number of upserted entities.
+
+```python
+{'upsert_count': 1, 'ids': [...]}
+```
 
 **EXCEPTIONS:**
 

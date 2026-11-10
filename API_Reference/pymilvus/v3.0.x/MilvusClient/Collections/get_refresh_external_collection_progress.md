@@ -9,7 +9,7 @@ def get_refresh_external_collection_progress(
     job_id: int,
     timeout: Optional[float] = None,
     **kwargs,
-) -> RefreshExternalCollectionJobInfo:
+) -> RefreshExternalCollectionJobInfo
 ```
 
 **PARAMETERS:**

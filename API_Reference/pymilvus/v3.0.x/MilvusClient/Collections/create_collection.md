@@ -7,9 +7,9 @@ This operation supports creating a collection in two distinct ways: quick setup 
 ```python
 create_collection(
     collection_name: str,
-    dimension: int,
+    dimension: Optional[int] = None,
     primary_field_name: str = "id",
-    id_type: str = DataType,
+    id_type: str = "int",
     vector_field_name: str = "vector",
     metric_type: str = "COSINE",
     auto_id: bool = False,

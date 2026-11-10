@@ -48,7 +48,7 @@ writer = LocalBulkWriter(
 
     While rewriting your raw data, Milvus splits your raw data into segments.
 
-    The value defaults to **536,870,912** in bytes, which is **512** MB.
+    The value defaults to **134,217,728** in bytes, which is **128** MB.
 
     <div class="alert note">
     
