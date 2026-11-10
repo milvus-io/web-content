@@ -9,7 +9,7 @@ def list_refresh_external_collection_jobs(
     collection_name: str = "",
     timeout: Optional[float] = None,
     **kwargs,
-) -> List:
+) -> List
 ```
 
 **PARAMETERS:**

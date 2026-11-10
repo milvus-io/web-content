@@ -8,7 +8,7 @@ This operation lists all existing databases.
 list_databases(
     timeout: Optional[float] = None,
     **kwargs,
-) -> [] string
+) -> List[str]
 ```
 
 **PARAMETERS:**
@@ -19,7 +19,7 @@ list_databases(
 
 **RETURN TYPE:**
 
-*[]string*
+*list*
 
 **RETURNS:**
 
