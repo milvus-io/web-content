@@ -482,6 +482,7 @@ Starting in Milvus 3.0.6, a vector subfield can be created with element-level nu
 
 - Milvus builds the vector index for a segment of an element-nullable vector subfield only when the segment holds at least 1,024 valid (non-null) elements. A segment below this threshold builds no index, and queries on it run brute-force search.
 
+
 ```python
 index_params = client.prepare_index_params()
 
