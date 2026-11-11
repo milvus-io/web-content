@@ -35,7 +35,7 @@ let request = UpsertRequest::builder()
 
 - `field_ops: Vec<FieldPartialUpdateOp>`
 
-    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name.
+    Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. Use `add_field_op()` to add one.
 
     This struct describes how a field value is applied during an upsert. `ArrayAppend` and `ArrayRemove` apply only to array fields and implicitly enable partial-update semantics for the request. These array operations require Milvus 2.6.17 or later.
 

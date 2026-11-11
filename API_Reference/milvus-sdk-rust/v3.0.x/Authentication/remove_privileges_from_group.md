@@ -23,7 +23,7 @@ let request = RemovePrivilegesFromGroupRequest::builder()
 
 - `privileges: HashSet<String>`
 
-    Privileges to remove from the group. At least one non-empty privilege is required.
+    Privileges to remove from the group. At least one non-empty privilege is required. Use `privilege()` to add one.
 
 **RETURN TYPE:**
 

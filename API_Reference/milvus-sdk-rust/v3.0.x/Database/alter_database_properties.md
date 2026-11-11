@@ -23,7 +23,7 @@ let request = AlterDatabasePropertiesRequest::builder()
 
 - `properties: HashMap<String, String>`
 
-    Mutable properties to set on the database. At least one property is required.
+    Mutable properties to set on the database. At least one property is required. Use `property()` to add one.
 
 **RETURN TYPE:**
 

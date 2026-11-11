@@ -42,7 +42,7 @@ let request = QueryRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression. See [FilterTemplateValue](FilterTemplateValue.md).
+    Placeholder values referenced by the filter expression. Use `add_filter_template()` to add one. See [FilterTemplateValue](FilterTemplateValue.md).
 
 - `output_fields: Vec<String>`
 
@@ -78,7 +78,7 @@ let request = QueryRequest::builder()
 
 - `group_by_fields: Vec<String>`
 
-    Scalar fields used to group aggregation results. Combine them with aggregate expressions such as `count(*)` or `sum(field)` in `output_fields`; the server returns one row per group.
+    Scalar fields used to group aggregation results. Combine them with aggregate expressions such as `count(*)` or `sum(field)` in `output_fields`; the server returns one row per group. Use `add_group_by_field()` to add one.
 
 - `rls_principal: Option<String>`
 
