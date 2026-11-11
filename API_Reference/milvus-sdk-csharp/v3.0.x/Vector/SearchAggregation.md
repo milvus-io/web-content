@@ -11,6 +11,7 @@ public sealed class SearchAggregation
     public IReadOnlyList<AggregationOrder> Order { get; set; }
     public AggregationTopHits TopHits { get; set; }
     public SearchAggregation SubAggregation { get; set; }
+    public long SearchSize { get; set; }
 }
 ```
 
@@ -27,6 +28,8 @@ public sealed class SearchAggregation
 - `TopHits` - Top-hit documents returned per bucket.
 
 - `SubAggregation` - A nested sub-aggregation (up to four levels).
+
+- `SearchSize` - The candidate buckets searched at this level; `0` means `Size`.
 
 ## AggregationMetricOp
 

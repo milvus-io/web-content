@@ -12,6 +12,8 @@ public sealed class CollectionSchema
     public IList<StructFieldSchema> StructFields { get; }
     public IDictionary<string, string> Properties { get; }
     public bool EnableDynamicFields { get; set; }
+    public string? ExternalSource { get; set; }
+    public string? ExternalSpec { get; set; }
 }
 ```
 
@@ -44,6 +46,14 @@ public sealed class CollectionSchema
 - `EnableDynamicFields` (*bool*) -
 
     Whether to enable dynamic fields for this schema. Defaults to `false`.
+
+- `ExternalSource` (*string?*) -
+
+    The external data source of an external collection, e.g. `"s3://bucket/path"`. Set together with `ExternalSpec` and the external-field mappings on `FieldSchema` to create an external collection. Mirrors the Java/C++/Rust SDKs' `externalSource`.
+
+- `ExternalSpec` (*string?*) -
+
+    The external file specification of an external collection (a JSON string), e.g. `"{\"format\":\"parquet\"}"`. Mirrors the Java/C++/Rust SDKs' `externalSpec`.
 
 ## Example
 

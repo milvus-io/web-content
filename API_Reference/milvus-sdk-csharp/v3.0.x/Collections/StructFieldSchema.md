@@ -10,6 +10,8 @@ public sealed class StructFieldSchema
     public string Name { get; }
     public string Description { get; }
     public int MaxCapacity { get; set; }
+    public bool Nullable { get; set; }
+    public IDictionary<string, string> TypeParams { get; }
     public IList<FieldSchema> Fields { get; }
 }
 ```
@@ -27,6 +29,14 @@ public sealed class StructFieldSchema
 - `MaxCapacity` (*int*) -
 
     The maximum number of struct elements a single row may hold.
+
+- `Nullable` (*bool*) -
+
+    Whether the struct field is nullable. A struct field added to an existing collection (via `AddCollectionStructFieldAsync`) must be nullable. The nullable flag is also applied to every sub-field on the wire.
+
+- `TypeParams` (*IDictionary\<string, string\>*) -
+
+    Additional per-struct `type_params` to send on the wire, mirroring the Java SDK's `StructFieldSchema.typeParams`. Supported keys include `warmup` and `mmap.enabled`.
 
 - `Fields` (*IList\<FieldSchema\>*) -
 

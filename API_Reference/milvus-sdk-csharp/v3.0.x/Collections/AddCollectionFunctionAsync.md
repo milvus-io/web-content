@@ -2,6 +2,8 @@
 
 Adds a function (e.g. BM25) to a collection's schema.
 
+> **Deprecated:** `AddCollectionFunctionAsync` is deprecated because Milvus 3.0 adds a function together with its output field. Use `AddFunctionFieldAsync` instead.
+
 ```csharp
 public async Task AddCollectionFunctionAsync(AddCollectionFunctionReq request, CancellationToken cancellationToken = default)
 ```

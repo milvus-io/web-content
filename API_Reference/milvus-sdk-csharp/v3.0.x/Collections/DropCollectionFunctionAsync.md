@@ -2,6 +2,8 @@
 
 Drops a function from a collection's schema.
 
+> **Deprecated:** `DropCollectionFunctionAsync` is deprecated because Milvus 3.0 drops a function together with its output field. Use `DropFunctionFieldAsync` instead.
+
 ```csharp
 public async Task DropCollectionFunctionAsync(DropCollectionFunctionReq request, CancellationToken cancellationToken = default)
 ```
