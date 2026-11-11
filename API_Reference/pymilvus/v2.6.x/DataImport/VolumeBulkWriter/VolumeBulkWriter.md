@@ -59,7 +59,7 @@ VolumeBulkWriter(
 
     While rewriting your raw data, Milvus splits your raw data into segments.
 
-    The value defaults to **536,870,912** in bytes, which is **512** MB.
+    The value defaults to **1,073,741,824** in bytes, which is **1,024** MB.
 
 - **file_type** (*[BulkFileType](../BulkFileType.md)*) -
 

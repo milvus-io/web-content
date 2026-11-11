@@ -10,10 +10,10 @@ In this release, you have the flexibility to choose MilvusClient or the original
 
 ## Installation
 
-Run the following command to install PyMilvus v2.6.17 or update an existing installation to this version:
+Run the following command to install PyMilvus v2.6.18 or update an existing installation to this version:
 
 ```shell
-pip install --upgrade pymilvus==v2.6.17
+pip install --upgrade pymilvus==v2.6.18
 ```
 
 After the installation, you can check the PyMilvus version by running the following:
@@ -23,7 +23,7 @@ from pymilvus import __version__
 
 print(__version__)
 
-# v2.6.17
+# v2.6.18
 ```
 
 To install the Model library for embedding operations, run the following command:
@@ -110,7 +110,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | 2.3.x          | 2.3.7                        | 
 | 2.4.x          | 2.4.15                       |
 | 2.5.x          | 2.5.16                       |
-| 2.6.x          | 2.6.17                       |
+| 2.6.x          | 2.6.18                       |
 
 ## Feedback & Issues
 

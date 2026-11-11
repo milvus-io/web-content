@@ -9,7 +9,7 @@ get_partition_stats(
     collection_name: str,
     partition_name: str,
     timeout: Optional[float] = None
-)
+) -> Dict
 ```
 
 **PARAMETERS:**

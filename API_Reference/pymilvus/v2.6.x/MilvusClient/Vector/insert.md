@@ -10,7 +10,7 @@ insert(
     data: Union[Dict, List[Dict]],
     timeout: Optional[float] = None,
     partition_name: Optional[str] = "",
-) -> List[Union[str, int]]
+) -> Dict
 ```
 
 **PARAMETERS:**
