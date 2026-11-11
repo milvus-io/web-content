@@ -94,6 +94,14 @@ DescribeCollectionResp
 
         Whether to enable dynamic fields for this schema.
 
+    - `ExternalSource` (*string?*) -
+
+        The external data source of the collection, when the collection is an external collection.
+
+    - `ExternalSpec` (*string?*) -
+
+        The external file specification of the collection (a JSON string), when the collection is an external collection.
+
 - **ShardsNum** (*int*) -
 
     The number of shards.
