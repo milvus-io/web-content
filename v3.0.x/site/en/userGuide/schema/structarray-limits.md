@@ -13,6 +13,7 @@ Most StructArray limits come from one of three places: the StructArray schema mo
 
 The main StructArray limits are:
 
+
 | Area | Limit |
 | --- | --- |
 | Schema shape | A Struct can be used only as the element type of an Array field. Struct is not supported as a top-level collection field. |
@@ -27,9 +28,11 @@ The main StructArray limits are:
 | Nullable fields | Nullable StructArray fields are version-gated. Row-level null applies to the whole StructArray field. Starting in Milvus 3.0.6, a subfield can additionally allow a null value in an individual Struct element: `nullable=True` on a scalar or vector subfield, `element_nullable=True` on an array subfield. A Struct element itself cannot be null. |
 | Dynamic add field | Adding a StructArray field to an existing collection is version-gated and requires the added field to be nullable. |
 
+
 ## Schema limits
 
 StructArray schemas have the following limits:
+
 
 | Limit | Details |
 | --- | --- |
@@ -43,11 +46,13 @@ StructArray schemas have the following limits:
 | Field properties are limited on StructArray fields. | Starting in Milvus 3.0.6, `alter_collection_field()` on a StructArray field or on a subfield path accepts only `mmap.enabled`, `field.description`, and `warmup`. Other properties, such as `max_capacity` and `max_length`, are rejected. |
 | Text analysis is not supported on subfields. | Setting `enable_match` or `enable_analyzer` on a Struct subfield is rejected. Text indexes are built only for top-level fields. |
 
+
 For schema creation examples, see [Create a StructArray Field](create-structarray-field.md).
 
 ## Supported subfield data types
 
 StructArray subfields map to physical array-style storage. The following table lists supported and unsupported physical types:
+
 
 | Struct subfield physical type | Support | Notes |
 | --- | --- | --- |
@@ -69,9 +74,11 @@ StructArray subfields map to physical array-style storage. The following table l
 | `Array` of `Array` | Supported in Milvus 3.0.6 and later | Define the subfield as `DataType.ARRAY` with a scalar `element_type` and a `max_capacity` for the inner array. Each Struct element then holds one inner array. Set `nullable=True` on the subfield to allow a null inner array and `element_nullable=True` to allow null values inside it. |
 | `Array` of `Array` of `Array`, `Array` of vectors, `Struct`, or `ArrayOfStruct` | Not supported | Array nesting inside a Struct is limited to one level, the inner array cannot hold vectors, and nested Struct or Array-of-Struct subfields are not supported. |
 
+
 ## Nullable and dynamic schema limits
 
 The following table describes nullable StructArray behavior and dynamic StructArray field addition, subject to the availability statement below:
+
 
 | Capability | Limit |
 | --- | --- |
@@ -88,18 +95,24 @@ The following table describes nullable StructArray behavior and dynamic StructAr
 | Dynamic add subfield | Supported in Milvus 3.0.6 and later. An added subfield must be created with `nullable=True`; an added `ARRAY` subfield additionally takes `element_nullable=True` for null values inside the inner array. Existing entities return null for the new subfield in each of their Struct elements, and entities whose StructArray field is null stay null. |
 
 
+
 Milvus 3.0.0 and later releases support nullable StructArray fields, nullable vector arrays, and dynamic StructArray field addition in both Standalone and Distributed deployments. Earlier Milvus versions do not support these capabilities.
+
 
 
 Milvus 3.0.6 and later releases additionally support element-level null values, scalar `ARRAY` subfields, and adding or dropping subfields of an existing StructArray field. These capabilities require Storage V2 and are not available in external collections.
 
+
+
 In Zilliz Cloud, these capabilities are available on On-Demand Clusters running Milvus 3.0.0 or later. Serving Clusters do not support them.
+
 
 For insert examples with nullable StructArray fields, see [Insert Data into StructArray Fields](insert-data-into-structarray-fields.md).
 
 ## Insert limits
 
 StructArray insert payloads have the following limits:
+
 
 | Limit | Details |
 | --- | --- |
@@ -109,6 +122,7 @@ StructArray insert payloads have the following limits:
 | Capacity | The number of Struct elements in one entity must not exceed `max_capacity`. |
 | Vector dimensions | Vector values must match the `dim` configured for their vector subfields. |
 | Search-mode duplication | If you need both EmbeddingList search and element-level search, write vectors to two separate vector subfields. |
+
 
 ## Index and metric limits
 
@@ -123,7 +137,9 @@ Use separate vector subfields when both modes are required. For example, use `ch
 
 StructArray vector subfields count as vector fields toward the collection-level limit `proxy.maxVectorFieldNum`, which defaults to 10. A StructArray field whose vector subfields are the collection's only vector fields is valid, and dropping such a field is rejected when it would leave the collection without a vector field. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.
 
+
 Starting in Milvus 3.0.6, an element-nullable vector subfield supports only element-level search with regular vector metrics. `MAX_SIM*` metrics, EmbeddingList indexes, and EmbeddingList search are rejected on element-nullable vector subfields, and `AUTOINDEX` does not select a `MAX_SIM*` metric for them. Null vectors do not participate in search. Scalar indexes are not supported on element-nullable subfields or on scalar `ARRAY` subfields.
+
 
 For the supported index-type and metric-type matrix, see [Index StructArray Fields](index-structarray-fields.md).
 
@@ -154,15 +170,20 @@ At a high level:
 
 - Do not use vector subfields as `$[...]` scalar predicate inputs.
 
+
 - JSON path syntax, JSON functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates. Starting in Milvus 3.0.6, `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length` are supported on `$[subfield]` for scalar `ARRAY` subfields, and `$[subfield] is null` / `is not null` is supported for every subfield type.
 
+
+
 - Starting in Milvus 3.0.6, a null subfield value in a Struct element makes the element predicate unknown rather than false. `element_filter` keeps only elements whose predicate is true, and `MATCH_*` counts an unknown element as a miss. For details, see [StructArray Operators](struct-array-operators.md).
+
 
 - Prefer explicit boolean comparisons such as `$[has_code] == true` instead of bare boolean expressions.
 
 <a id="Import-limits"></a>
 
 ## Import and storage limits
+
 
 | Limit | Details |
 | --- | --- |
@@ -171,6 +192,7 @@ At a high level:
 | External collections | Element-nullable subfields and scalar `ARRAY` subfields are not supported in external collections. |
 | Backup and snapshot import | Binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar `ARRAY` subfields. |
 | Downgrade | Collections that have element-nullable subfields or scalar `ARRAY` subfields cannot run on a release earlier than Milvus 3.0.6. Replaying the write-ahead log on the older release panics. Re-upgrading to Milvus 3.0.6 or later recovers the data. |
+
 
 ## Related pages
 

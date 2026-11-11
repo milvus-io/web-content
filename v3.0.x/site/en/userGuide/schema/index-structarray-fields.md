@@ -461,11 +461,15 @@ Scalar indexes are optional but useful when StructArray scalar subfields appear 
 
 For EmbeddingList search, choose the `MAX_SIM*` metric corresponding to the per-vector comparison: `MAX_SIM_COSINE` (also named `MAX_SIM`), `MAX_SIM_IP`, or `MAX_SIM_L2` for dense vectors, and `MAX_SIM_HAMMING` or `MAX_SIM_JACCARD` for binary vectors. These metrics compare embedding lists and return entity-level results. For element-level search, use the corresponding regular metric listed below.
 
+
 Starting in Milvus 3.0.6, scalar indexes are not supported on element-nullable subfields or on scalar `ARRAY` subfields. Filters on these subfields run without an index.
+
+
 
 ## Index element-nullable and added vector subfields | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, a vector subfield can be created with element-level null (`nullable=True`), and a vector subfield can be added to an existing StructArray field. Both cases change how you index the subfield:
+
 
 - An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as `COSINE`, `IP`, or `L2`. `MAX_SIM*` metrics and EmbeddingList indexes are rejected on it, and `AUTOINDEX` does not select a `MAX_SIM*` metric for it. Null vectors are skipped when the index is built and during search.
 

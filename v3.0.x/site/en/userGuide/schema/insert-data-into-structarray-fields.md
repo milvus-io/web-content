@@ -1021,7 +1021,9 @@ curl --request POST \
 
 For a non-NULL StructArray value, provide valid values for every required subfield. Do not mix NULL subfield arrays with present subfield arrays in the same entity.
 
+
 A Struct element itself cannot be null. Starting in Milvus 3.0.6, element-nullable subfields can hold null values in individual Struct elements, as described in the next section.
+
 
 <div class="alert note">
 
@@ -1029,9 +1031,11 @@ For version and deployment availability, see [StructArray Limits](structarray-li
 
 </div>
 
+
 ## Insert null values for individual Struct elements | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in some Struct elements and a valid value in others. The following example assumes that the `chunks` Struct schema defines a `lang` VARCHAR subfield with `nullable=True` and a `tags` array subfield with `nullable=True` and `element_nullable=True`. For the complete schema definition, see [Allow null values in Struct elements](create-structarray-field.md#allow-null-values-in-Struct-elements--milvus-306).
+
 
 In a Struct element, set an element-nullable subfield to `None` or omit it. Both store a null value.
 
@@ -1268,6 +1272,7 @@ Use StructArray field paths, such as `chunks[text]`, only when you query, search
 
 ## Insert rules
 
+
 | Rule | Explanation |
 | --- | --- |
 | Use an array of objects for a StructArray field. | The value of `chunks` is a list, and each item in the list is a Struct element. |
@@ -1277,6 +1282,7 @@ Use StructArray field paths, such as `chunks[text]`, only when you query, search
 | Respect `max_capacity`. | The number of Struct elements in one entity must not exceed the `max_capacity` of the StructArray field. |
 | Use separate vector subfields for separate search modes. | If both EmbeddingList search and element-level search are required, write vector values to both vector subfields. |
 | Use `null` only when the field is nullable. | Non-nullable StructArray fields require valid StructArray values. |
+
 
 ## Common mistakes
 

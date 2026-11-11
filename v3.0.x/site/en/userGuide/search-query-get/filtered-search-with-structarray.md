@@ -1068,7 +1068,9 @@ Use scalar subfields in StructArray predicates. Vector subfields are not scalar 
 | `VARCHAR` | `$[section] == "index"`, `$[text] like "range%"` |
 | Vector subfields | Not supported as `$[...]` scalar predicate inputs. Use vector subfields through vector search instead. |
 
+
 For unsupported cases such as JSON paths, text match functions, Geometry functions, Timestamptz expressions, and generic function calls, and for the array container functions and null predicates that `$[...]` supports starting in Milvus 3.0.6, see [StructArray Operators](struct-array-operators.md).
+
 
 ## Common mistakes
 

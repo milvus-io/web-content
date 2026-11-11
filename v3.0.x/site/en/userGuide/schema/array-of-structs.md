@@ -9,7 +9,9 @@ Use StructArray when one entity needs to store an ordered list of structured ele
 
 ## What is StructArray?
 
+
 A **StructArray**, also known as an array of structs, stores an ordered set of Struct elements in each entity. Every Struct element in the array follows the same schema. A Struct element can contain scalar subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array subfields.
+
 
 For example, a collection can store one article as an entity and store its chunks in a StructArray field named `chunks`. Each chunk can include text, section metadata, quality scores, and one or more vector embeddings.
 
