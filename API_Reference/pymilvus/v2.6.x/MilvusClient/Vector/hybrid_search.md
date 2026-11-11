@@ -14,7 +14,7 @@ hybrid_search(
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
     **kwargs,
-) -> SearchResult
+) -> List[List[dict]]
 ```
 
 **PARAMETERS:**
@@ -84,11 +84,11 @@ The additional search options, including the top-level `offset` for pagination a
 
 **RETURN TYPE:**
 
-*SearchResult*
+*list*
 
 **RETURNS:**
 
-Search results for the combined ANN requests after applying each request's expression or filter.
+A list of dictionaries containing the search results for the combined ANN requests after applying each request's expression or filter.
 
 **EXCEPTIONS:**
 
