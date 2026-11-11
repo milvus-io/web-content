@@ -88,7 +88,7 @@ const milvusClient = new MilvusClient({
     token: 'root:Milvus',
 });
 
-const fields: FieldType[] = [
+const fields = [
     { name: 'id', data_type: DataType.Int64, is_primary_key: true, autoID: true },
     { name: 'text', data_type: DataType.VarChar, type_params: { max_length: 512 } },
     { name: 'vector', data_type: DataType.FloatVector, type_params: { dim: 8 } },
