@@ -1453,6 +1453,7 @@ await client.DropCollectionFieldAsync(new DropCollectionFieldReq
 
 If `image_vector` is the last vector field in the collection, the drop operation is rejected.
 
+
 ### Drop a StructArray sub-field | Milvus 3.0.6
 
 Starting in Milvus 3.0.6, you can drop an individual sub-field from a StructArray field with `drop_collection_field()` by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in [When is storage space reclaimed after dropping a field?](#when-is-storage-space-reclaimed-after-dropping-a-field).
@@ -1517,6 +1518,7 @@ curl --request POST \
 You cannot drop the last sub-field of a StructArray field, the last vector field of the collection, or a sub-field used by a Function. To remove the whole StructArray field, drop it by name, as shown in the previous example. After a sub-field is dropped, insert and upsert requests that still carry the sub-field are rejected.
 
 Dropping a sub-field while queries are still running against it can fail transiently: query plans that were built on the older schema keep executing for a short time and fail with an internal error. Finish queries against a sub-field before dropping it, or retry the drop after the running queries finish.
+
 
 <a id="drop-vector-fields-generated-by-functions--milvus-30x"></a>
 
@@ -1626,7 +1628,9 @@ For a user-defined scalar field, existing entities return `NULL` unless you set 
 
 For a user-defined vector field, existing entities have `NULL` for the new vector field. Vector search on the added field skips entities whose vector value is `NULL`. To make existing entities searchable through the new vector field, write non-NULL vector values through upsert or a backfill workflow. New entities can include the new vector field during insert.
 
+
 For a StructArray field, existing entities return `NULL` for the new StructArray field across all its sub-fields. New entities must provide either `NULL` for the whole field or a valid value for every sub-field in every Struct element, except element-nullable sub-fields in Milvus 3.0.6 and later. For a sub-field added to an existing StructArray field, existing entities return `NULL` for that sub-field in each Struct element.
+
 
 ### Can I add BM25 lexical search to an existing collection?
 
@@ -1644,9 +1648,11 @@ Usually, no manual wait is required. If your next operation depends on the updat
 
 In a distributed deployment, there can be a short propagation window while Milvus components refresh collection metadata. If an operation immediately after the schema change fails with a schema-related error, refresh the schema and retry the operation.
 
+
 ### Why does an added vector sub-field fail with a FieldNotLoaded error?
 
 After you add a vector sub-field and create its index, queries against the new sub-field can still fail with error 2027 (`FieldNotLoaded`) even though the collection reports ready. Release the collection and load it again; queries then cover the new sub-field.
+
 
 ### When is storage space reclaimed after dropping a field?
 
