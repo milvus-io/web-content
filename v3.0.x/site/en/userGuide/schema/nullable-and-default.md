@@ -19,7 +19,7 @@ Use nullable fields when:
 
 - Vector fields that allow NULL values do not support `IS NULL` or `IS NOT NULL` filter expressions. You cannot explicitly filter entities based on whether a vector field value is NULL.
 
-- Starting in Milvus 3.0.0, the parent [StructArray](array-of-structs.md) field can be nullable. Set `nullable=True` on the parent StructArray field, not on individual subfields. NULL applies to the whole StructArray field, not to an individual Struct element, and Milvus propagates the parent's nullability to its subfields internally. A StructArray field added to an existing collection must be nullable so existing entities can return NULL for the new field. For details, refer to [StructArray Limits](structarray-limits.md#Nullable-and-dynamic-schema-limits).
+- Starting in Milvus 3.0.0, the parent [StructArray](array-of-structs.md) field can be nullable. Set `nullable=True` on the parent StructArray field, not on individual subfields. NULL applies to the whole StructArray field, not to an individual Struct element, and Milvus propagates the parent's nullability to its subfields internally. A StructArray field added to an existing collection must be nullable so existing entities can return NULL for the new field. Starting in Milvus 3.0.6, a subfield can additionally allow a NULL value in an individual Struct element: `nullable=True` on a scalar or vector subfield, `element_nullable=True` on an array subfield; a Struct element itself still cannot be NULL. For details, refer to [StructArray Limits](structarray-limits.md#Nullable-and-dynamic-schema-limits).
 
 - The nullable attribute is defined when a field is created and cannot be modified afterward. You cannot enable or disable nullability for an existing field.
 
@@ -38,7 +38,7 @@ When a field is defined with `nullable=True`, Milvus allows the field value to b
 If a field is not defined as nullable (the default behavior), every entity must provide a valid value for that field. Omitting the field or explicitly assigning a NULL value will cause the insert or import operation to fail.
 
 
-The nullable attribute is supported for both **scalar and vector fields** in a collection schema. Starting in Milvus 3.0.0, it is also supported on the parent StructArray field. Do not configure Struct subfields as nullable independently; define nullability on the StructArray parent and Milvus propagates that setting to its subfields internally.
+The nullable attribute is supported for both **scalar and vector fields** in a collection schema. Starting in Milvus 3.0.0, it is also supported on the parent StructArray field. Do not configure Struct subfields as row-level nullable independently; define row-level nullability on the StructArray parent and Milvus propagates that setting to its subfields internally. To allow NULL for a subfield value inside individual Struct elements (element-level null), set `nullable=True` on a scalar or vector subfield or `element_nullable=True` on an array subfield in Milvus 3.0.6 and later; refer to [Create a StructArray Field](create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306).
 
 
 <div class="alert note">

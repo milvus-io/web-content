@@ -9,7 +9,7 @@ Use StructArray when one entity needs to store an ordered list of structured ele
 
 ## What is StructArray?
 
-A **StructArray**, also known as an array of structs, stores an ordered set of Struct elements in each entity. Every Struct element in the array follows the same schema. A Struct element can contain scalar subfields, vector subfields, or both.
+A **StructArray**, also known as an array of structs, stores an ordered set of Struct elements in each entity. Every Struct element in the array follows the same schema. A Struct element can contain scalar subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array subfields.
 
 For example, a collection can store one article as an entity and store its chunks in a StructArray field named `chunks`. Each chunk can include text, section metadata, quality scores, and one or more vector embeddings.
 
@@ -143,7 +143,7 @@ StructArray documentation is split into modeling pages and search pages. Use the
 
 - `element_filter` and `MATCH_*` are for scalar subfields inside StructArray fields. Use `$[subfield]` only inside these operators. Row-level filters can also reference StructArray paths directly, such as `chunks[0][section]`, `array_length(chunks)`, and `array_contains(chunks[section], ...)`.
 
-- Some search combinations are version-gated or mode-specific. Check [StructArray Limits](structarray-limits.md) before relying on range search, grouping search, hybrid search, nullable fields, or dynamically added fields.
+- Some search combinations are version-gated or mode-specific. Check [StructArray Limits](structarray-limits.md) before relying on range search, grouping search, hybrid search, nullable fields, dynamically added fields, element-level null values, array subfields, or adding and dropping subfields.
 
 ## Next steps
 

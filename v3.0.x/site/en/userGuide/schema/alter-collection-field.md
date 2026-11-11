@@ -16,6 +16,8 @@ This page covers field property changes, not schema-shape changes such as adding
 
 - Each collection can have only one partition key. Once set during collection creation, you cannot change the partition key.
 
+- Starting in Milvus 3.0.6, for a [StructArray](array-of-structs.md) field or one of its subfield paths, such as `chunks[text]`, you can alter only `mmap.enabled`, `field.description`, and `warmup`. Other properties, such as `max_capacity` and `max_length`, are rejected. The parent field and its subfields are stored together, and `mmap.enabled` and `warmup` take effect on the shared storage when enabled on any of them: disabling one of these properties on a subfield alone does not take effect while the parent field or a sibling subfield still has it enabled. Also, `warmup` set to `disable` does not skip all reads: data required for query execution, such as element offsets, is still read.
+
 </div>
 
 ## Alter VarChar field

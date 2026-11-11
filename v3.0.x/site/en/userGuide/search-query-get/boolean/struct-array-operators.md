@@ -15,7 +15,7 @@ StructArray filtering has two operator families and a set of row-level path pred
 | `MATCH_*` | Select entities by how many Struct elements satisfy a scalar predicate. | Row-level filtering. These operators do not return element offsets by themselves. |
 | Row-level path predicates | Test one element position, count Struct elements, or test subfield values across elements without a `$[...]` predicate. | Row-level filtering. These predicates do not return element offsets. |
 
-Use scalar subfields in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.
+Use scalar subfields, and array subfields in Milvus 3.0.6 and later, in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.
 
 ## When to use which operator
 
@@ -235,6 +235,23 @@ Positional paths support comparison, `in`, `not in`, and chained range predicate
 
 ### ARRAY operators
 
+#### Access array subfields by position | Milvus 3.0.6
+
+Starting in Milvus 3.0.6, a positional path can also reference a scalar `ARRAY` subfield. `chunks[0][tags]` is the inner array of the first Struct element. It supports `==` and `!=` with an array literal, `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length`. Comparison operators, `in`, `like`, and arithmetic on it are rejected.
+
+```python
+# The first chunk is tagged "tuning".
+array_contains(chunks[0][tags], "tuning")
+
+# The first chunk has exactly these tags, in this order.
+chunks[0][tags] == ["search", "tuning"]
+
+# The first chunk has at least two tags.
+array_length(chunks[0][tags]) >= 2
+```
+
+`array_contains*`, `==`, and `!=` on the whole array subfield path, such as `array_contains(chunks[tags], "tuning")`, are rejected because that path holds one inner array per Struct element. Use `MATCH_ANY(chunks, array_contains($[tags], "tuning"))` instead.
+
 #### Count Struct elements
 
 Use `array_length(structArrayField)` to filter by the number of Struct elements in an entity. `array_length` on a subfield path, such as `array_length(chunks[section])`, returns the same count, because every subfield holds one value per Struct element.
@@ -307,9 +324,38 @@ The `$[...]` syntax represents the scalar value of the current Struct element. P
 | `INT8`, `INT16`, `INT32`, `INT64` | Comparison, chained range, `in`, `not in`, arithmetic expressions with `+`, `-`, `*`, `/`, or `%` followed by comparison, and logical combinations. |
 | `FLOAT`, `DOUBLE` | Comparison, chained range, `in`, `not in`, arithmetic expressions with `+`, `-`, `*`, or `/` followed by comparison, and logical combinations. The `%` operator is not supported for floating-point subfields. |
 | `VARCHAR` | String comparison, chained range, `in`, `not in`, `like`, `=~`, `!~`, and logical combinations. |
-| Vector subfields | Not supported as `$[...]` scalar predicate inputs. Use vector subfields through EmbeddingList search or element-level vector search instead. |
+| Scalar `ARRAY` subfields (Milvus 3.0.6 and later) | `array_contains`, `array_contains_any`, `array_contains_all`, and `array_length` on `$[tags]`, plus `$[tags] is null` and `$[tags] is not null`. Comparison operators, `in`, and `like` on `$[tags]` are rejected. |
+| Any element-nullable subfield (Milvus 3.0.6 and later) | `$[subfield] is null` and `$[subfield] is not null` test whether the value in the current Struct element is null. On a subfield that cannot hold null values, `is null` is always false. |
+| Vector subfields | Not supported as `$[...]` scalar predicate inputs, except `$[emb] is null` and `$[emb] is not null` on an element-nullable vector subfield in Milvus 3.0.6 and later. Use vector subfields through EmbeddingList search or element-level vector search instead. |
 
 Logical operators such as `&&`, `||`, and `!` apply to predicate expressions. For example, write `!($[has_code] == true)` instead of `!$[has_code]`.
+
+## Null values in element-level predicates | Milvus 3.0.6
+
+Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in a Struct element. Null values follow three-valued logic in StructArray predicates:
+
+- A comparison, `in`, `like`, or arithmetic predicate on a null subfield value is unknown rather than false. `&&`, `\|\|`, and `!` propagate unknown results, so `!($[lang] == "en")` is still unknown when `$[lang]` is null.
+
+- `element_filter` keeps only Struct elements whose predicate is true. Unknown elements are not matched.
+
+- `MATCH_*` counts an unknown element as a miss. `MATCH_ALL` is false when any element is unknown, while an empty StructArray still satisfies `MATCH_ALL`.
+
+- `$[subfield] is null` and `$[subfield] is not null` are always true or false. They read the validity of the current element, so `$[lang] is null` matches exactly the elements whose `lang` value is null.
+
+- On an array subfield, `array_contains*` on `$[tags]` skips null inner values and never matches a null inner array, `array_length($[tags])` counts null inner values, and `$[tags] is null` is true only for a null inner array.
+
+```python
+# Chunks whose language is unknown.
+element_filter(chunks, $[lang] is null)
+
+# Entities where every chunk has a detected language.
+MATCH_ALL(chunks, $[lang] is not null)
+
+# Entities with at least one chunk tagged "tuning".
+MATCH_ANY(chunks, array_contains($[tags], "tuning"))
+```
+
+Row-level positional paths follow the same rule: `chunks[0][lang] == "en"` is unknown when the `lang` value of the first element is null, when the entity has no element at that position, or when the StructArray field is null, so the entity does not match.
 
 ## Unsupported predicates
 
@@ -319,9 +365,11 @@ Element-level `$[...]` predicates do not support:
 
 - JSON path syntax, `exists` on JSON paths, or JSON functions such as `json_contains`, `json_contains_all`, or `json_contains_any`.
 
-- Array container functions such as `array_contains`, `array_contains_all`, `array_contains_any`, or `array_length` on `$[subfield]`. Use these functions on a subfield path such as `chunks[section]` in a row-level predicate instead.
+- Array container functions such as `array_contains`, `array_contains_all`, `array_contains_any`, or `array_length` on `$[subfield]` of a scalar subfield. Use these functions on a subfield path such as `chunks[section]` in a row-level predicate instead. Starting in Milvus 3.0.6, they are supported on `$[tags]` for scalar `ARRAY` subfields.
 
-- `$[subfield] is null` or `$[subfield] is not null`.
+- `$[subfield] is null` or `$[subfield] is not null` before Milvus 3.0.6.
+
+- A subscript into an array subfield, such as `$[tags][0]`, and `like` on `$[tags]`.
 
 - Geometry / GIS functions.
 
@@ -349,7 +397,9 @@ Follow these syntax rules:
 
 - In positional paths, write the element position before the subfield name: `chunks[0][section]`, not `chunks[section][0]`.
 
-- Use `IS NULL` and `IS NOT NULL` only on the whole StructArray field, such as `chunks is null`. Do not use them on a subfield path such as `chunks[section]` or on `$[subfield]`.
+- Use `IS NULL` and `IS NOT NULL` only on the whole StructArray field, such as `chunks is null`, or, starting in Milvus 3.0.6, on `$[subfield]` inside `element_filter` or `MATCH_*`. Do not use them on a subfield path such as `chunks[section]`.
+
+- Do not subscript into an array subfield. `$[tags][0]` and `chunks[0][tags][0]` are not supported.
 
 - `MATCH_ANY` on an empty StructArray returns `false`.
 

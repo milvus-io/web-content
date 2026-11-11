@@ -95,7 +95,7 @@ There are several special notes you should consider before using the merge featu
 
 - **Upsert a StructArray field.**
 
-    Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode.
+    Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode. Starting in Milvus 3.0.6, you can omit element-nullable subfields; Milvus stores null for them in that Struct element.
 
     For details, refer to [Upsert StructArray field in merge mode](upsert-entities.md#Upsert-StructArray-field-in-merge-mode).
 
@@ -1702,7 +1702,24 @@ console.log(res.data);
 
 ## Upsert StructArray field in merge mode
 
-Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field.
+Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field. Starting in Milvus 3.0.6, element-nullable subfields can be omitted or set to `None` in a Struct element, and Milvus stores null for them. A request that still carries a dropped subfield is rejected.
+
+pymilvus can also replace part of a StructArray value. Pass `field_ops` to `upsert()` with `FieldOp.path_replace()`: a path such as `[1][lang]` replaces one subfield of one Struct element and preserves the other Struct elements and subfields, and a path such as `[1]` replaces one whole Struct element. A child path carries only the selected subfield, and every operand must explicitly include its keys. A whole-element path requires every subfield that is not element-nullable and sets omitted element-nullable subfields to null.
+
+```python
+from pymilvus import FieldOp
+
+client.upsert(
+    collection_name="tech_articles",
+    data=[
+        {
+            "doc_id": 1,
+            "chunks": [{"lang": "zh"}],
+        }
+    ],
+    field_ops={"chunks": FieldOp.path_replace("[1][lang]")},
+)
+```
 
 The following example demonstrates how to upsert the `chunks` field in merge mode, a StructArray field with 6 subfields. When the operation completes, the `chunks` field of the entity with id 1 is set to the array with the two-element structs provided in the request.
 

@@ -205,17 +205,25 @@ A [StructArray](array-of-structs.md) field is carried differently by each source
 | Format | StructArray field shape |
 | --- | --- |
 | JSON, JSONL | The field value is a list of objects, one per Struct element, keyed by subfield name: `"chunks": [{"text": "...", "section": "index", "emb": [0.1, 0.2]}, ...]`. |
-| CSV | The cell holds the same JSON text as the JSON format. |
-| Parquet | One column per StructArray field with the type `list<struct<...>>`, one struct child per subfield. A scalar subfield is a scalar child, and a vector subfield is a list of its element type, such as `list<float32>`. |
+| CSV | The cell holds the same JSON text as the JSON format. The `nullkey` configured for the import job or a JSON `null` marks a null StructArray value. |
+| Parquet | One column per StructArray field with the type `list<struct<...>>`, one struct child per subfield. A scalar subfield is a scalar child, a vector subfield is a list of its element type, such as `list<float32>`, and an array subfield (Milvus 3.0.6 and later) is a `list<T>` child. |
 | NumPy | Not supported. NumPy files hold one file per top-level field and have no representation for a StructArray field. Use JSON, CSV, or Parquet files for collections that have a StructArray field. |
 
 The following rules apply to StructArray values in all supported formats:
 
 - Use subfield names inside each Struct element, not paths such as `chunks[text]`. Flat columns or keys named `chunks[text]` are rejected.
 
-- Each Struct element must provide every subfield of the Struct schema, and a Struct element itself cannot be null, such as `[null, {...}]`. A whole StructArray value can be null only when the StructArray field is nullable.
+- A Struct element itself cannot be null, such as `[null, {...}]`. A whole StructArray value can be null only when the StructArray field is nullable. Before Milvus 3.0.6, every Struct element must provide every subfield.
 
-For the schema-side limits, see [StructArray Limits](structarray-limits.md#Import-limits).
+- Keys or Parquet children that are not subfields of the collection, including dropped subfields, are ignored.
+
+- Starting in Milvus 3.0.6, a missing key or a `null` value for an element-nullable subfield imports as a null value for that Struct element, so files written before a subfield was added import without it. A `null` anywhere else fails the import. For an array subfield, `null` is a null inner array, and `null` inside the inner array is a null inner value when the subfield allows it.
+
+- Starting in Milvus 3.0.6, binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar array subfields.
+
+pymilvus [BulkWriter](#Set-up-BulkWriter) supports the StructArray shapes above in every supported format, including element-nullable subfields and nullable StructArray values. Use the same row shapes in the writer's `add_row()` calls.
+
+For the schema-side limits, see [StructArray Limits](structarray-limits.md#Import-and-storage-limits).
 
 ## Set up BulkWriter
 
