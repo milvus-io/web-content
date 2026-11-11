@@ -15,6 +15,8 @@ await milvusClient.loadCollection({
     refresh?: boolean,
     replica_number?: number,
     resource_groups?: string[],
+    load_fields?: string[],
+    skip_load_dynamic_field?: boolean,
     timeout?: number
 })
 ```
@@ -41,7 +43,15 @@ await milvusClient.loadCollection({
 
 - **resource_groups** (*string[]*) -
 
-    The number of resource groups in the collection to load.
+    The names of the resource groups that hold the loaded collection.
+
+- **load_fields** (*string[]*) -
+
+    A list of field names to load. If left unspecified, all fields are loaded.
+
+- **skip_load_dynamic_field** (*boolean*) -
+
+    Whether to skip loading the dynamic field.
 
 - **timeout** (*number*) -
 

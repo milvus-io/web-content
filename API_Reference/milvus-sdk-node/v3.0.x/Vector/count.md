@@ -13,27 +13,32 @@ await milvusClient.count({
     db_name?: string,
     collection_name: string,
     expr?: string,
-    timeout?: boolean
+    filter?: string,
+    timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*str*) -
+- **db_name** (*string*) -
 
     The name of the database that holds the target collection.
 
-- **collection_name** (*str*) -
+- **collection_name** (*string*) -
 
     **[REQUIRED]**
 
-    The name of the collection to create an alias for.
+    The name of the collection to count.
 
 - **expr** (*string*) -
 
     A scalar filtering condition to filter matching entities. 
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+
+- **filter** (*string*) -
+
+    An alias of **expr** for the filtering condition.
 
 - **timeout** (*number*)  
 

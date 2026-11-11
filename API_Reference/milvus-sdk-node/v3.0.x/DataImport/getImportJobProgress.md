@@ -12,6 +12,8 @@ await milvusClient.getImportJobProgress(params: HttpImportProgressReq)
 await milvusClient.getImportJobProgress({
     jobId: string,
     dbName?: string,
+    projectId?: string,
+    regionId?: string,
 })
 ```
 
@@ -26,6 +28,14 @@ await milvusClient.getImportJobProgress({
 - **dbName** (*string*) -
 
     Specifies the database name.
+
+- **projectId** (*string*) -
+
+    The ID of the Zilliz Cloud project. Optional.
+
+- **regionId** (*string*) -
+
+    The ID of the Zilliz Cloud region. Optional.
 
 **RETURNS:**
 
@@ -58,6 +68,18 @@ This method returns a promise that resolves to a **HttpImportProgressResponse** 
 - **data.importedRows** (*number*) -
 
     Specifies the imported row count when available.
+
+- **data.fileSize** (*number*) -
+
+    Specifies the total file size in bytes when available.
+
+- **data.completeTime** (*string*) -
+
+    Specifies the completion time when the job is finished.
+
+- **data.collectionName** (*string*) -
+
+    Specifies the target collection name.
 
 - **data.details** (*ImportJobDetailType[]*) -
 

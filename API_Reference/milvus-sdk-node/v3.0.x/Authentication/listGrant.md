@@ -12,7 +12,8 @@ await milvusClient.listGrant(data)
  milvusClient.listGrant({
    roleName: 'roleName',
    object: 'Collection',
-   objectName: '*'
+   objectName: '*',
+   db_name?: string
  });
 ```
 
@@ -31,6 +32,10 @@ await milvusClient.listGrant(data)
 - **objectName** (*string*)
 
     The name of a specific object in the specified object group. Using a wildcard (*) indicates that all privileges in the specified group are to be granted.
+
+- **db_name** (*string*)
+
+    The name of the database to which the target object belongs.
 
 - **timeout** (*number*) 
 

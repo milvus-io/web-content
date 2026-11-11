@@ -1,6 +1,6 @@
 # describeUser()
 
-This is a method template.
+This operation describes a user and its assigned roles.
 
 ```javascript
 await milvusClient.describeUser(data)
@@ -54,11 +54,15 @@ A list of **UserResult** objects. For `describeUser()`, this list contains a sin
 
     - **user** (*[User](User.md)*) -
 
-        A **User** object identifying the user.
+        A **[User](User.md)** object identifying the user.
 
     - **roles** (*[RoleEntity](RoleEntity.md)[]*) -
 
         A list of roles assigned to this user.
+
+    - **description** (*string*) -
+
+        The description of the user.
 
 - **ResStatus**
 A **ResStatus** object.

@@ -11,16 +11,21 @@ await milvusClient.listGrants(data)
 ```javascript
  milvusClient.listGrants({
    roleName: 'roleName',
+   db_name?: string,
  });
 ```
 
 **PARAMETERS:**
 
-- roleName (*string*)  
+- **roleName** (*string*)  
 
     The target role name
 
     Setting this to the name of a non-existing role may result in errors.
+
+- **db_name** (*string*)  
+
+    The name of the database to which the target role belongs.
 
 **RETURNS:**
 

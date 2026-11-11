@@ -11,6 +11,7 @@ await milvusClient.getPkFieldName(data: DescribeCollectionReq)
 ```javascript
 getPkFieldName({
     collection_name: string,
+    db_name?: string,
     timeout: number
 })
 ```
@@ -22,6 +23,10 @@ getPkFieldName({
     **[REQUIRED]**
 
     The name of the collection.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **timeout** (*number*) -
 

@@ -13,9 +13,12 @@ await milvusClient.hybridSearch({
     collection_name: string,
     data: HybridSearchSingleReq[],
     limit?: number,
+    topk?: number,
     offset?: number,
     output_fields?: string[],
     filter?: string,
+    params?: keyValueObj,
+    metric_type?: string,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
     partition_names?: string[],
     consistency_level?: ConsistencyLevelEnum,
@@ -26,6 +29,9 @@ await milvusClient.hybridSearch({
     hints?: string,
     round_decimal?: number,
     transformers?: OutputTransformers,
+    nq?: number,
+    ids?: number[] | string[],
+    highlighter?: Highlighter,
     db_name?: string,
     timeout?: number,
 })
@@ -49,6 +55,10 @@ await milvusClient.hybridSearch({
 
     The total number of entities to return. The sum of this value and `offset` must be less than or equal to 16,384.
 
+- **topk** (*number*) -
+
+    An alias of **limit**.
+
 - **offset** (*number*) -
 
     The number of records to skip in the search result. The sum of this value and `limit` must be less than or equal to 16,384.
@@ -61,7 +71,15 @@ await milvusClient.hybridSearch({
 
     A top-level scalar filtering condition applied after the hybrid search results are merged. Defaults to an empty string.
 
-- **rerank** (*RerankerObj \| FunctionObject \| [FunctionScore](FunctionScore.md)*) -
+- **params** (*keyValueObj*) -
+
+    Additional search parameters as key-value pairs.
+
+- **metric_type** (*string*) -
+
+    The metric type used to measure similarity between vectors.
+
+- **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy for combining results from multiple sub-searches. See `search()` for the full rerank parameter schema.
 
@@ -71,7 +89,7 @@ await milvusClient.hybridSearch({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. Options: `Strong` (0), `Bounded` (1), `Session` (2), `Eventually` (3). Defaults to `Bounded`.
+    The consistency level of the target collection. Options: `Strong` (0), `Session` (1), `Bounded` (2), `Eventually` (3). Defaults to `Bounded`.
 
 - **ignore_growing** (*boolean*) -
 
@@ -101,6 +119,18 @@ await milvusClient.hybridSearch({
 
     Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
 
+- **nq** (*number*) -
+
+    The number of query vectors.
+
+- **ids** (*number[]* | *string[]*) -
+
+    Primary keys for search-by-PK queries.
+
+- **highlighter** (*Highlighter*) -
+
+    A highlighter for the search results.
+
 - **db_name** (*string*) -
 
     The name of the database containing the collection.
@@ -108,10 +138,6 @@ await milvusClient.hybridSearch({
 - **timeout** (*number*) -
 
     The timeout duration for this operation in milliseconds.
-
-- **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
-
-    The fields to order the search results by. Optional.
 
 **RETURNS:**
 
@@ -143,7 +169,7 @@ Each element in the `data` array is a **HybridSearchSingleReq** object that defi
 
     The name of the vector field to search within this sub-request.
 
-- **filter** (*string*) -
+- **expr** (*string*) -
 
     A scalar filtering condition applied only to this sub-search.
 

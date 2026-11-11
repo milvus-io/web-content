@@ -16,18 +16,31 @@ Milvus automatically flushes data into persistent storage at intervals. You are 
 
 ```javascript
 await milvusClient.getFlushState({
-    segment_ids: number[],
+    segmentIDs?: number[],
+    flush_ts?: number,
+    db_name?: string,
+    collection_name?: string,
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **segment_ids** (*number[]*) -
-
-    **[REQUIRED]**
+- **segmentIDs** (*number[]*) -
 
     A list of the target segment IDs.
+
+- **flush_ts** (*number*) -
+
+    The flush timestamp to check against.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
+
+- **collection_name** (*string*) -
+
+    The name of the collection whose flush state to check. Provide at least one of **segmentIDs**, **flush_ts**, or **collection_name**.
 
 - **timeout** (*number*)  
 

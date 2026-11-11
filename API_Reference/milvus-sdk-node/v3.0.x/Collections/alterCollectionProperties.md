@@ -44,7 +44,7 @@ await milvusClient.alterCollectionProperties({
 
         The time-to-live (TTL) of a collection in seconds.
 
-    - **mmap.enabled** (*bool*) -
+    - **mmap.enabled** (*boolean*) -
 
         Whether to enable mmap for the raw data and indexes of all fields in the collection.
 
@@ -96,7 +96,7 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const resStatus = await milvusClient.alterCollection({
+const resStatus = await milvusClient.alterCollectionProperties({
     collection_name: 'my-collection',
     properties: {"collection.ttl.seconds": 18000}
 });

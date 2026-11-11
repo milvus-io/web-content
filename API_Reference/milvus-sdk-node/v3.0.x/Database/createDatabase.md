@@ -28,27 +28,27 @@ await milvusClient.createDatabase({
 
     Properties to set along with database creation. Possible database properties are as follows:
 
-    - **database.replica.number** (*int*) -
+    - **database.replica.number** (*number*) -
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*[]str*) -
+    - **database.resource_groups** (*string[]*) -
 
         Resource groups dedicated to the database.
 
-    - **database.diskQuota.mb** (*int*) -
+    - **database.diskQuota.mb** (*number*) -
 
         Disk quota allocated to the database in megabytes (**MB**).
 
-    - **database.max.collections** (*int*) -
+    - **database.max.collections** (*number*) -
 
         Maximum number of collections allowed in the database.
 
-    - **database.force.deny.writing** (*bool*) -
+    - **database.force.deny.writing** (*boolean*) -
 
         Whether to deny all write operations in the database.
 
-    - **database.force.deny.reading** (*bool*) -
+    - **database.force.deny.reading** (*boolean*) -
 
         Whether to deny all read operations in the database.
 
@@ -60,7 +60,7 @@ await milvusClient.createDatabase({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

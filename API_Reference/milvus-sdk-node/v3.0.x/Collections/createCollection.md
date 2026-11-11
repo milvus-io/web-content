@@ -23,16 +23,13 @@ await milvusClient.createCollection({
     consistency_level?: "Strong" | "Session" | "Bounded" | "Eventually" | "Customized";
     description?: string;
     enable_dynamic_field?: boolean;
+    enableDynamicField?: boolean;
     id_type?: Int64 | VarChar;
     index_params?: CreateIndexParam;
-    metric_type?: string;
+    metric_type?: string | MetricType;
     primary_field_name?: string;
     vector_field_name?: string;
     timeout?: number;
-    external_source?: string;
-    external_spec?: string;
-    do_physical_backfill?: boolean;
-    file_source_ids?: Array<number | string>;
  })
 ```
 
@@ -50,6 +47,8 @@ await milvusClient.createCollection({
 
 - **dimension** (*number*) -
 
+    **[REQUIRED]**
+
     The dimensionality of the vector embeddings. The value should be an integer greater than 1. Skip this if you need to customize the collection schema.
 
 - **auto_id** (*boolean*) - 
@@ -60,7 +59,7 @@ await milvusClient.createCollection({
 
     This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
-- **consistency_level** (*number* | *string*)
+- **consistency_level** (*string*)
 
     The consistency level of the target collection.
 
@@ -86,15 +85,19 @@ await milvusClient.createCollection({
 
     The value defaults to **True**, indicating that the meta field is used.
 
+- **enableDynamicField** (*boolean)* -
+
+    An alias of **enable_dynamic_field**.
+
 - **id_type** (*Int64* | *VarChar*) -
 
     The data type of the primary field.
 
-- **index_params** (*CreatIndexParam*) -
+- **index_params** (*CreateIndexParam*) -
 
     The index parameters for the collection to create.
 
-- **metric_type** (*string*) -
+- **metric_type** (*string* | *MetricType*) -
 
     The metric type determines how similarities between vector embeddings are measured.
 
@@ -110,22 +113,6 @@ await milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-- **external_source** (*string*) -
-
-    The external source path. This applies to the creation of external collections.
-
-- **external_spec** (*string*) -
-
-    The external spec configuration. This applies to the creation of external collections.
-
-- **do_physical_backfill** (*boolean*) -
-
-    Whether to physically backfill external data. This applies to the creation of external collections.
-
-- **file_resource_ids** (*Array<number | string>*) -
-
-    The external file resource IDs. This applies to the creation of external collections.
-
 ### With CreateCollectionReq
 
 Using this request body, you can customize the schema settings of the collection.
@@ -134,9 +121,10 @@ Using this request body, you can customize the schema settings of the collection
 await milvusClient.createCollection({
    db_name?: string,
    collection_name: string,
-   consistency_level: number | string,
+   consistency_level: string,
    description: string,
    enable_dynamic_field: boolean,
+   fields?: FieldType[],
    schema: [
      {
        name: string,
@@ -159,7 +147,7 @@ await milvusClient.createCollection({
        },
        autoID?: boolean,
        nullable: boolean,
-       default_value: object
+       default_value: number | string
      }
    ],
    functions: [
@@ -180,8 +168,7 @@ await milvusClient.createCollection({
    timeout?: number,
    external_source?: string;
    external_spec?: string;
-   do_physical_backfill?: boolean;
-   file_source_ids?: Array<number | string>;
+   file_resource_ids?: Array<number | string>;
 })
 ```
 
@@ -197,7 +184,7 @@ await milvusClient.createCollection({
 
     The name of the collection to create.
 
-- **consistency_level** (*number* | *string*)
+- **consistency_level** (*string*)
 
     The consistency level of the target collection.
 
@@ -227,7 +214,11 @@ await milvusClient.createCollection({
 
     The schema of the collection as a list of field definitions.
 
-- **functions** (*list*)
+- **fields** (*[FieldType](FieldType.md)[]*) -
+
+    An alternative to **schema** that lists the fields of the collection as a list of field definitions.
+
+- **functions** (*[FunctionObject](FunctionObject.md)[]*)
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
 
@@ -333,15 +324,11 @@ await milvusClient.createCollection({
 
     The external spec configuration. This applies to the creation of external collections.
 
-- **do_physical_backfill** (*boolean*) -
-
-    Whether to physically backfill external data. This applies to the creation of external collections.
-
 - **file_resource_ids** (*Array<number | string>*) -
 
     The external file resource IDs. This applies to the creation of external collections.
 
-### With CreateCollectionWithSchemaAndIndexParamsReq
+### With CreateColWithSchemaAndIndexParamsReq
 
 Using this request body, you can customize the schema and index settings of the collection. Upon creation, the collection is automatically loaded.
 
@@ -349,9 +336,10 @@ Using this request body, you can customize the schema and index settings of the 
 await milvusClient.createCollection({
    db_name?: string,
    collection_name: string,
-   consistency_level: number | string,
+   consistency_level: string,
    description: string,
    enable_dynamic_field: boolean,
+   fields?: FieldType[],
    schema: [
      {
        name: string,
@@ -373,7 +361,7 @@ await milvusClient.createCollection({
          'mmap.enabled': boolean
        },
        nullable: boolean,
-       default_value: object
+       default_value: number | string
      }
    ],
    functions: [
@@ -415,7 +403,7 @@ await milvusClient.createCollection({
 
     The name of the collection to create.
 
-- **consistency_level** (*number* | *string*)
+- **consistency_level** (*string*)
 
     The consistency level of the target collection.
 
@@ -445,7 +433,11 @@ await milvusClient.createCollection({
 
     The schema of the collection as a list of field definitions.
 
-- **functions** (*list*)
+- **fields** (*[FieldType](FieldType.md)[]*) -
+
+    An alternative to **schema** that lists the fields of the collection as a list of field definitions.
+
+- **functions** (*[FunctionObject](FunctionObject.md)[]*)
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
 
@@ -481,9 +473,9 @@ await milvusClient.createCollection({
 
     </div>
 
-- **partition_key_field** (*boolean)* -
+- **partition_key_field** (*string*) -
 
-    A boolean value indicating whether to enable partition key.
+    The name of the field that serves as the partition key.
 
     <div class="alert note">
     
@@ -574,10 +566,6 @@ await milvusClient.createCollection({
 - **external_spec** (*string*) -
 
     The external spec configuration. This applies to the creation of external collections.
-
-- **do_physical_backfill** (*boolean*) -
-
-    Whether to physically backfill external data. This applies to the creation of external collections.
 
 - **file_resource_ids** (*Array<number | string>*) -
 

@@ -11,6 +11,8 @@ await milvusClient.getReplicas(data: GetReplicaReq)
 ```javascript
 await milvusClient.getReplicas({
     collectionID: number | string,
+    collection_name?: string,
+    db_name?: string,
     with_shard_nodes?: boolean,
     timeout?: number,
 })
@@ -23,6 +25,14 @@ await milvusClient.getReplicas({
     **[REQUIRED]**
 
     The ID of the collection.
+
+- **collection_name** (*string*) -
+
+    The name of the collection. Optional.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection. Optional.
 
 - **with_shard_nodes** (*boolean*) -
 
@@ -81,22 +91,6 @@ A list of replicas currently serving the requested collection.
         - **node_ids** (*string[]*) -
 
         The query node IDs that hold this shard's data.
-
-        - **leaderID** (*string*) -
-
-            The query node ID acting as the shard leader.
-
-        - **leader_addr** (*string*) -
-
-            The address of the leader query node.
-
-        - **dm_channel_name** (*string*) -
-
-            The DML channel served by this shard.
-
-        - **node_ids** (*string[]*) -
-
-            The query node IDs that hold this shard's data.
 
     - **node_ids** (*string[]*) -
 

@@ -14,7 +14,7 @@ export interface FunctionScore {
 
 - **functions** (*FunctionObject[]*) -
 
-    The functions applied to the search results. See FunctionObject.
+    The functions applied to the search results. See [FunctionObject](../Collections/FunctionObject.md).
 
 - **params** (*keyValueObj*) -
 

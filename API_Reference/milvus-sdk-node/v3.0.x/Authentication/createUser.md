@@ -12,6 +12,7 @@ await milvusClient.createUser(data)
 await milvusClient.createUser({
    username: string,
    password: string,
+   description?: string,
    timeout?: number
  })
 ```
@@ -29,6 +30,10 @@ await milvusClient.createUser({
     **[REQUIRED]**
 
     The password of the user to create.
+
+- **description** (*string*) -
+
+    The description of the user to create.
 
 - **timeout** (*number*)  -
 

@@ -31,7 +31,7 @@ await milvusClient.dropResourceGroup({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -80,18 +80,18 @@ const milvusClient = new MilvusClient({
     token: 'root:Milvus',
 });
 
-const configs: ResourceGroupConfig = {
+const configs = {
     requests: { node_num: 0 },
     limits: { node_num: 0 },
     transfer_from: [{ resource_group: DEFAULT_RESOURCE_GROUP }],
     transfer_to: [{ resource_group: DEFAULT_RESOURCE_GROUP }]
 }
 
-const res = await milvusClient.updateResourceGroups({ 
-    my_rg: configs
+const resStatus1 = await milvusClient.updateResourceGroups({ 
+    resource_groups: { my_rg: configs }
 });
 
-const res = await milvusClient.dropResourceGroup({ 
+const resStatus2 = await milvusClient.dropResourceGroup({ 
     resource_group: 'my_rg'
 });
 ```

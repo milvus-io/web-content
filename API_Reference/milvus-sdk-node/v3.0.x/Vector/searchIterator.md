@@ -12,9 +12,11 @@ await milvusClient.searchIterator(data: SearchIteratorReq)
 await milvusClient.searchIterator({
     collection_name: string,
     data: SearchData | SearchData[],
+    vector?: SearchData | SearchData[],
     batchSize: number,
     limit?: number,
     filter?: string,
+    expr?: string,
     anns_field?: string,
     output_fields?: string[],
     partition_names?: string[],
@@ -23,9 +25,17 @@ await milvusClient.searchIterator({
     consistency_level?: ConsistencyLevelEnum,
     ignore_growing?: boolean,
     group_by_field?: string,
+    group_size?: number,
+    strict_group_size?: boolean,
+    order_by_fields?: OrderByFields,
+    hints?: string,
+    round_decimal?: number,
     exprValues?: keyValueObj,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
     transformers?: OutputTransformers,
+    nq?: number,
+    ids?: number[] | string[],
+    highlighter?: Highlighter,
     external_filter_fn?: (row: SearchResultData) => boolean,
     db_name?: string,
 })
@@ -41,9 +51,11 @@ await milvusClient.searchIterator({
 
 - **data** (*[SearchData](SearchData.md) | SearchData[]*) -
 
-    **[REQUIRED]**
+    The query vector(s). Supported types include FloatVector (number[]), BFloat16Vector (Uint8Array), Float16Vector (Uint8Array), BinaryVector (number[]), and SparseFloatVector. Provide either **data** or **vector**.
 
-    The query vector(s). Supported types include FloatVector (number[]), BFloat16Vector (Uint8Array), Float16Vector (Uint8Array), BinaryVector (number[]), and SparseFloatVector.
+- **vector** (*[SearchData](SearchData.md) | SearchData[]*) -
+
+    An alias of **data** for the query vector(s).
 
 - **batchSize** (*number*) -
 
@@ -58,6 +70,10 @@ await milvusClient.searchIterator({
 - **filter** (*string*) -
 
     A scalar filtering condition to filter matching entities before the search. Defaults to an empty string (no filter).
+
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
 
 - **anns_field** (*string*) -
 
@@ -81,7 +97,7 @@ await milvusClient.searchIterator({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level for this operation. Options: Strong (0), Bounded (1), Session (2), Eventually (3). Defaults to Bounded.
+    The consistency level for this operation. Options: Strong (0), Session (1), Bounded (2), Eventually (3). Defaults to Bounded.
 
 - **ignore_growing** (*boolean*) -
 
@@ -91,11 +107,43 @@ await milvusClient.searchIterator({
 
     Groups search results by the specified field to ensure diversity.
 
+- **group_size** (*number*) -
+
+    The target number of entities to return within each group in a grouping search.
+
+- **strict_group_size** (*boolean*) -
+
+    Whether **group_size** is strictly enforced in a grouping search.
+
+- **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
+
+    The fields to order the search results by.
+
+- **hints** (*string*) -
+
+    A hints string to improve search performance.
+
+- **round_decimal** (*number*) -
+
+    The number of decimal places to keep in the final results.
+
 - **exprValues** (*keyValueObj*) -
 
     Placeholder values for a templated filter expression.
 
-- **rerank** (*RerankerObj | FunctionObject | [FunctionScore](FunctionScore.md)*) -
+- **nq** (*number*) -
+
+    The number of query vectors.
+
+- **ids** (*number[]* | *string[]*) -
+
+    Primary keys for search-by-PK queries.
+
+- **highlighter** (*Highlighter*) -
+
+    A highlighter for the search results.
+
+- **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy and its parameters. See `search()` for details on supported reranker types.
 

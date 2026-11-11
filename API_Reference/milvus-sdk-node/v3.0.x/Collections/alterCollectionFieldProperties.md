@@ -28,7 +28,7 @@ await milvusClient.alterCollectionFieldProperties({
 
     **[REQUIRED]**
 
-    The name of the target collection to reassign an alias to.
+    The name of the target collection.
 
 - **field_name** (*string*) -
 
@@ -54,7 +54,7 @@ await milvusClient.alterCollectionFieldProperties({
 
         This is mandatory for a **DataType.ARRAY** field. See [DataType](DataType.md).
 
-    - **mmap_enabled** (*bool*) -
+    - **mmap.enabled** (*boolean*) -
 
         Whether Milvus maps the field data into memory instead of fully loading it. For details, refer to MMap-enabled Data Storage.
 
@@ -106,7 +106,7 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const resStatus = await milvusClient.alterCollectionField({
+const resStatus = await milvusClient.alterCollectionFieldProperties({
   collection_name: 'my-collection',
   field_name: 'my-field',
   properties: {"mmap.enabled": true}

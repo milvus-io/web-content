@@ -81,3 +81,19 @@ A **ResStatus** object.
 
     This exception is raised when any error occurs during this operation.
 
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.listIndexes({
+    collection_name: 'my_collection',
+});
+
+console.log(res.indexes);
+```

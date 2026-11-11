@@ -93,7 +93,7 @@ const milvusClient = new MilvusClient({
 });
 const resStatus = await milvusClient.dropCollectionProperties({
     collection_name: 'my-collection',
-    delete_keys: ["collection.ttl.seconds"]
+    properties: ["collection.ttl.seconds"]
 });
 ```
 

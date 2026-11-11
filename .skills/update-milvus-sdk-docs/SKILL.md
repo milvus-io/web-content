@@ -1,6 +1,6 @@
 ---
 name: update-milvus-sdk-docs
-description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 15-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
+description: Update the Milvus SDK API reference documentation under API_Reference/ in the web-content repository so it reflects a new SDK release, using the SDK repository's git tags as ground truth. Also audit/reconcile existing pages against a tag to fix omissions and errors, and run strict format checks (检查格式/check formatting) that walk the full 16-step reconciliation checklist. Use when the user asks to bump/update/refresh SDK reference docs, publish a new SDK version's API docs, audit/check/backfill/reconcile API_Reference for missing methods or wrong signatures, run a format check on the API_Reference trees, or mentions API_Reference, milvus-sdk-cpp, milvus-sdk-rust, pymilvus, milvus-sdk-java, milvus-sdk-go, milvus-sdk-node, milvus-sdk-csharp, and a version bump (e.g. "update cpp docs to v3.0.2").
 ---
 
 # Update Milvus SDK Reference Docs
@@ -86,16 +86,17 @@ run with a clarification instead of downgrading.
 
 
 **Format check mode**: when the user's instruction includes "检查格式",
-"格式检查", "check formatting", or "check format", run the **full 15-step
+"格式检查", "check formatting", or "check format", run the **full 16-step
 reconciliation checklist** against the target tree — the same Steps 1–14
-(including sub-step 8b) plus Step 15 in
+(including sub-step 8b) plus Steps 15 and 16 in
 [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
 enum format, cross-links, misplaced type pages, missing/absent inline
 expansions, unnecessary standalone pages, operation page filename and title, error
 reporting convention, About.md format compliance, example relevance, example
-heading cardinality, standalone type-page examples, section heading forms) plus the
+heading cardinality, standalone type-page examples, section heading forms,
+multi-type page hierarchy / member ownership) plus the
 Pass 1 response-surface audit. Apply the steps strictly,
 one category at a time, and fix every violation found. This mode does not bump
 versions — it audits and corrects whatever the checklist surfaces, including
@@ -118,13 +119,18 @@ titles, links, whitespace, or code snippets. Before editing, emit a
 `FORMAT CHECK BASELINE` containing the target paths/tags, a complete source
 API/type inventory, a complete Markdown page inventory, the source-to-page map,
 and a type reference matrix showing every page that references each type. Then
-execute Steps 1–15 in order. Do not replace a full pass with representative
+execute Steps 1–16 in order. Do not replace a full pass with representative
 samples; sample during diagnosis only, then reconcile every matching page.
 The matrix must be source-backed and classified before Step 5: remove every
-candidate whose name is absent from the target Java tag, then classify each
-remaining source-backed candidate by declaration kind and package into request
-wrapper, response wrapper/status model, enum, request-data/domain model, client
-or pool API class, exception, or generic nested field. Record the classification
+candidate whose name is absent from the target tag (the SDK tag the run checks
+against — e.g. a `v3.0.2` tag; adapt "tag" to the SDK's own version naming),
+then classify each remaining source-backed candidate by declaration kind and,
+where the language has one, its package/module/namespace into the applicable
+category — request wrapper, response wrapper/status model, enum,
+request-data/domain model, client or pool API class, exception, or generic
+nested field. Map the categories onto the SDK's own constructs (e.g. C++
+request headers, go option structs, python request dataclasses); not every
+category exists in every language. Record the classification
 and source path for every candidate; do not treat section names such as
 `Example` or prose tokens such as `Field` as types. Step 5 may not be marked
 complete while any candidate remains `UNCLASSIFIED`.
@@ -977,7 +983,11 @@ and confirm with the user before deleting it.
   header; fix to match the code.
 
 Also check, **one category at a time** (fix and verify each before moving to
-the next):
+the next). The reconciliation checklist is the full **Steps 1–16** below —
+Step 15 (section heading forms) and Step 16 (multi-type page hierarchy /
+member ownership) are **part of every reconciliation run**, not only of format
+checks, so member-ownership and heading-form violations are caught and fixed
+during 对账 as well:
 
 **Step 1 — Enum values on type pages**: verify every enum type page lists all
 variants from the SDK source (name and value). Add missing values, remove
@@ -1132,6 +1142,25 @@ operation pages must never introduce nested `## Example` sections or
 standalone-page import-only blocks; rely on the operation/client page's
 existing top-level imports.
 
+**Post-fold verification is mandatory before deleting the standalone page.**
+A fold is complete only when the owner page contains, under a labeled type or
+member (the folded type's name must appear in the owner page), **actual member
+entries** — field/member bullets or a declaration block naming each member with
+its type — for the folded type, **not** a one-line summary or a bare link that
+just renames it. Run the "Scripted batch edits" completeness check against the
+owner page before and after the fold:
+- the folded type's name is present in the owner page (as a heading, a member
+  label, or a named type reference);
+- every member of the folded type that the standalone page documented appears
+  in the owner page's inline expansion (match by member name);
+- no member list was replaced by a summary sentence, a bare `See <page>.` link,
+  or a link that points at a page being deleted.
+Only when all three hold, delete the standalone page. If any member is missing
+from the expansion, finish the expansion first and re-check. This check applies
+to every fold in Step 10 (nested subtypes, single-referencer top-level types,
+and orphaned pages folded into their owner), regardless of how the fold was
+performed.
+
 **Step 12 — Error-reporting convention**: verify that each operation page
 uses the correct error-reporting convention for its SDK. SDKs that return a
 Status/result object (e.g. C++, Go, Java) should use `**ERROR HANDLING:**`,
@@ -1232,6 +1261,72 @@ a bold mixed-case form (`**Methods:**`, `**Exceptions:**`,
 `**Request syntax:**`) becomes the canonical `**METHODS:**` /
 `**EXCEPTIONS:**` / `## Request Syntax`. Preserve the section's content
 exactly; only the heading line changes.
+
+**Step 16 — Multi-type page hierarchy (member ownership)**: when a page
+documents the page-title type plus inlined nested/helper types (for example
+`BulkWriter` + `BulkWriterOptions` + `FlushEvent` + `Formatter`), each
+`##`-level section must belong to exactly ONE type, so that a reader — including
+an LLM that parses headings — cannot misattribute members across types. Verify
+and fix:
+- The page-title type's own members (methods, properties, events) are grouped
+  under a section that names that type: directly under `# <Title>` before the
+  first nested-type `##` heading, or under `## Constructor` / `## Methods` /
+  `## Properties` (or the language-equivalent). They must never appear inside a
+  section headed by a nested type's name.
+- Each inlined nested/helper type has its own `## <Type>` heading, and only that
+  type's members appear in its section (`**FIELDS:**` / `**METHODS:**` /
+  `**PARAMETERS:**`). A member whose value is itself a nested subtype is expanded
+  as indented bullets directly beneath that member (for example the `flush`
+  event carries `files` / `rowCount` / `chunkIndex` nested under it) — never as
+  a sibling member block under another type's heading.
+- `**RETURNS:**` describing the page-title type's return sits in the page-title
+  type's section (immediately after its own members), never after a nested-type
+  section where a reader would attribute the return to that nested type.
+- **Detection heuristic**: for a page with two or more `##`-level sections, walk
+  each `## <Type>` segment in document order and collect the member bullets it
+  contains. If a segment headed by a nested type carries members that belong to
+  the page-title type (or to another type), reorder the page so each section
+  contains only its own type's members and the page-title type's member block
+  precedes the first nested-type section. If a `## <Type>` section holds only a
+  summary sentence while its members are documented elsewhere under a different
+  heading, move those members under the correct `## <Type>` heading.
+- **Operation-specific value lists vs. type members**: when a member's nested
+  bullets are a value list valid only for a particular call or operation (for
+  example `params` under a search request carrying `radius` / `range_filter` /
+  `max_empty_result_buckets`), they are NOT members of the member's declared type
+  (such as `keyValueObj`). State that ownership explicitly in the member's
+  description — e.g. "These are the keys accepted in the search `params`; they
+  are not members of `keyValueObj`" — so a reader (including an LLM) does not
+  mistake the operation-specific keys for members of the declared type. Do not
+  silently rely on indentation alone to convey this.
+- **Reused bold label for two scopes (cross-SDK, condition-triggered)**: when a
+  page uses the SAME bold section label for two different scopes — request
+  parameters vs. response members — the two sections must be distinguishable by
+  their enclosing context alone, so a label-only parse (an LLM that groups by
+  section label without tracking position) cannot merge them into one list. This
+  is the node-tree pattern (`**PARAMETERS:**` under `## Request Syntax`, then
+  `**RETURNS:**`, then a second `**PARAMETERS:**` for response members; go,
+  pymilvus, and csharp reuse `**PARAMETERS:**` the same way but are anchored by a
+  distinct `**RETURN TYPE:**` heading). The trigger is per-tree: it applies
+  wherever the same label is actually reused for two scopes, regardless of SDK.
+  Trees that already use distinct labels or anchors per scope — cpp
+  (`**REQUEST METHODS:**` vs. `**METHODS:**`), java (response members are
+  `getXxx()` bullets under `**RETURNS:**`), rust (`**RETURN TYPE:**` +
+  `**METHODS:**`), csharp (`**RETURN TYPE:**`/`**PARAMETERS:**`) — satisfy this
+  rule inherently and need no change. Where the rule triggers, verify each
+  response-member section keeps an unambiguous anchor: a shape code block
+  naming the members that follow, and/or a sentence stating the returned type
+  (e.g. "This method returns a promise that resolves to a **ResStatus**
+  object."), so a label-only reader can still tell the second `**PARAMETERS:**`
+  belongs to the response, not the request. Add such an anchor where it is
+  missing.
+ - Applies to every multi-type page — folded types from Step 10, operation pages
+   that expand request/response subtypes inline, and enum-plus-related-type pages
+   — across all SDKs. The heading hierarchy must be unambiguous before the page
+   passes.
+
+Steps 15 and 16 are enforced in **both** reconciliation (对账) runs and format
+checks; a reconciliation run that skips them is incomplete.
 
 After completing all steps, run a final validation: 0 broken links, 0
 orphaned pages, 0 format violations, and produce a per-page change summary.

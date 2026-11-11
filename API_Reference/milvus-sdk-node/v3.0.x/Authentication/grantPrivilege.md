@@ -13,6 +13,7 @@ await milvusClient.grantPrivilege(data)
    roleName: string,
    object: string,
    objectName: string,
+   db_name?: string,
    privilegeName: string,
    timeout?: number
  })
@@ -53,6 +54,10 @@ await milvusClient.grantPrivilege(data)
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
     When **object** is set to **Global**, set **objectName** to the wildcard (**&ast;**), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+
+- **db_name** (*string*) -
+
+    The name of the database to which the target object belongs.
 
 - **privilegeName** (*string*) -
 

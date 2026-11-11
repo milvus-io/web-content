@@ -13,6 +13,8 @@ await milvusClient.loadBalance({
     src_nodeID: number,
     dst_nodeIDs?: number[],
     sealed_segmentIDs?: number[],
+    collectionName?: string,
+    db_name?: string,
     timeout?: number,
 })
 ```
@@ -32,6 +34,14 @@ await milvusClient.loadBalance({
 - **sealed_segmentIDs** (*number[]*) -
 
     The IDs of sealed segments to balance. Optional.
+
+- **collectionName** (*string*) -
+
+    The name of the collection to balance. Optional.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection. Optional.
 
 - **timeout** (*number*) -
 

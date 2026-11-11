@@ -16,7 +16,7 @@ await milvusClient.deleteEntities({
    expr?: string,
    filter?: string,
    exprValues?: keyValueObj,
-   consistency_level: string,
+   consistency_level: ConsistencyLevelEnum,
    timeout?: number
  })
 ```
@@ -51,7 +51,7 @@ await milvusClient.deleteEntities({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
 - **timeout** (*number*) -
 
@@ -74,7 +74,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```
