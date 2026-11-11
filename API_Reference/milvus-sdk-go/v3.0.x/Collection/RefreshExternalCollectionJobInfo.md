@@ -54,7 +54,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/milvus-io/milvus/client/v3/entity"
 	"github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
