@@ -10,23 +10,26 @@ milvusClient.listCollections();
 
 ```javascript
 listCollections({
-    collection_name: string
     type: ShowCollectionsType,
+    collection_names?: string[],
+    db_name?: string,
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **collection_name** (*string*) -
-
-    **[REQUIRED]**
-
-    The name of an existing collection.
-
 - **type** (*ShowCollectionsType*) 
 
     The scope of this operation. Possible values are **All** or **Loaded**.
+
+- **collection_names** (*string[]*) -
+
+    A list of collection names to check. When empty, all collections in the scope defined by **type** are returned.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collections. When omitted, the default database is used.
 
 - **timeout** (*number*) -
 
@@ -89,6 +92,6 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const res = await milvusClient.listCollections({ collection_name: 'my_collection' });
+const res = await milvusClient.listCollections({ collection_names: ['my_collection'] });
 ```
 
