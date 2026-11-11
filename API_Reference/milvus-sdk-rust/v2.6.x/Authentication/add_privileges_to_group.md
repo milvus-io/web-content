@@ -23,7 +23,7 @@ let request = AddPrivilegesToGroupRequest::builder()
 
 - `privileges: HashSet<String>`
 
-    Privileges to add to the group. At least one non-empty privilege is required.
+    Privileges to add to the group. At least one non-empty privilege is required. Use `privilege()` to add one.
 
 **RETURN TYPE:**
 
