@@ -473,6 +473,7 @@ Starting in Milvus 3.0.6, a vector subfield can be created with element-level nu
 
 - An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as `COSINE`, `IP`, or `L2`. `MAX_SIM*` metrics and EmbeddingList indexes are rejected on it, and `AUTOINDEX` does not select a `MAX_SIM*` metric for it. Null vectors are skipped when the index is built and during search.
 
+
 - A vector subfield added to an existing StructArray field is always element-nullable, so the same metric rule applies. You cannot bind an index in the add request; create the index separately after the subfield exists.
 
 - A load that includes a vector subfield requires an index on it, as for any vector field. Create the index on an added vector subfield before you load the collection with that subfield included. Queries can return the new subfield before the index exists.

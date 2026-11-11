@@ -1078,6 +1078,7 @@ client.insert(
 
 In the second Struct element, `lang` is explicitly null and `tags` is omitted, so Milvus stores null for both in that element. The other subfields still require a value in every Struct element, and a Struct element itself cannot be null. On an array subfield, `None` stores a null inner array, while `[]` stores an empty inner array.
 
+
 Null subfield values behave as follows in later operations:
 
 - Query results return `null` for the subfield value in that element.

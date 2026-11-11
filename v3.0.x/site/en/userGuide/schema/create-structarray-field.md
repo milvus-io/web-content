@@ -7,6 +7,7 @@ summary: "Create a StructArray field when one entity needs to contain an ordered
 
 Create a StructArray field when one entity needs to contain an ordered list of structured elements. A StructArray field is an Array field whose element type is Struct. Each Struct element follows the same schema and can contain scalar subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array subfields.
 
+
 This page shows how to define a Struct schema, add it as a StructArray field, choose subfields for later search and filtering, and understand the schema rules that apply before you insert or index data.
 
 ## Before you begin
@@ -1780,6 +1781,7 @@ Adding a subfield follows these rules:
 - You cannot bind an index while adding the subfield. Create the index with a separate `create_index()` call. An added vector subfield supports element-level metrics only, and the collection must have an index on it before you load the collection with the new subfield included.
 
 - Clients that omit the new subfield when inserting keep working, because Milvus stores null for omitted element-nullable subfields.
+
 
 
 In versions before Milvus 3.0.6, subfields cannot be appended to an existing StructArray field. The following separate example replaces `chunks` with a schema that contains the original seven subfields and a new `source` string subfield.

@@ -377,6 +377,7 @@ Element-level `$[...]` predicates do not support:
 
 - `$[subfield] is null` or `$[subfield] is not null` before Milvus 3.0.6.
 
+
 - A subscript into an array subfield, such as `$[tags][0]`, and `like` on `$[tags]`.
 
 - Geometry / GIS functions.
