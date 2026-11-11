@@ -32,7 +32,7 @@ let request = DropIndexPropertiesRequest::builder()
 
 - `property_keys: HashSet<String>`
 
-    Keys of the properties to remove from the index.
+    Keys of the properties to remove from the index. Use `property_key()` to add one.
 
 **RETURN TYPE:**
 

@@ -23,7 +23,7 @@ let request = DropDatabasePropertiesRequest::builder()
 
 - `property_keys: HashSet<String>`
 
-    Keys of the properties to remove. At least one property key is required.
+    Keys of the properties to remove. At least one property key is required. Use `property_key()` to add one.
 
 **RETURN TYPE:**
 

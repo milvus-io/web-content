@@ -32,7 +32,7 @@ let request = AlterIndexPropertiesRequest::builder()
 
 - `properties: HashMap<String, String>`
 
-    Properties to set on the index, such as `mmap.enabled`.
+    Properties to set on the index, such as `mmap.enabled`. Use `property()` to add one.
 
 **RETURN TYPE:**
 
