@@ -2298,7 +2298,11 @@ client.drop_collection_field(
 <li><p>Using one vector subfield for both EmbeddingList search and element-level search.</p></li>
 <li><p>Adding only vector subfields and forgetting scalar subfields needed for filtering, such as <code translate="no">section</code>, <code translate="no">quality_score</code>, or <code translate="no">has_code</code>.</p></li>
 <li><p>Treating vector subfields as <code translate="no">$[...]</code> scalar predicate inputs. Use vector subfields for vector search, and scalar subfields for scalar predicates.</p></li>
-<li><p>Assuming new subfields can be added to an existing StructArray field before Milvus 3.0.6, or adding a subfield that does not allow element-level null.</p></li>
+</ul>
+<ul>
+<li>Assuming new subfields can be added to an existing StructArray field before Milvus 3.0.6, or adding a subfield that does not allow element-level null.</li>
+</ul>
+<ul>
 <li><p>Setting row-level null on a subfield. Row-level null is set on the StructArray parent only. For null values inside Struct elements, set <code translate="no">nullable=True</code> on a scalar or vector subfield, and <code translate="no">element_nullable=True</code> on an array subfield.</p></li>
 <li><p>Using <code translate="no">chunks.emb</code> or <code translate="no">chunks.emb_list_vector</code> instead of the required path syntax <code translate="no">chunks[emb]</code> or <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Treating nullable StructArray behavior as available in every target version.</p></li>
