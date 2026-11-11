@@ -26,7 +26,9 @@ This guide covers schema changes for user-defined fields and for Functions with 
 - Adding StructArray fields is supported in Milvus 3.0.0 and later. Added StructArray fields must be nullable.
 
 
+
 - Adding a sub-field to an existing StructArray field is supported in Milvus 3.0.6 and later. The added sub-field must allow element-level null (`nullable=True` on a scalar or vector sub-field, `element_nullable=True` on an array sub-field), cannot have a default value, and cannot be bound to an index in the same request.
+
 
 - Field names must be unique among fields in the collection.
 
@@ -48,7 +50,9 @@ This guide covers schema changes for user-defined fields and for Functions with 
 
 - You cannot drop the primary key field, partition key field, clustering key field, or the last vector field in a collection.
 
+
 - You can drop a whole `ARRAY<STRUCT>` field. Starting in Milvus 3.0.6, you can also drop an individual sub-field by its path, such as `chunks[lang]`, except the last sub-field of the `ARRAY<STRUCT>` field.
+
 
 - You cannot directly drop a field that is used as a Function input field or generated as a Function output field. To remove a Function output field, drop the Function that generates it.
 
@@ -80,7 +84,9 @@ Choose the workflow based on whether you are adding a user-defined field or a Fu
 - [Add a Function and its generated vector field](#Add-a-Function-and-its-generated-vector-field--Milvus-30x) when Milvus should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.
 
 
+
 - [Add a sub-field to an existing StructArray field](#Add-a-sub-field-to-an-existing-StructArray-field--Milvus-306) when existing Struct elements need a new attribute.
+
 
 
 In all cases, the new field name must not already exist in the collection, and the total number of fields cannot exceed the Milvus field-count limit. For details, refer to [Milvus Limits](limitations.md#number-of-resources-in-a-collection).
@@ -629,7 +635,10 @@ await client.AddCollectionStructFieldAsync(new AddCollectionStructFieldReq
 });
 ```
 
+
 After the StructArray field is added, entities that already exist in the collection return `NULL` for `chunks` across all its sub-fields. When you insert a new entity, every Struct element must provide a value for every sub-field, and a Struct element itself cannot be `NULL`. Starting in Milvus 3.0.6, element-nullable sub-fields may hold `NULL` in individual Struct elements; for details, refer to [Create a StructArray Field](create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306).
+
+
 
 ### Add a sub-field to an existing StructArray field | Milvus 3.0.6
 
@@ -723,6 +732,7 @@ The following rules apply:
 - History segments receive the added sub-field and its index through schema-version compaction. Set `dataCoord.compaction.bumpSchemaVersion.enabled` to `true` (it is `false` by default); otherwise the added sub-field's index does not cover history segments.
 
 - Adding a sub-field to a loaded collection does not release the collection. Queries can return the new sub-field before its index exists.
+
 
 - Clients that pin a schema timestamp receive a schema-mismatch error and must refresh, as for any added field.
 
