@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein <strong>StructArray</strong>, auch als Array von Structs bezeichnet, speichert in jeder Entität eine geordnete Menge von Struct-Elementen. Jedes Struct-Element im Array folgt demselben Schema. Ein Struct-Element kann skalare Unterfelder, vektorielle Unterfelder oder beides enthalten.</p>
+    </button></h2><p>Ein <strong>StructArray</strong>, auch als Array von Structs bezeichnet, speichert in jeder Entität eine geordnete Menge von Struct-Elementen. Jedes Struct-Element im Array folgt demselben Schema. Ein Struct-Element kann skalare Unterfelder, Vektor-Unterfelder und – ab Milvus 3.0.6 – skalare Array-Unterfelder enthalten.</p>
 <p>Beispielsweise kann eine Sammlung einen Artikel als Entität speichern und dessen Chunks in einem StructArray-Feld namens „ <code translate="no">chunks</code> “ ablegen. Jeder Chunk kann Text, Abschnittsmetadaten, Qualitätsbewertungen und eine oder mehrere Vektor-Einbettungen enthalten.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
@@ -96,7 +96,7 @@ summary: >-
 <tr><td>Dokumentenabruf</td><td>Speichern Sie ein Dokument als Entität, während Sie dessen Chunks durchsuchen.</td><td><code translate="no">chunks</code></td></tr>
 <tr><td>Abruf bei späterer Interaktion</td><td>Speichern Sie ein Dokument oder eine Seite als Einbettungsliste und bewerten Sie es/sie mit „ <code translate="no">MAX_SIM*</code> “.</td><td><code translate="no">chunks[emb_list_vector]</code> oder <code translate="no">patches[emb]</code></td></tr>
 <tr><td>Abruf auf Elementebene</td><td>Geben Sie den relevantesten Chunk, Clip, Patch oder die relevanteste Beobachtung zurück, einschließlich des Array-Offsets.</td><td><code translate="no">chunks[emb]</code></td></tr>
-<tr><td>Strukturierte Filterung</td><td>Filtern Sie nach skalaren Unterfeldern innerhalb von Struct-Elementen, wie z. B. Abschnitt, Partitur, Seite oder Flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
+<tr><td>Strukturierte Filterung</td><td>Filtern Sie nach skalaren Unterfeldern innerhalb von „Struct“-Elementen, wie z. B. Abschnitt, Partitur, Seite oder Flags.</td><td><code translate="no">chunks[section]</code>, <code translate="no">chunks[quality_score]</code></td></tr>
 <tr><td>Reduzierung doppelter übergeordneter Ergebnisse</td><td>Behalten Sie untergeordnete Elemente unter derselben übergeordneten Entität bei, anstatt jedes untergeordnete Element als separate Zeile zu speichern.</td><td><code translate="no">chunks</code>, <code translate="no">clips</code>, <code translate="no">patches</code></td></tr>
 </tbody>
 </table>
@@ -234,7 +234,7 @@ summary: >-
 <li><p>Alle Struct-Elemente im selben StructArray-Feld teilen sich ein vordefiniertes Schema.</p></li>
 <li><p>Vektor-Unterfelder erfordern Indizes. Die „EmbeddingList“-Suche verwendet „ <code translate="no">MAX_SIM*</code> “-Metriken, während die Suche auf Elementebene reguläre Vektormetriken nutzt.</p></li>
 <li><p><code translate="no">element_filter</code> und „ <code translate="no">MATCH_*</code> “ gelten für skalare Unterfelder innerhalb von „StructArray“-Feldern. Verwenden Sie „ <code translate="no">$[subfield]</code> “ nur innerhalb dieser Operatoren. Filter auf Zeilenebene können auch direkt auf „StructArray“-Pfade verweisen, wie beispielsweise „ <code translate="no">chunks[0][section]</code> “, „ <code translate="no">array_length(chunks)</code> “ und „ <code translate="no">array_contains(chunks[section], ...)</code> “.</p></li>
-<li><p>Einige Suchkombinationen sind versionsabhängig oder modusspezifisch. Informieren Sie sich über <a href="/docs/de/structarray-limits.md">die StructArray-Einschränkungen</a>, bevor Sie auf Bereichssuche, Gruppensuche, hybride Suche, nullfähige Felder oder dynamisch hinzugefügte Felder zurückgreifen.</p></li>
+<li><p>Einige Suchkombinationen sind versionsabhängig oder modusspezifisch. Lesen Sie <a href="/docs/de/structarray-limits.md">den Abschnitt „StructArray-Einschränkungen“</a>, bevor Sie auf Bereichssuche, Gruppensuche, hybride Suche, nullfähige Felder, dynamisch hinzugefügte Felder, Nullwerte auf Elementebene, Array-Unterfelder oder das Hinzufügen und Entfernen von Unterfeldern zurückgreifen.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -252,9 +252,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Informationen zum Entwerfen eines Schemas finden Sie unter <a href="/docs/de/create-structarray-field.md">„StructArray-Feld erstellen</a>“.</p></li>
+<li><p>Um ein Schema zu entwerfen, lesen Sie <a href="/docs/de/create-structarray-field.md">„Erstellen eines StructArray-Feldes</a>“.</p></li>
 <li><p>Lesen Sie zum Vorbereiten von Daten den Abschnitt <a href="/docs/de/insert-data-into-structarray-fields.md">„Daten in StructArray-Felder einfügen</a>“.</p></li>
 <li><p>Informationen zur Auswahl von Indizes finden Sie unter <a href="/docs/de/index-structarray-fields.md">„StructArray-Felder indizieren</a>“.</p></li>
-<li><p>Um StructArray-Vektor-Unterfelder zu durchsuchen, beginnen Sie mit <a href="/docs/de/basic-vector-search-with-structarray.md">„Einfache Vektorsuche mit StructArray</a>“.</p></li>
+<li><p>Um Vektor-Unterfelder von StructArray zu durchsuchen, beginnen Sie mit <a href="/docs/de/basic-vector-search-with-structarray.md">„Grundlegende Vektorsuche mit StructArray</a>“.</p></li>
 <li><p>Informationen zum Filtern von StructArray-Skalar-Unterfeldern finden Sie unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a> “ und <a href="/docs/de/filtered-search-with-structarray.md">„Gefilterte Suche mit StructArray</a>“.</p></li>
 </ol>

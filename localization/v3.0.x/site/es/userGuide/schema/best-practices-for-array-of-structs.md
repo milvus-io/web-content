@@ -6,7 +6,7 @@ summary: >-
   (IoT) y la conducción autónoma, suelen procesar eventos ricos y estructurados:
   una lectura de un sensor con su marca de tiempo y su vector de incrustación,
   un registro de diagnóstico con un código de error y un fragmento de audio, o
-  un segmento de trayecto con la ubicación, la velocidad y el contexto de la
+  un tramo de trayecto con la ubicación, la velocidad y el contexto de la
   escena. Esto requiere que la base de datos admita de forma nativa la ingesta y
   la búsqueda de datos anidados.
 beta: Milvus 2.6.4+
@@ -198,7 +198,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>You can find that the structure of the CoVLA dataset is highly hierarchical, dividing the collected data into multiple <code translate="no">.jsonl</code> files, along with the video clips in the <code translate="no">.mp4</code> format.</p>
-<p>In Milvus, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested structures. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the Milvus collection schema.</p>
+<p>In Milvus, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested Structs; starting in Milvus 3.0.6, it can contain scalar array subfields with one nesting level. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the Milvus collection schema.</p>
 <p>The diagram below illustrates how we can model this dataset using the schema illustrated in the following schema:</p>
 <p>
   <span class="img-wrapper">

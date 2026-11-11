@@ -1086,10 +1086,10 @@ curl --request POST \
 <tr><td>Types entiers</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Sous-champs vectoriels</td><td>Non pris en charge en tant qu’entrées de prédicats scalaires d’ <code translate="no">$[...]</code>. Utilisez plutôt les sous-champs vectoriels via la recherche vectorielle.</td></tr>
+<tr><td>Sous-champs vectoriels</td><td>Non pris en charge en tant qu’entrées de prédicats scalaires d <code translate="no">$[...]</code>. Utilisez plutôt les sous-champs vectoriels via la recherche vectorielle.</td></tr>
 </tbody>
 </table>
-<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de conteneurs de tableaux, les fonctions de correspondance de texte, les prédicats null sur <code translate="no">$[...]</code>, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
+<p>Pour les cas non pris en charge, tels que les chemins JSON, les fonctions de correspondance de texte, les fonctions de géométrie, les expressions Timestamptz et les appels de fonctions génériques, ainsi que pour les fonctions de conteneurs de tableaux et les prédicats null pris en charge par <code translate="no">$[...]</code> à partir de Milvus 3.0.6, consultez la <a href="/docs/fr/struct-array-operators.md">section Opérateurs StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erreurs courantes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

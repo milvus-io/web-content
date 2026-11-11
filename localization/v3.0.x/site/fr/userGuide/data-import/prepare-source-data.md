@@ -232,17 +232,21 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>La valeur du champ est une liste d’objets, à raison d’un par élément Struct, indexée par le nom du sous-champ : <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>La cellule contient le même texte JSON que le format JSON.</td></tr>
-<tr><td>Parquet</td><td>Une colonne par champ StructArray de type <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, avec un enfant struct par sous-champ. Un sous-champ scalaire correspond à un enfant scalaire, et un sous-champ vectoriel correspond à une liste de son type d'élément, par exemple <code translate="no">list&lt;float32&gt;</code>.</td></tr>
+<tr><td>CSV</td><td>La cellule contient le même texte JSON que le format JSON. La chaîne « <code translate="no">nullkey</code> » configurée pour la tâche d’importation ou une <code translate="no">null</code> JSON indique une valeur StructArray nulle.</td></tr>
+<tr><td>Parquet</td><td>Une colonne par champ StructArray de type <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un enfant struct par sous-champ. Un sous-champ scalaire est un enfant scalaire, un sous-champ vectoriel est une liste de son type d’élément, tel que <code translate="no">list&lt;float32&gt;</code>, et un sous-champ de type tableau (Milvus 3.0.6 et versions ultérieures) est un enfant de type <code translate="no">list&lt;T&gt;</code>.</td></tr>
 <tr><td>NumPy</td><td>Non pris en charge. Les fichiers NumPy contiennent un fichier par champ de niveau supérieur et ne disposent d’aucune représentation pour un champ StructArray. Utilisez des fichiers JSON, CSV ou Parquet pour les collections comportant un champ StructArray.</td></tr>
 </tbody>
 </table>
 <p>Les règles suivantes s’appliquent aux valeurs StructArray dans tous les formats pris en charge :</p>
 <ul>
 <li><p>Utilisez des noms de sous-champs à l’intérieur de chaque élément Struct, et non des chemins d’accès tels que <code translate="no">chunks[text]</code>. Les colonnes plates ou les clés nommées <code translate="no">chunks[text]</code> sont rejetées.</p></li>
-<li><p>Chaque élément Struct doit fournir tous les sous-champs du schéma Struct, et un élément Struct ne peut pas être nul, par exemple <code translate="no">[null, {...}]</code>. Une valeur StructArray entière ne peut être nulle que si le champ StructArray est non nul.</p></li>
+<li><p>Un élément Struct ne peut pas être nul en soi, par exemple <code translate="no">[null, {...}]</code>. Une valeur StructArray entière ne peut être nulle que si le champ StructArray est nullable. Avant Milvus 3.0.6, chaque élément Struct devait fournir tous ses sous-champs.</p></li>
+<li><p>Les clés ou les éléments enfants Parquet qui ne sont pas des sous-champs de la collection, y compris les sous-champs supprimés, sont ignorés.</p></li>
+<li><p>À partir de Milvus 3.0.6, une clé manquante ou une valeur « <code translate="no">null</code> » pour un sous-champ dont l’élément est nullable est importée comme une valeur nulle pour cet élément Struct ; ainsi, les fichiers créés avant l’ajout d’un sous-champ sont importés sans celui-ci. Un « <code translate="no">null</code> » (valeur nulle) à tout autre endroit entraîne l’échec de l’importation. Pour un sous-champ de type tableau, « <code translate="no">null</code> » correspond à un tableau interne nul, et « <code translate="no">null</code> » à l’intérieur du tableau interne correspond à une valeur interne nulle lorsque le sous-champ le permet.</p></li>
+<li><p>À partir de Milvus 3.0.6, l’importation à partir d’un fichier binlog (par exemple lors d’une restauration de sauvegarde) et l’importation à partir d’une source de snapshot sont rejetées pour les collections comportant des sous-champs dont les éléments peuvent être nuls ou des sous-champs de type tableau scalaire.</p></li>
 </ul>
-<p>Pour les limites liées au schéma, consultez la section « <a href="/docs/fr/structarray-limits.md#Import-limits">Limites de StructArray</a> ».</p>
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> prend en charge les formes de StructArray ci-dessus dans tous les formats pris en charge, y compris les sous-champs dont les éléments peuvent être nuls et les valeurs de StructArray pouvant être nulles. Utilisez les mêmes formes de lignes dans les appels ` <code translate="no">add_row()</code> ` de l’éditeur.</p>
+<p>Pour les limites liées au schéma, consultez la section <a href="/docs/fr/structarray-limits.md#Import-and-storage-limits">Limites de StructArray</a>.</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Configurer BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,10 +262,10 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong> est un outil conçu pour convertir des jeux de données bruts en un format adapté à l’importation via l’API d’importation RESTful. Il propose deux types d’écrivains :</p>
+    </button></h2><p><strong>BulkWriter</strong> est un outil conçu pour convertir des jeux de données bruts en un format adapté à l’importation via l’API d’importation RESTful. Il propose deux types d’écriteurs :</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: lit l’ensemble de données désigné et le transforme en un format facile à utiliser.</li>
-<li><strong>RemoteBulkWriter</strong>: effectue la même tâche que le LocalBulkWriter, mais transfère en outre les fichiers de données convertis vers un compartiment de stockage d’objets distant spécifié.</li>
+<li><strong>RemoteBulkWriter</strong>: effectue la même tâche que LocalBulkWriter, mais transfère en outre les fichiers de données convertis vers un compartiment de stockage d’objets distant spécifié.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> se distingue de <strong>LocalBulkWriter</strong> en ce <strong>qu’il</strong> transfère les fichiers de données convertis vers un compartiment de stockage d’objets cible.</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configurer LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
@@ -324,7 +328,7 @@ writer = LocalBulkWriter(
 <li>Référencer le schéma créé dans ` <code translate="no">CollectionSchema()</code>`.</li>
 <li>Définir le répertoire de sortie dans ` <code translate="no">withLocalPath()</code>`.</li>
 <li>Définir le type de fichier de sortie dans ` <code translate="no">withFileType()</code>`.</li>
-<li>Si votre ensemble de données contient un grand nombre d'enregistrements, il est recommandé de segmenter vos données en définissant <code translate="no">withChunkSize()</code> sur une valeur appropriée.</li>
+<li>Si votre jeu de données contient un grand nombre d'enregistrements, il est recommandé de segmenter vos données en définissant <code translate="no">withChunkSize()</code> sur une valeur appropriée.</li>
 </ul>
 <p>Pour plus de détails sur les paramètres, reportez-vous à la section LocalBulkWriter dans la documentation du SDK.</p>
 </div>

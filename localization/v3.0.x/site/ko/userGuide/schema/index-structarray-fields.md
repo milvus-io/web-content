@@ -52,7 +52,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하고 각각에 대해 별도로 인덱싱하십시오. 이 페이지에서는 EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 인덱싱하고, 요소 수준 검색을 위해 <code translate="no">chunks[emb]</code> 에 인덱싱합니다.</p>
+<p>벡터 필드 또는 벡터 하위 필드는 하나의 인덱스만 허용합니다. EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 개의 별도 벡터 하위 필드를 생성하고 각각에 대해 별도로 인덱싱하십시오. 이 페이지에서는 EmbeddingList 검색을 위해 <code translate="no">chunks[emb_list_vector]</code> 에 인덱싱이 적용되고, 요소 수준 검색을 위해 <code translate="no">chunks[emb]</code> 에 인덱싱이 적용됩니다.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">인덱스 선택<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -496,7 +496,52 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>EmbeddingList 검색의 경우, 벡터별 비교에 해당하는 <code translate="no">MAX_SIM*</code> 메트릭을 선택하십시오: 밀집 벡터의 경우 <code translate="no">MAX_SIM_COSINE</code> ( <code translate="no">MAX_SIM</code> 라고도 함), <code translate="no">MAX_SIM_IP</code> 또는 <code translate="no">MAX_SIM_L2</code>, 이진 벡터의 경우 <code translate="no">MAX_SIM_HAMMING</code> 또는 <code translate="no">MAX_SIM_JACCARD</code>. 이러한 메트릭은 임베딩 목록을 비교하여 엔티티 수준의 결과를 반환합니다. 요소 수준 검색의 경우, 아래에 나열된 해당 일반 메트릭을 사용하십시오.</p>
+    </button></h2><p>EmbeddingList 검색의 경우, 벡터별 비교에 해당하는 <code translate="no">MAX_SIM*</code> 메트릭을 선택하십시오: 밀집 벡터의 경우 <code translate="no">MAX_SIM_COSINE</code> ( <code translate="no">MAX_SIM</code> 라고도 함), <code translate="no">MAX_SIM_IP</code> 또는 <code translate="no">MAX_SIM_L2</code>, 이진 벡터의 경우 <code translate="no">MAX_SIM_HAMMING</code> 또는 <code translate="no">MAX_SIM_JACCARD</code>. 이러한 메트릭은 임베딩 목록을 비교하여 엔티티 수준 결과를 반환합니다. 요소 수준 검색의 경우, 아래에 나열된 해당 일반 메트릭을 사용하십시오.</p>
+<p>Milvus 3.0.6부터, 요소 null 허용 하위 필드나 스칼라 <code translate="no">ARRAY</code> 하위 필드에서는 스칼라 인덱스가 지원되지 않습니다. 이러한 하위 필드에 대한 필터링은 인덱스 없이 실행됩니다.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">요소 null 허용 및 추가된 벡터 서브필드 색인화<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 3.0.6부터 요소 수준 null(<code translate="no">nullable=True</code>)을 허용하는 벡터 하위 필드를 생성할 수 있으며, 기존 StructArray 필드에 벡터 하위 필드를 추가할 수 있습니다. 두 경우 모두 하위 필드의 인덱싱 방식이 달라집니다:</p>
+<ul>
+<li>요소 수준 null이 허용되는 벡터 하위 필드는 요소 수준 검색만 지원합니다. <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 과 같은 일반 벡터 메트릭을 사용하여 인덱싱하십시오. <code translate="no">MAX_SIM*</code> 메트릭과 EmbeddingList 인덱스는 이 필드에서 거부되며, <code translate="no">AUTOINDEX</code> 는 해당 필드에 대해 <code translate="no">MAX_SIM*</code> 메트릭을 선택하지 않습니다. 인덱스가 구축될 때와 검색 중에 null 벡터는 건너뜁니다.</li>
+</ul>
+<ul>
+<li><p>기존 StructArray 필드에 추가된 벡터 하위 필드는 항상 요소가 null일 수 있으므로, 동일한 메트릭 규칙이 적용됩니다. 추가 요청 시 인덱스를 바인딩할 수 없으며, 하위 필드가 생성된 후에 별도로 인덱스를 생성해야 합니다.</p></li>
+<li><p>벡터 하위 필드를 포함하는 로드 작업은 다른 벡터 필드와 마찬가지로 해당 필드에 대한 인덱스가 필요합니다. 해당 하위 필드가 포함된 컬렉션을 로드하기 전에 추가된 벡터 하위 필드에 대한 인덱스를 생성하십시오. 쿼리는 인덱스가 생성되기 전에도 새로운 하위 필드를 반환할 수 있습니다.</p></li>
+<li><p>히스토리 세그먼트는 스키마 버전 압축을 통해 추가된 서브필드와 해당 인덱스를 수신합니다. ` <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> `을 ` <code translate="no">true</code> `으로 설정하십시오(기본값은 ` <code translate="no">false</code> `입니다). 그렇지 않으면 추가된 서브필드의 인덱스가 히스토리 세그먼트에 적용되지 않습니다.</p></li>
+<li><p>Milvus는 요소 null 허용 벡터 하위 필드의 세그먼트에 대해, 해당 세그먼트가 유효한(null이 아닌) 요소를 최소 1,024개 포함하는 경우에만 벡터 인덱스를 생성합니다. 이 임계값 미만의 세그먼트는 인덱스가 생성되지 않으며, 해당 세그먼트에 대한 쿼리는 무차별 검색 방식으로 실행됩니다.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">인덱스 메트릭 호환성<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -512,7 +557,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 표를 참조하여 StructArray 벡터 하위 필드에 사용할 인덱스 유형과 메트릭 유형을 선택하십시오. 대상부터 시작하여 검색 모드에 따라 메트릭 계열을 선택하십시오.</p>
+    </button></h2><p>다음 표를 참조하여 StructArray 벡터 하위 필드의 인덱스 유형과 메트릭 유형을 선택하십시오. 목표부터 시작하여 검색 모드에 따라 메트릭 계열을 선택하십시오.</p>
 <p>다음 호환성 표에서 Milvus 인덱스 유형과 메트릭 유형을 선택하십시오.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 검색<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -529,7 +574,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>EmbeddingList 검색은 <code translate="no">MAX_SIM*</code> 메트릭을 사용합니다. 이 검색은 StructArray 벡터 하위 필드의 벡터를 임베딩 목록으로 처리하며 엔티티 수준의 결과를 반환합니다.</p>
+    </button></h3><p>EmbeddingList 검색은 <code translate="no">MAX_SIM*</code> 메트릭을 사용합니다. 이 검색 방식은 StructArray 벡터 하위 필드의 벡터를 임베딩 목록으로 처리하며, 엔티티 수준의 결과를 반환합니다.</p>
 <table>
 <thead>
 <tr><th>벡터 하위 필드 데이터 유형</th><th>인덱스 유형</th><th>메트릭 유형</th></tr>
@@ -792,7 +837,8 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>하나의 벡터 하위 필드에는 하나의 인덱스만 사용할 수 있습니다.</td><td>서로 다른 메트릭 계열이 필요한 경우 별도의 벡터 서브필드를 사용하십시오.</td></tr>
 <tr><td>EmbeddingList 검색에는 <code translate="no">MAX_SIM*</code> 메트릭을 사용하십시오.</td><td>EmbeddingList 쿼리 데이터에는 <code translate="no">MAX_SIM*</code> 메트릭으로 구축된 인덱스가 필요합니다.</td></tr>
 <tr><td>요소 수준 검색에는 일반 벡터 메트릭을 사용하십시오.</td><td>요소 수준 검색은 일반 벡터 쿼리 데이터와 <code translate="no">COSINE</code>, <code translate="no">IP</code> 또는 <code translate="no">L2</code> 와 같은 메트릭을 사용합니다.</td></tr>
-<tr><td>필터에 나타나는 스칼라 하위 필드를 인덱싱하십시오.</td><td>대상에서 지원하는 스칼라 인덱스 유형을 사용하십시오.</td></tr>
+<tr><td>필터에 나타나는 스칼라 하위 필드를 인덱싱하십시오.</td><td>대상에서 지원하는 스칼라 인덱스 유형을 사용하십시오. 요소 null 허용 하위 필드 및 스칼라 <code translate="no">ARRAY</code> 하위 필드는 인덱싱할 수 없습니다.</td></tr>
+<tr><td>요소 null 허용 벡터 하위 필드에는 요소 수준 메트릭을 사용하십시오.</td><td>기존 StructArray 필드에 추가된 벡터 하위 필드를 포함하여, 요소가 null일 수 있는 벡터 하위 필드(<code translate="no">nullable=True</code>)는 <code translate="no">MAX_SIM*</code> 메트릭을 거부합니다.</td></tr>
 <tr><td>벡터 필드 제한 사항을 염두에 두십시오.</td><td>벡터 필드와 벡터 하위 필드의 총 개수에는 제한이 있습니다. 벡터 하위 필드를 많이 추가하기 전에 StructArray 제한 사항을 참조하십시오.</td></tr>
 </tbody>
 </table>
@@ -813,7 +859,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
       </svg>
     </button></h2><ul>
 <li><p><code translate="no">chunks[emb]</code> 대신 <code translate="no">chunks.emb</code> 에 인덱스를 생성하는 경우.</p></li>
-<li><p><code translate="no">MAX_SIM*</code> 인덱스만 생성한 후, 동일한 서브필드에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
+<li><p><code translate="no">MAX_SIM*</code> 인덱스만 생성한 후, 동일한 하위 필드에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
 <li><p>일반 벡터 인덱스만 생성한 후, 동일한 서브필드에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
 <li><p><code translate="no">MAX_SIM*</code> 와 일반 벡터 메트릭 모두에 하나의 벡터 하위 필드를 재사용하는 경우.</p></li>
 <li><p>자주 사용되는 StructArray 필터에 대한 스칼라 인덱스를 생략하는 경우.</p></li>

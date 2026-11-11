@@ -24,7 +24,7 @@ summary: >-
 <p>Verwenden Sie nullfähige Felder, wenn:</p>
 <ul>
 <li>Daten aus externen Systemen eingelesen werden, die fehlende Werte zulassen.</li>
-<li>Bestimmte Metadaten optional sind oder nur für einen Teil des Datensatzes verfügbar sind.</li>
+<li>bestimmte Metadaten optional sind oder nur für einen Teil des Datensatzes verfügbar sind.</li>
 <li>Vektor-Einbettungen asynchron generiert und später eingefügt werden.</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
@@ -44,9 +44,9 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Vektorfelder, die NULL-Werte zulassen, unterstützen keine Filterausdrücke vom Typ „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “. Sie können Entitäten nicht explizit danach filtern, ob der Wert eines Vektorfelds NULL ist.</p></li>
-<li><p>Ab Milvus 3.0.0 kann das übergeordnete <a href="/docs/de/array-of-structs.md">StructArray-Feld</a> nullfähig sein. Setzen Sie „ <code translate="no">nullable=True</code> “ für das übergeordnete StructArray-Feld, nicht für einzelne Unterfelder. NULL gilt für das gesamte StructArray-Feld, nicht für ein einzelnes Struct-Element, und Milvus überträgt die Nullfähigkeit des übergeordneten Feldes intern auf dessen Unterfelder. Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, damit bestehende Entitäten für das neue Feld den Wert NULL zurückgeben können. Weitere Informationen finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„StructArray-Beschränkungen</a>“.</p></li>
-<li><p>Das Attribut „nullfähig“ wird beim Anlegen eines Feldes festgelegt und kann anschließend nicht mehr geändert werden. Sie können die Nullfähigkeit für ein bestehendes Feld nicht aktivieren oder deaktivieren.</p></li>
-<li><p>Als nullfähig markierte Felder können nicht als Partitionsschlüssel verwendet werden. Partitionsschlüsselfelder müssen immer gültige, nicht-nullwerte Werte enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/use-partition-key.md">„Partitionsschlüssel verwenden</a>“.</p></li>
+<li><p>Ab Milvus 3.0.0 kann das übergeordnete <a href="/docs/de/array-of-structs.md">StructArray-Feld</a> nullfähig sein. Setzen Sie „ <code translate="no">nullable=True</code> “ für das übergeordnete StructArray-Feld, nicht für einzelne Unterfelder. NULL gilt für das gesamte StructArray-Feld, nicht für ein einzelnes Struct-Element, und Milvus überträgt die Nullfähigkeit des übergeordneten Feldes intern auf dessen Unterfelder. Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, damit bestehende Entitäten für das neue Feld den Wert NULL zurückgeben können. Ab Milvus 3.0.6 kann ein Unterfeld zusätzlich einen NULL-Wert in einem einzelnen Struct-Element zulassen: „ <code translate="no">nullable=True</code> “ für ein skalares oder vektorales Unterfeld, „ <code translate="no">element_nullable=True</code> “ für ein Array-Unterfeld; ein Struct-Element selbst kann weiterhin nicht NULL sein. Weitere Informationen finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„StructArray-Beschränkungen</a>“.</p></li>
+<li><p>Das Attribut „nullable“ wird beim Anlegen eines Feldes festgelegt und kann anschließend nicht mehr geändert werden. Sie können die Nullbarkeit für ein bestehendes Feld nicht aktivieren oder deaktivieren.</p></li>
+<li><p>Als nullfähig markierte Felder können nicht als Partitionsschlüssel verwendet werden. Partitionsschlüsselfelder müssen immer gültige, nicht-null Werte enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/use-partition-key.md">„Partitionsschlüssel verwenden</a>“.</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">Was ist ein nullfähiges Feld?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,13 +64,13 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Milvus wird durch ein Feldattribut auf Schemaebene namens „ <code translate="no">nullable</code> “ gesteuert, ob ein Feld einen NULL-Wert speichern darf.</p>
-<p>Wenn ein Feld mit „ <code translate="no">nullable=True</code> “ definiert ist, lässt Milvus zu, dass der Feldwert bei der Datenerfassung fehlt. In der Praxis behandelt Milvus die folgenden beiden Eingaben als gleichwertig und speichert den Feldwert als NULL:</p>
+<p>Wenn ein Feld mit „ <code translate="no">nullable=True</code> “ definiert ist, lässt Milvus zu, dass der Feldwert bei der Dateneingabe fehlt. In der Praxis behandelt Milvus die folgenden beiden Eingaben als gleichwertig und speichert den Feldwert als NULL:</p>
 <ul>
 <li>Das Feld wird in der Eingabeentität weggelassen.</li>
 <li>Das Feld wird explizit auf NULL gesetzt (z. B. ` <code translate="no">None</code> ` in Python).</li>
 </ul>
 <p>Wenn ein Feld nicht als nullfähig definiert ist (Standardverhalten), muss jede Entität einen gültigen Wert für dieses Feld bereitstellen. Das Weglassen des Feldes oder die explizite Zuweisung eines NULL-Werts führt dazu, dass der Einfüge- oder Importvorgang fehlschlägt.</p>
-<p>Das Attribut „nullable“ wird sowohl für <strong>Skalar- als auch für Vektorfelder</strong> in einem Sammlungsschema unterstützt. Ab Milvus 3.0.0 wird es auch für das übergeordnete StructArray-Feld unterstützt. Konfigurieren Sie Struct-Unterfelder nicht separat als nullfähig; definieren Sie die Nullfähigkeit für das übergeordnete StructArray-Feld, und Milvus überträgt diese Einstellung intern auf dessen Unterfelder.</p>
+<p>Das Attribut „nullable“ wird sowohl für <strong>Skalar- als auch</strong> für <strong>Vektorfelder</strong> in einem Sammlungsschema unterstützt. Ab Milvus 3.0.0 wird es auch für das übergeordnete StructArray-Feld unterstützt. Konfigurieren Sie Struct-Unterfelder nicht unabhängig voneinander als auf Zeilenebene nullfähig; definieren Sie die Nullfähigkeit auf Zeilenebene für das übergeordnete StructArray, und Milvus überträgt diese Einstellung intern auf dessen Unterfelder. Um NULL für einen Unterfeldwert innerhalb einzelner „Struct“-Elemente zuzulassen (Nullbarkeit auf Elementebene), setzen Sie in Milvus 3.0.6 und höher „ <code translate="no">nullable=True</code> “ für ein skalares oder Vektor-Unterfeld oder „ <code translate="no">element_nullable=True</code> “ für ein Array-Unterfeld; siehe <a href="/docs/de/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">„Erstellen eines StructArray-Feldes</a>“.</p>
 <div class="alert note">
 <p>Die Nullbarkeit legt fest, ob ein Feldwert fehlen darf; sie definiert jedoch nicht, welcher Wert verwendet wird, wenn ein Feld fehlt.</p>
 <ul>

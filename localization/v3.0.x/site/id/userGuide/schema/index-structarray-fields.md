@@ -48,7 +48,7 @@ summary: >-
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian EmbeddingList dengan metrik " <code translate="no">MAX_SIM*</code> ".</td></tr>
 <tr><td><code translate="no">chunks[emb]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Pencarian tingkat elemen dengan metrik vektor biasa.</td></tr>
 <tr><td><code translate="no">chunks[section]</code></td><td><code translate="no">VARCHAR</code></td><td>Penyaringan kategorikal.</td></tr>
-<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat bergaya rentang.</td></tr>
+<tr><td><code translate="no">chunks[quality_score]</code></td><td><code translate="no">FLOAT</code></td><td>Penyaringan numerik dan predikat gaya rentang.</td></tr>
 <tr><td><code translate="no">chunks[has_code]</code></td><td><code translate="no">BOOL</code></td><td>Penyaringan Boolean.</td></tr>
 </tbody>
 </table>
@@ -497,7 +497,52 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk pencarian EmbeddingList, pilih metrik <code translate="no">MAX_SIM*</code> yang sesuai dengan perbandingan per-vektor: <code translate="no">MAX_SIM_COSINE</code> (juga disebut <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code>, atau <code translate="no">MAX_SIM_L2</code> untuk vektor padat, dan <code translate="no">MAX_SIM_HAMMING</code> atau <code translate="no">MAX_SIM_JACCARD</code> untuk vektor biner. Metrik-metrik ini membandingkan daftar embedding dan mengembalikan hasil tingkat entitas. Untuk pencarian tingkat elemen, gunakan metrik reguler yang sesuai yang tercantum di bawah ini.</p>
+    </button></h2><p>Untuk pencarian EmbeddingList, pilih metrik " <code translate="no">MAX_SIM*</code> " yang sesuai dengan perbandingan per-vektor: <code translate="no">MAX_SIM_COSINE</code> (juga disebut <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code>, atau <code translate="no">MAX_SIM_L2</code> untuk vektor padat, dan <code translate="no">MAX_SIM_HAMMING</code> atau <code translate="no">MAX_SIM_JACCARD</code> untuk vektor biner. Metrik-metrik ini membandingkan daftar embedding dan mengembalikan hasil tingkat entitas. Untuk pencarian tingkat elemen, gunakan metrik reguler yang sesuai yang tercantum di bawah ini.</p>
+<p>Mulai dari Milvus 3.0.6, indeks skalar tidak didukung pada subbidang yang elemennya dapat bernilai null atau pada subbidang skalar <code translate="no">ARRAY</code>. Filter pada subbidang ini dijalankan tanpa indeks.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Indeks subbidang vektor yang dapat bernilai null dan ditambahkan<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Mulai Milvus 3.0.6, subbidang vektor dapat dibuat dengan nilai null tingkat elemen (<code translate="no">nullable=True</code>), dan subbidang vektor dapat ditambahkan ke bidang StructArray yang sudah ada. Kedua kasus ini mengubah cara Anda mengindeks subbidang tersebut:</p>
+<ul>
+<li>Subbidang vektor yang mendukung nilai null pada tingkat elemen hanya mendukung pencarian pada tingkat elemen. Indeksnya menggunakan metrik vektor standar seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>. Metrik <code translate="no">MAX_SIM*</code> dan indeks EmbeddingList ditolak pada subbidang ini, dan <code translate="no">AUTOINDEX</code> tidak memilih metrik <code translate="no">MAX_SIM*</code> untuknya. Vektor null dilewati saat indeks dibangun dan selama pencarian.</li>
+</ul>
+<ul>
+<li><p>Subbidang vektor yang ditambahkan ke bidang StructArray yang sudah ada selalu bersifat nullable per elemen, sehingga aturan metrik yang sama berlaku. Anda tidak dapat mengikat indeks dalam permintaan penambahan; buat indeks secara terpisah setelah subbidang tersebut ada.</p></li>
+<li><p>Pemuatan yang mencakup subbidang vektor memerlukan indeks padanya, seperti halnya bidang vektor mana pun. Buat indeks pada subbidang vektor yang ditambahkan sebelum Anda memuat koleksi dengan subbidang tersebut disertakan. Kueri dapat mengembalikan subbidang baru tersebut sebelum indeksnya ada.</p></li>
+<li><p>Segmen riwayat menerima subbidang yang ditambahkan beserta indeksnya melalui pemadatan versi skema. Atur ` <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> ` menjadi ` <code translate="no">true</code> ` (nilai defaultnya adalah ` <code translate="no">false</code> `); jika tidak, indeks subbidang yang ditambahkan tidak akan mencakup segmen riwayat.</p></li>
+<li><p>Milvus membangun indeks vektor untuk segmen subbidang vektor yang elemennya dapat bernilai null hanya jika segmen tersebut memiliki setidaknya 1.024 elemen yang valid (tidak null). Segmen di bawah ambang batas ini tidak membangun indeks, dan kueri yang dijalankan padanya akan menggunakan pencarian brute-force.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">Kompatibilitas metrik indeks<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,7 +558,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan tabel berikut untuk memilih jenis indeks dan jenis metrik untuk subbidang vektor StructArray. Mulailah dari target, lalu pilih keluarga metrik berdasarkan mode pencarian.</p>
+    </button></h2><p>Gunakan tabel berikut untuk memilih jenis indeks dan jenis metrik untuk subbidang vektor StructArray. Mulailah dari tujuan, lalu pilih keluarga metrik berdasarkan mode pencarian.</p>
 <p>Pilih jenis indeks Milvus dan jenis metrik dari tabel kompatibilitas berikut.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">Pencarian EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -667,7 +712,7 @@ Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hl
     &quot;collectionName&quot;: &quot;tech_articles&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Setelah membuat indeks vektor dan skalar di atas, respons daftar harus berisi nama-nama berikut, dalam urutan apa pun. Formatnya bergantung pada SDK:</p>
+<p>Setelah membuat indeks vektor dan skalar di atas, respons daftar seharusnya berisi nama-nama berikut, dalam urutan apa pun. Formatnya bergantung pada SDK:</p>
 <pre><code translate="no" class="language-plaintext">chunks_emb_list_max_sim
 chunks_emb_cosine
 chunks_section_inverted
@@ -793,7 +838,8 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>Satu subbidang vektor hanya dapat memiliki satu indeks.</td><td>Gunakan subbidang vektor terpisah jika Anda memerlukan keluarga metrik yang berbeda.</td></tr>
 <tr><td>Gunakan metrik <code translate="no">MAX_SIM*</code> untuk pencarian EmbeddingList.</td><td>Data kueri EmbeddingList memerlukan indeks yang dibangun dengan metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>Gunakan metrik vektor biasa untuk pencarian tingkat elemen.</td><td>Pencarian tingkat elemen menggunakan data kueri vektor biasa dan metrik seperti <code translate="no">COSINE</code>, <code translate="no">IP</code>, atau <code translate="no">L2</code>.</td></tr>
-<tr><td>Indeks subbidang skalar yang muncul dalam filter.</td><td>Gunakan tipe indeks skalar yang didukung oleh target Anda.</td></tr>
+<tr><td>Indeks subbidang skalar yang muncul dalam filter.</td><td>Gunakan tipe indeks skalar yang didukung oleh target Anda. Subbidang elemen yang dapat bernilai null dan subbidang skalar <code translate="no">ARRAY</code> tidak dapat diindeks.</td></tr>
+<tr><td>Gunakan metrik tingkat elemen pada subbidang vektor yang dapat bernilai null.</td><td>Subbidang vektor yang elemennya dapat bernilai null (<code translate="no">nullable=True</code>), termasuk subbidang vektor apa pun yang ditambahkan ke bidang StructArray yang sudah ada, menolak metrik <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>Perhatikan batasan bidang vektor.</td><td>Jumlah total bidang vektor dan subbidang vektor dibatasi. Lihat Batasan StructArray sebelum menambahkan banyak subbidang vektor.</td></tr>
 </tbody>
 </table>
@@ -813,7 +859,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Membuat indeks pada ` <code translate="no">chunks.emb</code> ` alih-alih ` <code translate="no">chunks[emb]</code>`.</p></li>
+<li><p>Membuat indeks pada <code translate="no">chunks.emb</code> alih-alih <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Hanya membuat indeks <code translate="no">MAX_SIM*</code> dan kemudian mencoba menjalankan pencarian tingkat elemen pada subbidang yang sama.</p></li>
 <li><p>Hanya membuat indeks vektor biasa, lalu mencoba menjalankan pencarian EmbeddingList pada subbidang yang sama.</p></li>
 <li><p>Menggunakan kembali satu subbidang vektor untuk metrik <code translate="no">MAX_SIM*</code> dan metrik vektor biasa.</p></li>

@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當某個實體需要儲存結構化元素的有序清單時，例如包含多個區塊的單一文件、包含多個視覺區塊的單一頁面，或是包含多個片段的單一影片，請使用 StructArray。StructArray 會將這些元素保留在父實體內，同時仍允許針對每個元素內的欄位進行向量搜尋與標量篩選。</p>
+    </button></h1><p>當某個實體需要儲存結構化元素的有序清單時，請使用 StructArray，例如包含多個區塊的單一文件、包含多個視覺區塊的單一頁面，或是包含多個片段的單一影片。StructArray 會將這些元素保留在父實體內，同時仍允許對每個元素內的欄位進行向量搜尋與標量篩選。</p>
 <h2 id="What-is-StructArray" class="common-anchor-header">什麼是 StructArray？<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>StructArray</strong>（亦稱為結構體陣列）會在每個實體中儲存一組有序的 Struct 元素。陣列中的每個 Struct 元素皆遵循相同的結構。一個 Struct 元素可以包含標量子欄位、向量子欄位，或兩者兼具。</p>
-<p>舉例來說，一個集合可以將一篇文章儲存為一個實體，並將其片段儲存於名為 `<code translate="no">chunks</code>` 的 StructArray 欄位中。每個片段可包含文字、章節元資料、品質分數，以及一個或多個向量嵌入。</p>
+    </button></h2><p><strong>StructArray</strong>（亦稱為結構體陣列）會在每個實體中儲存一組有序的 Struct 元素。陣列中的每個 Struct 元素皆遵循相同的資料結構。一個 Struct 元素可以包含標量子欄位、向量子欄位，以及自 Milvus 3.0.6 起新增的標量陣列子欄位。</p>
+<p>舉例來說，一個集合可以將一篇文章儲存為一個實體，並將其片段（chunks）儲存於名為 `<code translate="no">chunks</code>` 的 StructArray 欄位中。每個片段可包含文字、章節元資料、品質分數，以及一個或多個向量嵌入。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -67,7 +67,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>此範例中的兩個向量子欄位，分別從兩種搜尋視角代表同一個片段。<code translate="no">chunks[emb_list_vector]</code> 旨在配合<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋，而<code translate="no">chunks[emb]</code> 則旨在配合<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等常規向量指標進行元素層級搜尋。</p>
+<p>此範例中的兩個向量子欄位，分別從兩種搜尋視角代表同一個片段。<code translate="no">chunks[emb_list_vector]</code> 旨在用於搭配<code translate="no">MAX_SIM*</code> 指標的 EmbeddingList 搜尋，而<code translate="no">chunks[emb]</code> 則旨在用於搭配常規向量指標（例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> ）的元素層級搜尋。</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">何時使用 StructArray<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,10 +192,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>StructArray 的文件分為「建模」頁面與「搜尋」頁面。請使用「建模」頁面來定義和準備資料，並使用「搜尋」頁面來選擇合適的檢索與篩選行為。</p>
+    </button></h2><p>StructArray 的文件分為「建模」頁面與「搜尋」頁面。請使用建模頁面來定義和準備資料，並使用搜尋頁面來選擇合適的檢索與篩選行為。</p>
 <table>
 <thead>
-<tr><th>範圍</th><th>頁面</th><th>用途</th></tr>
+<tr><th>區域</th><th>頁面</th><th>用途</th></tr>
 </thead>
 <tbody>
 <tr><td>建模</td><td><a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a></td><td>定義結構體（Struct）模式並新增一個結構體陣列（StructArray）欄位。</td></tr>
@@ -211,7 +211,7 @@ summary: >-
 <tr><td>篩選</td><td><a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a></td><td><code translate="no">element_filter</code> 、<code translate="no">MATCH_*</code> 運算子，以及行級StructArray路徑謂詞的參考語法。</td></tr>
 </tbody>
 </table>
-<h2 id="Key-limits-to-check-first" class="common-anchor-header">首先應檢查的關鍵限制<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
+<h2 id="Key-limits-to-check-first" class="common-anchor-header">首先需確認的關鍵限制<button data-href="#Key-limits-to-check-first" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,10 +228,10 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Struct 可用作 Array 欄位的元素類型，但不能用作頂層集合欄位。</p></li>
-<li><p>同一 StructArray 字段中的所有 Struct 元素共用一個預定義的架構。</p></li>
+<li><p>同一 StructArray 字段中的所有 Struct 元素共用一個預定義的模式。</p></li>
 <li><p>向量子欄位需要索引。EmbeddingList 搜尋使用<code translate="no">MAX_SIM*</code> 指標，而元素層級搜尋則使用一般向量指標。</p></li>
-<li><p><code translate="no">element_filter</code> 以及<code translate="no">MATCH_*</code> 適用於 StructArray 字段內的標量子字段。請僅在這些運算子內使用<code translate="no">$[subfield]</code> 。行級篩選器亦可直接引用 StructArray 路徑，例如<code translate="no">chunks[0][section]</code> 、<code translate="no">array_length(chunks)</code> 及<code translate="no">array_contains(chunks[section], ...)</code> 。</p></li>
-<li><p>某些搜尋組合受版本限制或僅適用於特定模式。在依賴範圍搜尋、分組搜尋、混合搜尋、可為空欄位或動態新增欄位之前，請先查閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
+<li><p><code translate="no">element_filter</code> 以及 `<code translate="no">MATCH_*</code> ` 適用於 StructArray 欄位內的標量子欄位。請僅在這些運算子內使用 `<code translate="no">$[subfield]</code> `。行級篩選器亦可直接參照 StructArray 路徑，例如 `<code translate="no">chunks[0][section]</code>`、`<code translate="no">array_length(chunks)</code>` 及 `<code translate="no">array_contains(chunks[section], ...)</code>`。</p></li>
+<li><p>某些搜尋組合受版本限制或僅適用於特定模式。在依賴範圍搜尋、分組搜尋、混合搜尋、可為空欄位、動態新增欄位、元素層級的 null 值、陣列子欄位，或新增與刪除子欄位之前，請先查閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制》</a>。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -249,9 +249,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>若要設計資料結構，請參閱《<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位》</a>。</p></li>
+<li><p>若要設計架構，請參閱《<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位》</a>。</p></li>
 <li><p>若要準備資料，請參閱《<a href="/docs/zh-hant/insert-data-into-structarray-fields.md">將資料插入 StructArray 欄位</a>》。</p></li>
-<li><p>若要選擇索引，請參閱《為<a href="/docs/zh-hant/index-structarray-fields.md">StructArray 欄位建立索引》</a>。</p></li>
+<li><p>若要選擇索引，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p></li>
 <li><p>若要搜尋 StructArray 向量子欄位，請從<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">《StructArray 的基本向量搜尋》</a>開始。</p></li>
 <li><p>若要篩選 StructArray 標量子欄位，請參閱《<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>》及《<a href="/docs/zh-hant/filtered-search-with-structarray.md">使用 StructArray 進行篩選搜尋</a>》。</p></li>
 </ol>

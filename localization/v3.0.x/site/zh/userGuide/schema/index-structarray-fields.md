@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请确保集合 Schema 中已包含<code translate="no">chunks</code> StructArray 字段。请复<a href="/docs/zh/create-structarray-field.md">用“创建 StructArray 字段</a>”中针对您所选语言<a href="/docs/zh/create-structarray-field.md">的</a>已初始化客户端（Go 语言请访问<code translate="no">cli</code> 和<code translate="no">ctx</code> ，其他 SDK 请访问<code translate="no">client</code> ）。您可以在插入数据之前创建索引。</p>
+    </button></h2><p>请确保 Schema 中已包含<code translate="no">chunks</code> StructArray 字段。请复<a href="/docs/zh/create-structarray-field.md">用“创建 StructArray 字段</a>”中针对您所选<a href="/docs/zh/create-structarray-field.md">语言的</a>已初始化客户端（Go 语言请访问<code translate="no">cli</code> 和<code translate="no">ctx</code> ，其他 SDK 请访问<code translate="no">client</code> ）。您可以在插入数据之前创建索引。</p>
 <table>
 <thead>
 <tr><th>子字段路径</th><th>类型</th><th>索引用途</th></tr>
@@ -81,7 +81,7 @@ summary: >-
 <tr><td>按布尔值过滤</td><td><code translate="no">chunks[has_code]</code></td><td>目标支持的标量索引。</td></tr>
 </tbody>
 </table>
-<p>EmbeddingList 搜索将 StructArray 向量子字段中的向量视为嵌入列表，并返回实体级别的结果。元素级搜索会独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。</p>
+<p>EmbeddingList 搜索将 StructArray 向量子字段中的向量视为嵌入列表，并返回实体级结果。元素级搜索会独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">创建向量索引<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -279,7 +279,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(vector_reques
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-请勿在同一向量子字段上同时创建<code translate="no">MAX_SIM*</code> 索引和常规向量度量索引。如果需要同时使用这两种搜索模式，请将向量写入两个独立的向量子字段，并在每个子字段上分别创建一个索引。</p>
+请勿在同一向量子字段上同时创建<code translate="no">MAX_SIM*</code> 索引和常规向量度量索引。如果需要同时支持这两种搜索模式，请将向量写入两个独立的向量子字段，并在每个子字段上分别创建一个索引。</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">创建标量索引<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -296,7 +296,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(vector_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当在过滤器中使用 StructArray 标量子字段时，请在这些子字段上创建标量索引。请使用相同的<code translate="no">structArray[subfield]</code> 路径语法。</p>
+    </button></h2><p>当在过滤器中使用 StructArray 的标量子字段时，请为其创建标量索引。使用相同的<code translate="no">structArray[subfield]</code> 路径语法。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -495,8 +495,9 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于 EmbeddingList 搜索，请选择与向量级比较对应的<code translate="no">MAX_SIM*</code> 度量：<code translate="no">MAX_SIM_COSINE</code> （也称为<code translate="no">MAX_SIM</code> ）、<code translate="no">MAX_SIM_IP</code> 或<code translate="no">MAX_SIM_L2</code> （适用于稠密向量），以及<code translate="no">MAX_SIM_HAMMING</code> 或<code translate="no">MAX_SIM_JACCARD</code> （适用于二进制向量）。这些度量用于比较嵌入列表，并返回实体级结果。对于元素级搜索，请使用下文列出的相应常规度量。</p>
-<h2 id="Index-metric-compatibility" class="common-anchor-header">索引度量兼容性<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
+    </button></h2><p>对于 EmbeddingList 搜索，请选择与向量级比较对应的<code translate="no">MAX_SIM*</code> 度量：针对稠密向量，可选<code translate="no">MAX_SIM_COSINE</code> （也称为<code translate="no">MAX_SIM</code> ）、<code translate="no">MAX_SIM_IP</code> 或<code translate="no">MAX_SIM_L2</code> ；针对二进制向量，可选<code translate="no">MAX_SIM_HAMMING</code> 或<code translate="no">MAX_SIM_JACCARD</code> 。这些度量用于比较嵌入列表，并返回实体级结果。对于元素级搜索，请使用下文列出的相应常规度量。</p>
+<p>从 Milvus 3.0.6 开始，标量索引不再支持元素可为空的子字段或标量<code translate="no">ARRAY</code> 子字段。针对这些子字段的过滤操作将不使用索引进行。</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">索引元素可为空和已添加的向量子字段<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -511,7 +512,51 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请参考以下表格，为 StructArray 向量子场选择索引类型和度量类型。请从目标开始，然后根据搜索模式选择度量家族。</p>
+    </button></h2><p>从 Milvus 3.0.6 开始，可以创建具有元素级空值（<code translate="no">nullable=True</code> ）的向量字段，也可以将向量字段添加到现有的 StructArray 字段中。这两种情况都会改变您对子字段的索引方式：</p>
+<ul>
+<li>支持元素级空值的向量子字段仅支持元素级搜索。请使用常规向量度量（如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> ）对其进行索引。<code translate="no">MAX_SIM*</code> 度量和 EmbeddingList 索引在此类字段上将被拒绝，且<code translate="no">AUTOINDEX</code> 不会为其选择<code translate="no">MAX_SIM*</code> 度量。在构建索引和搜索过程中，空向量将被跳过。</li>
+</ul>
+<ul>
+<li><p>添加到现有 StructArray 字段中的向量字段始终是元素可空的，因此适用相同的度量规则。您无法在添加请求中绑定索引；请在子字段存在后单独创建索引。</p></li>
+<li><p>包含向量子字段的加载操作需要为其创建索引，这与任何向量字段的要求相同。在加载包含该子字段的Collection之前，请先为新增的向量子字段创建索引。在索引创建之前，查询仍可返回该新子字段。</p></li>
+<li><p>历史分段会通过Schema版本压缩接收新增子字段及其索引。请将<code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> 设置为<code translate="no">true</code> （默认值为<code translate="no">false</code> ）；否则，新增子字段的索引将不覆盖历史分段。</p></li>
+<li><p>Milvus 仅在元素可为空的向量子字段的分段中包含至少 1,024 个有效（非空）元素时，才会为其构建向量索引。低于此阈值的分段不会构建索引，针对该分段的查询将采用暴力搜索。</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Index-metric-compatibility" class="common-anchor-header">索引度量标准兼容性<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>请参考以下表格为 StructArray 向量子字段选择索引类型和度量类型。请从目标出发，然后根据搜索模式选择度量家族。</p>
 <p>请从以下兼容性表格中选择 Milvus 索引类型和度量类型。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 搜索<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -554,7 +599,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>元素级搜索使用常规向量度量。它会独立搜索每个 Struct 元素，并能返回匹配元素的偏移量。</p>
+    </button></h3><p>元素级搜索使用常规向量度量。它会独立搜索每个 Struct 元素，并可返回匹配元素的偏移量。</p>
 <table>
 <thead>
 <tr><th>向量子场数据类型</th><th>索引类型</th><th>度量类型</th></tr>
@@ -791,8 +836,9 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>一个向量量子字段只能接受一个索引。</td><td>如果需要不同的度量家族，请使用独立的向量子字段。</td></tr>
 <tr><td>请使用<code translate="no">MAX_SIM*</code> 指标进行 EmbeddingList 搜索。</td><td>EmbeddingList 查询数据需要使用<code translate="no">MAX_SIM*</code> 度量构建的索引。</td></tr>
 <tr><td>对于元素级搜索，请使用常规向量指标。</td><td>元素级搜索使用常规向量查询数据和诸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等度量。</td></tr>
-<tr><td>对出现在过滤器中的标量子字段进行索引。</td><td>使用目标支持的标量索引类型。</td></tr>
-<tr><td>请注意向量字段的限制。</td><td>向量字段和向量子字段的总数是有限的。在添加大量向量子字段之前，请参阅“StructArray 限制”。</td></tr>
+<tr><td>对出现在过滤器中的标量子字段进行索引。</td><td>请使用目标支持的标量索引类型。元素可为空的子字段和标量<code translate="no">ARRAY</code> 子字段无法被索引。</td></tr>
+<tr><td>对元素可为空的向量子字段使用元素级度量。</td><td>允许元素为空的向量字段（<code translate="no">nullable=True</code> ），包括添加到现有 StructArray 字段中的任何向量字段，均不接受<code translate="no">MAX_SIM*</code> 指标。</td></tr>
+<tr><td>请注意向量字段的限制。</td><td>向量字段和向量子字段的总数是有限的。在添加大量向量子字段之前，请参阅《StructArray 限制》。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常见错误<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -811,11 +857,11 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>在 `<code translate="no">chunks.emb</code> ` 上创建索引，而不是在 `<code translate="no">chunks[emb]</code>` 上创建。</p></li>
-<li><p>仅在<code translate="no">MAX_SIM*</code> 上创建索引，然后尝试在同一子字段上执行元素级搜索。</p></li>
+<li><p>在 `<code translate="no">chunks.emb</code> ` 上创建索引，而不是在 `<code translate="no">chunks[emb]</code>` 上。</p></li>
+<li><p>仅在<code translate="no">MAX_SIM*</code> 上创建索引，然后尝试在同一子字段上运行元素级搜索。</p></li>
 <li><p>仅创建常规向量索引，随后却试图在同一子字段上执行 EmbeddingList 搜索。</p></li>
 <li><p>将同一个向量子字段同时用于<code translate="no">MAX_SIM*</code> 和常规向量度量。</p></li>
-<li><p>忽略了高频使用的 StructArray 过滤器对应的标量索引。</p></li>
+<li><p>忽略了高频使用的 StructArray 过滤器的标量索引。</p></li>
 <li><p>对 Struct Schema 中不存在的 StructArray 子字段进行索引。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">

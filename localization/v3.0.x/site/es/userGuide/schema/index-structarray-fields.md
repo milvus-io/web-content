@@ -498,6 +498,51 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
         ></path>
       </svg>
     </button></h2><p>Para la búsqueda en EmbeddingList, elige la métrica « <code translate="no">MAX_SIM*</code> » correspondiente a la comparación por vector: <code translate="no">MAX_SIM_COSINE</code> (también denominada <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code> o <code translate="no">MAX_SIM_L2</code> para vectores densos, y <code translate="no">MAX_SIM_HAMMING</code> o <code translate="no">MAX_SIM_JACCARD</code> para vectores binarios. Estas métricas comparan listas de incrustaciones y devuelven resultados a nivel de entidad. Para la búsqueda a nivel de elemento, utiliza la métrica regular correspondiente que se indica a continuación.</p>
+<p>A partir de Milvus 3.0.6, los índices escalares no son compatibles con subcampos de elementos nulos ni con subcampos escalares de tipo « <code translate="no">ARRAY</code> ». Los filtros sobre estos subcampos se ejecutan sin índice.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Indexar subcampos vectoriales con elementos nulos y añadidos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>A partir de Milvus 3.0.6, se puede crear un subcampo vectorial con valor nulo a nivel de elemento (<code translate="no">nullable=True</code>), y se puede añadir un subcampo vectorial a un campo StructArray ya existente. Ambos casos modifican la forma de indexar el subcampo:</p>
+<ul>
+<li>Un subcampo vectorial con elementos nulos solo admite la búsqueda a nivel de elemento. Índicelo con una métrica vectorial habitual, como <code translate="no">COSINE</code>, <code translate="no">IP</code> o <code translate="no">L2</code>. Las métricas « <code translate="no">MAX_SIM*</code> » y los índices «EmbeddingList» se rechazan en este caso, y <code translate="no">AUTOINDEX</code> no selecciona una métrica « <code translate="no">MAX_SIM*</code> » para él. Los vectores nulos se omiten al crear el índice y durante la búsqueda.</li>
+</ul>
+<ul>
+<li><p>Un subcampo vectorial añadido a un campo StructArray ya existente siempre es de tipo «element-nullable», por lo que se aplica la misma regla de métricas. No se puede vincular un índice en la solicitud de adición; cree el índice por separado una vez que el subcampo ya exista.</p></li>
+<li><p>Una carga que incluya un subcampo vectorial requiere un índice sobre él, al igual que cualquier campo vectorial. Crea el índice sobre un subcampo vectorial añadido antes de cargar la colección con ese subcampo incluido. Las consultas pueden devolver el nuevo subcampo antes de que exista el índice.</p></li>
+<li><p>Los segmentos de historial reciben un subcampo añadido y su índice a través de la compactación de la versión del esquema. Establece <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> en <code translate="no">true</code> (por defecto es <code translate="no">false</code> ); de lo contrario, el índice del subcampo añadido no abarcará los segmentos de historial.</p></li>
+<li><p>Milvus crea el índice vectorial para un segmento de un subcampo vectorial con elementos nulos solo cuando el segmento contiene al menos 1.024 elementos válidos (no nulos). Un segmento por debajo de este umbral no crea ningún índice, y las consultas sobre él se ejecutan mediante búsqueda por fuerza bruta.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">Compatibilidad de métricas de índice<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,7 +558,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilice las siguientes tablas para elegir un tipo de índice y un tipo de métrica para un subcampo vectorial de StructArray. Comience por el objetivo y, a continuación, elija la familia de métricas según el modo de búsqueda.</p>
+    </button></h2><p>Utiliza las siguientes tablas para elegir un tipo de índice y un tipo de métrica para un subcampo vectorial StructArray. Empieza por el destino y, a continuación, elige la familia de métricas según el modo de búsqueda.</p>
 <p>Elige un tipo de índice y un tipo de métrica de Milvus a partir de las siguientes tablas de compatibilidad.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">Búsqueda en EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,7 +575,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La búsqueda en EmbeddingList utiliza métricas de tipo « <code translate="no">MAX_SIM*</code> ». Trata los vectores de un subcampo vectorial StructArray como una lista de incrustaciones y devuelve resultados a nivel de entidad.</p>
+    </button></h3><p>La búsqueda en EmbeddingList utiliza métric <code translate="no">MAX_SIM*</code>. Trata los vectores de un subcampo vectorial de StructArray como una lista de incrustaciones y devuelve resultados a nivel de entidad.</p>
 <table>
 <thead>
 <tr><th>Tipo de datos del subcampo vectorial</th><th>Tipo de índice</th><th>Tipo de métrica</th></tr>
@@ -570,7 +615,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
 </tbody>
 </table>
 <p>Para obtener información sobre la compatibilidad con versiones específicas y otras restricciones, consulta <a href="/docs/es/structarray-limits.md">«Restricciones de StructArray</a>».</p>
-<h2 id="Verify-indexes" class="common-anchor-header">Verificar los índices<button data-href="#Verify-indexes" class="anchor-icon" translate="no">
+<h2 id="Verify-indexes" class="common-anchor-header">Verificar índices<button data-href="#Verify-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -793,8 +838,9 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>Un subcampo vectorial admite un único índice.</td><td>Utilice subcampos vectoriales independientes si necesita familias de métricas diferentes.</td></tr>
 <tr><td>Utilice métricas « <code translate="no">MAX_SIM*</code> » para la búsqueda en EmbeddingList.</td><td>Los datos de consulta de EmbeddingList requieren un índice creado con una métrica de tipo « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Utiliza métricas vectoriales normales para la búsqueda a nivel de elemento.</td><td>La búsqueda a nivel de elemento utiliza datos de consulta vectorial estándar y métricas como « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » o « <code translate="no">L2</code> ».</td></tr>
-<tr><td>Indexa los subcampos escalares que aparecen en los filtros.</td><td>Utiliza los tipos de índice escalar compatibles con tu destino.</td></tr>
-<tr><td>Tenga en cuenta los límites de los campos vectoriales.</td><td>El número total de campos vectoriales y subcampos vectoriales está limitado. Consulte «Límites de StructArray» antes de añadir muchos subcampos vectoriales.</td></tr>
+<tr><td>Indexa los subcampos escalares que aparecen en los filtros.</td><td>Utiliza los tipos de índice escalar compatibles con tu destino. Los subcampos de elementos nulos y los subcampos escalares de tipo « <code translate="no">ARRAY</code> » no se pueden indexar.</td></tr>
+<tr><td>Utilice métricas a nivel de elemento en los subcampos vectoriales con elementos nulos.</td><td>Un subcampo vectorial con elementos nulos (<code translate="no">nullable=True</code>), incluido cualquier subcampo vectorial añadido a un campo StructArray existente, rechaza las métricas de <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td>Tenga en cuenta los límites de los campos vectoriales.</td><td>El número total de campos vectoriales y subcampos vectoriales está limitado. Consulta «Límites de StructArray» antes de añadir muchos subcampos vectoriales.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">Errores comunes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -814,7 +860,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
       </svg>
     </button></h2><ul>
 <li><p>Crear un índice en « <code translate="no">chunks.emb</code> » en lugar de en « <code translate="no">chunks[emb]</code> ».</p></li>
-<li><p>Crear únicamente un índice de tipo « <code translate="no">MAX_SIM*</code> » y, a continuación, intentar realizar una búsqueda a nivel de elemento en el mismo subcampo.</p></li>
+<li><p>Crear únicamente un índice de « <code translate="no">MAX_SIM*</code> » y, a continuación, intentar realizar una búsqueda a nivel de elemento en el mismo subcampo.</p></li>
 <li><p>Crear únicamente un índice vectorial normal y, a continuación, intentar realizar una búsqueda en EmbeddingList en el mismo subcampo.</p></li>
 <li><p>Reutilizar un subcampo vectorial tanto para métricas de tipo « <code translate="no">MAX_SIM*</code> » como para métricas vectoriales normales.</p></li>
 <li><p>Olvidarse de los índices escalares para los filtros StructArray más utilizados.</p></li>

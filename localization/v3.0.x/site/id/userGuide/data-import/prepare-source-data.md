@@ -45,7 +45,7 @@ summary: >-
   
  </span></p>
 <p>Anda harus memeriksa data Anda dengan cermat dan merancang skema koleksi tujuan sesuai dengan itu.</p>
-<p>Mengambil data JSON pada diagram di atas sebagai contoh, terdapat dua entitas dalam daftar baris, di mana setiap baris memiliki enam bidang. Skema koleksi secara selektif mencakup empat bidang: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong>, dan <strong>scalar_2</strong>.</p>
+<p>Mengambil data JSON pada diagram di atas sebagai contoh, terdapat dua entitas dalam daftar baris, dengan setiap baris memiliki enam bidang. Skema koleksi secara selektif mencakup empat bidang: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong>, dan <strong>scalar_2</strong>.</p>
 <p>Ada dua hal lagi yang perlu dipertimbangkan saat merancang skema:</p>
 <ul>
 <li><p><strong>Apakah akan mengaktifkan AutoID</strong></p>
@@ -53,12 +53,12 @@ summary: >-
 <li><p><strong>Apakah akan mengaktifkan bidang dinamis</strong></p>
 <p>Koleksi tujuan juga dapat menyimpan kolom yang tidak termasuk dalam skema yang telah ditentukan sebelumnya jika skema tersebut mengaktifkan kolom dinamis. Kolom <strong>$meta</strong> adalah kolom JSON yang disediakan khusus untuk menyimpan kolom dinamis beserta nilainya dalam bentuk pasangan kunci-nilai. Pada diagram di atas, kolom <strong>dynamic_field_1</strong> dan <strong>dynamic_field_2</strong> beserta nilainya akan disimpan sebagai pasangan kunci-nilai di kolom <strong>$meta</strong>.</p></li>
 </ul>
-<p>Kode berikut menunjukkan cara mengatur skema untuk koleksi yang digambarkan dalam diagram di atas.</p>
+<p>Kode berikut menunjukkan cara mengatur skema untuk koleksi yang diilustrasikan pada diagram di atas.</p>
 <div class="language-python">
 <p>Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> di referensi SDK.</p>
 </div>
 <div class="language-java">
-<p>Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> di referensi SDK.</p>
+<p>Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> dalam referensi SDK.</p>
 </div>
 <div class="multipleCode">
  <a href="#python">Python 
@@ -232,18 +232,22 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>Nilai bidang berupa daftar objek, satu per elemen Struct, dengan kunci berupa nama subbidang: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>Sel tersebut berisi teks JSON yang sama seperti pada format JSON.</td></tr>
-<tr><td>Parquet</td><td>Satu kolom per bidang StructArray dengan tipe <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, satu anak struct per subbidang. Subbidang skalar adalah anak skalar, dan subbidang vektor adalah daftar tipe elemennya, seperti <code translate="no">list&lt;float32&gt;</code>.</td></tr>
-<tr><td>NumPy</td><td>Tidak didukung. File NumPy menyimpan satu file per bidang tingkat atas dan tidak memiliki representasi untuk bidang StructArray. Gunakan file JSON, CSV, atau Parquet untuk koleksi yang memiliki bidang StructArray.</td></tr>
+<tr><td>CSV</td><td>Sel tersebut berisi teks JSON yang sama seperti pada format JSON. Nilai ` <code translate="no">nullkey</code> ` yang dikonfigurasi untuk tugas impor atau `JSON <code translate="no">null</code> ` menandai nilai StructArray yang bernilai null.</td></tr>
+<tr><td>Parquet</td><td>Satu kolom per bidang StructArray dengan tipe <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, satu anak struct per subbidang. Subbidang skalar adalah anak skalar, subbidang vektor adalah daftar tipe elemennya, seperti <code translate="no">list&lt;float32&gt;</code>, dan subbidang array (Milvus 3.0.6 dan seterusnya) adalah anak <code translate="no">list&lt;T&gt;</code>.</td></tr>
+<tr><td>NumPy</td><td>Tidak didukung. File NumPy menyimpan satu file per bidang tingkat atas dan tidak memiliki representasi untuk bidang StructArray. Gunakan file JSON, CSV, atau Parquet untuk kumpulan data yang memiliki bidang StructArray.</td></tr>
 </tbody>
 </table>
 <p>Aturan berikut berlaku untuk nilai StructArray di semua format yang didukung:</p>
 <ul>
 <li><p>Gunakan nama subbidang di dalam setiap elemen Struct, bukan jalur seperti <code translate="no">chunks[text]</code>. Kolom datar atau kunci bernama <code translate="no">chunks[text]</code> akan ditolak.</p></li>
-<li><p>Setiap elemen Struct harus menyediakan setiap subbidang dari skema Struct, dan elemen Struct itu sendiri tidak boleh bernilai null, seperti <code translate="no">[null, {...}]</code>. Nilai StructArray secara keseluruhan hanya dapat bernilai null jika bidang StructArray tersebut dapat bernilai null.</p></li>
+<li><p>Elemen Struct itu sendiri tidak boleh bernilai null, seperti <code translate="no">[null, {...}]</code>. Nilai StructArray secara keseluruhan hanya dapat bernilai null jika bidang StructArray tersebut dapat bernilai null. Sebelum Milvus 3.0.6, setiap elemen Struct harus menyediakan setiap subbidang.</p></li>
+<li><p>Kunci atau anak Parquet yang bukan subbidang dari koleksi, termasuk subbidang yang dihilangkan, akan diabaikan.</p></li>
+<li><p>Mulai Milvus 3.0.6, kunci yang hilang atau nilai ` <code translate="no">null</code> ` untuk subfield yang dapat bernilai `null` akan diimpor sebagai nilai `null` untuk elemen Struct tersebut, sehingga file yang ditulis sebelum subfield ditambahkan akan diimpor tanpa subfield tersebut. Sebuah ` <code translate="no">null</code> ` di tempat lain akan menyebabkan kegagalan impor. Untuk subfield array, ` <code translate="no">null</code> ` adalah array dalam yang bernilai null, dan ` <code translate="no">null</code> ` di dalam array tersebut adalah nilai dalam yang bernilai null jika subfield tersebut mengizinkannya.</p></li>
+<li><p>Mulai Milvus 3.0.6, impor binlog, seperti pemulihan cadangan, dan impor dari sumber snapshot akan ditolak untuk koleksi yang memiliki subfield dengan elemen nullable atau subfield array skalar.</p></li>
 </ul>
-<p>Untuk batasan di sisi skema, lihat <a href="/docs/id/structarray-limits.md#Import-limits">Batasan StructArray</a>.</p>
-<h2 id="Set-up-BulkWriter" class="common-anchor-header">Siapkan BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> mendukung bentuk StructArray di atas dalam setiap format yang didukung, termasuk subfield dengan elemen nullable dan nilai StructArray yang nullable. Gunakan bentuk baris yang sama dalam panggilan ` <code translate="no">add_row()</code> ` pada writer.</p>
+<p>Untuk batasan di sisi skema, lihat <a href="/docs/id/structarray-limits.md#Import-and-storage-limits">Batasan StructArray</a>.</p>
+<h2 id="Set-up-BulkWriter" class="common-anchor-header">Menyiapkan BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -258,7 +262,7 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong> adalah alat yang dirancang untuk mengonversi dataset mentah ke dalam format yang sesuai untuk diimpor melalui RESTful Import API. Alat ini menawarkan dua jenis penulis:</p>
+    </button></h2><p><strong>BulkWriter</strong> adalah alat yang dirancang untuk mengonversi kumpulan data mentah ke dalam format yang sesuai untuk diimpor melalui RESTful Import API. Alat ini menawarkan dua jenis penulis:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: Membaca dataset yang ditentukan dan mengubahnya menjadi format yang mudah digunakan.</li>
 <li><strong>RemoteBulkWriter</strong>: Melakukan tugas yang sama seperti LocalBulkWriter, tetapi juga mentransfer file data yang telah dikonversi ke bucket penyimpanan objek jarak jauh yang ditentukan.</li>
@@ -668,7 +672,7 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Untuk memeriksa hasilnya, Anda dapat memperoleh jalur keluaran aktual dengan mencetak properti ` <code translate="no">batch_files</code> ` dari writer.</p>
+<p>Untuk memeriksa hasilnya, Anda dapat mendapatkan jalur keluaran sebenarnya dengan mencetak properti ` <code translate="no">batch_files</code> ` dari writer.</p>
 </div>
 <div class="language-java">
 <p>Untuk memeriksa hasilnya, Anda dapat memperoleh jalur keluaran sebenarnya dengan mencetak metode ` <code translate="no">getBatchFiles()</code> ` dari writer.</p>

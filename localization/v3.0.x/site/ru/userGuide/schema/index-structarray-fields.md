@@ -78,7 +78,7 @@ summary: >-
 <tbody>
 <tr><td>Поиск в EmbeddingList</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>Семейство метрик « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Векторный поиск на уровне элементов</td><td><code translate="no">chunks[emb]</code></td><td>Обычное семейство векторных метрик, например, <code translate="no">COSINE</code>, <code translate="no">IP</code> или <code translate="no">L2</code>.</td></tr>
-<tr><td>Фильтрация по строке или категории</td><td><code translate="no">chunks[section]</code></td><td>Скалярный индекс, поддерживаемый вашей целью.</td></tr>
+<tr><td>Фильтрация по строке или категории</td><td><code translate="no">chunks[section]</code></td><td>Скалярный индекс, поддерживаемый вашей целевой системой.</td></tr>
 <tr><td>Фильтрация по числовому диапазону</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>скалярный индекс, поддерживаемый целевым объектом.</td></tr>
 <tr><td>Фильтрация по булевому значению</td><td><code translate="no">chunks[has_code]</code></td><td>Скалярный индекс, поддерживаемый вашей целевой платформой.</td></tr>
 </tbody>
@@ -497,7 +497,52 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Для поиска по EmbeddingList выберите метрику <code translate="no">MAX_SIM*</code>, соответствующую сравнению по векторам: <code translate="no">MAX_SIM_COSINE</code> (также называется <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code> или <code translate="no">MAX_SIM_L2</code> для плотных векторов, а также <code translate="no">MAX_SIM_HAMMING</code> или <code translate="no">MAX_SIM_JACCARD</code> для бинарных векторов. Эти метрики сравнивают списки вложений и возвращают результаты на уровне сущностей. Для поиска на уровне элементов используйте соответствующую стандартную метрику, указанную ниже.</p>
+    </button></h2><p>Для поиска по EmbeddingList выберите метрику <code translate="no">MAX_SIM*</code>, соответствующую сравнению на уровне векторов: <code translate="no">MAX_SIM_COSINE</code> (также называется <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code> или <code translate="no">MAX_SIM_L2</code> для плотных векторов, а также <code translate="no">MAX_SIM_HAMMING</code> или <code translate="no">MAX_SIM_JACCARD</code> для бинарных векторов. Эти метрики сравнивают списки вложений и возвращают результаты на уровне сущностей. Для поиска на уровне элементов используйте соответствующую стандартную метрику, указанную ниже.</p>
+<p>Начиная с версии Milvus 3.0.6, скалярные индексы не поддерживаются для подполей, допускающих нулевые значения элементов, или для скалярных подполей типа « <code translate="no">ARRAY</code> ». Фильтры по этим подполям выполняются без использования индекса.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Индексирование подполей с допустимыми нулевыми элементами и добавленных векторных подполей<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Начиная с Milvus 3.0.6, векторное подполе можно создать с нулевыми элементами (<code translate="no">nullable=True</code>), а также добавить векторное подполе к существующему полю StructArray. В обоих случаях изменяется способ индексирования подполя:</p>
+<ul>
+<li>Векторное подполе с допустимыми нулевыми элементами поддерживает только поиск на уровне элементов. Индексируйте его с помощью обычной векторной метрики, такой как <code translate="no">COSINE</code>, <code translate="no">IP</code> или <code translate="no">L2</code>. Метрики типа « <code translate="no">MAX_SIM*</code> » и индексы EmbeddingList для него не допускаются, а <code translate="no">AUTOINDEX</code> не выбирает для него метрику типа « <code translate="no">MAX_SIM*</code> ». Нулевые векторы пропускаются при построении индекса и во время поиска.</li>
+</ul>
+<ul>
+<li><p>Векторное подполе, добавленное к существующему полю StructArray, всегда допускает нулевые элементы, поэтому к нему применяется то же правило метрики. Невозможно привязать индекс в запросе на добавление; создайте индекс отдельно после того, как подполе будет создано.</p></li>
+<li><p>Загрузка, включающая векторное подполе, требует наличия индекса для него, как и для любого векторного поля. Создайте индекс для добавленного векторного подполя до того, как загрузите коллекцию с включенным этим подполем. Запросы могут возвращать новое подполе до того, как индекс будет создан.</p></li>
+<li><p>Сегменты истории получают добавленное подполе и его индекс посредством уплотнения версии схемы. Установите для параметра ` <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> ` значение ` <code translate="no">true</code> ` (по умолчанию — ` <code translate="no">false</code> `); в противном случае индекс добавленного подполя не будет охватывать сегменты истории.</p></li>
+<li><p>Milvus создаёт векторный индекс для сегмента подполя вектора, допускающего нулевые элементы, только в том случае, если сегмент содержит не менее 1 024 действительных (не нулевых) элементов. Для сегмента, не достигающего этого порога, индекс не создаётся, и запросы по нему выполняются методом полного перебора.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">Совместимость метрик индекса<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,8 +558,8 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте приведенные ниже таблицы, чтобы выбрать тип индекса и тип метрики для подполя вектора StructArray. Начните с конечной цели, а затем выберите семейство метрик в зависимости от режима поиска.</p>
-<p>Выберите тип индекса Milvus и тип метрики из приведенных ниже таблиц совместимости.</p>
+    </button></h2><p>Используйте приведенные ниже таблицы для выбора типа индекса и типа метрики для векторного подполя StructArray. Начните с конечной цели, а затем выберите семейство метрик в зависимости от режима поиска.</p>
+<p>Выберите тип индекса Milvus и тип метрики из приведённых ниже таблиц совместимости.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">Поиск по EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -530,7 +575,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Поиск по EmbeddingList использует метрики типа « <code translate="no">MAX_SIM*</code> ». Он рассматривает векторы в подполе вектора StructArray как список вложений и возвращает результаты на уровне сущностей.</p>
+    </button></h3><p>Поиск по EmbeddingList использует метрики типа « <code translate="no">MAX_SIM*</code> ». Он рассматривает векторы в векторном подполе StructArray как список вложений и возвращает результаты на уровне сущностей.</p>
 <table>
 <thead>
 <tr><th>Тип данных подполя вектора</th><th>Тип индекса</th><th>Тип метрики</th></tr>
@@ -793,11 +838,12 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>Одно векторное подполе допускает один индекс.</td><td>Используйте отдельные векторные подполя, если вам нужны разные семейства метрик.</td></tr>
 <tr><td>Используйте метрику <code translate="no">MAX_SIM*</code> для поиска по EmbeddingList.</td><td>Для запросов EmbeddingList требуется индекс, построенный с использованием метрики <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>Для поиска на уровне элементов используйте обычные векторные метрики.</td><td>При поиске на уровне элементов используются данные запросов обычных векторных метрик, таких как <code translate="no">COSINE</code>, <code translate="no">IP</code> или <code translate="no">L2</code>.</td></tr>
-<tr><td>Индексируйте скалярные подполя, которые появляются в фильтрах.</td><td>Используйте скалярные типы индексов, поддерживаемые вашей целевой платформой.</td></tr>
+<tr><td>Индексируйте скалярные подполя, которые встречаются в фильтрах.</td><td>Используйте скалярные типы индексов, поддерживаемые вашей целевой платформой. По podpola, допускающие значение null, и скалярные подполя типа « <code translate="no">ARRAY</code> » не могут быть проиндексированы.</td></tr>
+<tr><td>Используйте метрики на уровне элементов для векторных подполей, допускающих нулевые элементы.</td><td>Векторное подполе, допускающее нулевые элементы (<code translate="no">nullable=True</code>), включая любое векторное подполе, добавленное к существующему полю StructArray, отклоняет метрики <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>Учитывайте ограничения на векторные поля.</td><td>Общее количество векторных полей и векторных подполей ограничено. Перед добавлением большого количества векторных подполей ознакомьтесь с разделом «Ограничения StructArray».</td></tr>
 </tbody>
 </table>
-<h2 id="Common-mistakes" class="common-anchor-header">Распространенные ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
+<h2 id="Common-mistakes" class="common-anchor-header">Распространённые ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -813,7 +859,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Создание индекса на массиве элементов ( <code translate="no">chunks.emb</code> ) вместо массива элементов с индексами ( <code translate="no">chunks[emb]</code>).</p></li>
+<li><p>Создание индекса на поле <code translate="no">chunks.emb</code> вместо <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Создание только индекса <code translate="no">MAX_SIM*</code>, а затем попытка запустить поиск на уровне элементов в том же подполе.</p></li>
 <li><p>Создание только обычного векторного индекса, а затем попытка выполнить поиск по EmbeddingList в том же подполе.</p></li>
 <li><p>Повторное использование одного векторного подполя как для метрики <code translate="no">MAX_SIM*</code>, так и для обычной векторной метрики.</p></li>

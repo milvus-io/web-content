@@ -328,7 +328,7 @@
             "children": []
           },
           {
-            "label": "查看 Collections",
+            "label": "View Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -383,7 +383,7 @@
         "order": 2,
         "children": [
           {
-            "label": "Schema说明",
+            "label": "Schema详解",
             "id": "schema.md",
             "order": 0,
             "children": []
@@ -479,7 +479,7 @@
                 "children": []
               },
               {
-                "label": "将数据插入 StructArray 字段中",
+                "label": "将数据插入 StructArray 字段",
                 "id": "insert-data-into-structarray-fields.md",
                 "order": 2,
                 "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "解聚剂",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -749,7 +749,7 @@
             "children": []
           },
           {
-            "label": "修改Collection Schema",
+            "label": "修改集合 Schema",
             "id": "add-fields-to-an-existing-collection.md",
             "order": 17,
             "children": []
@@ -1427,7 +1427,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名工具",
+                    "label": "TEI 排名器",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1593,7 +1593,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 版 Agents.md",
+            "label": "Milvus 的 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1645,7 +1645,7 @@
         "children": []
       },
       {
-        "label": "Claude 代码的 MCP 服务器",
+        "label": "Claude Code 的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1995,7 +1995,7 @@
         ]
       },
       {
-        "label": "监控、警报和日志",
+        "label": "监控、警报与日志",
         "id": "monitor_alert_log",
         "order": 8,
         "isMenu": true,
@@ -2187,7 +2187,7 @@
         "children": []
       },
       {
-        "label": "Milvus Backup",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "命令",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP API",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "常见案例",
-            "id": "common-cases",
+            "label": "快照备份与还原",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "备份 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "单实例中的备份与还原",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "命令",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "在同一个存储桶内迁移实例",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP API",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "在不同存储桶的实例之间迁移",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "常见案例",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "单实例中的备份与还原",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "在同一个存储桶内迁移实例",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "在不同存储桶之间的实例之间进行迁移",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "在不同 S3 环境之间的实例之间进行迁移",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "在不同 S3 环境之间的实例之间进行迁移",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "升级到 0.6.x 版本",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }

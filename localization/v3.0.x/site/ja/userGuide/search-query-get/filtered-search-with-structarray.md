@@ -1056,7 +1056,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;category&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>両方のサブリクエストで<code translate="no">category == &quot;search&quot;</code> が適用されます。<code translate="no">chunk_req</code> 式は、そのベクトル検索に参加するStruct要素に対しても制約を課します。サポートされているハイブリッド検索の組み合わせおよびバージョンごとの制限については、「<a href="/docs/ja/hybrid-search-with-structarray.md">StructArrayを使用したハイブリッド検索</a>」および「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p>
+<p>両方のサブリクエストで<code translate="no">category == &quot;search&quot;</code> が適用されます。<code translate="no">chunk_req</code> 式は、そのベクトル検索に参加するStruct要素に対しても制約を課します。サポートされているハイブリッド検索の組み合わせおよびバージョン固有の制限については、「<a href="/docs/ja/hybrid-search-with-structarray.md">StructArrayを使用したハイブリッド検索</a>」および「<a href="/docs/ja/structarray-limits.md">StructArrayの制限</a>」を参照してください。</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">述語のサポート概要<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1085,7 +1085,7 @@ curl --request POST \
 <tr><td>ベクトルサブフィールド</td><td><code translate="no">$[...]</code> のスカラー述語の入力としてはサポートされていません。代わりに、ベクトル検索を通じてベクトルサブフィールドを使用してください。</td></tr>
 </tbody>
 </table>
-<p>JSONパス、配列コンテナ関数、テキスト一致関数、<code translate="no">$[...]</code> に対する null 述語、Geometry 関数、Timestamptz 式、およびジェネリック関数の呼び出しなど、サポートされていないケースについては、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p>
+<p>JSONパス、テキスト一致関数、Geometry関数、Timestamptz式、および汎用関数呼び出しなどの未サポートのケース、ならびにMilvus 3.0.6以降で<code translate="no">$[...]</code> がサポートする配列コンテナ関数およびnull述語については、<a href="/docs/ja/struct-array-operators.md">「StructArray演算子」を</a>参照してください。</p>
 <h2 id="Common-mistakes" class="common-anchor-header">よくある間違い<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1103,13 +1103,13 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p><code translate="no">element_filter</code> や<code translate="no">MATCH_*</code> の外で<code translate="no">$[subfield]</code> を使用すること。</p></li>
-<li><p><code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> などのStructArray演算子構文の代わりに<code translate="no">chunks.section</code> を使用すること。</p></li>
+<li><p><code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> などの StructArray 演算子構文の代わりに<code translate="no">chunks.section</code> を使用すること。</p></li>
 <li><p>行レベルのフィルタリングのみが必要な場合に `<code translate="no">element_filter</code> ` を使用すること。エンティティを選択するだけなら、代わりに `<code translate="no">MATCH_ANY</code> ` を使用してください。</p></li>
 <li><p><code translate="no">MATCH_*</code> が要素のオフセットを返すことを期待しないこと。これらの演算子はエンティティを選択するものであり、それ自体では一致した要素を特定するものではありません。</p></li>
 <li><p><code translate="no">$[has_code]</code> のような、単純なブール述語を記述すること。<code translate="no">$[has_code] == true</code> のような明示的な比較を使用してください。</p></li>
 <li><p>同じフィルター式内で、<code translate="no">element_filter</code> をトップレベルの述語の前に配置すること。</p></li>
 </ul>
-<h2 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

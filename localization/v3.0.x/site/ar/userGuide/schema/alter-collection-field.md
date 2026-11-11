@@ -27,6 +27,9 @@ summary: >-
 <li><p>تتكون كل مجموعة من حقل أساسي واحد فقط. وبمجرد تعيينه أثناء إنشاء المجموعة، لا يمكنك تغيير الحقل الأساسي أو تعديل خصائصه.</p></li>
 <li><p>يمكن أن تحتوي كل مجموعة على مفتاح تقسيم واحد فقط. بمجرد تعيينه أثناء إنشاء المجموعة، لا يمكنك تغيير مفتاح التقسيم.</p></li>
 </ul>
+<ul>
+<li>بدءًا من Milvus 3.0.6، بالنسبة لحقل <a href="/docs/ar/array-of-structs.md">StructArray</a> أو أحد مسارات حقوله الفرعية، مثل <code translate="no">chunks[text]</code> ، يمكنك تعديل <code translate="no">mmap.enabled</code> و <code translate="no">field.description</code> و <code translate="no">warmup</code> فقط. أما الخصائص الأخرى، مثل <code translate="no">max_capacity</code> و <code translate="no">max_length</code> ، فسيتم رفضها. يتم تخزين الحقل الأصلي وحقوله الفرعية معًا، وتصبح الخصائص <code translate="no">mmap.enabled</code> و <code translate="no">warmup</code> سارية المفعول على التخزين المشترك عند تمكينها في أي منها: ولا يسري تأثير تعطيل إحدى هذه الخصائص في حقل فرعي بمفرده ما دام الحقل الأصلي أو أحد الحقول الفرعية الشقيقة لا يزال يتيحها. كما أن تعيين <code translate="no">warmup</code> إلى <code translate="no">disable</code> لا يتخطى جميع عمليات القراءة: فلا تزال البيانات المطلوبة لتنفيذ الاستعلام، مثل إزاحات العناصر، تُقرأ.</li>
+</ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">تعديل حقل VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يحتوي حقل VarChar على خاصية تُسمى « <code translate="no">max_length</code> » (الحد الأقصى لعدد البايتات)، والتي تحدد الحد الأقصى لعدد البايتات المسموح به لكل قيمة حقل. يمكنك تغيير خاصية « <code translate="no">max_length</code> » (الحد الأقصى لعدد البايتات).</p>
+    </button></h2><p>يحتوي حقل VarChar على خاصية تُسمى <code translate="no">max_length</code> ، والتي تحدد الحد الأقصى لعدد البايتات المسموح بها لكل قيمة حقل. يمكنك تغيير الخاصية <code translate="no">max_length</code>.</p>
 <p>يفترض المثال التالي أن المجموعة تحتوي على حقل VarChar باسم <code translate="no">varchar</code> ويقوم بتعيين خاصية <code translate="no">max_length</code> الخاصة به.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

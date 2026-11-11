@@ -1,9 +1,9 @@
 ---
 id: alter-collection-field.md
-title: 컬렉션 필드 변경
+title: 컬렉션 필드 수정
 summary: 컬렉션 필드의 속성을 변경하여 열 제약 조건을 수정하거나 더 엄격한 데이터 무결성 규칙을 적용할 수 있습니다.
 ---
-<h1 id="Alter-Collection-Field" class="common-anchor-header">컬렉션 필드 변경<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
+<h1 id="Alter-Collection-Field" class="common-anchor-header">컬렉션 필드 수정<button data-href="#Alter-Collection-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +23,10 @@ summary: 컬렉션 필드의 속성을 변경하여 열 제약 조건을 수정�
 <div class="alert note">
 <ul>
 <li><p>각 컬렉션은 하나의 기본 필드로만 구성됩니다. 컬렉션 생성 시 기본 필드가 설정되면, 해당 필드를 변경하거나 속성을 수정할 수 없습니다.</p></li>
-<li><p>각 컬렉션은 하나의 파티션 키만 가질 수 있습니다. 컬렉션 생성 시 파티션 키가 설정되면 이를 변경할 수 없습니다.</p></li>
+<li><p>각 컬렉션은 하나의 파티션 키만 가질 수 있습니다. 컬렉션 생성 시 설정된 파티션 키는 변경할 수 없습니다.</p></li>
+</ul>
+<ul>
+<li>Milvus 3.0.6부터 <a href="/docs/ko/array-of-structs.md">StructArray</a> 필드 또는 <code translate="no">chunks[text]</code> 와 같은 하위 필드 경로의 경우, <code translate="no">mmap.enabled</code>, <code translate="no">field.description</code> 및 <code translate="no">warmup</code> 만 변경할 수 있습니다. <code translate="no">max_capacity</code> 및 <code translate="no">max_length</code> 와 같은 다른 속성은 거부됩니다. 상위 필드와 그 하위 필드는 함께 저장되며, <code translate="no">mmap.enabled</code> 및 <code translate="no">warmup</code> 는 이들 중 어느 하나에서 활성화되면 공유 저장소에 적용됩니다. 즉, 하위 필드 하나에서만 이 속성을 비활성화하더라도 상위 필드나 형제 하위 필드에서 여전히 활성화되어 있는 경우 해당 변경 사항은 적용되지 않습니다. 또한, ` <code translate="no">warmup</code> `를 ` <code translate="no">disable</code> `로 설정해도 모든 읽기 작업이 건너뛰어지는 것은 아닙니다. 요소 오프셋과 같이 쿼리 실행에 필요한 데이터는 여전히 읽힙니다.</li>
 </ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">VarChar 필드 변경<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
@@ -41,8 +44,8 @@ summary: 컬렉션 필드의 속성을 변경하여 열 제약 조건을 수정�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VarChar 필드에는 각 필드 값에 허용되는 최대 바이트 수를 정의하는 ` <code translate="no">max_length</code>`라는 속성이 있습니다. ` <code translate="no">max_length</code> ` 속성을 변경할 수 있습니다.</p>
-<p>다음 예제는 컬렉션에 ' <code translate="no">varchar</code> '이라는 VarChar 필드가 있다고 가정하고, 해당 필드의 ' <code translate="no">max_length</code> ' 속성을 설정합니다.</p>
+    </button></h2><p>VarChar 필드에는 각 필드 값에 허용되는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 라는 속성이 있습니다. <code translate="no">max_length</code> 속성을 변경할 수 있습니다.</p>
+<p>다음 예제는 컬렉션에 <code translate="no">varchar</code> 라는 VarChar 필드가 있다고 가정하고, 해당 필드의 <code translate="no">max_length</code> 속성을 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

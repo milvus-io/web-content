@@ -1,11 +1,11 @@
 ---
 id: insert-data-into-structarray-fields.md
-title: 將資料插入 StructArray 欄位
+title: Insert Data into StructArray Fields
 summary: >-
   當每個實體包含一個有序的結構化元素清單時，請將資料插入 StructArray 欄位中。在插入載荷中，StructArray
   欄位以物件陣列的形式呈現。每個物件代表一個 Struct 元素，並使用集合架構中定義的 Struct 子欄位名稱。
 ---
-<h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">將資料插入 StructArray 欄位<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
+<h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">Insert Data into StructArray Fields<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當每個實體包含一個有序的結構化元素清單時，請將資料插入 StructArray 欄位中。在插入載荷中，StructArray 欄位以物件陣列的形式呈現。每個物件代表一個 Struct 元素，並使用集合架構中定義的 Struct 子欄位名稱。</p>
-<p>本頁使用《<a href="/docs/zh-hant/create-structarray-field.md">建立 StructArray 欄位</a>》中的<code translate="no">tech_articles</code> 集合。每個實體皆為一篇技術文章，而<code translate="no">chunks</code> 欄位則將文章片段儲存為 Struct 元素。</p>
-<h2 id="Before-you-begin" class="common-anchor-header">開始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+    </button></h1><p>Insert data into a StructArray field when each entity contains an ordered list of structured elements. In the insert payload, a StructArray field is represented as an array of objects. Each object represents one Struct element and uses the Struct subfield names defined in the collection schema.</p>
+<p>This page uses the <code translate="no">tech_articles</code> collection from <a href="/docs/zh-hant/create-structarray-field.md">Create a StructArray Field</a>. Each entity is a technical article, and the <code translate="no">chunks</code> field stores article chunks as Struct elements.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,38 +37,38 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請確認集合架構中已包含<code translate="no">chunks</code> StructArray欄位。</p>
+    </button></h2><p>Make sure the collection schema already contains the <code translate="no">chunks</code> StructArray field.</p>
 <table>
 <thead>
-<tr><th>欄位</th><th>類型</th><th>插入值</th></tr>
+<tr><th>Field</th><th>Type</th><th>Insert value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>文章 ID。</td></tr>
-<tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>文章標題。</td></tr>
-<tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>文章類別。</td></tr>
-<tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>文章層級嵌入。</td></tr>
-<tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>一組片段物件清單。</td></tr>
+<tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>Article ID.</td></tr>
+<tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>Article title.</td></tr>
+<tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>Article category.</td></tr>
+<tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Article-level embedding.</td></tr>
+<tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>A list of chunk objects.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">chunks</code> 中的每個物件都必須遵循 Struct 架構。</p>
+<p>Each object in <code translate="no">chunks</code> must follow the Struct schema.</p>
 <table>
 <thead>
-<tr><th>子欄位</th><th>類型</th><th>插入值</th></tr>
+<tr><th>Subfield</th><th>Type</th><th>Insert value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>區塊文字。</td></tr>
-<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>節名，例如<code translate="no">index</code> 、<code translate="no">search</code> 或<code translate="no">filter</code> 。</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>頁碼或邏輯位置。</td></tr>
-<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>區塊層級的評分。</td></tr>
-<tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>該片段是否包含程式碼。</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>為 EmbeddingList 搜尋所撰寫的向量。</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>為元素層級搜尋所撰寫的向量。</td></tr>
+<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Chunk text.</td></tr>
+<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Section name, such as <code translate="no">index</code>, <code translate="no">search</code>, or <code translate="no">filter</code>.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Page number or logical position.</td></tr>
+<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Chunk-level score.</td></tr>
+<tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Whether the chunk contains code.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vector written for EmbeddingList search.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vector written for element-level search.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>在插入式有效載荷中，<code translate="no">chunks</code> 是一個常規欄位，其值為 Struct 物件的陣列。在每個物件內部，請使用<code translate="no">text</code> 和<code translate="no">emb</code> 等子欄位名稱。僅在插入完成後，當您建立索引、執行搜尋、建立篩選器或指定輸出欄位時，才使用路徑語法，例如<code translate="no">chunks[text]</code> 或<code translate="no">chunks[emb]</code> 。</p>
+<p>In an insert payload, <code translate="no">chunks</code> is a regular field whose value is an array of Struct objects. Inside each object, use subfield names such as <code translate="no">text</code> and <code translate="no">emb</code>. Use path syntax, such as <code translate="no">chunks[text]</code> or <code translate="no">chunks[emb]</code>, only after insertion when you create indexes, run searches, build filters, or specify output fields.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">了解插入資料的結構<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Understand the insert payload shape<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">chunks</code> 的值是一個由 Struct 元素組成的陣列。每個元素皆為一個物件，其鍵為子欄位名稱。</p>
+    </button></h2><p>The <code translate="no">chunks</code> value is an array of Struct elements. Each element is an object whose keys are subfield names.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;StructArray indexing patterns&quot;</span><span class="hljs-punctuation">,</span>
@@ -111,8 +111,8 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> 和<code translate="no">emb</code> 是獨立的向量子欄位，因為它們支援不同的搜尋模式。EmbeddingList 搜尋會將 StructArray 欄位中的所有向量視為一個嵌入清單，並返回帶有<code translate="no">MAX_SIM*</code> 指標的實體層級結果。元素層級搜尋則會獨立搜尋每個 Struct 元素，並可返回匹配元素的偏移量。為簡化說明，此範例在兩個欄位中儲存相同的向量值。 在生產環境的應用程式中，當兩種搜尋模式使用相同的區塊嵌入時，可將相同的嵌入向量儲存於兩個子欄位中；若兩種搜尋模式使用不同的表示法，則可儲存不同的嵌入向量。</p>
-<h2 id="Insert-rows" class="common-anchor-header">插入資料列<button data-href="#Insert-rows" class="anchor-icon" translate="no">
+<p><code translate="no">emb_list_vector</code> and <code translate="no">emb</code> are separate vector subfields because they support different search modes. EmbeddingList search treats all vectors in a StructArray field as one embedding list and returns entity-level results with <code translate="no">MAX_SIM*</code> metrics. Element-level search searches each Struct element independently and can return the matched element offset. This example stores the same vector values in both fields for simplicity. In a production application, you can store the same embeddings in both subfields when both search modes use the same chunk embedding, or store different embeddings when the two search modes use different representations.</p>
+<h2 id="Insert-rows" class="common-anchor-header">Insert rows<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -127,16 +127,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用插入操作寫入以下三個實體。每個實體皆包含所有必要的 Struct 子欄位。Go 範例採用列式輸入：每個 map 會將一個實體的子欄位陣列分組。</p>
+    </button></h2><p>Use the insert operation to write the following three entities. Each entity includes all required Struct subfields. The Go example uses column-based input: each map groups the subfield arrays for one entity.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#rust">   Rust</a>
- <a href="#cpp">   C++</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   C#</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -895,7 +895,7 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">插入至可為空的 StructArray 欄位<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
+<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">Insert into nullable StructArray fields<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -910,16 +910,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>僅當父級 `<code translate="no">chunks</code> ` 欄位在建立時已啟用可為空設定時，才執行此可選範例。NULL 適用於整個欄位，而非單一 `Struct` 元素或子欄位。空陣列屬於有效值，並非 NULL。</p>
+    </button></h2><p>Run this optional example only if the parent <code translate="no">chunks</code> field was created with nullable enabled. NULL applies to the entire field, not an individual Struct element or subfield. An empty array is a present value and is not NULL.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#rust">   Rust</a>
- <a href="#cpp">   C++</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   C#</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
@@ -1047,11 +1047,12 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>對於非 NULL 的 StructArray 值，請為每個必填子欄位提供有效值。請勿在同一個實體中混合使用 NULL 子欄位陣列與非 NULL 子欄位陣列。</p>
+<p>For a non-NULL StructArray value, provide valid values for every required subfield. Do not mix NULL subfield arrays with present subfield arrays in the same entity.</p>
+<p>A Struct element itself cannot be null. Starting in Milvus 3.0.6, element-nullable subfields can hold null values in individual Struct elements, as described in the next section.</p>
 <div class="alert note">
-<p>有關版本與部署可用性，請參閱<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>。新增至現有集合的 StructArray 欄位必須為可為 NULL；現有實體中，新增的整個欄位將被設為 NULL。</p>
+<p>For version and deployment availability, see <a href="/docs/zh-hant/structarray-limits.md">StructArray Limits</a>. A StructArray field added to an existing collection must be nullable; existing entities have NULL for the whole added field.</p>
 </div>
-<h2 id="Validate-inserted-data" class="common-anchor-header">驗證插入的資料<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+<h2 id="Insert-null-values-for-individual-Struct-elements" class="common-anchor-header">Insert null values for individual Struct elements<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Insert-null-values-for-individual-Struct-elements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1066,16 +1067,75 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在載入集合之前，請依照《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》中的說明建立所需的向量索引。以下範例會等待載入完成，然後查詢選定的子欄位。 若使用 cURL，請安裝<code translate="no">jq</code> 以檢查載入狀態回應。在「有限過時一致性」下，插入後立即執行的查詢可能不會包含新資料列；請在寫入內容可見後重複查詢，或在建立範例集合時設定「強一致性」。</p>
+    </button></h2><p>Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in some Struct elements and a valid value in others. The following example assumes that the <code translate="no">chunks</code> Struct schema defines a <code translate="no">lang</code> VARCHAR subfield with <code translate="no">nullable=True</code> and a <code translate="no">tags</code> array subfield with <code translate="no">nullable=True</code> and <code translate="no">element_nullable=True</code>. For the complete schema definition, see <a href="/docs/zh-hant/create-structarray-field.md#allow-null-values-in-Struct-elements--milvus-306">Allow null values in Struct elements</a>.</p>
+<p>In a Struct element, set an element-nullable subfield to <code translate="no">None</code> or omit it. Both store a null value.</p>
+<pre><code translate="no" class="language-python">client.insert(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    data=[
+        {
+            <span class="hljs-string">&quot;doc_id&quot;</span>: <span class="hljs-number">11</span>,
+            <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Chunks with missing attributes&quot;</span>,
+            <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+            <span class="hljs-string">&quot;title_vector&quot;</span>: [<span class="hljs-number">0.07</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.21</span>],
+            <span class="hljs-string">&quot;chunks&quot;</span>: [
+                {
+                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Detected language and tags are present.&quot;</span>,
+                    <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+                    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.90</span>,
+                    <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,
+                    <span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-string">&quot;en&quot;</span>,
+                    <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>],
+                    <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.42</span>],
+                    <span class="hljs-string">&quot;emb&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.42</span>],
+                },
+                {
+                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Language is unknown and tags are omitted.&quot;</span>,
+                    <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+                    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">2</span>,
+                    <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.84</span>,
+                    <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,
+                    <span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-literal">None</span>,
+                    <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.44</span>],
+                    <span class="hljs-string">&quot;emb&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.44</span>],
+                },
+            ],
+        }
+    ],
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>In the second Struct element, <code translate="no">lang</code> is explicitly null and <code translate="no">tags</code> is omitted, so Milvus stores null for both in that element. The other subfields still require a value in every Struct element, and a Struct element itself cannot be null. On an array subfield, <code translate="no">None</code> stores a null inner array, while <code translate="no">[]</code> stores an empty inner array.</p>
+<p>Null subfield values behave as follows in later operations:</p>
+<ul>
+<li><p>Query results return <code translate="no">null</code> for the subfield value in that element.</p></li>
+<li><p>In filters, a null value makes the element predicate unknown rather than false. Use <code translate="no">$[lang] is null</code> or <code translate="no">$[lang] is not null</code> inside <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code> to test it. For details, see <a href="/docs/zh-hant/struct-array-operators.md">StructArray Operators</a>.</p></li>
+<li><p>Null vectors in an element-nullable vector subfield do not participate in search.</p></li>
+</ul>
+<h2 id="Validate-inserted-data" class="common-anchor-header">Validate inserted data<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Before loading the collection, create the required vector indexes as described in <a href="/docs/zh-hant/index-structarray-fields.md">Index StructArray Fields</a>. The following examples wait for loading to complete, then query selected subfields. For cURL, install <code translate="no">jq</code> to check the load-state response. With bounded-staleness consistency, a query immediately after insertion may not include the new rows; repeat it after the writes become visible, or configure strong consistency when creating the example collection.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#rust">   Rust</a>
- <a href="#cpp">   C++</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   C#</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.load_collection(<span class="hljs-string">&quot;tech_articles&quot;</span>)
 
@@ -1228,8 +1288,8 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>僅在進行查詢、搜尋、篩選或建立索引時，才應使用 StructArray 欄位路徑（例如<code translate="no">chunks[text]</code> ）。插入資料仍應使用<code translate="no">chunks</code> 下的嵌套物件。</p>
-<h2 id="Insert-rules" class="common-anchor-header">插入規則<button data-href="#Insert-rules" class="anchor-icon" translate="no">
+<p>Use StructArray field paths, such as <code translate="no">chunks[text]</code>, only when you query, search, filter, or create indexes. Insert payloads should still use nested objects under <code translate="no">chunks</code>.</p>
+<h2 id="Insert-rules" class="common-anchor-header">Insert rules<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1246,19 +1306,19 @@ curl --request POST \
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>規則</th><th>說明</th></tr>
+<tr><th>Rule</th><th>Explanation</th></tr>
 </thead>
 <tbody>
-<tr><td>針對 StructArray 欄位，請使用物件陣列。</td><td><code translate="no">chunks</code> 的值是一個清單，而清單中的每個項目都是一個 Struct 元素。</td></tr>
-<tr><td>在每個 Struct 元素內使用子欄位名稱。</td><td>請將 `<code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> ` 插入 `<code translate="no">chunks</code>` 中，而非 `<code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>`。</td></tr>
-<tr><td>請符合 Struct 模式的規範。</td><td>每個 Struct 元素必須使用 Struct 模式中定義的子欄位。</td></tr>
-<tr><td>向量維數必須與結構體模式相符。</td><td>向量值必須與其向量子欄位所配置的<code translate="no">dim</code> 相符。</td></tr>
-<tr><td>須遵守<code translate="no">max_capacity</code> 。</td><td>單一實體中的 Struct 元素數量不得超過 StructArray 欄位的<code translate="no">max_capacity</code> 。</td></tr>
-<tr><td>針對不同的搜尋模式，請使用獨立的向量子欄位。</td><td>如果同時需要 EmbeddingList 搜尋和元素層級搜尋，請將向量值寫入兩個向量子欄位中。</td></tr>
-<tr><td>僅當欄位為可為空時，才使用<code translate="no">null</code> 。</td><td>不可為空的 StructArray 欄位需要有效的 StructArray 值。</td></tr>
+<tr><td>Use an array of objects for a StructArray field.</td><td>The value of <code translate="no">chunks</code> is a list, and each item in the list is a Struct element.</td></tr>
+<tr><td>Use subfield names inside each Struct element.</td><td>Insert <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> inside <code translate="no">chunks</code>, not <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
+<tr><td>Match the Struct schema.</td><td>Each Struct element must use the subfields defined in the Struct schema. Starting in Milvus 3.0.6, an element-nullable subfield can be omitted or set to <code translate="no">None</code> in a Struct element.</td></tr>
+<tr><td>Match vector dimensions.</td><td>Vector values must match the <code translate="no">dim</code> configured for their vector subfields.</td></tr>
+<tr><td>Respect <code translate="no">max_capacity</code>.</td><td>The number of Struct elements in one entity must not exceed the <code translate="no">max_capacity</code> of the StructArray field.</td></tr>
+<tr><td>Use separate vector subfields for separate search modes.</td><td>If both EmbeddingList search and element-level search are required, write vector values to both vector subfields.</td></tr>
+<tr><td>Use <code translate="no">null</code> only when the field is nullable.</td><td>Non-nullable StructArray fields require valid StructArray values.</td></tr>
 </tbody>
 </table>
-<h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
+<h2 id="Common-mistakes" class="common-anchor-header">Common mistakes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1274,15 +1334,15 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>在插入有效載荷中使用如<code translate="no">chunks[text]</code> 之類的欄位路徑。</p></li>
-<li><p>從 Struct 元素中省略必填子欄位。</p></li>
-<li><p>插入維數錯誤的向量。</p></li>
-<li><p>插入的 Struct 元素數量超過<code translate="no">max_capacity</code> 所允許的數量。</p></li>
-<li><p>僅將一個子欄位設定為<code translate="no">null</code> ，而同一 StructArray 值中的其他子欄位卻是有效的。</p></li>
-<li><p>僅將向量寫入 `<code translate="no">emb_list_vector</code> `，隨後卻嘗試在 `<code translate="no">chunks[emb]</code>` 上執行元素層級搜尋。</p></li>
-<li><p>僅將向量寫入 `<code translate="no">emb</code> `，隨後嘗試在 `<code translate="no">chunks[emb_list_vector]</code>` 上執行 `EmbeddingList` 搜尋。</p></li>
+<li><p>Using field paths such as <code translate="no">chunks[text]</code> in insert payloads.</p></li>
+<li><p>Omitting a subfield that is not element-nullable from a Struct element.</p></li>
+<li><p>Inserting vectors with the wrong dimension.</p></li>
+<li><p>Inserting more Struct elements than <code translate="no">max_capacity</code> allows.</p></li>
+<li><p>Setting a subfield to <code translate="no">None</code> in a Struct element when the subfield is not element-nullable, or inserting a null Struct element such as <code translate="no">[None, {...}]</code>.</p></li>
+<li><p>Writing vectors only to <code translate="no">emb_list_vector</code> and then trying to run element-level search on <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Writing vectors only to <code translate="no">emb</code> and then trying to run EmbeddingList search on <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 </ul>
-<h2 id="Next-steps" class="common-anchor-header">後續步驟<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1298,7 +1358,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>若要為<code translate="no">chunks[emb_list_vector]</code> 、<code translate="no">chunks[emb]</code> 以及標量子欄位建立索引，請參閱《<a href="/docs/zh-hant/index-structarray-fields.md">索引 StructArray 欄位</a>》。</p></li>
-<li><p>若要搜尋 StructArray 向量子欄位，請參閱《<a href="/docs/zh-hant/basic-vector-search-with-structarray.md">使用 StructArray 進行基本向量搜尋</a>》。</p></li>
-<li><p>若要檢視可為空的行為及特定版本的限制，請參閱《<a href="/docs/zh-hant/structarray-limits.md">StructArray 限制</a>》。</p></li>
+<li><p>To create indexes for <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, and scalar subfields, read <a href="/docs/zh-hant/index-structarray-fields.md">Index StructArray Fields</a>.</p></li>
+<li><p>To search StructArray vector subfields, read <a href="/docs/zh-hant/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>.</p></li>
+<li><p>To review nullable behavior and version-specific limitations, read <a href="/docs/zh-hant/structarray-limits.md">StructArray Limits</a>.</p></li>
 </ol>

@@ -232,17 +232,21 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>O valor do campo é uma lista de objetos, um por elemento Struct, indexada pelo nome do subcampo: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>A célula contém o mesmo texto JSON que o formato JSON.</td></tr>
-<tr><td>Parquet</td><td>Uma coluna por campo StructArray com o tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, um elemento filho «struct» por subcampo. Um subcampo escalar é um elemento filho escalar e um subcampo vetorial é uma lista do seu tipo de elemento, como <code translate="no">list&lt;float32&gt;</code>.</td></tr>
+<tr><td>CSV</td><td>A célula contém o mesmo texto JSON que o formato JSON. O <code translate="no">nullkey</code> configurado para a tarefa de importação ou um JSON <code translate="no">null</code> marca um valor StructArray nulo.</td></tr>
+<tr><td>Parquet</td><td>Uma coluna por campo do StructArray com o tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, um elemento filho «struct» por subcampo. Um subcampo escalar é um elemento filho escalar, um subcampo vetorial é uma lista do seu tipo de elemento, como <code translate="no">list&lt;float32&gt;</code>, e um subcampo de matriz (Milvus 3.0.6 e versões posteriores) é um elemento filho « <code translate="no">list&lt;T&gt;</code> ».</td></tr>
 <tr><td>NumPy</td><td>Não suportado. Os ficheiros NumPy contêm um ficheiro por campo de nível superior e não têm representação para um campo StructArray. Utilize ficheiros JSON, CSV ou Parquet para coleções que tenham um campo StructArray.</td></tr>
 </tbody>
 </table>
 <p>As seguintes regras aplicam-se aos valores StructArray em todos os formatos suportados:</p>
 <ul>
 <li><p>Utilize nomes de subcampos dentro de cada elemento Struct, e não percursos como <code translate="no">chunks[text]</code>. Colunas planas ou chaves com nomes como <code translate="no">chunks[text]</code> são rejeitadas.</p></li>
-<li><p>Cada elemento Struct deve fornecer todos os subcampos do esquema Struct, e um elemento Struct em si não pode ser nulo, como <code translate="no">[null, {...}]</code>. Um valor StructArray completo só pode ser nulo quando o campo StructArray for nulo.</p></li>
+<li><p>Um elemento Struct, por si só, não pode ser nulo, como, por exemplo, <code translate="no">[null, {...}]</code>. Um valor StructArray completo só pode ser nulo quando o campo StructArray for nulo. Antes do Milvus 3.0.6, cada elemento Struct tinha de fornecer todos os subcampos.</p></li>
+<li><p>Chaves ou elementos filhos do Parquet que não sejam subcampos da coleção, incluindo subcampos omitidos, são ignorados.</p></li>
+<li><p>A partir do Milvus 3.0.6, uma chave em falta ou um valor « <code translate="no">null</code> » para um subcampo em que o elemento pode ser nulo é importado como um valor nulo para esse elemento Struct; assim, os ficheiros criados antes da adição de um subcampo são importados sem ele. Um ` <code translate="no">null</code> ` em qualquer outro local faz com que a importação falhe. Para um subcampo de matriz, ` <code translate="no">null</code> ` é uma matriz interna nula e ` <code translate="no">null</code> ` dentro da matriz interna é um valor interno nulo, quando o subcampo o permite.</p></li>
+<li><p>A partir do Milvus 3.0.6, a importação de binlog, como a restauração de uma cópia de segurança, e a importação a partir de uma fonte de instantâneo são rejeitadas para coleções que tenham subcampos com elementos nulos ou subcampos de matriz escalar.</p></li>
 </ul>
-<p>Para os limites do lado do esquema, consulte <a href="/docs/pt/structarray-limits.md#Import-limits">Limites do StructArray</a>.</p>
+<p><a href="#Set-up-BulkWriter">O</a> pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> suporta as formas de StructArray acima em todos os formatos suportados, incluindo subcampos com elementos nulos e valores de StructArray nulos. Utilize as mesmas formas de linha nas chamadas <code translate="no">add_row()</code> do gravador.</p>
+<p>Para os limites do lado do esquema, consulte <a href="/docs/pt/structarray-limits.md#Import-and-storage-limits">Limites do StructArray</a>.</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Configurar o BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,7 +262,7 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>O BulkWriter</strong> é uma ferramenta concebida para converter conjuntos de dados brutos num formato adequado para importação através da API de importação RESTful. Oferece dois tipos de escritores:</p>
+    </button></h2><p><strong>O BulkWriter</strong> é uma ferramenta concebida para converter conjuntos de dados brutos num formato adequado para importação através da API de importação RESTful. Oferece dois tipos de gravadores:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: Lê o conjunto de dados designado e transforma-o num formato fácil de utilizar.</li>
 <li><strong>RemoteBulkWriter</strong>: executa a mesma tarefa que o LocalBulkWriter, mas, além disso, transfere os ficheiros de dados convertidos para um bucket de armazenamento de objetos remoto especificado.</li>
@@ -314,7 +318,7 @@ writer = LocalBulkWriter(
 <li>Referenciar o esquema criado em <code translate="no">schema</code>.</li>
 <li>Definir ` <code translate="no">local_path</code> ` como o diretório de saída.</li>
 <li>Definir ` <code translate="no">file_type</code> ` para o tipo de ficheiro de saída.</li>
-<li>Se o seu conjunto de dados contiver um grande número de registos, recomenda-se que segmente os seus dados, definindo ` <code translate="no">segment_size</code> ` para um valor adequado.</li>
+<li>Se o seu conjunto de dados contiver um grande número de registos, recomenda-se que segmente os seus dados definindo ` <code translate="no">segment_size</code> ` para um valor adequado.</li>
 </ul>
 <p>Para obter detalhes sobre as definições dos parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> na referência do SDK.</p>
 </div>
@@ -696,7 +700,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>O BulkWriter</strong> gera um UUID, cria uma subpasta utilizando o UUID no diretório de saída fornecido e coloca todos os ficheiros gerados nessa subpasta. <a href="https://assets.zilliz.com/bulk_writer.zip">Clique aqui</a> para descarregar os dados de exemplo preparados.</p>
+<p><strong>O `BulkWriter`</strong> gera um UUID, cria uma subpasta utilizando o UUID no diretório de saída fornecido e coloca todos os ficheiros gerados nessa subpasta. <a href="https://assets.zilliz.com/bulk_writer.zip">Clique aqui</a> para descarregar os dados de exemplo preparados.</p>
 <p>As estruturas de pastas possíveis são as seguintes:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

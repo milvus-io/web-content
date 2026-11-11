@@ -6,8 +6,8 @@ summary: >-
   objets (IoT) et de la conduite autonome, s'appuient généralement sur des
   événements riches et structurés : une mesure de capteur accompagnée de son
   horodatage et de son vecteur d'encodage, un journal de diagnostic comportant
-  un code d'erreur et un extrait audio, ou encore un segment de trajet incluant
-  la localisation, la vitesse et le contexte de la scène. Cela nécessite que la
+  un code d'erreur et un extrait audio, ou encore un segment de trajet avec la
+  localisation, la vitesse et le contexte de la scène. Cela nécessite que la
   base de données prenne en charge nativement l'ingestion et la recherche de
   données imbriquées.
 beta: Milvus 2.6.4+
@@ -199,7 +199,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>You can find that the structure of the CoVLA dataset is highly hierarchical, dividing the collected data into multiple <code translate="no">.jsonl</code> files, along with the video clips in the <code translate="no">.mp4</code> format.</p>
-<p>In Milvus, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested structures. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the Milvus collection schema.</p>
+<p>In Milvus, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested Structs; starting in Milvus 3.0.6, it can contain scalar array subfields with one nesting level. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the Milvus collection schema.</p>
 <p>The diagram below illustrates how we can model this dataset using the schema illustrated in the following schema:</p>
 <p>
   <span class="img-wrapper">

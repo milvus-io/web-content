@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un <strong>StructArray</strong>, también conocido como matriz de estructuras, almacena un conjunto ordenado de elementos Struct en cada entidad. Todos los elementos Struct de la matriz siguen el mismo esquema. Un elemento Struct puede contener subcampos escalares, subcampos vectoriales o ambos.</p>
+    </button></h2><p>Un <strong>StructArray</strong>, también conocido como matriz de estructuras, almacena un conjunto ordenado de elementos Struct en cada entidad. Todos los elementos Struct de la matriz siguen el mismo esquema. Un elemento Struct puede contener subcampos escalares, subcampos vectoriales y, a partir de Milvus 3.0.6, subcampos de matrices escalares.</p>
 <p>Por ejemplo, una colección puede almacenar un artículo como entidad y guardar sus fragmentos en un campo StructArray denominado « <code translate="no">chunks</code> ». Cada fragmento puede incluir texto, metadatos de sección, puntuaciones de calidad y una o más incrustaciones vectoriales.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
@@ -117,10 +117,10 @@ summary: >-
     </button></h2><p>Utiliza la siguiente matriz para elegir la ruta adecuada de StructArray.</p>
 <table>
 <thead>
-<tr><th>Objetivo</th><th>Ruta recomendada</th><th>Granularidad del resultado</th><th>Empieza aquí</th></tr>
+<tr><th>Objetivo</th><th>Ruta recomendada</th><th>Granularidad del resultado</th><th>Empieza por aquí</th></tr>
 </thead>
 <tbody>
-<tr><td>Modelar un objeto padre con muchos hijos estructurados.</td><td>Crea un campo StructArray.</td><td>La entidad contiene elementos Struct ordenados.</td><td><a href="/docs/es/create-structarray-field.md">Crear un campo StructArray</a></td></tr>
+<tr><td>Modela un objeto padre con muchos hijos estructurados.</td><td>Crea un campo StructArray.</td><td>La entidad contiene elementos Struct ordenados.</td><td><a href="/docs/es/create-structarray-field.md">Crear un campo StructArray</a></td></tr>
 <tr><td>Inserta registros principales con datos secundarios anidados.</td><td>Insertar entidades cuyo campo StructArray sea una lista de objetos Struct.</td><td>Inserción a nivel de entidad.</td><td><a href="/docs/es/insert-data-into-structarray-fields.md">Insertar datos en campos «StructArray»</a></td></tr>
 <tr><td>Ejecutar ColBERT, ColPali o la recuperación de interacción tardía a nivel de documento.</td><td>Utilizar la búsqueda EmbeddingList con un índice « <code translate="no">MAX_SIM*</code> ».</td><td>Nivel de entidad.</td><td><a href="/docs/es/search-with-embedding-lists.md">Buscar con listas de incrustación</a></td></tr>
 <tr><td>Busca fragmentos, clips o parches individuales.</td><td>Utiliza la búsqueda a nivel de elemento con una métrica vectorial estándar.</td><td>Nivel de elemento de estructura, con desplazamiento cuando esté disponible.</td><td><a href="/docs/es/basic-vector-search-with-structarray.md">Búsqueda vectorial básica con StructArray</a></td></tr>
@@ -156,7 +156,7 @@ summary: >-
   <tbody>
     <tr>
       <td>
-        <p>La búsqueda en EmbeddingList trata los vectores dentro de un subcampo vectorial de StructArray como una lista de incrustaciones para la entidad principal. La consulta también es una lista de incrustaciones. Milvus compara la lista de incrustaciones de la consulta con la lista de incrustaciones almacenada utilizando una métrica de « <code translate="no">MAX_SIM*</code> » y devuelve las entidades que coinciden.</p>
+        <p>La búsqueda en EmbeddingList trata los vectores dentro de un subcampo vectorial de StructArray como una lista de incrustaciones para la entidad principal. La consulta también es una lista de incrustaciones. Milvus compara la lista de incrustaciones de la consulta con la lista de incrustaciones almacenada utilizando una métrica de « <code translate="no">MAX_SIM*</code> » y devuelve las entidades coincidentes.</p>
         <ul>
           <li>Datos de la consulta: lista de incrustaciones.</li>
           <li>Familia de métricas: « <code translate="no">MAX_SIM*</code> ».</li>
@@ -233,7 +233,7 @@ summary: >-
 <li><p>Todos los elementos Struct de un mismo campo StructArray comparten un esquema predefinido.</p></li>
 <li><p>Los subcampos vectoriales requieren índices. La búsqueda en EmbeddingList utiliza métricas de « <code translate="no">MAX_SIM*</code> », mientras que la búsqueda a nivel de elemento utiliza métricas vectoriales normales.</p></li>
 <li><p><code translate="no">element_filter</code> y « <code translate="no">MATCH_*</code> » son para subcampos escalares dentro de campos «StructArray». Utilice « <code translate="no">$[subfield]</code> » únicamente dentro de estos operadores. Los filtros a nivel de fila también pueden hacer referencia directa a rutas de «StructArray», como « <code translate="no">chunks[0][section]</code> », « <code translate="no">array_length(chunks)</code> » y « <code translate="no">array_contains(chunks[section], ...)</code> ».</p></li>
-<li><p>Algunas combinaciones de búsqueda dependen de la versión o son específicas de un modo. Consulta <a href="/docs/es/structarray-limits.md">los límites de StructArray</a> antes de utilizar la búsqueda por rango, la búsqueda por agrupación, la búsqueda híbrida, los campos nulos o los campos añadidos dinámicamente.</p></li>
+<li><p>Algunas combinaciones de búsqueda dependen de la versión o son específicas de un modo. Consulta <a href="/docs/es/structarray-limits.md">los límites de StructArray</a> antes de utilizar la búsqueda por rango, la búsqueda por agrupación, la búsqueda híbrida, los campos nulos, los campos añadidos dinámicamente, los valores nulos a nivel de elemento, los subcampos de matriz o la adición y eliminación de subcampos.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Próximos pasos<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

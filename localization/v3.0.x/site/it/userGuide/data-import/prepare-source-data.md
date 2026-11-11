@@ -225,24 +225,28 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un campo <a href="/docs/it/array-of-structs.md">StructArray</a> viene gestito in modo diverso a seconda del formato del file sorgente. Il lettore di importazione si aspetta una delle seguenti strutture:</p>
+    </button></h2><p>Un campo <a href="/docs/it/array-of-structs.md">StructArray</a> viene gestito in modo diverso a seconda del formato del file sorgente. Il lettore di importazione si aspetta una delle seguenti forme:</p>
 <table>
 <thead>
 <tr><th>Formato</th><th>Struttura del campo StructArray</th></tr>
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>Il valore del campo è un elenco di oggetti, uno per ogni elemento Struct, con chiave corrispondente al nome del sottocampo: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>La cella contiene lo stesso testo JSON del formato JSON.</td></tr>
-<tr><td>Parquet</td><td>Una colonna per ogni campo StructArray con il tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un elemento figlio struct per ogni sottocampo. Un sottocampo scalare è un elemento figlio scalare, mentre un sottocampo vettoriale è un elenco del proprio tipo di elemento, ad esempio <code translate="no">list&lt;float32&gt;</code>.</td></tr>
-<tr><td>NumPy</td><td>Non supportato. I file NumPy contengono un file per ogni campo di primo livello e non prevedono una rappresentazione per i campi StructArray. Utilizzare file JSON, CSV o Parquet per le collezioni che contengono un campo StructArray.</td></tr>
+<tr><td>CSV</td><td>La cella contiene lo stesso testo JSON del formato JSON. Il campo <code translate="no">nullkey</code> configurato per il processo di importazione o un JSON <code translate="no">null</code> indica un valore StructArray nullo.</td></tr>
+<tr><td>Parquet</td><td>Una colonna per ogni campo StructArray con il tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un elemento figlio struct per ogni sottocampo. Un sottocampo scalare è un elemento figlio scalare, un sottocampo vettoriale è un elenco del proprio tipo di elemento, come <code translate="no">list&lt;float32&gt;</code>, e un sottocampo array (Milvus 3.0.6 e versioni successive) è un elemento figlio <code translate="no">list&lt;T&gt;</code>.</td></tr>
+<tr><td>NumPy</td><td>Non supportato. I file NumPy contengono un file per ogni campo di primo livello e non dispongono di una rappresentazione per un campo StructArray. Utilizzare file JSON, CSV o Parquet per le raccolte che presentano un campo StructArray.</td></tr>
 </tbody>
 </table>
 <p>Le seguenti regole si applicano ai valori StructArray in tutti i formati supportati:</p>
 <ul>
-<li><p>Utilizzare i nomi dei sottocampi all’interno di ciascun elemento Struct, non percorsi come <code translate="no">chunks[text]</code>. Le colonne piatte o le chiavi denominate <code translate="no">chunks[text]</code> vengono rifiutate.</p></li>
-<li><p>Ogni elemento Struct deve fornire tutti i sottocampi dello schema Struct e un elemento Struct non può essere nullo, ad esempio <code translate="no">[null, {...}]</code>. Un intero valore StructArray può essere nullo solo quando il campo StructArray è nullable.</p></li>
+<li><p>Utilizzare nomi di sottocampi all’interno di ciascun elemento Struct, non percorsi come <code translate="no">chunks[text]</code>. Le colonne piatte o le chiavi denominate <code translate="no">chunks[text]</code> vengono rifiutate.</p></li>
+<li><p>Un elemento Struct non può essere nullo, ad esempio <code translate="no">[null, {...}]</code>. Un intero valore StructArray può essere nullo solo quando il campo StructArray è nullabile. Prima di Milvus 3.0.6, ogni elemento Struct deve fornire tutti i sottocampi.</p></li>
+<li><p>Le chiavi o gli elementi figli Parquet che non sono sottocampi della collezione, compresi i sottocampi omessi, vengono ignorati.</p></li>
+<li><p>A partire da Milvus 3.0.6, una chiave mancante o un valore ` <code translate="no">null</code> ` per un sottocampo in cui l’elemento può essere nullo viene importato come valore nullo per quell’elemento Struct; pertanto, i file scritti prima dell’aggiunta di un sottocampo vengono importati senza di esso. Un valore ` <code translate="no">null</code> ` in qualsiasi altra posizione causa il fallimento dell’importazione. Per un sottocampo di tipo array, ` <code translate="no">null</code> ` è un array interno nullo, mentre ` <code translate="no">null</code> ` all’interno dell’array interno è un valore interno nullo quando il sottocampo lo consente.</p></li>
+<li><p>A partire da Milvus 3.0.6, l’importazione da binlog, come il ripristino di un backup, e l’importazione da snapshot-source vengono rifiutate per le collezioni che presentano sottocampi con elementi nullabili o sottocampi di array scalari.</p></li>
 </ul>
-<p>Per i limiti relativi allo schema, vedere <a href="/docs/it/structarray-limits.md#Import-limits">Limiti di StructArray</a>.</p>
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> supporta le forme di StructArray sopra indicate in tutti i formati supportati, inclusi i sottocampi con elementi nullabili e i valori StructArray nullabili. Utilizzare le stesse forme di riga nelle chiamate ` <code translate="no">add_row()</code> ` del writer.</p>
+<p>Per i limiti relativi allo schema, consultare <a href="/docs/it/structarray-limits.md#Import-and-storage-limits">Limiti di StructArray</a>.</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Configurazione di BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -260,7 +264,7 @@ schema.verify()
       </svg>
     </button></h2><p><strong>BulkWriter</strong> è uno strumento progettato per convertire set di dati grezzi in un formato adatto all’importazione tramite l’API di importazione RESTful. Offre due tipi di writer:</p>
 <ul>
-<li><strong>LocalBulkWriter</strong>: legge il set di dati specificato e lo trasforma in un formato di facile utilizzo.</li>
+<li><strong>LocalBulkWriter</strong>: legge il set di dati designato e lo trasforma in un formato di facile utilizzo.</li>
 <li><strong>RemoteBulkWriter</strong>: esegue la stessa operazione di LocalBulkWriter, ma trasferisce inoltre i file di dati convertiti in un bucket di archiviazione oggetti remoto specificato.</li>
 </ul>
 <p><strong>Remote</strong> <strong>B</strong><strong>ulkWriter</strong> si differenzia da <strong>LocalBulkWriter</strong> in quanto trasferisce i file di dati convertiti in un bucket di object storage di destinazione.</p>
@@ -425,7 +429,7 @@ writer = RemoteBulkWriter(
 <span class="hljs-type">RemoteBulkWriter</span> <span class="hljs-variable">remoteBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(remoteBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>I parametri per la creazione di un <strong>RemoteBulkWriter</strong> sono praticamente identici a quelli di un <strong>LocalBulkWriter</strong>, ad eccezione di <code translate="no">connect_param</code>. Per i dettagli sulle impostazioni dei parametri, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> nella documentazione di riferimento dell'SDK.</p>
+<p>I parametri per la creazione di un <strong>RemoteBulkWriter</strong> sono praticamente identici a quelli di un <strong>LocalBulkWriter</strong>, ad eccezione di <code translate="no">connect_param</code>. Per ulteriori dettagli sulle impostazioni dei parametri, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> nella documentazione di riferimento dell'SDK.</p>
 </div>
 <div class="language-java">
 <p>I parametri per la creazione di un <strong>RemoteBulkWriter</strong> sono praticamente identici a quelli di un <strong>LocalBulkWriter</strong>, ad eccezione di <code translate="no">StorageConnectParam</code>. Per i dettagli sulle impostazioni dei parametri, consultare RemoteBulkWriter e StorageConnectParam nella documentazione di riferimento dell'SDK.</p>
@@ -449,7 +453,7 @@ writer = RemoteBulkWriter(
 <p>Un <strong>BulkWriter</strong> dispone di due metodi: ` <code translate="no">append_row()</code> ` aggiunge una riga da un dataset di origine, mentre ` <code translate="no">commit()</code> ` salva le righe aggiunte in un file locale o in un bucket remoto.</p>
 </div>
 <div class="language-java">
-<p>Un <strong>BulkWriter</strong> dispone di due metodi: <code translate="no">appendRow()</code> aggiunge una riga da un set di dati di origine, mentre <code translate="no">commit()</code> salva le righe aggiunte in un file locale o in un bucket remoto.</p>
+<p>Un <strong>BulkWriter</strong> dispone di due metodi: <code translate="no">appendRow()</code> aggiunge una riga da un dataset di origine, mentre <code translate="no">commit()</code> salva le righe aggiunte in un file locale o in un bucket remoto.</p>
 </div>
 <p>A scopo dimostrativo, il codice seguente aggiunge dati generati in modo casuale.</p>
 <div class="multipleCode">

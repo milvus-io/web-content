@@ -1,12 +1,15 @@
 ---
 id: shared-bucket-backup-and-restore.md
 summary: >-
-  Este tópico detalha o processo de fazer backup de uma coleção de uma instância
-  do Milvus e restaurá-la em outra, usando um bucket compartilhado para
-  armazenamento de objetos
-title: Migrar entre instâncias em um bucket (caminhos raiz diferentes)
+  Este tópico descreve em pormenor o processo de criar uma cópia de segurança de
+  uma coleção a partir de uma instância do Milvus e restaurá-la noutra
+  instância, utilizando um bucket partilhado para armazenamento de objetos
+title: >-
+  Migração entre instâncias num único bucket (caminhos raiz
+  diferentes)Compatible with Milvus Backup 0.5.x
+beta: Milvus Backup 0.5.x
 ---
-<h1 id="Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="common-anchor-header">Migrar entre instâncias em um bucket (caminhos raiz diferentes)<button data-href="#Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="anchor-icon" translate="no">
+<h1 id="Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="common-anchor-header">Migração entre instâncias num único bucket (caminhos raiz diferentes)<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.5.x</span><button data-href="#Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +24,10 @@ title: Migrar entre instâncias em um bucket (caminhos raiz diferentes)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tópico detalha o processo de fazer backup de uma coleção de uma instância do Milvus e restaurá-la para outra, usando um bucket compartilhado para armazenamento de objetos, com caminhos raiz distintos para cada instância.</p>
+    </button></h1><p>Para os fluxos de trabalho atuais, consulte o <a href="/docs/pt/milvus_backup_0_6_cli.md">guia da CLI</a> ou <a href="/docs/pt/milvus_backup_upgrade.md">atualize a partir da versão 0.5.x</a>. Verifique a <a href="/docs/pt/milvus_backup_overview.md#Compatibility-matrix">matriz de compatibilidade</a> para conhecer as versões do servidor Milvus suportadas.</p>
+<p>Este tópico descreve em pormenor o processo de fazer uma cópia de segurança de uma coleção a partir de uma
+instância do Milvus e restaurá-la noutra, utilizando um bucket partilhado
+para armazenamento de objetos, com caminhos raiz distintos para cada instância.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,15 +43,23 @@ title: Migrar entre instâncias em um bucket (caminhos raiz diferentes)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O diagrama abaixo ilustra o processo de backup e restauração usando um bucket compartilhado.</p>
-<p>
+    </button></h2><p>O diagrama abaixo ilustra o processo de cópia de segurança e restauração utilizando um
+bucket partilhado.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" />
-   </span> <span class="img-wrapper"> <span>shared-bucket-backup-and-restore.png</span> </span></p>
-<p>Suponha que temos instâncias Milvus, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code>, ambas utilizando o mecanismo de armazenamento MinIO padrão para armazenamento de objetos. Essas instâncias compartilham o mesmo bucket, <code translate="no">bucket_A</code>, mas armazenam seus dados em caminhos de raiz diferentes: <code translate="no">files_A</code> para <code translate="no">milvus_A</code> e files_B para <code translate="no">milvus_B</code>. Neste exemplo, nosso objetivo é concluir as seguintes tarefas:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" /> 
+   <span>shared-bucket-backup-and-restore.png</span>
+  
+ </span></p>
+<p>Suponhamos que temos as instâncias do Milvus, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code>, ambas a utilizar
+o motor de armazenamento MinIO predefinido para armazenamento de objetos. Estas instâncias
+partilham o mesmo bucket, <code translate="no">bucket_A</code>, mas armazenam os seus dados em caminhos raiz
+diferentes: <code translate="no">files_A</code> para <code translate="no">milvus_A</code> e files_B para <code translate="no">milvus_B</code>. Neste exemplo,
+o nosso objetivo é concluir as seguintes tarefas:</p>
 <ol>
-<li><p>Criar uma cópia de segurança (my_backup) para a coleção coll que está armazenada no caminho<code translate="no">files_A</code> para <code translate="no">milvus_A</code>.</p></li>
-<li><p>Restaurar a partir da cópia de segurança e armazená-la em files_B para <code translate="no">milvus_B</code>.</p></li>
+<li><p>Criar uma cópia de segurança (my_backup) para a coleção «coll», que fica armazenada no
+caminho<code translate="no">files_A</code> para <code translate="no">milvus_A</code>.</p></li>
+<li><p>Restaurar a partir do backup e guardá-lo em files_B para <code translate="no">milvus_B</code>.</p></li>
 </ol>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,10 +77,11 @@ title: Migrar entre instâncias em um bucket (caminhos raiz diferentes)
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Certifique-se de que a ferramenta <strong>milvus-backup</strong> está instalada.</p></li>
-<li><p>Familiarize-se com a configuração das definições de armazenamento de objectos do Milvus. Para obter detalhes, consulte <a href="https://milvus.io/docs/deploy_s3.md">Armazenamento de objectos</a>.</p></li>
+<li><p>Instale <strong>o Milvus Backup 0.5.16</strong> utilizando <a href="/docs/pt/milvus_backup_cli.md#Obtain-Milvus-Backup">o guia da CLI 0.5.x</a>.</p></li>
+<li><p>Familiarize-se com a configuração das definições de armazenamento de objetos do Milvus.
+Para mais detalhes, consulte <a href="https://milvus.io/docs/deploy_s3.md">Armazenamento</a> de <a href="https://milvus.io/docs/deploy_s3.md">Objetos.</a></p></li>
 </ul>
-<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">Fazer backup de uma coleção de <code translate="no">milvus_A</code><button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
+<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">Faça uma cópia de segurança de uma coleção a partir de <code translate="no">milvus_A</code><button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,7 +96,7 @@ title: Migrar entre instâncias em um bucket (caminhos raiz diferentes)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Etapa 1: Preparar a configuração<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Passo 1: Preparar a configuração<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,14 +111,14 @@ title: Migrar entre instâncias em um bucket (caminhos raiz diferentes)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vá para o diretório do projeto milvus-backup e crie um diretório chamado configs:</p>
-<pre><code translate="no" class="language-shell">mkdir configs
-cd configs
+    </button></h3><p>Aceda ao diretório do projeto milvus-backup e crie um diretório
+denominado « <code translate="no">configs</code> ». Execute os seguintes comandos a partir do diretório que contém « <code translate="no">milvus-backup</code> »:</p>
+<pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>Faça o download do arquivo de configuração de backup backup.yaml:</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
+<p>Descarregue o ficheiro de configuração de cópia de segurança backup.yaml:</p>
+<pre><code translate="no" class="language-shell">wget -O configs/backup.yaml https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>A estrutura do ficheiro tem o seguinte aspeto:</p>
+<p>A estrutura do ficheiro é a seguinte:</p>
 <pre><code translate="no">├── configs
 │   └── backup.yaml
 ├── milvus-backup
@@ -124,9 +139,11 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Modifique o ficheiro backup.yaml para definir as configurações apropriadas para<code translate="no">milvus_A</code>:</p>
+    </button></h3><p>O YAML abaixo mostra os campos a editar no ficheiro v1 descarregado. Mantenha as restantes definições necessárias. Defina <code translate="no">milvus.address</code> e <code translate="no">milvus.port</code> para a instância que está a ser copiada de segurança ou restaurada. Defina <code translate="no">minio.backupAddress</code>, <code translate="no">minio.backupPort</code> e <code translate="no">minio.backupStorageType</code> para o destino da cópia de segurança, e <code translate="no">backup.gcPause.address</code> para o ponto de extremidade de gestão do Milvus de origem (porta 9091 por predefinição). Substitua todos os endereços, nomes de buckets, caminhos e credenciais de exemplo pelas suas definições de implementação.</p>
+<p>Altere o ficheiro backup.yaml para definir as configurações adequadas para
+<code translate="no">milvus_A</code>:</p>
 <ul>
-<li><p>Configurações de conexão</p>
+<li><p>Configurações de ligação</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
   <span class="hljs-attr">address:</span> <span class="hljs-string">milvus_A</span>
@@ -139,10 +156,11 @@ cd configs
   <span class="hljs-attr">password:</span> <span class="hljs-string">&quot;Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">milvus.address</code>: Endereço IP ou nome de host do servidor <code translate="no">milvus_A</code>.</p></li>
-<li><p><code translate="no">milvus.port</code>: Porta TCP na qual o servidor Milvus está a ouvir (predefinição 19530).</p></li>
+<li><p><code translate="no">milvus.address</code>: endereço IP ou nome de host do servidor <code translate="no">milvus_A</code>.</p></li>
+<li><p><code translate="no">milvus.port</code>: Porta TCP na qual o servidor Milvus está a escutar (por predefinição
+19530).</p></li>
 </ul></li>
-<li><p>Configurações de armazenamento (definições MinIO/S3)</p>
+<li><p>Configurações de armazenamento (definições do MinIO/S3)</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -159,7 +177,7 @@ cd configs
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_A&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
-  <span class="hljs-comment"># only for azure</span>
+  <span class="hljs-comment"># Backup storage credentials</span>
   <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
   <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
@@ -167,13 +185,16 @@ cd configs
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">minio.bucketName</code>: Nome do contentor utilizado para o armazenamento <code translate="no">milvus_A</code>. Neste exemplo, definido como <code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.rootPath</code>: Caminho raiz dentro do bucket onde os dados de <code translate="no">milvus_A</code> são armazenados. Neste exemplo, defina como <code translate="no">files_A</code>.</p></li>
-<li><p><code translate="no">minio.backupBucketName</code>: Nome do compartimento usado para armazenamento. Neste exemplo, <code translate="no">milvus_A</code> e <code translate="no">milvus_B</code> partilham o contentor. Portanto, defina como<code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.backupRootPath</code>: Caminho de raiz dentro do contentor designado para armazenar ficheiros de cópia de segurança em <code translate="no">milvus_B</code>. Neste exemplo, utilize um caminho diferente de <code translate="no">milvus_A</code>. Por conseguinte, defina para <code translate="no">backup</code>.</p></li>
+<li><p><code translate="no">minio.bucketName</code>: Nome do bucket utilizado para o armazenamento do <code translate="no">milvus_A</code>. Neste
+exemplo, defina como <code translate="no">bucket_A</code>.</p></li>
+<li><p><code translate="no">minio.rootPath</code>: Caminho raiz dentro do bucket onde os dados do <code translate="no">milvus_A</code> são armazenados. Neste exemplo, defina como <code translate="no">files_A</code>.</p></li>
+<li><p><code translate="no">minio.backupBucketName</code>: Nome do bucket utilizado para armazenamento. Neste
+exemplo, o <code translate="no">milvus_A</code> e o <code translate="no">milvus_B</code> partilham o mesmo bucket. Por conseguinte, defina como
+<code translate="no">bucket_A</code>.</p></li>
+<li><p><code translate="no">minio.backupRootPath</code>: Caminho raiz dentro do bucket designado para armazenar ficheiros de cópia de segurança em <code translate="no">milvus_B</code>. Neste exemplo, utilize um caminho diferente de <code translate="no">milvus_A</code>. Por conseguinte, defina como <code translate="no">backup</code>.</p></li>
 </ul></li>
 </ul>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Etapa 3: Criar backup<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Passo 3: Criar cópia de segurança<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,11 +209,12 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Depois que <code translate="no">backup.yaml</code> for salvo, crie um backup chamado my_backup:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
+    </button></h3><p>Depois de guardar <code translate="no">backup.yaml</code>, crie um backup com o nome my_backup:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Este comando cria a cópia de segurança <code translate="no">bucket_A/backup/my_backup</code> no armazenamento de objectos para a coleção <code translate="no">coll</code>.</p>
-<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">Restaurar a cópia de segurança para <code translate="no">milvus_B</code><button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
+<p>Este comando cria o backup <code translate="no">bucket_A/backup/my_backup</code> no armazenamento de objetos
+para a coleção <code translate="no">coll</code>.</p>
+<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">Restaure o backup para <code translate="no">milvus_B</code><button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -207,7 +229,7 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Passo 1: Configurar as definições de restauro<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">Passo 1: Configurar as definições de restauração<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -222,8 +244,9 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Repita a etapa 2 para modificar as configurações de restauração para <code translate="no">milvus_B</code>, garantindo que <code translate="no">minio.bucketName</code> esteja definido como <code translate="no">bucket_A</code> e <code translate="no">minio.rootPath</code> como <code translate="no">files_B</code> para distinguir os locais de armazenamento entre as duas instâncias.</p>
-<p>Aqui está um exemplo de configuração:</p>
+    </button></h3><p>Repita o passo
+2 para modificar as configurações de restauração para <code translate="no">milvus_B</code>, garantindo que <code translate="no">minio.bucketName</code> esteja definido como <code translate="no">bucket_A</code> e <code translate="no">minio.rootPath</code> como <code translate="no">files_B</code>, para distinguir os locais de armazenamento entre as duas instâncias.</p>
+<p>Eis um exemplo de configuração:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
 <span class="hljs-attr">milvus:</span>
@@ -253,7 +276,7 @@ cd configs
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_B&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">Etapa 2: Restaurar backup<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">Passo 2: Restaurar a cópia de segurança<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,7 +291,9 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Restaurar a cópia de segurança para <code translate="no">milvus_B</code>:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
+    </button></h3><p>Restaure o backup para <code translate="no">milvus_B</code>:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Este comando restaura a cópia de segurança para uma nova coleção denominada <code translate="no">coll_bak</code> em <code translate="no">milvus_B</code>, com dados armazenados em <code translate="no">bucket_A/files_B/insert_log/[ID of new collection]</code>.</p>
+<p>Este comando restaura o backup numa nova coleção denominada <code translate="no">coll_bak</code> em <code translate="no">milvus_B</code>, utilizando a raiz de armazenamento configurada da instância de destino <code translate="no">bucket_A/files_B</code>.</p>
+<p>Na versão 0.5.16 do Backup, a opção obsoleta « <code translate="no">-c</code> » seleciona o nome da coleção no backup, antes de « <code translate="no">_bak</code> » ser aplicado. A versão 0.6.0, que substitui « <code translate="no">--filter</code> », utiliza o nome de destino; consulte <a href="/docs/pt/milvus_backup_upgrade.md#Update-CLI-commands">«Atualizar comandos da CLI</a>».</p>
+<p>Após a restauração, confirme se <code translate="no">coll_bak</code> existe, crie um índice vetorial adequado, se necessário, e compare a sua contagem de entidades, valores representativos e resultados de pesquisa com uma linha de base capturada antes do backup. A execução bem-sucedida do comando, por si só, não verifica os dados.</p>

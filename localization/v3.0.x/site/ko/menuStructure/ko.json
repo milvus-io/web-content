@@ -310,7 +310,7 @@
         "order": 1,
         "children": [
           {
-            "label": "컬렉션 설명",
+            "label": "컬렉션에 대한 설명",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -1229,7 +1229,7 @@
             "children": []
           },
           {
-            "label": "검색 반복자",
+            "label": "검색 이터레이터",
             "id": "with-iterators.md",
             "order": 15,
             "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "명령어",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP API",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "흔히 발생하는 사례",
-            "id": "common-cases",
+            "label": "스냅샷 백업 및 복원",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "백업 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "단일 인스턴스에서의 백업 및 복원",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "명령어",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "동일 버킷 내 인스턴스 간 마이그레이션",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP API",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "버킷 간 인스턴스 마이그레이션",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "흔히 발생하는 사례",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "단일 인스턴스에서의 백업 및 복원",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "동일 버킷 내 인스턴스 간 마이그레이션",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "버킷 간 인스턴스 마이그레이션",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "S3 환경 간 인스턴스 마이그레이션",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "S3 환경 간 인스턴스 마이그레이션",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "0.6.x 버전으로 업그레이드",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }

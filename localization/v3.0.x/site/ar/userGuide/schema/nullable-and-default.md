@@ -43,12 +43,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>الحقول المتجهة التي تسمح بقيم NULL لا تدعم تعبيرات التصفية من نوع " <code translate="no">IS NULL</code> " أو " <code translate="no">IS NOT NULL</code> ". لا يمكنك تصفية الكيانات بشكل صريح بناءً على ما إذا كانت قيمة الحقل المتجه هي NULL أم لا.</p></li>
-<li><p>بدءًا من Milvus 3.0.0، يمكن أن يكون حقل <a href="/docs/ar/array-of-structs.md">StructArray</a> الأصلي قابلاً للقيمة NULL. قم بتعيين <code translate="no">nullable=True</code> على حقل StructArray الأصلي، وليس على الحقول الفرعية الفردية. تنطبق القيمة NULL على حقل StructArray بأكمله، وليس على عنصر Struct فردي، ويقوم Milvus بنقل قابلية الحقل الأصلي للقيمة NULL إلى حقوله الفرعية داخليًا. يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة NULL حتى تتمكن الكيانات الموجودة من إرجاع NULL للحقل الجديد. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md#Nullable-and-dynamic-schema-limits">حدود StructArray</a>.</p></li>
-<li><p>يتم تعريف السمة «nullable» عند إنشاء الحقل ولا يمكن تعديلها لاحقًا. لا يمكنك تمكين أو تعطيل قابلية القيمة «null» لحقل موجود.</p></li>
+<li><p>الحقول المتجهة التي تسمح بقيم NULL لا تدعم تعبيرات التصفية من نوع " <code translate="no">IS NULL</code> " أو " <code translate="no">IS NOT NULL</code> ". لا يمكنك تصفية الكيانات بشكل صريح بناءً على ما إذا كانت قيمة الحقل المتجه NULL أم لا.</p></li>
+<li><p>بدءًا من Milvus 3.0.0، يمكن أن يكون حقل <a href="/docs/ar/array-of-structs.md">StructArray</a> الأصلي قابلاً للقيمة NULL. قم بتعيين <code translate="no">nullable=True</code> على حقل StructArray الأصلي، وليس على الحقول الفرعية الفردية. تنطبق القيمة NULL على حقل StructArray بأكمله، وليس على عنصر Struct فردي، ويقوم Milvus بنقل قابلية الحقل الأصلي للقيمة NULL إلى حقوله الفرعية داخليًا. يجب أن يكون حقل StructArray المضاف إلى مجموعة موجودة قابلاً للقيمة NULL حتى تتمكن الكيانات الموجودة من إرجاع NULL للحقل الجديد. بدءًا من Milvus 3.0.6، يمكن للحقل الفرعي أيضًا أن يسمح بقيمة NULL في عنصر Struct فردي: <code translate="no">nullable=True</code> في حقل فرعي سكالي أو متجه، و <code translate="no">element_nullable=True</code> في حقل فرعي من نوع المصفوفة؛ ولا يزال عنصر Struct نفسه غير قابل لـ NULL. لمزيد من التفاصيل، راجع <a href="/docs/ar/structarray-limits.md#Nullable-and-dynamic-schema-limits">حدود StructArray</a>.</p></li>
+<li><p>يتم تعريف السمة «nullable» عند إنشاء الحقل ولا يمكن تعديلها لاحقًا. لا يمكنك تمكين أو تعطيل إمكانية القيمة «null» لحقل موجود.</p></li>
 <li><p>لا يمكن استخدام الحقول التي تم وضع علامة «nullable» عليها كمفاتيح تقسيم. يجب أن تحتوي حقول مفاتيح التقسيم دائمًا على قيم صالحة وغير فارغة. لمزيد من المعلومات، راجع <a href="/docs/ar/use-partition-key.md">«استخدام مفتاح التقسيم</a>».</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">ما هو الحقل القابل للقيمة "null"؟<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">ما هو الحقل القابل للقيمة NULL؟<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,19 +63,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في Milvus، يتم التحكم في ما إذا كان يُسمح لحقل ما بتخزين قيمة NULL من خلال سمة حقل على مستوى المخطط تُسمى « <code translate="no">nullable</code> ».</p>
-<p>عندما يتم تعريف حقل بـ <code translate="no">nullable=True</code> ، يسمح Milvus بفقدان قيمة الحقل أثناء استيعاب البيانات. عمليًا، يعامل Milvus المدخلتين التاليتين على أنهما متكافئتان ويخزن قيمة الحقل كـ NULL:</p>
+    </button></h2><p>في Milvus، يتم التحكم في ما إذا كان يُسمح لحقل ما بتخزين قيمة NULL من خلال سمة حقل على مستوى المخطط تسمى « <code translate="no">nullable</code> ».</p>
+<p>عندما يتم تعريف حقل بـ <code translate="no">nullable=True</code> ، يسمح Milvus بفقدان قيمة الحقل أثناء استيعاب البيانات. في الممارسة العملية، يعامل Milvus المدخلتين التاليتين على أنهما متكافئتان ويخزن قيمة الحقل كـ NULL:</p>
 <ul>
 <li>تم حذف الحقل من الكيان المدخل.</li>
 <li>تعيين الحقل صراحةً إلى NULL (على سبيل المثال، <code translate="no">None</code> في لغة Python).</li>
 </ul>
 <p>إذا لم يتم تعريف الحقل على أنه قابل للقيمة الفارغة (السلوك الافتراضي)، فيجب أن توفر كل كيان قيمة صالحة لهذا الحقل. سيؤدي حذف الحقل أو تعيين قيمة NULL صراحةً إلى فشل عملية الإدراج أو الاستيراد.</p>
-<p>يتم دعم السمة "nullable" لكل <strong>من الحقول القياسية والمتجهة</strong> في مخطط المجموعة. بدءًا من Milvus 3.0.0، يتم دعمها أيضًا في الحقل الأصلي StructArray. لا تقم بتكوين الحقول الفرعية لـ Struct على أنها قابلة للفراغ بشكل مستقل؛ قم بتعريف قابلية الفراغ في الحقل الأصلي StructArray وسيقوم Milvus بنقل هذا الإعداد إلى حقوله الفرعية داخليًا.</p>
+<p>يتم دعم السمة القابلة للفراغ لكل <strong>من الحقول القياسية والمتجهة</strong> في مخطط المجموعة. بدءًا من Milvus 3.0.0، يتم دعمها أيضًا في الحقل StructArray الأصلي. لا تقم بتكوين الحقول الفرعية لـ Struct على أنها قابلة للقيمة الفارغة على مستوى الصف بشكل مستقل؛ قم بتعريف قابلية القيمة الفارغة على مستوى الصف في الحقل الأصلي StructArray وسيقوم Milvus بنقل هذا الإعداد إلى حقوله الفرعية داخليًا. للسماح بقيمة NULL لقيمة حقل فرعي داخل عناصر Struct الفردية (القابلية للقيمة الفارغة على مستوى العنصر)، قم بتعيين « <code translate="no">nullable=True</code> » على حقل فرعي سكالي أو متجهي أو « <code translate="no">element_nullable=True</code> » على حقل فرعي من نوع المصفوفة في Milvus 3.0.6 والإصدارات الأحدث؛ راجع <a href="/docs/ar/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">«إنشاء حقل StructArray</a>».</p>
 <div class="alert note">
-<p>تحدد خاصية القابلية للقيمة الفارغة ما إذا كان من الممكن أن تكون قيمة الحقل مفقودة؛ وهي لا تحدد القيمة التي يتم استخدامها عند فقدان الحقل.</p>
+<p>تحدد قابلية القيمة لـ NULL ما إذا كان من الممكن أن تكون قيمة الحقل مفقودة؛ وهي لا تحدد القيمة التي يتم استخدامها عند فقدان الحقل.</p>
 <ul>
-<li>إذا تم تكوين حقل قابل للفراغ بدون قيمة افتراضية، فإن حذف الحقل يؤدي إلى تخزين قيمة NULL.</li>
-<li>إذا تم تكوين قيمة افتراضية، فقد يقوم Milvus بتخزين القيمة الافتراضية بدلاً من ذلك. لمزيد من التفاصيل، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</li>
+<li>إذا تم تكوين حقل قابل للقيمة الفارغة بدون قيمة افتراضية، فإن حذف الحقل يؤدي إلى تخزين قيمة NULL.</li>
+<li>إذا تم تكوين قيمة افتراضية، فقد يقوم Milvus بتخزين القيمة الافتراضية بدلاً من ذلك. لمزيد من التفاصيل، راجع <a href="/docs/ar/default-values.md">«القيم الافتراضية</a>».</li>
 </ul>
 </div>
 <h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">تحديد حقل قابل للقيمة الفارغة في مخطط المجموعة<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
@@ -94,7 +94,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>لاستخدام الحقول القابلة للقيمة الفارغة، يجب تمكين السمة "nullable" عند تعريف مخطط المجموعة.</p>
-<p>في هذا المثال، يحدد مخطط المجموعة حقل متجهًا باسم « <code translate="no">embedding</code> » بقيمة « <code translate="no">nullable=True</code> ». وهذا يسمح للكيانات في المجموعة بحذف قيمة المتجه أو تعيينها صراحةً إلى NULL أثناء استيعاب البيانات.</p>
+<p>في هذا المثال، يحدد مخطط المجموعة حقل متجهًا باسم « <code translate="no">embedding</code> » بقيمة « <code translate="no">nullable=True</code> ». وهذا يسمح للكيانات في المجموعة بحذف قيمة المتجه أو تعيينها صراحةً إلى «NULL» أثناء استيعاب البيانات.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -331,7 +331,7 @@ curl --request POST \
 </ul>
 <p>للتوضيح، تركز الأمثلة التالية على حقل متجه قابل للقيمة الفارغة (<code translate="no">embedding</code>). يعد تعريف الحقول القياسية القابلة للقيمة الفارغة اختياريًا وليس مطلوبًا لمتابعة بقية هذا الدليل.</p>
 <p><details>
-<summary>اختياري: تعريف حقل قياسي قابل للقيمة NULL</summary></p>
+<summary>اختياري: تعريف حقل قياسي قابل للقيمة الفارغة</summary></p>
 <p>يمكن أيضًا تعريف الحقول القياسية على أنها قابلة للقيمة NULL باستخدام نفس السمة <code translate="no">nullable</code> واتباع نفس القواعد أثناء الاستيعاب. على سبيل المثال:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -773,7 +773,7 @@ curl --request POST \
 <ul>
 <li>يتم تقييم وترتيب الكيانات التي تحتوي على قيم متجهات صالحة فقط.</li>
 <li>لا تتسبب الكيانات ذات المتجهات NULL في حدوث أخطاء.</li>
-<li>إذا كان عدد المتجهات الصالحة أقل من عدد المتجهات المطلوبة ( <code translate="no">topK</code> ) (<code translate="no">limit</code>)، فقد يعرض Milvus نتائج أقل من <code translate="no">limit</code>.</li>
+<li>إذا كان عدد المتجهات الصالحة أقل من عدد <code translate="no">topK</code> المطلوب (<code translate="no">limit</code>)، فقد يعرض Milvus نتائج أقل من <code translate="no">limit</code>.</li>
 </ul>
 <p>يقوم المثال التالي بإجراء بحث متجهي على الحقل المتجهي القابل للقيمة الفارغة <code translate="no">embedding</code>:</p>
 <div class="multipleCode">
@@ -1032,14 +1032,14 @@ Console.WriteLine(res);
 <tr><td>نعم</td><td>لا</td><td>NULL أو تم تجاهله</td><td>يتم تخزينه كـ NULL</td></tr>
 <tr><td>لا</td><td>نعم (غير NULL)</td><td>NULL أو محذوف</td><td>يستخدم القيمة الافتراضية</td></tr>
 <tr><td>لا</td><td>لا</td><td>NULL أو تم تجاهله</td><td>يُحدث خطأً</td></tr>
-<tr><td>لا</td><td>نعم (القيمة الافتراضية NULL)</td><td>NULL أو تم تجاهله</td><td>يُحدث خطأً</td></tr>
+<tr><td>لا</td><td>نعم (القيمة الافتراضية NULL)</td><td>NULL أو تم حذفه</td><td>يُحدث خطأً</td></tr>
 </tbody>
 </table>
 <p><strong>النقاط الرئيسية:</strong></p>
 <ul>
 <li>عندما يكون للحقل قيمة افتراضية غير NULL، يتم استخدام تلك القيمة بغض النظر عما إذا كان الخيار " <code translate="no">nullable</code> " ممكّنًا أم لا.</li>
 <li>عندما تكون ميزة " <code translate="no">nullable=True</code> " مفعّلة دون تعيين قيمة افتراضية، يخزن الحقل القيمة NULL.</li>
-<li>عندما تكون ميزة " <code translate="no">nullable=False</code> " مفعّلة دون تعيين أي قيمة افتراضية، يفشل الإدراج ويظهر خطأ.</li>
+<li>عندما يتم تعيين " <code translate="no">nullable=False</code> " دون تعيين قيمة افتراضية، يفشل الإدراج مع ظهور خطأ.</li>
 <li>يُعد تعيين قيمة افتراضية NULL لحقل غير قابل للقيمة NULL غير صالح ويؤدي إلى ظهور خطأ.</li>
 </ul>
 <p>للاطلاع على أمثلة كاملة واستخدام واجهة برمجة التطبيقات (API) للقيم الافتراضية، راجع <a href="/docs/ar/default-values.md">القيم الافتراضية</a>.</p>

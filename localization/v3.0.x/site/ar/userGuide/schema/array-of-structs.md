@@ -39,8 +39,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يخزن <strong>StructArray،</strong> المعروف أيضًا باسم مصفوفة الهياكل ( <strong>array</strong> of structs)، مجموعة مرتبة من عناصر Struct في كل كيان. يتبع كل عنصر Struct في المصفوفة نفس المخطط. يمكن أن يحتوي عنصر Struct على حقول فرعية قياسية، أو حقول فرعية متجهة، أو كليهما.</p>
-<p>على سبيل المثال، يمكن لمجموعة أن تخزن مقالًا واحدًا ككيان وتخزن أجزاءه في حقل StructArray يُسمى <code translate="no">chunks</code>. يمكن أن تتضمن كل جزء نصًا، وبيانات وصفية للقسم، ودرجات الجودة، وتضمينًا متجهًا واحدًا أو أكثر.</p>
+    </button></h2><p>يخزن <strong>StructArray،</strong> المعروف أيضًا باسم <strong>مصفوفة</strong> الهياكل ( <strong>array</strong> of structs)، مجموعة مرتبة من عناصر Struct في كل كيان. يتبع كل عنصر Struct في المصفوفة نفس المخطط. يمكن أن يحتوي عنصر Struct على حقول فرعية قياسية، وحقول فرعية متجهة، وبدءًا من Milvus 3.0.6، حقول فرعية مصفوفة قياسية.</p>
+<p>على سبيل المثال، يمكن لمجموعة أن تخزن مقالًا واحدًا ككيان وتخزن أجزاءه في حقل StructArray يُسمى <code translate="no">chunks</code>. يمكن أن تتضمن كل جزء نصًا وبيانات وصفية للقسم ودرجات الجودة وتضمينًا متجهًا واحدًا أو أكثر.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -69,7 +69,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>يمثل الحقلان الفرعيان المتجهان في هذا المثال نفس المقطع من منظورين للبحث. يُقصد بـ « <code translate="no">chunks[emb_list_vector]</code> » البحث في قائمة التضمينات (EmbeddingList) باستخدام مقاييس « <code translate="no">MAX_SIM*</code> »، بينما يُقصد بـ « <code translate="no">chunks[emb]</code> » البحث على مستوى العناصر باستخدام مقاييس متجهة عادية مثل « <code translate="no">COSINE</code> » أو « <code translate="no">IP</code> » أو « <code translate="no">L2</code> ».</p>
+<p>يمثل الحقلان الفرعيان المتجهان في هذا المثال نفس المقطع من منظورين للبحث. يُقصد بـ « <code translate="no">chunks[emb_list_vector]</code> » البحث في قائمة التضمينات (EmbeddingList) باستخدام مقاييس « <code translate="no">MAX_SIM*</code> »، بينما يُقصد بـ « <code translate="no">chunks[emb]</code> » البحث على مستوى العنصر باستخدام مقاييس متجهة عادية مثل « <code translate="no">COSINE</code> » أو « <code translate="no">IP</code> » أو « <code translate="no">L2</code> ».</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">متى تستخدم StructArray<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,7 +121,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>نمذجة كائن أب واحد مع العديد من الكائنات الفرعية المنظمة.</td><td>قم بإنشاء حقل StructArray.</td><td>يحتوي الكيان على عناصر Struct مرتبة.</td><td><a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a></td></tr>
-<tr><td>أدخل سجلات أصلية تحتوي على بيانات فرعية متداخلة.</td><td>إدراج كيانات يكون حقل StructArray الخاص بها عبارة عن قائمة من كائنات Struct.</td><td>الإدراج على مستوى الكيان.</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td></tr>
+<tr><td>أدخل سجلات الأصل مع بيانات التابعين المتداخلة.</td><td>إدراج كيانات يكون حقل StructArray الخاص بها عبارة عن قائمة من كائنات Struct.</td><td>الإدراج على مستوى الكيان.</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td></tr>
 <tr><td>تشغيل ColBERT أو ColPali أو استرجاع التفاعل المتأخر على مستوى المستند.</td><td>استخدام بحث EmbeddingList مع فهرس <code translate="no">MAX_SIM*</code>.</td><td>على مستوى الكيان.</td><td><a href="/docs/ar/search-with-embedding-lists.md">البحث باستخدام قوائم التضمين</a></td></tr>
 <tr><td>ابحث في المقاطع الفردية أو المقاطع المصغرة أو الأجزاء.</td><td>استخدم البحث على مستوى العناصر باستخدام مقياس متجه عادي.</td><td>مستوى عنصر Struct، مع الإزاحة عند توفرها.</td><td><a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a></td></tr>
 <tr><td>تقييد البحث المتجهي على مستوى العناصر ليقتصر على العناصر التي تتطابق مع الشروط القياسية.</td><td>استخدم <code translate="no">element_filter</code>.</td><td>التصفية على مستوى العناصر؛ يعتمد شكل النتيجة على نوع البحث.</td><td><a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a></td></tr>
@@ -201,7 +201,7 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>النمذجة</td><td><a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a></td><td>تحديد مخطط Struct وإضافة حقل StructArray.</td></tr>
-<tr><td>النمذجة</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td><td>تحضير وإدراج بيانات StructArray المتداخلة.</td></tr>
+<tr><td>النمذجة</td><td><a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a></td><td>قم بإعداد وإدراج بيانات StructArray المتداخلة.</td></tr>
 <tr><td>النمذجة</td><td><a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a></td><td>إنشاء فهارس متجهة وعددية على الحقول الفرعية لـ StructArray.</td></tr>
 <tr><td>المرجع</td><td><a href="/docs/ar/structarray-limits.md">حدود StructArray</a></td><td>تحقق من حدود المخطط ونوع البيانات والفهرس والبحث والتصفية والإصدار.</td></tr>
 <tr><td>البحث</td><td><a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a></td><td>قارن بين البحث في EmbeddingList والبحث المتجه على مستوى العناصر.</td></tr>
@@ -232,8 +232,8 @@ summary: >-
 <li><p>يمكن استخدام Struct كنوع عنصر لحقل Array. ولا يُستخدم كحقل تجميع من المستوى الأعلى.</p></li>
 <li><p>تشترك جميع عناصر Struct في حقل StructArray نفسه في مخطط واحد محدد مسبقًا.</p></li>
 <li><p>تتطلب الحقول الفرعية من نوع Vector وجود فهارس. يستخدم البحث في EmbeddingList مقاييس <code translate="no">MAX_SIM*</code> ، بينما يستخدم البحث على مستوى العناصر مقاييس Vector العادية.</p></li>
-<li><p><code translate="no">element_filter</code> وتُستخدم <code translate="no">MATCH_*</code> للحقول الفرعية القياسية داخل حقول StructArray. استخدم <code translate="no">$[subfield]</code> فقط داخل هذه العوامل. يمكن أن تشير عوامل التصفية على مستوى الصف أيضًا إلى مسارات StructArray مباشرةً، مثل <code translate="no">chunks[0][section]</code> و <code translate="no">array_length(chunks)</code> و <code translate="no">array_contains(chunks[section], ...)</code>.</p></li>
-<li><p>بعض تركيبات البحث مقيدة بالإصدار أو خاصة بوضع معين. تحقق من <a href="/docs/ar/structarray-limits.md">حدود StructArray</a> قبل الاعتماد على البحث عن النطاق، أو البحث عن التجميع، أو البحث المختلط، أو الحقول القابلة للقيمة الفارغة، أو الحقول المضافة ديناميكيًا.</p></li>
+<li><p><code translate="no">element_filter</code> وتُستخدم <code translate="no">MATCH_*</code> للحقول الفرعية القياسية داخل حقول StructArray. استخدم <code translate="no">$[subfield]</code> فقط داخل هذه العوامل. يمكن أن تشير المرشحات على مستوى الصف أيضًا إلى مسارات StructArray مباشرةً، مثل <code translate="no">chunks[0][section]</code> و <code translate="no">array_length(chunks)</code> و <code translate="no">array_contains(chunks[section], ...)</code>.</p></li>
+<li><p>بعض تركيبات البحث مقيدة بالإصدار أو خاصة بوضع معين. راجع <a href="/docs/ar/structarray-limits.md">حدود StructArray</a> قبل الاعتماد على البحث عن النطاق، أو البحث عن التجميع، أو البحث المختلط، أو الحقول القابلة للقيمة الفارغة، أو الحقول المضافة ديناميكيًا، أو القيم الفارغة على مستوى العنصر، أو الحقول الفرعية للمصفوفة، أو إضافة الحقول الفرعية وحذفها.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">الخطوات التالية<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -252,8 +252,8 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><p>لتصميم مخطط، اقرأ <a href="/docs/ar/create-structarray-field.md">إنشاء حقل StructArray</a>.</p></li>
-<li><p>لتحضير البيانات، اقرأ " <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>".</p></li>
-<li><p>لاختيار الفهارس، اقرأ <a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a>.</p></li>
+<li><p>لتحضير البيانات، اقرأ <a href="/docs/ar/insert-data-into-structarray-fields.md">إدراج البيانات في حقول StructArray</a>.</p></li>
+<li><p>لاختيار الفهارس، اقرأ <a href="/docs/ar/index-structarray-fields.md">«فهرسة حقول StructArray</a>».</p></li>
 <li><p>للبحث في الحقول الفرعية المتجهة لـ StructArray، ابدأ بـ " <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجه الأساسي باستخدام StructArray</a>".</p></li>
 <li><p>لتصفية الحقول الفرعية القياسية في StructArray، اقرأ " <a href="/docs/ar/struct-array-operators.md">عوامل StructArray</a> " و" <a href="/docs/ar/filtered-search-with-structarray.md">البحث المُصفى باستخدام StructArray</a>".</p></li>
 </ol>

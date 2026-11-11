@@ -230,17 +230,21 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON、JSONL</td><td>フィールド値は、Struct要素ごとに1つずつ、サブフィールド名（<code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code> ）をキーとするオブジェクトのリストです。</td></tr>
-<tr><td>CSV</td><td>セルには、JSON 形式と同じ JSON テキストが格納されます。</td></tr>
-<tr><td>Parquet</td><td>StructArray フィールドごとに 1 列で、型は<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> であり、サブフィールドごとに 1 つの struct 子要素があります。スカラーサブフィールドはスカラー子要素であり、ベクトルサブフィールドはその要素型のリストです（例：<code translate="no">list&lt;float32&gt;</code> ）。</td></tr>
-<tr><td>NumPy</td><td>サポートされていません。NumPyファイルは、トップレベルフィールドごとに1つのファイルで構成され、StructArrayフィールドに対応する表現形式がありません。StructArrayフィールドを含むコレクションには、JSON、CSV、またはParquetファイルを使用してください。</td></tr>
+<tr><td>CSV</td><td>セルには、JSON 形式と同じ JSON テキストが格納されます。インポートジョブで設定された `<code translate="no">nullkey</code> ` または JSON の `<code translate="no">null</code> ` は、StructArray の値が null であることを示します。</td></tr>
+<tr><td>Parquet</td><td>StructArray フィールドごとに 1 列で、型は<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> であり、サブフィールドごとに 1 つの struct 子要素があります。スカラーサブフィールドはスカラー子要素、ベクトルサブフィールドはその要素型のリスト（<code translate="no">list&lt;float32&gt;</code> など）、配列サブフィールド（Milvus 3.0.6 以降）は<code translate="no">list&lt;T&gt;</code> 子要素となります。</td></tr>
+<tr><td>NumPy</td><td>サポートされていません。NumPyファイルは、トップレベルフィールドごとに1つのファイルで構成されており、StructArrayフィールドに対応する表現形式がありません。StructArrayフィールドを含むコレクションには、JSON、CSV、またはParquetファイルを使用してください。</td></tr>
 </tbody>
 </table>
 <p>サポートされているすべての形式における StructArray 値には、以下のルールが適用されます：</p>
 <ul>
 <li><p>各 Struct 要素内では、<code translate="no">chunks[text]</code> のようなパスではなく、サブフィールド名を使用してください。<code translate="no">chunks[text]</code> という名前のフラットな列やキーは拒否されます。</p></li>
-<li><p>各 Struct 要素は、Struct スキーマのすべてのサブフィールドを提供する必要があります。また、<code translate="no">[null, {...}]</code> のような Struct 要素自体は null にできません。StructArray 値全体が null になるのは、StructArray フィールドが null 許容である場合のみです。</p></li>
+<li><p><code translate="no">[null, {...}]</code> のような、Struct要素自体がnullになることはできません。StructArray値全体がnullになるのは、StructArrayフィールドがnull許容である場合に限られます。Milvus 3.0.6以前では、すべてのStruct要素がすべてのサブフィールドを提供する必要があります。</p></li>
+<li><p>コレクションのサブフィールドではないキーやParquetの子要素（削除されたサブフィールドを含む）は無視されます。</p></li>
+<li><p>Milvus 3.0.6 以降、要素が null 許容であるサブフィールドのキーが欠落している場合、または `<code translate="no">null</code> ` 値が指定されていない場合、その Struct 要素の null 値としてインポートされるため、サブフィールドが追加される前に書き込まれたファイルは、そのサブフィールドなしでインポートされます。 それ以外の場所での `<code translate="no">null</code> ` は、インポートを失敗させます。配列サブフィールドの場合、<code translate="no">null</code> は null の内部配列となり、サブフィールドが許可している場合、内部配列内の `<code translate="no">null</code> ` は null の内部値となります。</p></li>
+<li><p>Milvus 3.0.6 以降、バックアップの復元などの binlog インポートやスナップショットソースからのインポートは、要素が null 許容可能なサブフィールドまたはスカラー配列サブフィールドを持つコレクションに対しては拒否されます。</p></li>
 </ul>
-<p>スキーマ側の制限については、「<a href="/docs/ja/structarray-limits.md#Import-limits">StructArray の制限</a>」を参照してください。</p>
+<p>pymilvus<a href="#Set-up-BulkWriter">BulkWriterは</a>、要素がNULL可能なサブフィールドやNULL可能なStructArray値を含め、サポートされているすべてのフォーマットにおいて、上記のStructArrayの形状をサポートしています。ライターの<code translate="no">add_row()</code> 呼び出しでは、同じ行形状を使用してください。</p>
+<p>スキーマ側の制限については、「<a href="/docs/ja/structarray-limits.md#Import-and-storage-limits">StructArrayの制限</a>」を参照してください。</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">BulkWriter の設定<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,10 +260,10 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter は</strong>、生のデータセットを RESTful インポート API 経由でのインポートに適した形式に変換するために設計されたツールです。このツールには、次の 2 種類のライターが用意されています。</p>
+    </button></h2><p><strong>BulkWriterは</strong>、生のデータセットをRESTfulインポートAPI経由でのインポートに適した形式に変換するために設計されたツールです。2種類のライターが用意されています：</p>
 <ul>
-<li><strong>LocalBulkWriter</strong>：指定されたデータセットを読み取り、使いやすい形式に変換します。</li>
-<li><strong>RemoteBulkWriter</strong>: LocalBulkWriter と同じタスクを実行しますが、さらに変換されたデータファイルを指定されたリモート オブジェクト ストレージ バケットに転送します。</li>
+<li><strong>LocalBulkWriter</strong>：指定されたデータセットを読み取り、扱いやすい形式に変換します。</li>
+<li><strong>RemoteBulkWriter</strong>: LocalBulkWriter と同じ処理を行うほか、変換されたデータファイルを指定されたリモート オブジェクト ストレージ バケットに転送します。</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> <strong>は</strong>、変換されたデータファイルをターゲットのオブジェクトストレージバケットに転送するという点で、<strong>LocalBulkWriter</strong>とは異なります。</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">LocalBulkWriterの設定<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
@@ -423,7 +427,7 @@ writer = RemoteBulkWriter(
 <span class="hljs-type">RemoteBulkWriter</span> <span class="hljs-variable">remoteBulkWriter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(remoteBulkWriterParam);
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p><strong>RemoteBulkWriter</strong>を作成するためのパラメータは、<code translate="no">connect_param</code> を除き、<strong>LocalBulkWriter</strong> のものとほぼ同じです。パラメータ設定の詳細については、SDK リファレンスの<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a>および<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a>を参照してください。</p>
+<p><strong>RemoteBulkWriter</strong>を作成するためのパラメータは、<code translate="no">connect_param</code> を除き、<strong>LocalBulkWriter</strong> のものとほぼ同じです。パラメータ設定の詳細については、SDK リファレンスの「<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a>」および「<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a>」を参照してください。</p>
 </div>
 <div class="language-java">
 <p><strong>RemoteBulkWriter</strong>を作成するためのパラメータは、<code translate="no">StorageConnectParam</code> を除き、<strong>LocalBulkWriter</strong> のものとほぼ同じです。パラメータ設定の詳細については、SDK リファレンスの RemoteBulkWriter および StorageConnectParam を参照してください。</p>

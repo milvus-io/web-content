@@ -1,7 +1,7 @@
 ---
 id: nullable-and-default.md
 title: NULL許容フィールド
-summary: Null許容フィールドとデフォルト値を設定します。これには、スキーマ、挿入、インデックス、検索、およびフィルタリングの挙動が含まれます。
+summary: Null許容フィールドとデフォルト値を設定します。これには、スキーマ、挿入、インデックス、検索、およびフィルタリングの動作が含まれます。
 ---
 <h1 id="Nullable-Fields" class="common-anchor-header">NULL許容フィールド<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,11 +42,11 @@ summary: Null許容フィールドとデフォルト値を設定します。こ�
       </svg>
     </button></h2><ul>
 <li><p>NULL値を許可するベクトルフィールドは、<code translate="no">IS NULL</code> または<code translate="no">IS NOT NULL</code> のフィルタ式をサポートしていません。ベクトルフィールドの値がNULLであるかどうかに基づいて、エンティティを明示的にフィルタリングすることはできません。</p></li>
-<li><p>Milvus 3.0.0 以降、親の<a href="/docs/ja/array-of-structs.md">StructArray</a>フィールドは NULL 許容に設定できます。<code translate="no">nullable=True</code> は、個々のサブフィールドではなく、親の StructArray フィールドに設定してください。NULL は個々の Struct 要素ではなく StructArray フィールド全体に適用され、Milvus は親の NULL 許容性を内部的にそのサブフィールドに伝播します。 既存のコレクションに追加される StructArray フィールドは、既存のエンティティが新しいフィールドに対して NULL を返せるように、NULL 許容でなければなりません。詳細については、「<a href="/docs/ja/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray の制限</a>」を参照してください。</p></li>
+<li><p>Milvus 3.0.0 以降、親<a href="/docs/ja/array-of-structs.md">StructArray</a>フィールドは NULL 許容に設定できます。<code translate="no">nullable=True</code> は、個々のサブフィールドではなく、親 StructArray フィールドに設定してください。NULL は個々の Struct 要素ではなく StructArray フィールド全体に適用され、Milvus は親フィールドの NULL 許容性を内部的にそのサブフィールドに伝播します。 既存のコレクションに追加される StructArray フィールドは、既存のエンティティが新しいフィールドに対して NULL を返せるように、NULL 許容でなければなりません。 Milvus 3.0.6 以降では、サブフィールドにおいて個々の Struct 要素で NULL 値を許可できるようになりました。スカラーまたはベクトルのサブフィールドでは `<code translate="no">nullable=True</code> `、配列のサブフィールドでは `<code translate="no">element_nullable=True</code> ` を指定します。ただし、Struct 要素自体は依然として NULL にすることはできません。詳細については、<a href="/docs/ja/structarray-limits.md#Nullable-and-dynamic-schema-limits">「StructArray の制限</a>」を参照してください。</p></li>
 <li><p>nullable属性はフィールドの作成時に定義され、事後の変更はできません。既存のフィールドに対してNULL許容性を有効または無効にすることはできません。</p></li>
 <li><p>nullable としてマークされたフィールドは、パーティションキーとして使用できません。パーティションキーとなるフィールドには、常に有効で null ではない値が含まれている必要があります。詳細については、「<a href="/docs/ja/use-partition-key.md">パーティションキーの使用</a>」を参照してください。</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">NULL 許容フィールドとは何ですか？<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">Nullableフィールドとは何ですか？<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,12 +67,12 @@ summary: Null許容フィールドとデフォルト値を設定します。こ�
 <li>入力エンティティからそのフィールドが省略されている場合。</li>
 <li>フィールドが明示的にNULLに設定されている場合（例：Pythonでの<code translate="no">None</code> ）。</li>
 </ul>
-<p>フィールドがNULL許可として定義されていない場合（デフォルトの動作）、すべてのエンティティはそのフィールドに対して有効な値を指定する必要があります。フィールドを省略したり、明示的にNULL値を割り当てたりすると、挿入またはインポート操作は失敗します。</p>
-<p>nullable 属性は、コレクションスキーマ内の<strong>スカラーフィールドとベクトルフィールドの両方で</strong>サポートされています。Milvus 3.0.0 以降では、親の StructArray フィールドでもサポートされています。Struct サブフィールドを個別に nullable として設定しないでください。StructArray 親で nullability を定義すると、Milvus がその設定を内部的にサブフィールドに反映します。</p>
+<p>フィールドがNULL可能として定義されていない場合（デフォルトの動作）、すべてのエンティティはそのフィールドに対して有効な値を指定する必要があります。フィールドを省略したり、明示的にNULL値を割り当てたりすると、挿入またはインポート操作は失敗します。</p>
+<p>nullable 属性は、コレクションスキーマ内の<strong>スカラーフィールドとベクトルフィールド</strong>の両方でサポートされています。Milvus 3.0.0 以降では、親 StructArray フィールドでもサポートされています。 Structのサブフィールドを個別に「行レベルでNULL可」として設定しないでください。StructArrayの親フィールドで行レベルのNULL可を定義すれば、Milvusが内部的にその設定をサブフィールドに反映します。 個々の Struct 要素内のサブフィールド値で NULL を許可するには（要素レベルの NULL 許可）、Milvus 3.0.6 以降では、スカラーまたはベクトルサブフィールドに `<code translate="no">nullable=True</code> ` を、配列サブフィールドに `<code translate="no">element_nullable=True</code> ` を設定してください。「<a href="/docs/ja/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">StructArray フィールドの作成</a>」を参照してください。</p>
 <div class="alert note">
-<p>NULL許容性は、フィールド値が欠落していてもよいかどうかを決定するものであり、フィールドが欠落している場合にどの値が使用されるかを定義するものではありません。</p>
+<p>Nullability は、フィールド値が欠落していてもよいかどうかを決定するものであり、フィールドが欠落している場合にどの値が使用されるかを定義するものではありません。</p>
 <ul>
-<li>Null可能フィールドがデフォルト値なしで設定されている場合、そのフィールドを省略すると、NULL値が格納されます。</li>
+<li>Null 許容フィールドがデフォルト値なしで設定されている場合、そのフィールドを省略すると、NULL 値が格納されます。</li>
 <li>デフォルト値が設定されている場合、Milvus はそのデフォルト値を代わりに格納することがあります。詳細については、「<a href="/docs/ja/default-values.md">デフォルト値」を</a>参照してください。</li>
 </ul>
 </div>
@@ -564,7 +564,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 <ul>
 <li>エンティティ<strong>id = 1</strong>は有効なベクトル値を指定しています。</li>
 <li>エンティティ<strong>id = 2</strong>は、<code translate="no">embedding</code> フィールドに明示的にNULL値を割り当てています。</li>
-<li>エンティティ<strong>id = 3</strong>では、<code translate="no">embedding</code> フィールドを完全に省略しています。Milvus はこのフィールドを NULL として格納します。</li>
+<li>エンティティ<strong>id = 3</strong>では、<code translate="no">embedding</code> フィールドを完全に省略しています。Milvus はこれを NULL として格納します。</li>
 </ul>
 <h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">NULL許容フィールドにおけるインデックスの動作<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -767,7 +767,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>NULL 許容フィールドに対して検索操作を実行する場合、Milvus は検索に使用されたフィールドの値が NULL ではないエンティティのみを評価します。ベクトルフィールドが NULL のエンティティは自動的にスキップされます。</p>
-<p>この例にある<code translate="no">embedding</code> のようなNULL許容ベクトルフィールドの場合：</p>
+<p>この例の `<code translate="no">embedding</code> ` のようなNULL許容ベクトルフィールドの場合：</p>
 <ul>
 <li>有効なベクトル値を持つエンティティのみが評価され、ランク付けされます。</li>
 <li>ベクトルがNULLのエンティティがあっても、エラーは発生しません。</li>
@@ -1026,7 +1026,7 @@ Console.WriteLine(res);
 <tr><th>Null許可が有効</th><th>デフォルト値</th><th>ユーザー入力（NULL または省略）</th><th>結果</th></tr>
 </thead>
 <tbody>
-<tr><td>はい</td><td>はい (NULL以外)</td><td>NULL または省略</td><td>デフォルト値を使用する</td></tr>
+<tr><td>はい</td><td>はい (NULL 以外)</td><td>NULL または省略</td><td>デフォルト値を使用する</td></tr>
 <tr><td>はい</td><td>いいえ</td><td>NULL または省略</td><td>NULLとして保存される</td></tr>
 <tr><td>いいえ</td><td>はい（NULL以外）</td><td>NULL または省略</td><td>デフォルト値を使用する</td></tr>
 <tr><td>いいえ</td><td>いいえ</td><td>NULL または省略</td><td>エラーをスローする</td></tr>
@@ -1038,6 +1038,6 @@ Console.WriteLine(res);
 <li>フィールドにNULL以外のデフォルト値が設定されている場合、<code translate="no">nullable</code> が有効かどうかにかかわらず、その値が使用されます。</li>
 <li><code translate="no">nullable=True</code> が有効で、かつデフォルト値が設定されていない場合、そのフィールドにはNULLが格納されます。</li>
 <li><code translate="no">nullable=False</code> が有効で、かつデフォルト値が設定されていない場合、挿入はエラーで失敗します。</li>
-<li>NULL 以外の値が指定可能なフィールドに NULL のデフォルト値を設定することは無効であり、エラーが発生します。</li>
+<li>NULL 以外の値を指定できるフィールドに NULL のデフォルト値を設定することは無効であり、エラーが発生します。</li>
 </ul>
 <p>デフォルト値に関する完全な例および API の使用方法については、「<a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>

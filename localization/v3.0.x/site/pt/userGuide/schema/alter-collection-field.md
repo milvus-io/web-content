@@ -28,8 +28,11 @@ summary: >-
 <li><p>Cada coleção é composta por apenas um campo primário. Uma vez definido durante a criação da coleção, não é possível alterar o campo primário nem as suas propriedades.</p></li>
 <li><p>Cada coleção pode ter apenas uma chave de partição. Uma vez definida durante a criação da coleção, não é possível alterar a chave de partição.</p></li>
 </ul>
+<ul>
+<li>A partir do Milvus 3.0.6, para um campo <a href="/docs/pt/array-of-structs.md">StructArray</a> ou um dos seus caminhos de subcampo, como <code translate="no">chunks[text]</code>, só é possível alterar <code translate="no">mmap.enabled</code>, <code translate="no">field.description</code> e <code translate="no">warmup</code>. Outras propriedades, como <code translate="no">max_capacity</code> e <code translate="no">max_length</code>, são rejeitadas. O campo pai e os seus subcampos são armazenados em conjunto, e <code translate="no">mmap.enabled</code> e <code translate="no">warmup</code> surtem efeito no armazenamento partilhado quando ativadas em qualquer um deles: desativar uma destas propriedades apenas num subcampo não surte efeito enquanto o campo pai ou um subcampo irmão ainda a tiver ativada. Além disso, a opção « <code translate="no">warmup</code> » definida como « <code translate="no">disable</code> » não ignora todas as leituras: os dados necessários para a execução da consulta, tais como os deslocamentos dos elementos, continuam a ser lidos.</li>
+</ul>
 </div>
-<h2 id="Alter-VarChar-field" class="common-anchor-header">Alterar campo VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
+<h2 id="Alter-VarChar-field" class="common-anchor-header">Alterar o campo VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

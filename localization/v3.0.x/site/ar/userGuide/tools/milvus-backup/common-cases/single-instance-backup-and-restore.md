@@ -1,11 +1,12 @@
 ---
 id: single-instance-backup-and-restore.md
 summary: >-
-  يوضح هذا الموضوع بالتفصيل عملية النسخ الاحتياطي لمجموعة ما واستعادتها من
-  النسخة الاحتياطية داخل نفس مثيل Milvus
-title: النسخ الاحتياطي والاستعادة في مثيل واحد
+  يشرح هذا الموضوع بالتفصيل عملية إنشاء نسخة احتياطية لمجموعة ما واستعادتها من
+  النسخة الاحتياطية ضمن نفس مثيل Milvus
+title: النسخ الاحتياطي والاستعادة في مثيل واحدCompatible with Milvus Backup 0.5.x
+beta: Milvus Backup 0.5.x
 ---
-<h1 id="Backup-and-Restore-in-One-Instance" class="common-anchor-header">النسخ الاحتياطي والاستعادة في مثيل واحد<button data-href="#Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Backup-and-Restore-in-One-Instance" class="common-anchor-header">النسخ الاحتياطي والاستعادة في مثيل واحد<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.5.x</span><button data-href="#Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +21,10 @@ title: النسخ الاحتياطي والاستعادة في مثيل واحد
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يوضح هذا الموضوع بالتفصيل عملية النسخ الاحتياطي لمجموعة ما واستعادتها من النسخة الاحتياطية داخل نفس مثيل Milvus.</p>
+    </button></h1><p>للاطلاع على سير العمل الحالي، راجع <a href="/docs/ar/milvus_backup_0_6_cli.md">دليل واجهة سطر الأوامر (CLI)</a> أو <a href="/docs/ar/milvus_backup_upgrade.md">قم بالترقية من الإصدار 0.5.x</a>. تحقق من <a href="/docs/ar/milvus_backup_overview.md#Compatibility-matrix">مصفوفة التوافق</a> لمعرفة إصدارات خادم Milvus المدعومة.</p>
+<p>يشرح هذا الموضوع بالتفصيل عملية النسخ الاحتياطي لمجموعة واستعادتها
+من النسخة الاحتياطية داخل نفس مثيل Milvus.</p>
+<p>بالنسبة لسير عمل اللقطات في الإصدار 0.6.0 على Milvus 3.0.1 أو أحدث، راجع <a href="/docs/ar/snapshot-backup-and-restore.md">«النسخ الاحتياطي للقطات واستعادتها في مثيل واحد</a>».</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,12 +40,17 @@ title: النسخ الاحتياطي والاستعادة في مثيل واحد
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح الرسم البياني أدناه عملية النسخ الاحتياطي والاستعادة ضمن مثيل Milvus واحد.</p>
-<p>
+    </button></h2><p>يوضح الرسم البياني أدناه عملية النسخ الاحتياطي والاستعادة داخل
+مثيل Milvus واحد.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
-   </span> <span class="img-wrapper"> <span>النسخ الاحتياطي والاستعادة من مثيل واحد. png</span> </span></p>
-<p>لنفترض أن لدينا مثيل Milvus، <code translate="no">milvus_A</code> ، باستخدام دلو باسم<code translate="no">bucket_A</code> لتخزين البيانات. في هذا المثال، هدفنا هو إكمال المهام التالية:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" /> 
+   <span>single-instance-backup-and-restore.png</span>
+  
+ </span></p>
+<p>لنفترض أن لدينا مثيل Milvus، <code translate="no">milvus_A</code> ، يستخدم دلوًا باسم
+<code translate="no">bucket_A</code> لتخزين البيانات. في هذا المثال، هدفنا هو إكمال
+المهام التالية:</p>
 <ol>
 <li><p>إنشاء نسخة احتياطية (<code translate="no">my_backup</code>) للمجموعة coll في <code translate="no">bucket_A</code>.</p></li>
 <li><p>الاستعادة من النسخة الاحتياطية وتسمية المجموعة المستعادة <code translate="no">coll_bak</code>.</p></li>
@@ -62,8 +71,10 @@ title: النسخ الاحتياطي والاستعادة في مثيل واحد
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>تأكد من تثبيت أداة النسخ <strong>الاحتياطي Milvus-backup</strong>.</p></li>
-<li><p>تعرف على تكوين إعدادات تخزين كائنات Milvus. للحصول على التفاصيل، راجع <a href="https://milvus.io/docs/deploy_s3.md">تخزين الكائنات</a>.</p></li>
+<li><p>قم بتثبيت <strong>Milvus Backup 0.5.16</strong> باستخدام <a href="/docs/ar/milvus_backup_cli.md#Obtain-Milvus-Backup">دليل واجهة سطر الأوامر (CLI)</a> للإصدار <a href="/docs/ar/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x</a>.</p></li>
+<li><p>تعرف على كيفية تكوين إعدادات تخزين الكائنات في Milvus.
+للحصول على التفاصيل، راجع <a href="https://milvus.io/docs/deploy_s3.md">تخزين الكائنات
+</a>.</p></li>
 </ul>
 <h2 id="Back-up-the-collection" class="common-anchor-header">النسخ الاحتياطي للمجموعة<button data-href="#Back-up-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,14 +106,14 @@ title: النسخ الاحتياطي والاستعادة في مثيل واحد
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>انتقل إلى دليل مشروع milvus-backup وأنشئ دليلاً باسم <code translate="no">configs</code>:</p>
-<pre><code translate="no" class="language-shell">mkdir configs
-cd configs
+    </button></h3><p>انتقل إلى دليل مشروع milvus-backup وأنشئ دليلًا
+باسم <code translate="no">configs</code>:</p>
+<pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
 <p>قم بتنزيل ملف تكوين النسخ الاحتياطي backup.yaml:</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
+<pre><code translate="no" class="language-shell">wget -O configs/backup.yaml https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>تبدو بنية الملف هكذا:</p>
+<p>تبدو بنية الملف كما يلي:</p>
 <pre><code translate="no">├── configs
 │   └── backup.yaml
 ├── milvus-backup
@@ -123,7 +134,9 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>قم بتعديل ملف backup.yaml لتعيين التكوينات المناسبة لـ<code translate="no">milvus_A</code>. فيما يلي نموذج تكوين التخزين:</p>
+    </button></h3><p>يُظهر ملف YAML أدناه الحقول التي يجب تعديلها في ملف الإصدار v1 الذي تم تنزيله. احتفظ بالإعدادات الأخرى المطلوبة. أشر إلى <code translate="no">milvus.address</code> و <code translate="no">milvus.port</code> إلى المثيل الذي يتم نسخه احتياطيًا أو استعادته. اضبط <code translate="no">minio.backupAddress</code> و <code translate="no">minio.backupPort</code> و <code translate="no">minio.backupStorageType</code> على وجهة النسخ الاحتياطي، و <code translate="no">backup.gcPause.address</code> على نقطة نهاية إدارة Milvus المصدر (المنفذ 9091 افتراضيًا). استبدل جميع عناوين الأمثلة وأسماء الحاويات والمسارات وبيانات الاعتماد بإعدادات النشر الخاصة بك.</p>
+<p>قم بتعديل ملف backup.yaml لتعيين التكوينات المناسبة لـ
+<code translate="no">milvus_A</code>. فيما يلي نموذج لتكوين التخزين:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -140,7 +153,7 @@ cd configs
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
-  <span class="hljs-comment"># only for azure</span>
+  <span class="hljs-comment"># Backup storage credentials</span>
   <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
   <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
@@ -162,10 +175,11 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بمجرد حفظ backup.yaml، قم بإنشاء نسخة احتياطية باسم <code translate="no">my_backup</code>:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
+    </button></h3><p>بمجرد حفظ ملف backup.yaml، قم بإنشاء نسخة احتياطية باسم <code translate="no">my_backup</code>:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم هذا الأمر بإنشاء نسخة احتياطية <code translate="no">bucket_A/backup/my_backup</code> في مخزن الكائنات <code translate="no">milvus_A</code>.</p>
+<p>يُنشئ هذا الأمر النسخة الاحتياطية <code translate="no">bucket_A/backup/my_backup</code> في تخزين الكائنات
+لـ <code translate="no">milvus_A</code>.</p>
 <h2 id="Restore-from-the-backup-within-milvusA" class="common-anchor-header">الاستعادة من النسخة الاحتياطية داخل milvus_A<button data-href="#Restore-from-the-backup-within-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +195,11 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد إنشاء النسخة الاحتياطية، يمكنك الاستعادة منها باستخدام الأمر أدناه:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
+    </button></h2><p>بمجرد إنشاء النسخة الاحتياطية، يمكنك الاستعادة منها باستخدام الأمر
+التالي:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>يستعيد هذا الأمر من النسخة الاحتياطية وينشئ مجموعة جديدة باسم coll_bak في <code translate="no">milvus_A</code> ، مع البيانات المخزنة في <code translate="no">bucket_A/files/insert_log/[ID of new collection]</code>.</p>
+<p>يستعيد هذا الأمر البيانات من النسخة الاحتياطية ويُنشئ مجموعة جديدة باسم
+coll_bak في <code translate="no">milvus_A</code> ، باستخدام جذر التخزين المُهيأ للمثيل <code translate="no">bucket_A/files</code>.</p>
+<p>في النسخة 0.5.16 من Backup، يحدد الخيار <code translate="no">-c</code> الذي تم إهماله اسم المجموعة في النسخة الاحتياطية، قبل تطبيق <code translate="no">_bak</code>. أما البديل <code translate="no">--filter</code> في الإصدار 0.6.0 فيستخدم اسم الهدف بدلاً من ذلك؛ انظر <a href="/docs/ar/milvus_backup_upgrade.md#Update-CLI-commands">تحديث أوامر واجهة سطر الأوامر (CLI)</a>.</p>
+<p>بعد الاستعادة، تأكد من وجود <code translate="no">coll_bak</code> ، وأنشئ فهرس متجه مناسبًا إذا لزم الأمر، وقارن عدد الكيانات والقيم التمثيلية ونتائج البحث مع خط الأساس الذي تم تسجيله قبل النسخ الاحتياطي. لا يكفي نجاح الأمر وحده للتحقق من صحة البيانات.</p>

@@ -1,11 +1,15 @@
 ---
 id: single-instance-backup-and-restore.md
 summary: >-
-  Dieses Thema beschreibt den Prozess der Sicherung einer Sammlung und deren
+  In diesem Thema wird der Vorgang der Sicherung einer Sammlung und ihrer
   Wiederherstellung aus der Sicherung innerhalb derselben Milvus-Instanz
-title: Sichern und Wiederherstellen in einer Instanz
+  beschrieben.
+title: >-
+  Sicherung und Wiederherstellung in einer InstanzCompatible with Milvus Backup
+  0.5.x
+beta: Milvus Backup 0.5.x
 ---
-<h1 id="Backup-and-Restore-in-One-Instance" class="common-anchor-header">Sichern und Wiederherstellen in einer Instanz<button data-href="#Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
+<h1 id="Backup-and-Restore-in-One-Instance" class="common-anchor-header">Sicherung und Wiederherstellung in einer Instanz<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.5.x</span><button data-href="#Backup-and-Restore-in-One-Instance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +24,10 @@ title: Sichern und Wiederherstellen in einer Instanz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In diesem Thema wird der Prozess der Sicherung einer Sammlung und deren Wiederherstellung aus der Sicherung innerhalb derselben Milvus-Instanz beschrieben.</p>
+    </button></h1><p>Informationen zu aktuellen Workflows finden Sie im <a href="/docs/de/milvus_backup_0_6_cli.md">CLI-Handbuch</a> oder <a href="/docs/de/milvus_backup_upgrade.md">führen Sie ein Upgrade von 0.5.x durch</a>. Überprüfen Sie die <a href="/docs/de/milvus_backup_overview.md#Compatibility-matrix">Kompatibilitätsmatrix</a> auf unterstützte Milvus-Serverversionen.</p>
+<p>In diesem Abschnitt wird der Vorgang der Sicherung einer Sammlung und der Wiederherstellung
+aus der Sicherung innerhalb derselben Milvus-Instanz beschrieben.</p>
+<p>Informationen zum 0.6.0-Snapshot-Workflow unter Milvus 3.0.1 oder höher finden Sie unter <a href="/docs/de/snapshot-backup-and-restore.md">„Snapshot-Sicherung und -Wiederherstellung in einer Instanz</a>“.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,15 +43,19 @@ title: Sichern und Wiederherstellen in einer Instanz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das folgende Diagramm veranschaulicht den Sicherungs- und Wiederherstellungsprozess innerhalb einer einzelnen Milvus-Instanz.</p>
-<p>
+    </button></h2><p>Das folgende Diagramm veranschaulicht den Sicherungs- und Wiederherstellungsprozess innerhalb einer
+einzigen Milvus-Instanz.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" />
-   </span> <span class="img-wrapper"> <span>single-instance-backup-and-restore.png</span> </span></p>
-<p>Angenommen, wir haben eine Milvus-Instanz, <code translate="no">milvus_A</code>, die einen Bucket namens<code translate="no">bucket_A</code> für die Datenspeicherung verwendet. In diesem Beispiel ist es unser Ziel, die folgenden Aufgaben zu erledigen:</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/single-instance-backup-and-restore.png" alt="single-instance-backup-and-restore.png" class="doc-image" id="single-instance-backup-and-restore.png" /> 
+   <span>single-instance-backup-and-restore.png</span>
+  
+ </span></p>
+<p>Angenommen, wir haben eine Milvus-Instanz, <code translate="no">milvus_A</code>, die einen Bucket namens<code translate="no">bucket_A</code> zur Datenspeicherung verwendet. In diesem Beispiel ist es unser Ziel, die
+folgenden Aufgaben auszuführen:</p>
 <ol>
-<li><p>Erstellen Sie ein Backup (<code translate="no">my_backup</code>) für die Sammlung coll in <code translate="no">bucket_A</code>.</p></li>
-<li><p>Wiederherstellung aus der Sicherung und Benennung der wiederhergestellten Sammlung <code translate="no">coll_bak</code>.</p></li>
+<li><p>Erstellen einer Sicherung (<code translate="no">my_backup</code>) für die Sammlung „coll“ in <code translate="no">bucket_A</code>.</p></li>
+<li><p>Stellen Sie die Daten aus der Sicherung wieder her und benennen Sie die wiederhergestellte Sammlung „ <code translate="no">coll_bak</code> “.</p></li>
 </ol>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,8 +73,10 @@ title: Sichern und Wiederherstellen in einer Instanz
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Stellen Sie sicher, dass das Tool <strong>milvus-backup</strong> installiert ist.</p></li>
-<li><p>Machen Sie sich mit der Konfiguration der Milvus-Objektspeicher-Einstellungen vertraut. Details finden Sie unter <a href="https://milvus.io/docs/deploy_s3.md">Objektspeicher</a>.</p></li>
+<li><p>Installieren Sie <strong>Milvus Backup 0.5.16</strong> anhand der <a href="/docs/de/milvus_backup_cli.md#Obtain-Milvus-Backup">CLI-Anleitung für 0.5.x</a>.</p></li>
+<li><p>Machen Sie sich mit der Konfiguration der Milvus-Objektspeichereinstellungen vertraut.
+Einzelheiten finden Sie unter <a href="https://milvus.io/docs/deploy_s3.md">„Objektspeicher“
+</a>.</p></li>
 </ul>
 <h2 id="Back-up-the-collection" class="common-anchor-header">Sichern Sie die Sammlung<button data-href="#Back-up-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +93,7 @@ title: Sichern und Wiederherstellen in einer Instanz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Schritt 1: Vorbereiten der Konfiguration<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">Schritt 1: Konfiguration vorbereiten<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,12 +108,12 @@ title: Sichern und Wiederherstellen in einer Instanz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wechseln Sie in das Verzeichnis des milvus-backup-Projekts und erstellen Sie ein Verzeichnis namens <code translate="no">configs</code>:</p>
-<pre><code translate="no" class="language-shell">mkdir configs
-cd configs
+    </button></h3><p>Wechseln Sie in das Verzeichnis des milvus-backup-Projekts und erstellen Sie ein Verzeichnis
+mit dem Namen „ <code translate="no">configs</code> “:</p>
+<pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>Laden Sie die Backup-Konfigurationsdatei backup.yaml herunter:</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
+<p>Laden Sie die Backup-Konfigurationsdatei „backup.yaml“ herunter:</p>
+<pre><code translate="no" class="language-shell">wget -O configs/backup.yaml https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Die Dateistruktur sieht wie folgt aus:</p>
 <pre><code translate="no">├── configs
@@ -123,7 +136,9 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ändern Sie die Datei backup.yaml, um die entsprechenden Konfigurationen für<code translate="no">milvus_A</code> festzulegen. Nachfolgend finden Sie ein Beispiel für die Speicherkonfiguration:</p>
+    </button></h3><p>Das folgende YAML zeigt die Felder, die in der heruntergeladenen v1-Datei bearbeitet werden müssen. Behalten Sie die anderen erforderlichen Einstellungen bei. Verweisen Sie „ <code translate="no">milvus.address</code> “ und „ <code translate="no">milvus.port</code> “ auf die Instanz, die gesichert oder wiederhergestellt werden soll. Setzen Sie „ <code translate="no">minio.backupAddress</code> “, „ <code translate="no">minio.backupPort</code> “ und „ <code translate="no">minio.backupStorageType</code> “ auf das Sicherungsziel und „ <code translate="no">backup.gcPause.address</code> “ auf den Milvus-Verwaltungsendpunkt der Quelle (standardmäßig Port 9091). Ersetzen Sie alle Beispieladressen, Bucket-Namen, Pfade und Anmeldedaten durch Ihre eigenen Bereitstellungseinstellungen.</p>
+<p>Passen Sie die Datei „backup.yaml“ an, um die entsprechenden Konfigurationen für
+<code translate="no">milvus_A</code> festzulegen. Nachfolgend finden Sie ein Beispiel für die Speicherkonfiguration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
 <span class="hljs-attr">minio:</span>
   <span class="hljs-comment"># cloudProvider: &quot;minio&quot; # deprecated use storageType instead</span>
@@ -140,14 +155,14 @@ cd configs
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
-  <span class="hljs-comment"># only for azure</span>
+  <span class="hljs-comment"># Backup storage credentials</span>
   <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
   <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
   <span class="hljs-attr">backupBucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Bucket name to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Create-backup" class="common-anchor-header">Schritt 3: Backup erstellen<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
+<h3 id="Step-3-Create-backup" class="common-anchor-header">Schritt 3: Sicherung erstellen<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,11 +177,12 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sobald backup.yaml gespeichert ist, erstellen Sie ein Backup mit dem Namen <code translate="no">my_backup</code>:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
+    </button></h3><p>Sobald „backup.yaml“ gespeichert ist, erstellen Sie ein Backup mit dem Namen „ <code translate="no">my_backup</code> “:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit diesem Befehl wird die Sicherung <code translate="no">bucket_A/backup/my_backup</code> im Objektspeicher von <code translate="no">milvus_A</code> erstellt.</p>
-<h2 id="Restore-from-the-backup-within-milvusA" class="common-anchor-header">Wiederherstellung aus dem Backup in milvus_A<button data-href="#Restore-from-the-backup-within-milvusA" class="anchor-icon" translate="no">
+<p>Dieser Befehl erstellt das Backup „ <code translate="no">bucket_A/backup/my_backup</code> “ im Objektspeicher
+von <code translate="no">milvus_A</code>.</p>
+<h2 id="Restore-from-the-backup-within-milvusA" class="common-anchor-header">Wiederherstellung aus dem Backup innerhalb von milvus_A<button data-href="#Restore-from-the-backup-within-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +197,11 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald das Backup erstellt ist, können Sie es mit dem folgenden Befehl wiederherstellen:</p>
-<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
+    </button></h2><p>Sobald das Backup erstellt ist, können Sie es mit dem folgenden Befehl
+wiederherstellen:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit diesem Befehl wird aus dem Backup wiederhergestellt und eine neue Sammlung mit dem Namen coll_bak in <code translate="no">milvus_A</code> erstellt, deren Daten in <code translate="no">bucket_A/files/insert_log/[ID of new collection]</code> gespeichert sind.</p>
+<p>Dieser Befehl stellt die Daten aus dem Backup wieder her und erstellt eine neue Sammlung mit dem Namen
+„coll_bak“ in „ <code translate="no">milvus_A</code> “, wobei der für die Instanz konfigurierte Speicher-Stammordner „ <code translate="no">bucket_A/files</code> “ verwendet wird.</p>
+<p>In Backup 0.5.16 wählt die veraltete Option „ <code translate="no">-c</code> “ den Sammlungsnamen im Backup aus, bevor „ <code translate="no">_bak</code> “ angewendet wird. Der Ersatz „ <code translate="no">--filter</code> “ in Version 0.6.0 verwendet stattdessen den Zielnamen; siehe <a href="/docs/de/milvus_backup_upgrade.md#Update-CLI-commands">„CLI-Befehle aktualisieren</a>“.</p>
+<p>Vergewissern Sie sich nach der Wiederherstellung, dass „ <code translate="no">coll_bak</code> “ vorhanden ist, erstellen Sie bei Bedarf einen entsprechenden Vektorindex und vergleichen Sie dessen Entitätsanzahl, repräsentative Werte und Suchergebnisse mit einer vor der Sicherung erfassten Baseline. Ein erfolgreicher Befehl allein reicht nicht aus, um die Daten zu überprüfen.</p>

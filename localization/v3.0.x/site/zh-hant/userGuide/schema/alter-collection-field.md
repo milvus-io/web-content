@@ -25,6 +25,9 @@ summary: 您可以變更集合欄位的屬性，以修改欄位限制或實施�
 <li><p>每個集合僅包含一個主欄位。主欄位在建立集合時設定後，便無法變更或修改其屬性。</p></li>
 <li><p>每個集合僅能擁有一個分區鍵。一旦在建立集合時設定，便無法變更該分區鍵。</p></li>
 </ul>
+<ul>
+<li>自 Milvus 3.0.6 起，對於<a href="/docs/zh-hant/array-of-structs.md">StructArray</a>欄位或其子欄位路徑（例如<code translate="no">chunks[text]</code> ），您僅能修改<code translate="no">mmap.enabled</code> 、<code translate="no">field.description</code> 及<code translate="no">warmup</code> 。其他屬性（例如<code translate="no">max_capacity</code> 和<code translate="no">max_length</code> ）將被拒絕。 父級欄位及其子欄位會共同儲存，當其中任何一個啟用<code translate="no">mmap.enabled</code> 和<code translate="no">warmup</code> 時，這些設定便會對共享儲存空間生效：若僅在某個子欄位上停用其中一項屬性，而父級欄位或同級子欄位仍保持啟用狀態，則該停用設定將不生效。 此外，將<code translate="no">warmup</code> 設定為<code translate="no">disable</code> 並不會跳過所有讀取操作：查詢執行所需的数据（例如元素偏移量）仍會被讀取。</li>
+</ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">變更 VarChar 欄位<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +44,7 @@ summary: 您可以變更集合欄位的屬性，以修改欄位限制或實施�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VarChar 欄位具有一個名為 `<code translate="no">max_length</code>` 的屬性，用以定義每個欄位值允許的最大位元組數。您可以變更 `<code translate="no">max_length</code> ` 屬性。</p>
+    </button></h2><p>VarChar 欄位具有一個名為<code translate="no">max_length</code> 的屬性，用以定義每個欄位值允許的最大位元組數。您可以變更<code translate="no">max_length</code> 屬性。</p>
 <p>以下範例假設該集合有一個名為<code translate="no">varchar</code> 的 VarChar 欄位，並設定其<code translate="no">max_length</code> 屬性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

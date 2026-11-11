@@ -232,17 +232,21 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>El valor del campo es una lista de objetos, uno por cada elemento de Struct, con claves que corresponden a los nombres de los subcampos: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>La celda contiene el mismo texto JSON que el formato JSON.</td></tr>
-<tr><td>Parquet</td><td>Una columna por cada campo de StructArray con el tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un elemento secundario de Struct por cada subcampo. Un subcampo escalar es un elemento secundario escalar, y un subcampo vectorial es una lista del tipo de sus elementos, como <code translate="no">list&lt;float32&gt;</code>.</td></tr>
+<tr><td>CSV</td><td>La celda contiene el mismo texto JSON que el formato JSON. El <code translate="no">nullkey</code> configurado para el trabajo de importación o un JSON <code translate="no">null</code> marca un valor nulo de StructArray.</td></tr>
+<tr><td>Parquet</td><td>Una columna por cada campo de StructArray con el tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un elemento secundario struct por cada subcampo. Un subcampo escalar es un elemento secundario escalar, un subcampo vectorial es una lista del tipo de sus elementos, como <code translate="no">list&lt;float32&gt;</code>, y un subcampo de matriz (Milvus 3.0.6 y posteriores) es un elemento secundario de tipo <code translate="no">list&lt;T&gt;</code>.</td></tr>
 <tr><td>NumPy</td><td>No es compatible. Los archivos NumPy contienen un archivo por cada campo de nivel superior y no admiten la representación de un campo StructArray. Utiliza archivos JSON, CSV o Parquet para las colecciones que tengan un campo StructArray.</td></tr>
 </tbody>
 </table>
 <p>Las siguientes reglas se aplican a los valores de StructArray en todos los formatos compatibles:</p>
 <ul>
 <li><p>Utilice nombres de subcampos dentro de cada elemento Struct, no rutas como <code translate="no">chunks[text]</code>. Se rechazan las columnas planas o las claves denominadas <code translate="no">chunks[text]</code>.</p></li>
-<li><p>Cada elemento Struct debe proporcionar todos los subcampos del esquema Struct, y un elemento Struct en sí mismo no puede ser nulo, como <code translate="no">[null, {...}]</code>. Un valor StructArray completo solo puede ser nulo cuando el campo StructArray sea nulo.</p></li>
+<li><p>Un elemento Struct en sí mismo no puede ser nulo, como por ejemplo <code translate="no">[null, {...}]</code>. Un valor StructArray completo solo puede ser nulo cuando el campo StructArray sea nulo. Antes de Milvus 3.0.6, cada elemento Struct debía proporcionar todos los subcampos.</p></li>
+<li><p>Se ignoran las claves o los elementos secundarios de Parquet que no sean subcampos de la colección, incluidos los subcampos omitidos.</p></li>
+<li><p>A partir de Milvus 3.0.6, una clave que falte o un valor ` <code translate="no">null</code> ` para un subcampo en el que el elemento pueda ser nulo se importa como un valor nulo para ese elemento `Struct`, por lo que los archivos escritos antes de que se añadiera un subcampo se importan sin él. Un « <code translate="no">null</code> » en cualquier otro lugar provoca el fallo de la importación. Para un subcampo de tipo matriz, « <code translate="no">null</code> » es una matriz interna nula, y « <code translate="no">null</code> » dentro de la matriz interna es un valor interno nulo cuando el subcampo lo permite.</p></li>
+<li><p>A partir de Milvus 3.0.6, se rechazan las importaciones de binlog —como la restauración de copias de seguridad— y las importaciones desde fuentes de instantáneas para colecciones que tengan subcampos con elementos nulos o subcampos de matrices escalares.</p></li>
 </ul>
-<p>Para conocer los límites del esquema, consulta <a href="/docs/es/structarray-limits.md#Import-limits">«Límites de StructArray</a>».</p>
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> admite las estructuras de StructArray anteriores en todos los formatos compatibles, incluidos los subcampos con elementos nulos y los valores de StructArray nulos. Utiliza las mismas estructuras de fila en las llamadas ` <code translate="no">add_row()</code> ` del escritor.</p>
+<p>Para conocer los límites del esquema, consulta <a href="/docs/es/structarray-limits.md#Import-and-storage-limits">«Límites de StructArray</a>».</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Configuración de BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

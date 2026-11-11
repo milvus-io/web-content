@@ -2,9 +2,9 @@
 id: best-practices-for-array-of-structs.md
 title: Data Model Design with an Array of StructsCompatible with Milvus 2.6.4+
 summary: >-
-  현대적인 AI 애플리케이션, 특히 사물인터넷(IoT) 및 자율주행 분야의 애플리케이션은 일반적으로 타임스탬프와 벡터 임베딩이 포함된 센서
-  측정값, 오류 코드와 오디오 클립이 포함된 진단 로그, 위치, 속도 및 장면 컨텍스트가 포함된 주행 구간 등 풍부하고 구조화된 이벤트를
-  기반으로 추론을 수행합니다. 이를 위해서는 데이터베이스가 중첩된 데이터의 수집 및 검색을 기본적으로 지원해야 합니다.
+  현대적인 AI 애플리케이션, 특히 사물인터넷(IoT) 및 자율주행 분야에서는 일반적으로 타임스탬프와 벡터 임베딩이 포함된 센서 측정값, 오류
+  코드와 오디오 클립이 포함된 진단 로그, 위치, 속도 및 장면 컨텍스트가 포함된 주행 구간 등 풍부하고 구조화된 이벤트를 기반으로 추론을
+  수행합니다. 이를 위해서는 데이터베이스가 중첩된 데이터의 수집 및 검색을 기본적으로 지원해야 합니다.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Data Model Design with an Array of Structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">
@@ -194,7 +194,7 @@ beta: Milvus 2.6.4+
 ├── video_n
 <button class="copy-code-btn"></button></code></pre>
 <p>You can find that the structure of the CoVLA dataset is highly hierarchical, dividing the collected data into multiple <code translate="no">.jsonl</code> files, along with the video clips in the <code translate="no">.mp4</code> format.</p>
-<p>In Milvus, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested structures. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the Milvus collection schema.</p>
+<p>In Milvus, you can use either a JSON field or an Array-of-Structs field to create nested structures within a collection schema. When vector embeddings are part of the nested format, only an Array-of-Structs field is supported. However, a Struct inside an Array cannot itself contain further nested Structs; starting in Milvus 3.0.6, it can contain scalar array subfields with one nesting level. To store the CoVLA dataset while retaining essential relationships, you need to remove unnecessary hierarchy and flatten the data so it fits the Milvus collection schema.</p>
 <p>The diagram below illustrates how we can model this dataset using the schema illustrated in the following schema:</p>
 <p>
   <span class="img-wrapper">

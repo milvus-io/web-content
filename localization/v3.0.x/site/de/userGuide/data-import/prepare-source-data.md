@@ -232,18 +232,22 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>Der Feldwert ist eine Liste von Objekten, eines pro Struct-Element, indiziert nach dem Namen des Unterfelds: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>Die Zelle enthält denselben JSON-Text wie das JSON-Format.</td></tr>
-<tr><td>Parquet</td><td>Eine Spalte pro StructArray-Feld vom Typ „ <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> “, ein Struct-Unterelement pro Unterfeld. Ein skalares Unterfeld ist ein skalares Unterelement, und ein vektorales Unterfeld ist eine Liste des jeweiligen Elementtyps, z. B. „ <code translate="no">list&lt;float32&gt;</code> “.</td></tr>
-<tr><td>NumPy</td><td>Nicht unterstützt. NumPy-Dateien enthalten eine Datei pro Feld der obersten Ebene und bieten keine Darstellung für ein StructArray-Feld. Verwenden Sie JSON-, CSV- oder Parquet-Dateien für Sammlungen, die ein StructArray-Feld enthalten.</td></tr>
+<tr><td>CSV</td><td>Die Zelle enthält denselben JSON-Text wie das JSON-Format. Der für den Importauftrag konfigurierte „ <code translate="no">nullkey</code> “ oder ein JSON- <code translate="no">null</code> markiert einen null-Wert des StructArray.</td></tr>
+<tr><td>Parquet</td><td>Eine Spalte pro StructArray-Feld vom Typ „ <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> “, ein „struct“-Unterelement pro Unterfeld. Ein skalares Unterfeld ist ein skalares Unterelement, ein vektorales Unterfeld ist eine Liste seines Elementtyps, z. B. „ <code translate="no">list&lt;float32&gt;</code> “, und ein Array-Unterfeld (Milvus 3.0.6 und höher) ist ein „ <code translate="no">list&lt;T&gt;</code> “-Unterelement.</td></tr>
+<tr><td>NumPy</td><td>Nicht unterstützt. NumPy-Dateien enthalten eine Datei pro Feld der obersten Ebene und bieten keine Darstellung für ein „StructArray“-Feld. Verwenden Sie JSON-, CSV- oder Parquet-Dateien für Sammlungen, die ein „StructArray“-Feld enthalten.</td></tr>
 </tbody>
 </table>
 <p>Für StructArray-Werte gelten in allen unterstützten Formaten die folgenden Regeln:</p>
 <ul>
-<li><p>Verwenden Sie innerhalb jedes Struct-Elements Unterfeldnamen und keine Pfade wie <code translate="no">chunks[text]</code>. Flache Spalten oder Schlüssel mit dem Namen <code translate="no">chunks[text]</code> werden abgelehnt.</p></li>
-<li><p>Jedes „Struct“-Element muss jedes Unterfeld des „Struct“-Schemas enthalten, und ein „Struct“-Element selbst darf nicht null sein, wie z. B. „ <code translate="no">[null, {...}]</code> “. Ein gesamter „StructArray“-Wert darf nur dann null sein, wenn das „StructArray“-Feld nullfähig ist.</p></li>
+<li><p>Verwenden Sie innerhalb jedes Struct-Elements Unterfeldnamen und keine Pfade wie „ <code translate="no">chunks[text]</code> “. Flache Spalten oder Schlüssel mit dem Namen „ <code translate="no">chunks[text]</code> “ werden abgelehnt.</p></li>
+<li><p>Ein „Struct“-Element selbst darf nicht null sein, wie z. B. „ <code translate="no">[null, {...}]</code> “. Ein gesamter „StructArray“-Wert darf nur dann null sein, wenn das „StructArray“-Feld nullfähig ist. Vor Milvus 3.0.6 musste jedes „Struct“-Element jedes Unterfeld bereitstellen.</p></li>
+<li><p>Schlüssel oder Parquet-Unterelemente, die keine Unterfelder der Sammlung sind – einschließlich entfernter Unterfelder –, werden ignoriert.</p></li>
+<li><p>Ab Milvus 3.0.6 wird ein fehlender Schlüssel oder ein Wert vom Typ „ <code translate="no">null</code> “ für ein element-nullfähiges Unterfeld als Nullwert für dieses Struct-Element importiert, sodass Dateien, die vor dem Hinzufügen eines Unterfelds geschrieben wurden, ohne dieses importiert werden. Ein „ <code translate="no">null</code> “ an einer anderen Stelle führt zum Fehlschlagen des Imports. Bei einem Array-Unterfeld ist „ <code translate="no">null</code> “ ein inneres Null-Array, und „ <code translate="no">null</code> “ innerhalb des inneren Arrays ist ein innerer Null-Wert, sofern das Unterfeld dies zulässt.</p></li>
+<li><p>Ab Milvus 3.0.6 werden der Binlog-Import (z. B. bei der Wiederherstellung eines Backups) und der Import aus einer Snapshot-Quelle für Sammlungen abgelehnt, die Unterfelder mit nullfähigen Elementen oder skalare Array-Unterfelder enthalten.</p></li>
 </ul>
-<p>Informationen zu den schemaseitigen Beschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md#Import-limits">„StructArray-Beschränkungen</a>“.</p>
-<h2 id="Set-up-BulkWriter" class="common-anchor-header">BulkWriter einrichten<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> unterstützt die oben genannten StructArray-Formate in jedem unterstützten Format, einschließlich Unterfeldern mit nullfähigen Elementen und nullfähigen StructArray-Werten. Verwenden Sie dieselben Zeilenformate in den „ <code translate="no">add_row()</code> “-Aufrufen des Writers.</p>
+<p>Informationen zu den schemaseitigen Beschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md#Import-and-storage-limits">„StructArray-Beschränkungen</a>“.</p>
+<h2 id="Set-up-BulkWriter" class="common-anchor-header">Einrichten von BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -311,7 +315,7 @@ writer = LocalBulkWriter(
 <div class="language-python">
 <p>Beim Erstellen eines <strong>LocalBulkWriter</strong> sollten Sie:</p>
 <ul>
-<li>Verweisen Sie in ` <code translate="no">schema</code>` auf das erstellte Schema.</li>
+<li>Verweisen Sie auf das erstellte Schema in „ <code translate="no">schema</code> “.</li>
 <li>Legen Sie „ <code translate="no">local_path</code> “ als Ausgabeverzeichnis fest.</li>
 <li><code translate="no">file_type</code> auf den Dateityp der Ausgabedatei setzen.</li>
 <li>Wenn Ihr Datensatz eine große Anzahl von Datensätzen enthält, wird empfohlen, Ihre Daten zu segmentieren, indem Sie „ <code translate="no">segment_size</code> “ auf einen geeigneten Wert setzen.</li>
@@ -323,7 +327,7 @@ writer = LocalBulkWriter(
 <ul>
 <li>Verweisen Sie in „ <code translate="no">CollectionSchema()</code> “ auf das erstellte Schema.</li>
 <li>Legen Sie das Ausgabeverzeichnis in „ <code translate="no">withLocalPath()</code> “ fest.</li>
-<li>Legen Sie den Ausgabedateityp in ` <code translate="no">withFileType()</code>` fest.</li>
+<li>Legen Sie den Ausgabedateityp in „ <code translate="no">withFileType()</code> “ fest.</li>
 <li>Wenn Ihr Datensatz eine große Anzahl von Datensätzen enthält, wird empfohlen, Ihre Daten zu segmentieren, indem Sie „ <code translate="no">withChunkSize()</code> “ auf einen geeigneten Wert setzen.</li>
 </ul>
 <p>Einzelheiten zu den Parametereinstellungen finden Sie unter „LocalBulkWriter“ in der SDK-Referenz.</p>

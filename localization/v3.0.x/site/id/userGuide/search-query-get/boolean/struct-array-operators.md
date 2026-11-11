@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Predikat jalur tingkat baris</td><td>Uji posisi satu elemen, hitung jumlah elemen Struct, atau uji nilai subbidang di seluruh elemen tanpa predikat " <code translate="no">$[...]</code> ".</td><td>Penyaringan tingkat baris. Predikat-predikat ini tidak mengembalikan offset elemen.</td></tr>
 </tbody>
 </table>
-<p>Gunakan subbidang skalar dalam operator StructArray. Subbidang vektor digunakan oleh jalur pencarian vektor dan bukan masukan predikat skalar.</p>
+<p>Gunakan subbidang skalar, dan subbidang array di Milvus 3.0.6 dan yang lebih baru, dalam operator StructArray. Subbidang vektor digunakan oleh jalur pencarian vektor dan bukan merupakan input predikat skalar.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">Kapan menggunakan operator mana<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ summary: >-
 <tr><th>Tujuan</th><th>Gunakan</th></tr>
 </thead>
 <tbody>
-<tr><td>Batasi pencarian vektor tingkat elemen ke elemen yang memenuhi kondisi skalar.</td><td><code translate="no">element_filter</code></td></tr>
+<tr><td>Batasi pencarian vektor tingkat elemen hanya pada elemen yang memenuhi kondisi skalar.</td><td><code translate="no">element_filter</code></td></tr>
 <tr><td>Mencocokkan beberapa kondisi skalar dalam elemen Struct yang sama.</td><td><code translate="no">element_filter</code></td></tr>
 <tr><td>Hanya mengembalikan entitas di mana setidaknya satu elemen Struct memenuhi suatu predikat.</td><td><code translate="no">MATCH_ANY</code></td></tr>
 <tr><td>Hanya mengembalikan entitas di mana semua elemen Struct memenuhi suatu predikat.</td><td><code translate="no">MATCH_ALL</code></td></tr>
@@ -266,7 +266,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_MOST</code> akan menghasilkan nilai <code translate="no">true</code> jika jumlah elemen yang memenuhi predikat tersebut kurang dari atau sama dengan <code translate="no">threshold</code>.</p>
+    </button></h3><p><code translate="no">MATCH_MOST</code> akan menghasilkan nilai <code translate="no">true</code> jika jumlah elemen yang memenuhi predikat kurang dari atau sama dengan <code translate="no">threshold</code>.</p>
 <pre><code translate="no" class="language-text">MATCH_MOST(chunks, $[has_code] == true, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
 <p>Tidak ada entitas yang cocok: Entitas A memiliki empat elemen yang memenuhi syarat, sedangkan Entitas B memiliki tiga.</p>
@@ -306,7 +306,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Selain ` <code translate="no">element_filter</code> ` dan ` <code translate="no">MATCH_*</code>`, ekspresi filter biasa dapat merujuk langsung ke bidang StructArray atau salah satu subbidang skalarnya. Predikat ini dievaluasi pada tingkat entitas dan tidak mengembalikan offset elemen.</p>
+    </button></h2><p>Selain ` <code translate="no">element_filter</code> ` dan ` <code translate="no">MATCH_*</code>`, ekspresi filter biasa dapat merujuk langsung ke bidang StructArray atau salah satu subbidang skalernya. Predikat ini dievaluasi pada tingkat entitas dan tidak mengembalikan offset elemen.</p>
 <h3 id="Subfield-access" class="common-anchor-header">Akses subbidang<button data-href="#Subfield-access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -356,7 +356,18 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">Menghitung elemen Struct</h4><p>Gunakan <code translate="no">array_length(structArrayField)</code> untuk menyaring berdasarkan jumlah elemen Struct dalam suatu entitas. <code translate="no">array_length</code> pada jalur subbidang, seperti <code translate="no">array_length(chunks[section])</code>, mengembalikan jumlah yang sama, karena setiap subbidang menyimpan satu nilai per elemen Struct.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Mengakses subbidang array berdasarkan posisi<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>Mulai dari Milvus 3.0.6, jalur posisi juga dapat merujuk ke subbidang skalar <code translate="no">ARRAY</code>. <code translate="no">chunks[0][tags]</code> adalah array dalam dari elemen Struct pertama. Ia mendukung <code translate="no">==</code> dan <code translate="no">!=</code> dengan literal array, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code>, dan <code translate="no">array_length</code>. Operator perbandingan, <code translate="no">in</code>, <code translate="no">like</code>, dan operasi aritmatika pada jalur tersebut ditolak.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>, <code translate="no">==</code>, dan <code translate="no">!=</code> pada jalur subbidang array secara keseluruhan, seperti <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code>, ditolak karena jalur tersebut menampung satu array dalam per elemen Struct. Gunakan <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code> sebagai gantinya.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">Hitung elemen Struct</h4><p>Gunakan <code translate="no">array_length(structArrayField)</code> untuk menyaring berdasarkan jumlah elemen Struct dalam suatu entitas. <code translate="no">array_length</code> pada jalur subfield, seperti <code translate="no">array_length(chunks[section])</code>, mengembalikan jumlah yang sama, karena setiap subfield berisi satu nilai per elemen Struct.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
@@ -428,14 +439,49 @@ chunks is not null
 <tr><th>Tipe subbidang</th><th>Dukungan predikat tingkat elemen</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code></td><td>Predikat skalar seperti ` <code translate="no">$[has_code] == true</code> ` atau ` <code translate="no">!($[has_code] == true)</code>`. Hindari ekspresi boolean tanpa penekanan seperti ` <code translate="no">$[has_code]</code>`.</td></tr>
+<tr><td><code translate="no">BOOL</code></td><td>Predikat skalar seperti ` <code translate="no">$[has_code] == true</code> ` atau ` <code translate="no">!($[has_code] == true)</code>`. Hindari ekspresi boolean tanpa penanda seperti ` <code translate="no">$[has_code]</code>`.</td></tr>
 <tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>Perbandingan, rentang berantai, <code translate="no">in</code>, <code translate="no">not in</code>, ekspresi aritmatika dengan <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, atau <code translate="no">%</code> yang diikuti oleh perbandingan, serta kombinasi logika.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Perbandingan, rentang berantai, <code translate="no">in</code>, <code translate="no">not in</code>, ekspresi aritmatika dengan <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, atau <code translate="no">/</code> yang diikuti oleh perbandingan, serta kombinasi logika. Operator <code translate="no">%</code> tidak didukung untuk subbidang bilangan floating-point.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>Perbandingan string, rentang berantai, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code>, dan kombinasi logis.</td></tr>
-<tr><td>Subbidang vektor</td><td>Tidak didukung sebagai masukan predikat skalar <code translate="no">$[...]</code>. Gunakan subbidang vektor melalui pencarian EmbeddingList atau pencarian vektor tingkat elemen sebagai gantinya.</td></tr>
+<tr><td>Subbidang skalar <code translate="no">ARRAY</code> (Milvus 3.0.6 dan yang lebih baru)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code>, dan <code translate="no">array_length</code> pada <code translate="no">$[tags]</code>, ditambah <code translate="no">$[tags] is null</code> dan <code translate="no">$[tags] is not null</code>. Operator perbandingan, <code translate="no">in</code>, dan <code translate="no">like</code> pada <code translate="no">$[tags]</code> ditolak.</td></tr>
+<tr><td>Setiap subbidang elemen yang dapat bernilai null (Milvus 3.0.6 dan seterusnya)</td><td><code translate="no">$[subfield] is null</code> dan <code translate="no">$[subfield] is not null</code> menguji apakah nilai dalam elemen Struct saat ini bernilai null. Pada subfield yang tidak dapat menyimpan nilai null, <code translate="no">is null</code> selalu bernilai false.</td></tr>
+<tr><td>Subbidang vektor</td><td>Tidak didukung sebagai masukan predikat skalar ` <code translate="no">$[...]</code> `, kecuali ` <code translate="no">$[emb] is null</code> ` dan ` <code translate="no">$[emb] is not null</code> ` pada subbidang vektor yang elemennya dapat bernilai null di Milvus 3.0.6 dan versi selanjutnya. Gunakan subbidang vektor melalui pencarian EmbeddingList atau pencarian vektor tingkat elemen sebagai gantinya.</td></tr>
 </tbody>
 </table>
 <p>Operator logika seperti <code translate="no">&amp;&amp;</code>, <code translate="no">||</code>, dan <code translate="no">!</code> berlaku untuk ekspresi predikat. Misalnya, tulislah <code translate="no">!($[has_code] == true)</code> alih-alih <code translate="no">!$[has_code]</code>.</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">Nilai null dalam predikat tingkat elemen<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Mulai dari Milvus 3.0.6, subbidang yang dapat bernilai null pada elemen dapat menyimpan nilai null dalam elemen Struct. Nilai null mengikuti logika tiga nilai dalam predikat StructArray:</p>
+<ul>
+<li><p>Sebuah perbandingan, <code translate="no">in</code>, <code translate="no">like</code>, atau predikat aritmatika pada nilai subbidang null akan menghasilkan "tidak diketahui" alih-alih "salah". <code translate="no">&amp;&amp;</code>, <code translate="no">\|\|</code>, dan <code translate="no">!</code> meneruskan hasil "tidak diketahui", sehingga <code translate="no">!($[lang] == &quot;en&quot;)</code> tetap "tidak diketahui" ketika <code translate="no">$[lang]</code> bernilai null.</p></li>
+<li><p><code translate="no">element_filter</code> hanya menyimpan elemen Struct yang predikatnya benar. Elemen yang tidak diketahui tidak dicocokkan.</p></li>
+<li><p><code translate="no">MATCH_*</code> menghitung elemen yang tidak diketahui sebagai miss. <code translate="no">MATCH_ALL</code> bernilai false jika ada elemen yang tidak diketahui, sedangkan StructArray yang kosong masih memenuhi <code translate="no">MATCH_ALL</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> dan ` <code translate="no">$[subfield] is not null</code> ` selalu bernilai benar atau salah. Keduanya membaca validitas elemen saat ini, sehingga ` <code translate="no">$[lang] is null</code> ` mencocokkan secara tepat elemen-elemen yang nilai ` <code translate="no">lang</code> `-nya null.</p></li>
+<li><p>Pada subbidang array, <code translate="no">array_contains*</code> pada <code translate="no">$[tags]</code> melewati nilai dalam yang null dan tidak pernah cocok dengan array dalam yang null, <code translate="no">array_length($[tags])</code> menghitung nilai dalam yang null, dan <code translate="no">$[tags] is null</code> hanya bernilai benar untuk array dalam yang null.</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>Jalur posisi tingkat baris mengikuti aturan yang sama: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> tidak diketahui jika nilai <code translate="no">lang</code> elemen pertama adalah null, jika entitas tidak memiliki elemen pada posisi tersebut, atau jika bidang StructArray bernilai null, sehingga entitas tidak cocok.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Predikat yang tidak didukung<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -453,11 +499,14 @@ chunks is not null
       </svg>
     </button></h2><p>Predikat <code translate="no">$[...]</code> tingkat elemen tidak mendukung:</p>
 <ul>
-<li><p>Fungsi pencocokan teks, seperti <code translate="no">text_match(field, &quot;...&quot;)</code> atau <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
-<li><p>Sintaks JSON path, <code translate="no">exists</code> pada JSON path, atau fungsi JSON seperti <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code>, atau <code translate="no">json_contains_any</code>.</p></li>
-<li><p>Fungsi wadah array seperti <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code>, atau <code translate="no">array_length</code> di <code translate="no">$[subfield]</code>. Gunakan fungsi-fungsi ini pada jalur subbidang seperti <code translate="no">chunks[section]</code> dalam predikat tingkat baris sebagai gantinya.</p></li>
-<li><p><code translate="no">$[subfield] is null</code> atau <code translate="no">$[subfield] is not null</code>.</p></li>
-<li><p>Fungsi geometri/GIS.</p></li>
+<li><p>Fungsi pencocokan teks, seperti ` <code translate="no">text_match(field, &quot;...&quot;)</code> ` atau ` <code translate="no">phrase_match(field, &quot;...&quot;)</code>`.</p></li>
+<li><p>Sintaks JSON path, fungsi ` <code translate="no">exists</code> ` pada JSON path, atau fungsi JSON seperti ` <code translate="no">json_contains</code>`, ` <code translate="no">json_contains_all</code>`, atau ` <code translate="no">json_contains_any</code>`.</p></li>
+<li><p>Fungsi wadah array seperti <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code>, atau <code translate="no">array_length</code> pada <code translate="no">$[subfield]</code> dari subbidang skalar. Gunakan fungsi-fungsi ini pada jalur subbidang seperti <code translate="no">chunks[section]</code> dalam predikat tingkat baris sebagai gantinya. Mulai dari Milvus 3.0.6, fungsi-fungsi ini didukung pada <code translate="no">$[tags]</code> untuk subbidang skalar <code translate="no">ARRAY</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> atau <code translate="no">$[subfield] is not null</code> sebelum Milvus 3.0.6.</p></li>
+</ul>
+<ul>
+<li><p>Subskrip ke dalam subbidang array, seperti <code translate="no">$[tags][0]</code>, dan <code translate="no">like</code> pada <code translate="no">$[tags]</code>.</p></li>
+<li><p>Fungsi geometri / GIS.</p></li>
 <li><p>Ekspresi timestamptz.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
 <li><p>Predikat vektor tingkat bidang.</p></li>
@@ -485,9 +534,14 @@ chunks is not null
 <li><p>Jangan gunakan ` <code translate="no">$[subfield]</code> ` sebagai jalur JSON, wadah array, atau referensi bidang vektor.</p></li>
 <li><p>Jangan menyematkan <code translate="no">element_filter</code> atau <code translate="no">MATCH_*</code> di dalam operator StructArray lainnya.</p></li>
 <li><p>Gunakan <code translate="no">threshold=N</code> yang diberi nama untuk <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code>, dan <code translate="no">MATCH_EXACT</code>.</p></li>
-<li><p>Dalam jalur posisional, tuliskan posisi elemen sebelum nama subbidang: ` <code translate="no">chunks[0][section]</code>`, bukan ` <code translate="no">chunks[section][0]</code>`.</p></li>
-<li><p>Gunakan <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> hanya pada bidang StructArray secara keseluruhan, seperti <code translate="no">chunks is null</code>. Jangan gunakan keduanya pada jalur subbidang seperti <code translate="no">chunks[section]</code> atau pada <code translate="no">$[subfield]</code>.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> pada StructArray kosong akan mengembalikan <code translate="no">false</code>.</p></li>
+<li><p>Dalam jalur posisional, tuliskan posisi elemen sebelum nama subbidang: <code translate="no">chunks[0][section]</code>, bukan <code translate="no">chunks[section][0]</code>.</p></li>
+</ul>
+<ul>
+<li>Gunakan <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> hanya pada bidang StructArray secara keseluruhan, seperti <code translate="no">chunks is null</code>, atau, mulai dari Milvus 3.0.6, pada <code translate="no">$[subfield]</code> di dalam <code translate="no">element_filter</code> atau <code translate="no">MATCH_*</code>. Jangan gunakan keduanya pada jalur subbidang seperti <code translate="no">chunks[section]</code>.</li>
+</ul>
+<ul>
+<li><p>Jangan menggunakan indeks pada subbidang array. <code translate="no">$[tags][0]</code> dan <code translate="no">chunks[0][tags][0]</code> tidak didukung.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> pada StructArray yang kosong akan mengembalikan <code translate="no">false</code>.</p></li>
 <li><p><code translate="no">MATCH_ALL</code> pada StructArray kosong akan mengembalikan <code translate="no">true</code>.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">Lihat juga<button data-href="#See-also" class="anchor-icon" translate="no">

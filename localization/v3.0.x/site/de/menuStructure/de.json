@@ -729,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
+                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -826,7 +826,7 @@
             "children": []
           },
           {
-            "label": "Gleitkomma-Vektorindizes",
+            "label": "Gleitkommavektorindizes",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -1215,7 +1215,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie eine Suchstrategie für „EmbeddingList“ aus",
+                "label": "Wählen Sie eine Suchstrategie für die „EmbeddingList“ aus",
                 "id": "choose-an-embeddinglist-search-strategy.md",
                 "order": 6,
                 "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Befehle",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful-API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP-API",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Häufige Fälle",
-            "id": "common-cases",
+            "label": "Snapshot-Sicherung und -Wiederherstellung",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Sicherung und Wiederherstellung in einer Instanz",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Befehle",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migration zwischen Instanzen innerhalb eines Buckets",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP-API",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migration zwischen Instanzen über verschiedene Buckets hinweg",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Häufige Fälle",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Sicherung und Wiederherstellung in einer Instanz",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration zwischen Instanzen innerhalb eines Buckets",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration zwischen Instanzen über verschiedene Buckets hinweg",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Auf 0.6.x aktualisieren",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2783,7 +2815,7 @@
         ]
       },
       {
-        "label": "Auswertung und Beobachtbarkeit",
+        "label": "Bewertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [

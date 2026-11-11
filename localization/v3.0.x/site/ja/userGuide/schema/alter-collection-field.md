@@ -25,6 +25,9 @@ summary: コレクションフィールドのプロパティを変更するこ�
 <li><p>各コレクションは、1つのプライマリフィールドのみで構成されます。コレクションの作成時に一度設定されたプライマリフィールドは、変更したりそのプロパティを変更したりすることはできません。</p></li>
 <li><p>各コレクションには、パーティションキーを1つしか持つことができません。コレクションの作成時に一度設定されると、パーティションキーを変更することはできません。</p></li>
 </ul>
+<ul>
+<li>Milvus 3.0.6 以降、<a href="/docs/ja/array-of-structs.md">StructArray</a>フィールドまたはそのサブフィールドパス（<code translate="no">chunks[text]</code> など）については、<code translate="no">mmap.enabled</code> 、<code translate="no">field.description</code> 、および<code translate="no">warmup</code> のみを変更できます。<code translate="no">max_capacity</code> や<code translate="no">max_length</code> などのその他のプロパティは拒否されます。 親フィールドとそのサブフィールドはまとめて格納されており、<code translate="no">mmap.enabled</code> および<code translate="no">warmup</code> は、いずれかで有効にされると共有ストレージに対して適用されます。つまり、親フィールドまたは兄弟サブフィールドのいずれかでこれらのプロパティが有効なままの場合、サブフィールドの1つだけでこれらのプロパティを無効にしても、その変更は反映されません。 また、<code translate="no">warmup</code> を<code translate="no">disable</code> に設定しても、すべての読み取りがスキップされるわけではありません。要素のオフセットなど、クエリの実行に必要なデータは引き続き読み取られます。</li>
+</ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">VarCharフィールドの変更<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +44,7 @@ summary: コレクションフィールドのプロパティを変更するこ�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VarCharフィールドには、各フィールド値に許可される最大バイト数を定義する「<code translate="no">max_length</code> 」というプロパティがあります。「<code translate="no">max_length</code> 」プロパティを変更できます。</p>
+    </button></h2><p>VarChar フィールドには、<code translate="no">max_length</code> というプロパティがあり、各フィールド値に許可される最大バイト数を定義します。<code translate="no">max_length</code> プロパティを変更することができます。</p>
 <p>次の例では、コレクションに「<code translate="no">varchar</code> 」という名前のVarCharフィールドがあり、その<code translate="no">max_length</code> プロパティを設定することを想定しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -319,7 +322,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>メモリマッピング（Mmap）により、ディスク上の大容量ファイルへの直接メモリアクセスが可能になり、Milvusはインデックスとデータをメモリとハードドライブの両方に保存できるようになります。このアプローチにより、アクセス頻度に基づいてデータ配置ポリシーを最適化でき、検索パフォーマンスに影響を与えることなくコレクションのストレージ容量を拡張できます。</p>
+    </button></h2><p>メモリマッピング（Mmap）により、ディスク上の大容量ファイルへの直接メモリアクセスが可能になり、Milvusはインデックスとデータをメモリとハードドライブの両方に格納できるようになります。このアプローチにより、アクセス頻度に基づいてデータ配置ポリシーを最適化でき、検索パフォーマンスに影響を与えることなくコレクションのストレージ容量を拡張できます。</p>
 <p>以下の例では、コレクションに「<code translate="no">doc_chunk</code> 」という名前のフィールドがあり、その「<code translate="no">mmap_enabled</code> 」プロパティを設定することを想定しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

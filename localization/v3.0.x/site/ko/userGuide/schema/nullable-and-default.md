@@ -22,7 +22,7 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
 <p>다음과 같은 경우 null 허용 필드를 사용하십시오:</p>
 <ul>
 <li>값이 누락될 수 있는 외부 시스템에서 데이터를 수집하는 경우.</li>
-<li>일부 메타데이터가 선택 사항이거나 데이터 세트의 일부에만 적용되는 경우.</li>
+<li>일부 메타데이터가 선택 사항이거나 데이터셋의 일부에만 적용되는 경우.</li>
 <li>벡터 임베딩이 비동기적으로 생성되어 나중에 삽입되는 경우.</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
@@ -41,10 +41,10 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>NULL 값을 허용하는 벡터 필드는 ` <code translate="no">IS NULL</code> ` 또는 ` <code translate="no">IS NOT NULL</code> ` 필터 표현식을 지원하지 않습니다. 벡터 필드 값이 NULL인지 여부를 기준으로 엔티티를 명시적으로 필터링할 수 없습니다.</p></li>
-<li><p>Milvus 3.0.0부터 상위 <a href="/docs/ko/array-of-structs.md">StructArray</a> 필드는 null 허용이 가능해졌습니다. 개별 하위 필드가 아닌 상위 StructArray 필드에 <code translate="no">nullable=True</code> 를 설정하십시오. NULL은 개별 Struct 요소가 아닌 전체 StructArray 필드에 적용되며, Milvus는 상위 필드의 null 허용 여부를 내부적으로 하위 필드로 전파합니다. 기존 컬렉션에 추가되는 StructArray 필드는 기존 엔티티가 새 필드에 대해 NULL을 반환할 수 있도록 반드시 nullable이어야 합니다. 자세한 내용은 <a href="/docs/ko/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray 제한 사항을</a> 참조하십시오.</p></li>
+<li><p>NULL 값을 허용하는 벡터 필드는 ` <code translate="no">IS NULL</code> ` 또는 ` <code translate="no">IS NOT NULL</code> ` 필터 표현식을 지원하지 않습니다. 벡터 필드 값이 NULL인지 여부에 따라 엔티티를 명시적으로 필터링할 수 없습니다.</p></li>
+<li><p>Milvus 3.0.0부터 상위 <a href="/docs/ko/array-of-structs.md">StructArray</a> 필드는 null 허용이 가능해졌습니다. 개별 하위 필드가 아닌 상위 StructArray 필드에 <code translate="no">nullable=True</code> 을 설정하십시오. NULL은 개별 Struct 요소가 아닌 전체 StructArray 필드에 적용되며, Milvus는 상위 필드의 null 허용 여부를 내부적으로 하위 필드로 전파합니다. 기존 컬렉션에 추가되는 StructArray 필드는 nullable이어야 하며, 그래야 기존 엔티티가 새 필드에 대해 NULL을 반환할 수 있습니다. Milvus 3.0.6부터 하위 필드는 개별 Struct 요소 내에서 NULL 값을 추가로 허용할 수 있습니다. 스칼라 또는 벡터 하위 필드의 경우 ` <code translate="no">nullable=True</code> `, 배열 하위 필드의 경우 ` <code translate="no">element_nullable=True</code> `을 설정하면 됩니다. 단, Struct 요소 자체는 여전히 NULL이 될 수 없습니다. 자세한 내용은 <a href="/docs/ko/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray 제한 사항을</a> 참조하십시오.</p></li>
 <li><p>nullable 속성은 필드 생성 시 정의되며, 이후에는 수정할 수 없습니다. 기존 필드에 대해 null 허용 여부를 활성화하거나 비활성화할 수 없습니다.</p></li>
-<li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키 필드에는 항상 유효하고 null이 아닌 값이 포함되어야 합니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하십시오.</p></li>
+<li><p>nullable로 표시된 필드는 파티션 키로 사용할 수 없습니다. 파티션 키 필드는 항상 유효하고 null이 아닌 값을 포함해야 합니다. 자세한 내용은 <a href="/docs/ko/use-partition-key.md">‘파티션 키 사용’을</a> 참조하십시오.</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">Nullable 필드란 무엇입니까?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ summary: '스키마, 삽입, 인덱스, 검색 및 필터 동작을 포함하여
 <li>필드가 명시적으로 NULL로 설정된 경우(예: Python에서 ` <code translate="no">None</code> `).</li>
 </ul>
 <p>필드가 nullable로 정의되지 않은 경우(기본 동작), 모든 엔티티는 해당 필드에 유효한 값을 제공해야 합니다. 필드를 생략하거나 명시적으로 NULL 값을 할당하면 삽입 또는 가져오기 작업이 실패합니다.</p>
-<p>컬렉션 스키마의 <strong>스칼라 필드와 벡터 필드</strong> 모두에서 nullable 속성이 지원됩니다. Milvus 3.0.0부터는 상위 StructArray 필드에서도 지원됩니다. Struct 하위 필드를 개별적으로 nullable로 구성하지 마십시오. StructArray 상위 필드에서 nullability를 정의하면 Milvus가 내부적으로 해당 설정을 하위 필드에 적용합니다.</p>
+<p>nullable 속성은 컬렉션 스키마의 <strong>스칼라 필드와 벡터 필드</strong> 모두에서 지원됩니다. Milvus 3.0.0부터는 상위 StructArray 필드에서도 지원됩니다. Struct 하위 필드를 행 수준에서 별도로 nullable로 구성하지 마십시오. StructArray 부모 필드에서 행 수준 nullability를 정의하면 Milvus가 내부적으로 해당 설정을 하위 필드에 적용합니다. 개별 Struct 요소 내의 하위 필드 값에 대해 NULL을 허용하려면(요소 수준 null), Milvus 3.0.6 이상에서 스칼라 또는 벡터 하위 필드에 <code translate="no">nullable=True</code> 을 설정하거나, 배열 하위 필드에 <code translate="no">element_nullable=True</code> 을 설정하십시오. <a href="/docs/ko/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">'StructArray 필드 생성'을</a> 참조하십시오.</p>
 <div class="alert note">
 <p>Nullability는 필드 값이 누락될 수 있는지 여부를 결정하며, 필드가 누락되었을 때 어떤 값이 사용되는지는 정의하지 않습니다.</p>
 <ul>
@@ -327,7 +327,7 @@ curl --request POST \
 <li>엔티티는 삽입 시 ` <code translate="no">embedding</code> ` 필드를 생략하거나 NULL 값을 할당할 수 있습니다.</li>
 <li>NULL 값을 허용할지 여부는 컬렉션 생성 시점에 고정됩니다.</li>
 </ul>
-<p>명확성을 위해 다음 예제는 null 허용 벡터 필드(<code translate="no">embedding</code>)에 초점을 맞춥니다. null 허용 스칼라 필드의 정의는 선택 사항이며, 이 가이드의 나머지 내용을 따르기 위해 반드시 필요한 것은 아닙니다.</p>
+<p>명확성을 위해 다음 예제에서는 null 허용 벡터 필드(<code translate="no">embedding</code>)에 초점을 맞춥니다. null 허용 스칼라 필드의 정의는 선택 사항이며, 이 가이드의 나머지 내용을 따르기 위해 반드시 필요한 것은 아닙니다.</p>
 <p><details>
 <summary>선택 사항: nullable 스칼라 필드 정의</summary></p>
 <p>스칼라 필드도 동일한 ` <code translate="no">nullable</code> ` 속성을 사용하여 NULL 허용 가능하게 정의할 수 있으며, 데이터 수집 시 동일한 규칙을 따릅니다. 예:</p>
@@ -932,9 +932,9 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>앞서 살펴본 예시는 벡터 필드에 중점을 두었습니다. 이 섹션에서는 <strong>스칼라 필터 표현식에서</strong> NULL 값이 어떻게 처리되는지 설명합니다.</p>
+    </button></h2><p>앞서 살펴본 예제는 벡터 필드에 중점을 두었습니다. 이 섹션에서는 <strong>스칼라 필터 표현식에서</strong> NULL 값이 어떻게 동작하는지 설명합니다.</p>
 <p>스칼라 필드는 <code translate="no">nullable=True</code> 로 정의할 수 있으며 벡터 필드와 동일한 수집 규칙을 따릅니다. 그러나 <strong>NULL 스칼라 값은 필터 표현식에서 항상 false로 평가됩니다</strong>. <code translate="no">IS NULL</code> 또는 <code translate="no">IS NOT NULL</code> 를 사용하여 스칼라 필드가 NULL인지 여부에 따라 엔티티를 선택하십시오.</p>
-<p>예를 들어, null이 허용되는 스칼라 필드 <code translate="no">age</code> 가 주어졌을 때, 다음 필터는 나이가 18세보다 큰 엔티티를 선택합니다.</p>
+<p>예를 들어, null이 허용되는 스칼라 필드 <code translate="no">age</code> 가 주어졌을 때, 다음 필터는 나이가 18세보다 큰 엔티티를 선택합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1020,7 +1020,7 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필드에 대해 <code translate="no">nullable</code> 와 <code translate="no">default_value</code> 가 모두 설정된 경우, Milvus가 삽입 시 NULL 입력 또는 누락된 필드 값을 처리하는 방식은 다음 규칙에 따라 결정됩니다.</p>
+    </button></h2><p>필드에 대해 <code translate="no">nullable</code> 과 <code translate="no">default_value</code> 가 모두 설정된 경우, Milvus가 삽입 시 NULL 입력 또는 누락된 필드 값을 처리하는 방식은 다음 규칙에 따라 결정됩니다.</p>
 <table>
 <thead>
 <tr><th>Null 허용 활성화</th><th>기본값</th><th>사용자 입력 (NULL 또는 생략)</th><th>결과</th></tr>
@@ -1030,7 +1030,7 @@ Console.WriteLine(res);
 <tr><td>예</td><td>아니요</td><td>NULL 또는 생략</td><td>NULL로 저장됨</td></tr>
 <tr><td>아니요</td><td>예 (NULL 아님)</td><td>NULL 또는 생략</td><td>기본값을 사용</td></tr>
 <tr><td>아니요</td><td>아니요</td><td>NULL 또는 생략</td><td>오류를 발생시킵니다</td></tr>
-<tr><td>아니요</td><td>예 (기본값은 NULL)</td><td>NULL이거나 생략된 경우</td><td>오류를 발생시킵니다</td></tr>
+<tr><td>아니요</td><td>예 (기본값: NULL)</td><td>NULL이거나 생략된 경우</td><td>오류를 발생시킵니다</td></tr>
 </tbody>
 </table>
 <p><strong>주요 내용:</strong></p>

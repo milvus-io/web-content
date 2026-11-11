@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 配列フィールド
-summary: ARRAYフィールドには、同じデータ型の要素が順序付きで格納されます。以下に、ARRAYフィールドによるデータの格納例を示します。
+summary: ARRAYフィールドは、同じデータ型の要素からなる順序付き集合を格納します。以下に、ARRAYフィールドによるデータの格納例を示します。
 ---
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,10 +41,14 @@ summary: ARRAYフィールドには、同じデータ型の要素が順序付き
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。ただし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、NULL値を許可することができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</p></li>
-<li><p><code translate="no">VARCHAR</code>データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義される同一のデータ型でなければなりません。 が「<code translate="no">element_type</code> 」に設定されている場合は、各配列要素に許可される最大バイト数を定義する<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除き、Milvusがサポートするあらゆるスカラーデータ型を受け入れます。<code translate="no">element_type=STRUCT</code> の場合は、StructArrayフィールドを使用し、<code translate="no">struct_schema</code> を指定してください。詳細については、<a href="/docs/ja/create-structarray-field.md">StructArray</a>を参照してください。</p></li>
-<li><p><strong>配列の容量</strong>：ARRAYフィールド内の要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければなりません。この値<strong>は</strong> <strong>1から4096までの</strong>整数である必要があります。</p></li>
-<li><p><strong>文字列の取り扱い</strong>: 配列フィールド内の文字列値は、意味的なエスケープや変換を行わずに、そのままの形で格納されます。たとえば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
+<li><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。ただし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、NULL値を許可することができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</li>
+</ul>
+<ul>
+<li><code translate="no">VARCHAR</code>データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義される同一のデータ型でなければなりません。 が「<code translate="no">element_type</code> 」に設定されている場合は、各配列要素に許可される最大バイト数を定義する<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除き、Milvusがサポートするあらゆるスカラーデータ型を受け入れます。<code translate="no">element_type=STRUCT</code> の場合は、StructArrayフィールドを使用し、<code translate="no">struct_schema</code> を指定してください。詳細については、<a href="/docs/ja/create-structarray-field.md">StructArray</a>を参照してください。 最上位の ARRAY フィールドには、ベクトルやネストされた配列を格納することはできず、その要素を個別に null に設定することもできません。これらの形式は、Milvus 3.0.6 以降の StructArray フィールド内のサブフィールドでのみ利用可能です。</li>
+</ul>
+<ul>
+<li><p><strong>配列の容量</strong>: ARRAY フィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければなりません。この値は<strong>1</strong>から<strong>4096</strong> までの整数である必要があります。</p></li>
+<li><p><strong>文字列の取り扱い</strong>：Arrayフィールド内の文字列値は、意味的なエスケープや変換を行わずに、そのままの形で格納されます。たとえば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAYフィールドの追加<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,13 +65,13 @@ summary: ARRAYフィールドには、同じデータ型の要素が順序付き
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusクラスタでARRAYフィールドを使用するには、コレクションスキーマの作成時に該当するフィールド型を定義する必要があります。このプロセスには以下が含まれます：</p>
+    </button></h2><p>MilvusクラスタでARRAYフィールドを使用するには、コレクションスキーマの作成時に該当するフィールド型を定義します。このプロセスには以下が含まれます：</p>
 <ol>
 <li><p><code translate="no">datatype</code> を、サポートされている配列データ型である<code translate="no">ARRAY</code> に設定します。</p></li>
 <li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。同じ配列内のすべての要素は、同じデータ型でなければなりません。</p></li>
 <li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量（つまり、配列が格納できる要素の最大数）を定義します。</p></li>
 </ol>
-<p>ARRAYフィールドを含むコレクションスキーマを定義する方法は次のとおりです：</p>
+<p>ARRAYフィールドを含むコレクションスキーマを定義する方法は次のとおりです。</p>
 <div class="alert note">
 <p>スキーマ定義時に `<code translate="no">enable_dynamic_field=True</code> ` を設定すると、Milvus では事前に定義されていないスカラーフィールドの挿入が可能になります。ただし、これによりクエリや管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">「動的フィールド」</a>を参照してください。</p>
 </div>

@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>استخدم هذه الصفحة لإضافة تصفية قياسية إلى البحث المتجه في حقول StructArray. تتكون تصفية StructArray من مستويين: تعمل المرشحات على مستوى الصف على تحديد الكيانات الأصلية، بينما تحدد المرشحات على مستوى العنصر عناصر Struct التي تشارك في البحث المتجه على مستوى العنصر.</p>
+    </button></h1><p>استخدم هذه الصفحة لإضافة تصفية قيمية إلى البحث المتجهي في حقول StructArray. تتكون تصفية StructArray من مستويين: تعمل المرشحات على مستوى الصف على تحديد الكيانات الأصلية، بينما تحدد المرشحات على مستوى العنصر عناصر Struct التي تشارك في البحث المتجهي على مستوى العنصر.</p>
 <p>تستخدم هذه الصفحة المجموعة " <code translate="no">tech_articles</code> " من <a href="/docs/ar/create-structarray-field.md">"إنشاء حقل StructArray</a>". تحتوي المجموعة على حقل StructArray باسم " <code translate="no">chunks</code>"، مع حقول فرعية قياسية مثل " <code translate="no">section</code>" و" <code translate="no">page</code>" و" <code translate="no">quality_score</code>" و" <code translate="no">has_code</code>"، بالإضافة إلى حقول فرعية متجهة للبحث.</p>
 <p>قبل تشغيل هذه الأمثلة، قم بإنشاء المجموعة، وإدراج بيانات المثال، وإنشاء الفهارس المتجهة المطلوبة، وتحميل المجموعة. استخدم متجهات رباعية الأبعاد للحقول الموضحة هنا. يفترض كل كتلة كود وجود الاتصال والمتغيرات من الأمثلة السابقة في نفس اللغة ما لم يتم تعريفها مرة أخرى.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">اختر نوع المرشح<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
@@ -521,7 +521,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[page]&quot;, &quot;chunks[quality_score]&quot;, &quot;chunks[has_code]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، يقوم المسند ذو المستوى الأعلى <code translate="no">category == &quot;search&quot;</code> باختيار الكيانات المرشحة، ويقوم <code translate="no">element_filter</code> بتقييد البحث المتجهي على مستوى العناصر ليقتصر على المجموعات التي تتطابق فيها <code translate="no">section</code> و <code translate="no">quality_score</code> و <code translate="no">has_code</code> جميعها في نفس عنصر Struct.</p>
+<p>في هذا المثال، يختار المسند ذو المستوى الأعلى <code translate="no">category == &quot;search&quot;</code> الكيانات المرشحة، ويقصر <code translate="no">element_filter</code> البحث المتجهي على مستوى العنصر على المجموعات التي تتطابق فيها <code translate="no">section</code> و <code translate="no">quality_score</code> و <code translate="no">has_code</code> جميعها في نفس عنصر Struct.</p>
 <div class="alert note">
 <p>تحذير</p>
 <p>عند دمج مسند من المستوى الأعلى مع <code translate="no">element_filter</code> ، ضع <code translate="no">element_filter</code> في نهاية التعبير. لا يمكن أن يحتوي تعبير التصفية إلا على <code translate="no">element_filter</code> واحد فقط، ولا يمكنك تضمين <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code> داخل عامل StructArray آخر.</p>
@@ -541,7 +541,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم مشغلات <code translate="no">MATCH_*</code> عندما يتعين على التصفية تحديد ما إذا كانت الكيانات الأصلية مؤهلة بناءً على عناصر Struct الخاصة بها. هذه المشغلات هي عوامل تصفية على مستوى الصف: فهي تحدد الكيانات، ولكنها لا تُرجع إزاحات العناصر بنفسها.</p>
+    </button></h2><p>استخدم مشغلات <code translate="no">MATCH_*</code> عندما يتعين على التصفية تحديد ما إذا كانت الكيانات الأصلية مؤهلة بناءً على عناصر Struct الخاصة بها. هذه المشغلات هي عوامل تصفية على مستوى الصف: فهي تحدد الكيانات، ولكنها لا تُرجع إزاحات العناصر من تلقاء نفسها.</p>
 <table>
 <thead>
 <tr><th>المشغل</th><th>استخدمه عندما</th><th>مثال</th></tr>
@@ -768,7 +768,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;category&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>استخدم " <code translate="no">MATCH_ANY</code> " هنا لأن نتيجة البحث في EmbeddingList تكون على مستوى الكيان. يتطلب المرشح أن تكون هناك قطعة واحدة على الأقل في الكيان من نوع " <code translate="no">&quot;index&quot;</code> " ذات جودة عالية، لكن نتيجة البحث نفسها لا تزال تمثل الكيان الأصلي.</p>
+<p>استخدم " <code translate="no">MATCH_ANY</code> " هنا لأن نتيجة البحث في EmbeddingList تكون على مستوى الكيان. يتطلب الفلتر أن تكون هناك قطعة واحدة على الأقل في الكيان من نوع " <code translate="no">&quot;index&quot;</code> " ذات جودة عالية، لكن نتيجة البحث نفسها لا تزال تمثل الكيان الأصلي.</p>
 <h2 id="Use-filters-in-hybrid-search" class="common-anchor-header">استخدام المرشحات في البحث المختلط<button data-href="#Use-filters-in-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1059,7 +1059,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;category&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يطبق كلا الطلبين الفرعيين <code translate="no">category == &quot;search&quot;</code>. كما يفرض التعبير <code translate="no">chunk_req</code> قيودًا على عناصر Struct التي تشارك في البحث المتجه الخاص به. للاطلاع على تركيبات البحث الهجين المدعومة والحدود الخاصة بكل إصدار، راجع <a href="/docs/ar/hybrid-search-with-structarray.md">البحث الهجين باستخدام StructArray</a> <a href="/docs/ar/structarray-limits.md">وحدود StructArray</a>.</p>
+<p>يطبق كلا الطلبين الفرعيين <code translate="no">category == &quot;search&quot;</code>. كما يفرض التعبير <code translate="no">chunk_req</code> قيودًا على عناصر Struct التي تشارك في البحث المتجه الخاص به. للاطلاع على تركيبات البحث المختلط المدعومة والحدود الخاصة بكل إصدار، راجع <a href="/docs/ar/hybrid-search-with-structarray.md">البحث المختلط باستخدام StructArray</a> <a href="/docs/ar/structarray-limits.md">وحدود StructArray</a>.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">ملخص دعم المسندات<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1088,7 +1088,7 @@ curl --request POST \
 <tr><td>الحقول الفرعية للمتجهات</td><td>غير مدعومة كمدخلات للمسندات القياسية في <code translate="no">$[...]</code>. استخدم الحقول الفرعية للمتجهات من خلال البحث المتجهي بدلاً من ذلك.</td></tr>
 </tbody>
 </table>
-<p>بالنسبة للحالات غير المدعومة مثل مسارات JSON، ووظائف حاويات المصفوفات، ووظائف مطابقة النص، والمسندات ذات القيمة null في <code translate="no">$[...]</code> ، ووظائف Geometry، وتعبيرات Timestamptz، واستدعاءات الوظائف العامة، راجع <a href="/docs/ar/struct-array-operators.md">StructArray Operators</a>.</p>
+<p>بالنسبة للحالات غير المدعومة مثل مسارات JSON، ووظائف مطابقة النص، ووظائف الهندسة، وتعبيرات Timestamptz، واستدعاءات الوظائف العامة، وبالنسبة لوظائف حاويات المصفوفات والشرطيات الفارغة التي يدعمها <code translate="no">$[...]</code> بدءًا من Milvus 3.0.6، راجع <a href="/docs/ar/struct-array-operators.md">StructArray Operators</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">الأخطاء الشائعة<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1108,7 +1108,7 @@ curl --request POST \
 <li><p>استخدام <code translate="no">$[subfield]</code> خارج <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code>.</p></li>
 <li><p>استخدام <code translate="no">chunks.section</code> بدلاً من صيغة مشغل StructArray مثل <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>.</p></li>
 <li><p>استخدام <code translate="no">element_filter</code> عندما تحتاج فقط إلى التصفية على مستوى الصفوف. استخدم <code translate="no">MATCH_ANY</code> بدلاً من ذلك إذا كنت تحتاج فقط إلى تحديد الكيانات.</p></li>
-<li><p>توقع أن تُرجع <code translate="no">MATCH_*</code> إزاحات العناصر. تختار هذه العوامل الكيانات ولا تحدد عنصرًا مطابقًا واحدًا بمفردها.</p></li>
+<li><p>توقع أن تُرجع <code translate="no">MATCH_*</code> إزاحات العناصر. تختار هذه العوامل الكيانات ولا تحدد عنصرًا مطابقًا بمفردها.</p></li>
 <li><p>كتابة المسندات المنطقية المجردة مثل <code translate="no">$[has_code]</code>. استخدم مقارنات صريحة مثل <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>وضع <code translate="no">element_filter</code> قبل مسند من المستوى الأعلى في نفس تعبير التصفية.</p></li>
 </ul>
@@ -1129,7 +1129,7 @@ curl --request POST \
       </svg>
     </button></h2><ol>
 <li><p>لمراجعة صيغة تصفية StructArray الكاملة، اقرأ <a href="/docs/ar/struct-array-operators.md">«مشغلات StructArray</a>».</p></li>
-<li><p>لتشغيل عمليات البحث المتجهية غير المفلترة أولاً، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">البحث المتجهي الأساسي باستخدام StructArray</a>.</p></li>
+<li><p>لتشغيل عمليات البحث المتجهية غير المفلترة أولاً، اقرأ <a href="/docs/ar/basic-vector-search-with-structarray.md">«البحث المتجهي الأساسي باستخدام StructArray</a>».</p></li>
 <li><p>لإنشاء فهارس قياسية لمرشحات StructArray المستخدمة بشكل متكرر، اقرأ " <a href="/docs/ar/index-structarray-fields.md">فهرسة حقول StructArray</a>".</p></li>
 <li><p>للتحقق من حدود التصفية والبحث الخاصة بكل إصدار، اقرأ " <a href="/docs/ar/structarray-limits.md">حدود StructArray</a>".</p></li>
 </ol>

@@ -1377,7 +1377,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du classement « Decay »",
+                    "label": "Présentation de Decay Ranker",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Commandes",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Cas courants",
-            "id": "common-cases",
+            "label": "Sauvegarde et restauration par instantané",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Sauvegarde 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Sauvegarde et restauration au sein d'une même instance",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Commandes",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migration entre instances d'un même compartiment",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migration entre instances au sein de différents compartiments",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Cas courants",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Sauvegarde et restauration au sein d'une même instance",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration entre instances d'un même compartiment",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration entre instances au sein de différents compartiments",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migration entre instances dans différents environnements S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migration entre instances dans différents environnements S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Passer à la version 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }

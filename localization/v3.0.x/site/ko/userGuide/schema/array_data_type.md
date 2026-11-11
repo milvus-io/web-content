@@ -43,10 +43,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>기본값</strong>: ARRAY 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable 및 기본값’을</a> 참조하십시오.</p></li>
-<li><p><strong>데이터 유형:</strong> ARRAY 필드의 모든 요소는 <code translate="no">element_type</code> 매개변수로 정의된 동일한 데이터 유형을 가져야 합니다. <code translate="no">element_type</code> 가 <code translate="no">VARCHAR</code> 로 설정된 경우, 각 배열 요소에 허용되는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 도 함께 지정해야 합니다. <code translate="no">element_type</code> 는 <code translate="no">JSON</code> 을 제외하고 Milvus에서 지원하는 모든 스칼라 데이터 유형을 허용합니다. <code translate="no">element_type=STRUCT</code> 의 경우 StructArray 필드를 사용하고 <code translate="no">struct_schema</code> 를 지정해야 합니다. 자세한 내용은 <a href="/docs/ko/create-structarray-field.md">StructArray를</a> 참조하십시오.</p></li>
-<li><p><strong>배열 용량</strong>: ARRAY 필드의 요소 수는 <code translate="no">max_capacity</code> 에 명시된 대로, 배열 생성 시 정의된 최대 용량 이하여야 합니다. 값은 <strong>1에서</strong> <strong>4096</strong> 사이의 정수여야 합니다.</p></li>
-<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 의미적 이스케이프 처리나 변환 없이 있는 그대로 저장됩니다. 예를 들어, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> 및 <code translate="no">&quot;a\&quot;b&quot;</code> 는 입력된 그대로 저장되는 반면, <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 값으로 간주됩니다.</p></li>
+<li><strong>기본값</strong>: ARRAY 필드는 기본값을 지원하지 않습니다. 그러나 <code translate="no">nullable</code> 속성을 <code translate="no">True</code> 로 설정하여 null 값을 허용할 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">‘Nullable 및 기본값’을</a> 참조하십시오.</li>
+</ul>
+<ul>
+<li><strong>데이터 유형:</strong> ARRAY 필드의 모든 요소는 <code translate="no">element_type</code> 매개변수로 정의된 동일한 데이터 유형을 가져야 합니다. <code translate="no">element_type</code> 가 <code translate="no">VARCHAR</code> 로 설정된 경우, 각 배열 요소에 허용되는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 도 함께 지정해야 합니다. <code translate="no">element_type</code> 는 <code translate="no">JSON</code> 을 제외하고 Milvus에서 지원하는 모든 스칼라 데이터 유형을 허용합니다. <code translate="no">element_type=STRUCT</code> 의 경우 StructArray 필드를 사용하고 <code translate="no">struct_schema</code> 를 지정해야 합니다. 자세한 내용은 <a href="/docs/ko/create-structarray-field.md">StructArray를</a> 참조하십시오. 최상위 ARRAY 필드는 벡터나 중첩된 배열을 포함할 수 없으며, 각 요소가 개별적으로 null일 수 없습니다. 이러한 형식은 Milvus 3.0.6 이상 버전에서 StructArray 필드 내부의 하위 필드에서만 사용할 수 있습니다.</li>
+</ul>
+<ul>
+<li><p><strong>배열 용량</strong>: ARRAY 필드의 요소 수는 <code translate="no">max_capacity</code> 에 명시된 대로, 배열 생성 시 정의된 최대 용량 이하여야 합니다. 이 값은 <strong>1에서</strong> <strong>4096</strong> 사이의 정수여야 합니다.</p></li>
+<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 의미론적 이스케이프 처리나 변환 없이 있는 그대로 저장됩니다. 예를 들어, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> 및 <code translate="no">&quot;a\&quot;b&quot;</code> 는 입력된 그대로 저장되는 반면, <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 값으로 간주됩니다.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY 필드 추가<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -838,7 +842,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>전체 배열 삽입 외에도, Milvus v2.6.17 이상 버전의 <code translate="no">upsert</code> API에서 ` <code translate="no">ARRAY</code> ` 필드는 ` <code translate="no">ARRAY_APPEND</code> ` 및 ` <code translate="no">ARRAY_REMOVE</code> ` 부분 업데이트 연산자를 지원합니다. 이를 통해 기존 배열의 현재 값을 먼저 조회하지 않고도 요소를 추가하거나 일치하는 요소를 제거할 수 있어, 클라이언트 측의 읽기-수정-쓰기(read-modify-write) 패턴을 피할 수 있습니다. 자세한 내용은 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">병합 모드에서 ARRAY 필드 업서트(Upsert)</a>를 참조하십시오.</p>
+<p>전체 배열 삽입 외에도, Milvus v2.6.17 및 이후 버전의 <code translate="no">upsert</code> API에서 ` <code translate="no">ARRAY</code> ` 필드는 ` <code translate="no">ARRAY_APPEND</code> ` 및 ` <code translate="no">ARRAY_REMOVE</code> ` 부분 업데이트 연산자를 지원합니다. 이를 통해 기존 배열의 현재 값을 먼저 조회하지 않고도 요소를 추가하거나 일치하는 요소를 제거할 수 있어, 클라이언트 측의 읽기-수정-쓰기(read-modify-write) 패턴을 피할 수 있습니다. 자세한 내용은 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">병합 모드에서 ARRAY 필드의 업서트(Upsert</a>)를 참조하십시오.</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용한 쿼리<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1266,4 +1270,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>또한 Milvus는 쿼리 기능을 더욱 강화하기 위해 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 고급 배열 필터 연산자를 지원합니다. 자세한 내용은 <a href="/docs/ko/array-operators.md">ARRAY 연산자를</a> 참조하십시오.</p>
+<p>또한 Milvus는 쿼리 기능을 더욱 강화하기 위해 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 고급 배열 필터링 연산자를 지원합니다. 자세한 내용은 <a href="/docs/ko/array-operators.md">ARRAY 연산자를</a> 참조하십시오.</p>

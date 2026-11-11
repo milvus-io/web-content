@@ -4,8 +4,8 @@ title: مشغلات StructArray
 summary: >-
   تقوم مشغلات StructArray بتصفية الكيانات من خلال تقييم المسلسلات المنطقية على
   الحقول الفرعية القياسية داخل حقل StructArray. استخدم هذه الصفحة كمرجع لصيغة
-  العناصر التالية: element_filter، ومجموعة مشغلات MATCH_*، والمسلسلات المنطقية
-  على مستوى الصفوف في مسارات StructArray.
+  العناصر مثل element_filter، ومجموعة مشغلات MATCH_*، والمسلسلات المنطقية على
+  مستوى الصفوف في مسارات StructArray.
 ---
 <h1 id="StructArray-Operators" class="common-anchor-header">مشغلات StructArray<button data-href="#StructArray-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -30,11 +30,11 @@ summary: >-
 </thead>
 <tbody>
 <tr><td><code translate="no">element_filter</code></td><td>مطابقة عناصر Struct التي تستوفي شرطًا قياسيًا.</td><td>في البحث على مستوى العناصر، يمكن أن تتضمن النتائج المطابقة إزاحات العناصر. في الاستعلام على مستوى الصفوف أو البحث المُصفى، يعتمد شكل النتيجة على واجهة برمجة التطبيقات (API) وحقول الإخراج.</td></tr>
-<tr><td><code translate="no">MATCH_*</code></td><td>تحديد الكيانات بناءً على عدد عناصر Struct التي تستوفي شرطًا قياسيًا.</td><td>التصفية على مستوى الصفوف. لا تُرجع هذه العوامل إزاحات العناصر من تلقاء نفسها.</td></tr>
+<tr><td><code translate="no">MATCH_*</code></td><td>تحديد الكيانات بناءً على عدد عناصر Struct التي تستوفي شرطًا قياسيًا.</td><td>التصفية على مستوى الصف. لا تُرجع هذه العوامل إزاحات العناصر بحد ذاتها.</td></tr>
 <tr><td>شروط المسار على مستوى الصف</td><td>اختبر موضع عنصر واحد، أو احسب عناصر Struct، أو اختبر قيم الحقول الفرعية عبر العناصر بدون شرط " <code translate="no">$[...]</code> ".</td><td>التصفية على مستوى الصف. لا تُرجع هذه المسندات إزاحات العناصر.</td></tr>
 </tbody>
 </table>
-<p>استخدم الحقول الفرعية القياسية في مشغلات StructArray. تُستخدم الحقول الفرعية المتجهة في مسارات البحث المتجهة ولا تُعد مدخلات للمسلّطات القياسية.</p>
+<p>استخدم الحقول الفرعية القياسية، والحقول الفرعية للمصفوفات في Milvus 3.0.6 والإصدارات الأحدث، في مشغلات StructArray. تُستخدم الحقول الفرعية المتجهة في مسارات البحث المتجهة ولا تُعد مدخلات للمسندات القياسية.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">متى تستخدم أي عامل<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>اختر عاملًا وفقًا لهدف التصفية:</p>
+    </button></h2><p>اختر عاملًا وفقًا لهدف التصفية الذي تريده:</p>
 <table>
 <thead>
 <tr><th>الهدف</th><th>الاستخدام</th></tr>
@@ -60,7 +60,7 @@ summary: >-
 <tr><td>مطابقة شروط قياسية متعددة داخل نفس عنصر Struct.</td><td><code translate="no">element_filter</code></td></tr>
 <tr><td>إرجاع الكيانات التي يفي فيها عنصر Struct واحد على الأقل بشرط ما فقط.</td><td><code translate="no">MATCH_ANY</code></td></tr>
 <tr><td>إرجاع الكيانات التي تستوفي جميع عناصر Struct فيها شرطًا ما فقط.</td><td><code translate="no">MATCH_ALL</code></td></tr>
-<tr><td>إرجاع الكيانات التي يستوفي فيها عدد من عناصر Struct يساوي «على الأقل» أو «على الأكثر» أو «بالضبط» <code translate="no">N</code> شرطًا ما.</td><td><code translate="no">MATCH_LEAST</code>، <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code></td></tr>
+<tr><td>إرجاع الكيانات التي يستوفي فيها عدد من عناصر Struct يساوي "على الأقل" أو "على الأكثر" أو "بالضبط" <code translate="no">N</code> شرطًا ما.</td><td><code translate="no">MATCH_LEAST</code>، <code translate="no">MATCH_MOST</code> ، أو <code translate="no">MATCH_EXACT</code></td></tr>
 <tr><td>التحقق من عنصر Struct في موضع محدد، مثل الجزء الأول.</td><td>مسار موضعي مثل <code translate="no">chunks[0][section]</code></td></tr>
 <tr><td>التصفية حسب عدد عناصر Struct في كيان ما.</td><td><code translate="no">array_length(chunks)</code></td></tr>
 <tr><td>تحقق مما إذا كان أي عنصر من عناصر Struct يحتوي على قيمة حقل فرعي، دون الجمع بين الشروط على نفس العنصر.</td><td><code translate="no">array_contains</code>، <code translate="no">array_contains_any</code> ، أو <code translate="no">array_contains_all</code> على مسار حقل فرعي مثل <code translate="no">chunks[section]</code></td></tr>
@@ -356,7 +356,18 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">عدد عناصر Struct</h4><p>استخدم <code translate="no">array_length(structArrayField)</code> للتصفية حسب عدد عناصر Struct في الكيان. يُرجع <code translate="no">array_length</code> على مسار حقل فرعي، مثل <code translate="no">array_length(chunks[section])</code> ، نفس العدد، لأن كل حقل فرعي يحتوي على قيمة واحدة لكل عنصر Struct.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">الوصول إلى الحقول الفرعية للمصفوفة حسب الموضع<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>بدءًا من Milvus 3.0.6، يمكن للمسار الموضعي أيضًا الإشارة إلى حقل فرعي قياسي <code translate="no">ARRAY</code>. <code translate="no">chunks[0][tags]</code> هو المصفوفة الداخلية للعنصر الأول في Struct. وهو يدعم <code translate="no">==</code> و <code translate="no">!=</code> مع قيمة مصفوفة حرفية، <code translate="no">array_contains</code> و <code translate="no">array_contains_any</code> و <code translate="no">array_contains_all</code> و <code translate="no">array_length</code>. يتم رفض عوامل المقارنة، <code translate="no">in</code> و <code translate="no">like</code> ، والعمليات الحسابية عليها.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>يتم رفض <code translate="no">==</code> و <code translate="no">!=</code> على مسار الحقل الفرعي للمصفوفة بأكملها، مثل <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code> ، لأن هذا المسار يحتوي على مصفوفة داخلية واحدة لكل عنصر Struct. استخدم <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code> بدلاً من ذلك.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">عدد عناصر Struct</h4><p>استخدم <code translate="no">array_length(structArrayField)</code> للتصفية حسب عدد عناصر Struct في كيان ما. يُرجع <code translate="no">array_length</code> في مسار حقل فرعي، مثل <code translate="no">array_length(chunks[section])</code> ، نفس العدد، لأن كل حقل فرعي يحتوي على قيمة واحدة لكل عنصر Struct.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
@@ -406,7 +417,7 @@ chunks is null
 # Entities that have a chunks value.
 chunks is not null
 <button class="copy-code-btn"></button></code></pre>
-<p>لمعرفة قابلية التطبيق، راجع <a href="/docs/ar/structarray-limits.md#Nullable-and-dynamic-schema-limits">حدود المخططات القابلة للقيمة null والديناميكية</a>. يحتوي كل من الكيان A والكيان B على قيم StructArray غير NULL.</p>
+<p>لمعرفة قابلية التطبيق، راجع <a href="/docs/ar/structarray-limits.md#Nullable-and-dynamic-schema-limits">حدود المخططات القابلة للـNULL والديناميكية</a>. يحتوي كل من الكيان A والكيان B على قيم StructArray غير NULL.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">المسندات المدعومة<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -429,13 +440,48 @@ chunks is not null
 </thead>
 <tbody>
 <tr><td><code translate="no">BOOL</code></td><td>المسندات القياسية مثل <code translate="no">$[has_code] == true</code> أو <code translate="no">!($[has_code] == true)</code>. تجنب التعبيرات المنطقية المجردة مثل <code translate="no">$[has_code]</code>.</td></tr>
-<tr><td><code translate="no">INT8</code>، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code></td><td>المقارنة، والنطاق المتسلسل، و <code translate="no">in</code> ، و <code translate="no">not in</code> ، والتعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، و <code translate="no">-</code> ، و <code translate="no">*</code> ، و <code translate="no">/</code> ، أو <code translate="no">%</code> متبوعة بمقارنة، والتركيبات المنطقية.</td></tr>
+<tr><td><code translate="no">INT8</code>، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code></td><td>المقارنة، النطاق المتسلسل، <code translate="no">in</code> ، <code translate="no">not in</code> ، التعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، <code translate="no">-</code> ، <code translate="no">*</code> ، <code translate="no">/</code> ، أو <code translate="no">%</code> متبوعة بمقارنة، والتوليفات المنطقية.</td></tr>
 <tr><td><code translate="no">FLOAT</code>، <code translate="no">DOUBLE</code></td><td>المقارنة، والنطاق المتسلسل، و <code translate="no">in</code> ، و <code translate="no">not in</code> ، والتعبيرات الحسابية التي تحتوي على <code translate="no">+</code> ، أو <code translate="no">-</code> ، أو <code translate="no">*</code> ، أو <code translate="no">/</code> متبوعة بمقارنة، والتركيبات المنطقية. لا يُدعم عامل التشغيل <code translate="no">%</code> للحقول الفرعية ذات العلامة العائمة.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>مقارنة السلاسل، والنطاق المتسلسل، و <code translate="no">in</code> ، و <code translate="no">not in</code> ، و <code translate="no">like</code> ، و <code translate="no">=~</code> ، و <code translate="no">!~</code> ، والتركيبات المنطقية.</td></tr>
-<tr><td>الحقول الفرعية للمتجهات</td><td>غير مدعومة كمدخلات للمسندات القياسية <code translate="no">$[...]</code>. استخدم الحقول الفرعية للمتجهات بدلاً من ذلك من خلال البحث في EmbeddingList أو البحث المتجهي على مستوى العنصر.</td></tr>
+<tr><td>الحقول الفرعية ذات القيم العددية <code translate="no">ARRAY</code> (Milvus 3.0.6 والإصدارات الأحدث)</td><td><code translate="no">array_contains</code>، و <code translate="no">array_contains_any</code> ، و <code translate="no">array_contains_all</code> ، و <code translate="no">array_length</code> على <code translate="no">$[tags]</code> ، بالإضافة إلى <code translate="no">$[tags] is null</code> و <code translate="no">$[tags] is not null</code>. يتم رفض عوامل المقارنة، و <code translate="no">in</code> ، و <code translate="no">like</code> على <code translate="no">$[tags]</code>.</td></tr>
+<tr><td>أي حقل فرعي قابل للكونه فارغًا (Milvus 3.0.6 والإصدارات الأحدث)</td><td><code translate="no">$[subfield] is null</code> و <code translate="no">$[subfield] is not null</code> يختبران ما إذا كانت القيمة في عنصر Struct الحالي هي null. في الحقل الفرعي الذي لا يمكنه احتواء قيم null، تكون قيمة <code translate="no">is null</code> دائمًا false.</td></tr>
+<tr><td>الحقول الفرعية المتجهة</td><td>غير مدعومة كمدخلات للمسندات القياسية لـ <code translate="no">$[...]</code> ، باستثناء <code translate="no">$[emb] is null</code> و <code translate="no">$[emb] is not null</code> في حقل فرعي متجه قابل للـ null في Milvus 3.0.6 والإصدارات الأحدث. استخدم الحقول الفرعية المتجهة بدلاً من ذلك من خلال البحث في EmbeddingList أو البحث المتجه على مستوى العنصر.</td></tr>
 </tbody>
 </table>
 <p>تنطبق العوامل المنطقية مثل <code translate="no">&amp;&amp;</code> و <code translate="no">||</code> و <code translate="no">!</code> على تعبيرات المسندات. على سبيل المثال، اكتب <code translate="no">!($[has_code] == true)</code> بدلاً من <code translate="no">!$[has_code]</code>.</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">القيم الفارغة في المسندات على مستوى العناصر<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>بدءًا من Milvus 3.0.6، يمكن للحقل الفرعي القابل للصفر أن يحتوي على قيمة فارغة في عنصر Struct. تتبع القيم الفارغة المنطق ثلاثي القيم في المسندات StructArray:</p>
+<ul>
+<li><p>تكون المقارنة، أو <code translate="no">in</code> ، أو <code translate="no">like</code> ، أو المسند الحسابي على قيمة حقل فرعي فارغة «مجهولة» بدلاً من «خطأ». تقوم <code translate="no">&amp;&amp;</code> ، و <code translate="no">\|\|</code> ، و <code translate="no">!</code> بنقل النتائج المجهولة، لذا يظل <code translate="no">!($[lang] == &quot;en&quot;)</code> مجهولاً عندما تكون <code translate="no">$[lang]</code> فارغة.</p></li>
+<li><p><code translate="no">element_filter</code> يحتفظ فقط بعناصر Struct التي يكون مسندها صحيحًا. لا تتم مطابقة العناصر المجهولة.</p></li>
+<li><p><code translate="no">MATCH_*</code> يعتبر العنصر المجهول حالة فشل. تكون قيمة <code translate="no">MATCH_ALL</code> كاذبة عندما يكون أي عنصر مجهولًا، في حين أن StructArray الفارغ لا يزال يستوفي شرط <code translate="no">MATCH_ALL</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> و <code translate="no">$[subfield] is not null</code> تكون دائمًا صحيحة أو خاطئة. فهي تقرأ صحة العنصر الحالي، لذا فإن <code translate="no">$[lang] is null</code> تتطابق تمامًا مع العناصر التي تكون قيمة <code translate="no">lang</code> الخاصة بها null.</p></li>
+<li><p>في حقل فرعي للمصفوفة، يتخطى <code translate="no">array_contains*</code> في <code translate="no">$[tags]</code> القيم الداخلية التي تساوي null ولا يتطابق أبدًا مع مصفوفة داخلية تساوي null، بينما يحسب <code translate="no">array_length($[tags])</code> القيم الداخلية التي تساوي null، ولا تكون قيمة <code translate="no">$[tags] is null</code> صحيحة إلا في حالة وجود مصفوفة داخلية تساوي null.</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>تتبع المسارات الموضعية على مستوى الصف القاعدة نفسها: تكون قيمة <code translate="no">chunks[0][lang] == &quot;en&quot;</code> غير معروفة عندما تكون قيمة <code translate="no">lang</code> للعنصر الأول null، أو عندما لا يحتوي الكيان على عنصر في هذا الموضع، أو عندما يكون حقل StructArray null، وبالتالي لا يتطابق الكيان.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">المسندات غير المدعومة<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -451,14 +497,17 @@ chunks is not null
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لا تدعم المسندات على مستوى العناصر <code translate="no">$[...]</code> ما يلي:</p>
+    </button></h2><p>لا تدعم المسندات على مستوى العنصر <code translate="no">$[...]</code> ما يلي:</p>
 <ul>
 <li><p>وظائف مطابقة النص، مثل <code translate="no">text_match(field, &quot;...&quot;)</code> أو <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
 <li><p>بناء جملة مسار JSON، و <code translate="no">exists</code> على مسارات JSON، أو دوال JSON مثل <code translate="no">json_contains</code> أو <code translate="no">json_contains_all</code> أو <code translate="no">json_contains_any</code>.</p></li>
-<li><p>دوال حاويات المصفوفات مثل <code translate="no">array_contains</code> أو <code translate="no">array_contains_all</code> أو <code translate="no">array_contains_any</code> أو <code translate="no">array_length</code> على <code translate="no">$[subfield]</code>. استخدم هذه الدوال بدلاً من ذلك على مسار حقل فرعي مثل <code translate="no">chunks[section]</code> في مسند على مستوى الصف.</p></li>
-<li><p><code translate="no">$[subfield] is null</code> أو <code translate="no">$[subfield] is not null</code>.</p></li>
-<li><p>وظائف الهندسة / نظم المعلومات الجغرافية.</p></li>
-<li><p>تعبيرات الطابع الزمني tz.</p></li>
+<li><p>دوال حاويات المصفوفات مثل <code translate="no">array_contains</code> أو <code translate="no">array_contains_all</code> أو <code translate="no">array_contains_any</code> أو <code translate="no">array_length</code> على <code translate="no">$[subfield]</code> لحقل فرعي قياسي. استخدم هذه الدوال بدلاً من ذلك على مسار حقل فرعي مثل <code translate="no">chunks[section]</code> في مسند على مستوى الصف. بدءًا من Milvus 3.0.6، يتم دعمها على <code translate="no">$[tags]</code> للحقول الفرعية القياسية <code translate="no">ARRAY</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> أو <code translate="no">$[subfield] is not null</code> قبل الإصدار Milvus 3.0.6.</p></li>
+</ul>
+<ul>
+<li><p>الرمز السفلي في حقل فرعي من المصفوفة، مثل <code translate="no">$[tags][0]</code> ، و <code translate="no">like</code> في <code translate="no">$[tags]</code>.</p></li>
+<li><p>وظائف الهندسة / نظم المعلومات الجغرافية (GIS).</p></li>
+<li><p>تعبيرات Timestamptz.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
 <li><p>المسندات المتجهة على مستوى الحقل.</p></li>
 <li><p>استدعاءات وظائف التصفية العامة ما لم تدعم توقيعات الوظائف المحددة ومسارات التنفيذ صراحةً المسندات على مستوى عناصر StructArray.</p></li>
@@ -486,8 +535,13 @@ chunks is not null
 <li><p>لا تقم بتداخل <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code> داخل مشغل StructArray آخر.</p></li>
 <li><p>استخدم <code translate="no">threshold=N</code> المسمى لـ <code translate="no">MATCH_LEAST</code> و <code translate="no">MATCH_MOST</code> و <code translate="no">MATCH_EXACT</code>.</p></li>
 <li><p>في المسارات الموضعية، اكتب موضع العنصر قبل اسم الحقل الفرعي: <code translate="no">chunks[0][section]</code> ، وليس <code translate="no">chunks[section][0]</code>.</p></li>
-<li><p>استخدم <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> فقط على حقل StructArray بأكمله، مثل <code translate="no">chunks is null</code>. لا تستخدمهما في مسار حقل فرعي مثل <code translate="no">chunks[section]</code> أو في <code translate="no">$[subfield]</code>.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> على StructArray فارغ يُرجع <code translate="no">false</code>.</p></li>
+</ul>
+<ul>
+<li>استخدم <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> فقط على حقل StructArray بأكمله، مثل <code translate="no">chunks is null</code> ، أو، بدءًا من Milvus 3.0.6، على <code translate="no">$[subfield]</code> داخل <code translate="no">element_filter</code> أو <code translate="no">MATCH_*</code>. لا تستخدمهما في مسار حقل فرعي مثل <code translate="no">chunks[section]</code>.</li>
+</ul>
+<ul>
+<li><p>لا تقم بالرجوع إلى حقل فرعي في مصفوفة. لا يتم دعم <code translate="no">$[tags][0]</code> و <code translate="no">chunks[0][tags][0]</code>.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> عند استخدامها على StructArray فارغ، تُرجع <code translate="no">false</code>.</p></li>
 <li><p><code translate="no">MATCH_ALL</code> عند استخدامها على StructArray فارغ، تُرجع <code translate="no">true</code>.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">انظر أيضًا<button data-href="#See-also" class="anchor-icon" translate="no">

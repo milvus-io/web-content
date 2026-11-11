@@ -27,6 +27,9 @@ summary: >-
 <li><p>Каждая коллекция состоит только из одного первичного поля. После его установки при создании коллекции вы не сможете изменить первичное поле или изменить его свойства.</p></li>
 <li><p>Каждая коллекция может иметь только один ключ разбиения. После его установки при создании коллекции ключ разбиения изменить нельзя.</p></li>
 </ul>
+<ul>
+<li>Начиная с версии Milvus 3.0.6, для поля <a href="/docs/ru/array-of-structs.md">StructArray</a> или одного из путей к его подполям, например <code translate="no">chunks[text]</code>, можно изменять только <code translate="no">mmap.enabled</code>, <code translate="no">field.description</code> и <code translate="no">warmup</code>. Другие свойства, такие как <code translate="no">max_capacity</code> и <code translate="no">max_length</code>, отклоняются. Родительское поле и его подполя хранятся вместе, и свойства <code translate="no">mmap.enabled</code> и <code translate="no">warmup</code> вступают в силу для общего хранилища, если они включены хотя бы в одном из них: отключение одного из этих свойств только в подполе не вступает в силу, пока оно включено в родительском поле или в одном из родственных подполей. Кроме того, параметр « <code translate="no">warmup</code> », установленный в значение « <code translate="no">disable</code> », не пропускает все операции чтения: данные, необходимые для выполнения запроса, такие как смещения элементов, по-прежнему считываются.</li>
+</ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">Изменение поля VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,8 +46,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Поле VarChar имеет свойство <code translate="no">max_length</code>, которое определяет максимальное количество байтов, допустимое для каждого значения поля. Свойство <code translate="no">max_length</code> можно изменить.</p>
-<p>В следующем примере предполагается, что коллекция содержит поле VarChar с именем <code translate="no">varchar</code>, и задаётся его свойство <code translate="no">max_length</code>.</p>
+    </button></h2><p>Поле VarChar имеет свойство <code translate="no">max_length</code>, которое определяет максимальное количество байтов, разрешенное для каждого значения поля. Вы можете изменить свойство <code translate="no">max_length</code>.</p>
+<p>В следующем примере предполагается, что коллекция имеет поле VarChar с именем <code translate="no">varchar</code>, и задается его свойство <code translate="no">max_length</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -210,7 +213,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><p>Поле массива имеет два свойства: <code translate="no">element_type</code> и <code translate="no">max_capacity</code>. Первое определяет тип данных элементов массива, а второе ограничивает максимальное количество элементов в массиве. Можно изменять только свойство <code translate="no">max_capacity</code>.</p>
-<p>В следующем примере предполагается, что коллекция имеет поле типа массива с именем <code translate="no">array</code>, и задаётся его свойство <code translate="no">max_capacity</code>.</p>
+<p>В следующем примере предполагается, что коллекция имеет поле массива с именем <code translate="no">array</code>, и задается его свойство <code translate="no">max_capacity</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -1035,7 +1035,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales",
+            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1235,7 +1235,7 @@
             "children": []
           },
           {
-            "label": "Utilizar clave de partición",
+            "label": "Utilizar la clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1371,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de descomposición",
+                "label": "Clasificación de la descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Comandos",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Casos habituales",
-            "id": "common-cases",
+            "label": "Copia de seguridad y restauración mediante instantáneas",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Copia de seguridad 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Copia de seguridad y restauración en una sola instancia",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Comandos",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de un mismo depósito",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrar entre instancias de distintos depósitos",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Casos habituales",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Copia de seguridad y restauración en una sola instancia",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instancias de un mismo depósito",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instancias de distintos depósitos",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instancias en distintos entornos de S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrar entre instancias en distintos entornos de S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Actualizar a la versión 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2286,7 +2318,7 @@
             "children": []
           },
           {
-            "label": "Cambio",
+            "label": "Transición",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []

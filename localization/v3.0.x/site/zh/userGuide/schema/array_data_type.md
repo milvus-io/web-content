@@ -41,9 +41,13 @@ summary: ARRAY 字段用于存储一组具有相同数据类型的有序元素�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>默认值</strong>：ARRAY字段不支持默认值。不过，您可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。详情请参阅<a href="/docs/zh/nullable-and-default.md">“可为空与默认值</a>”。</p></li>
-<li><p><strong>数据类型：</strong>ARRAY字段中的所有元素必须具有相同的数据类型，该类型由<code translate="no">element_type</code> 参数定义。当<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> 时，您还必须指定<code translate="no">max_length</code> ，该参数定义了每个数组元素允许的最大字节数。<code translate="no">element_type</code> 接受Milvus支持的任何标量数据类型，但<code translate="no">JSON</code> 除外。对于<code translate="no">element_type=STRUCT</code> ，请使用StructArray字段并提供<code translate="no">struct_schema</code> ；详情请参阅<a href="/docs/zh/create-structarray-field.md">StructArray</a>。</p></li>
-<li><p><strong>数组容量</strong>：ARRAY字段中的元素数量必须小于或等于创建数组时定义的最大容量，具体由<code translate="no">max_capacity</code> 指定。该值应为<strong>1</strong>到<strong>4096</strong>之间的整数。</p></li>
+<li><strong>默认值</strong>：ARRAY字段不支持默认值。不过，您可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。详情请参阅<a href="/docs/zh/nullable-and-default.md">“可为空与默认值</a>”。</li>
+</ul>
+<ul>
+<li><strong>数据类型：</strong>ARRAY字段中的所有元素必须具有相同的数据类型，该类型由<code translate="no">element_type</code> 参数定义。当<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> 时，您还必须指定<code translate="no">max_length</code> ，该参数定义了每个数组元素允许的最大字节数。<code translate="no">element_type</code> 接受Milvus支持的任何标量数据类型，但<code translate="no">JSON</code> 除外。对于<code translate="no">element_type=STRUCT</code> ，请使用StructArray字段并提供<code translate="no">struct_schema</code> ；详情请参阅<a href="/docs/zh/create-structarray-field.md">StructArray</a>。 顶级 ARRAY 字段不能包含向量或嵌套数组，且其各个元素不能为空；在 Milvus 3.0.6 及更高版本中，这些形式仅适用于 StructArray 字段内的子字段。</li>
+</ul>
+<ul>
+<li><p><strong>数组容量</strong>：ARRAY 字段中的元素数量必须小于或等于创建数组时定义的最大容量，该容量由<code translate="no">max_capacity</code> 指定。该值应为<strong>1</strong>到<strong>4096</strong> 范围内的整数。</p></li>
 <li><p><strong>字符串处理</strong>：数组字段中的字符串值按原样存储，不进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 将按输入形式存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">添加 ARRAY 字段<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -370,7 +374,7 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
         ></path>
       </svg>
     </button></h2><p>建立索引有助于提升搜索和查询性能。在 Milvus 集群中，向量字段必须建立索引，而标量字段则可选。</p>
-<p>以下示例在向量字段<code translate="no">embedding</code> 和ARRAY字段<code translate="no">tags</code> 上创建索引，两者均使用<code translate="no">AUTOINDEX</code> 索引类型。使用此类型时，Milvus会根据数据类型自动选择最合适的索引。您还可以为每个字段自定义索引类型和参数。有关详细信息，请参阅《<a href="/docs/zh/index-explained.md">索引详解》</a>。</p>
+<p>以下示例在向量字段<code translate="no">embedding</code> 和ARRAY字段<code translate="no">tags</code> 上创建索引，两者均使用<code translate="no">AUTOINDEX</code> 索引类型。使用此类型时，Milvus会根据数据类型自动选择最合适的索引。您也可以为每个字段自定义索引类型和参数。详情请参阅《<a href="/docs/zh/index-explained.md">索引详解》</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -480,7 +484,7 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">创建Collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<h2 id="Create-collection" class="common-anchor-header">创建 Collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1264,4 +1268,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 还支持诸如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> 等高级数组过滤操作符，以进一步增强查询能力。更多详细信息，请参阅<a href="/docs/zh/array-operators.md">“ARRAY 操作符”</a>。</p>
+<p>此外，Milvus 还支持诸如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> 等高级数组过滤运算符，以进一步增强查询能力。更多详细信息，请参阅<a href="/docs/zh/array-operators.md">“ARRAY 运算符”</a>。</p>

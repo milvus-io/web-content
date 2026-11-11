@@ -35,8 +35,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>StructArray</strong>（構造体の配列とも呼ばれる）は、各エンティティ内に順序付けられた Struct 要素のセットを格納します。配列内のすべての Struct 要素は、同じスキーマに従います。Struct 要素には、スカラーサブフィールド、ベクトルサブフィールド、あるいはその両方を含めることができます。</p>
-<p>たとえば、コレクションは1つの記事をエンティティとして格納し、そのチャンクを「<code translate="no">chunks</code> 」という名前のStructArrayフィールドに格納できます。各チャンクには、テキスト、セクションのメタデータ、品質スコア、および1つ以上のベクトル埋め込みを含めることができます。</p>
+    </button></h2><p><strong>StructArray</strong>（構造体の配列とも呼ばれる）は、各エンティティ内に順序付けられた Struct 要素のセットを格納します。配列内のすべての Struct 要素は、同じスキーマに従います。Struct 要素には、スカラーサブフィールド、ベクトルサブフィールド、および Milvus 3.0.6 以降ではスカラー配列サブフィールドを含めることができます。</p>
+<p>たとえば、あるコレクションでは、1つの記事をエンティティとして格納し、そのチャンクを「<code translate="no">chunks</code> 」という名前のStructArrayフィールドに格納することができます。各チャンクには、テキスト、セクションのメタデータ、品質スコア、および1つ以上のベクトル埋め込みを含めることができます。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -65,7 +65,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>この例にある2つのベクトルサブフィールドは、2つの検索の観点から見た同じチャンクを表しています。「<code translate="no">chunks[emb_list_vector]</code> 」は、<code translate="no">MAX_SIM*</code> メトリックを用いた EmbeddingList 検索を目的としており、「<code translate="no">chunks[emb]</code> 」は、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、または<code translate="no">L2</code> などの通常のベクトルメトリックを用いた要素レベルの検索を目的としています。</p>
+<p>この例にある2つのベクトルサブフィールドは、2つの検索の観点から見た同じチャンクを表しています。「<code translate="no">chunks[emb_list_vector]</code> 」は、<code translate="no">MAX_SIM*</code> メトリクスを使用した EmbeddingList 検索を目的としており、「<code translate="no">chunks[emb]</code> 」は、<code translate="no">COSINE</code> 、<code translate="no">IP</code> 、または<code translate="no">L2</code> などの通常のベクトルメトリクスを使用した要素レベルの検索を目的としています。</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">StructArrayの使用場面<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,10 +85,10 @@ summary: >-
     </button></h2><p>StructArrayは、返したい自然単位が、検索やフィルタリングに用いたい自然単位よりも大きい場合に使用します。</p>
 <table>
 <thead>
-<tr><th>使用例</th><th>StructArrayが役立つ理由</th><th>StructArray の代表的なフィールド</th></tr>
+<tr><th>ユースケース</th><th>StructArrayが役立つ理由</th><th>StructArray の代表的なフィールド</th></tr>
 </thead>
 <tbody>
-<tr><td>ドキュメントの検索</td><td>1つのドキュメントをエンティティとして保存し、そのチャンク全体を横断して検索します。</td><td><code translate="no">chunks</code></td></tr>
+<tr><td>ドキュメントの検索</td><td>1つのドキュメントをエンティティとして保存しつつ、そのチャンク全体を横断して検索します。</td><td><code translate="no">chunks</code></td></tr>
 <tr><td>遅延インタラクションによる検索</td><td>ドキュメントやページを埋め込みリストとして保存し、<code translate="no">MAX_SIM*</code> でスコアを算出します。</td><td><code translate="no">chunks[emb_list_vector]</code> または<code translate="no">patches[emb]</code></td></tr>
 <tr><td>要素レベル検索</td><td>最も関連性の高いチャンク、クリップ、パッチ、またはオブザベーションを、その配列オフセットを含めて返す。</td><td><code translate="no">chunks[emb]</code></td></tr>
 <tr><td>構造化フィルタリング</td><td>Struct 要素内のスカラーサブフィールド（section、score、page、flags など）でフィルタリングします。</td><td><code translate="no">chunks[section]</code>,<code translate="no">chunks[quality_score]</code></td></tr>
@@ -118,7 +118,7 @@ summary: >-
 <tbody>
 <tr><td>1 つの親オブジェクトと、多数の構造化された子オブジェクトをモデル化します。</td><td>StructArrayフィールドを作成します。</td><td>エンティティには、順序付けられた Struct 要素が含まれます。</td><td><a href="/docs/ja/create-structarray-field.md">StructArrayフィールドの作成</a></td></tr>
 <tr><td>ネストされた子データを含む親レコードを挿入します。</td><td>StructArrayフィールドがStructオブジェクトのリストであるエンティティを挿入します。</td><td>エンティティレベルの挿入。</td><td><a href="/docs/ja/insert-data-into-structarray-fields.md">StructArrayフィールドへのデータの挿入</a></td></tr>
-<tr><td>ColBERT、ColPali、またはドキュメントレベルのレイトインタラクション検索を実行します。</td><td><code translate="no">MAX_SIM*</code> インデックスを使用したEmbeddingList検索を実行します。</td><td>エンティティレベル。</td><td><a href="/docs/ja/search-with-embedding-lists.md">Embedding Lists を使用した検索</a></td></tr>
+<tr><td>ColBERT、ColPali、またはドキュメントレベルのレイトインタラクション検索を実行します。</td><td><code translate="no">MAX_SIM*</code> インデックスを使用したEmbeddingList検索。</td><td>エンティティレベル。</td><td><a href="/docs/ja/search-with-embedding-lists.md">Embedding Lists を使用した検索</a></td></tr>
 <tr><td>個々のチャンク、クリップ、またはパッチを検索します。</td><td>通常のベクトルメトリックを使用した要素レベルの検索を行います。</td><td>Struct 要素レベル。利用可能な場合はオフセットを含みます。</td><td><a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a></td></tr>
 <tr><td>スカラー条件に一致する要素に限定して、要素レベルのベクトル検索を実行します。</td><td><code translate="no">element_filter</code> を使用します。</td><td>要素レベルのフィルタリング。結果の形状は検索タイプによって異なります。</td><td><a href="/docs/ja/filtered-search-with-structarray.md">StructArray を使用したフィルタリング検索</a></td></tr>
 <tr><td>条件を満たす Struct 要素の数に基づいてエンティティを選択します。</td><td><code translate="no">MATCH_ANY</code> 、<code translate="no">MATCH_ALL</code> 、<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 、または<code translate="no">MATCH_EXACT</code> を使用します。</td><td>エンティティレベル。</td><td><a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a></td></tr>
@@ -152,7 +152,7 @@ summary: >-
   <tbody>
     <tr>
       <td>
-        <p>EmbeddingList検索では、StructArrayベクトルサブフィールド内のベクトルを、親エンティティの1つの埋め込みリストとして扱います。クエリも埋め込みリストです。Milvusは、<code translate="no">MAX_SIM*</code> メトリックを使用して、クエリの埋め込みリストと保存された埋め込みリストを比較し、一致するエンティティを返します。</p>
+        <p>EmbeddingList検索では、StructArrayのベクトルサブフィールド内のベクトルを、親エンティティの1つの埋め込みリストとして扱います。クエリも埋め込みリストです。Milvusは、<code translate="no">MAX_SIM*</code> メトリックを使用して、クエリの埋め込みリストと保存された埋め込みリストを比較し、一致するエンティティを返します。</p>
         <ul>
           <li>クエリデータ：埋め込みリスト。</li>
           <li>メトリックファミリー：<code translate="no">MAX_SIM*</code> 。</li>
@@ -173,7 +173,7 @@ summary: >-
   </tbody>
 </table>
 <div class="alert warning">
-<p>コレクションで EmbeddingList 検索と要素レベル検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを使用してください。ベクトルフィールドまたはベクトルサブフィールドは 1 つのインデックスのみを受け付け、2 つの検索モードでは異なるメトリックファミリーが必要です。</p>
+<p>コレクションで EmbeddingList 検索と要素レベル検索の両方が必要な場合は、2 つの別々のベクトルサブフィールドを使用してください。ベクトルフィールドまたはベクトルサブフィールドは 1 つのインデックスのみを受け入れ、2 つの検索モードでは異なるメトリックファミリーが必要です。</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">ドキュメントマップ<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,8 +228,8 @@ summary: >-
 <li><p>Struct は、Array フィールドの要素型として使用できます。トップレベルのコレクションフィールドとしては使用されません。</p></li>
 <li><p>同じ StructArray フィールド内のすべての Struct 要素は、1 つの事前定義されたスキーマを共有します。</p></li>
 <li><p>Vector サブフィールドにはインデックスが必要です。EmbeddingList 検索では<code translate="no">MAX_SIM*</code> メトリックが使用されますが、要素レベルの検索では通常のベクトルメトリックが使用されます。</p></li>
-<li><p><code translate="no">element_filter</code> および `<code translate="no">MATCH_*</code> ` は、StructArray フィールド内のスカラーサブフィールド用です。`<code translate="no">$[subfield]</code> ` は、これらの演算子内でのみ使用してください。行レベルのフィルターでも、<code translate="no">chunks[0][section]</code> 、<code translate="no">array_length(chunks)</code> 、<code translate="no">array_contains(chunks[section], ...)</code> など、StructArray パスを直接参照できます。</p></li>
-<li><p>一部の検索の組み合わせは、バージョンに依存したり、モード固有であったりします。範囲検索、グループ化検索、ハイブリッド検索、NULL 許容フィールド、または動的に追加されたフィールドを利用する前に、『<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>』を確認してください。</p></li>
+<li><p><code translate="no">element_filter</code> また、<code translate="no">MATCH_*</code> は、StructArrayフィールド内のスカラーサブフィールド用です。<code translate="no">$[subfield]</code> は、これらの演算子内でのみ使用してください。行レベルのフィルターでも、<code translate="no">chunks[0][section]</code> 、<code translate="no">array_length(chunks)</code> 、<code translate="no">array_contains(chunks[section], ...)</code> など、StructArrayパスを直接参照できます。</p></li>
+<li><p>一部の検索の組み合わせは、バージョンに依存したり、モード固有であったりします。範囲検索、グループ化検索、ハイブリッド検索、NULL 許容フィールド、動的に追加されたフィールド、要素レベルの NULL 値、配列のサブフィールド、またはサブフィールドの追加・削除を利用する前に、『<a href="/docs/ja/structarray-limits.md">StructArray の制限事項</a>』を確認してください。</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">次の手順<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -250,6 +250,6 @@ summary: >-
 <li><p>スキーマを設計するには、「<a href="/docs/ja/create-structarray-field.md">StructArray フィールドの作成</a>」を参照してください。</p></li>
 <li><p>データを準備するには、「<a href="/docs/ja/insert-data-into-structarray-fields.md">StructArrayフィールドへのデータの挿入</a>」を参照してください。</p></li>
 <li><p>インデックスを選択するには、「<a href="/docs/ja/index-structarray-fields.md">StructArray フィールドのインデックス付け</a>」を参照してください。</p></li>
-<li><p>StructArrayのベクトルサブフィールドを検索するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」から始めてください。</p></li>
+<li><p>StructArray のベクトルサブフィールドを検索するには、「<a href="/docs/ja/basic-vector-search-with-structarray.md">StructArray を使用した基本的なベクトル検索</a>」から始めてください。</p></li>
 <li><p>StructArrayのスカラーサブフィールドをフィルタリングするには、「<a href="/docs/ja/struct-array-operators.md">StructArray演算子</a>」および「<a href="/docs/ja/filtered-search-with-structarray.md">StructArrayを使用したフィルタ検索</a>」を参照してください。</p></li>
 </ol>

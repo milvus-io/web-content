@@ -18,7 +18,7 @@ summary: 配置可为空字段和默认值，包括Schema、插入、索引、�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支持可为空字段，这允许字段值为空或显式设置为 NULL。可为空性在 Schema 级别定义，并一致地应用于数据摄入、索引、搜索和查询操作。</p>
+    </button></h1><p>Milvus 支持可为空字段，允许字段值为空或显式设置为 NULL。可为空性在 Schema 级别定义，并在数据摄取、索引、搜索和查询操作中始终如一地应用。</p>
 <p>在以下情况下使用可空字段：</p>
 <ul>
 <li>从允许缺失值的外部系统摄取数据时。</li>
@@ -42,7 +42,7 @@ summary: 配置可为空字段和默认值，包括Schema、插入、索引、�
       </svg>
     </button></h2><ul>
 <li><p>允许 NULL 值的向量字段不支持 `<code translate="no">IS NULL</code> ` 或 `<code translate="no">IS NOT NULL</code> ` 过滤表达式。您无法根据向量字段值是否为 NULL 来显式过滤实体。</p></li>
-<li><p>从 Milvus 3.0.0 开始，父级<a href="/docs/zh/array-of-structs.md">StructArray</a>字段可以是可为空的。请在父级 StructArray 字段上设置<code translate="no">nullable=True</code> ，而非在单个子字段上。NULL 适用于整个 StructArray 字段，而非单个 Struct 元素，且 Milvus 会在内部将父级字段的可为空性传播至其子字段。 添加到现有 Collection 中的 StructArray 字段必须为可空，以便现有实体能够为该新字段返回 NULL。有关详细信息，请参阅<a href="/docs/zh/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray 限制</a>。</p></li>
+<li><p>从 Milvus 3.0.0 开始，父级<a href="/docs/zh/array-of-structs.md">StructArray</a>字段可以是可为空的。请在父级 StructArray 字段上设置<code translate="no">nullable=True</code> ，而不是在单个子字段上设置。NULL 适用于整个 StructArray 字段，而不适用于单个 Struct 元素，Milvus 会在内部将父级的可为空性传播到其子字段。 添加到现有 Collection 中的 StructArray 字段必须为可为空，以便现有实体能够为该新字段返回 NULL。 从 Milvus 3.0.6 开始，子字段还可以允许单个 Struct 元素包含 NULL 值：对标量或向量字段使用 `<code translate="no">nullable=True</code> `，对数组子字段使用 `<code translate="no">element_nullable=True</code> `；但 Struct 元素本身仍不能为 NULL。详情请参阅《<a href="/docs/zh/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray 限制</a>》。</p></li>
 <li><p>可空属性在字段创建时定义，此后无法修改。您无法对现有字段启用或禁用可空性。</p></li>
 <li><p>标记为可空的字段不能用作Partition Key。Partition Key字段必须始终包含有效的、非空的值。有关更多信息，请参阅《<a href="/docs/zh/use-partition-key.md">使用Partition Key</a>》。</p></li>
 </ul>
@@ -67,12 +67,12 @@ summary: 配置可为空字段和默认值，包括Schema、插入、索引、�
 <li>输入实体中省略了该字段。</li>
 <li>该字段被显式设置为 NULL（例如，在 Python 中使用<code translate="no">None</code> ）。</li>
 </ul>
-<p>如果字段未定义为可为空（默认行为），则每个实体都必须为该字段提供有效值。省略该字段或显式赋值为 NULL 都会导致插入或导入操作失败。</p>
-<p>Collection 模式中的<strong>标量字段和向量字段均</strong>支持 nullable 属性。从 Milvus 3.0.0 开始，父级 StructArray 字段也支持该属性。请勿单独将 Struct 子字段配置为可为空；应在 StructArray 父字段上定义可为空性，Milvus 会内部将该设置传播至其子字段。</p>
+<p>如果字段未被定义为可为空（默认行为），则每个实体都必须为该字段提供有效值。省略该字段或显式赋值为 NULL 都会导致插入或导入操作失败。</p>
+<p>Collection 模式中的<strong>标量字段和向量字段</strong>均支持 nullable 属性。从 Milvus 3.0.0 开始，父级 StructArray 字段也支持该属性。 请勿单独将 Struct 子字段配置为行级可为空；应在 StructArray 父字段上定义行级可为空性，Milvus 会内部将该设置传播至其子字段。 若要允许单个 Struct 元素内的子字段值为 NULL（元素级空值），请在 Milvus 3.0.6 及更高版本中，对标量或向量字段设置 `<code translate="no">nullable=True</code> `，或对数组子字段设置 `<code translate="no">element_nullable=True</code> `；请参阅<a href="/docs/zh/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">“创建 StructArray 字段”</a>。</p>
 <div class="alert note">
 <p>可空性决定字段值是否可以为空；它并不定义当字段为空时使用何种值。</p>
 <ul>
-<li>如果配置了可空字段但未指定默认值，则省略该字段将导致存储 NULL 值。</li>
+<li>如果可为空字段在配置时未指定默认值，则省略该字段将导致存储 NULL 值。</li>
 <li>如果配置了默认值，Milvus 可能会存储该默认值。有关详细信息，请参阅<a href="/docs/zh/default-values.md">“默认值”</a>。</li>
 </ul>
 </div>
@@ -327,7 +327,7 @@ curl --request POST \
 <li>实体在插入时可以省略 `<code translate="no">embedding</code> ` 字段，或将其赋值为 `NULL`。</li>
 <li>是否允许 NULL 值的决定在 Collection 创建时即已确定。</li>
 </ul>
-<p>为清晰起见，以下示例将重点放在可为空的向量字段（<code translate="no">embedding</code> ）上。定义可为空的标量字段是可选的，且无需遵循本指南的其余内容。</p>
+<p>为清晰起见，以下示例重点介绍可为空的向量字段（<code translate="no">embedding</code> ）。定义可为空的标量字段是可选的，且无需遵循本指南的其余内容。</p>
 <p><details>
 <summary>可选：定义可为空的标量字段</summary></p>
 <p>标量字段也可以使用相同的 `<code translate="no">nullable</code> ` 属性定义为可为空，并在数据摄入过程中遵循相同的规则。例如：</p>
@@ -401,8 +401,8 @@ schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦在 Collection Schema 中将字段定义为可空，Milvus 便允许在数据摄入过程中该字段值为空或显式设置为 NULL。</p>
-<p>下面的示例将三个实体插入到<a href="#Define-a-nullable-field-in-the-collection-schema">“在Collection模式中定义可为空字段”</a>中创建的Collection中，演示了这些不同的情况。</p>
+    </button></h2><p>一旦在 Schema 中将字段定义为可空，Milvus 便允许在数据摄入过程中该字段值为空或显式设置为 NULL。</p>
+<p>下面的示例将三个实体插入到<a href="#Define-a-nullable-field-in-the-collection-schema">“在Collection Schema中定义可为空字段</a>”中创建的Collection中，演示了这些不同的情况。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -748,8 +748,8 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <p>此时：</p>
 <ul>
-<li>具有有效Embeddings值的实体已被索引，并可供搜索。</li>
-<li>Embeddings whose value is NULL remain in the Collection, but they are not included in the vector index.</li>
+<li>具有有效Embeddings值的实体已被索引，并已准备好供搜索。</li>
+<li>Embeddings whose value is NULL are still retained in the Collection, but they are not included in the vector index.</li>
 </ul>
 <h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">可为空字段的搜索行为<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -915,7 +915,7 @@ Console.WriteLine(res);
 <ul>
 <li>仅将<code translate="no">embedding</code> 字段值不为空的实体视为候选对象。</li>
 <li><code translate="no">embedding</code> 值为 NULL 的实体将被排除在评估之外。</li>
-<li>返回的结果数量取决于Collection中存在多少个有效向量。</li>
+<li>返回的结果数量取决于Collection中存在多少个有效的向量。</li>
 </ul>
 <h2 id="Query-and-filtering-implications" class="common-anchor-header">查询与过滤的注意事项<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1020,7 +1020,7 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>当某个字段同时配置了<code translate="no">nullable</code> 和<code translate="no">default_value</code> 时，以下规则将决定Milvus在插入过程中如何处理NULL输入或缺失的字段值。</p>
+    </button></h2><p>当某个字段同时配置了<code translate="no">nullable</code> 和<code translate="no">default_value</code> 时，以下规则将决定Milvus在插入操作中如何处理NULL输入或缺失的字段值。</p>
 <table>
 <thead>
 <tr><th>启用可空性</th><th>默认值</th><th>用户输入（NULL 或省略）</th><th>结果</th></tr>

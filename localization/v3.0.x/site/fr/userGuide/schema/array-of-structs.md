@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Utilisez StructArray lorsqu'une entité doit stocker une liste ordonnée d'éléments structurés, tels qu'un document comportant plusieurs segments, une page comportant plusieurs éléments visuels ou une vidéo comportant plusieurs extraits. StructArray conserve ces éléments au sein de l'entité parente tout en permettant la recherche vectorielle et le filtrage scalaire sur les champs de chaque élément.</p>
-<h2 id="What-is-StructArray" class="common-anchor-header">Qu’est-ce que StructArray ?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
+<h2 id="What-is-StructArray" class="common-anchor-header">Qu’est-ce qu’un StructArray ?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,8 +40,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un <strong>StructArray</strong>, également appelé « tableau de structures », stocke un ensemble ordonné d’éléments Struct dans chaque entité. Chaque élément Struct du tableau suit le même schéma. Un élément Struct peut contenir des sous-champs scalaires, des sous-champs vectoriels, ou les deux.</p>
-<p>Par exemple, une collection peut stocker un article en tant qu’entité et stocker ses segments dans un champ StructArray nommé « <code translate="no">chunks</code> ». Chaque segment peut inclure du texte, des métadonnées de section, des scores de qualité et un ou plusieurs vecteurs d’encodage.</p>
+    </button></h2><p>Un <strong>StructArray</strong>, également appelé « tableau de structures », stocke un ensemble ordonné d’éléments Struct dans chaque entité. Chaque élément Struct du tableau suit le même schéma. Un élément Struct peut contenir des sous-champs scalaires, des sous-champs vectoriels et, à partir de Milvus 3.0.6, des sous-champs de tableaux scalaires.</p>
+<p>Par exemple, une collection peut stocker un article en tant qu’entité et stocker ses segments dans un champ StructArray nommé « <code translate="no">chunks</code> ». Chaque segment peut inclure du texte, des métadonnées de section, des scores de qualité et une ou plusieurs représentations vectorielles.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -126,9 +126,9 @@ summary: >-
 <tr><td>Exécuter ColBERT, ColPali ou une recherche par interaction tardive au niveau du document.</td><td>Utiliser la recherche EmbeddingList avec un index « <code translate="no">MAX_SIM*</code> ».</td><td>Niveau de l’entité.</td><td><a href="/docs/fr/search-with-embedding-lists.md">Recherche avec les listes d’embedding</a></td></tr>
 <tr><td>Recherchez des segments, des extraits ou des fragments individuels.</td><td>Utilisez la recherche au niveau des éléments avec une métrique vectorielle standard.</td><td>Niveau des éléments de structure, avec décalage lorsque celui-ci est disponible.</td><td><a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a></td></tr>
 <tr><td>Limitez la recherche vectorielle au niveau des éléments à ceux qui répondent à des conditions scalaires.</td><td>Utilisez ` <code translate="no">element_filter</code>`.</td><td>Filtrage au niveau des éléments ; la forme du résultat dépend du type de recherche.</td><td><a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a></td></tr>
-<tr><td>Sélectionnez des entités en fonction du nombre d’éléments Struct qui satisfont une condition.</td><td>Utilisez <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Niveau de l'entité.</td><td><a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a></td></tr>
+<tr><td>Sélectionnez des entités en fonction du nombre d’éléments Struct qui satisfont une condition.</td><td>Utilisez <code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> ou <code translate="no">MATCH_EXACT</code>.</td><td>Niveau de l’entité.</td><td><a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a></td></tr>
 <tr><td>Utilisez des limites de score ou de distance sur les sous-champs vectoriels de StructArray.</td><td>Utilisez la recherche par plage au niveau des éléments.</td><td>Niveau des éléments de Struct.</td><td><a href="/docs/fr/range-search-with-structarray.md">Recherche par plage avec StructArray</a></td></tr>
-<tr><td>Renvoyer au maximum un résultat par entité parente après une recherche au niveau des éléments.</td><td>Utiliser la recherche par regroupement selon la clé primaire.</td><td>Niveau de l'entité après regroupement.</td><td><a href="/docs/fr/grouping-search-with-structarray.md">Recherche groupée avec StructArray</a></td></tr>
+<tr><td>Renvoyer au maximum un résultat par entité parente après une recherche au niveau des éléments.</td><td>Utiliser la recherche groupée par clé primaire.</td><td>Niveau de l'entité après regroupement.</td><td><a href="/docs/fr/grouping-search-with-structarray.md">Recherche groupée avec StructArray</a></td></tr>
 <tr><td>Combiner la recherche d'éléments StructArray avec un autre champ vectoriel.</td><td>Utiliser une recherche hybride avec une requête AnnSearchRequest ciblant un sous-champ vectoriel de StructArray.</td><td>Sous-recherche au niveau des éléments, reclassement au niveau des entités.</td><td><a href="/docs/fr/hybrid-search-with-structarray.md">Recherche hybride avec StructArray</a></td></tr>
 </tbody>
 </table>
@@ -157,12 +157,12 @@ summary: >-
   <tbody>
     <tr>
       <td>
-        <p>La recherche EmbeddingList traite les vecteurs contenus dans un sous-champ vectoriel de StructArray comme une seule liste d’embeddings pour l’entité parente. La requête est également une liste d’embeddings. Milvus compare la liste d’embeddings de la requête à la liste d’embeddings stockée à l’aide d’une métrique d’ <code translate="no">MAX_SIM*</code>, puis renvoie les entités correspondantes.</p>
+        <p>La recherche EmbeddingList traite les vecteurs contenus dans un sous-champ vectoriel de StructArray comme une seule liste d’embeddings pour l’entité parente. La requête est également une liste d’embeddings. Milvus compare la liste d’embeddings de la requête à la liste d’embeddings stockée à l’aide d’une métrique de « <code translate="no">MAX_SIM*</code> » et renvoie les entités correspondantes.</p>
         <ul>
           <li>Données de requête : liste d’embeddings.</li>
           <li>Famille de métriques : <code translate="no">MAX_SIM*</code>.</li>
           <li>Granularité des résultats : niveau de l’entité.</li>
-          <li>Idéal pour : la recherche à interaction tardive au niveau du document ou de la page.</li>
+          <li>Idéal pour : la recherche en phase avancée au niveau du document ou de la page.</li>
         </ul>
       </td>
       <td>
@@ -178,7 +178,7 @@ summary: >-
   </tbody>
 </table>
 <div class="alert warning">
-<p>Si votre collection nécessite à la fois une recherche EmbeddingList et une recherche au niveau des éléments, utilisez deux sous-champs vectoriels distincts. Un champ vectoriel ou un sous-champ vectoriel n'accepte qu'un seul index, et les deux modes de recherche requièrent des familles de métriques différentes.</p>
+<p>Si votre collection nécessite à la fois une recherche EmbeddingList et une recherche au niveau des éléments, utilisez deux sous-champs vectoriels distincts. Un champ vectoriel ou un sous-champ vectoriel n’accepte qu’un seul index, et les deux modes de recherche requièrent des familles de métriques différentes.</p>
 </div>
 <h2 id="Documentation-map" class="common-anchor-header">Plan de la documentation<button data-href="#Documentation-map" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,8 +233,8 @@ summary: >-
 <li><p>Struct peut être utilisé comme type d’élément d’un champ Array. Il n’est pas utilisé comme champ de collection de niveau supérieur.</p></li>
 <li><p>Tous les éléments Struct d’un même champ StructArray partagent un schéma prédéfini.</p></li>
 <li><p>Les sous-champs vectoriels nécessitent des index. La recherche EmbeddingList utilise les métriques « <code translate="no">MAX_SIM*</code> », tandis que la recherche au niveau des éléments utilise les métriques vectorielles standard.</p></li>
-<li><p><code translate="no">element_filter</code> et « <code translate="no">MATCH_*</code> » s’appliquent aux sous-champs scalaires à l’intérieur des champs StructArray. N’utilisez « <code translate="no">$[subfield]</code> » qu’à l’intérieur de ces opérateurs. Les filtres au niveau des lignes peuvent également référencer directement des chemins StructArray, tels que « <code translate="no">chunks[0][section]</code> », « <code translate="no">array_length(chunks)</code> » et « <code translate="no">array_contains(chunks[section], ...)</code> ».</p></li>
-<li><p>Certaines combinaisons de recherche dépendent de la version ou sont spécifiques à un mode. Consultez la section « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> » avant d’utiliser la recherche par plage, la recherche par regroupement, la recherche hybride, les champs pouvant prendre la valeur NULL ou les champs ajoutés dynamiquement.</p></li>
+<li><p><code translate="no">element_filter</code> et « <code translate="no">MATCH_*</code> » s’appliquent aux sous-champs scalaires au sein des champs StructArray. N’utilisez « <code translate="no">$[subfield]</code> » qu’au sein de ces opérateurs. Les filtres au niveau des lignes peuvent également référencer directement des chemins StructArray, tels que « <code translate="no">chunks[0][section]</code> », « <code translate="no">array_length(chunks)</code> » et « <code translate="no">array_contains(chunks[section], ...)</code> ».</p></li>
+<li><p>Certaines combinaisons de recherche dépendent de la version ou sont spécifiques à un mode. Consultez la <a href="/docs/fr/structarray-limits.md">section</a> « <a href="/docs/fr/structarray-limits.md">Limites de StructArray</a> » avant d’utiliser la recherche par plage, la recherche par regroupement, la recherche hybride, les champs pouvant prendre la valeur NULL, les champs ajoutés dynamiquement, les valeurs NULL au niveau des éléments, les sous-champs de tableau, ou l’ajout et la suppression de sous-champs.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -255,6 +255,6 @@ summary: >-
 <li><p>Pour concevoir un schéma, consultez la section <a href="/docs/fr/create-structarray-field.md">Créer un champ StructArray</a>.</p></li>
 <li><p>Pour préparer les données, consultez la section « <a href="/docs/fr/insert-data-into-structarray-fields.md">Insérer des données dans des champs StructArray</a> ».</p></li>
 <li><p>Pour choisir des index, consultez la section « <a href="/docs/fr/index-structarray-fields.md">Indexer des champs StructArray</a> ».</p></li>
-<li><p>Pour effectuer une recherche dans les sous-champs vectoriels de StructArray, commencez par la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
+<li><p>Pour effectuer une recherche dans les sous-champs vectoriels StructArray, commencez par la section « <a href="/docs/fr/basic-vector-search-with-structarray.md">Recherche vectorielle de base avec StructArray</a> ».</p></li>
 <li><p>Pour filtrer les sous-champs scalaires de StructArray, consultez les sections « <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a> » et « <a href="/docs/fr/filtered-search-with-structarray.md">Recherche filtrée avec StructArray</a> ».</p></li>
 </ol>

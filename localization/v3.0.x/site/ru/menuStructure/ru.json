@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдер",
+                    "label": "Линдэра",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "Устройство для удаления смеси",
+                    "label": "Декомпоундер",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -729,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Выберите анализатор, подходящий для вашего сценария использования",
+                "label": "Выберите анализатор, подходящий для вашей задачи",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -1191,7 +1191,7 @@
                 "children": []
               },
               {
-                "label": "Поиск по диапазону с использованием StructArray",
+                "label": "Поиск по диапазону с помощью StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1415,7 +1415,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Обзор Model Ranker",
+                    "label": "Обзор модели ранжирования",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2144,7 +2144,7 @@
                 "children": []
               },
               {
-                "label": "Удалить пользователей и роли",
+                "label": "Удаление пользователей и ролей",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Команды",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP-API",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Распространенные случаи",
-            "id": "common-cases",
+            "label": "Резервное копирование и восстановление с помощью моментальных снимков",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Резервное копирование 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Резервное копирование и восстановление в одном экземпляре",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Команды",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в одном хранилище",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP-API",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Перенос данных между экземплярами в разных корзинах",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Распространенные случаи",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Резервное копирование и восстановление в одном экземпляре",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Перенос данных между экземплярами в одном хранилище",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Перенос данных между экземплярами в разных корзинах",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Перенос данных между экземплярами в различных средах S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Перенос данных между экземплярами в различных средах S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Обновление до версии 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -3169,7 +3201,7 @@
         "children": []
       },
       {
-        "label": "Контекстуальный поиск",
+        "label": "Контекстный поиск",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 8,
         "children": []
@@ -3200,7 +3232,7 @@
         "children": []
       },
       {
-        "label": "Поиск по воронке с использованием вложений «матрешка»",
+        "label": "Поиск по воронке с использованием вложений «матрешки»",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

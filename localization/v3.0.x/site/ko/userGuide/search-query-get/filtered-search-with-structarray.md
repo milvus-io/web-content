@@ -520,7 +520,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[page]&quot;, &quot;chunks[quality_score]&quot;, &quot;chunks[has_code]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서 최상위 술어 ` <code translate="no">category == &quot;search&quot;</code> `는 후보 엔티티를 선택하며, ` <code translate="no">element_filter</code> `는 ` <code translate="no">section</code>`, ` <code translate="no">quality_score</code>`, ` <code translate="no">has_code</code> `가 모두 동일한 Struct 요소 내에서 일치하는 청크로 요소 수준 벡터 검색을 제한합니다.</p>
+<p>이 예제에서 최상위 술어 ` <code translate="no">category == &quot;search&quot;</code> `는 후보 엔티티를 선택하며, ` <code translate="no">element_filter</code> `는 ` <code translate="no">section</code>`, ` <code translate="no">quality_score</code>`, ` <code translate="no">has_code</code> `가 모두 동일한 Struct 요소 내에서 일치하는 청크로만 요소 수준 벡터 검색을 제한합니다.</p>
 <div class="alert note">
 <p>경고</p>
 <p>최상위 술어와 <code translate="no">element_filter</code> 를 결합할 때는 <code translate="no">element_filter</code> 를 식의 맨 끝에 배치해야 합니다. 필터 식에는 <code translate="no">element_filter</code> 가 하나만 포함될 수 있으며, <code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 를 다른 StructArray 연산자 안에 중첩할 수 없습니다.</p>
@@ -540,7 +540,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>필터가 부모 엔티티가 Struct 요소를 기준으로 자격 요건을 충족하는지 여부를 결정해야 할 때는 <code translate="no">MATCH_*</code> 연산자를 사용합니다. 이 연산자들은 행 수준 필터로, 엔티티를 선택하지만 자체적으로는 요소 오프셋을 반환하지 않습니다.</p>
+    </button></h2><p>필터가 상위 엔티티가 Struct 요소를 기준으로 자격 요건을 충족하는지 여부를 결정해야 할 때는 <code translate="no">MATCH_*</code> 연산자를 사용합니다. 이 연산자들은 행 수준 필터로, 엔티티를 선택하지만 자체적으로는 요소 오프셋을 반환하지 않습니다.</p>
 <table>
 <thead>
 <tr><th>연산자</th><th>다음과 같은 경우에 사용합니다</th><th>예시</th></tr>
@@ -783,7 +783,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>하이브리드 검색에서는 조건이 적용되어야 하는 위치에 StructArray 필터를 적용하십시오. 부모 엔티티 조건을 충족해야 하는 각 하위 요청에 해당 조건을 적용하십시오. <code translate="no">element_filter</code> 는 부모 엔티티 조건 적용 후, 요소 수준 제약 조건이 필요한 StructArray 요소 수준 요청에만 첨부하십시오.</p>
+    </button></h2><p>하이브리드 검색에서는 조건이 적용되어야 하는 위치에 StructArray 필터를 적용하십시오. 부모 엔티티 조건을 충족해야 하는 각 하위 요청에 해당 조건을 적용하십시오. <code translate="no">element_filter</code> 는 부모 엔티티 조건 적용 후, 요소 수준 제약 조건이 필요한 StructArray 요소 수준 요청에만 연결하십시오.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1087,7 +1087,7 @@ curl --request POST \
 <tr><td>벡터 하위 필드</td><td><code translate="no">$[...]</code> 의 스칼라 술어 입력으로는 지원되지 않습니다. 대신 벡터 검색을 통해 벡터 하위 필드를 사용하십시오.</td></tr>
 </tbody>
 </table>
-<p>JSON 경로, 배열 컨테이너 함수, 텍스트 일치 함수, ` <code translate="no">$[...]</code>`에 대한 null 술어, 기하학 함수, `Timestamptz` 표현식 및 제네릭 함수 호출과 같이 지원되지 않는 사례에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
+<p>JSON 경로, 텍스트 일치 함수, 기하 함수, Timestamptz 표현식, 제네릭 함수 호출과 같은 지원되지 않는 경우와, Milvus 3.0.6부터 <code translate="no">$[...]</code> 에서 지원하는 배열 컨테이너 함수 및 null 술어에 대해서는 <a href="/docs/ko/struct-array-operators.md">StructArray 연산자를</a> 참조하십시오.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1104,8 +1104,8 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><code translate="no">element_filter</code> 이나 <code translate="no">MATCH_*</code> 외부에서 <code translate="no">$[subfield]</code> 를 사용하는 경우.</p></li>
-<li><p><code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> 와 같은 StructArray 연산자 구문 대신 <code translate="no">chunks.section</code> 를 사용하는 경우.</p></li>
+<li><p><code translate="no">element_filter</code> 나 <code translate="no">MATCH_*</code> 외부에서 <code translate="no">$[subfield]</code> 를 사용하는 경우.</p></li>
+<li><p><code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> 과 같은 StructArray 연산자 구문 대신 <code translate="no">chunks.section</code> 을 사용하는 경우.</p></li>
 <li><p>행 수준 필터링만 필요한 경우 <code translate="no">element_filter</code> 를 사용하는 경우. 엔티티를 선택하기만 하면 되는 경우에는 대신 <code translate="no">MATCH_ANY</code> 를 사용하십시오.</p></li>
 <li><p><code translate="no">MATCH_*</code> 가 요소 오프셋을 반환할 것이라고 기대하지 마십시오. 이 연산자들은 엔티티를 선택할 뿐, 그 자체로는 일치하는 단일 요소를 식별하지 않습니다.</p></li>
 <li><p><code translate="no">$[has_code]</code> 와 같은 단순한 부울 술어를 작성하는 경우. <code translate="no">$[has_code] == true</code> 와 같은 명시적인 비교 연산자를 사용하십시오.</p></li>

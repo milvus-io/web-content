@@ -43,10 +43,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، راجع " <a href="/docs/ar/nullable-and-default.md">القيم الفارغة والقيم الافتراضية</a>".</p></li>
-<li><p><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تحديده بواسطة المعلمة <code translate="no">element_type</code>. عند تعيين <code translate="no">element_type</code> إلى <code translate="no">VARCHAR</code> ، يجب عليك أيضًا تحديد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات المسموح به لكل عنصر في المصفوفة. يقبل حقل المصفوفة ( <code translate="no">element_type</code> ) أي نوع بيانات قياسي يدعمه Milvus، باستثناء المصفوفات ذات العناصر المتغيرة ( <code translate="no">JSON</code>). بالنسبة لـ «المصفوفات ذات العناصر المتغيرة» ( <code translate="no">element_type=STRUCT</code>)، استخدم حقل StructArray وقم بتوفير «مصفوفة العناصر المتغيرة» ( <code translate="no">struct_schema</code>)؛ لمزيد من التفاصيل، راجع <a href="/docs/ar/create-structarray-field.md">StructArray</a>.</p></li>
+<li><strong>القيم الافتراضية</strong>: لا تدعم حقول ARRAY القيم الافتراضية. ومع ذلك، يمكنك تعيين السمة <code translate="no">nullable</code> إلى <code translate="no">True</code> للسماح بالقيم الفارغة. لمزيد من التفاصيل، راجع " <a href="/docs/ar/nullable-and-default.md">القيم الفارغة والقيم الافتراضية</a>".</li>
+</ul>
+<ul>
+<li><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تحديده بواسطة المعلمة <code translate="no">element_type</code>. عند تعيين <code translate="no">element_type</code> إلى <code translate="no">VARCHAR</code> ، يجب عليك أيضًا تحديد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات المسموح به لكل عنصر في المصفوفة. يقبل حقل « <code translate="no">element_type</code> » أي نوع بيانات قياسي يدعمه Milvus، باستثناء « <code translate="no">JSON</code> ». بالنسبة لـ « <code translate="no">element_type=STRUCT</code> »، استخدم حقل «StructArray» وقم بتوفير « <code translate="no">struct_schema</code> »؛ لمزيد من التفاصيل، راجع <a href="/docs/ar/create-structarray-field.md">StructArray</a>. لا يمكن لحقل ARRAY من المستوى الأعلى أن يحتوي على متجهات أو مصفوفات متداخلة، ولا يمكن أن تكون عناصره فرديةً ذات قيمة null؛ هذه الأشكال متاحة فقط للحقول الفرعية داخل حقل StructArray في Milvus 3.0.6 والإصدارات الأحدث.</li>
+</ul>
+<ul>
 <li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا في النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
-<li><p><strong>معالجة السلاسل</strong>: يتم تخزين قيم السلاسل في حقول Array كما هي، دون أي تحويل أو هروب دلالي. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما يُعتبر <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> قيمتين غير صالحتين.</p></li>
+<li><p><strong>معالجة السلاسل</strong>: يتم تخزين قيم السلاسل في حقول Array كما هي، دون أي تحويل أو هروب دلالي. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما يُعتبر كل من <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> قيمتين غير صالحتين.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">إضافة حقل ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +69,7 @@ summary: >-
       </svg>
     </button></h2><p>لاستخدام حقول ARRAY في مجموعات Milvus، قم بتعريف نوع الحقل ذي الصلة عند إنشاء مخطط المجموعة. تتضمن هذه العملية ما يلي:</p>
 <ol>
-<li><p>تعيين المعلمة « <code translate="no">datatype</code> » إلى نوع البيانات Array المدعوم، <code translate="no">ARRAY</code>.</p></li>
+<li><p>تعيين المعلمة « <code translate="no">datatype</code> » إلى نوع بيانات المصفوفة المدعوم، <code translate="no">ARRAY</code>.</p></li>
 <li><p>استخدام المعلمة <code translate="no">element_type</code> لتحديد نوع بيانات العناصر في المصفوفة. يجب أن تكون جميع العناصر في نفس المصفوفة من نفس نوع البيانات.</p></li>
 <li><p>استخدام المعلمة <code translate="no">max_capacity</code> لتحديد السعة القصوى للمصفوفة، أي الحد الأقصى لعدد العناصر التي يمكن أن تحتوي عليها.</p></li>
 </ol>

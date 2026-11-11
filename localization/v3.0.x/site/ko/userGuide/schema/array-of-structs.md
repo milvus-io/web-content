@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>하나의 엔티티가 구조화된 요소들의 정렬된 목록을 저장해야 할 때(예: 여러 청크로 구성된 하나의 문서, 여러 시각적 패치로 구성된 하나의 페이지, 또는 여러 클립으로 구성된 하나의 비디오) StructArray를 사용합니다. StructArray는 이러한 요소들을 상위 엔티티 내에 보관하면서도 각 요소 내의 필드에 대해 벡터 검색 및 스칼라 필터링을 수행할 수 있도록 합니다.</p>
+    </button></h1><p>하나의 엔티티가 구조화된 요소들의 정렬된 목록을 저장해야 할 때(예: 여러 청크로 구성된 하나의 문서, 여러 시각적 패치로 구성된 하나의 페이지, 또는 여러 클립으로 구성된 하나의 비디오) StructArray를 사용합니다. StructArray는 이러한 요소들을 상위 엔티티 내에 보관하면서도 각 요소 내의 필드에 대해 벡터 검색 및 스칼라 필터링을 허용합니다.</p>
 <h2 id="What-is-StructArray" class="common-anchor-header">StructArray란 무엇인가?<button data-href="#What-is-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>StructArray</strong>(구조체 배열이라고도 함)는 각 엔티티 내에 정렬된 Struct 요소 집합을 저장합니다. 배열 내의 모든 Struct 요소는 동일한 스키마를 따릅니다. Struct 요소는 스칼라 하위 필드, 벡터 하위 필드 또는 둘 다를 포함할 수 있습니다.</p>
-<p>예를 들어, 컬렉션은 하나의 기사를 엔티티로 저장하고, 그 청크들을 ‘ <code translate="no">chunks</code> ’라는 이름의 StructArray 필드에 저장할 수 있습니다. 각 청크에는 텍스트, 섹션 메타데이터, 품질 점수, 그리고 하나 이상의 벡터 임베딩이 포함될 수 있습니다.</p>
+    </button></h2><p><strong>StructArray</strong>(구조체 배열이라고도 함)는 각 엔티티 내에 정렬된 Struct 요소 집합을 저장합니다. 배열 내의 모든 Struct 요소는 동일한 스키마를 따릅니다. Struct 요소는 스칼라 하위 필드, 벡터 하위 필드, 그리고 Milvus 3.0.6부터는 스칼라 배열 하위 필드를 포함할 수 있습니다.</p>
+<p>예를 들어, 컬렉션은 하나의 기사를 엔티티로 저장하고, 해당 기사의 청크를 ‘ <code translate="no">chunks</code> ’라는 이름의 StructArray 필드에 저장할 수 있습니다. 각 청크에는 텍스트, 섹션 메타데이터, 품질 점수, 그리고 하나 이상의 벡터 임베딩이 포함될 수 있습니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vector search tuning guide&quot;</span><span class="hljs-punctuation">,</span>
@@ -67,7 +67,7 @@ summary: >-
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>이 예시에서 두 벡터 하위 필드는 두 가지 검색 관점에서 동일한 청크를 나타냅니다. ` <code translate="no">chunks[emb_list_vector]</code> `는 ` <code translate="no">MAX_SIM*</code> ` 메트릭을 사용하는 EmbeddingList 검색을 위한 것이며, ` <code translate="no">chunks[emb]</code> `는 ` <code translate="no">COSINE</code>`, ` <code translate="no">IP</code>` 또는 ` <code translate="no">L2</code>`과 같은 일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 것입니다.</p>
+<p>이 예시에서 두 개의 벡터 하위 필드는 두 가지 검색 관점에서 동일한 청크를 나타냅니다. ` <code translate="no">chunks[emb_list_vector]</code> `는 ` <code translate="no">MAX_SIM*</code> ` 메트릭을 사용하는 `EmbeddingList` 검색을 위한 것이며, ` <code translate="no">chunks[emb]</code> `는 ` <code translate="no">COSINE</code>`, ` <code translate="no">IP</code>` 또는 ` <code translate="no">L2</code>`와 같은 일반 벡터 메트릭을 사용하는 요소 수준 검색을 위한 것입니다.</p>
 </div>
 <h2 id="When-to-use-StructArray" class="common-anchor-header">StructArray 사용 시점<button data-href="#When-to-use-StructArray" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -230,8 +230,8 @@ summary: >-
 <li><p>Struct는 Array 필드의 요소 유형으로 사용할 수 있습니다. 최상위 컬렉션 필드로는 사용되지 않습니다.</p></li>
 <li><p>동일한 StructArray 필드 내의 모든 Struct 요소는 하나의 사전 정의된 스키마를 공유합니다.</p></li>
 <li><p>벡터 하위 필드에는 인덱스가 필요합니다. EmbeddingList 검색은 <code translate="no">MAX_SIM*</code> 메트릭을 사용하는 반면, 요소 수준 검색은 일반 벡터 메트릭을 사용합니다.</p></li>
-<li><p><code translate="no">element_filter</code> <code translate="no">MATCH_*</code> 는 StructArray 필드 내의 스칼라 하위 필드에 사용됩니다. 는 이러한 연산자 내에서만 사용하십시오. 행 수준 필터도 , , 와 같이 StructArray 경로를 직접 참조할 수 있습니다. <code translate="no">$[subfield]</code> <code translate="no">chunks[0][section]</code> <code translate="no">array_length(chunks)</code> <code translate="no">array_contains(chunks[section], ...)</code></p></li>
-<li><p>일부 검색 조합은 버전에 따라 제한되거나 특정 모드에 한정됩니다. 범위 검색, 그룹화 검색, 하이브리드 검색, null 허용 필드 또는 동적으로 추가된 필드를 사용하기 전에 <a href="/docs/ko/structarray-limits.md">StructArray 제한 사항을</a> 확인하십시오.</p></li>
+<li><p><code translate="no">element_filter</code> <code translate="no">MATCH_*</code> 는 StructArray 필드 내의 스칼라 하위 필드용입니다. 는 이러한 연산자 내에서만 사용하십시오. 행 수준 필터도 , , 와 같이 StructArray 경로를 직접 참조할 수 있습니다. <code translate="no">$[subfield]</code> <code translate="no">chunks[0][section]</code> <code translate="no">array_length(chunks)</code> <code translate="no">array_contains(chunks[section], ...)</code></p></li>
+<li><p>일부 검색 조합은 버전에 따라 지원 여부가 달라지거나 특정 모드에서만 사용할 수 있습니다. 범위 검색, 그룹화 검색, 하이브리드 검색, null 허용 필드, 동적으로 추가된 필드, 요소 수준 null 값, 배열 하위 필드, 또는 하위 필드 추가 및 제거 기능을 사용하기 전에 <a href="/docs/ko/structarray-limits.md">StructArray 제한 사항을</a> 확인하십시오.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -249,8 +249,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>스키마를 설계하려면 <a href="/docs/ko/create-structarray-field.md">'StructArray 필드 만들기'를</a> 참조하십시오.</p></li>
-<li><p>데이터를 준비하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">'StructArray 필드에 데이터 삽입'을</a> 참조하십시오.</p></li>
+<li><p>스키마를 설계하려면 <a href="/docs/ko/create-structarray-field.md">'StructArray 필드 생성'을</a> 참조하십시오.</p></li>
+<li><p>데이터를 준비하려면 <a href="/docs/ko/insert-data-into-structarray-fields.md">‘StructArray 필드에 데이터 삽입’을</a> 참조하십시오.</p></li>
 <li><p>인덱스를 선택하려면 <a href="/docs/ko/index-structarray-fields.md">‘StructArray 필드 인덱싱’을</a> 참조하십시오.</p></li>
 <li><p>StructArray 벡터 하위 필드를 검색하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터</a> 검색’부터 시작하십시오.</p></li>
 <li><p>StructArray 스칼라 하위 필드를 필터링하려면 <a href="/docs/ko/struct-array-operators.md">‘StructArray 연산자’</a> 및 <a href="/docs/ko/filtered-search-with-structarray.md">‘StructArray를 사용한 필터링 검색’을</a> 참조하십시오.</p></li>

@@ -814,7 +814,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "شرح الفهرس",
+            "label": "شرح المؤشر",
             "id": "index-explained.md",
             "order": 0,
             "children": []
@@ -1291,7 +1291,7 @@
                 "children": []
               },
               {
-                "label": "فيرتكس إيه آي",
+                "label": "Vertex AI",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
@@ -1987,7 +1987,7 @@
             "children": []
           },
           {
-            "label": "ترقية Milvus المستقل",
+            "label": "ترقية إصدار Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "الأوامر",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "واجهة برمجة التطبيقات (API) القائمة على REST",
-            "id": "milvus_backup_api.md",
+            "label": "واجهة برمجة التطبيقات (API) لـ HTTP",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "الحالات الشائعة",
-            "id": "common-cases",
+            "label": "النسخ الاحتياطي والاستعادة السريعة",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "النسخة الاحتياطية 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "النسخ الاحتياطي والاستعادة في مثيل واحد",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "الأوامر",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "الترحيل بين المثيلات داخل دلو واحد",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "واجهة برمجة التطبيقات (API) لـ HTTP",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "الترحيل بين المثيلات عبر المجموعات",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "الحالات الشائعة",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "النسخ الاحتياطي والاستعادة في مثيل واحد",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "الترحيل بين المثيلات داخل دلو واحد",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "الترحيل بين المثيلات عبر المجموعات",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "الترحيل بين المثيلات عبر بيئات S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "الترحيل بين المثيلات عبر بيئات S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "الترقية إلى الإصدار 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2904,7 +2936,7 @@
             "children": []
           },
           {
-            "label": "ميسترال أي آي",
+            "label": "ميسترال آي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []

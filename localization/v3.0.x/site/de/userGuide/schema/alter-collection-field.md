@@ -28,6 +28,9 @@ summary: >-
 <li><p>Jede Sammlung besteht aus nur einem Primärfeld. Sobald dieses bei der Erstellung der Sammlung festgelegt wurde, können Sie das Primärfeld nicht mehr ändern und auch seine Eigenschaften nicht mehr anpassen.</p></li>
 <li><p>Jede Sammlung kann nur einen Partitionsschlüssel haben. Sobald dieser bei der Erstellung der Sammlung festgelegt wurde, können Sie den Partitionsschlüssel nicht mehr ändern.</p></li>
 </ul>
+<ul>
+<li>Ab Milvus 3.0.6 können Sie für ein <a href="/docs/de/array-of-structs.md">StructArray-Feld</a> oder einen seiner Unterfeldpfade, wie z. B. „ <code translate="no">chunks[text]</code> “, nur „ <code translate="no">mmap.enabled</code> “, „ <code translate="no">field.description</code> “ und „ <code translate="no">warmup</code> “ ändern. Andere Eigenschaften, wie z. B. „ <code translate="no">max_capacity</code> “ und „ <code translate="no">max_length</code> “, werden abgelehnt. Das übergeordnete Feld und seine Unterfelder werden gemeinsam gespeichert, und die Eigenschaften „ <code translate="no">mmap.enabled</code> “ und „ <code translate="no">warmup</code> “ wirken sich auf den gemeinsamen Speicher aus, sobald sie für eines der Felder aktiviert sind: Das Deaktivieren einer dieser Eigenschaften in einem einzelnen Unterfeld hat keine Auswirkungen, solange sie im übergeordneten Feld oder in einem gleichrangigen Unterfeld noch aktiviert ist. Außerdem werden bei der Einstellung „ <code translate="no">warmup</code> “ auf „ <code translate="no">disable</code> “ nicht alle Lesevorgänge übersprungen: Für die Ausführung der Abfrage erforderliche Daten, wie z. B. Element-Offsets, werden weiterhin gelesen.</li>
+</ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">VarChar-Feld ändern<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -307,7 +310,7 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">mmap-Einstellungen auf Feldebene ändern<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
+<h2 id="Alter-field-level-mmap-settings" class="common-anchor-header">Einstellungen für „mmap“ auf Feldebene ändern<button data-href="#Alter-field-level-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

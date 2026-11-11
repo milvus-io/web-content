@@ -1089,7 +1089,7 @@ curl --request POST \
 <tr><td>Subcampos vetoriais</td><td>Não são suportados como entradas de predicados escalares d <code translate="no">$[...]</code>. Em vez disso, utilize subcampos vetoriais através da pesquisa vetorial.</td></tr>
 </tbody>
 </table>
-<p>Para casos não suportados, tais como percursos JSON, funções de contentores de matrizes, funções de correspondência de texto, predicados nulos em ` <code translate="no">$[...]</code>`, funções de geometria, expressões `Timestamptz` e chamadas a funções genéricas, consulte <a href="/docs/pt/struct-array-operators.md">Operadores StructArray</a>.</p>
+<p>Para casos não suportados, tais como percursos JSON, funções de correspondência de texto, funções de geometria, expressões Timestamptz e chamadas de funções genéricas, bem como para as funções de contentores de matrizes e predicados nulos que o ` <code translate="no">$[...]</code> ` suporta a partir do Milvus 3.0.6, consulte <a href="/docs/pt/struct-array-operators.md">Operadores StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Erros comuns<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1108,7 +1108,7 @@ curl --request POST \
     </button></h2><ul>
 <li><p>Utilizar ` <code translate="no">$[subfield]</code> ` fora de ` <code translate="no">element_filter</code> ` ou ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizar ` <code translate="no">chunks.section</code> ` em vez da sintaxe do operador `StructArray`, como ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
-<li><p>Utilizar ` <code translate="no">element_filter</code> ` quando apenas é necessária uma filtragem ao nível da linha. Utilize ` <code translate="no">MATCH_ANY</code> ` em vez disso, se apenas precisar de selecionar entidades.</p></li>
+<li><p>Utilizar <code translate="no">element_filter</code> quando apenas é necessária uma filtragem ao nível da linha. Utilize <code translate="no">MATCH_ANY</code> em vez disso, se apenas precisar de selecionar entidades.</p></li>
 <li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devolva deslocamentos de elementos. Estes operadores selecionam entidades e não identificam, por si só, um elemento correspondente.</p></li>
 <li><p>Escrever predicados booleanos simples, como <code translate="no">$[has_code]</code>. Utilize comparações explícitas, como <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Colocar « <code translate="no">element_filter</code> » antes de um predicado de nível superior na mesma expressão de filtro.</p></li>

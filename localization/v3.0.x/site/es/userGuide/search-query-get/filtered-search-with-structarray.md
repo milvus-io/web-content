@@ -25,7 +25,7 @@ summary: >-
       </svg>
     </button></h1><p>Utiliza esta página para añadir filtrado escalar a la búsqueda vectorial en campos StructArray. El filtrado de StructArray tiene dos niveles: los filtros a nivel de fila seleccionan entidades padre, mientras que los filtros a nivel de elemento restringen qué elementos de Struct participan en la búsqueda vectorial a nivel de elemento.</p>
 <p>Esta página utiliza la colección « <code translate="no">tech_articles</code> » de <a href="/docs/es/create-structarray-field.md">«Crear un campo StructArray</a>». La colección tiene un campo StructArray denominado « <code translate="no">chunks</code> », con subcampos escalares como « <code translate="no">section</code> », « <code translate="no">page</code> », « <code translate="no">quality_score</code> » y « <code translate="no">has_code</code> », además de subcampos vectoriales para la búsqueda.</p>
-<p>Antes de ejecutar estos ejemplos, crea la colección, inserta los datos de ejemplo, crea los índices vectoriales necesarios y carga la colección. Utiliza vectores de 4 dimensiones para los campos que se muestran aquí. Cada bloque de código da por hecho que la conexión y las variables de los ejemplos anteriores en el mismo lenguaje siguen vigentes, a menos que se vuelvan a definir.</p>
+<p>Antes de ejecutar estos ejemplos, crea la colección, inserta los datos de ejemplo, crea los índices vectoriales necesarios y carga la colección. Utiliza vectores de 4 dimensiones para los campos que se muestran aquí. Cada bloque de código asume que la conexión y las variables proceden de los ejemplos anteriores en el mismo lenguaje, a menos que se vuelvan a definir.</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">Elige un tipo de filtro<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Esta página explica cómo utilizar los filtros de StructArray en los flujos de trabajo de búsqueda. Para conocer las reglas sintácticas completas, los tipos de predicados admitidos y la matriz de predicados no admitidos, consulta <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
+<p>Esta página explica cómo utilizar los filtros de StructArray en los flujos de trabajo de búsqueda. Para conocer las reglas sintácticas completas, los tipos de predicados admitidos y la matriz de predicados no admitidos, consulta <a href="/docs/es/struct-array-operators.md">«Operadores de StructArray</a>».</p>
 </div>
 <h2 id="Filter-by-top-level-fields" class="common-anchor-header">Filtrar por campos de nivel superior<button data-href="#Filter-by-top-level-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -522,7 +522,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[page]&quot;, &quot;chunks[quality_score]&quot;, &quot;chunks[has_code]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, el predicado de nivel superior ` <code translate="no">category == &quot;search&quot;</code> ` selecciona entidades candidatas, y ` <code translate="no">element_filter</code> ` restringe la búsqueda vectorial a nivel de elemento a los fragmentos en los que ` <code translate="no">section</code>`, ` <code translate="no">quality_score</code>` y ` <code translate="no">has_code</code> ` coinciden todos en el mismo elemento `Struct`.</p>
+<p>En este ejemplo, el predicado de nivel superior <code translate="no">category == &quot;search&quot;</code> selecciona entidades candidatas, y <code translate="no">element_filter</code> restringe la búsqueda vectorial a nivel de elemento a los fragmentos en los que <code translate="no">section</code>, <code translate="no">quality_score</code> y <code translate="no">has_code</code> coinciden todos en el mismo elemento Struct.</p>
 <div class="alert note">
 <p>Advertencia</p>
 <p>Cuando se combine un predicado de nivel superior con <code translate="no">element_filter</code>, coloque <code translate="no">element_filter</code> al final de la expresión. Una expresión de filtro solo puede contener un <code translate="no">element_filter</code>, y no se pueden anidar <code translate="no">element_filter</code> ni <code translate="no">MATCH_*</code> dentro de otro operador StructArray.</p>
@@ -1086,10 +1086,10 @@ curl --request POST \
 <tr><td>Tipos enteros</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Subcampos vectoriales</td><td>No son compatibles como entradas de predicados escalares de <code translate="no">$[...]</code>. En su lugar, utilice subcampos vectoriales mediante la búsqueda vectorial.</td></tr>
+<tr><td>Subcampos vectoriales</td><td>No son compatibles como entradas de predicados escalares de « <code translate="no">$[...]</code> ». En su lugar, utilice subcampos vectoriales mediante la búsqueda vectorial.</td></tr>
 </tbody>
 </table>
-<p>Para los casos no admitidos, como las rutas JSON, las funciones de contenedores de matrices, las funciones de coincidencia de texto, los predicados nulos en <code translate="no">$[...]</code>, las funciones de geometría, las expresiones Timestamptz y las llamadas a funciones genéricas, consulte <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
+<p>Para los casos no compatibles, como las rutas JSON, las funciones de coincidencia de texto, las funciones de geometría, las expresiones Timestamptz y las llamadas a funciones genéricas, así como para las funciones de contenedores de matrices y los predicados nulos que <code translate="no">$[...]</code> admite a partir de Milvus 3.0.6, consulte <a href="/docs/es/struct-array-operators.md">Operadores de StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Errores comunes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1106,7 +1106,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Utilizar ` <code translate="no">$[subfield]</code> ` fuera de ` <code translate="no">element_filter</code> ` o ` <code translate="no">MATCH_*</code>`.</p></li>
+<li><p>Utilizar « <code translate="no">$[subfield]</code> » fuera de « <code translate="no">element_filter</code> » o « <code translate="no">MATCH_*</code> ».</p></li>
 <li><p>Utilizar « <code translate="no">chunks.section</code> » en lugar de la sintaxis de los operadores de StructArray, como « <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> ».</p></li>
 <li><p>Utilizar « <code translate="no">element_filter</code> » cuando solo se necesita un filtrado a nivel de fila. Utilice « <code translate="no">MATCH_ANY</code> » en su lugar si solo necesita seleccionar entidades.</p></li>
 <li><p>Esperar que ` <code translate="no">MATCH_*</code> ` devuelva índices de elementos. Estos operadores seleccionan entidades y no identifican por sí mismos un elemento coincidente.</p></li>

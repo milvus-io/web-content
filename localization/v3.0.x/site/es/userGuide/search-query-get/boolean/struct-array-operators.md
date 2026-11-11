@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Predicados de ruta a nivel de fila</td><td>Comprueba la posición de un elemento, cuenta elementos de Struct o comprueba valores de subcampos en distintos elementos sin un predicado « <code translate="no">$[...]</code> ».</td><td>Filtrado a nivel de fila. Estos predicados no devuelven desplazamientos de elementos.</td></tr>
 </tbody>
 </table>
-<p>Utiliza subcampos escalares en los operadores StructArray. Los subcampos vectoriales se utilizan en las rutas de búsqueda vectoriales y no son entradas de predicados escalares.</p>
+<p>Utiliza subcampos escalares y subcampos de matriz en Milvus 3.0.6 y versiones posteriores, en los operadores StructArray. Los subcampos vectoriales se utilizan en las rutas de búsqueda vectoriales y no son entradas de predicados escalares.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">Cuándo utilizar cada operador<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ summary: >-
 <tr><td>Cumplir varias condiciones escalares dentro del mismo elemento Struct.</td><td><code translate="no">element_filter</code></td></tr>
 <tr><td>Devolver solo las entidades en las que al menos un elemento Struct cumpla un predicado.</td><td><code translate="no">MATCH_ANY</code></td></tr>
 <tr><td>Devolver únicamente las entidades en las que todos los elementos Struct cumplan un predicado.</td><td><code translate="no">MATCH_ALL</code></td></tr>
-<tr><td>Devuelve únicamente las entidades en las que al menos, como máximo o exactamente <code translate="no">N</code> elementos Struct cumplan un predicado.</td><td><code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> o <code translate="no">MATCH_EXACT</code></td></tr>
+<tr><td>Devuelve únicamente las entidades en las que al menos, como máximo o exactamente <code translate="no">N</code> elementos Struct satisfacen un predicado.</td><td><code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> o <code translate="no">MATCH_EXACT</code></td></tr>
 <tr><td>Comprobar el elemento Struct en una posición específica, como el primer fragmento.</td><td>Una ruta posicional como <code translate="no">chunks[0][section]</code></td></tr>
 <tr><td>Filtrar por el número de elementos de Struct en una entidad.</td><td><code translate="no">array_length(chunks)</code></td></tr>
 <tr><td>Comprueba si algún elemento de la estructura contiene un valor de subcampo, sin combinar condiciones sobre el mismo elemento.</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_contains_all</code> en una ruta de subcampo como <code translate="no">chunks[section]</code></td></tr>
@@ -185,12 +185,12 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <tbody>
 <tr><td><code translate="no">MATCH_ANY(field, predicate)</code></td><td>Al menos un elemento Struct cumple el predicado.</td></tr>
 <tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>Todos los elementos Struct satisfacen el predicado.</td></tr>
-<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Al menos <code translate="no">N</code> elementos Struct cumplen el predicado.</td></tr>
+<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Al menos <code translate="no">N</code> elementos Struct satisfacen el predicado.</td></tr>
 <tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>Como máximo, un <code translate="no">N</code> es elementos de la estructura cumplen el predicado.</td></tr>
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>Exactamente <code translate="no">N</code> elementos de Struct satisfacen el predicado.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">MATCH_ANY</code> Tanto « <code translate="no">element_filter</code> » como « » pueden expresar que al menos un elemento de Struct cumple un predicado. Utiliza « <code translate="no">MATCH_ANY</code> » cuando solo necesites filtrado a nivel de fila. Utiliza « <code translate="no">element_filter</code> » cuando necesites restricciones a nivel de elemento, como filtrar qué elementos de Struct participan en una búsqueda vectorial a nivel de elemento.</p>
+<p><code translate="no">MATCH_ANY</code> Tanto « <code translate="no">element_filter</code> » como « » pueden expresar que al menos un elemento de Struct cumple un predicado. Utiliza « <code translate="no">MATCH_ANY</code> » cuando solo necesites filtrar a nivel de fila. Utiliza « <code translate="no">element_filter</code> » cuando necesites restricciones a nivel de elemento, como filtrar qué elementos de Struct participan en una búsqueda vectorial a nivel de elemento.</p>
 <h3 id="MATCHANY" class="common-anchor-header">MATCH_ANY<button data-href="#MATCHANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -269,7 +269,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
     </button></h3><p><code translate="no">MATCH_MOST</code> devuelve el valor <code translate="no">true</code> si el número de elementos que satisfacen el predicado es menor o igual que <code translate="no">threshold</code>.</p>
 <pre><code translate="no" class="language-text">MATCH_MOST(chunks, $[has_code] == true, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
-<p>Ninguna de las entidades cumple el criterio: la entidad A tiene cuatro elementos que cumplen el criterio y la entidad B tiene tres.</p>
+<p>Ninguna de las entidades cumple los requisitos: la entidad A tiene cuatro elementos que cumplen los requisitos y la entidad B tiene tres.</p>
 <p>Para <code translate="no">MATCH_MOST</code>, <code translate="no">threshold</code> puede ser cero o un entero positivo.</p>
 <h3 id="MATCHEXACT" class="common-anchor-header">MATCH_EXACT<button data-href="#MATCHEXACT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -286,7 +286,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">MATCH_EXACT</code> devuelve <code translate="no">true</code> si el número de elementos que satisfacen el predicado es exactamente igual a <code translate="no">threshold</code>.</p>
+    </button></h3><p><code translate="no">MATCH_EXACT</code> devuelve el valor de <code translate="no">true</code> si el número de elementos que cumplen el predicado es exactamente igual a <code translate="no">threshold</code>.</p>
 <pre><code translate="no" class="language-text">MATCH_EXACT(chunks, $[section] == &quot;filter&quot;, threshold=1)
 <button class="copy-code-btn"></button></code></pre>
 <p>Ninguna de las entidades coincide, ya que ninguna tiene un elemento con <code translate="no">section</code> establecido en <code translate="no">&quot;filter&quot;</code>.</p>
@@ -356,14 +356,25 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">Contar elementos de Struct</h4><p>Utilice <code translate="no">array_length(structArrayField)</code> para filtrar por el número de elementos Struct en una entidad. <code translate="no">array_length</code> en una ruta de subcampo, como <code translate="no">array_length(chunks[section])</code>, devuelve el mismo recuento, ya que cada subcampo contiene un valor por cada elemento Struct.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Acceso a subcampos de matriz por posición<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>A partir de Milvus 3.0.6, una ruta posicional también puede hacer referencia a un subcampo escalar <code translate="no">ARRAY</code>. <code translate="no">chunks[0][tags]</code> es la matriz interna del primer elemento Struct. Admite <code translate="no">==</code> y <code translate="no">!=</code> con un literal de matriz, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> y <code translate="no">array_length</code>. Se rechazan los operadores de comparación, <code translate="no">in</code>, <code translate="no">like</code> y las operaciones aritméticas sobre él.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>, <code translate="no">==</code> y <code translate="no">!=</code> en la ruta completa del subcampo de la matriz, como <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code>, se rechazan porque dicha ruta contiene una matriz interna por cada elemento de Struct. Utiliza <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code> en su lugar.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">Contar elementos de Struct</h4><p>Utilice <code translate="no">array_length(structArrayField)</code> para filtrar por el número de elementos de Struct en una entidad. <code translate="no">array_length</code> en una ruta de subcampo, como <code translate="no">array_length(chunks[section])</code>, devuelve el mismo recuento, ya que cada subcampo contiene un valor por cada elemento de Struct.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
 # Articles with exactly one chunk.
 array_length(chunks) == 1
 <button class="copy-code-btn"></button></code></pre>
-<p>Los predicados de recuento del campo principal coinciden con ambas entidades para <code translate="no">&gt;= 3</code> y con ninguna para <code translate="no">== 1</code>. También se pueden contar los valores en una ruta de subcampo:</p>
+<p>Los predicados de recuento del campo principal coinciden con ambas entidades para <code translate="no">&gt;= 3</code> y con ninguna para <code translate="no">== 1</code>. También puedes contar valores en una ruta de subcampo:</p>
 <pre><code translate="no" class="language-text">ARRAY_LENGTH(chunks[quality_score]) == 3
 <button class="copy-code-btn"></button></code></pre>
 <p>Solo la entidad B cumple el criterio, ya que su subcampo « <code translate="no">quality_score</code> » tiene tres valores.</p>
@@ -432,10 +443,45 @@ chunks is not null
 <tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>comparaciones, rangos encadenados, <code translate="no">in</code>, <code translate="no">not in</code>, expresiones aritméticas con <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> o <code translate="no">%</code> seguidas de una comparación, y combinaciones lógicas.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Comparación, rango encadenado, <code translate="no">in</code>, <code translate="no">not in</code>, expresiones aritméticas con <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code> o <code translate="no">/</code> seguidas de una comparación, y combinaciones lógicas. El operador <code translate="no">%</code> no es compatible con subcampos de punto flotante.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>Comparación de cadenas, rango encadenado, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code> y combinaciones lógicas.</td></tr>
-<tr><td>Subcampos vectoriales</td><td>No son compatibles como entradas de predicados escalares de <code translate="no">$[...]</code>. En su lugar, utilice subcampos vectoriales mediante la búsqueda con EmbeddingList o la búsqueda vectorial a nivel de elemento.</td></tr>
+<tr><td>Subcampos escalares de « <code translate="no">ARRAY</code> » (Milvus 3.0.6 y posteriores)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> y <code translate="no">array_length</code> en <code translate="no">$[tags]</code>, además de <code translate="no">$[tags] is null</code> y <code translate="no">$[tags] is not null</code>. Se rechazan los operadores de comparación, <code translate="no">in</code> y <code translate="no">like</code> en <code translate="no">$[tags]</code>.</td></tr>
+<tr><td>Cualquier subcampo de un elemento que admita valores nulos (Milvus 3.0.6 y posteriores)</td><td><code translate="no">$[subfield] is null</code> y <code translate="no">$[subfield] is not null</code> comprueban si el valor del elemento Struct actual es nulo. En un subcampo que no admite valores nulos, <code translate="no">is null</code> siempre es falso.</td></tr>
+<tr><td>Subcampos vectoriales</td><td>No son compatibles como entradas de predicados escalares de « <code translate="no">$[...]</code> », salvo « <code translate="no">$[emb] is null</code> » y « <code translate="no">$[emb] is not null</code> » en un subcampo vectorial de elemento nulo en Milvus 3.0.6 y versiones posteriores. En su lugar, utiliza los subcampos vectoriales mediante la búsqueda en EmbeddingList o la búsqueda vectorial a nivel de elemento.</td></tr>
 </tbody>
 </table>
-<p>Los operadores lógicos como « <code translate="no">&amp;&amp;</code> », « <code translate="no">||</code> » y « <code translate="no">!</code> » se aplican a las expresiones de predicado. Por ejemplo, escribe « <code translate="no">!($[has_code] == true)</code> » en lugar de « <code translate="no">!$[has_code]</code> ».</p>
+<p>Los operadores lógicos como « <code translate="no">&amp;&amp;</code> », « <code translate="no">||</code> » y « <code translate="no">!</code> » se aplican a expresiones de predicado. Por ejemplo, escriba « <code translate="no">!($[has_code] == true)</code> » en lugar de « <code translate="no">!$[has_code]</code> ».</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">Valores nulos en predicados a nivel de elemento<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>A partir de Milvus 3.0.6, un subcampo de un elemento que admita valores nulos puede contener un valor nulo en un elemento Struct. Los valores nulos siguen la lógica de tres valores en los predicados StructArray:</p>
+<ul>
+<li><p>Una comparación, « <code translate="no">in</code> », « <code translate="no">like</code> » o un predicado aritmético sobre un valor nulo de un subcampo se considera «desconocido» en lugar de «falso». « <code translate="no">&amp;&amp;</code> », « <code translate="no">\|\|</code> » y « <code translate="no">!</code> » propagan resultados desconocidos, por lo que « <code translate="no">!($[lang] == &quot;en&quot;)</code> » sigue siendo desconocido cuando « <code translate="no">$[lang]</code> » es nulo.</p></li>
+<li><p><code translate="no">element_filter</code> Conserva únicamente los elementos Struct cuyo predicado sea verdadero. Los elementos desconocidos no se emparejan.</p></li>
+<li><p><code translate="no">MATCH_*</code> cuenta un elemento desconocido como una omisión. <code translate="no">MATCH_ALL</code> es falso cuando cualquier elemento es desconocido, mientras que un StructArray vacío sigue satisfaciendo <code translate="no">MATCH_ALL</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> y <code translate="no">$[subfield] is not null</code> son siempre verdaderos o falsos. Leen la validez del elemento actual, por lo que <code translate="no">$[lang] is null</code> coincide exactamente con los elementos cuyo valor <code translate="no">lang</code> es nulo.</p></li>
+<li><p>En un subcampo de matriz, <code translate="no">array_contains*</code> sobre <code translate="no">$[tags]</code> omite los valores internos nulos y nunca coincide con una matriz interna nula, <code translate="no">array_length($[tags])</code> cuenta los valores internos nulos, y <code translate="no">$[tags] is null</code> es verdadero solo para una matriz interna nula.</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>Las rutas posicionales a nivel de fila siguen la misma regla: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> es desconocido cuando el valor de <code translate="no">lang</code> del primer elemento es nulo, cuando la entidad no tiene ningún elemento en esa posición o cuando el campo StructArray es nulo, por lo que la entidad no coincide.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Predicados no admitidos<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -451,12 +497,15 @@ chunks is not null
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los predicados de nivel de elemento de <code translate="no">$[...]</code> no admiten:</p>
+    </button></h2><p>Los predicados de « <code translate="no">$[...]</code> » a nivel de elemento no admiten:</p>
 <ul>
 <li><p>Funciones de coincidencia de texto, como <code translate="no">text_match(field, &quot;...&quot;)</code> o <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
-<li><p>La sintaxis de rutas JSON, <code translate="no">exists</code> sobre rutas JSON, o funciones JSON como <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code> o <code translate="no">json_contains_any</code>.</p></li>
-<li><p>Funciones de contenedores de matrices como <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_length</code> en <code translate="no">$[subfield]</code>. Utilice estas funciones en una ruta de subcampo como <code translate="no">chunks[section]</code> en un predicado a nivel de fila.</p></li>
-<li><p><code translate="no">$[subfield] is null</code> o <code translate="no">$[subfield] is not null</code>.</p></li>
+<li><p>La sintaxis de ruta JSON, la función « <code translate="no">exists</code> » aplicada a rutas JSON, o funciones JSON como « <code translate="no">json_contains</code> », « <code translate="no">json_contains_all</code> » o « <code translate="no">json_contains_any</code> ».</p></li>
+<li><p>Funciones de contenedores de matrices como <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> o <code translate="no">array_length</code> en <code translate="no">$[subfield]</code> de un subcampo escalar. Utilice estas funciones en una ruta de subcampo como <code translate="no">chunks[section]</code> en un predicado a nivel de fila. A partir de Milvus 3.0.6, son compatibles con <code translate="no">$[tags]</code> para subcampos escalares <code translate="no">ARRAY</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> o <code translate="no">$[subfield] is not null</code> antes de Milvus 3.0.6.</p></li>
+</ul>
+<ul>
+<li><p>Un subíndice en un subcampo de matriz, como <code translate="no">$[tags][0]</code>, y <code translate="no">like</code> en <code translate="no">$[tags]</code>.</p></li>
 <li><p>Funciones de geometría/SIG.</p></li>
 <li><p>Expresiones de marca de tiempo tz.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
@@ -486,7 +535,12 @@ chunks is not null
 <li><p>No anides <code translate="no">element_filter</code> ni <code translate="no">MATCH_*</code> dentro de otro operador StructArray.</p></li>
 <li><p>Utilice « <code translate="no">threshold=N</code> » con nombre para « <code translate="no">MATCH_LEAST</code> », « <code translate="no">MATCH_MOST</code> » y « <code translate="no">MATCH_EXACT</code> ».</p></li>
 <li><p>En las rutas posicionales, escribe la posición del elemento antes del nombre del subcampo: <code translate="no">chunks[0][section]</code>, no <code translate="no">chunks[section][0]</code>.</p></li>
-<li><p>Utilice <code translate="no">IS NULL</code> y <code translate="no">IS NOT NULL</code> únicamente en el campo StructArray completo, como por ejemplo <code translate="no">chunks is null</code>. No los utilice en una ruta de subcampo como <code translate="no">chunks[section]</code> ni en <code translate="no">$[subfield]</code>.</p></li>
+</ul>
+<ul>
+<li>Utilice <code translate="no">IS NULL</code> y <code translate="no">IS NOT NULL</code> únicamente en el campo StructArray completo, como <code translate="no">chunks is null</code>, o, a partir de Milvus 3.0.6, en <code translate="no">$[subfield]</code> dentro de <code translate="no">element_filter</code> o <code translate="no">MATCH_*</code>. No los utilice en una ruta de subcampo como <code translate="no">chunks[section]</code>.</li>
+</ul>
+<ul>
+<li><p>No utilices subíndices en un subcampo de una matriz. <code translate="no">$[tags][0]</code> y <code translate="no">chunks[0][tags][0]</code> no son compatibles.</p></li>
 <li><p><code translate="no">MATCH_ANY</code> En un StructArray vacío devuelve <code translate="no">false</code>.</p></li>
 <li><p><code translate="no">MATCH_ALL</code> En un StructArray vacío devuelve <code translate="no">true</code>.</p></li>
 </ul>

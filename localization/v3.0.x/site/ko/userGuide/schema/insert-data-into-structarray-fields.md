@@ -1,12 +1,12 @@
 ---
 id: insert-data-into-structarray-fields.md
-title: StructArray 필드에 데이터 삽입
+title: Insert Data into StructArray Fields
 summary: >-
   각 엔티티가 정렬된 구조화된 요소 목록을 포함하는 경우, StructArray 필드에 데이터를 삽입합니다. 삽입 페이로드에서
   StructArray 필드는 객체 배열로 표현됩니다. 각 객체는 하나의 Struct 요소를 나타내며, 컬렉션 스키마에 정의된 Struct
   하위 필드 이름을 사용합니다.
 ---
-<h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">StructArray 필드에 데이터 삽입<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
+<h1 id="Insert-Data-into-StructArray-Fields" class="common-anchor-header">Insert Data into StructArray Fields<button data-href="#Insert-Data-into-StructArray-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>각 엔티티가 정렬된 구조화된 요소 목록을 포함하는 경우, StructArray 필드에 데이터를 삽입합니다. 삽입 페이로드에서 StructArray 필드는 객체 배열로 표현됩니다. 각 객체는 하나의 Struct 요소를 나타내며, 컬렉션 스키마에 정의된 Struct 하위 필드 이름을 사용합니다.</p>
-<p>이 페이지에서는 <a href="/docs/ko/create-structarray-field.md">‘StructArray 필드 만들기’의</a> <code translate="no">tech_articles</code> 컬렉션을 사용합니다. 각 엔티티는 기술 문서이며, ‘ <code translate="no">chunks</code> ’ 필드는 문서 청크를 Struct 요소로 저장합니다.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+    </button></h1><p>Insert data into a StructArray field when each entity contains an ordered list of structured elements. In the insert payload, a StructArray field is represented as an array of objects. Each object represents one Struct element and uses the Struct subfield names defined in the collection schema.</p>
+<p>This page uses the <code translate="no">tech_articles</code> collection from <a href="/docs/ko/create-structarray-field.md">Create a StructArray Field</a>. Each entity is a technical article, and the <code translate="no">chunks</code> field stores article chunks as Struct elements.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,38 +38,38 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션 스키마에 이미 <code translate="no">chunks</code> StructArray 필드가 포함되어 있는지 확인하십시오.</p>
+    </button></h2><p>Make sure the collection schema already contains the <code translate="no">chunks</code> StructArray field.</p>
 <table>
 <thead>
-<tr><th>필드</th><th>유형</th><th>삽입 값</th></tr>
+<tr><th>Field</th><th>Type</th><th>Insert value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>기사 ID.</td></tr>
-<tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>기사 제목.</td></tr>
-<tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>기사 카테고리.</td></tr>
-<tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>기사 수준 임베딩.</td></tr>
-<tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>청크 객체 목록.</td></tr>
+<tr><td><code translate="no">doc_id</code></td><td><code translate="no">INT64</code></td><td>Article ID.</td></tr>
+<tr><td><code translate="no">title</code></td><td><code translate="no">VARCHAR</code></td><td>Article title.</td></tr>
+<tr><td><code translate="no">category</code></td><td><code translate="no">VARCHAR</code></td><td>Article category.</td></tr>
+<tr><td><code translate="no">title_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Article-level embedding.</td></tr>
+<tr><td><code translate="no">chunks</code></td><td><code translate="no">ARRAY</code></td><td>A list of chunk objects.</td></tr>
 </tbody>
 </table>
-<p><code translate="no">chunks</code> 에 포함된 각 객체는 Struct 스키마를 따라야 합니다.</p>
+<p>Each object in <code translate="no">chunks</code> must follow the Struct schema.</p>
 <table>
 <thead>
-<tr><th>하위 필드</th><th>유형</th><th>삽입 값</th></tr>
+<tr><th>Subfield</th><th>Type</th><th>Insert value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>청크 텍스트.</td></tr>
-<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td><code translate="no">index</code>, <code translate="no">search</code>, <code translate="no">filter</code> 와 같은 섹션 이름.</td></tr>
-<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>페이지 번호 또는 논리적 위치.</td></tr>
-<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>청크 수준 점수.</td></tr>
-<tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>청크에 코드가 포함되어 있는지 여부.</td></tr>
-<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>EmbeddingList 검색을 위해 작성된 벡터.</td></tr>
-<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>요소 수준 검색을 위해 작성된 벡터.</td></tr>
+<tr><td><code translate="no">text</code></td><td><code translate="no">VARCHAR</code></td><td>Chunk text.</td></tr>
+<tr><td><code translate="no">section</code></td><td><code translate="no">VARCHAR</code></td><td>Section name, such as <code translate="no">index</code>, <code translate="no">search</code>, or <code translate="no">filter</code>.</td></tr>
+<tr><td><code translate="no">page</code></td><td><code translate="no">INT64</code></td><td>Page number or logical position.</td></tr>
+<tr><td><code translate="no">quality_score</code></td><td><code translate="no">FLOAT</code></td><td>Chunk-level score.</td></tr>
+<tr><td><code translate="no">has_code</code></td><td><code translate="no">BOOL</code></td><td>Whether the chunk contains code.</td></tr>
+<tr><td><code translate="no">emb_list_vector</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vector written for EmbeddingList search.</td></tr>
+<tr><td><code translate="no">emb</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Vector written for element-level search.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>삽입 페이로드에서 ` <code translate="no">chunks</code> `는 값이 Struct 객체 배열인 일반 필드입니다. 각 객체 내부에서는 ` <code translate="no">text</code> ` 및 ` <code translate="no">emb</code>`와 같은 하위 필드 이름을 사용하십시오. ` <code translate="no">chunks[text]</code> ` 또는 ` <code translate="no">chunks[emb]</code>`와 같은 경로 구문은 삽입 후 인덱스를 생성하거나, 검색을 실행하거나, 필터를 구축하거나, 출력 필드를 지정할 때만 사용하십시오.</p>
+<p>In an insert payload, <code translate="no">chunks</code> is a regular field whose value is an array of Struct objects. Inside each object, use subfield names such as <code translate="no">text</code> and <code translate="no">emb</code>. Use path syntax, such as <code translate="no">chunks[text]</code> or <code translate="no">chunks[emb]</code>, only after insertion when you create indexes, run searches, build filters, or specify output fields.</p>
 </div>
-<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">삽입 페이로드의 형식을 이해하십시오<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
+<h2 id="Understand-the-insert-payload-shape" class="common-anchor-header">Understand the insert payload shape<button data-href="#Understand-the-insert-payload-shape" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,7 +84,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">chunks</code> 값은 Struct 요소의 배열입니다. 각 요소는 키가 하위 필드 이름인 객체입니다.</p>
+    </button></h2><p>The <code translate="no">chunks</code> value is an array of Struct elements. Each element is an object whose keys are subfield names.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;doc_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;StructArray indexing patterns&quot;</span><span class="hljs-punctuation">,</span>
@@ -112,8 +112,8 @@ summary: >-
   <span class="hljs-punctuation">]</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">emb_list_vector</code> <code translate="no">emb</code> 는 서로 다른 검색 모드를 지원하기 때문에 별도의 벡터 하위 필드입니다. EmbeddingList 검색은 StructArray 필드의 모든 벡터를 하나의 임베딩 목록으로 취급하며, 메트릭을 사용하여 엔티티 수준 결과를 반환합니다. 요소 수준 검색은 각 Struct 요소를 독립적으로 검색하며, 일치하는 요소의 오프셋을 반환할 수 있습니다. 이 예제에서는 단순화를 위해 두 필드 모두에 동일한 벡터 값을 저장합니다. 실제 애플리케이션에서는 두 검색 모드 모두 동일한 청크 임베딩을 사용하는 경우 두 하위 필드에 동일한 임베딩을 저장하거나, 두 검색 모드가 서로 다른 표현 방식을 사용하는 경우 서로 다른 임베딩을 저장할 수 있습니다. <code translate="no">MAX_SIM*</code> </p>
-<h2 id="Insert-rows" class="common-anchor-header">행 삽입<button data-href="#Insert-rows" class="anchor-icon" translate="no">
+<p><code translate="no">emb_list_vector</code> and <code translate="no">emb</code> are separate vector subfields because they support different search modes. EmbeddingList search treats all vectors in a StructArray field as one embedding list and returns entity-level results with <code translate="no">MAX_SIM*</code> metrics. Element-level search searches each Struct element independently and can return the matched element offset. This example stores the same vector values in both fields for simplicity. In a production application, you can store the same embeddings in both subfields when both search modes use the same chunk embedding, or store different embeddings when the two search modes use different representations.</p>
+<h2 id="Insert-rows" class="common-anchor-header">Insert rows<button data-href="#Insert-rows" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,16 +128,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>삽입(insert) 연산을 사용하여 다음 세 개의 엔티티를 작성합니다. 각 엔티티에는 필요한 모든 Struct 하위 필드가 포함되어 있습니다. Go 예제에서는 열 기반 입력을 사용합니다. 각 맵은 하나의 엔티티에 대한 하위 필드 배열을 그룹화합니다.</p>
+    </button></h2><p>Use the insert operation to write the following three entities. Each entity includes all required Struct subfields. The Go example uses column-based input: each map groups the subfield arrays for one entity.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#rust">   Rust</a>
- <a href="#cpp">   C++</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   C#</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -896,7 +896,7 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">Nullable StructArray 필드에 삽입<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
+<h2 id="Insert-into-nullable-StructArray-fields" class="common-anchor-header">Insert into nullable StructArray fields<button data-href="#Insert-into-nullable-StructArray-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -911,16 +911,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 선택적 예제는 상위 ` <code translate="no">chunks</code> ` 필드가 nullable이 활성화된 상태로 생성된 경우에만 실행하십시오. NULL은 개별 Struct 요소나 하위 필드가 아닌 필드 전체에 적용됩니다. 빈 배열은 존재하는 값이며 NULL이 아닙니다.</p>
+    </button></h2><p>Run this optional example only if the parent <code translate="no">chunks</code> field was created with nullable enabled. NULL applies to the entire field, not an individual Struct element or subfield. An empty array is a present value and is not NULL.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#rust">   Rust</a>
- <a href="#cpp">   C++</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   C#</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.insert(
     collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
@@ -1048,11 +1048,12 @@ curl --request POST \
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>NULL이 아닌 StructArray 값의 경우, 모든 필수 하위 필드에 유효한 값을 제공해야 합니다. 동일한 엔티티 내에서 NULL인 하위 필드 배열과 값이 존재하는 하위 필드 배열을 혼합하여 사용하지 마십시오.</p>
+<p>For a non-NULL StructArray value, provide valid values for every required subfield. Do not mix NULL subfield arrays with present subfield arrays in the same entity.</p>
+<p>A Struct element itself cannot be null. Starting in Milvus 3.0.6, element-nullable subfields can hold null values in individual Struct elements, as described in the next section.</p>
 <div class="alert note">
-<p>버전 및 배포 가능 여부에 대해서는 <a href="/docs/ko/structarray-limits.md">StructArray 제한 사항을</a> 참조하십시오. 기존 컬렉션에 추가된 StructArray 필드는 nullable이어야 하며, 기존 엔티티의 경우 추가된 필드 전체에 대해 NULL 값이 적용됩니다.</p>
+<p>For version and deployment availability, see <a href="/docs/ko/structarray-limits.md">StructArray Limits</a>. A StructArray field added to an existing collection must be nullable; existing entities have NULL for the whole added field.</p>
 </div>
-<h2 id="Validate-inserted-data" class="common-anchor-header">삽입된 데이터 유효성 검사<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+<h2 id="Insert-null-values-for-individual-Struct-elements" class="common-anchor-header">Insert null values for individual Struct elements<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Insert-null-values-for-individual-Struct-elements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1067,16 +1068,75 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션을 로드하기 전에 <a href="/docs/ko/index-structarray-fields.md">‘StructArray 필드 인덱싱’</a>에 설명된 대로 필수 벡터 인덱스를 생성하십시오. 다음 예제는 로드가 완료될 때까지 기다린 후, 선택된 하위 필드를 쿼리합니다. cURL의 경우, <code translate="no">jq</code> 를 설치하여 로드 상태 응답을 확인하십시오. 유한 지연 일관성(bounded-staleness consistency)을 사용하는 경우, 삽입 직후의 쿼리에는 새 행이 포함되지 않을 수 있습니다. 쓰기 작업이 반영된 후 쿼리를 반복하거나, 예제 컬렉션을 생성할 때 강력한 일관성(strong consistency)을 구성하십시오.</p>
+    </button></h2><p>Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in some Struct elements and a valid value in others. The following example assumes that the <code translate="no">chunks</code> Struct schema defines a <code translate="no">lang</code> VARCHAR subfield with <code translate="no">nullable=True</code> and a <code translate="no">tags</code> array subfield with <code translate="no">nullable=True</code> and <code translate="no">element_nullable=True</code>. For the complete schema definition, see <a href="/docs/ko/create-structarray-field.md#allow-null-values-in-Struct-elements--milvus-306">Allow null values in Struct elements</a>.</p>
+<p>In a Struct element, set an element-nullable subfield to <code translate="no">None</code> or omit it. Both store a null value.</p>
+<pre><code translate="no" class="language-python">client.insert(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    data=[
+        {
+            <span class="hljs-string">&quot;doc_id&quot;</span>: <span class="hljs-number">11</span>,
+            <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Chunks with missing attributes&quot;</span>,
+            <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+            <span class="hljs-string">&quot;title_vector&quot;</span>: [<span class="hljs-number">0.07</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.21</span>],
+            <span class="hljs-string">&quot;chunks&quot;</span>: [
+                {
+                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Detected language and tags are present.&quot;</span>,
+                    <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+                    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.90</span>,
+                    <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,
+                    <span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-string">&quot;en&quot;</span>,
+                    <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>],
+                    <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.42</span>],
+                    <span class="hljs-string">&quot;emb&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.42</span>],
+                },
+                {
+                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Language is unknown and tags are omitted.&quot;</span>,
+                    <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+                    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">2</span>,
+                    <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.84</span>,
+                    <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,
+                    <span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-literal">None</span>,
+                    <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.44</span>],
+                    <span class="hljs-string">&quot;emb&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.44</span>],
+                },
+            ],
+        }
+    ],
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>In the second Struct element, <code translate="no">lang</code> is explicitly null and <code translate="no">tags</code> is omitted, so Milvus stores null for both in that element. The other subfields still require a value in every Struct element, and a Struct element itself cannot be null. On an array subfield, <code translate="no">None</code> stores a null inner array, while <code translate="no">[]</code> stores an empty inner array.</p>
+<p>Null subfield values behave as follows in later operations:</p>
+<ul>
+<li><p>Query results return <code translate="no">null</code> for the subfield value in that element.</p></li>
+<li><p>In filters, a null value makes the element predicate unknown rather than false. Use <code translate="no">$[lang] is null</code> or <code translate="no">$[lang] is not null</code> inside <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code> to test it. For details, see <a href="/docs/ko/struct-array-operators.md">StructArray Operators</a>.</p></li>
+<li><p>Null vectors in an element-nullable vector subfield do not participate in search.</p></li>
+</ul>
+<h2 id="Validate-inserted-data" class="common-anchor-header">Validate inserted data<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Before loading the collection, create the required vector indexes as described in <a href="/docs/ko/index-structarray-fields.md">Index StructArray Fields</a>. The following examples wait for loading to complete, then query selected subfields. For cURL, install <code translate="no">jq</code> to check the load-state response. With bounded-staleness consistency, a query immediately after insertion may not include the new rows; repeat it after the writes become visible, or configure strong consistency when creating the example collection.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
- <a href="#go">   Go</a>
- <a href="#rust">   Rust</a>
- <a href="#cpp">   C++</a>
- <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   C#</a>
- <a href="#bash">   cURL</a>
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">client.load_collection(<span class="hljs-string">&quot;tech_articles&quot;</span>)
 
@@ -1229,8 +1289,8 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">chunks[text]</code> 와 같은 StructArray 필드 경로는 쿼리, 검색, 필터링 또는 인덱스 생성 시에만 사용하십시오. 삽입 페이로드는 여전히 <code translate="no">chunks</code> 아래의 중첩된 객체를 사용해야 합니다.</p>
-<h2 id="Insert-rules" class="common-anchor-header">삽입 규칙<button data-href="#Insert-rules" class="anchor-icon" translate="no">
+<p>Use StructArray field paths, such as <code translate="no">chunks[text]</code>, only when you query, search, filter, or create indexes. Insert payloads should still use nested objects under <code translate="no">chunks</code>.</p>
+<h2 id="Insert-rules" class="common-anchor-header">Insert rules<button data-href="#Insert-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1247,19 +1307,19 @@ curl --request POST \
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>규칙</th><th>설명</th></tr>
+<tr><th>Rule</th><th>Explanation</th></tr>
 </thead>
 <tbody>
-<tr><td>StructArray 필드에는 객체 배열을 사용하십시오.</td><td><code translate="no">chunks</code> 의 값은 목록이며, 목록의 각 항목은 Struct 요소입니다.</td></tr>
-<tr><td>각 Struct 요소 내부에서 하위 필드 이름을 사용하십시오.</td><td><code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> 는 <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code> 가 아닌 <code translate="no">chunks</code> 안에 삽입하십시오.</td></tr>
-<tr><td>Struct 스키마와 일치시켜야 합니다.</td><td>각 Struct 요소는 Struct 스키마에 정의된 하위 필드를 사용해야 합니다.</td></tr>
-<tr><td>벡터 차원을 일치시켜야 합니다.</td><td>벡터 값은 해당 벡터 하위 필드에 대해 구성된 <code translate="no">dim</code> 와 일치해야 합니다.</td></tr>
-<tr><td><code translate="no">max_capacity</code> 을 준수해야 합니다.</td><td>하나의 엔티티에 포함된 Struct 요소의 수는 StructArray 필드의 <code translate="no">max_capacity</code> 을 초과해서는 안 됩니다.</td></tr>
-<tr><td>별도의 검색 모드에는 별도의 벡터 하위 필드를 사용하십시오.</td><td>EmbeddingList 검색과 요소 수준 검색이 모두 필요한 경우, 두 벡터 하위 필드 모두에 벡터 값을 작성하십시오.</td></tr>
-<tr><td><code translate="no">null</code> 는 필드가 null이 허용되는 경우에만 사용하십시오.</td><td>null이 허용되지 않는 StructArray 필드에는 유효한 StructArray 값이 필요합니다.</td></tr>
+<tr><td>Use an array of objects for a StructArray field.</td><td>The value of <code translate="no">chunks</code> is a list, and each item in the list is a Struct element.</td></tr>
+<tr><td>Use subfield names inside each Struct element.</td><td>Insert <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> inside <code translate="no">chunks</code>, not <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
+<tr><td>Match the Struct schema.</td><td>Each Struct element must use the subfields defined in the Struct schema. Starting in Milvus 3.0.6, an element-nullable subfield can be omitted or set to <code translate="no">None</code> in a Struct element.</td></tr>
+<tr><td>Match vector dimensions.</td><td>Vector values must match the <code translate="no">dim</code> configured for their vector subfields.</td></tr>
+<tr><td>Respect <code translate="no">max_capacity</code>.</td><td>The number of Struct elements in one entity must not exceed the <code translate="no">max_capacity</code> of the StructArray field.</td></tr>
+<tr><td>Use separate vector subfields for separate search modes.</td><td>If both EmbeddingList search and element-level search are required, write vector values to both vector subfields.</td></tr>
+<tr><td>Use <code translate="no">null</code> only when the field is nullable.</td><td>Non-nullable StructArray fields require valid StructArray values.</td></tr>
 </tbody>
 </table>
-<h2 id="Common-mistakes" class="common-anchor-header">흔히 저지르는 실수<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
+<h2 id="Common-mistakes" class="common-anchor-header">Common mistakes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1275,15 +1335,15 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>삽입 페이로드에서 <code translate="no">chunks[text]</code> 와 같은 필드 경로를 사용하는 경우.</p></li>
-<li><p>Struct 요소에서 필수 하위 필드를 생략하는 경우.</p></li>
-<li><p>잘못된 차원의 벡터를 삽입하는 경우.</p></li>
-<li><p><code translate="no">max_capacity</code> 에서 허용하는 것보다 더 많은 Struct 요소를 삽입하는 경우.</p></li>
-<li><p>동일한 StructArray 값 내의 다른 하위 필드는 유효함에도 불구하고, 하나의 하위 필드만 <code translate="no">null</code> 로 설정하는 경우.</p></li>
-<li><p>벡터를 <code translate="no">emb_list_vector</code> 에만 기록한 후, <code translate="no">chunks[emb]</code> 에서 요소 수준 검색을 실행하려고 시도하는 경우.</p></li>
-<li><p>벡터를 <code translate="no">emb</code> 에만 기록한 후, <code translate="no">chunks[emb_list_vector]</code> 에서 EmbeddingList 검색을 실행하려는 경우.</p></li>
+<li><p>Using field paths such as <code translate="no">chunks[text]</code> in insert payloads.</p></li>
+<li><p>Omitting a subfield that is not element-nullable from a Struct element.</p></li>
+<li><p>Inserting vectors with the wrong dimension.</p></li>
+<li><p>Inserting more Struct elements than <code translate="no">max_capacity</code> allows.</p></li>
+<li><p>Setting a subfield to <code translate="no">None</code> in a Struct element when the subfield is not element-nullable, or inserting a null Struct element such as <code translate="no">[None, {...}]</code>.</p></li>
+<li><p>Writing vectors only to <code translate="no">emb_list_vector</code> and then trying to run element-level search on <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Writing vectors only to <code translate="no">emb</code> and then trying to run EmbeddingList search on <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 </ul>
-<h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
+<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1299,7 +1359,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ol>
-<li><p><code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code> 및 스칼라 하위 필드에 대한 인덱스를 생성하려면 <a href="/docs/ko/index-structarray-fields.md">StructArray 필드 인덱싱을</a> 참조하십시오.</p></li>
-<li><p>StructArray 벡터 하위 필드를 검색하려면 <a href="/docs/ko/basic-vector-search-with-structarray.md">‘StructArray를 사용한 기본 벡터 검색’을</a> 참조하십시오.</p></li>
-<li><p>null 허용 동작 및 버전별 제한 사항을 확인하려면 <a href="/docs/ko/structarray-limits.md">‘StructArray 제한 사항’을</a> 참조하십시오.</p></li>
+<li><p>To create indexes for <code translate="no">chunks[emb_list_vector]</code>, <code translate="no">chunks[emb]</code>, and scalar subfields, read <a href="/docs/ko/index-structarray-fields.md">Index StructArray Fields</a>.</p></li>
+<li><p>To search StructArray vector subfields, read <a href="/docs/ko/basic-vector-search-with-structarray.md">Basic Vector Search with StructArray</a>.</p></li>
+<li><p>To review nullable behavior and version-specific limitations, read <a href="/docs/ko/structarray-limits.md">StructArray Limits</a>.</p></li>
 </ol>

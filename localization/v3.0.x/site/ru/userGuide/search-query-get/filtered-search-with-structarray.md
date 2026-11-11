@@ -2,7 +2,7 @@
 id: filtered-search-with-structarray.md
 title: Фильтрованный поиск с использованием StructArray
 summary: >-
-  Используйте эту страницу для добавления скалярной фильтрации к векторному
+  Используйте эту страницу, чтобы добавить скалярную фильтрацию к векторному
   поиску по полям StructArray. Фильтрация StructArray имеет два уровня: фильтры
   на уровне строк выбирают родительские сущности, а фильтры на уровне элементов
   ограничивают набор элементов Struct, участвующих в векторном поиске на уровне
@@ -1089,8 +1089,8 @@ curl --request POST \
 <tr><td>Векторные подполя</td><td>Не поддерживаются в качестве входных данных для скалярных предикатов <code translate="no">$[...]</code>. Вместо этого используйте векторные подполя с помощью векторного поиска.</td></tr>
 </tbody>
 </table>
-<p>В отношении неподдерживаемых случаев, таких как пути JSON, функции контейнеров массивов, функции сопоставления текста, предикаты null для <code translate="no">$[...]</code>, функции Geometry, выражения Timestamptz и вызовы обобщённых функций, см. раздел <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
-<h2 id="Common-mistakes" class="common-anchor-header">Распространённые ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
+<p>Для неподдерживаемых случаев, таких как пути JSON, функции сопоставления текста, функции Geometry, выражения Timestamptz и вызовы обобщённых функций, а также для функций контейнеров массивов и предикатов null, которые <code translate="no">$[...]</code> поддерживает начиная с Milvus 3.0.6, см. раздел <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
+<h2 id="Common-mistakes" class="common-anchor-header">Распространенные ошибки<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1106,7 +1106,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Использование ` <code translate="no">$[subfield]</code> ` вне контекста ` <code translate="no">element_filter</code> ` или ` <code translate="no">MATCH_*</code>`.</p></li>
+<li><p>Использование <code translate="no">$[subfield]</code> вне контекста <code translate="no">element_filter</code> или <code translate="no">MATCH_*</code>.</p></li>
 <li><p>Использование <code translate="no">chunks.section</code> вместо синтаксиса операторов StructArray, например <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>.</p></li>
 <li><p>Использование <code translate="no">element_filter</code>, когда требуется только фильтрация на уровне строк. Если требуется только выбор сущностей, используйте вместо этого <code translate="no">MATCH_ANY</code>.</p></li>
 <li><p>Ожидание того, что оператор ` <code translate="no">MATCH_*</code> ` вернет смещения элементов. Эти операторы выбирают сущности и сами по себе не идентифицируют один соответствующий элемент.</p></li>

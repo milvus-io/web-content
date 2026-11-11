@@ -1944,7 +1944,7 @@
         ]
       },
       {
-        "label": "Scalabilità",
+        "label": "Ridimensionamento",
         "id": "scaling",
         "order": 4,
         "isMenu": true,
@@ -2152,7 +2152,7 @@
             ]
           },
           {
-            "label": "Crittografia in transito",
+            "label": "Crittografia durante il trasferimento",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Comandi",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Casi comuni",
-            "id": "common-cases",
+            "label": "Backup e ripristino istantanei",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Backup e ripristino in un’unica istanza",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Comandi",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze all’interno di un unico bucket",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrazione tra istanze in diversi bucket",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Casi comuni",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Backup e ripristino in un'unica istanza",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrazione tra istanze all’interno di un unico bucket",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrazione tra istanze in diversi bucket",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrazione tra istanze in diversi ambienti S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrazione tra istanze in diversi ambienti S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Aggiornamento alla versione 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }

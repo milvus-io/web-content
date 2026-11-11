@@ -44,11 +44,11 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li><p>Kolom vektor yang mengizinkan nilai NULL tidak mendukung ekspresi filter ` <code translate="no">IS NULL</code> ` atau ` <code translate="no">IS NOT NULL</code> `. Anda tidak dapat secara eksplisit menyaring entitas berdasarkan apakah nilai kolom vektor tersebut NULL.</p></li>
-<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat dinonaktifkan. Tetapkan " <code translate="no">nullable=True</code> " pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat " " induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus bersifat nullable agar entitas yang sudah ada dapat mengembalikan nilai NULL untuk bidang baru tersebut. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
+<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat dinonaktifkan. Tetapkan " <code translate="no">nullable=True</code> " pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat "nullable" induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus dapat bernilai NULL agar entitas yang sudah ada dapat mengembalikan nilai NULL untuk bidang baru tersebut. Mulai dari Milvus 3.0.6, subbidang juga dapat mengizinkan nilai NULL pada elemen Struct individu: ` <code translate="no">nullable=True</code> ` pada subbidang skalar atau vektor, ` <code translate="no">element_nullable=True</code> ` pada subbidang array; elemen Struct itu sendiri tetap tidak boleh bernilai NULL. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
 <li><p>Atribut nullable ditentukan saat bidang dibuat dan tidak dapat diubah setelahnya. Anda tidak dapat mengaktifkan atau menonaktifkan nullability untuk bidang yang sudah ada.</p></li>
-<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan tidak null. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
+<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan bukan null. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
 </ul>
-<h2 id="What-is-a-nullable-field" class="common-anchor-header">Apa itu bidang yang dapat bernilai NULL?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-nullable-field" class="common-anchor-header">Apa itu bidang nullable?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,15 +70,15 @@ summary: >-
 <li>Bidang tersebut secara eksplisit ditetapkan ke NULL (misalnya, ` <code translate="no">None</code> ` dalam Python).</li>
 </ul>
 <p>Jika suatu bidang tidak didefinisikan sebagai nullable (perilaku default), setiap entitas harus menyediakan nilai yang valid untuk bidang tersebut. Mengabaikan bidang atau secara eksplisit menetapkan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
-<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai Milvus 3.0.0, atribut ini juga didukung pada bidang induk StructArray. Jangan mengonfigurasi subbidang Struct sebagai nullable secara terpisah; tentukan nullability pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal.</p>
+<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai Milvus 3.0.0, atribut ini juga didukung pada bidang StructArray induk. Jangan mengonfigurasi subbidang Struct sebagai nullable tingkat baris secara terpisah; tentukan nullability tingkat baris pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal. Untuk mengizinkan nilai NULL pada subbidang di dalam elemen Struct individu (null pada tingkat elemen), atur ` <code translate="no">nullable=True</code> ` pada subbidang skalar atau vektor, atau ` <code translate="no">element_nullable=True</code> ` pada subbidang array di Milvus 3.0.6 dan versi selanjutnya; lihat " <a href="/docs/id/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">Membuat Bidang StructArray"</a>.</p>
 <div class="alert note">
 <p>Nullability menentukan apakah nilai bidang boleh tidak ada; hal ini tidak menentukan nilai apa yang digunakan ketika suatu bidang tidak ada.</p>
 <ul>
 <li>Jika bidang yang dapat bernilai null dikonfigurasi tanpa nilai default, mengabaikan bidang tersebut akan menghasilkan nilai NULL yang disimpan.</li>
-<li>Jika nilai default dikonfigurasi, Milvus mungkin menyimpan nilai default tersebut sebagai gantinya. Untuk detailnya, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</li>
+<li>Jika nilai default telah dikonfigurasi, Milvus mungkin akan menyimpan nilai default tersebut sebagai gantinya. Untuk detailnya, lihat " <a href="/docs/id/default-values.md">Nilai Default</a>".</li>
 </ul>
 </div>
-<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Tentukan bidang yang dapat bernilai null dalam skema koleksi<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
+<h2 id="Define-a-nullable-field-in-the-collection-schema" class="common-anchor-header">Tentukan bidang nullable dalam skema koleksi<button data-href="#Define-a-nullable-field-in-the-collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -27,6 +27,9 @@ summary: >-
 <li><p>Setiap koleksi hanya terdiri dari satu bidang utama. Setelah ditetapkan saat pembuatan koleksi, Anda tidak dapat mengubah bidang utama atau mengubah propertinya.</p></li>
 <li><p>Setiap koleksi hanya dapat memiliki satu kunci partisi. Setelah ditetapkan saat pembuatan koleksi, Anda tidak dapat mengubah kunci partisi tersebut.</p></li>
 </ul>
+<ul>
+<li>Mulai dari Milvus 3.0.6, untuk bidang <a href="/docs/id/array-of-structs.md">StructArray</a> atau salah satu jalur subbidangnya, seperti <code translate="no">chunks[text]</code>, Anda hanya dapat mengubah <code translate="no">mmap.enabled</code>, <code translate="no">field.description</code>, dan <code translate="no">warmup</code>. Properti lain, seperti <code translate="no">max_capacity</code> dan <code translate="no">max_length</code>, akan ditolak. Bidang induk dan subbidangnya disimpan bersama, dan <code translate="no">mmap.enabled</code> serta <code translate="no">warmup</code> berlaku pada penyimpanan bersama saat diaktifkan pada salah satunya: menonaktifkan salah satu properti ini pada subbidang saja tidak akan berlaku selama bidang induk atau subbidang sejenis masih mengaktifkannya. Selain itu, pengaturan ` <code translate="no">warmup</code> ` ke ` <code translate="no">disable</code> ` tidak akan melewatkan semua pembacaan: data yang diperlukan untuk eksekusi kueri, seperti offset elemen, tetap dibaca.</li>
+</ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">Mengubah Bidang VarChar<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,7 +212,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sebuah bidang array memiliki dua properti, yaitu ` <code translate="no">element_type</code> ` dan ` <code translate="no">max_capacity</code>`. Yang pertama menentukan tipe data elemen-elemen dalam array, sedangkan yang kedua membatasi jumlah maksimum elemen dalam array. Anda hanya dapat mengubah properti ` <code translate="no">max_capacity</code> `.</p>
+    </button></h2><p>Sebuah bidang array memiliki dua properti, yaitu ` <code translate="no">element_type</code> ` dan ` <code translate="no">max_capacity</code>`. Yang pertama menentukan tipe data elemen dalam array, sedangkan yang kedua membatasi jumlah maksimum elemen dalam array. Anda hanya dapat mengubah properti ` <code translate="no">max_capacity</code> `.</p>
 <p>Contoh berikut mengasumsikan koleksi memiliki bidang array bernama ` <code translate="no">array</code> ` dan mengatur properti ` <code translate="no">max_capacity</code> `-nya.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

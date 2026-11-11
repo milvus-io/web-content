@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用本页面可在 StructArray 字段的向量搜索中添加标量过滤。StructArray 过滤分为两级：行级过滤器用于选择父实体，而元素级过滤器则用于限制哪些 Struct 元素参与元素级向量搜索。</p>
+    </button></h1><p>使用本页面可在 StructArray 字段的向量搜索中添加标量过滤。StructArray 过滤分为两个层次：行级过滤器用于选择父实体，而元素级过滤器则用于限制哪些 Struct 元素参与元素级向量搜索。</p>
 <p>本页面<a href="/docs/zh/create-structarray-field.md">使用“创建 StructArray 字段</a>”中的<code translate="no">tech_articles</code> Collection。该 Collection 包含一个名为<code translate="no">chunks</code> 的 StructArray 字段，其中包含<code translate="no">section</code> 、<code translate="no">page</code> 、<code translate="no">quality_score</code> 和<code translate="no">has_code</code> 等标量子字段，以及用于搜索的向量字段。</p>
 <p>在运行这些示例之前，请先创建Collection、插入示例数据、创建所需的向量索引，并加载Collection。对于此处显示的字段，请使用四维向量。除非代码块中重新定义，否则每个代码块均假定使用了前几个示例中同种语言的连接和变量。</p>
 <h2 id="Choose-a-filter-type" class="common-anchor-header">选择过滤器类型<button data-href="#Choose-a-filter-type" class="anchor-icon" translate="no">
@@ -547,7 +547,7 @@ curl --request POST \
 <tbody>
 <tr><td><code translate="no">MATCH_ANY</code></td><td>至少有一个 Struct 元素必须满足谓词。</td><td><code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code></td></tr>
 <tr><td><code translate="no">MATCH_ALL</code></td><td>所有 Struct 元素都必须满足谓词。</td><td><code translate="no">MATCH_ALL(chunks, $[quality_score] &gt; 0.5)</code></td></tr>
-<tr><td><code translate="no">MATCH_LEAST</code></td><td>至少有<code translate="no">N</code> 个 Struct 元素必须满足该谓词。</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
+<tr><td><code translate="no">MATCH_LEAST</code></td><td>至少有<code translate="no">N</code> 个结构体元素必须满足该谓词。</td><td><code translate="no">MATCH_LEAST(chunks, $[has_code] == true, threshold=2)</code></td></tr>
 <tr><td><code translate="no">MATCH_MOST</code></td><td>至多有<code translate="no">N</code> 个Struct元素必须满足该谓词。</td><td><code translate="no">MATCH_MOST(chunks, $[section] == &quot;appendix&quot;, threshold=1)</code></td></tr>
 <tr><td><code translate="no">MATCH_EXACT</code></td><td>必须有恰好<code translate="no">N</code> 个 Struct 元素满足该谓词。</td><td><code translate="no">MATCH_EXACT(chunks, $[section] == &quot;summary&quot;, threshold=1)</code></td></tr>
 </tbody>
@@ -1086,7 +1086,7 @@ curl --request POST \
 <tr><td>向量子域</td><td>不支持作为<code translate="no">$[...]</code> 标量谓词的输入。请改用向量搜索来处理向量子字段。</td></tr>
 </tbody>
 </table>
-<p>对于不支持的情况（例如 JSON 路径、数组容器函数、文本匹配函数、针对<code translate="no">$[...]</code> 的 null 谓词、几何函数、Timestamptz 表达式以及泛型函数调用），请参阅<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
+<p>对于不支持的情况（如 JSON 路径、文本匹配函数、几何函数、Timestamptz 表达式以及泛型函数调用），以及<code translate="no">$[...]</code> 从 Milvus 3.0.6 开始支持的数组容器函数和 null 谓词，请参阅<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
 <h2 id="Common-mistakes" class="common-anchor-header">常见错误<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1104,7 +1104,7 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>在<code translate="no">element_filter</code> 或<code translate="no">MATCH_*</code> 之外使用<code translate="no">$[subfield]</code> 。</p></li>
-<li><p>使用<code translate="no">chunks.section</code> 代替StructArray操作符语法（如<code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> ）。</p></li>
+<li><p>使用<code translate="no">chunks.section</code> 代替 StructArray 操作符语法（例如<code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> ）。</p></li>
 <li><p>仅需行级过滤时却使用 `<code translate="no">element_filter</code> `。若仅需选择实体，请改用 `<code translate="no">MATCH_ANY</code> `。</p></li>
 <li><p>期望<code translate="no">MATCH_*</code> 返回元素偏移量。这些操作符用于选择实体，本身并不能识别出单个匹配元素。</p></li>
 <li><p>编写诸如<code translate="no">$[has_code]</code> 这样的裸布尔谓词。请使用显式比较，例如<code translate="no">$[has_code] == true</code> 。</p></li>
@@ -1128,6 +1128,6 @@ curl --request POST \
     </button></h2><ol>
 <li><p>要查看完整的 StructArray 过滤语法，请阅读《<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>》。</p></li>
 <li><p>若要先运行未过滤的向量搜索，请阅读《<a href="/docs/zh/basic-vector-search-with-structarray.md">使用 StructArray 进行基本向量搜索</a>》。</p></li>
-<li><p>要为常用 StructArray 过滤器创建标量索引，请参阅《<a href="/docs/zh/index-structarray-fields.md">索引 StructArray 字段</a>》。</p></li>
-<li><p>要查看特定版本的过滤和搜索限制，请阅读《<a href="/docs/zh/structarray-limits.md">StructArray 限制》</a>。</p></li>
+<li><p>要为常用 StructArray 过滤器创建标量索引，请阅读《<a href="/docs/zh/index-structarray-fields.md">索引 StructArray 字段</a>》。</p></li>
+<li><p>要查看特定版本的过滤和搜索限制，请参阅《<a href="/docs/zh/structarray-limits.md">StructArray 限制》</a>。</p></li>
 </ol>

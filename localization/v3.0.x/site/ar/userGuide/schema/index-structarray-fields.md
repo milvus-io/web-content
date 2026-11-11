@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل تشغيل البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار الحقل الفرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
+    </button></h1><p>قم بإنشاء فهارس على الحقول الفرعية لـ StructArray قبل تشغيل البحث المتجه أو تسريع التصفية القياسية. بالنسبة لحقل StructArray، يكون هدف الفهرس هو مسار حقل فرعي، مثل <code translate="no">chunks[emb_list_vector]</code> أو <code translate="no">chunks[emb]</code> أو <code translate="no">chunks[section]</code>.</p>
 <p>تستخدم هذه الصفحة مجموعة <code translate="no">tech_articles</code> من <a href="/docs/ar/create-structarray-field.md">"إنشاء حقل StructArray</a>". يحتوي حقل StructArray <code translate="no">chunks</code> على حقول فرعية قياسية للتصفية وحقول فرعية متجهة للبحث.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">قبل البدء<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -80,7 +80,7 @@ summary: >-
 <tr><td>البحث المتجهي على مستوى العنصر</td><td><code translate="no">chunks[emb]</code></td><td>عائلة المقاييس المتجهة العادية، مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
 <tr><td>التصفية حسب السلسلة أو الفئة</td><td><code translate="no">chunks[section]</code></td><td>فهرس قياسي يدعمه الهدف الخاص بك.</td></tr>
 <tr><td>التصفية حسب النطاق الرقمي</td><td><code translate="no">chunks[quality_score]</code>، <code translate="no">chunks[page]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
-<tr><td>التصفية حسب القيمة المنطقية</td><td><code translate="no">chunks[has_code]</code></td><td>فهرس قياسي يدعمه الهدف الخاص بك.</td></tr>
+<tr><td>التصفية حسب القيمة المنطقية</td><td><code translate="no">chunks[has_code]</code></td><td>مؤشر قياسي يدعمه الهدف الخاص بك.</td></tr>
 </tbody>
 </table>
 <p>يعامل البحث في EmbeddingList المتجهات الموجودة في حقل فرعي من نوع StructArray كقائمة تضمين ويُرجع نتائج على مستوى الكيان. أما البحث على مستوى العنصر فيبحث في كل عنصر من عناصر Struct بشكل مستقل ويمكنه إرجاع إزاحة العنصر المطابق.</p>
@@ -498,6 +498,51 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
         ></path>
       </svg>
     </button></h2><p>للبحث في EmbeddingList، اختر المقياس <code translate="no">MAX_SIM*</code> المطابق للمقارنة لكل متجه: <code translate="no">MAX_SIM_COSINE</code> (يُسمى أيضًا <code translate="no">MAX_SIM</code>)، <code translate="no">MAX_SIM_IP</code> ، أو <code translate="no">MAX_SIM_L2</code> للمتجهات الكثيفة، و <code translate="no">MAX_SIM_HAMMING</code> أو <code translate="no">MAX_SIM_JACCARD</code> للمتجهات الثنائية. تقارن هذه المقاييس قوائم التضمين وتُرجع نتائج على مستوى الكيان. للبحث على مستوى العنصر، استخدم المقياس العادي المطابق المذكور أدناه.</p>
+<p>بدءًا من Milvus 3.0.6، لم تعد الفهارس القياسية مدعومة في الحقول الفرعية القابلة للقيمة الفارغة (element-nullable) أو في الحقول الفرعية القياسية ذات النوع « <code translate="no">ARRAY</code> ». تعمل عوامل التصفية على هذه الحقول الفرعية بدون فهرس.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">فهرسة الحقول الفرعية المتجهة التي يمكن أن تكون قيم عناصرها فارغة (nullable) والمضافة<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>بدءًا من Milvus 3.0.6، يمكن إنشاء حقل فرعي متجه مع قيمة فارغة على مستوى العنصر (<code translate="no">nullable=True</code>)، ويمكن إضافة حقل فرعي متجه إلى حقل StructArray موجود. تؤدي كلتا الحالتين إلى تغيير طريقة فهرسة الحقل الفرعي:</p>
+<ul>
+<li>يدعم الحقل الفرعي المتجه الذي يمكن أن يكون العنصر فيه فارغًا البحث على مستوى العنصر فقط. قم بفهرسته باستخدام مقياس متجه عادي مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>. يتم رفض المقاييس من نوع <code translate="no">MAX_SIM*</code> وفهارس EmbeddingList عليه، ولا يختار <code translate="no">AUTOINDEX</code> مقياسًا من نوع <code translate="no">MAX_SIM*</code> له. يتم تخطي المتجهات الفارغة عند إنشاء الفهرس وأثناء البحث.</li>
+</ul>
+<ul>
+<li><p>يكون الحقل الفرعي المتجه المضاف إلى حقل StructArray موجود دائمًا قابلاً لإدخال قيمة null للعنصر، لذا تنطبق عليه نفس قاعدة المقاييس. لا يمكنك ربط فهرس في طلب الإضافة؛ قم بإنشاء الفهرس بشكل منفصل بعد إنشاء الحقل الفرعي.</p></li>
+<li><p>يتطلب التحميل الذي يتضمن حقلًا فرعيًّا متجهًا وجود فهرس عليه، كما هو الحال بالنسبة لأي حقل متجه. قم بإنشاء الفهرس على الحقل الفرعي المتجه المضاف قبل تحميل المجموعة مع تضمين هذا الحقل الفرعي. يمكن للاستعلامات إرجاع الحقل الفرعي الجديد قبل وجود الفهرس.</p></li>
+<li><p>تتلقى شرائح السجل حقلًا فرعيًّا مضافًا وفهرسه من خلال ضغط إصدار المخطط. اضبط <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> على <code translate="no">true</code> (القيمة الافتراضية هي <code translate="no">false</code> )؛ وإلا فإن فهرس الحقل الفرعي المضاف لن يغطي شرائح السجل.</p></li>
+<li><p>يقوم Milvus بإنشاء فهرس متجه لمقطع من حقل فرعي متجه قابل لإلغاء العناصر فقط عندما يحتوي المقطع على ما لا يقل عن 1,024 عنصرًا صالحًا (غير فارغ). لا يتم إنشاء فهرس للمقطع الذي يقل عن هذا الحد الأدنى، وتُجرى الاستعلامات عليه باستخدام البحث بالقوة الغاشمة.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">توافق مقاييس الفهرس<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,7 +558,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم الجداول التالية لاختيار نوع الفهرس ونوع المقياس لحقل فرعي من متجه StructArray. ابدأ من الهدف، ثم اختر عائلة المقاييس حسب وضع البحث.</p>
+    </button></h2><p>استخدم الجداول التالية لاختيار نوع الفهرس ونوع المقياس لحقل فرعي متجه من نوع StructArray. ابدأ بالهدف، ثم اختر عائلة المقاييس حسب وضع البحث.</p>
 <p>اختر نوع فهرس Milvus ونوع المقياس من جداول التوافق التالية.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">البحث في EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,7 +575,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يستخدم بحث EmbeddingList مقاييس " <code translate="no">MAX_SIM*</code> ". ويعامل المتجهات الموجودة في حقل فرعي من نوع StructArray كقائمة تضمين ويعرض نتائج على مستوى الكيان.</p>
+    </button></h3><p>يستخدم بحث EmbeddingList مقاييس « <code translate="no">MAX_SIM*</code> ». ويعامل المتجهات الموجودة في الحقل الفرعي المتجه لـ StructArray كقائمة تضمين ويُرجع نتائج على مستوى الكيان.</p>
 <table>
 <thead>
 <tr><th>نوع بيانات الحقل الفرعي للمتجهات</th><th>نوع الفهرس</th><th>نوع المقياس</th></tr>
@@ -793,8 +838,9 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>يقبل كل حقل فرعي متجه فهرسًا واحدًا.</td><td>استخدم حقول فرعية متجهة منفصلة إذا كنت بحاجة إلى مجموعات مقاييس مختلفة.</td></tr>
 <tr><td>استخدم مقاييس <code translate="no">MAX_SIM*</code> للبحث في EmbeddingList.</td><td>تتطلب بيانات استعلام EmbeddingList فهرسًا تم إنشاؤه باستخدام مقياس <code translate="no">MAX_SIM*</code>.</td></tr>
 <tr><td>استخدم مقاييس المتجهات العادية للبحث على مستوى العناصر.</td><td>يستخدم البحث على مستوى العنصر بيانات استعلام متجهة عادية ومقاييس مثل <code translate="no">COSINE</code> أو <code translate="no">IP</code> أو <code translate="no">L2</code>.</td></tr>
-<tr><td>قم بفهرسة الحقول الفرعية القياسية التي تظهر في عوامل التصفية.</td><td>استخدم أنواع الفهرس القياسي التي يدعمها هدفك.</td></tr>
-<tr><td>ضع حدود الحقول المتجهة في الاعتبار.</td><td>العدد الإجمالي للحقول المتجهة والحقول الفرعية المتجهة محدود. راجع حدود StructArray قبل إضافة العديد من الحقول الفرعية المتجهة.</td></tr>
+<tr><td>قم بفهرسة الحقول الفرعية القياسية التي تظهر في عوامل التصفية.</td><td>استخدم أنواع الفهرس القياسي التي يدعمها هدفك. لا يمكن فهرسة الحقول الفرعية القابلة للفراغ والحقول الفرعية القياسية <code translate="no">ARRAY</code>.</td></tr>
+<tr><td>استخدم المقاييس على مستوى العنصر في الحقول الفرعية المتجهة القابلة للصفر.</td><td>يرفض الحقل الفرعي المتجه الذي يمكن أن يكون عنصره فارغًا (<code translate="no">nullable=True</code>)، بما في ذلك أي حقل فرعي متجه تمت إضافته إلى حقل StructArray موجود، مقاييس <code translate="no">MAX_SIM*</code>.</td></tr>
+<tr><td>ضع حدود الحقول المتجهة في الاعتبار.</td><td>العدد الإجمالي لحقول المتجهات والحقول الفرعية للمتجهات محدود. راجع حدود StructArray قبل إضافة العديد من الحقول الفرعية للمتجهات.</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">الأخطاء الشائعة<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -814,7 +860,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
       </svg>
     </button></h2><ul>
 <li><p>إنشاء فهرس على <code translate="no">chunks.emb</code> بدلاً من <code translate="no">chunks[emb]</code>.</p></li>
-<li><p>إنشاء فهرس <code translate="no">MAX_SIM*</code> فقط ثم محاولة إجراء بحث على مستوى العنصر في نفس الحقل الفرعي.</p></li>
+<li><p>إنشاء فهرس لـ <code translate="no">MAX_SIM*</code> فقط ثم محاولة إجراء بحث على مستوى العنصر في نفس الحقل الفرعي.</p></li>
 <li><p>إنشاء فهرس متجه عادي فقط ثم محاولة تشغيل بحث EmbeddingList على نفس الحقل الفرعي.</p></li>
 <li><p>إعادة استخدام حقل فرعي متجه واحد لكل من مقاييس <code translate="no">MAX_SIM*</code> والمقاييس المتجهة العادية.</p></li>
 <li><p>تجاهل الفهارس القياسية لمرشحات StructArray المستخدمة بكثرة.</p></li>

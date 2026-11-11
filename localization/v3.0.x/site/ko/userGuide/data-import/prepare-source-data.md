@@ -230,17 +230,21 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>필드 값은 Struct 요소마다 하나씩, 하위 필드 이름을 키로 하는 객체 목록입니다: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>셀에는 JSON 형식과 동일한 JSON 텍스트가 포함됩니다.</td></tr>
-<tr><td>Parquet</td><td>StructArray 필드마다 하나의 열이 있으며, 유형은 <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> 이고, 하위 필드마다 하나의 struct 자식 요소가 있습니다. 스칼라 하위 필드는 스칼라 자식 요소이며, 벡터 하위 필드는 해당 요소 유형의 목록입니다(예: <code translate="no">list&lt;float32&gt;</code>).</td></tr>
-<tr><td>NumPy</td><td>지원되지 않습니다. NumPy 파일은 최상위 필드당 하나의 파일을 사용하며, StructArray 필드를 표현할 수 없습니다. StructArray 필드가 포함된 컬렉션의 경우 JSON, CSV 또는 Parquet 파일을 사용하십시오.</td></tr>
+<tr><td>CSV</td><td>셀에는 JSON 형식과 동일한 JSON 텍스트가 포함됩니다. 가져오기 작업에 대해 구성된 <code translate="no">nullkey</code> 또는 JSON <code translate="no">null</code> 는 null StructArray 값을 표시합니다.</td></tr>
+<tr><td>Parquet</td><td>StructArray 필드당 하나의 열이 있으며, 유형은 <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> 이고, 하위 필드당 하나의 struct 자식 노드가 있습니다. 스칼라 하위 필드는 스칼라 자식 노드이고, 벡터 하위 필드는 <code translate="no">list&lt;float32&gt;</code> 와 같은 해당 요소 유형의 목록이며, 배열 하위 필드(Milvus 3.0.6 이상)는 <code translate="no">list&lt;T&gt;</code> 자식 노드입니다.</td></tr>
+<tr><td>NumPy</td><td>지원되지 않습니다. NumPy 파일은 최상위 필드당 하나의 파일을 저장하며, StructArray 필드를 표현할 수 없습니다. StructArray 필드가 포함된 컬렉션의 경우 JSON, CSV 또는 Parquet 파일을 사용하십시오.</td></tr>
 </tbody>
 </table>
 <p>지원되는 모든 형식의 StructArray 값에는 다음 규칙이 적용됩니다:</p>
 <ul>
-<li><p>각 Struct 요소 내부에서는 <code translate="no">chunks[text]</code> 와 같은 경로가 아닌 서브필드 이름을 사용해야 합니다. <code translate="no">chunks[text]</code> 와 같이 명명된 플랫 컬럼이나 키는 허용되지 않습니다.</p></li>
-<li><p>각 Struct 요소는 Struct 스키마의 모든 하위 필드를 제공해야 하며, <code translate="no">[null, {...}]</code> 과 같이 Struct 요소 자체가 null일 수는 없습니다. StructArray 필드가 null 허용인 경우에만 전체 StructArray 값이 null일 수 있습니다.</p></li>
+<li><p>각 Struct 요소 내부에서는 <code translate="no">chunks[text]</code> 와 같은 경로가 아닌 서브필드 이름을 사용해야 합니다. <code translate="no">chunks[text]</code> 와 같은 평면 열이나 키는 허용되지 않습니다.</p></li>
+<li><p><code translate="no">[null, {...}]</code> 과 같이 Struct 요소 자체가 null일 수는 없습니다. StructArray 필드가 null 허용형인 경우에만 전체 StructArray 값이 null일 수 있습니다. Milvus 3.0.6 이전 버전에서는 모든 Struct 요소가 모든 하위 필드를 제공해야 했습니다.</p></li>
+<li><p>생략된 하위 필드를 포함하여 컬렉션의 하위 필드가 아닌 키나 Parquet 자식 요소는 무시됩니다.</p></li>
+<li><p>Milvus 3.0.6부터, 요소가 null일 수 있는 하위 필드에 대한 키나 <code translate="no">null</code> 값이 누락된 경우, 해당 Struct 요소의 null 값으로 가져오기되므로, 하위 필드가 추가되기 전에 작성된 파일은 해당 필드 없이 가져오기됩니다. 다른 위치에서 ` <code translate="no">null</code> `가 있으면 가져오기가 실패합니다. 배열 하위 필드의 경우, ` <code translate="no">null</code> `는 null 내부 배열이며, 하위 필드가 허용하는 경우 내부 배열 내의 ` <code translate="no">null</code> `는 null 내부 값입니다.</p></li>
+<li><p>Milvus 3.0.6부터, 백업 복원 등의 바이너리 로그(binlog) 가져오기 및 스냅샷 소스 가져오기는 요소 null 허용 하위 필드나 스칼라 배열 하위 필드가 있는 컬렉션의 경우 거부됩니다.</p></li>
 </ul>
-<p>스키마 측면의 제한 사항에 대해서는 <a href="/docs/ko/structarray-limits.md#Import-limits">StructArray 제한 사항을</a> 참조하십시오.</p>
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter는</a> 요소 null 허용 하위 필드 및 null 허용 StructArray 값을 포함하여, 지원되는 모든 형식에서 위의 StructArray 형식을 지원합니다. 라이터의 ` <code translate="no">add_row()</code> ` 호출에서 동일한 행 형식을 사용하십시오.</p>
+<p>스키마 측면의 제한 사항에 대해서는 <a href="/docs/ko/structarray-limits.md#Import-and-storage-limits">StructArray 제한 사항을</a> 참조하십시오.</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">BulkWriter 설정<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,10 +260,10 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter는</strong> 원시 데이터 세트를 RESTful 가져오기 API를 통해 가져오기에 적합한 형식으로 변환하도록 설계된 도구입니다. 이 도구는 두 가지 유형의 라이터를 제공합니다.</p>
+    </button></h2><p><strong>BulkWriter는</strong> 원시 데이터셋을 RESTful Import API를 통해 가져오기에 적합한 형식으로 변환하도록 설계된 도구입니다. 이 도구는 두 가지 유형의 라이터를 제공합니다:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: 지정된 데이터셋을 읽어와 사용하기 쉬운 형식으로 변환합니다.</li>
-<li><strong>RemoteBulkWriter</strong>: LocalBulkWriter와 동일한 작업을 수행하지만, 변환된 데이터 파일을 지정된 원격 객체 스토리지 버킷으로 추가로 전송합니다.</li>
+<li><strong>RemoteBulkWriter</strong>: LocalBulkWriter와 동일한 작업을 수행하지만, 변환된 데이터 파일을 지정된 원격 오브젝트 스토리지 버킷으로 추가로 전송합니다.</li>
 </ul>
 <p><strong>RemoteBulkWriter는</strong> 변환된 데이터 파일을 대상 오브젝트 스토리지 버킷으로 전송한다는 점에서 <strong>LocalBulkWriter와</strong> 다릅니다.</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">LocalBulkWriter 설정<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
@@ -314,7 +318,7 @@ writer = LocalBulkWriter(
 <li><code translate="no">file_type</code> 를 출력 파일 유형으로 설정해야 합니다.</li>
 <li>데이터셋에 레코드 수가 많은 경우, <code translate="no">segment_size</code> 를 적절한 값으로 설정하여 데이터를 분할하는 것이 좋습니다.</li>
 </ul>
-<p>매개변수 설정에 대한 자세한 내용은 SDK 참조 문서의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter를</a> 참조하십시오.</p>
+<p>매개 변수 설정에 대한 자세한 내용은 SDK 참조 문서의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter를</a> 참조하십시오.</p>
 </div>
 <div class="language-java">
 <p><strong>LocalBulkWriter</strong>를 생성할 때는 다음을 수행해야 합니다.</p>

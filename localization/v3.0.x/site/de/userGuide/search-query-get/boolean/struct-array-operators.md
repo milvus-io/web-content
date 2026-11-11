@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Pfadprädikate auf Zeilenebene</td><td>Prüfen Sie die Position eines Elements, zählen Sie Struct-Elemente oder prüfen Sie Unterfeldwerte über Elemente hinweg ohne ein „ <code translate="no">$[...]</code> “-Prädikat.</td><td>Filterung auf Zeilenebene. Diese Prädikate geben keine Element-Offsets zurück.</td></tr>
 </tbody>
 </table>
-<p>Verwenden Sie skalare Unterfelder in StructArray-Operatoren. Vektor-Unterfelder werden von Vektorsuchpfaden verwendet und sind keine Eingaben für skalare Prädikate.</p>
+<p>Verwenden Sie in Milvus 3.0.6 und höher skalare Unterfelder sowie Array-Unterfelder in StructArray-Operatoren. Vektor-Unterfelder werden von Vektor-Suchpfaden verwendet und sind keine Eingaben für skalare Prädikate.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">Wann welcher Operator zu verwenden ist<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +185,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <tbody>
 <tr><td><code translate="no">MATCH_ANY(field, predicate)</code></td><td>Mindestens ein Struct-Element erfüllt das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_ALL(field, predicate)</code></td><td>Alle „Struct“-Elemente erfüllen das Prädikat.</td></tr>
-<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Mindestens „ <code translate="no">N</code> “ Struct-Elemente erfüllen das Prädikat.</td></tr>
+<tr><td><code translate="no">MATCH_LEAST(field, predicate, threshold=N)</code></td><td>Mindestens <code translate="no">N</code> Struct-Elemente erfüllen das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_MOST(field, predicate, threshold=N)</code></td><td>Höchstens <code translate="no">N</code> -Struct-Elemente erfüllen das Prädikat.</td></tr>
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>Genau <code translate="no">N</code> Struct-Elemente erfüllen das Prädikat.</td></tr>
 </tbody>
@@ -356,7 +356,18 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">Anzahl der Struct-Elemente</h4><p>Verwenden Sie „ <code translate="no">array_length(structArrayField)</code> “, um nach der Anzahl der Struct-Elemente in einer Entität zu filtern. „ <code translate="no">array_length</code> “ auf einem Unterfeldpfad, wie z. B. „ <code translate="no">array_length(chunks[section])</code> “, liefert dieselbe Anzahl, da jedes Unterfeld einen Wert pro Struct-Element enthält.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Zugriff auf Array-Teilfelder anhand der Position<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>Ab Milvus 3.0.6 kann ein positionsbezogener Pfad auch auf ein skalares „ <code translate="no">ARRAY</code> “-Unterfeld verweisen. „ <code translate="no">chunks[0][tags]</code> “ ist das innere Array des ersten Struct-Elements. Es unterstützt „ <code translate="no">==</code> “ und „ <code translate="no">!=</code> “ mit einem Array-Literal, „ <code translate="no">array_contains</code> “, „ <code translate="no">array_contains_any</code> “, „ <code translate="no">array_contains_all</code> “ und „ <code translate="no">array_length</code> “. Vergleichsoperatoren wie „ <code translate="no">in</code> “, „ <code translate="no">like</code> “ sowie arithmetische Operationen darauf werden abgelehnt.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>, <code translate="no">==</code> sowie <code translate="no">!=</code> auf dem gesamten Array-Teilfeldpfad, wie z. B. <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code>, werden abgelehnt, da dieser Pfad pro Struct-Element ein inneres Array enthält. Verwenden Sie stattdessen <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code>.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">Anzahl der Struct-Elemente</h4><p>Verwenden Sie „ <code translate="no">array_length(structArrayField)</code> “, um nach der Anzahl der Struct-Elemente in einer Entität zu filtern. „ <code translate="no">array_length</code> “ in einem Unterfeldpfad, wie z. B. „ <code translate="no">array_length(chunks[section])</code> “, liefert dieselbe Anzahl, da jedes Unterfeld einen Wert pro Struct-Element enthält.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
@@ -399,14 +410,14 @@ array_contains_all(chunks[section], [&quot;index&quot;, &quot;search&quot;])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “ für ein nullfähiges „StructArray“-Feld, um den gesamten Feldwert zu prüfen. „NULL“ gilt für das gesamte „StructArray“-Feld, daher akzeptieren diese Prädikate nur den Feldnamen, nicht jedoch einen Unterfeldpfad.</p>
+    </button></h3><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “ für ein nullfähiges „StructArray“-Feld, um den gesamten Feldwert zu prüfen. Da sich „NULL“ auf das gesamte „StructArray“-Feld bezieht, akzeptieren diese Prädikate nur den Feldnamen, nicht jedoch einen Unterfeldpfad.</p>
 <pre><code translate="no" class="language-text"># Entities that have no chunks value.
 chunks is null
 
 # Entities that have a chunks value.
 chunks is not null
 <button class="copy-code-btn"></button></code></pre>
-<p>Informationen zur Anwendbarkeit finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„Einschränkungen für nullfähige und dynamische Schemata</a>“. Entität A und Entität B weisen beide nicht-NULL-Werte vom Typ „StructArray“ auf.</p>
+<p>Informationen zur Anwendbarkeit finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„Einschränkungen für nullfähige und dynamische Schemata</a>“. Entität A und Entität B weisen beide nicht-NULL-Werte für „StructArray“ auf.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Unterstützte Prädikate<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -432,10 +443,45 @@ chunks is not null
 <tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>Vergleiche, verkettete Bereichsausdrücke, <code translate="no">in</code>, <code translate="no">not in</code>, arithmetische Ausdrücke mit <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> oder <code translate="no">%</code>, gefolgt von einem Vergleich, sowie logische Kombinationen.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Vergleich, verketteter Bereich, <code translate="no">in</code>, <code translate="no">not in</code>, arithmetische Ausdrücke mit <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code> oder <code translate="no">/</code>, gefolgt von einem Vergleich, sowie logische Kombinationen. Der Operator <code translate="no">%</code> wird für Gleitkomma-Unterfelder nicht unterstützt.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>Zeichenfolgenvergleich, verkettete Bereiche, „ <code translate="no">in</code> “, „ <code translate="no">not in</code> “, „ <code translate="no">like</code> “, „ <code translate="no">=~</code> “, „ <code translate="no">!~</code> “ sowie logische Verknüpfungen.</td></tr>
-<tr><td>Vektor-Teilfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die „EmbeddingList“-Suche oder die Vektorsuche auf Elementebene.</td></tr>
+<tr><td>Skalare „ <code translate="no">ARRAY</code> “-Unterfelder (Milvus 3.0.6 und höher)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> und <code translate="no">array_length</code> auf <code translate="no">$[tags]</code> sowie <code translate="no">$[tags] is null</code> und <code translate="no">$[tags] is not null</code>. Vergleichsoperatoren wie <code translate="no">in</code> und <code translate="no">like</code> auf <code translate="no">$[tags]</code> werden abgelehnt.</td></tr>
+<tr><td>Jedes auf null setzbare Unterfeld (Milvus 3.0.6 und höher)</td><td><code translate="no">$[subfield] is null</code> sowie <code translate="no">$[subfield] is not null</code> prüfen, ob der Wert im aktuellen Struct-Element null ist. Bei einem Unterfeld, das keine null-Werte enthalten darf, ist <code translate="no">is null</code> immer false.</td></tr>
+<tr><td>Vektor-Unterfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt, mit Ausnahme von „ <code translate="no">$[emb] is null</code> “ und „ <code translate="no">$[emb] is not null</code> “ bei einem Vektor-Unterfeld, das Nullwerte zulässt, in Milvus 3.0.6 und höher. Verwenden Sie stattdessen Vektor-Unterfelder über die „EmbeddingList“-Suche oder die Vektorsuche auf Elementebene.</td></tr>
 </tbody>
 </table>
 <p>Logische Operatoren wie „ <code translate="no">&amp;&amp;</code> “, „ <code translate="no">||</code> “ und „ <code translate="no">!</code> “ gelten für Prädikatsausdrücke. Schreiben Sie beispielsweise „ <code translate="no">!($[has_code] == true)</code> “ anstelle von „ <code translate="no">!$[has_code]</code> “.</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">Null-Werte in Prädikaten auf Elementebene<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Ab Milvus 3.0.6 kann ein element-nullfähiges Unterfeld in einem Struct-Element einen Nullwert enthalten. Nullwerte folgen in StructArray-Prädikaten der dreiwertigen Logik:</p>
+<ul>
+<li><p>Ein Vergleich, „ <code translate="no">in</code> “, „ <code translate="no">like</code> “ oder ein arithmetisches Prädikat auf einen Nullwert eines Unterfelds ergibt „unkannt“ statt „falsch“. „ <code translate="no">&amp;&amp;</code> “, „ <code translate="no">\|\|</code> “ und „ <code translate="no">!</code> “ geben unbekannte Ergebnisse weiter, sodass „ <code translate="no">!($[lang] == &quot;en&quot;)</code> “ weiterhin unbekannt ist, wenn „ <code translate="no">$[lang]</code> “ null ist.</p></li>
+<li><p><code translate="no">element_filter</code> Behält nur Struct-Elemente bei, deren Prädikat wahr ist. Unbekannte Elemente werden nicht abgeglichen.</p></li>
+<li><p><code translate="no">MATCH_*</code> Zählt ein unbekanntes Element als Fehltreffer. „ <code translate="no">MATCH_ALL</code> “ ist falsch, wenn ein beliebiges Element unbekannt ist, während ein leeres „StructArray“ weiterhin die Bedingung „ <code translate="no">MATCH_ALL</code> “ erfüllt.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> und „ <code translate="no">$[subfield] is not null</code> “ sind immer wahr oder falsch. Sie lesen die Gültigkeit des aktuellen Elements aus, sodass „ <code translate="no">$[lang] is null</code> “ genau die Elemente abgleicht, deren Wert „ <code translate="no">lang</code> “ null ist.</p></li>
+<li><p>Bei einem Array-Unterfeld überspringt „ <code translate="no">array_contains*</code> “ bei „ <code translate="no">$[tags]</code> “ innere Nullwerte und stimmt niemals mit einem inneren Null-Array überein, „ <code translate="no">array_length($[tags])</code> “ zählt innere Nullwerte, und „ <code translate="no">$[tags] is null</code> “ ist nur für ein inneres Null-Array wahr.</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>Positionspfade auf Zeilenebene folgen derselben Regel: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> ist unbekannt, wenn der Wert von „ <code translate="no">lang</code> “ des ersten Elements null ist, wenn die Entität an dieser Position kein Element enthält oder wenn das StructArray-Feld null ist; daher passt die Entität nicht.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Nicht unterstützte Prädikate<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -454,14 +500,17 @@ chunks is not null
     </button></h2><p>Prädikate auf Elementebene vom Typ „ <code translate="no">$[...]</code> “ unterstützen Folgendes nicht:</p>
 <ul>
 <li><p>Textabgleichsfunktionen wie „ <code translate="no">text_match(field, &quot;...&quot;)</code> “ oder „ <code translate="no">phrase_match(field, &quot;...&quot;)</code> “.</p></li>
-<li><p>JSON-Pfad-Syntax, „ <code translate="no">exists</code> “ auf JSON-Pfaden oder JSON-Funktionen wie „ <code translate="no">json_contains</code> “, „ <code translate="no">json_contains_all</code> “ oder „ <code translate="no">json_contains_any</code> “.</p></li>
-<li><p>Array-Container-Funktionen wie <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> oder <code translate="no">array_length</code> auf <code translate="no">$[subfield]</code>. Verwenden Sie diese Funktionen stattdessen auf einem Unterfeldpfad wie <code translate="no">chunks[section]</code> in einem Prädikat auf Zeilenebene.</p></li>
-<li><p><code translate="no">$[subfield] is null</code> oder <code translate="no">$[subfield] is not null</code>.</p></li>
+<li><p>JSON-Path-Syntax, „ <code translate="no">exists</code> “ auf JSON-Paths oder JSON-Funktionen wie „ <code translate="no">json_contains</code> “, „ <code translate="no">json_contains_all</code> “ oder „ <code translate="no">json_contains_any</code> “.</p></li>
+<li><p>Array-Container-Funktionen wie <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> oder <code translate="no">array_length</code> auf <code translate="no">$[subfield]</code> eines skalaren Unterfelds. Verwenden Sie diese Funktionen stattdessen auf einem Unterfeldpfad wie <code translate="no">chunks[section]</code> in einem Prädikat auf Zeilenebene. Ab Milvus 3.0.6 werden sie auf <code translate="no">$[tags]</code> für skalare <code translate="no">ARRAY</code> -Unterfelder unterstützt.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> oder <code translate="no">$[subfield] is not null</code> vor Milvus 3.0.6.</p></li>
+</ul>
+<ul>
+<li><p>Ein Index in ein Array-Unterfeld, wie z. B. <code translate="no">$[tags][0]</code> und <code translate="no">like</code> auf <code translate="no">$[tags]</code>.</p></li>
 <li><p>Geometrie-/GIS-Funktionen.</p></li>
-<li><p>Timestamptz-Ausdrücke.</p></li>
+<li><p>„Timestamptz“-Ausdrücke.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
 <li><p>Vektorprädikate auf Feldebene.</p></li>
-<li><p>Aufrufe generischer Filterfunktionen, sofern die jeweilige Funktionssignatur und der Ausführungspfad nicht explizit Prädikate auf StructArray-Ebene unterstützen.</p></li>
+<li><p>Aufrufe generischer Filterfunktionen, es sei denn, die spezifische Funktionssignatur und der Ausführungspfad unterstützen explizit Prädikate auf StructArray-Ebene.</p></li>
 </ul>
 <h2 id="Syntax-rules" class="common-anchor-header">Syntaxregeln<button data-href="#Syntax-rules" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -486,9 +535,14 @@ chunks is not null
 <li><p>Verschachteln Sie „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “ nicht innerhalb eines anderen StructArray-Operators.</p></li>
 <li><p>Verwenden Sie benannte „ <code translate="no">threshold=N</code> “ für „ <code translate="no">MATCH_LEAST</code> “, „ <code translate="no">MATCH_MOST</code> “ und „ <code translate="no">MATCH_EXACT</code> “.</p></li>
 <li><p>Schreiben Sie bei positionsbezogenen Pfaden die Elementposition vor den Namen des Unterfelds: „ <code translate="no">chunks[0][section]</code> “, nicht „ <code translate="no">chunks[section][0]</code> “.</p></li>
-<li><p>Verwenden Sie „ <code translate="no">IS NULL</code> “ und „ <code translate="no">IS NOT NULL</code> “ nur für das gesamte StructArray-Feld, z. B. „ <code translate="no">chunks is null</code> “. Verwenden Sie sie nicht in einem Unterfeldpfad wie „ <code translate="no">chunks[section]</code> “ oder in „ <code translate="no">$[subfield]</code> “.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> Bei einem leeren StructArray wird „ <code translate="no">false</code> “ zurückgegeben.</p></li>
-<li><p><code translate="no">MATCH_ALL</code> Bei einem leeren StructArray wird „ <code translate="no">true</code> “ zurückgegeben.</p></li>
+</ul>
+<ul>
+<li>Verwenden Sie <code translate="no">IS NULL</code> und <code translate="no">IS NOT NULL</code> nur für das gesamte StructArray-Feld, z. B. <code translate="no">chunks is null</code>, oder ab Milvus 3.0.6 für <code translate="no">$[subfield]</code> innerhalb von <code translate="no">element_filter</code> oder <code translate="no">MATCH_*</code>. Verwenden Sie sie nicht in einem Unterfeldpfad wie <code translate="no">chunks[section]</code>.</li>
+</ul>
+<ul>
+<li><p>Verwenden Sie keine Indizes für Unterfelder eines Arrays. „ <code translate="no">$[tags][0]</code> “ und „ <code translate="no">chunks[0][tags][0]</code> “ werden nicht unterstützt.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> Bei einem leeren StructArray wird <code translate="no">false</code> zurückgegeben.</p></li>
+<li><p><code translate="no">MATCH_ALL</code> Bei einem leeren StructArray wird <code translate="no">true</code> zurückgegeben.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">Siehe auch<button data-href="#See-also" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -505,7 +559,7 @@ chunks is not null
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Weitere Hinweise finden Sie unter:</p>
+    </button></h2><p>Weitere Informationen finden Sie unter:</p>
 <ul>
 <li><p><a href="/docs/de/filtered-search-with-structarray.md">Gefilterte Suche mit StructArray</a></p></li>
 <li><p><a href="/docs/de/basic-vector-search-with-structarray.md">Einfache Vektorsuche mit StructArray</a></p></li>

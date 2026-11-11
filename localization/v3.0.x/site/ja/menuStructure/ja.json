@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "デコンパウンダー",
+                    "label": "脱コンパウンド装置",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -794,7 +794,7 @@
             "children": []
           },
           {
-            "label": "アップサートされるエンティティ",
+            "label": "Upsert エンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -1223,7 +1223,7 @@
             ]
           },
           {
-            "label": "Milvus への Elasticsearch クエリ",
+            "label": "Elasticsearch クエリを Milvus に送信",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1249,7 +1249,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "BM25の機能",
+            "label": "BM25 の機能",
             "id": "bm25-function.md",
             "order": 0,
             "children": []
@@ -1889,7 +1889,7 @@
                     "children": []
                   },
                   {
-                    "label": "Pulsar v2を引き続きご利用ください",
+                    "label": "Pulsar v2を引き続き使用する",
                     "id": "use-pulsar-v2.md",
                     "order": 1,
                     "children": []
@@ -1987,7 +1987,7 @@
             "children": []
           },
           {
-            "label": "Milvus Standalone のアップグレード",
+            "label": "Milvus スタンドアロンのアップグレード",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "コマンド",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RESTful API",
-            "id": "milvus_backup_api.md",
+            "label": "HTTP API",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "よくある症例",
-            "id": "common-cases",
+            "label": "スナップショットによるバックアップと復元",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "1つのインスタンスでのバックアップと復元",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "コマンド",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "1つのバケット内のインスタンス間で移行する",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "HTTP API",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "バケットをまたぐインスタンス間の移行",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "よくある事例",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "1つのインスタンスでのバックアップと復元",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "1つのバケット内のインスタンス間で移行する",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "バケットをまたぐインスタンス間の移行",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "S3環境間のインスタンス間での移行",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "S3環境間のインスタンス間での移行",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "0.6.x へアップグレードする",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -2446,7 +2478,7 @@
                 "children": []
               },
               {
-                "label": "Nomic",
+                "label": "ノミック",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []

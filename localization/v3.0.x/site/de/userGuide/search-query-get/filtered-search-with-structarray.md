@@ -1060,7 +1060,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;doc_id&quot;, &quot;title&quot;, &quot;category&quot;, &quot;chunks[text]&quot;, &quot;chunks[section]&quot;, &quot;chunks[quality_score]&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Beide Unteranfragen wenden „ <code translate="no">category == &quot;search&quot;</code> “ an. Der Ausdruck „ <code translate="no">chunk_req</code> “ schränkt zudem die Struct-Elemente ein, die an der Vektorsuche beteiligt sind. Informationen zu unterstützten hybriden Suchkombinationen und versionsspezifischen Einschränkungen finden Sie unter <a href="/docs/de/hybrid-search-with-structarray.md">„Hybride Suche mit StructArray</a> “ und <a href="/docs/de/structarray-limits.md">„StructArray-Einschränkungen</a>“.</p>
+<p>Beide Unteranfragen wenden „ <code translate="no">category == &quot;search&quot;</code> “ an. Der Ausdruck „ <code translate="no">chunk_req</code> “ schränkt zudem die Struct-Elemente ein, die an der Vektorsuche beteiligt sind. Informationen zu unterstützten hybriden Suchkombinationen und versionsspezifischen Beschränkungen finden Sie unter <a href="/docs/de/hybrid-search-with-structarray.md">„Hybride Suche mit StructArray</a> “ und <a href="/docs/de/structarray-limits.md">„StructArray-Beschränkungen</a>“.</p>
 <h2 id="Predicate-support-summary" class="common-anchor-header">Zusammenfassung der Prädikatunterstützung<button data-href="#Predicate-support-summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1086,10 +1086,10 @@ curl --request POST \
 <tr><td>Ganzzahltypen</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Vektor-Unterfelder</td><td>Werden nicht als skalare Prädikate für „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die Vektorsuche.</td></tr>
+<tr><td>Vektor-Unterfelder</td><td>Werden nicht als skalare Prädikate in „ <code translate="no">$[...]</code> “ unterstützt. Verwenden Sie stattdessen Vektor-Teilfelder über die Vektorsuche.</td></tr>
 </tbody>
 </table>
-<p>Für nicht unterstützte Fälle wie JSON-Pfade, Array-Container-Funktionen, Textabgleichsfunktionen, Null-Prädikate auf „ <code translate="no">$[...]</code> “, Geometrie-Funktionen, „Timestamptz“-Ausdrücke und generische Funktionsaufrufe siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Für nicht unterstützte Fälle wie JSON-Pfade, Textabgleichsfunktionen, Geometrie-Funktionen, Timestamptz-Ausdrücke und generische Funktionsaufrufe sowie für die Array-Container-Funktionen und Null-Prädikate, die <code translate="no">$[...]</code> ab Milvus 3.0.6 unterstützt, siehe <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1107,7 +1107,7 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>Verwendung von „ <code translate="no">$[subfield]</code> “ außerhalb von „ <code translate="no">element_filter</code> “ oder „ <code translate="no">MATCH_*</code> “.</p></li>
-<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie z. B. „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
+<li><p>Verwendung von „ <code translate="no">chunks.section</code> “ anstelle der StructArray-Operatorsyntax wie beispielsweise „ <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code> “.</p></li>
 <li><p>Verwendung von „ <code translate="no">element_filter</code> “, wenn nur eine Filterung auf Zeilenebene erforderlich ist. Verwenden Sie stattdessen „ <code translate="no">MATCH_ANY</code> “, wenn Sie lediglich Entitäten auswählen müssen.</p></li>
 <li><p>Die Erwartung, dass ` <code translate="no">MATCH_*</code> ` Element-Offsets zurückgibt. Diese Operatoren wählen Entitäten aus und identifizieren selbst kein einzelnes übereinstimmendes Element.</p></li>
 <li><p>Das Schreiben von einfachen booleschen Prädikaten wie „ <code translate="no">$[has_code]</code> “. Verwenden Sie explizite Vergleiche wie „ <code translate="no">$[has_code] == true</code> “.</p></li>

@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Предикаты пути на уровне строк</td><td>Проверка положения одного элемента, подсчёт элементов Struct или проверка значений подполей по элементам без предиката « <code translate="no">$[...]</code> ».</td><td>Фильтрация на уровне строк. Эти предикаты не возвращают смещения элементов.</td></tr>
 </tbody>
 </table>
-<p>Используйте скалярные подполя в операторах StructArray. Векторные подполя используются векторными путями поиска и не являются входными данными для скалярных предикатов.</p>
+<p>Используйте скалярные подполя и массивные подполя в Milvus 3.0.6 и более поздних версиях в операторах StructArray. Векторные подполя используются в векторных путях поиска и не являются входными данными для скалярных предикатов.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">Когда использовать тот или иной оператор<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ summary: >-
     </button></h2><p>Выбирайте оператор в зависимости от цели фильтрации:</p>
 <table>
 <thead>
-<tr><th>Цель</th><th>Использование</th></tr>
+<tr><th>Цель</th><th>Используйте</th></tr>
 </thead>
 <tbody>
 <tr><td>Ограничить векторный поиск на уровне элементов элементами, соответствующими скалярным условиям.</td><td><code translate="no">element_filter</code></td></tr>
@@ -249,7 +249,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
     </button></h3><p><code translate="no">MATCH_LEAST</code> возвращает значение <code translate="no">true</code>, если количество элементов, удовлетворяющих предикату, больше или равно <code translate="no">threshold</code>.</p>
 <pre><code translate="no" class="language-text">MATCH_LEAST(chunks, $[quality_score] &gt; 0.9, threshold=2)
 <button class="copy-code-btn"></button></code></pre>
-<p>Соответствует только сущность B: у сущности A нет подходящих элементов, а у сущности B их три.</p>
+<p>Соответствует только объект B: у объекта A нет подходящих элементов, а у объекта B их три.</p>
 <p>Для <code translate="no">MATCH_LEAST</code> <code translate="no">threshold</code> должно быть положительным целым числом.</p>
 <h3 id="MATCHMOST" class="common-anchor-header">MATCH_MOST<button data-href="#MATCHMOST" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -356,18 +356,29 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">Подсчёт элементов Struct</h4><p>Используйте <code translate="no">array_length(structArrayField)</code> для фильтрации по количеству элементов Struct в объекте. Оператор <code translate="no">array_length</code>, примененный к пути подполя, например <code translate="no">array_length(chunks[section])</code>, возвращает то же количество, поскольку каждое подполе содержит одно значение на каждый элемент Struct.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Доступ к подполям массива по позиции<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>Начиная с Milvus 3.0.6, позиционный путь также может ссылаться на скалярное подполе <code translate="no">ARRAY</code>. <code translate="no">chunks[0][tags]</code> — это внутренний массив первого элемента Struct. Он поддерживает <code translate="no">==</code> и <code translate="no">!=</code> с массивным литералом, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> и <code translate="no">array_length</code>. Операторы сравнения, <code translate="no">in</code>, <code translate="no">like</code>, а также арифметические операции над ним отклоняются.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>, <code translate="no">==</code> и <code translate="no">!=</code> для всего пути подполя массива, например <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code>, отклоняются, поскольку этот путь содержит один внутренний массив на каждый элемент Struct. Вместо этого используйте <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code>.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">Подсчёт элементов Struct</h4><p>Используйте <code translate="no">array_length(structArrayField)</code> для фильтрации по количеству элементов Struct в сущности. <code translate="no">array_length</code> в пути подполя, например <code translate="no">array_length(chunks[section])</code>, возвращает то же количество, поскольку каждое подполе содержит одно значение на каждый элемент Struct.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
 # Articles with exactly one chunk.
 array_length(chunks) == 1
 <button class="copy-code-btn"></button></code></pre>
-<p>Предикаты подсчёта родительского поля соответствуют обоим сущностям для <code translate="no">&gt;= 3</code> и ни одной для <code translate="no">== 1</code>. Вы также можете подсчитывать значения по пути подполя:</p>
+<p>Предикаты подсчёта родительского поля соответствуют обеим сущностям для <code translate="no">&gt;= 3</code> и ни одной из них для <code translate="no">== 1</code>. Вы также можете подсчитывать значения по пути к подполю:</p>
 <pre><code translate="no" class="language-text">ARRAY_LENGTH(chunks[quality_score]) == 3
 <button class="copy-code-btn"></button></code></pre>
 <p>Соответствует только сущность B, поскольку её подполе <code translate="no">quality_score</code> содержит три значения.</p>
-<h4 id="Test-subfield-values-across-elements" class="common-anchor-header">Проверка значений подполей по всем элементам</h4><p>Например, проверьте, равен ли какой-либо показатель качества значению <code translate="no">0.74</code>:</p>
+<h4 id="Test-subfield-values-across-elements" class="common-anchor-header">Проверка значений подполей по всем элементам</h4><p>Например, проверьте, равен ли какой-либо показатель качества значению « <code translate="no">0.74</code> »:</p>
 <pre><code translate="no" class="language-text">ARRAY_CONTAINS(chunks[quality_score], 0.74)
 <button class="copy-code-btn"></button></code></pre>
 <p>Соответствует только сущность A.</p>
@@ -432,10 +443,45 @@ chunks is not null
 <tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>сравнения, цепочки диапазонов, <code translate="no">in</code>, <code translate="no">not in</code>, арифметические выражения с <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code> или <code translate="no">%</code>, за которыми следует сравнение, а также логические комбинации.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Сравнение, цепочка диапазонов, <code translate="no">in</code>, <code translate="no">not in</code>, арифметические выражения с <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code> или <code translate="no">/</code>, за которыми следует сравнение, а также логические комбинации. Оператор <code translate="no">%</code> не поддерживается для подполей с плавающей запятой.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>Сравнение строк, цепочки диапазонов, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code> и логические комбинации.</td></tr>
-<tr><td>Векторные подполя</td><td>Не поддерживаются в качестве входных данных для скалярных предикатов <code translate="no">$[...]</code>. Вместо этого используйте подполя векторов посредством поиска EmbeddingList или векторного поиска на уровне элементов.</td></tr>
+<tr><td>Скалярные подполя <code translate="no">ARRAY</code> (Milvus 3.0.6 и более поздние версии)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code> и <code translate="no">array_length</code> на <code translate="no">$[tags]</code>, а также <code translate="no">$[tags] is null</code> и <code translate="no">$[tags] is not null</code>. Операторы сравнения, <code translate="no">in</code> и <code translate="no">like</code> на <code translate="no">$[tags]</code> отклоняются.</td></tr>
+<tr><td>Любое подполе, допускающее значение null (Milvus 3.0.6 и более поздние версии)</td><td><code translate="no">$[subfield] is null</code> и <code translate="no">$[subfield] is not null</code> проверяют, является ли значение в текущем элементе Struct нулевым. Для подполя, которое не может содержать нулевых значений, выражение <code translate="no">is null</code> всегда равно false.</td></tr>
+<tr><td>Подполя векторного типа</td><td>Не поддерживаются в качестве входных данных для скалярных предикатов <code translate="no">$[...]</code>, за исключением <code translate="no">$[emb] is null</code> и <code translate="no">$[emb] is not null</code> для векторного подполя, допускающего значение null, в Milvus 3.0.6 и более поздних версиях. Вместо этого используйте векторные подполя посредством поиска по EmbeddingList или векторного поиска на уровне элементов.</td></tr>
 </tbody>
 </table>
-<p>К выражениям предикатов применяются логические операторы, такие как <code translate="no">&amp;&amp;</code>, <code translate="no">||</code> и <code translate="no">!</code>. Например, вместо <code translate="no">!$[has_code]</code> напишите <code translate="no">!($[has_code] == true)</code>.</p>
+<p>Логические операторы, такие как <code translate="no">&amp;&amp;</code>, <code translate="no">||</code> и <code translate="no">!</code>, применяются к выражениям предикатов. Например, вместо <code translate="no">!$[has_code]</code> следует написать <code translate="no">!($[has_code] == true)</code>.</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">Нулевые значения в предикатах на уровне элементов<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Начиная с версии Milvus 3.0.6, подполе элемента, допускающее значение null, может содержать значение null в элементе Struct. Значения null подчиняются трёхзначной логике в предикатах StructArray:</p>
+<ul>
+<li><p>Сравнение, выражение типа « <code translate="no">in</code> », « <code translate="no">like</code> » или арифметический предикат, применяемый к нулевому значению подполя, возвращает значение «неизвестно», а не «ложно». Выражения « <code translate="no">&amp;&amp;</code> », « <code translate="no">\|\|</code> » и « <code translate="no">!</code> » распространяют неизвестные результаты, поэтому выражение « <code translate="no">!($[lang] == &quot;en&quot;)</code> » по-прежнему возвращает значение «неизвестно», если выражение « <code translate="no">$[lang]</code> » равно нулю.</p></li>
+<li><p><code translate="no">element_filter</code> сохраняет только элементы Struct, предикат которых истинный. Неизвестные элементы не сопоставляются.</p></li>
+<li><p><code translate="no">MATCH_*</code> считает неизвестный элемент пропуском. <code translate="no">MATCH_ALL</code> равно false, если какой-либо элемент неизвестен, в то время как пустой StructArray по-прежнему удовлетворяет условию <code translate="no">MATCH_ALL</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> и <code translate="no">$[subfield] is not null</code> всегда имеют значение true или false. Они определяют валидность текущего элемента, поэтому <code translate="no">$[lang] is null</code> точно сопоставляет элементы, значение <code translate="no">lang</code> которых равно null.</p></li>
+<li><p>В случае подполя массива функция <code translate="no">array_contains*</code> при использовании <code translate="no">$[tags]</code> пропускает внутренние значения null и никогда не сопоставляет внутренний массив с нулевым значением, функция <code translate="no">array_length($[tags])</code> учитывает внутренние значения null, а функция <code translate="no">$[tags] is null</code> возвращает true только для внутреннего массива с нулевым значением.</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>Позиционные пути на уровне строк следуют тому же правилу: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> имеет неизвестное значение, если значение <code translate="no">lang</code> первого элемента равно null, если у сущности нет элемента в этой позиции или если поле StructArray равно null, поэтому сущность не соответствует.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Неподдерживаемые предикаты<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -451,12 +497,15 @@ chunks is not null
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Предикаты на уровне элементов <code translate="no">$[...]</code> не поддерживают:</p>
+    </button></h2><p>Предикаты <code translate="no">$[...]</code> на уровне элементов не поддерживают:</p>
 <ul>
 <li><p>Функции сопоставления текста, такие как <code translate="no">text_match(field, &quot;...&quot;)</code> или <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
-<li><p>Синтаксис JSON-путей, оператор ` <code translate="no">exists</code> ` над JSON-путями или функции JSON, такие как ` <code translate="no">json_contains</code>`, ` <code translate="no">json_contains_all</code>` или ` <code translate="no">json_contains_any</code>`.</p></li>
-<li><p>Функции контейнера массивов, такие как <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> или <code translate="no">array_length</code> на <code translate="no">$[subfield]</code>. Вместо этого используйте эти функции с путем к подполю, например <code translate="no">chunks[section]</code>, в предикате на уровне строки.</p></li>
-<li><p><code translate="no">$[subfield] is null</code> или <code translate="no">$[subfield] is not null</code>.</p></li>
+<li><p>Синтаксис JSON-путей, оператор ` <code translate="no">exists</code> ` для JSON-путей или функции JSON, такие как ` <code translate="no">json_contains</code>`, ` <code translate="no">json_contains_all</code>` или ` <code translate="no">json_contains_any</code>`.</p></li>
+<li><p>Функции контейнера массивов, такие как <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code> или <code translate="no">array_length</code>, применительно к <code translate="no">$[subfield]</code> скалярного подполя. Вместо этого используйте эти функции с путем к подполю, например <code translate="no">chunks[section]</code>, в предикате на уровне строк. Начиная с Milvus 3.0.6, они поддерживаются при <code translate="no">$[tags]</code> для скалярных подполей <code translate="no">ARRAY</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> или <code translate="no">$[subfield] is not null</code> до версии Milvus 3.0.6.</p></li>
+</ul>
+<ul>
+<li><p>Индекс в подполе массива, например <code translate="no">$[tags][0]</code>, а также <code translate="no">like</code> в <code translate="no">$[tags]</code>.</p></li>
 <li><p>Функции геометрии / ГИС.</p></li>
 <li><p>Выражения с временными метками tz.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
@@ -486,9 +535,14 @@ chunks is not null
 <li><p>Не вкладывайте <code translate="no">element_filter</code> или <code translate="no">MATCH_*</code> внутрь другого оператора StructArray.</p></li>
 <li><p>Используйте именованные <code translate="no">threshold=N</code> для <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code> и <code translate="no">MATCH_EXACT</code>.</p></li>
 <li><p>В позиционных путях указывайте позицию элемента перед именем подполя: <code translate="no">chunks[0][section]</code>, а не <code translate="no">chunks[section][0]</code>.</p></li>
-<li><p>Используйте <code translate="no">IS NULL</code> и <code translate="no">IS NOT NULL</code> только для всего поля StructArray, например <code translate="no">chunks is null</code>. Не используйте их в пути к подполю, например <code translate="no">chunks[section]</code>, или в <code translate="no">$[subfield]</code>.</p></li>
-<li><p><code translate="no">MATCH_ANY</code> применение к пустому StructArray возвращает <code translate="no">false</code>.</p></li>
-<li><p><code translate="no">MATCH_ALL</code> при применении к пустому StructArray возвращает <code translate="no">true</code>.</p></li>
+</ul>
+<ul>
+<li>Используйте <code translate="no">IS NULL</code> и <code translate="no">IS NOT NULL</code> только для всего поля StructArray, например <code translate="no">chunks is null</code>, или, начиная с версии Milvus 3.0.6, для <code translate="no">$[subfield]</code> внутри <code translate="no">element_filter</code> или <code translate="no">MATCH_*</code>. Не используйте их в пути к подполю, например <code translate="no">chunks[section]</code>.</li>
+</ul>
+<ul>
+<li><p>Не используйте индексацию в подполе массива. <code translate="no">$[tags][0]</code> и <code translate="no">chunks[0][tags][0]</code> не поддерживаются.</p></li>
+<li><p><code translate="no">MATCH_ANY</code> при применении к пустому StructArray возвращает <code translate="no">false</code>.</p></li>
+<li><p><code translate="no">MATCH_ALL</code> При применении к пустому StructArray возвращается <code translate="no">true</code>.</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">См. также<button data-href="#See-also" class="anchor-icon" translate="no">
       <svg translate="no"

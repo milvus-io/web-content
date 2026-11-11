@@ -41,10 +41,14 @@ summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>預設值</strong>：ARRAY 欄位不支援預設值。不過，您可以將 `<code translate="no">nullable</code> ` 屬性設定為 `<code translate="no">True</code> `，以允許空值。詳細資訊請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>」。</p></li>
-<li><p><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須指定<code translate="no">max_length</code> ，該參數定義每個陣列元素允許的最大位元組數。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，惟<code translate="no">JSON</code> 除外。若為<code translate="no">element_type=STRUCT</code> ，請使用 StructArray 欄位並提供<code translate="no">struct_schema</code> ；詳情請參閱<a href="/docs/zh-hant/create-structarray-field.md">StructArray</a>。</p></li>
-<li><p><strong>陣列容量</strong>：ARRAY 欄位中的元素數量必須小於或等於建立陣列時所定義的最大容量，如<code translate="no">max_capacity</code> 所規定。該值應為<strong>1</strong>至<strong>4096</strong> 之間的整數。</p></li>
-<li><p><strong>字串處理</strong>：陣列欄位中的字串值會以原始形式儲存，不會進行語義轉義或轉換。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 以及<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入時的形式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則被視為無效值。</p></li>
+<li><strong>預設值</strong>：ARRAY 欄位不支援預設值。不過，您可以將 `<code translate="no">nullable</code> ` 屬性設定為 `<code translate="no">True</code> `，以允許空值。詳細資訊請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>」。</li>
+</ul>
+<ul>
+<li><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須指定<code translate="no">max_length</code> ，該參數定義每個陣列元素允許的最大位元組數。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，惟<code translate="no">JSON</code> 除外。若為<code translate="no">element_type=STRUCT</code> ，請使用 StructArray 欄位並提供<code translate="no">struct_schema</code> ；詳情請參閱<a href="/docs/zh-hant/create-structarray-field.md">StructArray</a>。 頂層的 ARRAY 欄位無法包含向量或嵌套陣列，且其各元素不得為 null；在 Milvus 3.0.6 及後續版本中，此類形式僅適用於 StructArray 欄位內的子欄位。</li>
+</ul>
+<ul>
+<li><p><strong>陣列容量</strong>：ARRAY 欄位的元素數量必須小於或等於建立陣列時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096</strong> 之間的整數。</p></li>
+<li><p><strong>字串處理</strong>：陣列欄位中的字串值將以原始形式儲存，不會進行語義轉義或轉換。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 以及<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入時的形式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則被視為無效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">新增 ARRAY 欄位<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -637,7 +637,7 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusutan ASCII",
+                    "label": "Penyusunan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -1243,7 +1243,7 @@
         ]
       },
       {
-        "label": "Inferensi Fungsi &amp; Model",
+        "label": "Inferensi Fungsi dan Model",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1539,7 +1539,7 @@
             "children": []
           },
           {
-            "label": "Kasus Penggunaan",
+            "label": "Contoh Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1645,7 +1645,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Kode Claude",
+        "label": "Server MCP untuk Claude Code",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1950,7 +1950,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Kelompok Skala",
+            "label": "Kluster Skala",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Perintah",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Kasus-kasus Umum",
-            "id": "common-cases",
+            "label": "Pencadangan dan Pemulihan Snapshot",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Cadangan 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Pencadangan dan Pemulihan dalam Satu Instansi",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Perintah",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Memindahkan Data Antar Instansi dalam Satu Bucket",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrasi Antar-Instan di Berbagai Bucket",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Kasus-kasus Umum",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Pencadangan dan Pemulihan dalam Satu Instansi",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Memindahkan Data Antar Instansi dalam Satu Bucket",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrasi Antar-Instan di Berbagai Bucket",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrasi Antar-Instan di Berbagai Lingkungan S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrasi Antar-Instan di Berbagai Lingkungan S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Tingkatkan ke versi 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
@@ -3212,7 +3244,7 @@
         "children": []
       },
       {
-        "label": "Gunakan AsyncMilvusClient dengan asyncio",
+        "label": "Gunakan AsyncMilvusClient bersama asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []

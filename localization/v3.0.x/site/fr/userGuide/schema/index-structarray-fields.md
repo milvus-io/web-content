@@ -53,7 +53,7 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Un champ vectoriel ou un sous-champ vectoriel n'accepte qu'un seul index. Si vous avez besoin à la fois d'une recherche EmbeddingList et d'une recherche au niveau des éléments, créez deux sous-champs vectoriels distincts et indexez-les séparément. Sur cette page, <code translate="no">chunks[emb_list_vector]</code> est indexé pour la recherche EmbeddingList, et <code translate="no">chunks[emb]</code> est indexé pour la recherche au niveau des éléments.</p>
+<p>Un champ vectoriel ou un sous-champ vectoriel n’accepte qu’un seul index. Si vous avez besoin à la fois de la recherche EmbeddingList et de la recherche au niveau des éléments, créez deux sous-champs vectoriels distincts et indexez-les séparément. Sur cette page, <code translate="no">chunks[emb_list_vector]</code> est indexé pour la recherche EmbeddingList, et <code translate="no">chunks[emb]</code> est indexé pour la recherche au niveau des éléments.</p>
 </div>
 <h2 id="Choose-indexes" class="common-anchor-header">Choisissez les index<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -497,7 +497,52 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour la recherche EmbeddingList, choisissez la métrique <code translate="no">MAX_SIM*</code> correspondant à la comparaison par vecteur : <code translate="no">MAX_SIM_COSINE</code> (également appelée <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code> ou <code translate="no">MAX_SIM_L2</code> pour les vecteurs denses, et <code translate="no">MAX_SIM_HAMMING</code> ou <code translate="no">MAX_SIM_JACCARD</code> pour les vecteurs binaires. Ces métriques comparent les listes d’embeddings et renvoient des résultats au niveau de l’entité. Pour la recherche au niveau des éléments, utilisez la métrique standard correspondante répertoriée ci-dessous.</p>
+    </button></h2><p>Pour la recherche EmbeddingList, choisissez la métrique « <code translate="no">MAX_SIM*</code> » correspondant à la comparaison par vecteur : <code translate="no">MAX_SIM_COSINE</code> (également appelée <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code> ou <code translate="no">MAX_SIM_L2</code> pour les vecteurs denses, et <code translate="no">MAX_SIM_HAMMING</code> ou <code translate="no">MAX_SIM_JACCARD</code> pour les vecteurs binaires. Ces métriques comparent les listes d’embeddings et renvoient des résultats au niveau de l’entité. Pour la recherche au niveau des éléments, utilisez la métrique standard correspondante répertoriée ci-dessous.</p>
+<p>À partir de Milvus 3.0.6, les index scalaires ne sont plus pris en charge sur les sous-champs dont les éléments peuvent être nuls ni sur les sous-champs scalaires de type « <code translate="no">ARRAY</code> ». Les filtres appliqués à ces sous-champs s’exécutent sans index.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Indexation des sous-champs vectoriels pouvant contenir des éléments nuls et des éléments « xml-ph-0000@deepl.internal »<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>À partir de Milvus 3.0.6, un sous-champ vectoriel peut être créé avec des éléments pouvant être nuls (<code translate="no">nullable=True</code>), et un sous-champ vectoriel peut être ajouté à un champ StructArray existant. Dans les deux cas, la manière d’indexer le sous-champ change :</p>
+<ul>
+<li>Un sous-champ vectoriel dont les éléments peuvent être nuls ne prend en charge que la recherche au niveau des éléments. Indexez-le à l’aide d’une métrique vectorielle standard telle que <code translate="no">COSINE</code>, <code translate="no">IP</code> ou <code translate="no">L2</code>. Les métriques de type « <code translate="no">MAX_SIM*</code> » et les index EmbeddingList sont rejetés pour ce sous-champ, et la métrique « <code translate="no">AUTOINDEX</code> » ne sélectionne pas de métrique de type « <code translate="no">MAX_SIM*</code> » pour celui-ci. Les vecteurs nuls sont ignorés lors de la création de l’index et pendant la recherche.</li>
+</ul>
+<ul>
+<li><p>Un sous-champ vectoriel ajouté à un champ StructArray existant comporte toujours des éléments pouvant être nuls ; la même règle de métrique s’applique donc. Vous ne pouvez pas associer d’index dans la requête d’ajout ; créez l’index séparément une fois que le sous-champ existe.</p></li>
+<li><p>Un chargement incluant un sous-champ vectoriel nécessite un index sur celui-ci, comme pour tout champ vectoriel. Créez l’index sur un sous-champ vectoriel ajouté avant de charger la collection incluant ce sous-champ. Les requêtes peuvent renvoyer le nouveau sous-champ avant même que l’index n’existe.</p></li>
+<li><p>Les segments d’historique reçoivent un sous-champ ajouté et son index via la compaction de version de schéma. Définissez ` <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> ` sur ` <code translate="no">true</code> ` (la valeur par défaut est ` <code translate="no">false</code> `) ; sinon, l’index du sous-champ ajouté ne couvre pas les segments d’historique.</p></li>
+<li><p>Milvus ne construit l’index vectoriel d’un segment d’un sous-champ vectoriel pouvant contenir des éléments nuls que si ce segment contient au moins 1 024 éléments valides (non nuls). Un segment inférieur à ce seuil ne fait l’objet d’aucune construction d’index, et les requêtes le concernant s’exécutent par recherche par force brute.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">Compatibilité des métriques d’index<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,7 +558,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez les tableaux suivants pour choisir un type d’index et un type de métrique pour un sous-champ de vecteur StructArray. Commencez par la cible, puis choisissez la famille de métriques en fonction du mode de recherche.</p>
+    </button></h2><p>Utilisez les tableaux suivants pour choisir un type d’index et un type de métrique pour un sous-champ vectoriel StructArray. Commencez par la cible, puis choisissez la famille de métriques en fonction du mode de recherche.</p>
 <p>Choisissez un type d’index Milvus et un type de métrique à partir des tableaux de compatibilité suivants.</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">Recherche EmbeddingList<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,7 +575,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La recherche EmbeddingList utilise des métriques de type « <code translate="no">MAX_SIM*</code> ». Elle traite les vecteurs d’un sous-champ de type StructArray comme une liste d’embeddings et renvoie des résultats au niveau de l’entité.</p>
+    </button></h3><p>La recherche EmbeddingList utilise des métriques de type « <code translate="no">MAX_SIM*</code> ». Elle traite les vecteurs d’un sous-champ vectoriel StructArray comme une liste d’embeddings et renvoie des résultats au niveau des entités.</p>
 <table>
 <thead>
 <tr><th>Type de données du sous-champ vectoriel</th><th>Type d’index</th><th>Type de métrique</th></tr>
@@ -769,7 +814,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>La réponse de liste contient les noms d'index ; la réponse « describe » identifie l'<code translate="no">chunks[emb]</code> et la configuration de l'index. Vérifiez la réponse ou le statut pour détecter d'éventuelles erreurs avant de l'utiliser.</p>
-<h2 id="Index-rules" class="common-anchor-header">Règles d’indexation<button data-href="#Index-rules" class="anchor-icon" translate="no">
+<h2 id="Index-rules" class="common-anchor-header">Règles d'indexation<button data-href="#Index-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -793,7 +838,8 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>Un sous-champ vectoriel n'accepte qu'un seul index.</td><td>Utilisez des sous-champs vectoriels distincts si vous avez besoin de familles de métriques différentes.</td></tr>
 <tr><td>Utilisez les métriques de type « <code translate="no">MAX_SIM*</code> » pour la recherche EmbeddingList.</td><td>Les données de requête EmbeddingList nécessitent un index créé avec une métrique de type « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Utilisez des métriques vectorielles standard pour la recherche au niveau des éléments.</td><td>La recherche au niveau des éléments utilise des données de requête vectorielles standard et des métriques telles que « <code translate="no">COSINE</code> », « <code translate="no">IP</code> » ou « <code translate="no">L2</code> ».</td></tr>
-<tr><td>Indexez les sous-champs scalaires qui apparaissent dans les filtres.</td><td>Utilisez les types d’index scalaires pris en charge par votre cible.</td></tr>
+<tr><td>Indexez les sous-champs scalaires qui apparaissent dans les filtres.</td><td>Utilisez les types d’index scalaires pris en charge par votre cible. Les sous-champs pouvant contenir des éléments nuls et les sous-champs scalaires de type « <code translate="no">ARRAY</code> » ne peuvent pas être indexés.</td></tr>
+<tr><td>Utilisez des métriques au niveau des éléments sur les sous-champs vectoriels pouvant contenir des éléments nuls.</td><td>Un sous-champ vectoriel pouvant contenir des éléments nuls (<code translate="no">nullable=True</code>), y compris tout sous-champ vectoriel ajouté à un champ StructArray existant, rejette les métriques de type « <code translate="no">MAX_SIM*</code> ».</td></tr>
 <tr><td>Gardez à l’esprit les limites des champs vectoriels.</td><td>Le nombre total de champs vectoriels et de sous-champs vectoriels est limité. Consultez la section « Limites de StructArray » avant d’ajouter un grand nombre de sous-champs vectoriels.</td></tr>
 </tbody>
 </table>
@@ -813,12 +859,12 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Créer un index sur <code translate="no">chunks.emb</code> au lieu de <code translate="no">chunks[emb]</code>.</p></li>
+<li><p>Créer un index sur « <code translate="no">chunks.emb</code> » au lieu de « <code translate="no">chunks[emb]</code> ».</p></li>
 <li><p>Créer uniquement un index « <code translate="no">MAX_SIM*</code> », puis tenter d’effectuer une recherche au niveau des éléments sur ce même sous-champ.</p></li>
 <li><p>Créer uniquement un index vectoriel standard, puis tenter d’effectuer une recherche EmbeddingList sur ce même sous-champ.</p></li>
 <li><p>Réutiliser un sous-champ vectoriel à la fois pour les métriques « <code translate="no">MAX_SIM*</code> » et les métriques vectorielles classiques.</p></li>
 <li><p>Oublier les index scalaires pour les filtres StructArray très utilisés.</p></li>
-<li><p>L'indexation d’un sous-champ StructArray qui n’existe pas dans le schéma Struct.</p></li>
+<li><p>Indexation d’un sous-champ StructArray qui n’existe pas dans le schéma Struct.</p></li>
 </ul>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"

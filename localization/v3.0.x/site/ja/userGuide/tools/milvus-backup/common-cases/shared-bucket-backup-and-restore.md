@@ -1,10 +1,11 @@
 ---
 id: shared-bucket-backup-and-restore.md
 summary: >-
-  このトピックでは、オブジェクトストレージに共有バケットを使用しながら、Milvusインスタンスからコレクションをバックアップし、別のインスタンスにリストアするプロセスについて詳しく説明します。
-title: つのバケット内のインスタンス間の移行（異なるルートパス）
+  このトピックでは、オブジェクトストレージ用の共有バケットを使用しながら、あるMilvusインスタンスからコレクションをバックアップし、別のMilvusインスタンスに復元する手順について詳しく説明します。
+title: 1つのバケット内のインスタンス間での移行（ルートパスが異なる場合）Compatible with Milvus Backup 0.5.x
+beta: Milvus Backup 0.5.x
 ---
-<h1 id="Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="common-anchor-header">つのバケット内のインスタンス間の移行（異なるルートパス）<button data-href="#Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="anchor-icon" translate="no">
+<h1 id="Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="common-anchor-header">1つのバケット内のインスタンス間での移行（ルートパスが異なる場合）<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.5.x</span><button data-href="#Migrate-Between-Instances-in-One-Bucket-Different-Root-Paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +20,10 @@ title: つのバケット内のインスタンス間の移行（異なるルー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、あるMilvusインスタンスからコレクションをバックアップし、別のMilvusインスタンスにリストアするプロセスについて詳しく説明します。</p>
+    </button></h1><p>現在のワークフローについては、<a href="/docs/ja/milvus_backup_0_6_cli.md">CLIガイド</a>を参照するか、<a href="/docs/ja/milvus_backup_upgrade.md">0.5.xからアップグレードしてください</a>。サポートされているMilvusサーバーのバージョンについては、<a href="/docs/ja/milvus_backup_overview.md#Compatibility-matrix">互換性マトリックス</a>を確認してください。</p>
+<p>このトピックでは、オブジェクトストレージとして共有バケットを使用し、
+各インスタンスに異なるルートパスを設定した状態で、ある
+Milvusインスタンスからコレクションをバックアップし、別のインスタンスに復元する手順について詳しく説明します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,15 +39,23 @@ title: つのバケット内のインスタンス間の移行（異なるルー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の図は、共有バケットを使用したバックアップとリストアのプロセスを示しています。</p>
-<p>
+    </button></h2><p>以下の図は、
+共有バケットを使用したバックアップおよび復元プロセスを示しています。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" />
-   </span> <span class="img-wrapper"> <span>共有バケットバックアップ・リストア.png</span> </span></p>
-<p>Milvusインスタンス、<code translate="no">milvus_A</code> と<code translate="no">milvus_B</code> があり、どちらもオブジェクトストレージにデフォルトのMinIOストレージエンジンを使用しているとします。これらのインスタンスは、<code translate="no">bucket_A</code> という同じバケットを共有していますが、<code translate="no">milvus_A</code> は<code translate="no">files_A</code> 、<code translate="no">milvus_B</code> は files_B という異なるルートパスにデータを保存しています。この例では、以下のタスクを完了することが目標です：</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/shared-bucket-backup-and-restore.png" alt="shared-bucket-backup-and-restore.png" class="doc-image" id="shared-bucket-backup-and-restore.png" /> 
+   <span>shared-bucket-backup-and-restore.png</span>
+  
+ </span></p>
+<p>Milvusインスタンス「<code translate="no">milvus_A</code> 」と「<code translate="no">milvus_B</code> 」があり、どちらも
+オブジェクトストレージとしてデフォルトのMinIOストレージエンジンを利用していると仮定します。これらのインスタンスは
+同じバケット「<code translate="no">bucket_A</code> 」を共有していますが、データは異なるルート
+パスに保存されています。<code translate="no">milvus_A</code> 用は「<code translate="no">files_A</code> 」、<code translate="no">milvus_B</code> 用は「files_B」です。この例では、
+以下のタスクを完了することを目標とします。</p>
 <ol>
-<li><p>コレクション coll のバックアップ(my_backup)を作成し、<code translate="no">milvus_A</code> の<code translate="no">files_A</code> パスに保存します。</p></li>
-<li><p>バックアップからリストアして、<code translate="no">milvus_B</code> の files_B に格納します。</p></li>
+<li><p>コレクション coll のバックアップ (my_backup) を作成し、これを
+<code translate="no">files_A</code> のパスに保存します（<code translate="no">milvus_A</code> ）。</p></li>
+<li><p>バックアップから復元し、<code translate="no">milvus_B</code> に対して files_B に保存する。</p></li>
 </ol>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,10 +73,12 @@ title: つのバケット内のインスタンス間の移行（異なるルー�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>milvus-backup</strong>ツールがインストールされていることを確認してください。</p></li>
-<li><p>Milvusオブジェクトストレージの設定に慣れていること。 詳細については、<a href="https://milvus.io/docs/deploy_s3.md">オブジェクトストレージを</a>参照してください。</p></li>
+<li><p><a href="/docs/ja/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x CLI ガイド</a>に従って、<strong>Milvus Backup 0.5.16</strong>をインストールしてください。</p></li>
+<li><p>Milvus オブジェクトストレージ設定の構成方法について理解しておいてください。
+詳細については、「<a href="https://milvus.io/docs/deploy_s3.md">オブジェクト
+ストレージ</a>」を参照してください。</p></li>
 </ul>
-<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">からのコレクションのバックアップ<code translate="no">milvus_A</code><button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
+<h2 id="Back-up-a-collection-from-milvusA" class="common-anchor-header">コレクションを<code translate="no">milvus_A</code><button data-href="#Back-up-a-collection-from-milvusA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,7 +93,7 @@ title: つのバケット内のインスタンス間の移行（異なるルー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">ステップ1: 設定の準備<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Prepare-configuration" class="common-anchor-header">ステップ 1: 設定の準備<button data-href="#Step-1-Prepare-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,20 +108,19 @@ title: つのバケット内のインスタンス間の移行（異なるルー�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>milvus-backupプロジェクトのディレクトリに移動し、configsというディレクトリを作成します：</p>
-<pre><code translate="no" class="language-shell">mkdir configs
-cd configs
+    </button></h3><p>milvus-backup プロジェクトのディレクトリに移動し、<code translate="no">configs</code> という名前のディレクトリを作成します。<code translate="no">milvus-backup</code> を含むディレクトリから、以下のコマンドを実行します：</p>
+<pre><code translate="no" class="language-shell">mkdir -p configs
 <button class="copy-code-btn"></button></code></pre>
-<p>バックアップ設定ファイルbackup.yamlをダウンロードします：</p>
-<pre><code translate="no" class="language-shell">wget https://raw.githubusercontent.com/zilliztech/milvus-backup/main/configs/backup.yaml
+<p>バックアップ設定ファイル `backup.yaml` をダウンロードします：</p>
+<pre><code translate="no" class="language-shell">wget -O configs/backup.yaml https://raw.githubusercontent.com/zilliztech/milvus-backup/v0.5.16/configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>ファイル構造は以下のようになります：</p>
+<p>ファイル構造は次のようになります：</p>
 <pre><code translate="no">├── configs
 │   └── backup.yaml
 ├── milvus-backup
 └── README.md
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">ステップ2：設定ファイルの編集<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
+<h3 id="Step-2-Edit-configuration-file" class="common-anchor-header">ステップ 2: 設定ファイルの編集<button data-href="#Step-2-Edit-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -122,7 +135,8 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>backup.yamlファイルを修正して、<code translate="no">milvus_A</code> に適切なコンフィギュレーションを設定します：</p>
+    </button></h3><p>以下の YAML は、ダウンロードした v1 ファイルで編集すべきフィールドを示しています。その他の必須設定はそのままにしてください。<code translate="no">milvus.address</code> および<code translate="no">milvus.port</code> を、バックアップまたは復元対象のインスタンスに指定します。<code translate="no">minio.backupAddress</code> 、<code translate="no">minio.backupPort</code> 、<code translate="no">minio.backupStorageType</code> をバックアップ先、<code translate="no">backup.gcPause.address</code> をソースの Milvus 管理エンドポイント（デフォルトはポート 9091）に設定します。例として記載されているすべてのアドレス、バケット名、パス、および認証情報を、ご自身のデプロイ設定に置き換えてください。</p>
+<p>backup.yaml ファイルを変更し、<code translate="no">milvus_A</code> に対して適切な設定を行ってください：</p>
 <ul>
 <li><p>接続設定</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -138,7 +152,8 @@ cd configs
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">milvus.address</code>:<code translate="no">milvus_A</code> サーバーの IP アドレスまたはホスト名。</p></li>
-<li><p><code translate="no">milvus.port</code>:MilvusサーバがリッスンしているTCPポート（デフォルト19530）。</p></li>
+<li><p><code translate="no">milvus.port</code>: Milvus サーバーがリスニングしている TCP ポート（デフォルトは
+19530）。</p></li>
 </ul></li>
 <li><p>ストレージ設定（MinIO/S3設定）</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Related configuration of minio, which is responsible for data persistence for Milvus.</span>
@@ -157,7 +172,7 @@ cd configs
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;bucket_A&quot;</span> <span class="hljs-comment"># Milvus Bucket name in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_A&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
 
-  <span class="hljs-comment"># only for azure</span>
+  <span class="hljs-comment"># Backup storage credentials</span>
   <span class="hljs-attr">backupAccessKeyID:</span> <span class="hljs-string">minioadmin</span>  <span class="hljs-comment"># accessKeyID of MinIO/S3</span>
   <span class="hljs-attr">backupSecretAccessKey:</span> <span class="hljs-string">minioadmin</span> <span class="hljs-comment"># MinIO/S3 encryption string</span>
   
@@ -165,10 +180,13 @@ cd configs
   <span class="hljs-attr">backupRootPath:</span> <span class="hljs-string">&quot;backup&quot;</span> <span class="hljs-comment"># Rootpath to store backup data. Backup data will store to backupBucketName/backupRootPath</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">minio.bucketName</code>:<code translate="no">milvus_A</code> ストレージに使用するバケット名。この例では<code translate="no">bucket_A</code> とする。</p></li>
-<li><p><code translate="no">minio.rootPath</code>:<code translate="no">milvus_A</code> のデータが保存されるバケット内のルートパス。この例では<code translate="no">files_A</code> とします。</p></li>
-<li><p><code translate="no">minio.backupBucketName</code>:保存に使うバケツの名前。この例では、<code translate="no">milvus_A</code> と<code translate="no">milvus_B</code> がバケツを共有している。したがって、<code translate="no">bucket_A</code>.</p></li>
-<li><p><code translate="no">minio.backupRootPath</code>:<code translate="no">milvus_B</code>この例では、<code translate="no">milvus_A</code> と異なるパスを使用するため、<code translate="no">backup</code> に設定します。</p></li>
+<li><p><code translate="no">minio.bucketName</code>:<code translate="no">milvus_A</code> のストレージとして使用するバケット名。この
+例では、<code translate="no">bucket_A</code> に設定します。</p></li>
+<li><p><code translate="no">minio.rootPath</code>:<code translate="no">milvus_A</code> からのデータが保存されるバケット内のルートパス。この例では、<code translate="no">files_A</code> に設定します。</p></li>
+<li><p><code translate="no">minio.backupBucketName</code>: 保存に使用するバケットの名前。この
+例では、<code translate="no">milvus_A</code> と<code translate="no">milvus_B</code> が同じバケットを共有しています。したがって、
+<code translate="no">bucket_A</code> に設定します。</p></li>
+<li><p><code translate="no">minio.backupRootPath</code>:<code translate="no">milvus_B</code> 内の、バックアップファイルの保存用に指定されたバケット内のルートパス。この例では、<code translate="no">milvus_A</code> とは異なるパスを使用します。したがって、<code translate="no">backup</code> に設定します。</p></li>
 </ul></li>
 </ul>
 <h3 id="Step-3-Create-backup" class="common-anchor-header">ステップ 3: バックアップの作成<button data-href="#Step-3-Create-backup" class="anchor-icon" translate="no">
@@ -186,11 +204,12 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">backup.yaml</code> が保存されたら、my_backup という名前のバックアップを作成する：</p>
-<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup
+    </button></h3><p><code translate="no">backup.yaml</code> の保存が完了したら、my_backup という名前のバックアップを作成します:</p>
+<pre><code translate="no" class="language-shell">./milvus-backup create -c coll -n my_backup --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>このコマンドは、コレクション<code translate="no">coll</code> のオブジェクトストレージにバックアップ<code translate="no">bucket_A/backup/my_backup</code> を作成します。</p>
-<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">バックアップを以下にリストアします。<code translate="no">milvus_B</code><button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
+<p>このコマンドにより、コレクション<code translate="no">coll</code> 用のオブジェクト
+ストレージにバックアップ<code translate="no">bucket_A/backup/my_backup</code> が作成されます。</p>
+<h2 id="Restore-the-backup-to-milvusB" class="common-anchor-header">バックアップを次の場所に復元します<code translate="no">milvus_B</code><button data-href="#Restore-the-backup-to-milvusB" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,7 +224,7 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">ステップ 1: リストア設定の構成<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Step-1-Configure-restoration-settings" class="common-anchor-header">ステップ 1: 復元設定の構成<button data-href="#Step-1-Configure-restoration-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -220,7 +239,8 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">milvus_B</code> <code translate="no">minio.bucketName</code> が に設定され、 が に設定され、2つのインスタンス間でストレージの場所が区別されるようにします。<code translate="no">bucket_A</code> <code translate="no">minio.rootPath</code> <code translate="no">files_B</code> </p>
+    </button></h3><p>手順
+2 を繰り返し、<code translate="no">milvus_B</code> への復元設定を変更します。この際、2 つのインスタンス間の保存場所を区別するために、<code translate="no">minio.bucketName</code> を<code translate="no">bucket_A</code> に、<code translate="no">minio.rootPath</code> を<code translate="no">files_B</code> に設定してください。</p>
 <p>以下に設定例を示します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-comment"># milvus proxy address, compatible to milvus.yaml</span>
@@ -251,7 +271,7 @@ cd configs
   <span class="hljs-attr">rootPath:</span> <span class="hljs-string">&quot;files_B&quot;</span> <span class="hljs-comment"># Milvus storage root path in MinIO/S3, make it the same as your milvus instance</span>
   <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Restore-backup" class="common-anchor-header">ステップ2：バックアップのリストア<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
+<h3 id="Step-2-Restore-backup" class="common-anchor-header">ステップ 2: バックアップの復元<button data-href="#Step-2-Restore-backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -266,7 +286,9 @@ cd configs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>バックアップを<code translate="no">milvus_B</code> にリストアします：</p>
-<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak
+    </button></h3><p><code translate="no">milvus_B</code> にバックアップを復元します：</p>
+<pre><code translate="no" class="language-shell">./milvus-backup restore -c coll -n my_backup -s _bak --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>このコマンドは、<code translate="no">milvus_B</code> の<code translate="no">coll_bak</code> という名前の新しいコレクションにバックアップをリストアし、データは<code translate="no">bucket_A/files_B/insert_log/[ID of new collection]</code> に保存されます。</p>
+<p>このコマンドは、ターゲットインスタンスで設定されたストレージルート<code translate="no">bucket_A/files_B</code> を使用して、<code translate="no">milvus_B</code> 内の<code translate="no">coll_bak</code> という名前の新しいコレクションにバックアップを復元します。</p>
+<p>Backup 0.5.16 では、非推奨となった `<code translate="no">-c</code> ` オプションは、<code translate="no">_bak</code> が適用される前に、バックアップ内のコレクション名を選択していました。0.6.0 で導入された `<code translate="no">--filter</code> ` への置き換えでは、代わりにターゲット名を使用します。詳細は<a href="/docs/ja/milvus_backup_upgrade.md#Update-CLI-commands">「CLI コマンドの更新</a>」を参照してください。</p>
+<p>復元後、<code translate="no">coll_bak</code> が存在することを確認し、必要に応じて適切なベクトルインデックスを作成し、そのエンティティ数、代表値、および検索結果を、バックアップ前に取得したベースラインと比較してください。コマンドが正常に実行されただけでは、データの検証は完了しません。</p>

@@ -49,7 +49,7 @@ summary: >-
 <tr><td>Filtra in base a un campo scalare di primo livello, come <code translate="no">category</code>.</td><td>Espressione di filtro regolare.</td><td>Seleziona le entità padre prima o durante la ricerca.</td></tr>
 <tr><td>Limita la ricerca vettoriale a livello di elemento agli elementi Struct che soddisfano le condizioni scalari.</td><td><code translate="no">element_filter</code>.</td><td>Cerca solo gli elementi Struct corrispondenti e può restituire gli offset degli elementi trovati.</td></tr>
 <tr><td>Seleziona le entità in base al fatto che uno, tutti o un numero specifico di elementi Struct soddisfino un predicato.</td><td><code translate="no">MATCH_ANY</code>, <code translate="no">MATCH_ALL</code>, <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code>, o <code translate="no">MATCH_EXACT</code>.</td><td>Filtraggio a livello di riga. Questi operatori non restituiscono offset di per sé.</td></tr>
-<tr><td>Verifica la posizione di un elemento, conta gli elementi della struttura o controlla i valori dei sottocampi tra gli elementi senza ` <code translate="no">$[...]</code>`.</td><td>Percorsi StructArray a livello di riga, come <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code> o <code translate="no">array_contains(chunks[section], ...)</code>.</td><td>Filtraggio a livello di riga. Per la sintassi, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</td></tr>
+<tr><td>Verifica la posizione di un elemento, conta gli elementi della struttura o controlla i valori dei sottocampi tra gli elementi senza <code translate="no">$[...]</code>.</td><td>Percorsi StructArray a livello di riga, come <code translate="no">chunks[0][section]</code>, <code translate="no">array_length(chunks)</code> o <code translate="no">array_contains(chunks[section], ...)</code>.</td><td>Filtraggio a livello di riga. Per la sintassi, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</td></tr>
 </tbody>
 </table>
 <div class="alert note">
@@ -1086,10 +1086,10 @@ curl --request POST \
 <tr><td>Tipi interi</td><td><code translate="no">$[page] &gt;= 2</code>, <code translate="no">$[page] in [1, 2, 3]</code></td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">$[quality_score] &gt; 0.9</code>, <code translate="no">0.7 &lt; $[quality_score] &lt; 0.95</code></td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">$[section] == &quot;index&quot;</code>, <code translate="no">$[text] like &quot;range%&quot;</code></td></tr>
-<tr><td>Sottocampi vettoriali</td><td>Non supportati come input di predicati scalari <code translate="no">$[...]</code>. Utilizzare invece i sottocampi vettoriali tramite la ricerca vettoriale.</td></tr>
+<tr><td>Sottocampi vettoriali</td><td>Non supportati come input per i predicati scalari dell'<code translate="no">$[...]</code>. Utilizzare invece i sottocampi vettoriali tramite la ricerca vettoriale.</td></tr>
 </tbody>
 </table>
-<p>Per i casi non supportati, quali percorsi JSON, funzioni relative ai contenitori di array, funzioni di corrispondenza testuale, predicati null su <code translate="no">$[...]</code>, funzioni geometriche, espressioni Timestamptz e chiamate a funzioni generiche, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p>
+<p>Per i casi non supportati, quali percorsi JSON, funzioni di corrispondenza testuale, funzioni geometriche, espressioni Timestamptz e chiamate a funzioni generiche, nonché per le funzioni relative ai contenitori di array e i predicati null supportati da <code translate="no">$[...]</code> a partire da Milvus 3.0.6, consultare <a href="/docs/it/struct-array-operators.md">Operatori StructArray</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Errori comuni<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1109,7 +1109,7 @@ curl --request POST \
 <li><p>Utilizzo di ` <code translate="no">$[subfield]</code> ` al di fuori di ` <code translate="no">element_filter</code> ` o ` <code translate="no">MATCH_*</code>`.</p></li>
 <li><p>Utilizzo di ` <code translate="no">chunks.section</code> ` al posto della sintassi degli operatori StructArray, come ad esempio ` <code translate="no">element_filter(chunks, $[section] == &quot;index&quot;)</code>`.</p></li>
 <li><p>Utilizzo di <code translate="no">element_filter</code> quando è necessario solo un filtro a livello di riga. Utilizzare invece <code translate="no">MATCH_ANY</code> se è necessario solo selezionare entità.</p></li>
-<li><p>Aspettarsi che ` <code translate="no">MATCH_*</code> ` restituisca gli offset degli elementi. Questi operatori selezionano le entità e non identificano di per sé un singolo elemento corrispondente.</p></li>
+<li><p>Aspettarsi che ` <code translate="no">MATCH_*</code> ` restituisca gli offset degli elementi. Questi operatori selezionano entità e non identificano di per sé un singolo elemento corrispondente.</p></li>
 <li><p>Scrivere predicati booleani semplici come <code translate="no">$[has_code]</code>. Utilizzare confronti espliciti come <code translate="no">$[has_code] == true</code>.</p></li>
 <li><p>Inserire ` <code translate="no">element_filter</code> ` prima di un predicato di primo livello nella stessa espressione di filtro.</p></li>
 </ul>

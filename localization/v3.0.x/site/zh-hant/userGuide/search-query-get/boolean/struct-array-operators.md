@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>StructArray 運算子透過評估 StructArray 欄位內標量子欄位的判別式，來篩選實體。本頁可作為<code translate="no">element_filter</code> 、<code translate="no">MATCH_*</code> 運算子家族，以及 StructArray 路徑上列級判別式的語法參考。</p>
+    </button></h1><p>StructArray 運算子透過評估 StructArray 欄位內標量子欄位的謂詞，來篩選實體。本頁可作為<code translate="no">element_filter</code> 、<code translate="no">MATCH_*</code> 運算子家族，以及 StructArray 路徑上列級謂詞的語法參考。</p>
 <p>StructArray 篩選包含兩個運算子家族及一組行級路徑謂詞：</p>
 <table>
 <thead>
@@ -32,7 +32,7 @@ summary: >-
 <tr><td>行級路徑謂詞</td><td>在不使用「<code translate="no">$[...]</code> 」謂詞的情況下，測試單一元素位置、計算 Struct 元素數量，或跨元素測試子欄位值。</td><td>行級篩選。這些判別式不會回傳元素偏移量。</td></tr>
 </tbody>
 </table>
-<p>在 StructArray 運算子中使用標量子欄位。向量子欄位用於向量搜尋路徑，並非標量謂詞的輸入。</p>
+<p>在 StructArray 運算子中，請使用標量子欄位，以及 Milvus 3.0.6 及後續版本中的陣列子欄位。向量子欄位僅用於向量搜尋路徑，並非標量判別式的輸入參數。</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">何時使用哪種運算子<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -142,7 +142,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用 `<code translate="no">element_filter(structArrayField, predicate)</code> ` 來匹配 StructArray 欄位中的 Struct 元素。</p>
+    </button></h2><p>使用 `<code translate="no">element_filter(structArrayField, predicate)</code> ` 來匹配 `StructArray` 欄位中的 `Struct` 元素。</p>
 <p>在謂詞內部，請使用 `<code translate="no">$[subfield]</code> ` 來引用當前 Struct 元素的標量子欄位。</p>
 <pre><code translate="no" class="language-text">element_filter(chunks, $[section] == &quot;index&quot;)
 <button class="copy-code-btn"></button></code></pre>
@@ -188,7 +188,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <tr><td><code translate="no">MATCH_EXACT(field, predicate, threshold=N)</code></td><td>恰有<code translate="no">N</code> 個 Struct 元素滿足該謂詞。</td></tr>
 </tbody>
 </table>
-<p><code translate="no">MATCH_ANY</code> 而 `<code translate="no">element_filter</code> ` 兩者皆可表示至少有一個 Struct 元素滿足該謂詞。當您僅需進行列級篩選時，請使用 `<code translate="no">MATCH_ANY</code> `；當您需要元素級約束（例如篩選哪些 Struct 元素會參與元素級向量搜尋）時，請使用 `<code translate="no">element_filter</code> `。</p>
+<p><code translate="no">MATCH_ANY</code> 而 `<code translate="no">element_filter</code> ` 兩者皆可表示至少有一個 Struct 元素滿足該謂詞。當您僅需進行列級篩選時，請使用 `<code translate="no">MATCH_ANY</code> `；當您需要元素級約束時（例如篩選哪些 Struct 元素會參與元素級向量搜尋），請使用 `<code translate="no">element_filter</code> `。</p>
 <h3 id="MATCHANY" class="common-anchor-header">MATCH_ANY<button data-href="#MATCHANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,7 +289,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
 <button class="copy-code-btn"></button></code></pre>
 <p>由於沒有任何實體的<code translate="no">section</code> 被設定為<code translate="no">&quot;filter&quot;</code> ，因此沒有任何實體符合條件。</p>
 <p>對於<code translate="no">MATCH_EXACT</code> ，<code translate="no">threshold</code> 可以是零或正整數。</p>
-<h2 id="Row-level-predicates-on-StructArray-paths" class="common-anchor-header">StructArray 路徑上的行級謂詞<button data-href="#Row-level-predicates-on-StructArray-paths" class="anchor-icon" translate="no">
+<h2 id="Row-level-predicates-on-StructArray-paths" class="common-anchor-header">StructArray 路徑上的列級謂詞<button data-href="#Row-level-predicates-on-StructArray-paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -304,7 +304,7 @@ element_filter(chunks, $[quality_score] &gt; 0.9) &amp;&amp; category == &quot;i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了 `<code translate="no">element_filter</code> ` 和 `<code translate="no">MATCH_*</code>` 之外，一般篩選表達式亦可直接參照 StructArray 欄位或其標量子欄位之一。這些謂詞在實體層級進行評估，且不會回傳元素偏移量。</p>
+    </button></h2><p>除了 `<code translate="no">element_filter</code> ` 和 `<code translate="no">MATCH_*</code>` 之外，一般篩選表達式亦可直接參照 StructArray 欄位或其標量子欄位之一。這些謂詞在實體層級進行評估，且不會返回元素偏移量。</p>
 <h3 id="Subfield-access" class="common-anchor-header">子欄位存取<button data-href="#Subfield-access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,7 +337,7 @@ chunks[0][page] in [1, 2, 3]
 # Chained range on a positional path.
 0.8 &lt; chunks[0][quality_score] &lt; 0.95
 <button class="copy-code-btn"></button></code></pre>
-<p>對於實體 A 和實體 B，第一個區段謂詞與兩者皆匹配，第二個分數謂詞僅與實體 B 匹配，而嚴格的分數範圍則與兩者皆不匹配。<code translate="no">page</code> 謂詞僅為通用範例；範例資料中並未定義<code translate="no">page</code> 。</p>
+<p>對於實體 A 和實體 B，第一個區段謂詞與兩個實體皆匹配，第二個分數謂詞僅與實體 B 匹配，而嚴格的分數範圍則與兩者皆不匹配。<code translate="no">page</code> 謂詞僅為通用範例；範例資料中並未定義<code translate="no">page</code> 。</p>
 <p>位置路徑支援對標量子欄位的比較、<code translate="no">in</code> 、<code translate="no">not in</code> 以及鏈式範圍謂詞。若實體的 StructArray 欄位在該位置沒有元素，則該實體不匹配。</p>
 <h3 id="ARRAY-operators" class="common-anchor-header">ARRAY 運算子<button data-href="#ARRAY-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -354,7 +354,18 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">計數 Struct 元素</h4><p>使用<code translate="no">array_length(structArrayField)</code> 根據實體中的 Struct 元素數量進行篩選。若在子欄位路徑上使用<code translate="no">array_length</code> （例如<code translate="no">array_length(chunks[section])</code> ），則會返回相同的計數，因為每個子欄位都會針對每個 Struct 元素儲存一個值。</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">依位置存取陣列子欄位<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>自 Milvus 3.0.6 起，位置路徑亦可參照標量<code translate="no">ARRAY</code> 子欄位。<code translate="no">chunks[0][tags]</code> 為第一個 Struct 元素的內部陣列。它支援使用陣列字面量進行的<code translate="no">==</code> 與<code translate="no">!=</code> 運算，以及<code translate="no">array_contains</code> 、<code translate="no">array_contains_any</code> 、<code translate="no">array_contains_all</code> 和<code translate="no">array_length</code> 。針對該陣列進行的比較運算子（<code translate="no">in</code> 、<code translate="no">like</code> ）及算術運算均不被接受。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>針對整個陣列子域路徑（例如<code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code> ）的<code translate="no">==</code> 及<code translate="no">!=</code> 均被拒絕，因為該路徑針對每個 Struct 元素僅包含一個內部陣列。請改用<code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code> 。</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">計算 Struct 元素數量</h4><p>使用<code translate="no">array_length(structArrayField)</code> 根據實體中的 Struct 元素數量進行篩選。若在子欄位路徑（例如<code translate="no">array_length(chunks[section])</code> ）上使用<code translate="no">array_length</code> ，則會返回相同的計數結果，因為每個子欄位針對每個 Struct 元素都儲存一個值。</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
@@ -381,7 +392,7 @@ array_contains_any(chunks[section], [&quot;index&quot;, &quot;search&quot;])
 array_contains_all(chunks[section], [&quot;index&quot;, &quot;search&quot;])
 <button class="copy-code-btn"></button></code></pre>
 <p>以範例資料而言，<code translate="no">array_contains</code> 和<code translate="no">array_contains_any</code> 這兩項表達式皆能匹配兩個實體。<code translate="no">array_contains_all</code> 則無法匹配任何一個實體，因為兩個實體均未包含<code translate="no">&quot;search&quot;</code> 區段。這些範例並未展示由不同元素在不同子欄位上滿足條件的情況。</p>
-<p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> 與<code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> 選取相同的實體。當同一 Struct 元素必須滿足多個條件時，請使用<code translate="no">MATCH_*</code> 或<code translate="no">element_filter</code> ，因為<code translate="no">$[...]</code> 謂詞是針對每個元素分別進行評估的。</p>
+<p><code translate="no">array_contains(chunks[section], &quot;index&quot;)</code> 與<code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> 選取相同的實體。當同一 Struct 元素必須滿足多個條件時，請使用<code translate="no">MATCH_*</code> 或<code translate="no">element_filter</code> ，因為<code translate="no">$[...]</code> 謂詞是針對每個元素分別評估的。</p>
 <h3 id="Test-whether-a-nullable-StructArray-field-is-null" class="common-anchor-header">測試可為 null 的 StructArray 欄位是否為 null<button data-href="#Test-whether-a-nullable-StructArray-field-is-null" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -430,10 +441,45 @@ chunks is not null
 <tr><td><code translate="no">INT8</code>、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code></td><td>比較運算、鏈式範圍、<code translate="no">in</code> 、<code translate="no">not in</code> ，以及以<code translate="no">+</code> 、<code translate="no">-</code> 、<code translate="no">*</code> 、<code translate="no">/</code> 或<code translate="no">%</code> 開頭並後接比較運算的算術表達式，以及邏輯組合。</td></tr>
 <tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td>比較、鏈式範圍、<code translate="no">in</code> 、<code translate="no">not in</code> 、以<code translate="no">+</code> 、<code translate="no">-</code> 、<code translate="no">*</code> 或<code translate="no">/</code> 開頭並後接比較運算的算術表達式，以及邏輯組合。<code translate="no">%</code> 運算子不支援浮點數子欄位。</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>字串比較、鏈式範圍、<code translate="no">in</code> 、<code translate="no">not in</code> 、<code translate="no">like</code> 、<code translate="no">=~</code> 、<code translate="no">!~</code> 以及邏輯組合。</td></tr>
-<tr><td>向量子欄位</td><td>不支援作為<code translate="no">$[...]</code> 標量謂詞的輸入。請改用 EmbeddingList 搜尋或元素層級向量搜尋來處理向量子欄位。</td></tr>
+<tr><td>標量<code translate="no">ARRAY</code> 子欄位（Milvus 3.0.6 及後續版本）</td><td><code translate="no">array_contains</code>、<code translate="no">array_contains_any</code> 、<code translate="no">array_contains_all</code> 以及<code translate="no">array_length</code> 對<code translate="no">$[tags]</code> 的運算，加上<code translate="no">$[tags] is null</code> 和<code translate="no">$[tags] is not null</code> 。對<code translate="no">$[tags]</code> 進行的比較運算子、<code translate="no">in</code> 以及<code translate="no">like</code> 均被拒絕。</td></tr>
+<tr><td>任何元素可為 null 的子欄位（Milvus 3.0.6 及後續版本）</td><td><code translate="no">$[subfield] is null</code> 以及<code translate="no">$[subfield] is not null</code> 會測試當前 Struct 元素中的值是否為 null。對於無法容納 null 值的子欄位，<code translate="no">is null</code> 始終為 false。</td></tr>
+<tr><td>向量子欄位</td><td>不支援作為<code translate="no">$[...]</code> 標量謂詞的輸入，惟 Milvus 3.0.6 及後續版本中，針對元素可為 null 的向量子欄位所進行的<code translate="no">$[emb] is null</code> 及<code translate="no">$[emb] is not null</code> 運算除外。請改為透過 EmbeddingList 搜尋或元素層級向量搜尋來使用向量子欄位。</td></tr>
 </tbody>
 </table>
 <p>邏輯運算子（例如<code translate="no">&amp;&amp;</code> 、<code translate="no">||</code> 及<code translate="no">!</code> ）適用於謂詞表達式。例如，請寫作<code translate="no">!($[has_code] == true)</code> 而非<code translate="no">!$[has_code]</code> 。</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">元素層級謂詞中的空值<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>自 Milvus 3.0.6 起，Struct 元素中的可為空子欄位可儲存空值。在 StructArray 謂詞中，空值遵循三值邏輯：</p>
+<ul>
+<li><p>針對空值子欄位的比較運算（<code translate="no">in</code> ）、<code translate="no">like</code> 或算術謂詞，其結果為「未知」而非「假」。<code translate="no">&amp;&amp;</code> 、<code translate="no">\|\|</code> 及<code translate="no">!</code> 會傳播「未知」結果，因此當<code translate="no">$[lang]</code> 為空值時，<code translate="no">!($[lang] == &quot;en&quot;)</code> 的結果仍為「未知」。</p></li>
+<li><p><code translate="no">element_filter</code> 僅保留其謂詞為 true 的 Struct 元素。未知元素不會被匹配。</p></li>
+<li><p><code translate="no">MATCH_*</code> 將未知元素計為未匹配。當任何元素為未知時，<code translate="no">MATCH_ALL</code> 為 false；而空的 StructArray 仍滿足<code translate="no">MATCH_ALL</code> 。</p></li>
+<li><p><code translate="no">$[subfield] is null</code> 以及<code translate="no">$[subfield] is not null</code> 總是為真或假。它們讀取當前元素的有效性，因此<code translate="no">$[lang] is null</code> 會精確匹配那些<code translate="no">lang</code> 值為 null 的元素。</p></li>
+<li><p>針對陣列子欄位，當<code translate="no">array_contains*</code> 作用於<code translate="no">$[tags]</code> 時，會跳過 null 的內部值且絕不會匹配 null 的內部陣列；<code translate="no">array_length($[tags])</code> 會計入 null 的內部值；而<code translate="no">$[tags] is null</code> 僅在內部陣列為 null 時為真。</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>行級位置路徑遵循相同的規則：當第一個元素的<code translate="no">lang</code> 值為 null、實體在該位置沒有元素，或 StructArray 欄位為 null 時，<code translate="no">chunks[0][lang] == &quot;en&quot;</code> 的結果為未知，因此實體不匹配。</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">不支援的謂詞<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -449,17 +495,20 @@ chunks is not null
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>元素層級的<code translate="no">$[...]</code> 謂詞不支援：</p>
+    </button></h2><p>元素層級的 `<code translate="no">$[...]</code> ` 謂詞不支援：</p>
 <ul>
-<li><p>文字比對函式，例如<code translate="no">text_match(field, &quot;...&quot;)</code> 或<code translate="no">phrase_match(field, &quot;...&quot;)</code> 。</p></li>
+<li><p>文字比對函式，例如 `<code translate="no">text_match(field, &quot;...&quot;)</code> ` 或 `<code translate="no">phrase_match(field, &quot;...&quot;)</code>`。</p></li>
 <li><p>JSON 路徑語法、針對 JSON 路徑的<code translate="no">exists</code> ，或 JSON 函式（例如<code translate="no">json_contains</code> 、<code translate="no">json_contains_all</code> 或<code translate="no">json_contains_any</code> ）。</p></li>
-<li><p>陣列容器函式，例如<code translate="no">array_contains</code> 、<code translate="no">array_contains_all</code> 、<code translate="no">array_contains_any</code> 或<code translate="no">array_length</code> （參見<code translate="no">$[subfield]</code> ）。請改為在列級謂詞中，對子欄位路徑（例如<code translate="no">chunks[section]</code> ）使用這些函式。</p></li>
-<li><p><code translate="no">$[subfield] is null</code> 或<code translate="no">$[subfield] is not null</code> 。</p></li>
+<li><p>陣列容器函式，例如<code translate="no">array_contains</code> 、<code translate="no">array_contains_all</code> 、<code translate="no">array_contains_any</code> 或<code translate="no">array_length</code> ，這些函式會針對標量子欄位的<code translate="no">$[subfield]</code> 進行運算。請改為在行級謂詞中，針對如<code translate="no">chunks[section]</code> 這樣的子欄位路徑使用這些函式。自 Milvus 3.0.6 起，這些函式已支援針對標量<code translate="no">ARRAY</code> 子欄位的<code translate="no">$[tags]</code> 進行運算。</p></li>
+<li><p><code translate="no">$[subfield] is null</code> 或在 Milvus 3.0.6 之前，使用<code translate="no">$[subfield] is not null</code> 。</p></li>
+</ul>
+<ul>
+<li><p>陣列子欄位的下標，例如<code translate="no">$[tags][0]</code> ，以及<code translate="no">like</code> 在<code translate="no">$[tags]</code> 上。</p></li>
 <li><p>幾何／GIS 函數。</p></li>
 <li><p>timestamptz 表達式。</p></li>
 <li><p><code translate="no">random_sample(...)</code>。</p></li>
-<li><p>欄位層級向量判別式。</p></li>
-<li><p>通用篩選函數呼叫，除非特定函數的簽名與執行路徑明確支援 StructArray 元素層級的謂詞。</p></li>
+<li><p>欄位層級的向量謂詞。</p></li>
+<li><p>通用篩選函數呼叫，除非該特定函數的簽名與執行路徑明確支援 StructArray 元素層級的謂詞。</p></li>
 </ul>
 <h2 id="Syntax-rules" class="common-anchor-header">語法規則<button data-href="#Syntax-rules" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -482,11 +531,16 @@ chunks is not null
 <li><p>僅可在 `<code translate="no">element_filter</code> ` 或 `<code translate="no">MATCH_*</code> ` 謂詞內使用 `<code translate="no">$[subfield]</code> `。例如，<code translate="no">array_length($[section])</code> 將被拒絕。</p></li>
 <li><p>請勿將 `<code translate="no">$[subfield]</code> ` 用作 JSON 路徑、陣列容器或向量欄位參照。</p></li>
 <li><p>請勿將<code translate="no">element_filter</code> 或<code translate="no">MATCH_*</code> 嵌套在另一個 StructArray 運算子之中。</p></li>
-<li><p>請使用命名過的<code translate="no">threshold=N</code> 來表示<code translate="no">MATCH_LEAST</code> 、<code translate="no">MATCH_MOST</code> 以及<code translate="no">MATCH_EXACT</code> 。</p></li>
+<li><p>請使用命名形式的 `<code translate="no">threshold=N</code> ` 來表示 `<code translate="no">MATCH_LEAST</code>`、`<code translate="no">MATCH_MOST</code>` 及 `<code translate="no">MATCH_EXACT</code>`。</p></li>
 <li><p>在位置路徑中，請將元素位置寫在子欄位名稱之前：<code translate="no">chunks[0][section]</code> ，而非<code translate="no">chunks[section][0]</code> 。</p></li>
-<li><p>僅在整個 StructArray 欄位上使用<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> ，例如<code translate="no">chunks is null</code> 。請勿在子欄位路徑（如<code translate="no">chunks[section]</code> ）或<code translate="no">$[subfield]</code> 上使用它們。</p></li>
-<li><p><code translate="no">MATCH_ANY</code> 若對空的 StructArray 執行此操作，將返回<code translate="no">false</code> 。</p></li>
-<li><p><code translate="no">MATCH_ALL</code> 若對空的 StructArray 進行此操作，將傳回<code translate="no">true</code> 。</p></li>
+</ul>
+<ul>
+<li>僅在整個 StructArray 欄位上使用<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> ，例如<code translate="no">chunks is null</code> ；或自 Milvus 3.0.6 起，在<code translate="no">element_filter</code> 或<code translate="no">MATCH_*</code> 內的<code translate="no">$[subfield]</code> 上使用。請勿在子欄位路徑（例如<code translate="no">chunks[section]</code> ）上使用它們。</li>
+</ul>
+<ul>
+<li><p>請勿對陣列子欄位進行下標操作。<code translate="no">$[tags][0]</code> 和<code translate="no">chunks[0][tags][0]</code> 均不被支援。</p></li>
+<li><p><code translate="no">MATCH_ANY</code> 若對空的 StructArray 進行此操作，將返回<code translate="no">false</code> 。</p></li>
+<li><p><code translate="no">MATCH_ALL</code> 若對空的 StructArray 進行此操作，將回傳<code translate="no">true</code> 。</p></li>
 </ul>
 <h2 id="See-also" class="common-anchor-header">另請參閱<button data-href="#See-also" class="anchor-icon" translate="no">
       <svg translate="no"

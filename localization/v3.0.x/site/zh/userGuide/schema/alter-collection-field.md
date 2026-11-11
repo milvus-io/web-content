@@ -19,11 +19,14 @@ summary: 您可以修改Collection字段的属性，以更改列约束或强制�
         ></path>
       </svg>
     </button></h1><p>您可以修改Collection字段的属性，以更改列约束或强制执行更严格的数据完整性规则。</p>
-<p>本页面介绍字段属性的修改，不涉及 Schema 结构的变更（例如添加或删除字段）。若要向现有 Collection 添加标量字段或从其中删除字段，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">“修改 Collection Schema”</a>。</p>
+<p>本页面介绍字段属性的修改，不涉及模式结构的变更（例如添加或删除字段）。若要向现有 Collection 添加标量字段或从其中删除字段，请参阅<a href="/docs/zh/add-fields-to-an-existing-collection.md">“修改 Collection Schema”</a>。</p>
 <div class="alert note">
 <ul>
 <li><p>每个Collection仅包含一个主字段。该主字段在创建Collection时设定后，您将无法更改主字段或修改其属性。</p></li>
 <li><p>每个 Collection 只能有一个 Partition Key。在创建 Collection 时一旦设置，便无法更改 Partition Key。</p></li>
+</ul>
+<ul>
+<li>从 Milvus 3.0.6 开始，对于<a href="/docs/zh/array-of-structs.md">StructArray</a>字段或其子字段路径（例如<code translate="no">chunks[text]</code> ），您只能修改<code translate="no">mmap.enabled</code> 、<code translate="no">field.description</code> 和<code translate="no">warmup</code> 。其他属性（例如<code translate="no">max_capacity</code> 和<code translate="no">max_length</code> ）将被拒绝。 父字段及其子字段存储在同一位置，当其中任何一个启用了<code translate="no">mmap.enabled</code> 和<code translate="no">warmup</code> 时，这些设置将对共享存储生效：如果仅在某个子字段上禁用其中一项属性，而父字段或同级子字段仍保持启用状态，则该禁用操作将不生效。 此外，将<code translate="no">warmup</code> 设置为<code translate="no">disable</code> 并不会跳过所有读取操作：查询执行所需的数据（例如元素偏移量）仍会被读取。</li>
 </ul>
 </div>
 <h2 id="Alter-VarChar-field" class="common-anchor-header">修改 VarChar 字段<button data-href="#Alter-VarChar-field" class="anchor-icon" translate="no">
@@ -41,7 +44,7 @@ summary: 您可以修改Collection字段的属性，以更改列约束或强制�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>VarChar 字段有一个名为 `<code translate="no">max_length</code>` 的属性，用于定义每个字段值允许的最大字节数。您可以修改 `<code translate="no">max_length</code> ` 属性。</p>
+    </button></h2><p>VarChar 字段有一个名为<code translate="no">max_length</code> 的属性，用于定义每个字段值允许的最大字节数。您可以修改<code translate="no">max_length</code> 属性。</p>
 <p>以下示例假设Collection中有一个名为<code translate="no">varchar</code> 的VarChar字段，并设置其<code translate="no">max_length</code> 属性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -319,7 +322,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>内存映射（Mmap）支持直接访问磁盘上的大文件，使 Milvus 能够同时在内存和硬盘中存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不影响搜索性能的情况下扩展 Collections 的存储容量。</p>
+    </button></h2><p>内存映射（Mmap）支持直接访问磁盘上的大文件，使 Milvus 能够同时在内存和硬盘中存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不影响搜索性能的前提下扩展 Collection 的存储容量。</p>
 <p>以下示例假设Collection中有一个名为<code translate="no">doc_chunk</code> 的字段，并设置其<code translate="no">mmap_enabled</code> 属性。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

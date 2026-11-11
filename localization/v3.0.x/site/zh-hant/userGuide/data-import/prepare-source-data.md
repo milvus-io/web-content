@@ -47,7 +47,7 @@ summary: 本頁說明在開始將資料批量插入您的集合之前，您應�
 <p>設計資料結構時，還有兩點需要考慮：</p>
 <ul>
 <li><p><strong>是否啟用 AutoID</strong></p>
-<p><strong>id</strong>欄位是集合的主要欄位。若要讓主要欄位自動遞增，您可以在資料結構中啟用<strong>AutoID</strong>。在此情況下，您應將來源資料中每筆記錄的<strong>id</strong>欄位排除在外。</p></li>
+<p><strong>id</strong>欄位是集合的主要欄位。若要讓主要欄位自動遞增，您可以在資料結構中啟用<strong>AutoID</strong>。在此情況下，您應將來源資料中各行的<strong>id</strong>欄位排除在外。</p></li>
 <li><p><strong>是否啟用動態欄位</strong></p>
 <p>若模式啟用動態欄位，目標集合亦可儲存未包含於其預定義模式中的欄位。<strong>$meta</strong>欄位是一個預留的 JSON 欄位，用於以鍵值對的形式儲存動態欄位及其值。在上圖中，欄位<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值將以鍵值對的形式儲存於<strong>$meta</strong>欄位中。</p></li>
 </ul>
@@ -229,18 +229,22 @@ schema.verify()
 <tr><th>格式</th><th>StructArray 欄位形狀</th></tr>
 </thead>
 <tbody>
-<tr><td>JSON、JSONL</td><td>該欄位值為一組物件清單，每個 Struct 元素對應一個物件，並以子欄位名稱作為鍵值：<code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code> 。</td></tr>
-<tr><td>CSV</td><td>該儲存格包含與 JSON 格式相同的 JSON 文字。</td></tr>
-<tr><td>Parquet</td><td>每個 StructArray 欄位對應一欄，資料型別為<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ，每個子欄位對應一個結構體子元素。標量子欄位為標量子元素，向量子欄位則為其元素型別的清單，例如<code translate="no">list&lt;float32&gt;</code> 。</td></tr>
-<tr><td>NumPy</td><td>不支援。NumPy 檔案會針對每個頂層欄位建立一個檔案，且無法表示 StructArray 欄位。若集合包含 StructArray 欄位，請使用 JSON、CSV 或 Parquet 檔案。</td></tr>
+<tr><td>JSON、JSONL</td><td>該欄位值為一組物件清單，每個 Struct 元素對應一個物件，其鍵名取自子欄位名稱：<code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code> 。</td></tr>
+<tr><td>CSV</td><td>該儲存格所包含的 JSON 文字與 JSON 格式相同。針對匯入工作所設定的 `<code translate="no">nullkey</code> `，或 JSON 中的 `<code translate="no">null</code> `，皆標示為 StructArray 的 null 值。</td></tr>
+<tr><td>Parquet</td><td>每個 StructArray 欄位對應一欄，資料型別為<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ，每個子欄位對應一個結構體子節點。標量子欄位為標量子節點；向量子欄位為其元素型別的清單（例如<code translate="no">list&lt;float32&gt;</code> ）；而陣列子欄位（Milvus 3.0.6 及後續版本）則為<code translate="no">list&lt;T&gt;</code> 子節點。</td></tr>
+<tr><td>NumPy</td><td>不支援。NumPy 檔案會針對每個頂層欄位儲存一個檔案，且無法表示 StructArray 欄位。若集合包含 StructArray 欄位，請使用 JSON、CSV 或 Parquet 檔案。</td></tr>
 </tbody>
 </table>
 <p>以下規則適用於所有受支援格式中的 StructArray 值：</p>
 <ul>
-<li><p>在每個 Struct 元素內應使用子欄位名稱，而非路徑（例如<code translate="no">chunks[text]</code> ）。名稱<code translate="no">chunks[text]</code> 的扁平欄位或鍵將被拒絕。</p></li>
-<li><p>每個 Struct 元素必須提供 Struct 模式中的所有子欄位，且 Struct 元素本身不得為 null，例如<code translate="no">[null, {...}]</code> 。只有當 StructArray 欄位為可為 null 時，整個 StructArray 值才可為 null。</p></li>
+<li><p>在每個 Struct 元素內應使用子欄位名稱，而非路徑（例如<code translate="no">chunks[text]</code> ）。名為<code translate="no">chunks[text]</code> 的扁平欄位或金鑰將被拒絕。</p></li>
+<li><p>Struct 元素本身不得為 null，例如<code translate="no">[null, {...}]</code> 。只有當 StructArray 欄位為可為 null 時，整個 StructArray 值才可為 null。在 Milvus 3.0.6 之前，每個 Struct 元素都必須提供所有子欄位。</p></li>
+<li><p>非集合子欄位的鍵或 Parquet 子元素（包括已刪除的子欄位）將被忽略。</p></li>
+<li><p>自 Milvus 3.0.6 起，若某個元素可為 null 的子欄位缺少鍵值，或其<code translate="no">null</code> 值為 null，則會將其匯入為該 Struct 元素的 null 值；因此，在該子欄位新增之前所寫入的檔案，匯入時將省略該子欄位。 若在其他位置出現 `<code translate="no">null</code> `，則會導致匯入失敗。對於陣列子欄位，若子欄位允許，則 `<code translate="no">null</code> ` 為空的內層陣列，而內層陣列中的 `<code translate="no">null</code> ` 則為空的內層值。</p></li>
+<li><p>自 Milvus 3.0.6 起，對於包含元素可為空子欄位或標量陣列子欄位的集合，系統將拒絕執行二進位日誌匯入（例如備份還原）以及快照來源匯入。</p></li>
 </ul>
-<p>有關架構層面的限制，請參閱<a href="/docs/zh-hant/structarray-limits.md#Import-limits">StructArray 限制</a>。</p>
+<p>pymilvus<a href="#Set-up-BulkWriter">BulkWriter</a>在所有受支援的格式中均支援上述 StructArray 結構，包括元素可為空的子欄位以及可為空的 StructArray 值。請在寫入器的 `<code translate="no">add_row()</code> ` 呼叫中使用相同的列結構。</p>
+<p>有關模式層面的限制，請參閱<a href="/docs/zh-hant/structarray-limits.md#Import-and-storage-limits">StructArray 限制</a>。</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">設定 BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,7 +260,7 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong>是一款專為將原始資料集轉換為適合透過 RESTful 匯入 API 匯入的格式而設計的工具。它提供兩種寫入器類型：</p>
+    </button></h2><p><strong>BulkWriter</strong>是一款專為將原始資料集轉換為適合透過 RESTful 匯入 API 匯入的格式而設計的工具。它提供兩種類型的寫入器：</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>：讀取指定的資料集，並將其轉換為易於使用的格式。</li>
 <li><strong>RemoteBulkWriter</strong>：執行與 LocalBulkWriter 相同的任務，但會額外將轉換後的資料檔案傳輸至指定的遠端物件儲存桶。</li>
@@ -393,7 +397,7 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>準備好連線參數後，即可在<strong>RemoteBulkWriter</strong>中如下所示進行引用：</p>
+<p>準備好連線參數後，您可於<strong>RemoteBulkWriter</strong>中如下所示進行引用：</p>
 <div class="multipleCode">
  <a href="#python">Python 
  </a> <a href="#java"> Java</a>
@@ -449,7 +453,7 @@ writer = RemoteBulkWriter(
 <div class="language-java">
 <p><strong>BulkWriter</strong>具有兩個方法：<code translate="no">appendRow()</code> 會從來源資料集新增一行資料，而<code translate="no">commit()</code> 則會將新增的資料行提交至本機檔案或遠端儲存桶。</p>
 </div>
-<p>為示範之目的，以下程式碼會追加隨機生成的資料。</p>
+<p>為示範之用，以下程式碼會追加隨機生成的資料。</p>
 <div class="multipleCode">
  <a href="#python">Python 
  </a> <a href="#java"> Java</a>

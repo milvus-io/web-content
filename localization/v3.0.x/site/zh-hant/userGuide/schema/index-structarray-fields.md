@@ -279,7 +279,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(vector_reques
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>警告
-請勿在同一個向量子欄位上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個不同的向量子欄位，並分別針對每個子欄位建立一個索引。</p>
+請勿在同一個向量子字段上建立「<code translate="no">MAX_SIM*</code> 」索引與一般向量度量索引。若需同時使用這兩種搜尋模式，請將向量寫入兩個不同的向量子字段，並分別針對每個子字段建立一個索引。</p>
 </div>
 <h2 id="Create-scalar-indexes" class="common-anchor-header">建立標量索引<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -495,7 +495,52 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>針對 EmbeddingList 搜尋，請選擇與向量間比較對應的<code translate="no">MAX_SIM*</code> 指標：<code translate="no">MAX_SIM_COSINE</code> （亦稱為<code translate="no">MAX_SIM</code> ）、<code translate="no">MAX_SIM_IP</code> 或<code translate="no">MAX_SIM_L2</code> （適用於密集向量），以及<code translate="no">MAX_SIM_HAMMING</code> 或<code translate="no">MAX_SIM_JACCARD</code> （適用於二進位向量）。這些指標會比較嵌入清單，並返回實體層級的結果。若要進行元素層級搜尋，請使用下方列出的對應常規指標。</p>
+    </button></h2><p>對於 EmbeddingList 搜尋，請選擇對應於向量間比對的<code translate="no">MAX_SIM*</code> 指標：針對密集向量，可選用<code translate="no">MAX_SIM_COSINE</code> （亦稱為<code translate="no">MAX_SIM</code> ）、<code translate="no">MAX_SIM_IP</code> 或<code translate="no">MAX_SIM_L2</code> ；針對二進位向量，則可選用<code translate="no">MAX_SIM_HAMMING</code> 或<code translate="no">MAX_SIM_JACCARD</code> 。這些指標會比對嵌入清單，並返回實體層級的結果。若要進行元素層級搜尋，請使用下方列出的對應常規指標。</p>
+<p>自 Milvus 3.0.6 起，標量索引不再支援元素可為空的子欄位，亦不支援標量<code translate="no">ARRAY</code> 子欄位。針對這些子欄位的篩選操作將在無索引的情況下執行。</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">索引可為空元素及新增的向量子欄位<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>自 Milvus 3.0.6 起，可建立具有元素層級空值（<code translate="no">nullable=True</code> ）的向量子欄位，亦可將向量子欄位新增至現有的 StructArray 欄位。這兩種情況都會改變您對該子欄位的索引方式：</p>
+<ul>
+<li>元素可為空的向量子欄位僅支援元素層級搜尋。請使用常規向量度量（例如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> ）對其建立索引。<code translate="no">MAX_SIM*</code> 度量及 EmbeddingList 索引將不被接受，且<code translate="no">AUTOINDEX</code> 不會為其選取<code translate="no">MAX_SIM*</code> 度量。在建立索引及搜尋過程中，空向量將被跳過。</li>
+</ul>
+<ul>
+<li><p>新增至現有 StructArray 欄位的向量子欄位，其元素始終為可為空的，因此適用相同的指標規則。您無法在新增請求中綁定索引；請在子欄位建立後，另行建立索引。</p></li>
+<li><p>包含向量子欄位的載入操作，與任何向量欄位一樣，都需要為其建立索引。請在載入包含該子欄位的集合之前，先為新增的向量子欄位建立索引。即使索引尚未建立，查詢仍可返回該新子欄位。</p></li>
+<li><p>歷史區段會透過模式版本壓縮接收新增的子欄位及其索引。請將 `<code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> ` 設定為 `<code translate="no">true</code> `（預設值為 `<code translate="no">false</code> `）；否則，新增子欄位的索引將不會涵蓋歷史區段。</p></li>
+<li><p>Milvus 僅在元素可為空的向量子欄位之區段中，該區段至少包含 1,024 個有效（非空）元素時，才會為其建立向量索引。低於此閾值的區段將不會建立索引，針對該區段的查詢將執行暴力搜尋。</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">索引指標相容性<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -511,7 +556,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請參閱以下表格，為 StructArray 向量子欄位選擇索引類型與度量類型。請先確定目標，再根據搜尋模式選擇度量家族。</p>
+    </button></h2><p>請參照以下表格，為 StructArray 向量子欄位選擇索引類型與度量類型。請先確定目標，再根據搜尋模式選擇度量家族。</p>
 <p>請從以下相容性表格中選擇 Milvus 索引類型與度量類型。</p>
 <h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList 搜尋<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -528,7 +573,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>EmbeddingList 搜尋使用<code translate="no">MAX_SIM*</code> 指標。它將 StructArray 向量子欄位中的向量視為嵌入清單，並返回實體層級的結果。</p>
+    </button></h3><p>EmbeddingList 搜尋使用<code translate="no">MAX_SIM*</code> 度量。它將 StructArray 向量子欄位中的向量視為嵌入清單，並返回實體層級的結果。</p>
 <table>
 <thead>
 <tr><th>向量子欄位資料型別</th><th>索引類型</th><th>度量類型</th></tr>
@@ -791,8 +836,9 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>一個向量子欄位僅接受一個索引。</td><td>若需使用不同的指標家族，請使用獨立的向量子欄位。</td></tr>
 <tr><td>請使用<code translate="no">MAX_SIM*</code> 指標進行 EmbeddingList 搜尋。</td><td>EmbeddingList 查詢資料需要使用<code translate="no">MAX_SIM*</code> 度量建立的索引。</td></tr>
 <tr><td>請使用一般向量指標進行元素層級搜尋。</td><td>元素層級搜尋使用一般向量查詢資料，以及諸如<code translate="no">COSINE</code> 、<code translate="no">IP</code> 或<code translate="no">L2</code> 等指標。</td></tr>
-<tr><td>請為出現在篩選器中的標量子欄位建立索引。</td><td>請使用目標所支援的標量索引類型。</td></tr>
-<tr><td>請留意向量欄位的限制。</td><td>向量欄位和向量子欄位的總數受到限制。在新增大量向量子欄位之前，請參閱《StructArray 限制》。</td></tr>
+<tr><td>請為出現在篩選器中的標量子欄位建立索引。</td><td>請使用目標所支援的標量索引類型。元素可為空的子欄位以及標量<code translate="no">ARRAY</code> 子欄位無法建立索引。</td></tr>
+<tr><td>對元素可為空的向量子欄位，請使用元素層級的度量。</td><td>任何元素可為空的向量子欄位（<code translate="no">nullable=True</code> ），包括新增至現有 StructArray 欄位的向量子欄位，均會拒絕<code translate="no">MAX_SIM*</code> 指標。</td></tr>
+<tr><td>請注意向量欄位的限制。</td><td>向量欄位與向量子欄位的總數受到限制。在新增大量向量子欄位之前，請參閱《StructArray 限制》。</td></tr>
 </tbody>
 </table>
 <h2 id="Common-mistakes" class="common-anchor-header">常見錯誤<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
@@ -812,7 +858,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
       </svg>
     </button></h2><ul>
 <li><p>在 `<code translate="no">chunks.emb</code> ` 上建立索引，而非在 `<code translate="no">chunks[emb]</code>` 上建立索引。</p></li>
-<li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，然後嘗試在同一子場上執行元素層級搜尋。</p></li>
+<li><p>僅建立<code translate="no">MAX_SIM*</code> 索引，然後嘗試在同一子欄位上執行元素層級搜尋。</p></li>
 <li><p>僅建立一般向量索引，隨後卻嘗試在同一子場上執行 EmbeddingList 搜尋。</p></li>
 <li><p>將同一個向量子欄位同時用於<code translate="no">MAX_SIM*</code> 和一般向量指標。</p></li>
 <li><p>遺漏針對使用頻率極高的 StructArray 篩選條件所建立的標量索引。</p></li>

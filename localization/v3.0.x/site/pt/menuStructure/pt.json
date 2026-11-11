@@ -2199,43 +2199,75 @@
           },
           {
             "label": "Comandos",
-            "id": "milvus_backup_cli.md",
+            "id": "milvus_backup_0_6_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "API RESTful",
-            "id": "milvus_backup_api.md",
+            "label": "API HTTP",
+            "id": "milvus_backup_0_6_api.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Casos comuns",
-            "id": "common-cases",
+            "label": "Cópia de segurança e restauração por instantâneo",
+            "id": "snapshot-backup-and-restore.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "Backup 0.5.x",
+            "id": "milvus_backup_0_5",
+            "order": 4,
             "isMenu": true,
             "children": [
               {
-                "label": "Cópia de segurança e restauração numa única instância",
-                "id": "single-instance-backup-and-restore.md",
+                "label": "Comandos",
+                "id": "milvus_backup_cli.md",
                 "order": 0,
                 "children": []
               },
               {
-                "label": "Migrar entre instâncias num único bucket",
-                "id": "shared-bucket-backup-and-restore.md",
+                "label": "API HTTP",
+                "id": "milvus_backup_api.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Migrar entre instâncias em diferentes buckets",
-                "id": "cross-bucket-backup-and-restore.md",
+                "label": "Casos comuns",
+                "id": "common-cases",
                 "order": 2,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Cópia de segurança e restauração numa única instância",
+                    "id": "single-instance-backup-and-restore.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instâncias num único bucket",
+                    "id": "shared-bucket-backup-and-restore.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instâncias em diferentes buckets",
+                    "id": "cross-bucket-backup-and-restore.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Migrar entre instâncias em diferentes ambientes S3",
+                    "id": "multi-storage-backup-and-restore.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Migrar entre instâncias em diferentes ambientes S3",
-                "id": "multi-storage-backup-and-restore.md",
+                "label": "Atualizar para a versão 0.6.x",
+                "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
               }
