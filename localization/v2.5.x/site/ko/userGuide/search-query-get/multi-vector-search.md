@@ -93,7 +93,7 @@ summary: >-
 <li><p><code translate="no">text</code>: 텍스트 콘텐츠를 저장하는 데 사용됩니다. 이 필드는 최대 길이가 1000바이트인 <code translate="no">VARCHAR</code> 데이터 유형입니다. <code translate="no">enable_analyzer</code> 옵션은 전체 텍스트 검색을 용이하게 하기 위해 <code translate="no">True</code> 으로 설정됩니다.</p></li>
 <li><p><code translate="no">text_dense</code>: 텍스트의 고밀도 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 크기가 768인 데이터 유형 <code translate="no">FLOAT_VECTOR</code> 입니다.</p></li>
 <li><p><code translate="no">text_sparse</code>: 텍스트의 스파스 벡터를 저장하는 데 사용됩니다. 이 필드는 데이터 유형 <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: 제품 이미지의 고밀도 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 차원이 512인 데이터 유형 <code translate="no">FLOAT_VETOR</code> 입니다.</p></li>
+<li><p><code translate="no">image_dense</code>: 제품 이미지의 고밀도 벡터를 저장하는 데 사용됩니다. 이 필드는 벡터 차원이 512인 데이터 유형 <code translate="no">FLOAT_VECTOR</code> 입니다.</p></li>
 </ul>
 <p>텍스트 필드에서 전체 텍스트 검색을 수행하기 위해 기본 제공 BM25 알고리즘을 사용하므로 스키마에 Milvus <code translate="no">Function</code> 를 추가해야 합니다. 자세한 내용은 <a href="/docs/ko/v2.5.x/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <div class="multipleCode">

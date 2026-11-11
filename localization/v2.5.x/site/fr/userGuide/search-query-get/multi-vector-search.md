@@ -101,7 +101,7 @@ summary: >-
 <li><p><code translate="no">text</code>: Utilisé pour stocker le contenu textuel. Ce champ est de type <code translate="no">VARCHAR</code> et a une longueur maximale de 1000 octets. L'option <code translate="no">enable_analyzer</code> est définie sur <code translate="no">True</code> pour faciliter la recherche en texte intégral.</p></li>
 <li><p><code translate="no">text_dense</code>: Utilisé pour stocker les vecteurs denses des textes. Ce champ est de type <code translate="no">FLOAT_VECTOR</code> avec une dimension vectorielle de 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Utilisé pour stocker les vecteurs peu denses des textes. Ce champ est du type <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Utilisé pour stocker les vecteurs denses des images de produits. Ce champ est du type <code translate="no">FLOAT_VETOR</code> avec une dimension vectorielle de 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Utilisé pour stocker les vecteurs denses des images de produits. Ce champ est du type <code translate="no">FLOAT_VECTOR</code> avec une dimension vectorielle de 512.</p></li>
 </ul>
 <p>Étant donné que nous utiliserons l'algorithme BM25 intégré pour effectuer une recherche plein texte sur le champ texte, il est nécessaire d'ajouter le Milvus <code translate="no">Function</code> au schéma. Pour plus de détails, veuillez vous référer à la section <a href="/docs/fr/v2.5.x/full-text-search.md">Recherche en texte intégral</a>.</p>
 <div class="multipleCode">

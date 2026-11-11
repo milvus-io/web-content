@@ -97,7 +97,7 @@ summary: >-
 <li><p><code translate="no">text</code>: يستخدم لتخزين المحتوى النصي. هذا الحقل من نوع البيانات <code translate="no">VARCHAR</code> بحد أقصى للطول 1000 بايت. يتم تعيين الخيار <code translate="no">enable_analyzer</code> على <code translate="no">True</code> لتسهيل البحث في النص الكامل.</p></li>
 <li><p><code translate="no">text_dense</code>: يستخدم لتخزين المتجهات الكثيفة للنصوص. هذا الحقل من نوع البيانات <code translate="no">FLOAT_VECTOR</code> مع بُعد متجه يبلغ 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: يستخدم لتخزين المتجهات المتفرقة للنصوص. هذا الحقل من نوع البيانات <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: يستخدم لتخزين المتجهات الكثيفة لصور المنتج. هذا الحقل هو من نوع البيانات <code translate="no">FLOAT_VETOR</code> مع بُعد متجه يبلغ 512.</p></li>
+<li><p><code translate="no">image_dense</code>: يستخدم لتخزين المتجهات الكثيفة لصور المنتج. هذا الحقل هو من نوع البيانات <code translate="no">FLOAT_VECTOR</code> مع بُعد متجه يبلغ 512.</p></li>
 </ul>
 <p>نظرًا لأننا سوف نستخدم خوارزمية BM25 المدمجة لإجراء بحث عن النص الكامل في حقل النص، فمن الضروري إضافة ميلفوس <code translate="no">Function</code> إلى المخطط. لمزيد من التفاصيل، يرجى الرجوع إلى <a href="/docs/ar/v2.5.x/full-text-search.md">البحث عن النص الكامل</a>.</p>
 <div class="multipleCode">

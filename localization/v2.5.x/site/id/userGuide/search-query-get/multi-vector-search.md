@@ -99,7 +99,7 @@ summary: >-
 <li><p><code translate="no">text</code>: Digunakan untuk menyimpan konten tekstual. Bidang ini bertipe data <code translate="no">VARCHAR</code> dengan panjang maksimum 1000 byte. Opsi <code translate="no">enable_analyzer</code> diatur ke <code translate="no">True</code> untuk memfasilitasi pencarian teks lengkap.</p></li>
 <li><p><code translate="no">text_dense</code>: Digunakan untuk menyimpan vektor teks yang padat. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Digunakan untuk menyimpan vektor jarang dari teks. Field ini bertipe data <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VETOR</code> dengan dimensi vektor 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Digunakan untuk menyimpan vektor padat dari gambar produk. Bidang ini bertipe data <code translate="no">FLOAT_VECTOR</code> dengan dimensi vektor 512.</p></li>
 </ul>
 <p>Karena kita akan menggunakan algoritma BM25 bawaan untuk melakukan pencarian teks lengkap pada bidang teks, maka perlu menambahkan Milvus <code translate="no">Function</code> ke skema. Untuk detail lebih lanjut, silakan merujuk ke <a href="/docs/id/v2.5.x/full-text-search.md">Pencarian Teks Penuh</a>.</p>
 <div class="multipleCode">

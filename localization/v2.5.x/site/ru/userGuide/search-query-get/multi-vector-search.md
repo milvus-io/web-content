@@ -99,7 +99,7 @@ summary: >-
 <li><p><code translate="no">text</code>: Используется для хранения текстового содержимого. Это поле имеет тип данных <code translate="no">VARCHAR</code> с максимальной длиной 1000 байт. Для облегчения полнотекстового поиска параметр <code translate="no">enable_analyzer</code> устанавливается в значение <code translate="no">True</code>.</p></li>
 <li><p><code translate="no">text_dense</code>: Используется для хранения плотных векторов текстов. Это поле имеет тип данных <code translate="no">FLOAT_VECTOR</code> с размерностью вектора 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Используется для хранения разреженных векторов текстов. Это поле имеет тип данных <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Используется для хранения плотных векторов изображений товаров. Это поле имеет тип данных <code translate="no">FLOAT_VETOR</code> с размерностью вектора 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Используется для хранения плотных векторов изображений товаров. Это поле имеет тип данных <code translate="no">FLOAT_VECTOR</code> с размерностью вектора 512.</p></li>
 </ul>
 <p>Поскольку для полнотекстового поиска по текстовому полю мы будем использовать встроенный алгоритм BM25, необходимо добавить в схему поле Milvus <code translate="no">Function</code>. Более подробную информацию вы можете найти в разделе <a href="/docs/ru/v2.5.x/full-text-search.md">"Полнотекстовый поиск"</a>.</p>
 <div class="multipleCode">

@@ -99,7 +99,7 @@ summary: >-
 <li><p><code translate="no">text</code>: Sirve para almacenar contenido textual. Este campo es del tipo de datos <code translate="no">VARCHAR</code> con una longitud máxima de 1000 bytes. La opción <code translate="no">enable_analyzer</code> se establece en <code translate="no">True</code> para facilitar la búsqueda de texto completo.</p></li>
 <li><p><code translate="no">text_dense</code>: Se utiliza para almacenar vectores densos de los textos. Este campo es del tipo de datos <code translate="no">FLOAT_VECTOR</code> con una dimensión vectorial de 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Se utiliza para almacenar vectores dispersos de los textos. Este campo es del tipo <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Se utiliza para almacenar vectores densos de imágenes de productos. Este campo es del tipo <code translate="no">FLOAT_VETOR</code> con una dimensión vectorial de 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Se utiliza para almacenar vectores densos de imágenes de productos. Este campo es del tipo <code translate="no">FLOAT_VECTOR</code> con una dimensión vectorial de 512.</p></li>
 </ul>
 <p>Dado que utilizaremos el algoritmo integrado BM25 para realizar una búsqueda de texto completo en el campo de texto, es necesario añadir el Milvus <code translate="no">Function</code> al esquema. Para más detalles, consulte <a href="/docs/es/v2.5.x/full-text-search.md">Búsqueda de texto completo</a>.</p>
 <div class="multipleCode">
