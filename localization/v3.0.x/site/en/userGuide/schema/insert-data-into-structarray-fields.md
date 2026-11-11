@@ -1050,9 +1050,69 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>For a non-NULL StructArray value, provide valid values for every required subfield. Do not mix NULL subfield arrays with present subfield arrays in the same entity.</p>
+<p>A Struct element itself cannot be null. Starting in Milvus 3.0.6, element-nullable subfields can hold null values in individual Struct elements, as described in the next section.</p>
 <div class="alert note">
 <p>For version and deployment availability, see <a href="/docs/structarray-limits.md">StructArray Limits</a>. A StructArray field added to an existing collection must be nullable; existing entities have NULL for the whole added field.</p>
 </div>
+<h2 id="Insert-null-values-for-individual-Struct-elements" class="common-anchor-header">Insert null values for individual Struct elements<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Insert-null-values-for-individual-Struct-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in some Struct elements and a valid value in others. The following example assumes that the <code translate="no">chunks</code> Struct schema defines a <code translate="no">lang</code> VARCHAR subfield with <code translate="no">nullable=True</code> and a <code translate="no">tags</code> array subfield with <code translate="no">nullable=True</code> and <code translate="no">element_nullable=True</code>. For the complete schema definition, see <a href="/docs/create-structarray-field.md#allow-null-values-in-Struct-elements--milvus-306">Allow null values in Struct elements</a>.</p>
+<p>In a Struct element, set an element-nullable subfield to <code translate="no">None</code> or omit it. Both store a null value.</p>
+<pre><code translate="no" class="language-python">client.insert(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    data=[
+        {
+            <span class="hljs-string">&quot;doc_id&quot;</span>: <span class="hljs-number">11</span>,
+            <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Chunks with missing attributes&quot;</span>,
+            <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+            <span class="hljs-string">&quot;title_vector&quot;</span>: [<span class="hljs-number">0.07</span>, <span class="hljs-number">0.11</span>, <span class="hljs-number">0.17</span>, <span class="hljs-number">0.21</span>],
+            <span class="hljs-string">&quot;chunks&quot;</span>: [
+                {
+                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Detected language and tags are present.&quot;</span>,
+                    <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+                    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.90</span>,
+                    <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,
+                    <span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-string">&quot;en&quot;</span>,
+                    <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>],
+                    <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.42</span>],
+                    <span class="hljs-string">&quot;emb&quot;</span>: [<span class="hljs-number">0.12</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.32</span>, <span class="hljs-number">0.42</span>],
+                },
+                {
+                    <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;Language is unknown and tags are omitted.&quot;</span>,
+                    <span class="hljs-string">&quot;section&quot;</span>: <span class="hljs-string">&quot;search&quot;</span>,
+                    <span class="hljs-string">&quot;page&quot;</span>: <span class="hljs-number">2</span>,
+                    <span class="hljs-string">&quot;quality_score&quot;</span>: <span class="hljs-number">0.84</span>,
+                    <span class="hljs-string">&quot;has_code&quot;</span>: <span class="hljs-literal">False</span>,
+                    <span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-literal">None</span>,
+                    <span class="hljs-string">&quot;emb_list_vector&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.44</span>],
+                    <span class="hljs-string">&quot;emb&quot;</span>: [<span class="hljs-number">0.14</span>, <span class="hljs-number">0.24</span>, <span class="hljs-number">0.34</span>, <span class="hljs-number">0.44</span>],
+                },
+            ],
+        }
+    ],
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>In the second Struct element, <code translate="no">lang</code> is explicitly null and <code translate="no">tags</code> is omitted, so Milvus stores null for both in that element. The other subfields still require a value in every Struct element, and a Struct element itself cannot be null. On an array subfield, <code translate="no">None</code> stores a null inner array, while <code translate="no">[]</code> stores an empty inner array.</p>
+<p>Null subfield values behave as follows in later operations:</p>
+<ul>
+<li><p>Query results return <code translate="no">null</code> for the subfield value in that element.</p></li>
+<li><p>In filters, a null value makes the element predicate unknown rather than false. Use <code translate="no">$[lang] is null</code> or <code translate="no">$[lang] is not null</code> inside <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code> to test it. For details, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p></li>
+<li><p>Null vectors in an element-nullable vector subfield do not participate in search.</p></li>
+</ul>
 <h2 id="Validate-inserted-data" class="common-anchor-header">Validate inserted data<button data-href="#Validate-inserted-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1253,7 +1313,7 @@ curl --request POST \
 <tbody>
 <tr><td>Use an array of objects for a StructArray field.</td><td>The value of <code translate="no">chunks</code> is a list, and each item in the list is a Struct element.</td></tr>
 <tr><td>Use subfield names inside each Struct element.</td><td>Insert <code translate="no">{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}</code> inside <code translate="no">chunks</code>, not <code translate="no">{&quot;chunks[text]&quot;: &quot;...&quot;}</code>.</td></tr>
-<tr><td>Match the Struct schema.</td><td>Each Struct element must use the subfields defined in the Struct schema.</td></tr>
+<tr><td>Match the Struct schema.</td><td>Each Struct element must use the subfields defined in the Struct schema. Starting in Milvus 3.0.6, an element-nullable subfield can be omitted or set to <code translate="no">None</code> in a Struct element.</td></tr>
 <tr><td>Match vector dimensions.</td><td>Vector values must match the <code translate="no">dim</code> configured for their vector subfields.</td></tr>
 <tr><td>Respect <code translate="no">max_capacity</code>.</td><td>The number of Struct elements in one entity must not exceed the <code translate="no">max_capacity</code> of the StructArray field.</td></tr>
 <tr><td>Use separate vector subfields for separate search modes.</td><td>If both EmbeddingList search and element-level search are required, write vector values to both vector subfields.</td></tr>
@@ -1277,10 +1337,10 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>Using field paths such as <code translate="no">chunks[text]</code> in insert payloads.</p></li>
-<li><p>Omitting required subfields from a Struct element.</p></li>
+<li><p>Omitting a subfield that is not element-nullable from a Struct element.</p></li>
 <li><p>Inserting vectors with the wrong dimension.</p></li>
 <li><p>Inserting more Struct elements than <code translate="no">max_capacity</code> allows.</p></li>
-<li><p>Setting only one subfield to <code translate="no">null</code> while other subfields in the same StructArray value are valid.</p></li>
+<li><p>Setting a subfield to <code translate="no">None</code> in a Struct element when the subfield is not element-nullable, or inserting a null Struct element such as <code translate="no">[None, {...}]</code>.</p></li>
 <li><p>Writing vectors only to <code translate="no">emb_list_vector</code> and then trying to run element-level search on <code translate="no">chunks[emb]</code>.</p></li>
 <li><p>Writing vectors only to <code translate="no">emb</code> and then trying to run EmbeddingList search on <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 </ul>

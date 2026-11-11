@@ -5,7 +5,8 @@ summary: >-
   Create a StructArray field when one entity needs to contain an ordered list of
   structured elements. A StructArray field is an Array field whose element type
   is Struct. Each Struct element follows the same schema and can contain scalar
-  subfields, vector subfields, or both.
+  subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array
+  subfields.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Create a StructArray Field<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Create a StructArray field when one entity needs to contain an ordered list of structured elements. A StructArray field is an Array field whose element type is Struct. Each Struct element follows the same schema and can contain scalar subfields, vector subfields, or both.</p>
+    </button></h1><p>Create a StructArray field when one entity needs to contain an ordered list of structured elements. A StructArray field is an Array field whose element type is Struct. Each Struct element follows the same schema and can contain scalar subfields, vector subfields, and, starting in Milvus 3.0.6, scalar array subfields.</p>
 <p>This page shows how to define a Struct schema, add it as a StructArray field, choose subfields for later search and filtering, and understand the schema rules that apply before you insert or index data.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +41,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus 3.0.0 and later support nullable StructArray fields and adding StructArray fields to existing collections in Standalone and Distributed deployments. Earlier versions do not support these capabilities.</p>
-<p>The creation, nullable creation, and field-addition examples are alternative workflows. Do not run them sequentially against the same collection. Reuse the client initialization for your selected language in the later examples.</p>
+<p>The creation, nullable creation, element-null creation, and field-addition examples are alternative workflows. Do not run them sequentially against the same collection. Reuse the client initialization for your selected language in the later examples.</p>
 <p>This page uses a collection named <code translate="no">tech_articles</code>. Each entity represents one technical article, and the <code translate="no">chunks</code> field stores chunk-level data as Struct elements.</p>
 <table>
 <thead>
@@ -87,28 +88,29 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A StructArray field stores one array value for each Struct subfield. When you define a Struct schema, choose subfield types from the supported scalar and vector families.</p>
+    </button></h2><p>A StructArray field stores one array value for each Struct subfield. When you define a Struct schema, choose subfield types from the supported scalar, scalar array (Milvus 3.0.6 and later), and vector families.</p>
 <table>
 <thead>
 <tr><th>Struct subfield physical type</th><th>Support</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BOOL</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, or <code translate="no">DataType.INT64</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT</code> or <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.VARCHAR</code> and set <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BFLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BINARY_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>Not supported</td><td>Sparse vector subfields are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>Not supported</td><td>Use <code translate="no">VARCHAR</code>, not <code translate="no">String</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>Not supported</td><td>JSON subfields are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>Not supported</td><td>Geometry subfields and GIS functions are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>Not supported</td><td>Text subfields are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>Not supported</td><td>Timestamptz subfields and time-specific expressions are not supported in StructArray fields.</td></tr>
-<tr><td>Nested <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, or <code translate="no">ArrayOfStruct</code></td><td>Not supported</td><td>StructArray fields do not support nested array, vector-array, Struct, or Array-of-Struct subfields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BOOL</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, or <code translate="no">DataType.INT64</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT</code> or <code translate="no">DataType.DOUBLE</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.VARCHAR</code> and set <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BFLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BINARY_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Not supported</td><td>Sparse vector subfields are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Use <code translate="no">VARCHAR</code>, not <code translate="no">String</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>JSON subfields are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Geometry subfields and GIS functions are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Text subfields are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Timestamptz subfields and time-specific expressions are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code> of <code translate="no">Array</code></td><td>Supported in Milvus 3.0.6 and later</td><td>Define the subfield as <code translate="no">DataType.ARRAY</code> with a scalar <code translate="no">element_type</code> and a <code translate="no">max_capacity</code> for the inner array. Each Struct element then holds one inner array.</td></tr>
+<tr><td><code translate="no">Array</code> of <code translate="no">Array</code> of <code translate="no">Array</code>, <code translate="no">Array</code> of vectors, <code translate="no">Struct</code>, or <code translate="no">ArrayOfStruct</code></td><td>Not supported</td><td>Array nesting inside a Struct is limited to one level, the inner array cannot hold vectors, and a Struct cannot contain nested Struct or Array-of-Struct subfields.</td></tr>
 </tbody>
 </table>
 <p>For version-specific support, nullable behavior, and other limits, see <a href="/docs/structarray-limits.md">StructArray Limits</a>.</p>
@@ -636,6 +638,417 @@ schema.StructFields.Add(chunks);
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Add-a-scalar-array-subfield" class="common-anchor-header">Add a scalar array subfield<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Add-a-scalar-array-subfield" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Starting in Milvus 3.0.6, a Struct subfield can be a scalar <code translate="no">ARRAY</code>. Each Struct element then holds one inner array, such as a list of tags for each chunk. Define the subfield with <code translate="no">DataType.ARRAY</code>, a scalar <code translate="no">element_type</code>, and a <code translate="no">max_capacity</code> for the inner array.</p>
+<pre><code translate="no" class="language-python">chunk_schema.add_field(
+    field_name=<span class="hljs-string">&quot;tags&quot;</span>,
+    datatype=DataType.ARRAY,
+    element_type=DataType.VARCHAR,
+    max_capacity=<span class="hljs-number">16</span>,
+    max_length=<span class="hljs-number">64</span>,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Array subfields follow these rules:</p>
+<ul>
+<li><p>The inner array holds scalar values only. It cannot hold vectors, Struct elements, or another array.</p></li>
+<li><p>The <code translate="no">max_capacity</code> of the subfield limits the inner array. The <code translate="no">max_capacity</code> of the StructArray field still limits the number of Struct elements.</p></li>
+<li><p>Scalar indexes are not supported on array subfields.</p></li>
+<li><p>In filters, use <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code>, and <code translate="no">array_length</code> on <code translate="no">$[tags]</code> inside <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code>, or on a positional path such as <code translate="no">chunks[0][tags]</code>. For details, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p></li>
+</ul>
+<h2 id="Allow-null-values-in-Struct-elements" class="common-anchor-header">Allow null values in Struct elements<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Allow-null-values-in-Struct-elements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Starting in Milvus 3.0.6, a scalar, vector, or array subfield can allow a null value for that subfield in individual Struct elements (an <strong>element-nullable subfield</strong>). Set <code translate="no">nullable=True</code> on a scalar or vector subfield. On an array subfield, set <code translate="no">nullable=True</code> to allow a null inner array and <code translate="no">element_nullable=True</code> to allow null values inside the inner array. For example, a chunk can have no detected language while its other subfields hold values.</p>
+<p>The following example creates <code translate="no">tech_articles</code> with the complete schema that the element-level-null examples in <a href="/docs/insert-data-into-structarray-fields.md">Insert Data into StructArray Fields</a> assume: the subfields from the first example, plus an element-nullable <code translate="no">lang</code> subfield and an element-nullable <code translate="no">tags</code> array subfield.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+```python
+from pymilvus import MilvusClient, DataType
+<p>client = MilvusClient(
+uri="http://localhost:19530",
+token="root:Milvus",
+)</p>
+<p>schema = client.create_schema(
+auto_id=False,
+enable_dynamic_field=False,
+)</p>
+<h1 id="Collection-level-fields" class="common-anchor-header">Collection-level fields.<button data-href="#Collection-level-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>schema.add_field(
+field_name="doc_id",
+datatype=DataType.INT64,
+is_primary=True,
+)
+schema.add_field(
+field_name="title",
+datatype=DataType.VARCHAR,
+max_length=512,
+)
+schema.add_field(
+field_name="category",
+datatype=DataType.VARCHAR,
+max_length=128,
+)
+schema.add_field(
+field_name="title_vector",
+datatype=DataType.FLOAT_VECTOR,
+dim=4,
+)</p>
+<h1 id="Struct-schema-used-by-each-element-in-the-StructArray-field" class="common-anchor-header">Struct schema used by each element in the StructArray field.<button data-href="#Struct-schema-used-by-each-element-in-the-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>chunk_schema = client.create_struct_field_schema()
+chunk_schema.add_field(
+field_name="text",
+datatype=DataType.VARCHAR,
+max_length=65535,
+)
+chunk_schema.add_field(
+field_name="section",
+datatype=DataType.VARCHAR,
+max_length=128,
+)
+chunk_schema.add_field(
+field_name="page",
+datatype=DataType.INT64,
+)
+chunk_schema.add_field(
+field_name="quality_score",
+datatype=DataType.FLOAT,
+)
+chunk_schema.add_field(
+field_name="has_code",
+datatype=DataType.BOOL,
+)</p>
+<h1 id="Vector-subfield-for-EmbeddingList-search" class="common-anchor-header">Vector subfield for EmbeddingList search.<button data-href="#Vector-subfield-for-EmbeddingList-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>chunk_schema.add_field(
+field_name="emb_list_vector",
+datatype=DataType.FLOAT_VECTOR,
+dim=4,
+)</p>
+<h1 id="Vector-subfield-for-element-level-search" class="common-anchor-header">Vector subfield for element-level search.<button data-href="#Vector-subfield-for-element-level-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>chunk_schema.add_field(
+field_name="emb",
+datatype=DataType.FLOAT_VECTOR,
+dim=4,
+)</p>
+<h1 id="An-element-nullable-scalar-subfield" class="common-anchor-header">An element-nullable scalar subfield.<button data-href="#An-element-nullable-scalar-subfield" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>chunk_schema.add_field(
+field_name="lang",
+datatype=DataType.VARCHAR,
+max_length=16,
+nullable=True,
+)</p>
+<h1 id="An-element-nullable-array-subfield-nullableTrue-allows-a-null-inner" class="common-anchor-header">An element-nullable array subfield: nullable=True allows a null inner<button data-href="#An-element-nullable-array-subfield-nullableTrue-allows-a-null-inner" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><h1 id="array-and-elementnullableTrue-allows-null-values-inside-the-inner-array" class="common-anchor-header">array and element_nullable=True allows null values inside the inner array.<button data-href="#array-and-elementnullableTrue-allows-null-values-inside-the-inner-array" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>chunk_schema.add_field(
+field_name="tags",
+datatype=DataType.ARRAY,
+element_type=DataType.VARCHAR,
+max_capacity=16,
+max_length=64,
+nullable=True,
+element_nullable=True,
+)</p>
+<h1 id="Add-the-StructArray-field-nullableTrue-applies-to-the-whole-field" class="common-anchor-header">Add the StructArray field. nullable=True applies to the whole field.<button data-href="#Add-the-StructArray-field-nullableTrue-applies-to-the-whole-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>schema.add_field(
+field_name="chunks",
+datatype=DataType.ARRAY,
+element_type=DataType.STRUCT,
+struct_schema=chunk_schema,
+max_capacity=1000,
+nullable=True,
+)</p>
+<p>client.create_collection(
+collection_name="tech_articles",
+schema=schema,
+)</p>
+<pre><code translate="no">
+```go
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != nil {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+
+schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
+
+<span class="hljs-comment">// Collection-level fields.</span>
+schema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;doc_id&quot;</span>).
+        WithDataType(entity.FieldTypeInt64).
+        WithIsPrimaryKey(<span class="hljs-literal">true</span>))
+schema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;title&quot;</span>).
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(<span class="hljs-number">512</span>))
+schema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;category&quot;</span>).
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(<span class="hljs-number">128</span>))
+schema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;title_vector&quot;</span>).
+        WithDataType(entity.FieldTypeFloatVector).
+        WithDim(<span class="hljs-number">4</span>))
+
+<span class="hljs-comment">// Struct schema used by each element in the StructArray field.</span>
+chunkSchema := entity.NewStructSchema()
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;text&quot;</span>).
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(<span class="hljs-number">65535</span>))
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;section&quot;</span>).
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(<span class="hljs-number">128</span>))
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;page&quot;</span>).
+        WithDataType(entity.FieldTypeInt64))
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;quality_score&quot;</span>).
+        WithDataType(entity.FieldTypeFloat))
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;has_code&quot;</span>).
+        WithDataType(entity.FieldTypeBool))
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;emb_list_vector&quot;</span>).
+        WithDataType(entity.FieldTypeFloatVector).
+        WithDim(<span class="hljs-number">4</span>))
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;emb&quot;</span>).
+        WithDataType(entity.FieldTypeFloatVector).
+        WithDim(<span class="hljs-number">4</span>))
+
+<span class="hljs-comment">// An element-nullable scalar subfield.</span>
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;lang&quot;</span>).
+        WithDataType(entity.FieldTypeVarChar).
+        WithMaxLength(<span class="hljs-number">16</span>).
+        WithNullable(<span class="hljs-literal">true</span>))
+
+<span class="hljs-comment">// An element-nullable array subfield: WithNullable(true) allows a null</span>
+<span class="hljs-comment">// inner array and WithElementNullable(true) allows null values inside it.</span>
+chunkSchema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;tags&quot;</span>).
+        WithDataType(entity.FieldTypeArray).
+        WithElementType(entity.FieldTypeVarChar).
+        WithMaxCapacity(<span class="hljs-number">16</span>).
+        WithMaxLength(<span class="hljs-number">64</span>).
+        WithNullable(<span class="hljs-literal">true</span>).
+        WithElementNullable(<span class="hljs-literal">true</span>))
+
+<span class="hljs-comment">// Add the StructArray field. WithNullable(true) applies to the whole field.</span>
+schema.WithField(entity.NewField().
+        WithName(<span class="hljs-string">&quot;chunks&quot;</span>).
+        WithDataType(entity.FieldTypeArray).
+        WithElementType(entity.FieldTypeStruct).
+        WithMaxCapacity(<span class="hljs-number">1000</span>).
+        WithNullable(<span class="hljs-literal">true</span>).
+        WithStructSchema(chunkSchema))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;tech_articles&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != nil {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/create&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;schema&quot;: {
+      &quot;autoID&quot;: false,
+      &quot;enableDynamicField&quot;: false,
+      &quot;fields&quot;: [
+        {&quot;fieldName&quot;: &quot;doc_id&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;isPrimary&quot;: true},
+        {&quot;fieldName&quot;: &quot;title&quot;, &quot;dataType&quot;: &quot;VarChar&quot;, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;512&quot;}},
+        {&quot;fieldName&quot;: &quot;category&quot;, &quot;dataType&quot;: &quot;VarChar&quot;, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;128&quot;}},
+        {&quot;fieldName&quot;: &quot;title_vector&quot;, &quot;dataType&quot;: &quot;FloatVector&quot;, &quot;elementTypeParams&quot;: {&quot;dim&quot;: &quot;4&quot;}}
+      ],
+      &quot;structFields&quot;: [
+        {
+          &quot;fieldName&quot;: &quot;chunks&quot;,
+          &quot;nullable&quot;: true,
+          &quot;typeParams&quot;: {&quot;max_capacity&quot;: &quot;1000&quot;},
+          &quot;fields&quot;: [
+            {&quot;fieldName&quot;: &quot;text&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;VarChar&quot;, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;65535&quot;}},
+            {&quot;fieldName&quot;: &quot;section&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;VarChar&quot;, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;128&quot;}},
+            {&quot;fieldName&quot;: &quot;page&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;Int64&quot;},
+            {&quot;fieldName&quot;: &quot;quality_score&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;Float&quot;},
+            {&quot;fieldName&quot;: &quot;has_code&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;Bool&quot;},
+            {&quot;fieldName&quot;: &quot;lang&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;VarChar&quot;, &quot;elementNullable&quot;: true, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;16&quot;}},
+            {&quot;fieldName&quot;: &quot;tags&quot;, &quot;dataType&quot;: &quot;Array&quot;, &quot;elementDataType&quot;: &quot;Array&quot;, &quot;elementNullable&quot;: true, &quot;typeSchema&quot;: {&quot;arrayElement&quot;: {&quot;typeParams&quot;: {&quot;max_capacity&quot;: &quot;16&quot;}, &quot;arrayElement&quot;: {&quot;leafType&quot;: &quot;VarChar&quot;, &quot;nullable&quot;: true, &quot;typeParams&quot;: {&quot;max_length&quot;: &quot;64&quot;}}}}},
+            {&quot;fieldName&quot;: &quot;emb_list_vector&quot;, &quot;dataType&quot;: &quot;ArrayOfVector&quot;, &quot;elementDataType&quot;: &quot;FloatVector&quot;, &quot;elementTypeParams&quot;: {&quot;dim&quot;: &quot;4&quot;}},
+            {&quot;fieldName&quot;: &quot;emb&quot;, &quot;dataType&quot;: &quot;ArrayOfVector&quot;, &quot;elementDataType&quot;: &quot;FloatVector&quot;, &quot;elementTypeParams&quot;: {&quot;dim&quot;: &quot;4&quot;}}
+          ]
+        }
+      ]
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Element-level null follows these rules:</p>
+<ul>
+<li><p>Row-level <code translate="no">nullable</code> applies to the whole StructArray field and is set on the parent field only. Element-level null is set on the subfield itself: <code translate="no">nullable=True</code> on a scalar or vector subfield, <code translate="no">element_nullable=True</code> on an array subfield.</p></li>
+<li><p>A Struct element itself cannot be null. Set the subfield values of the element to null instead.</p></li>
+<li><p>When you insert data, you can omit an element-nullable subfield from a Struct element or set it to <code translate="no">None</code>. Both store a null value. A subfield that is not element-nullable must be present in every Struct element.</p></li>
+<li><p>On an array subfield, <code translate="no">nullable=True</code> allows a null inner array for a Struct element and <code translate="no">element_nullable=True</code> allows null values inside the inner array. An empty inner array is not null.</p></li>
+<li><p>An element-nullable vector subfield (<code translate="no">nullable=True</code>) supports element-level search only. <code translate="no">MAX_SIM*</code> metrics and EmbeddingList search are rejected on it, and null vectors do not participate in search.</p></li>
+<li><p>Scalar indexes are not supported on element-nullable subfields.</p></li>
+<li><p>In filters, a null subfield value makes the element predicate unknown rather than false. Use <code translate="no">$[lang] is null</code> or <code translate="no">$[lang] is not null</code> inside <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code> to test it. For details, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p></li>
+</ul>
 <h2 id="Understand-StructArray-field-paths" class="common-anchor-header">Understand StructArray field paths<button data-href="#Understand-StructArray-field-paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1188,7 +1601,7 @@ schema.StructFields.Add(chunks);
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>NULL applies to the whole StructArray field. Do not configure individual Struct subfields as independently nullable. When supplying a valid StructArray value, do not mix null subfield arrays with valid subfield arrays. For details, see <a href="/docs/structarray-limits.md">StructArray Limits</a>.</p>
+<p>NULL applies to the whole StructArray field. Do not configure individual Struct subfields as row-level nullable independently. When supplying a valid StructArray value, do not mix null subfield arrays with valid subfield arrays. A Struct element itself cannot be null. Starting in Milvus 3.0.6, element-nullable subfields can hold null values in individual Struct elements; see <a href="#allow-null-values-in-struct-elements--milvus-306">Allow null values in Struct elements</a>. For details, see <a href="/docs/structarray-limits.md">StructArray Limits</a>.</p>
 </div>
 <h2 id="Add-a-StructArray-field-to-an-existing-collection" class="common-anchor-header">Add a StructArray field to an existing collection<button data-href="#Add-a-StructArray-field-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1443,7 +1856,69 @@ addedChunkSchema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<s
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>After the StructArray field is added, existing entities return NULL for the new field until you populate it.</p>
-<p>After a StructArray field is created, you cannot append subfields to that existing field. The following separate example replaces <code translate="no">chunks</code> with a schema that contains the original seven subfields and a new <code translate="no">source</code> string subfield.</p>
+<h3 id="Add-a-subfield-to-an-existing-StructArray-field" class="common-anchor-header">Add a subfield to an existing StructArray field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Add-a-subfield-to-an-existing-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Starting in Milvus 3.0.6, you can add a subfield to a StructArray field that already holds data. Call <code translate="no">add_collection_field()</code> with the subfield path as the field name and set <code translate="no">nullable=True</code> on the new subfield (required for every added subfield, and what allows element-level null). On an array subfield, additionally set <code translate="no">element_nullable=True</code> to allow null values inside the inner array. The new subfield inherits the row-level <code translate="no">nullable</code> setting and the <code translate="no">max_capacity</code> of the StructArray field.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+```python
+client.add_collection_field(
+    collection_name="tech_articles",
+    field_name="chunks[lang]",
+    data_type=DataType.VARCHAR,
+    max_length=16,
+    nullable=True,
+)
+```
+<pre><code translate="no" class="language-go">err = cli.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;tech_articles&quot;</span>,
+        entity.NewField().
+                WithName(<span class="hljs-string">&quot;chunks[lang]&quot;</span>).
+                WithDataType(entity.FieldTypeVarChar).
+                WithMaxLength(<span class="hljs-number">16</span>).
+                WithNullable(<span class="hljs-literal">true</span>)))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;schema&quot;: {
+      &quot;fieldName&quot;: &quot;chunks[lang]&quot;,
+      &quot;dataType&quot;: &quot;VarChar&quot;,
+      &quot;elementNullable&quot;: true,
+      &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;16&quot;}
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Adding a subfield follows these rules:</p>
+<ul>
+<li><p>The added subfield must be created with <code translate="no">nullable=True</code>, and an added array subfield additionally takes <code translate="no">element_nullable=True</code> to allow null values inside the inner array. It cannot have a default value. Existing entities return null for the new subfield in each of their Struct elements, and entities whose StructArray field is null stay null.</p></li>
+<li><p>The subfield can be a scalar, a vector, or a scalar array. Milvus appends it after the existing subfields.</p></li>
+<li><p>You cannot bind an index while adding the subfield. Create the index with a separate <code translate="no">create_index()</code> call. An added vector subfield supports element-level metrics only, and the collection must have an index on it before you load the collection with the new subfield included.</p></li>
+<li><p>Clients that omit the new subfield when inserting keep working, because Milvus stores null for omitted element-nullable subfields.</p></li>
+</ul>
+<p>In versions before Milvus 3.0.6, subfields cannot be appended to an existing StructArray field. The following separate example replaces <code translate="no">chunks</code> with a schema that contains the original seven subfields and a new <code translate="no">source</code> string subfield.</p>
 <p>Dropping a field removes its data; adding it again does not restore the old values. Preserve the data you need, follow the prerequisites in <a href="/docs/add-fields-to-an-existing-collection.md">Alter Collection Schema</a>, then repopulate and reindex the replacement field. This example retains the collection-level <code translate="no">title_vector</code> field so that dropping <code translate="no">chunks</code> does not remove every vector field from the collection.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1724,6 +2199,50 @@ curl --request POST \
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Drop-a-subfield-from-a-StructArray-field" class="common-anchor-header">Drop a subfield from a StructArray field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Drop-a-subfield-from-a-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Starting in Milvus 3.0.6, you can drop a subfield from an existing StructArray field by its path. Milvus removes the subfield, its data, and its index.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+```python
+client.drop_collection_field(
+    collection_name="tech_articles",
+    field_name="chunks[lang]",
+)
+```
+<pre><code translate="no" class="language-go">err = cli.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption(<span class="hljs-string">&quot;tech_articles&quot;</span>, <span class="hljs-string">&quot;chunks[lang]&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/drop&quot;</span> \
+  --header <span class="hljs-string">&quot;Authorization: Bearer root:Milvus&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;tech_articles&quot;,
+    &quot;fieldName&quot;: &quot;chunks[lang]&quot;
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>You cannot drop the last subfield of a StructArray field, the last vector field of the collection, or a subfield used by a Function. To remove the whole StructArray field, drop the field by its name, such as <code translate="no">chunks</code>. After a subfield is dropped, insert requests that still carry the subfield are rejected.</p>
+<p>Dropping a subfield while queries are still running against it can fail transiently: query plans that were built on the older schema keep executing for a short time and fail with an internal error. Finish queries against a subfield before dropping it, or retry the drop after the running queries finish.</p>
 <h2 id="Schema-rules" class="common-anchor-header">Schema rules<button data-href="#Schema-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1747,10 +2266,11 @@ curl --request POST \
 <tr><td>Struct is used as an Array element type.</td><td>Create a StructArray field as an Array field with <code translate="no">element_type=STRUCT</code>. Do not create Struct as a top-level collection field.</td></tr>
 <tr><td>All elements share one schema.</td><td>Every Struct element in the same StructArray field follows the Struct schema defined for that field.</td></tr>
 <tr><td><code translate="no">max_capacity</code> is required.</td><td>It limits how many Struct elements each entity can store in the StructArray field.</td></tr>
-<tr><td>Only supported subfield types are allowed.</td><td>Use scalar and vector subfield types supported by StructArray. Do not define JSON, Geometry, Text, Timestamptz, SparseFloatVector, or nested Struct / Array subfields.</td></tr>
+<tr><td>Only supported subfield types are allowed.</td><td>Use scalar, scalar array (Milvus 3.0.6 and later), and vector subfield types supported by StructArray. Do not define JSON, Geometry, Text, Timestamptz, SparseFloatVector, or nested Struct subfields.</td></tr>
 <tr><td>Vector subfields need indexes before search.</td><td>Create indexes on paths such as <code translate="no">chunks[emb_list_vector]</code> or <code translate="no">chunks[emb]</code> before running vector search.</td></tr>
 <tr><td>One vector subfield has one index.</td><td>If you need both EmbeddingList search and element-level search, create two separate vector subfields.</td></tr>
-<tr><td>Existing StructArray subfields are fixed.</td><td>After creating a StructArray field, do not expect to add more subfields to that same StructArray field.</td></tr>
+<tr><td>Subfields can change only in Milvus 3.0.6 and later.</td><td>Add an element-nullable subfield or drop a subfield by its path. In earlier versions, drop the StructArray field and add it again with the updated schema.</td></tr>
+<tr><td>All subfields share one <code translate="no">max_capacity</code>.</td><td>The StructArray field’s <code translate="no">max_capacity</code> applies to every subfield. An added subfield inherits it.</td></tr>
 <tr><td>Functions are not supported inside Struct.</td><td>Do not define functions for fields or subfields inside a StructArray field.</td></tr>
 <tr><td>Scalar subfields should match filter needs.</td><td>Add fields such as <code translate="no">section</code>, <code translate="no">quality_score</code>, or <code translate="no">has_code</code> only when you need to filter, group, or output them later.</td></tr>
 </tbody>
@@ -1773,12 +2293,13 @@ curl --request POST \
     </button></h2><ul>
 <li><p>Creating <code translate="no">DataType.STRUCT</code> as a top-level collection field instead of using it as the element type of an Array field.</p></li>
 <li><p>Forgetting to set <code translate="no">max_capacity</code> on the StructArray field.</p></li>
-<li><p>Defining unsupported subfield types, such as JSON, Geometry, Text, Timestamptz, SparseFloatVector, nested Array, nested Struct, or Array-of-Struct.</p></li>
+<li><p>Defining unsupported subfield types, such as JSON, Geometry, Text, Timestamptz, SparseFloatVector, nested Struct, Array-of-Struct, or an array subfield that holds vectors or another array.</p></li>
 <li><p>Using <code translate="no">String</code> as a subfield type. Use <code translate="no">VARCHAR</code> and set <code translate="no">max_length</code>.</p></li>
 <li><p>Using one vector subfield for both EmbeddingList search and element-level search.</p></li>
 <li><p>Adding only vector subfields and forgetting scalar subfields needed for filtering, such as <code translate="no">section</code>, <code translate="no">quality_score</code>, or <code translate="no">has_code</code>.</p></li>
 <li><p>Treating vector subfields as <code translate="no">$[...]</code> scalar predicate inputs. Use vector subfields for vector search, and scalar subfields for scalar predicates.</p></li>
-<li><p>Assuming new subfields can be added to an existing StructArray field after the field is created.</p></li>
+<li><p>Assuming new subfields can be added to an existing StructArray field before Milvus 3.0.6, or adding a subfield that does not allow element-level null.</p></li>
+<li><p>Setting row-level null on a subfield. Row-level null is set on the StructArray parent only. For null values inside Struct elements, set <code translate="no">nullable=True</code> on a scalar or vector subfield, and <code translate="no">element_nullable=True</code> on an array subfield.</p></li>
 <li><p>Using <code translate="no">chunks.emb</code> or <code translate="no">chunks.emb_list_vector</code> instead of the required path syntax <code translate="no">chunks[emb]</code> or <code translate="no">chunks[emb_list_vector]</code>.</p></li>
 <li><p>Treating nullable StructArray behavior as available in every target version.</p></li>
 </ul>

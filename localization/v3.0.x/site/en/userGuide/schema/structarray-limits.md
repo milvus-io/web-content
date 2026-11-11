@@ -46,13 +46,14 @@ summary: >-
 <tbody>
 <tr><td>Schema shape</td><td>A Struct can be used only as the element type of an Array field. Struct is not supported as a top-level collection field.</td></tr>
 <tr><td>Subfield schema</td><td>All Struct elements in the same StructArray field share one predefined Struct schema.</td></tr>
+<tr><td>Nested subfields</td><td>Starting in Milvus 3.0.6, a Struct can contain scalar <code translate="no">ARRAY</code> subfields with one nesting level. Nested <code translate="no">Struct</code>, <code translate="no">ArrayOfStruct</code>, and JSON subfields are not supported in any version.</td></tr>
 <tr><td>Capacity</td><td><code translate="no">max_capacity</code> is required and limits how many Struct elements one entity can store in the StructArray field.</td></tr>
-<tr><td>Subfield changes</td><td>After a StructArray field is created, you cannot add subfields to that existing StructArray field.</td></tr>
+<tr><td>Subfield changes</td><td>Starting in Milvus 3.0.6, you can add an element-nullable subfield to an existing StructArray field or drop a subfield from it. Earlier versions require dropping and re-adding the whole StructArray field.</td></tr>
 <tr><td>Subfield path</td><td>Use <code translate="no">structArray[subfield]</code> paths, such as <code translate="no">chunks[emb]</code>, for indexes, search targets, output fields, and filters. Do not use <code translate="no">chunks.emb</code>.</td></tr>
 <tr><td>Insert shape</td><td>Insert a StructArray field as an array of objects. Do not use path syntax inside insert payloads.</td></tr>
 <tr><td>Vector indexes</td><td>A vector field or vector subfield accepts only one index. Use separate vector subfields for EmbeddingList search and element-level search.</td></tr>
 <tr><td>Functions</td><td>Field functions are not supported for fields or subfields inside a StructArray field.</td></tr>
-<tr><td>Nullable fields</td><td>Nullable StructArray fields are version-gated. When supported, null applies to the whole StructArray field, not to an individual Struct element independently.</td></tr>
+<tr><td>Nullable fields</td><td>Nullable StructArray fields are version-gated. Row-level null applies to the whole StructArray field. Starting in Milvus 3.0.6, a subfield can additionally allow a null value in an individual Struct element: <code translate="no">nullable=True</code> on a scalar or vector subfield, <code translate="no">element_nullable=True</code> on an array subfield. A Struct element itself cannot be null.</td></tr>
 <tr><td>Dynamic add field</td><td>Adding a StructArray field to an existing collection is version-gated and requires the added field to be nullable.</td></tr>
 </tbody>
 </table>
@@ -81,9 +82,10 @@ summary: >-
 <tr><td>All elements share one schema.</td><td>Every Struct element in a StructArray field follows the same subfield list and subfield data types.</td></tr>
 <tr><td><code translate="no">max_capacity</code> is required.</td><td>The number of Struct elements in one entity must not exceed the <code translate="no">max_capacity</code> configured for the StructArray field.</td></tr>
 <tr><td>All subfields share one <code translate="no">max_capacity</code>.</td><td>Every subfield must declare <code translate="no">max_capacity</code>, and all subfields of a StructArray field must declare the same value. The value must be greater than 0 and must not exceed <code translate="no">proxy.maxArrayCapacity</code>, which defaults to 4096.</td></tr>
-<tr><td>Existing subfields are fixed.</td><td>You cannot append new subfields to an existing StructArray field. To change the subfield schema, drop the StructArray field and add it again with the updated schema.</td></tr>
-<tr><td>Nested StructArray is not supported.</td><td>A StructArray field cannot contain nested <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, or <code translate="no">ArrayOfStruct</code> subfields.</td></tr>
+<tr><td>Subfields can evolve in Milvus 3.0.6 and later.</td><td>Add an element-nullable subfield, or drop a subfield by its path, such as <code translate="no">chunks[lang]</code>. You cannot drop the last subfield of a StructArray field, the last vector field of the collection, or a subfield used by a Function. In earlier versions, drop the StructArray field and add it again with the updated schema.</td></tr>
+<tr><td>Nested Struct is not supported.</td><td>A Struct cannot contain nested <code translate="no">Struct</code>, <code translate="no">ArrayOfStruct</code>, or JSON subfields. Starting in Milvus 3.0.6, a Struct can contain scalar <code translate="no">ARRAY</code> subfields with one nesting level. An <code translate="no">ARRAY</code> subfield cannot hold vectors.</td></tr>
 <tr><td>Functions are not supported inside StructArray.</td><td>Do not define field functions for StructArray fields or their subfields.</td></tr>
+<tr><td>Field properties are limited on StructArray fields.</td><td>Starting in Milvus 3.0.6, <code translate="no">alter_collection_field()</code> on a StructArray field or on a subfield path accepts only <code translate="no">mmap.enabled</code>, <code translate="no">field.description</code>, and <code translate="no">warmup</code>. Other properties, such as <code translate="no">max_capacity</code> and <code translate="no">max_length</code>, are rejected.</td></tr>
 <tr><td>Text analysis is not supported on subfields.</td><td><code translate="no">enable_match</code> and <code translate="no">enable_analyzer</code> settings on Struct subfields have no effect because text indexes are built only for top-level fields.</td></tr>
 </tbody>
 </table>
@@ -109,22 +111,23 @@ summary: >-
 <tr><th>Struct subfield physical type</th><th>Support</th><th>Notes</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">Array&lt;Bool&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BOOL</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;Int8/Int16/Int32/Int64&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, or <code translate="no">DataType.INT64</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;Float/Double&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT</code> or <code translate="no">DataType.DOUBLE</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;VarChar&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.VARCHAR</code> and set <code translate="no">max_length</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;FloatVector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;Float16Vector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;BFloat16Vector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BFLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;Int8Vector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;BinaryVector&gt;</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BINARY_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
-<tr><td><code translate="no">ArrayOfVector&lt;SparseFloatVector&gt;</code></td><td>Not supported</td><td>Sparse vector subfields are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;String&gt;</code></td><td>Not supported</td><td>Use <code translate="no">VARCHAR</code>, not <code translate="no">String</code>.</td></tr>
-<tr><td><code translate="no">Array&lt;JSON&gt;</code></td><td>Not supported</td><td>JSON subfields are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;Geometry&gt;</code></td><td>Not supported</td><td>Geometry subfields and GIS functions are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;Text&gt;</code></td><td>Not supported</td><td>Text subfields are not supported in StructArray fields.</td></tr>
-<tr><td><code translate="no">Array&lt;Timestamptz&gt;</code></td><td>Not supported</td><td>Timestamptz subfields and time-specific expressions are not supported in StructArray fields.</td></tr>
-<tr><td>Nested <code translate="no">Array</code>, <code translate="no">ArrayOfVector</code>, <code translate="no">Struct</code>, or <code translate="no">ArrayOfStruct</code></td><td>Not supported</td><td>StructArray fields do not support nested array, vector-array, Struct, or Array-of-Struct subfields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BOOL</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8</code>, <code translate="no">DataType.INT16</code>, <code translate="no">DataType.INT32</code>, or <code translate="no">DataType.INT64</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT</code> or <code translate="no">DataType.DOUBLE</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.VARCHAR</code> and set <code translate="no">max_length</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.FLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BFLOAT16_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.INT8_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Supported</td><td>Define the subfield as <code translate="no">DataType.BINARY_VECTOR</code> and set <code translate="no">dim</code>.</td></tr>
+<tr><td><code translate="no">ArrayOfVector</code></td><td>Not supported</td><td>Sparse vector subfields are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Use <code translate="no">VARCHAR</code>, not <code translate="no">String</code>.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>JSON subfields are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Geometry subfields and GIS functions are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Text subfields are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code></td><td>Not supported</td><td>Timestamptz subfields and time-specific expressions are not supported in StructArray fields.</td></tr>
+<tr><td><code translate="no">Array</code> of <code translate="no">Array</code></td><td>Supported in Milvus 3.0.6 and later</td><td>Define the subfield as <code translate="no">DataType.ARRAY</code> with a scalar <code translate="no">element_type</code> and a <code translate="no">max_capacity</code> for the inner array. Each Struct element then holds one inner array. Set <code translate="no">nullable=True</code> on the subfield to allow a null inner array and <code translate="no">element_nullable=True</code> to allow null values inside it.</td></tr>
+<tr><td><code translate="no">Array</code> of <code translate="no">Array</code> of <code translate="no">Array</code>, <code translate="no">Array</code> of vectors, <code translate="no">Struct</code>, or <code translate="no">ArrayOfStruct</code></td><td>Not supported</td><td>Array nesting inside a Struct is limited to one level, the inner array cannot hold vectors, and nested Struct or Array-of-Struct subfields are not supported.</td></tr>
 </tbody>
 </table>
 <h2 id="Nullable-and-dynamic-schema-limits" class="common-anchor-header">Nullable and dynamic schema limits<button data-href="#Nullable-and-dynamic-schema-limits" class="anchor-icon" translate="no">
@@ -152,12 +155,18 @@ summary: >-
 <tr><td>NULL value in Python</td><td>Use <code translate="no">None</code> to insert a null StructArray value in Python. Do not use <code translate="no">Null</code> or <code translate="no">null</code>.</td></tr>
 <tr><td>Null scope</td><td>NULL applies to the whole StructArray field. For example, <code translate="no">chunks=None</code> is valid only when <code translate="no">chunks</code> is nullable.</td></tr>
 <tr><td>Partially null StructArray value</td><td>When a StructArray field contains a valid array value, do not mix null subfield arrays with valid subfield arrays in the same value.</td></tr>
+<tr><td>Element-level null</td><td>Supported in Milvus 3.0.6 and later. A scalar, vector, or <code translate="no">ARRAY</code> subfield can allow a null value in individual Struct elements: <code translate="no">nullable=True</code> on a scalar or vector subfield, <code translate="no">element_nullable=True</code> on an <code translate="no">ARRAY</code> subfield. The row-level <code translate="no">nullable</code> setting still comes from the StructArray parent; setting <code translate="no">nullable=True</code> on a subfield enables element-level null, not row-level null.</td></tr>
+<tr><td>Null Struct element</td><td>A Struct element itself cannot be null, such as <code translate="no">[null, {...}]</code>. Set the subfield values of the element to null instead.</td></tr>
+<tr><td>Omitted subfields</td><td>Starting in Milvus 3.0.6, you can omit an element-nullable subfield from a Struct element, and Milvus stores null for it. A subfield that is not element-nullable must be present in every Struct element. In earlier versions, every Struct element must provide every subfield.</td></tr>
 <tr><td>Dynamic add StructArray field</td><td>Subject to the availability statement below.</td></tr>
 <tr><td>Nullable requirement for dynamic add</td><td>A StructArray field added to an existing collection must be nullable because existing entities have no value for the new field.</td></tr>
 <tr><td>Existing entities after dynamic add</td><td>Existing entities return <code translate="no">null</code> for the added StructArray field.</td></tr>
+<tr><td>Dynamic add subfield</td><td>Supported in Milvus 3.0.6 and later. An added subfield must be created with <code translate="no">nullable=True</code>; an added <code translate="no">ARRAY</code> subfield additionally takes <code translate="no">element_nullable=True</code> for null values inside the inner array. Existing entities return null for the new subfield in each of their Struct elements, and entities whose StructArray field is null stay null.</td></tr>
 </tbody>
 </table>
 <p>Milvus 3.0.0 and later releases support nullable StructArray fields, nullable vector arrays, and dynamic StructArray field addition in both Standalone and Distributed deployments. Earlier Milvus versions do not support these capabilities.</p>
+<p>Milvus 3.0.6 and later releases additionally support element-level null values, scalar <code translate="no">ARRAY</code> subfields, and adding or dropping subfields of an existing StructArray field. These capabilities require Storage V2 and are not available in external collections.</p>
+<p>In Zilliz Cloud, these capabilities are available on On-Demand Clusters running Milvus 3.0.0 or later. Serving Clusters do not support them.</p>
 <p>For insert examples with nullable StructArray fields, see <a href="/docs/insert-data-into-structarray-fields.md">Insert Data into StructArray Fields</a>.</p>
 <h2 id="Insert-limits" class="common-anchor-header">Insert limits<button data-href="#Insert-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -182,7 +191,7 @@ summary: >-
 <tbody>
 <tr><td>Payload shape</td><td>Insert the StructArray field as an array of Struct objects, such as <code translate="no">chunks: [{&quot;text&quot;: &quot;...&quot;, &quot;emb&quot;: [...]}]</code>.</td></tr>
 <tr><td>Subfield names</td><td>Inside each Struct object, use subfield names such as <code translate="no">text</code> and <code translate="no">emb</code>, not paths such as <code translate="no">chunks[text]</code>.</td></tr>
-<tr><td>Schema alignment</td><td>Each Struct element must match the Struct schema.</td></tr>
+<tr><td>Schema alignment</td><td>Each Struct element must match the Struct schema. Starting in Milvus 3.0.6, an element-nullable subfield can be omitted or set to <code translate="no">null</code> in a Struct element.</td></tr>
 <tr><td>Capacity</td><td>The number of Struct elements in one entity must not exceed <code translate="no">max_capacity</code>.</td></tr>
 <tr><td>Vector dimensions</td><td>Vector values must match the <code translate="no">dim</code> configured for their vector subfields.</td></tr>
 <tr><td>Search-mode duplication</td><td>If you need both EmbeddingList search and element-level search, write vectors to two separate vector subfields.</td></tr>
@@ -215,6 +224,7 @@ summary: >-
 </table>
 <p>Use separate vector subfields when both modes are required. For example, use <code translate="no">chunks[emb_list_vector]</code> for EmbeddingList search and <code translate="no">chunks[emb]</code> for element-level search.</p>
 <p>StructArray vector subfields count as vector fields toward the collection-level limit <code translate="no">proxy.maxVectorFieldNum</code>, which defaults to 10. A StructArray field whose vector subfields are the collection’s only vector fields is valid, and dropping such a field is rejected when it would leave the collection without a vector field. Keep the total number of vector fields and vector subfields within the limits of your target version and service tier.</p>
+<p>Starting in Milvus 3.0.6, an element-nullable vector subfield supports only element-level search with regular vector metrics. <code translate="no">MAX_SIM*</code> metrics, EmbeddingList indexes, and EmbeddingList search are rejected on element-nullable vector subfields, and <code translate="no">AUTOINDEX</code> does not select a <code translate="no">MAX_SIM*</code> metric for them. Null vectors do not participate in search. Scalar indexes are not supported on element-nullable subfields or on scalar <code translate="no">ARRAY</code> subfields.</p>
 <p>For the supported index-type and metric-type matrix, see <a href="/docs/index-structarray-fields.md">Index StructArray Fields</a>.</p>
 <h2 id="Search-limits" class="common-anchor-header">Search limits<button data-href="#Search-limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,10 +277,12 @@ summary: >-
 <li><p>Row-level filter expressions can also reference StructArray paths directly: <code translate="no">chunks[0][section]</code> for one element position, <code translate="no">array_length(chunks)</code> for the element count, <code translate="no">array_contains(chunks[section], ...)</code> for subfield values across elements, and <code translate="no">chunks is null</code> on a nullable StructArray field.</p></li>
 <li><p>Use scalar subfields for scalar predicates.</p></li>
 <li><p>Do not use vector subfields as <code translate="no">$[...]</code> scalar predicate inputs.</p></li>
-<li><p>JSON path syntax, JSON functions, array container functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates.</p></li>
+<li><p>JSON path syntax, JSON functions, text match functions, Geometry / GIS functions, and Timestamptz expressions are not supported for StructArray element-level predicates. Starting in Milvus 3.0.6, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code>, and <code translate="no">array_length</code> are supported on <code translate="no">$[subfield]</code> for scalar <code translate="no">ARRAY</code> subfields, and <code translate="no">$[subfield] is null</code> / <code translate="no">is not null</code> is supported for every subfield type.</p></li>
+<li><p>Starting in Milvus 3.0.6, a null subfield value in a Struct element makes the element predicate unknown rather than false. <code translate="no">element_filter</code> keeps only elements whose predicate is true, and <code translate="no">MATCH_*</code> counts an unknown element as a miss. For details, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p></li>
 <li><p>Prefer explicit boolean comparisons such as <code translate="no">$[has_code] == true</code> instead of bare boolean expressions.</p></li>
 </ul>
-<h2 id="Import-limits" class="common-anchor-header">Import limits<button data-href="#Import-limits" class="anchor-icon" translate="no">
+<p><a id="Import-limits"></a></p>
+<h2 id="Import-and-storage-limits" class="common-anchor-header">Import and storage limits<button data-href="#Import-and-storage-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -291,6 +303,10 @@ summary: >-
 </thead>
 <tbody>
 <tr><td>Source file formats</td><td>JSON, JSONL, CSV, and Parquet files can carry StructArray fields. NumPy files hold one file per top-level field and cannot provide StructArray data; use JSON, CSV, or Parquet files for collections that have a StructArray field. For file shapes, see <a href="/docs/prepare-source-data.md#StructArray-fields-in-source-files">Prepare Source Data</a>.</td></tr>
+<tr><td>Storage format</td><td>Element-nullable subfields and scalar <code translate="no">ARRAY</code> subfields require Storage V2. Storage V1 cannot be reached for collections that use these subfields: creating the collection and inserting data can appear to succeed, but the data fails at flush, which is not a supported state. Storage V3 with <code translate="no">common.storage.enableGrowingSourceFlush</code> set to <code translate="no">true</code> rejects requests that use element-nullable subfields or scalar <code translate="no">ARRAY</code> subfields.</td></tr>
+<tr><td>External collections</td><td>Element-nullable subfields and scalar <code translate="no">ARRAY</code> subfields are not supported in external collections.</td></tr>
+<tr><td>Backup and snapshot import</td><td>Binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar <code translate="no">ARRAY</code> subfields.</td></tr>
+<tr><td>Downgrade</td><td>Collections that have element-nullable subfields or scalar <code translate="no">ARRAY</code> subfields cannot run on a release earlier than Milvus 3.0.6. Replaying the write-ahead log on the older release panics. Re-upgrading to Milvus 3.0.6 or later recovers the data.</td></tr>
 </tbody>
 </table>
 <h2 id="Related-pages" class="common-anchor-header">Related pages<button data-href="#Related-pages" class="anchor-icon" translate="no">

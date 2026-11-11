@@ -48,7 +48,8 @@ summary: >-
 <li>Adding StructArray fields is supported in Milvus 3.0.0 and later. Added StructArray fields must be nullable.</li>
 </ul>
 <ul>
-<li>Field names must be unique among fields in the collection.</li>
+<li><p>Adding a sub-field to an existing StructArray field is supported in Milvus 3.0.6 and later. The added sub-field must allow element-level null (<code translate="no">nullable=True</code> on a scalar or vector sub-field, <code translate="no">element_nullable=True</code> on an array sub-field), cannot have a default value, and cannot be bound to an index in the same request.</p></li>
+<li><p>Field names must be unique among fields in the collection.</p></li>
 </ul>
 <p><strong>Add a Function and its generated vector field</strong></p>
 <ul>
@@ -62,7 +63,7 @@ summary: >-
 <p><strong>Drop user-defined fields</strong></p>
 <ul>
 <li><p>You cannot drop the primary key field, partition key field, clustering key field, or the last vector field in a collection.</p></li>
-<li><p>You can drop a whole <code translate="no">ARRAY&lt;STRUCT&gt;</code> field, but you cannot drop an individual sub-field inside an <code translate="no">ARRAY&lt;STRUCT&gt;</code> field.</p></li>
+<li><p>You can drop a whole <code translate="no">ARRAY&lt;STRUCT&gt;</code> field. Starting in Milvus 3.0.6, you can also drop an individual sub-field by its path, such as <code translate="no">chunks[lang]</code>, except the last sub-field of the <code translate="no">ARRAY&lt;STRUCT&gt;</code> field.</p></li>
 <li><p>You cannot directly drop a field that is used as a Function input field or generated as a Function output field. To remove a Function output field, drop the Function that generates it.</p></li>
 </ul>
 <p><strong>Drop a Function and its generated vector field</strong></p>
@@ -95,6 +96,9 @@ summary: >-
 <li><p><a href="#Add-StructArray-fields--Milvus-300">Add StructArray fields</a> when you need an array field whose elements share the same Struct schema.</p></li>
 <li><p><a href="#Add-user-defined-vector-fields--Milvus-2618">Add user-defined vector fields</a> when your application generates embeddings and writes vector values to Milvus.</p></li>
 <li><p><a href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x">Add a Function and its generated vector field</a> when Milvus should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.</p></li>
+</ul>
+<ul>
+<li><a href="#Add-a-sub-field-to-an-existing-StructArray-field--Milvus-306">Add a sub-field to an existing StructArray field</a> when existing Struct elements need a new attribute.</li>
 </ul>
 <p>In all cases, the new field name must not already exist in the collection, and the total number of fields cannot exceed the Milvus field-count limit. For details, refer to <a href="/docs/limitations.md#number-of-resources-in-a-collection">Milvus Limits</a>.</p>
 <h3 id="Add-user-defined-scalar-fields" class="common-anchor-header">Add user-defined scalar fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields" class="anchor-icon" translate="no">
@@ -594,7 +598,127 @@ structSchema.Fields.Add(chapterVector);
     StructField = structSchema
 });
 <button class="copy-code-btn"></button></code></pre>
-<p>After the StructArray field is added, entities that already exist in the collection return <code translate="no">NULL</code> for <code translate="no">chunks</code> across all its sub-fields. When you insert a new entity, ensure that all sub-fields are either <code translate="no">NULL</code> or have valid values. Inserting an entity with some sub-fields set to <code translate="no">NULL</code> and others set to valid values results in errors.</p>
+<p>After the StructArray field is added, entities that already exist in the collection return <code translate="no">NULL</code> for <code translate="no">chunks</code> across all its sub-fields. When you insert a new entity, every Struct element must provide a value for every sub-field, and a Struct element itself cannot be <code translate="no">NULL</code>. Starting in Milvus 3.0.6, element-nullable sub-fields may hold <code translate="no">NULL</code> in individual Struct elements; for details, refer to <a href="/docs/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">Create a StructArray Field</a>.</p>
+<h3 id="Add-a-sub-field-to-an-existing-StructArray-field" class="common-anchor-header">Add a sub-field to an existing StructArray field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Add-a-sub-field-to-an-existing-StructArray-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Use <code translate="no">add_collection_field()</code> with the sub-field path as the field name to add a sub-field to a StructArray field that already holds data. To add a sub-field, do as follows:</p>
+<ol>
+<li><p>Name the field with the path <code translate="no">structArrayField[subField]</code>, such as <code translate="no">chunks[lang]</code>.</p></li>
+<li><p>Choose a scalar, vector, or scalar array data type supported by StructArray.</p></li>
+<li><p>Set <code translate="no">nullable=True</code> on the added sub-field. This is required for every added sub-field and is what allows element-level null. On an array sub-field, additionally set <code translate="no">element_nullable=True</code> to allow null values inside the inner array. The sub-field inherits the row-level <code translate="no">nullable</code> setting and the <code translate="no">max_capacity</code> of the StructArray field.</p></li>
+</ol>
+<p><strong>Example: Add an element-nullable sub-field</strong></p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+```python
+from pymilvus import DataType, MilvusClient
+<p>client = MilvusClient(uri="http://localhost:19530")</p>
+<h1 id="highlight-start" class="common-anchor-header">highlight-start<button data-href="#highlight-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>client.add_collection_field(
+collection_name="books",
+field_name="chunks[lang]",
+data_type=DataType.VARCHAR,
+max_length=16,
+nullable=True,
+)</p>
+<h1 id="highlight-end" class="common-anchor-header">highlight-end<button data-href="#highlight-end" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><pre><code translate="no">
+```go
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != nil {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="highlighted-comment-line">err = cli.AddCollectionField(ctx, milvusclient.NewAddCollectionFieldOption(<span class="hljs-string">&quot;books&quot;</span>,</span>
+<span class="highlighted-comment-line">        entity.NewField().</span>
+<span class="highlighted-comment-line">                WithName(<span class="hljs-string">&quot;chunks[lang]&quot;</span>).</span>
+<span class="highlighted-comment-line">                WithDataType(entity.FieldTypeVarChar).</span>
+<span class="highlighted-comment-line">                WithMaxLength(<span class="hljs-number">16</span>).</span>
+<span class="highlighted-comment-line">                WithNullable(<span class="hljs-literal">true</span>)))</span>
+<span class="hljs-keyword">if</span> err != nil {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/add&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;books&quot;,
+    &quot;schema&quot;: {
+      &quot;fieldName&quot;: &quot;chunks[lang]&quot;,
+      &quot;dataType&quot;: &quot;VarChar&quot;,
+      &quot;elementNullable&quot;: true,
+      &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;16&quot;}
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>After the sub-field is added, entities that already exist return <code translate="no">NULL</code> for <code translate="no">chunks[lang]</code> in each of their Struct elements, and entities whose <code translate="no">chunks</code> field is <code translate="no">NULL</code> stay <code translate="no">NULL</code>. New entities can omit the sub-field or set it to <code translate="no">NULL</code> in any Struct element.</p>
+<p>The following rules apply:</p>
+<ul>
+<li><p>The added sub-field must be created with <code translate="no">nullable=True</code>, and an added array sub-field additionally takes <code translate="no">element_nullable=True</code> to allow null values inside the inner array. It cannot have a default value.</p></li>
+<li><p>You cannot bind an index while adding the sub-field. Create the index with a separate <code translate="no">create_index()</code> call. An added vector sub-field supports element-level metrics only, not <code translate="no">MAX_SIM*</code>, and the collection must have an index on it before you load the collection with the new sub-field included.</p></li>
+<li><p>History segments receive the added sub-field and its index through schema-version compaction. Set <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> to <code translate="no">true</code> (it is <code translate="no">false</code> by default); otherwise the added sub-field’s index does not cover history segments.</p></li>
+<li><p>Adding a sub-field to a loaded collection does not release the collection. Queries can return the new sub-field before its index exists.</p></li>
+<li><p>Clients that pin a schema timestamp receive a schema-mismatch error and must refresh, as for any added field.</p></li>
+</ul>
 <h3 id="Add-user-defined-vector-fields" class="common-anchor-header">Add user-defined vector fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1216,6 +1340,100 @@ Bound index:
 });
 <button class="copy-code-btn"></button></code></pre>
 <p>If <code translate="no">image_vector</code> is the last vector field in the collection, the drop operation is rejected.</p>
+<h3 id="Drop-a-StructArray-sub-field" class="common-anchor-header">Drop a StructArray sub-field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Drop-a-StructArray-sub-field" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Starting in Milvus 3.0.6, you can drop an individual sub-field from a StructArray field with <code translate="no">drop_collection_field()</code> by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
+<p>The following example assumes that <code translate="no">chunks</code> is a StructArray field in <code translate="no">my_collection</code> with a <code translate="no">lang</code> sub-field, and drops only that sub-field.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+```python
+from pymilvus import MilvusClient
+<p>client = MilvusClient(uri="http://localhost:19530")</p>
+<h1 id="highlight-start" class="common-anchor-header">highlight-start<button data-href="#highlight-start" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><p>client.drop_collection_field(
+collection_name="my_collection",
+field_name="chunks[lang]",
+)</p>
+<h1 id="highlight-end" class="common-anchor-header">highlight-end<button data-href="#highlight-end" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h1><pre><code translate="no">
+```go
+<span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx := context.Background()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != nil {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="highlighted-comment-line">err = cli.DropCollectionField(ctx, milvusclient.NewDropCollectionFieldOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;chunks[lang]&quot;</span>))</span>
+<span class="hljs-keyword">if</span> err != nil {
+    fmt.Println(err)
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+  --url <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/fields/drop&quot;</span> \
+  --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  --data-raw <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;fieldName&quot;: &quot;chunks[lang]&quot;
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>You cannot drop the last sub-field of a StructArray field, the last vector field of the collection, or a sub-field used by a Function. To remove the whole StructArray field, drop it by name, as shown in the previous example. After a sub-field is dropped, insert and upsert requests that still carry the sub-field are rejected.</p>
+<p>Dropping a sub-field while queries are still running against it can fail transiently: query plans that were built on the older schema keep executing for a short time and fail with an internal error. Finish queries against a sub-field before dropping it, or retry the drop after the running queries finish.</p>
 <p><a id="drop-vector-fields-generated-by-functions--milvus-30x"></a></p>
 <h3 id="Drop-a-Function-and-its-generated-vector-field" class="common-anchor-header">Drop a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Drop-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1356,7 +1574,7 @@ Bound index:
       </svg>
     </button></h3><p>For a user-defined scalar field, existing entities return <code translate="no">NULL</code> unless you set a <code translate="no">default_value</code>. If you set a <code translate="no">default_value</code>, existing entities return that default value.</p>
 <p>For a user-defined vector field, existing entities have <code translate="no">NULL</code> for the new vector field. Vector search on the added field skips entities whose vector value is <code translate="no">NULL</code>. To make existing entities searchable through the new vector field, write non-NULL vector values through upsert or a backfill workflow. New entities can include the new vector field during insert.</p>
-<p>For a StructArray field, existing entities return <code translate="no">NULL</code> for the new StructArray field across all its sub-fields. New entities must provide either <code translate="no">NULL</code> for all sub-fields or valid values for all sub-fields.</p>
+<p>For a StructArray field, existing entities return <code translate="no">NULL</code> for the new StructArray field across all its sub-fields. New entities must provide either <code translate="no">NULL</code> for the whole field or a valid value for every sub-field in every Struct element, except element-nullable sub-fields in Milvus 3.0.6 and later. For a sub-field added to an existing StructArray field, existing entities return <code translate="no">NULL</code> for that sub-field in each Struct element.</p>
 <h3 id="Can-I-add-BM25-lexical-search-to-an-existing-collection" class="common-anchor-header">Can I add BM25 lexical search to an existing collection?<button data-href="#Can-I-add-BM25-lexical-search-to-an-existing-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1407,6 +1625,22 @@ Bound index:
       </svg>
     </button></h3><p>Usually, no manual wait is required. If your next operation depends on the updated schema, you can call <code translate="no">describe_collection()</code> first to confirm the schema that Milvus currently returns.</p>
 <p>In a distributed deployment, there can be a short propagation window while Milvus components refresh collection metadata. If an operation immediately after the schema change fails with a schema-related error, refresh the schema and retry the operation.</p>
+<h3 id="Why-does-an-added-vector-sub-field-fail-with-a-FieldNotLoaded-error" class="common-anchor-header">Why does an added vector sub-field fail with a FieldNotLoaded error?<button data-href="#Why-does-an-added-vector-sub-field-fail-with-a-FieldNotLoaded-error" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>After you add a vector sub-field and create its index, queries against the new sub-field can still fail with error 2027 (<code translate="no">FieldNotLoaded</code>) even though the collection reports ready. Release the collection and load it again; queries then cover the new sub-field.</p>
 <h3 id="When-is-storage-space-reclaimed-after-dropping-a-field" class="common-anchor-header">When is storage space reclaimed after dropping a field?<button data-href="#When-is-storage-space-reclaimed-after-dropping-a-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

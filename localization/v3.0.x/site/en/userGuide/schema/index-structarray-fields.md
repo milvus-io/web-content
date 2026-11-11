@@ -498,6 +498,49 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
         ></path>
       </svg>
     </button></h2><p>For EmbeddingList search, choose the <code translate="no">MAX_SIM*</code> metric corresponding to the per-vector comparison: <code translate="no">MAX_SIM_COSINE</code> (also named <code translate="no">MAX_SIM</code>), <code translate="no">MAX_SIM_IP</code>, or <code translate="no">MAX_SIM_L2</code> for dense vectors, and <code translate="no">MAX_SIM_HAMMING</code> or <code translate="no">MAX_SIM_JACCARD</code> for binary vectors. These metrics compare embedding lists and return entity-level results. For element-level search, use the corresponding regular metric listed below.</p>
+<p>Starting in Milvus 3.0.6, scalar indexes are not supported on element-nullable subfields or on scalar <code translate="no">ARRAY</code> subfields. Filters on these subfields run without an index.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Index element-nullable and added vector subfields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Starting in Milvus 3.0.6, a vector subfield can be created with element-level null (<code translate="no">nullable=True</code>), and a vector subfield can be added to an existing StructArray field. Both cases change how you index the subfield:</p>
+<ul>
+<li><p>An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as <code translate="no">COSINE</code>, <code translate="no">IP</code>, or <code translate="no">L2</code>. <code translate="no">MAX_SIM*</code> metrics and EmbeddingList indexes are rejected on it, and <code translate="no">AUTOINDEX</code> does not select a <code translate="no">MAX_SIM*</code> metric for it. Null vectors are skipped when the index is built and during search.</p></li>
+<li><p>A vector subfield added to an existing StructArray field is always element-nullable, so the same metric rule applies. You cannot bind an index in the add request; create the index separately after the subfield exists.</p></li>
+<li><p>A load that includes a vector subfield requires an index on it, as for any vector field. Create the index on an added vector subfield before you load the collection with that subfield included. Queries can return the new subfield before the index exists.</p></li>
+<li><p>History segments receive an added subfield and its index through schema-version compaction. Set <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> to <code translate="no">true</code> (it is <code translate="no">false</code> by default); otherwise the added subfield’s index does not cover history segments.</p></li>
+<li><p>Milvus builds the vector index for a segment of an element-nullable vector subfield only when the segment holds at least 1,024 valid (non-null) elements. A segment below this threshold builds no index, and queries on it run brute-force search.</p></li>
+</ul>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Index-metric-compatibility" class="common-anchor-header">Index metric compatibility<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -793,7 +836,8 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
 <tr><td>One vector subfield accepts one index.</td><td>Use separate vector subfields if you need different metric families.</td></tr>
 <tr><td>Use <code translate="no">MAX_SIM*</code> metrics for EmbeddingList search.</td><td>EmbeddingList query data requires an index built with a <code translate="no">MAX_SIM*</code> metric.</td></tr>
 <tr><td>Use regular vector metrics for element-level search.</td><td>Element-level search uses regular vector query data and metrics such as <code translate="no">COSINE</code>, <code translate="no">IP</code>, or <code translate="no">L2</code>.</td></tr>
-<tr><td>Index scalar subfields that appear in filters.</td><td>Use scalar index types supported by your target.</td></tr>
+<tr><td>Index scalar subfields that appear in filters.</td><td>Use scalar index types supported by your target. Element-nullable subfields and scalar <code translate="no">ARRAY</code> subfields cannot be indexed.</td></tr>
+<tr><td>Use element-level metrics on element-nullable vector subfields.</td><td>An element-nullable vector subfield (<code translate="no">nullable=True</code>), including any vector subfield added to an existing StructArray field, rejects <code translate="no">MAX_SIM*</code> metrics.</td></tr>
 <tr><td>Keep vector-field limits in mind.</td><td>The total number of vector fields and vector subfields is limited. See StructArray Limits before adding many vector subfields.</td></tr>
 </tbody>
 </table>

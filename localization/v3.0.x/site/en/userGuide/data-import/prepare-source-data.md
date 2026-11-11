@@ -232,17 +232,21 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>The field value is a list of objects, one per Struct element, keyed by subfield name: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>The cell holds the same JSON text as the JSON format.</td></tr>
-<tr><td>Parquet</td><td>One column per StructArray field with the type <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, one struct child per subfield. A scalar subfield is a scalar child, and a vector subfield is a list of its element type, such as <code translate="no">list&lt;float32&gt;</code>.</td></tr>
+<tr><td>CSV</td><td>The cell holds the same JSON text as the JSON format. The <code translate="no">nullkey</code> configured for the import job or a JSON <code translate="no">null</code> marks a null StructArray value.</td></tr>
+<tr><td>Parquet</td><td>One column per StructArray field with the type <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, one struct child per subfield. A scalar subfield is a scalar child, a vector subfield is a list of its element type, such as <code translate="no">list&lt;float32&gt;</code>, and an array subfield (Milvus 3.0.6 and later) is a <code translate="no">list&lt;T&gt;</code> child.</td></tr>
 <tr><td>NumPy</td><td>Not supported. NumPy files hold one file per top-level field and have no representation for a StructArray field. Use JSON, CSV, or Parquet files for collections that have a StructArray field.</td></tr>
 </tbody>
 </table>
 <p>The following rules apply to StructArray values in all supported formats:</p>
 <ul>
 <li><p>Use subfield names inside each Struct element, not paths such as <code translate="no">chunks[text]</code>. Flat columns or keys named <code translate="no">chunks[text]</code> are rejected.</p></li>
-<li><p>Each Struct element must provide every subfield of the Struct schema, and a Struct element itself cannot be null, such as <code translate="no">[null, {...}]</code>. A whole StructArray value can be null only when the StructArray field is nullable.</p></li>
+<li><p>A Struct element itself cannot be null, such as <code translate="no">[null, {...}]</code>. A whole StructArray value can be null only when the StructArray field is nullable. Before Milvus 3.0.6, every Struct element must provide every subfield.</p></li>
+<li><p>Keys or Parquet children that are not subfields of the collection, including dropped subfields, are ignored.</p></li>
+<li><p>Starting in Milvus 3.0.6, a missing key or a <code translate="no">null</code> value for an element-nullable subfield imports as a null value for that Struct element, so files written before a subfield was added import without it. A <code translate="no">null</code> anywhere else fails the import. For an array subfield, <code translate="no">null</code> is a null inner array, and <code translate="no">null</code> inside the inner array is a null inner value when the subfield allows it.</p></li>
+<li><p>Starting in Milvus 3.0.6, binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar array subfields.</p></li>
 </ul>
-<p>For the schema-side limits, see <a href="/docs/structarray-limits.md#Import-limits">StructArray Limits</a>.</p>
+<p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> supports the StructArray shapes above in every supported format, including element-nullable subfields and nullable StructArray values. Use the same row shapes in the writer’s <code translate="no">add_row()</code> calls.</p>
+<p>For the schema-side limits, see <a href="/docs/structarray-limits.md#Import-and-storage-limits">StructArray Limits</a>.</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Set up BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

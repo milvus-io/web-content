@@ -1088,7 +1088,7 @@ curl --request POST \
 <tr><td>Vector subfields</td><td>Not supported as <code translate="no">$[...]</code> scalar predicate inputs. Use vector subfields through vector search instead.</td></tr>
 </tbody>
 </table>
-<p>For unsupported cases such as JSON paths, array container functions, text match functions, null predicates on <code translate="no">$[...]</code>, Geometry functions, Timestamptz expressions, and generic function calls, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p>
+<p>For unsupported cases such as JSON paths, text match functions, Geometry functions, Timestamptz expressions, and generic function calls, and for the array container functions and null predicates that <code translate="no">$[...]</code> supports starting in Milvus 3.0.6, see <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p>
 <h2 id="Common-mistakes" class="common-anchor-header">Common mistakes<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

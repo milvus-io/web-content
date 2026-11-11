@@ -34,7 +34,7 @@ summary: >-
 <tr><td>Row-level path predicates</td><td>Test one element position, count Struct elements, or test subfield values across elements without a <code translate="no">$[...]</code> predicate.</td><td>Row-level filtering. These predicates do not return element offsets.</td></tr>
 </tbody>
 </table>
-<p>Use scalar subfields in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.</p>
+<p>Use scalar subfields, and array subfields in Milvus 3.0.6 and later, in StructArray operators. Vector subfields are used by vector search paths and are not scalar predicate inputs.</p>
 <h2 id="When-to-use-which-operator" class="common-anchor-header">When to use which operator<button data-href="#When-to-use-which-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -356,7 +356,18 @@ chunks[0][page] in [1, 2, 3]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><h4 id="Count-Struct-elements" class="common-anchor-header">Count Struct elements</h4><p>Use <code translate="no">array_length(structArrayField)</code> to filter by the number of Struct elements in an entity. <code translate="no">array_length</code> on a subfield path, such as <code translate="no">array_length(chunks[section])</code>, returns the same count, because every subfield holds one value per Struct element.</p>
+    </button></h3><h4 id="Access-array-subfields-by-position" class="common-anchor-header">Access array subfields by position<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span></h4><p>Starting in Milvus 3.0.6, a positional path can also reference a scalar <code translate="no">ARRAY</code> subfield. <code translate="no">chunks[0][tags]</code> is the inner array of the first Struct element. It supports <code translate="no">==</code> and <code translate="no">!=</code> with an array literal, <code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code>, and <code translate="no">array_length</code>. Comparison operators, <code translate="no">in</code>, <code translate="no">like</code>, and arithmetic on it are rejected.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># The first chunk is tagged &quot;tuning&quot;.</span>
+array_contains(chunks[<span class="hljs-number">0</span>][tags], <span class="hljs-string">&quot;tuning&quot;</span>)
+
+<span class="hljs-comment"># The first chunk has exactly these tags, in this order.</span>
+chunks[<span class="hljs-number">0</span>][tags] == [<span class="hljs-string">&quot;search&quot;</span>, <span class="hljs-string">&quot;tuning&quot;</span>]
+
+<span class="hljs-comment"># The first chunk has at least two tags.</span>
+array_length(chunks[<span class="hljs-number">0</span>][tags]) &gt;= <span class="hljs-number">2</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">array_contains*</code>, <code translate="no">==</code>, and <code translate="no">!=</code> on the whole array subfield path, such as <code translate="no">array_contains(chunks[tags], &quot;tuning&quot;)</code>, are rejected because that path holds one inner array per Struct element. Use <code translate="no">MATCH_ANY(chunks, array_contains($[tags], &quot;tuning&quot;))</code> instead.</p>
+<h4 id="Count-Struct-elements" class="common-anchor-header">Count Struct elements</h4><p>Use <code translate="no">array_length(structArrayField)</code> to filter by the number of Struct elements in an entity. <code translate="no">array_length</code> on a subfield path, such as <code translate="no">array_length(chunks[section])</code>, returns the same count, because every subfield holds one value per Struct element.</p>
 <pre><code translate="no" class="language-text"># Articles with at least three chunks.
 array_length(chunks) &gt;= 3
 
@@ -432,10 +443,45 @@ chunks is not null
 <tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code></td><td>Comparison, chained range, <code translate="no">in</code>, <code translate="no">not in</code>, arithmetic expressions with <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, or <code translate="no">%</code> followed by comparison, and logical combinations.</td></tr>
 <tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td>Comparison, chained range, <code translate="no">in</code>, <code translate="no">not in</code>, arithmetic expressions with <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, or <code translate="no">/</code> followed by comparison, and logical combinations. The <code translate="no">%</code> operator is not supported for floating-point subfields.</td></tr>
 <tr><td><code translate="no">VARCHAR</code></td><td>String comparison, chained range, <code translate="no">in</code>, <code translate="no">not in</code>, <code translate="no">like</code>, <code translate="no">=~</code>, <code translate="no">!~</code>, and logical combinations.</td></tr>
-<tr><td>Vector subfields</td><td>Not supported as <code translate="no">$[...]</code> scalar predicate inputs. Use vector subfields through EmbeddingList search or element-level vector search instead.</td></tr>
+<tr><td>Scalar <code translate="no">ARRAY</code> subfields (Milvus 3.0.6 and later)</td><td><code translate="no">array_contains</code>, <code translate="no">array_contains_any</code>, <code translate="no">array_contains_all</code>, and <code translate="no">array_length</code> on <code translate="no">$[tags]</code>, plus <code translate="no">$[tags] is null</code> and <code translate="no">$[tags] is not null</code>. Comparison operators, <code translate="no">in</code>, and <code translate="no">like</code> on <code translate="no">$[tags]</code> are rejected.</td></tr>
+<tr><td>Any element-nullable subfield (Milvus 3.0.6 and later)</td><td><code translate="no">$[subfield] is null</code> and <code translate="no">$[subfield] is not null</code> test whether the value in the current Struct element is null. On a subfield that cannot hold null values, <code translate="no">is null</code> is always false.</td></tr>
+<tr><td>Vector subfields</td><td>Not supported as <code translate="no">$[...]</code> scalar predicate inputs, except <code translate="no">$[emb] is null</code> and <code translate="no">$[emb] is not null</code> on an element-nullable vector subfield in Milvus 3.0.6 and later. Use vector subfields through EmbeddingList search or element-level vector search instead.</td></tr>
 </tbody>
 </table>
 <p>Logical operators such as <code translate="no">&amp;&amp;</code>, <code translate="no">||</code>, and <code translate="no">!</code> apply to predicate expressions. For example, write <code translate="no">!($[has_code] == true)</code> instead of <code translate="no">!$[has_code]</code>.</p>
+<h2 id="Null-values-in-element-level-predicates" class="common-anchor-header">Null values in element-level predicates<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Null-values-in-element-level-predicates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Starting in Milvus 3.0.6, an element-nullable subfield can hold a null value in a Struct element. Null values follow three-valued logic in StructArray predicates:</p>
+<ul>
+<li><p>A comparison, <code translate="no">in</code>, <code translate="no">like</code>, or arithmetic predicate on a null subfield value is unknown rather than false. <code translate="no">&amp;&amp;</code>, <code translate="no">\|\|</code>, and <code translate="no">!</code> propagate unknown results, so <code translate="no">!($[lang] == &quot;en&quot;)</code> is still unknown when <code translate="no">$[lang]</code> is null.</p></li>
+<li><p><code translate="no">element_filter</code> keeps only Struct elements whose predicate is true. Unknown elements are not matched.</p></li>
+<li><p><code translate="no">MATCH_*</code> counts an unknown element as a miss. <code translate="no">MATCH_ALL</code> is false when any element is unknown, while an empty StructArray still satisfies <code translate="no">MATCH_ALL</code>.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> and <code translate="no">$[subfield] is not null</code> are always true or false. They read the validity of the current element, so <code translate="no">$[lang] is null</code> matches exactly the elements whose <code translate="no">lang</code> value is null.</p></li>
+<li><p>On an array subfield, <code translate="no">array_contains*</code> on <code translate="no">$[tags]</code> skips null inner values and never matches a null inner array, <code translate="no">array_length($[tags])</code> counts null inner values, and <code translate="no">$[tags] is null</code> is true only for a null inner array.</p></li>
+</ul>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Chunks whose language is unknown.</span>
+element_filter(chunks, $[lang] <span class="hljs-keyword">is</span> null)
+
+<span class="hljs-comment"># Entities where every chunk has a detected language.</span>
+MATCH_ALL(chunks, $[lang] <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> null)
+
+<span class="hljs-comment"># Entities with at least one chunk tagged &quot;tuning&quot;.</span>
+MATCH_ANY(chunks, array_contains($[tags], <span class="hljs-string">&quot;tuning&quot;</span>))
+<button class="copy-code-btn"></button></code></pre>
+<p>Row-level positional paths follow the same rule: <code translate="no">chunks[0][lang] == &quot;en&quot;</code> is unknown when the <code translate="no">lang</code> value of the first element is null, when the entity has no element at that position, or when the StructArray field is null, so the entity does not match.</p>
 <h2 id="Unsupported-predicates" class="common-anchor-header">Unsupported predicates<button data-href="#Unsupported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -455,8 +501,9 @@ chunks is not null
 <ul>
 <li><p>Text match functions, such as <code translate="no">text_match(field, &quot;...&quot;)</code> or <code translate="no">phrase_match(field, &quot;...&quot;)</code>.</p></li>
 <li><p>JSON path syntax, <code translate="no">exists</code> on JSON paths, or JSON functions such as <code translate="no">json_contains</code>, <code translate="no">json_contains_all</code>, or <code translate="no">json_contains_any</code>.</p></li>
-<li><p>Array container functions such as <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code>, or <code translate="no">array_length</code> on <code translate="no">$[subfield]</code>. Use these functions on a subfield path such as <code translate="no">chunks[section]</code> in a row-level predicate instead.</p></li>
-<li><p><code translate="no">$[subfield] is null</code> or <code translate="no">$[subfield] is not null</code>.</p></li>
+<li><p>Array container functions such as <code translate="no">array_contains</code>, <code translate="no">array_contains_all</code>, <code translate="no">array_contains_any</code>, or <code translate="no">array_length</code> on <code translate="no">$[subfield]</code> of a scalar subfield. Use these functions on a subfield path such as <code translate="no">chunks[section]</code> in a row-level predicate instead. Starting in Milvus 3.0.6, they are supported on <code translate="no">$[tags]</code> for scalar <code translate="no">ARRAY</code> subfields.</p></li>
+<li><p><code translate="no">$[subfield] is null</code> or <code translate="no">$[subfield] is not null</code> before Milvus 3.0.6.</p></li>
+<li><p>A subscript into an array subfield, such as <code translate="no">$[tags][0]</code>, and <code translate="no">like</code> on <code translate="no">$[tags]</code>.</p></li>
 <li><p>Geometry / GIS functions.</p></li>
 <li><p>Timestamptz expressions.</p></li>
 <li><p><code translate="no">random_sample(...)</code>.</p></li>
@@ -486,7 +533,8 @@ chunks is not null
 <li><p>Do not nest <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code> inside another StructArray operator.</p></li>
 <li><p>Use named <code translate="no">threshold=N</code> for <code translate="no">MATCH_LEAST</code>, <code translate="no">MATCH_MOST</code>, and <code translate="no">MATCH_EXACT</code>.</p></li>
 <li><p>In positional paths, write the element position before the subfield name: <code translate="no">chunks[0][section]</code>, not <code translate="no">chunks[section][0]</code>.</p></li>
-<li><p>Use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> only on the whole StructArray field, such as <code translate="no">chunks is null</code>. Do not use them on a subfield path such as <code translate="no">chunks[section]</code> or on <code translate="no">$[subfield]</code>.</p></li>
+<li><p>Use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> only on the whole StructArray field, such as <code translate="no">chunks is null</code>, or, starting in Milvus 3.0.6, on <code translate="no">$[subfield]</code> inside <code translate="no">element_filter</code> or <code translate="no">MATCH_*</code>. Do not use them on a subfield path such as <code translate="no">chunks[section]</code>.</p></li>
+<li><p>Do not subscript into an array subfield. <code translate="no">$[tags][0]</code> and <code translate="no">chunks[0][tags][0]</code> are not supported.</p></li>
 <li><p><code translate="no">MATCH_ANY</code> on an empty StructArray returns <code translate="no">false</code>.</p></li>
 <li><p><code translate="no">MATCH_ALL</code> on an empty StructArray returns <code translate="no">true</code>.</p></li>
 </ul>

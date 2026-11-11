@@ -141,7 +141,7 @@ summary: >-
 </ul>
 <ul>
 <li><p><strong>Upsert a StructArray field.</strong></p>
-<p>Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode.</p>
+<p>Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode. Starting in Milvus 3.0.6, you can omit element-nullable subfields; Milvus stores null for them in that Struct element.</p>
 <p>For details, refer to <a href="/docs/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">Upsert StructArray field in merge mode</a>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Limits & Restrictions<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
@@ -1710,7 +1710,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field.</p>
+    </button></h2><p>Upserting a StructArray field in an entity overwrites the field value. That means you need to include all subfields defined in the struct schema when you upsert a StructArray field. Starting in Milvus 3.0.6, element-nullable subfields can be omitted or set to <code translate="no">None</code> in a Struct element, and Milvus stores null for them. A request that still carries a dropped subfield is rejected.</p>
+<p>pymilvus can also replace part of a StructArray value. Pass <code translate="no">field_ops</code> to <code translate="no">upsert()</code> with <code translate="no">FieldOp.path_replace()</code>: a path such as <code translate="no">[1][lang]</code> replaces one subfield of one Struct element and preserves the other Struct elements and subfields, and a path such as <code translate="no">[1]</code> replaces one whole Struct element. A child path carries only the selected subfield, and every operand must explicitly include its keys. A whole-element path requires every subfield that is not element-nullable and sets omitted element-nullable subfields to null.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldOp
+
+client.upsert(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    data=[
+        {
+            <span class="hljs-string">&quot;doc_id&quot;</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-string">&quot;chunks&quot;</span>: [{<span class="hljs-string">&quot;lang&quot;</span>: <span class="hljs-string">&quot;zh&quot;</span>}],
+        }
+    ],
+    field_ops={<span class="hljs-string">&quot;chunks&quot;</span>: FieldOp.path_replace(<span class="hljs-string">&quot;[1][lang]&quot;</span>)},
+)
+<button class="copy-code-btn"></button></code></pre>
 <p>The following example demonstrates how to upsert the <code translate="no">chunks</code> field in merge mode, a StructArray field with 6 subfields. When the operation completes, the <code translate="no">chunks</code> field of the entity with id 1 is set to the array with the two-element structs provided in the request.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
