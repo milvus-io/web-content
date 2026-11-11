@@ -89,7 +89,7 @@ summary: >-
 <li><p><code translate="no">text</code>:テキスト・コンテンツの格納に使用される。このフィールドのデータ型は<code translate="no">VARCHAR</code> で、最大長は1000バイトである。全文検索を容易にするため、<code translate="no">enable_analyzer</code> オプションは<code translate="no">True</code> に設定される。</p></li>
 <li><p><code translate="no">text_dense</code>:テキストの密なベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、ベクトル次元は 768 である。</p></li>
 <li><p><code translate="no">text_sparse</code>:テキストの疎ベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> である。</p></li>
-<li><p><code translate="no">image_dense</code>:商品画像の密なベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">FLOAT_VETOR</code> で、ベクトル次元は 512 である。</p></li>
+<li><p><code translate="no">image_dense</code>:商品画像の密なベクトルを格納するために使用される。このフィールドのデータ型は<code translate="no">FLOAT_VECTOR</code> で、ベクトル次元は 512 である。</p></li>
 </ul>
 <p>テキスト・フィールドの全文検索には、組み込みの BM25 アルゴリズムを使用するため、スキーマに Milvus<code translate="no">Function</code> を追加する必要があります。詳細は<a href="/docs/ja/v2.5.x/full-text-search.md">全文検索を</a>参照。</p>
 <div class="multipleCode">

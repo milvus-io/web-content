@@ -100,7 +100,7 @@ summary: >-
 <li><p><code translate="no">text</code>: Dient zur Speicherung von Textinhalten. Dieses Feld hat den Datentyp <code translate="no">VARCHAR</code> mit einer maximalen Länge von 1000 Bytes. Die Option <code translate="no">enable_analyzer</code> wird auf <code translate="no">True</code> gesetzt, um die Volltextsuche zu erleichtern.</p></li>
 <li><p><code translate="no">text_dense</code>: Dient zur Speicherung von dichten Vektoren der Texte. Dieses Feld hat den Datentyp <code translate="no">FLOAT_VECTOR</code> mit einer Vektordimension von 768.</p></li>
 <li><p><code translate="no">text_sparse</code>: Dient zur Speicherung von spärlichen Vektoren der Texte. Dieses Feld hat den Datentyp <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
-<li><p><code translate="no">image_dense</code>: Zur Speicherung von dichten Vektoren der Produktbilder. Dieses Feld hat den Datentyp <code translate="no">FLOAT_VETOR</code> mit einer Vektordimension von 512.</p></li>
+<li><p><code translate="no">image_dense</code>: Zur Speicherung von dichten Vektoren der Produktbilder. Dieses Feld hat den Datentyp <code translate="no">FLOAT_VECTOR</code> mit einer Vektordimension von 512.</p></li>
 </ul>
 <p>Da wir den eingebauten Algorithmus BM25 verwenden werden, um eine Volltextsuche im Textfeld durchzuführen, ist es notwendig, das Schema um den Milvus <code translate="no">Function</code> zu erweitern. Weitere Einzelheiten finden Sie unter <a href="/docs/de/v2.5.x/full-text-search.md">Volltextsuche</a>.</p>
 <div class="multipleCode">

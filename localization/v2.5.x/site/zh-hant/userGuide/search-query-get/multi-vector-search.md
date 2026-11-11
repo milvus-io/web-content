@@ -92,7 +92,7 @@ summary: >-
 <li><p><code translate="no">text</code>:用於儲存文字內容。此欄位的資料類型為<code translate="no">VARCHAR</code> ，最大長度為 1000 位元組。<code translate="no">enable_analyzer</code> 選項設定為<code translate="no">True</code> ，以方便全文檢索。</p></li>
 <li><p><code translate="no">text_dense</code>:用於儲存文字的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VECTOR</code> ，向量尺寸為 768。</p></li>
 <li><p><code translate="no">text_sparse</code>:用於儲存文字的稀疏向量。這個欄位的資料類型是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
-<li><p><code translate="no">image_dense</code>:用於儲存產品影像的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VETOR</code> ，向量維度為 512。</p></li>
+<li><p><code translate="no">image_dense</code>:用於儲存產品影像的密集向量。此欄位的資料類型為<code translate="no">FLOAT_VECTOR</code> ，向量維度為 512。</p></li>
 </ul>
 <p>由於我們會使用內建的 BM25 演算法來對文字欄位執行全文檢索，因此有必要在模式中加入 Milvus<code translate="no">Function</code> 。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.5.x/full-text-search.md">全文</a>檢索。</p>
 <div class="multipleCode">
