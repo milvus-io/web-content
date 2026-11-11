@@ -44,7 +44,7 @@ let request = InsertRequest::builder()
 
 - `rows: Vec<EntityRow>`
 
-    Row-oriented entities as JSON objects. `columns` and `rows` cannot both be provided. See [EntityRow](EntityRow.md).
+    Row-oriented entities as JSON objects. `columns` and `rows` cannot both be provided. Use `row()` to add one. See [EntityRow](EntityRow.md).
 
 - `rls_principal: Option<String>`
 

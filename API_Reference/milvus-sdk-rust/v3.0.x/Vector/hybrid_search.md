@@ -90,7 +90,7 @@ let request = HybridSearchRequest::builder()
 
 - `function_chains: Vec<FunctionChain>`
 
-    Function chains used to post-process the combined results. Mutually exclusive with `rerank`. See [FunctionChain](FunctionChain.md).
+    Function chains used to post-process the combined results. Mutually exclusive with `rerank`. Use `add_function_chain()` to add one. See [FunctionChain](FunctionChain.md).
 
 - `rls_principal: Option<String>`
 
@@ -120,7 +120,7 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression. See [FilterTemplateValue](FilterTemplateValue.md).
+    Placeholder values referenced by the filter expression. Use `add_filter_template()` to add one. See [FilterTemplateValue](FilterTemplateValue.md).
 
 - `limit: i64`
 

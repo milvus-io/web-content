@@ -50,7 +50,7 @@ let request = SearchRequest::builder()
 
 - `filter_templates: HashMap<String, FilterTemplateValue>`
 
-    Placeholder values referenced by the filter expression. See [FilterTemplateValue](FilterTemplateValue.md).
+    Placeholder values referenced by the filter expression. Use `add_filter_template()` to add one. See [FilterTemplateValue](FilterTemplateValue.md).
 
 - `output_fields: Vec<String>`
 
@@ -169,7 +169,7 @@ let request = SearchRequest::builder()
 
 - `function_chains: Vec<FunctionChain>`
 
-    Function chains used to post-process the search results. Mutually exclusive with `rerank`. See [FunctionChain](FunctionChain.md).
+    Function chains used to post-process the search results. Mutually exclusive with `rerank`. Use `add_function_chain()` to add one. See [FunctionChain](FunctionChain.md).
 
 - `search_aggregation: Option<SearchAggregation>`
 
