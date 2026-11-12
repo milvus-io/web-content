@@ -12,7 +12,7 @@ Constructs a VoyageRerankFunction for common use cases.
 
 ```python
 VoyageRerankFunction(
-    model_name: str = "rerank-lite-1",
+    model_name: str = "rerank-2",
     api_key: Optional[str] = None
 )
 ```
@@ -21,7 +21,7 @@ VoyageRerankFunction(
 
 - **model_name** (*string*)
 
-    The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, `voyage-law-2`, `voyage-code-2`, etc. If you leave this parameter unspecified, `voyage-2` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
+    The name of the Voyage reranker model to use for ranking. You can specify any of the available Voyage reranker model names, for example, `rerank-2`, `rerank-lite-1`, etc. If you leave this parameter unspecified, `rerank-2` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/rerank).
 
 - **api_key** (*string*)
 
@@ -34,7 +34,7 @@ from pymilvus.model.reranker import VoyageRerankFunction
 
 # Define the rerank function
 voyage_rf = VoyageRerankFunction(
-    model_name="rerank-lite-1",  # Specify the model name. Defaults to \`rerank-lite-1\`.
+    model_name="rerank-lite-1",  # Specify the model name. Defaults to \`rerank-2\`.
     api_key=VOYAGE_API_KEY # Replace with your Voyage API key
 )
 ```

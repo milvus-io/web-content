@@ -28,7 +28,7 @@ A list where each element is a NumPy array.
 
 - **ImportError**
 
-    This exception will be raised when the model2vec module is not installed.
+    This exception will be raised when the google-genai module is not installed.
 
 **EXCEPTIONS:**
 

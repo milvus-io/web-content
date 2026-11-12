@@ -95,7 +95,7 @@ A **LocalBulkWriter** object.
 
 **EXCEPTIONS:**
 
-- **SchemaNotReadyException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
     This exception will be raised when the provided schema is invalid.
 
@@ -109,7 +109,7 @@ A **LocalBulkWriter** object.
 
     The path to the output directory.
 
-- **batch_files** (*str*) -
+- **batch_files** (*list*) -
 
     A list of the generated file names.
 

@@ -12,9 +12,12 @@ Constructs an VoyageEmbeddingFunction for common use cases.
 
 ```python
 VoyageEmbeddingFunction(
-    model_name: str = "voyage-2",
+    model_name: str = "voyage-3-large",
     api_key: Optional[str] = None,
-    **kwargs
+    embedding_type: Optional[str] = None,
+    truncate: Optional[bool] = None,
+    dimension: Optional[int] = None,
+    **kwargs,
 )
 ```
 
@@ -22,11 +25,23 @@ VoyageEmbeddingFunction(
 
 - **model_name** (*string*)
 
-    The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, `voyage-law-2`, `voyage-code-2`, etc. If you leave this parameter unspecified, `voyage-2` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
+    The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, `voyage-3-large`, `voyage-code-3`, etc. If you leave this parameter unspecified, `voyage-3-large` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
 
 - **api_key** (*string*)
 
     The API key for accessing the Voyage API. For information on how to create an API key, refer to [API Key and Python Client](https://docs.voyageai.com/docs/api-key-and-installation).
+
+- **embedding_type** (*string*)
+
+    The type of embeddings to return. Valid values are **float**, **binary**, and **ubinary**. The value defaults to **None**, which returns float embeddings.
+
+- **truncate** (*bool*)
+
+    Whether to truncate the input text to fit within the model's context length. The value defaults to **None**.
+
+- **dimension** (*int*)
+
+    The number of dimensions for the output embeddings. The value defaults to the default dimension of the selected model.
 
 - **kwargs**
 
@@ -38,7 +53,7 @@ VoyageEmbeddingFunction(
 from pymilvus.model.dense import VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name="voyage-lite-02-instruct", # Defaults to \`voyage-2\`
+    model_name="voyage-lite-02-instruct", # Specify the model name
     api_key='YOUR_API_KEY' # Replace with your own Voyage API key
 )
 ```

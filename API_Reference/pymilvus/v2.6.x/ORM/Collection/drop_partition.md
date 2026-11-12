@@ -10,27 +10,12 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation drops a specified partition from the current collection.
 
+## Request Syntax
+
 ```python
 drop_partition(
     partition_name: str,
     timeout: float | None
-)
-```
-
-## Request Syntax
-
-```python
-from pymilvus import connections, Collection
-
-# Connect to localhost:19530
-connections.connect()
-
-# Get an existing collection
-collection = Collection(name="string")
-
-# drop an existing partition
-collection.drop_partition(
-    partition_name="string"
 )
 ```
 

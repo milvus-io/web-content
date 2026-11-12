@@ -35,9 +35,13 @@ connect_param = RemoteBulkWriter.AzureConnectParam(
 
 - **container_name** (*str*)
 
+    **[REQUIRED]**
+
     The name of the remote Azure blob storage container to connect to.
 
 - **conn_str** (*str*)
+
+    **[REQUIRED]**
 
     A connection string to an Azure Storage account, which can be parsed to an **account_url** and a **credential**. To generate a connection string, read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string).
 
@@ -47,7 +51,7 @@ connect_param = RemoteBulkWriter.AzureConnectParam(
 
     Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) for more info.
 
-- **credential** (*str*)
+- **credential** (*Optional[Union[str, Dict[str, str]]]*)
 
     Account access key for the account. Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) for more info.
 

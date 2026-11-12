@@ -41,6 +41,12 @@ transfer_replica(
 
     Setting this to a resource group that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
+- **collection_name** (*str*) -
+
+    **[REQUIRED]**
+
+    The name of the collection whose replicas are to be transferred.
+
 - **num_replicas** (*int*) -
 
     **[REQUIRED]**
@@ -81,7 +87,7 @@ None.
 
     This exception will be raised when any error occurs during this operation.
 
-**EXAMPLE:**
+## Example
 
 ```python
 from pymilvus import (

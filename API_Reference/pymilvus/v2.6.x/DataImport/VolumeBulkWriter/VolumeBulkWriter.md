@@ -126,6 +126,16 @@ Raised when the server rejects the request or the RPC fails. Inspect the server 
 
         The remote path in the volume that holds the uploaded data.
 
+## Properties
+
+- **data_path** (*str*)
+
+    The remote path in the volume that holds the uploaded data.
+
+- **batch_files** (*list*)
+
+    A list of the uploaded file names.
+
 ## Example
 
 ```python

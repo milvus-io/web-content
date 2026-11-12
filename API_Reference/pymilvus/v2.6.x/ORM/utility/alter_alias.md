@@ -21,17 +21,6 @@ alter_alias(
 )
 ```
 
-```python
-from pymilvus import utility
-
-# Alter collection alias
-alter_alias(
-    collection_name="string",
-    alias="string",
-    using="default"
-)
-```
-
 **PARAMETERS:**
 
 - **collection_name** (*str*) -

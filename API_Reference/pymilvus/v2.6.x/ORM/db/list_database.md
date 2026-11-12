@@ -10,19 +10,13 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 This operation returns a list of database names from the connected Milvus instance.
 
+## Request Syntax
+
 ```python
 list_database(
     using: str,
     timeout: float | None
 )
-```
-
-## Request Syntax
-
-```python
-from pymilvus import db
-
-db.list_database()
 ```
 
 **PARAMETERS:**

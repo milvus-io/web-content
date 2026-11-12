@@ -20,30 +20,8 @@ An upsert is a data-level operation that will overwrite an existing entity if a 
 
 ```python
 upsert(
-    data: List | pandas.DataFrame | Dict,, 
-    timeout=float | None
-)
-```
-
-```python
-from pymilvus import connections, Collection, Partition
-
-# Connect to localhost:19530
-connections.connect()
-
-# Get an existing collection
-collection = Collection(name="string")
-
-# Get an existing partition
-partition = Partition(name="string")
-
-# Prepare your data
-data = ...
-
-# Upsert data into partition
-partition.upsert(
-    data=data,
-    timeout=None
+    data: List | pandas.DataFrame | Dict,
+    timeout: float | None
 )
 ```
 

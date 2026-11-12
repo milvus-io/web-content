@@ -24,8 +24,7 @@ search(
     timeout: float | None,
     round_decimal: int,
     ranker: Optional[Union[Function, FunctionScore]] = None,
-    highlighter: Optional[Highlighter] = None,
-    search_aggregation: Optional[SearchAggregation] = None
+    highlighter: Optional[Highlighter] = None
 )
 ```
 
@@ -122,10 +121,6 @@ search(
 - **highlighter** (*Highlighter* | *None*) -
 
     The highlighter used to annotate matching terms in the returned text fields. See [LexicalHighlighter](../../MilvusClient/Vector/Highlighter/LexicalHighlighter.md) and [SemanticHighlighter](../../MilvusClient/Vector/Highlighter/SemanticHighlighter.md) for details.
-
-- **search_aggregation** (*Optional[SearchAggregation]*) -
-
-    Hierarchical bucket aggregation spec. Mutually exclusive with **group_by_field**. When set, **limit** is ignored and the root `SearchAggregation.size` controls the top-level bucket count.
 
 - **consistency_level** (*str*) -
 

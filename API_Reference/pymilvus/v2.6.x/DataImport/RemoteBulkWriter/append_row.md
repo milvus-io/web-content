@@ -12,7 +12,8 @@ This operation appends records to the writer.
 
 ```python
 append_row(
-    row: dict
+    row: dict,
+    **kwargs
 )
 ```
 
