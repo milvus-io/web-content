@@ -36,7 +36,7 @@ new MilvusClient(config: ClientConfig)
         http://localhost:19530
         ```
 
-    - **_SKIPCONNECT__** (*boolean*) -
+    - **__SKIP_CONNECT__** (*boolean*) -
 
         A boolean value indicating whether to skip the connection or not. 
 
@@ -96,12 +96,6 @@ new MilvusClient(config: ClientConfig)
 
         A generic poll option, which abides by the rules specified in [this repo](https://github.com/coopernurse/node-pool).
 
-    - **protoFilePath** (*protoFilePath*) -
-
-        - **milvus** (*string*) -
-
-        - **schema** (*string*) -
-
     - **retryDelay** (*number*) -
 
         The interval between retry attempts.
@@ -150,7 +144,7 @@ new MilvusClient(config: ClientConfig)
 
             Whether to skip the checks against the provided certificates. Setting it `true` indicates a skip.
 
-        - **verifyOptions** (*string*) -
+        - **verifyOptions** (*Record<string, any>*) -
 
             The verification options.
 
@@ -161,6 +155,10 @@ new MilvusClient(config: ClientConfig)
     - **trace** (*boolean*) -
 
         Whether to enable tracing. 
+
+    - **isGlobal** (*boolean*) -
+
+        Explicitly enables or disables global cluster mode. When `true`, the SDK fetches topology from the endpoint and routes to the primary cluster. When omitted, it is auto-detected from the address URI.
 
     - **username** (*string*) -
 

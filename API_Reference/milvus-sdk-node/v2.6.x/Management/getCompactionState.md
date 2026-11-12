@@ -64,7 +64,7 @@ The number of plans that completed successfully.
 - **failedPlanNo** (*string*) -
 The number of plans that failed.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -41,11 +41,11 @@ await milvusClient.getIndexState({
 
 - **index_name** (*string*) -
 
-    The name of the target index. This parameter and `field_name` are mutually exclusive. 
+    The name of the target index. Optional.
 
 - **field_name** (*string*) -
 
-    The name of the target field. This parameter and `index_name` are mutually exclusive. When you use this parameter, ensure that an index has been built upon the specified field.
+    The name of the target field. Optional. When you use this parameter, ensure that an index has been built upon the specified field.
 
 - **timeout** (number) -
 
@@ -69,7 +69,7 @@ This method returns a promise that resolves to a **GetIndexStateResponse** objec
 - **state** (*IndexState*) -
 The current build state of the index. Possible values are **IndexStateNone**, **Unissued**, **InProgress**, **Finished**, and **Failed**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

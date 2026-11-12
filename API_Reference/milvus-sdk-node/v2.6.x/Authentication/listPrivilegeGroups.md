@@ -49,7 +49,7 @@ A list of privilege groups defined in the current Milvus instance.
 
         The privileges contained in the group.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

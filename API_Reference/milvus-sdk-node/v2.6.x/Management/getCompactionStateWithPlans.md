@@ -58,7 +58,7 @@ A list of merge plans dispatched by the compaction.
 
         The new segment ID produced by the merge.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

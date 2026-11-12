@@ -61,7 +61,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 A list of index descriptions for the requested index. Each entry includes **indexed_rows** and **total_rows**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -64,7 +64,7 @@ A list of **RoleResult** objects. For `describeRole()`, this list contains a sin
 
         A list of grants attached to this role. Each entry includes the granted privilege, the target object, and the user who granted it.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

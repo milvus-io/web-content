@@ -56,7 +56,7 @@ await milvusClient.createCollection({
 
     This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
-- **consistency_level** (*number* | *string*)
+- **consistency_level** (*string*)
 
     The consistency level of the target collection.
 
@@ -82,15 +82,19 @@ await milvusClient.createCollection({
 
     The value defaults to **True**, indicating that the meta field is used.
 
+- **enableDynamicField** (*boolean)* -
+
+    An alias of **enable_dynamic_field**.
+
 - **id_type** (*Int64* | *VarChar*) -
 
     The data type of the primary field.
 
-- **index_params** (*CreatIndexParam*) -
+- **index_params** (*CreateIndexParam*) -
 
     The index parameters for the collection to create.
 
-- **metric_type** (*string*) -
+- **metric_type** (*string* | *MetricType*) -
 
     The metric type determines how similarities between vector embeddings are measured.
 
@@ -199,6 +203,10 @@ await milvusClient.createCollection({
 
     The value defaults to **True**, indicating that the meta field is used.
 
+- **enableDynamicField** (*boolean)* -
+
+    An alias of **enable_dynamic_field**.
+
 - **schema** ([FieldType](FieldType.md)[]) -
 
     The schema of the collection as a list of field definitions.
@@ -228,6 +236,10 @@ await milvusClient.createCollection({
     - **output_field_names** (*string[]*)
 
         The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+
+    - **params** (*Record<string, any>*)
+
+        The parameters of the function.
 
 - **num_partitions** (*number)* -
 
@@ -401,6 +413,10 @@ await milvusClient.createCollection({
 
     The value defaults to **True**, indicating that the meta field is used.
 
+- **enableDynamicField** (*boolean)* -
+
+    An alias of **enable_dynamic_field**.
+
 - **schema** ([FieldType](FieldType.md)[]) -
 
     The schema of the collection as a list of field definitions.
@@ -431,6 +447,10 @@ await milvusClient.createCollection({
 
         The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
+    - **params** (*Record<string, any>*)
+
+        The parameters of the function.
+
 - **num_partitions** (*number)* -
 
     The number of partitions to create in the collection.
@@ -441,9 +461,9 @@ await milvusClient.createCollection({
 
     </div>
 
-- **partition_key_field** (*boolean)* -
+- **partition_key_field** (*string*) -
 
-    A boolean value indicating whether to enable partition key.
+    The name of the field that serves as the partition key.
 
     <div class="alert note">
     

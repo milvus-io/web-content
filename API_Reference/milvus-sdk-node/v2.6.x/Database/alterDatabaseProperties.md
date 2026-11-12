@@ -11,7 +11,7 @@ await milvusClient.alterDatabaseProperties(data)
 ```javascript
 await milvusClient.alterDatabaseProperties({
     db_name: string,
-    delete_keys: Object,
+    delete_keys: string[],
     properties: Record<string, string | number | boolean>
     timeout?: number
 })
@@ -25,7 +25,7 @@ await milvusClient.alterDatabaseProperties({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **delete_properties** (*string[]*) -
+- **delete_keys** (*string[]*) -
 
     Names of the properties to drop in an array. Possible database properties are as follows:
 
@@ -131,7 +131,7 @@ const milvusClient = new MilvusClient({
 });
 const resStatus = await milvusClient.alterDatabaseProperties({ 
     db_name: 'new_db',
-    delete_properties: {'database.replica.number': 3} 
+    delete_keys: ['database.replica.number'] 
 });
 ```
 

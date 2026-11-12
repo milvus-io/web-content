@@ -9,15 +9,35 @@ await milvusClient.runAnalyzer(data)
 ## Request Syntax
 
 ```javascript
-milvusClient({
-    analyzer_params: Record<string, any>,
+milvusClient.runAnalyzer({
+    analyzer_params?: Record<string, any>,
     text: string | string[],
-    with_detail: boolean,
-    with_hash: boolean
+    with_detail?: boolean,
+    with_hash?: boolean,
+    db_name?: string,
+    collection_name?: string,
+    field_name?: string,
+    analyzer_names?: string[],
 })
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the collection.
+
+- **collection_name** (*string*) -
+
+    The name of the collection.
+
+- **field_name** (*string*) -
+
+    The name of the field to analyze.
+
+- **analyzer_names** (*string[]*) -
+
+    The names of the analyzers to use.
 
 - **analyzer_params** (*Record<string, any>*) -
 
@@ -81,31 +101,7 @@ The tokenization output. When **text** is a single string, this list has one ent
 
         The token hash, populated when the request set **with_hash** to **true**.
 
-        - **token** (*string*) -
-
-            The token text.
-
-        - **start_offset** (*number*) -
-
-            The zero-based character offset where the token begins in the input.
-
-        - **end_offset** (*number*) -
-
-            The zero-based character offset immediately after the token.
-
-        - **position** (*number*) -
-
-            The token position in the stream, used by phrase queries.
-
-        - **position_length** (*number*) -
-
-            The number of stream positions the token spans.
-
-        - **hash** (*number*) -
-
-            The token hash, populated when the request set **with_hash** to **true**.
-
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -
@@ -125,4 +121,20 @@ A **ResStatus** object.
 - **Error**
 
     This exception is raised when any error occurs during this operation.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await milvusClient.runAnalyzer({
+    text: "Hello Milvus",
+    analyzer_params: { type: "standard" }
+});
+```
 

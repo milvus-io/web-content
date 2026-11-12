@@ -10,6 +10,8 @@ await milvusClient.loadBalance(data: LoadBalanceReq)
 
 ```javascript
 await milvusClient.loadBalance({
+    collectionName?: string,
+    db_name?: string,
     src_nodeID: number,
     dst_nodeIDs?: number[],
     sealed_segmentIDs?: number[],
@@ -18,6 +20,14 @@ await milvusClient.loadBalance({
 ```
 
 **PARAMETERS:**
+
+- **collectionName** (*string*) -
+
+    The name of the collection to balance. Optional.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection. Optional.
 
 - **src_nodeID** (*number*) -
 
@@ -40,6 +50,20 @@ await milvusClient.loadBalance({
 **RETURNS:**
 
 *Promise<ResStatus>*
+
+**PARAMETERS:**
+
+- **code** (*number*) -
+
+    A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+- **error_code** (*string* | *number*) -
+
+    An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+- **reason** (*string*) -
+
+    The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 **EXCEPTIONS:**
 

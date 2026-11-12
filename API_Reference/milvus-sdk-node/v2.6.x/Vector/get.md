@@ -10,7 +10,7 @@ await milvusClient.get(data)
 
 ```javascript
 await milvusClient.get({
-   db_name: string,
+   db_name?: string,
    collection_name: string,
    consistency_level?: ConsistencyLevelEnum,
    ids: string[] | number[],
@@ -94,7 +94,8 @@ This method returns a promise that resolves to a **QueryResults** object.
 - **data** (*Record<string, any>[]*) -
 The rows whose primary keys match the supplied **ids**. Each entry is keyed by field name and carries the value for every requested **output_fields** entry plus the primary key.
 
-- **ResStatus**
+- **status** (*ResStatus*)
+
 A **ResStatus** object.
 
     - **code** (*number*) -

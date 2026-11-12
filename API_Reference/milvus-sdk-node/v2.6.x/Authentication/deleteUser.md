@@ -8,8 +8,6 @@ await milvusClient.deleteUser(data)
 
 ## Request Syntax
 
-This method has the following alternatives.
-
 ```javascript
 await milvusClient.deleteUser({
     username: string,

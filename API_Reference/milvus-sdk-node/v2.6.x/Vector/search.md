@@ -30,7 +30,7 @@ await milvusClient.search({
   hints?: string;
   round_decimal?: number;
   transformers?: OutputTransformers;
-  rerank?: RankerObj | FunctionObject | FunctionScore;
+  rerank?: RerankerObj | FunctionObject | FunctionScore;
 })
 ```
 
@@ -195,7 +195,7 @@ await milvusClient.search({
 
     A custom function to convert data for the following data types.
 
-- **rerank** (RerankerObj* | *FunctionObject \ [FunctionScore](FunctionScore.md)) -
+- **rerank** (*RerankerObj* | *FunctionObject* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy with its custom parameters. You can either use a **RerankerObj**, a **FunctionObject**, or a **FunctionScore**.
 

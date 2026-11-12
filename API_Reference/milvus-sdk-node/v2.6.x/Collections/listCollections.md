@@ -63,7 +63,7 @@ A list of hybrid timestamps indicating when each collection was created.
 - **created_utc_timestamps** (*string[]*) -
 A list of UTC timestamps indicating when each collection was created.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

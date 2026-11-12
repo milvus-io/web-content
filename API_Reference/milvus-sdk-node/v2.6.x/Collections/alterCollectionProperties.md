@@ -28,7 +28,7 @@ await milvusClient.alterCollectionProperties({
 
     **[REQUIRED]**
 
-    The name of the target collection to reassign an alias to.
+    The name of the target collection.
 
 - **delete_keys** (*string[]*) -
 
@@ -96,7 +96,7 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const resStatus = await milvusClient.alterCollection({
+const resStatus = await milvusClient.alterCollectionProperties({
     collection_name: 'my-collection',
     properties: {"collection.ttl.seconds": 18000}
 });

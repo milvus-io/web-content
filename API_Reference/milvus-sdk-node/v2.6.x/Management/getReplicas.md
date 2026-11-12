@@ -10,6 +10,8 @@ await milvusClient.getReplicas(data: GetReplicaReq)
 
 ```javascript
 await milvusClient.getReplicas({
+    collection_name?: string,
+    db_name?: string,
     collectionID: number | string,
     with_shard_nodes?: boolean,
     timeout?: number,
@@ -17,6 +19,14 @@ await milvusClient.getReplicas({
 ```
 
 **PARAMETERS:**
+
+- **collection_name** (*string*) -
+
+    The name of the collection. Optional.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection. Optional.
 
 - **collectionID** (*number | string*) -
 
@@ -82,22 +92,6 @@ A list of replicas currently serving the requested collection.
 
         The query node IDs that hold this shard's data.
 
-        - **leaderID** (*string*) -
-
-            The query node ID acting as the shard leader.
-
-        - **leader_addr** (*string*) -
-
-            The address of the leader query node.
-
-        - **dm_channel_name** (*string*) -
-
-            The DML channel served by this shard.
-
-        - **node_ids** (*string[]*) -
-
-            The query node IDs that hold this shard's data.
-
     - **node_ids** (*string[]*) -
 
         The query node IDs that participate in this replica.
@@ -110,7 +104,7 @@ A list of replicas currently serving the requested collection.
 
         The count of outbound nodes per resource group, used during rebalancing.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

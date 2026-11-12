@@ -21,6 +21,8 @@ await milvusClient.upsert({
     partial_update,
     field_ops,
     partition_name,
+    transformers,
+    skip_check_schema,
     timeout,
 })
 ```
@@ -75,6 +77,14 @@ await milvusClient.upsert({
 
     The partition into which the entities are upserted.
 
+- **transformers** (*InsertTransformers*) -
+
+    Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
+
+- **skip_check_schema** (*boolean*) -
+
+    Whether to skip the schema check before the upsert.
+
 - **timeout** (*number*) -
 
     The RPC timeout in milliseconds. When omitted, the client waits until the operation completes or fails.
@@ -84,6 +94,70 @@ await milvusClient.upsert({
 *Promise<MutationResult>*
 
 Returns the mutation result, including the operation status and counts for the affected entities.
+
+```javascript
+{
+    succ_index: number[],
+    err_index: number[],
+    acknowledged: boolean,
+    insert_cnt: string,
+    delete_cnt: string,
+    upsert_cnt: string,
+    timestamp: string,
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
+    status:  ResStatus
+}
+```
+
+**PARAMETERS:**
+
+- **succ_index** (*number[]*) -
+
+    The zero-based positions in the input data of rows that were successfully upserted.
+
+- **err_index** (*number[]*) -
+
+    The zero-based positions of rows that were rejected. When all rows succeed, this list is empty.
+
+- **acknowledged** (*boolean*) -
+
+    Whether the write was acknowledged by Milvus.
+
+- **insert_cnt** (*string*) -
+
+    The number of rows inserted, formatted as a string.
+
+- **delete_cnt** (*string*) -
+
+    The number of rows deleted by this operation. For `upsert()` this remains **"0"**.
+
+- **upsert_cnt** (*string*) -
+
+    The number of rows upserted by this operation.
+
+- **timestamp** (*string*) -
+
+    The hybrid timestamp at which the write became visible. Use this value for time-travel queries.
+
+- **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
+
+    The primary keys assigned to the upserted rows.
+
+- **status** (*ResStatus*)
+
+    A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 **EXCEPTIONS:**
 

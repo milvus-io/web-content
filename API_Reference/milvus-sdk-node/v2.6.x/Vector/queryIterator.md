@@ -38,7 +38,15 @@ await milvusClient.queryIterator({
 
 - **filter** (*string*) -
 
-    A scalar filtering condition to filter matching entities. Set to an empty string to return all entities. To build a scalar filtering condition, refer to Boolean Expression Rules.
+    A scalar filtering condition to filter matching entities. Set to an empty string to return all entities. To build a scalar filtering condition, refer to Boolean Expression Rules. You can use `expr` as an alias of this parameter.
+
+- **exprValues** (*keyValueObj*) -
+
+    Placeholder values for a templated filter expression.
+
+- **transformers** ([OutputTransformers](OutputTransformers.md)) -
+
+    Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
 
 - **limit** (*number*) -
 

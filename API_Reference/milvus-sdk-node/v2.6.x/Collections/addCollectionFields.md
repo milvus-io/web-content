@@ -3,7 +3,7 @@
 This operation adds a list of new scalar fields to an existing collection without recreating it. These fields become available almost immediately with minimal delay due to internal schema synchronization.
 
 ```javascript
-await milvusClient.addCollectionFields(data: AddCollectionFieldReq)
+await milvusClient.addCollectionFields(data: AddCollectionFieldsReq)
 ```
 
 <div class="alert note">
@@ -18,7 +18,7 @@ If the collection has the dynamic field enabled and you add a static field with 
 await milvusClient.addCollectionFields({
     collection_name: string,
     db_name?: string,
-    field: FieldType,
+    fields: FieldType[],
     timeout?: number
 })
 ```

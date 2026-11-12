@@ -13,6 +13,7 @@ await milvusClient.renameCollection({
    db_name: string,
    collection_name: string,
    new_collection_name: string,
+   new_db_name: string,
    timeout?: number
  })
 ```
@@ -34,6 +35,10 @@ await milvusClient.renameCollection({
     **[REQUIRED]**
 
     The name of the target collection after this operation.
+
+- **new_db_name** (*string*) -
+
+    The new name of the database to move the collection to.
 
 - **timeout** (*number*) -
 

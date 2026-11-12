@@ -9,7 +9,7 @@ await milvusClient.createResourceGroup(data)
 ## Request Syntax
 
 ```javascript
-await milvusClient.updateResourceGroup({
+await milvusClient.updateResourceGroups({
     resource_groups: {{ [key: string]: ResourceGroupConfig }},
     timeout?: number
 })
@@ -71,15 +71,15 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const configs: ResourceGroupConfig = {
+const config: ResourceGroupConfig = {
     requests: { node_num: 1 },
     limits: { node_num: 10000 },
     transfer_from: [{ resource_group: DEFAULT_RESOURCE_GROUP }],
     transfer_to: [{ resource_group: DEFAULT_RESOURCE_GROUP }]
 }
 
-const resStatus = await milvusClient.updateResourceGroup({ 
-    my_rg: configs
+const resStatus = await milvusClient.updateResourceGroups({ 
+    resource_groups: { my_rg: config }
 });
 ```
 

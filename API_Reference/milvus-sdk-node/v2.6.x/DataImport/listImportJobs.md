@@ -10,11 +10,18 @@ await milvusClient.listImportJobs(params: HttpBaseReq)
 
 ```javascript
 await milvusClient.listImportJobs({
+    collectionName: string,
     dbName?: string,
 })
 ```
 
 **PARAMETERS:**
+
+- **collectionName** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of the collection the import jobs belong to.
 
 - **dbName** (*string*) -
 

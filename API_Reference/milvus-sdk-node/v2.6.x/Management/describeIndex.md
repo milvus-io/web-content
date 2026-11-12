@@ -97,7 +97,7 @@ A list of index descriptions for the requested collection. When **field_name** o
 
         The number of rows still waiting to be indexed.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -38,6 +38,6 @@ This method returns nothing.
 ## Example
 
 ```javascript
-connect(2.3.5)
+connect('2.3.5')
 ```
 

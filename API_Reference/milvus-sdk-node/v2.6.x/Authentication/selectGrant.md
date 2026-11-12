@@ -61,7 +61,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
     A list of grant entities describing the privileges granted to the role.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 
     A **ResStatus** object.
 

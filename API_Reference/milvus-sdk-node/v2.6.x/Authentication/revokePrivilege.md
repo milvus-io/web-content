@@ -13,7 +13,8 @@ await milvusClient.revokePrivilege({
    roleName: string,
    object: RbacObjects,
    objectName: string,
-   privilegeName: PrivilegesTypes
+   privilegeName: PrivilegesTypes,
+   db_name?: string
  })
 ```
 
@@ -66,11 +67,11 @@ await milvusClient.revokePrivilege({
        </tr>
        <tr>
          <td><p>GlobalPrivileges</p></td>
-         <td><p>All, CreatAlias, CreateCollection, CreateDatabase, CreateOwnership, CreateResourceGroup, DescribeAlias, DescribeCollection, DescribeResourceGroup, DropAlias, DropCollection, DropDatabase, DropOwnership, DropResourceGroup, FlushAll, ListAliases, ListDatabases, ListResourceGroups, ManageOwnership, RenameCollection, SelectOwnership, ShowCollections, TransferNode, TransferReplica.</p></td>
+         <td><p>All, CreateAlias, CreateCollection, CreateDatabase, CreateOwnership, CreateResourceGroup, DescribeAlias, DescribeCollection, DescribeResourceGroup, DropAlias, DropCollection, DropDatabase, DropOwnership, DropResourceGroup, FlushAll, ListAliases, ListDatabases, ListResourceGroups, ManageOwnership, RenameCollection, SelectOwnership, ShowCollections, TransferNode, TransferReplica.</p></td>
        </tr>
        <tr>
          <td><p>CollectionPrivileges</p></td>
-         <td><p>Compaction, CreateIndex, CreatePartition, Delete, DropIndex, Drop Partition, Flush, GetFlushState, GetLoadState, GetLoadingProgress, GetStatistics, HasPartition, Import, IndexDetails, Insert, Load, LoadBalance, Query, Release, Search, ShowPartitions, Upsert</p></td>
+         <td><p>Compaction, CreateIndex, CreatePartition, Delete, DropIndex, DropPartition, Flush, GetFlushState, GetLoadState, GetLoadingProgress, GetStatistics, HasPartition, Import, IndexDetail, Insert, Load, LoadBalance, Query, Release, Search, ShowPartitions, Upsert</p></td>
        </tr>
        <tr>
          <td><p>UserPrivileges</p></td>
@@ -79,6 +80,10 @@ await milvusClient.revokePrivilege({
     </table>
 
     For details, refer to the **Privilege name** column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+
+- **db_name** (*string*) -
+
+    The name of the database the privileges apply to.
 
 - **timeout** (*float* | *None*)  
 

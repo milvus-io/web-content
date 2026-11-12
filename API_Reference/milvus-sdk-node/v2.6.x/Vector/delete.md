@@ -14,11 +14,11 @@ This method has the following alternatives.
 
 ```javascript
 await milvusClient.delete({
-   db_name: string,
+   db_name?: string,
    collection_name: string,
    partition_name?: string,
    ids: string[] | number[],
-   consistency_level: string,
+   consistency_level?: string,
    timeout?: number
  })
 ```
@@ -57,6 +57,56 @@ await milvusClient.delete({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+### With DeleteByFilterReq
+
+```javascript
+await milvusClient.delete({
+   db_name?: string,
+   collection_name: string,
+   partition_name?: string,
+   filter: string,
+   exprValues?: keyValueObj,
+   consistency_level?: string,
+   timeout?: number
+ })
+```
+
+**PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
+
+- **collection_name** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of an existing collection.
+
+- **partition_name** (*string*) -
+
+    The name of an existing partition in the collection.
+
+- **filter** (*string*) -
+
+    **[REQUIRED]**
+
+    A boolean expression used to filter the entities to delete.
+
+- **exprValues** (*keyValueObj*) -
+
+    Template values for the filter expression, for example `{ key: 'value' }`.
+
+- **consistency_level** (*ConsistencyLevelEnum*) -
+
+    The consistency level of the target collection.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation.
+
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
 **RETURNS:**
 
 *Promise<MutationResult>*
@@ -72,7 +122,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```
@@ -100,11 +150,12 @@ Always **"0"** for `delete()`.
 - **timestamp** (*string*) -
 The hybrid timestamp at which the delete became visible.
 
-- **IDs** (StringArrayId* | *[NumberArrayId](NumberArrayId.md)) -
+- **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
 
 The primary keys that were targeted by this delete. For the full field reference, refer to the `insert()` doc.
 
-- **ResStatus**
+- **status** (*ResStatus*)
+
 A **ResStatus** object.
 
     - **code** (*number*) -

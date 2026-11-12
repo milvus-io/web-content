@@ -10,9 +10,9 @@ await milvusClient.revokeRole(data)
 
 ```javascript
 await milvusClient.revokeRole({
-   username: string,
-   roleName: string，
-   timeout?: number
+    username: string,
+    roleName: string,
+    timeout?: number
  })
 ```
 
@@ -74,7 +74,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-await milvusClient.removeUserFromRole({
+await milvusClient.revokeRole({
    username: 'my',
    roleName: 'myrole'
  });

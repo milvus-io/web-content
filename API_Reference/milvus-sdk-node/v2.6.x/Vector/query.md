@@ -10,7 +10,7 @@ await milvusClient.query(data)
 
 ```javascript
  milvusClient.query({
-    db_name: string,
+    db_name?: string,
     collection_name: string,
     partition_names?: string[];
     output_fields?: string[];
@@ -53,7 +53,13 @@ await milvusClient.query(data)
 
     A scalar filtering condition to filter matching entities. 
 
+    You can use `expr` as an alias of this parameter.
+
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+
+- **transformers** ([OutputTransformers](OutputTransformers.md)) -
+
+    Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
 
 - **offset** (*number*) -
 
@@ -99,16 +105,14 @@ This method returns a promise that resolves to a **QueryResults** object.
 
 ```javascript
 {
-    data: {
-        [x: string]: any
-    },
+    data: Record<string, any>[],
     status: object
 }
 ```
 
 **PARAMETERS:**
 
-- **data** (*object*) -
+- **data** (*Record<string, any>[]*) -
 
     The query results.
 

@@ -11,6 +11,7 @@ await milvusClient.listGrants(data)
 ```javascript
  milvusClient.listGrants({
    roleName: 'roleName',
+   db_name?: string
  });
 ```
 
@@ -21,6 +22,10 @@ await milvusClient.listGrants(data)
     The target role name
 
     Setting this to the name of a non-existing role may result in errors.
+
+- **db_name** (*string*) -
+
+    The name of the database the privileges apply to.
 
 **RETURNS:**
 
@@ -41,7 +46,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
 A list of grants attached to the requested role. Each entry pairs a privilege with the target object and the principal that granted it. For the full **GrantEntity** field reference, refer to the `describeRole()` doc.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

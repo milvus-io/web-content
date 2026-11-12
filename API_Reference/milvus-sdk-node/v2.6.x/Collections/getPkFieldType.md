@@ -11,6 +11,8 @@ await milvusClient.getPkFieldType(data: DescribeCollectionReq)
 ```javascript
 getPkFieldType({
     collection_name: string,
+    db_name?: string,
+    cache?: boolean,
     timeout: number
 })
 ```
@@ -22,6 +24,14 @@ getPkFieldType({
     **[REQUIRED]**
 
     The name of the collection.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the collection.
+
+- **cache** (*boolean*) -
+
+    Whether to use the collection cache. When `true`, the cached schema is returned.
 
 - **timeout** (*number*) -
 

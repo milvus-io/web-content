@@ -9,10 +9,11 @@ await milvusClient.listGrant(data)
 ## Request Syntax
 
 ```javascript
- milvusClient.listGrants({
+ milvusClient.listGrant({
    roleName: 'roleName',
    object: 'Collection',
-   objectName: '*'
+   objectName: '*',
+   db_name?: string
  });
 ```
 
@@ -31,6 +32,10 @@ await milvusClient.listGrant(data)
 - **objectName** (*string*)
 
     The name of a specific object in the specified object group. Using a wildcard (*) indicates that all privileges in the specified group are to be granted.
+
+- **db_name** (*string*) -
+
+    The name of the database the privileges apply to.
 
 - **timeout** (*number*) 
 
@@ -54,6 +59,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
         }
     ],
     "status": ResStatus
+}
 ```
 
 **PARAMETERS:**
@@ -64,7 +70,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
 - **status** (*ResStatus*) -
 
-    A **ResStatus object.
+    A **ResStatus** object.
 
     - **code** (*number*) -
 

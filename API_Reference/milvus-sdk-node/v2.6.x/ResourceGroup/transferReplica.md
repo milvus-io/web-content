@@ -13,6 +13,7 @@ await milvusClient.transferReplica({
     source_resource_group: string,
     target_resource_group: string,
     collection_name: string,
+    db_name?: string,
     num_replica: number
     timeout?: number
 })
@@ -31,6 +32,10 @@ await milvusClient.transferReplica({
 - **collection_name** (*str*) -
 
     Name of the collection whose replicas will be transferred.
+
+- **db_name** (*string*) -
+
+    Name of the database that holds the target collection.
 
 - **num_replica** (*int*) -
 

@@ -49,7 +49,8 @@ The metrics payload returned by the targeted component. The shape depends on the
 - **component_name** (*string*) -
 The component that produced the metrics (for example, **rootcoord**, **querynode**, **datanode**).
 
-- **ResStatus**
+- **status** (*ResStatus*)
+
 A **ResStatus** object.
 
     - **code** (*number*) -

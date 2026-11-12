@@ -9,7 +9,7 @@ await milvusClient.restoreRBAC(data)
 ## Request Syntax
 
 ```javascript
-await milvusClient.backupRBAC({
+await milvusClient.restoreRBAC({
     RBAC_meta: RBACMeta,
     timeout?: number
 })

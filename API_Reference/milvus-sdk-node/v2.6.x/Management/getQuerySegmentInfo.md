@@ -98,7 +98,7 @@ A list of segment-level descriptors for the segments currently held by query nod
 
         The storage format version of the segment.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -
