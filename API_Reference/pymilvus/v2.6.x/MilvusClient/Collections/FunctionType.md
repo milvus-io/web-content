@@ -25,6 +25,10 @@ class FunctionType(IntEnum):
 
     Sets the function type to **RERANK**. This indicates that Milvus will use a ranker to rerank candidates for improved search performance.
 
+- **MINHASH** (4)
+
+    Sets the function type to **MINHASH**. This indicates that Milvus will use the MinHash algorithm to generate a binary vector embedding for a designated `VARCHAR` field.
+
 ## Example
 
 ```python

@@ -19,16 +19,6 @@ get_server_version(
 )
 ```
 
-```python
-from pymilvus import connections, utility
-
-# Establish a connection
-connections.connect(...)
-
-# Check the server version
-server_version = utility.get_server_version()
-```
-
 **PARAMETERS:**
 
 - **using** (*str*) - 

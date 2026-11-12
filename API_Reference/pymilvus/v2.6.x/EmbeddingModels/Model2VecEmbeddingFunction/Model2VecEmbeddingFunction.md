@@ -11,7 +11,7 @@ pymilvus.model.dense.Model2VecEmbeddingFunction
 Constructs an Model2VecEmbeddingFunction for common use cases.
 
 ```python
-model.dense.Model2VecEmbeddingFunction(
+Model2VecEmbeddingFunction(
     model_source: Union[str, Path] = "minishlab/potion-base-8M",
     **kwargs
 )

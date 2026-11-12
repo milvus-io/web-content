@@ -14,7 +14,6 @@ This operation drops a specified [collection ](../Collection/Collection.md)alias
 
 ```python
 drop_alias(
-    collection_name: str,
     alias: str,
     using: str,
     timeout: float | None

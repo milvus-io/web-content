@@ -15,7 +15,7 @@ This operation lists all bulk-insert tasks.
 ```python
 list_bulk_insert_tasks(
     limit: int = 0,
-    collection_name: list[str] | None,
+    collection_name: str | None,
     timeout: float | None,
     using: str = "default",
 )

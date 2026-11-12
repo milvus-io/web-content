@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [Model2VecEmbeddingFunction](../Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [GeminiEmbeddingFunction](GeminiEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **[GeminiEmbeddingFunction()](GeminiEmbeddingFunction.md)** method of Model2VecEmbeddingFunction shares the same functionality as [encode_documents()](../Model2VecEmbeddingFunction/encode_documents.md) and [encode_queries()](../Model2VecEmbeddingFunction/encode_queries.md).
+The **\_\_call\_\_()** method of GeminiEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request Syntax
 
@@ -34,7 +34,7 @@ A list where each element is a NumPy array.
 
 - **ImportError**
 
-    This exception will be raised when the model2vec module is not installed.
+    This exception will be raised when the google-genai module is not installed.
 
 **EXCEPTIONS:**
 

@@ -109,43 +109,9 @@ A **MutationResult** object that contains the following fields:
 
 **EXCEPTIONS:**
 
-- A **MutationResult** object that contains the following fields:
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
-    - **insert_count** (*int*)
-
-        The count of inserted entities.
-
-    - **delete_count** (*int*)
-
-        The count of deleted entities.
-
-    - **upsert_count** (*int*)
-
-        The count of upserted entities.
-
-    - **succ_count** (*int*)
-
-        The count of successful executions during this operation.
-
-    - **succ_index** (*list*)
-
-        A list of index numbers starting from 0, each indicating a successful operation.
-
-    - **err_count** (*int*)
-
-        The count of failed executions during this operation.
-
-    - **err_index** (*list*)
-
-        A list of index numbers starting from 0, each indicating a failed operation.
-
-    - **primary_keys** (*list*)
-
-        A list of primary keys for the inserted entities.
-
-    - **timestamp** (*int*)
-
-        The timestamp at which this operation is completed.
+    This exception will be raised when any error occurs during this operation.
 
 ## Example
 

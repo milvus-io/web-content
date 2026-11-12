@@ -43,7 +43,9 @@ writer = RemoteBulkWriter(
 
     The path to the directory that is to hold the rewritten data.
 
-- **connect_param** (*[ConnectParam](S3ConnectParam.md)*) -
+- **connect_param** (*[ConnectParam](S3ConnectParam.md) or [AzureConnectParam](AzureConnectParam.md)*) -
+
+    **[REQUIRED]**
 
     The parameters used to connect to a remote bucket.
 
@@ -100,9 +102,9 @@ A **RemoteBulkWriter** object.
 
 **EXCEPTIONS:**
 
-- **SchemaNotReadyException**
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
-    This exception will be raised when the provided schema is invalid.
+    This exception will be raised when the provided schema is invalid or the remote bucket connection fails.
 
 ## Properties
 
@@ -110,7 +112,7 @@ A **RemoteBulkWriter** object.
 
     The path to the output directory.
 
-- **batch_files** (*str*) -
+- **batch_files** (*list*) -
 
     A list of the generated file names.
 

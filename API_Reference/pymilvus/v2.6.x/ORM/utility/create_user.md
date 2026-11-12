@@ -8,7 +8,7 @@ This API is an ORM-style PyMilvus API and will be removed in PyMilvus 3.1. Use `
 
 </div>
 
-This operation creates a user and optionally stores a description for that user.
+This operation creates a user with a password.
 
 ## Request Syntax
 
@@ -16,8 +16,7 @@ This operation creates a user and optionally stores a description for that user.
 create_user(
     user: str,
     password: str,
-    timeout: Optional[float] = None,
-    description: Optional[str] = None
+    timeout: Optional[float] = None
 ) -> None
 ```
 
@@ -33,11 +32,11 @@ create_user(
 
     **[REQUIRED]**
 
-    The password for the user. The password must satisfy the server password policy.
+    The password for the user.
 
 - **timeout** (*float*) -
 
-    The timeout duration for this operation. If set to `None`, the client waits until the server responds or an error occurs.
+    The timeout duration for this operation.
 
 **RETURN TYPE:**
 
@@ -60,12 +59,33 @@ This operation returns no value.
 ## Example
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import connections, utility
 
-client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
-client.create_user(
-    user_name="analyst_user",
+# Connect to localhost:19530
+connections.connect()
+
+utility.create_user(
+    user="analyst_user",
     password="P@ssw0rd!",
-    description="Read-only analyst account",
 )
 ```
+
+## Related operations
+
+The following operations are related to `create_user()`
+
+- [Role](../Role/Role.md)
+
+- [delete_user()](delete_user.md)
+
+- [list_roles()](list_roles.md)
+
+- [list_user()](list_user.md)
+
+- [list_users()](list_users.md)
+
+- [list_usernames()](list_usernames.md)
+
+- [reset_password()](reset_password.md)
+
+- [update_password()](update_password.md)

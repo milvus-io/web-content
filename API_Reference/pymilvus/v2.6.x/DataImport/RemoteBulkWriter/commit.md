@@ -18,13 +18,7 @@ commit(
 
 **PARAMETERS:**
 
-- **kwargs** -
-
-    - **call_back** (function)
-
-        A callback function to call after this operation is completed.
-
-        The value defaults to **None**, indicating no callback is there to call. Use this to add post-commit actions.
+This method accepts no parameters. The flush operation runs synchronously, and the generated files are uploaded to the remote bucket after the flush completes.
 
 ## Example
 

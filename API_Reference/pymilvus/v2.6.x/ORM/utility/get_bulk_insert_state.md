@@ -21,19 +21,6 @@ get_bulk_insert_state(
 )
 ```
 
-```python
-from pymilvus import connections, utility
-connections.connect()
-
-task_id = utility.do_bulk_insert(
-    collection_name="string",
-    files=["string.npy", "string.npy"],
-)
-
-# Get bulk-insert task state
-res = utility.get_bulk_insert_state(task_id=task_id)
-```
-
 **PARAMETERS:**
 
 - **task_id** (*int*) -

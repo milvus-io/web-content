@@ -8,7 +8,7 @@ pymilvus.model.dense.InstructorEmbeddingFunction
 
 ## Constructor
 
-Constructs a MistralAIEmbeddingFunction for common use cases.
+Constructs an InstructorEmbeddingFunction for common use cases.
 
 ```python
 InstructorEmbeddingFunction(
@@ -26,7 +26,7 @@ InstructorEmbeddingFunction(
 
 - **model_name** (*string*)
 
-    The name of the Mistral AI embedding model to use for encoding. The value defaults to `hkunlp/instructor-xl`. For more information, refer to [Model List](https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#model-list).
+    The name of the Instructor embedding model to use for encoding. The value defaults to `hkunlp/instructor-xl`. For more information, refer to [Model List](https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#model-list).
 
 - **batch_size** (*int*)
 
