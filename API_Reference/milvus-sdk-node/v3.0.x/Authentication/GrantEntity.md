@@ -18,17 +18,29 @@ export type GrantEntity = {
 
     The role the privilege is granted to. See [RoleEntity](RoleEntity.md).
 
-- **object** (**[ObjectEntity](ObjectEntity.md)**) -
+- **object** (*ObjectEntity*) -
 
-    The protected object type. See [ObjectEntity](ObjectEntity.md).
+    The protected object type.
+
+    - **name** (*RbacObjects*) -
+
+        The object type (an `RbacObjects` value, e.g. `Collection`, `Global`, `User`).
 
 - **object_name** (*string*) -
 
     The name of the object the privilege applies to.
 
-- **grantor** (**[Grantor](Grantor.md)**) -
+- **grantor** (*Grantor*) -
 
-    Who granted the privilege. See [Grantor](Grantor.md).
+    Who granted the privilege.
+
+    - **user** (**[User](User.md)**) -
+
+        The grantor. See [User](User.md).
+
+    - **privilege** (**[PrivilegeEntity](PrivilegeEntity.md)**) -
+
+        The granted privilege. See [PrivilegeEntity](PrivilegeEntity.md).
 
 - **db_name** (*string*) -
 
@@ -50,4 +62,3 @@ const res = await milvusClient.listGrants({
 
 console.log(res.entities); // GrantEntity[]
 ```
-

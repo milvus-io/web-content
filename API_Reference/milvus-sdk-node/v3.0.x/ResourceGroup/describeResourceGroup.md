@@ -93,26 +93,6 @@ The resource group descriptor.
 
         - **node_filter** (*{ node_labels: KeyValuePair[] }*) -
 
-        Required node labels; only nodes that match all labels are admitted to the group.
-
-        - **requests** (*{ node_num: number }*) -
-
-            The minimum number of nodes the group must have. Missing nodes are pulled from groups listed in **transfer_from**.
-
-        - **limits** (*{ node_num: number }*) -
-
-            The maximum number of nodes the group can hold. Excess nodes are pushed to groups listed in **transfer_to**.
-
-        - **transfer_from** (*{ resource_group: string }[]*) -
-
-            Source groups, in priority order, from which to pull missing nodes.
-
-        - **transfer_to** (*{ resource_group: string }[]*) -
-
-            Target groups, in priority order, to which excess nodes are pushed.
-
-        - **node_filter** (*{ node_labels: KeyValuePair[] }*) -
-
             Required node labels; only nodes that match all labels are admitted to the group.
 
     - **nodes** (*NodeInfo[]*) -

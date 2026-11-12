@@ -11,7 +11,8 @@ await milvusClient.alterDatabaseProperties(data)
 ```javascript
 await milvusClient.alterDatabaseProperties({
     db_name: string,
-    delete_keys: Object,
+    db_id?: string,
+    delete_keys?: string[],
     properties: Record<string, string | number | boolean>
     timeout?: number
 })
@@ -25,31 +26,35 @@ await milvusClient.alterDatabaseProperties({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **delete_properties** (*string[]*) -
+- **db_id** (*string*) -
+
+    The ID of the database whose properties are to be modified. Optional.
+
+- **delete_keys** (*string[]*) -
 
     Names of the properties to drop in an array. Possible database properties are as follows:
 
-    - **database.replica.number** (*int*) -
+    - **database.replica.number** (*number*) -
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*[]str*) -
+    - **database.resource_groups** (*string[]*) -
 
         Resource groups dedicated to the database.
 
-    - **database.diskQuota.mb** (*int*) -
+    - **database.diskQuota.mb** (*number*) -
 
         Disk quota allocated to the database in megabytes (**MB**).
 
-    - **database.max.collections** (*int*) -
+    - **database.max.collections** (*number*) -
 
         Maximum number of collections allowed in the database.
 
-    - **database.force.deny.writing** (*bool*) -
+    - **database.force.deny.writing** (*boolean*) -
 
         Whether to deny all write operations in the database.
 
-    - **database.force.deny.reading** (*bool*) -
+    - **database.force.deny.reading** (*boolean*) -
 
         Whether to deny all read operations in the database.
 
@@ -57,27 +62,27 @@ await milvusClient.alterDatabaseProperties({
 
     Properties and their values in key-value pairs.
 
-    - **database.replica.number** (*int*) -
+    - **database.replica.number** (*number*) -
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*[]str*) -
+    - **database.resource_groups** (*string[]*) -
 
         Resource groups dedicated to the database.
 
-    - **database.diskQuota.mb** (*int*) -
+    - **database.diskQuota.mb** (*number*) -
 
         Disk quota allocated to the database in megabytes (**MB**).
 
-    - **database.max.collections** (*int*) -
+    - **database.max.collections** (*number*) -
 
         Maximum number of collections allowed in the database.
 
-    - **database.force.deny.writing** (*bool*) -
+    - **database.force.deny.writing** (*boolean*) -
 
         Whether to deny all write operations in the database.
 
-    - **database.force.deny.reading** (*bool*) -
+    - **database.force.deny.reading** (*boolean*) -
 
         Whether to deny all read operations in the database.
 
@@ -89,7 +94,7 @@ await milvusClient.alterDatabaseProperties({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -131,7 +136,7 @@ const milvusClient = new MilvusClient({
 });
 const resStatus = await milvusClient.alterDatabaseProperties({ 
     db_name: 'new_db',
-    delete_properties: {'database.replica.number': 3} 
+    delete_keys: ['database.replica.number'] 
 });
 ```
 

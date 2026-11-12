@@ -82,6 +82,10 @@ A list of segment-level descriptors for the segments currently held by query nod
 
         The segment state. Possible values are **SegmentStateNone**, **NotExist**, **Growing**, **Sealed**, **Flushed**, **Flushing**, **Dropped**, and **Importing**.
 
+    - **nodeID** (*number*) -
+
+        Deprecated. The query node that holds this segment. Use **nodeIds** instead.
+
     - **nodeIds** (*number[]*) -
 
         The query nodes that hold this segment.

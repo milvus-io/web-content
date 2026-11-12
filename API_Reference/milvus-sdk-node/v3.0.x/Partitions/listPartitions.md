@@ -55,6 +55,8 @@ This method returns a promise that resolves to a **ShowPartitionsResponse** obje
 {
     partition_names: string[],
     partitionIDs: number[],
+    created_timestamps: string[],
+    created_utc_timestamps: string[],
     data: PartitionData[],
     status:  ResStatus
 }
@@ -67,6 +69,12 @@ A list of partition names defined on the collection.
 
 - **partitionIDs** (*number[]*) -
 The internal identifiers of the partitions, in the same order as **partition_names**.
+
+- **created_timestamps** (*string[]*) -
+A list of hybrid timestamps indicating when each partition was created.
+
+- **created_utc_timestamps** (*string[]*) -
+A list of UTC timestamps indicating when each partition was created.
 
 - **data** (*PartitionData[]*) -
 A flattened, per-partition view that bundles the name, identifier, creation timestamp, and load percentage.

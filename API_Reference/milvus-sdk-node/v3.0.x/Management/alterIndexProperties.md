@@ -42,7 +42,7 @@ await milvusClient.alterIndexProperties({
 
     The index properties to modify and their expected values. Possible properties are as follows:
 
-    - **mmap.enabled** (*bool*) -
+    - **mmap.enabled** (*boolean*) -
 
         Whether to enable mmap for the specified index. Setting this to `True` offloads the specified index onto the disk. For details, refer to [Mmap-enabled Data Storage](https://milvus.io/docs/mmap.md)
 
@@ -91,9 +91,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const alterIndexReq = {
     collection_name: 'my_collection',
+    index_name: 'my_index',
     params: { nlist: 20 },
 };
-const res = await milvusClient.alterIndex(alterIndexReq);
+const res = await milvusClient.alterIndexProperties(alterIndexReq);
 console.log(res);
 ```
 

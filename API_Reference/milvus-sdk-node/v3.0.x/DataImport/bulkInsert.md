@@ -13,6 +13,7 @@ await milvusClient.bulkInsert({
     db_name?: string,
     collection_name: string,
     partition_name?: string,
+    channel_names?: string[],
     files: string[],
     timeout?: number,
     options?: KeyValuePair<string, string | number>[]
@@ -34,6 +35,10 @@ await milvusClient.bulkInsert({
 - **partition_name** (*string*) -
 
     The name of the target partition.
+
+- **channel_names** (*string[]*) -
+
+    The message channels to use for the import. Optional.
 
 - **files** (*string[]*) -
 

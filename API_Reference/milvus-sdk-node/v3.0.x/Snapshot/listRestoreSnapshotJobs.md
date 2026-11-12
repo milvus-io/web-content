@@ -48,7 +48,7 @@ This method returns a promise that resolves to a **ListRestoreSnapshotJobsRespon
 
 - **jobs** (*[RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md)[]*) -
 
-A list of restore jobs that match the requested database and collection filters. For the full **RestoreSnapshotJobInfo** field reference, refer to the `getRestoreSnapshotState()` doc.
+A list of restore jobs that match the requested database and collection filters. For the full [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md) field reference, refer to the `getRestoreSnapshotState()` doc.
 
 - **ResStatus**
 A **ResStatus** object.

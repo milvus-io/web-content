@@ -18,13 +18,13 @@ await milvusClient.revokeRole({
 
 **PARAMETERS:**
 
-- **username** (*str*) -
+- **username** (*string*) -
 
     **[REQUIRED]**
 
     The name of an existing user.
 
-- **roleName** (*str*) -
+- **roleName** (*string*) -
 
     **[REQUIRED]**
 
@@ -74,7 +74,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-await milvusClient.removeUserFromRole({
+await milvusClient.revokeRole({
    username: 'my',
    roleName: 'myrole'
  });

@@ -3,7 +3,7 @@
 This operation drops a database.
 
 ```javascript
-await milvusClient.dropDatabase(data?)
+await milvusClient.dropDatabase(data)
 ```
 
 ## Request Syntax
@@ -31,7 +31,7 @@ await milvusClient.dropDatabase({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

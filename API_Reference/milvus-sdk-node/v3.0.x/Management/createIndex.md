@@ -17,7 +17,7 @@ await milvusClient.createIndex([
        index_name?: string,
        index_type: string,
        metric_type: string,
-       params?: KeyValueObj,
+       params?: keyValueObj,
        timeout?: number
      }
  ] | {
@@ -27,7 +27,8 @@ await milvusClient.createIndex([
        index_name?: string,
        index_type: string,
        metric_type: string,
-       params?: KeyValueObj,
+       params?: keyValueObj,
+       extra_params?: CreateIndexParam,
        timeout?: number    
  });
 ```
@@ -64,9 +65,13 @@ await milvusClient.createIndex([
 
     This is available only when the specified field is a vector field.
 
-- **params** (*string*) -
+- **params** (*keyValueObj*) -
 
     Other index-specific parameters.
+
+- **extra_params** (*CreateIndexParam*) -
+
+    Alternative index parameters, used with the request form that omits `index_type` and `metric_type`. The object carries `index_type`, `metric_type`, and `params`. See [IndexType](IndexType.md) and [MetricType](MetricType.md).
 
 - **timeout** (number) -
 
@@ -110,10 +115,12 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-await milvusClient._createIndex({
+await milvusClient.createIndex({
    collection_name: "my_collection",
    field_name: "vector_field",
-   index_name: "vector_index"
+   index_name: "vector_index",
+   index_type: IndexType.AUTOINDEX,
+   metric_type: MetricType.COSINE,
  });
 ```
 

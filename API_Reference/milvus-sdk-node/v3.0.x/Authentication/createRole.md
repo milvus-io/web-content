@@ -11,6 +11,7 @@ await milvusClient.createRole(data)
 ```javascript
 await milvusClient.createRole({
    roleName: string,
+   description?: string,
    timeout?: number
  })
 ```
@@ -22,6 +23,10 @@ await milvusClient.createRole({
     **[REQUIRED]**
 
     The name of the role to create.
+
+- **description** (*string*) -
+
+    The description of the role to create.
 
 - **timeout** (*number*) -
 

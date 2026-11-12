@@ -13,8 +13,12 @@ await milvusClient.upsert({
     db_name?: string,
     collection_name: string,
     data: RowData[],
+    fields_data?: RowData[],
     hash_keys?: number[],
+    transformers?: InsertTransformers,
+    skip_check_schema?: boolean,
     partial_update?: boolean,
+    field_ops?: FieldPartialUpdateOp[],
     partition_name?: string,
     timeout?: number,
 })
@@ -30,9 +34,7 @@ await milvusClient.upsert({
 
 - **data** (*[RowData](RowData.md)[]*) -
 
-    **[REQUIRED]**
-
-    The data to upsert. Each element is a plain JavaScript object whose keys match the field names of the collection schema. Entities whose primary key matches an existing record are updated; otherwise a new entity is inserted.
+    The data to upsert. Each element is a plain JavaScript object whose keys match the field names of the collection schema. Entities whose primary key matches an existing record are updated; otherwise a new entity is inserted. Provide either **data** or **fields_data**.
 
 - **db_name** (*string*) -
 
@@ -41,6 +43,18 @@ await milvusClient.upsert({
 - **hash_keys** (*number[]*) -
 
     Reserved for internal use. Do not set this parameter unless explicitly required.
+
+- **fields_data** (*RowData[]*) -
+
+    An alias of **data**. You can pass the rows under either key; do not set both.
+
+- **transformers** (*InsertTransformers*) -
+
+    Custom data transformers for `BFloat16Vector` and `Float16Vector` data. Optional.
+
+- **skip_check_schema** (*boolean*) -
+
+    Whether to skip the schema check before upserting. Optional.
 
 - **partial_update** (*boolean*) -
 
@@ -73,7 +87,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```

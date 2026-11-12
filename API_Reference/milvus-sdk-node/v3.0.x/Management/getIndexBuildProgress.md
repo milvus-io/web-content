@@ -12,8 +12,8 @@ await milvusClient.getIndexBuildProgress(data)
 await milvusClient.getIndexBuildProgress({
       db_name?: string,
       collection_name: string,
-      field_name: string,
-      index_name: string,
+      field_name?: string,
+      index_name?: string,
       timeout?: number
 });
 ```
@@ -32,15 +32,11 @@ await milvusClient.getIndexBuildProgress({
 
 - **index_name** (*string*) -
 
-    **[REQUIRED]**
-
-    The name of the target index. This parameter and `field_name` are mutually exclusive. 
+    The name of the target index. This parameter and `field_name` are mutually exclusive; provide exactly one of them.
 
 - **field_name** (*string*) -
 
-    **[REQUIRED]**
-
-    The name of the target field. This parameter and `index_name` are mutually exclusive. When you use this parameter, ensure that an index has been built upon the specified field.
+    The name of the target field. This parameter and `index_name` are mutually exclusive; provide exactly one of them. When you use this parameter, ensure that an index has been built upon the specified field.
 
 - **timeout** (number) -
 

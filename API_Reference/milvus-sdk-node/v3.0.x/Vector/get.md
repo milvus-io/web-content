@@ -18,6 +18,8 @@ await milvusClient.get({
    offset?: number,
    output_fields?: string[],
    partition_names?: string[],
+   transformers?: OutputTransformers,
+   exprValues?: keyValueObj,
    timeout?: number
  })
 ```
@@ -40,7 +42,7 @@ await milvusClient.get({
 
     A specific entity ID or a list of entity IDs.
 
-- **consistency_level** (*string*) -
+- **consistency_level** (*ConsistencyLevelEnum*) -
 
     The consistency level of the target collection.
 
@@ -69,6 +71,14 @@ await milvusClient.get({
     A list of field names to include in each entity in return.
 
     The value defaults to **None**. If left unspecified, all fields are selected as the output fields.
+
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
+
+    A custom function to convert data for specific data types.
+
+- **exprValues** (*keyValueObj*) -
+
+    If you use placeholders in the filter expression, you can specify the actual values for these placeholders as key-value pairs.
 
 - **timeout** (*number*) -
 

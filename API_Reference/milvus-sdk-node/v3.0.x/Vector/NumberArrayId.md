@@ -29,6 +29,6 @@ const res = await milvusClient.insert({
     data: [{ id: 1, vector: [0.1, 0.2, 0.3, 0.4] }],
 });
 
-console.log(res.IDs); // NumberArrayId, e.g. { int_id: [1] }
+console.log(res.IDs); // NumberArrayId, e.g. { int_id: { data: [1] } }
 ```
 

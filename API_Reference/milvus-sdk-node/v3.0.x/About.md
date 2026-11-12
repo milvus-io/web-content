@@ -22,7 +22,7 @@ This will download the Milvus Node.js client and add a dependency entry in your 
 
 ## Quick Start
 
-The following example connects to Milvus, creates a collection, and runs a vector search using the MilvusClient API.
+The following example connects to Milvus, creates a collection, and runs a vector search using the [MilvusClient](Client/MilvusClient.md) API.
 
 ```javascript
 import { MilvusClient, DataType } from '@zilliz/milvus2-sdk-node';

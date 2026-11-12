@@ -18,13 +18,13 @@ await milvusClient.grantRole({
 
 **PARAMETERS:**
 
-- **username** (*str*) -
+- **username** (*string*) -
 
     **[REQUIRED]**
 
     The name of an existing user.
 
-- **roleName** (*str*) -
+- **roleName** (*string*) -
 
     **[REQUIRED]**
 

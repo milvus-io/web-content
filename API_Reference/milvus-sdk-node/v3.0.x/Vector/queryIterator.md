@@ -13,6 +13,13 @@ await milvusClient.queryIterator({
     collection_name: string,
     batchSize: number,
     filter?: string,
+    expr?: string,
+    exprValues?: keyValueObj,
+    params?: keyValueObj,
+    group_by_fields?: string[],
+    order_by_fields?: OrderByFields,
+    order_by?: OrderByFields,
+    transformers?: OutputTransformers,
     limit?: number,
     output_fields?: string[],
     partition_names?: string[],
@@ -40,6 +47,34 @@ await milvusClient.queryIterator({
 
     A scalar filtering condition to filter matching entities. Set to an empty string to return all entities. To build a scalar filtering condition, refer to Boolean Expression Rules.
 
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
+
+- **exprValues** (*keyValueObj*) -
+
+    If you use placeholders in the filter expression, you can specify the actual values for these placeholders as key-value pairs.
+
+- **params** (*keyValueObj*) -
+
+    Additional query parameters in key-value pairs.
+
+- **group_by_fields** (*string[]*) -
+
+    The scalar fields used to group the aggregation results.
+
+- **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
+
+    The fields to order the query results by.
+
+- **order_by** (*[OrderByFields](OrderByFields.md)*) -
+
+    An alias of **order_by_fields**.
+
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
+
+    A custom function to convert data for specific data types.
+
 - **limit** (*number*) -
 
     The maximum total number of entities to return across all iterations. Defaults to the total count of matching entities (no limit).
@@ -54,7 +89,7 @@ await milvusClient.queryIterator({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level for this operation. Options: Strong (0), Bounded (1), Session (2), Eventually (3). Defaults to the consistency level set when the collection was created.
+    The consistency level for this operation. Options: Strong (0), Session (1), Bounded (2), Eventually (3). Defaults to the consistency level set when the collection was created.
 
 - **db_name** (*string*) -
 

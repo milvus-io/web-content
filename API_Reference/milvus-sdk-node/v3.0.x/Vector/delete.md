@@ -18,7 +18,8 @@ await milvusClient.delete({
    collection_name: string,
    partition_name?: string,
    ids: string[] | number[],
-   consistency_level: string,
+   consistency_level: ConsistencyLevelEnum,
+   exprValues?: keyValueObj,
    timeout?: number
  })
 ```
@@ -49,7 +50,61 @@ await milvusClient.delete({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+
+- **exprValues** (*keyValueObj*) -
+
+    If you use placeholders in the filter expression, you can specify the actual values for these placeholders as key-value pairs.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation. 
+
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+### With DeleteByFilterReq
+
+```javascript
+await milvusClient.delete({
+   db_name: string,
+   collection_name: string,
+   partition_name?: string,
+   filter: string,
+   consistency_level: ConsistencyLevelEnum,
+   exprValues?: keyValueObj,
+   timeout?: number
+ })
+```
+
+**PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
+
+- **collection_name** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of an existing collection.
+
+- **partition_name** (*string*) -
+
+    The name of an existing partition in the collection.
+
+- **filter** (*string*) -
+
+    **[REQUIRED]**
+
+    A scalar filtering condition to match the entities to delete.
+
+- **consistency_level** (*ConsistencyLevelEnum*) -
+
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+
+- **exprValues** (*keyValueObj*) -
+
+    If you use placeholders in the filter expression, you can specify the actual values for these placeholders as key-value pairs.
 
 - **timeout** (*number*) -
 
@@ -72,7 +127,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```

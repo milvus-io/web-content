@@ -9,9 +9,7 @@ connect(sdkVersion): void
 ## Request Syntax
 
 ```javascript
-connect({
-    sdkVersion: string
-})
+connect(sdkVersion: string)
 ```
 
 **PARAMETERS:**
@@ -38,6 +36,6 @@ This method returns nothing.
 ## Example
 
 ```javascript
-connect(2.3.5)
+connect('2.3.5')
 ```
 

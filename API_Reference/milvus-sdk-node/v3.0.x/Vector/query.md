@@ -16,10 +16,14 @@ await milvusClient.query(data)
     output_fields?: string[];
     ids?: string[] | number[];
     filter?: string;
+    expr?: string;
     offset?: number;
     limit?: number;
     consistency_level?: ConsistencyLevelEnum;
     exprValues?: keyValueObj;
+    group_by_fields?: string[];
+    transformers?: OutputTransformers;
+    params?: keyValueObj;
 })
 ```
 
@@ -55,6 +59,10 @@ await milvusClient.query(data)
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
+
 - **offset** (*number*) -
 
     The number of records to skip in the query result. 
@@ -75,7 +83,7 @@ await milvusClient.query(data)
 
     The consistency level of the target collection.
 
-    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
     <div class="alert note">
     
@@ -98,6 +106,18 @@ await milvusClient.query(data)
 - **order_by** (*[OrderByFields](OrderByFields.md)*) -
 
     Alias for order_by_fields. Optional.
+
+- **group_by_fields** (*string[]*) -
+
+    The scalar fields used to group the aggregation results. Optional.
+
+- **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
+
+    A custom function to convert data for specific data types. Optional.
+
+- **params** (*keyValueObj*) -
+
+    Additional query parameters in key-value pairs. Optional.
 
 **RETURNS:**
 

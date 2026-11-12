@@ -11,7 +11,7 @@ await milvusClient.addUserToRole(data)
 ```javascript
 await milvusClient.addUserToRole({
    username: string,
-   rolename: string,
+   roleName: string,
    timeout?: number
  })
 ```
@@ -24,7 +24,7 @@ await milvusClient.addUserToRole({
 
     The name of a user.
 
-- **rolename** (*string*) -
+- **roleName** (*string*) -
 
     **[REQUIRED]**
 

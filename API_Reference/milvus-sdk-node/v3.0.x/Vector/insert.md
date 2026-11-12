@@ -11,9 +11,13 @@ await milvusClient.insert(data: InsertReq)
 ```javascript
 await milvusClient.insert({
     collection_name: string,
-    data: RowData | RowData[],
+    data: RowData[],
     partition_name?: string,
     db_name?: string,
+    hash_keys?: number[],
+    transformers?: InsertTransformers,
+    skip_check_schema?: boolean,
+    fields_data?: RowData[],
     timeout?: number,
 })
 ```
@@ -76,6 +80,22 @@ await milvusClient.insert({
     ]
     ```
 
+- **hash_keys** (*number[]*) -
+
+    A list of hash values computed from the primary keys, used to decide which shard receives each row. Optional.
+
+- **transformers** (*InsertTransformers*) -
+
+    Custom data transformers for `BFloat16Vector` and `Float16Vector` data. Optional.
+
+- **skip_check_schema** (*boolean*) -
+
+    Whether to skip the schema check before inserting. Optional.
+
+- **fields_data** (*RowData[]*) -
+
+    An alias of **data**. You can pass the rows under either key; do not set both.
+
 - **timeout** (*number*)  
 
     The timeout duration for this operation. 
@@ -103,7 +123,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```
@@ -142,10 +162,6 @@ The primary keys assigned to the inserted rows. For autoID collections, Milvus g
     - **str_id** (*{ data: string[] }*) -
 
         Set when the primary key is a VARCHAR field.
-
-    - **id_field** (*'int_id' | 'str_id'*) -
-
-        Indicates which of the two id arrays carries the values.
 
 - **ResStatus**
 A **ResStatus** object.

@@ -82,11 +82,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 const milvusClient = new MilvusClient(MILVUS_ADDRESS);
 const resStatus = await milvusClient.addCollectionField({
   collection_name: 'my_collection',
-  field: [{
+  field: {
     name: 'new_field',
     data_type: 'Int64',
     is_primary_key: false,
     description: 'A new field'
-  }]
+  }
 });
 ```

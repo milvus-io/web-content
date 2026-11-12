@@ -24,23 +24,18 @@ await milvusClient.useDatabase({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise<{ error_code: string, reason: string }>*
 
-This method returns a promise that resolves to a **ResStatus** object.
+This method returns a promise that resolves to an object carrying the result status.
 
 ```javascript
 {
-    code: number,
     error_code: string | number,
     reason: string
 }
 ```
 
 **PARAMETERS:**
-
-- **code** (*number*) -
-
-    A code that indicates the operation result. It remains **0** if this operation succeeds.
 
 - **error_code** (*string* | *number*) -
 

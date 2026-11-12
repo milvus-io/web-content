@@ -11,8 +11,6 @@ await milvusClient.dropAlias(data)
 ```javascript
 await milvusClient.dropAlias({
    alias: string,
-   db_name: string,
-   collection_name: string,
    timeout?: number
  })
 ```
@@ -26,14 +24,6 @@ await milvusClient.dropAlias({
     The alias of a collection. 
 
     Before this operation, ensure that the alias exists. Otherwise, exceptions will occur.
-
-- **db_name** (*string*) -
-
-    The name of the database that holds the specified collection.
-
-- **collection_name** (*string*) -
-
-    The name of the collection that the alias binds to.
 
 - **timeout** (*number*)  
 
@@ -85,7 +75,6 @@ const milvusClient = new MilvusClient({
 });
 const resStatus = await milvusClient.dropAlias({
    alias: 'my_collection_alias',
-   collection_name: 'my_collection',
 });
 ```
 

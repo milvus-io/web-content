@@ -36,7 +36,7 @@ await milvusClient.createResourceGroup({
 
     Name of the resource group to create.
 
-- **configs** (*ResourceGroupConfig*) -
+- **config** (*ResourceGroupConfig*) -
 
     A **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
 
@@ -48,7 +48,7 @@ await milvusClient.createResourceGroup({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -88,7 +88,7 @@ const milvusClient = new MilvusClient({
     address: 'localhost:19530',
     token: 'root:Milvus',
 });
-const configs = ResourceGroupConfig = {
+const configs = {
     requests: { node_num: 1 },
     limits: { node_num: 10000 },
     transfer_from: [{ resource_group: DEFAULT_RESOURCE_GROUP }],
@@ -97,6 +97,6 @@ const configs = ResourceGroupConfig = {
 
 const resStatus = await milvusClient.createResourceGroup({ 
     resource_group: 'my_rg',
-    configs: configs
+    config: configs
 });
 ```

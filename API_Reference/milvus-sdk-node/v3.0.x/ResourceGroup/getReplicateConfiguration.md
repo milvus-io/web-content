@@ -26,6 +26,43 @@ await milvusClient.getReplicateConfiguration({
 
 This method returns a promise that resolves to a **GetReplicateConfigurationResponse** object.
 
+```javascript
+{
+    configuration: ReplicateConfiguration,
+    status:  ResStatus
+}
+```
+
+**PARAMETERS:**
+
+- **configuration** (*ReplicateConfiguration*) -
+
+    The current cross-cluster replication configuration.
+
+    - **clusters** (*ReplicateCluster[]*) -
+
+        The clusters participating in replication.
+
+    - **cross_cluster_topology** (*CrossClusterTopology[]*) -
+
+        The cross-cluster topology, when configured.
+
+- **status** (*ResStatus*) -
+
+    A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
 **EXCEPTIONS:**
 
 - **Error**
@@ -43,5 +80,5 @@ const client = new MilvusClient({
 });
 
 const res = await client.getReplicateConfiguration();
-console.log(res.replicate_configuration);
+console.log(res.configuration);
 ```

@@ -15,12 +15,16 @@ await milvusClient.search({
   partition_names?: string[];
   anns_field?: string; 
   data?: SearchData | SearchData[];
+  vector?: SearchData | SearchData[];
   output_fields?: string[];
   limit?: number;
+  topk?: number;
   offset?: number;
   filter?: string;
+  expr?: string;
   exprValues?: keyValueObj;
   params?: keyValueObj;
+  metric_type?: string;
   consistency_level?: ConsistencyLevelEnum;
   ignore_growing?: boolean;
   group_by_field?: string;
@@ -29,8 +33,11 @@ await milvusClient.search({
   hints?: string;
   round_decimal?: number;
   transformers?: OutputTransformers;
-  rerank?: RankerObj | FunctionObject | FunctionScore;
+  rerank?: RerankerObj | FunctionObject | FunctionScore;
   search_aggregation?: SearchAggregation;
+  nq?: number;
+  ids?: number[] | string[];
+  highlighter?: Highlighter;
 })
 ```
 
@@ -54,11 +61,15 @@ await milvusClient.search({
 
     The name of the target vector field for this operation. It is mandatory if you are searching in a collection with multiple vector fields.
 
-- **data** (*number[]* | *number[][]*) -
+- **data** (*[SearchData](SearchData.md)* | *SearchData[]*) -
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
+
+- **vector** (*[SearchData](SearchData.md)* | *SearchData[]*) -
+
+    An alias of **data** for the query vectors.
 
 - **output_fields** (*string[]*) -
 
@@ -76,6 +87,10 @@ await milvusClient.search({
 
     In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
 
+- **topk** (*number*) -
+
+    An alias of **limit** for the total number of entities to return.
+
 - **offset** (*number*) - 
 
     The number of records to skip in the search result. 
@@ -92,13 +107,17 @@ await milvusClient.search({
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
+
 - **exprValues** (*keyValueObj*) -
 
     If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
 
 - **params** (*KeyValueObj*) -
 
-    The additional search parameters in key-value pairs.
+    The additional search parameters in key-value pairs. The keys listed below are accepted in the search `params`; they are not members of `KeyValueObj`.
 
     - **radius** (*number*) -
 
@@ -116,7 +135,11 @@ await milvusClient.search({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+
+- **metric_type** (*string*) -
+
+    The metric type used to measure similarity between vectors. Defaults to the metric type of the indexed field.
 
 - **ignore_growing** (*boolean*) -
 
@@ -146,11 +169,9 @@ await milvusClient.search({
 
     A custom function to convert data for the following data types.
 
-- **rerank** (*RerankerObj* | *FunctionObject \ [FunctionScore](FunctionScore.md)*) -
+- **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
-    A reranking strategy with its custom parameters. You can either use a **RerankerObj**, a **FunctionObject**, or a **FunctionScore**.
-
-    A **RerankerObj** has the following parameters.
+    A reranking strategy with its custom parameters. You can either use a **RerankerObj**, a **FunctionObject**, or a **FunctionScore**. See [RerankerObj](RerankerObj.md) and [FunctionObject](../Collections/FunctionObject.md).
 
 - **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
 
@@ -159,6 +180,18 @@ await milvusClient.search({
 - **search_aggregation** (*SearchAggregation*) -
 
     Optional bucket aggregation configuration. See [SearchAggregation](SearchAggregation.md).
+
+- **nq** (*number*) -
+
+    The number of query vectors.
+
+- **ids** (*number[]* | *string[]*) -
+
+    Primary keys for search-by-PK queries.
+
+- **highlighter** (*Highlighter*) -
+
+    A highlighter for the search results.
 
 **RETURNS:**
 
@@ -173,6 +206,8 @@ This method returns a promise that resolves to a **SearchResults<T>** object.
     session_ts: number,
     collection_name: string,
     all_search_count?: number,
+    search_iterator_v2_results?: Record<string, any>,
+    _search_iterator_v2_results?: string,
     status:  ResStatus
 }
 ```
@@ -220,6 +255,12 @@ Optional. Set when the search reports the total candidate count examined.
 
 - **agg_buckets** (*AggregationBucket[]* | *undefined*) -
 Optional. Set when **search_aggregation** was supplied; contains aggregation buckets, nested metrics, top hits, and sub-groups.
+
+- **search_iterator_v2_results** (*Record<string, any>*) -
+Optional. Internal results produced by a V2 search iterator.
+
+- **_search_iterator_v2_results** (*string*) -
+Optional. Internal serialized results produced by a V2 search iterator.
 
 - **ResStatus**
 A **ResStatus** object.

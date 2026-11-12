@@ -13,29 +13,30 @@ await milvusClient.updateUser({
    username: string,
    newPassword: string,
    oldPassword: string,
+   description?: string,
    timeout?: number
  })
 ```
 
 **PARAMETERS:**
 
-- **username** (*str*) -
+- **username** (*string*) -
 
     **[REQUIRED]**
 
     The name of an existing user.
 
-- **oldPassword** (*str*) -
+- **oldPassword** (*string*) -
 
-    **[REQUIRED]**
+    The original password of the user. Required when changing the password.
 
-    The original password of the user.
+- **newPassword** (*string*) -
 
-- **newPassword** (*str*) -
+    The new password of the user. Required when changing the password.
 
-    **[REQUIRED]**
+- **description** (*string*) -
 
-    The new password of the user.
+    The description of the user.
 
 - **timeout** (*number*) -  
 

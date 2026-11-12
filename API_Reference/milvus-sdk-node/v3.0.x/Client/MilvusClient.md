@@ -36,7 +36,7 @@ new MilvusClient(config: ClientConfig)
         http://localhost:19530
         ```
 
-    - **_SKIPCONNECT__** (*boolean*) -
+    - **__SKIP_CONNECT__** (*boolean*) -
 
         A boolean value indicating whether to skip the connection or not. 
 
@@ -96,12 +96,6 @@ new MilvusClient(config: ClientConfig)
 
         A generic poll option, which abides by the rules specified in [this repo](https://github.com/coopernurse/node-pool).
 
-    - **protoFilePath** (*protoFilePath*) -
-
-        - **milvus** (*string*) -
-
-        - **schema** (*string*) -
-
     - **retryDelay** (*number*) -
 
         The interval between retry attempts.
@@ -150,7 +144,7 @@ new MilvusClient(config: ClientConfig)
 
             Whether to skip the checks against the provided certificates. Setting it `true` indicates a skip.
 
-        - **verifyOptions** (*string*) -
+        - **verifyOptions** (*Record<string, any>*) -
 
             The verification options.
 
@@ -161,6 +155,14 @@ new MilvusClient(config: ClientConfig)
     - **trace** (*boolean*) -
 
         Whether to enable tracing. 
+
+    - **telemetry** (*TelemetryConfig*) -
+
+        Configuration for client metrics, heartbeat, and server-pushed commands.
+
+    - **isGlobal** (*boolean*) -
+
+        Whether to enable global-cluster mode. When **true**, the SDK fetches the cluster topology from the endpoint and routes to the primary cluster. When omitted, the mode is auto-detected from the address URI.
 
     - **username** (*string*) -
 
@@ -189,6 +191,22 @@ new MilvusClient(config: ClientConfig)
 - **channelOptions** (*channelOptions*) -
 
     Additional channel options for gRPC.
+
+**METHODS:**
+
+- `static get sdkInfo`
+
+    Returns `{ version, recommendMilvus }`, the SDK version and the recommended Milvus version generated at build time.
+
+- `session(clusterId: string): MilvusClientSession`
+
+    Creates a lightweight DQL session pinned to a target cluster ID. The session reuses this client's connection and injects `cluster_id` into `search`, `hybridSearch`, `searchIterator`, `query`, `queryIterator`, and `get` requests. See [session()](session.md).
+
+- `createCollection(data): Promise<ResStatus>`
+
+    The high-level collection creation method that builds a default schema from `collection_name` and `dimension` and optionally creates the index and loads the collection.
+
+- All other operations (for example, `insert`, `search`, `query`, `createIndex`, `loadCollection`) are inherited from the underlying GRPC client.
 
 **RETURNS:**
 

@@ -13,6 +13,8 @@ await milvusClient.createImportJobs({
     collectionName: string,
     files: string[][],
     dbName?: string,
+    projectId?: string,
+    regionId?: string,
     options?: {
         timeout: string,
     },
@@ -36,6 +38,14 @@ await milvusClient.createImportJobs({
 - **dbName** (*string*) -
 
     Specifies the database name.
+
+- **projectId** (*string*) -
+
+    The ID of the Zilliz Cloud project. Optional.
+
+- **regionId** (*string*) -
+
+    The ID of the Zilliz Cloud region. Optional.
 
 - **options** (*object*) -
 

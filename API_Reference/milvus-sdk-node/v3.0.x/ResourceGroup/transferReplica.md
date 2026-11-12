@@ -13,6 +13,7 @@ await milvusClient.transferReplica({
     source_resource_group: string,
     target_resource_group: string,
     collection_name: string,
+    db_name?: string,
     num_replica: number
     timeout?: number
 })
@@ -28,15 +29,19 @@ await milvusClient.transferReplica({
 
     Name of the target resource group of this operation.
 
-- **collection_name** (*str*) -
+- **collection_name** (*string*) -
 
     Name of the collection whose replicas will be transferred.
 
-- **num_replica** (*int*) -
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection. Optional.
+
+- **num_replica** (*number*) -
 
     Number of replicas to transfer.
 
-- **timeout** (*float* | *None*) - 
+- **timeout** (*number*) - 
 
     The timeout duration for this operation. 
 
@@ -44,7 +49,7 @@ await milvusClient.transferReplica({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise\<ResStatus\>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

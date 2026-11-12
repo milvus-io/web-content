@@ -9,16 +9,59 @@ await milvusClient.compact(data)
 ## Request Syntax
 
 ```javascript
-milvusClient.compact()
+milvusClient.compact({
+    collection_name: string,
+    db_name?: string,
+    timetravel?: number | string,
+    majorCompaction?: boolean,
+    partition_id?: number | string,
+    channel?: string,
+    segment_ids?: number[],
+    l0Compaction?: boolean,
+    target_size?: number | string,
+    timeout?: number,
+})
 ```
 
 **PARAMETERS:**
 
-- **collection_name** (*str*) -
+- **collection_name** (*string*) -
 
     **[REQUIRED]**
 
-    The name of the target collection to reassign an alias to.
+    The name of the collection to compact.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
+
+- **timetravel** (*number* | *string*) -
+
+    A timestamp in the past. Compaction drops the deleted data committed before this timestamp.
+
+- **majorCompaction** (*boolean*) -
+
+    Whether to run a major compaction that also compacts the deleted data of the collection.
+
+- **partition_id** (*number* | *string*) -
+
+    The ID of the partition to compact.
+
+- **channel** (*string*) -
+
+    The message channel of the segments to compact.
+
+- **segment_ids** (*number[]*) -
+
+    A list of segment IDs to compact.
+
+- **l0Compaction** (*boolean*) -
+
+    Whether to run an L0-level compaction.
+
+- **target_size** (*number* | *string*) -
+
+    The target size of the compacted segments.
 
 - **timeout** (*number*)  
 
