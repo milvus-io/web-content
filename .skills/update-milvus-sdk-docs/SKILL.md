@@ -35,6 +35,15 @@ line), the **mode** (below), and — if you want the result on the remote — th
 | **All SDKs to latest** | "Update all SDKs to latest" / "更新所有sdk到latest"（可加"except go sdk"/"除了go sdk之外"排除；加"对账/纠错"则同时审计错漏） | per-SDK: create a **per-SDK branch** only for SDKs with actual changes; skip SDKs already current (or, if reconciliation was requested, those with no omissions/errors to fix) |
 | **Reconciliation only** — audit existing pages | "Audit the cpp API_Reference against v3.0.2 for missing methods or errors" / "对账一下 cpp 的 API_Reference 文档，补遗漏、纠错" | no version bump; backfill + correct |
 
+> **The table picks the VERSION/SCOPE, not the workflow.** Whatever the intent —
+> diff/update, latest, reconciliation (对账), or format check (检查格式) — every
+> run executes the **same unified workflow** (see [Unified workflow](#unified-workflow))
+> in the same order: deterministic Steps 1–14 + Pass 1 response audit → format
+> sweep (Steps 15/16 + pure-formatting items) → Pass 2 prose audit → final
+> zero-violation validation with per-step evidence. The words "对账"、"更新",
+> "latest", "检查格式", "check format" only decide which version/tag to target and
+> whether to push; they never narrow the checklist.
+
 ### Pushing (only when you ask for it)
 
 The skill **never commits, pushes, or opens a PR unless the instruction says so**.
@@ -85,10 +94,12 @@ run with a clarification instead of downgrading.
   reviewable; produce a per-page change summary.
 
 
-**Format check mode**: when the user's instruction includes "检查格式",
-"格式检查", "check formatting", or "check format", run the **full 16-step
-reconciliation checklist** against the target tree — the same Steps 1–14
-(including sub-step 8b) plus Steps 15 and 16 in
+**Every run applies the full checklist** — there is no separate "format check
+mode". The words "检查格式" / "格式检查" / "check formatting" / "check format"
+are only trigger synonyms, not a different workflow: they select the same
+[Unified workflow](#unified-workflow) that "对账" / "reconcile" / "update"
+select. Whatever the wording, execute the full checklist against the target
+tree — Steps 1–14 (including sub-step 8b) plus Steps 15 and 16 in
 [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
 (enum values on type pages, request parameter coverage, response member
 coverage, method signature accuracy, standalone type page eligibility, inlined
@@ -98,10 +109,9 @@ reporting convention, About.md format compliance, example relevance, example
 heading cardinality, standalone type-page examples, section heading forms,
 multi-type page hierarchy / member ownership) plus the
 Pass 1 response-surface audit. Apply the steps strictly,
-one category at a time, and fix every violation found. This mode does not bump
-versions — it audits and corrects whatever the checklist surfaces, including
-backfilling enum values, request parameters, response members, and signatures
-the steps reveal as missing or wrong, as well as pure formatting issues (wrong
+one category at a time, and fix every violation found. The run also backfills
+enum values, request parameters, response members, and signatures the steps
+reveal as missing or wrong, and fixes pure formatting issues (wrong
 property names, missing `**Constants:**` headers, empty member bullets, 3+
 consecutive blank lines, missing or blank code-fence language tags, incorrect
 titles, examples that describe a different API or type than the page documents,
@@ -113,8 +123,8 @@ a type page referenced by only one page is folded into that page and deleted,
 regardless of why it was created and regardless of any per-SDK placement note
 naming it a "dedicated" page.
 
-**Strict evidence contract for format checks**: the preceding trigger is a hard
-scope, not a suggestion. Never narrow "检查格式" to a subset such as enums,
+**Strict evidence contract (applies to every run)**: the checklist is a hard
+scope, not a suggestion. Never narrow the run to a subset such as enums,
 titles, links, whitespace, or code snippets. Before editing, emit a
 `FORMAT CHECK BASELINE` containing the target paths/tags, a complete source
 API/type inventory, a complete Markdown page inventory, the source-to-page map,
@@ -214,15 +224,38 @@ discipline:
   target tree actually uses the scanned annotation form before trusting the
   result.
 
-## Two modes
+## Unified workflow
 
-- **Diff mode** (default): update only the pages affected by changes between two
-  SDK tags (old version → new version). Fast; does NOT touch pre-existing issues.
-- **Reconciliation mode**: audit the whole doc tree against one target tag and fix
-  omissions, errors, and drift (missing type/enum pages, missing methods, wrong
-  signatures, typos, stale descriptions). Use when the user wants existing pages
-  verified, not just bumped.
-  See [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages).
+There is **one** workflow for every run. "对账" / "reconcile", "更新" /
+"update", "latest", and "检查格式" / "check format" are the SAME run — they only
+select the target version/tag and the push intent, never a different checklist.
+The execution order is fixed:
+
+1. **Deterministic pass** — Steps 1–14 (including sub-step 8b) + Pass 1
+   response-surface audit: enum values, request parameter coverage, response
+   member coverage, method signature accuracy, type-page eligibility, enum
+   format, cross-links, misplaced type pages, operation filename/title,
+   inline expansions, unnecessary standalone pages, error-reporting convention,
+   About.md compliance, example relevance, example heading cardinality. Fix
+   every finding before moving on.
+2. **Format sweep** — Step 15 (section heading forms) + Step 16 (multi-type
+   page hierarchy / member ownership) + the pure-formatting items (non-canonical
+   type annotations, empty member bullets, 3+ consecutive blank lines, missing
+   or blank code-fence language tags, incorrect titles, `**Constants:**`
+   headers). Runs after the deterministic pass so the content is settled before
+   the format pass.
+3. **Pass 2 — AI prose audit** — last, when the structure is final: factual
+   errors, typos, wrong defaults, outdated constraints, duplicate content
+   (per-page review), on the settled pages.
+4. **Final validation** — 0 broken links, 0 orphaned pages, 0 format
+   violations; emit per-step evidence and the per-page change summary.
+
+The **strict evidence contract** below applies to every run (baseline
+inventory, per-step PASS/FIXED/FAIL evidence, zero-violation gate), not only to
+format checks.
+
+See [Reconciliation mode](#reconciliation-mode-audit-and-backfill-existing-pages)
+for the detailed Steps, Passes, and the response-surface audit.
 
 ## Repo layout & page conventions
 
@@ -955,9 +988,14 @@ every run, whether or not the user asked for a push/PR.
 
 ## Reconciliation mode (audit and backfill existing pages)
 
-Use when the user wants the existing pages verified against a tag — e.g. before
-bumping a version line, or because docs were hand-written and may be missing or
-wrong. Do this in two passes.
+This is the **core execution of the unified workflow** — every run, whether the
+user said "对账"/"reconcile", "更新"/"update", or "检查格式"/"check format",
+executes the steps below in the fixed order defined in
+[Unified workflow](#unified-workflow): deterministic Steps 1–14 + Pass 1
+response-surface audit first, then the Step 15/16 format sweep, then Pass 2
+prose audit, then the final zero-violation validation. Use it when the user
+wants the existing pages verified against a tag — e.g. before bumping a version
+line, or because docs were hand-written and may be missing or wrong.
 
 ### Pass 1 — Deterministic gap report (cheap, zero hallucination)
 
