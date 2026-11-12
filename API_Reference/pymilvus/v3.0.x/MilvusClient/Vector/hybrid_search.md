@@ -8,13 +8,14 @@ This operation conducts a hybrid vector search across multiple vector fields, co
 hybrid_search(
     collection_name: str,
     reqs: List[AnnSearchRequest],
-    ranker: Union[BaseRanker, Function],
+    ranker: Optional[Union[BaseRanker, Function]] = None,
     limit: int = 10,
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
+    function_chains: Optional[Union[FunctionChain, List[FunctionChain]]] = None,
     **kwargs,
-) -> SearchResult
+) -> List[List[dict]]
 ```
 
 **PARAMETERS:**
@@ -55,9 +56,9 @@ The values substituted into expression-template placeholders.
 Default: `None`
 The alias for `expr`. Do not provide both values. The resolved expression is available through the read-only `filter` property as `request.filter`.
 
-- **ranker** (*Union[BaseRanker, [Function](../Collections/Function/Function.md)]*) -
-**[REQUIRED]**
-The ranker used to combine and order results from the search requests.
+- **ranker** (*Union[BaseRanker, [Function](../Collections/Function/Function.md)]* | *None*) -
+Default: `None`
+The ranker used to combine and order results from the search requests. A `Function` ranker cannot be combined with per-request function chains.
 
 - **limit** (*int*) -
 Default: `10`
@@ -75,6 +76,10 @@ The maximum time, in seconds, to wait for the RPC. When omitted, the client wait
 Default: `None`
 The names of the partitions to search.
 
+- **function_chains** (*Optional[Union[[FunctionChain](FunctionChain.md), List[[FunctionChain](FunctionChain.md)]]]*) -
+Default: `None`
+A top-level fusion or reranking chain separate from per-request chains. Mutually exclusive with **ranker**. Use an L2 chain starting with a merge operation. Each **reqs** request can also provide its own `function_chains`.
+
 - **kwargs** (*Any*) -
 The additional search options, including the top-level `offset` for pagination and the `consistency_level` for the search.
 
@@ -84,11 +89,11 @@ The additional search options, including the top-level `offset` for pagination a
 
 **RETURN TYPE:**
 
-*SearchResult*
+*List[List[dict]]*
 
 **RETURNS:**
 
-Search results for the combined ANN requests after applying each request's expression or filter.
+A nested list of result dictionaries for the combined ANN requests after applying each request's expression or filter.
 
 **EXCEPTIONS:**
 

@@ -5,7 +5,7 @@ This operation makes a hybrid timestamp from a Python's **datetime.datetime** ob
 ## Request Syntax
 
 ```python
-utility.mkts_from_datetime(
+mkts_from_datetime(
     d_time: datetime,
     milliseconds: float = 0.0,
     delta: datetime.timedelta | None,
@@ -15,11 +15,14 @@ utility.mkts_from_datetime(
 **PARAMETERS:**
 
 - **d_time** (*datetime*) -
-**[REQUIRED]**
-A **datetime.datetime** object.
+
+    **[REQUIRED]**
+
+    A **datetime.datetime** object.
 
 - **milliseconds** (*float*) -
-An incremental time interval in milliseconds.
+
+    An incremental time interval in milliseconds.
 
 - **delta** (*Optional[timedelta]*) -
 

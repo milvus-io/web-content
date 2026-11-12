@@ -187,7 +187,7 @@ search(
 
     For details, refer to [Decay Ranker Overview](https://milvus.io/docs/decay-ranker-overview.md) and [Model Ranker Overview](https://milvus.io/docs/model-ranker-overview.md).
 
-- **function_chains** (*FunctionChain* | *list[FunctionChain]*) -
+- **function_chains** (*[FunctionChain](FunctionChain.md)* | *list[[FunctionChain](FunctionChain.md)]*) -
 
     The function chain or function chains to apply to the search. This parameter is mutually exclusive with **ranker**.
 

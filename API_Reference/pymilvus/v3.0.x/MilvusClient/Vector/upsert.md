@@ -41,7 +41,7 @@ The flag that controls whether only specified fields are updated. When `True`, u
 
     - **field_ops** (*Optional[Dict[str, Any]]*) -
 Default: `None`
-The per-field merge operations applied during a partial update. Each value can be a `FieldOp` factory result, `array_append`, `array_remove`, or `replace`, or a `FieldPartialUpdateOp` message. Any operation other than `replace` enables partial updates.
+The per-field merge operations applied during a partial update. Each value can be a `FieldOp` factory result (`replace`, `path_replace`, `array_append`, or `array_remove`), or a `FieldPartialUpdateOp` message. Any operation other than `replace` enables partial updates.
 
 **RETURN TYPE:**
 

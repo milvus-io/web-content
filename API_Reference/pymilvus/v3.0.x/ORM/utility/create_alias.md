@@ -16,8 +16,8 @@ This operation creates an alias for an existing collection.
 create_alias(
     collection_name: str,
     alias: str,
-    using: str,
-    timeout: float | None
+    timeout: float | None,
+    using: str = "default",
 )
 ```
 
@@ -45,13 +45,15 @@ create_alias(
 
     </div>
 
+- **timeout** (*float* | *None*)  
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
 - **using** (*str*) - 
 
     The alias of the employed connection.
 
     The default value is **default**, indicating that this operation employs the default connection.
-
-- **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 

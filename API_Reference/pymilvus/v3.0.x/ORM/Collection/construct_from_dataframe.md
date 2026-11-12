@@ -14,9 +14,9 @@ This operation creates a collection with the specified dataframe.
 
 ```python
 construct_from_dataframe(
-    name: str, 
-    primary_field: str,
-    dataframe: pandas.DataFrame
+    name: str,
+    dataframe: pandas.DataFrame,
+    **kwargs
 )
 ```
 
@@ -27,12 +27,6 @@ construct_from_dataframe(
     **[REQUIRED]**
 
     The name of the collection to create.
-
-- **primary_field** (*string*) -
-
-    **[REQUIRED]**
-
-    The name of the primary field. It should be one of the column labels in the following dataframe.
 
 - **dataframe** (*pandas.DataFrame*) 
 
@@ -54,6 +48,18 @@ construct_from_dataframe(
         ]
     })
     ```
+
+- **kwargs** -
+
+    - **primary_field** (*string*) -
+
+        **[REQUIRED]**
+
+        The name of the primary field. It should be one of the column labels in the following dataframe.
+
+    - **auto_id** (*bool*)
+
+        Whether to allow the primary field to automatically increment. The value defaults to **False**.
 
 **RETURN TYPE:**
 

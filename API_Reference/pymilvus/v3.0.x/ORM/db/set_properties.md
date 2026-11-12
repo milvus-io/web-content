@@ -16,7 +16,7 @@ This operation sets properties for a database using the provided database name.
 set_properties(
     db_name: str,
     properties: dict,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

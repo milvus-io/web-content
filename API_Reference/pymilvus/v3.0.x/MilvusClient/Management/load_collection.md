@@ -54,6 +54,10 @@ load_collection(
 
     The load priority of the current collection. The value may impact CPU usage during the load process. Possible values are `low` and `high`.
 
+- **warmup** (*string*) -
+
+    The load warmup mode. The value `sync` makes the server warm up the data on disk after loading. Available in PyMilvus v3.0.3 or later.
+
 - **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. 

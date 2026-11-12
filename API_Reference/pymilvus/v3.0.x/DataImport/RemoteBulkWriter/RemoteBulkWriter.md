@@ -45,7 +45,9 @@ writer = RemoteBulkWriter(
 
 - **connect_param** (*[ConnectParam](S3ConnectParam.md)*) -
 
-    The parameters used to connect to a remote bucket.
+    **[REQUIRED]**
+
+    The parameters used to connect to a remote bucket. This can be either an **S3ConnectParam** or an **AzureConnectParam** object.
 
 - **chunk_size** (*int*) -
 
@@ -69,7 +71,7 @@ writer = RemoteBulkWriter(
 
     The value defaults to **BulkFileType.PARQUET**. 
 
-    Possible options are **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**.
+    Possible options are **BulkFileType.NUMPY**, **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**, **BulkFileType.JSONL**.
 
 - **config** (*dict*)
 
@@ -110,7 +112,7 @@ A **RemoteBulkWriter** object.
 
     The path to the output directory.
 
-- **batch_files** (*str*) -
+- **batch_files** (*list*) -
 
     A list of the generated file names.
 

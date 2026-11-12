@@ -23,7 +23,8 @@ mkts_from_hybridts(
     A hybrid timestamp is a non-negative integer ranging from **0** to **18446744073709551615**.
 
 - **milliseconds** (*float*) -
-An incremental time interval in milliseconds.
+
+    An incremental time interval in milliseconds.
 
 - **delta** (*Optional[timedelta]*) -
 
@@ -36,7 +37,7 @@ An incremental time interval in milliseconds.
 **RETURNS:**
 A hybrid timestamp, which is a non-negative integer ranging from **0** to **18446744073709551615**.
 
-## **Examples**
+## Example
 
 ```python
 import time

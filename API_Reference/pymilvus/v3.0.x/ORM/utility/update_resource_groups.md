@@ -15,7 +15,7 @@ This operation updates the configurations of resource groups.
 ```python
 update_resource_groups(
     configs: Mapping[str, ResourceGroupConfig],
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

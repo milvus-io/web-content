@@ -67,7 +67,7 @@ VolumeBulkWriter(
 
     The value defaults to **BulkFileType.PARQUET**. 
 
-    Possible options are **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**.
+    Possible options are **BulkFileType.NUMPY**, **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**, **BulkFileType.JSONL**.
 
 - **config** (*dict*) -
 
@@ -99,6 +99,16 @@ A writer that stages bulk files locally and uploads committed files to the confi
 
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 Raised when the server rejects the request or the RPC fails. Inspect the server error message for exact failure details.
+
+## Properties
+
+- **data_path** (*str*) -
+
+    The remote path in the volume that holds the uploaded data.
+
+- **batch_files** (*list*) -
+
+    A list of the remote files uploaded to the volume.
 
 ## Methods
 

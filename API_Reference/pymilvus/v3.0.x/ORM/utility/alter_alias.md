@@ -16,19 +16,8 @@ This operation reassigns the alias of one collection to another.
 alter_alias(
     collection_name: str,
     alias: str,
-    using: str,
-    timeout: float | None
-)
-```
-
-```python
-from pymilvus import utility
-
-# Alter collection alias
-alter_alias(
-    collection_name="string",
-    alias="string",
-    using="default"
+    timeout: float | None,
+    using: str = "default",
 )
 ```
 
@@ -68,15 +57,15 @@ alter_alias(
     
     </div>
 
+- **timeout** (*float* | *None*)  
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
 - **using** (*str*) - 
 
     The alias of the employed connection.
 
     The default value is **default**, indicating that this operation employs the default connection.
-
-- **timeout** (*float* | *None*)  
-
-    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURN TYPE:**
 

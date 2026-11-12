@@ -15,7 +15,7 @@ This operation drops a database using the provided database name.
 ```python
 drop_database(
     db_name: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

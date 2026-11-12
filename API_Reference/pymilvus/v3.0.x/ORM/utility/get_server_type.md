@@ -41,7 +41,7 @@ The server type. Possible values are as follows:
 
     Indicates that the current server is a Milvus instance.
 
-**EXAMPLE:**
+## Example
 
 ```python
 from pymilvus import connections, utility

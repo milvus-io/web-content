@@ -41,6 +41,8 @@ add_collection_field(
 
     The name of the new field.
 
+    Use `field_name="clips[lang]"` to add a sub-field to an existing struct. The type describes one struct element and requires `nullable=True`. Available in PyMilvus v3.0.3 or later.
+
 - **data_type** (*[DataType](DataType.md)*) –
 
     **[REQUIRED]**
@@ -77,7 +79,11 @@ add_collection_field(
 
     - **max_capacity** *(int)*:
 
-        Required for `DataType.ARRAY` fields. Defines the maximum number of elements in the array.
+        Required for `DataType.ARRAY` fields. Defines the maximum number of elements in the array. For an Array sub-field added to a struct, this sets the inner array capacity.
+
+    - **element_nullable** *(bool)*:
+
+        For an Array sub-field added to a struct, controls whether the scalar leaves of the array can be null. Available in PyMilvus v3.0.3 or later.
 
 **RETURN TYPE:**
 

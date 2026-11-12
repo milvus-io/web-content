@@ -25,7 +25,7 @@ Use **describe_resource_group()** to check the actual number. If there are multi
 ```python
 create_resource_group(
     name: str,
-    using: str,
+    using: str = "default",
     timeout: float | None,
     **kwargs
 )

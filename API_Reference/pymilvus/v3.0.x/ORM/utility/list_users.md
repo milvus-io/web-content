@@ -15,7 +15,7 @@ This operation lists the information of all existing users.
 ```python
 list_users(
     include_role_info: bool,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

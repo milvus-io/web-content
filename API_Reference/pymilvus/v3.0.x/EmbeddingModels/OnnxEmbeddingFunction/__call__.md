@@ -2,7 +2,7 @@
 
 This operation in [OnnxEmbeddingFunction](OnnxEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The `call` method of OnnxEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
+The **\_\_call\_\_()** method of OnnxEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request Syntax
 

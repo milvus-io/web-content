@@ -14,7 +14,7 @@ This operation lists the names of all existing users.
 
 ```python
 list_usernames(
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

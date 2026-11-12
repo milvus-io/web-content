@@ -15,8 +15,8 @@ This operation lists all existing aliases for a specific collection.
 ```python
 list_aliases(
     collection_name: str,
-    using: str,
-    timeout: float | None
+    timeout: float | None,
+    using: str = "default",
 )
 ```
 
@@ -28,15 +28,15 @@ list_aliases(
 
     The name of the collection whose aliases are to be listed.
 
+- **timeout** (*float* | *None*)  
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation times out when any response arrives or any error occurs.
+
 - **using** (*str*) - 
 
     The alias of the employed connection.
 
     The default value is **default**, indicating that this operation employs the default connection.
-
-- **timeout** (*float* | *None*)  
-
-    The timeout duration for this operation. Setting this to **None** indicates that this operation times out when any response arrives or any error occurs.
 
 **RETURN TYPE:**
 

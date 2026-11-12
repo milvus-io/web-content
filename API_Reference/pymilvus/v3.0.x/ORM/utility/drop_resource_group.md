@@ -15,7 +15,7 @@ This operation drops a resource group.
 ```python
 drop_resource_group(
     name: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

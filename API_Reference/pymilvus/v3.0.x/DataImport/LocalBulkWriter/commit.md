@@ -20,6 +20,12 @@ pymilvus.LocalBulkWriter.commit(
 
 - **kwargs** -
 
+    - **_async** (*bool*)
+
+        Whether to flush the buffer asynchronously.
+
+        If set to **True**, the flush operation runs in a background thread and the method returns immediately. If set to **False** (default), the method blocks until the flush completes.
+
     - **call_back** (function)
 
         A callback function to call after this operation is completed.

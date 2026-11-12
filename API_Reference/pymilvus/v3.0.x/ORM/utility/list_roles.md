@@ -15,7 +15,7 @@ This operation lists the information about all existing roles.
 ```python
 list_roles(
     include_user_info: bool,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

@@ -15,7 +15,7 @@ This operation returns the load status of a specific collection.
 ```python
 load_state(
     collection_name: str,
-    partition_names: list[str] | None
+    partition_names: list[str] | None,
     using: str = "default",
     timeout: float | None
 ) -> LoadState

@@ -15,7 +15,7 @@ This operation creates a database using the provided database name.
 ```python
 create_database(
     db_name: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```
