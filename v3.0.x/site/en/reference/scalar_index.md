@@ -24,7 +24,6 @@ The following table lists the index Milvus selects by default when you use `AUTO
 | `TIMESTAMPTZ` | `STL_SORT` | `STL_SORT` |
 | `GEOMETRY` | `RTREE` | `RTREE` |
 | `JSON` with a typed scalar or array cast | `HYBRID` | Depends on `json_cast_type`; see [JSON field indexing](#JSON-field-indexing). |
-| `JSON` with `json_cast_type="JSON"` | `INVERTED` | `INVERTED` |
 | `ARRAY<BOOL>` | `BITMAP` | `INVERTED`, `BITMAP`, `STL_SORT` |
 | `ARRAY<INT8>` through `ARRAY<INT64>` | `HYBRID` | `INVERTED`, `BITMAP`, `STL_SORT` |
 | `ARRAY<FLOAT>`, `ARRAY<DOUBLE>` | `HYBRID` | `INVERTED`, `STL_SORT` |
@@ -81,9 +80,6 @@ To index JSON values, specify `json_cast_type` to indicate the type of values to
 | `ARRAY_BOOL` | `HYBRID` | `INVERTED`, `STL_SORT` |
 | `ARRAY_DOUBLE` | `HYBRID` | `INVERTED`, `STL_SORT` |
 | `ARRAY_VARCHAR` | `HYBRID` | `INVERTED`, `STL_SORT` |
-| `JSON` | `INVERTED` | `INVERTED` |
-
-The `JSON` cast selects full JSON indexing rather than a typed scalar-path index, and changes the `AUTOINDEX` default from `HYBRID` to `INVERTED`.
 
 The optional `json_cast_function="STRING_TO_DOUBLE"` converts string values for a `DOUBLE` cast. It cannot be used with other cast types. Neither `TRIE` nor `FMINDEX` supports JSON fields.
 
@@ -143,8 +139,7 @@ These are string-value predicates. Token-based functions such as `TEXT_MATCH` an
 | `INVERTED`, `BITMAP`, `STL_SORT`, or an eligible `AUTOINDEX` selection | JSON paths cast to `BOOL`, `DOUBLE`, or `VARCHAR` | Comparisons and membership appropriate to the cast type | The indexed path and cast must match the query. String patterns follow the preceding table. |
 | `NGRAM` | JSON paths cast to `VARCHAR` | LIKE and regex patterns | Uses the same pattern eligibility rules as VARCHAR NGRAM indexes. |
 | `INVERTED`, `STL_SORT`, or an eligible `AUTOINDEX` selection | JSON paths cast to `ARRAY_BOOL`, `ARRAY_DOUBLE`, or `ARRAY_VARCHAR` | `JSON_CONTAINS`, `JSON_CONTAINS_ANY`, `JSON_CONTAINS_ALL` | Requires compatible element types. Mixed-type or nested-array operands can fall back to scanning. |
-| `INVERTED` with cast `JSON` | Full JSON index | Comparisons and membership on supported scalar paths; supported string patterns; JSON containment on supported array paths | String paths follow INVERTED behavior. Array containment requires compatible element types. |
-| JSON path indexes and full JSON indexes | Indexed JSON paths | `exists` | Tests whether the path exists, which is different from testing its value or whether the whole field is null. |
+| JSON path indexes | Indexed JSON paths | `exists` | Tests whether the path exists, which is different from testing its value or whether the whole field is null. |
 | `RTREE` | `GEOMETRY` | `ST_EQUALS`, `ST_INTERSECTS`, `ST_CONTAINS`, `ST_WITHIN`, `ST_TOUCHES`, `ST_OVERLAPS`, `ST_CROSSES`, `ST_DWITHIN` | Uses bounding boxes to find candidates, then checks the exact spatial relation. `ST_ISVALID` does not use RTREE. |
 
 Array containment support does not imply index lookup for an element at a specific position, such as `values[0]`, or for array length. Whole-array equality must also check order and length, which element membership alone cannot establish.
