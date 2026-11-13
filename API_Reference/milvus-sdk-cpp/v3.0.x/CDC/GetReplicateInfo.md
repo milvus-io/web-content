@@ -42,7 +42,7 @@ Returns a status indicating whether the operation succeeded, with the replicatio
 
     - **Checkpoint** (*const ReplicateCheckpoint&*) -
 
-        Get the replication checkpoint.
+        Get the replication checkpoint. The following members belong to `ReplicateCheckpoint`.
 
         - **ClusterID** (*const std::string&*) -
 
@@ -54,7 +54,7 @@ Returns a status indicating whether the operation succeeded, with the replicatio
 
         - **MessageID** (*const ReplicateMessageID&*) -
 
-            Get the message identifier of the checkpoint.
+            Get the message identifier of the checkpoint. The following members belong to `ReplicateMessageID`.
 
             - **ID** (*const std::string&*) -
 
@@ -70,7 +70,7 @@ Returns a status indicating whether the operation succeeded, with the replicatio
 
     - **SalvageCheckpoint** (*const ReplicateCheckpoint&*) -
 
-        Get the salvage checkpoint.
+        Get the salvage checkpoint. The following members belong to `ReplicateCheckpoint`.
 
         - **ClusterID** (*const std::string&*) -
 
@@ -82,7 +82,7 @@ Returns a status indicating whether the operation succeeded, with the replicatio
 
         - **MessageID** (*const ReplicateMessageID&*) -
 
-            Get the message identifier of the checkpoint.
+            Get the message identifier of the checkpoint. The following members belong to `ReplicateMessageID`.
 
             - **ID** (*const std::string&*) -
 

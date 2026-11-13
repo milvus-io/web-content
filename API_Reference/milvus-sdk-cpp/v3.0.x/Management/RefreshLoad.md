@@ -15,8 +15,6 @@ auto request = RefreshLoadRequest()
     .WithTimeoutMs(timeout_ms);
 ```
 
-### RefreshLoadRequest
-
 **REQUEST METHODS:**
 
 - `WithCollectionName(const std::string& collection_name)`

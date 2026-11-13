@@ -48,6 +48,22 @@ const CollectionDesc& desc = response.Desc();
 
     Collection-level properties as key-value pairs (e.g., TTL settings).
 
+- `const std::string& ExternalSource() const`
+
+    The external data source of the collection, for external collections.
+
+- `const nlohmann::json& ExternalSpec() const`
+
+    The external file specification of the collection, for external collections.
+
+- `ConsistencyLevel GetConsistencyLevel() const`
+
+    The consistency level of the collection.
+
+- `int64_t NumPartitions() const`
+
+    Number of partitions of the collection. Only valid when the collection is created with a partition key.
+
 ## Example
 
 ```cpp

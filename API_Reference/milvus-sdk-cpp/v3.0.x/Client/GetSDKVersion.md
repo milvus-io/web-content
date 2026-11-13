@@ -47,6 +47,7 @@ if (!status.IsOk()) {
 }
 
 // print the SDK version
+std::string version;
 client->GetSDKVersion(version);
 std::cout << "The CPP SDK version is: " << version << std::endl;
 ```

@@ -29,7 +29,7 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 
     When `true`, entities may contain fields that are not declared in the schema. The extra fields are stored internally in a JSON field named `$meta`. Default: `true`.
 
-## Methods
+**METHODS:**
 
 **Adding fields:**
 
@@ -114,7 +114,9 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 **Deprecated compatibility methods.**
 
 - `Name()` / `SetName()` - Deprecated. Pass the collection name through `CreateCollectionRequest::WithCollectionName()`.
+
 - `Description()` / `SetDescription()` - Deprecated. Pass the description through `CreateCollectionRequest::WithDescription()`.
+
 - `ShardsNum()` / `SetShardsNum()` - Deprecated. Pass the shard count through `CreateCollectionRequest::WithNumShards()`.
 
 ## Example

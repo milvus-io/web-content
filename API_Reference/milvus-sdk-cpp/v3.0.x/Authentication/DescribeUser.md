@@ -19,6 +19,10 @@ auto request = DescribeUserRequest()
 
     Sets the name of the user to describe.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -29,11 +33,11 @@ Returns a status indicating whether the operation succeeded.
 
     - **Desc** (*const UserDesc&*) -
 
-        Get user description.
+        Get user description. The following members belong to `UserDesc`.
 
         - **Name** (*const std::string&*) -
 
-            Get the name of the user.
+            The username.
 
         - **Description** (*const std::string&*) -
 
@@ -41,20 +45,7 @@ Returns a status indicating whether the operation succeeded.
 
         - **Roles** (*const std::vector<std::string>&*) -
 
-            Get role names of the user.
-
-
-UserDesc members:
-
-**METHODS:**
-
-- `const std::string& Name() const`
-
-    The username.
-
-- `const std::vector<std::string>& Roles() const`
-
-    List of role names assigned to the user.
+            List of role names assigned to the user.
 
 **ERROR HANDLING:**
 

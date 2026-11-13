@@ -19,6 +19,10 @@ auto request = GetCompactionPlansRequest()
 
     Sets the ID of the compaction job to query, which is returned by Compact().
 
+- `SetCompactionID(int64_t id)`
+
+    Set compaction job ID returned by Compact().
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -30,14 +34,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
     - **Plans** (*const CompactionPlans&*) -
 
         Get plans of the compaction.
-
-        - **SourceSegments** (*const std::vector<int64_t>&*) -
-
-            Segment id array to be merged.
-
-        - **DestinySegemnt** (*int64_t*) -
-
-            New generated segment id after merging.
+        See [CompactionPlan](CompactionPlan.md).
 
     - **CompactionID** (*int64_t*) -
 

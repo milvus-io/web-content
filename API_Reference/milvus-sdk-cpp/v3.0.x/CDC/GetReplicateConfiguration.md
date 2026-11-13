@@ -26,11 +26,11 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
     - **Configuration** (*const ReplicateConfiguration&*) -
 
-        Get the replication configuration.
+        Get the replication configuration. The following members belong to `ReplicateConfiguration`.
 
         - **Clusters** (*const std::vector<MilvusCluster>&*) -
 
-            Get the clusters of the replication topology.
+            Get the clusters of the replication topology. Each entry is a `MilvusCluster` with the following members.
 
             - **ClusterID** (*const std::string&*) -
 
@@ -50,7 +50,7 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
         - **CrossClusterTopologies** (*const std::vector<CrossClusterTopology>&*) -
 
-            Get the cross-cluster forwarding edges of the topology.
+            Get the cross-cluster forwarding edges of the topology. Each entry is a `CrossClusterTopology` with the following members.
 
             - **SourceClusterID** (*const std::string&*) -
 

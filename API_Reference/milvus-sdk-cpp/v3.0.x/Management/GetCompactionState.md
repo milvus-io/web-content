@@ -19,6 +19,10 @@ auto request = GetCompactionStateRequest()
 
     Sets the compaction job ID returned by `Compact()`.
 
+- `SetCompactionID(int64_t id)`
+
+    Set compaction job ID returned by `Compact()`.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -29,7 +33,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **State** (*const CompactionState&*) -
 
-        Get state of the compaction.
+        Get state of the compaction. The following members belong to `CompactionState`.
 
         - **CompletedPlan** (*int64_t*) -
 

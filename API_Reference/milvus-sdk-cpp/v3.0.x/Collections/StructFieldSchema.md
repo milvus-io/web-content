@@ -17,39 +17,67 @@ explicit StructFieldSchema(std::string name, std::string description = "");
 
     Optional human-readable description. Default: `""`.
 
-## Request Syntax
-
-```cpp
-StructFieldSchema(name, description)
-    .WithName(name)
-    .WithDescription(description)
-    .WithMaxCapacity(capacity)
-    .WithNullable(nullable)
-    .AddTypeParam(key, value)
-    .AddField(field_schema);
-```
-
-**REQUEST METHODS:**
+**METHODS:**
 
 - `StructFieldSchema& WithName(std::string name)`
 
     Sets the field name and returns the schema for chaining.
 
+- `void SetName(std::string name)`
+
+    Sets the field name.
+
+- `const std::string& Name() const`
+
+    Returns the field name.
+
 - `StructFieldSchema& WithDescription(std::string description)`
 
     Sets the description and returns the schema for chaining.
+
+- `void SetDescription(std::string description)`
+
+    Sets the description of the field.
+
+- `const std::string& Description() const`
+
+    Returns the field description.
 
 - `StructFieldSchema& WithMaxCapacity(int64_t capacity)`
 
     Sets the maximum number of elements the struct field can hold. Returns the schema for chaining.
 
+- `void SetMaxCapacity(int64_t capacity)`
+
+    Sets the maximum capacity for the struct field.
+
+- `int64_t MaxCapacity() const`
+
+    Returns the maximum capacity of the struct field.
+
 - `StructFieldSchema& WithNullable(bool nullable)`
 
     Sets whether the struct field can contain empty element lists. Returns the schema for chaining.
 
+- `void SetNullable(bool nullable)`
+
+    Sets whether the struct field is nullable.
+
+- `bool IsNullable() const`
+
+    Returns whether the struct field is nullable.
+
 - `void SetTypeParams(const std::map<std::string, std::string>& params)`
 
     Merges extra key-value settings into the struct field without overwriting existing keys.
+
+- `void SetTypeParams(std::map<std::string, std::string>&& params)`
+
+    Merges extra key-value settings into the struct field without overwriting existing keys. The map is passed by rvalue reference.
+
+- `const std::map<std::string, std::string>& TypeParams() const`
+
+    Returns the extra key-value settings of the struct field.
 
 - `StructFieldSchema& AddTypeParam(const std::string& key, const std::string& val)`
 

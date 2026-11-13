@@ -21,9 +21,17 @@ auto request = GetPartitionStatsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name. Use the default database when it is empty.
+
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set the collection name.
 
 - `WithPartitionName(const std::string& partition_name)`
 
@@ -31,27 +39,7 @@ auto request = GetPartitionStatsRequest()
 
 - `SetPartitionName(const std::string& partition_name)`
 
-    Sets the partition name.
-
-- `WithPartitionName(const std::string& partition_name)`
-
-    Sets the partition name.
-
-- `SetCollectionName(const std::string& collection_name)`
-
-    Sets the collection name.
-
-- `WithCollectionName(const std::string& collection_name)`
-
-    Sets the collection name.
-
-- `SetDatabaseName(const std::string& db_name)`
-
-    Sets the database name. Use the default database when it is empty.
-
-- `WithDatabaseName(const std::string& db_name)`
-
-    Sets the database name. Use the default database when it is empty.
+    Set the partition name.
 
 **RETURNS:**
 
@@ -63,7 +51,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Stats** (*const PartitionStat&*) -
 
-        Get partition stats.
+        Get partition stats. The following members belong to `PartitionStat`.
 
         - **Name** (*const std::string&*) -
 

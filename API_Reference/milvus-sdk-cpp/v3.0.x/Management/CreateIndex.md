@@ -62,16 +62,6 @@ auto request = CreateIndexRequest()
 
     **Deprecated.** Adds a legacy index descriptor. Use `AddIndexParam()` instead.
 
-    Sets the indexes to be created. Accepts a std::vector<[IndexDesc](IndexDesc.md)> rvalue that is moved into the request.
-
-- `SetIndexes(std::vector<IndexDesc>&& indexes)`
-
-    Set indexes to be created.
-
-- `AddIndex(IndexDesc&& index)`
-
-    Adds an index to be created. Accepts an [IndexDesc](IndexDesc.md) rvalue that is moved into the request.
-
 - `WithSync(bool sync)`
 
     Sets whether the client waits until the indexes are fully built. Defaults to true; if false, the call returns immediately regardless of index build progress.

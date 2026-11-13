@@ -23,21 +23,41 @@ auto request = GrantPrivilegeRequest()
 
     Sets the name of the role.
 
+- `SetRoleName(const std::string& name)`
+
+    Set name of the role.
+
 - `WithObjectType(const std::string& object_type)`
 
     Sets the type of the target object, such as `Collection` or `Global`.
+
+- `SetObjectType(const std::string& object_type)`
+
+    Set type of the object the privilege applies to.
 
 - `WithObjectName(const std::string& object_name)`
 
     Sets the name of the target object. Use `*` to apply the privilege to all objects of the given type.
 
+- `SetObjectName(const std::string& object_name)`
+
+    Set name of the object the privilege applies to.
+
 - `WithPrivilege(const std::string& privilege)`
 
     Sets the name of the privilege to grant. For available privileges, refer to [Grant Privileges](https://milvus.io/docs/grant_privileges.md).
 
+- `SetPrivilege(const std::string& privilege)`
+
+    Set name of the privilege.
+
 - `WithDatabaseName(const std::string& db_name)`
 
     Sets the target database name. The default database applies if it is empty.
+
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name.
 
 **RETURNS:**
 

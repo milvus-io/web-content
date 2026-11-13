@@ -69,7 +69,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **GetResult** (*Status*) -
 
-        Wait for task result. Timeout zero means wait forever.
+        Waits for the task result and fills the provided `OptimizeResponse` out-parameter. Timeout zero means wait forever.
         See [Status](../Client/Status.md).
 
         - **StatusText** (*const std::string&*) -

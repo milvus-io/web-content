@@ -144,6 +144,10 @@ const QueryResults& results = response.Results();
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
 
+- `void Clear()`
+
+    Clears the result data.
+
 #### GetResponse statistics
 
 The `GetResponse` object exposes execution statistics that describe the cost of the operation.
@@ -165,6 +169,10 @@ The `GetResponse` object exposes execution statistics that describe the cost of 
 - `float CacheHitRatio() const`
 
     Returns the cache hit ratio as a value between 0.0 and 1.0.
+
+- `uint64_t SessionTs() const`
+
+    Returns the session timestamp used for consistent reads.
 
 **ERROR HANDLING:**
 

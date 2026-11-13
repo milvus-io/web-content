@@ -19,6 +19,10 @@ auto request = GetServerVersionRequest()
 
     When `true`, the response also carries the server build time, git commit, Go version, and deploy mode.
 
+- `SetDetail(bool detail)`
+
+    When `true`, the response also carries the server build time, git commit, Go version, and deploy mode.
+
 **RETURNS:**
 
 *[Status](Status.md)* with *GetServerVersionResponse*

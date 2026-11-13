@@ -28,6 +28,10 @@ auto request = milvus::AddFileResourceRequest()
 
     Sets the file path for the resource.
 
+- `SetPath(const std::string& path)`
+
+    Set the file path for the resource.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -57,4 +61,3 @@ if (!status.IsOk()) {
 }
 ```
 
-<!-- category: File Resources; action: CREATE; addedSince: v3.0.x -->

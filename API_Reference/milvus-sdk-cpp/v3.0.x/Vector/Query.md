@@ -28,7 +28,8 @@ auto request = QueryRequest()
     .AddExtraParam(key, value)
     .WithTimezone(timezone)
     .WithOrderByFields(order_by_fields)
-    .AddOrderByField(order_by_field);
+    .AddOrderByField(order_by_field)
+    .WithGroupByFields(group_by_fields);
 ```
 
 **REQUEST METHODS:**
@@ -236,6 +237,10 @@ const QueryResults& results = response.Results();
 - `uint64_t GetRowCount() const`
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
+
+- `void Clear()`
+
+    Clears the result data.
 
 #### QueryResponse statistics
 

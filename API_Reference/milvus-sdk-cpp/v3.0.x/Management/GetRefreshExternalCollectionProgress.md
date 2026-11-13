@@ -31,9 +31,9 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
 - **response** (*GetRefreshExternalCollectionProgressResponse*) -
 
-    - **JobInfo** (*const RefreshExternalCollectionJobInfo&*)
+    - **JobInfo** (*const RefreshExternalCollectionJobInfo&*) -
 
-        Get the refresh job information.
+        Get the refresh job information. The following members belong to `RefreshExternalCollectionJobInfo`.
         See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
         - **CollectionName** (*const std::string&*) -
@@ -98,4 +98,3 @@ if (!status.IsOk()) {
 }
 ```
 
-<!-- category: File Resources; action: CREATE; addedSince: v3.0.x -->

@@ -15,7 +15,8 @@ Status CurrentUsedDatabase(std::string& db_name)
 ## Request Syntax
 
 ```cpp
-std::string database = client->CurrentUsedDatabase();
+std::string db_name;
+auto status = client->CurrentUsedDatabase(db_name);
 ```
 
 **REQUEST METHODS:**

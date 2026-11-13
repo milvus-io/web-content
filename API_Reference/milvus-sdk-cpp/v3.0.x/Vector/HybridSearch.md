@@ -20,6 +20,8 @@ auto request = HybridSearchRequest()
     .WithSubRequests(requests)
     .AddSubRequest(request)
     .WithRerank(rerank)
+    .WithFunctionChains(function_chains)
+    .AddFunctionChain(function_chain)
     .WithLimit(limit)
     .WithOffset(offset)
     .WithRoundDecimal(round_decimal)
@@ -316,15 +318,15 @@ Each `SubSearchRequest` accepts one query-vector representation matching the tar
 
 - `AddFunctionChain(const FunctionChain& function_chain)`
 
-    Adds one reranking function chain. See [FunctionChain](FunctionChain.md).
+    Adds one reranking function chain. Function chains and rerank cannot be used together. See [FunctionChain](FunctionChain.md).
 
 - `SetFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
-    Sets the reranking function chains applied to hybrid-search results.
+    Sets the reranking function chains applied to hybrid-search results. Function chains and rerank cannot be used together.
 
 - `WithFunctionChains(std::vector<FunctionChain>&& function_chains)`
 
-    Sets the reranking function chains applied to hybrid-search results.
+    Sets the reranking function chains applied to hybrid-search results. Function chains and rerank cannot be used together.
 
 **RETURNS:**
 
@@ -473,6 +475,36 @@ explicit SearchResults(std::vector<SingleResult>&& results);
 
     Recall values per query vector. Populated only when the search is run on a Zilliz Cloud instance with `enable_recall_calculation` set to `true`. Otherwise the vector is empty.
 
+#### SearchResponse statistics
+
+The `HybridSearchResponse` object exposes execution statistics that describe the cost of the search.
+
+**METHODS:**
+
+- `int64_t Cost() const`
+
+    Returns the execution cost of the search in cost units, -1 when not reported.
+
+- `int64_t ScannedRemoteBytes() const`
+
+    Returns the number of bytes scanned from remote storage.
+
+- `int64_t ScannedTotalBytes() const`
+
+    Returns the total number of bytes scanned.
+
+- `float CacheHitRatio() const`
+
+    Returns the cache hit ratio as a value between 0.0 and 1.0.
+
+- `uint64_t SessionTs() const`
+
+    Returns the session timestamp of the search, used to guarantee consistency in a session.
+
+- `const AggregationBuckets& AggregationBuckets() const`
+
+    Returns the aggregation buckets grouped by search query. The outer vector follows query order; queries with no buckets retain an empty inner vector so their indexes stay aligned with the search request. See [SearchAggregation](SearchAggregation.md).
+
 #### SingleResult
 
 `SingleResult` contains the top-k hits for one query vector, including scores, primary keys, and requested output fields. `SearchResults` is the outer collection that contains these per-query results.
@@ -528,6 +560,22 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 - `uint64_t GetRowCount() const`
 
     Returns the number of hits in this result.
+
+- `Status OutputHighlightResult(int i, HighlightResults& result) const`
+
+    Returns the highlight results of one row. Returns `INVALID_ARGUMENT` if the index is out of bounds.
+
+- `SingleResult& WithHighlightResults(std::vector<HighlightResults>&& highlight_results)`
+
+    Sets the per-field highlight results of this search result.
+
+- `void Clear()`
+
+    Clears the result data.
+
+- `Status FilterRows(const std::vector<uint64_t>& keep_indices)`
+
+    Keeps only the rows whose indices are in `keep_indices`, dropping the rest. Used by the client-side page filter of the search iterator.
 
 **ERROR HANDLING:**
 

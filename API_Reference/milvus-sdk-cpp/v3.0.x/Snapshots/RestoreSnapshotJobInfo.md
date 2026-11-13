@@ -2,6 +2,10 @@
 
 This class holds the information of a snapshot restore job, as returned by `ListRestoreSnapshotJobs()` and `GetRestoreSnapshotState()`. Each field has a corresponding `Set*()` setter.
 
+```cpp
+const RestoreSnapshotJobInfo& job = response.JobInfo();
+```
+
 **METHODS:**
 
 - `int64_t JobID() const`

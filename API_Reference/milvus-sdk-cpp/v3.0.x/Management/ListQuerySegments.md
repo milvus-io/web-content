@@ -20,9 +20,17 @@ auto request = ListQuerySegmentsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collections are created.
+
 - `WithCollectionName(const std::string& name)`
 
     Sets the name of the collection.
+
+- `SetCollectionNames(const std::string& name)`
+
+    Set collection name.
 
 **RETURNS:**
 
@@ -34,7 +42,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Result** (*const std::vector<QuerySegmentInfo>&*) -
 
-        Get information of segments.
+        Get information of segments. Each entry is a `QuerySegmentInfo` with the following members.
 
         - **CollectionID** (*int64_t*) -
 

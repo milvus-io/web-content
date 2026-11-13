@@ -29,7 +29,7 @@ IndexDesc(std::string field_name, std::string index_name,
     Distance metric used to compare vectors. Not required for scalar field indexes. Default: `MetricType::INVALID` (server auto-determines). See `MetricType` for available values.
     See [MetricType](MetricType.md).
 
-## Methods
+**METHODS:**
 
 **Input methods (used when creating an index):**
 

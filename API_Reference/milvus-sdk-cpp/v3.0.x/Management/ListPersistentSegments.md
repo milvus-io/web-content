@@ -20,9 +20,17 @@ auto request = ListPersistentSegmentsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collections are created.
+
 - `WithCollectionName(const std::string& name)`
 
     Sets the name of the collection.
+
+- `SetCollectionNames(const std::string& name)`
+
+    Set collection name.
 
 **RETURNS:**
 
@@ -34,7 +42,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Result** (*const std::vector<SegmentInfo>&*) -
 
-        Get information of segments.
+        Get information of segments. Each entry is a `SegmentInfo` with the following members.
 
         - **CollectionID** (*int64_t*) -
 
@@ -44,14 +52,6 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
             Collection name which the segment belongs to.
 
-        - **IndexID** (*int64_t*) -
-
-            Index ID of the segment.
-
-        - **IndexName** (*std::string*) -
-
-            Index name of the segment.
-
         - **IsSorted** (*bool*) -
 
             Whether the segment is sorted.
@@ -60,18 +60,6 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
             Level of the segment.
             See [SegmentLevel](SegmentLevel.md).
-
-        - **MemSize** (*int64_t*) -
-
-            Memory size of the segment.
-
-        - **NodeID** (*int64_t*) -
-
-            Node ID of the segment.
-
-        - **NodeIDs** (*const std::vector<int64_t>&*) -
-
-            Node ID list of the segment.
 
         - **PartitionID** (*int64_t*) -
 

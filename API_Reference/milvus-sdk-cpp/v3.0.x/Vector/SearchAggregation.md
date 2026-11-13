@@ -69,24 +69,30 @@ Status Validate() const;
 SearchAggregation(std::vector<std::string> fields, int64_t size);
 
 const std::vector<std::string>& Fields() const;
+void SetFields(std::vector<std::string>&& fields);
 SearchAggregation& WithFields(std::vector<std::string>&& fields);
 SearchAggregation& AddField(std::string field);
 
 int64_t Size() const;
+void SetSize(int64_t size);
 SearchAggregation& WithSize(int64_t size);
 
 const std::map<std::string, AggregationMetric>& Metrics() const;
+void SetMetrics(std::map<std::string, AggregationMetric>&& metrics);
 SearchAggregation& WithMetrics(std::map<std::string, AggregationMetric>&& metrics);
 SearchAggregation& AddMetric(std::string alias, AggregationMetric metric);
 
 const std::vector<AggregationOrder>& Orders() const;
+void SetOrders(std::vector<AggregationOrder>&& orders);
 SearchAggregation& WithOrders(std::vector<AggregationOrder>&& orders);
 SearchAggregation& AddOrder(AggregationOrder order);
 
 const AggregationTopHitsPtr& TopHits() const;
+void SetTopHits(const AggregationTopHitsPtr& top_hits);
 SearchAggregation& WithTopHits(const AggregationTopHitsPtr& top_hits);
 
 const SearchAggregationPtr& SubAggregation() const;
+void SetSubAggregation(const SearchAggregationPtr& sub_aggregation);
 SearchAggregation& WithSubAggregation(const SearchAggregationPtr& sub_aggregation);
 
 Status Validate() const;

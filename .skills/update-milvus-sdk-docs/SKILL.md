@@ -1349,6 +1349,35 @@ and fix:
   are not members of `keyValueObj`" — so a reader (including an LLM) does not
   mistake the operation-specific keys for members of the declared type. Do not
   silently rely on indentation alone to convey this.
+- **Inline-expanded nested struct members must name their owning type**: when a
+  request/response member expands a nested struct's members inline — a parent
+  bullet such as `- **Groups** (*const std::vector<PrivilegeGroupInfo>&*) -`
+  followed by that struct's member bullets (`- **Name** (*const std::string&*) -`,
+  `- **Privileges** (*const std::vector<std::string>&*) -`) — the parent
+  description must name the nested type and state that the following bullets are
+  its members, e.g. "Each entry is a `PrivilegeGroupInfo` with the following
+  members." or "The following members belong to `SegmentInfo`." Naming the type
+  only in the member's type header (the `(*const ...&*)` annotation) or in a bare
+  `See [Type](Type.md).` link does NOT satisfy the rule: a label-only parser (an
+  LLM that reads bullet lists without tracking indentation depth) would otherwise
+  attribute the nested bullets to the parent member or the response wrapper
+  instead of the declared type. Field-style bullets (`- **Name** (*Type*) -`)
+  are the most ambiguous; method-style bullets (`- Fields() (*Type*) -`) are
+  clearer but the ownership sentence is still required when the parent
+  description does not already attribute them. The rule is satisfied by a
+  `### <Type>`-style section that groups the members under the type's own heading
+  (e.g. `ListRowPolicies`' `### RowPolicy`) or by a description that already
+  states the ownership. Apply it to every inline-expanded nested struct level
+  (`Groups` → `PrivilegeGroupInfo`, `Result` → `SegmentInfo`/`QuerySegmentInfo`,
+  `Desc` → `CollectionDesc`, `Schema` → `CollectionSchema`, ...), for every SDK,
+  in both reconciliation (对账) and format-check runs. The rule is most acute in
+  directly-exposed member trees where nested bullets are field-style — cpp struct
+  members (`PrivilegeGroupInfo`, `SegmentInfo`, `GrantItem`), pymilvus dict keys
+  (`fields` → the per-field dict), node response objects (`results` →
+  `SearchResultData`), go struct fields, csharp `{ get; }` properties — and also
+  applies to method/accessor trees (java `getXxx()` bullets, rust accessor
+  bullets, cpp getter bullets) when a nested subtype is expanded inline instead of
+  on its own page.
 - **Reused bold label for two scopes (cross-SDK, condition-triggered)**: when a
   page uses the SAME bold section label for two different scopes — request
   parameters vs. response members — the two sections must be distinguishable by
@@ -1889,6 +1918,12 @@ Rules:
   `CollectionInfo`, `ReplicaInfo`), list that type's own members/functions
   underneath it, indented further — down the whole chain, not just one level. Do
   this for every SDK, not only C++.
+- **Every nested expansion names its owning type** (see Step 16): a parent member
+  that expands a nested struct's members inline must say so in its description —
+  e.g. "Each entry is a `PrivilegeGroupInfo` with the following members." — so the
+  nested bullets are attributed to the declared type and not to the parent member
+  or the response wrapper. Do not rely on the type header annotation or on
+  indentation alone; state the ownership in the parent's description prose.
 - **Bound the recursion so it terminates while still covering the whole chain**:
   - **Cycle guard**: if a member/function's type is an ancestor already in the
     current expansion chain (self-referential, e.g. Rust `AggregationBucket` has
