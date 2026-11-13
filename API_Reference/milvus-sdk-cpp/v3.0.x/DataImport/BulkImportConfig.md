@@ -8,15 +8,15 @@ BulkImportConfig config;
 
 **METHODS:**
 
-- `int64_t Timeout() const` / `BulkImportConfig& WithTimeout(int64_t timeout)`
+- `int64_t Timeout() const` / `BulkImportConfig& WithTimeout(int64_t timeout)` / `void SetTimeout(int64_t timeout)`
 
     Returns or sets the request timeout in seconds. Zero keeps the HTTP client default.
 
-- `bool VerifyServerCert() const` / `BulkImportConfig& WithVerifyServerCert(bool verify)`
+- `bool VerifyServerCert() const` / `BulkImportConfig& WithVerifyServerCert(bool verify)` / `void SetVerifyServerCert(bool verify)`
 
     Returns or sets whether HTTPS server certificates are verified. The default is `true`.
 
-- `const std::string& CaCertPath() const` / `BulkImportConfig& WithCaCertPath(const std::string& ca_cert_path)`
+- `const std::string& CaCertPath() const` / `BulkImportConfig& WithCaCertPath(const std::string& ca_cert_path)` / `void SetCaCertPath(const std::string& ca_cert_path)`
 
     Returns or sets the CA certificate bundle path used to verify the server.
 

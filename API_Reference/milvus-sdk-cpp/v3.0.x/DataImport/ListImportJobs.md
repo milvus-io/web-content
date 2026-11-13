@@ -41,6 +41,14 @@ auto status = milvus::BulkImport::ListImportJobs(
 
     Sets the target database. Empty selects the default database.
 
+- `WithCollectionName(const std::string& collection_name)`
+
+    Sets the collection whose import jobs are listed.
+
+- `SetCollectionName(const std::string& collection_name)`
+
+    Sets the collection whose import jobs are listed.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

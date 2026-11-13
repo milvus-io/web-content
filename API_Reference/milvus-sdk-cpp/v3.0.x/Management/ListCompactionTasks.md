@@ -40,6 +40,20 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
 - **response** (*GetCompactionPlansResponse*) -
 
+    - **Plans** (*const CompactionPlans&*) -
+
+        Get the compaction plans.
+        See [CompactionPlan](CompactionPlan.md).
+
+    - **CompactionID** (*int64_t*) -
+
+        Get the id of the compaction.
+
+    - **State** (*CompactionStateCode*) -
+
+        Get the state of the compaction.
+        See [CompactionStateCode](CompactionStateCode.md).
+
     - **CollectionName** (*const std::string&*) -
 
         Returns the collection name to which the tasks belong.

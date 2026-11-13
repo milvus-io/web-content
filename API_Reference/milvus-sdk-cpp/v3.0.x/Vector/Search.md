@@ -117,6 +117,10 @@ auto request = SearchRequest()
 
     Add a binary vector to search request. This method automatically converts the string array to uint8 array.
 
+- `AddBinaryVector(const BinaryVecFieldData::ElementT& vector)`
+
+    Add a binary vector to search request.
+
 - `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
 
     Add a float vector to search request.
@@ -125,13 +129,25 @@ auto request = SearchRequest()
 
     Add a sparse vector to search request.
 
+- `AddSparseVector(const nlohmann::json& vector)`
+
+    Add a sparse vector to search request from a supported JSON representation.
+
 - `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
 
     Add a float16 vector to search request.
 
+- `AddFloat16Vector(const std::vector<float>& vector)`
+
+    Add a float16 vector to search request. The float values are converted to float16.
+
 - `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
 
     Add a bfloat16 vector to search request.
+
+- `AddBFloat16Vector(const std::vector<float>& vector)`
+
+    Add a bfloat16 vector to search request. The float values are converted to bfloat16.
 
 - `AddEmbeddedText(const std::string& text)`
 
@@ -149,6 +165,10 @@ auto request = SearchRequest()
 
     Assign binary vectors to search request. This method automatically converts the string array to uint8 array. Note: this method will reset the vector list of the request.
 
+- `WithBinaryVectors(std::vector<BinaryVecFieldData::ElementT>&& vectors)`
+
+    Assign binary vectors to search request. Note: this method will reset the vector list of the request.
+
 - `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)`
 
     Assign float vectors to search request. Note: this method will reset the vector list of the request.
@@ -157,13 +177,25 @@ auto request = SearchRequest()
 
     Assign sparse vectors to search request. Note: this method will reset the vector list of the request.
 
+- `WithSparseVectors(const std::vector<nlohmann::json>& vectors)`
+
+    Assign sparse vectors to search request from a supported JSON representation. Note: this method will reset the vector list of the request.
+
 - `WithFloat16Vectors(std::vector<Float16VecFieldData::ElementT>&& vectors)`
 
     Assign float16 vectors to search request. Note: this method will reset the vector list of the request.
 
+- `WithFloat16Vectors(const std::vector<std::vector<float>>& vectors)`
+
+    Assign float16 vectors to search request; float input is converted to float16. Note: this method will reset the vector list of the request.
+
 - `WithBFloat16Vectors(std::vector<BFloat16VecFieldData::ElementT>&& vectors)`
 
     Assign bfloat16 vectors to search request. Note: this method will reset the vector list of the request.
+
+- `WithBFloat16Vectors(const std::vector<std::vector<float>>& vectors)`
+
+    Assign bfloat16 vectors to search request; float input is converted to bfloat16. Note: this method will reset the vector list of the request.
 
 - `WithEmbeddedTexts(std::vector<std::string>&& texts)`
 
@@ -673,6 +705,22 @@ using SingleResultPtr = std::shared_ptr<SingleResult>;
 
     Returns the number of hits in this result.
 
+- `Status OutputHighlightResult(int i, HighlightResults& result) const`
+
+    Returns the highlight results of one row. Returns `INVALID_ARGUMENT` if the index is out of bounds.
+
+- `SingleResult& WithHighlightResults(std::vector<HighlightResults>&& highlight_results)`
+
+    Sets the per-field highlight results of this search result.
+
+- `void Clear()`
+
+    Clears the result data.
+
+- `Status FilterRows(const std::vector<uint64_t>& keep_indices)`
+
+    Keeps only the rows whose indices are in `keep_indices`, dropping the rest. Used by the client-side page filter of the search iterator.
+
 **ERROR HANDLING:**
 
 - **[Status](../Client/Status.md)**
@@ -687,7 +735,7 @@ The pointer convention is `XxxFieldDataPtr = std::shared_ptr<XxxFieldData>`. Thi
 
 ### FunctionScore
 
-This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchArguments::WithFunctionScore()` or `HybridSearchRequest::WithFunctionScore()`. For `HybridSearch` use RRF or Weighted functions; for `Search` use Boost, Decay, or Model functions. For the function subclass details see [Function](../Collections/Function.md).
+This class holds a list of rerank function objects and optional extra parameters. Pass a `FunctionScorePtr` (a `std::shared_ptr<FunctionScore>`) to `SearchRequest::WithRerank()`. For `Search` use Boost, Decay, or Model functions. For the function subclass details see [Function](../Collections/Function.md).
 
 ```cpp
 using FunctionScorePtr = std::shared_ptr<FunctionScore>;
@@ -705,11 +753,19 @@ auto score = FunctionScore()
 
     Replaces the rerank-function list.
 
+- `void SetFunctions(std::vector<FunctionPtr>&& functions)`
+
+    Replaces the rerank-function list.
+
 - `FunctionScore& AddFunction(const FunctionPtr& function)`
 
     Appends one rerank function.
 
 - `FunctionScore& WithParams(std::unordered_map<std::string, nlohmann::json>&& params)`
+
+    Replaces the extra parameter map used by the rerank functions.
+
+- `void SetParams(std::unordered_map<std::string, nlohmann::json>&& params)`
 
     Replaces the extra parameter map used by the rerank functions.
 

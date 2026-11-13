@@ -19,6 +19,10 @@ auto request = milvus::RemoveFileResourceRequest()
 
     Sets the resource name to remove.
 
+- `SetName(const std::string& name)`
+
+    Set the resource name to remove.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -47,4 +51,3 @@ if (!status.IsOk()) {
 }
 ```
 
-<!-- category: File Resources; action: CREATE; addedSince: v3.0.x -->

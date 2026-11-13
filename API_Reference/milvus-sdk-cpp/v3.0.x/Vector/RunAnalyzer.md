@@ -27,7 +27,15 @@ auto request = RunAnalyzerRequest()
 
     Set target db name, default is empty, means use the db name of MilvusClient.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, default is empty, means use the db name of MilvusClient.
+
 - `WithCollectionName(std::string collection_name)`
+
+    Set name of this collection, cannot be empty.
+
+- `SetCollectionName(std::string collection_name)`
 
     Set name of this collection, cannot be empty.
 
@@ -35,7 +43,15 @@ auto request = RunAnalyzerRequest()
 
     Set name of the target field, cannot be empty.
 
+- `SetFieldName(std::string field_name)`
+
+    Set name of the target field, cannot be empty.
+
 - `WithTexts(const std::vector<std::string>& texts)`
+
+    Set texts to be analyzed.
+
+- `SetTexts(const std::vector<std::string>& texts)`
 
     Set texts to be analyzed.
 
@@ -47,7 +63,15 @@ auto request = RunAnalyzerRequest()
 
     Specify an analyzer.
 
+- `SetAnalyzerNames(const std::vector<std::string>& names)`
+
+    Specify the analyzers.
+
 - `WithAnalyzerParams(const nlohmann::json& params)`
+
+    Set analyzer parameters.
+
+- `SetAnalyzerParams(const nlohmann::json& params)`
 
     Set analyzer parameters.
 
@@ -69,11 +93,11 @@ Returns a status indicating whether the operation succeeded.
 
     - **Results** (*const AnalyzerResults&*) -
 
-        Get results of analyzer.
+        Get results of analyzer. The following members belong to `AnalyzerResults`.
 
         - **Tokens** (*const std::vector<AnalyzerToken>&*) -
 
-            Set tokens to be analyzed.
+            Set tokens to be analyzed. Each entry is an `AnalyzerToken` with the following members.
 
             - **token_** (*std::string*) -
 

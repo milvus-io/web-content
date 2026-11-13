@@ -42,7 +42,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Desc** (*const CollectionDesc&*) -
 
-        Get collection description.
+        Get collection description. The following members belong to `CollectionDesc`.
         See [CollectionDesc](CollectionDesc.md).
 
         - **DatabaseName** (*const std::string&*) -
@@ -63,7 +63,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
         - **Schema** (*const CollectionSchema&*) -
 
-            Collection schema.
+            Collection schema. The following members belong to `CollectionSchema`.
             See [CollectionSchema](CollectionSchema.md).
 
             - **Name** (*const std::string&*) -
@@ -84,7 +84,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
             - **Fields** (*const std::vector<FieldSchema>&*) -
 
-                Fields schema array.
+                Fields schema array. Each entry is a `FieldSchema` with the following members.
                 See [FieldSchema](FieldSchema.md).
 
                 - **Name** (*const std::string&*) -
@@ -167,7 +167,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
             - **StructFields** (*const std::vector<StructFieldSchema>&*) -
 
-                Struct fields schema array.
+                Struct fields schema array. Each entry is a `StructFieldSchema` with the following members.
                 See [StructFieldSchema](StructFieldSchema.md).
 
                 - **Name** (*const std::string&*) -
@@ -186,9 +186,13 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
                     Whether the struct field is nullable.
 
+                - **TypeParams** (*const std::map<std::string, std::string>&*) -
+
+                    Extra key-value settings of the struct field.
+
                 - **Fields** (*const std::vector<FieldSchema>&*) -
 
-                    Get sub fields of the struct field.
+                    Get sub fields of the struct field. Each entry is a `FieldSchema` with the following members.
                     See [FieldSchema](FieldSchema.md).
 
                     - **Name** (*const std::string&*) -
@@ -279,7 +283,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
             - **Functions** (*const std::vector<FunctionPtr>&*) -
 
-                Get functions array.
+                Get functions array. Each entry is a [Function](Function.md) with the following members.
 
                 - **Name** (*const std::string&*) -
 

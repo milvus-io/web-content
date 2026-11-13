@@ -12,6 +12,10 @@ Status ListFileResources(const ListFileResourcesRequest& request, ListFileResour
 auto request = milvus::ListFileResourcesRequest();
 ```
 
+**REQUEST METHODS:**
+
+This request has no builder methods.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -22,7 +26,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Resources** (*const std::vector<FileResourceInfo>&*) -
 
-        Get the file resources.
+        Get the file resources. Each entry is a `FileResourceInfo` with the following members.
 
         - **Name** (*const std::string&*) -
 
@@ -56,4 +60,3 @@ if (!status.IsOk()) {
 }
 ```
 
-<!-- category: File Resources; action: CREATE; addedSince: v3.0.x -->

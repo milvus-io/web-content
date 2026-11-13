@@ -69,7 +69,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Descs** (*const std::vector<IndexDesc>&*) -
 
-        Get index description.
+        Get index description. Each entry is an `IndexDesc` with the following members.
         See [IndexDesc](IndexDesc.md).
 
         - **FieldName** (*const std::string&*) -

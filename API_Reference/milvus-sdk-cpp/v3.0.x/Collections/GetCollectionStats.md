@@ -42,7 +42,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Stats** (*const CollectionStat&*) -
 
-        Get collection stats.
+        Get collection stats. The following members belong to `CollectionStat`.
 
         - **RowCount** (*uint64_t*) -
 

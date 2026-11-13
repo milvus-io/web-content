@@ -33,6 +33,9 @@ Returns a [Status](Status.md) indicating whether the connection was established 
 This class holds the connection parameters passed to `Connect()`. Use the constructor overloads for quick setup, then chain `With*()` methods to configure advanced settings such as TLS, keepalive, and timeouts.
 
 ```cpp
+// Default constructor
+ConnectParam();
+
 // Recommended: URI only (no authentication)
 explicit ConnectParam(const std::string& uri);
 
@@ -71,41 +74,77 @@ ConnectParam(std::string host, uint16_t port, std::string username, std::string 
 
     Sets the password for authentication.
 
-**REQUEST METHODS:**
+**METHODS:**
 
 - `WithUri(const std::string& uri)`
 
     Sets the server URI. Overrides the value supplied in the constructor. Default: `"http://localhost:19530"`.
 
+- `SetUri(const std::string& uri)`
+
+    Sets the server URI.
+
 - `WithToken(const std::string& token)`
 
     Sets the authorization token. Calling this resets any username/password previously set via `WithAuthorizations()`.
+
+- `SetToken(const std::string& token)`
+
+    Sets the authorization token.
 
 - `WithAuthorizations(std::string username, std::string password)`
 
     Sets the username and password for authentication. Calling this resets any token previously set via `WithToken()`.
 
+- `SetAuthorizations(std::string username, std::string password)`
+
+    Sets the username and password for authentication.
+
 - `WithConnectTimeout(uint64_t connect_timeout_ms)`
 
     Timeout in milliseconds to wait for the gRPC channel to reach the `READY` state. Default: `10000`.
+
+- `SetConnectTimeout(uint64_t connect_timeout_ms)`
+
+    Timeout in milliseconds to wait for the gRPC channel to reach the `READY` state.
 
 - `WithKeepaliveTimeMs(uint64_t keepalive_time_ms)`
 
     Interval in milliseconds between keepalive pings. Default: `10000`.
 
+- `SetKeepaliveTimeMs(uint64_t keepalive_time_ms)`
+
+    Interval in milliseconds between keepalive pings.
+
 - `WithKeepaliveTimeoutMs(uint64_t keepalive_timeout_ms)`
 
     Timeout in milliseconds to wait for a keepalive ping acknowledgement before closing the connection. Default: `5000`.
+
+- `SetKeepaliveTimeoutMs(uint64_t keepalive_timeout_ms)`
+
+    Timeout in milliseconds to wait for a keepalive ping acknowledgement before closing the connection.
 
 - `WithKeepaliveWithoutCalls(bool keepalive_without_calls)`
 
     When `true`, keepalive pings are sent even when there are no active RPCs. Default: `true`.
 
+- `SetKeepaliveWithoutCalls(bool keepalive_without_calls)`
+
+    When `true`, keepalive pings are sent even when there are no active RPCs.
+
 - `WithRpcDeadlineMs(uint64_t rpc_deadline_ms)`
 
     Maximum duration in milliseconds allowed for a single RPC call. A value of `0` means no deadline is enforced. Default: `0`.
 
+- `SetRpcDeadlineMs(uint64_t rpc_deadline_ms)`
+
+    Maximum duration in milliseconds allowed for a single RPC call.
+
 - `WithTls()`
+
+    Enables TLS encryption without certificate verification.
+
+- `EnableTls()`
 
     Enables TLS encryption without certificate verification.
 
@@ -113,15 +152,35 @@ ConnectParam(std::string host, uint16_t port, std::string username, std::string 
 
     Enables TLS with server certificate verification using the given CA certificate file path.
 
+- `EnableTls(const std::string& server_name, const std::string& ca_cert)`
+
+    Enables TLS with server certificate verification using the given CA certificate file path.
+
 - `WithTls(const std::string& server_name, const std::string& cert, const std::string& key, const std::string& ca_cert)`
 
     Enables mutual TLS (mTLS). Provide the client certificate file, client key file, and CA certificate file paths.
 
+- `EnableTls(const std::string& server_name, const std::string& cert, const std::string& key, const std::string& ca_cert)`
+
+    Enables mutual TLS (mTLS). Provide the client certificate file, client key file, and CA certificate file paths.
+
+- `DisableTls()`
+
+    Disables TLS encryption.
+
 - `WithDbName(const std::string& db_name)`
 
-    Sets the default database to use after connecting. Default: `"default"`.
+    Sets the default database to use after connecting. Empty selects the server default database.
+
+- `SetDbName(const std::string& db_name)`
+
+    Sets the default database to use after connecting. Empty selects the server default database.
 
 - `WithTelemetryConfig(const TelemetryConfig& config)`
+
+    Sets the client telemetry configuration.
+
+- `SetTelemetryConfig(const TelemetryConfig& config)`
 
     Sets the client telemetry configuration.
 

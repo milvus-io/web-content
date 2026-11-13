@@ -81,7 +81,7 @@ auto request = LoadPartitionsRequest()
 
 - `SetTimeoutMs(int64_t timeout_ms)`
 
-    Set timeout in milliseconds. Default value is 60000ms. Only work when Sync() is true. If the WaitFlushedMs is zero, the LoadPartitions() will call GetLoadingProgress() to loading state, until the collection is fully loaded into memory. If the WaitFlushedMs is larger than zero, the LoadPartitions() will break the loop after a certain of time span and return a status saying the process is timeout.
+    Set timeout in milliseconds. Default value is 60000ms. Only work when Sync() is true. If the TimeoutMs is zero, the LoadPartitions() will call GetLoadingProgress() to loading state, until the collection is fully loaded into memory. If the TimeoutMs is larger than zero, the LoadPartitions() will break the loop after a certain of time span and return a status saying the process is timeout.
 
 - `WithRefresh(bool refresh)`
 

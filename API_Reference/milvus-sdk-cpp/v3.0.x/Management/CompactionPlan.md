@@ -3,7 +3,9 @@
 Describes one compaction task in a compaction response. `CompactionPlan` also contains the task type and task state enums.
 
 ```cpp
-class CompactionPlan;
+CompactionPlan();
+CompactionPlan(const std::vector<int64_t>& segments, int64_t dst_segment);
+CompactionPlan(std::vector<int64_t>&& segments, int64_t dst_segment);
 ```
 
 **METHODS:**
@@ -12,45 +14,97 @@ class CompactionPlan;
 
     Returns the source segment IDs.
 
+- `void SetSourceSegments(const std::vector<int64_t>& segments)`
+
+    Sets the source segment IDs.
+
+- `void SetSourceSegments(std::vector<int64_t>&& segments)`
+
+    Sets the source segment IDs. The vector is passed by rvalue reference.
+
 - `int64_t DestinySegemnt() const`
 
     Returns the single destination segment ID from the legacy compaction API. For detailed tasks, prefer `Targets()`.
+
+- `void SetDestinySegemnt(int64_t id)`
+
+    Sets the destination segment ID.
 
 - `int64_t PlanId() const`
 
     Returns the server-side compaction task identifier.
 
+- `void SetPlanId(int64_t plan_id)`
+
+    Sets the server-side compaction task identifier.
+
 - `int64_t TriggerId() const`
 
     Returns the compaction trigger ID.
+
+- `void SetTriggerId(int64_t trigger_id)`
+
+    Sets the compaction trigger ID.
 
 - `int64_t CollectionId() const`
 
     Returns the collection ID.
 
+- `void SetCollectionId(int64_t collection_id)`
+
+    Sets the collection ID.
+
 - `int64_t PartitionId() const`
 
     Returns the partition ID.
+
+- `void SetPartitionId(int64_t partition_id)`
+
+    Sets the partition ID.
 
 - `const std::string& Channel() const`
 
     Returns the channel handled by this task.
 
+- `void SetChannel(const std::string& channel)`
+
+    Sets the channel handled by this task.
+
 - `CompactionType Type() const`
 
     Returns the compaction type.
+
+- `void SetType(CompactionType type)`
+
+    Sets the compaction type.
 
 - `CompactionTaskState State() const`
 
     Returns the task state.
 
+- `void SetState(CompactionTaskState state)`
+
+    Sets the task state.
+
 - `const std::string& FailureReason() const`
 
     Returns the failure reason, or an empty string when the task has not failed.
 
+- `void SetFailureReason(const std::string& failure_reason)`
+
+    Sets the failure reason.
+
 - `const std::vector<int64_t>& Targets() const`
 
     Returns the complete output segment set.
+
+- `void SetTargets(const std::vector<int64_t>& targets)`
+
+    Sets the output segment set.
+
+- `void SetTargets(std::vector<int64_t>&& targets)`
+
+    Sets the output segment set. The vector is passed by rvalue reference.
 
 ## CompactionType
 

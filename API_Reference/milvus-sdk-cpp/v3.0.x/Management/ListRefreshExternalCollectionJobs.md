@@ -40,9 +40,9 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
 - **response** (*ListRefreshExternalCollectionJobsResponse*) -
 
-    - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*)
+    - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*) -
 
-        Get the refresh jobs.
+        Get the refresh jobs. Each entry is a `RefreshExternalCollectionJobInfo` with the following members.
         See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
         - **CollectionName** (*const std::string&*) -

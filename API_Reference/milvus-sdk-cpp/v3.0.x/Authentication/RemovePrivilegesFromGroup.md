@@ -20,7 +20,15 @@ auto request = RemovePrivilegesFromGroupRequest()
 
     Set the name of the target privilege group for this operation.
 
+- `SetGroupName(const std::string& name)`
+
+    Set the name of the target privilege group for this operation.
+
 - `WithPrivileges(std::set<std::string>&& privileges)`
+
+    Sets the privileges to be removed from the specified group.
+
+- `SetPrivileges(std::set<std::string>&& privileges)`
 
     Sets the privileges to be removed from the specified group.
 
@@ -52,7 +60,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 
-privileges = {"Search", "Query"};
+std::set<std::string> privileges = {"Search", "Query"};
 status = client->RemovePrivilegesFromGroup(
     milvus::RemovePrivilegesFromGroupRequest()
        .WithGroupName(privilege_group_name)

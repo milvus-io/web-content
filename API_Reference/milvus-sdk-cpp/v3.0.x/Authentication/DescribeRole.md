@@ -42,11 +42,11 @@ Returns a status indicating whether the operation succeeded.
 
     - **Desc** (*const RoleDesc&*) -
 
-        Get role description.
+        Get role description. The following members belong to `RoleDesc`.
 
         - **Name** (*const std::string&*) -
 
-            Get name of the role.
+            Name of the role.
 
         - **Description** (*const std::string&*) -
 
@@ -54,70 +54,31 @@ Returns a status indicating whether the operation succeeded.
 
         - **GrantItems** (*const std::vector<GrantItem>&*) -
 
-            Get privilege items of the role.
+            List of privilege grants assigned to this role. Each entry is a `GrantItem` plain struct with the following fields.
 
             - **object_type_** (*std::string*) -
 
-                privilege type.
+                Privilege type, for example `Global` or `Collection`.
 
             - **object_name_** (*std::string*) -
 
-                privilege name.
+                Privilege object name, for example a collection name or `*`.
 
             - **db_name_** (*std::string*) -
 
-                in which database take effect.
+                The database in which the privilege takes effect.
 
             - **role_name_** (*std::string*) -
 
-                grant to which role.
+                The role the privilege is granted to.
 
             - **privilege_** (*std::string*) -
 
-                privilege.
+                The privilege name, for example `Insert` or `Search`.
 
             - **grantor_name_** (*std::string*) -
 
-                grantor name.
-
-
-RoleDesc members:
-
-## RoleDesc
-
-```cpp
-RoleDesc();
-RoleDesc(const std::string& name, std::vector<GrantItem>&& grant_items);
-```
-
-**METHODS:**
-
-- `const std::string& Name() const`
-
-    Name of the role.
-
-- `const std::vector<GrantItem>& GrantItems() const`
-
-    List of privilege grants assigned to this role. Each entry is a GrantItem struct (see below).
-
-## GrantItem
-
-`GrantItem` is a plain struct that describes a single privilege grant.
-
-```cpp
-struct GrantItem {
-    GrantItem(const std::string& object_type, const std::string& object_name,
-              const std::string& db_name, const std::string& role_name,
-              const std::string& grantor_name, const std::string& privilege);
-
-    std::string object_type_;   // e.g., "Global", "Collection"
-    std::string object_name_;   // resource name (e.g., collection name or "*")
-    std::string db_name_;       // database in which the privilege takes effect
-    std::string role_name_;     // role that holds this privilege
-    std::string privilege_;     // privilege name (e.g., "Insert", "Search")
-    std::string grantor_name_;  // user who granted this privilege
-};
-```
+                The name of the user who granted the privilege.
 
 **ERROR HANDLING:**
 

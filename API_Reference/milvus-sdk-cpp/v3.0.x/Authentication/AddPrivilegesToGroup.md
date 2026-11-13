@@ -20,7 +20,15 @@ auto request = AddPrivilegesToGroupRequest()
 
     Set the name of the target privilege group for this operation.
 
+- `SetGroupName(const std::string& name)`
+
+    Set the name of the target privilege group for this operation.
+
 - `WithPrivileges(std::set<std::string>&& privileges)`
+
+    Sets the privileges to be added to the specified group.
+
+- `SetPrivileges(std::set<std::string>&& privileges)`
 
     Sets the privileges to be added to the specified group.
 

@@ -45,43 +45,6 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
         Get the restore jobs.
         See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
-        - **CollectionName** (*const std::string&*) -
-
-            Source collection name of the restore job.
-
-        - **DatabaseName** (*const std::string&*) -
-
-            Source database name of the restore job.
-
-        - **JobID** (*int64_t*) -
-
-            Restore job identifier.
-
-        - **Progress** (*int32_t*) -
-
-            Restore progress in percent (0 to 100).
-
-        - **Reason** (*const std::string&*) -
-
-            Failure reason of the restore job, empty when the job has not failed.
-
-        - **SnapshotName** (*const std::string&*) -
-
-            Name of the snapshot being restored.
-
-        - **StartTime** (*uint64_t*) -
-
-            Start timestamp of the restore job.
-
-        - **State** (*RestoreSnapshotStateCode*) -
-
-            Current state of the restore job.
-            See [RestoreSnapshotStateCode](RestoreSnapshotStateCode.md).
-
-        - **TimeCost** (*uint64_t*) -
-
-            Elapsed time of the restore job in milliseconds.
-
 **ERROR HANDLING:**
 
 - **[Status](../Client/Status.md)**
@@ -108,4 +71,3 @@ if (!status.IsOk()) {
 }
 ```
 
-<!-- category: Snapshots; action: CREATE; addedSince: v3.0.x -->

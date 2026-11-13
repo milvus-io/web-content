@@ -13,7 +13,7 @@ auto request = milvus::SetRLSPrincipalTagsRequest()
     .WithDatabaseName("default")
     .WithCollectionName("messages")
     .WithPrincipalName("tenant-a")
-    .WithTags(nlohmann::json{{"tenant_id", "tenant-a"}, {"tier", {"gold"}}}});
+    .WithTags(nlohmann::json{{"tenant_id", "tenant-a"}, {"tier", {"gold"}}});
 ```
 
 **REQUEST METHODS:**

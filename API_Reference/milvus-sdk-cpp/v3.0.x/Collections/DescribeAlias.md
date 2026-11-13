@@ -42,7 +42,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Desc** (*const AliasDesc&*) -
 
-        Get alias description.
+        Get alias description. The following members belong to `AliasDesc`.
 
         - **CollectionName** (*const std::string&*) -
 
@@ -55,23 +55,6 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
         - **Name** (*const std::string&*) -
 
             Alias name.
-
-
-AliasDesc members:
-
-**METHODS:**
-
-- `const std::string& Name() const`
-
-    Name of the alias.
-
-- `const std::string& DatabaseName() const`
-
-    Name of the database the alias belongs to.
-
-- `const std::string& CollectionName() const`
-
-    Name of the collection this alias points to.
 
 **ERROR HANDLING:**
 

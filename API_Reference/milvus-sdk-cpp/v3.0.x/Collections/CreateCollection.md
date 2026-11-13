@@ -119,16 +119,6 @@ auto request = CreateCollectionRequest()
 
     **Deprecated.** Adds a legacy index descriptor. Use `AddIndexParam()` instead.
 
-    Sets the indexes to create along with the collection. The vector is passed by rvalue reference, so pass it with std::move.
-
-- `SetIndexes(std::vector<IndexDesc>&& indexes)`
-
-    Set indexes to be created.
-
-- `AddIndex(IndexDesc&& index)`
-
-    Adds a single index to create along with the collection. The index is passed by rvalue reference, so pass it with std::move.
-
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

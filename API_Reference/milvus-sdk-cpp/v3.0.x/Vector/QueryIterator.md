@@ -27,7 +27,8 @@ auto request = QueryIteratorRequest()
     .WithTimezone(timezone)
     .WithOrderByFields(order_by_fields)
     .AddOrderByField(order_by_field)
-    .WithReduceStopForBest(reduce_stop_for_best);
+    .WithReduceStopForBest(reduce_stop_for_best)
+    .WithGroupByFields(group_by_fields);
 ```
 
 **REQUEST METHODS:**
@@ -182,7 +183,7 @@ auto request = QueryIteratorRequest()
 
 - `SetExternalFilterFunc(const std::function<Status(SingleResult&)>& func)`
 
-    Sets a client-side page filter applied to each returned page of hits before the iterator returns it.
+    Sets a client-side page filter applied to each returned page of hits. Only `SearchIterator` supports this callback; it is a no-op for query iterators.
 
 - `SetPkSchema(const FieldSchema& schema)`
 
@@ -239,10 +240,6 @@ const QueryResults& results = response.Results();
 - `uint64_t GetRowCount() const`
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
-
-### Iterator
-
-QueryIterator is an alias of Iterator<QueryResults>. Use it to retrieve query rows in batches when the complete result set is larger than a single request limit.
 
 ### Output field types
 
