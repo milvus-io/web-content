@@ -16,11 +16,16 @@ addCollectionField(AddCollectionFieldReq.builder()
     .description(String description)
     .dataType(DataType dataType)
     .maxLength(Integer maxLength)
+    .isPrimaryKey(Boolean isPrimaryKey)
+    .isPartitionKey(Boolean isPartitionKey)
+    .isClusteringKey(Boolean isClusteringKey)
+    .autoID(Boolean autoID)
     .dimension(Integer dimension)
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
     .defaultValue(Object defaultValue)
+    .enableDefaultValue(boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
     .analyzerParams(Map<String, Object> analyzerParams)
     .enableMatch(Boolean enableMatch)
@@ -57,6 +62,22 @@ The data type of the field. Scalar, vector, array, JSON, and struct-related fiel
 
 The maximum number of characters for a `DataType.VarChar` field. This is required for VarChar fields unless the value is supplied through `typeParams`.
 
+- `isPrimaryKey(Boolean isPrimaryKey)` -
+
+Whether the added field is the primary key.
+
+- `isPartitionKey(Boolean isPartitionKey)` -
+
+Whether the added field is a partition key.
+
+- `isClusteringKey(Boolean isClusteringKey)` -
+
+Whether the added field is a clustering key.
+
+- `autoID(Boolean autoID)` -
+
+Whether the primary key field uses auto-generated IDs. Defaults to `Boolean.FALSE`.
+
 - `dimension(Integer dimension)` -
 
 The vector dimension. This is required for fixed-dimension vector fields such as `DataType.FloatVector`.
@@ -76,6 +97,10 @@ Whether the added field accepts `null` values. A vector field added to an existi
 - `defaultValue(Object defaultValue)` -
 
 The default value for the added field. The runtime type must match `dataType`.
+
+- `enableDefaultValue(boolean enableDefaultValue)` -
+
+Whether the default value is passed to the server. Set by `defaultValue(Object)` automatically; use it to control the behavior explicitly.
 
 - `enableAnalyzer(Boolean enableAnalyzer)` -
 
