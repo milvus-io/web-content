@@ -49,7 +49,7 @@ A list where each element is a NumPy array.
 from pymilvus.model.dense import JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(
-    model_name="jina-embeddings-v2-base-en", # Defaults to \`jina-embeddings-v2-base-en\`
+    model_name="jina-embeddings-v3", # Specify the model name
     api_key="YOUR_JINAAI_API_KEY" # Provide your Jina AI API key
 )
 

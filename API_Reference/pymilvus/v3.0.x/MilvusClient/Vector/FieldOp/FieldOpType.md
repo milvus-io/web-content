@@ -7,6 +7,7 @@ class FieldPartialUpdateOp.OpType:
     REPLACE = 0
     ARRAY_APPEND = 1
     ARRAY_REMOVE = 2
+    PATH_REPLACE = 3
 ```
 
 **Constants:**
@@ -22,6 +23,10 @@ class FieldPartialUpdateOp.OpType:
 - **ARRAY_REMOVE** (2)
 
     Removes every matching incoming element from the current array.
+
+- **PATH_REPLACE** (3)
+
+    Replaces a value selected by a path relative to the parent field. For a struct, use `[index]` to replace one complete element or `[index][child]` to replace one child.
 
 ## Example
 

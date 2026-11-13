@@ -16,7 +16,8 @@ This operation creates a user with a password.
 create_user(
     user: str,
     password: str,
-    timeout: Optional[float] = None
+    using: str = "default",
+    timeout: float | None = None,
 ) -> None
 ```
 
@@ -34,9 +35,15 @@ create_user(
 
     The password for the user.
 
-- **timeout** (*float*) -
+- **using** (*str*) - 
 
-    The timeout duration for this operation.
+    The alias of the employed connection.
+
+    The default value is **default**, indicating that this operation employs the default connection.
+
+- **timeout** (*float* | *None*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURN TYPE:**
 

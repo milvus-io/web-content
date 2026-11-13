@@ -15,7 +15,7 @@ This operation deletes an existing user.
 ```python
 delete_user(
     user: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

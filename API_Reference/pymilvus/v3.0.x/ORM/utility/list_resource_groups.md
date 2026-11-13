@@ -14,7 +14,7 @@ This operation lists all resource groups in the currently connected Milvus insta
 
 ```python
 list_resource_groups(
-    using: str,
+    using: str = "default",
     timeout: float | None,
 )
 ```
@@ -38,7 +38,7 @@ list_resource_groups(
 **RETURNS:**
 A list of all resource group names.
 
-**EXAMPLE:**
+## Example
 
 ```python
 from pymilvus import connections, utility

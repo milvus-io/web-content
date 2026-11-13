@@ -22,7 +22,7 @@ Aliases created for the target collection remain intact after this operation.
 rename_collection(
     old_collection_name: str,
     new_collection_name: str,
-    new_db_name: str = "default",
+    new_db_name: str = "",
     timeout: float | None,
     using: str = "default",
 )

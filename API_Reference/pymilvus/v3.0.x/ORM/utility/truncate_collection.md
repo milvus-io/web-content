@@ -16,7 +16,7 @@ This operation truncates a collection by name.
 truncate_collection(
     collection_name: str,
     timeout: float | None,
-    using: str
+    using: str = "default"
 )
 ```
 

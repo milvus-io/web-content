@@ -16,7 +16,7 @@ This operation lists the information of a specific user.
 list_user(
     username: str,
     include_role_info: bool,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

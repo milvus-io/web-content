@@ -120,9 +120,9 @@ search(
 
     The ranker used to reorder the search results. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
 
-- **function_chains** (*[FunctionChain](../../MilvusClient/Collections/Function/Function.md)* | *list[[FunctionChain](../../MilvusClient/Collections/Function/Function.md)]* | *None*) -
+- **function_chains** (*[FunctionChain](../../MilvusClient/Vector/FunctionChain.md)* | *list[[FunctionChain](../../MilvusClient/Vector/FunctionChain.md)]* | *None*) -
 
-    One or more function chains to apply during the search. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
+    One or more function chains to apply during the search. See [FunctionChain](../../MilvusClient/Vector/FunctionChain.md) for details.
 
 - **highlighter** (*Highlighter* | *None*) -
 

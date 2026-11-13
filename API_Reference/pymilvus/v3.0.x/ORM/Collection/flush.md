@@ -30,8 +30,6 @@ It is recommended that you wait for Milvus to seal all segments before conductin
 
 **PARAMETERS:**
 
-- **PARAMETERS:**
-
 - **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.

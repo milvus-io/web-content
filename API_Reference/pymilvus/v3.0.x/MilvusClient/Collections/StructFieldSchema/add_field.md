@@ -27,11 +27,25 @@ add_field(
 
     You can choose from the following options when selecting a data type for different fields. For details, refer to [Array of Structs](https://milvus.io/docs/array-of-structs.md).
 
+    An `DataType.ARRAY` sub-field requires a scalar `element_type` and `max_capacity`. Available in PyMilvus v3.0.3 or later.
+
 - **max_length** (*int*) -
 
     The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
 
     This is mandatory for a **DataType.VARCHAR** field.
+
+- **element_type** (*[DataType](../DataType.md)*) -
+
+    The data type of the elements in an `DataType.ARRAY` sub-field. The value must be a scalar type. Available in PyMilvus v3.0.3 or later.
+
+- **element_nullable** (*bool*) -
+
+    Whether the scalar leaves of an `DataType.ARRAY` sub-field can be null. Available in PyMilvus v3.0.3 or later.
+
+- **max_capacity** (*int*) -
+
+    The maximum number of elements in an `DataType.ARRAY` sub-field. Available in PyMilvus v3.0.3 or later.
 
 - **dim** (*int*) -
 

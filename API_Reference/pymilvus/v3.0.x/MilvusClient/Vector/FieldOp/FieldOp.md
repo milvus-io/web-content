@@ -10,6 +10,13 @@ Factory class for field-level partial-update operations.
 
 Factory class whose static methods create field partial-update operation messages.
 
+The available factory methods are:
+
+- [replace()](replace.md): Creates a REPLACE operation, equivalent to omitting the operation.
+- [path_replace()](path_replace.md): Creates a PATH_REPLACE operation that replaces a value selected by a path relative to the parent field. Available in PyMilvus v3.0.3 or later.
+- [array_append()](array_append.md): Creates an ARRAY_APPEND operation that appends elements to the current array.
+- [array_remove()](array_remove.md): Creates an ARRAY_REMOVE operation that removes matching elements from the current array.
+
 **EXCEPTIONS:**
 
 - **[MilvusException](../../../Exceptions/MilvusException.md)**

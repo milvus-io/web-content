@@ -17,7 +17,7 @@ update_password(
     user: str,
     old_password: str,
     new_password: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

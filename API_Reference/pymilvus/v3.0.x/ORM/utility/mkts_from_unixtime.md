@@ -12,16 +12,6 @@ mkts_from_unixtime(
 )
 ```
 
-```python
-from pymilvus import utility
-
-utility.mkts_from_unixtime(
-    epoch=1704550236,
-    milliseconds=0.0,
-    delta=None
-)
-```
-
 **PARAMETERS:**
 
 - **epoch** (*float*) -
@@ -33,7 +23,8 @@ utility.mkts_from_unixtime(
     A UNIX epoch timestamp is an integer that represents the time elapsed since January 1, 1970 (midnight UTC/GMT) in seconds.
 
 - **milliseconds** (*float*) -
-An incremental time interval in milliseconds.
+
+    An incremental time interval in milliseconds.
 
 - **delta** (*Optional[timedelta]*) -
 
@@ -46,7 +37,7 @@ An incremental time interval in milliseconds.
 **RETURNS:**
 A hybrid timestamp, which is a non-negative integer ranging from **0** to **18446744073709551615**.
 
-## **Examples**
+## Example
 
 ```python
 import time

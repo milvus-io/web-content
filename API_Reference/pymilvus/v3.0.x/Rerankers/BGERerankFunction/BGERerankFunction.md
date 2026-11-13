@@ -16,7 +16,10 @@ BGERerankFunction(
     use_fp16: bool = True,
     batch_size: int = 32,
     normalize: bool = True,
-    device: Optional[str] = None,
+    device: Optional[Union[str, List]] = None,
+    query_max_length: int = 256,
+    max_length: int = 512,
+    **kwargs
 )
 ```
 
@@ -41,6 +44,18 @@ BGERerankFunction(
 - **device** (*string*) -
 
     Optional. The device to use for running the model. If not specified, the model will be run on the CPU. You can specify `cpu` for the CPU and `cuda:n` for the nth GPU device.
+
+- **query_max_length** (*int*)
+
+    The maximum length of the query tokens. Defaults to **256**.
+
+- **max_length** (*int*)
+
+    The maximum length of the tokens of a query-document pair. Defaults to **512**.
+
+- **&ast;&ast;kwargs**
+
+    Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [FlagAutoReranker](https://github.com/FlagOpen/FlagEmbedding/blob/master/FlagEmbedding/llm_reranker/reranker.py).
 
 ## Example
 

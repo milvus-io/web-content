@@ -15,7 +15,7 @@ This operation describes the details of a specific resource group.
 ```python
 describe_resource_group(
     name: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

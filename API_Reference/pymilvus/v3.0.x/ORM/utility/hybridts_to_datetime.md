@@ -35,7 +35,7 @@ A **datetime.datetime** object.
 
 N/A
 
-**EXAMPLE:**
+## Example
 
 ```python
 import time

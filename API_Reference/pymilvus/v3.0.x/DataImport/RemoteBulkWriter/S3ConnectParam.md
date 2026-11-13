@@ -29,8 +29,9 @@ connect_param = RemoteBulkWriter.S3ConnectParam(
     access_key="string",
     secret_key="string",
     secure=False,
+    enable_virtual_style_endpoint=False,
     session_token="string",
-    region="str",
+    region="string",
     http_client=PoolManager(),
     credentials=Provider()
 )
@@ -75,6 +76,10 @@ connect_param = RemoteBulkWriter.S3ConnectParam(
 
     Whether to use secure (TLS) connection to the AWS S3 compatible service. 
 
+- **enable_virtual_style_endpoint** (*bool*)
+
+    Whether to enable the virtual-style endpoint for the AWS S3 compatible service. 
+
 - **session_token** (*str*)
 
     A session token of your account in the AWS S3 compatible service.
@@ -93,11 +98,11 @@ connect_param = RemoteBulkWriter.S3ConnectParam(
 
 **RETURN TYPE:**
 
-*[RemoteBulkWriter](RemoteBulkWriter.md)*
+*S3ConnectParam*
 
 **RETURNS:**
 
-A **[RemoteBulkWriter](RemoteBulkWriter.md)** object.
+An **S3ConnectParam** object.
 
 **EXCEPTIONS:**
 

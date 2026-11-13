@@ -24,11 +24,11 @@ drop_index(timeout: float | None)
 
 **RETURN TYPE:**
 
-*None*
+*NoneType*
 
 **RETURNS:**
 
-*NoneType*
+None
 
 **EXCEPTIONS:**
 

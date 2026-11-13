@@ -64,7 +64,7 @@ writer = LocalBulkWriter(
 
     The value defaults to **BulkFileType.PARQUET**. 
 
-    Possible options are **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**.
+    Possible options are **BulkFileType.NUMPY**, **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**, **BulkFileType.JSONL**.
 
 - **config** (*dict*)
 
@@ -109,7 +109,7 @@ A **LocalBulkWriter** object.
 
     The path to the output directory.
 
-- **batch_files** (*str*) -
+- **batch_files** (*list*) -
 
     A list of the generated file names.
 

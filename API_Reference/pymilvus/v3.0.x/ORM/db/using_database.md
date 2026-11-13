@@ -17,7 +17,7 @@ A Milvus cluster ships with a default database named **default**. All collection
 ```python
 using_database(
     db_name: str,
-    using: str
+    using: str = "default"
 )
 ```
 

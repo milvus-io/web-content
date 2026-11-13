@@ -15,7 +15,7 @@ This operation describes a database using the provided database name.
 ```python
 describe_database(
     db_name: str,
-    using: str,
+    using: str = "default",
     timeout: float | None
 )
 ```

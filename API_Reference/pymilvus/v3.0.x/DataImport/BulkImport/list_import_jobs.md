@@ -15,6 +15,7 @@ list_import_jobs(
     current_page: int = 1,
     verify: Optional[Union[bool, str]] = True,
     cert: Optional[Union[str, tuple]] = None,
+    headers: Optional[Dict[str, str]] = None,
     **kwargs,
 ) -> requests.Response
 # include-end
@@ -31,6 +32,7 @@ list_import_jobs(
     current_page: int = 1,
     verify: Optional[Union[bool, str]] = True,
     cert: Optional[Union[str, tuple]] = None,
+    headers: Optional[Dict[str, str]] = None,
     **kwargs,
 ) -> requests.Response
 # include-end
@@ -50,6 +52,18 @@ The name of the collection whose import jobs are listed.
 - **db_name** (*str*) -
 Default: `""`
 The name of the database whose import jobs are listed.
+
+- **cluster_id** (*str*) -
+Default: `""`
+The ID of a Milvus instance on Zilliz Cloud.
+
+- **project_id** (*str*) -
+Default: `""`
+The ID of the project on Zilliz Cloud, for project databases.
+
+- **region_id** (*str*) -
+Default: `""`
+The ID of the region on Zilliz Cloud, for project databases.
 
 - **api_key** (*str*) -
 Default: `""`
@@ -71,6 +85,10 @@ The TLS verification setting. Use `True` to verify with the default trust store 
 - **cert** (*Optional[Union[str, tuple]]*) -
 Default: `None`
 The client certificate path, or a certificate and private-key pair for mutual TLS.
+
+- **headers** (*Optional[Dict[str, str]]*) -
+Default: `None`
+Extra HTTP headers merged into the request; a caller's value overrides the SDK default for the same name.
 
 - **kwargs** (*Any*) -
 The additional options forwarded to the HTTP request.

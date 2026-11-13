@@ -66,7 +66,7 @@ from pymilvus.model.reranker import CrossEncoderRerankFunction
 
 # Define the rerank function
 ce_rf = CrossEncoderRerankFunction(
-    model_name="cross-encoder/ms-marco-MiniLM-L-6-v2",  # Specify the model name. Defaults to an emtpy string.
+    model_name="cross-encoder/ms-marco-MiniLM-L-6-v2",  # Specify the model name. Defaults to an empty string.
     device="cpu" # Specify the device to use, e.g., 'cpu' or 'cuda:0'
 )
 

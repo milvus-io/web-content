@@ -5,12 +5,14 @@ This operation prepares index parameters to build indexes for a specific collect
 ## Request Syntax
 
 ```python
-pymilvus.MilvusClient.prepare_index_params() -> IndexParams
+pymilvus.MilvusClient.prepare_index_params(field_name: str = "") -> IndexParams
 ```
 
 **PARAMETERS:**
 
-N/A
+- **field_name** (*str*) -
+Default: `""`
+The name of the field on which to build the index. When omitted, you add the field name later through the returned `IndexParams.add_index()`.
 
 **RETURN TYPE:**
 
