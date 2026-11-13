@@ -255,7 +255,7 @@
         "children": []
       },
       {
-        "label": "多租戶架構",
+        "label": "多租戶",
         "id": "multi_tenancy.md",
         "order": 3,
         "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "解複合劑",
+                    "label": "解合器",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1035,7 +1047,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神經網路（ANN）的基本搜尋",
+            "label": "人工神經網路的基本搜尋",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1191,7 +1203,7 @@
                 "children": []
               },
               {
-                "label": "使用 StructArray 進行區間搜尋",
+                "label": "使用 StructArray 進行範圍搜尋",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1235,7 +1247,7 @@
             "children": []
           },
           {
-            "label": "使用分區鍵",
+            "label": "使用分區金鑰",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1605,7 +1617,7 @@
             "children": []
           },
           {
-            "label": "資料庫架構設計",
+            "label": "資料庫結構設計",
             "id": "schema_design.md",
             "order": 2,
             "children": []
@@ -2114,7 +2126,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "RBAC 概覽",
+                "label": "RBAC 概述",
                 "id": "rbac.md",
                 "order": 0,
                 "children": []
@@ -2152,7 +2164,7 @@
             ]
           },
           {
-            "label": "傳輸中的加密",
+            "label": "傳輸過程中的加密",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -2330,7 +2342,7 @@
             "children": []
           },
           {
-            "label": "CDC 複製中的批次匯入",
+            "label": "CDC 複製中的批量匯入",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -3046,7 +3058,7 @@
             "children": []
           },
           {
-            "label": "個人識別資訊（PII）遮罩",
+            "label": "個人識別資訊遮罩",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3171,7 +3183,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行全文檢索",
+        "label": "使用 Milvus 進行全文搜尋",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -3220,7 +3232,7 @@
         "children": []
       },
       {
-        "label": "向量視覺化",
+        "label": "向量可視化",
         "id": "vector_visualization.md",
         "order": 11,
         "children": []

@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_ESCASO",
+                "label": "ÍNDICE_INVERTIDO_DISPARSO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1035,7 +1047,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Búsqueda básica con redes neuronales artificiales (RNA)",
+            "label": "Búsqueda básica con redes neuronales artificiales",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []

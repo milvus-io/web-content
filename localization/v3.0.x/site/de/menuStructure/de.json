@@ -729,7 +729,7 @@
                 "children": []
               },
               {
-                "label": "Wählen Sie das richtige Analysegerät für Ihren Anwendungsfall",
+                "label": "Wählen Sie den richtigen Analysator für Ihren Anwendungsfall",
                 "id": "choose-the-right-analyzer-for-your-use-case.md",
                 "order": 5,
                 "children": []
@@ -826,7 +826,7 @@
             "children": []
           },
           {
-            "label": "Gleitkommavektorindizes",
+            "label": "Gleitkomma-Vektorindizes",
             "id": "floating-vector-indexes",
             "order": 2,
             "isMenu": true,
@@ -938,7 +938,7 @@
             ]
           },
           {
-            "label": "Spärliche Vektorindizes",
+            "label": "Indizes für spärliche Vektoren",
             "id": "sparse-vector-indexes",
             "order": 4,
             "isMenu": true,
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -2815,7 +2827,7 @@
         ]
       },
       {
-        "label": "Bewertung und Beobachtbarkeit",
+        "label": "Auswertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [

@@ -23,7 +23,7 @@ title: Index Scalar Fields
       </svg>
     </button></h1><p>In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.</p>
 <div class="alert warning">
-<p>This page has been deprecated. For the latest implementation, refer to <a href="/docs/bitmap.md">BITMAP</a>, <a href="/docs/inverted.md">INVERTED</a>, <a href="/docs/ngram.md">NGRAM</a>, <a href="/docs/rtree.md">RTREE</a> <a href="/docs/stl-sort.md">STL_SORT</a>, and more.</p>
+<p>This page has been deprecated. For the latest implementation, refer to <a href="/docs/bitmap.md">BITMAP</a>, <a href="/docs/inverted.md">INVERTED</a>, <a href="/docs/ngram.md">NGRAM</a>, <a href="/docs/rtree.md">RTREE</a>, <a href="/docs/stl-sort.md">STL_SORT</a>, <a href="/docs/trie.md">TRIE</a>, and <a href="/docs/fmindex.md">FMINDEX</a>.</p>
 </div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Types of scalar indexing<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: Index Scalar Fields
 <div class="language-javascript">
 <p>To use auto indexing, omit the <strong>index_type</strong> parameter in <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, so that Milvus can infer the index type based on the scalar field type.</p>
 </div>
-<p>For mappings between scalar data types and default indexing algorithms, refer to <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Scalar field indexing algorithms</a>.</p>
+<p>For mappings between scalar data types and default indexing algorithms, refer to <a href="/docs/scalar_index.md#Choosing-a-scalar-index">Choosing a scalar index</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -203,8 +203,11 @@ client.createIndex(createIndexReq);
 <ul>
 <li><p><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</p></li>
 <li><p><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
-<li><p><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</p></li>
+<li><p><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports numeric, VARCHAR, and TIMESTAMPTZ fields. For details, refer to <a href="/docs/stl-sort.md">STL_SORT</a>.</p></li>
+<li><p><strong>TRIE</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields. For details, refer to <a href="/docs/trie.md">TRIE</a>.</p></li>
+<li><p><strong>NGRAM</strong>: An index that accelerates LIKE and regex filters on VARCHAR fields. For details, refer to <a href="/docs/ngram.md">NGRAM</a>.</p></li>
+<li><p><strong>FMINDEX</strong>: An exact byte-level substring index for VARCHAR fields. For details, refer to <a href="/docs/fmindex.md">FMINDEX</a>.</p></li>
+<li><p><strong>RTREE</strong>: An index for GEOMETRY fields. For details, refer to <a href="/docs/rtree.md">RTREE</a>.</p></li>
 </ul></li>
 <li><p><strong>index_name</strong> (<em>string</em>)</p>
 <p>The name of the scalar index to create. Each scalar field supports one index.</p></li>
@@ -234,8 +237,12 @@ The type of the scalar index to create. For implicit indexing, leave it empty or
 For custom indexing, valid values are:
 <ul>
 <li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</li>
+<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports numeric, VARCHAR, and TIMESTAMPTZ fields. For details, refer to <a href="/docs/stl-sort.md">STL_SORT</a>.</li>
+<li><strong>TRIE</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields. For details, refer to <a href="/docs/trie.md">TRIE</a>.</li>
+<li><strong>NGRAM</strong>: An index that accelerates LIKE and regex filters on VARCHAR fields. For details, refer to <a href="/docs/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: An exact byte-level substring index for VARCHAR fields. For details, refer to <a href="/docs/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: An index for GEOMETRY fields. For details, refer to <a href="/docs/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
 <li><strong>CreateIndexReq</strong>
@@ -265,8 +272,12 @@ The type of the scalar index to create. For implicit indexing, leave it empty or
 For custom indexing, valid values are:
 <ul>
 <li><strong>INVERTED</strong>: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to <a href="/docs/scalar_index.md">Scalar Index</a>.</li>
-<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.</li>
+<li><strong>BITMAP</strong>: An index type that stores a bitmap of all unique values in a field. For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</li>
+<li><strong>STL_SORT</strong>: Sorts scalar fields using the standard template library sort algorithm. Supports numeric, VARCHAR, and TIMESTAMPTZ fields. For details, refer to <a href="/docs/stl-sort.md">STL_SORT</a>.</li>
+<li><strong>TRIE</strong>: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields. For details, refer to <a href="/docs/trie.md">TRIE</a>.</li>
+<li><strong>NGRAM</strong>: An index that accelerates LIKE and regex filters on VARCHAR fields. For details, refer to <a href="/docs/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: An exact byte-level substring index for VARCHAR fields. For details, refer to <a href="/docs/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: An index for GEOMETRY fields. For details, refer to <a href="/docs/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
 </ul>

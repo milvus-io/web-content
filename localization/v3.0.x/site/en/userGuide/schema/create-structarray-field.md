@@ -1905,7 +1905,9 @@ client.add_collection_field(
     &quot;collectionName&quot;: &quot;tech_articles&quot;,
     &quot;schema&quot;: {
       &quot;fieldName&quot;: &quot;chunks[lang]&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
+      &quot;dataType&quot;: &quot;Array&quot;,
+      &quot;elementDataType&quot;: &quot;VarChar&quot;,
+      &quot;nullable&quot;: true,
       &quot;elementNullable&quot;: true,
       &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;16&quot;}
     }

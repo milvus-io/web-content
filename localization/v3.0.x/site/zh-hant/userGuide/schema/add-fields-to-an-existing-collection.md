@@ -46,8 +46,10 @@ summary: 透過新增或刪除使用者自訂欄位及其所產生的向量欄�
 <li>Adding StructArray fields is supported in Milvus 3.0.0 and later. Added StructArray fields must be nullable.</li>
 </ul>
 <ul>
-<li><p>Adding a sub-field to an existing StructArray field is supported in Milvus 3.0.6 and later. The added sub-field must allow element-level null (<code translate="no">nullable=True</code> on a scalar or vector sub-field, <code translate="no">element_nullable=True</code> on an array sub-field), cannot have a default value, and cannot be bound to an index in the same request.</p></li>
-<li><p>Field names must be unique among fields in the collection.</p></li>
+<li>Adding a sub-field to an existing StructArray field is supported in Milvus 3.0.6 and later. The added sub-field must allow element-level null (<code translate="no">nullable=True</code> on a scalar or vector sub-field, <code translate="no">element_nullable=True</code> on an array sub-field), cannot have a default value, and cannot be bound to an index in the same request.</li>
+</ul>
+<ul>
+<li>Field names must be unique among fields in the collection.</li>
 </ul>
 <p><strong>Add a Function and its generated vector field</strong></p>
 <ul>
@@ -60,9 +62,13 @@ summary: 透過新增或刪除使用者自訂欄位及其所產生的向量欄�
 </ul>
 <p><strong>Drop user-defined fields</strong></p>
 <ul>
-<li><p>You cannot drop the primary key field, partition key field, clustering key field, or the last vector field in a collection.</p></li>
-<li><p>You can drop a whole <code translate="no">ARRAY&lt;STRUCT&gt;</code> field. Starting in Milvus 3.0.6, you can also drop an individual sub-field by its path, such as <code translate="no">chunks[lang]</code>, except the last sub-field of the <code translate="no">ARRAY&lt;STRUCT&gt;</code> field.</p></li>
-<li><p>You cannot directly drop a field that is used as a Function input field or generated as a Function output field. To remove a Function output field, drop the Function that generates it.</p></li>
+<li>You cannot drop the primary key field, partition key field, clustering key field, or the last vector field in a collection.</li>
+</ul>
+<ul>
+<li>You can drop a whole <code translate="no">ARRAY&lt;STRUCT&gt;</code> field. Starting in Milvus 3.0.6, you can also drop an individual sub-field by its path, such as <code translate="no">chunks[lang]</code>, except the last sub-field of the <code translate="no">ARRAY&lt;STRUCT&gt;</code> field.</li>
+</ul>
+<ul>
+<li>You cannot directly drop a field that is used as a Function input field or generated as a Function output field. To remove a Function output field, drop the Function that generates it.</li>
 </ul>
 <p><strong>Drop a Function and its generated vector field</strong></p>
 <ul>
@@ -702,7 +708,9 @@ cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     &quot;collectionName&quot;: &quot;books&quot;,
     &quot;schema&quot;: {
       &quot;fieldName&quot;: &quot;chunks[lang]&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
+      &quot;dataType&quot;: &quot;Array&quot;,
+      &quot;elementDataType&quot;: &quot;VarChar&quot;,
+      &quot;nullable&quot;: true,
       &quot;elementNullable&quot;: true,
       &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;16&quot;}
     }
@@ -715,7 +723,9 @@ cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <li><p>You cannot bind an index while adding the sub-field. Create the index with a separate <code translate="no">create_index()</code> call. An added vector sub-field supports element-level metrics only, not <code translate="no">MAX_SIM*</code>, and the collection must have an index on it before you load the collection with the new sub-field included.</p></li>
 <li><p>History segments receive the added sub-field and its index through schema-version compaction. Set <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> to <code translate="no">true</code> (it is <code translate="no">false</code> by default); otherwise the added sub-field’s index does not cover history segments.</p></li>
 <li><p>Adding a sub-field to a loaded collection does not release the collection. Queries can return the new sub-field before its index exists.</p></li>
-<li><p>Clients that pin a schema timestamp receive a schema-mismatch error and must refresh, as for any added field.</p></li>
+</ul>
+<ul>
+<li>Clients that pin a schema timestamp receive a schema-mismatch error and must refresh, as for any added field.</li>
 </ul>
 <h3 id="Add-user-defined-vector-fields" class="common-anchor-header">Add user-defined vector fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.18+</span><button data-href="#Add-user-defined-vector-fields" class="anchor-icon" translate="no">
       <svg translate="no"

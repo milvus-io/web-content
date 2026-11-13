@@ -316,7 +316,7 @@
             "children": []
           },
           {
-            "label": "创建Collection",
+            "label": "Create Collection",
             "id": "create-collection.md",
             "order": 1,
             "children": []
@@ -661,7 +661,7 @@
                     "children": []
                   },
                   {
-                    "label": "Cnalphanumonly",
+                    "label": "Cnalphanumonly简体中文（大陆）",
                     "id": "cnalphanumonly-filter.md",
                     "order": 5,
                     "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1427,7 +1439,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名器",
+                    "label": "TEI 排名工具",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -2252,7 +2264,7 @@
                     "children": []
                   },
                   {
-                    "label": "在不同存储桶之间的实例之间进行迁移",
+                    "label": "在不同存储桶的实例之间迁移",
                     "id": "cross-bucket-backup-and-restore.md",
                     "order": 2,
                     "children": []
@@ -2312,7 +2324,7 @@
             "children": []
           },
           {
-            "label": "设置 CDC 复制",
+            "label": "配置 CDC 复制",
             "id": "set_up_cdc_replication.md",
             "order": 1,
             "children": []

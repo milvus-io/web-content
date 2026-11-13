@@ -485,7 +485,7 @@
                 "children": []
               },
               {
-                "label": "インデックス、構造体配列、フィールド",
+                "label": "Index StructArray のフィールド",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -517,7 +517,7 @@
             "children": []
           },
           {
-            "label": "NULL許容フィールド",
+            "label": "Null許容フィールド",
             "id": "nullable-and-default.md",
             "order": 14,
             "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "脱コンパウンド装置",
+                    "label": "デコンパウンダー",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -743,7 +743,7 @@
             ]
           },
           {
-            "label": "コレクションのフィールドを変更する",
+            "label": "コレクションフィールドの変更",
             "id": "alter-collection-field.md",
             "order": 16,
             "children": []
@@ -794,7 +794,7 @@
             "children": []
           },
           {
-            "label": "Upsert エンティティ",
+            "label": "アップサートされるエンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1249,7 +1261,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "BM25 の機能",
+            "label": "BM25の機能",
             "id": "bm25-function.md",
             "order": 0,
             "children": []
@@ -1487,7 +1499,7 @@
             "children": []
           },
           {
-            "label": "強制マージ・コンパクテーション",
+            "label": "強制マージ・コンパクション",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1987,7 +1999,7 @@
             "children": []
           },
           {
-            "label": "Milvus スタンドアロンのアップグレード",
+            "label": "Milvus Standalone のアップグレード",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2266,7 +2278,7 @@
                 ]
               },
               {
-                "label": "0.6.x へアップグレードする",
+                "label": "0.6.x にアップグレードする",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -2478,7 +2490,7 @@
                 "children": []
               },
               {
-                "label": "ノミック",
+                "label": "Nomic",
                 "id": "embed-with-nomic.md",
                 "order": 11,
                 "children": []

@@ -473,7 +473,7 @@
                 "children": []
               },
               {
-                "label": "Créer un champ StructArray",
+                "label": "Créer un champ de type StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -2240,7 +2252,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Sauvegarde et restauration au sein d'une même instance",
+                    "label": "Sauvegarde et restauration dans une seule instance",
                     "id": "single-instance-backup-and-restore.md",
                     "order": 0,
                     "children": []
@@ -3232,7 +3244,7 @@
         "children": []
       },
       {
-        "label": "Recherche en entonnoir avec les représentations « matriochka »",
+        "label": "Recherche en entonnoir avec des représentations de type « matriochka »",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

@@ -4,7 +4,7 @@ title: Data Model Design with an Array of StructsCompatible with Milvus 2.6.4+
 summary: >-
   As aplicações modernas de IA, especialmente na Internet das Coisas (IoT) e na
   condução autónoma, costumam processar eventos ricos e estruturados: uma
-  leitura de sensor com o seu registo temporal e vetor de incorporação, um
+  leitura de sensor com o seu registo temporal e representação vetorial, um
   registo de diagnóstico com um código de erro e um excerto de áudio, ou um
   segmento de viagem com localização, velocidade e contexto da cena. Isto exige
   que a base de dados suporte nativamente a ingestão e a pesquisa de dados

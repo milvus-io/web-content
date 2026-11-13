@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "تشغيل Milvus في الوضع المستقل",
+            "label": "تشغيل Milvus في وضع مستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -473,7 +473,7 @@
                 "children": []
               },
               {
-                "label": "إنشاء حقل من نوع StructArray",
+                "label": "إنشاء حقل StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -814,7 +814,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "شرح المؤشر",
+            "label": "شرح الفهرس",
             "id": "index-explained.md",
             "order": 0,
             "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1291,7 +1303,7 @@
                 "children": []
               },
               {
-                "label": "Vertex AI",
+                "label": "فيرتكس إيه آي",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
@@ -1421,7 +1433,7 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف نماذج اللغة الكبيرة (vLLM)",
+                    "label": "مُصنِّف vLLM",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []

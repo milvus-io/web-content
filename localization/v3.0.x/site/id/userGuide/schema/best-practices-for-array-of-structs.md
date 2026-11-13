@@ -6,8 +6,9 @@ summary: >-
   otonom, umumnya melakukan penalaran berdasarkan peristiwa yang kaya dan
   terstruktur: pembacaan sensor beserta cap waktu dan vektor embedding-nya, log
   diagnostik dengan kode kesalahan dan cuplikan audio, atau segmen perjalanan
-  dengan lokasi, kecepatan, dan konteks pemandangan. Hal ini mengharuskan basis
-  data untuk secara native mendukung pengambilan dan pencarian data bersarang.
+  yang mencakup lokasi, kecepatan, dan konteks pemandangan. Hal ini mengharuskan
+  basis data untuk secara native mendukung pengambilan dan pencarian data
+  bersarang.
 beta: Milvus 2.6.4+
 ---
 <h1 id="Data-Model-Design-with-an-Array-of-Structs" class="common-anchor-header">Data Model Design with an Array of Structs<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Data-Model-Design-with-an-Array-of-Structs" class="anchor-icon" translate="no">

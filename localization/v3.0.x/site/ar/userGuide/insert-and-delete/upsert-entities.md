@@ -1,7 +1,7 @@
 ---
 id: upsert-entities.md
 title: Upsert Entities
-summary: توفر عملية «upsert» طريقة ملائمة لإدراج الكيانات في مجموعة أو تحديثها.
+summary: توفر عملية «upsert» طريقة مريحة لإدراج الكيانات في مجموعة أو تحديثها.
 ---
 <h1 id="Upsert-Entities" class="common-anchor-header">Upsert Entities<button data-href="#Upsert-Entities" class="anchor-icon" translate="no">
       <svg translate="no"

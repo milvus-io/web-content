@@ -6,8 +6,8 @@ summary: >-
   содержать упорядоченный список структурированных элементов. Поле StructArray
   представляет собой поле типа Array, тип элементов которого — Struct. Каждый
   элемент Struct соответствует одной и той же схеме и может содержать скалярные
-  подполя, векторные подполя, а также — начиная с версии Milvus 3.0.6 —
-  скалярные массивы подполей.
+  подполя, векторные подполя, а также, начиная с версии Milvus 3.0.6, подполя в
+  виде скалярных массивов.
 ---
 <h1 id="Create-a-StructArray-Field" class="common-anchor-header">Create a StructArray Field<button data-href="#Create-a-StructArray-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1906,7 +1906,9 @@ client.add_collection_field(
     &quot;collectionName&quot;: &quot;tech_articles&quot;,
     &quot;schema&quot;: {
       &quot;fieldName&quot;: &quot;chunks[lang]&quot;,
-      &quot;dataType&quot;: &quot;VarChar&quot;,
+      &quot;dataType&quot;: &quot;Array&quot;,
+      &quot;elementDataType&quot;: &quot;VarChar&quot;,
+      &quot;nullable&quot;: true,
       &quot;elementNullable&quot;: true,
       &quot;elementTypeParams&quot;: {&quot;max_length&quot;: &quot;16&quot;}
     }

@@ -2,11 +2,11 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  Это руководство поможет вам создать и настроить скалярные индексы для таких
-  полей, как целые числа, строки и т. д.
-title: Скалярные поля индексов
+  В данном руководстве вы узнаете, как создавать и настраивать скалярные индексы
+  для таких полей, как целые числа, строки и т. д.
+title: Скалярные индексы по полям
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Скалярные поля индексов<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">Скалярные индексы по полям<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ title: Скалярные поля индексов
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В Milvus скалярный индекс используется для ускорения метафильтрации по определенному значению не векторного поля, подобно традиционному индексу базы данных. Это руководство поможет вам создать и настроить скалярные индексы для таких полей, как целые числа, строки и т. д.</p>
+    </button></h1><p>В Milvus скалярный индекс используется для ускорения метафильтрации по конкретному значению невекторного поля, аналогично традиционному индексу базы данных. В этом руководстве вы узнаете, как создавать и настраивать скалярные индексы для таких полей, как целые числа, строки и т. д.</p>
 <div class="alert warning">
-<p>Эта страница была устаревшей. За последними реализациями обращайтесь к разделам <a href="/docs/ru/bitmap.md">BITMAP</a>, <a href="/docs/ru/inverted.md">INVERTED</a>, <a href="/docs/ru/ngram.md">NGRAM</a>, <a href="/docs/ru/rtree.md">RTREE</a> <a href="/docs/ru/stl-sort.md">STL_SORT</a> и другим.</p>
+<p>Эта страница устарела. Информацию о новейших реализациях см. в разделах <a href="/docs/ru/bitmap.md">BITMAP</a>, <a href="/docs/ru/inverted.md">INVERTED</a>, <a href="/docs/ru/ngram.md">NGRAM</a>, <a href="/docs/ru/rtree.md">RTREE</a>, <a href="/docs/ru/stl-sort.md">STL_SORT</a>, <a href="/docs/ru/trie.md">TRIE</a> и <a href="/docs/ru/fmindex.md">FMINDEX</a>.</p>
 </div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Типы скалярной индексации<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,10 +41,10 @@ title: Скалярные поля индексов
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Автоматическая индексация</a></strong>: Milvus автоматически определяет тип индекса, основываясь на типе данных скалярного поля. Это подходит, когда вам не нужно контролировать конкретный тип индекса.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Пользовательское индексирование</a></strong>: Вы указываете точный тип индекса, например инвертированный индекс или <a href="/docs/ru/bitmap.md">растровый индекс</a>. Это обеспечивает больший контроль над выбором типа индекса.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Автоматическая индексация</a></strong>: Milvus автоматически определяет тип индекса на основе типа данных скалярного поля. Это подходит в тех случаях, когда вам не нужно контролировать конкретный тип индекса.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Пользовательская индексация</a></strong>: вы указываете конкретный тип индекса, например инвертированный индекс или <a href="/docs/ru/bitmap.md">битовый индекс</a>. Это обеспечивает больший контроль над выбором типа индекса.</p></li>
 </ul>
-<h2 id="Auto-indexing" class="common-anchor-header">Автоматическое индексирование<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
+<h2 id="Auto-indexing" class="common-anchor-header">Автоматическая индексация<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,17 +60,20 @@ title: Скалярные поля индексов
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Чтобы использовать автоматическое индексирование, опустите параметр <strong>index_type</strong> в строке <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>чтобы Milvus мог определить тип индекса на основе типа скалярного поля.</p>
+<p>Чтобы использовать автоматическую индексацию, опустите параметр <strong>index_type</strong> в <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, чтобы Milvus мог определить тип индекса на основе типа скалярного поля.</p>
 </div>
 <div class="language-java">
-<p>Чтобы использовать автоматическое индексирование, опустите параметр <strong>indexType</strong> в <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, чтобы Milvus мог определить тип индекса на основе типа скалярного поля.</p>
+<p>Чтобы использовать автоматическую индексацию, опустите параметр <strong>indexType</strong> в <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, чтобы Milvus мог определить тип индекса на основе типа скалярного поля.</p>
 </div>
 <div class="language-javascript">
-<p>Чтобы использовать автоматическое индексирование, опустите параметр <strong>index_type</strong> в <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, чтобы Milvus мог определить тип индекса на основе типа скалярного поля.</p>
+<p>Чтобы использовать автоматическую индексацию, опустите параметр <strong>index_type</strong> в <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, чтобы Milvus мог определить тип индекса на основе типа скалярного поля.</p>
 </div>
-<p>Сопоставления между скалярными типами данных и алгоритмами индексации по умолчанию см. в разделе <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Алгоритмы индексации скалярных полей</a>.</p>
+<p>Соответствия между скалярными типами данных и алгоритмами индексирования по умолчанию см. в разделе <a href="/docs/ru/scalar_index.md#Choosing-a-scalar-index">«Выбор скалярного индекса</a>».</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Auto indexing</span>
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -115,7 +118,7 @@ client.createIndex(createIndexReq);
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">// Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
 })
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Custom-indexing" class="common-anchor-header">Пользовательское индексирование<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
+<h2 id="Custom-indexing" class="common-anchor-header">Пользовательская индексация<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,17 +134,20 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Чтобы использовать пользовательскую индексацию, укажите конкретный тип индекса с помощью параметра <strong>index_type</strong> в файле <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>Чтобы использовать настраиваемую индексацию, укажите конкретный тип индекса с помощью параметра <strong>index_type</strong> в <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Чтобы использовать пользовательскую индексацию, укажите конкретный тип индекса с помощью параметра <strong>indexType</strong> в <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Чтобы использовать пользовательскую индексацию, укажите конкретный тип индекса с помощью параметра <strong>index_type</strong> в <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Чтобы использовать настраиваемую индексацию, укажите конкретный тип индекса с помощью параметра <strong>index_type</strong> в <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
-<p>В примере ниже создается инвертированный индекс для скалярного поля <code translate="no">scalar_2</code>.</p>
+<p>В приведенном ниже примере создается инвертированный индекс для скалярного поля <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
@@ -187,47 +193,65 @@ client.createIndex(createIndexReq);
 <li><p><strong>prepare_index_params()</strong></p>
 <p>Подготавливает объект <strong>IndexParams</strong>.</p></li>
 <li><p><strong>add_index()</strong></p>
-<p>Добавляет конфигурации индекса в объект <strong>IndexParams</strong>.</p>
+<p>Добавляет настройки индекса в объект <strong>IndexParams</strong>.</p>
 <ul>
-<li><p><strong>имя_поля</strong><em>(строка</em>)</p>
-<p>Имя скалярного поля для индексации.</p></li>
-<li><p><strong>index_type</strong><em>(строка</em>):</p>
-<p>Тип создаваемого скалярного индекса. Для неявного индексирования оставьте его пустым или опустите этот параметр.</p>
-<p>Для пользовательского индексирования допустимыми значениями являются:</p>
+<li><p><strong>field_name</strong> (<em>строка</em>)</p>
+<p>Имя скалярного поля для индексирования.</p></li>
+<li><p><strong>index_type</strong> (<em>строка</em>):</p>
+<p>Тип скалярного индекса, который необходимо создать. Для неявной индексации оставьте поле пустым или пропустите этот параметр.</p>
+<p>Для пользовательской индексации допустимы следующие значения:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Рекомендуется) Инвертированный индекс состоит из словаря терминов, содержащего все токенизированные слова, отсортированные в алфавитном порядке. Подробнее см. в разделе <a href="/docs/ru/scalar_index.md">Скалярный индекс</a>.</p></li>
-<li><p><strong>БИТМАП</strong>: Тип индекса, который хранит битовую карту всех уникальных значений в поле. Подробнее см. в разделе <a href="/docs/ru/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Сортирует скалярные поля с помощью стандартного алгоритма сортировки библиотеки шаблонов. Поддерживаются только числовые поля (например, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
-<li><p><strong>Trie</strong>: Древовидная структура данных для быстрого поиска и извлечения префиксов. Поддерживает поля VARCHAR.</p></li>
+<li><p><strong>INVERTED</strong>: (рекомендуется) Инвертированный индекс состоит из словаря терминов, содержащего все токенизированные слова, отсортированные в алфавитном порядке. Подробности см. в разделе <a href="/docs/ru/scalar_index.md">«Скалярный индекс</a>».</p></li>
+<li><p><strong>BITMAP</strong>: тип индекса, в котором хранится растровое изображение всех уникальных значений поля. Подробности см. в разделе <a href="/docs/ru/bitmap.md">«BITMAP</a>».</p></li>
+<li><p><strong>STL_SORT</strong>: сортирует скалярные поля с использованием алгоритма сортировки стандартной библиотеки шаблонов. Поддерживает числовые поля, поля типа VARCHAR и TIMESTAMPTZ. Подробности см. в разделе <a href="/docs/ru/stl-sort.md">«STL_SORT</a>».</p></li>
+<li><p><strong>TRIE</strong>: Деревовидная структура данных для быстрого поиска и извлечения по префиксам. Поддерживает поля типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/trie.md">«TRIE</a>».</p></li>
+<li><p><strong>NGRAM</strong>: индекс, ускоряющий работу фильтров LIKE и регулярных выражений для полей типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</p></li>
+<li><p><strong>FMINDEX</strong>: индекс точных подстрок на уровне байтов для полей типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/fmindex.md">FMINDEX</a>.</p></li>
+<li><p><strong>RTREE</strong>: индекс для полей GEOMETRY. Подробности см. в разделе <a href="/docs/ru/rtree.md">RTREE</a>.</p></li>
 </ul></li>
-<li><p><strong>имя_индекса</strong><em>(строка</em>)</p>
-<p>Имя создаваемого скалярного индекса. Каждое скалярное поле поддерживает один индекс.</p></li>
+<li><p><strong>index_name</strong> (<em>строка</em>)</p>
+<p>Имя скалярного индекса, который необходимо создать. Каждое скалярное поле поддерживает один индекс.</p></li>
 </ul></li>
 <li><p><strong>create_index()</strong></p>
-<p>Создает индекс в указанной коллекции.</p>
+<p>Создаёт индекс в указанной коллекции.</p>
 <ul>
-<li><p><strong>имя_коллекции</strong><em>(строка</em>)</p>
-<p>Имя коллекции, для которой создается индекс.</p></li>
+<li><p><strong>collection_name</strong> (<em>строка</em>)</p>
+<p>Имя коллекции, для которой создаётся индекс.</p></li>
 <li><p><strong>index_params</strong></p>
-<p>Объект <strong>IndexParams</strong>, содержащий конфигурации индекса.</p></li>
+<p>Объект <strong>IndexParams</strong>, содержащий настройки индекса.</p></li>
 </ul></li>
 </ul>
 </div>
 <div class="language-java">
 <p><strong>Методы и параметры</strong></p>
 <ul>
-<li><strong>IndexParam</strong>Подготавливает объект IndexParam.<ul>
-<li><strong>fieldName</strong><em>(String</em>) Имя скалярного поля для индексации.</li>
-<li><strong>indexName</strong><em>(String</em>) Имя создаваемого скалярного индекса. Каждое скалярное поле поддерживает один индекс.</li>
-<li><strong>indexType</strong><em>(String</em>) Тип создаваемого скалярного индекса. Для неявного индексирования оставьте его пустым или опустите этот параметр. Для пользовательского индексирования допустимыми значениями являются:<ul>
-<li><strong>INVERTED</strong>: (Рекомендуется) Инвертированный индекс состоит из словаря терминов, содержащего все токенизированные слова, отсортированные в алфавитном порядке. Подробнее см. в разделе <a href="/docs/ru/scalar_index.md">Скалярный индекс</a>.</li>
-<li><strong>STL_SORT</strong>: Сортирует скалярные поля с помощью стандартного алгоритма сортировки библиотеки шаблонов. Поддерживает булевы и числовые поля (например, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: Древовидная структура данных для быстрого поиска и извлечения префиксов. Поддерживает поля VARCHAR.</li>
+<li><strong>IndexParam</strong>
+Подготавливает объект IndexParam.
+<ul>
+<li><strong>fieldName</strong> (<em>String</em>)
+Имя скалярного поля, для которого создаётся индекс.</li>
+<li><strong>indexName</strong> (<em>String</em>)
+Имя скалярного индекса, который необходимо создать. Каждое скалярное поле поддерживает один индекс.</li>
+<li><strong>indexType</strong> (<em>String</em>)
+Тип скалярного индекса, который необходимо создать. Для неявной индексации оставьте поле пустым или пропустите этот параметр.
+Для пользовательской индексации допустимы следующие значения:
+<ul>
+<li><strong>INVERTED</strong>: (рекомендуется) Инвертированный индекс состоит из словаря терминов, содержащего все токенизированные слова, отсортированные в алфавитном порядке. Подробности см. в разделе <a href="/docs/ru/scalar_index.md">«Скалярный индекс</a>».</li>
+<li><strong>BITMAP</strong>: тип индекса, в котором хранится растровое изображение всех уникальных значений в поле. Подробности см. в разделе <a href="/docs/ru/bitmap.md">«BITMAP</a>».</li>
+<li><strong>STL_SORT</strong>: сортирует скалярные поля с использованием алгоритма сортировки стандартной библиотеки шаблонов. Поддерживает числовые поля, поля типа VARCHAR и TIMESTAMPTZ. Подробности см. в разделе <a href="/docs/ru/stl-sort.md">«STL_SORT</a>».</li>
+<li><strong>TRIE</strong>: Деревовидная структура данных для быстрого поиска и извлечения по префиксам. Поддерживает поля типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/trie.md">«TRIE</a>».</li>
+<li><strong>NGRAM</strong>: индекс, ускоряющий работу фильтров LIKE и регулярных выражений для полей типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: индекс точных подстрок на уровне байтов для полей типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: индекс для полей GEOMETRY. Подробности см. в разделе <a href="/docs/ru/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>Создает индекс в указанной коллекции.<ul>
-<li><strong>collectionName</strong><em>(String</em>) Имя коллекции, для которой создается индекс.</li>
-<li><strong>indexParams</strong><em>(List<IndexParam></em>) Список объектов IndexParam, содержащих конфигурации индекса.</li>
+<li><strong>CreateIndexReq</strong>
+Создает индекс в указанной коллекции.
+<ul>
+<li><strong>collectionName</strong> (<em>String</em>)
+Имя коллекции, для которой создаётся индекс.</li>
+<li><strong>indexParams</strong> (<em>Список<IndexParam></em>)
+Список объектов IndexParam, содержащих настройки индекса.</li>
 </ul></li>
 </ul>
 </div>
@@ -237,13 +261,23 @@ client.createIndex(createIndexReq);
 <li><p><strong>createIndex</strong></p>
 <p>Создает индекс в указанной коллекции.</p>
 <ul>
-<li><strong>Имя_коллекции</strong><em>(строка</em>) Имя коллекции, для которой создается индекс.</li>
-<li><strong>имя_поля</strong><em>(строка</em>) Имя скалярного поля для индексации.</li>
-<li><strong>index_name</strong><em>(string</em>) Имя создаваемого скалярного индекса. Каждое скалярное поле поддерживает один индекс.</li>
-<li><strong>index_type</strong><em>(строка</em>) Тип создаваемого скалярного индекса. Для неявного индексирования оставьте его пустым или опустите этот параметр. Для пользовательского индексирования допустимыми значениями являются:<ul>
-<li><strong>INVERTED</strong>: (рекомендуется) Инвертированный индекс состоит из словаря терминов, содержащего все токенизированные слова, отсортированные в алфавитном порядке. Подробнее см. в разделе <a href="/docs/ru/scalar_index.md">Скалярный индекс</a>.</li>
-<li><strong>STL_SORT</strong>: Сортирует скалярные поля с помощью стандартного алгоритма сортировки библиотеки шаблонов. Поддерживает булевы и числовые поля (например, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: Древовидная структура данных для быстрого поиска и извлечения префиксов. Поддерживает поля VARCHAR.</li>
+<li><strong>collection_name</strong> (<em>string</em>)
+Имя коллекции, для которой создается индекс.</li>
+<li><strong>field_name</strong> (<em>строка</em>)
+Имя скалярного поля, для которого создается индекс.</li>
+<li><strong>index_name</strong> (<em>строка</em>)
+Имя скалярного индекса, который необходимо создать. Каждое скалярное поле поддерживает один индекс.</li>
+<li><strong>index_type</strong> (<em>строка</em>)
+Тип скалярного индекса, который необходимо создать. Для неявной индексации оставьте поле пустым или пропустите этот параметр.
+Для пользовательской индексации допустимы следующие значения:
+<ul>
+<li><strong>INVERTED</strong>: (Рекомендуется) Инвертированный индекс состоит из словаря терминов, содержащего все токенизированные слова, отсортированные в алфавитном порядке. Подробности см. в разделе <a href="/docs/ru/scalar_index.md">«Скалярный индекс</a>».</li>
+<li><strong>BITMAP</strong>: тип индекса, в котором хранится растровое изображение всех уникальных значений в поле. Подробности см. в разделе <a href="/docs/ru/bitmap.md">«BITMAP</a>».</li>
+<li><strong>STL_SORT</strong>: сортирует скалярные поля с использованием алгоритма сортировки стандартной библиотеки шаблонов. Поддерживает числовые поля, поля типа VARCHAR и TIMESTAMPTZ. Подробности см. в разделе <a href="/docs/ru/stl-sort.md">«STL_SORT</a>».</li>
+<li><strong>TRIE</strong>: Деревовидная структура данных для быстрого поиска и извлечения по префиксам. Поддерживает поля типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/trie.md">«TRIE</a>».</li>
+<li><strong>NGRAM</strong>: индекс, ускоряющий работу фильтров LIKE и регулярных выражений для полей типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: индекс точных подстрок на уровне байтов для полей типа VARCHAR. Подробности см. в разделе <a href="/docs/ru/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: индекс для полей GEOMETRY. Подробности см. в разделе <a href="/docs/ru/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -264,16 +298,19 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Используйте метод <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> для проверки создания скалярных индексов:</p>
+<p>Используйте метод <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> метод для проверки создания скалярных индексов:</p>
 </div>
 <div class="language-java">
-<p>Используйте метод <code translate="no">listIndexes()</code> для проверки создания скалярных индексов:</p>
+<p>Используйте метод ` <code translate="no">listIndexes()</code> ` для проверки создания скалярных индексов:</p>
 </div>
 <div class="language-javascript">
-<p>Используйте метод <code translate="no">listIndexes()</code> для проверки создания скалярных индексов:</p>
+<p>Используйте метод ` <code translate="no">listIndexes()</code> ` для проверки создания скалярных индексов:</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )

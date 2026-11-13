@@ -249,7 +249,7 @@
         ]
       },
       {
-        "label": "Bitset",
+        "label": "Набор битов",
         "id": "bitset.md",
         "order": 1,
         "children": []
@@ -606,7 +606,7 @@
                     "children": []
                   },
                   {
-                    "label": "Линдэра",
+                    "label": "Линдер",
                     "id": "lindera-tokenizer.md",
                     "order": 4,
                     "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "Декомпоундер",
+                    "label": "Устройство для удаления смеси",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1118,7 +1130,7 @@
                 "children": []
               },
               {
-                "label": "Операторы над массивами",
+                "label": "Операторы с массивами",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1191,7 +1203,7 @@
                 "children": []
               },
               {
-                "label": "Поиск по диапазону с помощью StructArray",
+                "label": "Поиск по диапазону с использованием StructArray",
                 "id": "range-search-with-structarray.md",
                 "order": 2,
                 "children": []
@@ -1415,7 +1427,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Обзор модели ранжирования",
+                    "label": "Обзор Model Ranker",
                     "id": "model-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -2144,7 +2156,7 @@
                 "children": []
               },
               {
-                "label": "Удаление пользователей и ролей",
+                "label": "Удалить пользователей и роли",
                 "id": "drop_users_roles.md",
                 "order": 5,
                 "children": []
@@ -2635,7 +2647,7 @@
                 "children": []
               },
               {
-                "label": "Async API Milvus",
+                "label": "API Milvus Async",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []

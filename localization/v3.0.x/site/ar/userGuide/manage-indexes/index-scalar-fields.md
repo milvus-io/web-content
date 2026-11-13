@@ -2,11 +2,11 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  سيرشدك هذا الدليل إلى كيفية إنشاء وتكوين الفهارس العددية للحقول مثل الأعداد
-  الصحيحة والسلاسل وما إلى ذلك.
-title: فهرس الحقول العددية
+  سيوجهك هذا الدليل خطوة بخطوة إلى كيفية إنشاء وتهيئة الفهارس القياسية لحقول مثل
+  الأعداد الصحيحة والسلاسل النصية وغيرها.
+title: الحقول القياسية للفهرس
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">فهرس الحقول العددية<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">الحقول القياسية للفهرس<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +21,11 @@ title: فهرس الحقول العددية
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>في Milvus، يتم استخدام الفهرس العددي لتسريع التصفية الوصفية حسب قيمة حقل معين غير متجه، على غرار فهرس قاعدة البيانات التقليدية. سيرشدك هذا الدليل خلال إنشاء وتكوين الفهارس العددية للحقول مثل الأعداد الصحيحة والسلاسل وما إلى ذلك.</p>
+    </button></h1><p>في Milvus، يُستخدم الفهرس القياسي لتسريع عملية التصفية الفوقية (metafiltering) وفقًا لقيمة حقل غير متجهي محدد، على غرار الفهرس التقليدي في قواعد البيانات. سيرشدك هذا الدليل خطوة بخطوة إلى إنشاء وتكوين الفهارس القياسية لحقول مثل الأعداد الصحيحة والسلاسل النصية وغيرها.</p>
 <div class="alert warning">
-<p>تم إهمال هذه الصفحة. للحصول على أحدث التطبيقات، راجع <a href="/docs/ar/bitmap.md">BITMAP</a> و <a href="/docs/ar/inverted.md">INVERTED</a> و <a href="/docs/ar/ngram.md">NGRAM</a> و <a href="/docs/ar/rtree.md">RTREE</a> <a href="/docs/ar/stl-sort.md">STL_SORT</a> وغيرها.</p>
+<p>هذه الصفحة لم تعد مستخدمة. للحصول على أحدث تطبيق، راجع <a href="/docs/ar/bitmap.md">BITMAP</a> و <a href="/docs/ar/inverted.md">INVERTED</a> و <a href="/docs/ar/ngram.md">NGRAM</a> و <a href="/docs/ar/rtree.md">RTREE</a> و <a href="/docs/ar/stl-sort.md">STL_SORT</a> و <a href="/docs/ar/trie.md">TRIE</a> و <a href="/docs/ar/fmindex.md">FMINDEX</a>.</p>
 </div>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">أنواع الفهرسة العددية<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">أنواع الفهرسة القياسية<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,8 +41,8 @@ title: فهرس الحقول العددية
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus نوع الفهرسة تلقائيًا بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس الدقيق، مثل الفهرس المقلوب أو <a href="/docs/ar/bitmap.md">الفهرس النقطي</a>. يوفر هذا المزيد من التحكم في تحديد نوع الفهرس.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">الفهرسة التلقائية</a></strong>: يقرر Milvus نوع الفهرس تلقائيًا بناءً على نوع بيانات الحقل القياسي. وهذا مناسب عندما لا تحتاج إلى التحكم في نوع الفهرس المحدد.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">الفهرسة المخصصة</a></strong>: يمكنك تحديد نوع الفهرس بالضبط، مثل الفهرس المعكوس أو <a href="/docs/ar/bitmap.md">فهرس الصورة النقطية</a>. يوفر هذا مزيدًا من التحكم في اختيار نوع الفهرس.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">الفهرسة التلقائية<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,17 +60,20 @@ title: فهرس الحقول العددية
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>لاستخدام الفهرسة التلقائية، احذف معلمة <strong>نوع الفهرسة</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>بحيث يمكن ل Milvus استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
+<p>لاستخدام الفهرسة التلقائية، قم بحذف المعلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>، حتى يتمكن Milvus من استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
 </div>
 <div class="language-java">
-<p>لاستخدام الفهرسة التلقائية، احذف معلمة <strong>نوع الفهرس</strong> في <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>بحيث يمكن ل Milvus استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
+<p>لاستخدام الفهرسة التلقائية، قم بحذف المعلمة <strong>indexType</strong> في <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>، حتى يتمكن Milvus من استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
 </div>
 <div class="language-javascript">
-<p>لاستخدام الفهرسة التلقائية، احذف معلمة <strong>نوع الفهرس</strong> في <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>بحيث يمكن ل Milvus استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
+<p>لاستخدام الفهرسة التلقائية، قم بحذف المعلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>، حتى يتمكن Milvus من استنتاج نوع الفهرس بناءً على نوع الحقل القياسي.</p>
 </div>
-<p>للاطلاع على التعيينات بين أنواع البيانات العددية وخوارزميات الفهرسة الافتراضية، راجع <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">خوارزميات فهرسة الحقل العددي</a>.</p>
+<p>للاطلاع على التوافق بين أنواع البيانات القياسية وخوارزميات الفهرسة الافتراضية، راجع <a href="/docs/ar/scalar_index.md#Choosing-a-scalar-index">«اختيار فهرس قياسي</a>».</p>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Auto indexing</span>
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -115,7 +118,7 @@ client.createIndex(createIndexReq);
     <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;&quot;</span> <span class="hljs-comment">// Type of index to be created. For auto indexing, leave it empty or omit this parameter.</span>
 })
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Custom-indexing" class="common-anchor-header">فهرسة مخصصة<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
+<h2 id="Custom-indexing" class="common-anchor-header">الفهرسة المخصصة<button data-href="#Custom-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,17 +134,20 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرس معين باستخدام المعلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام معلمة <strong>indexType</strong> في . <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
+<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرس معين باستخدام المعلمة <strong>indexType</strong> في <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرسة معين باستخدام المعلمة <strong>index_type</strong> في . <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>لاستخدام الفهرسة المخصصة، حدد نوع فهرس معين باستخدام المعلمة <strong>index_type</strong> في <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
-<p>ينشئ المثال أدناه فهرسًا مقلوبًا للحقل القياسي <code translate="no">scalar_2</code>.</p>
+<p>يُنشئ المثال أدناه فهرسًا معكوسًا للحقل القياسي <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
@@ -184,66 +190,94 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>الطرق والمعلمات</strong></p>
 <ul>
-<li><p><strong>إعداد_مفهرس_بارامز()</strong></p>
-<p>يقوم بإعداد كائن <strong>IndexParams</strong>.</p></li>
-<li><p><strong>إضافة_الفهرس()</strong></p>
-<p>يضيف تكوينات الفهرس إلى كائن <strong>IndexParams</strong>.</p>
+<li><p><strong>prepare_index_params()</strong></p>
+<p>يُعد كائن <strong>IndexParams</strong>.</p></li>
+<li><p><strong>add_index()</strong></p>
+<p>تضيف تكوينات الفهرس إلى كائن <strong>IndexParams</strong>.</p>
 <ul>
-<li><p><strong>اسم_الحقل</strong><em>(سلسلة</em>)</p>
+<li><p><strong>field_name</strong> (<em>سلسلة</em>)</p>
 <p>اسم الحقل القياسي المراد فهرسته.</p></li>
-<li><p><strong>نوع_الفهرس</strong><em>(سلسلة</em>):</p>
-<p>نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة.</p>
-<p>للفهرسة المخصصة، القيم الصالحة هي:</p>
+<li><p><strong>index_type</strong> (<em>سلسلة</em>):</p>
+<p>نوع الفهرس القياسي المراد إنشاؤه. بالنسبة للفهرسة الضمنية، اتركه فارغًا أو احذف هذا المعامل.</p>
+<p>بالنسبة للفهرسة المخصصة، القيم الصالحة هي:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</p></li>
+<li><p><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المعكوس من قاموس مصطلحات يحتوي على جميع الكلمات التي تم تحويلها إلى رموز، مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس السكالي</a>.</p></li>
 <li><p><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: فرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم فقط الحقول الرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</p></li>
-<li><p><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</p></li>
+<li><p><strong>STL_SORT</strong>: يقوم بفرز الحقول السكالارية باستخدام خوارزمية الفرز الخاصة بمكتبة القوالب القياسية. يدعم الحقول الرقمية وحقول VARCHAR و TIMESTAMPTZ. لمزيد من التفاصيل، راجع <a href="/docs/ar/stl-sort.md">STL_SORT</a>.</p></li>
+<li><p><strong>TRIE</strong>: بنية بيانات شجرية للبحث السريع عن البادئات واسترجاعها. يدعم الحقول من نوع VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/trie.md">TRIE</a>.</p></li>
+<li><p><strong>NGRAM</strong>: فهرس يعمل على تسريع عوامل التصفية LIKE و regex في الحقول من نوع VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">NGRAM</a>.</p></li>
+<li><p><strong>FMINDEX</strong>: فهرس دقيق لسلسلة فرعية على مستوى البايت لحقول VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/fmindex.md">FMINDEX</a>.</p></li>
+<li><p><strong>RTREE</strong>: فهرس لحقول GEOMETRY. لمزيد من التفاصيل، راجع <a href="/docs/ar/rtree.md">RTREE</a>.</p></li>
 </ul></li>
-<li><p><strong>اسم_الفهرس</strong><em>(سلسلة</em>)</p>
+<li><p><strong>index_name</strong> (<em>سلسلة</em>)</p>
 <p>اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرسًا واحدًا.</p></li>
 </ul></li>
-<li><p><strong>إنشاء_فهرس()</strong></p>
-<p>إنشاء الفهرس في المجموعة المحددة.</p>
+<li><p><strong>create_index()</strong></p>
+<p>ينشئ الفهرس في المجموعة المحددة.</p>
 <ul>
-<li><p><strong>اسم_المجموعة</strong><em>(سلسلة</em>)</p>
-<p>اسم المجموعة التي يتم إنشاء الفهرس لها.</p></li>
+<li><p><strong>collection_name</strong> (<em>سلسلة</em>)</p>
+<p>اسم المجموعة التي سيتم إنشاء الفهرس لها.</p></li>
 <li><p><strong>index_params</strong></p>
 <p>كائن <strong>IndexParams</strong> الذي يحتوي على تكوينات الفهرس.</p></li>
 </ul></li>
 </ul>
 </div>
 <div class="language-java">
-<p><strong>الأساليب والمعلمات</strong></p>
+<p><strong>الطرق والمعلمات</strong></p>
 <ul>
-<li>إعداد كائن <strong>IndexParam</strong>إعداد كائن IndexParam.<ul>
-<li><strong>اسم الحقل</strong><em>(سلسلة</em>) اسم الحقل القياسي المراد فهرسته.</li>
-<li><strong>اسم الفهرس</strong><em>(سلسلة</em>) اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرس واحد.</li>
-<li><strong>نوع الفهرس</strong><em>(سلسلة</em>) نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة. للفهرسة المخصصة، القيم الصالحة هي<ul>
-<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</li>
-<li><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم الحقول المنطقية والرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</li>
-<li><strong>تري</strong>: بنية بيانات شجرية لعمليات البحث والاسترجاع السريع للبادئة. يدعم حقول VARCHAR.</li>
+<li><strong>IndexParam</strong>
+يقوم بإعداد كائن IndexParam.
+<ul>
+<li><strong>fieldName</strong> (<em>سلسلة</em>)
+اسم الحقل القياسي المراد فهرسته.</li>
+<li><strong>indexName</strong> (<em>سلسلة</em>)
+اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرسًا واحدًا.</li>
+<li><strong>indexType</strong> (<em>سلسلة</em>)
+نوع الفهرس السكالي المراد إنشاؤه. بالنسبة للفهرسة الضمنية، اتركه فارغًا أو احذف هذه المعلمة.
+بالنسبة للفهرسة المخصصة، القيم الصالحة هي:
+<ul>
+<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المعكوس من قاموس مصطلحات يحتوي على جميع الكلمات التي تم تحويلها إلى رموز، مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس العددية</a>.</li>
+<li><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/bitmap.md">«BITMAP</a>».</li>
+<li><strong>STL_SORT</strong>: يقوم بفرز الحقول السكالارية باستخدام خوارزمية الفرز الخاصة بمكتبة القوالب القياسية. يدعم الحقول الرقمية وحقول VARCHAR و TIMESTAMPTZ. لمزيد من التفاصيل، راجع <a href="/docs/ar/stl-sort.md">STL_SORT</a>.</li>
+<li><strong>TRIE</strong>: بنية بيانات شجرية للبحث السريع عن البادئات واسترجاعها. يدعم الحقول من نوع VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/trie.md">TRIE</a>.</li>
+<li><strong>NGRAM</strong>: فهرس يعمل على تسريع عوامل التصفية LIKE و regex في الحقول من نوع VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: فهرس دقيق لسلسلة فرعية على مستوى البايت لحقول VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: فهرس لحقول GEOMETRY. لمزيد من التفاصيل، راجع <a href="/docs/ar/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq إنشاء</strong>فهرس في المجموعة المحددة.<ul>
-<li><strong>اسم المجموعة</strong><em>(سلسلة</em>) اسم المجموعة التي يتم إنشاء الفهرس لها.</li>
-<li><strong>indexParams</strong><em>(قائمة<IndexParam></em>) قائمة بكائنات IndexParam التي تحتوي على تكوينات الفهرس.</li>
+<li><strong>CreateIndexReq</strong>
+ينشئ الفهرس في المجموعة المحددة.
+<ul>
+<li><strong>collectionName</strong> (<em>سلسلة</em>)
+اسم المجموعة التي يتم إنشاء الفهرس لها.</li>
+<li><strong>indexParams</strong> (<em>قائمة<IndexParam></em>)
+قائمة بكائنات IndexParam التي تحتوي على تكوينات الفهرس.</li>
 </ul></li>
 </ul>
 </div>
 <div class="language-javascript">
-<p><strong>الأساليب والمعلمات</strong></p>
+<p><strong>الطرق والمعلمات</strong></p>
 <ul>
-<li><p><strong>إنشاء فهرس</strong></p>
-<p>إنشاء الفهرس في المجموعة المحددة.</p>
+<li><p><strong>createIndex</strong></p>
+<p>ينشئ الفهرس في المجموعة المحددة.</p>
 <ul>
-<li><strong>اسم_المجموعة</strong><em>(سلسلة</em>) اسم المجموعة التي يتم إنشاء الفهرس لها.</li>
-<li><strong>اسم_الحقل</strong><em>(سلسلة</em>) اسم الحقل القياسي المراد فهرسته.</li>
-<li><strong>اسم_الفهرس</strong><em>(سلسلة</em>) اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرس واحد.</li>
-<li><strong>نوع_الفهرس</strong><em>(سلسلة</em>) نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركها فارغة أو احذف هذه المعلمة. للفهرسة المخصصة، القيم الصالحة هي<ul>
-<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المقلوب من قاموس مصطلحات يحتوي على جميع الكلمات الرمزية مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">الفهرس المقلوب</a>.</li>
-<li><strong>STL_SORT</strong>: يفرز الحقول العددية باستخدام خوارزمية فرز مكتبة القالب القياسية. يدعم الحقول المنطقية والرقمية (مثل INT8 و INT16 و INT32 و INT64 و FLOAT و DOUBLE).</li>
-<li><strong>تري</strong>: بنية بيانات شجرية لعمليات بحث واسترجاع سريعة للبادئة. يدعم حقول VARCHAR.</li>
+<li><strong>collection_name</strong> (<em>سلسلة</em>)
+اسم المجموعة التي يتم إنشاء الفهرس لها.</li>
+<li><strong>field_name</strong> (<em>سلسلة</em>)
+اسم الحقل القياسي المراد فهرسته.</li>
+<li><strong>index_name</strong> (<em>سلسلة</em>)
+اسم الفهرس القياسي المراد إنشاؤه. يدعم كل حقل قياسي فهرسًا واحدًا.</li>
+<li><strong>index_type</strong> (<em>سلسلة</em>)
+نوع الفهرس القياسي المراد إنشاؤه. للفهرسة الضمنية، اتركه فارغًا أو احذف هذه المعلمة.
+بالنسبة للفهرسة المخصصة، القيم الصالحة هي:
+<ul>
+<li><strong>INVERTED</strong>: (موصى به) يتكون الفهرس المعكوس من قاموس مصطلحات يحتوي على جميع الكلمات التي تم تحويلها إلى رموز، مرتبة أبجديًا. لمزيد من التفاصيل، راجع <a href="/docs/ar/scalar_index.md">«الفهرس القياسي</a>».</li>
+<li><strong>BITMAP</strong>: نوع فهرس يخزن صورة نقطية لجميع القيم الفريدة في الحقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/bitmap.md">«BITMAP</a>».</li>
+<li><strong>STL_SORT</strong>: يقوم بفرز الحقول السكالارية باستخدام خوارزمية الفرز الخاصة بمكتبة القوالب القياسية. يدعم الحقول الرقمية وحقول VARCHAR و TIMESTAMPTZ. لمزيد من التفاصيل، راجع <a href="/docs/ar/stl-sort.md">STL_SORT</a>.</li>
+<li><strong>TRIE</strong>: بنية بيانات شجرية للبحث السريع عن البادئات واسترجاعها. يدعم الحقول من نوع VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/trie.md">TRIE</a>.</li>
+<li><strong>NGRAM</strong>: فهرس يعمل على تسريع عوامل التصفية LIKE و regex في الحقول من نوع VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: فهرس دقيق لسلسلة فرعية على مستوى البايت لحقول VARCHAR. لمزيد من التفاصيل، راجع <a href="/docs/ar/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: فهرس لحقول GEOMETRY. لمزيد من التفاصيل، راجع <a href="/docs/ar/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -264,16 +298,19 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>استخدم طريقة <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> للتحقق من إنشاء الفهارس العددية:</p>
+<p>استخدم الطريقة <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> للتحقق من إنشاء الفهارس القياسية:</p>
 </div>
 <div class="language-java">
-<p>استخدم الطريقة <code translate="no">listIndexes()</code> للتحقق من إنشاء الفهارس العددية:</p>
+<p>استخدم الطريقة <code translate="no">listIndexes()</code> للتحقق من إنشاء الفهارس القياسية:</p>
 </div>
 <div class="language-javascript">
-<p>استخدم الأسلوب <code translate="no">listIndexes()</code> للتحقق من إنشاء الفهارس العددية:</p>
+<p>استخدم الطريقة <code translate="no">listIndexes()</code> للتحقق من إنشاء الفهارس القياسية:</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )

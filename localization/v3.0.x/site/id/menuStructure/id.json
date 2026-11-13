@@ -637,7 +637,7 @@
                     "children": []
                   },
                   {
-                    "label": "Penyusunan ASCII",
+                    "label": "Penyusutan ASCII",
                     "id": "ascii-folding-filter.md",
                     "order": 1,
                     "children": []
@@ -970,21 +970,33 @@
                 "children": []
               },
               {
+                "label": "STL_SORT",
+                "id": "stl-sort.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "TRIE",
+                "id": "trie.md",
+                "order": 3,
+                "children": []
+              },
+              {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 2,
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "FMINDEX",
+                "id": "fmindex.md",
+                "order": 5,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "STL_SORT",
-                "id": "stl-sort.md",
-                "order": 4,
+                "order": 6,
                 "children": []
               }
             ]
@@ -1347,7 +1359,7 @@
             "children": []
           },
           {
-            "label": "Fungsi Penataan Ulang Peringkat",
+            "label": "Fungsi Penilaian Ulang",
             "id": "reranking",
             "order": 3,
             "isMenu": true,
@@ -1539,7 +1551,7 @@
             "children": []
           },
           {
-            "label": "Contoh Penggunaan",
+            "label": "Kasus Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1645,7 +1657,7 @@
         "children": []
       },
       {
-        "label": "Server MCP untuk Claude Code",
+        "label": "Server MCP untuk Kode Claude",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1704,7 +1716,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Lakukan penerapan di AWS",
+                "label": "Melakukan deployment di AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
@@ -2138,7 +2150,7 @@
                 "children": []
               },
               {
-                "label": "Peran Pemberian Dana",
+                "label": "Peran Pemberian Hibah",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []

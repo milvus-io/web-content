@@ -5,8 +5,8 @@ summary: >-
   Moderne KI-Anwendungen, insbesondere im Internet der Dinge (IoT) und im
   Bereich des autonomen Fahrens, werten in der Regel umfangreiche, strukturierte
   Ereignisse aus: einen Sensorwert mit Zeitstempel und Vektor-Einbettung, ein
-  Diagnoseprotokoll mit Fehlercode und Audioausschnitt oder eine Fahrstrecke mit
-  Standort, Geschwindigkeit und Umgebungskontext. Dies erfordert, dass die
+  Diagnoseprotokoll mit Fehlercode und Audioausschnitt oder einen Fahrabschnitt
+  mit Standort, Geschwindigkeit und Umgebungskontext. Dies erfordert, dass die
   Datenbank die Erfassung und Suche von verschachtelten Daten nativ unterstützt.
 beta: Milvus 2.6.4+
 ---

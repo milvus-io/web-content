@@ -2,11 +2,11 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  Esta guía le guiará a través de la creación y configuración de índices
-  escalares para campos como enteros, cadenas, etc.
-title: Índice de campos escalares
+  Esta guía te explicará paso a paso cómo crear y configurar índices escalares
+  para campos como números enteros, cadenas de caracteres, etc.
+title: Índices de campos escalares
 ---
-<h1 id="Index-Scalar-Fields" class="common-anchor-header">Índice de campos escalares<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Scalar-Fields" class="common-anchor-header">Índices de campos escalares<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ title: Índice de campos escalares
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En Milvus, un índice escalar se utiliza para acelerar el metafiltrado por un valor de campo no vectorial específico, de forma similar a un índice de base de datos tradicional. Esta guía le mostrará cómo crear y configurar índices escalares para campos como enteros, cadenas, etc.</p>
+    </button></h1><p>En Milvus, un índice escalar se utiliza para acelerar el metafiltrado según un valor específico de un campo no vectorial, de forma similar a un índice de base de datos tradicional. Esta guía te guiará a través del proceso de creación y configuración de índices escalares para campos como números enteros, cadenas de caracteres, etc.</p>
 <div class="alert warning">
-<p>Esta página está obsoleta. Para la última implementación, consulte <a href="/docs/es/bitmap.md">BITMAP</a>, <a href="/docs/es/inverted.md">INVERTED</a>, <a href="/docs/es/ngram.md">NGRAM</a>, <a href="/docs/es/rtree.md">RTREE</a> <a href="/docs/es/stl-sort.md">STL_SORT</a>, etc.</p>
+<p>Esta página ha quedado obsoleta. Para conocer la implementación más reciente, consulta <a href="/docs/es/bitmap.md">BITMAP</a>, <a href="/docs/es/inverted.md">INVERTED</a>, <a href="/docs/es/ngram.md">NGRAM</a>, <a href="/docs/es/rtree.md">RTREE</a>, <a href="/docs/es/stl-sort.md">STL_SORT</a>, <a href="/docs/es/trie.md">TRIE</a> y <a href="/docs/es/fmindex.md">FMINDEX</a>.</p>
 </div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipos de indexación escalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,8 +41,8 @@ title: Índice de campos escalares
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexación</a></strong>: Milvus decide automáticamente el tipo de índice basándose en el tipo de datos del campo escalar. Esto es adecuado cuando no necesita controlar el tipo de índice específico.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexación personalizada</a></strong>: Usted especifica el tipo de índice exacto, como un índice invertido o un <a href="/docs/es/bitmap.md">índice de mapa de bits</a>. Esto proporciona un mayor control sobre la selección del tipo de índice.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexación automática</a></strong>: Milvus decide automáticamente el tipo de índice en función del tipo de datos del campo escalar. Esto resulta adecuado cuando no es necesario controlar el tipo de índice específico.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexación personalizada</a></strong>: se especifica el tipo de índice exacto, como un índice invertido o <a href="/docs/es/bitmap.md">un índice de mapa de bits</a>. Esto proporciona un mayor control sobre la selección del tipo de índice.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Indexación automática<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,17 +60,20 @@ title: Índice de campos escalares
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Para utilizar la indexación automática, omita el parámetro <strong>tipo_índice</strong> en <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>para que Milvus pueda deducir el tipo de índice basándose en el tipo de campo escalar.</p>
+<p>Para utilizar la indexación automática, omita el parámetro <strong>index_type</strong> en <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>, de modo que Milvus pueda deducir el tipo de índice en función del tipo de campo escalar.</p>
 </div>
 <div class="language-java">
-<p>Para utilizar la indexación automática, omita el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>para que Milvus pueda deducir el tipo de índice basándose en el tipo de campo escalar.</p>
+<p>Para utilizar la indexación automática, omita el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, de modo que Milvus pueda deducir el tipo de índice en función del tipo de campo escalar.</p>
 </div>
 <div class="language-javascript">
-<p>Para utilizar la indexación automática, omita el parámetro <strong>index_type</strong> en <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>para que Milvus pueda deducir el tipo de índice basándose en el tipo de campo escalar.</p>
+<p>Para utilizar la indexación automática, omita el parámetro <strong>index_type</strong> en <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>, de modo que Milvus pueda deducir el tipo de índice en función del tipo de campo escalar.</p>
 </div>
-<p>Para mapeos entre tipos de datos escalares y algoritmos de indexación por defecto, consulte <a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">Algoritmos de indexación de campos escalares</a>.</p>
+<p>Para conocer las correspondencias entre los tipos de datos escalares y los algoritmos de indexación predeterminados, consulte <a href="/docs/es/scalar_index.md#Choosing-a-scalar-index">«Elección de un índice escalar</a>».</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Auto indexing</span>
 client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -131,17 +134,20 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>Para utilizar la indexación personalizada, especifica un tipo de índice concreto mediante el parámetro <strong>index_type</strong> en <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
+<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto mediante el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>index_type</strong> en <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto mediante el parámetro <strong>index_type</strong> en <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
-<p>El siguiente ejemplo crea un índice invertido para el campo escalar <code translate="no">scalar_2</code>.</p>
+<p>El ejemplo siguiente crea un índice invertido para el campo escalar <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
@@ -184,50 +190,68 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>Métodos y parámetros</strong></p>
 <ul>
-<li><p><strong>preparar_parametros_de_índice()</strong></p>
-<p>Prepara un objeto <strong>IndexParams</strong>.</p></li>
+<li><p><strong>prepare_index_params()</strong></p>
+<p>Prepara un objeto ` <strong>IndexParams</strong> `.</p></li>
 <li><p><strong>add_index()</strong></p>
 <p>Añade configuraciones de índice al objeto <strong>IndexParams</strong>.</p>
 <ul>
-<li><p><strong>nombre_campo</strong><em>(cadena</em>)</p>
-<p>El nombre del campo escalar a indexar.</p></li>
-<li><p><strong>index_type</strong><em>(cadena</em>):</p>
-<p>El tipo del índice escalar a crear. Para la indexación implícita, déjelo vacío u omita este parámetro.</p>
+<li><p><strong>field_name</strong> (<em>cadena</em>)</p>
+<p>El nombre del campo escalar que se va a indexar.</p></li>
+<li><p><strong>index_type</strong> (<em>cadena</em>):</p>
+<p>El tipo de índice escalar que se va a crear. Para la indexación implícita, déjalo en blanco u omite este parámetro.</p>
 <p>Para la indexación personalizada, los valores válidos son:</p>
 <ul>
-<li><p><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</p></li>
-<li><p><strong>BITMAP</strong>: Tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más información, consulte <a href="/docs/es/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Sólo admite campos numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
-<li><p><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</p></li>
+<li><p><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulta <a href="/docs/es/scalar_index.md">Índice escalar</a>.</p></li>
+<li><p><strong>BITMAP</strong>: un tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más detalles, consulta <a href="/docs/es/bitmap.md">«BITMAP</a>».</p></li>
+<li><p><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación de la biblioteca de plantillas estándar. Admite campos numéricos, VARCHAR y TIMESTAMPTZ. Para más detalles, consulta <a href="/docs/es/stl-sort.md">STL_SORT</a>.</p></li>
+<li><p><strong>TRIE</strong>: Una estructura de datos en forma de árbol para búsquedas y recuperaciones rápidas por prefijo. Admite campos VARCHAR. Para más detalles, consulta <a href="/docs/es/trie.md">TRIE</a>.</p></li>
+<li><p><strong>NGRAM</strong>: Un índice que acelera los filtros LIKE y de expresiones regulares en campos VARCHAR. Para más detalles, consulta <a href="/docs/es/ngram.md">NGRAM</a>.</p></li>
+<li><p><strong>FMINDEX</strong>: Un índice exacto de subcadenas a nivel de byte para campos VARCHAR. Para más detalles, consulta <a href="/docs/es/fmindex.md">FMINDEX</a>.</p></li>
+<li><p><strong>RTREE</strong>: un índice para campos GEOMETRY. Para obtener más información, consulta <a href="/docs/es/rtree.md">RTREE</a>.</p></li>
 </ul></li>
-<li><p><strong>nombre_índice</strong><em>(cadena</em>)</p>
-<p>Nombre del índice escalar que se va a crear. Cada campo escalar admite un índice.</p></li>
+<li><p><strong>index_name</strong> (<em>cadena</em>)</p>
+<p>El nombre del índice escalar que se va a crear. Cada campo escalar admite un índice.</p></li>
 </ul></li>
-<li><p><strong>crear_índice()</strong></p>
+<li><p><strong>create_index()</strong></p>
 <p>Crea el índice en la colección especificada.</p>
 <ul>
-<li><p><strong>nombre_colección</strong><em>(cadena</em>)</p>
-<p>Nombre de la colección para la que se crea el índice.</p></li>
-<li><p><strong>parámetros_índice</strong></p>
-<p>El objeto <strong>IndexParams</strong> que contiene las configuraciones del índice.</p></li>
+<li><p><strong>nombre_de_colección</strong> (<em>cadena</em>)</p>
+<p>El nombre de la colección para la que se crea el índice.</p></li>
+<li><p><strong>index_params</strong></p>
+<p>El objeto <strong>IndexParams</strong> que contiene la configuración del índice.</p></li>
 </ul></li>
 </ul>
 </div>
 <div class="language-java">
 <p><strong>Métodos y parámetros</strong></p>
 <ul>
-<li><strong>IndexParam</strong>Prepara un objeto IndexParam.<ul>
-<li><strong>fieldName</strong><em>(Cadena</em>) El nombre del campo escalar que se va a indexar.</li>
-<li><strong>indexName</strong><em>(Cadena</em>) El nombre del índice escalar a crear. Cada campo escalar admite un índice.</li>
-<li><strong>indexType</strong><em>(Cadena</em>) Tipo de índice escalar a crear. Para la indexación implícita, déjelo vacío u omita este parámetro. Para la indexación personalizada, los valores válidos son:<ul>
-<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</li>
-<li><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Admite campos booleanos y numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</li>
+<li><strong>IndexParam</strong>
+Prepara un objeto IndexParam.
+<ul>
+<li><strong>fieldName</strong> (<em>cadena</em>)
+El nombre del campo escalar que se va a indexar.</li>
+<li><strong>indexName</strong> (<em>cadena</em>)
+El nombre del índice escalar que se va a crear. Cada campo escalar admite un índice.</li>
+<li><strong>indexType</strong> (<em>cadena</em>)
+El tipo de índice escalar que se va a crear. Para la indexación implícita, déjalo en blanco u omite este parámetro.
+Para la indexación personalizada, los valores válidos son:
+<ul>
+<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulta <a href="/docs/es/scalar_index.md">Índice escalar</a>.</li>
+<li><strong>BITMAP</strong>: Un tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más detalles, consulta <a href="/docs/es/bitmap.md">«BITMAP</a>».</li>
+<li><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación de la biblioteca de plantillas estándar. Admite campos numéricos, VARCHAR y TIMESTAMPTZ. Para más detalles, consulta <a href="/docs/es/stl-sort.md">STL_SORT</a>.</li>
+<li><strong>TRIE</strong>: Una estructura de datos en forma de árbol para búsquedas y recuperaciones rápidas por prefijo. Admite campos VARCHAR. Para más detalles, consulta <a href="/docs/es/trie.md">TRIE</a>.</li>
+<li><strong>NGRAM</strong>: Un índice que acelera los filtros LIKE y de expresiones regulares en campos VARCHAR. Para más detalles, consulte <a href="/docs/es/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: Un índice exacto de subcadenas a nivel de byte para campos VARCHAR. Para más detalles, consulta <a href="/docs/es/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: un índice para campos GEOMETRY. Para obtener más información, consulte <a href="/docs/es/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>Crea el índice en la colección especificada.<ul>
-<li><strong>collectionName</strong><em>(Cadena</em>) El nombre de la colección para la que se crea el índice.</li>
-<li><strong>indexParams</strong><em>(Lista<IndexParam></em>) Una lista de objetos IndexParam que contienen configuraciones de índices.</li>
+<li><strong>CreateIndexReq</strong>
+Crea el índice en la colección especificada.
+<ul>
+<li><strong>collectionName</strong> (<em>cadena</em>)
+El nombre de la colección para la que se crea el índice.</li>
+<li><strong>indexParams</strong> (<em>Lista<IndexParam></em>)
+Una lista de objetos IndexParam que contienen configuraciones de índice.</li>
 </ul></li>
 </ul>
 </div>
@@ -237,13 +261,23 @@ client.createIndex(createIndexReq);
 <li><p><strong>createIndex</strong></p>
 <p>Crea el índice en la colección especificada.</p>
 <ul>
-<li><strong>nombre_colección</strong><em>(cadena</em>) El nombre de la colección para la que se crea el índice.</li>
-<li><strong>nombre_campo</strong><em>(cadena</em>) El nombre del campo escalar que se va a indexar.</li>
-<li><strong>nombre_índice</strong><em>(cadena</em>) Nombre del índice escalar que se va a crear. Cada campo escalar admite un índice.</li>
-<li><strong>tipo_índice</strong><em>(cadena</em>) Tipo de índice escalar que se va a crear. Para la indexación implícita, déjelo vacío u omita este parámetro. Para la indexación personalizada, los valores válidos son:<ul>
-<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulte <a href="/docs/es/scalar_index.md">Índice escalar</a>.</li>
-<li><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación estándar de la biblioteca de plantillas. Admite campos booleanos y numéricos (por ejemplo, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</li>
-<li><strong>Trie</strong>: Una estructura de datos en árbol para búsquedas y recuperaciones rápidas de prefijos. Admite campos VARCHAR.</li>
+<li><strong>collection_name</strong> (<em>cadena</em>)
+El nombre de la colección para la que se crea el índice.</li>
+<li><strong>field_name</strong> (<em>cadena</em>)
+El nombre del campo escalar que se va a indexar.</li>
+<li><strong>nombre_índice</strong> (<em>cadena</em>)
+El nombre del índice escalar que se va a crear. Cada campo escalar admite un índice.</li>
+<li><strong>tipo_de_índice</strong> (<em>cadena</em>)
+El tipo de índice escalar que se va a crear. Para la indexación implícita, déjalo en blanco u omite este parámetro.
+Para la indexación personalizada, los valores válidos son:
+<ul>
+<li><strong>INVERTED</strong>: (Recomendado) Un índice invertido consiste en un diccionario de términos que contiene todas las palabras tokenizadas ordenadas alfabéticamente. Para más detalles, consulta <a href="/docs/es/scalar_index.md">Índice escalar</a>.</li>
+<li><strong>BITMAP</strong>: Un tipo de índice que almacena un mapa de bits de todos los valores únicos de un campo. Para más detalles, consulta <a href="/docs/es/bitmap.md">«BITMAP</a>».</li>
+<li><strong>STL_SORT</strong>: Ordena los campos escalares utilizando el algoritmo de ordenación de la biblioteca de plantillas estándar. Admite campos numéricos, VARCHAR y TIMESTAMPTZ. Para más detalles, consulta <a href="/docs/es/stl-sort.md">STL_SORT</a>.</li>
+<li><strong>TRIE</strong>: Una estructura de datos en forma de árbol para búsquedas y recuperaciones rápidas por prefijo. Admite campos VARCHAR. Para más detalles, consulta <a href="/docs/es/trie.md">TRIE</a>.</li>
+<li><strong>NGRAM</strong>: Un índice que acelera los filtros LIKE y de expresiones regulares en campos VARCHAR. Para más detalles, consulte <a href="/docs/es/ngram.md">NGRAM</a>.</li>
+<li><strong>FMINDEX</strong>: Un índice exacto de subcadenas a nivel de byte para campos VARCHAR. Para más detalles, consulta <a href="/docs/es/fmindex.md">FMINDEX</a>.</li>
+<li><strong>RTREE</strong>: un índice para campos GEOMETRY. Para obtener más información, consulta <a href="/docs/es/rtree.md">RTREE</a>.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -264,16 +298,19 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> para verificar la creación de índices escalares:</p>
+<p>Utilice el <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> método para verificar la creación de índices escalares:</p>
 </div>
 <div class="language-java">
-<p>Utilice el método <code translate="no">listIndexes()</code> para verificar la creación de índices escalares:</p>
+<p>Utilice el método ` <code translate="no">listIndexes()</code> ` para verificar la creación de índices escalares:</p>
 </div>
 <div class="language-javascript">
-<p>Utiliza el método <code translate="no">listIndexes()</code> para verificar la creación de índices escalares:</p>
+<p>Utilice el método ` <code translate="no">listIndexes()</code> ` para comprobar la creación de índices escalares:</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python 
+ </a> <a href="#java">   Java</a>
+ <a href="#javascript">   Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">client.list_indexes(
     collection_name=<span class="hljs-string">&quot;test_scalar_index&quot;</span>  <span class="hljs-comment"># Specify the collection name</span>
 )
