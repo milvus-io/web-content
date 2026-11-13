@@ -45,7 +45,7 @@ This method returns a promise that resolves to a **HasRoleResponse** object.
 - **hasRole** (*boolean*) -
 A boolean that indicates whether the requested role exists. It is **true** when the role exists and **false** when it does not.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -1,6 +1,6 @@
 # listAliases()
 
-This is a method template.
+This operation lists all aliases of a collection.
 
 ```javascript
 await milvusClient.listAliases(data)
@@ -8,12 +8,10 @@ await milvusClient.listAliases(data)
 
 ## Request Syntax
 
-This method has the following alternatives.
-
 ```javascript
 listAliases({
-    db_name: string
-    collection_name: string
+    db_name?: string,
+    collection_name: string,
     timeout?: number
 })
 ```
@@ -62,7 +60,7 @@ A list of all aliases that point to the requested collection.
 - **collection_name** (*string*) -
 The collection name to which the listed aliases point.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

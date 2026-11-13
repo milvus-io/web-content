@@ -68,6 +68,12 @@ A list of partition names defined on the collection.
 - **partitionIDs** (*number[]*) -
 The internal identifiers of the partitions, in the same order as **partition_names**.
 
+- **created_timestamps** (*string[]*) -
+The creation timestamps of the partitions, in the same order as **partition_names**.
+
+- **created_utc_timestamps** (*string[]*) -
+The UTC creation timestamps of the partitions, in the same order as **partition_names**.
+
 - **data** (*PartitionData[]*) -
 A flattened, per-partition view that bundles the name, identifier, creation timestamp, and load percentage.
 
@@ -87,7 +93,7 @@ A flattened, per-partition view that bundles the name, identifier, creation time
 
         The percentage of the partition that is currently loaded into memory.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

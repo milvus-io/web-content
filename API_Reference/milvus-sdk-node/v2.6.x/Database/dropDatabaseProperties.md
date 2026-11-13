@@ -11,7 +11,7 @@ await milvusClient.dropDatabaseProperties(data)
 ```javascript
 await milvusClient.dropDatabaseProperties({
     db_name: string,
-    delete_properties: string[],
+    properties: string[],
     timeout?: number
 })
 ```
@@ -24,7 +24,7 @@ await milvusClient.dropDatabaseProperties({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **delete_properties** (*string[]*) -
+- **properties** (*string[]*) -
 
     Names of the properties to drop in an array. Possible database properties are as follows:
 
@@ -102,6 +102,6 @@ const milvusClient = new MilvusClient({
 });
 const resStatus = await milvusClient.dropDatabaseProperties({ 
     db_name: 'new_db',
-    delete_properties: ["database.replica.number"] 
+    properties: ["database.replica.number"] 
 });
 ```

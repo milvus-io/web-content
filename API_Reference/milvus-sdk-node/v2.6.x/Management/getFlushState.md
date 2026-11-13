@@ -16,16 +16,29 @@ Milvus automatically flushes data into persistent storage at intervals. You are 
 
 ```javascript
 await milvusClient.getFlushState({
-    segment_ids: number[],
+    flush_ts?: number,
+    db_name?: string,
+    collection_name?: string,
+    segmentIDs?: number[],
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **segment_ids** (*number[]*) -
+- **flush_ts** (*number*) -
 
-    **[REQUIRED]**
+    The flush timestamp to check.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
+
+- **collection_name** (*string*) -
+
+    The name of the collection that holds the target segments.
+
+- **segmentIDs** (*number[]*) -
 
     A list of the target segment IDs.
 
@@ -53,7 +66,7 @@ This method returns a promise that resolves to a **GetFlushStateResponse** objec
 - **flushed** (*boolean*) -
 Whether all targeted segments are flushed to persistent storage. It is **true** when every requested segment ID is sealed and persisted, otherwise **false**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

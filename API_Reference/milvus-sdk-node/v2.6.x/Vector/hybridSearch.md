@@ -13,9 +13,12 @@ await milvusClient.hybridSearch({
     collection_name: string,
     data: HybridSearchSingleReq[],
     limit?: number,
+    topk?: number,
     offset?: number,
     output_fields?: string[],
     filter?: string,
+    exprValues?: keyValueObj,
+    params?: keyValueObj,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
     partition_names?: string[],
     metric_type?: string,
@@ -26,6 +29,9 @@ await milvusClient.hybridSearch({
     strict_group_size?: boolean,
     hints?: string,
     round_decimal?: number,
+    nq?: number,
+    ids?: number[] | string[],
+    highlighter?: Highlighter,
     transformers?: OutputTransformers,
     db_name?: string,
     timeout?: number,
@@ -50,6 +56,10 @@ await milvusClient.hybridSearch({
 
     The total number of entities to return. The sum of this value and `offset` must be less than or equal to 16,384.
 
+- **topk** (*number*) -
+
+    An alias of `limit`. The total number of entities to return.
+
 - **offset** (*number*) -
 
     The number of records to skip in the search result. The sum of this value and `limit` must be less than or equal to 16,384.
@@ -62,7 +72,15 @@ await milvusClient.hybridSearch({
 
     A top-level scalar filtering condition applied after the hybrid search results are merged. Defaults to an empty string.
 
-- **rerank** (RerankerObj \| FunctionObject \| [FunctionScore](FunctionScore.md)) -
+- **exprValues** (*keyValueObj*) -
+
+    Template values for the filter expression in key-value pairs.
+
+- **params** (*keyValueObj*) -
+
+    Index-specific search parameters in key-value pairs.
+
+- **rerank** (*RerankerObj* | *FunctionObject* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy for combining results from multiple sub-searches. See `search()` for the full rerank parameter schema.
 
@@ -102,6 +120,18 @@ await milvusClient.hybridSearch({
 
     The number of decimal places to keep in the final scores.
 
+- **nq** (*number*) -
+
+    The number of query vectors to search.
+
+- **ids** (*number[]* | *string[]*) -
+
+    Primary keys for a search-by-ID operation.
+
+- **highlighter** (*Highlighter*) -
+
+    A highlighter for the search results.
+
 - **transformers** ([OutputTransformers](OutputTransformers.md)) -
 
     Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
@@ -118,7 +148,70 @@ await milvusClient.hybridSearch({
 
 *Promise<SearchResults>*
 
-This method returns a promise that resolves to a `SearchResults` object.
+This method returns a promise that resolves to a **SearchResults** object.
+
+```javascript
+{
+    status:  ResStatus,
+    results: SearchResultData[] | SearchResultData[][],
+    recalls: number[],
+    session_ts: number,
+    collection_name: string,
+    all_search_count?: number
+}
+```
+
+**PARAMETERS:**
+
+- **status** (*ResStatus*) -
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
+- **results** (*SearchResultData[]* | *SearchResultData[][]*) -
+
+    The hits returned for each query vector. When a single query vector is supplied, this is a flat **SearchResultData[]**. When a batch of query vectors is supplied, this is a nested **SearchResultData[][]** with one inner list per query.
+
+    Each result object has the following keys:
+
+    - **id** (*string*) -
+
+        The primary key of the matched row.
+
+    - **score** (*number*) -
+
+        The similarity score of the search result.
+
+    - **highlight** (*HighlightResult*) -
+
+        Set when a **highlighter** was supplied on the request; carries the highlighted fragments for matching fields.
+
+    - Plus output fields and their values.
+
+- **recalls** (*number[]*) -
+
+    The estimated recall score for each query, when the search engine produced one.
+
+- **session_ts** (*number*) -
+
+    The session timestamp Milvus used to evaluate the search.
+
+- **collection_name** (*string*) -
+
+    The collection that was searched.
+
+- **all_search_count** (*number*) -
+
+    Optional. Set when the search reports the total candidate count examined.
 
 **EXCEPTIONS:**
 
@@ -144,7 +237,7 @@ Each element in the `data` array is a **HybridSearchSingleReq** object that defi
 
     The name of the vector field to search within this sub-request.
 
-- **filter** (*string*) -
+- **expr** (*string*) -
 
     A scalar filtering condition applied only to this sub-search.
 

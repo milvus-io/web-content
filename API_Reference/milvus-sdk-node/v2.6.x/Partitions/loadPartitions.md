@@ -14,7 +14,7 @@ await milvusClient.loadPartitions({
     collection_name: string,
     partition_names: string[],
     replica_number?: number,
-    resource_groups[]?: string[],
+    resource_groups?: string[],
     timeout?: number
  });
 ```

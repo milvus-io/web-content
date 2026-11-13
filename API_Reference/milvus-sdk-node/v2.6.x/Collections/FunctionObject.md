@@ -23,7 +23,7 @@ export type FunctionObject = {
 
     Optional description of the function.
 
-- **type** (*FunctionType | FunctionTypeName*) -
+- **type** (*FunctionType*) -
 
     The function type.
 

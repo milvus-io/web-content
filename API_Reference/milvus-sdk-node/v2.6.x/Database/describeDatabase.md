@@ -57,7 +57,7 @@ The creation timestamp of the database, in milliseconds.
 - **properties** (*KeyValuePair[]*) -
 Database-level properties (for example, **database.replica.number**, **database.resource_groups**) declared at creation or set via `alterDatabaseProperties()`.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -1,6 +1,6 @@
 # RoleEntity
 
-Describes a role: its name and optional description.
+Describes a role.
 
 ```typescript
 export type RoleEntity = { name: string };
@@ -11,10 +11,6 @@ export type RoleEntity = { name: string };
 - **name** (*string*) -
 
     The role name.
-
-- **description** (*string*) -
-
-    Optional description of the role.
 
 ## Example
 

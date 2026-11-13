@@ -82,7 +82,7 @@ The alias name.
 - **collection** (*string*) -
 The collection name to which the alias currently points.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

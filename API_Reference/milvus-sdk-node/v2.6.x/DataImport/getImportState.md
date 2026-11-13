@@ -79,7 +79,7 @@ This method returns a promise that resolves to a **GetImportStateResponse** obje
 
     The timestamp when the import task was created.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 
     A **ResStatus** object.
 

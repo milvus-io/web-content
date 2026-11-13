@@ -10,9 +10,9 @@ await milvusClient.removeUserFromRole(data)
 
 ```javascript
 await milvusClient.removeUserFromRole({
-   username: string,
-   rolename: string,
-   timeout?: number
+    username: string,
+    roleName: string,
+    timeout?: number
  })
 ```
 
@@ -24,7 +24,7 @@ await milvusClient.removeUserFromRole({
 
     The name of a user.
 
-- **rolename** (*string*) -
+- **roleName** (*string*) -
 
     **[REQUIRED]**
 

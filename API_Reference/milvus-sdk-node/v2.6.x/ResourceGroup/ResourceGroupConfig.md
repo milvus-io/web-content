@@ -10,7 +10,7 @@ type ResourceGroupConfig = {
   limits?: { node_num: number }; 
   transfer_from?: { resource_group: string }[]; 
   transfer_to?: { resource_group: string }[]; 
-  node_filter?: { node_labels: { key: string, value: string }[] };
+  node_filter?: { node_labels: { key: string, value: string | number }[] };
 };
 ```
 
@@ -52,7 +52,7 @@ type ResourceGroupConfig = {
 
     A filter is used to filter the query nodes with specified node labels. It has the following keys:
 
-    - **node_labels** (*{ key: string, value: string }[]*) -
+    - **node_labels** (*{ key: string, value: string | number }[]*) -
 
         Node labels in key-value pairs, as in `[{ "key": "QUERYNODE_LOCATION", "value": "dc1" }]`.
 
@@ -65,10 +65,22 @@ type ResourceGroupConfig = {
 ## Example
 
 ```javascript
-const configs = ResourceGroupConfig = {
+import { MilvusClient, DEFAULT_RESOURCE_GROUP } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const config = {
     requests: { node_num: 1 },
     limits: { node_num: 10000 },
     transfer_from: [{ resource_group: DEFAULT_RESOURCE_GROUP }],
     transfer_to: [{ resource_group: DEFAULT_RESOURCE_GROUP }]
-}
+};
+
+await milvusClient.createResourceGroup({
+    resource_group: DEFAULT_RESOURCE_GROUP,
+    config,
+});
 ```

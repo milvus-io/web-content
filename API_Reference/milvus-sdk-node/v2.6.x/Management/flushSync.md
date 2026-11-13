@@ -58,7 +58,7 @@ This method returns a promise that resolves to a **GetFlushStateResponse** objec
 - **flushed** (*boolean*) -
 Whether all targeted segments are flushed to persistent storage. Because `flushSync()` blocks until the flush completes, this value is **true** on success.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -14,6 +14,7 @@ await milvusClient.grantPrivilege(data)
    object: string,
    objectName: string,
    privilegeName: string,
+   db_name?: string,
    timeout?: number
  })
 ```
@@ -61,6 +62,10 @@ await milvusClient.grantPrivilege(data)
     The name of the privilege to assign. 
 
     For details, refer to the **Privilege name** column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+
+- **db_name** (*string*) -
+
+    The name of the database the privilege applies to.
 
 - **timeout** (*number*)  
 

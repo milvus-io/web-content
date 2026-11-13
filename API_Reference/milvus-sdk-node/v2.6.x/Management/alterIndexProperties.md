@@ -91,9 +91,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const alterIndexReq = {
     collection_name: 'my_collection',
+    index_name: 'my_index',
     params: { nlist: 20 },
 };
-const res = await milvusClient.alterIndex(alterIndexReq);
+const res = await milvusClient.alterIndexProperties(alterIndexReq);
 console.log(res);
 ```
 

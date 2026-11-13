@@ -58,6 +58,38 @@ export type FieldType = {
 
     Type parameters such as dimension or max length.
 
+- **dim** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **max_length** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **max_capacity** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **analyzer_params** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **enable_analyzer** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **enable_match** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **multi_analyzer_params** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **mmap.enabled** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
 - **autoID** (*boolean*) -
 
     Whether the primary key values are auto-generated.
@@ -69,10 +101,6 @@ export type FieldType = {
 - **nullable** (*boolean*) -
 
     Whether the field accepts null values.
-
-- **external_field** (*string*) -
-
-    The external field mapping name.
 
 - **fields** (FieldType[])
 

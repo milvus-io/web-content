@@ -58,7 +58,7 @@ This method returns a promise that resolves to a **FlushResult** object.
 - **coll_segIDs** (*Record<string, { data: number[] }>*) -
 A mapping from collection name to the segment IDs that were sealed by this flush. Use the returned IDs with `getFlushState()` to confirm persistence.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

@@ -11,7 +11,8 @@ await milvusClient.describeCollection(data)
 ```javascript
 await milvusClient.describeCollection({ 
     db_name: string,
-    collection_name: string 
+    collection_name: string,
+    cache?: boolean 
 })
 ```
 
@@ -26,6 +27,10 @@ await milvusClient.describeCollection({
     **[REQUIRED]**
 
     The name of an existing collection.
+
+- **cache** (*boolean*) -
+
+    Whether to use the collection cache. When `true`, the cached schema is returned.
 
 - **timeout** (*number*)  
 

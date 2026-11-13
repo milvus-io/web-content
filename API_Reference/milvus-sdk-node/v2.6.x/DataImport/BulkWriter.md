@@ -32,7 +32,7 @@ new BulkWriter({
 
 - **format** (*'json' | 'parquet'*) -
 
-    Specifies the output file format. Defaults to `json`. Parquet output uses `@shanghaikid/parquetjs` in v3.0.3 and later.
+    Specifies the output file format. Defaults to `json`.
 
 - **chunkSize** (*number*) -
 
@@ -56,9 +56,27 @@ new BulkWriter({
 
     Flushes remaining rows and returns the generated file paths grouped by chunk.
 
+- `totalRowCount(): number`
+
+    Returns the total number of rows appended to the writer.
+
+- `bufferRowCount(): number`
+
+    Returns the number of rows currently buffered but not yet committed.
+
+- `batchFiles(): string[][]`
+
+    Returns the file paths of the batches generated so far.
+
 - `writeFrom(source: AsyncIterable<Record<string, any>>): Promise<string[][]>`
 
     Consumes an async iterable, appends each row, closes the writer, and returns generated file paths.
+
+**EVENTS:**
+
+- **flush** (*[FlushEvent](FlushEvent.md)*)
+
+    Emitted each time the buffered data is flushed to files. Carries the generated file paths, the row count, and the chunk index.
 
 **RETURNS:**
 

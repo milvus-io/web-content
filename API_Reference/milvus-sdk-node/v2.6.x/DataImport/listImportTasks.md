@@ -11,6 +11,7 @@ await milvusClient.listImportTasks(data: ListImportTasksReq)
 ```javascript
 await milvusClient.listImportTasks({
     collection_name: string,
+    db_name?: string,
     limit?: number,
     timeout?: number,
 })
@@ -23,6 +24,10 @@ await milvusClient.listImportTasks({
     **[REQUIRED]**
 
     The name of the collection.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **limit** (*number*) -
 
@@ -82,7 +87,7 @@ A list of import-task descriptors. Each entry carries the task's state, row coun
 
         The creation timestamp of the task.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

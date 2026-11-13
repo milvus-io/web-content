@@ -13,7 +13,7 @@ await milvusClient.count({
     db_name?: string,
     collection_name: string,
     expr?: string,
-    timeout?: boolean
+    timeout?: number
 })
 ```
 
@@ -27,7 +27,7 @@ await milvusClient.count({
 
     **[REQUIRED]**
 
-    The name of the collection to create an alias for.
+    The name of the collection to count entities in.
 
 - **expr** (*string*) -
 
@@ -57,8 +57,9 @@ This method returns a promise that resolves to a **CountResult** object.
 - **data** (*number*) -
 The number of rows in the collection that match the supplied filter expression. When no expression is supplied, this is the total row count.
 
-- **ResStatus**
-A **ResStatus** object.
+- **status** (*ResStatus*)
+
+    A **ResStatus** object.
 
     - **code** (*number*) -
 

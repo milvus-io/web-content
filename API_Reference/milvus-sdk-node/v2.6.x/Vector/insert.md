@@ -11,7 +11,7 @@ await milvusClient.insert(data: InsertReq)
 ```javascript
 await milvusClient.insert({
     collection_name: string,
-    data: RowData | RowData[],
+    data: RowData[],
     partition_name?: string,
     db_name?: string,
     timeout?: number,
@@ -34,7 +34,7 @@ await milvusClient.insert({
 
     The data to insert into the current collection.
 
-    The data to insert should be a dictionary that matches the schema of the current collection or a list of such dictionaries. 
+    The data to insert should be a list of dictionaries that matches the schema of the current collection.
 
     The following code assumes that the schema of the current collection has two fields named **id** and **vector**. The former is the primary field and the latter is a field to hold 5-dimensional vector embeddings.
 
@@ -103,7 +103,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```
@@ -131,7 +131,7 @@ The number of rows upserted by this operation. For `insert()` this remains **"0"
 - **timestamp** (*string*) -
 The hybrid timestamp at which the write became visible. Use this value for time-travel queries.
 
-- **IDs** (StringArrayId* | *[NumberArrayId](NumberArrayId.md)) -
+- **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
 
 The primary keys assigned to the inserted rows. For autoID collections, Milvus generates these values; otherwise, they echo the input keys.
 
@@ -143,11 +143,8 @@ The primary keys assigned to the inserted rows. For autoID collections, Milvus g
 
         Set when the primary key is a VARCHAR field.
 
-    - **id_field** (*'int_id' | 'str_id'*) -
+- **status** (*ResStatus*)
 
-        Indicates which of the two id arrays carries the values.
-
-- **ResStatus**
 A **ResStatus** object.
 
     - **code** (*number*) -

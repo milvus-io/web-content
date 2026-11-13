@@ -64,9 +64,13 @@ await milvusClient.createIndex([
 
     This is available only when the specified field is a vector field.
 
-- **params** (*string*) -
+- **params** (*keyValueObj*) -
 
     Other index-specific parameters.
+
+- **extra_params** (*keyValueObj*) -
+
+    Extra index-related parameters in key-value pairs.
 
 - **timeout** (number) -
 
@@ -110,10 +114,12 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-await milvusClient._createIndex({
+await milvusClient.createIndex({
    collection_name: "my_collection",
    field_name: "vector_field",
-   index_name: "vector_index"
+   index_name: "vector_index",
+   index_type: "AUTOINDEX",
+   metric_type: "COSINE"
  });
 ```
 

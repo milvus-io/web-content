@@ -9,16 +9,59 @@ await milvusClient.compact(data)
 ## Request Syntax
 
 ```javascript
-milvusClient.compact()
+await milvusClient.compact({
+    collection_name: string,
+    db_name?: string,
+    timetravel?: number | string,
+    majorCompaction?: boolean,
+    partition_id?: number | string,
+    channel?: string,
+    segment_ids?: number[],
+    l0Compaction?: boolean,
+    target_size?: number | string,
+    timeout?: number,
+})
 ```
 
 **PARAMETERS:**
 
-- **collection_name** (*str*) -
+- **collection_name** (*string*) -
 
     **[REQUIRED]**
 
-    The name of the target collection to reassign an alias to.
+    The name of the collection to compact.
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
+
+- **timetravel** (*number* | *string*) -
+
+    A timestamp to compact data before it, for time-travel compaction.
+
+- **majorCompaction** (*boolean*) -
+
+    Whether to perform a major compaction that merges small segments.
+
+- **partition_id** (*number* | *string*) -
+
+    The ID of the partition to compact.
+
+- **channel** (*string*) -
+
+    The channel to compact.
+
+- **segment_ids** (*number[]*) -
+
+    The IDs of the segments to compact.
+
+- **l0Compaction** (*boolean*) -
+
+    Whether to perform an L0 compaction that cleans up deleted data.
+
+- **target_size** (*number* | *string*) -
+
+    The target segment size for the compaction.
 
 - **timeout** (*number*)  
 
@@ -48,7 +91,7 @@ The identifier of the compaction operation. Pass this value to `getCompactionSta
 - **compactionPlanCount** (*number*) -
 The number of compaction plans generated for this operation.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

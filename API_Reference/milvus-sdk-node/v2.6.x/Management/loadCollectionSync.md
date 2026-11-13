@@ -15,6 +15,8 @@ await milvusClient.loadCollectionSync({
     refresh?: boolean,
     replica_number?: number,
     resource_groups?: string[],
+    load_fields?: string[],
+    skip_load_dynamic_field?: boolean,
     timeout?: number
 })
 ```
@@ -42,6 +44,14 @@ await milvusClient.loadCollectionSync({
 - **resource_groups** (*string[]*) -
 
     The number of resource groups in the collection to load.
+
+- **load_fields** (*string[]*) -
+
+    The field names to load.
+
+- **skip_load_dynamic_field** (*boolean*) -
+
+    Whether to skip loading the dynamic field.
 
 - **timeout** (*number*) -
 

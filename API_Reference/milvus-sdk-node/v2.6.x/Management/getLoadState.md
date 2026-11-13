@@ -55,7 +55,7 @@ This method returns a promise that resolves to a **GetLoadStateResponse** object
 - **state** (*LoadState*) -
 The current load state. Possible values are **LoadStateNotExist**, **LoadStateNotLoad**, **LoadStateLoading**, and **LoadStateLoaded**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

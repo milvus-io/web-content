@@ -23,11 +23,19 @@ await milvusClient.searchIterator({
     consistency_level?: ConsistencyLevelEnum,
     ignore_growing?: boolean,
     group_by_field?: string,
+    group_size?: number,
+    strict_group_size?: boolean,
+    hints?: string,
+    round_decimal?: number,
+    nq?: number,
+    ids?: number[] | string[],
+    highlighter?: Highlighter,
     exprValues?: keyValueObj,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
     transformers?: OutputTransformers,
     external_filter_fn?: (row: SearchResultData) => boolean,
     db_name?: string,
+    timeout?: number,
 })
 ```
 
@@ -43,7 +51,7 @@ await milvusClient.searchIterator({
 
     **[REQUIRED]**
 
-    The query vector(s). Supported types include FloatVector (number[]), BFloat16Vector (Uint8Array), Float16Vector (Uint8Array), BinaryVector (number[]), and SparseFloatVector.
+    The query vector(s). Supported types include FloatVector (number[]), BFloat16Vector (Uint8Array), Float16Vector (Uint8Array), BinaryVector (number[]), and SparseFloatVector. You can use `vector` as an alias of this parameter.
 
 - **batchSize** (*number*) -
 
@@ -91,11 +99,39 @@ await milvusClient.searchIterator({
 
     Groups search results by the specified field to ensure diversity.
 
+- **group_size** (*number*) -
+
+    The target number of entities to return within each group in a grouping search.
+
+- **strict_group_size** (*boolean*) -
+
+    Whether to strictly enforce `group_size`.
+
+- **hints** (*string*) -
+
+    A hints string to improve search performance.
+
+- **round_decimal** (*number*) -
+
+    The number of decimal places to keep in the final scores.
+
+- **nq** (*number*) -
+
+    The number of query vectors to search.
+
+- **ids** (*number[]* | *string[]*) -
+
+    Primary keys for a search-by-ID operation.
+
+- **highlighter** (*Highlighter*) -
+
+    A highlighter for the search results.
+
 - **exprValues** (*keyValueObj*) -
 
     Placeholder values for a templated filter expression.
 
-- **rerank** (RerankerObj | FunctionObject | [FunctionScore](FunctionScore.md)) -
+- **rerank** (*RerankerObj* | *FunctionObject* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy and its parameters. See `search()` for details on supported reranker types.
 
@@ -110,6 +146,10 @@ await milvusClient.searchIterator({
 - **db_name** (*string*) -
 
     The name of the database containing the collection.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation in milliseconds.
 
 **RETURNS:**
 

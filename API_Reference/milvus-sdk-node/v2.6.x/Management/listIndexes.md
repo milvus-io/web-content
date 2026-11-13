@@ -60,7 +60,7 @@ This method returns a promise that resolves to a **ListIndexResponse** object.
 - **indexes** (*string[]*) -
 A list of index names defined on the requested collection.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -
@@ -80,4 +80,14 @@ A **ResStatus** object.
 - **Error**
 
     This exception is raised when any error occurs during this operation.
+
+## Example
+
+```javascript
+const milvusClient = new MilvusClient(MILUVS_ADDRESS);
+const res = await milvusClient.listIndexes({
+    collection_name: 'my_collection',
+});
+console.log(res);
+```
 

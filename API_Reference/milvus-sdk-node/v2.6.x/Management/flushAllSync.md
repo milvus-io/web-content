@@ -31,6 +31,26 @@ A trace ID for request tracking. Optional.
 
 *Promise<GetFlushAllStateResponse>*
 
+**PARAMETERS:**
+
+- **flushed** (*boolean*) -
+Whether the flush-all operation has completed.
+
+- **status** (*ResStatus*) -
+A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
 **EXCEPTIONS:**
 
 - **Error**

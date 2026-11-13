@@ -43,6 +43,18 @@ This method returns a promise that resolves to a **HttpImportProgressResponse** 
 
     Specifies the import job ID.
 
+- **data.fileSize** (*string*) -
+
+    Specifies the file size.
+
+- **data.completeTime** (*string*) -
+
+    Specifies the completion time.
+
+- **data.collectionName** (*string*) -
+
+    Specifies the collection name.
+
 - **data.progress** (*number*) -
 
     Specifies the job progress.

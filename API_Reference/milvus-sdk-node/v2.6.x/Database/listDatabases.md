@@ -48,7 +48,7 @@ The internal database identifiers, in the same order as **db_names**.
 - **created_timestamp** (*string[]*) -
 The creation timestamps of the databases, in the same order as **db_names**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

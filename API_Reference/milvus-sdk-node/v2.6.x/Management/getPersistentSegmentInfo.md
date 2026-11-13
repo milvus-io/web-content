@@ -82,7 +82,7 @@ A list of segment-level descriptors for segments persisted to object storage.
 
         The storage format version of the segment.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

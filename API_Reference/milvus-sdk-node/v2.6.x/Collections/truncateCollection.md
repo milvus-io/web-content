@@ -3,7 +3,7 @@
 This operation removes all data from a collection but retains the collection schema and structure.
 
 ```javascript
-await milvusClient.truncateCollection(data: TruncateCollectionRequest)
+await milvusClient.truncateCollection(data: DropCollectionReq)
 ```
 
 <div class="alert note">
@@ -46,31 +46,27 @@ truncateCollection({
 
 **RETURNS:**
 
-*Promise<ResStatus>*
+*Promise<{ status: ResStatus }>*
 
-This method returns a promise that resolves to a **ResStatus** object.
-
-```javascript
-{
-    code: number,
-    error_code: string | number,
-    reason: string
-}
-```
+This method returns a promise that resolves to an object with a **status** field of type **ResStatus**.
 
 **PARAMETERS:**
 
-- **code** (*number*) -
+- **status** (*ResStatus*) -
 
-    A code that indicates the operation result. It remains **0** if this operation succeeds.
+    A **ResStatus** object.
 
-- **error_code** (*string* | *number*) -
+    - **code** (*number*) -
 
-    An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
 
-- **reason** (*string*) - 
+    - **error_code** (*string* | *number*) -
 
-    The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
 
 **EXCEPTIONS:**

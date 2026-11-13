@@ -9,10 +9,10 @@ await milvusClient.listRoles(data)
 ## Request Syntax
 
 ```javascript
-await milvusClient.listRoles(
+await milvusClient.listRoles({
     includeUserInfo?: boolean,
     timeout?: number
-)
+})
 ```
 
 **PARAMETERS:**
@@ -45,7 +45,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 - **results** (*RoleResult[]*) -
 A list of **RoleResult** objects, one per role defined in the current Milvus instance. For the full **RoleResult** field reference, refer to the `describeRole()` doc.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -
@@ -70,6 +70,6 @@ A **ResStatus** object.
 ## Example
 
 ```javascript
-
+await milvusClient.listRoles();
 ```
 

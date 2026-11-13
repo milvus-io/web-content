@@ -63,7 +63,7 @@ The raw statistics list returned by Milvus. Each entry has a **key** (for exampl
 - **data** (*Record<string, any>*) -
 A flattened, key-indexed view of **stats** for convenience. For example, `data.row_count` returns the partition row count as a string.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

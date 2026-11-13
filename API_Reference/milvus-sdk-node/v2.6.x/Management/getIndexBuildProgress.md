@@ -32,15 +32,11 @@ await milvusClient.getIndexBuildProgress({
 
 - **index_name** (*string*) -
 
-    **[REQUIRED]**
-
-    The name of the target index. This parameter and `field_name` are mutually exclusive. 
+    The name of the target index. Provide either this parameter or `field_name`; exactly one of the two is required. This parameter and `field_name` are mutually exclusive. 
 
 - **field_name** (*string*) -
 
-    **[REQUIRED]**
-
-    The name of the target field. This parameter and `index_name` are mutually exclusive. When you use this parameter, ensure that an index has been built upon the specified field.
+    The name of the target field. Provide either this parameter or `index_name`; exactly one of the two is required. This parameter and `index_name` are mutually exclusive. When you use this parameter, ensure that an index has been built upon the specified field.
 
 - **timeout** (number) -
 
@@ -68,7 +64,7 @@ The number of rows that have been indexed so far.
 - **total_rows** (*number*) -
 The total number of rows the index covers. The build is complete when **indexed_rows** equals **total_rows**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

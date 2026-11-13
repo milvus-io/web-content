@@ -10,13 +10,13 @@ await milvusClient.deleteEntities(data)
 
 ```javascript
 await milvusClient.deleteEntities({
-   db_name: string,
+   db_name?: string,
    collection_name: string,
    partition_name?: string,
    expr?: string,
    filter?: string,
    exprValues?: keyValueObj,
-   consistency_level: string,
+   consistency_level?: string,
    timeout?: number
  })
 ```
@@ -74,7 +74,7 @@ This method returns a promise that resolves to a **MutationResult** object.
     delete_cnt: string,
     upsert_cnt: string,
     timestamp: string,
-    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] }, id_field: 'int_id' | 'str_id' },
+    IDs: { int_id?: { data: number[] }, str_id?: { data: string[] } },
     status:  ResStatus
 }
 ```
@@ -102,11 +102,12 @@ Always **"0"** for `deleteEntities()`.
 - **timestamp** (*string*) -
 The hybrid timestamp at which the delete became visible.
 
-- **IDs** (StringArrayId* | *[NumberArrayId](NumberArrayId.md)) -
+- **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
 
 The primary keys that were targeted by this delete. For the full field reference, refer to the `insert()` doc.
 
-- **ResStatus**
+- **status** (*ResStatus*)
+
 A **ResStatus** object.
 
     - **code** (*number*) -

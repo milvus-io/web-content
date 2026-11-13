@@ -10,7 +10,7 @@ export type ObjectEntity = { name: RbacObjects };
 
 - **name** (*string*) -
 
-    The object type (an `RbacObjects` value, e.g. `Collection`, `Index`, `Global»).
+    The object type (an `RbacObjects` value, e.g. `Collection`, `Index`, `Global`).
 
 ## Example
 

@@ -13,6 +13,7 @@ await milvusClient.bulkInsert({
     db_name?: string,
     collection_name: string,
     partition_name?: string,
+    channel_names?: string[],
     files: string[],
     timeout?: number,
     options?: KeyValuePair<string, string | number>[]
@@ -34,6 +35,10 @@ await milvusClient.bulkInsert({
 - **partition_name** (*string*) -
 
     The name of the target partition.
+
+- **channel_names** (*string[]*) -
+
+    The channel names to use for the import.
 
 - **files** (*string[]*) -
 
@@ -67,7 +72,7 @@ This method returns a promise that resolves to a **ImportResponse** object.
 - **tasks** (*number[]*) -
 The identifiers of the asynchronous import tasks dispatched to the data nodes. Pass these values to `listImportTasks()` to poll for completion.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -

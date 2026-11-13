@@ -1,6 +1,6 @@
 # dropPrivilegeGroup()
 
-This operation adds a user to a specific role.
+This operation drops a privilege group.
 
 ```javascript
 await milvusClient.dropPrivilegeGroup(data)
@@ -10,11 +10,18 @@ await milvusClient.dropPrivilegeGroup(data)
 
 ```javascript
 await milvusClient.dropPrivilegeGroup({
+   group_name: string,
    timeout?: number
 })
 ```
 
 **PARAMETERS:**
+
+- **group_name** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of the privilege group to drop.
 
 - **timeout** (*number*) -  
 
@@ -60,6 +67,6 @@ This method returns a list of promises, each of which resolves to a **ResStatus*
 ## Example
 
 ```javascript
-milvusClient.dropPrivilegeGroup()
+milvusClient.dropPrivilegeGroup({ group_name: 'my_group' })
 ```
 

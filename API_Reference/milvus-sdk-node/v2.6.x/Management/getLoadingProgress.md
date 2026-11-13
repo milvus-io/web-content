@@ -12,7 +12,7 @@ await milvusClient.getLoadingProgress(data)
 await milvusClient.getLoadingProgress({
       db_name?: string,
       collection_name: string,
-      partition_names?: string[]
+      partition_names?: string[],
       timeout?: number
 });
 ```
@@ -55,7 +55,7 @@ This method returns a promise that resolves to a **GetLoadingProgressResponse** 
 - **progress** (*string*) -
 The completion percentage of the load operation as an integer between **"0"** and **"100"**. The collection is fully loaded once this value reaches **"100"**.
 
-- **ResStatus**
+- **status** (*ResStatus*) -
 A **ResStatus** object.
 
     - **code** (*number*) -
