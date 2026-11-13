@@ -1,6 +1,6 @@
 # HybridSearch()
 
-This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as RRFRerank or WeightedRerank). Each sub-search targets one vector field with its own query vector, filter, and limit.
+This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as an [RRFRerank](../Collections/Function.md) or [WeightedRerank](../Collections/Function.md)). Each sub-search targets one vector field with its own query vector, filter, and limit.
 
 ```cpp
 Status HybridSearch(const HybridSearchRequest& request, HybridSearchResponse& response)
@@ -94,7 +94,7 @@ auto request = HybridSearchRequest()
 
 - `WithRerank(const FunctionPtr& rerank)`
 
-    Sets the reranking function that fuses the sub-search results, such as an RRFRerank or WeightedRerank function.
+    Sets the reranking function that fuses the sub-search results, such as an [RRFRerank](../Collections/Function.md) or [WeightedRerank](../Collections/Function.md) function.
 
 - `SetRerank(const FunctionPtr& rerank)`
 
@@ -209,9 +209,206 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
-     <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
+      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>
+
+### SubSearchRequest
+
+```cpp
+SubSearchRequest()
+    .WithAnnsField(field_name)
+    .WithLimit(limit)
+    .WithFilter(filter)
+    .WithMetricType(metric_type)
+    .WithTimezone(tz)
+    .AddFloatVector(vector)       // or any Add*/With* vector method
+    .WithFloatVectors(vectors);   // batch assignment
+```
+
+**REQUEST METHODS:**
+
+- `WithAnnsField(const std::string& ann_field)`
+
+    Sets the target field of the ANN search.
+
+- `WithLimit(int64_t limit)`
+
+    Sets the search limit (topk) of this sub search.
+
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk)
+
+- `WithFilter(std::string filter)`
+
+    Sets the filter expression of this sub search.
+
+- `WithMetricType(milvus::MetricType metric_type)`
+
+    Specifies the metric type of this sub search.
+
+- `WithTimezone(const std::string& timezone)`
+
+    Sets the timezone; it takes effect for Timestamptz fields.
+
+**Inherited vector methods** (all return `SubSearchRequest&` for chaining):
+
+- `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
+
+    Appends one dense float vector.
+
+- `AddBinaryVector(const std::string& vector)`
+
+    Appends one binary vector; the string overload converts the string to binary bytes.
+
+- `AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
+
+    Appends one sparse vector from index-value data.
+
+- `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+
+    Appends one float16 vector.
+
+- `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
+
+    Appends one bfloat16 vector.
+
+- `AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+
+    Appends one dense int8 vector.
+
+- `AddEmbeddedText(const std::string& text)`
+
+    Appends embedded text for a supported text-embedding function such as BM25.
+
+- `AddEmbeddingList(EmbeddingList&& emb_list)` — for struct-field ANN
+
+    Adds an embedding list for struct-field ANN search.
+
+- `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)` — batch
+
+    Sets the dense float vectors in batch.
+
+- `WithSparseVectors(...)`, `WithFloat16Vectors(...)`, etc. — batch variants
+
+    Batch variants of the corresponding add methods.
+
+### EmbeddingList
+
+This class holds one or more query vectors of the same type, used as the target vectors for a `SearchRequest`, `SubSearchRequest`, or struct-field ANN search via `AddEmbeddingList()`. Build an `EmbeddingList` by calling the Add*/Set* methods, then pass it to `SearchRequestBase::AddEmbeddingList()`.
+
+```cpp
+EmbeddingList list;
+```
+
+**METHODS:**
+
+**Read methods:**
+
+- `FieldDataPtr TargetVectors() const`
+
+    Returns the underlying field data containing all vectors.
+
+- `size_t Count() const`
+
+    Returns the number of vectors added.
+
+- `int64_t Dim() const`
+
+    Returns the vector dimension. For embedded-text mode the value is `0`.
+
+**Single-vector add methods:**
+
+- `Status AddFloatVector(const FloatVecFieldData::ElementT& vector)`
+
+    Appends one dense float vector.
+
+- `Status AddBinaryVector(const std::string& vector)`
+
+    Appends one binary vector. The string overload converts the string to binary bytes.
+
+- `Status AddBinaryVector(const BinaryVecFieldData::ElementT& vector)`
+
+    Appends one binary vector. The string overload converts the string to binary bytes.
+
+- `Status AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
+
+    Appends one sparse vector from index-value data or a supported JSON representation.
+
+- `Status AddSparseVector(const nlohmann::json& vector)`
+
+    Appends one sparse vector from index-value data or a supported JSON representation.
+
+- `Status AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+
+    Appends one float16 vector. The float-vector overload converts values to float16.
+
+- `Status AddFloat16Vector(const std::vector<float>& vector)` — auto-converts float to float16
+
+    Appends one float16 vector. The float-vector overload converts values to float16.
+
+- `Status AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
+
+    Appends one bfloat16 vector. The float-vector overload converts values to bfloat16.
+
+- `Status AddBFloat16Vector(const std::vector<float>& vector)` — auto-converts float to bfloat16
+
+    Appends one bfloat16 vector. The float-vector overload converts values to bfloat16.
+
+- `Status AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+
+    Appends one dense int8 vector.
+
+- `Status AddEmbeddedText(const std::string& text)` — for BM25 text-embedding
+
+    Appends text for a supported text-embedding function such as BM25.
+
+**Batch set methods (reset the list):**
+
+- `Status SetFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)`
+
+    Replaces the current list with dense float vectors.
+
+- `Status SetBinaryVectors(const std::vector<std::string>& vectors)`
+
+    Replaces the current list with binary vectors.
+
+- `Status SetBinaryVectors(std::vector<BinaryVecFieldData::ElementT>&& vectors)`
+
+    Replaces the current list with binary vectors.
+
+- `Status SetSparseVectors(std::vector<SparseFloatVecFieldData::ElementT>&& vectors)`
+
+    Replaces the current list with sparse vectors.
+
+- `Status SetSparseVectors(const std::vector<nlohmann::json>& vectors)`
+
+    Replaces the current list with sparse vectors.
+
+- `Status SetFloat16Vectors(std::vector<Float16VecFieldData::ElementT>&& vectors)`
+
+    Replaces the current list with float16 vectors; float input is converted when applicable.
+
+- `Status SetFloat16Vectors(const std::vector<std::vector<float>>& vectors)` — auto-converts
+
+    Replaces the current list with float16 vectors; float input is converted when applicable.
+
+- `Status SetBFloat16Vectors(std::vector<BFloat16VecFieldData::ElementT>&& vectors)`
+
+    Replaces the current list with bfloat16 vectors; float input is converted when applicable.
+
+- `Status SetBFloat16Vectors(const std::vector<std::vector<float>>& vectors)` — auto-converts
+
+    Replaces the current list with bfloat16 vectors; float input is converted when applicable.
+
+- `Status SetInt8Vectors(std::vector<Int8VecFieldData::ElementT>&& vectors)`
+
+    Replaces the current list with dense int8 vectors.
+
+- `Status SetEmbeddedTexts(std::vector<std::string>&& texts)` — for BM25 text-embedding
+
+    Replaces the current list with text input for a supported embedding function.
 
 **RETURNS:**
 
@@ -223,11 +420,11 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
     - **Results** (*const SearchResults&*) -
 
-        Get result of search operation.
+        Get result of search operation. The following members belong to `SearchResults`.
 
         - **Results** (*const std::vector<SingleResult>&*) -
 
-            Get search results.
+            Get search results. Each entry is a `SingleResult` with the following members.
 
             - **Scores** (*const std::vector<float>&*) -
 
@@ -372,7 +569,7 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
 ## Example
 
-Run two sub-searches on different vector fields, fuse their results with a WeightedRerank ranker, and return the top 10 entities after connecting a MilvusClientV2.
+Run two sub-searches on different vector fields, fuse their results with a [WeightedRerank](../Collections/Function.md) ranker, and return the top 10 entities after connecting a MilvusClientV2.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();

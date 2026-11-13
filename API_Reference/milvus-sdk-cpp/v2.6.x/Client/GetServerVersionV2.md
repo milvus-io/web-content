@@ -19,6 +19,10 @@ auto request = GetServerVersionRequest()
 
     Sets whether the response includes detailed build information of the Milvus server in addition to the version. Optional.
 
+- `SetDetail(bool detail)`
+
+    Sets whether the response includes detailed build information of the Milvus server in addition to the version.
+
 **RETURNS:**
 
 *[Status](Status.md)*

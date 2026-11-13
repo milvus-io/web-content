@@ -29,7 +29,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Plans** (*const std::vector<CompactionPlan>&*) -
 
-        Get plans of the compaction.
+        Get plans of the compaction. Each entry is a `CompactionPlan` with the following members.
 
         - **SourceSegments** (*const std::vector<int64_t>&*) -
 

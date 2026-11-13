@@ -161,7 +161,7 @@ Returns a [Status](../Client/Status.md) indicating whether the query succeeded, 
 
     - **Results** (*const QueryResults&*) -
 
-        Get result of query operation.
+        Get result of query operation. The following members belong to `QueryResults`.
 
         - **OutputField** (*FieldDataPtr*) -
 
