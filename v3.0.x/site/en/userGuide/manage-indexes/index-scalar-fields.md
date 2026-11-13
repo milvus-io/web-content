@@ -11,7 +11,7 @@ In Milvus, a scalar index is used to speed up metafiltering by a specific non-ve
 
 <div class="alert warning">
 
-This page has been deprecated. For the latest implementation, refer to [BITMAP](bitmap.md), [INVERTED](inverted.md), [NGRAM](ngram.md), [RTREE](rtree.md) [STL_SORT](stl-sort.md), and more.
+This page has been deprecated. For the latest implementation, refer to [BITMAP](bitmap.md), [INVERTED](inverted.md), [NGRAM](ngram.md), [RTREE](rtree.md), [STL_SORT](stl-sort.md), [TRIE](trie.md), and [FMINDEX](fmindex.md).
 
 </div>
 
@@ -41,7 +41,7 @@ To use auto indexing, omit the __index_type__ parameter in [`createIndex()`](htt
 
 </div>
 
-For mappings between scalar data types and default indexing algorithms, refer to [Scalar field indexing algorithms](https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms).
+For mappings between scalar data types and default indexing algorithms, refer to [Choosing a scalar index](scalar_index.md#Choosing-a-scalar-index).
 
 <div class="multipleCode">
     <a href="#python">Python </a>
@@ -198,9 +198,15 @@ __Methods and Parameters__
 
         - __BITMAP__: An index type that stores a bitmap of all unique values in a field. For details, refer to [BITMAP](bitmap.md).
 
-        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
+        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports numeric, VARCHAR, and TIMESTAMPTZ fields. For details, refer to [STL_SORT](stl-sort.md).
 
-        - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
+        - __TRIE__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields. For details, refer to [TRIE](trie.md).
+
+        - __NGRAM__: An index that accelerates LIKE and regex filters on VARCHAR fields. For details, refer to [NGRAM](ngram.md).
+
+        - __FMINDEX__: An exact byte-level substring index for VARCHAR fields. For details, refer to [FMINDEX](fmindex.md).
+
+        - __RTREE__: An index for GEOMETRY fields. For details, refer to [RTREE](rtree.md).
 
     - __index_name__ (_string_)
 
@@ -234,8 +240,12 @@ __Methods and Parameters__
     The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
     For custom indexing, valid values are:
     - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to [Scalar Index](scalar_index.md).
-    - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
-    - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
+    - __BITMAP__: An index type that stores a bitmap of all unique values in a field. For details, refer to [BITMAP](bitmap.md).
+    - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports numeric, VARCHAR, and TIMESTAMPTZ fields. For details, refer to [STL_SORT](stl-sort.md).
+    - __TRIE__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields. For details, refer to [TRIE](trie.md).
+    - __NGRAM__: An index that accelerates LIKE and regex filters on VARCHAR fields. For details, refer to [NGRAM](ngram.md).
+    - __FMINDEX__: An exact byte-level substring index for VARCHAR fields. For details, refer to [FMINDEX](fmindex.md).
+    - __RTREE__: An index for GEOMETRY fields. For details, refer to [RTREE](rtree.md).
 - __CreateIndexReq__
   Creates the index in the specified collection.
   - __collectionName__ (_String_)
@@ -261,8 +271,12 @@ __Methods and Parameters__
     The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
     For custom indexing, valid values are:
     - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to [Scalar Index](scalar_index.md).
-    - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
-    - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
+    - __BITMAP__: An index type that stores a bitmap of all unique values in a field. For details, refer to [BITMAP](bitmap.md).
+    - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports numeric, VARCHAR, and TIMESTAMPTZ fields. For details, refer to [STL_SORT](stl-sort.md).
+    - __TRIE__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields. For details, refer to [TRIE](trie.md).
+    - __NGRAM__: An index that accelerates LIKE and regex filters on VARCHAR fields. For details, refer to [NGRAM](ngram.md).
+    - __FMINDEX__: An exact byte-level substring index for VARCHAR fields. For details, refer to [FMINDEX](fmindex.md).
+    - __RTREE__: An index for GEOMETRY fields. For details, refer to [RTREE](rtree.md).
 
 </div>
 
