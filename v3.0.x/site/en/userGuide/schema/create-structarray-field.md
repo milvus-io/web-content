@@ -1765,7 +1765,9 @@ curl --request POST \
     "collectionName": "tech_articles",
     "schema": {
       "fieldName": "chunks[lang]",
-      "dataType": "VarChar",
+      "dataType": "Array",
+      "elementDataType": "VarChar",
+      "nullable": true,
       "elementNullable": true,
       "elementTypeParams": {"max_length": "16"}
     }
