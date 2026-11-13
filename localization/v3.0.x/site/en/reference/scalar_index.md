@@ -52,7 +52,6 @@ title: Scalar Index
 <tr><td><code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">STL_SORT</code></td><td><code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">GEOMETRY</code></td><td><code translate="no">RTREE</code></td><td><code translate="no">RTREE</code></td></tr>
 <tr><td><code translate="no">JSON</code> with a typed scalar or array cast</td><td><code translate="no">HYBRID</code></td><td>Depends on <code translate="no">json_cast_type</code>; see <a href="#JSON-field-indexing">JSON field indexing</a>.</td></tr>
-<tr><td><code translate="no">JSON</code> with <code translate="no">json_cast_type=&quot;JSON&quot;</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> through <code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;FLOAT&gt;</code>, <code translate="no">ARRAY&lt;DOUBLE&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
@@ -151,10 +150,8 @@ title: Scalar Index
 <tr><td><code translate="no">ARRAY_BOOL</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_DOUBLE</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 </tbody>
 </table>
-<p>The <code translate="no">JSON</code> cast selects full JSON indexing rather than a typed scalar-path index, and changes the <code translate="no">AUTOINDEX</code> default from <code translate="no">HYBRID</code> to <code translate="no">INVERTED</code>.</p>
 <p>The optional <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> converts string values for a <code translate="no">DOUBLE</code> cast. It cannot be used with other cast types. Neither <code translate="no">TRIE</code> nor <code translate="no">FMINDEX</code> supports JSON fields.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Supported predicates<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -269,8 +266,7 @@ title: Scalar Index
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code>, or an eligible <code translate="no">AUTOINDEX</code> selection</td><td>JSON paths cast to <code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, or <code translate="no">VARCHAR</code></td><td>Comparisons and membership appropriate to the cast type</td><td>The indexed path and cast must match the query. String patterns follow the preceding table.</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>JSON paths cast to <code translate="no">VARCHAR</code></td><td>LIKE and regex patterns</td><td>Uses the same pattern eligibility rules as VARCHAR NGRAM indexes.</td></tr>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>, or an eligible <code translate="no">AUTOINDEX</code> selection</td><td>JSON paths cast to <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, or <code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ANY</code>, <code translate="no">JSON_CONTAINS_ALL</code></td><td>Requires compatible element types. Mixed-type or nested-array operands can fall back to scanning.</td></tr>
-<tr><td><code translate="no">INVERTED</code> with cast <code translate="no">JSON</code></td><td>Full JSON index</td><td>Comparisons and membership on supported scalar paths; supported string patterns; JSON containment on supported array paths</td><td>String paths follow INVERTED behavior. Array containment requires compatible element types.</td></tr>
-<tr><td>JSON path indexes and full JSON indexes</td><td>Indexed JSON paths</td><td><code translate="no">exists</code></td><td>Tests whether the path exists, which is different from testing its value or whether the whole field is null.</td></tr>
+<tr><td>JSON path indexes</td><td>Indexed JSON paths</td><td><code translate="no">exists</code></td><td>Tests whether the path exists, which is different from testing its value or whether the whole field is null.</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_WITHIN</code>, <code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code>, <code translate="no">ST_DWITHIN</code></td><td>Uses bounding boxes to find candidates, then checks the exact spatial relation. <code translate="no">ST_ISVALID</code> does not use RTREE.</td></tr>
 </tbody>
 </table>
