@@ -26,7 +26,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Groups** (*const std::vector<PrivilegeGroupInfo>&*) -
 
-        Get informations of privilege groups.
+        Get information of privilege groups. Each entry is a `PrivilegeGroupInfo` with the following members.
 
         - **Name** (*const std::string&*) -
 

@@ -29,7 +29,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **State** (*const CompactionState&*) -
 
-        Get state of the compaction.
+        Get state of the compaction. The following members belong to `CompactionState`.
 
         - **State** (***CompactionStateCode***) -
 

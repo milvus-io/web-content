@@ -46,7 +46,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **PartitionInfos** (*const std::vector<PartitionInfo>&*) -
 
-        Get informations of partitions.
+        Get information of partitions. Each entry is a `PartitionInfo` with the following members.
 
         - **Name** (*std::string*) -
 

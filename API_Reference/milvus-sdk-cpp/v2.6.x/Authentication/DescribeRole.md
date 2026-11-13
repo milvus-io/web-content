@@ -42,7 +42,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Desc** (*const RoleDesc&*) -
 
-        Get role description.
+        Get role description. The following members belong to `RoleDesc`.
 
         - **Name** (*const std::string&*) -
 
@@ -54,7 +54,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
         - **GrantItems** (*const std::vector<GrantItem>&*) -
 
-            Get privilege items of the role.
+            List of privilege grants assigned to this role. Each entry is a `GrantItem` plain struct with the following fields.
 
             - **object_type_** (*std::string*) -
 

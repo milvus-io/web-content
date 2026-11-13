@@ -97,7 +97,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Results** (*const DmlResults&*) -
 
-        Get result of dml operation.
+        Get result of dml operation. The following members belong to `DmlResults`.
 
         - **IdArray** (*const IDArray&*) -
 

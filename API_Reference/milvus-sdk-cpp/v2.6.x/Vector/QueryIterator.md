@@ -110,7 +110,7 @@ auto request = QueryIteratorRequest()
 
 - `SetLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
@@ -118,7 +118,7 @@ auto request = QueryIteratorRequest()
 
 - `SetOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
