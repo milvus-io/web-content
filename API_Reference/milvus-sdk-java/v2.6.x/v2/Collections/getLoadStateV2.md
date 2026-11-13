@@ -40,6 +40,10 @@ getLoadStateV2(GetLoadStateReq.builder()
 
     The current load state of the collection or partition.
 
+- `getStateName()` (*String*) -
+
+    The name of the current load state.
+
 - `getProgress()` (*Long*) -
 
     The loading progress of the collection or partition.
