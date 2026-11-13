@@ -18,7 +18,7 @@ string sdkVersion = client.GetSdkVersion();
 
 **RETURNS:**
 
-The assembly version of the `Milvus.Client.V2` package (e.g. `2.6.1.0`).
+The assembly version of the `Milvus.Client.V2` package (e.g. `3.0.0.0`).
 
 ## Example
 
