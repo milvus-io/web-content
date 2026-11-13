@@ -600,6 +600,12 @@ own new page automatically (no need to ask the user). Exceptions:
   stdlib/generic containers** (e.g. `type Properties = Record<string, string |
   number | boolean>`) — an alias that adds no SDK-specific structure has no
   standalone-page value and stays inline as a plain annotation;
+- **module-level constants and named string/int values** → skip (no page).
+  A constant such as `IDEMPOTENCY_KEY_HEADER = "Idempotency-Key"` (pymilvus),
+  a documented HTTP header name, a default timeout value, etc. is a plain value,
+  not a type, and gets no standalone page even when exported in the package's
+  `__all__`. Document it inline in the parameter/prose that uses it (e.g. the
+  `headers` parameter description of the operation that accepts it);
 - **single-page non-allowlisted types** → expand inline. A type referenced by
   only ONE operation page, and any nested request/response subtype that is not
   explicitly allowlisted, does not get a standalone page — document its members
@@ -1053,7 +1059,10 @@ owner-page documentation, even when multiple pages mention them. For remaining
 top-level types, types defined in SDK source and shared across ≥2 pages should
 have standalone pages; single-page types should be expanded inline in their
 referencing operation page (no standalone page). Third-party types and pure
-stdlib aliases should never get pages. Non-allowlisted nested or
+stdlib aliases should never get pages. Module-level constants and named
+string/int values (e.g. `IDEMPOTENCY_KEY_HEADER`) are plain values, not types,
+and never get standalone pages either — document them inline in the
+parameter/prose that uses them. Non-allowlisted nested or
 single-referencer standalone pages are folded unconditionally (Step 10).
 Execution: allowlisted and eligible shared types are materialized and inline
 expansions replaced by Step 9; non-allowlisted nested and single-referencer
@@ -1167,9 +1176,12 @@ non-allowlisted top-level single-referencer case, fold the page into the
 operation page's `**RETURNS:**` / `**PARAMETERS:**` sections. This is
 unconditional for non-allowlisted pages: it applies regardless of why the page
 was created, including pages created by a prior reconcile or a previous
-migration, and pages that were shared across pages at an earlier SDK version
+ migration, and pages that were shared across pages at an earlier SDK version
 but are referenced by only one page at the target tag. If the target tag makes
-a previously-shared type single-referenced, fold it too. The exemptions are
+a previously-shared type single-referenced, fold it too. A standalone page that
+documents a module-level constant / named value (not a type) is folded
+unconditionally — inline the value into the operation page that uses it and
+delete the page. The exemptions are
 global/cross-cutting response or status types, eligible top-level types that
 ARE referenced by ≥2 pages at the target tag, and the explicit allowlist. After
 folding, delete the standalone page and re-point every relative link to the
