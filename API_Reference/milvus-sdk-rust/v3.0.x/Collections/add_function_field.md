@@ -43,11 +43,11 @@ let request = AddFunctionFieldRequest::builder()
 
 - `field: Option<FieldSchema>`
 
-    Schema of the function output field. Only `SparseFloatVector` (for BM25) and `BinaryVector` (for MinHash) output fields can be added to an existing collection. Required.
+    Schema of the function output field. Only `SparseFloatVector` (for BM25) and `BinaryVector` (for MinHash) output fields can be added to an existing collection. Required. See [FieldSchema](FieldSchema.md).
 
 - `function: Option<Function>`
 
-    The function definition, including its name and type. Required.
+    The function definition, including its name and type. Required. See [Function](Function.md).
 
 - `index: Option<IndexParam>`
 

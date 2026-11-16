@@ -68,7 +68,7 @@ Each variant carries the field `name` shared with the collection schema and the 
 
 - **VarChar { name: String, values: Vec<String> }**
 
-    Variable-length UTF-8 string values. Values for `DataType::Text` schema fields are also supplied with this variant.
+    Variable-length UTF-8 string values. Values for [DataType](../Collections/DataType.md)::`Text` schema fields are also supplied with this variant.
 
 - **Json { name: String, values: Vec<serde_json::Value> }**
 

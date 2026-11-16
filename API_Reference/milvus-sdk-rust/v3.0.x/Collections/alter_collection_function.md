@@ -32,7 +32,7 @@ let request = AlterCollectionFunctionRequest::builder()
 
 - `function: Option<Function>`
 
-    The updated function definition. Required.
+    The updated function definition. Required. See [Function](Function.md).
 
 **RETURN TYPE:**
 

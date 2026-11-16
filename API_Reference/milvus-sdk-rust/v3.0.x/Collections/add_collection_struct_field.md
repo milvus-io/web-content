@@ -39,7 +39,7 @@ let request = AddCollectionStructFieldRequest::builder()
 
 - `struct_field: Option<StructFieldSchema>`
 
-    The `StructFieldSchema` describing the new struct field. Adding a struct field to an existing collection requires `nullable(true)`. Required.
+    The [StructFieldSchema](StructFieldSchema.md) describing the new struct field. Adding a struct field to an existing collection requires `nullable(true)`. Required.
 
     Struct fields also accept type parameters with `type_param()`, such as `mmap.enabled` and `warmup`. Existing keys are preserved when a map is supplied with `type_params()`.
 

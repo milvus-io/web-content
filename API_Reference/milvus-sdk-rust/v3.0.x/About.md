@@ -124,7 +124,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 ### 3.0.1
 
 - `use_database()` is now asynchronous and validates that the target database exists. Await the call and handle a validation error when the database does not exist.
-- `AddCollectionFieldRequest` requires `FieldSchema.nullable(true)` when adding a vector field to an existing collection.
+- `AddCollectionFieldRequest` requires [FieldSchema](Collections/FieldSchema.md)`nullable(true)` when adding a vector field to an existing collection.
 - `RunAnalyzerRequest.analyzer_params` accepts an optional `serde_json::Value` object instead of a pre-serialized JSON string.
 
 ### 3.0.0
