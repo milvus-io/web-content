@@ -1,6 +1,6 @@
 # ReplicateConfiguration
 
-The replication configuration of a Milvus cluster.
+The replication configuration of a Milvus cluster. Related types (`MilvusCluster`, `CrossClusterTopology`) are documented in the sections below.
 
 ```csharp
 public sealed class ReplicateConfiguration
@@ -15,17 +15,85 @@ public sealed class ReplicateConfiguration
 
 - `Clusters` (*IReadOnlyList\<MilvusCluster\>*) -
 
-    The clusters participating in replication. See [MilvusCluster](MilvusCluster.md).
+    The clusters participating in replication. See [MilvusCluster](#milvuscluster).
 
 - `CrossClusterTopologies` (*IReadOnlyList\<CrossClusterTopology\>*) -
 
-    The cross-cluster topology entries. See [CrossClusterTopology](CrossClusterTopology.md).
+    The cross-cluster topology entries. See [CrossClusterTopology](#crossclustertopology).
 
 **METHODS:**
 
 - `ReplicateConfiguration(IEnumerable<MilvusCluster> clusters, IEnumerable<CrossClusterTopology>? crossClusterTopologies = null)` (*constructor*) -
 
     Creates a new replication configuration.
+
+## MilvusCluster
+
+A Milvus cluster participating in cross-cluster replication.
+
+```csharp
+public sealed class MilvusCluster
+{
+    public MilvusCluster(string clusterId, string uri, string token = "", IEnumerable<string>? pchannels = null) { ... }
+    public string ClusterId { get; }
+    public string Uri { get; }
+    public string Token { get; }
+    public IReadOnlyList<string> Pchannels { get; }
+}
+```
+
+**PARAMETERS:**
+
+- `ClusterId` (*string*) -
+
+    The ID of the cluster.
+
+- `Uri` (*string*) -
+
+    The connection URI of the cluster.
+
+- `Token` (*string*) -
+
+    The connection token of the cluster.
+
+- `Pchannels` (*IReadOnlyList\<string\>*) -
+
+    The physical channels replicated from this cluster.
+
+**METHODS:**
+
+- `MilvusCluster(string clusterId, string uri, string token = "", IEnumerable<string>? pchannels = null)` (*constructor*) -
+
+    Creates a new cluster definition.
+
+## CrossClusterTopology
+
+A cross-cluster topology entry describing a replication direction between two clusters.
+
+```csharp
+public sealed class CrossClusterTopology
+{
+    public CrossClusterTopology(string sourceClusterId, string targetClusterId) { ... }
+    public string SourceClusterId { get; }
+    public string TargetClusterId { get; }
+}
+```
+
+**PARAMETERS:**
+
+- `SourceClusterId` (*string*) -
+
+    The ID of the source cluster.
+
+- `TargetClusterId` (*string*) -
+
+    The ID of the target cluster.
+
+**METHODS:**
+
+- `CrossClusterTopology(string sourceClusterId, string targetClusterId)` (*constructor*) -
+
+    Creates a new topology entry.
 
 ## Example
 
