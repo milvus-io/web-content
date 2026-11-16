@@ -21,7 +21,7 @@ title: スカラーインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>スカラーインデックスは、カテゴリ、価格、タイムスタンプ、場所など、ベクトルではないフィールドでのフィルタリングを高速化します。フィルタ式によって検索範囲が絞り込まれた場合、スカラーインデックスを使用することで、Milvusはフィールドをスキャンすることなく、一致するエンティティを特定できます。</p>
+    </button></h1><p>スカラーインデックスは、カテゴリ、価格、タイムスタンプ、場所など、ベクトルではないフィールドでのフィルタリングを高速化します。フィルタ式によって検索範囲が絞り込まれた場合、スカラーインデックスを使用することで、Milvusはそのフィールドをスキャンすることなく、一致するエンティティを特定できます。</p>
 <p>どのインデックスを選択すべきか迷った場合は、<code translate="no">AUTOINDEX</code> を使用してください。特定の動作が必要な場合にのみ、インデックスタイプを手動で指定してください。</p>
 <h2 id="Choosing-a-scalar-index" class="common-anchor-header">スカラーインデックスの選択<button data-href="#Choosing-a-scalar-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,9 +51,8 @@ title: スカラーインデックス
 <tr><td><code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">STL_SORT</code></td><td><code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">GEOMETRY</code></td><td><code translate="no">RTREE</code></td><td><code translate="no">RTREE</code></td></tr>
 <tr><td><code translate="no">JSON</code> 型付きスカラーまたは配列へのキャスト</td><td><code translate="no">HYBRID</code></td><td><code translate="no">json_cast_type</code> に依存します。<a href="#JSON-field-indexing">JSON フィールドのインデックス参照を</a>参照してください。</td></tr>
-<tr><td><code translate="no">JSON</code> 以下の場合<code translate="no">json_cast_type=&quot;JSON&quot;</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>、<code translate="no">BITMAP</code> 、<code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> 経由して<code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>、<code translate="no">BITMAP</code> 、<code translate="no">STL_SORT</code></td></tr>
+<tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> を通じて<code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;FLOAT&gt;</code>,<code translate="no">ARRAY&lt;DOUBLE&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">TEXT</code></td><td>未対応</td><td>なし</td></tr>
@@ -150,11 +149,9 @@ title: スカラーインデックス
 <tr><td><code translate="no">ARRAY_BOOL</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_DOUBLE</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 </tbody>
 </table>
-<p><code translate="no">JSON</code> キャストは、型付きスカラーパスインデックスではなく完全な JSON インデックスを選択し、<code translate="no">AUTOINDEX</code> のデフォルト値を<code translate="no">HYBRID</code> から<code translate="no">INVERTED</code> に変更します。</p>
-<p>オプションの<code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> は、<code translate="no">DOUBLE</code> キャストにおける文字列値を変換します。他のキャスト型では使用できません。<code translate="no">TRIE</code> も<code translate="no">FMINDEX</code> も、JSONフィールドをサポートしていません。</p>
+<p>オプションの<code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> は、<code translate="no">DOUBLE</code> へのキャストを行う際に文字列値を変換します。他のキャスト型では使用できません。<code translate="no">TRIE</code> および<code translate="no">FMINDEX</code> はいずれもJSONフィールドをサポートしていません。</p>
 <h2 id="Supported-predicates" class="common-anchor-header">サポートされている述語<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +167,7 @@ title: スカラーインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下の表は、各インデックスがどの述語の評価を支援できるかを示しています。<strong>インデックスがサポートされているからといって、Milvusがすべてのクエリでそのインデックスを使用するとは限りません。</strong>特定の式やパターンに対してインデックスが不適切な場合<strong>、</strong>Milvusはフィールドデータをスキャンすることがあります<strong>。</strong></p>
+    </button></h2><p>以下の表は、各インデックスがどの述語の評価を支援できるかを示しています。<strong>インデックスがサポートされているからといって、Milvusがすべてのクエリでそのインデックスを使用することが保証されるわけではありません。</strong>特定の式やパターンに対してインデックスが不適切な場合<strong>、</strong>Milvusはフィールドデータをスキャンすることがあります<strong>。</strong></p>
 <h3 id="Comparisons-and-membership" class="common-anchor-header">比較およびメンバーシップ<button data-href="#Comparisons-and-membership" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,17 +191,17 @@ title: スカラーインデックス
 <tbody>
 <tr><td><code translate="no">INVERTED</code></td><td><code translate="no">BOOL</code></td><td>等価およびメンバーシップ</td></tr>
 <tr><td><code translate="no">INVERTED</code></td><td>整数、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">VARCHAR</code></td><td>等価、包含、および範囲</td></tr>
-<tr><td><code translate="no">BITMAP</code></td><td><code translate="no">BOOL</code></td><td>等価性および包含関係</td></tr>
+<tr><td><code translate="no">BITMAP</code></td><td><code translate="no">BOOL</code></td><td>等価性および所属関係</td></tr>
 <tr><td><code translate="no">BITMAP</code></td><td>整数、<code translate="no">VARCHAR</code></td><td>等価性、所属、および範囲</td></tr>
 <tr><td><code translate="no">STL_SORT</code></td><td>整数、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 、<code translate="no">TIMESTAMPTZ</code> 、<code translate="no">VARCHAR</code></td><td>等価性、集合への所属、および範囲</td></tr>
 <tr><td><code translate="no">TRIE</code></td><td><code translate="no">VARCHAR</code></td><td>等価性、包含関係、および範囲；範囲の評価では複数のインデックス付き文字列が参照される場合がある</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td><code translate="no">VARCHAR</code></td><td>文字列パターンのみ。直接的な等価性、包含関係、範囲検索は行われない</td></tr>
-<tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">VARCHAR</code></td><td>文字列パターンのみ。直接的な等価性、包含関係、範囲検索は行われない</td></tr>
+<tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">VARCHAR</code></td><td>文字列パターンのみ。直接的な等価性、包含関係、範囲検索は不可</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td>以下に挙げる空間述語</td></tr>
-<tr><td><code translate="no">AUTOINDEX</code></td><td>サポートされるスカラー型</td><td>選択したインデックスによって異なります。内部の<code translate="no">HYBRID</code> による選択では、対応するビットマップ・ソート済み・反転インデックスの機能を使用します。</td></tr>
+<tr><td><code translate="no">AUTOINDEX</code></td><td>サポートされるスカラー型</td><td>選択したインデックスによって異なります。内部の<code translate="no">HYBRID</code> 選択では、対応するビットマップ、ソート済み、または反転インデックスの機能を使用します。</td></tr>
 </tbody>
 </table>
-<p>VARCHAR の範囲比較では、文字列値を数値として解釈するのではなく、文字列値として比較されます。この表はリテラル値との比較のみを説明しており、算術式や 2 つのフィールド間の比較が同様のインデックスによる高速化を受けるとは限りません。</p>
+<p>VARCHAR の範囲比較では、文字列値を数値として解釈するのではなく、文字列値として比較されます。この表はリテラル値との比較のみを説明しており、算術式や 2 つのフィールド間の比較が同様のインデックスによる高速化を受けることを示唆するものではありません。</p>
 <h3 id="String-patterns" class="common-anchor-header">文字列パターン<button data-href="#String-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -235,7 +232,7 @@ title: スカラーインデックス
 <tr><td><code translate="no">INVERTED</code></td><td>はい</td><td>スキャン</td><td>スキャン</td><td>はい</td><td>スキャン</td></tr>
 <tr><td><code translate="no">BITMAP</code></td><td>インデックス付き値を確認</td><td>インデックス値を確認する</td><td>インデックス化された値を確認</td><td>インデックス化された値を確認</td><td>インデックス化された値を確認</td></tr>
 <tr><td><code translate="no">STL_SORT</code></td><td>はい</td><td>インデックス付き値を確認する</td><td>インデックス付き値を確認する</td><td>インデックス値を確認する</td><td>インデックス値を確認する</td></tr>
-<tr><td><code translate="no">TRIE</code></td><td>はい</td><td>インデックス付き値を確認する</td><td>インデックス値を確認する</td><td>インデックス値を確認する</td><td>インデックス付き値を確認する</td></tr>
+<tr><td><code translate="no">TRIE</code></td><td>はい</td><td>インデックス付き値を確認する</td><td>インデックス付き値を確認する</td><td>インデックス値を確認する</td><td>インデックス付き値を確認する</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>候補者</td><td>候補</td><td>候補；設定されたグラム長範囲内のリテラルに完全に一致するもの</td><td>候補</td><td>候補</td></tr>
 <tr><td><code translate="no">FMINDEX</code></td><td>はい</td><td>はい</td><td>はい</td><td>候補者</td><td>候補</td></tr>
 </tbody>
@@ -268,8 +265,7 @@ title: スカラーインデックス
 <tr><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code> 、<code translate="no">STL_SORT</code> 、または適格な<code translate="no">AUTOINDEX</code> の選択</td><td><code translate="no">BOOL</code> 、<code translate="no">DOUBLE</code> 、または<code translate="no">VARCHAR</code></td><td>キャストされた型に応じた比較およびメンバーシップ</td><td>インデックス付きパスとキャストは、クエリと一致する必要があります。文字列パターンは、前述の表に従います。</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>JSONパスが以下に変換されたもの<code translate="no">VARCHAR</code></td><td>LIKEおよび正規表現パターン</td><td>VARCHAR NGRAM インデックスと同じパターン適格性ルールを使用します。</td></tr>
 <tr><td><code translate="no">INVERTED</code>、<code translate="no">STL_SORT</code> 、または適格な<code translate="no">AUTOINDEX</code> の選択</td><td><code translate="no">ARRAY_BOOL</code> 、<code translate="no">ARRAY_DOUBLE</code> 、または<code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>、<code translate="no">JSON_CONTAINS_ANY</code> 、<code translate="no">JSON_CONTAINS_ALL</code></td><td>互換性のある要素型が必要です。型が混在している、またはネストされた配列のオペランドは、スキャン処理に切り替わる場合があります。</td></tr>
-<tr><td><code translate="no">INVERTED</code> キャストあり<code translate="no">JSON</code></td><td>完全な JSON インデックス</td><td>サポートされているスカラーパスでの比較およびメンバーシップ、サポートされている文字列パターン、サポートされている配列パスでのJSON包含関係</td><td>文字列パスはINVERTED挙動に従います。配列の包含には、互換性のある要素型が必要です。</td></tr>
-<tr><td>JSON パスインデックスおよび完全な JSON インデックス</td><td>インデックス付きJSONパス</td><td><code translate="no">exists</code></td><td>パスが存在するかどうかをテストします。これは、パスの値をテストすることや、フィールド全体が null であるかどうかをテストすることとは異なります。</td></tr>
+<tr><td>JSONパスのインデックス</td><td>インデックス付きJSONパス</td><td><code translate="no">exists</code></td><td>パスが存在するかどうかをテストします。これは、その値をテストすることや、フィールド全体が null であるかどうかをテストすることとは異なります。</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td><code translate="no">ST_EQUALS</code>,<code translate="no">ST_INTERSECTS</code>,<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_WITHIN</code>,<code translate="no">ST_TOUCHES</code>,<code translate="no">ST_OVERLAPS</code>,<code translate="no">ST_CROSSES</code>,<code translate="no">ST_DWITHIN</code></td><td>バウンディングボックスを使用して候補を特定し、その後、正確な空間的関係を検証します。<code translate="no">ST_ISVALID</code> は RTREE を使用しません。</td></tr>
 </tbody>
 </table>
@@ -320,7 +316,7 @@ title: スカラーインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスのパフォーマンスは、データの分布やアプリケーションが使用するフィルターに依存します。カーディナリティ、文字列の長さ、配列の長さ、および一致するエンティティの数は、すべてメモリ使用量やクエリのレイテンシに影響を与える可能性があります。代表的なデータとフィルター式を使用してインデックスを比較し、メモリ使用量、構築時間、およびクエリのレイテンシをまとめて測定してください。</p>
+    </button></h2><p>インデックスのパフォーマンスは、データの分布やアプリケーションが使用するフィルタに依存します。カーディナリティ、文字列の長さ、配列の長さ、および一致するエンティティの数は、すべてメモリ使用量やクエリのレイテンシに影響を与える可能性があります。代表的なデータとフィルタ式を使用してインデックスを比較し、メモリ使用量、構築時間、およびクエリのレイテンシをまとめて測定してください。</p>
 <h3 id="Estimating-memory-requirements" class="common-anchor-header">メモリ要件の見積もり<button data-href="#Estimating-memory-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,14 +347,14 @@ title: スカラーインデックス
 <tr><td><code translate="no">STL_SORT</code> <code translate="no">INT8</code> 、 、 、または<code translate="no">INT16</code> <code translate="no">INT32</code> <code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td><td>エンティティあたり約 12 バイト。</td></tr>
 <tr><td><code translate="no">STL_SORT</code> <code translate="no">INT64</code> 、 、または<code translate="no">DOUBLE</code> <code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td><td>値が大きい場合は、エンティティあたり約20バイト。</td></tr>
 <tr><td><code translate="no">STL_SORT</code> で<code translate="no">VARCHAR</code></td><td><code translate="no">8 * N + (l + 16) * D</code></td><td>繰り返し出現する文字列はメモリを共有するため、通常、異なる文字列が少ないほどメモリ使用量は少なくなります。</td></tr>
-<tr><td><code translate="no">BITMAP</code>、高密度ビットマップを使用する場合</td><td><code translate="no">(D + 1) * N / 8</code></td><td>各エンティティごとに、異なる値ごとに約 1 ビットが必要であり、さらに有効なエンティティを追跡するためのビットマップが 1 つ必要になります。</td></tr>
+<tr><td><code translate="no">BITMAP</code>、高密度ビットマップを使用する場合</td><td><code translate="no">(D + 1) * N / 8</code></td><td>各エンティティごとに、異なる値ごとに約 1 ビットに加え、有効なエンティティを追跡するための 1 つのビットマップが必要です。</td></tr>
 <tr><td><code translate="no">INVERTED</code> または<code translate="no">NGRAM</code></td><td><code translate="no">S</code></td><td>構築済みのインデックスのサイズを目安としてください。</td></tr>
 <tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">2 * S</code></td><td>構築されたインデックスのサイズの約 2 倍の容量を確保します。</td></tr>
 </tbody>
 </table>
 <p>その結果を<code translate="no">1024 * 1024</code> で割って、バイトを<strong>MiB</strong>に変換します。たとえば、100万個のNULLではない<code translate="no">INT64</code> 値を持つ<code translate="no">STL_SORT</code> インデックスでは、メインのデータ構造に<strong>約19 MiB</strong>が必要です。すべての文字列が一意であるVARCHARフィールドの場合、推定値は<code translate="no">(l + 24) * N</code> に単純化されます。100万個の一意な文字列が平均32バイトだとすると、<strong>約53 MiB</strong>になります。</p>
-<p>BITMAPの計算式は、高密度ビットマップ格納を表しています。オプションのオフセットキャッシュを有効にすると、64ビットシステムで約<code translate="no">8 * N</code> バイトが追加されます。<code translate="no">INVERTED</code> 、<code translate="no">NGRAM</code> 、および<code translate="no">FMINDEX</code> については、代表的なデータに対してインデックスを構築し、<code translate="no">S</code> を算出してください。生データのサイズは、構築されたインデックスのサイズの代用にはなりません。<code translate="no">AUTOINDEX</code> については、実際に選択されたインデックスの計算式を使用し、セグメントごとの推定値を適用した後、ロードされたセグメントおよびレプリカ全体でそれらを合計します。</p>
-<p>これらは概算の計画値であり、メモリの制限値ではありません。これらは、構築、ロード、およびクエリ中に使用される一時メモリを省略しており、数値型<code translate="no">STL_SORT</code> に比べて、文字列およびビットマップインデックスの場合、一意の値やデータの分布の影響をより強く受けます。正確性の固定された割合は保証されません。 メモリマッピング、古いインデックス形式、配列、およびJSONフィールドについては、別途測定が必要です。デプロイメントのサイズを決定する前に、代表的なデータとクエリを使用して実際のメモリ使用量を確認し、ピーク時の使用量に備えて余裕を持たせてください。</p>
+<p>BITMAPの計算式は、高密度ビットマップ格納を表しています。オプションのオフセットキャッシュを有効にすると、64ビットシステム上で約<code translate="no">8 * N</code> バイトが追加されます。<code translate="no">INVERTED</code> 、<code translate="no">NGRAM</code> 、および<code translate="no">FMINDEX</code> については、代表的なデータに対してインデックスを構築し、<code translate="no">S</code> を算出してください。生データのサイズは、構築されたインデックスのサイズの代用にはなりません。<code translate="no">AUTOINDEX</code> については、実際に選択されたインデックスの計算式を使用し、セグメントごとの推定値を適用した後、ロードされたセグメントおよびレプリカ全体でそれらを合計します。</p>
+<p>これらは概算の計画値であり、メモリの上限値ではありません。これらは、構築、ロード、およびクエリ実行中に使用される一時メモリを省略しており、数値型<code translate="no">STL_SORT</code> に比べて、文字列およびビットマップインデックスの場合、一意の値やデータの分布の影響をより強く受けます。正確性の固定された割合は保証されません。 メモリマッピング、古いインデックス形式、配列、およびJSONフィールドについては、別途測定が必要です。デプロイメントのサイズを決定する前に、代表的なデータとクエリを使用して実際のメモリ使用量を確認し、ピーク時の使用量に備えて余裕を持たせてください。</p>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

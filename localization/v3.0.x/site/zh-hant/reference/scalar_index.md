@@ -19,7 +19,7 @@ title: 標量索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>標量索引可加速對非向量欄位的篩選，例如類別、價格、時間戳記和位置。當篩選表達式縮小搜尋範圍時，標量索引能讓 Milvus 無需掃描該欄位，即可定位符合條件的實體。</p>
+    </button></h1><p>標量索引可加速對非向量欄位的篩選，例如類別、價格、時間戳記和位置。當篩選表達式縮小搜尋範圍時，標量索引可讓 Milvus 無需掃描該欄位，即可定位符合條件的實體。</p>
 <p>若不確定該選擇哪種索引，請使用 `<code translate="no">AUTOINDEX</code>`。僅當您需要特定行為時，才需手動指定索引類型。</p>
 <h2 id="Choosing-a-scalar-index" class="common-anchor-header">選擇標量索引<button data-href="#Choosing-a-scalar-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,9 +49,8 @@ title: 標量索引
 <tr><td><code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">STL_SORT</code></td><td><code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">GEOMETRY</code></td><td><code translate="no">RTREE</code></td><td><code translate="no">RTREE</code></td></tr>
 <tr><td><code translate="no">JSON</code> 搭配類型化的標量或陣列轉換</td><td><code translate="no">HYBRID</code></td><td>取決於<code translate="no">json_cast_type</code> ；請參閱<a href="#JSON-field-indexing">JSON 欄位索引</a>。</td></tr>
-<tr><td><code translate="no">JSON</code> 搭配<code translate="no">json_cast_type=&quot;JSON&quot;</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
-<tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>、<code translate="no">BITMAP</code> 、<code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> 透過<code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>、<code translate="no">BITMAP</code> 、<code translate="no">STL_SORT</code></td></tr>
+<tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code>,<code translate="no">STL_SORT</code></td></tr>
+<tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> 透過<code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;FLOAT&gt;</code>,<code translate="no">ARRAY&lt;DOUBLE&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">TEXT</code></td><td>不支援</td><td>無</td></tr>
@@ -63,7 +62,7 @@ title: 標量索引
 <li><strong>主鍵：</strong> <code translate="no">BITMAP</code> 無法用於主鍵欄位。</li>
 <li><strong>陣列：</strong>遞迴陣列及包含可為空元素的陣列不支援標量索引，包括<code translate="no">AUTOINDEX</code> 。一般陣列支援布林值、整數、浮點數及 VARCHAR 元素。</li>
 <li><strong>結構體陣列：</strong>需分別對標量子欄位建立索引。其支援方式可能與一般陣列不同；例如，布林型結構體子欄位不支援顯式的<code translate="no">STL_SORT</code> 。</li>
-<li><strong>TEXT：</strong>使用者自訂的標量索引（包括 `<code translate="no">AUTOINDEX</code>`）無法使用。文字分析與 BM25 搜尋採用各自獨立的機制。</li>
+<li><strong>TEXT：</strong>使用者自訂的標量索引（包括 `<code translate="no">AUTOINDEX</code>`）無法使用。文字分析與 BM25 搜尋採用不同的機制。</li>
 </ul>
 <h2 id="Index-types" class="common-anchor-header">索引類型<button data-href="#Index-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +109,7 @@ title: 標量索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在<code translate="no">AUTOINDEX</code> 下，Milvus會根據欄位類型、伺服器設定，以及某些欄位的不同值數量（基數）來選擇索引。預設選項列於「<a href="#Choosing-a-scalar-index">選擇標量索引</a>」中。</p>
+    </button></h2><p>在<code translate="no">AUTOINDEX</code> 下，Milvus會根據欄位類型、伺服器設定，以及某些欄位的獨特值數量（基數）來選取索引。預設選項詳見「<a href="#Choosing-a-scalar-index">選擇標量索引</a>」。</p>
 <p>對於大多數欄位，<code translate="no">AUTOINDEX</code> 會採用內建的「<code translate="no">HYBRID</code> 」策略，根據獨特值數量（基數）來選擇索引：</p>
 <ul>
 <li><strong><code translate="no">BITMAP</code></strong> 當建構包含少於 100 個不同值時。</li>
@@ -119,7 +118,7 @@ title: 標量索引
 <p>陣列索引採用獨立的相容性政策：其高基數分支在叢集支援時使用「<code translate="no">STL_SORT</code> 」，否則使用「<code translate="no">INVERTED</code> 」。請參閱<a href="#Version-compatibility">「版本相容性</a>」。</p>
 <p><code translate="no">HYBRID</code> 此選項僅供內部使用 — 您無法直接指定。內部選項亦可使用該欄位無法作為顯式選項的索引，例如針對浮點數的位圖索引。</p>
 <blockquote>
-<p>這些選取條件為預設值。管理員可透過<code translate="no">scalarAutoIndex.params.build</code> 進行變更。<code translate="no">scalarAutoIndex.enable</code> 的預設值為<code translate="no">false</code> ，此設定在未指定索引類型時，仍允許明確指定<code translate="no">AUTOINDEX</code> 及選取條件；若將其設定為<code translate="no">true</code> ，則會將自動選取功能套用至原本有效的手動請求。</p>
+<p>這些選取條件為預設值。管理員可透過<code translate="no">scalarAutoIndex.params.build</code> 進行變更。<code translate="no">scalarAutoIndex.enable</code> 的預設值為<code translate="no">false</code> ，此設定在未指定索引類型時，仍允許明確指定<code translate="no">AUTOINDEX</code> 及選取條件；若將其設定為<code translate="no">true</code> ，則會對原本有效的手動請求也套用自動選取機制。</p>
 </blockquote>
 <h2 id="JSON-field-indexing" class="common-anchor-header">JSON 欄位索引<button data-href="#JSON-field-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,12 +147,10 @@ title: 標量索引
 <tr><td><code translate="no">ARRAY_BOOL</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_DOUBLE</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 </tbody>
 </table>
-<p><code translate="no">JSON</code> 轉換會選擇完整的 JSON 索引，而非類型化的標量路徑索引，並將<code translate="no">AUTOINDEX</code> 的預設值從<code translate="no">HYBRID</code> 變更為<code translate="no">INVERTED</code> 。</p>
-<p>可選的 `<code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> ` 會針對 `<code translate="no">DOUBLE</code> ` 轉換進行字串值轉換。此轉換無法與其他轉換類型併用。無論是 `<code translate="no">TRIE</code> ` 還是 `<code translate="no">FMINDEX</code> `，均不支援 JSON 欄位。</p>
-<h2 id="Supported-predicates" class="common-anchor-header">受支援的謂詞<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
+<p>可選的<code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> 會將字串值轉換為<code translate="no">DOUBLE</code> 轉換格式。它無法與其他轉換類型併用。<code translate="no">TRIE</code> 與<code translate="no">FMINDEX</code> 均不支援 JSON 欄位。</p>
+<h2 id="Supported-predicates" class="common-anchor-header">支援的謂詞<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,7 +199,7 @@ title: 標量索引
 <tr><td><code translate="no">AUTOINDEX</code></td><td>支援的標量類型</td><td>取決於所選的索引。內部<code translate="no">HYBRID</code> 篩選會利用其位圖、排序或反轉索引的功能。</td></tr>
 </tbody>
 </table>
-<p>VARCHAR 範圍會比較字串值，而非將其解讀為數字。此表僅描述與字面值的比較；這並不意味著算術表達式或兩個欄位之間的比較也能獲得相同的索引加速效果。</p>
+<p>VARCHAR 範圍會比較字串值，而非將其解讀為數字。此表僅描述與字面值的比較；這並不意味著算術表達式或兩個欄位之間的比較會獲得相同的索引加速效果。</p>
 <h3 id="String-patterns" class="common-anchor-header">字串模式<button data-href="#String-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,8 +219,8 @@ title: 標量索引
 <ul>
 <li><strong>是：</strong>索引會返回完全匹配的結果。</li>
 <li><strong>檢查索引值：</strong>Milvus 會將模式與儲存於索引中的字串進行比對，此過程可能需要遍歷許多不同的字串。</li>
-<li><strong>候選項：</strong>索引會縮小可能的匹配範圍，然後由 Milvus 檢查原始值。</li>
-<li><strong>掃描：</strong>索引無法滿足該謂詞；Milvus 會使用另一條合資格的路徑，或掃描該欄位。</li>
+<li><strong>候選項：</strong>索引會先縮小可能的匹配範圍，然後由 Milvus 檢查原始值。</li>
+<li><strong>掃描：</strong>索引無法滿足該謂詞；Milvus 會使用另一條符合條件的路徑，或掃描該欄位。</li>
 </ul>
 <table>
 <thead>
@@ -239,8 +236,8 @@ title: 標量索引
 </tbody>
 </table>
 <p>這些條目描述了查詢規劃後的運算子。Milvus 可以將字面值 LIKE 模式簡化為等值比對，並將簡單的錨點正規表達式簡化為等值、前綴或後綴比對；例如，<code translate="no">name =~ &quot;^abc$&quot;</code> 會轉為等值比對，並遵循等值比對表。</p>
-<p><code translate="no">INVERTED</code> 即使較複雜的 LIKE 模式可以使用索引，Milvus 仍會將簡單的後綴和子字串形式視為掃描。<code translate="no">NGRAM</code> 要求字面文字長度至少為<code translate="no">min_gram</code> 個字元；一般的 LIKE 則要求每個非空的字面片段都必須達到該最低長度，而正規表達式的加速效果則取決於能否提取合適的字面值。 否則，Milvus 會掃描資料。當模式提供的有用篩選條件甚少，或透過索引解析的成本過高時，<code translate="no">FMINDEX</code> 亦可能選擇進行掃描。</p>
-<p>這些屬於字串值謂詞。基於標記的函數（例如<code translate="no">TEXT_MATCH</code> 和<code translate="no">PHRASE_MATCH</code> ）會使用透過欄位屬性配置的文字比對索引；若選擇標量型<code translate="no">INVERTED</code> 索引，則無法啟用這些函數。</p>
+<p><code translate="no">INVERTED</code> 即使較複雜的 LIKE 模式可以使用索引，Milvus 仍會將簡單的後綴和子字串形式視為掃描。<code translate="no">NGRAM</code> 要求字面文字長度至少為<code translate="no">min_gram</code> 個字元；一般的 LIKE 則要求每個非空的字面片段都必須符合該最低長度，而正規表達式的加速效果則取決於能否提取合適的字面值。 否則，Milvus 會掃描資料。當模式提供的有用篩選條件甚少，或透過索引解析的成本過高時，<code translate="no">FMINDEX</code> 亦可能選擇進行掃描。</p>
+<p>這些屬於字串值謂詞。基於標記的函數（例如<code translate="no">TEXT_MATCH</code> 和<code translate="no">PHRASE_MATCH</code> ）會使用透過欄位屬性配置的文字比對索引；若選擇標量<code translate="no">INVERTED</code> 索引，則無法啟用這些函數。</p>
 <h3 id="Array-JSON-and-spatial-predicates" class="common-anchor-header">陣列、JSON 和空間謂詞<button data-href="#Array-JSON-and-spatial-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -265,9 +262,8 @@ title: 標量索引
 <tr><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code></td><td>由布林值、整數或 VARCHAR 值組成的普通陣列</td><td>全陣列<code translate="no">==</code> 以及<code translate="no">!=</code></td><td>可使用索引候選項，隨後對原始陣列進行檢查。浮點數陣列將回退至掃描；位圖索引不支援此候選路徑。</td></tr>
 <tr><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code> 、<code translate="no">STL_SORT</code> ，或符合資格的<code translate="no">AUTOINDEX</code> 選取項</td><td>轉換為<code translate="no">BOOL</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code></td><td>與轉換類型相符的比較與成員關係</td><td>索引路徑與轉換結果必須與查詢相符。字串模式遵循前表規定。</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>轉換為<code translate="no">VARCHAR</code></td><td>LIKE 及正規表達式模式</td><td>採用與 VARCHAR NGRAM 索引相同的模式適用性規則。</td></tr>
-<tr><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code> ，或符合資格的<code translate="no">AUTOINDEX</code> 選項</td><td>轉換為<code translate="no">ARRAY_BOOL</code> 、<code translate="no">ARRAY_DOUBLE</code> 或<code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>、<code translate="no">JSON_CONTAINS_ANY</code> 、<code translate="no">JSON_CONTAINS_ALL</code></td><td>需元素類型相容。混合類型或嵌套陣列的運算元可能會回退至掃描模式。</td></tr>
-<tr><td><code translate="no">INVERTED</code> 帶有轉換<code translate="no">JSON</code></td><td>完整的 JSON 索引</td><td>對受支援的標量路徑進行比較與成員關係檢查；支援字串模式；對受支援的陣列路徑進行 JSON 包含檢查</td><td>字串路徑遵循「反轉」行為。陣列包含運算需元素類型相容。</td></tr>
-<tr><td>JSON 路徑索引與完整 JSON 索引</td><td>索引 JSON 路徑</td><td><code translate="no">exists</code></td><td>用以測試路徑是否存在，這與測試其值或整個欄位是否為 null 有所不同。</td></tr>
+<tr><td><code translate="no">INVERTED</code>,<code translate="no">STL_SORT</code> ，或符合資格的<code translate="no">AUTOINDEX</code> 選項</td><td>轉換為<code translate="no">ARRAY_BOOL</code> 、<code translate="no">ARRAY_DOUBLE</code> 或<code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>、<code translate="no">JSON_CONTAINS_ANY</code> 、<code translate="no">JSON_CONTAINS_ALL</code></td><td>需具備相容的元素類型。混合類型或嵌套陣列的運算元可能會回退至掃描模式。</td></tr>
+<tr><td>JSON 路徑索引</td><td>帶索引的 JSON 路徑</td><td><code translate="no">exists</code></td><td>用以測試路徑是否存在，這與測試其值或整個欄位是否為 null 有所不同。</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td><code translate="no">ST_EQUALS</code>,<code translate="no">ST_INTERSECTS</code>,<code translate="no">ST_CONTAINS</code>,<code translate="no">ST_WITHIN</code>,<code translate="no">ST_TOUCHES</code>,<code translate="no">ST_OVERLAPS</code>,<code translate="no">ST_CROSSES</code>,<code translate="no">ST_DWITHIN</code></td><td>使用邊界框尋找候選元素，然後檢查確切的空間關係。<code translate="no">ST_ISVALID</code> 並未使用 RTREE。</td></tr>
 </tbody>
 </table>
@@ -296,8 +292,8 @@ title: 標量索引
 </thead>
 <tbody>
 <tr><td>明確<code translate="no">FMINDEX</code></td><td>標量索引引擎版本 5 或更新</td></tr>
-<tr><td>明確<code translate="no">STL_SORT</code> 適用於一般陣列</td><td>標量索引引擎版本 3 或更新，且已啟用陣列排序支援</td></tr>
-<tr><td><code translate="no">HYBRID</code> 針對一般陣列選用 `<code translate="no">STL_SORT</code> `</td><td>標量索引引擎版本 5 或更新，且已啟用陣列排序支援</td></tr>
+<tr><td>顯式在普通陣列上執行<code translate="no">STL_SORT</code> </td><td>標量索引引擎版本 3 或更新，且已啟用陣列排序支援</td></tr>
+<tr><td><code translate="no">HYBRID</code> 針對一般陣列選擇 `<code translate="no">STL_SORT</code> `</td><td>標量索引引擎版本 5 或更新，且已啟用陣列排序支援</td></tr>
 <tr><td><code translate="no">BITMAP</code>，或對 JSON 標量路徑使用 `<code translate="no">STL_SORT</code>` 或 `<code translate="no">HYBRID</code> `</td><td>標量索引引擎版本 4 或更新</td></tr>
 <tr><td><code translate="no">STL_SORT</code> 或在具類型標示的 JSON 陣列路徑上使用<code translate="no">HYBRID</code> </td><td>標量索引引擎版本 3 或更新，且已啟用陣列排序支援</td></tr>
 </tbody>
@@ -339,7 +335,7 @@ title: 標量索引
 <li><code translate="no">N</code>: 實體數量。</li>
 <li><code translate="no">D</code>: 不同值的數量。</li>
 <li><code translate="no">l</code>: 不同字串的平均長度（以<strong>位元組</strong>為單位）。</li>
-<li><code translate="no">S</code>: 儲存壓縮前的建置索引大小，單位為<strong>位元組</strong>。</li>
+<li><code translate="no">S</code>: 儲存壓縮前的建置索引大小（單位：<strong>位元組</strong>）。</li>
 </ul>
 <table>
 <thead>
@@ -348,8 +344,8 @@ title: 標量索引
 <tbody>
 <tr><td><code translate="no">STL_SORT</code> 關於<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> ，或<code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td><td>每個實體約 12 位元組。</td></tr>
 <tr><td><code translate="no">STL_SORT</code> 在<code translate="no">INT64</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td><td>若為較大的數值，每個實體約佔 20 位元組。</td></tr>
-<tr><td><code translate="no">STL_SORT</code> 在<code translate="no">VARCHAR</code></td><td><code translate="no">8 * N + (l + 16) * D</code></td><td>重複的字串會共用儲存空間，因此獨特的字串越少，通常代表佔用的記憶體越少。</td></tr>
-<tr><td><code translate="no">BITMAP</code>，使用密集位圖</td><td><code translate="no">(D + 1) * N / 8</code></td><td>每個不同值大約需要一個位元，外加一個位圖來追蹤有效的實體。</td></tr>
+<tr><td><code translate="no">STL_SORT</code> 在<code translate="no">VARCHAR</code></td><td><code translate="no">8 * N + (l + 16) * D</code></td><td>重複的字串會共用儲存空間，因此不同的字串越少，通常代表佔用的記憶體越少。</td></tr>
+<tr><td><code translate="no">BITMAP</code>，使用密集位圖</td><td><code translate="no">(D + 1) * N / 8</code></td><td>每個不同值約需 1 位元，外加 1 個位圖來追蹤有效的實體。</td></tr>
 <tr><td><code translate="no">INVERTED</code> 或<code translate="no">NGRAM</code></td><td><code translate="no">S</code></td><td>以已建立索引的大小為起點。</td></tr>
 <tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">2 * S</code></td><td>預留約為已建立索引大小兩倍的空間。</td></tr>
 </tbody>

@@ -944,7 +944,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "ÍNDICE_INVERTIDO_DISPARSO",
+                "label": "ÍNDICE_INVERTIDO_ESCASO",
                 "id": "sparse-inverted-index.md",
                 "order": 0,
                 "children": []
@@ -958,45 +958,51 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Resumen",
+                "id": "scalar_index.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "BITMAP",
                 "id": "bitmap.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "INVERTIDO",
                 "id": "inverted.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "TRIE",
                 "id": "trie.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "FMINDEX",
                 "id": "fmindex.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1247,7 +1253,7 @@
             "children": []
           },
           {
-            "label": "Utilizar la clave de partición",
+            "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1383,7 +1389,7 @@
                 "children": []
               },
               {
-                "label": "Clasificación de la descomposición",
+                "label": "Clasificación de descomposición",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -2330,7 +2336,7 @@
             "children": []
           },
           {
-            "label": "Transición",
+            "label": "Cambio",
             "id": "cdc_switchover.md",
             "order": 2,
             "children": []

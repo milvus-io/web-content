@@ -249,7 +249,7 @@
         ]
       },
       {
-        "label": "Bitset",
+        "label": "位集",
         "id": "bitset.md",
         "order": 1,
         "children": []
@@ -655,7 +655,7 @@
                     "children": []
                   },
                   {
-                    "label": "僅限英數字",
+                    "label": "僅限字母數字",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -958,45 +958,51 @@
             "isMenu": true,
             "children": [
               {
+                "label": "概覽",
+                "id": "scalar_index.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "位圖",
                 "id": "bitmap.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "倒置",
                 "id": "inverted.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "TRIE",
                 "id": "trie.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "FMINDEX",
                 "id": "fmindex.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1047,7 +1053,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "人工神經網路的基本搜尋",
+            "label": "人工神經網路（ANN）的基本搜尋",
             "id": "single-vector-search.md",
             "order": 0,
             "children": []
@@ -1247,7 +1253,7 @@
             "children": []
           },
           {
-            "label": "使用分區金鑰",
+            "label": "使用分區鍵",
             "id": "use-partition-key.md",
             "order": 16,
             "children": []
@@ -1421,7 +1427,7 @@
                 ]
               },
               {
-                "label": "模特評分系統",
+                "label": "模特排名榜",
                 "id": "model-ranker",
                 "order": 4,
                 "isMenu": true,
@@ -1734,7 +1740,7 @@
                 "children": []
               },
               {
-                "label": "在 OpenShift 上部署",
+                "label": "部署至 OpenShift",
                 "id": "openshift.md",
                 "order": 4,
                 "children": []
@@ -2126,7 +2132,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "RBAC 概述",
+                "label": "RBAC 概覽",
                 "id": "rbac.md",
                 "order": 0,
                 "children": []
@@ -3058,7 +3064,7 @@
             "children": []
           },
           {
-            "label": "個人識別資訊遮罩",
+            "label": "個人識別資訊（PII）遮罩",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3183,7 +3189,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行全文搜尋",
+        "label": "使用 Milvus 進行全文檢索",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -3207,7 +3213,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行圖 RAG",
+        "label": "使用 Milvus 建立圖形 RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []

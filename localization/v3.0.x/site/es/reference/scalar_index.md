@@ -22,7 +22,7 @@ title: Índice escalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Los índices escalares aceleran el filtrado en campos no vectoriales, como categorías, precios, marcas de tiempo y ubicaciones. Cuando una expresión de filtro restringe una búsqueda, un índice escalar permite a Milvus localizar las entidades que coinciden sin necesidad de escanear el campo.</p>
+    </button></h1><p>Los índices escalares aceleran el filtrado en campos no vectoriales, como categorías, precios, marcas de tiempo y ubicaciones. Cuando una expresión de filtro restringe una búsqueda, un índice escalar permite a Milvus localizar las entidades coincidentes sin necesidad de escanear el campo.</p>
 <p>Si no estás seguro de qué índice elegir, utiliza <code translate="no">AUTOINDEX</code>. Especifica un tipo de índice manualmente solo cuando necesites un comportamiento concreto.</p>
 <h2 id="Choosing-a-scalar-index" class="common-anchor-header">Elección de un índice escalar<button data-href="#Choosing-a-scalar-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,6 @@ title: Índice escalar
 <tr><td><code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">STL_SORT</code></td><td><code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">GEOMETRY</code></td><td><code translate="no">RTREE</code></td><td><code translate="no">RTREE</code></td></tr>
 <tr><td><code translate="no">JSON</code> con un escalar tipado o una conversión de matriz</td><td><code translate="no">HYBRID</code></td><td>Depende de <code translate="no">json_cast_type</code>; véase <a href="#JSON-field-indexing">la indexación de campos JSON</a>.</td></tr>
-<tr><td><code translate="no">JSON</code> con <code translate="no">json_cast_type=&quot;JSON&quot;</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> a través de <code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;FLOAT&gt;</code>, <code translate="no">ARRAY&lt;DOUBLE&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
@@ -97,7 +96,7 @@ title: Índice escalar
 <tr><td><code translate="no">RTREE</code></td><td>Filtrado espacial en campos GEOMETRY.</td></tr>
 </tbody>
 </table>
-<p>Para ver ejemplos de creación, parámetros de índice y consultas admitidas, consulta <a href="/docs/es/bitmap.md">BITMAP</a>, <a href="/docs/es/inverted.md">INVERTED</a>, <a href="/docs/es/ngram.md">NGRAM</a>, <a href="/docs/es/stl-sort.md">STL_SORT</a>, <a href="/docs/es/trie.md">TRIE</a>, <a href="/docs/es/fmindex.md">FMINDEX</a> y <a href="/docs/es/rtree.md">RTREE</a>.</p>
+<p>Para ver ejemplos de creación, parámetros de índice y consultas compatibles, consulta <a href="/docs/es/bitmap.md">BITMAP</a>, <a href="/docs/es/inverted.md">INVERTED</a>, <a href="/docs/es/ngram.md">NGRAM</a>, <a href="/docs/es/stl-sort.md">STL_SORT</a>, <a href="/docs/es/trie.md">TRIE</a>, <a href="/docs/es/fmindex.md">FMINDEX</a> y <a href="/docs/es/rtree.md">RTREE</a>.</p>
 <h2 id="How-AUTOINDEX-selects" class="common-anchor-header">Cómo selecciona AUTOINDEX<button data-href="#How-AUTOINDEX-selects" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,11 +150,9 @@ title: Índice escalar
 <tr><td><code translate="no">ARRAY_BOOL</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_DOUBLE</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 </tbody>
 </table>
-<p>La conversión « <code translate="no">JSON</code> » selecciona la indexación JSON completa en lugar de un índice de ruta escalar tipado, y cambia el valor predeterminado de « <code translate="no">AUTOINDEX</code> » de « <code translate="no">HYBRID</code> » a « <code translate="no">INVERTED</code> ».</p>
-<p>El conversor opcional ` <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> ` convierte los valores de cadena para una conversión ` <code translate="no">DOUBLE</code> `. No se puede utilizar con otros tipos de conversión. Ni ` <code translate="no">TRIE</code> ` ni ` <code translate="no">FMINDEX</code> ` admiten campos JSON.</p>
+<p>El predicado opcional « <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> » convierte valores de cadena para una conversión de tipo « <code translate="no">DOUBLE</code> ». No se puede utilizar con otros tipos de conversión. Ni « <code translate="no">TRIE</code> » ni « <code translate="no">FMINDEX</code> » admiten campos JSON.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Predicados compatibles<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,7 +168,7 @@ title: Índice escalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Las siguientes tablas muestran qué predicados puede ayudar a evaluar cada índice. <strong>La compatibilidad con un índice no garantiza que Milvus lo utilice en todas las consultas.</strong> Milvus puede escanear los datos de los campos cuando el índice no sea adecuado para una expresión o patrón concretos.</p>
+    </button></h2><p>Las siguientes tablas muestran qué predicados puede ayudar a evaluar cada índice. <strong>La compatibilidad con los índices no garantiza que Milvus utilice el índice para todas las consultas.</strong> Milvus puede escanear los datos de los campos cuando el índice no sea adecuado para una expresión o patrón concretos.</p>
 <h3 id="Comparisons-and-membership" class="common-anchor-header">Comparaciones y pertenencia<button data-href="#Comparisons-and-membership" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,7 +195,7 @@ title: Índice escalar
 <tr><td><code translate="no">BITMAP</code></td><td><code translate="no">BOOL</code></td><td>Igualdad y pertenencia</td></tr>
 <tr><td><code translate="no">BITMAP</code></td><td>Números enteros, <code translate="no">VARCHAR</code></td><td>Igualdad, pertenencia e intervalos</td></tr>
 <tr><td><code translate="no">STL_SORT</code></td><td>Números enteros, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">TIMESTAMPTZ</code>, <code translate="no">VARCHAR</code></td><td>Igualdad, pertenencia y rangos</td></tr>
-<tr><td><code translate="no">TRIE</code></td><td><code translate="no">VARCHAR</code></td><td>Igualdad, pertenencia e intervalos; la evaluación de intervalos puede recorrer varias cadenas indexadas</td></tr>
+<tr><td><code translate="no">TRIE</code></td><td><code translate="no">VARCHAR</code></td><td>Igualdad, pertenencia y rangos; la evaluación de rangos puede recorrer varias cadenas indexadas</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td><code translate="no">VARCHAR</code></td><td>Solo patrones de cadena; no se permite la búsqueda directa de igualdad, pertenencia o intervalos</td></tr>
 <tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">VARCHAR</code></td><td>Solo patrones de cadena; no se permite la búsqueda directa de igualdad, pertenencia o intervalos</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td>Predicados espaciales, enumerados a continuación</td></tr>
@@ -236,13 +233,13 @@ title: Índice escalar
 <tr><td><code translate="no">INVERTED</code></td><td>Sí</td><td>Escanear</td><td>Escaneo</td><td>Sí</td><td>Escanear</td></tr>
 <tr><td><code translate="no">BITMAP</code></td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar los valores indexados</td></tr>
 <tr><td><code translate="no">STL_SORT</code></td><td>Sí</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td></tr>
-<tr><td><code translate="no">TRIE</code></td><td>Sí</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td></tr>
+<tr><td><code translate="no">TRIE</code></td><td>Sí</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar valores indexados</td><td>Comprobar los valores indexados</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>Candidatos</td><td>Candidatos</td><td>Candidatos; coincidencia exacta con un literal dentro del rango de longitud de gram configurado</td><td>Candidatos</td><td>Candidatos</td></tr>
 <tr><td><code translate="no">FMINDEX</code></td><td>Sí</td><td>Sí</td><td>Sí</td><td>Candidatos</td><td>Candidatos</td></tr>
 </tbody>
 </table>
 <p>Estas entradas describen el operador tras la planificación de la consulta. Milvus puede simplificar un patrón LIKE literal a una igualdad, y una expresión regular simple con anclaje a una igualdad, una coincidencia de prefijo o de sufijo; por ejemplo, <code translate="no">name =~ &quot;^abc$&quot;</code> se convierte en una prueba de igualdad y sigue la tabla de igualdad.</p>
-<p><code translate="no">INVERTED</code> trata las formas simples de sufijo y subcadena como escaneos, aunque los patrones LIKE más complejos puedan utilizar el índice. « <code translate="no">NGRAM</code> » requiere un texto literal de al menos <code translate="no">min_gram</code> caracteres de longitud; el LIKE general requiere que cada fragmento literal no vacío cumpla ese mínimo, y la aceleración de expresiones regulares depende de la extracción de literales adecuados. De lo contrario, Milvus realiza un escaneo de los datos. « <code translate="no">FMINDEX</code> » también puede optar por un escaneo cuando un patrón proporciona poco filtrado útil o resulta demasiado costoso de resolver a través del índice.</p>
+<p><code translate="no">INVERTED</code> trata las formas simples de sufijo y subcadena como escaneos, aunque los patrones LIKE más complejos puedan utilizar el índice. « <code translate="no">NGRAM</code> » requiere un texto literal de al menos <code translate="no">min_gram</code> caracteres de longitud; el LIKE general requiere que cada fragmento literal no vacío cumpla ese mínimo, y la aceleración de expresiones regulares depende de la extracción de literales adecuados. De lo contrario, Milvus realiza un escaneo de los datos. <code translate="no">FMINDEX</code> también puede optar por un escaneo cuando un patrón proporciona un filtrado poco útil o resulta demasiado costoso de resolver mediante el índice.</p>
 <p>Se trata de predicados de valor de cadena. Las funciones basadas en tokens, como <code translate="no">TEXT_MATCH</code> y <code translate="no">PHRASE_MATCH</code>, utilizan la indexación de coincidencia de texto configurada a través de las propiedades de los campos; la elección de un índice escalar <code translate="no">INVERTED</code> no habilita dichas funciones.</p>
 <h3 id="Array-JSON-and-spatial-predicates" class="common-anchor-header">Predicados de matriz, JSON y espaciales<button data-href="#Array-JSON-and-spatial-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,12 +262,11 @@ title: Índice escalar
 </thead>
 <tbody>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code> o una selección válida de <code translate="no">AUTOINDEX</code> </td><td>Matrices ordinarias con tipos de elementos compatibles</td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td>Coincide con los elementos independientemente de su posición. Se siguen aplicando las restricciones de índice y tipo.</td></tr>
-<tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td><td>Matrices ordinarias de valores booleanos, enteros o VARCHAR</td><td><code translate="no">==</code> de todo el array y <code translate="no">!=</code></td><td>Se pueden utilizar candidatos de índice seguidos de comprobaciones de las matrices originales. Las matrices de punto flotante recurren al escaneo; los índices de mapa de bits no sirven para esta ruta de candidatos.</td></tr>
+<tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td><td>Matrices ordinarias de valores booleanos, enteros o VARCHAR</td><td><code translate="no">==</code> de todo el matriz y <code translate="no">!=</code></td><td>Se pueden utilizar candidatos de índice seguidos de comprobaciones de las matrices originales. Las matrices de punto flotante recurren al escaneo; los índices de mapa de bits no sirven para esta ruta de candidatos.</td></tr>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code> o una selección válida de <code translate="no">AUTOINDEX</code> </td><td>Rutas JSON convertidas a <code translate="no">BOOL</code>, <code translate="no">DOUBLE</code> o <code translate="no">VARCHAR</code></td><td>Comparaciones y pertenencia adecuadas al tipo de conversión</td><td>La ruta indexada y la conversión deben coincidir con la consulta. Los patrones de cadena siguen la tabla anterior.</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>Rutas JSON convertidas a <code translate="no">VARCHAR</code></td><td>patrones LIKE y expresiones regulares</td><td>Utiliza las mismas reglas de elegibilidad de patrones que los índices VARCHAR NGRAM.</td></tr>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code> o una selección válida de <code translate="no">AUTOINDEX</code> </td><td>Rutas JSON convertidas a <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code> o <code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ANY</code>, <code translate="no">JSON_CONTAINS_ALL</code></td><td>Requiere tipos de elementos compatibles. Los operandos de tipos mixtos o de matrices anidadas pueden recurrir al escaneo.</td></tr>
-<tr><td><code translate="no">INVERTED</code> con conversión <code translate="no">JSON</code></td><td>Índice JSON completo</td><td>Comparaciones y pertenencia en rutas escalares compatibles; patrones de cadena compatibles; contención JSON en rutas de matriz compatibles</td><td>Las rutas de cadena siguen un comportamiento INVERTIDO. La contención de matrices requiere tipos de elementos compatibles.</td></tr>
-<tr><td>Índices de rutas JSON e índices JSON completos</td><td>Rutas JSON indexadas</td><td><code translate="no">exists</code></td><td>Comprueba si la ruta existe, lo cual es diferente a comprobar su valor o si todo el campo es nulo.</td></tr>
+<tr><td>Índices de rutas JSON</td><td>Rutas JSON indexadas</td><td><code translate="no">exists</code></td><td>Comprueba si la ruta existe, lo cual es diferente de comprobar su valor o si todo el campo es nulo.</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_WITHIN</code>, <code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code>, <code translate="no">ST_DWITHIN</code></td><td>Utiliza cajas delimitadoras para encontrar candidatos y, a continuación, comprueba la relación espacial exacta. <code translate="no">ST_ISVALID</code> no utiliza RTREE.</td></tr>
 </tbody>
 </table>

@@ -51,9 +51,8 @@ title: 스칼라 인덱스
 <tr><td><code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">STL_SORT</code></td><td><code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">GEOMETRY</code></td><td><code translate="no">RTREE</code></td><td><code translate="no">RTREE</code></td></tr>
 <tr><td><code translate="no">JSON</code> 형식이 지정된 스칼라 또는 배열로 형변환</td><td><code translate="no">HYBRID</code></td><td><code translate="no">json_cast_type</code> 에 따라 다름; <a href="#JSON-field-indexing">JSON 필드 인덱싱을</a> 참조하십시오.</td></tr>
-<tr><td><code translate="no">JSON</code> 다음과 함께 <code translate="no">json_cast_type=&quot;JSON&quot;</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> 다음과 같이 <code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
+<tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> ~을 통해 <code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;FLOAT&gt;</code>, <code translate="no">ARRAY&lt;DOUBLE&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">TEXT</code></td><td>지원되지 않음</td><td>없음</td></tr>
@@ -64,7 +63,7 @@ title: 스칼라 인덱스
 <ul>
 <li><strong>주 키:</strong> <code translate="no">BITMAP</code> 는 주 키 필드에서는 사용할 수 없습니다.</li>
 <li><strong>배열:</strong> 재귀적 배열과 null 허용 요소가 포함된 배열은 <code translate="no">AUTOINDEX</code> 을 포함한 스칼라 인덱싱을 지원하지 않습니다. 일반 배열은 부울, 정수, 부동 소수점 및 VARCHAR 요소를 지원합니다.</li>
-<li><strong>구조체 배열:</strong> 스칼라 하위 필드를 개별적으로 인덱싱해야 합니다. 지원 방식은 일반 배열과 다를 수 있습니다. 예를 들어, 부울 구조체 하위 필드는 명시적인 <code translate="no">STL_SORT</code> 를 지원하지 않습니다.</li>
+<li><strong>구조체 배열:</strong> 스칼라 하위 필드를 개별적으로 인덱싱해야 합니다. 지원 여부는 일반 배열과 다를 수 있습니다. 예를 들어, 부울 구조체 하위 필드는 명시적인 <code translate="no">STL_SORT</code> 를 지원하지 않습니다.</li>
 <li><strong>TEXT:</strong> <code translate="no">AUTOINDEX</code> 을 포함한 사용자 정의 스칼라 인덱스는 사용할 수 없습니다. 텍스트 분석과 BM25 검색은 별도의 메커니즘을 사용합니다.</li>
 </ul>
 <h2 id="Index-types" class="common-anchor-header">인덱스 유형<button data-href="#Index-types" class="anchor-icon" translate="no">
@@ -150,11 +149,9 @@ title: 스칼라 인덱스
 <tr><td><code translate="no">ARRAY_BOOL</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_DOUBLE</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 </tbody>
 </table>
-<p><code translate="no">JSON</code> 형변환은 유형 지정 스칼라 경로 인덱스 대신 전체 JSON 인덱싱을 선택하며, <code translate="no">AUTOINDEX</code> 의 기본값을 <code translate="no">HYBRID</code> 에서 <code translate="no">INVERTED</code> 로 변경합니다.</p>
-<p>선택적 ` <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> `는 ` <code translate="no">DOUBLE</code> ` 형 변환 시 문자열 값을 변환합니다. 다른 형 변환 유형과는 함께 사용할 수 없습니다. ` <code translate="no">TRIE</code> `와 ` <code translate="no">FMINDEX</code> ` 모두 JSON 필드를 지원하지 않습니다.</p>
+<p>선택 사항인 <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> 는 <code translate="no">DOUBLE</code> 형 변환을 위해 문자열 값을 변환합니다. 다른 형 변환 유형과는 함께 사용할 수 없습니다. <code translate="no">TRIE</code> 와 <code translate="no">FMINDEX</code> 모두 JSON 필드를 지원하지 않습니다.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">지원되는 술어<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +191,7 @@ title: 스칼라 인덱스
 <tbody>
 <tr><td><code translate="no">INVERTED</code></td><td><code translate="no">BOOL</code></td><td>등가 및 소속</td></tr>
 <tr><td><code translate="no">INVERTED</code></td><td>정수, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code></td><td>등가, 소속, 범위</td></tr>
-<tr><td><code translate="no">BITMAP</code></td><td><code translate="no">BOOL</code></td><td>동등성 및 소속</td></tr>
+<tr><td><code translate="no">BITMAP</code></td><td><code translate="no">BOOL</code></td><td>동등성 및 소속 조건</td></tr>
 <tr><td><code translate="no">BITMAP</code></td><td>정수, <code translate="no">VARCHAR</code></td><td>등가성, 소속성 및 범위</td></tr>
 <tr><td><code translate="no">STL_SORT</code></td><td>정수, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, <code translate="no">TIMESTAMPTZ</code>, <code translate="no">VARCHAR</code></td><td>등가성, 집합 소속, 및 범위</td></tr>
 <tr><td><code translate="no">TRIE</code></td><td><code translate="no">VARCHAR</code></td><td>동등성, 소속 관계 및 범위; 범위 평가 시 여러 인덱스된 문자열을 방문할 수 있음</td></tr>
@@ -240,8 +237,8 @@ title: 스칼라 인덱스
 <tr><td><code translate="no">FMINDEX</code></td><td>예</td><td>예</td><td>예</td><td>후보자</td><td>후보</td></tr>
 </tbody>
 </table>
-<p>이 항목들은 쿼리 계획 수립 후의 연산자를 설명합니다. Milvus는 리터럴 LIKE 패턴을 등가 조건으로, 간단한 앵커가 지정된 정규식을 등가, 접두사 또는 접미사 일치 조건으로 단순화할 수 있습니다. 예를 들어, ` <code translate="no">name =~ &quot;^abc$&quot;</code> `는 등가 테스트가 되어 등가 테이블을 따릅니다.</p>
-<p><code translate="no">INVERTED</code> 더 복잡한 LIKE 패턴은 인덱스를 사용할 수 있더라도, 간단한 접미사 및 부분 문자열 형태는 스캔으로 처리합니다. <code translate="no">NGRAM</code> 는 길이가 최소 <code translate="no">min_gram</code> 인 리터럴 텍스트를 필요로 하며, 일반적인 LIKE는 비어 있지 않은 각 리터럴 조각이 해당 최소 길이를 충족해야 하며, 정규식 가속은 적절한 리터럴을 추출하는 데 달려 있습니다. 그렇지 않은 경우, Milvus는 데이터를 스캔합니다. 패턴이 유용한 필터링 기능을 거의 제공하지 않거나 인덱스를 통해 해결하는 데 비용이 너무 많이 드는 경우, ` <code translate="no">FMINDEX</code> `도 스캔을 선택할 수 있습니다.</p>
+<p>이 항목들은 쿼리 계획 수립 후의 연산자를 설명합니다. Milvus는 리터럴 LIKE 패턴을 등가 조건으로, 간단한 앵커가 지정된 정규식을 등가, 접두사 또는 접미사 일치 조건으로 단순화할 수 있습니다. 예를 들어, ` <code translate="no">name =~ &quot;^abc$&quot;</code> `는 등가 테스트가 되며 등가 테이블을 따릅니다.</p>
+<p><code translate="no">INVERTED</code> 더 복잡한 LIKE 패턴은 인덱스를 사용할 수 있더라도, 간단한 접미사 및 부분 문자열 형태는 스캔으로 처리합니다. <code translate="no">NGRAM</code> 는 길이가 최소 <code translate="no">min_gram</code> 인 리터럴 텍스트를 필요로 하며, 일반적인 LIKE는 비어 있지 않은 각 리터럴 조각이 해당 최소 길이를 충족해야 하며, 정규식 가속화는 적절한 리터럴을 추출하는 데 달려 있습니다. 그렇지 않은 경우, Milvus는 데이터를 스캔합니다. 패턴이 유용한 필터링 기능을 거의 제공하지 않거나 인덱스를 통해 해결하는 데 비용이 너무 많이 드는 경우, ` <code translate="no">FMINDEX</code> `도 스캔을 선택할 수 있습니다.</p>
 <p>이는 문자열 값 술어입니다. <code translate="no">TEXT_MATCH</code> 및 <code translate="no">PHRASE_MATCH</code> 와 같은 토큰 기반 함수는 필드 속성을 통해 구성된 텍스트 일치 인덱싱을 사용하며, 스칼라 <code translate="no">INVERTED</code> 인덱스를 선택해도 이러한 함수는 활성화되지 않습니다.</p>
 <h3 id="Array-JSON-and-spatial-predicates" class="common-anchor-header">배열, JSON 및 공간 술어<button data-href="#Array-JSON-and-spatial-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -267,13 +264,12 @@ title: 스칼라 인덱스
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td><td>부울, 정수 또는 VARCHAR 값으로 구성된 일반 배열</td><td>전체 배열 <code translate="no">==</code> 및 <code translate="no">!=</code></td><td>인덱스 후보에 이어 원본 배열에 대한 검사를 수행할 수 있습니다. 부동 소수점 배열의 경우 스캔 방식으로 대체되며, 비트맵 인덱스는 이 후보 경로를 지원하지 않습니다.</td></tr>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code> 또는 유효한 <code translate="no">AUTOINDEX</code> 선택 항목</td><td><code translate="no">BOOL</code>, <code translate="no">DOUBLE</code> 로 형변환된 JSON 경로, 또는 <code translate="no">VARCHAR</code></td><td>변환된 유형에 적합한 비교 및 멤버십</td><td>인덱싱된 경로와 형 변환은 쿼리와 일치해야 합니다. 문자열 패턴은 앞의 표를 따릅니다.</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>다음으로 형변환된 JSON 경로 <code translate="no">VARCHAR</code></td><td>LIKE 및 정규식 패턴으로 변환된 JSON 경로</td><td>VARCHAR NGRAM 인덱스와 동일한 패턴 유효성 규칙을 사용합니다.</td></tr>
-<tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code> 또는 유효한 <code translate="no">AUTOINDEX</code> 선택</td><td><code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code> 또는 <code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ANY</code>, <code translate="no">JSON_CONTAINS_ALL</code></td><td>호환되는 요소 유형이 필요합니다. 유형이 혼합되거나 중첩된 배열인 피연산자는 스캔 방식으로 대체될 수 있습니다.</td></tr>
-<tr><td><code translate="no">INVERTED</code> 형 변환 시 <code translate="no">JSON</code></td><td>전체 JSON 인덱스</td><td>지원되는 스칼라 경로에 대한 비교 및 멤버십; 지원되는 문자열 패턴; 지원되는 배열 경로에 대한 JSON 포함 관계</td><td>문자열 경로는 INVERTED 동작을 따릅니다. 배열 포함 여부는 호환되는 요소 유형이 필요합니다.</td></tr>
-<tr><td>JSON 경로 인덱스 및 전체 JSON 인덱스</td><td>인덱싱된 JSON 경로</td><td><code translate="no">exists</code></td><td>경로가 존재하는지 여부를 검사하며, 이는 경로의 값을 검사하거나 전체 필드가 null인지 여부를 검사하는 것과는 다릅니다.</td></tr>
+<tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code> 또는 유효한 <code translate="no">AUTOINDEX</code> 선택</td><td><code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code> 또는 <code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ANY</code>, <code translate="no">JSON_CONTAINS_ALL</code></td><td>호환되는 요소 유형이 필요합니다. 유형이 혼합되거나 중첩된 배열 연산자는 스캔 방식으로 대체될 수 있습니다.</td></tr>
+<tr><td>JSON 경로 인덱스</td><td>인덱싱된 JSON 경로</td><td><code translate="no">exists</code></td><td>경로가 존재하는지 여부를 테스트하며, 이는 경로의 값을 테스트하거나 전체 필드가 null인지 여부를 테스트하는 것과는 다릅니다.</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_WITHIN</code>, <code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code>, <code translate="no">ST_DWITHIN</code></td><td>바운딩 박스를 사용하여 후보를 찾은 다음, 정확한 공간적 관계를 확인합니다. <code translate="no">ST_ISVALID</code> 는 RTREE를 사용하지 않습니다.</td></tr>
 </tbody>
 </table>
-<p>배열 포함 지원이 <code translate="no">values[0]</code> 와 같이 특정 위치의 요소에 대한 인덱스 조회나 배열 길이에 대한 조회를 의미하는 것은 아닙니다. 전체 배열의 동일성 검사에서는 순서와 길이도 확인해야 하며, 이는 요소의 소속 여부만으로는 확인할 수 없습니다.</p>
+<p>배열 포함 지원이 <code translate="no">values[0]</code> 와 같이 특정 위치에 있는 요소에 대한 인덱스 조회나 배열 길이에 대한 조회를 의미하는 것은 아닙니다. 전체 배열의 동일성 검사에서는 순서와 길이도 확인해야 하며, 이는 요소의 소속 여부만으로는 확인할 수 없습니다.</p>
 <p><code translate="no">IS NULL</code> <code translate="no">IS NOT NULL</code> 는 유효성 정보를 사용하며 특정 스칼라 인덱스 유형을 요구하지 않습니다. 술어를 , , 와 결합할 수 있으며, 각 부분은 자체적으로 허용되는 실행 경로를 사용할 수 있습니다. <code translate="no">and</code> <code translate="no">or</code> <code translate="no">not</code></p>
 <h2 id="Version-compatibility" class="common-anchor-header">버전 호환성<button data-href="#Version-compatibility" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -353,12 +349,12 @@ title: 스칼라 인덱스
 <tr><td><code translate="no">STL_SORT</code> 에서 <code translate="no">VARCHAR</code></td><td><code translate="no">8 * N + (l + 16) * D</code></td><td>반복되는 문자열은 저장 공간을 공유하므로, 고유한 문자열이 적을수록 일반적으로 메모리 사용량이 줄어듭니다.</td></tr>
 <tr><td><code translate="no">BITMAP</code>, 고밀도 비트맵을 사용하여</td><td><code translate="no">(D + 1) * N / 8</code></td><td>on각 고유 값은 엔티티당 대략 1비트가 필요하며, 유효한 엔티티를 추적하기 위한 비트맵 1개가 추가로 필요합니다.</td></tr>
 <tr><td><code translate="no">INVERTED</code> 또는 <code translate="no">NGRAM</code></td><td><code translate="no">S</code></td><td>구축된 인덱스의 크기를 기준으로 시작하십시오.</td></tr>
-<tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">2 * S</code></td><td>구축된 인덱스 크기의 약 2배를 허용합니다.</td></tr>
+<tr><td><code translate="no">FMINDEX</code></td><td><code translate="no">2 * S</code></td><td>구축된 인덱스 크기의 약 두 배를 허용합니다.</td></tr>
 </tbody>
 </table>
 <p>결과를 <code translate="no">1024 * 1024</code> 로 나누어 바이트를 <strong>MiB로</strong> 변환합니다. 예를 들어, 100만 개의 null이 아닌 <code translate="no">INT64</code> 값을 가진 <code translate="no">STL_SORT</code> 인덱스의 경우, 주요 데이터 구조에 약 <strong>19 MiB가</strong> 필요합니다. 모든 문자열이 고유한 VARCHAR 필드의 경우, 추정치는 <code translate="no">(l + 24) * N</code> 로 단순화됩니다. 평균 32바이트인 100만 개의 고유 문자열은 약 <strong>53 MiB를</strong> 차지합니다.</p>
-<p>BITMAP 공식은 고밀도 비트맵 저장을 설명하며, 선택적 오프셋 캐시를 활성화하면 64비트 시스템에서 약 <code translate="no">8 * N</code> 바이트가 추가됩니다. <code translate="no">INVERTED</code>, <code translate="no">NGRAM</code> 및 <code translate="no">FMINDEX</code> 의 경우, 대표 데이터에 인덱스를 생성하여 <code translate="no">S</code> 를 구하십시오. 원시 데이터 크기는 생성된 인덱스 크기를 대체할 수 없습니다. <code translate="no">AUTOINDEX</code> 의 경우, 실제로 선택된 인덱스에 대한 공식을 사용하고 세그먼트별 추정치를 적용한 다음, 로드된 세그먼트와 복제본 전체에 걸쳐 이를 합산하십시오.</p>
-<p>이는 대략적인 계획 수치일 뿐, 메모리 제한값이 아닙니다. 이 수치에는 인덱스 생성, 로딩 및 쿼리 실행 중에 사용되는 임시 메모리가 포함되지 않으며, 숫자형 <code translate="no">STL_SORT</code> 보다 문자열 및 비트맵 인덱스의 고유 값과 데이터 분포에 더 민감하게 반응합니다. 정확도에 대한 고정된 비율은 보장되지 않습니다. 메모리 매핑, 구형 인덱스 형식, 배열 및 JSON 필드는 별도의 측정이 필요합니다. 배포 규모를 결정하기 전에 대표적인 데이터와 쿼리를 사용하여 실제 메모리 사용량을 확인하고, 피크 사용량을 대비해 여유 공간을 확보하십시오.</p>
+<p>BITMAP 공식은 고밀도 비트맵 저장을 설명합니다. 선택적 오프셋 캐시를 활성화하면 64비트 시스템에서 약 <code translate="no">8 * N</code> 바이트가 추가됩니다. <code translate="no">INVERTED</code>, <code translate="no">NGRAM</code> 및 <code translate="no">FMINDEX</code> 의 경우, 대표 데이터에 인덱스를 생성하여 <code translate="no">S</code> 를 구하십시오. 원시 데이터 크기는 생성된 인덱스 크기를 대체할 수 없습니다. <code translate="no">AUTOINDEX</code> 의 경우, 실제로 선택된 인덱스에 대한 공식을 사용하고 세그먼트별 추정치를 적용한 다음, 로드된 세그먼트와 복제본 전체에 걸쳐 이를 합산하십시오.</p>
+<p>이는 대략적인 계획 수치일 뿐, 메모리 제한은 아닙니다. 여기에는 인덱스 생성, 로딩 및 쿼리 실행 중에 사용되는 임시 메모리가 제외되어 있으며, 숫자형 <code translate="no">STL_SORT</code> 보다 문자열 및 비트맵 인덱스의 고유 값과 데이터 분포에 더 민감하게 반응합니다. 정확도에 대한 고정된 비율은 보장되지 않습니다. 메모리 매핑, 구형 인덱스 형식, 배열 및 JSON 필드는 별도의 측정이 필요합니다. 배포 규모를 결정하기 전에 대표적인 데이터와 쿼리를 사용하여 실제 메모리 사용량을 확인하고, 피크 사용량을 대비해 여유 공간을 확보하십시오.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

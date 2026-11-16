@@ -938,7 +938,7 @@
             ]
           },
           {
-            "label": "Indizes für spärliche Vektoren",
+            "label": "Spärliche Vektorindizes",
             "id": "sparse-vector-indexes",
             "order": 4,
             "isMenu": true,
@@ -958,45 +958,51 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Übersicht",
+                "id": "scalar_index.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "BITMAP",
                 "id": "bitmap.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "UMGEKEHRT",
                 "id": "inverted.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "TRIE",
                 "id": "trie.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "FMINDEX",
                 "id": "fmindex.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1511,7 +1517,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Übersicht über die mehrstufige Speicherung",
+                "label": "Übersicht über mehrstufige Speicherung",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -2827,7 +2833,7 @@
         ]
       },
       {
-        "label": "Auswertung und Beobachtbarkeit",
+        "label": "Bewertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [

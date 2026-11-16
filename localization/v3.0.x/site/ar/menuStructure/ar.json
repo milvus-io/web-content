@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "ابدأ الآن",
+    "label": "ابدأ",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -68,7 +68,7 @@
             "children": []
           },
           {
-            "label": "تشغيل Milvus في وضع مستقل",
+            "label": "تشغيل Milvus في الوضع المستقل",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -958,45 +958,51 @@
             "isMenu": true,
             "children": [
               {
+                "label": "نظرة عامة",
+                "id": "scalar_index.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "صورة نقطية",
                 "id": "bitmap.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "مقلوب",
                 "id": "inverted.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "TRIE",
                 "id": "trie.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "FMINDEX",
                 "id": "fmindex.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1433,7 +1439,7 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف vLLM",
+                    "label": "مُصنِّف نماذج اللغة الكبيرة (vLLM)",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1999,7 +2005,7 @@
             "children": []
           },
           {
-            "label": "ترقية إصدار Milvus المستقل",
+            "label": "ترقية Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2484,7 +2490,7 @@
                 "children": []
               },
               {
-                "label": "ميسترال أي آي",
+                "label": "ميسترال آي آي",
                 "id": "embed-with-mistral-ai.md",
                 "order": 10,
                 "children": []
@@ -2570,7 +2576,7 @@
     ]
   },
   {
-    "label": "عمليات الدمج",
+    "label": "عمليات التكامل",
     "id": "integrations",
     "isMenu": true,
     "order": 8,
@@ -2948,7 +2954,7 @@
             "children": []
           },
           {
-            "label": "ميسترال آي آي",
+            "label": "ميسترال أي آي",
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []

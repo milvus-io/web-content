@@ -958,45 +958,51 @@
             "isMenu": true,
             "children": [
               {
+                "label": "Gambaran Umum",
+                "id": "scalar_index.md",
+                "order": 0,
+                "children": []
+              },
+              {
                 "label": "BITMAP",
                 "id": "bitmap.md",
-                "order": 0,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "TERBALIK",
                 "id": "inverted.md",
-                "order": 1,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "STL_SORT",
                 "id": "stl-sort.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "TRIE",
                 "id": "trie.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "NGRAM",
                 "id": "ngram.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "FMINDEX",
                 "id": "fmindex.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "RTREE",
                 "id": "rtree.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -1551,7 +1557,7 @@
             "children": []
           },
           {
-            "label": "Kasus Penggunaan",
+            "label": "Contoh Penggunaan",
             "id": "snapshot-use-cases.md",
             "order": 2,
             "children": []
@@ -1716,7 +1722,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Melakukan deployment di AWS",
+                "label": "Lakukan penerapan di AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
@@ -1962,7 +1968,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "Kluster Skala",
+            "label": "Kelompok Skala",
             "id": "scaleout.md",
             "order": 0,
             "children": []
@@ -2150,7 +2156,7 @@
                 "children": []
               },
               {
-                "label": "Peran Pemberian Hibah",
+                "label": "Peran Pemberian Dana",
                 "id": "grant_roles.md",
                 "order": 4,
                 "children": []
@@ -2278,7 +2284,7 @@
                 ]
               },
               {
-                "label": "Tingkatkan ke versi 0.6.x",
+                "label": "Lakukan pembaruan ke versi 0.6.x",
                 "id": "milvus_backup_upgrade.md",
                 "order": 3,
                 "children": []
@@ -3256,7 +3262,7 @@
         "children": []
       },
       {
-        "label": "Gunakan AsyncMilvusClient bersama asyncio",
+        "label": "Gunakan AsyncMilvusClient dengan asyncio",
         "id": "use-async-milvus-client-with-asyncio.md",
         "order": 15,
         "children": []

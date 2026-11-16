@@ -51,8 +51,7 @@ title: Indeks Skalar
 <tr><td><code translate="no">VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code>, <code translate="no">TRIE</code>, <code translate="no">NGRAM</code>, <code translate="no">FMINDEX</code></td></tr>
 <tr><td><code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">STL_SORT</code></td><td><code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">GEOMETRY</code></td><td><code translate="no">RTREE</code></td><td><code translate="no">RTREE</code></td></tr>
-<tr><td><code translate="no">JSON</code> dengan pengonversian tipe skalar atau array</td><td><code translate="no">HYBRID</code></td><td>Bergantung pada <code translate="no">json_cast_type</code>; lihat <a href="#JSON-field-indexing">pengindeksan bidang JSON</a>.</td></tr>
-<tr><td><code translate="no">JSON</code> dengan <code translate="no">json_cast_type=&quot;JSON&quot;</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
+<tr><td><code translate="no">JSON</code> dengan pengonversian tipe skalar atau array</td><td><code translate="no">HYBRID</code></td><td>Tergantung pada <code translate="no">json_cast_type</code>; lihat <a href="#JSON-field-indexing">pengindeksan bidang JSON</a>.</td></tr>
 <tr><td><code translate="no">ARRAY&lt;BOOL&gt;</code></td><td><code translate="no">BITMAP</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;INT8&gt;</code> melalui <code translate="no">ARRAY&lt;INT64&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY&lt;FLOAT&gt;</code>, <code translate="no">ARRAY&lt;DOUBLE&gt;</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
@@ -60,7 +59,7 @@ title: Indeks Skalar
 <tr><td><code translate="no">TEXT</code></td><td>Tidak didukung</td><td>Tidak ada</td></tr>
 </tbody>
 </table>
-<p><code translate="no">HYBRID</code> adalah strategi internal, bukan tipe yang dapat Anda tentukan secara langsung. Lihat <a href="#How-AUTOINDEX-selects">Cara AUTOINDEX melakukan pemilihan</a>.</p>
+<p><code translate="no">HYBRID</code> adalah strategi internal, bukan tipe yang dapat Anda tentukan secara langsung. Lihat <a href="#How-AUTOINDEX-selects">Cara kerja AUTOINDEX</a>.</p>
 <p>Pembatasan berikut berlaku:</p>
 <ul>
 <li><strong>Kunci utama:</strong> <code translate="no">BITMAP</code> tidak tersedia pada kolom kunci utama.</li>
@@ -122,7 +121,7 @@ title: Indeks Skalar
 <p>Indeks array menggunakan kebijakan kompatibilitas terpisah: cabang kardinalitas tinggi mereka menggunakan " <code translate="no">STL_SORT</code> " jika kluster mendukungnya, dan " <code translate="no">INVERTED</code> " jika tidak. Lihat " <a href="#Version-compatibility">Kompatibilitas Versi</a>".</p>
 <p><code translate="no">HYBRID</code> hanya bersifat internal — Anda tidak dapat menentukannya secara langsung. Pemilihan internal juga dapat menggunakan indeks yang tidak tersedia sebagai pilihan eksplisit untuk bidang tersebut, seperti pengindeksan bitmap untuk nilai floating-point.</p>
 <blockquote>
-<p>Pilihan-pilihan ini adalah pengaturan default. Administrator dapat mengubahnya melalui <code translate="no">scalarAutoIndex.params.build</code>. Pengaturan <code translate="no">scalarAutoIndex.enable</code> secara default diatur ke <code translate="no">false</code>, yang masih memungkinkan penggunaan <code translate="no">AUTOINDEX</code> dan pemilihan eksplisit saat jenis indeks diabaikan; mengaturnya ke <code translate="no">true</code> juga menerapkan pemilihan otomatis pada permintaan manual yang valid.</p>
+<p>Pilihan-pilihan ini adalah pengaturan default. Administrator dapat mengubahnya melalui <code translate="no">scalarAutoIndex.params.build</code>. Pengaturan <code translate="no">scalarAutoIndex.enable</code> secara default diatur ke <code translate="no">false</code>, yang masih mengizinkan <code translate="no">AUTOINDEX</code> dan pemilihan eksplisit saat jenis indeks diabaikan; mengaturnya ke <code translate="no">true</code> juga menerapkan pemilihan otomatis pada permintaan manual yang valid.</p>
 </blockquote>
 <h2 id="JSON-field-indexing" class="common-anchor-header">Pengindeksan bidang JSON<button data-href="#JSON-field-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,11 +150,9 @@ title: Indeks Skalar
 <tr><td><code translate="no">ARRAY_BOOL</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_DOUBLE</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
 <tr><td><code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">HYBRID</code></td><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td></tr>
-<tr><td><code translate="no">JSON</code></td><td><code translate="no">INVERTED</code></td><td><code translate="no">INVERTED</code></td></tr>
 </tbody>
 </table>
-<p>Konversi ` <code translate="no">JSON</code> ` memilih pengindeksan JSON lengkap daripada indeks jalur skalar bertipe, dan mengubah nilai default ` <code translate="no">AUTOINDEX</code> ` dari ` <code translate="no">HYBRID</code> ` menjadi ` <code translate="no">INVERTED</code>`.</p>
-<p>Konversi opsional ` <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> ` mengubah nilai string untuk konversi ` <code translate="no">DOUBLE</code> `. Konversi ini tidak dapat digunakan dengan jenis konversi lainnya. Baik ` <code translate="no">TRIE</code> ` maupun ` <code translate="no">FMINDEX</code> ` tidak mendukung bidang JSON.</p>
+<p><code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> yang bersifat opsional mengonversi nilai string untuk pengonversian <code translate="no">DOUBLE</code>. Fitur ini tidak dapat digunakan dengan tipe pengonversian lainnya. Baik <code translate="no">TRIE</code> maupun <code translate="no">FMINDEX</code> tidak mendukung bidang JSON.</p>
 <h2 id="Supported-predicates" class="common-anchor-header">Predikat yang didukung<button data-href="#Supported-predicates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -171,7 +168,7 @@ title: Indeks Skalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tabel berikut menunjukkan predikat mana yang dapat dievaluasi oleh masing-masing indeks. <strong>Dukungan indeks tidak menjamin bahwa Milvus akan menggunakan indeks tersebut untuk setiap kueri.</strong> Milvus dapat memindai data bidang jika indeks <strong>tidak</strong> sesuai untuk ekspresi atau pola tertentu.</p>
+    </button></h2><p>Tabel berikut menunjukkan predikat mana yang dapat dievaluasi dengan bantuan masing-masing indeks. <strong>Dukungan indeks tidak menjamin bahwa Milvus akan menggunakan indeks tersebut untuk setiap kueri.</strong> Milvus dapat memindai data bidang jika indeks tersebut <strong>tidak</strong> sesuai untuk ekspresi atau pola tertentu.</p>
 <h3 id="Comparisons-and-membership" class="common-anchor-header">Perbandingan dan keanggotaan<button data-href="#Comparisons-and-membership" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,7 +202,7 @@ title: Indeks Skalar
 <tr><td><code translate="no">AUTOINDEX</code></td><td>Tipe skalar yang didukung</td><td>Tergantung pada indeks yang dipilih. Pemilihan internal <code translate="no">HYBRID</code> menggunakan kemampuan indeks bitmap, indeks terurut, atau indeks terbaliknya.</td></tr>
 </tbody>
 </table>
-<p>Rentang VARCHAR membandingkan nilai string, bukan menafsirkannya sebagai angka. Tabel ini hanya menjelaskan perbandingan terhadap nilai literal; ini tidak berarti bahwa ekspresi aritmatika atau perbandingan antara dua bidang mendapatkan akselerasi indeks yang sama.</p>
+<p>Rentang VARCHAR membandingkan nilai string, bukan menafsirkannya sebagai angka. Tabel ini hanya menjelaskan perbandingan terhadap nilai literal; ini tidak berarti bahwa ekspresi aritmatika atau perbandingan antara dua bidang mendapatkan percepatan indeks yang sama.</p>
 <h3 id="String-patterns" class="common-anchor-header">Pola string<button data-href="#String-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -234,14 +231,14 @@ title: Indeks Skalar
 </thead>
 <tbody>
 <tr><td><code translate="no">INVERTED</code></td><td>Ya</td><td>Pindai</td><td>Pindai</td><td>Ya</td><td>Pindai</td></tr>
-<tr><td><code translate="no">BITMAP</code></td><td>Periksa nilai yang diindeks</td><td>Periksa nilai-nilai yang diindeks</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai yang diindeks</td><td>Periksa nilai-nilai yang diindeks</td></tr>
+<tr><td><code translate="no">BITMAP</code></td><td>Periksa nilai-nilai yang diindeks</td><td>Periksa nilai-nilai yang diindeks</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai yang diindeks</td><td>Periksa nilai-nilai yang diindeks</td></tr>
 <tr><td><code translate="no">STL_SORT</code></td><td>Ya</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai terindeks</td></tr>
 <tr><td><code translate="no">TRIE</code></td><td>Ya</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai terindeks</td><td>Periksa nilai-nilai terindeks</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>Calon</td><td>Calon</td><td>Kandidat; cocok persis dengan literal dalam rentang panjang gram yang telah dikonfigurasi</td><td>Kandidat</td><td>Kandidat</td></tr>
 <tr><td><code translate="no">FMINDEX</code></td><td>Ya</td><td>Ya</td><td>Ya</td><td>Calon</td><td>Kandidat</td></tr>
 </tbody>
 </table>
-<p>Entri-entri ini menjelaskan operator setelah perencanaan kueri. Milvus dapat menyederhanakan pola LIKE literal menjadi perbandingan kesamaan, dan regex berancor sederhana menjadi perbandingan kesamaan, pencocokan awalan, atau pencocokan akhiran; misalnya, <code translate="no">name =~ &quot;^abc$&quot;</code> menjadi uji kesamaan dan mengikuti tabel kesamaan.</p>
+<p>Entri-entri ini menjelaskan operator setelah perencanaan kueri. Milvus dapat menyederhanakan pola LIKE literal menjadi perbandingan kesamaan, dan regex ber-anchor sederhana menjadi perbandingan kesamaan, pencocokan awalan, atau pencocokan akhiran; misalnya, <code translate="no">name =~ &quot;^abc$&quot;</code> menjadi uji kesamaan dan mengikuti tabel kesamaan.</p>
 <p><code translate="no">INVERTED</code> menganggap bentuk sufiks dan substring sederhana sebagai pemindaian meskipun pola LIKE yang lebih kompleks dapat menggunakan indeks. <code translate="no">NGRAM</code> memerlukan teks literal dengan panjang minimal <code translate="no">min_gram</code> karakter; LIKE umum mengharuskan setiap fragmen literal yang tidak kosong memenuhi batas minimum tersebut, dan percepatan regex bergantung pada ekstraksi literal yang sesuai. Jika tidak, Milvus akan memindai data. ` <code translate="no">FMINDEX</code> ` juga dapat memilih pemindaian jika pola yang digunakan memberikan sedikit penyaringan yang berguna atau terlalu mahal untuk diselesaikan melalui indeks.</p>
 <p>Ini adalah predikat nilai string. Fungsi berbasis token seperti <code translate="no">TEXT_MATCH</code> dan <code translate="no">PHRASE_MATCH</code> menggunakan pengindeksan pencocokan teks yang dikonfigurasi melalui properti bidang; memilih indeks skalar <code translate="no">INVERTED</code> tidak mengaktifkan fungsi-fungsi tersebut.</p>
 <h3 id="Array-JSON-and-spatial-predicates" class="common-anchor-header">Predikat array, JSON, dan spasial<button data-href="#Array-JSON-and-spatial-predicates" class="anchor-icon" translate="no">
@@ -265,12 +262,11 @@ title: Indeks Skalar
 </thead>
 <tbody>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code>, atau pilihan <code translate="no">AUTOINDEX</code> yang memenuhi syarat</td><td>Array biasa dengan tipe elemen yang didukung</td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td>Mencocokkan elemen terlepas dari posisinya. Pembatasan indeks/tipe tetap berlaku.</td></tr>
-<tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td><td>Array biasa dengan nilai Boolean, integer, atau VARCHAR</td><td><code translate="no">==</code> seluruh array dan <code translate="no">!=</code></td><td>Dapat menggunakan kandidat indeks yang diikuti dengan pemeriksaan terhadap array asli. Array bilangan floating-point akan beralih ke pemindaian; indeks bitmap tidak mendukung jalur kandidat ini.</td></tr>
+<tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code></td><td>Array biasa dengan nilai Boolean, integer, atau VARCHAR</td><td><code translate="no">==</code> seluruh array dan <code translate="no">!=</code></td><td>Dapat menggunakan kandidat indeks yang diikuti dengan pemeriksaan terhadap array asli. Array bilangan floating-point akan kembali ke pemindaian; indeks bitmap tidak mendukung jalur kandidat ini.</td></tr>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code>, atau pilihan <code translate="no">AUTOINDEX</code> yang memenuhi syarat</td><td>Jalur JSON yang dikonversi ke <code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, atau <code translate="no">VARCHAR</code></td><td>Perbandingan dan keanggotaan yang sesuai dengan tipe hasil konversi</td><td>Jalur terindeks dan hasil konversi harus sesuai dengan kueri. Pola string mengikuti tabel di atas.</td></tr>
 <tr><td><code translate="no">NGRAM</code></td><td>Jalur JSON yang dikonversi ke <code translate="no">VARCHAR</code></td><td>pola LIKE dan regex</td><td>Menggunakan aturan kelayakan pola yang sama seperti indeks VARCHAR NGRAM.</td></tr>
 <tr><td><code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>, atau pilihan <code translate="no">AUTOINDEX</code> yang memenuhi syarat</td><td>Jalur JSON yang dikonversi ke <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, atau <code translate="no">ARRAY_VARCHAR</code></td><td><code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ANY</code>, <code translate="no">JSON_CONTAINS_ALL</code></td><td>Memerlukan tipe elemen yang kompatibel. Operan bertipe campuran atau array bersarang dapat dialihkan ke pemindaian.</td></tr>
-<tr><td><code translate="no">INVERTED</code> dengan konversi <code translate="no">JSON</code></td><td>Indeks JSON lengkap</td><td>Perbandingan dan keanggotaan pada jalur skalar yang didukung; pola string yang didukung; pencakupan JSON pada jalur array yang didukung</td><td>Jalur string mengikuti perilaku TERBALIK. Keterkandungan array memerlukan tipe elemen yang kompatibel.</td></tr>
-<tr><td>Indeks jalur JSON dan indeks JSON lengkap</td><td>Jalur JSON yang diindeks</td><td><code translate="no">exists</code></td><td>Menguji apakah jalur tersebut ada, yang berbeda dari menguji nilainya atau apakah seluruh bidang bernilai null.</td></tr>
+<tr><td>Indeks jalur JSON</td><td>Jalur JSON yang diindeks</td><td><code translate="no">exists</code></td><td>Menguji apakah jalur tersebut ada, yang berbeda dari menguji nilainya atau apakah seluruh bidang bernilai null.</td></tr>
 <tr><td><code translate="no">RTREE</code></td><td><code translate="no">GEOMETRY</code></td><td><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_WITHIN</code>, <code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code>, <code translate="no">ST_DWITHIN</code></td><td>Menggunakan kotak pembatas (bounding boxes) untuk menemukan kandidat, kemudian memeriksa hubungan spasial yang tepat. <code translate="no">ST_ISVALID</code> tidak menggunakan RTREE.</td></tr>
 </tbody>
 </table>
@@ -321,7 +317,7 @@ title: Indeks Skalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Kinerja indeks bergantung pada distribusi data dan filter yang digunakan aplikasi Anda. Kardinalitas, panjang string, panjang array, dan jumlah entitas yang cocok semuanya dapat memengaruhi penggunaan memori dan latensi kueri. Bandingkan indeks menggunakan data dan ekspresi filter yang representatif, serta ukur penggunaan memori, waktu pembuatan, dan latensi kueri secara bersamaan.</p>
+    </button></h2><p>Kinerja indeks bergantung pada distribusi data dan filter yang digunakan aplikasi Anda. Kardinalitas, panjang string, panjang array, dan jumlah entitas yang cocok dapat memengaruhi penggunaan memori dan latensi kueri. Bandingkan indeks menggunakan data dan ekspresi filter yang representatif, lalu ukur penggunaan memori, waktu pembuatan, dan latensi kueri secara bersamaan.</p>
 <h3 id="Estimating-memory-requirements" class="common-anchor-header">Memperkirakan kebutuhan memori<button data-href="#Estimating-memory-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
