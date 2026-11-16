@@ -25,11 +25,15 @@ await milvusClient.alterDatabaseProperties({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
+- **db_id** (*string*) -
+
+    The ID of the database whose properties are to be modified. Optional.
+
 - **delete_keys** (*string[]*) -
 
     Names of the properties to drop in an array. Possible database properties are as follows:
 
-    - **database.replica.number** (*int*) -
+    - **database.replica.number** (*number*) -
 
         Number of replicas for the database.
 
@@ -37,11 +41,11 @@ await milvusClient.alterDatabaseProperties({
 
         Resource groups dedicated to the database.
 
-    - **database.diskQuota.mb** (*int*) -
+    - **database.diskQuota.mb** (*number*) -
 
         Disk quota allocated to the database in megabytes (**MB**).
 
-    - **database.max.collections** (*int*) -
+    - **database.max.collections** (*number*) -
 
         Maximum number of collections allowed in the database.
 
@@ -57,7 +61,7 @@ await milvusClient.alterDatabaseProperties({
 
     Properties and their values in key-value pairs.
 
-    - **database.replica.number** (*int*) -
+    - **database.replica.number** (*number*) -
 
         Number of replicas for the database.
 
@@ -65,11 +69,11 @@ await milvusClient.alterDatabaseProperties({
 
         Resource groups dedicated to the database.
 
-    - **database.diskQuota.mb** (*int*) -
+    - **database.diskQuota.mb** (*number*) -
 
         Disk quota allocated to the database in megabytes (**MB**).
 
-    - **database.max.collections** (*int*) -
+    - **database.max.collections** (*number*) -
 
         Maximum number of collections allowed in the database.
 
@@ -89,7 +93,7 @@ await milvusClient.alterDatabaseProperties({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

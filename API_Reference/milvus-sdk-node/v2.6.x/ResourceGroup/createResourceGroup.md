@@ -54,7 +54,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number
+    code: number,
     error_code: string | number,
     reason: string
 }

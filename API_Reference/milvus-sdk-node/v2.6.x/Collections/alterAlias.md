@@ -19,7 +19,7 @@ await milvusClient.alterAlias({
 
 **PARAMETERS:**
 
-- **alias** (*str*) -
+- **alias** (*string*) -
 
     **[REQUIRED]**
 
@@ -47,11 +47,11 @@ await milvusClient.alterAlias({
     
     </div>
 
-- **db_name** (*str*) -
+- **db_name** (*string*) -
 
     The name of the database that holds the target collection.
 
-- **collection_name** (*str*) -
+- **collection_name** (*string*) -
 
     **[REQUIRED]**
 

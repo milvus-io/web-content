@@ -77,6 +77,18 @@ The complete field schema object for the primary key, including name, data type,
 
     The state of the field.
 
+- **element_type** (*keyof typeof DataType*) -
+
+    The element type of the field, set when the field is an **Array** field.
+
+- **default_value** (*number* | *string* | *null*) -
+
+    The default value of the field, when one is declared.
+
+- **is_dynamic** (*boolean*) -
+
+    Whether the field is a dynamic field.
+
 - **nullable** (*boolean*) -
 
     Whether the field allows NULL values.
@@ -100,6 +112,10 @@ The complete field schema object for the primary key, including name, data type,
 - **index_params** (*KeyValuePair[]*) -
 
     The index parameters of the field.
+
+- **fields** (*FieldSchema[]*) -
+
+    The nested fields of the field, set when the field is a **Struct** field.
 
 **EXCEPTIONS:**
 

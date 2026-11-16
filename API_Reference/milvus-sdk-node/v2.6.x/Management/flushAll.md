@@ -31,19 +31,21 @@ A trace ID for request tracking. Optional.
 
 *Promise<FlushAllResponse>*
 
+This method returns a promise that resolves to a **FlushAllResponse** object.
+
 **PARAMETERS:**
 
 - **flush_all_ts** (*number*) -
 The flush-all timestamp.
 
-- **flush_all_tss** (*number[]*) -
-A list of flush-all timestamps.
+- **flush_all_tss** (*Record<string, number>*) -
+A record of flush-all timestamps, keyed by cluster.
 
-- **flush_all_msgs** (*number[]*) -
-A list of flush-all messages.
+- **flush_all_msgs** (*Record<string, any>*) -
+A record of flush-all messages, keyed by cluster.
 
-- **cluster_info** (*FlushClusterInfo[]*) -
-A list of cluster information.
+- **cluster_info** (*FlushClusterInfo*) -
+The cluster information.
 
 - **status** (*ResStatus*) -
 A **ResStatus** object.

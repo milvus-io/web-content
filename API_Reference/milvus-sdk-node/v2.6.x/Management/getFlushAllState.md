@@ -39,6 +39,8 @@ A trace ID for request tracking. Optional.
 
 *Promise<GetFlushAllStateResponse>*
 
+This method returns a promise that resolves to a **GetFlushAllStateResponse** object.
+
 **PARAMETERS:**
 
 - **flushed** (*boolean*) -

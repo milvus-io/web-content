@@ -9,7 +9,7 @@ await milvusClient.listGrants(data)
 ## Request Syntax
 
 ```javascript
- milvusClient.listGrants({
+await milvusClient.listGrants({
    roleName: 'roleName',
    db_name?: string
  });
@@ -17,7 +17,7 @@ await milvusClient.listGrants(data)
 
 **PARAMETERS:**
 
-- roleName (*string*)  
+- **roleName** (*string*)  
 
     The target role name
 
@@ -26,6 +26,12 @@ await milvusClient.listGrants(data)
 - **db_name** (*string*) -
 
     The name of the database the privileges apply to.
+
+- **timeout** (*number*)  
+
+    The timeout duration for this operation. 
+
+    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURNS:**
 
@@ -71,7 +77,7 @@ A **ResStatus** object.
 ## Example
 
 ```javascript
- milvusClient.listGrants({
+await milvusClient.listGrants({
    roleName: 'roleName',
  });
 ```

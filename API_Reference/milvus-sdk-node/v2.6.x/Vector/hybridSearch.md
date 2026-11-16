@@ -17,7 +17,6 @@ await milvusClient.hybridSearch({
     offset?: number,
     output_fields?: string[],
     filter?: string,
-    exprValues?: keyValueObj,
     params?: keyValueObj,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
     partition_names?: string[],
@@ -72,15 +71,11 @@ await milvusClient.hybridSearch({
 
     A top-level scalar filtering condition applied after the hybrid search results are merged. Defaults to an empty string.
 
-- **exprValues** (*keyValueObj*) -
-
-    Template values for the filter expression in key-value pairs.
-
 - **params** (*keyValueObj*) -
 
     Index-specific search parameters in key-value pairs.
 
-- **rerank** (*RerankerObj* | *FunctionObject* | *[FunctionScore](FunctionScore.md)*) -
+- **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy for combining results from multiple sub-searches. See `search()` for the full rerank parameter schema.
 
@@ -94,7 +89,7 @@ await milvusClient.hybridSearch({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. Options: `Strong` (0), `Bounded` (1), `Session` (2), `Eventually` (3). Defaults to `Bounded`.
+    The consistency level of the target collection. Options: `Strong` (0), `Session` (1), `Bounded` (2), `Eventually` (3). Defaults to `Bounded`.
 
 - **ignore_growing** (*boolean*) -
 
@@ -157,7 +152,9 @@ This method returns a promise that resolves to a **SearchResults** object.
     recalls: number[],
     session_ts: number,
     collection_name: string,
-    all_search_count?: number
+    all_search_count?: number,
+    search_iterator_v2_results?: Record<string, any>,
+    _search_iterator_v2_results?: string
 }
 ```
 
@@ -212,6 +209,14 @@ This method returns a promise that resolves to a **SearchResults** object.
 - **all_search_count** (*number*) -
 
     Optional. Set when the search reports the total candidate count examined.
+
+- **search_iterator_v2_results** (*Record<string, any>*) -
+
+    The raw search iterator v2 results, when the request used iterator-style search.
+
+- **_search_iterator_v2_results** (*string*) -
+
+    The serialized search iterator v2 results string, when the request used iterator-style search.
 
 **EXCEPTIONS:**
 

@@ -12,6 +12,7 @@ await milvusClient.loadPartitionsSync(data)
 await milvusClient.loadPartitionsSync({ 
     db_name: string,
     collection_name: string,
+    partition_names: string[],
     replica_number?: number,
     resource_groups?: string[],
     timeout?: number

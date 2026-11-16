@@ -17,7 +17,7 @@ await milvusClient.createIndex([
        index_name?: string,
        index_type: string,
        metric_type: string,
-       params?: KeyValueObj,
+       params?: keyValueObj,
        timeout?: number
      }
  ] | {
@@ -27,7 +27,7 @@ await milvusClient.createIndex([
        index_name?: string,
        index_type: string,
        metric_type: string,
-       params?: KeyValueObj,
+       params?: keyValueObj,
        timeout?: number    
  });
 ```
@@ -68,7 +68,7 @@ await milvusClient.createIndex([
 
     Other index-specific parameters.
 
-- **extra_params** (*keyValueObj*) -
+- **extra_params** (*CreateIndexParam*) -
 
     Extra index-related parameters in key-value pairs.
 

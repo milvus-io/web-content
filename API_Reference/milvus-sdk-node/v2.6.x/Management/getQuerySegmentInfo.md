@@ -78,6 +78,10 @@ A list of segment-level descriptors for the segments currently held by query nod
 
         The internal identifier of the loaded index.
 
+    - **nodeID** (*number*) -
+
+        Deprecated. The query node that holds this segment. Use **nodeIds** instead.
+
     - **state** ([SegmentState](SegmentState.md)) -
 
         The segment state. Possible values are **SegmentStateNone**, **NotExist**, **Growing**, **Sealed**, **Flushed**, **Flushing**, **Dropped**, and **Importing**.

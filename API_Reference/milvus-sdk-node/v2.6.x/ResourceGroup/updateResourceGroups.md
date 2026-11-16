@@ -3,21 +3,21 @@
 This operation updates the configurations of the specified resource group.
 
 ```javascript
-await milvusClient.createResourceGroup(data)
+await milvusClient.updateResourceGroups(data)
 ```
 
 ## Request Syntax
 
 ```javascript
 await milvusClient.updateResourceGroups({
-    resource_groups: {{ [key: string]: ResourceGroupConfig }},
+    resource_groups: { [key: string]: ResourceGroupConfig },
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
 
-- **resource_groups** (*{{ [key: string]: ResourceGroupConfig }}*) -
+- **resource_groups** (*{ [key: string]: ResourceGroupConfig }*) -
 
     **[REQUIRED]**
 
@@ -31,13 +31,13 @@ await milvusClient.updateResourceGroups({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number
+    code: number,
     error_code: string | number,
     reason: string
 }

@@ -18,7 +18,8 @@ await milvusClient.delete({
    collection_name: string,
    partition_name?: string,
    ids: string[] | number[],
-   consistency_level?: string,
+   exprValues?: keyValueObj,
+   consistency_level?: ConsistencyLevelEnum,
    timeout?: number
  })
 ```
@@ -47,9 +48,13 @@ await milvusClient.delete({
 
     The value defaults to **None**, indicating that a scalar filtering condition applies.
 
+- **exprValues** (*keyValueObj*) -
+
+    If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
+
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**1**) with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
 - **timeout** (*number*) -
 
@@ -66,7 +71,7 @@ await milvusClient.delete({
    partition_name?: string,
    filter: string,
    exprValues?: keyValueObj,
-   consistency_level?: string,
+   consistency_level?: ConsistencyLevelEnum,
    timeout?: number
  })
 ```

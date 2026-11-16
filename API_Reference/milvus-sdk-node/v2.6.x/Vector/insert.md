@@ -12,7 +12,11 @@ await milvusClient.insert(data: InsertReq)
 await milvusClient.insert({
     collection_name: string,
     data: RowData[],
+    fields_data?: RowData[],
     partition_name?: string,
+    hash_keys?: number[],
+    transformers?: InsertTransformers,
+    skip_check_schema?: boolean,
     db_name?: string,
     timeout?: number,
 })
@@ -75,6 +79,22 @@ await milvusClient.insert({
         }
     ]
     ```
+
+- **fields_data** (*[RowData](RowData.md)[]*) -
+
+    An alias of **data**. Provide either **data** or **fields_data**, not both.
+
+- **hash_keys** (*number[]*) -
+
+    Custom hash values computed from the primary key values. Optional.
+
+- **transformers** (*InsertTransformers*) -
+
+    Custom data transformers for `BFloat16Vector` and `Float16Vector` data. Optional.
+
+- **skip_check_schema** (*boolean*) -
+
+    Whether to skip the schema check on the rows before insertion. Optional.
 
 - **timeout** (*number*)  
 

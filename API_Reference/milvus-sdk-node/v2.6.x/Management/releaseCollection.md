@@ -22,7 +22,7 @@ await milvusClient.releaseCollection({
 
     The name of the database that holds the target collection.
 
-- **collection_name** (*str*) -
+- **collection_name** (*string*) -
 
     **[REQUIRED]**
 
