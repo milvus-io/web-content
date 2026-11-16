@@ -110,7 +110,7 @@ auto request = QueryIteratorRequest()
 
 - `SetLimit(int64_t limit)`
 
-    Set limit value, only avaiable when expression is empty. Note: this value is stored in the ExtraParams.
+    Set limit value, only available when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithOffset(int64_t offset)`
 
@@ -118,7 +118,7 @@ auto request = QueryIteratorRequest()
 
 - `SetOffset(int64_t offset)`
 
-    Set offset value, only avaiable when expression is empty. Note: this value is stored in the ExtraParams.
+    Set offset value, only available when expression is empty. Note: this value is stored in the ExtraParams.
 
 - `WithIgnoreGrowing(bool ignore_growing)`
 
@@ -176,46 +176,12 @@ Returns a [Status](../Client/Status.md), and on success assigns the output param
         - **OutputField** (*FieldDataPtr*) -
 
             Get an output field by name. See [FieldData](FieldData.md).
-
-            - **Name** (*const std::string&*) -
-
-                Get field name.
-
-            - **Type** (*DataType*) -
-
-                Get field data type.
-                See [DataType](../Collections/DataType.md).
-
-            - **ElementType** (*DataType*) -
-
-                Get the element type for an array field.
-                See [DataType](../Collections/DataType.md).
-
-            - **Count** (*size_t*) -
-
-                Total number of field elements.
+            See [FieldData](FieldData.md).
 
         - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
             Get all output fields data.
-
-            - **Name** (*const std::string&*) -
-
-                Get field name.
-
-            - **Type** (*DataType*) -
-
-                Get field data type.
-                See [DataType](../Collections/DataType.md).
-
-            - **ElementType** (*DataType*) -
-
-                Get the element type for an array field.
-                See [DataType](../Collections/DataType.md).
-
-            - **Count** (*size_t*) -
-
-                Total number of field elements.
+            See [FieldData](FieldData.md).
 
         - **OutputFieldNames** (*const std::set<std::string>&*) -
 

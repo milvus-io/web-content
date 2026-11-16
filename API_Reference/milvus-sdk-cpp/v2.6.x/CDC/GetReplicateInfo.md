@@ -42,6 +42,8 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
     - **Checkpoint** (*const ReplicateCheckpoint&*) -
 
+        Get the replication checkpoint. The following members belong to `ReplicateCheckpoint`.
+
         - **ClusterID** (*const std::string&*) -
 
             ID of the Milvus cluster that owns the channel.
@@ -51,6 +53,8 @@ Returns a status indicating whether the operation succeeded; on success, the res
             Name of the physical channel.
 
         - **MessageID** (*const ReplicateMessageID&*) -
+
+            Get the message identifier of the checkpoint. The following members belong to `ReplicateMessageID`.
 
             - **ID** (*const std::string&*) -
 
@@ -66,6 +70,8 @@ Returns a status indicating whether the operation succeeded; on success, the res
 
     - **SalvageCheckpoint** (*const ReplicateCheckpoint&*) -
 
+        Get the salvage checkpoint. The following members belong to `ReplicateCheckpoint`.
+
         - **ClusterID** (*const std::string&*) -
 
             ID of the Milvus cluster that owns the channel.
@@ -75,6 +81,8 @@ Returns a status indicating whether the operation succeeded; on success, the res
             Name of the physical channel.
 
         - **MessageID** (*const ReplicateMessageID&*) -
+
+            Get the message identifier of the checkpoint. The following members belong to `ReplicateMessageID`.
 
             - **ID** (*const std::string&*) -
 
