@@ -33,7 +33,7 @@ let request = AddCollectionFieldRequest::builder()
 
 - `field: Option<FieldSchema>`
 
-    The `FieldSchema` describing the new field. Vector fields added to an existing collection require `nullable(true)`. Required.
+    The `FieldSchema` describing the new field. Vector fields added to an existing collection require `nullable(true)`. Required. See [FieldSchema](FieldSchema.md).
 
 **RETURN TYPE:**
 
