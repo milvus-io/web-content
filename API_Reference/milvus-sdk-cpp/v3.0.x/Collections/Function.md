@@ -1,6 +1,6 @@
 # Function
 
-This class is the base class for all built-in function objects used in search reranking and full-text search. It is also used as the base for schema-level functions (e.g., BM25 tokenizer). Pass a `FunctionPtr` (a `std::shared_ptr<Function>`) to `CollectionSchema::AddFunction()` or to `FunctionScore::AddFunction()`.
+This class is the base class for all built-in function objects used in search reranking and full-text search. It is also used as the base for schema-level functions (e.g., BM25 tokenizer). Pass a `FunctionPtr` (a `std::shared_ptr<Function>`) to `CollectionSchema::AddFunction()` or to [FunctionScore](../Vector/FunctionScore.md)`::AddFunction()`.
 
 ```cpp
 Function();
@@ -56,7 +56,7 @@ using FunctionPtr = std::shared_ptr<Function>;
 
 ## RRFRerank
 
-Reciprocal Rank Fusion reranker for `HybridSearch`. Combines multiple ranked lists by summing reciprocal ranks. Set via `FunctionScore::AddFunction()` or `HybridSearchRequest::WithRerank()`.
+Reciprocal Rank Fusion reranker for `HybridSearch`. Combines multiple ranked lists by summing reciprocal ranks. Set via [FunctionScore](../Vector/FunctionScore.md)`::AddFunction()` or `HybridSearchRequest::WithRerank()`.
 
 ```cpp
 RRFRerank();
