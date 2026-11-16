@@ -50,6 +50,8 @@ public enum SegmentState
 
     The segment is being imported.
 
+## SegmentLevel
+
 The level of a segment.
 
 ```csharp
