@@ -38,6 +38,7 @@ await milvusClient.search({
   nq?: number;
   ids?: number[] | string[];
   highlighter?: Highlighter;
+  timeout?: number;
 })
 ```
 
@@ -135,7 +136,7 @@ await milvusClient.search({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**). See [ConsistencyLevelEnum](../Collections/ConsistencyLevelEnum.md).
 
 - **metric_type** (*string*) -
 
@@ -179,7 +180,67 @@ await milvusClient.search({
 
 - **search_aggregation** (*SearchAggregation*) -
 
-    Optional bucket aggregation configuration. See [SearchAggregation](SearchAggregation.md).
+    Optional bucket aggregation configuration. It groups matching entities by one or more fields, optionally calculates metrics, orders buckets, returns top hits, and can contain a nested sub-aggregation. The following members belong to `SearchAggregation`:
+
+    - **fields** (*string[]*) -
+
+        **[REQUIRED]**
+
+        The group-by field names. At least one field is required.
+
+    - **size** (*number*) -
+
+        **[REQUIRED]**
+
+        The number of buckets to return. Must be a positive integer.
+
+    - **metrics** (*Record\<string, SearchAggregationMetric\>*) -
+
+        Optional metric aggregations keyed by alias. Each value is a `SearchAggregationMetric` with the following members:
+
+        - **op** (*AggregationMetricOp*) -
+
+            The metric operation. Can be **avg**, **sum**, **count**, **min**, or **max**.
+
+        - **field_name** (*string*) -
+
+            The field to aggregate.
+
+    - **order** (*SearchAggregationOrder[]*) -
+
+        Optional ordering rules for returned buckets. Each entry is a `SearchAggregationOrder` with the following members:
+
+        - **key** (*string*) -
+
+            A key that can be a metric alias, `_count`, or `_key`.
+
+        - **direction** (*AggregationDirection*) -
+
+            The sort direction. Can be **asc** or **desc**.
+
+    - **top_hits** (*SearchAggregationTopHits*) -
+
+        Optional top-hit documents returned for each bucket. A `SearchAggregationTopHits` object has the following members:
+
+        - **size** (*number*) -
+
+            **[REQUIRED]**
+
+            The number of hits to return per bucket. Must be a positive integer.
+
+        - **sort** (*SearchAggregationSort[]*) -
+
+            Optional sort rules applied to the hits in each bucket. Each entry is a `SearchAggregationSort` with **field_name** and **direction** members.
+
+    - **sub_aggregation** (*SearchAggregation*) -
+
+        Optional nested sub-aggregation. At most four aggregation levels are supported.
+
+    > **NOTES:**
+    >
+    > - Supports at most four aggregation levels.
+    > - Supports at most ten group-by fields in total.
+    > - Cannot be combined with a non-zero `offset`, hybrid search, search or query iterators, a highlighter, or `group_by_field`.
 
 - **nq** (*number*) -
 
@@ -192,6 +253,10 @@ await milvusClient.search({
 - **highlighter** (*Highlighter*) -
 
     A highlighter for the search results.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURNS:**
 

@@ -12,6 +12,7 @@ await milvusClient.listGrants(data)
  milvusClient.listGrants({
    roleName: 'roleName',
    db_name?: string,
+   timeout?: number,
  });
 ```
 
@@ -26,6 +27,10 @@ await milvusClient.listGrants(data)
 - **db_name** (*string*)  
 
     The name of the database to which the target role belongs.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURNS:**
 

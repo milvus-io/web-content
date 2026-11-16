@@ -89,7 +89,7 @@ await milvusClient.hybridSearch({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. Options: `Strong` (0), `Session` (1), `Bounded` (2), `Eventually` (3). Defaults to `Bounded`.
+    The consistency level of the target collection. Options: `Strong` (0), `Session` (1), `Bounded` (2), `Eventually` (3). Defaults to `Bounded`. See [ConsistencyLevelEnum](../Collections/ConsistencyLevelEnum.md).
 
 - **ignore_growing** (*boolean*) -
 
