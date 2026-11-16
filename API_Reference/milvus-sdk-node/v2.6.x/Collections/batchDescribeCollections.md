@@ -40,6 +40,8 @@ A trace ID for request tracking. Optional.
 
 *Promise<BatchDescribeCollectionResponse>*
 
+This method returns a promise that resolves to a **BatchDescribeCollectionResponse** object.
+
 **PARAMETERS:**
 
 - **responses** (*DescribeCollectionResponse[]*) -

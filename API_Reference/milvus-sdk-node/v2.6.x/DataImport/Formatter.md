@@ -40,7 +40,7 @@ interface Formatter
 
         Serializes the buffered columns and returns the generated Parquet file paths.
 
-## Example
+## Examples
 
 ### Choose a formatter implementation
 

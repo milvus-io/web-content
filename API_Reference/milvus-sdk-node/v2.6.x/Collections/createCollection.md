@@ -211,7 +211,11 @@ await milvusClient.createCollection({
 
     The schema of the collection as a list of field definitions.
 
-- **functions** (*list*)
+- **fields** ([FieldType](FieldType.md)[]) -
+
+    An alternative to **schema** that lists the fields of the collection as a list of field definitions.
+
+- **functions** ([FunctionObject](FunctionObject.md)[])
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
 
@@ -309,7 +313,7 @@ await milvusClient.createCollection({
 
         Whether to allow primary key insertion when autoID is enabled.
 
-- **timeout** (*float* | *None*) -
+- **timeout** (*number*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
@@ -421,7 +425,11 @@ await milvusClient.createCollection({
 
     The schema of the collection as a list of field definitions.
 
-- **functions** (*list*)
+- **fields** ([FieldType](FieldType.md)[]) -
+
+    An alternative to **schema** that lists the fields of the collection as a list of field definitions.
+
+- **functions** ([FunctionObject](FunctionObject.md)[])
 
     Converts data into vector embeddings. This function will be added to the schema of a collection.
 

@@ -39,11 +39,15 @@ This method returns a promise that resolves to a **HttpImportProgressResponse** 
 
     Specifies the HTTP API response code.
 
+- **message** (*string*) -
+
+    Specifies the response message.
+
 - **data.jobId** (*string*) -
 
     Specifies the import job ID.
 
-- **data.fileSize** (*string*) -
+- **data.fileSize** (*number*) -
 
     Specifies the file size.
 

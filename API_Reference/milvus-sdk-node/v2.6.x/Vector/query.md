@@ -81,7 +81,7 @@ await milvusClient.query(data)
 
     The consistency level of the target collection.
 
-    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
     <div class="alert note">
     
@@ -106,7 +106,7 @@ This method returns a promise that resolves to a **QueryResults** object.
 ```javascript
 {
     data: Record<string, any>[],
-    status: object
+    status:  ResStatus
 }
 ```
 
@@ -116,7 +116,7 @@ This method returns a promise that resolves to a **QueryResults** object.
 
     The query results.
 
-- **status** (*object*) -
+- **status** (*ResStatus*) -
 
     - **code** (*number*) -
 

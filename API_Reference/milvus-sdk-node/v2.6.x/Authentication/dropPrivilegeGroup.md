@@ -33,7 +33,7 @@ await milvusClient.dropPrivilegeGroup({
 
 *Promise\<ResStatus\>*
 
-This method returns a list of promises, each of which resolves to a **ResStatus** object.
+This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {

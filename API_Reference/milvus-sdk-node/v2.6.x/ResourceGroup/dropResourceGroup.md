@@ -31,13 +31,13 @@ await milvusClient.dropResourceGroup({
 
 **RETURNS:**
 
-*Promise |<ResStatus>*
+*Promise<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number
+    code: number,
     error_code: string | number,
     reason: string
 }
@@ -88,7 +88,7 @@ const config: ResourceGroupConfig = {
 }
 
 await milvusClient.updateResourceGroups({ 
-    my_rg: config
+    resource_groups: { my_rg: config }
 });
 
 const res = await milvusClient.dropResourceGroup({ 

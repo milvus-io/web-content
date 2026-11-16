@@ -40,7 +40,7 @@ await milvusClient.get({
 
     A specific entity ID or a list of entity IDs.
 
-- **consistency_level** (*string*) -
+- **consistency_level** (*ConsistencyLevelEnum*) -
 
     The consistency level of the target collection.
 

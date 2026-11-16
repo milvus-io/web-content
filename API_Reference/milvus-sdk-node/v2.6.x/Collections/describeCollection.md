@@ -72,7 +72,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
 **PARAMETERS:**
 
-- **status** (*object*)-
+- **status** (*ResStatus*) -
 
     - **code** (*number*) -
 
@@ -86,7 +86,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **schema** (*object*)-
+- **schema** (*CollectionSchema*) -
 
     The CollectionSchema object.
 
@@ -118,55 +118,55 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
         The name of **CollectionSchema** object.
 
-- **collectionID** (*string*)-
+- **collectionID** (*string*) -
 
     The ID of the collection.
 
-- **collection_name** (*string*)-
+- **collection_name** (*string*) -
 
     The name of the collection.
 
-- **consistency_level** (*string*)-
+- **consistency_level** (*string*) -
 
     The consistency level of the collection.
 
-- **aliases** (*string[]*)-
+- **aliases** (*string[]*) -
 
     A list of the aliases of the collection.
 
-- **virtual_channel_names** (*string[]*)-
+- **virtual_channel_names** (*string[]*) -
 
     A list of the names of the virtual channels in this collection.
 
-- **physical_channel_names** (*string[]*)-
+- **physical_channel_names** (*string[]*) -
 
     A list of the names of the physical channels in this collection.
 
-- **start_positions** (*string[]*)-
+- **start_positions** (*string[]*) -
 
     The start positions of the collection at the time it was created.
 
-- **properties** (*KeyValuePair[]*)-
+- **properties** (*KeyValuePair[]*) -
 
     Collection-level properties (for example, **mmap.enabled**, **collection.ttl.seconds**) declared at creation or set via `alterCollectionProperties()`.
 
-- **created_timestamp** (*string*)-
+- **created_timestamp** (*string*) -
 
     The timestamp indicating the creation time of the collection.
 
-- **created_utc_timestamp** (*string*)-
+- **created_utc_timestamp** (*string*) -
 
     The timestamp in UTC indicating the creation time of the collection.
 
-- **shards_num** (*number*)-
+- **shards_num** (*number*) -
 
     The number of shards in the collection.
 
-- **num_partitions** (*string*)-
+- **num_partitions** (*string*) -
 
     The number of partitions in the collection.
 
-- **db_name** (*string*)-
+- **db_name** (*string*) -
 
     The name of the database to which the collection belongs.
 
@@ -174,23 +174,23 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     A flattened list of doc-in / doc-out functions attached to the collection.
 
-- **update_timestamp_str** (*string*)-
+- **update_timestamp_str** (*string*) -
 
     The timestamp indicating the last update time of the collection, formatted as a string.
 
-- **update_timestamp** (*number*)-
+- **update_timestamp** (*number*) -
 
     The numeric form of the last-update timestamp.
 
-- **anns_fields** (*Record<string, FieldSchema>*)-
+- **anns_fields** (*Record<string, FieldSchema>*) -
 
     A mapping from vector-field name to its **FieldSchema**, covering all vector fields declared on the collection.
 
-- **scalar_fields** (*Record<string, FieldSchema>*)-
+- **scalar_fields** (*Record<string, FieldSchema>*) -
 
     A mapping from scalar-field name to its **FieldSchema**, covering all scalar fields declared on the collection.
 
-- **function_fields** (*Record<string, FieldSchema>*)-
+- **function_fields** (*Record<string, FieldSchema>*) -
 
     A mapping from function-output-field name to its **FieldSchema**.
 

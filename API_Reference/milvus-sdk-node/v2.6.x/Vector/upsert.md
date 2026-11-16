@@ -17,6 +17,7 @@ await milvusClient.upsert({
     db_name,
     collection_name,
     data,
+    fields_data,
     hash_keys,
     partial_update,
     field_ops,
@@ -40,6 +41,10 @@ await milvusClient.upsert({
     **[REQUIRED]**
 
     The entities to insert or update. Each object uses collection field names as keys.
+
+- **fields_data** (*[RowData](RowData.md)[]*) -
+
+    An alias of **data**. Provide either **data** or **fields_data**, not both.
 
 - **db_name** (*string*) -
 
@@ -93,7 +98,7 @@ await milvusClient.upsert({
 
 *Promise<MutationResult>*
 
-Returns the mutation result, including the operation status and counts for the affected entities.
+This method returns a promise that resolves to a **MutationResult** object, including the operation status and counts for the affected entities.
 
 ```javascript
 {
@@ -169,7 +174,7 @@ Returns the mutation result, including the operation status and counts for the a
 
     A field_ops entry omits field_name or uses an unsupported operation. Use a valid field name and one of REPLACE, ARRAY_APPEND, or ARRAY_REMOVE.
 
-## Example
+## Examples
 
 ### Append values to an array field
 

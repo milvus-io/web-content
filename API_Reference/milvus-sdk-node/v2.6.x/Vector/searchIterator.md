@@ -15,6 +15,7 @@ await milvusClient.searchIterator({
     batchSize: number,
     limit?: number,
     filter?: string,
+    expr?: string,
     anns_field?: string,
     output_fields?: string[],
     partition_names?: string[],
@@ -67,6 +68,10 @@ await milvusClient.searchIterator({
 
     A scalar filtering condition to filter matching entities before the search. Defaults to an empty string (no filter).
 
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
+
 - **anns_field** (*string*) -
 
     The name of the target vector field. Required when the collection has multiple vector fields.
@@ -89,7 +94,7 @@ await milvusClient.searchIterator({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level for this operation. Options: Strong (0), Bounded (1), Session (2), Eventually (3). Defaults to Bounded.
+    The consistency level for this operation. Options: Strong (0), Session (1), Bounded (2), Eventually (3). Defaults to Bounded.
 
 - **ignore_growing** (*boolean*) -
 
@@ -131,7 +136,7 @@ await milvusClient.searchIterator({
 
     Placeholder values for a templated filter expression.
 
-- **rerank** (*RerankerObj* | *FunctionObject* | *[FunctionScore](FunctionScore.md)*) -
+- **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy and its parameters. See `search()` for details on supported reranker types.
 
