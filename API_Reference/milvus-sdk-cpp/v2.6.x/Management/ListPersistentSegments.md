@@ -34,7 +34,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Result** (*const std::vector<SegmentInfo>&*) -
 
-        Get informations of segments.
+        Get information of segments. Each entry is a `SegmentInfo` with the following members.
 
         - **CollectionID** (*int64_t*) -
 

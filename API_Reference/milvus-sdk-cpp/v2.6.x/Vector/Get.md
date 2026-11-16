@@ -97,51 +97,17 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Results** (*const QueryResults&*) -
 
-        Get result of query operation.
+        Get result of query operation. The following members belong to `QueryResults`.
 
         - **OutputField** (*FieldDataPtr*) -
 
             Get an output field by name.
-
-            - **Name** (*const std::string&*) -
-
-                Get field name.
-
-            - **Type** (*DataType*) -
-
-                Get field data type.
-                See [DataType](../Collections/DataType.md).
-
-            - **ElementType** (*DataType*) -
-
-                Get the element type for an array field.
-                See [DataType](../Collections/DataType.md).
-
-            - **Count** (*size_t*) -
-
-                Total number of field elements.
+            See [FieldData](FieldData.md).
 
         - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
             Get all output fields data.
-
-            - **Name** (*const std::string&*) -
-
-                Get field name.
-
-            - **Type** (*DataType*) -
-
-                Get field data type.
-                See [DataType](../Collections/DataType.md).
-
-            - **ElementType** (*DataType*) -
-
-                Get the element type for an array field.
-                See [DataType](../Collections/DataType.md).
-
-            - **Count** (*size_t*) -
-
-                Total number of field elements.
+            See [FieldData](FieldData.md).
 
         - **OutputFieldNames** (*const std::set<std::string>&*) -
 

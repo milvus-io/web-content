@@ -29,7 +29,7 @@ using CollectionSchemaPtr = std::shared_ptr<CollectionSchema>;
 
     When `true`, entities may contain fields that are not declared in the schema. The extra fields are stored internally in a JSON field named `$meta`. Default: `true`.
 
-## Methods
+**METHODS:**
 
 **Adding fields:**
 

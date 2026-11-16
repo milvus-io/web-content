@@ -503,6 +503,14 @@ Vector request payloads use [FieldData](FieldData.md) instances.
    </tr>
 </table>
 
+### EmbeddingList
+
+See [EmbeddingList](EmbeddingList.md).
+
+### FunctionScore
+
+See [FunctionScore](FunctionScore.md).
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -513,11 +521,11 @@ Returns a [Status](../Client/Status.md) indicating whether the search succeeded;
 
     - **Results** (*const SearchResults&*) -
 
-        Get result of search operation.
+        Get result of search operation. The following members belong to `SearchResults`.
 
         - **Results** (*const std::vector<SingleResult>&*) -
 
-            Get search results.
+            Get search results. Each entry is a `SingleResult` with the following members.
 
             - **Scores** (*const std::vector<float>&*) -
 
@@ -554,46 +562,12 @@ Returns a [Status](../Client/Status.md) indicating whether the search succeeded;
             - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
                 Output fields data.
-
-                - **Name** (*const std::string&*) -
-
-                    Get field name.
-
-                - **Type** (*DataType*) -
-
-                    Get field data type.
-                    See [DataType](../Collections/DataType.md).
-
-                - **ElementType** (*DataType*) -
-
-                    Get the element type for an array field.
-                    See [DataType](../Collections/DataType.md).
-
-                - **Count** (*size_t*) -
-
-                    Total number of field elements.
+                See [FieldData](FieldData.md).
 
             - **OutputField** (*FieldDataPtr*) -
 
                 Get an output field by name.
-
-                - **Name** (*const std::string&*) -
-
-                    Get field name.
-
-                - **Type** (*DataType*) -
-
-                    Get field data type.
-                    See [DataType](../Collections/DataType.md).
-
-                - **ElementType** (*DataType*) -
-
-                    Get the element type for an array field.
-                    See [DataType](../Collections/DataType.md).
-
-                - **Count** (*size_t*) -
-
-                    Total number of field elements.
+                See [FieldData](FieldData.md).
 
             - **OutputFieldNames** (*const std::set<std::string>&*) -
 

@@ -1,6 +1,6 @@
 # HybridSearch()
 
-This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as RRFRerank or WeightedRerank). Each sub-search targets one vector field with its own query vector, filter, and limit.
+This operation runs multiple sub-search requests against a collection in a single call and fuses their hits with the reranking function carried by the request (such as an [RRFRerank](../Collections/Function.md) or [WeightedRerank](../Collections/Function.md)). Each sub-search targets one vector field with its own query vector, filter, and limit.
 
 ```cpp
 Status HybridSearch(const HybridSearchRequest& request, HybridSearchResponse& response)
@@ -94,7 +94,7 @@ auto request = HybridSearchRequest()
 
 - `WithRerank(const FunctionPtr& rerank)`
 
-    Sets the reranking function that fuses the sub-search results, such as an RRFRerank or WeightedRerank function.
+    Sets the reranking function that fuses the sub-search results, such as an [RRFRerank](../Collections/Function.md) or [WeightedRerank](../Collections/Function.md) function.
 
 - `SetRerank(const FunctionPtr& rerank)`
 
@@ -209,9 +209,94 @@ Vector request payloads use [FieldData](FieldData.md) instances.
      <td><p>[Function](../Collections/Function.md) or struct-field input</p></td>
      <td><p><code>AddEmbeddedText()</code> / <code>WithEmbeddedTexts()</code>; <code>AddEmbeddingList()</code> / <code>WithEmbeddingLists()</code></p></td>
      <td><p><code>std::string</code> or <code>EmbeddingList</code></p></td>
-     <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
+      <td><p>Use embedded text for supported functions and embedding lists for struct-field ANN search.</p></td>
    </tr>
 </table>
+
+### SubSearchRequest
+
+```cpp
+SubSearchRequest()
+    .WithAnnsField(field_name)
+    .WithLimit(limit)
+    .WithFilter(filter)
+    .WithMetricType(metric_type)
+    .WithTimezone(tz)
+    .AddFloatVector(vector)       // or any Add*/With* vector method
+    .WithFloatVectors(vectors);   // batch assignment
+```
+
+**REQUEST METHODS:**
+
+- `WithAnnsField(const std::string& ann_field)`
+
+    Sets the target field of the ANN search.
+
+- `WithLimit(int64_t limit)`
+
+    Sets the search limit (topk) of this sub search.
+
+- `SetLimit(int64_t limit)`
+
+    Set search limit(topk)
+
+- `WithFilter(std::string filter)`
+
+    Sets the filter expression of this sub search.
+
+- `WithMetricType(milvus::MetricType metric_type)`
+
+    Specifies the metric type of this sub search.
+
+- `WithTimezone(const std::string& timezone)`
+
+    Sets the timezone; it takes effect for Timestamptz fields.
+
+**Inherited vector methods** (all return `SubSearchRequest&` for chaining):
+
+- `AddFloatVector(const FloatVecFieldData::ElementT& vector)`
+
+    Appends one dense float vector.
+
+- `AddBinaryVector(const std::string& vector)`
+
+    Appends one binary vector; the string overload converts the string to binary bytes.
+
+- `AddSparseVector(const SparseFloatVecFieldData::ElementT& vector)`
+
+    Appends one sparse vector from index-value data.
+
+- `AddFloat16Vector(const Float16VecFieldData::ElementT& vector)`
+
+    Appends one float16 vector.
+
+- `AddBFloat16Vector(const BFloat16VecFieldData::ElementT& vector)`
+
+    Appends one bfloat16 vector.
+
+- `AddInt8Vector(const Int8VecFieldData::ElementT& vector)`
+
+    Appends one dense int8 vector.
+
+- `AddEmbeddedText(const std::string& text)`
+
+    Appends embedded text for a supported text-embedding function such as BM25.
+
+- `AddEmbeddingList(EmbeddingList&& emb_list)` — for struct-field ANN
+
+    Adds an embedding list for struct-field ANN search.
+
+- `WithFloatVectors(std::vector<FloatVecFieldData::ElementT>&& vectors)` — batch
+
+    Sets the dense float vectors in batch.
+
+- `WithSparseVectors(...)`, `WithFloat16Vectors(...)`, etc. — batch variants
+
+    Batch variants of the corresponding add methods.
+
+### EmbeddingList
+
+See [EmbeddingList](EmbeddingList.md).
 
 **RETURNS:**
 
@@ -223,11 +308,11 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
     - **Results** (*const SearchResults&*) -
 
-        Get result of search operation.
+        Get result of search operation. The following members belong to `SearchResults`.
 
         - **Results** (*const std::vector<SingleResult>&*) -
 
-            Get search results.
+            Get search results. Each entry is a `SingleResult` with the following members.
 
             - **Scores** (*const std::vector<float>&*) -
 
@@ -264,46 +349,12 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
             - **OutputFields** (*const std::vector<FieldDataPtr>&*) -
 
                 Output fields data.
-
-                - **Name** (*const std::string&*) -
-
-                    Get field name.
-
-                - **Type** (*DataType*) -
-
-                    Get field data type.
-                    See [DataType](../Collections/DataType.md).
-
-                - **ElementType** (*DataType*) -
-
-                    Get the element type for an array field.
-                    See [DataType](../Collections/DataType.md).
-
-                - **Count** (*size_t*) -
-
-                    Total number of field elements.
+                See [FieldData](FieldData.md).
 
             - **OutputField** (*FieldDataPtr*) -
 
                 Get an output field by name.
-
-                - **Name** (*const std::string&*) -
-
-                    Get field name.
-
-                - **Type** (*DataType*) -
-
-                    Get field data type.
-                    See [DataType](../Collections/DataType.md).
-
-                - **ElementType** (*DataType*) -
-
-                    Get the element type for an array field.
-                    See [DataType](../Collections/DataType.md).
-
-                - **Count** (*size_t*) -
-
-                    Total number of field elements.
+                See [FieldData](FieldData.md).
 
             - **OutputFieldNames** (*const std::set<std::string>&*) -
 
@@ -372,7 +423,7 @@ Returns a [Status](../Client/Status.md) reporting success or failure, while the 
 
 ## Example
 
-Run two sub-searches on different vector fields, fuse their results with a WeightedRerank ranker, and return the top 10 entities after connecting a MilvusClientV2.
+Run two sub-searches on different vector fields, fuse their results with a [WeightedRerank](../Collections/Function.md) ranker, and return the top 10 entities after connecting a MilvusClientV2.
 
 ```cpp
 auto client = milvus::MilvusClientV2::Create();

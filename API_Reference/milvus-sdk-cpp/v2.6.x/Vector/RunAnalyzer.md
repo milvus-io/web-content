@@ -67,11 +67,11 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Results** (*const std::vector<AnalyzerResult>&*) -
 
-        Get results of analyzer.
+        Get results of analyzer. The following members belong to `AnalyzerResults`.
 
         - **Tokens** (*const std::vector<AnalyzerToken>&*) -
 
-            Get tokens of the analyzer result.
+            Get tokens of the analyzer result. Each entry is an `AnalyzerToken` with the following members.
 
             - **token_** (*std::string*) -
 

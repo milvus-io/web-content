@@ -63,7 +63,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Stats** (*const PartitionStat&*) -
 
-        Get partition stats.
+        Get partition stats. The following members belong to `PartitionStat`.
 
         - **Name** (*const std::string&*) -
 

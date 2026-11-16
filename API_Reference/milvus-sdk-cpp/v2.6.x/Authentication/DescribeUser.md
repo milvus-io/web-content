@@ -29,7 +29,7 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Desc** (*const UserDesc&*) -
 
-        Get user description.
+        Get user description. The following members belong to `UserDesc`.
 
         - **Name** (*const std::string&*) -
 
