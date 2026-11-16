@@ -172,6 +172,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -181,7 +183,6 @@
                               "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer",
                           "example": 0
                         },
                         "data": {
@@ -443,6 +444,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -452,7 +455,6 @@
                               "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer",
                           "example": 0
                         },
                         "data": {

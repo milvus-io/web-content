@@ -159,6 +159,144 @@
                               "description": "ジョブが失敗した理由を示すメッセージ。"
                             }
                           }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブの ID。"
+                                }
+                              }
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "Type of the job.",
+                              "enum": [
+                                "IMPORT",
+                                "MIGRATION",
+                                "BACKUP",
+                                "RESTORE",
+                                "CLONE_COLLECTION",
+                                "CREATE_SAMPLE_COLLECTION",
+                                "EXPORT_BACKUP",
+                                "UPGRADE",
+                                "FREE_TO_DEDICATE",
+                                "SERVERLESS_TO_DEDICATE",
+                                "DEDICATE_TO_DEDICATE",
+                                "CROSS_BACKUP",
+                                "CREATE_CLUSTER",
+                                "MODIFY_CLUSTER_CU",
+                                "MODIFY_CLUSTER_REPLICA",
+                                "RESUME_CLUSTER",
+                                "SUSPEND_CLUSTER",
+                                "ETL",
+                                "CREATE_GLOBAL_CLUSTER",
+                                "CREATE_SECONDARY_CLUSTER",
+                                "CREATE_SPARK_APPLICATION",
+                                "DELETE_SPARK_APPLICATION",
+                                "RESTART_SPARK_APPLICATION",
+                                "SWITCHOVER_GLOBAL_CLUSTER",
+                                "MODIFY_GLOBAL_CLUSTER_CU",
+                                "FAILOVER_GLOBAL_CLUSTER",
+                                "DELETE_SECONDARY_CLUSTER",
+                                "CREATE_NEW_SECONDARIES",
+                                "CREATE_SPARK_BATCH_JOB"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务的类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブの種類。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Status of the job.",
+                              "enum": [
+                                "PENDING",
+                                "IN_PROGRESS",
+                                "SUCCESSFUL",
+                                "FAILED",
+                                "CANCELING",
+                                "CANCELED",
+                                "SCHEDULER"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务的状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブのステータス。"
+                                }
+                              }
+                            },
+                            "progress": {
+                              "type": "string",
+                              "description": "Progress of the job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务的进度。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブの進捗状況。"
+                                }
+                              }
+                            },
+                            "startTime": {
+                              "type": "string",
+                              "description": "Time when the job started.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务的开始时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブが開始された時刻。"
+                                }
+                              }
+                            },
+                            "endTime": {
+                              "type": "string",
+                              "description": "Time when the job ended.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务的结束时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブが終了した時刻。"
+                                }
+                              }
+                            },
+                            "reason": {
+                              "type": "string",
+                              "description": "Reason for failure when the job did not succeed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "任务未成功时的失败原因。"
+                                },
+                                "ja-JP": {
+                                  "description": "ジョブが成功しなかった場合の失敗理由。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。種類はエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "One possible shape of the job response payload.",
@@ -189,6 +327,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {

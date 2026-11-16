@@ -214,6 +214,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -227,17 +228,10 @@
                         "data": {
                           "type": "object",
                           "description": "Response payload which is a list of backups.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "响应负载，为备份列表。"
-                            },
-                            "ja-JP": {
-                              "description": "バックアップのリストを含むレスポンスペイロード。"
-                            }
-                          },
                           "properties": {
                             "count": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The total number of backups returned.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -250,6 +244,7 @@
                             },
                             "currentPage": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The current page number.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -262,6 +257,7 @@
                             },
                             "pageSize": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The number of records per page.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -275,38 +271,10 @@
                             "backups": {
                               "type": "array",
                               "description": "A list of backups.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "备份列表。"
-                                },
-                                "ja-JP": {
-                                  "description": "バックアップのリスト。"
-                                }
-                              },
                               "items": {
                                 "type": "object",
                                 "description": "Inforamtion about a backup in detail.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "备份的详细信息。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "バックアップの詳細情報。"
-                                  }
-                                },
                                 "properties": {
-                                  "projectId": {
-                                    "type": "string",
-                                    "description": "The ID of the project that holds the backup.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "包含该备份的项目 ID。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "バックアップを保持するプロジェクトの ID。"
-                                      }
-                                    }
-                                  },
                                   "backupId": {
                                     "type": "string",
                                     "description": "The ID of the backup.",
@@ -316,6 +284,18 @@
                                       },
                                       "ja-JP": {
                                         "description": "バックアップの ID。"
+                                      }
+                                    }
+                                  },
+                                  "projectId": {
+                                    "type": "string",
+                                    "description": "The ID of the project that holds the backup.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "包含该备份的项目 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップを保持するプロジェクトの ID。"
                                       }
                                     }
                                   },
@@ -334,10 +314,6 @@
                                   "backupType": {
                                     "type": "string",
                                     "description": "The type of resources contained in the backup.",
-                                    "enum": [
-                                      "CLUSTER",
-                                      "COLLECTION"
-                                    ],
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份中包含的资源类型。"
@@ -345,15 +321,15 @@
                                       "ja-JP": {
                                         "description": "バックアップに含まれるリソースの種類。"
                                       }
-                                    }
+                                    },
+                                    "enum": [
+                                      "CLUSTER",
+                                      "COLLECTION"
+                                    ]
                                   },
                                   "creationMethod": {
                                     "type": "string",
                                     "description": "Whether the backup is created manually or automatically.",
-                                    "enum": [
-                                      "AUTO",
-                                      "MANUAL"
-                                    ],
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "备份的创建方式，是手动创建还是自动创建。"
@@ -361,10 +337,31 @@
                                       "ja-JP": {
                                         "description": "バックアップが手動で作成されたものか、自動で作成されたものかを示します。"
                                       }
+                                    },
+                                    "enum": [
+                                      "AUTO",
+                                      "MANUAL"
+                                    ]
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "The status of the backup.",
+                                    "enum": [
+                                      "AVAILABLE",
+                                      "CREATING"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップのステータス。"
+                                      }
                                     }
                                   },
                                   "size": {
                                     "type": "integer",
+                                    "format": "int64",
                                     "description": "The size of the backup in bytes.",
                                     "x-i18n": {
                                       "zh-CN": {
@@ -377,6 +374,7 @@
                                   },
                                   "expireTime": {
                                     "type": "string",
+                                    "format": "date-time",
                                     "description": "The time at which the backup will be automatically deleted.",
                                     "x-i18n": {
                                       "zh-CN": {
@@ -413,6 +411,7 @@
                                   },
                                   "createTime": {
                                     "type": "string",
+                                    "format": "date-time",
                                     "description": "The time at which the cluster has been created.",
                                     "x-i18n": {
                                       "zh-CN": {
@@ -423,35 +422,15 @@
                                       }
                                     }
                                   },
-                                  "status": {
-                                    "type": "string",
-                                    "description": "The status of the backup.",
-                                    "enum": [
-                                      "AVAILABLE",
-                                      "CREATING"
-                                    ],
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "备份状态。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "バックアップのステータス。"
-                                      }
-                                    }
-                                  },
                                   "restoreNewInstancePolicies": {
                                     "type": "array",
                                     "description": "The policies for restoring a new cluster from the backup. This field is only applicable to backups of the type CLUSTER.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "バックアップから新しいクラスターを復元するためのポリシー。このフィールドは、タイプが CLUSTER のバックアップにのみ適用されます。"
-                                      }
-                                    },
                                     "items": {
                                       "type": "string",
+                                      "enum": [
+                                        "LATEST",
+                                        "ORIGINAL"
+                                      ],
                                       "description": "The policy for restoring a new cluster from the backup. Possible values are: <ul><li><b>LATEST</b>: Restores the cluster to the latest compatible GA Milvus version available.</li><li><b>ORIGINAL</b>: Restores the cluster to its original compatible Milvus version.</li></ul>",
                                       "x-i18n": {
                                         "zh-CN": {
@@ -460,15 +439,43 @@
                                         "ja-JP": {
                                           "description": "バックアップから新しいクラスターを復元するためのポリシー。指定可能な値は次のとおりです: <ul><li><b>LATEST</b>: クラスターを、利用可能な最新の互換性のある GA Milvus version に復元します。</li><li><b>ORIGINAL</b>: クラスターを元の互換性のある Milvus version に復元します。</li></ul>"
                                         }
+                                      }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
                                       },
-                                      "enum": [
-                                        "LATEST",
-                                        "ORIGINAL"
-                                      ]
+                                      "ja-JP": {
+                                        "description": "バックアップから新しいクラスターを復元するためのポリシー。このフィールドは、タイプが CLUSTER のバックアップにのみ適用されます。"
+                                      }
                                     }
                                   }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "备份的详细信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "バックアップの詳細情報。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップのリスト。"
                                 }
                               }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为备份列表。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップのリストを含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -684,6 +691,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -697,19 +705,10 @@
                         "data": {
                           "type": "object",
                           "description": "Response payload which is the information about the backup in detail.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "响应负载，为备份的详细信息。"
-                            },
-                            "ja-JP": {
-                              "description": "バックアップの詳細情報を含むレスポンスペイロード。"
-                            }
-                          },
                           "properties": {
                             "clusterId": {
                               "type": "string",
                               "description": "The ID of the cluster that holds the backup.",
-                              "example": "inxx-xxxxxxxxxxxxxxx",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "包含该备份的集群 ID。"
@@ -717,7 +716,8 @@
                                 "ja-JP": {
                                   "description": "バックアップを保持するクラスターの ID。"
                                 }
-                              }
+                              },
+                              "example": "inxx-xxxxxxxxxxxxxxx"
                             },
                             "clusterName": {
                               "type": "string",
@@ -728,6 +728,18 @@
                                 },
                                 "ja-JP": {
                                   "description": "バックアップを保持するクラスターの名前。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "The ID of the cloud region where the backup is located. The region should be bound to the project to which the specified cluster belongs.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份所在的云区域 ID。该区域应与指定集群所属项目绑定。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップが配置されているクラウドリージョンの ID。このリージョンは、指定したクラスターが属するプロジェクトに関連付けられている必要があります。"
                                 }
                               }
                             },
@@ -746,7 +758,6 @@
                             "backupId": {
                               "type": "string",
                               "description": "The ID of the backup.",
-                              "example": "Dedicated-01_backup3",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份 ID。"
@@ -754,7 +765,8 @@
                                 "ja-JP": {
                                   "description": "バックアップの ID。"
                                 }
-                              }
+                              },
+                              "example": "Dedicated-01_backup3"
                             },
                             "backupName": {
                               "type": "string",
@@ -771,10 +783,6 @@
                             "backupType": {
                               "type": "string",
                               "description": "The type of resources backed up.",
-                              "enum": [
-                                "CLUSTER",
-                                "COLLECTION"
-                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的资源类型。"
@@ -782,15 +790,15 @@
                                 "ja-JP": {
                                   "description": "バックアップされたリソースの種類。"
                                 }
-                              }
+                              },
+                              "enum": [
+                                "CLUSTER",
+                                "COLLECTION"
+                              ]
                             },
                             "creationMethod": {
                               "type": "string",
                               "description": "Whether the backup was created manually or automatically.",
-                              "enum": [
-                                "MANUAL",
-                                "AUTO"
-                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份的创建方式，是手动创建还是自动创建。"
@@ -798,7 +806,11 @@
                                 "ja-JP": {
                                   "description": "バックアップが手動で作成されたか、自動で作成されたかを示します。"
                                 }
-                              }
+                              },
+                              "enum": [
+                                "MANUAL",
+                                "AUTO"
+                              ]
                             },
                             "status": {
                               "type": "string",
@@ -806,7 +818,16 @@
                               "enum": [
                                 "CREATING",
                                 "AVAILABLE",
-                                "DELETED"
+                                "DELETED",
+                                "CANCELING",
+                                "CANCELED",
+                                "NOT_AVAILABLE",
+                                "KEEP_BACKUP",
+                                "PENDING_CANCEL",
+                                "PENDING_DELETE",
+                                "TABLE_DELETE",
+                                "PAUSE_AVAILABLE",
+                                "PAUSE_FAIL"
                               ],
                               "x-i18n": {
                                 "zh-CN": {
@@ -819,6 +840,7 @@
                             },
                             "size": {
                               "type": "integer",
+                              "format": "int64",
                               "description": "The size of the backup in bytes.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -829,41 +851,75 @@
                                 }
                               }
                             },
-                            "regionId": {
-                              "type": "string",
-                              "description": "The ID of the cloud region where the backup is located. The region should be bound to the project to which the specified cluster belongs.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "备份所在的云区域 ID。该区域应与指定集群所属项目绑定。"
+                            "collections": {
+                              "type": "array",
+                              "description": "Collections included in the backup.",
+                              "items": {
+                                "type": "object",
+                                "description": "Details of a collection included in a backup.",
+                                "properties": {
+                                  "collectionName": {
+                                    "type": "string",
+                                    "description": "Name of the collection.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集合名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "Collection の名前。"
+                                      }
+                                    }
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "Description of the collection.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集合描述。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "Collection の説明。"
+                                      }
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "Backup status of the collection.",
+                                    "enum": [
+                                      "LOADED",
+                                      "UNLOADED"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集合的备份状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "Collection のバックアップステータス。"
+                                      }
+                                    }
+                                  }
                                 },
-                                "ja-JP": {
-                                  "description": "バックアップが配置されているクラウドリージョンの ID。このリージョンは、指定したクラスターが属するプロジェクトに関連付けられている必要があります。"
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "备份中包含的集合详情。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "バックアップに含まれる Collection の詳細。"
+                                  }
                                 }
-                              }
-                            },
-                            "expireTime": {
-                              "type": "string",
-                              "description": "The expiration time of the backup.",
+                              },
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "备份的过期时间。"
+                                  "description": "备份中包含的集合。"
                                 },
                                 "ja-JP": {
-                                  "description": "バックアップの有効期限。"
+                                  "description": "バックアップに含まれる Collection。"
                                 }
                               }
                             },
                             "dbCollections": {
                               "type": "array",
                               "description": "A list of databases and its collections that are included in the backup.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "备份中包含的数据库及其集合列表。"
-                                },
-                                "ja-JP": {
-                                  "description": "バックアップに含まれるデータベースとそのコレクションの一覧。"
-                                }
-                              },
                               "items": {
                                 "type": "object",
                                 "description": "A database and its collections that are included in the backup.",
@@ -883,25 +939,9 @@
                                   "collections": {
                                     "type": "array",
                                     "description": "The collections that are included in the backup.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "备份中包含的集合。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "バックアップに含まれるコレクション。"
-                                      }
-                                    },
                                     "items": {
                                       "type": "object",
                                       "description": "The collection information.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "集合信息。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "コレクション情報。"
-                                        }
-                                      },
                                       "properties": {
                                         "collectionName": {
                                           "type": "string",
@@ -930,6 +970,10 @@
                                         "status": {
                                           "type": "string",
                                           "description": "The loading status of the collection.",
+                                          "enum": [
+                                            "LOADED",
+                                            "UNLOADED"
+                                          ],
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "集合的加载状态。"
@@ -937,12 +981,24 @@
                                             "ja-JP": {
                                               "description": "コレクションのロードステータス。"
                                             }
-                                          },
-                                          "enum": [
-                                            "LOADED",
-                                            "UNLOADED"
-                                          ]
+                                          }
                                         }
+                                      },
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "集合信息。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "コレクション情報。"
+                                        }
+                                      }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备份中包含的集合。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バックアップに含まれるコレクション。"
                                       }
                                     }
                                   }
@@ -950,32 +1006,56 @@
                                 "x-i18n": {
                                   "ja-JP": {
                                     "description": "バックアップに含まれるデータベースとそのコレクション。"
+                                  },
+                                  "zh-CN": {
+                                    "description": "备份中包含的数据库及其 Collection。"
                                   }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份中包含的数据库及其集合列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップに含まれるデータベースとそのコレクションの一覧。"
                                 }
                               }
                             },
                             "createTime": {
                               "type": "string",
+                              "format": "date-time",
                               "description": "The time at which the backup was created.",
                               "x-i18n": {
                                 "ja-JP": {
                                   "description": "バックアップが作成された時刻。"
+                                },
+                                "zh-CN": {
+                                  "description": "备份的创建时间。"
+                                }
+                              }
+                            },
+                            "expireTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "The expiration time of the backup.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "备份的过期时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "バックアップの有効期限。"
                                 }
                               }
                             },
                             "restoreNewInstancePolicies": {
                               "type": "array",
                               "description": "The policies for restoring a new cluster from the backup. This field is only applicable to backups of the type CLUSTER.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
-                                },
-                                "ja-JP": {
-                                  "description": "バックアップから新しいクラスターを復元するためのポリシー。このフィールドは、タイプが CLUSTER のバックアップにのみ適用されます。"
-                                }
-                              },
                               "items": {
                                 "type": "string",
+                                "enum": [
+                                  "LATEST",
+                                  "ORIGINAL"
+                                ],
                                 "description": "The policy for restoring a new cluster from the backup. Possible values are: <ul><li><b>LATEST</b>: Restores the cluster to the latest compatible GA Milvus version available.</li><li><b>ORIGINAL</b>: Restores the cluster to its original compatible Milvus version.</li></ul>",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -984,12 +1064,24 @@
                                   "ja-JP": {
                                     "description": "バックアップから新しいクラスターを復元するためのポリシー。指定可能な値は次のとおりです: <ul><li><b>LATEST</b>: クラスターを、利用可能な最新の互換性のある GA Milvus バージョンに復元します。</li><li><b>ORIGINAL</b>: クラスターを元の互換性のある Milvus バージョンに復元します。</li></ul>"
                                   }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "从备份恢复新集群的策略。仅适用于 CLUSTER 类型的备份。"
                                 },
-                                "enum": [
-                                  "LATEST",
-                                  "ORIGINAL"
-                                ]
+                                "ja-JP": {
+                                  "description": "バックアップから新しいクラスターを復元するためのポリシー。このフィールドは、タイプが CLUSTER のバックアップにのみ適用されます。"
+                                }
                               }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为备份的详细信息。"
+                            },
+                            "ja-JP": {
+                              "description": "バックアップの詳細情報を含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -1221,6 +1313,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1504,10 +1597,14 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "ja-JP": {
                               "description": "レスポンスコード。"
+                            },
+                            "zh-CN": {
+                              "description": "响应码。"
                             }
                           }
                         },
@@ -1776,30 +1873,13 @@
                   "crossRegionCopies": {
                     "type": "array",
                     "description": "The list of cloud regions to which the backup will be copied. Note that Zilliz Cloud will create a backup in the same region as the cluster by default, so you only need to specify the regions where you want to copy the backup to. Each entry in the list results in one copy of the permanent backup being created in the specified region.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "备份将被复制到的云区域列表。注意，Zilliz Cloud 会默认在与集群相同的区域创建备份，因此您只需指定您希望备份复制到的其他区域。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
-                      },
-                      "ja-JP": {
-                        "description": "バックアップのコピー先となるクラウドリージョンのリスト。Zilliz Cloud はデフォルトでクラスターと同じリージョンにバックアップを作成するため、バックアップをコピーしたいリージョンのみ指定すればよい点に注意してください。リスト内の各エントリごとに、指定したリージョンに永続バックアップのコピーが 1 つ作成されます。"
-                      }
-                    },
                     "items": {
                       "type": "object",
                       "description": "Information about the target cloud region to which the backup will be copied.",
-                      "x-i18n": {
-                        "zh-CN": {
-                          "description": "目标云区域信息。"
-                        },
-                        "ja-JP": {
-                          "description": "バックアップのコピー先となる対象クラウドリージョンの情報。"
-                        }
-                      },
                       "properties": {
                         "regionId": {
                           "type": "string",
                           "description": "The ID of the target cloud region to which the backup will be copied.",
-                          "example": "aws-us-west-2",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "目标云区域 ID，当前集群的备份将被复制到该区域。",
@@ -1808,8 +1888,40 @@
                             "ja-JP": {
                               "description": "バックアップのコピー先となる対象クラウドリージョンの ID。"
                             }
+                          },
+                          "example": "aws-us-west-2"
+                        },
+                        "retentionDays": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Number of days cross-region backups are retained.",
+                          "maximum": 30,
+                          "minimum": 1,
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "跨地域备份的保留天数。"
+                            },
+                            "ja-JP": {
+                              "description": "クロスリージョンバックアップの保持日数。"
+                            }
                           }
                         }
+                      },
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "目标云区域信息。"
+                        },
+                        "ja-JP": {
+                          "description": "バックアップのコピー先となる対象クラウドリージョンの情報。"
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "备份将被复制到的云区域列表。注意，Zilliz Cloud 会默认在与集群相同的区域创建备份，因此您只需指定您希望备份复制到的其他区域。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
+                      },
+                      "ja-JP": {
+                        "description": "バックアップのコピー先となるクラウドリージョンのリスト。Zilliz Cloud はデフォルトでクラスターと同じリージョンにバックアップを作成するため、バックアップをコピーしたいリージョンのみ指定すればよい点に注意してください。リスト内の各エントリごとに、指定したリージョンに永続バックアップのコピーが 1 つ作成されます。"
                       }
                     }
                   }
@@ -1918,10 +2030,14 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code",
                           "x-i18n": {
                             "ja-JP": {
                               "description": "レスポンスコード"
+                            },
+                            "zh-CN": {
+                              "description": "响应码"
                             }
                           }
                         },
@@ -2143,6 +2259,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2156,14 +2273,6 @@
                         "data": {
                           "type": "object",
                           "description": "Response payload which is the backup policy of the specified cluster.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "响应负载，为指定集群的备份策略。"
-                            },
-                            "ja-JP": {
-                              "description": "指定したクラスターのバックアップポリシーを含むレスポンスペイロード。"
-                            }
-                          },
                           "properties": {
                             "clusterId": {
                               "type": "string",
@@ -2196,7 +2305,6 @@
                             "startTime": {
                               "type": "string",
                               "description": "The start time is a two hour duration for the backup policy to execute in the format of HH:mm-HH:mm UTC time. When the backup policy is disabled, the value is `null`.",
-                              "example": "02:00-04:00",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份策略执行的开始时间，为 UTC 时间，格式为 HH:mm-HH:mm。当备份策略被禁用时，该值为 `null`。"
@@ -2204,12 +2312,12 @@
                                 "ja-JP": {
                                   "description": "開始時刻は、バックアップポリシーが実行される 2 時間の期間で、形式は HH:mm-HH:mm UTC time です。バックアップポリシーが無効な場合、値は `null` です。"
                                 }
-                              }
+                              },
+                              "example": "02:00-04:00"
                             },
                             "frequency": {
                               "type": "string",
                               "description": "The week days on which the backup is performed. The value is a comma-separated list of numbers from 1 to 7, where 1 represents Monday and 7 represents Sunday. When the backup policy is disabled, the value is `null`.",
-                              "example": "1,2,5",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份执行的星期几。该值为 1 到 7 之间的逗号分隔数字列表，其中 1 代表星期一，7 代表星期日。当备份策略被禁用时，该值为 `null`。"
@@ -2217,14 +2325,13 @@
                                 "ja-JP": {
                                   "description": "バックアップが実行される曜日。値は 1 から 7 までの数値をカンマ区切りで並べたリストで、1 は Monday、7 は Sunday を表します。バックアップポリシーが無効な場合、値は `null` です。"
                                 }
-                              }
+                              },
+                              "example": "1,2,5"
                             },
                             "retentionDays": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The number of days to retain the backup. When the backup policy is disabled, the value is `0`.",
-                              "minimum": 1,
-                              "maximum": 30,
-                              "example": 7,
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "备份保留的天数。当备份策略被禁用时，该值为 `0`。"
@@ -2232,76 +2339,79 @@
                                 "ja-JP": {
                                   "description": "バックアップを保持する日数。バックアップポリシーが無効な場合、値は `0` です。"
                                 }
-                              }
-                            },
-                            "crossRegionCopies": {
-                              "type": "array",
-                              "description": "The list of cross-region backup policies. Each entry in the list results in one copy of the permanent backup being created in the specified region.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "跨区域备份策略列表。列表中的每条记录都会在指定区域创建一个永久保留的备份副本。"
-                                },
-                                "ja-JP": {
-                                  "description": "クロスリージョンバックアップポリシーのリスト。リスト内の各エントリにより、永続バックアップのコピーが指定したリージョンに 1 つ作成されます。"
-                                }
                               },
+                              "example": 7
+                            },
+                            "crossRegionPolicies": {
+                              "type": "array",
+                              "description": "Cross-region backup policies of the cluster.",
                               "items": {
                                 "type": "object",
-                                "description": "Information about the cross-region backup policy.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "跨区域备份策略信息。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クロスリージョンバックアップポリシーに関する情報。"
-                                  }
-                                },
+                                "description": "Cross-region backup policy data of an instance.",
                                 "properties": {
                                   "regionId": {
                                     "type": "string",
-                                    "description": "The ID of the target cloud region to which the backup will be copied.",
-                                    "example": "aws-us-west-2",
+                                    "description": "Region ID of the cross-region backup policy.",
                                     "x-i18n": {
                                       "zh-CN": {
-                                        "description": "目标云区域 ID。",
-                                        "example": "ali-cn-hangzhou"
+                                        "description": "跨地域备份策略对应的地域 ID。"
                                       },
                                       "ja-JP": {
-                                        "description": "バックアップのコピー先となるターゲットクラウドリージョンの ID。"
+                                        "description": "クロスリージョンバックアップポリシーのリージョン ID。"
                                       }
                                     }
                                   },
                                   "retentionDays": {
                                     "type": "integer",
-                                    "description": "The number of days to retain the cross-region backup.",
-                                    "minimum": 1,
-                                    "maximum": 30,
-                                    "example": 7,
+                                    "format": "int32",
+                                    "description": "Number of days cross-region backups are retained.",
                                     "x-i18n": {
                                       "zh-CN": {
-                                        "description": "跨区域备份保留的天数。"
+                                        "description": "跨地域备份的保留天数。"
                                       },
                                       "ja-JP": {
-                                        "description": "クロスリージョンバックアップを保持する日数。"
+                                        "description": "クロスリージョンバックアップの保持日数。"
                                       }
                                     }
                                   },
                                   "region": {
                                     "type": "string",
-                                    "description": "The region code.",
+                                    "description": "Region name of the cross-region backup policy.",
                                     "x-i18n": {
                                       "zh-CN": {
-                                        "description": "区域代码。",
-                                        "example": "cn-hangzhou"
+                                        "description": "跨地域备份策略对应的地域名称。"
                                       },
                                       "ja-JP": {
-                                        "description": "リージョンコード。"
+                                        "description": "クロスリージョンバックアップポリシーのリージョン名。"
                                       }
-                                    },
-                                    "example": "us-west-2"
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "实例的跨地域备份策略数据。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "インスタンスのクロスリージョンバックアップポリシーデータ。"
                                   }
                                 }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的跨地域备份策略。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cluster のクロスリージョンバックアップポリシー。"
+                                }
                               }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，为指定集群的备份策略。"
+                            },
+                            "ja-JP": {
+                              "description": "指定したクラスターのバックアップポリシーを含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -2528,9 +2638,10 @@
                   },
                   "retentionDays": {
                     "type": "integer",
+                    "format": "int32",
                     "description": "The number of days to retain the backup.",
-                    "minimum": 1,
                     "maximum": 30,
+                    "minimum": 1,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "备份保留的天数。"
@@ -2557,30 +2668,13 @@
                   "crossRegionCopies": {
                     "type": "array",
                     "description": "The list of cross-region backup policies.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "跨区域备份策略列表。"
-                      },
-                      "ja-JP": {
-                        "description": "クロスリージョンバックアップポリシーの一覧。"
-                      }
-                    },
                     "items": {
                       "type": "object",
                       "description": "Information about the cross-region backup policy.",
-                      "x-i18n": {
-                        "zh-CN": {
-                          "description": "跨区域备份策略信息。"
-                        },
-                        "ja-JP": {
-                          "description": "クロスリージョンバックアップポリシーに関する情報。"
-                        }
-                      },
                       "properties": {
                         "regionId": {
                           "type": "string",
                           "description": "The ID of the target cloud region to which the backup will be copied. The region should be bound the to project to which the specified cluster belongs.",
-                          "example": "aws-us-west-2",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "目标云区域 ID。该区域应与指定集群所属项目绑定。",
@@ -2589,14 +2683,15 @@
                             "ja-JP": {
                               "description": "バックアップのコピー先となる対象クラウドリージョンの ID。このリージョンは、指定したクラスターが属するプロジェクトに関連付けられている必要があります。"
                             }
-                          }
+                          },
+                          "example": "aws-us-west-2"
                         },
                         "retentionDays": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "The number of days to retain the cross-region backup.",
-                          "minimum": 1,
                           "maximum": 30,
-                          "example": 7,
+                          "minimum": 1,
                           "x-i18n": {
                             "zh-CN": {
                               "description": "跨区域备份保留的天数。"
@@ -2604,8 +2699,25 @@
                             "ja-JP": {
                               "description": "クロスリージョンバックアップを保持する日数。"
                             }
-                          }
+                          },
+                          "example": 7
                         }
+                      },
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "跨区域备份策略信息。"
+                        },
+                        "ja-JP": {
+                          "description": "クロスリージョンバックアップポリシーに関する情報。"
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "跨区域备份策略列表。"
+                      },
+                      "ja-JP": {
+                        "description": "クロスリージョンバックアップポリシーの一覧。"
                       }
                     }
                   }
@@ -2696,6 +2808,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2951,9 +3064,10 @@
                   },
                   "cuSize": {
                     "type": "integer",
+                    "format": "int64",
                     "description": "The CU size allocated to the restored cluster.",
-                    "minimum": 1,
                     "maximum": 1024,
+                    "minimum": 1,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "恢复后的集群的 CU 大小。"
@@ -2992,6 +3106,20 @@
                       },
                       "ja-JP": {
                         "description": "復元後のクラスターに使用する Milvus バージョンを選択するポリシー。指定可能な値は次のとおりです: <ul><li><b>LATEST</b>: クラスターを利用可能な最新の互換性のある GA Milvus バージョンに復元します。</li><li><b>ORIGINAL</b>: クラスターを元の互換性のある Milvus バージョンに復元します。</li></ul>"
+                      }
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the restored cluster. At most 255 characters.",
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "恢复出的集群的描述，最长 255 个字符。"
+                      },
+                      "ja-JP": {
+                        "description": "復元された Cluster の説明。最大 255 文字。"
                       }
                     }
                   }
@@ -3035,6 +3163,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -3458,6 +3587,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {

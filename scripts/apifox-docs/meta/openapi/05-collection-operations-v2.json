@@ -1307,6 +1307,63 @@
                         ]
                       }
                     }
+                  },
+                  "6": {
+                    "summary": "External Collection from Another Cluster",
+                    "x-target-response": "OPTION 1",
+                    "x-include-target": [
+                      "zilliz"
+                    ],
+                    "value": {
+                      "code": 0,
+                      "data": {
+                        "aliases": [],
+                        "autoId": false,
+                        "collectionID": 448707763883002000,
+                        "collectionName": "test_collection",
+                        "consistencyLevel": "Bounded",
+                        "description": "",
+                        "enableDynamicField": true,
+                        "externalSource": "milvus://in01-xxxxxxxxxxxxxxx/default/orders",
+                        "externalSpec": "{\"format\":\"milvus-table\"}",
+                        "fields": [
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 100,
+                            "name": "id",
+                            "partitionKey": false,
+                            "primaryKey": true,
+                            "type": "Int64"
+                          },
+                          {
+                            "autoId": false,
+                            "description": "",
+                            "id": 101,
+                            "name": "vector",
+                            "params": [
+                              {
+                                "key": "dim",
+                                "value": "5"
+                              }
+                            ],
+                            "partitionKey": false,
+                            "primaryKey": false,
+                            "type": "FloatVector"
+                          }
+                        ],
+                        "indexes": [
+                          {
+                            "fieldName": "vector",
+                            "indexName": "vector",
+                            "metricType": "COSINE"
+                          }
+                        ],
+                        "load": "LoadStateLoaded",
+                        "partitionsNum": 1,
+                        "properties": []
+                      }
+                    }
                   }
                 }
               }
@@ -4198,7 +4255,7 @@
           },
           "ja-JP": {
             "summary": "外部コレクションを更新",
-            "description": "この操作は、既存の外部コレクションに対して非同期のデータ更新ジョブを開始し、基盤となる外部ソースからコレクションのデータを再同期します。`externalSource` と `externalSpec` は両方を指定するか、両方を省略する必要があります。両方を省略した場合は、コレクションに以前保存された source と spec が再利用されます。"
+            "description": "この操作は、既存の外部コレクションに対して非同期のデータ更新ジョブを開始し、基盤となる外部ソースからコレクションのデータを再同期します。`externalSource` と `externalSpec` は両方を指定するか、両方を省略する必要があります。両方を省略した場合は、コレクションに以前保存された source と spec の設定が再利用されます。"
           }
         },
         "tags": [
@@ -4561,13 +4618,13 @@
                             },
                             "state": {
                               "type": "string",
-                              "description": "Current state of the refresh job.",
+                              "description": "Current state of the refresh job. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`.",
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "刷新任务的当前状态。"
+                                  "description": "刷新任务的当前状态。任务状态从 `RefreshInProgress` 变为 `RefreshCompleted` 或 `RefreshFailed`。"
                                 },
                                 "ja-JP": {
-                                  "description": "リフレッシュジョブの現在の状態。"
+                                  "description": "リフレッシュジョブの現在の状態。ジョブは `RefreshInProgress` から `RefreshCompleted` または `RefreshFailed` に遷移します。"
                                 }
                               },
                               "enum": [
@@ -5005,13 +5062,13 @@
                                   },
                                   "state": {
                                     "type": "string",
-                                    "description": "Current state of the refresh job.",
+                                    "description": "Current state of the refresh job. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`.",
                                     "x-i18n": {
                                       "zh-CN": {
-                                        "description": "刷新任务的当前状态。"
+                                        "description": "刷新任务的当前状态。任务状态从 `RefreshInProgress` 变为 `RefreshCompleted` 或 `RefreshFailed`。"
                                       },
                                       "ja-JP": {
-                                        "description": "リフレッシュジョブの現在の状態。"
+                                        "description": "リフレッシュジョブの現在の状態。ジョブは `RefreshInProgress` から `RefreshCompleted` または `RefreshFailed` に遷移します。"
                                       }
                                     },
                                     "enum": [
@@ -5915,7 +5972,6 @@
                 "anyOf": [
                   {
                     "required": [
-                      "fieldName",
                       "collectionName"
                     ],
                     "properties": {
@@ -5948,6 +6004,36 @@
                             "description": "対象の Collection を含むデータベースの名前。リクエストを特定のデータベースに限定するために使用します。"
                           }
                         }
+                      },
+                      "fieldId": {
+                        "type": "integer",
+                        "description": "The ID of the field to drop from the collection.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要从 Collection 中删除的字段 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "Collection から削除するフィールドの ID。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "fieldName": {
+                        "type": "string",
+                        "description": "The name of the collection field to drop. The operation applies to this field.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要删除的 Collection 字段名称。该操作作用于该字段。"
+                          },
+                          "ja-JP": {
+                            "description": "削除する Collection フィールドの名前。操作はこのフィールドに適用されます。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
                       }
                     },
                     "x-added-at": "3.0.x",
@@ -5965,7 +6051,6 @@
                   },
                   {
                     "required": [
-                      "fieldId",
                       "collectionName"
                     ],
                     "properties": {
@@ -5998,6 +6083,36 @@
                             "description": "対象の Collection を含むデータベースの名前。リクエストを特定のデータベースに限定するために使用します。"
                           }
                         }
+                      },
+                      "fieldId": {
+                        "type": "integer",
+                        "description": "The ID of the field to drop from the collection.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要从 Collection 中删除的字段 ID。"
+                          },
+                          "ja-JP": {
+                            "description": "Collection から削除するフィールドの ID。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
+                      },
+                      "fieldName": {
+                        "type": "string",
+                        "description": "The name of the collection field to drop. The operation applies to this field.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "要删除的 Collection 字段名称。该操作作用于该字段。"
+                          },
+                          "ja-JP": {
+                            "description": "削除する Collection フィールドの名前。操作はこのフィールドに適用されます。"
+                          }
+                        },
+                        "x-added-at": "3.0.x",
+                        "x-last-modified": "3.0.x",
+                        "x-deprecated-since": null
                       }
                     },
                     "x-added-at": "3.0.x",
@@ -8072,13 +8187,13 @@
           },
           "externalSource": {
             "type": "string",
-            "description": "The external data source identifier (e.g., \"mysql\"). Required when creating an external collection.",
+            "description": "The external data source identifier. <include target=\"milvus\">An object url in an S3 bucket applies.</include><include target=\"zilliz\">On Zilliz Cloud, `externalSource` accepts two schemes: `volume://<volume_name>/<path>` and `milvus://<instance_id>/<db_name>/<collection_name>`. The `milvus://` scheme points to a collection on another cluster compatible with Milvus v3.0.x in the same project and region. The scheme must be lowercase, all three segments are required (including `default` as the database name), and a single trailing slash is tolerated.</include> Required when creating an external collection.",
             "x-i18n": {
               "zh-CN": {
-                "description": "外部数据源标识符（例如 \"mysql\"）。创建外部集合时必填。"
+                "description": "外部数据源标识符。<include target=\"milvus\">S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">在 Zilliz Cloud 上，`externalSource` 支持两种格式：`volume://<volume_name>/<path>` 与 `milvus://<instance_id>/<db_name>/<collection_name>`。`milvus://` 指向与目标集群同项目、同地域的另一集群（兼容 Milvus v3.0.x）上的集合。前缀必须小写；三段（实例/数据库/集合）缺一不可，数据库为 `default` 时也须写明；末尾允许多一个 `/`。</include> 创建外部集合时必填。"
               },
               "ja-JP": {
-                "description": "外部データソース識別子です（例: \"mysql\"）。external collection を作成する場合に必須です。"
+                "description": "外部データソース識別子です。<include target=\"milvus\">S3 bucket 内の object url を指定します。</include><include target=\"zilliz\">Zilliz Cloud では、`externalSource` は `volume://<volume_name>/<path>` と `milvus://<instance_id>/<db_name>/<collection_name>` の 2 つのスキームを受け付けます。`milvus://` スキームは、同じプロジェクトおよびリージョン内の別の Milvus v3.0.x 互換のクラスター上のコレクションを指します。スキームは小文字でなければならず、3 つのセグメント（データベース名としての `default` を含む）はすべて必須で、末尾に 1 つの `/` は許容されます。</include> external collection を作成する場合に必須です。"
               }
             },
             "x-added-at": "2.6.x",
@@ -8087,13 +8202,13 @@
           },
           "externalSpec": {
             "type": "string",
-            "description": "A JSON-encoded string describing the connection parameters for the external source. Required when creating an external collection.",
+            "description": "A JSON-encoded string describing the connection parameters for the external source. The `format` key accepts `parquet`, `vortex`, `lance-table`, `iceberg-table`, and `milvus-table`.<include target=\"milvus\"> Required when creating an external collection. For `milvus-table`, set `externalSource` to a Milvus snapshot metadata JSON path, for example `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`.</include><include target=\"zilliz\"> Optional when creating an external collection; for a `milvus://` source, omitting it defaults `format` to `milvus-table`.</include>",
             "x-i18n": {
               "zh-CN": {
-                "description": "描述外部数据源连接参数的 JSON 字符串。创建外部集合时必填。"
+                "description": "描述外部数据源连接参数的 JSON 字符串。`format` 键接受 `parquet`、`vortex`、`lance-table`、`iceberg-table` 与 `milvus-table`。<include target=\"milvus\">创建外部集合时必填。使用 `milvus-table` 时，请将 `externalSource` 指向 Milvus snapshot metadata JSON 路径，例如 `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`。</include><include target=\"zilliz\">创建外部集合时可省略；对于 `milvus://` 源，省略时 `format` 默认为 `milvus-table`。</include>"
               },
               "ja-JP": {
-                "description": "外部ソースの接続パラメータを記述する JSON エンコード文字列です。external collection を作成する場合に必須です。"
+                "description": "外部ソースの接続パラメータを記述する JSON エンコード文字列です。`format` キーは `parquet`、`vortex`、`lance-table`、`iceberg-table`、および `milvus-table` を受け付けます。<include target=\"milvus\">external collection の作成時に必須です。`milvus-table` を使用する場合は、`externalSource` に Milvus snapshot metadata JSON パス（例: `s3://bucket/snapshots/{collection_id}/metadata/{snapshot_id}.json`）を指定します。</include><include target=\"zilliz\">external collection の作成時には省略可能です。`milvus://` ソースの場合、省略すると `format` はデフォルトの `milvus-table` になります。</include>"
               }
             },
             "x-added-at": "2.6.x",
@@ -8117,6 +8232,53 @@
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
+          }
+        },
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      },
+      "CustomCollectionSchema": {
+        "type": "object",
+        "description": "The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "Schema 决定了 Collection 中数据的组织方式。一个有效的 Schema 应包含多个字段，其中必须包含主键字段、向量字段以及多个标量字段。"
+          },
+          "ja-JP": {
+            "description": "schema は対象コレクション内のデータを整理する役割を担います。有効な schema には複数のフィールドが必要であり、primary key、vector field、および複数の scalar field を含める必要があります。"
+          }
+        },
+        "properties": {
+          "autoID": {
+            "$ref": "#/components/schemas/CollectionSchema/properties/autoID"
+          },
+          "enableDynamicField": {
+            "$ref": "#/components/schemas/CollectionSchema/properties/enableDynamicField"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CustomFieldSchema"
+            },
+            "description": "A list of field objects.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "字段列表。"
+              },
+              "ja-JP": {
+                "description": "フィールドオブジェクトのリスト。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "functions": {
+            "$ref": "#/components/schemas/CollectionSchema/properties/functions"
+          },
+          "structFields": {
+            "$ref": "#/components/schemas/CollectionSchema/properties/structFields"
           }
         },
         "x-added-at": "2.6.x",
@@ -8167,9 +8329,9 @@
                 "description": "schema は対象コレクション内のデータを整理する役割を担います。有効な schema には複数のフィールドが必要であり、primary key、vector field、および複数の scalar field を含める必要があります。このパラメーターを設定すると、`dimension`、`idType`、`autoID`、`primaryFieldName`、`vectorFieldName` は無視されます。"
               }
             },
-            "allOf": [
+            "oneOf": [
               {
-                "$ref": "#/components/schemas/CollectionSchema"
+                "$ref": "#/components/schemas/CustomCollectionSchema"
               }
             ],
             "x-added-at": "2.6.x",
@@ -8255,6 +8417,36 @@
                 "description": "キーと値のペアで指定する Collection の追加プロパティ。"
               }
             }
+          },
+          "externalSource": {
+            "type": "string",
+            "description": "Top-level external source configuration for the collection. A top-level value here is accepted only for explicit rejection; to create an external collection, provide the JSON-encoded external source configuration through `schema.externalSource` or `schema.externalSpec` instead.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集合的顶层外部源配置。此处的顶层值仅用于显式拒绝；要创建外部集合，请改为通过 `schema.externalSource` 或 `schema.externalSpec` 提供 JSON 编码的外部源配置。"
+              },
+              "ja-JP": {
+                "description": "コレクションのトップレベル外部ソース設定。ここでのトップレベル値は明示的な拒否にのみ受け付けられます。外部コレクションを作成するには、代わりに `schema.externalSource` または `schema.externalSpec` を介して JSON エンコードされた外部ソース設定を指定してください。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "externalSpec": {
+            "type": "string",
+            "description": "A JSON-encoded string describing the external specification when creating an external collection, including connection parameters and details such as the source data format and field mapping. Its content varies depending on the connector type and the source data format.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "一个 JSON 编码字符串，用于描述创建外部 Collection 时的外部规范，包括连接参数以及源数据格式和字段映射等详细信息。其内容取决于连接器类型和源数据格式。"
+              },
+              "ja-JP": {
+                "description": "外部 Collection を作成する際の外部仕様を記述する JSON エンコードされた文字列。接続パラメータや、ソースデータ形式、フィールドマッピングなどの詳細を含みます。その内容はコネクタタイプとソースデータ形式によって異なります。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
         "x-added-at": "2.6.x",
@@ -8308,23 +8500,22 @@
             "x-deprecated-since": null
           },
           "schema": {
-            "description": "The schema for an external collection. Must include fields with externalField mappings, plus externalSource and externalSpec.",
+            "description": "The schema for an external collection. Must include fields with externalField mappings, plus externalSource.<include target=\"milvus\"> `externalSpec` is required when creating an external collection.</include><include target=\"zilliz\"> `externalSpec` is optional; for a `milvus://` source, omitting it defaults `format` to `milvus-table`.</include>",
             "x-i18n": {
               "zh-CN": {
-                "description": "外部集合的 Schema。必须包含带有 externalField 映射的字段，以及 externalSource 和 externalSpec。"
+                "description": "外部集合的 Schema。必须包含带有 externalField 映射的字段以及 externalSource。<include target=\"milvus\">创建外部集合时必须包含 `externalSpec`。</include><include target=\"zilliz\">`externalSpec` 可省略；对于 `milvus://` 源，省略时 `format` 默认为 `milvus-table`。</include>"
               },
               "ja-JP": {
-                "description": "external collection 用のスキーマです。externalField マッピングを持つフィールドに加えて、externalSource と externalSpec を含める必要があります。"
+                "description": "external collection 用のスキーマです。externalField マッピングを持つフィールドに加えて、externalSource を含める必要があります。<include target=\"milvus\">external collection の作成時には `externalSpec` が必須です。</include><include target=\"zilliz\">`externalSpec` は省略可能です。`milvus://` ソースの場合、省略すると `format` はデフォルトの `milvus-table` になります。</include>"
               }
             },
-            "allOf": [
+            "oneOf": [
               {
-                "$ref": "#/components/schemas/CollectionSchema"
+                "$ref": "#/components/schemas/CollectionSchema",
+                "required": [
+                  "externalSource"
+                ]
               }
-            ],
-            "required": [
-              "externalSource",
-              "externalSpec"
             ],
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
@@ -8409,6 +8600,36 @@
                 "description": "Collection に適用する追加のプロパティ。"
               }
             }
+          },
+          "externalSource": {
+            "type": "string",
+            "description": "Top-level external source configuration for the collection. A top-level value here is accepted only for explicit rejection; to create an external collection, provide the JSON-encoded external source configuration through `schema.externalSource` or `schema.externalSpec` instead.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "集合的顶层外部源配置。此处的顶层值仅用于显式拒绝；要创建外部集合，请改为通过 `schema.externalSource` 或 `schema.externalSpec` 提供 JSON 编码的外部源配置。"
+              },
+              "ja-JP": {
+                "description": "コレクションのトップレベル外部ソース設定。ここでのトップレベル値は明示的な拒否にのみ受け付けられます。外部コレクションを作成するには、代わりに `schema.externalSource` または `schema.externalSpec` を介して JSON エンコードされた外部ソース設定を指定してください。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
+          },
+          "externalSpec": {
+            "type": "string",
+            "description": "A JSON-encoded string describing the external specification when creating an external collection, including connection parameters and details such as the source data format and field mapping. Its content varies depending on the connector type and the source data format.",
+            "x-i18n": {
+              "zh-CN": {
+                "description": "一个 JSON 编码字符串，用于描述创建外部 Collection 时的外部规范，包括连接参数以及源数据格式和字段映射等详细信息。其内容取决于连接器类型和源数据格式。"
+              },
+              "ja-JP": {
+                "description": "外部 Collection を作成する際の外部仕様を記述する JSON エンコードされた文字列。接続パラメータや、ソースデータ形式、フィールドマッピングなどの詳細を含みます。その内容はコネクタタイプとソースデータ形式によって異なります。"
+              }
+            },
+            "x-added-at": "2.6.x",
+            "x-last-modified": "2.6.x",
+            "x-deprecated-since": null
           }
         },
         "x-added-at": "2.6.x",
@@ -10137,6 +10358,54 @@
         "x-last-modified": "2.6.x",
         "x-deprecated-since": null
       },
+      "CustomFieldSchema": {
+        "type": "object",
+        "description": "A field schema object.",
+        "x-i18n": {
+          "zh-CN": {
+            "description": "一个字段 Schema 对象。"
+          },
+          "ja-JP": {
+            "description": "フィールド schema オブジェクト。"
+          }
+        },
+        "properties": {
+          "fieldName": {
+            "$ref": "#/components/schemas/FieldSchema/properties/fieldName"
+          },
+          "dataType": {
+            "$ref": "#/components/schemas/FieldSchema/properties/dataType"
+          },
+          "elementDataType": {
+            "$ref": "#/components/schemas/FieldSchema/properties/elementDataType"
+          },
+          "nullable": {
+            "$ref": "#/components/schemas/FieldSchema/properties/nullable"
+          },
+          "defaultValue": {
+            "$ref": "#/components/schemas/FieldSchema/properties/defaultValue"
+          },
+          "isPrimary": {
+            "$ref": "#/components/schemas/FieldSchema/properties/isPrimary"
+          },
+          "isPartitionKey": {
+            "$ref": "#/components/schemas/FieldSchema/properties/isPartitionKey"
+          },
+          "isClusteringKey": {
+            "$ref": "#/components/schemas/FieldSchema/properties/isClusteringKey"
+          },
+          "elementTypeParams": {
+            "$ref": "#/components/schemas/FieldSchema/properties/elementTypeParams"
+          }
+        },
+        "required": [
+          "fieldName",
+          "dataType"
+        ],
+        "x-added-at": "2.6.x",
+        "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      },
       "FieldDetails": {
         "type": "object",
         "description": "A field object.",
@@ -10919,13 +11188,13 @@
           },
           "externalSource": {
             "type": "string",
-            "description": "JSON-encoded specification of the external data source. When provided, `externalSpec` must also be provided. When omitted, the collection's persisted source is reused. <include target=\"milvus\">An object url in an S3 bucket applies.</include><include target=\"zilliz\">An object url in a Zilliz Cloud volume applies.</include><br/>This parameters applies only to Iceberg tables.",
+            "description": "JSON-encoded specification of the external data source.<include target=\"milvus\"> When provided, `externalSpec` must also be provided. When omitted, the collection's persisted source is reused. An object url in an S3 bucket applies.</include><include target=\"zilliz\"> For a `volume://` source, `externalSource` and `externalSpec` must be both provided or both omitted; when both are omitted, the collection's previously persisted source configuration is reused. An object url in a Zilliz Cloud volume applies.</include>",
             "x-i18n": {
               "zh-CN": {
-                "description": "外部数据源的 JSON 配置。提供该字段时必须同时提供 `externalSpec`；省略时将复用 Collection 此前已持久化的 source 配置。<include target=\"milvus\">S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">Zilliz Cloud Volume 中的对象 URL 适用。</include><br/>此参数仅适用于 Iceberg 表。"
+                "description": "外部数据源的 JSON 配置。<include target=\"milvus\">提供该字段时必须同时提供 `externalSpec`；省略时将复用 Collection 此前已持久化的 source 配置。S3 存储桶中的对象 URL 适用。</include><include target=\"zilliz\">对于 `volume://` 卷源，`externalSource` 与 `externalSpec` 需同时提供或同时省略，省略时将复用 Collection 此前已持久化的 source 配置。Zilliz Cloud Volume 中的对象 URL 适用。</include>"
               },
               "ja-JP": {
-                "description": "外部データソースの JSON エンコードされた仕様。指定する場合は、`externalSpec` も指定する必要があります。省略した場合は、コレクションに保存されている source が再利用されます。<include target=\"milvus\">S3 bucket 内の object url を指定します。</include><include target=\"zilliz\">Zilliz Cloud volume 内の object url を指定します。</include><br/>このパラメータは Iceberg tables にのみ適用されます。"
+                "description": "外部データソースの JSON エンコードされた仕様。<include target=\"milvus\">指定する場合は、`externalSpec` も指定する必要があります。省略した場合は、コレクションに保存されている source が再利用されます。S3 bucket 内の object url を指定します。</include><include target=\"zilliz\">`volume://` ボリュームソースの場合、`externalSource` と `externalSpec` は両方を指定するか、両方を省略する必要があり、省略した場合はコレクションに以前保存された source 設定が再利用されます。Zilliz Cloud volume 内の object url を指定します。</include>"
               }
             },
             "x-added-at": "2.6.x",
@@ -10934,13 +11203,13 @@
           },
           "externalSpec": {
             "type": "string",
-            "description": "JSON-encoded specification describing how the external data maps to the collection. When provided, `externalSource` must also be provided. When omitted, the collection's persisted spec is reused.<br/>This parameters applies only to Iceberg tables.",
+            "description": "JSON-encoded specification describing how the external data maps to the collection.<include target=\"milvus\"> When provided, `externalSource` must also be provided. When omitted, the collection's persisted spec is reused.</include><include target=\"zilliz\"> For a `milvus://` source, `format` must be `milvus-table` (or omitted). For a `volume://` source, provide `externalSpec` together with `externalSource`, or omit both.</include>",
             "x-i18n": {
               "zh-CN": {
-                "description": "描述外部数据与 Collection 字段映射关系的 JSON 配置。提供该字段时必须同时提供 `externalSource`；省略时将复用 Collection 此前已持久化的 spec 配置。<br/>此参数仅适用于 Iceberg 表。"
+                "description": "描述外部数据与 Collection 字段映射关系的 JSON 配置。<include target=\"milvus\">提供该字段时必须同时提供 `externalSource`；省略时将复用 Collection 此前已持久化的 spec 配置。</include><include target=\"zilliz\">对于 `milvus://` 源，`format` 必须为 `milvus-table`（或省略）；对于 `volume://` 卷源，`externalSpec` 需与 `externalSource` 同时提供或同时省略。</include>"
               },
               "ja-JP": {
-                "description": "外部データがコレクションにどのようにマッピングされるかを記述する、JSON エンコードされた仕様。指定する場合は、`externalSource` も指定する必要があります。省略した場合は、コレクションに保存されている spec が再利用されます。<br/>このパラメータは Iceberg tables にのみ適用されます。"
+                "description": "外部データがコレクションにどのようにマッピングされるかを記述する、JSON エンコードされた仕様。<include target=\"milvus\">指定する場合は、`externalSource` も指定する必要があります。省略した場合は、コレクションに保存されている spec が再利用されます。</include><include target=\"zilliz\">`milvus://` ソースの場合、`format` は `milvus-table`（または省略）である必要があります。`volume://` ボリュームソースの場合、`externalSpec` は `externalSource` とともに指定するか、両方を省略します。</include>"
               }
             },
             "x-added-at": "2.6.x",

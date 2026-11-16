@@ -78,6 +78,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -365,6 +366,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -377,8 +379,10 @@
                         },
                         "data": {
                           "type": "array",
+                          "description": "Response payload.",
                           "items": {
                             "type": "object",
+                            "description": "List of applicable cloud regions.",
                             "properties": {
                               "cloudId": {
                                 "type": "string",
@@ -415,9 +419,32 @@
                                     "description": "コントロールプレーン上の V2 API server のベースURL。"
                                   }
                                 }
+                              },
+                              "supportedClusterTypes": {
+                                "type": "array",
+                                "description": "Cluster types supported by the region. Possible values are free, serverless, and dedicated; an empty list means no cluster type is currently available in the region.",
+                                "items": {
+                                  "type": "string",
+                                  "description": "A cluster type supported in the region. Each value identifies one cluster type available in that region.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "该地域支持的一种集群类型。每个值标识该地域中可用的一种集群类型。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "リージョンでサポートされているクラスタタイプ。各値は、そのリージョンで利用可能な1つのクラスタタイプを識別します。"
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "该地域支持的集群类型，可能值为 free、serverless 和 dedicated；空列表表示该地域当前没有可用的集群类型。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "リージョンでサポートされているクラスタタイプ。有効な値は free、serverless、dedicated です。空のリストは、そのリージョンで現在利用可能なクラスタタイプがないことを意味します。"
+                                  }
+                                }
                               }
                             },
-                            "description": "List of applicable cloud regions.",
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "可用云地域列表。"
@@ -427,7 +454,6 @@
                               }
                             }
                           },
-                          "description": "Response payload.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载。"

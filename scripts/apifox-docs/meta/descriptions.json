@@ -423,14 +423,14 @@
     }
   },
   {
-    "name": "spark-job-v2",
-    "description": "This set of APIs provides a way to create, list, describe, validate, and cancel Spark batch jobs in Zilliz Cloud.",
+    "name": "batch-job-v2",
+    "description": "This set of APIs provides a way to create, list, describe, validate, and cancel batch jobs in Zilliz Cloud.",
     "x-i18n": {
       "zh-CN": {
-        "description": "本系列 API 提供了在 Zilliz Cloud 中创建、列出、查看、校验和取消 Spark 批处理任务的相关接口。"
+        "description": "本系列 API 提供了在 Zilliz Cloud 中创建、列出、查看、校验和取消批量任务的相关接口。"
       },
       "ja-JP": {
-        "description": "この一連の API は、Zilliz Cloud で Spark バッチジョブを作成、一覧表示、詳細表示、検証、キャンセルする方法を提供します。"
+        "description": "この一連の API は、Zilliz Cloud でバッチジョブを作成、一覧表示、詳細表示、検証、キャンセルする方法を提供します。"
       }
     }
   },
