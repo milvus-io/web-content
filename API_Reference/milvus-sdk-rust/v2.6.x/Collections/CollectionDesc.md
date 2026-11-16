@@ -50,7 +50,7 @@ pub struct CollectionDesc
 
 - `schema: CollectionSchema`
 
-    The collection schema.
+    The collection schema. See [CollectionSchema](CollectionSchema.md).
 
 - `collection_id: i64`
 

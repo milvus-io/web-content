@@ -35,9 +35,9 @@ let request = CreateCollectionRequest::builder()
 
 - `schema: Option<CollectionSchema>`
 
-    The collection schema, including its fields. Must contain exactly one primary-key field. Required.
+    The collection schema, including its fields. Must contain exactly one primary-key field. Required. See [CollectionSchema](CollectionSchema.md).
 
-    Struct fields are configured with `StructFieldSchema`; use `type_param()` for struct-level parameters such as `mmap.enabled` and `warmup`.
+    Struct fields are configured with [StructFieldSchema](StructFieldSchema.md); use `type_param()` for struct-level parameters such as `mmap.enabled` and `warmup`.
 
 - `num_partitions: i64`
 
