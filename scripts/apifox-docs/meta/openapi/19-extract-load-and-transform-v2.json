@@ -22,7 +22,7 @@
     "/v2/etl/merge": {
       "post": {
         "summary": "Merge Data",
-        "deprecated": false,
+        "deprecated": true,
         "description": "You can use this interface to add fields with or without data to an existing collection.<div style=\"padding: 8px;\"><ul style=\"margin-bottom: 0px;\"><li>If you choose to add fields with data, you need to upload the data file to an AWS S3 bucket or a Zilliz Cloud Volume and ensure that the data share the same merge key as the source collection. The merged data will be stored in a new collection that you specify.</li><li>If you choose to add without data, the new fields will be created with null values.</li></ul></div>You need to be a project admin or above to perform this operation. For details, refer to <a href=\"/docs/merge-data\">Merge Data</a>.<br/>",
         "x-i18n": {
           "zh-CN": {
@@ -133,14 +133,6 @@
                       "dataSource": {
                         "type": "object",
                         "description": "The data to be merged with the above specified collection. You need to upload the data file in PARQUET format to an AWS S3 bucket or a Zilliz Cloud Volume as the data source and then provide the URL of the data file optionally with the access credentials.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "待与指定 Collection 合并的数据。您需要将 PARQUET 格式的数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume 作为数据源，并提供数据文件的 URL 及访问凭据（如有）。"
-                          },
-                          "ja-JP": {
-                            "description": "上記で指定した collection とマージするデータ。データソースとして、PARQUET 形式のデータファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、その後、必要に応じてアクセス認証情報とともにデータファイルの URL を指定する必要があります。"
-                          }
-                        },
                         "properties": {
                           "type": {
                             "type": "string",
@@ -154,6 +146,19 @@
                               }
                             },
                             "example": "volume"
+                          },
+                          "stageName": {
+                            "type": "string",
+                            "deprecated": true,
+                            "description": "Name of the stage to read from. Deprecated, use volumeName instead.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "读取数据的 Stage 名称，已废弃，请改用 volumeName。"
+                              },
+                              "ja-JP": {
+                                "description": "読み取り元の stage 名。非推奨。代わりに volumeName を使用してください。"
+                              }
+                            }
                           },
                           "volumeName": {
                             "type": "string",
@@ -179,6 +184,76 @@
                               }
                             },
                             "example": "path/to/your/data.parquet"
+                          },
+                          "region": {
+                            "type": "string",
+                            "description": "Region of the data source.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "数据来源所在地域。"
+                              },
+                              "ja-JP": {
+                                "description": "データソースのリージョン。"
+                              }
+                            }
+                          },
+                          "credential": {
+                            "type": "object",
+                            "description": "Credentials used to access the data source.",
+                            "properties": {
+                              "accessKey": {
+                                "type": "string",
+                                "description": "Access key of the data source.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "数据来源的 Access Key。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "データソースのアクセスキー。"
+                                  }
+                                }
+                              },
+                              "secretKey": {
+                                "type": "string",
+                                "description": "Secret key of the data source.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "数据来源的 Secret Key。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "データソースのシークレットキー。"
+                                  }
+                                }
+                              },
+                              "sessionToken": {
+                                "type": "string",
+                                "description": "Session token of the data source.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "数据来源的会话令牌。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "データソースのセッショントークン。"
+                                  }
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "访问数据来源的凭证。"
+                              },
+                              "ja-JP": {
+                                "description": "データソースへのアクセスに使用する認証情報。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待与指定 Collection 合并的数据。您需要将 PARQUET 格式的数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume 作为数据源，并提供数据文件的 URL 及访问凭据（如有）。"
+                          },
+                          "ja-JP": {
+                            "description": "上記で指定した collection とマージするデータ。データソースとして、PARQUET 形式のデータファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、その後、必要に応じてアクセス認証情報とともにデータファイルの URL を指定する必要があります。"
                           }
                         }
                       },
@@ -197,25 +272,9 @@
                       "newFields": {
                         "type": "array",
                         "description": "The schema of the fields to create in the new collection. The schema should be an array of field schemas.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "待创建 Collection 的各字段数据结构。该参数的值应该为字段数据结构数组。"
-                          },
-                          "ja-JP": {
-                            "description": "新しい collection に作成する field の schema。schema は field schema の配列である必要があります。"
-                          }
-                        },
                         "items": {
                           "type": "object",
                           "description": "The schema of a field to add.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "一个待添加字段的数据结构。"
-                            },
-                            "ja-JP": {
-                              "description": "追加する field の schema。"
-                            }
-                          },
                           "properties": {
                             "fieldName": {
                               "type": "string",
@@ -232,14 +291,6 @@
                             "dataType": {
                               "type": "string",
                               "description": "Data type of the current field to add.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "待添加字段的数据类型。"
-                                },
-                                "ja-JP": {
-                                  "description": "追加する現在の field のデータ型。"
-                                }
-                              },
                               "enum": [
                                 "VARCHAR",
                                 "INT8",
@@ -249,22 +300,23 @@
                                 "FLOAT",
                                 "DOUBLE",
                                 "BOOL"
-                              ]
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "待添加字段的数据类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field のデータ型。"
+                                }
+                              }
                             },
                             "params": {
                               "type": "object",
                               "description": "Extra settings for the current field to add.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "待添加字段的详细设置。"
-                                },
-                                "ja-JP": {
-                                  "description": "追加する現在の field の追加設定。"
-                                }
-                              },
                               "properties": {
                                 "maxLength": {
                                   "type": "integer",
+                                  "format": "int32",
                                   "description": "The maximum length of a VARCHAR field value. This parameter is applicable only when `dataType` is set to `VARCHAR`.",
                                   "x-i18n": {
                                     "zh-CN": {
@@ -274,9 +326,69 @@
                                       "description": "VARCHAR field 値の最大長。このパラメータは、`dataType` が `VARCHAR` に設定されている場合にのみ適用されます。"
                                     }
                                   }
+                                },
+                                "elementType": {
+                                  "type": "string",
+                                  "description": "Element type of the field.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "字段的元素类型。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "フィールドの要素型。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "待添加字段的详细设置。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field の追加設定。"
                                 }
                               }
                             }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "一个待添加字段的数据结构。"
+                            },
+                            "ja-JP": {
+                              "description": "追加する field の schema。"
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待创建 Collection 的各字段数据结构。该参数的值应该为字段数据结构数组。"
+                          },
+                          "ja-JP": {
+                            "description": "新しい collection に作成する field の schema。schema は field schema の配列である必要があります。"
+                          }
+                        }
+                      },
+                      "onError": {
+                        "type": "string",
+                        "description": "Behavior when a record fails to merge. Defaults to \"CONTINUE\".",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "记录合并失败时的处理方式，默认为 \"CONTINUE\"。"
+                          },
+                          "ja-JP": {
+                            "description": "レコードのマージに失敗した場合の動作。デフォルトは \"CONTINUE\" です。"
+                          }
+                        }
+                      },
+                      "validationMode": {
+                        "type": "string",
+                        "description": "Validation mode of the merge.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "合并的校验模式。"
+                          },
+                          "ja-JP": {
+                            "description": "マージの検証モード。"
                           }
                         }
                       }
@@ -366,14 +478,6 @@
                       "dataSource": {
                         "type": "object",
                         "description": "The data to be merged with the above specified collection. You need to upload the data file in PARQUET format to an AWS S3 bucket or a Zilliz Cloud Volume as the data source and then provide the URL of the data file optionally with the access credentials.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "待与指定 Collection 合并的数据。您需要将 PARQUET 格式的数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume 作为数据源，并提供数据文件的 URL 及访问凭据（如有）。"
-                          },
-                          "ja-JP": {
-                            "description": "上記で指定した collection とマージするデータ。データソースとして、PARQUET 形式のデータファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、その後、必要に応じてアクセス認証情報とともにデータファイルの URL を指定する必要があります。"
-                          }
-                        },
                         "properties": {
                           "type": {
                             "type": "string",
@@ -384,6 +488,31 @@
                               },
                               "ja-JP": {
                                 "description": "データソースの種類。AWS S3 bucket を使用する場合は、これを `s3` に設定します"
+                              }
+                            }
+                          },
+                          "stageName": {
+                            "type": "string",
+                            "deprecated": true,
+                            "description": "Name of the stage to read from. Deprecated, use volumeName instead.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "读取数据的 Stage 名称，已废弃，请改用 volumeName。"
+                              },
+                              "ja-JP": {
+                                "description": "読み取り元のStageの名前。非推奨。代わりにvolumeNameを使用してください。"
+                              }
+                            }
+                          },
+                          "volumeName": {
+                            "type": "string",
+                            "description": "Name of the Volume to read from.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "读取数据的 Volume 名称。"
+                              },
+                              "ja-JP": {
+                                "description": "読み取り元のVolumeの名前。"
                               }
                             }
                           },
@@ -399,17 +528,21 @@
                               }
                             }
                           },
+                          "region": {
+                            "type": "string",
+                            "description": "Region of the data source.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "数据来源所在地域。"
+                              },
+                              "ja-JP": {
+                                "description": "データソースのリージョン。"
+                              }
+                            }
+                          },
                           "credential": {
                             "type": "object",
                             "description": "The credentials to access the bucket that holds the PARQUET file. This parameter applies only when you set `type` to `s3`.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "存放待合并数据文件的存储桶的访问凭据。此参数仅当您将 `type` 设置为 `oss` 时有效。"
-                              },
-                              "ja-JP": {
-                                "description": "PARQUET ファイルを保持する bucket にアクセスするための認証情報。このパラメータは、`type` を `s3` に設定した場合にのみ適用されます。"
-                              }
-                            },
                             "properties": {
                               "accessKey": {
                                 "type": "string",
@@ -434,8 +567,36 @@
                                     "description": "PARQUET ファイルを保持する bucket の secret key。"
                                   }
                                 }
+                              },
+                              "sessionToken": {
+                                "type": "string",
+                                "description": "Session token of the data source.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "数据来源的会话令牌。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "データソースのセッショントークン。"
+                                  }
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "存放待合并数据文件的存储桶的访问凭据。此参数仅当您将 `type` 设置为 `oss` 时有效。"
+                              },
+                              "ja-JP": {
+                                "description": "PARQUET ファイルを保持する bucket にアクセスするための認証情報。このパラメータは、`type` を `s3` に設定した場合にのみ適用されます。"
                               }
                             }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待与指定 Collection 合并的数据。您需要将 PARQUET 格式的数据文件上传到阿里云 OSS 存储桶或 Zilliz Cloud Volume 作为数据源，并提供数据文件的 URL 及访问凭据（如有）。"
+                          },
+                          "ja-JP": {
+                            "description": "上記で指定した collection とマージするデータ。データソースとして、PARQUET 形式のデータファイルを AWS S3 bucket または Zilliz Cloud Volume にアップロードし、その後、必要に応じてアクセス認証情報とともにデータファイルの URL を指定する必要があります。"
                           }
                         }
                       },
@@ -454,25 +615,9 @@
                       "newFields": {
                         "type": "array",
                         "description": "The schema of the fields to add to the existing collection. The schema should be an array of field schemas.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "待添加字段的 Schema。该参数应为一个字段 Schema 的数组。"
-                          },
-                          "ja-JP": {
-                            "description": "既存の collection に追加する field の schema。schema は field schema の配列である必要があります。"
-                          }
-                        },
                         "items": {
                           "type": "object",
                           "description": "The schema of a field to add.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "一个待添加字段的 Schema。"
-                            },
-                            "ja-JP": {
-                              "description": "追加する field の schema。"
-                            }
-                          },
                           "properties": {
                             "fieldName": {
                               "type": "string",
@@ -489,14 +634,6 @@
                             "dataType": {
                               "type": "string",
                               "description": "Data type of the current field to add.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "待添加字段的数据类型。"
-                                },
-                                "ja-JP": {
-                                  "description": "追加する現在の field のデータ型。"
-                                }
-                              },
                               "enum": [
                                 "VARCHAR",
                                 "INT8",
@@ -506,22 +643,23 @@
                                 "FLOAT",
                                 "DOUBLE",
                                 "BOOL"
-                              ]
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "待添加字段的数据类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field のデータ型。"
+                                }
+                              }
                             },
                             "params": {
                               "type": "object",
                               "description": "Extra settings for the current field to add.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "待添加字段的详细设置。"
-                                },
-                                "ja-JP": {
-                                  "description": "追加する現在の field の追加設定。"
-                                }
-                              },
                               "properties": {
                                 "maxLength": {
                                   "type": "integer",
+                                  "format": "int32",
                                   "description": "The maximum length of a VARCHAR field value. This parameter is applicable only when `dataType` is set to `VARCHAR`.",
                                   "x-i18n": {
                                     "zh-CN": {
@@ -531,9 +669,69 @@
                                       "description": "VARCHAR field 値の最大長。このパラメータは、`dataType` が `VARCHAR` に設定されている場合にのみ適用されます。"
                                     }
                                   }
+                                },
+                                "elementType": {
+                                  "type": "string",
+                                  "description": "Element type of the field.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "字段的元素类型。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "フィールドの要素型。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "待添加字段的详细设置。"
+                                },
+                                "ja-JP": {
+                                  "description": "追加する現在の field の追加設定。"
                                 }
                               }
                             }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "一个待添加字段的 Schema。"
+                            },
+                            "ja-JP": {
+                              "description": "追加する field の schema。"
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "待添加字段的 Schema。该参数应为一个字段 Schema 的数组。"
+                          },
+                          "ja-JP": {
+                            "description": "既存の collection に追加する field の schema。schema は field schema の配列である必要があります。"
+                          }
+                        }
+                      },
+                      "onError": {
+                        "type": "string",
+                        "description": "Behavior when a record fails to merge. Defaults to \"CONTINUE\".",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "记录合并失败时的处理方式，默认为 \"CONTINUE\"。"
+                          },
+                          "ja-JP": {
+                            "description": "レコードのマージに失敗した場合の動作。デフォルトは \"CONTINUE\" です。"
+                          }
+                        }
+                      },
+                      "validationMode": {
+                        "type": "string",
+                        "description": "Validation mode of the merge.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "合并的校验模式。"
+                          },
+                          "ja-JP": {
+                            "description": "マージの検証モード。"
                           }
                         }
                       }
@@ -677,6 +875,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -686,44 +886,31 @@
                               "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer",
                           "example": 0
                         },
                         "data": {
-                          "type": "array",
+                          "type": "object",
                           "description": "Response payload which carries the IDs of the created data-merge jobs.",
+                          "properties": {
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the asynchronous Spark merge job.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "异步 Spark 合并任务 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "非同期 Spark マージジョブの ID。"
+                                }
+                              }
+                            }
+                          },
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，包含了当前操作创建的数据合并任务的 ID。"
                             },
                             "ja-JP": {
                               "description": "作成された data-merge job の ID を含むレスポンス payload。"
-                            }
-                          },
-                          "items": {
-                            "type": "object",
-                            "description": "A created data-merge job.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "一个已创建的数据合并任务。"
-                              },
-                              "ja-JP": {
-                                "description": "作成された data-merge job。"
-                              }
-                            },
-                            "properties": {
-                              "jobId": {
-                                "type": "string",
-                                "description": "The ID of the current data-merge job.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "当前创建的数据合并任务 ID。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "現在の data-merge job の ID。"
-                                  }
-                                }
-                              }
                             }
                           }
                         }

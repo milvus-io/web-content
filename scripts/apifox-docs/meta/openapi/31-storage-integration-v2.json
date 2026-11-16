@@ -146,6 +146,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -158,8 +159,151 @@
                           "example": 0
                         },
                         "data": {
-                          "$ref": "#/components/schemas/ListStorageIntegrationsData",
+                          "type": "object",
                           "description": "Returns the list of storage integrations.",
+                          "properties": {
+                            "storageIntegrations": {
+                              "type": "array",
+                              "description": "The current page of storage integration summaries.",
+                              "items": {
+                                "type": "object",
+                                "description": "Summary of a storage integration.",
+                                "properties": {
+                                  "integrationId": {
+                                    "type": "string",
+                                    "description": "The ID of the storage integration.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Storage Integration ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ストレージ統合の ID。"
+                                      }
+                                    }
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the storage integration.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Storage Integration 名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ストレージ統合の名前。"
+                                      }
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "The public status of the storage integration.",
+                                    "enum": [
+                                      "ACTIVE",
+                                      "ERROR"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Storage Integration 的公开状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ストレージ統合の公開ステータス。"
+                                      }
+                                    }
+                                  },
+                                  "message": {
+                                    "type": "string",
+                                    "description": "The status message. This field is empty when there is no message.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "状态信息。没有状态信息时为空字符串。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "ステータスメッセージ。メッセージがない場合、このフィールドは空です。"
+                                      }
+                                    }
+                                  },
+                                  "regionId": {
+                                    "type": "string",
+                                    "description": "The ID of the region.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "地域 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "リージョンの ID。"
+                                      }
+                                    }
+                                  },
+                                  "bucketName": {
+                                    "type": "string",
+                                    "description": "The bucket, container, or storage name.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Bucket、容器或存储名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "バケット、コンテナ、またはストレージの名前。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "存储集成的概要信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "ストレージ統合のサマリー。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页的 Storage Integration 概览。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合サマリーの現在のページ。"
+                                }
+                              }
+                            },
+                            "count": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "The total number of visible storage integrations after filtering.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "过滤后的可见 Storage Integration 总数。"
+                                },
+                                "ja-JP": {
+                                  "description": "フィルタリング後に表示されるストレージ統合の総数。"
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "The current page number.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "The page size.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "ページサイズ。"
+                                }
+                              }
+                            }
+                          },
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 Storage Integration 列表。"
@@ -466,6 +610,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -666,6 +811,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -678,8 +824,208 @@
                           "example": 0
                         },
                         "data": {
-                          "$ref": "#/components/schemas/StorageIntegrationDetail",
+                          "type": "object",
                           "description": "Returns the storage integration details.",
+                          "properties": {
+                            "integrationId": {
+                              "type": "string",
+                              "description": "ID of the storage integration.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合の ID。"
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Name of the storage integration.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合の名前。"
+                                }
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "description": "Description of the storage integration.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的描述。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合の説明。"
+                                }
+                              }
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "Status of the storage integration.",
+                              "enum": [
+                                "ACTIVE",
+                                "ERROR"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的状态。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合のステータス。"
+                                }
+                              }
+                            },
+                            "message": {
+                              "type": "string",
+                              "description": "Status message of the storage integration.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的状态信息。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合のステータスメッセージ。"
+                                }
+                              }
+                            },
+                            "regionId": {
+                              "type": "string",
+                              "description": "ID of the region of the storage integration.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成所在地域的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合のリージョンの ID。"
+                                }
+                              }
+                            },
+                            "bucketName": {
+                              "type": "string",
+                              "description": "Name of the integrated storage bucket.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集成的存储桶名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "統合ストレージバケットの名前。"
+                                }
+                              }
+                            },
+                            "externalCred": {
+                              "type": "object",
+                              "description": "External cloud credential of the storage integration.",
+                              "properties": {
+                                "roleArn": {
+                                  "type": "string",
+                                  "description": "ARN of the IAM role to assume.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "待代入的 IAM 角色的 ARN。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "引き受ける IAM ロールの ARN。"
+                                    }
+                                  }
+                                },
+                                "externalId": {
+                                  "type": "string",
+                                  "description": "External ID used when assuming the role.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "代入角色时使用的外部 ID（External ID）。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "ロールを引き受けるときに使用する外部 ID。"
+                                    }
+                                  }
+                                },
+                                "accountName": {
+                                  "type": "string",
+                                  "description": "Name of the cloud account.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "云账号的名称。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "クラウドアカウントの名前。"
+                                    }
+                                  }
+                                },
+                                "clientId": {
+                                  "type": "string",
+                                  "description": "Client ID of the Azure application.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Azure 应用的客户端 ID。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Azure アプリケーションのクライアント ID。"
+                                    }
+                                  }
+                                },
+                                "tenantId": {
+                                  "type": "string",
+                                  "description": "Tenant ID of the Azure directory.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Azure 目录的租户 ID。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Azure ディレクトリのテナント ID。"
+                                    }
+                                  }
+                                },
+                                "gcpProjectId": {
+                                  "type": "string",
+                                  "description": "ID of the Google Cloud project.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Google Cloud 项目的 ID。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Google Cloud プロジェクトの ID。"
+                                    }
+                                  }
+                                },
+                                "serviceAccountEmail": {
+                                  "type": "string",
+                                  "description": "Email of the Google Cloud service account.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Google Cloud 服务账号的邮箱。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Google Cloud サービスアカウントのメールアドレス。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的外部云凭据。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合の外部クラウド認証情報。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "description": "Time when the storage integration was created.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的创建时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合が作成された時刻。"
+                                }
+                              }
+                            }
+                          },
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 Storage Integration 详情。"
@@ -884,6 +1230,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1103,6 +1450,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1339,6 +1687,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1351,8 +1700,180 @@
                           "example": 0
                         },
                         "data": {
-                          "$ref": "#/components/schemas/AwsS3AuthorizationMaterialsData",
+                          "type": "object",
                           "description": "Returns the AWS S3 authorization materials.",
+                          "properties": {
+                            "readonly": {
+                              "type": "string",
+                              "description": "Read-only access policy document.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "只读访问策略文档。"
+                                },
+                                "ja-JP": {
+                                  "description": "読み取り専用のアクセスポリシードキュメント。"
+                                }
+                              }
+                            },
+                            "readwrite": {
+                              "type": "string",
+                              "description": "Read-write access policy document.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "读写访问策略文档。"
+                                },
+                                "ja-JP": {
+                                  "description": "読み書きアクセスポリシードキュメント。"
+                                }
+                              }
+                            },
+                            "iamPolicy": {
+                              "type": "string",
+                              "description": "IAM policy document for accessing the storage bucket.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "用于访问存储桶的 IAM 策略文档。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージバケットにアクセスするための IAM ポリシードキュメント。"
+                                }
+                              }
+                            },
+                            "ramPolicy": {
+                              "type": "string",
+                              "description": "RAM policy document for accessing the storage bucket.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "用于访问存储桶的 RAM 策略文档。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージバケットにアクセスするための RAM ポリシードキュメント。"
+                                }
+                              }
+                            },
+                            "trustPolicy": {
+                              "type": "string",
+                              "description": "Trust policy document for the role to be assumed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "待代入角色的信任策略文档。"
+                                },
+                                "ja-JP": {
+                                  "description": "引き受けるロールの信頼ポリシードキュメント。"
+                                }
+                              }
+                            },
+                            "zillizAccount": {
+                              "type": "string",
+                              "description": "Zilliz Cloud account that needs to be authorized.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "需要授权的 Zilliz Cloud 账号。"
+                                },
+                                "ja-JP": {
+                                  "description": "認可が必要な Zilliz Cloud アカウント。"
+                                }
+                              }
+                            },
+                            "externalId": {
+                              "type": "string",
+                              "description": "External ID used when assuming the role.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "代入角色时使用的外部 ID（External ID）。"
+                                },
+                                "ja-JP": {
+                                  "description": "ロールを引き受けるときに使用する外部 ID。"
+                                }
+                              }
+                            },
+                            "permission": {
+                              "type": "array",
+                              "description": "Permissions required for the storage integration.",
+                              "items": {
+                                "type": "string",
+                                "description": "A permission to grant on the GCP bucket. The authorization materials produced for the storage integration cover each listed permission.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "要在 GCP 存储桶上授予的权限。为存储集成生成的授权材料涵盖所列的每一项权限。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "GCP バケットに付与する権限。ストレージ統合用に生成された認可マテリアルは、リストされた各権限に対応します。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成所需的权限列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合に必要な権限。"
+                                }
+                              }
+                            },
+                            "googleCloudServiceAccount": {
+                              "type": "string",
+                              "description": "Google Cloud service account to be granted access.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "需要授予访问权限的 Google Cloud 服务账号。"
+                                },
+                                "ja-JP": {
+                                  "description": "アクセスを付与する Google Cloud サービスアカウント。"
+                                }
+                              }
+                            },
+                            "credential": {
+                              "type": "object",
+                              "description": "Azure credential material for the storage integration.",
+                              "properties": {
+                                "clusterIssuerUrl": {
+                                  "type": "string",
+                                  "description": "OIDC issuer URL of the cluster.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "集群的 OIDC 签发者 URL。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "クラスターの OIDC 発行者 URL。"
+                                    }
+                                  }
+                                },
+                                "namespace": {
+                                  "type": "string",
+                                  "description": "Kubernetes namespace of the service account.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "服务账号所在的 Kubernetes 命名空间。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "サービスアカウントの Kubernetes 名前空間。"
+                                    }
+                                  }
+                                },
+                                "serviceAccountName": {
+                                  "type": "string",
+                                  "description": "Name of the Kubernetes service account.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Kubernetes 服务账号的名称。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Kubernetes サービスアカウントの名前。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "存储集成的 Azure 凭据材料。"
+                                },
+                                "ja-JP": {
+                                  "description": "ストレージ統合用の Azure 認証情報マテリアル。"
+                                }
+                              }
+                            }
+                          },
                           "x-i18n": {
                             "zh-CN": {
                               "description": "返回 AWS S3 授权材料。"
@@ -1789,8 +2310,8 @@
             }
           },
           "externalCred": {
-            "description": "Provider-specific credential fields.",
             "type": "object",
+            "description": "Provider-specific credential fields.",
             "properties": {
               "roleArn": {
                 "type": "string",
@@ -1813,6 +2334,66 @@
                   },
                   "ja-JP": {
                     "description": "AWS role の引き受けに使用する external ID。"
+                  }
+                }
+              },
+              "accountName": {
+                "type": "string",
+                "description": "The Azure storage account name.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 存储账号名称。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure ストレージアカウント名。"
+                  }
+                }
+              },
+              "clientId": {
+                "type": "string",
+                "description": "The Azure federated identity client ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 联合身份客户端 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure フェデレーション ID クライアント ID。"
+                  }
+                }
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The Azure tenant ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 租户 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure テナント ID。"
+                  }
+                }
+              },
+              "gcpProjectId": {
+                "type": "string",
+                "description": "The customer GCP project ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用户侧 GCP 项目 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "顧客の GCP プロジェクト ID。"
+                  }
+                }
+              },
+              "serviceAccountEmail": {
+                "type": "string",
+                "description": "The customer-created GCP service account email that grants bucket access.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用户创建的 GCP 服务账号邮箱，用于授予 bucket 访问权限。"
+                  },
+                  "ja-JP": {
+                    "description": "バケットへのアクセスを許可する、顧客が作成した GCP サービスアカウントのメールアドレス。"
                   }
                 }
               }
@@ -1907,9 +2488,69 @@
             }
           },
           "externalCred": {
-            "description": "Provider-specific credential fields.",
             "type": "object",
+            "description": "Provider-specific credential fields.",
             "properties": {
+              "roleArn": {
+                "type": "string",
+                "description": "The AWS IAM role ARN or Alibaba Cloud RAM role ARN.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "AWS IAM 角色 ARN 或阿里云 RAM 角色 ARN。"
+                  },
+                  "ja-JP": {
+                    "description": "AWS IAM ロール ARN または Alibaba Cloud RAM ロール ARN。"
+                  }
+                }
+              },
+              "externalId": {
+                "type": "string",
+                "description": "The external ID for AWS or Alibaba Cloud role assumption.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "AWS 或阿里云角色扮演使用的 external ID。"
+                  },
+                  "ja-JP": {
+                    "description": "AWS または Alibaba Cloud のロール引き受け用の外部 ID。"
+                  }
+                }
+              },
+              "accountName": {
+                "type": "string",
+                "description": "The Azure storage account name.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 存储账号名称。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure ストレージアカウント名。"
+                  }
+                }
+              },
+              "clientId": {
+                "type": "string",
+                "description": "The Azure federated identity client ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 联合身份客户端 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure フェデレーション ID のクライアント ID。"
+                  }
+                }
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The Azure tenant ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "Azure 租户 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "Azure テナント ID。"
+                  }
+                }
+              },
               "gcpProjectId": {
                 "type": "string",
                 "description": "The customer GCP project ID.",
@@ -2025,9 +2666,33 @@
             }
           },
           "externalCred": {
-            "description": "Provider-specific credential fields.",
             "type": "object",
+            "description": "Provider-specific credential fields.",
             "properties": {
+              "roleArn": {
+                "type": "string",
+                "description": "The AWS IAM role ARN or Alibaba Cloud RAM role ARN.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "AWS IAM 角色 ARN 或阿里云 RAM 角色 ARN。"
+                  },
+                  "ja-JP": {
+                    "description": "AWS IAM ロール ARN または Alibaba Cloud RAM ロール ARN。"
+                  }
+                }
+              },
+              "externalId": {
+                "type": "string",
+                "description": "The external ID for AWS or Alibaba Cloud role assumption.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "AWS 或阿里云角色扮演使用的 external ID。"
+                  },
+                  "ja-JP": {
+                    "description": "AWS または Alibaba Cloud のロール引き受け用の外部 ID。"
+                  }
+                }
+              },
               "accountName": {
                 "type": "string",
                 "description": "The Azure storage account name.",
@@ -2061,6 +2726,30 @@
                   },
                   "ja-JP": {
                     "description": "Azure federated identity の tenant ID。"
+                  }
+                }
+              },
+              "gcpProjectId": {
+                "type": "string",
+                "description": "The customer GCP project ID.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用户侧 GCP 项目 ID。"
+                  },
+                  "ja-JP": {
+                    "description": "顧客の GCP プロジェクト ID。"
+                  }
+                }
+              },
+              "serviceAccountEmail": {
+                "type": "string",
+                "description": "The customer-created GCP service account email that grants bucket access.",
+                "x-i18n": {
+                  "zh-CN": {
+                    "description": "用户创建的 GCP 服务账号邮箱，用于授予 bucket 访问权限。"
+                  },
+                  "ja-JP": {
+                    "description": "バケットアクセスを許可する、顧客が作成した GCP サービスアカウントのメールアドレス。"
                   }
                 }
               }

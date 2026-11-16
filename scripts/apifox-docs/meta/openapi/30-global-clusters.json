@@ -138,6 +138,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -503,6 +504,203 @@
                               }
                             }
                           }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Total number of global clusters.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的总数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバルクラスタの総数。"
+                                }
+                              }
+                            },
+                            "currentPage": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Current page number.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Number of entries per page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页条目数。"
+                                },
+                                "ja-JP": {
+                                  "description": "ページあたりのエントリ数。"
+                                }
+                              }
+                            },
+                            "globalClusters": {
+                              "type": "array",
+                              "description": "Global clusters in the current page.",
+                              "items": {
+                                "type": "object",
+                                "description": "Summary information of a global cluster.",
+                                "properties": {
+                                  "globalClusterId": {
+                                    "type": "string",
+                                    "description": "ID of the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタの ID。"
+                                      }
+                                    }
+                                  },
+                                  "globalClusterName": {
+                                    "type": "string",
+                                    "description": "Name of the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群的名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタの名前。"
+                                      }
+                                    }
+                                  },
+                                  "projectId": {
+                                    "type": "string",
+                                    "description": "ID of the project that owns the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群所属项目的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタを所有するプロジェクトの ID。"
+                                      }
+                                    }
+                                  },
+                                  "regionIds": {
+                                    "type": "array",
+                                    "description": "IDs of the regions spanned by the global cluster.",
+                                    "items": {
+                                      "type": "string",
+                                      "description": "A region ID associated with the global cluster. Each entry identifies one region by its region identifier.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "与全局集群关联的一个 Region ID。每个条目通过其 Region 标识符标识一个 Region。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "グローバルクラスタに関連付けられたリージョン ID。各エントリは、そのリージョン識別子によって 1 つのリージョンを識別します。"
+                                        }
+                                      }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群覆盖的地域的 ID 列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタがまたがるリージョンの ID。"
+                                      }
+                                    }
+                                  },
+                                  "cuType": {
+                                    "type": "string",
+                                    "description": "CU type of the global cluster.",
+                                    "enum": [
+                                      "Performance-optimized",
+                                      "Capacity-optimized",
+                                      "Cost-optimized",
+                                      "Tiered-storage",
+                                      "Free",
+                                      "Serverless"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群的 CU 类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタの CU タイプ。"
+                                      }
+                                    }
+                                  },
+                                  "cuSize": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "CU size of the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群的 CU 规格。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタの CU サイズ。"
+                                      }
+                                    }
+                                  },
+                                  "connectAddress": {
+                                    "type": "string",
+                                    "description": "Connection address of the global cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群的连接地址。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタの接続アドレス。"
+                                      }
+                                    }
+                                  },
+                                  "createTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Time when the global cluster was created.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "全球集群的创建时间。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "グローバルクラスタの作成日時。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群的概要信息。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバルクラスタの概要情報。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页的全球集群列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ内のグローバルクラスタ。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。タイプはエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "A response payload carrying the `globalClusters` list.",
@@ -533,6 +731,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -747,14 +946,6 @@
                   "primaryCluster": {
                     "type": "object",
                     "description": "Parameters for the primary cluster of the global cluster.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "全球集群的主集群参数。"
-                      },
-                      "ja-JP": {
-                        "description": "global cluster の primary cluster のパラメーター。"
-                      }
-                    },
                     "properties": {
                       "clusterName": {
                         "type": "string",
@@ -780,26 +971,40 @@
                             "description": "primary cluster がデプロイされるリージョン ID。リージョンは、指定された project で利用可能なリージョンのいずれかである必要があります。"
                           }
                         }
+                      },
+                      "replica": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Number of replicas of the cluster.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "集群的副本数量。"
+                          },
+                          "ja-JP": {
+                            "description": "クラスタのレプリカ数。"
+                          }
+                        }
                       }
                     },
                     "required": [
                       "clusterName",
                       "regionId"
-                    ]
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群的主集群参数。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の primary cluster のパラメーター。"
+                      }
+                    }
                   },
                   "secondaryClusters": {
                     "type": "array",
                     "description": "Parameters for the secondary clusters of the global cluster. You can specify one or more secondary clusters.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "全球集群的从集群参数。您可以指定一个或多个从集群。"
-                      },
-                      "ja-JP": {
-                        "description": "global cluster の secondary cluster のパラメーター。1 つ以上の secondary cluster を指定できます。"
-                      }
-                    },
                     "items": {
                       "type": "object",
+                      "description": "A secondary Cluster to add to the Global Cluster, identified by `clusterName` and `regionId`; both are required. One or more secondary Clusters can be specified.",
                       "properties": {
                         "clusterName": {
                           "type": "string",
@@ -825,13 +1030,25 @@
                               "description": "secondary cluster がデプロイされるリージョン ID。リージョンは、指定された project で利用可能なリージョンのいずれかである必要があり、かつ primary cluster がデプロイされるリージョンとは異なる必要があります。"
                             }
                           }
+                        },
+                        "replica": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Number of replicas of the cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "集群的副本数量。"
+                            },
+                            "ja-JP": {
+                              "description": "Cluster のレプリカ数。"
+                            }
+                          }
                         }
                       },
                       "required": [
                         "clusterName",
                         "regionId"
                       ],
-                      "description": "A secondary Cluster to add to the Global Cluster, identified by `clusterName` and `regionId`; both are required. One or more secondary Clusters can be specified.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "要添加到 Global Cluster 的从 Cluster，由 `clusterName` 和 `regionId` 标识，两者均为必填项。可以指定一个或多个从 Cluster。"
@@ -839,6 +1056,234 @@
                         "ja-JP": {
                           "description": "Global Cluster に追加するセカンダリ Cluster。`clusterName` と `regionId` で指定し、いずれも必須です。複数のセカンダリ Cluster を指定できます。"
                         }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群的从集群参数。您可以指定一个或多个从集群。"
+                      },
+                      "ja-JP": {
+                        "description": "global cluster の secondary cluster のパラメーター。1 つ以上の secondary cluster を指定できます。"
+                      }
+                    }
+                  },
+                  "autoscaling": {
+                    "type": "object",
+                    "description": "Autoscaling configuration of the clusters.",
+                    "properties": {
+                      "cu": {
+                        "type": "object",
+                        "description": "CU autoscaling bounds and schedules.",
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Minimum number of CUs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "CU 的最小数量。"
+                              },
+                              "ja-JP": {
+                                "description": "CU の最小数。"
+                              }
+                            }
+                          },
+                          "max": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Maximum number of CUs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "CU 的最大数量。"
+                              },
+                              "ja-JP": {
+                                "description": "CU の最大数。"
+                              }
+                            }
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Scheduled CU scaling targets.",
+                            "items": {
+                              "type": "object",
+                              "description": "Scheduled autoscaling target.",
+                              "properties": {
+                                "cron": {
+                                  "type": "string",
+                                  "description": "Cron expression defining when the schedule applies.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定义定时计划生效时间的 Cron 表达式。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                    }
+                                  }
+                                },
+                                "target": {
+                                  "type": "integer",
+                                  "format": "int64",
+                                  "description": "Target value applied when the schedule fires.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定时计划触发时应用的目标值。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールが実行されたときに適用されるターゲット値。"
+                                    }
+                                  }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the cron schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Cron 定时计划使用的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Cron スケジュールのタイムゾーン。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定时扩缩容规则。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールされた自動スケーリングターゲット。"
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "CU 的定时扩缩容目标列表。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールされた CU スケーリングターゲット。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "CU 自动扩缩容的范围与定时计划。"
+                          },
+                          "ja-JP": {
+                            "description": "CU 自動スケーリングの上下限とスケジュール。"
+                          }
+                        }
+                      },
+                      "replica": {
+                        "type": "object",
+                        "description": "Replica autoscaling bounds and schedules.",
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Minimum number of replicas.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的最小数量。"
+                              },
+                              "ja-JP": {
+                                "description": "レプリカの最小数。"
+                              }
+                            }
+                          },
+                          "max": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Maximum number of replicas.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的最大数量。"
+                              },
+                              "ja-JP": {
+                                "description": "レプリカの最大数。"
+                              }
+                            }
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Scheduled replica scaling targets.",
+                            "items": {
+                              "type": "object",
+                              "description": "Scheduled autoscaling target.",
+                              "properties": {
+                                "cron": {
+                                  "type": "string",
+                                  "description": "Cron expression defining when the schedule applies.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定义定时计划生效时间的 Cron 表达式。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                    }
+                                  }
+                                },
+                                "target": {
+                                  "type": "integer",
+                                  "format": "int64",
+                                  "description": "Target value applied when the schedule fires.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定时计划触发时应用的目标值。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールが実行されたときに適用されるターゲット値。"
+                                    }
+                                  }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the cron schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Cron 定时计划使用的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "Cron スケジュールのタイムゾーン。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定时扩缩容规则。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールされた自動スケーリングターゲット。"
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的定时扩缩容目标列表。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールされたレプリカスケーリングターゲット。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "副本自动扩缩容的范围与定时计划。"
+                          },
+                          "ja-JP": {
+                            "description": "レプリカの自動スケーリングの上下限とスケジュール。"
+                          }
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的自动扩缩容配置。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターの自動スケーリング設定。"
                       }
                     }
                   }
@@ -986,6 +1431,68 @@
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "globalClusterId": {
+                              "type": "string",
+                              "description": "ID of the created global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "已创建的全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成されたグローバルクラスタの ID。"
+                                }
+                              }
+                            },
+                            "username": {
+                              "type": "string",
+                              "description": "Username of the initial database account for the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群初始数据库账号的用户名。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバルクラスタの初期データベースアカウントのユーザー名。"
+                                }
+                              }
+                            },
+                            "password": {
+                              "type": "string",
+                              "description": "Password of the initial database account for the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群初始数据库账号的密码。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバルクラスタの初期データベースアカウントのパスワード。"
+                                }
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the asynchronous job tracking the creation.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "跟踪创建过程的异步任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "作成を追跡する非同期ジョブの ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。タイプはエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "A successful response payload for the Global Cluster creation request.",
@@ -1013,6 +1520,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1363,6 +1871,462 @@
                               }
                             }
                           }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "globalClusterId": {
+                              "type": "string",
+                              "description": "ID of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の ID。"
+                                }
+                              }
+                            },
+                            "globalClusterName": {
+                              "type": "string",
+                              "description": "Name of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の名前。"
+                                }
+                              }
+                            },
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the project that owns the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群所属项目的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster を所有するプロジェクトの ID。"
+                                }
+                              }
+                            },
+                            "regionIds": {
+                              "type": "array",
+                              "description": "IDs of the regions spanned by the global cluster.",
+                              "items": {
+                                "type": "string",
+                                "description": "Identifier of one region associated with the global cluster.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "与全局 Cluster 关联的某个区域的标识符。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバル Cluster に関連付けられた 1 つのリージョンの識別子。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群覆盖的地域的 ID 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster がまたがるリージョンの ID。"
+                                }
+                              }
+                            },
+                            "cuType": {
+                              "type": "string",
+                              "description": "CU type of the global cluster.",
+                              "enum": [
+                                "Performance-optimized",
+                                "Capacity-optimized",
+                                "Cost-optimized",
+                                "Tiered-storage",
+                                "Free",
+                                "Serverless"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的 CU 类型。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の CU タイプ。"
+                                }
+                              }
+                            },
+                            "cuSize": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "CU size of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的 CU 规格。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の CU サイズ。"
+                                }
+                              }
+                            },
+                            "autoscaling": {
+                              "type": "object",
+                              "description": "Autoscaling configuration of the global cluster.",
+                              "properties": {
+                                "cu": {
+                                  "type": "object",
+                                  "description": "CU autoscaling bounds and schedules.",
+                                  "properties": {
+                                    "min": {
+                                      "type": "integer",
+                                      "format": "int64",
+                                      "description": "Minimum number of CUs.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "CU 的最小数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "CU の最小数。"
+                                        }
+                                      }
+                                    },
+                                    "max": {
+                                      "type": "integer",
+                                      "format": "int64",
+                                      "description": "Maximum number of CUs.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "CU 的最大数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "CU の最大数。"
+                                        }
+                                      }
+                                    },
+                                    "schedules": {
+                                      "type": "array",
+                                      "description": "Scheduled CU scaling targets.",
+                                      "items": {
+                                        "type": "object",
+                                        "description": "Scheduled autoscaling target.",
+                                        "properties": {
+                                          "cron": {
+                                            "type": "string",
+                                            "description": "Cron expression defining when the schedule applies.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "定义定时计划生效时间的 Cron 表达式。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                              }
+                                            }
+                                          },
+                                          "target": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "description": "Target value applied when the schedule fires.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "定时计划触发时应用的目标值。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "スケジュールの実行時に適用されるターゲット値。"
+                                              }
+                                            }
+                                          },
+                                          "timezone": {
+                                            "type": "string",
+                                            "description": "Timezone of the cron schedule.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "Cron 定时计划使用的时区。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "Cron スケジュールのタイムゾーン。"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "定时扩缩容规则。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "スケジュールされたオートスケーリングターゲット。"
+                                          }
+                                        }
+                                      },
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "CU 的定时扩缩容目标列表。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "スケジュールされた CU スケーリングターゲット。"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "CU 自动扩缩容的范围与定时计划。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "CU オートスケーリングの上限・下限とスケジュール。"
+                                    }
+                                  }
+                                },
+                                "replica": {
+                                  "type": "object",
+                                  "description": "Replica autoscaling bounds and schedules.",
+                                  "properties": {
+                                    "min": {
+                                      "type": "integer",
+                                      "format": "int64",
+                                      "description": "Minimum number of replicas.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "副本的最小数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "レプリカの最小数。"
+                                        }
+                                      }
+                                    },
+                                    "max": {
+                                      "type": "integer",
+                                      "format": "int64",
+                                      "description": "Maximum number of replicas.",
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "副本的最大数量。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "レプリカの最大数。"
+                                        }
+                                      }
+                                    },
+                                    "schedules": {
+                                      "type": "array",
+                                      "description": "Scheduled replica scaling targets.",
+                                      "items": {
+                                        "type": "object",
+                                        "description": "Scheduled autoscaling target.",
+                                        "properties": {
+                                          "cron": {
+                                            "type": "string",
+                                            "description": "Cron expression defining when the schedule applies.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "定义定时计划生效时间的 Cron 表达式。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                              }
+                                            }
+                                          },
+                                          "target": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "description": "Target value applied when the schedule fires.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "定时计划触发时应用的目标值。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "スケジュールの実行時に適用されるターゲット値。"
+                                              }
+                                            }
+                                          },
+                                          "timezone": {
+                                            "type": "string",
+                                            "description": "Timezone of the cron schedule.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "Cron 定时计划使用的时区。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "Cron スケジュールのタイムゾーン。"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "定时扩缩容规则。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "スケジュールされたオートスケーリングターゲット。"
+                                          }
+                                        }
+                                      },
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "副本的定时扩缩容目标列表。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "スケジュールされたレプリカスケーリングターゲット。"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "副本自动扩缩容的范围与定时计划。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "レプリカのオートスケーリングの上限・下限とスケジュール。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的自动扩缩容配置。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster のオートスケーリング設定。"
+                                }
+                              }
+                            },
+                            "connectAddress": {
+                              "type": "string",
+                              "description": "Connection address of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的连接地址。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の接続アドレス。"
+                                }
+                              }
+                            },
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time",
+                              "description": "Time when the global cluster was created.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的创建时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の作成日時。"
+                                }
+                              }
+                            },
+                            "clusters": {
+                              "type": "array",
+                              "description": "Member clusters of the global cluster.",
+                              "items": {
+                                "type": "object",
+                                "description": "A member cluster of a global cluster.",
+                                "properties": {
+                                  "clusterId": {
+                                    "type": "string",
+                                    "description": "ID of the member cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "成员集群的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メンバー Cluster の ID。"
+                                      }
+                                    }
+                                  },
+                                  "clusterName": {
+                                    "type": "string",
+                                    "description": "Name of the member cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "成员集群的名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メンバー Cluster の名前。"
+                                      }
+                                    }
+                                  },
+                                  "regionId": {
+                                    "type": "string",
+                                    "description": "ID of the region where the member cluster resides.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "成员集群所在地域的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メンバー Cluster が存在するリージョンの ID。"
+                                      }
+                                    }
+                                  },
+                                  "role": {
+                                    "type": "string",
+                                    "description": "Role of the member cluster, such as primary or secondary.",
+                                    "enum": [
+                                      "UNKNOWN",
+                                      "PRIMARY",
+                                      "SECONDARY"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "成员集群的角色，例如主集群或备集群。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メンバー Cluster のロール（プライマリやセカンダリなど）。"
+                                      }
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "Status of the member cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "成员集群的状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メンバー Cluster のステータス。"
+                                      }
+                                    }
+                                  },
+                                  "replica": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Replica count of the member cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "成员集群的副本数量。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "メンバー Cluster のレプリカ数。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "全球集群的一个成员集群。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "グローバル Cluster のメンバー Cluster。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的成员集群列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster のメンバー Cluster。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。型はエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "x-tab-label": "success",
@@ -1391,6 +2355,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1689,6 +2654,119 @@
                               }
                             }
                           }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "globalClusterId": {
+                              "type": "string",
+                              "description": "ID of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバルクラスターの ID。"
+                                }
+                              }
+                            },
+                            "primaryClusterId": {
+                              "type": "string",
+                              "description": "ID of the primary cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "主集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "プライマリクラスターの ID。"
+                                }
+                              }
+                            },
+                            "primaryRegionId": {
+                              "type": "string",
+                              "description": "ID of the region where the primary cluster resides.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "主集群所在地域的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "プライマリクラスターが存在するリージョンの ID。"
+                                }
+                              }
+                            },
+                            "lags": {
+                              "type": "array",
+                              "description": "Replication lag of each secondary cluster.",
+                              "items": {
+                                "type": "object",
+                                "description": "Replication lag of a single secondary cluster.",
+                                "properties": {
+                                  "secondaryClusterId": {
+                                    "type": "string",
+                                    "description": "ID of the secondary cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备集群的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "セカンダリクラスターの ID。"
+                                      }
+                                    }
+                                  },
+                                  "secondaryRegionId": {
+                                    "type": "string",
+                                    "description": "ID of the region where the secondary cluster resides.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "备集群所在地域的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "セカンダリクラスターが存在するリージョンの ID。"
+                                      }
+                                    }
+                                  },
+                                  "lagMs": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": "Replication lag in milliseconds.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "复制延迟，单位为毫秒。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "レプリケーションラグ（ミリ秒）。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "单个备集群的复制延迟。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "単一のセカンダリクラスターのレプリケーションラグ。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "各备集群的复制延迟列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "各セカンダリクラスターのレプリケーションラグ。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスのペイロード。型はエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "A replication lag result for the global cluster.",
@@ -1716,6 +2794,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1859,16 +2938,9 @@
                   "secondaryClusters": {
                     "type": "array",
                     "description": "Secondary clusters to add.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "要添加的从集群。"
-                      },
-                      "ja-JP": {
-                        "description": "追加するセカンダリクラスター。"
-                      }
-                    },
                     "items": {
                       "type": "object",
+                      "description": "A secondary cluster to add to the global cluster, specified by `clusterName` and `regionId`.",
                       "properties": {
                         "clusterName": {
                           "type": "string",
@@ -1901,7 +2973,6 @@
                         "clusterName",
                         "regionId"
                       ],
-                      "description": "A secondary cluster to add to the global cluster, specified by `clusterName` and `regionId`.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "要添加到 Global Cluster 的一个辅助集群，由 `clusterName` 和 `regionId` 指定。"
@@ -1911,7 +2982,14 @@
                         }
                       }
                     },
-                    "minItems": 1
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要添加的从集群。"
+                      },
+                      "ja-JP": {
+                        "description": "追加するセカンダリクラスター。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -2002,6 +3080,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2219,6 +3298,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2461,6 +3541,68 @@
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "globalClusterId": {
+                              "type": "string",
+                              "description": "ID of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の ID。"
+                                }
+                              }
+                            },
+                            "oldPrimaryClusterId": {
+                              "type": "string",
+                              "description": "ID of the previous primary cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "原主集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "以前のプライマリ Cluster の ID。"
+                                }
+                              }
+                            },
+                            "newPrimaryClusterId": {
+                              "type": "string",
+                              "description": "ID of the new primary cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "新主集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "新しいプライマリ Cluster の ID。"
+                                }
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the asynchronous job tracking the promotion.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "跟踪提升过程的异步任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "昇格を追跡する非同期ジョブの ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。型はエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "One possible success response payload for the switchover operation.",
@@ -2488,6 +3630,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2731,6 +3874,68 @@
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "globalClusterId": {
+                              "type": "string",
+                              "description": "ID of the global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバル Cluster の ID。"
+                                }
+                              }
+                            },
+                            "oldPrimaryClusterId": {
+                              "type": "string",
+                              "description": "ID of the previous primary cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "原主集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "以前のプライマリ Cluster の ID。"
+                                }
+                              }
+                            },
+                            "newPrimaryClusterId": {
+                              "type": "string",
+                              "description": "ID of the new primary cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "新主集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "新しいプライマリ Cluster の ID。"
+                                }
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the asynchronous job tracking the promotion.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "跟踪提升过程的异步任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "昇格を追跡する非同期ジョブの ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。型はエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "One possible success response payload for the failover operation.",
@@ -2758,6 +3963,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2894,6 +4100,7 @@
                 "properties": {
                   "cuSize": {
                     "type": "integer",
+                    "format": "int64",
                     "description": "Target CU size. Mutually exclusive with autoscaling.cu.",
                     "x-i18n": {
                       "zh-CN": {
@@ -2908,29 +4115,14 @@
                   "autoscaling": {
                     "type": "object",
                     "description": "Autoscaling policy for the Global Cluster.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "全球集群自动扩缩容策略。"
-                      },
-                      "ja-JP": {
-                        "description": "Global Cluster のオートスケーリングポリシー。"
-                      }
-                    },
                     "properties": {
                       "cu": {
                         "type": "object",
                         "description": "CU autoscaling policy. Configure either min and max for dynamic scaling, or schedules for scheduled scaling.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "CU 自动扩缩容策略。可配置 min 和 max 进行动态扩缩容，或配置 schedules 进行定时扩缩容。"
-                          },
-                          "ja-JP": {
-                            "description": "CU オートスケーリングポリシー。動的スケーリングには min と max を設定するか、スケジュールスケーリングには schedules を設定します。"
-                          }
-                        },
                         "properties": {
                           "min": {
                             "type": "integer",
+                            "format": "int64",
                             "description": "Minimum CU for dynamic scaling. Must be set together with max.",
                             "x-i18n": {
                               "zh-CN": {
@@ -2944,6 +4136,7 @@
                           },
                           "max": {
                             "type": "integer",
+                            "format": "int64",
                             "description": "Maximum CU for dynamic scaling. Must be set together with min.",
                             "x-i18n": {
                               "zh-CN": {
@@ -2958,16 +4151,9 @@
                           "schedules": {
                             "type": "array",
                             "description": "Scheduled scaling rules.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "定时扩缩容规则。"
-                              },
-                              "ja-JP": {
-                                "description": "スケジュールスケーリングルール。"
-                              }
-                            },
                             "items": {
                               "type": "object",
+                              "description": "An auto-scaling schedule defined by a `cron` expression and a `target`. Auto-scaling schedules are mutually exclusive with `min`/`max`, so specify only one of them.",
                               "properties": {
                                 "cron": {
                                   "type": "string",
@@ -2984,6 +4170,7 @@
                                 },
                                 "target": {
                                   "type": "integer",
+                                  "format": "int64",
                                   "description": "Target CU size for the schedule.",
                                   "x-i18n": {
                                     "zh-CN": {
@@ -2994,13 +4181,24 @@
                                     }
                                   },
                                   "example": 8
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Time zone of the cron schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Cron 计划所使用的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "cron スケジュールのタイムゾーン。"
+                                    }
+                                  }
                                 }
                               },
                               "required": [
                                 "cron",
                                 "target"
                               ],
-                              "description": "An auto-scaling schedule defined by a `cron` expression and a `target`. Auto-scaling schedules are mutually exclusive with `min`/`max`, so specify only one of them.",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "由 `cron` 表达式和 `target` 定义的自动扩缩容调度。自动扩缩容调度与 `min`/`max` 互斥，只能指定其中一种。"
@@ -3009,9 +4207,33 @@
                                   "description": "`cron` 式と `target` で定義される自動スケーリングスケジュール。自動スケーリングスケジュールは `min`/`max` と相互排他的であるため、いずれか一方のみを指定します。"
                                 }
                               }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "定时扩缩容规则。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールスケーリングルール。"
+                              }
                             }
                           }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "CU 自动扩缩容策略。可配置 min 和 max 进行动态扩缩容，或配置 schedules 进行定时扩缩容。"
+                          },
+                          "ja-JP": {
+                            "description": "CU オートスケーリングポリシー。動的スケーリングには min と max を設定するか、スケジュールスケーリングには schedules を設定します。"
+                          }
                         }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "全球集群自动扩缩容策略。"
+                      },
+                      "ja-JP": {
+                        "description": "Global Cluster のオートスケーリングポリシー。"
                       }
                     }
                   }
@@ -3125,6 +4347,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -3271,6 +4494,32 @@
                             }
                           },
                           "example": "glo-xxxxxxxxxxxxxxx"
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "oldGlobalClusterId": {
+                              "type": "string",
+                              "description": "ID of the global cluster whose global endpoint was removed.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "被移除全球端点的全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "グローバルエンドポイントが削除されたグローバルクラスタの ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。型はエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "One possible success response payload for the global endpoint removal operation.",
@@ -3298,6 +4547,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -3440,16 +4690,9 @@
                   "secondaryClusters": {
                     "type": "array",
                     "description": "Secondary clusters to create as Global Cluster members. At least one item is required.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "要创建为全球集群成员的从集群，至少需要一个。"
-                      },
-                      "ja-JP": {
-                        "description": "Global Clusterメンバーとして作成するセカンダリクラスター。少なくとも1つの項目が必要です。"
-                      }
-                    },
                     "items": {
                       "type": "object",
+                      "description": "Configuration for one secondary cluster to add when converting a cluster to a global cluster. It requires `clusterName` and `regionId`.",
                       "properties": {
                         "clusterName": {
                           "type": "string",
@@ -3482,7 +4725,6 @@
                         "clusterName",
                         "regionId"
                       ],
-                      "description": "Configuration for one secondary cluster to add when converting a cluster to a global cluster. It requires `clusterName` and `regionId`.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "将集群转换为全局集群时要添加的一个次级集群的配置。需要提供 `clusterName` 和 `regionId`。"
@@ -3492,7 +4734,14 @@
                         }
                       }
                     },
-                    "minItems": 1
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "要创建为全球集群成员的从集群，至少需要一个。"
+                      },
+                      "ja-JP": {
+                        "description": "Global Clusterメンバーとして作成するセカンダリクラスター。少なくとも1つの項目が必要です。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -3589,6 +4838,44 @@
                             }
                           },
                           "example": "job-xxxxxxxxxxxxxxx"
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "properties": {
+                            "globalClusterId": {
+                              "type": "string",
+                              "description": "ID of the resulting global cluster.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "生成的全球集群的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "生成されたグローバル Cluster の ID。"
+                                }
+                              }
+                            },
+                            "jobId": {
+                              "type": "string",
+                              "description": "ID of the asynchronous job tracking the conversion.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "跟踪转换过程的异步任务的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "変換を追跡する非同期 Job の ID。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。タイプはエンドポイントによって異なります。"
+                            }
+                          }
                         }
                       },
                       "description": "A response object representing the result of converting a cluster to a global cluster.",
@@ -3616,6 +4903,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {

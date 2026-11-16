@@ -275,6 +275,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -378,14 +379,15 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/v2/migrations/toExisting": {
       "post": {
         "summary": "Migrate to Existing Cluster",
         "x-beta": "ON REQUEST",
-        "deprecated": false,
+        "deprecated": true,
         "description": "Migrate data from a cluster to another.",
         "x-i18n": {
           "zh-CN": {
@@ -433,6 +435,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -760,7 +763,7 @@
     "/v2/migrations/toNewDedicated": {
       "post": {
         "summary": "Migrate to New Dedicated Cluster",
-        "deprecated": false,
+        "deprecated": true,
         "description": "Create a dedicated cluster and migrate data from the source cluster to the new cluster.",
         "x-i18n": {
           "zh-CN": {
@@ -808,6 +811,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {

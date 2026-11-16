@@ -131,6 +131,40 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "projectId",
+            "in": "query",
+            "description": "The ID of the project. If specified, only clusters in that project are returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "项目 ID。若指定，则仅返回该项目内的集群。"
+              },
+              "ja-JP": {
+                "description": "プロジェクトの ID。指定した場合、そのプロジェクト内の Cluster のみが返されます。"
+              }
+            }
+          },
+          {
+            "name": "regionId",
+            "in": "query",
+            "description": "The ID of the cloud region. If specified, only clusters in that region are returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "x-i18n": {
+              "zh-CN": {
+                "description": "云区域 ID。若指定，则仅返回该区域内的集群。"
+              },
+              "ja-JP": {
+                "description": "クラウドリージョンの ID。指定した場合、そのリージョン内の Cluster のみが返されます。"
+              }
+            }
           }
         ],
         "responses": {
@@ -154,6 +188,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -165,252 +200,313 @@
                           }
                         },
                         "data": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "clusterId": {
-                                "type": "string",
-                                "description": "ID of a cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群 ID。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターの ID。"
-                                  }
-                                }
-                              },
-                              "clusterName": {
-                                "type": "string",
-                                "description": "Name of the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群名称。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスター名。"
-                                  }
-                                }
-                              },
-                              "description": {
-                                "type": "string",
-                                "description": "Description of the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群描述。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターの説明。"
-                                  }
-                                }
-                              },
-                              "regionId": {
-                                "type": "string",
-                                "description": "ID of the cloud region hosting the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群所在云地域 ID。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターをホストするクラウドリージョンの ID。"
-                                  }
-                                }
-                              },
-                              "plan": {
-                                "type": "string",
-                                "description": "Subscription plan of the project to which the cluster belongs. Possible values are `Free`, `Serverless`, `Standard` and `Enterprise`.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群所在项目的订阅计划。当前支持 `Free`、 `Serverless` 和 `Enterprise` 计划。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターが属するプロジェクトのサブスクリプションプラン。指定可能な値は `Free`、`Serverless`、`Standard`、`Enterprise` です。"
-                                  }
-                                }
-                              },
-                              "cuType": {
-                                "type": "string",
-                                "description": "Type of the cluster. <br/>This applies to dedicated clusters only. For free and serverless clusters, the value is empty.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群类型。\n仅适用于 Dedicated 集群。对于 Free 和 Serverless 集群，该值为空。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターのタイプ。<br/>これは dedicated クラスターにのみ適用されます。free クラスターおよび serverless クラスターでは、この値は空です。"
-                                  }
+                          "type": "object",
+                          "description": "Response payload.",
+                          "properties": {
+                            "count": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Total number of clusters.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群总数。"
                                 },
-                                "enum": [
-                                  "Performance-optimized",
-                                  "Capacity-optimized"
-                                ]
-                              },
-                              "cuSize": {
-                                "type": "integer",
-                                "description": "CU size of the cluster. For free and serverless clusters, the value is always `0`.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群 CU 大小。\n对于 Free 和 Serverless 集群，该值始终为 0。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターの CU サイズ。free クラスターおよび serverless クラスターでは、この値は常に `0` です。"
-                                  }
-                                },
-                                "minimum": 0,
-                                "maximum": 256
-                              },
-                              "status": {
-                                "type": "string",
-                                "description": "Current status of the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群当前状态。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターの現在のステータス。"
-                                  }
-                                },
-                                "enum": [
-                                  "CREATING",
-                                  "RUNNING",
-                                  "DELETING",
-                                  "DELETED",
-                                  "STOPPING",
-                                  "RESUMING",
-                                  "MODIFYING",
-                                  "ABNORMAL",
-                                  "FREEZING",
-                                  "FROZEN",
-                                  "UNFREEZED",
-                                  "RESTORE_BACKUP",
-                                  "MIGRATING",
-                                  "RESIZING",
-                                  "UPGRADING",
-                                  "WRITING_OPERATION",
-                                  "SET_PRIVATE_LINK"
-                                ]
-                              },
-                              "connectAddress": {
-                                "type": "string",
-                                "description": "Public endpoint of the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群公开访问端点 (Public Endpoint)。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターのパブリックエンドポイント。"
-                                  }
-                                }
-                              },
-                              "privateLinkAddress": {
-                                "type": "string",
-                                "description": "Private link of the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群私有访问端点 (Private Link)。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターの Private Link。"
-                                  }
-                                }
-                              },
-                              "projectId": {
-                                "type": "string",
-                                "description": "ID of the project to which the cluster belongs.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群所属项目 ID。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターが属するプロジェクトの ID。"
-                                  }
-                                }
-                              },
-                              "createTime": {
-                                "type": "string",
-                                "description": "Time at which the cluster has been created.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群创建时间。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターが作成された時刻。"
-                                  }
-                                }
-                              },
-                              "deploymentOption": {
-                                "type": "string",
-                                "description": "Deployment option of the cluster.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群部署方式。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターのデプロイオプション。"
-                                  }
-                                },
-                                "enum": [
-                                  "Free",
-                                  "Serverless",
-                                  "Dedicated"
-                                ]
-                              },
-                              "globalClusterMeta": {
-                                "type": "object",
-                                "description": "Metadata of the global cluster to which the cluster belongs. If the cluster does not belong to any global cluster, this field is null.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群所属全球集群的元信息。如果集群不属于任何全球集群，则该字段为 null。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターが属するグローバルクラスターのメタデータ。クラスターがどのグローバルクラスターにも属していない場合、このフィールドは null です。"
-                                  }
-                                },
-                                "properties": {
-                                  "globalClusterId": {
-                                    "type": "string",
-                                    "description": "ID of the global cluster.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "全球集群 ID。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "グローバルクラスターの ID。"
-                                      }
-                                    },
-                                    "example": "glo-xxxxxxxxxxxxxxx"
-                                  },
-                                  "role": {
-                                    "type": "string",
-                                    "description": "Role of the cluster in the global cluster.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "集群在全球集群中的角色。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "グローバルクラスター内でのクラスターのロール。"
-                                      }
-                                    },
-                                    "example": "PRIMARY",
-                                    "enum": [
-                                      "PRIMARY",
-                                      "SECONDARY"
-                                    ]
-                                  }
+                                "ja-JP": {
+                                  "description": "クラスタの総数。"
                                 }
                               }
                             },
-                            "description": "List of clusters in detail.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "集群详情列表。"
+                            "currentPage": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Current page number.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页码。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ番号。"
+                                }
+                              }
+                            },
+                            "pageSize": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Number of entries per page.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "每页条数。"
+                                },
+                                "ja-JP": {
+                                  "description": "ページあたりのエントリ数。"
+                                }
+                              }
+                            },
+                            "clusters": {
+                              "type": "array",
+                              "description": "Clusters in the current page.",
+                              "items": {
+                                "type": "object",
+                                "description": "Details of a cluster.",
+                                "properties": {
+                                  "clusterId": {
+                                    "type": "string",
+                                    "description": "ID of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタの ID。"
+                                      }
+                                    }
+                                  },
+                                  "clusterName": {
+                                    "type": "string",
+                                    "description": "Name of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタの名前。"
+                                      }
+                                    }
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "Description of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群描述。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタの説明。"
+                                      }
+                                    }
+                                  },
+                                  "regionId": {
+                                    "type": "string",
+                                    "description": "ID of the region where the cluster is deployed.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群所在地域 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタがデプロイされているリージョンの ID。"
+                                      }
+                                    }
+                                  },
+                                  "cuType": {
+                                    "type": "string",
+                                    "description": "CU type of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的 CU 类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタの CU タイプ。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "Performance-optimized",
+                                      "Capacity-optimized"
+                                    ]
+                                  },
+                                  "plan": {
+                                    "type": "string",
+                                    "description": "Plan of the cluster.",
+                                    "enum": [
+                                      "Free",
+                                      "Standard",
+                                      "Enterprise",
+                                      "Serverless",
+                                      "BusinessCritical"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的套餐类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタのプラン。"
+                                      }
+                                    }
+                                  },
+                                  "cuSize": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Number of CUs allocated to the cluster.",
+                                    "maximum": 256,
+                                    "minimum": 0,
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的 CU 数量。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタに割り当てられた CU 数。"
+                                      }
+                                    }
+                                  },
+                                  "status": {
+                                    "type": "string",
+                                    "description": "Status of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群状态。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタのステータス。"
+                                      }
+                                    },
+                                    "enum": [
+                                      "CREATING",
+                                      "RUNNING",
+                                      "DELETING",
+                                      "DELETED",
+                                      "STOPPING",
+                                      "RESUMING",
+                                      "MODIFYING",
+                                      "ABNORMAL",
+                                      "FREEZING",
+                                      "FROZEN",
+                                      "UNFREEZED",
+                                      "RESTORE_BACKUP",
+                                      "MIGRATING",
+                                      "RESIZING",
+                                      "UPGRADING",
+                                      "WRITING_OPERATION",
+                                      "SET_PRIVATE_LINK"
+                                    ]
+                                  },
+                                  "connectAddress": {
+                                    "type": "string",
+                                    "description": "Endpoint used to connect to the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "用于连接集群的端点。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタへの接続に使用するエンドポイント。"
+                                      }
+                                    }
+                                  },
+                                  "privateLinkAddress": {
+                                    "type": "string",
+                                    "description": "Private link endpoint of the cluster.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的私网连接地址。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタの Private link エンドポイント。"
+                                      }
+                                    }
+                                  },
+                                  "createTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Time when the cluster was created.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群创建时间。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタの作成時刻。"
+                                      }
+                                    }
+                                  },
+                                  "projectId": {
+                                    "type": "string",
+                                    "description": "ID of the project the cluster belongs to.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群所属项目 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタが属するプロジェクトの ID。"
+                                      }
+                                    }
+                                  },
+                                  "deploymentOption": {
+                                    "type": "string",
+                                    "description": "Deployment option of the cluster.",
+                                    "enum": [
+                                      "Free",
+                                      "Serverless",
+                                      "Dedicated"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群的部署选项。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタのデプロイオプション。"
+                                      }
+                                    }
+                                  },
+                                  "globalClusterMeta": {
+                                    "type": "object",
+                                    "description": "Metadata of the global cluster the cluster belongs to. Omitted when the cluster is not part of a global cluster.",
+                                    "properties": {
+                                      "globalClusterId": {
+                                        "type": "string",
+                                        "description": "ID of the global cluster.",
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "全局集群 ID。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "グローバルクラスタの ID。"
+                                          }
+                                        }
+                                      },
+                                      "role": {
+                                        "type": "string",
+                                        "description": "Role of the cluster in the global cluster.",
+                                        "enum": [
+                                          "UNKNOWN",
+                                          "PRIMARY",
+                                          "SECONDARY"
+                                        ],
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "集群在全局集群中的角色。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "グローバルクラスタ内のクラスタのロール。"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "集群所属的全局集群元数据，集群不属于全局集群时不返回。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "クラスタが属するグローバルクラスタのメタデータ。クラスタがグローバルクラスタの一部でない場合は省略されます。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群详情。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスタの詳細。"
+                                  }
+                                }
                               },
-                              "ja-JP": {
-                                "description": "クラスターの詳細一覧。"
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前页的集群。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のページ内のクラスタ。"
+                                }
                               }
                             }
                           },
-                          "description": "Response payload.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，是一个集群详情列表。"
@@ -706,7 +802,8 @@
                   "description": {
                     "type": "string",
                     "description": "Description of the cluster.",
-                    "example": "Production vector search cluster",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群描述。",
@@ -715,7 +812,8 @@
                       "ja-JP": {
                         "description": "クラスターの説明。"
                       }
-                    }
+                    },
+                    "example": "Production vector search cluster"
                   },
                   "projectId": {
                     "type": "string",
@@ -732,6 +830,11 @@
                   "plan": {
                     "type": "string",
                     "description": "Subscription plan of the project to which the cluster belongs. Possible values are `Standard` and `Enterprise`.",
+                    "enum": [
+                      "Standard",
+                      "Enterprise",
+                      "BusinessCritical"
+                    ],
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群所在项目的订阅计划。当前仅支持 `Enterprise`。"
@@ -839,12 +942,256 @@
                         "description": "BYOC クラスターでの暗号化に使用するキー識別子。"
                       }
                     }
+                  },
+                  "autoscaling": {
+                    "type": "object",
+                    "description": "Autoscaling configuration of the cluster.",
+                    "properties": {
+                      "cu": {
+                        "type": "object",
+                        "description": "CU autoscaling bounds and schedules.",
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Minimum number of CUs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "CU 的最小数量。"
+                              },
+                              "ja-JP": {
+                                "description": "CU の最小数。"
+                              }
+                            }
+                          },
+                          "max": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Maximum number of CUs.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "CU 的最大数量。"
+                              },
+                              "ja-JP": {
+                                "description": "CU の最大数。"
+                              }
+                            }
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Scheduled CU scaling targets.",
+                            "items": {
+                              "type": "object",
+                              "description": "Scheduled autoscaling target.",
+                              "properties": {
+                                "cron": {
+                                  "type": "string",
+                                  "description": "Cron expression defining when the schedule applies.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定义定时计划生效时间的 Cron 表达式。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールが適用されるタイミングを定義する cron 式。"
+                                    }
+                                  }
+                                },
+                                "target": {
+                                  "type": "integer",
+                                  "format": "int64",
+                                  "description": "Target value applied when the schedule fires.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定时计划触发时应用的目标值。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュール発火時に適用されるターゲット値。"
+                                    }
+                                  }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the cron schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Cron 定时计划使用的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "cron スケジュールのタイムゾーン。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定时扩缩容规则。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールされたオートスケーリングターゲット。"
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "CU 的定时扩缩容目标列表。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールされた CU スケーリングターゲット。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "CU 自动扩缩容的范围与定时计划。"
+                          },
+                          "ja-JP": {
+                            "description": "CU のオートスケーリングの上限/下限とスケジュール。"
+                          }
+                        }
+                      },
+                      "replica": {
+                        "type": "object",
+                        "description": "Replica autoscaling bounds and schedules.",
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Minimum number of replicas.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的最小数量。"
+                              },
+                              "ja-JP": {
+                                "description": "レプリカの最小数。"
+                              }
+                            }
+                          },
+                          "max": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Maximum number of replicas.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的最大数量。"
+                              },
+                              "ja-JP": {
+                                "description": "レプリカの最大数。"
+                              }
+                            }
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Scheduled replica scaling targets.",
+                            "items": {
+                              "type": "object",
+                              "description": "Scheduled autoscaling target.",
+                              "properties": {
+                                "cron": {
+                                  "type": "string",
+                                  "description": "Cron expression defining when the schedule applies.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定义定时计划生效时间的 Cron 表达式。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールが適用されるタイミングを定義する cron 式。"
+                                    }
+                                  }
+                                },
+                                "target": {
+                                  "type": "integer",
+                                  "format": "int64",
+                                  "description": "Target value applied when the schedule fires.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "定时计划触发时应用的目标值。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュール発火時に適用されるターゲット値。"
+                                    }
+                                  }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the cron schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Cron 定时计划使用的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "cron スケジュールのタイムゾーン。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定时扩缩容规则。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールされたオートスケーリングターゲット。"
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的定时扩缩容目标列表。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールされたレプリカスケーリングターゲット。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "副本自动扩缩容的范围与定时计划。"
+                          },
+                          "ja-JP": {
+                            "description": "レプリカのオートスケーリングの上限/下限とスケジュール。"
+                          }
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的自动扩缩容配置。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスタのオートスケーリング設定。"
+                      }
+                    }
+                  },
+                  "regionId": {
+                    "type": "string",
+                    "description": "ID of the region where the cluster is created. Required for Free, Serverless, and non-BYOC Dedicated clusters; optional for BYOC Dedicated clusters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "创建集群所在地域的 ID。Free、Serverless 和非 BYOC Dedicated 集群必填；BYOC Dedicated 集群可省略。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスタが作成されるリージョンの ID。Free、Serverless、非 BYOC Dedicated クラスタでは必須、BYOC Dedicated クラスタでは任意です。"
+                      }
+                    }
+                  },
+                  "replica": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Number of replicas of the cluster. Defaults to 1.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的副本数量。默认为 1。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスタのレプリカ数。デフォルトは 1 です。"
+                      }
+                    }
                   }
                 },
                 "required": [
                   "clusterName",
                   "projectId",
-                  "regionId",
                   "cuSize",
                   "cuType"
                 ],
@@ -910,6 +1257,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1153,7 +1501,8 @@
                   "description": {
                     "type": "string",
                     "description": "Description of the cluster.",
-                    "example": "Production vector search cluster",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群描述。",
@@ -1162,7 +1511,8 @@
                       "ja-JP": {
                         "description": "クラスターの説明。"
                       }
-                    }
+                    },
+                    "example": "Production vector search cluster"
                   },
                   "projectId": {
                     "type": "string",
@@ -1174,6 +1524,18 @@
                       },
                       "ja-JP": {
                         "description": "クラスターが属するプロジェクトの ID。"
+                      }
+                    }
+                  },
+                  "regionId": {
+                    "type": "string",
+                    "description": "ID of the region where the cluster is created. Required for Free, Serverless, and non-BYOC Dedicated clusters; optional for BYOC Dedicated clusters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "创建集群所在地域的 ID。Free、Serverless 和非 BYOC Dedicated 集群必填；BYOC Dedicated 集群可省略。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスタが作成されるリージョンの ID。Free、Serverless、非 BYOC Dedicated クラスタでは必須、BYOC Dedicated クラスタでは任意です。"
                       }
                     }
                   }
@@ -1239,6 +1601,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1482,7 +1845,8 @@
                   "description": {
                     "type": "string",
                     "description": "Description of the cluster.",
-                    "example": "Production vector search cluster",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群描述。",
@@ -1491,7 +1855,8 @@
                       "ja-JP": {
                         "description": "クラスターの説明。"
                       }
-                    }
+                    },
+                    "example": "Production vector search cluster"
                   },
                   "projectId": {
                     "type": "string",
@@ -1505,6 +1870,18 @@
                       }
                     },
                     "example": "proj-xxxxxxxxxxxxxxxxxxxx"
+                  },
+                  "regionId": {
+                    "type": "string",
+                    "description": "ID of the region where the cluster is created. Required for Free, Serverless, and non-BYOC Dedicated clusters; optional for BYOC Dedicated clusters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "创建集群所在地域的 ID。Free、Serverless 和非 BYOC Dedicated 集群必填；BYOC Dedicated 集群可省略。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスタが作成されるリージョンの ID。Free、Serverless、非 BYOC Dedicated クラスタでは必須、BYOC Dedicated クラスタでは任意です。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -1568,6 +1945,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1829,6 +2207,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1841,6 +2220,7 @@
                         },
                         "data": {
                           "type": "object",
+                          "description": "Response payload.",
                           "properties": {
                             "clusterId": {
                               "type": "string",
@@ -1921,6 +2301,13 @@
                             "plan": {
                               "type": "string",
                               "description": "Subscription plan of the project to which the cluster belongs. Possible values are `Free`, `Serverless`, `Standard` and `Enterprise`.",
+                              "enum": [
+                                "Free",
+                                "Standard",
+                                "Enterprise",
+                                "Serverless",
+                                "BusinessCritical"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "集群所在项目的订阅计划。当前支持 `Free`、 `Serverless` 和 `Enterprise` 计划。"
@@ -1985,8 +2372,34 @@
                                 }
                               }
                             },
-                            "replica": {
+                            "publicAddressEnabled": {
+                              "type": "boolean",
+                              "description": "Whether a public endpoint is enabled for the cluster. Omitted when not set.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "是否为集群启用公网访问地址，未设置时不返回。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターでパブリックエンドポイントが有効かどうか。未設定の場合は省略されます。"
+                                }
+                              }
+                            },
+                            "createTime": {
                               "type": "string",
+                              "format": "date-time",
+                              "description": "Time at which the cluster has been created.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "当前集群的创建时间。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターが作成された時刻。"
+                                }
+                              }
+                            },
+                            "replica": {
+                              "type": "integer",
+                              "format": "int32",
                               "description": "Number of replicas of the cluster.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -1999,6 +2412,7 @@
                             },
                             "cuSize": {
                               "type": "integer",
+                              "format": "int64",
                               "description": "CU size of the cluster. For free and serverless clusters, the value is always `0`.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -2007,12 +2421,11 @@
                                 "ja-JP": {
                                   "description": "クラスターの CU サイズ。Free および serverless クラスターでは、この値は常に `0` です。"
                                 }
-                              },
-                              "minimum": 0,
-                              "maximum": 256
+                              }
                             },
                             "storageSize": {
                               "type": "integer",
+                              "format": "int64",
                               "description": "Storage size used by this cluster.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -2025,6 +2438,7 @@
                             },
                             "snapshotNumber": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "Number of backups created.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -2037,6 +2451,7 @@
                             },
                             "createProgress": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "Creation progress of the cluster. ",
                               "x-i18n": {
                                 "zh-CN": {
@@ -2047,21 +2462,14 @@
                                 }
                               }
                             },
-                            "createTime": {
-                              "type": "string",
-                              "description": "Time at which the cluster has been created.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "当前集群的创建时间。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターが作成された時刻。"
-                                }
-                              }
-                            },
                             "deploymentOption": {
                               "type": "string",
                               "description": "Deployment option of the cluster.",
+                              "enum": [
+                                "Free",
+                                "Serverless",
+                                "Dedicated"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前集群部署方式。"
@@ -2069,39 +2477,19 @@
                                 "ja-JP": {
                                   "description": "クラスターのデプロイオプション。"
                                 }
-                              },
-                              "enum": [
-                                "Free",
-                                "Serverless",
-                                "Dedicated"
-                              ]
+                              }
                             },
                             "autoscaling": {
                               "type": "object",
                               "description": "Auto-scaling configuration for the cluster. ",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "集群的自动扩缩容配置。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターのオートスケーリング設定。 "
-                                }
-                              },
                               "properties": {
                                 "cu": {
                                   "type": "object",
                                   "description": "Auto-scaling configuration for CUs. ",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "CU 的自动扩缩容配置。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "CU のオートスケーリング設定。 "
-                                    }
-                                  },
                                   "properties": {
                                     "min": {
                                       "type": "integer",
+                                      "format": "int64",
                                       "description": "Minimum number of CUs for auto-scaling. This parameter and `schedules` are mutually exclusive.",
                                       "x-i18n": {
                                         "zh-CN": {
@@ -2110,13 +2498,11 @@
                                         "ja-JP": {
                                           "description": "オートスケーリング時の最小 CU 数。このパラメーターと `schedules` は相互排他的です。"
                                         }
-                                      },
-                                      "minimum": 1,
-                                      "maximum": 256,
-                                      "exclusiveMinimum": true
+                                      }
                                     },
                                     "max": {
                                       "type": "integer",
+                                      "format": "int64",
                                       "description": "Maximum number of CUs for auto-scaling. This parameter and `schedules` are mutually exclusive.",
                                       "x-i18n": {
                                         "zh-CN": {
@@ -2125,33 +2511,14 @@
                                         "ja-JP": {
                                           "description": "オートスケーリング時の最大 CU 数。このパラメーターと `schedules` は相互排他的です。"
                                         }
-                                      },
-                                      "minimum": 1,
-                                      "maximum": 256,
-                                      "exclusiveMinimum": true
+                                      }
                                     },
                                     "schedules": {
                                       "type": "array",
                                       "description": "Auto-scaling schedules. This parameter and `min`/`max` are mutually exclusive.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "オートスケーリングのスケジュール。このパラメーターと `min`/`max` は相互排他的です。"
-                                        }
-                                      },
                                       "items": {
                                         "type": "object",
                                         "description": "An auto-scaling schedule.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "自动扩缩容时间表。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "オートスケーリングスケジュール。"
-                                          }
-                                        },
                                         "properties": {
                                           "cron": {
                                             "type": "string",
@@ -2168,6 +2535,7 @@
                                           },
                                           "target": {
                                             "type": "integer",
+                                            "format": "int64",
                                             "description": "Target number of CUs for this schedule.",
                                             "x-i18n": {
                                               "zh-CN": {
@@ -2177,26 +2545,55 @@
                                                 "description": "このスケジュールの対象 CU 数。"
                                               }
                                             }
+                                          },
+                                          "timezone": {
+                                            "type": "string",
+                                            "description": "Timezone of the cron schedule.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "Cron 定时计划使用的时区。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "cron スケジュールのタイムゾーン。"
+                                              }
+                                            }
+                                          }
+                                        },
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "自动扩缩容时间表。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "オートスケーリングスケジュール。"
                                           }
                                         }
+                                      },
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "オートスケーリングのスケジュール。このパラメーターと `min`/`max` は相互排他的です。"
+                                        }
                                       }
+                                    }
+                                  },
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "CU 的自动扩缩容配置。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "CU のオートスケーリング設定。 "
                                     }
                                   }
                                 },
                                 "replica": {
                                   "type": "object",
                                   "description": "Auto-scaling configuration for replicas. ",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "Replica 的自动扩缩容配置。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "レプリカのオートスケーリング設定。 "
-                                    }
-                                  },
                                   "properties": {
                                     "min": {
                                       "type": "integer",
+                                      "format": "int64",
                                       "description": "Minimum number of replicas for auto-scaling. This parameter and `schedules` are mutually exclusive.",
                                       "x-i18n": {
                                         "zh-CN": {
@@ -2205,13 +2602,11 @@
                                         "ja-JP": {
                                           "description": "オートスケーリング時の最小レプリカ数。このパラメーターと `schedules` は相互排他的です。"
                                         }
-                                      },
-                                      "minimum": 1,
-                                      "maximum": 10,
-                                      "exclusiveMinimum": true
+                                      }
                                     },
                                     "max": {
                                       "type": "integer",
+                                      "format": "int64",
                                       "description": "Maximum number of replicas for auto-scaling. This parameter and `schedules` are mutually exclusive.",
                                       "x-i18n": {
                                         "zh-CN": {
@@ -2220,33 +2615,14 @@
                                         "ja-JP": {
                                           "description": "オートスケーリング時の最大レプリカ数。このパラメーターと `schedules` は相互排他的です。"
                                         }
-                                      },
-                                      "minimum": 1,
-                                      "maximum": 10,
-                                      "exclusiveMinimum": true
+                                      }
                                     },
                                     "schedules": {
                                       "type": "array",
                                       "description": "Auto-scaling schedules. This parameter and `min`/`max` are mutually exclusive.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "オートスケーリングのスケジュール。このパラメーターと `min`/`max` は相互排他的です。"
-                                        }
-                                      },
                                       "items": {
                                         "type": "object",
                                         "description": "An auto-scaling schedule.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "自动扩缩容时间表。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "オートスケーリングスケジュール。"
-                                          }
-                                        },
                                         "properties": {
                                           "cron": {
                                             "type": "string",
@@ -2263,6 +2639,7 @@
                                           },
                                           "target": {
                                             "type": "integer",
+                                            "format": "int64",
                                             "description": "Target number of replicas for this schedule.",
                                             "x-i18n": {
                                               "zh-CN": {
@@ -2272,25 +2649,61 @@
                                                 "description": "このスケジュールの対象レプリカ数。"
                                               }
                                             }
+                                          },
+                                          "timezone": {
+                                            "type": "string",
+                                            "description": "Timezone of the cron schedule.",
+                                            "x-i18n": {
+                                              "zh-CN": {
+                                                "description": "Cron 定时计划使用的时区。"
+                                              },
+                                              "ja-JP": {
+                                                "description": "cron スケジュールのタイムゾーン。"
+                                              }
+                                            }
                                           }
+                                        },
+                                        "x-i18n": {
+                                          "zh-CN": {
+                                            "description": "自动扩缩容时间表。"
+                                          },
+                                          "ja-JP": {
+                                            "description": "オートスケーリングスケジュール。"
+                                          }
+                                        }
+                                      },
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "オートスケーリングのスケジュール。このパラメーターと `min`/`max` は相互排他的です。"
                                         }
                                       }
                                     }
+                                  },
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "Replica 的自动扩缩容配置。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "レプリカのオートスケーリング設定。 "
+                                    }
                                   }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "集群的自动扩缩容配置。"
+                                },
+                                "ja-JP": {
+                                  "description": "クラスターのオートスケーリング設定。 "
                                 }
                               }
                             },
                             "globalClusterMeta": {
                               "type": "object",
                               "description": "Metadata of the global cluster if the current cluster belongs to a global cluster. Otherwise, this field is null.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "如果当前集群属于全球集群，则返回全球集群的元信息。否则，此字段为 null。"
-                                },
-                                "ja-JP": {
-                                  "description": "現在のクラスターがグローバルクラスターに属している場合の、そのグローバルクラスターのメタデータ。そうでない場合、このフィールドは null です。"
-                                }
-                              },
                               "properties": {
                                 "globalClusterId": {
                                   "type": "string",
@@ -2307,6 +2720,11 @@
                                 "role": {
                                   "type": "string",
                                   "description": "Role of the cluster in the global cluster. Possible values are `PRIMARY` and `SECONDARY`.",
+                                  "enum": [
+                                    "UNKNOWN",
+                                    "PRIMARY",
+                                    "SECONDARY"
+                                  ],
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "当前集群在全球集群中的角色。可能的值有 `PRIMARY` 和 `SECONDARY`。"
@@ -2314,16 +2732,19 @@
                                     "ja-JP": {
                                       "description": "グローバルクラスター内でのクラスターの役割。指定可能な値は `PRIMARY` と `SECONDARY` です。"
                                     }
-                                  },
-                                  "enum": [
-                                    "PRIMARY",
-                                    "SECONDARY"
-                                  ]
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "如果当前集群属于全球集群，则返回全球集群的元信息。否则，此字段为 null。"
+                                },
+                                "ja-JP": {
+                                  "description": "現在のクラスターがグローバルクラスターに属している場合の、そのグローバルクラスターのメタデータ。そうでない場合、このフィールドは null です。"
                                 }
                               }
                             }
                           },
-                          "description": "Response payload.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载。"
@@ -2727,12 +3148,26 @@
                   "description": {
                     "type": "string",
                     "description": "The new description of the cluster. The value can be an empty string.",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群的新描述。值可以为空字符串。"
                       },
                       "ja-JP": {
                         "description": "クラスターの新しい説明。値は空文字列でもかまいません。"
+                      }
+                    }
+                  },
+                  "publicAddressEnabled": {
+                    "type": "boolean",
+                    "description": "Whether the cluster's public address is enabled; null leaves it unchanged and the flag only applies to dedicated (non-BYOC) clusters.",
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "是否启用集群的公网地址；为 null 时表示保持不变，仅适用于 Dedicated（非 BYOC）集群。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターのパブリックアドレスが有効かどうか。null の場合は変更されず、このフラグは専用（BYOC 以外）クラスターにのみ適用されます。"
                       }
                     }
                   }
@@ -2784,10 +3219,14 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "ja-JP": {
                               "description": "レスポンスコード。"
+                            },
+                            "zh-CN": {
+                              "description": "响应码。"
                             }
                           }
                         },
@@ -3012,6 +3451,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -3234,7 +3674,10 @@
                 "properties": {
                   "cuSize": {
                     "type": "integer",
+                    "format": "int64",
                     "description": "Number of CUs allocated to this cluster after the modification. This parameter and `autoscaling.cu` are mutually exclusive; you can specify only one of them. The product of this parameter and `replica` should not exceed 1024.<br/>For dedicated clusters in Standard plan, the value can be `1` to `32`, and possible values can be 1, 2, 4, 8, 12, 16, 20, 24, 28, 32.<br/>For dedicated clusters in Enterprise plan, the value can be `1` to `1,024`, and possible values can be 1, 2, 4, 8, 12, 16, 20, 24, 28, 32,...,64, 72, 80, 88,...,256, 272, 288, ...,1024.<br/>For details on the increment rules for the CU size, refer to the `Deployment` section in [Detailed Plan Comparison](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment).",
+                    "maximum": 1024,
+                    "minimum": 1,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "修改后分配给指定集群的 CU 数量。此参数与 `autoscaling.cu` 互斥；您只能指定其中一个。此参数与 `replica` 的乘积不得超过 1024。<br/>对于 Standard 计划的 Dedicated 集群，该值取值范围为 `1` 到 `32`，可能的值为1、2、4、8、12、16、20、24、28、32。<br/>对于 Enterprise 计划的 Dedicated 集群，该值取值范围为 `1` 到 `1024`，可能的值为1、2、4、8、12、16、20、24、28、32、...、64、72、80、88、...、256、272、288、...、1024。<br/>关于 CU 大小的增量规则，请参阅 [详细计划对比](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) 中的 `Deployment` 部分。"
@@ -3242,14 +3685,14 @@
                       "ja-JP": {
                         "description": "変更後にこのクラスターへ割り当てられる CU 数。このパラメーターと `autoscaling.cu` は相互排他的であり、指定できるのはどちらか一方のみです。このパラメーターと `replica` の積は 1024 を超えてはなりません。<br/>Standard plan の専用クラスターでは、値は `1` ～ `32` で、指定可能な値は 1, 2, 4, 8, 12, 16, 20, 24, 28, 32 です。<br/>Enterprise plan の専用クラスターでは、値は `1` ～ `1,024` で、指定可能な値は 1, 2, 4, 8, 12, 16, 20, 24, 28, 32,...,64, 72, 80, 88,...,256, 272, 288, ...,1024 です。<br/>CU サイズの増分ルールの詳細については、[Detailed Plan Comparison](https://docs.zilliz.com/docs/select-zilliz-cloud-service-plans#deployment) の `Deployment` セクションを参照してください。"
                       }
-                    },
-                    "minimum": 1,
-                    "maximum": 1024,
-                    "exclusiveMinimum": true
+                    }
                   },
                   "replica": {
                     "type": "integer",
+                    "format": "int64",
                     "description": "Number of replicas for this cluster after the modification. This parameter and `autoscaling.replica` are mutually exclusive; you can specify only one of them. The product of this parameter and `cuSize` should not exceed 1024.",
+                    "maximum": 10,
+                    "minimum": 1,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "修改后指定集群的副本数量。此参数与 `autoscaling.replica` 互斥；您只能指定其中一个。此参数与 `cuSize` 的乘积不得超过 1024。"
@@ -3257,38 +3700,22 @@
                       "ja-JP": {
                         "description": "変更後のこのクラスターのレプリカ数。このパラメーターと `autoscaling.replica` は相互排他的であり、指定できるのはどちらか一方のみです。このパラメーターと `cuSize` の積は 1024 を超えてはなりません。"
                       }
-                    },
-                    "minimum": 1,
-                    "maximum": 10,
-                    "exclusiveMinimum": true
+                    }
                   },
                   "autoscaling": {
                     "type": "object",
                     "description": "Auto-scaling configuration for the cluster. This parameter and `cuSize` or `replica` are mutually exclusive; you can specify only one of them.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "集群的自动扩缩容配置。此参数与 `cuSize` 或 `replica` 互斥；您只能指定其中一个。"
-                      },
-                      "ja-JP": {
-                        "description": "クラスターの Auto-scaling 設定。このパラメーターと `cuSize` または `replica` は相互排他的であり、指定できるのはどちらか一方のみです。"
-                      }
-                    },
                     "properties": {
                       "cu": {
                         "type": "object",
                         "description": "Auto-scaling configuration for CUs. This is unavailable if you have already set `cuSize`. The product of the maximum number of CUs and the maximum number of replicas should not exceed 1024.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "CU 的自动扩缩容配置。如果您已设置 `cuSize`，则无法使用此配置。最大 CU 数量与最大副本数量的乘积不得超过 1024。"
-                          },
-                          "ja-JP": {
-                            "description": "CU の Auto-scaling 設定。`cuSize` をすでに設定している場合は使用できません。CU の最大数とレプリカの最大数の積は 1024 を超えてはなりません。"
-                          }
-                        },
                         "properties": {
                           "min": {
                             "type": "integer",
+                            "format": "int64",
                             "description": "Minimum number of CUs for auto-scaling. This parameter and `schedules` are mutually exclusive; you can specify only one of them.",
+                            "maximum": 1024,
+                            "minimum": 1,
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "自动扩缩容的最小 CU 数量。此参数与 `schedules` 互斥；您只能指定其中一个。"
@@ -3296,14 +3723,14 @@
                               "ja-JP": {
                                 "description": "Auto-scaling の CU の最小数。このパラメーターと `schedules` は相互排他的であり、指定できるのはどちらか一方のみです。"
                               }
-                            },
-                            "minimum": 1,
-                            "maximum": 1024,
-                            "exclusiveMinimum": true
+                            }
                           },
                           "max": {
                             "type": "integer",
+                            "format": "int64",
                             "description": "Maximum number of CUs for auto-scaling. This parameter and `schedules` are mutually exclusive; you can specify only one of them.",
+                            "maximum": 1024,
+                            "minimum": 1,
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "自动扩缩容的最大 CU 数量。此参数与 `schedules` 互斥；您只能指定其中一个。"
@@ -3311,33 +3738,14 @@
                               "ja-JP": {
                                 "description": "Auto-scaling の CU の最大数。このパラメーターと `schedules` は相互排他的であり、指定できるのはどちらか一方のみです。"
                               }
-                            },
-                            "minimum": 1,
-                            "maximum": 1024,
-                            "exclusiveMinimum": true
+                            }
                           },
                           "schedules": {
                             "type": "array",
                             "description": "Auto-scaling schedules. This parameter and `min`/`max` are mutually exclusive; you can specify only one of them.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥；您只能指定其中一个。"
-                              },
-                              "ja-JP": {
-                                "description": "Auto-scaling スケジュール。このパラメーターと `min`/`max` は相互排他的であり、指定できるのはどちらか一方のみです。"
-                              }
-                            },
                             "items": {
                               "type": "object",
                               "description": "An auto-scaling schedule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "自动扩缩容时间表。"
-                                },
-                                "ja-JP": {
-                                  "description": "Auto-scaling スケジュール。"
-                                }
-                              },
                               "properties": {
                                 "cron": {
                                   "type": "string",
@@ -3354,7 +3762,10 @@
                                 },
                                 "target": {
                                   "type": "integer",
+                                  "format": "int64",
                                   "description": "Target number of CUs for this schedule.",
+                                  "maximum": 1024,
+                                  "minimum": 1,
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "此时间表的目标 CU 数量。"
@@ -3363,68 +3774,20 @@
                                       "description": "このスケジュールの対象 CU 数。"
                                     }
                                   }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "调度的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールのタイムゾーン。"
+                                    }
+                                  }
                                 }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "replica": {
-                        "type": "object",
-                        "description": "Auto-scaling configuration for replicas. This is unavailable if you have already set `replica`. The product of the maximum number of CUs and the maximum number of replicas should not exceed 256.",
-                        "x-i18n": {
-                          "zh-CN": {
-                            "description": "Replica 的自动扩缩容配置。如果您已设置 `replica`，则无法使用此配置。最大 CU 数量与最大副本数量的乘积不得超过 256。"
-                          },
-                          "ja-JP": {
-                            "description": "レプリカの Auto-scaling 設定。`replica` をすでに設定している場合は使用できません。CU の最大数とレプリカの最大数の積は 256 を超えてはなりません。"
-                          }
-                        },
-                        "properties": {
-                          "min": {
-                            "type": "integer",
-                            "description": "Minimum number of replicas for auto-scaling. This parameter and `schedules` are mutually exclusive; you can specify only one of them.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "自动扩缩容的最小 Replica 数量。此参数与 `schedules` 互斥；您只能指定其中一个。"
                               },
-                              "ja-JP": {
-                                "description": "Auto-scaling のレプリカの最小数。このパラメーターと `schedules` は相互排他的であり、指定できるのはどちらか一方のみです。"
-                              }
-                            },
-                            "minimum": 1,
-                            "maximum": 10,
-                            "exclusiveMinimum": true
-                          },
-                          "max": {
-                            "type": "integer",
-                            "description": "Maximum number of replicas for auto-scaling. This parameter and `schedules` are mutually exclusive; you can specify only one of them.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "自动扩缩容的最大 Replica 数量。此参数与 `schedules` 互斥；您只能指定其中一个。"
-                              },
-                              "ja-JP": {
-                                "description": "Auto-scaling のレプリカの最大数。このパラメーターと `schedules` は相互排他的であり、指定できるのはどちらか一方のみです。"
-                              }
-                            },
-                            "minimum": 1,
-                            "maximum": 10,
-                            "exclusiveMinimum": true
-                          },
-                          "schedules": {
-                            "type": "array",
-                            "description": "Auto-scaling schedules. This parameter and `min`/`max` are mutually exclusive; you can specify only one of them.",
-                            "x-i18n": {
-                              "zh-CN": {
-                                "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥；您只能指定其中一个。"
-                              },
-                              "ja-JP": {
-                                "description": "Auto-scaling スケジュール。このパラメーターと `min`/`max` は相互排他的であり、指定できるのはどちらか一方のみです。"
-                              }
-                            },
-                            "items": {
-                              "type": "object",
-                              "description": "An auto-scaling schedule.",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "自动扩缩容时间表。"
@@ -3432,7 +3795,67 @@
                                 "ja-JP": {
                                   "description": "Auto-scaling スケジュール。"
                                 }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥；您只能指定其中一个。"
                               },
+                              "ja-JP": {
+                                "description": "Auto-scaling スケジュール。このパラメーターと `min`/`max` は相互排他的であり、指定できるのはどちらか一方のみです。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "CU 的自动扩缩容配置。如果您已设置 `cuSize`，则无法使用此配置。最大 CU 数量与最大副本数量的乘积不得超过 1024。"
+                          },
+                          "ja-JP": {
+                            "description": "CU の Auto-scaling 設定。`cuSize` をすでに設定している場合は使用できません。CU の最大数とレプリカの最大数の積は 1024 を超えてはなりません。"
+                          }
+                        }
+                      },
+                      "replica": {
+                        "type": "object",
+                        "description": "Auto-scaling configuration for replicas. This is unavailable if you have already set `replica`. The product of the maximum number of CUs and the maximum number of replicas should not exceed 256.",
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Minimum number of replicas for auto-scaling. This parameter and `schedules` are mutually exclusive; you can specify only one of them.",
+                            "maximum": 10,
+                            "minimum": 1,
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "自动扩缩容的最小 Replica 数量。此参数与 `schedules` 互斥；您只能指定其中一个。"
+                              },
+                              "ja-JP": {
+                                "description": "Auto-scaling のレプリカの最小数。このパラメーターと `schedules` は相互排他的であり、指定できるのはどちらか一方のみです。"
+                              }
+                            }
+                          },
+                          "max": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Maximum number of replicas for auto-scaling. This parameter and `schedules` are mutually exclusive; you can specify only one of them.",
+                            "maximum": 10,
+                            "minimum": 1,
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "自动扩缩容的最大 Replica 数量。此参数与 `schedules` 互斥；您只能指定其中一个。"
+                              },
+                              "ja-JP": {
+                                "description": "Auto-scaling のレプリカの最大数。このパラメーターと `schedules` は相互排他的であり、指定できるのはどちらか一方のみです。"
+                              }
+                            }
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Auto-scaling schedules. This parameter and `min`/`max` are mutually exclusive; you can specify only one of them.",
+                            "items": {
+                              "type": "object",
+                              "description": "An auto-scaling schedule.",
                               "properties": {
                                 "cron": {
                                   "type": "string",
@@ -3449,7 +3872,10 @@
                                 },
                                 "target": {
                                   "type": "integer",
+                                  "format": "int64",
                                   "description": "Target number of replicas for this schedule.",
+                                  "maximum": 10,
+                                  "minimum": 1,
                                   "x-i18n": {
                                     "zh-CN": {
                                       "description": "此时间表的目标 Replica 数量。"
@@ -3458,11 +3884,55 @@
                                       "description": "このスケジュールの対象レプリカ数。"
                                     }
                                   }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "调度的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールのタイムゾーン。"
+                                    }
+                                  }
                                 }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "自动扩缩容时间表。"
+                                },
+                                "ja-JP": {
+                                  "description": "Auto-scaling スケジュール。"
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "自动扩缩容的时间表。此参数与 `min`/`max` 互斥；您只能指定其中一个。"
+                              },
+                              "ja-JP": {
+                                "description": "Auto-scaling スケジュール。このパラメーターと `min`/`max` は相互排他的であり、指定できるのはどちらか一方のみです。"
                               }
                             }
                           }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "Replica 的自动扩缩容配置。如果您已设置 `replica`，则无法使用此配置。最大 CU 数量与最大副本数量的乘积不得超过 256。"
+                          },
+                          "ja-JP": {
+                            "description": "レプリカの Auto-scaling 設定。`replica` をすでに設定している場合は使用できません。CU の最大数とレプリカの最大数の積は 256 を超えてはなりません。"
+                          }
                         }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的自动扩缩容配置。此参数与 `cuSize` 或 `replica` 互斥；您只能指定其中一个。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターの Auto-scaling 設定。このパラメーターと `cuSize` または `replica` は相互排他的であり、指定できるのはどちらか一方のみです。"
                       }
                     }
                   }
@@ -3540,10 +4010,14 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "ja-JP": {
                               "description": "レスポンスコード。"
+                            },
+                            "zh-CN": {
+                              "description": "响应码。"
                             }
                           }
                         },
@@ -3749,7 +4223,10 @@
                 "properties": {
                   "replica": {
                     "type": "integer",
+                    "format": "int64",
                     "description": "Number of replicas for this cluster after the modification.",
+                    "maximum": 8,
+                    "minimum": 1,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "修改后的集群副本数量。"
@@ -3757,9 +4234,130 @@
                       "ja-JP": {
                         "description": "変更後のこのクラスタのレプリカ数。"
                       }
+                    }
+                  },
+                  "autoscaling": {
+                    "type": "object",
+                    "description": "Autoscaling configuration of the cluster.",
+                    "properties": {
+                      "replica": {
+                        "type": "object",
+                        "description": "Replica range and schedules for autoscaling.",
+                        "properties": {
+                          "min": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Minimum number of replicas.",
+                            "maximum": 8,
+                            "minimum": 1,
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "最小副本数量。"
+                              },
+                              "ja-JP": {
+                                "description": "レプリカの最小数。"
+                              }
+                            }
+                          },
+                          "max": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Maximum number of replicas.",
+                            "maximum": 8,
+                            "minimum": 1,
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "最大副本数量。"
+                              },
+                              "ja-JP": {
+                                "description": "レプリカの最大数。"
+                              }
+                            }
+                          },
+                          "schedules": {
+                            "type": "array",
+                            "description": "Scheduled replica adjustments.",
+                            "items": {
+                              "type": "object",
+                              "description": "Scheduled autoscaling adjustment.",
+                              "properties": {
+                                "cron": {
+                                  "type": "string",
+                                  "description": "Cron expression of the schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "调度的 Cron 表达式。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールのcron式。"
+                                    }
+                                  }
+                                },
+                                "target": {
+                                  "type": "integer",
+                                  "format": "int64",
+                                  "description": "Target replica count applied when the schedule fires.",
+                                  "maximum": 8,
+                                  "minimum": 1,
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "调度触发时应用的目标副本数量。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュール実行時に適用されるターゲットレプリカ数。"
+                                    }
+                                  }
+                                },
+                                "timezone": {
+                                  "type": "string",
+                                  "description": "Timezone of the schedule.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "调度的时区。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "スケジュールのタイムゾーン。"
+                                    }
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定时自动扩缩容调整。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールされたオートスケーリング調整。"
+                                }
+                              }
+                            },
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "副本的定时调整调度列表。"
+                              },
+                              "ja-JP": {
+                                "description": "スケジュールされたレプリカ調整。"
+                              }
+                            }
+                          }
+                        },
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "自动扩缩容的副本范围与调度。"
+                          },
+                          "ja-JP": {
+                            "description": "オートスケーリングのレプリカ範囲とスケジュール。"
+                          }
+                        }
+                      }
                     },
-                    "minimum": 1,
-                    "maximum": 8
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "集群的自动扩缩容配置。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスターのオートスケーリング設定。"
+                      }
+                    }
                   }
                 },
                 "required": [
@@ -3825,10 +4423,14 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "ja-JP": {
                               "description": "レスポンスコード。"
+                            },
+                            "zh-CN": {
+                              "description": "响应码。"
                             }
                           }
                         },
@@ -4053,6 +4655,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -4288,6 +4891,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {

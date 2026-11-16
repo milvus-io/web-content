@@ -152,6 +152,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -164,9 +165,11 @@
                         },
                         "data": {
                           "type": "object",
+                          "description": "Response payload for the alert rules request.",
                           "properties": {
                             "count": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The total number of alert rules.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -179,6 +182,7 @@
                             },
                             "currentPage": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The current page number.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -191,6 +195,7 @@
                             },
                             "pageSize": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "The number of records in each page.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -204,16 +209,9 @@
                             "alertRules": {
                               "type": "array",
                               "description": "A list of alert rules.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则列表。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールの一覧。"
-                                }
-                              },
                               "items": {
                                 "type": "object",
+                                "description": "An alert rule returned in the list.",
                                 "properties": {
                                   "id": {
                                     "type": "string",
@@ -227,6 +225,18 @@
                                       }
                                     }
                                   },
+                                  "orgId": {
+                                    "type": "string",
+                                    "description": "The ID of the organization this alert rule belongs to.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "该告警规则所属组织的 ID。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "このアラートルールが属する組織の ID。"
+                                      }
+                                    }
+                                  },
                                   "projectId": {
                                     "type": "string",
                                     "description": "The ID of the project to which the alert rule belongs.",
@@ -236,70 +246,6 @@
                                       },
                                       "ja-JP": {
                                         "description": "アラートルールが属するプロジェクトの ID。"
-                                      }
-                                    }
-                                  },
-                                  "ruleName": {
-                                    "type": "string",
-                                    "description": "The name of the alert rule.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "告警规则名称。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラートルールの名前。"
-                                      }
-                                    }
-                                  },
-                                  "level": {
-                                    "type": "string",
-                                    "description": "The level of the alert rule.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "告警规则级别。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラートルールのレベル。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "CRITICAL",
-                                      "WARNING"
-                                    ]
-                                  },
-                                  "metricName": {
-                                    "type": "string",
-                                    "description": "The name of the metric that the alert rule monitors.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "告警规则监控的指标名称。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラートルールが監視するメトリクスの名前。"
-                                      }
-                                    }
-                                  },
-                                  "threshold": {
-                                    "type": "string",
-                                    "description": "The threshold value of the alert rule.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "告警规则阈值。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラートルールのしきい値。"
-                                      }
-                                    }
-                                  },
-                                  "windowSize": {
-                                    "type": "string",
-                                    "description": "The time window for the alert rule in minutes.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "告警规则的时间窗口，单位为分钟。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラートルールの時間ウィンドウ（分）。"
                                       }
                                     }
                                   },
@@ -327,214 +273,110 @@
                                       }
                                     }
                                   },
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "The actions to take when the alert rule is triggered.",
+                                  "level": {
+                                    "type": "string",
+                                    "description": "The level of the alert rule.",
+                                    "enum": [
+                                      "WARNING",
+                                      "CRITICAL"
+                                    ],
                                     "x-i18n": {
                                       "zh-CN": {
-                                        "description": "触发告警规则时采取的操作列表。"
+                                        "description": "告警规则级别。"
                                       },
                                       "ja-JP": {
-                                        "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                        "description": "アラートルールのレベル。"
                                       }
-                                    },
-                                    "items": {
-                                      "type": "object",
-                                      "description": "An action to take when the alert rule is triggered.",
-                                      "x-i18n": {
-                                        "zh-CN": {
-                                          "description": "触发告警规则时采取的操作。"
-                                        },
-                                        "ja-JP": {
-                                          "description": "アラートルールがトリガーされたときに実行するアクション。"
-                                        }
+                                    }
+                                  },
+                                  "ruleName": {
+                                    "type": "string",
+                                    "description": "The name of the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则名称。"
                                       },
-                                      "properties": {
-                                        "type": {
-                                          "type": "string",
-                                          "description": "The type of the action.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "操作类型。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "アクションのタイプ。"
-                                            }
-                                          },
-                                          "enum": [
-                                            "EMAIL",
-                                            "SMS",
-                                            "WEBHOOK",
-                                            "SLACK",
-                                            "LARK",
-                                            "WECOM",
-                                            "PAGERDUTY",
-                                            "OPSGENIE"
-                                          ]
-                                        },
-                                        "config": {
-                                          "type": "object",
-                                          "description": "The configuration for the action.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "操作配置。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "アクションの設定。"
-                                            }
-                                          },
-                                          "properties": {
-                                            "recipients": {
-                                              "type": "object",
-                                              "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
-                                                }
-                                              },
-                                              "properties": {
-                                                "members": {
-                                                  "type": "array",
-                                                  "description": "A list of email addresses to receive the alert notification.",
-                                                  "x-i18n": {
-                                                    "zh-CN": {
-                                                      "description": "用于接收通知的邮件地址列表。"
-                                                    },
-                                                    "ja-JP": {
-                                                      "description": "アラート通知を受信するメールアドレスの一覧。"
-                                                    }
-                                                  },
-                                                  "items": {
-                                                    "type": "string",
-                                                    "description": "An email address to receive the alert notification.",
-                                                    "x-i18n": {
-                                                      "zh-CN": {
-                                                        "description": "用于接收通知的邮件地址。"
-                                                      },
-                                                      "ja-JP": {
-                                                        "description": "アラート通知を受信するメールアドレス。"
-                                                      }
-                                                    }
-                                                  }
-                                                },
-                                                "orgRoles": {
-                                                  "type": "array",
-                                                  "description": "A list of organization roles to receive the alert notification.",
-                                                  "x-i18n": {
-                                                    "zh-CN": {
-                                                      "description": "用于接收通知的组织角色列表。"
-                                                    },
-                                                    "ja-JP": {
-                                                      "description": "アラート通知を受信する組織ロールの一覧。"
-                                                    }
-                                                  },
-                                                  "items": {
-                                                    "type": "string",
-                                                    "description": "An organization role to receive the alert notification.",
-                                                    "x-i18n": {
-                                                      "zh-CN": {
-                                                        "description": "用于接收通知的组织角色。"
-                                                      },
-                                                      "ja-JP": {
-                                                        "description": "アラート通知を受信する組織ロール。"
-                                                      }
-                                                    },
-                                                    "enum": [
-                                                      "OWNER",
-                                                      "MEMBER",
-                                                      "BILLING_ADMIN"
-                                                    ]
-                                                  }
-                                                },
-                                                "projectRoles": {
-                                                  "type": "array",
-                                                  "description": "A list of project roles to receive the alert notification.",
-                                                  "x-i18n": {
-                                                    "zh-CN": {
-                                                      "description": "用于接收通知的项目角色列表。"
-                                                    },
-                                                    "ja-JP": {
-                                                      "description": "アラート通知を受信するプロジェクトロールの一覧。"
-                                                    }
-                                                  },
-                                                  "items": {
-                                                    "type": "string",
-                                                    "description": "A project role to receive the alert notification.",
-                                                    "x-i18n": {
-                                                      "zh-CN": {
-                                                        "description": "用于接收通知的项目角色。"
-                                                      },
-                                                      "ja-JP": {
-                                                        "description": "アラート通知を受信するプロジェクトロール。"
-                                                      }
-                                                    },
-                                                    "enum": [
-                                                      "OWNER",
-                                                      "MEMBER"
-                                                    ]
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "url": {
-                                              "type": "string",
-                                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
-                                                }
-                                              }
-                                            },
-                                            "webhookUrl": {
-                                              "type": "string",
-                                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
-                                                }
-                                              }
-                                            },
-                                            "region": {
-                                              "type": "string",
-                                              "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                                }
-                                              }
-                                            },
-                                            "apiKey": {
-                                              "type": "string",
-                                              "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "PagerDuty または OpsGenie サービス用の API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
+                                      "ja-JP": {
+                                        "description": "アラートルールの名前。"
+                                      }
+                                    }
+                                  },
+                                  "metricName": {
+                                    "type": "string",
+                                    "description": "The name of the metric that the alert rule monitors.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则监控的指标名称。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが監視するメトリクスの名前。"
+                                      }
+                                    }
+                                  },
+                                  "metricUnit": {
+                                    "type": "string",
+                                    "description": "The unit of the monitored metric.",
+                                    "enum": [
+                                      "percent",
+                                      "millisecond",
+                                      "second",
+                                      "qps",
+                                      "vps",
+                                      "count",
+                                      "row",
+                                      "vcu",
+                                      "count/s",
+                                      "count/m",
+                                      "gb",
+                                      "dollar",
+                                      "day",
+                                      "core",
+                                      "mb",
+                                      "mbps"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "被监控指标的单位。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "監視対象メトリックの単位。"
+                                      }
+                                    }
+                                  },
+                                  "windowSize": {
+                                    "type": "string",
+                                    "description": "The time window for the alert rule in minutes.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则的时间窗口，单位为分钟。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールの時間ウィンドウ（分）。"
+                                      }
+                                    }
+                                  },
+                                  "threshold": {
+                                    "type": "string",
+                                    "description": "The threshold value of the alert rule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则阈值。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールのしきい値。"
                                       }
                                     }
                                   },
                                   "comparisonMethod": {
                                     "type": "string",
                                     "description": "The comparison operator used in the alert rule.",
+                                    "enum": [
+                                      "GREATER_THAN",
+                                      "LESS_THAN",
+                                      "GREATER_THAN_OR_EQUAL",
+                                      "LESS_THAN_OR_EQUAL",
+                                      "EQUAL"
+                                    ],
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "告警规则使用的比较运算符。"
@@ -542,26 +384,11 @@
                                       "ja-JP": {
                                         "description": "アラートルールで使用される比較演算子。"
                                       }
-                                    },
-                                    "enum": [
-                                      "GREATER_THAN",
-                                      "EQUALS",
-                                      "LESS_THAN",
-                                      "GREATER_THAN_OR_EQUALS",
-                                      "LESS_THAN_OR_EQUALS"
-                                    ]
+                                    }
                                   },
                                   "targetInstanceIds": {
                                     "type": "array",
                                     "description": "The IDs of the clusters to which the alert rule applies.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "告警规则适用的集群 ID 列表。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラートルールが適用されるクラスターの ID。"
-                                      }
-                                    },
                                     "items": {
                                       "type": "string",
                                       "description": "The ID of the cluster.",
@@ -573,10 +400,96 @@
                                           "description": "クラスターの ID。"
                                         }
                                       }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警规则适用的集群 ID 列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールが適用されるクラスターの ID。"
+                                      }
+                                    }
+                                  },
+                                  "actions": {
+                                    "type": "array",
+                                    "description": "The actions to take when the alert rule is triggered.",
+                                    "items": {
+                                      "type": "object",
+                                      "description": "An action to take when the alert rule is triggered.",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "description": "The type of the action.",
+                                          "enum": [
+                                            "NOTIFY_ORG",
+                                            "EMAIL",
+                                            "SMS",
+                                            "PAGERDUTY",
+                                            "OPSGENIE",
+                                            "SLACK",
+                                            "WECOM",
+                                            "DINGTALK",
+                                            "LARK",
+                                            "WEBHOOK"
+                                          ],
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "操作类型。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "アクションのタイプ。"
+                                            }
+                                          }
+                                        },
+                                        "config": {
+                                          "type": "object",
+                                          "description": "The configuration for the action.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "操作配置。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "アクションの設定。"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "config",
+                                        "type"
+                                      ],
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "触发告警规则时采取的操作。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                        }
+                                      }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "触发告警规则时采取的操作列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                      }
+                                    }
+                                  },
+                                  "repeatIntervalSeconds": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "description": "Repeat interval in seconds for alert notifications",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "告警通知的重复间隔（秒）。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アラート通知の繰り返し間隔（秒）"
+                                      }
                                     }
                                   }
                                 },
-                                "description": "An alert rule returned in the list.",
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "列表中返回的一条告警规则。"
@@ -585,10 +498,17 @@
                                     "description": "リストで返されるアラートルール。"
                                   }
                                 }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの一覧。"
+                                }
                               }
                             }
                           },
-                          "description": "Response payload for the alert rules request.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "告警规则请求的响应载荷。"
@@ -867,6 +787,10 @@
                   "level": {
                     "type": "string",
                     "description": "The level of the alert rule.",
+                    "enum": [
+                      "WARNING",
+                      "CRITICAL"
+                    ],
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则级别。"
@@ -874,11 +798,7 @@
                       "ja-JP": {
                         "description": "アラートルールのレベル。"
                       }
-                    },
-                    "enum": [
-                      "CRITICAL",
-                      "WARNING"
-                    ]
+                    }
                   },
                   "metricName": {
                     "type": "string",
@@ -943,29 +863,25 @@
                   "actions": {
                     "type": "array",
                     "description": "The actions to take when the alert rule is triggered.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "触发告警规则时采取的操作列表。"
-                      },
-                      "ja-JP": {
-                        "description": "アラートルールがトリガーされたときに実行するアクション。"
-                      }
-                    },
                     "items": {
                       "type": "object",
                       "description": "An action to take when the alert rule is triggered.",
-                      "x-i18n": {
-                        "zh-CN": {
-                          "description": "触发告警规则时采取的操作。"
-                        },
-                        "ja-JP": {
-                          "description": "アラートルールがトリガーされたときに実行するアクション。"
-                        }
-                      },
                       "properties": {
                         "type": {
                           "type": "string",
                           "description": "The type of the action.",
+                          "enum": [
+                            "NOTIFY_ORG",
+                            "EMAIL",
+                            "SMS",
+                            "PAGERDUTY",
+                            "OPSGENIE",
+                            "SLACK",
+                            "WECOM",
+                            "DINGTALK",
+                            "LARK",
+                            "WEBHOOK"
+                          ],
                           "x-i18n": {
                             "zh-CN": {
                               "description": "操作类型。"
@@ -973,17 +889,7 @@
                             "ja-JP": {
                               "description": "アクションのタイプ。"
                             }
-                          },
-                          "enum": [
-                            "EMAIL",
-                            "SMS",
-                            "WEBHOOK",
-                            "SLACK",
-                            "LARK",
-                            "WECOM",
-                            "PAGERDUTY",
-                            "OPSGENIE"
-                          ]
+                          }
                         },
                         "config": {
                           "type": "object",
@@ -995,163 +901,41 @@
                             "ja-JP": {
                               "description": "アクションの設定。"
                             }
-                          },
-                          "properties": {
-                            "recipients": {
-                              "type": "object",
-                              "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
-                                }
-                              },
-                              "properties": {
-                                "members": {
-                                  "type": "array",
-                                  "description": "A list of email addresses to receive the alert notification.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "用于接收通知的邮件地址列表。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "アラート通知を受信するメールアドレスの一覧。"
-                                    }
-                                  },
-                                  "items": {
-                                    "type": "string",
-                                    "description": "An email address to receive the alert notification.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "用于接收通知的邮件地址。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラート通知を受信するメールアドレス。"
-                                      }
-                                    }
-                                  }
-                                },
-                                "orgRoles": {
-                                  "type": "array",
-                                  "description": "A list of organization roles to receive the alert notification.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "用于接收通知的组织角色列表。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "アラート通知を受信する組織ロールの一覧。"
-                                    }
-                                  },
-                                  "items": {
-                                    "type": "string",
-                                    "description": "An organization role to receive the alert notification.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "用于接收通知的组织角色。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラート通知を受信する組織ロール。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "OWNER",
-                                      "MEMBER",
-                                      "BILLING_ADMIN"
-                                    ]
-                                  }
-                                },
-                                "projectRoles": {
-                                  "type": "array",
-                                  "description": "A list of project roles to receive the alert notification.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "用于接收通知的项目角色列表。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "アラート通知を受信するプロジェクトロールの一覧。"
-                                    }
-                                  },
-                                  "items": {
-                                    "type": "string",
-                                    "description": "A project role to receive the alert notification.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "用于接收通知的项目角色。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラート通知を受信するプロジェクトロール。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "OWNER",
-                                      "MEMBER"
-                                    ]
-                                  }
-                                }
-                              }
-                            },
-                            "url": {
-                              "type": "string",
-                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
-                                }
-                              }
-                            },
-                            "webhookUrl": {
-                              "type": "string",
-                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
-                                }
-                              }
-                            },
-                            "region": {
-                              "type": "string",
-                              "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                }
-                              }
-                            },
-                            "apiKey": {
-                              "type": "string",
-                              "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                }
-                              }
-                            }
                           }
                         }
                       },
                       "required": [
-                        "type",
-                        "config"
-                      ]
+                        "config",
+                        "type"
+                      ],
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "触发告警规则时采取的操作。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールがトリガーされたときに実行するアクション。"
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "触发告警规则时采取的操作列表。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールがトリガーされたときに実行するアクション。"
+                      }
                     }
                   },
                   "comparisonMethod": {
                     "type": "string",
                     "description": "The comparison operator used in the alert rule.",
+                    "enum": [
+                      "GREATER_THAN",
+                      "LESS_THAN",
+                      "GREATER_THAN_OR_EQUAL",
+                      "LESS_THAN_OR_EQUAL",
+                      "EQUAL"
+                    ],
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则使用的比较运算符。"
@@ -1159,14 +943,7 @@
                       "ja-JP": {
                         "description": "アラートルールで使用される比較演算子。"
                       }
-                    },
-                    "enum": [
-                      "GREATER_THAN",
-                      "EQUALS",
-                      "LESS_THAN",
-                      "GREATER_THAN_OR_EQUALS",
-                      "LESS_THAN_OR_EQUALS"
-                    ]
+                    }
                   },
                   "targetInstanceIds": {
                     "type": "array",
@@ -1206,6 +983,7 @@
                   },
                   "repeatIntervalSeconds": {
                     "type": "integer",
+                    "format": "int32",
                     "description": "The interval in seconds between repeated alert notifications.",
                     "x-i18n": {
                       "zh-CN": {
@@ -1224,7 +1002,8 @@
                   "metricName",
                   "enabled",
                   "sendResolved",
-                  "actions"
+                  "actions",
+                  "comparisonMethod"
                 ],
                 "example": {
                   "projectId": "proj-b44a39b0c51cf21791a841",
@@ -1462,6 +1241,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1474,6 +1254,7 @@
                         },
                         "data": {
                           "type": "object",
+                          "description": "Response payload for the alert rule creation request.",
                           "properties": {
                             "id": {
                               "type": "string",
@@ -1487,6 +1268,18 @@
                                 }
                               }
                             },
+                            "orgId": {
+                              "type": "string",
+                              "description": "The ID of the organization this alert rule belongs to.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "该告警规则所属组织的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "このアラートルールが属する組織の ID。"
+                                }
+                              }
+                            },
                             "projectId": {
                               "type": "string",
                               "description": "The ID of the project to which the alert rule belongs.",
@@ -1496,70 +1289,6 @@
                                 },
                                 "ja-JP": {
                                   "description": "アラートルールが属するプロジェクトの ID。"
-                                }
-                              }
-                            },
-                            "ruleName": {
-                              "type": "string",
-                              "description": "The name of the alert rule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールの名前。"
-                                }
-                              }
-                            },
-                            "level": {
-                              "type": "string",
-                              "description": "The level of the alert rule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则级别。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールのレベル。"
-                                }
-                              },
-                              "enum": [
-                                "CRITICAL",
-                                "WARNING"
-                              ]
-                            },
-                            "metricName": {
-                              "type": "string",
-                              "description": "The name of the metric that the alert rule monitors.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则监控的指标名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールが監視するメトリクスの名前。"
-                                }
-                              }
-                            },
-                            "threshold": {
-                              "type": "string",
-                              "description": "The threshold value of the alert rule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则阈值。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールのしきい値。"
-                                }
-                              }
-                            },
-                            "windowSize": {
-                              "type": "string",
-                              "description": "The time window for the alert rule in minutes.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则的时间窗口，单位为分钟。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールの時間ウィンドウ（分）。"
                                 }
                               }
                             },
@@ -1587,214 +1316,110 @@
                                 }
                               }
                             },
-                            "actions": {
-                              "type": "array",
-                              "description": "The actions to take when the alert rule is triggered.",
+                            "level": {
+                              "type": "string",
+                              "description": "The level of the alert rule.",
+                              "enum": [
+                                "WARNING",
+                                "CRITICAL"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "触发告警规则时采取的操作列表。"
+                                  "description": "告警规则级别。"
                                 },
                                 "ja-JP": {
-                                  "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                  "description": "アラートルールのレベル。"
                                 }
-                              },
-                              "items": {
-                                "type": "object",
-                                "description": "An action to take when the alert rule is triggered.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "触发告警规则时采取的操作。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "アラートルールがトリガーされたときに実行するアクション。"
-                                  }
+                              }
+                            },
+                            "ruleName": {
+                              "type": "string",
+                              "description": "The name of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则名称。"
                                 },
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "The type of the action.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "操作类型。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アクションのタイプ。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "EMAIL",
-                                      "SMS",
-                                      "WEBHOOK",
-                                      "SLACK",
-                                      "LARK",
-                                      "WECOM",
-                                      "PAGERDUTY",
-                                      "OPSGENIE"
-                                    ]
-                                  },
-                                  "config": {
-                                    "type": "object",
-                                    "description": "The configuration for the action.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "操作配置。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アクションの設定。"
-                                      }
-                                    },
-                                    "properties": {
-                                      "recipients": {
-                                        "type": "object",
-                                        "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
-                                          }
-                                        },
-                                        "properties": {
-                                          "members": {
-                                            "type": "array",
-                                            "description": "A list of email addresses to receive the alert notification.",
-                                            "x-i18n": {
-                                              "zh-CN": {
-                                                "description": "用于接收通知的邮件地址列表。"
-                                              },
-                                              "ja-JP": {
-                                                "description": "アラート通知を受信するメールアドレスの一覧。"
-                                              }
-                                            },
-                                            "items": {
-                                              "type": "string",
-                                              "description": "An email address to receive the alert notification.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "用于接收通知的邮件地址。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知を受信するメールアドレス。"
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "orgRoles": {
-                                            "type": "array",
-                                            "description": "A list of organization roles to receive the alert notification.",
-                                            "x-i18n": {
-                                              "zh-CN": {
-                                                "description": "用于接收通知的组织角色列表。"
-                                              },
-                                              "ja-JP": {
-                                                "description": "アラート通知を受信する組織ロールの一覧。"
-                                              }
-                                            },
-                                            "items": {
-                                              "type": "string",
-                                              "description": "An organization role to receive the alert notification.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "用于接收通知的组织角色。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知を受信する組織ロール。"
-                                                }
-                                              },
-                                              "enum": [
-                                                "OWNER",
-                                                "MEMBER",
-                                                "BILLING_ADMIN"
-                                              ]
-                                            }
-                                          },
-                                          "projectRoles": {
-                                            "type": "array",
-                                            "description": "A list of project roles to receive the alert notification.",
-                                            "x-i18n": {
-                                              "zh-CN": {
-                                                "description": "用于接收通知的项目角色列表。"
-                                              },
-                                              "ja-JP": {
-                                                "description": "アラート通知を受信するプロジェクトロールの一覧。"
-                                              }
-                                            },
-                                            "items": {
-                                              "type": "string",
-                                              "description": "A project role to receive the alert notification.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "用于接收通知的项目角色。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知を受信するプロジェクトロール。"
-                                                }
-                                              },
-                                              "enum": [
-                                                "OWNER",
-                                                "MEMBER"
-                                              ]
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "url": {
-                                        "type": "string",
-                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      },
-                                      "webhookUrl": {
-                                        "type": "string",
-                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      },
-                                      "region": {
-                                        "type": "string",
-                                        "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      },
-                                      "apiKey": {
-                                        "type": "string",
-                                        "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
+                                "ja-JP": {
+                                  "description": "アラートルールの名前。"
+                                }
+                              }
+                            },
+                            "metricName": {
+                              "type": "string",
+                              "description": "The name of the metric that the alert rule monitors.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则监控的指标名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが監視するメトリクスの名前。"
+                                }
+                              }
+                            },
+                            "metricUnit": {
+                              "type": "string",
+                              "description": "The unit of the monitored metric.",
+                              "enum": [
+                                "percent",
+                                "millisecond",
+                                "second",
+                                "qps",
+                                "vps",
+                                "count",
+                                "row",
+                                "vcu",
+                                "count/s",
+                                "count/m",
+                                "gb",
+                                "dollar",
+                                "day",
+                                "core",
+                                "mb",
+                                "mbps"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "被监控指标的单位。"
+                                },
+                                "ja-JP": {
+                                  "description": "監視対象メトリックの単位。"
+                                }
+                              }
+                            },
+                            "windowSize": {
+                              "type": "string",
+                              "description": "The time window for the alert rule in minutes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则的时间窗口，单位为分钟。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの時間ウィンドウ（分）。"
+                                }
+                              }
+                            },
+                            "threshold": {
+                              "type": "string",
+                              "description": "The threshold value of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则阈值。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールのしきい値。"
                                 }
                               }
                             },
                             "comparisonMethod": {
                               "type": "string",
                               "description": "The comparison operator used in the alert rule.",
+                              "enum": [
+                                "GREATER_THAN",
+                                "LESS_THAN",
+                                "GREATER_THAN_OR_EQUAL",
+                                "LESS_THAN_OR_EQUAL",
+                                "EQUAL"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则使用的比较运算符。"
@@ -1802,26 +1427,11 @@
                                 "ja-JP": {
                                   "description": "アラートルールで使用される比較演算子。"
                                 }
-                              },
-                              "enum": [
-                                "GREATER_THAN",
-                                "EQUALS",
-                                "LESS_THAN",
-                                "GREATER_THAN_OR_EQUALS",
-                                "LESS_THAN_OR_EQUALS"
-                              ]
+                              }
                             },
                             "targetInstanceIds": {
                               "type": "array",
                               "description": "The IDs of the clusters to which the alert rule applies.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则适用的集群 ID 列表。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールが適用されるクラスターの ID。"
-                                }
-                              },
                               "items": {
                                 "type": "string",
                                 "description": "The ID of the cluster.",
@@ -1833,10 +1443,96 @@
                                     "description": "クラスターの ID。"
                                   }
                                 }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则适用的集群 ID 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが適用されるクラスターの ID。"
+                                }
+                              }
+                            },
+                            "actions": {
+                              "type": "array",
+                              "description": "The actions to take when the alert rule is triggered.",
+                              "items": {
+                                "type": "object",
+                                "description": "An action to take when the alert rule is triggered.",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the action.",
+                                    "enum": [
+                                      "NOTIFY_ORG",
+                                      "EMAIL",
+                                      "SMS",
+                                      "PAGERDUTY",
+                                      "OPSGENIE",
+                                      "SLACK",
+                                      "WECOM",
+                                      "DINGTALK",
+                                      "LARK",
+                                      "WEBHOOK"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションのタイプ。"
+                                      }
+                                    }
+                                  },
+                                  "config": {
+                                    "type": "object",
+                                    "description": "The configuration for the action.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作配置。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションの設定。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "config",
+                                  "type"
+                                ],
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "触发告警规则时采取的操作。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "触发告警规则时采取的操作列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                }
+                              }
+                            },
+                            "repeatIntervalSeconds": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Repeat interval in seconds for alert notifications",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知的重复间隔（秒）。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の繰り返し間隔（秒）"
+                                }
                               }
                             }
                           },
-                          "description": "Response payload for the alert rule creation request.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "告警规则创建请求的响应载荷。"
@@ -2106,6 +1802,10 @@
                   "level": {
                     "type": "string",
                     "description": "The level of the alert rule.",
+                    "enum": [
+                      "WARNING",
+                      "CRITICAL"
+                    ],
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则级别。"
@@ -2113,11 +1813,7 @@
                       "ja-JP": {
                         "description": "アラートルールのレベル。"
                       }
-                    },
-                    "enum": [
-                      "CRITICAL",
-                      "WARNING"
-                    ]
+                    }
                   },
                   "metricName": {
                     "type": "string",
@@ -2182,29 +1878,25 @@
                   "actions": {
                     "type": "array",
                     "description": "The actions to take when the alert rule is triggered.",
-                    "x-i18n": {
-                      "zh-CN": {
-                        "description": "触发告警规则时采取的操作列表。"
-                      },
-                      "ja-JP": {
-                        "description": "アラートルールがトリガーされたときに実行するアクション。"
-                      }
-                    },
                     "items": {
                       "type": "object",
                       "description": "An action to take when the alert rule is triggered.",
-                      "x-i18n": {
-                        "zh-CN": {
-                          "description": "触发告警规则时采取的操作。"
-                        },
-                        "ja-JP": {
-                          "description": "アラートルールがトリガーされたときに実行するアクション。"
-                        }
-                      },
                       "properties": {
                         "type": {
                           "type": "string",
                           "description": "The type of the action.",
+                          "enum": [
+                            "NOTIFY_ORG",
+                            "EMAIL",
+                            "SMS",
+                            "PAGERDUTY",
+                            "OPSGENIE",
+                            "SLACK",
+                            "WECOM",
+                            "DINGTALK",
+                            "LARK",
+                            "WEBHOOK"
+                          ],
                           "x-i18n": {
                             "zh-CN": {
                               "description": "操作类型。"
@@ -2212,17 +1904,7 @@
                             "ja-JP": {
                               "description": "アクションのタイプ。"
                             }
-                          },
-                          "enum": [
-                            "EMAIL",
-                            "SMS",
-                            "WEBHOOK",
-                            "SLACK",
-                            "LARK",
-                            "WECOM",
-                            "PAGERDUTY",
-                            "OPSGENIE"
-                          ]
+                          }
                         },
                         "config": {
                           "type": "object",
@@ -2234,163 +1916,41 @@
                             "ja-JP": {
                               "description": "アクションの設定。"
                             }
-                          },
-                          "properties": {
-                            "recipients": {
-                              "type": "object",
-                              "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
-                                }
-                              },
-                              "properties": {
-                                "members": {
-                                  "type": "array",
-                                  "description": "A list of email addresses to receive the alert notification.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "用于接收通知的邮件地址列表。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "アラート通知を受信するメールアドレスのリスト。"
-                                    }
-                                  },
-                                  "items": {
-                                    "type": "string",
-                                    "description": "An email address to receive the alert notification.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "用于接收通知的邮件地址。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラート通知を受信するメールアドレス。"
-                                      }
-                                    }
-                                  }
-                                },
-                                "orgRoles": {
-                                  "type": "array",
-                                  "description": "A list of organization roles to receive the alert notification.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "用于接收通知的组织角色列表。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "アラート通知を受信する組織ロールのリスト。"
-                                    }
-                                  },
-                                  "items": {
-                                    "type": "string",
-                                    "description": "An organization role to receive the alert notification.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "用于接收通知的组织角色。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラート通知を受信する組織ロール。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "OWNER",
-                                      "MEMBER",
-                                      "BILLING_ADMIN"
-                                    ]
-                                  }
-                                },
-                                "projectRoles": {
-                                  "type": "array",
-                                  "description": "A list of project roles to receive the alert notification.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "用于接收通知的项目角色列表。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "アラート通知を受信するプロジェクトロールのリスト。"
-                                    }
-                                  },
-                                  "items": {
-                                    "type": "string",
-                                    "description": "A project role to receive the alert notification.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "用于接收通知的项目角色。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アラート通知を受信するプロジェクトロール。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "OWNER",
-                                      "MEMBER"
-                                    ]
-                                  }
-                                }
-                              }
-                            },
-                            "url": {
-                              "type": "string",
-                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
-                                }
-                              }
-                            },
-                            "webhookUrl": {
-                              "type": "string",
-                              "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
-                                }
-                              }
-                            },
-                            "region": {
-                              "type": "string",
-                              "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                }
-                              }
-                            },
-                            "apiKey": {
-                              "type": "string",
-                              "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                },
-                                "ja-JP": {
-                                  "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                }
-                              }
-                            }
                           }
                         }
                       },
                       "required": [
-                        "type",
-                        "config"
-                      ]
+                        "config",
+                        "type"
+                      ],
+                      "x-i18n": {
+                        "zh-CN": {
+                          "description": "触发告警规则时采取的操作。"
+                        },
+                        "ja-JP": {
+                          "description": "アラートルールがトリガーされたときに実行するアクション。"
+                        }
+                      }
+                    },
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "触发告警规则时采取的操作列表。"
+                      },
+                      "ja-JP": {
+                        "description": "アラートルールがトリガーされたときに実行するアクション。"
+                      }
                     }
                   },
                   "comparisonMethod": {
                     "type": "string",
                     "description": "The comparison operator used in the alert rule.",
+                    "enum": [
+                      "GREATER_THAN",
+                      "LESS_THAN",
+                      "GREATER_THAN_OR_EQUAL",
+                      "LESS_THAN_OR_EQUAL",
+                      "EQUAL"
+                    ],
                     "x-i18n": {
                       "zh-CN": {
                         "description": "告警规则使用的比较运算符。"
@@ -2398,14 +1958,7 @@
                       "ja-JP": {
                         "description": "アラートルールで使用される比較演算子。"
                       }
-                    },
-                    "enum": [
-                      "GREATER_THAN",
-                      "EQUALS",
-                      "LESS_THAN",
-                      "GREATER_THAN_OR_EQUALS",
-                      "LESS_THAN_OR_EQUALS"
-                    ]
+                    }
                   },
                   "targetInstanceIds": {
                     "type": "array",
@@ -2445,6 +1998,7 @@
                   },
                   "repeatIntervalSeconds": {
                     "type": "integer",
+                    "format": "int32",
                     "description": "The interval in seconds between repeated alert notifications.",
                     "x-i18n": {
                       "zh-CN": {
@@ -2556,7 +2110,15 @@
                   "ja-JP": {
                     "description": "`ALERT_RULE_ID` で識別されるアラートルールを更新するためのリクエストボディ。"
                   }
-                }
+                },
+                "required": [
+                  "actions",
+                  "comparisonMethod",
+                  "enabled",
+                  "level",
+                  "metricName",
+                  "sendResolved"
+                ]
               },
               "example": {
                 "id": "12391290837zs09sad0d09123",
@@ -2687,6 +2249,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -2699,6 +2262,7 @@
                         },
                         "data": {
                           "type": "object",
+                          "description": "Response payload object returned by the alert rule update.",
                           "properties": {
                             "id": {
                               "type": "string",
@@ -2712,6 +2276,18 @@
                                 }
                               }
                             },
+                            "orgId": {
+                              "type": "string",
+                              "description": "The ID of the organization this alert rule belongs to.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "该告警规则所属组织的 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "このアラートルールが属する組織の ID。"
+                                }
+                              }
+                            },
                             "projectId": {
                               "type": "string",
                               "description": "The ID of the project to which the alert rule belongs.",
@@ -2721,70 +2297,6 @@
                                 },
                                 "ja-JP": {
                                   "description": "アラートルールが属するプロジェクトの ID。"
-                                }
-                              }
-                            },
-                            "ruleName": {
-                              "type": "string",
-                              "description": "The name of the alert rule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールの名前。"
-                                }
-                              }
-                            },
-                            "level": {
-                              "type": "string",
-                              "description": "The level of the alert rule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则级别。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールのレベル。"
-                                }
-                              },
-                              "enum": [
-                                "CRITICAL",
-                                "WARNING"
-                              ]
-                            },
-                            "metricName": {
-                              "type": "string",
-                              "description": "The name of the metric that the alert rule monitors.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则监控的指标名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールが監視するメトリクスの名前。"
-                                }
-                              }
-                            },
-                            "threshold": {
-                              "type": "string",
-                              "description": "The threshold value of the alert rule.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则阈值。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールのしきい値。"
-                                }
-                              }
-                            },
-                            "windowSize": {
-                              "type": "string",
-                              "description": "The time window for the alert rule in minutes.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则的时间窗口，单位为分钟。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールの時間ウィンドウ（分）。"
                                 }
                               }
                             },
@@ -2812,214 +2324,110 @@
                                 }
                               }
                             },
-                            "actions": {
-                              "type": "array",
-                              "description": "The actions to take when the alert rule is triggered.",
+                            "level": {
+                              "type": "string",
+                              "description": "The level of the alert rule.",
+                              "enum": [
+                                "WARNING",
+                                "CRITICAL"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "触发告警规则时采取的操作列表。"
+                                  "description": "告警规则级别。"
                                 },
                                 "ja-JP": {
-                                  "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                  "description": "アラートルールのレベル。"
                                 }
-                              },
-                              "items": {
-                                "type": "object",
-                                "description": "An action to take when the alert rule is triggered.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "触发告警规则时采取的操作。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "アラートルールがトリガーされたときに実行するアクション。"
-                                  }
+                              }
+                            },
+                            "ruleName": {
+                              "type": "string",
+                              "description": "The name of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则名称。"
                                 },
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "The type of the action.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "操作类型。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アクションのタイプ。"
-                                      }
-                                    },
-                                    "enum": [
-                                      "EMAIL",
-                                      "SMS",
-                                      "WEBHOOK",
-                                      "SLACK",
-                                      "LARK",
-                                      "WECOM",
-                                      "PAGERDUTY",
-                                      "OPSGENIE"
-                                    ]
-                                  },
-                                  "config": {
-                                    "type": "object",
-                                    "description": "The configuration for the action.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "操作配置。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "アクションの設定。"
-                                      }
-                                    },
-                                    "properties": {
-                                      "recipients": {
-                                        "type": "object",
-                                        "description": "The recipients of the alert notification. This applies only when the action type is EMAIL and SMS.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "告警通知的接收者。仅当操作类型为 EMAIL 和 SMS 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "アラート通知の受信者。これは、アクションタイプが EMAIL および SMS の場合にのみ適用されます。"
-                                          }
-                                        },
-                                        "properties": {
-                                          "members": {
-                                            "type": "array",
-                                            "description": "A list of email addresses to receive the alert notification.",
-                                            "x-i18n": {
-                                              "zh-CN": {
-                                                "description": "用于接收通知的邮件地址列表。"
-                                              },
-                                              "ja-JP": {
-                                                "description": "アラート通知を受信するメールアドレスのリスト。"
-                                              }
-                                            },
-                                            "items": {
-                                              "type": "string",
-                                              "description": "An email address to receive the alert notification.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "用于接收通知的邮件地址。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知を受信するメールアドレス。"
-                                                }
-                                              }
-                                            }
-                                          },
-                                          "orgRoles": {
-                                            "type": "array",
-                                            "description": "A list of organization roles to receive the alert notification.",
-                                            "x-i18n": {
-                                              "zh-CN": {
-                                                "description": "用于接收通知的组织角色列表。"
-                                              },
-                                              "ja-JP": {
-                                                "description": "アラート通知を受信する組織ロールのリスト。"
-                                              }
-                                            },
-                                            "items": {
-                                              "type": "string",
-                                              "description": "An organization role to receive the alert notification.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "用于接收通知的组织角色。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知を受信する組織ロール。"
-                                                }
-                                              },
-                                              "enum": [
-                                                "OWNER",
-                                                "MEMBER",
-                                                "BILLING_ADMIN"
-                                              ]
-                                            }
-                                          },
-                                          "projectRoles": {
-                                            "type": "array",
-                                            "description": "A list of project roles to receive the alert notification.",
-                                            "x-i18n": {
-                                              "zh-CN": {
-                                                "description": "用于接收通知的项目角色列表。"
-                                              },
-                                              "ja-JP": {
-                                                "description": "アラート通知を受信するプロジェクトロールのリスト。"
-                                              }
-                                            },
-                                            "items": {
-                                              "type": "string",
-                                              "description": "A project role to receive the alert notification.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "用于接收通知的项目角色。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "アラート通知を受信するプロジェクトロール。"
-                                                }
-                                              },
-                                              "enum": [
-                                                "OWNER",
-                                                "MEMBER"
-                                              ]
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "url": {
-                                        "type": "string",
-                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is WEBHOOK.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "告警通知应发送到的 URL。仅当操作类型为 WEBHOOK 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが WEBHOOK の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      },
-                                      "webhookUrl": {
-                                        "type": "string",
-                                        "description": "The URL to which the alert notification should be sent. This applies only when the action type is SLACK, LARK, and WECOM.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "告警通知应发送到的 URL。仅当操作类型为 SLACK、LARK、WECOM 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "アラート通知の送信先 URL。これは、アクションタイプが SLACK、LARK、および WECOM の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      },
-                                      "region": {
-                                        "type": "string",
-                                        "description": "The region where your PagerDuty or OpsGenie service is located. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "您的 PagerDuty 或 OpsGenie 服务所在的区域。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "PagerDuty または OpsGenie サービスが配置されているリージョン。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      },
-                                      "apiKey": {
-                                        "type": "string",
-                                        "description": "The API key for your PagerDuty or OpsGenie service. This applies only when the action type is PAGERDUTY and OPSGENIE.",
-                                        "x-i18n": {
-                                          "zh-CN": {
-                                            "description": "您的 PagerDuty 或 OpsGenie 服务的 API 密钥。仅当操作类型为 PAGERDUTY 和 OPSGENIE 时适用。"
-                                          },
-                                          "ja-JP": {
-                                            "description": "PagerDuty または OpsGenie サービスの API key。これは、アクションタイプが PAGERDUTY および OPSGENIE の場合にのみ適用されます。"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
+                                "ja-JP": {
+                                  "description": "アラートルールの名前。"
+                                }
+                              }
+                            },
+                            "metricName": {
+                              "type": "string",
+                              "description": "The name of the metric that the alert rule monitors.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则监控的指标名称。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが監視するメトリクスの名前。"
+                                }
+                              }
+                            },
+                            "metricUnit": {
+                              "type": "string",
+                              "description": "The unit of the monitored metric.",
+                              "enum": [
+                                "percent",
+                                "millisecond",
+                                "second",
+                                "qps",
+                                "vps",
+                                "count",
+                                "row",
+                                "vcu",
+                                "count/s",
+                                "count/m",
+                                "gb",
+                                "dollar",
+                                "day",
+                                "core",
+                                "mb",
+                                "mbps"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "被监控指标的单位。"
+                                },
+                                "ja-JP": {
+                                  "description": "監視対象メトリックの単位。"
+                                }
+                              }
+                            },
+                            "windowSize": {
+                              "type": "string",
+                              "description": "The time window for the alert rule in minutes.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则的时间窗口，单位为分钟。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールの時間ウィンドウ（分）。"
+                                }
+                              }
+                            },
+                            "threshold": {
+                              "type": "string",
+                              "description": "The threshold value of the alert rule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则阈值。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールのしきい値。"
                                 }
                               }
                             },
                             "comparisonMethod": {
                               "type": "string",
                               "description": "The comparison operator used in the alert rule.",
+                              "enum": [
+                                "GREATER_THAN",
+                                "LESS_THAN",
+                                "GREATER_THAN_OR_EQUAL",
+                                "LESS_THAN_OR_EQUAL",
+                                "EQUAL"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "告警规则使用的比较运算符。"
@@ -3027,26 +2435,11 @@
                                 "ja-JP": {
                                   "description": "アラートルールで使用される比較演算子。"
                                 }
-                              },
-                              "enum": [
-                                "GREATER_THAN",
-                                "EQUALS",
-                                "LESS_THAN",
-                                "GREATER_THAN_OR_EQUALS",
-                                "LESS_THAN_OR_EQUALS"
-                              ]
+                              }
                             },
                             "targetInstanceIds": {
                               "type": "array",
                               "description": "The IDs of the clusters to which the alert rule applies.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "告警规则适用的集群 ID 列表。"
-                                },
-                                "ja-JP": {
-                                  "description": "アラートルールが適用されるクラスターの ID。"
-                                }
-                              },
                               "items": {
                                 "type": "string",
                                 "description": "The ID of the cluster.",
@@ -3058,10 +2451,96 @@
                                     "description": "クラスターの ID。"
                                   }
                                 }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警规则适用的集群 ID 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールが適用されるクラスターの ID。"
+                                }
+                              }
+                            },
+                            "actions": {
+                              "type": "array",
+                              "description": "The actions to take when the alert rule is triggered.",
+                              "items": {
+                                "type": "object",
+                                "description": "An action to take when the alert rule is triggered.",
+                                "properties": {
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the action.",
+                                    "enum": [
+                                      "NOTIFY_ORG",
+                                      "EMAIL",
+                                      "SMS",
+                                      "PAGERDUTY",
+                                      "OPSGENIE",
+                                      "SLACK",
+                                      "WECOM",
+                                      "DINGTALK",
+                                      "LARK",
+                                      "WEBHOOK"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作类型。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションのタイプ。"
+                                      }
+                                    }
+                                  },
+                                  "config": {
+                                    "type": "object",
+                                    "description": "The configuration for the action.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "操作配置。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "アクションの設定。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "required": [
+                                  "config",
+                                  "type"
+                                ],
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "触发告警规则时采取的操作。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "触发告警规则时采取的操作列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラートルールがトリガーされたときに実行するアクション。"
+                                }
+                              }
+                            },
+                            "repeatIntervalSeconds": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Repeat interval in seconds for alert notifications",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "告警通知的重复间隔（秒）。"
+                                },
+                                "ja-JP": {
+                                  "description": "アラート通知の繰り返し間隔（秒）"
+                                }
                               }
                             }
                           },
-                          "description": "Response payload object returned by the alert rule update.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "告警规则更新操作返回的响应负载对象。"
@@ -3331,6 +2810,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -3338,6 +2818,18 @@
                             },
                             "ja-JP": {
                               "description": "レスポンスコード。"
+                            }
+                          }
+                        },
+                        "data": {
+                          "type": "object",
+                          "description": "Response payload; the type varies by endpoint.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "响应负载，类型随端点而变化。"
+                            },
+                            "ja-JP": {
+                              "description": "レスポンスペイロード。タイプはエンドポイントによって異なります。"
                             }
                           }
                         }
@@ -3556,8 +3048,10 @@
                   },
                   "metricQueries": {
                     "type": "array",
+                    "description": "List of **MetricQuery** objects.",
                     "items": {
                       "type": "object",
+                      "description": "A **MetricQuery** object.",
                       "properties": {
                         "name": {
                           "type": "string",
@@ -3612,12 +3106,31 @@
                             "UNLOADED_COLLECTIONS_COUNT",
                             "FLUSH_COUNT"
                           ]
+                        },
+                        "stat": {
+                          "type": "string",
+                          "deprecated": true,
+                          "description": "Statistic type of the metric. Deprecated.",
+                          "enum": [
+                            "AVG",
+                            "MAX",
+                            "MIN",
+                            "P90",
+                            "P99"
+                          ],
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "指标的统计类型，已废弃。"
+                            },
+                            "ja-JP": {
+                              "description": "メトリックの統計タイプ。非推奨。"
+                            }
+                          }
                         }
                       },
                       "required": [
                         "name"
                       ],
-                      "description": "A **MetricQuery** object.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "一个 **MetricQuery** 对象。"
@@ -3627,7 +3140,6 @@
                         }
                       }
                     },
-                    "description": "List of **MetricQuery** objects.",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "一个 **MetricQuery** 对象列表。"
@@ -3686,6 +3198,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -3698,11 +3211,14 @@
                         },
                         "data": {
                           "type": "object",
+                          "description": "Response payload.",
                           "properties": {
                             "results": {
                               "type": "array",
+                              "description": "List of collected statistics on the specified metric.",
                               "items": {
                                 "type": "object",
+                                "description": "A set of collected statistics.",
                                 "properties": {
                                   "name": {
                                     "type": "string",
@@ -3716,9 +3232,47 @@
                                       }
                                     }
                                   },
+                                  "stat": {
+                                    "type": "string",
+                                    "deprecated": true,
+                                    "description": "Deprecated statistic of the metric values.",
+                                    "enum": [
+                                      "AVG",
+                                      "MAX",
+                                      "MIN",
+                                      "P90",
+                                      "P99"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "已废弃的指标值统计方式。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "非推奨となったメトリクス値の統計情報。"
+                                      }
+                                    }
+                                  },
                                   "unit": {
                                     "type": "string",
                                     "description": "Unit of the value in the statistics.",
+                                    "enum": [
+                                      "percent",
+                                      "millisecond",
+                                      "second",
+                                      "qps",
+                                      "vps",
+                                      "count",
+                                      "row",
+                                      "vcu",
+                                      "count/s",
+                                      "count/m",
+                                      "gb",
+                                      "dollar",
+                                      "day",
+                                      "core",
+                                      "mb",
+                                      "mbps"
+                                    ],
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "统计值单位。"
@@ -3730,8 +3284,10 @@
                                   },
                                   "values": {
                                     "type": "array",
+                                    "description": "List of collected statistics at an interval.",
                                     "items": {
                                       "type": "object",
+                                      "description": "Statistics collected within an interval period.",
                                       "properties": {
                                         "timestamp": {
                                           "type": "string",
@@ -3751,11 +3307,13 @@
                                           "x-i18n": {
                                             "zh-CN": {
                                               "description": "给定时间戳的指标值。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "指定されたタイムスタンプ時点のメトリクスの値。"
                                             }
                                           }
                                         }
                                       },
-                                      "description": "Statistics collected within an interval period.",
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "在采集周期内收集到的统计信息。"
@@ -3765,7 +3323,6 @@
                                         }
                                       }
                                     },
-                                    "description": "List of collected statistics at an interval.",
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "在采集周期内收集到的统计信息列表。"
@@ -3776,7 +3333,6 @@
                                     }
                                   }
                                 },
-                                "description": "A set of collected statistics.",
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "采集到的统计信息。"
@@ -3786,7 +3342,6 @@
                                   }
                                 }
                               },
-                              "description": "List of collected statistics on the specified metric.",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "对指定指标采集到的统计信息列表。"
@@ -3797,7 +3352,6 @@
                               }
                             }
                           },
-                          "description": "Response payload.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载。"

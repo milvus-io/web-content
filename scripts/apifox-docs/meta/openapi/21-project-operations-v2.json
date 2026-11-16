@@ -95,7 +95,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
-                          "type": "number",
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -108,45 +109,11 @@
                         },
                         "data": {
                           "type": "array",
+                          "description": "Response payload, which is a list of projects in detail.",
                           "items": {
                             "type": "object",
+                            "description": "List of projects in detail.",
                             "properties": {
-                              "projectId": {
-                                "type": "string",
-                                "description": "ID of a project.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "项目 ID。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "プロジェクトの ID。"
-                                  }
-                                }
-                              },
-                              "regionIds": {
-                                "type": "array",
-                                "description": "Region IDs of a project.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "项目的地域 ID 列表。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "プロジェクトのリージョン ID。"
-                                  }
-                                },
-                                "items": {
-                                  "type": "string",
-                                  "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
-                                  "x-i18n": {
-                                    "zh-CN": {
-                                      "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
-                                    },
-                                    "ja-JP": {
-                                      "description": "リージョン ID。適用可能なリージョン ID を一覧表示するには、[List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) を使用できます。"
-                                    }
-                                  }
-                                }
-                              },
                               "projectName": {
                                 "type": "string",
                                 "description": "Name of a project.",
@@ -156,6 +123,18 @@
                                   },
                                   "ja-JP": {
                                     "description": "プロジェクト名。"
+                                  }
+                                }
+                              },
+                              "projectId": {
+                                "type": "string",
+                                "description": "ID of a project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクトの ID。"
                                   }
                                 }
                               },
@@ -171,8 +150,21 @@
                                   }
                                 }
                               },
-                              "instanceCount": {
+                              "createdBy": {
                                 "type": "string",
+                                "description": "User who created the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目的创建者。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクトを作成したユーザー。"
+                                  }
+                                }
+                              },
+                              "instanceCount": {
+                                "type": "integer",
+                                "format": "int32",
                                 "description": "Number of clusters in the projects.",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -183,8 +175,35 @@
                                   }
                                 }
                               },
+                              "servingInstanceCount": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "Number of serving instances in the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目中服务中的实例数量。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクト内のサービングインスタンス数。"
+                                  }
+                                }
+                              },
+                              "queryClusterCount": {
+                                "type": "integer",
+                                "format": "int32",
+                                "description": "Number of query clusters in the project.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目中的查询集群数量。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクト内のクエリクラスタ数。"
+                                  }
+                                }
+                              },
                               "createTime": {
                                 "type": "string",
+                                "format": "date-time",
                                 "description": "Time at which the project is created.",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -198,6 +217,11 @@
                               "plan": {
                                 "type": "string",
                                 "description": "The subscription plan of the current project. Possible values are `Standard`, `Enterprise`, or `BusinessCritical`.",
+                                "enum": [
+                                  "Standard",
+                                  "Enterprise",
+                                  "BusinessCritical"
+                                ],
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "当前项目的订阅计划。当前仅支持 `Enterprise` 一种。"
@@ -207,12 +231,36 @@
                                   }
                                 }
                               },
+                              "regionIds": {
+                                "type": "array",
+                                "description": "Region IDs of a project.",
+                                "items": {
+                                  "type": "string",
+                                  "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
+                                  "x-i18n": {
+                                    "zh-CN": {
+                                      "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
+                                    },
+                                    "ja-JP": {
+                                      "description": "リージョン ID。適用可能なリージョン ID を一覧表示するには、[List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) を使用できます。"
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "项目的地域 ID 列表。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "プロジェクトのリージョン ID。"
+                                  }
+                                }
+                              },
                               "orgType": {
                                 "type": "string",
                                 "description": "The type of the organization. Possible values are `SAAS` or `BYOC`.",
                                 "enum": [
-                                  "SAAS",
-                                  "BYOC"
+                                  "BYOC",
+                                  "SAAS"
                                 ],
                                 "x-i18n": {
                                   "zh-CN": {
@@ -224,7 +272,6 @@
                                 }
                               }
                             },
-                            "description": "List of projects in detail.",
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "项目详情列表。"
@@ -234,7 +281,6 @@
                               }
                             }
                           },
-                          "description": "Response payload, which is a list of projects in detail.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应负载，是一个项目详情列表。"
@@ -414,6 +460,9 @@
                   "projectName": {
                     "type": "string",
                     "description": "The name of the project to create.",
+                    "example": "My Project",
+                    "maxLength": 50,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建项目的名称。"
@@ -427,6 +476,8 @@
                     "type": "string",
                     "description": "The description of the project.",
                     "example": "Production search workloads",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "项目描述。",
@@ -439,7 +490,14 @@
                   },
                   "plan": {
                     "type": "string",
+                    "default": "Standard",
                     "description": "The subscription plan of the project. The possible values are `Standard`, `Enterprise`, and `BusinessCritical`.",
+                    "enum": [
+                      "Standard",
+                      "Enterprise",
+                      "BusinessCritical"
+                    ],
+                    "example": "Standard",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "项目的订阅计划。当前仅支持 `Enterprise` 一种。"
@@ -447,8 +505,7 @@
                       "ja-JP": {
                         "description": "プロジェクトのサブスクリプションプラン。指定可能な値は `Standard`、`Enterprise`、`BusinessCritical` です。"
                       }
-                    },
-                    "default": "Standard"
+                    }
                   },
                   "regionIds": {
                     "type": "array",
@@ -524,6 +581,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -533,22 +592,10 @@
                               "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer",
                           "example": 0
                         },
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "projectId": {
-                              "type": "string",
-                              "description": "ID of the created project.",
-                              "x-i18n": {
-                                "ja-JP": {
-                                  "description": "作成されたプロジェクトの ID。"
-                                }
-                              }
-                            }
-                          },
+                          "type": "string",
                           "description": "Response payload which contains the ID of the created project.",
                           "x-i18n": {
                             "zh-CN": {
@@ -728,6 +775,10 @@
                   "projectName": {
                     "type": "string",
                     "description": "The new name of the project. The value cannot be an empty string",
+                    "example": "My Project",
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "pattern": ".*\\S.*",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "项目的新名称。值不能为空字符串。"
@@ -740,6 +791,9 @@
                   "description": {
                     "type": "string",
                     "description": "The new description of the project. The value can be an empty string.",
+                    "example": "Production search workloads",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "项目的新描述。值可以为空字符串。"
@@ -800,9 +854,9 @@
                       "type": "object",
                       "properties": {
                         "code": {
-                          "description": "Response code.",
                           "type": "integer",
-                          "example": 0,
+                          "format": "int32",
+                          "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
@@ -810,7 +864,8 @@
                             "ja-JP": {
                               "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "example": 0
                         },
                         "data": {
                           "type": "string",
@@ -994,6 +1049,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1003,48 +1060,12 @@
                               "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer",
                           "example": 0
                         },
                         "data": {
                           "type": "object",
+                          "description": "Response payload which contains the details of the specified project.",
                           "properties": {
-                            "projectId": {
-                              "type": "string",
-                              "description": "ID of the project.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "项目 ID。"
-                                },
-                                "ja-JP": {
-                                  "description": "ProjectのID。"
-                                }
-                              }
-                            },
-                            "regionIds": {
-                              "type": "array",
-                              "description": "Region IDs of the project.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "项目的地域 ID 列表。"
-                                },
-                                "ja-JP": {
-                                  "description": "ProjectのRegion ID。"
-                                }
-                              },
-                              "items": {
-                                "type": "string",
-                                "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
-                                  },
-                                  "ja-JP": {
-                                    "description": "Region ID。適用可能なRegion IDを一覧表示するには、[List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2)を使用できます。"
-                                  }
-                                }
-                              }
-                            },
                             "projectName": {
                               "type": "string",
                               "description": "Name of the project.",
@@ -1054,6 +1075,18 @@
                                 },
                                 "ja-JP": {
                                   "description": "Project名。"
+                                }
+                              }
+                            },
+                            "projectId": {
+                              "type": "string",
+                              "description": "ID of the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目 ID。"
+                                },
+                                "ja-JP": {
+                                  "description": "ProjectのID。"
                                 }
                               }
                             },
@@ -1069,8 +1102,21 @@
                                 }
                               }
                             },
+                            "createdBy": {
+                              "type": "string",
+                              "description": "User who created the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目的创建者。"
+                                },
+                                "ja-JP": {
+                                  "description": "プロジェクトを作成したユーザー。"
+                                }
+                              }
+                            },
                             "instanceCount": {
                               "type": "integer",
+                              "format": "int32",
                               "description": "Number of clusters in the project.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -1081,8 +1127,35 @@
                                 }
                               }
                             },
+                            "servingInstanceCount": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Number of serving instances in the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目中服务中的实例数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "プロジェクト内のサービングインスタンス数。"
+                                }
+                              }
+                            },
+                            "queryClusterCount": {
+                              "type": "integer",
+                              "format": "int32",
+                              "description": "Number of query clusters in the project.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目中的查询集群数量。"
+                                },
+                                "ja-JP": {
+                                  "description": "プロジェクト内のクエリクラスタ数。"
+                                }
+                              }
+                            },
                             "createTime": {
                               "type": "string",
+                              "format": "date-time",
                               "description": "Time at which the project is created.",
                               "x-i18n": {
                                 "zh-CN": {
@@ -1096,6 +1169,11 @@
                             "plan": {
                               "type": "string",
                               "description": "The subscription plan of the current project. The possible values are `Standard`, `Enterprise`, or `BusinessCritical`.",
+                              "enum": [
+                                "Standard",
+                                "Enterprise",
+                                "BusinessCritical"
+                              ],
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "当前项目的订阅计划。当前仅支持 `Enterprise` 一种。"
@@ -1105,12 +1183,36 @@
                                 }
                               }
                             },
+                            "regionIds": {
+                              "type": "array",
+                              "description": "Region IDs of the project.",
+                              "items": {
+                                "type": "string",
+                                "description": "A region ID. You can use the [List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2) to list applicable region IDs.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "地域 ID。您可以使用 [查看云服务地域](https://docs.zilliz.com.cn/reference/restful/list-cloud-regions-v2) 来获取可用地域 ID。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "Region ID。適用可能なRegion IDを一覧表示するには、[List regions](https://docs.zilliz.com/reference/restful/list-cloud-regions-v2)を使用できます。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "项目的地域 ID 列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "ProjectのRegion ID。"
+                                }
+                              }
+                            },
                             "orgType": {
                               "type": "string",
                               "description": "The type of the organization. Possible values are `SAAS` or `BYOC`.",
                               "enum": [
-                                "SAAS",
-                                "BYOC"
+                                "BYOC",
+                                "SAAS"
                               ],
                               "x-i18n": {
                                 "zh-CN": {
@@ -1122,7 +1224,6 @@
                               }
                             }
                           },
-                          "description": "Response payload which contains the details of the specified project.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含指定项目的详细信息。"
@@ -1300,6 +1401,8 @@
                       "type": "object",
                       "properties": {
                         "code": {
+                          "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1309,7 +1412,6 @@
                               "description": "レスポンスコード。"
                             }
                           },
-                          "type": "integer",
                           "example": 0
                         },
                         "data": {
@@ -1476,7 +1578,14 @@
                 "properties": {
                   "plan": {
                     "type": "string",
+                    "default": "Standard",
                     "description": "The subscription plan to upgrade to. Possible values are `Standard`, `Enterprise`, or `BusinessCritical`. If you need to upgrade your project to `BusinessCritical`, please [contact us](https://support.zilliz.com/hc/en-us).",
+                    "enum": [
+                      "Standard",
+                      "Enterprise",
+                      "BusinessCritical"
+                    ],
+                    "example": "Standard",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "升级到的订阅计划。当前仅支持 `Enterprise` 一种。"
@@ -1484,8 +1593,7 @@
                       "ja-JP": {
                         "description": "アップグレード先のサブスクリプションプラン。指定可能な値は `Standard`、`Enterprise`、または `BusinessCritical` です。プロジェクトを `BusinessCritical` にアップグレードする必要がある場合は、[お問い合わせください](https://support.zilliz.com/hc/en-us)。"
                       }
-                    },
-                    "default": "Standard"
+                    }
                   }
                 },
                 "required": [
@@ -1523,9 +1631,9 @@
                       "type": "object",
                       "properties": {
                         "code": {
-                          "description": "Response code.",
                           "type": "integer",
-                          "example": 0,
+                          "format": "int32",
+                          "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
@@ -1533,7 +1641,8 @@
                             "ja-JP": {
                               "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "example": 0
                         },
                         "data": {
                           "type": "string",
@@ -1769,9 +1878,9 @@
                       "type": "object",
                       "properties": {
                         "code": {
-                          "description": "Response code.",
                           "type": "integer",
-                          "example": 0,
+                          "format": "int32",
+                          "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
@@ -1779,37 +1888,24 @@
                             "ja-JP": {
                               "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "example": 0
                         },
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "projectId": {
-                              "type": "string",
-                              "description": "ID of the current project.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "当前项目 ID。"
-                                },
-                                "ja-JP": {
-                                  "description": "現在のプロジェクトの ID。"
-                                }
-                              }
-                            },
-                            "regionIds": {
-                              "type": "array",
-                              "description": "Regions added to the project.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "此次添加到当前项目的地域 ID。"
-                                },
-                                "ja-JP": {
-                                  "description": "プロジェクトに追加されたリージョン。"
-                                }
+                          "type": "array",
+                          "description": "Response payload which contains the current project and the regions added to the project this time.",
+                          "items": {
+                            "type": "string",
+                            "description": "One entry in the `data` array of the response payload, represented as a string. Each entry carries a single value returned for the add-project-region request.",
+                            "x-i18n": {
+                              "zh-CN": {
+                                "description": "响应 payload 的 `data` 数组中的一个条目，以字符串表示。每个条目包含 add-project-region 请求返回的单个值。"
+                              },
+                              "ja-JP": {
+                                "description": "レスポンス payload の `data` 配列内の 1 エントリで、文字列として表されます。各エントリは、add-project-region リクエストに対して返される単一の値を保持します。"
                               }
                             }
                           },
-                          "description": "Response payload which contains the current project and the regions added to the project this time.",
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应载荷，包含当前项目 ID 及此次添加到当前项目的地域 ID。"
@@ -2008,8 +2104,8 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
-                          "example": 0,
                           "x-i18n": {
                             "zh-CN": {
                               "description": "响应码。"
@@ -2017,7 +2113,8 @@
                             "ja-JP": {
                               "description": "レスポンスコード。"
                             }
-                          }
+                          },
+                          "example": 0
                         },
                         "data": {
                           "type": "array",

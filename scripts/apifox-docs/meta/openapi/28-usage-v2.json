@@ -150,6 +150,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -163,19 +164,13 @@
                         "data": {
                           "type": "object",
                           "description": "The usage query result. The full requested range is returned in a single response.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "用量查询结果。整个查询区间在单次响应中完整返回。"
-                            },
-                            "ja-JP": {
-                              "description": "使用量照会の結果です。照会した全期間が 1 回のレスポンスで返されます。"
-                            }
-                          },
                           "properties": {
                             "results": {
                               "type": "array",
+                              "description": "Array of result objects produced by the usage query.",
                               "items": {
                                 "type": "object",
+                                "description": "A single result object in the usage query response.",
                                 "properties": {
                                   "intervalStart": {
                                     "type": "string",
@@ -218,6 +213,11 @@
                                   "currency": {
                                     "type": "string",
                                     "description": "The currency that applies to the total amount.",
+                                    "enum": [
+                                      "USD",
+                                      "CNY",
+                                      "EURO"
+                                    ],
                                     "x-i18n": {
                                       "zh-CN": {
                                         "description": "总金额币种。"
@@ -230,28 +230,13 @@
                                   "items": {
                                     "type": "array",
                                     "description": "The breakdowns of the usage within the specified interval.",
-                                    "x-i18n": {
-                                      "zh-CN": {
-                                        "description": "指定时间段内的用量明细。"
-                                      },
-                                      "ja-JP": {
-                                        "description": "指定した期間内の使用量の内訳です。"
-                                      }
-                                    },
                                     "items": {
                                       "type": "object",
+                                      "description": "A single item within the result, represented as a key-value pair.",
                                       "properties": {
                                         "costType": {
                                           "type": "string",
                                           "description": "The type of the cost.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "费用类型。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "コストの種類です。"
-                                            }
-                                          },
                                           "enum": [
                                             "compute",
                                             "storage",
@@ -262,27 +247,122 @@
                                             "write_vcu",
                                             "storage_serverless",
                                             "pipeline_tokens",
-                                            "stage",
+                                            "data_transfer",
+                                            "vCPU",
+                                            "memory",
+                                            "storage_byoc",
+                                            "proxy_compute",
+                                            "audit_log_cu",
                                             "data_transfer_new",
-                                            "lakebase_storage",
-                                            "lakebase_storage_request",
+                                            "cold_data_access",
+                                            "stage",
                                             "query_cu_ondemand",
                                             "indexing_cu",
-                                            "cold_data_access",
-                                            "audit_log_cu"
-                                          ]
+                                            "lakebase_storage",
+                                            "lakebase_storage_request",
+                                            "spark_batch_cu",
+                                            "overage_vcpu"
+                                          ],
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "费用类型。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コストの種類です。"
+                                            }
+                                          }
+                                        },
+                                        "quantity": {
+                                          "type": "number",
+                                          "description": "The amount of the used resource corresponds to the cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源数量。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの量です。"
+                                            }
+                                          }
+                                        },
+                                        "amount": {
+                                          "type": "number",
+                                          "description": "The cost amount of the item, in the currency of the interval (`currency`).",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项的费用金额，币种与该时间区间的 `currency` 一致。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "このコスト項目の金額です。通貨は当該区間の `currency` に従います。"
+                                            }
+                                          }
+                                        },
+                                        "unit": {
+                                          "type": "string",
+                                          "description": "The unit of the amount of the used resource corresponds to the cost item.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源数量单位。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソース量の単位です。"
+                                            }
+                                          }
+                                        },
+                                        "listPrice": {
+                                          "type": "object",
+                                          "description": "The list price of the used resource corresponds to the cost item.",
+                                          "properties": {
+                                            "unitPrice": {
+                                              "type": "number",
+                                              "description": "The unit price of the used resource.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "资源单价。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "使用済みリソースの単価です。"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源列表价格。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの定価です。"
+                                            }
+                                          }
+                                        },
+                                        "price": {
+                                          "type": "object",
+                                          "description": "The actual price of the used resource corresponds to the cost item.",
+                                          "properties": {
+                                            "unitPrice": {
+                                              "type": "number",
+                                              "description": "The unit price of the used resource.",
+                                              "x-i18n": {
+                                                "zh-CN": {
+                                                  "description": "资源单价。"
+                                                },
+                                                "ja-JP": {
+                                                  "description": "使用済みリソースの単価です。"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "当前费用项对应的已使用的资源实际价格。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "コスト項目に対応する使用済みリソースの実際の価格です。"
+                                            }
+                                          }
                                         },
                                         "properties": {
                                           "type": "object",
                                           "description": "The details of the current cost item.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "当前费用项详情。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "現在のコスト項目の詳細です。"
-                                            }
-                                          },
                                           "properties": {
                                             "projectId": {
                                               "type": "string",
@@ -323,6 +403,13 @@
                                             "plan": {
                                               "type": "string",
                                               "description": "The subscription plan of the cluster that generates the cost item.",
+                                              "enum": [
+                                                "Free",
+                                                "Standard",
+                                                "Enterprise",
+                                                "Serverless",
+                                                "BusinessCritical"
+                                              ],
                                               "x-i18n": {
                                                 "zh-CN": {
                                                   "description": "产生当前费用项目的集群的订阅计划。"
@@ -392,98 +479,17 @@
                                                 }
                                               }
                                             }
-                                          }
-                                        },
-                                        "quantity": {
-                                          "type": "number",
-                                          "description": "The amount of the used resource corresponds to the cost item.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "当前费用项对应的已使用的资源数量。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "コスト項目に対応する使用済みリソースの量です。"
-                                            }
-                                          }
-                                        },
-                                        "unit": {
-                                          "type": "string",
-                                          "description": "The unit of the amount of the used resource corresponds to the cost item.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "当前费用项对应的已使用的资源数量单位。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "コスト項目に対応する使用済みリソース量の単位です。"
-                                            }
-                                          }
-                                        },
-                                        "listPrice": {
-                                          "type": "object",
-                                          "description": "The list price of the used resource corresponds to the cost item.",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "当前费用项对应的已使用的资源列表价格。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "コスト項目に対応する使用済みリソースの定価です。"
-                                            }
                                           },
-                                          "properties": {
-                                            "unitPrice": {
-                                              "type": "number",
-                                              "description": "The unit price of the used resource.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "资源单价。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "使用済みリソースの単価です。"
-                                                }
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "price": {
-                                          "type": "object",
-                                          "description": "The actual price of the used resource corresponds to the cost item.",
                                           "x-i18n": {
                                             "zh-CN": {
-                                              "description": "当前费用项对应的已使用的资源实际价格。"
+                                              "description": "当前费用项详情。"
                                             },
                                             "ja-JP": {
-                                              "description": "コスト項目に対応する使用済みリソースの実際の価格です。"
-                                            }
-                                          },
-                                          "properties": {
-                                            "unitPrice": {
-                                              "type": "number",
-                                              "description": "The unit price of the used resource.",
-                                              "x-i18n": {
-                                                "zh-CN": {
-                                                  "description": "资源单价。"
-                                                },
-                                                "ja-JP": {
-                                                  "description": "使用済みリソースの単価です。"
-                                                }
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "amount": {
-                                          "type": "number",
-                                          "description": "The cost amount of the item, in the currency of the interval (`currency`).",
-                                          "x-i18n": {
-                                            "zh-CN": {
-                                              "description": "当前费用项的费用金额，币种与该时间区间的 `currency` 一致。"
-                                            },
-                                            "ja-JP": {
-                                              "description": "このコスト項目の金額です。通貨は当該区間の `currency` に従います。"
+                                              "description": "現在のコスト項目の詳細です。"
                                             }
                                           }
                                         }
                                       },
-                                      "description": "A single item within the result, represented as a key-value pair.",
                                       "x-i18n": {
                                         "zh-CN": {
                                           "description": "结果中的单个条目，以键值对表示。"
@@ -492,10 +498,17 @@
                                           "description": "結果内の単一の項目。キーと値のペアとして表されます。"
                                         }
                                       }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "指定时间段内的用量明细。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "指定した期間内の使用量の内訳です。"
+                                      }
                                     }
                                   }
                                 },
-                                "description": "A single result object in the usage query response.",
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "用量查询响应中的单个结果对象。"
@@ -505,7 +518,6 @@
                                   }
                                 }
                               },
-                              "description": "Array of result objects produced by the usage query.",
                               "x-i18n": {
                                 "zh-CN": {
                                   "description": "用量查询生成的结果对象数组。"
@@ -514,6 +526,14 @@
                                   "description": "使用量クエリによって生成される結果オブジェクトの配列。"
                                 }
                               }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "用量查询结果。整个查询区间在单次响应中完整返回。"
+                            },
+                            "ja-JP": {
+                              "description": "使用量照会の結果です。照会した全期間が 1 回のレスポンスで返されます。"
                             }
                           }
                         }

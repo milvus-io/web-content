@@ -7,13 +7,13 @@
   },
   "tags": [
     {
-      "name": "Spark Job (V2)",
+      "name": "Batch Job (V2)",
       "x-include-target": [
         "zilliz"
       ],
       "x-i18n": {
         "zh-CN": {
-          "name": "Spark Job (V2)"
+          "name": "Batch Job (V2)"
         }
       }
     }
@@ -21,21 +21,21 @@
   "paths": {
     "/v2/jobs": {
       "get": {
-        "summary": "List Spark Jobs",
+        "summary": "List Batch Jobs",
         "deprecated": false,
-        "description": "This operation lists Spark batch jobs associated with a Zilliz Cloud cluster.",
+        "description": "This operation lists batch jobs associated with a Zilliz Cloud cluster.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "列出 Spark 任务",
-            "description": "本接口用于列出与 Zilliz Cloud 集群关联的 Spark 批处理任务。"
+            "summary": "列出批量任务",
+            "description": "本接口用于列出与 Zilliz Cloud 集群关联的批量任务。"
           },
           "ja-JP": {
-            "summary": "Sparkジョブを一覧表示",
-            "description": "この操作では、Zilliz Cloudクラスターに関連付けられた Spark バッチジョブを一覧表示します。"
+            "summary": "バッチジョブを一覧表示",
+            "description": "この操作では、Zilliz Cloudクラスターに関連付けられたバッチジョブを一覧表示します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -99,17 +99,17 @@
             "name": "clusterId",
             "in": "query",
             "required": true,
-            "description": "The Zilliz Cloud cluster whose Spark jobs you want to list.",
+            "description": "The Zilliz Cloud cluster whose batch jobs you want to list.",
             "schema": {
               "type": "string"
             },
             "example": "in01-xxxxxxxxxxxxxxx",
             "x-i18n": {
               "zh-CN": {
-                "description": "要列出 Spark 任务的 Zilliz Cloud 集群。"
+                "description": "要列出批量任务的 Zilliz Cloud 集群。"
               },
               "ja-JP": {
-                "description": "Sparkジョブを一覧表示する対象の Zilliz Cloudクラスターです。"
+                "description": "バッチジョブを一覧表示する対象の Zilliz Cloudクラスターです。"
               }
             }
           },
@@ -155,7 +155,7 @@
             "name": "pageSize",
             "in": "query",
             "required": false,
-            "description": "The number of Spark jobs per page. The default value is 20 and the maximum value is 100.",
+            "description": "The number of jobs per page. The default value is 20 and the maximum value is 100.",
             "schema": {
               "type": "integer",
               "default": 20,
@@ -165,23 +165,23 @@
             "example": 20,
             "x-i18n": {
               "zh-CN": {
-                "description": "每页返回的 Spark 任务数量。默认值为 20，最大值为 100。"
+                "description": "每页返回的批量任务数量。默认值为 20，最大值为 100。"
               },
               "ja-JP": {
-                "description": "1ページあたりの Sparkジョブ数です。デフォルト値は 20、最大値は 100 です。"
+                "description": "1ページあたりのバッチジョブ数です。デフォルト値は 20、最大値は 100 です。"
               }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of Spark jobs.",
+            "description": "Returns a list of batch jobs.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回 Spark 任务列表。"
+                "description": "返回批量任务列表。"
               },
               "ja-JP": {
-                "description": "Sparkジョブのリストを返します。"
+                "description": "バッチジョブのリストを返します。"
               }
             },
             "content": {
@@ -206,38 +206,38 @@
                         },
                         "data": {
                           "type": "object",
-                          "description": "Response payload that contains Spark jobs and the total count.",
+                          "description": "Response payload that contains batch jobs and the total count.",
                           "x-i18n": {
                             "zh-CN": {
-                              "description": "响应载荷，包含 Spark 任务和总数。"
+                              "description": "响应载荷，包含批量任务和总数。"
                             },
                             "ja-JP": {
-                              "description": "Sparkジョブと総件数を含むレスポンスペイロードです。"
+                              "description": "バッチジョブと総件数を含むレスポンスペイロードです。"
                             }
                           },
                           "properties": {
                             "total": {
                               "type": "integer",
-                              "description": "Total number of Spark jobs.",
+                              "description": "Total number of jobs.",
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "Spark 任务总数。"
+                                  "description": "批量任务总数。"
                                 },
                                 "ja-JP": {
-                                  "description": "Sparkジョブの総数です。"
+                                  "description": "バッチジョブの総数です。"
                                 }
                               },
                               "example": 1
                             },
                             "items": {
                               "type": "array",
-                              "description": "Spark job summaries.",
+                              "description": "Batch job summaries.",
                               "x-i18n": {
                                 "zh-CN": {
-                                  "description": "Spark 任务摘要。"
+                                  "description": "批量任务摘要。"
                                 },
                                 "ja-JP": {
-                                  "description": "Sparkジョブの概要です。"
+                                  "description": "バッチジョブの概要です。"
                                 }
                               },
                               "items": {
@@ -354,21 +354,21 @@
     },
     "/v2/projects/{projectId}/jobs/{jobId}": {
       "get": {
-        "summary": "Describe Spark Job",
+        "summary": "Describe Batch Job",
         "deprecated": false,
-        "description": "This operation describes a Spark job in a specified project.",
+        "description": "This operation describes a batch job in a specified project.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "查看 Spark 任务详情",
-            "description": "本接口用于查看指定项目中的 Spark 任务详情。"
+            "summary": "查看批量任务详情",
+            "description": "本接口用于查看指定项目中的批量任务详情。"
           },
           "ja-JP": {
-            "summary": "Spark ジョブの説明",
-            "description": "この操作は、指定されたプロジェクト内の Spark ジョブを説明します。"
+            "summary": "バッチジョブの説明",
+            "description": "この操作は、指定されたプロジェクト内のバッチジョブを説明します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -415,26 +415,26 @@
             "schema": {
               "type": "string"
             },
-            "description": "The Spark job ID.",
+            "description": "The batch job ID.",
             "x-i18n": {
               "zh-CN": {
-                "description": "Spark 任务 ID。"
+                "description": "批量任务 ID。"
               },
               "ja-JP": {
-                "description": "Spark ジョブ ID。"
+                "description": "バッチジョブ ID。"
               }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns details of the Spark job.",
+            "description": "Returns details of the batch job.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回 Spark 任务详情。"
+                "description": "返回批量任务详情。"
               },
               "ja-JP": {
-                "description": "Spark ジョブの詳細を返します。"
+                "description": "バッチジョブの詳細を返します。"
               }
             },
             "content": {
@@ -459,13 +459,13 @@
                         },
                         "data": {
                           "$ref": "#/components/schemas/SparkJobDetail",
-                          "description": "Response payload that contains Spark job details.",
+                          "description": "Response payload that contains batch job details.",
                           "x-i18n": {
                             "zh-CN": {
-                              "description": "响应载荷，包含 Spark 任务详情。"
+                              "description": "响应载荷，包含批量任务详情。"
                             },
                             "ja-JP": {
-                              "description": "Spark ジョブの詳細を含むレスポンスペイロード。"
+                              "description": "バッチジョブの詳細を含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -578,21 +578,21 @@
     },
     "/v2/projects/{projectId}/jobs/{jobId}/cancel": {
       "post": {
-        "summary": "Cancel Spark Job",
+        "summary": "Cancel Batch Job",
         "deprecated": false,
-        "description": "This operation submits a cancellation request for a Spark job in a specified project.",
+        "description": "This operation submits a cancellation request for a batch job in a specified project.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "取消 Spark 任务",
-            "description": "本接口用于提交取消指定项目中 Spark 任务的请求。"
+            "summary": "取消批量任务",
+            "description": "本接口用于提交取消指定项目中批量任务的请求。"
           },
           "ja-JP": {
-            "summary": "Spark ジョブのキャンセル",
-            "description": "この操作は、指定されたプロジェクト内の Spark ジョブのキャンセルリクエストを送信します。"
+            "summary": "バッチジョブのキャンセル",
+            "description": "この操作は、指定されたプロジェクト内のバッチジョブのキャンセルリクエストを送信します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -639,13 +639,13 @@
             "schema": {
               "type": "string"
             },
-            "description": "The Spark job ID.",
+            "description": "The batch job ID.",
             "x-i18n": {
               "zh-CN": {
-                "description": "Spark 任务 ID。"
+                "description": "批量任务 ID。"
               },
               "ja-JP": {
-                "description": "Spark ジョブ ID。"
+                "description": "バッチジョブ ID。"
               }
             }
           }
@@ -655,7 +655,7 @@
             "description": "The cancellation request was accepted.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回取消请求后的 Spark 任务。"
+                "description": "返回取消请求后的批量任务。"
               },
               "ja-JP": {
                 "description": "キャンセルリクエストが受理されました。"
@@ -683,13 +683,13 @@
                         },
                         "data": {
                           "$ref": "#/components/schemas/SparkJobDetail",
-                          "description": "Response payload that contains the Spark job after the cancel request.",
+                          "description": "Response payload that contains the batch job after the cancel request.",
                           "x-i18n": {
                             "zh-CN": {
-                              "description": "响应载荷，包含取消请求后的 Spark 任务。"
+                              "description": "响应载荷，包含取消请求后的批量任务。"
                             },
                             "ja-JP": {
-                              "description": "キャンセルリクエスト後の Spark ジョブを含むレスポンスペイロード。"
+                              "description": "キャンセルリクエスト後のバッチジョブを含むレスポンスペイロード。"
                             }
                           }
                         }
@@ -826,21 +826,21 @@
     "/v2/projects/{projectId}/jobs/jar": {
       "post": {
         "x-include-target": [],
-        "summary": "Create Spark JAR Job",
+        "summary": "Create JAR Job",
         "deprecated": false,
-        "description": "This operation creates a Spark JAR job.",
+        "description": "This operation creates a JAR job.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark JAR 任务",
-            "description": "本接口用于创建 Spark JAR 任务。"
+            "summary": "创建 JAR 任务",
+            "description": "本接口用于创建 JAR 任务。"
           },
           "ja-JP": {
-            "summary": "Spark JAR ジョブの作成",
-            "description": "この操作は、Spark JAR ジョブを作成します。"
+            "summary": "JAR ジョブの作成",
+            "description": "この操作は、JAR ジョブを作成します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -907,7 +907,7 @@
               },
               "examples": {
                 "1": {
-                  "summary": "Create Spark job",
+                  "summary": "Create batch job",
                   "value": {
                     "description": "Daily vector processing job.",
                     "regionId": "aws-us-west-2",
@@ -949,13 +949,13 @@
         },
         "responses": {
           "201": {
-            "description": "Returns the created Spark job.",
+            "description": "Returns the created batch job.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回已创建的 Spark 任务。"
+                "description": "返回已创建的批量任务。"
               },
               "ja-JP": {
-                "description": "作成された Spark ジョブを返します。"
+                "description": "作成されたバッチジョブを返します。"
               }
             },
             "content": {
@@ -1033,13 +1033,13 @@
                       }
                     }
                   ],
-                  "description": "The response body returned when the Spark JAR job has been created.",
+                  "description": "The response body returned when the JAR job has been created.",
                   "x-i18n": {
                     "zh-CN": {
-                      "description": "Spark JAR 作业创建完成后返回的响应体。"
+                      "description": "JAR 作业创建完成后返回的响应体。"
                     },
                     "ja-JP": {
-                      "description": "Spark JAR ジョブが作成されたときに返されるレスポンスボディ。"
+                      "description": "JAR ジョブが作成されたときに返されるレスポンスボディ。"
                     }
                   }
                 },
@@ -1077,21 +1077,21 @@
     },
     "/v2/projects/{projectId}/jobs/dedup/pk": {
       "post": {
-        "summary": "Create Spark PK Deduplication Job",
+        "summary": "Create PK Deduplication Job",
         "deprecated": false,
         "description": "This operation creates a primary-key deduplication job.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark 主键去重任务",
+            "summary": "创建主键去重任务",
             "description": "本接口用于创建主键去重任务。"
           },
           "ja-JP": {
-            "summary": "Spark PK 重複排除ジョブの作成",
+            "summary": "PK 重複排除ジョブの作成",
             "description": "この操作は、primary key に基づく重複排除ジョブを作成します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -1158,7 +1158,7 @@
               },
               "examples": {
                 "1": {
-                  "summary": "Create Spark job",
+                  "summary": "Create batch job",
                   "value": {
                     "description": "Daily vector processing job.",
                     "regionId": "aws-us-west-2",
@@ -1187,13 +1187,13 @@
         },
         "responses": {
           "201": {
-            "description": "Returns the created Spark job.",
+            "description": "Returns the created batch job.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回已创建的 Spark 任务。"
+                "description": "返回已创建的批量任务。"
               },
               "ja-JP": {
-                "description": "作成された Spark ジョブを返します。"
+                "description": "作成されたバッチジョブを返します。"
               }
             },
             "content": {
@@ -1315,21 +1315,21 @@
     },
     "/v2/projects/{projectId}/jobs/dedup/vector": {
       "post": {
-        "summary": "Create Spark Vector Deduplication Job",
+        "summary": "Create Vector Deduplication Job",
         "deprecated": false,
         "description": "This operation creates a vector deduplication job.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark 向量去重任务",
+            "summary": "创建向量去重任务",
             "description": "本接口用于创建向量去重任务。"
           },
           "ja-JP": {
-            "summary": "Spark ベクトル重複排除ジョブの作成",
+            "summary": "ベクトル重複排除ジョブの作成",
             "description": "この操作は、ベクトル重複排除ジョブを作成します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -1396,7 +1396,7 @@
               },
               "examples": {
                 "1": {
-                  "summary": "Create Spark job",
+                  "summary": "Create batch job",
                   "value": {
                     "description": "Daily vector processing job.",
                     "regionId": "aws-us-west-2",
@@ -1430,13 +1430,13 @@
         },
         "responses": {
           "201": {
-            "description": "Returns the created Spark job.",
+            "description": "Returns the created batch job.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回已创建的 Spark 任务。"
+                "description": "返回已创建的批量任务。"
               },
               "ja-JP": {
-                "description": "作成された Spark ジョブを返します。"
+                "description": "作成されたバッチジョブを返します。"
               }
             },
             "content": {
@@ -1558,21 +1558,21 @@
     },
     "/v2/projects/{projectId}/jobs/kmeans": {
       "post": {
-        "summary": "Create Spark K-means Job",
+        "summary": "Create K-means Job",
         "deprecated": false,
         "description": "This operation creates a K-means clustering job.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark K-means 任务",
+            "summary": "创建 K-means 任务",
             "description": "本接口用于创建 K-means 聚类任务。"
           },
           "ja-JP": {
-            "summary": "Spark K-means ジョブの作成",
+            "summary": "K-means ジョブの作成",
             "description": "この操作は、K-means クラスタリングジョブを作成します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -1639,7 +1639,7 @@
               },
               "examples": {
                 "1": {
-                  "summary": "Create Spark job",
+                  "summary": "Create batch job",
                   "value": {
                     "description": "Daily vector processing job.",
                     "regionId": "aws-us-west-2",
@@ -1670,13 +1670,13 @@
         },
         "responses": {
           "201": {
-            "description": "Returns the created Spark job.",
+            "description": "Returns the created batch job.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回已创建的 Spark 任务。"
+                "description": "返回已创建的批量任务。"
               },
               "ja-JP": {
-                "description": "作成された Spark ジョブを返します。"
+                "description": "作成されたバッチジョブを返します。"
               }
             },
             "content": {
@@ -1798,21 +1798,21 @@
     },
     "/v2/projects/{projectId}/jobs/anomaly-detection": {
       "post": {
-        "summary": "Create Spark Anomaly Detection Job",
+        "summary": "Create Anomaly Detection Job",
         "deprecated": false,
         "description": "This operation creates an anomaly-detection job.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark 异常检测任务",
+            "summary": "创建异常检测任务",
             "description": "本接口用于创建异常检测任务。"
           },
           "ja-JP": {
-            "summary": "Spark 異常検知ジョブの作成",
+            "summary": "異常検知ジョブの作成",
             "description": "この操作は、異常検知ジョブを作成します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -1879,7 +1879,7 @@
               },
               "examples": {
                 "1": {
-                  "summary": "Create Spark job",
+                  "summary": "Create batch job",
                   "value": {
                     "description": "Daily vector processing job.",
                     "regionId": "aws-us-west-2",
@@ -1910,13 +1910,13 @@
         },
         "responses": {
           "201": {
-            "description": "Returns the created Spark job.",
+            "description": "Returns the created batch job.",
             "x-i18n": {
               "zh-CN": {
-                "description": "返回已创建的 Spark 任务。"
+                "description": "返回已创建的批量任务。"
               },
               "ja-JP": {
-                "description": "作成された Spark ジョブを返します。"
+                "description": "作成されたバッチジョブを返します。"
               }
             },
             "content": {
@@ -2038,21 +2038,21 @@
     },
     "/v2/projects/{projectId}/jobs/backfill": {
       "post": {
-        "summary": "Create Spark Backfill Job",
+        "summary": "Create Backfill Job",
         "x-beta": "ON REQUEST",
-        "description": "Creates a Spark Backfill job. The project is selected by the projectId path parameter.",
+        "description": "Creates a Backfill job. The project is selected by the projectId path parameter.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark 回填任务",
-            "description": "创建 Spark 回填任务。项目由 projectId 路径参数指定。"
+            "summary": "创建回填任务",
+            "description": "创建回填任务。项目由 projectId 路径参数指定。"
           },
           "ja-JP": {
-            "summary": "Spark バックフィルジョブを作成",
-            "description": "Spark バックフィルジョブを作成します。プロジェクトは projectId パスパラメーターで指定します。"
+            "summary": "バックフィルジョブを作成",
+            "description": "バックフィルジョブを作成します。プロジェクトは projectId パスパラメーターで指定します。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -2142,21 +2142,21 @@
     },
     "/v2/projects/{projectId}/jobs/backfill/precheck": {
       "post": {
-        "summary": "Create Spark Backfill Precheck Job",
+        "summary": "Create Backfill Precheck Job",
         "x-beta": "ON REQUEST",
-        "description": "Creates a Spark Backfill precheck job. It validates target schema, fields, source sample, and column mapping without modifying Collection data. Confirm data.precheckReport.passed before submitting Backfill.",
+        "description": "Creates a Backfill precheck job. It validates target schema, fields, source sample, and column mapping without modifying Collection data. Confirm data.precheckReport.passed before submitting Backfill.",
         "x-i18n": {
           "zh-CN": {
-            "summary": "创建 Spark 回填预检任务",
-            "description": "创建 Spark 回填预检任务。预检会验证目标 schema、字段、源数据样本和列映射，不会修改 Collection 数据。提交回填任务前，请确认 data.precheckReport.passed 为 true。"
+            "summary": "创建回填预检任务",
+            "description": "创建回填预检任务。预检会验证目标 schema、字段、源数据样本和列映射，不会修改 Collection 数据。提交回填任务前，请确认 data.precheckReport.passed 为 true。"
           },
           "ja-JP": {
-            "summary": "Spark バックフィルの事前チェックジョブを作成",
-            "description": "Spark バックフィルの事前チェックジョブを作成します。対象スキーマ、フィールド、入力サンプル、カラムマッピングを検証しますが、Collection データは変更しません。バックフィルを送信する前に data.precheckReport.passed を確認してください。"
+            "summary": "バックフィルの事前チェックジョブを作成",
+            "description": "バックフィルの事前チェックジョブを作成します。対象スキーマ、フィールド、入力サンプル、カラムマッピングを検証しますが、Collection データは変更しません。バックフィルを送信する前に data.precheckReport.passed を確認してください。"
           }
         },
         "tags": [
-          "Spark Job (V2)"
+          "Batch Job (V2)"
         ],
         "parameters": [
           {
@@ -2249,13 +2249,13 @@
     "schemas": {
       "SparkJobSummary": {
         "type": "object",
-        "description": "Summary information about a Spark batch job.",
+        "description": "Summary information about a batch job.",
         "x-i18n": {
           "zh-CN": {
-            "description": "Spark 批处理任务的摘要信息。"
+            "description": "批量任务的摘要信息。"
           },
           "ja-JP": {
-            "description": "Spark バッチジョブの概要情報です。"
+            "description": "バッチジョブの概要情報です。"
           }
         },
         "properties": {
@@ -2315,7 +2315,7 @@
                 "description": "任务状态。"
               },
               "ja-JP": {
-                "description": "Spark バッチジョブのステータスです。"
+                "description": "バッチジョブのステータスです。"
               }
             }
           },
@@ -2327,7 +2327,7 @@
                 "description": "云地域 ID。"
               },
               "ja-JP": {
-                "description": "Sparkジョブが実行されるクラウドリージョンです。"
+                "description": "バッチジョブが実行されるクラウドリージョンです。"
               }
             }
           },
@@ -2339,7 +2339,7 @@
                 "description": "集群 ID。"
               },
               "ja-JP": {
-                "description": "Sparkジョブに関連付けられた Zilliz Cloudクラスターです。"
+                "description": "バッチジョブに関連付けられた Zilliz Cloudクラスターです。"
               }
             }
           },
@@ -2351,7 +2351,7 @@
                 "description": "创建时间（ISO 8601）。"
               },
               "ja-JP": {
-                "description": "Sparkジョブが作成された時刻です。"
+                "description": "バッチジョブが作成された時刻です。"
               }
             }
           },
@@ -2363,7 +2363,7 @@
                 "description": "开始时间（ISO 8601）。"
               },
               "ja-JP": {
-                "description": "Sparkジョブの実行が開始された時刻です。ジョブの開始前は、このフィールドが存在しない場合があります。"
+                "description": "バッチジョブの実行が開始された時刻です。ジョブの開始前は、このフィールドが存在しない場合があります。"
               }
             }
           },
@@ -2375,7 +2375,7 @@
                 "description": "结束时间（ISO 8601）。"
               },
               "ja-JP": {
-                "description": "Sparkジョブが終了ステータスに達した時刻です。アクティブなジョブでは、このフィールドが存在しない場合があります。"
+                "description": "バッチジョブが終了ステータスに達した時刻です。アクティブなジョブでは、このフィールドが存在しない場合があります。"
               }
             }
           },
@@ -2403,13 +2403,13 @@
       },
       "SparkJobDetail": {
         "type": "object",
-        "description": "Detailed information about a Spark batch job.",
+        "description": "Detailed information about a batch job.",
         "x-i18n": {
           "zh-CN": {
-            "description": "Spark 批处理任务的详细信息。"
+            "description": "批量任务的详细信息。"
           },
           "ja-JP": {
-            "description": "Spark バッチジョブの詳細情報。"
+            "description": "バッチジョブの詳細情報。"
           }
         },
         "properties": {
@@ -3096,13 +3096,13 @@
       },
       "SparkJobDataResourceRequestV2": {
         "type": "object",
-        "description": "A data resource (input or output) reference for a Spark job.",
+        "description": "A data resource (input or output) reference for a batch job.",
         "x-i18n": {
           "zh-CN": {
-            "description": "Spark 任务的数据资源（输入或输出）引用。"
+            "description": "批量任务的数据资源（输入或输出）引用。"
           },
           "ja-JP": {
-            "description": "Spark ジョブのデータリソース (入力または出力) への参照。"
+            "description": "バッチジョブのデータリソース (入力または出力) への参照。"
           }
         },
         "properties": {
@@ -3199,13 +3199,13 @@
       },
       "SparkArtifactRequest": {
         "type": "object",
-        "description": "The Spark job artifact (JAR).",
+        "description": "The job artifact (JAR).",
         "x-i18n": {
           "zh-CN": {
-            "description": "Spark 任务产物（JAR）。"
+            "description": "批量任务产物（JAR）。"
           },
           "ja-JP": {
-            "description": "Spark ジョブのアーティファクト (JAR)。"
+            "description": "バッチジョブのアーティファクト (JAR)。"
           }
         },
         "properties": {
@@ -3241,13 +3241,13 @@
       },
       "CreateSparkBackfillJobRequestV2": {
         "type": "object",
-        "description": "Request to create a Spark Backfill job.",
+        "description": "Request to create a Backfill job.",
         "x-i18n": {
           "zh-CN": {
-            "description": "创建 Spark 回填任务的请求体。"
+            "description": "创建回填任务的请求体。"
           },
           "ja-JP": {
-            "description": "Spark バックフィルジョブを作成するリクエスト。"
+            "description": "バックフィルジョブを作成するリクエスト。"
           }
         },
         "properties": {
@@ -3357,13 +3357,13 @@
               "2XLARGE",
               "3XLARGE"
             ],
-            "description": "The Spark resource size.",
+            "description": "The resource size.",
             "x-i18n": {
               "zh-CN": {
-                "description": "Spark 资源规格。"
+                "description": "资源规格。"
               },
               "ja-JP": {
-                "description": "Spark のリソースサイズ。"
+                "description": "リソースサイズ。"
               }
             }
           },
@@ -3394,13 +3394,13 @@
       },
       "CreateSparkBackfillPrecheckJobRequestV2": {
         "type": "object",
-        "description": "Request to create a Spark Backfill precheck job.",
+        "description": "Request to create a Backfill precheck job.",
         "x-i18n": {
           "zh-CN": {
-            "description": "创建 Spark 回填预检任务的请求体。"
+            "description": "创建回填预检任务的请求体。"
           },
           "ja-JP": {
-            "description": "Spark バックフィルの事前チェックジョブを作成するリクエスト。"
+            "description": "バックフィルの事前チェックジョブを作成するリクエスト。"
           }
         },
         "properties": {
@@ -3498,13 +3498,13 @@
               "2XLARGE",
               "3XLARGE"
             ],
-            "description": "The Spark resource size.",
+            "description": "The resource size.",
             "x-i18n": {
               "zh-CN": {
-                "description": "Spark 资源规格。"
+                "description": "资源规格。"
               },
               "ja-JP": {
-                "description": "Spark のリソースサイズ。"
+                "description": "リソースサイズ。"
               }
             }
           },
@@ -3534,13 +3534,13 @@
       },
       "CreateSparkJobRequest": {
         "type": "object",
-        "description": "The common fields shared by all Spark job creation requests.",
+        "description": "The common fields shared by all batch job creation requests.",
         "x-i18n": {
           "zh-CN": {
-            "description": "所有 Spark 任务创建请求共有的字段。"
+            "description": "所有批量任务创建请求共有的字段。"
           },
           "ja-JP": {
-            "description": "すべての Spark ジョブ作成リクエストに共通するフィールド。"
+            "description": "すべてのバッチジョブ作成リクエストに共通するフィールド。"
           }
         },
         "properties": {
@@ -3688,13 +3688,13 @@
             "type": "array",
             "items": {
               "type": "string",
-              "description": "One argument passed to the Spark JAR job.",
+              "description": "One argument passed to the JAR job.",
               "x-i18n": {
                 "zh-CN": {
-                  "description": "传递给 Spark JAR 任务的一个参数。"
+                  "description": "传递给 JAR 任务的一个参数。"
                 },
                 "ja-JP": {
-                  "description": "Spark JAR ジョブに渡される引数の 1 つ。"
+                  "description": "JAR ジョブに渡される引数の 1 つ。"
                 }
               }
             },
@@ -3712,13 +3712,13 @@
             "type": "object",
             "additionalProperties": {
               "type": "string",
-              "description": "Job parameters supplied to the Spark JAR job.",
+              "description": "Job parameters supplied to the JAR job.",
               "x-i18n": {
                 "zh-CN": {
-                  "description": "为 Spark JAR 任务提供的任务参数。"
+                  "description": "为 JAR 任务提供的任务参数。"
                 },
                 "ja-JP": {
-                  "description": "Spark JAR ジョブに指定するジョブパラメータ。"
+                  "description": "JAR ジョブに指定するジョブパラメータ。"
                 }
               }
             },

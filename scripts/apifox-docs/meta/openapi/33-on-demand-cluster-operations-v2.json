@@ -91,7 +91,9 @@
                   },
                   "cuSize": {
                     "type": "integer",
+                    "format": "int32",
                     "description": "The CU size to use for the cluster. The minimum CU size is 1.",
+                    "minimum": 8,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "分配给待创建集群的 CU 大小。"
@@ -104,6 +106,8 @@
                   "clusterName": {
                     "type": "string",
                     "description": "The name of the cluster to create.",
+                    "maxLength": 64,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "待创建集群名称。"
@@ -116,7 +120,8 @@
                   "description": {
                     "type": "string",
                     "description": "Description of the on-demand cluster.",
-                    "example": "Ad hoc analytics query cluster",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "按需集群描述。",
@@ -125,12 +130,15 @@
                       "ja-JP": {
                         "description": "オンデマンドクラスターの説明。"
                       }
-                    }
+                    },
+                    "example": "Ad hoc analytics query cluster"
                   },
                   "autoSuspend": {
-                    "type": "integer",
+                    "type": "string",
+                    "default": "60s",
                     "description": "Auto-suspend idle window. The cluster will be automatically suspended if there is no request within the specified period. The value should be an integer representing the number of seconds. For example, `300` means 5 minutes.",
-                    "default": 60,
+                    "example": "60s",
+                    "pattern": "^(?=\\d)(?:\\d+d)?(?:\\d+h)?(?:\\d+m)?(?:\\d+s)?$",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "自动挂起空闲时间。如果指定的时间段内无任何请求，集群将自动挂起。该值应为一个整数，表示秒数。例如，`300` 表示 5 分钟。"
@@ -139,12 +147,136 @@
                         "description": "自動一時停止のアイドルウィンドウ。指定した期間内にリクエストがない場合、クラスターは自動的に一時停止されます。値は秒数を表す整数を指定します。たとえば、`300` は 5 分を意味します。"
                       }
                     }
+                  },
+                  "keepWarm": {
+                    "type": "object",
+                    "description": "Optional keep-warm schedule saved right after the cluster is created. At least one schedule entry is required when present.",
+                    "properties": {
+                      "enabled": {
+                        "type": "boolean",
+                        "description": "Whether the keep-warm schedule is enabled.",
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "是否启用 keep-warm 调度。"
+                          },
+                          "ja-JP": {
+                            "description": "keep-warm スケジュールが有効かどうか。"
+                          }
+                        }
+                      },
+                      "schedules": {
+                        "type": "array",
+                        "description": "Complete replacement set of weekly keep-warm windows in the organization System Time Zone, at most 10 entries. An empty list removes the schedule on update.",
+                        "items": {
+                          "type": "object",
+                          "description": "Scheduled autoscaling target.",
+                          "properties": {
+                            "cron": {
+                              "type": "string",
+                              "description": "Cron expression defining when the schedule applies.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定义定时计划生效时间的 Cron 表达式。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                }
+                              }
+                            },
+                            "target": {
+                              "type": "integer",
+                              "format": "int64",
+                              "description": "Target value applied when the schedule fires.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "定时计划触发时应用的目标值。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールの実行時に適用されるターゲット値。"
+                                }
+                              }
+                            },
+                            "timezone": {
+                              "type": "string",
+                              "description": "Timezone of the cron schedule.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "Cron 定时计划使用的时区。"
+                                },
+                                "ja-JP": {
+                                  "description": "Cron スケジュールのタイムゾーン。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "定时扩缩容规则。"
+                            },
+                            "ja-JP": {
+                              "description": "スケジュールされたオートスケーリングターゲット。"
+                            }
+                          }
+                        },
+                        "maxItems": 10,
+                        "minItems": 0,
+                        "x-i18n": {
+                          "zh-CN": {
+                            "description": "每周 keep-warm 时间窗口的完整替换集合，使用组织系统时区，最多 10 条；更新时传空列表表示移除调度。"
+                          },
+                          "ja-JP": {
+                            "description": "組織のシステムタイムゾーンにおける週次の keep-warm ウィンドウの完全な置換セット。最大 10 エントリ。更新時に空のリストを指定するとスケジュールが削除されます。"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "enabled",
+                      "schedules"
+                    ],
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "可选的 keep-warm 调度配置，在集群创建后保存；配置时至少需要一条调度条目。"
+                      },
+                      "ja-JP": {
+                        "description": "クラスター作成直後に保存されるオプションの keep-warm スケジュール。指定する場合は少なくとも 1 つのスケジュールエントリが必要です。"
+                      }
+                    }
+                  },
+                  "maxQueryNodeCU": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Maximum CU count of query nodes. Must be at least 1.",
+                    "minimum": 1,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "查询节点的最大 CU 数量，最小为 1。"
+                      },
+                      "ja-JP": {
+                        "description": "クエリノードの最大 CU 数。1 以上である必要があります。"
+                      }
+                    }
+                  },
+                  "maxQueryNodeReplicas": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Maximum number of query node replicas. Must be at least 1.",
+                    "minimum": 1,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "查询节点的最大副本数量，最小为 1。"
+                      },
+                      "ja-JP": {
+                        "description": "クエリノードレプリカの最大数。1 以上である必要があります。"
+                      }
+                    }
                   }
                 },
                 "required": [
                   "projectId",
                   "regionId",
-                  "cuSize"
+                  "cuSize",
+                  "clusterName"
                 ],
                 "description": "Request payload for creating an on-demand Cluster. `projectId`, `regionId`, and `cuSize` are required.",
                 "x-i18n": {
@@ -206,6 +338,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -459,56 +592,28 @@
                   "properties": {
                     "code": {
                       "type": "integer",
+                      "format": "int32",
                       "description": "Response code.",
                       "x-i18n": {
                         "ja-JP": {
                           "description": "レスポンスコード。"
+                        },
+                        "zh-CN": {
+                          "description": "响应码。"
                         }
                       }
                     },
                     "data": {
                       "type": "object",
+                      "description": "Response payload containing the on-demand Cluster records returned by the listing operation.",
                       "properties": {
-                        "count": {
-                          "type": "integer",
-                          "description": "The total number of on-demand clusters.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "按需集群总数。"
-                            },
-                            "ja-JP": {
-                              "description": "オンデマンドクラスターの合計数。"
-                            }
-                          }
-                        },
                         "onDemandClusters": {
                           "type": "array",
                           "description": "List of on-demand clusters.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "按需集群列表。"
-                            },
-                            "ja-JP": {
-                              "description": "オンデマンドクラスターの一覧。"
-                            }
-                          },
                           "items": {
                             "type": "object",
+                            "description": "An on-demand cluster.",
                             "properties": {
-                              "projectId": {
-                                "type": "string",
-                                "description": "ID of the project to which the cluster belongs.",
-                                "example": "proj-xxxxxxxxxxxxxxx",
-                                "x-i18n": {
-                                  "zh-CN": {
-                                    "description": "集群所属项目 ID。",
-                                    "example": "proj-xxxxxxxxxxxxxxx"
-                                  },
-                                  "ja-JP": {
-                                    "description": "クラスターが属するプロジェクトの ID。"
-                                  }
-                                }
-                              },
                               "clusterId": {
                                 "type": "string",
                                 "description": "ID of the cluster.",
@@ -560,8 +665,23 @@
                                 },
                                 "example": "aws-us-west-2"
                               },
+                              "projectId": {
+                                "type": "string",
+                                "description": "ID of the project to which the cluster belongs.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "集群所属项目 ID。",
+                                    "example": "proj-xxxxxxxxxxxxxxx"
+                                  },
+                                  "ja-JP": {
+                                    "description": "クラスターが属するプロジェクトの ID。"
+                                  }
+                                },
+                                "example": "proj-xxxxxxxxxxxxxxx"
+                              },
                               "cuSize": {
                                 "type": "integer",
+                                "format": "int32",
                                 "description": "CU size of the cluster",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -575,6 +695,14 @@
                               "status": {
                                 "type": "string",
                                 "description": "Current cluster status",
+                                "enum": [
+                                  "CREATING",
+                                  "SUSPENDED",
+                                  "RESUMING",
+                                  "RUNNING",
+                                  "SUSPENDING"
+                                ],
+                                "example": "SUSPENDED",
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "当前集群所处状态。"
@@ -582,14 +710,7 @@
                                   "ja-JP": {
                                     "description": "現在のクラスターのステータス。"
                                   }
-                                },
-                                "enum": [
-                                  "CREATING",
-                                  "SUSPENDED",
-                                  "RESUMING",
-                                  "RUNNING",
-                                  "SUSPENDING"
-                                ]
+                                }
                               },
                               "endpoint": {
                                 "type": "string",
@@ -631,6 +752,7 @@
                               "createTime": {
                                 "type": "string",
                                 "description": "Time at which the cluster is created in UTC ISO-8601 format.",
+                                "example": {},
                                 "x-i18n": {
                                   "zh-CN": {
                                     "description": "集群创建时间，UTC ISO-8601 格式。"
@@ -642,6 +764,7 @@
                               },
                               "autoSuspend": {
                                 "type": "integer",
+                                "format": "int32",
                                 "description": "Auto-suspend idle window configured for the cluster. The cluster will be automatically suspended if there is no request within the specified period. The value is an integer representing the number of seconds. For example, `300` means 5 minutes.",
                                 "x-i18n": {
                                   "zh-CN": {
@@ -651,9 +774,151 @@
                                     "description": "クラスターに設定された自動一時停止のアイドルウィンドウ。指定した期間内にリクエストがない場合、クラスターは自動的に一時停止されます。値は秒数を表す整数です。たとえば、`300` は 5 分を意味します。"
                                   }
                                 }
+                              },
+                              "keepWarmActive": {
+                                "type": "boolean",
+                                "description": "Whether a keep-warm window is currently active.",
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "当前是否处于 keep-warm 窗口。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "keep-warm ウィンドウが現在アクティブかどうか。"
+                                  }
+                                }
+                              },
+                              "keepWarm": {
+                                "type": "object",
+                                "description": "Keep-warm schedule configuration; null when no schedule is configured.",
+                                "properties": {
+                                  "enabled": {
+                                    "type": "boolean",
+                                    "description": "Whether the keep-warm schedule is enabled.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "keep-warm 定时是否启用。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "keep-warm スケジュールが有効かどうか。"
+                                      }
+                                    }
+                                  },
+                                  "systemTimezone": {
+                                    "type": "string",
+                                    "description": "Organization system time zone (IANA) in which the schedules are interpreted.",
+                                    "example": "Asia/Shanghai",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "解释定时配置时使用的组织系统时区（IANA）。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "スケジュールを解釈する組織のシステムタイムゾーン（IANA）。"
+                                      }
+                                    }
+                                  },
+                                  "schedules": {
+                                    "type": "array",
+                                    "description": "Keep-warm schedule windows.",
+                                    "items": {
+                                      "type": "object",
+                                      "description": "Scheduled autoscaling target.",
+                                      "properties": {
+                                        "cron": {
+                                          "type": "string",
+                                          "description": "Cron expression defining when the schedule applies.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "定义定时计划生效时间的 Cron 表达式。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                            }
+                                          }
+                                        },
+                                        "target": {
+                                          "type": "integer",
+                                          "format": "int64",
+                                          "description": "Target value applied when the schedule fires.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "定时计划触发时应用的目标值。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "スケジュール発火時に適用されるターゲット値。"
+                                            }
+                                          }
+                                        },
+                                        "timezone": {
+                                          "type": "string",
+                                          "description": "Timezone of the cron schedule.",
+                                          "x-i18n": {
+                                            "zh-CN": {
+                                              "description": "Cron 定时计划使用的时区。"
+                                            },
+                                            "ja-JP": {
+                                              "description": "Cron スケジュールのタイムゾーン。"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "x-i18n": {
+                                        "zh-CN": {
+                                          "description": "定时扩缩容规则。"
+                                        },
+                                        "ja-JP": {
+                                          "description": "スケジュールされたオートスケーリングターゲット。"
+                                        }
+                                      }
+                                    },
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "keep-warm 定时窗口列表。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "keep-warm スケジュールウィンドウ。"
+                                      }
+                                    }
+                                  },
+                                  "nextTransitionAt": {
+                                    "type": "string",
+                                    "description": "Next planned window boundary in RFC 3339 UTC; null when there is none.",
+                                    "example": {},
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "下一个计划窗口边界的 RFC 3339 UTC 时间；无则为 null。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "次に計画されたウィンドウ境界（RFC 3339 UTC）。存在しない場合は null。"
+                                      }
+                                    }
+                                  },
+                                  "nextTransitionType": {
+                                    "type": "string",
+                                    "description": "Meaning of nextTransitionAt: START or END of a keep-warm window; null when there is no next transition.",
+                                    "enum": [
+                                      "START",
+                                      "END"
+                                    ],
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "nextTransitionAt 的含义：keep-warm 窗口的 START 或 END；无下一次切换时为 null。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "nextTransitionAt の意味: keep-warm ウィンドウの START または END。次の遷移がない場合は null。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "keep-warm 定时配置；未配置定时时为 null。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "keep-warm スケジュール設定。スケジュールが構成されていない場合は null。"
+                                  }
+                                }
                               }
                             },
-                            "description": "An on-demand cluster.",
                             "x-i18n": {
                               "zh-CN": {
                                 "description": "一个按需集群。"
@@ -662,10 +927,30 @@
                                 "description": "オンデマンドクラスター。"
                               }
                             }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "按需集群列表。"
+                            },
+                            "ja-JP": {
+                              "description": "オンデマンドクラスターの一覧。"
+                            }
+                          }
+                        },
+                        "count": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "The total number of on-demand clusters.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "按需集群总数。"
+                            },
+                            "ja-JP": {
+                              "description": "オンデマンドクラスターの合計数。"
+                            }
                           }
                         }
                       },
-                      "description": "Response payload containing the on-demand Cluster records returned by the listing operation.",
                       "x-i18n": {
                         "zh-CN": {
                           "description": "响应载荷，包含列表操作返回的按需 Cluster 记录。"
@@ -879,6 +1164,7 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "zh-CN": {
@@ -1107,6 +1393,7 @@
                   "properties": {
                     "code": {
                       "type": "integer",
+                      "format": "int32",
                       "description": "Response code.",
                       "x-i18n": {
                         "zh-CN": {
@@ -1120,183 +1407,312 @@
                     "data": {
                       "type": "object",
                       "description": "Details of the current cluster",
+                      "properties": {
+                        "clusterId": {
+                          "type": "string",
+                          "description": "ID of the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタの ID。"
+                            }
+                          }
+                        },
+                        "clusterName": {
+                          "type": "string",
+                          "description": "Name of the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的名称。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタの名前。"
+                            }
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的描述。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタの説明。"
+                            }
+                          }
+                        },
+                        "regionId": {
+                          "type": "string",
+                          "description": "ID of the region where the query cluster resides.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群所在地域的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタが存在するリージョンの ID。"
+                            }
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "description": "ID of the project the query cluster belongs to.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群所属项目的 ID。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタが属するプロジェクトの ID。"
+                            }
+                          }
+                        },
+                        "cuSize": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "CU size of the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的 CU 规格。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタの CU サイズ。"
+                            }
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "description": "Status of the query cluster: CREATING, SUSPENDED, RESUMING, RUNNING, or SUSPENDING.",
+                          "enum": [
+                            "CREATING",
+                            "SUSPENDED",
+                            "RESUMING",
+                            "RUNNING",
+                            "SUSPENDING"
+                          ],
+                          "example": "SUSPENDED",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的状态：CREATING、SUSPENDED、RESUMING、RUNNING 或 SUSPENDING。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタのステータス: CREATING、SUSPENDED、RESUMING、RUNNING、または SUSPENDING。"
+                            }
+                          }
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "description": "Endpoint of the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的端点。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタのエンドポイント。"
+                            }
+                          }
+                        },
+                        "privateLink": {
+                          "type": "string",
+                          "description": "Private link address of the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "查询集群的私网连接地址。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタの Private Link アドレス。"
+                            }
+                          }
+                        },
+                        "createdBy": {
+                          "type": "string",
+                          "description": "User who created the query cluster.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "创建查询集群的用户。"
+                            },
+                            "ja-JP": {
+                              "description": "クエリクラスタを作成したユーザー。"
+                            }
+                          }
+                        },
+                        "createTime": {
+                          "type": "string",
+                          "description": "Cluster creation time in UTC ISO-8601 format",
+                          "example": {},
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "集群创建时间，UTC ISO-8601 格式。"
+                            },
+                            "ja-JP": {
+                              "description": "クラスタの作成時刻 (UTC ISO-8601 形式)。"
+                            }
+                          }
+                        },
+                        "autoSuspend": {
+                          "type": "integer",
+                          "format": "int32",
+                          "description": "Auto-suspend idle timeout in seconds.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "自动挂起的空闲超时时间，单位为秒。"
+                            },
+                            "ja-JP": {
+                              "description": "自動サスペンドのアイドルタイムアウト (秒)。"
+                            }
+                          }
+                        },
+                        "keepWarmActive": {
+                          "type": "boolean",
+                          "description": "Whether a keep-warm window is currently active.",
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "当前是否处于 keep-warm 窗口。"
+                            },
+                            "ja-JP": {
+                              "description": "keep-warm ウィンドウが現在アクティブかどうか。"
+                            }
+                          }
+                        },
+                        "keepWarm": {
+                          "type": "object",
+                          "description": "Keep-warm schedule configuration; null when no schedule is configured.",
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean",
+                              "description": "Whether the keep-warm schedule is enabled.",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "keep-warm 定时是否启用。"
+                                },
+                                "ja-JP": {
+                                  "description": "keep-warm スケジュールが有効かどうか。"
+                                }
+                              }
+                            },
+                            "systemTimezone": {
+                              "type": "string",
+                              "description": "Organization system time zone (IANA) in which the schedules are interpreted.",
+                              "example": "Asia/Shanghai",
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "解释定时配置时使用的组织系统时区（IANA）。"
+                                },
+                                "ja-JP": {
+                                  "description": "スケジュールの解釈に使用される組織のシステムタイムゾーン (IANA)。"
+                                }
+                              }
+                            },
+                            "schedules": {
+                              "type": "array",
+                              "description": "Keep-warm schedule windows.",
+                              "items": {
+                                "type": "object",
+                                "description": "Scheduled autoscaling target.",
+                                "properties": {
+                                  "cron": {
+                                    "type": "string",
+                                    "description": "Cron expression defining when the schedule applies.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "定义定时计划生效时间的 Cron 表达式。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "スケジュールが適用されるタイミングを定義する Cron 式。"
+                                      }
+                                    }
+                                  },
+                                  "target": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Target value applied when the schedule fires.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "定时计划触发时应用的目标值。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "スケジュールが発火したときに適用されるターゲット値。"
+                                      }
+                                    }
+                                  },
+                                  "timezone": {
+                                    "type": "string",
+                                    "description": "Timezone of the cron schedule.",
+                                    "x-i18n": {
+                                      "zh-CN": {
+                                        "description": "Cron 定时计划使用的时区。"
+                                      },
+                                      "ja-JP": {
+                                        "description": "Cron スケジュールのタイムゾーン。"
+                                      }
+                                    }
+                                  }
+                                },
+                                "x-i18n": {
+                                  "zh-CN": {
+                                    "description": "定时扩缩容规则。"
+                                  },
+                                  "ja-JP": {
+                                    "description": "スケジュールされた自動スケーリングのターゲット。"
+                                  }
+                                }
+                              },
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "keep-warm 定时窗口列表。"
+                                },
+                                "ja-JP": {
+                                  "description": "keep-warm スケジュールウィンドウ。"
+                                }
+                              }
+                            },
+                            "nextTransitionAt": {
+                              "type": "string",
+                              "description": "Next planned window boundary in RFC 3339 UTC; null when there is none.",
+                              "example": {},
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "下一个计划窗口边界的 RFC 3339 UTC 时间；无则为 null。"
+                                },
+                                "ja-JP": {
+                                  "description": "次に計画されているウィンドウ境界 (RFC 3339 UTC)。存在しない場合は null。"
+                                }
+                              }
+                            },
+                            "nextTransitionType": {
+                              "type": "string",
+                              "description": "Meaning of nextTransitionAt: START or END of a keep-warm window; null when there is no next transition.",
+                              "enum": [
+                                "START",
+                                "END"
+                              ],
+                              "x-i18n": {
+                                "zh-CN": {
+                                  "description": "nextTransitionAt 的含义：keep-warm 窗口的 START 或 END；无下一次切换时为 null。"
+                                },
+                                "ja-JP": {
+                                  "description": "nextTransitionAt の意味: keep-warm ウィンドウの START または END。次の遷移がない場合は null。"
+                                }
+                              }
+                            }
+                          },
+                          "x-i18n": {
+                            "zh-CN": {
+                              "description": "keep-warm 定时配置；未配置定时时为 null。"
+                            },
+                            "ja-JP": {
+                              "description": "keep-warm スケジュール設定。スケジュールが未設定の場合は null。"
+                            }
+                          }
+                        }
+                      },
                       "x-i18n": {
                         "zh-CN": {
                           "description": "当前集群的详细情况。"
                         },
                         "ja-JP": {
                           "description": "現在のクラスターの詳細。"
-                        }
-                      },
-                      "properties": {
-                        "properties": {
-                          "type": "object",
-                          "properties": {
-                            "projectId": {
-                              "type": "string",
-                              "description": "ID of the project.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "项目 ID。"
-                                },
-                                "ja-JP": {
-                                  "description": "プロジェクトの ID。"
-                                }
-                              }
-                            },
-                            "clusterId": {
-                              "type": "string",
-                              "description": "ID of the cluster.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "集群 ID。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターの ID。"
-                                }
-                              },
-                              "example": "inxx-xxxxxxxxxxxxxxx"
-                            },
-                            "clusterName": {
-                              "type": "string",
-                              "description": "Name of the cluster.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "集群名称。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターの名前。"
-                                }
-                              }
-                            },
-                            "description": {
-                              "type": "string",
-                              "description": "Description of the on-demand cluster.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "按需集群描述。"
-                                },
-                                "ja-JP": {
-                                  "description": "オンデマンドクラスターの説明。"
-                                }
-                              }
-                            },
-                            "regionId": {
-                              "type": "string",
-                              "description": "Cloud region where the cluster is located.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "集群所处云地域 ID。",
-                                  "example": "ali-cn-hangzhou"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターが配置されているクラウドリージョン。"
-                                }
-                              },
-                              "example": "aws-us-west-2"
-                            },
-                            "cuSize": {
-                              "type": "integer",
-                              "description": "CU size of the cluster",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "分配给当前集群的 CU 大小。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターの CU サイズ。"
-                                }
-                              }
-                            },
-                            "status": {
-                              "type": "string",
-                              "description": "Current cluster status",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "当前集群所处状态。"
-                                },
-                                "ja-JP": {
-                                  "description": "現在のクラスターのステータス。"
-                                }
-                              },
-                              "enum": [
-                                "CREATING",
-                                "SUSPENDED",
-                                "RESUMING",
-                                "RUNNING",
-                                "SUSPENDING"
-                              ]
-                            },
-                            "endpoint": {
-                              "type": "string",
-                              "description": "Cluster public endpoint. For an on-demand cluster, the endpoint is an on-demand compute endpoint, which is shared among all on-demand clusters in the project. Use that with the target cluster ID for searches and queries.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "访问集群时使用的公共端点。注意对于按需集群来说，该端点是一个项目级别的按需计算端点，项目中的所有按需集群共享该端点。在进行搜索和查询时，请和集群 ID 共同使用。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターの public endpoint。オンデマンドクラスターの場合、この endpoint はオンデマンドコンピュート endpoint であり、プロジェクト内のすべてのオンデマンドクラスター間で共有されます。検索やクエリでは、ターゲットのクラスター ID とともにこの endpoint を使用します。"
-                                }
-                              },
-                              "example": "https://proj-xxxxxxxxxxxxxxx.aws-us-west-2.zillizcloud.com"
-                            },
-                            "privateLink": {
-                              "type": "string",
-                              "description": "Cluster private endpoint. This is an empty string if private link is not enabled.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "访问集群时使用的私有端点。若未开启 Private Link。此参数值为空。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターの private endpoint。private link が有効でない場合は空の文字列です。"
-                                }
-                              }
-                            },
-                            "createdBy": {
-                              "type": "string",
-                              "description": "Email address of the user who create the cluster.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "集群创建人的邮箱。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターを作成したユーザーのメールアドレス。"
-                                }
-                              }
-                            },
-                            "createTime": {
-                              "type": "string",
-                              "description": "Time at which the cluster is created in UTC ISO-8601 format.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "集群创建时间，UTC ISO-8601 格式。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターが作成された時刻 (UTC ISO-8601 形式)。"
-                                }
-                              }
-                            },
-                            "autoSuspend": {
-                              "type": "integer",
-                              "description": "Auto-suspend idle window configured for the cluster. The cluster will be automatically suspended if there is no request within the specified period. The value is an integer representing the number of seconds. For example, `300` means 5 minutes.",
-                              "x-i18n": {
-                                "zh-CN": {
-                                  "description": "自动挂起空闲时间。如果指定的时间段内无任何请求，集群将自动挂起。该值为一个整数，表示秒数。例如，`300` 表示 5 分钟。"
-                                },
-                                "ja-JP": {
-                                  "description": "クラスターに設定された自動一時停止のアイドルウィンドウ。指定した期間内にリクエストがない場合、クラスターは自動的に一時停止されます。値は秒数を表す整数です。たとえば、`300` は 5 分を意味します。"
-                                }
-                              }
-                            }
-                          },
-                          "description": "Properties of the on-demand Cluster, returned as an object of Cluster attributes.",
-                          "x-i18n": {
-                            "zh-CN": {
-                              "description": "按需 Cluster 的属性，以 Cluster 属性的对象形式返回。"
-                            },
-                            "ja-JP": {
-                              "description": "オンデマンド Cluster のプロパティで、Cluster の属性を持つオブジェクトとして返されます。"
-                            }
-                          }
                         }
                       }
                     }
@@ -1459,6 +1875,8 @@
                   "description": {
                     "type": "string",
                     "description": "The new description of the cluster. The value can be an empty string.",
+                    "maxLength": 255,
+                    "minLength": 0,
                     "x-i18n": {
                       "zh-CN": {
                         "description": "集群的新描述。值可以为空字符串。"
@@ -1471,8 +1889,8 @@
                   "autoSuspend": {
                     "type": "string",
                     "description": "Auto-suspend idle window. The value must use the `<number><s|m|h>` format, such as `60s`, `5m`, or `1h`, and must be at least 60 seconds.",
-                    "pattern": "^\\d+[smh]$",
                     "example": "5m",
+                    "pattern": "^(?=\\d)(?:\\d+d)?(?:\\d+h)?(?:\\d+m)?(?:\\d+s)?$",
                     "x-i18n": {
                       "zh-CN": {
                         "description": "自动挂起空闲时间。该值必须使用 `<number><s|m|h>` 格式，例如 `60s`、`5m` 或 `1h`，且至少为 60 秒。",
@@ -1480,6 +1898,21 @@
                       },
                       "ja-JP": {
                         "description": "自動一時停止のアイドルウィンドウ。値は `<number><s|m|h>` 形式（`60s`、`5m`、`1h` など）を使用する必要があり、60 秒以上である必要があります。"
+                      }
+                    }
+                  },
+                  "cuSize": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "New CU count of the Query Cluster. Must be a positive multiple of 8.",
+                    "example": 32,
+                    "minimum": 8,
+                    "x-i18n": {
+                      "zh-CN": {
+                        "description": "Query Cluster 的新 CU 数量，必须为 8 的正整数倍。"
+                      },
+                      "ja-JP": {
+                        "description": "Query Cluster の新しい CU 数。8 の正の倍数である必要があります。"
                       }
                     }
                   }
@@ -1538,10 +1971,14 @@
                       "properties": {
                         "code": {
                           "type": "integer",
+                          "format": "int32",
                           "description": "Response code.",
                           "x-i18n": {
                             "ja-JP": {
                               "description": "レスポンスコード。"
+                            },
+                            "zh-CN": {
+                              "description": "响应码。"
                             }
                           }
                         },
