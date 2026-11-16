@@ -1,6 +1,6 @@
 # DataType
 
-This enum specifies the data type of a collection field. Pass a `DataType` value when constructing a `FieldSchema`.
+This enum specifies the data type of a collection field. Pass a `DataType` value when constructing a [FieldSchema](FieldSchema.md).
 
 ```rust
 pub enum DataType {

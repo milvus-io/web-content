@@ -118,7 +118,7 @@ let request = SearchRequest::builder()
 
     - `functions: Vec<Function>`
 
-        Reranking functions applied to the candidate set.
+        Reranking functions applied to the candidate set. See [Function](../Collections/Function.md).
 
     - `params: HashMap<String, serde_json::Value>`
 
