@@ -10,7 +10,7 @@ public DescribeReplicasResp describeReplicas(DescribeReplicasReq request)
 
 ```java
 describeReplicas(DescribeReplicasReq.builder()
-    .databaseName(String alias)
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .build()
 )
@@ -18,7 +18,7 @@ describeReplicas(DescribeReplicasReq.builder()
 
 **BUILDER METHODS:**
 
-- `databaseName(String alias)`
+- `databaseName(String databaseName)`
 
     The name of the database that holds the target collection.
 

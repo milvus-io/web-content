@@ -50,6 +50,10 @@ alterDatabaseProperties(AlterDatabasePropertiesReq.builder()
 
         Whether to deny all read operations in the database.
 
+- `property(String key, String value)`
+
+    Sets a single database property by key and value.
+
 **RETURNS:**
 
 *void*

@@ -102,7 +102,7 @@ SearchResp searchResp = client.search(SearchReq.builder()
         .limit(10)
         .functionScore(FunctionScore.builder()
                 .addFunction(ranker)
-
-    .consistencyLevel(ConsistencyLevel.STRONG).build())
+                .build())
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 ```

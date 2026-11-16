@@ -5,7 +5,7 @@ This operation alters the properties of a specified collection.
 **Deprecated.** Replaced by `alterCollectionProperties()` since SDK v2.5.3, to keep consistency with other SDKs.
 
 ```java
-public Void alterCollection(AlterCollectionReq request)
+public void alterCollection(AlterCollectionReq request)
 ```
 
 ## Request Syntax

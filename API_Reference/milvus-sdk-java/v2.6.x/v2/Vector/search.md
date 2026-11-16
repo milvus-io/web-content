@@ -297,9 +297,9 @@ SearchResp searchResp = client.search(SearchReq.builder()
         .limit(100)
         .outputFields(Arrays.asList("birth_year", "lifespan"))
         .functionScore(FunctionScore.builder()
-        .addFunction(decay)
+                .addFunction(decay)
+                .build())
         .consistencyLevel(ConsistencyLevel.STRONG)
-        .build())
         .build());
 
 List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();

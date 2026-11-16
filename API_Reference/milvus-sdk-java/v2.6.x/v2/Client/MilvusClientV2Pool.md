@@ -11,7 +11,7 @@ io.milvus.pool.MilvusClientV2Pool
 Constructs a client pool for common use cases.
 
 ```java
-MilvusClientV2Pool(PoolConfig poolConfig, ConnectConfig connectConfig);
+MilvusClientV2Pool(PoolConfig poolConfig, ConnectConfig connectConfig) throws ClassNotFoundException, NoSuchMethodException
 ```
 
 **METHODS:**

@@ -3,7 +3,7 @@
 This operation drops a specified collection alias.
 
 ```java
-public void dropAlias(request)
+public void dropAlias(DropAliasReq request)
 ```
 
 ## Request Syntax

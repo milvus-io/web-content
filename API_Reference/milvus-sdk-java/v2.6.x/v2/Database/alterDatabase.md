@@ -5,7 +5,7 @@ This operation alters the properties of a specified database.
 **Deprecated.** Replaced by `alterDatabaseProperties()` since SDK v2.5.3, to keep consistency with other SDKs.
 
 ```java
-public Void alterDatabase(AlterDatabaseReq request)
+public void alterDatabase(AlterDatabaseReq request)
 ```
 
 ## Request Syntax

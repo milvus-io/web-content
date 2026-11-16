@@ -15,20 +15,20 @@ CreateCollectionReq.FieldSchema.builder()
     .name(String fieldName)
     .description(String description)
     .dataType(DataType dataType)
-    .maxLength(int maxLength)
-    .dimension(int dimension)
-    .isPrimaryKey(boolean isPrimaryKey)
-    .isPartitionKey(boolean isPartitionKey)
-    .autoID(boolean autoID)
+    .maxLength(Integer maxLength)
+    .dimension(Integer dimension)
+    .isPrimaryKey(Boolean isPrimaryKey)
+    .isPartitionKey(Boolean isPartitionKey)
+    .autoID(Boolean autoID)
 
     .elementType(DataType elementType)
-    .maxCapacity(int maxCapacity)
-    .isClusteringKey(boolean isClusteringKey)
-    .isNullable(boolean isNullable)
+    .maxCapacity(Integer maxCapacity)
+    .isClusteringKey(Boolean isClusteringKey)
+    .isNullable(Boolean isNullable)
     .defaultValue(Object defaultValue)
-    .enableAnalyzer(boolean enableAnalyzer)
+    .enableAnalyzer(Boolean enableAnalyzer)
     .analyzerParams(Map<String, Object> analyzerParams)
-    .enableMatch(boolean enableMatch)
+    .enableMatch(Boolean enableMatch)
     .typeParams(Map<String, String> typeParams)
     .multiAnalyzerParams(Map<String, Object> multiAnalyzerParams)
 
@@ -57,31 +57,31 @@ CreateCollectionReq.FieldSchema.builder()
 
     - Vector fields: Select **DataType.BinaryVector** or **DataType.FloatVector**.
 
-- `maxLength(int maxLength)`
+- `maxLength(Integer maxLength)`
 
     The maximum number of characters a value should contain.
 
     This is required if **[dataType](DataType.md)** of this field is set to **DataType.VarChar.**
 
-- `dimension(int dimension)`
+- `dimension(Integer dimension)`
 
     The number of dimensions a value should have.
 
     This is required if **[dataType](DataType.md)** of this field is set to **DataType.FloatVector**.
 
-- `isPrimaryKey(boolean isPrimaryKey)`
+- `isPrimaryKey(Boolean isPrimaryKey)`
 
     Whether the current field is the primary field.
 
     Setting this to **True** makes the current field the primary field.
 
-- `isPartitionKey(boolean isPartitionKey)`
+- `isPartitionKey(Boolean isPartitionKey)`
 
     Whether the current field is the partitionKey field.
 
     Setting this to **True** makes the current field the partition key.
 
-- `autoID(boolean autoID)`
+- `autoID(Boolean autoID)`
 
     Whether allows the primary field to automatically increment.
 
@@ -95,19 +95,19 @@ CreateCollectionReq.FieldSchema.builder()
 
     This is required if **[dataType](DataType.md)** of this field is set to **DataType.Array**.
 
-- `maxCapacity(int maxCapacity)`
+- `maxCapacity(Integer maxCapacity)`
 
     The maximum number of elements that an array field can contain.
 
     This is required if **[dataType](DataType.md)** of this field is set to **DataType.Array**.
 
-- `isClusteringKey(boolean isClusteringKey)`
+- `isClusteringKey(Boolean isClusteringKey)`
 
     Whether the current field is the clustering key.
 
     Setting this to **True** makes the current field the clustering key.
 
-- `isNullable(boolean isNullable)`
+- `isNullable(Boolean isNullable)`
 
     Whether the field can accept null values. Defaults to `false`.
 
@@ -115,7 +115,7 @@ CreateCollectionReq.FieldSchema.builder()
 
     The default value of the field, used when no value is provided during data insertion.
 
-- `enableAnalyzer(boolean enableAnalyzer)`
+- `enableAnalyzer(Boolean enableAnalyzer)`
 
     Whether to enable text analysis for the specified `VARCHAR` field.
 
@@ -123,7 +123,7 @@ CreateCollectionReq.FieldSchema.builder()
 
     Configures the analyzer for text processing, specifically for `DataType.VarChar` fields.
 
-- `enableMatch(boolean enableMatch)`
+- `enableMatch(Boolean enableMatch)`
 
     Whether to enable keyword matching for the specified `VARCHAR` field.
 

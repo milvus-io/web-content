@@ -116,6 +116,16 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
 *SearchIteratorV2*
 
+A **SearchIteratorV2** object to iterate search results, which offers the following methods:
+
+- `next()` (*List<SearchResp.SearchResult>*) -
+
+    Returns the next batch of search results, or an empty list when iteration is complete.
+
+- `close()` (*void*) -
+
+    Closes the iterator and releases the underlying resources.
+
 **EXCEPTIONS:**
 
 - **[MilvusClientException](../Client/MilvusClientException.md)**

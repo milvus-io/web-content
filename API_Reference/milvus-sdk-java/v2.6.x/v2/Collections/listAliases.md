@@ -3,7 +3,7 @@
 This operation lists all existing aliases for a specific collection.
 
 ```java
-public ListAliasResp listAliases()
+public ListAliasResp listAliases(ListAliasesReq request)
 ```
 
 ## Request Syntax

@@ -19,7 +19,7 @@ class io.milvus.v2.service.collection.CollectionInfo
 ## Example
 
 ```java
-ListCollectionsResp resp = client.listCollections(ListCollectionsReq.builder().build());
+ListCollectionsResp resp = client.listCollections();
 resp.getCollectionInfos().forEach(info ->
     System.out.println(info.getCollectionName() + ", shards: " + info.getShardNum()));
 ```
