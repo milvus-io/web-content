@@ -51,7 +51,7 @@ await milvusClient.deleteEntities({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+    The consistency level of the target collection. The value defaults to **Bounded** (**2**) with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**). See [ConsistencyLevelEnum](../Collections/ConsistencyLevelEnum.md).
 
 - **timeout** (*number*) -
 
@@ -102,7 +102,7 @@ Always **"0"** for `deleteEntities()`.
 - **timestamp** (*string*) -
 The hybrid timestamp at which the delete became visible.
 
-- **IDs** (*StringArrayId* | *[NumberArrayId](NumberArrayId.md)*) -
+- **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
 
 The primary keys that were targeted by this delete. For the full field reference, refer to the `insert()` doc.
 

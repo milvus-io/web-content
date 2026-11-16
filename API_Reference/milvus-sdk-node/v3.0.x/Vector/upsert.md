@@ -115,7 +115,7 @@ The total number of rows upserted by this operation.
 - **timestamp** (*string*) -
 The hybrid timestamp at which the write became visible.
 
-- **IDs** (*StringArrayId* | *[NumberArrayId](NumberArrayId.md)*) -
+- **IDs** (*[StringArrayId](StringArrayId.md)* | *[NumberArrayId](NumberArrayId.md)*) -
 
 The primary keys carried in the upserted rows. For the full field reference, refer to the `insert()` doc.
 

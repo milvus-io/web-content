@@ -12,7 +12,8 @@ await milvusClient.describeAlias(data)
 await milvusClient.describeAlias({
     db_name: string,
     alias: string,
-    collection_name: string
+    collection_name: string,
+    timeout?: number
 })
 ```
 
@@ -55,6 +56,10 @@ await milvusClient.describeAlias({
     **[REQUIRED]**
 
     The name of the collection that has the specified alias.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURNS:**
 

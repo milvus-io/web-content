@@ -12,6 +12,7 @@ await milvusClient.getPkFieldName(data: DescribeCollectionReq)
 getPkFieldName({
     collection_name: string,
     db_name?: string,
+    cache?: boolean,
     timeout: number
 })
 ```
@@ -27,6 +28,10 @@ getPkFieldName({
 - **db_name** (*string*) -
 
     The name of the database that holds the target collection.
+
+- **cache** (*boolean*) -
+
+    Whether to use the cached description of the collection. Optional.
 
 - **timeout** (*number*) -
 

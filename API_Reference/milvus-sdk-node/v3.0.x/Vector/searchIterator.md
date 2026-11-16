@@ -38,6 +38,7 @@ await milvusClient.searchIterator({
     highlighter?: Highlighter,
     external_filter_fn?: (row: SearchResultData) => boolean,
     db_name?: string,
+    timeout?: number,
 })
 ```
 
@@ -97,7 +98,7 @@ await milvusClient.searchIterator({
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level for this operation. Options: Strong (0), Session (1), Bounded (2), Eventually (3). Defaults to Bounded.
+    The consistency level for this operation. Options: Strong (0), Session (1), Bounded (2), Eventually (3). Defaults to Bounded. See [ConsistencyLevelEnum](../Collections/ConsistencyLevelEnum.md).
 
 - **ignore_growing** (*boolean*) -
 
@@ -158,6 +159,10 @@ await milvusClient.searchIterator({
 - **db_name** (*string*) -
 
     The name of the database containing the collection.
+
+- **timeout** (*number*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURNS:**
 

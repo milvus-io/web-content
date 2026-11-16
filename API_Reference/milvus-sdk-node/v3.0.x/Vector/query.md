@@ -63,6 +63,10 @@ await milvusClient.query(data)
 
     An alias of **filter**. Provide either **filter** or **expr**, not both.
 
+- **exprValues** (*keyValueObj*) -
+
+    If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
+
 - **offset** (*number*) -
 
     The number of records to skip in the query result. 
@@ -81,7 +85,7 @@ await milvusClient.query(data)
 
 - **consistency_level** (*ConsistencyLevelEnum*) -
 
-    The consistency level of the target collection.
+    The consistency level of the target collection. See [ConsistencyLevelEnum](../Collections/ConsistencyLevelEnum.md).
 
     The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
 
