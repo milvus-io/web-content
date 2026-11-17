@@ -72,7 +72,7 @@ summary: This page demonstrates the procedure to import the prepared data.
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> parameters<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> is a thin wrapper around <code translate="no">POST /v2/vectordb/jobs/import/create</code>. Beyond the
+example above, it exposes the following parameters (PyMilvus 2.6 and later).</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Server address, for example <code translate="no">http://127.0.0.1:19530</code> or <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Target collection.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Target database. Sent as the <code translate="no">DB-Name</code> header for RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Files already available to the Milvus instance, for example on MinIO. These are <strong>server-side paths, not object URLs</strong>. Each sub-list is one JSON or Parquet file, or one set of NumPy files.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Target partition. Passed through extra keyword arguments rather than a declared parameter, so it is easy to miss in the signature. Leave it empty for collections that use a partition key.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>Single object URL on cloud object storage. Superseded by <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>Object URLs on cloud object storage, for example <code translate="no">s3://bucket/prefix/1.parquet</code>. Each sub-list is one object or one prefix that ends with <code translate="no">/</code>. Use this <strong>instead of</strong> <code translate="no">files</code>; the two are different transports, not synonyms.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud cluster ID.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud project ID, for project databases.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Region of the project database.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>API key, or <code translate="no">username:password</code> for a self-hosted instance.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Object storage credentials for <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Session token for short-term object storage credentials.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud volume to import from. Requires <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Paths inside <code translate="no">volume_name</code>. Each sub-list is one file or one prefix that ends with <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> or <code translate="no">str</code></td><td>Verify the server TLS certificate; <code translate="no">True</code> by default. A string is treated as a CA bundle path.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> or <code translate="no">tuple</code></td><td>Client certificate for mutual TLS: a file path, or a <code translate="no">('cert', 'key')</code> pair.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>Extra HTTP headers merged into the request; caller values win. Use it to send an idempotency key, for example <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; see <a href="/docs/idempotent-import.md">Idempotent Bulk Import</a>.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Additional import options forwarded to the server in the request body.</td></tr>
+</tbody>
+</table>
+<p>Any remaining keyword arguments are forwarded to <code translate="no">requests.post</code>, so <code translate="no">timeout</code> and <code translate="no">proxies</code>
+work as they do there. The wrapper sends a 20-second timeout by default.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">Check import progress<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
