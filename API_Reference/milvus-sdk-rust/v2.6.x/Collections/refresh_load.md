@@ -1,6 +1,6 @@
 # refresh_load()
 
-Refreshes a loaded collection or its partitions on query nodes.
+Refreshes the loaded data of a collection on query nodes (its partitions are refreshed together).
 
 ```rust
 pub async fn refresh_load(&self, request: RefreshLoadRequest) -> Result<()>

@@ -1,12 +1,12 @@
 # optimize()
 
-Starts an asynchronous collection-optimization task.
+Starts a collection-optimization task.
 
 ```rust
 pub async fn optimize(&self, request: OptimizeRequest) -> Result<OptimizeTask>
 ```
 
-Use the returned `OptimizeTask` to observe progress, wait for completion, or request cooperative cancellation. Optimization may involve multiple server-side stages.
+With the request's `async_mode` set, the task runs in a background Tokio task and this method returns immediately; otherwise it runs to completion before returning. Use the returned `OptimizeTask` to observe progress, wait for completion, or request cooperative cancellation. Optimization may involve multiple server-side stages.
 
 ## Request Syntax
 
@@ -30,7 +30,7 @@ let request = OptimizeRequest::builder()
 
 - `target_size: String`
 
-    Target segment size such as `512MB` or `1GB`. Empty means that no explicit target size is sent to Milvus.
+    Target segment size such as `512MB` or `1GB`. Empty sends a `0` target size so the server uses its default.
 
 - `async_mode: bool`
 

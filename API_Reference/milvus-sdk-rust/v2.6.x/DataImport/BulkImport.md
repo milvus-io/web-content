@@ -142,7 +142,9 @@ The request must specify exactly one data source among `files`, `object_url`, `o
 
 - `options: HashMap<String, Value>`
 
-    Additional import options, such as `auto_commit`.
+    Additional import options, such as `auto_commit`. Use `rls_principal()` and `skip_rls()` to populate the row-level security options for an import into an RLS-enabled collection.
+
+    The request exposes `rls_principal()` and `should_skip_rls()` accessors for those two options.
 
 **RETURN TYPE:**
 

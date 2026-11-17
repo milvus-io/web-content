@@ -57,7 +57,7 @@ Operations are grouped into the following categories. Click a category page to s
 - [**Vector**](../Vector/insert.md) — DML and DQL: `insert`, `upsert`, `delete`, `query`, `get`, `search`, `hybrid_search`, `query_iterator`, `search_iterator`.
 - **Partitions** — partition lifecycle: `create_partition`, `drop_partition`, `has_partition`, `list_partitions`, `load_partitions`, `release_partitions`, `get_partition_stats`.
 - **Index** — index management: `create_index`, `describe_index`, `drop_index`, `list_indexes`, `alter_index_properties`, `drop_index_properties`.
-- [**Authentication**](../Authentication/create_user.md) — users, roles, privileges, and privilege groups.
+- [**Authentication**](../Authentication/create_user.md) — users, roles, privileges, privilege groups, and row-level security.
 - [**ResourceGroup**](../ResourceGroup/create_resource_group.md) — resource-group lifecycle, node and replica transfer.
 - [**Management**](../Management/check_health.md) — maintenance, compaction, segments, server version, and health.
 - **CDC** — change-data-capture replication: `update_replicate_configuration`, `get_replicate_configuration`, `get_replicate_info`, `dump_messages`.
