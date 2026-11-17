@@ -22,6 +22,7 @@ CollectionSchema.addField(AddFieldReq.builder()
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
+    .elementNullable(Boolean elementNullable)
     .defaultValue(Object defaultValue)
     .enableDefaultValue(boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
@@ -104,6 +105,10 @@ CollectionSchema.addField(AddFieldReq.builder()
     A Boolean parameter that specifies whether the field can accept null values.
 
     For more information, refer to Nullable & Default.
+
+- `elementNullable(Boolean elementNullable)` -
+
+    Whether the inner elements of an Array or ArrayOfVector struct sub-field can be null. Defaults to `false`.
 
 - `defaultValue(Object defaultValue)` -
 

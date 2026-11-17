@@ -1,6 +1,6 @@
 # getReplicateInfo()
 
-This operation gets replication checkpoint information for a target physical channel. Use it before dumping messages or diagnosing cross-cluster replication progress.
+This operation gets replication checkpoint information for a source cluster's physical channel. Use it before dumping messages or diagnosing cross-cluster replication progress.
 
 ```java
 public GetReplicateInfoResp getReplicateInfo(GetReplicateInfoReq request)
@@ -23,7 +23,7 @@ getReplicateInfo(GetReplicateInfoReq.builder()
 
 - `targetPchannel(String targetPchannel)`
 
-    The target physical channel whose replicate checkpoint should be returned.
+    The source cluster's pchannel to query. The field name is historical and misleading; the value belongs to the source cluster.
 
 **RETURN TYPE:**
 
@@ -65,7 +65,7 @@ A **GetReplicateInfoResp** object that contains the checkpoint and salvage check
 
 - `getSalvageCheckpoint()` (*ReplicateCheckpoint*) -
 
-    The salvage checkpoint used to recover the replication. Has the same fields as `checkpoint`.
+    The salvage checkpoint captured during a force promote, representing the last synced position from the old primary. Has the same fields as `checkpoint`.
 
 **EXCEPTIONS:**
 
