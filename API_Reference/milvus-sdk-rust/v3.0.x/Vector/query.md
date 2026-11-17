@@ -54,7 +54,7 @@ let request = QueryRequest::builder()
 
 - `offset: Option<i64>`
 
-    Number of leading rows to skip.
+    Number of leading rows to skip. For `element_filter` queries the offset counts matched elements (the server and the query iterator seek both skip matched elements, mirroring pymilvus); otherwise it counts rows.
 
 - `ignore_growing: bool`
 
@@ -126,11 +126,15 @@ QueryResponse
 
     - `get_row_count()` (*u64*) -
 
-        The number of rows returned.
+        The number of rows returned. This counts the entity rows backing the columnar field data. When the result came from an `element_filter` query, the row materializers instead yield one row per matched element; use `get_element_row_count()` to count the matched elements those rows address.
+
+    - `get_element_row_count()` (*u64*) -
+
+        The number of rows yielded by the row materializers. For `element_filter` results this is the number of matched elements (each entity may match several); otherwise it equals `get_row_count()`.
 
     - `get_element_indices()` (*&[Vec<i64>]*) -
 
-        The element indices of the matched rows.
+        The element indices of the matched rows, one inner list per entity when an `element_filter` iterator is used.
 
     - `is_empty()` (*bool*) -
 

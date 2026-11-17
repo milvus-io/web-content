@@ -31,7 +31,7 @@ let mut iterator = client.query_iterator(request).await?;
 
 - `batch_size: usize`
 
-    Number of rows returned per `next()` call. Defaults to `1000`.
+    Number of rows returned per `next()` call. Defaults to `1000`. For `element_filter` iterators the pages are bounded by matched elements.
 
 - `reduce_stop_for_best: bool`
 
@@ -39,7 +39,7 @@ let mut iterator = client.query_iterator(request).await?;
 
 - `limit: Option<i64>`
 
-    Optional maximum number of rows to iterate before stopping. `None` iterates all matching rows.
+    Optional maximum number of rows to iterate before stopping. `None` iterates all matching rows. For `element_filter` iterators the limit counts matched elements (mirroring pymilvus); otherwise it counts result rows/entities.
 
 - `cursor: Option<QueryCursor>`
 

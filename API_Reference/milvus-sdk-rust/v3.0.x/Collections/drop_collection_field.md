@@ -27,7 +27,7 @@ let request = DropCollectionFieldRequest::builder()
 
 - `field_name: Option<String>`
 
-    Name of the field to drop. Exactly one of `field_name` or `field_id` must be specified.
+    Name of the field to drop. Exactly one of `field_name` or `field_id` must be specified. A struct sub-field is dropped with a bracketed `struct[sub]` path, for example `clips[note]`; the parent struct and the child must be C-style identifiers.
 
 - `field_id: Option<i64>`
 

@@ -1,12 +1,12 @@
 # optimize()
 
-Starts an asynchronous collection-optimization task.
+Starts a collection-optimization task.
 
 ```rust
 pub async fn optimize(&self, request: OptimizeRequest) -> Result<OptimizeTask>
 ```
 
-Use the returned `OptimizeTask` to observe progress, wait for completion, or request cooperative cancellation. Optimization may involve multiple server-side stages.
+With the request's `async_mode` set, the task runs in a background Tokio task and this method returns immediately; otherwise it runs to completion before returning. Use the returned `OptimizeTask` to observe progress, wait for completion, or request cooperative cancellation. Optimization may involve multiple server-side stages.
 
 ## Request Syntax
 

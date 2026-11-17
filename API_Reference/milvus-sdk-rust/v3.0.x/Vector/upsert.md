@@ -37,7 +37,7 @@ let request = UpsertRequest::builder()
 
     Per-field operations applied during a partial update, such as `ArrayAppend` or `ArrayRemove`. Each operation requires a field name. Use `add_field_op()` to add one.
 
-    This struct describes how a field value is applied during an upsert. `ArrayAppend` and `ArrayRemove` apply only to array fields and implicitly enable partial-update semantics for the request. These array operations require Milvus 2.6.17 or later.
+    This struct describes how a field value is applied during an upsert. `ArrayAppend` and `ArrayRemove` apply only to array fields and implicitly enable partial-update semantics for the request. These array operations require Milvus 2.6.17 or later. `PathReplace` replaces the value selected by `path` (`[index]` on an Array field, or `[index][child]` on a struct field) and requires `path` to be set.
 
     ```rust
     pub struct FieldPartialUpdateOp
@@ -51,13 +51,18 @@ let request = UpsertRequest::builder()
 
     - `op_type: FieldPartialUpdateOpType`
 
-        Operation applied to the field, `Replace`, `ArrayAppend`, or `ArrayRemove`. Defaults to `Replace`.
+        Operation applied to the field, `Replace`, `ArrayAppend`, `ArrayRemove`, or `PathReplace`. Defaults to `Replace`.
+
+    - `path: String`
+
+        Replacement path used by `PathReplace`: `[index]` on an Array field, or `[index][child]` on a struct field.
 
     **METHODS:**
 
     - `new()` - Creates a value initialized with its SDK defaults.
     - `field_name(value)` / `set_field_name(value)` / `get_field_name()` - Sets or returns the field name.
     - `op_type(value)` / `set_op_type(value)` / `get_op_type()` - Sets or returns the operation type.
+    - `path(value)` / `set_path(value)` / `get_path()` - Sets or returns the replacement path.
 
     ## FieldPartialUpdateOpType
 
@@ -68,6 +73,7 @@ let request = UpsertRequest::builder()
         Replace,
         ArrayAppend,
         ArrayRemove,
+        PathReplace,
     }
     ```
 
@@ -84,6 +90,10 @@ let request = UpsertRequest::builder()
     - **ArrayRemove**
 
         Remove every occurrence of the supplied elements from an existing array field.
+
+    - **PathReplace**
+
+        Replace the existing value selected by `path`, such as `[0]` on an Array field or `[0][child]` on a struct field. Requires `path` to be set.
 
 - `rls_principal: Option<String>`
 

@@ -183,7 +183,7 @@ Operations are grouped into the following categories. Click a category page to s
 - [**Authentication**](../Authentication/create_user.md) — users, roles, privileges, privilege groups, and row-level security.
 - [**ResourceGroup**](../ResourceGroup/create_resource_group.md) — resource-group lifecycle, node and replica transfer.
 - [**Snapshots**](../Snapshots/create_snapshot.md) — snapshot backup, restore, and pinning.
-- [**Management**](../Management/check_health.md) — maintenance, compaction, segments, server version, and health.
+- [**Management**](../Management/check_health.md) — maintenance, compaction, segments, running requests, server version, and health.
 - **CDC** — change-data-capture replication: `update_replicate_configuration`, `get_replicate_configuration`, `get_replicate_info`, `dump_messages`.
 - **Alias** — collection aliases: `create_alias`, `drop_alias`, `alter_alias`, `describe_alias`, `list_aliases`.
 

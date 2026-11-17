@@ -48,6 +48,10 @@ pub struct FieldSchema
 
     Whether the field accepts null values.
 
+- `element_nullable: bool`
+
+    Whether the field's elements can be null. Supported for Array sub-fields of a struct array field: it permits individual inner-array values to be null. Struct sub-fields that are themselves arrays use `element_nullable` for the inner values and `nullable` for the inner array as a whole.
+
 - `is_dynamic: bool`
 
     Whether the field is a dynamic (undefined) field.
@@ -84,6 +88,7 @@ pub struct FieldSchema
 - `partition_key(value)` / `set_partition_key(value)` / `is_partition_key()` - Sets or returns whether the field is the partition key.
 - `clustering_key(value)` / `set_clustering_key(value)` / `is_clustering_key()` - Sets or returns whether the field is the clustering key.
 - `nullable(value)` / `set_nullable(value)` / `is_nullable()` - Sets or returns whether the field accepts null values.
+- `element_nullable(value)` / `set_element_nullable(value)` / `is_element_nullable()` - Sets or returns whether the field's elements can be null.
 - `default_value(value)` / `set_default_value(value)` / `get_default_value()` - Sets or returns the default value.
 - `type_params(value)` / `set_type_params(value)` / `get_type_params()` - Sets or returns the type params.
 - `index_params(value)` / `set_index_params(value)` / `get_index_params()` - Sets or returns the index params.
@@ -117,6 +122,16 @@ let schema = CollectionSchema::new()
             .name("embedding")
             .data_type(DataType::FloatVector)
             .dimension(4),
+    )
+    .add_field(
+        FieldSchema::new()
+            .name("tags")
+            .data_type(DataType::Array)
+            .element_type(DataType::VarChar)
+            .max_capacity(8)
+            .max_length(16)
+            .nullable(true)
+            .element_nullable(true),
     );
 
 let request = CreateCollectionRequest::builder()

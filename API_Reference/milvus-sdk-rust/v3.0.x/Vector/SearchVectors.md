@@ -49,13 +49,62 @@ pub enum SearchVectors {
 
     Struct-vector inputs, each carrying its own list of embeddings.
 
+## EmbeddingList
+
+A list of embeddings used by struct-vector search.
+
+```rust
+pub struct EmbeddingList
+```
+
+**PARAMETERS:**
+
+- `values: EmbeddingListValues`
+
+    The vector payload of the list. Each embedding list is type-homogeneous: all vectors in one list use the same element type (`Float`, `Binary` or `Int8`), matching the `EmbList*` placeholder the server expects for struct-vector search.
+
+**METHODS:**
+
+- `new()` - Creates a value initialized with its SDK defaults.
+- `vectors(value)` / `set_vectors(value)` / `get_vectors()` - Sets or returns the float vectors.
+- `add_vector(value)` - Adds one float vector to the existing values.
+- `binary_vectors(value)` / `set_binary_vectors(value)` / `get_binary_vectors()` - Sets the binary vectors (packed bytes) or returns them; `get_binary_vectors()` returns `None` when the list is not binary-typed.
+- `add_binary_vector(value)` - Adds one binary vector to the existing values.
+- `int8_vectors(value)` / `set_int8_vectors(value)` / `get_int8_vectors()` - Sets the int8 vectors or returns them; `get_int8_vectors()` returns `None` when the list is not int8-typed.
+- `add_int8_vector(value)` - Adds one int8 vector to the existing values.
+
+## EmbeddingListValues
+
+The vector payload held by one struct-vector embedding list.
+
+```rust
+pub enum EmbeddingListValues
+```
+
+**Constants:**
+
+- `Float(Vec<Vec<f32>>)`
+
+    32-bit float vectors, one slice per query.
+
+- `Binary(Vec<Vec<u8>>)`
+
+    Binary vectors stored as packed bytes, one slice per query.
+
+- `Int8(Vec<Vec<i8>>)`
+
+    Int8 vectors, one slice per query.
+
 ## Example
 
 ```rust
 let request = SearchRequest::builder()
     .collection_name("books")
-    .vector_field("embedding")
-    .vectors(SearchVectors::Float(vec![vec![0.1, 0.2, 0.3, 0.4]]))
+    .vector_field("struct_vec")
+    .vectors(SearchVectors::EmbeddingLists(vec![
+        EmbeddingList::new().int8_vectors(vec![vec![1, -2, 3]]),
+        EmbeddingList::new().binary_vectors(vec![vec![0b10101010]]),
+    ]))
     .limit(5)
     .build()?;
 ```
