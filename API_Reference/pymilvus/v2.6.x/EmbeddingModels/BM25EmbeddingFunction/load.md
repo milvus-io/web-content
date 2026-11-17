@@ -26,15 +26,9 @@ None
 
 **EXCEPTIONS:**
 
-- **OSError**
+- **RuntimeError**
 
-    This exception will be raised when the file cannot be opened, such as when the path is invalid or permissions do not allow opening the file.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
+    This exception will be raised when the parameter file cannot be downloaded or opened, such as when the path is invalid or permissions do not allow opening the file.
 
 ## Example
 

@@ -1,13 +1,13 @@
 # list_roles()
 
-This operation lists all custom roles.
+This operation lists all roles.
 
 ## Request Syntax
 
 ```python
 list_roles(
     timeout: Optional[float] = None
-) -> dict
+) -> list
 ```
 
 **PARAMETERS:**

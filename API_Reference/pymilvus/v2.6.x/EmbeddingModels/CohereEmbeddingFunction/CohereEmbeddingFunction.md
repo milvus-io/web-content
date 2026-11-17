@@ -61,7 +61,7 @@ CohereEmbeddingFunction(
 
     If `NONE` is selected, when the input exceeds the maximum input token length an error will be returned.
 
-    Default: `END`
+    The value defaults to **None**, which defers the truncation behavior to the Cohere API default.
 
 - **kwargs**
 

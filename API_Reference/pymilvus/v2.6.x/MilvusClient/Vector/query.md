@@ -7,7 +7,7 @@ This operation conducts a scalar filtering with a specified boolean expression.
 ```python
 query(
     collection_name: str,
-    filter: str,
+    filter: str = "",
     output_fields: Optional[List[str]] = None,
     timeout: Optional[float] = None,
     ids: Optional[Union[List, str, int]] = None,
@@ -26,9 +26,9 @@ query(
 
 - **filter** (*str*) -
 
-    **[REQUIRED]**
-
     A scalar filtering condition to filter matching entities. 
+
+    The value defaults to an empty string, indicating that no condition applies.
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
@@ -86,7 +86,7 @@ query(
 
         A valid timestamp. 
 
-        If this parameter is set, MilvusZilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
+        If this parameter is set, Milvus/Zilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
 
         <div class="alert note">
         
@@ -98,7 +98,7 @@ query(
 
         A period of time in seconds.
 
-        The value defaults to **5**. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
+        The value defaults to **5**. If this parameter is set, Milvus/Zilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
 
         <div class="alert note">
         

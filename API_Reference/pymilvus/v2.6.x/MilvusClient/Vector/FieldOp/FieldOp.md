@@ -8,6 +8,10 @@ Factory class for field-level partial-update operations.
 class FieldOp:
 ```
 
+**PARAMETERS:**
+
+N/A
+
 **RETURN TYPE:**
 
 *FieldOp*

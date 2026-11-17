@@ -70,6 +70,9 @@ Field schema instance containing the configured data type, constraints, default,
 - **DataTypeNotSupportException**
 Raised when `dtype` is not a supported `DataType` value. Use a supported PyMilvus data type.
 
+- **AutoIDException**
+Raised when `auto_id` is not a Boolean value. Pass `True` or `False` for the auto-ID option.
+
 - **PrimaryKeyException**
 Raised when primary-key or auto-ID options are invalid. Check the `is_primary` and `auto_id` option types and combinations.
 

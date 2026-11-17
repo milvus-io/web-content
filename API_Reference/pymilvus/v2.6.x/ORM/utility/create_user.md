@@ -16,6 +16,7 @@ This operation creates a user with a password.
 create_user(
     user: str,
     password: str,
+    using: str = "default",
     timeout: Optional[float] = None
 ) -> None
 ```
@@ -33,6 +34,10 @@ create_user(
     **[REQUIRED]**
 
     The password for the user.
+
+- **using** (*str*) -
+
+    The alias of the employed connection. The value defaults to **default**, indicating that this operation employs the default connection.
 
 - **timeout** (*float*) -
 

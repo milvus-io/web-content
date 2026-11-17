@@ -3,125 +3,65 @@
 This is an enumeration that provides the following constants.
 
 ```python
-class IndexType(str, Enum):
-    GPU_BRUTE_FORCE = "GPU_BRUTE_FORCE"
-    GPU_IVF_FLAT = "GPU_IVF_FLAT"
-    GPU_IVF_PQ = "GPU_IVF_PQ"
-    GPU_CAGRA = "GPU_CAGRA"
-    FLAT = "FLAT"
-    IVF_FLAT = "IVF_FLAT"
-    IVF_PQ = "IVF_PQ"
-    SCANN = "SCANN"
-    IVF_SQ8 = "IVF_SQ8"
-    IVF_RABITQ = "IVF_RABITQ"
-    BIN_FLAT = "BIN_FLAT"
-    BIN_IVF_FLAT = "BIN_IVF_FLAT"
-    HNSW = "HNSW"
-    HNSW_SQ = "HNSW_SQ"
-    HNSW_PQ = "HNSW_PQ"
-    HNSW_PRQ = "HNSW_PRQ"
-    DISKANN = "DISKANN"
-    SPARSE_INVERTED_INDEX = "SPARSE_INVERTED_INDEX"
-    SPARSE_WAND = "SPARSE_WAND"
-    INVERTED = "INVERTED"
-    STL_SORT = "STL_SORT"
-    TRIE = "TRIE"
-    AUTOINDEX = "AUTOINDEX"
+class IndexType(IntEnum):
+    INVALID = 0
+    FLAT = 1
+    IVFLAT = 2
+    IVF_SQ8 = 3
+    RNSG = 4
+    IVF_SQ8H = 5
+    IVF_PQ = 6
+    HNSW = 11
+    ANNOY = 12
+    IVF_FLAT = IVFLAT
+    IVF_SQ8_H = IVF_SQ8H
 ```
 
 **Constants:**
 
-- **GPU_BRUTE_FORCE**
+- **INVALID** (0)
 
-    Sets the index type to **GPU_BRUTE_FORCE**. This applies to GPU indexes only.
+    An invalid index type.
 
-- **GPU_IVF_FLAT**
-
-    Sets the index type to **GPU_IVF_FLAT**. This applies to GPU indexes only.
-
-- **GPU_IVF_PQ**
-
-    Sets the index type to **GPU_IVF_PQ**. This applies to GPU indexes only.
-
-- **GPU_CAGRA**
-
-    Sets the index type to **GPU_CAGRA**. This applies to GPU indexes only.
-
-- **FLAT**
+- **FLAT** (1)
 
     Sets the index type to **FLAT**.
 
-- **IVF_FLAT**
+- **IVFLAT** (2)
 
     Sets the index type to **IVF_FLAT**.
 
-- **IVF_PQ**
-
-    Sets the index type to **IVF_PQ**.
-
-- **SCANN**
-
-    Sets the index type to **SCANN**.
-
-- **IVF_SQ8**
+- **IVF_SQ8** (3)
 
     Sets the index type to **IVF_SQ8**.
 
-- **IVF_RABITQ**
+- **RNSG** (4)
 
-    Sets the index type to **IVF_RABITQ**.
+    Sets the index type to **RNSG**.
 
-- **BIN_FLAT**
+- **IVF_SQ8H** (5)
 
-    Sets the index type to **BIN_FLAT**. This applies to binary vectors only.
+    Sets the index type to **IVF_SQ8H**.
 
-- **BIN_IVF_FLAT**
+- **IVF_PQ** (6)
 
-    Sets the index type to **BIN_IVF_FLAT**. This applies to binary vectors only.
+    Sets the index type to **IVF_PQ**.
 
-- **HNSW**
+- **HNSW** (11)
 
     Sets the index type to **HNSW**.
 
-- **HNSW_SQ**
+- **ANNOY** (12)
 
-    Sets the index type to **HNSW_SQ**.
+    Sets the index type to **ANNOY**.
 
-- **HNSW_PQ**
+- **IVF_FLAT** (2)
 
-    Sets the index type to **HNSW_PQ**.
+    An alias of **IVFLAT**.
 
-- **HNSW_PRQ**
+- **IVF_SQ8_H** (5)
 
-    Sets the index type to **HNSW_PRQ**.
-
-- **DISKANN**
-
-    Sets the index type to **DISKANN**.
-
-- **SPARSE_INVERTED_INDEX**
-
-    Sets the index type to **SPARSE_INVERTED_INDEX**. This applies to sparse vectors only.
-
-- **SPARSE_WAND**
-
-    Sets the index type to **SPARSE_WAND**. This applies to sparse vectors only.
-
-- **INVERTED**
-
-    Sets the index type to **INVERTED**. This applies to scalar fields only.
-
-- **STL_SORT**
-
-    Sets the index type to **STL_SORT**. This applies to scalar fields only.
-
-- **TRIE**
-
-    Sets the index type to **TRIE**. This applies to VarChar scalar fields only.
-
-- **AUTOINDEX**
-
-    Sets the index type to **AUTOINDEX**.
+    An alias of **IVF_SQ8H**.
 
 ## Example
 
@@ -144,7 +84,7 @@ index_params = client.prepare_index_params()
 # Add an index using an IndexType constant
 index_params.add_index(
     field_name="my_vector",
-    index_type=IndexType.AUTOINDEX,
+    index_type=IndexType.FLAT,
     metric_type="L2",
 )
 

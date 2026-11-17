@@ -7,7 +7,7 @@ This operation adds multiple vector embeddings to the current **[EmbeddingList](
 ```python
 add_batch(
     self,
-    embedding: Union[List[np.ndarray], np.ndarray]
+    embeddings: Union[List[np.ndarray], np.ndarray]
 )
 ```
 

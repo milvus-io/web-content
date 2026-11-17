@@ -32,6 +32,15 @@ pymilvus.LocalBulkWriter.commit(
 
         The value defaults to **None**, indicating no callback is there to call. Use this to add post-commit actions.
 
+**RETURN TYPE:**
+
+*None*
+
+**RETURNS:**
+
+None
+
+
 ## Example
 
 ```python

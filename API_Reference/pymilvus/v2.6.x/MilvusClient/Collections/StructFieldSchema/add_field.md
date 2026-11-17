@@ -7,7 +7,8 @@ This operation adds a field to the schema of a struct element in an array of str
 ```python
 add_field(
     field_name: str,
-    datatype: DataType
+    datatype: DataType,
+    **kwargs
 )
 ```
 

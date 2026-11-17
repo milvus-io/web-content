@@ -7,7 +7,7 @@ This operation lists all indexes of a specific collection.
 ```python
 list_indexes(
     collection_name: str,
-    field_name: Optional[str],
+    field_name: Optional[str] = "",
     **kwargs,    
 ) -> List
 ```
@@ -22,7 +22,9 @@ list_indexes(
 
 - **field_name** (*str*) -
 
-    The name of a field. Leaving this unspecified make this operation list all indexes.
+    The name of a field. Leaving this unspecified makes this operation list all indexes.
+
+    The value defaults to an empty string, indicating that the indexes of all fields are listed.
 
 **RETURN TYPE:**
 

@@ -22,6 +22,10 @@ To complete this operation, you need to enable authentication on your Milvus ins
 list_privilege_groups()
 ```
 
+**PARAMETERS:**
+
+N/A
+
 **RETURN TYPE:**
 
 *PrivilegeGroupInfo*

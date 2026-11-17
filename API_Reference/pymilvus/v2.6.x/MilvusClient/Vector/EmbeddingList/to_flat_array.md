@@ -7,6 +7,9 @@ This operation converts the current **[EmbeddingList](EmbeddingList.md)** instan
 ```python
 to_flat_array()
 ```
+**PARAMETERS:**
+
+N/A
 
 **RETURN TYPE:**
 

@@ -12,7 +12,11 @@ verify(
 
 **PARAMETERS:**
 
-None
+- **schema** (*[CollectionSchema](../CollectionSchema/CollectionSchema.md)*) -
+
+    **[REQUIRED]**
+
+    The collection schema whose fields are used to validate the input and output fields of the function.
 
 **RETURN TYPE:**
 

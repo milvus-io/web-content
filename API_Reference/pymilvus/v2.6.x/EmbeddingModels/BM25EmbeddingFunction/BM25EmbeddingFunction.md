@@ -25,7 +25,7 @@ BM25EmbeddingFunction(
 
 - **analyzer** (*object*) -
 
-    An Analyzer object used to tokenize texts. Defaults to a built-in English language analyzer if not specified. For more information, refer to 
+    An Analyzer object used to tokenize texts. If not specified, a built-in English language analyzer is used.
 
 - **corpus** (*list*) -
 

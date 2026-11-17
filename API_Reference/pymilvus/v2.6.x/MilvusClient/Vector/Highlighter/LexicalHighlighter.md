@@ -18,10 +18,11 @@ LexicalHighlighter(
     post_tags: Optional[List[str]] = None,
     fragment_offset: Optional[int] = None,
     fragment_size: Optional[int] = None,
+    num_of_fragments: Optional[int] = None,
 )
 ```
 
-**PARAMETERS**:
+**PARAMETERS:**
 
 - **highlight_query** (*list[dict]*) -
 Defines which query terms from text-based filters are highlighted. Each entry must be a dict:
@@ -55,11 +56,11 @@ Maximum length of each returned fragment (in characters). The highlighter will c
 - **num_of_fragments** (*int*) -
 Maximum number of fragments to return per text value. If unset, the default is multiple fragments (implementation default; see Examples for typical values).
 
-**RETURN TYPE**:
+**RETURN TYPE:**
 
 *LexicalHighlighter*
 
-**RETURNS**:
+**RETURNS:**
 
 A **LexicalHighlighter** object.
 

@@ -8,8 +8,7 @@ This operation conducts a vector similarity search with an optional scalar filte
 search(
     self,
     collection_name: str,
-    data: Union[List[list], list],
-    ids: Union[List[str], List[int]],
+    data: Optional[Union[List[list], list]] = None,
     filter: str = "",
     limit: int = 10,
     output_fields: Optional[List[str]] = None,
@@ -19,6 +18,7 @@ search(
     anns_field: Optional[str] = None,
     ranker: Optional[Union[Function, FunctionScore]] = None,
     highlighter: Optional[Highlighter] = None,
+    ids: Optional[Union[List[int], List[str], str, int]] = None,
     **kwargs,
 ) -> List[List[dict]]
 ```
@@ -31,21 +31,23 @@ search(
 
     The name of an existing collection.
 
-- **data** (*List[list], list]*) -
-
-    **[REQUIRED]**
+- **data** (*Optional[Union[List[list], list]]*) -
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
 
+    The value defaults to **None**, indicating that **ids** should be used for the search.
+
     This parameter is mutually exclusive with **ids**.
 
-- **ids** (*Union[List[str], List[int]]*) -
+- **ids** (*Optional[Union[List[int], List[str], str, int]]*) -
 
     A list of primary keys.
 
     Milvus searches for the most similar vector embeddings to those in the specified entities.
+
+    The value defaults to **None**, indicating that **data** should be used for the search.
 
     This parameter is mutually exclusive with **data**.
 

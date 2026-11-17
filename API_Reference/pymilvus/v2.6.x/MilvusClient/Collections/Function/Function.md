@@ -15,8 +15,9 @@ Function(
     name: str,
     function_type: FunctionType,
     input_field_names: Union[str, List[str]],
-    output_field_names: Union[str, List[str]],
+    output_field_names: Optional[Union[str, List[str]]] = None,
     description: str = "",
+    params: Optional[Dict] = None,
 )
 ```
 
@@ -46,9 +47,11 @@ Function(
 
     The name of the field containing the raw data that requires conversion to a vector representation. This parameter accepts only one field name.
 
-- `output_field_names` (*Union[str, List[str]]*) -
+- `output_field_names` (*Optional[Union[str, List[str]]]*) -
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. This parameter accepts only one field name.
+
+    The value defaults to **None**, indicating that no output field is specified.
 
     <div class="alert note">
     
@@ -281,25 +284,11 @@ A `Function` object that can be registered with a Milvus collection, facilitatin
 
 **EXCEPTIONS:**
 
-- `UnknownFunctionType`
+- **[ParamError](../../../Exceptions/MilvusException.md)**
 
     This exception will be raised when an unsupported or unrecognized function type is specified.
 
-- `FunctionIncorrectInputOutputType`
-
-    This exception will be raised when one or more field names in `input_field_names` or `output_field_names` are not strings.
-
-- `FunctionDuplicateInputs`
-
-    This exception will be raised when there are duplicate field names in `input_field_names`.
-
-- `FunctionDuplicateOutputs`
-
-    This exception will be raised when there are duplicate field names in `output_field_names`.
-
-- `FunctionCommonInputOutput`
-
-    This exception will be raised when there is an overlap between `input_field_names` and `output_field_names`, meaning that the same field name is present in both.
+    This exception will also be raised when one or more field names in `input_field_names` or `output_field_names` are not strings, when there are duplicate field names in `input_field_names` or `output_field_names`, or when there is an overlap between the two parameter lists.
 
 ## Examples
 

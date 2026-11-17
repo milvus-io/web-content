@@ -48,7 +48,10 @@ A list of **QuerySegmentInfo** objects, each reporting the status of a segment.
 
 **EXCEPTIONS:**
 
-N/A
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 
 ## Example
 

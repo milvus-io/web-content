@@ -7,6 +7,9 @@ Creates an operation that appends incoming array elements to the existing field 
 ```python
 FieldOp.array_append() -> FieldPartialUpdateOp
 ```
+**PARAMETERS:**
+
+N/A
 
 **RETURN TYPE:**
 

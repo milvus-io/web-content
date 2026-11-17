@@ -31,17 +31,10 @@ ef(
 
 A list where each element is a NumPy array.
 
-**EXCEPTIONS:**
 
 - **ValueError**
 
     This exception will be raised when `api_key` is not provided and the `MISTRALAI_API_KEY` environment variable is also not set.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
 
 ## Example
 

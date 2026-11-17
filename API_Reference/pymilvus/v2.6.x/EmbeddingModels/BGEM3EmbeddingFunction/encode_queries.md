@@ -26,17 +26,10 @@ A dictionary containing the query embeddings.
 
 When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
-**EXCEPTIONS:**
 
 - **ImportError**
 
     This exception will be raised when the FlagEmbedding module is not installed.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
 
 ## Example
 

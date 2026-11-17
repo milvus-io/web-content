@@ -13,7 +13,7 @@ This operation checks whether the current collection has a built index.
 ## Request Syntax
 
 ```python
-has_index(timeout: float | None)
+has_index(timeout: float | None, **kwargs)
 ```
 
 **PARAMETERS:**
@@ -21,6 +21,14 @@ has_index(timeout: float | None)
 - **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **index_name** (*str*) -
+
+        The name of the index to check. If no index name is specified, the default index name is used.
 
 **RETURN TYPE:**
 

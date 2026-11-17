@@ -14,11 +14,13 @@ This operation establishes a connection to a Milvus instance using the provided 
 
 ```python
 connect(
-    alias: str,
+    alias: str | "default",
     user: str | "",
     password: str | "",
     db_name: str | "default",
     token: str | "",
+    _async: bool | False,
+    _unbind_with_db: bool | False,
     **kwargs
 )
 ```
@@ -27,9 +29,9 @@ connect(
 
 - **alias** (*string*) -
 
-    **[REQUIRED]**
-
     A connection alias.
+
+    The value defaults to **default**, indicating that the default connection alias is used.
 
     <div class="alert note">
     
@@ -69,6 +71,18 @@ connect(
 
     Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
+- **_async** (*bool*) -
+
+    Whether to create an asynchronous connection. The value defaults to **False**.
+
+- **_unbind_with_db** (*bool*) -
+
+    Whether the connection alias should be bound with a database. The value defaults to **False**.
+
+    - If set to **False** (the default, for ORM usage), the alias configuration contains a **db_name** key and is compatible with ORM APIs such as `using_database()`.
+
+    - If set to **True** (for MilvusClient/AsyncMilvusClient usage), the alias configuration does not contain a **db_name** key and the database is managed by the client instance instead.
+
 - **kwargs** (*dict*) -
 
     Keyword arguments for configuring the connection. The following keys are supported:
@@ -88,6 +102,14 @@ connect(
     - **port** (*string | int*) -
 
         The port that Milvus instance listens to. The value defaults to **19530**, and PyMilvus will fill in the default port if only **host** is provided.
+
+    - **timeout** (*float*) -
+
+        The timeout in seconds for the connection. The value defaults to **10**.
+
+    - **keep_alive** (*bool*) -
+
+        Whether to keep an alive connection. The value defaults to **False**. When set to **True**, the client keeps an alive connection.
 
     - **secure** (*bool*) -
 
@@ -143,17 +165,13 @@ None
 
 **EXCEPTIONS:**
 
-- **NotImplementedError**:
+- **ConnectionConfigException**
 
-    This exception will be raised when the handler parameter value is not GRPC.
+    This exception will be raised when the connection parameters are illegal.
 
-- **ParamError**: 
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
-    This exception will be raised when an unsupported value is passed for the pool parameter.
-
-- **Exception**: 
-
-    This exception will be raised when the server specified in the connection parameters is not reachable/ready and the client cannot connect to it.
+    This exception will be raised when anything goes wrong during the connection.
 
 ## Example
 

@@ -7,6 +7,9 @@ This operation clears the vector embeddings from the current **[EmbeddingList](E
 ```python
 clear()
 ```
+**PARAMETERS:**
+
+N/A
 
 **RETURN TYPE:**
 

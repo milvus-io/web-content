@@ -58,6 +58,14 @@ create_index(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **index_name** (*str*) -
+
+        The name of the index to create, which must be unique. If no index name is specified, the default index name is used.
+
 **RETURN TYPE:**
 
 *Status*

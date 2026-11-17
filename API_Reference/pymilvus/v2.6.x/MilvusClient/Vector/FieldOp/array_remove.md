@@ -7,6 +7,9 @@ Creates an operation that removes matching array elements from the existing fiel
 ```python
 FieldOp.array_remove() -> FieldPartialUpdateOp
 ```
+**PARAMETERS:**
+
+N/A
 
 **RETURN TYPE:**
 

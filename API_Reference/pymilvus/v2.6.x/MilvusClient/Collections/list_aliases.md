@@ -6,7 +6,7 @@ This operation lists all existing aliases for a specific collection.
 
 ```python
 list_aliases(
-    collection_name: str,
+    collection_name: str = "",
     timeout: Optional[float] = None
 )
 ```
@@ -15,9 +15,9 @@ list_aliases(
 
 - **collection_name** (*str*) -
 
-    **[REQUIRED]**
-
     The name of the collection whose aliases are to be listed.
+
+    The value defaults to an empty string, indicating that the aliases of all collections are listed.
 
 - **timeout** (*float* | *None*)  
 

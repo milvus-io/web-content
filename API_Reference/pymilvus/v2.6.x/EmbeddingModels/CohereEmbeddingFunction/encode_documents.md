@@ -24,17 +24,10 @@ encode_documents(
 
 A list where each element is a NumPy array.
 
-**EXCEPTIONS:**
 
 - **ValueError**
 
     This exception will be raised when you specify multiple embedding types or use the `int8` or `uint8` data type for CohereEmbeddingFunction initialization.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
 
 ## Example
 

@@ -4,6 +4,7 @@ This is an enumeration that provides the following constants.
 
 ```python
 class DataType(IntEnum):
+    NONE = 0
     BOOL = 1
     INT8 = 2
     INT16 = 3
@@ -23,9 +24,14 @@ class DataType(IntEnum):
     BFLOAT16_VECTOR = 103
     INT8_VECTOR = 105
     SPARSE_FLOAT_VECTOR = 104
+    UNKNOWN = 999
 ```
 
 **Constants:**
+
+- **NONE** (0)
+
+    An invalid representation of a data type in Python.
 
 - **BOOL** (1)
 
@@ -102,6 +108,10 @@ class DataType(IntEnum):
 - **SPARSE_FLOAT_VECTOR** (104)
 
     Sets the data type to **Sparse Vector**.
+
+- **UNKNOWN** (999)
+
+    An unknown or unspecified data type.
 
 ## Example
 

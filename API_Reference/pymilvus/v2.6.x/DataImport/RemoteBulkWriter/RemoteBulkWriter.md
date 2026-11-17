@@ -71,7 +71,7 @@ writer = RemoteBulkWriter(
 
     The value defaults to **BulkFileType.PARQUET**. 
 
-    Possible options are **BulkFileType.JSON**, **BulkFileType.PARQUET**, **BulkFileType.CSV**.
+    Possible options are **BulkFileType.NUMPY**, **BulkFileType.JSON**, **BulkFileType.JSONL**, **BulkFileType.PARQUET**, and **BulkFileType.CSV**.
 
 - **config** (*dict*)
 

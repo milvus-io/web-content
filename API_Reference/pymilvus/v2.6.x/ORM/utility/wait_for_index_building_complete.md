@@ -51,11 +51,11 @@ wait_for_index_building_complete(
 
 **RETURN TYPE:**
 
-*NoneType*
+*bool*
 
 **RETURNS:**
 
-None
+**True** when the specified index has been built; otherwise, **False**.
 
 **EXCEPTIONS:**
 

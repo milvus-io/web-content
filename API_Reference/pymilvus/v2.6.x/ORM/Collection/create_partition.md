@@ -15,7 +15,7 @@ This operation creates a partition in the target collection.
 ```python
 create_partition(
     partition_name: str, 
-    description: str | None, 
+    description: str = "", 
 )
 ```
 
@@ -30,6 +30,8 @@ create_partition(
 - **description** (*string*)
 
     The description of this partition.
+
+    The value defaults to an empty string.
 
 **RETURN TYPE:**
 

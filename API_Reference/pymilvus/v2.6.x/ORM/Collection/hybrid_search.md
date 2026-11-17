@@ -96,6 +96,34 @@ hybrid_search(
 
     An optional ranker that further reorders the reranked results. See [Function](../../MilvusClient/Collections/Function/Function.md) for details.
 
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **_async** (*bool*) -
+
+        Whether to invoke the search asynchronously. The value defaults to **False**.
+
+    - **_callback** (*function*) -
+
+        The callback function invoked after the server responds successfully. This takes effect only when **_async** is set to **True**.
+
+    - **offset** (*int*) -
+
+        The number of records to skip in the final search results, applied after candidate fusion and reranking.
+
+    - **consistency_level** (*str* | *int*) -
+
+        The consistency level to use when searching within the collection. Possible values are **Strong**, **Bounded**, **Eventually**, **Session**, and **Customized**.
+
+    - **guarantee_timestamp** (*int*) -
+
+        The timestamp that Milvus uses as a reference during the search.
+
+    - **graceful_time** (*int*) -
+
+        A graceful period in seconds for the search.
+
 **RETURN TYPE:**
 
 *SearchResult*
