@@ -42,6 +42,10 @@ RRF Ranker is specifically designed for hybrid search scenarios where you want t
 
 If your hybrid search application requires balancing multiple search paths democratically without assigning explicit weights, RRF Ranker is your ideal choice.
 
+<!-- doc:block:start id="rrf-weighted-pointer" -->
+If some search paths are more reliable than others but their raw scores are not comparable, you can still fuse results by rank and give each path its own weight. For details, refer to [Assign weights to search paths](rrf-ranker.md#Assign-weights-to-search-paths). To combine the paths' scores instead of their ranks, use [Weighted Ranker](weighted-ranker.md).
+<!-- doc:block:end id="rrf-weighted-pointer" -->
+
 ## Mechanism of RRF Ranker
 
 The main workflow of the RRFRanker strategy is as follows:
@@ -273,20 +277,14 @@ rerank := milvusclient.NewRRFReranker().WithK(100)
 ```rust
 use milvus::v2::prelude::*;
 
-let rerank = Function::new()
-    .name("rrf")
-    .function_type(FunctionType::Rerank)
-    .param("reranker", "rrf")
-    .param("k", "100");
+let rerank = RRFRerank::new().k(100);
 ```
 
 ```cpp
 #include <memory>
 #include "milvus/MilvusClientV2.h"
 
-auto rerank = std::make_shared<milvus::Function>("rrf", milvus::FunctionType::RERANK);
-rerank->AddParam("reranker", "rrf");
-rerank->AddParam("k", "100");
+auto rerank = std::make_shared<milvus::RRFRerank>(100);
 ```
 
 ```javascript
@@ -313,7 +311,7 @@ var rerank = new RrfReranker(100);
 functions='[
   {
     "name": "rrf",
-    "type": "RERANK",
+    "type": "Rerank",
     "inputFieldNames": [],
     "params": {
       "reranker": "rrf",
@@ -361,6 +359,196 @@ functions='[
      <td><p><code>100</code></p></td>
    </tr>
 </table>
+
+<!-- doc:block:start id="rrf-weighted-intro" -->
+### Assign weights to search paths
+
+Set `params.weights` to give each search path a different influence on the fused ranking. Each document's score becomes `score(d) = Σ weights[i] / (k + rank_i(d))`. The value at position *i* applies to the *i*-th search request in your hybrid search call, in the order you pass the requests. Each weight must be from 0 to 1 inclusive, and you must provide exactly one weight per search request; otherwise, the request fails with a parameter error. Weights are not normalized and don't need to sum to 1. A weight of `0` removes that path's contribution to the score, but its results can still appear in the merged results. If you omit `weights`, every path has a weight of 1, which is classic RRF.
+<!-- doc:block:end id="rrf-weighted-intro" -->
+
+<!-- doc:block:start id="rrf-weights-version-note" -->
+<div class="alert note">
+
+Weighted RRF requires Milvus 3.0.1 or later, or Milvus 2.6.23 or later in the 2.6.x line. Earlier versions ignore the `weights` parameter without returning an error and rank results with classic RRF.
+
+</div>
+<!-- doc:block:end id="rrf-weights-version-note" -->
+
+<!-- doc:block:start id="rrf-weighted-body" -->
+For example, apply weights `[0.3, 0.7]` to the [sparse-dense example](rrf-ranker.md#Example-of-RRF-Ranker) above with `k` set to 60. The sparse request is passed first, so `0.3` applies to the sparse search and `0.7` to the dense search:
+
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Rank (sparse)</strong></p></th>
+     <th><p><strong>Rank (dense)</strong></p></th>
+     <th><p><strong>Final Score</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>0.3/(60+1)+0.7/(60+2) = 0.01620836</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>0.3/(60+4)+0.7/(60+1) = 0.01616291</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>0.3/(60+5)+0.7/(60+4) = 0.01555288</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>N/A</p></td>
+     <td><p>3</p></td>
+     <td><p>0.7/(60+3) = 0.01111111</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>N/A</p></td>
+     <td><p>5</p></td>
+     <td><p>0.7/(60+5) = 0.01076923</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0.3/(60+2) = 0.00483871</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0.3/(60+3) = 0.00476190</p></td>
+   </tr>
+</table>
+
+With topK=5, IDs 110 and 250, which appear only in the dense results, replace IDs 203 and 150 in the final results.
+
+To create a weighted RRF Ranker, add `weights` to the ranker parameters, and then pass the ranker to your hybrid search as shown in [Apply to hybrid search](rrf-ranker.md#Apply-to-hybrid-search). For cURL, use the object as the `rerank` value of the hybrid search request:
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+from pymilvus import Function, FunctionType
+
+ranker = Function(
+    name="rrf",
+    input_field_names=[], # Must be an empty list
+    function_type=FunctionType.RERANK,
+    params={
+        "reranker": "rrf",
+        "k": 100,
+        "weights": [0.3, 0.7]  # One weight per search request, in request order
+    }
+)
+```
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.Function rerank = CreateCollectionReq.Function.builder()
+        .name("rrf")
+        .functionType(FunctionType.RERANK)
+        .param("reranker", "rrf")
+        .param("k", "100")
+        .param("weights", "[0.3, 0.7]")
+        .build();
+```
+
+```go
+import "github.com/milvus-io/milvus/client/v3/milvusclient"
+
+rerank := milvusclient.NewRRFReranker().WithK(100).WithWeights([]float64{0.3, 0.7})
+```
+
+```rust
+use milvus::v2::prelude::*;
+
+// Hybrid search reads RRF settings from the strategy and params keys
+let rerank = Function::new()
+    .name("rrf")
+    .function_type(FunctionType::Rerank)
+    .param("strategy", "rrf")
+    .param("params", r#"{"k": 100, "weights": [0.3, 0.7]}"#);
+```
+
+```cpp
+#include <memory>
+#include "milvus/MilvusClientV2.h"
+
+// Hybrid search reads RRF settings from the strategy and params keys
+auto rerank = std::make_shared<milvus::Function>("rrf", milvus::FunctionType::RERANK);
+rerank->AddParam("strategy", "rrf");
+rerank->AddParam("params", R"({"k": 100, "weights": [0.3, 0.7]})");
+```
+
+```javascript
+import { FunctionType } from "@zilliz/milvus2-sdk-node";
+
+const ranker = {
+  name: "rrf",
+  input_field_names: [],
+  type: FunctionType.RERANK,
+  params: {
+    reranker: "rrf",
+    k: 100,
+    weights: [0.3, 0.7],
+  },
+};
+```
+
+```csharp
+using System.Collections.Generic;
+using Milvus.Client.V2.Types;
+
+var rerank = new WeightedRrfReranker();
+
+// RrfReranker does not accept weights, so implement IReranker.
+// Hybrid search reads RRF settings from the strategy and params keys.
+sealed class WeightedRrfReranker : IReranker
+{
+    public IReadOnlyList<KeyValuePair<string, string>> ToRankParams() => new[]
+    {
+        new KeyValuePair<string, string>("strategy", "rrf"),
+        new KeyValuePair<string, string>("params", "{\"k\": 100, \"weights\": [0.3, 0.7]}")
+    };
+
+    public FunctionScore? ToFunctionScore() => null;
+}
+```
+
+```bash
+"rerank": {
+    "strategy": "rrf",
+    "params": {
+        "k": 100,
+        "weights": [0.3, 0.7]
+    }
+}
+```
+
+<div class="alert note">
+
+Pass weights in the forms shown above. Apart from `WithWeights` in the Go SDK, the SDKs' RRF helper classes have no weights option, and weights added to them through a generic parameter method are ignored without an error.
+
+</div>
+<!-- doc:block:end id="rrf-weighted-body" -->
 
 ### Apply to hybrid search
 
