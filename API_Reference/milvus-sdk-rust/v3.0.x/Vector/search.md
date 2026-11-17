@@ -30,11 +30,11 @@ let request = SearchRequest::builder()
 
 - `ids: Ids`
 
-    Primary keys whose stored vectors are used as search targets. Mutually exclusive with `vectors`. See [Ids](Ids.md).
+    Primary keys whose stored vectors are used as search targets. Mutually exclusive with `vectors`; when set, no query vectors or vector field are needed. See [Ids](Ids.md).
 
 - `vector_field: String`
 
-    Name of the vector field to search (the ANN field).
+    Name of the vector field to search (the ANN field). Not required when the request targets primary-key IDs via `ids`.
 
 - `vectors: SearchVectors`
 

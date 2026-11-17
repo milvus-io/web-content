@@ -35,6 +35,8 @@ let request = AddCollectionFieldRequest::builder()
 
     The `FieldSchema` describing the new field. Vector fields added to an existing collection require `nullable(true)`. Required. See [FieldSchema](FieldSchema.md).
 
+    A struct sub-field is added with a bracketed `struct[sub]` path in the field name, for example `clips[note]`; the parent struct and the child must be C-style identifiers. Nested Array sub-fields set `element_type` and may set `element_nullable(true)`. Sub-field adds never fall back to the legacy add-field RPC, matching pymilvus.
+
 **RETURN TYPE:**
 
 *Result\<()\>*
@@ -57,4 +59,16 @@ let request = AddCollectionFieldRequest::builder()
     )
     .build()?;
 client.add_collection_field(request).await?;
+
+let sub_field = AddCollectionFieldRequest::builder()
+    .collection_name("books")
+    .field(
+        FieldSchema::new()
+            .name("clips[note]")
+            .data_type(DataType::VarChar)
+            .max_length(64)
+            .nullable(true),
+    )
+    .build()?;
+client.add_collection_field(sub_field).await?;
 ```

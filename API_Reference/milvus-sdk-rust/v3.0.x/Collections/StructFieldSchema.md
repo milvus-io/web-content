@@ -22,7 +22,7 @@ pub struct StructFieldSchema
 
 - `fields: Vec<FieldSchema>`
 
-    The sub-fields of the struct. See [FieldSchema](FieldSchema.md).
+    The sub-fields of the struct. See [FieldSchema](FieldSchema.md). A sub-field may itself be an `Array` field, in which case it can set `element_nullable(true)` to allow null inner values.
 
 - `nullable: bool`
 
@@ -51,6 +51,14 @@ let struct_field = StructFieldSchema::new()
     .name("address")
     .add_field(FieldSchema::new().name("city").data_type(DataType::VarChar).max_length(128))
     .add_field(FieldSchema::new().name("zip").data_type(DataType::Int64))
+    .add_field(
+        FieldSchema::new()
+            .name("tags")
+            .data_type(DataType::Array)
+            .element_type(DataType::VarChar)
+            .max_capacity(8)
+            .element_nullable(true),
+    )
     .type_param("mmap.enabled", "true");
 
 let schema = CollectionSchema::new()

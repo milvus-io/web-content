@@ -7,7 +7,7 @@ The Milvus Rust SDK is an open-source project and its source code is hosted on [
 Add the SDK to your project with Cargo:
 
 ```bash
-cargo add milvus-sdk-rust@3.0.3
+cargo add milvus-sdk-rust@3.0.4
 ```
 
 ## Quick Start
@@ -113,7 +113,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | Milvus version | Recommended SDK version |
 |:-----:|:-----:|
 | 2.6.x | v2.6.2 |
-| 3.0.x | v3.0.3 |
+| 3.0.x | v3.0.4 |
 
 ## Breaking Changes
 
