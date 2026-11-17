@@ -173,10 +173,63 @@ client.createCollection(requestCreate);
   <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&#x27;Strong&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+dim := <span class="hljs-type">int64</span>(<span class="hljs-number">8</span>)
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">true</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;embeddings&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(dim)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;geo&quot;</span>).WithDataType(entity.FieldTypeGeometry).WithNullable(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;name&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">128</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;geo_collection&quot;</span>, schema).
+    WithConsistencyLevel(entity.ClStrong))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: true,
+        &quot;fields&quot;: [
+            {&quot;fieldName&quot;: &quot;id&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;isPrimary&quot;: true},
+            {&quot;fieldName&quot;: &quot;embeddings&quot;, &quot;dataType&quot;: &quot;FloatVector&quot;, &quot;elementTypeParams&quot;: {&quot;dim&quot;: 8}},
+            {&quot;fieldName&quot;: &quot;geo&quot;, &quot;dataType&quot;: &quot;Geometry&quot;, &quot;nullable&quot;: true},
+            {&quot;fieldName&quot;: &quot;name&quot;, &quot;dataType&quot;: &quot;VarChar&quot;, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: 128}}
+        ]
+    },
+    &quot;consistencyLevel&quot;: &quot;Strong&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>In this example, the <code translate="no">GEOMETRY</code> field defined in the collection schema allows null values with <code translate="no">nullable=True</code>. For details, refer to <a href="/docs/nullable-and-default.md">Nullable & Default</a>.</p>
@@ -287,9 +340,58 @@ client.insert(InsertReq.builder()
 });
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(insert_result);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+
+geoPoints := []<span class="hljs-type">string</span>{
+    <span class="hljs-string">&quot;POINT(13.399710 52.518010)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.403934 52.522877)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.405088 52.521124)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.408223 52.516876)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.400092 52.521507)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.408529 52.519274)&quot;</span>,
+}
+names := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Shop A&quot;</span>, <span class="hljs-string">&quot;Shop B&quot;</span>, <span class="hljs-string">&quot;Shop C&quot;</span>, <span class="hljs-string">&quot;Shop D&quot;</span>, <span class="hljs-string">&quot;Shop E&quot;</span>, <span class="hljs-string">&quot;Shop F&quot;</span>}
+ids := []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>}
+embeddings := [][]<span class="hljs-type">float32</span>{
+    {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>},
+    {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>},
+    {<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>},
+    {<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.1</span>},
+    {<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>},
+    {<span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>, <span class="hljs-number">1.3</span>},
+}
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithColumns(
+        column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, ids),
+        column.NewColumnVarChar(<span class="hljs-string">&quot;name&quot;</span>, names),
+        column.NewColumnFloatVector(<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-number">8</span>, embeddings),
+        column.NewColumnGeometryWKT(<span class="hljs-string">&quot;geo&quot;</span>, geoPoints),
+    ))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;data&quot;: [
+        {&quot;id&quot;: 1, &quot;name&quot;: &quot;Shop A&quot;, &quot;embeddings&quot;: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], &quot;geo&quot;: &quot;POINT(13.399710 52.518010)&quot;},
+        {&quot;id&quot;: 2, &quot;name&quot;: &quot;Shop B&quot;, &quot;embeddings&quot;: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], &quot;geo&quot;: &quot;POINT(13.403934 52.522877)&quot;},
+        {&quot;id&quot;: 3, &quot;name&quot;: &quot;Shop C&quot;, &quot;embeddings&quot;: [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], &quot;geo&quot;: &quot;POINT(13.405088 52.521124)&quot;},
+        {&quot;id&quot;: 4, &quot;name&quot;: &quot;Shop D&quot;, &quot;embeddings&quot;: [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1], &quot;geo&quot;: &quot;POINT(13.408223 52.516876)&quot;},
+        {&quot;id&quot;: 5, &quot;name&quot;: &quot;Shop E&quot;, &quot;embeddings&quot;: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2], &quot;geo&quot;: &quot;POINT(13.400092 52.521507)&quot;},
+        {&quot;id&quot;: 6, &quot;name&quot;: &quot;Shop F&quot;, &quot;embeddings&quot;: [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3], &quot;geo&quot;: &quot;POINT(13.408529 52.519274)&quot;}
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Filtering-operations" class="common-anchor-header">Step 3: Filtering operations<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -358,9 +460,46 @@ client.createIndex(CreateIndexReq.builder()
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;geo_collection&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+idxOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;geo_collection&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>, index.NewAutoIndex(entity.L2))
+indexTask, err := cli.CreateIndex(ctx, idxOpt)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = indexTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;geo_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;indexParams&quot;: [{&quot;fieldName&quot;: &quot;embeddings&quot;, &quot;indexName&quot;: &quot;embeddings&quot;, &quot;metricType&quot;: &quot;L2&quot;, &quot;indexType&quot;: &quot;AUTOINDEX&quot;}]
+}&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Once these requirements are met, you can use expressions with dedicated geometry operators to filter your collection based on the geometric values.</p>
@@ -444,9 +583,36 @@ System.out.println(<span class="hljs-string">&quot;Query results:&quot;</span>);
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">topLeftLon, topLeftLat := <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+bottomRightLon, bottomRightLat := <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
+boundingBoxWKT := fmt.Sprintf(<span class="hljs-string">&quot;POLYGON((%f %f, %f %f, %f %f, %f %f, %f %f))&quot;</span>,
+    topLeftLon, topLeftLat, bottomRightLon, topLeftLat, bottomRightLon, bottomRightLat,
+    topLeftLon, bottomRightLat, topLeftLon, topLeftLat)
+
+resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithFilter(fmt.Sprintf(<span class="hljs-string">&quot;st_within(geo, &#x27;%s&#x27;)&quot;</span>, boundingBoxWKT)).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;geo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(resultSet.GetColumn(<span class="hljs-string">&quot;name&quot;</span>))
+fmt.Println(resultSet.GetColumn(<span class="hljs-string">&quot;geo&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;filter&quot;: &quot;st_within(geo, &#x27;</span>\&#x27;<span class="hljs-string">&#x27;POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))&#x27;</span>\&#x27;<span class="hljs-string">&#x27;)&quot;,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;geo&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Example 2: Find entities within 1km of a central point</h4><div class="multipleCode">
     <a href="#python">Python</a>
@@ -503,9 +669,32 @@ System.out.println(<span class="hljs-string">&quot;Query results:&quot;</span>);
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">centerPointLon, centerPointLat := <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+radiusMeters := <span class="hljs-number">1000.0</span>
+centralPointWKT := fmt.Sprintf(<span class="hljs-string">&quot;POINT(%f %f)&quot;</span>, centerPointLon, centerPointLat)
+
+filterExpr := fmt.Sprintf(<span class="hljs-string">&quot;st_dwithin(geo, &#x27;%s&#x27;, %f)&quot;</span>, centralPointWKT, radiusMeters)
+_, err = cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithFilter(filterExpr).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;geo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;filter&quot;: &quot;st_dwithin(geo, &#x27;</span>\&#x27;<span class="hljs-string">&#x27;POINT(13.403683 52.520711)&#x27;</span>\&#x27;<span class="hljs-string">&#x27;, 1000.0)&quot;,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;geo&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Example 3: Combine vector similarity with a spatial filter</h4><div class="multipleCode">
     <a href="#python">Python</a>
@@ -568,9 +757,41 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>}
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;geo_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,                <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embeddings&quot;</span>).
+    WithFilter(filterExpr).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;geo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
+    &quot;limit&quot;: 3,
+    &quot;filter&quot;: &quot;st_within(geo, &#x27;</span>\&#x27;<span class="hljs-string">&#x27;POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))&#x27;</span>\&#x27;<span class="hljs-string">&#x27;)&quot;,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;geo&quot;],
+    &quot;searchParams&quot;: {&quot;metricType&quot;: &quot;L2&quot;}
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Next-Accelerate-queries" class="common-anchor-header">Next: Accelerate queries<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
