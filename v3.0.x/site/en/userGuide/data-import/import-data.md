@@ -46,7 +46,7 @@ from pymilvus.bulk_writer import bulk_import
 
 url = f"http://127.0.0.1:19530"
 
-# Bulk-insert data from a set of JSON files already uploaded to the MinIO server
+# Bulk-insert data from a set of Parquet files already uploaded to the MinIO server
 resp = bulk_import(
     url=url,
     collection_name="quick_setup",
@@ -145,6 +145,36 @@ The possible return is as follows:
     }
 }
 ```
+
+## `bulk_import` parameters
+
+`bulk_import()` is a thin wrapper around `POST /v2/vectordb/jobs/import/create`. Beyond the
+example above, it exposes the following parameters (PyMilvus 2.6 and later).
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `url` | `str` | Server address, for example `http://127.0.0.1:19530` or `https://api.cloud.zilliz.com`. |
+| `collection_name` | `str` | Target collection. |
+| `db_name` | `str` | Target database. Sent as the `DB-Name` header for RBAC. |
+| `files` | `list[list[str]]` | Files already available to the Milvus instance, for example on MinIO. These are **server-side paths, not object URLs**. Each sub-list is one JSON or Parquet file, or one set of NumPy files. |
+| `partition_name` | `str` | Target partition. Passed through extra keyword arguments rather than a declared parameter, so it is easy to miss in the signature. Leave it empty for collections that use a partition key. |
+| `object_url` | `str` | Single object URL on cloud object storage. Superseded by `object_urls`. |
+| `object_urls` | `list[list[str]]` | Object URLs on cloud object storage, for example `s3://bucket/prefix/1.parquet`. Each sub-list is one object or one prefix that ends with `/`. Use this **instead of** `files`; the two are different transports, not synonyms. |
+| `cluster_id` | `str` | Zilliz Cloud cluster ID. |
+| `project_id` | `str` | Zilliz Cloud project ID, for project databases. |
+| `region_id` | `str` | Region of the project database. |
+| `api_key` | `str` | API key, or `username:password` for a self-hosted instance. |
+| `access_key` / `secret_key` | `str` | Object storage credentials for `object_urls`. |
+| `token` | `str` | Session token for short-term object storage credentials. |
+| `volume_name` | `str` | Zilliz Cloud volume to import from. Requires `data_paths`. |
+| `data_paths` | `list[list[str]]` | Paths inside `volume_name`. Each sub-list is one file or one prefix that ends with `/`. |
+| `verify` | `bool` or `str` | Verify the server TLS certificate; `True` by default. A string is treated as a CA bundle path. |
+| `cert` | `str` or `tuple` | Client certificate for mutual TLS: a file path, or a `('cert', 'key')` pair. |
+| `headers` | `dict[str, str]` | Extra HTTP headers merged into the request; caller values win. Use it to send an idempotency key, for example `{IDEMPOTENCY_KEY_HEADER: "nightly-2026-09-07-batch-3"}`; see [Idempotent Bulk Import](idempotent-import.md). |
+| `options` | `dict` | Additional import options forwarded to the server in the request body. |
+
+Any remaining keyword arguments are forwarded to `requests.post`, so `timeout` and `proxies`
+work as they do there. The wrapper sends a 20-second timeout by default.
 
 ## Check import progress
 
