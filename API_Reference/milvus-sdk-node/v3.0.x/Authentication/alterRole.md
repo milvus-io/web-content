@@ -38,6 +38,8 @@ await milvusClient.alterRole({
 
 *Promise<ResStatus>*
 
+This method returns a promise that resolves to a **ResStatus** object.
+
 **EXCEPTIONS:**
 
 - **Error**

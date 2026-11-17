@@ -60,6 +60,37 @@ await milvusClient.alterCollectionSchema({
 
 *Promise<AlterCollectionSchemaResponse>*
 
+This method returns a promise that resolves to an **AlterCollectionSchemaResponse** object.
+
+```javascript
+{
+    alter_status: ResStatus,
+    index_status?: ResStatus
+}
+```
+
+**PARAMETERS:**
+
+- **alter_status** (*ResStatus*) -
+
+    A **ResStatus** object that reports whether the schema alteration succeeded.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
+- **index_status** (*ResStatus*) -
+
+    Deprecated. This member has been removed from the `AlterCollectionSchema` wire response. Use **alter_status** instead.
+
 **EXCEPTIONS:**
 
 - **Error**
