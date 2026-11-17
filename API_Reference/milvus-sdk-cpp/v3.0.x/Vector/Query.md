@@ -238,6 +238,10 @@ const QueryResults& results = response.Results();
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
 
+- `const std::vector<std::vector<int64_t>>& ElementIndices() const`
+
+    The per-row element indices. Each inner list holds the element offsets within an entity that matched an `element_filter` query; ordinary queries leave this empty. The query iterator instead expands each entity into one row per matched element with an appended `offset` column, so its delivered pages carry no element indices.
+
 - `void Clear()`
 
     Clears the result data.

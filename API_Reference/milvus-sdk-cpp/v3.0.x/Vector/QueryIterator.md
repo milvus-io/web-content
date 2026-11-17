@@ -28,7 +28,8 @@ auto request = QueryIteratorRequest()
     .WithOrderByFields(order_by_fields)
     .AddOrderByField(order_by_field)
     .WithReduceStopForBest(reduce_stop_for_best)
-    .WithGroupByFields(group_by_fields);
+    .WithGroupByFields(group_by_fields)
+    .WithCursor(cursor);
 ```
 
 **REQUEST METHODS:**
@@ -197,6 +198,18 @@ auto request = QueryIteratorRequest()
 
     Sets the number of records requested in each iterator page.
 
+- `Cursor() (*const QueryIteratorCursor*)`
+
+    Gets a previously captured cursor used to resume pagination from its position. Returns `nullptr` when none was set.
+
+- `SetCursor(const QueryIteratorCursor& cursor)`
+
+    Sets a previously captured cursor to resume pagination from its position.
+
+- `WithCursor(const QueryIteratorCursor& cursor)`
+
+    Sets a previously captured cursor to resume pagination from its position. A request `Offset` is ignored on resume: the cursor already positions past the consumed rows. Resuming an element-filter iterator requires re-supplying the same `element_filter(...)` expression, otherwise the cursor's element offset is silently dropped.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*
@@ -241,6 +254,10 @@ const QueryResults& results = response.Results();
 
     Number of rows returned. When the query uses `count(*)`, this returns the aggregate count.
 
+- `const std::vector<std::vector<int64_t>>& ElementIndices() const`
+
+    The per-row element indices. Each inner list holds the element offsets within an entity that matched an `element_filter` query; ordinary queries leave this empty. The query iterator instead expands each entity into one row per matched element with an appended `offset` column, so its delivered pages carry no element indices.
+
 ### Output field types
 
 Requested entity fields are returned through `FieldDataPtr`. The concrete `XxxFieldData` type follows the field's schema [DataType](../Collections/DataType.md); use `OutputField(name)` for the base pointer or `OutputField<T>(name)` for a checked shared-pointer cast.
@@ -256,10 +273,15 @@ template <typename T>
 class Iterator {
  public:
     virtual Status Next(T& results) = 0;
+    virtual Status Cursor(QueryIteratorCursor& cursor) const;
 };
 ```
 
 - `virtual Status Next(T& results) = 0`
+
+- `virtual Status Cursor(QueryIteratorCursor& cursor) const`
+
+    Captures the current position as a resumable cursor. Only QueryIterator supports this; SearchIterator returns `StatusCode::NOT_SUPPORTED`.
 
 ### QueryIterator
 
@@ -271,6 +293,42 @@ using QueryIteratorPtr = std::shared_ptr<QueryIterator>;
 ```
 
 Obtained via `MilvusClientV2::QueryIterator(QueryIteratorRequest&, QueryIteratorPtr&)`.
+
+### QueryIteratorCursor
+
+A serializable snapshot of a `QueryIterator` position, used to resume pagination. Captures the session timestamp of the original iterator, the last primary key returned, and (for element-filter iterators) the last matched element offset. Pass it back through the request's `WithCursor()` to resume from exactly this position. Resuming an element-filter iterator requires re-supplying the same `element_filter(...)` expression; otherwise the cursor's element offset is silently dropped.
+
+```cpp
+QueryIteratorCursor();
+```
+
+- `uint64_t SessionTs() const` / `Status SetSessionTs(uint64_t session_ts)` / `WithSessionTs(uint64_t session_ts)`
+
+    Gets or sets the MVCC session timestamp pinned from the original iterator.
+
+- `bool HasIntPk() const`
+
+    Whether an Int64 primary-key position is present.
+
+- `int64_t IntPk() const` / `Status SetIntPk(int64_t pk)` / `WithIntPk(int64_t pk)`
+
+    Gets or sets the Int64 primary-key position.
+
+- `bool HasStrPk() const`
+
+    Whether a VarChar primary-key position is present.
+
+- `const std::string& StrPk() const` / `Status SetStrPk(const std::string& pk)` / `WithStrPk(const std::string& pk)`
+
+    Gets or sets the VarChar primary-key position.
+
+- `bool HasLastElementOffset() const`
+
+    Whether the element position within the last primary key is present.
+
+- `int64_t LastElementOffset() const` / `Status SetLastElementOffset(int64_t offset)` / `WithLastElementOffset(int64_t offset)`
+
+    Gets or sets the element position within the last primary key. Only meaningful for element-filter iterators; ordinary iterators leave it unset.
 
 **ERROR HANDLING:**
 

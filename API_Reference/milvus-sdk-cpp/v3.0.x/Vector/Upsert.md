@@ -82,7 +82,7 @@ auto request = UpsertRequest()
 
 - `WithFieldOps(std::vector<FieldPartialUpdateOp>&& field_ops)`
 
-    Set per-field partial update operations with fluent interface.
+    Sets per-field partial update operations (REPLACE, ARRAY_APPEND, ARRAY_REMOVE, PATH_REPLACE); ARRAY_APPEND and ARRAY_REMOVE automatically enable partial update semantics. Optional.
 
 - `SetFieldOps(std::vector<FieldPartialUpdateOp>&& field_ops)`
 
@@ -91,6 +91,68 @@ auto request = UpsertRequest()
 - `AddFieldOp(FieldPartialUpdateOp field_op)`
 
     Add a per-field partial update operation.
+
+### FieldPartialUpdateOp
+
+Describes how a field value is applied during a partial upsert. The field named by `FieldName()` must also be present in the upsert payload.
+
+```cpp
+FieldPartialUpdateOp();
+explicit FieldPartialUpdateOp(std::string field_name, OpType op_type = OpType::REPLACE);
+```
+
+**PARAMETERS:**
+
+- **field_name** (*std::string*)
+
+    The name of the field being updated.
+
+- **op_type** (*OpType*)
+
+    The partial-update operation type. Default: `OpType::REPLACE`.
+
+**METHODS:**
+
+- `const std::string& FieldName() const` / `WithFieldName(std::string field_name)` / `SetFieldName(std::string field_name)`
+
+    Gets or sets the field name being updated.
+
+- `OpType GetOpType() const` / `WithOpType(OpType op_type)` / `SetOpType(OpType op_type)`
+
+    Gets or sets the partial-update operation type.
+
+- `const std::string& Path() const` / `WithPath(std::string path)` / `SetPath(std::string path)`
+
+    Gets or sets the path of a PATH_REPLACE operation.
+
+The `OpType` enum defines the operation applied to the matching field during a partial upsert:
+
+```cpp
+enum class OpType {
+    REPLACE,
+    ARRAY_APPEND,
+    ARRAY_REMOVE,
+    PATH_REPLACE,
+};
+```
+
+**Constants:**
+
+- **REPLACE**
+
+    Overwrite the existing field value. Supported for all field types; this is the default when no operation targets a field.
+
+- **ARRAY_APPEND**
+
+    Append the supplied elements to an existing array field. Supported only for array fields. The resulting array length must not exceed the field's `max_capacity`.
+
+- **ARRAY_REMOVE**
+
+    Remove every occurrence of each supplied element from an existing array field. Supported only for array fields. It has no effect when the existing array is empty or no supplied element matches.
+
+- **PATH_REPLACE**
+
+    Replace an existing value selected by a path relative to the parent field. Supported for struct fields. Use `[index]` to replace one complete element or `[index][child]` to replace one struct child. Each operand row contains one struct element; a child path sends only the selected child and every operand must explicitly include its key.
 
 ### Column payload types
 
