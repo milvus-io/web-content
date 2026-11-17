@@ -22,7 +22,7 @@ Status Session(const std::string& cluster_id, MilvusClientV2SessionPtr& session)
 
 - **session** (*MilvusClientV2SessionPtr&*)
 
-    Sets a variable that holds the returned cluster-scoped client view.
+    Sets a variable that holds the returned cluster-scoped client view. See [MilvusClientV2Session](MilvusClientV2Session.md).
 
 ## Request Syntax
 

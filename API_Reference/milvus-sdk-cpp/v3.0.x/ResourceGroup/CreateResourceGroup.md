@@ -32,11 +32,11 @@ auto request = CreateResourceGroupRequest()
 
 - `WithConfig(ResourceGroupConfig&& config)`
 
-    Sets resource group configuration.
+    Sets resource group configuration. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
 - `SetConfig(ResourceGroupConfig&& config)`
 
-    Set resource group config.
+    Set resource group config. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
 **RETURNS:**
 
