@@ -17,6 +17,8 @@ auto request = HybridSearchRequest()
     .WithOutputFields(output_field_names)
     .AddOutputField(output_field)
     .WithConsistencyLevel(consistency_level)
+    .WithRLSPrincipal(principal)
+    .WithSkipRLS(skip_rls)
     .WithSubRequests(requests)
     .AddSubRequest(request)
     .WithRerank(rerank)
@@ -79,6 +81,22 @@ auto request = HybridSearchRequest()
 - `SetConsistencyLevel(::milvus::ConsistencyLevel consistency_level)`
 
     Set the consistency level.
+
+- `WithRLSPrincipal(const std::string& principal)`
+
+    Sets the application-level RLS principal name. On an RLS-enabled collection, every row-bearing request must supply a non-blank principal or set SkipRLS to true. Optional.
+
+- `SetRLSPrincipal(const std::string& principal)`
+
+    Set the application-level RLS principal name.
+
+- `WithSkipRLS(bool skip_rls)`
+
+    Sets whether to bypass row-level-security enforcement for this request. Only allowed when the authenticated user holds the SkipRLS privilege on the collection; `rls.force=true` rejects it. Optional.
+
+- `SetSkipRLS(bool skip_rls)`
+
+    Set the flag to bypass row-level-security enforcement for this request.
 
 - `WithSubRequests(std::vector<SubSearchRequestPtr>&& requests)`
 
