@@ -102,7 +102,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 | Milvus version | Recommended SDK version |
 |:-----:|:-----:|
 | 2.6.x | v2.6.8 |
-| 3.0.x | v3.0.4 |
+| 3.0.x | v3.0.5 |
 
 ## Contributing
 

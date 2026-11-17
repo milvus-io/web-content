@@ -179,6 +179,18 @@ FieldSchema(std::string name, DataType data_type,
 
     Returns whether `null` values are allowed for this field.
 
+- `WithElementNullable(bool element_nullable)`
+
+    Sets whether a nested Array sub-field's inner values (leaves) can be null. Applies only to a nested Array sub-field used as a struct sub-field: `true` permits null values inside the inner Array, while the inner Array itself being null is controlled by the sub-field's nullable flag. Plain scalar/vector sub-fields express element-level null with `WithNullable`; setting this flag on a non-Array sub-field is rejected on create/add. Default: `false`.
+
+- `void SetElementNullable(bool element_nullable)`
+
+    Sets whether a nested Array sub-field's inner values (leaves) can be null.
+
+- `bool IsElementNullable() const`
+
+    Returns whether the inner Array leaves are nullable. Applies only to a nested Array sub-field used as a struct sub-field.
+
 - `WithDefaultValue(const nlohmann::json& val)`
 
     Sets a default value used when an entity does not provide a value for this field. Not supported for `JSON` or `ARRAY` fields.

@@ -510,10 +510,15 @@ template <typename T>
 class Iterator {
  public:
     virtual Status Next(T& results) = 0;
+    virtual Status Cursor(QueryIteratorCursor& cursor) const;
 };
 ```
 
 - `virtual Status Next(T& results) = 0`
+
+- `virtual Status Cursor(QueryIteratorCursor& cursor) const`
+
+    Captures the current position as a resumable cursor. Only QueryIterator supports this; SearchIterator returns `StatusCode::NOT_SUPPORTED`. See the [QueryIteratorCursor](QueryIterator.md#queryiteratorcursor) documentation on the [QueryIterator](QueryIterator.md) page.
 
 ### SearchIterator
 
