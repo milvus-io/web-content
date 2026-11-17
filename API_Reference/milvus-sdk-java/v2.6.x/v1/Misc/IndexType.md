@@ -38,13 +38,28 @@ public enum IndexType
      <td><p>4</p></td>
      <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
    </tr>
-   <tr>
-     <td><p>HNSW</p></td>
-     <td><p>5</p></td>
-     <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
-   </tr>
-   <tr>
-     <td><p>DISKANN</p></td>
+    <tr>
+      <td><p>HNSW</p></td>
+      <td><p>5</p></td>
+      <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
+    </tr>
+    <tr>
+      <td><p>HNSW_SQ</p></td>
+      <td><p>6</p></td>
+      <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
+    </tr>
+    <tr>
+      <td><p>HNSW_PQ</p></td>
+      <td><p>7</p></td>
+      <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
+    </tr>
+    <tr>
+      <td><p>HNSW_PRQ</p></td>
+      <td><p>8</p></td>
+      <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
+    </tr>
+    <tr>
+      <td><p>DISKANN</p></td>
      <td><p>10</p></td>
      <td><p>Works for FloatVector/Float16Vector/BFloat16Vector type field.</p></td>
    </tr>
@@ -98,13 +113,18 @@ public enum IndexType
      <td><p>200</p></td>
      <td><p>Only for numeric type field.</p></td>
    </tr>
-   <tr>
-     <td><p>INVERTED</p></td>
-     <td><p>201</p></td>
-     <td><p>Works for all scalar fields except JSON type field.</p></td>
-   </tr>
-   <tr>
-     <td><p>SPARSE<em>INVERTED</em>INDEX</p></td>
+    <tr>
+      <td><p>INVERTED</p></td>
+      <td><p>201</p></td>
+      <td><p>Works for all scalar fields except JSON type field.</p></td>
+    </tr>
+    <tr>
+      <td><p>BITMAP</p></td>
+      <td><p>202</p></td>
+      <td><p>Works for all scalar fields except JSON, FLOAT and DOUBLE type fields.</p></td>
+    </tr>
+    <tr>
+      <td><p>SPARSE<em>INVERTED</em>INDEX</p></td>
      <td><p>300</p></td>
      <td><p>Only for SparseFloatVector type field.</p></td>
    </tr>

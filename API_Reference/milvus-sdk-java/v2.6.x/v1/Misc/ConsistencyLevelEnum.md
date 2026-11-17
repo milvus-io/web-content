@@ -19,6 +19,11 @@ public enum ConsistencyLevelEnum
      <td><p>Waits until all operations are completed before a search/query.</p></td>
    </tr>
    <tr>
+     <td><p>SESSION</p></td>
+     <td><p>1</p></td>
+     <td><p>Waits until all operations within the same session are completed before a search/query.</p></td>
+   </tr>
+   <tr>
      <td><p>BOUNDED</p></td>
      <td><p>2</p></td>
      <td><p>Waits until operations in a time span are completed before a search/query.</p></td>

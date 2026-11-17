@@ -29,11 +29,6 @@ Methods of `SearchSimpleParam.Builder`:
         <td><p>collectionName: target collection name</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List&lt;String> outFields)</p></td>
-        <td><p>Specifies output scalar fields (Optional).</p></td>
-        <td><p><br/>outFields: The name list of fields to be outputed</p></td>
-    </tr>
-    <tr>
         <td><p>withFilter(String filter)</p></td>
         <td><p>Set the expression to filter scalar fields before searching(Optional).For more information please refer to <a href="https://milvus.io/docs/v2.1.x/boolean.md">this doc</a>.</p></td>
         <td><p>filter: The expression to filter scalar fields</p></td>
@@ -57,6 +52,11 @@ Methods of `SearchSimpleParam.Builder`:
         <td><p>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</p></td>
         <td><p>Consistency level used in the search. If no level is specified, will use default consistency. Please refer to ConsistencyLevelEnum in Misc.</p></td>
         <td><p>consistencyLevel: The consistency level used in the search</p></td>
+    </tr>
+    <tr>
+        <td><p>withOutputFields(List&lt;String> outputFields)</p></td>
+        <td><p>Specifies output fields (Optional).</p></td>
+        <td><p>outputFields: The name list of the fields to be output.</p></td>
     </tr>
     <tr>
         <td><p>build()</p></td>

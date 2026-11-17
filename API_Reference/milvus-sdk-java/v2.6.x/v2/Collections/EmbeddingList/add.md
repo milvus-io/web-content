@@ -26,7 +26,7 @@ None.
 
     This exception arises if different types of vector embeddings are provided.
 
-## Examples:
+## Example
 
 ```java
 import io.milvus.v2.client.ConnectConfig;

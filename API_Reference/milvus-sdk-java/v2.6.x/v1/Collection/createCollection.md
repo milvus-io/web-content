@@ -39,6 +39,11 @@ Methods of `CreateCollectionParam.Builder`:
         <td><p>shardsNum: The number of shards to split the inserted data into. Multiple shards are processed by multiple nodes in Milvus.</p></td>
     </tr>
     <tr>
+        <td><p>withEnableDynamicField(boolean enableDynamicField)</p></td>
+        <td><p><strong>Deprecated.</strong> Use <code>withSchema(CollectionSchemaParam)</code> instead. Sets the collection if enableDynamicField.</p></td>
+        <td><p>enableDynamicField: enableDynamicField of the collection</p></td>
+    </tr>
+    <tr>
         <td><p>withDescription(String description)</p></td>
         <td><p>Sets the collection description. The description can be empty. The default description is "".</p></td>
         <td><p>description: The description of the collection to create.</p></td>
@@ -118,6 +123,11 @@ Methods of `FieldType.Builder`:
      <td><p>name: The name of the field.</p></td>
    </tr>
    <tr>
+     <td><p>withIsDynamic(boolean isDynamic)</p></td>
+     <td><p>Sets the isDynamic of a field.</p></td>
+     <td><p>isDynamic: A boolean value that defines if this field is a dynamic field.</p></td>
+   </tr>
+   <tr>
      <td><p>withPrimaryKey(boolean primaryKey)</p></td>
      <td><p>Sets the field as the primary key field. Only fields whose data type is INT64 or VARCHAR can be set as the primary key field. The value is false by default.</p></td>
      <td><p>primaryKey: A boolean value that defines if the field is the primary key field. The value true means that the field is the primary key field while the value false means it is not.</p></td>
@@ -143,6 +153,11 @@ Methods of `FieldType.Builder`:
      <td><p>key: The parameter key.</p><p>value: The parameter value.</p></td>
    </tr>
    <tr>
+     <td><p>withTypeParams(Map&lt;String, String> typeParams)</p></td>
+     <td><p>Sets more parameters for the field.</p></td>
+     <td><p>typeParams: The parameters of the field.</p></td>
+   </tr>
+   <tr>
      <td><p>withDimension(Integer dimension)</p></td>
      <td><p>Sets the dimension of a vector field. The dimension value must be greater than zero. This method internally calls addTypeParam() to store the dimension value.</p></td>
      <td><p>dimension: The dimension of the vector field.</p></td>
@@ -166,6 +181,21 @@ Methods of `FieldType.Builder`:
      <td><p>withPartitionKey(boolean partitionKey)</p></td>
      <td><p>Sets the field to be partition key.A partition key field's values are hashed and distributed to different logic partitions.Only int64 and varchar type fields can be a partition key. The primary key field can not be a partition key.</p></td>
      <td><p>partitionKey: A boolean value that defines if this field is a partition key field. The value true is a partition key, false is not.</p></td>
+   </tr>
+   <tr>
+     <td><p>withNullable(boolean nullable)</p></td>
+     <td><p>Sets whether this field is nullable. Primary key, vector, and Array fields cannot be nullable.</p></td>
+     <td><p>nullable: A boolean value that defines if this field is nullable. The value true means the field is nullable.</p></td>
+   </tr>
+   <tr>
+     <td><p>withDefaultValue(Object obj)</p></td>
+     <td><p>Sets the default value of this field.</p></td>
+     <td><p>obj: The default value of the field.</p></td>
+   </tr>
+   <tr>
+     <td><p>withClusteringKey(boolean clusteringKey)</p></td>
+     <td><p>Sets the field to be a clustering key. Only scalar fields (except Array/JSON) can be clustering keys, and only one clustering key is allowed in a collection.</p></td>
+     <td><p>clusteringKey: A boolean value that defines if this field is a clustering key. The value true means the field is a clustering key.</p></td>
    </tr>
    <tr>
      <td><p>build()</p></td>

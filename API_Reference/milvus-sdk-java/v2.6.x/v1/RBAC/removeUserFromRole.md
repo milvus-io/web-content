@@ -29,9 +29,9 @@ Methods of `AddUserToRoleParam.Builder`:
         <td><p>roleName: The role name used to create the privilege.</p></td>
     </tr>
     <tr>
-        <td><p>withUsername(String username)</p></td>
-        <td><p>Sets the username. Username cannot be empty or null.</p></td>
-        <td><p>username: The user name.</p></td>
+        <td><p>withUserName(String userName)</p></td>
+        <td><p>Sets the username. UserName cannot be empty or null.</p></td>
+        <td><p>userName: The user name.</p></td>
     </tr>
     <tr>
         <td><p>build()</p></td>

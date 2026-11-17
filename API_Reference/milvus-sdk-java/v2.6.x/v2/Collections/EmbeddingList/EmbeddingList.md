@@ -22,7 +22,7 @@ EmbeddingList
 
 An EmbeddingList instance comprises one or multiple vector embeddings. You can use it to search against the vector fields in the Struct elements of an Array of Structs field.
 
-## Examples:
+## Example
 
 ```java
 import io.milvus.v2.service.vector.request.data.EmbeddingList;

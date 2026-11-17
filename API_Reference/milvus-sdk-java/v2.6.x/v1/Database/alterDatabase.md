@@ -34,9 +34,14 @@ Methods of `AlterDatabaseParam.Builder`:
         <td><p>replicaNumber: replica number</p></td>
     </tr>
     <tr>
-        <td><p>WithResourceGroups(List&lt;String> resourceGroups)</p></td>
+        <td><p>withResourceGroups(List&lt;String> resourceGroups)</p></td>
         <td><p>Sets the resource groups in database level, then if load collection doesn't have resource groups, it will use this resource groups.</p></td>
         <td><p>resourceGroups: resource group names</p></td>
+    </tr>
+    <tr>
+        <td><p>withProperty(String key, String value)</p></td>
+        <td><p>Basic method to set a key-value property.</p></td>
+        <td><p>key: The property key.<br/>value: The property value.</p></td>
     </tr>
     <tr>
         <td><p>build()</p></td>
@@ -63,7 +68,7 @@ import io.milvus.param.collection.AlterDatabaseParam;
 AlterDatabaseParam param = AlterDatabaseParam.newBuilder()
         .withDatabaseName("mydnb")
         .withReplicaNumber(3)
-        .WithResourceGroups(Arrays.asList("rg1", "rg2", "rg3"))
+        .withResourceGroups(Arrays.asList("rg1", "rg2", "rg3"))
         .build();
 
 R<RpcStatus> response = client.alterDatabase(param);

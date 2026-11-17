@@ -29,6 +29,11 @@ Methods of `GetFlushAllStateParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
+        <td><p>withFlushAllTs(Long flushAllTs)</p></td>
+        <td><p>Sets the flush-all timestamp used to check the flush-all state.</p></td>
+        <td><p>flushAllTs: The flush-all timestamp.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a GetFlushAllStateParam object.</p></td>
         <td><p>N/A</p></td>

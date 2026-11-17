@@ -39,6 +39,11 @@ Methods of `ShowCollectionsParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
+        <td><p>withShowType(ShowType showType)</p></td>
+        <td><p>Sets a show type. Show type can be empty or null, default value is ShowType.All.</p></td>
+        <td><p>showType: The show type to use for the collection.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Constructs a ShowCollectionsParam object.</p></td>
         <td><p>N/A</p></td>
@@ -82,6 +87,12 @@ Methods of `ShowCollResponseWrapper`:
      <td><p>Returns a list of CollectionInfo objects. Each CollectionInfo represents a collection.</p></td>
      <td><p>N/A</p></td>
      <td><p>List&lt;CollectionInfo></p></td>
+   </tr>
+   <tr>
+     <td><p>getCollectionNames()</p></td>
+     <td><p>Gets a list of collection names.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>List&lt;String></p></td>
    </tr>
    <tr>
      <td><p>getCollectionInfoByName(String collectionName)</p></td>

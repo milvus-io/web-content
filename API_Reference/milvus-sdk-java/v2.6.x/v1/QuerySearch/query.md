@@ -179,6 +179,36 @@ Methods of `FieldDataWrapper`:
      <td><p>Returns the field data according to field type.</p></td>
      <td><ul><li><p>Return List&lt;List&lt;Float>gt; for FloatVector field.</p></li><li><p>Return List&lt;ByteBuffer> for BinaryVector/Float16Vector/BFloatVector field.</p></li><li><p>Return List&lt;SortedMap&lt;Long, Float>gt; for SparseFloatVector field.</p></li><li><p>Return List&lt;Long> for Int64 field.</p></li><li><p>Return List&lt;Integer> for Int32/Int16/Int8 field.</p></li><li><p>Return List&lt;Boolean> for Bool field.</p></li><li><p>Return List&lt;Float> for Float field.</p></li><li><p>Return List&lt;Double> for Double field.</p></li><li><p>Return List&lt;String> for Varchar field.</p></li><li><p>Return List&lt;ByteString> for JSON field.</p></li></ul></td>
    </tr>
+   <tr>
+     <td><p>get(int rowIdx, String fieldName)</p></td>
+     <td><p>Gets a field's value by field name. Returns Long for an integer value, Double for a decimal value, String for a string value, and JsonElement for a JSON object and Array.</p></td>
+     <td><p>Object</p></td>
+   </tr>
+   <tr>
+     <td><p>getAsInt(int rowIdx, String fieldName)</p></td>
+     <td><p>Gets an integer value of a JSON field by row index and field name.</p></td>
+     <td><p>Integer</p></td>
+   </tr>
+   <tr>
+     <td><p>getAsString(int rowIdx, String fieldName)</p></td>
+     <td><p>Gets a string value of a JSON field by row index and field name.</p></td>
+     <td><p>String</p></td>
+   </tr>
+   <tr>
+     <td><p>getAsBool(int rowIdx, String fieldName)</p></td>
+     <td><p>Gets a boolean value of a JSON field by row index and field name.</p></td>
+     <td><p>Boolean</p></td>
+   </tr>
+   <tr>
+     <td><p>getAsDouble(int rowIdx, String fieldName)</p></td>
+     <td><p>Gets a double value of a JSON field by row index and field name.</p></td>
+     <td><p>Double</p></td>
+   </tr>
+   <tr>
+     <td><p>valueByIdx(int rowIdx)</p></td>
+     <td><p>Gets the value of a row by its index. Throws ParamException if the index is out of range.</p></td>
+     <td><p>Object</p></td>
+   </tr>
 </table>
 
 #### QueryResultsWrapper.RowRecord
@@ -197,6 +227,11 @@ Methods of `RowRecord`:
      <td><p>put(String keyName, Object obj)</p></td>
      <td><p>For internal use. Set a key-value pair for the row.</p></td>
      <td><p>boolean</p></td>
+   </tr>
+   <tr>
+     <td><p>getFieldValues()</p></td>
+     <td><p>Gets all field values of the row as a map.</p></td>
+     <td><p>Map&lt;String, Object></p></td>
    </tr>
    <tr>
      <td><p>get(String keyName)</p></td>

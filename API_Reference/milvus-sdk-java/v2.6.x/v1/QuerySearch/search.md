@@ -79,6 +79,11 @@ Methods of `SearchParam.Builder`:
         <td><p>topK: The topk value.</p></td>
     </tr>
     <tr>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Specify a value to control the returned number of entities. Must be a positive value.</p></td>
+        <td><p>limit: A value to define the limit of returned entities.</p></td>
+    </tr>
+    <tr>
         <td><p>withVectors(List&lt;?> vectors)</p></td>
         <td><p><strong>Deprecated.</strong> Since v2.4.0, use typed builders such as <code>withFloatVectors</code>, <code>withBinaryVectors</code>, <code>withFloat16Vectors</code>, <code>withBFloat16Vectors</code>, or <code>withSparseFloatVectors</code> instead. Set the target vectors. Up to 16384 vectors allowed.<br/>Note: this method works for FloatVector/BinaryVector/SparseFloatVector, but it doesn't work for Float16Vector/BFloat16Vector.<br/>It is recommended to use withFloatVectors/withBinaryVectors/withFloat16Vectors/withBFloat16Vectors/withSparseFloatVectors to input vectors explicitly.</p></td>
         <td><p>vectors: <br/>- If target field type is FloatVector, List&lt; List&lt;Float>gt; is required.<br/>- If target field type is BinaryVector, List&lt;ByteBuffer> is required.<br/>- If target field type is SparseFloatVector, List&lt;SortedMap[Long, Float]> is required.</p></td>
@@ -127,6 +132,16 @@ Methods of `SearchParam.Builder`:
         <td><p>withGroupByFieldName(String groupByFieldName)</p></td>
         <td><p>Sets field name to do grouping.</p></td>
         <td><p>groupByFieldName: The name of a field to do grouping.</p></td>
+    </tr>
+    <tr>
+        <td><p>withGroupSize(Integer groupSize)</p></td>
+        <td><p>Defines the max number of items for each group; the value must be greater than zero.</p></td>
+        <td><p>groupSize: The maximum number of items per group.</p></td>
+    </tr>
+    <tr>
+        <td><p>withStrictGroupSize(Boolean strictGroupSize)</p></td>
+        <td><p>Whether to force the number of each group to be groupSize; set to false, Milvus might return some groups with fewer items than groupSize.</p></td>
+        <td><p>strictGroupSize: Whether to force each group to contain exactly groupSize items.</p></td>
     </tr>
     <tr>
         <td><p>build()</p></td>
@@ -185,6 +200,24 @@ Methods of `SearchResultsWrapper`:
      <td><p>indexOfTarget: The order number of a target vector.</p></td>
      <td><p>List&lt;QueryResultsWrapper.RowRecord></p></td>
    </tr>
+   <tr>
+     <td><p>getFieldWrapper(String fieldName)</p></td>
+     <td><p>Gets a FieldDataWrapper object by a field name. Throws <code>ParamException</code> if the field doesn't exist.</p></td>
+     <td><p>fieldName: A field name which is specified by the withOutFields() of SearchParam.</p></td>
+     <td><p>FieldDataWrapper</p></td>
+   </tr>
+   <tr>
+     <td><p>getNumQueries()</p></td>
+     <td><p>Gets how many queries are searched.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>long</p></td>
+   </tr>
+   <tr>
+     <td><p>getOffsetByIndex(int index)</p></td>
+     <td><p>Gets the offset and the search count (topK) of the search results by the index of a target vector.</p></td>
+     <td><p>index: The order number of a target vector.</p></td>
+     <td><p>Position</p></td>
+   </tr>
 </table>
 
 #### IDScore
@@ -218,6 +251,16 @@ Methods of `SearchResultsWrapper.IDScore`:
      <td><p>get(String keyName)</p></td>
      <td><p>Get a value by a key name. If the key name is a field name, return the value of this field.If the key name is in the dynamic field, return the value from the dynamic field.Throws ParamException if the key name doesn't exist.</p></td>
      <td><p>Object</p></td>
+   </tr>
+   <tr>
+     <td><p>getPrimaryKey()</p></td>
+     <td><p>Get the name of the primary key field.</p></td>
+     <td><p>String</p></td>
+   </tr>
+   <tr>
+     <td><p>getFieldValues()</p></td>
+     <td><p>Get all field values as a map.</p></td>
+     <td><p>Map&lt;String, Object></p></td>
    </tr>
 </table>
 

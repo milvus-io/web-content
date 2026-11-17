@@ -37,6 +37,11 @@ Methods of `LoadBalanceParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection.</p></td>
+    </tr>
+    <tr>
         <td><p>withSourceNodeID(Long srcNodeID)</p></td>
         <td><p>Set the ID of source query node in which the sealed segments were loaded.</p></td>
         <td><p>srcNodeID: The source query node ID.</p></td>

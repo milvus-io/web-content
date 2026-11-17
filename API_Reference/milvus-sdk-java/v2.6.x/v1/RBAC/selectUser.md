@@ -24,9 +24,9 @@ Methods of `SelectUserParam.Builder`:
         <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td><p>withUsername(String username)</p></td>
-        <td><p>Sets the username. Username cannot be empty or null.</p></td>
-        <td><p>username: The user name.</p></td>
+        <td><p>withUserName(String userName)</p></td>
+        <td><p>Sets the username. UserName cannot be empty or null.</p></td>
+        <td><p>userName: The user name.</p></td>
     </tr>
     <tr>
         <td><p>withIncludeRoleInfo(boolean includeRoleInfo)</p></td>
@@ -60,7 +60,7 @@ This method catches all the exceptions and returns an `R<SelectUserResponse>` ob
 import io.milvus.param.SelectUserParam;
 
 R<SelectUserResponse> response = client.selectUser(SelectUserParam.newBuilder()
-            .withUsername(userName)
+            .withUserName(userName)
             .build());
 
 if (response.getStatus() != R.Status.Success.getCode()) {
