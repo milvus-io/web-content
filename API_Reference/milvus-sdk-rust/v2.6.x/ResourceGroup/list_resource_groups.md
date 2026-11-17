@@ -1,6 +1,6 @@
 # list_resource_groups()
 
-Lists resource groups visible in the current database.
+Lists resource groups visible to the caller.
 
 ```rust
 pub async fn list_resource_groups(&self, request: ListResourceGroupsRequest) -> Result<ListResourceGroupsResponse>

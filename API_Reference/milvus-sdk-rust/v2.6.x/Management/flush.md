@@ -1,6 +1,6 @@
 # flush()
 
-Flushes pending insert data for a collection into durable storage.
+Flushes pending insert data for the requested collection(s) into durable storage.
 
 ```rust
 pub async fn flush(&self, request: FlushRequest) -> Result<FlushResponse>

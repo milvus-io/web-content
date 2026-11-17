@@ -71,6 +71,14 @@ let request = QueryRequest::builder()
 
     Additional query parameters.
 
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security. Defaults to `false`.
+
 **RETURN TYPE:**
 
 *Result\<QueryResponse\>*

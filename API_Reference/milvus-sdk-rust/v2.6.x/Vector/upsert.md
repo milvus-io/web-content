@@ -14,8 +14,8 @@ let request = UpsertRequest::builder()
         InsertRequest::builder()
             .collection_name("books")
             .rows(vec![EntityRow::from_iter([
-                ("id".into(), json!(1)),
-                ("title".into(), json!("Milvus")),
+                ("id".into(), serde_json::json!(1)),
+                ("title".into(), serde_json::json!("Milvus")),
             ])])
             .build()?,
     )
@@ -85,6 +85,14 @@ let request = UpsertRequest::builder()
 
         Remove every occurrence of the supplied elements from an existing array field.
 
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security. Defaults to `false`.
+
 **RETURN TYPE:**
 
 *Result\<UpsertResponse\>*
@@ -147,8 +155,8 @@ let request = UpsertRequest::builder()
         InsertRequest::builder()
             .collection_name("books")
             .rows(vec![EntityRow::from_iter([
-                ("id".into(), json!(1)),
-                ("title".into(), json!("Milvus")),
+                ("id".into(), serde_json::json!(1)),
+                ("title".into(), serde_json::json!("Milvus")),
             ])])
             .build()?,
     )

@@ -85,6 +85,14 @@ let request = HybridSearchRequest::builder()
 
     Consistency guarantee for the search; the collection default is used when unset. See [ConsistencyLevel](../Collections/ConsistencyLevel.md).
 
+- `rls_principal: Option<String>`
+
+    Principal name used to enforce row-level security for every sub-search. Required for requests against an RLS-enabled collection unless `skip_rls` is set.
+
+- `skip_rls: bool`
+
+    Whether the request explicitly bypasses row-level security for every sub-search. Defaults to `false`.
+
 ### SubSearchRequest
 
 Each entry in `sub_requests` describes one vector search against a single vector field. Build it with `SubSearchRequest::builder()` and pass the list to `HybridSearchRequest::builder().sub_requests(...)`.
