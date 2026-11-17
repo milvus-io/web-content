@@ -97,11 +97,87 @@ CreateCollectionReq.Function ranker = CreateCollectionReq.Function.builder()
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    panic(err)
+}
+defer cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName("cohere_semantic_ranker").
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields("document").
+    WithParam("reranker", "model").
+    WithParam("provider", "cohere").
+    WithParam("model_name", "rerank-english-v3.0").
+    WithParam("queries", []string{"renewable energy developments"}).
+    WithParam("max_client_batch_size", 128).
+    WithParam("max_tokens_per_doc", 4096)
+
+schema := entity.NewSchema().
+    WithName("your_collection").
+    WithDynamicFieldEnabled(false).
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("document").WithDataType(entity.FieldTypeVarChar).WithMaxLength(65535)).
+    WithField(entity.NewField().WithName("dense_vector").WithDataType(entity.FieldTypeFloatVector).WithDim(768))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("your_collection", schema))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "your_collection",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "document",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 65535
+                }
+            },
+            {
+                "fieldName": "dense_vector",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": 768
+                }
+            }
+        ]
+    }
+}'
 ```
 
 ### Cohere ranker-specific parameters
@@ -216,9 +292,68 @@ SearchResp searchResp = client.search(searchReq);
 ```
 
 ```go
-// go
+functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "your_collection", // collection name
+    5,           // limit
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField("dense_vector").
+    WithOutputFields("document").
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+fmt.Println(resultSets)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# The ranker configuration is passed with the search request
+export rankerFunction='{
+    "name": "cohere_semantic_ranker",
+    "type": "Rerank",
+    "inputFieldNames": [
+        "document"
+    ],
+    "outputFieldNames": [],
+    "params": {
+        "reranker": "model",
+        "provider": "cohere",
+        "model_name": "rerank-english-v3.0",
+        "queries": [
+            "renewable energy developments"
+        ],
+        "max_client_batch_size": 128,
+        "max_tokens_per_doc": 4096
+    }
+}'
+
+# A query vector matching the collection dimension
+export QUERY_VECTOR=$(jq -n '[range(768) | 0.01]')
+
+request=$(jq -n \
+--argjson vec "$QUERY_VECTOR" \
+--argjson fn "$rankerFunction" \
+'{
+    collectionName: "your_collection",
+    data: [$vec],
+    annsField: "dense_vector",
+    limit: 5,
+    outputFields: ["document"],
+    consistencyLevel: "Bounded",
+    functionScore: {functions: [$fn]}
+}')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "$request"
 ```

@@ -212,7 +212,38 @@ client.createCollection(requestCreate);
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Printf("Failed to connect to Milvus: %s\n", err.Error())
+    return
+}
+defer client.Close(context.Background())
+
+schema := entity.NewSchema().
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true).WithIsAutoID(false)).
+    WithField(entity.NewField().WithName("key").WithDataType(entity.FieldTypeInt64).WithIsClusteringKey(true)).
+    WithField(entity.NewField().WithName("var").WithDataType(entity.FieldTypeVarChar).WithMaxLength(1000)).
+    WithField(entity.NewField().WithName("vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5))
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("clustering_test", schema))
+if err != nil {
+    fmt.Printf("Failed to create collection: %s\n", err.Error())
+    return
+}
 ```
 
 ```javascript
@@ -256,7 +287,44 @@ const schema = [
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "clustering_test",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true,
+                "autoID": false
+            },
+            {
+                "fieldName": "key",
+                "dataType": "Int64",
+                "isClusteringKey": true
+            },
+            {
+                "fieldName": "var",
+                "dataType": "VarChar",
+                "elementTypeParams": {"max_length": 1000}
+            },
+            {
+                "fieldName": "vector",
+                "dataType": "FloatVector",
+                "elementTypeParams": {"dim": 5}
+            }
+        ]
+    }
+}'
 ```
 
 <div class="alert note">
@@ -272,7 +340,6 @@ If you have enabled automatic clustering compaction, Milvus automatically trigge
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -308,10 +375,6 @@ GetCompactionStateResp stateResp = client.getCompactionState(GetCompactionStateR
 System.out.println(stateResp.getState());
 ```
 
-```go
-// go
-```
-
 ```javascript
 // trigger a manual compaction
 const {compactionID} = await client.compact({
@@ -326,7 +389,18 @@ await client.getCompactionState({
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/compact" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "clustering_test",
+    "isClustering": true
+}'
 ```
 
 ## Benchmark Test

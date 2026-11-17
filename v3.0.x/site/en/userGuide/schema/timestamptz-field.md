@@ -81,11 +81,76 @@ print(f"Collection '{collection_name}' with a TimestampTz field created successf
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    panic(err)
+}
+defer cli.Close(ctx)
+
+collectionName := "timestamptz_test123"
+has, err := cli.HasCollection(ctx, milvusclient.NewHasCollectionOption(collectionName))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+if has {
+    err = cli.DropCollection(ctx, milvusclient.NewDropCollectionOption(collectionName))
+    if err != nil {
+        fmt.Println(err.Error())
+        return
+    }
+}
+
+schema := entity.NewSchema().
+    WithName(collectionName).
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("tsz").WithDataType(entity.FieldTypeTimestamptz).WithNullable(true)).
+    WithField(entity.NewField().WithName("vec").WithDataType(entity.FieldTypeFloatVector).WithDim(4))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(collectionName, schema).
+    WithConsistencyLevel(entity.ClSession))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+fmt.Printf("Collection '%s' with a TimestampTz field created successfully.\n", collectionName)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": false,
+        "fields": [
+            {"fieldName": "id", "dataType": "Int64", "isPrimary": true},
+            {"fieldName": "tsz", "dataType": "Timestamptz", "nullable": true},
+            {"fieldName": "vec", "dataType": "FloatVector", "elementTypeParams": {"dim": 4}}
+        ]
+    },
+    "consistencyLevel": "Session"
+}'
 ```
 
 ### Step 2: Insert data
@@ -145,11 +210,55 @@ print("Data inserted successfully.")
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/column"
+
+// Timestamps are written as ISO 8601 strings with a time-zone offset
+tszValues := []string{
+    "2025-01-01T00:00:00+08:00",
+    "2025-01-02T00:00:00+08:00",
+    "2025-01-03T00:00:00+08:00",
+    "2025-01-04T00:00:00+08:00",
+    "2025-01-05T00:00:00+08:00",
+}
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(collectionName).
+    WithColumns(
+        column.NewColumnInt64("id", []int64{1, 2, 3, 4, 5}),
+        column.NewColumnTimestamptzIsoString("tsz", tszValues),
+        column.NewColumnFloatVector("vec", 4, [][]float32{
+            {0.0, 0.1, 0.2, 0.3},
+            {0.1, 0.2, 0.3, 0.4},
+            {0.2, 0.3, 0.4, 0.5},
+            {0.3, 0.4, 0.5, 0.6},
+            {0.4, 0.5, 0.6, 0.7},
+        }),
+    ))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+fmt.Println("Data inserted successfully.")
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123",
+    "data": [
+        {"id": 1, "tsz": "2025-01-01T00:00:00+08:00", "vec": [0.0, 0.1, 0.2, 0.3]},
+        {"id": 2, "tsz": "2025-01-02T00:00:00+08:00", "vec": [0.1, 0.2, 0.3, 0.4]},
+        {"id": 3, "tsz": "2025-01-03T00:00:00+08:00", "vec": [0.2, 0.3, 0.4, 0.5]},
+        {"id": 4, "tsz": "2025-01-04T00:00:00+08:00", "vec": [0.3, 0.4, 0.5, 0.6]},
+        {"id": 5, "tsz": "2025-01-05T00:00:00+08:00", "vec": [0.4, 0.5, 0.6, 0.7]}
+    ]
+}'
 ```
 
 ### Step 3: Filtering operations
@@ -200,11 +309,50 @@ print(f"Collection '{collection_name}' loaded successfully.")
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+idxOpt := milvusclient.NewCreateIndexOption(collectionName, "vec", index.NewAutoIndex(entity.COSINE))
+indexTask, err := cli.CreateIndex(ctx, idxOpt)
+if err != nil {
+    panic(err)
+}
+if err = indexTask.Await(ctx); err != nil {
+    panic(err)
+}
+fmt.Println("Index created successfully.")
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(collectionName))
+if err != nil {
+    panic(err)
+}
+if err = loadTask.Await(ctx); err != nil {
+    panic(err)
+}
+fmt.Printf("Collection '%s' loaded successfully.\n", collectionName)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123",
+    "indexParams": [{"fieldName": "vec", "indexName": "vec_index", "metricType": "COSINE", "indexType": "AUTOINDEX"}]
+}'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123"
+}'
 ```
 
 </details>
@@ -250,11 +398,34 @@ print("Query result: ", results)
 ```
 
 ```go
-// go
+expr := "tsz != ISO '2025-01-03T00:00:00+08:00'"
+
+resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption(collectionName).
+    WithFilter(expr).
+    WithOutputFields("id", "tsz").
+    WithLimit(10))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+fmt.Println("Query result: ", resultSet.GetColumn("tsz"))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123",
+    "filter": "tsz != ISO '\''2025-01-03T00:00:00+08:00'\''",
+    "outputFields": ["id", "tsz"],
+    "limit": 10
+}'
 ```
 
 In the example above,
@@ -305,11 +476,34 @@ print("Query result: ", results)
 ```
 
 ```go
-// go
+expr := "tsz + INTERVAL 'P0D' != ISO '2025-01-03T00:00:00+08:00'"
+
+resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption(collectionName).
+    WithFilter(expr).
+    WithOutputFields("id", "tsz").
+    WithLimit(10))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+fmt.Println("Query result: ", resultSet.GetColumn("tsz"))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123",
+    "filter": "tsz + INTERVAL '\''P0D'\'' != ISO '\''2025-01-03T00:00:00+08:00'\''",
+    "outputFields": ["id", "tsz"],
+    "limit": 10
+}'
 ```
 
 <div class="alert note">
@@ -370,11 +564,47 @@ print("Search result: ", res)
 ```
 
 ```go
-// go
+filter := "tsz > ISO '2025-01-05T00:00:00+08:00'"
+queryVector := []float32{0.1, 0.2, 0.3, 0.4}
+annParam := index.NewCustomAnnParam()
+annParam.WithExtraParam("metric_type", "COSINE")
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    collectionName,
+    5,
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("vec").
+    WithFilter(filter).
+    WithAnnParam(annParam).
+    WithOutputFields("id", "tsz"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+for _, rs := range resultSets {
+    fmt.Println("IDs: ", rs.IDs)
+    fmt.Println("Scores: ", rs.Scores)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "timestamptz_test123",
+    "data": [[0.1, 0.2, 0.3, 0.4]],
+    "limit": 5,
+    "filter": "tsz > ISO '\''2025-01-05T00:00:00+08:00'\''",
+    "outputFields": ["id", "tsz"],
+    "searchParams": {"metricType": "COSINE"}
+}'
 ```
 
 <div class="alert note">

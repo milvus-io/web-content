@@ -328,7 +328,46 @@ var rerank = new DecayRerank("time_decay")     // Function identifier
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "your_collection",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "document",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 65535
+                }
+            },
+            {
+                "fieldName": "timestamp",
+                "dataType": "Int64"
+            },
+            {
+                "fieldName": "vector_field",
+                "dataType": "FloatVector",
+                "elementTypeParams": {
+                    "dim": 768
+                }
+            }
+        ]
+    }
+}'
 ```
 
 <table>
@@ -455,16 +494,18 @@ import (
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, // collection name
+    collectionName, // collection name
     10,              // limit
-    []entity.Vector{your_query_vector}, // query vector
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, // query vector
 ).WithANNSField("vector_field").
     WithFunctionScore(functionScore).
     WithOutputFields("document", "timestamp"))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
+
+fmt.Println(resultSets)
 ```
 
 ```rust
@@ -545,5 +586,47 @@ SearchResp results = await client.SearchAsync(new SearchReq
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# The ranker configuration is passed with the search request
+export rankerFunction='{
+    "name": "time_decay",
+    "type": "Rerank",
+    "inputFieldNames": [
+        "timestamp"
+    ],
+    "outputFieldNames": [],
+    "params": {
+        "reranker": "decay",
+        "function": "gauss",
+        "origin": 1735689600,
+        "scale": 604800,
+        "offset": 86400,
+        "decay": 0.5
+    }
+}'
+
+# A query vector matching the collection dimension
+export QUERY_VECTOR=$(jq -n '[range(768) | 0.01]')
+
+request=$(jq -n \
+--argjson vec "$QUERY_VECTOR" \
+--argjson fn "$rankerFunction" \
+'{
+    collectionName: "your_collection",
+    data: [$vec],
+    annsField: "vector_field",
+    limit: 10,
+    outputFields: ["document", "timestamp"],
+    consistencyLevel: "Strong",
+    functionScore: {functions: [$fn]}
+}')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "$request"
 ```

@@ -66,18 +66,27 @@ client.create_snapshot(
 ```go
 import (
     "context"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
 
 client, err := milvusclient.New(context.Background(), &milvusclient.ClientConfig{
-    Address: "localhost:19530",
-    Token: "root:Milvus",
+    Address:  "localhost:19530",
+    Username: "root",
+    Password: "Milvus",
 })
+if err != nil {
+    panic(err)
+}
+defer client.Close(context.Background())
 
 // Recommended: Flush data before creating snapshot to ensure all data is included
-err = client.Flush(context.Background(), milvusclient.NewFlushOption("my_collection"))
+flushTask, err := client.Flush(context.Background(), milvusclient.NewFlushOption("my_collection"))
 if err != nil {
-    log.Fatal(err)
+    panic(err)
+}
+if err = flushTask.Await(context.Background()); err != nil {
+    panic(err)
 }
 
 // Create snapshot
@@ -85,6 +94,9 @@ createOpt := milvusclient.NewCreateSnapshotOption("backup_20240101", "my_collect
     WithDescription("Daily backup for January 1st, 2024")
 
 err = client.CreateSnapshot(context.Background(), createOpt)
+if err != nil {
+    panic(err)
+}
 ```
 
 ```javascript
@@ -92,7 +104,19 @@ err = client.CreateSnapshot(context.Background(), createOpt)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101",
+    "description": "Daily backup for January 1st, 2024"
+}'
 ```
 
 ## List snapshots
@@ -119,11 +143,17 @@ snapshots = client.list_snapshots(
 ```
 
 ```go
+// Add this import to the same Go file for the following examples.
+import "fmt"
+
 // List snapshots for collection
-listOpt := milvusclient.NewListSnapshotsOption().
-    WithCollectionName("my_collection")
+listOpt := milvusclient.NewListSnapshotsOption("my_collection")
 
 snapshots, err := client.ListSnapshots(context.Background(), listOpt)
+if err != nil {
+    panic(err)
+}
+fmt.Println(snapshots)
 ```
 
 ```javascript
@@ -131,7 +161,17 @@ snapshots, err := client.ListSnapshots(context.Background(), listOpt)
 ```
 
 ```bash
-# bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/list" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection"
+}'
 ```
 
 ## Describe snapshot
@@ -163,11 +203,15 @@ print(f"Description: {snapshot_info.description}")
 ```
 
 ```go
-describeOpt := milvusclient.NewDescribeSnapshotOption("backup_20240101")
+describeOpt := milvusclient.NewDescribeSnapshotOption("backup_20240101", "my_collection")
 resp, err := client.DescribeSnapshot(context.Background(), describeOpt)
+if err != nil {
+    panic(err)
+}
 
-fmt.Printf("Snapshot ID: %d\n", resp.GetSnapshotInfo().GetId())
-fmt.Printf("Collection: %s\n", resp.GetSnapshotInfo().GetCollectionName())
+fmt.Printf("Snapshot: %s\n", resp.GetName())
+fmt.Printf("Collection: %s\n", resp.GetCollectionName())
+fmt.Printf("Created at: %d\n", resp.GetCreateTs())
 ```
 
 ```javascript
@@ -175,7 +219,18 @@ fmt.Printf("Collection: %s\n", resp.GetSnapshotInfo().GetCollectionName())
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/describe" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101"
+}'
 ```
 
 ## Pin/unpin snapshot data
@@ -214,7 +269,7 @@ pinID, err := client.PinSnapshotData(
     milvusclient.NewPinSnapshotDataOption("backup_20240101", "my_collection").WithTTL(3600),
 )
 if err != nil {
-    log.Fatal(err)
+    panic(err)
 }
 
 defer func() {
@@ -232,7 +287,29 @@ defer func() {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# The pin response carries the pinId that the unpin request needs
+PIN_ID=$(curl --silent --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/pin" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101",
+    "ttlSeconds": 3600
+}' | jq -r '.data.pinId')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/unpin" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "{
+    \"pinId\": \"${PIN_ID}\"
+}"
 ```
 
 ## Restore snapshot
@@ -270,14 +347,17 @@ job_id = client.restore_snapshot(
 
 ```go
 restoreOpt := milvusclient.NewRestoreSnapshotOption(
-    "backup_20240101",
-    "restored_collection"
+    "backup_20240101",     // snapshot name
+    "my_collection",       // source collection holding the snapshot
+    "restored_collection", // target collection
 )
 
 jobID, err := client.RestoreSnapshot(context.Background(), restoreOpt)
 if err != nil {
-    log.Fatal(err)
+    panic(err)
 }
+
+fmt.Println(jobID)
 ```
 
 ```javascript
@@ -285,7 +365,19 @@ if err != nil {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/restore" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "sourceCollectionName": "my_collection",
+    "targetCollectionName": "restored_collection",
+    "snapshotName": "backup_20240101"
+}'
 ```
 
 For details on monitoring the progress of a restoration job, refer to [Get restoration state](#Get-restoration-state).
@@ -313,8 +405,11 @@ client.drop_snapshot(
 ```
 
 ```go
-dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101")
-err := client.DropSnapshot(context.Background(), dropOpt)
+dropOpt := milvusclient.NewDropSnapshotOption("backup_20240101", "my_collection")
+err = client.DropSnapshot(context.Background(), dropOpt)
+if err != nil {
+    panic(err)
+}
 ```
 
 ```javascript
@@ -322,7 +417,18 @@ err := client.DropSnapshot(context.Background(), dropOpt)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/snapshots/drop" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "snapshotName": "backup_20240101"
+}'
 ```
 
 ## List restoration jobs
@@ -355,23 +461,30 @@ jobs = client.list_restore_snapshot_jobs(collection_name="my_collection")
 
 ```go
 // List all restore jobs
-listOpt := milvusclient.NewListRestoreSnapshotJobsOption()
-jobs, err := client.ListRestoreSnapshotJobs(context.Background(), listOpt)
+jobsOpt := milvusclient.NewListRestoreSnapshotJobsOption()
+jobs, err := client.ListRestoreSnapshotJobs(context.Background(), jobsOpt)
 if err != nil {
-    log.Fatal(err)
+    panic(err)
 }
 
 for _, job := range jobs {
-    fmt.Printf("Job %d: %s -> Collection %d\n",
-        job.GetJobId(), job.GetSnapshotName(), job.GetCollectionId())
+    fmt.Printf("Job %d: %s -> Collection %s\n",
+        job.GetJobId(), job.GetSnapshotName(), job.GetCollectionName())
     fmt.Printf("  State: %s, Progress: %d%%\n",
         job.GetState(), job.GetProgress())
 }
 
 // List restore jobs for a specific collection
-listOpt = milvusclient.NewListRestoreSnapshotJobsOption().
+jobsOpt = milvusclient.NewListRestoreSnapshotJobsOption().
     WithCollectionName("my_collection")
-jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
+jobs, err = client.ListRestoreSnapshotJobs(context.Background(), jobsOpt)
+if err != nil {
+    panic(err)
+}
+for _, job := range jobs {
+    fmt.Printf("Job %d: %s -> Collection %s\n",
+        job.GetJobId(), job.GetSnapshotName(), job.GetCollectionName())
+}
 ```
 
 ```javascript
@@ -379,7 +492,26 @@ jobs, err = client.ListRestoreSnapshotJobs(context.Background(), listOpt)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# List all restore jobs
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/snapshot/list" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{}'
+
+# List restore jobs for a specific collection
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/snapshot/list" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection"
+}'
 ```
 
 ## Get restoration state
@@ -415,15 +547,15 @@ print(f"Time Cost: {state.time_cost}ms")
 stateOpt := milvusclient.NewGetRestoreSnapshotStateOption(12345)
 state, err := client.GetRestoreSnapshotState(context.Background(), stateOpt)
 if err != nil {
-    log.Fatal(err)
+    panic(err)
 }
 
 fmt.Printf("Job ID: %d\n", state.GetJobId())
 fmt.Printf("Snapshot Name: %s\n", state.GetSnapshotName())
-fmt.Printf("Collection ID: %d\n", state.GetCollectionId())
+fmt.Printf("Collection: %s\n", state.GetCollectionName())
 fmt.Printf("State: %s\n", state.GetState())
 fmt.Printf("Progress: %d%%\n", state.GetProgress())
-if state.GetState() == milvuspb.RestoreSnapshotState_RestoreSnapshotFailed {
+if state.GetState().String() == "RestoreSnapshotFailed" {
     fmt.Printf("Failure Reason: %s\n", state.GetReason())
 }
 fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())
@@ -434,5 +566,15 @@ fmt.Printf("Time Cost: %dms\n", state.GetTimeCost())
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/jobs/snapshot/describe" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "jobId": "12345"
+}'
 ```

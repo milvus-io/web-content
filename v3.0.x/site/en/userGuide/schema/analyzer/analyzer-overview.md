@@ -150,23 +150,46 @@ import (
     "encoding/json"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )
+
+ctx := context.Background()
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    panic(err)
+}
+defer cli.Close(ctx)
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []string{"An efficient system relies on a robust analyzer to correctly process text for various applications."}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(string(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(string(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
+
+fmt.Println(result)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "analyzerParams": "{\"type\": \"standard\", \"stop_words\": [\"a\", \"an\", \"for\"]}",
+    "text": ["An efficient system relies on a robust analyzer to correctly process text for various applications."],
+    "withDetail": true
+}'
 ```
 
 The output will be:
@@ -512,12 +535,12 @@ const client = new MilvusClient("http://localhost:19530");
 ```go
 import (
     "context"
+    "encoding/json"
     "fmt"
 
-    "github.com/milvus-io/milvus/client/v2/column"
-    "github.com/milvus-io/milvus/client/v2/entity"
-    "github.com/milvus-io/milvus/client/v2/index"
-    "github.com/milvus-io/milvus/client/v2/milvusclient"
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
 )  
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -527,16 +550,16 @@ cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
 })
 if err != nil {
-    fmt.Println(err.Error())
-    // handle err
+    panic(err)
 }
-defer client.Close(ctx)
+defer cli.Close(ctx)
 
 schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
 ```
 
 ### Step 2: Define and verify analyzer configurations
@@ -607,19 +630,32 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
 
     bs, _ := json.Marshal(analyzerParams)
     texts := []string{"Milvus simplifies text analysis for search."}
-    option := milvusclient.NewRunAnalyzerOption(texts).
-        WithAnalyzerParams(string(bs))
+    option := milvusclient.NewRunAnalyzerOption(texts...).
+        WithAnalyzerParamsStr(string(bs))
     
-    result, err := client.RunAnalyzer(ctx, option)
+    result, err := cli.RunAnalyzer(ctx, option)
     if err != nil {
         fmt.Println(err.Error())
-        // handle error
+        return
     }
-    
+
+    fmt.Println(result)
     ```
 
     ```bash
-    # restful
+    export CLUSTER_ENDPOINT="http://localhost:19530"
+    export TOKEN="root:Milvus"
+
+    curl --request POST \
+    --url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+    --header "Authorization: Bearer ${TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Request-Timeout: 10" \
+    -d '{
+        "analyzerParams": "{\"type\": \"english\"}",
+        "text": ["Milvus simplifies text analysis for search."],
+        "withDetail": true
+    }'
     ```
 
 1. **Configure and verify a custom analyzer:**
@@ -714,11 +750,12 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
     ```
 
     ```go
-    analyzerParams = map[string]any{"tokenizer": "standard",
-        "filter": []any{"lowercase", 
+    analyzerParams := map[string]any{"tokenizer": "standard",
+        "filter": []any{"lowercase",
         map[string]any{
             "type": "length",
             "max":  40,
+        },
         map[string]any{
             "type": "stop",
             "stop_words": []string{"of", "to"},
@@ -726,18 +763,32 @@ schema := entity.NewSchema().WithAutoID(true).WithDynamicFieldEnabled(false)
         
     bs, _ := json.Marshal(analyzerParams)
     texts := []string{"Milvus provides flexible, customizable analyzers for robust text processing."}
-    option := milvusclient.NewRunAnalyzerOption(texts).
-        WithAnalyzerParams(string(bs))
+    option := milvusclient.NewRunAnalyzerOption(texts...).
+        WithAnalyzerParamsStr(string(bs))
     
-    result, err := client.RunAnalyzer(ctx, option)
+    result, err := cli.RunAnalyzer(ctx, option)
     if err != nil {
         fmt.Println(err.Error())
-        // handle error
+        return
     }
+
+    fmt.Println(result)
     ```
 
     ```bash
-    # curl
+    export CLUSTER_ENDPOINT="http://localhost:19530"
+    export TOKEN="root:Milvus"
+
+    curl --request POST \
+    --url "${CLUSTER_ENDPOINT}/v2/vectordb/common/run_analyzer" \
+    --header "Authorization: Bearer ${TOKEN}" \
+    --header "Content-Type: application/json" \
+    --header "Request-Timeout: 10" \
+    -d '{
+        "analyzerParams": "{\"tokenizer\": \"standard\", \"filter\": [\"lowercase\", {\"type\": \"length\", \"max\": 40}, {\"type\": \"stop\", \"stop_words\": [\"of\", \"for\"]}]}",
+        "text": ["Milvus provides flexible, customizable analyzers for robust text processing."],
+        "withDetail": true
+    }'
     ```
 
 ### Step 3: Add fields to the schema
@@ -861,7 +912,60 @@ schema.WithField(entity.NewField().
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "schema": {
+        "autoID": true,
+        "enableDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "title_en",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true,
+                    "enable_match": true,
+                    "analyzer_params": {"type": "english"}
+                }
+            },
+            {
+                "fieldName": "title",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true,
+                    "enable_match": true,
+                    "analyzer_params": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "lowercase",
+                            {"type": "length", "max": 40},
+                            {"type": "stop", "stop_words": ["of", "for"]}
+                        ]
+                    }
+                }
+            },
+            {
+                "fieldName": "embedding",
+                "dataType": "FloatVector",
+                "elementTypeParams": {"dim": 3}
+            },
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            }
+        ]
+    }
+}'
 ```
 
 ### Step 4: Prepare index parameters and create the collection
@@ -929,17 +1033,35 @@ console.log("Collection created successfully!");
 idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
 indexOption := milvusclient.NewCreateIndexOption("my_collection", "embedding", idx)
 
-err = client.CreateCollection(ctx,
+err = cli.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption("my_collection", schema).
         WithIndexOptions(indexOption))
 if err != nil {
     fmt.Println(err.Error())
-    // handle error
+    return
 }
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "indexParams": [
+        {
+            "fieldName": "embedding",
+            "indexName": "embedding",
+            "metricType": "COSINE",
+            "indexType": "AUTOINDEX"
+        }
+    ]
+}'
 ```
 
 ## What's next

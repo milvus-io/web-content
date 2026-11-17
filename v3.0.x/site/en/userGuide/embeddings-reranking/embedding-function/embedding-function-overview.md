@@ -247,11 +247,61 @@ schema.add_field("dense", DataType.FLOAT_VECTOR, dim=1536)
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    panic(err)
+}
+defer cli.Close(ctx)
+
+schema := entity.NewSchema().
+    WithName("demo").
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("document").WithDataType(entity.FieldTypeVarChar).WithMaxLength(9000)).
+    WithField(entity.NewField().WithName("dense").WithDataType(entity.FieldTypeFloatVector).WithDim(1536))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export schema='{
+    "autoID": false,
+    "enableDynamicField": false,
+    "fields": [
+        {
+            "fieldName": "id",
+            "dataType": "Int64",
+            "isPrimary": true
+        },
+        {
+            "fieldName": "document",
+            "dataType": "VarChar",
+            "elementTypeParams": {
+                "max_length": 9000
+            }
+        },
+        {
+            "fieldName": "dense",
+            "dataType": "FloatVector",
+            "elementTypeParams": {
+                "dim": 1536
+            }
+        }
+    ]
+}'
 ```
 
 ### Step 2: Add embedding function to schema
@@ -298,11 +348,37 @@ schema.add_function(text_embedding_function)
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/entity"
+
+embeddingFunction := entity.NewFunction().
+    WithName("openai_embedding").
+    WithType(entity.FunctionTypeTextEmbedding).
+    WithInputFields("document").
+    WithOutputFields("dense").
+    WithParam("provider", "openai").
+    WithParam("model_name", "text-embedding-3-small")
+
+schema.WithFunction(embeddingFunction)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export embeddingFunction='{
+    "name": "openai_embedding",
+    "type": "TextEmbedding",
+    "inputFieldNames": [
+        "document"
+    ],
+    "outputFieldNames": [
+        "dense"
+    ],
+    "params": {
+        "provider": "openai",
+        "model_name": "text-embedding-3-small"
+    }
+}'
 ```
 
 <table>
@@ -402,11 +478,23 @@ index_params.add_index(
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+indexOption := milvusclient.NewCreateIndexOption("demo", "dense", index.NewAutoIndex(entity.COSINE))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export indexParams='[
+    {
+        "fieldName": "dense",
+        "indexName": "dense",
+        "metricType": "COSINE",
+        "indexType": "AUTOINDEX"
+    }
+]'
 ```
 
 ### Step 4: Create collection
@@ -439,11 +527,47 @@ client.create_collection(
 ```
 
 ```go
-// go
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("demo", schema).
+    WithIndexOptions(indexOption))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("demo"))
+if err != nil {
+    panic(err)
+}
+if err = loadTask.Await(ctx); err != nil {
+    panic(err)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+request=$(jq -n --argjson schema "$schema" --argjson fn "$embeddingFunction" --argjson indexParams "$indexParams" '{
+    collectionName: "demo",
+    schema: ($schema + {functions: [$fn]}),
+    indexParams: $indexParams
+}')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "$request"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "demo"
+}'
 ```
 
 ### Step 5: Insert data
@@ -476,11 +600,40 @@ client.insert('demo', [
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/column"
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("demo").
+    WithColumns(
+        column.NewColumnInt64("id", []int64{1, 2, 3}),
+        column.NewColumnVarChar("document", []string{
+            "Milvus simplifies semantic search through embeddings.",
+            "Vector embeddings convert text into searchable numeric data.",
+            "Semantic search helps users find relevant information quickly.",
+        }),
+    ))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "demo",
+    "data": [
+        {"id": 1, "document": "Milvus simplifies semantic search through embeddings."},
+        {"id": 2, "document": "Vector embeddings convert text into searchable numeric data."},
+        {"id": 3, "document": "Semantic search helps users find relevant information quickly."}
+    ]
+}'
 ```
 
 ### Step 6: Perform vector search
@@ -520,11 +673,39 @@ print(results)
 ```
 
 ```go
-// go
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "demo",
+    1,
+    []entity.Vector{entity.Text("How does Milvus handle semantic search?")},
+).WithANNSField("dense").
+    WithOutputFields("document"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+for _, rs := range resultSets {
+    fmt.Println("IDs: ", rs.IDs)
+    fmt.Println("Scores: ", rs.Scores)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "demo",
+    "data": ["How does Milvus handle semantic search?"],
+    "annsField": "dense",
+    "limit": 1,
+    "outputFields": ["document"]
+}'
 ```
 
 For more information about search and query operations, refer to [Basic Vector Search](single-vector-search.md) and [Query](get-and-scalar-query.md).
@@ -593,9 +774,60 @@ results = client.search(
 ```
 
 ```go
-// go
+// Raw text: the embedding function converts the query automatically
+textResults, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "demo",
+    1,
+    []entity.Vector{entity.Text("How does Milvus handle semantic search?")},
+).WithANNSField("dense"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+// Pre-computed vector: yourQueryVector must have the same dimension as the stored embeddings
+vectorResults, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "demo",
+    1,
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField("dense"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+fmt.Println(textResults, vectorResults)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+# Raw text: the embedding function converts the query automatically
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "demo",
+    "data": ["How does Milvus handle semantic search?"],
+    "annsField": "dense",
+    "limit": 1
+}'
+
+# Pre-computed vector: QUERY_VECTOR is a JSON array with the same dimension as the stored embeddings
+request=$(jq -n --argjson vec "$QUERY_VECTOR" '{
+    collectionName: "demo",
+    data: [$vec],
+    annsField: "dense",
+    limit: 1
+}')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "$request"
 ```

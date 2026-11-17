@@ -114,11 +114,63 @@ schema.add_field(field_name="binary_vector", datatype=DataType.BINARY_VECTOR, di
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    panic(err)
+}
+defer cli.Close(ctx)
+
+schema := entity.NewSchema().
+    WithName("dedup_collection").
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true).WithIsAutoID(true)).
+    WithField(entity.NewField().WithName("document_content").WithDataType(entity.FieldTypeVarChar).WithMaxLength(9000).WithEnableAnalyzer(true)).
+    WithField(entity.NewField().WithName("binary_vector").WithDataType(entity.FieldTypeBinaryVector).WithDim(8192))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export schema='{
+    "autoID": true,
+    "enableDynamicField": false,
+    "fields": [
+        {
+            "fieldName": "id",
+            "dataType": "Int64",
+            "isPrimary": true,
+            "autoID": true
+        },
+        {
+            "fieldName": "document_content",
+            "dataType": "VarChar",
+            "elementTypeParams": {
+                "max_length": 9000,
+                "enable_analyzer": true
+            }
+        },
+        {
+            "fieldName": "binary_vector",
+            "dataType": "BinaryVector",
+            "elementTypeParams": {
+                "dim": 8192
+            }
+        }
+    ]
+}'
 ```
 
 ### Define the MinHash function
@@ -159,11 +211,37 @@ schema.add_function(minhash_function)
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/entity"
+
+minhashFunction := entity.NewFunction().
+    WithName("minhash_function").
+    WithType(entity.FunctionTypeMinHash).
+    WithInputFields("document_content").
+    WithOutputFields("binary_vector").
+    WithParam("num_hashes", 256).
+    WithParam("shingle_size", 3)
+
+schema.WithFunction(minhashFunction)
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export minhashFunction='{
+    "name": "minhash_function",
+    "type": "MinHash",
+    "inputFieldNames": [
+        "document_content"
+    ],
+    "outputFieldNames": [
+        "binary_vector"
+    ],
+    "params": {
+        "num_hashes": 256,
+        "shingle_size": 3
+    }
+}'
 ```
 
 **Configuration options**
@@ -245,11 +323,31 @@ index_params.add_index(
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+indexOption := milvusclient.NewCreateIndexOption("dedup_collection", "binary_vector",
+    index.NewMinHashLSHIndex(entity.MHJACCARD, 128).
+        WithElementBitWidth(32).
+        WithRawData(true))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+export indexParams='[
+    {
+        "fieldName": "binary_vector",
+        "indexName": "binary_vector",
+        "metricType": "MHJACCARD",
+        "indexType": "MINHASH_LSH",
+        "params": {
+            "mh_lsh_band": 128,
+            "mh_element_bit_width": 32,
+            "with_raw_data": true
+        }
+    }
+]'
 ```
 
 Set `with_raw_data` to `True` if searches will use Jaccard refinement. The raw MinHash signatures are required to calculate estimated Jaccard similarity for the candidates returned by the LSH lookup.
@@ -283,11 +381,47 @@ client.create_collection(
 ```
 
 ```go
-// go
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("dedup_collection", schema).
+    WithIndexOptions(indexOption))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("dedup_collection"))
+if err != nil {
+    panic(err)
+}
+if err = loadTask.Await(ctx); err != nil {
+    panic(err)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+request=$(jq -n --argjson schema "$schema" --argjson fn "$minhashFunction" --argjson indexParams "$indexParams" '{
+    collectionName: "dedup_collection",
+    schema: ($schema + {functions: [$fn]}),
+    indexParams: $indexParams
+}')
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d "$request"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "dedup_collection"
+}'
 ```
 
 ## Step 2: Insert documents
@@ -322,11 +456,41 @@ client.insert(
 ```
 
 ```go
-// go
+import (
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/column"
+)
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("dedup_collection").
+    WithColumns(column.NewColumnVarChar("document_content", []string{
+        "information retrieval is a field of study that helps users find relevant information in large datasets",
+        "information retrieval is a research field focused on helping users find relevant data in large collections",
+        "information retrieval is a field of research helping users search for relevant information in large datasets",
+    })))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "dedup_collection",
+    "data": [
+        {"document_content": "information retrieval is a field of study that helps users find relevant information in large datasets"},
+        {"document_content": "information retrieval is a research field focused on helping users find relevant data in large collections"},
+        {"document_content": "information retrieval is a field of research helping users search for relevant information in large datasets"}
+    ]
+}'
 ```
 
 ## Step 3: Search with MinHash
@@ -374,11 +538,53 @@ for hits in results:
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+annParam := index.NewMinHashLSHAnnParam().
+    WithSearchWithJACCARD(true).
+    WithRefineK(3)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "dedup_collection",
+    3,
+    []entity.Vector{entity.Text("information retrieval is a research field focused on helping users find relevant data in large collections")},
+).WithANNSField("binary_vector").
+    WithAnnParam(annParam).
+    WithOutputFields("document_content"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+for _, rs := range resultSets {
+    fmt.Println("IDs: ", rs.IDs)
+    fmt.Println("Scores: ", rs.Scores)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "dedup_collection",
+    "data": ["information retrieval is a research field focused on helping users find relevant data in large collections"],
+    "annsField": "binary_vector",
+    "limit": 3,
+    "outputFields": ["document_content"],
+    "searchParams": {
+        "metric_type": "MHJACCARD",
+        "params": {
+            "mh_search_with_jaccard": true,
+            "refine_k": 3
+        }
+    }
+}'
 ```
 
 Set `mh_search_with_jaccard` to `True` to enable Jaccard refinement. `refine_k` controls the candidate-pool capacity used for refinement. Milvus uses `max(refine_k, limit)` as the capacity, but may refine fewer candidates if the LSH lookup returns fewer matches. Increasing `refine_k` can improve result quality at the cost of additional computation.

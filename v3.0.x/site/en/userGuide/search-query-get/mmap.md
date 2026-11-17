@@ -219,7 +219,46 @@ await client.alterCollectionFieldProperties({
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Printf("Failed to connect to Milvus: %s\n", err.Error())
+    return
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema().
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true).WithIsAutoID(false)).
+    WithField(entity.NewField().WithName("vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5)).
+    WithField(entity.NewField().WithName("doc_chunk").WithDataType(entity.FieldTypeVarChar).WithMaxLength(512).
+        WithTypeParams("mmap.enabled", "false"))
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("my_collection", schema))
+if err != nil {
+    fmt.Printf("Failed to create collection: %s\n", err.Error())
+    return
+}
+
+err = client.AlterCollectionFieldProperty(ctx,
+    milvusclient.NewAlterCollectionFieldPropertiesOption("my_collection", "doc_chunk").
+        WithProperty("mmap.enabled", true))
+if err != nil {
+    fmt.Printf("Failed to alter field properties: %s\n", err.Error())
+    return
+}
 ```
 
 ```bash
@@ -379,7 +418,42 @@ await client.alterIndexProperties({
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+    "github.com/milvus-io/milvus/client/v3/index"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Printf("Failed to connect to Milvus: %s\n", err.Error())
+    return
+}
+defer client.Close(ctx)
+
+indexOption := milvusclient.NewCreateIndexOption("my_collection", "title", index.NewInvertedIndex())
+indexOption.WithExtraParam("mmap.enabled", false)
+
+_, err = client.CreateIndex(ctx, indexOption)
+if err != nil {
+    fmt.Printf("Failed to create index: %s\n", err.Error())
+    return
+}
+
+err = client.AlterIndexProperties(ctx,
+    milvusclient.NewAlterIndexPropertiesOption("my_collection", "title").
+        WithProperty("mmap.enabled", true))
+if err != nil {
+    fmt.Printf("Failed to alter index properties: %s\n", err.Error())
+    return
+}
 ```
 
 ```bash
@@ -467,7 +541,38 @@ await client.createCollection({
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Printf("Failed to connect to Milvus: %s\n", err.Error())
+    return
+}
+defer client.Close(ctx)
+
+schema := entity.NewSchema().
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true).WithIsAutoID(false)).
+    WithField(entity.NewField().WithName("vector").WithDataType(entity.FieldTypeFloatVector).WithDim(5))
+
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption("my_collection", schema).
+        WithProperty("mmap.enabled", "true"))
+if err != nil {
+    fmt.Printf("Failed to create collection: %s\n", err.Error())
+    return
+}
 ```
 
 ```bash
@@ -550,7 +655,44 @@ await client.loadCollection({
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+client, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "http://localhost:19530",
+    APIKey:  "root:Milvus",
+})
+if err != nil {
+    fmt.Printf("Failed to connect to Milvus: %s\n", err.Error())
+    return
+}
+defer client.Close(ctx)
+
+err = client.ReleaseCollection(ctx, milvusclient.NewReleaseCollectionOption("my_collection"))
+if err != nil {
+    fmt.Printf("Failed to release collection: %s\n", err.Error())
+    return
+}
+
+err = client.AlterCollectionProperties(ctx,
+    milvusclient.NewAlterCollectionPropertiesOption("my_collection").
+        WithProperty("mmap.enabled", false))
+if err != nil {
+    fmt.Printf("Failed to alter collection properties: %s\n", err.Error())
+    return
+}
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("my_collection"))
+if err != nil {
+    fmt.Printf("Failed to load collection: %s\n", err.Error())
+    return
+}
 ```
 
 ```bash

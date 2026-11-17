@@ -143,12 +143,65 @@ await milvusClient.createCollection({
 ```
 
 ```go
-// go
+import (
+    "context"
+    "fmt"
+
+    "github.com/milvus-io/milvus/client/v3/entity"
+    "github.com/milvus-io/milvus/client/v3/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+    Address: "localhost:19530",
+})
+if err != nil {
+    panic(err)
+}
+defer cli.Close(ctx)
+
+dim := int64(8)
+schema := entity.NewSchema().
+    WithName("geo_collection").
+    WithDynamicFieldEnabled(true).
+    WithField(entity.NewField().WithName("id").WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(true)).
+    WithField(entity.NewField().WithName("embeddings").WithDataType(entity.FieldTypeFloatVector).WithDim(dim)).
+    WithField(entity.NewField().WithName("geo").WithDataType(entity.FieldTypeGeometry).WithNullable(true)).
+    WithField(entity.NewField().WithName("name").WithDataType(entity.FieldTypeVarChar).WithMaxLength(128))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption("geo_collection", schema).
+    WithConsistencyLevel(entity.ClStrong))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
 
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection",
+    "schema": {
+        "autoID": false,
+        "enableDynamicField": true,
+        "fields": [
+            {"fieldName": "id", "dataType": "Int64", "isPrimary": true},
+            {"fieldName": "embeddings", "dataType": "FloatVector", "elementTypeParams": {"dim": 8}},
+            {"fieldName": "geo", "dataType": "Geometry", "nullable": true},
+            {"fieldName": "name", "dataType": "VarChar", "elementTypeParams": {"max_length": 128}}
+        ]
+    },
+    "consistencyLevel": "Strong"
+}'
 ```
 
 <div class="alert note">
@@ -259,11 +312,60 @@ console.log(insert_result);
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/column"
+
+geoPoints := []string{
+    "POINT(13.399710 52.518010)",
+    "POINT(13.403934 52.522877)",
+    "POINT(13.405088 52.521124)",
+    "POINT(13.408223 52.516876)",
+    "POINT(13.400092 52.521507)",
+    "POINT(13.408529 52.519274)",
+}
+names := []string{"Shop A", "Shop B", "Shop C", "Shop D", "Shop E", "Shop F"}
+ids := []int64{1, 2, 3, 4, 5, 6}
+embeddings := [][]float32{
+    {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8},
+    {0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9},
+    {0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0},
+    {0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1},
+    {0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2},
+    {0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3},
+}
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption("geo_collection").
+    WithColumns(
+        column.NewColumnInt64("id", ids),
+        column.NewColumnVarChar("name", names),
+        column.NewColumnFloatVector("embeddings", 8, embeddings),
+        column.NewColumnGeometryWKT("geo", geoPoints),
+    ))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection",
+    "data": [
+        {"id": 1, "name": "Shop A", "embeddings": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], "geo": "POINT(13.399710 52.518010)"},
+        {"id": 2, "name": "Shop B", "embeddings": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], "geo": "POINT(13.403934 52.522877)"},
+        {"id": 3, "name": "Shop C", "embeddings": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], "geo": "POINT(13.405088 52.521124)"},
+        {"id": 4, "name": "Shop D", "embeddings": [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1], "geo": "POINT(13.408223 52.516876)"},
+        {"id": 5, "name": "Shop E", "embeddings": [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2], "geo": "POINT(13.400092 52.521507)"},
+        {"id": 6, "name": "Shop F", "embeddings": [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3], "geo": "POINT(13.408529 52.519274)"}
+    ]
+}'
 ```
 
 ### Step 3: Filtering operations
@@ -331,11 +433,48 @@ await milvusClient.loadCollection({
 ```
 
 ```go
-// go
+import "github.com/milvus-io/milvus/client/v3/index"
+
+idxOpt := milvusclient.NewCreateIndexOption("geo_collection", "embeddings", index.NewAutoIndex(entity.L2))
+indexTask, err := cli.CreateIndex(ctx, idxOpt)
+if err != nil {
+    panic(err)
+}
+if err = indexTask.Await(ctx); err != nil {
+    panic(err)
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption("geo_collection"))
+if err != nil {
+    panic(err)
+}
+if err = loadTask.Await(ctx); err != nil {
+    panic(err)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/indexes/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection",
+    "indexParams": [{"fieldName": "embeddings", "indexName": "embeddings", "metricType": "L2", "indexType": "AUTOINDEX"}]
+}'
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/load" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection"
+}'
 ```
 
 </details>
@@ -441,11 +580,38 @@ for (const ret of query_results.data) {
 ```
 
 ```go
-// go
+topLeftLon, topLeftLat := 13.403683, 52.520711
+bottomRightLon, bottomRightLat := 13.455868, 52.495862
+boundingBoxWKT := fmt.Sprintf("POLYGON((%f %f, %f %f, %f %f, %f %f, %f %f))",
+    topLeftLon, topLeftLat, bottomRightLon, topLeftLat, bottomRightLon, bottomRightLat,
+    topLeftLon, bottomRightLat, topLeftLon, topLeftLat)
+
+resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption("geo_collection").
+    WithFilter(fmt.Sprintf("st_within(geo, '%s')", boundingBoxWKT)).
+    WithOutputFields("name", "geo"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+fmt.Println(resultSet.GetColumn("name"))
+fmt.Println(resultSet.GetColumn("geo"))
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection",
+    "filter": "st_within(geo, '\''POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))'\'')",
+    "outputFields": ["name", "geo"]
+}'
 ```
 
 #### Example 2: Find entities within 1km of a central point
@@ -515,11 +681,34 @@ for (const ret of query_results_dwithin.data) {
 ```
 
 ```go
-// go
+centerPointLon, centerPointLat := 13.403683, 52.520711
+radiusMeters := 1000.0
+centralPointWKT := fmt.Sprintf("POINT(%f %f)", centerPointLon, centerPointLat)
+
+filterExpr := fmt.Sprintf("st_dwithin(geo, '%s', %f)", centralPointWKT, radiusMeters)
+_, err = cli.Query(ctx, milvusclient.NewQueryOption("geo_collection").
+    WithFilter(filterExpr).
+    WithOutputFields("name", "geo"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection",
+    "filter": "st_dwithin(geo, '\''POINT(13.403683 52.520711)'\'', 1000.0)",
+    "outputFields": ["name", "geo"]
+}'
 ```
 
 #### Example 3: Combine vector similarity with a spatial filter
@@ -595,11 +784,43 @@ for (const hits of search_results.results) {
 ```
 
 ```go
-// go
+queryVector := []float32{0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8}
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    "geo_collection", // collectionName
+    3,                // limit
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField("embeddings").
+    WithFilter(filterExpr).
+    WithOutputFields("name", "geo"))
+if err != nil {
+    fmt.Println(err.Error())
+    return
+}
+
+for _, rs := range resultSets {
+    fmt.Println("IDs: ", rs.IDs)
+    fmt.Println("Scores: ", rs.Scores)
+}
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "geo_collection",
+    "data": [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
+    "limit": 3,
+    "filter": "st_within(geo, '\''POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))'\'')",
+    "outputFields": ["name", "geo"],
+    "searchParams": {"metricType": "L2"}
+}'
 ```
 
 ## Next: Accelerate queries
