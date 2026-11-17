@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
     <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#csharp">CSharp</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 ```python
@@ -187,7 +187,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
     <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#csharp">CSharp</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 ```python
@@ -254,7 +254,7 @@ client.add_collection_field(
     <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#csharp">CSharp</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 ```python

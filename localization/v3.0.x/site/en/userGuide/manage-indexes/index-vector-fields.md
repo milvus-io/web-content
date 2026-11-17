@@ -136,9 +136,9 @@ title: Index Vector Fields
 <p>To prepare for indexing, use <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -251,9 +251,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4.1. Set up the index parameters</span>
 index_params = MilvusClient.prepare_index_params()
@@ -453,9 +453,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>To check the index details, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> to get the index details.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Describe index</span>
 res = client.list_indexes(
@@ -586,9 +586,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>To drop an index, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Drop index</span>
 client.drop_index(

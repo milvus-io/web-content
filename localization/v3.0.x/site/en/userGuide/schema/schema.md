@@ -65,9 +65,9 @@ summary: >-
       </svg>
     </button></h2><p>The following code snippet demonstrates how to create a schema.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -107,9 +107,9 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
       </svg>
     </button></h2><p>The primary field in a collection uniquely identifies an entity. It only accepts <strong>Int64</strong> or <strong>VARCHAR</strong> values. The following code snippets demonstrate how to add the primary field.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -173,9 +173,9 @@ export schema='{​
       </svg>
     </button></h2><p>Vector fields accept various sparse and dense vector embeddings. In Milvus, you can add four vector fields to a collection. The following code snippets demonstrate how to add a vector field.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -260,9 +260,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>In Milvus, you can use <code translate="no">VARCHAR</code> fields to store strings. For more on the <code translate="no">VARCHAR</code> field, refer to <a href="/docs/string.md">​VarChar Field</a>.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -342,9 +342,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>The types of numbers that Milvus supports are <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, and <code translate="no">Double</code>. For more on the number fields, refer to <a href="/docs/number.md">​Number Field</a>.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -398,9 +398,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus supports boolean fields. The following code snippets demonstrate how to add a boolean field.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -455,9 +455,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to <a href="/docs/use-json-fields.md">​JSON Field</a>.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -513,9 +513,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to <a href="/docs/array_data_type.md">​Array Field</a>.​</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#curl">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

@@ -64,7 +64,7 @@ summary: This page demonstrates the procedure to import the prepared data.
     </button></h2><p>If your pipeline may retry a failed or timed-out import request, tag the job with an idempotency key; see <a href="/docs/idempotent-import.md">Idempotent Bulk Import</a>.</p>
 <p>To import the prepared data, you have to create an import job as follows:</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#shell">cURL</a>
 </div>
@@ -219,7 +219,7 @@ work as they do there. The wrapper sends a 20-second timeout by default.</p>
       </svg>
     </button></h2><p>Once you get an import job ID, you can check the import progress as follows:</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#shell">cURL</a>
 </div>
@@ -333,7 +333,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>You can list all import jobs relative to a specific collection as follows:</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#shell">cURL</a>
 </div>

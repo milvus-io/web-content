@@ -89,7 +89,7 @@ python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0
 <p>Quote the extras expression so shells such as zsh do not interpret the brackets. On Windows PowerShell, activate the environment with <code translate="no">.venv\Scripts\Activate.ps1</code> instead of <code translate="no">source .venv/bin/activate</code>. The explicit versions keep the SDK and local backend aligned with this guide.</p>
 <div class="alert note">
 <blockquote>
-<p>Milvus Lite 3.x uses a different storage engine from the original 2.x package. It cannot open an existing 2.x <code translate="no">.db</code> file in place. Keep the original database and an environment that can open it, export its data there, and import the data into a new database. Installing a new package does not migrate the old storage format. See <a href="#Migrating-data-from-Milvus-Lite">Migrating data from Milvus Lite</a>.</p>
+<p>Milvus Lite 3.x uses a different storage engine from the original 2.x package. It cannot open an existing 2.x <code translate="no">.db</code> file in place. Keep the original database and an environment that can open it, export its data there, and import the data into a new database. Installing a new package does not migrate the old storage format. See <a href="#migrating-data-from-milvus-lite">Migrating data from Milvus Lite</a>.</p>
 </blockquote>
 </div>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Connect to Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">

@@ -54,7 +54,7 @@ title: Install Milvus Cluster with Helm
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">Install Helm CLI</a>.</p></li>
-<li><p><a href="/docs/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">Create a K8s cluster</a>.</p></li>
+<li><p><a href="/docs/prerequisite-helm.md#how-can-i-start-a-k8s-cluster-locally-for-test-purposes">Create a K8s cluster</a>.</p></li>
 <li><p>Install a <a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>. You can check the installed StorageClass as follows.</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
@@ -165,7 +165,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 </ul>
 <p>For complete architecture details, refer to the <a href="/docs/architecture_overview.md">Architecture Overview</a>.</p>
 </div>
-<p><strong>Alternative message queues:</strong> To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see <a href="#Optional-dependencies">Optional dependencies</a>.</p>
+<p><strong>Alternative message queues:</strong> To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see <a href="#optional-dependencies">Optional dependencies</a>.</p>
 <p><strong>Next steps:</strong>
 The command above deploys Milvus with recommended configurations. For production use:</p>
 <ul>
@@ -435,7 +435,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
       </svg>
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f milvus_manifest.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Till now, you can follow steps <a href="#2-Check-Milvus-cluster-status">2</a> and <a href="#3-Connect-to-Milvus">3</a> of the online install to check the cluster status and forward a local port to Milvus.</p>
+<p>Till now, you can follow steps <a href="#2-check-milvus-cluster-status">2</a> and <a href="#3-connect-to-milvus">3</a> of the online install to check the cluster status and forward a local port to Milvus.</p>
 <h2 id="Upgrade-running-Milvus-cluster" class="common-anchor-header">Upgrade running Milvus cluster<button data-href="#Upgrade-running-Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
