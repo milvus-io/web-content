@@ -26,12 +26,6 @@ encode_documents(
 
 A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html) data structure, which is a sparse matrix format commonly used for document embedding representations.
 
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
-
 ## Example
 
 ```python
@@ -49,7 +43,7 @@ docs = [
 
 bm25_ef = BM25EmbeddingFunction(analyzer)
 
-# Fit the model on the corpus to get the statstics of the docs.
+# Fit the model on the corpus to get the statistics of the docs.
 bm25_ef.fit(docs)
 
 # Create embeddings for the documents

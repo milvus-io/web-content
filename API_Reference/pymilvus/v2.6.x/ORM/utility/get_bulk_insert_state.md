@@ -75,7 +75,7 @@ A **[BulkInsertState](BulkInsertState.md)** object has the following fields
 
 - **state** (*int*)
 
-    The state of the specified bulk_insert task in integers. Possible values are the following integers:
+    The state of the specified bulk_insert task as a string. Possible values are the following:
 
     - **0**: Indicates that the task is in a pending state
 
@@ -93,7 +93,7 @@ A **[BulkInsertState](BulkInsertState.md)** object has the following fields
 
 - **state_name** (*str*)
 
-    The state of the specified bulk_insert task in integers. Possible values are the following integers:
+    The state of the specified bulk_insert task as a string. Possible values are the following:
 
     - **Pending**: Indicates that the task is in a pending state
 
@@ -151,7 +151,7 @@ A **[BulkInsertState](BulkInsertState.md)** object has the following fields
 
 - **id_ranges** (*google._upb._message.RepeatedScalarContainer*)
 
-- The ID of the inserted entities in a range.
+    The ID of the inserted entities in a range.
 
 - **files** (str)
 

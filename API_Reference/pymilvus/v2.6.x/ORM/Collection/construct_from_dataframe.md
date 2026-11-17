@@ -15,8 +15,8 @@ This operation creates a collection with the specified dataframe.
 ```python
 construct_from_dataframe(
     name: str, 
-    primary_field: str,
-    dataframe: pandas.DataFrame
+    dataframe: pandas.DataFrame, 
+    **kwargs,
 )
 ```
 
@@ -27,12 +27,6 @@ construct_from_dataframe(
     **[REQUIRED]**
 
     The name of the collection to create.
-
-- **primary_field** (*string*) -
-
-    **[REQUIRED]**
-
-    The name of the primary field. It should be one of the column labels in the following dataframe.
 
 - **dataframe** (*pandas.DataFrame*) 
 
@@ -54,6 +48,14 @@ construct_from_dataframe(
         ]
     })
     ```
+
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **primary_field** (*string*) -
+
+        The name of the primary field. It should be one of the column labels in the specified dataframe.
 
 **RETURN TYPE:**
 

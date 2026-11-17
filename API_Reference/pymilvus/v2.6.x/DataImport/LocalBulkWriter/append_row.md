@@ -25,6 +25,15 @@ append_row(
 
     The keys and their values in the dictionary should match the schema referenced in the current **[LocalBulkWriter](LocalBulkWriter.md)**.
 
+**RETURN TYPE:**
+
+*None*
+
+**RETURNS:**
+
+None
+
+
 ## Example
 
 ```python

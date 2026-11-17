@@ -142,6 +142,22 @@ search(
 
     Setting this value makes Milvus search within the entities flushed the specified seconds ago.
 
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **_async** (*bool*) -
+
+        Whether to invoke the search asynchronously. When set to **True**, a **SearchFuture** is returned instead of the results directly. The value defaults to **False**.
+
+    - **_callback** (*function*) -
+
+        The callback function invoked after the server responds successfully. This takes effect only when **_async** is set to **True**.
+
+    - **offset** (*int*) -
+
+        The number of records to skip in the search result, for pagination.
+
 **RETURN TYPE:**
 
 *SearchResult*

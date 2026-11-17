@@ -27,7 +27,7 @@ hybridts_to_unixtime(
 **RETURNS:**
 A UNIX epoch time, which is an integer that represents the time elapsed since January 1, 1970 (midnight UTC/GMT) in seconds.
 
-## **Examples**
+## Example
 
 ```python
 import time

@@ -6,22 +6,26 @@ This operation updates replication configuration across Milvus clusters. This is
 
 ```python
 client.update_replicate_configuration(
-    clusters: List[dict] = None,
-    cross_cluster_topology: List[dict] = None,
+    clusters: List[dict],
+    cross_cluster_topology: Optional[List[dict]] = None,
     force_promote: bool = False,
-    timeout: float = None
+    timeout: Optional[float] = None
 )
 ```
 
 **PARAMETERS:**
 
-- **clusters** (*List[dict]* | *None*) -
+- **clusters** (*List[dict]*) -
+
+    **[REQUIRED]**
 
     A list of cluster configurations. Each dict should contain `cluster_id` (str), `connection_param` (dict with `uri` and `token`), and optionally `pchannels` (List[str]).
 
 - **cross_cluster_topology** (*List[dict]* | *None*) -
 
     A list of replication relationships. Each dict should contain `source_cluster_id` (str) and `target_cluster_id` (str).
+
+    The value defaults to **None**.
 
 - **force_promote** (*bool*) -
 
@@ -43,7 +47,7 @@ The status of the operation.
 
 - **ParamError**
 
-    This exception will be raised when neither `clusters` nor `cross_cluster_topology` is provided.
+    This exception will be raised when `clusters` is not provided.
 
 - **[MilvusException](../../Exceptions/MilvusException.md)**
 

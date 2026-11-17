@@ -77,7 +77,7 @@ An **AzureConnectParam** object.
 
 - **Exception**
 
-    This exception will be raised if the connection fails.
+    This exception will be raised when the connection to the remote storage fails.
 
 ## Example
 

@@ -36,7 +36,7 @@ An incremental time interval in milliseconds.
 **RETURNS:**
 A hybrid timestamp, which is a non-negative integer ranging from **0** to **18446744073709551615**.
 
-## **Examples**
+## Example
 
 ```python
 import time

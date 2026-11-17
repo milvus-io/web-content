@@ -12,9 +12,9 @@ fit(
 
 **PARAMETERS:**
 
-- **corpus** (*string*)
+- **corpus** (*List[str]*)
 
-    A list of strings that represent the documents used to fit the model
+    A list of strings that represent the documents used to fit the model.
 
 **RETURN TYPE:**
 
@@ -23,12 +23,6 @@ fit(
 **RETURNS:**
 
 None
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
 
 ## Example
 
@@ -47,6 +41,6 @@ corpus = [
 
 bm25_ef = BM25EmbeddingFunction(analyzer)
 
-# Fit the model on the corpus to get the statstics of the corpus.
+# Fit the model on the corpus to get the statistics of the corpus.
 bm25_ef.fit(corpus)
 ```

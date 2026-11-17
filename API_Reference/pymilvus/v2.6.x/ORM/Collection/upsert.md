@@ -23,6 +23,7 @@ upsert(
     data: List | pandas.DataFrame | Dict, 
     partition_name: str | None, 
     timeout: float, 
+    **kwargs
 )
 ```
 
@@ -97,6 +98,14 @@ upsert(
 - **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **partial_update** (*bool*) -
+
+        Whether this is a partial update operation. When set to **True**, only the specified fields are updated while the other fields remain unchanged. The value defaults to **False**.
 
 **RETURN TYPE:**
 

@@ -15,8 +15,9 @@ This operation loads the data of the current collection into memory.
 ```python
 load(
     partition_names: list[str] | None, 
-    replica_number: int, 
+    replica_number: int | None, 
     timeout: float | None, 
+    **kwargs
 )
 ```
 
@@ -36,9 +37,9 @@ This operation is non-blocking. You can call `utility.wait_for_loading_complete(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **replica_number** (*int*) -
+- **replica_number** (*int* | *None*) -
 
-    The number of replicas to create. The value defaults to 1 and ranges from 1 to the number of query nodes available. Setting this to `1` indicates that segments in the current collection or any specified partitions are to be loaded onto one query node.
+    The number of replicas to create. The value defaults to **None**, indicating that the server decides the number of replicas, which ranges from 1 to the number of query nodes available. Setting this to `1` indicates that segments in the current collection or any specified partitions are to be loaded onto one query node.
 
     <div class="alert note">
     
@@ -71,6 +72,18 @@ This operation is non-blocking. You can call `utility.wait_for_loading_complete(
 - **skip_load_dynamic_field** (*bool*) - 
 
     Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
+
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **_async** (*bool*) -
+
+        Whether to invoke the load asynchronously. The value defaults to **False**.
+
+    - **refresh** (*bool*) -
+
+        Whether to renew the segment list of this collection before loading. The value defaults to **False**.
 
 **RETURN TYPE:**
 

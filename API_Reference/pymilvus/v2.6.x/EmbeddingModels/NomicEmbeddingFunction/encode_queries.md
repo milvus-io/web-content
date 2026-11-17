@@ -24,18 +24,6 @@ encode_queries(
 
 A list where each element is a NumPy array.
 
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when `api_key` is not provided and the `NOMIC_API_KEY` environment variable is also not set.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
-
 ## Example
 
 ```python
@@ -43,7 +31,6 @@ from pymilvus.model.dense import NomicEmbeddingFunction
 
 ef = NomicEmbeddingFunction(
     model_name="nomic-embed-text-v1.5", # Defaults to \`nomic-embed-text-v1.5\`
-    api_key="NOMIC_API_KEY" # Provide your Nomic API key
 )
 
 queries = ["When was artificial intelligence founded", 

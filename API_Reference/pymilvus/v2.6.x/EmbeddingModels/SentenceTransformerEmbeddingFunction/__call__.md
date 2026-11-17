@@ -2,7 +2,7 @@
 
 This operation in [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-To prevent potential errors when directly using the **\_\_call()\_\_** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md).
+To prevent potential errors when directly using the **\_\_call\_\_()** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md).
 
 ## Request Syntax
 
@@ -30,17 +30,10 @@ sentence_transformer_ef(
 
 A list where each element is a NumPy array.
 
-**EXCEPTIONS:**
 
 - **ImportError**
 
     This exception will be raised when the necessary sentence-transformers module is not installed.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
 
 ## Example
 

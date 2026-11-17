@@ -25,6 +25,10 @@ VolumeBulkWriter.append_row(
 
 This method does not return a value.
 
+**RETURNS:**
+
+None
+
 **EXCEPTIONS:**
 
 - **[MilvusException](../../Exceptions/MilvusException.md)**

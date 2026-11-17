@@ -18,7 +18,16 @@ commit(
 
 **PARAMETERS:**
 
-This method accepts no parameters. The flush operation runs synchronously, and the generated files are uploaded to the remote bucket after the flush completes.
+This method accepts `**kwargs` and forwards them to the internal flush operation. The flush operation runs synchronously, and the generated files are uploaded to the remote bucket after the flush completes. The upload callback is fixed to the writer's internal uploader, so a user-supplied `call_back` is ignored.
+
+**RETURN TYPE:**
+
+*None*
+
+**RETURNS:**
+
+None
+
 
 ## Example
 
@@ -56,10 +65,7 @@ writer.append_row(
 )
 
 # Commit the appended data
-def callback():
-    print("Commit completes")
-
-writer.commit(call_back=callback)
+writer.commit()
 ```
 
 ## Related classes and methods

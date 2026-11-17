@@ -53,7 +53,6 @@ Each `RerankResult` object contains:
 
 - `index`: The index of the document in the original documents list.
 
-**EXCEPTIONS:**
 
 - **ImportError**
 

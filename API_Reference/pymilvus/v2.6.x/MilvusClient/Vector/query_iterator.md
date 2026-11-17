@@ -9,12 +9,12 @@ query_iterator(
     collection_name: str,
     batch_size: Optional[int] = 1000,
     limit: Optional[int] = UNLIMITED,
-    filter: str,
+    filter: Optional[str] = "",
     output_fields: Optional[List[str]] = None,
-    timeout: Optional[float] = None,
     partition_names: Optional[List[str]] = None,
+    timeout: Optional[float] = None,
     **kwargs,
-) -> List[dict]
+) -> QueryIterator
 ```
 
 **PARAMETERS:**
@@ -35,9 +35,9 @@ query_iterator(
 
 - **filter** (*str*) -
 
-    **[REQUIRED]**
-
     A scalar filtering condition to filter matching entities. 
+
+    The value defaults to an empty string, indicating that no condition applies.
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
@@ -89,7 +89,7 @@ query_iterator(
 
         A valid timestamp. 
 
-        If this parameter is set, MilvusZilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
+        If this parameter is set, Milvus/Zilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
 
         <div class="alert note">
         
@@ -101,7 +101,7 @@ query_iterator(
 
         A period of time in seconds.
 
-        The value defaults to **5**. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
+        The value defaults to **5**. If this parameter is set, Milvus/Zilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
 
         <div class="alert note">
         
@@ -116,14 +116,6 @@ query_iterator(
         You can use this parameter in combination with `limit` to enable pagination.
 
         The sum of this value and `limit` should be less than or equal to 16,384. 
-
-    - **limit** (*int*) -
-
-        The number of records to return in the query result.
-
-        You can use this parameter in combination with `offset` to enable pagination.
-
-        The sum of this value and `offset` should be less than or equal to 16,384. 
 
 **RETURN TYPE:**
 

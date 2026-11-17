@@ -50,25 +50,7 @@ add_connection(
 
         Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
-        This should be used along with **password**.
-
-    - **password** (*string*) -
-
-        A valid password used to connect to the specified Milvus instance.
-
-        Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
-
-        This should be used along with **user**.
-
-    - **token** (string) -
-
-        A valid access token to access the specified Milvus instance. This can be used as an alternative to setting **user** and **password** separately.
-
-        When setting this field, notice that:
-
-        A valid token should be a pair of username and password used to access the target cluster, joined by a colon (:). For example, you can set this to `username:p@ssw0rd`.
-
-        Use this if authentication has been enabled on the target Milvus instance. To enable authentication, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
+        This should be used along with **password** in the **connect()** method.
 
 **RETURN TYPE:**
 

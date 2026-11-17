@@ -80,7 +80,7 @@ A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
 - **state** (*int*)
 
-    The state of the specified bulk_insert task in integers. Possible values are the following integers:
+    The state of the specified bulk_insert task as a string. Possible values are the following:
 
     - **0**: Indicates that the task is in a pending state
 
@@ -98,7 +98,7 @@ A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
 - **state_name** (*str*)
 
-    The state of the specified bulk_insert task in integers. Possible values are the following integers:
+    The state of the specified bulk_insert task as a string. Possible values are the following:
 
     - **Pending**: Indicates that the task is in a pending state
 
@@ -156,7 +156,7 @@ A list of **[BulkInsertState](BulkInsertState.md)** objects.
 
 - **id_ranges** (*google._upb._message.RepeatedScalarContainer*)
 
-- The ID of the inserted entities in a range.
+    The ID of the inserted entities in a range.
 
 - **files** (str)
 
@@ -194,7 +194,7 @@ res = utility.list_bulk_insert_tasks()
 
 ## Related operations
 
-The following operations are related to `list_bulk_insert_state()`:
+The following operations are related to `list_bulk_insert_tasks()`:
 
 - [BulkInsertState](BulkInsertState.md)
 

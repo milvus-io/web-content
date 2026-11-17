@@ -32,17 +32,32 @@ flush_all(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **db** (*str*) -
+
+        The database to flush.
+
+    - **_async** (*bool*) -
+
+        Whether to invoke the flush asynchronously. The value defaults to **False**.
+
 **RETURN TYPE:**
 
-*NoneType*
+*FlushFuture* | *NoneType*
 
 **RETURNS:**
 
-None
+A **FlushFuture** object when **_async** is set to **True**; otherwise, **None**.
 
 **EXCEPTIONS:**
 
-N/A
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 
 ## Example
 

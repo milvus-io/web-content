@@ -31,16 +31,6 @@ ef(
 
 A list where each element is a NumPy array.
 
-**EXCEPTIONS:**
-
-*None*
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
-
 ## Example
 
 ```python
@@ -48,7 +38,6 @@ from pymilvus.model.dense import NomicEmbeddingFunction
 
 ef = NomicEmbeddingFunction(
     model_name="nomic-embed-text-v1.5", # Defaults to \`nomic-embed-text-v1.5\`
-    api_key="NOMIC_API_KEY" # Provide your Nomic API key
 )
 
 docs = [

@@ -28,7 +28,7 @@ A `CollectionSchema` object
 
 **EXCEPTIONS:**
 
-- `FunctionIncorrectType`
+- **ParamError**
 
     This exception will be raised when the `function` parameter is of the incorrect type.
 

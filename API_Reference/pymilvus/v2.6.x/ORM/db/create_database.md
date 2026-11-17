@@ -36,6 +36,14 @@ create_database(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **properties** (*dict*) -
+
+        Database properties. The value defaults to **None**. You can use this to configure the database replica number with the `database.replica.number` key.
+
 **RETURN TYPE:**
 
 None
@@ -46,7 +54,10 @@ None
 
 **EXCEPTIONS:**
 
-None
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 
 ## Example
 

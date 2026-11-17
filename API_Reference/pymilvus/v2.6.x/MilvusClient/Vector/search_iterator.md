@@ -10,8 +10,8 @@ search_iterator(
     collection_name: str,
     data: Union[List[list], list],
     batch_size: Optional[int] = 1000,
-    filter: str = "",
-    limit: int = 10,
+    filter: Optional[str] = None,
+    limit: Optional[int] = UNLIMITED,
     output_fields: Optional[List[str]] = None,
     search_params: Optional[dict] = None,
     timeout: Optional[float] = None,
@@ -19,7 +19,7 @@ search_iterator(
     anns_field: Optional[str] = None,
     round_decimal: int = -1,
     **kwargs,
-) -> List[List[dict]]
+) -> Union[SearchIteratorV2, SearchIterator]
 ```
 
 **PARAMETERS:**
@@ -46,13 +46,15 @@ search_iterator(
 
     A scalar filtering condition to filter matching entities. 
 
-    The value defaults to an empty string, indicating that no condition applies.
+    The value defaults to **None**, indicating that no condition applies.
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
 - **limit** (*int*) -
 
     The total number of entities to return.
+
+    The value defaults to **UNLIMITED**, indicating that all matching entities are returned.
 
     <div class="alert warning">
 
@@ -84,7 +86,7 @@ search_iterator(
 
         - **range_filter**  (float) -  
 
-            Refines the search to vectors within a specific similarity range. When the collection's metric type to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
+            Refines the search to vectors within a specific similarity range. When the collection's metric type is set to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
 
         - **max_empty_result_buckets** (*int*)
 

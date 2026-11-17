@@ -26,18 +26,6 @@ encode_queries(
 
 A [scipy.sparse.csr_array](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html) data structure, which is a sparse matrix format commonly used for query embedding representations.
 
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
-
-**EXCEPTIONS:**
-
-- **ValueError**
-
-    This exception will be raised when an unsupported operation is attempted on the embedding object.
-
 ## Example
 
 ```python
@@ -52,7 +40,7 @@ bm25_ef = BM25EmbeddingFunction(analyzer)
 queries = ["When was artificial intelligence founded", 
            "Where was Alan Turing born?"]
 
-# Fit the model on the queries to get the statstics of the queries.
+# Fit the model on the queries to get the statistics of the queries.
 bm25_ef.fit(queries)
 
 query_embeddings = bm25_ef.encode_queries(queries)

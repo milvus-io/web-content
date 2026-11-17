@@ -7,8 +7,8 @@ This operation adds index parameters for a specific field in a collection.
 ```python
 IndexParams.add_index(
     field_name: str,
-    index_type: str,
-    index_name: str,
+    index_type: str = "",
+    index_name: str = "",
     metric_type: str,
     params: dict
 ) -> None

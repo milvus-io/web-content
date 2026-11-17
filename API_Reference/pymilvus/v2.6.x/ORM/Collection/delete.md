@@ -38,6 +38,14 @@ delete(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **consistency_level** (*str* | *int*) -
+
+        The consistency level to use when deleting entities from the collection. Possible values are **Strong** (**0**), **Session** (**1**), **Bounded** (**2**), and **Eventually** (**3**).
+
 **RETURN TYPE:**
 
 *MutationResult*

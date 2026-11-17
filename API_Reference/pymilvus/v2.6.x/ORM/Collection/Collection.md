@@ -88,6 +88,12 @@ Collection(
 
     </div>
 
+- **properties** (*dict*)
+
+    Collection properties.
+
+    The value defaults to **None**, indicating that no additional properties are set.
+
 - **timeout** (*float* | *None*)  
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.

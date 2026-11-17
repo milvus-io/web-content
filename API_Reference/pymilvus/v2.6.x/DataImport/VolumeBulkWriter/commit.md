@@ -12,13 +12,17 @@ VolumeBulkWriter.commit(
 
 **PARAMETERS:**
 
-This method accepts no parameters. The flush operation runs synchronously, and the generated files are uploaded to the remote volume after the flush completes.
+This method accepts `**kwargs` and forwards them to the internal flush operation. The flush operation runs synchronously, and the generated files are uploaded to the remote volume after the flush completes. The upload callback is fixed to the writer's internal uploader, so a user-supplied `call_back` is ignored.
 
 **RETURN TYPE:**
 
 *None*
 
 This method does not return a value.
+
+**RETURNS:**
+
+None
 
 **EXCEPTIONS:**
 

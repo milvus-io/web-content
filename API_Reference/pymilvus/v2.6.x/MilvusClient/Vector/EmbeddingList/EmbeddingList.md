@@ -12,15 +12,15 @@ Constructs an empty embedding list or a list of given vector embeddings.
 
 ```python
 EmbeddingList(
-    embeddings: Optional[Union[np.ndarray, List[np.ndarray]],
-    dim: Optional[int],
-    dtype: Optional[Union[np.dtype, str, DataType]]
+    embeddings: Optional[Union[np.ndarray, List[np.ndarray]]] = None,
+    dim: Optional[int] = None,
+    dtype: Optional[Union[np.dtype, str, DataType]] = None,
 )
 ```
 
 **PARAMETERS:**
 
-- **embeddings** (*np.ndarray, List[np.ndarray*) -
+- **embeddings** (*Optional[Union[np.ndarray, List[np.ndarray]]]*) -
 
     A list of vector embeddings, which can be either of the following types:
 
@@ -38,7 +38,7 @@ EmbeddingList(
 
 - **dtype** (*np.dtype, str, [DataType](../../Collections/DataType.md)*) -  
 
-    - **np.dtype**, such as `np.float32`, `np.float16`, or `np.unit8`
+    - **np.dtype**, such as `np.float32`, `np.float16`, or `np.uint8`
 
     - **string**, such as `'float32'`, `'float16'`, or `'uint8'`
 
@@ -51,6 +51,20 @@ EmbeddingList(
 **RETURNS:**
 
 An **EmbeddingList** instance.
+
+**EXCEPTIONS:**
+
+- **ValueError**
+
+    This exception will be raised when the provided embeddings do not form a one-dimensional or two-dimensional array.
+
+- **TypeError**
+
+    This exception will be raised when the provided input is not an `np.ndarray` or a list.
+
+- **ParamError**
+
+    This exception will be raised when the specified data type cannot be parsed.
 
 ## Example
 

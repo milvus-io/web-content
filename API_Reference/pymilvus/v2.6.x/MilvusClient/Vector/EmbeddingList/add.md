@@ -7,13 +7,13 @@ This operation adds a single vector embedding to the current **[EmbeddingList](E
 ```python
 add(
     self,
-    embedding: Union[np.ndarray, List[Any]]
+    embedding: Union[np.ndarray, bytes, List[Any]]
 )
 ```
 
 **PARAMETERS:**
 
-- **embedding** (*np.ndarray, List[Any]*) - 
+- **embedding** (*np.ndarray, bytes, List[Any]*) - 
 
     The vector embedding that is to be added to the current **[EmbeddingList](EmbeddingList.md)** instance.
 

@@ -7,7 +7,7 @@ This operation loads the unloaded data of a loaded collection into memory.
 ```python
 refresh_load(
     collection_name: str,
-    timeout: Optional[str] = None
+    timeout: Optional[float] = None
 )
 ```
 

@@ -53,7 +53,6 @@ Each `RerankResult` object contains:
 
 - `index`: The index of the document in the original documents list.
 
-**EXCEPTIONS:**
 
 - **ImportError**
 
@@ -83,6 +82,6 @@ cohere_rf(query, documents)
 
 # [RerankResult(text="The Dartmouth Conference in 1956 is considered the birthplace of artificial intelligence as a field; here, John McCarthy and others coined the term 'artificial intelligence' and laid out its basic goals.", score=0.99691266, index=1),
 #  RerankResult(text="The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.", score=0.8578872, index=3),
-#  RerankResult(text='The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.', score=0.006514905766152258, index=3),
-#  RerankResult(text='In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.', score=0.3589146, index=0)]
+#  RerankResult(text='In 1951, British mathematician and computer scientist Alan Turing also developed the first program designed to play chess, demonstrating an early example of AI in game strategy.', score=0.3589146, index=0),
+#  RerankResult(text='In 1950, Alan Turing published his seminal paper, \'Computing Machinery and Intelligence,\' proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.', score=0.2065149, index=2)]
 ```

@@ -22,6 +22,7 @@ search(
     output_fields: list[str] | None,
     timeout: float | None,
     round_decimal: int,
+    **kwargs,
 )
 ```
 
@@ -104,6 +105,34 @@ search(
     The number of decimal places that Milvus rounds the calculated distances to.
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **_async** (*bool*) -
+
+        Whether to invoke the search asynchronously. The value defaults to **False**.
+
+    - **_callback** (*function*) -
+
+        The callback function invoked after the server responds successfully. This takes effect only when **_async** is set to **True**.
+
+    - **offset** (*int*) -
+
+        The number of records to skip in the search result, for pagination.
+
+    - **consistency_level** (*str* | *int*) -
+
+        The consistency level to use when searching within the collection. Possible values are **Strong**, **Bounded**, **Eventually**, **Session**, and **Customized**.
+
+    - **guarantee_timestamp** (*int*) -
+
+        The timestamp that Milvus uses as a reference during the search.
+
+    - **graceful_time** (*int*) -
+
+        A graceful period in seconds for the search.
 
 **RETURN TYPE:**
 

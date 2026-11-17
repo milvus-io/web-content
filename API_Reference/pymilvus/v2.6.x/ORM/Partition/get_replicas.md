@@ -84,7 +84,9 @@ Shards can be regarded as DML channels for distributed data write operations amo
 
 **EXCEPTIONS:**
 
-None
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
 
 ## Example
 

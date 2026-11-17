@@ -20,16 +20,17 @@ Using the **partition_names** parameter in the **load()** method of a **[Collect
 
 ```python
 load(
-    replica_number: int,
-    timeout: float | None
+    replica_number: int | None,
+    timeout: float | None,
+    **kwargs
 )
 ```
 
 **PARAMETERS:**
 
-- **replica_number** (*int*)
+- **replica_number** (*int* | *None*)
 
-    The number of replicas to load in the current partition. The default value is **1**, indicating that one replica in the current partition is loaded.
+    The number of replicas to load in the current partition. The default value is **None**, indicating that the server decides the number of replicas to load in the current partition.
 
 - **timeout** (*float* | *None*)  
 
@@ -58,6 +59,18 @@ load(
 - **skip_load_dynamic_field** (*bool*) - 
 
     Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
+
+- **kwargs** -
+
+    Additional keyword arguments.
+
+    - **_async** (*bool*) -
+
+        Whether to invoke the load asynchronously. The value defaults to **False**.
+
+    - **refresh** (*bool*) -
+
+        Whether to renew the segment list of this collection before loading. The value defaults to **False**.
 
 **RETURN TYPE:**
 

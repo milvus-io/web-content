@@ -7,6 +7,9 @@ Creates an explicit replacement operation for a field during an upsert.
 ```python
 FieldOp.replace() -> FieldPartialUpdateOp
 ```
+**PARAMETERS:**
+
+N/A
 
 **RETURN TYPE:**
 

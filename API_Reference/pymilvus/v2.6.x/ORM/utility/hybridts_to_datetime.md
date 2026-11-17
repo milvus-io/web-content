@@ -33,9 +33,11 @@ A **datetime.datetime** object.
 
 **EXCEPTIONS:**
 
-N/A
+- **[MilvusException](../../Exceptions/MilvusException.md)**
 
-**EXAMPLE:**
+    This exception will be raised when the **tz** parameter is not of the `datetime.timezone` type.
+
+## Example
 
 ```python
 import time

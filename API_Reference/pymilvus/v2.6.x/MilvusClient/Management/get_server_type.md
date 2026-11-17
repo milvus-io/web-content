@@ -7,6 +7,9 @@ This operation returns the type of the connected Milvus server.
 ```python
 client.get_server_type() -> str
 ```
+**PARAMETERS:**
+
+N/A
 
 **RETURN TYPE:**
 
