@@ -31,7 +31,7 @@ GetRestoreSnapshotStateResp result = await client.GetRestoreSnapshotStateAsync(r
 
 A **GetRestoreSnapshotStateResp** object.
 
-- `JobInfo` (*RestoreSnapshotJobInfo*) -
+- **JobInfo** (*RestoreSnapshotJobInfo*) -
 
     The restore job information, including state, progress, and failure reason. See [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
@@ -47,6 +47,7 @@ A **GetRestoreSnapshotStateResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Snapshot;
 using Milvus.Client.V2.Responses.Snapshot;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

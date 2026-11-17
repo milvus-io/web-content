@@ -40,27 +40,27 @@ DescribeSnapshotResp result = await client.DescribeSnapshotAsync(request);
 
 A **DescribeSnapshotResp** object.
 
-- `Name` (*string*) -
+- **Name** (*string*) -
 
     The name of the snapshot.
 
-- `Description` (*string*) -
+- **Description** (*string*) -
 
     The description of the snapshot.
 
-- `CollectionName` (*string*) -
+- **CollectionName** (*string*) -
 
     The name of the collection the snapshot belongs to.
 
-- `PartitionNames` (*IReadOnlyList\<string\>*) -
+- **PartitionNames** (*IReadOnlyList\<string\>*) -
 
     The names of the partitions included in the snapshot.
 
-- `CreateTs` (*long*) -
+- **CreateTs** (*long*) -
 
     The creation timestamp of the snapshot.
 
-- `S3Location` (*string*) -
+- **S3Location** (*string*) -
 
     The S3 location of the snapshot data.
 
@@ -76,6 +76,7 @@ A **DescribeSnapshotResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Snapshot;
 using Milvus.Client.V2.Responses.Snapshot;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

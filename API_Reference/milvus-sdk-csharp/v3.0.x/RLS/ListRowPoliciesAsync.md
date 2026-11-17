@@ -35,39 +35,39 @@ ListRowPoliciesResp result = await client.ListRowPoliciesAsync(request);
 
 A **ListRowPoliciesResp** object.
 
-- `DbName` (*string*) -
+- **DbName** (*string*) -
 
     The database the collection belongs to.
 
-- `CollectionName` (*string*) -
+- **CollectionName** (*string*) -
 
     The name of the collection the row policies belong to.
 
-- `Policies` (*IReadOnlyList\<RowPolicyInfo\>*) -
+- **Policies** (*IReadOnlyList\<RowPolicyInfo\>*) -
 
     The row policies of the collection. Each **RowPolicyInfo** exposes:
 
-    - `PolicyName` (*string*) -
+    - **PolicyName** (*string*) -
 
         The name of the row policy.
 
-    - `PolicyType` (*RowPolicyType*) -
+    - **PolicyType** (*RowPolicyType*) -
 
         The type of the row policy. See [RowPolicyType](RowPolicyType.md).
 
-    - `Actions` (*IReadOnlyList\<RowPolicyAction\>*) -
+    - **Actions** (*IReadOnlyList\<RowPolicyAction\>*) -
 
         The actions governed by the policy. See [RowPolicyAction](RowPolicyAction.md).
 
-    - `UsingExpr` (*string*) -
+    - **UsingExpr** (*string*) -
 
         The expression used to filter rows visible to a principal.
 
-    - `CheckExpr` (*string*) -
+    - **CheckExpr** (*string*) -
 
         The expression used to validate rows written by a principal.
 
-    - `Description` (*string*) -
+    - **Description** (*string*) -
 
         The policy description.
 
@@ -83,6 +83,7 @@ A **ListRowPoliciesResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Rls;
 using Milvus.Client.V2.Responses.Rls;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

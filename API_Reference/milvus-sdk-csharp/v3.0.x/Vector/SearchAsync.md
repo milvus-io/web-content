@@ -163,7 +163,7 @@ SearchResp
 
 - **GroupByFieldValue** (*FieldData?*) -
 
-    The group-by field value for each returned row, populated when the search used `SearchParameters.GroupByField`.
+    The group-by field value for each returned row, populated when the search used `SearchParameters.GroupByField`. See [FieldData](FieldData.md).
 
 - **AllSearchCount** (*long?*) -
 

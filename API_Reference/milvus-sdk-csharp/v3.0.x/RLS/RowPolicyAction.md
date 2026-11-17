@@ -60,6 +60,7 @@ public enum RowPolicyAction
 ```csharp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Rls;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

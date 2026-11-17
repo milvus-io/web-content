@@ -35,7 +35,7 @@ ListRefreshExternalCollectionJobsResp result = await client.ListRefreshExternalC
 
 A **ListRefreshExternalCollectionJobsResp** object.
 
-- `Jobs` (*IReadOnlyList\<RefreshExternalCollectionJobInfo\>*) -
+- **Jobs** (*IReadOnlyList\<RefreshExternalCollectionJobInfo\>*) -
 
     The list of external-collection refresh jobs. Each entry is a [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
@@ -51,6 +51,7 @@ A **ListRefreshExternalCollectionJobsResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
 using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

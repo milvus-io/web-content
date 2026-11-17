@@ -20,7 +20,7 @@ public sealed class HighlightResult
 
     The per-hit highlight data, flattened across all queries in the same order as the search hits.
 
-**MilvusHighlightData:**
+## MilvusHighlightData
 
 The highlight fragments and scores for a single query of a highlighted field.
 

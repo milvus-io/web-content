@@ -59,6 +59,7 @@ ListDatabasesResp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Database;
 using Milvus.Client.V2.Responses.Database;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

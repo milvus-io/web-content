@@ -45,7 +45,7 @@ PinSnapshotDataResp result = await client.PinSnapshotDataAsync(request);
 
 A **PinSnapshotDataResp** object.
 
-- `PinId` (*long*) -
+- **PinId** (*long*) -
 
     The pin ID, which can be passed to `UnpinSnapshotDataAsync()` to release the pin.
 
@@ -61,6 +61,7 @@ A **PinSnapshotDataResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Snapshot;
 using Milvus.Client.V2.Responses.Snapshot;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

@@ -49,7 +49,7 @@ RestoreSnapshotResp result = await client.RestoreSnapshotAsync(request);
 
 A **RestoreSnapshotResp** object.
 
-- `JobId` (*long*) -
+- **JobId** (*long*) -
 
     The restore job ID, which can be passed to `GetRestoreSnapshotStateAsync()` to poll progress.
 
@@ -65,6 +65,7 @@ A **RestoreSnapshotResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Snapshot;
 using Milvus.Client.V2.Responses.Snapshot;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

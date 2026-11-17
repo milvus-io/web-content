@@ -24,6 +24,7 @@ The assembly version of the `Milvus.Client.V2` package (e.g. `3.0.0.0`).
 
 ```csharp
 using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

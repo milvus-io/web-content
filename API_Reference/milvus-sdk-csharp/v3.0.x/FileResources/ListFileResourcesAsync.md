@@ -26,19 +26,19 @@ ListFileResourcesResp result = await client.ListFileResourcesAsync(request);
 
 A **ListFileResourcesResp** object.
 
-- `Resources` (*IReadOnlyList\<FileResourceInfo\>*) -
+- **Resources** (*IReadOnlyList\<FileResourceInfo\>*) -
 
     The file resources attached to the collection. Each **FileResourceInfo** exposes:
 
-    - `Id` (*long*) -
+    - **Id** (*long*) -
 
         The ID of the file resource.
 
-    - `Name` (*string*) -
+    - **Name** (*string*) -
 
         The name of the file resource.
 
-    - `Path` (*string*) -
+    - **Path** (*string*) -
 
         The path of the file resource.
 
@@ -54,6 +54,7 @@ A **ListFileResourcesResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
 using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

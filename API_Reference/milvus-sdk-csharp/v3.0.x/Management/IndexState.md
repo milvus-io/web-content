@@ -46,6 +46,7 @@ public enum IndexState
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Index;
 using Milvus.Client.V2.Responses.Index;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

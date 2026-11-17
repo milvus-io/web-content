@@ -73,6 +73,7 @@ GetPartitionStatsResp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Partition;
 using Milvus.Client.V2.Responses.Partition;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

@@ -68,6 +68,7 @@ DescribeAliasResp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Aliases;
 using Milvus.Client.V2.Responses.Aliases;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

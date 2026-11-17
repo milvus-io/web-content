@@ -5,73 +5,202 @@ Hierarchical bucket-aggregation input for `SearchAsync()`: groups matching entit
 ```csharp
 public sealed class SearchAggregation
 {
-    public IReadOnlyList<string> Fields { get; set; }
-    public int Size { get; set; }
-    public IReadOnlyDictionary<string, AggregationMetricSpec> Metrics { get; set; }
-    public IReadOnlyList<AggregationOrder> Order { get; set; }
-    public AggregationTopHits TopHits { get; set; }
-    public SearchAggregation SubAggregation { get; set; }
+    public IList<string> Fields { get; }
+    public long Size { get; set; }
+    public IDictionary<string, AggregationMetricSpec> Metrics { get; }
+    public IList<AggregationOrder> Order { get; }
+    public AggregationTopHits? TopHits { get; set; }
+    public SearchAggregation? SubAggregation { get; set; }
     public long SearchSize { get; set; }
 }
 ```
 
-**FIELDS:**
+**PARAMETERS:**
 
-- `Fields` - The group-by field names. At least one is required.
+- `Fields` (*IList\<string\>*) -
 
-- `Size` - The number of buckets to return.
+    The group-by field names. At least one is required. Entries are added via the collection-initializer syntax `Fields = { ... }`.
 
-- `Metrics` - Metric aggregations keyed by alias.
+- `Size` (*long*) -
 
-- `Order` - Ordering rules for the returned buckets; a key can be a metric alias, `_count`, or `_key`.
+    The number of buckets to return.
 
-- `TopHits` - Top-hit documents returned per bucket.
+- `Metrics` (*IDictionary\<string, AggregationMetricSpec\>*) -
 
-- `SubAggregation` - A nested sub-aggregation (up to four levels).
+    Metric aggregations keyed by alias. Entries are added via the collection-initializer syntax `Metrics = { ... }`.
 
-- `SearchSize` - The candidate buckets searched at this level; `0` means `Size`.
+- `Order` (*IList\<AggregationOrder\>*) -
+
+    Ordering rules for the returned buckets; a key can be a metric alias, `_count`, or `_key`. Entries are added via the collection-initializer syntax `Order = { ... }`.
+
+- `TopHits` (*AggregationTopHits?*) -
+
+    Top-hit documents returned per bucket.
+
+- `SubAggregation` (*SearchAggregation?*) -
+
+    A nested sub-aggregation (up to four levels).
+
+- `SearchSize` (*long*) -
+
+    The candidate buckets searched at this level; `0` means `Size`.
 
 ## AggregationMetricOp
 
-- `Avg` - Average of the grouped field values.
+The operator used by a metric aggregation.
 
-- `Sum` - Sum of the grouped field values.
+```csharp
+public enum AggregationMetricOp
+{
+    Avg,
+    Sum,
+    Count,
+    Min,
+    Max
+}
+```
 
-- `Count` - Number of retained candidates per group.
+**Constants:**
 
-- `Min` - Minimum of the grouped field values.
+- **Avg**
 
-- `Max` - Maximum of the grouped field values.
+    Average of the grouped field values.
+
+- **Sum**
+
+    Sum of the grouped field values.
+
+- **Count**
+
+    Number of retained candidates per group.
+
+- **Min**
+
+    Minimum of the grouped field values.
+
+- **Max**
+
+    Maximum of the grouped field values.
 
 ## AggregationDirection
 
-- `Asc` - Ascending order.
+The sort direction of an aggregation bucket.
 
-- `Desc` - Descending order (default).
+```csharp
+public enum AggregationDirection
+{
+    Asc,
+    Desc
+}
+```
+
+**Constants:**
+
+- **Asc**
+
+    Ascending order.
+
+- **Desc**
+
+    Descending order (default).
 
 ## AggregationMetricSpec
 
-- `Op` - The aggregation operator (an `AggregationMetricOp`).
+A metric aggregation specification.
 
-- `FieldName` - The aggregated field name.
+```csharp
+public sealed class AggregationMetricSpec
+{
+    public AggregationMetricOp Op { get; set; }
+    public string FieldName { get; set; } = "";
+}
+```
+
+**PARAMETERS:**
+
+- `Op` (*AggregationMetricOp*) -
+
+    The aggregation operator.
+
+- `FieldName` (*string*) -
+
+    The aggregated field name.
 
 ## AggregationOrder
 
-- `Key` - A metric alias, `_count`, or `_key`.
+An ordering rule for the returned buckets.
 
-- `Direction` - The sort direction (an `AggregationDirection`).
+```csharp
+public sealed class AggregationOrder
+{
+    public string Key { get; set; } = "";
+    public AggregationDirection Direction { get; set; }
+    public bool NullFirst { get; set; }
+}
+```
+
+**PARAMETERS:**
+
+- `Key` (*string*) -
+
+    A metric alias, `_count`, or `_key`.
+
+- `Direction` (*AggregationDirection*) -
+
+    The sort direction.
+
+- `NullFirst` (*bool*) -
+
+    Whether buckets with a null key sort first. Defaults to `false`.
 
 ## AggregationTopHits
 
-- `Size` - The number of hits to return per bucket.
+Top-hit documents returned per bucket.
 
-- `Sort` - Optional sort rules (`AggregationSort` entries).
+```csharp
+public sealed class AggregationTopHits
+{
+    public long Size { get; set; }
+    public IList<AggregationSort> Sort { get; }
+}
+```
+
+**PARAMETERS:**
+
+- `Size` (*long*) -
+
+    The number of hits to return per bucket.
+
+- `Sort` (*IList\<AggregationSort\>*) -
+
+    Optional sort rules for the top hits. Entries are added via the collection-initializer syntax `Sort = { ... }`.
 
 ## AggregationSort
 
-- `FieldName` - The field used to sort top hits.
+A sort rule for top hits.
 
-- `Direction` - The sort direction (an `AggregationDirection`).
+```csharp
+public sealed class AggregationSort
+{
+    public string FieldName { get; set; } = "";
+    public AggregationDirection Direction { get; set; }
+    public bool NullFirst { get; set; }
+}
+```
+
+**PARAMETERS:**
+
+- `FieldName` (*string*) -
+
+    The field used to sort top hits.
+
+- `Direction` (*AggregationDirection*) -
+
+    The sort direction.
+
+- `NullFirst` (*bool*) -
+
+    Whether hits with a null field value sort first. Defaults to `false`.
 
 ## Example
 
@@ -90,13 +219,13 @@ using var client = new MilvusClientV2(new ConnectConfig
 
 var aggregation = new SearchAggregation
 {
-    Fields = ["category"],
+    Fields = { "category" },
     Size = 10,
-    Metrics = new Dictionary<string, AggregationMetricSpec>
+    Metrics =
     {
-        ["avg_price"] = new() { Op = AggregationMetricOp.Avg, FieldName = "price" }
+        ["avg_price"] = new AggregationMetricSpec { Op = AggregationMetricOp.Avg, FieldName = "price" }
     },
-    Order = [new AggregationOrder { Key = "_count", Direction = AggregationDirection.Desc }],
+    Order = { new AggregationOrder { Key = "_count", Direction = AggregationDirection.Desc } },
     TopHits = new AggregationTopHits { Size = 3 }
 };
 

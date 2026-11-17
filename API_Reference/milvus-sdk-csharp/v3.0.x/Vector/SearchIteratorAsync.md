@@ -123,6 +123,7 @@ The **SearchIterator** exposes the following members:
 ```csharp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Dql;
+using Milvus.Client.V2.Responses.Dql;
 using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig

@@ -201,6 +201,6 @@ SearchResp results = await client.SearchAsync(new SearchReq
     VectorFieldName = "embedding",
     Vectors = [new[] { 0.1f, 0.2f, 0.3f, 0.4f }],
     Limit = 10,
-    FunctionChains = [chain]
+    FunctionChains = { chain }
 });
 ```
