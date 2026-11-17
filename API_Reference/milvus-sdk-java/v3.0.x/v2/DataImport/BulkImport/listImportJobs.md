@@ -51,6 +51,12 @@ MilvusListImportRequest.builder()
 
     The name of the target collection of this operation.
 
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
 ## Example
 
 Lists import jobs for a collection in Milvus.
@@ -86,7 +92,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 // 2. List the import jobs of the collection
 MilvusListImportJobsRequest request = MilvusListImportJobsRequest.builder()

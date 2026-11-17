@@ -36,7 +36,13 @@ An UploadFilesResult instance that has the following methods:
 
 - `toString()`
 
-    Strigifies the UploadFilesResult instance.
+    Stringifies the UploadFilesResult instance.
+
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 

@@ -15,6 +15,7 @@ alterCollection(AlterCollectionReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .properties(Map<String, String> properties)
+    .property(String key, String value)
     .build()
 )
 ```
@@ -40,6 +41,10 @@ alterCollection(AlterCollectionReq.builder()
     - **mmap.enabled** -
 
         Whether to enable mmap for the raw data and indexes of all fields in the collection.
+
+- `property(String key, String value)`
+
+    Adds a single property to alter on the collection. The property values should be strings, with the same property keys as listed under `properties()`.
 
 **RETURNS:**
 

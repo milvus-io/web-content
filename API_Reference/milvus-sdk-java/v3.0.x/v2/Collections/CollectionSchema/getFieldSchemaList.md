@@ -10,6 +10,8 @@ public List<CreateCollectionReq.FieldSchema> getFieldSchemaList()
 
 *List\<CreateCollectionReq.FieldSchema\>*
 
+A list of [FieldSchema](../FieldSchema.md) objects containing the field schema of each field in the collection schema.
+
 **EXCEPTIONS:**
 
 - **[MilvusClientException](../../Client/MilvusClientException.md)**

@@ -22,7 +22,7 @@ None
 
 **RETURNS:**
 
-A **CreateCollectionReq.CollectionSchema** object.
+A **CreateCollectionReq.CollectionSchema** object. See [CollectionSchema](CollectionSchema/CollectionSchema.md).
 
 ## Example
 

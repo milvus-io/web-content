@@ -1,6 +1,6 @@
 # getTotalRowCount()
 
-This operation returns the total number of rows written by this LocalBulkWriter instance.
+This operation returns the total number of rows written by this [LocalBulkWriter](LocalBulkWriter.md) instance.
 
 ```java
 public Long getTotalRowCount()
@@ -12,7 +12,7 @@ public Long getTotalRowCount()
 
 **RETURNS:**
 
-The total number of rows written by this LocalBulkWriter instance.
+The total number of rows written by this [LocalBulkWriter](LocalBulkWriter.md) instance.
 
 **EXCEPTIONS:**
 

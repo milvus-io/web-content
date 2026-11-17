@@ -1,6 +1,6 @@
 # getBatchFiles()
 
-This operation returns a list of files passed to the current LocalBulkWriter instance.
+This operation returns a list of files passed to the current [LocalBulkWriter](LocalBulkWriter.md) instance.
 
 ```java
 public List<List<String>> getBatchFiles()
@@ -23,6 +23,12 @@ localBulkWriter.getBatchFiles()
 **RETURNS:**
 
 A list of file paths. Each inner list holds the column-based file paths for one batch of data.
+
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 

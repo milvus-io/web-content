@@ -1,6 +1,6 @@
 # getFunctions()
 
-This getter returns the list of functions defined in this FunctionScore object.
+This getter returns the list of functions defined in this [FunctionScore](FunctionScore.md) object.
 
 ```java
 public List<CreateCollectionReq.Function> getFunctions()

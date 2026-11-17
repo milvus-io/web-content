@@ -1,6 +1,6 @@
 # getParams()
 
-This getter returns the parameters map of this FunctionScore object.
+This getter returns the parameters map of this [FunctionScore](FunctionScore.md) object.
 
 ```java
 public Map<String, String> getParams()
