@@ -18,7 +18,7 @@ getFields()
 
 **RETURNS:**
 
-The return value will be the fields of the Struct elements in an Array of Structs.
+The return value will be the fields of the Struct elements in an Array of Structs. Each field is a [FieldSchema](../FieldSchema.md) object.
 
 ## Example
 

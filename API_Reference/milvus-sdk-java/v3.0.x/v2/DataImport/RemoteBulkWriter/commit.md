@@ -28,6 +28,12 @@ remoteBulkWriter.commit(
 
 This operation returns no value.
 
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
 ## Example
 
 ```java

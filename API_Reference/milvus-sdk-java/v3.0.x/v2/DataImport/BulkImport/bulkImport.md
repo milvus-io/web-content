@@ -66,6 +66,12 @@ MilvusImportRequest.builder()
 
     The list of string lists, each string list contains a singular row-based file path or multiple column-based file paths.
 
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
 ## Example
 
 Creates an import job for files accessible to Milvus.
@@ -101,7 +107,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 // 2. Import data files into the collection
 MilvusImportRequest request = MilvusImportRequest.builder()

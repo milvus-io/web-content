@@ -16,11 +16,16 @@ AddFunctionFieldReq.builder()
     .description(description)
     .dataType(dataType)
     .maxLength(maxLength)
+    .isPrimaryKey(isPrimaryKey)
+    .isPartitionKey(isPartitionKey)
+    .isClusteringKey(isClusteringKey)
+    .autoID(autoID)
     .dimension(dimension)
     .elementType(elementType)
     .maxCapacity(maxCapacity)
     .isNullable(isNullable)
     .defaultValue(defaultValue)
+    .enableDefaultValue(enableDefaultValue)
     .enableAnalyzer(enableAnalyzer)
     .analyzerParams(analyzerParams)
     .enableMatch(enableMatch)
@@ -59,6 +64,22 @@ AddFunctionFieldReq.builder()
 
     The maximum length for a variable-length field.
 
+- `isPrimaryKey(Boolean isPrimaryKey)`
+
+    Whether the new field is the primary key.
+
+- `isPartitionKey(Boolean isPartitionKey)`
+
+    Whether the new field is a partition key.
+
+- `isClusteringKey(Boolean isClusteringKey)`
+
+    Whether the new field is a clustering key.
+
+- `autoID(Boolean autoID)`
+
+    Whether the primary key field uses auto-generated IDs. Defaults to `Boolean.FALSE`.
+
 - `dimension(Integer dimension)`
 
     The dimension of the vector field.
@@ -78,6 +99,10 @@ AddFunctionFieldReq.builder()
 - `defaultValue(Object defaultValue)`
 
     The default value for a scalar field.
+
+- `enableDefaultValue(boolean enableDefaultValue)`
+
+    Whether the default value is passed to the server. Set by `defaultValue(Object)` automatically; use it to control the behavior explicitly.
 
 - `enableAnalyzer(Boolean enableAnalyzer)`
 

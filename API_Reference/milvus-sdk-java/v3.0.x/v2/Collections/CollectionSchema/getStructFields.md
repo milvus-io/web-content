@@ -10,6 +10,8 @@ public List<CreateCollectionReq.StructFieldSchema> getStructFields()
 
 *List\<CreateCollectionReq.StructFieldSchema\>*
 
+A list of [StructFieldSchema](../StructFieldSchema/StructFieldSchema.md) objects containing the struct field schema of each struct field in the collection schema.
+
 **EXCEPTIONS:**
 
 - **[MilvusClientException](../../Client/MilvusClientException.md)**

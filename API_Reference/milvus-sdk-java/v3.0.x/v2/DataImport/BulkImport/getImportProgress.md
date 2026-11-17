@@ -51,6 +51,12 @@ MilvusDescribeImportRequest.builder()
 
     The ID of an existing import job.
 
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
+
 ## Example
 
 Gets import progress for a job created in Milvus.
@@ -87,7 +93,6 @@ client.createCollection(CreateCollectionReq.builder()
         .collectionSchema(collectionSchema)
         .indexParams(Collections.singletonList(indexParam))
         .build());
-
 
 // 2. Import data files and get the job ID from the response
 MilvusImportRequest importRequest = MilvusImportRequest.builder()

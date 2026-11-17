@@ -47,6 +47,12 @@ A **GetCompactionStateResp** instance, which comprises the following parameters:
 
     The ID of the completed plan.
 
+**EXCEPTIONS:**
+
+- **[MilvusClientException](../Client/MilvusClientException.md)**
+
+    This exception will be raised when any error occurs during this operation.
+
 ## Example
 
 ```java

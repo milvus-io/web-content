@@ -25,7 +25,7 @@ CreateCollectionReq.CollectionSchema.builder()
 
 - `fieldSchemaList(List<CreateCollectionReq.FieldSchema> fieldSchemaList)` -
 
-    A list of **[FieldSchema](../FieldSchema.md)** objects that define the fields in the collection schema. A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of FieldSchema objects to define the full schema.
+    A list of **[FieldSchema](../FieldSchema.md)** objects that define the fields in the collection schema. A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of [FieldSchema](../FieldSchema.md) objects to define the full schema.
 
 - `structFields(List<CreateCollectionReq.StructFieldSchema> structFields)` -
 

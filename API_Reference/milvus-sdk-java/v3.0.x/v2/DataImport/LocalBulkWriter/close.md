@@ -1,6 +1,6 @@
 # close()
 
-This operation closes the current LocalBulkWriter instance.
+This operation closes the current [LocalBulkWriter](LocalBulkWriter.md) instance.
 
 ```java
 public void close()
@@ -23,6 +23,12 @@ localBulkWriter.close()
 **RETURNS:**
 
 This operation returns no value.
+
+**EXCEPTIONS:**
+
+- **Exception**
+
+    Raised when request validation, transport, or server execution fails. Inspect the exception message for the exact failure reason.
 
 ## Example
 
