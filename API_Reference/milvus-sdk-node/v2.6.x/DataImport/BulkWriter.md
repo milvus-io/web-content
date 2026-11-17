@@ -56,15 +56,15 @@ new BulkWriter({
 
     Flushes remaining rows and returns the generated file paths grouped by chunk.
 
-- `totalRowCount(): number`
+- `get totalRowCount(): number`
 
     Returns the total number of rows appended to the writer.
 
-- `bufferRowCount(): number`
+- `get bufferRowCount(): number`
 
     Returns the number of rows currently buffered but not yet committed.
 
-- `batchFiles(): string[][]`
+- `get batchFiles(): string[][]`
 
     Returns the file paths of the batches generated so far.
 
@@ -74,13 +74,116 @@ new BulkWriter({
 
 **EVENTS:**
 
-- **flush** (*[FlushEvent](FlushEvent.md)*)
+- **flush** (*FlushEvent*) -
 
-    Emitted each time the buffered data is flushed to files. Carries the generated file paths, the row count, and the chunk index.
+    Emitted each time the buffered data is flushed to files. The event is a **FlushEvent** with the following members.
+
+    - **files** (*string[]*) -
+
+        Lists the files generated for the flushed chunk.
+
+    - **rowCount** (*number*) -
+
+        Specifies how many rows were flushed.
+
+    - **chunkIndex** (*number*) -
+
+        Specifies the zero-based chunk index.
 
 **RETURNS:**
 
 *BulkWriter*
+
+## BulkWriterOptions
+
+This interface configures a **BulkWriter** instance, including schema validation, storage behavior, file format, chunk size, and local output path.
+
+```javascript
+interface BulkWriterOptions {
+    schema: BulkWriterSchema;
+    storage?: Storage;
+    format?: 'json' | 'parquet';
+    chunkSize?: number;
+    localPath?: string;
+}
+```
+
+**FIELDS:**
+
+- **schema** (*[BulkWriterSchema](BulkWriterSchema.md)*) -
+
+    **[REQUIRED]**
+
+    Defines the fields that `BulkWriter` validates and serializes.
+
+- **[storage](Storage.md)** (*[Storage](Storage.md)*) -
+
+    Specifies a custom storage adapter. If omitted, `LocalStorage` keeps the generated files on disk.
+
+- **format** (*'json' | 'parquet'*) -
+
+    Specifies the generated file format. Defaults to `json`.
+
+- **chunkSize** (*number*) -
+
+    Specifies the approximate buffered byte size that triggers automatic commit.
+
+- **localPath** (*string*) -
+
+    Specifies the local base directory where chunk folders are created.
+
+## Formatter
+
+Serializes buffered **BulkWriter** columns into one or more import files. `BulkWriter` selects `JsonFormatter` when `format` is `json` and `ParquetFormatter` when `format` is `parquet`.
+
+```javascript
+interface Formatter {
+    readonly extension: string;
+    persist(columns, dynamicCol, rowCount, dir, schema): Promise<string[]>;
+}
+```
+
+**FIELDS:**
+
+- **extension** (*string*) -
+
+    The file extension of the generated files (for example, `.json` or `.parquet`).
+
+**METHODS:**
+
+- `persist(columns: Map<string, any[]>, dynamicCol: Record<string, any>[], rowCount: number, dir: string, schema: BulkWriterSchema): Promise<string[]>`
+
+    Serializes the buffered columns and returns the generated local file paths.
+
+    - **columns** (*Map<string, any[]>*) -
+
+        The buffered column data.
+
+    - **dynamicCol** (*Record<string, any>[]*) -
+
+        The dynamic-field rows.
+
+    - **rowCount** (*number*) -
+
+        The number of rows being serialized.
+
+    - **dir** (*string*) -
+
+        The output directory.
+
+    - **schema** (*[BulkWriterSchema](BulkWriterSchema.md)*) -
+
+        The schema used to interpret the columns.
+
+**IMPLEMENTATIONS:**
+
+- `class JsonFormatter`
+
+    Writes buffered rows to a JSON file whose top-level `rows` property contains the serialized entities, including dynamic fields when enabled.
+
+- `class ParquetFormatter`
+
+    Writes buffered rows to Parquet files using `@shanghaikid/parquetjs`, converting Milvus scalar, vector, array, and dynamic-field values to Parquet-compatible representations. Requires the SDK dependency `@shanghaikid/parquetjs`.
 
 ## Example
 
