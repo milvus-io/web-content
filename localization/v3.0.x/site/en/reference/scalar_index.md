@@ -163,10 +163,10 @@ title: Scalar Index
 </div>
 <p><a id="Version-compatibility"></a></p>
 <p><details>
-<summary><strong>Selection details and administrator settings</strong></summary></p>
+<summary><strong>Selection details</strong></summary></p>
 <ul>
 <li><strong>Internal layouts:</strong> <code translate="no">AUTOINDEX</code> can select layouts unavailable as explicit choices, such as bitmap indexing for <code translate="no">FLOAT</code> and <code translate="no">DOUBLE</code>. The cardinality-based strategy is called <code translate="no">HYBRID</code> internally; you cannot specify it directly. The selected index determines which filters can use it.</li>
-<li><strong>Cardinality threshold:</strong> <a id="Cardinality-threshold"></a>Set <code translate="no">bitmap_cardinality_limit</code> (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the table’s high-cardinality layout applies. Explicit <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>, and <code translate="no">BITMAP</code> builds bypass cardinality-based selection and ignore this threshold.</li>
+<li><strong>Cardinality threshold:</strong> <a id="Cardinality-threshold"></a>Set <code translate="no">bitmap_cardinality_limit</code> (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the data type’s high-cardinality layout applies. Explicit <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>, and <code translate="no">BITMAP</code> builds bypass cardinality-based selection and ignore this threshold.</li>
 <li><strong>Administrator overrides:</strong> Change type mappings through <code translate="no">scalarAutoIndex.params.build</code>. <code translate="no">scalarAutoIndex.enable=false</code> (default) still allows explicit <code translate="no">AUTOINDEX</code>; <code translate="no">true</code> also applies automatic selection to valid manual requests.</li>
 </ul>
 <p></details></p>

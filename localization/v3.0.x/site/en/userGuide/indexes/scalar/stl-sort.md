@@ -56,7 +56,7 @@ summary: >-
 <li><p><code translate="no">VARCHAR</code> fields. For details, refer to <a href="/docs/string.md">String Field</a>.</p></li>
 <li><p><code translate="no">TIMESTAMPTZ</code> fields. For details, refer to <a href="/docs/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></li>
 </ul>
-<p>For numeric, VARCHAR, or TIMESTAMPTZ subfields in a StructArray, see <a href="/docs/index-structarray-fields.md#Create-scalar-indexes">Index StructArray Fields</a>. Ordinary ARRAY fields do not support <code translate="no">STL_SORT</code> in Milvus 3.0.6; see <a href="/docs/array_data_type.md#Array-index-support">Array index support</a> for their index choices.</p>
+<p>For numeric, VARCHAR, or TIMESTAMPTZ subfields in a StructArray, see <a href="/docs/index-structarray-fields.md#Create-scalar-indexes">Index StructArray Fields</a>. Ordinary ARRAY fields do not support <code translate="no">STL_SORT</code>; see <a href="/docs/array_data_type.md#Array-index-support">Array index support</a> for their index choices.</p>
 <p>JSON paths cast to <code translate="no">DOUBLE</code> or <code translate="no">VARCHAR</code> support <code translate="no">STL_SORT</code> after the <a href="/docs/json-indexing.md#Index-requirements">3.0 JSON index opt-in setup</a>.</p>
 <p><a id="Queries-accelerated-by-STLSORT"></a></p>
 <p><a id="Supported-filters"></a></p>

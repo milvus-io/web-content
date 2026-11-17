@@ -98,7 +98,7 @@ summary: >-
 <ul>
 <li><strong>One index per path:</strong> Each <code translate="no">(field, json_path)</code> pair supports at most one index across all cast and index types.</li>
 <li><strong>Matching query types:</strong> A query must target the indexed path with a compatible value type to use the index. Incompatible filters can fall back to scanning.</li>
-<li><strong>Array casts:</strong> Specify <code translate="no">INVERTED</code> explicitly for <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, and <code translate="no">ARRAY_VARCHAR</code>. The default 3.0.6 automatic type mapping does not accept these casts.</li>
+<li><strong>Array casts:</strong> Specify <code translate="no">INVERTED</code> explicitly for <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, and <code translate="no">ARRAY_VARCHAR</code>. The default automatic type mapping does not accept these casts.</li>
 <li><strong>String-pattern indexes:</strong> For a <code translate="no">NGRAM</code> index, use a <code translate="no">VARCHAR</code> cast and supply <code translate="no">min_gram</code> and <code translate="no">max_gram</code>. See <a href="/docs/ngram.md#Example-2-Create-on-a-JSON-path">NGRAM on a JSON path</a> for parameters and creation examples.</li>
 </ul>
 <p><a id="AUTOINDEX"></a></p>
@@ -1448,7 +1448,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(describe_re
 <p><a id="FAQ"></a></p>
 <p><details id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold">
 <summary><strong>Advanced: Tune automatic selection for a JSON path</strong></summary></p>
-<p>This example changes the cardinality threshold for <code translate="no">metadata[&quot;category&quot;]</code>. It applies only after the <a href="#Index-requirements">opt-in setup</a> enables cardinality-based <code translate="no">AUTOINDEX</code>. For the parameter range, layout choices, and explicit-index behavior, see <a href="/docs/scalar_index.md#Cardinality-threshold">Cardinality threshold</a>:</p>
+<p>This example changes the cardinality threshold for <code translate="no">metadata[&quot;category&quot;]</code>. It requires cardinality-based <code translate="no">AUTOINDEX</code>; check the <a href="#Index-requirements">index requirements</a> before using it. For the parameter range, layout choices, and explicit-index behavior, see <a href="/docs/scalar_index.md#Cardinality-threshold">Cardinality threshold</a>:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>

@@ -492,7 +492,7 @@ IndexParam[] indexes =
 <button class="copy-code-btn"></button></code></pre>
 <p><details id="Array-index-support">
 <summary><strong>Array index support: index types and accelerated filters</strong></summary></p>
-<p>Scalar indexes on an ordinary ARRAY field index its elements. Milvus 3.0.6 supports these explicit choices:</p>
+<p>Scalar indexes on an ordinary ARRAY field index its elements. Choose from the following explicit index types:</p>
 <table>
 <thead>
 <tr><th>Element type</th><th>Explicit index types</th></tr>
