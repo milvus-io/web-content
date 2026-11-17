@@ -16,6 +16,8 @@ UpsertReq.builder()
     .partitionName(partitionName)
     .partialUpdate(partialUpdate)
     .fieldOps(fieldOps)
+    .rlsPrincipal(rlsPrincipal)
+    .skipRls(skipRls)
     .build();
 ```
 
@@ -64,6 +66,14 @@ UpsertReq.builder()
         - `ARRAY_REMOVE` -
 
             Removes every occurrence of each supplied value from an array field. It is a no-op when the base array is empty or no value matches.
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the upsert runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the upsert explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 

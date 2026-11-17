@@ -28,6 +28,8 @@ searchIteratorV2(SearchIteratorReqV2.builder()
     .groupByFieldName(String groupByFieldName)
     .batchSize(long batchSize)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 );
 ```
@@ -111,6 +113,14 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 - `externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)` -
 
     A function used to filter the search results before returning them.
+
+- `rlsPrincipal(String rlsPrincipal)` -
+
+    The name of the RLS principal the search iterator runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)` -
+
+    Whether the search iterator explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURNS:**
 

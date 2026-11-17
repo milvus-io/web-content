@@ -17,6 +17,8 @@ delete(DeleteReq.builder()
     .ids(List<Object> ids)
     .consistencyLevel(ConsistencyLevel consistencyLevel)
     .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 );
 ```
@@ -50,6 +52,14 @@ delete(DeleteReq.builder()
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
     A map of template variable values for parameterized filters.
+
+- `rlsPrincipal(String rlsPrincipal)` -
+
+    The name of the RLS principal the delete runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)` -
+
+    Whether the delete explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 
