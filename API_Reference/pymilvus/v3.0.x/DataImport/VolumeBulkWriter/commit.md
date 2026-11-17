@@ -12,15 +12,17 @@ VolumeBulkWriter.commit(
 
 **PARAMETERS:**
 
-- **_async** (*bool*) -
+- **kwargs** -
 
-    Whether to flush the buffer asynchronously.
+    - **_async** (*bool*)
 
-    If set to `True`, the flush operation runs in a background thread and the method returns immediately. If set to `False` (default), the method blocks until the flush completes.
+        Whether to flush the buffer asynchronously.
 
-- **call_back** (*Callable[[List[str]], List[str]]*) -
+        If set to `True`, the flush operation runs in a background thread and the method returns immediately. If set to `False` (default), the method blocks until the flush completes.
 
-    An optional callback function invoked after the local files are flushed. In [VolumeBulkWriter](VolumeBulkWriter.md), this callback is used internally to upload files to the remote volume.
+    - **call_back** (*Callable[[List[str]], List[str]]*) -
+
+        An optional callback function invoked after the local files are flushed. In [VolumeBulkWriter](VolumeBulkWriter.md), this callback is used internally to upload files to the remote volume.
 
 **RETURN TYPE:**
 

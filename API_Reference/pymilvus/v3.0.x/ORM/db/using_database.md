@@ -57,8 +57,8 @@ conn = connections.connect(
 
 db.using_database("test")
 
-## You can directly use a database upon the connection as follows.
-## However, the specified database should exist beforehand.
+# You can directly use a database upon the connection as follows.
+# However, the specified database should exist beforehand.
 conn = connections.connect(host="127.0.0.1", port=19530, db_name="test")
 ```
 

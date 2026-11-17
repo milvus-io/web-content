@@ -41,6 +41,12 @@ transfer_replica(
 
     Setting this to a resource group that does not exist results in a **[MilvusException](../../Exceptions/MilvusException.md)**.
 
+- **collection_name** (*str*) -
+
+    **[REQUIRED]**
+
+    The name of the collection whose replicas are transferred.
+
 - **num_replicas** (*int*) -
 
     **[REQUIRED]**
@@ -115,10 +121,11 @@ utility.create_resource_group(
 )
 
 # Transfer replicas between resource groups
-utility.transfer_node(
+utility.transfer_replica(
     source_group="__default_resource_group",
     target_group="rg_01",
-    num_nodes=1
+    collection_name="test_collection",
+    num_replicas=1,
 )
 ```
 

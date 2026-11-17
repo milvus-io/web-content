@@ -65,7 +65,7 @@ create_resource_group(
         │   │   └── node_num
         │   └── limits
         │       └── node_num
-        ```
+```
 
         - **requests** (*dict*) -
 

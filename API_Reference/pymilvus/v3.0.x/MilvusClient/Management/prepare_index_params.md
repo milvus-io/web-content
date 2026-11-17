@@ -29,7 +29,7 @@ An **IndexParams** contains a list of **IndexParam** objects.
 ```text
     ├── IndexParams 
     │       └── add_index()
-    ```
+```
 
     It offers the **[add_index()](add_index.md)** method to add indexes to the list.
 

@@ -19,35 +19,35 @@ run_analyzer(
 
 **PARAMETERS:**
 
-- `texts` (*Union[str, List[str]]*) -
+- **texts** (*Union[str, List[str]]*) -
 
     The input text or a list of texts to be analyzed.
 
-- `analyzer_params` (*Union[str, Dict, None]*) -
+- **analyzer_params** (*Union[str, Dict, None]*) -
 
     The parameters for the analyzer. If set to `None`, defaults to an empty dictionary.
 
-- `with_hash` (*bool*) -
+- **with_hash** (*bool*) -
 
     Optional flag indicating whether to include hash-based processing.
 
-- `with_detail` (*bool*) -
+- **with_detail** (*bool*) -
 
     Optional flag indicating whether to return detailed analysis output.
 
-- `collection_name` (*str* | *None*) -
+- **collection_name** (*str* | *None*) -
 
     The name of the collection on which to run the analyzer.
 
-- `field_name` (*str* | *None*) -
+- **field_name** (*str* | *None*) -
 
     The name of the field whose analyzer settings are used to analyze the input text.
 
-- `analyzer_names` (*str* | *list[str]* | *None*) -
+- **analyzer_names** (*str* | *list[str]* | *None*) -
 
     The name or a list of names of the built-in analyzers to run.
 
-- `timeout` (*float* | *None*) -
+- **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. Setting this to *None* indicates that this operation timeouts when any response or error occurs.
 
@@ -65,7 +65,9 @@ A tuple containing:
 
 **EXCEPTIONS:**
 
-- `MilvusException` - Raised if any error occurs during this operation.
+- **[MilvusException](../../Exceptions/MilvusException.md)**
+
+    This exception will be raised when any error occurs during this operation.
 
 ## Example
 
