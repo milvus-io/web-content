@@ -66,7 +66,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li>Use a Backup binary and configuration examples from the same release. The <a href="/docs/milvus_backup_cli.md#obtain-milvus-backup">0.5.x guide</a> pins 0.5.16; the <a href="/docs/milvus_backup_0_6_cli.md#obtain-milvus-backup">current guide</a> pins 0.6.0.</li>
+<li>Use a Backup binary and configuration examples from the same release. The <a href="/docs/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x guide</a> pins 0.5.16; the <a href="/docs/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">current guide</a> pins 0.6.0.</li>
 <li>Provide network access to Milvus, its storage, and the backup destination. Snapshot operations also require the Milvus server to reach the backup store.</li>
 <li>Check server compatibility below. Go is required only when building from source: 1.25 or later for Backup 0.5.16, and 1.26 or later for 0.6.0.</li>
 </ul>
@@ -103,7 +103,7 @@ title: Milvus Backup
 </tbody>
 </table>
 <p>A backup directory contains metadata and the files required by its format. Preserve the complete directory when archiving or moving it. Do not assume that a snapshot backup uses the binlog directory layout.</p>
-<p>In 0.6.0, the <code translate="no">create --for</code> presets configure purpose-specific options: <code translate="no">clone</code> keeps the chosen format, while <code translate="no">archive</code> and <code translate="no">secondary</code> require binlog. A secondary also requires a configured replication topology; ordinary migration between instances does not require a secondary. See <a href="/docs/milvus_backup_0_6_cli.md#choose-a-backup-format-or-purpose">Choose a backup format or purpose</a>.</p>
+<p>In 0.6.0, the <code translate="no">create --for</code> presets configure purpose-specific options: <code translate="no">clone</code> keeps the chosen format, while <code translate="no">archive</code> and <code translate="no">secondary</code> require binlog. A secondary also requires a configured replication topology; ordinary migration between instances does not require a secondary. See <a href="/docs/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">Choose a backup format or purpose</a>.</p>
 <p>Backup 0.6.0 skips external collections during backup. A successful task does not imply that external collection data was included.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Compatibility matrix<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

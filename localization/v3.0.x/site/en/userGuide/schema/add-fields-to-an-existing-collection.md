@@ -98,13 +98,13 @@ summary: >-
       </svg>
     </button></h2><p>Choose the workflow based on whether you are adding a user-defined field or a Function that generates a vector field:</p>
 <ul>
-<li><p><a href="#add-user-defined-scalar-fields--milvus-26x">Add user-defined scalar fields</a> when you need new metadata for filtering, query output, or application logic.</p></li>
-<li><p><a href="#add-structarray-fields--milvus-300">Add StructArray fields</a> when you need an array field whose elements share the same Struct schema.</p></li>
-<li><p><a href="#add-user-defined-vector-fields--milvus-2618">Add user-defined vector fields</a> when your application generates embeddings and writes vector values to Milvus.</p></li>
-<li><p><a href="#add-a-function-and-its-generated-vector-field--milvus-30x">Add a Function and its generated vector field</a> when Milvus should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.</p></li>
+<li><p><a href="#Add-user-defined-scalar-fields--Milvus-26x">Add user-defined scalar fields</a> when you need new metadata for filtering, query output, or application logic.</p></li>
+<li><p><a href="#Add-StructArray-fields--Milvus-300">Add StructArray fields</a> when you need an array field whose elements share the same Struct schema.</p></li>
+<li><p><a href="#Add-user-defined-vector-fields--Milvus-2618">Add user-defined vector fields</a> when your application generates embeddings and writes vector values to Milvus.</p></li>
+<li><p><a href="#Add-a-Function-and-its-generated-vector-field--Milvus-30x">Add a Function and its generated vector field</a> when Milvus should generate vector values from existing fields, such as BM25 sparse vectors or MinHash signatures from text.</p></li>
 </ul>
 <ul>
-<li><a href="#add-a-sub-field-to-an-existing-structarray-field--milvus-306">Add a sub-field to an existing StructArray field</a> when existing Struct elements need a new attribute.</li>
+<li><a href="#Add-a-sub-field-to-an-existing-StructArray-field--Milvus-306">Add a sub-field to an existing StructArray field</a> when existing Struct elements need a new attribute.</li>
 </ul>
 <p>In all cases, the new field name must not already exist in the collection, and the total number of fields cannot exceed the Milvus field-count limit. For details, refer to <a href="/docs/limitations.md#number-of-resources-in-a-collection">Milvus Limits</a>.</p>
 <h3 id="Add-user-defined-scalar-fields" class="common-anchor-header">Add user-defined scalar fields<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Add-user-defined-scalar-fields" class="anchor-icon" translate="no">
@@ -413,7 +413,7 @@ status = client-&gt;<span class="hljs-built_in">AddCollectionField</span>(
       </svg>
     </button></h3><p>Use <code translate="no">add_collection_struct_field()</code> to add a StructArray field that accepts arrays of Struct elements. To add a StructArray field, do as follows:</p>
 <ol>
-<li><p>Create a Struct schema that contains the necessary sub-fields of supported data types. For applicable data types, refer to <a href="/docs/structarray-limits.md#supported-subfield-data-types">StructArray Limits</a>.</p></li>
+<li><p>Create a Struct schema that contains the necessary sub-fields of supported data types. For applicable data types, refer to <a href="/docs/structarray-limits.md#Supported-subfield-data-types">StructArray Limits</a>.</p></li>
 <li><p>Reference the Struct schema created above and set the maximum capacity of the field in <code translate="no">add_collection_struct_field()</code>.</p></li>
 <li><p>Set <code translate="no">nullable=True</code> in the request.</p></li>
 </ol>
@@ -1187,7 +1187,7 @@ Bound index:
 <li><p>After <code translate="no">drop_collection_field()</code> succeeds, the collection schema is updated: <code translate="no">describe_collection()</code> no longer returns the dropped field, and queries or searches can no longer return the field in <code translate="no">output_fields</code> or use it in expressions.</p></li>
 <li><p>Indexes built on the dropped field are cleaned up as part of the schema update.</p></li>
 </ul>
-<p>Storage cleanup is handled separately from schema cleanup. For details, refer to <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
+<p>Storage cleanup is handled separately from schema cleanup. For details, refer to <a href="#When-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
 <p><strong>Example: Drop a user-defined scalar field</strong></p>
 <p>The following example assumes that <code translate="no">experiment_tag</code> is a user-defined scalar field in <code translate="no">product_catalog</code>, and drops it from the collection.</p>
 <div class="multipleCode">
@@ -1365,7 +1365,7 @@ Bound index:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Starting in Milvus 3.0.6, you can drop an individual sub-field from a StructArray field with <code translate="no">drop_collection_field()</code> by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
+    </button></h3><p>Starting in Milvus 3.0.6, you can drop an individual sub-field from a StructArray field with <code translate="no">drop_collection_field()</code> by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in <a href="#When-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
 <p>The following example assumes that <code translate="no">chunks</code> is a StructArray field in <code translate="no">my_collection</code> with a <code translate="no">lang</code> sub-field, and drops only that sub-field.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

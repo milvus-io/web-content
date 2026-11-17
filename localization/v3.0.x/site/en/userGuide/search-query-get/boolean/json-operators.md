@@ -45,9 +45,9 @@ summary: >-
       </svg>
     </button></h2><p>Milvus provides several powerful JSON operators that help filter and query JSON data, and these operators are:</p>
 <ul>
-<li><p><a href="#json_contains"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Filters entities where the specified JSON expression is found within the field.</p></li>
-<li><p><a href="#json_contains_all"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: Ensures that all elements of the specified JSON expression are present in the field.</p></li>
-<li><p><a href="#json_contains_any"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: Filters entities where at least one member of the JSON expression exists within the field.</p></li>
+<li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Filters entities where the specified JSON expression is found within the field.</p></li>
+<li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: Ensures that all elements of the specified JSON expression are present in the field.</p></li>
+<li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: Filters entities where at least one member of the JSON expression exists within the field.</p></li>
 </ul>
 <p>Let’s explore these operators with examples to see how they can be applied in real-world scenarios.</p>
 <h2 id="JSONCONTAINS" class="common-anchor-header">JSON_CONTAINS<button data-href="#JSONCONTAINS" class="anchor-icon" translate="no">

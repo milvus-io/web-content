@@ -50,12 +50,12 @@ summary: >-
 <tr><th>Operator</th><th>Use in</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="#array_contains">ARRAY_CONTAINS(identifier, expr)</a></td><td>Filter expression</td><td>Checks whether a specific element exists in an ARRAY field.</td></tr>
-<tr><td><a href="#array_contains_all">ARRAY_CONTAINS_ALL(identifier, expr)</a></td><td>Filter expression</td><td>Checks whether all elements in a specified list exist in an ARRAY field.</td></tr>
-<tr><td><a href="#array_contains_any">ARRAY_CONTAINS_ANY(identifier, expr)</a></td><td>Filter expression</td><td>Checks whether any element in a specified list exists in an ARRAY field.</td></tr>
-<tr><td><a href="#array_length">ARRAY_LENGTH(identifier)</a></td><td>Filter expression</td><td>Returns the number of elements in an ARRAY field and can be combined with comparison operators for filtering.</td></tr>
-<tr><td><a href="#array_append--milvus-2617">ARRAY_APPEND</a></td><td><code translate="no">upsert</code> with <code translate="no">field_ops</code></td><td>Appends payload elements to an existing ARRAY field. Available in Milvus v2.6.17 and later.</td></tr>
-<tr><td><a href="#array_remove--milvus-2617">ARRAY_REMOVE</a></td><td><code translate="no">upsert</code> with <code translate="no">field_ops</code></td><td>Removes every element from an existing ARRAY field that matches a value in the request payload. Available in Milvus v2.6.17 and later.</td></tr>
+<tr><td><a href="#ARRAYCONTAINS">ARRAY_CONTAINS(identifier, expr)</a></td><td>Filter expression</td><td>Checks whether a specific element exists in an ARRAY field.</td></tr>
+<tr><td><a href="#ARRAYCONTAINSALL">ARRAY_CONTAINS_ALL(identifier, expr)</a></td><td>Filter expression</td><td>Checks whether all elements in a specified list exist in an ARRAY field.</td></tr>
+<tr><td><a href="#ARRAYCONTAINSANY">ARRAY_CONTAINS_ANY(identifier, expr)</a></td><td>Filter expression</td><td>Checks whether any element in a specified list exists in an ARRAY field.</td></tr>
+<tr><td><a href="#ARRAYLENGTH">ARRAY_LENGTH(identifier)</a></td><td>Filter expression</td><td>Returns the number of elements in an ARRAY field and can be combined with comparison operators for filtering.</td></tr>
+<tr><td><a href="#ARRAYAPPEND">ARRAY_APPEND</a></td><td><code translate="no">upsert</code> with <code translate="no">field_ops</code></td><td>Appends payload elements to an existing ARRAY field. Available in Milvus v2.6.17 and later.</td></tr>
+<tr><td><a href="#ARRAYREMOVE">ARRAY_REMOVE</a></td><td><code translate="no">upsert</code> with <code translate="no">field_ops</code></td><td>Removes every element from an existing ARRAY field that matches a value in the request payload. Available in Milvus v2.6.17 and later.</td></tr>
 </tbody>
 </table>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">

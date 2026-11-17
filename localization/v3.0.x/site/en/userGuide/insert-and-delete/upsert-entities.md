@@ -93,7 +93,7 @@ summary: >-
 </ul>
 <p>If a partial update fails with a missing-field error, check whether the target entity exists. Without an existing entity, Milvus cannot retrieve the values of fields you omitted.</p>
 <p>For new entities, use <code translate="no">insert</code> or an upsert in override mode. Use merge mode for subsequent updates to individual fields.</p>
-<p>For <code translate="no">ARRAY</code> fields, merge mode supports two operators in Milvus v2.6.17 and later: <code translate="no">ARRAY_APPEND</code> and <code translate="no">ARRAY_REMOVE</code>. These operators let you append elements to or remove matching elements from an existing <code translate="no">ARRAY</code> field, without first querying the entity to retrieve its current value. For details, see <a href="/docs/upsert-entities.md#upsert-array-fields-in-merge-mode--milvus-2617">Upsert ARRAY fields in merge mode</a>.</p>
+<p>For <code translate="no">ARRAY</code> fields, merge mode supports two operators in Milvus v2.6.17 and later: <code translate="no">ARRAY_APPEND</code> and <code translate="no">ARRAY_REMOVE</code>. These operators let you append elements to or remove matching elements from an existing <code translate="no">ARRAY</code> field, without first querying the entity to retrieve its current value. For details, see <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">Upsert ARRAY fields in merge mode</a>.</p>
 <h3 id="Upsert-behaviors-special-notes" class="common-anchor-header">Upsert behaviors: special notes<button data-href="#Upsert-behaviors-special-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,12 +137,12 @@ summary: >-
 <li><p><code translate="no">ARRAY_APPEND</code> appends the elements in the request payload to the existing array.</p></li>
 <li><p><code translate="no">ARRAY_REMOVE</code> removes every element from the existing array that matches a value in the request payload.</p></li>
 </ul>
-<p>For operator syntax, supported element types, and other constraints, see <a href="/docs/upsert-entities.md#upsert-array-fields-in-merge-mode--milvus-2617">Upsert ARRAY fields in merge mode</a>.</p></li>
+<p>For operator syntax, supported element types, and other constraints, see <a href="/docs/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">Upsert ARRAY fields in merge mode</a>.</p></li>
 </ul>
 <ul>
 <li><p><strong>Upsert a StructArray field.</strong></p>
 <p>Upserting a StructArray field in an entity overwrites the field value. To do so, you need to provide a list of dictionaries, each of which contains all subfields defined in the struct schema, even when you perform the upsert in merge mode. Starting in Milvus 3.0.6, you can omit element-nullable subfields; Milvus stores null for them in that Struct element.</p>
-<p>For details, refer to <a href="/docs/upsert-entities.md#upsert-structarray-field-in-merge-mode">Upsert StructArray field in merge mode</a>.</p></li>
+<p>For details, refer to <a href="/docs/upsert-entities.md#Upsert-StructArray-field-in-merge-mode">Upsert StructArray field in merge mode</a>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Limits & Restrictions<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"

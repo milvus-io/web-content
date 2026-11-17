@@ -114,7 +114,7 @@ title: Quickstart
         ></path>
       </svg>
     </button></h3><p>To create a local Milvus vector database, instantiate a <code translate="no">MilvusClient</code> with a storage path, such as <code translate="no">milvus_demo.db</code>. Milvus Lite 3.x creates a directory at this path, even when its name ends in <code translate="no">.db</code>.</p>
-<p>If you have a database file created by Milvus Lite 2.x, export it with the old version before migrating. Do not open that file directly with Milvus Lite 3.x. See <a href="/docs/milvus_lite.md#migrating-data-from-milvus-lite">Migrating data from Milvus Lite</a>.</p>
+<p>If you have a database file created by Milvus Lite 2.x, export it with the old version before migrating. Do not open that file directly with Milvus Lite 3.x. See <a href="/docs/milvus_lite.md#Migrating-data-from-Milvus-Lite">Migrating data from Milvus Lite</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -532,7 +532,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <p>Milvus Lite is great for getting started with a local python program. If you have large scale data or would like to use Milvus in production, you can learn about deploying Milvus on <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> and <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. All deployment modes of Milvus share the same API, so your client side code doesn’t need to change much if moving to another deployment mode. Simply specify the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI and Token</a> of a Milvus server deployed anywhere:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to <a href="/docs/milvus_lite.md#migrating-data-from-milvus-lite">Migrating data from Milvus Lite</a>.</p>
+<p>To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to <a href="/docs/milvus_lite.md#Migrating-data-from-Milvus-Lite">Migrating data from Milvus Lite</a>.</p>
 <p>Milvus provides REST and gRPC API, with client libraries in languages such as <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# and <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
 <p>For schema design, Milvus supports flexible schema design, where you can define the fields and their data types, including vector fields. You can also define the index type and parameters for each field. For more information, see <a href="https://milvus.io/docs/schema-hands-on.md">Data Model Design for Search</a>.</p>
 <h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus for AI Agents<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
