@@ -19,7 +19,7 @@ await milvusClient.flushAll({
 **PARAMETERS:**
 
 - **db_name** (*string*) -
-The name of the database. Optional.
+The name of the database. Optional and deprecated.
 
 - **timeout** (*number*) -
 An optional duration of time in milliseconds to allow for the RPC. If it is set to undefined, the client keeps waiting until the server responds or an error occurs. Default is undefined.
@@ -36,7 +36,7 @@ This method returns a promise that resolves to a **FlushAllResponse** object.
 **PARAMETERS:**
 
 - **flush_all_ts** (*number*) -
-The flush-all timestamp.
+The flush-all timestamp. Deprecated.
 
 - **flush_all_tss** (*Record<string, number>*) -
 A record of flush-all timestamps, keyed by cluster.
@@ -45,7 +45,19 @@ A record of flush-all timestamps, keyed by cluster.
 A record of flush-all messages, keyed by cluster.
 
 - **cluster_info** (*FlushClusterInfo*) -
-The cluster information.
+The cluster information. Each entry is a **FlushClusterInfo** with the following members.
+
+    - **cluster_id** (*string*) -
+
+        The ID of the cluster.
+
+    - **cchannel** (*string*) -
+
+        The channel through which the flush-all request was delivered.
+
+    - **pchannels** (*string[]*) -
+
+        The physical channels flushed for the cluster.
 
 - **status** (*ResStatus*) -
 A **ResStatus** object.

@@ -11,7 +11,7 @@ await milvusClient.createDatabase(data)
 ```javascript
 await milvusClient.createDatabase({
     db_name: string,
-    properties?: Object
+    properties?: Record<string, string | number | boolean>
     timeout?: number
 })
 ```
@@ -24,7 +24,7 @@ await milvusClient.createDatabase({
 
     There should be no database that has the specified name. Otherwise, exceptions will occur.
 
-- **properties** (*Object*) -
+- **properties** (*Record<string, string | number | boolean>*) -
 
     Properties to set along with database creation. Possible database properties are as follows:
 
