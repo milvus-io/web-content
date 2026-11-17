@@ -114,10 +114,10 @@ Set `index_type` to `AUTOINDEX` in each selected field's index definition. Milvu
 <a id="Version-compatibility"></a>
 
 <details>
-<summary><strong>Selection details and administrator settings</strong></summary>
+<summary><strong>Selection details</strong></summary>
 
 - **Internal layouts:** `AUTOINDEX` can select layouts unavailable as explicit choices, such as bitmap indexing for `FLOAT` and `DOUBLE`. The cardinality-based strategy is called `HYBRID` internally; you cannot specify it directly. The selected index determines which filters can use it.
-- **Cardinality threshold:** <a id="Cardinality-threshold"></a>Set `bitmap_cardinality_limit` (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the table's high-cardinality layout applies. Explicit `INVERTED`, `STL_SORT`, and `BITMAP` builds bypass cardinality-based selection and ignore this threshold.
+- **Cardinality threshold:** <a id="Cardinality-threshold"></a>Set `bitmap_cardinality_limit` (range: 1–1000) to override the default threshold. Values below it use bitmap; at or above it, the data type's high-cardinality layout applies. Explicit `INVERTED`, `STL_SORT`, and `BITMAP` builds bypass cardinality-based selection and ignore this threshold.
 - **Administrator overrides:** Change type mappings through `scalarAutoIndex.params.build`. `scalarAutoIndex.enable=false` (default) still allows explicit `AUTOINDEX`; `true` also applies automatic selection to valid manual requests.
 
 </details>

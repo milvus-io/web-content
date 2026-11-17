@@ -18,7 +18,7 @@ summary: "Use STL_SORT for value lookups, range filtering, and string prefix mat
 
 - `TIMESTAMPTZ` fields. For details, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
 
-For numeric, VARCHAR, or TIMESTAMPTZ subfields in a StructArray, see [Index StructArray Fields](index-structarray-fields.md#Create-scalar-indexes). Ordinary ARRAY fields do not support `STL_SORT` in Milvus 3.0.6; see [Array index support](array_data_type.md#Array-index-support) for their index choices.
+For numeric, VARCHAR, or TIMESTAMPTZ subfields in a StructArray, see [Index StructArray Fields](index-structarray-fields.md#Create-scalar-indexes). Ordinary ARRAY fields do not support `STL_SORT`; see [Array index support](array_data_type.md#Array-index-support) for their index choices.
 
 JSON paths cast to `DOUBLE` or `VARCHAR` support `STL_SORT` after the [3.0 JSON index opt-in setup](json-indexing.md#Index-requirements).
 

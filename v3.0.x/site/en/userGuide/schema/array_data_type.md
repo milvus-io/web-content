@@ -487,7 +487,7 @@ export indexParams='[
 <details id="Array-index-support">
 <summary><strong>Array index support: index types and accelerated filters</strong></summary>
 
-Scalar indexes on an ordinary ARRAY field index its elements. Milvus 3.0.6 supports these explicit choices:
+Scalar indexes on an ordinary ARRAY field index its elements. Choose from the following explicit index types:
 
 | Element type | Explicit index types |
 | --- | --- |
