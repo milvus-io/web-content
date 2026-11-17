@@ -19,7 +19,7 @@ add_file_resource(
 )
 ```
 
-**PARAMETERS**:
+**PARAMETERS:**
 
 - **name** (*str*) -
  The unique name to register the resource under. This value is what you later pass as `resource_name` in analyzer configurations that reference this resource.
@@ -30,7 +30,11 @@ add_file_resource(
 - **timeout** (*float* | *None*) -
  The timeout duration (in seconds) for this operation. A value of `None` indicates that no timeout is applied.
 
-**RETURNS**:
+**RETURN TYPE:**
+
+*None*
+
+**RETURNS:**
 
 *None*
 

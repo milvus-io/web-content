@@ -17,12 +17,16 @@ list_file_resources(
 )
 ```
 
-**PARAMETERS**:
+**PARAMETERS:**
 
 - **timeout** (*float* | *None*) -
  The timeout duration (in seconds) for this operation. A value of `None` indicates that no timeout is applied.
 
-**RETURNS**:
+**RETURN TYPE:**
+
+*list[FileResourceInfo]*
+
+**RETURNS:**
 
 *list[FileResourceInfo]*
 

@@ -12,7 +12,7 @@ with_query(
 )
 ```
 
-**PARAMETERS**:
+**PARAMETERS:**
 
 - **field** (*str*) -
 The target text field name whose content should be annotated when matches are found by the filtering expression. Must correspond to a **VARCHAR** text field in the collection schema.
@@ -23,7 +23,11 @@ The terms or phrase to highlight from the filtering expression. For example, **"
 - **query_type** (*str*) -
 The filtering type that provides the terms to highlight. For text-based filtering, use **"TextMatch"** to correspond to the **TEXT_MATCH** condition.
 
-**RETURNS**:
+**RETURN TYPE:**
+
+*None*
+
+**RETURNS:**
 
 *None*
 

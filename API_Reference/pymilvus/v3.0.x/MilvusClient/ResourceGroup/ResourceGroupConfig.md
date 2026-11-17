@@ -66,7 +66,7 @@ ResourceGroupConfig(
 
         </div>
 
-**RETURN TYPES:**
+**RETURN TYPE:**
 
 *ResourceGroupConfig*
 
