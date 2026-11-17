@@ -24,6 +24,7 @@ client.addCollectionField(AddCollectionFieldReq.builder()
     .elementType(DataType elementType)
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
+    .elementNullable(Boolean elementNullable)
     .defaultValue(Object defaultValue)
     .enableDefaultValue(boolean enableDefaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
@@ -94,6 +95,10 @@ client.addCollectionField(AddCollectionFieldReq.builder()
 - `isNullable(Boolean isNullable)` -
 
     Whether the added field accepts `null` values. For v3.0.1 and later, vector fields added to an existing collection must set this to `true`; otherwise the SDK raises `MilvusClientException`.
+
+- `elementNullable(Boolean elementNullable)` -
+
+    Whether the inner elements of an Array or ArrayOfVector struct sub-field can be null. Defaults to `false`.
 
 - `defaultValue(Object defaultValue)` -
 

@@ -26,6 +26,7 @@ CreateCollectionReq.FieldSchema.builder()
     .maxCapacity(Integer maxCapacity)
 
     .isNullable(Boolean isNullable)
+    .elementNullable(Boolean elementNullable)
     .defaultValue(Object defaultValue)
     .enableAnalyzer(Boolean enableAnalyzer)
     .analyzerParams(Map<String, Object> analyzerParams)
@@ -85,6 +86,10 @@ CreateCollectionReq.FieldSchema.builder()
 - `isNullable(Boolean isNullable)` -
 
     Allows `null` values for this field. Default: `false`. For more information, refer to Nullable & Default.
+
+- `elementNullable(Boolean elementNullable)` -
+
+    Whether the inner elements of an Array or ArrayOfVector struct sub-field can be null. Default: `false`. See [addField()](CollectionSchema/addField.md).
 
 - `defaultValue(Object defaultValue)` -
 

@@ -45,7 +45,19 @@ UpsertReq.builder()
 
 - `fieldOps(List<FieldPartialUpdateOp> fieldOps)`
 
-    Field-level operations. `ARRAY_APPEND` and `ARRAY_REMOVE` imply partial-update semantics.
+    Field-level operations. `ARRAY_APPEND` and `ARRAY_REMOVE` imply partial-update semantics. Each **FieldPartialUpdateOp** has the following builder methods:
+
+    - `fieldName(String fieldName)` -
+
+        The name of the field to update.
+
+    - `opType(OpType opType)` -
+
+        The operation to apply. The **OpType** values are `REPLACE`, `ARRAY_APPEND`, `ARRAY_REMOVE`, and `PATH_REPLACE`.
+
+    - `path(String path)` -
+
+        The path for a `PATH_REPLACE` operation. The path is relative to the parent field and uses `[index]` to replace one complete struct element or `[index][child]` to replace one child. Leave unset for non-path operations.
 
 - `rlsPrincipal(String rlsPrincipal)`
 

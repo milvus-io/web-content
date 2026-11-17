@@ -36,7 +36,7 @@ A **GetReplicateConfigurationResp** object that contains the replication configu
 
         - `getPchannels()` (*List\<String\>*) -
 
-            The physical channels of the cluster.
+            The physical channels of the cluster that participate in the replication task.
 
     - `getCrossClusterTopologies()` (*List\<CrossClusterTopology\>*) -
 
