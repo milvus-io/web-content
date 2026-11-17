@@ -18,6 +18,8 @@ MilvusImportRequest.builder()
     .partitionName(partitionName)
     .files(files)
     .options(options)
+    .rlsPrincipal(rlsPrincipal)
+    .skipRls(skipRls)
     .build();
 ```
 
@@ -42,6 +44,12 @@ Files or file groups stored in the bucket accessible to Milvus.
 
 - **options** (*Map<String, Object>*) -
 Additional import options passed to the server.
+
+- **rlsPrincipal** (*String*) -
+The name of the RLS principal the import runs as. Required for imports against an RLS-enabled collection unless `skipRls` is set.
+
+- **skipRls** (*Boolean*) -
+Whether the import explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 

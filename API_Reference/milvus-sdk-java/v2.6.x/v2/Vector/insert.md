@@ -14,6 +14,8 @@ insert(InsertReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
+    .rlsPrincipal(String rlsPrincipal)
+    .skipRls(Boolean skipRls)
     .build()
 );
 ```
@@ -35,6 +37,14 @@ insert(InsertReq.builder()
 - `partitionName(String partitionName)` -
 
     The name of the target partition.
+
+- `rlsPrincipal(String rlsPrincipal)` -
+
+    The name of the RLS principal the insert runs as. Required for requests against an RLS-enabled collection unless `skipRls` is set. See [RowPolicyType](../RLS/RowPolicyType.md).
+
+- `skipRls(Boolean skipRls)` -
+
+    Whether the insert explicitly bypasses row-level security. Defaults to `null`, which uses the server default.
 
 **RETURN TYPE:**
 
