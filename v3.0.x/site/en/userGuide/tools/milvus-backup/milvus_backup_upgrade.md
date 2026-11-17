@@ -13,9 +13,9 @@ V1 YAML configurations still load through automatic translation. However, deprec
 
 ## Check the starting point
 
-Record your Backup version, Milvus source and target versions, configuration files, environment-variable overrides, backup location, and commands used by scripts or API services. Check the [compatibility information](milvus_backup_overview.md#Compatibility-matrix) for those server versions.
+Record your Backup version, Milvus source and target versions, configuration files, environment-variable overrides, backup location, and commands used by scripts or API services. Check the [compatibility information](milvus_backup_overview.md#compatibility-matrix) for those server versions.
 
-Keep the original binary, configuration, and existing backup directories while validating the new installation. Download 0.6.0 into a separate directory using [Obtain Milvus Backup](milvus_backup_0_6_cli.md#Obtain-Milvus-Backup). All commands below run from that directory and invoke the 0.6.0 binary. Place a copy of your v1 configuration at `configs/backup-v1.yaml`.
+Keep the original binary, configuration, and existing backup directories while validating the new installation. Download 0.6.0 into a separate directory using [Obtain Milvus Backup](milvus_backup_0_6_cli.md#obtain-milvus-backup). All commands below run from that directory and invoke the 0.6.0 binary. Place a copy of your v1 configuration at `configs/backup-v1.yaml`.
 
 ## Migrate the configuration
 
@@ -74,14 +74,14 @@ Their 0.6.0 replacements use the target name for restore:
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 ```
 
-A restore filter that matches nothing can exit successfully without creating a collection. Always check the target collection and its data. The HTTP API's `collection_names` still selects source names in the backup; see the [HTTP API guide](milvus_backup_0_6_api.md#Restore-data).
+A restore filter that matches nothing can exit successfully without creating a collection. Always check the target collection and its data. The HTTP API's `collection_names` still selects source names in the backup; see the [HTTP API guide](milvus_backup_0_6_api.md#restore-data).
 
 ## Choose the backup behavior
 
 - On supported Milvus 2.x servers, the `auto` format uses binlog. Upgrading Backup does not require moving to Milvus 3.0.
 - On Milvus 3.0, `auto` selects snapshot. Official backup and restore support starts at Milvus 3.0.1. Pass `--format binlog` to retain binlog behavior when creating a backup.
 - V1 configuration compatibility does not preserve removed command flags or override the new format default.
-- Purpose presets can set the format and other options. For example, `--for archive` forces binlog even if `--format snapshot` is also supplied. Review [format and purpose choices](milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose).
+- Purpose presets can set the format and other options. For example, `--for archive` forces binlog even if `--format snapshot` is also supplied. Review [format and purpose choices](milvus_backup_0_6_cli.md#choose-a-backup-format-or-purpose).
 - External collections are skipped during backup. Check the backup metadata rather than treating task success as proof that every collection was included.
 
 ## Validate before switching jobs

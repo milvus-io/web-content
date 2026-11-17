@@ -54,7 +54,7 @@ The Spark-Milvus Connector supports Scala and Python programming languages. User
 In this demo, we create a sample Spark DataFrame with vector data and write it to Milvus through the Spark-Milvus Connector. A collection will be created in Milvus automatically based on the schema and specified options. 
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#scala">Scala</a>
 </div>
 
@@ -121,7 +121,7 @@ After executing the above code, you can view the inserted data in Milvus using S
 
 ### Milvus options
 
-In the [Quick Start](#Quick-start) section, we have shown setting options during operations with Milvus. These options are abstracted as Milvus Options. They are used to create connections to Milvus and control other Milvus behaviors. Not all of the options are mandatory.
+In the [Quick Start](#quick-start) section, we have shown setting options during operations with Milvus. These options are abstracted as Milvus Options. They are used to create connections to Milvus and control other Milvus behaviors. Not all of the options are mandatory.
 
 | Option Key | Default Value | Description |
 | ---------- | ------------- | ----------- |
@@ -155,12 +155,12 @@ The Spark-Milvus Connector supports reading and writing data in the following Mi
 
 ### milvus
 
-In [Quick start](#Quick-start), we use the **milvus** format to write sample data into a Milvus cluster. The **milvus** format is a new data format that supports seamlessly writing Spark DataFrame data into Milvus Collections. This is achieved by batch calls to the Insert API of Milvus SDK. If a collection doesn't exist in Milvus, a new collection will be created based on the schema of the Dataframe. However, the automatically created collection may not support all features of the collection schema. Therefore, it is recommended to create a collection via SDK first and then use spark-milvus for writing. For further information, please refer to [the demo](https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala).
+In [Quick start](#quick-start), we use the **milvus** format to write sample data into a Milvus cluster. The **milvus** format is a new data format that supports seamlessly writing Spark DataFrame data into Milvus Collections. This is achieved by batch calls to the Insert API of Milvus SDK. If a collection doesn't exist in Milvus, a new collection will be created based on the schema of the Dataframe. However, the automatically created collection may not support all features of the collection schema. Therefore, it is recommended to create a collection via SDK first and then use spark-milvus for writing. For further information, please refer to [the demo](https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala).
 
 ### milvusbinlog
 
 The new data format **milvusbinlog** is for reading Milvus built-in binlog data. Binlog is Milvus's internal data storage format based on parquet. Unfortunately, it can't be read by a regular parquet library, so we implemented this new data format to help Spark job read it.
-It is not recommended to use **milvusbinlog** directly unless you are familiar with the milvus internal storage details. We suggest using the [MilvusUtils](#MilvusUtils) function that will be introduced in the next section.
+It is not recommended to use **milvusbinlog** directly unless you are familiar with the milvus internal storage details. We suggest using the [MilvusUtils](#milvusutils) function that will be introduced in the next section.
 
 ```scalar
 val df = spark.read
@@ -202,7 +202,7 @@ This will be improved in the future. We recommend using parquet format in spark-
 
 ## MilvusUtils
 
-MilvusUtils contains several useful util functions. Currently it is only supported in Scala. More usage examples are in [Advanced Usage](#Advanced-Usage) section.
+MilvusUtils contains several useful util functions. Currently it is only supported in Scala. More usage examples are in [Advanced Usage](#advanced-usage) section.
 
 ### MilvusUtils.readMilvusCollection
 

@@ -18,11 +18,11 @@ JSON fields cannot deal with complex, nested structures and treats all nested st
 
 Milvus provides several powerful JSON operators that help filter and query JSON data, and these operators are:
 
-- [`JSON_CONTAINS(identifier, expr)`](#JSONCONTAINS): Filters entities where the specified JSON expression is found within the field.
+- [`JSON_CONTAINS(identifier, expr)`](#json_contains): Filters entities where the specified JSON expression is found within the field.
 
-- [`JSON_CONTAINS_ALL(identifier, expr)`](#JSONCONTAINSALL): Ensures that all elements of the specified JSON expression are present in the field.
+- [`JSON_CONTAINS_ALL(identifier, expr)`](#json_contains_all): Ensures that all elements of the specified JSON expression are present in the field.
 
-- [`JSON_CONTAINS_ANY(identifier, expr)`](#JSONCONTAINSANY): Filters entities where at least one member of the JSON expression exists within the field.
+- [`JSON_CONTAINS_ANY(identifier, expr)`](#json_contains_any): Filters entities where at least one member of the JSON expression exists within the field.
 
 Let’s explore these operators with examples to see how they can be applied in real-world scenarios.
 

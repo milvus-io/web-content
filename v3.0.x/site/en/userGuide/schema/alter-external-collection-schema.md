@@ -35,7 +35,7 @@ Use `add_collection_field()` to add a scalar field when you want to return the f
     <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#csharp">CSharp</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 ```python
@@ -144,7 +144,7 @@ The following example adds a dense vector field named `image_embedding_v2`.
     <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#csharp">CSharp</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 ```python
@@ -227,7 +227,7 @@ If you plan to run vector search on the added vector field, create an index for 
     <a href="#rust">Rust</a>
     <a href="#cpp">C++</a>
     <a href="#javascript">NodeJS</a>
-    <a href="#csharp">CSharp</a>
+    <a href="#csharp">C#</a>
     <a href="#bash">cURL</a>
 </div>
 ```python

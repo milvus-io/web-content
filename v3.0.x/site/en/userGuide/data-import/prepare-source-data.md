@@ -44,7 +44,7 @@ To obtain more information, refer to [`CollectionSchema`](https://milvus.io/api-
 </div>
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
 </div>
 
@@ -221,7 +221,7 @@ The following rules apply to StructArray values in all supported formats:
 
 - Starting in Milvus 3.0.6, binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar array subfields.
 
-pymilvus [BulkWriter](#Set-up-BulkWriter) supports the StructArray shapes above in every supported format, including element-nullable subfields and nullable StructArray values. Use the same row shapes in the writer's `add_row()` calls.
+pymilvus [BulkWriter](#set-up-bulkwriter) supports the StructArray shapes above in every supported format, including element-nullable subfields and nullable StructArray values. Use the same row shapes in the writer's `add_row()` calls.
 
 For the schema-side limits, see [StructArray Limits](structarray-limits.md#Import-and-storage-limits).
 
@@ -239,7 +239,7 @@ For the schema-side limits, see [StructArray Limits](structarray-limits.md#Impor
 A **LocalBulkWriter** appends rows from the source dataset and commits them to a local file of the specified format.
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
 </div>
 
@@ -302,7 +302,7 @@ For details on parameter settings, refer to LocalBulkWriter in the SDK reference
 Instead of committing appended data to a local file, a **RemoteBulkWriter** commits them to a remote bucket. Therefore, you should set up a **ConnectParam** object before creating a **RemoteBulkWriter**.
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
 </div>
 
@@ -361,7 +361,7 @@ private static RemoteBulkWriter createRemoteBulkWriter(CreateCollectionReq.Colle
 Once the connection parameters are ready, you can reference it in the **RemoteBulkWriter** as follows:
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
 </div>
 
@@ -422,7 +422,7 @@ A **BulkWriter** has two methods: `appendRow()` adds a row from a source dataset
 For demonstration purposes, the following code appends randomly generated data.
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
 </div>
 
@@ -641,7 +641,7 @@ To check the results, you can get the actual output path by printing the `getBat
 </div>
 
 <div class="multipleCode">
-  <a href="#python">Python </a>
+  <a href="#python">Python</a>
   <a href="#java">Java</a>
 </div>
 

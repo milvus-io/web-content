@@ -22,7 +22,7 @@ For more information, refer to [HNSW](hnsw.md).
 
 PQ is a vector compression technique that breaks down high-dimensional vectors into smaller sub-vectors, which are then quantized and compressed. The compression dramatically reduces memory requirements and accelerates distance computations.
 
-For more information, refer to [IVF_PQ](ivf-pq.md#PQ).
+For more information, refer to [IVF_PQ](ivf-pq.md#pq).
 
 ### HNSW + PQ
 
@@ -42,7 +42,7 @@ HNSW_PQ combines the strengths of HNSW and PQ to enable efficient approximate ne
 
     - `refine_k`: Acts as a magnification factor. For instance, if your top *k* is 100 and `refine_k` is 2, the system re-ranks the top 200 candidates and returns the best 100, enhancing overall accuracy.
 
-For a full list of parameters and valid values, refer to [Index params](hnsw-sq.md#Index-params).
+For a full list of parameters and valid values, refer to [Index params](hnsw-sq.md#index-params).
 
 ## Build index
 
@@ -76,7 +76,7 @@ In this configuration:
 
 - `metric_type`: The method used to calculate the distance between vectors. Supported values include `COSINE`, `L2`, and `IP`. For details, refer to [Metric Types](metric.md).
 
-- `params`: Additional configuration options for building the index. For details, refer to [Index building params](hnsw-pq.md#Index-building-params).
+- `params`: Additional configuration options for building the index. For details, refer to [Index building params](hnsw-pq.md#index-building-params).
 
 Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
 
@@ -103,7 +103,7 @@ res = MilvusClient.search(
 
 In this configuration:
 
-- `params`: Additional configuration options for searching on the index. For details, refer to [Index-specific search params](hnsw-pq.md#Index-specific-search-params).
+- `params`: Additional configuration options for searching on the index. For details, refer to [Index-specific search params](hnsw-pq.md#index-specific-search-params).
 
 ## Index params
 
@@ -111,7 +111,7 @@ This section provides an overview of the parameters used for building an index a
 
 ### Index building params
 
-The following table lists the parameters that can be configured in `params` when [building an index](hnsw-pq.md#Build-index).
+The following table lists the parameters that can be configured in `params` when [building an index](hnsw-pq.md#build-index).
 
 <table>
    <tr>
@@ -192,7 +192,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-pq.md#Search-on-index).
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-pq.md#search-on-index).
 
 <table>
    <tr>

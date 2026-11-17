@@ -37,11 +37,11 @@ If you prefer to use Pulsar V2 with Milvus v2.5.x, read [Use Pulsar V2 with Milv
 
 The upgrade process includes the following steps:
 
-1. [Persist data not consumed in pulsar​.](#Persist-data-not-consumed-in-Pulsar)
+1. [Persist data not consumed in pulsar​.](#persist-data-not-consumed-in-pulsar)
 
-2. [Stop Milvus and delete pulsar V2​.](#Stop-Milvus-and-delete-Pulsar-V2)
+2. [Stop Milvus and delete pulsar V2​.](#stop-milvus-and-delete-pulsar-v2)
 
-3. [Start Pulsar V3 and Milvus​.](#Start-Pulsar-V3-and-Milvus)
+3. [Start Pulsar V3 and Milvus​.](#start-pulsar-v3-and-milvus)
 
 ## Procedures
 
@@ -148,11 +148,11 @@ In this step, you need to stop the Milvus pod and delete the Pulsar V2 deploymen
 
 - For Milvus Helm users
 
-    If you have installed Milvus using the Milvus Helm chart, go to [Delete Pulsar v2 using Helm](#Delete-Pulsar-V2-using-Helm).
+    If you have installed Milvus using the Milvus Helm chart, go to [Delete Pulsar v2 using Helm](#delete-pulsar-v2-using-helm).
 
 - For Milvus Operator users
 
-    If you have installed Milvus using the Milvus Operator, go to [Delete Pulsar v2 using Milvus Operator](#Delete-Pulsar-V2-using-Milvus-Operator).
+    If you have installed Milvus using the Milvus Operator, go to [Delete Pulsar v2 using Milvus Operator](#delete-pulsar-v2-using-milvus-operator).
 
 #### Delete Pulsar V2 using Helm
 
@@ -363,11 +363,11 @@ In this step, you need to start the Pulsar V3 and Milvus pods.​ There are two 
 
 - For Helm User
 
-    If you have installed Milvus using the Milvus Helm chart, go to [For Helm User](#For-Helm-User).
+    If you have installed Milvus using the Milvus Helm chart, go to [For Helm User](#start-pulsar-v3-and-using-helm).
 
 - For Milvus Operator users
 
-    If you have installed Milvus using the Milvus Operator, go to [For Milvus Operator User](#For-Milvus-Operator-User).
+    If you have installed Milvus using the Milvus Operator, go to [For Milvus Operator User](#start-pulsar-v3-and-using-milvus-operator).
 
 #### Start Pulsar V3 and using Helm
 

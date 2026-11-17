@@ -17,7 +17,7 @@ Helm uses a packaging format called charts. A chart is a collection of files tha
 ## Prerequisites
 
 - [Install Helm CLI](https://helm.sh/docs/intro/install/).
-- [Create a K8s cluster](prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes).
+- [Create a K8s cluster](prerequisite-helm.md#how-can-i-start-a-k8s-cluster-locally-for-test-purposes).
 - Install a [StorageClass](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/). You can check the installed StorageClass as follows.
 
     ```bash
@@ -122,7 +122,7 @@ For complete architecture details, refer to the [Architecture Overview](architec
 
 </div>
 
-**Alternative message queues:** To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see [Optional dependencies](#Optional-dependencies).
+**Alternative message queues:** To deploy with Pulsar, Kafka, or RocksMQ instead of Woodpecker, see [Optional dependencies](#optional-dependencies).
 
 **Next steps:**
 The command above deploys Milvus with recommended configurations. For production use:
@@ -316,7 +316,7 @@ $ for image in $(find . -type f -name "*.tar.gz") ; do gunzip -c $image | docker
 $ kubectl apply -f milvus_manifest.yaml
 ```
 
-Till now, you can follow steps [2](#2-Check-Milvus-cluster-status) and [3](#3-Connect-to-Milvus) of the online install to check the cluster status and forward a local port to Milvus.
+Till now, you can follow steps [2](#2-check-milvus-cluster-status) and [3](#3-connect-to-milvus) of the online install to check the cluster status and forward a local port to Milvus.
 
 ## Upgrade running Milvus cluster
 

@@ -44,7 +44,7 @@ Quote the extras expression so shells such as zsh do not interpret the brackets.
 
 <div class="alert note">
 
-> Milvus Lite 3.x uses a different storage engine from the original 2.x package. It cannot open an existing 2.x `.db` file in place. Keep the original database and an environment that can open it, export its data there, and import the data into a new database. Installing a new package does not migrate the old storage format. See [Migrating data from Milvus Lite](#Migrating-data-from-Milvus-Lite).
+> Milvus Lite 3.x uses a different storage engine from the original 2.x package. It cannot open an existing 2.x `.db` file in place. Keep the original database and an environment that can open it, export its data there, and import the data into a new database. Installing a new package does not migrate the old storage format. See [Migrating data from Milvus Lite](#migrating-data-from-milvus-lite).
 
 </div>
 

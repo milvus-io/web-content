@@ -28,7 +28,7 @@ The following figure shows how it works.
 
 1. **Product Quantization (PQ)**
 
-    In this phase, the original vector is divided into smaller sub-vectors, and each sub-vector is mapped to its nearest centroid in a learned codebook. This mapping significantly reduces data size but introduces some rounding error since each sub-vector is approximated by a single centroid. For more details, refer to [IVF_PQ](ivf-pq.md#PQ).
+    In this phase, the original vector is divided into smaller sub-vectors, and each sub-vector is mapped to its nearest centroid in a learned codebook. This mapping significantly reduces data size but introduces some rounding error since each sub-vector is approximated by a single centroid. For more details, refer to [IVF_PQ](ivf-pq.md#pq).
 
 1. **Residual Quantization (RQ)**
 
@@ -58,7 +58,7 @@ By combining HNSW with PRQ, **HNSW_PRQ** retains HNSW’s fast graph-based searc
 
     - `refine_k`: Acts as a magnification factor. For instance, if your top *k* is 100 and `refine_k` is 2, the system re-ranks the top 200 candidates and returns the best 100, enhancing overall accuracy.
 
-For a full list of parameters and valid values, refer to [Index params](hnsw-prq.md#Index-params).
+For a full list of parameters and valid values, refer to [Index params](hnsw-prq.md#index-params).
 
 ## Build index
 
@@ -93,7 +93,7 @@ In this configuration:
 
 - `metric_type`: The method used to calculate the distance between vectors. Supported values include `COSINE`, `L2`, and `IP`. For details, refer to [Metric Types](metric.md).
 
-- `params`: Additional configuration options for building the index. For details, refer to [Index building params](hnsw-prq.md#Index-building-params).
+- `params`: Additional configuration options for building the index. For details, refer to [Index building params](hnsw-prq.md#index-building-params).
 
 Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
 
@@ -120,7 +120,7 @@ res = MilvusClient.search(
 
 In this configuration:
 
-- `params`: Additional configuration options for searching on the index. For details, refer to [Index-specific search params](hnsw-prq.md#Index-specific-search-params).
+- `params`: Additional configuration options for searching on the index. For details, refer to [Index-specific search params](hnsw-prq.md#index-specific-search-params).
 
 ## Index params
 
@@ -128,7 +128,7 @@ This section provides an overview of the parameters used for building an index a
 
 ### Index building params
 
-The following table lists the parameters that can be configured in `params` when [building an index](hnsw-prq.md#Build-index).
+The following table lists the parameters that can be configured in `params` when [building an index](hnsw-prq.md#build-index).
 
 <table>
    <tr>
@@ -218,7 +218,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-prq.md#Search-on-index).
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-prq.md#search-on-index).
 
 <table>
    <tr>

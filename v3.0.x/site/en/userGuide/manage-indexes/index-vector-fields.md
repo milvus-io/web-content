@@ -127,9 +127,9 @@ To prepare for indexing, use [`MilvusClient`](https://milvus.io/api-reference/no
 </div>
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python
@@ -245,9 +245,9 @@ To create an index for a collection or index a collection, use [`createIndex()`]
 </div>
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python
@@ -458,9 +458,9 @@ To check the index details, use [`describeIndex()`](https://milvus.io/api-refere
 </div>
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python
@@ -599,9 +599,9 @@ To drop an index, use [`dropIndex()`](https://milvus.io/api-reference/node/v2.4.
 </div>
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+    <a href="#javascript">NodeJS</a>
 </div>
 
 ```python

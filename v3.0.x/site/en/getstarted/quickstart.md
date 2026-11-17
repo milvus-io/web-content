@@ -53,7 +53,7 @@ Choose exactly one connection block below.
 
 To create a local Milvus vector database, instantiate a `MilvusClient` with a storage path, such as `milvus_demo.db`. Milvus Lite 3.x creates a directory at this path, even when its name ends in `.db`.
 
-If you have a database file created by Milvus Lite 2.x, export it with the old version before migrating. Do not open that file directly with Milvus Lite 3.x. See [Migrating data from Milvus Lite](milvus_lite.md#Migrating-data-from-Milvus-Lite).
+If you have a database file created by Milvus Lite 2.x, export it with the old version before migrating. Do not open that file directly with Milvus Lite 3.x. See [Migrating data from Milvus Lite](milvus_lite.md#migrating-data-from-milvus-lite).
 
 ```python
 from pymilvus import MilvusClient
@@ -354,7 +354,7 @@ Milvus Lite is great for getting started with a local python program. If you hav
 client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
-To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](milvus_lite.md#Migrating-data-from-Milvus-Lite).
+To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, refer to [Migrating data from Milvus Lite](milvus_lite.md#migrating-data-from-milvus-lite).
 
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
 

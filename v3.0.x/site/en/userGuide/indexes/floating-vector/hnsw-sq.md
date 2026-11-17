@@ -22,7 +22,7 @@ For more information, refer to [HNSW](hnsw.md).
 
 SQ is a method for compressing vectors by representing them with fewer bits. For instance:
 
-- **SQ8** uses 8 bits, mapping values into 256 levels.  For more information, refer to [IVF_SQ8](ivf-sq8.md#SQ8).
+- **SQ8** uses 8 bits, mapping values into 256 levels.  For more information, refer to [IVF_SQ8](ivf-sq8.md#sq8).
 
 - **SQ6** uses 6 bits to represent each floating-point value, resulting in 64 discrete levels.
 
@@ -72,7 +72,7 @@ HNSW_SQ combines the strengths of HNSW and SQ to enable efficient approximate ne
 
     - `refine_k`: Acts as a magnification factor. For instance, if your top *k* is 100 and `refine_k` is 2, the system re-ranks the top 200 candidates and returns the best 100, enhancing overall accuracy.
 
-For a full list of parameters and valid values, refer to [Index params](hnsw-sq.md#Index-params).
+For a full list of parameters and valid values, refer to [Index params](hnsw-sq.md#index-params).
 
 ## Build index
 
@@ -105,7 +105,7 @@ In this configuration:
 
 - `metric_type`: The method used to calculate the distance between vectors. Supported values include `COSINE`, `L2`, and `IP`. For details, refer to [Metric Types](metric.md).
 
-- `params`: Additional configuration options for building the index. For details, refer to [Index building params](hnsw-sq.md#Index-building-params).
+- `params`: Additional configuration options for building the index. For details, refer to [Index building params](hnsw-sq.md#index-building-params).
 
 Once the index parameters are configured, you can create the index by using the `create_index()` method directly or passing the index params in the `create_collection` method. For details, refer to [Create Collection](create-collection.md).
 
@@ -132,7 +132,7 @@ res = MilvusClient.search(
 
 In this configuration:
 
-- `params`: Additional configuration options for searching on the index. For details, refer to [Index-specific search params](hnsw-sq.md#Index-specific-search-params).
+- `params`: Additional configuration options for searching on the index. For details, refer to [Index-specific search params](hnsw-sq.md#index-specific-search-params).
 
 ## Index params
 
@@ -189,7 +189,7 @@ The following table lists the parameters that can be configured in `params` when
 
 ### Index-specific search params
 
-The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-sq.md#Search-on-index). Server settings can override the defaults for parameters you omit.
+The following table lists the parameters that can be configured in `search_params.params` when [searching on the index](hnsw-sq.md#search-on-index). Server settings can override the defaults for parameters you omit.
 
 <table>
    <tr>

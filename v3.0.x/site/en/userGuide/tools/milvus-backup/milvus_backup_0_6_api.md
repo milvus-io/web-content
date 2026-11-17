@@ -11,13 +11,13 @@ Use the Milvus Backup HTTP API to create backups, restore collections, and monit
 
 ## Obtain Milvus Backup
 
-The examples below were validated with **Milvus Backup 0.6.0**. Download and extract the appropriate binary from the [v0.6.0 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0). To build from source instead, follow [Obtain Milvus Backup](milvus_backup_0_6_cli.md#Obtain-Milvus-Backup); building requires Go 1.26 or later.
+The examples below were validated with **Milvus Backup 0.6.0**. Download and extract the appropriate binary from the [v0.6.0 release](https://github.com/zilliztech/milvus-backup/releases/tag/v0.6.0). To build from source instead, follow [Obtain Milvus Backup](milvus_backup_0_6_cli.md#obtain-milvus-backup); building requires Go 1.26 or later.
 
 ## Prepare configuration file
 
-Create `configs/backup.yaml` using the v2 example in [Prepare configuration file](milvus_backup_0_6_cli.md#Prepare-configuration-file). Configure access to Milvus, the instance's storage, and the backup destination. The Milvus server must also be able to access the backup storage for snapshot operations.
+Create `configs/backup.yaml` using the v2 example in [Prepare configuration file](milvus_backup_0_6_cli.md#prepare-configuration-file). Configure access to Milvus, the instance's storage, and the backup destination. The Milvus server must also be able to access the backup storage for snapshot operations.
 
-If you have a v1 file, it remains loadable. See [Migrate the configuration](milvus_backup_upgrade.md#Migrate-the-configuration) before changing its schema or environment variables.
+If you have a v1 file, it remains loadable. See [Migrate the configuration](milvus_backup_upgrade.md#migrate-the-configuration) before changing its schema or environment variables.
 
 From the directory containing the binary, inspect the configuration and check connectivity:
 
@@ -135,7 +135,7 @@ curl --request POST 'http://localhost:8080/api/v1/restore' \
   }'
 ```
 
-Poll `get_restore` on the same service using the returned task ID. Configure `milvus.*` for the restore target and `backup.storage` for the existing backup. See [Prepare configuration file](milvus_backup_0_6_cli.md#Prepare-configuration-file).
+Poll `get_restore` on the same service using the returned task ID. Configure `milvus.*` for the restore target and `backup.storage` for the existing backup. See [Prepare configuration file](milvus_backup_0_6_cli.md#prepare-configuration-file).
 
 ## Verify restored data
 

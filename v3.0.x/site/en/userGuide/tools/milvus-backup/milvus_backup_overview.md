@@ -25,7 +25,7 @@ The existing [same-instance](single-instance-backup-and-restore.md), [shared-buc
 
 ## Prerequisites
 
-- Use a Backup binary and configuration examples from the same release. The [0.5.x guide](milvus_backup_cli.md#Obtain-Milvus-Backup) pins 0.5.16; the [current guide](milvus_backup_0_6_cli.md#Obtain-Milvus-Backup) pins 0.6.0.
+- Use a Backup binary and configuration examples from the same release. The [0.5.x guide](milvus_backup_cli.md#obtain-milvus-backup) pins 0.5.16; the [current guide](milvus_backup_0_6_cli.md#obtain-milvus-backup) pins 0.6.0.
 - Provide network access to Milvus, its storage, and the backup destination. Snapshot operations also require the Milvus server to reach the backup store.
 - Check server compatibility below. Go is required only when building from source: 1.25 or later for Backup 0.5.16, and 1.26 or later for 0.6.0.
 
@@ -43,7 +43,7 @@ Milvus Backup coordinates collection metadata and data backups between the Milvu
 
 A backup directory contains metadata and the files required by its format. Preserve the complete directory when archiving or moving it. Do not assume that a snapshot backup uses the binlog directory layout.
 
-In 0.6.0, the `create --for` presets configure purpose-specific options: `clone` keeps the chosen format, while `archive` and `secondary` require binlog. A secondary also requires a configured replication topology; ordinary migration between instances does not require a secondary. See [Choose a backup format or purpose](milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose).
+In 0.6.0, the `create --for` presets configure purpose-specific options: `clone` keeps the chosen format, while `archive` and `secondary` require binlog. A secondary also requires a configured replication topology; ordinary migration between instances does not require a secondary. See [Choose a backup format or purpose](milvus_backup_0_6_cli.md#choose-a-backup-format-or-purpose).
 
 Backup 0.6.0 skips external collections during backup. A successful task does not imply that external collection data was included.
 

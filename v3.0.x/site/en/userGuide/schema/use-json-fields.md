@@ -447,9 +447,9 @@ To create a JSON path index, specify:
 
 - **JSON cast type** (`json_cast_type`): The data type that Milvus should use when interpreting and indexing the value at the specified path.
 
-    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514).
+    - This type must match the actual data type of the field being indexed. If you want to convert the data type to another during indexing, consider [using a cast function](use-json-fields.md#use-json-cast-functions-for-type-conversion--milvus-2514).
 
-    - For a complete list, see [below](use-json-fields.md#Supported-JSON-cast-types).
+    - For a complete list, see [below](use-json-fields.md#supported-json-cast-types).
 
 #### Supported JSON cast types
 
