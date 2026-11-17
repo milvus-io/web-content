@@ -191,6 +191,10 @@ curl --request POST \
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>Specifies the default timezone for this collection when handling time-sensitive operations, especially <code translate="no">TIMESTAMPTZ</code> fields. Timestamps are stored internally in UTC, and Milvus converts values for display and comparison according to this setting. If set, the collection timezone overrides the database’s default timezone; a query’s timezone parameter can temporarily override both. The value must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code translate="no">TIMESTAMPTZ</code> field, refer to <a href="/docs/v2.6.x/timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>Alters the consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), or <strong>Eventually</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="/docs/v2.6.x/tune_consistency.md">Consistency Level</a>.</p></td>
+   </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Example 1: Set collection TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -580,6 +584,73 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
       &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-7-Alter-the-consistency-level" class="common-anchor-header">Example 7: Alter the consistency level<button data-href="#Example-7-Alter-the-consistency-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>The following code snippet alters the consistency level of an existing collection to <strong>Eventually</strong>. The new level applies to subsequent searches and queries on this collection that do not explicitly set a consistency level; per-request settings still take precedence. For details, refer to <a href="/docs/v2.6.x/tune_consistency.md">Consistency Level</a>.</p>
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;consistency_level&quot;: &quot;Eventually&quot;
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
