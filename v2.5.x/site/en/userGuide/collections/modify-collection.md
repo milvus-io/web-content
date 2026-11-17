@@ -186,6 +186,72 @@ curl --request POST \
 }'
 ```
 
+The following code snippet alters the consistency level of an existing collection to **Eventually**. The new level applies to subsequent searches and queries on this collection that do not explicitly set a consistency level; per-request settings still take precedence. For details, refer to [Consistency Level](tune_consistency.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#go">Go</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.alter_collection_properties(
+    collection_name="my_collection",
+    properties={"consistency_level": "Eventually"}
+)
+```
+
+```java
+import io.milvus.v2.service.collection.request.AlterCollectionReq;
+import java.util.HashMap;
+import java.util.Map;
+
+Map<String, String> properties = new HashMap<>();
+properties.put("consistency_level", "Eventually");
+
+AlterCollectionReq alterCollectionReq = AlterCollectionReq.builder()
+        .collectionName("my_collection")
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+```
+
+```javascript
+res = await client.alterCollection({
+    collection_name: "my_collection",
+    properties: {
+        "consistency_level": "Eventually"
+    }
+})
+```
+
+```go
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty("consistency_level", "Eventually"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "collectionName": "my_collection",
+    "properties": {
+        "consistency_level": "Eventually"
+    }
+}'
+```
+
 The applicable collection properties are as follows:
 
 <table>
@@ -204,6 +270,10 @@ The applicable collection properties are as follows:
    <tr>
      <td><p><code>partitionkey.isolation</code></p></td>
      <td><p>With Partition Key Isolation enabled, Milvus groups entities based on the Partition Key value and creates a separate index for each of these groups. Upon receiving a search request, Milvus locates the index based on the Partition Key value specified in the filtering condition and restricts the search scope within the entities included in the index, thus avoiding scanning irrelevant entities during the search and greatly enhancing the search performance. For details, refer to <a href="use-partition-key.md#Use-Partition-Key-Isolation">Use Partition Key Isolation</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code>consistency_level</code></p></td>
+     <td><p>Alters the consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), or <strong>Eventually</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="tune_consistency.md">Consistency Level</a>.</p></td>
    </tr>
 </table>
 
