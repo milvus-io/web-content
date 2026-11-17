@@ -10,7 +10,6 @@ public SearchIterator searchIterator(SearchIteratorReq request)
 
 ```java
 searchIterator(SearchIteratorReq.builder()
-searchIterator(SearchIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .vectorFieldName(String vectorFieldName)
@@ -101,6 +100,14 @@ searchIterator(SearchIteratorReq.builder()
 *SearchIterator*
 
 A *SearchIterator* object to iterate search results, which offers the following methods:
+
+- `next()` (*List<QueryResultsWrapper.RowRecord>*) -
+
+    Returns the next batch of search results, or an empty list when iteration is complete.
+
+- `close()` (*void*) -
+
+    Closes the iterator and releases the underlying resources.
 
 **EXCEPTIONS:**
 

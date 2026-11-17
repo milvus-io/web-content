@@ -5,7 +5,7 @@ This operation alters the properties of a specified index.
 **Deprecated.** Replaced by `alterIndexProperties()` since SDK v2.5.3, to keep consistency with other SDKs.
 
 ```java
-public Void alterIndex(AlterIndexReq request)
+public void alterIndex(AlterIndexReq request)
 ```
 
 ## Request Syntax

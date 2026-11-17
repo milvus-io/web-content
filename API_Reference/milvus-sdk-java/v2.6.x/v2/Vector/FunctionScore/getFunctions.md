@@ -10,12 +10,6 @@ public List<CreateCollectionReq.Function> getFunctions()
 
 *List\<CreateCollectionReq.Function\>*
 
-**EXCEPTIONS:**
-
-- **[MilvusClientException](../../Client/MilvusClientException.md)**
-
-    This exception will be raised when any error occurs during this operation.
-
 ## Example
 
 ```java

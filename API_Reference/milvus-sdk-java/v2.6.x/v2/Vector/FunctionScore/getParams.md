@@ -10,12 +10,6 @@ public Map<String, String> getParams()
 
 *Map\<String, String\>*
 
-**EXCEPTIONS:**
-
-- **[MilvusClientException](../../Client/MilvusClientException.md)**
-
-    This exception will be raised when any error occurs during this operation.
-
 ## Example
 
 ```java

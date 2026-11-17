@@ -3,7 +3,7 @@
 This operation displays the details of an alias.
 
 ```java
-public DescribeAliasResp describeAlias(request)
+public DescribeAliasResp describeAlias(DescribeAliasReq request)
 ```
 
 ## Request Syntax

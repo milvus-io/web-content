@@ -59,9 +59,13 @@ An **OptimizeTask** that tracks progress and provides the optimization result.
 
 - `ProgressStage getProgress()` — Returns the current progress stage.
 
+- `List<ProgressStage> getProgressHistory()` — Returns the full progress history as a list of progress stages.
+
 - `List<String> getProgressHistoryAsStrings()` — Returns the progress history as strings.
 
 - `boolean cancel()` — Attempts to cancel the optimization.
+
+- `void checkCancelled()` — Throws an exception if the optimization was cancelled.
 
 - `OptimizeResp getResult(Long timeoutMs)` — Blocks until the result is available or the timeout elapses, then returns the `OptimizeResp`.
 

@@ -10,7 +10,6 @@ public QueryIterator queryIterator(QueryIteratorReq request)
 
 ```java
 queryIterator(QueryIteratorReq.builder()
-queryIterator(QueryIteratorReq.builder()
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
     .outputFields(List<String> outputFields)
@@ -84,6 +83,16 @@ queryIterator(QueryIteratorReq.builder()
 **RETURNS:**
 
 *QueryIterator*
+
+A **QueryIterator** object to iterate query results, which offers the following methods:
+
+- `next()` (*List<QueryResultsWrapper.RowRecord>*) -
+
+    Returns the next batch of query results, or an empty list when iteration is complete.
+
+- `close()` (*void*) -
+
+    Closes the iterator and releases the underlying resources.
 
 **EXCEPTIONS:**
 

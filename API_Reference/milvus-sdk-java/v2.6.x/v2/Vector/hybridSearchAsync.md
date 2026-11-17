@@ -153,14 +153,14 @@ CompletableFuture<SearchResp> future = client.hybridSearchAsync(HybridSearchReq.
                         .vectorFieldName("dense_vector")
                         .vectors(queryVector)
                         .limit(10)
-
-    .consistencyLevel(ConsistencyLevel.STRONG).build(),
+                        .build(),
                 AnnSearchReq.builder()
                         .vectorFieldName("sparse_vector")
                         .vectors(sparseVector)
                         .limit(10)
                         .build()))
         .limit(5)
+        .consistencyLevel(ConsistencyLevel.STRONG)
         .build());
 SearchResp response = future.get();
 ```
