@@ -31,19 +31,19 @@ Here's an example of how ARRAY fields store data:
 
 ## Add ARRAY field
 
-To use ARRAY fields in Milvus clusters, define the relevant field type when creating the collection schema. This process includes:
+To add an ARRAY field to the collection schema, set the following parameters:
 
-1. Setting `datatype` to the supported Array data type, `ARRAY`.
+1. Set the field data type to `ARRAY`.
 
-1. Using the `element_type` parameter to specify the data type of elements in the array. All elements in the same array must be of the same data type.
+1. Set `element_type` to the shared data type of the elements.
 
-1. Using the `max_capacity` parameter to define the maximum capacity of the array, i.e., the maximum number of elements it can contain.
+1. Set `max_capacity` to the maximum number of elements.
 
 Here’s how to define a collection schema that includes ARRAY fields:
 
 <div class="alert note">
 
-If you set `enable_dynamic_field=True` when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to [Dynamic Field](enable-dynamic-field.md).
+To insert fields not defined in the schema, enable the [dynamic field](enable-dynamic-field.md).
 
 </div>
 
@@ -349,9 +349,14 @@ export schema="{
 
 ## Set index params
 
-Indexing helps improve search and query performance. In Milvus clusters, indexing is mandatory for vector fields but optional for scalar fields.
+Vector fields require indexes; scalar indexes are optional. This example requests `AUTOINDEX` on `embedding` and `tags`. For explicit ARRAY index choices and filter support, see [Array index support](#Array-index-support).
 
-The following example creates indexes on the vector field `embedding` and the ARRAY field `tags`, both using the `AUTOINDEX` index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to [Index Explained](index-explained.md).
+<div class="alert note">
+
+> Scalar indexes, including `AUTOINDEX`, do not support recursive ARRAY fields or arrays with nullable elements. See [Array index support](array_data_type.md#Array-index-support) for ordinary-array filters and [Index StructArray Fields](index-structarray-fields.md#Create-scalar-indexes) for subfield rules.
+
+</div>
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -478,6 +483,31 @@ export indexParams='[
         }
     ]'
 ```
+
+<details id="Array-index-support">
+<summary><strong>Array index support: index types and accelerated filters</strong></summary>
+
+Scalar indexes on an ordinary ARRAY field index its elements. Milvus 3.0.6 supports these explicit choices:
+
+| Element type | Explicit index types |
+| --- | --- |
+| `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, `VARCHAR` | `INVERTED`, `BITMAP` |
+| `FLOAT`, `DOUBLE` | `INVERTED` |
+
+You can also request `AUTOINDEX`; see [Scalar Index](scalar_index.md#AUTOINDEX-behavior) for the default ARRAY selections.
+
+The following filters can use eligible array indexes:
+
+| Filter | Index behavior |
+| --- | --- |
+| `ARRAY_CONTAINS`, `ARRAY_CONTAINS_ANY`, `ARRAY_CONTAINS_ALL` | `INVERTED`, `BITMAP`, or an eligible automatic selection can look up elements regardless of position. |
+| Whole-array `==` or `!=` on Boolean, integer, or VARCHAR arrays | `INVERTED` can find candidates, then check original arrays for order and length. `BITMAP` does not serve this candidate path. |
+| Whole-array comparisons on floating-point arrays | Fall back to scanning. |
+| Element access, such as `tags[0]`, or array length | Element-membership indexing does not provide index lookup for these operations. |
+
+For expression syntax, see [ARRAY Operators](array-operators.md).
+
+</details>
 
 ## Create collection
 
@@ -1124,7 +1154,7 @@ curl --request POST \
 
 ## Vector search with filter expressions
 
-In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:
+Use ARRAY filters in vector search to restrict the eligible entities:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1305,4 +1335,4 @@ curl --request POST \
 }'
 ```
 
-Additionally, Milvus supports advanced Array filtering operators like `ARRAY_CONTAINS`, `ARRAY_CONTAINS_ALL`, `ARRAY_CONTAINS_ANY`, and `ARRAY_LENGTH` to further enhance query capabilities. For more details, refer to [ARRAY Operators](array-operators.md).
+For containment and length filters, see [ARRAY Operators](array-operators.md).

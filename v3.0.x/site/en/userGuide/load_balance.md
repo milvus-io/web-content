@@ -262,7 +262,7 @@ load_balance -s 3 -d 4 -ss 431067441441538050
   - [Insert, Upsert & Delete](insert-update-delete.md)
   - [Manage Partitions](manage-partitions.md)
   - [Index Vector Fields](index-vector-fields.md)
-  - [Index Scalar Fields](index-scalar-fields.md)
+  - [Scalar Index](scalar_index.md)
   - [Single-vector search](single-vector-search.md)
   - [Hybrid search](multi-vector-search.md)
 

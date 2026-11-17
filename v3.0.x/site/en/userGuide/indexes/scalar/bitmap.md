@@ -1,22 +1,72 @@
 ---
 id: bitmap.md
 title: "BITMAP"
-summary: "Bitmap indexing is an efficient indexing technique designed to improve query performance on low-cardinality scalar fields. Cardinality refers to the number of distinct values in a field. Fields with fewer distinct elements are considered low-cardinality."
+summary: "Use BITMAP for low-cardinality scalar filtering. Check supported filters, field restrictions, and index creation."
 ---
 
 # BITMAP
 
-Bitmap indexing is an efficient indexing technique designed to improve query performance on low-cardinality scalar fields. Cardinality refers to the number of distinct values in a field. Fields with fewer distinct elements are considered low-cardinality.
-
-This index type helps reduce the retrieval time of scalar queries by representing field values in a compact binary format and performing efficient bitwise operations on them. Compared to other types of indexes, bitmap indexes typically have higher space efficiency and faster query speeds when dealing with low-cardinality fields.
+`BITMAP` accelerates scalar filtering on fields with few distinct values, such as status codes and categories. Cardinality is the number of distinct values in a field. This page describes supported filters, field restrictions, and index creation.
 
 ## Overview
 
-The term **Bitmap** combines two words: **Bit** and **Map**. A bit represents the smallest unit of data in a computer, which can only hold a value of either **0** or **1**. A map, in this context, refers to the process of transforming and organizing data according to what value should be assigned to 0 and 1.
+<!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
 
-A bitmap index consists of two main components: bitmaps and keys. Keys represent the unique values in the indexed field. For each unique value, there is a corresponding bitmap. The length of these bitmaps is equal to the number of records in the collection. Each bit in the bitmap corresponds to a record in the collection. If the value of the indexed field in a record matches the key, the corresponding bit is set to **1**; otherwise, it is set to **0**.
+### Index targets and filters
 
-Consider a collection of documents with fields **Category** and **Public**. We want to retrieve documents that fall into the **Tech** category and are open to the **Public**. In this case, the keys for our bitmap indexes are **Tech** and **Public**.
+To create a `BITMAP` index explicitly, choose a non-primary-key target from the table below. Each row pairs a supported target with the filters the index can help evaluate:
+
+| Index target | Filters that can use the index |
+| --- | --- |
+| `BOOL` field | Equality (`==`, `!=`) and membership (`in`, `not in`). |
+| Integer field (`INT8`, `INT16`, `INT32`, `INT64`) | Equality, membership, and ranges (`<`, `<=`, `>`, `>=`). |
+| `VARCHAR` field | Equality, membership, ranges, and [LIKE or regex patterns](pattern-matching.md). Pattern evaluation can visit many distinct indexed strings. |
+| Ordinary `ARRAY` field with `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, or `VARCHAR` elements | `ARRAY_CONTAINS`, `ARRAY_CONTAINS_ANY`, `ARRAY_CONTAINS_ALL`. See [Array index support](array_data_type.md#Array-index-support). |
+| JSON path cast to `BOOL` or `VARCHAR` | Filters for the corresponding Boolean or string values above, subject to the [JSON index requirements](json-indexing.md#Index-requirements). |
+
+<div class="alert note">
+
+> Scalar indexes, including `AUTOINDEX`, do not support recursive ARRAY fields or arrays with nullable elements. See [Array index support](array_data_type.md#Array-index-support) for ordinary-array filters and [Index StructArray Fields](index-structarray-fields.md#Create-scalar-indexes) for subfield rules.
+
+</div>
+
+
+For ARRAY targets, `BITMAP` serves element-containment filters, not whole-array equality, element access by position, or array length. See [Array index support](array_data_type.md#Array-index-support).
+
+For automatic selection beyond these explicit targets, see [AUTOINDEX behavior](scalar_index.md#AUTOINDEX-behavior).
+
+<div class="alert note">
+
+> These are index capabilities, not limits on valid filter expressions. See [Scalar Index](scalar_index.md#Filter-execution) for shared lookup constraints. For `AND`, `OR`, `NOT`, and NULL tests (`IS NULL`, `IS NOT NULL`), see [Basic Operators](basic-operators.md).
+
+</div>
+
+
+### Memory considerations
+
+Memory and query costs depend on the number of distinct values and their distribution. Compare indexes with representative filters rather than treating a fixed cardinality as a universal performance cutoff.
+
+For dense bitmaps, a rough estimate in bytes is `(D + 1) * N / 8`, where `N` is the number of entities and `D` the number of distinct values. This includes one bitmap per distinct value and one for validity. Value storage and other overhead add to the estimate; an optional offset cache adds approximately `8 * N` bytes on a 64-bit system. Compressed bitmap representations can have substantially different memory use.
+
+These rough estimates cover loaded index memory with memory mapping disabled. Calculate them per segment, then sum across loaded segments and replicas.
+
+<div class="alert note">
+
+> Allow extra memory for loaded field data, vector indexes, collection and index overhead, and temporary allocations. Validate with representative data and queries; arrays, JSON, older index formats, and memory mapping require separate measurement.
+
+</div>
+
+
+### How BITMAP works
+
+<details>
+<summary><strong>View a bitmap filtering example</strong></summary>
+
+A bitmap index associates each distinct field value with a bitmap. Each bit corresponds to an entity: **1** means the entity has that value, and **0** means it does not.
+
+For example, to find public documents in the **Tech** category, combine the bitmaps for **Category = Tech** and **Public = true**:
 
 ![Bitmap](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png)
 
@@ -30,7 +80,9 @@ To find the documents that match both criteria, we perform a bitwise AND operati
 
 - **Tech** AND **Public**: [1, 0, 0, 0, 0]
 
-The resulting bitmap [1, 0, 0, 0, 0] indicates that only the first document (**ID** **1**) satisfies both criteria. By using bitmap indexes and efficient bitwise operations, we can quickly narrow down the search scope, eliminating the need to scan the entire dataset.
+Only the first document (**ID 1**) satisfies both criteria.
+
+</details>
 
 ## Create a bitmap index
 
@@ -220,9 +272,7 @@ curl --request POST \
 # }
 ```
 
-In this example, we create a bitmap index on the `category` field of the `my_collection` collection. The `add_index()` method is used to specify the field name, index type, and index name.
-
-Once the bitmap index is created, you can use the `filter` parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to [Filtering Explained](boolean.md).
+This creates an index on `my_collection.category`. Use the field in a query or search `filter`; see [Filtering Explained](boolean.md).
 
 ## Drop an index
 
@@ -230,11 +280,10 @@ Use the `drop_index()` method to remove an existing index from a collection.
 
 <div class="alert note">
 
-- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
-
-- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
+> For release requirements when dropping a scalar index, see [Scalar Index](scalar_index.md#Drop-index-compatibility).
 
 </div>
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -372,27 +421,3 @@ curl --request POST \
 #     "data": {}
 # }
 ```
-
-## Limits
-
-- Bitmap indexes are supported only for scalar fields that are not primary keys.
-
-- The data type of the field must be one of the following:
-
-    - `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, `VARCHAR`
-
-    - `ARRAY` (elements must be one of: `BOOL`, `INT8`, `INT16`, `INT32`, `INT64`, `VARCHAR`)
-
-- Bitmap indexes do not support the following data types:
-
-    - `FLOAT`, `DOUBLE`: Floating-point types are not compatible with the binary nature of bitmap indexes.
-
-    - `JSON`: JSON data types have a complex structure that cannot be efficiently represented using bitmap indexes.
-
-- Bitmap indexes are not suitable for fields with high cardinality (i.e., fields with a large number of distinct values).
-
-    - As a general guideline, bitmap indexes are most effective when the cardinality of a field is less than 500.
-
-    - When the cardinality increases beyond this threshold, the performance benefits of bitmap indexes diminish, and the storage overhead becomes significant.
-
-    - For high-cardinality fields, consider using alternative indexing techniques such as inverted indexes, depending on your specific use case and query requirements.

@@ -664,7 +664,7 @@ Before you can perform filtering operations on JSON fields, make sure:
 
 <details>
 
-<summary>Show code</summary>
+<summary><strong>Show code</strong></summary>
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1548,52 +1548,14 @@ For more information about JSON-specific operators, refer to [JSON Operators](js
 
 ## Next: Accelerate JSON queries
 
-By default, queries on JSON fields without acceleration will perform a full scan of all rows, which can be slow on large datasets. To speed up JSON queries, Milvus provides advanced indexing and storage optimization features.
+Without acceleration, JSON filters can require a scan of the data. Choose an approach according to the paths your application queries:
 
-<div class="alert warning">
+| Query needs | Guide | Array values |
+| --- | --- | --- |
+| A known set of frequently filtered paths | [JSON Indexing](json-indexing.md) covers selecting paths and casts, checking compatibility, and creating indexes. | Can accelerate elements at an indexed array path. |
+| Broad acceleration across many or varying paths | [JSON Shredding](json-shredding.md) covers the required storage configuration. | Does not accelerate values inside arrays; use path indexes for those keys. |
 
-Whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Use JSON path indexing for known query paths, or consider [JSON Shredding](json-shredding.md) for broad query acceleration.
-
-</div>
-
-The table below summarizes their differences and best-use scenarios:
-
-<table>
-   <tr>
-     <th><p>Technique</p></th>
-     <th><p>Best For</p></th>
-     <th><p>Arrays Acceleration</p></th>
-     <th><p>Notes</p></th>
-   </tr>
-   <tr>
-     <td><p>JSON Indexing</p></td>
-     <td><p>Small set of frequently accessed keys, arrays on a specific array key</p></td>
-     <td><p>Yes (on indexed array key)</p></td>
-     <td><p>Must preselect keys, maintenance needed if schema evolves</p></td>
-   </tr>
-   <tr>
-     <td><p>JSON Shredding</p></td>
-     <td><p>General speed-up across many keys, flexible for varied queries</p></td>
-     <td><p>No (does not accelerate values inside arrays)</p></td>
-     <td><p>Extra storage config, arrays still need per-key index</p></td>
-   </tr>
-   <tr>
-     <td><p>NGRAM Index</p></td>
-     <td><p>Wildcard searches, substring matching in text fields</p></td>
-     <td><p>N/A</p></td>
-     <td><p>Not for numeric/range filters</p></td>
-   </tr>
-</table>
-
-**Tip:** You can combine these approaches—for example, use JSON shredding for broad query acceleration, JSON indexing for high-frequency array keys, and NGRAM indexing for flexible text search.
-
-For implementation details, refer to:
-
--  [JSON Indexing](json-indexing.md)
-
-- [JSON Shredding](json-shredding.md)
-
-- [NGRAM](ngram.md)
+You can combine shredding with path indexes for frequently queried keys. For string-pattern filters on JSON paths, see the [JSON index combinations](json-indexing.md#Compatibility-reference) and the [NGRAM JSON-path example](ngram.md#Example-2-Create-on-a-JSON-path).
 
 ## FAQ
 

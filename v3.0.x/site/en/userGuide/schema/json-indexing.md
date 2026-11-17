@@ -1,152 +1,87 @@
 ---
 id: json-indexing.md
 title: "JSON Indexing"
-summary: "JSON fields provide a flexible way to store structured metadata in Milvus. Without indexing, queries on JSON fields require full collection scans, which become slow as your dataset grows. JSON indexing creates indexes on specific paths within your JSON data so equality, range, and other filter queries on those paths run fast."
+summary: "Choose a JSON path and cast, check JSON-specific requirements, and create path indexes."
 ---
 
 # JSON Indexing
 
-JSON fields provide a flexible way to store structured metadata in Milvus. Without indexing, queries on JSON fields require full collection scans, which become slow as your dataset grows. JSON indexing creates an index on a specific path within your JSON data so equality, range, and other filter queries on that path run fast.
+JSON path indexes accelerate filters on selected keys in a [JSON field](json-field-overview.md). This guide covers the path and cast settings, supported combinations, and creation steps specific to JSON. For general index selection and automatic-selection rules, see [Scalar Index](scalar_index.md).
 
-JSON indexing is ideal for:
+For documents with diverse query paths, consider [JSON Shredding](json-shredding.md).
 
-- Structured schemas with consistent, known keys
+<a id="Index-type-overview"></a>
 
-- Equality, `IN`, range, and text-match queries on specific JSON paths
-
-- Scenarios where you need precise control over which keys are indexed
-
-For complex JSON documents with diverse query patterns, consider [JSON Shredding](json-shredding.md) as an alternative.
-
-## Index type overview
-
-Milvus offers four index types for JSON paths. Each is suited to a different query pattern.
-
-Before choosing an index type, identify the **cast type** for the JSON path. The cast type determines how Milvus interprets the value at that path and which index types are available.
+## Before you create an index
 
 ### Understand cast types
 
-`json_cast_type` is the data type used to interpret and index the value at `json_path`. It is different from the field schema type: the field is still a `JSON` field, but each indexed path is treated as a specific scalar, array, or JSON object type.
+Choose the key to index with `json_path`, such as `metadata["price"]`. Set `json_cast_type` to the type of values at that path; the field schema remains `JSON`. The cast is required for both explicit indexes and `AUTOINDEX`. If you omit `json_path`, Milvus uses the field name supplied in the request.
 
-Choose the cast type that matches the values stored at the path. To check whether a cast type works with a specific index type, see [Compatibility reference](json-indexing.md#Compatibility-reference).
+<a id="Choose-an-index-type"></a>
+<a id="Compatibility-reference"></a>
+<a id="How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type"></a>
+<a id="INVERTED"></a>
+<a id="STLSORT"></a>
+<a id="BITMAP"></a>
+<a id="NGRAM"></a>
 
-| Cast type | Use when the path value is... | Example value |
+Choose a cast and one of its supported index types. This table lists the JSON path combinations supported in Milvus 3.0.6 with the default automatic type mapping; options marked * require the [opt-in setup](#Index-requirements):
+
+| Cast type | Values at the path | Supported index types |
 | --- | --- | --- |
-| `BOOL` | A Boolean value | `true` |
-| `DOUBLE` | A numeric value | `99.99` |
-| `VARCHAR` | A string value | `"electronics"` |
-| `ARRAY_BOOL` | An array of Boolean values | `[true, false]` |
-| `ARRAY_DOUBLE` | An array of numeric values | `[1.2, 3.14]` |
-| `ARRAY_VARCHAR` | An array of string values | `["tag1", "tag2"]` |
+| `BOOL` | Boolean, such as `true` | `AUTOINDEX`, `INVERTED`, `BITMAP`* |
+| `DOUBLE` | Number, such as `99.99` | `AUTOINDEX`, `INVERTED`, `STL_SORT`* |
+| `VARCHAR` | String, such as `"electronics"` | `AUTOINDEX`, `INVERTED`, `STL_SORT`*, `BITMAP`*, `NGRAM` |
+| `ARRAY_BOOL` | Boolean array, such as `[true, false]` | `INVERTED` |
+| `ARRAY_DOUBLE` | Number array, such as `[1.2, 3.14]` | `INVERTED` |
+| `ARRAY_VARCHAR` | String array, such as `["tag1", "tag2"]` | `INVERTED` |
 
-If values at the same path have inconsistent types, only values that match the cast type are indexed. For example, if `metadata["price"]` contains both `99.99` and `"99.99"`, an index of the `DOUBLE` cast type includes the numeric value and skips the string value. To convert string values during indexing, use `json_cast_function`; see [Example 5: Convert data type at index time](json-indexing.md#Example-5-Convert-data-type-at-index-time).
+<a id="What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities"></a>
 
-<div class="alert warning">
+Only values matching the cast are indexed. For example, a `DOUBLE` cast indexes `99.99` but skips `"99.99"`. To convert numeric strings during indexing, use `json_cast_function="STRING_TO_DOUBLE"` with a `DOUBLE` cast, as shown in [Example 5](#Example-5-Convert-data-type-at-index-time). This function cannot be used with other casts; values that fail conversion are skipped.
 
-Whole-object JSON indexing (`json_cast_type="JSON"`), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Create JSON path indexes for known query paths, or consider [JSON Shredding](json-shredding.md) for broad query acceleration.
+### Index requirements
 
-</div>
+<a id="Can-I-create-multiple-indexes-on-the-same-JSON-key"></a>
+<a id="What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type"></a>
 
-### Choose an index type
+Check these conditions before creating an index:
 
-After you choose a cast type, choose the index type according to your query pattern.
+- **One index per path:** Each `(field, json_path)` pair supports at most one index across all cast and index types.
+- **Matching query types:** A query must target the indexed path with a compatible value type to use the index. Incompatible filters can fall back to scanning.
+- **Array casts:** Specify `INVERTED` explicitly for `ARRAY_BOOL`, `ARRAY_DOUBLE`, and `ARRAY_VARCHAR`. The default 3.0.6 automatic type mapping does not accept these casts.
+- **String-pattern indexes:** For a `NGRAM` index, use a `VARCHAR` cast and supply `min_gram` and `max_gram`. See [NGRAM on a JSON path](ngram.md#Example-2-Create-on-a-JSON-path) for parameters and creation examples.
 
-| Query pattern | Recommended index type | Cast type requirement | Notes |
-| --- | --- | --- | --- |
-| Mixed equality and range filters on scalar values | `AUTOINDEX` | Use `BOOL`, `DOUBLE`, or `VARCHAR`. | Lets Milvus choose the internal index layout based on value cardinality. |
-| Filters on values inside JSON arrays | `INVERTED` | Use `ARRAY_BOOL`, `ARRAY_DOUBLE`, or `ARRAY_VARCHAR`. | Required for all array cast types. |
-| Range filters on numbers or sortable strings | `STL_SORT` or `AUTOINDEX` | Use `DOUBLE` or `VARCHAR`. | Use `STL_SORT` to force a sorted layout; use `AUTOINDEX` when you want automatic selection. |
-| Equality or `IN` filters on low-cardinality values | `BITMAP` or `AUTOINDEX` | Use `BOOL` or `VARCHAR`. | Use `BITMAP` to force a bitmap layout. For numeric values, use `AUTOINDEX` or `STL_SORT`. |
+<a id="AUTOINDEX"></a>
 
-When in doubt, start with `AUTOINDEX` for scalar paths. Use `INVERTED` explicitly for array cast types and text-match queries.
-
-### AUTOINDEX
-
-`AUTOINDEX` behavior depends on the `json_cast_type` you specify. In Milvus 3.0, `AUTOINDEX` no longer always resolves to `INVERTED` for JSON path indexes.
-
-| Cast type | `AUTOINDEX` behavior |
-| --- | --- |
-| `BOOL`, `DOUBLE`, `VARCHAR` | Chooses between `BITMAP` and `STL_SORT` based on value cardinality. |
-| `ARRAY_BOOL`, `ARRAY_DOUBLE`, `ARRAY_VARCHAR` | Not supported. Use `INVERTED` explicitly as the index type. |
-
-For scalar cast types (`BOOL`, `DOUBLE`, and `VARCHAR`), `AUTOINDEX` is the recommended starting point when you want Milvus to choose the internal index layout. During index build, Milvus measures the **cardinality** of the values at the JSON path. Cardinality means the number of distinct values at that path.
-
-Based on cardinality, Milvus chooses one of two internal layouts:
-
-- **Low cardinality**: Values repeat often, such as `metadata["in_stock"]` with `true` and `false`, or `metadata["status"]` with a small set of status strings. Milvus builds a `BITMAP` index internally for fast equality and `IN` filters.
-
-- **High cardinality**: Most values are distinct, such as `metadata["price"]`, `metadata["created_at"]`, or `metadata["product_id"]`. Milvus builds an `STL_SORT` index internally for fast range filters such as `>`, `<`, `>=`, and `<=`.
-
-The default `BITMAP`-vs-`STL_SORT` threshold is **100 distinct values**. You can tune this threshold with `bitmap_cardinality_limit`; see [How do I tune AUTOINDEX's BITMAP-vs-STL_SORT threshold?](json-indexing.md#How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold).
+JSON scalar `BITMAP`, `STL_SORT`, and cardinality-based automatic selection are available from Milvus 3.0.0. Before using the options marked * or cardinality-based `AUTOINDEX`, have your administrator complete the [index opt-in setup in the compatibility notes](release_notes.md#Compatibility-and-behavior-notes).
 
 <div class="alert note">
 
-**Behavior change in Milvus 3.0**. In earlier versions, `AUTOINDEX` on JSON paths always built an `INVERTED` index. From Milvus 3.0, `AUTOINDEX` picks between `BITMAP` and `STL_SORT` for scalar cast types. For array cast types and text-match queries, specify `INVERTED` explicitly.
+> Without the opt-in setup, `AUTOINDEX` uses `INVERTED` for scalar JSON paths, and explicit JSON `BITMAP` or `STL_SORT` requests fail. `INVERTED` and `NGRAM` do not require this setup. For automatic-selection rules and administrator overrides, see [AUTOINDEX behavior](scalar_index.md#AUTOINDEX-behavior).
 
 </div>
 
-### INVERTED
+<details id="Supported-filters">
+<summary><strong>JSON filter execution details</strong></summary>
 
-`INVERTED` is the best fit when you need text-match queries or array indexing.
+For scalar comparisons and string patterns, follow the selected index's [filter capabilities](scalar_index.md#Index-types). String filter syntax and planning rules are described in [Pattern Matching](pattern-matching.md).
 
-Specify `INVERTED` explicitly when:
+JSON-specific operations have these additional behaviors:
 
-- You need to index values inside JSON arrays.
+| Filter | JSON path index behavior |
+| --- | --- |
+| `JSON_CONTAINS`, `JSON_CONTAINS_ANY`, `JSON_CONTAINS_ALL` | An `INVERTED` index on a typed array path can look up compatible elements. Mixed-type or nested-array operands can fall back to scanning. |
+| `exists`, such as `exists metadata["price"]` | Can use an indexed path to test its presence. This differs from comparing the value or testing whether the entire field is NULL. |
 
-- You want one index type that handles equality, `IN`, range, text-match, and array queries.
+For expression syntax, see [JSON Operators](json-operators.md).
 
-For details, refer to [INVERTED](inverted.md).
-
-### STL_SORT
-
-`STL_SORT` stores values from a JSON path in sorted order. It is optimized for range filters on numeric values or sortable string values.
-
-`STL_SORT` supports only `DOUBLE` and `VARCHAR` cast types. Use it when:
-
-- Your filters compare values with `>`, `<`, `>=`, or `<=`.
-
-- The indexed values have high cardinality, such as prices, timestamps, IDs, or sortable codes.
-
-- You want to force a sorted layout instead of letting `AUTOINDEX` choose.
-
-`STL_SORT` does not support `BOOL` or `ARRAY_*` cast types. Use `INVERTED` for arrays.
-
-For details, refer to [STL_SORT](stl-sort.md).
-
-### BITMAP
-
-`BITMAP` creates a compact bitmap for each distinct value at a JSON path. It is optimized for equality and `IN` filters on values that repeat often.
-
-`BITMAP` supports only `BOOL` and `VARCHAR` cast types. Use it when:
-
-- Your filters use `==` or `IN`.
-
-- The indexed values have low cardinality, such as booleans, status values, or a small set of categories.
-
-- You want to force a bitmap layout instead of letting `AUTOINDEX` choose.
-
-`BITMAP` does not support `DOUBLE` or `ARRAY_*` cast types. For numeric values, use `AUTOINDEX`, `STL_SORT`, or `INVERTED` instead.
-
-For details, refer to [BITMAP](bitmap.md).
-
-### Compatibility reference
-
-Use the following matrix as a quick reference for supported `(cast type, index type)` combinations.
-
-| Cast type | Description | Example value | AUTOINDEX | INVERTED | STL_SORT | BITMAP |
-| --- | --- | --- | --- | --- | --- | --- |
-| `BOOL` | Boolean values (`true`/`false`). | `true` | Yes | Yes | No | Yes |
-| `DOUBLE` | Numeric values (integers or floats). | `99.99` | Yes | Yes | Yes | No |
-| `VARCHAR` | String values. | `"electronics"` | Yes | Yes | Yes | Yes |
-| `ARRAY_BOOL` | Array of booleans. | `[true, false]` | No | Yes | No | No |
-| `ARRAY_DOUBLE` | Array of numbers. | `[1.2, 3.14]` | No | Yes | No | No |
-| `ARRAY_VARCHAR` | Array of strings. | `["tag1", "tag2"]` | No | Yes | No | No |
-
-For cells marked `No`, Milvus rejects the request at index-creation time. For array cast types, use `INVERTED` explicitly (`AUTOINDEX` does not cover arrays).
+</details>
 
 ## Create a JSON index
 
-This section walks through indexing different shapes of JSON data. All examples use the sample structure below and assume you already have a collection that includes a `JSON` field named `metadata`.
+The examples use a connected client and a collection with a `JSON` field named `metadata`, containing data shaped as follows:
 
 ### Sample JSON structure
 
@@ -173,11 +108,11 @@ This section walks through indexing different shapes of JSON data. All examples 
 
 ### Basic setup
 
-The examples below assume you have a `MilvusClient` named `client` connected to your Milvus deployment, and a collection that already includes a `JSON` field named `metadata`. If you need to set those up from scratch, expand the block below.
+For connection and collection setup, expand the following block:
 
 <details>
 
-<summary>Connect and create a sample collection</summary>
+<summary><strong>Connect and create a sample collection</strong></summary>
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -689,11 +624,11 @@ var indexParams = new List<IndexParam>();
 export indexParams="[]"
 ```
 
-Each example that follows shows one `index_params.add_index(...)` call. Pick the ones that match your data and call them on the same `index_params` object. Then apply everything in a single `client.create_index(...)` call at the end. For details, see [Apply the index](json-indexing.md#Apply-the-index).
+Add the definitions that match your data to the same index-params object, then [apply the indexes](#Apply-the-index) in one request.
 
 ### Example 1: Index a top-level key with AUTOINDEX
 
-Index the `category` field for fast filtering by product category. With `AUTOINDEX`, Milvus picks `BITMAP` or `STL_SORT` based on how many distinct categories exist in your data.
+Index `metadata["category"]` with a `VARCHAR` cast and `AUTOINDEX`. The [index requirements](#Index-requirements) explain which automatic-selection mode your deployment uses.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -939,7 +874,7 @@ export emailIndex='{
 
 ### Example 3: Range queries with STL_SORT
 
-When you know your queries on a path will be dominated by range comparisons (`>`, `<`, `>=`, `<=`), pick `STL_SORT` directly. This bypasses cardinality measurement and builds the sorted layout immediately.
+After completing the [opt-in setup](#Index-requirements), index `metadata["price"]` with a `DOUBLE` cast and [STL_SORT](stl-sort.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1058,11 +993,11 @@ export priceIndex='{
 }'
 ```
 
-After indexing, range queries like `metadata["price"] > 50 AND metadata["price"] < 100` use binary search instead of a full scan.
+This supports range lookups such as `metadata["price"] > 50 AND metadata["price"] < 100`.
 
 ### Example 4: Equality queries with BITMAP
 
-For low-cardinality keys, such as status codes, booleans, or enum-like strings, pick `BITMAP` directly. Equality and `IN` queries become bitmap operations.
+After completing the [opt-in setup](#Index-requirements), index `metadata["in_stock"]` with a `BOOL` cast and [BITMAP](bitmap.md).
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1181,11 +1116,9 @@ export inStockIndex='{
 }'
 ```
 
-`BITMAP` is also a strong fit for fields like a `status` column with a handful of distinct string values.
-
 ### Example 5: Convert data type at index time
 
-When numeric data is mistakenly stored as strings, use `STRING_TO_DOUBLE` to convert the value to a number during index build.
+When numeric values are stored as strings, use `STRING_TO_DOUBLE` with a `DOUBLE` cast to convert them during index build.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1314,7 +1247,7 @@ export stringToDoubleIndex='{
 }'
 ```
 
-If conversion fails for a row (for example, a non-numeric string like `"invalid"`), that row is skipped during indexing.
+For conversion and skipped-value behavior, see [Understand cast types](#Understand-cast-types).
 
 
 ### Apply the index
@@ -1420,7 +1353,7 @@ curl --request POST \
   }"
 ```
 
-Index builds run asynchronously. Use `client.describe_index(...)` to check the build state of a specific index. The `state` field shows `Finished` once the build is done, and `total_rows`, `indexed_rows`, and `pending_index_rows` show progress along the way.
+After submitting the definitions, check each index's build state. The `state` field reports `Finished` when the build is complete; `total_rows`, `indexed_rows`, and `pending_index_rows` report progress:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1534,37 +1467,16 @@ Sample response:
 }
 ```
 
-Once `state` reports `Finished`, queries against the indexed path use the new index automatically.
+Once `state` reports `Finished`, the index is available to queries with compatible filters.
 
-For `AUTOINDEX` entries, the `index_type` field in this response is reported as `AUTOINDEX`. Milvus does not expose which underlying layout (`BITMAP` or `STL_SORT`) was chosen at build time. Treat the choice as an internal optimization: equality, `IN`, and range queries against the path will work regardless of which layout was selected.
+For `AUTOINDEX` entries, the `index_type` field in this response is reported as `AUTOINDEX`. The response does not identify the underlying index layout. For the selection rules, see [AUTOINDEX behavior](scalar_index.md#AUTOINDEX-behavior); the [path and cast requirements](#Index-requirements) still apply.
 
-## FAQ
+<a id="FAQ"></a>
 
-### How do I choose between AUTOINDEX and an explicit index type?
+<details id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold">
+<summary><strong>Advanced: Tune automatic selection for a JSON path</strong></summary>
 
-Start with `AUTOINDEX`. It picks the right layout from your data's cardinality, and it covers most equality, `IN`, and range queries on JSON paths. Pick an explicit type when:
-
-- You know your query pattern (for example, always range queries use `STL_SORT`, and always equality queries on low-cardinality values use `BITMAP`) and want to skip cardinality measurement.
-
-- You need text-match or substring queries. Use `INVERTED`.
-
-- You're indexing array cast types. Use `INVERTED` explicitly.
-
-### What happens if a query's filter expression uses a different type than the indexed cast type?
-
-If your filter expression uses a different type than the index's `json_cast_type`, Milvus does not use the index and may fall back to a slower brute-force scan if the data allows. For best performance, always align your filter expression with the cast type of the index. For example, if a numeric index is created with `json_cast_type="DOUBLE"`, only numeric filter conditions will leverage the index.
-
-### What if a JSON key has inconsistent data types across different entities?
-
-Inconsistent types can lead to **partial indexing**. For example, if `metadata["price"]` is stored as both a number (`99.99`) and a string (`"99.99"`) and you create an index with `json_cast_type="DOUBLE"`, only the numeric values are indexed. String-form entries are skipped and won't appear in filter results. Use `json_cast_function="STRING_TO_DOUBLE"` to coerce strings to numbers at index time, or fix the source data so all entries share one type.
-
-### Can I create multiple indexes on the same JSON key?
-
-No. Milvus allows at most one index per `(field, json_path)` pair, regardless of cast type or index type. You cannot create both an `INVERTED` and a `BITMAP` index on the same path, or two indexes on the same path with different cast types.
-
-### How do I tune AUTOINDEX's BITMAP-vs-STL_SORT threshold?
-
-By default, `AUTOINDEX` picks `BITMAP` when the indexed values have **100 or fewer distinct values** and `STL_SORT` otherwise. You can override this threshold by adding `"bitmap_cardinality_limit"` to your index parameters (range: 1-1000):
+This example changes the cardinality threshold for `metadata["category"]`. It applies only after the [opt-in setup](#Index-requirements) enables cardinality-based `AUTOINDEX`. For the parameter range, layout choices, and explicit-index behavior, see [Cardinality threshold](scalar_index.md#Cardinality-threshold):
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1586,7 +1498,7 @@ index_params.add_index(
         "json_path": 'metadata["category"]',
         "json_cast_type": "VARCHAR",
         # highlight-next-line
-        "bitmap_cardinality_limit": 200,  # use BITMAP up to 200 distinct values
+        "bitmap_cardinality_limit": 200,  # use BITMAP for fewer than 200 distinct values
     }
 )
 ```
@@ -1674,7 +1586,7 @@ indexParams.Add(new IndexParam("metadata", "category_index", IndexType.AutoIndex
     {
         ["json_path"] = "metadata[\"category\"]",
         ["json_cast_type"] = "VARCHAR",
-        ["bitmap_cardinality_limit"] = "200" // use BITMAP up to 200 distinct values
+        ["bitmap_cardinality_limit"] = "200" // use BITMAP for fewer than 200 distinct values
     }
 });
 ```
@@ -1692,4 +1604,6 @@ export categoryLimitIndex='{
 }'
 ```
 
-Most users don't need to tune this. Raise it if you have a moderate-cardinality field you'd prefer bitmapped; lower it to push `AUTOINDEX` toward `STL_SORT` sooner. The setting is ignored when you specify `INVERTED`, `STL_SORT`, or `BITMAP` explicitly.
+Apply this definition in place of Example 1, then [apply the index](#Apply-the-index).
+
+</details>

@@ -10,9 +10,7 @@ Milvus provides comparison, range, arithmetic, logical, and NULL operators for f
 
 <div class="alert note">
 
-The literal on the left-hand side of a filtering expression can either be a collection field name, such as `status`, `color`, etc., used in examples below, or the name of a StructArray subfield at a specific element index, as in `filter = 'struct[0][subfield] > 10'`.
-
-For details on scalar filtering in a StructArray field, refer to [StructArray Operators](struct-array-operators.md).
+The left operand can be a collection field, such as `status`, or a StructArray subfield at a specific element index, such as `struct[0][subfield] > 10`. See [StructArray Operators](struct-array-operators.md).
 
 </div>
 
@@ -365,8 +363,6 @@ string filter = "color in [\"red\", \"green\", \"blue\"]";
 filter='color in ["red", "green", "blue"]'
 ```
 
-This is useful when you want to check for membership in a list of values.
-
 ## Pattern matching operators
 
 Pattern matching operators help filter string values based on wildcard patterns or regular expressions.
@@ -512,7 +508,7 @@ string filter = "message !~ \"^DEBUG\"";
 filter='message !~ "^DEBUG"'
 ```
 
-For more details about choosing between `LIKE` and regex, supported field types, regex syntax, escaping rules, and performance, refer to [Pattern Matching](pattern-matching.md). Milvus also allows you to build an `NGRAM` index on `VARCHAR` fields or JSON string paths to accelerate eligible pattern matching filters. For details, refer to [NGRAM](ngram.md).
+For syntax, escaping, field support, and acceleration options such as `NGRAM`, see [Pattern Matching](pattern-matching.md).
 
 ## Arithmetic operators
 
@@ -803,6 +799,12 @@ Always wrap the bitwise operation in parentheses before comparing the result, su
 ## Logical operators
 
 Logical operators are used to combine multiple conditions into a more complex filter expression. These include `AND`, `OR`, and `NOT`.
+
+<div class="alert note">
+
+Each condition can use its own eligible index or scan path; one index type need not serve the entire expression. See [Scalar Index](scalar_index.md).
+
+</div>
 
 ### Supported logical operators
 
@@ -1197,6 +1199,12 @@ The operators check the stored field value. For a nullable field without a defau
 
 For a supported field defined with `nullable=False`, `IS NULL` matches no entities and `IS NOT NULL` matches all visible entities. Other conditions in the filter still apply.
 
+<div class="alert note">
+
+Scalar NULL filters use validity information from an eligible index or field data; they do not require a particular scalar index type. A non-nullable field can produce a constant result.
+
+</div>
+
 ### Use NULL filters in vector search
 
 The same operators can be used in search filters, but an entity also needs a vector in the field being searched to participate in similarity search.
@@ -1209,15 +1217,11 @@ Using the example data above, consider a search with `anns_field="embedding"`:
 | `embedding IS NULL` | None | Entity `3` matches the filter, but has no `embedding` vector to compare with the query vector. |
 | `embedding IS NOT NULL` | `1`, `2` | Both entities have an `embedding` vector. |
 
-All three filters are valid. A search on `embedding` with `embedding IS NULL` returns no hits because no entity can satisfy both requirements. To retrieve the entities with missing embeddings, use `query()` as shown above.
-
-Vector search already skips entities whose searched vector field is NULL, so `embedding IS NOT NULL` does not further narrow the candidates for a search on `embedding`. Ranking, other filters, and the search limit still determine which candidates are returned.
+To retrieve missing embeddings, use `query()`; a search on `embedding` with `embedding IS NULL` is valid but returns no hits. Vector search already skips NULL embeddings, so `embedding IS NOT NULL` does not further narrow candidates. Ranking, other filters, and the search limit still determine the returned hits.
 
 ## Tips on using basic operators with JSON and ARRAY fields
 
-While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.
-
-For example, if you have a `product` field that contains multiple keys like `price`, `model`, and `tags`, always reference the key directly:
+Reference a JSON key or ARRAY element directly in the expression. For example, to filter the `price` key in a JSON field named `product`:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -1307,9 +1311,7 @@ string filter = "history_temperatures[0] > 30";
 filter='history_temperatures[0] > 30'
 ```
 
-## Conclusion
-
-Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.
+<a id="Conclusion"></a>
 
 ## FAQ
 

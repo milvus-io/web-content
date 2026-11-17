@@ -1,20 +1,16 @@
 ---
 id: stl-sort.md
 title: "STL_SORT"
-summary: "The STL_SORT index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.), VARCHAR fields, or TIMESTAMPTZ fields by organizing the data in a sorted order."
+summary: "Use STL_SORT for value lookups, range filtering, and string prefix matching on compatible fields."
 ---
 
 # STL_SORT
 
-The `STL_SORT` index is an index type specifically designed to enhance query performance on numeric fields (INT8, INT16, etc.), `VARCHAR` fields, or `TIMESTAMPTZ` fields within Milvus by organizing the data in a sorted order.
+`STL_SORT` stores values in sorted order to accelerate value lookups, range filters, and string prefix matching.
 
-Use the `STL_SORT` index if you frequently run queries with:
+## Overview
 
-- Comparison filtering with `==`, `!=`, `>`, `<`, `>=`, and `<=` operators
-
--  Range filtering with `IN` and `LIKE` operators
-
-## Supported data types
+### Supported data types
 
 - Numeric fields (e.g., `INT8`, `INT16`, `INT32`, `INT64`, `FLOAT`, `DOUBLE`). For details, refer to [Boolean & Number](number.md).
 
@@ -22,35 +18,75 @@ Use the `STL_SORT` index if you frequently run queries with:
 
 - `TIMESTAMPTZ` fields. For details, refer to [TIMESTAMPTZ Field](timestamptz-field.md).
 
-## How it works
+For numeric, VARCHAR, or TIMESTAMPTZ subfields in a StructArray, see [Index StructArray Fields](index-structarray-fields.md#Create-scalar-indexes). Ordinary ARRAY fields do not support `STL_SORT` in Milvus 3.0.6; see [Array index support](array_data_type.md#Array-index-support) for their index choices.
 
-Milvus implements `STL_SORT` in two phases:
+JSON paths cast to `DOUBLE` or `VARCHAR` support `STL_SORT` after the [3.0 JSON index opt-in setup](json-indexing.md#Index-requirements).
 
-1. **Build index**
+<a id="Queries-accelerated-by-STLSORT"></a>
 
-    - During ingestion, Milvus collects all values for the indexed field.
+<a id="Supported-filters"></a>
 
-    - The values are sorted in ascending order using C++ STL’s [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort.html).
+### Filter acceleration
 
-    - Each value is paired with its entity ID, and the sorted array is persisted as the index.
+An `STL_SORT` index can help evaluate the following conditions, subject to field and cast compatibility:
 
-1. **Accelerate queries**
+- Equality (`==`, `!=`) and membership (`in`, `not in`).
+- Ranges: `<`, `<=`, `>`, `>=`, including intervals such as `10 <= price < 50`.
+- VARCHAR prefix matching, such as `name LIKE "abc%"`.
+- Comparisons on eligible JSON scalar paths. See [JSON filters](json-indexing.md#Supported-filters).
 
-    - At query time, Milvus uses **binary search** ([std::lower_bound](https://en.cppreference.com/w/cpp/algorithm/lower_bound.html) and [std::upper_bound](https://en.cppreference.com/w/cpp/algorithm/upper_bound.html)) on the sorted array.
+For suffix, substring, general LIKE, and regex filters, Milvus can evaluate the pattern against strings stored in the index. This can require visiting many distinct strings. See [Pattern Matching](pattern-matching.md) for syntax and planning simplifications.
 
-    - For equality, Milvus quickly finds all matching values.
+<div class="alert note">
 
-    - For ranges, Milvus locates the start and end positions and returns all values in between.
+> These are index capabilities, not limits on valid filter expressions. See [Scalar Index](scalar_index.md#Filter-execution) for shared lookup constraints. For `AND`, `OR`, `NOT`, and NULL tests (`IS NULL`, `IS NOT NULL`), see [Basic Operators](basic-operators.md).
 
-    - Matching entity IDs are passed to the query executor for final result assembly.
+</div>
+
+
+<a id="Usage-notes"></a>
+
+### Memory considerations
+
+Explicit `STL_SORT` indexes do not support memory-mapped mode.
+
+For numeric and timestamp fields with no NULL values, use these rough estimates in bytes. `N` is the number of entities:
+
+| Field type | Estimate |
+| --- | --- |
+| `INT8`, `INT16`, `INT32`, `FLOAT` | `12 * N` |
+| `INT64`, `DOUBLE`, `TIMESTAMPTZ` | `20 * N` |
+| `VARCHAR` | Measure with representative data; loaded memory depends on string storage, distinct values, and posting-list capacity. |
+
+Divide by `1024 * 1024` to convert bytes to MiB. One million non-NULL INT64 values require roughly 19 MiB for the main index structures. Measure VARCHAR indexes after loading: serialized index size does not include all in-memory string and posting-list allocations.
+
+These rough estimates cover loaded index memory with memory mapping disabled. Calculate them per segment, then sum across loaded segments and replicas.
+
+<div class="alert note">
+
+> Allow extra memory for loaded field data, vector indexes, collection and index overhead, and temporary allocations. Validate with representative data and queries; arrays, JSON, older index formats, and memory mapping require separate measurement.
+
+</div>
+
+
+<a id="How-it-works"></a>
+
+### How STL_SORT works
+
+<details>
+<summary><strong>View the sorting and lookup process</strong></summary>
+
+During index building, Milvus pairs field values with entity IDs, sorts them in ascending order using [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort.html), and persists the sorted array.
+
+For equality and range queries, binary search ([std::lower_bound](https://en.cppreference.com/w/cpp/algorithm/lower_bound.html) and [std::upper_bound](https://en.cppreference.com/w/cpp/algorithm/upper_bound.html)) locates the matching interval. The query executor receives the entity IDs in that interval.
 
 This reduces query complexity from **O(n)** (full scan) to **O(log n + m)**, where *m* is the number of matches.
 
+</details>
+
 ## Create an STL_SORT index
 
-You can create an `STL_SORT` index on a numeric, `VARCHAR`, or `TIMESTAMPTZ` field. No extra parameters are required.
-
-The example below shows how to create an `STL_SORT` index on a `TIMESTAMPTZ` field:
+Set `index_type` to `STL_SORT`; no extra index parameters are required. This example indexes a `TIMESTAMPTZ` field:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -223,11 +259,10 @@ Use the `drop_index()` method to remove an existing index from a collection.
 
 <div class="alert note">
 
-- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
-
-- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
+> For release requirements when dropping a scalar index, see [Scalar Index](scalar_index.md#Drop-index-compatibility).
 
 </div>
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -354,11 +389,3 @@ curl --request POST \
 #     "data": {}
 # }
 ```
-
-## Usage notes
-
-- **Field types:** Works with numeric, `VARCHAR`, and `TIMESTAMPTZ` fields. For more information on data types, refer to [Boolean & Number](number.md) and [TIMESTAMPTZ Field](timestamptz-field.md).
-
-- **Parameters:** No index parameters are needed.
-
-- **Mmap not supported:** Memory-mapped mode is not available for `STL_SORT`.

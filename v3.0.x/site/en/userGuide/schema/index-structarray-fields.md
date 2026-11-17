@@ -11,7 +11,9 @@ This page uses the `tech_articles` collection from [Create a StructArray Field](
 
 ## Before you begin
 
-Make sure the collection schema already contains the `chunks` StructArray field. Reuse the initialized client from [Create a StructArray Field](create-structarray-field.md) for your selected language (`cli` and `ctx` for Go, `client` for the other SDKs). You can create indexes before inserting data.
+Make sure the collection schema already contains the `chunks` StructArray field. Reuse the initialized client from [Create a StructArray Field](create-structarray-field.md) for your selected language (`cli` and `ctx` for Go, `client` for the other SDKs). You can create indexes before inserting data. Check [StructArray Limits](structarray-limits.md) for the combined limit on vector fields and vector subfields before adding them.
+
+Specify the complete subfield path, such as `chunks[emb]`; bare subfield names and dot notation are invalid index targets.
 
 | Subfield path | Type | Index purpose |
 | --- | --- | --- |
@@ -27,23 +29,74 @@ A vector field or vector subfield accepts only one index. If you need both Embed
 
 </div>
 
+<a id="Index-rules"></a>
+
 ## Choose indexes
 
-Use the search mode to choose the vector metric family.
+Choose the vector metric family by search mode:
 
-| Search or filter goal | Target path | What to choose |
+| Search mode | Target path | Metric family |
 | --- | --- | --- |
 | EmbeddingList search | `chunks[emb_list_vector]` | A `MAX_SIM*` metric family. |
 | Element-level vector search | `chunks[emb]` | A regular vector metric family, such as `COSINE`, `IP`, or `L2`. |
-| Filter by string or category | `chunks[section]` | A scalar index supported by your target. |
-| Filter by numeric range | `chunks[quality_score]`, `chunks[page]` | A scalar index supported by your target. |
-| Filter by boolean value | `chunks[has_code]` | A scalar index supported by your target. |
 
 EmbeddingList search treats the vectors in a StructArray vector subfield as an embedding list and returns entity-level results. Element-level search searches each Struct element independently and can return the matched element offset.
 
+
+## Index element-nullable and added vector subfields | Milvus 3.0.6
+
+Starting in Milvus 3.0.6, a vector subfield can be created with element-level null (`nullable=True`), and a vector subfield can be added to an existing StructArray field. Both cases change how you index the subfield:
+
+
+- An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as `COSINE`, `IP`, or `L2`. `MAX_SIM*` metrics and EmbeddingList indexes are rejected on it, and `AUTOINDEX` does not select a `MAX_SIM*` metric for it. Null vectors are skipped when the index is built and during search.
+
+
+- A vector subfield added to an existing StructArray field is always element-nullable, so the same metric rule applies. You cannot bind an index in the add request; create the index separately after the subfield exists.
+
+- A load that includes a vector subfield requires an index on it, as for any vector field. Create the index on an added vector subfield before you load the collection with that subfield included. Queries can return the new subfield before the index exists.
+
+- History segments receive an added subfield and its index through schema-version compaction. Set `dataCoord.compaction.bumpSchemaVersion.enabled` to `true` (it is `false` by default); otherwise the added subfield's index does not cover history segments.
+
+- Milvus builds the vector index for a segment of an element-nullable vector subfield only when the segment holds at least 1,024 valid (non-null) elements. A segment below this threshold builds no index, and queries on it run brute-force search.
+
+
+<a id="Applicable-metric-types"></a>
+
+## Index metric compatibility
+
+Choose an index and metric compatible with the vector subfield type and search mode:
+
+### EmbeddingList search
+
+EmbeddingList search uses `MAX_SIM*` metrics; `MAX_SIM` is an alias for `MAX_SIM_COSINE`:
+
+
+| Vector subfield data type | Index type | Metric type |
+| --- | --- | --- |
+| `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR` | `IVF_FLAT`, `IVF_FLAT_CC`, `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ`, `DISKANN` | `MAX_SIM`, `MAX_SIM_COSINE`, `MAX_SIM_IP`, `MAX_SIM_L2` |
+| `INT8_VECTOR` | `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ` | `MAX_SIM`, `MAX_SIM_COSINE`, `MAX_SIM_IP`, `MAX_SIM_L2` |
+| `BINARY_VECTOR` | `HNSW` | `MAX_SIM_HAMMING`, `MAX_SIM_JACCARD` |
+
+
+### Element-level search
+
+Element-level search uses regular vector metrics:
+
+
+| Vector subfield data type | Index type | Metric type |
+| --- | --- | --- |
+| `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR` | `FLAT`, `IVF_FLAT`, `IVF_FLAT_CC`, `IVF_SQ8`, `IVF_SQ_CC`, `IVF_PQ`, `SCANN`, `IVF_RABITQ`, `IVF_RABITQ_FASTSCAN`, `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ`, `DISKANN` | `L2`, `IP`, `COSINE` |
+| `INT8_VECTOR` | `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ` | `L2`, `IP`, `COSINE` |
+| `BINARY_VECTOR` | `HNSW` | `HAMMING`, `JACCARD` |
+| `BINARY_VECTOR` | `BIN_FLAT` | `HAMMING`, `JACCARD`, `SUBSTRUCTURE`, `SUPERSTRUCTURE`, `MHJACCARD` |
+| `BINARY_VECTOR` | `BIN_IVF_FLAT` | `HAMMING`, `JACCARD` |
+
+
+For version-specific support and other limits, see [StructArray Limits](structarray-limits.md).
+
 ## Create vector indexes
 
-The following example creates two vector indexes. The first index uses a `MAX_SIM*` metric for EmbeddingList search. The second index uses a regular vector metric for element-level search.
+Create one index for each vector subfield using the chosen metric family:
 
 
 <div class="multipleCode">
@@ -243,16 +296,14 @@ curl --request POST \
 ```
 
 
-<div class="alert note">
-
-Warning
-Do not create a `MAX_SIM*` index and a regular vector-metric index on the same vector subfield. If both search modes are required, write vectors to two separate vector subfields and create one index on each subfield.
-
-</div>
-
 ## Create scalar indexes
 
-Create scalar indexes on StructArray scalar subfields when you use them in filters. Use the same `structArray[subfield]` path syntax.
+Create scalar indexes on StructArray scalar subfields when you use them in filters. Use the same `structArray[subfield]` path syntax. Index each subfield individually rather than the entire StructArray field.
+
+Subfield indexes use array representations, but their compatibility can differ from ordinary ARRAY fields. In particular, a Boolean StructArray subfield supports `INVERTED` and `BITMAP`, but not explicit `STL_SORT`. For other non-vector subfield choices, see [Scalar Index](scalar_index.md#Supported-field-types); use this page's subfield-specific rules when they differ.
+
+
+Starting in Milvus 3.0.6, scalar indexes are not supported on element-nullable subfields or on scalar `ARRAY` subfields. Filters on these subfields run without an index.
 
 
 <div class="multipleCode">
@@ -455,88 +506,7 @@ curl --request POST \
 ```
 
 
-Scalar indexes are optional but useful when StructArray scalar subfields appear frequently in filters, such as `element_filter(chunks, $[quality_score] > 0.9)` or `MATCH_ANY(chunks, $[section] == "index")`.
-
-## Applicable metric types
-
-For EmbeddingList search, choose the `MAX_SIM*` metric corresponding to the per-vector comparison: `MAX_SIM_COSINE` (also named `MAX_SIM`), `MAX_SIM_IP`, or `MAX_SIM_L2` for dense vectors, and `MAX_SIM_HAMMING` or `MAX_SIM_JACCARD` for binary vectors. These metrics compare embedding lists and return entity-level results. For element-level search, use the corresponding regular metric listed below.
-
-
-Starting in Milvus 3.0.6, scalar indexes are not supported on element-nullable subfields or on scalar `ARRAY` subfields. Filters on these subfields run without an index.
-
-
-
-## Index element-nullable and added vector subfields | Milvus 3.0.6
-
-Starting in Milvus 3.0.6, a vector subfield can be created with element-level null (`nullable=True`), and a vector subfield can be added to an existing StructArray field. Both cases change how you index the subfield:
-
-
-- An element-nullable vector subfield supports element-level search only. Index it with a regular vector metric such as `COSINE`, `IP`, or `L2`. `MAX_SIM*` metrics and EmbeddingList indexes are rejected on it, and `AUTOINDEX` does not select a `MAX_SIM*` metric for it. Null vectors are skipped when the index is built and during search.
-
-
-- A vector subfield added to an existing StructArray field is always element-nullable, so the same metric rule applies. You cannot bind an index in the add request; create the index separately after the subfield exists.
-
-- A load that includes a vector subfield requires an index on it, as for any vector field. Create the index on an added vector subfield before you load the collection with that subfield included. Queries can return the new subfield before the index exists.
-
-- History segments receive an added subfield and its index through schema-version compaction. Set `dataCoord.compaction.bumpSchemaVersion.enabled` to `true` (it is `false` by default); otherwise the added subfield's index does not cover history segments.
-
-- Milvus builds the vector index for a segment of an element-nullable vector subfield only when the segment holds at least 1,024 valid (non-null) elements. A segment below this threshold builds no index, and queries on it run brute-force search.
-
-
-```python
-index_params = client.prepare_index_params()
-
-# Element-level index on an added, element-nullable vector subfield.
-index_params.add_index(
-    field_name="chunks[summary_emb]",
-    index_name="chunks_summary_emb_cosine",
-    index_type="HNSW",
-    metric_type="COSINE",
-    params={
-        "M": 16,
-        "efConstruction": 200,
-    },
-)
-
-client.create_index(
-    collection_name="tech_articles",
-    index_params=index_params,
-)
-```
-
-## Index metric compatibility
-
-Use the following tables to choose an index type and metric type for a StructArray vector subfield. Start from the target, then choose the metric family by search mode.
-
-Choose a Milvus index type and metric type from the following compatibility tables.
-
-### EmbeddingList search
-
-EmbeddingList search uses `MAX_SIM*` metrics. It treats the vectors in a StructArray vector subfield as an embedding list and returns entity-level results.
-
-
-| Vector subfield data type | Index type | Metric type |
-| --- | --- | --- |
-| `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR` | `IVF_FLAT`, `IVF_FLAT_CC`, `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ`, `DISKANN` | `MAX_SIM`, `MAX_SIM_COSINE`, `MAX_SIM_IP`, `MAX_SIM_L2` |
-| `INT8_VECTOR` | `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ` | `MAX_SIM`, `MAX_SIM_COSINE`, `MAX_SIM_IP`, `MAX_SIM_L2` |
-| `BINARY_VECTOR` | `HNSW` | `MAX_SIM_HAMMING`, `MAX_SIM_JACCARD` |
-
-
-### Element-level search
-
-Element-level search uses regular vector metrics. It searches each Struct element independently and can return the matched element offset.
-
-
-| Vector subfield data type | Index type | Metric type |
-| --- | --- | --- |
-| `FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR` | `FLAT`, `IVF_FLAT`, `IVF_FLAT_CC`, `IVF_SQ8`, `IVF_SQ_CC`, `IVF_PQ`, `SCANN`, `IVF_RABITQ`, `IVF_RABITQ_FASTSCAN`, `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ`, `DISKANN` | `L2`, `IP`, `COSINE` |
-| `INT8_VECTOR` | `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ` | `L2`, `IP`, `COSINE` |
-| `BINARY_VECTOR` | `HNSW` | `HAMMING`, `JACCARD` |
-| `BINARY_VECTOR` | `BIN_FLAT` | `HAMMING`, `JACCARD`, `SUBSTRUCTURE`, `SUPERSTRUCTURE`, `MHJACCARD` |
-| `BINARY_VECTOR` | `BIN_IVF_FLAT` | `HAMMING`, `JACCARD` |
-
-
-For version-specific support and other limits, see [StructArray Limits](structarray-limits.md).
+Scalar indexes are optional. Use them for frequent filters on subfields such as `section`, `quality_score`, `page`, or `has_code`. Examples include `element_filter(chunks, $[quality_score] > 0.9)` and `MATCH_ANY(chunks, $[section] == "index")`.
 
 ## Verify indexes
 
@@ -762,33 +732,37 @@ curl --request POST \
 }'
 ```
 
-The list response contains the index names; the describe response identifies `chunks[emb]` and the index configuration. Inspect the response or status for errors before using it.
+Check that the describe response identifies `chunks[emb]` and the expected configuration, with no reported errors.
 
-## Index rules
+<details>
+<summary><strong>Example: Index an added vector subfield</strong></summary>
 
-| Rule | Explanation |
-| --- | --- |
-| Use path syntax for subfield indexes. | Index `chunks[emb]`, not `emb` or `chunks.emb`. |
-| One vector subfield accepts one index. | Use separate vector subfields if you need different metric families. |
-| Use `MAX_SIM*` metrics for EmbeddingList search. | EmbeddingList query data requires an index built with a `MAX_SIM*` metric. |
-| Use regular vector metrics for element-level search. | Element-level search uses regular vector query data and metrics such as `COSINE`, `IP`, or `L2`. |
-| Index scalar subfields that appear in filters. | Use scalar index types supported by your target. Element-nullable subfields and scalar `ARRAY` subfields cannot be indexed. |
-| Use element-level metrics on element-nullable vector subfields. | An element-nullable vector subfield (`nullable=True`), including any vector subfield added to an existing StructArray field, rejects `MAX_SIM*` metrics. |
-| Keep vector-field limits in mind. | The total number of vector fields and vector subfields is limited. See StructArray Limits before adding many vector subfields. |
+```python
+index_params = client.prepare_index_params()
+
+# Element-level index on an added, element-nullable vector subfield.
+index_params.add_index(
+    field_name="chunks[summary_emb]",
+    index_name="chunks_summary_emb_cosine",
+    index_type="HNSW",
+    metric_type="COSINE",
+    params={
+        "M": 16,
+        "efConstruction": 200,
+    },
+)
+
+client.create_index(
+    collection_name="tech_articles",
+    index_params=index_params,
+)
+```
+
+</details>
 
 ## Common mistakes
 
-- Creating an index on `chunks.emb` instead of `chunks[emb]`.
-
-- Creating only a `MAX_SIM*` index and then trying to run element-level search on the same subfield.
-
-- Creating only a regular vector index and then trying to run EmbeddingList search on the same subfield.
-
-- Reusing one vector subfield for both `MAX_SIM*` and regular vector metrics.
-
-- Forgetting scalar indexes for heavily used StructArray filters.
-
-- Indexing a StructArray subfield that does not exist in the Struct schema.
+If index creation or search fails, check the path syntax and metric rules above, and confirm that the target subfield exists in the Struct schema.
 
 ## Next steps
 

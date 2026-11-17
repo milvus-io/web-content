@@ -285,13 +285,9 @@ export schema='{
 
 ## (Optional) Set Index Parameters
 
-Creating an index on a specific field accelerates the search against this field. An index records the order of entities within a collection. As shown in the following code snippets, you can use `metric_type` and `index_type` to select appropriate ways for Milvus to index a field and measure similarities between vector embeddings.
+The examples below prepare index definitions for the schema's fields. Choose a vector index and metric compatible with the vector field's data type; see [Index Explained](index-explained.md) and [Similarity Metrics](metric.md).
 
-On Milvus, you can use `AUTOINDEX` as the index type for all vector fields, and one of `COSINE`, `L2`, and `IP` as the metric type based on your needs.
-
-As demonstrated in the above code snippet, you need to set both the index type and metric type for vector fields and only the index type for the scalar fields. Indexes are mandatory for vector fields, and you are advised to create indexes on scalar fields frequently used in filtering conditions.
-
-For details, refer to [Index Vector Fields](index-vector-fields.md) and [Index Scalar Fields](index-scalar-fields.md).
+Vector fields require indexes before loading. Scalar indexes are optional; see [Scalar Index](scalar_index.md) for field compatibility and explicit or automatic type selection.
 
 <div class="multipleCode">
     <a href="#python">Python</a>

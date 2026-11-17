@@ -1,18 +1,16 @@
 ---
 id: pattern-matching.md
 title: "Pattern Matching"
-summary: "Milvus supports string pattern matching with LIKE wildcard patterns and RE2 regular expressions. Use pattern filters to match prefixes, suffixes, substrings, structured codes, email domains, URL paths, and other string patterns in VARCHAR fields, JSON string paths, or ARRAY elements."
+summary: "Match string values with LIKE wildcard patterns or RE2 regular expressions in scalar filters."
 ---
 
 # Pattern Matching
 
-In agentic search applications, vector search and grep-style pattern matching often complement each other. Vector search retrieves entities that are semantically relevant, while pattern matching narrows those results by exact string structures, such as error codes, log prefixes, email domains, URL paths, or identifiers.
-
-In Milvus, you can express these pattern constraints in scalar filters with `LIKE` for simple wildcard matching, and `=~` or `!~` for [RE2](https://github.com/google/re2/wiki/syntax) regular expressions. You can combine these filters with `query`, `search`, or hybrid search.
+Use `LIKE` for wildcard matching and `=~` or `!~` for [RE2](https://github.com/google/re2/wiki/syntax) regular expressions. These scalar filters match string structures such as error codes, prefixes, email domains, or URL paths in `query`, `search`, and hybrid search.
 
 <div class="alert note">
 
-This page describes pattern matching in scalar filter expressions used by `query`, `search`, and hybrid search. These expressions evaluate field values and do not change the tokens produced by an analyzer. To filter tokens during text analysis, refer to [Regex Analyzer Filter](regex-filter.md).
+These filters match string values. They do not change analyzer tokens or enable token-based `TEXT_MATCH` and `PHRASE_MATCH`. See [Regex Analyzer Filter](regex-filter.md) and [Text Match](keyword-match.md) for those mechanisms.
 
 </div>
 
@@ -193,13 +191,11 @@ curl --request POST \
   }'
 ```
 
-The examples on this page focus on the expression assigned to `filter`. You can use the same filter expression syntax in Milvus operations that accept a scalar filter, such as `query`, `search`, and hybrid search.
+The remaining examples show the expression assigned to `filter`.
 
 <div class="alert note">
 
-The literal on the left-hand side of a filtering expression can either be a collection field name, such as `message`, `email`, etc., used in examples below, or the name of a StructArray subfield at a specific element index, as in `filter = 'struct[0][subfield] =~ "E[0-9]{4}"'`.
-
-For details on scalar filtering in a StructArray field, refer to [StructArray Operators](struct-array-operators.md).
+The left operand can be a collection field, such as `message`, or a StructArray subfield at a specific element index, such as `struct[0][subfield] =~ "E[0-9]{4}"`. See [StructArray Operators](struct-array-operators.md).
 
 </div>
 
@@ -210,15 +206,13 @@ Pattern matching is available for string values.
 | Target | `LIKE` | Regex `=~` / `!~` | Notes |
 | --- | --- | --- | --- |
 | `VARCHAR` field | Yes | Yes | Typical target for pattern matching on string fields. |
-| `JSON` path with `VARCHAR` cast type | Yes | Yes | The JSON path value must be a string for positive matches. If you create an index on the JSON path for acceleration, set `json_cast_type="varchar"`. |
+| `JSON` path with a string value | Yes | Yes | Positive matches require string values. For index path/cast settings, see [JSON Indexing](json-indexing.md#Understand-cast-types). |
 | `ARRAY<VARCHAR>` element | Yes | Yes | Match a specific element by index, such as `tags[0]`. Pattern matching does **not** scan all elements; it only applies to the element at the specified index. |
-| Numeric, Boolean, vector, `TEXT`, or other non-`VARCHAR` targets | No | No | Pattern matching is available only for `VARCHAR` values, JSON paths that resolve to strings, or indexed `ARRAY<VARCHAR>` elements. |
+| Numeric, Boolean, vector, `TEXT`, or other non-string targets | No | No | Patterns require string values. |
 
 ## Choose LIKE or regex
 
-Choose the simplest operator that expresses the pattern you need.
-
-If you need an exact string match, we recommend you use `==` instead of pattern matching. Use `LIKE` or regex only when the filter needs to match a pattern.
+Use `==` for exact string equality; otherwise, choose an operator from the following table:
 
 | Requirement | Recommended operator | Example | Description |
 | --- | --- | --- | --- |
@@ -229,8 +223,6 @@ If you need an exact string match, we recommend you use `==` instead of pattern 
 | Match a structured code or fixed-length pattern | `=~` | `code =~ "E[0-9]{4}"` | Matches strings that case-sensitively contain `E` followed by four digits, such as `E1001`. |
 | Case-insensitive pattern matching | `=~` with `(?i)` | `message =~ "(?i)error"` | Matches `error`, `ERROR`, or other case variants. |
 | Exclude values that match a regex pattern | `!~` | `message !~ "^DEBUG"` | Excludes strings that start with `DEBUG`. |
-
-Use `LIKE` for simple wildcard matching. Use regex when the pattern needs character classes, repetition, alternation such as `error|failed`, anchors, or case-insensitive matching.
 
 ## Use LIKE
 
@@ -256,11 +248,9 @@ Use the position of `%` and `_` to control where the fixed text appears in the m
 
 Use `LIKE` for prefix, suffix, contains, and fixed-position single-character matches. `LIKE` does not support character classes such as `[0-9]`, alternation such as `error|failed`, repeat counts such as `{4}`, anchors such as `^` or `$`, or case-insensitive flags such as `(?i)`. Use regex for those patterns.
 
-Use `==` for exact full-string equality. Use `LIKE` only when the filter needs wildcard matching.
-
 ### Escaping wildcards in a LIKE pattern
 
-In `LIKE` patterns, `%` matches zero or more characters and `_` matches exactly one character. To match `%`, `_`, or `\` literally, escape the character with a backslash (`\`):
+To match `%`, `_`, or `\` literally, escape the character with a backslash (`\`):
 
 - `name LIKE r"\%"` matches the literal value `%`.
 - `name LIKE r"\_%"` matches values that start with a literal `_`.
@@ -270,9 +260,7 @@ Raw string literals, written as `r"..."` or `r'...'`, keep backslashes verbatim 
 
 ## Use regex | Milvus 3.0.x
 
-Use regex filters when the pattern requires regular expression features such as character classes, repetition, alternation, anchors, or case-insensitive matching. Milvus applies an [RE2](https://github.com/google/re2/wiki/syntax) regular expression to a string value.
-
-The right side of `=~` or `!~` must be a string literal.
+Regex supports character classes, repetition, alternation, anchors, and case-insensitive matching. The right operand of `=~` or `!~` must be a string literal:
 
 | Operator | Meaning | Example |
 | --- | --- | --- |
@@ -281,9 +269,7 @@ The right side of `=~` or `!~` must be a string literal.
 
 ### Using raw string literals
 
-Raw string literals are recommended for regex patterns that contain backslashes. In a raw string, written as `r"..."` or `r'...'`, backslashes are passed to the regex engine verbatim. This avoids the extra escaping required by ordinary string literals.
-
-For example:
+Use raw string literals (`r"..."` or `r'...'`) to pass backslashes verbatim to RE2, avoiding the extra escaping in ordinary filter strings:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -437,7 +423,11 @@ string filter = "email =~ \"@gmail\\.com$\"";
 filter='email =~ "@gmail\\.com$"'
 ```
 
-Note: Milvus regex filters follow RE2 syntax. If a regex pattern uses syntax that RE2 does not support or is otherwise invalid, Milvus rejects the filter expression. For details about regex metacharacters, flags, and matching behavior, refer to the [RE2 syntax](https://github.com/google/re2/wiki/syntax) reference.
+<div class="alert note">
+
+Milvus rejects invalid regex patterns and syntax that [RE2](https://github.com/google/re2/wiki/syntax) does not support.
+
+</div>
 
 ### Matching behavior
 
@@ -598,14 +588,10 @@ For JSON paths, regex filters behave differently when the path is missing, null,
 
 ## Accelerate pattern matching with indexes
 
-Milvus supports several index types on string fields that can be used together with `LIKE` and regex filters on `VARCHAR` fields or JSON string paths, such as `NGRAM`, `STL_SORT`, `INVERTED`, and `BITMAP`. Pattern matching can work without an index, but an index can improve performance on large datasets.
+Pattern matching works without a scalar index. For acceleration options and their eligibility conditions, see [String-pattern index selection](scalar_index.md#String-pattern-indexes). For JSON path indexes, check the [JSON-specific prerequisites](json-indexing.md#Index-requirements).
 
-Index effectiveness depends on the pattern expression, whether Milvus can extract fixed literal substrings, and the cardinality and distribution of the target field. Prefix-style patterns such as `name LIKE "Prod%"` may benefit from different index strategies than infix or suffix patterns such as `description LIKE "%vector%"` or `filename LIKE "%.json"`.
+<div class="alert note">
 
-Use the following table as a starting point, then benchmark with your own workload:
+Query planning can simplify a LIKE expression without wildcards to equality, or a simple anchored regex to equality, prefix, or suffix matching. For example, `name =~ "^abc$"` becomes an equality test and follows equality lookup support. Check index support for the operation after this simplification, not only for the operator written in the original expression.
 
-| Pattern or data characteristic | Index to consider | Notes |
-| --- | --- | --- |
-| Contains fixed literal substrings, such as `message =~ "error.*timeout"` or `message LIKE "%database%"` | `NGRAM` | Helps when Milvus can extract meaningful literal substrings from the pattern. For details, refer to [NGRAM](ngram.md). |
-| Prefix, exact, or equality-like string filters, especially on fields with low to moderate cardinality | `STL_SORT`, `INVERTED`, or `BITMAP` | May be more effective when the field has repeated values or when the filter is close to exact matching. For details, refer to [STL_SORT](stl-sort.md), [INVERTED](inverted.md), and [BITMAP](bitmap.md). |
-| Regex patterns without fixed literals, or patterns dominated by character classes, short tokens, or wildcards | Benchmark before relying on index acceleration | These patterns may provide limited index selectivity and can fall back to broader scans. |
+</div>

@@ -1,52 +1,69 @@
 ---
 id: trie.md
 title: "TRIE"
-summary: "The TRIE index organizes VARCHAR field values in a tree structure to accelerate string equality and prefix matching. It is the fastest scalar index choice for exact lookups and prefix filters such as name LIKE \"abc%\"."
+summary: "Use TRIE to accelerate exact string lookups and prefix filters on VARCHAR fields."
 ---
 
 # TRIE
 
-The `TRIE` index in Milvus organizes `VARCHAR` field values into a prefix tree (a *trie*). Each character in a string corresponds to an edge in the tree, and shared prefixes are stored only once. This structure makes exact string lookups and prefix matching fast, without scanning every value in the field.
+`TRIE` organizes strings in a prefix tree to accelerate exact lookups and prefix filters such as `name LIKE "abc%"`.
 
-Use the `TRIE` index if you frequently run queries with:
+## Overview
 
-- Exact equality on string values, such as `category == "books"`
+### Supported data types
 
-- Prefix filtering, such as `name LIKE "abc%"`
+Only [VARCHAR fields](string.md). For JSON string paths, choose a compatible index in [JSON Indexing](json-indexing.md).
 
-## Supported data types
+<a id="Queries-accelerated-by-TRIE"></a>
 
-- `VARCHAR` fields. For details, refer to [String Field](string.md).
+<a id="Supported-filters"></a>
 
-`TRIE` is supported only on `VARCHAR` fields. To index a string value inside a `JSON` field, cast the path to `VARCHAR` and use the [NGRAM](ngram.md) index instead.
+### Filter acceleration
 
-## How it works
+A `TRIE` index can help evaluate the following conditions on a `VARCHAR` field. The expressions are examples:
 
-Milvus implements `TRIE` in two phases:
+| Filters that can use the index | Example expression |
+| --- | --- |
+| Equality (`==`, `!=`) | `category == "books"` |
+| Membership (`in`, `not in`) | `category in ["books", "electronics"]` |
+| Prefix match | `category LIKE "elec%"` |
+| Range (`<`, `<=`, `>`, `>=`) | `category >= "a" and category < "m"` |
 
-1. **Build index**
+For expression syntax, see [Basic Operators](basic-operators.md) and [Pattern Matching](pattern-matching.md).
 
-    - During ingestion, Milvus reads each value of the indexed field.
+Range evaluation may visit multiple indexed strings. Suffix, substring, general `LIKE`, and regex patterns can also be evaluated against the indexed strings, but they may require visiting many distinct values. For substring or regex workloads, compare [NGRAM](ngram.md) using its pattern eligibility rules.
 
-    - The values are inserted into a trie: characters are stored along edges, and each terminal node records the entity IDs that share that string.
+<a id="Best-practices"></a>
 
-    - The completed tree is persisted as the index.
+Compare query latency with representative string lengths, prefixes, and result counts.
 
-1. **Accelerate queries**
+<a id="Usage-notes"></a>
 
-    - For equality, Milvus walks the tree character by character to reach the node for the exact value and returns its entity IDs.
+<div class="alert note">
 
-    - For a prefix, Milvus walks to the node matching the prefix and collects the entity IDs in its subtree.
+> These are index capabilities, not limits on valid filter expressions. See [Scalar Index](scalar_index.md#Filter-execution) for shared lookup constraints. For `AND`, `OR`, `NOT`, and NULL tests (`IS NULL`, `IS NOT NULL`), see [Basic Operators](basic-operators.md).
 
-    - Matching entity IDs are passed to the query executor for final result assembly.
+</div>
 
-For equality and prefix filters, lookup cost is proportional to the string length rather than the number of entities, which keeps these queries fast on large collections.
+
+<a id="How-it-works"></a>
+
+### How TRIE works
+
+<details>
+<summary><strong>View the prefix tree lookup process</strong></summary>
+
+During index building, Milvus inserts strings into a prefix tree and persists it. Characters are stored along edges, shared prefixes are stored once, and each terminal node records the entity IDs with that string.
+
+For equality, traverse the tree to the exact string's terminal node. For a prefix, find the prefix node and collect IDs from its subtree. The query executor receives the matching entity IDs.
+
+Traversing to the string or prefix node depends on the pattern length; returning matches also requires collecting the associated entity IDs.
+
+</details>
 
 ## Create a TRIE index
 
-You can create a `TRIE` index on a `VARCHAR` field. No extra parameters are required.
-
-The example below shows how to create a `TRIE` index on a `VARCHAR` field:
+Set `index_type` to `TRIE`; no extra index parameters are required:
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -212,49 +229,16 @@ curl --request POST \
 # }
 ```
 
-## Queries accelerated by TRIE
-
-The `TRIE` index accelerates the following filter patterns on a `VARCHAR` field:
-
-- **Equality**
-
-    ```python
-    filter = 'category == "books"'
-    ```
-
-- **Membership**
-
-    ```python
-    filter = 'category in ["books", "electronics"]'
-    ```
-
-- **Prefix match**
-
-    ```python
-    filter = 'category LIKE "elec%"'
-    ```
-
-- **Range**
-
-    ```python
-    filter = 'category >= "a" and category < "m"'
-    ```
-
-    Range evaluation may visit multiple indexed strings.
-
-Suffix, substring, and general `LIKE` patterns can also be evaluated against the indexed strings, but they may require visiting many distinct values. If your workload is dominated by substring or regex matching, consider the [FMINDEX](fmindex.md) or [NGRAM](ngram.md) index instead.
-
 ## Drop an index
 
 Use the `drop_index()` method to remove an existing index from a collection.
 
 <div class="alert note">
 
-- In **v2.6.3** or earlier, you must release the collection before dropping a scalar index.
-
-- From **v2.6.4** or later, you can drop a scalar index directly once it’s no longer needed—no need to release the collection first.
+> For release requirements when dropping a scalar index, see [Scalar Index](scalar_index.md#Drop-index-compatibility).
 
 </div>
+
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -381,17 +365,3 @@ curl --request POST \
 #     "data": {}
 # }
 ```
-
-## Usage notes
-
-- **Field types:** Works with `VARCHAR` fields only. For more information on data types, refer to [String Field](string.md).
-
-- **Parameters:** No index parameters are needed.
-
-- **Pattern matching:** `TRIE` is fastest for equality and prefix filters. Range filters are supported but may visit multiple indexed strings. Suffix, substring, and general `LIKE` patterns can be evaluated but may require scanning many indexed strings.
-
-## Best practices
-
-- Use `TRIE` when your filters are dominated by exact lookups or prefix matching.
-
-- If your workload relies on substring (`LIKE "%abc%"`) or regex filters, use [FMINDEX](fmindex.md) for exact anchored matching or [NGRAM](ngram.md) for candidate narrowing instead.
