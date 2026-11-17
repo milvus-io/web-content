@@ -36,7 +36,7 @@ await milvusClient.alterCollectionFunction({
 
     **[REQUIRED]**
 
-    The updated function schema. For the full FunctionObject field reference, refer to `addCollectionFunction()`.
+    The updated function schema. See [FunctionObject](FunctionObject.md).
 
 - **db_name** (*string*) -
 
@@ -49,6 +49,8 @@ await milvusClient.alterCollectionFunction({
 **RETURNS:**
 
 *Promise<ResStatus>*
+
+This method returns a promise that resolves to a **ResStatus** object.
 
 **EXCEPTIONS:**
 

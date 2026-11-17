@@ -32,13 +32,13 @@ await milvusClient.addFunctionField({
 
     **[REQUIRED]**
 
-    The schema of the function output field. For the full field reference, see the FieldType section in [createCollection](createCollection.md).
+    The schema of the function output field. See [FieldType](FieldType.md).
 
 - **function** (*[FunctionObject](FunctionObject.md)*) -
 
     **[REQUIRED]**
 
-    The function schema. For the full function reference, see the FunctionObject section in [addCollectionFunction](addCollectionFunction.md).
+    The function schema. See [FunctionObject](FunctionObject.md).
 
 - **index_name** (*string*) -
 
@@ -61,6 +61,8 @@ await milvusClient.addFunctionField({
 **RETURNS:**
 
 *Promise<ResStatus>*
+
+This method returns a promise that resolves to a **ResStatus** object.
 
 **EXCEPTIONS:**
 
