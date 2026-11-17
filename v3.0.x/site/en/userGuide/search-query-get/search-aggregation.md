@@ -67,9 +67,9 @@ Choose an example based on what you want to accomplish:
 
 | Go to | Description | Key settings |
 |---|---|---|
-| [Compare and sort buckets](#compare-and-sort-buckets) | Calculate per-bucket statistics to compare buckets, then sort the returned buckets by metrics, counts, or keys. | `fields`, `size`, `metrics`, `order` |
-| [Show representative results from each bucket](#show-representative-results-from-each-bucket) | Return a limited number of entities from each bucket and sort those entities independently by scalar fields or vector score. | `top_hits`, `TopHits.size`, `TopHits.sort` |
-| [Group results at multiple levels](#group-results-at-multiple-levels) | Organize results into parent and child bucket levels to analyze multiple dimensions in sequence. | `sub_aggregation` |
+| [Compare and sort buckets](#Compare-and-sort-buckets) | Calculate per-bucket statistics to compare buckets, then sort the returned buckets by metrics, counts, or keys. | `fields`, `size`, `metrics`, `order` |
+| [Show representative results from each bucket](#Show-representative-results-from-each-bucket) | Return a limited number of entities from each bucket and sort those entities independently by scalar fields or vector score. | `top_hits`, `TopHits.size`, `TopHits.sort` |
+| [Group results at multiple levels](#Group-results-at-multiple-levels) | Organize results into parent and child bucket levels to analyze multiple dimensions in sequence. | `sub_aggregation` |
 
 The examples below use a product collection with brand, category, color, price, and rating fields. All brand names, product names, prices, ratings, and search results are synthetic example data. Expand the following section to create the collection and define the shared search variables.
 
@@ -765,9 +765,9 @@ search "$payload"
 
 This configuration can produce keys such as `(Brand A, black)`, `(Brand A, blue)`, and `(Brand B, white)`. Two entities share a bucket only when both values match. Milvus preserves the list order, so `brand` is the first key component and `color` is the second. When `_key` is used in `order`, Milvus compares composite key components in the same order. Pass multiple strings in one flat list; nested lists are not supported.
 
-`size=6` is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the [returned-entry limit](#limits), this request contributes `1 query vector × 6 buckets × 1 = 6` configured result entries.
+`size=6` is the maximum number of composite buckets returned at this aggregation level. The example data contains five distinct brand-color combinations, so all five can be returned. In the [returned-entry limit](#Limits), this request contributes `1 query vector × 6 buckets × 1 = 6` configured result entries.
 
-Multiple fields in one `SearchAggregation.fields` list create a composite bucket key at that aggregation level. To create a parent-child bucket hierarchy, use a [nested aggregation](#group-results-at-multiple-levels).
+Multiple fields in one `SearchAggregation.fields` list create a composite bucket key at that aggregation level. To create a parent-child bucket hierarchy, use a [nested aggregation](#Group-results-at-multiple-levels).
 
 </details>
 
@@ -896,7 +896,7 @@ The following Brand A bucket was captured from the request above and serialized 
 | `TopHits.size` | Returns up to two representative entities from each selected bucket and sets the per-key candidate budget to two for the entire aggregation tree. |
 | `TopHits.sort` | Orders entities inside each bucket using the listed criteria. |
 
-Configure `top_hits` when the application needs representative entities or when counts and metrics need a wider per-key candidate window. A larger `TopHits.size` increases both the candidate budget and the maximum returned-entry calculation in [Limits](#limits).
+Configure `top_hits` when the application needs representative entities or when counts and metrics need a wider per-key candidate window. A larger `TopHits.size` increases both the candidate budget and the maximum returned-entry calculation in [Limits](#Limits).
 
 `SearchAggregation.order` sorts buckets, while `TopHits.sort` sorts the retained entities inside each bucket. The sort order does not change which candidates were retained for `count` and metrics. `TopHits.sort` accepts supported comparable scalar field names and the built-in `_score` field, which represents the ANN similarity or distance. Milvus evaluates the `sort` entries from first to last. In this example, it orders products by `rating` from highest to lowest and uses `_score` only when two ratings are equal. Because the setup uses `COSINE`, descending `_score` places the more similar product first.
 

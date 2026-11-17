@@ -221,7 +221,7 @@ The following rules apply to StructArray values in all supported formats:
 
 - Starting in Milvus 3.0.6, binlog import, such as a backup restore, and snapshot-source import are rejected for collections that have element-nullable subfields or scalar array subfields.
 
-pymilvus [BulkWriter](#set-up-bulkwriter) supports the StructArray shapes above in every supported format, including element-nullable subfields and nullable StructArray values. Use the same row shapes in the writer's `add_row()` calls.
+pymilvus [BulkWriter](#Set-up-BulkWriter) supports the StructArray shapes above in every supported format, including element-nullable subfields and nullable StructArray values. Use the same row shapes in the writer's `add_row()` calls.
 
 For the schema-side limits, see [StructArray Limits](structarray-limits.md#Import-and-storage-limits).
 

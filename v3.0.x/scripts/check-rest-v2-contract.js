@@ -212,6 +212,11 @@ function extractResponsePayloads(content) {
 
   while ((match = detailsRegex.exec(content)) !== null) {
     const jsonStr = match[1];
+    // <details> is also used for collapsible sample-data structures (e.g.
+    // user JSON field shapes in json-indexing.md), which use arbitrary
+    // user-defined keys. Only blocks carrying the REST v2 response envelope
+    // ("code" at the root) are API responses.
+    if (!/"code"\s*:/.test(jsonStr)) continue;
     const blockStartIndex = match.index;
     const lineNumber = content.substring(0, blockStartIndex).split('\n').length;
 
@@ -246,6 +251,13 @@ function checkObjectKeys(obj, pathContext = '', violations = [], options = {}) {
     pathContext.includes('extraParams') ||
     pathContext.includes('elementTypeParams') ||
     pathContext.includes('searchParams');
+  // Keys inside a request "properties" bag are server-side collection property
+  // names (consistency_level, collection.ttl.seconds, partitionkey.isolation,
+  // ...), not REST wire envelope keys — the server matches them literally.
+  const inPropertyBag =
+    pathContext === 'properties' ||
+    pathContext.endsWith('.properties') ||
+    /\.properties\[\d+\]$/.test(pathContext);
 
   for (const [key, value] of Object.entries(obj)) {
     const currentPath = pathContext ? `${pathContext}.${key}` : key;
@@ -265,6 +277,8 @@ function checkObjectKeys(obj, pathContext = '', violations = [], options = {}) {
           });
         }
       }
+    } else if (inPropertyBag) {
+      // Server-side collection property names are exempt from wire-envelope rules.
     } else {
       // In wire envelope (request payload or top-level response envelope)
       if (FORBIDDEN_ENVELOPE_KEYS[key]) {

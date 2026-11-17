@@ -278,6 +278,10 @@ You can modify collection-level properties after a collection is created.
      <td><p><code>timezone</code></p></td>
      <td><p>Specifies the default timezone for this collection when handling time-sensitive operations, especially <code>TIMESTAMPTZ</code> fields. Timestamps are stored internally in UTC, and Milvus converts values for display and comparison according to this setting. If set, the collection timezone overrides the database’s default timezone; a query’s timezone parameter can temporarily override both. The value must be a valid <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA time zone identifier</a> (for example, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong>, or <strong>UTC</strong>). For details on how to use a <code>TIMESTAMPTZ</code> field, refer to <a href="timestamptz-field.md">TIMESTAMPTZ Field</a>.</p></td>
    </tr>
+   <tr>
+     <td><p><code>consistency_level</code></p></td>
+     <td><p>Alters the consistency level of the collection. The new level applies to subsequent searches and queries on this collection that do not specify a consistency level of their own; per-request settings still take precedence. The value must be one of <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (default), or <strong>Eventually</strong>. Changing this property does not require releasing the collection. For details, refer to <a href="tune_consistency.md">Consistency Level</a>.</p></td>
+   </tr>
 </table>
 
 ### Example 1: Set collection-level TTL
@@ -1037,6 +1041,99 @@ curl --request POST \
     "collectionName": "my_collection",
     "properties": {
         "timezone": "Asia/Shanghai"
+    }
+}'
+```
+
+### Example 8: Alter the consistency level
+
+The following code snippet alters the consistency level of an existing collection to **Eventually**. The new level applies to subsequent searches and queries on this collection that do not explicitly set a consistency level; per-request settings still take precedence. For details, refer to [Consistency Level](tune_consistency.md).
+
+<div class="multipleCode">
+    <a href="#python">Python</a>
+    <a href="#java">Java</a>
+    <a href="#go">Go</a>
+    <a href="#rust">Rust</a>
+    <a href="#cpp">C++</a>
+    <a href="#javascript">NodeJS</a>
+    <a href="#csharp">C#</a>
+    <a href="#bash">cURL</a>
+</div>
+
+```python
+client.alter_collection_properties(
+    collection_name="my_collection",
+    properties={"consistency_level": "Eventually"}
+)
+```
+
+```java
+AlterCollectionPropertiesReq alterCollectionReq = AlterCollectionPropertiesReq.builder()
+        .collectionName("my_collection")
+        .property("consistency_level", "Eventually")
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+```
+
+```go
+err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty("consistency_level", "Eventually"))
+if err != nil {
+    fmt.Println(err.Error())
+    // handle error
+}
+```
+
+```rust
+client
+    .alter_collection_properties(
+        AlterCollectionPropertiesRequest::builder()
+            .collection_name("my_collection")
+            .property("consistency_level", "Eventually")
+            .build()?,
+    )
+    .await?;
+```
+
+```cpp
+auto status = client->AlterCollectionProperties(milvus::AlterCollectionPropertiesRequest()
+                                                   .WithCollectionName("my_collection")
+                                                   .AddProperty("consistency_level", "Eventually"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```
+
+```javascript
+await client.alterCollectionProperties({
+    collection_name: "my_collection",
+    properties: {
+        "consistency_level": "Eventually"
+    }
+});
+```
+
+```csharp
+await client.AlterCollectionPropertiesAsync(new AlterCollectionPropertiesReq
+{
+    CollectionName = "my_collection",
+    Properties = { ["consistency_level"] = "Eventually" }
+});
+```
+
+```bash
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "my_collection",
+    "properties": {
+        "consistency_level": "Eventually"
     }
 }'
 ```

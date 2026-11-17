@@ -26,12 +26,12 @@ The following table lists ARRAY operators available in Milvus.
 
 | Operator | Use in | Description |
 | --- | --- | --- |
-| [ARRAY_CONTAINS(identifier, expr)](#array_contains) | Filter expression | Checks whether a specific element exists in an ARRAY field. |
-| [ARRAY_CONTAINS_ALL(identifier, expr)](#array_contains_all) | Filter expression | Checks whether all elements in a specified list exist in an ARRAY field. |
-| [ARRAY_CONTAINS_ANY(identifier, expr)](#array_contains_any) | Filter expression | Checks whether any element in a specified list exists in an ARRAY field. |
-| [ARRAY_LENGTH(identifier)](#array_length) | Filter expression | Returns the number of elements in an ARRAY field and can be combined with comparison operators for filtering. |
-| [ARRAY_APPEND](#array_append--milvus-2617) | `upsert` with `field_ops` | Appends payload elements to an existing ARRAY field. Available in Milvus v2.6.17 and later. |
-| [ARRAY_REMOVE](#array_remove--milvus-2617) | `upsert` with `field_ops` | Removes every element from an existing ARRAY field that matches a value in the request payload. Available in Milvus v2.6.17 and later. |
+| [ARRAY_CONTAINS(identifier, expr)](#ARRAYCONTAINS) | Filter expression | Checks whether a specific element exists in an ARRAY field. |
+| [ARRAY_CONTAINS_ALL(identifier, expr)](#ARRAYCONTAINSALL) | Filter expression | Checks whether all elements in a specified list exist in an ARRAY field. |
+| [ARRAY_CONTAINS_ANY(identifier, expr)](#ARRAYCONTAINSANY) | Filter expression | Checks whether any element in a specified list exists in an ARRAY field. |
+| [ARRAY_LENGTH(identifier)](#ARRAYLENGTH) | Filter expression | Returns the number of elements in an ARRAY field and can be combined with comparison operators for filtering. |
+| [ARRAY_APPEND](#ARRAYAPPEND) | `upsert` with `field_ops` | Appends payload elements to an existing ARRAY field. Available in Milvus v2.6.17 and later. |
+| [ARRAY_REMOVE](#ARRAYREMOVE) | `upsert` with `field_ops` | Removes every element from an existing ARRAY field that matches a value in the request payload. Available in Milvus v2.6.17 and later. |
 
 ## ARRAY_CONTAINS
 

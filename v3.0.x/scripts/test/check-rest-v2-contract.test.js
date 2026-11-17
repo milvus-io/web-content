@@ -110,6 +110,65 @@ curl --request POST \\
   assert.equal(violations.length, 0);
 });
 
+test('allows server-side collection property keys inside properties bags (alter-consistency regression test)', () => {
+  const markdown = `
+\`\`\`bash
+curl --request POST \\
+--url "\${CLUSTER_ENDPOINT}/v2/vectordb/collections/alter_properties" \\
+-d '{
+    "collectionName": "my_collection",
+    "properties": {
+        "consistency_level": "Eventually",
+        "collection.ttl.seconds": 60,
+        "partitionkey.isolation": "false"
+    }
+}'
+\`\`\`
+`;
+
+  // Keys inside `properties` are server-side collection property names, not
+  // wire envelope keys — the server matches them literally.
+  const violations = lintRestContract('test-props.md', markdown);
+  assert.equal(violations.length, 0);
+
+  // But consistency_level at the wire envelope level stays forbidden.
+  const envelopeMarkdown = `
+\`\`\`bash
+curl --request POST \\
+--url "\${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \\
+-d '{
+    "collectionName": "my_collection",
+    "consistency_level": "Bounded"
+}'
+\`\`\`
+`;
+  const envelopeViolations = lintRestContract('test-props-envelope.md', envelopeMarkdown);
+  assert.equal(envelopeViolations.length, 1);
+  assert.equal(envelopeViolations[0].key, 'consistency_level');
+  assert.equal(envelopeViolations[0].expected, 'consistencyLevel');
+});
+
+test('skips <details> sample-data json blocks without a REST envelope code (json-indexing regression test)', () => {
+  const markdown = `
+The examples below call \`/v2/vectordb/\` endpoints. They use a collection with
+a \`JSON\` field named \`metadata\`, containing data shaped as follows:
+
+<details>
+\`\`\`json
+{
+  "metadata": {
+    "in_stock": true,
+    "string_price": "99.99"
+  }
+}
+\`\`\`
+</details>
+`;
+
+  const violations = lintRestContract('test-sample.md', markdown);
+  assert.equal(violations.length, 0);
+});
+
 test('allows arbitrary user column names in insert data arrays and aggregation metrics', () => {
   const markdown = `
 \`\`\`bash
