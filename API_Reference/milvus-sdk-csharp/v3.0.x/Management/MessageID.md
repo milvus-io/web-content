@@ -27,6 +27,8 @@ public sealed class MessageID
 
     Creates a new message ID.
 
+## WalName
+
 The name of the write-ahead log (WAL) implementation backing a physical channel.
 
 ```csharp

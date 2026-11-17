@@ -61,7 +61,7 @@ public sealed class SearchParameters
 
 - `PageRetainOrder` (*bool?*) -
 
-    Whether to retain the original order when paging results.
+    Whether to preserve the JSON array element order when retrieving elements by `JsonPath`. Sent as the `"page_retain_order"` search param.
 
 - `Offset` (*int?*) -
 
@@ -85,7 +85,7 @@ public sealed class SearchParameters
 
 - `RoundDecimal` (*long?*) -
 
-    The number of decimal places to round the scores to. Must be between 0 and 6.
+    The number of decimal places to round the scores to. Must be between -1 and 6: `-1` (the server default) disables rounding, `0` rounds to integer, and positive values round to that many decimals. The server rejects values outside this range.
 
 - `ExtraParameters` (*IDictionary\<string, string\>*) -
 
@@ -146,6 +146,8 @@ public sealed class SearchParameters
 - `HighlightType` (*HighlightType?*) -
 
     The type of highlighter to apply (lexical or semantic). When `null`, the server applies its default (lexical).
+
+## HighlightType
 
 The type of highlighter used to produce matched-term highlights in search results.
 

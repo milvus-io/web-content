@@ -159,7 +159,11 @@ SearchResp results = await client.HybridSearchAsync(request);
 
         The type of highlighter to apply (lexical or semantic).
 
-- `FunctionChains` (*IReadOnlyList\<FunctionChain\>*) -
+    - `FunctionChains` (*IList\<FunctionChain\>*) -
+
+        Function chains applied to this leg's search results. See [FunctionChain](FunctionChain.md).
+
+- `FunctionChains` (*IList\<FunctionChain\>*) -
 
     Function chains applied to the search results. See [FunctionChain](FunctionChain.md).
 
@@ -246,7 +250,7 @@ SearchResp
 
 - **GroupByFieldValue** (*FieldData?*) -
 
-    The group-by field value for each returned row, populated when the search used `SearchParameters.GroupByField`.
+    The group-by field value for each returned row, populated when the search used `SearchParameters.GroupByField`. See [FieldData](FieldData.md).
 
 - **AllSearchCount** (*long?*) -
 

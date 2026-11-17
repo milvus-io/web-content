@@ -35,7 +35,7 @@ ListRLSPrincipalsResp result = await client.ListRLSPrincipalsAsync(request);
 
 A **ListRLSPrincipalsResp** object.
 
-- `PrincipalNames` (*IReadOnlyList\<string\>*) -
+- **PrincipalNames** (*IReadOnlyList\<string\>*) -
 
     The names of the RLS principals configured on the collection.
 
@@ -51,6 +51,7 @@ A **ListRLSPrincipalsResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Rls;
 using Milvus.Client.V2.Responses.Rls;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

@@ -35,7 +35,7 @@ ListSnapshotsResp result = await client.ListSnapshotsAsync(request);
 
 A **ListSnapshotsResp** object.
 
-- `Snapshots` (*IReadOnlyList\<string\>*) -
+- **Snapshots** (*IReadOnlyList\<string\>*) -
 
     The names of the snapshots of the collection (or all snapshots when no collection filter is given).
 
@@ -51,6 +51,7 @@ A **ListSnapshotsResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Snapshot;
 using Milvus.Client.V2.Responses.Snapshot;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

@@ -59,6 +59,7 @@ public enum MilvusErrorCode
 
 ```csharp
 using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
@@ -69,7 +70,7 @@ using var client = new MilvusClientV2(new ConnectConfig
 
 try
 {
-    await client.DescribeCollectionAsync(new DescribeCollectionReq("my_collection"));
+    await client.DescribeCollectionAsync(new DescribeCollectionReq { CollectionName = "my_collection" });
 }
 catch (MilvusException e)
 {

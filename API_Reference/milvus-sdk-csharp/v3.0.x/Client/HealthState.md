@@ -33,6 +33,8 @@ public sealed record HealthState(
 
     The quota states reported by the server.
 
+## QuotaState
+
 ```csharp
 public enum QuotaState
 {

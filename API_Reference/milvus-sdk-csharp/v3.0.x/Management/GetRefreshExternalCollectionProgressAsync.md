@@ -31,7 +31,7 @@ GetRefreshExternalCollectionProgressResp result = await client.GetRefreshExterna
 
 A **GetRefreshExternalCollectionProgressResp** object.
 
-- `JobInfo` (*RefreshExternalCollectionJobInfo*) -
+- **JobInfo** (*RefreshExternalCollectionJobInfo*) -
 
     The refresh job's progress information. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
@@ -47,6 +47,7 @@ A **GetRefreshExternalCollectionProgressResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
 using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

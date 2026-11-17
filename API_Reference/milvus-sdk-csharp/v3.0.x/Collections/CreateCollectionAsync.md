@@ -1,9 +1,12 @@
 # CreateCollectionAsync()
 
-Creates a collection with the given schema.
+Creates a collection.
+
+The method has two overloads: a general one that creates a collection from a `CreateCollectionReq` with an explicit schema, and a convenience one that creates a simple collection with a primary-key field and a float vector field from a `CreateSimpleCollectionReq` (an `AutoIndex` index is created on the vector field and the collection is loaded automatically).
 
 ```csharp
 public async Task CreateCollectionAsync(CreateCollectionReq request, CancellationToken cancellationToken = default)
+public Task CreateCollectionAsync(CreateSimpleCollectionReq request, CancellationToken cancellationToken = default)
 ```
 
 ## Request Syntax
@@ -56,6 +59,75 @@ await client.CreateCollectionAsync(new CreateCollectionReq
 - `Indexes` (*IReadOnlyList\<IndexParam\>*) -
 
     Optional indexes to create immediately after the collection is created. When set, the collection is also loaded automatically after the indexes are built. See [IndexParam](../Management/IndexParam.md).
+
+## CreateSimpleCollectionReq
+
+The request for the simple-collection overload. Creates a simple collection with a primary-key field and a float vector field. An `AutoIndex` index is created on the vector field and the collection is loaded automatically.
+
+```csharp
+public Task CreateCollectionAsync(CreateSimpleCollectionReq request, CancellationToken cancellationToken = default)
+```
+
+```csharp
+var request = new CreateSimpleCollectionReq
+{
+    CollectionName = "my_collection",
+    PrimaryFieldName = "id",
+    PrimaryFieldType = DataType.Int64,
+    VectorFieldName = "embedding",
+    Dimension = 4,
+    ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
+    MetricType = MetricType.Cosine
+};
+
+await client.CreateCollectionAsync(request);
+```
+
+**REQUEST PARAMETERS:**
+
+- `CollectionName` (*string*) -
+
+    The name of the collection to create.
+
+- `DatabaseName` (*string?*) -
+
+    An optional database name to operate on. When empty, the client's currently selected database is used.
+
+- `PrimaryFieldName` (*string*) -
+
+    The name of the primary-key field. Defaults to `"id"`.
+
+- `PrimaryFieldType` (*DataType*) -
+
+    The data type of the primary-key field: `DataType.Int64` (default) or `DataType.VarChar`. See [DataType](DataType.md).
+
+- `MaxLength` (*int*) -
+
+    The maximum length of the primary-key field when `PrimaryFieldType` is `DataType.VarChar`. Defaults to 65535.
+
+- `VectorFieldName` (*string*) -
+
+    The name of the vector field. Defaults to `"vector"`.
+
+- `Dimension` (*int*) -
+
+    The dimensionality of the vector field. Must be specified (non-zero).
+
+- `ConsistencyLevel` (*ConsistencyLevel*) -
+
+    The consistency level of the collection. Defaults to `ConsistencyLevel.BoundedStaleness`. See [ConsistencyLevel](ConsistencyLevel.md).
+
+- `MetricType` (*MetricType*) -
+
+    The metric type used for the vector index and search. Defaults to `MetricType.Cosine`. See [MetricType](../Vector/MetricType.md).
+
+- `AutoID` (*bool*) -
+
+    Whether primary-key values are automatically generated. Defaults to `false`.
+
+- `EnableDynamicFields` (*bool*) -
+
+    Whether to enable dynamic fields. Defaults to `true`.
 
 **RETURN TYPE:**
 

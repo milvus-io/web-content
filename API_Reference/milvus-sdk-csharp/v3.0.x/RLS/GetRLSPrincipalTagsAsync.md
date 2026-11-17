@@ -40,7 +40,7 @@ GetRLSPrincipalTagsResp result = await client.GetRLSPrincipalTagsAsync(request);
 
 A **GetRLSPrincipalTagsResp** object.
 
-- `Tags` (*IReadOnlyDictionary\<string, object?\>*) -
+- **Tags** (*IReadOnlyDictionary\<string, object?\>*) -
 
     The principal's tag keys and values.
 
@@ -56,6 +56,7 @@ A **GetRLSPrincipalTagsResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Rls;
 using Milvus.Client.V2.Responses.Rls;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

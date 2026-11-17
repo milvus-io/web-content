@@ -20,7 +20,7 @@ public interface IReranker
 
     Gets a structured `FunctionScore` for this reranker, or `null` when the reranker uses the `rank_params` channel instead. See [FunctionScore](../Collections/FunctionScore.md).
 
-**FunctionReranker\<T\>:**
+## FunctionReranker\<T\>
 
 Base class for function-score (boost/decay/model) rerankers; converts to a `FunctionScore` for the proto `schema.FunctionScore` wire member.
 
@@ -52,7 +52,7 @@ public abstract class FunctionReranker<T> : IReranker where T : FunctionReranker
 
     The input field names the rerank function operates on; decay/model require one.
 
-**RrfReranker:**
+## RrfReranker
 
 A Reciprocal Rank Fusion (RRF) reranker that combines results based on their reciprocal ranks, scoring each document as the sum of `1 / (k + rank)` across all input searches.
 
@@ -76,7 +76,7 @@ public sealed class RrfReranker : IReranker
 
     Creates a new RRF reranker with a specified k value, which must be greater than or equal to 1.
 
-**WeightedReranker:**
+## WeightedReranker
 
 A weighted reranker that combines results using specified weights for each input search; the final score of each document is a weighted sum of its scores from each input search.
 
@@ -100,7 +100,7 @@ public sealed class WeightedReranker : IReranker
 
     Creates a new weighted reranker with the specified weights.
 
-**BoostRerank:**
+## BoostRerank
 
 A function-score reranker that boosts results matching a filter (or random score on a field), mapped to the proto `schema.FunctionScore`.
 
@@ -137,7 +137,7 @@ public sealed class BoostRerank : FunctionReranker<BoostRerank>
 
     Sets the seed for the random score.
 
-**DecayRerank:**
+## DecayRerank
 
 A function-score reranker applying a gaussian/exponential/linear decay to results by a scalar field, mapped to the proto `schema.FunctionScore`.
 
@@ -184,7 +184,7 @@ public sealed class DecayRerank : FunctionReranker<DecayRerank>
 
     Sets the decay value (the score at the scale position).
 
-**ModelRerank:**
+## ModelRerank
 
 A function-score reranker that uses a model service to recompute relevance, mapped to the proto `schema.FunctionScore`.
 

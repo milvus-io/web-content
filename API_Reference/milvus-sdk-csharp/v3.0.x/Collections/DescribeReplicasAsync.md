@@ -51,47 +51,47 @@ DescribeReplicasResp
 
     The replicas of the collection. Each **ReplicaInfo** contains the following members:
 
-    - `ReplicaId` (*long*) -
+    - **ReplicaId** (*long*) -
 
         The ID of the replica.
 
-    - `CollectionId` (*long*) -
+    - **CollectionId** (*long*) -
 
         The ID of the collection to which the replica belongs.
 
-    - `PartitionIds` (*IReadOnlyList\<long\>*) -
+    - **PartitionIds** (*IReadOnlyList\<long\>*) -
 
         The IDs of the partitions loaded on the replica. An empty list indicates the whole collection is loaded.
 
-    - `ShardReplicas` (*IReadOnlyList\<ShardReplica\>*) -
+    - **ShardReplicas** (*IReadOnlyList\<ShardReplica\>*) -
 
         The shard replicas that serve the shard channels of the collection. Each **ShardReplica** contains the following members:
 
-        - `LeaderId` (*long*) -
+        - **LeaderId** (*long*) -
 
             The ID of the query node that leads this shard replica.
 
-        - `LeaderAddress` (*string*) -
+        - **LeaderAddress** (*string*) -
 
             The address (`IP:port`) of the leader query node.
 
-        - `DmChannelName` (*string*) -
+        - **DmChannelName** (*string*) -
 
             The DM channel name served by this shard replica.
 
-        - `NodeIds` (*IReadOnlyList\<long\>*) -
+        - **NodeIds** (*IReadOnlyList\<long\>*) -
 
             The IDs of the query nodes that host this shard replica, including the leader. Only populated when the request asks for shard nodes.
 
-    - `NodeIds` (*IReadOnlyList\<long\>*) -
+    - **NodeIds** (*IReadOnlyList\<long\>*) -
 
         The IDs of the query nodes that host the replica, including the leaders.
 
-    - `ResourceGroupName` (*string*) -
+    - **ResourceGroupName** (*string*) -
 
         The name of the resource group to which the replica belongs.
 
-    - `NumOutboundNode` (*IReadOnlyDictionary\<string, int\>*) -
+    - **NumOutboundNode** (*IReadOnlyDictionary\<string, int\>*) -
 
         The number of outbound query nodes contributed by each resource group.
 
@@ -107,6 +107,7 @@ DescribeReplicasResp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Collection;
 using Milvus.Client.V2.Responses.Collection;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

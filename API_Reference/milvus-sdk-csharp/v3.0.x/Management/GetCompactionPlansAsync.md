@@ -58,47 +58,47 @@ GetCompactionPlansResp
 
     The merge plans for the compaction: each entry maps the source segments onto a target segment. Each **CompactionMergeInfo** exposes:
 
-    - `Sources` (*IReadOnlyList\<long\>*) -
+    - **Sources** (*IReadOnlyList\<long\>*) -
 
         The segment IDs that are merged as part of this plan.
 
-    - `Target` (*long*) -
+    - **Target** (*long*) -
 
         The target segment ID produced by this merge.
 
-    - `Targets` (*IReadOnlyList\<long\>*) -
+    - **Targets** (*IReadOnlyList\<long\>*) -
 
         The complete set of target segments produced by this compaction, which may be larger than the single legacy `Target`.
 
-    - `PlanId` (*long*) -
+    - **PlanId** (*long*) -
 
         The server-side compaction task identifier.
 
-    - `TriggerId` (*long*) -
+    - **TriggerId** (*long*) -
 
         The ID of the compaction that triggered this plan.
 
-    - `CollectionId` (*long*) -
+    - **CollectionId** (*long*) -
 
         The ID of the collection being compacted.
 
-    - `PartitionId` (*long*) -
+    - **PartitionId** (*long*) -
 
         The ID of the partition being compacted.
 
-    - `Channel` (*string*) -
+    - **Channel** (*string*) -
 
         The channel on which the compaction was scheduled.
 
-    - `CompactionType` (*CompactionType*) -
+    - **CompactionType** (*CompactionType*) -
 
         The type of the compaction task. See [CompactionType](CompactionType.md).
 
-    - `State` (*CompactionTaskState*) -
+    - **State** (*CompactionTaskState*) -
 
         The state of the compaction task. See [CompactionTaskState](CompactionTaskState.md).
 
-    - `FailureReason` (*string*) -
+    - **FailureReason** (*string*) -
 
         The failure reason of the compaction task, empty when it did not fail.
 
@@ -114,6 +114,7 @@ GetCompactionPlansResp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
 using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

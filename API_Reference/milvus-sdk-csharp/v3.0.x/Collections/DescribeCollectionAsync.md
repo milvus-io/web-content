@@ -64,43 +64,7 @@ DescribeCollectionResp
 
 - **Schema** (*CollectionSchema*) -
 
-    The collection schema. See [CollectionSchema](CollectionSchema.md). The schema contains the following members:
-
-    - `Name` (*string?*) -
-
-        The name of the collection.
-
-    - `Description` (*string?*) -
-
-        An optional description for the collection.
-
-    - `Fields` (*IList\<FieldSchema\>*) -
-
-        The fields defined in the schema. See [FieldSchema](FieldSchema.md).
-
-    - `Functions` (*IList\<FunctionSchema\>*) -
-
-        The functions defined in the schema (e.g. BM25 full-text search functions). See [FunctionSchema](FunctionSchema.md).
-
-    - `StructFields` (*IList\<StructFieldSchema\>*) -
-
-        The struct fields defined in the schema. See [StructFieldSchema](StructFieldSchema.md).
-
-    - `Properties` (*IDictionary\<string, string\>*) -
-
-        The properties of the collection, returned by describe.
-
-    - `EnableDynamicFields` (*bool*) -
-
-        Whether to enable dynamic fields for this schema.
-
-    - `ExternalSource` (*string?*) -
-
-        The external data source of the collection, when the collection is an external collection.
-
-    - `ExternalSpec` (*string?*) -
-
-        The external file specification of the collection (a JSON string), when the collection is an external collection.
+    The collection schema. See [CollectionSchema](CollectionSchema.md).
 
 - **ShardsNum** (*int*) -
 
@@ -154,6 +118,7 @@ DescribeCollectionResp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Collection;
 using Milvus.Client.V2.Responses.Collection;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

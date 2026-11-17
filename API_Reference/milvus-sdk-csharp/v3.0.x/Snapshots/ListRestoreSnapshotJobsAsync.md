@@ -35,7 +35,7 @@ ListRestoreSnapshotJobsResp result = await client.ListRestoreSnapshotJobsAsync(r
 
 A **ListRestoreSnapshotJobsResp** object.
 
-- `Jobs` (*IReadOnlyList\<RestoreSnapshotJobInfo\>*) -
+- **Jobs** (*IReadOnlyList\<RestoreSnapshotJobInfo\>*) -
 
     The list of restore jobs matching the collection filter. Each entry is a [RestoreSnapshotJobInfo](RestoreSnapshotJobInfo.md).
 
@@ -51,6 +51,7 @@ A **ListRestoreSnapshotJobsResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Snapshot;
 using Milvus.Client.V2.Responses.Snapshot;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

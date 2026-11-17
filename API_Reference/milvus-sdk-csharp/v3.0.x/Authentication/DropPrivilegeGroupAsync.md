@@ -42,6 +42,7 @@ This method does not return a value.
 ```csharp
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Rbac;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {

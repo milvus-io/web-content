@@ -139,7 +139,7 @@ SearchResp results = await client.SearchAsync(new SearchReq
     Limit = 5,
     SearchAggregation = new SearchAggregation
     {
-        Fields = ["category"],
+        Fields = { "category" },
         Size = 10
     }
 });

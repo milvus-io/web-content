@@ -33,7 +33,7 @@ public MilvusException(MilvusErrorCode errorCode, string reason, Grpc.Core.Statu
 
 - `errorCode` (*MilvusErrorCode*) -
 
-    The error code.
+    The error code. See [MilvusErrorCode](MilvusErrorCode.md).
 
 - `reason` (*string*) -
 
@@ -47,7 +47,7 @@ public MilvusException(MilvusErrorCode errorCode, string reason, Grpc.Core.Statu
 
 - `ErrorCode` (*MilvusErrorCode*) -
 
-    The error code.
+    The error code. See [MilvusErrorCode](MilvusErrorCode.md).
 
 - `GrpcStatusCode` (*Grpc.Core.StatusCode?*) -
 
@@ -57,6 +57,7 @@ public MilvusException(MilvusErrorCode errorCode, string reason, Grpc.Core.Statu
 
 ```csharp
 using Milvus.Client.V2;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
@@ -67,7 +68,7 @@ using var client = new MilvusClientV2(new ConnectConfig
 
 try
 {
-    await client.DescribeCollectionAsync(new DescribeCollectionReq("my_collection"));
+    await client.DescribeCollectionAsync(new DescribeCollectionReq { CollectionName = "my_collection" });
 }
 catch (MilvusException e)
 {

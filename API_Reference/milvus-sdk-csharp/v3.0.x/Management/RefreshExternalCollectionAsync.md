@@ -43,7 +43,7 @@ RefreshExternalCollectionResp result = await client.RefreshExternalCollectionAsy
 
 A **RefreshExternalCollectionResp** object.
 
-- `JobId` (*long*) -
+- **JobId** (*long*) -
 
     The refresh job ID, which can be passed to `GetRefreshExternalCollectionProgressAsync()` to poll progress.
 
@@ -59,6 +59,7 @@ A **RefreshExternalCollectionResp** object.
 using Milvus.Client.V2;
 using Milvus.Client.V2.Requests.Utility;
 using Milvus.Client.V2.Responses.Utility;
+using Milvus.Client.V2.Types;
 
 using var client = new MilvusClientV2(new ConnectConfig
 {
