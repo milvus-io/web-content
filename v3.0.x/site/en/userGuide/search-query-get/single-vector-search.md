@@ -1507,7 +1507,22 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "product_catalog",
+    "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    "annsField": "embedding",
+    "limit": 20,
+    "outputFields": ["id", "price", "rating", "category"],
+    "orderByFields": ["price:asc"]
+}'
 ```
 
 You can also sort by multiple scalar fields. Milvus applies the fields in the order that you specify. In the following example, Milvus sorts results by `price` in ascending order. For entities with the same `price`, Milvus then sorts by `rating` in descending order.
@@ -1698,7 +1713,22 @@ for (const auto& result : searchResponse.Results().Results()) {
 ```
 
 ```bash
-# restful
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--header "Request-Timeout: 10" \
+-d '{
+    "collectionName": "product_catalog",
+    "data": [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    "annsField": "embedding",
+    "limit": 20,
+    "outputFields": ["id", "price", "rating", "category"],
+    "orderByFields": ["price:asc", "rating:desc"]
+}'
 ```
 
 For entities with the same values in all specified order-by fields, Milvus keeps the original similarity-score order.
