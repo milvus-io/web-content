@@ -2,11 +2,8 @@
 id: json-indexing.md
 title: JSON Indexing
 summary: >-
-  JSON fields provide a flexible way to store structured metadata in Milvus.
-  Without indexing, queries on JSON fields require full collection scans, which
-  become slow as your dataset grows. JSON indexing creates indexes on specific
-  paths within your JSON data so equality, range, and other filter queries on
-  those paths run fast.
+  Choose a JSON path and cast, check JSON-specific requirements, and create path
+  indexes.
 ---
 <h1 id="JSON-Indexing" class="common-anchor-header">JSON Indexing<button data-href="#JSON-Indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,228 +20,109 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>JSON fields provide a flexible way to store structured metadata in Milvus. Without indexing, queries on JSON fields require full collection scans, which become slow as your dataset grows. JSON indexing creates an index on a specific path within your JSON data so equality, range, and other filter queries on that path run fast.</p>
-<p>JSON indexing is ideal for:</p>
+    </button></h1><p>JSON path indexes accelerate filters on selected keys in a <a href="/docs/json-field-overview.md">JSON field</a>. This guide covers the path and cast settings, supported combinations, and creation steps specific to JSON. For general index selection and automatic-selection rules, see <a href="/docs/scalar_index.md">Scalar Index</a>.</p>
+<p>For documents with diverse query paths, consider <a href="/docs/json-shredding.md">JSON Shredding</a>.</p>
+<p><a id="Index-type-overview"></a></p>
+<h2 id="Before-you-create-an-index" class="common-anchor-header">Before you create an index<button data-href="#Before-you-create-an-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><h3 id="Understand-cast-types" class="common-anchor-header">Understand cast types<button data-href="#Understand-cast-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Choose the key to index with <code translate="no">json_path</code>, such as <code translate="no">metadata[&quot;price&quot;]</code>. Set <code translate="no">json_cast_type</code> to the type of values at that path; the field schema remains <code translate="no">JSON</code>. The cast is required for both explicit indexes and <code translate="no">AUTOINDEX</code>. If you omit <code translate="no">json_path</code>, Milvus uses the field name supplied in the request.</p>
+<p><a id="Choose-an-index-type"></a>
+<a id="Compatibility-reference"></a>
+<a id="How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type"></a>
+<a id="INVERTED"></a>
+<a id="STLSORT"></a>
+<a id="BITMAP"></a>
+<a id="NGRAM"></a></p>
+<p>Choose a cast and one of its supported index types. This table lists the JSON path combinations supported in Milvus 3.0.6 with the default automatic type mapping; options marked * require the <a href="#Index-requirements">opt-in setup</a>:</p>
+<table>
+<thead>
+<tr><th>Cast type</th><th>Values at the path</th><th>Supported index types</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code></td><td>Boolean, such as <code translate="no">true</code></td><td><code translate="no">AUTOINDEX</code>, <code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>*</td></tr>
+<tr><td><code translate="no">DOUBLE</code></td><td>Number, such as <code translate="no">99.99</code></td><td><code translate="no">AUTOINDEX</code>, <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>*</td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>String, such as <code translate="no">&quot;electronics&quot;</code></td><td><code translate="no">AUTOINDEX</code>, <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code><em>, <code translate="no">BITMAP</code></em>, <code translate="no">NGRAM</code></td></tr>
+<tr><td><code translate="no">ARRAY_BOOL</code></td><td>Boolean array, such as <code translate="no">[true, false]</code></td><td><code translate="no">INVERTED</code></td></tr>
+<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>Number array, such as <code translate="no">[1.2, 3.14]</code></td><td><code translate="no">INVERTED</code></td></tr>
+<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>String array, such as <code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p><a id="What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities"></a></p>
+<p>Only values matching the cast are indexed. For example, a <code translate="no">DOUBLE</code> cast indexes <code translate="no">99.99</code> but skips <code translate="no">&quot;99.99&quot;</code>. To convert numeric strings during indexing, use <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> with a <code translate="no">DOUBLE</code> cast, as shown in <a href="#Example-5-Convert-data-type-at-index-time">Example 5</a>. This function cannot be used with other casts; values that fail conversion are skipped.</p>
+<h3 id="Index-requirements" class="common-anchor-header">Index requirements<button data-href="#Index-requirements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Can-I-create-multiple-indexes-on-the-same-JSON-key"></a>
+<a id="What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type"></a></p>
+<p>Check these conditions before creating an index:</p>
 <ul>
-<li><p>Structured schemas with consistent, known keys</p></li>
-<li><p>Equality, <code translate="no">IN</code>, range, and text-match queries on specific JSON paths</p></li>
-<li><p>Scenarios where you need precise control over which keys are indexed</p></li>
+<li><strong>One index per path:</strong> Each <code translate="no">(field, json_path)</code> pair supports at most one index across all cast and index types.</li>
+<li><strong>Matching query types:</strong> A query must target the indexed path with a compatible value type to use the index. Incompatible filters can fall back to scanning.</li>
+<li><strong>Array casts:</strong> Specify <code translate="no">INVERTED</code> explicitly for <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, and <code translate="no">ARRAY_VARCHAR</code>. The default 3.0.6 automatic type mapping does not accept these casts.</li>
+<li><strong>String-pattern indexes:</strong> For a <code translate="no">NGRAM</code> index, use a <code translate="no">VARCHAR</code> cast and supply <code translate="no">min_gram</code> and <code translate="no">max_gram</code>. See <a href="/docs/ngram.md#Example-2-Create-on-a-JSON-path">NGRAM on a JSON path</a> for parameters and creation examples.</li>
 </ul>
-<p>For complex JSON documents with diverse query patterns, consider <a href="/docs/json-shredding.md">JSON Shredding</a> as an alternative.</p>
-<h2 id="Index-type-overview" class="common-anchor-header">Index type overview<button data-href="#Index-type-overview" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus offers four index types for JSON paths. Each is suited to a different query pattern.</p>
-<p>Before choosing an index type, identify the <strong>cast type</strong> for the JSON path. The cast type determines how Milvus interprets the value at that path and which index types are available.</p>
-<h3 id="Understand-cast-types" class="common-anchor-header">Understand cast types<button data-href="#Understand-cast-types" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">json_cast_type</code> is the data type used to interpret and index the value at <code translate="no">json_path</code>. It is different from the field schema type: the field is still a <code translate="no">JSON</code> field, but each indexed path is treated as a specific scalar, array, or JSON object type.</p>
-<p>Choose the cast type that matches the values stored at the path. To check whether a cast type works with a specific index type, see <a href="/docs/json-indexing.md#Compatibility-reference">Compatibility reference</a>.</p>
-<table>
-<thead>
-<tr><th>Cast type</th><th>Use when the path value is…</th><th>Example value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">BOOL</code></td><td>A Boolean value</td><td><code translate="no">true</code></td></tr>
-<tr><td><code translate="no">DOUBLE</code></td><td>A numeric value</td><td><code translate="no">99.99</code></td></tr>
-<tr><td><code translate="no">VARCHAR</code></td><td>A string value</td><td><code translate="no">&quot;electronics&quot;</code></td></tr>
-<tr><td><code translate="no">ARRAY_BOOL</code></td><td>An array of Boolean values</td><td><code translate="no">[true, false]</code></td></tr>
-<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>An array of numeric values</td><td><code translate="no">[1.2, 3.14]</code></td></tr>
-<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>An array of string values</td><td><code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td></tr>
-</tbody>
-</table>
-<p>If values at the same path have inconsistent types, only values that match the cast type are indexed. For example, if <code translate="no">metadata[&quot;price&quot;]</code> contains both <code translate="no">99.99</code> and <code translate="no">&quot;99.99&quot;</code>, an index of the <code translate="no">DOUBLE</code> cast type includes the numeric value and skips the string value. To convert string values during indexing, use <code translate="no">json_cast_function</code>; see <a href="/docs/json-indexing.md#Example-5-Convert-data-type-at-index-time">Example 5: Convert data type at index time</a>.</p>
-<div class="alert warning">
-<p>Whole-object JSON indexing (<code translate="no">json_cast_type=&quot;JSON&quot;</code>), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Create JSON path indexes for known query paths, or consider <a href="/docs/json-shredding.md">JSON Shredding</a> for broad query acceleration.</p>
-</div>
-<h3 id="Choose-an-index-type" class="common-anchor-header">Choose an index type<button data-href="#Choose-an-index-type" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>After you choose a cast type, choose the index type according to your query pattern.</p>
-<table>
-<thead>
-<tr><th>Query pattern</th><th>Recommended index type</th><th>Cast type requirement</th><th>Notes</th></tr>
-</thead>
-<tbody>
-<tr><td>Mixed equality and range filters on scalar values</td><td><code translate="no">AUTOINDEX</code></td><td>Use <code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, or <code translate="no">VARCHAR</code>.</td><td>Lets Milvus choose the internal index layout based on value cardinality.</td></tr>
-<tr><td>Filters on values inside JSON arrays</td><td><code translate="no">INVERTED</code></td><td>Use <code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, or <code translate="no">ARRAY_VARCHAR</code>.</td><td>Required for all array cast types.</td></tr>
-<tr><td>Range filters on numbers or sortable strings</td><td><code translate="no">STL_SORT</code> or <code translate="no">AUTOINDEX</code></td><td>Use <code translate="no">DOUBLE</code> or <code translate="no">VARCHAR</code>.</td><td>Use <code translate="no">STL_SORT</code> to force a sorted layout; use <code translate="no">AUTOINDEX</code> when you want automatic selection.</td></tr>
-<tr><td>Equality or <code translate="no">IN</code> filters on low-cardinality values</td><td><code translate="no">BITMAP</code> or <code translate="no">AUTOINDEX</code></td><td>Use <code translate="no">BOOL</code> or <code translate="no">VARCHAR</code>.</td><td>Use <code translate="no">BITMAP</code> to force a bitmap layout. For numeric values, use <code translate="no">AUTOINDEX</code> or <code translate="no">STL_SORT</code>.</td></tr>
-</tbody>
-</table>
-<p>When in doubt, start with <code translate="no">AUTOINDEX</code> for scalar paths. Use <code translate="no">INVERTED</code> explicitly for array cast types and text-match queries.</p>
-<h3 id="AUTOINDEX" class="common-anchor-header">AUTOINDEX<button data-href="#AUTOINDEX" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">AUTOINDEX</code> behavior depends on the <code translate="no">json_cast_type</code> you specify. In Milvus 3.0, <code translate="no">AUTOINDEX</code> no longer always resolves to <code translate="no">INVERTED</code> for JSON path indexes.</p>
-<table>
-<thead>
-<tr><th>Cast type</th><th><code translate="no">AUTOINDEX</code> behavior</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, <code translate="no">VARCHAR</code></td><td>Chooses between <code translate="no">BITMAP</code> and <code translate="no">STL_SORT</code> based on value cardinality.</td></tr>
-<tr><td><code translate="no">ARRAY_BOOL</code>, <code translate="no">ARRAY_DOUBLE</code>, <code translate="no">ARRAY_VARCHAR</code></td><td>Not supported. Use <code translate="no">INVERTED</code> explicitly as the index type.</td></tr>
-</tbody>
-</table>
-<p>For scalar cast types (<code translate="no">BOOL</code>, <code translate="no">DOUBLE</code>, and <code translate="no">VARCHAR</code>), <code translate="no">AUTOINDEX</code> is the recommended starting point when you want Milvus to choose the internal index layout. During index build, Milvus measures the <strong>cardinality</strong> of the values at the JSON path. Cardinality means the number of distinct values at that path.</p>
-<p>Based on cardinality, Milvus chooses one of two internal layouts:</p>
-<ul>
-<li><p><strong>Low cardinality</strong>: Values repeat often, such as <code translate="no">metadata[&quot;in_stock&quot;]</code> with <code translate="no">true</code> and <code translate="no">false</code>, or <code translate="no">metadata[&quot;status&quot;]</code> with a small set of status strings. Milvus builds a <code translate="no">BITMAP</code> index internally for fast equality and <code translate="no">IN</code> filters.</p></li>
-<li><p><strong>High cardinality</strong>: Most values are distinct, such as <code translate="no">metadata[&quot;price&quot;]</code>, <code translate="no">metadata[&quot;created_at&quot;]</code>, or <code translate="no">metadata[&quot;product_id&quot;]</code>. Milvus builds an <code translate="no">STL_SORT</code> index internally for fast range filters such as <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, and <code translate="no">&lt;=</code>.</p></li>
-</ul>
-<p>The default <code translate="no">BITMAP</code>-vs-<code translate="no">STL_SORT</code> threshold is <strong>100 distinct values</strong>. You can tune this threshold with <code translate="no">bitmap_cardinality_limit</code>; see <a href="/docs/json-indexing.md#How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold">How do I tune AUTOINDEX’s BITMAP-vs-STL_SORT threshold?</a>.</p>
+<p><a id="AUTOINDEX"></a></p>
+<p>JSON scalar <code translate="no">BITMAP</code>, <code translate="no">STL_SORT</code>, and cardinality-based automatic selection are available from Milvus 3.0.0. Before using the options marked * or cardinality-based <code translate="no">AUTOINDEX</code>, have your administrator complete the <a href="/docs/release_notes.md#Compatibility-and-behavior-notes">index opt-in setup in the compatibility notes</a>.</p>
 <div class="alert note">
-<p><strong>Behavior change in Milvus 3.0</strong>. In earlier versions, <code translate="no">AUTOINDEX</code> on JSON paths always built an <code translate="no">INVERTED</code> index. From Milvus 3.0, <code translate="no">AUTOINDEX</code> picks between <code translate="no">BITMAP</code> and <code translate="no">STL_SORT</code> for scalar cast types. For array cast types and text-match queries, specify <code translate="no">INVERTED</code> explicitly.</p>
+<blockquote>
+<p>Without the opt-in setup, <code translate="no">AUTOINDEX</code> uses <code translate="no">INVERTED</code> for scalar JSON paths, and explicit JSON <code translate="no">BITMAP</code> or <code translate="no">STL_SORT</code> requests fail. <code translate="no">INVERTED</code> and <code translate="no">NGRAM</code> do not require this setup. For automatic-selection rules and administrator overrides, see <a href="/docs/scalar_index.md#AUTOINDEX-behavior">AUTOINDEX behavior</a>.</p>
+</blockquote>
 </div>
-<h3 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">INVERTED</code> is the best fit when you need text-match queries or array indexing.</p>
-<p>Specify <code translate="no">INVERTED</code> explicitly when:</p>
-<ul>
-<li><p>You need to index values inside JSON arrays.</p></li>
-<li><p>You want one index type that handles equality, <code translate="no">IN</code>, range, text-match, and array queries.</p></li>
-</ul>
-<p>For details, refer to <a href="/docs/inverted.md">INVERTED</a>.</p>
-<h3 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">STL_SORT</code> stores values from a JSON path in sorted order. It is optimized for range filters on numeric values or sortable string values.</p>
-<p><code translate="no">STL_SORT</code> supports only <code translate="no">DOUBLE</code> and <code translate="no">VARCHAR</code> cast types. Use it when:</p>
-<ul>
-<li><p>Your filters compare values with <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, or <code translate="no">&lt;=</code>.</p></li>
-<li><p>The indexed values have high cardinality, such as prices, timestamps, IDs, or sortable codes.</p></li>
-<li><p>You want to force a sorted layout instead of letting <code translate="no">AUTOINDEX</code> choose.</p></li>
-</ul>
-<p><code translate="no">STL_SORT</code> does not support <code translate="no">BOOL</code> or <code translate="no">ARRAY_*</code> cast types. Use <code translate="no">INVERTED</code> for arrays.</p>
-<p>For details, refer to <a href="/docs/stl-sort.md">STL_SORT</a>.</p>
-<h3 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p><code translate="no">BITMAP</code> creates a compact bitmap for each distinct value at a JSON path. It is optimized for equality and <code translate="no">IN</code> filters on values that repeat often.</p>
-<p><code translate="no">BITMAP</code> supports only <code translate="no">BOOL</code> and <code translate="no">VARCHAR</code> cast types. Use it when:</p>
-<ul>
-<li><p>Your filters use <code translate="no">==</code> or <code translate="no">IN</code>.</p></li>
-<li><p>The indexed values have low cardinality, such as booleans, status values, or a small set of categories.</p></li>
-<li><p>You want to force a bitmap layout instead of letting <code translate="no">AUTOINDEX</code> choose.</p></li>
-</ul>
-<p><code translate="no">BITMAP</code> does not support <code translate="no">DOUBLE</code> or <code translate="no">ARRAY_*</code> cast types. For numeric values, use <code translate="no">AUTOINDEX</code>, <code translate="no">STL_SORT</code>, or <code translate="no">INVERTED</code> instead.</p>
-<p>For details, refer to <a href="/docs/bitmap.md">BITMAP</a>.</p>
-<h3 id="Compatibility-reference" class="common-anchor-header">Compatibility reference<button data-href="#Compatibility-reference" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Use the following matrix as a quick reference for supported <code translate="no">(cast type, index type)</code> combinations.</p>
+<p><details id="Supported-filters">
+<summary><strong>JSON filter execution details</strong></summary></p>
+<p>For scalar comparisons and string patterns, follow the selected index’s <a href="/docs/scalar_index.md#Index-types">filter capabilities</a>. String filter syntax and planning rules are described in <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
+<p>JSON-specific operations have these additional behaviors:</p>
 <table>
 <thead>
-<tr><th>Cast type</th><th>Description</th><th>Example value</th><th>AUTOINDEX</th><th>INVERTED</th><th>STL_SORT</th><th>BITMAP</th></tr>
+<tr><th>Filter</th><th>JSON path index behavior</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">BOOL</code></td><td>Boolean values (<code translate="no">true</code>/<code translate="no">false</code>).</td><td><code translate="no">true</code></td><td>Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
-<tr><td><code translate="no">DOUBLE</code></td><td>Numeric values (integers or floats).</td><td><code translate="no">99.99</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-<tr><td><code translate="no">VARCHAR</code></td><td>String values.</td><td><code translate="no">&quot;electronics&quot;</code></td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-<tr><td><code translate="no">ARRAY_BOOL</code></td><td>Array of booleans.</td><td><code translate="no">[true, false]</code></td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
-<tr><td><code translate="no">ARRAY_DOUBLE</code></td><td>Array of numbers.</td><td><code translate="no">[1.2, 3.14]</code></td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
-<tr><td><code translate="no">ARRAY_VARCHAR</code></td><td>Array of strings.</td><td><code translate="no">[&quot;tag1&quot;, &quot;tag2&quot;]</code></td><td>No</td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td><code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ANY</code>, <code translate="no">JSON_CONTAINS_ALL</code></td><td>An <code translate="no">INVERTED</code> index on a typed array path can look up compatible elements. Mixed-type or nested-array operands can fall back to scanning.</td></tr>
+<tr><td><code translate="no">exists</code>, such as <code translate="no">exists metadata[&quot;price&quot;]</code></td><td>Can use an indexed path to test its presence. This differs from comparing the value or testing whether the entire field is NULL.</td></tr>
 </tbody>
 </table>
-<p>For cells marked <code translate="no">No</code>, Milvus rejects the request at index-creation time. For array cast types, use <code translate="no">INVERTED</code> explicitly (<code translate="no">AUTOINDEX</code> does not cover arrays).</p>
+<p>For expression syntax, see <a href="/docs/json-operators.md">JSON Operators</a>.</p>
+<p></details></p>
 <h2 id="Create-a-JSON-index" class="common-anchor-header">Create a JSON index<button data-href="#Create-a-JSON-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -260,7 +138,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section walks through indexing different shapes of JSON data. All examples use the sample structure below and assume you already have a collection that includes a <code translate="no">JSON</code> field named <code translate="no">metadata</code>.</p>
+    </button></h2><p>The examples use a connected client and a collection with a <code translate="no">JSON</code> field named <code translate="no">metadata</code>, containing data shaped as follows:</p>
 <h3 id="Sample-JSON-structure" class="common-anchor-header">Sample JSON structure<button data-href="#Sample-JSON-structure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -310,9 +188,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The examples below assume you have a <code translate="no">MilvusClient</code> named <code translate="no">client</code> connected to your Milvus deployment, and a collection that already includes a <code translate="no">JSON</code> field named <code translate="no">metadata</code>. If you need to set those up from scratch, expand the block below.</p>
+    </button></h3><p>For connection and collection setup, expand the following block:</p>
 <p><details></p>
-<p><summary>Connect and create a sample collection</summary></p>
+<p><summary><strong>Connect and create a sample collection</strong></summary></p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -787,7 +665,7 @@ curl --request POST \
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># REST creates one index per request; collect the definitions below</span>
 <span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&quot;[]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Each example that follows shows one <code translate="no">index_params.add_index(...)</code> call. Pick the ones that match your data and call them on the same <code translate="no">index_params</code> object. Then apply everything in a single <code translate="no">client.create_index(...)</code> call at the end. For details, see <a href="/docs/json-indexing.md#Apply-the-index">Apply the index</a>.</p>
+<p>Add the definitions that match your data to the same index-params object, then <a href="#Apply-the-index">apply the indexes</a> in one request.</p>
 <h3 id="Example-1-Index-a-top-level-key-with-AUTOINDEX" class="common-anchor-header">Example 1: Index a top-level key with AUTOINDEX<button data-href="#Example-1-Index-a-top-level-key-with-AUTOINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -803,7 +681,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Index the <code translate="no">category</code> field for fast filtering by product category. With <code translate="no">AUTOINDEX</code>, Milvus picks <code translate="no">BITMAP</code> or <code translate="no">STL_SORT</code> based on how many distinct categories exist in your data.</p>
+    </button></h3><p>Index <code translate="no">metadata[&quot;category&quot;]</code> with a <code translate="no">VARCHAR</code> cast and <code translate="no">AUTOINDEX</code>. The <a href="#Index-requirements">index requirements</a> explain which automatic-selection mode your deployment uses.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1033,7 +911,7 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>When you know your queries on a path will be dominated by range comparisons (<code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code>), pick <code translate="no">STL_SORT</code> directly. This bypasses cardinality measurement and builds the sorted layout immediately.</p>
+    </button></h3><p>After completing the <a href="#Index-requirements">opt-in setup</a>, index <code translate="no">metadata[&quot;price&quot;]</code> with a <code translate="no">DOUBLE</code> cast and <a href="/docs/stl-sort.md">STL_SORT</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1133,7 +1011,7 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>After indexing, range queries like <code translate="no">metadata[&quot;price&quot;] &gt; 50 AND metadata[&quot;price&quot;] &lt; 100</code> use binary search instead of a full scan.</p>
+<p>This supports range lookups such as <code translate="no">metadata[&quot;price&quot;] &gt; 50 AND metadata[&quot;price&quot;] &lt; 100</code>.</p>
 <h3 id="Example-4-Equality-queries-with-BITMAP" class="common-anchor-header">Example 4: Equality queries with BITMAP<button data-href="#Example-4-Equality-queries-with-BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1149,7 +1027,7 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>For low-cardinality keys, such as status codes, booleans, or enum-like strings, pick <code translate="no">BITMAP</code> directly. Equality and <code translate="no">IN</code> queries become bitmap operations.</p>
+    </button></h3><p>After completing the <a href="#Index-requirements">opt-in setup</a>, index <code translate="no">metadata[&quot;in_stock&quot;]</code> with a <code translate="no">BOOL</code> cast and <a href="/docs/bitmap.md">BITMAP</a>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1249,7 +1127,6 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">BITMAP</code> is also a strong fit for fields like a <code translate="no">status</code> column with a handful of distinct string values.</p>
 <h3 id="Example-5-Convert-data-type-at-index-time" class="common-anchor-header">Example 5: Convert data type at index time<button data-href="#Example-5-Convert-data-type-at-index-time" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1265,7 +1142,7 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>When numeric data is mistakenly stored as strings, use <code translate="no">STRING_TO_DOUBLE</code> to convert the value to a number during index build.</p>
+    </button></h3><p>When numeric values are stored as strings, use <code translate="no">STRING_TO_DOUBLE</code> with a <code translate="no">DOUBLE</code> cast to convert them during index build.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1374,7 +1251,7 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>If conversion fails for a row (for example, a non-numeric string like <code translate="no">&quot;invalid&quot;</code>), that row is skipped during indexing.</p>
+<p>For conversion and skipped-value behavior, see <a href="#Understand-cast-types">Understand cast types</a>.</p>
 <h3 id="Apply-the-index" class="common-anchor-header">Apply the index<button data-href="#Apply-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1473,7 +1350,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
   }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Index builds run asynchronously. Use <code translate="no">client.describe_index(...)</code> to check the build state of a specific index. The <code translate="no">state</code> field shows <code translate="no">Finished</code> once the build is done, and <code translate="no">total_rows</code>, <code translate="no">indexed_rows</code>, and <code translate="no">pending_index_rows</code> show progress along the way.</p>
+<p>After submitting the definitions, check each index’s build state. The <code translate="no">state</code> field reports <code translate="no">Finished</code> when the build is complete; <code translate="no">total_rows</code>, <code translate="no">indexed_rows</code>, and <code translate="no">pending_index_rows</code> report progress:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1566,108 +1443,12 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(describe_re
   <span class="hljs-attr">&quot;state&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Finished&quot;</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Once <code translate="no">state</code> reports <code translate="no">Finished</code>, queries against the indexed path use the new index automatically.</p>
-<p>For <code translate="no">AUTOINDEX</code> entries, the <code translate="no">index_type</code> field in this response is reported as <code translate="no">AUTOINDEX</code>. Milvus does not expose which underlying layout (<code translate="no">BITMAP</code> or <code translate="no">STL_SORT</code>) was chosen at build time. Treat the choice as an internal optimization: equality, <code translate="no">IN</code>, and range queries against the path will work regardless of which layout was selected.</p>
-<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><h3 id="How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type" class="common-anchor-header">How do I choose between AUTOINDEX and an explicit index type?<button data-href="#How-do-I-choose-between-AUTOINDEX-and-an-explicit-index-type" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Start with <code translate="no">AUTOINDEX</code>. It picks the right layout from your data’s cardinality, and it covers most equality, <code translate="no">IN</code>, and range queries on JSON paths. Pick an explicit type when:</p>
-<ul>
-<li><p>You know your query pattern (for example, always range queries use <code translate="no">STL_SORT</code>, and always equality queries on low-cardinality values use <code translate="no">BITMAP</code>) and want to skip cardinality measurement.</p></li>
-<li><p>You need text-match or substring queries. Use <code translate="no">INVERTED</code>.</p></li>
-<li><p>You’re indexing array cast types. Use <code translate="no">INVERTED</code> explicitly.</p></li>
-</ul>
-<h3 id="What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">What happens if a query’s filter expression uses a different type than the indexed cast type?<button data-href="#What-happens-if-a-querys-filter-expression-uses-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>If your filter expression uses a different type than the index’s <code translate="no">json_cast_type</code>, Milvus does not use the index and may fall back to a slower brute-force scan if the data allows. For best performance, always align your filter expression with the cast type of the index. For example, if a numeric index is created with <code translate="no">json_cast_type=&quot;DOUBLE&quot;</code>, only numeric filter conditions will leverage the index.</p>
-<h3 id="What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="common-anchor-header">What if a JSON key has inconsistent data types across different entities?<button data-href="#What-if-a-JSON-key-has-inconsistent-data-types-across-different-entities" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Inconsistent types can lead to <strong>partial indexing</strong>. For example, if <code translate="no">metadata[&quot;price&quot;]</code> is stored as both a number (<code translate="no">99.99</code>) and a string (<code translate="no">&quot;99.99&quot;</code>) and you create an index with <code translate="no">json_cast_type=&quot;DOUBLE&quot;</code>, only the numeric values are indexed. String-form entries are skipped and won’t appear in filter results. Use <code translate="no">json_cast_function=&quot;STRING_TO_DOUBLE&quot;</code> to coerce strings to numbers at index time, or fix the source data so all entries share one type.</p>
-<h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-key" class="common-anchor-header">Can I create multiple indexes on the same JSON key?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-key" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>No. Milvus allows at most one index per <code translate="no">(field, json_path)</code> pair, regardless of cast type or index type. You cannot create both an <code translate="no">INVERTED</code> and a <code translate="no">BITMAP</code> index on the same path, or two indexes on the same path with different cast types.</p>
-<h3 id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold" class="common-anchor-header">How do I tune AUTOINDEX’s BITMAP-vs-STL_SORT threshold?<button data-href="#How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>By default, <code translate="no">AUTOINDEX</code> picks <code translate="no">BITMAP</code> when the indexed values have <strong>100 or fewer distinct values</strong> and <code translate="no">STL_SORT</code> otherwise. You can override this threshold by adding <code translate="no">&quot;bitmap_cardinality_limit&quot;</code> to your index parameters (range: 1-1000):</p>
+<p>Once <code translate="no">state</code> reports <code translate="no">Finished</code>, the index is available to queries with compatible filters.</p>
+<p>For <code translate="no">AUTOINDEX</code> entries, the <code translate="no">index_type</code> field in this response is reported as <code translate="no">AUTOINDEX</code>. The response does not identify the underlying index layout. For the selection rules, see <a href="/docs/scalar_index.md#AUTOINDEX-behavior">AUTOINDEX behavior</a>; the <a href="#Index-requirements">path and cast requirements</a> still apply.</p>
+<p><a id="FAQ"></a></p>
+<p><details id="How-do-I-tune-AUTOINDEXs-BITMAP-vs-STLSORT-threshold">
+<summary><strong>Advanced: Tune automatic selection for a JSON path</strong></summary></p>
+<p>This example changes the cardinality threshold for <code translate="no">metadata[&quot;category&quot;]</code>. It applies only after the <a href="#Index-requirements">opt-in setup</a> enables cardinality-based <code translate="no">AUTOINDEX</code>. For the parameter range, layout choices, and explicit-index behavior, see <a href="/docs/scalar_index.md#Cardinality-threshold">Cardinality threshold</a>:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1685,7 +1466,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(describe_re
     params={
         <span class="hljs-string">&quot;json_path&quot;</span>: <span class="hljs-string">&#x27;metadata[&quot;category&quot;]&#x27;</span>,
         <span class="hljs-string">&quot;json_cast_type&quot;</span>: <span class="hljs-string">&quot;VARCHAR&quot;</span>,
-<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>: <span class="hljs-number">200</span>,  <span class="hljs-comment"># use BITMAP up to 200 distinct values</span></span>
+<span class="highlighted-wrapper-line">        <span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>: <span class="hljs-number">200</span>,  <span class="hljs-comment"># use BITMAP for fewer than 200 distinct values</span></span>
     }
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -1761,7 +1542,7 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
     {
         [<span class="hljs-string">&quot;json_path&quot;</span>] = <span class="hljs-string">&quot;metadata[\&quot;category\&quot;]&quot;</span>,
         [<span class="hljs-string">&quot;json_cast_type&quot;</span>] = <span class="hljs-string">&quot;VARCHAR&quot;</span>,
-        [<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>] = <span class="hljs-string">&quot;200&quot;</span> <span class="hljs-comment">// use BITMAP up to 200 distinct values</span>
+        [<span class="hljs-string">&quot;bitmap_cardinality_limit&quot;</span>] = <span class="hljs-string">&quot;200&quot;</span> <span class="hljs-comment">// use BITMAP for fewer than 200 distinct values</span>
     }
 });
 <button class="copy-code-btn"></button></code></pre>
@@ -1776,4 +1557,5 @@ indexParams.Add(<span class="hljs-keyword">new</span> IndexParam(<span class="hl
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Most users don’t need to tune this. Raise it if you have a moderate-cardinality field you’d prefer bitmapped; lower it to push <code translate="no">AUTOINDEX</code> toward <code translate="no">STL_SORT</code> sooner. The setting is ignored when you specify <code translate="no">INVERTED</code>, <code translate="no">STL_SORT</code>, or <code translate="no">BITMAP</code> explicitly.</p>
+<p>Apply this definition in place of Example 1, then <a href="#Apply-the-index">apply the index</a>.</p>
+<p></details></p>

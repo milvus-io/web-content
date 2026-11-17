@@ -23,8 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus provides comparison, range, arithmetic, logical, and NULL operators for filtering entities. Each operator supports specific field types.</p>
 <div class="alert note">
-<p>The literal on the left-hand side of a filtering expression can either be a collection field name, such as <code translate="no">status</code>, <code translate="no">color</code>, etc., used in examples below, or the name of a StructArray subfield at a specific element index, as in <code translate="no">filter = 'struct[0][subfield] &gt; 10'</code>.</p>
-<p>For details on scalar filtering in a StructArray field, refer to <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p>
+<p>The left operand can be a collection field, such as <code translate="no">status</code>, or a StructArray subfield at a specific element index, such as <code translate="no">struct[0][subfield] &gt; 10</code>. See <a href="/docs/struct-array-operators.md">StructArray Operators</a>.</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">Comparison operators<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -360,7 +359,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>This is useful when you want to check for membership in a list of values.</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">Pattern matching operators<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -463,7 +461,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more details about choosing between <code translate="no">LIKE</code> and regex, supported field types, regex syntax, escaping rules, and performance, refer to <a href="/docs/pattern-matching.md">Pattern Matching</a>. Milvus also allows you to build an <code translate="no">NGRAM</code> index on <code translate="no">VARCHAR</code> fields or JSON string paths to accelerate eligible pattern matching filters. For details, refer to <a href="/docs/ngram.md">NGRAM</a>.</p>
+<p>For syntax, escaping, field support, and acceleration options such as <code translate="no">NGRAM</code>, see <a href="/docs/pattern-matching.md">Pattern Matching</a>.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">Arithmetic operators<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -760,6 +758,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Logical operators are used to combine multiple conditions into a more complex filter expression. These include <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code>.</p>
+<div class="alert note">
+<p>Each condition can use its own eligible index or scan path; one index type need not serve the entire expression. See <a href="/docs/scalar_index.md">Scalar Index</a>.</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">Supported logical operators<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1177,6 +1178,9 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 </tbody>
 </table>
 <p>For a supported field defined with <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> matches no entities and <code translate="no">IS NOT NULL</code> matches all visible entities. Other conditions in the filter still apply.</p>
+<div class="alert note">
+<p>Scalar NULL filters use validity information from an eligible index or field data; they do not require a particular scalar index type. A non-nullable field can produce a constant result.</p>
+</div>
 <h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Use NULL filters in vector search<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1204,8 +1208,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Both entities have an <code translate="no">embedding</code> vector.</td></tr>
 </tbody>
 </table>
-<p>All three filters are valid. A search on <code translate="no">embedding</code> with <code translate="no">embedding IS NULL</code> returns no hits because no entity can satisfy both requirements. To retrieve the entities with missing embeddings, use <code translate="no">query()</code> as shown above.</p>
-<p>Vector search already skips entities whose searched vector field is NULL, so <code translate="no">embedding IS NOT NULL</code> does not further narrow the candidates for a search on <code translate="no">embedding</code>. Ranking, other filters, and the search limit still determine which candidates are returned.</p>
+<p>To retrieve missing embeddings, use <code translate="no">query()</code>; a search on <code translate="no">embedding</code> with <code translate="no">embedding IS NULL</code> is valid but returns no hits. Vector search already skips NULL embeddings, so <code translate="no">embedding IS NOT NULL</code> does not further narrow candidates. Ranking, other filters, and the search limit still determine the returned hits.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Tips on using basic operators with JSON and ARRAY fields<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1221,8 +1224,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>While the basic operators in Milvus are versatile and can be applied to scalar fields, they can also be effectively used with the keys and indexes in the JSON and ARRAY fields.</p>
-<p>For example, if you have a <code translate="no">product</code> field that contains multiple keys like <code translate="no">price</code>, <code translate="no">model</code>, and <code translate="no">tags</code>, always reference the key directly:</p>
+    </button></h2><p>Reference a JSON key or ARRAY element directly in the expression. For example, to filter the <code translate="no">price</code> key in a JSON field named <code translate="no">product</code>:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1276,22 +1278,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus offers a range of basic operators that give you flexibility in filtering and querying your data. By combining comparison, range, arithmetic, and logical operators, you can create powerful filter expressions to narrow down your search results and retrieve the data you need efficiently.</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

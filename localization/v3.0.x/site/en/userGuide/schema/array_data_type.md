@@ -67,15 +67,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use ARRAY fields in Milvus clusters, define the relevant field type when creating the collection schema. This process includes:</p>
+    </button></h2><p>To add an ARRAY field to the collection schema, set the following parameters:</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported Array data type, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Using the <code translate="no">element_type</code> parameter to specify the data type of elements in the array. All elements in the same array must be of the same data type.</p></li>
-<li><p>Using the <code translate="no">max_capacity</code> parameter to define the maximum capacity of the array, i.e., the maximum number of elements it can contain.</p></li>
+<li><p>Set the field data type to <code translate="no">ARRAY</code>.</p></li>
+<li><p>Set <code translate="no">element_type</code> to the shared data type of the elements.</p></li>
+<li><p>Set <code translate="no">max_capacity</code> to the maximum number of elements.</p></li>
 </ol>
 <p>Here’s how to define a collection schema that includes ARRAY fields:</p>
 <div class="alert note">
-<p>If you set <code translate="no">enable_dynamic_field=True</code> when defining the schema, Milvus allows you to insert scalar fields that were not defined in advance. However, this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">Dynamic Field</a>.</p>
+<p>To insert fields not defined in the schema, enable the <a href="/docs/enable-dynamic-field.md">dynamic field</a>.</p>
 </div>
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -375,8 +375,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexing helps improve search and query performance. In Milvus clusters, indexing is mandatory for vector fields but optional for scalar fields.</p>
-<p>The following example creates indexes on the vector field <code translate="no">embedding</code> and the ARRAY field <code translate="no">tags</code>, both using the <code translate="no">AUTOINDEX</code> index type. With this type, Milvus automatically selects the most suitable index based on the data type. You can also customize the index type and params for each field. For details, refer to <a href="/docs/index-explained.md">Index Explained</a>.</p>
+    </button></h2><p>Vector fields require indexes; scalar indexes are optional. This example requests <code translate="no">AUTOINDEX</code> on <code translate="no">embedding</code> and <code translate="no">tags</code>. For explicit ARRAY index choices and filter support, see <a href="#Array-index-support">Array index support</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Scalar indexes, including <code translate="no">AUTOINDEX</code>, do not support recursive ARRAY fields or arrays with nullable elements. See <a href="/docs/array_data_type.md#Array-index-support">Array index support</a> for ordinary-array filters and <a href="/docs/index-structarray-fields.md#Create-scalar-indexes">Index StructArray Fields</a> for subfield rules.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -486,6 +490,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>Array index support: index types and accelerated filters</strong></summary></p>
+<p>Scalar indexes on an ordinary ARRAY field index its elements. Milvus 3.0.6 supports these explicit choices:</p>
+<table>
+<thead>
+<tr><th>Element type</th><th>Explicit index types</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>You can also request <code translate="no">AUTOINDEX</code>; see <a href="/docs/scalar_index.md#AUTOINDEX-behavior">Scalar Index</a> for the default ARRAY selections.</p>
+<p>The following filters can use eligible array indexes:</p>
+<table>
+<thead>
+<tr><th>Filter</th><th>Index behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, or an eligible automatic selection can look up elements regardless of position.</td></tr>
+<tr><td>Whole-array <code translate="no">==</code> or <code translate="no">!=</code> on Boolean, integer, or VARCHAR arrays</td><td><code translate="no">INVERTED</code> can find candidates, then check original arrays for order and length. <code translate="no">BITMAP</code> does not serve this candidate path.</td></tr>
+<tr><td>Whole-array comparisons on floating-point arrays</td><td>Fall back to scanning.</td></tr>
+<tr><td>Element access, such as <code translate="no">tags[0]</code>, or array length</td><td>Element-membership indexing does not provide index lookup for these operations.</td></tr>
+</tbody>
+</table>
+<p>For expression syntax, see <a href="/docs/array-operators.md">ARRAY Operators</a>.</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">Create collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1107,7 +1138,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:</p>
+    </button></h2><p>Use ARRAY filters in vector search to restrict the eligible entities:</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1270,4 +1301,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Additionally, Milvus supports advanced Array filtering operators like <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code> to further enhance query capabilities. For more details, refer to <a href="/docs/array-operators.md">ARRAY Operators</a>.</p>
+<p>For containment and length filters, see <a href="/docs/array-operators.md">ARRAY Operators</a>.</p>
