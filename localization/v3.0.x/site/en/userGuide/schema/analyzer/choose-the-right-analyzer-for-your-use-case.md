@@ -527,9 +527,9 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>Remove standalone punctuation tokens</p></td>
-     <td><p>Clean output from <code translate="no">jieba</code>, <code translate="no">lindera</code>, <code translate="no">icu</code> tokenizers, which will return punctuations as single tokens</p></td>
-     <td><ul><li><p>Input: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>Output: <code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>Remove tokens that contain punctuation</p></td>
+     <td><p>Clean output from <code translate="no">jieba</code>, <code translate="no">lindera</code>, and <code translate="no">icu</code> tokenizers, which return punctuation as standalone tokens. Tokens with word-internal punctuation, such as <code translate="no">don't</code> or <code translate="no">3.5kg</code>, are removed entirely; use the <a href="/docs/regex-filter.md"><code translate="no">regex</code></a> filter to keep them</p></td>
+     <td><ul><li><p>Input: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>Output: <code translate="no">[['Hello'], ['world']]</code></p></li><li><p>Input: <code translate="no">["don't", "buy"]</code></p></li><li><p>Output: <code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
@@ -794,7 +794,7 @@ analyzer_params = {
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
