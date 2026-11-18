@@ -48,6 +48,8 @@ This repository ships an agent skill, **edit-docs**, that lets AI coding agents 
 
 Every change the skill makes is delivered as a pull request — it never pushes to a version branch directly.
 
+> **Reserved markers:** many pages contain paired `<!-- doc:block:start|end id="..." -->` comments that anchor the Zilliz Cloud documentation build. They look like leftover comments but are load-bearing — never delete or restructure them. See [AGENTS.md](AGENTS.md) ("Reserved markers") before removing or reformatting HTML comments.
+
 ## Docs structure
 
 ![Folders](assets/folder-structure.png)

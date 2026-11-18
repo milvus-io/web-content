@@ -13,6 +13,8 @@ The `removepunct` filter removes tokens that contain punctuation or whitespace f
 
 This filter is most effective with `jieba`, `lindera`, and `icu` tokenizers, which preserve punctuation as separate tokens (e.g., `"Hello!"` → `["Hello", "!"]`). The `standard` tokenizer discards punctuation during tokenization. The `whitespace` tokenizer preserves punctuation, including punctuation within a token. When combined with `whitespace`, `removepunct` removes the entire token if it contains punctuation or whitespace; it does not strip individual characters from the token.
 
+Some tokenizers keep punctuation inside a single token. For example, `icu` tokenizes `don't`, `3.5kg`, and `u.s.a` into single tokens that contain punctuation, and `removepunct` removes them entirely, making the corresponding terms unsearchable. To remove only tokens made entirely of punctuation and whitespace while keeping such tokens, use the [regex](regex-filter.md) filter with an expression that requires at least one non-punctuation, non-whitespace character, such as `{"type": "regex", "expr": "[^\\s\\p{P}]"}`.
+
 </div>
 
 ## Configuration

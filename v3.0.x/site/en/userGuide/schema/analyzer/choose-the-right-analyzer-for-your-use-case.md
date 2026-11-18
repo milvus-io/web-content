@@ -439,9 +439,9 @@ Control which tokens are preserved based on character content or length:
    </tr>
    <tr>
      <td><p><a href="removepunct-filter.md"><code>removepunct</code></a></p></td>
-     <td><p>Remove standalone punctuation tokens</p></td>
-     <td><p>Clean output from <code>jieba</code>, <code>lindera</code>, <code>icu</code> tokenizers, which will return punctuations as single tokens</p></td>
-     <td><ul><li><p>Input: <code>["Hello", "!", "world"]</code></p></li><li><p>Output: <code>[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>Remove tokens that contain punctuation</p></td>
+     <td><p>Clean output from <code>jieba</code>, <code>lindera</code>, and <code>icu</code> tokenizers, which return punctuation as standalone tokens. Tokens with word-internal punctuation, such as <code>don't</code> or <code>3.5kg</code>, are removed entirely; use the <a href="regex-filter.md"><code>regex</code></a> filter to keep them</p></td>
+     <td><ul><li><p>Input: <code>["Hello", "!", "world"]</code></p></li><li><p>Output: <code>[['Hello'], ['world']]</code></p></li><li><p>Input: <code>["don't", "buy"]</code></p></li><li><p>Output: <code>[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="alphanumonly-filter.md"><code>alphanumonly</code></a></p></td>
@@ -651,7 +651,7 @@ analyzer_params = {
         "dict": "ipadic"  # Options: ipadic, ipadic-neologd, unidic
     },
     "filter": [
-        "removepunct",  # Remove standalone punctuation
+        "removepunct",  # Remove tokens containing punctuation
         {
             "type": "length",
             "min": 1,
