@@ -7,9 +7,10 @@ public enum ConsistencyLevel
 {
     Strong = 0,
     Session = 1,
-    BoundedStaleness = 2,
+    Bounded = 2,
+    BoundedStaleness = 2,  // deprecated; use Bounded
     Eventually = 3,
-    Customized = 4
+    Customized = 4  // deprecated
 }
 ```
 
@@ -23,9 +24,13 @@ public enum ConsistencyLevel
 
     Ensures that all data writes can be immediately perceived in reads during the same session.
 
-- **BoundedStaleness** (2)
+- **Bounded** (2)
 
     Allows data inconsistency during a certain period of time, after which data is generally globally consistent.
+
+- **BoundedStaleness** (2)
+
+    Deprecated: renamed to `Bounded`, matching the Java/C++/Rust/PyMilvus SDKs. This member has the same numeric value (2) and is kept for compatibility; use `Bounded` instead.
 
 - **Eventually** (3)
 
@@ -33,7 +38,7 @@ public enum ConsistencyLevel
 
 - **Customized** (4)
 
-    A customized consistency level with a guarantee timestamp supplied by the caller.
+    Deprecated: the Java and C++ V2 SDKs no longer expose a Customized level, and the guarantee timestamp is expected to be derived from the other four levels. This member is kept for compatibility and may be removed in a future release; prefer `Strong`, `Session`, `Bounded` or `Eventually`.
 
 ## Example
 
