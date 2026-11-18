@@ -64,6 +64,21 @@ Methods of `LoadPartitionsParam.Builder`:
         <td><p>replicaNumber: replica number</p></td>
     </tr>
     <tr>
+        <td><p>withLoadFields(List&lt;String> loadFields)</p></td>
+        <td><p>Specify the fields to load during this load. If not specified, all the fields will be loaded.</p></td>
+        <td><p>loadFields: A <code>List</code> of field names to load.</p></td>
+    </tr>
+    <tr>
+        <td><p>withResourceGroups(List&lt;String> resourceGroups)</p></td>
+        <td><p>Specify the target resource groups to load the replicas. If not specified, the replicas will be loaded into the default resource group.</p></td>
+        <td><p>resourceGroups: A <code>List</code> of resource group names.</p></td>
+    </tr>
+    <tr>
+        <td><p>withSkipLoadDynamicField(Boolean skip)</p></td>
+        <td><p>Whether to skip the dynamic field when loading. Default is <code>Boolean.FALSE</code>.</p></td>
+        <td><p>skip: <code>Boolean.TRUE</code> to skip the dynamic field, <code>Boolean.FALSE</code> not to.</p></td>
+    </tr>
+    <tr>
         <td><p>withRefresh(Boolean refresh)</p></td>
         <td><p>Whether to renew the segment list of this partition before loading. This flag must be set to FALSE when first time call the loadPartitions(). After loading a partition, call loadPartitions() again with refresh=TRUE, the server will look for new segments that are not loaded yet and tries to load them up.<br/>This method is mainly for bulkinsert() interface.</p></td>
         <td><p>refresh: The flag whether to renew segment list.</p></td>

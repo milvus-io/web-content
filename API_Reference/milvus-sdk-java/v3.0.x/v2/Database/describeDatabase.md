@@ -21,10 +21,6 @@ describeDatabase(DescribeDatabaseReq.builder()
 
     The name of the database.
 
-**RETURN TYPE**:
-
-*DescribeDatabaseResp*
-
 **RETURN TYPE:**
 
 *DescribeDatabaseResp*

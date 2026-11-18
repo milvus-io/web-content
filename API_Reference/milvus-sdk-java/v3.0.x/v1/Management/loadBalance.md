@@ -32,6 +32,11 @@ Methods of `LoadBalanceParam.Builder`:
         <th><p>Parameters</p></th>
     </tr>
     <tr>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the target collection.</p></td>
+    </tr>
+    <tr>
         <td><p>withDatabaseName(String databaseName)</p></td>
         <td><p>Sets the database name. database name can be null for default database.</p></td>
         <td><p>databaseName: The database name.</p></td>

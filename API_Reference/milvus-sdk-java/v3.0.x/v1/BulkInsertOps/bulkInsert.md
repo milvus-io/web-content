@@ -49,6 +49,11 @@ Methods of `BulkInsertParam.Builder`:
         <td><p>file: A file path.</p></td>
     </tr>
     <tr>
+        <td><p>withOption(String key, String value)</p></td>
+        <td><p>Sets an option of the request.</p></td>
+        <td><p>key: The option key.<br/>value: The option value.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Constructs a BulkInsertParam object.</p></td>
         <td><p>N/A</p></td>

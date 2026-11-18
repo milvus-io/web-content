@@ -29,6 +29,11 @@ Methods of `RevokeRolePrivilegeParam.Builder`:
         <td><p>roleName: The role name.</p></td>
     </tr>
     <tr>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. Database name cannot be null.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
         <td><p>withObject(String object)</p></td>
         <td><p>Sets the object. object cannot be empty or null.</p></td>
         <td><p>object: A granted object in Milvus, such as collection, partition, and database.</p></td>

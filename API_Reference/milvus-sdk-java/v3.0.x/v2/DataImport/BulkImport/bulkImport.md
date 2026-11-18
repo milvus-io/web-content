@@ -45,6 +45,7 @@ MilvusImportRequest.builder()
     .collectionName(String collectionName)
     .partitionName(String partitionName)
     .files(List<List<String>> files)
+    .apiKey(String apiKey)
     .build()
 ```
 
@@ -65,6 +66,22 @@ MilvusImportRequest.builder()
 - `files(List<List<String>> files)`
 
     The list of string lists, each string list contains a singular row-based file path or multiple column-based file paths.
+
+- `apiKey(String apiKey)`
+
+    The authentication credential. Use `userName:password` for Milvus or a Zilliz Cloud API key.
+
+- `options(Map<String, Object> options)`
+
+    Additional options for the import request.
+
+- `rlsPrincipal(String rlsPrincipal)`
+
+    The name of the RLS principal the import runs as.
+
+- `skipRls(Boolean skipRls)`
+
+    Whether the import explicitly bypasses row-level security.
 
 **EXCEPTIONS:**
 

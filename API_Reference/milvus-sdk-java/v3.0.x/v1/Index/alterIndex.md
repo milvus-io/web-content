@@ -39,6 +39,16 @@ Methods of `AlterIndexParam.Builder`:
         <td><p>indexName: The name of the index.</p></td>
     </tr>
     <tr>
+        <td><p>withMMapEnabled(boolean enabledMMap)</p></td>
+        <td><p>Enables or disables MMap for the index data files.</p></td>
+        <td><p>enabledMMap: whether MMap is enabled or not.</p></td>
+    </tr>
+    <tr>
+        <td><p>withProperty(String key, String value)</p></td>
+        <td><p>Sets a key-value property.</p></td>
+        <td><p>key: the key<br/>value: the value</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a AlterIndexParam object.</p></td>
         <td><p>N/A</p></td>

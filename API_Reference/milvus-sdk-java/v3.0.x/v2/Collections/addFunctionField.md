@@ -24,6 +24,7 @@ AddFunctionFieldReq.builder()
     .elementType(elementType)
     .maxCapacity(maxCapacity)
     .isNullable(isNullable)
+    .elementNullable(elementNullable)
     .defaultValue(defaultValue)
     .enableDefaultValue(enableDefaultValue)
     .enableAnalyzer(enableAnalyzer)
@@ -95,6 +96,10 @@ AddFunctionFieldReq.builder()
 - `isNullable(Boolean isNullable)`
 
     Whether the field accepts null values.
+
+- `elementNullable(Boolean elementNullable)`
+
+    Whether the inner elements of an Array or ArrayOfVector struct sub-field can be null. Defaults to `false`.
 
 - `defaultValue(Object defaultValue)`
 

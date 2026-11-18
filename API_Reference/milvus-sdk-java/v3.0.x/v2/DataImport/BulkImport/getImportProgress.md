@@ -42,6 +42,7 @@ A **BaseDescribeImportRequest** instance is implemented in **MilvusDescribeImpor
 ```java
 MilvusDescribeImportRequest.builder()
     .jobId(String jobId)
+    .apiKey(String apiKey)
     .build()
 ```
 
@@ -50,6 +51,10 @@ MilvusDescribeImportRequest.builder()
 - `jobId(String jobId)`
 
     The ID of an existing import job.
+
+- `apiKey(String apiKey)`
+
+    The authentication credential. Use `userName:password` for Milvus or a Zilliz Cloud API key.
 
 **EXCEPTIONS:**
 
