@@ -21,7 +21,7 @@ let request = ListFileResourcesRequest::builder().build()?;
 
 **RETURNS:**
 
-A **ListFileResourcesResponse** containing the file resources of the collection. Returns an `Error` if the operation fails.
+A **ListFileResourcesResponse** containing the registered file resources. Returns an `Error` if the operation fails.
 
 ```rust
 ListFileResourcesResponse
@@ -32,7 +32,7 @@ ListFileResourcesResponse
 
 - `resources()` (*&[FileResourceInfo]*) -
 
-    The file resources associated with the collection.
+    The registered file resources.
 
     - `get_name()` (*&str*) -
 

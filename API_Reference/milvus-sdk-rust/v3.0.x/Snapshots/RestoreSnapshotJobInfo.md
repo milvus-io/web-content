@@ -1,6 +1,6 @@
 # RestoreSnapshotJobInfo
 
-Information of a snapshot restore job, as returned by `listRestoreSnapshotJobs()` and `getRestoreSnapshotState()`.
+Information of a snapshot restore job, as returned by `list_restore_snapshot_jobs()` and `get_restore_snapshot_state()`.
 
 **METHODS:**
 
