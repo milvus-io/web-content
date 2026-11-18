@@ -29,9 +29,9 @@ Methods of `SearchSimpleParam.Builder`:
         <td><p>collectionName: target collection name</p></td>
     </tr>
     <tr>
-        <td><p>withOutFields(List&lt;String> outFields)</p></td>
+        <td><p>withOutputFields(List&lt;String> outputFields)</p></td>
         <td><p>Specifies output scalar fields (Optional).</p></td>
-        <td><p><br/>outFields: The name list of fields to be outputed</p></td>
+        <td><p><br/>outputFields: The name list of fields to be outputed</p></td>
     </tr>
     <tr>
         <td><p>withFilter(String filter)</p></td>

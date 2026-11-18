@@ -129,6 +129,21 @@ Methods of `SearchParam.Builder`:
         <td><p>groupByFieldName: The name of a field to do grouping.</p></td>
     </tr>
     <tr>
+        <td><p>withGroupSize(Integer groupSize)</p></td>
+        <td><p>Defines the max number of items for each group. The value must be greater than zero.</p></td>
+        <td><p>groupSize: The max number of items per group.</p></td>
+    </tr>
+    <tr>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Sets the limit.</p></td>
+        <td><p>limit: The limit value.</p></td>
+    </tr>
+    <tr>
+        <td><p>withStrictGroupSize(Boolean strictGroupSize)</p></td>
+        <td><p>Whether to force the number of each group to be <code>groupSize</code>. Set to <code>Boolean.FALSE</code>, Milvus might return some groups with a number of items less than <code>groupSize</code>.</p></td>
+        <td><p>strictGroupSize: Whether to force the number of each group to be <code>groupSize</code>.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a SearchParam object.</p></td>
         <td><p>N/A</p></td>

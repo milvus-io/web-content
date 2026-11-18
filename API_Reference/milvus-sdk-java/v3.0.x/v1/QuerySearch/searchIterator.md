@@ -129,6 +129,26 @@ Methods of `SearchIteratorParam.Builder`:
         <td><p>groupByFieldName: The name of a field to do grouping.</p></td>
     </tr>
     <tr>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Sets the limit.</p></td>
+        <td><p>limit: The limit value.</p></td>
+    </tr>
+    <tr>
+        <td><p>withBatchSize(Long batchSize)</p></td>
+        <td><p>Specify a value to control the number of entities returned per batch. Must be a positive value. Default value is 1000, will return without batchSize.</p></td>
+        <td><p>batchSize: A value to define the number of entities returned per batch.</p></td>
+    </tr>
+    <tr>
+        <td><p>withRlsPrincipal(String rlsPrincipal)</p></td>
+        <td><p>Sets the row-level security (RLS) principal for the search.</p></td>
+        <td><p>rlsPrincipal: The RLS principal.</p></td>
+    </tr>
+    <tr>
+        <td><p>withSkipRls(Boolean skipRls)</p></td>
+        <td><p>Sets whether the search should skip row-level security (RLS) enforcement.</p></td>
+        <td><p>skipRls: <code>Boolean.TRUE</code> to skip RLS, <code>Boolean.FALSE</code> not to.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a SearchIteratorParam object.</p></td>
         <td><p>N/A</p></td>

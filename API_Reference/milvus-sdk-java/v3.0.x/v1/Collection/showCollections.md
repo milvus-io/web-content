@@ -39,6 +39,11 @@ Methods of `ShowCollectionsParam.Builder`:
         <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
+        <td><p>withShowType(ShowType showType)</p></td>
+        <td><p>Sets a show type. Show Type can be empty or null, default value is <code>ShowType.All</code>.</p></td>
+        <td><p>showType: The show type.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Constructs a ShowCollectionsParam object.</p></td>
         <td><p>N/A</p></td>

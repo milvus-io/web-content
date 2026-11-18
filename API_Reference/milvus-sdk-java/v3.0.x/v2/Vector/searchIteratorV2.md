@@ -56,6 +56,10 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 
     The name of the vector field to search.
 
+- `metricType(IndexParam.MetricType metricType)`
+
+    The metric type used to measure vector similarity. See [MetricType](../Management/MetricType.md).
+
 - `topK(int topK)`
 
     **Deprecated.** Use `limit(long limit)` instead.
@@ -105,6 +109,10 @@ searchIteratorV2(SearchIteratorReqV2.builder()
 - `batchSize(long batchSize)`
 
     The batch size for iterator operations.
+
+- `externalFilterFunc(Function\<List\<SearchResp.SearchResult\>, List\<SearchResp.SearchResult\>\> externalFilterFunc)`
+
+    A function applied to filter the search results after retrieval.
 
 - `filterTemplateValues(Map<String, Object> filterTemplateValues)`
 

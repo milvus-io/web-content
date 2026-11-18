@@ -42,6 +42,8 @@ A **BaseListImportRequest** instance is implemented in **MilvusListImportRequest
 ```java
 MilvusListImportRequest.builder()
     .collectionName(String collectionName)
+    .dbName(String dbName)
+    .apiKey(String apiKey)
     .build()
 ```
 
@@ -50,6 +52,14 @@ MilvusListImportRequest.builder()
 - `collectionName(String collectionName)`
 
     The name of the target collection of this operation.
+
+- `dbName(String dbName)`
+
+    The name of the target database of this operation.
+
+- `apiKey(String apiKey)`
+
+    The authentication credential. Use `userName:password` for Milvus or a Zilliz Cloud API key.
 
 **EXCEPTIONS:**
 

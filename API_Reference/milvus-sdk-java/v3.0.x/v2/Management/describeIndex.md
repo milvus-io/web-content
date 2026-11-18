@@ -57,25 +57,25 @@ A **DescribeIndexResp** object that contains the details of the specified index.
 
     - `getIndexName()` (*String*) - The name of the index.
 
-    - `getId()` (*Long*) - The ID of the index.
+    - `getId()` (*long*) - The ID of the index.
 
-    - `getParams()` (*Map\<String, String\>*) - The index parameters as key-value pairs.
+    - `getIndexType()` (*IndexParam.IndexType*) - The index type.
 
-    - `getIndexedRows()` (*Long*) - The number of indexed rows.
+    - `getMetricType()` (*IndexParam.MetricType*) - The metric type used by the index.
 
-    - `getTotalRows()` (*Long*) - The total number of rows in the collection.
+    - `getExtraParams()` (*Map\<String, String\>*) - The extra index parameters.
 
-    - `getPendingIndexRows()` (*Long*) - The number of rows pending to be indexed.
+    - `getIndexedRows()` (*long*) - The number of rows that have been indexed.
 
-    - `getIndexState()` (*String*) - The build state of the index.
+    - `getTotalRows()` (*long*) - The total number of rows known to the index.
 
-    - `getIndexFailedReason()` (*String*) - The reason the index build failed, if any.
+    - `getPendingIndexRows()` (*long*) - The number of rows waiting to be indexed.
 
-    - `getIndexType()` (*String*) - The index type parsed from the index parameters.
+    - `getIndexState()` (*IndexBuildState*) - The current index-building state.
 
-    - `getMetricType()` (*String*) - The metric type parsed from the index parameters.
+    - `getIndexFailedReason()` (*String*) - The reason why index building failed.
 
-    - `getExtraParam()` (*String*) - The extra parameters excluding index type and metric type.
+    - `getProperties()` (*Map\<String, String\>*) - **Deprecated.** The index properties, as set at creation time.
 
 - `getIndexDescByFieldName(String fieldName)` (*IndexDesc*) -
 
