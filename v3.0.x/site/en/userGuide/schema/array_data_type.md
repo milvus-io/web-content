@@ -25,7 +25,9 @@ Here's an example of how ARRAY fields store data:
 - <strong>Data Type:</strong> All elements in an ARRAY field must share the same data type, which is defined by the `element_type` parameter. When `element_type` is set to `VARCHAR`, you must also specify `max_length`, which defines the maximum number of bytes allowed for each array element. The `element_type` accepts any scalar data type supported by Milvus, with the exception of `JSON`. For `element_type=STRUCT`, use a StructArray field and provide a `struct_schema`; for details, refer to [StructArray](create-structarray-field.md). A top-level ARRAY field cannot hold vectors or nested arrays, and its elements cannot be null individually; these forms are available only for subfields inside a StructArray field in Milvus 3.0.6 and later.
 
 
-- **Array Capacity**: The number of elements in an ARRAY field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value should be an integer within the range from **1** to **4096**.
+- **Array Capacity**: The number of elements in an ARRAY field must be less than or equal to the maximum capacity defined when the Array was created, as specified by `max_capacity`. The value must be greater than 0 and must not exceed `proxy.maxArrayCapacity`, which defaults to **4096**.
+
+- **Text Match**: `TEXT_MATCH`, `TEXT_MATCH_FUZZY`, and `PHRASE_MATCH` support only `VARCHAR` and `TEXT` fields; applying them to an ARRAY field returns an error. `enable_analyzer` and `enable_match` have no effect on ARRAY fields. For details on text match, refer to [Text Match](keyword-match.md).
 
 - **String Handling**: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, `'a"b'`, `"a'b"`, `'a\'b'`, and `"a\"b"` are stored as entered, while `'a'b'` and `"a"b"` are considered invalid values.
 
