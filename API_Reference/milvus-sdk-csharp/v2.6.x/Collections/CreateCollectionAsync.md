@@ -21,7 +21,7 @@ await client.CreateCollectionAsync(new CreateCollectionReq
 {
     CollectionName = "my_collection",
     Schema = schema,
-    ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
+    ConsistencyLevel = ConsistencyLevel.Bounded,
     ShardsNum = 1
 });
 ```
@@ -42,7 +42,7 @@ await client.CreateCollectionAsync(new CreateCollectionReq
 
 - `ConsistencyLevel` (*ConsistencyLevel*) -
 
-    The consistency level to be used by the collection. Defaults to `ConsistencyLevel.BoundedStaleness`. See [ConsistencyLevel](ConsistencyLevel.md).
+    The consistency level to be used by the collection. Defaults to `ConsistencyLevel.Bounded`. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `ShardsNum` (*int*) -
 
@@ -86,7 +86,7 @@ var request = new CreateSimpleCollectionReq
     PrimaryFieldType = DataType.Int64,
     VectorFieldName = "embedding",
     Dimension = 4,
-    ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
+    ConsistencyLevel = ConsistencyLevel.Bounded,
     MetricType = MetricType.Cosine
 };
 
@@ -125,7 +125,7 @@ await client.CreateCollectionAsync(request);
 
 - `ConsistencyLevel` (*ConsistencyLevel*) -
 
-    The consistency level of the collection. Defaults to `ConsistencyLevel.BoundedStaleness`. See [ConsistencyLevel](ConsistencyLevel.md).
+    The consistency level of the collection. Defaults to `ConsistencyLevel.Bounded`. See [ConsistencyLevel](ConsistencyLevel.md).
 
 - `MetricType` (*MetricType*) -
 

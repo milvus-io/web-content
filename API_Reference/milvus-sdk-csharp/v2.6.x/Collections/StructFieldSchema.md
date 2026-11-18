@@ -10,6 +10,7 @@ public sealed class StructFieldSchema
     public string Name { get; }
     public string Description { get; }
     public int MaxCapacity { get; set; }
+    public IDictionary<string, string> TypeParams { get; }
     public IList<FieldSchema> Fields { get; }
 }
 ```
@@ -27,6 +28,10 @@ public sealed class StructFieldSchema
 - `MaxCapacity` (*int*) -
 
     The maximum number of struct elements a single row may hold.
+
+- `TypeParams` (*IDictionary\<string, string\>*) -
+
+    Additional per-struct `type_params` to send on the wire, mirroring the Java SDK's `StructFieldSchema.typeParams` / PyMilvus struct params. Supported keys include `warmup` and `mmap.enabled` (PyMilvus accepts `mmap_enabled` and normalizes it to `mmap.enabled`; the C# SDK passes wire keys verbatim, like `FieldSchema.TypeParams` on [FieldSchema](FieldSchema.md)). Also populated when the schema is read back via `DescribeCollection`. Entries are added via the collection-initializer syntax `TypeParams = { ... }`.
 
 - `Fields` (*IList\<FieldSchema\>*) -
 

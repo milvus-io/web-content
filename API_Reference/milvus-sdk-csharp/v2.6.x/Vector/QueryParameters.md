@@ -93,7 +93,7 @@ QueryResp results = await client.QueryAsync(new QueryReq
     {
         Limit = 10,
         OutputFields = { "title", "pages" },
-        ConsistencyLevel = ConsistencyLevel.BoundedStaleness,
+        ConsistencyLevel = ConsistencyLevel.Bounded,
         FilterTemplates = { ["minPages"] = 100 }
     }
 });
