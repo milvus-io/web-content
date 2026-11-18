@@ -19,6 +19,10 @@ auto request = DropPrivilegeGroupRequest()
 
     Sets the name of the privilege group.
 
+- `SetGroupName(const std::string& name)`
+
+    Set name of the privilege group.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

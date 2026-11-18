@@ -20,9 +20,17 @@ auto request = ListPersistentSegmentsRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name in which the collections are created.
+
 - `WithCollectionName(const std::string& name)`
 
     Sets the name of the collection.
+
+- `SetCollectionNames(const std::string& name)`
+
+    Set collection name.
 
 **RETURNS:**
 

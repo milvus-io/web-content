@@ -19,6 +19,10 @@ auto request = GetCompactionPlansRequest()
 
     Sets the compaction job ID returned by `Compact()`.
 
+- `SetCompactionID(int64_t id)`
+
+    Set compaction job id which is returned by `Compact()`.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

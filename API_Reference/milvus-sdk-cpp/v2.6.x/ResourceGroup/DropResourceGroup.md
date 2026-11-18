@@ -19,6 +19,10 @@ auto request = DropResourceGroupRequest()
 
     Sets the name of the resource group.
 
+- `SetGroupName(const std::string& name)`
+
+    Set name of the resource group.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

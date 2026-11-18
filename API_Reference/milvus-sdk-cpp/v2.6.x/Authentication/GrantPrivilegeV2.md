@@ -22,17 +22,33 @@ auto request = GrantPrivilegeV2Request()
 
     Sets the role's name.
 
+- `SetRoleName(const std::string& name)`
+
+    Set name of the role.
+
 - `WithDatabaseName(const std::string& db_name)`
 
     Sets the target database name for the role.
+
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set database name.
 
 - `WithCollectionName(const std::string& collection_name)`
 
     Sets the target collection name for the role.
 
+- `SetCollectionName(const std::string& collection_name)`
+
+    Set name of the collection.
+
 - `WithPrivilege(const std::string& privilege)`
 
     Sets the name of the privilege to assign to the role. For available privileges, refer to [this page](https://milvus.io/docs/grant_privileges.md).
+
+- `SetPrivilege(const std::string& privilege)`
+
+    Set name of the privilege.
 
 **RETURNS:**
 

@@ -25,17 +25,33 @@ auto request = RunAnalyzerRequest()
 
     Sets the target database name. The default database applies if it is empty.
 
+- `SetDatabaseName(const std::string& db_name)`
+
+    Set target db name, default is empty, means use the db name of MilvusClient.
+
 - `WithCollectionName(std::string collection_name)`
 
     Sets the name of the collection.
+
+- `SetCollectionName(std::string collection_name)`
+
+    Set name of this collection, cannot be empty.
 
 - `WithFieldName(std::string field_name)`
 
     Sets the name of the target field, which cannot be empty.
 
+- `SetFieldName(std::string field_name)`
+
+    Set name of the target field, cannot be empty.
+
 - `WithTexts(const std::vector<std::string>& texts)`
 
     Sets the texts to be analyzed.
+
+- `SetTexts(const std::vector<std::string>& texts)`
+
+    Set texts to be analyzed.
 
 - `AddText(std::string text)`
 
@@ -45,9 +61,17 @@ auto request = RunAnalyzerRequest()
 
     Sets the name of the analyzer to run.
 
+- `SetAnalyzerNames(const std::vector<std::string>& names)`
+
+    Set analyzer names.
+
 - `WithAnalyzerParams(const nlohmann::json& params)`
 
     Sets the analyzer parameters.
+
+- `SetAnalyzerParams(const nlohmann::json& params)`
+
+    Set analyzer parameters.
 
 - `WithDetail(bool with_detail)`
 
