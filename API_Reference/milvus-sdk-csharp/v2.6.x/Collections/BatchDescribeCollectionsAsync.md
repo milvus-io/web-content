@@ -46,7 +46,13 @@ DescribeCollectionResp
     Schema              // -> CollectionSchema
     ShardsNum           // -> int
     ConsistencyLevel    // -> ConsistencyLevel
+    CreatedTimestamp    // -> ulong
+    UpdateTimestamp     // -> ulong
     DatabaseName        // -> string
+    NumPartitions       // -> long?
+    CreatedUtcTimestamp // -> ulong
+    Aliases             // -> IReadOnlyList<string>
+    Properties          // -> IReadOnlyDictionary<string, string>
 ```
 
 **PARAMETERS:**
@@ -71,11 +77,33 @@ DescribeCollectionResp
 
     The consistency level of the collection. See [ConsistencyLevel](ConsistencyLevel.md).
 
+- **CreatedTimestamp** (*ulong*) -
+
+    The hybrid timestamp at which the collection was created.
+
+- **UpdateTimestamp** (*ulong*) -
+
+    The hybrid timestamp at which the collection's schema was last updated (e.g. by a field or property change).
+
 - **DatabaseName** (*string*) -
 
     The database the collection belongs to, as reported by the server.
 
-For the complete member list and descriptions of each entry, see [DescribeCollectionAsync](DescribeCollectionAsync.md).
+- **NumPartitions** (*long?*) -
+
+    The number of default physical partitions, populated for a partition-key collection; `null` when not applicable.
+
+- **CreatedUtcTimestamp** (*ulong*) -
+
+    The UTC timestamp at which the collection was created, as reported by the server.
+
+- **Aliases** (*IReadOnlyList\<string\>*) -
+
+    The aliases of the collection.
+
+- **Properties** (*IReadOnlyDictionary\<string, string\>*) -
+
+    The collection-level properties (e.g. TTL, consistency override, timezone), as set at creation time or via `AlterCollectionProperties`.
 
 **EXCEPTIONS:**
 

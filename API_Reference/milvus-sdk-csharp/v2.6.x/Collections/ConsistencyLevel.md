@@ -33,7 +33,7 @@ public enum ConsistencyLevel
 
 - **Customized** (4)
 
-    A customized consistency level with a guarantee timestamp supplied by the caller. Deprecated: the Java and C++ V2 SDKs no longer expose a Customized level.
+    A customized consistency level with a guarantee timestamp supplied by the caller.
 
 ## Example
 

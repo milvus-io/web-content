@@ -93,7 +93,7 @@ A **[BulkImportResp](BulkImportResp.md)** object that contains the envelope retu
 
 - [MilvusException](../Client/MilvusException.md)
 
-    Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
+    Thrown when the HTTP request fails or the server returns an error. Inspect the exception message for details.
 
 ## Example
 

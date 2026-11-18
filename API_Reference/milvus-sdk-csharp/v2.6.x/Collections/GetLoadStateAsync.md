@@ -49,7 +49,7 @@ GetLoadStateResp
 
 - **State** (*LoadState*) -
 
-    The load state of the collection. See [LoadState](#loadstate).
+    The load state of the collection. See [LoadState](LoadState.md).
 
 - **Progress** (*long*) -
 
@@ -60,38 +60,6 @@ GetLoadStateResp
 - [MilvusException](../Client/MilvusException.md)
 
     Thrown when the RPC fails or the server returns an error. Inspect the exception message for details.
-
-## LoadState
-
-The load state of a collection or partition.
-
-```csharp
-public enum LoadState
-{
-    NotExist = 0,
-    NotLoad = 1,
-    Loading = 2,
-    Loaded = 3
-}
-```
-
-**Constants:**
-
-- **NotExist** (0)
-
-    The entity does not exist.
-
-- **NotLoad** (1)
-
-    The entity is not loaded.
-
-- **Loading** (2)
-
-    The entity is being loaded.
-
-- **Loaded** (3)
-
-    The entity is loaded.
 
 ## Example
 
