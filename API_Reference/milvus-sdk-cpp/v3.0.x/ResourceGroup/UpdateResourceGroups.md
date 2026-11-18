@@ -17,15 +17,15 @@ auto request = UpdateResourceGroupsRequest()
 
 - `WithGroups(std::unordered_map<std::string, ResourceGroupConfig>&& groups)`
 
-    Sets the resource groups to be updated.
+    Sets the resource groups to be updated. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
 - `SetGroups(std::unordered_map<std::string, ResourceGroupConfig>&& groups)`
 
-    Set the resource groups to be updated.
+    Set the resource groups to be updated. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
 - `AddGroup(const std::string& name, ResourceGroupConfig&& config)`
 
-    Adds a resource group to be updated.
+    Adds a resource group to be updated. See [ResourceGroupConfig](ResourceGroupConfig.md).
 
 **RETURNS:**
 
