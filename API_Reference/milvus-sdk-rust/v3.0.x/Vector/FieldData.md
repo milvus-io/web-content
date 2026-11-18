@@ -172,9 +172,9 @@ Each variant carries the field `name` shared with the collection schema and the 
 
     Returns the per-row validity bitmap of a `Nullable` field.
 
-- `nullable()` / `with_validity()` -
+- `nullable(data: FieldData, valid_data: Vec<bool>)` / `with_validity(valid_data: Vec<bool>)` -
 
-    Constructs or converts to a `Nullable` field with a validity bitmap.
+    Constructs or converts to a `Nullable` field with a validity bitmap. Both return `Result<Self>`.
 
 **TYPED ACCESSORS:**
 

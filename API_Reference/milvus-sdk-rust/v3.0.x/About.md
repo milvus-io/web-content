@@ -130,6 +130,7 @@ Milvus proto is backward compatible, so a later SDK version can work with an ear
 ### 3.0.0
 
 - `CompactRequest` rejects `target_size = 0`. Omit `target_size` to request the server default.
+- `insert()`, `upsert()`, and `get()` with empty input now build and return an empty result without issuing an RPC, instead of failing at request construction.
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 # RefreshExternalCollectionJobInfo
 
-Information of an external collection refresh job, as returned by `listRefreshExternalCollectionJobs()` and `getRefreshExternalCollectionProgress()`.
+Information of an external collection refresh job, as returned by `list_refresh_external_collection_jobs()` and `get_refresh_external_collection_progress()`.
 
 **METHODS:**
 

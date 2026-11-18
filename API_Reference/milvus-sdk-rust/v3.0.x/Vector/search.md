@@ -108,7 +108,7 @@ let request = SearchRequest::builder()
 
     Reranking configuration for single-vector search. Mutually exclusive with `function_chains`.
 
-    This struct carries reranking functions and combination settings used by search. It is used both as a V2 request input and as a response domain object.
+    This struct carries reranking functions and combination settings used by search.
 
     ```rust
     pub struct FunctionScore

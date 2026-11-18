@@ -37,11 +37,11 @@ let request = CreateIndexRequest::builder()
 
 - `sync: bool`
 
-    Whether to wait for the index build to finish before returning. Defaults to `false`.
+    Whether to wait for the index build to finish before returning. Defaults to `true`.
 
 - `timeout_ms: i64`
 
-    Timeout in milliseconds applied to the operation. Zero means the client default is used.
+    Timeout in milliseconds applied while waiting for the index build. A value less than or equal to zero waits indefinitely. Defaults to `60000`.
 
 **RETURN TYPE:**
 

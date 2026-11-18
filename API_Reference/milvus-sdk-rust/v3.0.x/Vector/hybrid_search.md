@@ -124,7 +124,7 @@ Each entry in `sub_requests` describes one vector search against a single vector
 
 - `limit: i64`
 
-    Maximum number of hits returned for this sub-search. Defaults to `0`.
+    Maximum number of hits returned for this sub-search. Defaults to `10`.
 
 - `metric_type: Option<MetricType>`
 

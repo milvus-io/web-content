@@ -14,7 +14,7 @@ pub struct CollectionSchema
 
 - `enable_dynamic_field: bool`
 
-    Whether dynamic fields are enabled. Defaults to `false`.
+    Whether dynamic fields are enabled. Defaults to `true`.
 
 - `schema_version: i32`
 
