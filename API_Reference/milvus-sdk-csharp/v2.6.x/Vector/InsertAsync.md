@@ -16,7 +16,7 @@ var request = new InsertReq
     [
         FieldData.Create("id", new long[] { 1, 2 }),
         FieldData.CreateVarChar("title", new[] { "A", "B" }),
-        FieldData.Create("embedding", new[]
+        FieldData.CreateFloatVector("embedding", new[]
         {
             new[] { 0.1f, 0.2f },
             new[] { 0.3f, 0.4f }
