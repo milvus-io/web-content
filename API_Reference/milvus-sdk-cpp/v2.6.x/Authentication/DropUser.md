@@ -19,6 +19,10 @@ auto request = DropUserRequest()
 
     Sets the name of the user.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

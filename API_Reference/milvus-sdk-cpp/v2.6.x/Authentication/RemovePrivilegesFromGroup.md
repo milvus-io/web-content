@@ -20,9 +20,17 @@ auto request = RemovePrivilegesFromGroupRequest()
 
     Set the name of the target privilege group for this operation.
 
+- `SetGroupName(const std::string& name)`
+
+    Set name of the privilege group.
+
 - `WithPrivileges(std::set<std::string>&& privileges)`
 
     Sets the privileges to be removed from the specified group.
+
+- `SetPrivileges(std::set<std::string>&& privileges)`
+
+    Set privileges of the group to be added or removed.
 
 - `AddPrivilege(const std::string& privilege)`
 

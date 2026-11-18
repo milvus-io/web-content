@@ -19,6 +19,10 @@ auto request = DescribeUserRequest()
 
     Sets the name of the user to describe.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user.
+
 **RETURNS:**
 
 *[Status](../Client/Status.md)*

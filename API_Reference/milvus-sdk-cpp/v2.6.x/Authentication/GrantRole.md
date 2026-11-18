@@ -20,9 +20,17 @@ auto request = GrantRoleRequest()
 
     Sets the name of the target user of this operation.
 
+- `SetUserName(const std::string& name)`
+
+    Set name of the user, grant a role to this user.
+
 - `WithRoleName(const std::string& name)`
 
     Sets the name of the role to be granted.
+
+- `SetRoleName(const std::string& name)`
+
+    Set name of the role.
 
 **RETURNS:**
 
