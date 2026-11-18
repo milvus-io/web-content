@@ -56,7 +56,7 @@ let request = GetRequest::builder()
 
 **RETURNS:**
 
-A **QueryResponse** containing the rows matched by the query. Returns an `Error` if the operation fails.
+A **QueryResponse** containing the entities matching the provided primary keys. Returns an `Error` if the operation fails.
 
 ```rust
 QueryResponse

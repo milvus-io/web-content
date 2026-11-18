@@ -36,7 +36,7 @@ let request = InsertRequest::builder()
 
 - `partition_name: String`
 
-    Name of the partition to insert into. Required.
+    Name of the partition to insert into. When empty, rows are inserted into the default partition.
 
 - `columns: Vec<FieldData>`
 
