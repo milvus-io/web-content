@@ -51,51 +51,7 @@ ListIndexesResp
 
 - **Indexes** (*IReadOnlyList\<IndexDesc\>*) -
 
-    The descriptions of the indexes on the collection. Each **IndexDesc** has the following members:
-
-    - **IndexName** (*string*) -
-
-        The index name.
-
-    - **IndexId** (*long*) -
-
-        The index id.
-
-    - **FieldName** (*string*) -
-
-        The field name the index is built on.
-
-    - **State** (*IndexState*) -
-
-        The index build state. See [IndexState](IndexState.md).
-
-    - **IndexedRows** (*long*) -
-
-        The number of rows indexed so far.
-
-    - **TotalRows** (*long*) -
-
-        The total number of rows to index.
-
-    - **PendingIndexRows** (*long*) -
-
-        The number of rows pending index build.
-
-    - **IndexStateFailReason** (*string?*) -
-
-        The failure reason when the index build failed, or `null`.
-
-    - **Parameters** (*IReadOnlyDictionary\<string, string\>*) -
-
-        The index parameters (e.g. `index_type`, `metric_type`, `nlist`).
-
-    - **IndexType** (*IndexType?*) -
-
-        The typed index type, parsed from `Parameters`' `index_type` entry, or `null` when absent or unrecognized. See [IndexType](IndexType.md).
-
-    - **MetricType** (*MetricType?*) -
-
-        The typed metric type, parsed from `Parameters`' `metric_type` entry, or `null` when absent or unrecognized (e.g. scalar indexes have no metric). See [MetricType](../Vector/MetricType.md).
+    The descriptions of the indexes on the collection. Each entry is an [IndexDesc](IndexDesc.md).
 
 - **IndexNames** (*IReadOnlyList\<string\>*) -
 
