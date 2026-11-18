@@ -129,6 +129,16 @@ Methods of `MutationResultWrapper`:
      <td><p>List&lt;String></p></td>
    </tr>
    <tr>
+     <td><p>getInsertIDs()</p></td>
+     <td><p>Gets the ID array returned by the insert() interface.</p></td>
+     <td><p>List&lt;?></p></td>
+   </tr>
+   <tr>
+     <td><p>getDeleteIDs()</p></td>
+     <td><p>Gets the ID array returned by the delete() interface.</p></td>
+     <td><p>List&lt;?></p></td>
+   </tr>
+   <tr>
      <td><p>getDeleteCount()</p></td>
      <td><p>Gets the row count of the deleted entities. Currently, this value is always equal to the input row count.</p></td>
      <td><p>long</p></td>

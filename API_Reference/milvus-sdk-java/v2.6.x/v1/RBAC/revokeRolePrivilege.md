@@ -24,6 +24,11 @@ Methods of `RevokeRolePrivilegeParam.Builder`:
         <th><p>Parameters</p></th>
     </tr>
     <tr>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. Database name cannot be null.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
         <td><p>withRoleName(String roleName)</p></td>
         <td><p>Sets the roleName. RoleName cannot be empty or null.</p></td>
         <td><p>roleName: The role name.</p></td>

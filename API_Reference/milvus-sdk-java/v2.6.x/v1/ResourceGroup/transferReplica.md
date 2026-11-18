@@ -39,6 +39,11 @@ Methods of `TransferReplicaParam.Builder`:
         <td><p>collectionName: The name of a collection.</p></td>
     </tr>
     <tr>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
         <td><p>withReplicaNumber(Long replicaNumber)</p></td>
         <td><p>Specify number of replicas to transfer.</p></td>
         <td><p>replicaNumber: The number of replicas to transfer.</p></td>

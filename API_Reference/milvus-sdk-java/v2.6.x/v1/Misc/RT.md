@@ -174,11 +174,16 @@ Note: Not all status codes are used, some of them are reserved.
      <td><p>25</p></td>
      <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
-   <tr>
-     <td><p>EmptyCollection</p></td>
-     <td><p>26</p></td>
-     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
-   </tr>
+    <tr>
+      <td><p>EmptyCollection</p></td>
+      <td><p>26</p></td>
+      <td><p>*<em>This error is reserved and not used for now.</em></p></td>
+    </tr>
+    <tr>
+      <td><p>DDRequestRace</p></td>
+      <td><p>1000</p></td>
+      <td><p>*<em>This error is reserved and not used for now.</em></p></td>
+    </tr>
 </table>
 
 #### Methods
@@ -203,6 +208,11 @@ Note: Not all status codes are used, some of them are reserved.
         <td><p>getData()</p></td>
         <td><p>Gets the response object returned by the server.</p></td>
         <td><p>RPC response class</p></td>
+    </tr>
+    <tr>
+        <td><p>getException()</p></td>
+        <td><p>Gets the exception captured by this response.</p></td>
+        <td><p>Exception</p></td>
     </tr>
 </table>
 

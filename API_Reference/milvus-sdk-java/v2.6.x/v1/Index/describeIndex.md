@@ -94,6 +94,12 @@ Methods of `DescIndexResponseWrapper`:
      <td><p>fieldName: A field name</p></td>
      <td><p>IndexDesc</p></td>
    </tr>
+   <tr>
+     <td><p>getIndexDescByIndexName(String indexName)</p></td>
+     <td><p>Get index description by index name. Return null if the index doesn't exist.</p></td>
+     <td><p>indexName: An index name</p></td>
+     <td><p>IndexDesc</p></td>
+   </tr>
 </table>
 
 Each `DescIndexResponseWrapper.IndexDesc` has the following getters:

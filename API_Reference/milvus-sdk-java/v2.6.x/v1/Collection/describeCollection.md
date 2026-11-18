@@ -144,6 +144,54 @@ Methods of `DescCollResponseWrapper`:
      <td><p>N/A</p></td>
      <td><p>FieldType</p></td>
    </tr>
+   <tr>
+     <td><p>getDatabaseName()</p></td>
+     <td><p>Get the database name of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>String</p></td>
+   </tr>
+   <tr>
+     <td><p>getConsistencyLevel()</p></td>
+     <td><p>Get the consistency level of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>ConsistencyLevelEnum</p></td>
+   </tr>
+   <tr>
+     <td><p>getPrimaryField()</p></td>
+     <td><p>Get the primary key field. Throws ParamException if the primary key field doesn't exist.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>FieldType</p></td>
+   </tr>
+   <tr>
+     <td><p>getVectorFields()</p></td>
+     <td><p>Get all the vector fields. Milvus supports multiple vector fields from v2.4.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>List&lt;FieldType></p></td>
+   </tr>
+   <tr>
+     <td><p>getProperties()</p></td>
+     <td><p>Get the properties of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>Map&lt;String, String></p></td>
+   </tr>
+   <tr>
+     <td><p>getSchema()</p></td>
+     <td><p>Get the schema of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>CollectionSchemaParam</p></td>
+   </tr>
+   <tr>
+     <td><p>getResourceGroups()</p></td>
+     <td><p>Get the resource groups of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>List&lt;String></p></td>
+   </tr>
+   <tr>
+     <td><p>getReplicaNumber()</p></td>
+     <td><p>Get the replica number of the collection.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>int</p></td>
+   </tr>
 </table>
 
 #### Example

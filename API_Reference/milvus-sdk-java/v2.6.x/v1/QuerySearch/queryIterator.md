@@ -84,6 +84,11 @@ Methods of `QueryIteratorParam.Builder`:
         <td><p>batchSize: A value to define the number of entities returned per batch</p></td>
     </tr>
     <tr>
+        <td><p>withReduceStopForBest(Boolean reduceStopForBest)</p></td>
+        <td><p>Adjusts the query using iterators to handle offsets more efficiently during the Reduce step. Default is True.</p></td>
+        <td><p>reduceStopForBest: A boolean value indicating whether to adjust the query to handle offsets more efficiently during the Reduce step.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a QueryIteratorParam object.</p></td>
         <td><p>N/A</p></td>

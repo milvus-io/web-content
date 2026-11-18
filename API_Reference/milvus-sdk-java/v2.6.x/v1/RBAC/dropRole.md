@@ -29,6 +29,11 @@ Methods of `DropRoleParam.Builder`:
         <td><p>roleName: The role name used to create the privilege.</p></td>
     </tr>
     <tr>
+        <td><p>withForceDrop(boolean forceDrop)</p></td>
+        <td><p>Sets the forceDrop flag. If true, the role will be force dropped.</p></td>
+        <td><p>forceDrop: A boolean value that defines if the role is force dropped.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a DropRoleParam object.</p></td>
         <td><p>N/A</p></td>

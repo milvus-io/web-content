@@ -13,7 +13,7 @@ public enum MetricType
      <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td><p>NONE</p></td>
+     <td><p>None</p></td>
      <td><p>For internal usage.</p></td>
    </tr>
    <tr>

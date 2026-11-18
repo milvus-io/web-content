@@ -79,6 +79,31 @@ Methods of `HybridSearchParam.Builder`:
         <td><p>ranker: The concrete ranker object.</p></td>
     </tr>
     <tr>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Specify a value to control the returned number of entities. Must be a positive value.</p></td>
+        <td><p>limit: A value to define the limit of returned entities.</p></td>
+    </tr>
+    <tr>
+        <td><p>withOffset(Long offset)</p></td>
+        <td><p>Specifies the offset place of the returned results.</p></td>
+        <td><p>offset: The offset position of the returned results.</p></td>
+    </tr>
+    <tr>
+        <td><p>withGroupByFieldName(String groupByFieldName)</p></td>
+        <td><p>Groups the results by a scalar field name.</p></td>
+        <td><p>groupByFieldName: A scalar field name to group the results by.</p></td>
+    </tr>
+    <tr>
+        <td><p>withGroupSize(Integer groupSize)</p></td>
+        <td><p>Defines the max number of items for each group; the value must be greater than zero.</p></td>
+        <td><p>groupSize: The maximum number of items per group.</p></td>
+    </tr>
+    <tr>
+        <td><p>withStrictGroupSize(Boolean strictGroupSize)</p></td>
+        <td><p>Whether to force the number of each group to be groupSize; set to false, Milvus might return some groups with fewer items than groupSize.</p></td>
+        <td><p>strictGroupSize: Whether to force each group to contain exactly groupSize items.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a SearchParam object.</p></td>
         <td><p>N/A</p></td>
@@ -127,6 +152,11 @@ Methods of `AnnSearchParam.Builder`:
         <td><p>withTopK(Integer topK)</p></td>
         <td><p><strong>Deprecated.</strong> Use <code>withLimit(Long)</code> instead. Set topK value of ANN search.<br/>Available range: [1, 16384]</p></td>
         <td><p>topK: The topk value.</p></td>
+    </tr>
+    <tr>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Specify a value to control the returned number of entities. Must be a positive value.</p></td>
+        <td><p>limit: A value to define the limit of returned entities.</p></td>
     </tr>
     <tr>
         <td><p>withParams(String params)</p></td>

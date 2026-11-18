@@ -59,6 +59,21 @@ Methods of `LoadCollectionParam.Builder`:
         <td><p>refresh: The flag whether to renew segment list.</p></td>
     </tr>
     <tr>
+        <td><p>withResourceGroups(List&lt;String> resourceGroups)</p></td>
+        <td><p>Specifies the target resource groups to load the replicas; if not specified, the replicas are loaded into the default resource group.</p></td>
+        <td><p>resourceGroups: The names of the resource groups to load the replicas.</p></td>
+    </tr>
+    <tr>
+        <td><p>withLoadFields(List&lt;String> loadFields)</p></td>
+        <td><p>Specifies the load fields list needed during this load; if not specified, all the fields will be loaded.</p></td>
+        <td><p>loadFields: The list of field names to load.</p></td>
+    </tr>
+    <tr>
+        <td><p>withSkipLoadDynamicField(Boolean skip)</p></td>
+        <td><p>Specifies whether to skip loading the dynamic field during this load. Default is False.</p></td>
+        <td><p>skip: A Boolean value indicating whether to skip the dynamic field; Boolean.TRUE skips the dynamic field.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Constructs a LoadCollectionParam object.</p></td>
         <td><p>N/A</p></td>

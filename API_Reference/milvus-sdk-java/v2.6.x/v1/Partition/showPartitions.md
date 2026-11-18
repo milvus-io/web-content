@@ -109,19 +109,24 @@ Methods of `ShowPartitionsResponse.PartitionInfo`
      <th><p><strong>Returns</strong></p></th>
    </tr>
    <tr>
-     <td><p>getIndexType()</p></td>
-     <td><p>Get index type.</p></td>
-     <td><p>IndexType</p></td>
-   </tr>
-   <tr>
-     <td><p>getMetricType()</p></td>
-     <td><p>Get metric type.</p></td>
-     <td><p>MetricType</p></td>
-   </tr>
-   <tr>
-     <td><p>getExtraParam()</p></td>
-     <td><p>Get index parameters in JSON format.</p></td>
+     <td><p>getName()</p></td>
+     <td><p>Get the name of the partition.</p></td>
      <td><p>String</p></td>
+   </tr>
+   <tr>
+     <td><p>getId()</p></td>
+     <td><p>Get the ID of the partition.</p></td>
+     <td><p>long</p></td>
+   </tr>
+   <tr>
+     <td><p>getUtcTimestamp()</p></td>
+     <td><p>Get the UTC timestamp of the partition.</p></td>
+     <td><p>long</p></td>
+   </tr>
+   <tr>
+     <td><p>getInMemoryPercentage()</p></td>
+     <td><p>Get the in-memory percentage of the partition.</p></td>
+     <td><p>long</p></td>
    </tr>
 </table>
 

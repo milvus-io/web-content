@@ -29,6 +29,11 @@ Methods of `CreateResourceGroupParam.Builder`:
         <td><p>groupName: The name of the group to be created.</p></td>
     </tr>
     <tr>
+        <td><p>withConfig(ResourceGroupConfig config)</p></td>
+        <td><p>Sets the resource group config.</p></td>
+        <td><p>config: The configuration of the resource group.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a CreateResourceGroupParam object.</p></td>
         <td><p>N/A</p></td>

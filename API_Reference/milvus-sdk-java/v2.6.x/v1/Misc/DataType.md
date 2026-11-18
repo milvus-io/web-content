@@ -68,14 +68,24 @@ public enum DataType
      <td><p>22</p></td>
      <td><p>Array data type. The element type can be one of the data types: Int8, Int16, Int32, Int64, Varchar, Bool, Float, or Double.</p></td>
    </tr>
-   <tr>
-     <td><p>JSON</p></td>
-     <td><p>23</p></td>
-     <td></td>
-   </tr>
-   <tr>
-     <td><p>BinaryVector</p></td>
-     <td><p>100</p></td>
+    <tr>
+      <td><p>JSON</p></td>
+      <td><p>23</p></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>Geometry</p></td>
+      <td><p>24</p></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><p>Timestamptz</p></td>
+      <td><p>26</p></td>
+      <td><p>Timestamp type, representing a point in time with timezone information.</p></td>
+    </tr>
+    <tr>
+      <td><p>BinaryVector</p></td>
+      <td><p>100</p></td>
      <td><p>Binary vector. Each dimension is represented by 1 bit.</p></td>
    </tr>
    <tr>
@@ -93,11 +103,21 @@ public enum DataType
      <td><p>103</p></td>
      <td><p>BFloat16 vector. Each dimension is a 16-bit floating-point number with reduced precision but the same exponent range as Float32.</p></td>
    </tr>
-   <tr>
-     <td><p>SparseFloatVector</p></td>
-     <td><p>104</p></td>
-     <td><p>Sparse vectors represent words or phrases using vector embeddings where most elements are zeros. A sparse vector is a list of key-value pairs, the key type is an unsigned integer and the value type is Float32.</p></td>
-   </tr>
+    <tr>
+      <td><p>SparseFloatVector</p></td>
+      <td><p>104</p></td>
+      <td><p>Sparse vectors represent words or phrases using vector embeddings where most elements are zeros. A sparse vector is a list of key-value pairs, the key type is an unsigned integer and the value type is Float32.</p></td>
+    </tr>
+    <tr>
+      <td><p>Int8Vector</p></td>
+      <td><p>105</p></td>
+      <td><p>Int8 vector. Each dimension is represented by an 8-bit integer value.</p></td>
+    </tr>
+    <tr>
+      <td><p>Struct</p></td>
+      <td><p>201</p></td>
+      <td><p>Struct data type, used as the element type of an Array field.</p></td>
+    </tr>
 </table>
 
 ## Example

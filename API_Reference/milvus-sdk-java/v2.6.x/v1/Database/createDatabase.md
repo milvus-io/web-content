@@ -39,6 +39,11 @@ Methods of `CreateDatabaseParam.Builder`:
         <td><p>resourceGroups: Resource group names</p></td>
     </tr>
     <tr>
+        <td><p>withProperty(String key, String value)</p></td>
+        <td><p>Basic method to set a key-value property.</p></td>
+        <td><p>key: The property key.<br/>value: The property value.</p></td>
+    </tr>
+    <tr>
         <td><p>build()</p></td>
         <td><p>Construct a CreateDatabaseParam object.</p></td>
         <td><p>N/A</p></td>

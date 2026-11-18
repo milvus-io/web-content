@@ -67,7 +67,7 @@ ModelRanker.builder()
 
 A model ranker instance.
 
-## Examples:
+## Example
 
 ```java
 import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
