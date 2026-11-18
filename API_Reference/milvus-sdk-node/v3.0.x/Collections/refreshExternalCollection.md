@@ -26,10 +26,14 @@ await milvusClient.refreshExternalCollection({
 The name of the external collection to refresh.
 
 - **external_source** (*string*) -
+<!-- doc:block:start id="node-refresh-external-collection-external-source" -->
 Optional new external source path. If provided, the collection will be refreshed from this new source.
+<!-- doc:block:end id="node-refresh-external-collection-external-source" -->
 
 - **external_spec** (*string*) -
+<!-- doc:block:start id="node-refresh-external-collection-external-spec" -->
 Optional new external spec configuration. If provided, the collection will use this new spec.
+<!-- doc:block:end id="node-refresh-external-collection-external-spec" -->
 
 - **db_name** (*string*) -
 The name of the database. Optional.

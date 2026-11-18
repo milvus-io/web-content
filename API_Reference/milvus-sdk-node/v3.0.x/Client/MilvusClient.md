@@ -102,7 +102,9 @@ new MilvusClient(config: ClientConfig)
 
     - **ssl** (*boolean*) -
 
+        <!-- doc:block:start id="node-milvus-client-ssl-config" -->
         A boolean value indicating whether to use SSL or not. Set this to `true` if you have configured Milvus to work at a TLS endpoint. For details, refer to [Encryption in Transit](https://milvus.io/docs/tls.md).
+        <!-- doc:block:end id="node-milvus-client-ssl-config" -->
 
     - **timeout** (*string* | *number*) -
 
@@ -170,7 +172,9 @@ new MilvusClient(config: ClientConfig)
 
 - **ssl** (*boolean*) -
 
+    <!-- doc:block:start id="node-milvus-client-ssl" -->
     A boolean value indicating whether to use SSL or not. Set this to `true` if you have configured Milvus to work at a TLS endpoint. For details, refer to [Encryption in Transit](https://milvus.io/docs/tls.md).
+    <!-- doc:block:end id="node-milvus-client-ssl" -->
 
 - **username** (*string*) -
 
@@ -215,8 +219,10 @@ new MilvusClient(config: ClientConfig)
 This method returns a Milvus Client instance that extends GRPC Client and handles communication with Milvus server.
 
 ## Example
+<!-- doc:block:start id="node-milvus-client-example" -->
 
 ```javascript
 new MilvusClient(config: ClientConfig)
 ```
+<!-- doc:block:end id="node-milvus-client-example" -->
 
