@@ -318,11 +318,15 @@ await milvusClient.createCollection({
 
 - **external_source** (*string*) -
 
+    <!-- doc:block:start id="node-create-collection-external-source-createcollectionreq" -->
     The external source path. This applies to the creation of external collections.
+    <!-- doc:block:end id="node-create-collection-external-source-createcollectionreq" -->
 
 - **external_spec** (*string*) -
 
+    <!-- doc:block:start id="node-create-collection-external-spec-createcollectionreq" -->
     The external spec configuration. This applies to the creation of external collections.
+    <!-- doc:block:end id="node-create-collection-external-spec-createcollectionreq" -->
 
 - **file_resource_ids** (*Array<number | string>*) -
 
@@ -561,11 +565,15 @@ await milvusClient.createCollection({
 
 - **external_source** (*string*) -
 
+    <!-- doc:block:start id="node-create-collection-external-source-createcolwithschema" -->
     The external source path. This applies to the creation of external collections.
+    <!-- doc:block:end id="node-create-collection-external-source-createcolwithschema" -->
 
 - **external_spec** (*string*) -
 
+    <!-- doc:block:start id="node-create-collection-external-spec-createcolwithschema" -->
     The external spec configuration. This applies to the creation of external collections.
+    <!-- doc:block:end id="node-create-collection-external-spec-createcolwithschema" -->
 
 - **file_resource_ids** (*Array<number | string>*) -
 

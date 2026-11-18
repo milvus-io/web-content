@@ -12,6 +12,8 @@ Generally, we follow the "fork-and-pull" Git workflow.
 
 Remember to [sync your forked repository](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced) *before* submitting proposed changes upstream. Quickly fork repositories and start making contributions directly from [milvus.io](https://www.milvus.io/docs/install_milvus.md) using the *Edit* button located in the top right corner of most pages.
 
+> **Reserved markers:** some pages contain paired `<!-- doc:block:start|end id="..." -->` comments that anchor the Zilliz Cloud documentation build. They look like leftover comments but are load-bearing — never delete or restructure them. See [AGENTS.md](AGENTS.md) ("Reserved markers") before removing or reformatting HTML comments.
+
 ### Issues
 
 Flag issues and request improvements using the links below:
