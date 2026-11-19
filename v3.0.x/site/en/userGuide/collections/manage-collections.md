@@ -94,8 +94,6 @@ In addition, Milvus also provides enhancements to improve search performance and
 
 - [Use mmap](mmap.md)
 
-- [Clustering Compaction](clustering-compaction.md)
-
 ## Partition
 
 Partitions are subsets of a collection, which share the same field set with its parent collection, each containing a subset of entities.

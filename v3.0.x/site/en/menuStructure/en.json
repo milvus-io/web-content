@@ -1481,12 +1481,6 @@
             "children": []
           },
           {
-            "label": "Clustering Compaction",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Force Merge Compaction",
             "id": "force-merge.md",
             "order": 2,

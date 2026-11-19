@@ -291,7 +291,7 @@ The key difference is merge shape: standard compaction is effectively m → 1 pe
 
 **How is Force Merge different from clustering compaction?**
 
-[Clustering compaction](clustering-compaction.md) (`is_clustering=True`) reorganizes data within segments based on a clustering key to improve search pruning. Force Merge (`target_size=N`) optimizes segment sizes without changing data distribution. They serve different purposes and can be used together — run clustering compaction first to organize data, then Force Merge to consolidate the resulting segments.
+Clustering compaction (`is_clustering=True`) reorganizes data within segments based on a clustering key to improve search pruning. Force Merge (`target_size=N`) optimizes segment sizes without changing data distribution. They serve different purposes and can be used together — run clustering compaction first to organize data, then Force Merge to consolidate the resulting segments.
 
 **Can I run Force Merge on a collection that is being queried?**
 
