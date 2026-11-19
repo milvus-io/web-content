@@ -141,7 +141,10 @@ Some markdown pages contain paired HTML-comment markers:
   which do not contain markers. A refresh PR touching a page that carries
   markers **must re-add the marker pairs at the equivalent regions** in the
   same PR; a refresh that silently drops markers is treated as a regression by
-  the downstream watchdog.
+  the downstream watchdog. The `update-milvus-sdk-docs` skill enforces this
+  mechanically: its Step 5 validation runs
+  `.skills/update-milvus-sdk-docs/scripts/check-doc-block-markers.py --diff <base>`
+  and fails the run when a changed page loses a marker pair.
 - **Editing inside a marked region is welcome** — the content is normal
   documentation. If a change substantially rewrites a marked region (or
   removes content that a downstream transform replaces), note it in the PR
