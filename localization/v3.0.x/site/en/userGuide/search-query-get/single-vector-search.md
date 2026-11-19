@@ -1652,8 +1652,6 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>For details on the partition key, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p></li>
 <li><p>Use mmap</p>
 <p>For details on mmap-settings, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></li>
-<li><p>Clustering Compaction</p>
-<p>For details on clustering compactions, refer to <a href="/docs/clustering-compaction.md">Clustering Compaction</a>.</p></li>
 <li><p>Use reranking</p>
 <p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

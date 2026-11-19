@@ -362,7 +362,7 @@ state = client.get_compaction_state(job_id)
 <li><p>Choose force merge when you explicitly want to reshape the collection into fewer, larger segments aligned with search and loading behavior.</p></li>
 </ul>
 <p><strong>How is Force Merge different from clustering compaction?</strong></p>
-<p><a href="/docs/clustering-compaction.md">Clustering compaction</a> (<code translate="no">is_clustering=True</code>) reorganizes data within segments based on a clustering key to improve search pruning. Force Merge (<code translate="no">target_size=N</code>) optimizes segment sizes without changing data distribution. They serve different purposes and can be used together — run clustering compaction first to organize data, then Force Merge to consolidate the resulting segments.</p>
+<p>Clustering compaction (<code translate="no">is_clustering=True</code>) reorganizes data within segments based on a clustering key to improve search pruning. Force Merge (<code translate="no">target_size=N</code>) optimizes segment sizes without changing data distribution. They serve different purposes and can be used together — run clustering compaction first to organize data, then Force Merge to consolidate the resulting segments.</p>
 <p><strong>Can I run Force Merge on a collection that is being queried?</strong></p>
 <p>Yes. Force Merge runs asynchronously and does not block queries. However, it consumes DataNode and disk I/O resources, so query latency may increase during compaction. Schedule Force Merge during low-traffic periods for best results.</p>
 <p><strong>What happens if I set a target_size smaller than maxSize?</strong></p>
