@@ -1062,8 +1062,6 @@ PRQ is a fusion of PQ and AQ (Additive Quantizer). Compared to PQ, it requires l
 
 Milvus 2.5 introduces Clustering Compaction to accelerate searches and reduce costs in large collections. By specifying a scalar field as a clustering key, data is redistributed by range to optimize storage and retrieval. Acting like a global index, this feature enables Milvus to efficiently prune data during queries based on clustering metadata, enhancing search performance when scalar filters are applied.
 
-For details, refer to [Clustering Compaction](clustering-compaction.md).
-
 ### Other Features
 
 #### Streaming Node (Beta)

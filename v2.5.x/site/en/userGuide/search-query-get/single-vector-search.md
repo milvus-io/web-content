@@ -1021,7 +1021,3 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
     For details on mmap-settings, refer to [Use mmap](mmap.md).
 
-- Clustering Compaction
-
-    For details on clustering compactions, refer to [Clustering Compaction](clustering-compaction.md).
-

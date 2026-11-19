@@ -1433,12 +1433,6 @@
             "id": "mmap.md",
             "order": 0,
             "children": []
-          },
-          {
-            "label": "Clustering Compaction",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
           }
         ]
       },

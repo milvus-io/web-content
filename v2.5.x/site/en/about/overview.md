@@ -129,7 +129,7 @@ In addition to primitive data types, Milvus supports various advanced data types
   Consistency ensures every Milvus node or replica has the same view of data when writing or reading data at a given time. You can easily tune the consistency level when conducting ANN searches in Milvus. For details, see [Consistency](consistency.md).
 
 - Data Isolation and Resource Control
-  For multi-tenancy scenarios, data isolation is the basic security requirement. Milvus implements several features to resolve your security concerns. For details, see [Manage Resource Groups](resource_group.md) and [Clustering Compaction](clustering-compaction.md).
+  For multi-tenancy scenarios, data isolation is the basic security requirement. Milvus implements several features to resolve your security concerns. For details, see [Manage Resource Groups](resource_group.md).
 
 ### AI Integrations
 
