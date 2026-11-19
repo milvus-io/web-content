@@ -17,8 +17,6 @@ Use nullable fields when:
 
 ## Limits
 
-- Vector fields that allow NULL values do not support `IS NULL` or `IS NOT NULL` filter expressions. You cannot explicitly filter entities based on whether a vector field value is NULL.
-
 - Starting in Milvus 3.0.0, the parent [StructArray](array-of-structs.md) field can be nullable. Set `nullable=True` on the parent StructArray field, not on individual subfields. NULL applies to the whole StructArray field, not to an individual Struct element, and Milvus propagates the parent's nullability to its subfields internally. A StructArray field added to an existing collection must be nullable so existing entities can return NULL for the new field. Starting in Milvus 3.0.6, a subfield can additionally allow a NULL value in an individual Struct element: `nullable=True` on a scalar or vector subfield, `element_nullable=True` on an array subfield; a Struct element itself still cannot be NULL. For details, refer to [StructArray Limits](structarray-limits.md#Nullable-and-dynamic-schema-limits).
 
 - The nullable attribute is defined when a field is created and cannot be modified afterward. You cannot enable or disable nullability for an existing field.
@@ -943,9 +941,18 @@ In this search:
 
 ## Query and filtering implications
 
-The previous examples focus on vector fields. This section describes how NULL values behave in **scalar filter expressions**.
+<div class="alert note">
 
-Scalar fields can be defined with `nullable=True` and follow the same ingestion rules as vector fields. However, **NULL scalar values always evaluate to false in filter expressions**. Use `IS NULL` or `IS NOT NULL` to select entities by whether a scalar field is NULL.
+Starting in Milvus 3.0.3, you can use `IS NULL` and `IS NOT NULL` in query and search filters on ordinary vector fields to select entities whose vector field is NULL or non-NULL, respectively.
+
+To find entities whose `embedding` field is NULL, use `query()` with the filter `embedding IS NULL`. This filter is also valid in `search()`. However, searching on `embedding` with this filter returns no hits: entities without an `embedding` value have no vector to compare with the query vector.
+
+For supported types, syntax, and examples, see [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
+
+</div>
+
+
+For scalar fields defined with `nullable=True`, comparison conditions such as `age > 18` or `status == "active"` do not match entities where the compared field is NULL.
 
 For example, given a nullable scalar field `age`, the following filter selects entities whose age is greater than 18:
 

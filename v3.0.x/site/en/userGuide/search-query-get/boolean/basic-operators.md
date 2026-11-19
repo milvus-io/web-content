@@ -972,7 +972,7 @@ The operators are case-insensitive: `IS NULL` and `is null` are equivalent, as a
 
 ### Example: Find entities with missing or available values
 
-Assume a collection named `products` is indexed and loaded. The collection has an `INT64` primary key named `id`, a nullable `VARCHAR` field named `category`, and a nullable, three-dimensional `FLOAT_VECTOR` field named `embedding`. It already contains the following entities:
+Assume a collection named `products` is indexed and loaded on Milvus 3.0.3 or later. The collection has an `INT64` primary key named `id`, a nullable `VARCHAR` field named `category`, and a nullable, three-dimensional `FLOAT_VECTOR` field named `embedding`. It already contains the following entities:
 
 | `id` | `category` | `embedding` |
 | --- | --- | --- |
