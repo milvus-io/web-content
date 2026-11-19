@@ -1,0 +1,54 @@
+# LoadState
+
+The load state of a collection or partition, as returned by `GetLoadStateAsync()`.
+
+```csharp
+public enum LoadState
+{
+    NotExist = 0,
+    NotLoad = 1,
+    Loading = 2,
+    Loaded = 3
+}
+```
+
+**Constants:**
+
+- **NotExist** (0)
+
+    The entity does not exist.
+
+- **NotLoad** (1)
+
+    The entity is not loaded.
+
+- **Loading** (2)
+
+    The entity is being loaded.
+
+- **Loaded** (3)
+
+    The entity is loaded.
+
+## Example
+
+```csharp
+using Milvus.Client.V2;
+using Milvus.Client.V2.Requests.Collection;
+using Milvus.Client.V2.Responses.Collection;
+using Milvus.Client.V2.Types;
+
+using var client = new MilvusClientV2(new ConnectConfig
+{
+    Uri = "localhost:19530",
+    Username = "root",
+    Password = "Milvus"
+});
+
+GetLoadStateResp result = await client.GetLoadStateAsync(new GetLoadStateReq
+{
+    CollectionName = "my_collection"
+});
+
+Console.WriteLine(result.State == LoadState.Loaded ? "Loaded" : $"Loading: {result.Progress}%");
+```
