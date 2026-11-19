@@ -92,6 +92,12 @@ run with a clarification instead of downgrading.
 - Keep deprecated API guidance scoped to the API generation documented by the page.
 - Unless the user says otherwise, always confirm before changing. Keep every edit
   reviewable; produce a per-page change summary.
+- **Preserve `doc:block` markers** — some pages carry paired
+  `<!-- doc:block:start id="…" -->` / `<!-- doc:block:end id="…" -->` region
+  anchors consumed by the Zilliz Cloud docs pipeline. Never delete, rename, or
+  reflow them away; a wholesale page rewrite must re-add the pairs (see
+  [Reserved markers](#reserved-markers-docblock)). The Step 5 marker check
+  fails the run when a changed page loses one.
 
 
 **Every run applies the full checklist** — there is no separate "format check
@@ -248,7 +254,8 @@ The execution order is fixed:
    errors, typos, wrong defaults, outdated constraints, duplicate content
    (per-page review), on the settled pages.
 4. **Final validation** — 0 broken links, 0 orphaned pages, 0 format
-   violations; emit per-step evidence and the per-page change summary.
+   violations, 0 dropped `doc:block` markers; emit per-step evidence and the
+   per-page change summary.
 
 The **strict evidence contract** below applies to every run (baseline
 inventory, per-step PASS/FIXED/FAIL evidence, zero-violation gate), not only to
@@ -315,6 +322,60 @@ Returns a status indicating whether the operation succeeded.
 Type page format: `# <Type>`, description, a ```` ```cpp ```` block with
 constructors/aliases, `**PARAMETERS:**`, then `**METHODS:**` grouping related
 methods. Cross-page links are relative (e.g. `../Collections/DataType.md`).
+
+## Reserved markers (doc:block)
+
+Some pages under `API_Reference/` carry paired HTML-comment markers:
+
+```markdown
+<!-- doc:block:start id="some-lowercase-id" -->
+...page content...
+<!-- doc:block:end id="some-lowercase-id" -->
+```
+
+These are **load-bearing region anchors**, not leftover comments. The Zilliz
+Cloud documentation pipeline (zilliztech/zdoc, shared-docs renderer) pins
+commits of this repository and applies content transforms (insert / replace /
+remove) *inside* these named regions to produce the Zilliz Cloud variants of
+these pages on docs.zilliz.com / docs.zilliz.com.cn. The repo `AGENTS.md`
+("Reserved markers (`doc:block`)") is the canonical rule text; for this skill
+the operational rules are:
+
+- The skill's update sources (SDK git tags) **do not contain markers**. When a
+  diff/latest/reconciliation run rewrites a page wholesale, a page that
+  carries markers **must get its marker pairs re-added at the equivalent
+  regions in the same run** — same ids, same relative position (covering the
+  same content the pair covered before). Never drop a pair because the
+  rewritten page "reads cleaner" without them.
+- Never change a marker `id`, move content across markers, or reorder marked
+  regions relative to surrounding content without coordinating with the
+  Zilliz Cloud docs team.
+- Keep markers as standalone lines (they may be indented); a marker line
+  carries nothing else. A marker pair must not split a fenced code block:
+  `start` and `end` sit outside the fence or fully contain it.
+- Editing *inside* a marked region is normal documentation work and is
+  welcome. If a change substantially rewrites a marked region, note it in the
+  PR description so the downstream consumer can re-pin.
+- Adding new markers: coordinate with the Zilliz Cloud docs team first; use a
+  lowercase kebab-case `id` unique within the page (`<sdk>-<topic>-<thing>`).
+
+Before finishing a run, the Step 5 validation includes the bundled marker
+check:
+
+```bash
+# per-SDK tree, against the upstream base resolved in Step 0:
+python3 .skills/update-milvus-sdk-docs/scripts/check-doc-block-markers.py \
+    API_Reference/<sdk>/<version-line>/ --diff <upstream-master>
+# whole API_Reference tree, structural checks only:
+python3 .skills/update-milvus-sdk-docs/scripts/check-doc-block-markers.py API_Reference/
+```
+
+It fails the run when a changed page loses a marker pair it had at the base
+revision, when a page that carried markers is deleted, or when a pair is
+unbalanced, non-standalone, or split by a fence. Fix the page (re-add the
+pairs at the equivalent regions), or treat the loss as an intentional,
+coordinated marker removal only with explicit user approval and a note in the
+PR description.
 
 ## Workflow
 
@@ -732,6 +793,11 @@ For each affected page:
     to guarantee output and that production can use Bounded etc. Do NOT use
     `flush()` for this (see "Example code: DQL insert-then-query must use Strong
     consistency" under the Doc style guide).
+ 11. **Preserve `doc:block` markers** (see
+    [Reserved markers](#reserved-markers-docblock)): if the page carries
+    `<!-- doc:block:start id="…" -->` pairs, a rewrite must re-add them at the
+    equivalent regions with the same ids — the SDK sources do not contain
+    them, so a wholesale overwrite silently drops them otherwise.
 
 ### Step 4b — Compile-verify the code snippets (mandatory)
 
@@ -808,6 +874,11 @@ grep -rn "3\.0\.1" API_Reference/<sdk>/<version-line>/   # adjust for the actual
 #  - no empty member bullets (bullet whose next non-blank line is another bullet)
 #  - bare mentions of dedicated-page types are linked (grep \bDataType\b etc.
 #    outside code fences, inline spans, existing links, and (*...*) headers)
+
+# reserved doc:block markers: no changed page loses a marker pair vs the
+# upstream base resolved in Step 0; every pair is balanced, standalone,
+# and fence-safe
+python3 .skills/update-milvus-sdk-docs/scripts/check-doc-block-markers.py API_Reference/<sdk>/<version-line>/ --diff <upstream-master>
 ```
 
 Report results explicitly. Fix anything flagged before proceeding.
