@@ -248,16 +248,6 @@
                         "alt_text": "mmap-illustrated"
                     },
                     {
-                        "token": "UyGbwGKtEhZ2hqb7gyscRm1znIe",
-                        "type": "board",
-                        "alt_text": "without-clustering-compaction"
-                    },
-                    {
-                        "token": "MmC8wJoFphUqMkbmkBSc68KHnQf",
-                        "type": "board",
-                        "alt_text": "clustering-compaction"
-                    },
-                    {
                         "token": "UlOJwpWuKhj5LAbGSp9cwMFznEb",
                         "type": "board",
                         "alt_text": "batch-data-and-streaming-data"
