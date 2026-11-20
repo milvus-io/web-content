@@ -1682,7 +1682,13 @@ domain-type page set and the placement.** A base type/interface and its
 implementations remain separate dedicated pages; for example, `Highlighter`,
 `LexicalHighlighter`, and `SemanticHighlighter` are never merged into one page
 merely because they are related or an implementation is referenced from its
-interface page.
+interface page. **Exception — TS discriminated unions (node)**: the node SDK's
+`Highlighter` is a TypeScript union (`LexicalHighlighter | SemanticHighlighter`),
+not an inheritance hierarchy. Per the per-SDK convention in `references/sdk-map.md`
+(milvus-sdk-node), document a TS union on ONE page — `# <Union>` plus a `## <Member>`
+section per member — and never split it into per-member pages. The Java
+"never merged" rule above targets Java V2's inheritance model and does not apply
+to node unions.
 
 - **Dedicated type pages** — each eligible type gets a one-page-per-type page.
   This is an explicit protected allowlist, not merely source-nesting or
