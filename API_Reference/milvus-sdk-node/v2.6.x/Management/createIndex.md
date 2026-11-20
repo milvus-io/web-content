@@ -68,9 +68,9 @@ await milvusClient.createIndex([
 
     Other index-specific parameters.
 
-- **extra_params** (*CreateIndexParam*) -
+- **extra_params** (*[CreateIndexParam](CreateIndexParam.md)*) -
 
-    Extra index-related parameters in key-value pairs.
+    Extra index-related parameters in key-value pairs. See [CreateIndexParam](CreateIndexParam.md).
 
 - **timeout** (number) -
 

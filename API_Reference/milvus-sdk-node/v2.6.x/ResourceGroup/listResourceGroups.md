@@ -41,7 +41,7 @@ This method returns a promise that resolves to a **ListResourceGroupsResponse** 
 A list of resource group names defined in the current Milvus instance. The default resource group is named **__default_resource_group**.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

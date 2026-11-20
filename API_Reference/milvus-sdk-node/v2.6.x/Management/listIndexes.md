@@ -61,7 +61,7 @@ This method returns a promise that resolves to a **ListIndexResponse** object.
 A list of index names defined on the requested collection.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

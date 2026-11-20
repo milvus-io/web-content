@@ -65,7 +65,7 @@ The number of rows that have been indexed so far.
 The total number of rows the index covers. The build is complete when **indexed_rows** equals **total_rows**.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

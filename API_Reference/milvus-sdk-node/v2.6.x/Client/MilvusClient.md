@@ -26,6 +26,8 @@ new MilvusClient(config: ClientConfig)
 
 - **configOrAddress** (*ClientConfig*)
 
+    The following members belong to `ClientConfig`.
+
     - **address** (*string*) -
 
         **[REQUIRED]**
@@ -72,7 +74,7 @@ new MilvusClient(config: ClientConfig)
 
         The level of the log. Available options include: `debug`, `info`, `warn`, `error`, `panic`, and `fatal`. 
 
-        The default value is `debug`.
+        The default value is `info`.
 
         It is recommended to use `debug` level under test and development environments, and `info` level in the production environment.
 
@@ -111,6 +113,8 @@ new MilvusClient(config: ClientConfig)
         Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
     - **tls** (*tls*) -
+
+        The following members belong to `tls`.
 
         - **certChain** (*Buffer*) -
 

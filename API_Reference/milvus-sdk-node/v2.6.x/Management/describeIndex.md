@@ -59,7 +59,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 - **index_descriptions** ([IndexDescription](IndexDescription.md)[]) -
 
-A list of index descriptions for the requested collection. When **field_name** or **index_name** is supplied, the list contains only the matching entry.
+A list of index descriptions for the requested collection. When **field_name** or **index_name** is supplied, the list contains only the matching entry. Each entry is an `IndexDescription` with the following members.
 
     - **index_name** (*string*) -
 
@@ -98,7 +98,7 @@ A list of index descriptions for the requested collection. When **field_name** o
         The number of rows still waiting to be indexed.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

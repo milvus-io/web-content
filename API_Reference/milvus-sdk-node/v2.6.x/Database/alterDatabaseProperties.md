@@ -59,7 +59,7 @@ await milvusClient.alterDatabaseProperties({
 
 - **properties** (*Record<string, string | number | boolean>*) -
 
-    Properties and their values in key-value pairs.
+    Properties and their values in key-value pairs. Possible database properties are as follows:
 
     - **database.replica.number** (*number*) -
 
@@ -99,7 +99,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ```javascript
 {
-    code: number
+    code: number,
     error_code: string | number,
     reason: string
 }

@@ -14,7 +14,6 @@ await milvusClient.getFlushAllState({
     flush_all_tss?: Record\<string, number\>,
     db_name?: string,
     timeout?: number,
-    client_request_id?: string,
 })
 ```
 
@@ -32,9 +31,6 @@ The name of the database. Optional and deprecated.
 - **timeout** (*number*) -
 An optional duration of time in milliseconds to allow for the RPC. If it is set to undefined, the client keeps waiting until the server responds or an error occurs. Default is undefined.
 
-- **client_request_id** (*string*) -
-A trace ID for request tracking. Optional.
-
 **RETURNS:**
 
 *Promise<GetFlushAllStateResponse>*
@@ -47,7 +43,7 @@ This method returns a promise that resolves to a **GetFlushAllStateResponse** ob
 Whether the flush-all operation has completed.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

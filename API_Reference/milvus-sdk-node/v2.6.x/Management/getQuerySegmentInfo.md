@@ -48,7 +48,7 @@ This method returns a promise that resolves to a **GetQuerySegmentInfoResponse**
 **PARAMETERS:**
 
 - **infos** (*QuerySegmentInfo[]*) -
-A list of segment-level descriptors for the segments currently held by query nodes.
+A list of segment-level descriptors for the segments currently held by query nodes. Each entry is a `QuerySegmentInfo` with the following members.
 
     - **segmentID** (*number*) -
 
@@ -103,7 +103,7 @@ A list of segment-level descriptors for the segments currently held by query nod
         The storage format version of the segment.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

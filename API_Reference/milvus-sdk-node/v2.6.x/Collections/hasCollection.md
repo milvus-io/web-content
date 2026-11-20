@@ -53,7 +53,7 @@ This method returns a promise that resolves to a **BoolResponse** object.
 A boolean that indicates whether the requested collection exists. It is **true** when the collection exists and **false** when it does not.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

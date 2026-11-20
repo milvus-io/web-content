@@ -74,6 +74,8 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
 - **status** (*ResStatus*) -
 
+    A **ResStatus** object with the following members.
+
     - **code** (*number*) -
 
         A code that indicates the operation result. It remains **0** if this operation succeeds.
@@ -88,7 +90,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
 - **schema** (*CollectionSchema*) -
 
-    The CollectionSchema object.
+    The CollectionSchema object. The following members belong to `CollectionSchema`.
 
     - **autoID** (*boolean*) -
 
@@ -104,7 +106,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     - **fields** (*FieldSchema[]*) -
 
-        A list of schema-defined fields.
+        A list of schema-defined fields. See [FieldSchema](FieldSchema.md).
 
     - **functions** ([FunctionObject](FunctionObject.md)[]) -
 
@@ -112,7 +114,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     - **struct_array_fields** (*FieldSchema[]*) -
 
-        All struct and array fields declared on the collection.
+        All struct and array fields declared on the collection. See [FieldSchema](FieldSchema.md).
 
     - **name** (*string*) -
 
@@ -184,15 +186,15 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
 - **anns_fields** (*Record<string, FieldSchema>*) -
 
-    A mapping from vector-field name to its **FieldSchema**, covering all vector fields declared on the collection.
+    A mapping from vector-field name to its **FieldSchema**, covering all vector fields declared on the collection. See [FieldSchema](FieldSchema.md).
 
 - **scalar_fields** (*Record<string, FieldSchema>*) -
 
-    A mapping from scalar-field name to its **FieldSchema**, covering all scalar fields declared on the collection.
+    A mapping from scalar-field name to its **FieldSchema**, covering all scalar fields declared on the collection. See [FieldSchema](FieldSchema.md).
 
 - **function_fields** (*Record<string, FieldSchema>*) -
 
-    A mapping from function-output-field name to its **FieldSchema**.
+    A mapping from function-output-field name to its **FieldSchema**. See [FieldSchema](FieldSchema.md).
 
 
 **EXCEPTIONS:**

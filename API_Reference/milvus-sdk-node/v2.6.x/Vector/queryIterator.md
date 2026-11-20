@@ -13,6 +13,7 @@ await milvusClient.queryIterator({
     collection_name: string,
     batchSize: number,
     filter?: string,
+    expr?: string,
     limit?: number,
     output_fields?: string[],
     partition_names?: string[],
@@ -39,6 +40,10 @@ await milvusClient.queryIterator({
 - **filter** (*string*) -
 
     A scalar filtering condition to filter matching entities. Set to an empty string to return all entities. To build a scalar filtering condition, refer to Boolean Expression Rules. You can use `expr` as an alias of this parameter.
+
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
 
 - **exprValues** (*keyValueObj*) -
 

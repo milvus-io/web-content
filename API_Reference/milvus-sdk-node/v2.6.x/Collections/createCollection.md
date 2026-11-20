@@ -90,9 +90,9 @@ await milvusClient.createCollection({
 
     The data type of the primary field.
 
-- **index_params** (*CreateIndexParam*) -
+- **index_params** (*[CreateIndexParam](../Management/CreateIndexParam.md)*) -
 
-    The index parameters for the collection to create.
+    The index parameters for the collection to create. See [CreateIndexParam](../Management/CreateIndexParam.md).
 
 - **metric_type** (*string* | *MetricType*) -
 
@@ -201,7 +201,7 @@ await milvusClient.createCollection({
 
     Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
-    The value defaults to **True**, indicating that the meta field is used.
+    The value defaults to **False**, indicating that the meta field is not used.
 
 - **enableDynamicField** (*boolean)* -
 
@@ -217,7 +217,7 @@ await milvusClient.createCollection({
 
 - **functions** ([FunctionObject](FunctionObject.md)[])
 
-    Converts data into vector embeddings. This function will be added to the schema of a collection.
+    Converts data into vector embeddings. This function will be added to the schema of a collection. Each entry is a `FunctionObject` with the following members.
 
     - **name** (*string*)
 
@@ -415,7 +415,7 @@ await milvusClient.createCollection({
 
     Whether to use a reserved JSON field named **&#36;meta** to store undefined fields and their values in key-value pairs.
 
-    The value defaults to **True**, indicating that the meta field is used.
+    The value defaults to **False**, indicating that the meta field is not used.
 
 - **enableDynamicField** (*boolean)* -
 
@@ -431,7 +431,7 @@ await milvusClient.createCollection({
 
 - **functions** ([FunctionObject](FunctionObject.md)[])
 
-    Converts data into vector embeddings. This function will be added to the schema of a collection.
+    Converts data into vector embeddings. This function will be added to the schema of a collection. Each entry is a `FunctionObject` with the following members.
 
     - **name** (*string*)
 
@@ -529,7 +529,7 @@ await milvusClient.createCollection({
 
 - **index_params** (*CreateIndexSimpleReq[]* | *CreateIndexSimpleReq*)
 
-    The index parameters.
+    The index parameters. Each entry is a `CreateIndexSimpleReq` with the following members.
 
     - **field_name** (*string*) -
 

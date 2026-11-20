@@ -12,7 +12,6 @@ await milvusClient.flushAll(data?: FlushAllReq)
 await milvusClient.flushAll({
     db_name?: string,
     timeout?: number,
-    client_request_id?: string,
 })
 ```
 
@@ -23,9 +22,6 @@ The name of the database. Optional and deprecated.
 
 - **timeout** (*number*) -
 An optional duration of time in milliseconds to allow for the RPC. If it is set to undefined, the client keeps waiting until the server responds or an error occurs. Default is undefined.
-
-- **client_request_id** (*string*) -
-A trace ID for request tracking. Optional.
 
 **RETURNS:**
 
@@ -60,7 +56,7 @@ The cluster information. Each entry is a **FlushClusterInfo** with the following
         The physical channels flushed for the cluster.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

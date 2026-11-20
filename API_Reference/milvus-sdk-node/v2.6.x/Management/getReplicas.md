@@ -58,7 +58,7 @@ This method returns a promise that resolves to a **ReplicasResponse** object.
 **PARAMETERS:**
 
 - **replicas** (*ReplicaInfo[]*) -
-A list of replicas currently serving the requested collection.
+A list of replicas currently serving the requested collection. Each entry is a `ReplicaInfo` with the following members.
 
     - **replicaID** (*string*) -
 
@@ -74,7 +74,7 @@ A list of replicas currently serving the requested collection.
 
     - **shard_replicas** (*ShardReplica[]*) -
 
-        Per-shard leader and node assignment information.
+        Per-shard leader and node assignment information. Each entry is a `ShardReplica` with the following members.
 
         - **leaderID** (*string*) -
 
@@ -105,7 +105,7 @@ A list of replicas currently serving the requested collection.
         The count of outbound nodes per resource group, used during rebalancing.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

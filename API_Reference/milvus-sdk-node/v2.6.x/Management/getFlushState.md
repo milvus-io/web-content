@@ -8,7 +8,7 @@ await milvusClient.getFlushState(data)
 
 <div class="alert note">
 
-Milvus automatically flushes data into persistent storage at intervals. You are advised to rely on this automatic data persistence mechnism.
+Milvus automatically flushes data into persistent storage at intervals. You are advised to rely on this automatic data persistence mechanism.
 
 </div>
 
@@ -67,7 +67,7 @@ This method returns a promise that resolves to a **GetFlushStateResponse** objec
 Whether all targeted segments are flushed to persistent storage. It is **true** when every requested segment ID is sealed and persisted, otherwise **false**.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

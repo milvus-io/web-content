@@ -43,7 +43,7 @@ A snapshot of all RBAC metadata in the current Milvus instance. Pass this value 
 
 - **status** (*ResStatus*) -
 
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

@@ -58,7 +58,7 @@ The creation timestamp of the database, in milliseconds.
 Database-level properties (for example, **database.replica.number**, **database.resource_groups**) declared at creation or set via `alterDatabaseProperties()`.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

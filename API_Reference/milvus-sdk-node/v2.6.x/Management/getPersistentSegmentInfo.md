@@ -48,7 +48,7 @@ This method returns a promise that resolves to a **GePersistentSegmentInfoRespon
 **PARAMETERS:**
 
 - **infos** (*PersistentSegmentInfo[]*) -
-A list of segment-level descriptors for segments persisted to object storage.
+A list of segment-level descriptors for segments persisted to object storage. Each entry is a `PersistentSegmentInfo` with the following members.
 
     - **segmentID** (*number*) -
 
@@ -83,7 +83,7 @@ A list of segment-level descriptors for segments persisted to object storage.
         The storage format version of the segment.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

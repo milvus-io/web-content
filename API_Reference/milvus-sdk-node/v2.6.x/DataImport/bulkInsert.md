@@ -73,7 +73,7 @@ This method returns a promise that resolves to a **ImportResponse** object.
 The identifiers of the asynchronous import tasks dispatched to the data nodes. Pass these values to `listImportTasks()` to poll for completion.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

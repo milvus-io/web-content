@@ -30,7 +30,7 @@ await milvusClient.revokePrivilegeV2({
 
     **[REQUIRED]**
 
-    The name of the privilege or privilege group to assign. 
+    The name of the privilege or privilege group to revoke. 
 
     For details, refer to [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
@@ -46,7 +46,7 @@ await milvusClient.revokePrivilegeV2({
 
     The name of the target collection of this operation. 
 
-- **timeout** (*float* | *None*)  
+- **timeout** (*number*)  
 
     The timeout duration for this operation. 
 

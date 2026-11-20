@@ -82,9 +82,9 @@ await milvusClient.upsert({
 
     The partition into which the entities are upserted.
 
-- **transformers** (*InsertTransformers*) -
+- **transformers** (*[InsertTransformers](InsertTransformers.md)*) -
 
-    Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
+    Custom transformers for special vector data types such as BFloat16Vector and Float16Vector. See [InsertTransformers](InsertTransformers.md).
 
 - **skip_check_schema** (*boolean*) -
 
@@ -150,7 +150,7 @@ This method returns a promise that resolves to a **MutationResult** object, incl
 
 - **status** (*ResStatus*)
 
-    A **ResStatus** object.
+    A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

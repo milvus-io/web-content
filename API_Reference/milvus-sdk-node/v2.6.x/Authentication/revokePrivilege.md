@@ -30,7 +30,7 @@ await milvusClient.revokePrivilege({
 
     **[REQUIRED]**
 
-    The type of object for which the privilege is to be assigned.
+    The type of object for which the privilege is to be revoked.
 
     Possible values are as follows:
 
@@ -58,7 +58,7 @@ await milvusClient.revokePrivilege({
 
     **[REQUIRED]**
 
-    The name of the privilege to assign. You can use any value in the **Enumeration Members** column of the following table.
+    The name of the privilege to revoke. You can use any value in the **Enumeration Members** column of the following table.
 
     <table>
        <tr>
@@ -85,7 +85,7 @@ await milvusClient.revokePrivilege({
 
     The name of the database the privileges apply to.
 
-- **timeout** (*float* | *None*)  
+- **timeout** (*number*)  
 
     The timeout duration for this operation. 
 

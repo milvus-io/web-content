@@ -53,7 +53,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 A list of grants attached to the requested role. Each entry pairs a privilege with the target object and the principal that granted it. For the full **GrantEntity** field reference, refer to the `describeRole()` doc.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

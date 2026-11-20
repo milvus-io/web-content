@@ -108,7 +108,7 @@ The primary keys that were targeted by this delete. For the full field reference
 
 - **status** (*ResStatus*)
 
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

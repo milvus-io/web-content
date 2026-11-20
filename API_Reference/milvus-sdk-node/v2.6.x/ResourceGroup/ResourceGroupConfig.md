@@ -2,8 +2,6 @@
 
 A **ResourceGroupConfig** instance describes the configuration of a resource group. You can reference such an instance when you create a resource group or update its configuration.
 
-## Type Definition
-
 ```javascript
 type ResourceGroupConfig = {
   requests?: { node_num: number }; 

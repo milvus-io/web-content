@@ -20,13 +20,13 @@ new BulkWriter({
 
 **PARAMETERS:**
 
-- **schema** (*[BulkWriterSchema](BulkWriterSchema.md)*) -
+- **schema** (*[BulkWriterSchema](#bulkwriterschema)*) -
 
     **[REQUIRED]**
 
     Defines the collection fields and dynamic field setting used to validate rows and serialize files.
 
-- **[storage](Storage.md)** (*[Storage](Storage.md)*) -
+- **[storage](#storage)** (*[Storage](#storage)*) -
 
     Specifies a custom storage adapter. If omitted, files remain on local disk.
 
@@ -110,13 +110,13 @@ interface BulkWriterOptions {
 
 **FIELDS:**
 
-- **schema** (*[BulkWriterSchema](BulkWriterSchema.md)*) -
+- **schema** (*[BulkWriterSchema](#bulkwriterschema)*) -
 
     **[REQUIRED]**
 
     Defines the fields that `BulkWriter` validates and serializes.
 
-- **[storage](Storage.md)** (*[Storage](Storage.md)*) -
+- **[storage](#storage)** (*[Storage](#storage)*) -
 
     Specifies a custom storage adapter. If omitted, `LocalStorage` keeps the generated files on disk.
 
@@ -131,6 +131,45 @@ interface BulkWriterOptions {
 - **localPath** (*string*) -
 
     Specifies the local base directory where chunk folders are created.
+
+## BulkWriterSchema
+
+This interface describes the collection schema used by **BulkWriter** to validate rows and generate JSON or Parquet files that Milvus can import.
+
+```javascript
+interface BulkWriterSchema {
+    fields: FieldType[];
+    enable_dynamic_field?: boolean;
+}
+```
+
+**FIELDS:**
+
+- **fields** (*FieldType[]*) -
+
+    **[REQUIRED]**
+
+    Specifies collection fields. Fields marked as `autoID` or `is_function_output` are excluded from generated import files. See [FieldType](../Collections/FieldType.md).
+
+- **enable_dynamic_field** (*boolean*) -
+
+    Specifies whether dynamic fields are collected into the `$meta` column.
+
+## Storage
+
+This interface stores files produced by **BulkWriter**. Use it to upload generated files to object storage or another remote location before calling `bulkInsert()`.
+
+```javascript
+interface Storage {
+    write(localPath: string, remotePath: string): Promise<string>;
+}
+```
+
+**METHODS:**
+
+- `write(localPath: string, remotePath: string): Promise<string>`
+
+    Stores a generated local file and returns the final path that should be passed to Milvus import APIs.
 
 ## Formatter
 
@@ -171,7 +210,7 @@ interface Formatter {
 
         The output directory.
 
-    - **schema** (*[BulkWriterSchema](BulkWriterSchema.md)*) -
+    - **schema** (*[BulkWriterSchema](#bulkwriterschema)*) -
 
         The schema used to interpret the columns.
 

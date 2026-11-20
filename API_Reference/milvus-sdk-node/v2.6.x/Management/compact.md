@@ -92,7 +92,7 @@ The identifier of the compaction operation. Pass this value to `getCompactionSta
 The number of compaction plans generated for this operation.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 
