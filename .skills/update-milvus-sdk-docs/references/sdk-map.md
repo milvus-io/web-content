@@ -409,6 +409,18 @@ local directory via this table before editing. Current latest version line is
   (Per the SKILL.md placement rule there is no standalone `types/` directory:
   the legacy `types/SearchAggregation.md` was moved to `Vector/SearchAggregation.md`;
   place new type pages in their business-domain category.)
+- **TS discriminated unions → ONE page, not one per member**: the SDK uses
+  TypeScript discriminated unions (e.g. `Highlighter = LexicalHighlighter |
+  SemanticHighlighter`, `SearchData = SearchVector | SearchText | SearchEmbList`).
+  Document the union type on a single page — `# <Union>` with the union
+  declaration, then a `## <Member>` section per member interface (each with its
+  own ```` ```typescript ```` declaration and `**FIELDS:**` block), then one
+  `## Example`. Do **not** create a separate page per union member. This is the
+  node counterpart of the C++ "related types in one page" rule (SKILL.md), and
+  overrides the generic "Highlighter / LexicalHighlighter / SemanticHighlighter
+  never merged" guidance, which applies to Java V2's inheritance model, not TS
+  unions. Precedent: `Vector/Highlighter.md` (union + `## LexicalHighlighter` +
+  `## SemanticHighlighter`).
 - **Language tags**: the SDK is written in TypeScript. Use `javascript` for
   runnable examples and `## Request Syntax` blocks, and `typescript` for
   type-declaration blocks (enum/interface/type declarations), never an
