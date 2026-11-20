@@ -20,6 +20,8 @@ await milvusClient.hybridSearch({
     params?: keyValueObj,
     metric_type?: string,
     rerank?: RerankerObj | FunctionObject | FunctionScore,
+    function_score?: FunctionScore,
+    function_chains?: FunctionChains,
     partition_names?: string[],
     consistency_level?: ConsistencyLevelEnum,
     ignore_growing?: boolean,
@@ -82,6 +84,14 @@ await milvusClient.hybridSearch({
 - **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy for combining results from multiple sub-searches. See `search()` for the full rerank parameter schema.
+
+- **function_score** (*[FunctionScore](FunctionScore.md)*) -
+
+    A function-based reranker. Also accepted through **rerank**. See [FunctionScore](FunctionScore.md).
+
+- **function_chains** (*[FunctionChain](FunctionChain.md)* | *FunctionChainSpec* | *readonly (FunctionChain | FunctionChainSpec)[]*) -
+
+    Optional server-side chains applied after the sub-search results are merged. A hybrid search can also set chains on individual ANN requests.
 
 - **partition_names** (*string[]*) -
 
@@ -192,6 +202,10 @@ Each element in the `data` array is a **HybridSearchSingleReq** object that defi
 - **transformers** (*[OutputTransformers](OutputTransformers.md)*) -
 
     Custom transformers for special vector types such as BFloat16Vector and Float16Vector.
+
+- **function_chains** (*[FunctionChain](FunctionChain.md)* | *FunctionChainSpec* | *readonly (FunctionChain | FunctionChainSpec)[]*) -
+
+    Optional server-side chains for this ANN request.
 
 ## Example
 

@@ -34,6 +34,8 @@ await milvusClient.search({
   round_decimal?: number;
   transformers?: OutputTransformers;
   rerank?: RerankerObj | FunctionObject | FunctionScore;
+  function_score?: FunctionScore;
+  function_chains?: FunctionChains;
   search_aggregation?: SearchAggregation;
   nq?: number;
   ids?: number[] | string[];
@@ -173,6 +175,14 @@ await milvusClient.search({
 - **rerank** (*[RerankerObj](RerankerObj.md)* | *[FunctionObject](../Collections/FunctionObject.md)* | *[FunctionScore](FunctionScore.md)*) -
 
     A reranking strategy with its custom parameters. You can either use a **RerankerObj**, a **FunctionObject**, or a **FunctionScore**. See [RerankerObj](RerankerObj.md) and [FunctionObject](../Collections/FunctionObject.md).
+
+- **function_score** (*[FunctionScore](FunctionScore.md)*) -
+
+    A function-based reranker. Also accepted through **rerank**. See [FunctionScore](FunctionScore.md).
+
+- **function_chains** (*[FunctionChain](FunctionChain.md)* | *FunctionChainSpec* | *readonly (FunctionChain | FunctionChainSpec)[]*) -
+
+    Server-side processing chains applied to the search candidates. Optional.
 
 - **order_by_fields** (*[OrderByFields](OrderByFields.md)*) -
 

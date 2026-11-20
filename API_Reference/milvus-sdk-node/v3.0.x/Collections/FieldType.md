@@ -14,8 +14,9 @@ export type FieldType = {
   is_clustering_key?: boolean;
   type_params?: Partial<Record<TypeParamKey, TypeParam>>;
   autoID?: boolean;
-  default_value?: number | string;
+  default_value?: number | string | boolean;
   nullable?: boolean;
+  element_nullable?: boolean;
   external_field?: string;
   fields?: FieldType[];
 } & Partial<Record<TypeParamKey, TypeParam>>;
@@ -63,13 +64,17 @@ export type FieldType = {
 
     Whether the primary key values are auto-generated.
 
-- **default_value** (*number | string*) -
+- **default_value** (*number | string | boolean*) -
 
     The default value of the field.
 
 - **nullable** (*boolean*) -
 
     Whether the field accepts null values.
+
+- **element_nullable** (*boolean*) -
+
+    Whether the elements of an Array sub-field of a StructArray field accept null values. Applies only to Array sub-fields of StructArray fields.
 
 - **external_field** (*string*) -
 
