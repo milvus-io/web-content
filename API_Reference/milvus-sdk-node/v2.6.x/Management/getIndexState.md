@@ -70,7 +70,7 @@ This method returns a promise that resolves to a **GetIndexStateResponse** objec
 The current build state of the index. Possible values are **IndexStateNone**, **Unissued**, **InProgress**, **Finished**, and **Failed**.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

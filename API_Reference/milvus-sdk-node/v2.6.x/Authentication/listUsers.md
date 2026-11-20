@@ -39,7 +39,7 @@ This method returns a promise that resolves to a **ListCredUsersResponse** objec
 A list of usernames that exist in the current Milvus instance.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

@@ -64,7 +64,7 @@ A list of hybrid timestamps indicating when each collection was created.
 A list of UTC timestamps indicating when each collection was created.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

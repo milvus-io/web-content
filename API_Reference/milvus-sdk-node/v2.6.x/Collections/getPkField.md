@@ -41,7 +41,7 @@ getPkField({
 
 *Promise<FieldSchema>*
 
-The complete field schema object for the primary key, including name, data type, field ID, and other properties.
+The complete field schema object for the primary key, including name, data type, field ID, and other properties. See [FieldSchema](FieldSchema.md).
 
 **PARAMETERS:**
 
@@ -109,13 +109,45 @@ The complete field schema object for the primary key, including name, data type,
 
     The type parameters of the field.
 
+- **dim** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **max_length** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **max_capacity** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **analyzer_params** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **enable_analyzer** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **enable_match** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **multi_analyzer_params** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
+- **mmap.enabled** (*TypeParam*) -
+
+    Shorthand type_params key accepted directly on the field.
+
 - **index_params** (*KeyValuePair[]*) -
 
     The index parameters of the field.
 
 - **fields** (*FieldSchema[]*) -
 
-    The nested fields of the field, set when the field is a **Struct** field.
+    The nested fields of the field, set when the field is a **Struct** field. See [FieldSchema](FieldSchema.md).
 
 **EXCEPTIONS:**
 

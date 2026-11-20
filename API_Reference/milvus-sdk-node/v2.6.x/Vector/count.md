@@ -59,7 +59,7 @@ The number of rows in the collection that match the supplied filter expression. 
 
 - **status** (*ResStatus*)
 
-    A **ResStatus** object.
+    A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

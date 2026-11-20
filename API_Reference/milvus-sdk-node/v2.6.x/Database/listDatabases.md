@@ -49,7 +49,7 @@ The internal database identifiers, in the same order as **db_names**.
 The creation timestamps of the databases, in the same order as **db_names**.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

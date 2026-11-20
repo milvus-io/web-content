@@ -51,7 +51,7 @@ The component that produced the metrics (for example, **rootcoord**, **querynode
 
 - **status** (*ResStatus*)
 
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

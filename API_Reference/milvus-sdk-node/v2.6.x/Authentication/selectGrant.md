@@ -63,7 +63,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
 - **status** (*ResStatus*) -
 
-    A **ResStatus** object.
+    A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

@@ -96,7 +96,7 @@ The rows whose primary keys match the supplied **ids**. Each entry is keyed by f
 
 - **status** (*ResStatus*)
 
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

@@ -12,6 +12,7 @@ await milvusClient.searchIterator(data: SearchIteratorReq)
 await milvusClient.searchIterator({
     collection_name: string,
     data: SearchData | SearchData[],
+    vector?: SearchData | SearchData[],
     batchSize: number,
     limit?: number,
     filter?: string,
@@ -52,7 +53,11 @@ await milvusClient.searchIterator({
 
     **[REQUIRED]**
 
-    The query vector(s). Supported types include FloatVector (number[]), BFloat16Vector (Uint8Array), Float16Vector (Uint8Array), BinaryVector (number[]), and SparseFloatVector. You can use `vector` as an alias of this parameter.
+    The query vector(s). Supported types include FloatVector (number[]), BFloat16Vector (Uint8Array), Float16Vector (Uint8Array), BinaryVector (number[]), and SparseFloatVector. Provide either **data** or **vector**.
+
+- **vector** ([SearchData](SearchData.md) | SearchData[]) -
+
+    An alias of **data** for the query vector(s).
 
 - **batchSize** (*number*) -
 
@@ -128,9 +133,9 @@ await milvusClient.searchIterator({
 
     Primary keys for a search-by-ID operation.
 
-- **highlighter** (*Highlighter*) -
+- **highlighter** (*[Highlighter](Highlighter.md)*) -
 
-    A highlighter for the search results.
+    A highlighter for the search results. See [Highlighter](Highlighter.md).
 
 - **exprValues** (*keyValueObj*) -
 
@@ -144,9 +149,9 @@ await milvusClient.searchIterator({
 
     Custom transformers for special vector data types such as BFloat16Vector and Float16Vector.
 
-- **external_filter_fn** (*(row: SearchResultData) => boolean*) -
+- **external_filter_fn** (*(row: [SearchResultData](SearchResultData.md)) => boolean*) -
 
-    An optional client-side filter function applied to each batch of results. Entities for which this function returns `false` are excluded from the yielded batch.
+    An optional client-side filter function applied to each batch of results. Entities for which this function returns `false` are excluded from the yielded batch. See [SearchResultData](SearchResultData.md).
 
 - **db_name** (*string*) -
 
@@ -158,9 +163,9 @@ await milvusClient.searchIterator({
 
 **RETURNS:**
 
-*Promise<AsyncIterable<SearchResultData[]>>*
+*Promise<AsyncIterable<[SearchResultData](SearchResultData.md)[]>>*
 
-Returns an async iterable. Each iteration yields an array of matching entities for that batch. Iteration ends when the total result count reaches `limit` or all matching entities are exhausted.
+Returns an async iterable. Each iteration yields an array of matching entities for that batch. Iteration ends when the total result count reaches `limit` or all matching entities are exhausted. See [SearchResultData](SearchResultData.md).
 
 **EXCEPTIONS:**
 

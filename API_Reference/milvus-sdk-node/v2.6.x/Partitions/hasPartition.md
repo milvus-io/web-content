@@ -60,7 +60,7 @@ This method returns a promise that resolves to a **BoolResponse** object.
 A boolean that indicates whether the requested partition exists in the collection. It is **true** when the partition exists and **false** when it does not.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

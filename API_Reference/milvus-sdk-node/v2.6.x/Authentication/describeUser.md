@@ -50,7 +50,7 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 **PARAMETERS:**
 
 - **results** (*UserResult[]*) -
-A list of **UserResult** objects. For `describeUser()`, this list contains a single entry describing the requested user.
+A list of **UserResult** objects. For `describeUser()`, this list contains a single entry describing the requested user. Each entry is a `UserResult` with the following members.
 
     - **user** ([User](User.md)) -
 
@@ -61,7 +61,7 @@ A list of **UserResult** objects. For `describeUser()`, this list contains a sin
         A list of roles assigned to this user.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

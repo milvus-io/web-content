@@ -16,6 +16,7 @@ await milvusClient.query(data)
     output_fields?: string[];
     ids?: string[] | number[];
     filter?: string;
+    expr?: string;
     offset?: number;
     limit?: number;
     consistency_level?: ConsistencyLevelEnum;
@@ -56,6 +57,14 @@ await milvusClient.query(data)
     You can use `expr` as an alias of this parameter.
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+
+- **expr** (*string*) -
+
+    An alias of **filter**. Provide either **filter** or **expr**, not both.
+
+- **exprValues** (*keyValueObj*) -
+
+    If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
 
 - **transformers** ([OutputTransformers](OutputTransformers.md)) -
 
@@ -117,6 +126,8 @@ This method returns a promise that resolves to a **QueryResults** object.
     The query results.
 
 - **status** (*ResStatus*) -
+
+    A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

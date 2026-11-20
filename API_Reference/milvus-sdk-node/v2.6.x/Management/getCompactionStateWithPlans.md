@@ -48,7 +48,7 @@ This method returns a promise that resolves to a **GetCompactionPlansResponse** 
 The aggregate state of the compaction. Possible values are **UndefiedState**, **Executing**, and **Completed**.
 
 - **mergeInfos** (*{ sources: string[], target: string }[]*) -
-A list of merge plans dispatched by the compaction.
+A list of merge plans dispatched by the compaction. Each entry is a merge plan with the following members.
 
     - **sources** (*string[]*) -
 
@@ -59,7 +59,7 @@ A list of merge plans dispatched by the compaction.
         The new segment ID produced by the merge.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

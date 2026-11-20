@@ -20,7 +20,7 @@ export type GrantEntity = {
 
 - **object** (*ObjectEntity*) -
 
-    The protected object type.
+    The protected object type. The following members belong to `ObjectEntity`.
 
     - **name** (*RbacObjects*) -
 
@@ -32,7 +32,7 @@ export type GrantEntity = {
 
 - **grantor** (*Grantor*) -
 
-    Who granted the privilege.
+    Who granted the privilege. The following members belong to `Grantor`.
 
     - **user** (*[User](User.md)*) -
 

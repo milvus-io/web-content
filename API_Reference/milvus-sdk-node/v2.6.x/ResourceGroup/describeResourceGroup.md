@@ -45,7 +45,7 @@ This method returns a promise that resolves to a **DescribeResourceGroupResponse
 **PARAMETERS:**
 
 - **resource_group** (*ResourceGroup*) -
-The resource group descriptor.
+The resource group descriptor. The following members belong to `ResourceGroup`.
 
     - **name** (*string*) -
 
@@ -100,7 +100,7 @@ The resource group descriptor.
         Optional. The current member nodes of the group, with their IDs, addresses, and hostnames.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

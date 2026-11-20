@@ -81,7 +81,7 @@ This method returns a promise that resolves to a **GetImportStateResponse** obje
 
 - **status** (*ResStatus*) -
 
-    A **ResStatus** object.
+    A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

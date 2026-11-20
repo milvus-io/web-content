@@ -71,11 +71,11 @@ This method returns a promise that resolves to a **RunAnalyzerResponse** object.
 **PARAMETERS:**
 
 - **results** (*AnalyzerResult[]*) -
-The tokenization output. When **text** is a single string, this list has one entry; when **text** is an array, the entries align with the input order.
+The tokenization output. When **text** is a single string, this list has one entry; when **text** is an array, the entries align with the input order. Each entry is an `AnalyzerResult` with the following members.
 
     - **tokens** (*AnalyzerToken[]*) -
 
-        The tokens produced by the analyzer.
+        The tokens produced by the analyzer. Each entry is an `AnalyzerToken` with the following members.
 
         - **token** (*string*) -
 
@@ -102,7 +102,7 @@ The tokenization output. When **text** is a single string, this list has one ent
         The token hash, populated when the request set **with_hash** to **true**.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

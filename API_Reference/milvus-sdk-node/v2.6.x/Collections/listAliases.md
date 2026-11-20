@@ -61,7 +61,7 @@ A list of all aliases that point to the requested collection.
 The collection name to which the listed aliases point.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

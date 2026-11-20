@@ -88,7 +88,7 @@ A list of import-task descriptors. Each entry carries the task's state, row coun
         The creation timestamp of the task.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

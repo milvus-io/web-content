@@ -17,19 +17,19 @@ export enum SegmentState {
 
 **Constants:**
 
-- **SegmentStateNone**
+- **SegmentStateNone** (0)
 
     Placeholder for an unknown state.
 
-- **NotExist**
+- **NotExist** (1)
 
     The segment does not exist.
 
-- **Growing**
+- **Growing** (2)
 
     The segment is actively accepting inserts.
 
-- **Sealed**
+- **Sealed** (3)
 
     The segment is sealed and no longer accepts inserts.
 

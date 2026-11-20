@@ -1,6 +1,6 @@
 # getCompactionState()
 
-This operation lists the statistics collected on a specific collection.
+This operation returns the compaction state of a specified compaction job.
 
 ```javascript
 await milvusClient.getCompactionState(data)
@@ -65,7 +65,7 @@ The number of plans that completed successfully.
 The number of plans that failed.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

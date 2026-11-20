@@ -46,8 +46,6 @@ await milvusClient.delete({
 
     A specific entity ID or a list of entity IDs.
 
-    The value defaults to **None**, indicating that a scalar filtering condition applies.
-
 - **exprValues** (*keyValueObj*) -
 
     If you choose to use placeholders in `filter` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
@@ -161,7 +159,7 @@ The primary keys that were targeted by this delete. For the full field reference
 
 - **status** (*ResStatus*)
 
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 
@@ -184,23 +182,7 @@ A **ResStatus** object.
 
 ## Examples
 
-<Tabs groupId="code" defaultValue='python' values={[{"label":"Python","value":"python"},{"label":"Java","value":"java"}]}>
-<TabItem value='python'>
-
-```javascript
-const milvusClient = new MilvusClient({
-    address: 'localhost:19530',
-    token: 'root:Milvus',
-});
- const resStatus = await milvusClient.delete({
-   collection_name: 'my_collection',
-   ids: [1,2,3,4]
- });
-```
-
-</TabItem>
-
-<TabItem value='java'>
+### Delete by IDs
 
 ```javascript
 import { MilvusClient } from '@zilliz/milvus2-sdk-node';
@@ -215,6 +197,17 @@ const resStatus1 = await milvusClient.delete({
     collection_name: 'my_collection',
     ids: [1, 2, 3, 4],
 });
+```
+
+### Delete by filter
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 
 // Delete by filter
 const resStatus2 = await milvusClient.delete({
@@ -222,6 +215,3 @@ const resStatus2 = await milvusClient.delete({
     filter: 'id in [5, 6, 7, 8]',
 });
 ```
-
-</TabItem>
-</Tabs>

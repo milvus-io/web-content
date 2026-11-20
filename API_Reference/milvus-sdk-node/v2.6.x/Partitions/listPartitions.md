@@ -75,7 +75,7 @@ The creation timestamps of the partitions, in the same order as **partition_name
 The UTC creation timestamps of the partitions, in the same order as **partition_names**.
 
 - **data** (*PartitionData[]*) -
-A flattened, per-partition view that bundles the name, identifier, creation timestamp, and load percentage.
+A flattened, per-partition view that bundles the name, identifier, creation timestamp, and load percentage. Each entry is a `PartitionData` with the following members.
 
     - **name** (*string*) -
 
@@ -94,7 +94,7 @@ A flattened, per-partition view that bundles the name, identifier, creation time
         The percentage of the partition that is currently loaded into memory.
 
 - **status** (*ResStatus*) -
-A **ResStatus** object.
+A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 

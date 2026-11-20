@@ -123,9 +123,9 @@ await milvusClient.hybridSearch({
 
     Primary keys for a search-by-ID operation.
 
-- **highlighter** (*Highlighter*) -
+- **highlighter** (*[Highlighter](Highlighter.md)*) -
 
-    A highlighter for the search results.
+    A highlighter for the search results. See [Highlighter](Highlighter.md).
 
 - **transformers** ([OutputTransformers](OutputTransformers.md)) -
 
@@ -162,6 +162,8 @@ This method returns a promise that resolves to a **SearchResults** object.
 
 - **status** (*ResStatus*) -
 
+    A **ResStatus** object with the following members.
+
     - **code** (*number*) -
 
         A code that indicates the operation result. It remains **0** if this operation succeeds.
@@ -174,25 +176,9 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **results** (*SearchResultData[]* | *SearchResultData[][]*) -
+- **results** (*[SearchResultData](SearchResultData.md)[]* | *[SearchResultData](SearchResultData.md)[][]*) -
 
-    The hits returned for each query vector. When a single query vector is supplied, this is a flat **SearchResultData[]**. When a batch of query vectors is supplied, this is a nested **SearchResultData[][]** with one inner list per query.
-
-    Each result object has the following keys:
-
-    - **id** (*string*) -
-
-        The primary key of the matched row.
-
-    - **score** (*number*) -
-
-        The similarity score of the search result.
-
-    - **highlight** (*HighlightResult*) -
-
-        Set when a **highlighter** was supplied on the request; carries the highlighted fragments for matching fields.
-
-    - Plus output fields and their values.
+    The hits returned for each query vector. When a single query vector is supplied, this is a flat **SearchResultData[]**. When a batch of query vectors is supplied, this is a nested **SearchResultData[][]** with one inner list per query. Each hit may carry a `highlight` field (see [HighlightResult](HighlightResult.md)). See [SearchResultData](SearchResultData.md).
 
 - **recalls** (*number[]*) -
 

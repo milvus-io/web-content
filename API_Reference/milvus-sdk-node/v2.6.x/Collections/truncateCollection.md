@@ -54,7 +54,7 @@ This method returns a promise that resolves to an object with a **status** field
 
 - **status** (*ResStatus*) -
 
-    A **ResStatus** object.
+    A **ResStatus** object with the following members.
 
     - **code** (*number*) -
 
