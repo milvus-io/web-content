@@ -70,7 +70,23 @@ await milvusClient.upsert({
 
 - **field_ops** (*FieldPartialUpdateOp[]*) -
 
-    Partial update operations for array fields. Optional.
+    Partial update operations for array, struct, or JSON fields. Optional. Each operation has the following members:
+
+    - **field_name** (*string*) -
+
+        **[REQUIRED]**
+
+        The name of the field to update.
+
+    - **op** (*FieldPartialUpdateOpName*) -
+
+        **[REQUIRED]**
+
+        The update operation. Possible values are **REPLACE**, **ARRAY_APPEND**, **ARRAY_REMOVE**, and **PATH_REPLACE**. **PATH_REPLACE** (Milvus 3.0.6+) replaces an existing Array, StructArray, or JSON value by path.
+
+    - **path** (*string*) -
+
+        The path within the field value to replace, for example `[0]` or `["key"]`. Required for **PATH_REPLACE** (Milvus 3.0.6+) and unsupported for the other operations.
 
 **RETURNS:**
 

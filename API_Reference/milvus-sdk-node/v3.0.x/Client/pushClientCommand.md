@@ -1,0 +1,111 @@
+# pushClientCommand()
+
+This operation queues a telemetry command for the selected clients or database.
+
+```javascript
+await milvusClient.pushClientCommand(data: PushClientCommandReq)
+```
+
+## Request Syntax
+
+```javascript
+await milvusClient.pushClientCommand({
+    command_type: string,
+    payload?: Uint8Array | string,
+    target_client_id?: string,
+    target_database?: string,
+    ttl_seconds?: number | string,
+    persistent?: boolean,
+    timeout?: number,
+})
+```
+
+**PARAMETERS:**
+
+- **command_type** (*string*) -
+
+    **[REQUIRED]**
+
+    The type of the telemetry command to push.
+
+- **payload** (*Uint8Array* | *string*) -
+
+    The command payload as bytes or a base64 string. Optional.
+
+- **target_client_id** (*string*) -
+
+    The ID of the client to receive the command. Optional.
+
+- **target_database** (*string*) -
+
+    The database whose connected clients receive the command. Optional.
+
+- **ttl_seconds** (*number* | *string*) -
+
+    The time-to-live of the command, in seconds. Optional.
+
+- **persistent** (*boolean*) -
+
+    Whether the command persists until it is executed or removed. Optional.
+
+- **timeout** (*number*) -
+
+    An optional duration of time in milliseconds to allow for the RPC. If it is set to `undefined`, the client keeps waiting until the server responds or an error occurs. Default is `undefined`.
+
+**RETURNS:**
+
+*Promise<PushClientCommandResponse>*
+
+This method returns a promise that resolves to a **PushClientCommandResponse** object.
+
+```javascript
+{
+    status:  ResStatus,
+    command_id: string
+}
+```
+
+**PARAMETERS:**
+
+- **command_id** (*string*) -
+
+    The identifier of the queued command. Pass this value to `deleteClientCommand()` to remove it.
+
+- **ResStatus**
+
+    A **ResStatus** object.
+
+    - **code** (*number*) -
+
+        A code that indicates the operation result. It remains **0** if this operation succeeds.
+
+    - **error_code** (*string* | *number*) -
+
+        An error code that indicates an occurred error. It remains **Success** if this operation succeeds.
+
+    - **reason** (*string*) -
+
+        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+
+**EXCEPTIONS:**
+
+- **Error**
+
+    This exception is raised when any error occurs during this operation.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const res = await client.pushClientCommand({
+    command_type: 'SetDatabase',
+    target_database: 'my_db',
+});
+console.log(res.command_id);
+```

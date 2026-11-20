@@ -24,6 +24,7 @@ await milvusClient.query(data)
     group_by_fields?: string[];
     transformers?: OutputTransformers;
     params?: keyValueObj;
+    function_chains?: FunctionChains;
 })
 ```
 
@@ -122,6 +123,10 @@ await milvusClient.query(data)
 - **params** (*keyValueObj*) -
 
     Additional query parameters in key-value pairs. Optional.
+
+- **function_chains** (*[FunctionChain](FunctionChain.md)* | *FunctionChainSpec* | *readonly (FunctionChain | FunctionChainSpec)[]*) -
+
+    An optional server-side **QUERY_SCAN** chain applied to the query results. Only one chain is supported, and it must contain at least one operation.
 
 **RETURNS:**
 

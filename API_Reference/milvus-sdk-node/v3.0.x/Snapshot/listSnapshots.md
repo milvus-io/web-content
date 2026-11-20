@@ -41,6 +41,7 @@ This method returns a promise that resolves to a **ListSnapshotsResponse** objec
 ```javascript
 {
     snapshots: string[],
+    snapshot_summaries?: SnapshotSummary[],
     status:  ResStatus
 }
 ```
@@ -49,6 +50,25 @@ This method returns a promise that resolves to a **ListSnapshotsResponse** objec
 
 - **snapshots** (*string[]*) -
 A list of snapshot names that currently exist for the requested collection.
+
+- **snapshot_summaries** (*SnapshotSummary[]*) -
+Optional. Summaries of the snapshots. Each entry has the following members:
+
+    - **name** (*string*) -
+
+        The snapshot name.
+
+    - **create_ts** (*string*) -
+
+        The creation timestamp of the snapshot.
+
+    - **description** (*string*) -
+
+        The snapshot description.
+
+    - **create_utc_ts** (*string*) -
+
+        The creation time of the snapshot as Unix milliseconds.
 
 - **ResStatus**
 A **ResStatus** object.
