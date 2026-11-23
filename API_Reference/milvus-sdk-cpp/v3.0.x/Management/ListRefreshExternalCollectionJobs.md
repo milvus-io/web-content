@@ -42,46 +42,8 @@ Returns a [Status](../Client/Status.md) indicating whether the operation succeed
 
     - **Jobs** (*const std::vector<RefreshExternalCollectionJobInfo>&*) -
 
-        Get the refresh jobs. Each entry is a `RefreshExternalCollectionJobInfo` with the following members.
+        Get the refresh jobs. Each entry is a `RefreshExternalCollectionJobInfo` with the members documented on its own page.
         See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
-
-        - **CollectionName** (*const std::string&*) -
-
-            Name of the collection being refreshed.
-
-        - **EndTime** (*uint64_t*) -
-
-            End timestamp of the refresh job.
-
-        - **ExternalSource** (*const std::string&*) -
-
-            External data source, for example an S3 path.
-
-        - **ExternalSpec** (*const nlohmann::json&*) -
-
-            External file specification.
-
-        - **JobID** (*int64_t*) -
-
-            Refresh job identifier.
-
-        - **Progress** (*int32_t*) -
-
-            Refresh progress in percent (0 to 100).
-
-        - **Reason** (*const std::string&*) -
-
-            Failure reason of the refresh job, empty when the job has not failed.
-
-        - **StartTime** (*uint64_t*) -
-
-            Start timestamp of the refresh job.
-
-        - **State** (*RefreshExternalCollectionStateCode*)
-
-            Current state of the refresh job.
-            See [RefreshExternalCollectionStateCode](RefreshExternalCollectionStateCode.md).
-
 **ERROR HANDLING:**
 
 - **[Status](../Client/Status.md)**
