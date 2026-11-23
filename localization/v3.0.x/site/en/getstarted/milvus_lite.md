@@ -59,13 +59,13 @@ title: Run Milvus Lite Locally
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide uses PyMilvus <strong>3.0.2</strong> and Milvus Lite <strong>3.2.2</strong>. Prepare the following environment:</p>
+    </button></h2><p>This guide uses PyMilvus <strong>3.0.3</strong> and Milvus Lite <strong>3.2.2</strong>. Prepare the following environment:</p>
 <ul>
 <li>Python 3.10 or newer. The local Lite backend has a higher minimum Python version than the remote PyMilvus client.</li>
 <li>macOS, Linux, or Windows, with compatible wheels for dependencies such as <code translate="no">faiss-cpu</code> and <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 is a pure-Python package, so the operating system and architecture must satisfy those dependencies rather than the Lite package itself.</li>
 <li>A writable local directory for database storage.</li>
 </ul>
-<p>On Windows, pip skips the <code translate="no">milvus-lite</code> extra of PyMilvus 3.0.2 because of its platform marker, so <code translate="no">milvus-lite</code> must be named explicitly. The install command below already does this. For other package and platform combinations, consult the <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite release requirements</a>.</p>
+<p>On Windows, pip skips the <code translate="no">milvus-lite</code> extra of PyMilvus 3.0.3 because of its platform marker, so <code translate="no">milvus-lite</code> must be named explicitly. The install command below already does this. For other package and platform combinations, consult the <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite release requirements</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Set up Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ title: Run Milvus Lite Locally
     </button></h2><p>Create an isolated Python environment and install both packages:</p>
 <pre><code translate="no" class="language-bash">python3 -m venv .venv
 <span class="hljs-built_in">source</span> .venv/bin/activate
-python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
+python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.3&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Quote the extras expression so shells such as zsh do not interpret the brackets. On Windows PowerShell, activate the environment with <code translate="no">.venv\Scripts\Activate.ps1</code> instead of <code translate="no">source .venv/bin/activate</code>. The explicit versions keep the SDK and local backend aligned with this guide.</p>
 <div class="alert note">
@@ -238,7 +238,7 @@ client.close()
       </svg>
     </button></h2><p>Use <code translate="no">milvus-lite dump</code> to export a collection as Milvus BulkWriter JSON files. These files can be imported into a self-hosted Milvus deployment or Zilliz Cloud.</p>
 <p>Install the SDK’s bulk writer dependencies in the environment that opens the source database:</p>
-<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
+<pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.3&quot;</span>
 milvus-lite dump -h
 <button class="copy-code-btn"></button></code></pre>
 <p>Close the Python application that owns the local database before running the command in another process. Export the collection from the preceding example:</p>

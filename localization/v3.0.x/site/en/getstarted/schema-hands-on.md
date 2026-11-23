@@ -368,7 +368,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 
 <span class="hljs-comment">//Skip this step using JavaScript</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
 
 schema := entity.NewSchema()
 <button class="copy-code-btn"></button></code></pre>

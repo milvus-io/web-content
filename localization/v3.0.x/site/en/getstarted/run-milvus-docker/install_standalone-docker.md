@@ -78,9 +78,18 @@ title: Run Milvus in Docker (Linux)
 <li>To change the default Milvus configuration, add your settings to the <strong>user.yaml</strong> file in the current folder and then restart the service.</li>
 <li>The Milvus data volume is mapped to <strong>volumes/milvus</strong> in the current folder.</li>
 </ul>
+<p>The <code translate="no">start</code> command prints <code translate="no">Wait for Milvus Starting...</code> and then checks once per second until <code translate="no">docker ps</code> reports the container as healthy. This check has no time limit. If the command does not return, check the container logs from another terminal:</p>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker logs milvus-standalone
+<button class="copy-code-btn"></button></code></pre>
+<p>The script runs its <code translate="no">docker</code> commands with <code translate="no">sudo</code>. Each <code translate="no">start</code> first runs a short-lived container from the Milvus image as <code translate="no">root</code>, which recursively changes the owner of <strong>volumes/milvus</strong> to the <code translate="no">milvus</code> user of the image unless a <code translate="no">.milvus-volume-owner-*</code> marker file in that folder shows that this was already done. The script starts the Milvus container with <code translate="no">--security-opt seccomp:unconfined</code>, so the container runs without the default Docker seccomp profile.</p>
+<div class="alert warning">
+<blockquote>
+<p>The script publishes ports <strong>19530</strong>, <strong>9091</strong>, and <strong>2379</strong> without a host address, and <strong>embedEtcd.yaml</strong> sets etcd to listen on <code translate="no">http://0.0.0.0:2379</code>. Docker publishes a port without a host address on all host addresses, so other machines that can reach this host can also connect to Milvus and etcd. To limit access to this host, edit the <code translate="no">-p</code> options in <code translate="no">standalone_embed.sh</code> before the first <code translate="no">start</code>, for example <code translate="no">-p 127.0.0.1:19530:19530</code>, and remove <code translate="no">-p 2379:2379</code> if you do not connect to etcd from outside the container. If a <code translate="no">milvus-standalone</code> container already exists, <code translate="no">start</code> starts it again with its original options. To require credentials for Milvus connections, see <a href="/docs/authenticate.md">Authenticate User Access</a>.</p>
+</blockquote>
+</div>
 <p>Verify the actual image and health status:</p>
-<pre><code translate="no" class="language-bash">docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
-docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.Config.Image}}&#x27;</span> milvus-standalone
+<span class="hljs-built_in">sudo</span> docker inspect --format <span class="hljs-string">&#x27;{{.State.Health.Status}}&#x27;</span> milvus-standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Wait for <code translate="no">healthy</code> before following <a href="/docs/quickstart.md">Quickstart</a>. When using this server, connect the SDK to <code translate="no">http://localhost:19530</code>; a local <code translate="no">.db</code> URI starts Milvus Lite instead.</p>
 <p>You can access Milvus WebUI at <code translate="no">http://127.0.0.1:9091/webui/</code> to learn more about the your Milvus instance. For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
@@ -201,7 +210,7 @@ EOF
 <li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
 <li><p>Review the upgrade considerations on this page before changing the Milvus version.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p><a href="/docs/scaleout.md">Scale a Milvus cluster</a> on Kubernetes. That procedure uses Helm and does not apply to this Docker deployment.</p></li>
 <li><p>Deploy your Milvu cluster on clouds:</p>
 <ul>
 <li><a href="/docs/eks.md">Amazon EKS</a></li>

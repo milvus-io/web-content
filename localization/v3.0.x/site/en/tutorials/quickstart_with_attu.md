@@ -58,7 +58,7 @@ title: Quick Start with Attu - the Web UI of Milvus
 <li>An Attu release compatible with your server. Attu 3.0 supports Milvus 2.6.0 and later, including Milvus 3.x; use the <a href="https://github.com/zilliztech/attu#compatibility">compatibility table</a> for older servers.</li>
 <li>A Python environment with a PyMilvus version compatible with your server. See <a href="/docs/install-pymilvus.md">Install Milvus Python SDK</a> and <a href="/docs/release_notes.md">Release Notes</a>. For the SDK version used in this documentation branch, install the model extra and progress-bar dependency:</li>
 </ul>
-<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span> tqdm
+<pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.3&quot;</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
 <p>The data-preparation steps also use <code translate="no">wget</code> and <code translate="no">unzip</code>. The embedding function downloads its model on first use, so allow network access to the model host or prepare the model cache in advance. Screenshots illustrate the workflow; labels and layouts can differ between Attu releases.</p>
 <h2 id="2-Install-Desktop-Application" class="common-anchor-header">2. Install Desktop Application<button data-href="#2-Install-Desktop-Application" class="anchor-icon" translate="no">

@@ -88,7 +88,7 @@ title: Upgrade Milvus Standalone with Milvus Operator
   --namespace &lt;namespace&gt; \
   --output yaml &gt; milvus-before-upgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the source manifest for your existing deployment as the upgrade manifest. Do not apply the exported backup file directly without first removing server-managed metadata and status fields.</p>
+<p>Use the source manifest for your existing deployment (<code translate="no">milvus.yaml</code> in this guide) as the upgrade manifest. Do not apply the exported backup file directly without first removing server-managed metadata and status fields.</p>
 <h3 id="Step-2-Confirm-the-Milvus-Operator-version" class="common-anchor-header">Step 2: Confirm the Milvus Operator version<button data-href="#Step-2-Confirm-the-Milvus-Operator-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -164,3 +164,6 @@ kubectl get pods --namespace &lt;namespace&gt; \
   -o jsonpath=<span class="hljs-string">&#x27;{range .items[*]}{.metadata.name}{&quot;\t&quot;}{range .spec.containers[*]}{.image}{&quot; &quot;}{end}{&quot;\n&quot;}{end}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Verify that the Milvus CR reports <code translate="no">Healthy</code>, the current image is <code translate="no">milvusdb/milvus:v3.0.5</code>, and the existing collections remain queryable and searchable. Complete these checks before you enable any v3.0.5-specific feature.</p>
+<div class="alert note">
+<p>Upgrading to Milvus 3.0 does not enable Storage V3. After you verify the upgrade, review <a href="/docs/storage-v3.md">Storage V3</a> before enabling features that depend on it. Once Milvus writes Storage V3 data, downgrading to an older Milvus version that cannot read Storage V3 is not supported.</p>
+</div>
