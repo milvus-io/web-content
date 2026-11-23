@@ -2,10 +2,8 @@
 id: inverted.md
 title: TERBALIK
 summary: >-
-  Apabila Anda perlu sering melakukan kueri penyaringan pada data Anda, indeks
-  TERBALIK dapat meningkatkan kinerja kueri secara signifikan. Alih-alih
-  memindai semua dokumen, indeks terbalik dengan cepat menemukan catatan yang
-  tepat yang sesuai dengan kondisi penyaringan Anda.
+  Gunakan indeks TERBALIK untuk penyaringan nilai pada bidang skalar, larik, dan
+  jalur JSON bertipe.
 ---
 <h1 id="INVERTED" class="common-anchor-header">TERBALIK<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Saat Anda perlu sering melakukan kueri penyaringan pada data Anda, indeks terbalik ( <code translate="no">INVERTED</code> ) dapat secara signifikan meningkatkan kinerja kueri. Alih-alih memindai semua dokumen, Milvus menggunakan indeks terbalik untuk dengan cepat menemukan catatan yang tepat yang sesuai dengan kondisi penyaringan Anda.</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">Kapan menggunakan indeks TERBALIK<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">INVERTED</code> memetakan nilai-nilai bidang ke entitas yang mengandungnya untuk mempercepat penyaringan skalar.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,14 +36,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan indeks TERBALIK jika Anda perlu:</p>
-<ul>
-<li><p><strong>Menyaring berdasarkan nilai tertentu</strong>: Menemukan semua catatan di mana suatu bidang sama dengan nilai tertentu (misalnya, <code translate="no">category == &quot;electronics&quot;</code>)</p></li>
-<li><p><strong>Memfilter konten teks</strong>: Melakukan pencarian yang efisien pada bidang-bidang <code translate="no">VARCHAR</code> </p></li>
-<li><p><strong>Mencari nilai bidang JSON</strong>: Menyaring berdasarkan kunci tertentu dalam struktur JSON</p></li>
-</ul>
-<p><strong>Manfaat kinerja</strong>: Indeks INVERTED dapat mengurangi waktu kueri dari detik menjadi milidetik pada kumpulan data besar dengan menghilangkan kebutuhan untuk pemindaian koleksi secara menyeluruh.</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">Cara kerja indeks INVERTED<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+    </button></h2><p><a id="When-to-use-INVERTED-indexes"></a></p>
+<p>Gunakan ` <code translate="no">INVERTED</code> ` untuk filter kesamaan, keanggotaan, dan rentang pada bidang yang kompatibel atau jalur JSON, seperti ` <code translate="no">category == &quot;electronics&quot;</code>`.</p>
+<p><a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a></p>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Target indeks dan filter<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,21 +57,80 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Indeks INVERTED</strong> di Milvus memetakan setiap nilai bidang unik (istilah) ke kumpulan ID dokumen tempat nilai tersebut muncul. Struktur ini memungkinkan pencarian cepat untuk bidang dengan nilai berulang atau kategoris.</p>
-<p>Seperti yang ditunjukkan pada diagram, proses ini berlangsung dalam dua langkah:</p>
-<ol>
-<li><p><strong>Pemetaan maju (ID → Istilah):</strong> Setiap ID dokumen mengarah ke nilai bidang yang dikandungnya.</p></li>
-<li><p><strong>Pemetaan terbalik (Istilah → ID):</strong> Milvus mengumpulkan istilah-istilah unik dan membuat pemetaan terbalik dari setiap istilah ke semua ID yang mengandung istilah tersebut.</p></li>
-</ol>
-<p>Misalnya, nilai <strong>“electronics”</strong> dipetakan ke ID <strong>1</strong> dan <strong>3</strong>, sedangkan <strong>“books”</strong> dipetakan ke ID <strong>2</strong> dan <strong>5</strong>.</p>
+    </button></h3><p>Tabel berikut mencocokkan target indeks <code translate="no">INVERTED</code> yang didukung dengan filter yang dapat dievaluasi oleh indeks tersebut:</p>
+<table>
+<thead>
+<tr><th>Target indeks</th><th>Filter yang dapat menggunakan indeks</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> bidang</td><td>Kesetaraan (<code translate="no">==</code>, <code translate="no">!=</code>) dan keanggotaan (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Bidang numerik (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</td><td>Kesetaraan, keanggotaan, dan rentang (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> bidang</td><td>Kesetaraan, keanggotaan, rentang, pencocokan awalan seperti <code translate="no">name LIKE &quot;abc%&quot;</code>, dan LIKE umum seperti <code translate="no">name LIKE &quot;a%b_c&quot;</code>.</td></tr>
+<tr><td>Bidang " <code translate="no">ARRAY</code> " biasa dengan elemen <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>, atau <code translate="no">VARCHAR</code> </td><td>Kandungan elemen dan perbandingan seluruh array yang memenuhi syarat. Lihat <a href="/docs/id/array_data_type.md#Array-index-support">Dukungan indeks array</a>.</td></tr>
+<tr><td>Jalur JSON bertipe</td><td>Filter yang sesuai dengan tipe data yang diindeks. Tentukan parameter jalur dan tipe data; lihat <a href="/docs/id/json-indexing.md#Understand-cast-types">Indeksasi JSON</a> untuk kompatibilitas tipe data dan <a href="/docs/id/json-indexing.md#Supported-filters">detail filter JSON</a> untuk perilaku kueri.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Indeks skalar, termasuk <code translate="no">AUTOINDEX</code>, tidak mendukung bidang ARRAY rekursif atau array dengan elemen yang dapat bernilai null. Lihat <a href="/docs/id/array_data_type.md#Array-index-support">Dukungan indeks array</a> untuk filter array biasa dan <a href="/docs/id/index-structarray-fields.md#Create-scalar-indexes">Indeks Bidang StructArray</a> untuk aturan subbidang.</p>
+</blockquote>
+</div>
+<p>Filter sufiks sederhana (<code translate="no">LIKE &quot;%abc&quot;</code>) dan substring (<code translate="no">LIKE &quot;%abc%&quot;</code>) menggunakan jalur pemindaian, meskipun pola LIKE yang lebih kompleks dapat menggunakan indeks ini. Filter regex tidak menggunakan pencarian pola INVERTED secara langsung. Aturan ini berlaku setelah <a href="/docs/id/pattern-matching.md#Accelerate-pattern-matching-with-indexes">penyederhanaan perencanaan kueri</a>.</p>
+<p>Indeks skalar <code translate="no">INVERTED</code> tidak mendukung <code translate="no">TEXT_MATCH</code> atau <code translate="no">PHRASE_MATCH</code> berbasis token; lihat <a href="/docs/id/keyword-match.md">Pencocokan Teks</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Ini adalah kemampuan indeks, bukan batasan pada ekspresi filter yang valid. Lihat <a href="/docs/id/scalar_index.md#Filter-execution">Indeks Skalar</a> untuk batasan pencarian bersama. Untuk <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code>, dan pengujian NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Pertimbangan memori<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk perkiraan kasar memori yang dimuat, gunakan <code translate="no">S</code> byte, di mana <code translate="no">S</code> adalah ukuran indeks yang dibangun sebelum kompresi penyimpanan. Bangun indeks pada data representatif untuk mendapatkan <code translate="no">S</code>; ukuran data bidang mentah tidak dapat dijadikan pengganti.</p>
+<p>Perkiraan kasar ini mencakup memori indeks yang dimuat dengan pemetaan memori dinonaktifkan. Hitung per segmen, lalu jumlahkan di seluruh segmen yang dimuat dan replika.</p>
+<div class="alert note">
+<blockquote>
+<p>Sediakan memori tambahan untuk data bidang yang dimuat, indeks vektor, overhead koleksi dan indeks, serta alokasi sementara. Validasi dengan data dan kueri representatif; array, JSON, format indeks lama, dan pemetaan memori memerlukan pengukuran terpisah.</p>
+</blockquote>
+</div>
+<p><a id="How-INVERTED-indexes-work"></a></p>
+<h3 id="How-INVERTED-works" class="common-anchor-header">Cara Kerja INVERTED<button data-href="#How-INVERTED-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Lihat contoh pencarian nilai</strong></summary></p>
+<p>Indeks terbalik membalikkan pemetaan dari ID entitas ke nilai bidang. Pada diagram, <strong>“electronics”</strong> dipetakan ke ID <strong>1</strong> dan <strong>3</strong>, sedangkan <strong>“books”</strong> dipetakan ke ID <strong>2</strong> dan <strong>5</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" /> 
    <span>Cara Kerja Indeks Terbalik</span>
   
  </span></p>
-<p>Saat Anda menyaring berdasarkan nilai tertentu (misalnya, <code translate="no">category == &quot;electronics&quot;</code>), Milvus cukup mencari istilah tersebut dalam indeks dan langsung mengambil ID yang cocok. Hal ini menghindari pemindaian seluruh dataset dan memungkinkan penyaringan yang cepat, terutama untuk nilai kategorikal atau nilai yang berulang.</p>
-<p>Indeks TERBALIK mendukung semua tipe bidang skalar, seperti <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, dan <strong>ARRAY</strong>. Namun, parameter indeks untuk mengindeks bidang JSON sedikit berbeda dari bidang skalar biasa.</p>
+<p>Untuk <code translate="no">category == &quot;electronics&quot;</code>, Milvus mengambil ID <strong>1</strong> dan <strong>3</strong> dari indeks alih-alih memeriksa kategori setiap entitas.</p>
+<p></details></p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Membuat indeks pada bidang non-JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -470,10 +526,9 @@ curl --request POST \
       </svg>
     </button></h2><p>Gunakan metode ` <code translate="no">drop_index()</code> ` untuk menghapus indeks yang sudah ada dari sebuah koleksi.</p>
 <div class="alert note">
-<ul>
-<li><p>Pada <strong>v2.6.3</strong> atau sebelumnya, Anda harus melepaskan koleksi terlebih dahulu sebelum menghapus indeks skalar.</p></li>
-<li><p>Mulai <strong>v2.6.4</strong> atau yang lebih baru, Anda dapat menghapus indeks skalar secara langsung begitu indeks tersebut tidak lagi diperlukan—tidak perlu melepaskan koleksi terlebih dahulu.</p></li>
-</ul>
+<blockquote>
+<p>Untuk persyaratan rilis saat menghapus indeks skalar, lihat <a href="/docs/id/scalar_index.md#Drop-index-compatibility">Indeks Skalar</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -570,27 +625,7 @@ curl --request POST \
     &quot;indexName&quot;: &quot;category_index&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Best-practices" class="common-anchor-header">Praktik terbaik<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>Buat indeks setelah memuat data</strong>: Buat indeks pada koleksi yang sudah berisi data untuk kinerja yang lebih baik</p></li>
-<li><p><strong>Gunakan nama indeks yang deskriptif</strong>: Pilih nama yang secara jelas menunjukkan bidang dan tujuannya</p></li>
-<li><p><strong>Pantau kinerja indeks</strong>: Periksa kinerja kueri sebelum dan sesudah membuat indeks</p></li>
-<li><p><strong>Pertimbangkan pola kueri Anda</strong>: Buat indeks pada kolom yang sering Anda gunakan untuk penyaringan</p></li>
-</ul>
+<p><a id="Best-practices"></a></p>
 <h2 id="Next-steps" class="common-anchor-header">Langkah selanjutnya<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -607,6 +642,6 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Pelajari <a href="/docs/id/index-explained.md">jenis indeks lainnya</a></p></li>
-<li><p>Lihat <a href="/docs/id/json-indexing.md">Indeksasi JSON</a> untuk skenario indeksasi JSON tingkat lanjut</p></li>
+<li><p>Bandingkan indeks skalar dan rencanakan sumber daya di <a href="/docs/id/scalar_index.md#Whats-next">Indeks Skalar</a>.</p></li>
+<li><p>Lihat <a href="/docs/id/json-indexing.md">Indeks JSON</a> untuk skenario pengindeksan JSON tingkat lanjut</p></li>
 </ul>

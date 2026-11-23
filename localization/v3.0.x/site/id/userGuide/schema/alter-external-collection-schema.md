@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -162,7 +162,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
 <span class="hljs-comment"># collection (POST /v2/vectordb/collections/fields/add routes through</span>
 <span class="hljs-comment"># AlterCollectionSchema, which rejects external collections).</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, <code translate="no">score</code> adalah nama bidang di Milvus, dan <code translate="no">external_field=&quot;score&quot;</code> memetakan bidang tersebut ke bidang <code translate="no">score</code> di sumber data eksternal. Tetapkan <code translate="no">nullable=True</code> karena bidang tersebut ditambahkan setelah koleksi telah dibuat.</p>
+<p>Dalam contoh ini, <code translate="no">score</code> adalah nama bidang di Milvus, sedangkan <code translate="no">external_field=&quot;score&quot;</code> memetakan bidang tersebut ke bidang <code translate="no">score</code> di sumber data eksternal. Tetapkan <code translate="no">nullable=True</code> karena bidang tersebut ditambahkan setelah koleksi telah dibuat.</p>
 <h3 id="Add-a-vector-field" class="common-anchor-header">Menambahkan bidang vektor<button data-href="#Add-a-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +187,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python

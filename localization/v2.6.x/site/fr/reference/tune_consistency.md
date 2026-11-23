@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus est un système qui sépare le stockage et le calcul. <strong>Les nœuds de streaming</strong> ajoutent toutes les opérations d’écriture au journal d’écriture anticipée (WAL) et conservent les <strong>données en croissance</strong> — c’est-à-dire les données qui se trouvent encore dans le WAL et qui n’ont pas encore été persistées. Un processus de récupération convertit les données en croissance en <strong>données historiques</strong> (segments scellés persistés dans un stockage objet tel que MinIO/S3), qui sont ensuite mises à disposition par <strong>les nœuds de requête</strong>. Chaque requête de recherche ou d’interrogation est reçue par un <strong>déléguant de requêtes (Query Delegator)</strong> sur le nœud de streaming qui héberge le WAL de la collection : le déléguant génère le plan de requête, exécute localement la partie relative aux données en croissance, transmet la partie relative aux données historiques aux nœuds de requête concernés, puis fusionne les résultats avant de les renvoyer. Pour plus de détails, reportez-vous à <a href="/docs/fr/v2.6.x/streaming_service.md">la section Service de streaming</a>.</p>
+    </button></h2><p>Milvus est un système qui sépare le stockage et le calcul. <strong>Les nœuds de streaming</strong> ajoutent toutes les opérations d’écriture au journal d’écriture anticipée (WAL) et conservent les <strong>données en croissance</strong> — c’est-à-dire les données qui se trouvent encore dans le WAL et qui n’ont pas encore été persistées. Un processus de récupération convertit les données en croissance en <strong>données historiques</strong> (segments scellés persistés dans un stockage objet tel que MinIO/S3), qui sont ensuite servies par <strong>les nœuds de requête</strong>. Chaque requête de recherche ou d’interrogation est reçue par un <strong>déléguant de requêtes (Query Delegator)</strong> sur le nœud de streaming qui héberge le WAL de la collection : le déléguant génère le plan de requête, exécute localement la partie relative aux données en croissance, transmet la partie relative aux données historiques aux nœuds de requête concernés, puis fusionne les résultats avant de les renvoyer. Pour plus de détails, reportez-vous à <a href="/docs/fr/v2.6.x/streaming_service.md">la section Service de streaming</a>.</p>
 <p>Afin de garantir la cohérence, Milvus attribue à chaque message un horodatage TSO (Timestamp Oracle) qui détermine son ordre dans le WAL, et insère en continu des horodatages de synchronisation dans le WAL parallèlement aux messages de données. Chaque fois qu’un horodatage de synchronisation (syncTs) est reçu, il est enregistré en tant que ServiceTime, ce qui signifie que toutes les données antérieures à ce ServiceTime sont visibles pour les requêtes. Sur la base du ServiceTime, Milvus fournit des horodatages de garantie (GuaranteeTs) afin de répondre aux différentes exigences des utilisateurs en matière de cohérence et de disponibilité. Les utilisateurs peuvent indiquer au délégateur la nécessité d’inclure dans le champ de recherche les données antérieures à un moment donné en spécifiant des GuaranteeTs dans leurs requêtes de recherche.</p>
 <p><span class="img-wrapper">
   
@@ -49,7 +49,7 @@ summary: >-
   
  </span></p>
 <p>Comme le montre la figure ci-dessus, si GuaranteeTs est inférieur à ServiceTime, cela signifie que toutes les données antérieures au moment spécifié sont déjà visibles, ce qui permet à la recherche de s’exécuter immédiatement. Lorsque GuaranteeTs est supérieur à ServiceTime, la recherche doit attendre que ServiceTime dépasse GuaranteeTs avant de pouvoir s’exécuter.</p>
-<p>Les utilisateurs doivent trouver un compromis entre la précision de la requête et sa latence. S’ils ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent définir GuaranteeTs sur une valeur aussi élevée que possible ; s’ils souhaitent obtenir rapidement les résultats de recherche et sont plus tolérants quant à la précision de la requête, GuaranteeTs peut alors être défini sur une valeur plus faible.</p>
+<p>Les utilisateurs doivent trouver un compromis entre la précision de la requête et sa latence. S’ils ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent définir GuaranteeTs sur une valeur aussi élevée que possible ; s’ils souhaitent obtenir rapidement des résultats de recherche et sont plus tolérants quant à la précision de la requête, GuaranteeTs peut alors être défini sur une valeur plus faible.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" /> 
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez définir différents niveaux de cohérence lors de la création d’une collection, ainsi que lors de l’exécution de recherches et de requêtes.</p>
+    </button></h2><p>Vous pouvez définir le niveau de cohérence lors de la création d’une collection, le modifier après la création de la collection ou le remplacer pour des recherches et requêtes individuelles.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Définir le niveau de cohérence lors de la création d’une collection<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +170,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Les valeurs possibles pour le paramètre ` <code translate="no">consistency_level</code> ` sont ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>` et ` <code translate="no">Session</code>`.</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Définir le niveau de cohérence dans la recherche<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Modifier le niveau de cohérence d’une collection<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -185,7 +185,65 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Vous pouvez à tout moment modifier le niveau de cohérence pour une recherche spécifique. L'exemple de code suivant rétablit le niveau de cohérence sur « <strong>Bounded</strong> ». La modification s'applique uniquement à la requête de recherche en cours.</p>
+    </button></h3><p>Vous pouvez modifier le niveau de cohérence d’une collection existante en modifiant sa propriété <code translate="no">consistency_level</code>. Le nouveau niveau s’applique aux recherches et requêtes ultérieures sur la collection qui ne spécifient pas de niveau de cohérence propre, et sa modification ne nécessite pas de libérer la collection. L’exemple de code suivant modifie le niveau de cohérence pour le définir sur « <strong>Eventually</strong> ».</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<span class="highlighted-wrapper-line">properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);</span>
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Définir le niveau de cohérence dans une recherche<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous pouvez à tout moment modifier le niveau de cohérence d’une recherche spécifique. L’exemple de code suivant rétablit le niveau de cohérence sur « <strong>Bounded</strong> ». La modification s’applique uniquement à la requête de recherche en cours.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

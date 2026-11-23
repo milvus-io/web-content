@@ -47,7 +47,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus propose plusieurs opérateurs JSON puissants qui facilitent le filtrage et l’interrogation des données JSON. Ces opérateurs sont les suivants :</p>
 <ul>
-<li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Filtre les entités dans lesquelles l’expression JSON spécifiée se trouve au sein du champ.</p></li>
+<li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Filtre les entités dans lesquelles l’expression JSON spécifiée est présente au sein du champ.</p></li>
 <li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: S'assure que tous les éléments de l'expression JSON spécifiée sont présents dans le champ.</p></li>
 <li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: Filtre les entités dans lesquelles au moins un élément de l’expression JSON est présent dans le champ.</p></li>
 </ul>
@@ -122,7 +122,7 @@ filter=<span class="hljs-string">&#x27;json_contains(product[&quot;tags&quot;], 
       </svg>
     </button></h2><p>L'opérateur <code translate="no">json_contains_all</code> garantit que tous les éléments d'une expression JSON spécifiée sont présents dans le champ cible. Il est particulièrement utile lorsque vous devez faire correspondre plusieurs valeurs au sein d'un tableau JSON.</p>
 <p><strong>Exemple</strong></p>
-<p>Pour reprendre l’exemple des balises de produit, si vous souhaitez trouver tous les produits portant les balises <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> et <code translate="no">&quot;new&quot;</code>, vous pouvez utiliser l’opérateur <code translate="no">json_contains_all</code>.</p>
+<p>Pour reprendre l’exemple des balises de produits, si vous souhaitez trouver tous les produits comportant les balises <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> et <code translate="no">&quot;new&quot;</code>, vous pouvez utiliser l’opérateur <code translate="no">json_contains_all</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -173,7 +173,7 @@ filter=<span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'opérateur <code translate="no">json_contains_any</code> filtre les entités pour lesquelles au moins un élément de l'expression JSON est présent dans le champ. Cela s'avère utile lorsque vous souhaitez faire correspondre des entités en fonction de l'une quelconque parmi plusieurs valeurs possibles.</p>
+    </button></h2><p>L'opérateur <code translate="no">json_contains_any</code> filtre les entités dont le champ contient au moins un élément de l'expression JSON. Cela s'avère utile lorsque vous souhaitez faire correspondre des entités en fonction de l'une quelconque de plusieurs valeurs possibles.</p>
 <p><strong>Exemple</strong></p>
 <p>Supposons que vous souhaitiez filtrer les produits comportant au moins l’une des balises suivantes : <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> ou <code translate="no">&quot;new&quot;</code>. Vous pouvez utiliser l’opérateur <code translate="no">json_contains_any</code> pour y parvenir.</p>
 <div class="multipleCode">

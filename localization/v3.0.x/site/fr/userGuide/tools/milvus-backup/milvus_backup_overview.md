@@ -20,8 +20,8 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Backup permet de sauvegarder les collections Milvus et de les restaurer dans la même instance ou dans une autre. Il fournit une interface en ligne de commande (CLI) et une API HTTP.</p>
-<p>Milvus Backup <strong>0.6.0</strong> ajoute la sauvegarde par instantanés pour Milvus 3.0, un schéma de configuration v2 versionné et des préréglages spécifiques pour la création de sauvegardes. La prise en charge officielle de la sauvegarde et de la restauration pour Milvus 3.0 commence à partir de <strong>la version Milvus 3.0.1</strong>.</p>
+    </button></h1><p>Milvus Backup permet de sauvegarder des collections Milvus et de les restaurer dans la même instance ou dans une autre. Il fournit une interface en ligne de commande (CLI) et une API HTTP.</p>
+<p>Milvus Backup <strong>0.6.0</strong> ajoute la sauvegarde par instantanés pour Milvus 3.0, un schéma de configuration v2 versionné et des préréglages spécifiques pour la création de sauvegardes. La prise en charge officielle de la sauvegarde et de la restauration pour Milvus 3.0 commence avec <strong>la version Milvus 3.0.1</strong>.</p>
 <h2 id="Choose-your-guide" class="common-anchor-header">Choisissez votre guide<button data-href="#Choose-your-guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Backup dispose de sa propre version de publication, distincte de celle du serveur Milvus. Les guides actuels couvrent la série 0.6.x ; la section « Backup 0.5.x » conserve les workflows antérieurs. Les libellés des titres de page identifient la série de Backup concernée. Les instructions d’installation et les exemples utilisent une version spécifique validée. Vérifiez séparément la compatibilité entre le serveur Milvus source et le serveur Milvus cible.</p>
+    </button></h2><p>Milvus Backup dispose de sa propre version, distincte de celle du serveur Milvus. Les guides actuels couvrent la série 0.6.x ; la section « Backup 0.5.x » conserve les workflows antérieurs. Les libellés des titres de page identifient la série de Milvus Backup concernée. Les instructions d’installation et les exemples utilisent une version spécifique validée. Vérifiez séparément la compatibilité entre le serveur Milvus source et le serveur Milvus cible.</p>
 <table>
 <thead>
 <tr><th>Votre tâche</th><th>Guide</th></tr>
@@ -49,7 +49,7 @@ title: Milvus Backup
 <tr><td>Sauvegarder et restaurer un instantané sur Milvus 3.0.1 ou version ultérieure</td><td><a href="/docs/fr/snapshot-backup-and-restore.md">Sauvegarde et restauration d’un instantané au sein d’une même instance</a></td></tr>
 </tbody>
 </table>
-<p>Les guides existants relatifs à <a href="/docs/fr/single-instance-backup-and-restore.md">la même instance</a>, <a href="/docs/fr/shared-bucket-backup-and-restore.md">aux compartiments partagés</a>, <a href="/docs/fr/cross-bucket-backup-and-restore.md">aux compartiments croisés</a> et <a href="/docs/fr/multi-storage-backup-and-restore.md">aux stockages croisés</a> conservent la configuration et les commandes de la version 0.5.16. Leurs exemples ne changent pas de version lorsqu’une nouvelle version de Backup est publiée.</p>
+<p>Les guides existants relatifs à <a href="/docs/fr/single-instance-backup-and-restore.md">la même instance</a>, <a href="/docs/fr/shared-bucket-backup-and-restore.md">au compartiment partagé</a>, <a href="/docs/fr/cross-bucket-backup-and-restore.md">inter-compartiments</a> et <a href="/docs/fr/multi-storage-backup-and-restore.md">inter-stockages</a> conservent la configuration et les commandes de la version 0.5.16. Leurs exemples ne changent pas de version lorsqu’une nouvelle version de Backup est publiée.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prérequis<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,7 +68,7 @@ title: Milvus Backup
     </button></h2><ul>
 <li>Utilisez un binaire de sauvegarde et des exemples de configuration issus de la même version. Le <a href="/docs/fr/milvus_backup_cli.md#Obtain-Milvus-Backup">guide 0.5.x</a> fait référence à la version 0.5.16 ; le <a href="/docs/fr/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">guide actuel</a> fait référence à la version 0.6.0.</li>
 <li>Assurez un accès réseau à Milvus, à son stockage et à la destination de sauvegarde. Les opérations de snapshot nécessitent également que le serveur Milvus puisse accéder au magasin de sauvegarde.</li>
-<li>Vérifiez la compatibilité du serveur ci-dessous. Go n’est requis que lors de la compilation à partir du code source : version 1.25 ou ultérieure pour Backup 0.5.16, et version 1.26 ou ultérieure pour la version 0.6.0.</li>
+<li>Vérifiez la compatibilité du serveur ci-dessous. Go n’est requis que lors de la compilation à partir du code source : version 1.25 ou ultérieure pour Backup 0.5.16, et 1.26 ou ultérieure pour la version 0.6.0.</li>
 </ul>
 <h2 id="Architecture" class="common-anchor-header">Architecture<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -102,7 +102,7 @@ title: Milvus Backup
 <tr><td><code translate="no">auto</code></td><td>Sélectionnez le format en fonction des fonctionnalités prises en charge par le serveur. Sur Milvus 3.0, le format « instantané » est sélectionné par défaut.</td></tr>
 </tbody>
 </table>
-<p>Un répertoire de sauvegarde contient les métadonnées et les fichiers requis par son format. Conservez le répertoire complet lors de l’archivage ou du déplacement de celui-ci. Ne partez pas du principe qu’une sauvegarde de type « snapshot » utilise la structure du répertoire binlog.</p>
+<p>Un répertoire de sauvegarde contient les métadonnées et les fichiers requis par son format. Conservez le répertoire complet lors de son archivage ou de son déplacement. Ne partez pas du principe qu’une sauvegarde de type « snapshot » utilise la structure du répertoire binlog.</p>
 <p>Dans la version 0.6.0, les préréglages de l’ <code translate="no">create --for</code> t configurent des options spécifiques à l’objectif : « <code translate="no">clone</code> » conserve le format choisi, tandis que « <code translate="no">archive</code> » et « <code translate="no">secondary</code> » nécessitent un fichier binlog. Un serveur secondaire nécessite également une topologie de réplication configurée ; une migration ordinaire entre instances ne nécessite pas de serveur secondaire. Voir <a href="/docs/fr/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">Choisir un format de sauvegarde ou un objectif</a>.</p>
 <p>La version 0.6.0 de Backup ignore les collections externes pendant la sauvegarde. La réussite d’une tâche n’implique pas que les données des collections externes aient été incluses.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Matrice de compatibilité<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">

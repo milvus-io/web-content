@@ -19,7 +19,7 @@ summary: 註釋
         ></path>
       </svg>
     </button></h1><div class="alert note">
-<p>本指南著重於分析儀選型的實務決策。有關分析儀元件的技術細節以及如何新增分析儀參數，請參閱《<a href="/docs/zh-hant/analyzer-overview.md">分析儀概覽</a>》。</p>
+<p>本指南著重於分析器的實務選型決策。有關分析器元件的技術細節以及如何新增分析器參數，請參閱《<a href="/docs/zh-hant/analyzer-overview.md">分析器概覽</a>》。</p>
 </div>
 <h2 id="Understand-analyzers-in-2-minutes" class="common-anchor-header">2 分鐘了解分析器<button data-href="#Understand-analyzers-in-2-minutes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +45,8 @@ summary: 註釋
   
  </span></p>
 <ol>
-<li><p><strong>分詞（必經步驟）：</strong>此初始階段會<strong>套用分詞器，</strong>將連續的文字字串分割成稱為「分詞」的離散且有意義的單位。分詞方法會因語言和內容類型而有顯著差異。</p></li>
-<li><p><strong>標記過濾（可選）：</strong>分詞後，會套用<strong>過濾器</strong>來修改、移除或精煉標記。這些操作可能包括將所有標記轉換為小寫、移除常見的無意義詞彙（例如停用詞），或將單字還原為其詞幹形式（詞幹化）。</p></li>
+<li><p><strong>分詞（必經步驟）：</strong>此初始階段會套用<strong>分詞器，</strong>將連續的文字字串拆解為稱為「詞元」的離散且有意義的單位。分詞方法會因語言和內容類型而有顯著差異。</p></li>
+<li><p><strong>詞元過濾（可選）：</strong>詞元化完成後，會套用<strong>過濾器</strong>來修改、移除或精煉詞元。這些操作可能包括將所有詞元轉換為小寫、移除常見的無意義詞彙（例如停用詞），或將單詞還原為其詞幹形式（詞幹化）。</p></li>
 </ol>
 <p><strong>範例</strong>：</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -69,7 +69,7 @@ summary: 註釋
         ></path>
       </svg>
     </button></h2><p>若選擇錯誤的分析器，可能會導致相關文件無法被搜尋到，或返回不相關的結果。</p>
-<p>下表彙整了因分析器選取不當所導致的常見問題，並針對診斷搜尋問題提供可執行的解決方案。</p>
+<p>下表總結了因分析器選擇不當而引起的常見問題，並針對診斷搜尋問題提供可執行的解決方案。</p>
 <table>
    <tr>
      <th><p>問題</p></th>
@@ -80,17 +80,17 @@ summary: 註釋
    </tr>
    <tr>
      <td><p>過度分詞</p></td>
-     <td><p>針對技術術語、識別碼或網址的文字查詢無法找到相關文件。</p></td>
+     <td><p>針對技術術語、識別碼或網址的文字查詢，無法找到相關文件。</p></td>
      <td><ul><li><p><code translate="no">"user_id"</code> →<code translate="no">['user', 'id']</code></p></li><li><p><code translate="no">"C++"</code> →<code translate="no">['c']</code></p></li></ul></td>
      <td><p><a href="/docs/zh-hant/standard-analyzer.md"><code translate="no">standard</code></a> 分析器</p></td>
-     <td><p>使用 <a href="/docs/zh-hant/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分詞器；並搭配 <a href="/docs/zh-hant/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 過濾器。</p></td>
+     <td><p>使用 <a href="/docs/zh-hant/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分詞器；並搭配一個 <a href="/docs/zh-hant/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 過濾器。</p></td>
    </tr>
    <tr>
      <td><p>分詞不足</p></td>
-     <td><p>搜尋多詞短語中的某個組成部分時，無法回傳包含完整短語的文件。</p></td>
+     <td><p>搜尋多詞短語中的某個組成部分時，無法返回包含完整短語的文件。</p></td>
      <td><p><code translate="no">"state-of-the-art"</code> →<code translate="no">['state-of-the-art']</code></p></td>
      <td><p>搭配 <a href="/docs/zh-hant/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分詞器</p></td>
-     <td><p>請使用 <a href="/docs/zh-hant/standard-tokenizer.md"><code translate="no">standard</code></a> 分詞器」進行標點符號與空格分割；使用自訂<a href="/docs/zh-hant/regex-filter.md">正規</a>表達式篩選器。</p></td>
+     <td><p>請使用 <a href="/docs/zh-hant/standard-tokenizer.md"><code translate="no">standard</code></a> 分詞器 來依據標點符號和空格進行分割；使用自訂<a href="/docs/zh-hant/regex-filter.md">正規表達式</a>篩選器。</p></td>
    </tr>
    <tr>
      <td><p>語言不匹配</p></td>
@@ -101,9 +101,9 @@ summary: 註釋
    </tr>
    <tr>
      <td><p>輸入法不匹配</p></td>
-     <td><p>使用者輸入拼音，但索引文字使用的是中文字。</p></td>
+     <td><p>使用者輸入拼音，但索引文字使用的是中文漢字。</p></td>
      <td><p>中文文本：<code translate="no">"足球"</code> ；查詢文本：<code translate="no">"zuqiu"</code></p></td>
-     <td><p>僅產生漢字詞元（token）的分析器</p></td>
+     <td><p>僅產生中文字元分詞的分析器</p></td>
      <td><p>請使用自訂分析器，並搭配 <a href="/docs/zh-hant/jieba-tokenizer.md"><code translate="no">jieba</code></a> 分詞器與 <a href="/docs/zh-hant/pinyin-filter.md"><code translate="no">pinyin</code></a> 篩選器。</p></td>
    </tr>
 </table>
@@ -143,13 +143,13 @@ summary: 註釋
 <ul>
 <li><p>根據空格和標點符號分割文字</p></li>
 <li><p>將所有詞元轉換為小寫</p></li>
-<li><p>移除一組內建的常見英文停用詞及大部分標點符號</p></li>
+<li><p>移除一套內建的常見英文停用詞及大部分標點符號</p></li>
 </ul>
 <p><strong>轉換範例</strong>：</p>
 <pre><code translate="no" class="language-plaintext">Input:  &quot;The Milvus vector database is built for scale!&quot;
 Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database&#x27;, &#x27;is&#x27;, &#x27;built&#x27;, &#x27;scale&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Decision-criteria-A-quick-check" class="common-anchor-header">決策準則：快速檢查<button data-href="#Decision-criteria-A-quick-check" class="anchor-icon" translate="no">
+<h3 id="Decision-criteria-A-quick-check" class="common-anchor-header">決策標準：快速檢查<button data-href="#Decision-criteria-A-quick-check" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,14 +187,14 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>阿拉伯文文件</p></td>
      <td><p>❌ 否</p></td>
-     <td><p>阿拉伯文可能包含字母變體、標點符號、Tatweel、阿拉伯-印度數字，以及常見的阿拉伯語停用詞，這些都需要針對該語言進行特殊處理。</p></td>
+     <td><p>阿拉伯文可能包含字母變體、發音標記、Tatweel、阿拉伯-印度數字，以及常見的阿拉伯語停用詞，這些都需要針對該語言進行特殊處理。</p></td>
      <td><p>請使用內建的 <a href="/docs/zh-hant/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器。</p></td>
    </tr>
    <tr>
      <td><p>泰文文件</p></td>
      <td><p>❌ 否</p></td>
-     <td><p>泰文通常不在單詞之間使用空格，因此需要針對該語言的單詞分詞處理。</p></td>
-     <td><p>請使用內建的 <a href="/docs/zh-hant/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。</p></td>
+     <td><p>泰文通常不在單詞之間使用空格，因此需要針對該語言的單詞分割。</p></td>
+     <td><p>使用內建的 <a href="/docs/zh-hant/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。</p></td>
    </tr>
    <tr>
      <td><p>技術文件</p></td>
@@ -205,14 +205,14 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>以空格分隔的語言，例如法語／西班牙語文本</p></td>
      <td><p>⚠️ 可能</p></td>
-     <td><p>帶有重音符號的字元（<code translate="no">café</code> 對比<code translate="no">cafe</code> ）可能無法正確匹配。</p></td>
+     <td><p>帶有重音符號的字元（例如<code translate="no">café</code> 與<code translate="no">cafe</code> ）可能無法正確匹配。</p></td>
      <td><p>建議使用帶有 <a href="/docs/zh-hant/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> 以獲得更佳結果。</p></td>
    </tr>
    <tr>
      <td><p>多語言或未知語言</p></td>
-     <td><p>❌ 不</p></td>
+     <td><p>❌ 不可</p></td>
      <td><p><code translate="no">standard</code> 分析器缺乏處理不同字元集和分詞規則所需的語言特定邏輯。</p></td>
-     <td><p>請使用具備 <a href="/docs/zh-hant/icu-tokenizer.md"><code translate="no">icu</code></a> ，以進行支援 Unicode 的分詞。 </p><p>此外，亦可考慮配置<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>或<a href="/docs/zh-hant/language-identifier.md">語言識別器</a>，以更精確地處理多語言內容。</p></td>
+     <td><p>請使用具備 <a href="/docs/zh-hant/icu-tokenizer.md"><code translate="no">icu</code></a> ，以進行支援 Unicode 的分詞處理。 </p><p>此外，亦可考慮配置<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>或<a href="/docs/zh-hant/language-identifier.md">語言識別器</a>，以更精確地處理多語言內容。</p></td>
    </tr>
 </table>
 <p>若預設的<code translate="no">standard</code> 分析器無法滿足您的需求，您需要實作另一個分析器。您有兩種途徑：</p>
@@ -268,7 +268,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/zh-hant/english-analyzer.md"><code translate="no">english</code></a></p></td>
      <td><p>專為英語設計，會進行詞幹提取與停用詞移除，以提升英語語義匹配效果</p></td>
      <td><ul><li><p>分詞器：<code translate="no">standard</code></p></li><li><p>篩選器：<code translate="no">lowercase</code> 、<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
-     <td><p>相較於<code translate="no">standard</code> ，此設定更推薦用於純英文內容。</p></td>
+     <td><p>相較於<code translate="no">standard</code> ，此分析器更推薦用於純英文內容。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/chinese-analyzer.md"><code translate="no">chinese</code></a></p></td>
@@ -280,7 +280,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/zh-hant/arabic-analyzer.md"><code translate="no">arabic</code></a></p></td>
      <td><p>阿拉伯文</p></td>
      <td><ul><li><p>分詞器：<code translate="no">standard</code></p></li><li><p>篩選器：<code translate="no">lowercase</code> 、<code translate="no">decimaldigit</code> 、<code translate="no">arabic_normalization</code> 、<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
-     <td><p>相較於<code translate="no">standard</code> ，更推薦用於阿拉伯語文本。</p></td>
+     <td><p>相較於<code translate="no">standard</code> ，此設定更推薦用於阿拉伯語文本。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/thai-analyzer.md"><code translate="no">thai</code></a></p></td>
@@ -320,9 +320,9 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>有關詳細用法，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>」、「<a href="/docs/zh-hant/keyword-match.md">文字匹配</a>」或「<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>」。</p>
+<p>有關詳細用法，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文搜尋</a>」、「<a href="/docs/zh-hant/keyword-match.md">文字比對</a>」或「<a href="/docs/zh-hant/phrase-match.md">短語比對</a>」。</p>
 </div>
-<h2 id="Path-B-Create-a-custom-analyzer" class="common-anchor-header">方法 B：建立自訂分析器<button data-href="#Path-B-Create-a-custom-analyzer" class="anchor-icon" translate="no">
+<h2 id="Path-B-Create-a-custom-analyzer" class="common-anchor-header">方案 B：建立自訂分析器<button data-href="#Path-B-Create-a-custom-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -396,7 +396,7 @@ schema.add_field(
      <td><ul><li><p>輸入：<code translate="no">"机器学习算法"</code></p></li><li><p>輸出：<code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
    </tr>
 </table>
-<h5 id="Thai" class="common-anchor-header">泰語</h5><p>對於大多數泰文文本，請使用內建的 <a href="/docs/zh-hant/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。僅在需要建立自訂分析器管線時，才使用獨立的 <a href="/docs/zh-hant/thai-tokenizer.md"><code translate="no">thai</code></a> 分詞器，僅限於需要建立自訂分析器管線時使用。</p>
+<h5 id="Thai" class="common-anchor-header">泰語</h5><p>對於大多數泰文文本，請使用內建的 <a href="/docs/zh-hant/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。僅在需要建立自訂分析器管線時，才使用獨立的 <a href="/docs/zh-hant/thai-tokenizer.md"><code translate="no">thai</code></a> 分詞器，僅限於您需要建立自訂分析器管線時。</p>
 <table>
    <tr>
      <th><p>分詞器</p></th>
@@ -445,18 +445,18 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/zh-hant/icu-tokenizer.md"><code translate="no">icu</code></a></p></td>
      <td><p>支援 Unicode 的分詞（國際 Unicode 元件）</p></td>
-     <td><p>混合文字系統、未知語言，或僅需簡單分詞的情境</p></td>
+     <td><p>混合文字系統、未知語言，或僅需簡單分詞時</p></td>
      <td><ul><li><p>輸入：<code translate="no">"Hello 世界 مرحبا"</code></p></li><li><p>輸出：<code translate="no">['Hello', ' ', '世界', ' ', 'مرحبا']</code></p></li></ul></td>
    </tr>
 </table>
-<p><strong>何時應使用 ICU</strong>：</p>
+<p><strong>何時應使用 icu</strong>：</p>
 <ul>
 <li><p>在無法實際進行語言識別的混合語言情境中。</p></li>
-<li><p>您希望避免<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>或<a href="/docs/zh-hant/language-identifier.md">語言識別器</a>所帶來的額外負擔。</p></li>
+<li><p>您不希望承擔<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>或<a href="/docs/zh-hant/language-identifier.md">語言識別</a>器的額外開銷。</p></li>
 <li><p>內容雖以某種主要語言為主，但偶爾會出現對整體意義影響甚微的外來詞（例如：英文文本中零星出現日文或法文的品牌名稱或技術術語）。</p></li>
 </ul>
-<p><strong>替代方案</strong>：若需更精確地處理多語言內容，請考慮使用多語言分析器或語言識別器。詳細資訊請參閱《<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>》或《<a href="/docs/zh-hant/language-identifier.md">語言識別器</a>》。</p>
-<h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">步驟 2：新增篩選器以提升精準度<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
+<p><strong>替代方案</strong>：若需更精確地處理多語言內容，請考慮使用多語言分析器或語言識別器。詳情請參閱《<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>》或《<a href="/docs/zh-hant/language-identifier.md">語言識別器</a>》。</p>
+<h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">步驟 2：新增篩選器以提高精準度<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -483,7 +483,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/zh-hant/lowercase-filter.md"><code translate="no">lowercase</code></a></p></td>
      <td><p>將所有詞元轉換為小寫</p></td>
-     <td><p>通用 - 適用於所有區分大小寫的語言</p></td>
+     <td><p>通用型 — 適用於所有區分大小寫的語言</p></td>
      <td><ul><li><p>輸入：<code translate="no">["Apple", "iPhone"]</code></p></li><li><p>輸出：<code translate="no">[['apple'], ['iphone']]</code></p></li></ul></td>
    </tr>
    <tr>
@@ -495,14 +495,14 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/zh-hant/stop-filter.md"><code translate="no">stop</code></a></p></td>
      <td><p>移除常見的無意義詞彙</p></td>
-     <td><p>多數語言——對於以空格分隔的語言特別有效</p></td>
+     <td><p>多數語言——對以空格分隔的語言特別有效</p></td>
      <td><ul><li><p>輸入：<code translate="no">["the", "quick", "brown", "fox"]</code></p></li><li><p>輸出：<code translate="no">[[], ['quick'], ['brown'], ['fox']]</code></p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>對於東亞語言（中文、日文、韓文等），應著重採用<a href="/docs/zh-hant/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">特定語言的過濾器</a>。這些語言通常採用不同的文字處理方法，因此詞幹提取可能無法帶來顯著效益。</p>
+<p>對於東亞語言（中文、日文、韓文等），應改為採用<a href="/docs/zh-hant/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">特定語言的過濾器</a>。這些語言通常採用不同的文字處理方法，因此詞幹提取可能無法帶來顯著效益。</p>
 </div>
-<h4 id="Text-normalization-filters" class="common-anchor-header">文字標準化篩選器</h4><p>這些篩選器可將文字變體標準化，以提升匹配的一致性：</p>
+<h4 id="Text-normalization-filters" class="common-anchor-header">文字標準化過濾器</h4><p>這些篩選器可將文字變體標準化，以提升匹配的一致性：</p>
 <table>
    <tr>
      <th><p>篩選器</p></th>
@@ -512,12 +512,12 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/ascii-folding-filter.md"><code translate="no">asciifolding</code></a></p></td>
-     <td><p>將帶有重音符號的字元轉換為 ASCII 等效字元</p></td>
+     <td><p>將帶有音標符號的字元轉換為 ASCII 對應字元</p></td>
      <td><p>國際內容、使用者生成內容</p></td>
      <td><ul><li><p>輸入：<code translate="no">["café", "naïve", "résumé"]</code></p></li><li><p>輸出：<code translate="no">[['cafe'], ['naive'], ['resume']]</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="Token-filtering" class="common-anchor-header">標記過濾</h4><p>根據字元內容或長度控制保留哪些詞元：</p>
+<h4 id="Token-filtering" class="common-anchor-header">標記過濾</h4><p>根據字元內容或長度控制應保留哪些詞元：</p>
 <table>
    <tr>
      <th><p>篩選</p></th>
@@ -527,19 +527,19 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>移除獨立的標點符號詞元</p></td>
-     <td><p>清理由<code translate="no">jieba</code> 、<code translate="no">lindera</code> 、<code translate="no">icu</code> 等標記器產生的輸出結果，這些標記器會將標點符號視為單一標記</p></td>
-     <td><ul><li><p>輸入：<code translate="no">["Hello", "!", "world"]</code></p></li><li><p>輸出：<code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>移除包含標點符號的標記</p></td>
+     <td><p>清理由<code translate="no">jieba</code> 、<code translate="no">lindera</code> 及<code translate="no">icu</code> 標記化器產生的輸出結果，這些標記化器會將標點符號視為獨立的標記。含有單詞內部標點符號的標記（例如<code translate="no">don't</code> 或<code translate="no">3.5kg</code> ）將被完全移除；請使用 <a href="/docs/zh-hant/regex-filter.md"><code translate="no">regex</code></a> 篩選器來保留它們</p></td>
+     <td><ul><li><p>輸入：<code translate="no">["Hello", "!", "world"]</code></p></li><li><p>輸出：<code translate="no">[['Hello'], ['world']]</code></p></li><li><p>輸入：<code translate="no">["don't", "buy"]</code></p></li><li><p>輸出：<code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
      <td><p>僅保留字母和數字</p></td>
-     <td><p>技術內容、乾淨的文字處理</p></td>
+     <td><p>技術內容，純文字處理</p></td>
      <td><ul><li><p>輸入：<code translate="no">["user123", "test@email.com"]</code></p></li><li><p>輸出：<code translate="no">[['user123'], ['test', 'email', 'com']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh-hant/length-filter.md"><code translate="no">length</code></a></p></td>
-     <td><p>移除超出指定長度範圍的標記</p></td>
+     <td><p>移除超出指定長度範圍的詞元</p></td>
      <td><p>過濾雜訊（過長的語素）</p></td>
      <td><ul><li><p>輸入：<code translate="no">["a", "very", "extraordinarily"]</code></p></li><li><p>輸出：<code translate="no">[['a'], ['very'], []]</code> （若<strong>max=10</strong>）</p></li></ul></td>
    </tr>
@@ -583,7 +583,7 @@ schema.add_field(
      <td><ul><li><p>輸入：<code translate="no">["中文"]</code></p></li><li><p>輸出：<code translate="no">[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
    </tr>
 </table>
-<h3 id="Step-3-Combine-and-implement" class="common-anchor-header">步驟 3：組合與實作<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">
+<h3 id="Step-3-Combine-and-implement" class="common-anchor-header">步驟 3：整合與實作<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -639,9 +639,9 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <button class="copy-code-btn"></button></code></pre>
 <p>常見需檢查的問題：</p>
 <ul>
-<li><p><strong>過度分詞</strong>：技術術語被錯誤分割</p></li>
+<li><p><strong>過度分詞</strong>：技術術語被錯誤地拆分</p></li>
 <li><p><strong>分詞不足</strong>：短語未被正確分割</p></li>
-<li><p><strong>遺漏標記</strong>：重要術語被過濾掉</p></li>
+<li><p><strong>缺失標記</strong>：重要術語被過濾掉</p></li>
 </ul>
 <p>有關詳細用法，請參閱<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md">run_analyzer</a>。</p>
 <h2 id="Recommended-configurations-by-use-case" class="common-anchor-header">依使用情境建議的設定<button data-href="#Recommended-configurations-by-use-case" class="anchor-icon" translate="no">
@@ -659,7 +659,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本節針對在 Milvus 中使用分析器時常見的使用情境，提供建議的分詞器與篩選器設定。請選擇最符合您的內容類型與搜尋需求的組合。</p>
+    </button></h2><p>本節提供在 Milvus 中使用分析器時，針對常見使用情境的建議分詞器與篩選器設定。請選擇最符合您的內容類型與搜尋需求的組合。</p>
 <div class="alert note">
 <p>在將分析器套用至您的資料集之前，我們建議您使用 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> 來測試並驗證文字分析的效能。</p>
 </div>
@@ -678,7 +678,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>請使用具備小寫轉換、語言專屬詞幹化及停用詞移除功能的<code translate="no">standard</code> 分詞器。此設定亦適用於其他歐洲語言，只需修改<code translate="no">language</code> 和<code translate="no">stop_words</code> 參數即可。</p>
+    </button></h3><p>請使用具備小寫轉換、語言特定詞幹化及停用詞移除功能的<code translate="no">standard</code> 分詞器。此設定亦適用於其他歐洲語言，只需修改<code translate="no">language</code> 和<code translate="no">stop_words</code> 參數即可。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># French example</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -764,9 +764,9 @@ analyzer_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>針對簡體中文，<code translate="no">cnalphanumonly</code> 會移除除中文字、英文字母及數字以外的所有詞元。此舉可避免標點符號影響搜尋品質。</p>
+<p>對於簡體中文，<code translate="no">cnalphanumonly</code> 會移除所有非中文字元、非英數字元及非數字的詞元。此舉可避免標點符號影響搜尋品質。</p>
 </div>
-<p>若使用者可能透過輸入拼音來搜尋中文內容，請使用自訂分析器，搭配<code translate="no">jieba</code> 分詞器以及 <a href="/docs/zh-hant/pinyin-filter.md"><code translate="no">pinyin</code></a> 篩選器，而非內建的<code translate="no">chinese</code> 分析器。</p>
+<p>若使用者可能透過輸入拼音來搜尋中文內容，請使用自訂分析器，並搭配<code translate="no">jieba</code> 分詞器以及 <a href="/docs/zh-hant/pinyin-filter.md"><code translate="no">pinyin</code></a> 篩選器，而非內建的<code translate="no">chinese</code> 分析器。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>]
@@ -794,7 +794,7 @@ analyzer_params = {
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
@@ -818,7 +818,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>與日文類似，請搭配韓語詞典使用<code translate="no">lindera</code> 分詞器：</p>
+    </button></h3><p>與日文類似，請搭配韓文詞典使用<code translate="no">lindera</code> 分詞器：</p>
 <pre><code translate="no" class="language-json">analyzer_params = <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;tokenizer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;lindera&quot;</span><span class="hljs-punctuation">,</span>
@@ -857,10 +857,10 @@ analyzer_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>進階多語言處理</strong>：</p>
-<p>若需更精確地控制不同語言間的詞元行為：</p>
+<p>若要更精確地控制不同語言間的詞元行為：</p>
 <ul>
 <li><p>請<strong>使用多語言分析器</strong>配置。詳細資訊請參閱《<a href="/docs/zh-hant/multi-language-analyzers.md">多語言分析器</a>》。</p></li>
-<li><p>在您的內容中實作<strong>語言識別碼</strong>。詳細資訊請參閱《<a href="/docs/zh-hant/language-identifier.md">語言識別碼</a>》。</p></li>
+<li><p>在您的內容中實作<strong>語言識別器</strong>。詳細資訊請參閱《<a href="/docs/zh-hant/language-identifier.md">語言識別器</a>》。</p></li>
 </ul>
 <h2 id="Integrate-with-text-retrieval-features" class="common-anchor-header">與文本檢索功能整合<button data-href="#Integrate-with-text-retrieval-features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -880,9 +880,9 @@ analyzer_params = {
     </button></h2><p>選取分析器後，即可將其與 Milvus 提供的文字檢索功能整合。</p>
 <ul>
 <li><p><strong>全文檢索</strong></p>
-<p>分析器會透過稀疏向量生成，直接影響基於 BM25 的全文搜尋。請在索引建立與查詢時使用相同的分析器，以確保分詞結果的一致性。特定語言的分析器通常能提供比通用分析器更佳的 BM25 評分。有關實作細節，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文搜尋」</a>。</p></li>
+<p>分析器會透過生成稀疏向量，直接影響基於 BM25 的全文搜尋。請在索引與查詢時使用相同的分析器，以確保分詞結果的一致性。特定語言的分析器通常能提供比通用分析器更佳的 BM25 評分。有關實作詳情，請參閱「<a href="/docs/zh-hant/full-text-search.md">全文搜尋」</a>。</p></li>
 <li><p><strong>文字比對</strong></p>
-<p>文字比對操作會根據分析器的輸出結果，對查詢內容與索引內容進行精確的詞元比對。有關實作細節，請參閱<a href="/docs/zh-hant/keyword-match.md">「文字比對」</a>。</p></li>
+<p>文字比對操作會根據分析器的輸出結果，在查詢與索引內容之間執行精確的詞元比對。有關實作細節，請參閱《<a href="/docs/zh-hant/keyword-match.md">文字比對》</a>。</p></li>
 <li><p><strong>短語匹配</strong></p>
-<p>短語匹配需要對多詞表達式進行一致的詞元分割，以維持短語的邊界與語意。有關實作細節，請參閱《<a href="/docs/zh-hant/phrase-match.md">短語匹配》</a>。</p></li>
+<p>短語匹配需要對多詞表達式進行一致的詞元分割，以維持短語的邊界與語意。有關實作細節，請參閱「<a href="/docs/zh-hant/phrase-match.md">短語匹配</a>」。</p></li>
 </ul>

@@ -35,8 +35,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは、ストレージと演算を分離したシステムです。<strong>ストリーミングノードは</strong>、すべての書き込み操作をWrite-Ahead Log（WAL）に追加し、<strong>増え続けるデータ</strong>（WAL内にあり、まだ永続化されていないデータ）を保持します。 リカバリ処理により、成長中のデータは<strong>履歴データ</strong>（MinIOやS3などのオブジェクトストレージに永続化されたシール済みセグメント）に変換され、<strong>クエリノード</strong>によって提供されます。 各検索またはクエリリクエストは、コレクションのWALをホストするストリーミングノード上の<strong>クエリデリゲーター</strong>によって受信されます。デリゲーターはクエリプランを生成し、増大中のデータ部分をローカルで実行し、履歴データ部分を関連するクエリノードに転送し、結果をマージしてから返します。詳細については、<a href="/docs/ja/streaming_service.md">「ストリーミングサービス」</a>を参照してください。</p>
-<p>一貫性を保証するため、Milvusはすべてのメッセージに、WAL内での順序を決定するタイムスタンプ・オラクル（TSO）タイムスタンプを割り当て、データメッセージとともに同期タイムスタンプをWALに継続的に挿入します。 同期タイムスタンプ（syncTs）を受信するたびに、それは ServiceTime として記録されます。つまり、その ServiceTime より前のすべてのデータがクエリから参照可能になります。Milvus は、この ServiceTime に基づいて、一貫性と可用性に関するさまざまなユーザー要件を満たすために、保証タイムスタンプ（GuaranteeTs）を提供します。 ユーザーは、検索リクエストでGuaranteeTsを指定することにより、指定された時点以前のデータを検索範囲に含める必要があることをデリゲーターに通知できます。</p>
+    </button></h2><p>Milvusは、ストレージと演算を分離したシステムです。<strong>ストリーミングノードは</strong>、すべての書き込み操作をWrite-Ahead Log（WAL）に追加し、<strong>増え続けるデータ</strong>（WAL内にあり、まだ永続化されていないデータ）を保持します。 リカバリ処理により、成長中のデータは<strong>履歴データ</strong>（MinIOやS3などのオブジェクトストレージに永続化されたシール済みセグメント）に変換され、<strong>クエリノード</strong>によって提供されます。 各検索またはクエリリクエストは、コレクションのWALをホストするストリーミングノード上の<strong>クエリデリゲーター</strong>によって受信されます。デリゲーターはクエリプランを生成し、増分データ部分をローカルで実行し、履歴データ部分を関連するクエリノードに転送し、結果をマージしてから返します。詳細については、「<a href="/docs/ja/streaming_service.md">ストリーミングサービス」</a>を参照してください。</p>
+<p>一貫性を保証するため、Milvusはすべてのメッセージに、WAL内での順序を決定するタイムスタンプ・オラクル（TSO）タイムスタンプを割り当て、データメッセージとともに同期タイムスタンプをWALに継続的に挿入します。 同期タイムスタンプ（syncTs）を受信するたびに、それは ServiceTime として記録されます。つまり、その ServiceTime より前のすべてのデータがクエリから参照可能になります。Milvus は、ServiceTime に基づいて、一貫性と可用性に関するさまざまなユーザー要件を満たすために、保証タイムスタンプ（GuaranteeTs）を提供します。 ユーザーは、検索リクエストでGuaranteeTを指定することにより、指定された時点以前のデータを検索範囲に含める必要があることをデリゲーターに通知できます。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
@@ -60,7 +60,7 @@ summary: >-
 <li><p><strong>Bounded Staleness</strong></p>
 <p>GuaranteeTs は最新のタイムスタンプよりも前の時点に設定されるため、検索は、一部の最近のデータがまだ表示されていないという許容範囲内で実行されます。</p></li>
 <li><p><strong>セッション</strong></p>
-<p>クライアントがデータを挿入した最新の時点を GuaranteeTs として使用し、クライアントによって挿入されたすべてのデータを検索の対象に含めるようにします。</p></li>
+<p>クライアントがデータを挿入した最新の時点が GuaranteeTs として使用されるため、検索はクライアントによって挿入されたすべてのデータを網羅することができます。</p></li>
 </ul>
 <p>Milvus は、デフォルトの一貫性レベルとして「Bounded Staleness」を使用します。GuaranteeTs が指定されていない場合、最新の ServiceTime が GuaranteeTs として使用されます。</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">一貫性レベルの設定<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
@@ -78,7 +78,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションの作成時、および検索やクエリの実行時に、さまざまな一貫性レベルを設定できます。</p>
+    </button></h2><p>一貫性レベルは、コレクションの作成時に設定したり、コレクション作成後に変更したり、個々の検索やクエリに対して上書きしたりすることができます。</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">コレクション作成時の整合性レベルの設定<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -165,7 +165,58 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> パラメータに指定可能な値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索における一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">コレクションの一貫性レベルの変更<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>既存のコレクションの一貫性レベルは、その<code translate="no">consistency_level</code> プロパティを変更することで変更できます。新しいレベルは、独自の一貫性レベルを指定していない、そのコレクションに対する以降の検索およびクエリに適用されます。また、この変更を行う際にコレクションを解放する必要はありません。次のコード例では、一貫性レベルを「<strong>Eventually</strong>」に変更しています。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索での一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

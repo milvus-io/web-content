@@ -310,7 +310,7 @@
         "order": 1,
         "children": [
           {
-            "label": "About the Collection",
+            "label": "关于本Collection",
             "id": "manage-collections.md",
             "order": 0,
             "children": []
@@ -328,7 +328,7 @@
             "children": []
           },
           {
-            "label": "查看 Collections",
+            "label": "View Collections",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "解合器",
+                    "label": "解聚剂",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1197,7 +1191,7 @@
             "order": 13,
             "children": [
               {
-                "label": "使用 StructArray 进行基本向量搜索",
+                "label": "使用 StructArray 进行基本的向量搜索",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1241,7 +1235,7 @@
             ]
           },
           {
-            "label": "Elasticsearch 向 Milvus 发送的查询",
+            "label": "Elasticsearch 向 Milvus 发起的查询",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 14,
             "children": []
@@ -1377,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "RRF 排名器",
+                "label": "RRF 排名系统",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1445,7 +1439,7 @@
                     "children": []
                   },
                   {
-                    "label": "TEI 排名器",
+                    "label": "TEI 排名工具",
                     "id": "tei-ranker.md",
                     "order": 2,
                     "children": []
@@ -1496,12 +1490,6 @@
             "label": "使用 mmap",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "聚簇压缩",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1611,7 +1599,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Milvus 的 Agents.md",
+            "label": "Milvus 版 Agents.md",
             "id": "agents_overview.md",
             "order": 0,
             "children": []
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "Node.js SDK",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RESTful API v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "模式设计",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "搜索模式",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "指数选择",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "RAG 管道",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -1663,7 +1669,7 @@
         "children": []
       },
       {
-        "label": "Claude Code 的 MCP 服务器",
+        "label": "Claude 代码的 MCP 服务器",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -2205,7 +2211,7 @@
         "children": []
       },
       {
-        "label": "Milvus Backup",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -2270,7 +2276,7 @@
                     "children": []
                   },
                   {
-                    "label": "在不同存储桶之间的实例之间进行迁移",
+                    "label": "在不同存储桶的实例之间迁移",
                     "id": "cross-bucket-backup-and-restore.md",
                     "order": 2,
                     "children": []
@@ -3213,7 +3219,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 构建图 RAG",
+        "label": "使用 Milvus 构建 RAG 图",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []

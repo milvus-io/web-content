@@ -23,8 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus bietet Vergleichs-, Bereichs-, arithmetische, logische und NULL-Operatoren zum Filtern von Entitäten. Jeder Operator unterstützt bestimmte Feldtypen.</p>
 <div class="alert note">
-<p>Das Literal auf der linken Seite eines Filterausdrucks kann entweder ein Sammlungsfeldname sein, wie z. B. „ <code translate="no">status</code> “, „ <code translate="no">color</code> “ usw., die in den folgenden Beispielen verwendet werden, oder der Name eines StructArray-Unterfelds an einem bestimmten Elementindex, wie in „ <code translate="no">filter = 'struct[0][subfield] &gt; 10'</code> “.</p>
-<p>Einzelheiten zur skalaren Filterung in einem StructArray-Feld finden Sie unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Der linke Operand kann ein Sammlungsfeld sein, wie z. B. „ <code translate="no">status</code> “, oder ein StructArray-Unterfeld an einem bestimmten Elementindex, wie z. B. „ <code translate="no">struct[0][subfield] &gt; 10</code> “. Siehe <a href="/docs/de/struct-array-operators.md">StructArray-Operatoren</a>.</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">Vergleichsoperatoren<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,7 +58,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">==</code> (Gleich)</p></li>
-<li><p><code translate="no">!=</code> (Ungleich)</p></li>
+<li><p><code translate="no">!=</code> (Nicht gleich)</p></li>
 <li><p><code translate="no">&gt;</code> (Größer als)</p></li>
 <li><p><code translate="no">&lt;</code> (Kleiner als)</p></li>
 <li><p><code translate="no">&gt;=</code> (Größer als oder gleich)</p></li>
@@ -360,7 +359,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dies ist nützlich, wenn Sie prüfen möchten, ob eine Entität in einer Liste von Werten enthalten ist.</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">Operatoren für den Musterabgleich<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -378,8 +376,8 @@ summary: >-
       </svg>
     </button></h2><p>Operatoren für den Musterabgleich helfen dabei, Zeichenfolgenwerte anhand von Platzhaltermustern oder regulären Ausdrücken zu filtern.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: Wird verwendet, um einfache Platzhaltermuster mit Zeichenfolgenwerten abzugleichen. Beispielsweise findet „ <code translate="no">name LIKE &quot;Prod%&quot;</code> “ Werte, die mit „ <code translate="no">Prod</code> “ beginnen.</p></li>
-<li><p><code translate="no">=~</code>: Wird verwendet, um einen Zeichenfolgenwert mit einem RE2-regulären Ausdruck abzugleichen. Beispielsweise passt „ <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> “ auf Werte, die einen Fehlercode wie „ <code translate="no">E1001</code> “ enthalten.</p></li>
+<li><p><code translate="no">LIKE</code>: Wird verwendet, um einfache Platzhaltermuster mit Zeichenfolgenwerten abzugleichen. Beispielsweise passt „ <code translate="no">name LIKE &quot;Prod%&quot;</code> “ auf Werte, die mit „ <code translate="no">Prod</code> “ beginnen.</p></li>
+<li><p><code translate="no">=~</code>: Wird verwendet, um einen Zeichenfolgenwert mit einem RE2-regulären Ausdruck abzugleichen. Beispielsweise findet „ <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> “ Werte, die einen Fehlercode wie „ <code translate="no">E1001</code> “ enthalten.</p></li>
 <li><p><code translate="no">!~</code>: Wird verwendet, um Zeichenfolgenwerte auszuschließen, die einem RE2-regulären Ausdruck entsprechen. Dies entspricht „ <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> “.</p></li>
 </ul>
 <p>So finden Sie Entitäten, bei denen „ <code translate="no">name</code> “ mit „ <code translate="no">Prod</code> “ beginnt:</p>
@@ -463,7 +461,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zur Wahl zwischen „ <code translate="no">LIKE</code> “ und regulären Ausdrücken, zu unterstützten Feldtypen, zur Syntax regulärer Ausdrücke, zu Escape-Regeln und zur Leistung finden Sie unter <a href="/docs/de/pattern-matching.md">„Pattern Matching</a>“. Milvus ermöglicht es Ihnen außerdem, einen „ <code translate="no">NGRAM</code> “-Index für „ <code translate="no">VARCHAR</code> “-Felder oder JSON-String-Pfade zu erstellen, um geeignete Musterabgleichfilter zu beschleunigen. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">„NGRAM</a>“.</p>
+<p>Informationen zu Syntax, Escaping, Feldunterstützung und Beschleunigungsoptionen wie „ <code translate="no">NGRAM</code> “ finden Sie unter <a href="/docs/de/pattern-matching.md">„Pattern Matching</a>“.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">Arithmetische Operatoren<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -479,7 +477,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mit arithmetischen Operatoren können Sie Bedingungen erstellen, die auf Berechnungen mit numerischen Feldern basieren.</p>
+    </button></h2><p>Mit arithmetischen Operatoren können Sie Bedingungen auf der Grundlage von Berechnungen mit numerischen Feldern erstellen.</p>
 <h3 id="Supported-arithmetic-operators" class="common-anchor-header">Unterstützte arithmetische Operatoren<button data-href="#Supported-arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -588,7 +586,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Arithmetische Operatoren unterstützen nur Ausdrücke, die ein <strong>einzelnes Feld und eine Konstante</strong> beinhalten. Ausdrücke, die zwei Felder arithmetisch kombinieren – wie beispielsweise „ <code translate="no">price * quantity &gt; 100</code> “ – werden derzeit nicht unterstützt und führen zu einem Fehler. Wenn Sie nach einem abgeleiteten Wert filtern müssen, der aus mehreren Feldern berechnet wurde, sollten Sie in Betracht ziehen, den vorberechneten Wert beim Einfügen als separates Skalarfeld zu speichern.</p>
+<p>Arithmetische Operatoren unterstützen nur Ausdrücke, die ein <strong>einzelnes Feld und eine Konstante</strong> beinhalten. Ausdrücke, die zwei Felder arithmetisch kombinieren – wie beispielsweise „ <code translate="no">price * quantity &gt; 100</code> “ – werden derzeit nicht unterstützt und führen zu einer Fehlermeldung. Wenn Sie nach einem abgeleiteten Wert filtern müssen, der aus mehreren Feldern berechnet wurde, sollten Sie in Betracht ziehen, den vorberechneten Wert beim Einfügen als separates Skalarfeld zu speichern.</p>
 </div>
 <h2 id="Bitwise-operators" class="common-anchor-header">Bitweise Operatoren<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -605,7 +603,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bitweise Operatoren sind nützlich, wenn ein Ganzzahlfeld mehrere Flags kodiert, wie z. B. Berechtigungen, Feature-Flags oder Statusbits. Sie können diese Operatoren in Filterausdrücken verwenden, um einzelne Bits in einem Ganzzahlwert zu prüfen, zu kombinieren oder zu vergleichen.</p>
+    </button></h2><p>Bitweise Operatoren sind nützlich, wenn ein Ganzzahlfeld mehrere Flags codiert, wie z. B. Berechtigungen, Feature-Flags oder Statusbits. Sie können diese Operatoren in Filterausdrücken verwenden, um einzelne Bits in einem Ganzzahlwert zu prüfen, zu kombinieren oder zu vergleichen.</p>
 <p>Bei Skalarfeldern gelten bitweise Operatoren für ganzzahlige Feldtypen wie „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “ und „ <code translate="no">INT64</code> “.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">Unterstützte bitweise Operatoren<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -659,7 +657,7 @@ summary: >-
 <tr><td><code translate="no">ADMIN</code></td><td><code translate="no">8</code></td></tr>
 </tbody>
 </table>
-<p>Beispielsweise bedeutet „ <code translate="no">permissions = 5</code> “, dass die Bits „ <code translate="no">READ</code> “ und „ <code translate="no">SHARE</code> “ gesetzt sind, da <code translate="no">5 = 1 + 4</code> gilt.</p>
+<p>Beispielsweise bedeutet „ <code translate="no">permissions = 5</code> “, dass die Bits „ <code translate="no">READ</code> “ und „ <code translate="no">SHARE</code> “ gesetzt sind, da „ <code translate="no">5 = 1 + 4</code> “ gilt.</p>
 <p>Um Entitäten zu finden, bei denen das Bit „ <code translate="no">SHARE</code> “ gesetzt ist, verwenden Sie die bitweise UND-Verknüpfung (<code translate="no">&amp;</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -714,7 +712,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Um Entitäten zu finden, deren Berechtigungsbits sich von „ <code translate="no">READ + WRITE + SHARE</code> “ nur durch das Bit „ <code translate="no">WRITE</code> “ unterscheiden, verwenden Sie das bitweise XOR (<code translate="no">^</code>):</p>
+<p>Um Entitäten zu finden, deren Berechtigungsbits sich von „ <code translate="no">READ + WRITE + SHARE</code> “ nur durch das Bit „ <code translate="no">WRITE</code> “ unterscheiden, verwenden Sie die bitweise XOR-Operation (<code translate="no">^</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -760,6 +758,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Logische Operatoren werden verwendet, um mehrere Bedingungen zu einem komplexeren Filterausdruck zu kombinieren. Dazu gehören „ <code translate="no">AND</code> “, „ <code translate="no">OR</code> “ und „ <code translate="no">NOT</code> “.</p>
+<div class="alert note">
+<p>Jede Bedingung kann einen eigenen zulässigen Index oder Scanpfad verwenden; ein Index-Typ muss nicht den gesamten Ausdruck abdecken. Siehe <a href="/docs/de/scalar_index.md">Skalarer Index</a>.</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">Unterstützte logische Operatoren<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -949,7 +950,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Angenommen, eine Sammlung namens „ <code translate="no">products</code> “ ist indiziert und geladen. Die Sammlung verfügt über einen Primärschlüssel vom Typ „ <code translate="no">INT64</code> “ mit dem Namen „ <code translate="no">id</code> “, ein nullfähiges Feld vom Typ „ <code translate="no">VARCHAR</code> “ mit dem Namen „ <code translate="no">category</code> “ sowie ein nullfähiges, dreidimensionales Feld vom Typ „ <code translate="no">FLOAT_VECTOR</code> “ mit dem Namen „ <code translate="no">embedding</code> “. Sie enthält bereits die folgenden Entitäten:</p>
+    </button></h3><p>Angenommen, eine Sammlung namens „ <code translate="no">products</code> “ ist in Milvus 3.0.3 oder höher indiziert und geladen. Die Sammlung verfügt über einen Primärschlüssel vom Typ „ <code translate="no">INT64</code> “ mit dem Namen „ <code translate="no">id</code> “, ein nullfähiges Feld vom Typ „ <code translate="no">VARCHAR</code> “ mit dem Namen „ <code translate="no">category</code> “ sowie ein nullfähiges, dreidimensionales Feld vom Typ „ <code translate="no">FLOAT_VECTOR</code> “ mit dem Namen „ <code translate="no">embedding</code> “. Sie enthält bereits die folgenden Entitäten:</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1176,8 +1177,11 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td>Gewöhnliche Vektortypen</td><td>NULL bedeutet, dass der Vektorwert fehlt. Ein Vektor, dessen Komponenten Null sind, ist nicht NULL.</td></tr>
 </tbody>
 </table>
-<p>Bei einem unterstützten Feld, das mit „ <code translate="no">nullable=False</code> “ definiert ist, liefert „ <code translate="no">IS NULL</code> “ keine Treffer, während „ <code translate="no">IS NOT NULL</code> “ alle sichtbaren Entitäten findet. Andere Bedingungen im Filter gelten weiterhin.</p>
-<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Verwenden Sie NULL-Filter bei der Vektorsuche<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
+<p>Bei einem unterstützten Feld, das mit „ <code translate="no">nullable=False</code> “ definiert wurde, findet „ <code translate="no">IS NULL</code> “ keine Entitäten, während „ <code translate="no">IS NOT NULL</code> “ alle sichtbaren Entitäten findet. Andere Bedingungen im Filter gelten weiterhin.</p>
+<div class="alert note">
+<p>Skalare NULL-Filter verwenden Gültigkeitsinformationen aus einem zulässigen Index oder aus Felddaten; sie erfordern keinen bestimmten skalaren Indextyp. Ein nicht-nullfähiges Feld kann ein konstantes Ergebnis liefern.</p>
+</div>
+<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Verwendung von NULL-Filtern bei der Vektorsuche<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1192,7 +1196,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die gleichen Operatoren können in Suchfiltern verwendet werden, allerdings muss eine Entität auch einen Vektor in dem durchsuchten Feld enthalten, um an der Ähnlichkeitssuche teilzunehmen.</p>
+    </button></h3><p>Die gleichen Operatoren können in Suchfiltern verwendet werden, jedoch benötigt eine Entität zusätzlich einen Vektor in dem durchsuchten Feld, um an der Ähnlichkeitssuche teilzunehmen.</p>
 <p>Betrachten Sie anhand der obigen Beispieldaten eine Suche mit „ <code translate="no">anns_field=&quot;embedding&quot;</code> “:</p>
 <table>
 <thead>
@@ -1204,8 +1208,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Beide Entitäten verfügen über einen „ <code translate="no">embedding</code> “-Vektor.</td></tr>
 </tbody>
 </table>
-<p>Alle drei Filter sind gültig. Eine Suche nach „ <code translate="no">embedding</code> “ mit „ <code translate="no">embedding IS NULL</code> “ liefert keine Treffer, da keine Entität beide Anforderungen erfüllen kann. Um die Entitäten mit fehlenden Einbettungen abzurufen, verwenden Sie „ <code translate="no">query()</code> “, wie oben gezeigt.</p>
-<p>Die Vektorsuche überspringt bereits Entitäten, deren gesuchtes Vektorfeld NULL ist, sodass <code translate="no">embedding IS NOT NULL</code> die Kandidaten für eine Suche nach <code translate="no">embedding</code> nicht weiter eingrenzt. Das Ranking, andere Filter und das Suchlimit bestimmen weiterhin, welche Kandidaten zurückgegeben werden.</p>
+<p>Um fehlende Einbettungen abzurufen, verwenden Sie „ <code translate="no">query()</code> “; eine Suche nach „ <code translate="no">embedding</code> “ mit „ <code translate="no">embedding IS NULL</code> “ ist gültig, liefert jedoch keine Treffer. Die Vektorsuche überspringt bereits NULL-Einbettungen, sodass „ <code translate="no">embedding IS NOT NULL</code> “ die Kandidaten nicht weiter eingrenzt. Das Ranking, andere Filter und das Suchlimit bestimmen weiterhin die zurückgegebenen Treffer.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Tipps zur Verwendung grundlegender Operatoren mit JSON- und ARRAY-Feldern<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1221,8 +1224,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Grundoperatoren in Milvus sind zwar vielseitig und können auf Skalarfelder angewendet werden, lassen sich aber auch effektiv mit den Schlüsseln und Indizes in den JSON- und ARRAY-Feldern nutzen.</p>
-<p>Wenn Sie beispielsweise ein Feld „ <code translate="no">product</code> “ haben, das mehrere Schlüssel wie „ <code translate="no">price</code> “, „ <code translate="no">model</code> “ und „ <code translate="no">tags</code> “ enthält, verweisen Sie immer direkt auf den Schlüssel:</p>
+    </button></h2><p>Verweisen Sie direkt im Ausdruck auf einen JSON-Schlüssel oder ein ARRAY-Element. Um beispielsweise den Schlüssel „ <code translate="no">price</code> “ in einem JSON-Feld namens „ <code translate="no">product</code> “ zu filtern:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1276,22 +1278,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Fazit<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus bietet eine Reihe grundlegender Operatoren, die Ihnen Flexibilität beim Filtern und Abfragen Ihrer Daten bieten. Durch die Kombination von Vergleichs-, Bereichs-, arithmetischen und logischen Operatoren können Sie leistungsstarke Filterausdrücke erstellen, um Ihre Suchergebnisse einzugrenzen und die benötigten Daten effizient abzurufen.</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1309,4 +1296,4 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
       </svg>
     </button></h2><p><strong>Gibt es eine Begrenzung für die Länge der Liste der Übereinstimmungswerte in Filterbedingungen (z. B. filter=’color in ["red", "green", “blue”]')? Was soll ich tun, wenn die Liste zu lang ist?</strong></p>
 <p>Milvus legt keine Längenbeschränkung für die Liste der Übereinstimmungswerte in Filterbedingungen fest. Eine übermäßig lange Liste kann jedoch die Abfrageleistung erheblich beeinträchtigen.
-Wenn Ihre Filterbedingung eine lange Liste von Übereinstimmungswerten oder einen komplexen Ausdruck mit vielen Elementen enthält, empfehlen wir die Verwendung <a href="/docs/de/filtering-templating.md">von Filtervorlagen</a>, um die Abfrageleistung zu verbessern.</p>
+Wenn Ihre Filterbedingung eine lange Liste von Übereinstimmungswerten oder einen komplexen Ausdruck mit vielen Elementen enthält, empfehlen wir die Verwendung <a href="/docs/de/filtering-templating.md">von Filter-Templates</a>, um die Abfrageleistung zu verbessern.</p>

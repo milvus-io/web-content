@@ -3,8 +3,8 @@ id: removepunct-filter.md
 title: Remover PontuaçãoCompatible with Milvus 2.5.11+
 summary: >-
   O filtro «removepunct» remove tokens que contenham sinais de pontuação ou
-  espaços em branco. No caso de tokenizadores que mantêm a pontuação no interior
-  das palavras, este filtro remove o token afetado na íntegra.
+  espaços em branco. No caso de tokenizadores que mantêm a pontuação dentro das
+  palavras, este filtro remove o token afetado na íntegra.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">Remover Pontuação<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -24,7 +24,8 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h1><p>O filtro « <code translate="no">removepunct</code> » remove tokens que contenham pontuação ou espaços em branco do fluxo de tokens. Utilize-o quando pretender um processamento de texto mais limpo, que se concentre em palavras de conteúdo significativas em vez de sinais de pontuação.</p>
 <div class="alert note">
-<p>Este filtro é mais eficaz com os tokenizadores « <code translate="no">jieba</code> », « <code translate="no">lindera</code> » e « <code translate="no">icu</code> », que preservam a pontuação como tokens separados (por exemplo, « <code translate="no">&quot;Hello!&quot;</code> » → « <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> »). O tokenizador <code translate="no">standard</code> descarta a pontuação durante a tokenização. O tokenizador <code translate="no">whitespace</code> preserva a pontuação, incluindo a pontuação dentro de um token. Quando combinado com <code translate="no">whitespace</code>, <code translate="no">removepunct</code> remove o token na íntegra se este contiver pontuação ou espaços em branco; não retira caracteres individuais do token.</p>
+<p>Este filtro é mais eficaz com os tokenizadores « <code translate="no">jieba</code> », « <code translate="no">lindera</code> » e « <code translate="no">icu</code> », que preservam a pontuação como tokens separados (por exemplo, « <code translate="no">&quot;Hello!&quot;</code> » → « <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> »). O tokenizador <code translate="no">standard</code> descarta a pontuação durante a tokenização. O tokenizador <code translate="no">whitespace</code> preserva a pontuação, incluindo a pontuação dentro de um token. Quando combinado com <code translate="no">whitespace</code>, o <code translate="no">removepunct</code> remove o token na íntegra se este contiver pontuação ou espaços em branco; não retira caracteres individuais do token.</p>
+<p>Alguns tokenizadores mantêm a pontuação dentro de um único token. Por exemplo, <code translate="no">icu</code> tokeniza <code translate="no">don't</code>, <code translate="no">3.5kg</code> e <code translate="no">u.s.a</code> em tokens únicos que contêm pontuação, enquanto <code translate="no">removepunct</code> remove-os na totalidade, tornando os termos correspondentes impossíveis de pesquisar. Para remover apenas os tokens compostos inteiramente por sinais de pontuação e espaços em branco, mantendo os restantes, utilize o filtro <a href="/docs/pt/regex-filter.md">regex</a> com uma expressão que exija pelo menos um carácter que não seja de pontuação nem espaço em branco, tal como <code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code>.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Configuração<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +42,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O filtro « <code translate="no">removepunct</code> » está integrado no Milvus. Para o utilizar, basta especificar o seu nome na secção « <code translate="no">filter</code> » dentro de « <code translate="no">analyzer_params</code> ».</p>
+    </button></h2><p>O filtro « <code translate="no">removepunct</code> » está integrado no Milvus. Para o utilizar, basta especificar o seu nome na secção « <code translate="no">filter</code> » em « <code translate="no">analyzer_params</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

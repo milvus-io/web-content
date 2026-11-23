@@ -3,7 +3,7 @@ id: install_cluster-helm.md
 label: Helm
 related_key: Kubernetes
 summary: Descubre cómo instalar un clúster de Milvus en Kubernetes.
-title: Instalar Milvus Cluster con Helm
+title: Instalar el clúster de Milvus con Helm
 ---
 <h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Ejecutar Milvus en Kubernetes con Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><strong>Nuevo componente</strong>: se introduce <strong>el nodo de streaming</strong>, que viene habilitado por defecto</li>
 <li><strong>Componentes fusionados</strong>: <strong>el nodo de índice</strong> y <strong>el nodo de datos</strong> se combinan en un único <strong>nodo de datos</strong></li>
 </ul>
-<p>Para obtener información detallada sobre la arquitectura, consulta la <a href="/docs/es/architecture_overview.md">Descripción general de la arquitectura</a>.</p>
+<p>Para obtener detalles completos sobre la arquitectura, consulta la <a href="/docs/es/architecture_overview.md">Descripción general de la arquitectura</a>.</p>
 </div>
 <p><strong>Colas de mensajes alternativas:</strong> para realizar la implementación con Pulsar, Kafka o RocksMQ en lugar de Woodpecker, consulta <a href="#Optional-dependencies">«Dependencias opcionales</a>».</p>
 <p><strong>Próximos pasos:</strong>
@@ -197,7 +197,7 @@ El comando anterior implementa Milvus con las configuraciones recomendadas. Para
     </button></h3><p>Comprueba que la implementación se ha realizado correctamente verificando el estado de los pods:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Espera a que todos los pods muestren el estado «Running».</strong> Con la configuración v3.0.5, deberías ver pods similares a:</p>
+<p><strong>Espera a que todos los pods muestren el estado «Running».</strong> Con la configuración v3.0.5, deberías ver pods similares a estos:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
@@ -222,7 +222,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li><strong>Dependencias</strong>: <code translate="no">etcd</code> (metadatos), <code translate="no">minio</code> (almacenamiento de objetos), <code translate="no">woodpecker</code> (cola de mensajes)</li>
 </ul>
 <div class="alert note">
-<p>Con <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker se ejecuta como un <strong>StatefulSet dedicado</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por defecto —un quórum de 3 nodos más uno de reserva para la tolerancia a fallos; no establezcas <code translate="no">woodpecker.replicaCount</code> por debajo de 3) respaldado por un servicio sin interfaz gráfica, que utiliza MinIO como backend de almacenamiento; por lo tanto, el clúster cuenta con un conjunto de pods <code translate="no">woodpecker</code> independiente, distinto del nodo de streaming.</p>
+<p>Con <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker se ejecuta como un <strong>StatefulSet dedicado</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 réplicas por defecto —un quórum de 3 nodos más uno de reserva para la tolerancia a fallos; no establezcas <code translate="no">woodpecker.replicaCount</code> por debajo de 3) respaldado por un servicio sin interfaz gráfica, que utiliza MinIO como backend de almacenamiento — por lo que el clúster cuenta con un conjunto de pods <code translate="no">woodpecker</code> independiente, distinto del nodo de streaming.</p>
 </div>
 <p>También puedes acceder a la <strong>interfaz web de Milvus</strong> en <code translate="no">http://127.0.0.1:9091/webui/</code> una vez configurado el reenvío de puertos (véase el siguiente paso). Para más detalles, consulta <a href="/docs/es/milvus-webui.md">la interfaz web de Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Conectarse a Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
@@ -314,12 +314,12 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus incluye una herramienta gráfica integrada denominada Milvus WebUI a la que puede acceder a través de su navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre Milvus WebUI, consulta <a href="/docs/es/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus incluye una herramienta gráfica integrada denominada Milvus WebUI a la que se puede acceder a través del navegador. Milvus WebUI mejora la observabilidad del sistema con una interfaz sencilla e intuitiva. Puede utilizar Milvus WebUI para observar las estadísticas y métricas de los componentes y dependencias de Milvus, comprobar los detalles de la base de datos y la recopilación de datos, y ver una lista detallada de las configuraciones de Milvus. Para obtener más información sobre Milvus WebUI, consulta <a href="/docs/es/milvus-webui.md">Milvus WebUI</a></p>
 <p>Para habilitar el acceso a Milvus WebUI, es necesario redirigir el puerto del pod del proxy a un puerto local.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
 <button class="copy-code-btn"></button></code></pre>
-<p>Ahora puede acceder a la interfaz de usuario web de Milvus en <code translate="no">http://localhost:27018</code>.</p>
+<p>Ahora ya puede acceder a la interfaz de usuario web de Milvus en <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Offline-install" class="common-anchor-header">Instalación sin conexión<button data-href="#Offline-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,7 +357,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <p>El comando anterior genera plantillas de gráficos para un clúster de Milvus y guarda el resultado en un archivo de manifiesto denominado « <code translate="no">milvus_manifest.yaml</code> ». Con este manifiesto, puedes instalar un clúster de Milvus con sus componentes y dependencias en pods independientes.</p>
 <div class="alert note">
 <ul>
-<li>Para instalar una instancia de Milvus en modo autónomo, en el que todos los componentes de Milvus se encuentran dentro de un único pod, debe ejecutar <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false --set standalone.messageQueue=woodpecker --set woodpecker.enabled=true --set streaming.enabled=true zilliztech/milvus &gt; milvus_manifest.yaml</code> en su lugar para generar las plantillas de gráficos de una instancia de Milvus en modo autónomo.</li>
+<li>Para instalar una instancia de Milvus en modo autónomo, en el que todos los componentes de Milvus se encuentran dentro de un único pod, debe ejecutar « <code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false --set standalone.messageQueue=woodpecker --set woodpecker.enabled=true --set streaming.enabled=true zilliztech/milvus &gt; milvus_manifest.yaml</code> » para generar las plantillas de gráficos de una instancia de Milvus en modo autónomo.</li>
 <li>Para modificar las configuraciones de Milvus, descarga la <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a> plantilla, introduce en ella los ajustes que desees y utiliza <code translate="no">helm template -f values.yaml my-release zilliztech/milvus &gt; milvus_manifest.yaml</code> para generar el manifiesto en consecuencia.</li>
 </ul>
 </div>
@@ -380,7 +380,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Pull-and-save-images" class="common-anchor-header">3. Descargar y guardar las imágenes<button data-href="#3-Pull-and-save-images" class="anchor-icon" translate="no">
+<h3 id="3-Pull-and-save-images" class="common-anchor-header">3. Obtener y guardar las imágenes<button data-href="#3-Pull-and-save-images" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -520,7 +520,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
 <li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
 <li><a href="/docs/es/manage-partitions.md">Gestionar particiones</a></li>
-<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o eliminar</a></li>
+<li><a href="/docs/es/insert-update-delete.md">Insertar, actualizar o insertar y eliminar</a></li>
 <li><a href="/docs/es/single-vector-search.md">Búsqueda de un solo vector</a></li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></li>
 </ul></li>

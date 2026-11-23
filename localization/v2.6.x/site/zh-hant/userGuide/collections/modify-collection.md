@@ -1,7 +1,7 @@
 ---
 id: modify-collection.md
 title: 修改收藏集
-summary: 您可以重新命名一個集合或變更其設定。本頁主要介紹如何修改收藏集。
+summary: 您可以重新命名一個收藏集或變更其設定。本頁面主要介紹如何修改收藏集。
 ---
 <h1 id="Modify-Collection" class="common-anchor-header">修改收藏集<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ summary: 您可以重新命名一個集合或變更其設定。本頁主要介�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>您可以重新命名一個收藏集或變更其設定。本頁主要介紹如何修改收藏集。</p>
-<h2 id="Rename-Collection" class="common-anchor-header">重新命名收藏集<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
+    </button></h1><p>您可以重新命名一個收藏集或變更其設定。本頁面主要說明如何修改收藏集。</p>
+<h2 id="Rename-Collection" class="common-anchor-header">重新命名集合<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +34,14 @@ summary: 您可以重新命名一個集合或變更其設定。本頁主要介�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以重命名集合，如下所示。</p>
+    </button></h2><p>您可以依照以下步驟重新命名集合。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -139,7 +144,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在建立集合後修改集合層級的屬性。</p>
+    </button></h2><p>建立集合後，您可以修改集合層級的屬性。</p>
 <h3 id="Supported-properties" class="common-anchor-header">支援的屬性<button data-href="#Supported-properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,30 +167,34 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>如果集合的資料需要在特定時間後刪除，請考慮設定其 Time-To-Live (TTL)，單位為秒。一旦 TTL 超時，Milvus 會刪除集合中的所有實體。 </p><p>刪除是異步的，表示在刪除完成之前，搜尋和查詢仍是可能的。</p><p>詳情請參閱<a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md">設定集合 TTL</a>。</p></td>
+     <td><p>若需在特定期間後刪除集合中的資料，請考慮以秒為單位設定其有效期限 (TTL)。一旦 TTL 到期，Milvus 便會從該集合中刪除所有實體。 </p><p>此刪除操作為非同步進行，這表示在刪除完成之前，仍可進行搜尋與查詢。</p><p>詳情請參閱「<a href="/docs/zh-hant/v2.6.x/set-collection-ttl.md">設定集合 TTL</a>」。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>記憶體映射 (Mmap) 可以直接存取磁碟上的大型檔案，讓 Milvus 可以同時在記憶體和硬碟中儲存索引和資料。此方法有助於根據存取頻率最佳化資料放置政策，在不影響搜尋效能的情況下擴充資料集的儲存容量。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/mmap.md">使用 mmap</a>。</p></td>
+     <td><p>記憶體映射 (Mmap) 允許直接存取磁碟上的大型檔案，使 Milvus 能同時將索引和資料儲存於記憶體與硬碟中。此方法有助於根據存取頻率優化資料配置策略，在不影響搜尋效能的前提下，擴充集合的儲存容量。</p><p>有關詳細資訊，請參閱「<a href="/docs/zh-hant/v2.6.x/mmap.md">使用 mmap</a>」。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>在啟用「分割區金鑰隔離」的情況下，Milvus 會根據分割區金鑰值將實體分組，並為每個分組建立獨立索引。收到搜尋請求後，Milvus 會根據過濾條件中指定的 Partition Key 值找到索引，並將搜尋範圍限制在索引包含的實體內，從而避免在搜尋過程中掃描不相關的實體，大幅提升搜尋效能。</p><p>如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">使用分割區金鑰隔離</a>。</p></td>
+     <td><p>啟用「分區金鑰隔離」後，Milvus 會根據分區金鑰值將實體分組，並為每個群組建立獨立的索引。 收到搜尋請求時，Milvus 會根據篩選條件中指定的分區鍵值定位索引，並將搜尋範圍限制在該索引所包含的實體內，從而避免在搜尋過程中掃描無關的實體，並大幅提升搜尋效能。</p><p>詳細資訊請參閱「<a href="/docs/zh-hant/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">使用分區鍵隔離</a>」。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>對於未啟用動態欄位而建立的集合，啟用動態欄位。啟用後，您可以插入原始模式中未定義欄位的實體。如需詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>。</p></td>
+     <td><p>為未啟用動態欄位的集合啟用動態欄位功能。啟用後，您即可插入包含原始資料結構中未定義欄位的實體。詳細資訊請參閱「<a href="/docs/zh-hant/v2.6.x/enable-dynamic-field.md">動態欄位</a>」。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>當已為集合啟用 AutoID 時，是否允許集合接受使用者提供的主索引鍵值。</p><ul><li><p>當設定為<strong>"true "</strong>時：如果存在，插入、上插入和大量導入會使用使用者提供的主索引鍵；否則，主索引鍵值會自動產生。</p></li><li><p>設定為<strong>"false "</strong>時：使用者提供的主索引鍵值會被拒絕或忽略，主索引鍵值永遠是自動產生的。預設為<strong>"false"</strong>。</p></li></ul></td>
+     <td><p>當集合已啟用 AutoID 時，是否允許該集合接受使用者提供的主鍵值。</p><ul><li><p>當設定為<strong>「true」</strong>時：插入、更新或插入（upsert）以及批次匯入操作會使用使用者提供的主鍵（若存在）；否則，主鍵值將自動產生。</p></li><li><p>設定為<strong>「false」</strong>時：系統會拒絕或忽略使用者提供的主鍵值，並始終自動產生主鍵值。預設值為<strong>「false」</strong>。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>在處理時間敏感的作業，特別是<code translate="no">TIMESTAMPTZ</code> 欄位時，指定此集合的預設時區。時間戳在內部以 UTC 儲存，Milvus 會根據此設定轉換值來顯示和比較。如果設定，集合時區會取代資料庫的預設時區；查詢的時區參數可以暫時取代這兩個參數。該值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如，<strong>亞洲/上海</strong>、<strong>美國/芝加哥</strong>或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
+     <td><p>指定此集合在處理與時間相關的操作（尤其是<code translate="no">TIMESTAMPTZ</code> 欄位）時的預設時區。時間戳記在內部以UTC儲存，Milvus會根據此設定轉換值以供顯示和比較。若已設定，集合時區將覆寫資料庫的預設時區；查詢的時區參數可暫時覆寫兩者。 該值必須為有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>（例如<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有關如何使用<code translate="no">TIMESTAMPTZ</code> 欄位的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/timestamptz-field.md">TIMESTAMPTZ 欄位</a>。</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>變更集合的一致性層級。新層級將套用至此後針對此集合且未自行指定一致性層級的搜尋與查詢；但每項請求的設定仍具有優先權。值必須為<strong>「Strong」</strong>、「<strong>Session</strong>」、<strong>「Bounded」</strong>（預設）或<strong>「Eventually」</strong>之一。變更此屬性無需釋放集合。 詳細資訊請參閱「<a href="/docs/zh-hant/v2.6.x/tune_consistency.md">一致性層級</a>」。</p></td>
    </tr>
 </table>
-<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">範例 1：設定收集 TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">範例 1：設定集合 TTL<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,7 +211,12 @@ curl --request POST \
       </svg>
     </button></h3><p>以下程式碼片段示範如何設定集合 TTL。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -269,7 +283,12 @@ curl --request POST \
       </svg>
     </button></h3><p>以下程式碼片段示範如何啟用 mmap。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -311,7 +330,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Enable-partition-key" class="common-anchor-header">範例 3：啟用分割區金鑰<button data-href="#Example-3-Enable-partition-key" class="anchor-icon" translate="no">
+<h3 id="Example-3-Enable-partition-key" class="common-anchor-header">範例 3：啟用分區金鑰<button data-href="#Example-3-Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -326,9 +345,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下程式碼片段示範如何啟用分割區金鑰。</p>
+    </button></h3><p>以下程式碼片段示範如何啟用分區鍵。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -388,7 +412,12 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
       </svg>
     </button></h3><p>以下程式碼片段示範如何啟用動態欄位。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -446,10 +475,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">allow_insert_auto_id</code> 屬性允許啟用 AutoID 的集合在插入、上移和大量匯入時接受使用者提供的主索引鍵值。當設定為<strong>"true "</strong>時<strong>，</strong>Milvus<strong>會</strong>使用使用者提供的主索引鍵值，否則會自動產生。預設為<strong>"false"。</strong></p>
-<p>下面的範例顯示如何啟用<code translate="no">allow_insert_auto_id</code> ：</p>
+    </button></h3><p><code translate="no">allow_insert_auto_id</code> 屬性允許已啟用 AutoID 的集合，在插入、更新插入（upsert）及批次匯入時接受使用者提供的素鍵值。當設定為<strong>「true」</strong>時，若存在使用者提供的素鍵值，Milvus 將使用該值；否則會自動產生。預設值為<strong>「false」。</strong></p>
+<p>以下範例展示如何啟用<code translate="no">allow_insert_auto_id</code> ：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;allow_insert_auto_id&quot;</span>: <span class="hljs-string">&quot;true&quot;</span>}</span>
@@ -506,11 +540,16 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以使用<code translate="no">timezone</code> 屬性為您的集合設定預設時區。這會決定在資料集中的所有作業，包括資料插入、查詢和結果呈現，如何詮釋和顯示與時間相關的資料。</p>
-<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>，例如<code translate="no">Asia/Shanghai</code>,<code translate="no">America/Chicago</code>, 或<code translate="no">UTC</code> 。使用無效或非標準的值會在修改集合屬性時導致錯誤。</p>
-<p>以下範例顯示如何設定集合時區為<strong>亞洲/上海</strong>：</p>
+    </button></h3><p>您可以透過 `<code translate="no">timezone</code> ` 屬性為您的集合設定預設時區。這將決定該集合內所有操作（包括資料插入、查詢及結果呈現）中，與時間相關的資料如何被解讀與顯示。</p>
+<p><code translate="no">timezone</code> 的值必須是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 時區識別碼</a>，例如<code translate="no">Asia/Shanghai</code> 、<code translate="no">America/Chicago</code> 或<code translate="no">UTC</code> 。若使用無效或非標準的值，在修改集合屬性時將會引發錯誤。</p>
+<p>以下範例展示如何將集合時區設定為<strong>Asia/Shanghai</strong>：</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
@@ -546,7 +585,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">丟棄集合屬性<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h3 id="Example-7-Alter-the-consistency-level" class="common-anchor-header">範例 7：變更一致性層級<button data-href="#Example-7-Alter-the-consistency-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -561,9 +600,81 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您也可以透過丟棄集合屬性來重設集合屬性，如下所示。</p>
+    </button></h3><p>以下程式碼片段將現有集合的一致性等級變更為「<strong>最終（Eventually）」</strong>。新的一致性等級將套用至此後對該集合進行且未明確設定一致性等級的搜尋與查詢；但每次請求的設定仍具有優先權。詳細資訊請參閱《<a href="/docs/zh-hant/v2.6.x/tune_consistency.md">一致性等級》</a>。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">刪除集合屬性<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>您也可以透過以下方式刪除集合屬性來重設該屬性。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[

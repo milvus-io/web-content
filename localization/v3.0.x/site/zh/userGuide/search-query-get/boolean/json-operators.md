@@ -2,8 +2,8 @@
 id: json-operators.md
 title: JSON 操作符
 summary: >-
-  Milvus 支持用于查询和过滤 JSON 字段的高级操作符，非常适合管理复杂的结构化数据。这些操作符能够对 JSON 文档进行高效查询，使您能够根据
-  JSON 字段中的特定元素、值或条件检索实体。 本节将指导您如何在 Milvus 中使用针对 JSON 的专用操作符，并通过实际示例说明其功能。
+  Milvus 支持用于查询和过滤 JSON 字段的高级操作符，非常适合管理复杂的结构化数据。这些操作符能够高效地查询 JSON 文档，使您能够根据 JSON
+  字段中的特定元素、值或条件检索实体。 本节将指导您如何在 Milvus 中使用针对 JSON 的专用操作符，并通过实际示例说明其功能。
 ---
 <h1 id="JSON-Operators" class="common-anchor-header">JSON 操作符<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"

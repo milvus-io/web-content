@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans la recherche vectorielle traditionnelle, les résultats sont classés uniquement en fonction de la similarité vectorielle, c'est-à-dire du degré de correspondance entre les vecteurs dans l'espace mathématique. Mais dans les applications concrètes, ce qui rend un contenu véritablement pertinent ne se résume souvent pas à la seule similarité sémantique.</p>
+    </button></h1><p>Dans la recherche vectorielle traditionnelle, les résultats sont classés uniquement en fonction de la similarité vectorielle, c'est-à-dire du degré de correspondance entre les vecteurs dans l'espace mathématique. Mais dans les applications concrètes, ce qui rend un contenu véritablement pertinent ne dépend souvent pas uniquement de la similarité sémantique.</p>
 <p>Prenons ces scénarios courants :</p>
 <ul>
 <li><p>Une recherche d’actualités où l’article d’hier devrait être mieux classé qu’un article similaire datant d’il y a trois ans</p></li>
@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le classement par décroissance améliore la recherche vectorielle traditionnelle en intégrant des facteurs numériques tels que le temps ou la distance géographique dans le processus de classement. L’ensemble du processus se déroule selon les étapes suivantes :</p>
+    </button></h2><p>Le classement par décroissance améliore la recherche vectorielle traditionnelle en intégrant des facteurs numériques tels que le temps ou la distance géographique dans le processus de classement. L'ensemble du processus se déroule selon les étapes suivantes :</p>
 <h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Étape 1 : Calcul des scores de similarité normalisés<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,7 +113,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ensuite, Milvus calcule un score de décroissance basé sur la valeur numérique du champ (comme un horodatage ou une distance) à l’aide du classement par décroissance que vous avez sélectionné :</p>
+    </button></h3><p>Ensuite, Milvus calcule un score de décroissance basé sur la valeur numérique d’un champ (comme un horodatage ou une distance) à l’aide du classement par décroissance que vous avez sélectionné :</p>
 <ul>
 <li><p>Chaque système de classement par décroissance transforme les valeurs numériques brutes en scores de pertinence normalisés compris entre 0 et 1</p></li>
 <li><p>Le score de décroissance représente la pertinence d’un élément en fonction de sa « distance » par rapport au point idéal</p></li>
@@ -211,9 +211,9 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>l'article C se hisse à la première place malgré une similarité moyenne, car il est très récent (publié hier)</p></li>
 <li><p>L'article B recule à la 4e place malgré une excellente similarité, car il est relativement ancien</p></li>
-<li><p>L'article D utilise la similarité COSINE ; son score de 0,76 est donc utilisé directement avant l'application du classement par décroissance</p></li>
+<li><p>L'article D utilise la similarité COSINE ; son score de 0,76 est donc utilisé directement avant l'application de la décroissance</p></li>
 </ul>
-<h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Choisissez le bon système de classement avec décroissance<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
+<h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Choisissez le bon algorithme de classement avec décroissance<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,11 +246,11 @@ beta: Milvus 2.6.x
      <td><p>Exponentielle (<code translate="no">exp</code>)</p></td>
      <td><p>Diminue rapidement au début mais conserve une longue traîne</p></td>
      <td><ul><li><p>Flux d’actualités où la fraîcheur des informations est essentielle</p></li><li><p>Les réseaux sociaux où le contenu récent doit dominer</p></li><li><p>Lorsque la proximité est fortement privilégiée, mais que certains éléments éloignés exceptionnels doivent rester visibles</p></li></ul></td>
-     <td><p>Dans une application d'actualités, les articles d'hier sont bien mieux classés que ceux datant d'une semaine, mais des articles plus anciens très pertinents peuvent tout de même apparaître</p></td>
+     <td><p>Dans une application d’actualités, les articles d’hier sont bien mieux classés que ceux datant d’une semaine, mais des articles plus anciens très pertinents peuvent tout de même apparaître</p></td>
    </tr>
    <tr>
      <td><p>Linéaire (<code translate="no">linear</code>)</p></td>
-     <td><p>Baisse régulière et prévisible avec une limite claire</p></td>
+     <td><p>Baisse constante et prévisible avec une limite claire</p></td>
      <td><ul><li><p>Applications présentant des limites naturelles</p></li><li><p>Services avec des limites de distance</p></li><li><p>Contenus avec des dates d’expiration ou des seuils clairs</p></li></ul></td>
      <td><p>Dans un moteur de recherche d'événements, les événements situés au-delà d'une fenêtre de deux semaines ne s'affichent tout simplement pas</p></td>
    </tr>
@@ -408,7 +408,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -426,7 +465,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Champ numérique pour le calcul du score de décroissance. Détermine quel attribut de données sera utilisé pour calculer la décroissance (par exemple, les horodatages pour une décroissance basée sur le temps, les coordonnées pour une décroissance basée sur la localisation). </p><p>Doit correspondre à un champ de votre collection contenant des valeurs numériques pertinentes. Prend en charge les types INT8/16/32/64, FLOAT et DOUBLE.</p></td>
+     <td><p>Champ numérique pour le calcul du score de décroissance. Détermine quel attribut de données sera utilisé pour calculer la décroissance (par exemple, les horodatages pour une décroissance basée sur le temps, les coordonnées pour une décroissance basée sur la localisation). </p><p>Doit être un champ de votre collection contenant des valeurs numériques pertinentes. Prend en charge les types INT8/16/32/64, FLOAT et DOUBLE.</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
@@ -450,7 +489,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>Oui</p></td>
-     <td><p>Point de référence à partir duquel le score de décroissance est calculé. Les éléments ayant cette valeur reçoivent des scores de pertinence maximaux.</p><p>Pour une décroissance basée sur le temps, l’unité de temps doit correspondre à celle de vos données de collection.</p></td>
+     <td><p>Point de référence à partir duquel le score de décroissance est calculé. Les éléments ayant cette valeur reçoivent des scores de pertinence maximaux.</p><p>Pour une décroissance basée sur le temps, l’unité de temps doit correspondre à vos données de collecte.</p></td>
      <td><ul><li><p>Pour les horodatages : heure actuelle (par exemple, <code translate="no">int(time.time())</code>)</p></li><li><p>Pour la géolocalisation : les coordonnées actuelles de l’utilisateur</p></li></ul></td>
    </tr>
    <tr>
@@ -538,16 +577,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -618,5 +659,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

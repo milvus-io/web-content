@@ -142,7 +142,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> <code translate="no">collection_backups</code> を含む JSON メタデータを返します。バックアップファイルはダウンロード<strong>されません</strong>。別のプロセスによって作成されたバックアップの場合、名前のみのクエリでは、進行中のタスクの進捗情報を含まないメタデータが返されることがあります。アクティブなバックアップを監視する際は、現在のサービスの作成レスポンスから取得したタスク ID を使用してください。</p>
+<p><code translate="no">get_backup</code> <code translate="no">collection_backups</code> を含む JSON メタデータが返されます。バックアップファイルはダウンロード<strong>されません</strong>。別のプロセスによって作成されたバックアップの場合、名前のみのクエリでは、進行中のタスクの進捗情報を含まないメタデータが返されることがあります。アクティブなバックアップを監視する際は、現在のサービスの create レスポンスから取得したタスク ID を使用してください。</p>
 <p>デフォルトの形式は `<code translate="no">auto</code>` であり、これは Milvus 3.0 でのスナップショットを選択します。binlog を明示的に要求するには、`create` ボディに `<code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> ` を追加してください。CLI の `<code translate="no">--for</code> ` プリセットは、HTTP リクエストのフィールドではありません。</p>
 <p>バックアップを保持または移動するには、オブジェクトストレージ内のディレクトリ全体をコピーします。<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">0.6.0の転送ガイド</a>を参照してください。</p>
 <h2 id="Restore-data" class="common-anchor-header">データの復元<button data-href="#Restore-data" class="anchor-icon" translate="no">
@@ -174,7 +174,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <p>復元レスポンスから `<code translate="no">data.id</code> ` をコピーし、タスクのステータスを確認します:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">data.state_code: 2</code> が表示されるまで待機し、<code translate="no">collection_restore_tasks</code> で期待されるターゲットコレクションを確認してください。タスクが送信されただけでは、復元がまだ検証されたことにはなりません。</p>
+<p><code translate="no">data.state_code: 2</code> が表示されるまで待機し、<code translate="no">collection_restore_tasks</code> で期待されるターゲットコレクションを確認してください。送信されたタスクは、まだ復元が検証された状態ではありません。</p>
 <h3 id="Restore-with-the-original-name" class="common-anchor-header">元の名前で復元する<button data-href="#Restore-with-the-original-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

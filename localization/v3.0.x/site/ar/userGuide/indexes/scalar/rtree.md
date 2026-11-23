@@ -1,11 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  مؤشر RTREE هو بنية بيانات قائمة على الشجرة تعمل على تسريع عمليات الاستعلام على
-  حقول GEOMETRY. إذا كانت مجموعتك تخزن كائنات هندسية مثل النقاط أو الخطوط أو
-  المضلعات بتنسيق النص المعروف (WKT)، وكنت ترغب في تسريع عملية التصفية المكانية،
-  فإن RTREE يُعد الخيار المثالي.
+summary: استخدم RTREE لتسريع عملية التصفية المكانية في حقول GEOMETRY.
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -23,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>مؤشر " <code translate="no">RTREE</code> " هو بنية بيانات قائمة على الشجرة تعمل على تسريع عمليات الاستعلام على الحقول " <code translate="no">GEOMETRY</code> " في Milvus. إذا كانت مجموعتك تخزن كائنات هندسية مثل النقاط أو الخطوط أو المضلعات بتنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">"Well-known text" (WKT)</a> وترغب في تسريع عملية التصفية المكانية، فإن " <code translate="no">RTREE</code> " هو الخيار المثالي.</p>
-<h2 id="How-it-works" class="common-anchor-header">كيف يعمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> يعمل على تسريع عملية التصفية المكانية لحقول <code translate="no">GEOMETRY</code> التي تحتوي على نقاط أو خطوط أو مضلعات بتنسيق <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">النص المعروف (WKT)</a>.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يستخدم Milvus فهرس " <code translate="no">RTREE</code> " لتنظيم البيانات الهندسية وتصفيتها بكفاءة، وذلك من خلال عملية من مرحلتين:</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">المرحلة 1: إنشاء الفهرس<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,10 +50,60 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
-<li><p><strong>إنشاء العقد الطرفية:</strong> بالنسبة لكل كائن هندسي، احسب <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">المستطيل المحيط الأدنى</a> (MBR)، وهو أصغر مستطيل يحتوي على الكائن بالكامل، وقم بتخزينه كعقدة طرفية.</p></li>
-<li><p><strong>التجميع في مربعات أكبر:</strong> تجميع العقد الطرفية المتقاربة معًا وتغليف كل مجموعة بمستطيل محيط أدنى جديد (MBR)، لتشكيل عقد داخلية. على سبيل المثال، المجموعة <strong>B</strong> تحتوي على <strong>D</strong> و <strong>E</strong>؛ والمجموعة <strong>C</strong> تحتوي على <strong>F</strong> و <strong>G</strong>.</p></li>
-<li><p><strong>إضافة العقدة الجذرية:</strong> أضف عقدة جذرية يغطي مستطيلها المحيط الأدنى (MBR) جميع المجموعات الداخلية، مما ينتج عنه هيكل شجري متوازن الارتفاع.</p></li>
+    </button></h3><p><code translate="no">GEOMETRY</code> الحقول. انظر <a href="/docs/ar/geometry-field.md">حقل الهندسة (Geometry Field</a> ) للاطلاع على تعريفات الحقول.</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">تسريع التصفية<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> يبحث عن العناصر المرشحة باستخدام المربعات المحيطة، ثم يتحقق Milvus من العلاقة المكانية الدقيقة. وهو يدعم <a href="/docs/ar/geometry-operators.md">عوامل الهندسة</a> التالية:</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>، <code translate="no">ST_INTERSECTS</code> ، <code translate="no">ST_CONTAINS</code> ، و <code translate="no">ST_WITHIN</code>.</li>
+<li><code translate="no">ST_TOUCHES</code>، و <code translate="no">ST_OVERLAPS</code> ، و <code translate="no">ST_CROSSES</code> ، و <code translate="no">ST_DWITHIN</code>.</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> لا يستخدم <code translate="no">RTREE</code>. في حالة عدم وجود فهرس مؤهل، تقوم المرشحات المكانية بمسح الحقل.</p>
+<div class="alert note">
+<blockquote>
+<p>هذه هي إمكانيات الفهرس، وليست قيودًا على تعبيرات التصفية الصالحة. انظر <a href="/docs/ar/scalar_index.md#Filter-execution">الفهرس القياسي</a> لمعرفة قيود البحث المشتركة. بالنسبة لاختبارات <code translate="no">AND</code> و <code translate="no">OR</code> و <code translate="no">NOT</code> و NULL (<code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code>)، انظر <a href="/docs/ar/basic-operators.md">العوامل الأساسية</a>.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">كيفية عمل RTREE<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>عرض عملية الإنشاء والاستعلام</strong></summary></p>
+<p>يستخدم Milvus فهرس " <code translate="no">RTREE</code> " لتنظيم وتصفية البيانات الهندسية بكفاءة، باتباع عملية من مرحلتين:</p>
+<p><strong>المرحلة 1: إنشاء الفهرس</strong></p>
+<ol>
+<li><p><strong>إنشاء العقد الطرفية:</strong> لكل كائن هندسي، احسب <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">المستطيل المحيط الأدنى</a> (MBR)، وهو أصغر مستطيل يحتوي على الكائن بالكامل، وقم بتخزينه كعقدة طرفية.</p></li>
+<li><p><strong>التجميع في مربعات أكبر:</strong> تجميع العقد الطرفية المتجاورة معًا وتغليف كل مجموعة بمستطيل حدودي أدنى جديد (MBR)، لتشكيل عقد داخلية. على سبيل المثال، المجموعة <strong>B</strong> تحتوي على <strong>D</strong> و <strong>E</strong>؛ والمجموعة <strong>C</strong> تحتوي على <strong>F</strong> و <strong>G</strong>.</p></li>
+<li><p><strong>إضافة العقدة الجذرية:</strong> أضف عقدة جذرية يغطي مستطيلها المحدود الأدنى (MBR) جميع المجموعات الداخلية، مما ينتج عنه هيكل شجرة متوازن الارتفاع.</p></li>
 </ol>
 <p><span class="img-wrapper">
   
@@ -66,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>كيفية عمل Retree</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">المرحلة 2: تسريع الاستعلامات<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>المرحلة 2: تسريع الاستعلامات</strong></p>
+<ol>
 <li><p><strong>تشكيل MBR للاستعلام:</strong> احسب MBR لهندسة الاستعلام الخاص بك.</p></li>
 <li><p><strong>تقليم الفروع:</strong> بدءًا من الجذر، قارن MBR الاستعلام بكل عقدة داخلية. تخط أي فروع لا يتقاطع MBR الخاص بها مع MBR الاستعلام.</p></li>
 <li><p><strong>جمع المرشحين:</strong> النزول إلى الفروع المتقاطعة لجمع العقد الورقية المرشحة.</p></li>
-<li><p><strong>المطابقة التامة:</strong> بالنسبة لكل مرشح، قم بتنفيذ مسند مكاني دقيق لتحديد المطابقات الحقيقية.</p></li>
+<li><p><strong>المطابقة التامة:</strong> لكل مرشح، قم بتنفيذ مسند مكاني دقيق لتحديد التطابقات الحقيقية.</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">إنشاء فهرس RTREE<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,8 +326,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك التصفية باستخدام عوامل هندسية في تعبير <code translate="no">filter</code>. عند وجود <code translate="no">RTREE</code> في الحقل المستهدف <code translate="no">GEOMETRY</code> ، يستخدم Milvus هذا الفهرس لتقليص المرشحين تلقائيًا. بدون الفهرس، يعود التصفية إلى المسح الكامل.</p>
-<p>للحصول على قائمة كاملة بمشغلات الهندسة المتاحة، راجع <a href="/docs/ar/geometry-operators.md">مشغلات الهندسة</a>.</p>
+    </button></h2><p>تستخدم الأمثلة التالية حقلًا مُفهرسًا من نوع <code translate="no">GEOMETRY</code> يُسمى <code translate="no">geo</code>.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">المثال 1: التصفية فقط<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -313,8 +344,8 @@ curl --request POST \
       </svg>
     </button></h3><p>البحث عن جميع الكائنات الهندسية داخل مضلع معين:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a>
- <a href="#java">   Java</a>
+   <a href="#python">بايثون</a>
+ <a href="#java">   جافا</a>
  <a href="#go">   Go</a>
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
@@ -616,10 +647,9 @@ EOF
       </svg>
     </button></h2><p>استخدم طريقة ` <code translate="no">drop_index()</code> ` لإزالة فهرس موجود من مجموعة.</p>
 <div class="alert note">
-<ul>
-<li><p>في <strong>الإصدار 2.6.3</strong> أو ما قبله، يجب تحرير المجموعة قبل حذف مؤشر قياسي.</p></li>
-<li><p>ابتداءً من <strong>الإصدار 2.6.4</strong> أو الأحدث، يمكنك حذف مؤشر سكالي مباشرةً بمجرد انتفاء الحاجة إليه — دون الحاجة إلى تحرير المجموعة أولاً.</p></li>
-</ul>
+<blockquote>
+<p>للاطلاع على متطلبات الإصدار عند حذف فهرس قياسي، راجع <a href="/docs/ar/scalar_index.md#Drop-index-compatibility">«الفهرس القياسي</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

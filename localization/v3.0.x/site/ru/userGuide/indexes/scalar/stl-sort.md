@@ -2,9 +2,8 @@
 id: stl-sort.md
 title: STL_SORT
 summary: >-
-  Индекс STL_SORT — это тип индекса, специально разработанный для повышения
-  производительности запросов по числовым полям (INT8, INT16 и т. д.), полям
-  типа VARCHAR или полям типа TIMESTAMPTZ за счёт упорядочивания данных.
+  Используйте STL_SORT для поиска значений, фильтрации по диапазону и
+  сопоставления префиксов строк в совместимых полях.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,13 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс « <code translate="no">STL_SORT</code> » — это тип индекса, специально разработанный для повышения производительности запросов по числовым полям (INT8, INT16 и т. д.), полям типа « <code translate="no">VARCHAR</code> » или полям типа « <code translate="no">TIMESTAMPTZ</code> » в Milvus за счет упорядочивания данных.</p>
-<p>Используйте индекс « <code translate="no">STL_SORT</code> », если вы часто выполняете запросы с:</p>
-<ul>
-<li><p>фильтрацией по сравнению с операторами <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code> и <code translate="no">&lt;=</code> </p></li>
-<li><p>Фильтрация по диапазону с помощью операторов <code translate="no">IN</code> и <code translate="no">LIKE</code> </p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">STL_SORT</code> сохраняет значения в отсортированном порядке для ускорения поиска значений, фильтрации диапазонов и сопоставления префиксов строк.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,12 +36,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>Числовые поля (например, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Подробности см. в разделе <a href="/docs/ru/number.md">«Булевы значения и числа</a>».</p></li>
-<li><p><code translate="no">VARCHAR</code> поля. Подробнее см. раздел <a href="/docs/ru/string.md">«Поле String</a>».</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> Поля. Подробности см. в разделе <a href="/docs/ru/timestamptz-field.md">«Поле TIMESTAMPTZ</a>».</p></li>
+<li><p><code translate="no">VARCHAR</code> поля. Подробности см. в разделе <a href="/docs/ru/string.md">«Поле String</a>».</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code>. Подробности см. в разделе <a href="/docs/ru/timestamptz-field.md">«Поле TIMESTAMPTZ</a>».</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">Принцип работы<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<p>Что касается числовых, VARCHAR или TIMESTAMPTZ-полей в StructArray, см. раздел <a href="/docs/ru/index-structarray-fields.md#Create-scalar-indexes">«Индексирование полей StructArray</a>». Обычные поля ARRAY не поддерживают <code translate="no">STL_SORT</code>; см. раздел <a href="/docs/ru/array_data_type.md#Array-index-support">«Поддержка индексации массивов</a> » для ознакомления с вариантами индексации.</p>
+<p>JSON-пути, преобразованные в типы « <code translate="no">DOUBLE</code> » или « <code translate="no">VARCHAR</code> », поддерживают <a href="/docs/ru/json-indexing.md#Index-requirements">индексацию</a> по ключу ( <code translate="no">STL_SORT</code> ) после <a href="/docs/ru/json-indexing.md#Index-requirements">включения поддержки индексации JSON</a> в версии <a href="/docs/ru/json-indexing.md#Index-requirements">3.0</a>.</p>
+<p><a id="Queries-accelerated-by-STLSORT"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Ускорение фильтрации<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,23 +75,76 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus реализует индексирование по времени ( <code translate="no">STL_SORT</code> ) в два этапа:</p>
-<ol>
-<li><p><strong>Создание индекса</strong></p>
+    </button></h3><p>Индекс <code translate="no">STL_SORT</code> может помочь в оценке следующих условий при условии совместимости полей и преобразований:</p>
 <ul>
-<li><p>Во время загрузки данных Milvus собирает все значения для индексируемого поля.</p></li>
-<li><p>Значения сортируются в восходящем порядке с помощью <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">функции std::sort</a> из библиотеки C++ STL.</p></li>
-<li><p>Каждое значение сопоставляется с идентификатором сущности, а отсортированный массив сохраняется в качестве индекса.</p></li>
-</ul></li>
-<li><p><strong>Ускорение запросов</strong></p>
-<ul>
-<li><p>При выполнении запроса Milvus использует <strong>бинарный поиск</strong> (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> и <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) по отсортированному массиву.</p></li>
-<li><p>При проверке на равенство Milvus быстро находит все совпадающие значения.</p></li>
-<li><p>При поиске по диапазону Milvus определяет начальную и конечную позиции и возвращает все значения, находящиеся между ними.</p></li>
-<li><p>Соответствующие идентификаторы сущностей передаются исполнителю запроса для окончательной сборки результата.</p></li>
-</ul></li>
-</ol>
+<li>Равенство (<code translate="no">==</code>, <code translate="no">!=</code>) и принадлежность (<code translate="no">in</code>, <code translate="no">not in</code>).</li>
+<li>Диапазоны: <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>, включая интервалы, такие как <code translate="no">10 &lt;= price &lt; 50</code>.</li>
+<li>Совпадение префиксов VARCHAR, например <code translate="no">name LIKE &quot;abc%&quot;</code>.</li>
+<li>Сравнения по допустимым скалярным путям JSON. См. <a href="/docs/ru/json-indexing.md#Supported-filters">«Фильтры JSON</a>».</li>
+</ul>
+<p>Для фильтров по суффиксу, подстроке, общего типа LIKE и фильтров с регулярными выражениями Milvus может оценивать шаблон по строкам, хранящимся в индексе. Это может потребовать просмотра множества различных строк. См. раздел <a href="/docs/ru/pattern-matching.md">«Сопоставление шаблонов»</a> для упрощения синтаксиса и планирования.</p>
+<div class="alert note">
+<blockquote>
+<p>Это возможности индекса, а не ограничения на допустимые выражения фильтров. См. <a href="/docs/ru/scalar_index.md#Filter-execution">раздел «Скалярный индекс»</a> для ознакомления с общими ограничениями поиска. Информацию о тестах <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> и NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>) см. в разделе <a href="/docs/ru/basic-operators.md">«Основные операторы</a>».</p>
+</blockquote>
+</div>
+<p><a id="Usage-notes"></a></p>
+<h3 id="Memory-considerations" class="common-anchor-header">Вопросы, связанные с памятью<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Явные индексы <code translate="no">STL_SORT</code> не поддерживают режим отображения в памяти.</p>
+<p>Для числовых полей и полей с временными метками, не содержащих значений NULL, используйте следующие приблизительные оценки в байтах. <code translate="no">N</code> — это количество сущностей:</p>
+<table>
+<thead>
+<tr><th>Тип поля</th><th>Ориентировочное значение</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td></tr>
+<tr><td><code translate="no">INT64</code>, <code translate="no">DOUBLE</code>, <code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>Проведите измерение с использованием репрезентативных данных; объем загруженной памяти зависит от хранения строк, количества уникальных значений и емкости списка записей.</td></tr>
+</tbody>
+</table>
+<p>Разделите на <code translate="no">1024 * 1024</code>, чтобы преобразовать байты в MiB. Для одного миллиона значений INT64, отличных от NULL, требуется примерно 19 MiB для основных структур индекса. Измеряйте индексы VARCHAR после загрузки: размер сериализованного индекса не включает все выделения памяти для строк и списков размещения.</p>
+<p>Эти приблизительные оценки охватывают объем памяти, занятый загруженными индексами, при отключенном отображении памяти. Рассчитывайте их для каждого сегмента, а затем суммируйте по загруженным сегментам и репликам.</p>
+<div class="alert note">
+<blockquote>
+<p>Предусмотрите дополнительную память для загруженных данных полей, векторных индексов, накладных расходов на коллекции и индексы, а также для временных выделений памяти. Проверьте результаты с помощью репрезентативных данных и запросов; массивы, JSON, устаревшие форматы индексов и отображение памяти требуют отдельного измерения.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-STLSORT-works" class="common-anchor-header">Как работает STL_SORT<button data-href="#How-STLSORT-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Ознакомьтесь с процессом сортировки и поиска</strong></summary></p>
+<p>Во время построения индекса Milvus сопоставляет значения полей с идентификаторами сущностей, сортирует их в восходящем порядке с помощью <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> и сохраняет отсортированный массив.</p>
+<p>Для запросов на равенство и диапазон бинарный поиск (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> и <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) находит соответствующий интервал. Исполнитель запроса получает идентификаторы сущностей в этом интервале.</p>
 <p>Это снижает сложность запроса с <strong>O(n)</strong> (полное сканирование) до <strong>O(log n + m)</strong>, где <em>m</em> — количество совпадений.</p>
+<p></details></p>
 <h2 id="Create-an-STLSORT-index" class="common-anchor-header">Создание индекса STL_SORT<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,8 +160,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете создать индекс <code translate="no">STL_SORT</code> для числового поля, поля типа « <code translate="no">VARCHAR</code> » или поля типа « <code translate="no">TIMESTAMPTZ</code> ». Никаких дополнительных параметров не требуется.</p>
-<p>В примере ниже показано, как создать индекс <code translate="no">STL_SORT</code> для поля типа <code translate="no">TIMESTAMPTZ</code>:</p>
+    </button></h2><p>Установите ` <code translate="no">index_type</code> ` равным ` <code translate="no">STL_SORT</code>`; дополнительные параметры индекса не требуются. В этом примере индексируется поле ` <code translate="no">TIMESTAMPTZ</code> `:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -261,10 +326,9 @@ curl --request POST \
       </svg>
     </button></h2><p>Используйте метод ` <code translate="no">drop_index()</code> ` для удаления существующего индекса из коллекции.</p>
 <div class="alert note">
-<ul>
-<li><p>В <strong>версии 2.6.3</strong> и более ранних версиях перед удалением скалярного индекса необходимо освободить коллекцию.</p></li>
-<li><p>Начиная с <strong>версии 2.6.4</strong> и более поздних, скалярный индекс можно удалить напрямую, как только он больше не нужен — нет необходимости сначала освобождать коллекцию.</p></li>
-</ul>
+<blockquote>
+<p>Требования к версии при удалении скалярного индекса см. в разделе <a href="/docs/ru/scalar_index.md#Drop-index-compatibility">«Скалярный индекс</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -377,23 +441,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">Примечания по использованию<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>Типы полей:</strong> Работает с числовыми полями, полями типа « <code translate="no">VARCHAR</code> » и « <code translate="no">TIMESTAMPTZ</code> ». Дополнительную информацию о типах данных см. в разделах <a href="/docs/ru/number.md">«Boolean &amp; Number</a> » и <a href="/docs/ru/timestamptz-field.md">«TIMESTAMPTZ Field</a>».</p></li>
-<li><p><strong>Параметры:</strong> Индексные параметры не требуются.</p></li>
-<li><p><strong>Mmap не поддерживается:</strong> режим отображения в памяти недоступен для <code translate="no">STL_SORT</code>.</p></li>
-</ul>

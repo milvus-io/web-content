@@ -18,7 +18,7 @@ summary: 컬렉션의 이름을 변경하거나 설정을 수정할 수 있습�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>컬렉션의 이름을 변경하거나 설정을 수정할 수 있습니다. 이 페이지에서는 컬렉션을 수정하는 방법에 대해 중점적으로 설명합니다.</p>
+    </button></h1><p>컬렉션의 이름을 변경하거나 설정을 수정할 수 있습니다. 이 페이지에서는 컬렉션을 수정하는 방법에 대해 설명합니다.</p>
 <h2 id="Rename-Collection" class="common-anchor-header">컬렉션 이름 변경<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -285,11 +285,11 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">ttl_field</code></p></td>
-     <td><p>각 엔티티의 절대 만료 타임스탬프(엔티티 수준 TTL)를 저장하는 ' <code translate="no">TIMESTAMPTZ</code> ' 필드의 이름입니다. 각 엔티티는 실제 시간이 이 필드에 저장된 값에 도달하면 만료되며, 필드에 ' <code translate="no">NULL</code> '가 설정되어 있으면 엔티티가 만료되지 않음을 의미합니다. ' <code translate="no">collection.ttl.seconds</code>'와 상호 배타적입니다.</p><p>자세한 내용은 <a href="/docs/ko/set-collection-ttl.md">‘엔티티 수준 TTL 설정</a>’을 참조하십시오.</p></td>
+     <td><p>각 엔티티의 절대 만료 타임스탬프(엔티티 수준 TTL)를 저장하는 ' <code translate="no">TIMESTAMPTZ</code> ' 필드의 이름입니다. 각 엔티티는 실제 시간이 이 필드에 저장된 값에 도달하면 만료되며, 필드에 ' <code translate="no">NULL</code> '가 설정되어 있으면 해당 엔티티는 만료되지 않습니다. ' <code translate="no">collection.ttl.seconds</code>'와 상호 배타적입니다.</p><p>자세한 내용은 <a href="/docs/ko/set-collection-ttl.md">‘엔티티 수준 TTL 설정</a>’을 참조하십시오.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>메모리 매핑(Mmap)을 사용하면 디스크에 있는 대용량 파일에 직접 메모리 액세스할 수 있으므로, Milvus는 인덱스와 데이터를 메모리와 하드 드라이브 모두에 저장할 수 있습니다. 이 접근 방식은 액세스 빈도를 기반으로 데이터 배치 정책을 최적화하여, 검색 성능에 영향을 주지 않으면서 컬렉션의 저장 용량을 확장하는 데 도움이 됩니다.</p><p>자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하십시오.</p></td>
+     <td><p>메모리 매핑(Mmap)을 사용하면 디스크에 있는 대용량 파일에 직접 메모리 액세스할 수 있어, Milvus가 인덱스와 데이터를 메모리와 하드 드라이브 모두에 저장할 수 있습니다. 이 접근 방식은 액세스 빈도를 기반으로 데이터 배치 정책을 최적화하여, 검색 성능에 영향을 주지 않으면서 컬렉션의 저장 용량을 확장하는 데 도움이 됩니다.</p><p>자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하십시오.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
@@ -307,8 +307,12 @@ curl --request POST \
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>시간에 민감한 작업, 특히 <code translate="no">TIMESTAMPTZ</code> 필드를 처리할 때 이 컬렉션의 기본 시간대를 지정합니다. 타임스탬프는 내부적으로 UTC로 저장되며, Milvus는 이 설정에 따라 표시 및 비교를 위해 값을 변환합니다. 이 설정이 지정된 경우, 컬렉션 시간대가 데이터베이스의 기본 시간대보다 우선하며, 쿼리의 시간대 매개변수는 두 설정 모두를 일시적으로 재정의할 수 있습니다. 값은 유효한 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 시간대 식별자여야</a> 합니다(예: <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> 또는 <strong>UTC</strong>). <code translate="no">TIMESTAMPTZ</code> 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하십시오.</p></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>컬렉션의 일관성 수준을 변경합니다. 새로운 수준은 자체 일관성 수준을 지정하지 않은 이 컬렉션에 대한 후속 검색 및 쿼리에 적용되며, 요청별 설정은 여전히 우선 적용됩니다. 값은 <strong>Strong</strong>, <strong>Session</strong>, <strong>Bounded</strong> (기본값) 또는 <strong>Eventually</strong> 중 하나여야 합니다. 이 속성을 변경할 때 컬렉션을 해제할 필요는 없습니다. 자세한 내용은 <a href="/docs/ko/tune_consistency.md">‘일관성 수준</a>’을 참조하십시오.</p></td>
+   </tr>
 </table>
-<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">예 1: 수집 수준 TTL 설정<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">예제 1: 컬렉션 수준 TTL 설정<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -427,7 +431,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 코드 스니펫은 기존 ` <code translate="no">TIMESTAMPTZ</code> ` 필드(`<code translate="no">expire_at</code>`)를 엔티티 수준 TTL의 TTL 필드로 지정합니다. 컬렉션에는 이미 해당 이름의 ` <code translate="no">TIMESTAMPTZ</code> ` 필드가 포함되어 있어야 하며, ` <code translate="no">collection.ttl.seconds</code> `이 설정되어서는 안 됩니다. 두 TTL 모드는 상호 배타적입니다.</p>
+    </button></h3><p>다음 코드 스니펫은 기존 <code translate="no">TIMESTAMPTZ</code> 필드(<code translate="no">expire_at</code>)를 엔티티 수준 TTL의 TTL 필드로 지정합니다. 컬렉션에는 이미 해당 이름의 <code translate="no">TIMESTAMPTZ</code> 필드가 포함되어 있어야 하며, <code translate="no">collection.ttl.seconds</code> 는 설정되어서는 안 됩니다. 두 TTL 모드는 상호 배타적입니다.</p>
 <p>엔티티 수준 TTL의 전체 워크플로(스키마 설정, 삽입, 쿼리, 새로 고침, 삭제)에 대해서는 <a href="/docs/ko/set-collection-ttl.md">‘엔티티 수준 TTL 설정</a>’을 참조하십시오.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1024,6 +1028,94 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
         &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-8-Alter-the-consistency-level" class="common-anchor-header">예제 8: 일관성 수준 변경<button data-href="#Example-8-Alter-the-consistency-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 코드 스니펫은 기존 컬렉션의 일관성 수준을 <strong>'Eventually'로</strong> 변경합니다. 새로운 수준은 일관성 수준을 명시적으로 설정하지 않은 이 컬렉션에 대한 후속 검색 및 쿼리에 적용됩니다. 요청별 설정은 여전히 우선 적용됩니다. 자세한 내용은 <a href="/docs/ko/tune_consistency.md">일관성 수준을</a> 참조하십시오.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">alter_collection_properties</span>(
+        AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                                   .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;consistency_level&quot;</span>] = <span class="hljs-string">&quot;Eventually&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

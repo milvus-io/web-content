@@ -2,8 +2,8 @@
 id: basic-operators.md
 title: 基本操作符
 summary: >-
-  使用比较操作符、范围操作符、算术操作符、逻辑操作符和 NULL 操作符来筛选实体。从 Milvus 3.0.3 开始，IS NULL 和 IS NOT
-  NULL 也支持普通向量字段。
+  使用比较操作符、范围操作符、算术操作符、逻辑操作符和NULL操作符来筛选实体。从 Milvus 3.0.3 开始，IS NULL 和 IS NOT NULL
+  也支持普通向量字段。
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">基本操作符<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus 提供了用于过滤实体的比较、范围、算术、逻辑和 NULL 操作符。每个操作符都支持特定的字段类型。</p>
 <div class="alert note">
-<p>过滤表达式左侧的字面量可以是 Collection 字段名（例如下文示例中的<code translate="no">status</code> 、<code translate="no">color</code> 等），也可以是 StructArray 子字段在特定元素索引处的名称，例如<code translate="no">filter = 'struct[0][subfield] &gt; 10'</code> 。</p>
-<p>有关 StructArray 字段中标量过滤的详细信息，请参阅<a href="/docs/zh/struct-array-operators.md">StructArray 操作符</a>。</p>
+<p>左操作数可以是 Collection 字段（例如<code translate="no">status</code> ），也可以是 StructArray 子字段中特定元素索引处的值（例如<code translate="no">struct[0][subfield] &gt; 10</code> ）。请参阅<a href="/docs/zh/struct-array-operators.md">“StructArray 操作符”</a>。</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">比较操作符<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>比较操作符用于根据相等、不等或大小对数据进行筛选。它们适用于数值和文本字段。</p>
+    </button></h2><p>比较操作符用于根据相等、不等或大小条件过滤数据。它们适用于数值型和文本型字段。</p>
 <h3 id="Supported-comparison-operators" class="common-anchor-header">支持的比较操作符<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +56,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><code translate="no">==</code> （等于）</p></li>
+<li><p><code translate="no">==</code> (等于)</p></li>
 <li><p><code translate="no">!=</code> (不等于)</p></li>
 <li><p><code translate="no">&gt;</code> (大于)</p></li>
 <li><p><code translate="no">&lt;</code> (小于)</p></li>
@@ -121,7 +120,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要查找<code translate="no">status</code> 状态非“inactive”的实体：</p>
+    </button></h3><p>查找<code translate="no">status</code> 不是“inactive”的实体：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -359,7 +358,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>当您需要检查实体是否属于一组特定值时，此功能非常有用。</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">模式匹配操作符<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -377,7 +375,7 @@ summary: >-
       </svg>
     </button></h2><p>模式匹配操作符可帮助根据通配符模式或正则表达式过滤字符串值。</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: 用于根据字符串值匹配简单的通配符模式。例如，<code translate="no">name LIKE &quot;Prod%&quot;</code> 会匹配以<code translate="no">Prod</code> 开头的值。</p></li>
+<li><p><code translate="no">LIKE</code>: 用于根据字符串值匹配简单的通配符模式。例如，<code translate="no">name LIKE &quot;Prod%&quot;</code> 可匹配以<code translate="no">Prod</code> 开头的值。</p></li>
 <li><p><code translate="no">=~</code>: 用于使用 RE2 正则表达式匹配字符串值。例如，<code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> 会匹配包含错误代码的值，如<code translate="no">E1001</code> 。</p></li>
 <li><p><code translate="no">!~</code>: 用于排除匹配 RE2 正则表达式的字符串值。这等同于<code translate="no">NOT (field =~ &quot;pattern&quot;)</code> 。</p></li>
 </ul>
@@ -462,7 +460,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关在<code translate="no">LIKE</code> 和正则表达式之间进行选择、支持的字段类型、正则表达式语法、转义规则以及性能的更多详细信息，请参阅《<a href="/docs/zh/pattern-matching.md">模式匹配》</a>。Milvus 还允许您在<code translate="no">VARCHAR</code> 字段或 JSON 字符串路径上构建<code translate="no">NGRAM</code> 索引，以加速符合条件的模式匹配过滤器。有关详细信息，请参阅<a href="/docs/zh/ngram.md">《NGRAM》</a>。</p>
+<p>有关语法、转义、字段支持以及<code translate="no">NGRAM</code> 等加速选项，请参阅<a href="/docs/zh/pattern-matching.md">“模式匹配”</a>。</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">算术操作符<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -502,7 +500,7 @@ summary: >-
 <li><p><code translate="no">%</code> (取模)</p></li>
 <li><p><code translate="no">**</code> (幂运算)</p></li>
 </ul>
-<h3 id="Example-1-Using-modulus-" class="common-anchor-header">例 1：使用取模运算（<code translate="no">%</code> ）<button data-href="#Example-1-Using-modulus-" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-modulus-" class="common-anchor-header">例 1：使用取模运算 (<code translate="no">%</code>)<button data-href="#Example-1-Using-modulus-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -646,7 +644,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>假设有一个名为<code translate="no">permissions</code> 的整数字段，该整数中的每个位代表一个权限标志：</p>
+    </button></h3><p>假设有一个名为<code translate="no">permissions</code> 的整数字段，该整数的每个位代表一个权限标志：</p>
 <table>
 <thead>
 <tr><th>权限标志</th><th>位值</th></tr>
@@ -758,7 +756,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>逻辑操作符用于将多个条件组合成更复杂的筛选表达式。这些操作符包括<code translate="no">AND</code> 、<code translate="no">OR</code> 和<code translate="no">NOT</code> 。</p>
+    </button></h2><p>逻辑操作符用于将多个条件组合成更复杂的过滤表达式。这些操作符包括<code translate="no">AND</code> 、<code translate="no">OR</code> 和<code translate="no">NOT</code> 。</p>
+<div class="alert note">
+<p>每个条件均可使用其自身的适用索引或扫描路径；无需使用同一种索引类型来处理整个表达式。请参阅<a href="/docs/zh/scalar_index.md">“标量索引”</a>。</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">支持的逻辑操作符<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -776,7 +777,7 @@ summary: >-
       </svg>
     </button></h3><ul>
 <li><p><code translate="no">AND</code>：将多个条件组合在一起，这些条件必须全部为真。</p></li>
-<li><p><code translate="no">OR</code>: 将多个条件组合，其中至少有一个必须为真。</p></li>
+<li><p><code translate="no">OR</code>: 组合多个条件，其中至少有一个必须为真。</p></li>
 <li><p><code translate="no">NOT</code>: 否定一个条件。</p></li>
 </ul>
 <h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">示例 1：使用<code translate="no">AND</code> 组合条件<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
@@ -794,7 +795,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要查找所有满足<code translate="no">price</code> 大于100且<code translate="no">stock</code> 大于50的产品：</p>
+    </button></h3><p>要查找所有<code translate="no">price</code> 大于100且<code translate="no">stock</code> 大于50的产品：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -863,7 +864,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color == &quot;red&quot; OR color == &quot;blue&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">示例 3：使用 `<code translate="no">NOT</code> ` 排除某个条件<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
+<h3 id="Example-3-Using-NOT-to-exclude-a-condition" class="common-anchor-header">示例 3：使用 `<code translate="no">NOT</code> ` 排除条件<button data-href="#Example-3-Using-NOT-to-exclude-a-condition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -948,7 +949,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>假设一个名为<code translate="no">products</code> 的 Collection 已建立索引并加载完毕。该 Collection 具有一个名为<code translate="no">id</code> 的<code translate="no">INT64</code> 主键，一个名为<code translate="no">category</code> 的可为空<code translate="no">VARCHAR</code> 字段，以及一个名为<code translate="no">embedding</code> 的可为空三维<code translate="no">FLOAT_VECTOR</code> 字段。该 Collection 已包含以下实体：</p>
+    </button></h3><p>假设一个名为<code translate="no">products</code> 的 Collection已在 Milvus 3.0.3 或更高版本上完成索引并加载。该 Collection 具有一个名为<code translate="no">id</code> 的<code translate="no">INT64</code> 主键，一个名为<code translate="no">category</code> 的可为空<code translate="no">VARCHAR</code> 字段，以及一个名为<code translate="no">embedding</code> 的可为空三维<code translate="no">FLOAT_VECTOR</code> 字段。该 Collection 已包含以下实体：</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1163,19 +1164,22 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>操作符会检查存储的字段值。对于没有默认值的可为空字段，在插入时省略该字段或将其显式设置为NULL，都会存储NULL。已配置的默认值可能会改变存储的内容。有关详细信息，请参阅<a href="/docs/zh/nullable-and-default.md">《</a> <a href="/docs/zh/default-values.md">可为空</a> <a href="/docs/zh/nullable-and-default.md">字段和</a> <a href="/docs/zh/default-values.md">默认值</a> <a href="/docs/zh/nullable-and-default.md">》</a>。</p>
+    </button></h3><p>操作符会检查存储的字段值。对于没有默认值的可为空字段，在插入时省略该字段或将其显式设置为NULL，都会存储NULL。已配置的默认值可能会改变实际存储的内容。有关详细信息，请参阅<a href="/docs/zh/nullable-and-default.md">《</a> <a href="/docs/zh/default-values.md">可为</a> <a href="/docs/zh/nullable-and-default.md">空字段和</a> <a href="/docs/zh/default-values.md">默认值</a> <a href="/docs/zh/nullable-and-default.md">》</a>。</p>
 <table>
 <thead>
 <tr><th>字段类型</th><th>NULL 行为</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>空字符串<code translate="no">&quot;&quot;</code> 属于非 NULL 值。</td></tr>
-<tr><td><code translate="no">JSON</code></td><td>整个字段为NULL值时，其匹配条件为<code translate="no">IS NULL</code> 。诸如<code translate="no">{&quot;category&quot;: null}</code> 这样的JSON对象即使内部某个值为NULL，仍被视为非NULL值。</td></tr>
+<tr><td><code translate="no">JSON</code></td><td>整个字段为NULL值时，其匹配条件为<code translate="no">IS NULL</code> 。例如，JSON对象<code translate="no">{&quot;category&quot;: null}</code> 即为非NULL值，即使其内部某个值是NULL。</td></tr>
 <tr><td><code translate="no">ARRAY</code></td><td>整个字段的 NULL 值与<code translate="no">IS NULL</code> 匹配。单个元素不能为 NULL，且<code translate="no">IS NULL</code> /<code translate="no">IS NOT NULL</code> 不支持诸如<code translate="no">tags[0]</code> 之类的数组元素访问。请参阅<a href="/docs/zh/array_data_type.md">“数组字段”</a>。</td></tr>
 <tr><td>普通向量类型</td><td>NULL 表示向量值不存在。各分量均为零的向量不被视为 NULL。</td></tr>
 </tbody>
 </table>
-<p>对于使用<code translate="no">nullable=False</code> 定义的支持字段，<code translate="no">IS NULL</code> 不会匹配任何实体，而<code translate="no">IS NOT NULL</code> 会匹配所有可见实体。过滤器中的其他条件仍然有效。</p>
+<p>对于使用<code translate="no">nullable=False</code> 定义的支持字段，<code translate="no">IS NULL</code> 不会匹配任何实体，而<code translate="no">IS NOT NULL</code> 会匹配所有可见实体。过滤器中的其他条件仍然适用。</p>
+<div class="alert note">
+<p>标量NULL过滤器使用来自符合条件的索引或字段数据的有效性信息；它们不需要特定的标量索引类型。一个不可为空的字段可以产生一个常量结果。</p>
+</div>
 <h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">在向量搜索中使用 NULL 过滤器<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1191,20 +1195,19 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>搜索过滤器中可以使用相同的操作符，但实体在被搜索的字段中也必须包含向量，才能参与相似度搜索。</p>
+    </button></h3><p>搜索过滤器中可以使用相同的操作符，但实体还需在被搜索的字段中包含向量，才能参与相似度搜索。</p>
 <p>以上面的示例数据为例，考虑使用<code translate="no">anns_field=&quot;embedding&quot;</code> 进行搜索：</p>
 <table>
 <thead>
-<tr><th>过滤器表达式</th><th>符合相似度搜索条件的实体</th><th>原因</th></tr>
+<tr><th>筛选表达式</th><th>符合相似性搜索条件的实体</th><th>原因</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>实体<code translate="no">2</code> 没有类别，但拥有一个<code translate="no">embedding</code> 向量。</td></tr>
 <tr><td><code translate="no">embedding IS NULL</code></td><td>无</td><td>实体<code translate="no">3</code> 符合筛选条件，但没有<code translate="no">embedding</code> 向量可用于与查询向量进行比较。</td></tr>
-<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>这两个实体都拥有一个<code translate="no">embedding</code> 向量。</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>两个实体均具有<code translate="no">embedding</code> 向量。</td></tr>
 </tbody>
 </table>
-<p>这三个过滤条件均有效。使用<code translate="no">embedding</code> 配合<code translate="no">embedding IS NULL</code> 进行搜索不会返回任何结果，因为没有实体能同时满足这两个条件。要检索缺少 Embeddings 的实体，请如上所示使用<code translate="no">query()</code> 。</p>
-<p>向量搜索会自动跳过其被搜索向量字段为NULL的实体，因此<code translate="no">embedding IS NOT NULL</code> 不会进一步缩小<code translate="no">embedding</code> 搜索的候选范围。排名、其他筛选条件以及搜索限制仍将决定返回哪些候选结果。</p>
+<p>要检索缺失的Embeddings，请使用 `<code translate="no">query()</code>`；在 `<code translate="no">embedding</code> ` 字段上使用 `<code translate="no">embedding IS NULL</code> ` 进行搜索虽然有效，但不会返回任何匹配结果。向量搜索会自动跳过 `NULL` Embeddings，因此 `<code translate="no">embedding IS NOT NULL</code> ` 不会进一步缩小候选范围。排名、其他过滤条件以及搜索限制仍将决定返回的匹配结果。</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">关于在 JSON 和 ARRAY 字段中使用基本操作符的提示<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1220,8 +1223,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>虽然 Milvus 中的基本操作符用途广泛且可应用于标量字段，但它们也可有效用于 JSON 和 ARRAY 字段中的键和索引。</p>
-<p>例如，如果有一个<code translate="no">product</code> 字段包含多个键，如<code translate="no">price</code> 、<code translate="no">model</code> 和<code translate="no">tags</code> ，请始终直接引用该键：</p>
+    </button></h2><p>在表达式中直接引用 JSON 键或 ARRAY 元素。例如，要过滤名为<code translate="no">product</code> 的 JSON 字段中的<code translate="no">price</code> 键：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1248,7 +1250,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要查找记录温度数组中第一个温度超过特定值的记录，请使用：</p>
+<p>要查找记录温度数组中第一个温度超过特定值的记录，请使用：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1275,22 +1277,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">结论<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus 提供了一系列基本操作符，让您能够灵活地过滤和查询数据。通过组合比较、范围、算术和逻辑操作符，您可以创建强大的过滤表达式，从而缩小搜索范围并高效地检索所需数据。</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1306,6 +1293,6 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>过滤条件中的匹配值列表长度是否有上限（例如：filter='color in ["red", "green", “blue”]'）？如果列表过长该怎么办？</strong></p>
+    </button></h2><p><strong>过滤条件中的匹配值列表（例如 filter='color in ["red", "green", "blue"]'）是否有长度限制？如果列表过长该怎么办？</strong></p>
 <p>Milvus 并未对过滤条件中的匹配值列表长度设置限制。但是，过长的列表会显著影响查询性能。
-如果您的过滤条件包含冗长的匹配值列表或包含多个元素的复杂表达式，建议使用<a href="/docs/zh/filtering-templating.md">过滤器模板功能</a>来提升查询性能。</p>
+如果您的过滤条件包含一个很长的匹配值列表或包含许多元素的复杂表达式，我们建议使用<a href="/docs/zh/filtering-templating.md">过滤器模板</a>来提升查询性能。</p>

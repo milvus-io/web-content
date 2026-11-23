@@ -513,4 +513,4 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_remove&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يتيح ربط <code translate="no">ARRAY_REMOVE</code> بحقل عبر <code translate="no">field_ops</code> إمكانية التحديث الجزئي لهذا الحقل. للاطلاع على سير العمل الكامل وأنواع العناصر المدعومة والحدود، راجع <a href="/docs/ar/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">حقول ARRAY في وضع الدمج (Upsert ARRAY fields in merge mode</a>).</p>
+<p>يتيح ربط <code translate="no">ARRAY_REMOVE</code> بحقل عبر <code translate="no">field_ops</code> إمكانية التحديث الجزئي لهذا الحقل. للاطلاع على سير العمل الكامل وأنواع العناصر المدعومة والحدود، راجع <a href="/docs/ar/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">حقول ARRAY في وضع الدمج (Upsert</a>).</p>

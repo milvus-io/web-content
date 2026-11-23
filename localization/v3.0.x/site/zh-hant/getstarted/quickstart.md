@@ -21,7 +21,7 @@ title: 快速入門
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>向量作為神經網路模型的輸出資料格式，能有效編碼資訊，並在知識庫、語義搜尋、檢索增強生成（RAG）等人工智慧應用中扮演關鍵角色。</p>
-<p>Milvus 是一款開源向量資料庫，適用於各種規模的 AI 應用，從在 Jupyter 筆記本中運行示範型聊天機器人，到建置服務數十億用戶的網路級搜尋系統皆能勝任。在本指南中，我們將引導您在數分鐘內於本地端設定 Milvus，並使用 Python 客戶端函式庫來生成、儲存及搜尋向量。</p>
+<p>Milvus 是一款開源向量資料庫，適用於各種規模的 AI 應用，從在 Jupyter 筆記本中運行示範聊天機器人，到建置服務數十億用戶的網路級搜尋系統皆能勝任。在本指南中，我們將引導您在數分鐘內於本地端設定 Milvus，並使用 Python 客戶端函式庫來生成、儲存及搜尋向量。</p>
 <h2 id="Install-Milvus" class="common-anchor-header">安裝 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,10 +54,10 @@ title: 快速入門
         ></path>
       </svg>
     </button></h3><p>本指南使用 Milvus Lite，這是 PyMilvus Python SDK 的可選依賴項，可在本地端運行。若需進行伺服器部署，請參閱<a href="/docs/zh-hant/install_standalone-docker.md">Docker</a>或<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Kubernetes</a>。</p>
-<p>請在 macOS、Linux 或 Windows 系統上使用 Python 3.10 或更新版本，並確保 Milvus Lite 的依賴項（例如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）有可用的二進位 wheel 檔。範例中使用 PyMilvus 3.0.2 和 Milvus Lite 3.2.2。請明確安裝這兩個套件：</p>
+<p>請在 macOS、Linux 或 Windows 系統上使用 Python 3.10 或更新版本，並確保 Milvus Lite 的依賴項（例如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）有可用的二進位 wheel 檔。範例中使用 PyMilvus 3.0.2 和 Milvus Lite 3.2.2。請明確安裝這兩套套件：</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Windows 上，pip 會跳過 PyMilvus 3.0.2 的<code translate="no">milvus-lite</code> 額外元件；上述指令明確指定了<code translate="no">milvus-lite</code> ，因此該本地路徑在此處同樣有效。若需僅安裝 SDK 的相關要求，請參閱《<a href="/docs/zh-hant/install-pymilvus.md">安裝 Milvus Python SDK》</a>。</p>
+<p>在 Windows 上，pip 會跳過 PyMilvus 3.0.2 的<code translate="no">milvus-lite</code> 額外套件；上述指令已明確指定<code translate="no">milvus-lite</code> ，因此該本地路徑在此環境下同樣適用。若需僅安裝 SDK 的相關要求，請參閱《<a href="/docs/zh-hant/install-pymilvus.md">安裝 Milvus Python SDK》</a>。</p>
 <div class="alert note">
 <blockquote>
 <p>若您使用 Google Colab，為啟用剛安裝的依賴項，可能需要<strong>重新啟動執行環境</strong>。（點擊螢幕頂端的「Runtime」選單，並從下拉式選單中選擇「Restart session」）。</p>
@@ -139,7 +139,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>若您已變更憑證設定，請使用您所設定的憑證。後續範例將使用您選定的<code translate="no">client</code> ；這些範例無需另行建立本機 Lite 資料庫。</p>
+<p>若您已變更憑證設定，請使用您所設定的憑證。以下範例均採用您所選定的<code translate="no">client</code> ；無需另行建立本機 Lite 資料庫。</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">建立集合<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -359,7 +359,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>輸出結果為一個結果清單，每個結果對應一個向量搜尋查詢。每個查詢包含一個結果清單，其中每個結果包含實體的主鍵、與查詢向量的距離，以及透過指定<code translate="no">output_fields</code> 所取得的實體詳細資訊。</p>
+<p>輸出結果為一組結果清單，每項結果皆對應至一個向量搜尋查詢。每個查詢包含一組結果清單，其中每項結果包含實體的主鍵、與查詢向量的距離，以及透過指定<code translate="no">output_fields</code> 所取得的實體詳細資訊。</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">結合元資料篩選的向量搜尋<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -450,7 +450,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要清除資料，您可以透過指定主鍵來刪除實體，或刪除所有符合特定篩選條件的實體。</p>
+    </button></h2><p>若要清除資料，您可以透過指定主鍵來刪除實體，或刪除所有符合特定篩選表達式的實體。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete entities by primary key</span>
 res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>])
 

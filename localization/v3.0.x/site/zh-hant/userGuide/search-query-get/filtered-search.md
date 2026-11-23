@@ -52,19 +52,24 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若某個集合同時包含向量嵌入及其元資料，您可在進行人工神經網路搜尋前對元資料進行篩選，以提升搜尋結果的相關性。一旦 Milvus 接收到包含篩選條件的搜尋請求，便會將搜尋範圍限制在符合指定篩選條件的實體內。</p>
+    </button></h3><p>若某個集合同時包含向量嵌入及其元資料，您可在進行 ANN 搜尋前對元資料進行篩選，以提升搜尋結果的相關性。一旦 Milvus 收到包含篩選條件的搜尋請求，便會將搜尋範圍限制在符合指定篩選條件的實體內。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" /> 
    <span>篩選搜尋</span>
   
  </span></p>
-<p>如上圖所示，搜尋請求攜帶「<code translate="no">chunk like &quot;%red%&quot;</code> 」作為篩選條件，表示 Milvus 應在所有「<code translate="no">chunk</code> 」欄位中包含「<code translate="no">red</code> 」一詞的實體內進行人工神經網路（ANN）搜尋。具體而言，Milvus 會執行以下操作：</p>
+<p>如上圖所示，搜尋請求攜帶<code translate="no">chunk like &quot;%red%&quot;</code> 作為篩選條件，表示 Milvus 應在所有「<code translate="no">chunk</code> 」欄位中包含「<code translate="no">red</code> 」一詞的實體內進行人工神經網路（ANN）搜尋。具體而言，Milvus 會執行以下操作：</p>
 <ul>
 <li><p>篩選符合搜尋請求中所攜帶之篩選條件的實體。</p></li>
 <li><p>在篩選後的實體中執行人工神經網路（ANN）搜尋。</p></li>
-<li><p>返回前 K 個實體。</p></li>
+<li><p>回傳前 K 個實體。</p></li>
 </ul>
+<div class="alert note">
+<p>自 Milvus 3.0.3 起，您可以在一般向量欄位的查詢和搜尋篩選條件中使用<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> ，分別選取向量欄位為 NULL 或非 NULL 的實體。</p>
+<p>若要尋找<code translate="no">embedding</code> 欄位為 NULL 的實體，請在<code translate="no">query()</code> 中使用篩選條件<code translate="no">embedding IS NULL</code> 。此篩選條件在<code translate="no">search()</code> 中同樣有效。然而，若在<code translate="no">embedding</code> 中使用此篩選條件進行搜尋，將不會返回任何結果：沒有<code translate="no">embedding</code> 值的實體沒有向量可供與查詢向量進行比對。</p>
+<p>有關支援的類型、語法及範例，請參閱<a href="/docs/zh-hant/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL 和 IS NOT NULL 運算子</a>。</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">迭代篩選<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,14 +85,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>標準篩選流程能有效將搜尋範圍縮小至較小範圍。然而，過於複雜的篩選表達式可能會導致搜尋延遲過高。在此類情況下，迭代篩選可作為替代方案，有助於減輕標量篩選的工作負載。</p>
+    </button></h3><p>標準的篩選流程能有效將搜尋範圍縮小至較小範圍。然而，過於複雜的篩選表達式可能會導致搜尋延遲極高。在此類情況下，迭代篩選可作為替代方案，有助於減輕標量篩選的工作負載。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>迭代篩選</span>
   
  </span></p>
-<p>如上圖所示，採用迭代篩選的搜尋會以迭代方式執行向量搜尋。迭代器所回傳的每個實體都會經過標量篩選，此過程將持續進行，直到獲得指定的前 K 項結果為止。</p>
+<p>如上圖所示，採用迭代篩選的搜尋會以迭代方式執行向量搜尋。迭代器返回的每個實體都會經過標量篩選，此過程將持續進行，直到達到指定的 topK 結果為止。</p>
 <p>此方法能顯著減少需進行標量篩選的實體數量，對於處理高度複雜的篩選表達式尤為有益。</p>
 <p>然而，必須注意的是，迭代器會逐一處理實體。這種序列式處理方式可能會導致處理時間延長或潛在的效能問題，特別是在有大量實體需要進行標量篩選時。</p>
 <h2 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -120,7 +125,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>若查詢向量已存在於目標集合中，請考慮直接使用<code translate="no">ids</code> ，而非在搜尋前先將其擷取出來。詳細資訊請參閱《<a href="/docs/zh-hant/primary-key-search.md">主鍵搜尋</a>》。</p>
+<p>若查詢向量已存在於目標集合中，請考慮直接使用<code translate="no">ids</code> ，而非在搜尋前先將其擷取出來。詳細資訊請參閱「<a href="/docs/zh-hant/primary-key-search.md">主鍵搜尋</a>」。</p>
 </div>
 <p>範例使用 PyMilvus 3.0.2、Java SDK 3.0.10、Go SDK 3.0.0（<code translate="no">client/v3</code> ）、Rust SDK 3.0.2、C++ SDK 3.0.4、NodeJS SDK 3.0.6 以及 C# SDK 3.0.0。</p>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">使用標準篩選進行搜尋<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
@@ -138,7 +143,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下程式碼片段示範了使用標準篩選的搜尋，而下列程式碼片段中的請求包含一個篩選條件及多個輸出欄位。</p>
+    </button></h3><p>以下程式碼片段示範了帶有標準篩選條件的搜尋，其中該程式碼片段中的請求包含一項篩選條件及多個輸出欄位。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -392,7 +397,7 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975796,&quot;id&quot;:4,&quot;likes&quot;:122},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.2499619,&quot;id&quot;:6,&quot;likes&quot;:58}],&quot;topks&quot;:[2]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>搜尋請求中攜帶的篩選條件為<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 。它使用「and」運算子包含兩個條件：第一個條件是查詢在<code translate="no">color</code> 欄位中值以<code translate="no">red</code> 開頭的實體；另一個條件則是查詢在<code translate="no">likes</code> 欄位中值大於<code translate="no">50</code> 的實體。 僅有兩個實體符合這些條件。當 top-K 設定為<code translate="no">5</code> 時，Milvus 會計算這兩個實體與查詢向量之間的距離，並將其作為搜尋結果返回。</p>
-<p>以下範例展示了 Python 結果的格式，並附有說明性的餘弦分數。分數可能會因浮點數精確度而有所差異。<code translate="no">entity</code> 中僅會顯示請求的輸出欄位；REST 範例則會在每個搜尋結果的頂層返回這些欄位。</p>
+<p>以下範例展示了 Python 結果的格式，並附有說明性的餘弦分數。分數可能會因浮點數精確度而有所差異。<code translate="no">entity</code> 中僅會顯示請求的輸出欄位；REST 範例則會在每個搜尋結果的頂層回傳這些欄位。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>

@@ -24,7 +24,7 @@ summary: >-
 <p>Verwenden Sie nullfähige Felder, wenn:</p>
 <ul>
 <li>Daten aus externen Systemen eingelesen werden, die fehlende Werte zulassen.</li>
-<li>bestimmte Metadaten optional sind oder nur für einen Teil des Datensatzes verfügbar sind.</li>
+<li>Bestimmte Metadaten optional sind oder nur für einen Teil des Datensatzes verfügbar sind.</li>
 <li>Vektor-Einbettungen asynchron generiert und später eingefügt werden.</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
@@ -43,10 +43,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Vektorfelder, die NULL-Werte zulassen, unterstützen keine Filterausdrücke vom Typ „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “. Sie können Entitäten nicht explizit danach filtern, ob der Wert eines Vektorfelds NULL ist.</p></li>
 <li><p>Ab Milvus 3.0.0 kann das übergeordnete <a href="/docs/de/array-of-structs.md">StructArray-Feld</a> nullfähig sein. Setzen Sie „ <code translate="no">nullable=True</code> “ für das übergeordnete StructArray-Feld, nicht für einzelne Unterfelder. NULL gilt für das gesamte StructArray-Feld, nicht für ein einzelnes Struct-Element, und Milvus überträgt die Nullfähigkeit des übergeordneten Feldes intern auf dessen Unterfelder. Ein StructArray-Feld, das einer bestehenden Sammlung hinzugefügt wird, muss nullfähig sein, damit bestehende Entitäten für das neue Feld den Wert NULL zurückgeben können. Ab Milvus 3.0.6 kann ein Unterfeld zusätzlich einen NULL-Wert in einem einzelnen Struct-Element zulassen: „ <code translate="no">nullable=True</code> “ für ein skalares oder vektorales Unterfeld, „ <code translate="no">element_nullable=True</code> “ für ein Array-Unterfeld; ein Struct-Element selbst kann weiterhin nicht NULL sein. Weitere Informationen finden Sie unter <a href="/docs/de/structarray-limits.md#Nullable-and-dynamic-schema-limits">„StructArray-Beschränkungen</a>“.</p></li>
 <li><p>Das Attribut „nullable“ wird beim Anlegen eines Feldes festgelegt und kann anschließend nicht mehr geändert werden. Sie können die Nullbarkeit für ein bestehendes Feld nicht aktivieren oder deaktivieren.</p></li>
-<li><p>Als nullfähig markierte Felder können nicht als Partitionsschlüssel verwendet werden. Partitionsschlüsselfelder müssen immer gültige, nicht-null Werte enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/use-partition-key.md">„Partitionsschlüssel verwenden</a>“.</p></li>
+<li><p>Als nullfähig markierte Felder können nicht als Partitionsschlüssel verwendet werden. Partitionsschlüsselfelder müssen immer gültige, nicht-nullwerte Werte enthalten. Weitere Informationen finden Sie unter <a href="/docs/de/use-partition-key.md">„Partitionsschlüssel verwenden</a>“.</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">Was ist ein nullfähiges Feld?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -934,9 +933,13 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die vorherigen Beispiele konzentrieren sich auf Vektorfelder. In diesem Abschnitt wird beschrieben, wie sich NULL-Werte in <strong>skalaren Filterausdrücken</strong> verhalten.</p>
-<p>Skalarfelder können mit „ <code translate="no">nullable=True</code> “ definiert werden und unterliegen denselben Erfassungsregeln wie Vektorfelder. <strong>NULL-Skalarwerte werden in Filterausdrücken</strong> jedoch <strong>immer als „false“ ausgewertet</strong>. Verwenden Sie „ <code translate="no">IS NULL</code> “ oder „ <code translate="no">IS NOT NULL</code> “, um Entitäten danach auszuwählen, ob ein Skalarfeld den Wert NULL aufweist.</p>
-<p>Beispiel: Bei einem nullfähigen Skalarfeld „ <code translate="no">age</code> “ wählt der folgende Filter Entitäten aus, deren Alter größer als 18 ist:</p>
+    </button></h2><div class="alert note">
+<p>Ab Milvus 3.0.3 können Sie „ <code translate="no">IS NULL</code> “ und „ <code translate="no">IS NOT NULL</code> “ in Abfrage- und Suchfiltern für gewöhnliche Vektorfelder verwenden, um Entitäten auszuwählen, deren Vektorfeld jeweils NULL oder nicht NULL ist.</p>
+<p>Um Entitäten zu finden, deren Feld „ <code translate="no">embedding</code> “ den Wert NULL hat, verwenden Sie „ <code translate="no">query()</code> “ mit dem Filter „ <code translate="no">embedding IS NULL</code> “. Dieser Filter ist auch in „ <code translate="no">search()</code> “ gültig. Eine Suche nach „ <code translate="no">embedding</code> “ mit diesem Filter liefert jedoch keine Treffer: Entitäten ohne einen Wert für „ <code translate="no">embedding</code> “ haben keinen Vektor, der mit dem Abfragevektor verglichen werden könnte.</p>
+<p>Informationen zu unterstützten Typen, Syntax und Beispielen finden Sie unter <a href="/docs/de/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">den Operatoren „IS NULL“ und „IS NOT NULL</a>“.</p>
+</div>
+<p>Bei skalaren Feldern, die mit „ <code translate="no">nullable=True</code> “ definiert sind, treffen Vergleichsbedingungen wie „ <code translate="no">age &gt; 18</code> “ oder „ <code translate="no">status == &quot;active&quot;</code> “ nicht auf Entitäten zu, bei denen das verglichene Feld NULL ist.</p>
+<p>Beispiel: Bei einem nullfähigen Skalarfeld ` <code translate="no">age</code>` wählt der folgende Filter Entitäten aus, deren Alter größer als 18 ist:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

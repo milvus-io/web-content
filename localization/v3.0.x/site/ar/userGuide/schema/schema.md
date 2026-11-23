@@ -45,8 +45,8 @@ summary: >-
    <span>تصميم المخطط</span>
   
  </span></p>
-<p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات إلى نموذج بيانات معبر عنه بمخطط. على سبيل المثال، يجب «فهرسة» البحث عن جزء من النص عن طريق تحويل السلسلة النصية إلى متجه من خلال «التضمين» وتمكين البحث المتجهي. بالإضافة إلى هذا المطلب الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتحسين عمليات البحث الدلالي من خلال التصفية، بحيث يتم عرض النصوص المنشورة بعد تاريخ محدد أو التي كتبها مؤلف معين فقط. يمكنك أيضًا استرداد هذه القيم العددية مع النص الرئيسي لعرض نتيجة البحث في التطبيق. يجب تعيين معرّف فريد لكل منها لتنظيم هذه المقاطع النصية، ويُعبَّر عنه كعدد صحيح أو سلسلة نصية. هذه العناصر أساسية لتحقيق منطق بحث متطور.​</p>
-<p>راجع <a href="/docs/ar/schema-hands-on.md">«التدريب العملي</a> على <a href="/docs/ar/schema-hands-on.md">تصميم المخطط</a> » لمعرفة كيفية إنشاء مخطط جيد التصميم.</p>
+<p>يتضمن تصميم نموذج البيانات لنظام البحث تحليل احتياجات العمل وتجريد المعلومات إلى نموذج بيانات معبر عنه بمخطط. على سبيل المثال، يجب «فهرسة» البحث عن جزء من النص عن طريق تحويل السلسلة النصية إلى متجه من خلال «التضمين» وتمكين البحث المتجهي. بالإضافة إلى هذا المطلب الأساسي، قد يكون من الضروري تخزين خصائص أخرى مثل الطابع الزمني للنشر والمؤلف. تسمح هذه البيانات الوصفية بتحسين عمليات البحث الدلالي من خلال التصفية، بحيث يتم عرض النصوص المنشورة بعد تاريخ محدد أو من قبل مؤلف معين فقط. يمكنك أيضًا استرداد هذه القيم العددية مع النص الرئيسي لعرض نتيجة البحث في التطبيق. يجب تعيين معرّف فريد لكل منها لتنظيم هذه المقاطع النصية، ويُعبَّر عنه كعدد صحيح أو سلسلة نصية. هذه العناصر أساسية لتحقيق منطق بحث متطور.​</p>
+<p>راجع «تدريب <a href="/docs/ar/schema-hands-on.md">عملي</a> على <a href="/docs/ar/schema-hands-on.md">تصميم المخطط</a> » لمعرفة كيفية إنشاء مخطط جيد التصميم.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">إنشاء المخطط​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,11 +62,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوضح مقتطف الشفرة التالي كيفية إنشاء مخطط.</p>
+    </button></h2><p>يوضح المقتطف البرمجي التالي كيفية إنشاء مخطط.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -106,9 +106,9 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
       </svg>
     </button></h2><p>يُعرّف الحقل الأساسي في المجموعة الكيان بشكل فريد. ولا يقبل سوى قيم <strong>Int64</strong> أو <strong>VARCHAR</strong>. توضح مقتطفات الكود التالية كيفية إضافة الحقل الأساسي.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -152,8 +152,8 @@ export schema='{​
 }'​
 
 </code></pre>
-<p>عند إضافة حقل، يمكنك تحديد الحقل صراحةً كحقل أساسي عن طريق تعيين خاصية <code translate="no">is_primary</code> الخاصة به إلى <code translate="no">True</code>. يقبل الحقل الأساسي قيم <strong>Int64</strong> بشكل افتراضي. في هذه الحالة، يجب أن تكون قيمة الحقل الأساسي أعدادًا صحيحة مشابهة لـ <code translate="no">12345</code>. إذا اخترت استخدام قيم <strong>VARCHAR</strong> في الحقل الأساسي، فيجب أن تكون القيمة سلاسل مشابهة لـ <code translate="no">my_entity_1234</code>.</p>
-<p>يمكنك أيضًا تعيين خصائص « <code translate="no">autoId</code> » إلى <code translate="no">True</code> لجعل Milvus يقوم تلقائيًا بتخصيص قيم الحقل الأساسي عند إدراج البيانات.​</p>
+<p>عند إضافة حقل، يمكنك تحديد الحقل صراحةً كحقل أساسي عن طريق تعيين خاصية « <code translate="no">is_primary</code> » الخاصة به إلى « <code translate="no">True</code> ». يقبل الحقل الأساسي قيم <strong>Int64</strong> بشكل افتراضي. في هذه الحالة، يجب أن تكون قيمة الحقل الأساسي أعدادًا صحيحةً مشابهةً لـ « <code translate="no">12345</code> ». إذا اخترت استخدام قيم <strong>VARCHAR</strong> في الحقل الأساسي، فيجب أن تكون القيمة سلاسل نصية مشابهةً لـ « <code translate="no">my_entity_1234</code> ».​</p>
+<p>يمكنك أيضًا تعيين خصائص « <code translate="no">autoId</code> » (تخصيص الحقول الأولية) إلى <code translate="no">True</code> لجعل Milvus يقوم تلقائيًا بتخصيص قيم الحقول الأولية عند إدراج البيانات.​</p>
 <p>للحصول على التفاصيل، راجع <a href="/docs/ar/primary-field.md">«الحقل الأساسي وAutoID</a>».​</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">إضافة الحقول المتجهة​<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -172,9 +172,9 @@ export schema='{​
       </svg>
     </button></h2><p>تقبل الحقول المتجهة مختلف أنواع التضمينات المتجهة المتفرقة والكثيفة. في Milvus، يمكنك إضافة أربعة حقول متجهة إلى مجموعة. توضح مقتطفات الكود التالية كيفية إضافة حقل متجه.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -215,16 +215,16 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>تشير المعلمة <code translate="no">dim</code> في مقتطفات الكود أعلاه إلى أبعاد التضمينات المتجهة التي سيتم الاحتفاظ بها في الحقل المتجه. تشير القيمة <code translate="no">FLOAT_VECTOR</code> إلى أن الحقل المتجه يحتوي على قائمة من الأرقام العائمة ذات 32 بت، والتي تُستخدم عادةً لتمثيل المضاد اللوغاريتمي. بالإضافة إلى ذلك، يدعم Milvus أيضًا أنواع التضمينات المتجهة التالية:​</p>
+<p>تشير المعلمة <code translate="no">dim</code> في مقتطفات الكود أعلاه إلى أبعاد التضمينات المتجهة التي سيتم الاحتفاظ بها في الحقل المتجه. تشير القيمة <code translate="no">FLOAT_VECTOR</code> إلى أن الحقل المتجه يحتوي على قائمة من الأرقام العائمة ذات 32 بت، والتي تُستخدم عادةً لتمثيل المضاد اللوغاريتمي. بالإضافة إلى ذلك، يدعم Milvus أيضًا الأنواع التالية من التضمينات المتجهة:​</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code>​</p>
-<p>يحتوي حقل المتجهات من هذا النوع على قائمة من الأرقام العائمة ذات الدقة النصفية ذات 16 بت، ويُطبق عادةً على سيناريوهات التعلم العميق أو الحوسبة القائمة على وحدة معالجة الرسومات (GPU) التي تكون مقيدة بالذاكرة أو عرض النطاق الترددي.​</p></li>
+<p>يحتوي حقل المتجهات من هذا النوع على قائمة من الأرقام العائمة ذات الدقة النصفية ذات 16 بت، وعادةً ما ينطبق على سيناريوهات التعلم العميق أو الحوسبة القائمة على وحدة معالجة الرسومات (GPU) التي تكون مقيدة بالذاكرة أو عرض النطاق الترددي.​</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code>​</p>
 <p>يحتوي الحقل المتجه من هذا النوع على قائمة من الأرقام العائمة ذات 16 بت، والتي تتميز بدقة مخفضة ولكن بنفس نطاق الأس الذي يتميز به Float32. ويُستخدم هذا النوع من البيانات بشكل شائع في سيناريوهات التعلم العميق، حيث إنه يقلل من استخدام الذاكرة دون التأثير بشكل كبير على الدقة.​</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code>​</p>
-<p>يحتوي الحقل المتجه من هذا النوع على قائمة من الأصفار والآحاد. وتُستخدم هذه القيم كسمات مدمجة لتمثيل البيانات في سيناريوهات معالجة الصور واسترجاع المعلومات.​</p></li>
+<p>يحتوي الحقل المتجه من هذا النوع على قائمة من الأصفار والآحاد. وتُستخدم هذه الأرقام كميزات مدمجة لتمثيل البيانات في سيناريوهات معالجة الصور واسترجاع المعلومات.​</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code>​</p>
-<p>يحتوي الحقل المتجه من هذا النوع على قائمة بأرقام غير صفرية وأرقام تسلسلها لتمثيل تضمينات متجهة متفرقة.​</p></li>
+<p>يحتوي الحقل المتجه من هذا النوع على قائمة من الأرقام غير الصفرية وأرقام تسلسلها لتمثيل التضمينات المتجهة المتفرقة.​</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields​" class="common-anchor-header">إضافة الحقول القياسية​<button data-href="#Add-Scalar-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -241,7 +241,7 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في الحالات الشائعة، يمكنك استخدام الحقول القياسية لتخزين البيانات الوصفية للتضمينات المتجهة المخزنة في Milvus، وإجراء عمليات بحث باستخدام الشبكات العصبية الاصطناعية (ANN) مع تصفية البيانات الوصفية لتحسين دقة نتائج البحث. يدعم Milvus أنواعًا متعددة من الحقول القياسية، بما في ذلك <strong>VARCHAR</strong> <strong>وTEXT</strong> <strong>وBoolean</strong> <strong>وInt</strong> وFloat <strong>وDouble</strong> <strong>وArray</strong> وJSON.​</p>
+    </button></h2><p>في الحالات الشائعة، يمكنك استخدام الحقول القياسية لتخزين البيانات الوصفية لتضمينات المتجهات المخزنة في Milvus، وإجراء عمليات بحث باستخدام الشبكات العصبية الاصطناعية (ANN) مع تصفية البيانات الوصفية لتحسين دقة نتائج البحث. يدعم Milvus أنواعًا متعددة من الحقول القياسية، بما في ذلك <strong>VARCHAR</strong> <strong>وTEXT</strong> <strong>وBoolean</strong> <strong>وInt</strong> وFloat <strong>وDouble</strong> <strong>وArray</strong> وJSON.​</p>
 <h3 id="Add-VARCHAR-Fields​" class="common-anchor-header">إضافة حقول VARCHAR​<button data-href="#Add-VARCHAR-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,9 +259,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>في Milvus، يمكنك استخدام حقول <code translate="no">VARCHAR</code> لتخزين السلاسل النصية. لمزيد من المعلومات حول حقل <code translate="no">VARCHAR</code> ، راجع <a href="/docs/ar/string.md">حقل VarChar</a>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -318,7 +318,7 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>في Milvus 3.0 والإصدارات الأحدث، يمكنك استخدام حقول <code translate="no">TEXT</code> لتخزين نص المستندات والمقاطع والسجلات والمحتويات النصية الطويلة الأخرى. على عكس <code translate="no">VARCHAR</code> ، لا يتطلب حقل <code translate="no">TEXT</code> <code translate="no">max_length</code> . لمزيد من المعلومات حول حقل <code translate="no">TEXT</code> ، راجع <a href="/docs/ar/text.md">حقل النص</a>.</p>
+    </button></h3><p>في Milvus 3.0 والإصدارات الأحدث، يمكنك استخدام حقول <code translate="no">TEXT</code> لتخزين نصوص المستندات والمقاطع والسجلات والمحتويات النصية الطويلة الأخرى. على عكس <code translate="no">VARCHAR</code> ، لا يتطلب حقل <code translate="no">TEXT</code> <code translate="no">max_length</code> . لمزيد من المعلومات حول حقل <code translate="no">TEXT</code> ، راجع <a href="/docs/ar/text.md">حقل النص</a>.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_text&quot;</span>,
     datatype=DataType.TEXT,
@@ -341,9 +341,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>أنواع الأرقام التي يدعمها Milvus هي <code translate="no">Int8</code> و <code translate="no">Int16</code> و <code translate="no">Int32</code> و <code translate="no">Int64</code> و <code translate="no">Float</code> و <code translate="no">Double</code>. لمزيد من المعلومات حول حقول الأرقام، راجع <a href="/docs/ar/number.md">«حقل الأرقام</a>».​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -397,9 +397,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>يدعم Milvus الحقول المنطقية. توضح مقتطفات الكود التالية كيفية إضافة حقل منطقي.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -454,9 +454,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>عادةً ما يخزن حقل JSON بيانات JSON شبه منظمة. لمزيد من المعلومات حول حقول JSON، راجع <a href="/docs/ar/use-json-fields.md">«حقل JSON</a>».​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -512,9 +512,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>يخزن حقل المصفوفة قائمة من العناصر. يجب أن تكون أنواع بيانات جميع العناصر في حقل المصفوفة متماثلة. لمزيد من المعلومات حول حقول المصفوفة، راجع <a href="/docs/ar/array_data_type.md">«حقل المصفوفة</a>».​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

@@ -22,10 +22,10 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>기존의 벡터 검색에서는 결과가 순전히 벡터 유사도, 즉 수학적 공간에서 벡터들이 얼마나 잘 일치하는지에 따라 순위가 매겨집니다. 하지만 실제 응용 분야에서는 콘텐츠의 관련성을 결정하는 요소가 단순히 의미적 유사성 이상의 요소에 달려 있는 경우가 많습니다.</p>
-<p>다음과 같은 일상적인 상황을 생각해 보십시오:</p>
+<p>다음과 같은 일상적인 상황을 생각해 보십시오.</p>
 <ul>
 <li><p>어제 게시된 기사가 3년 전의 유사한 기사보다 더 높은 순위에 표시되어야 하는 뉴스 검색</p></li>
-<li><p>30분 운전이 필요한 식당보다 5분 거리에 있는 식당을 우선순위로 보여주는 식당 검색 서비스</p></li>
+<li><p>30분 운전이 필요한 식당보다 5분 거리에 있는 식당을 우선적으로 추천하는 식당 검색 서비스</p></li>
 <li><p>검색어와의 유사도가 약간 낮더라도 인기 상품을 상위에 노출하는 전자상거래 플랫폼</p></li>
 </ul>
 <p>이러한 시나리오들은 모두 벡터 유사성과 시간, 거리, 인기 같은 다른 수치적 요소 간의 균형을 맞추어야 한다는 공통된 필요성을 공유합니다.</p>
@@ -71,7 +71,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>감쇠 순위 지정(Decay ranking)은 시간이나 지리적 거리와 같은 수치적 요소를 순위 지정 과정에 반영함으로써 기존의 벡터 검색 기능을 강화합니다. 전체 과정은 다음 단계를 따릅니다:</p>
+    </button></h2><p>감쇠 순위 지정(Decay ranking)은 시간이나 지리적 거리와 같은 수치적 요소를 순위 지정 과정에 통합하여 기존의 벡터 검색 기능을 향상시킵니다. 전체 과정은 다음 단계를 따릅니다:</p>
 <h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">1단계: 정규화된 유사도 점수 계산<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +93,7 @@ beta: Milvus 2.6.x
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
 <p>이를 통해 거리는 0~1 사이의 유사도 점수로 변환되며, 점수가 높을수록 더 좋은 결과를 나타냅니다.</p></li>
-<li><p><strong>IP</strong>, <strong>COSINE</strong> 및 <strong>BM25</strong> 거리 측정 기준의 경우(점수가 높을수록 일치도가 더 높음을 나타냄): 점수는 정규화 없이 직접 사용됩니다.</p></li>
+<li><p><strong>IP</strong>, <strong>COSINE</strong> 및 <strong>BM25</strong> 거리 측정 기준의 경우(이 경우 점수가 높을수록 일치도가 더 높음을 나타냄): 점수는 정규화 없이 직접 사용됩니다.</p></li>
 </ul>
 <h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">2단계: 감쇠 점수 계산<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,7 +110,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음으로, Milvus는 사용자가 선택한 감쇠 순위 지정기를 사용하여 숫자형 필드 값(타임스탬프나 거리 등)을 기반으로 감쇠 점수를 계산합니다:</p>
+    </button></h3><p>다음으로, Milvus는 사용자가 선택한 감쇠 랭커를 사용하여 숫자형 필드 값(타임스탬프나 거리 등)을 기반으로 감쇠 점수를 계산합니다:</p>
 <ul>
 <li><p>각 감쇠 랭커는 원시 수치 값을 0~1 사이의 정규화된 관련성 점수로 변환합니다.</p></li>
 <li><p>감쇠 점수는 이상적인 지점과의 “거리”를 기준으로 항목의 관련성을 나타냅니다.</p></li>
@@ -137,7 +137,7 @@ beta: Milvus 2.6.x
 <p>하이브리드 검색(여러 벡터 필드를 결합하는 경우)의 경우, Milvus는 검색 요청 중 가장 높은 정규화된 유사도 점수를 채택합니다:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>예를 들어, 하이브리드 검색에서 특정 연구 논문이 벡터 유사도에서 0.82, BM25 기반 텍스트 검색에서 0.91의 점수를 받은 경우, Milvus는 감쇠 계수를 적용하기 전에 0.91을 기본 유사도 점수로 사용합니다.</p>
+<p>예를 들어, 하이브리드 검색에서 특정 연구 논문이 벡터 유사도에서 0.82점, BM25 기반 텍스트 검색에서 0.91점을 받은 경우, Milvus는 감쇠 계수를 적용하기 전에 0.91을 기본 유사도 점수로 사용합니다.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">감쇠 순위 적용 사례<button data-href="#Decay-ranking-in-action" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,7 +242,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>지수형 (<code translate="no">exp</code>)</p></td>
      <td><p>초기에는 급격히 감소하지만 롱테일 현상을 유지함</p></td>
-     <td><ul><li><p>최신성이 중요한 뉴스 피드</p></li><li><p>최신 콘텐츠가 주를 이루어야 하는 소셜 미디어</p></li><li><p>근접성이 매우 중요하지만, 예외적으로 우수한 원거리 항목은 계속 노출되어야 할 때</p></li></ul></td>
+     <td><ul><li><p>최신성이 중요한 뉴스 피드</p></li><li><p>최신 콘텐츠가 주를 이루어야 하는 소셜 미디어</p></li><li><p>근접성이 매우 중요하지만, 예외적으로 뛰어난 원거리 항목은 계속 노출되어야 할 때</p></li></ul></td>
      <td><p>뉴스 앱에서는 어제 게시된 기사가 일주일 전 콘텐츠보다 훨씬 높은 순위를 차지하지만, 관련성이 매우 높은 오래된 기사도 여전히 표시될 수 있습니다</p></td>
    </tr>
    <tr>
@@ -405,7 +405,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -453,7 +492,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">params.scale</code></p></td>
      <td><p>예</p></td>
-     <td><p>관련성이 <code translate="no">decay</code> 값으로 떨어지는 거리 또는 시간입니다. 관련성이 얼마나 빠르게 감소하는지 제어합니다.</p><p>시간 기반 감쇠의 경우, 시간 단위는 수집 데이터와 일치해야 합니다.</p><p>값이 클수록 관련성이 더 서서히 감소하고, 값이 작을수록 더 가파르게 감소합니다.</p></td>
+     <td><p>관련성이 <code translate="no">decay</code> 값으로 떨어지는 거리 또는 시간입니다. 관련성이 감소하는 속도를 제어합니다.</p><p>시간 기반 감쇠의 경우, 시간 단위는 수집 데이터와 일치해야 합니다.</p><p>값이 클수록 관련성이 더 서서히 감소하고, 값이 작을수록 더 가파르게 감소합니다.</p></td>
      <td><ul><li><p>시간의 경우: 초 단위의 기간(예: 7일 동안 <code translate="no">7 * 24 * 60 * 60</code> )</p></li><li><p>거리의 경우: 미터(예: 5km의 <code translate="no">5000</code> )</p></li></ul></td>
    </tr>
    <tr>
@@ -535,16 +574,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -615,5 +656,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

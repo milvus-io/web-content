@@ -2,11 +2,11 @@
 id: index-vector-fields.md
 order: 1
 summary: >-
-  Panduan ini memandu Anda melalui operasi dasar dalam membuat dan mengelola
-  indeks pada bidang vektor dalam koleksi.
-title: Mengindeks Bidang Vektor
+  Panduan ini akan memandu Anda melalui langkah-langkah dasar dalam membuat dan
+  mengelola indeks pada bidang vektor dalam sebuah koleksi.
+title: Indeks Bidang Vektor
 ---
-<h1 id="Index-Vector-Fields" class="common-anchor-header">Mengindeks Bidang Vektor<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Vector-Fields" class="common-anchor-header">Indeks Bidang Vektor<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,11 +21,11 @@ title: Mengindeks Bidang Vektor
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini memandu Anda melalui operasi dasar dalam membuat dan mengelola indeks pada bidang vektor dalam koleksi.</p>
+    </button></h1><p>Panduan ini memandu Anda melalui operasi dasar dalam membuat dan mengelola indeks pada bidang vektor dalam sebuah koleksi.</p>
 <div class="alert warning">
 <p>Halaman ini sudah tidak digunakan lagi. Untuk implementasi terbaru, lihat <a href="/docs/id/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/id/hnsw.md">HNSW</a>, dan lainnya.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Ikhtisar<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +40,13 @@ title: Mengindeks Bidang Vektor
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dengan memanfaatkan metadata yang tersimpan dalam berkas indeks, Milvus mengatur data Anda dalam struktur khusus, sehingga memudahkan pengambilan informasi yang diminta dengan cepat selama pencarian atau kueri.</p>
-<p>Milvus menyediakan beberapa jenis indeks dan metrik untuk mengurutkan nilai bidang untuk pencarian kemiripan yang efisien. Tabel berikut mencantumkan jenis indeks dan metrik yang didukung untuk berbagai jenis bidang vektor. Saat ini, Milvus mendukung berbagai jenis data vektor, termasuk penyematan floating point (sering dikenal sebagai vektor floating point atau vektor padat), penyematan biner (juga dikenal sebagai vektor biner), dan penyematan jarang (juga dikenal sebagai vektor jarang). Untuk detailnya, lihat <a href="/docs/id/index.md">Indeks Dalam Memori</a> dan <a href="/docs/id/metric.md">Metrik Kemiripan</a>.</p>
+    </button></h2><p>Dengan memanfaatkan metadata yang disimpan dalam berkas indeks, Milvus mengatur data Anda dalam struktur khusus, sehingga memudahkan pengambilan informasi yang diminta secara cepat selama pencarian atau kueri.</p>
+<p>Milvus menyediakan beberapa jenis indeks dan metrik untuk mengurutkan nilai bidang guna pencarian kesamaan yang efisien. Tabel berikut mencantumkan jenis indeks dan metrik yang didukung untuk berbagai jenis bidang vektor. Saat ini, Milvus mendukung berbagai jenis data vektor, termasuk embedding floating point (sering dikenal sebagai vektor floating point atau vektor padat), embedding biner (juga dikenal sebagai vektor biner), dan embedding jarang (juga dikenal sebagai vektor jarang). Untuk detailnya, lihat <a href="/docs/id/index.md">Indeks Dalam Memori</a> dan <a href="/docs/id/metric.md">Metrik Kesamaan</a>.</p>
 <div class="filter">
- <a href="#floating">Penyematan titik mengambang</a> <a href="#binary">Penyematan biner Penyematan</a> <a href="#sparse">jarang</a></div>
+ <a href="#floating">Embedding floating point</a>
+ <a href="#binary"> Embedding biner</a>
+ <a href="#sparse"> Embedding spars</a>
+</div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -54,8 +57,8 @@ title: Mengindeks Bidang Vektor
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Jarak Euclidean (L2)</li><li>Produk dalam (IP)</li><li>Kemiripan kosinus (COSINE)</li></td>
-    <td class="tg-0pky" rowspan="2"><ul><li>DATAR</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
+    <td class="tg-0pky"><ul><li>Jarak Euklides (L2)</li><li>Produk dalam (IP)</li><li>Kesamaan kosinus (COSINE)</li></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -98,10 +101,10 @@ title: Mengindeks Bidang Vektor
 </tbody>
 </table>
 <div class="alert note">
-<p>Sejak Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan sambil mempertahankan kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
+<p>Mulai dari Milvus 2.5.4 ke atas, ` <code translate="no">SPARSE_WAND</code> ` telah dihentikan penggunaannya. Sebagai gantinya, disarankan untuk menggunakan ` <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> ` untuk kesetaraan sambil tetap menjaga kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
 </div>
-<p>Direkomendasikan untuk membuat indeks untuk bidang vektor dan bidang skalar yang sering diakses.</p>
+<p>Disarankan untuk membuat indeks baik untuk bidang vektor maupun bidang skalar yang sering diakses.</p>
 <h2 id="Preparations" class="common-anchor-header">Persiapan<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,23 +120,26 @@ title: Mengindeks Bidang Vektor
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Seperti yang dijelaskan di <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>, Milvus secara otomatis membuat indeks dan memuatnya ke dalam memori ketika membuat koleksi jika salah satu dari kondisi berikut ini ditentukan dalam permintaan pembuatan koleksi:</p>
+    </button></h2><p>Sebagaimana dijelaskan dalam <a href="/docs/id/manage-collections.md">Mengelola Koleksi</a>, Milvus secara otomatis menghasilkan indeks dan memuatnya ke dalam memori saat membuat koleksi jika salah satu dari kondisi berikut ditentukan dalam permintaan pembuatan koleksi:</p>
 <ul>
-<li><p>Dimensi bidang vektor dan tipe metrik, atau</p></li>
+<li><p>Dimensi bidang vektor dan jenis metrik, atau</p></li>
 <li><p>Skema dan parameter indeks.</p></li>
 </ul>
-<p>Cuplikan kode di bawah ini menggunakan kembali kode yang sudah ada untuk membuat koneksi ke instance Milvus dan membuat koleksi tanpa menentukan parameter indeksnya. Dalam kasus ini, koleksi tidak memiliki indeks dan tetap tidak dimuat.</p>
+<p>Potongan kode di bawah ini memanfaatkan kembali kode yang ada untuk membuat koneksi ke instance Milvus dan membuat koleksi tanpa menentukan parameter indeksnya. Dalam hal ini, koleksi tersebut tidak memiliki indeks dan tetap tidak dimuat.</p>
 <div class="language-python">
-<p>Untuk mempersiapkan pengindeksan, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> untuk menyambung ke server Milvus dan menyiapkan koleksi dengan menggunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
+<p>Untuk mempersiapkan pengindeksan, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> untuk terhubung ke server Milvus dan menyiapkan koleksi dengan menggunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>Untuk mempersiapkan pengindeksan, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> untuk menyambung ke server Milvus dan menyiapkan koleksi dengan menggunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, , dan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Untuk mempersiapkan pengindeksan, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> untuk terhubung ke server Milvus dan menyiapkan koleksi dengan menggunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, dan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Untuk mempersiapkan pengindeksan, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> untuk menyambung ke server Milvus dan menyiapkan koleksi dengan menggunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Untuk mempersiapkan proses pengindeksan, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> untuk terhubung ke server Milvus dan menyiapkan koleksi dengan menggunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -236,16 +242,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Untuk membuat indeks untuk koleksi atau mengindeks koleksi, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> untuk menyiapkan parameter indeks dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> untuk membuat indeks.</p>
+<p>Untuk membuat indeks untuk sebuah koleksi atau mengindeks sebuah koleksi, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> untuk menyiapkan parameter indeks dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> untuk membuat indeks.</p>
 </div>
 <div class="language-java">
-<p>Untuk membuat indeks untuk koleksi atau mengindeks koleksi, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> untuk menyiapkan parameter indeks dan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> untuk membuat indeks.</p>
+<p>Untuk membuat indeks untuk sebuah koleksi atau mengindeks sebuah koleksi, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> untuk menyiapkan parameter indeks dan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> untuk membuat indeks tersebut.</p>
 </div>
 <div class="language-javascript">
-<p>Untuk membuat indeks untuk koleksi atau mengindeks koleksi, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Untuk membuat indeks untuk suatu koleksi atau mengindeks suatu koleksi, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4.1. Set up the index parameters</span>
 index_params = MilvusClient.prepare_index_params()
 
@@ -318,23 +327,23 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>Nama file target untuk menerapkan objek ini.</td>
+      <td>Nama berkas tujuan tempat objek ini akan diterapkan.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>Algoritme yang digunakan untuk mengukur kemiripan antar vektor. Nilai yang memungkinkan adalah <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Ini hanya tersedia jika bidang yang ditentukan adalah bidang vektor. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indeks yang didukung di Milvus</a>.</td>
+      <td>Algoritma yang digunakan untuk mengukur kemiripan antar vektor. Nilai yang mungkin adalah <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Opsi ini hanya tersedia jika bidang yang ditentukan adalah bidang vektor. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indeks yang didukung di Milvus</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>Nama algoritme yang digunakan untuk mengatur data dalam bidang tertentu. Untuk algoritma yang berlaku, lihat <a href="https://milvus.io/docs/index.md">Indeks dalam memori</a> dan <a href="https://milvus.io/docs/disk_index.md">Indeks pada disk</a>.</td>
+      <td>Nama algoritma yang digunakan untuk mengatur data dalam bidang tertentu. Untuk algoritma yang berlaku, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam Memori</a> dan <a href="https://milvus.io/docs/disk_index.md">Indeks di Disk</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>Nama file indeks yang dihasilkan setelah objek ini diterapkan.</td>
+      <td>Nama berkas indeks yang dihasilkan setelah objek ini diterapkan.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Parameter penyetelan untuk jenis indeks yang ditentukan. Untuk detail tentang kunci dan rentang nilai yang mungkin, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam Memori</a>.</td>
+      <td>Parameter penyempurnaan untuk jenis indeks yang ditentukan. Untuk detail mengenai kunci dan rentang nilai yang mungkin, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam Memori</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>
@@ -346,7 +355,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Mengontrol bagaimana indeks dibuat terkait dengan permintaan klien. Nilai yang valid:<br><ul><li><code translate="no">True</code> (default): Klien menunggu hingga indeks selesai dibangun sebelum kembali. Ini berarti Anda tidak akan mendapatkan respons hingga proses selesai.</li><li><code translate="no">False</code>: Klien segera kembali setelah permintaan diterima dan indeks sedang dibuat di latar belakang. Untuk mengetahui apakah pembuatan indeks telah selesai, gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Mengontrol cara indeks dibangun sehubungan dengan permintaan klien. Nilai yang valid:<br><ul><li><code translate="no">True</code> (default): Klien menunggu hingga indeks selesai dibangun sepenuhnya sebelum kembali. Ini berarti Anda tidak akan menerima respons hingga proses selesai.</li><li><code translate="no">False</code>: Klien akan merespons segera setelah permintaan diterima dan indeks sedang dibangun di latar belakang. Untuk mengetahui apakah pembuatan indeks telah selesai, gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -360,23 +369,23 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>Nama bidang target untuk menerapkan objek IndexParam ini.</td>
+      <td>Nama bidang target tempat objek IndexParam ini diterapkan.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>Nama file indeks yang dihasilkan setelah objek ini diterapkan.</td>
+      <td>Nama berkas indeks yang dihasilkan setelah objek ini diterapkan.</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>Nama algoritme yang digunakan untuk menyusun data dalam bidang tertentu. Untuk algoritme yang berlaku, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam Memori</a> dan <a href="https://milvus.io/docs/disk_index.md">Indeks Pada Disk</a>.</td>
+      <td>Nama algoritma yang digunakan untuk mengatur data di bidang tertentu. Untuk algoritma yang berlaku, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam Memori</a> dan <a href="https://milvus.io/docs/disk_index.md">Indeks di Disk</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>Metrik jarak yang digunakan untuk indeks. Nilai yang memungkinkan adalah <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>Metrik jarak yang akan digunakan untuk indeks. Nilai yang mungkin adalah <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Parameter indeks tambahan. Untuk detailnya, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam-memori</a> dan <a href="https://milvus.io/docs/disk_index.md">Indeks On-disk</a>.</td>
+      <td>Parameter indeks tambahan. Untuk detailnya, lihat <a href="https://milvus.io/docs/index.md">Indeks Dalam Memori</a> dan <a href="https://milvus.io/docs/disk_index.md">Indeks di Disk</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -394,7 +403,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>Nama bidang untuk membuat indeks.</td>
+      <td>Nama bidang tempat indeks akan dibuat.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
@@ -410,15 +419,15 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Parameter khusus indeks lainnya.</td>
+      <td>Parameter lain yang spesifik untuk indeks.</td>
     </tr>
   </tbody>
 </table>
 <div class="admonition note">
-<p><strong>Catatan</strong></p>
-<p>Saat ini, Anda hanya dapat membuat satu file indeks untuk setiap bidang dalam koleksi.</p>
+<p><strong>catatan</strong></p>
+<p>Saat ini, Anda hanya dapat membuat satu berkas indeks untuk setiap bidang dalam sebuah koleksi.</p>
 </div>
-<h2 id="Check-Index-Details" class="common-anchor-header">Memeriksa Detail Indeks<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
+<h2 id="Check-Index-Details" class="common-anchor-header">Periksa Detail Indeks<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -433,18 +442,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda membuat indeks, Anda dapat memeriksa rinciannya.</p>
+    </button></h2><p>Setelah Anda membuat indeks, Anda dapat memeriksa detailnya.</p>
 <div class="language-python">
-<p>Untuk memeriksa rincian indeks, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> untuk membuat daftar nama indeks dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> untuk mendapatkan rincian indeks.</p>
+<p>Untuk memeriksa detail indeks, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> untuk menampilkan daftar nama indeks dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> untuk mendapatkan rincian indeks.</p>
 </div>
 <div class="language-java">
-<p>Untuk memeriksa detail indeks, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan detail indeks.</p>
+<p>Untuk memeriksa rincian indeks, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan rincian indeks.</p>
 </div>
 <div class="language-javascript">
-<p>Untuk memeriksa detail indeks, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan detail indeks.</p>
+<p>Untuk memeriksa rincian indeks, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> untuk mendapatkan detail indeks.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Describe index</span>
 res = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>
@@ -544,8 +556,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Anda dapat memeriksa berkas indeks yang dibuat pada bidang tertentu, dan mengumpulkan statistik jumlah baris yang diindeks menggunakan berkas indeks ini.</p>
-<h2 id="Drop-an-Index" class="common-anchor-header">Membuang Indeks<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
+<p>Anda dapat memeriksa berkas indeks yang dibuat pada kolom tertentu, dan mengumpulkan statistik mengenai jumlah baris yang diindeks menggunakan berkas indeks tersebut.</p>
+<h2 id="Drop-an-Index" class="common-anchor-header">Menghapus Indeks<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -560,21 +572,24 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat dengan mudah membuang indeks jika sudah tidak diperlukan lagi.</p>
+    </button></h2><p>Anda dapat dengan mudah menghapus indeks jika tidak lagi diperlukan.</p>
 <div class="alert note">
-<p>Sebelum membuang indeks, pastikan indeks tersebut telah dirilis terlebih dahulu.</p>
+<p>Sebelum menghapus indeks, pastikan indeks tersebut telah dilepaskan terlebih dahulu.</p>
 </div>
 <div class="language-python">
-<p>Untuk membuang indeks, gunakan perintah <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
+<p>Untuk menghapus indeks, gunakan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>Untuk menjatuhkan indeks, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>Untuk menghapus indeks, gunakan <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>Untuk menjatuhkan indeks, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>Untuk menghapus indeks, gunakan <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Drop index</span>
 client.drop_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,

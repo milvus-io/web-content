@@ -74,7 +74,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>クエリ結果にフィールドを返したり、フィルタで使用したりする場合は、`<code translate="no">add_collection_field()</code> ` を使用してスカラーフィールドを追加します。次の例では、外部データソースの `<code translate="no">score</code> ` フィールドにマッピングされる `<code translate="no">score</code> ` フィールドを追加しています。</p>
+    </button></h3><p>クエリ結果にフィールドを返したり、フィルタで使用したりする場合は、<code translate="no">add_collection_field()</code> を使用してスカラーフィールドを追加します。次の例では、外部データソースの `<code translate="no">score</code> ` フィールドにマッピングされる `<code translate="no">score</code> ` フィールドを追加しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -82,7 +82,7 @@ beta: Milvus 3.0.x
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -96,7 +96,7 @@ collection_name="product_embeddings",
 field_name="score",
 data_type=DataType.DOUBLE,
 nullable=True,
-# 次の行をハイライト
+# 次の行を強調表示
 external_field="score",
 )</p>
 <pre><code translate="no">
@@ -185,7 +185,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -252,7 +252,7 @@ client.add_collection_field(
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python

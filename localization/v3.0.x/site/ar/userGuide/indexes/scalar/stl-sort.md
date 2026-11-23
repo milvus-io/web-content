@@ -2,9 +2,8 @@
 id: stl-sort.md
 title: STL_SORT
 summary: >-
-  يُعد فهرس STL_SORT نوعًا من الفهارس مصممًا خصيصًا لتحسين أداء الاستعلامات على
-  الحقول الرقمية (INT8، INT16، إلخ)، أو حقول VARCHAR، أو حقول TIMESTAMPTZ، وذلك
-  من خلال تنظيم البيانات بترتيب مرتب.
+  استخدم STL_SORT للبحث عن القيم، وتصفية النطاقات، ومطابقة بادئات السلاسل في
+  الحقول المتوافقة.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,13 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>فهرس " <code translate="no">STL_SORT</code> " هو نوع من الفهارس مصمم خصيصًا لتحسين أداء الاستعلامات على الحقول الرقمية (INT8، INT16، إلخ)، أو الحقول من نوع " <code translate="no">VARCHAR</code> "، أو الحقول من نوع " <code translate="no">TIMESTAMPTZ</code> " داخل Milvus، وذلك من خلال تنظيم البيانات بترتيب مرتب.</p>
-<p>استخدم فهرس <code translate="no">STL_SORT</code> إذا كنت تُجري استعلامات بشكل متكرر باستخدام:</p>
-<ul>
-<li><p>تصفية المقارنة باستخدام عوامل التشغيل <code translate="no">==</code> و <code translate="no">!=</code> و <code translate="no">&gt;</code> و <code translate="no">&lt;</code> و <code translate="no">&gt;=</code> و <code translate="no">&lt;=</code> </p></li>
-<li><p>تصفية النطاق باستخدام عوامل التشغيل <code translate="no">IN</code> و <code translate="no">LIKE</code> </p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">STL_SORT</code> يخزن القيم بترتيب مرتب لتسريع عمليات البحث عن القيم، وتصفية النطاقات، ومطابقة بادئات السلاسل.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,12 +36,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p>الحقول الرقمية (على سبيل المثال، <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code> و <code translate="no">FLOAT</code> و <code translate="no">DOUBLE</code>). لمزيد من التفاصيل، راجع " <a href="/docs/ar/number.md">القيم المنطقية والأرقام"</a>.</p></li>
 <li><p><code translate="no">VARCHAR</code> الحقول. لمزيد من التفاصيل، راجع <a href="/docs/ar/string.md">«حقل السلسلة</a>».</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code> الحقول. لمزيد من التفاصيل، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code> الحقول. لمزيد من التفاصيل، راجع <a href="/docs/ar/timestamptz-field.md">«حقل TIMESTAMPTZ</a>».</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">كيفية العمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<p>بالنسبة للحقول الفرعية الرقمية أو من نوع VARCHAR أو TIMESTAMPTZ في StructArray، راجع <a href="/docs/ar/index-structarray-fields.md#Create-scalar-indexes">«فهرسة حقول StructArray</a>». لا تدعم حقول ARRAY العادية <code translate="no">STL_SORT</code> ؛ راجع <a href="/docs/ar/array_data_type.md#Array-index-support">«دعم فهرسة المصفوفات</a> » لمعرفة خيارات الفهرسة المتاحة لها.</p>
+<p>تدعم مسارات JSON التي تم تحويلها إلى <code translate="no">DOUBLE</code> أو <code translate="no">VARCHAR</code> ميزة <code translate="no">STL_SORT</code> بعد <a href="/docs/ar/json-indexing.md#Index-requirements">إعداد تفعيل فهرسة JSON</a> في الإصدار <a href="/docs/ar/json-indexing.md#Index-requirements">3.0</a>.</p>
+<p><a id="Queries-accelerated-by-STLSORT"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">تسريع التصفية<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,23 +75,76 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُنفذ Milvus عملية " <code translate="no">STL_SORT</code> " على مرحلتين:</p>
-<ol>
-<li><p><strong>إنشاء الفهرس</strong></p>
+    </button></h3><p>يمكن أن يساعد مؤشر <code translate="no">STL_SORT</code> في تقييم الشروط التالية، رهناً بتوافق الحقول والتحويل:</p>
 <ul>
-<li><p>أثناء الاستيعاب، يجمع Milvus جميع القيم الخاصة بالحقل المفهرس.</p></li>
-<li><p>يتم فرز القيم بترتيب تصاعدي باستخدام <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> في مكتبة C++ STL.</p></li>
-<li><p>يتم إقران كل قيمة بمعرف الكيان الخاص بها، ويتم حفظ المصفوفة المرتبة كفهرس.</p></li>
-</ul></li>
-<li><p><strong>تسريع الاستعلامات</strong></p>
-<ul>
-<li><p>عند إجراء الاستعلام، يستخدم Milvus <strong>البحث الثنائي</strong> (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> و <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) على المصفوفة المرتبة.</p></li>
-<li><p>في حالة المساواة، يعثر Milvus بسرعة على جميع القيم المطابقة.</p></li>
-<li><p>بالنسبة للنطاقات، يحدد Milvus موضع البداية والنهاية ويعرض جميع القيم الموجودة بينهما.</p></li>
-<li><p>يتم تمرير معرّفات الكيانات المطابقة إلى منفّذ الاستعلام لتجميع النتيجة النهائية.</p></li>
-</ul></li>
-</ol>
-<p>وهذا يقلل من تعقيد الاستعلام من <strong>O(n)</strong> (المسح الكامل) إلى <strong>O(log n + m)</strong>، حيث <em>m</em> هو عدد التطابقات.</p>
+<li>المساواة (<code translate="no">==</code> ، <code translate="no">!=</code>) والعضوية (<code translate="no">in</code> ، <code translate="no">not in</code>).</li>
+<li>النطاقات: <code translate="no">&lt;</code> ، <code translate="no">&lt;=</code> ، <code translate="no">&gt;</code> ، <code translate="no">&gt;=</code> ، بما في ذلك الفواصل الزمنية مثل <code translate="no">10 &lt;= price &lt; 50</code>.</li>
+<li>مطابقة بادئة VARCHAR، مثل <code translate="no">name LIKE &quot;abc%&quot;</code>.</li>
+<li>المقارنات على مسارات JSON القيمية المؤهلة. انظر <a href="/docs/ar/json-indexing.md#Supported-filters">مرشحات JSON</a>.</li>
+</ul>
+<p>بالنسبة لمرشحات اللاحقة والسلسلة الفرعية وLIKE العامة والتعبيرات النمطية، يمكن لـ Milvus تقييم النمط مقابل السلاسل المخزنة في الفهرس. قد يتطلب ذلك مراجعة العديد من السلاسل المختلفة. انظر <a href="/docs/ar/pattern-matching.md">مطابقة الأنماط</a> للاطلاع على تبسيطات الصياغة والتخطيط.</p>
+<div class="alert note">
+<blockquote>
+<p>هذه هي إمكانيات الفهرس، وليست قيودًا على تعبيرات المرشحات الصالحة. انظر <a href="/docs/ar/scalar_index.md#Filter-execution">الفهرس القياسي</a> لمعرفة قيود البحث المشتركة. بالنسبة لاختبارات <code translate="no">AND</code> و <code translate="no">OR</code> و <code translate="no">NOT</code> وNULL (<code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code>)، انظر <a href="/docs/ar/basic-operators.md">العوامل الأساسية</a>.</p>
+</blockquote>
+</div>
+<p><a id="Usage-notes"></a></p>
+<h3 id="Memory-considerations" class="common-anchor-header">اعتبارات الذاكرة<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لا تدعم الفهارس الصريحة لـ <code translate="no">STL_SORT</code> الوضع المُخطط للذاكرة.</p>
+<p>بالنسبة للحقول الرقمية وحقول الطوابع الزمنية التي لا تحتوي على قيم NULL، استخدم هذه التقديرات التقريبية بالبايت. <code translate="no">N</code> هو عدد الكيانات:</p>
+<table>
+<thead>
+<tr><th>نوع الحقل</th><th>التقدير</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">INT8</code>، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td></tr>
+<tr><td><code translate="no">INT64</code>، <code translate="no">DOUBLE</code> ، <code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>قم بالقياس باستخدام بيانات تمثيلية؛ حيث تعتمد الذاكرة المحملة على تخزين السلاسل والقيم الفريدة وسعة قائمة النشر.</td></tr>
+</tbody>
+</table>
+<p>اقسم على <code translate="no">1024 * 1024</code> لتحويل البايتات إلى ميغابايت. يتطلب مليون قيمة INT64 غير فارغة حوالي 19 ميغابايت لهياكل الفهرس الرئيسية. قم بقياس فهارس VARCHAR بعد التحميل: لا يشمل حجم الفهرس المتسلسل جميع تخصيصات السلاسل وقوائم النشر الموجودة في الذاكرة.</p>
+<p>تغطي هذه التقديرات التقريبية ذاكرة الفهرس المحملة مع تعطيل تعيين الذاكرة. احسبها لكل مقطع، ثم اجمعها عبر المقاطع المحملة والنسخ المتماثلة.</p>
+<div class="alert note">
+<blockquote>
+<p>خصص ذاكرة إضافية لبيانات الحقول المحملة، وفهارس المتجهات، والتكاليف الإضافية للمجموعات والفهارس، والتخصيصات المؤقتة. تحقق من صحة النتائج باستخدام بيانات واستعلامات تمثيلية؛ حيث تتطلب المصفوفات وملفات JSON وتنسيقات الفهارس القديمة وتعيين الذاكرة قياسات منفصلة.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-STLSORT-works" class="common-anchor-header">كيفية عمل STL_SORT<button data-href="#How-STLSORT-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>عرض عملية الفرز والبحث</strong></summary></p>
+<p>أثناء إنشاء الفهرس، يقرن Milvus قيم الحقول بمعرفات الكيانات، ويقوم بفرزها بترتيب تصاعدي باستخدام <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort،</a> ويحفظ المصفوفة المفروزة.</p>
+<p>بالنسبة لاستعلامات المساواة والنطاق، يحدد البحث الثنائي (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> و <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) الفاصل الزمني المطابق. يتلقى منفذ الاستعلام معرّفات الكيانات في ذلك الفاصل الزمني.</p>
+<p>يؤدي ذلك إلى تقليل تعقيد الاستعلام من <strong>O(n)</strong> (المسح الكامل) إلى <strong>O(log n + m)</strong>، حيث <em>m</em> هو عدد التطابقات.</p>
+<p></details></p>
 <h2 id="Create-an-STLSORT-index" class="common-anchor-header">إنشاء فهرس STL_SORT<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,8 +160,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك إنشاء فهرس <code translate="no">STL_SORT</code> في حقل رقمي أو حقل من نوع <code translate="no">VARCHAR</code> أو <code translate="no">TIMESTAMPTZ</code>. ولا يلزم وجود معلمات إضافية.</p>
-<p>يوضح المثال أدناه كيفية إنشاء فهرس <code translate="no">STL_SORT</code> على حقل <code translate="no">TIMESTAMPTZ</code>:</p>
+    </button></h2><p>اضبط <code translate="no">index_type</code> على <code translate="no">STL_SORT</code> ؛ ولا يلزم وجود معلمات إضافية للفهرس. يُفهرس هذا المثال حقل <code translate="no">TIMESTAMPTZ</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -259,12 +324,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم الطريقة <code translate="no">drop_index()</code> لإزالة فهرس موجود من مجموعة.</p>
+    </button></h2><p>استخدم طريقة <code translate="no">drop_index()</code> لإزالة فهرس موجود من مجموعة.</p>
 <div class="alert note">
-<ul>
-<li><p>في <strong>الإصدار 2.6.3</strong> أو ما قبله، يجب تحرير المجموعة قبل حذف مؤشر سكالي.</p></li>
-<li><p>ابتداءً من <strong>الإصدار v2.6.4</strong> أو الأحدث، يمكنك حذف الفهرس القياسي مباشرةً بمجرد انتفاء الحاجة إليه — دون الحاجة إلى تحرير المجموعة أولاً.</p></li>
-</ul>
+<blockquote>
+<p>للاطلاع على متطلبات الإصدار عند حذف فهرس سكالي، راجع <a href="/docs/ar/scalar_index.md#Drop-index-compatibility">«الفهرس السكالي</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -377,23 +441,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">ملاحظات الاستخدام<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>أنواع الحقول:</strong> تعمل مع الحقول الرقمية و <code translate="no">VARCHAR</code> و <code translate="no">TIMESTAMPTZ</code>. لمزيد من المعلومات حول أنواع البيانات، راجع <a href="/docs/ar/number.md">Boolean &amp; Number</a> <a href="/docs/ar/timestamptz-field.md">وTIMESTAMPTZ Field</a>.</p></li>
-<li><p><strong>المعلمات:</strong> لا توجد حاجة إلى معلمات فهرس.</p></li>
-<li><p><strong>Mmap غير مدعوم:</strong> وضع التعيين الذاكري غير متاح لـ <code translate="no">STL_SORT</code>.</p></li>
-</ul>

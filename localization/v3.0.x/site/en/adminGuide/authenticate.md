@@ -22,7 +22,7 @@ title: Authenticate User Access
 <div class="alert note">
 <ul>
 <li><p>TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you must provide a username, password, and certificate file paths. For information on how to enable TLS, refer to <a href="/docs/tls.md">Encryption in Transit</a>.</p></li>
-<li><p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p></li>
+<li><p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient</a> (Python) to interact with Milvus.</p></li>
 </ul>
 </div>
 <h2 id="Enable-user-authentication" class="common-anchor-header">Enable user authentication<button data-href="#Enable-user-authentication" class="anchor-icon" translate="no">
@@ -110,6 +110,15 @@ client = MilvusClient(
 <div class="alert note">
 If you fail to provide a valid token when connecting to Milvus with authentication enabled, you will receive a gRPC error.
 </div>
+<p>Milvus uses the <code translate="no">common.security.defaultRootPassword</code> setting only to create the <code translate="no">root</code> user when no <code translate="no">root</code> user exists. Changing this setting later does not change the password of an existing <code translate="no">root</code> user. To change the <code translate="no">root</code> password, call <code translate="no">update_password()</code> while connected as <code translate="no">root</code>:</p>
+<pre><code translate="no" class="language-python">client.update_password(
+    user_name=<span class="hljs-string">&quot;root&quot;</span>,
+    old_password=<span class="hljs-string">&quot;Milvus&quot;</span>,
+    new_password=<span class="hljs-string">&quot;&lt;your_new_password&gt;&quot;</span>,
+    reset_connection=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>With <code translate="no">reset_connection=True</code>, the client uses the new password for subsequent requests.</p>
 <h2 id="Create-a-new-user" class="common-anchor-header">Create a new user<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +148,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on creating users, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
+<p>For more information on creating users, refer to <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Connect to Milvus with a new user<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +196,7 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on updating user passwords, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
+<p>For more information on updating user passwords, refer to <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>If you forget your old password, Milvus provides a configuration item that allows you to designate certain users as super users. This eliminates the need for the old password when you reset the password.</p>
 <p>By default, the <code translate="no">common.security.superUsers</code> field in the Milvus configuration file is empty, meaning that all users must provide the old password when resetting their password. However, you can designate specific users as super users who do not need to provide the old password. In the snippet below, <code translate="no">root</code> and <code translate="no">foo</code> are designated as super users.</p>
 <p>You should add the below configuration item in the Milvus configuration file that governs the running of your Milvus instance.</p>
@@ -236,6 +245,27 @@ To drop a user, you cannot be the user being dropped. Otherwise, an error will b
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Protect-the-metrics-port" class="common-anchor-header">Protect the metrics port<button data-href="#Protect-the-metrics-port" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>The metrics port (default <code translate="no">9091</code>) serves <code translate="no">/management/*</code>, <code translate="no">/log/level</code>, <code translate="no">/eventlog</code>, <code translate="no">/telemetry</code>, <code translate="no">/debug/pprof/*</code>, and the web console. The <code translate="no">common.security.adminAuthEnabled</code> setting controls whether these endpoints require <code translate="no">root</code> HTTP Basic authentication. It defaults to <code translate="no">false</code>. To turn it on, add the following to the Milvus configuration file:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">adminAuthEnabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>With this setting, health probes and metrics scrapes remain open. Requests that carry neither an <code translate="no">Origin</code> header nor Fetch Metadata headers must include the <code translate="no">X-Milvus-Admin-Request: true</code> header. Update the clients that call these endpoints, such as graceful shutdown and profiling scripts, before you turn the setting on. The metrics port still uses plain HTTP, so expose it only on a trusted network or behind a TLS proxy. This setting cannot be changed through <code translate="no">/management/config/alter</code>.</p>
 <h2 id="Limitations" class="common-anchor-header">Limitations<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +296,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Usernames must not be empty or exceed 32 characters. They must start with a letter and contain only letters, numbers, or underscores.</p>
+    </button></h3><p>Usernames must not be empty or exceed 32 characters. They must start with a letter or underscore and contain only letters, numbers, underscores (<code translate="no">_</code>), and any extra characters configured in <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> by default).</p>
 <h3 id="Password-requirements" class="common-anchor-header">Password requirements<button data-href="#Password-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

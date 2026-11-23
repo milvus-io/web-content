@@ -22,7 +22,7 @@ title: Аутентификация доступа пользователей
 <div class="alert note">
 <ul>
 <li><p>TLS и аутентификация пользователей — это два разных подхода к обеспечению безопасности. Если в вашей системе Milvus включены как аутентификация пользователей, так и TLS, необходимо указать имя пользователя, пароль и пути к файлам сертификатов. Информацию о том, как включить TLS, см. в разделе <a href="/docs/ru/tls.md">«Шифрование при передаче данных</a>».</p></li>
-<li><p>В фрагментах кода на этой странице для взаимодействия с Milvus используется новый <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python). Новые SDK MilvusClient для других языков будут выпущены в будущих обновлениях.</p></li>
+<li><p>В фрагментах кода на этой странице для взаимодействия с Milvus используется класс new <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient</a> (Python).</p></li>
 </ul>
 </div>
 <h2 id="Enable-user-authentication" class="common-anchor-header">Включение аутентификации пользователей<button data-href="#Enable-user-authentication" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: Аутентификация доступа пользователей
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-helm">
-<p>Чтобы включить аутентификацию пользователей на вашем сервере Milvus, установите для параметра authorizationEnabled значение true в файле конфигурации Milvus <code translate="no">values.yaml</code>. Дополнительную информацию о конфигурациях см. в разделе <a href="https://milvus.io/docs/configure-helm.md?tab=component">«Настройка Milvus с помощью Helm Charts</a>».</p>
+<p>Чтобы включить аутентификацию пользователей на вашем сервере Milvus, установите значение authorizationEnabled равным true в файле конфигурации Milvus <code translate="no">values.yaml</code>. Дополнительную информацию о конфигурациях см. в разделе <a href="https://milvus.io/docs/configure-helm.md?tab=component">«Настройка Milvus с помощью Helm Charts</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -110,6 +110,15 @@ client = MilvusClient(
 <div class="alert note">
 Если при подключении к Milvus с включенной аутентификацией вы не предоставите действительный токен, вы получите ошибку gRPC.
 </div>
+<p>Milvus использует настройку <code translate="no">common.security.defaultRootPassword</code> только для создания пользователя <code translate="no">root</code>, если пользователь <code translate="no">root</code> отсутствует. Изменение этой настройки впоследствии не изменяет пароль существующего пользователя <code translate="no">root</code>. Чтобы изменить пароль <code translate="no">root</code>, выполните вызов <code translate="no">update_password()</code>, будучи подключенным как <code translate="no">root</code>:</p>
+<pre><code translate="no" class="language-python">client.update_password(
+    user_name=<span class="hljs-string">&quot;root&quot;</span>,
+    old_password=<span class="hljs-string">&quot;Milvus&quot;</span>,
+    new_password=<span class="hljs-string">&quot;&lt;your_new_password&gt;&quot;</span>,
+    reset_connection=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>С помощью команды <code translate="no">reset_connection=True</code> клиент будет использовать новый пароль для последующих запросов.</p>
 <h2 id="Create-a-new-user" class="common-anchor-header">Создание нового пользователя<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +134,7 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Войдя в систему как <code translate="no">root</code>, создайте пользователя с именем <code translate="no">create_user()</code>. Выберите пароль длиной 6–72 байта в кодировке UTF-8, если в вашей среде развертывания не установлены пользовательские <a href="/docs/ru/authenticate.md#Password-requirements">ограничения на длину пароля</a>.</p>
+    </button></h2><p>Во время подключения в качестве <code translate="no">root</code> создайте пользователя с помощью команды <code translate="no">create_user()</code>. Выберите пароль длиной 6–72 байта в кодировке UTF-8, если в вашей среде развертывания не используются настраиваемые <a href="/docs/ru/authenticate.md#Password-requirements">ограничения на длину пароля</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># create a user</span>
 client.create_user(
     user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
@@ -139,8 +148,8 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительную информацию о создании пользователей см. в <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
-<h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Подключение к Milvus с использованием нового пользователя<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
+<p>Дополнительную информацию о создании пользователей см. в <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
+<h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Подключение к Milvus с новым пользователем<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,7 +196,7 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительную информацию об обновлении паролей пользователей см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
+<p>Дополнительную информацию об обновлении паролей пользователей см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>Если вы забыли старый пароль, Milvus предоставляет элемент конфигурации, позволяющий назначить определенных пользователей суперпользователями. Это устраняет необходимость в старом пароле при сбросе пароля.</p>
 <p>По умолчанию поле ` <code translate="no">common.security.superUsers</code> ` в конфигурационном файле Milvus пусто, что означает, что все пользователи должны вводить старый пароль при сбросе пароля. Однако вы можете назначить определённых пользователей суперпользователями, которым не нужно вводить старый пароль. В приведённом ниже фрагменте кода <code translate="no">root</code> и <code translate="no">foo</code> назначены суперпользователями.</p>
 <p>Вам необходимо добавить приведенный ниже элемент конфигурации в файл конфигурации Milvus, который управляет работой вашего экземпляра Milvus.</p>
@@ -236,6 +245,27 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Protect-the-metrics-port" class="common-anchor-header">Защита порта метрик<button data-href="#Protect-the-metrics-port" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Порт метрик (по умолчанию <code translate="no">9091</code>) обслуживает <code translate="no">/management/*</code>, <code translate="no">/log/level</code>, <code translate="no">/eventlog</code>, <code translate="no">/telemetry</code>, <code translate="no">/debug/pprof/*</code> и веб-консоль. Параметр <code translate="no">common.security.adminAuthEnabled</code> определяет, требуют ли эти конечные точки HTTP-аутентификацию по методу Basic с использованием <code translate="no">root</code>. По умолчанию установлено значение <code translate="no">false</code>. Чтобы включить его, добавьте следующее в файл конфигурации Milvus:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">adminAuthEnabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>При этом параметре проверки работоспособности и сбор метрик остаются открытыми. Запросы, не содержащие ни заголовка <code translate="no">Origin</code>, ни заголовков Fetch Metadata, должны включать заголовок <code translate="no">X-Milvus-Admin-Request: true</code>. Перед включением этого параметра обновите клиенты, которые вызывают эти конечные точки, например скрипты плавного завершения работы и профилирования. Порт метрик по-прежнему использует простой HTTP, поэтому открывайте его доступ только в доверенной сети или за TLS-прокси. Этот параметр нельзя изменить через <code translate="no">/management/config/alter</code>.</p>
 <h2 id="Limitations" class="common-anchor-header">Ограничения<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +296,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Имя пользователя не должно быть пустым и не должно превышать 32 символа. Оно должно начинаться с буквы и содержать только буквы, цифры или символы подчеркивания.</p>
+    </button></h3><p>Имя пользователя не должно быть пустым или превышать 32 символа. Оно должно начинаться с буквы или символа подчеркивания и содержать только буквы, цифры, символы подчеркивания (<code translate="no">_</code>) и любые дополнительные символы, настроенные в <code translate="no">proxy.nameValidation.allowedChars</code> (по умолчанию —<code translate="no">$</code> ).</p>
 <h3 id="Password-requirements" class="common-anchor-header">Требования к паролям<button data-href="#Password-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,8 +312,8 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>По умолчанию длина паролей должна составлять от 6 до 72 байтов в кодировке UTF-8. Каждый символ ASCII занимает один байт; многобайтовые символы занимают более одного байта. Milvus не требует определенного сочетания заглавных букв, строчных букв, цифр или специальных символов.</p>
-<p>Чтобы изменить ограничения на длину, настройте параметры <code translate="no">proxy.minPasswordLength</code> и <code translate="no">proxy.maxPasswordLength</code>. Максимальная длина не может превышать 72 байта. Значение параметра <code translate="no">proxy.maxPasswordLength</code>, равное нулю или меньше, либо превышающее 72, интерпретируется как 72. Инструкции по настройке см. в разделе <a href="/docs/ru/dynamic_config.md">«Настройка Milvus на лету</a>».</p>
+    </button></h3><p>По умолчанию длина паролей должна составлять от 6 до 72 байтов в кодировке UTF-8. Каждый символ ASCII занимает один байт; многобайтовые символы занимают более одного байта. Milvus не требует определённого сочетания заглавных букв, строчных букв, цифр или специальных символов.</p>
+<p>Чтобы изменить ограничения по длине, настройте параметры <code translate="no">proxy.minPasswordLength</code> и <code translate="no">proxy.maxPasswordLength</code>. Максимальная длина не может превышать 72 байта. Значение <code translate="no">proxy.maxPasswordLength</code>, равное нулю или меньше, либо превышающее 72, интерпретируется как 72. Инструкции по настройке см. в разделе <a href="/docs/ru/dynamic_config.md">«Настройка Milvus на лету</a>».</p>
 <h2 id="Whats-next" class="common-anchor-header">Что дальше<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,7 @@
 ---
 id: stl-sort.md
 title: STL_SORT
-summary: >-
-  STL_SORT 索引是一种专门设计的索引类型，通过将数据按排序顺序组织，从而提升对数值字段（INT8、INT16 等）、VARCHAR 字段或
-  TIMESTAMPTZ 字段的查询性能。
+summary: 在兼容字段上，使用 STL_SORT 进行值查找、范围过滤和字符串前缀匹配。
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">STL_SORT</code> 索引是一种专门设计的索引类型，旨在通过将数据按排序顺序组织，从而提升Milvus中数值字段（INT8、INT16等）、<code translate="no">VARCHAR</code> 字段或<code translate="no">TIMESTAMPTZ</code> 字段的查询性能。</p>
-<p>如果您经常执行以下类型的查询，请使用<code translate="no">STL_SORT</code> 索引：</p>
-<ul>
-<li><p>使用<code translate="no">==</code> 、<code translate="no">!=</code> 、<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> 、<code translate="no">&gt;=</code> 和<code translate="no">&lt;=</code> 操作符进行比较过滤</p></li>
-<li><p>使用<code translate="no">IN</code> 和<code translate="no">LIKE</code> 操作符进行范围过滤</p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">支持的数据类型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">STL_SORT</code> 按排序顺序存储值，以加快值查找、范围过滤和字符串前缀匹配的速度。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,12 +34,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><p>数值字段（例如：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> ）。详情请参阅<a href="/docs/zh/number.md">“布尔值与数值”</a>。</p></li>
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">支持的数据类型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><p>数值字段（例如：<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> ）。有关详细信息，请参阅<a href="/docs/zh/number.md">“布尔值与数值”</a>。</p></li>
 <li><p><code translate="no">VARCHAR</code> 字段。详情请参阅<a href="/docs/zh/string.md">“字符串字段</a>”。</p></li>
 <li><p><code translate="no">TIMESTAMPTZ</code> 字段。详情请参阅<a href="/docs/zh/timestamptz-field.md">“TIMESTAMPTZ 字段”</a>。</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<p>关于 StructArray 中的数值型、VARCHAR 或 TIMESTAMPTZ 子字段，请参阅《<a href="/docs/zh/index-structarray-fields.md#Create-scalar-indexes">StructArray 字段索引</a>》。普通 ARRAY 字段不支持<code translate="no">STL_SORT</code> ；有关其索引选项，请参阅《<a href="/docs/zh/array_data_type.md#Array-index-support">数组索引支持》</a>。</p>
+<p>在<a href="/docs/zh/json-indexing.md#Index-requirements">完成 3.0</a> 版<a href="/docs/zh/json-indexing.md#Index-requirements">JSON 索引启用配置</a>后，转换为<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code> 的 JSON 路径支持<code translate="no">STL_SORT</code> 。</p>
+<p><a id="Queries-accelerated-by-STLSORT"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">过滤器加速<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,24 +73,21 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus分两阶段实现<code translate="no">STL_SORT</code> ：</p>
-<ol>
-<li><p><strong>构建索引</strong></p>
+    </button></h3><p><code translate="no">STL_SORT</code> 索引可协助评估以下条件，但需满足字段和类型转换的兼容性要求：</p>
 <ul>
-<li><p>在数据摄入过程中，Milvus会收集索引字段的所有值。</p></li>
-<li><p>这些值会使用 C++ STL 的<a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> 按升序进行排序。</p></li>
-<li><p>每个值都会与其实体 ID 配对，并将其排序后的数组持久化为索引。</p></li>
-</ul></li>
-<li><p><strong>加速查询</strong></p>
-<ul>
-<li><p>在查询时，Milvus 对已排序的数组使用<strong>二分搜索</strong>（<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a>和<a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>）。</p></li>
-<li><p>对于相等查询，Milvus 可以快速找到所有匹配的值。</p></li>
-<li><p>对于范围查询，Milvus 会定位起始和结束位置，并返回其间的所有值。</p></li>
-<li><p>匹配的实体 ID 会被传递给查询执行器，以进行最终结果的组装。</p></li>
-</ul></li>
-</ol>
-<p>这将查询复杂度从<strong>O(n)</strong>（全表扫描）降低到<strong>O(log n + m)</strong>，其中<em>m</em>是匹配项的数量。</p>
-<h2 id="Create-an-STLSORT-index" class="common-anchor-header">创建一个 STL_SORT 索引<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
+<li>相等性（<code translate="no">==</code> 、<code translate="no">!=</code> ）和成员关系（<code translate="no">in</code> 、<code translate="no">not in</code> ）。</li>
+<li>范围：<code translate="no">&lt;</code> 、<code translate="no">&lt;=</code> 、<code translate="no">&gt;</code> 、<code translate="no">&gt;=</code> ，包括<code translate="no">10 &lt;= price &lt; 50</code> 等区间。</li>
+<li>VARCHAR 前缀匹配，例如<code translate="no">name LIKE &quot;abc%&quot;</code> 。</li>
+<li>对符合条件的 JSON 标量路径进行比较。请参阅<a href="/docs/zh/json-indexing.md#Supported-filters">JSON 过滤器</a>。</li>
+</ul>
+<p>对于后缀、子字符串、通用 LIKE 以及正则表达式过滤器，Milvus 可以针对存储在索引中的字符串评估模式。这可能需要遍历许多不同的字符串。有关语法和规划简化的信息，请参阅<a href="/docs/zh/pattern-matching.md">“模式匹配”</a>。</p>
+<div class="alert note">
+<blockquote>
+<p>这些是索引功能，而非对有效过滤表达式的限制。有关共享查找约束，请<a href="/docs/zh/scalar_index.md#Filter-execution">参阅“标量索引”</a>。关于<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及 NULL 测试（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），请<a href="/docs/zh/basic-operators.md">参阅“基本操作符”</a>。</p>
+</blockquote>
+</div>
+<p><a id="Usage-notes"></a></p>
+<h3 id="Memory-considerations" class="common-anchor-header">内存注意事项<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,8 +102,63 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在数值型、<code translate="no">VARCHAR</code> 或<code translate="no">TIMESTAMPTZ</code> 字段上创建<code translate="no">STL_SORT</code> 索引。无需任何额外参数。</p>
-<p>下面的示例演示了如何在<code translate="no">TIMESTAMPTZ</code> 字段上创建<code translate="no">STL_SORT</code> 索引：</p>
+    </button></h3><p>显式<code translate="no">STL_SORT</code> 索引不支持内存映射模式。</p>
+<p>对于没有NULL值的数值型和时间戳字段，请使用以下以字节为单位的粗略估算值。<code translate="no">N</code> 表示实体数量：</p>
+<table>
+<thead>
+<tr><th>字段类型</th><th>估算值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td></tr>
+<tr><td><code translate="no">INT64</code>,<code translate="no">DOUBLE</code>,<code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>请使用具有代表性的数据进行测量；加载的内存大小取决于字符串存储、唯一值数量以及发布列表的容量。</td></tr>
+</tbody>
+</table>
+<p>除以<code translate="no">1024 * 1024</code> 可将字节转换为 MiB。一百万个非空 INT64 值的主索引结构大约需要 19 MiB。在加载后测量 VARCHAR 索引：序列化索引大小不包括所有内存中的字符串和发布列表分配。</p>
+<p>这些粗略估算涵盖了禁用内存映射时已加载索引的内存占用。请按分段分别计算，然后对已加载的分段和副本进行求和。</p>
+<div class="alert note">
+<blockquote>
+<p>请为加载的字段数据、向量索引、Collection和索引开销以及临时分配预留额外内存。使用具有代表性的数据和查询进行验证；数组、JSON、旧版索引格式以及内存映射需要单独测量。</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-STLSORT-works" class="common-anchor-header">STL_SORT 的工作原理<button data-href="#How-STLSORT-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>查看排序和查找过程</strong></summary></p>
+<p>在构建索引期间，Milvus 将字段值与实体 ID 配对，使用<a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> 按升序对其进行排序，并持久化已排序的数组。</p>
+<p>对于相等性和范围查询，二分搜索（<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a>和<a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>）会定位匹配的区间。查询执行器将接收该区间内的实体 ID。</p>
+<p>这将查询复杂度从<strong>O(n)</strong>（全表扫描）降低至<strong>O(log n + m)</strong>，其中<em>m</em>为匹配项的数量。</p>
+<p></details></p>
+<h2 id="Create-an-STLSORT-index" class="common-anchor-header">创建 STL_SORT 索引<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>将<code translate="no">index_type</code> 设置为<code translate="no">STL_SORT</code> ；无需额外索引参数。以下示例对<code translate="no">TIMESTAMPTZ</code> 字段建立索引：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -260,10 +324,9 @@ curl --request POST \
       </svg>
     </button></h2><p>使用<code translate="no">drop_index()</code> 方法从 Collection 中删除现有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>及更早版本中，在删除标量索引之前，必须先释放 Collection。</p></li>
-<li><p>从<strong>v2.6.4</strong>及更高版本开始，一旦不再需要标量索引，即可直接删除，无需先释放 Collection。</p></li>
-</ul>
+<blockquote>
+<p>有关删除标量索引的版本要求，请参阅《<a href="/docs/zh/scalar_index.md#Drop-index-compatibility">标量索引</a>》。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -376,23 +439,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">使用说明<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>字段类型：</strong>支持数值型、<code translate="no">VARCHAR</code> 以及<code translate="no">TIMESTAMPTZ</code> 字段。有关数据类型的更多信息，请参阅<a href="/docs/zh/number.md">“布尔值与数值</a>”和<a href="/docs/zh/timestamptz-field.md">“TIMESTAMPTZ 字段”</a>。</p></li>
-<li><p><strong>参数：</strong>无需索引参数。</p></li>
-<li><p><strong>不支持 Mmap：</strong> <code translate="no">STL_SORT</code> 不支持内存映射模式。</p></li>
-</ul>

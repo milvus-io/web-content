@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>باعتبارها قاعدة بيانات متجهة موزعة، توفر Milvus مستويات متعددة من الاتساق لضمان أن كل عقدة أو نسخة متماثلة يمكنها الوصول إلى نفس البيانات أثناء عمليات القراءة والكتابة. حاليًا، تشمل مستويات الاتساق المدعومة: <strong>"قوي"</strong> و <strong>"محدود"</strong> و <strong>"نهائي"</strong> و <strong>"الجلسة"</strong>، مع كون <strong>"محدود"</strong> هو مستوى الاتساق الافتراضي المستخدم.</p>
+    </button></h1><p>باعتبارها قاعدة بيانات متجهة موزعة، توفر Milvus مستويات متعددة من الاتساق لضمان أن تتمكن كل عقدة أو نسخة متماثلة من الوصول إلى نفس البيانات أثناء عمليات القراءة والكتابة. حاليًا، تشمل مستويات الاتساق المدعومة: <strong>"قوي" (Strong</strong>) و <strong>"محدود</strong>" ( <strong>Bounded</strong>) و <strong>"نهائي" (Eventually</strong>) و <strong>"الجلسة</strong>" ( <strong>Session</strong>)، مع كون <strong>"محدود" (Bounded)</strong> هو مستوى الاتساق الافتراضي المستخدم.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,8 +39,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus هو نظام يفصل بين التخزين والحساب. تقوم <strong>العقد المتدفقة</strong> بإلحاق جميع عمليات الكتابة بسجل الكتابة المسبقة (WAL) وتحتفظ <strong>بالبيانات المتزايدة</strong> — وهي البيانات التي لا تزال موجودة في سجل الكتابة المسبقة ولم يتم حفظها بعد. تقوم عملية الاستعادة بتحويل البيانات المتزايدة إلى <strong>بيانات تاريخية</strong> (شرائح مختومة تم حفظها في تخزين الكائنات مثل MinIO/S3)، والتي يتم تقديمها بواسطة <strong>«عقد الاستعلام» (Query Nodes</strong>). يتم استلام كل طلب بحث أو استعلام بواسطة <strong>«مفوض الاستعلام» (Query Delegator</strong> ) على عقدة البث التي تستضيف سجل الكتابة المسبق (WAL) الخاص بالمجموعة: يقوم المفوض بإنشاء خطة الاستعلام، وتنفيذ الجزء المتعلق بالبيانات المتزايدة محليًّا، وإعادة توجيه الجزء المتعلق بالبيانات التاريخية إلى عقد الاستعلام ذات الصلة، ودمج النتائج قبل إرجاعها. لمزيد من التفاصيل، راجع <a href="/docs/ar/streaming_service.md">خدمة البث</a>.</p>
-<p>لضمان الاتساق، يخصص Milvus لكل رسالة طابعًا زمنيًا من نوع Timestamp Oracle (TSO) يحدد ترتيبها في سجل WAL، ويقوم بإدراج طوابع زمنية للمزامنة بشكل مستمر في سجل WAL جنبًا إلى جنب مع رسائل البيانات. عند استلام طابع زمني للمزامنة (syncTs)، يتم تسجيله باعتباره «ServiceTime»، مما يعني أن جميع البيانات السابقة لـ «ServiceTime» تكون مرئية للاستعلامات. استنادًا إلى «ServiceTime»، يوفر Milvus طوابع زمنية مضمونة (GuaranteeTs) لتلبية متطلبات المستخدمين المختلفة فيما يتعلق بالاتساق والتوافر. يمكن للمستخدمين إبلاغ المُفوِّض بضرورة تضمين البيانات التي تسبق نقطة زمنية محددة في نطاق البحث من خلال تحديد GuaranteeTs في طلبات البحث الخاصة بهم.</p>
+    </button></h2><p>Milvus هو نظام يفصل بين التخزين والحساب. تقوم <strong>العقد المتدفقة</strong> بإلحاق جميع عمليات الكتابة بسجل الكتابة المسبقة (WAL) وتحتفظ <strong>بالبيانات المتزايدة</strong> — وهي البيانات التي لا تزال موجودة في سجل الكتابة المسبقة ولم يتم حفظها بعد. تقوم عملية الاستعادة بتحويل البيانات المتزايدة إلى <strong>بيانات تاريخية</strong> (شرائح مختومة تم حفظها في تخزين الكائنات مثل MinIO/S3)، والتي يتم تقديمها بواسطة <strong>«عقد الاستعلام» (Query Nodes</strong>). يتم استلام كل طلب بحث أو استعلام بواسطة <strong>«مفوض الاستعلام» (Query Delegator)</strong> على عقدة البث التي تستضيف سجل الكتابة المسبق (WAL) للمجموعة: يقوم المفوض بإنشاء خطة الاستعلام، وتنفيذ الجزء المتعلق بالبيانات المتزايدة محليًّا، وإعادة توجيه الجزء المتعلق بالبيانات التاريخية إلى عقد الاستعلام ذات الصلة، ودمج النتائج قبل إرجاعها. لمزيد من التفاصيل، راجع <a href="/docs/ar/streaming_service.md">خدمة البث (Streaming Service)</a>.</p>
+<p>لضمان الاتساق، يخصص Milvus لكل رسالة طابعًا زمنيًا من نوع Timestamp Oracle (TSO) يحدد ترتيبها في سجل WAL، ويقوم بإدراج طوابع زمنية للمزامنة بشكل مستمر في سجل WAL جنبًا إلى جنب مع رسائل البيانات. عند استلام طابع زمني للمزامنة (syncTs)، يتم تسجيله باعتباره «ServiceTime»، مما يعني أن جميع البيانات السابقة لـ «ServiceTime» تكون مرئية للاستعلامات. استنادًا إلى «ServiceTime»، يوفر Milvus طوابع زمنية مضمونة (GuaranteeTs) لتلبية متطلبات المستخدمين المختلفة فيما يتعلق بالاتساق والتوافر. يمكن للمستخدمين إبلاغ المُفوّض بضرورة تضمين البيانات التي تسبق نقطة زمنية محددة في نطاق البحث من خلال تحديد GuaranteeTs في طلبات البحث الخاصة بهم.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك تعيين مستويات اتساق مختلفة عند إنشاء مجموعة وكذلك عند إجراء عمليات البحث والاستعلامات.</p>
+    </button></h2><p>يمكنك تعيين مستوى الاتساق عند إنشاء مجموعة، أو تعديله بعد إنشاء المجموعة، أو تجاوزه لعمليات البحث والاستعلامات الفردية.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">تعيين مستوى الاتساق عند إنشاء المجموعة<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات داخل المجموعة. يعيّن مثال الكود التالي مستوى الاتساق على <strong>Bounded</strong>.</p>
+    </button></h3><p>عند إنشاء مجموعة، يمكنك تعيين مستوى الاتساق لعمليات البحث والاستعلامات داخل المجموعة. يعيّن مثال الكود التالي مستوى الاتساق إلى <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -168,7 +168,58 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>القيم الممكنة للمعلمة « <code translate="no">consistency_level</code> » هي « <code translate="no">Strong</code> » و« <code translate="no">Bounded</code> » و« <code translate="no">Eventually</code> » و« <code translate="no">Session</code> ».</p>
+<p>القيم الممكنة للمعلمة <code translate="no">consistency_level</code> هي <code translate="no">Strong</code> و <code translate="no">Bounded</code> و <code translate="no">Eventually</code> و <code translate="no">Session</code>.</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">تعديل مستوى اتساق المجموعة<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكنك تغيير مستوى اتساق مجموعة موجودة عن طريق تعديل خاصية <code translate="no">consistency_level</code> الخاصة بها. ينطبق المستوى الجديد على عمليات البحث والاستعلامات اللاحقة على المجموعة التي لا تحدد مستوى اتساق خاص بها، ولا يتطلب تغييره تحرير المجموعة. يغير مثال الكود التالي مستوى الاتساق إلى <strong>«في النهاية» (Eventually)</strong>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">تعيين مستوى الاتساق في البحث<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +235,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك دائمًا تغيير مستوى الاتساق لبحث معين. يعيّد مثال الكود التالي ضبط مستوى الاتساق إلى <strong>Bounded</strong>. لا ينطبق التغيير إلا على طلب البحث الحالي.</p>
+    </button></h3><p>يمكنك دائمًا تغيير مستوى الاتساق لبحث معين. يعيّد مثال الكود التالي تعيين مستوى الاتساق إلى <strong>«Bounded</strong>». ينطبق التغيير فقط على طلب البحث الحالي.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -234,7 +285,7 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>هذه المعلمة متاحة أيضًا في عمليات البحث المختلطة ومكرر البحث. القيم الممكنة لمعلمة " <code translate="no">consistency_level</code> " هي <code translate="no">Strong</code> و <code translate="no">Bounded</code> و <code translate="no">Eventually</code> و <code translate="no">Session</code>.</p>
+<p>يتوفر هذا المعامل أيضًا في عمليات البحث المختلطة ومكرر البحث. القيم الممكنة لمعامل « <code translate="no">consistency_level</code> » هي « <code translate="no">Strong</code> » و« <code translate="no">Bounded</code> » و« <code translate="no">Eventually</code> » و« <code translate="no">Session</code> ».</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">تعيين مستوى الاتساق في الاستعلام<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -250,7 +301,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكنك دائمًا تغيير مستوى الاتساق لبحث معين. يضبط مثال الكود التالي مستوى الاتساق على <strong>«في النهاية» (Eventually</strong>). ينطبق هذا الإعداد فقط على طلب الاستعلام الحالي.</p>
+    </button></h3><p>يمكنك دائمًا تغيير مستوى الاتساق لبحث معين. يضبط مثال الكود التالي مستوى الاتساق على <strong>«في النهاية» (Eventually</strong>). ينطبق هذا الإعداد على طلب الاستعلام الحالي فقط.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

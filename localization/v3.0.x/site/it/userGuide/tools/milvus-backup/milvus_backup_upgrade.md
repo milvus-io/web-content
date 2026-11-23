@@ -1,8 +1,8 @@
 ---
 id: milvus_backup_upgrade.md
 summary: >-
-  Eseguire l'aggiornamento di Milvus Backup dalla versione 0.5.x alla versione
-  0.6.x, aggiornare la configurazione e i comandi e verificare il corretto
+  Eseguire l'aggiornamento di Milvus Backup dalla versione 0.5.x alla 0.6.x,
+  aggiornare la configurazione e i comandi e verificare il corretto
   funzionamento del backup e del ripristino.
 title: >-
   Aggiornamento di Milvus Backup alla versione 0.6.xCompatible with Milvus
@@ -80,7 +80,7 @@ beta: Milvus Backup 0.6.x
 <p>Rivedere le variabili d’ambiente nella stessa modifica del file di configurazione. La v2 accetta solo le variabili d’ambiente relative alle credenziali supportate, come <code translate="no">MILVUS_STORAGE_AUTH_SECRET_ACCESS_KEY</code>. I vecchi nomi della v1 non vengono applicati a un file v2. Per le impostazioni non relative alle credenziali, come i nomi dei bucket e gli endpoint, utilizzare YAML o una sovrascrittura della chiave di configurazione:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup-v2.yaml --set milvus.storage.bucketName=my-bucket
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">config migrate</code> segnala le variabili d’ambiente interessate senza copiare i relativi valori segreti nel file di output. Vedere <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">le variabili d’ambiente v2 supportate</a>. <code translate="no">config show</code> sostituisce il comando deprecato <code translate="no">check config</code>.</p>
+<p><code translate="no">config migrate</code> segnala le variabili d’ambiente interessate senza copiare i relativi valori segreti nel file di output. Vedi <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">le variabili d’ambiente v2 supportate</a>. <code translate="no">config show</code> sostituisce il comando deprecato <code translate="no">check config</code>.</p>
 <h2 id="Update-CLI-commands" class="common-anchor-header">Aggiornamento dei comandi CLI<button data-href="#Update-CLI-commands" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,7 +119,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup create --filter coll -n my_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Un filtro di ripristino che non trova corrispondenze può terminare con successo senza creare una raccolta. Controllare sempre la raccolta di destinazione e i relativi dati. Il comando <code translate="no">collection_names</code> dell’API HTTP seleziona ancora i nomi delle origini nel backup; consultare <a href="/docs/it/milvus_backup_0_6_api.md#Restore-data">la guida all’API HTTP</a>.</p>
+<p>Un filtro di ripristino che non trova corrispondenze può terminare con successo senza creare una raccolta. Controllare sempre la raccolta di destinazione e i relativi dati. Il comando ` <code translate="no">collection_names</code> ` dell’API HTTP seleziona ancora i nomi delle origini nel backup; consultare <a href="/docs/it/milvus_backup_0_6_api.md#Restore-data">la guida all’API HTTP</a>.</p>
 <h2 id="Choose-the-backup-behavior" class="common-anchor-header">Scegliere il comportamento del backup<button data-href="#Choose-the-backup-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +139,7 @@ beta: Milvus Backup 0.6.x
 <li>Sui server Milvus 2.x supportati, il formato <code translate="no">auto</code> utilizza il binlog. L’aggiornamento del backup non richiede il passaggio a Milvus 3.0.</li>
 <li>Su Milvus 3.0, <code translate="no">auto</code> seleziona lo snapshot. Il supporto ufficiale per il backup e il ripristino è disponibile a partire dalla versione Milvus 3.0.1. Passare <code translate="no">--format binlog</code> per mantenere il comportamento binlog durante la creazione di un backup.</li>
 <li>La compatibilità della configurazione V1 non preserva i flag di comando rimossi né sovrascrive le impostazioni predefinite del nuovo formato.</li>
-<li>Le impostazioni predefinite per lo scopo possono determinare il formato e altre opzioni. Ad esempio, <code translate="no">--for archive</code> impone l’uso del binlog anche se viene specificato anche <code translate="no">--format snapshot</code>. Verificare <a href="/docs/it/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">le scelte relative al formato e allo scopo</a>.</li>
+<li>Le impostazioni predefinite per lo scopo possono determinare il formato e altre opzioni. Ad esempio, <code translate="no">--for archive</code> forza l’uso del binlog anche se viene specificato anche <code translate="no">--format snapshot</code>. Verificare <a href="/docs/it/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">le scelte relative al formato e allo scopo</a>.</li>
 <li>Le raccolte esterne vengono ignorate durante il backup. Controllare i metadati del backup anziché considerare il completamento dell’attività come prova che tutte le raccolte siano state incluse.</li>
 </ul>
 <h2 id="Validate-before-switching-jobs" class="common-anchor-header">Verificare prima di cambiare job<button data-href="#Validate-before-switching-jobs" class="anchor-icon" translate="no">

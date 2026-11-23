@@ -64,14 +64,15 @@ summary: Learn how to deploy monitoring services for a Milvus cluster using Prom
     </button></h2><p>This tutorial uses <a href="https://github.com/prometheus-operator/kube-prometheus">kube-prometheus</a> to save you the trouble of installing and manually configuring each monitoring and alerting component.</p>
 <p>Kube-prometheus collects Kubernetes manifests, <a href="http://grafana.com/">Grafana</a> dashboards, and <a href="https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/">Prometheus rules</a> combined with documentation and scripts.</p>
 <p>Before deploying monitoring services, you need to create a monitoring stack by using the configuration in the kube-prometheus manifests directory.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/prometheus-operator/kube-prometheus.git</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cd</span> kube-prometheus</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply --server-side -f manifests/setup</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl <span class="hljs-built_in">wait</span> \
+<p>The following commands use the <code translate="no">release-0.19</code> branch of kube-prometheus, which supports Kubernetes 1.35, 1.36, and 1.37. To choose the branch for your Kubernetes version, see the <a href="https://github.com/prometheus-operator/kube-prometheus#compatibility">kube-prometheus compatibility matrix</a>.</p>
+<pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> --branch release-0.19 https://github.com/prometheus-operator/kube-prometheus.git
+$ <span class="hljs-built_in">cd</span> kube-prometheus
+$ kubectl apply --server-side -f manifests/setup
+$ kubectl <span class="hljs-built_in">wait</span> \
         --<span class="hljs-keyword">for</span> condition=Established \
         --all CustomResourceDefinition \
-        --namespace=monitoring</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f manifests/</span>
+        --namespace=monitoring
+$ kubectl apply -f manifests/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 The default prometheus-k8s clusterrole can not capture milvus' metrics, need to patch:
@@ -110,8 +111,8 @@ The default prometheus-k8s clusterrole can not capture milvus' metrics, need to 
         ></path>
       </svg>
     </button></h3><p>Forward the Prometheus service to port <code translate="no">9090</code>, and Grafana service to port <code translate="no">3000</code>.</p>
-<pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/prometheus-k8s 9090</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl --namespace monitoring --address 0.0.0.0 port-forward svc/grafana 3000</span>
+<pre><code translate="no" class="language-bash">$ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+$ kubectl --namespace monitoring port-forward svc/grafana 3000
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Enable-ServiceMonitor" class="common-anchor-header">2. Enable ServiceMonitor<button data-href="#2-Enable-ServiceMonitor" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,12 +131,13 @@ The default prometheus-k8s clusterrole can not capture milvus' metrics, need to 
       </svg>
     </button></h3><p>The ServiceMonitor is not enabled for Milvus Helm by default. After installing the Prometheus Operator in the Kubernetes cluster, you can enable it by adding the parameter <code translate="no">metrics.serviceMonitor.enabled=true</code>.</p>
 <h4 id="With-Helm" class="common-anchor-header">With Helm</h4><p>You can enable the ServiceMonitor by setting the parameter <code translate="no">metrics.serviceMonitor.enabled=true</code> as follows if you have installed Milvus Helm chart.</p>
-<pre><code translate="no">```
-$ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=true --reuse-values
-```
-</code></pre>
+<pre><code translate="no" class="language-bash">$ helm upgrade my-release zilliztech/milvus --version &lt;current-chart-version&gt; --reset-then-reuse-values --<span class="hljs-built_in">set</span> metrics.serviceMonitor.enabled=<span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>This command uses <code translate="no">--reset-then-reuse-values</code>, which requires Helm 3.14 or later. With this option, Helm resets the values to the defaults of the chart version set in <code translate="no">--version</code>, applies the values of your current release, and then applies the values from <code translate="no">--set</code>. To find <code translate="no">&lt;current-chart-version&gt;</code>, run <code translate="no">helm list</code> and remove the <code translate="no">milvus-</code> prefix from the value in the <code translate="no">CHART</code> column. If you run <code translate="no">helm upgrade</code> with <code translate="no">-f</code> or <code translate="no">--set</code> but without <code translate="no">--reset-then-reuse-values</code> or <code translate="no">--reuse-values</code>, Helm does not keep the values that you set at install time.</p>
+</div>
 <p>When the installation completes, use <code translate="no">kubectl</code> to check the ServiceMonitor resource.</p>
-<h4 id="With-Milvus-Operator" class="common-anchor-header">With Milvus Operator</h4><p>You can enable the ServiceMonitor as follows if you have installed Milvus using the Milvus Operator.</p>
+<h4 id="With-Milvus-Operator" class="common-anchor-header">With Milvus Operator</h4><p>If you have installed Milvus using the Milvus Operator, the operator creates a PodMonitor instead of a ServiceMonitor. The PodMonitor has the same name as the Milvus custom resource. The operator creates it only when metrics are not disabled in the custom resource and the PodMonitor CRD exists in the cluster. The kube-prometheus <code translate="no">manifests/setup</code> directory installs this CRD. To make sure that metrics are enabled, do as follows.</p>
 <ol>
 <li><p>Run the following command to edit the MIlvus custom resource. The following command assumes that the custom resource is named <code translate="no">my-release</code>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>kubectl edit milvus my-release
@@ -148,11 +150,10 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Save and exit the editor.</p></li>
-<li><p>Wait for the operator to reconcile the changes. You can check the status of the Milvus custom resource by running the following command.</p>
-<pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> milvus my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span> <span class="hljs-operator">-</span>o yaml
+<li><p>Wait for the operator to reconcile the changes. You can check the PodMonitor by running the following command.</p>
+<pre><code translate="no" class="language-bash">$ kubectl get podmonitor my-release
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>The <code translate="no">status.components.metrics.serviceMonitor.enabled</code> field should be <code translate="no">true</code>.</p>
 <h3 id="3-Check-the-metrics" class="common-anchor-header">3. Check the metrics<button data-href="#3-Check-the-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -168,7 +169,7 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>After enabling the ServiceMonitor, you can access the Prometheus dashboard at <code translate="no">http://localhost:9090/</code>.</p>
+    </button></h3><p>After enabling the ServiceMonitor or the PodMonitor, you can access the Prometheus dashboard at <code translate="no">http://localhost:9090/</code>.</p>
 <p>Click on the <code translate="no">Status</code> tab and then <code translate="no">Targets</code>. You should see the targets of the Milvus components.</p>
 <p>
   <span class="img-wrapper">
@@ -176,7 +177,7 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
     <span>Prometheus_targets</span>
   </span>
 </p>
-<p>Click on the <code translate="no">Graph</code> tab and enter the expression <code translate="no">up{job=&quot;default/my-release&quot;}</code> in the expression input box. You should see the metrics of the Milvus components.</p>
+<p>Click on the <code translate="no">Graph</code> tab and enter the expression <code translate="no">up{app_kubernetes_io_instance=&quot;my-release&quot;}</code> in the expression input box. You should see the metrics of the Milvus components.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/prometheus_graph.png" alt="Prometheus_graph" class="doc-image" id="prometheus_graph" />
@@ -198,10 +199,11 @@ $ helm upgrade my-release milvus/milvus --set metrics.serviceMonitor.enabled=tru
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> servicemonitor
+    </button></h3><p>If you have installed Milvus with Helm, run the following command to list the ServiceMonitor. The chart names it <code translate="no">my-release-milvus</code> for a Milvus cluster and <code translate="no">my-release-milvus-standalone</code> for a Milvus standalone.</p>
+<pre><code translate="no" class="language-bash">$ kubectl get servicemonitor
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">NAME                           AGE
-<span class="hljs-keyword">my</span>-release-milvus              54s
+<pre><code translate="no" class="language-text">NAME                           AGE
+my-release-milvus              54s
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

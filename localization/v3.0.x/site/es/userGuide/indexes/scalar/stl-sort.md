@@ -2,10 +2,8 @@
 id: stl-sort.md
 title: STL_SORT
 summary: >-
-  El índice STL_SORT es un tipo de índice diseñado específicamente para mejorar
-  el rendimiento de las consultas en campos numéricos (INT8, INT16, etc.),
-  campos VARCHAR o campos TIMESTAMPTZ, mediante la organización de los datos en
-  orden de clasificación.
+  Utiliza STL_SORT para la búsqueda de valores, el filtrado por rango y la
+  coincidencia de prefijos de cadenas en campos compatibles.
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,13 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El índice « <code translate="no">STL_SORT</code> » es un tipo de índice diseñado específicamente para mejorar el rendimiento de las consultas en campos numéricos (INT8, INT16, etc.), campos « <code translate="no">VARCHAR</code> » o campos « <code translate="no">TIMESTAMPTZ</code> » dentro de Milvus, mediante la organización de los datos en orden de clasificación.</p>
-<p>Utiliza el índice « <code translate="no">STL_SORT</code> » si realizas con frecuencia consultas con:</p>
-<ul>
-<li><p>Filtrado por comparación con los operadores « <code translate="no">==</code> », « <code translate="no">!=</code> », « <code translate="no">&gt;</code> », « <code translate="no">&lt;</code> », « <code translate="no">&gt;=</code> » y « <code translate="no">&lt;=</code> »</p></li>
-<li><p>Filtrado por rango con los operadores « <code translate="no">IN</code> » y « <code translate="no">LIKE</code> »</p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">Tipos de datos admitidos<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">STL_SORT</code> almacena los valores en orden clasificado para acelerar las búsquedas de valores, los filtros de rango y la coincidencia de prefijos de cadenas.</p>
+<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,12 +36,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><p>Campos numéricos (por ejemplo, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Para más detalles, consulta <a href="/docs/es/number.md">«Booleano y número</a>».</p></li>
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Tipos de datos admitidos<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><p>Campos numéricos (por ejemplo, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). Para obtener más información, consulte <a href="/docs/es/number.md">«Booleano y número</a>».</p></li>
 <li><p><code translate="no">VARCHAR</code> campos. Para más detalles, consulte <a href="/docs/es/string.md">«Campo de cadena</a>».</p></li>
-<li><p><code translate="no">TIMESTAMPTZ</code>. Para más detalles, consulte el <a href="/docs/es/timestamptz-field.md">campo «TIMESTAMPTZ</a>».</p></li>
+<li><p><code translate="no">TIMESTAMPTZ</code>. Para más detalles, consulte <a href="/docs/es/timestamptz-field.md">«Campo TIMESTAMPTZ</a>».</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">Cómo funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<p>Para los subcampos numéricos, VARCHAR o TIMESTAMPTZ en un StructArray, véase <a href="/docs/es/index-structarray-fields.md#Create-scalar-indexes">«Campos de StructArray indexables</a>». Los campos ARRAY normales no admiten <code translate="no">STL_SORT</code>; consulte <a href="/docs/es/array_data_type.md#Array-index-support">«Compatibilidad con índices de matriz</a> » para conocer las opciones de indexación disponibles.</p>
+<p>Las rutas JSON convertidas a « <code translate="no">DOUBLE</code> » o « <code translate="no">VARCHAR</code> » admiten « <code translate="no">STL_SORT</code> » tras la <a href="/docs/es/json-indexing.md#Index-requirements">configuración de activación del índice JSON 3.0</a>.</p>
+<p><a id="Queries-accelerated-by-STLSORT"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Aceleración de filtros<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,23 +75,76 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus implementa « <code translate="no">STL_SORT</code> » en dos fases:</p>
-<ol>
-<li><p><strong>Creación del índice</strong></p>
+    </button></h3><p>Un índice de tipo « <code translate="no">STL_SORT</code> » puede ayudar a evaluar las siguientes condiciones, siempre que haya compatibilidad entre los campos y la conversión:</p>
 <ul>
-<li><p>Durante la ingesta, Milvus recopila todos los valores del campo indexado.</p></li>
-<li><p>Los valores se ordenan en orden ascendente utilizando la función <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> de la biblioteca STL de C++.</p></li>
-<li><p>Cada valor se empareja con su ID de entidad, y la matriz ordenada se almacena como índice.</p></li>
-</ul></li>
-<li><p><strong>Aceleración de consultas</strong></p>
-<ul>
-<li><p>En el momento de la consulta, Milvus utiliza <strong>la búsqueda binaria</strong> (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> y <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) en la matriz ordenada.</p></li>
-<li><p>En el caso de la igualdad, Milvus encuentra rápidamente todos los valores coincidentes.</p></li>
-<li><p>En el caso de los rangos, Milvus localiza las posiciones inicial y final y devuelve todos los valores comprendidos entre ellas.</p></li>
-<li><p>Los ID de entidad coincidentes se pasan al ejecutor de consultas para el ensamblaje del resultado final.</p></li>
-</ul></li>
-</ol>
+<li>Igualdad (<code translate="no">==</code>, <code translate="no">!=</code>) y pertenencia (<code translate="no">in</code>, <code translate="no">not in</code>).</li>
+<li>Rangos: <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>, incluidos intervalos como <code translate="no">10 &lt;= price &lt; 50</code>.</li>
+<li>Coincidencia de prefijos VARCHAR, como <code translate="no">name LIKE &quot;abc%&quot;</code>.</li>
+<li>Comparaciones en rutas escalares JSON válidas. Véase <a href="/docs/es/json-indexing.md#Supported-filters">Filtros JSON</a>.</li>
+</ul>
+<p>En el caso de los filtros de sufijo, subcadena, LIKE general y expresiones regulares, Milvus puede evaluar el patrón con respecto a las cadenas almacenadas en el índice. Esto puede requerir examinar muchas cadenas distintas. Véase <a href="/docs/es/pattern-matching.md">«Coincidencia de patrones»</a> para conocer las simplificaciones sintácticas y de planificación.</p>
+<div class="alert note">
+<blockquote>
+<p>Se trata de capacidades del índice, no de límites en las expresiones de filtro válidas. Véase <a href="/docs/es/scalar_index.md#Filter-execution">«Índice escalar»</a> para conocer las restricciones de búsqueda compartidas. Para las pruebas « <code translate="no">AND</code> », « <code translate="no">OR</code> », « <code translate="no">NOT</code> » y NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), véase <a href="/docs/es/basic-operators.md">«Operadores básicos</a>».</p>
+</blockquote>
+</div>
+<p><a id="Usage-notes"></a></p>
+<h3 id="Memory-considerations" class="common-anchor-header">Consideraciones sobre la memoria<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Los índices explícitos de « <code translate="no">STL_SORT</code> » no admiten el modo mapeado en memoria.</p>
+<p>Para campos numéricos y de marca de tiempo sin valores NULL, utilice estas estimaciones aproximadas en bytes. <code translate="no">N</code> es el número de entidades:</p>
+<table>
+<thead>
+<tr><th>Tipo de campo</th><th>Estimación</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td></tr>
+<tr><td><code translate="no">INT64</code>, <code translate="no">DOUBLE</code>, <code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>Realice la medición con datos representativos; la memoria utilizada depende del almacenamiento de cadenas, los valores distintos y la capacidad de la lista de publicaciones.</td></tr>
+</tbody>
+</table>
+<p>Divide por <code translate="no">1024 * 1024</code> para convertir bytes a MiB. Un millón de valores INT64 no nulos requieren aproximadamente 19 MiB para las estructuras del índice principal. Mide los índices VARCHAR tras la carga: el tamaño del índice serializado no incluye todas las asignaciones de cadenas en memoria ni de listas de publicación.</p>
+<p>Estas estimaciones aproximadas abarcan la memoria del índice cargado con el mapeo de memoria desactivado. Cálcalas por segmento y, a continuación, súmalas entre los segmentos cargados y las réplicas.</p>
+<div class="alert note">
+<blockquote>
+<p>Prevé memoria adicional para los datos de los campos cargados, los índices vectoriales, la sobrecarga de las colecciones y los índices, y las asignaciones temporales. Valida los resultados con datos y consultas representativos; las matrices, el formato JSON, los formatos de índice más antiguos y el mapeo de memoria requieren mediciones por separado.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-STLSORT-works" class="common-anchor-header">Cómo funciona STL_SORT<button data-href="#How-STLSORT-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Consulta el proceso de ordenación y búsqueda</strong></summary></p>
+<p>Durante la creación del índice, Milvus empareja los valores de los campos con los ID de las entidades, los ordena en orden ascendente utilizando <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort</a> y almacena la matriz ordenada.</p>
+<p>Para las consultas de igualdad y de rango, la búsqueda binaria (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> y <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) localiza el intervalo coincidente. El ejecutor de consultas recibe los ID de entidad de ese intervalo.</p>
 <p>Esto reduce la complejidad de la consulta de <strong>O(n)</strong> (búsqueda completa) a <strong>O(log n + m)</strong>, donde <em>m</em> es el número de coincidencias.</p>
+<p></details></p>
 <h2 id="Create-an-STLSORT-index" class="common-anchor-header">Crear un índice STL_SORT<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,8 +160,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se puede crear un índice « <code translate="no">STL_SORT</code> » en un campo numérico, « <code translate="no">VARCHAR</code> » o « <code translate="no">TIMESTAMPTZ</code> ». No se requieren parámetros adicionales.</p>
-<p>El siguiente ejemplo muestra cómo crear un índice « <code translate="no">STL_SORT</code> » en un campo « <code translate="no">TIMESTAMPTZ</code> »:</p>
+    </button></h2><p>Establece ` <code translate="no">index_type</code> ` en ` <code translate="no">STL_SORT</code>`; no se requieren parámetros adicionales para el índice. Este ejemplo indexa un campo ` <code translate="no">TIMESTAMPTZ</code> `:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -260,12 +324,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utiliza el método ` <code translate="no">drop_index()</code> ` para eliminar un índice existente de una colección.</p>
+    </button></h2><p>Utiliza el método <code translate="no">drop_index()</code> para eliminar un índice existente de una colección.</p>
 <div class="alert note">
-<ul>
-<li><p>En <strong>la versión 2.6.3</strong> o anteriores, debes liberar la colección antes de eliminar un índice escalar.</p></li>
-<li><p>A partir de <strong>la v2.6.4</strong> o posterior, puedes eliminar un índice escalar directamente una vez que ya no sea necesario; no es necesario liberar primero la colección.</p></li>
-</ul>
+<blockquote>
+<p>Para conocer los requisitos de la versión a la hora de eliminar un índice escalar, consulta <a href="/docs/es/scalar_index.md#Drop-index-compatibility">Índice escalar</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -378,23 +441,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">Notas de uso<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>Tipos de campo:</strong> Funciona con campos numéricos, de tipo « <code translate="no">VARCHAR</code> » y « <code translate="no">TIMESTAMPTZ</code> ». Para obtener más información sobre los tipos de datos, consulta <a href="/docs/es/number.md">«Boolean &amp; Number</a> » y <a href="/docs/es/timestamptz-field.md">«TIMESTAMPTZ Field</a>».</p></li>
-<li><p><strong>Parámetros:</strong> No se necesitan parámetros de índice.</p></li>
-<li><p><strong>Mmap no compatible:</strong> el modo de mapa de memoria no está disponible para « <code translate="no">STL_SORT</code> ».</p></li>
-</ul>

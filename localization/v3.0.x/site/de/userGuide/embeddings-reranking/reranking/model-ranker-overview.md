@@ -1,6 +1,6 @@
 ---
 id: model-ranker-overview.md
-title: Übersicht über den Model RankerCompatible with Milvus 2.6.x
+title: Überblick über den Model RankerCompatible with Milvus 2.6.x
 summary: >-
   Bei der herkömmlichen Vektorsuche werden die Ergebnisse ausschließlich nach
   ihrer mathematischen Ähnlichkeit sortiert – also danach, wie gut die Vektoren
@@ -12,7 +12,7 @@ summary: >-
   Optimierungsstrategien bieten.
 beta: Milvus 2.6.x
 ---
-<h1 id="Model-Ranker-Overview" class="common-anchor-header">Übersicht über den Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
+<h1 id="Model-Ranker-Overview" class="common-anchor-header">Überblick über den Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,7 +28,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>Bei der herkömmlichen Vektorsuche werden Ergebnisse ausschließlich nach mathematischer Ähnlichkeit sortiert – also danach, wie gut Vektoren im hochdimensionalen Raum übereinstimmen. Dieser Ansatz ist zwar effizient, lässt jedoch oft die tatsächliche semantische Relevanz außer Acht. Stellen Sie sich vor, Sie suchen nach <strong>„Best Practices für die Datenbankoptimierung“:</strong> Möglicherweise erhalten Sie Dokumente mit hoher Vektorähnlichkeit, in denen diese Begriffe häufig vorkommen, die jedoch keine tatsächlich umsetzbaren Optimierungsstrategien bieten.</p>
-<p>Model Ranker revolutioniert die Milvus-Suche durch die Integration fortschrittlicher Sprachmodelle, die semantische Beziehungen zwischen Suchanfragen und Dokumenten verstehen. Anstatt sich ausschließlich auf die Vektorähnlichkeit zu stützen, wertet das System die Bedeutung und den Kontext der Inhalte aus, um intelligentere und relevantere Ergebnisse zu liefern.</p>
+<p>Model Ranker revolutioniert die Milvus-Suche durch die Integration fortschrittlicher Sprachmodelle, die semantische Beziehungen zwischen Suchanfragen und Dokumenten verstehen. Anstatt sich ausschließlich auf die Vektorähnlichkeit zu stützen, wertet das Modell die Bedeutung und den Kontext der Inhalte aus, um intelligentere und relevantere Ergebnisse zu liefern.</p>
 <h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Model Ranker können nicht bei Gruppierungssuchen verwendet werden.</p></li>
-<li><p>Felder, die für das Modell-Ranking verwendet werden, müssen vom Typ „Text“ sein (<code translate="no">VARCHAR</code>).</p></li>
+<li><p>Felder, die für das Model-Ranking verwendet werden, müssen vom Typ „Text“ sein (<code translate="no">VARCHAR</code>).</p></li>
 <li><p>Jeder Model Ranker kann jeweils nur ein Feld vom Typ „ <code translate="no">VARCHAR</code> “ zur Auswertung verwenden.</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">So funktioniert es<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -64,7 +64,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Modell-Ranker integrieren Funktionen zum Verständnis von Sprachmodellen über einen klar definierten Workflow in den Milvus-Suchprozess:</p>
+    </button></h2><p>Modell-Ranker integrieren Sprachmodell-Verständnisfunktionen über einen genau definierten Arbeitsablauf in den Milvus-Suchprozess:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" /> 
@@ -81,7 +81,7 @@ beta: Milvus 2.6.x
 <li><p>Das Sprachmodell bewertet die semantische Relevanz zwischen der Abfrage und jedem Dokument</p></li>
 <li><p>Jedes Dokument erhält auf der Grundlage des semantischen Verständnisses einen Relevanzwert</p></li>
 </ul></li>
-<li><p><strong>Intelligente Neuanordnung</strong>: Die Dokumente werden auf der Grundlage der vom Modell generierten Relevanzwerte neu geordnet</p></li>
+<li><p><strong>Intelligente Neureihung</strong>: Die Dokumente werden auf der Grundlage der vom Modell generierten Relevanzwerte neu geordnet</p></li>
 <li><p><strong>Verbesserte Ergebnisse</strong>: Ihre Anwendung erhält Ergebnisse, die nach semantischer Relevanz und nicht nur nach Vektorähnlichkeit geordnet sind</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">Wählen Sie einen Modellanbieter, der Ihren Anforderungen entspricht<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
@@ -110,8 +110,8 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>vLLM</p></td>
      <td><p>Komplexe Anwendungen, die ein tiefes semantisches Verständnis und eine individuelle Anpassung erfordern</p></td>
-     <td><ul><li><p>Unterstützt verschiedene große Sprachmodelle</p></li><li><p>Flexible Bereitstellungsoptionen</p></li><li><p>Höhere Rechenanforderungen</p></li><li><p>Größeres Potenzial zur Anpassung</p></li></ul></td>
-     <td><p>Rechtsrechercheplattform, die fachspezifische Modelle einsetzt, die juristische Terminologie und Zusammenhänge in der Rechtsprechung verstehen</p></td>
+     <td><ul><li><p>Unterstützt verschiedene große Sprachmodelle</p></li><li><p>Flexible Bereitstellungsoptionen</p></li><li><p>Höhere Rechenanforderungen</p></li><li><p>Größeres Anpassungspotenzial</p></li></ul></td>
+     <td><p>Rechtsforschungsplattform, die fachspezifische Modelle einsetzt, die juristische Terminologie und Zusammenhänge in der Rechtsprechung verstehen</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
@@ -134,20 +134,20 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Anwendungen zur Verarbeitung langer Dokumente mit Schwerpunkt auf Kosteneffizienz</p></td>
-     <td><ul><li><p>Erweiterte Dokumentaufteilung in Blöcke mit konfigurierbarer Überlappung</p></li><li><p>Chunk-basierte Bewertung (der Chunk mit der höchsten Punktzahl repräsentiert das Dokument)</p></li><li><p>Unterstützung für verschiedene Reranking-Modelle</p></li><li><p>Kosteneffizient dank Standard- und Pro-Modellvarianten</p></li></ul></td>
-     <td><p>Suchsystem für technische Dokumentation zur Verarbeitung umfangreicher Handbücher und Fachartikel, die eine intelligente Segmentierung und Überlappungssteuerung erfordern</p></td>
+     <td><ul><li><p>Erweiterte Dokumentenzerlegung mit konfigurierbarer Überlappung</p></li><li><p>Chunk-basierte Bewertung (der Chunk mit der höchsten Punktzahl repräsentiert das Dokument)</p></li><li><p>Unterstützung für verschiedene Modelle zur Neureihung</p></li><li><p>Kosteneffizient dank Standard- und Pro-Modellvarianten</p></li></ul></td>
+     <td><p>Suchsystem für technische Dokumentation zur Verarbeitung umfangreicher Handbücher und Dokumente, die eine intelligente Segmentierung und Überlappungssteuerung erfordern</p></td>
    </tr>
    <tr>
      <td><p>DashScope</p></td>
      <td><p>Anwendungen, die Reranking-Modelle von Alibaba Cloud oder Qwen nutzen</p></td>
-     <td><ul><li><p>Verwaltete DashScope-Reranking-API</p></li><li><p>Unterstützt Reranking-Modelle wie <code translate="no">gte-rerank-v2</code></p></li><li><p>API-Key-basierte Authentifizierung</p></li></ul></td>
+     <td><ul><li><p>Verwaltete DashScope-Reranking-API</p></li><li><p>Unterstützt Reranking-Modelle wie <code translate="no">gte-rerank-v2</code></p></li><li><p>Authentifizierung über API-Schlüssel</p></li></ul></td>
      <td><p>RAG-Anwendungen, die Kandidaten mit von Alibaba Cloud gehosteten Reranking-Modellen neu bewerten möchten</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
      <td><p>Anwendungen, die gehostete Hugging-Face-Modelle zur Satzähnlichkeit nutzen</p></td>
      <td><ul><li><p>Verwendet den gehosteten „ <code translate="no">hf-inference</code> “-Anbieter</p></li><li><p>Wählt Modelle aus dem Hugging Face Hub aus</p></li><li><p>Berechnet einen Satzähnlichkeitswert pro Kandidaten</p></li><li><p>Verwendet die Authentifizierung per API-Schlüssel</p></li></ul></td>
-     <td><p>Anwendungen für die semantische Suche, die Textkandidaten mit einem Hugging-Face-Modell neu bewerten möchten, ohne einen separaten Inferenzdienst zu betreiben</p></td>
+     <td><p>Semantische Suchanwendungen, die Textkandidaten mit einem Hugging-Face-Modell neu bewerten möchten, ohne einen separaten Inferenzdienst zu betreiben</p></td>
    </tr>
 </table>
 <p>Ausführliche Informationen zur Implementierung der einzelnen Modelldienste finden Sie in der entsprechenden Dokumentation:</p>
@@ -244,9 +244,83 @@ model_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;tei&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;machine learning for time series&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -288,7 +362,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params.provider</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der Modell-Dienstanbieter, der für das Reranking verwendet werden soll.</p></td>
+     <td><p>Der Modell-Dienstanbieter, der für die Neureihung verwendet werden soll.</p></td>
      <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
@@ -337,7 +411,7 @@ model_ranker = Function(
 results = client.search(
     collection_name,
     data=[your_query_vector], <span class="hljs-comment"># Number of query vectors must match that specified in model_ranker.params[&quot;queries&quot;] </span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
@@ -352,7 +426,7 @@ results = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(COLLECTION_NAME)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
-        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
         .outputFields(Collections.singletonList(document))
         .functionScore(FunctionScore.builder()
@@ -364,7 +438,67 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">10</span>,            <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;tei&quot;,
+        &quot;queries&quot;: [
+            &quot;machine learning for time series&quot;
+        ],
+        &quot;endpoint&quot;: &quot;http://model-service:8080&quot;
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

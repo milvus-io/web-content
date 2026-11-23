@@ -389,7 +389,7 @@
             "children": []
           },
           {
-            "label": "Campo principal e AutoID",
+            "label": "Campo principal e identificação automática",
             "id": "primary-field.md",
             "order": 1,
             "children": []
@@ -783,7 +783,7 @@
         ]
       },
       {
-        "label": "Inserir e Eliminar",
+        "label": "Inserir e Apagar",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1197,7 +1191,7 @@
             "order": 13,
             "children": [
               {
-                "label": "Pesquisa básica de vetores com StructArray",
+                "label": "Pesquisa básica em vetores com StructArray",
                 "id": "basic-vector-search-with-structarray.md",
                 "order": 0,
                 "children": []
@@ -1499,12 +1493,6 @@
             "children": []
           },
           {
-            "label": "Compactação por agrupamento",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Forçar a compactação da fusão",
             "id": "force-merge.md",
             "order": 2,
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "SDK do Node.js",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "API RESTful v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Conceção de esquemas",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "Padrões de pesquisa",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "Seleção de índices",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "Pipeline RAG",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -2150,7 +2156,7 @@
                 "children": []
               },
               {
-                "label": "Conceder Privilégios",
+                "label": "Conceder privilégios",
                 "id": "grant_privileges.md",
                 "order": 3,
                 "children": []
@@ -3250,7 +3256,7 @@
         "children": []
       },
       {
-        "label": "Pesquisa em funil com incorporações Matryoshka",
+        "label": "Pesquisa em funil com representações Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

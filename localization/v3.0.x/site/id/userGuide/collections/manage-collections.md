@@ -138,7 +138,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memuat koleksi merupakan prasyarat untuk melakukan pencarian kesamaan dan kueri dalam koleksi. Saat Anda memuat koleksi, Milvus memuat semua file indeks dan data mentah di setiap bidang ke dalam memori untuk respons yang cepat terhadap pencarian dan kueri.</p>
+    </button></h2><p>Memuat koleksi merupakan prasyarat untuk melakukan pencarian kesamaan dan kueri dalam koleksi. Saat Anda memuat koleksi, Milvus memuat semua berkas indeks dan data mentah di setiap bidang ke dalam memori untuk respons yang cepat terhadap pencarian dan kueri.</p>
 <p>Pencarian dan kueri merupakan operasi yang intensif memori. Untuk menghemat sumber daya, disarankan untuk melepaskan koleksi yang saat ini tidak digunakan.</p>
 <p>Untuk detail lebih lanjut, lihat <a href="/docs/id/load-and-release.md">Memuat &amp; Melepaskan</a>.</p>
 <h2 id="Search-and-Query" class="common-anchor-header">Pencarian dan Kueri<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
@@ -175,7 +175,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a></p></li>
 <li><p><a href="/docs/id/mmap.md">Gunakan mmap</a></p></li>
-<li><p><a href="/docs/id/clustering-compaction.md">Pengelompokan Pemadatan</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">Partisi<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,7 +192,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Partisi adalah himpunan bagian dari sebuah koleksi, yang memiliki kumpulan bidang yang sama dengan koleksi induknya, dan masing-masing berisi himpunan bagian dari entitas.</p>
-<p>Dengan mengalokasikan entitas ke partisi yang berbeda, Anda dapat membuat kelompok entitas. Anda dapat melakukan pencarian dan kueri di partisi tertentu agar Milvus mengabaikan entitas di partisi lain, serta meningkatkan efisiensi pencarian.</p>
+<p>Dengan mengalokasikan entitas ke partisi yang berbeda, Anda dapat membuat kelompok entitas. Anda dapat melakukan pencarian dan kueri di partisi tertentu agar Milvus mengabaikan entitas di partisi lain, sehingga meningkatkan efisiensi pencarian.</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/manage-partitions.md">Mengelola Partisi</a>.</p>
 <h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"

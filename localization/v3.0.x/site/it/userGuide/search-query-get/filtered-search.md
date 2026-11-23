@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una ricerca ANN individua le rappresentazioni vettoriali più simili a quelle specificate. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti. È possibile includere condizioni di filtraggio in una richiesta di ricerca in modo che Milvus esegua il filtraggio dei metadati prima di effettuare le ricerche ANN, riducendo l’ambito della ricerca dall’intera raccolta alle sole entità che soddisfano le condizioni di filtraggio specificate.</p>
+    </button></h1><p>Una ricerca ANN individua le rappresentazioni vettoriali più simili a quelle specificate. Tuttavia, i risultati della ricerca potrebbero non essere sempre corretti. È possibile includere condizioni di filtraggio in una richiesta di ricerca in modo che Milvus esegua il filtraggio dei metadati prima di effettuare le ricerche ANN, riducendo l’ambito di ricerca dall’intera raccolta alle sole entità che soddisfano le condizioni di filtraggio specificate.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, le ricerche filtrate sono suddivise in due tipologie — <strong>filtraggio standard</strong> e <strong>filtraggio iterativo</strong> — a seconda della fase in cui viene applicato il filtraggio.</p>
+    </button></h2><p>In Milvus, le ricerche filtrate sono classificate in due tipi — <strong>filtraggio standard</strong> e <strong>filtraggio iterativo</strong> — a seconda della fase in cui viene applicato il filtraggio.</p>
 <h3 id="Standard-filtering" class="common-anchor-header">Filtraggio standard<button data-href="#Standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Se una collezione contiene sia embedding vettoriali che i relativi metadati, è possibile filtrare i metadati prima della ricerca ANN per migliorare la pertinenza dei risultati. Una volta ricevuta una richiesta di ricerca contenente una condizione di filtraggio, Milvus limita l’ambito di ricerca alle entità che soddisfano la condizione specificata.</p>
+    </button></h3><p>Se una collezione contiene sia embedding vettoriali che i relativi metadati, è possibile filtrare i metadati prima della ricerca ANN per migliorare la pertinenza del risultato della ricerca. Una volta che Milvus riceve una richiesta di ricerca contenente una condizione di filtraggio, limita l’ambito di ricerca alle entità che soddisfano la condizione di filtraggio specificata.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" /> 
@@ -70,6 +70,11 @@ summary: >-
 <li><p>Esegue la ricerca ANN all’interno delle entità filtrate.</p></li>
 <li><p>Restituisce le prime K entità.</p></li>
 </ul>
+<div class="alert note">
+<p>A partire da Milvus 3.0.3, è possibile utilizzare " <code translate="no">IS NULL</code> " e " <code translate="no">IS NOT NULL</code> " nei filtri di query e di ricerca sui campi vettoriali ordinari per selezionare, rispettivamente, le entità il cui campo vettoriale è NULL o non NULL.</p>
+<p>Per trovare le entità il cui campo ` <code translate="no">embedding</code> ` è `NULL`, utilizzare ` <code translate="no">query()</code> ` con il filtro ` <code translate="no">embedding IS NULL</code>`. Questo filtro è valido anche in ` <code translate="no">search()</code>`. Tuttavia, la ricerca su ` <code translate="no">embedding</code> ` con questo filtro non restituisce alcun risultato: le entità prive di un valore ` <code translate="no">embedding</code> ` non dispongono di un vettore da confrontare con il vettore della query.</p>
+<p>Per i tipi supportati, la sintassi e gli esempi, vedere <a href="/docs/it/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">gli operatori IS NULL e IS NOT NULL</a>.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">Filtraggio iterativo<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,14 +90,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Il processo di filtraggio standard restringe efficacemente l’ambito di ricerca a un intervallo ristretto. Tuttavia, espressioni di filtraggio eccessivamente complesse possono comportare una latenza di ricerca molto elevata. In tali casi, il filtraggio iterativo può rappresentare un’alternativa, contribuendo a ridurre il carico di lavoro del filtraggio scalare.</p>
+    </button></h3><p>Il processo di filtraggio standard restringe efficacemente l’ambito della ricerca a un intervallo ristretto. Tuttavia, espressioni di filtraggio eccessivamente complesse possono comportare una latenza di ricerca molto elevata. In tali casi, il filtraggio iterativo può rappresentare un’alternativa, contribuendo a ridurre il carico di lavoro del filtraggio scalare.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>Filtraggio iterativo</span>
   
  </span></p>
-<p>Come illustrato nel diagramma sopra, una ricerca con filtraggio iterativo esegue la ricerca vettoriale in iterazioni. Ogni entità restituita dall'iteratore viene sottoposta a filtraggio scalare e questo processo continua fino al raggiungimento dei primi K risultati specificati.</p>
+<p>Come illustrato nel diagramma sopra, una ricerca con filtraggio iterativo esegue la ricerca vettoriale in iterazioni. Ogni entità restituita dall’iteratore viene sottoposta a filtraggio scalare e questo processo continua fino al raggiungimento dei risultati topK specificati.</p>
 <p>Questo metodo riduce significativamente il numero di entità sottoposte al filtraggio scalare, rendendolo particolarmente vantaggioso per la gestione di espressioni di filtraggio altamente complesse.</p>
 <p>Tuttavia, è importante notare che l’iteratore elabora le entità una alla volta. Questo approccio sequenziale può comportare tempi di elaborazione più lunghi o potenziali problemi di prestazioni, specialmente quando un gran numero di entità è sottoposto al filtraggio scalare.</p>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -143,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>I seguenti frammenti di codice illustrano una ricerca con filtraggio standard; la richiesta nel frammento di codice riportato di seguito include una condizione di filtraggio e diversi campi di output.</p>
+    </button></h3><p>I seguenti frammenti di codice illustrano una ricerca con filtraggio standard; la richiesta nel frammento di codice seguente include una condizione di filtraggio e diversi campi di output.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

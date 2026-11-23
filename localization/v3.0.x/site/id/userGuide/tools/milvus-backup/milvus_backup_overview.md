@@ -20,7 +20,7 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Backup melakukan pencadangan koleksi Milvus dan memulihkannya di instance yang sama atau instance lain. Milvus Backup menyediakan antarmuka baris perintah (CLI) dan API HTTP.</p>
+    </button></h1><p>Milvus Backup melakukan pencadangan koleksi Milvus dan memulihkannya di instance yang sama atau instance lain. Alat ini menyediakan antarmuka baris perintah (CLI) dan API HTTP.</p>
 <p>Milvus Backup <strong>0.6.0</strong> menambahkan fitur pencadangan snapshot untuk Milvus 3.0, skema konfigurasi v2 yang berversi, serta preset tujuan untuk membuat cadangan. Dukungan resmi untuk pencadangan dan pemulihan pada Milvus 3.0 dimulai pada <strong>Milvus 3.0.1</strong>.</p>
 <h2 id="Choose-your-guide" class="common-anchor-header">Pilih panduan Anda<button data-href="#Choose-your-guide" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Backup memiliki versi rilisnya sendiri, terpisah dari versi server Milvus. Panduan saat ini mencakup seri 0.6.x; bagian Backup 0.5.x mempertahankan alur kerja sebelumnya. Label judul halaman mengidentifikasi seri Backup yang berlaku. Petunjuk instalasi dan contoh menggunakan rilis tervalidasi tertentu. Periksa kompatibilitas server Milvus sumber dan target secara terpisah.</p>
+    </button></h2><p>Milvus Backup memiliki versi rilisnya sendiri, terpisah dari versi server Milvus. Panduan saat ini mencakup seri 0.6.x; bagian Backup 0.5.x mempertahankan alur kerja sebelumnya. Label judul halaman mengidentifikasi seri Backup yang berlaku. Petunjuk instalasi dan contoh menggunakan rilis tervalidasi tertentu. Periksa kompatibilitas server Milvus sumber dan tujuan secara terpisah.</p>
 <table>
 <thead>
 <tr><th>Tugas Anda</th><th>Panduan</th></tr>
@@ -99,11 +99,11 @@ title: Milvus Backup
 <tbody>
 <tr><td><code translate="no">snapshot</code></td><td>Milvus mengekspor bundel snapshot koleksi. Milvus Backup mencatat informasi bundel tersebut, dan proses pemulihan mengimpor bundel tersebut melalui Milvus. Server mengelola tata letak data yang dihasilkan.</td></tr>
 <tr><td><code translate="no">binlog</code></td><td>Milvus Backup menyalin berkas data koleksi dan metadata, kemudian membuat ulang koleksi dan mengimpor data cadangan selama proses pemulihan.</td></tr>
-<tr><td><code translate="no">auto</code></td><td>Pilih format sesuai dengan fitur yang didukung oleh server. Pada Milvus 3.0, pilih snapshot.</td></tr>
+<tr><td><code translate="no">auto</code></td><td>Pilih format sesuai dengan fitur yang didukung oleh server. Pada Milvus 3.0, format yang dipilih adalah snapshot.</td></tr>
 </tbody>
 </table>
 <p>Direktori cadangan berisi metadata dan berkas yang diperlukan oleh formatnya. Pertahankan direktori secara utuh saat mengarsipkan atau memindahkannya. Jangan berasumsi bahwa cadangan snapshot menggunakan tata letak direktori binlog.</p>
-<p>Pada versi 0.6.0, preset " <code translate="no">create --for</code> " mengonfigurasi opsi khusus tujuan: " <code translate="no">clone</code> " mempertahankan format yang dipilih, sedangkan " <code translate="no">archive</code> " dan " <code translate="no">secondary</code> " memerlukan binlog. Sebuah server sekunder juga memerlukan topologi replikasi yang dikonfigurasi; migrasi biasa antar instans tidak memerlukan server sekunder. Lihat <a href="/docs/id/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">"Pilih Format atau Tujuan Cadangan"</a>.</p>
+<p>Pada versi 0.6.0, preset " <code translate="no">create --for</code> " mengonfigurasi opsi khusus tujuan: " <code translate="no">clone</code> " mempertahankan format yang dipilih, sedangkan " <code translate="no">archive</code> " dan " <code translate="no">secondary</code> " memerlukan binlog. Server sekunder juga memerlukan topologi replikasi yang dikonfigurasi; migrasi biasa antar-instans tidak memerlukan server sekunder. Lihat <a href="/docs/id/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">"Pilih Format atau Tujuan Cadangan"</a>.</p>
 <p>Backup 0.6.0 melewatkan koleksi eksternal selama proses pencadangan. Tugas yang berhasil tidak berarti bahwa data koleksi eksternal telah disertakan.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Matriks kompatibilitas<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

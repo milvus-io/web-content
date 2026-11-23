@@ -21,7 +21,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Используйте это руководство при обновлении <strong>инструмента Milvus Backup</strong> с версии 0.5.x до 0.6.x. В приведенной ниже процедуре в качестве проверенной целевой версии используется версия 0.6.0. Это обновление не затрагивает ваш сервер Milvus. Если вы остаетесь на версии 0.5.x, продолжайте использовать руководство <a href="/docs/ru/milvus_backup_cli.md">по CLI</a> или <a href="/docs/ru/milvus_backup_api.md">API</a> для вер <a href="/docs/ru/milvus_backup_cli.md">сии 0.5.x</a>. Для новой установки воспользуйтесь <a href="/docs/ru/milvus_backup_0_6_cli.md">руководством по CLI</a>.</p>
+    </button></h1><p>Используйте это руководство при обновлении <strong>инструмента Milvus Backup</strong> с версии 0.5.x до 0.6.x. В приведенной ниже процедуре в качестве проверенной целевой версии используется версия 0.6.0. Это обновление не затрагивает ваш сервер Milvus. Если вы остаетесь на версии 0.5.x, продолжайте использовать руководство <a href="/docs/ru/milvus_backup_cli.md">по CLI</a> или <a href="/docs/ru/milvus_backup_api.md">API</a> для <a href="/docs/ru/milvus_backup_cli.md">версии 0.5.x</a>. Для новой установки воспользуйтесь <a href="/docs/ru/milvus_backup_0_6_cli.md">руководством по CLI</a>.</p>
 <p>Конфигурации YAML версии V1 по-прежнему загружаются посредством автоматического преобразования. Однако в версии 0.6.0 устаревшие флаги CLI отклоняются, а формат резервного копирования по умолчанию изменяется в Milvus 3.0. Перед переключением запланированных заданий или служб проверьте как конфигурацию, так и команды.</p>
 <h2 id="Check-the-starting-point" class="common-anchor-header">Проверьте исходную конфигурацию<button data-href="#Check-the-starting-point" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,10 +60,10 @@ beta: Milvus Backup 0.6.x
 ./milvus-backup config show --config configs/backup-v2.yaml
 ./milvus-backup check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">--strict</code> отклоняет некорректную перенесённую конфигурацию. Без файла <code translate="no">--output</code> команда записывает YAML-файл версии v2 в стандартный вывод. Проверьте и используйте новый файл только после проверки его настроек.</p>
+<p><code translate="no">--strict</code> отклоняет некорректную перенесённую конфигурацию. Без файла <code translate="no">--output</code> команда записывает YAML версии v2 в стандартный вывод. Проверьте и используйте новый файл только после проверки его настроек.</p>
 <table>
 <thead>
-<tr><th>Параметр версии v1</th><th>Настройка v2</th></tr>
+<tr><th>Настройка v1</th><th>Настройка v2</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">milvus.address</code>, <code translate="no">milvus.port</code></td><td><code translate="no">milvus.grpc.address</code>, <code translate="no">milvus.grpc.port</code></td></tr>
@@ -105,7 +105,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">restore</code></td><td><code translate="no">--collections</code> / <code translate="no">-c</code>, <code translate="no">--databases</code> / <code translate="no">-d</code>, <code translate="no">--database_collections</code> / <code translate="no">-a</code></td><td><code translate="no">--filter</code>, с использованием имен целей</td></tr>
 <tr><td><code translate="no">restore</code></td><td><code translate="no">--restore_index</code></td><td><code translate="no">--rebuild_index</code></td></tr>
 <tr><td><code translate="no">get</code></td><td><code translate="no">--detail</code> / <code translate="no">-d</code></td><td>Удалите флаг; <code translate="no">get</code> возвращает информацию о резервной копии</td></tr>
-<tr><td><code translate="no">list</code></td><td><code translate="no">--collection</code> / <code translate="no">-c</code></td><td>Нет эквивалентного фильтра коллекции</td></tr>
+<tr><td><code translate="no">list</code></td><td><code translate="no">--collection</code> / <code translate="no">-c</code></td><td>Нет эквивалентного фильтра сбора</td></tr>
 </tbody>
 </table>
 <p>Например, следующие команды версии 0.5.16 выбирают имя источника <code translate="no">coll</code>:</p>
@@ -116,7 +116,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup create --filter coll -n my_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Фильтр восстановления, не дающий результатов, может успешно завершиться без создания коллекции. Всегда проверяйте целевую коллекцию и её данные. В HTTP-API команда <code translate="no">collection_names</code> по-прежнему выбирает имена источников в резервной копии; см. <a href="/docs/ru/milvus_backup_0_6_api.md#Restore-data">руководство по HTTP-API</a>.</p>
+<p>Фильтр восстановления, не дающий результатов, может успешно завершиться без создания коллекции. Всегда проверяйте целевую коллекцию и её данные. В HTTP API команда <code translate="no">collection_names</code> по-прежнему выбирает имена источников в резервной копии; см. <a href="/docs/ru/milvus_backup_0_6_api.md#Restore-data">руководство по HTTP API</a>.</p>
 <h2 id="Choose-the-backup-behavior" class="common-anchor-header">Выбор поведения резервного копирования<button data-href="#Choose-the-backup-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -154,7 +154,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В следующем примере сохраняется формат бинарного журнала, а восстановление выполняется в новую коллекцию. Замените <code translate="no">coll</code> на коллекцию, схему, количество элементов, скалярные и векторные значения которой, а также результаты поиска которой вы зафиксировали. Используйте новое имя резервной копии и убедитесь, что целевое имя <code translate="no">coll_upgrade_check</code> не существует.</p>
+    </button></h2><p>В следующем примере сохраняется формат бинарного журнала, а восстановление выполняется в новую коллекцию. Замените <code translate="no">coll</code> на коллекцию, схему, количество, скалярные и векторные значения которой, а также результаты поиска которой вы зафиксировали. Используйте новое имя резервной копии и убедитесь, что целевое имя <code translate="no">coll_upgrade_check</code> не существует.</p>
 <pre><code translate="no" class="language-shell">./milvus-backup check --config configs/backup-v2.yaml
 ./milvus-backup create --filter coll --format binlog -n upgrade_check --config configs/backup-v2.yaml
 ./milvus-backup get -n upgrade_check --config configs/backup-v2.yaml
@@ -165,5 +165,5 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup get -n legacy_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_legacy_check -n legacy_backup -s _legacy_check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Эти пути обновления были проверены с использованием <strong>Milvus 2.6.11</strong>, резервной копии <strong>0.5.16 → 0.6.0</strong> и резервных копий binlog в MinIO. Как вновь созданные, так и существующие резервные копии восстанавливались с совпадающими значениями сущностей и результатами векторного поиска. Это не гарантирует совместимость со всеми историческими резервными копиями или восстановление данных из Milvus версии 2.x в версию 3.0. Также это не гарантирует, что версия 0.5.x сможет прочитать резервные копии, созданные версией 0.6.0.</p>
-<p>После успешной проверки обновите задания, чтобы они использовали новый бинарный файл, проверенную конфигурацию, настройки среды и флаги замены одновременно. При развертывании через API запустите новую службу с проверенной конфигурацией и проверьте выполнение задач через <a href="/docs/ru/milvus_backup_0_6_api.md">HTTP-API</a>. Для использования моментальных снимков в Milvus 3.0.1 или более поздних версиях следуйте инструкциям, приведенным в разделе <a href="/docs/ru/snapshot-backup-and-restore.md">«Резервное копирование и восстановление моментальных снимков в одном экземпляре</a>».</p>
+<p>Эти пути обновления были проверены с использованием <strong>Milvus 2.6.11</strong>, резервной копии <strong>0.5.16 → 0.6.0</strong> и резервных копий binlog в MinIO. Как вновь созданные, так и существующие резервные копии восстанавливались с совпадающими значениями сущностей и результатами векторного поиска. Это не гарантирует совместимость со всеми историческими резервными копиями или восстановление данных из Milvus версии 2.x в версию 3.0. Это также не гарантирует, что версия 0.5.x сможет прочитать резервные копии, созданные версией 0.6.0.</p>
+<p>После успешной проверки обновите задания, чтобы они использовали новый бинарный файл, проверенную конфигурацию, настройки среды и флаги замены одновременно. При развертывании через API запустите новую службу с проверенной конфигурацией и проверьте выполнение задач через <a href="/docs/ru/milvus_backup_0_6_api.md">HTTP-API</a>. Для использования моментальных снимков в Milvus 3.0.1 или более поздних версиях следуйте инструкциям, приведённым в разделе <a href="/docs/ru/snapshot-backup-and-restore.md">«Резервное копирование и восстановление моментальных снимков в одном экземпляре</a>».</p>

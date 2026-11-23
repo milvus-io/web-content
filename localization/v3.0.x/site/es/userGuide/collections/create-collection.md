@@ -1,12 +1,12 @@
 ---
 id: create-collection.md
-title: Crear colección
+title: Crear una colección
 summary: >-
   Puedes crear una colección definiendo su esquema, los parámetros de índice, el
   tipo de métrica y si se debe cargar al crearla. En esta página se explica cómo
   crear una colección desde cero.
 ---
-<h1 id="Create-Collection" class="common-anchor-header">Crear colección<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+<h1 id="Create-Collection" class="common-anchor-header">Crear una colección<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Puedes crear una colección definiendo su esquema, los parámetros del índice, el tipo de métrica y si se debe cargar al crearla. En esta página se explica cómo crear una colección desde cero.</p>
+    </button></h1><p>Puedes crear una colección definiendo su esquema, los parámetros de índice, el tipo de métrica y si se debe cargar al crearla. En esta página se explica cómo crear una colección desde cero.</p>
 <h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -308,10 +308,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Crear un índice en un campo específico acelera la búsqueda en dicho campo. Un índice registra el orden de las entidades dentro de una colección. Tal y como se muestra en los siguientes fragmentos de código, puedes utilizar <code translate="no">metric_type</code> y <code translate="no">index_type</code> para seleccionar las formas adecuadas en que Milvus indexe un campo y mida las similitudes entre las representaciones vectoriales.</p>
-<p>En Milvus, puedes utilizar <code translate="no">AUTOINDEX</code> como tipo de índice para todos los campos vectoriales, y uno de los siguientes: <code translate="no">COSINE</code>, <code translate="no">L2</code> y <code translate="no">IP</code> como tipo de métrica, según tus necesidades.</p>
-<p>Tal y como se muestra en el fragmento de código anterior, es necesario configurar tanto el tipo de índice como el tipo de métrica para los campos vectoriales, y solo el tipo de índice para los campos escalares. Los índices son obligatorios para los campos vectoriales, y se recomienda crear índices en los campos escalares que se utilicen con frecuencia en las condiciones de filtrado.</p>
-<p>Para obtener más información, consulta <a href="/docs/es/index-vector-fields.md">«Indexar campos vectoriales</a> » e <a href="/docs/es/index-scalar-fields.md">«Indexar campos escalares</a>».</p>
+    </button></h2><p>Los ejemplos siguientes preparan definiciones de índices para los campos del esquema. Elige un índice vectorial y una métrica compatibles con el tipo de datos del campo vectorial; consulta <a href="/docs/es/index-explained.md">Explicación de los índices</a> y <a href="/docs/es/metric.md">Métricas de similitud</a>.</p>
+<p>Los campos vectoriales requieren índices antes de su carga. Los índices escalares son opcionales; consulta <a href="/docs/es/scalar_index.md">«Índice escalar»</a> para conocer la compatibilidad de los campos y la selección explícita o automática de tipos.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

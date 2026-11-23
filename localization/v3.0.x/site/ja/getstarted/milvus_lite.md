@@ -41,7 +41,7 @@ title: Milvus Liteをローカルで実行する
 <li>ノートパソコン</li>
 <li>互換性のある Python 依存関係を持つエッジデバイス</li>
 </ul>
-<p>Milvus Lite は、ベクトルデータの永続化、挿入および削除、ベクトル検索、メタデータフィルタリングなど、サポートされている操作に対して<code translate="no">MilvusClient</code> API を使用します。サポートされているアプリケーションワークフローをリモート環境に移行するには、接続 URI と認証情報を変更し、サポートされている機能の違いを確認してください。 大規模な本番ワークロードについては、<a href="/docs/ja/install-overview.md">Milvus Standalone または Distributed</a>、あるいは<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上のフルマネージド型 Milvus をご利用ください。</p>
+<p>Milvus Lite は、ベクトルデータの永続化、挿入および削除、ベクトル検索、メタデータフィルタリングなど、サポートされている操作に対して<code translate="no">MilvusClient</code> API を使用します。サポートされているアプリケーションワークフローをリモート環境に移行するには、接続 URI と認証情報を変更し、サポートされている機能の違いを確認してください。 大規模な本番環境のワークロードについては、<a href="/docs/ja/install-overview.md">Milvus Standalone または Distributed</a>、あるいは<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上のフルマネージド型 Milvus をご利用ください。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ client.close()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 3.2.2 は、ローカルの PyMilvus アダプタを通じて Milvus 操作の一部を実装しています。<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features">バージョン管理された機能リファレンス</a>には、以下の機能が記載されています：</p>
+    </button></h2><p>Milvus Lite 3.2.2 は、ローカルの PyMilvus アダプターを通じて Milvus 操作の一部を実装しています。<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#supported-features">バージョン管理された機能リファレンス</a>には、以下の機能が記載されています：</p>
 <table>
 <thead>
 <tr><th>領域</th><th>このLiteバージョンでのサポート状況</th></tr>
@@ -205,7 +205,7 @@ client.close()
 <tr><td>スカラーおよびスパースインデックス</td><td><code translate="no">INVERTED</code> スカラーインデックスおよび<code translate="no">SPARSE_INVERTED_INDEX</code></td></tr>
 <tr><td>データ操作</td><td>挿入、アップサート、取得、クエリ、ベクトル検索、および削除</td></tr>
 <tr><td>検索</td><td>密インデックスおよび疎インデックスによる検索、メタデータフィルター、複数のベクトルフィールド、ハイブリッド検索</td></tr>
-<tr><td>コレクションの構成</td><td>ローカルアダプタがサポートする操作範囲内でのコレクション、名前付きデータベース、エイリアス、およびパーティション</td></tr>
+<tr><td>コレクションの構成</td><td>ローカルアダプタでサポートされている操作範囲内での、コレクション、名前付きデータベース、エイリアス、およびパーティション</td></tr>
 </tbody>
 </table>
 <p>このバージョンは、<code translate="no">FLAT</code> インデックスに限定されません。インデックスの利用可能性と動作はLiteバージョンによって異なります。元の2.xバックエンドの制限を3.xエンジンに適用しないでください。</p>
@@ -269,5 +269,5 @@ milvus-lite dump -h
 <li><a href="/docs/ja/quickstart.md">クイックスタート</a>：埋め込みを生成し、検索ワークフローを実行します。</li>
 <li><a href="/docs/ja/single-vector-search.md">シングルベクトル検索</a>と<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a>：アプリケーション向けのクエリを設計します。</li>
 <li><a href="/docs/ja/install-overview.md">デプロイ方法の選択</a>：ローカル開発の枠を超えて。</li>
-<li><a href="https://github.com/zilliztech/attu">Attu</a>：リモートデプロイメントのためのMilvus GUIを探索する。</li>
+<li><a href="https://github.com/zilliztech/attu">Attu</a>：リモートデプロイメントのためのMilvus GUIを操作してみましょう。</li>
 </ul>

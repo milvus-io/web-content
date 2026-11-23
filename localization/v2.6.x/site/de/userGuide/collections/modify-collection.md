@@ -1,11 +1,11 @@
 ---
 id: modify-collection.md
-title: Sammlung ändern
+title: Sammlung bearbeiten
 summary: >-
   Sie können eine Sammlung umbenennen oder ihre Einstellungen ändern. Auf dieser
-  Seite wird beschrieben, wie Sie eine Sammlung ändern können.
+  Seite wird erläutert, wie Sie eine Sammlung bearbeiten können.
 ---
-<h1 id="Modify-Collection" class="common-anchor-header">Sammlung ändern<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
+<h1 id="Modify-Collection" class="common-anchor-header">Sammlung bearbeiten<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sie können eine Sammlung umbenennen oder ihre Einstellungen ändern. Auf dieser Seite wird beschrieben, wie Sie eine Sammlung ändern können.</p>
+    </button></h1><p>Sie können eine Sammlung umbenennen oder ihre Einstellungen ändern. Auf dieser Seite erfahren Sie, wie Sie eine Sammlung bearbeiten können.</p>
 <h2 id="Rename-Collection" class="common-anchor-header">Sammlung umbenennen<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +38,12 @@ summary: >-
       </svg>
     </button></h2><p>Sie können eine Sammlung wie folgt umbenennen.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -126,7 +131,7 @@ curl --request POST \
     &quot;newCollectionName&quot;: &quot;my_new_collection&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Collection-Properties" class="common-anchor-header">Eigenschaften einer Sammlung festlegen<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-Properties" class="common-anchor-header">Sammlungs-Eigenschaften festlegen<button data-href="#Set-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,27 +169,31 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Wenn die Daten einer Sammlung nach einer bestimmten Zeit gelöscht werden müssen, sollten Sie die Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung. </p><p>Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p><p>Details finden Sie unter <a href="/docs/de/v2.6.x/set-collection-ttl.md">Set Collection TTL</a>.</p></td>
+     <td><p>Wenn die Daten einer Sammlung nach einer bestimmten Zeitspanne gelöscht werden sollen, sollten Sie deren Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus alle Entitäten aus der Sammlung. </p><p>Die Löschung erfolgt asynchron, was bedeutet, dass Suchvorgänge und Abfragen auch nach Beginn der Löschung weiterhin möglich sind.</p><p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/set-collection-ttl.md">„TTL einer Sammlung festlegen</a>“.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
-     <td><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, so dass Milvus Indizes und Daten sowohl im Speicher als auch auf den Festplatten speichern kann. Dieser Ansatz hilft bei der Optimierung der Datenplatzierungspolitik auf der Grundlage der Zugriffshäufigkeit und erweitert die Speicherkapazität für Sammlungen, ohne die Suchleistung zu beeinträchtigen.</p><p>Einzelheiten finden Sie unter <a href="/docs/de/v2.6.x/mmap.md">mmap verwenden</a>.</p></td>
+     <td><p>Memory Mapping (Mmap) ermöglicht den direkten Speicherzugriff auf große Dateien auf der Festplatte, sodass Milvus Indizes und Daten sowohl im Arbeitsspeicher als auch auf Festplatten speichern kann. Dieser Ansatz hilft dabei, die Datenplatzierungsrichtlinie basierend auf der Zugriffshäufigkeit zu optimieren und die Speicherkapazität für Sammlungen zu erweitern, ohne die Suchleistung zu beeinträchtigen.</p><p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/mmap.md">„mmap verwenden</a>“.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Wenn die Partition Key Isolation aktiviert ist, gruppiert Milvus Entitäten auf der Grundlage des Partition Key Wertes und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage findet Milvus den Index auf der Grundlage des in der Filterbedingung angegebenen Partitionsschlüsselwerts und schränkt den Suchbereich auf die im Index enthaltenen Entitäten ein, wodurch das Scannen irrelevanter Entitäten während der Suche vermieden und die Suchleistung erheblich verbessert wird.</p><p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">Partitionsschlüssel-Isolierung verwenden</a>.</p></td>
+     <td><p>Bei aktivierter Partitionsschlüssel-Isolation gruppiert Milvus Entitäten anhand des Partitionsschlüsselwerts und erstellt für jede dieser Gruppen einen separaten Index. Beim Empfang einer Suchanfrage ermittelt Milvus den Index anhand des in der Filterbedingung angegebenen Partitionsschlüsselwerts und beschränkt den Suchbereich auf die in diesem Index enthaltenen Entitäten. Dadurch wird vermieden, dass während der Suche irrelevante Entitäten durchsucht werden, was die Suchleistung erheblich verbessert.</p><p>Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/use-partition-key.md#Use-Partition-Key-Isolation">„Partitionsschlüssel-Isolation verwenden</a>“.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>Aktiviert das dynamische Feld für Sammlungen, die ohne diese Funktion erstellt wurden. Sobald es aktiviert ist, können Sie Entitäten mit Feldern einfügen, die nicht im ursprünglichen Schema definiert sind. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/enable-dynamic-field.md">Dynamisches Feld</a>.</p></td>
+     <td><p>Aktiviert das dynamische Feld für Sammlungen, die ohne diese Option erstellt wurden. Nach der Aktivierung können Sie Entitäten mit Feldern einfügen, die im ursprünglichen Schema nicht definiert sind. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/enable-dynamic-field.md">„Dynamisches Feld</a>“.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>Gibt an, ob eine Sammlung vom Benutzer bereitgestellte Primärschlüsselwerte akzeptieren darf, wenn AutoID für die Sammlung aktiviert wurde.</p><ul><li><p>Bei Einstellung auf <strong>"true"</strong>: Inserts, Upserts und Massenimporte verwenden den vom Benutzer bereitgestellten Primärschlüssel, falls vorhanden; andernfalls werden die Primärschlüsselwerte automatisch generiert.</p></li><li><p>Bei Einstellung auf <strong>"false"</strong>: Vom Benutzer bereitgestellte Primärschlüsselwerte werden zurückgewiesen oder ignoriert und Primärschlüsselwerte werden immer automatisch generiert. Der Standardwert ist <strong>"false"</strong>.</p></li></ul></td>
+     <td><p>Legt fest, ob eine Sammlung vom Benutzer bereitgestellte Primärschlüsselwerte akzeptieren darf, wenn „AutoID“ für die Sammlung aktiviert wurde.</p><ul><li><p>Bei der Einstellung <strong> „true</strong>“: Bei Einfügungen, Upserts und Massenimporten wird der vom Benutzer angegebene Primärschlüssel verwendet, sofern vorhanden; andernfalls werden Primärschlüsselwerte automatisch generiert.</p></li><li><p>Bei der Einstellung <strong> „false</strong>“: Vom Benutzer bereitgestellte Primärschlüsselwerte werden abgelehnt oder ignoriert, und Primärschlüsselwerte werden immer automatisch generiert. Die Standardeinstellung ist <strong> „false</strong>“.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Legt die Standardzeitzone für diese Sammlung fest, wenn zeitabhängige Vorgänge verarbeitet werden, insbesondere <code translate="no">TIMESTAMPTZ</code> Felder. Zeitstempel werden intern in UTC gespeichert, und Milvus konvertiert Werte für die Anzeige und den Vergleich entsprechend dieser Einstellung. Wenn sie gesetzt ist, hat die Zeitzone der Sammlung Vorrang vor der Standard-Zeitzone der Datenbank; der Zeitzonen-Parameter einer Abfrage kann beide vorübergehend außer Kraft setzen. Der Wert muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asien/Shanghai</strong>, <strong>Amerika/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung des Feldes <code translate="no">TIMESTAMPTZ</code> finden Sie unter <a href="/docs/de/v2.6.x/timestamptz-field.md">TIMESTAMPTZ-Feld</a>.</p></td>
+     <td><p>Legt die Standardzeitzone für diese Sammlung bei der Verarbeitung zeitkritischer Vorgänge fest, insbesondere bei Feldern vom Typ „ <code translate="no">TIMESTAMPTZ</code> “. Zeitstempel werden intern in UTC gespeichert, und Milvus konvertiert die Werte für die Anzeige und den Vergleich entsprechend dieser Einstellung. Wenn diese Option festgelegt ist, hat die Zeitzone der Sammlung Vorrang vor der Standardzeitzone der Datenbank; der Zeitzonenparameter einer Abfrage kann beide vorübergehend außer Kraft setzen. Der Wert muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein (z. B. <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> oder <strong>UTC</strong>). Einzelheiten zur Verwendung eines „ <code translate="no">TIMESTAMPTZ</code> “-Feldes finden Sie unter <a href="/docs/de/v2.6.x/timestamptz-field.md">„TIMESTAMPTZ-Feld</a>“.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>Ändert die Konsistenzstufe der Sammlung. Die neue Stufe gilt für nachfolgende Suchvorgänge und Abfragen zu dieser Sammlung, für die keine eigene Konsistenzstufe angegeben wird; Einstellungen pro Anfrage haben weiterhin Vorrang. Der Wert muss einer der folgenden sein: <strong>„Strong“</strong>, <strong>„Session“</strong>, <strong>„Bounded“</strong> (Standard) oder <strong>„Eventually</strong>“. Zum Ändern dieser Eigenschaft muss die Sammlung nicht freigegeben werden. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/tune_consistency.md">„Konsistenzstufe</a>“.</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-TTL" class="common-anchor-header">Beispiel 1: TTL der Sammlung festlegen<button data-href="#Example-1-Set-collection-TTL" class="anchor-icon" translate="no">
@@ -202,9 +211,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der folgende Codeschnipsel demonstriert, wie man die TTL einer Auflistung festlegt.</p>
+    </button></h3><p>Der folgende Codeausschnitt veranschaulicht, wie die TTL der Sammlung festgelegt wird.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -254,7 +268,7 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Enable-mmap" class="common-anchor-header">Beispiel 2: Aktivieren von mmap<button data-href="#Example-2-Enable-mmap" class="anchor-icon" translate="no">
+<h3 id="Example-2-Enable-mmap" class="common-anchor-header">Beispiel 2: „mmap“ aktivieren<button data-href="#Example-2-Enable-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -269,9 +283,14 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der folgende Codeschnipsel demonstriert, wie mmap aktiviert wird.</p>
+    </button></h3><p>Der folgende Codeausschnitt zeigt, wie man mmap aktiviert.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -313,7 +332,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Enable-partition-key" class="common-anchor-header">Beispiel 3: Partitionsschlüssel einschalten<button data-href="#Example-3-Enable-partition-key" class="anchor-icon" translate="no">
+<h3 id="Example-3-Enable-partition-key" class="common-anchor-header">Beispiel 3: Partitionsschlüssel aktivieren<button data-href="#Example-3-Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -330,7 +349,12 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
       </svg>
     </button></h3><p>Der folgende Codeausschnitt zeigt, wie man den Partitionsschlüssel aktiviert.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -373,7 +397,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-4-Enable-dynamic-field" class="common-anchor-header">Beispiel 4: Dynamisches Feld einschalten<button data-href="#Example-4-Enable-dynamic-field" class="anchor-icon" translate="no">
+<h3 id="Example-4-Enable-dynamic-field" class="common-anchor-header">Beispiel 4: Dynamisches Feld aktivieren<button data-href="#Example-4-Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -388,9 +412,14 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der folgende Codeschnipsel zeigt, wie das dynamische Feld aktiviert werden kann.</p>
+    </button></h3><p>Der folgende Codeausschnitt zeigt, wie das dynamische Feld aktiviert wird.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.alter_collection_properties(
@@ -433,7 +462,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Enable-allowinsertautoid" class="common-anchor-header">Beispiel 5: Aktivieren von allow_insert_auto_id<button data-href="#Example-5-Enable-allowinsertautoid" class="anchor-icon" translate="no">
+<h3 id="Example-5-Enable-allowinsertautoid" class="common-anchor-header">Beispiel 5: „allow_insert_auto_id“ aktivieren<button data-href="#Example-5-Enable-allowinsertautoid" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -448,10 +477,15 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Eigenschaft <code translate="no">allow_insert_auto_id</code> ermöglicht es einer Sammlung mit aktivierter AutoID, vom Benutzer bereitgestellte Primärschlüsselwerte beim Einfügen, Upsert und Massenimport zu akzeptieren. Wenn sie auf <strong>"true"</strong> gesetzt ist <strong>,</strong> verwendet Milvus den vom Benutzer zur Verfügung gestellten Primärschlüsselwert, wenn er vorhanden ist; andernfalls wird er automatisch generiert. Die Voreinstellung ist <strong>"false".</strong></p>
-<p>Das folgende Beispiel zeigt, wie Sie <code translate="no">allow_insert_auto_id</code> aktivieren:</p>
+    </button></h3><p>Die Eigenschaft „ <code translate="no">allow_insert_auto_id</code> “ ermöglicht es einer Sammlung mit aktivierter AutoID, vom Benutzer bereitgestellte Primärschlüsselwerte bei Einfügen, Upsert und Massenimport zu akzeptieren. Bei der Einstellung <strong>„true“</strong> verwendet Milvus den vom Benutzer bereitgestellten Primärschlüsselwert, sofern vorhanden; andernfalls wird dieser automatisch generiert. Der Standardwert ist <strong>„false“.</strong></p>
+<p>Das folgende Beispiel zeigt, wie „ <code translate="no">allow_insert_auto_id</code> “ aktiviert wird:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;allow_insert_auto_id&quot;</span>: <span class="hljs-string">&quot;true&quot;</span>}</span>
@@ -493,7 +527,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">Beispiel 6: Zeitzone für die Sammlung festlegen<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
+<h3 id="Example-6-Set-collection-time-zone" class="common-anchor-header">Beispiel 6: Zeitzone der Sammlung festlegen<button data-href="#Example-6-Set-collection-time-zone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -508,11 +542,16 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können eine Standardzeitzone für Ihre Sammlung mit der Eigenschaft <code translate="no">timezone</code> festlegen. Dies bestimmt wie zeitbezogene Daten interpretiert und für alle Operationen innerhalb der Sammlung angezeigt werden, einschließlich Dateneinfügung, Abfrage und Ergebnisdarstellung.</p>
-<p>Der Wert von <code translate="no">timezone</code> muss ein gültiger <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennzeichner</a> sein, z. B. <code translate="no">Asia/Shanghai</code>, <code translate="no">America/Chicago</code> oder <code translate="no">UTC</code>. Die Verwendung eines ungültigen oder nicht standardmäßigen Wertes führt zu einem Fehler beim Ändern der Sammlungseigenschaft.</p>
-<p>Das folgende Beispiel zeigt, wie die Zeitzone der Sammlung auf <strong>Asien/Shanghai</strong> gesetzt wird:</p>
+    </button></h3><p>Sie können mithilfe der Eigenschaft „ <code translate="no">timezone</code> “ eine Standardzeitzone für Ihre Sammlung festlegen. Diese bestimmt, wie zeitbezogene Daten für alle Vorgänge innerhalb der Sammlung interpretiert und angezeigt werden, einschließlich Dateneinfügung, Abfragen und Darstellung der Ergebnisse.</p>
+<p>Der Wert von ` <code translate="no">timezone</code> ` muss eine gültige <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA-Zeitzonenkennung</a> sein, z. B. ` <code translate="no">Asia/Shanghai</code>`, ` <code translate="no">America/Chicago</code>` oder ` <code translate="no">UTC</code>`. Die Verwendung eines ungültigen oder nicht standardmäßigen Werts führt zu einem Fehler beim Ändern der Sammlungseigenschaft.</p>
+<p>Das folgende Beispiel zeigt, wie die Zeitzone der Sammlung auf <strong>„Asia/Shanghai“</strong> festgelegt wird:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.alter_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
 <span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;timezone&quot;</span>: <span class="hljs-string">&quot;Asia/Shanghai&quot;</span>}</span>
@@ -548,7 +587,7 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
     }
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">Aufsammlungseigenschaften löschen<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h3 id="Example-7-Alter-the-consistency-level" class="common-anchor-header">Beispiel 7: Ändern der Konsistenzstufe<button data-href="#Example-7-Alter-the-consistency-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -563,9 +602,81 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können eine Sammlungseigenschaft auch zurücksetzen, indem Sie sie wie folgt löschen.</p>
+    </button></h3><p>Der folgende Codeausschnitt ändert die Konsistenzstufe einer bestehenden Sammlung auf <strong>„Eventually</strong>“. Die neue Stufe gilt für nachfolgende Suchvorgänge und Abfragen in dieser Sammlung, bei denen keine Konsistenzstufe explizit festgelegt wird; Einstellungen pro Anfrage haben weiterhin Vorrang. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/tune_consistency.md">„Konsistenzstufe</a>“.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/collections/alter_properties&quot;</span> \
+  -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+  -H <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+  -H <span class="hljs-string">&quot;Authorization: Bearer &lt;token&gt;&quot;</span> \
+  -d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+      &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+  }&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">Sammlungs-Eigenschaften löschen<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Sie können eine Sammlungseigenschaft auch zurücksetzen, indem Sie sie wie folgt entfernen.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">client.drop_collection_properties(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     property_keys=[

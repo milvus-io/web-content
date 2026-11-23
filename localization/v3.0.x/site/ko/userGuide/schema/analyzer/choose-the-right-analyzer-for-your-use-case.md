@@ -36,7 +36,7 @@ summary: 참고 사항
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 분석기는 이 필드에 저장된 텍스트를 처리하여 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a> (BM25), <a href="/docs/ko/phrase-match.md">구문 일치</a> 또는 <a href="/docs/ko/keyword-match.md">텍스트 일치와</a> 같은 기능을 통해 검색이 가능하도록 만듭니다. 이를 원시 콘텐츠를 검색 가능한 토큰으로 변환하는 텍스트 프로세서로 생각하시면 됩니다.</p>
+    </button></h2><p>Milvus에서 분석기는 이 필드에 저장된 텍스트를 처리하여 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a> (BM25), <a href="/docs/ko/phrase-match.md">구문 일치</a> 또는 <a href="/docs/ko/keyword-match.md">텍스트 일치와</a> 같은 기능을 통해 검색이 가능하도록 만듭니다. 이를 원시 콘텐츠를 검색 가능한 토큰으로 변환하는 텍스트 프로세서로 생각하면 됩니다.</p>
 <p>애널라이저는 다음과 같은 간단한 2단계 파이프라인으로 작동합니다:</p>
 <p><span class="img-wrapper">
   
@@ -46,7 +46,7 @@ summary: 참고 사항
  </span></p>
 <ol>
 <li><p><strong>토큰화(필수):</strong> 이 초기 단계에서는 <strong>토큰화기를</strong> 적용하여 연속된 텍스트 문자열을 토큰이라고 하는 개별적이고 의미 있는 단위로 분할합니다. 토큰화 방법은 언어와 콘텐츠 유형에 따라 크게 달라질 수 있습니다.</p></li>
-<li><p><strong>토큰 필터링(선택 사항):</strong> 토큰화 후, <strong>필터를</strong> 적용하여 토큰을 수정, 제거 또는 정제합니다. 이러한 작업에는 모든 토큰을 소문자로 변환하거나, 흔한 무의미한 단어(스톱워드 등)를 제거하거나, 단어를 어근 형태로 축소(스템밍)하는 것이 포함될 수 있습니다.</p></li>
+<li><p><strong>토큰 필터링(선택 사항):</strong> 토큰화 후, <strong>필터를</strong> 적용하여 토큰을 수정, 제거 또는 정제합니다. 이러한 작업에는 모든 토큰을 소문자로 변환하거나, 흔한 무의미한 단어(예: 스톱워드)를 제거하거나, 단어를 어근 형태로 축소(스템밍)하는 것이 포함될 수 있습니다.</p></li>
 </ol>
 <p><strong>예시</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -86,8 +86,8 @@ summary: 참고 사항
      <td><p>토큰화기를 <a href="/docs/ko/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 토큰화기를 사용하고, 이를 <a href="/docs/ko/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 필터와 결합하십시오.</p></td>
    </tr>
    <tr>
-     <td><p>과도한 토큰화</p></td>
-     <td><p>여러 단어로 구성된 구의 일부를 검색할 때, 해당 구 전체가 포함된 문서가 반환되지 않습니다.</p></td>
+     <td><p>과소 토큰화</p></td>
+     <td><p>여러 단어로 구성된 구의 구성 요소를 검색할 때, 해당 구 전체가 포함된 문서가 반환되지 않습니다.</p></td>
      <td><p><code translate="no">"state-of-the-art"</code> → <code translate="no">['state-of-the-art']</code></p></td>
      <td><p>다음이 포함된 분석기 <a href="/docs/ko/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 토큰화기를</p></td>
      <td><p>구두점과 공백을 기준으로 분할하는 <a href="/docs/ko/standard-tokenizer.md"><code translate="no">standard</code></a> 토큰화기를 사용하여 구두점과 공백을 기준으로 분할하고, 사용자 정의 <a href="/docs/ko/regex-filter.md">정규식</a> 필터를 사용하십시오.</p></td>
@@ -95,7 +95,7 @@ summary: 참고 사항
    <tr>
      <td><p>언어 불일치</p></td>
      <td><p>특정 언어에 대한 검색 결과가 무의미하거나 아예 표시되지 않습니다.</p></td>
-     <td><p>중국어 텍스트: <code translate="no">"机器学习"</code> → <code translate="no">['机器学习']</code> (하나의 토큰)</p></td>
+     <td><p>중국어 텍스트: <code translate="no">"机器学习"</code> → <code translate="no">['机器学习']</code> (토큰 1개)</p></td>
      <td><p><a href="/docs/ko/english-analyzer.md"><code translate="no">english</code></a> 분석기</p></td>
      <td><p>다음과 같은 언어별 분석기를 사용하십시오. <a href="/docs/ko/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
    </tr>
@@ -104,7 +104,7 @@ summary: 참고 사항
      <td><p>사용자는 병음을 입력하지만, 색인된 텍스트는 한자를 사용합니다.</p></td>
      <td><p>중국어 텍스트: <code translate="no">"足球"</code>; 쿼리 텍스트: <code translate="no">"zuqiu"</code></p></td>
      <td><p>한자 토큰만 생성하는 분석기</p></td>
-     <td><p>다음과 같은 사용자 정의 분석기를 사용하십시오. <a href="/docs/ko/jieba-tokenizer.md"><code translate="no">jieba</code></a> 토큰화기 및 <a href="/docs/ko/pinyin-filter.md"><code translate="no">pinyin</code></a> 필터를 적용한 사용자 정의 분석기를 사용하십시오.</p></td>
+     <td><p>다음과 같은 사용자 정의 분석기를 사용하십시오. <a href="/docs/ko/jieba-tokenizer.md"><code translate="no">jieba</code></a> 토큰화기 및 <a href="/docs/ko/pinyin-filter.md"><code translate="no">pinyin</code></a> 필터를 갖춘 사용자 정의 분석기를 사용하십시오.</p></td>
    </tr>
 </table>
 <h2 id="First-question-Do-you-need-to-choose-an-analyzer" class="common-anchor-header">첫 번째 질문: 분석기를 선택해야 할까요?<button data-href="#First-question-Do-you-need-to-choose-an-analyzer" class="anchor-icon" translate="no">
@@ -206,13 +206,13 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>프랑스어/스페인어 텍스트와 같이 공백으로 구분된 언어</p></td>
      <td><p>⚠️ 주의</p></td>
      <td><p>악센트가 있는 문자(<code translate="no">café</code> 대 <code translate="no">cafe</code>)가 일치하지 않을 수 있습니다.</p></td>
-     <td><p>더 나은 결과를 얻으려면 <a href="/docs/ko/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> 사용하는 사용자 정의 분석기를 사용하는 것이 좋습니다.</p></td>
+     <td><p>더 나은 결과를 얻으려면 <a href="/docs/ko/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> 사용하는 사용자 정의 분석기를 권장합니다.</p></td>
    </tr>
    <tr>
      <td><p>다국어 또는 알 수 없는 언어</p></td>
-     <td><p>❌ 아니요</p></td>
+     <td><p>❌ 안 됨</p></td>
      <td><p><code translate="no">standard</code> 분석기에는 다양한 문자 집합과 토큰화 규칙을 처리하는 데 필요한 언어별 로직이 부족합니다.</p></td>
-     <td><p>유니코드 인식 토큰화를 위해 <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a> 유니코드 인식 토큰화를 위한 토큰화기를 함께 사용하십시오. </p><p>또는 다국어 콘텐츠를 보다 정확하게 처리하기 위해 <a href="/docs/ko/multi-language-analyzers.md">다국어 분석기나</a> <a href="/docs/ko/language-identifier.md">언어 식별자를</a> 구성하는 것을 고려해 보십시오.</p></td>
+     <td><p>유니코드 인식 토큰화를 위해 <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a> 유니코드 인식 토큰화를 수행하십시오. </p><p>또는 다국어 콘텐츠를 보다 정확하게 처리하기 위해 <a href="/docs/ko/multi-language-analyzers.md">다국어 분석기나</a> <a href="/docs/ko/language-identifier.md">언어 식별자를</a> 구성하는 것을 고려해 보십시오.</p></td>
    </tr>
 </table>
 <p>기본 <code translate="no">standard</code> 분석기가 요구 사항을 충족하지 못하는 경우, 다른 분석기를 구현해야 합니다. 다음 두 가지 방법이 있습니다.</p>
@@ -262,11 +262,11 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a></p></td>
      <td><p>대부분의 공백으로 구분되는 언어(영어, 프랑스어, 독일어, 스페인어 등)</p></td>
      <td><ul><li><p>토큰화기: <code translate="no">standard</code></p></li><li><p>필터: <code translate="no">lowercase</code></p></li></ul></td>
-     <td><p>초기 텍스트 처리를 위한 범용 분석기입니다. 단일 언어 환경의 경우, 언어별 분석기(예: <code translate="no">english</code>)가 더 나은 성능을 제공합니다.</p></td>
+     <td><p>초기 텍스트 처리를 위한 범용 분석기입니다. 단일 언어 환경에서는 언어별 분석기(예: <code translate="no">english</code>)가 더 나은 성능을 제공합니다.</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ko/english-analyzer.md"><code translate="no">english</code></a></p></td>
-     <td><p>영어 전용으로, 더 나은 영어 의미 일치를 위해 어간 추출 및 중지어 제거 기능을 적용합니다.</p></td>
+     <td><p>영어 전용으로, 더 나은 영어 의미 일치를 위해 어근 추출 및 스톱워드 제거 기능을 적용합니다.</p></td>
      <td><ul><li><p>토큰화기: <code translate="no">standard</code></p></li><li><p>필터: <code translate="no">lowercase</code>, <code translate="no">stemmer</code>, <code translate="no">stop</code></p></li></ul></td>
      <td><p><code translate="no">standard</code> 보다 영어 전용 콘텐츠에 권장됩니다.</p></td>
    </tr>
@@ -337,7 +337,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">내장 옵션이</a> 요구 사항을 충족하지 못하는 경우, 토큰화기와 일련의 필터를 결합하여 사용자 지정 분석기를 생성할 수 있습니다. 이를 통해 텍스트 처리 파이프라인을 완벽하게 제어할 수 있습니다.</p>
+    </button></h2><p><a href="/docs/ko/choose-the-right-analyzer-for-your-use-case.md#Available-built-in-analyzers">내장 옵션이</a> 요구 사항을 충족하지 못하는 경우, 토큰화기와 일련의 필터를 결합하여 사용자 정의 분석기를 생성할 수 있습니다. 이를 통해 텍스트 처리 파이프라인을 완벽하게 제어할 수 있습니다.</p>
 <h3 id="Step-1-Select-the-tokenizer-based-on-language" class="common-anchor-header">1단계: 언어에 따라 토큰화기 선택<button data-href="#Step-1-Select-the-tokenizer-based-on-language" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -358,8 +358,8 @@ schema.add_field(
 <table>
    <tr>
      <th><p>토큰화기</p></th>
-     <th><p>작동 방식</p></th>
-     <th><p>가장 적합한 경우</p></th>
+     <th><p>작동 원리</p></th>
+     <th><p>가장 적합한 대상</p></th>
      <th><p>예시</p></th>
    </tr>
    <tr>
@@ -401,12 +401,12 @@ schema.add_field(
    <tr>
      <th><p>토큰화기</p></th>
      <th><p>작동 원리</p></th>
-     <th><p>적용 대상</p></th>
+     <th><p>가장 적합한 용도</p></th>
      <th><p>예시</p></th>
    </tr>
    <tr>
      <td><p><a href="/docs/ko/thai-tokenizer.md"><code translate="no">thai</code></a></p></td>
-     <td><p>태국어 텍스트를 단어 토큰으로 분할하고, 공백 및 구두점만 포함된 세그먼트를 걸러냅니다.</p></td>
+     <td><p>태국어 텍스트를 단어 토큰으로 분할하고, 공백 및 구두점만으로 구성된 세그먼트를 걸러냅니다.</p></td>
      <td><p>태국어 또는 태국어와 영어가 혼합된 텍스트를 위한 맞춤형 분석기 파이프라인</p></td>
      <td><ul><li><p>입력: <code translate="no">"สวัสดี! ทดสอบ, ระบบ Milvus"</code></p></li><li><p>출력: <code translate="no">['สวัสดี', 'ทดสอบ', 'ระบบ', 'Milvus']</code></p></li></ul></td>
    </tr>
@@ -444,7 +444,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a></p></td>
-     <td><p>유니코드 지원 토큰화 (International Components for Unicode)</p></td>
+     <td><p>유니코드 인식 토큰화 (International Components for Unicode)</p></td>
      <td><p>여러 문자 체계가 혼합된 경우, 알 수 없는 언어의 경우, 또는 간단한 토큰화가 충분한 경우</p></td>
      <td><ul><li><p>입력: <code translate="no">"Hello 世界 مرحبا"</code></p></li><li><p>출력: <code translate="no">['Hello', ' ', '世界', ' ', 'مرحبا']</code></p></li></ul></td>
    </tr>
@@ -452,10 +452,10 @@ schema.add_field(
 <p><strong>icu를 사용할 때</strong>:</p>
 <ul>
 <li><p>언어 식별이 사실상 불가능한 혼합 언어의 경우.</p></li>
-<li><p><a href="/docs/ko/multi-language-analyzers.md">다국어 분석기나</a> <a href="/docs/ko/language-identifier.md">언어 식별자에</a> 따른 부하를 원치 않는 경우.</p></li>
-<li><p>콘텐츠에 주 언어가 있으며, 전체적인 의미에 거의 영향을 미치지 않는 외국어 단어가 간혹 포함된 경우(예: 일본어 또는 프랑스어로 된 브랜드 이름이나 전문 용어가 산발적으로 포함된 영어 텍스트).</p></li>
+<li><p><a href="/docs/ko/multi-language-analyzers.md">다국어 분석기</a> 나 <a href="/docs/ko/language-identifier.md">언어 식별</a>기에 따른 부하를 원치 않는 경우.</p></li>
+<li><p>콘텐츠에 주 언어가 있으며, 전체적인 의미에 거의 영향을 미치지 않는 외국어 단어가 간혹 포함된 경우(예: 일본어나 프랑스어로 된 브랜드 이름이나 전문 용어가 산발적으로 포함된 영어 텍스트).</p></li>
 </ul>
-<p><strong>대안</strong>: 다국어 콘텐츠를 보다 정밀하게 처리하려면 다국어 분석기나 언어 식별자를 사용하는 것을 고려해 보십시오. 자세한 내용은 <a href="/docs/ko/multi-language-analyzers.md">다국어 분석기</a> 또는 <a href="/docs/ko/language-identifier.md">언어 식별자를</a> 참조하십시오.</p>
+<p><strong>대안</strong>: 다국어 콘텐츠를 보다 정밀하게 처리하려면 다국어 분석기나 언어 식별자를 사용하는 것을 고려해 보십시오. 자세한 내용은 <a href="/docs/ko/multi-language-analyzers.md">‘다국어 분석기’</a> 또는 <a href="/docs/ko/language-identifier.md">‘언어 식별자’를</a> 참조하십시오.</p>
 <h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">2단계: 정확도를 높이기 위한 필터 추가<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,7 +471,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="/docs/ko/choose-the-right-analyzer-for-your-use-case.md#Step-1-Select-the-tokenizer-based-on-language">토큰화기를 선택한</a> 후, 구체적인 검색 요구 사항과 콘텐츠 특성에 따라 필터를 적용하십시오.</p>
+    </button></h3><p><a href="/docs/ko/choose-the-right-analyzer-for-your-use-case.md#Step-1-Select-the-tokenizer-based-on-language">토큰화기를 선택한</a> 후, 구체적인 검색 요구 사항과 콘텐츠 특성에 따라 필터를 적용합니다.</p>
 <h4 id="Commonly-used-filters" class="common-anchor-header">일반적으로 사용되는 필터</h4><p>이러한 필터는 공백으로 구분되는 대부분의 언어 구성(영어, 프랑스어, 독일어, 스페인어 등)에 필수적이며, 검색 품질을 크게 향상시킵니다:</p>
 <table>
    <tr>
@@ -495,12 +495,12 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/ko/stop-filter.md"><code translate="no">stop</code></a></p></td>
      <td><p>흔히 쓰이는 무의미한 단어 제거</p></td>
-     <td><p>대부분의 언어 - 특히 공백으로 구분되는 언어에 효과적</p></td>
+     <td><p>대부분의 언어 — 특히 공백으로 구분되는 언어에 효과적</p></td>
      <td><ul><li><p>입력: <code translate="no">["the", "quick", "brown", "fox"]</code></p></li><li><p>출력: <code translate="no">[[], ['quick'], ['brown'], ['fox']]</code></p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>동아시아 언어(중국어, 일본어, 한국어 등)의 경우, 대신 <a href="/docs/ko/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">언어별 필터에</a> 중점을 두십시오. 이러한 언어들은 일반적으로 텍스트 처리에 있어 다른 접근 방식을 사용하므로, 어간 추출을 통해 큰 이점을 얻지 못할 수 있습니다.</p>
+<p>동아시아 언어(중국어, 일본어, 한국어 등)의 경우, 대신 <a href="/docs/ko/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">언어별 필터에</a> 중점을 두십시오. 이러한 언어들은 일반적으로 텍스트 처리에 있어 다른 접근 방식을 사용하므로, 어근 추출을 통해 큰 이점을 얻지 못할 수 있습니다.</p>
 </div>
 <h4 id="Text-normalization-filters" class="common-anchor-header">텍스트 정규화 필터</h4><p>이 필터들은 텍스트의 변형을 표준화하여 일치 일관성을 높입니다:</p>
 <table>
@@ -512,7 +512,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/ko/ascii-folding-filter.md"><code translate="no">asciifolding</code></a></p></td>
-     <td><p>악센트 부호가 붙은 문자를 ASCII 등가 문자로 변환</p></td>
+     <td><p>악센트가 붙은 문자를 ASCII 등가 문자로 변환</p></td>
      <td><p>국제 콘텐츠, 사용자 생성 콘텐츠</p></td>
      <td><ul><li><p>입력: <code translate="no">["café", "naïve", "résumé"]</code></p></li><li><p>출력: <code translate="no">[['cafe'], ['naive'], ['resume']]</code></p></li></ul></td>
    </tr>
@@ -527,14 +527,14 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/ko/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>단독으로 사용되는 구두점 토큰 제거</p></td>
-     <td><p><code translate="no">jieba</code>, <code translate="no">lindera</code>, <code translate="no">icu</code> 토큰화기에서 반환된 출력을 정리합니다. 이 토큰화기들은 구두점을 단일 토큰으로 반환합니다.</p></td>
-     <td><ul><li><p>입력: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>출력: <code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>구두점이 포함된 토큰 제거</p></td>
+     <td><p><code translate="no">jieba</code>, <code translate="no">lindera</code> 및 <code translate="no">icu</code> 토큰화기가 구두점을 독립된 토큰으로 반환하는 경우, 이를 정리합니다. <code translate="no">don't</code> 또는 <code translate="no">3.5kg</code> 과 같이 단어 내부에 구두점이 포함된 토큰은 완전히 제거됩니다. 이러한 토큰을 유지하려면 <a href="/docs/ko/regex-filter.md"><code translate="no">regex</code></a> 필터를 사용하여 이를 유지하십시오</p></td>
+     <td><ul><li><p>입력: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>출력: <code translate="no">[['Hello'], ['world']]</code></p></li><li><p>입력: <code translate="no">["don't", "buy"]</code></p></li><li><p>출력: <code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ko/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
-     <td><p>문자와 숫자만 남기기</p></td>
-     <td><p>기술 콘텐츠, 정제된 텍스트 처리</p></td>
+     <td><p>영문자와 숫자만 남기기</p></td>
+     <td><p>기술적 내용, 깔끔한 텍스트 처리</p></td>
      <td><ul><li><p>입력: <code translate="no">["user123", "test@email.com"]</code></p></li><li><p>출력: <code translate="no">[['user123'], ['test', 'email', 'com']]</code></p></li></ul></td>
    </tr>
    <tr>
@@ -643,7 +643,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <li><p><strong>토큰화 부족</strong>: 구문이 제대로 분리되지 않음</p></li>
 <li><p><strong>토큰 누락</strong>: 중요한 용어가 필터링되어 제외됨</p></li>
 </ul>
-<p>자세한 사용 방법은 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md">run_analyzer를</a> 참조하십시오.</p>
+<p>자세한 사용법은 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md">run_analyzer를</a> 참조하십시오.</p>
 <h2 id="Recommended-configurations-by-use-case" class="common-anchor-header">사용 사례별 권장 구성<button data-href="#Recommended-configurations-by-use-case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -659,7 +659,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 Milvus에서 분석기를 사용할 때 흔히 발생하는 사용 사례에 대한 권장 토큰화기 및 필터 구성을 제공합니다. 콘텐츠 유형과 검색 요구 사항에 가장 적합한 조합을 선택하십시오.</p>
+    </button></h2><p>이 섹션에서는 Milvus에서 분석기를 사용할 때 흔히 발생하는 사용 사례에 대한 권장 토큰화기 및 필터 구성을 제공합니다. 콘텐츠 유형과 검색 요구 사항에 가장 잘 맞는 조합을 선택하십시오.</p>
 <div class="alert note">
 <p>컬렉션에 분석기를 적용하기 전에, <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> 를 사용하여 텍스트 분석 성능을 테스트하고 검증할 것을 권장합니다.</p>
 </div>
@@ -794,7 +794,7 @@ analyzer_params = {
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
@@ -880,7 +880,7 @@ analyzer_params = {
     </button></h2><p>분석기를 선택한 후, Milvus에서 제공하는 텍스트 검색 기능과 통합할 수 있습니다.</p>
 <ul>
 <li><p><strong>전체 텍스트 검색</strong></p>
-<p>분석기는 스파스 벡터 생성을 통해 BM25 기반 전체 텍스트 검색에 직접적인 영향을 미칩니다. 일관된 토큰화를 보장하기 위해 색인 생성 및 쿼리 시 동일한 분석기를 사용하십시오. 일반적으로 언어별 분석기는 범용 분석기보다 더 나은 BM25 점수를 제공합니다. 구현에 대한 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하십시오.</p></li>
+<p>분석기는 스파스 벡터 생성을 통해 BM25 기반 전체 텍스트 검색에 직접적인 영향을 미칩니다. 일관된 토큰화를 보장하기 위해 색인 생성 및 쿼리 시 동일한 분석기를 사용하십시오. 일반적으로 언어별 분석기는 범용 분석기보다 더 나은 BM25 점수를 제공합니다. 구현에 대한 자세한 <a href="/docs/ko/full-text-search.md">내용은 ‘전체 텍스트 검색’을</a> 참조하십시오.</p></li>
 <li><p><strong>텍스트 일치</strong></p>
 <p>텍스트 일치 연산은 분석기 출력을 기반으로 쿼리와 색인된 콘텐츠 간의 토큰을 정확히 일치시킵니다. 구현에 대한 자세한 내용은 <a href="/docs/ko/keyword-match.md">‘텍스트 일치’를</a> 참조하십시오.</p></li>
 <li><p><strong>구문 일치</strong></p>

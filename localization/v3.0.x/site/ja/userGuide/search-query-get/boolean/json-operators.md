@@ -44,7 +44,7 @@ summary: >-
     </button></h2><p>Milvus には、JSON データのフィルタリングやクエリに役立つ、いくつかの強力な JSON 演算子が用意されています。これらの演算子は以下の通りです。</p>
 <ul>
 <li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: フィールド内に指定されたJSON式が含まれるエンティティをフィルタリングします。</p></li>
-<li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: 指定されたJSON式に含まれるすべての要素がフィールド内に存在することを保証します。</p></li>
+<li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: 指定された JSON 式のすべての要素がフィールド内に存在することを確認します。</p></li>
 <li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: フィールド内に、指定された JSON 式のメンバーが少なくとも 1 つ存在するエンティティをフィルタリングします。</p></li>
 </ul>
 <p>これらの演算子を例を交えて解説し、実際のシナリオでどのように適用できるかを見ていきましょう。</p>
@@ -63,9 +63,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">json_contains</code> 演算子は、特定の要素またはサブ配列がJSONフィールド内に存在するかどうかを確認します。これは、JSON配列またはオブジェクトに特定の値が含まれていることを確認したい場合に役立ちます。</p>
+    </button></h2><p><code translate="no">json_contains</code> 演算子は、特定の要素またはサブ配列がJSONフィールド内に存在するかどうかを確認します。これは、JSON配列やオブジェクトに特定の値が含まれていることを確認したい場合に役立ちます。</p>
 <p><strong>例</strong></p>
-<p>製品コレクションがあり、各製品に「<code translate="no">tags</code> 」フィールドがあり、その中に「<code translate="no">[&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]</code> 」のような文字列のJSON配列が含まれていると仮定します。ここで、「<code translate="no">&quot;sale&quot;</code> 」というタグを持つ製品をフィルタリングしたいとします。</p>
+<p>製品コレクションがあり、各製品に「<code translate="no">tags</code> 」フィールドがあり、その中に<code translate="no">[&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]</code> のような文字列のJSON配列が含まれていると仮定します。タグ「<code translate="no">&quot;sale&quot;</code> 」を持つ製品をフィルタリングしたいとします。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -206,4 +206,4 @@ std::string filter = <span class="hljs-string">&quot;json_contains_any(product[\
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 filter=<span class="hljs-string">&#x27;json_contains_any(product[&quot;tags&quot;], [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この場合、Milvusはリスト<code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code> に含まれるタグのうち、少なくとも1つを持つすべての商品を返します。商品にこれらのタグのうち1つしか付いていなくても、結果に含まれます。</p>
+<p>この場合、Milvusは<code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code> のリストに含まれるタグのうち、少なくとも1つを持つすべての商品を返します。商品にこれらのタグのうち1つしか付いていなくても、結果に含まれます。</p>

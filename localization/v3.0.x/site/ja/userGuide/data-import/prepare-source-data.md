@@ -59,8 +59,8 @@ summary: このページでは、コレクションへのデータの一括挿�
 <p>詳細については、SDK リファレンスのおよび <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> SDK リファレンスの</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -240,10 +240,10 @@ schema.verify()
 <li><p>各 Struct 要素内では、<code translate="no">chunks[text]</code> のようなパスではなく、サブフィールド名を使用してください。<code translate="no">chunks[text]</code> という名前のフラットな列やキーは拒否されます。</p></li>
 <li><p><code translate="no">[null, {...}]</code> のような、Struct要素自体がnullになることはできません。StructArray値全体がnullになるのは、StructArrayフィールドがnull許容である場合に限られます。Milvus 3.0.6以前では、すべてのStruct要素がすべてのサブフィールドを提供する必要があります。</p></li>
 <li><p>コレクションのサブフィールドではないキーやParquetの子要素（削除されたサブフィールドを含む）は無視されます。</p></li>
-<li><p>Milvus 3.0.6 以降、要素が null 許容であるサブフィールドのキーが欠落している場合、または `<code translate="no">null</code> ` 値が指定されていない場合、その Struct 要素の null 値としてインポートされるため、サブフィールドが追加される前に書き込まれたファイルは、そのサブフィールドなしでインポートされます。 それ以外の場所での `<code translate="no">null</code> ` は、インポートを失敗させます。配列サブフィールドの場合、<code translate="no">null</code> は null の内部配列となり、サブフィールドが許可している場合、内部配列内の `<code translate="no">null</code> ` は null の内部値となります。</p></li>
+<li><p>Milvus 3.0.6 以降、要素が null 許容であるサブフィールドのキーが欠落している場合、または `<code translate="no">null</code> ` 値が指定されていない場合、その Struct 要素の null 値としてインポートされるため、サブフィールドが追加される前に書き込まれたファイルは、そのサブフィールドなしでインポートされます。 それ以外の場所での `<code translate="no">null</code> ` は、インポートを失敗させます。配列サブフィールドの場合、<code translate="no">null</code> は null の内部配列となり、サブフィールドが許可している場合、内部配列内の<code translate="no">null</code> は null の内部値となります。</p></li>
 <li><p>Milvus 3.0.6 以降、バックアップの復元などの binlog インポートやスナップショットソースからのインポートは、要素が null 許容可能なサブフィールドまたはスカラー配列サブフィールドを持つコレクションに対しては拒否されます。</p></li>
 </ul>
-<p>pymilvus<a href="#Set-up-BulkWriter">BulkWriterは</a>、要素がNULL可能なサブフィールドやNULL可能なStructArray値を含め、サポートされているすべてのフォーマットにおいて、上記のStructArrayの形状をサポートしています。ライターの<code translate="no">add_row()</code> 呼び出しでは、同じ行形状を使用してください。</p>
+<p>pymilvus<a href="#Set-up-BulkWriter">BulkWriterは</a>、要素がNULL可能なサブフィールドやNULL可能なStructArray値を含め、サポートされているすべてのフォーマットにおいて、上記のStructArrayの形状をサポートしています。ライターの<code translate="no">add_row()</code> 呼び出しでは、同じ行の形状を使用してください。</p>
 <p>スキーマ側の制限については、「<a href="/docs/ja/structarray-limits.md#Import-and-storage-limits">StructArrayの制限</a>」を参照してください。</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">BulkWriter の設定<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -283,8 +283,8 @@ schema.verify()
       </svg>
     </button></h3><p><strong>LocalBulkWriter</strong>は、ソースデータセットの行を順次追加し、指定された形式のローカルファイルに書き込みます。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -347,8 +347,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p><strong>RemoteBulkWriter</strong>は、追加されたデータをローカルファイルにコミットする代わりに、リモートバケットにコミットします。そのため、<strong>RemoteBulkWriter</strong> を作成する前に、<strong>ConnectParam</strong>オブジェクトを設定する必要があります。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -399,8 +399,8 @@ writer = RemoteBulkWriter(
 <button class="copy-code-btn"></button></code></pre>
 <p>接続パラメータの準備ができたら、次のように<strong>RemoteBulkWriter</strong>内でそれを参照できます:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -455,8 +455,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>デモとして、以下のコードではランダムに生成されたデータを末尾に追加しています。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -673,11 +673,11 @@ writer = RemoteBulkWriter(
 <p>結果を確認するには、ライターの `<code translate="no">batch_files</code> ` プロパティを出力することで、実際の出力パスを取得できます。</p>
 </div>
 <div class="language-java">
-<p>結果を確認するには、ライターの<code translate="no">getBatchFiles()</code> メソッドを出力することで、実際の出力パスを取得できます。</p>
+<p>結果を確認するには、ライターの `<code translate="no">getBatchFiles()</code> ` メソッドを出力することで、実際の出力パスを取得できます。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
@@ -698,7 +698,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter は</strong>UUID を生成し、指定された出力ディレクトリ内にその UUID を使用してサブフォルダを作成し、生成されたすべてのファイルをそのサブフォルダに配置します。準備済みのサンプルデータをダウンロードするには、<a href="https://assets.zilliz.com/bulk_writer.zip">ここをクリックしてください</a>。</p>
+<p><strong>BulkWriterは</strong>UUIDを生成し、指定された出力ディレクトリ内にそのUUIDを使用してサブフォルダを作成し、生成されたすべてのファイルをそのサブフォルダに配置します。準備済みのサンプルデータをダウンロードするには、<a href="https://assets.zilliz.com/bulk_writer.zip">ここをクリックしてください</a>。</p>
 <p>考えられるフォルダ構造は以下の通りです：</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

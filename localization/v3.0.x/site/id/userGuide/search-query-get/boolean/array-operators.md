@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus menyediakan operator ARRAY untuk menyaring bidang ARRAY dan memperbarui sebagian nilai bidang ARRAY.</p>
 <div class="alert note">
-<p>Semua elemen dalam sebuah array harus memiliki tipe yang sama, dan struktur bersarang di dalam array diperlakukan sebagai string biasa. Oleh karena itu, saat bekerja dengan bidang ARRAY, disarankan untuk menghindari struktur bersarang yang terlalu dalam dan memastikan bahwa struktur data Anda sesederhana mungkin untuk kinerja yang optimal.</p>
+<p>Semua elemen dalam sebuah array harus memiliki tipe yang sama, dan struktur bersarang di dalam array diperlakukan sebagai string biasa. Oleh karena itu, saat bekerja dengan bidang ARRAY, disarankan untuk menghindari penyarangan yang terlalu dalam dan memastikan bahwa struktur data Anda sedatar mungkin untuk kinerja yang optimal.</p>
 </div>
 <p>Operator ARRAY di Milvus mencakup dua skenario penggunaan:</p>
 <ul>

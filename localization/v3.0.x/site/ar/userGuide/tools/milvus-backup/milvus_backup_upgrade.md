@@ -21,7 +21,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>استخدم هذا الدليل عند ترقية <strong>أداة Milvus Backup</strong> من الإصدار 0.5.x إلى الإصدار 0.6.x. يستخدم الإجراء أدناه الإصدار 0.6.0 كإصدار مستهدف تم التحقق من صحته. ولا يؤدي هذا الإجراء إلى ترقية خادم Milvus الخاص بك. إذا كنت ستستمر في استخدام الإصدار 0.5.x، فاستمر في استخدام دليل <a href="/docs/ar/milvus_backup_cli.md">واجهة سطر الأوامر (CLI)</a> أو <a href="/docs/ar/milvus_backup_api.md">واجهة برمجة التطبيقات (API)</a> <a href="/docs/ar/milvus_backup_cli.md">للإصدار 0.5.x</a>. للتثبيت الجديد، استخدم <a href="/docs/ar/milvus_backup_0_6_cli.md">دليل واجهة سطر الأوامر (CLI)</a>.</p>
+    </button></h1><p>استخدم هذا الدليل عند ترقية <strong>أداة Milvus Backup</strong> من الإصدار 0.5.x إلى الإصدار 0.6.x. يستخدم الإجراء أدناه الإصدار 0.6.0 كإصدار مستهدف تم التحقق من صحته. ولا يقوم هذا الإجراء بترقية خادم Milvus الخاص بك. إذا كنت ستستمر في استخدام الإصدار 0.5.x، فاستمر في استخدام دليل <a href="/docs/ar/milvus_backup_cli.md">واجهة سطر الأوامر (CLI)</a> أو <a href="/docs/ar/milvus_backup_api.md">واجهة برمجة التطبيقات (API)</a> <a href="/docs/ar/milvus_backup_cli.md">للإصدار 0.5.x</a>. للتثبيت الجديد، استخدم <a href="/docs/ar/milvus_backup_0_6_cli.md">دليل واجهة سطر الأوامر (CLI)</a>.</p>
 <p>لا تزال تكوينات YAML من الإصدار V1 تُحمَّل عبر الترجمة التلقائية. ومع ذلك، يتم رفض علامات CLI التي تم إهمالها في الإصدار 0.6.0، ويتغير تنسيق النسخ الاحتياطي الافتراضي في Milvus 3.0. راجع كل من التكوينات والأوامر قبل تبديل المهام أو الخدمات المجدولة.</p>
 <h2 id="Check-the-starting-point" class="common-anchor-header">تحقق من نقطة البداية<button data-href="#Check-the-starting-point" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h2><p>سجل إصدار النسخ الاحتياطي، وإصداري Milvus المصدر والهدف، وملفات التكوين، وتجاوزات متغيرات البيئة، وموقع النسخ الاحتياطي، والأوامر المستخدمة بواسطة البرامج النصية أو خدمات واجهة برمجة التطبيقات (API). تحقق من <a href="/docs/ar/milvus_backup_overview.md#Compatibility-matrix">معلومات التوافق</a> الخاصة بإصدارات الخادم تلك.</p>
-<p>احتفظ بالدليل الثنائي الأصلي ودليل التكوين ودلائل النسخ الاحتياطي الحالية أثناء التحقق من صحة التثبيت الجديد. قم بتنزيل الإصدار 0.6.0 في دليل منفصل باستخدام <a href="/docs/ar/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">«الحصول على Milvus Backup</a>». يتم تشغيل جميع الأوامر أدناه من هذا الدليل وتستدعي الملف الثنائي للإصدار 0.6.0. ضع نسخة من تكوين الإصدار v1 الخاص بك في <code translate="no">configs/backup-v1.yaml</code>.</p>
+<p>احتفظ بالدليل الثنائي الأصلي ودليل التكوين ودلائل النسخ الاحتياطي الحالية أثناء التحقق من صحة التثبيت الجديد. قم بتنزيل الإصدار 0.6.0 في دليل منفصل باستخدام <a href="/docs/ar/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">«الحصول على Milvus Backup</a>». يتم تشغيل جميع الأوامر أدناه من هذا الدليل وتستدعي الملف الثنائي للإصدار 0.6.0. ضع نسخة من تكوين الإصدار 1 في <code translate="no">configs/backup-v1.yaml</code>.</p>
 <h2 id="Migrate-the-configuration" class="common-anchor-header">ترحيل ملف التكوين<button data-href="#Migrate-the-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +77,7 @@ beta: Milvus Backup 0.6.x
 <p>راجع متغيرات البيئة في نفس التغيير الذي يتم فيه تعديل ملف التكوين. لا تقبل النسخة V2 سوى متغيرات البيئة المدعومة المتعلقة ببيانات الاعتماد، مثل <code translate="no">MILVUS_STORAGE_AUTH_SECRET_ACCESS_KEY</code>. لا يتم تطبيق أسماء النسخة القديمة v1 على ملف v2. بالنسبة للإعدادات غير المتعلقة ببيانات الاعتماد، مثل أسماء الحاويات ونقاط النهاية، استخدم YAML أو تجاوز مفتاح التكوين:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup-v2.yaml --set milvus.storage.bucketName=my-bucket
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">config migrate</code> يبلغ عن متغيرات البيئة المتأثرة دون نسخ قيمها السرية إلى ملف الإخراج. انظر <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">متغيرات بيئة الإصدار 2 المدعومة</a>. يحل الأمر ` <code translate="no">config show</code> ` محل الأمر ` <code translate="no">check config</code> ` الذي تم إهماله.</p>
+<p><code translate="no">config migrate</code> يبلغ عن متغيرات البيئة المتأثرة دون نسخ قيمها السرية إلى ملف الإخراج. راجع <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">متغيرات بيئة الإصدار 2 المدعومة</a>. يحل الأمر ` <code translate="no">config show</code> ` محل الأمر ` <code translate="no">check config</code> ` الذي تم إهماله.</p>
 <h2 id="Update-CLI-commands" class="common-anchor-header">تحديث أوامر واجهة سطر الأوامر (CLI)<button data-href="#Update-CLI-commands" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,7 +136,7 @@ beta: Milvus Backup 0.6.x
 <li>على خوادم Milvus 2.x المدعومة، يستخدم تنسيق <code translate="no">auto</code> سجلات binlog. لا تتطلب ترقية النسخ الاحتياطي الانتقال إلى Milvus 3.0.</li>
 <li>في Milvus 3.0، يختار <code translate="no">auto</code> «snapshot». يبدأ الدعم الرسمي للنسخ الاحتياطي والاستعادة اعتبارًا من Milvus 3.0.1. قم بتمرير <code translate="no">--format binlog</code> للاحتفاظ بسلوك binlog عند إنشاء نسخة احتياطية.</li>
 <li>لا يحافظ توافق تكوين الإصدار 1 على علامات الأوامر التي تمت إزالتها ولا يتجاوز الإعداد الافتراضي للتنسيق الجديد.</li>
-<li>يمكن للإعدادات المسبقة الخاصة بالغرض تحديد التنسيق والخيارات الأخرى. على سبيل المثال، يفرض <code translate="no">--for archive</code> استخدام سجل الثنائي حتى إذا تم توفير <code translate="no">--format snapshot</code> أيضًا. راجع <a href="/docs/ar/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">خيارات التنسيق والغرض</a>.</li>
+<li>يمكن للإعدادات المسبقة الخاصة بالغرض تحديد التنسيق والخيارات الأخرى. على سبيل المثال، يفرض <code translate="no">--for archive</code> استخدام سجل الثنائي (binlog) حتى إذا تم توفير <code translate="no">--format snapshot</code> أيضًا. راجع <a href="/docs/ar/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">خيارات التنسيق والغرض</a>.</li>
 <li>يتم تخطي المجموعات الخارجية أثناء النسخ الاحتياطي. تحقق من بيانات تعريف النسخ الاحتياطي بدلاً من اعتبار نجاح المهمة دليلاً على تضمين كل مجموعة.</li>
 </ul>
 <h2 id="Validate-before-switching-jobs" class="common-anchor-header">التحقق من الصحة قبل تبديل المهام<button data-href="#Validate-before-switching-jobs" class="anchor-icon" translate="no">

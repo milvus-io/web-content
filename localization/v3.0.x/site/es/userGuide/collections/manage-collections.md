@@ -23,7 +23,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En Milvus, puedes crear varias colecciones para gestionar tus datos e insertarlos como entidades en las colecciones. Las colecciones y las entidades son similares a las tablas y los registros de las bases de datos relacionales. Esta página te ayuda a conocer las colecciones y los conceptos relacionados.</p>
+    </button></h1><p>En Milvus, puedes crear varias colecciones para gestionar tus datos e insertarlos como entidades en dichas colecciones. Las colecciones y las entidades son similares a las tablas y los registros de las bases de datos relacionales. Esta página te ayuda a conocer las colecciones y los conceptos relacionados.</p>
 <h2 id="Collection" class="common-anchor-header">Colección<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ summary: >-
 <p>Como se muestra en el gráfico anterior, el campo denominado <strong>«id»</strong> actúa como campo primario, y el primer ID, <strong>0</strong>, corresponde a una entidad titulada <em>«La tasa de mortalidad del coronavirus no es importante</em>». No habrá ninguna otra entidad que tenga el campo primario con valor 0.</p>
 <p>Un campo primario solo admite números enteros o cadenas de caracteres. Al insertar entidades, debe incluir los valores del campo primario de forma predeterminada. Sin embargo, si ha habilitado <strong>AutoId</strong> al crear la colección, Milvus generará esos valores al insertar los datos. En tal caso, excluya los valores del campo primario de las entidades que se vayan a insertar.</p>
 <p>Para obtener más información, consulta <a href="/docs/es/primary-field.md">«Campo primario y AutoId</a>».</p>
-<h2 id="Index" class="common-anchor-header">Índices<button data-href="#Index" class="anchor-icon" translate="no">
+<h2 id="Index" class="common-anchor-header">Índice<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,7 +159,7 @@ summary: >-
     </button></h2><p>Una vez creados los índices y cargada la colección, puedes iniciar una búsqueda de similitud introduciendo uno o varios vectores de consulta. Por ejemplo, al recibir la representación vectorial de tu consulta incluida en una solicitud de búsqueda, Milvus utiliza el tipo de métrica especificado para medir la similitud entre el vector de consulta y los de la colección de destino antes de devolver aquellos que son semánticamente similares a la consulta.</p>
 <p>También puede incluir filtros de metadatos en las búsquedas y consultas para mejorar la relevancia de los resultados. Tenga en cuenta que las condiciones de filtrado de metadatos son obligatorias en las consultas, pero opcionales en las búsquedas.</p>
 <p>Para obtener más información sobre los tipos de métricas aplicables, consulta <a href="/docs/es/metric.md">Tipos</a> de <a href="/docs/es/metric.md">métricas</a>.</p>
-<p>Para obtener más información sobre búsquedas y consultas, consulta los artículos del capítulo «Búsqueda y reordenación», entre los que destacan las siguientes funciones básicas:</p>
+<p>Para obtener más información sobre búsquedas y consultas, consulta los artículos del capítulo «Búsqueda y reordenación», entre los que destacan las siguientes características básicas:</p>
 <ul>
 <li><p><a href="/docs/es/single-vector-search.md">Búsqueda básica con redes neuronales artificiales (ANN)</a></p></li>
 <li><p><a href="/docs/es/filtered-search.md">Búsqueda filtrada</a></p></li>
@@ -175,7 +175,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/es/use-partition-key.md">Usar clave de partición</a></p></li>
 <li><p><a href="/docs/es/mmap.md">Usar mmap</a></p></li>
-<li><p><a href="/docs/es/clustering-compaction.md">Compactación por clústeres</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">Partición<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -194,7 +193,7 @@ summary: >-
       </svg>
     </button></h2><p>Las particiones son subconjuntos de una colección que comparten el mismo conjunto de campos que su colección principal, y cada una contiene un subconjunto de entidades.</p>
 <p>Al asignar entidades a diferentes particiones, se pueden crear grupos de entidades. Se pueden realizar búsquedas y consultas en particiones específicas para que Milvus ignore las entidades de otras particiones y mejore así la eficiencia de la búsqueda.</p>
-<p>Para más detalles, consulta <a href="/docs/es/manage-partitions.md">«Gestionar particiones</a>».</p>
+<p>Para obtener más información, consulta <a href="/docs/es/manage-partitions.md">«Gestionar particiones</a>».</p>
 <h2 id="Shard" class="common-anchor-header">Fragmento<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

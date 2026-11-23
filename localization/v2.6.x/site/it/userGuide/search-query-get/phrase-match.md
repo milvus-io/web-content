@@ -27,7 +27,7 @@ beta: Milvus 2.5.17+
         ></path>
       </svg>
     </button></h1><p>La corrispondenza di frase consente di cercare documenti che contengano i termini della query come frase esatta. Per impostazione predefinita, le parole devono apparire nello stesso ordine e essere direttamente adiacenti l'una all'altra. Ad esempio, una query come <strong>“robotica machine learning”</strong> trova corrispondenze in testi del tipo <em>“…modelli tipici di machine learning nella robotica…”</em>, dove le parole <strong>“robotica”</strong>, <strong>“machine”</strong> e <strong>“learning”</strong> compaiono in sequenza senza altre parole tra di esse.</p>
-<p>Tuttavia, in scenari reali, la corrispondenza esatta delle frasi può risultare troppo rigida. Potrebbe essere necessario trovare corrispondenze con testi del tipo <em>“…modelli di machine learning ampiamente adottati nella robotica…”.</em> In questo caso, le stesse parole chiave sono presenti ma non una accanto all’altra né nell’ordine originale. Per gestire questa situazione, la corrispondenza per frase supporta il parametro “ <code translate="no">slop</code> ”, che introduce una maggiore flessibilità. Il valore « <code translate="no">slop</code> » definisce quanti spostamenti posizionali sono consentiti tra i termini della frase. Ad esempio, con un « <code translate="no">slop</code> » pari a 1, una query per <strong>«machine learning»</strong> può trovare corrispondenze in testi come <em>«…machine deep learning…»</em>, dove una parola (<strong>«deep»</strong>) separa i termini originali.</p>
+<p>Tuttavia, in scenari reali, la corrispondenza esatta delle frasi può risultare troppo rigida. Potrebbe essere necessario trovare corrispondenze con testi del tipo <em>“…modelli di machine learning ampiamente adottati nella robotica…”.</em> In questo caso, le stesse parole chiave sono presenti ma non una accanto all’altra né nell’ordine originale. Per gestire questa situazione, la corrispondenza per frase supporta il parametro “ <code translate="no">slop</code> ”, che introduce una maggiore flessibilità. Il valore « <code translate="no">slop</code> » definisce quanti spostamenti posizionali sono consentiti tra i termini della frase. Ad esempio, con un « <code translate="no">slop</code> » pari a 1, una query per <strong>«machine learning»</strong> può trovare corrispondenze con testi come <em>«…machine deep learning…»</em>, dove una parola (<strong>«deep»</strong>) separa i termini originali.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,7 @@ beta: Milvus 2.5.17+
 </ul></li>
 </ul></li>
 </ol>
-<h2 id="Enable-phrase-match" class="common-anchor-header">Abilita la corrispondenza di frasi<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
+<h2 id="Enable-phrase-match" class="common-anchor-header">Abilita la corrispondenza per frase<button data-href="#Enable-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -123,7 +123,7 @@ schema.add_field(
     dim=<span class="hljs-number">5</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Opzionale: configurare un analizzatore<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">Facoltativo: configurare un analizzatore<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,7 +139,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>La precisione della corrispondenza delle frasi dipende in modo significativo dall’analizzatore utilizzato per tokenizzare i dati di testo. Analizzatori diversi si adattano a lingue e formati di testo diversi, influenzando la tokenizzazione e la precisione posizionale. La selezione di un analizzatore appropriato per il proprio caso d’uso specifico ottimizzerà i risultati della corrispondenza delle frasi.</p>
-<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura, rimuove i token più lunghi di 40 caratteri e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per ulteriori dettagli, consultare <a href="/docs/it/v2.6.x/standard-analyzer.md">Analizzatore standard</a>.</p>
+<p>Per impostazione predefinita, Milvus utilizza l’analizzatore standard, che tokenizza il testo in base agli spazi bianchi e alla punteggiatura e converte il testo in minuscolo. Non sono richiesti parametri aggiuntivi per l’utilizzo predefinito. Per ulteriori dettagli, consultare <a href="/docs/it/v2.6.x/standard-analyzer.md">Analizzatore standard</a>.</p>
 <p>Se la propria applicazione richiede un analizzatore specifico, è possibile configurarlo utilizzando il parametro ` <code translate="no">analyzer_params</code> `. Ad esempio, ecco come configurare l’analizzatore ` <code translate="no">english</code> ` per la corrispondenza delle frasi in un testo in inglese:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -415,7 +415,7 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>L’abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l’impatto sull’archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all’analizzatore utilizzato.</p></li>
+<li><p>L'abilitazione della corrispondenza delle frasi per un campo comporta la creazione di un indice invertito, che consuma risorse di archiviazione. Quando si decide di abilitare questa funzionalità, è necessario considerare l'impatto sull'archiviazione, poiché varia in base alle dimensioni del testo, ai token univoci e all'analizzatore utilizzato.</p></li>
 <li><p>Una volta definito un analizzatore nello schema, le relative impostazioni diventano permanenti per quella raccolta. Se si ritiene che un analizzatore diverso sia più adatto alle proprie esigenze, è possibile eliminare la raccolta esistente e crearne una nuova con la configurazione dell’analizzatore desiderata.</p></li>
 <li><p>Le prestazioni della corrispondenza delle frasi dipendono dal modo in cui il testo viene tokenizzato. Prima di applicare un analizzatore all’intera raccolta, utilizzare il metodo ` <code translate="no">run_analyzer</code> ` per esaminare l’output della tokenizzazione. Per ulteriori informazioni, consultare <a href="/docs/it/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">la panoramica sugli analizzatori</a>.</p></li>
 <li><p>Regole di escape nelle espressioni di <code translate="no">filter</code>:</p>

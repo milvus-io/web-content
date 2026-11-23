@@ -39,7 +39,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 2.5 memperkenalkan versi baru API yang menyederhanakan proses pemberian hak akses. Anda tidak perlu lagi mencari jenis objek saat memberikan hak akses kepada suatu peran. Berikut adalah parameter dan penjelasannya.</p>
 <ul>
-<li><p><strong>role_name:</strong> Nama peran target yang akan diberikan hak akses atau grup hak akses.</p></li>
+<li><p><strong>role_name:</strong> Nama peran target yang akan diberikan hak akses atau kelompok hak akses.</p></li>
 <li><p><strong>Resource</strong>: Sumber daya target dari suatu hak akses, yang dapat berupa instance tertentu, database, atau koleksi.</p></li>
 </ul>
 <p>Tabel berikut menjelaskan cara menentukan sumber daya dalam metode ` <code translate="no">client.grantV2()</code> `.</p>
@@ -110,9 +110,9 @@ summary: >-
    </tr>
 </table>
 <ul>
-<li><p><strong>Hak Akses</strong>: Hak akses spesifik atau <a href="/docs/id/privilege_group.md">grup hak akses</a> yang perlu Anda berikan kepada suatu peran. Saat ini, Milvus menyediakan 56 jenis hak akses yang dapat Anda berikan. Tabel di bawah ini mencantumkan hak akses di Milvus.</p>
+<li><p><strong>Hak Akses</strong>: Hak akses spesifik atau <a href="/docs/id/privilege_group.md">grup hak akses</a> yang perlu Anda berikan kepada suatu peran. Tabel di bawah ini mencantumkan hak akses yang dapat Anda berikan.</p>
 <p><div class="alert note"></p>
-<p>Kolom jenis pada tabel di bawah ini disediakan untuk memudahkan Anda mencari hak akses dengan cepat dan hanya digunakan untuk tujuan klasifikasi. Saat memberikan hak akses, Anda tidak perlu memahami jenis-jenisnya. Anda hanya perlu memasukkan hak akses yang sesuai.</p>
+<p>Kolom jenis dalam tabel di bawah ini disediakan untuk memudahkan Anda mencari hak akses dengan cepat dan hanya digunakan untuk tujuan klasifikasi. Saat memberikan hak akses, Anda tidak perlu memahami jenis-jenisnya. Anda hanya perlu memasukkan hak akses yang sesuai.</p>
 <p></div></p>
 <p><table>
 <tr>
@@ -151,17 +151,17 @@ summary: >-
 <td rowspan="18"><p>Hak Akses Koleksi</p></td>
 <td><p>GetFlushState</p></td>
 <td><p>Periksa status operasi pembersihan koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadState</p></td>
 <td><p>Periksa status pemuatan suatu koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/restful/v3.0.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadingProgress</p></td>
 <td><p>Periksa kemajuan pemuatan suatu koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
 </tr>
 <tr>
 <td><p>Tampilkan Koleksi</p></td>
@@ -171,22 +171,22 @@ summary: >-
 <tr>
 <td><p>ListAliases</p></td>
 <td><p>Lihat semua alias dari sebuah koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">DaftarAlias</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/list_aliases.md">DaftarAlias</a></p></td>
 </tr>
 <tr>
 <td><p>Jelaskan Koleksi</p></td>
 <td><p>Lihat detail koleksi</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">JelaskanKoleksi</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/describe_collection.md">JelaskanKoleksi</a></p></td>
 </tr>
 <tr>
 <td><p>Jelaskan Alias</p></td>
 <td><p>Lihat detail alias</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">JelaskanAlias</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/describe_alias.md">JelaskanAlias</a></p></td>
 </tr>
 <tr>
 <td><p>GetStatistics</p></td>
 <td><p>Mendapatkan statistik suatu koleksi (misalnya, jumlah entitas dalam suatu koleksi)</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
 </tr>
 <tr>
 <td><p>BuatKoleksi</p></td>
@@ -201,7 +201,7 @@ summary: >-
 <tr>
 <td><p>Muat</p></td>
 <td><p>Muat koleksi</p></td>
-<td><p><a href="/docs/id/load-and-release.md">M</a><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">uat</a> Koleksi/Dapatkan Kemajuan Pemuatan/Dapatkan Status Pemuatan</p></td>
+<td><p><a href="/docs/id/load-and-release.md">M</a><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/loading_progress.md">uat</a> Koleksi/Dapatkan Kemajuan Pemuatan/Dapatkan Status Pemu<a href="https://milvus.io/api-reference/restful/v3.0.x/v2/Collection%20(v2)/Get%20Load%20State.md">atan</a></p></td>
 </tr>
 <tr>
 <td><p>Lepaskan</p></td>
@@ -210,13 +210,13 @@ summary: >-
 </tr>
 <tr>
 <td><p>Flush</p></td>
-<td><p>Menyimpan semua entitas dalam sebuah koleksi ke segmen yang telah disegel. Setiap entitas yang dimasukkan setelah operasi flush akan disimpan di segmen baru.</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush/GetFlushState</a></p></td>
+<td><p>Menyimpan semua entitas dalam koleksi ke segmen yang disegel. Setiap entitas yang dimasukkan setelah operasi flush akan disimpan di segmen baru.</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">Flush/GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>Pemadatan</p></td>
 <td><p>Memicu kompaksi secara manual</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">Kompaksi</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Management/compact.md">Kompaksi</a></p></td>
 </tr>
 <tr>
 <td><p>Ganti Nama Koleksi</p></td>
@@ -236,7 +236,7 @@ summary: >-
 <tr>
 <td><p>FlushAll</p></td>
 <td><p>Kosongkan semua koleksi dalam sebuah basis data</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
 </tr>
 <tr>
 <td rowspan="4"><p>Hak Akses Partisi</p></td>
@@ -284,7 +284,7 @@ summary: >-
 <tr>
 <td><p>BuatGrupSumberDaya</p></td>
 <td><p>Buat grup sumber daya</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">BuatGrupSumberDaya</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/create_resource_group.md">BuatGrupSumberDaya</a></p></td>
 </tr>
 <tr>
 <td><p>Hapus Grup Sumber Daya</p></td>
@@ -313,7 +313,7 @@ summary: >-
 </tr>
 <tr>
 <td><p>TransferReplica</p></td>
-<td><p>Memindahkan replika antar kelompok sumber daya</p></td>
+<td><p>Memindahkan replika antar grup sumber daya</p></td>
 <td><p><a href="/docs/id/resource_group.md">TransferReplica</a></p></td>
 </tr>
 <tr>
@@ -406,7 +406,7 @@ summary: >-
 <tr>
 <td><p>Mengelola Grup Hak Akses</p></td>
 <td><p>Menambahkan atau menghapus hak istimewa dari suatu grup hak istimewa</p></td>
-<td><p><a href="/docs/id/privilege_group.md">MengelolaKelompokHakAkses</a></p></td>
+<td><p><a href="/docs/id/privilege_group.md">Mengelola Kelompok Hak Akses</a></p></td>
 </tr>
 </table></p></li>
 </ul>
@@ -446,7 +446,7 @@ client.grant_privilege_v2(
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2;
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -473,7 +473,7 @@ client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -515,22 +515,22 @@ err = client.GrantV2(ctx, milvusclient.NewGrantV2Option(<span class="hljs-string
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">grantPrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;Search&quot;</span>
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;Search&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
 });
     
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">grantPrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;privilege_group_1&quot;</span>
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">grantPrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;*&#x27;</span>
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;*&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;*&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
@@ -571,7 +571,7 @@ curl --request POST \
 }&#x27;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-a-role" class="common-anchor-header">Menjelaskan peran<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
+<h2 id="Describe-a-role" class="common-anchor-header">Menjelaskan sebuah peran<button data-href="#Describe-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -599,7 +599,7 @@ curl --request POST \
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq;
 
 <span class="hljs-type">DescribeRoleReq</span> <span class="hljs-variable">describeRoleReq</span> <span class="hljs-operator">=</span> DescribeRoleReq.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -607,7 +607,7 @@ client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</spa
 <span class="hljs-type">DescribeRoleResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.describeRole(describeRoleReq);
 List&lt;DescribeRoleResp.GrantInfo&gt; infos = resp.getGrantInfos();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -685,7 +685,7 @@ client.revoke_privilege_v2(
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2;
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -739,7 +739,7 @@ err = client.RevokePrivilegeV2(ctx, milvusclient.NewRevokePrivilegeV2Option(<spa
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">revokePrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>,
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&#x27;Search&#x27;</span>,
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&#x27;privilege_group_1&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>
 });
 
@@ -769,7 +769,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
-    &quot;privilege&quot;: &quot;Search&quot;,
+    &quot;privilege&quot;: &quot;privilege_group_1&quot;,
     &quot;collectionName&quot;: &quot;collection_01&quot;,
     &quot;dbName&quot;:&quot;default&quot;
 }&#x27;</span>

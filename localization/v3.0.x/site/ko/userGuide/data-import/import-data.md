@@ -41,7 +41,7 @@ summary: 이 페이지에서는 준비된 데이터를 가져오는 절차를 �
 <li><p>데이터 준비에 사용하는 스키마로 컬렉션을 이미 생성해 두어야 합니다. 그렇지 않은 경우, <a href="/docs/ko/manage-collections.md">‘컬렉션 관리’를</a> 참조하십시오.</p></li>
 </ul>
 <div class="language-python">
-<p>다음 코드 스니펫은 주어진 스키마를 사용하여 간단한 컬렉션을 생성합니다. 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 및 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> SDK 참조 문서를 참조하십시오.</p>
+<p>다음 코드 스니펫은 주어진 스키마를 사용하여 간단한 컬렉션을 생성합니다. 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> SDK 참조 문서를 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> SDK 참조 문서를 참조하십시오.</p>
 </div>
 <div class="language-java">
 <p>다음 코드 스니펫은 지정된 스키마를 사용하여 간단한 컬렉션을 생성합니다. 매개변수에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> SDK 참조 문서를 참조하십시오.</p>
@@ -61,18 +61,18 @@ summary: 이 페이지에서는 준비된 데이터를 가져오는 절차를 �
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>파이프라인에서 실패했거나 시간 초과된 가져오기 요청을 재시도할 수 있는 경우, 작업에 이멱포텐트 키를 태그로 지정하십시오. <a href="/docs/ko/idempotent-import.md">이멱포텐트 대량 가져오기를</a> 참조하십시오.</p>
+    </button></h2><p>파이프라인에서 실패했거나 시간 초과된 가져오기 요청을 재시도할 수 있는 경우, 작업에 idempotency 키를 태그로 지정하십시오. <a href="/docs/ko/idempotent-import.md">‘Idempotent Bulk Import’를</a> 참조하십시오.</p>
 <p>준비된 데이터를 가져오려면 다음과 같이 가져오기 작업을 생성해야 합니다.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -132,7 +132,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>대상 컬렉션의 이름.</p></li>
 <li><p><code translate="no">files</code></p>
-<p>Milvus 인스턴스와 함께 시작된 MioIO 인스턴스의 Milvus 버킷 루트 경로를 기준으로 한 파일 경로 목록의 리스트입니다. 가능한 하위 리스트는 다음과 같습니다:</p>
+<p>Milvus 인스턴스와 함께 시작된 MioIO 인스턴스 상의 Milvus 버킷 루트 경로를 기준으로 한 파일 경로 목록의 리스트입니다. 가능한 하위 리스트는 다음과 같습니다:</p>
 <ul>
 <li><p><strong>JSON 파일</strong></p>
 <p>준비된 파일이 JSON 형식인 경우, <strong>각 하위 목록에는 하나의 준비된 JSON 파일 경로가 포함되어야 합니다</strong>.</p>
@@ -149,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>반환될 수 있는 결과는 다음과 같습니다:</p>
+<p>반환 가능한 값은 다음과 같습니다:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> 매개변수<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> 는 <code translate="no">POST /v2/vectordb/jobs/import/create</code> 를 감싸는 얇은 래퍼입니다.
+위의 예제 외에도, 다음 매개변수를 노출합니다(PyMilvus 2.6 이상).</p>
+<table>
+<thead>
+<tr><th>매개변수</th><th>유형</th><th>설명</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>서버 주소(예: <code translate="no">http://127.0.0.1:19530</code> 또는 <code translate="no">https://api.cloud.zilliz.com</code>).</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>대상 컬렉션.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>대상 데이터베이스. RBAC용 <code translate="no">DB-Name</code> 헤더로 전송됩니다.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Milvus 인스턴스에서 이미 사용할 수 있는 파일(예: MinIO에 있는 <strong>파일</strong>). 이는 <strong>객체 URL이 아닌 서버 측 경로입니다.</strong> 각 하위 목록은 하나의 JSON 또는 Parquet 파일, 또는 하나의 NumPy 파일 세트입니다.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>대상 파티션. 선언된 매개변수가 아닌 추가 키워드 인수를 통해 전달되므로 시그니처에서 놓치기 쉽습니다. 파티션 키를 사용하는 컬렉션의 경우 비워 둡니다.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>클라우드 객체 스토리지의 단일 객체 URL. <code translate="no">object_urls</code> 로 대체되었습니다.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>클라우드 객체 스토리지의 객체 URL(예: <code translate="no">s3://bucket/prefix/1.parquet</code>). 각 하위 목록은 하나의 객체이거나 <code translate="no">/</code> 로 끝나는 하나의 접두사입니다. <code translate="no">files</code><strong>대신</strong> 이 <strong>방법을</strong> 사용하십시오. 두 가지는 동의어가 아닌 서로 다른 전송 방식입니다.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud 클러스터 ID.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>프로젝트 데이터베이스용 Zilliz Cloud 프로젝트 ID.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>프로젝트 데이터베이스의 리전.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>API 키, 또는 자체 호스팅 인스턴스의 경우 <code translate="no">username:password</code>.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td><code translate="no">object_urls</code> 용 오브젝트 스토리지 자격 증명.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>단기 오브젝트 스토리지 자격 증명을 위한 세션 토큰.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>가져올 Zilliz Cloud 볼륨. <code translate="no">data_paths</code> 가 필요합니다.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td><code translate="no">volume_name</code> 내의 경로. 각 하위 목록은 하나의 파일 또는 <code translate="no">/</code> 로 끝나는 하나의 접두사입니다.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> 또는 <code translate="no">str</code></td><td>서버 TLS 인증서를 확인합니다. 기본값은 <code translate="no">True</code> 입니다. 문자열은 CA 번들 경로로 간주됩니다.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> 또는 <code translate="no">tuple</code></td><td>상호 TLS용 클라이언트 인증서: 파일 경로 또는 <code translate="no">('cert', 'key')</code> 쌍.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>요청에 병합되는 추가 HTTP 헤더; 호출자 측 값이 우선합니다. 예를 들어 <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code> 와 같은 이멧포텐시 키를 전송하는 데 사용하십시오. <a href="/docs/ko/idempotent-import.md">이멧포텐트 대량 가져오기를</a> 참조하십시오.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>요청 본문을 통해 서버로 전달되는 추가 가져오기 옵션입니다.</td></tr>
+</tbody>
+</table>
+<p>남은 키워드 인수는 <code translate="no">requests.post</code> 로 전달되므로, <code translate="no">timeout</code> 및 <code translate="no">proxies</code>
+는 해당 함수에서와 동일하게 작동합니다. 래퍼는 기본적으로 20초의 타임아웃을 보냅니다.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">가져오기 진행 상황 확인<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,8 +219,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
       </svg>
     </button></h2><p>가져오기 작업 ID를 받으면 다음과 같이 가져오기 진행 상황을 확인할 수 있습니다:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -271,7 +316,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">가져오기 작업 목록 조회<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">가져오기 작업 나열<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>다음과 같이 특정 컬렉션과 관련된 모든 가져오기 작업을 나열할 수 있습니다:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -377,7 +422,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>데이터를 가져오기 전에, 다음 Milvus 동작과 관련된 제약 사항을 숙지했는지 확인하십시오:</p>
+    </button></h2><p>데이터를 가져오기 전에, Milvus의 다음과 같은 동작과 관련된 제약 사항을 숙지했는지 확인하십시오:</p>
 <ul>
 <li><p>로드 동작과 관련된 제약 조건:</p>
 <ul>
@@ -413,4 +458,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>단일 요청으로 여러 파일을 업로드할 수 있는 다중 파일 가져오기 기능을 적극 활용할 것을 권장합니다. 이 방법은 가져오기 과정을 간소화할 뿐만 아니라 가져오기 성능을 크게 향상시킵니다. 또한, 업로드를 통합함으로써 데이터 관리에 소요되는 시간을 줄이고 워크플로우를 더욱 효율적으로 만들 수 있습니다.</p>
+    </button></h2><p>단일 요청으로 여러 파일을 업로드할 수 있는 다중 파일 가져오기 기능을 적극 활용할 것을 권장합니다. 이 방법은 가져오기 프로세스를 간소화할 뿐만 아니라 가져오기 성능을 크게 향상시킵니다. 또한, 업로드를 통합함으로써 데이터 관리에 소요되는 시간을 줄이고 워크플로우를 더욱 효율적으로 만들 수 있습니다.</p>

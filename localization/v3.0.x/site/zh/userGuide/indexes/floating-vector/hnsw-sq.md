@@ -100,7 +100,7 @@ summary: >-
 <p>SQ4U 中的“U”代表“Uniform”（均匀）。与通常为每个维度独立计算最小值和最大值（按维度量化）的非均匀标量量化不同，SQ4U 采用<strong>全局均匀量化策略</strong>：</p>
 <ol>
 <li><p><strong>全局统计</strong>：系统计算出<strong>一个</strong>适用于向量<strong>所有维度</strong>（或整个向量片段）的最小值<code translate="no">vmin</code> 和<strong>一个</strong>值范围<code translate="no">vdiff</code> 。</p></li>
-<li><p><strong>统一映射</strong>：全局值范围被划分为 16 个等间隔区间。向量中的每个浮点数，无论属于哪个维度，都会使用这些共享参数映射为一个 4 位整数（0–15）。</p></li>
+<li><p><strong>统一映射</strong>：全局值范围被划分为 16 个等间隔区间。向量中的每个浮点值，无论属于哪个维度，都会使用这些共享参数映射到一个 4 位整数（0–15）。</p></li>
 </ol>
 <p><strong>性能优势：</strong></p>
 <ul>
@@ -130,11 +130,11 @@ summary: >-
 <ol>
 <li><p><strong>数据压缩：</strong>SQ 使用<code translate="no">sq_type</code> （例如 SQ6 或 SQ8）对向量进行压缩，从而减少内存占用。这种压缩可能会降低精度，但使系统能够处理更大的数据集。</p></li>
 <li><p><strong>图构建：</strong>利用压缩后的向量构建 HNSW 图。由于数据经过压缩，生成的图体积更小，搜索速度更快。</p></li>
-<li><p><strong>候选结果检索：</strong>当提供查询向量时，算法会利用压缩数据从 HNSW 图中快速识别出一组候选邻居。</p></li>
+<li><p><strong>候选结果检索：</strong>当提供查询向量时，算法会利用压缩后的数据，从 HNSW 图中快速识别出一组候选邻居。</p></li>
 <li><p><strong>（可选）结果精化：</strong>可基于以下参数对初始候选结果进行精化，以提高准确性：</p>
 <ul>
 <li><p><code translate="no">refine</code>: 控制是否启用此精化步骤。当设置为<code translate="no">true</code> 时，系统将使用更高精度或未压缩的表示形式重新计算距离。</p></li>
-<li><p><code translate="no">refine_type</code>：指定精炼过程中使用的数据精度级别（例如，SQ6、SQ8、BF16）。选择更高精度（如<code translate="no">FP32</code> ）可获得更准确的结果，但需要更多内存。该精度必须比原始压缩数据集的精度高出<code translate="no">sq_type</code> 。</p></li>
+<li><p><code translate="no">refine_type</code>：指定精炼过程中使用的数据精度级别（例如，SQ6、SQ8、BF16）。选择更高精度的选项（如<code translate="no">FP32</code> ）可获得更准确的结果，但需要更多内存。该精度必须比原始压缩数据集的精度高出<code translate="no">sq_type</code> 。</p></li>
 <li><p><code translate="no">refine_k</code>: 作为放大因子。例如，如果您的前<em>k 项</em>为 100，且<code translate="no">refine_k</code> 为 2，系统将对前 200 个候选项进行重新排序并返回最佳的 100 个，从而提高整体准确率。</p></li>
 </ul></li>
 </ol>
@@ -177,10 +177,10 @@ index_params.add_index(
 <p>在此配置中：</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 要构建的索引类型。在此示例中，将值设置为<code translate="no">HNSW_SQ</code> 。</p></li>
-<li><p><code translate="no">metric_type</code>: 用于计算向量之间距离的方法。支持的值包括<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 。详情请参阅《<a href="/docs/zh/metric.md">度量类型</a>》。</p></li>
+<li><p><code translate="no">metric_type</code>: 用于计算向量之间距离的方法。支持的值包括<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 。有关详细信息，请参阅《<a href="/docs/zh/metric.md">度量类型</a>》。</p></li>
 <li><p><code translate="no">params</code>: 用于构建索引的其他配置选项。详情请参阅<a href="/docs/zh/hnsw-sq.md#Index-building-params">“索引构建参数</a>”。</p></li>
 </ul>
-<p>配置好索引参数后，您可以直接使用<code translate="no">create_index()</code> 方法，或在<code translate="no">create_collection</code> 方法中传入索引参数来创建索引。详情请参阅<a href="/docs/zh/create-collection.md">“创建Collection”</a>。</p>
+<p>配置好索引参数后，您可以直接使用<code translate="no">create_index()</code> 方法创建索引，或在<code translate="no">create_collection</code> 方法中传入索引参数。详情请参阅<a href="/docs/zh/create-collection.md">“创建Collection”</a>。</p>
 <h2 id="Search-on-index" class="common-anchor-header">在索引上进行搜索<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +266,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>在索引构建期间，考虑用于连接的候选邻居数量。</p><p>对于每个新元素，系统会评估更大的候选邻居池，但实际建立的连接最大数量仍受<code translate="no">M</code> 的限制。</p></td>
+     <td><p>在索引构建期间，用于连接的候选邻居数量。</p><p>对于每个新元素，系统会评估更大的候选邻居池，但实际建立的连接最大数量仍受<code translate="no">M</code> 的限制。</p></td>
      <td><p><strong>类型</strong>：整数</p><p><strong>范围</strong>：[1,<em>int_max</em>]</p><p><strong>默认值</strong>：<code translate="no">360</code></p></td>
      <td><p>通常，<code translate="no">efConstruction</code> 值越高，<strong>索引的准确性就越高</strong>，因为会探索更多的潜在连接。但是，这也会导致<strong>索引构建时间延长，并增加</strong>构建过程中的<strong>内存占用</strong>。</p><p>建议提高<code translate="no">efConstruction</code> 以提升准确性，特别是在索引时间不是关键因素的场景下。</p><p>当资源受限时，可考虑降低<code translate="no">efConstruction</code> 以加快索引构建速度。</p><p>在大多数情况下，我们建议您将该值设置在 [50, 500] 范围内。</p></td>
    </tr>
@@ -275,7 +275,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">sq_type</code></p></td>
      <td><p>指定用于压缩向量的标量量化方法。每种选项在压缩率与精度之间提供了不同的平衡：</p><ul><li><p><code translate="no">SQ4U</code>：使用 4 位均匀量化对向量进行编码。此模式提供最高的速度和压缩率。</p></li><li><p><code translate="no">SQ6</code>: 使用 6 位整数对向量进行编码。</p></li><li><p><code translate="no">SQ8</code>: 使用 8 位整数对向量进行编码。</p></li><li><p><code translate="no">BF16</code>: 使用 Bfloat16 格式。</p></li><li><p><code translate="no">FP16</code>: 使用标准的 16 位浮点格式。</p></li></ul></td>
      <td><p><strong>类型</strong>：字符串</p><p><strong>范围</strong>：[<code translate="no">SQ4U</code>,<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p><p><strong>默认值</strong>：<code translate="no">SQ8</code></p></td>
-     <td><p><code translate="no">sq_type</code> 的选择取决于具体应用的需求。若追求最高速度和内存效率，应选择<code translate="no">SQ4U</code> 。若追求性能与效率的平衡，<code translate="no">SQ6</code> 或<code translate="no">SQ8</code> 可能更为合适。另一方面，如果精度至关重要，则建议选择<code translate="no">BF16</code> 或<code translate="no">FP16</code> 。</p></td>
+     <td><p><code translate="no">sq_type</code> <code translate="no">SQ4U</code> <code translate="no">SQ6</code> <code translate="no">BF16</code> 或 可能更为合适。另一方面，如果精度至关重要，则建议选择 或 。<code translate="no">SQ8</code> <code translate="no">FP16</code> </p></td>
    </tr>
    <tr>
      <td></td>
@@ -292,7 +292,7 @@ res = MilvusClient.search(
      <td><p>若需最高精度（但会消耗更多内存），请使用<code translate="no">FP32</code> ；若需更好的压缩效果，请使用<code translate="no">SQ6</code> 或<code translate="no">SQ8</code> 。<code translate="no">BF16</code> 和<code translate="no">FP16</code> 则提供了折中方案。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">索引特定搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+<h3 id="Index-specific-search-params" class="common-anchor-header">索引特定的搜索参数<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

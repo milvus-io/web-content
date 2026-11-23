@@ -1,9 +1,9 @@
 ---
 id: python_sdk.md
-title: 'Preguntar: Milvus Python SDK'
+title: 'Indicación: SDK de Milvus para Python'
 summary: >-
-  Reglas para que los asistentes de codificación de IA escriban código Milvus
-  Python correcto utilizando MilvusClient.
+  Normas para que los asistentes de programación basados en IA escriban código
+  Python correcto para Milvus utilizando MilvusClient.
 ---
 <h1 id="Python-SDK" class="common-anchor-header">SDK de Python<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Reglas para escribir código Milvus Python correcto usando la interfaz MilvusClient, incluyendo migración ORM, patrones de conexión y operaciones comunes. Copie el mensaje completo a continuación en su herramienta AI para aplicar estas reglas automáticamente. Para una visión general de todos los avisos, vea <a href="/docs/es/milvus_for_agents.md">Avisos AI</a>.</p>
-<h2 id="How-to-use-this-prompt" class="common-anchor-header">Cómo utilizar este aviso<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
+    </button></h1><p>Normas para escribir código Python correcto para Milvus utilizando la interfaz MilvusClient, incluyendo la migración ORM, los patrones de conexión y las operaciones habituales. Copia el mensaje completo que aparece a continuación en tu herramienta de IA para aplicar estas normas automáticamente. Para obtener una visión general de todos los mensajes, consulta <a href="/docs/es/milvus_for_agents.md">Mensajes de IA</a>.</p>
+<h2 id="How-to-use-this-prompt" class="common-anchor-header">Cómo utilizar esta indicación<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,12 +37,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Copie</strong> el mensaje completo de la sección <a href="#full-prompt">Mensaje completo</a>.</li>
-<li><strong>Guárdela</strong> en la ubicación prevista por su herramienta de IA (consulte la <a href="/docs/es/milvus_for_agents.md">tabla de entornos</a> para obtener más información sobre la ubicación).</li>
-<li>Su asistente de IA aplicará automáticamente estas reglas cuando genere o revise código Milvus.</li>
+<li><strong>Copia</strong> el comando completo de la sección <a href="#full-prompt">«Comando completo</a> » que aparece a continuación.</li>
+<li><strong>Guárdalo</strong> en la ubicación que requiera tu herramienta de IA; consulta la <a href="/docs/es/milvus_for_agents.md">tabla de entornos</a> para obtener detalles sobre la ubicación.</li>
+<li>Tu asistente de IA aplicará automáticamente estas reglas al generar o revisar código de Milvus.</li>
 </ol>
-<p>Para usuarios <strong>de Cursor</strong>: copie el prompt de la sección <a href="#full-prompt">prompt completo</a> y guárdelo en <code translate="no">.cursor/rules/</code> en su proyecto.</p>
-<h2 id="Full-prompt" class="common-anchor-header">Mensaje completo<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>Para usuarios <strong>de Cursor</strong>: copia la indicación de la sección <a href="#full-prompt">«Indicación completa»</a> y guárdala en « <code translate="no">.cursor/rules/</code> » dentro de tu proyecto.</p>
+<h2 id="Full-prompt" class="common-anchor-header">Prompt completo<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +231,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

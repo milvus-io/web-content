@@ -4,8 +4,8 @@ title: Menghubungkan ke Kafka dengan SASL/SSL
 related_key: 'kafka, sasl, tls'
 summary: >-
   Panduan ini mencantumkan beberapa cara untuk menghubungkan Milvus ke Kafka,
-  mulai dari yang paling sederhana tanpa SASL/SSL hingga yang sepenuhnya aman
-  dengan SASL/SSL.
+  mulai dari cara paling sederhana tanpa SASL/SSL hingga cara yang sepenuhnya
+  aman dengan SASL/SSL.
 ---
 <h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">Menghubungkan ke Kafka dengan SASL/SSL<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Panduan ini mencantumkan beberapa cara untuk menghubungkan Milvus ke Kafka, mulai dari yang paling sederhana tanpa SASL/SSL hingga yang sepenuhnya aman dengan SASL/SSL.</p>
+    </button></h1><p>Panduan ini mencantumkan beberapa cara untuk menghubungkan Milvus ke Kafka, mulai dari cara paling sederhana tanpa SASL/SSL hingga cara yang sepenuhnya aman dengan SASL/SSL.</p>
 <h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">Menghubungkan Milvus ke Kafka Tanpa SASL/SSL<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +38,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk memulai Milvus dan Kafka tanpa SASL/SSL, Anda menonaktifkan autentikasi dan enkripsi untuk Kafka dan Milvus. Gunakan hanya di lingkungan yang terpercaya.</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. Memulai layanan Kafka tanpa SASL/SSL<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h2><p>Untuk menjalankan Milvus dan Kafka tanpa SASL/SSL, Anda harus menonaktifkan otentikasi dan enkripsi baik untuk Kafka maupun Milvus. Gunakan metode ini hanya di lingkungan yang terpercaya.</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. Jalankan layanan Kafka tanpa SASL/SSL<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,7 +54,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda dapat menggunakan berkas <code translate="no">docker-compose.yaml</code> berikut ini untuk memulai layanan Kafka tanpa SASL/SSL:</p>
+    </button></h3><p>Anda dapat menggunakan berkas ` <code translate="no">docker-compose.yaml</code> ` berikut untuk menjalankan layanan Kafka tanpa SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -65,7 +65,7 @@ summary: >-
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
   <span class="hljs-attr">kafka:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:2.13-2.8.1</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
     <span class="hljs-attr">ports:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
@@ -73,14 +73,12 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian Anda dapat memulai layanan Kafka dengan perintah berikut:</p>
+<p>Kemudian, Anda dapat menjalankan layanan Kafka dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Mulai Milvus dan Hubungkan ke Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Memulai Milvus dan Menghubungkannya ke Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -95,7 +93,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menyambungkannya. Gunakan berkas <code translate="no">docker-compose.yaml</code> berikut ini untuk memulai Milvus dan menyambung ke Kafka tanpa SASL/SSL:</p>
+    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menghubungkannya ke Kafka. Gunakan berkas ` <code translate="no">docker-compose.yaml</code> ` berikut untuk memulai Milvus dan menghubungkannya ke Kafka tanpa SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -110,12 +108,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan perintah berikut untuk mengunduh templat berkas konfigurasi Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Dan atur parameter berikut:</p>
+<p>Buat berkas ` <code translate="no">user.yaml</code> ` di direktori yang sama dengan berkas ` <code translate="no">docker-compose.yaml</code> ` Anda, lalu atur parameter berikut di dalamnya. Milvus memuat ` <code translate="no">configs/user.yaml</code> ` setelah ` <code translate="no">configs/milvus.yaml</code>`, sehingga nilai-nilai di ` <code translate="no">user.yaml</code> ` akan menggantikan nilai default:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -133,10 +128,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span>
     <span class="hljs-attr">tlsKeyPassword:</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian Anda dapat memulai Milvus dengan perintah berikut:</p>
+<p>Kemudian Anda dapat menjalankan Milvus dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Menghubungkan Milus ke Kafka dengan SASL/PLAIN Saja<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Menghubungkan Milvus ke Kafka Hanya dengan SASL/PLAIN<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,8 +146,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk memulai Kafka dengan autentikasi SASL/PLAIN, Anda perlu menambahkan berkas <code translate="no">kafka_server_jass.conf</code> dengan pengaturan yang tepat.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. Memulai layanan Kafka dengan SASL/PLAIN<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+    </button></h2><p>Untuk menjalankan Kafka dengan otentikasi SASL/PLAIN, Anda perlu menambahkan berkas <code translate="no">kafka_server_jaas.conf</code> dengan pengaturan yang tepat.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. Jalankan layanan Kafka dengan SASL/PLAIN<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,7 +162,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Letakkan berkas <code translate="no">docker-compose.yaml</code> dan berkas <code translate="no">kafka_server_jaas.conf</code> di direktori yang sama.</p>
+    </button></h3><p>Letakkan berkas <code translate="no">docker-compose.yaml</code> dan <code translate="no">kafka_server_jaas.conf</code> berikut di direktori yang sama.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -200,11 +195,11 @@ summary: >-
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam berkas <code translate="no">kafka_server_jass.conf</code>, atur parameter berikut:</p>
+<p>Di berkas <code translate="no">kafka_server_jaas.conf</code>, atur parameter berikut:</p>
 <pre><code translate="no" class="language-conf">KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username=&quot;kafka&quot;
@@ -212,10 +207,10 @@ summary: >-
     user_kafka=&quot;pass123&quot;;
 };
 </code></pre>
-<p>Kemudian Anda dapat memulai layanan Kafka dengan perintah berikut:</p>
+<p>Kemudian, Anda dapat memulai layanan Kafka dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Mulai Milvus dan Hubungkan ke Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Jalankan Milvus dan Hubungkan ke Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -230,7 +225,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menyambungkannya. Gunakan berkas <code translate="no">docker-compose.yaml</code> berikut untuk memulai Milvus dan menyambung ke Kafka dengan SASL/PLAIN:</p>
+    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menghubungkannya ke Kafka. Gunakan berkas ` <code translate="no">docker-compose.yaml</code> ` berikut untuk memulai Milvus dan menghubungkannya ke Kafka dengan SASL/PLAIN:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -245,12 +240,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan perintah berikut untuk mengunduh templat berkas konfigurasi Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Dan atur parameter berikut:</p>
+<p>Buat berkas ` <code translate="no">user.yaml</code> ` di direktori yang sama dengan berkas ` <code translate="no">docker-compose.yaml</code> ` Anda, lalu atur parameter berikut di dalamnya. Milvus memuat ` <code translate="no">configs/user.yaml</code> ` setelah ` <code translate="no">configs/milvus.yaml</code>`, sehingga nilai-nilai di ` <code translate="no">user.yaml</code> ` akan menggantikan nilai default:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -268,10 +260,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian Anda dapat memulai Milvus dengan perintah berikut:</p>
+<p>Kemudian Anda dapat menjalankan Milvus dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">Menghubungkan Milvus ke Kafka dengan SSL Saja<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">Menghubungkan Milvus ke Kafka Hanya dengan SSL<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -286,8 +278,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk memulai Kafka dengan autentikasi SSL, Anda perlu mendapatkan beberapa berkas sertifikat atau membuat berkas yang ditandatangani sendiri. Pada contoh ini, kita menggunakan sertifikat yang ditandatangani sendiri.</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. Menghasilkan Sertifikat yang Ditandatangani Sendiri<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
+    </button></h2><p>Untuk menjalankan Kafka dengan otentikasi SSL, Anda perlu memperoleh beberapa berkas sertifikat atau membuat sertifikat yang ditandatangani sendiri. Dalam contoh ini, kami menggunakan sertifikat yang ditandatangani sendiri.</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. Membuat Sertifikat yang Ditandatangani Sendiri<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -302,7 +294,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buat folder bernama <code translate="no">my_secrets</code>, tambahkan skrip bash bernama <code translate="no">gen-ssl-certs.sh</code> di dalamnya, dan tempelkan konten berikut ke dalamnya:</p>
+    </button></h3><p>Buat folder bernama <code translate="no">my_secrets</code>, tambahkan skrip bash bernama <code translate="no">gen-ssl-certs.sh</code> di dalamnya, lalu tempelkan konten berikut ke dalamnya:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -468,23 +460,23 @@ EOF</span>
     <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pada skrip di atas, kata sandi default <code translate="no">abcdefgh</code> berlaku. Untuk mengubah kata sandi, buat file teks bernama <code translate="no">cert_creds</code> dan masukkan kata sandi di baris pertama.</p>
-<p>Kemudian jalankan perintah berikut ini untuk menghasilkan sertifikat:</p>
+<p>Dalam skrip di atas, kata sandi default <code translate="no">abcdefgh</code> berlaku. Untuk mengubah kata sandi, buat berkas teks bernama <code translate="no">cert_creds</code> dan masukkan kata sandi pada baris pertama.</p>
+<p>Kemudian jalankan perintah berikut untuk membuat sertifikat:</p>
 <ul>
-<li><p>Hasilkan sertifikat CA:</p>
-<p>Perintah berikut ini mengasumsikan file sertifikat CA bernama <code translate="no">ca-cert</code> dan nama host broker adalah <code translate="no">kafka-ssl</code>:</p>
+<li><p>Membuat sertifikat CA:</p>
+<p>Berikut ini mengasumsikan bahwa berkas sertifikat CA bernama <code translate="no">ca-cert</code> dan nama host broker adalah <code translate="no">kafka-ssl</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh ca ca-cert kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Hasilkan sertifikat server dan penyimpanan kunci:</p>
-<p>Berikut ini mengasumsikan file sertifikat CA bernama <code translate="no">ca-cert</code>, awalan untuk semua file keluaran adalah <code translate="no">kafka_</code>, dan nama host broker adalah <code translate="no">kafka-ssl</code>:</p>
+<li><p>Membuat sertifikat server dan keystore:</p>
+<p>Berikut ini mengasumsikan bahwa berkas sertifikat CA bernama <code translate="no">ca-cert</code>, awalan untuk semua berkas keluaran adalah <code translate="no">kafka_</code>, dan nama host broker adalah <code translate="no">kafka-ssl</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Menghasilkan kunci klien:</p>
-<p>Berikut ini mengasumsikan file sertifikat CA bernama <code translate="no">ca-cert</code>, awalan untuk semua file keluaran adalah <code translate="no">kafka_</code>, dan nama klien adalah <code translate="no">kafka-client</code>:</p>
+<li><p>Buat kunci klien:</p>
+<p>Berikut ini mengasumsikan bahwa berkas sertifikat CA bernama <code translate="no">ca-cert</code>, awalan untuk semua berkas keluaran adalah <code translate="no">kafka_</code>, dan nama klien adalah <code translate="no">kafka-client</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh client ca-cert kafka_ kafka-client</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Setelah semua sertifikat yang diperlukan dibuat, Anda bisa melihat file-file berikut ini di folder <code translate="no">my_secrets</code>:</p>
+<p>Setelah semua sertifikat yang diperlukan dihasilkan, Anda dapat melihat berkas-berkas berikut di dalam folder <code translate="no">my_secrets</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l my_secrets</span>
 total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:53 ca-cert
@@ -515,7 +507,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gunakan berkas <code translate="no">docker-compose.yaml</code> berikut ini untuk memulai layanan Kafka dengan SSL:</p>
+    </button></h3><p>Gunakan berkas <code translate="no">docker-compose.yaml</code> berikut untuk memulai layanan Kafka dengan SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -554,10 +546,10 @@ total 12
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian mulai layanan Kafka dengan perintah berikut:</p>
+<p>Kemudian jalankan layanan Kafka dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Mulai Milvus dan Hubungkan ke Kafka dengan SSL<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Jalankan Milvus dan Hubungkan ke Kafka dengan SSL<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -572,7 +564,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menyambungkannya. Gunakan berkas <code translate="no">docker-compose.yaml</code> berikut untuk memulai Milvus dan terhubung ke Kafka dengan SSL:</p>
+    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menghubungkannya ke layanan tersebut. Gunakan berkas ` <code translate="no">docker-compose.yaml</code> ` berikut untuk memulai Milvus dan menghubungkannya ke Kafka dengan SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -587,13 +579,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan perintah berikut untuk mengunduh templat berkas konfigurasi Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Dan atur parameter berikut:</p>
+<p>Buat berkas ` <code translate="no">user.yaml</code> ` di direktori yang sama dengan berkas ` <code translate="no">docker-compose.yaml</code> ` Anda, lalu atur parameter berikut di dalamnya. Milvus memuat ` <code translate="no">configs/user.yaml</code> ` setelah ` <code translate="no">configs/milvus.yaml</code>`, sehingga nilai-nilai di ` <code translate="no">user.yaml</code> ` akan menggantikan nilai default:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -629,8 +618,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menghubungkan Milvus ke Kafka dengan SASL/PLAIN dan SSL, Anda perlu mengulangi langkah-langkah pada Menghubungkan <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Milus ke Kafka dengan SASL/PLAIN Saja</a> dan Menghubungkan <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Milus ke Kafka dengan SSL Saja</a>.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. Memulai layanan Kafka dengan SASL/PLAIN dan SSL<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+    </button></h2><p>Untuk menghubungkan Milvus ke Kafka dengan SASL/PLAIN dan SSL, Anda perlu mengulangi langkah-langkah dalam <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">Menghubungkan Milvus ke Kafka dengan SASL/PLAIN Saja</a> dan <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">Menghubungkan Milvus ke Kafka dengan SSL Saja</a>.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. Jalankan layanan Kafka dengan SASL/PLAIN dan SSL<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -645,8 +634,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Gunakan file <code translate="no">kafka_server_jass.conf</code> yang disebutkan di Hubungkan <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Milus ke Kafka dengan SASL / PLAIN Saja</a> dan folder <code translate="no">my_secrets</code> yang dihasilkan di <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Hubungkan Milus ke Kafka dengan SSL Saja</a> untuk memulai layanan Kafka dengan SASL / PLAIN dan SSL.</p>
-<p>File <code translate="no">docker-compose.yaml</code> berikut ini dapat digunakan untuk memulai layanan Kafka dengan SASL/PLAIN dan SSL:</p>
+    </button></h3><p>Gunakan berkas ` <code translate="no">kafka_server_jaas.conf</code> ` yang disebutkan dalam <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">"Menghubungkan Milvus ke Kafka dengan SASL/PLAIN Saja</a> " dan folder ` <code translate="no">my_secrets</code> ` yang dihasilkan dalam <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">"Menghubungkan Milvus ke Kafka dengan SSL Saja</a> " untuk memulai layanan Kafka dengan SASL/PLAIN dan SSL.</p>
+<p>Berkas ` <code translate="no">docker-compose.yaml</code> ` berikut dapat digunakan untuk memulai layanan Kafka dengan SASL/PLAIN dan SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -690,16 +679,16 @@ total 12
       <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
 
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Kemudian mulai layanan Kafka dengan perintah berikut:</p>
+<p>Kemudian jalankan layanan Kafka dengan perintah berikut:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Mulai Milvus dan Hubungkan ke Kafka dengan SASL/PLAIN dan SSL<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Jalankan Milvus dan Hubungkan ke Kafka dengan SASL/PLAIN dan SSL<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -714,7 +703,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menyambungkannya. Gunakan berkas <code translate="no">docker-compose.yaml</code> berikut ini untuk memulai Milvus dan menyambung ke Kafka dengan SASL/PLAIN dan SSL:</p>
+    </button></h3><p>Setelah layanan Kafka dimulai, Anda dapat memulai Milvus dan menghubungkannya. Gunakan berkas ` <code translate="no">docker-compose.yaml</code> ` berikut untuk memulai Milvus dan menghubungkannya ke Kafka dengan SASL/PLAIN dan SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -729,13 +718,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan perintah berikut untuk mengunduh templat berkas konfigurasi Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Dan atur parameter berikut:</p>
+<p>Buat berkas ` <code translate="no">user.yaml</code> ` di direktori yang sama dengan berkas ` <code translate="no">docker-compose.yaml</code> ` Anda, lalu atur parameter berikut di dalamnya. Milvus memuat ` <code translate="no">configs/user.yaml</code> ` setelah ` <code translate="no">configs/milvus.yaml</code>`, sehingga nilai-nilai di ` <code translate="no">user.yaml</code> ` akan menggantikan nilai default:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 

@@ -22,6 +22,7 @@ beta: Milvus 2.5.11+
     </button></h1><p><code translate="no">removepunct</code> 过滤器可从令牌流中移除包含标点符号或空格的令牌。当您希望进行更干净的文本处理，专注于有意义的内容词而非标点符号时，请使用此过滤器。</p>
 <div class="alert note">
 <p>该过滤器与<code translate="no">jieba</code> 、<code translate="no">lindera</code> 和<code translate="no">icu</code> 词法分析器配合使用时效果最佳，这些词法分析器会将标点符号作为独立的词元保留（例如，<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> 词法分析器在词法分析过程中会舍弃标点符号。<code translate="no">whitespace</code> 词法分析器则保留标点符号，包括词内标点。当与<code translate="no">whitespace</code> 结合使用时，<code translate="no">removepunct</code> 会移除包含标点符号或空格的整个词；它不会从词中剥离单个字符。</p>
+<p>某些分词器会将标点符号保留在单个词元内。例如，<code translate="no">icu</code> 将<code translate="no">don't</code> 、<code translate="no">3.5kg</code> 和<code translate="no">u.s.a</code> 分别分词为包含标点符号的单个词元，而<code translate="no">removepunct</code> 则会将其完全移除，导致相应的术语无法被搜索。 若要仅移除完全由标点符号和空格组成的词元，同时保留此类词元，请使用<a href="/docs/zh/regex-filter.md">正则表达式</a>过滤器，并指定表达式中必须包含至少一个非标点、非空格字符，例如<code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code> 。</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">配置<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,8 +96,8 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">removepunct</code> 过滤器作用于分词器生成的词项，因此必须与分词器配合使用。</p>
-<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection Schema时将其应用于<code translate="no">VARCHAR</code> 字段。这使Milvus能够使用指定的分析器处理该字段中的文本，从而实现高效的分词和过滤。详情请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">“使用示例”</a>。</p>
+<p><code translate="no">removepunct</code> 过滤器作用于分词器生成的术语，因此必须与分词器配合使用。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，您可以在定义Collection模式时将其应用于<code translate="no">VARCHAR</code> 字段。这使Milvus能够使用指定的分析器处理该字段中的文本，从而实现高效的分词和过滤。详情请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">“使用示例”</a>。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,11 +2,8 @@
 id: pattern-matching.md
 title: Musterabgleich
 summary: >-
-  Milvus unterstützt den Abgleich von Zeichenfolgenmustern mit
-  LIKE-Platzhaltermustern und RE2-regulären Ausdrücken. Verwenden Sie
-  Musterfilter, um Präfixe, Suffixe, Teilzeichenfolgen, strukturierte Codes,
-  E-Mail-Domänen, URL-Pfade und andere Zeichenfolgenmuster in VARCHAR-Feldern,
-  JSON-Zeichenfolgenpfaden oder ARRAY-Elementen abzugleichen.
+  Vergleiche Zeichenfolgenwerte mit LIKE-Platzhaltermustern oder RE2-regulären
+  Ausdrücken in skalaren Filtern.
 ---
 <h1 id="Pattern-Matching" class="common-anchor-header">Musterabgleich<button data-href="#Pattern-Matching" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,12 +20,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In agentenbasierten Suchanwendungen ergänzen sich Vektorsuche und Musterabgleich im Grep-Stil häufig gegenseitig. Die Vektorsuche liefert semantisch relevante Entitäten, während der Musterabgleich diese Ergebnisse anhand exakter Zeichenfolgenstrukturen wie Fehlercodes, Protokollpräfixen, E-Mail-Domänen, URL-Pfaden oder Identifikatoren eingrenzt.</p>
-<p>In Milvus können Sie diese Musterbeschränkungen in skalaren Filtern ausdrücken: mit „ <code translate="no">LIKE</code> “ für einfache Platzhalterabgleiche und mit „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ für <a href="https://github.com/google/re2/wiki/syntax">RE2-reguläre</a> Ausdrücke. Sie können diese Filter mit „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ oder der hybriden Suche kombinieren.</p>
+    </button></h1><p>Verwenden Sie „ <code translate="no">LIKE</code> “ für den Abgleich mit Platzhaltern und „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ für <a href="https://github.com/google/re2/wiki/syntax">RE2-reguläre</a> Ausdrücke. Diese skalaren Filter gleichen Zeichenfolgenstrukturen wie Fehlercodes, Präfixe, E-Mail-Domänen oder URL-Pfade in der „ <code translate="no">query</code> “, der „ <code translate="no">search</code> “ und der hybriden Suche ab.</p>
 <div class="alert note">
-<p>Auf dieser Seite wird der Musterabgleich in skalaren Filterausdrücken beschrieben, die von „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ und der hybriden Suche verwendet werden. Diese Ausdrücke werten Feldwerte aus und ändern die von einem Analysator erzeugten Token nicht. Informationen zum Filtern von Token während der Textanalyse finden Sie unter <a href="/docs/de/regex-filter.md">„Regex-Analysator-Filter</a>“.</p>
+<p>Diese Filter suchen nach Zeichenfolgenwerten. Sie ändern keine Analyzer-Token und aktivieren keine tokenbasierten Funktionen wie „ <code translate="no">TEXT_MATCH</code> “ und „ <code translate="no">PHRASE_MATCH</code> “. Informationen zu diesen Mechanismen finden Sie unter <a href="/docs/de/regex-filter.md">„Regex-Analyzer-Filter</a> “ und <a href="/docs/de/keyword-match.md">„Textabgleich</a> “.</p>
 </div>
-<p>Ausdrücke für die Mustererkennung werden im Parameter „ <code translate="no">filter</code> “ angegeben. Die folgende Abfrage findet beispielsweise Protokollmeldungen, die einen Fehlercode wie „ <code translate="no">E1001</code> “ enthalten:</p>
+<p>Ausdrücke für den Musterabgleich werden im Parameter „ <code translate="no">filter</code> “ angegeben. Die folgende Abfrage findet beispielsweise Protokollmeldungen, die einen Fehlercode wie „ <code translate="no">E1001</code> “ enthalten:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -182,10 +178,9 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;message&quot;, &quot;severity&quot;]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Beispiele auf dieser Seite konzentrieren sich auf den Ausdruck, der „ <code translate="no">filter</code> “ zugewiesen ist. Sie können dieselbe Filterausdruckssyntax in Milvus-Operationen verwenden, die einen skalaren Filter akzeptieren, wie z. B. „ <code translate="no">query</code> “, „ <code translate="no">search</code> “ und die hybride Suche.</p>
+<p>Die übrigen Beispiele zeigen den Ausdruck, der „ <code translate="no">filter</code> “ zugewiesen ist.</p>
 <div class="alert note">
-<p>Das Literal auf der linken Seite eines Filterausdrucks kann entweder ein Feldname einer Sammlung sein, wie z. B. <code translate="no">message</code>, <code translate="no">email</code> usw., die in den folgenden Beispielen verwendet werden, oder der Name eines StructArray-Unterfelds an einem bestimmten Elementindex, wie in <code translate="no">filter = 'struct[0][subfield] =~ &quot;E[0-9]{4}&quot;'</code>.</p>
-<p>Einzelheiten zur skalaren Filterung in einem StructArray-Feld finden Sie unter <a href="/docs/de/struct-array-operators.md">„StructArray-Operatoren</a>“.</p>
+<p>Der linke Operand kann ein Sammlungsfeld sein, wie z. B. „ <code translate="no">message</code> “, oder ein StructArray-Unterfeld an einem bestimmten Elementindex, wie z. B. „ <code translate="no">struct[0][subfield] =~ &quot;E[0-9]{4}&quot;</code> “. Siehe <a href="/docs/de/struct-array-operators.md">StructArray-Operatoren</a>.</p>
 </div>
 <h2 id="Supported-field-types" class="common-anchor-header">Unterstützte Feldtypen<button data-href="#Supported-field-types" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,16 +197,16 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Musterabgleich ist für Zeichenfolgenwerte verfügbar.</p>
+    </button></h2><p>Für Zeichenfolgenwerte ist Musterabgleich verfügbar.</p>
 <table>
 <thead>
-<tr><th>Ziel</th><th><code translate="no">LIKE</code></th><th>Regex- <code translate="no">=~</code> / <code translate="no">!~</code></th><th>Hinweise</th></tr>
+<tr><th>Ziel</th><th><code translate="no">LIKE</code></th><th>Regex <code translate="no">=~</code> / <code translate="no">!~</code></th><th>Hinweise</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">VARCHAR</code> Feld</td><td>Ja</td><td>Ja</td><td>Typisches Ziel für den Musterabgleich bei Zeichenfolgenfeldern.</td></tr>
-<tr><td><code translate="no">JSON</code> Pfad mit Typumwandlung „ <code translate="no">VARCHAR</code> “</td><td>Ja</td><td>Ja</td><td>Der JSON-Pfadwert muss eine Zeichenkette sein, damit eine Übereinstimmung erzielt wird. Wenn Sie zur Beschleunigung einen Index auf dem JSON-Pfad erstellen, setzen Sie „ <code translate="no">json_cast_type=&quot;varchar&quot;</code> “.</td></tr>
-<tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> element</td><td>Ja</td><td>Ja</td><td>Gibt ein bestimmtes Element anhand des Index an, z. B. „ <code translate="no">tags[0]</code> “. Beim Musterabgleich werden <strong>nicht</strong> alle Elemente durchsucht; er gilt nur für das Element am angegebenen Index.</td></tr>
-<tr><td>Numerische, boolesche, Vektor-, „ <code translate="no">TEXT</code> “- oder andere Nicht-<code translate="no">VARCHAR</code> -Ziele</td><td>Nein</td><td>Nein</td><td>Der Musterabgleich ist nur für „ <code translate="no">VARCHAR</code> “-Werte, JSON-Pfade, die zu Zeichenfolgen aufgelöst werden, oder indizierte „ <code translate="no">ARRAY&lt;VARCHAR&gt;</code> “-Elemente verfügbar.</td></tr>
+<tr><td><code translate="no">JSON</code> Pfad mit einem Zeichenfolgenwert</td><td>Ja</td><td>Ja</td><td>Positive Übereinstimmungen erfordern Zeichenfolgenwerte. Informationen zu den Einstellungen für Indexpfad und Typumwandlung finden Sie unter <a href="/docs/de/json-indexing.md#Understand-cast-types">„JSON-Indizierung</a>“.</td></tr>
+<tr><td><code translate="no">ARRAY&lt;VARCHAR&gt;</code> element</td><td>Ja</td><td>Ja</td><td>Sucht nach einem bestimmten Element anhand des Index, z. B. „ <code translate="no">tags[0]</code> “. Beim Musterabgleich werden <strong>nicht</strong> alle Elemente durchsucht; er gilt nur für das Element am angegebenen Index.</td></tr>
+<tr><td>Numerische, boolesche, Vektor-, „ <code translate="no">TEXT</code> “- oder andere Nicht-Zeichenfolgen-Ziele</td><td>Nein</td><td>Nein</td><td>Muster erfordern Zeichenfolgenwerte.</td></tr>
 </tbody>
 </table>
 <h2 id="Choose-LIKE-or-regex" class="common-anchor-header">Wählen Sie „LIKE“ oder „regex“<button data-href="#Choose-LIKE-or-regex" class="anchor-icon" translate="no">
@@ -229,8 +224,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wählen Sie den einfachsten Operator, der das gewünschte Muster ausdrückt.</p>
-<p>Wenn Sie eine exakte Zeichenfolgenübereinstimmung benötigen, empfehlen wir Ihnen, „ <code translate="no">==</code> “ anstelle des Musterabgleichs zu verwenden. Verwenden Sie „ <code translate="no">LIKE</code> “ oder „regex“ nur, wenn der Filter einem Muster entsprechen muss.</p>
+    </button></h2><p>Verwenden Sie „ <code translate="no">==</code> “ für die exakte Zeichenfolgenübereinstimmung; andernfalls wählen Sie einen Operator aus der folgenden Tabelle:</p>
 <table>
 <thead>
 <tr><th>Anforderung</th><th>Empfohlener Operator</th><th>Beispiel</th><th>Beschreibung</th></tr>
@@ -242,10 +236,9 @@ curl --request POST \
 <tr><td>Einfache „Enthält“-Übereinstimmung</td><td><code translate="no">LIKE</code></td><td><code translate="no">description LIKE &quot;%vector database%&quot;</code></td><td>Erkennt Werte, die an beliebiger Stelle im String „ <code translate="no">vector database</code> “ enthalten.</td></tr>
 <tr><td>Strukturierten Code oder Muster mit fester Länge abgleichen</td><td><code translate="no">=~</code></td><td><code translate="no">code =~ &quot;E[0-9]{4}&quot;</code></td><td>Sucht nach Zeichenfolgen, die – unter Berücksichtigung der Groß-/Kleinschreibung – „ <code translate="no">E</code> “ gefolgt von vier Ziffern enthalten, z. B. „ <code translate="no">E1001</code> “.</td></tr>
 <tr><td>Musterabgleich ohne Berücksichtigung der Groß-/Kleinschreibung</td><td><code translate="no">=~</code> mit <code translate="no">(?i)</code></td><td><code translate="no">message =~ &quot;(?i)error&quot;</code></td><td>Erkennt „ <code translate="no">error</code> “, „ <code translate="no">ERROR</code> “ oder andere Varianten mit Groß- und Kleinschreibung.</td></tr>
-<tr><td>Werte ausschließen, die einem regulären Ausdruck entsprechen</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Schließt Zeichenfolgen aus, die mit „ <code translate="no">DEBUG</code> “ beginnen.</td></tr>
+<tr><td>Werte ausschließen, die einem Regex-Muster entsprechen</td><td><code translate="no">!~</code></td><td><code translate="no">message !~ &quot;^DEBUG&quot;</code></td><td>Schließt Zeichenfolgen aus, die mit „ <code translate="no">DEBUG</code> “ beginnen.</td></tr>
 </tbody>
 </table>
-<p>Verwenden Sie „ <code translate="no">LIKE</code> “ für den einfachen Platzhalterabgleich. Verwenden Sie reguläre Ausdrücke, wenn das Muster Zeichenklassen, Wiederholungen, Alternativen wie „ <code translate="no">error|failed</code> “, Anker oder einen Abgleich ohne Berücksichtigung der Groß-/Kleinschreibung erfordert.</p>
 <h2 id="Use-LIKE" class="common-anchor-header">Verwenden Sie LIKE<button data-href="#Use-LIKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,7 +260,7 @@ curl --request POST \
 <tr><th>Platzhalter</th><th>Beschreibung</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">%</code></td><td>Übereinstimmung mit null oder mehr Zeichen.</td></tr>
+<tr><td><code translate="no">%</code></td><td>Stimmt mit null oder mehr Zeichen überein.</td></tr>
 <tr><td><code translate="no">_</code></td><td>Entspricht genau einem Zeichen.</td></tr>
 </tbody>
 </table>
@@ -314,8 +307,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>Verwenden Sie „ <code translate="no">LIKE</code> “ für Präfix-, Suffix-, „enthält“- und Einzelzeichen-Übereinstimmungen an einer festen Position. „ <code translate="no">LIKE</code> “ unterstützt keine Zeichenklassen wie „ <code translate="no">[0-9]</code> “, keine Alternativen wie „ <code translate="no">error|failed</code> “, keine Wiederholungsanzahlen wie „ <code translate="no">{4}</code> “, keine Anker wie „ <code translate="no">^</code> “ oder „ <code translate="no">$</code> “ und keine Flags für die Groß-/Kleinschreibung wie „ <code translate="no">(?i)</code> “. Verwenden Sie für diese Muster reguläre Ausdrücke (Regex).</p>
-<p>Verwenden Sie „ <code translate="no">==</code> “ für die exakte Übereinstimmung des gesamten Strings. Verwenden Sie „ <code translate="no">LIKE</code> “ nur, wenn der Filter eine Übereinstimmung mit Platzhaltern erfordert.</p>
-<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escaping von Platzhaltern in einem LIKE-Muster<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
+<h3 id="Escaping-wildcards-in-a-LIKE-pattern" class="common-anchor-header">Escapen von Platzhaltern in einem LIKE-Muster<button data-href="#Escaping-wildcards-in-a-LIKE-pattern" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -330,9 +322,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In „ <code translate="no">LIKE</code> “-Mustern entspricht „ <code translate="no">%</code> “ null oder mehr Zeichen und „ <code translate="no">_</code> “ genau einem Zeichen. Um „ <code translate="no">%</code> “, „ <code translate="no">_</code> “ oder „ <code translate="no">\</code> “ wörtlich abzugleichen, müssen Sie das Zeichen mit einem Backslash (<code translate="no">\</code>) escapen:</p>
+    </button></h3><p>Um „ <code translate="no">%</code> “, „ <code translate="no">_</code> “ oder „ <code translate="no">\</code> “ wörtlich abzugleichen, müssen Sie das Zeichen mit einem Backslash (<code translate="no">\</code>) escapen:</p>
 <ul>
-<li><code translate="no">name LIKE r&quot;\%&quot;</code> entspricht dem literalen Wert „ <code translate="no">%</code> “.</li>
+<li><code translate="no">name LIKE r&quot;\%&quot;</code> stimmt mit dem literalen Wert „ <code translate="no">%</code> “ überein.</li>
 <li><code translate="no">name LIKE r&quot;\_%&quot;</code> passt auf Werte, die mit dem Literal „ <code translate="no">_</code> “ beginnen.</li>
 <li><code translate="no">name LIKE r&quot;\\%&quot;</code> passt auf Werte, die mit einem literalen Backslash beginnen.</li>
 </ul>
@@ -352,14 +344,13 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie Regex-Filter, wenn das Muster Funktionen regulärer Ausdrücke wie Zeichenklassen, Wiederholungen, Alternativen, Anker oder groß-/kleinschreibungsunabhängige Übereinstimmungen erfordert. Milvus wendet einen <a href="https://github.com/google/re2/wiki/syntax">RE2-regulären</a> Ausdruck auf einen Zeichenfolgenwert an.</p>
-<p>Die rechte Seite von „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ muss ein String-Literal sein.</p>
+    </button></h2><p>Regex unterstützt Zeichenklassen, Wiederholungen, Alternativen, Anker und die groß-/kleinschreibungsunabhängige Übereinstimmung. Der rechte Operand von „ <code translate="no">=~</code> “ oder „ <code translate="no">!~</code> “ muss ein String-Literal sein:</p>
 <table>
 <thead>
 <tr><th>Operator</th><th>Bedeutung</th><th>Beispiel</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">=~</code></td><td>Passt auf Werte, die dem Regex-Muster entsprechen.</td><td><code translate="no">filter = 'message =~ &quot;E[0-9]{4}&quot;'</code></td></tr>
+<tr><td><code translate="no">=~</code></td><td>Findet Werte, die dem Regex-Muster entsprechen.</td><td><code translate="no">filter = 'message =~ &quot;E[0-9]{4}&quot;'</code></td></tr>
 <tr><td><code translate="no">!~</code></td><td>Schließt Werte aus, die dem Regex-Muster entsprechen.</td><td><code translate="no">filter = 'message !~ &quot;^DEBUG&quot;'</code></td></tr>
 </tbody>
 </table>
@@ -378,8 +369,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Rohzeichenfolgen werden für reguläre Ausdrücke empfohlen, die Backslashes enthalten. In einer Rohzeichenfolge, die als „ <code translate="no">r&quot;...&quot;</code> “ oder „ <code translate="no">r'...'</code> “ geschrieben wird, werden Backslashes unverändert an die Regex-Engine übergeben. Dadurch entfällt die zusätzliche Escape-Behandlung, die bei gewöhnlichen Zeichenfolgen erforderlich ist.</p>
-<p>Beispiel:</p>
+    </button></h3><p>Verwenden Sie Raw-String-Literale (<code translate="no">r&quot;...&quot;</code> oder <code translate="no">r'...'</code>), um Backslashes unverändert an RE2 zu übergeben und so die zusätzliche Escape-Sequenz in gewöhnlichen Filter-Strings zu vermeiden:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -406,8 +396,8 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;filename =~ r&quot;\.json$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dies passt auf Zeichenfolgen, die mit „ <code translate="no">.json</code> “ enden, wie beispielsweise „ <code translate="no">report.json</code> “.</p>
-<p>Ohne eine „Raw“-Zeichenkette im Milvus-Filterausdruck verarbeiten gewöhnliche String-Literale Escape-Sequenzen, bevor das Regex-Muster ausgewertet wird. Für escaped Literalzeichen sind daher möglicherweise zusätzliche Backslashes in der Zeichenkette der Host-Sprache erforderlich.</p>
+<p>Dies passt auf Zeichenfolgen, die mit ` <code translate="no">.json</code>` enden, wie beispielsweise ` <code translate="no">report.json</code>`.</p>
+<p>Ohne eine „Raw“-Zeichenkette im Milvus-Filterausdruck werden in gewöhnlichen Zeichenfolgenliteralen Escape-Sequenzen verarbeitet, bevor das Regex-Muster ausgewertet wird. Für escaped Literalzeichen sind daher möglicherweise zusätzliche Backslashes in der Zeichenfolge der Host-Sprache erforderlich.</p>
 <h3 id="Common-regex-patterns" class="common-anchor-header">Gängige Regex-Muster<button data-href="#Common-regex-patterns" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -423,7 +413,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die folgenden Beispiele verwenden gängige RE2-Syntax in Milvus-Filterausdrücken. Die vollständige Regex-Syntax finden Sie in der <a href="https://github.com/google/re2/wiki/syntax">RE2-Syntaxreferenz</a>.</p>
+    </button></h3><p>Die folgenden Beispiele verwenden gängige RE2-Syntax in Milvus-Filterausdrücken. Die vollständige Syntax für reguläre Ausdrücke finden Sie in der <a href="https://github.com/google/re2/wiki/syntax">RE2-Syntaxreferenz</a>.</p>
 <table>
 <thead>
 <tr><th>Anforderung</th><th>Muster</th><th>Filterbeispiel</th></tr>
@@ -493,8 +483,10 @@ curl --request POST \
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;email =~ &quot;@gmail\\.com$&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Hinweis: Milvus-Regex-Filter folgen der RE2-Syntax. Wenn ein Regex-Muster eine Syntax verwendet, die RE2 nicht unterstützt, oder anderweitig ungültig ist, lehnt Milvus den Filterausdruck ab. Einzelheiten zu Regex-Metazeichen, Flags und dem Abgleichverhalten finden Sie in der <a href="https://github.com/google/re2/wiki/syntax">RE2-Syntaxreferenz</a>.</p>
-<h3 id="Matching-behavior" class="common-anchor-header">Übereinstimmungsverhalten<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Milvus lehnt ungültige Regex-Muster und Syntax ab, die von <a href="https://github.com/google/re2/wiki/syntax">RE2</a> nicht unterstützt werden.</p>
+</div>
+<h3 id="Matching-behavior" class="common-anchor-header">Verhalten bei der Übereinstimmungssuche<button data-href="#Matching-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -509,8 +501,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>Übereinstimmung mit Teilzeichenfolgen</strong></p>
-<p>Der Regex-Abgleich in Milvus verwendet die Semantik von Teilzeichenfolgen. Das Muster muss nicht mit dem gesamten Feldwert übereinstimmen. Der folgende Filter passt beispielsweise sowohl auf „ <code translate="no">E1001</code> “ als auch auf „ <code translate="no">failed with E1001 after retry</code> “:</p>
+    </button></h3><p><strong>Teilzeichenfolgenabgleich</strong></p>
+<p>Der Regex-Abgleich in Milvus verwendet die Semantik von Teilzeichenfolgen. Das Muster muss nicht mit dem gesamten Feldwert übereinstimmen. Der folgende Filter findet beispielsweise sowohl „ <code translate="no">E1001</code> “ als auch „ <code translate="no">failed with E1001 after retry</code> “:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -610,7 +602,7 @@ filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</sp
 <tr><td><code translate="no">json_field[&quot;path&quot;] !~ &quot;pattern&quot;</code></td><td>Ja</td><td>Gibt Entitäten zurück, bei denen der Pfad fehlt, null ist, kein String ist oder ein String ist, der nicht dem regulären Ausdruck entspricht.</td></tr>
 </tbody>
 </table>
-<h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Beschleunigung des Musterabgleichs durch Indizes<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
+<h2 id="Accelerate-pattern-matching-with-indexes" class="common-anchor-header">Beschleunigung des Musterabgleichs mit Indizes<button data-href="#Accelerate-pattern-matching-with-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -625,16 +617,7 @@ filter=<span class="hljs-string">&#x27;code =~ &quot;^E[0-9]{4}$&quot;&#x27;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus unterstützt mehrere Indextypen für Zeichenfolgenfelder, die zusammen mit „ <code translate="no">LIKE</code> “ und Regex-Filtern für „ <code translate="no">VARCHAR</code> “-Felder oder JSON-Zeichenfolgenpfade verwendet werden können, z. B. „ <code translate="no">NGRAM</code> “, „ <code translate="no">STL_SORT</code> “, „ <code translate="no">INVERTED</code> “ und „ <code translate="no">BITMAP</code> “. Der Musterabgleich funktioniert zwar auch ohne Index, doch ein Index kann die Leistung bei großen Datensätzen verbessern.</p>
-<p>Die Wirksamkeit des Indexes hängt vom Musterausdruck ab, davon, ob Milvus feste Literal-Teilstrings extrahieren kann, sowie von der Kardinalität und der Verteilung des Zielfeldes. Präfixmuster wie <code translate="no">name LIKE &quot;Prod%&quot;</code> profitieren möglicherweise von anderen Indexstrategien als Infix- oder Suffixmuster wie <code translate="no">description LIKE &quot;%vector%&quot;</code> oder <code translate="no">filename LIKE &quot;%.json&quot;</code>.</p>
-<p>Verwenden Sie die folgende Tabelle als Ausgangspunkt und führen Sie anschließend einen Benchmark mit Ihrer eigenen Arbeitslast durch:</p>
-<table>
-<thead>
-<tr><th>Muster oder Datenmerkmal</th><th>Zu berücksichtigender Index</th><th>Anmerkungen</th></tr>
-</thead>
-<tbody>
-<tr><td>Enthält feste Literal-Teilstrings, wie z. B. <code translate="no">message =~ &quot;error.*timeout&quot;</code> oder <code translate="no">message LIKE &quot;%database%&quot;</code></td><td><code translate="no">NGRAM</code></td><td>Hilfreich, wenn Milvus aussagekräftige Literal-Teilstrings aus dem Muster extrahieren kann. Weitere Informationen finden Sie unter <a href="/docs/de/ngram.md">NGRAM</a>.</td></tr>
-<tr><td>Präfix-, exakte oder gleichheitsähnliche Zeichenfolgenfilter, insbesondere bei Feldern mit geringer bis mittlerer Kardinalität</td><td><code translate="no">STL_SORT</code>, „ <code translate="no">INVERTED</code> “ oder <code translate="no">BITMAP</code></td><td>Können effektiver sein, wenn das Feld wiederholte Werte enthält oder wenn der Filter nahe an einer exakten Übereinstimmung liegt. Weitere Informationen finden Sie unter <a href="/docs/de/stl-sort.md">STL_SORT</a>, <a href="/docs/de/inverted.md">INVERTED</a> und <a href="/docs/de/bitmap.md">BITMAP</a>.</td></tr>
-<tr><td>Regex-Muster ohne feste Literale oder Muster, die von Zeichenklassen, kurzen Tokens oder Platzhaltern dominiert werden</td><td>Führen Sie einen Benchmark durch, bevor Sie sich auf die Indexbeschleunigung verlassen</td><td>Diese Muster bieten möglicherweise nur eine begrenzte Indexselektivität und können auf umfassendere Scans zurückgreifen.</td></tr>
-</tbody>
-</table>
+    </button></h2><p>Der Musterabgleich funktioniert auch ohne skalaren Index. Informationen zu Beschleunigungsoptionen und deren Voraussetzungen finden Sie unter <a href="/docs/de/scalar_index.md#String-pattern-indexes">„Auswahl von Zeichenfolgenmuster-Indizes</a>“. Für JSON-Pfad-Indizes beachten Sie bitte die <a href="/docs/de/json-indexing.md#Index-requirements">JSON-spezifischen Voraussetzungen</a>.</p>
+<div class="alert note">
+<p>Die Abfrageplanung kann einen LIKE-Ausdruck ohne Platzhalter auf Gleichheit vereinfachen oder einen einfachen verankerten regulären Ausdruck auf Gleichheit, Präfix- oder Suffixübereinstimmung. Beispielsweise wird „ <code translate="no">name =~ &quot;^abc$&quot;</code> “ zu einem Gleichheitstest und folgt der Unterstützung für Gleichheitsabfragen. Überprüfen Sie die Indexunterstützung für die Operation nach dieser Vereinfachung, nicht nur für den im ursprünglichen Ausdruck geschriebenen Operator.</p>
+</div>

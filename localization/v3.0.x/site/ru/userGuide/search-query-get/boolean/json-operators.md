@@ -7,8 +7,8 @@ summary: >-
   структурированными данными. Эти операторы обеспечивают высокоэффективный поиск
   по документам JSON, позволяя извлекать объекты на основе определённых
   элементов, значений или условий в полях JSON. В этом разделе вы узнаете, как
-  использовать операторы, специфичные для JSON, в Milvus; при этом будут
-  приведены практические примеры, иллюстрирующие их функциональность.
+  использовать специальные операторы JSON в Milvus, а также увидите практические
+  примеры, иллюстрирующие их функциональность.
 ---
 <h1 id="JSON-Operators" class="common-anchor-header">Операторы JSON<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -27,7 +27,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus поддерживает расширенные операторы для запросов и фильтрации полей JSON, что делает их идеальным инструментом для управления сложными структурированными данными. Эти операторы обеспечивают высокоэффективный поиск по документам JSON, позволяя извлекать сущности на основе определенных элементов, значений или условий в полях JSON. В этом разделе вы узнаете, как использовать специфические для JSON операторы в Milvus, а также увидите практические примеры, иллюстрирующие их функциональность.</p>
 <div class="alert note">
-<p>Поля JSON не могут обрабатывать сложные вложенные структуры и рассматривают все вложенные структуры как простые строки. Поэтому при работе с полями JSON рекомендуется избегать чрезмерно глубокого вложения и обеспечивать максимально плоскую структуру данных для оптимальной производительности.</p>
+<p>Поля JSON не могут обрабатывать сложные вложенные структуры и рассматривают все вложенные структуры как простые строки. Поэтому при работе с полями JSON рекомендуется избегать чрезмерно глубокого вложения и следить за тем, чтобы ваши структуры данных были как можно более плоскими для обеспечения оптимальной производительности.</p>
 </div>
 <h2 id="Available-JSON-Operators" class="common-anchor-header">Доступные операторы JSON<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
     </button></h2><p>Milvus предоставляет несколько мощных операторов JSON, которые помогают фильтровать и выполнять запросы к данным JSON. К этим операторам относятся:</p>
 <ul>
 <li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Фильтрует сущности, в поле которых встречается указанное JSON-выражение.</p></li>
-<li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: Гарантирует, что все элементы указанного выражения JSON присутствуют в поле.</p></li>
+<li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: Гарантирует, что все элементы указанного JSON-выражения присутствуют в поле.</p></li>
 <li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: Фильтрует сущности, в поле которых присутствует хотя бы один элемент JSON-выражения.</p></li>
 </ul>
 <p>Рассмотрим эти операторы на примерах, чтобы понять, как их можно применять в реальных сценариях.</p>
@@ -119,7 +119,7 @@ filter=<span class="hljs-string">&#x27;json_contains(product[&quot;tags&quot;], 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Оператор <code translate="no">json_contains_all</code> гарантирует, что все элементы указанного JSON-выражения присутствуют в целевом поле. Он особенно полезен, когда необходимо сопоставить несколько значений в массиве JSON.</p>
+    </button></h2><p>Оператор <code translate="no">json_contains_all</code> гарантирует, что все элементы указанного выражения JSON присутствуют в целевом поле. Он особенно полезен, когда необходимо сопоставить несколько значений в массиве JSON.</p>
 <p><strong>Пример</strong></p>
 <p>Продолжая рассмотрение сценария с тегами товаров: если вам нужно найти все товары, имеющие теги <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> и <code translate="no">&quot;new&quot;</code>, можно использовать оператор <code translate="no">json_contains_all</code>.</p>
 <div class="multipleCode">
@@ -209,4 +209,4 @@ std::string filter = <span class="hljs-string">&quot;json_contains_any(product[\
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 filter=<span class="hljs-string">&#x27;json_contains_any(product[&quot;tags&quot;], [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом случае Milvus вернет все товары, у которых есть хотя бы один из тегов из списка <code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code>. Даже если у товара есть только один из этих тегов, он будет включён в результат.</p>
+<p>В этом случае Milvus вернёт все товары, у которых есть хотя бы один из тегов из списка <code translate="no">[&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;]</code>. Даже если у товара есть только один из этих тегов, он будет включён в результат.</p>

@@ -55,7 +55,7 @@ beta: Milvus Backup 0.6.x
       </svg>
     </button></h2><p>Creare <a href="/docs/it/milvus_backup_0_6_cli.md#Prepare-configuration-file">un file</a>` <code translate="no">configs/backup.yaml</code> ` utilizzando l’esempio v2 riportato in <a href="/docs/it/milvus_backup_0_6_cli.md#Prepare-configuration-file">Preparare il file di configurazione</a>. Configurare l’accesso a Milvus, allo storage dell’istanza e alla destinazione del backup. Il server Milvus deve inoltre poter accedere allo storage di backup per le operazioni di snapshot.</p>
 <p>Se si dispone di un file v1, questo rimane caricabile. Consultare la sezione " <a href="/docs/it/milvus_backup_upgrade.md#Migrate-the-configuration">Migrazione della configurazione</a> " prima di modificarne lo schema o le variabili d’ambiente.</p>
-<p>Dalla directory contenente il file binario, esaminare la configurazione e verificare la connettività:</p>
+<p>Dalla directory contenente il file binario, esamina la configurazione e verifica la connettività:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
 ./milvus-backup check --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -172,7 +172,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
     &quot;collection_suffix&quot;: &quot;_bak&quot;
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Il campo HTTP <code translate="no">collection_names</code> seleziona i nomi <strong>presenti nel backup</strong>, prima che venga applicato il suffisso. Questa richiesta seleziona <code translate="no">coll</code> e crea <code translate="no">coll_bak</code>. L’opzione <code translate="no">--filter</code> della CLI, invece, abbina i nomi di destinazione dopo la ridenominazione; non sostituire <code translate="no">coll_bak</code> in questo campo HTTP.</p>
+<p>Il campo HTTP ` <code translate="no">collection_names</code> ` seleziona i nomi <strong>presenti nel backup</strong>, prima che venga applicato il suffisso. Questa richiesta seleziona ` <code translate="no">coll</code> ` e crea ` <code translate="no">coll_bak</code>`. L’opzione ` <code translate="no">--filter</code> ` della CLI, invece, trova corrispondenze con i nomi di destinazione dopo la ridenominazione; non sostituire ` <code translate="no">coll_bak</code> ` in questo campo HTTP.</p>
 <p>Copiare <code translate="no">data.id</code> dalla risposta di ripristino e interrogare l’attività:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>

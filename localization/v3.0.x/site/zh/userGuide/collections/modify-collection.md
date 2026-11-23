@@ -1,9 +1,9 @@
 ---
 id: modify-collection.md
-title: 修改Collection
+title: 修改 Collection
 summary: 您可以重命名一个Collection或更改其设置。本页面主要介绍如何修改Collection。
 ---
-<h1 id="Modify-Collection" class="common-anchor-header">修改Collection<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
+<h1 id="Modify-Collection" class="common-anchor-header">修改 Collection<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -301,11 +301,15 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>当 Collection 已启用 AutoID 时，是否允许该 Collection 接受用户提供的primary key值。</p><ul><li><p>当设置为<strong>“true”时</strong>：插入、更新或插入（upsert）以及批量导入操作会使用用户提供的primary key（如有）；否则，primary key值将自动生成。</p></li><li><p>当设置为<strong>“false”时</strong>：用户提供的primary key值将被拒绝或忽略，primary key值始终自动生成。默认值为<strong>“false”</strong>。</p></li></ul></td>
+     <td><p>当 Collection 已启用 AutoID 时，是否允许该 Collection 接受用户提供的主键值。</p><ul><li><p>当设置为<strong>“true”时</strong>：插入、更新或插入（upsert）以及批量导入操作会使用用户提供的primary key（如有）；否则，primary key值将自动生成。</p></li><li><p>当设置为<strong>“false”时</strong>：用户提供的primary key值将被拒绝或忽略，primary key值始终自动生成。默认值为<strong>“false”</strong>。</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>指定在处理与时间相关的操作（尤其是<code translate="no">TIMESTAMPTZ</code> 字段）时，该Collection的默认时区。时间戳在内部以UTC格式存储，Milvus会根据此设置转换值以供显示和比较。如果设置了此选项，Collection时区将覆盖数据库的默认时区；查询的时区参数可以暂时覆盖这两者。 该值必须是有效的<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANA 时区标识符</a>（例如<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong> 或<strong>UTC</strong>）。有关如何使用<code translate="no">TIMESTAMPTZ</code> 字段的详细信息，请参阅<a href="/docs/zh/timestamptz-field.md">TIMESTAMPTZ 字段</a>。</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>更改Collection的一致性级别。新级别适用于后续对该Collection且未自行指定一致性级别的搜索和查询；按请求设置仍具有优先级。该值必须为<strong>Strong</strong>、<strong>Session</strong>、<strong>Bounded</strong>（默认）或<strong>Eventually</strong> 之一。更改此属性无需释放Collection。 有关详细信息，请参阅<a href="/docs/zh/tune_consistency.md">“一致性级别</a>”。</p></td>
    </tr>
 </table>
 <h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">示例 1：设置 Collection 级 TTL<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
@@ -427,7 +431,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下代码片段将现有的<code translate="no">TIMESTAMPTZ</code> 字段（<code translate="no">expire_at</code> ）指定为实体级TTL的TTL字段。集合中必须已包含一个同名的<code translate="no">TIMESTAMPTZ</code> 字段，且不得设置<code translate="no">collection.ttl.seconds</code> ——这两种TTL模式互斥。</p>
+    </button></h3><p>以下代码片段将现有的<code translate="no">TIMESTAMPTZ</code> 字段（<code translate="no">expire_at</code> ）指定为实体级TTL的TTL字段。该Collection必须已包含一个同名的<code translate="no">TIMESTAMPTZ</code> 字段，且不得设置<code translate="no">collection.ttl.seconds</code> ——这两种TTL模式互斥。</p>
 <p>有关完整的实体级 TTL 工作流（Schema 设置、插入、查询、刷新、删除），请参阅《<a href="/docs/zh/set-collection-ttl.md">设置实体级 TTL》</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1024,6 +1028,94 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
         &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-8-Alter-the-consistency-level" class="common-anchor-header">示例 8：更改一致性级别<button data-href="#Example-8-Alter-the-consistency-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下代码片段将现有Collection的一致性级别更改为<strong>“最终一致”</strong>（<strong>Eventually）</strong>。新级别适用于此后对该Collection进行的、未显式设置一致性级别的搜索和查询；但每次请求的设置仍具有优先级。有关详细信息，请参阅《<a href="/docs/zh/tune_consistency.md">一致性级别</a>》。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">alter_collection_properties</span>(
+        AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                                   .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;consistency_level&quot;</span>] = <span class="hljs-string">&quot;Eventually&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

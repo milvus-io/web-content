@@ -457,7 +457,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Для ускорения скалярной фильтрации по полям JSON Milvus поддерживает <strong>индексирование по путям JSON</strong>, при котором индексируются определенные пути JSON с объявленным скалярным типом.</p>
 <div class="alert note">
-<p>Индексирование полей JSON <strong>не</strong> является <strong>обязательным</strong>. Вы по-прежнему можете выполнять запросы или фильтрацию по путям JSON без индекса, однако это может привести к снижению производительности из-за поиска методом перебора.</p>
+<p>Индексирование полей JSON <strong>не</strong> является <strong>обязательным</strong>. Вы по-прежнему можете выполнять запросы или фильтрацию по путям JSON без индекса, но это может привести к снижению производительности из-за поиска методом перебора.</p>
 </div>
 <h3 id="JSON-path-indexing" class="common-anchor-header">Индексирование по JSON-путям<button data-href="#JSON-path-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -905,7 +905,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>JSON-поле</strong> определяется схемой. Вы должны явно объявить поле в схеме.</p></li>
+<li><p><strong>Поле JSON</strong> определяется схемой. Вы должны явно объявить поле в схеме.</p></li>
 <li><p><strong>Динамическое поле</strong> представляет собой скрытый объект JSON (<code translate="no">$meta</code>), в котором автоматически хранятся все поля, не определённые в схеме.</p></li>
 </ul>
 <p>Оба поддерживают вложенные структуры и индексирование по JSON-путям, но динамические поля больше подходят для необязательных или развивающихся структур данных.</p>
@@ -1005,7 +1005,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <li><p><strong>Числовая индексация</strong>:</p>
 <p>Если индекс создан с помощью ` <code translate="no">json_cast_type=&quot;double&quot;</code>`, то только числовые условия фильтрации (например, ` <code translate="no">&gt;</code>`, ` <code translate="no">&lt;</code>`, ` <code translate="no">== 42</code>`) будут использовать этот индекс. Нечисловые условия могут привести к переходу на полное сканирование.</p></li>
 <li><p><strong>Индексирование строк</strong>:</p>
-<p>Если индекс использует <code translate="no">json_cast_type=&quot;varchar&quot;</code>, то только строковые условия фильтрации будут использовать этот индекс; для других типов данных может применяться полное сканирование.</p></li>
+<p>Если в индексе используется <code translate="no">json_cast_type=&quot;varchar&quot;</code>, то индекс будет использоваться только при строковых условиях фильтрации; для других типов данных может применяться полный просмотр.</p></li>
 <li><p><strong>Булева индексация</strong>:</p>
 <p>Индексирование по булевым значениям работает аналогично индексированию строк: индекс используется только в том случае, если условие строго соответствует значению true или false.</p></li>
 </ul>
@@ -1025,7 +1025,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
         ></path>
       </svg>
     </button></h3><p>Milvus хранит все индексированные числовые значения в формате double.</p>
-<p>Если числовое значение превышает <strong>2^53</strong>, может произойти потеря точности. Эта потеря точности может привести к тому, что фильтрующие запросы не будут точно соответствовать значениям, выходящим за пределы диапазона.</p>
+<p>Если числовое значение превышает <strong>2^53</strong>, может произойти потеря точности. Эта потеря точности может привести к тому, что фильтрующие запросы не будут точно сопоставляться со значениями, выходящими за пределы диапазона.</p>
 <h3 id="Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="common-anchor-header">Можно ли создать несколько индексов на одном и том же пути JSON с разными типами приведения?<button data-href="#Can-I-create-multiple-indexes-on-the-same-JSON-path-with-different-cast-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1058,7 +1058,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
         ></path>
       </svg>
     </button></h3><p>Несогласованные типы данных в сущностях могут привести к <strong>частичной индексации</strong>. Например, если <code translate="no">metadata[&quot;price&quot;]</code> хранится как число (<code translate="no">99.99</code>) и как строка (<code translate="no">&quot;99.99&quot;</code>), а индекс определен с помощью <code translate="no">json_cast_type=&quot;double&quot;</code>, индексироваться будут только числовые значения. Записи в виде строк будут пропущены и не появятся в результатах фильтрации.</p>
-<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Можно ли использовать фильтры с типом, отличным от типа преобразования индекса?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">Можно ли использовать фильтры с типом, отличным от типа индекса?<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1073,4 +1073,4 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Если в выражении фильтра используется тип, отличный от типа преобразования индекса ( <code translate="no">json_cast_type</code>), система <strong>не</strong> будет <strong>использовать индекс</strong> и, если позволяют данные, может перейти к более медленному перебору по методу «грубой силы». Для обеспечения максимальной производительности всегда согласовывайте выражение фильтра с типом преобразования индекса.</p>
+    </button></h3><p>Если в выражении фильтра используется тип, отличный от типа преобразования индекса ( <code translate="no">json_cast_type</code>), система <strong>не</strong> будет <strong>использовать индекс</strong> и, если позволяют данные, может перейти к более медленному полному сканированию. Для обеспечения максимальной производительности всегда согласовывайте выражение фильтра с типом преобразования индекса.</p>

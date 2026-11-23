@@ -309,10 +309,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La création d’un index sur un champ spécifique accélère la recherche sur ce champ. Un index enregistre l’ordre des entités au sein d’une collection. Comme le montrent les extraits de code suivants, vous pouvez utiliser <code translate="no">metric_type</code> et <code translate="no">index_type</code> pour choisir les méthodes appropriées permettant à Milvus d’indexer un champ et de mesurer les similitudes entre les représentations vectorielles.</p>
-<p>Sur Milvus, vous pouvez utiliser <code translate="no">AUTOINDEX</code> comme type d’index pour tous les champs vectoriels, et l’un des types suivants : <code translate="no">COSINE</code>, <code translate="no">L2</code> ou <code translate="no">IP</code> comme type de métrique, en fonction de vos besoins.</p>
-<p>Comme le montre l’extrait de code ci-dessus, vous devez définir à la fois le type d’index et le type de métrique pour les champs vectoriels, et uniquement le type d’index pour les champs scalaires. Les index sont obligatoires pour les champs vectoriels, et il est recommandé de créer des index sur les champs scalaires fréquemment utilisés dans les conditions de filtrage.</p>
-<p>Pour plus de détails, consultez les sections « <a href="/docs/fr/index-vector-fields.md">Indexer des champs vectoriels</a> » et « <a href="/docs/fr/index-scalar-fields.md">Indexer des champs scalaires</a> ».</p>
+    </button></h2><p>Les exemples ci-dessous préparent des définitions d’index pour les champs du schéma. Choisissez un index vectoriel et une métrique compatibles avec le type de données du champ vectoriel ; voir <a href="/docs/fr/index-explained.md">Explication des index</a> et <a href="/docs/fr/metric.md">Métriques de similarité</a>.</p>
+<p>Les champs vectoriels nécessitent des index avant leur chargement. Les index scalaires sont facultatifs ; voir « <a href="/docs/fr/scalar_index.md">Index scalaire</a> » pour la compatibilité des champs et la sélection explicite ou automatique des types.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1076,7 +1074,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si les données d’une collection doivent être supprimées au bout d’une période donnée, pensez à définir son délai de vie (Time-To-Live, TTL) en secondes. Une fois le TTL écoulé, Milvus supprime les entités de la collection. La suppression est asynchrone, ce qui signifie que les recherches et les requêtes restent possibles avant que la suppression ne soit terminée.</p>
+    </button></h3><p>Si les données d’une collection doivent être supprimées au bout d’une période donnée, pensez à définir leur durée de vie (Time-To-Live, TTL) en secondes. Une fois le délai TTL écoulé, Milvus supprime les entités de la collection. La suppression est asynchrone, ce qui signifie que les recherches et les requêtes restent possibles avant que la suppression ne soit terminée.</p>
 <p>L'extrait de code suivant définit la durée de vie (TTL) sur un jour (86 400 secondes). Il est recommandé de définir la durée de vie (TTL) sur au moins deux jours.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

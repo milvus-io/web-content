@@ -25,7 +25,7 @@ summary: >-
 <ul>
 <li>Os dados forem importados de sistemas externos que permitem valores em falta.</li>
 <li>Alguns metadados forem opcionais ou estiverem disponíveis apenas para uma parte do conjunto de dados.</li>
-<li>As representações vetoriais forem geradas de forma assíncrona e inseridas posteriormente.</li>
+<li>As representações vetoriais são geradas de forma assíncrona e inseridas posteriormente.</li>
 </ul>
 <h2 id="Limits" class="common-anchor-header">Limitações<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,8 +43,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Os campos vetoriais que permitem valores NULL não suportam expressões de filtro do tipo « <code translate="no">IS NULL</code> » ou « <code translate="no">IS NOT NULL</code> ». Não é possível filtrar explicitamente entidades com base no facto de o valor de um campo vetorial ser NULL.</p></li>
-<li><p>A partir do Milvus 3.0.0, o campo <a href="/docs/pt/array-of-structs.md">StructArray</a> pai pode ser nulo. Defina « <code translate="no">nullable=True</code> » no campo StructArray pai, e não em subcampos individuais. O valor NULL aplica-se a todo o campo StructArray, e não a um elemento Struct individual, e o Milvus propaga internamente a possibilidade de ser nulo do pai para os seus subcampos. Um campo StructArray adicionado a uma coleção existente deve ser nulo, para que as entidades existentes possam devolver NULL para o novo campo. A partir do Milvus 3.0.6, um subcampo pode, adicionalmente, permitir um valor NULL num elemento Struct individual: « <code translate="no">nullable=True</code> » num subcampo escalar ou vetorial, « <code translate="no">element_nullable=True</code> » num subcampo de matriz; o próprio elemento Struct continua a não poder ser NULL. Para mais detalhes, consulte <a href="/docs/pt/structarray-limits.md#Nullable-and-dynamic-schema-limits">«Limites do StructArray</a>».</p></li>
+<li><p>A partir do Milvus 3.0.0, o campo <a href="/docs/pt/array-of-structs.md">StructArray</a> pai pode ser nulo. Defina « <code translate="no">nullable=True</code> » no campo StructArray pai, e não em subcampos individuais. O valor NULL aplica-se a todo o campo StructArray, e não a um elemento Struct individual, e o Milvus propaga internamente a possibilidade de o campo pai ser nulo aos seus subcampos. Um campo StructArray adicionado a uma coleção existente deve ser nulo, para que as entidades existentes possam devolver NULL para o novo campo. A partir do Milvus 3.0.6, um subcampo pode, adicionalmente, permitir um valor NULL num elemento Struct individual: « <code translate="no">nullable=True</code> » num subcampo escalar ou vetorial, « <code translate="no">element_nullable=True</code> » num subcampo de matriz; o próprio elemento Struct continua a não poder ser NULL. Para mais detalhes, consulte <a href="/docs/pt/structarray-limits.md#Nullable-and-dynamic-schema-limits">«Limites do StructArray</a>».</p></li>
 <li><p>O atributo «nullable» é definido quando um campo é criado e não pode ser modificado posteriormente. Não é possível ativar ou desativar a nulabilidade para um campo existente.</p></li>
 <li><p>Os campos marcados como nulos não podem ser utilizados como chaves de partição. Os campos de chave de partição devem conter sempre valores válidos e não nulos. Para mais informações, consulte <a href="/docs/pt/use-partition-key.md">«Utilizar chave de partição</a>».</p></li>
 </ul>
@@ -583,7 +582,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Após inserir os dados, pode criar um índice num campo nulo, como habitualmente. A principal diferença reside na forma como o Milvus lida com os valores NULL durante a criação do índice:</p>
+    </button></h2><p>Após inserir os dados, pode criar um índice num campo nulo, como habitualmente. A principal diferença reside na forma como o Milvus lida com os valores NULL durante a construção do índice:</p>
 <ul>
 <li>Apenas as entidades com valores não nulos são adicionadas ao índice.</li>
 <li>As entidades com valores NULL são ignoradas e não participam na construção do índice.</li>
@@ -919,7 +918,7 @@ Console.WriteLine(res);
 <li>As entidades com valores NULL para ` <code translate="no">embedding</code> ` são excluídas da avaliação.</li>
 <li>O número de resultados devolvidos depende do número de vetores válidos existentes na coleção.</li>
 </ul>
-<h2 id="Query-and-filtering-implications" class="common-anchor-header">Implicações nas consultas e na filtragem<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
+<h2 id="Query-and-filtering-implications" class="common-anchor-header">Implicações na consulta e na filtragem<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -934,9 +933,13 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os exemplos anteriores centram-se em campos vetoriais. Esta secção descreve como os valores NULL se comportam em <strong>expressões de filtro escalares</strong>.</p>
-<p>Os campos escalares podem ser definidos com <code translate="no">nullable=True</code> e seguem as mesmas regras de ingestão que os campos vetoriais. No entanto, <strong>os valores escalares NULL são sempre avaliados como falsos nas expressões de filtro</strong>. Utilize <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> para selecionar entidades com base no facto de um campo escalar ser NULL.</p>
-<p>Por exemplo, dado um campo escalar que pode ser nulo <code translate="no">age</code>, o filtro seguinte seleciona entidades cuja idade seja superior a 18:</p>
+    </button></h2><div class="alert note">
+<p>A partir do Milvus 3.0.3, pode utilizar <code translate="no">IS NULL</code> e <code translate="no">IS NOT NULL</code> em filtros de consulta e pesquisa em campos vetoriais comuns para selecionar entidades cujo campo vetorial seja NULL ou diferente de NULL, respetivamente.</p>
+<p>Para encontrar entidades cujo campo « <code translate="no">embedding</code> » seja NULL, utilize « <code translate="no">query()</code> » com o filtro « <code translate="no">embedding IS NULL</code> ». Este filtro também é válido em « <code translate="no">search()</code> ». No entanto, a pesquisa em « <code translate="no">embedding</code> » com este filtro não devolve resultados: as entidades sem um valor « <code translate="no">embedding</code> » não têm nenhum vetor para comparar com o vetor da consulta.</p>
+<p>Para conhecer os tipos suportados, a sintaxe e os exemplos, consulte <a href="/docs/pt/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">os operadores IS NULL e IS NOT NULL</a>.</p>
+</div>
+<p>Para campos escalares definidos com ` <code translate="no">nullable=True</code>`, condições de comparação como ` <code translate="no">age &gt; 18</code> ` ou ` <code translate="no">status == &quot;active&quot;</code> ` não correspondem a entidades em que o campo comparado seja `NULL`.</p>
+<p>Por exemplo, dado um campo escalar nulo <code translate="no">age</code>, o filtro seguinte seleciona entidades cuja idade seja superior a 18:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

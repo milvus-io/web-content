@@ -4,7 +4,7 @@ title: フレーズ一致Compatible with Milvus 2.5.17+
 summary: >-
   フレーズ一致では、検索クエリの用語がそのままのフレーズとして含まれるドキュメントを検索できます。デフォルトでは、単語は同じ順序で、かつ互いに隣接して出現している必要があります。
   たとえば、「robotics machine
-  learning」というクエリでは、「…典型的なロボティクス・機械学習モデル…」といったテキストが一致します。この場合、「robotics」、「machine」、「learning」という単語が、間に他の単語を挟まずに連続して出現しています。
+  learning」というクエリでは、「…典型的なロボティクス・機械学習モデル…」といったテキストが一致します。この場合、「robotics」、「machine」、「learning」という単語が、その間に他の単語を挟まずに連続して出現しています。
 beta: Milvus 2.5.17+
 ---
 <h1 id="Phrase-Match" class="common-anchor-header">フレーズ一致<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">
@@ -22,8 +22,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>フレーズ一致では、検索クエリの用語が正確なフレーズとして含まれるドキュメントを検索できます。デフォルトでは、単語は同じ順序で、かつ互いに隣接して出現している必要があります。 たとえば、<strong>「robotics machine learning」</strong>というクエリでは、<em>「…典型的なロボティクス機械学習モデル…」</em>といったテキストが一致します。この場合、<strong>「robotics」</strong>、<strong>「machine」</strong>、<strong>「learning」</strong>という単語が、その間に他の単語を挟まずに順番に並んでいます。</p>
-<p>しかし、実際のシナリオでは、厳格なフレーズ一致は柔軟性に欠ける場合があります。<em>「…ロボット工学で広く採用されている機械学習モデル…」</em>のようなテキストに一致させたい場合もあるでしょう<em>。</em>この例では、同じキーワードが含まれていますが、隣り合っておらず、元の順序でもありません。これに対応するため、フレーズ一致では「<code translate="no">slop</code> 」パラメータをサポートしており、これにより柔軟性が向上します。<code translate="no">slop</code> の値は、フレーズ内の用語間で許容される位置のずれの数を定義します。たとえば、<code translate="no">slop</code> を1に設定した場合、<strong>「machine learning」</strong>というクエリは、<em>「…machine deep learning…」</em>のようなテキストと一致します。この場合、1つの単語（<strong>「deep」</strong>）が元の用語を隔てています。</p>
+    </button></h1><p>フレーズ一致では、検索クエリの用語が正確なフレーズとして含まれるドキュメントを検索できます。デフォルトでは、単語は同じ順序で、かつ互いに隣接して出現している必要があります。 たとえば、<strong>「robotics machine learning」</strong>というクエリでは、<em>「…典型的なロボティクス機械学習モデル…」</em>といったテキストが一致します。この場合、<strong>「robotics」</strong>、<strong>「machine」</strong>、<strong>「learning」</strong>という単語が、間に他の単語を挟まずに順番に並んでいます。</p>
+<p>しかし、実際のシナリオでは、厳格なフレーズ一致は柔軟性に欠ける場合があります。<em>「…ロボット工学で広く採用されている機械学習モデル…」</em>のようなテキストに一致させたい場合もあるでしょう。この例では、同じキーワードが含まれていますが、隣り合っておらず、元の順序でもありません。これに対応するため、フレーズ一致では「<code translate="no">slop</code> 」パラメータをサポートしており、柔軟性を高めています。<code translate="no">slop</code> の値は、フレーズ内の用語間で許容される位置のずれの数を定義します。たとえば、<code translate="no">slop</code> を1に設定した場合、<strong>「machine learning」</strong>というクエリは、<em>「…machine deep learning…」</em>のようなテキストと一致します。この場合、1つの単語（<strong>「deep」</strong>）が元の用語を隔てています。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,8 +135,8 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>フレーズマッチングの精度は、テキストデータのトークン化に使用するアナライザーに大きく依存します。言語やテキスト形式によって適したアナライザーが異なり、トークン化や位置情報の精度に影響を与えます。特定のユースケースに適したアナライザーを選択することで、フレーズマッチングの結果を最適化できます。</p>
-<p>デフォルトでは、Milvusは標準アナライザーを使用します。このアナライザーは、空白や句読点に基づいてテキストをトークン化し、40文字を超えるトークンを削除し、テキストを小文字に変換します。デフォルトでの使用には、追加のパラメーターは必要ありません。詳細については、<a href="/docs/ja/v2.6.x/standard-analyzer.md">「標準アナライザー</a>」を参照してください。</p>
-<p>アプリケーションで特定のアナライザーが必要な場合は、<code translate="no">analyzer_params</code> パラメーターを使用して設定してください。たとえば、英語のテキストでフレーズマッチングを行うために<code translate="no">english</code> アナライザーを設定する方法は次のとおりです。</p>
+<p>デフォルトでは、Milvusは標準アナライザーを使用します。このアナライザーは、空白や句読点に基づいてテキストをトークン化し、テキストを小文字に変換します。デフォルトでの使用には、追加のパラメーターは必要ありません。詳細については、「<a href="/docs/ja/v2.6.x/standard-analyzer.md">標準アナライザー</a>」を参照してください。</p>
+<p>アプリケーションで特定のアナライザーが必要な場合は、<code translate="no">analyzer_params</code> パラメータを使用して設定してください。例えば、英語のテキストでフレーズマッチングを行うために<code translate="no">english</code> アナライザーを設定する方法は以下の通りです：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -195,7 +195,7 @@ schema.add_field(
 <li><p><code translate="no">phrase</code><strong>:</strong>検索対象となる正確なフレーズ。</p></li>
 <li><p><code translate="no">slop</code> (オプション)<strong>:</strong>トークンのマッチングで許容される最大位置数を指定する整数。</p>
 <ul>
-<li><p><code translate="no">0</code> (デフォルト): 完全一致のフレーズのみを一致させます。例:<strong>「machine learning」</strong>のフィルターは、<strong>「machine learning」</strong>と完全に一致するフレーズのみを一致させますが、<strong>「machine boosts learning」</strong>や<strong>「learning machine」</strong>は一致しません<strong>。</strong></p></li>
+<li><p><code translate="no">0</code> (デフォルト): 完全一致するフレーズのみをマッチングします。例:<strong>「machine learning」</strong>のフィルターは、<strong>「machine learning」</strong>と完全に一致するもののみをマッチングし、<strong>「machine boosts learning」</strong>や<strong>「learning machine」</strong>はマッチングしません<strong>。</strong></p></li>
 <li><p><code translate="no">1</code>: 1つの用語が追加されたり、位置がわずかにずれたりといった、軽微な変動を許容します。例：<strong>「machine learning」</strong>のフィルターは、<strong>「machine boosts learning」</strong>（<strong>「machine」</strong>と<strong>「learning」</strong>の間に1つのトークンがある）には一致しますが、<strong>「learning machine」</strong>（用語の順序が逆）には一致しません。</p></li>
 <li><p><code translate="no">2</code>: 用語の順序が逆転していたり、<strong>「machine」</strong>と「<strong>learning</strong> <strong>」</strong>の間に最大2つのトークンが挟まっていたりする場合など、より柔軟な一致を許可します。例：<strong>「machine learning」</strong>というフィルターは、<strong>「learning machine」</strong>（用語の順序が逆）や<strong>「machine quickly boosts learning」</strong>（<strong>「machine」</strong>と<strong>「learning」</strong>の間に2つのトークンがある）に一致します。</p></li>
 </ul></li>

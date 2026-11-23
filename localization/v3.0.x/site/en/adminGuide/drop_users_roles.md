@@ -2,8 +2,8 @@
 id: drop_users_roles.md
 title: Drop Users & Roles
 summary: >-
-  To ensure data security, it is recommend that you drop users and roles that
-  are no longer in use. This guide introduces how to drop users and roles.
+  To ensure data security, we recommend dropping users and roles that are no
+  longer in use. This guide introduces how to drop users and roles.
 ---
 <h1 id="Drop-Users--Roles" class="common-anchor-header">Drop Users & Roles<button data-href="#Drop-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
-    <a href="#plaintext">plaintext</a>
+    <a href="#go">Go</a>
     <a href="#javascript">NodeJS</a>
     <a href="#bash">cURL</a>
 </div>
@@ -54,12 +54,12 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
-<span class="hljs-comment"># create a user</span>
+<span class="hljs-comment"># drop a user</span>
 client.drop_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2
-<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropUserReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropUserReq;
 
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
         .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
@@ -73,30 +73,30 @@ client.drop_user(user_name=<span class="hljs-string">&quot;user_1&quot;</span>)
         .build();
 client.dropUser(dropUserReq);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-plaintext">import (
-    &quot;context&quot;
-    &quot;fmt&quot;
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
-    &quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
-defer cancel()
+<span class="hljs-keyword">defer</span> cancel()
 
 client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
-    Address: &quot;localhost:19530&quot;,
-    APIKey:  &quot;root:Milvus&quot;,
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
 })
-if err != nil {
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
-defer client.Close(ctx)
+<span class="hljs-keyword">defer</span> client.Close(ctx)
 
-err = client.DropUser(ctx, milvusclient.NewDropUserOption(&quot;user_1&quot;))
-if err != nil {
+err = client.DropUser(ctx, milvusclient.NewDropUserOption(<span class="hljs-string">&quot;user_1&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    // handle error
+    <span class="hljs-comment">// handle error</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
@@ -105,7 +105,7 @@ if err != nil {
 <span class="hljs-keyword">const</span> token = <span class="hljs-string">&quot;root:Milvus&quot;</span>;
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({address, token});
 
-milvusClient.<span class="hljs-title function_">deleteUser</span>({
+client.<span class="hljs-title function_">deleteUser</span>({
     <span class="hljs-attr">username</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>
 })
 <button class="copy-code-btn"></button></code></pre>
@@ -133,9 +133,7 @@ curl --request POST \
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.listUsersReq
-
-List&lt;String&gt; resp = client.listUsers();
+<pre><code translate="no" class="language-java">List&lt;String&gt; resp = client.listUsers();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">users, err := client.ListUsers(ctx, milvusclient.NewListUserOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -145,7 +143,7 @@ List&lt;String&gt; resp = client.listUsers();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
-<span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">listUsers</span>();
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">listUsers</span>();
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/users/list&quot;</span> \
@@ -187,7 +185,7 @@ List&lt;String&gt; resp = client.listUsers();
 
 client.drop_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropRoleReq
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DropRoleReq;
 
 <span class="hljs-type">DropRoleReq</span> <span class="hljs-variable">dropRoleReq</span> <span class="hljs-operator">=</span> DropRoleReq.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -202,7 +200,7 @@ client.dropRole(dropRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
-<span class="hljs-keyword">await</span> milvusClient.<span class="hljs-title function_">dropRole</span>({
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">dropRole</span>({
    <span class="hljs-attr">roleName</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>,
  });
 <button class="copy-code-btn"></button></code></pre>
@@ -247,5 +245,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Below is an example output. There is no <code translate="no">role_a</code> in the list. The drop operation is successful.</p>
-<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>]
+<pre><code translate="no" class="language-bash">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;public&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>

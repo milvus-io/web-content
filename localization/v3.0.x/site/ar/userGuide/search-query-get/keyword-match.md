@@ -24,7 +24,7 @@ summary: >-
       </svg>
     </button></h1><p>تتيح ميزة "مطابقة النص" في Milvus استرجاع المستندات بدقة استنادًا إلى مصطلحات محددة. تُستخدم هذه الميزة في المقام الأول للبحث المُصفى لتلبية شروط محددة، ويمكنها دمج التصفية القياسية لتحسين نتائج الاستعلام، مما يتيح إجراء عمليات بحث عن التشابه داخل المتجهات التي تستوفي المعايير القياسية.</p>
 <div class="alert note">
-<p><code translate="no">TEXT_MATCH</code> تجد المصطلحات التي تم تحليلها بالضبط، بينما يمكن لـ « <code translate="no">TEXT_MATCH_FUZZY</code> » (التشابه) أن تتحمل مسافة تحرير صغيرة بين رموز الاستعلام والرموز المفهرسة. كلاهما عمليات تصفية منطقية ولا تقيم مدى صلة المستندات المتطابقة. إذا كنت ترغب في استرجاع المستندات الأكثر صلة بناءً على المعنى الدلالي وأهمية مصطلحات الاستعلام، نوصيك باستخدام <a href="/docs/ar/full-text-search.md">«Full Text Search» (البحث عن النص الكامل</a>).</p>
+<p><code translate="no">TEXT_MATCH</code> تجد المصطلحات التي تم تحليلها بالضبط، بينما يمكن لـ « <code translate="no">TEXT_MATCH_FUZZY</code> » (التشابه) أن تتسامح مع مسافة تحرير صغيرة بين رموز الاستعلام والرموز المفهرسة. كلاهما عمليات تصفية منطقية ولا تقيم مدى صلة المستندات المتطابقة. إذا كنت ترغب في استرجاع المستندات الأكثر صلة بناءً على المعنى الدلالي وأهمية مصطلحات الاستعلام، نوصيك باستخدام <a href="/docs/ar/full-text-search.md">«Full Text Search» (البحث عن النص الكامل)</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
     </button></h2><p>يدمج Milvus <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> لتشغيل الفهرس المقلوب الأساسي والبحث النصي القائم على المصطلحات. يقوم Milvus بفهرسة كل إدخال نصي باتباع الإجراء التالي:</p>
 <ol>
 <li><p><a href="/docs/ar/analyzer-overview.md">المحلل</a>: يعالج المحلل النص المدخل عن طريق تقسيمه إلى كلمات فردية، أو رموز، ثم تطبيق المرشحات حسب الحاجة. وهذا يسمح لـ Milvus بإنشاء فهرس بناءً على هذه الرموز.</p></li>
-<li><p><a href="/docs/ar/index-explained.md">الفهرسة</a>: بعد تحليل النص، ينشئ Milvus فهرسًا معكوسًا يربط كل وحدة فريدة بالوثائق التي تحتوي عليها.</p></li>
+<li><p><a href="/docs/ar/index-explained.md">الفهرسة</a>: بعد تحليل النص، يقوم Milvus بإنشاء فهرس معكوس يربط كل وحدة فريدة بالوثائق التي تحتوي عليها.</p></li>
 </ol>
 <p>عندما يقوم المستخدم بإجراء مطابقة نصية، يُستخدم الفهرس المقلوب لاسترجاع جميع المستندات التي تحتوي على المصطلحات بسرعة. وهذا أسرع بكثير من مسح كل مستند على حدة.</p>
 <p><span class="img-wrapper">
@@ -230,7 +230,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يعتمد أداء ودقة مطابقة الكلمات المفتاحية على المحلل المحدد. تم تصميم المحللات المختلفة خصيصًا لتناسب اللغات المختلفة وهياكل النصوص المتنوعة، لذا فإن اختيار المحلل المناسب يمكن أن يؤثر بشكل كبير على نتائج البحث لحالة الاستخدام المحددة الخاصة بك.</p>
+    </button></h3><p>يعتمد أداء ودقة مطابقة الكلمات المفتاحية على المحلل المحدد. تم تصميم المحللات المختلفة لتناسب اللغات وهياكل النصوص المتنوعة، لذا فإن اختيار المحلل المناسب يمكن أن يؤثر بشكل كبير على نتائج البحث لحالة الاستخدام الخاصة بك.</p>
 <p>بشكل افتراضي، يستخدم Milvus محلل « <code translate="no">standard</code> »، الذي يقوم بتقسيم النص إلى رموز بناءً على المسافات البيضاء وعلامات الترقيم، ويزيل الرموز التي يزيد طولها عن 40 حرفًا، ويحول النص إلى أحرف صغيرة. لا توجد معلمات إضافية مطلوبة لتطبيق هذا الإعداد الافتراضي. لمزيد من المعلومات، راجع <a href="/docs/ar/standard-analyzer.md">«Standard</a>».</p>
 <p>في الحالات التي تتطلب محللًا مختلفًا، يمكنك تكوين واحد باستخدام المعلمة <code translate="no">analyzer_params</code>. على سبيل المثال، لتطبيق محلل <code translate="no">english</code> لمعالجة النص باللغة الإنجليزية:</p>
 <div class="multipleCode">
@@ -469,9 +469,9 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <ul>
 <li><p><code translate="no">field_name</code>: اسم الحقل <code translate="no">VARCHAR</code> أو <code translate="no">TEXT</code> الذي تم تمكين المطابقة فيه والذي سيتم البحث فيه.</p></li>
 <li><p><code translate="no">text</code>: نص الاستعلام المراد تحليله ومطابقته مع الرموز المفهرسة.</p></li>
-<li><p><code translate="no">max_edit_distance</code>: الحد الأقصى لمسافة التعديل المسموح بها لكل رمز في الاستعلام. يجب أن يكون اسم الخيار هو <code translate="no">max_edit_distance</code> بالضبط، ويجب أن تكون قيمته <code translate="no">0</code> أو <code translate="no">1</code> أو <code translate="no">2</code>. تؤدي القيمة <code translate="no">0</code> إلى إجراء مطابقة دقيقة للرموز، وهو ما يعادل <code translate="no">TEXT_MATCH</code>.</p></li>
+<li><p><code translate="no">max_edit_distance</code>: الحد الأقصى لمسافة التعديل المسموح بها لكل رمز استعلام. يجب أن يكون اسم الخيار هو بالضبط <code translate="no">max_edit_distance</code> ، ويجب أن تكون قيمته <code translate="no">0</code> أو <code translate="no">1</code> أو <code translate="no">2</code>. تؤدي القيمة <code translate="no">0</code> إلى إجراء مطابقة دقيقة للرموز، وهو ما يعادل <code translate="no">TEXT_MATCH</code>.</p></li>
 </ul>
-<p>على سبيل المثال، يطابق التعبير التالي الرموز التي تختلف بمقدار تعديل واحد عن <code translate="no">machne</code> ، بما في ذلك <code translate="no">machine</code>:</p>
+<p>على سبيل المثال، يتطابق التعبير التالي مع الرموز التي تختلف بمقدار تعديل واحد عن <code translate="no">machne</code> ، بما في ذلك <code translate="no">machine</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -638,8 +638,8 @@ milvus::SearchResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكن أيضًا استخدام مطابقة النص للتصفية القياسية في عمليات الاستعلام. من خلال تحديد تعبير <code translate="no">TEXT_MATCH</code> في المعلمة <code translate="no">expr</code> الخاصة بالطريقة <code translate="no">query()</code> ، يمكنك استرداد المستندات التي تتطابق مع المصطلحات المحددة.</p>
-<p>يسترد المثال أدناه المستندات التي يحتوي حقل <code translate="no">text</code> فيها على كلا المصطلحين <code translate="no">keyword1</code> و <code translate="no">keyword2</code>.</p>
+    </button></h3><p>يمكن أيضًا استخدام مطابقة النص للتصفية القياسية في عمليات الاستعلام. من خلال تحديد تعبير <code translate="no">TEXT_MATCH</code> في المعلمة <code translate="no">expr</code> الخاصة بالطريقة <code translate="no">query()</code> ، يمكنك استرداد المستندات التي تطابق المصطلحات المحددة.</p>
+<p>يسترد المثال أدناه المستندات التي يحتوي حقل <code translate="no">text</code> فيها على المصطلحين <code translate="no">keyword1</code> و <code translate="no">keyword2</code> معًا.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -740,8 +740,8 @@ milvus::QueryResponse response;
 <li><p>بمجرد تعريف محلل في مخططك، تصبح إعداداته دائمة لتلك المجموعة. إذا قررت أن محللًا مختلفًا يناسب احتياجاتك بشكل أفضل، فيمكنك التفكير في حذف المجموعة الحالية وإنشاء مجموعة جديدة بتكوين المحلل المطلوب.</p></li>
 <li><p>قواعد الهروب في تعبيرات <code translate="no">filter</code>:</p>
 <ul>
-<li><p>يتم تفسير الأحرف المحاطة بعلامات الاقتباس المزدوجة أو المفردة داخل التعبيرات على أنها ثوابت سلاسل. إذا كانت ثابتة السلسلة تتضمن أحرف الهروب، فيجب تمثيل أحرف الهروب باستخدام تسلسل الهروب. على سبيل المثال، استخدم <code translate="no">\\</code> لتمثيل <code translate="no">\</code> ، و <code translate="no">\\t</code> لتمثيل علامة الجدولة <code translate="no">\t</code> ، و <code translate="no">\\n</code> لتمثيل سطر جديد.</p></li>
-<li><p>إذا كانت ثابتة السلسلة محاطة بعلامات اقتباس مفردة، فيجب تمثيل علامة الاقتباس المفردة داخل الثابتة على أنها <code translate="no">\\'</code> ، بينما يمكن تمثيل علامة الاقتباس المزدوجة إما على أنها <code translate="no">&quot;</code> أو <code translate="no">\\&quot;</code>. مثال: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>يتم تفسير الأحرف المحاطة بعلامات اقتباس مزدوجة أو مفردة داخل التعبيرات على أنها ثوابت سلاسل. إذا كانت ثابتة السلسلة تتضمن أحرف الهروب، فيجب تمثيل أحرف الهروب بتسلسل الهروب. على سبيل المثال، استخدم <code translate="no">\\</code> لتمثيل <code translate="no">\</code> ، و <code translate="no">\\t</code> لتمثيل علامة الجدولة <code translate="no">\t</code> ، و <code translate="no">\\n</code> لتمثيل سطر جديد.</p></li>
+<li><p>إذا كانت ثابتة السلسلة محاطة بعلامات اقتباس مفردة، فيجب تمثيل علامة الاقتباس المفردة داخل الثابتة على أنها <code translate="no">\\'</code> بينما يمكن تمثيل علامة الاقتباس المزدوجة إما على أنها <code translate="no">&quot;</code> أو <code translate="no">\\&quot;</code>. مثال: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>إذا كان الثابت السلسلي محاطًا بعلامات اقتباس مزدوجة، فيجب تمثيل علامة الاقتباس المزدوجة داخل الثابت على النحو التالي: <code translate="no">\\&quot;</code> ، بينما يمكن تمثيل علامة الاقتباس المفردة إما على النحو التالي: <code translate="no">'</code> أو <code translate="no">\\'</code>. مثال: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

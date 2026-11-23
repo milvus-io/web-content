@@ -20,7 +20,7 @@ summary: Milvus 提供了 ARRAY 運算子，用於篩選 ARRAY 欄位以及部�
       </svg>
     </button></h1><p>Milvus 提供 ARRAY 運算子，用於篩選 ARRAY 欄位以及部分更新 ARRAY 欄位值。</p>
 <div class="alert note">
-<p>陣列中的所有元素必須為相同類型，且陣列內的嵌套結構將被視為普通字串。因此，在處理 ARRAY 欄位時，建議避免過度深層的嵌套，並確保資料結構盡可能扁平化，以獲得最佳效能。</p>
+<p>陣列中的所有元素必須為相同類型，且陣列內的嵌套結構將被視為普通字串。因此，在處理 ARRAY 欄位時，建議避免過深的嵌套，並確保資料結構盡可能扁平化，以獲得最佳效能。</p>
 </div>
 <p>Milvus 中的 ARRAY 運算子涵蓋兩種使用情境：</p>
 <ul>
@@ -42,7 +42,7 @@ summary: Milvus 提供了 ARRAY 運算子，用於篩選 ARRAY 欄位以及部�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表列出了 Milvus 中可用的 ARRAY 運算子。</p>
+    </button></h2><p>下表列出 Milvus 中可用的 ARRAY 運算子。</p>
 <table>
 <thead>
 <tr><th>運算子</th><th>適用於</th><th>說明</th></tr>
@@ -73,7 +73,7 @@ summary: Milvus 提供了 ARRAY 運算子，用於篩選 ARRAY 欄位以及部�
       </svg>
     </button></h2><p><code translate="no">ARRAY_CONTAINS</code> 運算子用於檢查陣列欄位中是否存在特定元素。當您需要查找陣列中包含特定元素的實體時，此功能非常實用。</p>
 <p><strong>範例</strong></p>
-<p>假設您有一個名為 `<code translate="no">history_temperatures</code>` 的陣列欄位，其中包含各年份的最低氣溫紀錄。若要找出陣列中包含值 `<code translate="no">23</code>` 的所有實體，您可以使用以下篩選表達式：</p>
+<p>假設您有一個名為 `<code translate="no">history_temperatures</code>` 的陣列欄位，其中包含不同年份的最低氣溫紀錄。若要找出陣列中包含值 `<code translate="no">23</code>` 的所有實體，您可以使用以下篩選表達式：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -117,7 +117,7 @@ summary: Milvus 提供了 ARRAY 運算子，用於篩選 ARRAY 欄位以及部�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_CONTAINS_ALL</code> 運算子可確保指定清單中的所有元素均存在於陣列欄位中。當您需要匹配陣列中包含多個值的實體時，此運算子便十分實用。</p>
+    </button></h2><p><code translate="no">ARRAY_CONTAINS_ALL</code> 運算子可確保指定清單中的所有元素均存在於陣列欄位中。當您需要匹配陣列中包含多個值的實體時，此運算子非常實用。</p>
 <p><strong>範例</strong></p>
 <p>若要找出<code translate="no">history_temperatures</code> 陣列同時包含<code translate="no">23</code> 和<code translate="no">24</code> 的所有實體，可使用：</p>
 <div class="multipleCode">
@@ -209,7 +209,7 @@ summary: Milvus 提供了 ARRAY 運算子，用於篩選 ARRAY 欄位以及部�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_LENGTH</code> 會傳回陣列欄位的長度（元素個數）。此函式僅接受一個參數：陣列欄位識別碼。</p>
+    </button></h2><p><code translate="no">ARRAY_LENGTH</code> 會傳回陣列欄位的長度（元素數量）。此函式僅接受一個參數：陣列欄位識別碼。</p>
 <p><strong>範例</strong></p>
 <p>要查詢所有<code translate="no">history_temperatures</code> 陣列元素數少於 10 個的實體：</p>
 <div class="multipleCode">
@@ -392,7 +392,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_REMOVE</code> 運算子會在執行<code translate="no">upsert</code> 請求時，從現有的 ARRAY 欄位中移除所有與請求載荷中某個值相符的元素。這並非篩選表達式。當您希望從陣列中移除相符的值，且無需事先查詢當前陣列值時，請使用此運算子。</p>
+    </button></h2><p><code translate="no">ARRAY_REMOVE</code> 運算子會在執行<code translate="no">upsert</code> 請求時，從現有的 ARRAY 欄位中移除所有與請求載荷中某個值相符的元素。這並非篩選表達式。當您希望從陣列中移除相符的值，且無需先查詢當前陣列值時，請使用此運算子。</p>
 <p>以下範例會從主鍵為<code translate="no">1</code> 的實體之<code translate="no">tags</code> ARRAY 欄位中，移除<code translate="no">&quot;trial&quot;</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>Die Textübereinstimmung in Milvus ermöglicht eine präzise Dokumentensuche auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche verwendet, um bestimmte Bedingungen zu erfüllen, und kann skalare Filterung einbeziehen, um die Suchergebnisse zu verfeinern, wodurch Ähnlichkeitssuchen innerhalb von Vektoren ermöglicht werden, die skalare Kriterien erfüllen.</p>
 <div class="alert note">
-<p><code translate="no">TEXT_MATCH</code> findet exakte analysierte Begriffe, während die „ <code translate="no">TEXT_MATCH_FUZZY</code> “-Suche einen geringen Edit-Abstand zwischen Such- und indizierten Tokens toleriert. Bei beiden handelt es sich um boolesche Filteroperationen, bei denen die Relevanz der gefundenen Dokumente nicht bewertet wird. Wenn Sie die relevantesten Dokumente basierend auf der semantischen Bedeutung und Wichtigkeit der Suchbegriffe abrufen möchten, empfehlen wir Ihnen die Verwendung <a href="/docs/de/full-text-search.md">der Volltextsuche</a>.</p>
+<p><code translate="no">TEXT_MATCH</code> findet exakte analysierte Begriffe, während die „ <code translate="no">TEXT_MATCH_FUZZY</code> “-Suche einen geringen Editierabstand zwischen Such- und indizierten Tokens toleriert. Bei beiden handelt es sich um boolesche Filteroperationen, bei denen die Relevanz der gefundenen Dokumente nicht bewertet wird. Wenn Sie die relevantesten Dokumente basierend auf der semantischen Bedeutung und Wichtigkeit der Suchbegriffe abrufen möchten, empfehlen wir Ihnen die Verwendung <a href="/docs/de/full-text-search.md">der Volltextsuche</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
 <li><p><a href="/docs/de/analyzer-overview.md">Analysator</a>: Der Analysator verarbeitet den Eingabetext, indem er ihn in einzelne Wörter (Token) zerlegt und anschließend bei Bedarf Filter anwendet. Auf diese Weise kann Milvus einen Index auf Basis dieser Token erstellen.</p></li>
 <li><p><a href="/docs/de/index-explained.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes eindeutige Token den Dokumenten zuordnet, in denen es vorkommt.</p></li>
 </ol>
-<p>Wenn ein Benutzer eine Textabfrage durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente abzurufen, die die Suchbegriffe enthalten. Dies ist wesentlich schneller, als jedes Dokument einzeln zu durchsuchen.</p>
+<p>Wenn ein Benutzer eine Textsuche durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente abzurufen, die die Suchbegriffe enthalten. Dies ist wesentlich schneller, als jedes Dokument einzeln zu durchsuchen.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -471,7 +471,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <ul>
 <li><p><code translate="no">field_name</code>: Der Name des für den Abgleich aktivierten Felds „ <code translate="no">VARCHAR</code> “ oder „ <code translate="no">TEXT</code> “, in dem gesucht werden soll.</p></li>
 <li><p><code translate="no">text</code>: Der Suchtext, der analysiert und mit den indizierten Tokens abgeglichen werden soll.</p></li>
-<li><p><code translate="no">max_edit_distance</code>: Der maximal zulässige Editierabstand für jedes Abfragetoken. Der Name der Option muss genau „ <code translate="no">max_edit_distance</code> “ lauten, und ihr Wert muss „ <code translate="no">0</code> “, „ <code translate="no">1</code> “ oder „ <code translate="no">2</code> “ sein. Der Wert „ <code translate="no">0</code> “ führt einen exakten Tokenabgleich durch, was „ <code translate="no">TEXT_MATCH</code> “ entspricht.</p></li>
+<li><p><code translate="no">max_edit_distance</code>: Der maximal zulässige Bearbeitungsabstand für jedes Abfragetoken. Der Name der Option muss genau „ <code translate="no">max_edit_distance</code> “ lauten, und ihr Wert muss „ <code translate="no">0</code> “, „ <code translate="no">1</code> “ oder „ <code translate="no">2</code> “ sein. Der Wert „ <code translate="no">0</code> “ führt einen exakten Tokenabgleich durch, was „ <code translate="no">TEXT_MATCH</code> “ entspricht.</p></li>
 </ul>
 <p>Der folgende Ausdruck findet beispielsweise Token, die bis auf eine Änderung mit „ <code translate="no">machne</code> “ übereinstimmen, einschließlich „ <code translate="no">machine</code> “:</p>
 <div class="multipleCode">
@@ -494,7 +494,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH_FUZZY(text, &#x27;machne&#x27;, max_edit_distance = 1)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">TEXT_MATCH_FUZZY</code> ist Teil der Filterausdruckssyntax, sodass Client-SDKs keine spezielle Methode für unscharfe Übereinstimmungen benötigen. Übergeben Sie den Ausdruck über denselben Parameter „ <code translate="no">filter</code> “, der auch für „ <code translate="no">TEXT_MATCH</code> “ bei Such- oder Abfragevorgängen verwendet wird.</p>
+<p><code translate="no">TEXT_MATCH_FUZZY</code> ist Teil der Syntax für Filterausdrücke, sodass Client-SDKs keine spezielle Methode für unscharfe Übereinstimmungen benötigen. Übergeben Sie den Ausdruck über denselben Parameter „ <code translate="no">filter</code> “, der auch für „ <code translate="no">TEXT_MATCH</code> “ bei Such- oder Abfragevorgängen verwendet wird.</p>
 <h3 id="Search-with-text-match" class="common-anchor-header">Suche mit Textübereinstimmung<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -511,7 +511,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
         ></path>
       </svg>
     </button></h3><p>Die Textübereinstimmung kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchbereich einzugrenzen und die Suchleistung zu verbessern. Indem Sie die Sammlung vor der Vektorähnlichkeitssuche mithilfe der Textübereinstimmung filtern, können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
-<p>In diesem Beispiel filtert der Ausdruck „ <code translate="no">filter</code> “ die Suchergebnisse so, dass nur Dokumente berücksichtigt werden, die mit den angegebenen Begriffen „ <code translate="no">keyword1</code> “ oder „ <code translate="no">keyword2</code> “ übereinstimmen. Die Vektorähnlichkeitssuche wird dann auf diese gefilterte Teilmenge von Dokumenten angewendet.</p>
+<p>In diesem Beispiel filtert der Ausdruck „ <code translate="no">filter</code> “ die Suchergebnisse so, dass nur Dokumente berücksichtigt werden, die mit dem angegebenen Begriff „ <code translate="no">keyword1</code> “ oder „ <code translate="no">keyword2</code> “ übereinstimmen. Die Vektorähnlichkeitssuche wird dann auf diese gefilterte Teilmenge von Dokumenten angewendet.</p>
 <div class="alert note">
 <p>Sie können die übereinstimmenden Begriffe in den Suchergebnissen hervorheben, indem Sie einen Text-Highlighter konfigurieren. Weitere Informationen finden Sie unter <a href="/docs/de/text-highlighter.md">„Text-Highlighter</a> “.</p>
 </div>
@@ -742,7 +742,7 @@ milvus::QueryResponse response;
 <li><p>Sobald Sie einen Analysator in Ihrem Schema definiert haben, sind dessen Einstellungen für diese Sammlung dauerhaft festgelegt. Wenn Sie zu dem Schluss kommen, dass ein anderer Analysator Ihren Anforderungen besser entspricht, können Sie die bestehende Sammlung löschen und eine neue mit der gewünschten Analysatorkonfiguration erstellen.</p></li>
 <li><p>Escape-Regeln in „ <code translate="no">filter</code> “-Ausdrücken:</p>
 <ul>
-<li><p>Zeichen, die in Ausdrücken in doppelte oder einfache Anführungszeichen gesetzt sind, werden als Zeichenfolgenkonstanten interpretiert. Enthält die Zeichenfolgenkonstante Escape-Zeichen, müssen diese mit einer Escape-Sequenz dargestellt werden. Verwenden Sie beispielsweise „ <code translate="no">\\</code> “, um „ <code translate="no">\</code> “ darzustellen, „ <code translate="no">\\t</code> “, um ein Tabulatorzeichen „ <code translate="no">\t</code> “ darzustellen, und „ <code translate="no">\\n</code> “, um einen Zeilenumbruch darzustellen.</p></li>
+<li><p>Zeichen, die in Ausdrücken in doppelte oder einfache Anführungszeichen gesetzt sind, werden als Zeichenfolgenkonstanten interpretiert. Enthält die Zeichenfolgenkonstante Escape-Zeichen, müssen diese mit einer Escape-Sequenz dargestellt werden. Verwenden Sie beispielsweise „ <code translate="no">\\</code> “, um „ <code translate="no">\</code> “ darzustellen, „ <code translate="no">\\t</code> “, um einen Tabulator darzustellen („ <code translate="no">\t</code> “), und „ <code translate="no">\\n</code> “, um einen Zeilenumbruch darzustellen.</p></li>
 <li><p>Wenn eine Zeichenfolgenkonstante in einfache Anführungszeichen gesetzt ist, sollte ein einfaches Anführungszeichen innerhalb der Konstante als „ <code translate="no">\\'</code> “ dargestellt werden, während ein doppeltes Anführungszeichen entweder als „ <code translate="no">&quot;</code> “ oder als „ <code translate="no">\\&quot;</code> “ dargestellt werden kann. Beispiel: „ <code translate="no">'It\\'s milvus'</code> “.</p></li>
 <li><p>Wenn eine Zeichenfolgenkonstante in doppelte Anführungszeichen gesetzt ist, sollte ein doppeltes Anführungszeichen innerhalb der Konstante als „ <code translate="no">\\&quot;</code> “ dargestellt werden, während ein einfaches Anführungszeichen entweder als „ <code translate="no">'</code> “ oder „ <code translate="no">\\'</code> “ dargestellt werden kann. Beispiel: „ <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> “.</p></li>
 </ul></li>

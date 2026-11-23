@@ -2,7 +2,7 @@
 id: import-data.md
 order: 1
 title: استيراد البيانات
-summary: توضح هذه الصفحة الإجراءات اللازمة لاستيراد البيانات المعدة مسبقًا.
+summary: توضح هذه الصفحة الإجراءات المتبعة لاستيراد البيانات المعدة مسبقًا.
 ---
 <h1 id="Import-data" class="common-anchor-header">استيراد البيانات<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,15 +64,15 @@ summary: توضح هذه الصفحة الإجراءات اللازمة لاست
     </button></h2><p>إذا كان مسار العمل الخاص بك قد يعيد محاولة طلب استيراد فاشل أو انتهت مهلته، فقم بتمييز المهمة بمفتاح التكرار؛ انظر <a href="/docs/ar/idempotent-import.md">الاستيراد المجمّع القابل للتكرار</a>.</p>
 <p>لاستيراد البيانات المعدة، يجب عليك إنشاء مهمة استيراد على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -132,7 +132,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>اسم المجموعة المستهدفة.</p></li>
 <li><p><code translate="no">files</code></p>
-<p>قائمة من قوائم مسارات الملفات النسبية لمسار الجذر لحاوية Milvus على مثيل MioIO الذي تم تشغيله مع مثيل Milvus الخاص بك. القوائم الفرعية المحتملة هي كما يلي:</p>
+<p>قائمة بالقوائم التي تحتوي على مسارات الملفات بالنسبة إلى المسار الجذري لحاوية Milvus على مثيل MioIO الذي تم تشغيله مع مثيل Milvus الخاص بك. القوائم الفرعية المحتملة هي كما يلي:</p>
 <ul>
 <li><p><strong>ملفات JSON</strong></p>
 <p>إذا كان الملف المُعد بتنسيق JSON، <strong>فيجب أن تحتوي كل قائمة فرعية على مسار ملف JSON واحد مُعد</strong>.</p>
@@ -149,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>النتائج المحتملة هي كما يلي:</p>
+<p>القيم المحتملة التي يمكن إرجاعها هي كما يلي:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> المعلمات<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> هي غلاف بسيط حول <code translate="no">POST /v2/vectordb/jobs/import/create</code>. بالإضافة إلى
+المثال أعلاه، فإنها تكشف عن المعلمات التالية (PyMilvus 2.6 والإصدارات الأحدث).</p>
+<table>
+<thead>
+<tr><th>المعلمة</th><th>النوع</th><th>الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>عنوان الخادم، على سبيل المثال <code translate="no">http://127.0.0.1:19530</code> أو <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>المجموعة المستهدفة.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>قاعدة البيانات المستهدفة. تُرسل كرأس <code translate="no">DB-Name</code> لنظام RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>الملفات المتاحة بالفعل لمثيل Milvus، على سبيل المثال على MinIO. هذه <strong>مسارات من جانب الخادم، وليست عناوين URL للكائنات</strong>. كل قائمة فرعية عبارة عن ملف JSON أو Parquet واحد، أو مجموعة واحدة من ملفات NumPy.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>القسم المستهدف. يتم تمريره عبر حجج كلمات رئيسية إضافية بدلاً من معلمة مُعلنة، لذا من السهل تفويته في التوقيع. اتركه فارغًا للمجموعات التي تستخدم مفتاح القسم.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>عنوان URL لكائن واحد على تخزين الكائنات السحابي. تم استبداله بـ <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>عناوين URL للكائنات في تخزين الكائنات السحابي، على سبيل المثال <code translate="no">s3://bucket/prefix/1.parquet</code>. كل قائمة فرعية تمثل كائنًا واحدًا أو بادئة واحدة تنتهي بـ <code translate="no">/</code>. استخدم هذا <strong>بدلاً من</strong> <code translate="no">files</code> ؛ فهما وسيلتا نقل مختلفتان، وليستا مترادفتين.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>معرف مجموعة Zilliz Cloud.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>معرف مشروع Zilliz Cloud، لقواعد بيانات المشروع.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>منطقة قاعدة بيانات المشروع.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>مفتاح واجهة برمجة التطبيقات (API)، أو <code translate="no">username:password</code> للمثيل المُستضاف ذاتيًا.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>بيانات اعتماد تخزين الكائنات لـ <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>رمز الجلسة لبيانات اعتماد تخزين الكائنات قصيرة الأجل.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>وحدة تخزين Zilliz Cloud المراد الاستيراد منها. يتطلب <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>المسارات داخل <code translate="no">volume_name</code>. كل قائمة فرعية تمثل ملفًا واحدًا أو بادئة واحدة تنتهي بـ <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> أو <code translate="no">str</code></td><td>التحقق من شهادة TLS الخاصة بالخادم؛ <code translate="no">True</code> بشكل افتراضي. يتم التعامل مع السلسلة على أنها مسار حزمة CA.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> أو <code translate="no">tuple</code></td><td>شهادة العميل لـ TLS المتبادل: مسار ملف، أو زوج <code translate="no">('cert', 'key')</code>.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>رؤوس HTTP إضافية مدمجة في الطلب؛ وتكون لقيم المتصل الأسبقية. استخدمها لإرسال مفتاح التماثل، على سبيل المثال <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code> ؛ انظر <a href="/docs/ar/idempotent-import.md">الاستيراد المجمّع المتماثل</a>.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>يتم توجيه خيارات الاستيراد الإضافية إلى الخادم في نص الطلب.</td></tr>
+</tbody>
+</table>
+<p>يتم توجيه أي حجج كلمات رئيسية متبقية إلى <code translate="no">requests.post</code> ، لذا فإن <code translate="no">timeout</code> و <code translate="no">proxies</code>
+تعملان كما هو الحال هناك. يرسل الغلاف مهلة انتظار مدتها 20 ثانية بشكل افتراضي.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">التحقق من تقدم عملية الاستيراد<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,8 +219,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
       </svg>
     </button></h2><p>بمجرد الحصول على معرّف مهمة الاستيراد، يمكنك التحقق من تقدم عملية الاستيراد على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>يمكنك عرض قائمة بجميع مهام الاستيراد المتعلقة بمجموعة معينة على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -383,7 +428,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <ul>
 <li>إذا تم تحميل مجموعة بالفعل قبل الاستيراد، فيمكنك استخدام وظيفة «تحميل القسم» ( <code translate="no">refresh_load</code> ) لتحميل البيانات المستوردة حديثًا بعد اكتمال عملية الاستيراد.</li>
 </ul></li>
-<li><p>القيود المتعلقة بسلوكيات الاستعلام والبحث:</p>
+<li><p>القيود المتعلقة بسلوكي الاستعلام والبحث:</p>
 <ul>
 <li><p>قبل أن تصبح حالة مهمة الاستيراد " <strong>مكتملة" (Completed</strong>)، من المؤكد أن البيانات المستوردة حديثًا لن تظهر في عمليات الاستعلام والبحث.</p></li>
 <li><p>بمجرد أن تصبح حالة المهمة " <strong>مكتملة</strong>"،</p>
@@ -394,7 +439,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 </ul></li>
 <li><p>القيود المتعلقة بسلوك الحذف:</p>
 <ul>
-<li><p>قبل أن تصبح حالة مهمة الاستيراد <strong>«مكتملة</strong>»، لا يُضمن نجاح الحذف وقد ينجح أو لا ينجح.</p></li>
+<li><p>قبل أن تصبح حالة مهمة الاستيراد <strong>"مكتملة</strong>"، لا يُضمن نجاح الحذف وقد ينجح أو لا ينجح.</p></li>
 <li><p>يُضمن نجاح الحذف بعد أن تصبح حالة المهمة " <strong>مكتملة</strong> ".</p></li>
 </ul></li>
 </ul>

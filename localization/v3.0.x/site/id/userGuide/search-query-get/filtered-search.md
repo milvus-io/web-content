@@ -70,6 +70,11 @@ summary: >-
 <li><p>Melakukan pencarian ANN di dalam entitas yang telah difilter.</p></li>
 <li><p>Mengembalikan entitas teratas K.</p></li>
 </ul>
+<div class="alert note">
+<p>Mulai dari Milvus 3.0.3, Anda dapat menggunakan " <code translate="no">IS NULL</code> " dan " <code translate="no">IS NOT NULL</code> " dalam kueri dan filter pencarian pada bidang vektor biasa untuk memilih entitas yang bidang vektornya NULL atau non-NULL, masing-masing.</p>
+<p>Untuk menemukan entitas yang bidang ` <code translate="no">embedding</code> `-nya bernilai NULL, gunakan ` <code translate="no">query()</code> ` dengan filter ` <code translate="no">embedding IS NULL</code>`. Filter ini juga berlaku di ` <code translate="no">search()</code>`. Namun, pencarian pada ` <code translate="no">embedding</code> ` dengan filter ini tidak akan menghasilkan hasil: entitas tanpa nilai ` <code translate="no">embedding</code> ` tidak memiliki vektor untuk dibandingkan dengan vektor kueri.</p>
+<p>Untuk tipe yang didukung, sintaks, dan contoh, lihat <a href="/docs/id/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">operator IS NULL dan IS NOT NULL</a>.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">Penyaringan berulang<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,7 +97,7 @@ summary: >-
    <span>Penyaringan Iteratif</span>
   
  </span></p>
-<p>Sebagaimana diilustrasikan dalam diagram di atas, pencarian dengan penyaringan berulang melakukan pencarian vektor secara berulang. Setiap entitas yang dikembalikan oleh iterator menjalani penyaringan skalar, dan proses ini berlanjut hingga hasil top-K yang ditentukan tercapai.</p>
+<p>Sebagaimana diilustrasikan dalam diagram di atas, pencarian dengan penyaringan berulang melakukan pencarian vektor secara berulang. Setiap entitas yang dikembalikan oleh iterator menjalani penyaringan skalar, dan proses ini berlanjut hingga hasil topK yang ditentukan tercapai.</p>
 <p>Metode ini secara signifikan mengurangi jumlah entitas yang menjalani penyaringan skalar, sehingga sangat bermanfaat untuk menangani ekspresi penyaringan yang sangat kompleks.</p>
 <p>Namun, penting untuk dicatat bahwa iterator memproses entitas satu per satu. Pendekatan berurutan ini dapat menyebabkan waktu pemrosesan yang lebih lama atau potensi masalah kinerja, terutama ketika sejumlah besar entitas menjalani penyaringan skalar.</p>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -397,7 +402,7 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975796,&quot;id&quot;:4,&quot;likes&quot;:122},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.2499619,&quot;id&quot;:6,&quot;likes&quot;:58}],&quot;topks&quot;:[2]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Kondisi penyaringan yang disertakan dalam permintaan pencarian berbunyi <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Kondisi ini menggunakan operator "and" untuk menggabungkan dua syarat: syarat pertama mencari entitas yang memiliki nilai yang dimulai dengan <code translate="no">red</code> pada bidang <code translate="no">color</code>, sedangkan syarat kedua mencari entitas dengan nilai yang lebih besar dari <code translate="no">50</code> pada bidang <code translate="no">likes</code>. Hanya ada dua entitas yang memenuhi persyaratan ini. Dengan top-K diatur ke <code translate="no">5</code>, Milvus akan menghitung jarak antara kedua entitas ini dengan vektor kueri dan mengembalikannya sebagai hasil pencarian.</p>
-<p>Contoh berikut menunjukkan bentuk hasil Python dengan skor kosinus ilustratif. Skor dapat bervariasi tergantung presisi bilangan floating-point. Hanya bidang keluaran yang diminta yang muncul di <code translate="no">entity</code>; contoh REST mengembalikan bidang-bidang tersebut pada tingkat teratas setiap hasil pencarian.</p>
+<p>Contoh berikut menunjukkan bentuk hasil Python dengan skor kosinus ilustratif. Skor dapat bervariasi tergantung presisi bilangan floating-point. Hanya bidang keluaran yang diminta yang muncul di <code translate="no">entity</code>; contoh REST mengembalikan bidang-bidang tersebut di tingkat atas setiap hasil pencarian.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>

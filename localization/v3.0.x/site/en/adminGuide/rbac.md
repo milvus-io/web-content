@@ -2,9 +2,8 @@
 id: rbac.md
 title: RBAC Explained
 summary: >-
-  RBAC (Role-Based Access Control) is an access control method based on roles.
-  With RBAC, you can finely control the operations users can perform at the
-  collection, database, and instance levels, enhancing data security.
+  RBAC (Role-Based Access Control) controls the operations users can perform at
+  the collection, database, and instance levels based on roles.
 ---
 <h1 id="RBAC-Explained" class="common-anchor-header">RBAC Explained<button data-href="#RBAC-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +44,7 @@ summary: >-
     <span>Users Roles Privileges</span>
   </span>
 </p>
-<p>There are four major components in the RBAC model.</p>
+<p>There are five major components in the RBAC model.</p>
 <ul>
 <li><p><strong>Resource:</strong> The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.</p></li>
 <li><p><strong>Privilege:</strong> The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc).</p></li>
@@ -68,7 +67,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The achieve access control via RBAC, you need to follow the steps below:</p>
+    </button></h2><p>To achieve access control via RBAC, you need to follow the steps below:</p>
 <ol>
 <li><p><strong><a href="/docs/users_and_roles.md#Create-a-user">Create a user</a></strong>: In addition to the default user <code translate="no">root</code> in Milvus, you can create new users and set passwords to protect data security.</p></li>
 <li><p><strong><a href="/docs/users_and_roles.md#Create-a-role">Create a role</a></strong>: You can create customized roles based on your needs. The specific capabilities of a role are determined by its privileges.</p></li>

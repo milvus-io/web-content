@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus memungkinkan Anda menyimpan dan mengindeks data terstruktur dalam satu bidang menggunakan tipe data JSON ( <code translate="no">JSON</code> ). Hal ini memungkinkan skema yang fleksibel dengan atribut bersarang, sekaligus tetap memungkinkan penyaringan yang efisien melalui pengindeksan JSON.</p>
+    </button></h1><p>Milvus memungkinkan Anda menyimpan dan mengindeks data terstruktur dalam satu bidang menggunakan tipe data <code translate="no">JSON</code>. Hal ini memungkinkan skema yang fleksibel dengan atribut bersarang, sekaligus tetap memungkinkan penyaringan yang efisien melalui pengindeksan JSON.</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">Apa itu bidang JSON?<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -488,7 +488,7 @@ curl --request POST \
 <li><p><strong>Tipe konversi JSON</strong> (<code translate="no">json_cast_type</code>): Tipe data yang harus digunakan Milvus saat menafsirkan dan mengindeks nilai pada jalur yang ditentukan.</p>
 <ul>
 <li><p>Tipe ini harus sesuai dengan tipe data sebenarnya dari bidang yang diindeks. Jika Anda ingin mengubah tipe data menjadi tipe lain selama proses pengindeksan, pertimbangkan <a href="/docs/id/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">untuk menggunakan fungsi cast</a>.</p></li>
-<li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">di bawah</a>.</p></li>
+<li><p>Untuk daftar lengkapnya, lihat <a href="/docs/id/use-json-fields.md#Supported-JSON-cast-types">di bawah ini</a>.</p></li>
 </ul></li>
 </ul>
 <h4 id="Supported-JSON-cast-types" class="common-anchor-header">Tipe konversi JSON yang didukung</h4><p>Tipe konversi tidak membedakan huruf besar dan kecil. Tipe-tipe berikut ini didukung:</p>
@@ -530,7 +530,7 @@ curl --request POST \
    </tr>
 </table>
 <div class="alert note">
-<p>Array harus berisi elemen dengan tipe yang sama agar pengindeksan dapat berjalan optimal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
+<p>Array harus berisi elemen dengan tipe yang sama agar pengindeksan berjalan optimal. Untuk informasi lebih lanjut, lihat <a href="/docs/id/array_data_type.md">Bidang Array</a>.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Contoh: Membuat indeks jalur JSON</h4><p>Dengan menggunakan struktur JSON " <code translate="no">metadata</code> " dari pengantar kami, berikut adalah contoh cara membuat indeks pada jalur JSON yang berbeda:</p>
 <div class="multipleCode">
@@ -657,7 +657,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
      <td><p>Mengonversi " <code translate="no">"99.99"</code> " menjadi <code translate="no">99.99</code></p></td>
    </tr>
 </table>
-<h5 id="Example-Cast-string-numbers-to-double" class="common-anchor-header">Contoh: Mengonversi angka dalam string menjadi double</h5><div class="multipleCode">
+<h5 id="Example-Cast-string-numbers-to-double" class="common-anchor-header">Contoh: Mengonversi angka dalam bentuk string menjadi double</h5><div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
  <a href="#javascript">   NodeJS</a>
@@ -941,7 +941,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tidak, bidang JSON tidak mendukung nilai default. Namun, Anda dapat menetapk <code translate="no">nullable=True</code> saat mendefinisikan bidang tersebut untuk mengizinkan entri kosong.</p>
+    </button></h3><p>Tidak, bidang JSON tidak mendukung nilai default. Namun, Anda dapat menetapk <code translate="no">nullable=True</code> saat mendefinisikan bidang untuk mengizinkan entri kosong.</p>
 <p>Lihat <a href="/docs/id/nullable-and-default.md">Nullable &amp; Default</a> untuk detailnya.</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Apakah ada konvensi penamaan untuk kunci bidang JSON?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"

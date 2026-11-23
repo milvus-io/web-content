@@ -1,9 +1,7 @@
 ---
 id: stl-sort.md
 title: STL_SORT
-summary: >-
-  STL_SORT 인덱스는 데이터를 정렬된 순서대로 구성함으로써 숫자형 필드(INT8, INT16 등), VARCHAR 필드 또는
-  TIMESTAMPTZ 필드에 대한 쿼리 성능을 향상시키기 위해 특별히 설계된 인덱스 유형입니다.
+summary: '호환되는 필드에 대해 값 조회, 범위 필터링 및 문자열 접두사 일치를 수행할 때는 STL_SORT를 사용하십시오.'
 ---
 <h1 id="STLSORT" class="common-anchor-header">STL_SORT<button data-href="#STLSORT" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">STL_SORT</code> 인덱스는 Milvus 내에서 데이터가 정렬된 순서로 구성되도록 하여 숫자형 필드(INT8, INT16 등), <code translate="no">VARCHAR</code> 필드 또는 <code translate="no">TIMESTAMPTZ</code> 필드에 대한 쿼리 성능을 향상시키기 위해 특별히 설계된 인덱스 유형입니다.</p>
-<p>다음과 같은 쿼리를 자주 실행하는 경우 <code translate="no">STL_SORT</code> 인덱스를 사용하십시오.</p>
-<ul>
-<li><p><code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code> 연산자를 사용한 비교 필터링</p></li>
-<li><p><code translate="no">IN</code> 및 <code translate="no">LIKE</code> 연산자를 사용한 범위 필터링</p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">STL_SORT</code> 값을 정렬된 순서대로 저장하여 값 조회, 범위 필터링 및 문자열 접두사 일치를 가속화합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,12 +34,31 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><p>숫자형 필드(예: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). 자세한 내용은 <a href="/docs/ko/number.md">‘부울 및 숫자</a>’를 참조하십시오.</p></li>
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li><p>숫자 필드(예: <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>). 자세한 내용은 <a href="/docs/ko/number.md">‘부울 및 숫자</a>’를 참조하십시오.</p></li>
 <li><p><code translate="no">VARCHAR</code> 필드. 자세한 내용은 <a href="/docs/ko/string.md">'문자열 필드</a>'를 참조하십시오.</p></li>
 <li><p><code translate="no">TIMESTAMPTZ</code> 필드. 자세한 내용은 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하십시오.</p></li>
 </ul>
-<h2 id="How-it-works" class="common-anchor-header">작동 원리<button data-href="#How-it-works" class="anchor-icon" translate="no">
+<p>StructArray 내의 숫자, VARCHAR 또는 TIMESTAMPTZ 하위 필드에 대해서는 <a href="/docs/ko/index-structarray-fields.md#Create-scalar-indexes">StructArray 필드 인덱스를</a> 참조하십시오. 일반 ARRAY 필드는 <code translate="no">STL_SORT</code> 를 지원하지 않습니다. <a href="/docs/ko/array_data_type.md#Array-index-support">인덱스</a> 선택 사항에 대해서는 <a href="/docs/ko/array_data_type.md#Array-index-support">배열 인덱스 지원을</a> 참조하십시오.</p>
+<p><code translate="no">DOUBLE</code> 또는 <code translate="no">VARCHAR</code> 로 형변환된 JSON 경로는 <a href="/docs/ko/json-indexing.md#Index-requirements">3.0 JSON 인덱스 옵트인 설정</a> 후 <code translate="no">STL_SORT</code> 을 지원합니다.</p>
+<p><a id="Queries-accelerated-by-STLSORT"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">필터 가속<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,23 +73,76 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 두 단계에 걸쳐 <code translate="no">STL_SORT</code> 를 구현합니다:</p>
-<ol>
-<li><p><strong>인덱스 구축</strong></p>
+    </button></h3><p><code translate="no">STL_SORT</code> 인덱스는 필드 및 형 변환 호환성에 따라 다음 조건의 평가에 도움이 될 수 있습니다:</p>
 <ul>
-<li><p>데이터 수집 과정에서 Milvus는 인덱싱 대상 필드의 모든 값을 수집합니다.</p></li>
-<li><p>이 값들은 C++ STL의 <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort를</a> 사용하여 오름차순으로 정렬됩니다.</p></li>
-<li><p>각 값은 해당 엔티티 ID와 짝을 이루며, 정렬된 배열은 인덱스로 저장됩니다.</p></li>
-</ul></li>
-<li><p><strong>쿼리 가속화</strong></p>
-<ul>
-<li><p>쿼리 시, Milvus는 정렬된 배열에 대해 <strong>이진 검색</strong> (<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> 및 <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>) <strong>을</strong> 사용합니다.</p></li>
-<li><p>동일성 검색의 경우, Milvus는 일치하는 모든 값을 빠르게 찾습니다.</p></li>
-<li><p>범위의 경우, Milvus는 시작 및 끝 위치를 찾아 그 사이의 모든 값을 반환합니다.</p></li>
-<li><p>일치하는 엔티티 ID는 최종 결과 조립을 위해 쿼리 실행기로 전달됩니다.</p></li>
-</ul></li>
-</ol>
+<li>동일성(<code translate="no">==</code>, <code translate="no">!=</code>) 및 멤버십(<code translate="no">in</code>, <code translate="no">not in</code>).</li>
+<li>범위: <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>, 여기에는 <code translate="no">10 &lt;= price &lt; 50</code> 와 같은 구간도 포함됩니다.</li>
+<li><code translate="no">name LIKE &quot;abc%&quot;</code> 과 같은 VARCHAR 접두사 일치.</li>
+<li>적격한 JSON 스칼라 경로에 대한 비교. <a href="/docs/ko/json-indexing.md#Supported-filters">JSON 필터를</a> 참조하십시오.</li>
+</ul>
+<p>접미사, 부분 문자열, 일반 LIKE 및 정규식 필터의 경우, Milvus는 인덱스에 저장된 문자열을 기준으로 패턴을 평가할 수 있습니다. 이 과정에서 많은 개별 문자열을 조회해야 할 수 있습니다. 구문 및 계획 간소화에 대해서는 <a href="/docs/ko/pattern-matching.md">패턴 일치를</a> 참조하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p>이는 인덱스의 기능일 뿐, 유효한 필터 표현식에 대한 제한 사항은 아닙니다. 공유 조회 제약 조건에 대해서는 <a href="/docs/ko/scalar_index.md#Filter-execution">스칼라 인덱스를</a> 참조하십시오. <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 및 NULL 테스트(<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>)에 대해서는 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<p><a id="Usage-notes"></a></p>
+<h3 id="Memory-considerations" class="common-anchor-header">메모리 관련 고려 사항<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>명시적 <code translate="no">STL_SORT</code> 인덱스는 메모리 매핑 모드를 지원하지 않습니다.</p>
+<p>NULL 값이 없는 숫자 및 타임스탬프 필드의 경우, 바이트 단위로 다음의 대략적인 추정치를 사용하십시오. <code translate="no">N</code> 는 엔티티의 수입니다:</p>
+<table>
+<thead>
+<tr><th>필드 유형</th><th>추정치</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">FLOAT</code></td><td><code translate="no">12 * N</code></td></tr>
+<tr><td><code translate="no">INT64</code>, <code translate="no">DOUBLE</code>, <code translate="no">TIMESTAMPTZ</code></td><td><code translate="no">20 * N</code></td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>대표적인 데이터를 사용하여 측정하십시오. 로드된 메모리 용량은 문자열 저장 방식, 고유 값 수, 포스팅 리스트 용량에 따라 달라집니다.</td></tr>
+</tbody>
+</table>
+<p>바이트를 MiB로 변환하려면 <code translate="no">1024 * 1024</code> 로 나누십시오. NULL이 아닌 INT64 값 100만 개는 메인 인덱스 구조에 약 19 MiB가 필요합니다. VARCHAR 인덱스는 로드 후 측정하십시오. 직렬화된 인덱스 크기에는 메모리 내의 모든 문자열 및 포스팅 목록 할당량이 포함되지 않습니다.</p>
+<p>이러한 대략적인 추정치는 메모리 매핑이 비활성화된 상태에서 로드된 인덱스 메모리를 다룹니다. 세그먼트별로 계산한 후, 로드된 세그먼트와 복제본 전체에 걸쳐 합산하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p>로드된 필드 데이터, 벡터 인덱스, 컬렉션 및 인덱스 오버헤드, 임시 할당을 위해 추가 메모리를 확보하십시오. 대표적인 데이터와 쿼리를 사용하여 검증하십시오. 배열, JSON, 구형 인덱스 형식 및 메모리 매핑은 별도의 측정이 필요합니다.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-STLSORT-works" class="common-anchor-header">STL_SORT의 작동 방식<button data-href="#How-STLSORT-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>정렬 및 조회 과정 살펴보기</strong></summary></p>
+<p>인덱스 구축 과정에서 Milvus는 필드 값을 엔티티 ID와 쌍으로 매칭하고, <a href="https://en.cppreference.com/w/cpp/algorithm/sort.html">std::sort를</a> 사용하여 오름차순으로 정렬한 후 정렬된 배열을 저장합니다.</p>
+<p>등가 및 범위 쿼리의 경우, 이진 검색(<a href="https://en.cppreference.com/w/cpp/algorithm/lower_bound.html">std::lower_bound</a> 및 <a href="https://en.cppreference.com/w/cpp/algorithm/upper_bound.html">std::upper_bound</a>)을 통해 일치하는 구간을 찾습니다. 쿼리 실행기는 해당 구간의 엔티티 ID를 수신합니다.</p>
 <p>이를 통해 쿼리 복잡도가 <strong>O(n)</strong> (전체 스캔)에서 <strong>O(log n + m)</strong>으로 감소하며, 여기서 <em>m은</em> 일치 항목의 수입니다.</p>
+<p></details></p>
 <h2 id="Create-an-STLSORT-index" class="common-anchor-header">STL_SORT 인덱스 생성<button data-href="#Create-an-STLSORT-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,8 +158,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>숫자, <code translate="no">VARCHAR</code> 또는 <code translate="no">TIMESTAMPTZ</code> 필드에 <code translate="no">STL_SORT</code> 인덱스를 생성할 수 있습니다. 별도의 매개 변수는 필요하지 않습니다.</p>
-<p>아래 예제는 <code translate="no">TIMESTAMPTZ</code> 필드에 <code translate="no">STL_SORT</code> 인덱스를 생성하는 방법을 보여줍니다:</p>
+    </button></h2><p><code translate="no">index_type</code> 를 <code translate="no">STL_SORT</code> 로 설정합니다. 별도의 인덱스 매개변수는 필요하지 않습니다. 이 예제는 <code translate="no">TIMESTAMPTZ</code> 필드에 인덱스를 생성합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -260,10 +324,9 @@ curl --request POST \
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> 메서드를 사용하여 컬렉션에서 기존 인덱스를 제거합니다.</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong> 이하 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
-<li><p><strong>v2.6.4부터는</strong> 스칼라 인덱스가 더 이상 필요하지 않으면 컬렉션을 먼저 해제할 필요 없이 직접 삭제할 수 있습니다.</p></li>
-</ul>
+<blockquote>
+<p>스칼라 인덱스를 삭제할 때의 릴리스 요구 사항에 대해서는 <a href="/docs/ko/scalar_index.md#Drop-index-compatibility">스칼라 인덱스를</a> 참조하십시오.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -376,23 +439,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">사용법 참고 사항<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>필드 유형:</strong> 숫자형(numeric), 정수형( <code translate="no">VARCHAR</code>), 실수형( <code translate="no">TIMESTAMPTZ</code> ) 필드에서 작동합니다. 데이터 유형에 대한 자세한 내용은 <a href="/docs/ko/number.md">Boolean &amp; Number</a> 및 <a href="/docs/ko/timestamptz-field.md">TIMESTAMPTZ 필드를</a> 참조하십시오.</p></li>
-<li><p><strong>매개변수:</strong> 인덱스 매개변수는 필요하지 않습니다.</p></li>
-<li><p><strong>Mmap 미지원:</strong> <code translate="no">STL_SORT</code> 의 경우 메모리 매핑 모드를 사용할 수 없습니다.</p></li>
-</ul>

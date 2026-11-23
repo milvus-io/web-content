@@ -65,7 +65,7 @@ title: Configure Access Logs
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">proxy:</span>
   <span class="hljs-attr">accessLog:</span>
     <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-comment"># If `filename` is emtpy, logs will be printed to stdout.</span>
+    <span class="hljs-comment"># If `filename` is empty, logs will be printed to stdout.</span>
     <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;&quot;</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -95,16 +95,16 @@ title: Configure Access Logs
     <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;access_log.txt&quot;</span> <span class="hljs-comment"># Name of the access log file</span>
     <span class="hljs-attr">localPath:</span> <span class="hljs-string">&quot;/var/logs/milvus&quot;</span> <span class="hljs-comment"># Local file path where the access log file is stored</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">500</span> <span class="hljs-comment"># Max size for each single access log file. Unit: MB</span>
-    <span class="hljs-attr">rotatedTime:</span> <span class="hljs-number">24</span> <span class="hljs-comment"># Time interval for log rotation. Unit: seconds</span>
+    <span class="hljs-attr">rotatedTime:</span> <span class="hljs-number">86400</span> <span class="hljs-comment"># Time interval for log rotation. Unit: seconds</span>
     <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span> <span class="hljs-comment"># Max number of sealed access log files that can be retained</span>
     <span class="hljs-comment"># Additional formatter configurations...</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>These parameters are specified when <code translate="no">filename</code> is not empty.</p>
 <ul>
-<li><code translate="no">proxy.accessLog.localPath</code>: The local file path where the access log file is stored.</li>
-<li><code translate="no">proxy.accessLog.maxSize</code>: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file.</li>
-<li><code translate="no">proxy.accessLog.rotatedTime</code>: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one.</li>
-<li><code translate="no">proxy.accessLog.maxBackups</code>: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted.</li>
+<li><code translate="no">proxy.accessLog.localPath</code>: The local file path where the access log file is stored. Defaults to <code translate="no">/tmp/milvus_access</code>.</li>
+<li><code translate="no">proxy.accessLog.maxSize</code>: The maximum size in MB allowed for a single access log file. If the log file size reaches this limit, a rotation process will be triggered. This process seals the current access log file, creates a new log file, and clears the contents of the original log file. Defaults to <strong>64</strong>.</li>
+<li><code translate="no">proxy.accessLog.rotatedTime</code>: The maximum time interval in seconds allowed for rotating a single access log file. Upon reaching the specified time interval, a rotation process is triggered, resulting in the creation of a new access log file and sealing of the previous one. Defaults to <strong>0</strong>.</li>
+<li><code translate="no">proxy.accessLog.maxBackups</code>: The maximum number of sealed access log files that can be retained. If the number of sealed access log files exceeds this limit, the oldest one will be deleted. Defaults to <strong>8</strong>.</li>
 </ul>
 <h3 id="Config-for-uploading-local-access-log-files-to-MinIO" class="common-anchor-header">Config for uploading local access log files to MinIO<button data-href="#Config-for-uploading-local-access-log-files-to-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -128,7 +128,7 @@ title: Configure Access Logs
     <span class="hljs-attr">filename:</span> <span class="hljs-string">&quot;access_log.txt&quot;</span>
     <span class="hljs-attr">localPath:</span> <span class="hljs-string">&quot;/var/logs/milvus&quot;</span>
     <span class="hljs-attr">maxSize:</span> <span class="hljs-number">500</span>
-    <span class="hljs-attr">rotatedTime:</span> <span class="hljs-number">24</span> 
+    <span class="hljs-attr">rotatedTime:</span> <span class="hljs-number">86400</span>
     <span class="hljs-attr">maxBackups:</span> <span class="hljs-number">7</span>
     <span class="hljs-attr">minioEnable:</span> <span class="hljs-literal">true</span>
     <span class="hljs-attr">remotePath:</span> <span class="hljs-string">&quot;/milvus/logs/access_logs&quot;</span>
@@ -138,8 +138,8 @@ title: Configure Access Logs
 <p>When configuring MinIO parameters, ensure that you have set either <code translate="no">maxSize</code> or <code translate="no">rotatedTime</code>. Failure to do so may result in unsuccessful uploads of local access log files to MinIO.</p>
 <ul>
 <li><code translate="no">proxy.accessLog.minioEnable</code>: Whether to upload local access log files to MinIO. Defaults to <strong>false</strong>.</li>
-<li><code translate="no">proxy.accessLog.remotePath</code>: The path of the object storage for uploading access log files.</li>
-<li><code translate="no">proxy.accessLog.remoteMaxTime</code>: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature.</li>
+<li><code translate="no">proxy.accessLog.remotePath</code>: The path of the object storage for uploading access log files. Defaults to <code translate="no">access_log/</code>.</li>
+<li><code translate="no">proxy.accessLog.remoteMaxTime</code>: The time interval allowed for uploading access log files. If the upload time of a log file exceeds this interval, the file will be deleted. Setting the value to 0 disables this feature. Defaults to <strong>0</strong>.</li>
 </ul>
 <h2 id="Formatter-config" class="common-anchor-header">Formatter config<button data-href="#Formatter-config" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,8 +176,8 @@ title: Configure Access Logs
         <span class="hljs-attr">methods:</span> [<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.format</code>: Defines the log format with dynamic metrics. For more information, see <a href="#reference-supported-metrics">Supported metrics</a>.</li>
-<li><code translate="no">proxy.accessLog.&lt;formatter_name&gt;.methods</code>: Lists Milvus operations using this formatter. To obtain method names, see <strong>MilvusService</strong> in <a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvus methods</a>.</li>
+<li><code translate="no">proxy.accessLog.formatters.&lt;formatter_name&gt;.format</code>: Defines the log format with dynamic metrics. For more information, see <a href="#reference-supported-metrics">Supported metrics</a>.</li>
+<li><code translate="no">proxy.accessLog.formatters.&lt;formatter_name&gt;.methods</code>: Lists Milvus operations using this formatter. To obtain method names, see <strong>MilvusService</strong> in <a href="https://github.com/milvus-io/milvus-proto/blob/master/proto/milvus.proto">Milvus methods</a>.</li>
 </ul>
 <h2 id="Reference-Supported-metrics" class="common-anchor-header">Reference: Supported metrics<button data-href="#Reference-Supported-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -216,5 +216,16 @@ title: Configure Access Logs
 <tr><td><code translate="no">$time_start</code></td><td>Time at which the access starts</td></tr>
 <tr><td><code translate="no">$time_end</code></td><td>Time at which the access ends</td></tr>
 <tr><td><code translate="no">$sdk_version</code></td><td>Version of the Milvus SDK used by the user</td></tr>
+<tr><td><code translate="no">$error_type</code></td><td>Type of the error: <strong>system_error</strong> or <strong>input_error</strong></td></tr>
+<tr><td><code translate="no">$output_fields</code></td><td>Output fields of the request</td></tr>
+<tr><td><code translate="no">$cluster_prefix</code></td><td>Cluster prefix set in <code translate="no">msgChannel.chanNamePrefix.cluster</code></td></tr>
+<tr><td><code translate="no">$consistency_level</code></td><td>Consistency level of the request</td></tr>
+<tr><td><code translate="no">$anns_field</code></td><td>Vector field of a search or hybrid search request</td></tr>
+<tr><td><code translate="no">$nq</code></td><td>Number of query vectors of a search or hybrid search request</td></tr>
+<tr><td><code translate="no">$search_params</code></td><td>Search parameters of a search or hybrid search request</td></tr>
+<tr><td><code translate="no">$query_params</code></td><td>Query parameters of a query request</td></tr>
+<tr><td><code translate="no">$client_request_time</code></td><td>Request time that the client sets in the gRPC metadata</td></tr>
+<tr><td><code translate="no">$template_value_length</code></td><td>Length of each expression template value</td></tr>
+<tr><td><code translate="no">$partial_update</code></td><td>Whether an upsert request is a partial update</td></tr>
 </tbody>
 </table>

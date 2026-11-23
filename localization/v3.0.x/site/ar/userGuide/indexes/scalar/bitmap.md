@@ -2,10 +2,8 @@
 id: bitmap.md
 title: BITMAP
 summary: >-
-  تعد فهرسة الصور النقطية تقنية فهرسة فعالة مصممة لتحسين أداء الاستعلامات على
-  الحقول القياسية ذات الكاردينالية المنخفضة. ويشير مصطلح «الكاردينالية» إلى عدد
-  القيم المتميزة في الحقل. وتُعتبر الحقول التي تحتوي على عدد أقل من العناصر
-  المتميزة ذات كاردينالية منخفضة.
+  استخدم BITMAP للتصفية القياسية ذات الكاردينالية المنخفضة. تحقق من المرشحات
+  المدعومة، وقيود الحقول، وإنشاء الفهارس.
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,8 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>الفهرسة باستخدام الخرائط البتية هي تقنية فهرسة فعالة مصممة لتحسين أداء الاستعلامات على الحقول العددية ذات الكاردينالية المنخفضة. تشير الكاردينالية إلى عدد القيم المتميزة في الحقل. وتُعتبر الحقول التي تحتوي على عدد أقل من العناصر المتميزة ذات كاردينالية منخفضة.</p>
-<p>يساعد هذا النوع من الفهارس في تقليل وقت استرجاع الاستعلامات القياسية من خلال تمثيل قيم الحقول بتنسيق ثنائي مضغوط وإجراء عمليات بتية فعالة عليها. مقارنةً بأنواع الفهارس الأخرى، تتميز فهارس الصور النقطية عادةً بكفاءة أعلى في استخدام المساحة وسرعات استعلام أسرع عند التعامل مع الحقول ذات الكاردينالية المنخفضة.</p>
+    </button></h1><p><code translate="no">BITMAP</code> تعمل على تسريع عملية التصفية القياسية للحقول التي تحتوي على عدد قليل من القيم المتميزة، مثل رموز الحالة والفئات. ويُقصد بالعددية عدد القيم المتميزة في الحقل. تصف هذه الصفحة عوامل التصفية المدعومة، وقيود الحقول، وإنشاء الفهارس.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,26 +36,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يجمع مصطلح <strong>«الخريطة البتية» (Bitmap)</strong> بين كلمتين: <strong>«البت» (Bit)</strong> <strong>و«الخريطة» (Map)</strong>. يمثل البت أصغر وحدة من البيانات في الكمبيوتر، والتي لا يمكنها إلا أن تحمل قيمة <strong>0</strong> أو <strong>1</strong>. أما «الخريطة»، في هذا السياق، فتشير إلى عملية تحويل البيانات وتنظيمها وفقًا للقيمة التي يجب تعيينها لـ 0 و1.</p>
-<p>يتكون فهرس الصورة النقطية من مكونين رئيسيين: الصور النقطية والمفاتيح. تمثل المفاتيح القيم الفريدة في الحقل المفهرس. لكل قيمة فريدة، توجد صورة نقطية مقابلة لها. يساوي طول هذه الصور النقطية عدد السجلات في المجموعة. كل بت في الصورة النقطية يقابل سجلًا في المجموعة. إذا كانت قيمة الحقل المفهرس في السجل مطابقة للمفتاح، يتم تعيين البت المقابل إلى <strong>1</strong>؛ وإلا، يتم تعيينه إلى <strong>0</strong>.</p>
-<p>لنفترض وجود مجموعة من المستندات تحتوي على الحقلين <strong>«الفئة»</strong> <strong>و«عام</strong>». نريد استرداد المستندات التي تندرج ضمن فئة <strong>«التكنولوجيا</strong> » والمتاحة <strong>«للجمهور</strong>». في هذه الحالة، تكون مفاتيح فهارس الصور النقطية لدينا هي <strong>«التكنولوجيا</strong> » <strong>و«عام</strong>».</p>
-<p><span class="img-wrapper">
-  
-   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
-   <span>الصورة النقطية</span>
-  
- </span></p>
-<p>كما هو موضح في الشكل، فإن فهارس الصور النقطية لـ <strong>«Category»</strong> <strong>و«Public»</strong> هي:</p>
-<ul>
-<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0]، مما يشير إلى أن المستندين الأول والثالث فقط يندرجان ضمن فئة <strong>Tech</strong>.</p></li>
-<li><p><strong>«Public</strong>»: [1, 0, 0, 1, 0]، مما يشير إلى أن المستندين الأول والرابع فقط متاحان <strong>للجمهور</strong>.</p></li>
-</ul>
-<p>للعثور على المستندات التي تتطابق مع كلا المعيارين، نقوم بإجراء عملية «AND» بتية على هاتين الخريطتين البتيتين:</p>
-<ul>
-<li><strong>«Tech»</strong> و <strong>«Public</strong>»: [1, 0, 0, 0, 0]</li>
-</ul>
-<p>تشير الصورة النقطية الناتجة [1, 0, 0, 0, 0] إلى أن الوثيقة الأولى فقط (<strong>ID</strong> <strong>1</strong>) هي التي تستوفي كلا المعيارين. باستخدام الفهارس النقطية وعمليات البتات الفعالة، يمكننا تضييق نطاق البحث بسرعة، مما يلغي الحاجة إلى مسح مجموعة البيانات بأكملها.</p>
-<h2 id="Create-a-bitmap-index" class="common-anchor-header">إنشاء فهرس خريطة بتية<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">أهداف الفهرس والمرشحات<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,7 +54,106 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإنشاء فهرس صورة نقطية في Milvus، استخدم الطريقة ` <code translate="no">create_index()</code> ` وقم بتعيين المعلمة ` <code translate="no">index_type</code> ` إلى ` <code translate="no">&quot;BITMAP&quot;</code>`.</p>
+    </button></h3><p>لإنشاء فهرس « <code translate="no">BITMAP</code> » بشكل صريح، اختر هدفًا غير مفتاح أساسي من الجدول أدناه. يربط كل صف هدفًا مدعومًا بالمرشحات التي يمكن للفهرس المساعدة في تقييمها:</p>
+<table>
+<thead>
+<tr><th>هدف الفهرس</th><th>المعايير التي يمكنها استخدام الفهرس</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> الحقل</td><td>المساواة (<code translate="no">==</code> ، <code translate="no">!=</code>) والانتماء (<code translate="no">in</code> ، <code translate="no">not in</code>).</td></tr>
+<tr><td>الحقل الصحيح (<code translate="no">INT8</code> ، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code>)</td><td>المساواة والانتماء والنطاقات (<code translate="no">&lt;</code> ، <code translate="no">&lt;=</code> ، <code translate="no">&gt;</code> ، <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> الحقل</td><td>المساواة، والانتماء، والنطاقات، <a href="/docs/ar/pattern-matching.md">وأنماط LIKE أو regex</a>. يمكن لتقييم النمط أن يمر على العديد من السلاسل المفهرسة المتميزة.</td></tr>
+<tr><td>حقل <code translate="no">ARRAY</code> عادي مع عناصر <code translate="no">BOOL</code> ، <code translate="no">INT8</code> ، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code> ، أو <code translate="no">VARCHAR</code> </td><td><code translate="no">ARRAY_CONTAINS</code>، <code translate="no">ARRAY_CONTAINS_ANY</code> ، <code translate="no">ARRAY_CONTAINS_ALL</code>. انظر <a href="/docs/ar/array_data_type.md#Array-index-support">دعم مؤشر المصفوفة</a>.</td></tr>
+<tr><td>تحويل مسار JSON إلى <code translate="no">BOOL</code> أو <code translate="no">VARCHAR</code></td><td>مرشحات للقيم المنطقية أو السلسلية المقابلة أعلاه، وفقًا <a href="/docs/ar/json-indexing.md#Index-requirements">لمتطلبات فهرس JSON</a>.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>لا تدعم الفهارس القياسية، بما في ذلك <code translate="no">AUTOINDEX</code> ، حقول ARRAY التكرارية أو المصفوفات التي تحتوي على عناصر قابلة للقيمة null. انظر <a href="/docs/ar/array_data_type.md#Array-index-support">دعم فهرس المصفوفة</a> لمعاملات تصفية المصفوفات العادية <a href="/docs/ar/index-structarray-fields.md#Create-scalar-indexes">وفهرسة حقول StructArray</a> لقواعد الحقول الفرعية.</p>
+</blockquote>
+</div>
+<p>بالنسبة لأهداف ARRAY، يستخدم <code translate="no">BITMAP</code> عوامل تصفية احتواء العناصر، وليس المساواة للمصفوفة بأكملها، أو الوصول إلى العناصر حسب الموضع، أو طول المصفوفة. انظر <a href="/docs/ar/array_data_type.md#Array-index-support">دعم فهرس المصفوفات</a>.</p>
+<p>بالنسبة للاختيار التلقائي خارج نطاق هذه الأهداف الصريحة، راجع <a href="/docs/ar/scalar_index.md#AUTOINDEX-behavior">سلوك AUTOINDEX</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>هذه هي إمكانيات الفهرس، وليست قيودًا على تعبيرات المرشحات الصالحة. انظر <a href="/docs/ar/scalar_index.md#Filter-execution">«الفهرس القياسي» (Scalar Index)</a> لمعرفة قيود البحث المشتركة. بالنسبة لاختبارات <code translate="no">AND</code> و <code translate="no">OR</code> و <code translate="no">NOT</code> وNULL (<code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code>)، انظر <a href="/docs/ar/basic-operators.md">«المشغلات الأساسية» (Basic Operators</a>).</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">اعتبارات الذاكرة<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تعتمد تكاليف الذاكرة والاستعلام على عدد القيم المتميزة وتوزيعها. قارن الفهارس باستخدام عوامل تصفية تمثيلية بدلاً من التعامل مع الكاردينالية الثابتة كحد فاصل عام للأداء.</p>
+<p>بالنسبة للخرائط النقطية الكثيفة، فإن التقدير التقريبي بالبايت هو <code translate="no">(D + 1) * N / 8</code> ، حيث <code translate="no">N</code> هو عدد الكيانات و <code translate="no">D</code> هو عدد القيم المتميزة. ويشمل ذلك خريطة نقطية واحدة لكل قيمة متميزة وأخرى للتحقق من الصحة. يُضاف تخزين القيم والتكاليف الإضافية الأخرى إلى هذا التقدير؛ حيث تضيف ذاكرة التخزين المؤقتة الاختيارية حوالي <code translate="no">8 * N</code> بايت على نظام 64 بت. وقد تختلف استهلاك الذاكرة بشكل كبير في تمثيلات الصور النقطية المضغوطة.</p>
+<p>تغطي هذه التقديرات التقريبية ذاكرة الفهرس المحملة مع تعطيل تعيين الذاكرة. احسبها لكل مقطع، ثم اجمعها عبر المقاطع المحملة والنسخ المتماثلة.</p>
+<div class="alert note">
+<blockquote>
+<p>خصص ذاكرة إضافية لبيانات الحقول المحملة، وفهارس المتجهات، والتكاليف الإضافية للمجموعات والفهارس، والتخصيصات المؤقتة. تحقق من صحة التقديرات باستخدام بيانات واستعلامات تمثيلية؛ حيث تتطلب المصفوفات، وملفات JSON، وتنسيقات الفهارس القديمة، وتعيين الذاكرة قياسات منفصلة.</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">كيفية عمل BITMAP<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>عرض مثال على تصفية الصور النقطية</strong></summary></p>
+<p>يربط فهرس الصور النقطية كل قيمة حقل مميزة بصورة نقطية. ويتوافق كل بت مع كيان: حيث يعني <strong>الرقم 1</strong> أن الكيان يحتوي على تلك القيمة، بينما يعني <strong>الرقم 0</strong> أنه لا يحتوي عليها.</p>
+<p>على سبيل المثال، للعثور على المستندات العامة في فئة <strong>«Tech</strong> »، اجمع الصور النقطية الخاصة بـ <strong>«Category = Tech</strong> » و <strong>«Public = true</strong>»:</p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
+   <span>الصورة النقطية</span>
+  
+ </span></p>
+<p>كما هو موضح في الشكل، فإن فهارس الصور النقطية لـ <strong>«الفئة»</strong> <strong>و«عامة»</strong> هي:</p>
+<ul>
+<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0]، مما يشير إلى أن المستندين الأول والثالث فقط يندرجان ضمن فئة <strong>Tech</strong>.</p></li>
+<li><p><strong>«Public</strong>»: [1، 0، 0، 1، 0]، مما يشير إلى أن الوثيقتين الأولى والرابعة فقط متاحتان <strong>للجمهور</strong>.</p></li>
+</ul>
+<p>للعثور على المستندات التي تتطابق مع كلا المعيارين، نقوم بإجراء عملية «AND» بتية على هاتين الخريطتين البتيتين:</p>
+<ul>
+<li><strong>التقنية</strong> و <strong>«عامة</strong>»: [1، 0، 0، 0، 0]</li>
+</ul>
+<p>الوثيقة الأولى فقط (<strong>رقم التعريف 1</strong>) هي التي تستوفي كلا المعيارين.</p>
+<p></details></p>
+<h2 id="Create-a-bitmap-index" class="common-anchor-header">إنشاء فهرس صور نقطية<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>لإنشاء فهرس صور نقطية في Milvus، استخدم طريقة ` <code translate="no">create_index()</code> ` وقم بتعيين المعلمة ` <code translate="no">index_type</code> ` إلى ` <code translate="no">&quot;BITMAP&quot;</code>`.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -241,8 +321,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>في هذا المثال، نقوم بإنشاء فهرس صور نقطية في الحقل <code translate="no">category</code> الخاص بمجموعة <code translate="no">my_collection</code>. تُستخدم طريقة <code translate="no">add_index()</code> لتحديد اسم الحقل ونوع الفهرس واسم الفهرس.</p>
-<p>بمجرد إنشاء فهرس الصورة النقطية، يمكنك استخدام المعلمة <code translate="no">filter</code> في عمليات الاستعلام لإجراء تصفية قياسية استنادًا إلى الحقل المفهرس. يتيح لك ذلك تضييق نطاق نتائج البحث بكفاءة باستخدام فهرس الصورة النقطية. لمزيد من المعلومات، راجع <a href="/docs/ar/boolean.md">شرح التصفية</a>.</p>
+<p>يؤدي هذا إلى إنشاء فهرس على <code translate="no">my_collection.category</code>. استخدم الحقل في استعلام أو ابحث عن <code translate="no">filter</code> ؛ انظر <a href="/docs/ar/boolean.md">شرح التصفية</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">إزالة فهرس<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,12 +337,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استخدم الطريقة ` <code translate="no">drop_index()</code> ` لإزالة فهرس موجود من مجموعة.</p>
+    </button></h2><p>استخدم الطريقة <code translate="no">drop_index()</code> لإزالة فهرس موجود من مجموعة.</p>
 <div class="alert note">
-<ul>
-<li><p>في <strong>الإصدار 2.6.3</strong> أو ما قبله، يجب تحرير المجموعة قبل حذف فهرس سكالي.</p></li>
-<li><p>بدءًا من <strong>الإصدار 2.6.4</strong> أو الأحدث، يمكنك حذف الفهرس القياسي مباشرةً بمجرد انتفاء الحاجة إليه — دون الحاجة إلى تحرير المجموعة أولاً.</p></li>
-</ul>
+<blockquote>
+<p>للاطلاع على متطلبات الإصدار عند حذف فهرس سكالاري، راجع <a href="/docs/ar/scalar_index.md#Drop-index-compatibility">«الفهرس السكالاري</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -385,37 +463,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>يتم دعم الفهارس النقطية فقط للحقول العددية التي ليست مفاتيح أساسية.</p></li>
-<li><p>يجب أن يكون نوع بيانات الحقل أحد الأنواع التالية:</p>
-<ul>
-<li><p><code translate="no">BOOL</code>، <code translate="no">INT8</code> ، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code> ، <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (يجب أن تكون العناصر أحد الأنواع التالية: <code translate="no">BOOL</code> ، <code translate="no">INT8</code> ، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code> ، <code translate="no">VARCHAR</code>)</p></li>
-</ul></li>
-<li><p>لا تدعم فهارس الصور النقطية أنواع البيانات التالية:</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>، <code translate="no">DOUBLE</code>: أنواع النقاط العائمة غير متوافقة مع الطبيعة الثنائية لفهرس الصور النقطية.</p></li>
-<li><p><code translate="no">JSON</code>: تتميز أنواع بيانات JSON ببنية معقدة لا يمكن تمثيلها بكفاءة باستخدام الفهارس النقطية.</p></li>
-</ul></li>
-<li><p>فهرس الصور النقطية غير مناسب للحقول ذات الكاردينالية العالية (أي الحقول التي تحتوي على عدد كبير من القيم المتميزة).</p>
-<ul>
-<li><p>كإرشاد عام، تكون الفهارس النقطية أكثر فعالية عندما يكون عدد القيم في الحقل أقل من 500.</p></li>
-<li><p>عندما يزيد عدد القيم عن هذا الحد، تتضاءل مزايا أداء الفهارس النقطية، وتصبح تكلفة التخزين كبيرة.</p></li>
-<li><p>بالنسبة للحقول ذات الكاردينالية العالية، ضع في اعتبارك استخدام تقنيات فهرسة بديلة مثل الفهارس المقلوبة، اعتمادًا على حالة الاستخدام المحددة ومتطلبات الاستعلام.</p></li>
-</ul></li>
-</ul>

@@ -1,9 +1,9 @@
 ---
 id: choose-the-right-analyzer-for-your-use-case.md
-title: 用途に合ったアナライザーの選び方
+title: 用途に適したアナライザーの選び方
 summary: 注記
 ---
-<h1 id="Choose-the-Right-Analyzer-for-Your-Use-Case" class="common-anchor-header">用途に合ったアナライザーの選び方<button data-href="#Choose-the-Right-Analyzer-for-Your-Use-Case" class="anchor-icon" translate="no">
+<h1 id="Choose-the-Right-Analyzer-for-Your-Use-Case" class="common-anchor-header">用途に適したアナライザーの選び方<button data-href="#Choose-the-Right-Analyzer-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +46,7 @@ summary: 注記
  </span></p>
 <ol>
 <li><p><strong>トークン化（必須）：</strong>この初期段階では、<strong>トークナイザー</strong>を適用して、連続したテキスト文字列を「トークン」と呼ばれる個別の意味のある単位に分割します。トークン化の手法は、言語やコンテンツの種類によって大きく異なります。</p></li>
-<li><p><strong>トークンのフィルタリング（オプション）：</strong>トークン化の後、<strong>フィルタを</strong>適用してトークンを変更、削除、または精緻化します。これらの操作には、すべてのトークンを小文字に変換すること、一般的な無意味な単語（ストップワードなど）を削除すること、または単語を語幹形に還元すること（ステミング）などが含まれます。</p></li>
+<li><p><strong>トークンのフィルタリング（オプション）：</strong>トークン化の後、<strong>フィルタを</strong>適用してトークンを修正、削除、または精緻化します。これらの操作には、すべてのトークンを小文字に変換すること、一般的な無意味な単語（ストップワードなど）を削除すること、または単語を語幹形に還元すること（ステミング）などが含まれます。</p></li>
 </ol>
 <p><strong>例</strong>：</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -90,18 +90,18 @@ summary: 注記
      <td><p>複数語からなるフレーズの構成要素を検索しても、そのフレーズ全体を含むドキュメントが返されない。</p></td>
      <td><p><code translate="no">"state-of-the-art"</code> →<code translate="no">['state-of-the-art']</code></p></td>
      <td><p>以下の <a href="/docs/ja/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> トークナイザー</p></td>
-     <td><p>トークナイザーを備えた <a href="/docs/ja/standard-tokenizer.md"><code translate="no">standard</code></a> トークナイザーを使用して、句読点やスペースで分割します。カスタム<a href="/docs/ja/regex-filter.md">正規表現</a>フィルターを使用します。</p></td>
+     <td><p>トークナイザーを備えた <a href="/docs/ja/standard-tokenizer.md"><code translate="no">standard</code></a> トークナイザーを使用して、句読点やスペースで分割し、カスタム<a href="/docs/ja/regex-filter.md">正規表現</a>フィルターを使用します。</p></td>
    </tr>
    <tr>
      <td><p>言語の不一致</p></td>
      <td><p>特定の言語の検索結果が意味をなさないか、まったく表示されない。</p></td>
-     <td><p>中国語のテキスト：<code translate="no">"机器学习"</code> →<code translate="no">['机器学习']</code> （1つのトークン）</p></td>
+     <td><p>中国語のテキスト：<code translate="no">"机器学习"</code> →<code translate="no">['机器学习']</code> （1 つのトークン）</p></td>
      <td><p><a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a> アナライザー</p></td>
      <td><p>言語固有のアナライザー（例： <a href="/docs/ja/chinese-analyzer.md"><code translate="no">chinese</code></a>。</p></td>
    </tr>
    <tr>
      <td><p>入力方法の不一致</p></td>
-     <td><p>ユーザーはピンインを入力していますが、インデックス化されたテキストには漢字が使用されています。</p></td>
+     <td><p>ユーザーはピンインを入力していますが、インデックス化されたテキストは漢字を使用しています。</p></td>
      <td><p>中国語のテキスト：<code translate="no">"足球"</code> ；クエリテキスト：<code translate="no">"zuqiu"</code></p></td>
      <td><p>漢字トークンのみを出力するアナライザー</p></td>
      <td><p>以下の <a href="/docs/ja/jieba-tokenizer.md"><code translate="no">jieba</code></a> tokenizerおよび <a href="/docs/ja/pinyin-filter.md"><code translate="no">pinyin</code></a> フィルターを備えたカスタムアナライザーを使用します。</p></td>
@@ -122,7 +122,7 @@ summary: 注記
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>多くのユースケースでは、特別な設定は必要ありません。あなたのケースがそれに該当するかどうかを確認しましょう。</p>
+    </button></h2><p>多くのユースケースでは、特別な設定を行う必要はありません。あなたのケースがそれに該当するかどうかを確認しましょう。</p>
 <h3 id="Default-behavior-standard-analyzer" class="common-anchor-header">デフォルトの動作：<code translate="no">standard</code> アナライザー<button data-href="#Default-behavior-standard-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,7 +143,7 @@ summary: 注記
 <ul>
 <li><p>スペースや句読点でテキストを分割します</p></li>
 <li><p>すべてのトークンを小文字に変換します</p></li>
-<li><p>組み込みの一般的な英語のストップワードと、ほとんどの句読点を削除します</p></li>
+<li><p>英語の一般的なストップワードの組み込みセットと、ほとんどの句読点を削除します</p></li>
 </ul>
 <p><strong>変換例</strong>：</p>
 <pre><code translate="no" class="language-plaintext">Input:  &quot;The Milvus vector database is built for scale!&quot;
@@ -187,7 +187,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>アラビア語の文書</p></td>
      <td><p>❌ いいえ</p></td>
-     <td><p>アラビア語のテキストには、文字の異体、発音記号、タトゥイール、アラビア・インド数字、および言語固有の処理を必要とする一般的なアラビア語のストップワードが含まれる場合があります。</p></td>
+     <td><p>アラビア語のテキストには、文字の異体、発音区別符号、タトウィール、アラビア・インド数字、および言語固有の処理を必要とする一般的なアラビア語のストップワードが含まれる場合があります。</p></td>
      <td><p>組み込みの <a href="/docs/ja/arabic-analyzer.md"><code translate="no">arabic</code></a> アナライザーを使用してください。</p></td>
    </tr>
    <tr>
@@ -199,11 +199,11 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>技術文書</p></td>
      <td><p>❌ いいえ</p></td>
-     <td><p>「<code translate="no">C++</code> 」のような用語から句読点が削除されます。</p></td>
+     <td><p><code translate="no">C++</code> のような用語からは、句読点が削除されます。</p></td>
      <td><p>トークナイザーを使用して、カスタムアナライザーを作成します <a href="/docs/ja/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> トークナイザーと <a href="/docs/ja/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> フィルターを備えたカスタムアナライザーを作成します。</p></td>
    </tr>
    <tr>
-     <td><p>フランス語やスペイン語など、スペースで区切られた言語のテキスト</p></td>
+     <td><p>フランス語やスペイン語など、スペースで区切られる言語のテキスト</p></td>
      <td><p>⚠️ 場合によっては</p></td>
      <td><p>アクセント付き文字（<code translate="no">café</code> 対<code translate="no">cafe</code> ）が一致しない可能性があります。</p></td>
      <td><p>より良い結果を得るためには、 <a href="/docs/ja/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> を使用することをお勧めします。</p></td>
@@ -212,12 +212,12 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>多言語または未知の言語</p></td>
      <td><p>❌ 不可</p></td>
      <td><p><code translate="no">standard</code> アナライザーには、さまざまな文字セットやトークン化ルールを処理するために必要な、言語固有のロジックが欠けています。</p></td>
-     <td><p>ユニコード対応のトークナイゼーションを行うには、 <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a> ユニコード対応のトークナイザーを備えたカスタムアナライザーを使用してください。 </p><p>あるいは、多言語コンテンツをより正確に処理するために、<a href="/docs/ja/multi-language-analyzers.md">多言語アナライザや</a> <a href="/docs/ja/language-identifier.md">言語識別子の</a>設定を検討してください。</p></td>
+     <td><p>ユニコード対応のトークン化を行うには、 <a href="/docs/ja/icu-tokenizer.md"><code translate="no">icu</code></a> ユニコード対応のトークナイザーを備えたカスタムアナライザーを使用してください。 </p><p>あるいは、多言語コンテンツをより正確に処理するために、<a href="/docs/ja/multi-language-analyzers.md">多言語アナライザや</a> <a href="/docs/ja/language-identifier.md">言語識別子の</a>設定を検討してください。</p></td>
    </tr>
 </table>
-<p>デフォルトの `<code translate="no">standard</code> ` アナライザーが要件を満たせない場合は、別のアナライザーを実装する必要があります。その方法には 2 つの選択肢があります。</p>
+<p>デフォルトの `<code translate="no">standard</code> ` アナライザーが要件を満たせない場合は、別のアナライザーを実装する必要があります。その方法には 2 つあります。</p>
 <ul>
-<li><p><a href="/docs/ja/choose-the-right-analyzer-for-your-use-case.md#Path-A-Use-built-in-analyzers">組み込みのアナライザーを使用するか</a>、</p></li>
+<li><p><a href="/docs/ja/choose-the-right-analyzer-for-your-use-case.md#Path-A-Use-built-in-analyzers">組み込みのアナライザを使用するか</a>、</p></li>
 <li><p><a href="/docs/ja/choose-the-right-analyzer-for-your-use-case.md#Path-B-Create-a-custom-analyzer">カスタムアナライザーを作成する</a></p></li>
 </ul>
 <h2 id="Path-A-Use-built-in-analyzers" class="common-anchor-header">方法 A：組み込みアナライザーの使用<button data-href="#Path-A-Use-built-in-analyzers" class="anchor-icon" translate="no">
@@ -260,13 +260,13 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p><a href="/docs/ja/standard-analyzer.md"><code translate="no">standard</code></a></p></td>
-     <td><p>スペース区切りが主流の言語（英語、フランス語、ドイツ語、スペイン語など）</p></td>
+     <td><p>スペース区切り言語のほとんど（英語、フランス語、ドイツ語、スペイン語など）</p></td>
      <td><ul><li><p>トークナイザー：<code translate="no">standard</code></p></li><li><p>フィルター：<code translate="no">lowercase</code></p></li></ul></td>
      <td><p>初期のテキスト処理用の汎用アナライザー。単一言語のシナリオでは、言語固有のアナライザー（<code translate="no">english</code> など）の方が優れたパフォーマンスを発揮します。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a></p></td>
-     <td><p>英語専用であり、英語の意味的マッチングを向上させるためにステミングとストップワードの除去を行います。</p></td>
+     <td><p>英語専用であり、より正確な英語の意味的マッチングを実現するために、ステミングとストップワードの除去を行います。</p></td>
      <td><ul><li><p>トークナイザー：<code translate="no">standard</code></p></li><li><p>フィルター：<code translate="no">lowercase</code> 、<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
      <td><p><code translate="no">standard</code> よりも、英語のみのコンテンツに推奨されます。</p></td>
    </tr>
@@ -280,12 +280,12 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/ja/arabic-analyzer.md"><code translate="no">arabic</code></a></p></td>
      <td><p>アラビア語</p></td>
      <td><ul><li><p>トークナイザー:<code translate="no">standard</code></p></li><li><p>フィルター：<code translate="no">lowercase</code> 、<code translate="no">decimaldigit</code> 、<code translate="no">arabic_normalization</code> 、<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
-     <td><p><code translate="no">standard</code> よりもアラビア語テキストにはこちらが推奨されます。</p></td>
+     <td><p><code translate="no">standard</code> よりもアラビア語テキストにはこちらを推奨します。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/thai-analyzer.md"><code translate="no">thai</code></a></p></td>
      <td><p>タイ語</p></td>
-     <td><ul><li><p>トークナイザー:<code translate="no">thai</code></p></li><li><p>フィルター：<code translate="no">lowercase</code> 、<code translate="no">decimaldigit</code> 、<code translate="no">stop</code></p></li></ul></td>
+     <td><ul><li><p>トークナイザー：<code translate="no">thai</code></p></li><li><p>フィルター：<code translate="no">lowercase</code> 、<code translate="no">decimaldigit</code> 、<code translate="no">stop</code></p></li></ul></td>
      <td><p><code translate="no">standard</code> や空白ベースのトークン化よりも、タイ語テキストにはこちらが推奨されます。</p></td>
    </tr>
 </table>
@@ -371,11 +371,11 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/ja/whitespace-tokenizer.md"><code translate="no">whitespace</code></a></p></td>
      <td><p>空白文字でのみ分割する</p></td>
-     <td><p>前処理済みのコンテンツ、ユーザーが書式設定したテキスト</p></td>
+     <td><p>前処理済みのコンテンツ、ユーザーがフォーマットしたテキスト</p></td>
      <td><ul><li><p>入力:<code translate="no">"user_id = get_user_data()"</code></p></li><li><p>出力:<code translate="no">['user_id', '=', 'get_user_data()']</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="East-Asian-languages" class="common-anchor-header">東アジア言語</h4><p>単語間のスペースが統一されていない言語では、適切な単語分割を行うために専用のトークナイザーが必要です:</p>
+<h4 id="East-Asian-languages" class="common-anchor-header">東アジア言語</h4><p>単語間のスペースが一定ではない言語では、適切な単語分割を行うために専用のトークナイザーが必要です:</p>
 <h5 id="Chinese" class="common-anchor-header">中国語</h5><table>
    <tr>
      <th><p>トークナイザー</p></th>
@@ -393,7 +393,7 @@ schema.add_field(
      <td><p><a href="/docs/ja/lindera-tokenizer.md"><code translate="no">lindera</code></a></p></td>
      <td><p>中国語辞書（<a href="https://cc-cedict.org/wiki/">cc-cedict</a>）を用いた純粋な辞書ベースの形態素解析</p></td>
      <td><p><code translate="no">jieba</code> と比較して、中国語テキストをより汎用的な方法で処理します</p></td>
-     <td><ul><li><p>入力:<code translate="no">"机器学习算法"</code></p></li><li><p>出力:<code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
+     <td><ul><li><p>入力：<code translate="no">"机器学习算法"</code></p></li><li><p>出力:<code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
    </tr>
 </table>
 <h5 id="Thai" class="common-anchor-header">タイ語</h5><p>ほとんどのタイ語テキストについては、組み込みの <a href="/docs/ja/thai-analyzer.md"><code translate="no">thai</code></a> アナライザーを使用してください。スタンドアロンの <a href="/docs/ja/thai-tokenizer.md"><code translate="no">thai</code></a> トークナイザーは、カスタムアナライザーパイプラインを構築する必要がある場合にのみ使用してください。</p>
@@ -401,7 +401,7 @@ schema.add_field(
    <tr>
      <th><p>トークナイザー</p></th>
      <th><p>仕組み</p></th>
-     <th><p>最適な用途</p></th>
+     <th><p>適した用途</p></th>
      <th><p>使用例</p></th>
    </tr>
    <tr>
@@ -449,13 +449,13 @@ schema.add_field(
      <td><ul><li><p>入力：<code translate="no">"Hello 世界 مرحبا"</code></p></li><li><p>出力：<code translate="no">['Hello', ' ', '世界', ' ', 'مرحبا']</code></p></li></ul></td>
    </tr>
 </table>
-<p><strong>icu を使用すべき場合</strong>:</p>
+<p><strong>icu を使用すべき場合</strong>：</p>
 <ul>
 <li><p>言語の識別が現実的でない混合言語の場合。</p></li>
 <li><p><a href="/docs/ja/multi-language-analyzers.md">多言語アナライザや</a> <a href="/docs/ja/language-identifier.md">言語識別子の</a>オーバーヘッドを避けたい場合。</p></li>
 <li><p>コンテンツには主要な言語があり、全体的な意味にほとんど影響を与えない外来語が散見される場合（例：英語のテキストに、日本語やフランス語のブランド名や専門用語が散見される場合）。</p></li>
 </ul>
-<p><strong>代替アプローチ</strong>:多言語コンテンツをより正確に処理するには、多言語アナライザや言語識別子の使用を検討してください。詳細については、「<a href="/docs/ja/multi-language-analyzers.md">多言語アナライザ</a>」または「<a href="/docs/ja/language-identifier.md">言語識別子</a>」を参照してください。</p>
+<p><strong>代替アプローチ</strong>：多言語コンテンツをより正確に処理するには、多言語アナライザや言語識別子の使用を検討してください。詳細については、「<a href="/docs/ja/multi-language-analyzers.md">多言語アナライザ</a>」または「<a href="/docs/ja/language-identifier.md">言語識別子</a>」を参照してください。</p>
 <h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">ステップ 2: 精度を高めるためのフィルターを追加する<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -500,9 +500,9 @@ schema.add_field(
    </tr>
 </table>
 <div class="alert note">
-<p>東アジア言語（中国語、日本語、韓国語など）については、代わりに<a href="/docs/ja/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">言語固有のフィルタに</a>重点を置いてください。これらの言語では通常、テキスト処理に異なるアプローチが採用されており、ステミングによる効果はそれほど期待できません。</p>
+<p>東アジアの言語（中国語、日本語、韓国語など）については、代わりに<a href="/docs/ja/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">言語固有のフィルタに</a>重点を置いてください。これらの言語では通常、テキスト処理に異なるアプローチが採用されており、ステミングによる恩恵はあまり得られない可能性があります。</p>
 </div>
-<h4 id="Text-normalization-filters" class="common-anchor-header">テキスト正規化フィルター</h4><p>これらのフィルターは、テキストのバリエーションを標準化し、マッチングの一貫性を向上させます：</p>
+<h4 id="Text-normalization-filters" class="common-anchor-header">テキスト正規化フィルター</h4><p>これらのフィルターは、テキストのバリエーションを標準化し、一致の一貫性を向上させます：</p>
 <table>
    <tr>
      <th><p>フィルター</p></th>
@@ -527,13 +527,13 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/ja/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>単独の句読点トークンを削除する</p></td>
-     <td><p><code translate="no">jieba</code> 、<code translate="no">lindera</code> 、<code translate="no">icu</code> 各トークナイザーの出力をクリーンアップします。これらのトークナイザーは、句読点を単一のトークンとして返します</p></td>
-     <td><ul><li><p>入力:<code translate="no">["Hello", "!", "world"]</code></p></li><li><p>出力:<code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>句読点を含むトークンを削除する</p></td>
+     <td><p><code translate="no">jieba</code> 、<code translate="no">lindera</code> 、および<code translate="no">icu</code> トークナイザーの出力をクリーンアップします。これらのトークナイザーは、句読点を独立したトークンとして返します。<code translate="no">don't</code> や<code translate="no">3.5kg</code> のように、単語内に句読点が含まれるトークンは完全に削除されます。これらを残したい場合は、 <a href="/docs/ja/regex-filter.md"><code translate="no">regex</code></a> フィルターを使用してそれらを残すようにしてください</p></td>
+     <td><ul><li><p>入力：<code translate="no">["Hello", "!", "world"]</code></p></li><li><p>出力:<code translate="no">[['Hello'], ['world']]</code></p></li><li><p>入力:<code translate="no">["don't", "buy"]</code></p></li><li><p>出力:<code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
-     <td><p>文字と数字のみを残す</p></td>
+     <td><p>英数字のみを残す</p></td>
      <td><p>技術的な内容、クリーンなテキスト処理</p></td>
      <td><ul><li><p>入力:<code translate="no">["user123", "test@email.com"]</code></p></li><li><p>出力:<code translate="no">[['user123'], ['test', 'email', 'com']]</code></p></li></ul></td>
    </tr>
@@ -567,7 +567,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/ja/cnalphanumonly-filter.md">cnalphanumonly</a></p></td>
      <td><p>中国語</p></td>
-     <td><p>漢字と英数字のみを保持する</p></td>
+     <td><p>漢字と英数字のみを残す</p></td>
      <td><ul><li><p>入力:<code translate="no">["Hello", "世界", "123", "!@#"]</code></p></li><li><p>出力:<code translate="no">[['Hello'], ['世界'], ['123'], []]</code></p></li></ul></td>
    </tr>
    <tr>
@@ -583,7 +583,7 @@ schema.add_field(
      <td><ul><li><p>入力:<code translate="no">["中文"]</code></p></li><li><p>出力:<code translate="no">[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
    </tr>
 </table>
-<h3 id="Step-3-Combine-and-implement" class="common-anchor-header">ステップ3: 結合と実装<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">
+<h3 id="Step-3-Combine-and-implement" class="common-anchor-header">ステップ 3: 結合と実装<button data-href="#Step-3-Combine-and-implement" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -614,7 +614,7 @@ schema.add_field(
 <span class="highlighted-wrapper-line">    analyzer_params=analyzer_params,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Final-Test-with-runanalyzer" class="common-anchor-header">最終段階：以下のコマンドでテストします<code translate="no">run_analyzer</code><button data-href="#Final-Test-with-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Final-Test-with-runanalyzer" class="common-anchor-header">最終段階：以下の方法でテストします<code translate="no">run_analyzer</code><button data-href="#Final-Test-with-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -629,7 +629,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションに適用する前に、必ず設定を検証してください:</p>
+    </button></h3><p>コレクションに適用する前に、必ず設定を検証してください：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>
 
@@ -643,7 +643,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <li><p><strong>トークン化不足</strong>：フレーズが適切に分割されていない</p></li>
 <li><p><strong>トークンの欠落</strong>：重要な用語が除外されている</p></li>
 </ul>
-<p>詳細な使用方法については、<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md">run_analyzer</a>を参照してください。</p>
+<p>詳細な使用方法については、<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md">run_analyzer</a> を参照してください。</p>
 <h2 id="Recommended-configurations-by-use-case" class="common-anchor-header">ユースケース別の推奨設定<button data-href="#Recommended-configurations-by-use-case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -659,7 +659,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、Milvusでアナライザーを使用する際の一般的なユースケースに対する、推奨されるトークナイザーおよびフィルターの設定について説明します。コンテンツの種類や検索要件に最も適した組み合わせを選択してください。</p>
+    </button></h2><p>このセクションでは、Milvus でアナライザーを使用する際の一般的なユースケースに対する、推奨されるトークナイザーおよびフィルターの設定について説明します。コンテンツの種類や検索要件に最も適した組み合わせを選択してください。</p>
 <div class="alert note">
 <p>コレクションにアナライザーを適用する前に、 <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> を使用して、テキスト分析のパフォーマンスをテストおよび検証することをお勧めします。</p>
 </div>
@@ -678,7 +678,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">standard</code> トークナイザーを使用し、小文字変換、言語固有のステミング、およびストップワードの除去を設定してください。この設定は、<code translate="no">language</code> および<code translate="no">stop_words</code> パラメータを変更することで、他のヨーロッパ言語にも適用できます。</p>
+    </button></h3><p><code translate="no">standard</code> トークナイザーを使用し、小文字変換、言語固有のステミング、ストップワードの除去を設定してください。この設定は、<code translate="no">language</code> および<code translate="no">stop_words</code> パラメータを変更することで、他のヨーロッパ言語にも適用できます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># French example</span>
 analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
@@ -716,7 +716,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>包括的なフィルタリングを伴う英語テキストの処理には、組み込みの <a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a> アナライザーを使用することも可能です：</p>
+    </button></h3><p>包括的なフィルタリングを伴う英語テキスト処理用です。組み込みの <a href="/docs/ja/english-analyzer.md"><code translate="no">english</code></a> アナライザーを使用することも可能です：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [
@@ -787,14 +787,14 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">lindera</code> トークナイザーを日本語辞書およびフィルターと組み合わせて使用し、句読点を除去してトークンの長さを制御します:</p>
+    </button></h3><p><code translate="no">lindera</code> トークナイザーを日本語辞書およびフィルターと組み合わせて使用し、句読点を除去し、トークンの長さを制御します:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: {
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;lindera&quot;</span>,
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
@@ -880,7 +880,7 @@ analyzer_params = {
     </button></h2><p>アナライザーを選択した後、Milvusが提供するテキスト検索機能と統合できます。</p>
 <ul>
 <li><p><strong>全文検索</strong></p>
-<p>アナライザーは、スパースベクトルの生成を通じて、BM25ベースの全文検索に直接影響を与えます。一貫したトークン化を確保するため、インデックス作成とクエリ実行の両方で同じアナライザーを使用してください。一般的に、言語固有のアナライザーは、汎用的なアナライザーよりも優れたBM25スコアを提供します。実装の詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p></li>
+<p>アナライザーは、スパースベクトルの生成を通じて、BM25ベースの全文検索に直接影響を与えます。一貫したトークン化を確保するために、インデックス作成とクエリの両方で同じアナライザーを使用してください。一般的に、言語固有のアナライザーは、汎用的なアナライザーよりも優れたBM25スコアを提供します。実装の詳細については、「<a href="/docs/ja/full-text-search.md">全文検索</a>」を参照してください。</p></li>
 <li><p><strong>テキストマッチ</strong></p>
 <p>テキストマッチ操作は、アナライザーの出力を基に、クエリとインデックス化されたコンテンツの間でトークンの完全一致検索を行います。実装の詳細については、<a href="/docs/ja/keyword-match.md">「テキストマッチ</a>」を参照してください。</p></li>
 <li><p><strong>フレーズ一致</strong></p>

@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1499,12 +1493,6 @@
             "children": []
           },
           {
-            "label": "Compattazione tramite raggruppamento",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "Compattazione con unione forzata",
             "id": "force-merge.md",
             "order": 2,
@@ -1623,33 +1611,51 @@
             "children": []
           },
           {
+            "label": "SDK di Node.js",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "API RESTful v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Progettazione dello schema",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "Modelli di ricerca",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "Selezione dell'indice",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "Pipeline RAG",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
       },
       {
-        "label": "Abilità Milvus",
+        "label": "Abilità di Milvus",
         "id": "milvus_skill",
         "order": 2,
         "externalLink": "https://github.com/zilliztech/milvus-skill",
@@ -2176,7 +2182,7 @@
             "children": []
           },
           {
-            "label": "Connettiti a Kafka con SASL/SSL",
+            "label": "Connettiti a Kafka tramite SASL/SSL",
             "id": "connect_kafka_ssl.md",
             "order": 3,
             "children": []
@@ -2258,7 +2264,7 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Backup e ripristino in un'unica istanza",
+                    "label": "Backup e ripristino in un’unica istanza",
                     "id": "single-instance-backup-and-restore.md",
                     "order": 0,
                     "children": []

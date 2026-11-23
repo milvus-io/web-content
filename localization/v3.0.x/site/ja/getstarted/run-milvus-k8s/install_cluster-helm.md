@@ -54,7 +54,7 @@ title: Helm を使用して Milvus クラスターをインストールする
       </svg>
     </button></h2><ul>
 <li><p><a href="https://helm.sh/docs/intro/install/">Helm CLI をインストールします</a>。</p></li>
-<li><p><a href="/docs/ja/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8sクラスターを作成してください</a>。</p></li>
+<li><p><a href="/docs/ja/prerequisite-helm.md#How-can-I-start-a-K8s-cluster-locally-for-test-purposes">K8sクラスタを作成してください</a>。</p></li>
 <li><p><a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClassを</a>インストールします。インストール済みのStorageClassは、次のように確認できます。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
@@ -122,7 +122,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Helmチャートのインストールが完了したら、Kubernetes上でMilvusを起動できます。このセクションでは、Milvusクラスタのデプロイ手順について説明します。</p>
+    </button></h3><p>Helmチャートのインストールが完了したら、Kubernetes上でMilvusを起動できます。このセクションでは、Milvusクラスタのデプロイ手順を説明します。</p>
 <div class="alert note" id="standalone-deployment-note">
 <p><strong>スタンドアロンでのデプロイをご希望ですか？</strong></p>
 <p>開発やテストのために Milvus をスタンドアロンモード（シングルノード）でデプロイしたい場合は、次のコマンドを使用してください：</p>
@@ -152,14 +152,14 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>このコマンドの機能:</strong></p>
 <ul>
 <li>メッセージキューとして<strong>Woodpecker</strong>を使用します（メンテナンス負担の軽減に推奨）</li>
-<li><strong>Woodpeckerを</strong>ストリーミングノードに組み込まず、<strong>専用のサービス</strong>（独立したStatefulSet）<strong>として</strong>実行します</li>
+<li><strong>Woodpeckerを</strong>ストリーミングノードに組み込まず、<strong>専用のサービス</strong>（個別のStatefulSet）<strong>として</strong>実行します</li>
 <li>パフォーマンス向上のために、新しい<strong>ストリーミングノード</strong>コンポーネントを有効にします</li>
 <li>従来の<strong>インデックスノード</strong>を無効化します（機能は現在、データノードによって処理されます）</li>
 </ul>
 <div class="alert note">
 <p><strong>Milvus 2.6.x におけるアーキテクチャの変更点:</strong></p>
 <ul>
-<li><strong>メッセージキュー</strong>：<strong>Woodpeckerの使用が</strong>推奨されるようになりました（Pulsarと比較してインフラのメンテナンス負担を軽減します）</li>
+<li><strong>メッセージキュー</strong>：<strong>Woodpeckerの使用が</strong>推奨されるようになりました（Pulsarと比較してインフラのメンテナンス負担が軽減されます）</li>
 <li><strong>新しいコンポーネント</strong>:<strong>Streaming Nodeが</strong>導入され、デフォルトで有効化されています</li>
 <li><strong>コンポーネントの統合</strong>:<strong>インデックスノード</strong>と<strong>データノードが</strong>単一の<strong>データノード</strong>に統合されました</li>
 </ul>
@@ -280,7 +280,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
       </svg>
     </button></h2><p><code translate="no">values.yaml</code> ファイルを編集して再度適用することで、Milvus クラスタの設定を更新できます。</p>
 <ol>
-<li><p>希望の設定を記載した<code translate="no">values.yaml</code> ファイルを作成します。</p>
+<li><p>希望する設定を含む<code translate="no">values.yaml</code> ファイルを作成します。</p>
 <p>以下では、<code translate="no">proxy.http</code> を有効にする場合を想定しています。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -314,7 +314,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus には、ブラウザからアクセスできる「Milvus WebUI」という組み込みの GUI ツールが付属しています。Milvus WebUI は、シンプルで直感的なインターフェースにより、システムの可観測性を向上させます。Milvus WebUI を使用すると、Milvus のコンポーネントや依存関係の統計情報やメトリクスを確認したり、データベースやコレクションの詳細を確認したり、Milvus の詳細な設定を一覧表示したりすることができます。 Milvus WebUIの詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>参照してください。</p>
+    </button></h2><p>Milvus には、ブラウザからアクセスできる「Milvus WebUI」という組み込みの GUI ツールが付属しています。Milvus WebUI は、シンプルで直感的なインターフェースにより、システムの可観測性を高めます。Milvus WebUI を使用すると、Milvus のコンポーネントや依存関係の統計情報やメトリクスを確認したり、データベースやコレクションの詳細を確認したり、Milvus の詳細な設定を一覧表示したりすることができます。 Milvus WebUIの詳細については、<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>参照してください。</p>
 <p>Milvus WebUIへのアクセスを有効にするには、プロキシPodをローカルポートにポートフォワードする必要があります。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -470,7 +470,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus をアンインストールするには、次のコマンドを実行します。</p>
+    </button></h2><p>以下のコマンドを実行して、Milvusをアンインストールします。</p>
 <pre><code translate="no" class="language-bash">$ helm uninstall my-release
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Optional-dependencies" class="common-anchor-header">オプションの依存関係<button data-href="#Optional-dependencies" class="anchor-icon" translate="no">
@@ -495,7 +495,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>メタデータ:<a href="/docs/ja/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3はデフォルトで無効になっています。Storage V3に依存する機能を使用する前に、有効にしてください。要件および互換性に関する注意事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
+<p>Storage V3はデフォルトで無効になっています。Storage V3に依存する機能を使用する前に、有効にしてください。要件および互換性に関する考慮事項については、「<a href="/docs/ja/storage-v3.md">Storage V3</a>」を参照してください。</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

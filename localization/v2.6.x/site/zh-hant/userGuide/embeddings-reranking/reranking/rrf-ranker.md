@@ -65,7 +65,8 @@ summary: >-
      <td><p>當不同系統採用無法直接比較之評分方法時，仍能建立共識排名</p></td>
    </tr>
 </table>
-<p>若您的混合搜尋應用程式需要在不指定明確權重的情況下，公平地平衡多條搜尋路徑，RRF Ranker 便是您的理想選擇。</p>
+<p>若您的混合搜尋應用程式需要以公平的方式平衡多條搜尋路徑，且無需指定明確權重，RRF Ranker 便是您的理想選擇。</p>
+<p>若某些搜尋路徑比其他路徑更可靠，但其原始分數無法相互比較，您仍可依據排名融合結果，並為每個路徑賦予專屬權重。詳細資訊請參閱「<a href="/docs/zh-hant/v2.6.x/rrf-ranker.md#Assign-weights-to-search-paths">為搜尋路徑指派權重</a>」。若要整合各路徑的分數而非其排名，請使用<a href="/docs/zh-hant/v2.6.x/weighted-ranker.md">Weighted Ranker</a>。</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">RRF Ranker 的運作機制<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ summary: >-
 <ol>
 <li><p><strong>收集搜尋排名</strong>：收集向量搜尋各路徑的結果排名（rank_1、rank_2）。</p></li>
 <li><p><strong>合併排名</strong>：根據公式轉換各路徑的排名 (rank_rrf_1, rank_rrf_2)。</p>
-<p>計算公式涉及<em>變數 N</em>，代表檢索次數。<em>ranki</em>(<em>d</em>) 為<em>第 i 個</em>檢索器所產生的文件<em>d</em>的排名位置。<em>k</em>為平滑參數，通常設定為 60。</p></li>
+<p>計算公式涉及<em>變數 N</em>，代表檢索結果的數量。<em>ranki</em>(<em>d</em>) 表示由<em>第 i 個</em>檢索器產生的文件<em>d</em>的排名位置。<em>k</em>為平滑參數，通常設定為 60。</p></li>
 <li><p><strong>彙總排名</strong>：根據合併後的排名對搜尋結果進行重新排序，以產生最終結果。</p></li>
 </ol>
 <p><span class="img-wrapper">
@@ -270,7 +271,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>使用 RRF 重新排序策略時，您需要設定參數<code translate="no">k</code> 。此為平滑參數，可有效調整全文搜尋與向量搜尋之間的相對權重。此參數的預設值為 60，並可在 (0, 16384) 範圍內進行調整。 該值應為浮點數。建議值範圍為 [10, 100]。雖然<code translate="no">k=60</code> 是常見的選擇，但最佳的<code translate="no">k</code> 值會因您的具體應用和資料集而異。我們建議您根據具體的使用情境測試並調整此參數，以獲得最佳效能。</p>
+    </button></h2><p>使用 RRF 重新排序策略時，您需要設定參數<code translate="no">k</code> 。此為平滑參數，可有效調整全文搜尋與向量搜尋之間的相對權重。此參數的預設值為 60，並可在 (0, 16384) 範圍內進行調整。 該值應為浮點數。建議值範圍為 [10, 100]。雖然<code translate="no">k=60</code> 是常見的選擇，但最佳的<code translate="no">k</code> 值會因您的具體應用場景和資料集而異。我們建議您根據具體的使用情境進行測試與調整此參數，以獲得最佳效能。</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">建立 RRF 排序器<button data-href="#Create-an-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -374,6 +375,143 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
+<h3 id="Assign-weights-to-search-paths" class="common-anchor-header">為搜尋路徑指派權重<button data-href="#Assign-weights-to-search-paths" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>將 `<code translate="no">params.weights</code> ` 設為特定值，可讓每個搜尋路徑對融合排名產生不同的影響。每個文檔的分數將計算為 `<code translate="no">score(d) = Σ weights[i] / (k + rank_i(d))</code>`。位置<em>`i`</em>處的數值適用於您混合搜尋呼叫中的<em>第 `i` 個</em>搜尋請求，順序依您傳遞請求的順序而定。 每個權重必須介於 0 至 1 之間（含 0 和 1），且您必須針對每個搜尋請求提供恰好一個權重；否則，該請求將因參數錯誤而失敗。 權重不會經過歸一化處理，且總和無需等於 1。若權重設定為<code translate="no">0</code> ，將移除該路徑對分數的貢獻，但其結果仍可能出現在合併結果中。若省略<code translate="no">weights</code> ，每個路徑的權重皆為 1，此即為經典 RRF。</p>
+<div class="alert note">
+<p>加權 RRF 需使用 Milvus 2.6.23 或更新版本。較早版本會忽略<code translate="no">weights</code> 參數而不返回錯誤，並以經典 RRF 進行結果排序。</p>
+</div>
+<p>例如，將權重<code translate="no">[0.3, 0.7]</code> 套用至上述<a href="/docs/zh-hant/v2.6.x/rrf-ranker.md#Example-of-RRF-Ranker">稀疏-密集範例</a>，並將<code translate="no">k</code> 設定為 60。由於稀疏請求會優先處理，因此<code translate="no">0.3</code> 適用於稀疏搜尋，而<code translate="no">0.7</code> 則適用於密集搜尋：</p>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>排名 (稀疏)</strong></p></th>
+     <th><p><strong>排名 (密集)</strong></p></th>
+     <th><p><strong>最終分數</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>0.3/(60+1)+0.7/(60+2) = 0.01620836</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>0.3/(60+4)+0.7/(60+1) = 0.01616291</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>0.3/(60+5)+0.7/(60+4) = 0.01555288</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>不適用</p></td>
+     <td><p>3</p></td>
+     <td><p>0.7/(60+3) = 0.01111111</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>不適用</p></td>
+     <td><p>5</p></td>
+     <td><p>0.7/(60+5) = 0.01076923</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>不適用</p></td>
+     <td><p>0.3/(60+2) = 0.00483871</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>不適用</p></td>
+     <td><p>0.3/(60+3) = 0.00476190</p></td>
+   </tr>
+</table>
+<p>當 topK=5 時，僅出現在密集結果中的 ID 110 和 250，將取代最終結果中的 ID 203 和 150。</p>
+<p>若要建立加權 RRF 排序器，請在排序器參數中加入 `<code translate="no">weights</code> `，然後依照<a href="/docs/zh-hant/v2.6.x/rrf-ranker.md#Apply-to-hybrid-search">「套用至混合搜尋</a>」中的說明，將排序器傳遞至您的混合搜尋。對於 cURL，請將該物件用作混合搜尋請求中的 `<code translate="no">rerank</code> ` 值；如需完整的請求範例，請參閱《<a href="/docs/zh-hant/v2.6.x/multi-vector-search.md">多向量混合搜尋</a>》：</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
+
+ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]  <span class="hljs-comment"># One weight per search request, in request order</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+rerank := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-number">100</span>).
+    WithParam(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+<span class="hljs-comment">// Pass it with milvusclient.NewHybridSearchOption(...).WithFunctionRerankers(rerank)</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;rerank&quot;</span>: {
+    <span class="hljs-string">&quot;strategy&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;k&quot;</span>: 100,
+        <span class="hljs-string">&quot;weights&quot;</span>: [0.3, 0.7]
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>請依照上述形式傳遞權重。SDK 的 RRF 輔助類別並未提供權重選項，且透過通用參數方法新增至其中的權重將被忽略，且不會觸發錯誤。</p>
+</div>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

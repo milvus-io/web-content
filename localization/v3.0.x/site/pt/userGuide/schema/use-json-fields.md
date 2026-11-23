@@ -4,7 +4,7 @@ title: Campo JSON
 summary: >-
   O Milvus permite-lhe armazenar e indexar dados estruturados num único campo
   utilizando o tipo de dados JSON. Isto permite esquemas flexíveis com atributos
-  aninhados, ao mesmo tempo que permite uma filtragem eficiente através da
+  aninhados, ao mesmo tempo que possibilita uma filtragem eficiente através da
   indexação JSON.
 ---
 <h1 id="JSON-Field" class="common-anchor-header">Campo JSON<button data-href="#JSON-Field" class="anchor-icon" translate="no">
@@ -849,7 +849,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <li><p>A coleção esteja carregada na memória.</p></li>
 </ul>
 <p>Para obter uma lista completa dos operadores e expressões suportados, consulte <a href="/docs/pt/json-operators.md">Operadores JSON</a>.</p>
-<h2 id="Pull-it-all-together" class="common-anchor-header">Resumindo<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
+<h2 id="Pull-it-all-together" class="common-anchor-header">Resumo<button data-href="#Pull-it-all-together" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1005,7 +1005,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <li><p><strong>Indexação numérica</strong>:</p>
 <p>Se for criado um índice com ` <code translate="no">json_cast_type=&quot;double&quot;</code>`, apenas as condições de filtragem numéricas (por exemplo, ` <code translate="no">&gt;</code>`, ` <code translate="no">&lt;</code>`, ` <code translate="no">== 42</code>`) irão utilizar esse índice. As condições não numéricas poderão recorrer a uma pesquisa por força bruta.</p></li>
 <li><p><strong>Indexação de cadeias de caracteres</strong>:</p>
-<p>Se um índice utilizar « <code translate="no">json_cast_type=&quot;varchar&quot;</code> », apenas as condições de filtragem de cadeias de caracteres beneficiarão do índice; outros tipos poderão recorrer a uma pesquisa por força bruta.</p></li>
+<p>Se um índice utilizar <code translate="no">json_cast_type=&quot;varchar&quot;</code>, apenas as condições de filtragem de cadeias de caracteres beneficiarão do índice; outros tipos poderão recorrer a uma pesquisa por força bruta.</p></li>
 <li><p><strong>Indexação booleana</strong>:</p>
 <p>A indexação booleana comporta-se de forma semelhante à indexação de cadeias de caracteres, sendo o índice utilizado apenas quando a condição corresponde estritamente a «verdadeiro» ou «falso».</p></li>
 </ul>

@@ -20,7 +20,7 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h1><p><strong>Milvus Backup 도구를</strong> 0.5.x에서 0.6.x로 업그레이드할 때 이 가이드를 사용하십시오. 아래 절차는 검증된 대상 버전으로 0.6.0을 사용합니다. 이 절차는 Milvus 서버를 업그레이드하지 않습니다. 0.5.x 버전을 계속 사용하려면 <a href="/docs/ko/milvus_backup_cli.md">0.5.x CLI</a> 또는 <a href="/docs/ko/milvus_backup_api.md">API</a> 가이드를 계속 따르십시오. 새로 설치하는 경우 <a href="/docs/ko/milvus_backup_0_6_cli.md">CLI 가이드를</a> 사용하십시오.</p>
-<p>V1 YAML 구성은 여전히 자동 변환을 통해 로드됩니다. 그러나 0.6.0에서는 더 이상 사용되지 않는 CLI 플래그가 거부되며, Milvus 3.0에서는 기본 백업 형식이 변경됩니다. 예약된 작업이나 서비스를 전환하기 전에 구성 및 명령어를 모두 검토하십시오.</p>
+<p>V1 YAML 구성은 여전히 자동 변환을 통해 로드됩니다. 그러나 0.6.0에서는 더 이상 사용되지 않는 CLI 플래그가 거부되며, Milvus 3.0에서는 기본 백업 형식이 변경됩니다. 예약된 작업이나 서비스를 전환하기 전에 구성과 명령어를 모두 검토하십시오.</p>
 <h2 id="Check-the-starting-point" class="common-anchor-header">시작점 확인<button data-href="#Check-the-starting-point" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>백업 버전, Milvus 소스 및 대상 버전, 구성 파일, 환경 변수 재정의, 백업 위치, 스크립트나 API 서비스에서 사용하는 명령어를 기록해 두십시오. 해당 서버 버전의 <a href="/docs/ko/milvus_backup_overview.md#Compatibility-matrix">호환성 정보를</a> 확인하십시오.</p>
+    </button></h2><p>백업 버전, Milvus 소스 및 대상 버전, 구성 파일, 환경 변수 재정의, 백업 위치, 스크립트나 API 서비스에서 사용하는 명령어를 기록해 두십시오. 해당 서버 버전에 대한 <a href="/docs/ko/milvus_backup_overview.md#Compatibility-matrix">호환성 정보를</a> 확인하십시오.</p>
 <p>새 설치를 검증하는 동안 원본 바이너리, 구성 및 기존 백업 디렉터리를 유지하십시오. <a href="/docs/ko/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">‘Milvus Backup 다운로드’를</a> 사용하여 0.6.0을 별도의 디렉터리에 다운로드하십시오. 아래의 모든 명령은 해당 디렉터리에서 실행되며 0.6.0 바이너리를 호출합니다. v1 구성 파일의 사본을 <code translate="no">configs/backup-v1.yaml</code> 에 배치하십시오.</p>
 <h2 id="Migrate-the-configuration" class="common-anchor-header">구성 마이그레이션<button data-href="#Migrate-the-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ beta: Milvus Backup 0.6.x
 ./milvus-backup config show --config configs/backup-v2.yaml
 ./milvus-backup check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">--strict</code> 유효하지 않은 마이그레이션된 구성은 거부됩니다. <code translate="no">--output</code> 가 지정되지 않으면, 명령어는 v2 YAML을 표준 출력으로 기록합니다. 해결된 설정을 확인한 후에만 새 파일을 검토하고 사용하십시오.</p>
+<p><code translate="no">--strict</code> 유효하지 않은 마이그레이션된 구성은 거부됩니다. <code translate="no">--output</code> 가 지정되지 않은 경우, 명령어는 v2 YAML을 표준 출력으로 작성합니다. 해결된 설정을 확인한 후에만 새 파일을 검토하고 사용하십시오.</p>
 <table>
 <thead>
 <tr><th>v1 설정</th><th>v2 설정</th></tr>
@@ -72,7 +72,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">backup.gcPause.address</code></td><td><code translate="no">milvus.management.endpoint</code></td></tr>
 </tbody>
 </table>
-<p>구성 파일과 동일한 변경 사항에서 환경 변수를 검토하십시오. V2는 <code translate="no">MILVUS_STORAGE_AUTH_SECRET_ACCESS_KEY</code> 와 같이 지원되는 자격 증명 관련 환경 변수만 허용합니다. 구버전 v1의 이름은 v2 파일에 적용되지 않습니다. 버킷 이름 및 엔드포인트와 같은 자격 증명과 무관한 설정의 경우, YAML 또는 구성 키 재정의 기능을 사용하십시오:</p>
+<p>구성 파일과 동일한 변경 사항에서 환경 변수를 검토하십시오. V2는 <code translate="no">MILVUS_STORAGE_AUTH_SECRET_ACCESS_KEY</code> 와 같이 지원되는 자격 증명 관련 환경 변수만 허용합니다. 구버전 v1 이름은 v2 파일에 적용되지 않습니다. 버킷 이름 및 엔드포인트와 같은 자격 증명과 무관한 설정의 경우, YAML 또는 구성 키 재정의 기능을 사용하십시오:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup-v2.yaml --set milvus.storage.bucketName=my-bucket
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">config migrate</code> 비밀 값을 출력 파일에 복사하지 않고 영향을 받는 환경 변수만 보고합니다. <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">지원되는 v2 환경 변수를</a> 참조하십시오. ` <code translate="no">config show</code> `는 더 이상 사용되지 않는 ` <code translate="no">check config</code> ` 명령을 대체합니다.</p>

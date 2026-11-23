@@ -1001,7 +1001,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><ul>
 <li><p><strong>숫자 인덱싱</strong>:</p>
-<p><code translate="no">json_cast_type=&quot;double&quot;</code> 로 인덱스가 생성된 경우, 숫자형 필터 조건(예: <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>)만 해당 인덱스를 활용합니다. 숫자가 아닌 조건의 경우 무차별 스캔으로 대체될 수 있습니다.</p></li>
+<p><code translate="no">json_cast_type=&quot;double&quot;</code> 로 인덱스가 생성된 경우, 숫자형 필터 조건(예: <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>)만 해당 인덱스를 활용합니다. 숫자가 아닌 조건의 경우 무차별 검색(brute-force scan)으로 전환될 수 있습니다.</p></li>
 <li><p><strong>문자열 인덱싱</strong>:</p>
 <p>인덱스가 ` <code translate="no">json_cast_type=&quot;varchar&quot;</code>`를 사용하는 경우, 문자열 필터 조건만 해당 인덱스의 이점을 누릴 수 있으며, 다른 유형의 조건은 무차별 스캔으로 전환될 수 있습니다.</p></li>
 <li><p><strong>부울 인덱싱</strong>:</p>

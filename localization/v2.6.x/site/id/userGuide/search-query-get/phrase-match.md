@@ -5,7 +5,7 @@ summary: >-
   Pencocokan frasa memungkinkan Anda mencari dokumen yang berisi istilah kueri
   Anda sebagai frasa yang persis sama. Secara default, kata-kata tersebut harus
   muncul dalam urutan yang sama dan berdekatan satu sama lain. Misalnya, kueri
-  "robotics machine learning" akan cocok dengan teks seperti "…model
+  untuk "robotics machine learning" akan cocok dengan teks seperti "…model
   pembelajaran mesin robotika yang umum…", di mana kata-kata "robotics",
   "machine", dan "learning" muncul secara berurutan tanpa ada kata lain di
   antaranya.
@@ -51,7 +51,7 @@ beta: Milvus 2.5.17+
   
  </span></p>
 <ol>
-<li><p><strong>Tokenisasi Dokumen</strong>: Saat Anda memasukkan dokumen ke Milvus, teks tersebut dipecah menjadi token (kata atau istilah individual) menggunakan penganalisis, dengan informasi posisi yang dicatat untuk setiap token. Misalnya, <strong>doc_1</strong> ditokenisasi menjadi <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. Untuk informasi lebih lanjut tentang penganalisis, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Gambaran Umum Penganalisis</a>.</p></li>
+<li><p><strong>Tokenisasi Dokumen</strong>: Saat Anda memasukkan dokumen ke Milvus, teks tersebut dipecah menjadi token (kata atau istilah individual) menggunakan penganalisis, dengan informasi posisi yang dicatat untuk setiap token. Misalnya, <strong>doc_1</strong> ditokenisasi menjadi <strong>[“machine” (pos=0), “learning” (pos=1), “boosts” (pos=2), “efficiency” (pos=3)]</strong>. Untuk informasi lebih lanjut tentang penganalisis, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p></li>
 <li><p><strong>Pembuatan Indeks Terbalik</strong>: Milvus membangun indeks terbalik, yang memetakan setiap token ke dokumen tempat token tersebut muncul serta posisi token dalam dokumen-dokumen tersebut.</p></li>
 <li><p><strong>Pencocokan Frasa</strong>: Saat kueri frasa dijalankan, Milvus mencari setiap token dalam indeks terbalik dan memeriksa posisinya untuk menentukan apakah token tersebut muncul dalam urutan dan kedekatan yang benar. Parameter “ <code translate="no">slop</code> ” mengontrol jumlah maksimum posisi yang diperbolehkan di antara token yang cocok:</p>
 <ul>
@@ -139,8 +139,8 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Akurasi pencocokan frasa sangat bergantung pada penganalisis yang digunakan untuk menokenisasi data teks Anda. Penganalisis yang berbeda cocok untuk bahasa dan format teks yang berbeda, yang memengaruhi akurasi tokenisasi dan posisi. Memilih penganalisis yang sesuai untuk kasus penggunaan spesifik Anda akan mengoptimalkan hasil pencocokan frasa Anda.</p>
-<p>Secara default, Milvus menggunakan penganalisis standar, yang memecah teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, dan mengubah teks menjadi huruf kecil. Tidak diperlukan parameter tambahan untuk penggunaan default. Lihat <a href="/docs/id/v2.6.x/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
-<p>Jika aplikasi Anda memerlukan penganalisis tertentu, konfigurasikan menggunakan parameter ` <code translate="no">analyzer_params</code> `. Sebagai contoh, berikut cara mengonfigurasi penganalisis ` <code translate="no">english</code> ` untuk pencocokan frasa pada teks bahasa Inggris:</p>
+<p>Secara default, Milvus menggunakan penganalisis standar, yang memecah teks berdasarkan spasi dan tanda baca serta mengubah teks menjadi huruf kecil. Tidak diperlukan parameter tambahan untuk penggunaan default. Lihat <a href="/docs/id/v2.6.x/standard-analyzer.md">Penganalisis Standar</a> untuk detailnya.</p>
+<p>Jika aplikasi Anda memerlukan analis tertentu, konfigurasikan menggunakan parameter ` <code translate="no">analyzer_params</code> `. Sebagai contoh, berikut cara mengonfigurasi analis ` <code translate="no">english</code> ` untuk pencocokan frasa pada teks bahasa Inggris:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -156,7 +156,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus mendukung beberapa penganalisis yang dirancang khusus untuk berbagai bahasa dan kasus penggunaan. Untuk informasi terperinci, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
+<p>Milvus mendukung beberapa penganalisis yang disesuaikan untuk berbagai bahasa dan kasus penggunaan. Untuk informasi terperinci, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md">Ikhtisar Penganalisis</a>.</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">Gunakan pencocokan frasa<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -262,7 +262,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Saat menggunakan metode <code translate="no">query()</code>, <strong>PHRASE_MATCH</strong> berfungsi sebagai filter skalar. Hanya dokumen yang mengandung frasa yang ditentukan (dengan toleransi yang diizinkan) yang akan dikembalikan.</p>
-<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Contoh: slop = 0 (kecocokan tepat)</h4><p>Contoh ini mengembalikan dokumen yang mengandung frasa persis <strong>“machine learning”</strong> tanpa token tambahan di antaranya.</p>
+<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Contoh: slop = 0 (kecocokan persis)</h4><p>Contoh ini mengembalikan dokumen yang mengandung frasa persis <strong>“machine learning”</strong> tanpa token tambahan di antaranya.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
 
@@ -415,13 +415,13 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Mengaktifkan pencocokan frasa untuk suatu bidang akan memicu pembuatan indeks terbalik, yang menghabiskan sumber daya penyimpanan. Pertimbangkan dampak penyimpanan saat memutuskan untuk mengaktifkan fitur ini, karena dampaknya bervariasi berdasarkan ukuran teks, token unik, dan penganalisis yang digunakan.</p></li>
+<li><p>Mengaktifkan pencocokan frasa untuk suatu bidang akan memicu pembuatan indeks terbalik, yang menghabiskan sumber daya penyimpanan. Pertimbangkan dampak penyimpanan saat memutuskan untuk mengaktifkan fitur ini, karena dampaknya bervariasi tergantung pada ukuran teks, token unik, dan penganalisis yang digunakan.</p></li>
 <li><p>Setelah Anda mendefinisikan penganalisis dalam skema Anda, pengaturannya menjadi permanen untuk koleksi tersebut. Jika Anda memutuskan bahwa penganalisis lain lebih sesuai dengan kebutuhan Anda, Anda dapat mempertimbangkan untuk menghapus koleksi yang ada dan membuat yang baru dengan konfigurasi penganalisis yang diinginkan.</p></li>
 <li><p>Kinerja pencocokan frasa bergantung pada cara teks ditokenisasi. Sebelum menerapkan penganalisis ke seluruh koleksi Anda, gunakan metode ` <code translate="no">run_analyzer</code> ` untuk meninjau hasil tokenisasi. Untuk informasi lebih lanjut, lihat <a href="/docs/id/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">Ikhtisar Penganalisis</a>.</p></li>
 <li><p>Aturan escape dalam ekspresi ` <code translate="no">filter</code> `:</p>
 <ul>
 <li><p>Karakter yang diapit tanda kutip ganda atau tanda kutip tunggal dalam ekspresi diartikan sebagai konstanta string. Jika konstanta string tersebut mengandung karakter escape, karakter escape tersebut harus direpresentasikan dengan urutan escape. Misalnya, gunakan ` <code translate="no">\\</code> ` untuk merepresentasikan ` <code translate="no">\</code>`, ` <code translate="no">\\t</code> ` untuk merepresentasikan tab ` <code translate="no">\t</code>`, dan ` <code translate="no">\\n</code> ` untuk merepresentasikan baris baru.</p></li>
-<li><p>Jika konstanta string diapit oleh tanda kutip tunggal, tanda kutip tunggal di dalam konstanta harus direpresentasikan sebagai <code translate="no">\\'</code>, sedangkan tanda kutip ganda dapat direpresentasikan sebagai <code translate="no">&quot;</code> atau <code translate="no">\\&quot;</code>. Contoh: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>Jika konstanta string diapit oleh tanda kutip tunggal, tanda kutip tunggal di dalam konstanta harus direpresentasikan sebagai <code translate="no">\\'</code> sedangkan tanda kutip ganda dapat direpresentasikan sebagai <code translate="no">&quot;</code> atau <code translate="no">\\&quot;</code>. Contoh: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Jika konstanta string diapit oleh tanda kutip ganda, tanda kutip ganda di dalam konstanta tersebut harus ditulis sebagai <code translate="no">\\&quot;</code>, sedangkan tanda kutip tunggal dapat ditulis sebagai <code translate="no">'</code> atau <code translate="no">\\'</code>. Contoh: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

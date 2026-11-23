@@ -53,7 +53,7 @@ summary: Milvus には、ARRAY フィールドのフィルタリングや、ARRA
 <tr><td><a href="#ARRAYCONTAINSANY">ARRAY_CONTAINS_ANY(識別子, 式)</a></td><td>フィルタ式</td><td>指定されたリスト内のいずれかの要素が ARRAY フィールドに存在するかどうかを調べます。</td></tr>
 <tr><td><a href="#ARRAYLENGTH">ARRAY_LENGTH(識別子)</a></td><td>フィルタ式</td><td>ARRAY フィールド内の要素数を返し、フィルタリングのために比較演算子と組み合わせることができます。</td></tr>
 <tr><td><a href="#ARRAYAPPEND">ARRAY_APPEND</a></td><td><code translate="no">upsert</code> with<code translate="no">field_ops</code></td><td>既存のARRAYフィールドにペイロード要素を追加します。Milvus v2.6.17以降で利用可能です。</td></tr>
-<tr><td><a href="#ARRAYREMOVE">ARRAY_REMOVE</a></td><td><code translate="no">upsert</code> with<code translate="no">field_ops</code></td><td>リクエストペイロード内の値と一致する要素を、既存のARRAYフィールドからすべて削除します。Milvus v2.6.17以降で利用可能です。</td></tr>
+<tr><td><a href="#ARRAYREMOVE">ARRAY_REMOVE</a></td><td><code translate="no">upsert</code> と<code translate="no">field_ops</code></td><td>リクエストペイロード内の値と一致する要素を、既存のARRAYフィールドからすべて削除します。Milvus v2.6.17以降で利用可能です。</td></tr>
 </tbody>
 </table>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
@@ -71,7 +71,7 @@ summary: Milvus には、ARRAY フィールドのフィルタリングや、ARRA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_CONTAINS</code> 演算子は、配列フィールドに特定の要素が存在するかどうかを確認します。配列内に指定された要素が含まれるエンティティを検索したい場合に便利です。</p>
+    </button></h2><p><code translate="no">ARRAY_CONTAINS</code> オペレータは、配列フィールドに特定の要素が存在するかどうかを確認します。これは、配列内に指定された要素が含まれるエンティティを検索したい場合に役立ちます。</p>
 <p><strong>例</strong></p>
 <p><code translate="no">history_temperatures</code> という配列フィールドがあり、そこに各年の観測最低気温が格納されているとします。配列に値<code translate="no">23</code> が含まれるすべてのエンティティを検索するには、次のフィルタ式を使用できます：</p>
 <div class="multipleCode">

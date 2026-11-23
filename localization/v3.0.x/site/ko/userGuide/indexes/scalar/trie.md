@@ -1,9 +1,7 @@
 ---
 id: trie.md
 title: TRIE
-summary: >-
-  TRIE 인덱스는 VARCHAR 필드의 값을 트리 구조로 구성하여 문자열 동일성 비교 및 접두사 일치 검색 속도를 높여줍니다. 이는 정확한
-  조회나 “name LIKE 'abc%'”와 같은 접두사 필터링에 가장 빠른 스칼라 인덱스입니다.
+summary: TRIE를 사용하여 VARCHAR 필드에 대한 정확한 문자열 조회 및 접두사 필터링 속도를 높입니다.
 ---
 <h1 id="TRIE" class="common-anchor-header">TRIE<button data-href="#TRIE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus의 <code translate="no">TRIE</code> 인덱스는 <code translate="no">VARCHAR</code> 필드의 값들을 접두사 트리( <em>트리</em>) 형태로 구성합니다. 문자열의 각 문자는 트리의 한 노드에 해당하며, 공통된 접두사는 한 번만 저장됩니다. 이러한 구조 덕분에 필드의 모든 값을 일일이 스캔하지 않고도 정확한 문자열 조회 및 접두사 일치를 빠르게 수행할 수 있습니다.</p>
-<p>다음과 같은 쿼리를 자주 실행하는 경우 <code translate="no">TRIE</code> 인덱스를 사용하십시오.</p>
-<ul>
-<li><p>다음과 같은 문자열 값에 대한 정확한 등가 비교: <code translate="no">category == &quot;books&quot;</code></p></li>
-<li><p>다음과 같은 접두사 필터링 <code translate="no">name LIKE &quot;abc%&quot;</code></p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">TRIE</code> 는 문자열을 접두사 트리로 구성하여 정확한 조회 및 <code translate="no">name LIKE &quot;abc%&quot;</code> 와 같은 접두사 필터링 작업을 가속화합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,11 +34,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><code translate="no">VARCHAR</code> 필드. 자세한 내용은 <a href="/docs/ko/string.md">‘문자열 필드</a>’를 참조하십시오.</li>
-</ul>
-<p><code translate="no">TRIE</code> 는 <code translate="no">VARCHAR</code> 필드에서만 지원됩니다. <code translate="no">JSON</code> 필드 내의 문자열 값을 인덱싱하려면 경로를 <code translate="no">VARCHAR</code> 로 형변환하고 대신 <a href="/docs/ko/ngram.md">NGRAM</a> 인덱스를 사용하십시오.</p>
-<h2 id="How-it-works" class="common-anchor-header">작동 원리<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,22 +49,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 <code translate="no">TRIE</code> 를 두 단계로 구현합니다:</p>
-<ol>
-<li><p><strong>인덱스 구축</strong></p>
-<ul>
-<li><p>데이터 수집 과정에서 Milvus는 인덱싱된 필드의 각 값을 읽습니다.</p></li>
-<li><p>이 값들은 트라이(trie)에 삽입됩니다. 문자는 에지에 저장되며, 각 터미널 노드는 해당 문자열을 공유하는 엔티티 ID를 기록합니다.</p></li>
-<li><p>완성된 트리는 인덱스로 영구 저장됩니다.</p></li>
-</ul></li>
-<li><p><strong>쿼리 가속화</strong></p>
-<ul>
-<li><p>동일성 조회의 경우, Milvus는 트리를 문자 단위로 탐색하여 정확한 값에 해당하는 노드에 도달한 후 해당 엔티티 ID를 반환합니다.</p></li>
-<li><p>접두사의 경우, Milvus는 접두사와 일치하는 노드로 이동하여 해당 하위 트리에 있는 엔티티 ID를 수집합니다.</p></li>
-<li><p>일치하는 엔티티 ID는 최종 결과 조립을 위해 쿼리 실행기로 전달됩니다.</p></li>
-</ul></li>
-</ol>
-<p>등가 및 접두사 필터의 경우, 조회 비용은 엔티티 수보다는 문자열 길이에 비례하므로, 대규모 컬렉션에서도 이러한 쿼리를 빠르게 처리할 수 있습니다.</p>
+    </button></h3><p><a href="/docs/ko/string.md">VARCHAR 필드</a>만 지원됩니다. JSON 문자열 경로의 경우, <a href="/docs/ko/json-indexing.md">JSON 인덱싱에서</a> 호환되는 인덱스를 선택하십시오.</p>
+<p><a id="Queries-accelerated-by-TRIE"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">필터 가속<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">TRIE</code> 인덱스를 사용하면 <code translate="no">VARCHAR</code> 필드에 대한 다음 조건을 평가하는 데 도움이 됩니다. 다음 표현식은 예시입니다:</p>
+<table>
+<thead>
+<tr><th>인덱스를 사용할 수 있는 필터</th><th>예시 표현식</th></tr>
+</thead>
+<tbody>
+<tr><td>등가 조건 (<code translate="no">==</code>, <code translate="no">!=</code>)</td><td><code translate="no">category == &quot;books&quot;</code></td></tr>
+<tr><td>소속 조건 (<code translate="no">in</code>, <code translate="no">not in</code>)</td><td><code translate="no">category in [&quot;books&quot;, &quot;electronics&quot;]</code></td></tr>
+<tr><td>접두사 일치</td><td><code translate="no">category LIKE &quot;elec%&quot;</code></td></tr>
+<tr><td>범위 (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>)</td><td><code translate="no">category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;</code></td></tr>
+</tbody>
+</table>
+<p>식 구문에 대해서는 <a href="/docs/ko/basic-operators.md">‘기본 연산자</a> 및 <a href="/docs/ko/pattern-matching.md">패턴 일치’를</a> 참조하십시오.</p>
+<p>범위 평가 시 여러 인덱싱된 문자열을 참조할 수 있습니다. 접미사, 부분 문자열, 일반 <code translate="no">LIKE</code> 및 정규식 패턴도 인덱싱된 문자열에 대해 평가할 수 있지만, 이 경우 많은 개별 값을 참조해야 할 수 있습니다. 부분 문자열 또는 정규식 워크로드의 경우, 패턴 적격성 규칙을 사용하여 <a href="/docs/ko/ngram.md">NGRAM을</a> 비교하십시오.</p>
+<p><a id="Best-practices"></a></p>
+<p>대표적인 문자열 길이, 접두사 및 결과 개수를 기준으로 쿼리 지연 시간을 비교하십시오.</p>
+<p><a id="Usage-notes"></a></p>
+<div class="alert note">
+<blockquote>
+<p>이는 인덱스 기능일 뿐, 유효한 필터 표현식에 대한 제한 사항은 아닙니다. 공유 조회 제약 조건에 대해서는 <a href="/docs/ko/scalar_index.md#Filter-execution">스칼라 인덱스를</a> 참조하십시오. <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 및 NULL 테스트(<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>)에 대해서는 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-TRIE-works" class="common-anchor-header">TRIE의 작동 원리<button data-href="#How-TRIE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>접두사 트리 조회 과정 보기</strong></summary></p>
+<p>인덱스 구축 과정에서 Milvus는 문자열을 접두사 트리에 삽입하고 이를 영구 저장합니다. 문자는 에지에 따라 저장되며, 공통 접두사는 한 번만 저장되고, 각 터미널 노드는 해당 문자열과 연관된 엔티티 ID를 기록합니다.</p>
+<p>동일성 검사의 경우, 트리를 탐색하여 정확한 문자열의 말단 노드로 이동합니다. 접두사의 경우, 접두사 노드를 찾고 해당 하위 트리에서 ID를 수집합니다. 쿼리 실행기는 일치하는 엔티티 ID를 수신합니다.</p>
+<p>문자열 또는 접두사 노드로의 탐색은 패턴 길이에 따라 달라지며, 일치 결과를 반환하려면 관련 엔티티 ID를 수집해야 합니다.</p>
+<p></details></p>
 <h2 id="Create-a-TRIE-index" class="common-anchor-header">TRIE 인덱스 생성<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,8 +126,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">VARCHAR</code> 필드에 <code translate="no">TRIE</code> 인덱스를 생성할 수 있습니다. 별도의 매개변수는 필요하지 않습니다.</p>
-<p>아래 예제는 ` <code translate="no">VARCHAR</code> ` 필드에 ` <code translate="no">TRIE</code> ` 인덱스를 생성하는 방법을 보여줍니다:</p>
+    </button></h2><p><code translate="no">index_type</code> 를 <code translate="no">TRIE</code> 로 설정합니다. 추가 인덱스 매개변수는 필요하지 않습니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -240,38 +274,6 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-accelerated-by-TRIE" class="common-anchor-header">TRIE를 통해 가속화된 쿼리<button data-href="#Queries-accelerated-by-TRIE" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><code translate="no">TRIE</code> 인덱스는 <code translate="no">VARCHAR</code> 필드에 대해 다음 필터 패턴의 처리 속도를 높여줍니다:</p>
-<ul>
-<li><p><strong>동일성</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category == &quot;books&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>소속</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category in [&quot;books&quot;, &quot;electronics&quot;]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>접두사 일치</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category LIKE &quot;elec%&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>범위</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>범위 평가 시 여러 인덱싱된 문자열을 참조할 수 있습니다.</p></li>
-</ul>
-<p>접미사, 부분 문자열 및 일반 정규 표현식( <code translate="no">LIKE</code> ) 패턴도 인덱싱된 문자열에 대해 평가할 수 있지만, 이 경우 많은 개별 값을 참조해야 할 수 있습니다. 워크로드가 부분 문자열 또는 정규 표현식 일치 작업이 주를 이루는 경우, 대신 <a href="/docs/ko/fmindex.md">FMINDEX</a> 또는 <a href="/docs/ko/ngram.md">NGRAM</a> 인덱스를 고려해 보십시오.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">인덱스 삭제<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -287,12 +289,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">drop_index()</code> 메서드를 사용하여 컬렉션에서 기존 인덱스를 제거하십시오.</p>
+    </button></h2><p><code translate="no">drop_index()</code> 메서드를 사용하여 컬렉션에서 기존 인덱스를 제거합니다.</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong> 이하 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
-<li><p><strong>v2.6.4부터는</strong> 스칼라 인덱스가 더 이상 필요하지 않으면 컬렉션을 먼저 해제할 필요 없이 직접 삭제할 수 있습니다.</p></li>
-</ul>
+<blockquote>
+<p>스칼라 인덱스를 삭제할 때의 릴리스 요구 사항에 대해서는 <a href="/docs/ko/scalar_index.md#Drop-index-compatibility">스칼라 인덱스를</a> 참조하십시오.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -405,42 +406,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">사용법 참고 사항<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>필드 유형:</strong> ` <code translate="no">VARCHAR</code> ` 필드에서만 작동합니다. 데이터 유형에 대한 자세한 내용은 ` <a href="/docs/ko/string.md">String Field</a>`를 참조하십시오.</p></li>
-<li><p><strong>매개변수:</strong> 인덱스 매개변수는 필요하지 않습니다.</p></li>
-<li><p><strong>패턴 매칭:</strong> ` <code translate="no">TRIE</code> `는 등가 및 접두사 필터링에 가장 빠릅니다. 범위 필터링도 지원되지만, 인덱싱된 여러 문자열을 검색해야 할 수 있습니다. 접미사, 부분 문자열 및 일반 ` <code translate="no">LIKE</code> ` 패턴은 평가될 수 있지만, 인덱싱된 많은 문자열을 스캔해야 할 수 있습니다.</p></li>
-</ul>
-<h2 id="Best-practices" class="common-anchor-header">모범 사례<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>필터가 정확한 조회나 접두사 일치 위주로 이루어지는 경우 <code translate="no">TRIE</code> 를 사용하십시오.</p></li>
-<li><p>워크로드가 부분 문자열(<code translate="no">LIKE &quot;%abc%&quot;</code>) 또는 정규식 필터에 의존하는 경우, 정확한 앵커 매칭을 위해 <a href="/docs/ko/fmindex.md">FMINDEX를</a> 사용하거나 후보 범위를 좁히기 위해 <a href="/docs/ko/ngram.md">NGRAM을</a> 대신 사용하십시오.</p></li>
-</ul>

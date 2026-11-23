@@ -2,12 +2,9 @@
 id: users_and_roles.md
 title: Crear usuarios y roles
 summary: >-
-  Milvus permite un control de acceso detallado mediante el modelo RBAC. Puedes
-  empezar creando usuarios y roles, asignar a continuación privilegios o grupos
-  de privilegios a los roles y, por último, gestionar el control de acceso
-  otorgando roles a los usuarios. Este método garantiza la eficiencia y la
-  seguridad de la gestión de accesos. En esta página se explica cómo crear
-  usuarios y roles en Milvus.
+  Milvus controla el acceso mediante el modelo RBAC: los privilegios se otorgan
+  a los roles, y los roles a los usuarios. En esta página se explica cómo crear
+  usuarios y roles.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Crear usuarios y roles<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tras inicializar una instancia de Milvus, se genera automáticamente un usuario root para la autenticación al conectarse a Milvus por primera vez. El nombre de usuario del usuario root es <code translate="no">root</code> y la contraseña es <code translate="no">Milvus</code>. El rol predeterminado del usuario root es <code translate="no">admin</code>, que tiene acceso a todos los recursos. Para garantizar la seguridad de los datos, mantén a buen recaudo las credenciales de tu usuario root para evitar el acceso no autorizado.</p>
-<p>Para las operaciones diarias, recomendamos crear usuarios en lugar de utilizar el usuario «root».</p>
+    </button></h2><p>Tras inicializar una instancia de Milvus, se genera automáticamente un usuario root para la autenticación al conectarse a Milvus por primera vez. El nombre de usuario del usuario root es <code translate="no">root</code> y la contraseña es <code translate="no">Milvus</code>. Por defecto, el usuario root no está vinculado a ningún rol y omite las comprobaciones de privilegios, por lo que tiene acceso a todos los recursos. El parámetro <code translate="no">common.security.rootShouldBindRole</code>, cuyo valor por defecto es <code translate="no">false</code>, controla este comportamiento. Para garantizar la seguridad de los datos, mantén a buen recaudo las credenciales de tu usuario root para evitar el acceso no autorizado.</p>
+<p>Para las operaciones diarias, recomendamos crear usuarios en lugar de utilizar el usuario root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Crear un usuario<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,8 +56,8 @@ summary: >-
       </svg>
     </button></h3><p>Inicia sesión como <code translate="no">root</code> y crea un usuario con el nombre de usuario <code translate="no">user_1</code> y la contraseña <code translate="no">P@ssw0rd</code>. A la hora de elegir las credenciales, sigue estas reglas:</p>
 <ul>
-<li><p>Nombre de usuario: debe comenzar con una letra y solo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</p></li>
-<li><p>Contraseña: debe tener una longitud de entre 6 y 72 bytes UTF-8 de forma predeterminada. Es posible que su implementación configure <a href="/docs/es/authenticate.md#Password-requirements">límites de longitud de contraseña</a> diferentes.</p></li>
+<li><p>Nombre de usuario: debe comenzar con una letra o un guión bajo y solo puede incluir letras mayúsculas o minúsculas, números, guiones bajos (<code translate="no">_</code>) y cualquier carácter adicional configurado en <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> por defecto).</p></li>
+<li><p>Contraseña: debe tener una longitud de entre 6 y 72 bytes UTF-8 por defecto. Tu implementación puede configurar <a href="/docs/es/authenticate.md#Password-requirements">límites de longitud de contraseña</a> diferentes.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -100,7 +97,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -161,7 +158,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Reutilice la conexión del ejemplo «create-user» para actualizar la contraseña de <code translate="no">user_1</code> de <code translate="no">P@ssw0rd</code> a <code translate="no">NewP@ssw0rd</code>. Introduzca la contraseña actual y elija una nueva que cumpla los mismos <a href="/docs/es/authenticate.md#Password-requirements">requisitos</a>.</p>
+    </button></h3><p>Reutiliza la conexión del ejemplo «create-user» para actualizar la contraseña de <code translate="no">user_1</code> de <code translate="no">P@ssw0rd</code> a <code translate="no">NewP@ssw0rd</code>. Introduce la contraseña actual y elige una nueva que cumpla los mismos <a href="/docs/es/authenticate.md#Password-requirements">requisitos</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -293,7 +290,7 @@ client.list_users()
     </button></h3><p>El siguiente ejemplo muestra cómo crear un rol denominado « <code translate="no">role_a</code> ».</p>
 <p>El nombre del rol debe cumplir la siguiente regla:</p>
 <ul>
-<li>Debe comenzar con una letra y solo puede incluir letras mayúsculas o minúsculas, números y guiones bajos.</li>
+<li>Debe comenzar con una letra o un guión bajo y solo puede incluir letras mayúsculas o minúsculas, números, guiones bajos y los caracteres de « <code translate="no">proxy.roleNameValidation.allowedChars</code> » (por defecto, «<code translate="no">$</code> »).</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -312,6 +309,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -378,6 +376,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación se muestra un ejemplo de resultado. « <code translate="no">admin</code> » es el rol predeterminado en Milvus. « <code translate="no">role_a</code> » es el nuevo rol que se acaba de crear.</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>A continuación se muestra un ejemplo de resultado. « <code translate="no">admin</code> » y « <code translate="no">public</code> » son los roles predeterminados que crea Milvus. « <code translate="no">role_a</code> » es el nuevo rol que se acaba de crear.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

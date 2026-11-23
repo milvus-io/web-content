@@ -1,7 +1,7 @@
 ---
 id: bitmap.md
 title: BITMAP
-summary: 位图索引是一种高效的索引技术，旨在提高低基数标量字段的查询性能。基数是指字段中不同值的数量。不同元素较少的字段被视为低基数字段。
+summary: 对于低Cardinal标量过滤，请使用 BITMAP。请检查支持的过滤器、字段限制以及索引创建。
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,7 @@ summary: 位图索引是一种高效的索引技术，旨在提高低基数标�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>位图索引是一种高效的索引技术，旨在提高低基数标量字段的查询性能。基数是指字段中不同值的数量。不同元素较少的字段被视为低基数字段。</p>
-<p>该索引类型通过将字段值表示为紧凑的二进制格式，并对它们执行高效的位运算，从而有助于缩短标量查询的检索时间。与其他类型的索引相比，在处理低基数字段时，位图索引通常具有更高的空间利用率，且查询速度更快。</p>
+    </button></h1><p><code translate="no">BITMAP</code> 可加速对具有少量不同值的字段（如状态码和类别）进行的标量过滤。Cardinal是指字段中不同值的数量。本页介绍了支持的过滤器、字段限制以及索引创建。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,25 +34,108 @@ summary: 位图索引是一种高效的索引技术，旨在提高低基数标�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>“位图”（Bitmap）</strong> <strong>一词由“位”</strong>（<strong>Bit）</strong> <strong>和“映射”（Map）</strong>两个词组合而成。位是计算机中数据的最小单位，只能存储<strong>0</strong>或<strong>1</strong> 其中一个值。在此语境下，“映射”是指根据应将何种值分配给 0 和 1 来转换和组织数据的过程。</p>
-<p>位图索引由两个主要组成部分构成：位图和键。键代表索引字段中的唯一值。每个唯一值都对应一个位图。这些位图的长度等于Collection中的记录数。 位图中的每个位对应Collection中的一条记录。如果某条记录中索引字段的值与键匹配，则对应的位被设为<strong>1</strong>；否则，设为<strong>0</strong>。</p>
-<p>假设有一个包含<strong>“Category”</strong>和<strong>“Public”</strong>字段的文档Collection。我们希望检索属于<strong>“Tech”</strong>类别且对<strong>“Public”</strong>开放的文档。在这种情况下，位图索引的键就是<strong>“Tech”</strong>和<strong>“Public”</strong>。</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">索引目标和过滤条件<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要显式创建<code translate="no">BITMAP</code> 索引，请从下表中选择一个非主键目标。每行都列出了一个受支持的目标及其对应的、该索引可协助评估的过滤器：</p>
+<table>
+<thead>
+<tr><th>索引目标</th><th>可使用该索引的筛选条件</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> 字段</td><td>相等（<code translate="no">==</code> 、<code translate="no">!=</code> ）和成员关系（<code translate="no">in</code> 、<code translate="no">not in</code> ）。</td></tr>
+<tr><td>整数字段（<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> ）</td><td>相等性、成员关系和范围（<code translate="no">&lt;</code> 、<code translate="no">&lt;=</code> 、<code translate="no">&gt;</code> 、<code translate="no">&gt;=</code> ）。</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 字段</td><td>相等、成员关系、范围以及<a href="/docs/zh/pattern-matching.md">LIKE 或正则表达式模式</a>。模式评估可遍历许多不同的索引字符串。</td></tr>
+<tr><td>带有<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 或<code translate="no">VARCHAR</code> 元素的普通<code translate="no">ARRAY</code> 字段</td><td><code translate="no">ARRAY_CONTAINS</code>、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 。参见<a href="/docs/zh/array_data_type.md#Array-index-support">数组索引支持</a>。</td></tr>
+<tr><td>将 JSON 路径转换为<code translate="no">BOOL</code> 或<code translate="no">VARCHAR</code></td><td>过滤器，以匹配上述相应的布尔值或字符串值，但须符合<a href="/docs/zh/json-indexing.md#Index-requirements">JSON 索引要求</a>。</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>标量索引（包括<code translate="no">AUTOINDEX</code> ）不支持递归的 ARRAY 字段或包含可为空元素的数组。有关普通数组过滤器的<a href="/docs/zh/array_data_type.md#Array-index-support">信息</a>，请参阅<a href="/docs/zh/array_data_type.md#Array-index-support">“数组索引支持”</a>；有关子字段规则的信息，<a href="/docs/zh/index-structarray-fields.md#Create-scalar-indexes">请参阅“索引 StructArray 字段”</a>。</p>
+</blockquote>
+</div>
+<p>对于 ARRAY 目标，<code translate="no">BITMAP</code> 用于元素包含过滤器，而不支持整个数组的相等性、按位置访问元素或数组长度。请参阅<a href="/docs/zh/array_data_type.md#Array-index-support">“数组索引支持”</a>。</p>
+<p>关于超出这些显式目标范围的自动选择，请参阅<a href="/docs/zh/scalar_index.md#AUTOINDEX-behavior">“AUTOINDEX 行为</a>”。</p>
+<div class="alert note">
+<blockquote>
+<p>这些是索引功能，而非对有效过滤表达式的限制。有关共享查找约束，请参阅<a href="/docs/zh/scalar_index.md#Filter-execution">“标量索引”</a>。关于<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及NULL测试（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），请参阅<a href="/docs/zh/basic-operators.md">“基本操作符”</a>。</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">内存注意事项<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>内存和查询开销取决于不同值の数及其分布情况。应使用具有代表性的过滤条件来比较索引，而不是将固定的基数视为通用的性能阈值。</p>
+<p>对于密集位图，以字节为单位的粗略估算公式为：<code translate="no">(D + 1) * N / 8</code> ，其中<code translate="no">N</code> 表示实体数量，<code translate="no">D</code> 表示不同值数量。这包括每个不同值对应的一张位图以及一张有效性位图。 值存储和其他开销会增加该估计值；在 64 位系统上，可选的偏移量缓存会增加约<code translate="no">8 * N</code> 字节。压缩的位图表示形式的内存占用可能有显著差异。</p>
+<p>这些粗略估计涵盖了禁用内存映射时已加载索引的内存占用。应按每个分段分别计算，然后将已加载分段和副本的计算结果相加。</p>
+<div class="alert note">
+<blockquote>
+<p>请为加载的字段数据、向量索引、Collection和索引开销以及临时分配预留额外内存。请使用具有代表性的数据和查询进行验证；数组、JSON、旧版索引格式以及内存映射需要单独测量。</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">BITMAP 的工作原理<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>查看位图过滤示例</strong></summary></p>
+<p>位图索引将每个不同的字段值与一个位图相关联。每个位对应一个实体：<strong>1</strong>表示该实体具有该值，<strong>0</strong>表示不具有该值。</p>
+<p>例如，要查找<strong>“科技”</strong>类别下的公开文档，需组合<strong>“类别 = 科技</strong>”和<strong>“公开 = true</strong>”的位图：</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
    <span>位图</span>
   
  </span></p>
-<p>如图所示<strong>，Category</strong>和<strong>Public</strong>的位图索引分别为：</p>
+<p>如图所示<strong>，“类别</strong>”和<strong>“公开</strong>”的位图索引如下：</p>
 <ul>
-<li><p><strong>Tech</strong>：[1, 0, 1, 0, 0]，这表明只有第 1 和第 3 个文档属于<strong>Tech</strong>类别。</p></li>
-<li><p><strong>Public</strong>：[1, 0, 0, 1, 0]，这表明只有第 1 个和第 4 个文档对<strong>公众</strong>开放。</p></li>
+<li><p><strong>Tech</strong>：[1, 0, 1, 0, 0]，这表明只有第 1 个和第 3 个文档属于<strong>Tech</strong>类别。</p></li>
+<li><p><strong>Public</strong>：[1, 0, 0, 1, 0]，这表明只有第 1 和第 4 个文档对<strong>Public</strong> 开放。</p></li>
 </ul>
-<p>为了查找同时满足这两个条件的文档，我们对这两个位图执行位与（AND）运算：</p>
+<p>要查找同时满足这两个条件的文档，我们需要对这两个位图执行位与（AND）运算：</p>
 <ul>
-<li><strong>Tech</strong>且<strong>Public</strong>：[1, 0, 0, 0, 0]</li>
+<li><strong>技术</strong>且<strong>公开</strong>：[1, 0, 0, 0, 0]</li>
 </ul>
-<p>生成的位图 [1, 0, 0, 0, 0] 表明只有第一份文档（<strong>ID</strong> <strong>1</strong>）同时满足这两个条件。通过使用位图索引和高效的位运算，我们可以快速缩小搜索范围，从而无需扫描整个数据集。</p>
+<p>只有第一份文档（<strong>ID 1</strong>）同时满足这两个条件。</p>
+<p></details></p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">创建位图索引<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,8 +319,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在此示例中，我们针对<code translate="no">my_collection</code> Collection的<code translate="no">category</code> 字段创建了一个位图索引。通过<code translate="no">add_index()</code> 方法指定字段名、索引类型和索引名称。</p>
-<p>创建位图索引后，您可以在查询操作中使用<code translate="no">filter</code> 参数，根据已建立索引的字段执行标量过滤。这使您能够利用位图索引高效地缩小搜索结果范围。有关更多信息，请参阅《<a href="/docs/zh/boolean.md">过滤原理说明</a>》。</p>
+<p>这将在<code translate="no">my_collection.category</code> 上创建一个索引。可在查询中使用该字段，或访问<code translate="no">filter</code> 进行搜索；请参阅《<a href="/docs/zh/boolean.md">过滤原理说明》</a>。</p>
 <h2 id="Drop-an-index" class="common-anchor-header">删除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,10 +337,9 @@ curl --request POST \
       </svg>
     </button></h2><p>使用<code translate="no">drop_index()</code> 方法从 Collection 中删除现有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>及更早版本中，在删除标量索引之前，必须先释放 Collection。</p></li>
-<li><p>从<strong>v2.6.4</strong>及更高版本开始，一旦不再需要标量索引，即可直接删除，无需先释放 Collection。</p></li>
-</ul>
+<blockquote>
+<p>有关删除标量索引时的版本要求，请参阅《<a href="/docs/zh/scalar_index.md#Drop-index-compatibility">标量索引</a>》。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -381,37 +461,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>仅支持非主键的标量字段使用位图索引。</p></li>
-<li><p>该字段的数据类型必须是以下之一：</p>
-<ul>
-<li><p><code translate="no">BOOL</code>,<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> （元素必须是以下类型之一：<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> ）</p></li>
-</ul></li>
-<li><p>位图索引不支持以下数据类型：</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> ：浮点类型与位图索引的二进制特性不兼容。</p></li>
-<li><p><code translate="no">JSON</code>：JSON 数据类型具有复杂的结构，无法通过位图索引进行高效表示。</p></li>
-</ul></li>
-<li><p>位图索引不适用于高基数字段（即具有大量不同值的字段）。</p>
-<ul>
-<li><p>作为一般准则，当字段的基数小于 500 时，位图索引最为有效。</p></li>
-<li><p>当基数超过此阈值时，位图索引的性能优势会减弱，且存储开销会变得很大。</p></li>
-<li><p>对于高Cardinal数字段，请根据您的具体用例和查询要求，考虑使用其他索引技术，例如倒排索引。</p></li>
-</ul></li>
-</ul>

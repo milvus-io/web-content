@@ -121,7 +121,7 @@ summary: >-
       </svg>
     </button></h2><p>L'operatore <code translate="no">ARRAY_CONTAINS_ALL</code> garantisce che tutti gli elementi dell'elenco specificato siano presenti nel campo array. Questo operatore è utile quando si desidera trovare entità che contengono più valori nell'array.</p>
 <p><strong>Esempio</strong></p>
-<p>Se si desidera trovare tutte le entità in cui l’array ` <code translate="no">history_temperatures</code> ` contiene sia ` <code translate="no">23</code> ` che ` <code translate="no">24</code>`, è possibile utilizzare:</p>
+<p>Se si desidera trovare tutte le entità in cui l’array ` <code translate="no">history_temperatures</code> ` contenga sia ` <code translate="no">23</code> ` che ` <code translate="no">24</code>`, è possibile utilizzare:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -195,7 +195,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Questo restituirà tutte le entità in cui l'array ` <code translate="no">history_temperatures</code> ` contiene almeno uno dei valori ` <code translate="no">23</code> ` o ` <code translate="no">24</code>`.</p>
+<p>Questo restituirà tutte le entità in cui l’array ` <code translate="no">history_temperatures</code> ` contiene almeno uno dei valori ` <code translate="no">23</code> ` o ` <code translate="no">24</code>`.</p>
 <h2 id="ARRAYLENGTH" class="common-anchor-header">ARRAY_LENGTH<button data-href="#ARRAYLENGTH" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -213,7 +213,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">ARRAY_LENGTH</code> restituisce la lunghezza (numero di elementi) di un campo array. Accetta esattamente un parametro: l'identificatore del campo array.</p>
 <p><strong>Esempio</strong></p>
-<p>Per trovare tutte le entità in cui l'array <code translate="no">history_temperatures</code> contiene meno di 10 elementi:</p>
+<p>Per trovare tutte le entità in cui l’array <code translate="no">history_temperatures</code> contiene meno di 10 elementi:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -378,7 +378,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_append&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'aggiunta di <code translate="no">ARRAY_APPEND</code> a un campo tramite <code translate="no">field_ops</code> abilita la semantica dell'aggiornamento parziale per quel campo. Per il flusso di lavoro completo, i tipi di elementi supportati e i limiti, fare riferimento a <a href="/docs/it/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">Campi ARRAY di tipo Upsert in modalità di unione</a>.</p>
+<p>L'aggiunta di <code translate="no">ARRAY_APPEND</code> a un campo tramite <code translate="no">field_ops</code> abilita la semantica dell'aggiornamento parziale per quel campo. Per il flusso di lavoro completo, i tipi di elementi supportati e i limiti, fare riferimento a <a href="/docs/it/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">Campi ARRAY di tipo "Upsert" in modalità di unione</a>.</p>
 <h2 id="ARRAYREMOVE" class="common-anchor-header">ARRAY_REMOVE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#ARRAYREMOVE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,7 +1,7 @@
 ---
 id: python_sdk.md
-title: プロンプトmilvus Python SDK
-summary: AIコーディングアシスタントがMilvusClientを使って正しいMilvus Pythonコードを書くためのルール。
+title: 'プロンプト: Milvus Python SDK'
+summary: AIコーディングアシスタントが、MilvusClient を使用して正しい Milvus Python コードを記述するためのルール。
 ---
 <h1 id="Python-SDK" class="common-anchor-header">Python SDK<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: AIコーディングアシスタントがMilvusClientを使って正し
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ORMマイグレーション、接続パターン、一般的な操作など、MilvusClientインターフェイスを使用して正しいMilvus Pythonコードを記述するためのルールです。これらのルールを自動的に適用するには、以下のプロンプトをAIツールにコピーしてください。すべてのプロンプトの概要については、<a href="/docs/ja/milvus_for_agents.md">AIプロンプトを</a>参照してください。</p>
+    </button></h1><p>MilvusClient インターフェースを使用した、正しい Milvus Python コードの記述ルール。これには、ORM マイグレーション、接続パターン、および一般的な操作が含まれます。以下のプロンプト全文を AI ツールにコピーして貼り付けると、これらのルールが自動的に適用されます。すべてのプロンプトの概要については、「<a href="/docs/ja/milvus_for_agents.md">AI プロンプト」を</a>参照してください。</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">このプロンプトの使用方法<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,12 +35,12 @@ summary: AIコーディングアシスタントがMilvusClientを使って正し
         ></path>
       </svg>
     </button></h2><ol>
-<li>以下の「<a href="#full-prompt">完全なプロンプト」</a>セクションから完全なプロンプトを<strong>コピー</strong>します。</li>
-<li>このプロンプトをAIツールが指定する場所に<strong>保存</strong>します。</li>
-<li>AIアシスタントはMilvusコードを生成またはレビューする際にこれらのルールを自動的に適用します。</li>
+<li>以下の「<a href="#full-prompt">プロンプト全文</a>」セクションから<a href="#full-prompt">プロンプト全文</a>を<strong>コピーしてください</strong>。</li>
+<li>AIツールが指定する場所に<strong>保存してください</strong>。配置の詳細については、<a href="/docs/ja/milvus_for_agents.md">環境表</a>を参照してください。</li>
+<li>AIアシスタントは、Milvusコードを生成またはレビューする際に、これらのルールを自動的に適用します。</li>
 </ol>
-<p><strong>Cursorを</strong>お使いの場合: プロンプトを<a href="#full-prompt">フルプロンプトセクションから</a>コピーし、プロジェクトの<code translate="no">.cursor/rules/</code> 。</p>
-<h2 id="Full-prompt" class="common-anchor-header">フルプロンプト<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p><strong>Cursor</strong>ユーザーの場合：「<a href="#full-prompt">完全なプロンプト</a>」セクションからプロンプトをコピーし、プロジェクト内の `<code translate="no">.cursor/rules/</code> ` に保存してください。</p>
+<h2 id="Full-prompt" class="common-anchor-header">プロンプト全文<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,7 +229,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

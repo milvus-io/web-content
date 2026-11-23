@@ -1,7 +1,7 @@
 ---
 id: python_sdk.md
-title: '프롬프트: 밀버스 파이썬 SDK'
-summary: AI 코딩 어시스턴트가 MilvusClient를 사용하여 올바른 Milvus Python 코드를 작성하기 위한 규칙입니다.
+title: '프롬프트: Milvus Python SDK'
+summary: AI 코딩 도우미가 MilvusClient를 사용하여 올바른 Milvus Python 코드를 작성하기 위한 규칙.
 ---
 <h1 id="Python-SDK" class="common-anchor-header">Python SDK<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,8 @@ summary: AI 코딩 어시스턴트가 MilvusClient를 사용하여 올바른 Mil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ORM 마이그레이션, 연결 패턴 및 일반적인 작업을 포함하여 MilvusClient 인터페이스를 사용하여 올바른 Milvus Python 코드를 작성하기 위한 규칙입니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
-<h2 id="How-to-use-this-prompt" class="common-anchor-header">이 프롬프트를 사용하는 방법<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
+    </button></h1><p>MilvusClient 인터페이스를 사용하여 올바른 Milvus Python 코드를 작성하기 위한 규칙으로, ORM 마이그레이션, 연결 패턴 및 일반적인 작업이 포함됩니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
+<h2 id="How-to-use-this-prompt" class="common-anchor-header">이 프롬프트 사용 방법<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,11 +35,11 @@ summary: AI 코딩 어시스턴트가 MilvusClient를 사용하여 올바른 Mil
         ></path>
       </svg>
     </button></h2><ol>
-<li>아래의 <a href="#full-prompt">전체</a> 프롬프트 섹션에서 전체 프롬프트를<strong>복사합니다</strong>.</li>
-<li>AI 도구가 예상하는 위치에<strong>저장합니다</strong> (배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하세요).</li>
+<li>아래 <a href="#full-prompt">'전체 프롬프트'</a> 섹션에서 전체 프롬프트를<strong>복사하세요</strong>.</li>
+<li>AI 도구가 인식할 수 있는 위치에<strong>저장하십시오</strong>. 배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하십시오.</li>
 <li>AI 어시스턴트는 Milvus 코드를 생성하거나 검토할 때 이러한 규칙을 자동으로 적용합니다.</li>
 </ol>
-<p><strong>커서</strong> 사용자의 경우: <a href="#full-prompt">전체 프롬프트</a> 섹션에서 프롬프트를 복사하여 프로젝트의 <code translate="no">.cursor/rules/</code> 아래에 저장합니다.</p>
+<p><strong>Cursor</strong> 사용자의 경우: <a href="#full-prompt">‘전체 프롬프트’</a> 섹션에서 프롬프트를 복사하여 프로젝트 내 ‘ <code translate="no">.cursor/rules/</code> ’ 폴더에 저장하십시오.</p>
 <h2 id="Full-prompt" class="common-anchor-header">전체 프롬프트<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -229,7 +229,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

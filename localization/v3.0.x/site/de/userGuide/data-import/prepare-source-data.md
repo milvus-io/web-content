@@ -61,8 +61,8 @@ summary: >-
 <p>Weitere Informationen finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -228,12 +228,12 @@ schema.verify()
     </button></h2><p>Ein <a href="/docs/de/array-of-structs.md">StructArray</a> -Feld wird je nach Quelldateiformat unterschiedlich dargestellt. Der Import-Reader erwartet eine der folgenden Strukturen:</p>
 <table>
 <thead>
-<tr><th>Format</th><th>Struktur des StructArray-Feldes</th></tr>
+<tr><th>Format</th><th>Form der StructArray-Felder</th></tr>
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>Der Feldwert ist eine Liste von Objekten, eines pro Struct-Element, indiziert nach dem Namen des Unterfelds: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
 <tr><td>CSV</td><td>Die Zelle enthält denselben JSON-Text wie das JSON-Format. Der für den Importauftrag konfigurierte „ <code translate="no">nullkey</code> “ oder ein JSON- <code translate="no">null</code> markiert einen null-Wert des StructArray.</td></tr>
-<tr><td>Parquet</td><td>Eine Spalte pro StructArray-Feld vom Typ „ <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> “, ein „struct“-Unterelement pro Unterfeld. Ein skalares Unterfeld ist ein skalares Unterelement, ein vektorales Unterfeld ist eine Liste seines Elementtyps, z. B. „ <code translate="no">list&lt;float32&gt;</code> “, und ein Array-Unterfeld (Milvus 3.0.6 und höher) ist ein „ <code translate="no">list&lt;T&gt;</code> “-Unterelement.</td></tr>
+<tr><td>Parquet</td><td>Eine Spalte pro StructArray-Feld mit dem Typ „ <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> “, ein „struct“-Unterelement pro Unterfeld. Ein skalares Unterfeld ist ein skalares Unterelement, ein vektorales Unterfeld ist eine Liste seines Elementtyps, wie z. B. „ <code translate="no">list&lt;float32&gt;</code> “, und ein Array-Unterfeld (Milvus 3.0.6 und höher) ist ein „ <code translate="no">list&lt;T&gt;</code> “-Unterelement.</td></tr>
 <tr><td>NumPy</td><td>Nicht unterstützt. NumPy-Dateien enthalten eine Datei pro Feld der obersten Ebene und bieten keine Darstellung für ein „StructArray“-Feld. Verwenden Sie JSON-, CSV- oder Parquet-Dateien für Sammlungen, die ein „StructArray“-Feld enthalten.</td></tr>
 </tbody>
 </table>
@@ -243,7 +243,7 @@ schema.verify()
 <li><p>Ein „Struct“-Element selbst darf nicht null sein, wie z. B. „ <code translate="no">[null, {...}]</code> “. Ein gesamter „StructArray“-Wert darf nur dann null sein, wenn das „StructArray“-Feld nullfähig ist. Vor Milvus 3.0.6 musste jedes „Struct“-Element jedes Unterfeld bereitstellen.</p></li>
 <li><p>Schlüssel oder Parquet-Unterelemente, die keine Unterfelder der Sammlung sind – einschließlich entfernter Unterfelder –, werden ignoriert.</p></li>
 <li><p>Ab Milvus 3.0.6 wird ein fehlender Schlüssel oder ein Wert vom Typ „ <code translate="no">null</code> “ für ein element-nullfähiges Unterfeld als Nullwert für dieses Struct-Element importiert, sodass Dateien, die vor dem Hinzufügen eines Unterfelds geschrieben wurden, ohne dieses importiert werden. Ein „ <code translate="no">null</code> “ an einer anderen Stelle führt zum Fehlschlagen des Imports. Bei einem Array-Unterfeld ist „ <code translate="no">null</code> “ ein inneres Null-Array, und „ <code translate="no">null</code> “ innerhalb des inneren Arrays ist ein innerer Null-Wert, sofern das Unterfeld dies zulässt.</p></li>
-<li><p>Ab Milvus 3.0.6 werden der Binlog-Import (z. B. bei der Wiederherstellung eines Backups) und der Import aus einer Snapshot-Quelle für Sammlungen abgelehnt, die Unterfelder mit nullfähigen Elementen oder skalare Array-Unterfelder enthalten.</p></li>
+<li><p>Ab Milvus 3.0.6 werden der Binlog-Import (z. B. bei der Wiederherstellung aus einem Backup) und der Import aus einer Snapshot-Quelle für Sammlungen abgelehnt, die Unterfelder mit nullfähigen Elementen oder skalare Array-Unterfelder enthalten.</p></li>
 </ul>
 <p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> unterstützt die oben genannten StructArray-Formate in jedem unterstützten Format, einschließlich Unterfeldern mit nullfähigen Elementen und nullfähigen StructArray-Werten. Verwenden Sie dieselben Zeilenformate in den „ <code translate="no">add_row()</code> “-Aufrufen des Writers.</p>
 <p>Informationen zu den schemaseitigen Beschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md#Import-and-storage-limits">„StructArray-Beschränkungen</a>“.</p>
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p>Ein <strong>LocalBulkWriter</strong> fügt Zeilen aus dem Quelldatensatz an und schreibt sie in eine lokale Datei im angegebenen Format.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -315,7 +315,7 @@ writer = LocalBulkWriter(
 <div class="language-python">
 <p>Beim Erstellen eines <strong>LocalBulkWriter</strong> sollten Sie:</p>
 <ul>
-<li>Verweisen Sie auf das erstellte Schema in „ <code translate="no">schema</code> “.</li>
+<li>Verweisen Sie in ` <code translate="no">schema</code>` auf das erstellte Schema.</li>
 <li>Legen Sie „ <code translate="no">local_path</code> “ als Ausgabeverzeichnis fest.</li>
 <li><code translate="no">file_type</code> auf den Dateityp der Ausgabedatei setzen.</li>
 <li>Wenn Ihr Datensatz eine große Anzahl von Datensätzen enthält, wird empfohlen, Ihre Daten zu segmentieren, indem Sie „ <code translate="no">segment_size</code> “ auf einen geeigneten Wert setzen.</li>
@@ -349,8 +349,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>Anstatt angehängte Daten in eine lokale Datei zu schreiben, schreibt ein <strong>„RemoteBulkWriter“</strong> diese in einen Remote-Bucket. Daher sollten Sie vor dem Erstellen eines <strong>„RemoteBulkWriter“</strong> ein <strong>„ConnectParam“-Objekt</strong> einrichten.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -401,8 +401,8 @@ writer = RemoteBulkWriter(
 <button class="copy-code-btn"></button></code></pre>
 <p>Sobald die Verbindungsparameter bereitstehen, können Sie im <strong>„RemoteBulkWriter“</strong> wie folgt darauf verweisen:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -432,7 +432,7 @@ writer = RemoteBulkWriter(
 <p>Die Parameter zum Erstellen eines <strong>RemoteBulkWriter</strong> sind fast identisch mit denen für einen <strong>LocalBulkWriter</strong>, mit Ausnahme von „ <code translate="no">connect_param</code> “. Einzelheiten zu den Parametereinstellungen finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">„RemoteBulkWriter“</a> und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">„ConnectParam“</a> in der SDK-Referenz.</p>
 </div>
 <div class="language-java">
-<p>Die Parameter zum Erstellen eines <strong>„RemoteBulkWriter“</strong> entsprechen weitgehend denen eines <strong>„LocalBulkWriter“</strong>, mit Ausnahme von „ <code translate="no">StorageConnectParam</code> “. Einzelheiten zu den Parametereinstellungen finden Sie unter „RemoteBulkWriter“ und „StorageConnectParam“ in der SDK-Referenz.</p>
+<p>Die Parameter zum Erstellen eines <strong>„RemoteBulkWriter“</strong> entsprechen weitgehend denen für einen <strong>„LocalBulkWriter“</strong>, mit Ausnahme von „ <code translate="no">StorageConnectParam</code> “. Einzelheiten zu den Parametereinstellungen finden Sie unter „RemoteBulkWriter“ und „StorageConnectParam“ in der SDK-Referenz.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Schreiben starten<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,8 +457,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>Zu Demonstrationszwecken fügt der folgende Code zufällig generierte Daten an.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -672,14 +672,14 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Um die Ergebnisse zu überprüfen, können Sie den tatsächlichen Ausgabepfad abrufen, indem Sie die Eigenschaft ` <code translate="no">batch_files</code> ` des Writers ausgeben.</p>
+<p>Um die Ergebnisse zu überprüfen, können Sie den tatsächlichen Ausgabepfad abrufen, indem Sie die Eigenschaft „ <code translate="no">batch_files</code> “ des Writers ausgeben.</p>
 </div>
 <div class="language-java">
 <p>Um die Ergebnisse zu überprüfen, können Sie den tatsächlichen Ausgabepfad abrufen, indem Sie die Methode „ <code translate="no">getBatchFiles()</code> “ des Writers ausgeben.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 

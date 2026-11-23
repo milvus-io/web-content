@@ -19,7 +19,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用 Milvus Backup HTTP API 來建立備份、還原資料集，並監控非同步任務。以下快照範例需使用<strong>Milvus 3.0.1 或更新版本</strong>。若使用 Backup 0.5.x 版本，請參閱<a href="/docs/zh-hant/milvus_backup_api.md">0.5.x API 指南</a>。若為現有安裝環境，請參閱《<a href="/docs/zh-hant/milvus_backup_upgrade.md">升級 Milvus Backup》</a>。</p>
+    </button></h1><p>使用 Milvus Backup HTTP API 來建立備份、還原資料集，並監控非同步任務。以下快照範例需使用<strong>Milvus 3.0.1 或更新版本。</strong>若使用 Backup 0.5.x，請參閱<a href="/docs/zh-hant/milvus_backup_api.md">0.5.x API 指南</a>。若為現有安裝環境，請參閱《<a href="/docs/zh-hant/milvus_backup_upgrade.md">升級 Milvus Backup</a>》。</p>
 <h2 id="Obtain-Milvus-Backup" class="common-anchor-header">取得 Milvus Backup<button data-href="#Obtain-Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,7 +51,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請參照「<a href="/docs/zh-hant/milvus_backup_0_6_cli.md#Prepare-configuration-file">準備設定檔</a>」中的 v2 範例，建立 `<code translate="no">configs/backup.yaml</code> `<a href="/docs/zh-hant/milvus_backup_0_6_cli.md#Prepare-configuration-file">檔案</a>。設定對 Milvus、實例儲存空間及備份目標的存取權限。此外，Milvus 伺服器必須能夠存取備份儲存空間，以便執行快照操作。</p>
+    </button></h2><p>請參照「<a href="/docs/zh-hant/milvus_backup_0_6_cli.md#Prepare-configuration-file">準備設定檔</a>」中的 v2 範例，建立 `<code translate="no">configs/backup.yaml</code> `<a href="/docs/zh-hant/milvus_backup_0_6_cli.md#Prepare-configuration-file">檔案</a>。設定對 Milvus、實例儲存空間以及備份目標的存取權限。此外，Milvus 伺服器必須能夠存取備份儲存空間，以便執行快照操作。</p>
 <p>若您已有 v1 版本的設定檔，該檔案仍可載入。在變更其架構或環境變數之前，請參閱<a href="/docs/zh-hant/milvus_backup_upgrade.md#Migrate-the-configuration">《遷移設定》</a>。</p>
 <p>從包含二進位檔的目錄中，檢視設定並檢查連線狀態：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
@@ -137,12 +137,12 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">4</code></td><td>超時</td></tr>
 </tbody>
 </table>
-<p>請同時檢查回應內容與任務狀態。僅有 HTTP 200 狀態碼並不足夠：若回應中的 `<code translate="no">code</code> ` 值不為零，即表示發生錯誤。成功的回應可省略 `<code translate="no">code</code> `，因其值為零。若任務失敗或超時，請在從該備份還原前，先檢查回應詳細資訊及伺服器日誌。</p>
+<p>請同時檢查回應內容與任務狀態。僅有 HTTP 200 回應並不足夠：若回應中的 `<code translate="no">code</code> ` 值不為零，即表示發生錯誤。成功的回應可省略 `<code translate="no">code</code> `，因其值為零。若任務失敗或超時，請在從該備份還原前，先檢查回應詳細資訊及伺服器日誌。</p>
 <p>列出儲存的備份，並按名稱檢查已完成的備份：</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> 此指令會回傳包含<code translate="no">collection_backups</code> 的 JSON 元資料；它<strong>不會</strong>下載備份檔案。對於由其他程序所建立的備份，僅查詢名稱可回傳元資料，但不包含即時任務進度。監控正在進行的備份時，請使用當前服務的建立回應中所提供的任務 ID。</p>
+<p><code translate="no">get_backup</code> 此指令會回傳包含<code translate="no">collection_backups</code> 的 JSON 元資料；<strong>但不會</strong>下載備份檔案。若備份是由其他程序所建立，僅查詢名稱時，回傳的元資料將不包含當前任務的執行進度。監控正在進行的備份時，請使用當前服務的建立回應中所提供的任務 ID。</p>
 <p>預設格式為<code translate="no">auto</code> ，此格式在 Milvus 3.0 上會選取快照。若要明確請求二進位日誌，請在 create 請求正文中加入<code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> 。CLI 的<code translate="no">--for</code> 預設值並非 HTTP 請求欄位。</p>
 <p>若要保留或移動備份，請將整個目錄複製到物件儲存中。請參閱<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">0.6.0 版傳輸指南</a>。</p>
 <h2 id="Restore-data" class="common-anchor-header">還原資料<button data-href="#Restore-data" class="anchor-icon" translate="no">

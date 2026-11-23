@@ -47,7 +47,7 @@ summary: >-
 <li><p><a href="/docs/id/analyzer-overview.md">Penganalisis</a>: Penganalisis memproses teks masukan dengan memecahnya menjadi kata-kata individual, atau token, lalu menerapkan filter sesuai kebutuhan. Hal ini memungkinkan Milvus membangun indeks berdasarkan token-token tersebut.</p></li>
 <li><p><a href="/docs/id/index-explained.md">Pengindeksan</a>: Setelah analisis teks, Milvus membuat indeks terbalik yang memetakan setiap token unik ke dokumen yang mengandungnya.</p></li>
 </ol>
-<p>Saat pengguna melakukan pencocokan teks, indeks terbalik digunakan untuk dengan cepat mengambil semua dokumen yang berisi istilah tersebut. Proses ini jauh lebih cepat daripada memindai setiap dokumen satu per satu.</p>
+<p>Saat pengguna melakukan pencocokan teks, indeks terbalik digunakan untuk dengan cepat mengambil semua dokumen yang mengandung istilah tersebut. Proses ini jauh lebih cepat daripada memindai setiap dokumen satu per satu.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -231,7 +231,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kinerja dan akurasi pencocokan kata kunci bergantung pada penganalisis yang dipilih. Penganalisis yang berbeda dirancang khusus untuk berbagai bahasa dan struktur teks, sehingga memilih yang tepat dapat secara signifikan memengaruhi hasil pencarian untuk kasus penggunaan spesifik Anda.</p>
+    </button></h3><p>Kinerja dan akurasi pencocokan kata kunci bergantung pada penganalisis yang dipilih. Penganalisis yang berbeda dirancang khusus untuk berbagai bahasa dan struktur teks, sehingga memilih yang tepat dapat sangat memengaruhi hasil pencarian untuk kasus penggunaan spesifik Anda.</p>
 <p>Secara default, Milvus menggunakan penganalisis <code translate="no">standard</code>, yang menokenisasi teks berdasarkan spasi dan tanda baca, menghapus token yang lebih panjang dari 40 karakter, serta mengubah teks menjadi huruf kecil. Tidak diperlukan parameter tambahan untuk menerapkan pengaturan default ini. Untuk informasi lebih lanjut, lihat <a href="/docs/id/standard-analyzer.md">Standard</a>.</p>
 <p>Jika diperlukan penganalisis yang berbeda, Anda dapat mengonfigurasinya menggunakan parameter ` <code translate="no">analyzer_params</code> `. Misalnya, untuk menerapkan penganalisis ` <code translate="no">english</code> ` guna memproses teks bahasa Inggris:</p>
 <div class="multipleCode">
@@ -510,7 +510,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
         ></path>
       </svg>
     </button></h3><p>Pencocokan teks dapat digunakan bersama dengan pencarian kesamaan vektor untuk mempersempit cakupan pencarian dan meningkatkan kinerja pencarian. Dengan menyaring koleksi menggunakan pencocokan teks sebelum pencarian kesamaan vektor, Anda dapat mengurangi jumlah dokumen yang perlu dicari, sehingga waktu kueri menjadi lebih cepat.</p>
-<p>Dalam contoh ini, ekspresi ` <code translate="no">filter</code> ` menyaring hasil pencarian sehingga hanya mencakup dokumen yang cocok dengan istilah yang ditentukan, yaitu ` <code translate="no">keyword1</code> ` atau ` <code translate="no">keyword2</code>`. Pencarian kesamaan vektor kemudian dilakukan pada subset dokumen yang telah disaring ini.</p>
+<p>Dalam contoh ini, ekspresi ` <code translate="no">filter</code> ` menyaring hasil pencarian agar hanya mencakup dokumen yang cocok dengan istilah yang ditentukan, yaitu ` <code translate="no">keyword1</code> ` atau ` <code translate="no">keyword2</code>`. Pencarian kesamaan vektor kemudian dilakukan pada subset dokumen yang telah disaring ini.</p>
 <div class="alert note">
 <p>Anda dapat menyorot istilah yang cocok dalam hasil pencarian dengan mengonfigurasi penyorot teks. Lihat <a href="/docs/id/text-highlighter.md">Penyorot Teks</a> untuk detailnya.</p>
 </div>
@@ -640,7 +640,7 @@ milvus::SearchResponse response;
         ></path>
       </svg>
     </button></h3><p>Pencocokan teks juga dapat digunakan untuk penyaringan skalar dalam operasi kueri. Dengan menentukan ekspresi <code translate="no">TEXT_MATCH</code> pada parameter <code translate="no">expr</code> dari metode <code translate="no">query()</code>, Anda dapat mengambil dokumen yang cocok dengan istilah yang diberikan.</p>
-<p>Contoh di bawah ini mengambil dokumen yang bidang ` <code translate="no">text</code> `-nya berisi kedua istilah ` <code translate="no">keyword1</code> ` dan ` <code translate="no">keyword2</code>`.</p>
+<p>Contoh di bawah ini mengambil dokumen di mana bidang ` <code translate="no">text</code> ` berisi kedua istilah ` <code translate="no">keyword1</code> ` dan ` <code translate="no">keyword2</code>`.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -742,7 +742,7 @@ milvus::QueryResponse response;
 <li><p>Aturan escape dalam ekspresi <code translate="no">filter</code>:</p>
 <ul>
 <li><p>Karakter yang diapit tanda kutip ganda atau tanda kutip tunggal dalam ekspresi diinterpretasikan sebagai konstanta string. Jika konstanta string tersebut mengandung karakter escape, karakter escape tersebut harus direpresentasikan dengan urutan escape. Misalnya, gunakan ` <code translate="no">\\</code> ` untuk merepresentasikan ` <code translate="no">\</code>`, ` <code translate="no">\\t</code> ` untuk merepresentasikan tab ` <code translate="no">\t</code>`, dan ` <code translate="no">\\n</code> ` untuk merepresentasikan baris baru.</p></li>
-<li><p>Jika konstanta string diapit oleh tanda kutip tunggal, tanda kutip tunggal di dalam konstanta harus direpresentasikan sebagai <code translate="no">\\'</code>, sedangkan tanda kutip ganda dapat direpresentasikan sebagai <code translate="no">&quot;</code> atau <code translate="no">\\&quot;</code>. Contoh: <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>Jika konstanta string diapit oleh tanda kutip tunggal, tanda kutip tunggal di dalam konstanta tersebut harus direpresentasikan sebagai <code translate="no">\\'</code>, sedangkan tanda kutip ganda dapat direpresentasikan sebagai <code translate="no">&quot;</code> atau <code translate="no">\\&quot;</code>. Contoh: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Jika konstanta string diapit oleh tanda kutip ganda, tanda kutip ganda di dalam konstanta tersebut harus ditulis sebagai <code translate="no">\\&quot;</code>, sedangkan tanda kutip tunggal dapat ditulis sebagai <code translate="no">'</code> atau <code translate="no">\\'</code>. Contoh: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

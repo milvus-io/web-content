@@ -2,12 +2,10 @@
 id: boolean.md
 title: Explicação sobre a filtragem
 summary: >-
-  O Milvus oferece poderosas funcionalidades de filtragem que permitem a
-  consulta precisa dos seus dados. As expressões de filtragem permitem-lhe
-  selecionar campos escalares específicos e refinar os resultados da pesquisa
-  com diferentes condições. Este guia explica como utilizar expressões de
-  filtragem no Milvus, com exemplos centrados em operações de consulta. Também
-  pode aplicar estes filtros em pedidos de pesquisa e eliminação.
+  As expressões de filtragem selecionam entidades com base em condições
+  aplicadas aos campos suportados. Este guia apresenta os operadores de
+  filtragem do Milvus e inclui links para os tipos suportados, requisitos de
+  versão e exemplos.
 ---
 <h1 id="Filtering-Explained" class="common-anchor-header">Explicação sobre a filtragem<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus oferece poderosas funcionalidades de filtragem que permitem a consulta precisa dos seus dados. As expressões de filtro permitem-lhe selecionar campos escalares específicos e refinar os resultados da pesquisa com diferentes condições. Este guia explica como utilizar expressões de filtro no Milvus, com exemplos centrados em operações de consulta. Também pode aplicar estes filtros em pedidos de pesquisa e eliminação.</p>
+    </button></h1><p>As expressões de filtro selecionam entidades utilizando condições aplicadas aos campos suportados. Este guia apresenta as expressões de filtro, com exemplos centrados em operações de consulta. Para conhecer os tipos suportados por cada operador, os requisitos de versão e a forma de utilização, consulte as ligações abaixo.</p>
 <h2 id="Basic-operators" class="common-anchor-header">Operadores básicos<button data-href="#Basic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +45,7 @@ summary: >-
 <li><p><strong>Operadores aritméticos</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> e <code translate="no">**</code> são utilizados para cálculos que envolvem campos numéricos.</p></li>
 <li><p><strong>Operadores bit a bit</strong>: No Milvus 3.0.0 e versões posteriores, <code translate="no">&amp;</code>, <code translate="no">|</code> e <code translate="no">^</code> filtram campos inteiros que codificam vários sinalizadores, tais como permissões ou bits de estado. Para mais detalhes, consulte <a href="/docs/pt/basic-operators.md#Bitwise-operators">Operadores básicos</a>.</p></li>
 <li><p><strong>Operadores lógicos</strong>: <code translate="no">AND</code>, <code translate="no">OR</code> e <code translate="no">NOT</code> combinam várias condições em expressões complexas.</p></li>
-<li><p><strong>Operadores IS NULL e IS NOT NULL</strong>: Os operadores <code translate="no">IS NULL</code> e <code translate="no">IS NOT NULL</code> são utilizados para filtrar campos com base na existência ou não de um valor nulo (ausência de dados). Para mais detalhes, consulte <a href="/docs/pt/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">Operadores Básicos</a>.</p></li>
+<li><p><strong>Operadores IS NULL e IS NOT NULL</strong>: Selecionam entidades com base no facto de um campo ser NULL ou não NULL. Para obter informações sobre o suporte a campos escalares e vetoriais, requisitos de versão e exemplos, consulte <a href="/docs/pt/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">Operadores Básicos</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Exemplo: Filtragem por cor<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para encontrar entidades cujo campo inteiro « <code translate="no">permissions</code> » tenha o bit « <code translate="no">SHARE</code> » definido, utilize o operador AND bit a bit (<code translate="no">&amp;</code>):</p>
+    </button></h3><p>Para encontrar entidades cujo campo inteiro <code translate="no">permissions</code> tenha o bit « <code translate="no">SHARE</code> » definido, utilize o operador AND bit a bit (<code translate="no">&amp;</code>):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;(permissions &amp; 4) == 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-by-Regex-Pattern" class="common-anchor-header">Exemplo: Filtragem por padrão Regex<button data-href="#Example-Filtering-by-Regex-Pattern" class="anchor-icon" translate="no">
@@ -103,7 +101,7 @@ summary: >-
     </button></h3><p>Para encontrar entidades cujo campo « <code translate="no">message</code> » contenha um código de erro como « <code translate="no">E1001</code> », utilize o operador de correspondência de expressões regulares « <code translate="no">=~</code> »:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;message =~ &quot;E[0-9]{4}&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Os filtros de expressões regulares utilizam a correspondência de subcadeias. Para exigir que todo o valor do campo corresponda ao padrão, adicione as âncoras <code translate="no">^</code> e <code translate="no">$</code>. Para mais detalhes, consulte <a href="/docs/pt/pattern-matching.md">Correspondência de Padrões</a>.</p>
+<p>Os filtros de expressões regulares utilizam a correspondência de subcadeias. Para exigir que todo o valor do campo corresponda ao padrão, adicione as âncoras <code translate="no">^</code> e <code translate="no">$</code>. Para mais detalhes, consulte <a href="/docs/pt/pattern-matching.md">«Correspondência de Padrões</a>».</p>
 <h3 id="Example-Filtering-JSON-Fields" class="common-anchor-header">Exemplo: Filtragem de campos JSON<button data-href="#Example-Filtering-JSON-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -173,7 +171,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para encontrar indivíduos com mais de 25 anos que vivam em «北京» (Pequim) ou em «上海» (Xangai), utilize a seguinte expressão de modelo:</p>
+    </button></h3><p>Para encontrar indivíduos com mais de 25 anos que vivam em «北京» (Pequim) ou em «上海» (Xangai), utilize a seguinte expressão modelo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Para melhorar o desempenho, utilize esta variação com parâmetros:</p>
@@ -241,7 +239,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O Milvus fornece operadores de filtragem avançados para campos de matriz, tais como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code>, que permitem um controlo minucioso sobre os dados da matriz:</p>
+    </button></h3><p>O Milvus disponibiliza operadores de filtragem avançados para campos de matriz, tais como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code>, que permitem um controlo minucioso sobre os dados da matriz:</p>
 <p><code translate="no">ARRAY_CONTAINS</code>: Filtra as entidades que contêm um elemento específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -280,5 +278,5 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <li><p><strong>Indexação</strong>: Cria um índice invertido que mapeia tokens únicos para documentos.</p></li>
 </ol>
 <p>Para mais detalhes, consulte <a href="/docs/pt/keyword-match.md">Text Match</a>.</p>
-<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operador<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>O operador <strong>PHRASE_MATCH</strong> permite a recuperação precisa de documentos com base em correspondências exatas de frases, tendo em conta tanto a ordem como a adjacência dos termos da consulta.</p>
-<p>Para mais detalhes, consulte <a href="/docs/pt/phrase-match.md">«Correspondência</a> de <a href="/docs/pt/phrase-match.md">Frases</a>».</p>
+<h4 id="PHRASEMATCH-operator" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operador<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>O operador <strong>PHRASE_MATCH</strong> permite a recuperação precisa de documentos com base em correspondências exatas de frases, tendo em conta tanto a ordem como a adjacência dos termos da consulta.</p>
+<p>Para mais detalhes, consulte <a href="/docs/pt/phrase-match.md">«Correspondência de frases</a>».</p>

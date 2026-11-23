@@ -63,18 +63,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Falls Ihre Pipeline eine fehlgeschlagene oder wegen Zeitüberschreitung abgebrochene Importanforderung erneut versuchen kann, versehen Sie den Job mit einem Idempotenzschlüssel; siehe <a href="/docs/de/idempotent-import.md">Idempotenter Massenimport</a>.</p>
+    </button></h2><p>Wenn Ihre Pipeline eine fehlgeschlagene oder wegen Zeitüberschreitung abgebrochene Importanforderung wiederholen darf, versehen Sie den Job mit einem Idempotenzschlüssel; siehe <a href="/docs/de/idempotent-import.md">Idempotenter Massenimport</a>.</p>
 <p>Um die vorbereiteten Daten zu importieren, müssen Sie wie folgt einen Importauftrag erstellen:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -159,6 +159,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> Parameter<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> ist ein schlanker Wrapper um ` <code translate="no">POST /v2/vectordb/jobs/import/create</code>`. Über das
+obige Beispiel hinaus stellt er die folgenden Parameter bereit (PyMilvus 2.6 und höher).</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Typ</th><th>Beschreibung</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Serveradresse, zum Beispiel <code translate="no">http://127.0.0.1:19530</code> oder <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Zielsammlung.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Zieldatenbank. Wird als „ <code translate="no">DB-Name</code> “-Header für RBAC gesendet.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Dateien, die der Milvus-Instanz bereits zur Verfügung stehen, beispielsweise auf MinIO. Hierbei handelt es sich um <strong>serverseitige Pfade, nicht um Objekt-URLs</strong>. Jede Unterliste entspricht einer JSON- oder Parquet-Datei oder einem Satz von NumPy-Dateien.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Zielpartition. Wird über zusätzliche Schlüsselwortargumente statt über einen deklarierten Parameter übergeben, sodass sie in der Signatur leicht übersehen werden kann. Bei Sammlungen, die einen Partitionsschlüssel verwenden, leer lassen.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>Einzelne Objekt-URL im Cloud-Objektspeicher. Wird durch <code translate="no">object_urls</code> ersetzt.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>Objekt-URLs im Cloud-Objektspeicher, zum Beispiel <code translate="no">s3://bucket/prefix/1.parquet</code>. Jede Unterliste entspricht einem Objekt oder einem Präfix, das auf <code translate="no">/</code> endet. Verwenden Sie dies <strong>anstelle von</strong> <code translate="no">files</code>; es handelt sich um zwei unterschiedliche Transportmechanismen, nicht um Synonyme.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud-Cluster-ID.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>Zilliz-Cloud-Projekt-ID für Projektdatenbanken.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Region der Projektdatenbank.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>API-Schlüssel oder „ <code translate="no">username:password</code> “ für eine selbst gehostete Instanz.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Anmeldedaten für den Objektspeicher unter <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Sitzungstoken für kurzfristige Anmeldedaten für den Objektspeicher.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Zilliz-Cloud-Volume, aus dem importiert werden soll. Erfordert <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Pfade innerhalb von <code translate="no">volume_name</code>. Jede Unterliste entspricht einer Datei oder einem Präfix, das mit <code translate="no">/</code> endet.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> oder <code translate="no">str</code></td><td>Überprüfen Sie das TLS-Zertifikat des Servers; standardmäßig <code translate="no">True</code>. Eine Zeichenfolge wird als Pfad zum CA-Bundle behandelt.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> oder <code translate="no">tuple</code></td><td>Client-Zertifikat für gegenseitiges TLS: ein Dateipfad oder ein „ <code translate="no">('cert', 'key')</code> “-Paar.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>Zusätzliche HTTP-Header, die in die Anfrage eingefügt werden; die Werte des Aufrufers haben Vorrang. Verwenden Sie dies beispielsweise zum Senden eines Idempotenzschlüssels, z. B. <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; siehe <a href="/docs/de/idempotent-import.md">Idempotenter Massenimport</a>.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Zusätzliche Importoptionen, die im Anfragetext an den Server weitergeleitet werden.</td></tr>
+</tbody>
+</table>
+<p>Alle verbleibenden Schlüsselwortargumente werden an ` <code translate="no">requests.post</code>` weitergeleitet, sodass ` <code translate="no">timeout</code> ` und ` <code translate="no">proxies</code>` 
+dort wie gewohnt funktionieren. Der Wrapper sendet standardmäßig ein Timeout von 20 Sekunden.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">Importfortschritt überprüfen<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,8 +221,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
       </svg>
     </button></h2><p>Sobald Sie eine Import-Auftrags-ID erhalten haben, können Sie den Importfortschritt wie folgt überprüfen:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -290,8 +335,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>Sie können alle Importaufträge zu einer bestimmten Sammlung wie folgt auflisten:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json

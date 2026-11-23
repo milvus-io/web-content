@@ -425,7 +425,7 @@
             "children": []
           },
           {
-            "label": "Числовое поле",
+            "label": "Поле «Число»",
             "id": "number.md",
             "order": 7,
             "children": []
@@ -643,7 +643,7 @@
                     "children": []
                   },
                   {
-                    "label": "Нормализация арабского языка",
+                    "label": "Нормализация арабоязычных текстов",
                     "id": "arabic-normalization-filter.md",
                     "order": 2,
                     "children": []
@@ -691,7 +691,7 @@
                     "children": []
                   },
                   {
-                    "label": "Декомпоундер",
+                    "label": "Устройство для удаления смеси",
                     "id": "decompounder-filter.md",
                     "order": 10,
                     "children": []
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1136,7 +1130,7 @@
                 "children": []
               },
               {
-                "label": "Операторы с массивами",
+                "label": "Операторы над массивами",
                 "id": "array-operators.md",
                 "order": 5,
                 "children": []
@@ -1203,7 +1197,7 @@
                 "children": []
               },
               {
-                "label": "Фильтрованный поиск с использованием StructArray",
+                "label": "Фильтрованный поиск с помощью StructArray",
                 "id": "filtered-search-with-structarray.md",
                 "order": 1,
                 "children": []
@@ -1389,7 +1383,7 @@
                 "children": []
               },
               {
-                "label": "Рейтинг распада",
+                "label": "Рейтинг разложения",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1496,12 +1490,6 @@
             "label": "Используйте mmap",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "Уплотнение с группировкой",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "SDK для Node.js",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RESTful API версии 2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Проектирование схемы",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "Шаблоны поиска",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "Выбор индекса",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "Конвейер RAG",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -3064,7 +3070,7 @@
             "children": []
           },
           {
-            "label": "Маска PII",
+            "label": "Маскировщик персональных данных",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3274,7 +3280,7 @@
         "children": []
       },
       {
-        "label": "Генерация выражений фильтрации запросов Milvus с помощью крупных языковых моделей",
+        "label": "Генерация выражений фильтров запросов Milvus с помощью крупных языковых моделей",
         "id": "generating_milvus_query_filter_expressions.md",
         "order": 17,
         "children": []

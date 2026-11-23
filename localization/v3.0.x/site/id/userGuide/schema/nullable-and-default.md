@@ -2,7 +2,7 @@
 id: nullable-and-default.md
 title: Kolom yang Dapat Bernilai NULL
 summary: >-
-  Konfigurasikan kolom yang dapat bernilai null dan nilai defaultnya, termasuk
+  Konfigurasikan kolom yang dapat bernilai null dan nilai default, termasuk
   skema, perilaku penyisipan, pengindeksan, pencarian, dan penyaringan.
 ---
 <h1 id="Nullable-Fields" class="common-anchor-header">Kolom yang Dapat Bernilai NULL<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
@@ -43,10 +43,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Kolom vektor yang mengizinkan nilai NULL tidak mendukung ekspresi filter ` <code translate="no">IS NULL</code> ` atau ` <code translate="no">IS NOT NULL</code> `. Anda tidak dapat secara eksplisit menyaring entitas berdasarkan apakah nilai kolom vektor tersebut NULL.</p></li>
-<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat dinonaktifkan. Tetapkan " <code translate="no">nullable=True</code> " pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat "nullable" induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus dapat bernilai NULL agar entitas yang sudah ada dapat mengembalikan nilai NULL untuk bidang baru tersebut. Mulai dari Milvus 3.0.6, subbidang juga dapat mengizinkan nilai NULL pada elemen Struct individu: ` <code translate="no">nullable=True</code> ` pada subbidang skalar atau vektor, ` <code translate="no">element_nullable=True</code> ` pada subbidang array; elemen Struct itu sendiri tetap tidak boleh bernilai NULL. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
+<li><p>Mulai dari Milvus 3.0.0, bidang <a href="/docs/id/array-of-structs.md">StructArray</a> induk dapat bersifat nullable. Tetapkan ` <code translate="no">nullable=True</code> ` pada bidang StructArray induk, bukan pada subbidang individual. Nilai NULL berlaku untuk seluruh bidang StructArray, bukan untuk elemen Struct individual, dan Milvus secara internal meneruskan sifat nullable induk ke subbidangnya. Bidang StructArray yang ditambahkan ke koleksi yang sudah ada harus dapat bernilai NULL agar entitas yang sudah ada dapat mengembalikan NULL untuk bidang baru tersebut. Mulai dari Milvus 3.0.6, subbidang juga dapat mengizinkan nilai NULL pada elemen Struct individu: ` <code translate="no">nullable=True</code> ` pada subbidang skalar atau vektor, ` <code translate="no">element_nullable=True</code> ` pada subbidang array; namun, elemen Struct itu sendiri tetap tidak boleh bernilai NULL. Untuk detailnya, lihat <a href="/docs/id/structarray-limits.md#Nullable-and-dynamic-schema-limits">Batasan StructArray</a>.</p></li>
 <li><p>Atribut nullable ditentukan saat bidang dibuat dan tidak dapat diubah setelahnya. Anda tidak dapat mengaktifkan atau menonaktifkan nullability untuk bidang yang sudah ada.</p></li>
-<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan bukan null. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
+<li><p>Bidang yang ditandai sebagai nullable tidak dapat digunakan sebagai kunci partisi. Bidang kunci partisi harus selalu berisi nilai yang valid dan tidak null. Untuk informasi lebih lanjut, lihat <a href="/docs/id/use-partition-key.md">Gunakan Kunci Partisi</a>.</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">Apa itu bidang nullable?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,7 +69,7 @@ summary: >-
 <li>Bidang tersebut secara eksplisit ditetapkan ke NULL (misalnya, ` <code translate="no">None</code> ` dalam Python).</li>
 </ul>
 <p>Jika suatu bidang tidak didefinisikan sebagai nullable (perilaku default), setiap entitas harus menyediakan nilai yang valid untuk bidang tersebut. Mengabaikan bidang atau secara eksplisit menetapkan nilai NULL akan menyebabkan operasi penyisipan atau impor gagal.</p>
-<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai Milvus 3.0.0, atribut ini juga didukung pada bidang StructArray induk. Jangan mengonfigurasi subbidang Struct sebagai nullable tingkat baris secara terpisah; tentukan nullability tingkat baris pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal. Untuk mengizinkan nilai NULL pada subbidang di dalam elemen Struct individu (null pada tingkat elemen), atur ` <code translate="no">nullable=True</code> ` pada subbidang skalar atau vektor, atau ` <code translate="no">element_nullable=True</code> ` pada subbidang array di Milvus 3.0.6 dan versi selanjutnya; lihat " <a href="/docs/id/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">Membuat Bidang StructArray"</a>.</p>
+<p>Atribut nullable didukung untuk <strong>bidang skalar dan vektor</strong> dalam skema koleksi. Mulai dari Milvus 3.0.0, atribut ini juga didukung pada bidang StructArray induk. Jangan mengonfigurasi subbidang Struct sebagai nullable tingkat baris secara terpisah; tentukan nullability tingkat baris pada induk StructArray dan Milvus akan menyebarkan pengaturan tersebut ke subbidangnya secara internal. Untuk mengizinkan nilai NULL pada subbidang di dalam elemen Struct individu (null pada tingkat elemen), atur ` <code translate="no">nullable=True</code> ` pada subbidang skalar atau vektor, atau ` <code translate="no">element_nullable=True</code> ` pada subbidang array di Milvus 3.0.6 dan versi selanjutnya; lihat " <a href="/docs/id/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">Membuat Bidang StructArray"</a>.</p>
 <div class="alert note">
 <p>Nullability menentukan apakah nilai bidang boleh tidak ada; hal ini tidak menentukan nilai apa yang digunakan ketika suatu bidang tidak ada.</p>
 <ul>
@@ -404,7 +403,7 @@ schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class=
         ></path>
       </svg>
     </button></h2><p>Setelah suatu bidang didefinisikan sebagai nullable dalam skema koleksi, Milvus mengizinkan nilai bidang tersebut hilang atau secara eksplisit ditetapkan ke NULL selama proses ingestion data.</p>
-<p>Contoh di bawah ini menyisipkan tiga entitas ke dalam koleksi yang dibuat pada bagian " <a href="#Define-a-nullable-field-in-the-collection-schema">Tentukan bidang yang dapat bernilai NULL dalam skema koleksi</a>", yang menunjukkan berbagai kasus tersebut.</p>
+<p>Contoh di bawah ini menyisipkan tiga entitas ke dalam koleksi yang dibuat pada bagian " <a href="#Define-a-nullable-field-in-the-collection-schema">Tentukan bidang yang dapat bernilai NULL dalam skema koleksi</a>", yang menunjukkan berbagai kasus ini.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -775,7 +774,7 @@ curl --request POST \
 <li>Entitas dengan vektor NULL tidak menyebabkan kesalahan.</li>
 <li>Jika jumlah vektor yang valid lebih kecil daripada <code translate="no">topK</code> yang diminta (<code translate="no">limit</code>), Milvus mungkin mengembalikan hasil yang lebih sedikit daripada <code translate="no">limit</code>.</li>
 </ul>
-<p>Contoh berikut melakukan pencarian vektor pada bidang vektor yang dapat bernilai NULL, yaitu ` <code translate="no">embedding</code>`:</p>
+<p>Contoh berikut melakukan pencarian vektor pada bidang vektor yang dapat bernilai NULL ( <code translate="no">embedding</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -934,9 +933,13 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Contoh-contoh sebelumnya berfokus pada bidang vektor. Bagian ini menjelaskan bagaimana nilai NULL berperilaku dalam <strong>ekspresi penyaringan skalar</strong>.</p>
-<p>Bidang skalar dapat didefinisikan dengan <code translate="no">nullable=True</code> dan mengikuti aturan pengambilan data yang sama seperti bidang vektor. Namun, <strong>nilai skalar NULL selalu dievaluasi sebagai false dalam ekspresi penyaringan</strong>. Gunakan <code translate="no">IS NULL</code> atau <code translate="no">IS NOT NULL</code> untuk memilih entitas berdasarkan apakah bidang skalar bernilai NULL.</p>
-<p>Misalnya, dengan bidang skalar yang dapat bernilai NULL <code translate="no">age</code>, filter berikut memilih entitas yang usianya lebih dari 18:</p>
+    </button></h2><div class="alert note">
+<p>Mulai dari Milvus 3.0.3, Anda dapat menggunakan <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> dalam kueri dan filter pencarian pada bidang vektor biasa untuk memilih entitas yang bidang vektornya NULL atau non-NULL, masing-masing.</p>
+<p>Untuk menemukan entitas yang bidang ` <code translate="no">embedding</code> `-nya bernilai NULL, gunakan ` <code translate="no">query()</code> ` dengan filter ` <code translate="no">embedding IS NULL</code>`. Filter ini juga berlaku di ` <code translate="no">search()</code>`. Namun, pencarian pada ` <code translate="no">embedding</code> ` dengan filter ini tidak akan menghasilkan hasil: entitas tanpa nilai ` <code translate="no">embedding</code> ` tidak memiliki vektor untuk dibandingkan dengan vektor kueri.</p>
+<p>Untuk tipe yang didukung, sintaks, dan contoh, lihat <a href="/docs/id/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">operator IS NULL dan IS NOT NULL</a>.</p>
+</div>
+<p>Untuk bidang skalar yang didefinisikan dengan ` <code translate="no">nullable=True</code>`, kondisi perbandingan seperti ` <code translate="no">age &gt; 18</code> ` atau ` <code translate="no">status == &quot;active&quot;</code> ` tidak akan cocok dengan entitas di mana bidang yang dibandingkan bernilai `NULL`.</p>
+<p>Misalnya, untuk bidang skalar yang dapat bernilai NULL <code translate="no">age</code>, filter berikut memilih entitas yang usianya lebih dari 18:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1032,7 +1035,7 @@ Console.WriteLine(res);
 <tr><td>Ya</td><td>Tidak</td><td>NULL atau diabaikan</td><td>Disimpan sebagai NULL</td></tr>
 <tr><td>Tidak</td><td>Ya (bukan NULL)</td><td>NULL atau diabaikan</td><td>Menggunakan nilai default</td></tr>
 <tr><td>Tidak</td><td>Tidak</td><td>NULL atau diabaikan</td><td>Menimbulkan kesalahan</td></tr>
-<tr><td>Tidak</td><td>Ya (default NULL)</td><td>NULL atau diabaikan</td><td>Menyebabkan kesalahan</td></tr>
+<tr><td>Tidak</td><td>Ya (default NULL)</td><td>NULL atau diabaikan</td><td>Menimbulkan kesalahan</td></tr>
 </tbody>
 </table>
 <p><strong>Poin-poin penting:</strong></p>
@@ -1040,6 +1043,6 @@ Console.WriteLine(res);
 <li>Jika suatu bidang memiliki nilai default non-NULL, nilai tersebut akan digunakan terlepas dari apakah opsi " <code translate="no">nullable</code> " diaktifkan atau tidak.</li>
 <li>Jika " <code translate="no">nullable=True</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, kolom tersebut akan menyimpan nilai NULL.</li>
 <li>Jika " <code translate="no">nullable=False</code> " diaktifkan tetapi tidak ada nilai default yang ditetapkan, proses penyisipan akan gagal dan menimbulkan kesalahan.</li>
-<li>Menetapkan nilai default NULL pada bidang yang tidak boleh NULL adalah tidak valid dan menyebabkan kesalahan.</li>
+<li>Menetapkan nilai default NULL pada kolom yang tidak boleh NULL adalah tidak valid dan akan menyebabkan kesalahan.</li>
 </ul>
 <p>Untuk contoh lengkap dan penggunaan API terkait nilai default, lihat <a href="/docs/id/default-values.md">Nilai Default</a>.</p>

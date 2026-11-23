@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pode criar uma coleção definindo o seu esquema, os parâmetros de índice, o tipo de métrica e se pretende carregá-la no momento da criação. Esta página explica como criar uma coleção a partir do zero.</p>
+    </button></h1><p>Pode criar uma coleção definindo o seu esquema, parâmetros de índice, tipo de métrica e se pretende carregá-la no momento da criação. Esta página explica como criar uma coleção a partir do zero.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -308,10 +308,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A criação de um índice num campo específico acelera a pesquisa nesse campo. Um índice regista a ordem das entidades dentro de uma coleção. Conforme mostrado nos trechos de código a seguir, pode utilizar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar as formas adequadas para o Milvus indexar um campo e medir semelhanças entre representações vetoriais.</p>
-<p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como tipo de índice para todos os campos vetoriais e um dos seguintes: <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como tipo de métrica, consoante as suas necessidades.</p>
-<p>Conforme demonstrado no trecho de código acima, é necessário definir tanto o tipo de índice como o tipo de métrica para os campos vetoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para os campos vetoriais, e recomenda-se criar índices nos campos escalares frequentemente utilizados nas condições de filtragem.</p>
-<p>Para mais detalhes, consulte <a href="/docs/pt/index-vector-fields.md">«Indexar campos vetoriais</a> » e <a href="/docs/pt/index-scalar-fields.md">«Indexar campos escalares</a>».</p>
+    </button></h2><p>Os exemplos abaixo preparam definições de índice para os campos do esquema. Escolha um índice vetorial e uma métrica compatíveis com o tipo de dados do campo vetorial; consulte <a href="/docs/pt/index-explained.md">Explicação sobre índices</a> e <a href="/docs/pt/metric.md">Métricas de similaridade</a>.</p>
+<p>Os campos vetoriais requerem índices antes do carregamento. Os índices escalares são opcionais; consulte <a href="/docs/pt/scalar_index.md">Índice escalar</a> para obter informações sobre a compatibilidade dos campos e a seleção explícita ou automática do tipo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -432,8 +430,8 @@ indexOptions := []milvusclient.CreateIndexOption{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se tiver criado uma coleção com parâmetros de índice, o Milvus carrega automaticamente a coleção no momento da sua criação. Neste caso, todos os campos mencionados nos parâmetros de índice são indexados.</p>
-<p>Os trechos de código seguintes demonstram como criar a coleção com parâmetros de índice e verificar o seu estado de carregamento.</p>
+    </button></h2><p>Se tiver criado uma coleção com parâmetros de índice, o Milvus carrega automaticamente a coleção logo após a sua criação. Neste caso, todos os campos mencionados nos parâmetros de índice são indexados.</p>
+<p>Os trechos de código a seguir demonstram como criar a coleção com parâmetros de índice e verificar o seu estado de carregamento.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -952,7 +950,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O Milvus ativa o mmap em todas as coleções por predefinição, permitindo que o Milvus mapeie dados de campo em bruto para a memória, em vez de os carregar na íntegra. Isto reduz o consumo de memória e aumenta a capacidade da coleção. O exemplo seguinte desativa o mmap para uma única coleção; para mais detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Utilizar o mmap</a>.</p>
+    </button></h3><p>O Milvus ativa o mmap em todas as coleções por predefinição, permitindo que o Milvus mapeie dados de campo em bruto para a memória, em vez de os carregar na íntegra. Isto reduz o consumo de memória e aumenta a capacidade da coleção. O exemplo seguinte desativa o mmap para uma única coleção; para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Utilizar o mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1322,4 +1320,4 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>O campo dinâmico numa coleção é um campo reservado em JavaScript Object Notation (JSON) denominado <strong>$meta</strong>. Depois de ativar este campo, o Milvus guarda todos os campos não definidos no esquema que cada entidade contém, bem como os respetivos valores, como pares chave-valor no campo reservado.</p>
-<p>Para obter detalhes sobre como utilizar o campo dinâmico, consulte <a href="/docs/pt/enable-dynamic-field.md">«Campo dinâmico</a>».</p>
+<p>Para obter detalhes sobre como utilizar o campo dinâmico, consulte <a href="/docs/pt/enable-dynamic-field.md">Campo dinâmico</a>.</p>

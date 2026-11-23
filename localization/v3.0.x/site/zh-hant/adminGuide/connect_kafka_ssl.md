@@ -1,10 +1,10 @@
 ---
 id: connect_kafka_ssl.md
-title: 使用 SASL/SSL 連線到 Kafka
+title: 使用 SASL/SSL 連線至 Kafka
 related_key: 'kafka, sasl, tls'
-summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡單的不使用 SASL/SSL 到使用 SASL/SSL 的完全安全的方法。
+summary: 本指南列出了幾種將 Milvus 連接到 Kafka 的方法，從最簡單的（不使用 SASL/SSL）到完全安全的（使用 SASL/SSL）皆有涵蓋。
 ---
-<h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">使用 SASL/SSL 連線到 Kafka<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
+<h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">使用 SASL/SSL 連線至 Kafka<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡單的不使用 SASL/SSL 到使用 SASL/SSL 的完全安全的方法。</p>
-<h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">不使用 SASL/SSL 連接 Milvus 到 Kafka<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h1><p>本指南列出了幾種將 Milvus 連接到 Kafka 的方法，從最簡單的（不使用 SASL/SSL）到完全安全的（使用 SASL/SSL）皆有涵蓋。</p>
+<h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">在不使用 SASL/SSL 的情況下將 Milvus 連線至 Kafka<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,8 +35,8 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在沒有 SASL/SSL 的情況下啟動 Milvus 和 Kafka，您必須停用 Kafka 和 Milvus 的驗證和加密。僅在可信賴的環境中使用它們。</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1.在沒有 SASL/SSL 的情況下啟動 Kafka 服務<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h2><p>若要在不使用 SASL/SSL 的情況下啟動 Milvus 和 Kafka，請同時停用 Kafka 和 Milvus 的驗證與加密功能。此方式僅適用於可信賴的環境。</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. 啟動不使用 SASL/SSL 的 Kafka 服務<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,7 +51,7 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以使用下列<code translate="no">docker-compose.yaml</code> 檔案，在沒有 SASL/SSL 的情況下啟動 Kafka 服務：</p>
+    </button></h3><p>您可以使用以下 `<code translate="no">docker-compose.yaml</code> ` 檔案來啟動不使用 SASL/SSL 的 Kafka 服務：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -62,7 +62,7 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
   <span class="hljs-attr">kafka:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:2.13-2.8.1</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
     <span class="hljs-attr">ports:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
@@ -70,14 +70,12 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後您可以使用下列指令啟動 Kafka 服務：</p>
+<p>接著，您可以使用以下指令啟動 Kafka 服務：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2.啟動 Milvus 並連接到 Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. 啟動 Milvus 並連線至 Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,7 +90,7 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>一旦 Kafka 服務啟動，您就可以啟動 Milvus 並連接到它。使用下列<code translate="no">docker-compose.yaml</code> 檔案啟動 Milvus 並連線到 Kafka，不需要 SASL/SSL：</p>
+    </button></h3><p>Kafka 服務啟動後，即可啟動 Milvus 並與其連線。請使用以下<code translate="no">docker-compose.yaml</code> 檔案，在不使用 SASL/SSL 的情況下啟動 Milvus 並連線至 Kafka：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -107,12 +105,9 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用以下命令下載 Milvus 配置文件模板：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>並設定以下參數：</p>
+<p>在與您的 `<code translate="no">docker-compose.yaml</code> ` 檔案位於同一目錄下建立一個 `<code translate="no">user.yaml</code> ` 檔案，並在其中設定以下參數。Milvus 會在載入 `<code translate="no">configs/milvus.yaml</code>` 之後載入 `<code translate="no">configs/user.yaml</code> `，因此 `<code translate="no">user.yaml</code> ` 中的值會覆寫預設值：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -130,10 +125,10 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
     <span class="hljs-attr">tlsCACert:</span>
     <span class="hljs-attr">tlsKeyPassword:</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後使用以下指令啟動 Milvus：</p>
+<p>接著，您可以使用以下指令啟動 Milvus：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">使用 SASL/PLAIN Alone 連接 Milus 到 Kafka<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">僅使用 SASL/PLAIN 將 Milvus 連線至 Kafka<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,8 +143,8 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要以 SASL/PLAIN 認證啟動 Kafka，您需要加入<code translate="no">kafka_server_jass.conf</code> 檔案，並進行適當的設定。</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1.使用 SASL/PLAIN 啟動 Kafka 服務<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+    </button></h2><p>若要使用 SASL/PLAIN 驗證啟動 Kafka，您需要新增一個包含正確設定的<code translate="no">kafka_server_jaas.conf</code> 檔案。</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. 啟動採用 SASL/PLAIN 的 Kafka 服務<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,7 +159,7 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>將以下<code translate="no">docker-compose.yaml</code> 檔案和<code translate="no">kafka_server_jaas.conf</code> 檔案放在同一個目錄中。</p>
+    </button></h3><p>將以下<code translate="no">docker-compose.yaml</code> 檔案和<code translate="no">kafka_server_jaas.conf</code> 檔案放置於同一目錄中。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -197,11 +192,11 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在<code translate="no">kafka_server_jass.conf</code> 檔案中，設定下列參數：</p>
+<p>在<code translate="no">kafka_server_jaas.conf</code> 檔案中，設定以下參數：</p>
 <pre><code translate="no" class="language-conf">KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username=&quot;kafka&quot;
@@ -209,10 +204,10 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
     user_kafka=&quot;pass123&quot;;
 };
 </code></pre>
-<p>然後就可以用以下指令啟動 Kafka 服務：</p>
+<p>接著，您可以使用以下指令啟動 Kafka 服務：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2.啟動 Milvus 並連接到 Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. 啟動 Milvus 並連線至 Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -227,7 +222,7 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>一旦 Kafka 服務啟動，您就可以啟動 Milvus 並連接到它。使用下面的<code translate="no">docker-compose.yaml</code> 文件啟動 Milvus 並使用 SASL/PLAIN 連接到 Kafka：</p>
+    </button></h3><p>Kafka 服務啟動後，即可啟動 Milvus 並與其連線。請使用以下<code translate="no">docker-compose.yaml</code> 檔案來啟動 Milvus，並透過 SASL/PLAIN 連線至 Kafka：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -242,12 +237,9 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用以下命令下載 Milvus 配置文件模板：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>並設定以下參數：</p>
+<p>在與您的 `<code translate="no">docker-compose.yaml</code> ` 檔案位於同一目錄下建立一個 `<code translate="no">user.yaml</code> ` 檔案，並在其中設定以下參數。Milvus 會在載入 `<code translate="no">configs/milvus.yaml</code>` 之後載入 `<code translate="no">configs/user.yaml</code> `，因此 `<code translate="no">user.yaml</code> ` 中的值會覆寫預設值：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -265,10 +257,10 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後使用下列指令啟動 Milvus：</p>
+<p>接著，您可以使用以下指令啟動 Milvus：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">使用 SSL 獨立連接 Milvus 到 Kafka<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">僅透過 SSL 將 Milvus 連線至 Kafka<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -283,8 +275,8 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 SSL 認證啟動 Kafka，你需要取得一些證書檔案或產生自簽的證書。在這個範例中，我們使用自簽的憑證。</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1.產生自簽憑證<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
+    </button></h2><p>若要以 SSL 驗證方式啟動 Kafka，您需要取得一些憑證檔案或產生自簽名憑證。在此範例中，我們使用自簽名憑證。</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. 產生自簽名憑證<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -299,7 +291,7 @@ summary: 本指南列出了幾種連接 Milvus 到 Kafka 的方法，從最簡�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>建立一個名為<code translate="no">my_secrets</code> 的資料夾，在其中加入一個名為<code translate="no">gen-ssl-certs.sh</code> 的 bash script，並將下列內容貼入其中：</p>
+    </button></h3><p>建立一個名為<code translate="no">my_secrets</code> 的資料夾，在其中新增一個名為<code translate="no">gen-ssl-certs.sh</code> 的 bash 腳本，並將以下內容貼入其中：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -465,23 +457,23 @@ EOF</span>
     <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在上述腳本中，預設密碼<code translate="no">abcdefgh</code> 適用。若要變更密碼，請建立一個名為<code translate="no">cert_creds</code> 的文字檔，並在第一行輸入密碼。</p>
-<p>然後執行以下指令以產生憑證：</p>
+<p>在上述腳本中，預設密碼為<code translate="no">abcdefgh</code> 。若要變更密碼，請建立一個名為<code translate="no">cert_creds</code> 的文字檔，並在第一行輸入新密碼。</p>
+<p>接著執行以下指令來產生憑證：</p>
 <ul>
 <li><p>產生 CA 憑證：</p>
-<p>以下假設 CA 證書檔案的名稱是<code translate="no">ca-cert</code> ，而經紀人的主機名稱是<code translate="no">kafka-ssl</code> ：</p>
+<p>以下假設 CA 憑證檔案名為<code translate="no">ca-cert</code> ，且仲介主機的名稱為<code translate="no">kafka-ssl</code> ：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh ca ca-cert kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>生成服务器证书和密钥库：</p>
-<p>以下假設 CA 憑證檔案的名稱是<code translate="no">ca-cert</code> ，所有輸出檔案的前綴是<code translate="no">kafka_</code> ，經紀人的主機名稱是<code translate="no">kafka-ssl</code> ：</p>
+<li><p>產生伺服器憑證與金鑰庫：</p>
+<p>以下假設 CA 憑證檔案名為<code translate="no">ca-cert</code> ，所有輸出檔案的前綴皆為<code translate="no">kafka_</code> ，且仲介伺服器的主機名為<code translate="no">kafka-ssl</code> ：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>生成用戶端金鑰：</p>
-<p>以下假設 CA 證書檔案的名稱是<code translate="no">ca-cert</code> ，所有輸出檔案的前綴是<code translate="no">kafka_</code> ，用戶端名稱是<code translate="no">kafka-client</code> ：</p>
+<li><p>產生客戶端金鑰：</p>
+<p>以下假設 CA 憑證檔案名為<code translate="no">ca-cert</code> ，所有輸出檔案的前綴為<code translate="no">kafka_</code> ，且客戶端名稱是<code translate="no">kafka-client</code> ：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh client ca-cert kafka_ kafka-client</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>生成所有必要的憑證後，您可以在<code translate="no">my_secrets</code> 資料夾中看到以下檔案：</p>
+<p>一旦生成所有必要的憑證，您將在<code translate="no">my_secrets</code> 資料夾中看到以下檔案：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l my_secrets</span>
 total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:53 ca-cert
@@ -497,7 +489,7 @@ total 12
 -rw-rw-r-- 1 5.6K Feb 26 11:54 kafka_server.keystore.jks
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2.使用 SSL 啟動 Kafka 服務<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. 啟動具備 SSL 的 Kafka 服務<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -512,7 +504,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用下列<code translate="no">docker-compose.yaml</code> 檔案以 SSL 啟動 Kafka 服務：</p>
+    </button></h3><p>請使用以下<code translate="no">docker-compose.yaml</code> 檔案來啟動具備 SSL 的 Kafka 服務：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -551,10 +543,10 @@ total 12
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後使用下列指令啟動 Kafka 服務：</p>
+<p>接著使用以下指令啟動 Kafka 服務：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3.啟動 Milvus 並使用 SSL 連線到 Kafka<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. 啟動 Milvus 並透過 SSL 連線至 Kafka<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -569,7 +561,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>一旦 Kafka 服務啟動，您就可以啟動 Milvus 並連接到它。使用下面的<code translate="no">docker-compose.yaml</code> 檔啟動 Milvus 並使用 SSL 連接到 Kafka：</p>
+    </button></h3><p>Kafka 服務啟動後，即可啟動 Milvus 並與其連線。請使用以下<code translate="no">docker-compose.yaml</code> 檔案來啟動 Milvus 並透過 SSL 連線至 Kafka：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -584,13 +576,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用以下命令下載 Milvus 配置文件模板：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>並設定以下參數：</p>
+<p>在與您的 `<code translate="no">docker-compose.yaml</code> ` 檔案位於同一目錄下建立一個 `<code translate="no">user.yaml</code> ` 檔案，並在其中設定以下參數。Milvus 會在載入 `<code translate="no">configs/milvus.yaml</code>` 之後載入 `<code translate="no">configs/user.yaml</code> `，因此 `<code translate="no">user.yaml</code> ` 中的值會覆寫預設值：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -608,10 +597,10 @@ total 12
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-string">/milvus/secrets/ca-cert</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-string">abcdefgh</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後用以下指令啟動 Milvus：</p>
+<p>接著使用以下指令啟動 Milvus：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">使用 SASL/PLAIN 和 SSL 連接 Milvus 到 Kafka<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">使用 SASL/PLAIN 和 SSL 將 Milvus 連接到 Kafka<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -626,8 +615,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要使用 SASL/PLAIN 和 SSL 連接 Milvus 到 Kafka，您需要重複<a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">單獨使用 SASL/PLAIN 連接</a>Milvus 到 Kafka 和<a href="#Connect-Milus-to-Kafka-with-SSL-Alone">單獨使用 SSL 連接 Milvus 到</a> Kafka 的步驟。</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1.使用 SASL/PLAIN 和 SSL 啟動 Kafka 服務<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+    </button></h2><p>若要透過 SASL/PLAIN 和 SSL 將 Milvus 連線至 Kafka，您需要重複「<a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">僅使用 SASL/PLAIN 將 Milvus 連線至 Kafka</a>」及<a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">「僅使用 SSL 將 Milvus 連線至 Kafka</a>」中的步驟。</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. 啟動採用 SASL/PLAIN 和 SSL 的 Kafka 服務<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -642,8 +631,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用「<a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus to Kafka with SASL/PLAIN Alone</a>」中提到的<code translate="no">kafka_server_jass.conf</code> 檔案，以及「<a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Alone</a>」中產生的<code translate="no">my_secrets</code> 資料夾，以 SASL/PLAIN 和 SSL 啟動 Kafka 服務。</p>
-<p>下列<code translate="no">docker-compose.yaml</code> 檔案可用於以 SASL/PLAIN 和 SSL 啟動 Kafka 服務：</p>
+    </button></h3><p>請使用《<a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">僅透過 SASL/PLAIN 將 Milvus 連線至 Kafka</a>》中提到的<code translate="no">kafka_server_jaas.conf</code> 檔案，以及<a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">《僅透過 SSL 將 Milvus 連線至 Kafka</a>》中產生的<code translate="no">my_secrets</code> 資料夾，以 SASL/PLAIN 和 SSL 啟動 Kafka 服務。</p>
+<p>可使用以下<code translate="no">docker-compose.yaml</code> 檔案來啟動採用 SASL/PLAIN 與 SSL 的 Kafka 服務：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -687,16 +676,16 @@ total 12
       <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
 
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>然後使用下列指令啟動 Kafka 服務：</p>
+<p>接著，請使用以下指令啟動 Kafka 服務：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2.啟動 Milvus 並使用 SASL/PLAIN 和 SSL 連接到 Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. 啟動 Milvus 並透過 SASL/PLAIN 和 SSL 連線至 Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -711,7 +700,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>一旦 Kafka 服務啟動，您就可以啟動 Milvus 並連接到它。使用下列<code translate="no">docker-compose.yaml</code> 檔案啟動 Milvus 並使用 SASL/PLAIN 和 SSL 連線到 Kafka：</p>
+    </button></h3><p>Kafka 服務啟動後，即可啟動 Milvus 並連線至該服務。請使用以下<code translate="no">docker-compose.yaml</code> 檔案，以 SASL/PLAIN 和 SSL 方式啟動 Milvus 並連線至 Kafka：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -726,13 +715,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用以下命令下載 Milvus 配置文件模板：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>並設定以下參數：</p>
+<p>在與您的 `<code translate="no">docker-compose.yaml</code> ` 檔案位於同一目錄下建立一個 `<code translate="no">user.yaml</code> ` 檔案，並在其中設定以下參數。Milvus 會在載入 `<code translate="no">configs/milvus.yaml</code>` 之後載入 `<code translate="no">configs/user.yaml</code> `，因此 `<code translate="no">user.yaml</code> ` 中的值會覆寫預設值：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 

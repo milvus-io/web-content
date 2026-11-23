@@ -25,6 +25,7 @@ beta: Milvus 2.5.11+
     </button></h1><p>Filter " <code translate="no">removepunct</code> " menghapus token yang mengandung tanda baca atau spasi kosong dari aliran token. Gunakan filter ini jika Anda ingin pemrosesan teks yang lebih bersih yang berfokus pada kata-kata bermakna daripada tanda baca.</p>
 <div class="alert note">
 <p>Filter ini paling efektif digunakan bersama tokenizer " <code translate="no">jieba</code>", " <code translate="no">lindera</code>", dan " <code translate="no">icu</code> ", yang mempertahankan tanda baca sebagai token terpisah (misalnya, " <code translate="no">&quot;Hello!&quot;</code> " → " <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>"). Tokenizer <code translate="no">standard</code> membuang tanda baca selama proses tokenisasi. Tokenizer <code translate="no">whitespace</code> mempertahankan tanda baca, termasuk tanda baca di dalam sebuah token. Ketika digabungkan dengan <code translate="no">whitespace</code>, <code translate="no">removepunct</code> menghapus seluruh token jika mengandung tanda baca atau spasi; tokenizer ini tidak menghapus karakter individu dari token.</p>
+<p>Beberapa tokenizer mempertahankan tanda baca di dalam satu token. Misalnya, <code translate="no">icu</code> memecah <code translate="no">don't</code>, <code translate="no">3.5kg</code>, dan <code translate="no">u.s.a</code> menjadi token tunggal yang mengandung tanda baca, sedangkan <code translate="no">removepunct</code> menghapusnya sepenuhnya, sehingga istilah-istilah tersebut tidak dapat dicari. Untuk menghapus hanya token yang seluruhnya terdiri dari tanda baca dan spasi kosong sambil tetap mempertahankan token semacam itu, gunakan filter <a href="/docs/id/regex-filter.md">regex</a> dengan ekspresi yang mensyaratkan setidaknya satu karakter non-tanda baca dan non-spasi kosong, seperti <code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code>.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Konfigurasi<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +42,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filter ` <code translate="no">removepunct</code> ` sudah terintegrasi dalam Milvus. Untuk menggunakannya, cukup tentukan namanya di bagian ` <code translate="no">filter</code> ` dalam ` <code translate="no">analyzer_params</code>`.</p>
+    </button></h2><p>Filter " <code translate="no">removepunct</code> " sudah terintegrasi dalam Milvus. Untuk menggunakannya, cukup tentukan namanya di bagian " <code translate="no">filter</code> " dalam berkas " <code translate="no">analyzer_params</code>".</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

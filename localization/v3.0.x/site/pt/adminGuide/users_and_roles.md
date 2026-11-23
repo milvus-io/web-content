@@ -2,12 +2,9 @@
 id: users_and_roles.md
 title: Criar utilizadores e funções
 summary: >-
-  O Milvus permite um controlo de acesso detalhado através do modelo RBAC. Pode
-  começar por criar utilizadores e funções, depois atribuir privilégios ou
-  grupos de privilégios às funções e, por fim, gerir o controlo de acesso ao
-  atribuir funções aos utilizadores. Este método garante a eficiência e a
-  segurança da gestão de acessos. Esta página explica como criar utilizadores e
-  funções no Milvus.
+  O Milvus controla o acesso através do RBAC: os privilégios são atribuídos a
+  funções e as funções aos utilizadores. Esta página explica como criar
+  utilizadores e funções.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Criar utilizadores e funções<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Após a inicialização de uma instância do Milvus, é gerado automaticamente um utilizador root para autenticação aquando da primeira ligação ao Milvus. O nome de utilizador do utilizador root é <code translate="no">root</code> e a palavra-passe é <code translate="no">Milvus</code>. A função predefinida do utilizador root é <code translate="no">admin</code>, que tem acesso a todos os recursos. Para garantir a segurança dos dados, guarde as credenciais do seu utilizador root num local seguro, de modo a impedir o acesso não autorizado.</p>
-<p>Para as operações diárias, recomendamos a criação de utilizadores em vez de utilizar o utilizador «root».</p>
+    </button></h2><p>Após a inicialização de uma instância do Milvus, é gerado automaticamente um utilizador root para autenticação aquando da primeira ligação ao Milvus. O nome de utilizador do utilizador «root» é <code translate="no">root</code> e a palavra-passe é <code translate="no">Milvus</code>. Por predefinição, o utilizador «root» não está associado a nenhuma função e ignora as verificações de privilégios, pelo que tem acesso a todos os recursos. A definição « <code translate="no">common.security.rootShouldBindRole</code> », cujo valor predefinido é « <code translate="no">false</code> », controla este comportamento. Para garantir a segurança dos dados, mantenha as credenciais do seu utilizador «root» em segurança, a fim de evitar o acesso não autorizado.</p>
+<p>Para as operações diárias, recomendamos a criação de utilizadores em vez de utilizar o utilizador root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Criar um utilizador<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,8 +56,8 @@ summary: >-
       </svg>
     </button></h3><p>Inicie sessão como <code translate="no">root</code> e crie um utilizador com o nome de utilizador <code translate="no">user_1</code> e a palavra-passe <code translate="no">P@ssw0rd</code>. Ao escolher as credenciais, siga estas regras:</p>
 <ul>
-<li><p>Nome de utilizador: Deve começar por uma letra e só pode incluir letras maiúsculas ou minúsculas, números e sublinhados.</p></li>
-<li><p>Palavra-passe: Deve ter, por predefinição, um comprimento de 6 a 72 bytes UTF-8. A sua implementação pode definir <a href="/docs/pt/authenticate.md#Password-requirements">limites de comprimento de palavra-passe</a> diferentes.</p></li>
+<li><p>Nome de utilizador: Deve começar por uma letra ou um sublinhado e só pode incluir letras maiúsculas ou minúsculas, números, sublinhados (<code translate="no">_</code>) e quaisquer caracteres adicionais configurados em <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> por predefinição).</p></li>
+<li><p>Palavra-passe: Deve ter, por predefinição, um comprimento de 6 a 72 bytes UTF-8. A sua implementação pode definir <a href="/docs/pt/authenticate.md#Password-requirements">limites de comprimento</a> diferentes <a href="/docs/pt/authenticate.md#Password-requirements">para a palavra-passe</a>.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -100,7 +97,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -274,7 +271,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus disponibiliza uma função integrada denominada <code translate="no">admin</code>, que é uma função de administrador capaz de aceder aos recursos em todas as instâncias e que possui privilégios para todas as operações. Para uma gestão de acesso mais detalhada e uma segurança de dados reforçada, recomenda-se que crie funções personalizadas de acordo com as suas necessidades.</p>
+    </button></h2><p>O Milvus fornece uma função integrada chamada <code translate="no">admin</code>, que é uma função de administrador capaz de aceder a recursos em todas as instâncias e que possui privilégios para todas as operações. Para uma gestão de acesso mais detalhada e uma segurança de dados reforçada, recomenda-se que crie funções personalizadas com base nas suas necessidades.</p>
 <h3 id="Create-a-role" class="common-anchor-header">Criar uma função<button data-href="#Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,7 +290,7 @@ client.list_users()
     </button></h3><p>O exemplo seguinte demonstra como criar uma função denominada « <code translate="no">role_a</code> ».</p>
 <p>O nome da função deve seguir a seguinte regra:</p>
 <ul>
-<li>Deve começar por uma letra e só pode incluir letras maiúsculas ou minúsculas, números e sublinhados.</li>
+<li>Deve começar por uma letra ou um sublinhado e só pode incluir letras maiúsculas ou minúsculas, números, sublinhados e os caracteres em <code translate="no">proxy.roleNameValidation.allowedChars</code> (<code translate="no">$</code> por predefinição).</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -312,6 +309,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -378,6 +376,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Segue-se um exemplo de resultado. « <code translate="no">admin</code> » é a função predefinida no Milvus. « <code translate="no">role_a</code> » é a nova função que acabou de ser criada.</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>Segue-se um exemplo de resultado. « <code translate="no">admin</code> » e « <code translate="no">public</code> » são as funções predefinidas criadas pelo Milvus. « <code translate="no">role_a</code> » é a nova função que acabou de ser criada.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

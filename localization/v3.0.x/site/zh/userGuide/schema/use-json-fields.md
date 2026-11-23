@@ -641,7 +641,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">使用 JSON 类型转换函数进行类型转换<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>如果您的 JSON 字段键包含格式不正确的值（例如，以字符串形式存储的数字），可以在建立索引时使用转换函数来转换这些值。</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">使用 JSON 类型转换函数进行类型转换<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>如果您的 JSON 字段键包含格式不正确的值（例如，以字符串形式存储的数字），可以在建立索引时使用转换函数对值进行转换。</p>
 <h5 id="Supported-cast-functions" class="common-anchor-header">支持的转换函数</h5><p>类型转换函数不区分大小写。支持以下类型：</p>
 <table>
    <tr>
@@ -1001,7 +1001,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><ul>
 <li><p><strong>数值索引</strong>：</p>
-<p>如果使用 `<code translate="no">json_cast_type=&quot;double&quot;</code>` 创建索引，则只有数值过滤条件（例如 `<code translate="no">&gt;</code>`、`<code translate="no">&lt;</code>`、`<code translate="no">== 42</code>`）才会利用该索引。非数值条件可能会回退到暴力扫描。</p></li>
+<p>如果使用 `<code translate="no">json_cast_type=&quot;double&quot;</code>` 创建索引，则只有数值过滤条件（例如 `<code translate="no">&gt;</code>`、`<code translate="no">&lt;</code>`、`<code translate="no">== 42</code>`）才会利用该索引。非数值条件可能会退而采用暴力扫描。</p></li>
 <li><p><strong>字符串索引</strong>：</p>
 <p>如果索引使用<code translate="no">json_cast_type=&quot;varchar&quot;</code> ，则只有字符串过滤条件才能从该索引中受益；其他类型可能会退而采用全量扫描。</p></li>
 <li><p><strong>布尔索引</strong>：</p>

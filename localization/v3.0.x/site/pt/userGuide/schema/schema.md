@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>No Milvus, um esquema de coleção corresponde a uma tabela numa base de dados relacional, que define a forma como o Milvus organiza os dados na coleção. ​</p>
-<p>Um esquema bem concebido é essencial, uma vez que abstrai o modelo de dados e determina se é possível atingir os objetivos empresariais através de uma pesquisa. Além disso, como cada linha de dados inserida na coleção deve seguir o esquema, este ajuda a manter a consistência dos dados e a qualidade a longo prazo. De uma perspetiva técnica, um esquema bem definido conduz a um armazenamento de dados em colunas bem organizado e a uma estrutura de índices mais clara, melhorando o desempenho da pesquisa.​</p>
+<p>Um esquema bem concebido é essencial, uma vez que abstrai o modelo de dados e determina se é possível atingir os objetivos de negócio através de uma pesquisa. Além disso, como cada linha de dados inserida na coleção deve seguir o esquema, este ajuda a manter a consistência dos dados e a qualidade a longo prazo. De uma perspetiva técnica, um esquema bem definido conduz a um armazenamento de dados em colunas bem organizado e a uma estrutura de índices mais clara, melhorando o desempenho da pesquisa.​</p>
 <p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vetoriais e vários campos escalares. O diagrama seguinte ilustra como mapear um artigo para uma lista de campos do esquema.​</p>
 <p><span class="img-wrapper">
   
@@ -48,8 +48,8 @@ summary: >-
   
  </span></p>
 <p>O projeto do modelo de dados de um sistema de pesquisa envolve a análise das necessidades empresariais e a abstração da informação num modelo de dados expresso através de um esquema. Por exemplo, a pesquisa de um trecho de texto deve ser «indexada» através da conversão da cadeia de caracteres literal num vetor por meio de «incorporação» e da ativação da pesquisa vetorial. Para além deste requisito essencial, poderá ser necessário armazenar outras propriedades, tais como a data e hora de publicação e o autor. Estes metadados permitem refinar as pesquisas semânticas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um autor em particular. Também é possível recuperar estes valores escalares juntamente com o texto principal para apresentar o resultado da pesquisa na aplicação. A cada um deve ser atribuído um identificador único para organizar estes fragmentos de texto, expresso como um número inteiro ou uma cadeia de caracteres. Estes elementos são essenciais para alcançar uma lógica de pesquisa sofisticada.​</p>
-<p>Consulte o guia <a href="/docs/pt/schema-hands-on.md">prático de conceção de esquemas</a> para descobrir como criar um esquema bem concebido.​</p>
-<h2 id="Create-Schema​" class="common-anchor-header">Criar esquema​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
+<p>Consulte o Guia <a href="/docs/pt/schema-hands-on.md">Prático de Concepção de Esquemas</a> para descobrir como criar um esquema bem concebido.​</p>
+<h2 id="Create-Schema​" class="common-anchor-header">Criar um esquema​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -64,11 +64,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O trecho de código seguinte demonstra como criar um esquema.​</p>
+    </button></h2><p>O seguinte fragmento de código demonstra como criar um esquema.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -108,9 +108,9 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
       </svg>
     </button></h2><p>O campo primário numa coleção identifica de forma única uma entidade. Só aceita valores <strong>do tipo Int64</strong> ou <strong>VARCHAR</strong>. Os trechos de código seguintes demonstram como adicionar o campo primário.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -154,8 +154,8 @@ export schema='{​
 }'​
 
 </code></pre>
-<p>Ao adicionar um campo, pode especificá-lo explicitamente como campo primário, definindo a sua propriedade « <code translate="no">is_primary</code> » para « <code translate="no">True</code> ». Por predefinição, um campo primário aceita valores <strong>Int64</strong>. Neste caso, o valor do campo primário deve ser um número inteiro semelhante a « <code translate="no">12345</code> ». Se optar por utilizar valores <strong>VARCHAR</strong> no campo primário, o valor deve ser uma cadeia de caracteres semelhante a « <code translate="no">my_entity_1234</code> ».​</p>
-<p>Também pode definir as propriedades « <code translate="no">autoId</code> » ( ) para <code translate="no">True</code> para que o Milvus atribua automaticamente valores ao campo primário aquando da inserção de dados.​</p>
+<p>Ao adicionar um campo, pode especificar explicitamente esse campo como campo primário, definindo a sua propriedade « <code translate="no">is_primary</code> » para « <code translate="no">True</code> ». Por predefinição, um campo primário aceita valores <strong>Int64</strong>. Neste caso, o valor do campo primário deve ser um número inteiro semelhante a « <code translate="no">12345</code> ». Se optar por utilizar valores <strong>VARCHAR</strong> no campo primário, o valor deve ser uma cadeia de caracteres semelhante a « <code translate="no">my_entity_1234</code> ».​</p>
+<p>Também pode definir as propriedades « <code translate="no">autoId</code> » ( ) em <code translate="no">True</code> para que o Milvus atribua automaticamente valores ao campo primário aquando da inserção de dados.​</p>
 <p>Para mais detalhes, consulte <a href="/docs/pt/primary-field.md">«Campo Primário e AutoID</a>».​</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Adicionar campos vetoriais​<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -172,11 +172,11 @@ export schema='{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os campos vetoriais aceitam várias representações vetoriais esparsas e densas. No Milvus, pode adicionar quatro campos vetoriais a uma coleção. Os trechos de código seguintes demonstram como adicionar um campo vetorial.​</p>
+    </button></h2><p>Os campos vetoriais aceitam várias incorporações vetoriais esparsas e densas. No Milvus, pode adicionar quatro campos vetoriais a uma coleção. Os trechos de código seguintes demonstram como adicionar um campo vetorial.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -217,14 +217,14 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>O parâmetro ` <code translate="no">dim</code> ` nos trechos de código acima indica a dimensionalidade das representações vetoriais a serem mantidas no campo vetorial. O valor « <code translate="no">FLOAT_VECTOR</code> » indica que o campo vetorial contém uma lista de números de 32 bits com ponto flutuante, que são normalmente utilizados para representar antilogaritmos. Além disso, o Milvus também suporta os seguintes tipos de representações vetoriais:​</p>
+<p>O parâmetro ` <code translate="no">dim</code> ` nos trechos de código acima indica a dimensionalidade das representações vetoriais a serem mantidas no campo vetorial. O valor « <code translate="no">FLOAT_VECTOR</code> » indica que o campo vetorial contém uma lista de números flutuantes de 32 bits, que são normalmente utilizados para representar antilogaritmos. Além disso, o Milvus também suporta os seguintes tipos de representações vetoriais:​</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code>​</p>
 <p>Um campo vetorial deste tipo contém uma lista de números de ponto flutuante de meia precisão de 16 bits e aplica-se normalmente a cenários de aprendizagem profunda com restrições de memória ou largura de banda, ou a cenários de computação baseados em GPU.​</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code>​</p>
 <p>Um campo vetorial deste tipo contém uma lista de números de ponto flutuante de 16 bits que têm precisão reduzida, mas o mesmo intervalo de expoentes que o Float32. Este tipo de dados é frequentemente utilizado em cenários de aprendizagem profunda, uma vez que reduz a utilização de memória sem afetar significativamente a precisão.​</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code>​</p>
-<p>Um campo vetorial deste tipo contém uma lista de 0s e 1s. Estes servem como características compactas para representar dados em cenários de processamento de imagens e recuperação de informação.​</p></li>
+<p>Um campo vetorial deste tipo contém uma lista de 0s e 1s. Estes servem como características compactas para representar dados em cenários de processamento de imagens e de recuperação de informação.​</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code>​</p>
 <p>Um campo vetorial deste tipo contém uma lista de números diferentes de zero e os seus números de sequência para representar incorporações vetoriais esparsas.​</p></li>
 </ul>
@@ -261,9 +261,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>No Milvus, pode utilizar campos « <code translate="no">VARCHAR</code> » para armazenar cadeias de caracteres. Para mais informações sobre o campo « <code translate="no">VARCHAR</code> », consulte <a href="/docs/pt/string.md">«Campo VARCHAR</a>».​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -343,9 +343,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Os tipos de números suportados pelo Milvus são <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> e <code translate="no">Double</code>. Para mais informações sobre os campos numéricos, consulte <a href="/docs/pt/number.md">«Campo numérico</a>».</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -399,9 +399,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>O Milvus suporta campos booleanos. Os trechos de código seguintes demonstram como adicionar um campo booleano.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -456,9 +456,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Um campo JSON armazena normalmente dados JSON semiestruturados. Para mais informações sobre os campos JSON, consulte <a href="/docs/pt/use-json-fields.md">«Campo JSON</a>».​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -512,11 +512,11 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">«Campo de matriz</a>».​</p>
+    </button></h3><p>Um campo de matriz armazena uma lista de elementos. Os tipos de dados de todos os elementos num campo de matriz devem ser os mesmos. Para mais informações sobre os campos de matriz, consulte <a href="/docs/pt/array_data_type.md">«Campo de Matriz</a>».​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

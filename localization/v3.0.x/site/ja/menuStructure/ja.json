@@ -24,7 +24,7 @@
         "children": []
       },
       {
-        "label": "リリース",
+        "label": "リリース情報",
         "id": "release_notes.md",
         "order": 3,
         "children": []
@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "ノウウェア",
+            "label": "ノウヒア",
             "id": "knowhere.md",
             "order": 6,
             "children": []
@@ -540,7 +540,7 @@
                 "children": []
               },
               {
-                "label": "組み込みアナライザ",
+                "label": "内蔵アナライザ",
                 "id": "built-in-analyzers",
                 "order": 1,
                 "children": [
@@ -794,7 +794,7 @@
             "children": []
           },
           {
-            "label": "Upsert エンティティ",
+            "label": "アップサートされるエンティティ",
             "id": "upsert-entities.md",
             "order": 1,
             "children": []
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1077,7 +1071,7 @@
             "children": []
           },
           {
-            "label": "検索の集計",
+            "label": "検索の集約",
             "id": "search-aggregation.md",
             "order": 4,
             "children": []
@@ -1439,7 +1433,7 @@
                     "children": []
                   },
                   {
-                    "label": "vLLMランカー",
+                    "label": "vLLM ランカー",
                     "id": "vllm-ranker.md",
                     "order": 1,
                     "children": []
@@ -1499,13 +1493,7 @@
             "children": []
           },
           {
-            "label": "クラスタリング・コンパクテーション",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "強制マージ・コンパクション",
+            "label": "強制マージ・コンパクテーション",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "Node.js SDK",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RESTful API v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "スキーマ設計",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "検索パターン",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "インデックスの選択",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "RAGパイプライン",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -2037,7 +2043,7 @@
                 "children": []
               },
               {
-                "label": "指標の可視化",
+                "label": "指標を可視化する",
                 "id": "visualize.md",
                 "order": 2,
                 "children": []
@@ -2984,7 +2990,7 @@
             "children": []
           },
           {
-            "label": "オラマ",
+            "label": "オッラマ",
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
@@ -3213,7 +3219,7 @@
         "children": []
       },
       {
-        "label": "Milvus を使用した RAG のグラフ化",
+        "label": "Milvus を使用したグラフ RAG",
         "id": "graph_rag_with_milvus.md",
         "order": 7,
         "children": []
@@ -3355,7 +3361,7 @@
         "children": []
       },
       {
-        "label": "Milvus リミッツ",
+        "label": "Milvus Limits",
         "id": "limitations.md",
         "order": 3,
         "children": []

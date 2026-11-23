@@ -3,7 +3,7 @@ id: filtered-search.md
 title: 过滤搜索
 summary: >-
   人工神经网络（ANN）搜索可找到与指定向量嵌入最相似的向量嵌入。不过，搜索结果未必总是正确的。您可以在搜索请求中添加过滤条件，以便 Milvus 在进行
-  ANN 搜索之前先执行元数据过滤，将搜索范围从整个 Collection 缩小到仅包含符合指定过滤条件的实体。
+  ANN 搜索之前先执行元数据过滤，从而将搜索范围从整个 Collection 缩小到仅包含符合指定过滤条件的实体。
 ---
 <h1 id="Filtered-Search" class="common-anchor-header">过滤搜索<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>人工神经网络（ANN）搜索会查找与指定向量嵌入最相似的向量嵌入。然而，搜索结果未必总是正确的。您可以在搜索请求中添加过滤条件，以便 Milvus 在执行 ANN 搜索之前先进行元数据过滤，将搜索范围从整个 Collection 缩小到仅包含符合指定过滤条件的实体。</p>
+    </button></h1><p>人工神经网络（ANN）搜索会查找与指定向量嵌入最相似的向量嵌入。然而，搜索结果未必总是正确的。您可以在搜索请求中添加过滤条件，以便 Milvus 在进行 ANN 搜索之前先执行元数据过滤，将搜索范围从整个 Collection 缩小到仅包含符合指定过滤条件的实体。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,12 +59,17 @@ summary: >-
    <span>带过滤条件的搜索</span>
   
  </span></p>
-<p>如上图所示，搜索请求携带<code translate="no">chunk like &quot;%red%&quot;</code> 作为过滤条件，这表明Milvus应在所有<code translate="no">chunk</code> 字段中包含“<code translate="no">red</code> ”一词的实体范围内进行ANN搜索。具体而言，Milvus将执行以下操作：</p>
+<p>如上图所示，搜索请求携带<code translate="no">chunk like &quot;%red%&quot;</code> 作为过滤条件，这表明Milvus应在所有<code translate="no">chunk</code> 字段中包含<code translate="no">red</code> 一词的实体范围内进行ANN搜索。具体而言，Milvus将执行以下操作：</p>
 <ul>
 <li><p>筛选出符合搜索请求中携带的筛选条件的实体。</p></li>
 <li><p>在筛选后的实体中进行 ANN 搜索。</p></li>
 <li><p>返回前 K 个实体。</p></li>
 </ul>
+<div class="alert note">
+<p>从 Milvus 3.0.3 开始，您可以在普通向量字段的查询和搜索过滤器中使用<code translate="no">IS NULL</code> 和<code translate="no">IS NOT NULL</code> ，分别选中向量字段为 NULL 或非 NULL 的实体。</p>
+<p>要查找<code translate="no">embedding</code> 字段为 NULL 的实体，请在<code translate="no">query()</code> 中使用过滤器<code translate="no">embedding IS NULL</code> 。此过滤器在<code translate="no">search()</code> 中同样有效。但是，使用此过滤器在<code translate="no">embedding</code> 上进行搜索不会返回任何结果：没有<code translate="no">embedding</code> 值的实体没有向量可与查询向量进行比较。</p>
+<p>有关支持的类型、语法和示例，请参阅<a href="/docs/zh/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL 和 IS NOT NULL 操作符</a>。</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">迭代过滤<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,14 +85,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>标准过滤过程能有效地将搜索范围缩小到一个较小的范围。然而，过于复杂的过滤表达式可能会导致搜索延迟过高。在这种情况下，迭代过滤可以作为一种替代方案，有助于减轻标量过滤的工作负载。</p>
+    </button></h3><p>标准的过滤过程能有效地将搜索范围缩小到一个较小的区间。但是，过于复杂的过滤表达式可能会导致搜索延迟非常高。在这种情况下，迭代过滤可以作为一种替代方案，有助于减轻标量过滤的工作负载。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>迭代过滤</span>
   
  </span></p>
-<p>如上图所示，采用迭代过滤的搜索会分迭代地执行向量搜索。迭代器返回的每个实体都会经过标量过滤，该过程将持续进行，直至获得指定的前K个结果。</p>
+<p>如上图所示，采用迭代过滤的搜索会分迭代执行向量搜索。迭代器返回的每个实体都会经过标量过滤，该过程将持续进行，直至获得指定的 topK 结果。</p>
 <p>该方法显著减少了需要进行标量过滤的实体数量，因此对于处理高度复杂的过滤表达式尤为有益。</p>
 <p>但需要注意的是，迭代器每次仅处理一个实体。这种顺序处理方式可能会导致处理时间延长或引发潜在的性能问题，特别是在大量实体需要进行标量过滤时。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -120,7 +125,7 @@ summary: >-
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果查询向量已在目标 Collection 中存在，请考虑直接使用<code translate="no">ids</code> ，而非在搜索前重新检索它们。有关详细信息，请参阅<a href="/docs/zh/primary-key-search.md">“主键搜索”</a>。</p>
+<p>如果查询向量已在目标Collection中存在，请考虑直接使用<code translate="no">ids</code> ，而非在搜索前重新检索它们。有关详细信息，请参阅<a href="/docs/zh/primary-key-search.md">“主键搜索”</a>。</p>
 </div>
 <p>示例使用 PyMilvus 3.0.2、Java SDK 3.0.10、Go SDK 3.0.0（<code translate="no">client/v3</code> ）、Rust SDK 3.0.2、C++ SDK 3.0.4、NodeJS SDK 3.0.6 以及 C# SDK 3.0.0。</p>
 <h3 id="Search-with-standard-filtering" class="common-anchor-header">使用标准过滤条件进行搜索<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
@@ -391,7 +396,7 @@ curl --request POST \
 <span class="hljs-comment"># Illustrative response; scores and cost can vary.</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975796,&quot;id&quot;:4,&quot;likes&quot;:122},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.2499619,&quot;id&quot;:6,&quot;likes&quot;:58}],&quot;topks&quot;:[2]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>搜索请求中携带的筛选条件为<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 。该条件使用“and”操作符包含两项条件：第一项要求实体的<code translate="no">color</code> 字段值以<code translate="no">red</code> 开头，另一项要求实体的<code translate="no">likes</code> 字段值大于<code translate="no">50</code> 。 只有两个实体符合这些要求。当 top-K 设置为<code translate="no">5</code> 时，Milvus 将计算这两个实体与查询向量之间的距离，并将其作为搜索结果返回。</p>
+<p>搜索请求中携带的筛选条件为<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 。该条件使用“and”运算符包含两项条件：第一项要求实体的<code translate="no">color</code> 字段值以<code translate="no">red</code> 开头；第二项要求实体的<code translate="no">likes</code> 字段值大于<code translate="no">50</code> 。 只有两个实体符合这些要求。当 top-K 设置为<code translate="no">5</code> 时，Milvus 将计算这两个实体与查询向量之间的距离，并将其作为搜索结果返回。</p>
 <p>以下示例展示了 Python 结果的结构，并附有示例余弦得分。得分可能会因浮点精度而有所差异。<code translate="no">entity</code> 中仅显示请求的输出字段；REST 示例会在每个命中结果的顶层返回这些字段。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>

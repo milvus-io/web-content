@@ -3,7 +3,7 @@ id: hnsw-sq.md
 title: HNSW_SQ
 summary: >-
   HNSW_SQ는 계층적 탐색 가능 스몰 월드(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여, 크기와 정확도 간의 균형을 조절할 수 있는
-  고급 벡터 인덱싱 기법을 구현합니다. 표준 HNSW와 비교했을 때, 이 인덱스 유형은 인덱스 생성 시간이 약간 증가하는 대신 높은 쿼리 처리
+  고급 벡터 인덱싱 기법을 제시합니다. 표준 HNSW와 비교할 때, 이 인덱스 유형은 인덱스 생성 시간이 약간 증가하는 대신 높은 쿼리 처리
   속도를 유지합니다.
 ---
 <h1 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_SQ는</strong> 계층적 탐색 가능 스몰 월드(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여, 크기와 정확도 간의 균형을 조절할 수 있는 고급 벡터 인덱싱 방법을 제공합니다. 표준 <a href="/docs/ko/hnsw.md">HNSW와</a> 비교할 때, 이 인덱스 유형은 인덱스 생성 시간이 약간 증가하는 대신 높은 쿼리 처리 속도를 유지합니다.</p>
+    </button></h1><p><strong>HNSW_SQ는</strong> 계층적 탐색 가능 스몰 월드(HNSW) 그래프와 스칼라 양자화(SQ)를 결합하여, 크기와 정확도 간의 균형을 조절할 수 있는 고급 벡터 인덱싱 방법을 제공합니다. 표준 <a href="/docs/ko/hnsw.md">HNSW와</a> 비교할 때, 이 인덱스 유형은 인덱스 구축 시간이 약간 증가하는 대신 높은 쿼리 처리 속도를 유지합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>HNSW_SQ는 빠른 그래프 기반 탐색을 위한 <strong>HNSW와</strong> 효율적인 벡터 압축을 위한 <strong>SQ라는</strong> 두 가지 인덱싱 기법을 결합합니다.</p>
+    </button></h2><p>HNSW_SQ는 빠른 그래프 기반 탐색을 위한 <strong>HNSW와</strong> 효율적인 벡터 압축을 위한 <strong>SQ</strong>, <strong>이</strong> 두 가지 인덱싱 기법을 결합한 것입니다.</p>
 <h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ summary: >-
     </button></h3><p>SQ는 벡터를 더 적은 비트로 표현하여 압축하는 방법입니다. 예를 들어:</p>
 <ul>
 <li><p><strong>SQ8은</strong> 8비트를 사용하여 값을 256단계로 매핑합니다. 자세한 내용은 <a href="/docs/ko/ivf-sq8.md#SQ8">IVF_SQ8을</a> 참조하십시오.</p></li>
-<li><p><strong>SQ6는</strong> 각 부동소수점 값을 6비트로 표현하여 64개의 이산 레벨을 생성합니다.</p></li>
+<li><p><strong>SQ6은</strong> 각 부동소수점 값을 6비트로 표현하여 64개의 이산 레벨을 생성합니다.</p></li>
 </ul>
 <p><span class="img-wrapper">
   
@@ -101,7 +101,7 @@ summary: >-
 <p>SQ4U의 “U”는 Uniform(균일)을 의미합니다. 일반적으로 각 차원별로 최소값과 최대값을 독립적으로 계산하는 비균일 스칼라 양자화(차원별 양자화)와 달리, SQ4U는 <strong>전역 균일 양자화</strong> 전략을 적용합니다.</p>
 <ol>
 <li><p><strong>전역 통계</strong>: 시스템은 벡터(또는 전체 벡터 세그먼트)의 <strong>모든 차원에</strong> 적용되는 <strong>단일</strong> 최소값 <code translate="no">vmin</code> 과 <strong>단일</strong> 값 범위 <code translate="no">vdiff</code> 를 계산합니다.</p></li>
-<li><p><strong>균일 매핑</strong>: 전역 값 범위는 16개의 동일한 구간으로 나뉩니다. 벡터 내의 모든 부동 소수점 값은 속한 차원에 관계없이 이러한 공유 매개변수를 사용하여 4비트 정수(0–15)로 매핑됩니다.</p></li>
+<li><p><strong>균일 매핑</strong>: 전역 값 범위는 16개의 동일한 구간으로 나뉩니다. 벡터 내의 모든 부동 소수점 값은 어느 차원에 속하든 상관없이 이러한 공유 매개변수를 사용하여 4비트 정수(0–15)로 매핑됩니다.</p></li>
 </ol>
 <p><strong>성능상의 이점:</strong></p>
 <ul>
@@ -127,9 +127,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>HNSW_SQ는 HNSW와 SQ의 장점을 결합하여 효율적인 근사 최인접 이웃 검색을 가능하게 합니다. 그 작동 방식은 다음과 같습니다:</p>
+    </button></h3><p>HNSW_SQ는 HNSW와 SQ의 장점을 결합하여 효율적인 근사 최인접 이웃 검색을 가능하게 합니다. 그 과정은 다음과 같습니다:</p>
 <ol>
-<li><p><strong>데이터 압축:</strong> SQ는 <code translate="no">sq_type</code> (예: SQ6 또는 SQ8)를 사용하여 벡터를 압축함으로써 메모리 사용량을 줄입니다. 이 압축으로 인해 정밀도가 다소 낮아질 수 있지만, 시스템이 더 큰 데이터셋을 처리할 수 있게 해줍니다.</p></li>
+<li><p><strong>데이터 압축:</strong> SQ는 <code translate="no">sq_type</code> (예: SQ6 또는 SQ8)을 사용하여 벡터를 압축함으로써 메모리 사용량을 줄입니다. 이 압축으로 인해 정밀도가 다소 낮아질 수 있지만, 시스템이 더 큰 데이터셋을 처리할 수 있게 해줍니다.</p></li>
 <li><p><strong>그래프 구축:</strong> 압축된 벡터를 사용하여 HNSW 그래프를 구축합니다. 데이터가 압축되어 있으므로 결과 그래프의 크기가 작아지고 검색 속도가 빨라집니다.</p></li>
 <li><p><strong>후보 검색:</strong> 쿼리 벡터가 제공되면, 알고리즘은 압축된 데이터를 사용하여 HNSW 그래프에서 후보 이웃 집합을 신속하게 식별합니다.</p></li>
 <li><p><strong>(선택 사항) 결과 정제:</strong> 다음 매개변수를 기반으로 초기 후보 결과를 정제하여 정확도를 높일 수 있습니다:</p>
@@ -248,7 +248,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">인덱스를 생성할</a> 때 ‘ <code translate="no">params</code> ’에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw-sq.md#share-PRYPd4xBJonkoZxPpNWcdnebnNh">인덱스를 생성할</a> 때 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -269,12 +269,12 @@ res = MilvusClient.search(
      <td><p><code translate="no">efConstruction</code></p></td>
      <td><p>인덱스 구축 시 연결 대상으로 고려되는 후보 이웃의 수입니다.</p><p>새로운 요소마다 더 많은 후보 풀이 평가되지만, 실제로 설정되는 연결의 최대 개수는 여전히 <code translate="no">M</code> 에 의해 제한됩니다.</p></td>
      <td><p><strong>유형</strong>: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: <code translate="no">360</code></p></td>
-     <td><p><code translate="no">efConstruction</code> 값이 높을수록 더 많은 잠재적 연결이 탐색되므로 일반적으로 <strong>더 정확한 인덱스가</strong> 생성됩니다. 그러나 이로 인해 <strong>인덱싱 시간이 길어지고</strong> 인덱스 생성 중 <strong>메모리 사용량이 증가합니다</strong>.</p><p>특히 인덱싱 시간이 그리 중요하지 않은 상황에서는 정확도를 높이기 위해 ` <code translate="no">efConstruction</code> ` 값을 늘리는 것을 고려해 보십시오.</p><p>리소스 제약이 우려되는 경우, 인덱스 생성 속도를 높이기 위해 ` <code translate="no">efConstruction</code> ` 값을 낮추는 것을 고려해 보십시오.</p><p>대부분의 경우, [50, 500] 범위 내의 값을 설정하는 것이 좋습니다.</p></td>
+     <td><p><code translate="no">efConstruction</code> 값이 높을수록 더 많은 잠재적 연결이 탐색되므로 일반적으로 <strong>더 정확한 인덱스가</strong> 생성됩니다. 그러나 이로 인해 <strong>인덱싱 시간이 길어지고</strong> 인덱스 생성 중 <strong>메모리 사용량이 증가합니다</strong>.</p><p>특히 인덱싱 시간이 그리 중요하지 않은 상황에서는 정확도를 높이기 위해 <code translate="no">efConstruction</code> 값을 늘리는 것을 고려해 보십시오.</p><p>리소스 제약이 우려되는 경우, 인덱스 생성 속도를 높이기 위해 ` <code translate="no">efConstruction</code> ` 값을 낮추는 것을 고려해 보십시오.</p><p>대부분의 경우, [50, 500] 범위 내의 값을 설정하는 것이 좋습니다.</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>벡터를 압축하기 위한 스칼라 양자화 방법을 지정합니다. 각 옵션은 압축률과 정확도 간의 균형이 서로 다릅니다:</p><ul><li><p><code translate="no">SQ4U</code>: 4비트 균일 양자화를 사용하여 벡터를 인코딩합니다. 이 모드는 가장 빠른 속도와 가장 높은 압축률을 제공합니다.</p></li><li><p><code translate="no">SQ6</code>: 6비트 정수를 사용하여 벡터를 인코딩합니다.</p></li><li><p><code translate="no">SQ8</code>: 8비트 정수를 사용하여 벡터를 인코딩합니다.</p></li><li><p><code translate="no">BF16</code>: Bfloat16 형식을 사용합니다.</p></li><li><p><code translate="no">FP16</code>: 표준 16비트 부동소수점 형식을 사용합니다.</p></li></ul></td>
+     <td><p>벡터를 압축하기 위한 스칼라 양자화 방법을 지정합니다. 각 옵션은 압축과 정확도 사이에서 서로 다른 균형을 제공합니다:</p><ul><li><p><code translate="no">SQ4U</code>: 4비트 균일 양자화를 사용하여 벡터를 인코딩합니다. 이 모드는 가장 빠른 속도와 가장 높은 압축률을 제공합니다.</p></li><li><p><code translate="no">SQ6</code>: 6비트 정수를 사용하여 벡터를 인코딩합니다.</p></li><li><p><code translate="no">SQ8</code>: 8비트 정수를 사용하여 벡터를 인코딩합니다.</p></li><li><p><code translate="no">BF16</code>: Bfloat16 형식을 사용합니다.</p></li><li><p><code translate="no">FP16</code>: 표준 16비트 부동소수점 형식을 사용합니다.</p></li></ul></td>
      <td><p><strong>유형</strong>: 문자열</p><p><strong>범위</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>기본값</strong>: <code translate="no">SQ8</code></p></td>
      <td><p><code translate="no">sq_type</code> 의 선택은 특정 애플리케이션의 요구 사항에 따라 달라집니다. <code translate="no">SQ4U</code> 는 최대 속도와 메모리 효율성을 위해 선택됩니다. <code translate="no">SQ6</code> 또는 <code translate="no">SQ8</code> 는 균형 잡힌 성능에 적합할 수 있습니다. 반면, 정확도가 가장 중요하다면 <code translate="no">BF16</code> 또는 <code translate="no">FP16</code> 를 선호할 수 있습니다.</p></td>
    </tr>
@@ -290,7 +290,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>정밀화 작업에 사용되는 데이터의 정밀도를 결정합니다.</p><p>이 정밀도는 압축된 벡터의 정밀도( <code translate="no">sq_type</code> 로 설정된 값)보다 높아야 하며, 재순위가 매겨진 벡터의 정확도와 메모리 사용량 모두에 영향을 미칩니다.</p></td>
      <td><p><strong>유형</strong>: 문자열</p><p><strong>범위</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>기본값</strong>: 없음</p></td>
-     <td><p>더 높은 메모리 비용을 감수하고 최대 정밀도를 얻으려면 <code translate="no">FP32</code> 을, 더 나은 압축률을 원한다면 <code translate="no">SQ6</code> 또는<code translate="no">SQ8</code> 을 사용하십시오. <code translate="no">BF16</code> 과 <code translate="no">FP16</code> 은 균형 잡힌 대안을 제공합니다.</p></td>
+     <td><p>더 높은 메모리 비용을 감수하고 최대 정밀도를 얻으려면 <code translate="no">FP32</code> 을, 더 나은 압축률을 원한다면 <code translate="no">SQ6</code> 또는<code translate="no">SQ8</code> 을 사용하십시오. <code translate="no">BF16</code> 과 <code translate="no">FP16</code> 은 두 가지의 장점을 균형 있게 결합한 대안입니다.</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -308,7 +308,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw-sq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다. 생략한 매개변수의 경우 서버 설정이 기본값을 재정의할 수 있습니다.</p>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw-sq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다. 생략한 매개변에 대해서는 서버 설정이 기본값을 재정의할 수 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -321,7 +321,7 @@ res = MilvusClient.search(
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
      <td><p>가장 가까운 이웃 검색 시 검색 범위를 제어합니다. 이 매개변수는 잠재적인 가장 가까운 이웃으로 방문 및 평가될 노드의 수를 결정합니다. </p><p>이 매개변수는 검색 과정에만 영향을 미치며, 그래프의 최하위 계층에만 적용됩니다.</p></td>
-     <td><p><strong>유형</strong>: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: 일반 kNN 검색의 경우 <code translate="no">max(limit, 16)</code>, 범위 검색의 경우 <code translate="no">512</code>.</p><p>일반 kNN 검색의 경우, 명시적인 <code translate="no">ef</code> 은 <code translate="no">limit</code> (반환할 가장 가까운 이웃의 수)보다 크거나 같아야 합니다.</p></td>
+     <td><p><strong>유형</strong>: 정수</p><p><strong>범위</strong>: [1, <em>int_max</em>]</p><p><strong>기본값</strong>: 일반 kNN 검색의 경우 <code translate="no">max(limit, 16)</code>, 범위 검색의 경우 <code translate="no">512</code>.</p><p>일반 kNN 검색의 경우, 명시적인 <code translate="no">ef</code> 는 <code translate="no">limit</code> (반환할 가장 가까운 이웃의 수)보다 크거나 같아야 합니다.</p></td>
      <td><p><code translate="no">ef</code> 값이 클수록 더 많은 잠재적 이웃이 고려되므로 일반적으로 <strong>검색 정확도가 높아집니다</strong>. 그러나 이로 인해 <strong>검색 시간도 늘어납니다</strong>.</p><p>높은 리콜을 달성하는 것이 중요하고 검색 속도는 그다지 문제가 되지 않는 경우, <code translate="no">ef</code> 를 늘리는 것을 고려해 보십시오.</p><p>특히 정확도가 약간 낮아져도 괜찮은 상황에서는 더 빠른 검색을 우선시하기 위해 <code translate="no">ef</code> 값을 줄이는 것을 고려해 보십시오.</p><p>대부분의 경우, [K, 10K] 범위 내의 값을 설정하는 것이 좋습니다.</p></td>
    </tr>
    <tr>

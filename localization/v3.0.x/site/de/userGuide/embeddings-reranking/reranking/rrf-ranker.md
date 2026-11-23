@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Reciprocal Rank Fusion (RRF)-Ranker ist eine Strategie zur Neugewichtung der Ergebnisse bei der Milvus-Hybridsuche, die die Ergebnisse aus mehreren Vektorsuchpfaden auf der Grundlage ihrer Rangpositionen und nicht ihrer reinen Ähnlichkeitswerte ausbalanciert. Ähnlich wie bei einem Sportturnier, bei dem die Ranglisten der Spieler statt individueller Statistiken berücksichtigt werden, kombiniert der RRF-Ranker Suchergebnisse danach, wie hoch jedes Element in verschiedenen Suchpfaden rangiert, und erstellt so eine faire und ausgewogene Endrangliste.</p>
+    </button></h1><p>Der Reciprocal Rank Fusion (RRF)-Ranker ist eine Strategie zur Neugewichtung der Ergebnisse bei der Milvus-Hybridsuche, die die Ergebnisse aus mehreren Vektorsuchpfaden auf der Grundlage ihrer Rangpositionen und nicht anhand ihrer reinen Ähnlichkeitswerte ausbalanciert. Ähnlich wie bei einem Sportturnier, bei dem die Ranglisten der Spieler statt individueller Statistiken berücksichtigt werden, kombiniert der RRF-Ranker Suchergebnisse danach, wie hoch jedes Element in verschiedenen Suchpfaden rangiert, und erstellt so eine faire und ausgewogene Endrangliste.</p>
 <h2 id="When-to-use-RRF-Ranker" class="common-anchor-header">Wann sollte der RRF-Ranker verwendet werden?<button data-href="#When-to-use-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ summary: >-
    </tr>
    <tr>
      <td><p>Ensemble-Vektorsuche</p></td>
-     <td><p>Kombination der Ergebnisse verschiedener Einbettungsmodelle</p></td>
+     <td><p>Kombination von Ergebnissen aus verschiedenen Einbettungsmodellen</p></td>
      <td><p>Führt Rankings demokratisch zusammen, ohne die Bewertungsverteilung eines bestimmten Modells zu bevorzugen</p></td>
    </tr>
    <tr>
@@ -70,7 +70,8 @@ summary: >-
      <td><p>Erstellt Konsens-Rankings, wenn verschiedene Systeme nicht vergleichbare Bewertungsmethoden verwenden</p></td>
    </tr>
 </table>
-<p>Wenn Ihre hybride Suchanwendung eine ausgewogene Gewichtung mehrerer Suchpfade erfordert, ohne explizite Gewichtungen festzulegen, ist der RRF Ranker die ideale Wahl für Sie.</p>
+<p>Wenn Ihre hybride Suchanwendung eine ausgewogene Gewichtung mehrerer Suchpfade erfordert, ohne explizite Gewichtungen zuzuweisen, ist der RRF Ranker die ideale Wahl für Sie.</p>
+<p>Wenn einige Suchpfade zuverlässiger sind als andere, ihre Rohwerte jedoch nicht vergleichbar sind, können Sie die Ergebnisse dennoch nach Rang zusammenführen und jedem Pfad eine eigene Gewichtung zuweisen. Weitere Informationen finden Sie unter <a href="/docs/de/rrf-ranker.md#Assign-weights-to-search-paths">„Gewichtungen für Suchpfade zuweisen</a>“. Um die Bewertungen der Pfade anstelle ihrer Ränge zu kombinieren, verwenden Sie <a href="/docs/de/weighted-ranker.md">den Weighted Ranker</a>.</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Funktionsweise des RRF Rankers<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +87,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Hauptablauf der RRF-Ranker-Strategie sieht wie folgt aus:</p>
+    </button></h2><p>Der Hauptablauf der RRFRanker-Strategie ist wie folgt:</p>
 <ol>
 <li><p><strong>Suchranglisten erfassen</strong>: Erfassen Sie die Ranglisten der Ergebnisse aus jedem Pfad der Vektorsuche (rank_1, rank_2).</p></li>
 <li><p><strong>Ranglisten zusammenführen</strong>: Konvertieren Sie die Ranglisten aus jedem Pfad (rank_rrf_1, rank_rrf_2) gemäß einer Formel.</p>
@@ -174,7 +175,7 @@ summary: >-
 <p><table>
 <tr>
 <th><p><strong>ID</strong></p></th>
-<th><p><strong>Punktzahl (spärlich)</strong></p></th>
+<th><p><strong>Punktzahl (Sparse)</strong></p></th>
 <th><p><strong>Punktzahl (dicht)</strong></p></th>
 <th><p><strong>Endpunktzahl</strong></p></th>
 </tr>
@@ -333,18 +334,12 @@ rerank := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</spa
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
-<span class="hljs-keyword">let</span> <span class="hljs-variable">rerank</span> = Function::<span class="hljs-title function_ invoke__">new</span>()
-    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;rrf&quot;</span>)
-    .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Rerank)
-    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
-    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>);
+<span class="hljs-keyword">let</span> <span class="hljs-variable">rerank</span> = RRFRerank::<span class="hljs-title function_ invoke__">new</span>().<span class="hljs-title function_ invoke__">k</span>(<span class="hljs-number">100</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
 
-<span class="hljs-keyword">auto</span> rerank = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;rrf&quot;</span>, milvus::FunctionType::RERANK);
-rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>);
-rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>);
+<span class="hljs-keyword">auto</span> rerank = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::RRFRerank&gt;(<span class="hljs-number">100</span>);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -365,7 +360,7 @@ rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string"
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">functions</span>=<span class="hljs-string">&#x27;[
   {
     &quot;name&quot;: &quot;rrf&quot;,
-    &quot;type&quot;: &quot;RERANK&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
     &quot;inputFieldNames&quot;: [],
     &quot;params&quot;: {
       &quot;reranker&quot;: &quot;rrf&quot;,
@@ -396,13 +391,13 @@ rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string"
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der Typ der aufzurufenden Funktion; verwenden Sie „ <code translate="no">RERANK</code> “, um eine Neureihenbildungsstrategie festzulegen</p></td>
+     <td><p>Der Typ der aufzurufenden Funktion; verwenden Sie „ <code translate="no">RERANK</code> “, um eine Neurangfolgestrategie festzulegen</p></td>
      <td><p><code translate="no">FunctionType.RERANK</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Legt die zu verwendende Neureihenbildungsmethode fest.</p><p>Muss auf „ <code translate="no">rrf</code> “ gesetzt sein, um den RRF-Ranker zu verwenden.</p></td>
+     <td><p>Legt die zu verwendende Neurangordnungsmethode fest.</p><p>Muss auf „ <code translate="no">rrf</code> “ gesetzt sein, um den RRF-Ranker zu verwenden.</p></td>
      <td><p><code translate="no">"rrf"</code></p></td>
    </tr>
    <tr>
@@ -412,7 +407,7 @@ rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string"
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Anwendung bei der hybriden Suche<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+<h3 id="Assign-weights-to-search-paths" class="common-anchor-header">Gewichtung der Suchpfade<button data-href="#Assign-weights-to-search-paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -427,8 +422,177 @@ rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string"
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der RRF-Ranker wurde speziell für hybride Suchvorgänge entwickelt, bei denen mehrere Vektorfelder kombiniert werden. So wenden Sie ihn bei einer hybriden Suche an:</p>
-<p>Die Beispiele gehen von einer vorhandenen Sammlung mit einer Text-Embedding-Funktion für „ <code translate="no">text_vector</code> “ und einem vorbereiteten Bild-Embedding aus, das der Dimension von „ <code translate="no">image_vector</code> “ entspricht. Ersetzen Sie den Namen der Sammlung und das Bild-Embedding durch Ihre eigenen Werte.</p>
+    </button></h3><p>Legen Sie den „ <code translate="no">params.weights</code> “ so fest, dass jeder Suchpfad einen unterschiedlichen Einfluss auf das fusionierte Ranking hat. Die Punktzahl jedes Dokuments wird zu <code translate="no">score(d) = Σ weights[i] / (k + rank_i(d))</code>. Der Wert an Position <em>i</em> gilt für die <em>i-te</em> Suchanfrage in Ihrem Hybrid-Suchaufruf, in der Reihenfolge, in der Sie die Anfragen übergeben. Jedes Gewicht muss im Bereich von 0 bis einschließlich 1 liegen, und Sie müssen genau ein Gewicht pro Suchanfrage angeben; andernfalls schlägt die Anfrage mit einem Parameterfehler fehl. Gewichte werden nicht normalisiert und müssen sich nicht auf 1 summieren. Ein Gewicht von <code translate="no">0</code> eliminiert den Beitrag dieses Pfades zur Punktzahl, doch seine Ergebnisse können weiterhin in den zusammengeführten Ergebnissen erscheinen. Wenn Sie <code translate="no">weights</code> weglassen, hat jeder Pfad ein Gewicht von 1, was dem klassischen RRF entspricht.</p>
+<div class="alert note">
+<p>Für das gewichtete RRF ist Milvus 3.0.1 oder höher bzw. Milvus 2.6.23 oder höher aus der 2.6.x-Reihe erforderlich. Frühere Versionen ignorieren den Parameter „ <code translate="no">weights</code> “, ohne einen Fehler zurückzugeben, und ordnen die Ergebnisse nach dem klassischen RRF.</p>
+</div>
+<p>Wenden Sie beispielsweise die Gewichtung „ <code translate="no">[0.3, 0.7]</code> “ auf das obige <a href="/docs/de/rrf-ranker.md#Example-of-RRF-Ranker">Beispiel für „sparse-dense“</a> an, wobei „ <code translate="no">k</code> “ auf 60 gesetzt ist. Die „sparse“-Anfrage wird zuerst übermittelt, sodass „ <code translate="no">0.3</code> “ für die „sparse“-Suche und „ <code translate="no">0.7</code> “ für die „dense“-Suche gilt:</p>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Rang (sparse)</strong></p></th>
+     <th><p><strong>Rang (dicht)</strong></p></th>
+     <th><p><strong>Endpunktzahl</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>0,3/(60+1)+0,7/(60+2) = 0,01620836</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>0,3/(60+4)+0,7/(60+1) = 0,01616291</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>0,3/(60+5)+0,7/(60+4) = 0,01555288</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>k. A.</p></td>
+     <td><p>3</p></td>
+     <td><p>0,7/(60+3) = 0,01111111</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>k. A.</p></td>
+     <td><p>5</p></td>
+     <td><p>0,7/(60+5) = 0,01076923</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>k. A.</p></td>
+     <td><p>0,3/(60+2) = 0,00483871</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>k. A.</p></td>
+     <td><p>0,3/(60+3) = 0,00476190</p></td>
+   </tr>
+</table>
+<p>Bei topK=5 ersetzen die IDs 110 und 250, die nur in den dichten Ergebnissen vorkommen, die IDs 203 und 150 in den Endergebnissen.</p>
+<p>Um einen gewichteten RRF-Ranker zu erstellen, fügen Sie „ <code translate="no">weights</code> “ zu den Ranker-Parametern hinzu und übergeben Sie den Ranker anschließend an Ihre Hybrid-Suche, wie unter <a href="/docs/de/rrf-ranker.md#Apply-to-hybrid-search">„Auf Hybrid-Suche anwenden“</a> gezeigt. Verwenden Sie für cURL das Objekt als Wert für „ <code translate="no">rerank</code> “ der Hybrid-Suchanfrage:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
+
+ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]  <span class="hljs-comment"># One weight per search request, in request order</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+
+rerank := milvusclient.NewRRFReranker().WithK(<span class="hljs-number">100</span>).WithWeights([]<span class="hljs-type">float64</span>{<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>})
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
+
+<span class="hljs-comment">// Hybrid search reads RRF settings from the strategy and params keys</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">rerank</span> = Function::<span class="hljs-title function_ invoke__">new</span>()
+    .<span class="hljs-title function_ invoke__">name</span>(<span class="hljs-string">&quot;rrf&quot;</span>)
+    .<span class="hljs-title function_ invoke__">function_type</span>(FunctionType::Rerank)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+    .<span class="hljs-title function_ invoke__">param</span>(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">r#&quot;{&quot;k&quot;: 100, &quot;weights&quot;: [0.3, 0.7]}&quot;#</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;milvus/MilvusClientV2.h&quot;</span></span>
+
+<span class="hljs-comment">// Hybrid search reads RRF settings from the strategy and params keys</span>
+<span class="hljs-keyword">auto</span> rerank = std::<span class="hljs-built_in">make_shared</span>&lt;milvus::Function&gt;(<span class="hljs-string">&quot;rrf&quot;</span>, milvus::FunctionType::RERANK);
+rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>);
+rerank-&gt;<span class="hljs-built_in">AddParam</span>(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">R&quot;({&quot;k&quot;: 100, &quot;weights&quot;: [0.3, 0.7]})&quot;</span>);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> Milvus.Client.V2.Types;
+
+<span class="hljs-keyword">var</span> rerank = <span class="hljs-keyword">new</span> WeightedRrfReranker();
+
+<span class="hljs-comment">// RrfReranker does not accept weights, so implement IReranker.</span>
+<span class="hljs-comment">// Hybrid search reads RRF settings from the strategy and params keys.</span>
+<span class="hljs-keyword">sealed</span> <span class="hljs-keyword">class</span> <span class="hljs-title">WeightedRrfReranker</span> : <span class="hljs-title">IReranker</span>
+{
+    <span class="hljs-keyword">public</span> IReadOnlyList&lt;KeyValuePair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;&gt; ToRankParams() =&gt; <span class="hljs-keyword">new</span>[]
+    {
+        <span class="hljs-keyword">new</span> KeyValuePair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;strategy&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>),
+        <span class="hljs-keyword">new</span> KeyValuePair&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;(<span class="hljs-string">&quot;params&quot;</span>, <span class="hljs-string">&quot;{\&quot;k\&quot;: 100, \&quot;weights\&quot;: [0.3, 0.7]}&quot;</span>)
+    };
+
+    <span class="hljs-keyword">public</span> FunctionScore? ToFunctionScore() =&gt; <span class="hljs-literal">null</span>;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;rerank&quot;</span>: {
+    <span class="hljs-string">&quot;strategy&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;k&quot;</span>: 100,
+        <span class="hljs-string">&quot;weights&quot;</span>: [0.3, 0.7]
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Übergeben Sie die Gewichte in der oben gezeigten Form. Abgesehen von „ <code translate="no">WithWeights</code> “ im Go-SDK verfügen die RRF-Hilfsklassen der SDKs über keine Option für Gewichte, und Gewichte, die ihnen über eine generische Parametermethode hinzugefügt werden, werden ohne Fehler ignoriert.</p>
+</div>
+<h3 id="Apply-to-hybrid-search" class="common-anchor-header">Anwendung auf die Hybrid-Suche<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der RRF-Ranker wurde speziell für hybride Suchvorgänge entwickelt, bei denen mehrere Vektorfelder kombiniert werden. So verwenden Sie ihn in einer hybriden Suche:</p>
+<p>Die Beispiele gehen von einer vorhandenen Sammlung mit einer Text-Embedding-Funktion für <code translate="no">text_vector</code> und einem vorbereiteten Bild-Embedding aus, das der Dimension von <code translate="no">image_vector</code> entspricht. Ersetzen Sie den Namen der Sammlung und das Bild-Embedding durch Ihre eigenen Werte.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -2,9 +2,8 @@
 id: trie.md
 title: TRIE
 summary: >-
-  يقوم فهرس TRIE بتنظيم قيم حقول VARCHAR في بنية شجرية لتسريع عمليات مقارنة
-  تساوي السلاسل ومطابقة البادئات. وهو أسرع خيار للفهرس القياسي في عمليات البحث
-  الدقيقة وعمليات التصفية بالبادئات، مثل: name LIKE "abc%".
+  استخدم TRIE لتسريع عمليات البحث الدقيق عن السلاسل وتصفية البادئات في حقول
+  VARCHAR.
 ---
 <h1 id="TRIE" class="common-anchor-header">TRIE<button data-href="#TRIE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,13 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يقوم فهرس " <code translate="no">TRIE</code> " في Milvus بتنظيم قيم حقل " <code translate="no">VARCHAR</code> " في شجرة بادئة ( <em>trie</em>). يتوافق كل حرف في السلسلة مع حافة في الشجرة، ويتم تخزين البادئات المشتركة مرة واحدة فقط. تتيح هذه البنية إجراء عمليات البحث الدقيق عن السلاسل ومطابقة البادئات بسرعة، دون الحاجة إلى مسح كل قيمة في الحقل.</p>
-<p>استخدم فهرس " <code translate="no">TRIE</code> " إذا كنت تُجري استعلامات بشكل متكرر باستخدام:</p>
-<ul>
-<li><p>المساواة الدقيقة لقيم السلاسل، مثل <code translate="no">category == &quot;books&quot;</code></p></li>
-<li><p>تصفية البادئات، مثل <code translate="no">name LIKE &quot;abc%&quot;</code></p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">TRIE</code> تنظم السلاسل في شجرة البادئات لتسريع عمليات البحث الدقيقة وعمليات التصفية بالبادئات مثل <code translate="no">name LIKE &quot;abc%&quot;</code>.</p>
+<h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,11 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><code translate="no">VARCHAR</code> الحقول. لمزيد من التفاصيل، راجع <a href="/docs/ar/string.md">حقل السلسلة</a>.</li>
-</ul>
-<p><code translate="no">TRIE</code> يتم دعم هذه الميزة فقط في حقول " <code translate="no">VARCHAR</code> ". لفهرسة قيمة سلسلة داخل حقل " <code translate="no">JSON</code> "، قم بتحويل المسار إلى " <code translate="no">VARCHAR</code> " واستخدم فهرس <a href="/docs/ar/ngram.md">NGRAM</a> بدلاً من ذلك.</p>
-<h2 id="How-it-works" class="common-anchor-header">كيفية العمل<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">أنواع البيانات المدعومة<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,22 +51,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يُنفذ Milvus " <code translate="no">TRIE</code> " على مرحلتين:</p>
-<ol>
-<li><p><strong>إنشاء الفهرس</strong></p>
-<ul>
-<li><p>أثناء الاستيعاب، يقرأ Milvus كل قيمة من قيم الحقل المفهرس.</p></li>
-<li><p>يتم إدراج القيم في شجرة تري (trie): حيث يتم تخزين الأحرف على طول الحواف، وتسجل كل عقدة طرفية معرّفات الكيانات التي تشترك في تلك السلسلة.</p></li>
-<li><p>يتم حفظ الشجرة المكتملة كفهرس.</p></li>
-</ul></li>
-<li><p><strong>تسريع الاستعلامات</strong></p>
-<ul>
-<li><p>بالنسبة لمشكلة المساواة، يتتبع Milvus الشجرة حرفًا حرفًا للوصول إلى العقدة الخاصة بالقيمة الدقيقة ويعرض معرّفات الكيانات الخاصة بها.</p></li>
-<li><p>بالنسبة للبادئة، يتتبع Milvus العقدة المطابقة للبادئة ويجمع معرّفات الكيانات في شجرتها الفرعية.</p></li>
-<li><p>يتم تمرير معرّفات الكيانات المطابقة إلى منفّذ الاستعلام لتجميع النتيجة النهائية.</p></li>
-</ul></li>
-</ol>
-<p>بالنسبة لمرشحات المساواة والبادئة، تكون تكلفة البحث متناسبة مع طول السلسلة بدلاً من عدد الكيانات، مما يحافظ على سرعة هذه الاستعلامات في المجموعات الكبيرة.</p>
+    </button></h3><p><a href="/docs/ar/string.md">حقول VARCHAR</a> فقط. بالنسبة لمسارات سلاسل JSON، اختر فهرسًا متوافقًا في " <a href="/docs/ar/json-indexing.md">فهرسة JSON</a>".</p>
+<p><a id="Queries-accelerated-by-TRIE"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">تسريع التصفية<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يمكن أن يساعد فهرس " <code translate="no">TRIE</code> " في تقييم الشروط التالية في حقل " <code translate="no">VARCHAR</code> ". التعبيرات التالية هي أمثلة:</p>
+<table>
+<thead>
+<tr><th>المرشحات التي يمكنها استخدام الفهرس</th><th>مثال على التعبير</th></tr>
+</thead>
+<tbody>
+<tr><td>المساواة (<code translate="no">==</code> ، <code translate="no">!=</code>)</td><td><code translate="no">category == &quot;books&quot;</code></td></tr>
+<tr><td>العضوية (<code translate="no">in</code> ، <code translate="no">not in</code>)</td><td><code translate="no">category in [&quot;books&quot;, &quot;electronics&quot;]</code></td></tr>
+<tr><td>مطابقة البادئة</td><td><code translate="no">category LIKE &quot;elec%&quot;</code></td></tr>
+<tr><td>النطاق (<code translate="no">&lt;</code> ، <code translate="no">&lt;=</code> ، <code translate="no">&gt;</code> ، <code translate="no">&gt;=</code>)</td><td><code translate="no">category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;</code></td></tr>
+</tbody>
+</table>
+<p>للاطلاع على صيغة التعبير، انظر " <a href="/docs/ar/basic-operators.md">المشغلات الأساسية</a> <a href="/docs/ar/pattern-matching.md">ومطابقة الأنماط</a>".</p>
+<p>قد يتطلب تقييم النطاق زيارة عدة سلاسل مفهرسة. يمكن أيضًا تقييم أنماط اللاحقة والسلسلة الفرعية و <code translate="no">LIKE</code> العامة وأنماط التعبيرات العادية مقابل السلاسل المفهرسة، ولكنها قد تتطلب زيارة العديد من القيم المتميزة. بالنسبة لأحمال عمل السلسلة الفرعية أو التعبيرات العادية، قارن <a href="/docs/ar/ngram.md">NGRAM</a> باستخدام قواعد أهلية الأنماط الخاصة به.</p>
+<p><a id="Best-practices"></a></p>
+<p>قارن زمن استجابة الاستعلام بأطوال سلاسل ممثلة، وبادئات، وعدد النتائج.</p>
+<p><a id="Usage-notes"></a></p>
+<div class="alert note">
+<blockquote>
+<p>هذه هي إمكانيات الفهرس، وليست قيودًا على تعبيرات التصفية الصالحة. راجع <a href="/docs/ar/scalar_index.md#Filter-execution">«الفهرس القياسي» (Scalar Index)</a> للاطلاع على قيود البحث المشتركة. بالنسبة لاختبارات « <code translate="no">AND</code> » و« <code translate="no">OR</code> » و« <code translate="no">NOT</code> » و«NULL» (<code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code>)، راجع <a href="/docs/ar/basic-operators.md">«المشغلات الأساسية</a>».</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-TRIE-works" class="common-anchor-header">كيفية عمل TRIE<button data-href="#How-TRIE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>عرض عملية البحث في شجرة البادئات</strong></summary></p>
+<p>أثناء إنشاء الفهرس، يقوم Milvus بإدراج سلاسل نصية في شجرة البادئة وحفظها. يتم تخزين الأحرف على طول الحواف، ويتم تخزين البادئات المشتركة مرة واحدة، وتسجل كل عقدة طرفية معرّفات الكيانات المرتبطة بتلك السلسلة.</p>
+<p>للتحقق من المساواة، يتم اجتياز الشجرة حتى الوصول إلى العقدة الطرفية للسلسلة الدقيقة. بالنسبة للبادئة، يتم العثور على عقدة البادئة وجمع معرّفات الكيانات من شجرتها الفرعية. يتلقى منفّذ الاستعلام معرّفات الكيانات المطابقة.</p>
+<p>يعتمد التصفح إلى عقدة السلسلة أو البادئة على طول النمط؛ كما يتطلب إرجاع التطابقات جمع معرّفات الكيانات المرتبطة.</p>
+<p></details></p>
 <h2 id="Create-a-TRIE-index" class="common-anchor-header">إنشاء فهرس TRIE<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,8 +128,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك إنشاء فهرس TRIE ( <code translate="no">TRIE</code> ) على حقل <code translate="no">VARCHAR</code>. ولا يلزم وجود معلمات إضافية.</p>
-<p>يوضح المثال أدناه كيفية إنشاء فهرس TRIE ( <code translate="no">TRIE</code> ) على حقل <code translate="no">VARCHAR</code>:</p>
+    </button></h2><p>اضبط ` <code translate="no">index_type</code> ` على ` <code translate="no">TRIE</code>`؛ ولا يلزم وجود معلمات فهرس إضافية:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -241,38 +276,6 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-accelerated-by-TRIE" class="common-anchor-header">الاستعلامات التي يتم تسريعها بواسطة TRIE<button data-href="#Queries-accelerated-by-TRIE" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يعمل فهرس <code translate="no">TRIE</code> على تسريع أنماط التصفية التالية في حقل <code translate="no">VARCHAR</code>:</p>
-<ul>
-<li><p><strong>المساواة</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category == &quot;books&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>العضوية</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category in [&quot;books&quot;, &quot;electronics&quot;]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>مطابقة البادئة</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category LIKE &quot;elec%&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>النطاق</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>قد يؤدي تقييم النطاق إلى زيارة عدة سلاسل مفهرسة.</p></li>
-</ul>
-<p>يمكن أيضًا تقييم أنماط اللاحقة والسلسلة الفرعية والتعبيرات العادية ( <code translate="no">LIKE</code> ) مقابل السلاسل المفهرسة، ولكنها قد تتطلب تقييم العديد من القيم المتميزة. إذا كان عبء العمل الخاص بك يغلب عليه مطابقة السلاسل الفرعية أو التعبيرات العادية، ففكر في استخدام فهرس <a href="/docs/ar/fmindex.md">FMINDEX</a> أو <a href="/docs/ar/ngram.md">NGRAM</a> بدلاً من ذلك.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">إزالة فهرس<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,10 +293,9 @@ curl --request POST \
       </svg>
     </button></h2><p>استخدم طريقة <code translate="no">drop_index()</code> لإزالة فهرس موجود من مجموعة.</p>
 <div class="alert note">
-<ul>
-<li><p>في <strong>الإصدار 2.6.3</strong> أو ما قبله، يجب عليك تحرير المجموعة قبل حذف فهرس سكالي.</p></li>
-<li><p>ابتداءً من <strong>الإصدار v2.6.4</strong> أو الأحدث، يمكنك حذف الفهرس القياسي مباشرةً بمجرد انتفاء الحاجة إليه — دون الحاجة إلى تحرير المجموعة أولاً.</p></li>
-</ul>
+<blockquote>
+<p>للاطلاع على متطلبات الإصدار عند حذف فهرس سكالي، انظر <a href="/docs/ar/scalar_index.md#Drop-index-compatibility">الفهرس السكالي</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -406,42 +408,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">ملاحظات الاستخدام<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>أنواع الحقول:</strong> تعمل مع حقول " <code translate="no">VARCHAR</code> " فقط. لمزيد من المعلومات حول أنواع البيانات، راجع <a href="/docs/ar/string.md">حقل السلسلة</a>.</p></li>
-<li><p><strong>المعلمات:</strong> لا توجد معلمات مؤشر مطلوبة.</p></li>
-<li><p><strong>مطابقة الأنماط:</strong> يُعد « <code translate="no">TRIE</code> » الأسرع في مرشحات المساواة والبادئة. يتم دعم مرشحات النطاق، ولكنها قد تتطلب فحص عدة سلاسل مفهرسة. يمكن تقييم أنماط اللاحقة والسلسلة الفرعية و <code translate="no">LIKE</code> العامة، ولكنها قد تتطلب فحص العديد من السلاسل المفهرسة.</p></li>
-</ul>
-<h2 id="Best-practices" class="common-anchor-header">أفضل الممارسات<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>استخدم <code translate="no">TRIE</code> عندما تكون عوامل التصفية الخاصة بك تعتمد بشكل أساسي على عمليات البحث الدقيقة أو مطابقة البادئة.</p></li>
-<li><p>إذا كان عبء العمل الخاص بك يعتمد على مرشحات السلاسل الفرعية (<code translate="no">LIKE &quot;%abc%&quot;</code>) أو مرشحات التعبيرات العادية، فاستخدم <a href="/docs/ar/fmindex.md">FMINDEX</a> للمطابقة المثبتة الدقيقة أو <a href="/docs/ar/ngram.md">NGRAM</a> لتضييق نطاق المرشحين بدلاً من ذلك.</p></li>
-</ul>

@@ -1,7 +1,7 @@
 ---
 id: python_sdk.md
 title: 提示：Milvus Python SDK
-summary: 人工智能编码助手使用 MilvusClient 编写正确的 Milvus Python 代码的规则。
+summary: AI 编码助手使用 MilvusClient 编写正确的 Milvus Python 代码的规则。
 ---
 <h1 id="Python-SDK" class="common-anchor-header">Python SDK<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: 人工智能编码助手使用 MilvusClient 编写正确的 Milvus Pyth
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>使用 MilvusClient 接口编写正确的 Milvus Python 代码的规则，包括 ORM 迁移、连接模式和常用操作符。将下面的完整提示复制到您的人工智能工具中，以自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/milvus_for_agents.md">AI 提示</a>。</p>
+    </button></h1><p>使用 MilvusClient 接口编写正确的 Milvus Python 代码的规则，包括 ORM 迁移、连接模式和常见操作。将下面的完整提示复制到您的 AI 工具中，即可自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/milvus_for_agents.md">AI 提示</a>。</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">如何使用此提示<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,12 +35,12 @@ summary: 人工智能编码助手使用 MilvusClient 编写正确的 Milvus Pyth
         ></path>
       </svg>
     </button></h2><ol>
-<li>从下面的完整提示部分<strong>复制</strong>完整<a href="#full-prompt">提示</a>。</li>
-<li>将其<strong>保存</strong>到人工智能工具所需的位置 - 有关位置的详细信息，请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
-<li>在生成或审查 Milvus 代码时，您的人工智能助手将自动应用这些规则。</li>
+<li>从下方的<a href="#full-prompt">“完整提示</a>”部分<strong>复制</strong>完整的提示。</li>
+<li>将其<strong>保存</strong>到您的 AI 工具所期望的位置——有关放置位置的详细信息，请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
+<li>您的 AI 助手在生成或审查 Milvus 代码时将自动应用这些规则。</li>
 </ol>
-<p>对于<strong>Cursor</strong>用户：从<a href="#full-prompt">完整提示</a>部分复制提示，并将其保存在项目中的<code translate="no">.cursor/rules/</code> 下。</p>
-<h2 id="Full-prompt" class="common-anchor-header">完整提示<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>针对<strong>Cursor</strong>用户：请从<a href="#full-prompt">“完整提示</a>”部分复制提示，并将其保存至项目中的 `<code translate="no">.cursor/rules/</code> ` 目录下。</p>
+<h2 id="Full-prompt" class="common-anchor-header">完整提示词<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,7 +229,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

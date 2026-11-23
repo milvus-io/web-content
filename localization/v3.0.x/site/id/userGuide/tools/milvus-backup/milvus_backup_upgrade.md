@@ -70,7 +70,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">milvus.address</code>, <code translate="no">milvus.port</code></td><td><code translate="no">milvus.grpc.address</code>, <code translate="no">milvus.grpc.port</code></td></tr>
 <tr><td>Penyimpanan sumber di bawah <code translate="no">minio.*</code></td><td><code translate="no">milvus.storage.*</code></td></tr>
 <tr><td>Penyimpanan cadangan di bawah <code translate="no">minio.backup*</code></td><td><code translate="no">backup.storage.*</code></td></tr>
-<tr><td>Kredensial penyimpanan</td><td><code translate="no">milvus.storage.auth.*</code> / <code translate="no">backup.storage.auth.*</code>, dengan penulisan eksplisit <code translate="no">auth.type</code></td></tr>
+<tr><td>Kredensial penyimpanan</td><td><code translate="no">milvus.storage.auth.*</code> / <code translate="no">backup.storage.auth.*</code>, dengan <code translate="no">auth.type</code></td></tr>
 <tr><td><code translate="no">minio.crossStorage</code></td><td><code translate="no">transfer.mode</code></td></tr>
 <tr><td><code translate="no">backup.gcPause.address</code></td><td><code translate="no">milvus.management.endpoint</code></td></tr>
 </tbody>
@@ -105,7 +105,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">create</code></td><td><code translate="no">--meta_only</code></td><td><code translate="no">--strategy meta_only</code></td></tr>
 <tr><td><code translate="no">restore</code></td><td><code translate="no">--collections</code> / <code translate="no">-c</code>, <code translate="no">--databases</code> / <code translate="no">-d</code>, <code translate="no">--database_collections</code> / <code translate="no">-a</code></td><td><code translate="no">--filter</code>, menggunakan nama target</td></tr>
 <tr><td><code translate="no">restore</code></td><td><code translate="no">--restore_index</code></td><td><code translate="no">--rebuild_index</code></td></tr>
-<tr><td><code translate="no">get</code></td><td><code translate="no">--detail</code> / <code translate="no">-d</code></td><td>Hapus tanda centang; <code translate="no">get</code> akan menampilkan informasi cadangan</td></tr>
+<tr><td><code translate="no">get</code></td><td><code translate="no">--detail</code> / <code translate="no">-d</code></td><td>Hapus tanda bintang; <code translate="no">get</code> akan menampilkan informasi cadangan</td></tr>
 <tr><td><code translate="no">list</code></td><td><code translate="no">--collection</code> / <code translate="no">-c</code></td><td>Tidak ada filter koleksi yang setara</td></tr>
 </tbody>
 </table>
@@ -134,10 +134,10 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>Pada server Milvus 2.x yang didukung, format ` <code translate="no">auto</code> ` menggunakan `binlog`. Peningkatan versi pencadangan tidak memerlukan migrasi ke Milvus 3.0.</li>
+<li>Pada server Milvus 2.x yang didukung, format ` <code translate="no">auto</code> ` menggunakan `binlog`. Memperbarui cadangan tidak memerlukan migrasi ke Milvus 3.0.</li>
 <li>Pada Milvus 3.0, <code translate="no">auto</code> memilih snapshot. Dukungan resmi untuk pencadangan dan pemulihan dimulai pada Milvus 3.0.1. Berikan argumen ` <code translate="no">--format binlog</code> ` untuk mempertahankan perilaku binlog saat membuat cadangan.</li>
 <li>Kompatibilitas konfigurasi V1 tidak mempertahankan bendera perintah yang dihapus atau menggantikan pengaturan default format baru.</li>
-<li>Preset tujuan dapat mengatur format dan opsi lainnya. Misalnya, ` <code translate="no">--for archive</code> ` memaksa penggunaan binlog meskipun ` <code translate="no">--format snapshot</code> ` juga disertakan. Periksa <a href="/docs/id/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">pilihan format dan tujuan</a>.</li>
+<li>Preset tujuan dapat menentukan format dan opsi lainnya. Misalnya, ` <code translate="no">--for archive</code> ` memaksa penggunaan binlog meskipun ` <code translate="no">--format snapshot</code> ` juga disertakan. Periksa <a href="/docs/id/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">pilihan format dan tujuan</a>.</li>
 <li>Koleksi eksternal dilewati selama pencadangan. Periksa metadata pencadangan daripada menganggap keberhasilan tugas sebagai bukti bahwa setiap koleksi telah disertakan.</li>
 </ul>
 <h2 id="Validate-before-switching-jobs" class="common-anchor-header">Lakukan validasi sebelum mengganti pekerjaan<button data-href="#Validate-before-switching-jobs" class="anchor-icon" translate="no">
@@ -166,5 +166,5 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup get -n legacy_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_legacy_check -n legacy_backup -s _legacy_check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Jalur peningkatan ini telah divalidasi dengan <strong>Milvus 2.6.11</strong>, Cadangan <strong>0.5.16 → 0.6.0</strong>, dan cadangan binlog di MinIO. Baik cadangan yang baru dibuat maupun yang sudah ada dipulihkan dengan nilai entitas dan hasil pencarian vektor yang sesuai. Hal ini tidak menjamin kompatibilitas untuk setiap cadangan historis atau untuk pemulihan dari Milvus 2.x ke 3.0. Hal ini juga tidak menjamin bahwa versi 0.5.x dapat membaca cadangan yang dibuat oleh versi 0.6.0.</p>
-<p>Setelah validasi berhasil, perbarui tugas untuk menggunakan biner baru, konfigurasi yang telah diperiksa, pengaturan lingkungan, dan bendera penggantian secara bersamaan. Untuk penerapan API, jalankan layanan baru dengan konfigurasi yang telah diperiksa dan verifikasi penyelesaian tugas melalui <a href="/docs/id/milvus_backup_0_6_api.md">API HTTP</a>. Untuk mengadopsi snapshot pada Milvus 3.0.1 atau versi yang lebih baru, ikuti panduan <a href="/docs/id/snapshot-backup-and-restore.md">“Snapshot Backup and Restore in One Instance</a>”.</p>
+<p>Jalur peningkatan ini telah divalidasi dengan <strong>Milvus 2.6.11</strong>, Cadangan <strong>0.5.16 → 0.6.0</strong>, dan cadangan binlog di MinIO. Baik cadangan yang baru dibuat maupun yang sudah ada berhasil dipulihkan dengan nilai entitas dan hasil pencarian vektor yang sesuai. Hal ini tidak menjamin kompatibilitas untuk setiap cadangan historis atau untuk pemulihan dari Milvus 2.x ke 3.0. Hal ini juga tidak menjamin bahwa versi 0.5.x dapat membaca cadangan yang dibuat oleh versi 0.6.0.</p>
+<p>Setelah validasi berhasil, perbarui tugas untuk menggunakan biner baru, konfigurasi yang telah diperiksa, pengaturan lingkungan, dan bendera penggantian secara bersamaan. Untuk penerapan API, jalankan layanan baru dengan konfigurasi yang telah diperiksa dan verifikasi penyelesaian tugas melalui <a href="/docs/id/milvus_backup_0_6_api.md">API HTTP</a>. Untuk mengadopsi snapshot pada Milvus 3.0.1 atau yang lebih baru, ikuti panduan <a href="/docs/id/snapshot-backup-and-restore.md">“Snapshot Backup and Restore in One Instance</a>”.</p>

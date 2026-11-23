@@ -283,7 +283,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">collection.ttl.seconds</code></p></td>
-     <td><p>Si es necesario eliminar los datos de una colección tras un periodo específico, se recomienda configurar su tiempo de vida (TTL) en segundos. Una vez que el TTL haya expirado, Milvus eliminará todas las entidades de la colección. </p><p>La eliminación es asíncrona, lo que significa que se pueden seguir realizando búsquedas y consultas antes de que se complete la eliminación.</p><p>Para obtener más información, consulta <a href="/docs/es/set-collection-ttl.md">«Establecer el TTL</a> de <a href="/docs/es/set-collection-ttl.md">una colección</a>».</p></td>
+     <td><p>Si es necesario eliminar los datos de una colección tras un periodo específico, se recomienda configurar su tiempo de vida (TTL) en segundos. Una vez que el TTL vence, Milvus elimina todas las entidades de la colección. </p><p>La eliminación es asíncrona, lo que significa que se pueden seguir realizando búsquedas y consultas antes de que se complete la eliminación.</p><p>Para obtener más información, consulta <a href="/docs/es/set-collection-ttl.md">«Establecer el TTL</a> de <a href="/docs/es/set-collection-ttl.md">una colección</a>».</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">ttl_field</code></p></td>
@@ -307,10 +307,14 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>Especifica la zona horaria predeterminada para esta colección al gestionar operaciones sensibles al tiempo, especialmente los campos « <code translate="no">TIMESTAMPTZ</code> ». Las marcas de tiempo se almacenan internamente en UTC, y Milvus convierte los valores para su visualización y comparación de acuerdo con esta configuración. Si se establece, la zona horaria de la colección anula la zona horaria predeterminada de la base de datos; el parámetro de zona horaria de una consulta puede anular temporalmente ambas. El valor debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria</a> válido <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">de la IANA</a> (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más información sobre cómo utilizar un campo « <code translate="no">TIMESTAMPTZ</code> », consulta <a href="/docs/es/timestamptz-field.md">el campo TIMESTAMPTZ</a>.</p></td>
+     <td><p>Especifica la zona horaria predeterminada para esta colección al gestionar operaciones sensibles al tiempo, especialmente los campos « <code translate="no">TIMESTAMPTZ</code> ». Las marcas de tiempo se almacenan internamente en UTC, y Milvus convierte los valores para su visualización y comparación de acuerdo con esta configuración. Si se establece, la zona horaria de la colección anula la zona horaria predeterminada de la base de datos; el parámetro de zona horaria de una consulta puede anular temporalmente ambas. El valor debe ser un <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de zona horaria</a> válido <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">de la IANA</a> (por ejemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> o <strong>UTC</strong>). Para obtener más detalles sobre cómo utilizar un campo « <code translate="no">TIMESTAMPTZ</code> », consulte <a href="/docs/es/timestamptz-field.md">el campo TIMESTAMPTZ</a>.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>Modifica el nivel de consistencia de la colección. El nuevo nivel se aplica a las búsquedas y consultas posteriores en esta colección que no especifiquen un nivel de consistencia propio; la configuración por solicitud sigue teniendo prioridad. El valor debe ser uno de los siguientes: <strong>«Strong»</strong>, <strong>«Session»</strong>, <strong>«Bounded»</strong> (por defecto) o <strong>«Eventually</strong>». Cambiar esta propiedad no requiere liberar la colección. Para obtener más información, consulte <a href="/docs/es/tune_consistency.md">«Nivel</a> de <a href="/docs/es/tune_consistency.md">consistencia</a>».</p></td>
    </tr>
 </table>
-<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">Ejemplo 1: Configurar el TTL a nivel de colección<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">Ejemplo 1: Establecer el TTL a nivel de colección<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -325,7 +329,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El siguiente fragmento de código muestra cómo configurar el TTL de la colección.</p>
+    </button></h3><p>El siguiente fragmento de código muestra cómo configurar el TTL de una colección.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -429,7 +433,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>El siguiente fragmento de código designa un campo « <code translate="no">TIMESTAMPTZ</code> » (<code translate="no">expire_at</code>) ya existente como el campo de TTL para el TTL a nivel de entidad. La colección debe contener ya un campo « <code translate="no">TIMESTAMPTZ</code> » con ese nombre, y no debe estar configurado « <code translate="no">collection.ttl.seconds</code> », ya que los dos modos de TTL son mutuamente excluyentes.</p>
+    </button></h3><p>El siguiente fragmento de código designa un campo existente de « <code translate="no">TIMESTAMPTZ</code> » (<code translate="no">expire_at</code>) como el campo de TTL para el TTL a nivel de entidad. La colección debe contener ya un campo de « <code translate="no">TIMESTAMPTZ</code> » con ese nombre, y no debe estar configurado « <code translate="no">collection.ttl.seconds</code> », ya que los dos modos de TTL son mutuamente excluyentes.</p>
 <p>Para conocer el flujo de trabajo completo del TTL a nivel de entidad (configuración del esquema, inserción, consulta, actualización y eliminación), consulta <a href="/docs/es/set-collection-ttl.md">«Establecer el TTL a nivel de entidad</a>».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1029,7 +1033,7 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">Eliminar propiedades de la colección<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h3 id="Example-8-Alter-the-consistency-level" class="common-anchor-header">Ejemplo 8: Modificar el nivel de consistencia<button data-href="#Example-8-Alter-the-consistency-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1044,7 +1048,95 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>También puedes restablecer una propiedad de la colección eliminándola de la siguiente manera.</p>
+    </button></h3><p>El siguiente fragmento de código cambia el nivel de consistencia de una colección existente a <strong>«Eventually</strong>». El nuevo nivel se aplica a las búsquedas y consultas posteriores en esta colección que no establezcan explícitamente un nivel de consistencia; la configuración por solicitud sigue teniendo prioridad. Para obtener más detalles, consulta <a href="/docs/es/tune_consistency.md">Nivel de consistencia</a>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">alter_collection_properties</span>(
+        AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                                   .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;consistency_level&quot;</span>] = <span class="hljs-string">&quot;Eventually&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">Eliminar propiedades de una colección<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>También puede restablecer una propiedad de la colección eliminándola de la siguiente manera.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

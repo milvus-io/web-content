@@ -40,15 +40,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus — это система, в которой хранение и вычисления разделены. <strong>Потоковые узлы</strong> добавляют все операции записи в журнал предварительной записи (WAL) и хранят <strong>растущий</strong> объем <strong>данных</strong> — данные, которые все еще находятся в WAL и еще не сохранены. Процесс восстановления преобразует растущие данные в <strong>исторические данные</strong> (запечатанные сегменты, сохраненные в объектном хранилище, таком как MinIO/S3), которые обслуживаются <strong>узлами запросов</strong>. Каждый запрос на поиск или запрос принимается <strong>делегатором запросов</strong> на потоковом узле, на котором размещён журнал WAL коллекции: делегатор генерирует план запроса, выполняет часть, относящуюся к растущим данным, локально, пересылает часть, относящуюся к историческим данным, на соответствующие узлы запросов и объединяет результаты перед их возвратом. Подробности см. в разделе <a href="/docs/ru/streaming_service.md">«Служба потоковой передачи</a>».</p>
-<p>Чтобы обеспечить гарантии согласованности, Milvus присваивает каждому сообщению метку времени Timestamp Oracle (TSO), которая определяет его порядок в журнале WAL, и непрерывно вставляет метки времени синхронизации в журнал WAL наряду с сообщениями данных. При получении метки времени синхронизации (syncTs) она записывается в качестве ServiceTime, что означает, что все данные, предшествующие этому ServiceTime, доступны для запросов. На основе ServiceTime Milvus предоставляет метки времени гарантии (GuaranteeTs) для удовлетворения различных требований пользователей к согласованности и доступности. Пользователи могут уведомить делегатора о необходимости включения данных, предшествующих указанному моменту времени, в область поиска, указав GuaranteeTs в своих запросах на поиск.</p>
+    </button></h2><p>Milvus — это система, в которой хранение и вычисления разделены. <strong>Потоковые узлы (Streaming Nodes</strong> ) добавляют все операции записи в журнал предварительной записи (WAL) и хранят <strong>растущий</strong> объем <strong>данных</strong> — данные, которые все еще находятся в WAL и еще не сохранены. Процесс восстановления преобразует растущие данные в <strong>исторические данные</strong> (запечатанные сегменты, сохраненные в объектном хранилище, таком как MinIO/S3), которые обслуживаются <strong>узлами запросов</strong>. Каждый запрос на поиск или запрос принимается <strong>делегатором запросов</strong> на потоковом узле, на котором размещён журнал WAL коллекции: делегатор генерирует план запроса, выполняет часть, относящуюся к растущим данным, локально, пересылает часть, относящуюся к историческим данным, на соответствующие узлы запросов и объединяет результаты перед их возвратом. Подробности см. в разделе <a href="/docs/ru/streaming_service.md">«Служба потоковой передачи</a>».</p>
+<p>Чтобы обеспечить гарантии согласованности, Milvus присваивает каждому сообщению временную метку Timestamp Oracle (TSO), которая определяет его порядок в WAL, и непрерывно вставляет в WAL метки синхронизации наряду с сообщениями данных. При получении метки времени синхронизации (syncTs) она записывается как ServiceTime, что означает, что все данные, предшествующие этому ServiceTime, доступны для запросов. На основе ServiceTime Milvus предоставляет метки времени гарантии (GuaranteeTs) для удовлетворения различных требований пользователей к согласованности и доступности. Пользователи могут уведомить делегатора о необходимости включения данных, предшествующих указанному моменту времени, в область поиска, указав GuaranteeTs в своих запросах на поиск.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
    <span>Время обслуживания и время гарантии</span>
   
  </span></p>
-<p>Как показано на рисунке выше, если GuaranteeTs меньше ServiceTime, это означает, что все данные, предшествующие указанному моменту времени, уже доступны, что позволяет немедленно выполнить поиск. Когда GuaranteeTs больше ServiceTime, поиск должен подождать, пока ServiceTime не превысит GuaranteeTs, прежде чем он сможет быть выполнен.</p>
+<p>Как показано на рисунке выше, если GuaranteeTs меньше ServiceTime, это означает, что все данные до указанного момента времени уже доступны, что позволяет немедленно выполнить поиск. Когда GuaranteeTs больше ServiceTime, поиск должен подождать, пока ServiceTime не превысит GuaranteeTs, прежде чем он сможет быть выполнен.</p>
 <p>Пользователям необходимо найти компромисс между точностью запроса и задержкой его выполнения. Если у пользователей высокие требования к согласованности и они не чувствительны к задержке запроса, они могут установить для GuaranteeTs максимально возможное значение; если пользователи желают быстро получать результаты поиска и менее требовательны к точности запроса, то GuaranteeTs можно установить на меньшее значение.</p>
 <p><span class="img-wrapper">
   
@@ -63,7 +63,7 @@ summary: >-
 <li><p><strong>Конечный</strong></p>
 <p>Значение GuaranteeTs устанавливается на крайне малое значение, например 1, чтобы избежать проверок согласованности, благодаря чему поиск выполняется немедленно на основе данных, видимых в данный момент.</p></li>
 <li><p><strong>Ограниченная устарелость</strong></p>
-<p>Значение GuaranteeTs устанавливается на момент времени, предшествующий самой последней временной метке, так что поиск выполняется с допущением того, что некоторые недавние данные еще могут быть недоступны.</p></li>
+<p>Значение GuaranteeTs устанавливается на момент времени, предшествующий самой последней временной метке, так что поиск выполняется с допущением того, что некоторые недавние данные ещё могут быть недоступны.</p></li>
 <li><p><strong>Сессия</strong></p>
 <p>В качестве GuaranteeTs используется самый поздний момент времени, в который клиент вставил данные, чтобы поиск мог охватить все данные, вставленные клиентом.</p></li>
 </ul>
@@ -83,7 +83,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете устанавливать различные уровни согласованности как при создании коллекции, так и при выполнении поисков и запросов.</p>
+    </button></h2><p>Уровень согласованности можно установить при создании коллекции, изменить его после создания коллекции или переопределить для отдельных поисков и запросов.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Установка уровня согласованности при создании коллекции<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +99,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>При создании коллекции можно установить уровень согласованности для поисков и запросов внутри коллекции. В приведённом ниже примере кода уровень согласованности установлен на значение <strong>«Bounded</strong>».</p>
+    </button></h3><p>При создании коллекции можно установить уровень согласованности для поисков и запросов в пределах этой коллекции. В приведённом ниже примере кода уровень согласованности установлен на значение <strong>«Bounded</strong>».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -170,6 +170,57 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Возможные значения параметра ` <code translate="no">consistency_level</code> `: ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>` и ` <code translate="no">Session</code>`.</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Изменение уровня согласованности коллекции<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Уровень согласованности существующей коллекции можно изменить, изменив её свойство <code translate="no">consistency_level</code>. Новый уровень применяется к последующим поискам и запросам по коллекции, в которых не указан собственный уровень согласованности, и для его изменения не требуется освобождать коллекцию. В следующем примере кода уровень согласованности изменяется на <strong>«Eventually</strong>».</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Установка уровня согласованности при поиске<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -235,7 +286,7 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Этот параметр также доступен в гибридных поисках и итераторе поиска. Возможные значения параметра « <code translate="no">consistency_level</code> » (уровень согласованности): « <code translate="no">Strong</code> », « <code translate="no">Bounded</code> », « <code translate="no">Eventually</code> » и « <code translate="no">Session</code> ».</p>
+<p>Этот параметр также доступен в гибридных поисках и итераторе поиска. Возможные значения параметра ` <code translate="no">consistency_level</code> `: ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>` и ` <code translate="no">Session</code>`.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Установка уровня согласованности в запросе<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

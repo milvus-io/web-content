@@ -47,11 +47,12 @@ summary: >-
 <li><strong>Valeurs par défaut</strong>: les champs ARRAY ne prennent pas en charge les valeurs par défaut. Cependant, vous pouvez définir l’attribut « <code translate="no">nullable</code> » sur « <code translate="no">True</code> » pour autoriser les valeurs nulles. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a> ».</li>
 </ul>
 <ul>
-<li><strong>Type de données :</strong> tous les éléments d’un champ ARRAY doivent partager le même type de données, qui est défini par le paramètre ` <code translate="no">element_type</code> `. Lorsque ` <code translate="no">element_type</code> ` est défini sur ` <code translate="no">VARCHAR</code>`, vous devez également spécifier ` <code translate="no">max_length</code>`, qui définit le nombre maximal d’octets autorisés pour chaque élément du tableau. Le champ « <code translate="no">element_type</code> » accepte tout type de données scalaire pris en charge par Milvus, à l’exception de « <code translate="no">JSON</code> ». Pour « <code translate="no">element_type=STRUCT</code> », utilisez un champ StructArray et fournissez un « <code translate="no">struct_schema</code> » ; pour plus de détails, reportez-vous à <a href="/docs/fr/create-structarray-field.md">la section StructArray</a>. Un champ ARRAY de niveau supérieur ne peut pas contenir de vecteurs ni de tableaux imbriqués, et ses éléments ne peuvent pas être nuls individuellement ; ces formes ne sont disponibles que pour les sous-champs à l’intérieur d’un champ StructArray dans Milvus 3.0.6 et versions ultérieures.</li>
+<li><strong>Type de données :</strong> tous les éléments d’un champ ARRAY doivent partager le même type de données, qui est défini par le paramètre <code translate="no">element_type</code>. Lorsque <code translate="no">element_type</code> est défini sur <code translate="no">VARCHAR</code>, vous devez également spécifier <code translate="no">max_length</code>, qui définit le nombre maximal d’octets autorisés pour chaque élément du tableau. Le champ « <code translate="no">element_type</code> » accepte tout type de données scalaire pris en charge par Milvus, à l’exception de « <code translate="no">JSON</code> ». Pour « <code translate="no">element_type=STRUCT</code> », utilisez un champ StructArray et fournissez un « <code translate="no">struct_schema</code> » ; pour plus de détails, reportez-vous à <a href="/docs/fr/create-structarray-field.md">la section StructArray</a>. Un champ ARRAY de niveau supérieur ne peut pas contenir de vecteurs ni de tableaux imbriqués, et ses éléments ne peuvent pas être nuls individuellement ; ces formes ne sont disponibles que pour les sous-champs à l’intérieur d’un champ StructArray dans Milvus 3.0.6 et versions ultérieures.</li>
 </ul>
 <ul>
-<li><p><strong>Capacité du tableau</strong>: le nombre d’éléments d’un champ ARRAY doit être inférieur ou égal à la capacité maximale définie lors de la création du tableau, comme spécifié par <code translate="no">max_capacity</code>. La valeur doit être un entier compris entre <strong>1</strong> et <strong>4 096</strong>.</p></li>
-<li><p><strong>Gestion des chaînes de caractères</strong>: les valeurs de type chaîne de caractères dans les champs « Array » sont stockées telles quelles, sans échappement sémantique ni conversion. Par exemple, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> et <code translate="no">&quot;a\&quot;b&quot;</code> sont stockées telles qu’elles ont été saisies, tandis que <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérées comme des valeurs non valides.</p></li>
+<li><p><strong>Capacité du tableau</strong>: le nombre d’éléments d’un champ ARRAY doit être inférieur ou égal à la capacité maximale définie lors de la création du tableau, comme spécifié par <code translate="no">max_capacity</code>. La valeur doit être supérieure à 0 et ne doit pas dépasser <code translate="no">proxy.maxArrayCapacity</code>, dont la valeur par défaut est <strong>4096</strong>.</p></li>
+<li><p><strong>Correspondance de texte</strong>: les fonctions <code translate="no">TEXT_MATCH</code>, <code translate="no">TEXT_MATCH_FUZZY</code> et <code translate="no">PHRASE_MATCH</code> ne prennent en charge que les champs de type « <code translate="no">VARCHAR</code> » et « <code translate="no">TEXT</code> » ; leur application à un champ de type «ARRAY» génère une erreur. Les fonctions <code translate="no">enable_analyzer</code> et <code translate="no">enable_match</code> n’ont aucun effet sur les champs de type «ARRAY». Pour plus de détails sur la correspondance de texte, reportez-vous à <a href="/docs/fr/keyword-match.md">la section Correspondance de texte</a>.</p></li>
+<li><p><strong>Gestion des chaînes de caractères</strong>: les valeurs de type chaîne dans les champs de type « Array » sont stockées telles quelles, sans échappement sémantique ni conversion. Par exemple, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> et <code translate="no">&quot;a\&quot;b&quot;</code> sont stockées telles qu’elles ont été saisies, tandis que <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérées comme des valeurs non valides.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Ajouter un champ ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,15 +69,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser des champs de type ARRAY dans les clusters Milvus, définissez le type de champ approprié lors de la création du schéma de collection. Cette procédure comprend :</p>
+    </button></h2><p>Pour ajouter un champ ARRAY au schéma de la collection, définissez les paramètres suivants :</p>
 <ol>
-<li><p>Définir le paramètre « <code translate="no">datatype</code> » sur le type de données «Array» pris en charge, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utiliser le paramètre ` <code translate="no">element_type</code> ` pour spécifier le type de données des éléments du tableau. Tous les éléments d’un même tableau doivent être du même type de données.</p></li>
-<li><p>Utiliser le paramètre ` <code translate="no">max_capacity</code> ` pour définir la capacité maximale du tableau, c'est-à-dire le nombre maximal d'éléments qu'il peut contenir.</p></li>
+<li><p>Définissez le type de données du champ sur « <code translate="no">ARRAY</code> ».</p></li>
+<li><p>Définissez « <code translate="no">element_type</code> » sur le type de données commun aux éléments.</p></li>
+<li><p>Définissez ` <code translate="no">max_capacity</code> ` sur le nombre maximal d’éléments.</p></li>
 </ol>
 <p>Voici comment définir un schéma de collection incluant des champs ARRAY :</p>
 <div class="alert note">
-<p>Si vous définissez ` <code translate="no">enable_dynamic_field=True</code> ` lors de la définition du schéma, Milvus vous permet d’insérer des champs scalaires qui n’ont pas été définis au préalable. Cependant, cela peut accroître la complexité des requêtes et de la gestion, ce qui peut avoir un impact sur les performances. Pour plus d’informations, consultez la section <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
+<p>Pour insérer des champs non définis dans le schéma, activez le <a href="/docs/fr/enable-dynamic-field.md">champ dynamique</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -361,7 +362,7 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Définir les paramètres d’indexation<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Définir les paramètres d’index<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,8 +377,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L’indexation contribue à améliorer les performances de recherche et de requête. Dans les clusters Milvus, l’indexation est obligatoire pour les champs vectoriels, mais facultative pour les champs scalaires.</p>
-<p>L'exemple suivant crée des index sur le champ vectoriel <code translate="no">embedding</code> et le champ ARRAY <code translate="no">tags</code>, en utilisant dans les deux cas le type d'index « <code translate="no">AUTOINDEX</code> ». Avec ce type, Milvus sélectionne automatiquement l'index le plus adapté en fonction du type de données. Vous pouvez également personnaliser le type d'index et les paramètres pour chaque champ. Pour plus de détails, consultez la section « <a href="/docs/fr/index-explained.md">Explication de l'index</a> ».</p>
+    </button></h2><p>Les champs vectoriels nécessitent des index ; les index scalaires sont facultatifs. Cet exemple demande l’ <code translate="no">AUTOINDEX</code> sur <code translate="no">embedding</code> et <code translate="no">tags</code>. Pour connaître les choix d’index ARRAY explicites et la prise en charge des filtres, consultez la <a href="#Array-index-support">section Prise en charge des index ARRAY</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Les index scalaires, y compris <code translate="no">AUTOINDEX</code>, ne prennent pas en charge les champs ARRAY récursifs ni les tableaux contenant des éléments pouvant être nuls. Consultez la section « <a href="/docs/fr/array_data_type.md#Array-index-support">Prise en charge des index ARRAY</a> » pour les filtres de tableaux ordinaires et la section « <a href="/docs/fr/index-structarray-fields.md#Create-scalar-indexes">Index des champs StructArray</a> » pour les règles relatives aux sous-champs.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -487,6 +492,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>Prise en charge des index de tableaux : types d’index et filtres accélérés</strong></summary></p>
+<p>Les index scalaires sur un champ ARRAY ordinaire indexent ses éléments. Choisissez parmi les types d’index explicites suivants :</p>
+<table>
+<thead>
+<tr><th>Type d’élément</th><th>Types d’index explicites</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>Vous pouvez également demander <code translate="no">AUTOINDEX</code>; voir <a href="/docs/fr/scalar_index.md#AUTOINDEX-behavior">Index scalaire</a> pour les sélections ARRAY par défaut.</p>
+<p>Les filtres suivants peuvent utiliser des index de tableau éligibles :</p>
+<table>
+<thead>
+<tr><th>Filtre</th><th>Comportement de l’index</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, ou une sélection automatique éligible peut rechercher des éléments quelle que soit leur position.</td></tr>
+<tr><td><code translate="no">==</code> sur l’ensemble du tableau ou <code translate="no">!=</code> sur des tableaux de type booléen, entier ou VARCHAR</td><td><code translate="no">INVERTED</code> peuvent identifier des candidats, puis vérifier l’ordre et la longueur des tableaux d’origine. La fonction « <code translate="no">BITMAP</code> » ne prend pas en charge ce chemin de sélection.</td></tr>
+<tr><td>Comparaisons sur l’ensemble du tableau pour les tableaux à virgule flottante</td><td>Recourent au balayage.</td></tr>
+<tr><td>Accès aux éléments, tel que l’ <code translate="no">tags[0]</code>, ou à la longueur du tableau</td><td>L'indexation par appartenance à un élément ne fournit pas de recherche par index pour ces opérations.</td></tr>
+</tbody>
+</table>
+<p>Pour la syntaxe des expressions, voir <a href="/docs/fr/array-operators.md">Opérateurs ARRAY</a>.</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">Créer une collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -502,7 +534,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois le schéma et l’index définis, créez une collection comprenant des champs de type ARRAY.</p>
+    </button></h2><p>Une fois le schéma et l’index définis, créez une collection comprenant des champs ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -653,7 +685,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois la collection créée, vous pouvez insérer des données comprenant des champs de type ARRAY.</p>
+    </button></h2><p>Après avoir créé la collection, vous pouvez insérer des données comprenant des champs ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -843,7 +875,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Au-delà de l’insertion de tableaux complets, les champs de type « <code translate="no">ARRAY</code> » prennent également en charge les opérateurs de mise à jour partielle « <code translate="no">ARRAY_APPEND</code> » et « <code translate="no">ARRAY_REMOVE</code> » de l’API « <code translate="no">upsert</code> » dans Milvus v2.6.17 et versions ultérieures. Ceux-ci vous permettent d’ajouter des éléments à un tableau existant ou d’en supprimer certains sans avoir à récupérer au préalable sa valeur actuelle, ce qui évite le modèle « lecture-modification-écriture » côté client. Pour plus de détails, consultez la section « <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert des champs ARRAY en mode fusion</a> ».</p>
+<p>Au-delà de l’insertion de tableaux complets, les champs de type « <code translate="no">ARRAY</code> » prennent également en charge les opérateurs de mise à jour partielle « <code translate="no">ARRAY_APPEND</code> » et « <code translate="no">ARRAY_REMOVE</code> » de l’API « <code translate="no">upsert</code> » dans Milvus v2.6.17 et versions ultérieures. Ceux-ci vous permettent d’ajouter des éléments à un tableau existant ou d’en supprimer certains sans avoir à récupérer au préalable sa valeur actuelle, ce qui évite le modèle «lecture-modification-écriture» côté client. Pour plus de détails, consultez la section « <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert des champs ARRAY en mode fusion</a> ».</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Requête avec des expressions de filtrage<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1108,7 +1140,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Outre le filtrage de base par champ scalaire, vous pouvez combiner des recherches de similarité vectorielle avec des filtres de champ scalaire. Par exemple, le code suivant montre comment ajouter un filtre de champ scalaire à une recherche vectorielle :</p>
+    </button></h2><p>Utilisez les filtres ARRAY dans la recherche vectorielle pour restreindre les entités éligibles :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1271,4 +1303,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>De plus, Milvus prend en charge des opérateurs de filtrage de tableaux avancés tels que <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> et <code translate="no">ARRAY_LENGTH</code> afin d’améliorer encore les capacités de requête. Pour plus de détails, consultez la section <a href="/docs/fr/array-operators.md">Opérateurs ARRAY</a>.</p>
+<p>Pour les filtres de contenance et de longueur, voir <a href="/docs/fr/array-operators.md">Opérateurs ARRAY</a>.</p>

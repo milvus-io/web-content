@@ -3,7 +3,7 @@ id: keyword-match.md
 title: 文本匹配
 summary: >-
   Milvus
-  中的文本匹配功能可基于特定术语实现精确的文档检索。该功能主要用于满足特定条件的过滤搜索，并可结合标量过滤来优化查询结果，从而在满足标量条件的向量范围内进行相似度搜索。
+  中的文本匹配功能可基于特定术语实现精确的文档检索。该功能主要用于满足特定条件的过滤搜索，并可结合标量过滤来优化查询结果，从而在满足标量条件的向量中进行相似度搜索。
 ---
 <h1 id="Text-Match" class="common-anchor-header">文本匹配<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
 <li><p><a href="/docs/zh/analyzer-overview.md">分析器</a>：分析器通过将输入文本切分为单个单词（即词元）来处理文本，然后根据需要应用过滤器。这使 Milvus 能够基于这些词元构建索引。</p></li>
 <li><p><a href="/docs/zh/index-explained.md">索引</a>：文本分析完成后，Milvus 会创建一个倒排索引，将每个唯一的词素映射到包含该词素的文档。</p></li>
 </ol>
-<p>当用户执行文本匹配时，系统会利用倒排索引快速检索所有包含该术语的文档。这比逐个扫描每个文档要快得多。</p>
+<p>当用户执行文本匹配时，系统会利用倒排索引快速检索所有包含该术语的文档。这比逐一扫描每个文档要快得多。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
@@ -66,7 +66,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>文本匹配适用于已启用匹配功能的字符串字段。本页示例使用 <a href="/docs/zh/string.md"><code translate="no">VARCHAR</code></a>，该字段在所有客户端 SDK 中均受支持。在 Milvus 3.0.x 中， <a href="/docs/zh/text.md"><code translate="no">TEXT</code></a> 字段在启用 Storage V3 时也支持文本匹配。对于这两种字段类型，请将 `<code translate="no">enable_analyzer</code> ` 和 `<code translate="no">enable_match</code> ` 均设置为 `<code translate="no">True</code>`，然后在定义 Collection Schema 时可选地配置<a href="/docs/zh/analyzer-overview.md">分析器</a>。</p>
+    </button></h2><p>文本匹配适用于已启用匹配功能的字符串字段。本页示例使用 <a href="/docs/zh/string.md"><code translate="no">VARCHAR</code></a>，该字段在所有客户端 SDK 中均受支持。在 Milvus 3.0.x 中， <a href="/docs/zh/text.md"><code translate="no">TEXT</code></a> 字段在启用 Storage V3 时也支持文本匹配。对于这两种字段类型，请将 `<code translate="no">enable_analyzer</code> ` 和 `<code translate="no">enable_match</code> ` 均设置为 `<code translate="no">True</code>`，然后在定义 Schema 时可选地配置<a href="/docs/zh/analyzer-overview.md">分析器</a>。</p>
 <h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">将 `<code translate="no">enable_analyzer</code> ` 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要为特定的<code translate="no">VARCHAR</code> 字段启用文本匹配，请在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 两个参数均设置为<code translate="no">True</code> 。这将指示 Milvus 对文本进行分词并为指定字段创建倒排索引，从而实现快速高效的文本匹配。</p>
+    </button></h3><p>若要为特定的<code translate="no">VARCHAR</code> 字段启用文本匹配，请在定义字段模式时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 两个参数均设置为<code translate="no">True</code> 。这将指示 Milvus 对文本进行分词，并为指定字段创建倒排索引，从而实现快速高效的文本匹配。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -346,7 +346,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在Collection模式中为<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 字段启用文本匹配功能后，即可使用<code translate="no">TEXT_MATCH</code> 表达式执行文本匹配。</p>
+    </button></h2><p>在Collection Schema中为<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 字段启用文本匹配功能后，即可使用<code translate="no">TEXT_MATCH</code> 表达式执行文本匹配。</p>
 <h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">TEXT_MATCH 表达式语法<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -394,7 +394,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-cpp">std::string filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以使用逻辑操作符组合多个<code translate="no">TEXT_MATCH</code> 表达式，以执行<strong>“AND”</strong>匹配。</p>
+<p>您还可以使用逻辑操作符组合多个<code translate="no">TEXT_MATCH</code> 表达式，以执行<strong>“与”</strong>匹配。</p>
 <ul>
 <li>若要搜索在“<code translate="no">text</code> ”字段中同时包含“<code translate="no">machine</code> ”和“<code translate="no">deep</code> ”的文档，请使用以下表达式：</li>
 </ul>
@@ -456,7 +456,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>使用<code translate="no">TEXT_MATCH_FUZZY</code> 可容忍查询词元与索引词元之间的拼写差异。Milvus会使用字段的分析器对查询文本进行分析，并对每个生成的词元应用模糊匹配。如果查询产生多个词元，当任何一个词元满足配置的编辑距离时，该表达式即匹配一个实体。</p>
+    </button></h3><p>使用<code translate="no">TEXT_MATCH_FUZZY</code> 可容忍查询词元与索引词元之间的拼写差异。Milvus会使用字段的分析器对查询文本进行分析，并对每个生成的词元应用模糊匹配。如果查询产生多个词元，当其中任何一个词元满足配置的编辑距离时，该表达式即匹配一个实体。</p>
 <p>语法如下：</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = <span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -466,7 +466,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: 要搜索的、已启用匹配功能的<code translate="no">VARCHAR</code> 或<code translate="no">TEXT</code> 字段名称。</p></li>
-<li><p><code translate="no">text</code>: 待分析和与索引令牌进行匹配的查询文本。</p></li>
+<li><p><code translate="no">text</code>: 待分析并与索引词进行匹配的查询文本。</p></li>
 <li><p><code translate="no">max_edit_distance</code>: 每个查询令牌允许的最大编辑距离。该选项名称必须精确为<code translate="no">max_edit_distance</code> ，其值必须为<code translate="no">0</code> 、<code translate="no">1</code> 或<code translate="no">2</code> 。值为<code translate="no">0</code> 时执行精确令牌匹配，等同于<code translate="no">TEXT_MATCH</code> 。</p></li>
 </ul>
 <p>例如，以下表达式匹配与<code translate="no">machne</code> 仅差一个编辑操作的令牌，包括<code translate="no">machine</code> ：</p>

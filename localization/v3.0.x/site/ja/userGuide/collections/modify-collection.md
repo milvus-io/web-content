@@ -293,7 +293,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>パーティションキーの分離を有効にすると、Milvus はパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。 検索リクエストを受信すると、Milvus はフィルタリング条件で指定されたパーティションキーの値に基づいてインデックスを特定し、そのインデックスに含まれるエンティティの範囲内に検索範囲を制限します。これにより、検索中に無関係なエンティティをスキャンすることを回避し、検索パフォーマンスを大幅に向上させます。</p><p>詳細については、「<a href="/docs/ja/use-partition-key.md#Use-Partition-Key-Isolation">パーティションキーの分離の使用</a>」を参照してください。</p></td>
+     <td><p>パーティションキーの分離を有効にすると、Milvus はパーティションキーの値に基づいてエンティティをグループ化し、これらのグループごとに個別のインデックスを作成します。 検索リクエストを受信すると、Milvus はフィルタリング条件で指定されたパーティションキーの値に基づいてインデックスを特定し、そのインデックスに含まれるエンティティの範囲内に検索範囲を限定します。これにより、検索中に無関係なエンティティをスキャンすることを回避し、検索パフォーマンスを大幅に向上させます。</p><p>詳細については、「<a href="/docs/ja/use-partition-key.md#Use-Partition-Key-Isolation">パーティションキーの分離の使用</a>」を参照してください。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
@@ -305,10 +305,14 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
-     <td><p>時刻に依存する操作、特に<code translate="no">TIMESTAMPTZ</code> フィールドを処理する際の、このコレクションのデフォルトのタイムゾーンを指定します。タイムスタンプは内部的にはUTCで保存され、Milvusはこの設定に従って表示および比較のために値を変換します。設定された場合、コレクションのタイムゾーンはデータベースのデフォルトのタイムゾーンよりも優先されます。クエリのタイムゾーンパラメータは、これら両方を一時的に上書きすることができます。 値は有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（例：<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>またはUTC</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、<a href="/docs/ja/timestamptz-field.md">「TIMESTAMPTZフィールド」</a>を参照してください。</p></td>
+     <td><p>時刻に依存する操作、特に<code translate="no">TIMESTAMPTZ</code> フィールドを処理する際の、このコレクションのデフォルトのタイムゾーンを指定します。タイムスタンプは内部的にUTCで保存され、Milvusはこの設定に従って表示および比較のために値を変換します。設定された場合、コレクションのタイムゾーンはデータベースのデフォルトのタイムゾーンよりも優先されます。クエリのタイムゾーンパラメータは、両方を一時的に上書きすることができます。 値は有効な<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">IANAタイムゾーン識別子</a>（例：<strong>Asia/Shanghai</strong>、<strong>America/Chicago</strong>、<strong>またはUTC</strong>）でなければなりません。<code translate="no">TIMESTAMPTZ</code> フィールドの使用方法の詳細については、<a href="/docs/ja/timestamptz-field.md">「TIMESTAMPTZフィールド」</a>を参照してください。</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>コレクションの一貫性レベルを変更します。新しいレベルは、独自の一貫性レベルを指定していない、このコレクションに対するその後の検索およびクエリに適用されます。ただし、リクエストごとの設定が引き続き優先されます。値は、<strong>Strong</strong>、<strong>Session</strong>、<strong>Bounded</strong>（既定値）、<strong>またはEventuallyの</strong>いずれかでなければなりません。このプロパティを変更しても、コレクションを解放する必要はありません。 詳細については、「<a href="/docs/ja/tune_consistency.md">一貫性レベル</a>」を参照してください。</p></td>
    </tr>
 </table>
-<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">例 1: 収集レベルの TTL を設定する<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">例 1: コレクションレベルの TTL を設定する<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -838,7 +842,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">allow_insert_auto_id</code> プロパティを有効にすると、AutoIDが有効なコレクションにおいて、挿入、アップサート、および一括インポートの際に、ユーザーが指定した主キー値を受け入れることができます。<strong>「true」</strong>に設定すると、Milvusは指定された主キー値が存在する場合にそれを使用し、存在しない場合は自動生成します<strong>。</strong>デフォルトは<strong>「false</strong>」です<strong>。</strong></p>
+    </button></h3><p><code translate="no">allow_insert_auto_id</code> プロパティを設定すると、AutoIDが有効なコレクションにおいて、挿入（insert）、更新・挿入（upsert）、および一括インポートの際に、ユーザーが指定した主キー値を受け入れることができます。<strong>「true」</strong>に設定すると、Milvusは指定された主キー値が存在する場合にそれを使用し、存在しない場合は自動生成します<strong>。</strong>デフォルトは<strong>「false」</strong>です<strong>。</strong></p>
 <p>以下の例は、<code translate="no">allow_insert_auto_id</code> を有効にする方法を示しています：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1027,7 +1031,95 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-Collection-Properties" class="common-anchor-header">コレクションプロパティの削除<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
+<h3 id="Example-8-Alter-the-consistency-level" class="common-anchor-header">例 8: 一貫性レベルの変更<button data-href="#Example-8-Alter-the-consistency-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下のコードスニペットは、既存のコレクションの一貫性レベルを「<strong>Eventually</strong>」に変更します。新しいレベルは、一貫性レベルを明示的に設定していないこのコレクションに対するその後の検索およびクエリに適用されます。ただし、リクエストごとの設定が優先されます。詳細については、「<a href="/docs/ja/tune_consistency.md">一貫性レベル</a>」を参照してください。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">alter_collection_properties</span>(
+        AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                                   .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;consistency_level&quot;</span>] = <span class="hljs-string">&quot;Eventually&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Drop-Collection-Properties" class="common-anchor-header">コレクションのプロパティを削除する<button data-href="#Drop-Collection-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

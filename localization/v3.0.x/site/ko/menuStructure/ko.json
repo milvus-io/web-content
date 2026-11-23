@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "메모리 내 복제본",
+        "label": "인메모리 복제본",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1106,7 +1100,7 @@
             "order": 8,
             "children": [
               {
-                "label": "필터링에 대한 설명",
+                "label": "필터링에 대해 알아보기",
                 "id": "boolean.md",
                 "order": 0,
                 "children": []
@@ -1499,12 +1493,6 @@
             "children": []
           },
           {
-            "label": "클러스터링 압축",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "강제 병합 압축",
             "id": "force-merge.md",
             "order": 2,
@@ -1585,7 +1573,7 @@
         "children": []
       },
       {
-        "label": "항등적 일괄 가져오기",
+        "label": "항등적 대량 가져오기",
         "id": "idempotent-import.md",
         "order": 2,
         "children": []
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "Node.js SDK",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RESTful API v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "스키마 설계",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "검색 패턴",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "지수 선정",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "RAG 파이프라인",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -1663,7 +1669,7 @@
         "children": []
       },
       {
-        "label": "클로드 코드용 MCP 서버",
+        "label": "Claude 코드용 MCP 서버",
         "id": "mcp_claude_context",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
@@ -1986,7 +1992,7 @@
             "children": []
           },
           {
-            "label": "스케일 종속성",
+            "label": "스케일 의존성",
             "id": "scale-dependencies.md",
             "order": 3,
             "children": []
@@ -2270,7 +2276,7 @@
                     "children": []
                   },
                   {
-                    "label": "버킷 간 인스턴스 마이그레이션",
+                    "label": "버킷 간 인스턴스 간 마이그레이션",
                     "id": "cross-bucket-backup-and-restore.md",
                     "order": 2,
                     "children": []
@@ -2294,7 +2300,7 @@
         ]
       },
       {
-        "label": "조류 관찰자",
+        "label": "조류 관찰가",
         "id": "birdwatcher",
         "order": 3,
         "children": [

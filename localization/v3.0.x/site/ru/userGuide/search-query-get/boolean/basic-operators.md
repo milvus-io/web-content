@@ -23,8 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus предоставляет операторы сравнения, диапазона, арифметические, логические и операторы NULL для фильтрации сущностей. Каждый оператор поддерживает определенные типы полей.</p>
 <div class="alert note">
-<p>Литералом в левой части выражения фильтрации может быть либо имя поля коллекции, например <code translate="no">status</code>, <code translate="no">color</code> и т. д., используемое в примерах ниже, либо имя подполя StructArray с определенным индексом элемента, как в <code translate="no">filter = 'struct[0][subfield] &gt; 10'</code>.</p>
-<p>Подробнее о скалярной фильтрации в поле StructArray см. в разделе <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
+<p>Левым операндом может быть поле коллекции, например <code translate="no">status</code>, или подполе StructArray с определённым индексом элемента, например <code translate="no">struct[0][subfield] &gt; 10</code>. См. раздел <a href="/docs/ru/struct-array-operators.md">«Операторы StructArray</a>».</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">Операторы сравнения<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -149,7 +148,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;status != &quot;inactive&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">Пример 3: Фильтрация по условию «больше» (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
+<h3 id="Example-3-Filtering-with-greater-than-" class="common-anchor-header">Пример 3: Фильтрация по условию «больше, чем» (<code translate="no">&gt;</code>)<button data-href="#Example-3-Filtering-with-greater-than-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -290,7 +289,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы найти объекты, у которых <code translate="no">discount</code> меньше или равно 10%:</p>
+    </button></h3><p>Чтобы найти сущности, у которых <code translate="no">discount</code> меньше или равно 10%:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -360,7 +359,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Это полезно, когда нужно проверить принадлежность к списку значений.</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">Операторы сопоставления шаблонов<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -463,7 +461,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Более подробную информацию о выборе между <code translate="no">LIKE</code> и регулярными выражениями, поддерживаемых типах полей, синтаксисе регулярных выражений, правилах экранирования и производительности см. в <a href="/docs/ru/pattern-matching.md">разделе «Сопоставление шаблонов</a>». Milvus также позволяет создавать индекс <code translate="no">NGRAM</code> на полях <code translate="no">VARCHAR</code> или строковых путях JSON для ускорения работы подходящих фильтров сопоставления шаблонов. Подробности см. в разделе <a href="/docs/ru/ngram.md">«NGRAM</a>».</p>
+<p>Информацию о синтаксисе, экранировании, поддержке полей и параметрах ускорения, таких как <code translate="no">NGRAM</code>, см. в разделе <a href="/docs/ru/pattern-matching.md">«Сопоставление шаблонов</a>».</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">Арифметические операторы<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -760,6 +758,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Логические операторы используются для объединения нескольких условий в более сложное выражение фильтра. К ним относятся <code translate="no">AND</code>, <code translate="no">OR</code> и <code translate="no">NOT</code>.</p>
+<div class="alert note">
+<p>Каждое условие может использовать свой собственный подходящий индекс или путь сканирования; один тип индекса не обязательно должен обслуживать всё выражение. См. раздел <a href="/docs/ru/scalar_index.md">«Скалярный индекс</a>».</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">Поддерживаемые логические операторы<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -780,7 +781,7 @@ summary: >-
 <li><p><code translate="no">OR</code>: Объединяет условия, при которых хотя бы одно из них должно быть истинным.</p></li>
 <li><p><code translate="no">NOT</code>: Отрицает условие.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Пример 1: Использование <code translate="no">AND</code> для объединения условий<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Пример 1: Использование оператора « <code translate="no">AND</code> » для объединения условий<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -921,7 +922,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте операторы ` <code translate="no">IS NULL</code> ` и ` <code translate="no">IS NOT NULL</code> ` для поиска объектов с отсутствующими или доступными значениями полей. Например, вы можете найти товары без категории или объекты, вложения которых готовы к поиску. Оба оператора работают с поддерживаемыми скалярными и векторными полями и имеют одинаковое значение:</p>
+    </button></h2><p>Используйте операторы ` <code translate="no">IS NULL</code> ` и ` <code translate="no">IS NOT NULL</code> ` для поиска объектов с отсутствующими или имеющимися значениями полей. Например, вы можете найти товары без категории или объекты, вложения которых готовы к поиску. Оба оператора работают с поддерживаемыми скалярными и векторными полями и имеют одинаковое значение:</p>
 <table>
 <thead>
 <tr><th>Оператор</th><th>Соответствует</th></tr>
@@ -933,8 +934,8 @@ summary: >-
 </table>
 <p>К поддерживаемым скалярным полям относятся поля типа Boolean, numeric, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code> и <code translate="no">ARRAY</code>. Эти операторы не поддерживают <a href="/docs/ru/text.md">поля типа TEXT</a>.</p>
 <p>Начиная с версии Milvus 3.0.3, операторы также поддерживают обычные векторные поля: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code> и <code translate="no">INT8_VECTOR</code>.</p>
-<p>Операторы нечувствительны к регистру: <code translate="no">IS NULL</code> и <code translate="no">is null</code> являются эквивалентными, так же как <code translate="no">IS NOT NULL</code> и <code translate="no">is not null</code>.</p>
-<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Пример: поиск сущностей с отсутствующими или доступными значениями<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
+<p>Операторы нечувствительны к регистру: <code translate="no">IS NULL</code> и <code translate="no">is null</code> эквивалентны, как и <code translate="no">IS NOT NULL</code> и <code translate="no">is not null</code>.</p>
+<h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Пример: поиск сущностей с отсутствующими или имеющимися значениями<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -949,7 +950,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Предположим, что коллекция с именем <code translate="no">products</code> проиндексирована и загружена. Коллекция имеет первичный ключ <code translate="no">INT64</code> с именем <code translate="no">id</code>, поле <code translate="no">VARCHAR</code>, допускающее значение null, с именем <code translate="no">category</code>, а также трехмерное поле <code translate="no">FLOAT_VECTOR</code>, допускающее значение null, с именем <code translate="no">embedding</code>. Она уже содержит следующие сущности:</p>
+    </button></h3><p>Предположим, что коллекция с именем <code translate="no">products</code> проиндексирована и загружена в Milvus версии 3.0.3 или более поздней. Коллекция имеет первичный ключ <code translate="no">INT64</code> с именем <code translate="no">id</code>, поле <code translate="no">VARCHAR</code>, допускающее значение null, с именем <code translate="no">category</code>, а также трехмерное поле <code translate="no">FLOAT_VECTOR</code>, допускающее значение null, с именем <code translate="no">embedding</code>. Она уже содержит следующие сущности:</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1176,7 +1177,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td>Обычные векторные типы</td><td>NULL означает отсутствие значения вектора. Вектор, компоненты которого равны нулю, не является NULL.</td></tr>
 </tbody>
 </table>
-<p>Для поддерживаемого поля, определённого с помощью <code translate="no">nullable=False</code>, выражение <code translate="no">IS NULL</code> не найдёт ни одного объекта, а выражение <code translate="no">IS NOT NULL</code> найдёт все видимые объекты. Остальные условия фильтра по-прежнему применяются.</p>
+<p>Для поддерживаемого поля, определённого с помощью <code translate="no">nullable=False</code>, выражение <code translate="no">IS NULL</code> не соответствует ни одной сущности, а выражение <code translate="no">IS NOT NULL</code> соответствует всем видимым сущностям. Остальные условия фильтра по-прежнему применяются.</p>
+<div class="alert note">
+<p>Скалярные фильтры NULL используют информацию о допустимости из подходящего индекса или данных поля; они не требуют конкретного типа скалярного индекса. Поле, допускающее нулевые значения, может давать постоянный результат.</p>
+</div>
 <h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Использование фильтров NULL в векторном поиске<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1192,8 +1196,8 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Те же операторы можно использовать в фильтрах поиска, но для участия в поиске по схожести объект также должен иметь вектор в поле, по которому осуществляется поиск.</p>
-<p>Рассмотрим поиск с использованием <code translate="no">anns_field=&quot;embedding&quot;</code> на примере приведённых выше данных:</p>
+    </button></h3><p>Те же операторы можно использовать в фильтрах поиска, но для участия в поиске по схожести сущность также должна иметь вектор в поле, по которому осуществляется поиск.</p>
+<p>Используя приведенные выше примерные данные, рассмотрим поиск с помощью выражения « <code translate="no">anns_field=&quot;embedding&quot;</code> »:</p>
 <table>
 <thead>
 <tr><th>Выражение фильтра</th><th>Объекты, подходящие для поиска по схожести</th><th>Причина</th></tr>
@@ -1204,8 +1208,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Оба объекта имеют вектор « <code translate="no">embedding</code> ».</td></tr>
 </tbody>
 </table>
-<p>Все три фильтра являются действительными. Поиск по « <code translate="no">embedding</code> » с использованием « <code translate="no">embedding IS NULL</code> » не возвращает результатов, поскольку ни одна сущность не может удовлетворить обоим требованиям. Чтобы извлечь сущности с отсутствующими вложениями, используйте « <code translate="no">query()</code> », как показано выше.</p>
-<p>Векторный поиск и так пропускает сущности, у которых искомое векторное поле равно NULL, поэтому <code translate="no">embedding IS NOT NULL</code> не сужает круг кандидатов для поиска по <code translate="no">embedding</code>. Ранжирование, другие фильтры и ограничение поиска по-прежнему определяют, какие кандидаты будут возвращены.</p>
+<p>Чтобы получить отсутствующие вложения, используйте <code translate="no">query()</code>; поиск по <code translate="no">embedding</code> с <code translate="no">embedding IS NULL</code> допустим, но не возвращает результатов. Векторный поиск и так пропускает вложения с значением NULL, поэтому <code translate="no">embedding IS NOT NULL</code> не сужает круг кандидатов. Ранжирование, другие фильтры и ограничение поиска по-прежнему определяют возвращаемые результаты.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Советы по использованию базовых операторов с полями JSON и ARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1221,8 +1224,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Хотя базовые операторы в Milvus универсальны и могут применяться к скалярным полям, их также можно эффективно использовать с ключами и индексами в полях JSON и ARRAY.</p>
-<p>Например, если у вас есть поле <code translate="no">product</code>, содержащее несколько ключей, таких как <code translate="no">price</code>, <code translate="no">model</code> и <code translate="no">tags</code>, всегда указывайте ключ напрямую:</p>
+    </button></h2><p>Ссылайтесь на ключ JSON или элемент ARRAY непосредственно в выражении. Например, чтобы отфильтровать ключ <code translate="no">price</code> в поле JSON с именем <code translate="no">product</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1249,7 +1251,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы найти записи, в которых первая температура в массиве зафиксированных значений температуры превышает определённое значение, используйте:</p>
+<p>Чтобы найти записи, в которых первая температура в массиве зарегистрированных значений температуры превышает определённое значение, используйте:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1276,22 +1278,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Заключение<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus предлагает набор базовых операторов, которые обеспечивают гибкость при фильтрации и запросах данных. Комбинируя сравнительные, диапазонные, арифметические и логические операторы, вы можете создавать мощные фильтрующие выражения для сужения результатов поиска и эффективного извлечения нужных данных.</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">Часто задаваемые вопросы<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1307,6 +1294,6 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Существует ли ограничение на длину списка значений соответствия в условиях фильтрации (например, filter=’color in ["red", "green", “blue”]')? Что делать, если список слишком длинный?</strong></p>
-<p>Milvus не налагает ограничений на длину списка значений, соответствующих условиям фильтрации. Однако чрезмерно длинный список может существенно повлиять на производительность запроса.
-Если ваше условие фильтрации включает длинный список значений или сложное выражение со многими элементами, мы рекомендуем использовать <a href="/docs/ru/filtering-templating.md">шаблоны фильтров</a> для повышения производительности запроса.</p>
+    </button></h2><p><strong>Существует ли ограничение на длину списка значений, соответствующих условию фильтрации (например, filter=’color in ["red", "green", “blue”]')? Что делать, если список слишком длинный?</strong></p>
+<p>Milvus не налагает ограничений на длину списка значений соответствия в условиях фильтрации. Однако чрезмерно длинный список может существенно повлиять на производительность запроса.
+Если ваше условие фильтрации включает длинный список значений соответствия или сложное выражение со множеством элементов, мы рекомендуем использовать <a href="/docs/ru/filtering-templating.md">шаблоны фильтров (Filter Templating)</a> для повышения производительности запроса.</p>

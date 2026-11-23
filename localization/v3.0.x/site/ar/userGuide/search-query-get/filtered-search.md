@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في Milvus، يتم تصنيف عمليات البحث المُصفَّاة إلى نوعين — <strong>التصفية القياسية</strong> <strong>والتصفية التكرارية</strong> — اعتمادًا على المرحلة التي يتم فيها تطبيق التصفية.</p>
+    </button></h2><p>في Milvus، يتم تصنيف عمليات البحث المُصفاة إلى نوعين — <strong>التصفية القياسية</strong> <strong>والتصفية التكرارية</strong> — اعتمادًا على المرحلة التي يتم فيها تطبيق التصفية.</p>
 <h3 id="Standard-filtering" class="common-anchor-header">التصفية القياسية<button data-href="#Standard-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,6 +69,11 @@ summary: >-
 <li><p>إجراء البحث باستخدام الشبكة العصبية الاصطناعية (ANN) ضمن الكيانات التي تمت تصفيتها.</p></li>
 <li><p>إرجاع الكيانات K الأعلى.</p></li>
 </ul>
+<div class="alert note">
+<p>بدءًا من Milvus 3.0.3، يمكنك استخدام <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> في عوامل تصفية الاستعلام والبحث في حقول المتجهات العادية لتحديد الكيانات التي يكون حقل المتجه الخاص بها NULL أو غير NULL، على التوالي.</p>
+<p>للعثور على الكيانات التي يكون حقل <code translate="no">embedding</code> الخاص بها NULL، استخدم <code translate="no">query()</code> مع عامل التصفية <code translate="no">embedding IS NULL</code>. هذا العامل صالح أيضًا في <code translate="no">search()</code>. ومع ذلك، فإن البحث في <code translate="no">embedding</code> باستخدام هذا العامل لا يُرجع أي نتائج: فالكيانات التي لا تحتوي على قيمة <code translate="no">embedding</code> ليس لها متجه لمقارنته بمتجه الاستعلام.</p>
+<p>للاطلاع على الأنواع المدعومة، وقواعد الصياغة، والأمثلة، راجع <a href="/docs/ar/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">عوامل التشغيل IS NULL و IS NOT NULL</a>.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">التصفية التكرارية<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,14 +89,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تعمل عملية التصفية القياسية على تضييق نطاق البحث بشكل فعال إلى نطاق صغير. ومع ذلك، قد تؤدي تعبيرات التصفية شديدة التعقيد إلى تأخير كبير في البحث. في مثل هذه الحالات، يمكن أن تكون التصفية التكرارية بديلاً، مما يساعد على تقليل عبء العمل الناتج عن التصفية القياسية.</p>
+    </button></h3><p>تعمل عملية التصفية القياسية على تضييق نطاق البحث بشكل فعال إلى نطاق صغير. ومع ذلك، قد تؤدي تعبيرات التصفية شديدة التعقيد إلى زمن انتقال مرتفع جدًا للبحث. في مثل هذه الحالات، يمكن أن تكون التصفية التكرارية بديلاً، مما يساعد على تقليل عبء العمل الناتج عن التصفية القياسية.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>التصفية التكرارية</span>
   
  </span></p>
-<p>كما هو موضح في الرسم البياني أعلاه، يقوم البحث باستخدام التصفية التكرارية بإجراء البحث المتجهي على شكل تكرارات. يخضع كل كيان يتم إرجاعه بواسطة المكرر لعملية التصفية القياسية، وتستمر هذه العملية حتى يتم الوصول إلى النتائج المحددة لأفضل K كيانات.</p>
+<p>كما هو موضح في الرسم البياني أعلاه، يقوم البحث باستخدام التصفية التكرارية بإجراء البحث المتجهي على شكل تكرارات. يخضع كل كيان يتم إرجاعه بواسطة المكرر للتصفية القياسية، وتستمر هذه العملية حتى يتم الوصول إلى النتائج topK المحددة.</p>
 <p>تقلل هذه الطريقة بشكل كبير من عدد الكيانات الخاضعة للتصفية القياسية، مما يجعلها مفيدة بشكل خاص للتعامل مع تعبيرات التصفية شديدة التعقيد.</p>
 <p>ومع ذلك، من المهم ملاحظة أن المكرر يعالج الكيانات واحدًا تلو الآخر. وقد يؤدي هذا النهج التسلسلي إلى أوقات معالجة أطول أو مشكلات محتملة في الأداء، خاصةً عندما يخضع عدد كبير من الكيانات للتصفية القياسية.</p>
 <h2 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -395,7 +400,7 @@ curl --request POST \
 <span class="hljs-comment"># Illustrative response; scores and cost can vary.</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975796,&quot;id&quot;:4,&quot;likes&quot;:122},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.2499619,&quot;id&quot;:6,&quot;likes&quot;:58}],&quot;topks&quot;:[2]}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>شرط التصفية الوارد في طلب البحث هو <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. ويستخدم عامل «and» لتضمين شرطين: الأول يطلب الكيانات التي تحتوي على قيمة تبدأ بـ <code translate="no">red</code> في حقل <code translate="no">color</code> ، والثاني يطلب الكيانات التي تحتوي على قيمة أكبر من <code translate="no">50</code> في حقل <code translate="no">likes</code>. لا يوجد سوى كيانين يستوفيان هذه المتطلبات. مع تعيين «top-K» على « <code translate="no">5</code> »، سيقوم Milvus بحساب المسافة بين هذين الكيانين ومتجه الاستعلام، ثم إرجاعهما كنتائج البحث.</p>
+<p>شرط التصفية الوارد في طلب البحث هو <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. ويستخدم عامل «and» لتضمين شرطين: الأول يطلب الكيانات التي تحتوي على قيمة تبدأ بـ <code translate="no">red</code> في حقل <code translate="no">color</code> ، والثاني يطلب الكيانات التي تحتوي على قيمة أكبر من <code translate="no">50</code> في حقل <code translate="no">likes</code>. لا يوجد سوى كيانين يستوفيان هذه المتطلبات. مع تعيين «top-K» على <code translate="no">5</code> ، سيقوم Milvus بحساب المسافة بين هذين الكيانين ومتجه الاستعلام وإرجاعهما كنتائج البحث.</p>
 <p>يوضح المثال التالي شكل نتائج Python مع درجات جيب التمام التوضيحية. قد تختلف الدرجات باختلاف دقة العدد العائم. تظهر حقول الإخراج المطلوبة فقط في <code translate="no">entity</code> ؛ وتُرجع أمثلة REST تلك الحقول في المستوى الأعلى لكل نتيجة.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>

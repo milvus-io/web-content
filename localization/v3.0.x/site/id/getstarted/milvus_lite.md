@@ -43,7 +43,7 @@ title: Menjalankan Milvus Lite Secara Lokal
 <li>Laptop</li>
 <li>Perangkat tepi dengan dependensi Python yang kompatibel</li>
 </ul>
-<p>Milvus Lite menggunakan API <code translate="no">MilvusClient</code> untuk operasi yang didukung, termasuk penyimpanan data vektor, penambahan dan penghapusan, pencarian vektor, serta penyaringan metadata. Untuk memindahkan alur kerja aplikasi yang didukung ke deployment jarak jauh, ubah URI koneksi dan kredensial, serta tinjau perbedaan fitur yang didukung. Untuk beban kerja produksi berskala besar, gunakan <a href="/docs/id/install-overview.md">Milvus Standalone atau Distributed</a>, atau Milvus yang dikelola sepenuhnya di <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Milvus Lite menggunakan API <code translate="no">MilvusClient</code> untuk operasi yang didukung, termasuk penyimpanan data vektor, penyisipan dan penghapusan, pencarian vektor, serta penyaringan metadata. Untuk memindahkan alur kerja aplikasi yang didukung ke penyebaran jarak jauh, ubah URI koneksi dan kredensial, serta tinjau perbedaan fitur yang didukung. Untuk beban kerja produksi berskala besar, gunakan <a href="/docs/id/install-overview.md">Milvus Standalone atau Distributed</a>, atau Milvus yang dikelola sepenuhnya di <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +65,7 @@ title: Menjalankan Milvus Lite Secara Lokal
 <li>macOS, Linux, atau Windows, dengan wheel yang kompatibel untuk dependensi seperti <code translate="no">faiss-cpu</code> dan <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 adalah paket Python murni, sehingga sistem operasi dan arsitektur harus memenuhi dependensi tersebut, bukan paket Lite itu sendiri.</li>
 <li>Direktori lokal yang dapat ditulis untuk penyimpanan basis data.</li>
 </ul>
-<p>Di Windows, pip melewatkan paket tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.2 karena penanda platformnya, sehingga <code translate="no">milvus-lite</code> harus disebutkan secara eksplisit. Perintah instalasi di bawah ini sudah melakukannya. Untuk kombinasi paket dan platform lainnya, lihat <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">persyaratan rilis Milvus Lite</a>.</p>
+<p>Di Windows, pip melewatkan tambahan <code translate="no">milvus-lite</code> dari PyMilvus 3.0.2 karena penanda platformnya, sehingga <code translate="no">milvus-lite</code> harus disebutkan secara eksplisit. Perintah instalasi di bawah ini sudah melakukannya. Untuk kombinasi paket dan platform lainnya, lihat <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">persyaratan rilis Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Siapkan Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +181,7 @@ res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collect
 client.close()
 <button class="copy-code-btn"></button></code></pre>
 <p>Untuk aplikasi yang menghasilkan embedding dari teks, lanjutkan ke <a href="/docs/id/quickstart.md">Panduan Cepat</a>. Anda juga dapat menjelajahi <a href="https://github.com/milvus-io/bootcamp">contoh Milvus Bootcamp</a> untuk RAG, pencarian gambar, dan integrasi kerangka kerja.</p>
-<h2 id="Supported-features-and-limits" class="common-anchor-header">Fitur dan batasan yang didukung<button data-href="#Supported-features-and-limits" class="anchor-icon" translate="no">
+<h2 id="Supported-features-and-limits" class="common-anchor-header">Fitur yang didukung dan batasan<button data-href="#Supported-features-and-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -215,7 +215,7 @@ client.close()
 <ul>
 <li>Hanya satu proses yang dapat memiliki direktori penyimpanan basis data pada satu waktu. Mesin melindungi direktori tersebut dengan kunci file.</li>
 <li>Serialisasikan penulisan ke koleksi yang sama. Penulisan bersamaan tidak didukung dengan aman.</li>
-<li>Adaptor lokal tidak mengimplementasikan semua RPC Milvus. Operasi yang tidak didukung akan mengembalikan ` <code translate="no">UNIMPLEMENTED</code>`; perubahan skema serta pemuatan atau pelepasan pada tingkat partisi tidak tersedia.</li>
+<li>Adaptor lokal tidak mengimplementasikan setiap RPC Milvus. Operasi yang tidak didukung akan mengembalikan ` <code translate="no">UNIMPLEMENTED</code>`; perubahan skema serta pemuatan atau pelepasan pada tingkat partisi tidak tersedia.</li>
 <li>Otentikasi, pengguna, peran, RBAC, dan TLS tidak didukung. Jangan mengekspos server lokal ke jaringan yang tidak tepercaya.</li>
 <li>Bidang vektor biner, float16, bfloat16, dan int8, serta indeks Kuantisasi Produk, tidak didukung.</li>
 <li>Lite dirancang untuk beban kerja lokal. Kompatibilitas API lokal tidak menyediakan penskalaan terdistribusi atau isolasi produksi serta ketersediaan seperti pada penerapan jarak jauh.</li>

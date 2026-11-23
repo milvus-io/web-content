@@ -36,7 +36,7 @@ title: Executar o Milvus Lite localmente
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Lite é um backend local leve para o <a href="https://github.com/milvus-io/pymilvus">SDK do Milvus em Python</a>. Instale-o com o complemento opcional « <code translate="no">milvus-lite</code> »; a instalação apenas do « <code translate="no">pymilvus</code> » não instala este backend na versão do SDK utilizada abaixo.</p>
+    </button></h2><p>O Milvus Lite é um backend local leve para o <a href="https://github.com/milvus-io/pymilvus">SDK do Milvus em Python</a>. Instale-o com o extra opcional « <code translate="no">milvus-lite</code> »; a instalação apenas do « <code translate="no">pymilvus</code> » não instala este backend na versão do SDK utilizada abaixo.</p>
 <p>O Milvus Lite é adequado para desenvolvimento local e cargas de trabalho de pequena escala em ambientes como:</p>
 <ul>
 <li>Jupyter Notebook ou Google Colab</li>
@@ -65,7 +65,7 @@ title: Executar o Milvus Lite localmente
 <li>macOS, Linux ou Windows, com «wheels» compatíveis para dependências como <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code>. O Milvus Lite 3.2.2 é um pacote em Python puro, pelo que o sistema operativo e a arquitetura devem satisfazer essas dependências, em vez de o próprio pacote Lite.</li>
 <li>Um diretório local com permissão de gravação para armazenamento da base de dados.</li>
 </ul>
-<p>No Windows, o pip ignora o extra « <code translate="no">milvus-lite</code> » do PyMilvus 3.0.2 devido ao seu marcador de plataforma, pelo que « <code translate="no">milvus-lite</code> » deve ser especificado explicitamente. O comando de instalação abaixo já faz isso. Para outras combinações de pacotes e plataformas, consulte os <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">requisitos de lançamento do Milvus Lite</a>.</p>
+<p>No Windows, o pip ignora o extra « <code translate="no">milvus-lite</code> » do PyMilvus 3.0.2 devido ao seu marcador de plataforma, pelo que « <code translate="no">milvus-lite</code> » deve ser especificado explicitamente. O comando de instalação abaixo já o faz. Para outras combinações de pacotes e plataformas, consulte os <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">requisitos de lançamento do Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configurar o Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +86,7 @@ title: Executar o Milvus Lite localmente
 <span class="hljs-built_in">source</span> .venv/bin/activate
 python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Coloque a expressão «extras» entre aspas para que shells como o zsh não interpretem os parênteses. No Windows PowerShell, ative o ambiente com « <code translate="no">.venv\Scripts\Activate.ps1</code> » em vez de « <code translate="no">source .venv/bin/activate</code> ». As versões explícitas mantêm o SDK e o backend local alinhados com este guia.</p>
+<p>Coloque a expressão «extras» entre aspas para que os shells, como o zsh, não interpretem os parênteses. No Windows PowerShell, ative o ambiente com « <code translate="no">.venv\Scripts\Activate.ps1</code> » em vez de « <code translate="no">source .venv/bin/activate</code> ». As versões explícitas mantêm o SDK e o backend local alinhados com este guia.</p>
 <div class="alert note">
 <blockquote>
 <p>O Milvus Lite 3.x utiliza um motor de armazenamento diferente do pacote 2.x original. Não é possível abrir um ficheiro <code translate="no">.db</code> existente da versão 2.x no local. Mantenha a base de dados original e um ambiente capaz de a abrir, exporte os dados para esse ambiente e importe-os para uma nova base de dados. A instalação de um novo pacote não migra o formato de armazenamento antigo. Consulte <a href="#Migrating-data-from-Milvus-Lite">«Migração de dados do Milvus Lite</a>».</p>
@@ -206,7 +206,7 @@ client.close()
 <tr><td>Índices de vetores</td><td><code translate="no">FLAT</code>, <code translate="no">BRUTE_FORCE</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, e <code translate="no">AUTOINDEX</code></td></tr>
 <tr><td>Índices escalares e esparsos</td><td><code translate="no">INVERTED</code> índices escalares e <code translate="no">SPARSE_INVERTED_INDEX</code></td></tr>
 <tr><td>Operações sobre dados</td><td>Inserção, upsert, recuperação, consulta, pesquisa vetorial e eliminação</td></tr>
-<tr><td>Pesquisa</td><td>Pesquisa densa e esparsa, filtros de metadados, vários campos vetoriais e pesquisa híbrida</td></tr>
+<tr><td>Pesquisa</td><td>Pesquisa densa e esparsa, filtros de metadados, múltiplos campos vetoriais e pesquisa híbrida</td></tr>
 <tr><td>Organização de coleções</td><td>Coleções, bases de dados nomeadas, aliases e partições, dentro das operações suportadas pelo adaptador local</td></tr>
 </tbody>
 </table>
@@ -218,7 +218,7 @@ client.close()
 <li>O adaptador local não implementa todos os RPC do Milvus. As operações não suportadas devolvem « <code translate="no">UNIMPLEMENTED</code> »; a alteração do esquema e o carregamento ou libertação ao nível da partição não estão disponíveis.</li>
 <li>A autenticação, os utilizadores, as funções, o RBAC e o TLS não são suportados. Não exponha o servidor local a uma rede não fiável.</li>
 <li>Os campos vetoriais «binary», «float16», «bfloat16» e «int8», bem como os índices de quantização de produto, não são suportados.</li>
-<li>A versão Lite foi concebida para cargas de trabalho locais. A compatibilidade com a API local não oferece escalabilidade distribuída nem o isolamento e a disponibilidade de produção de uma implementação remota.</li>
+<li>A versão Lite foi concebida para cargas de trabalho locais. A compatibilidade com a API local não oferece escalabilidade distribuída nem o isolamento de produção e a disponibilidade de uma implementação remota.</li>
 </ul>
 <p>Consulte as <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#known-limitations">limitações conhecidas por versão</a> antes de confiar numa funcionalidade do servidor que o exemplo local não utilize.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migração de dados do Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">
@@ -247,7 +247,7 @@ milvus-lite dump -h
 <p>O comando lê o ficheiro « <code translate="no">demo_collection</code> » a partir do <strong>diretório de armazenamento «milvus_demo.db»</strong> e grava os ficheiros de exportação no diretório <strong>«data_dir</strong>». Importe esses ficheiros com <a href="/docs/pt/import-data.md">o Bulk Insert</a> ou com <a href="https://docs.zilliz.com/docs/data-import">o Zilliz Cloud Data Import</a>.</p>
 <div class="alert note">
 <blockquote>
-<p>Para exportar um ficheiro de base de dados 2.x original, execute a ferramenta de dump num ambiente com a versão Lite original capaz de abrir esse ficheiro. A ferramenta de dump 3.x não converte o formato de armazenamento antigo ao abri-lo diretamente. Mantenha a base de dados de origem até ter verificado o número de linhas importadas e os resultados da pesquisa.</p>
+<p>Para exportar um ficheiro de base de dados 2.x original, execute a ferramenta de dump num ambiente com a versão Lite original capaz de abrir esse ficheiro. A ferramenta de dump 3.x não converte o formato de armazenamento antigo ao abri-lo diretamente. Mantenha a base de dados de origem até ter verificado a contagem de linhas importadas e os resultados da pesquisa.</p>
 </blockquote>
 </div>
 <p>Para conhecer as opções de dump suportadas e as restrições do formato de armazenamento, consulte a <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#dump-data">referência de exportação do Milvus Lite</a>.</p>

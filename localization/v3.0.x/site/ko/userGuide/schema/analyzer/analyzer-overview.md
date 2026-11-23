@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>텍스트 처리에서 <strong>분석기</strong> ( <strong>analyzer</strong> )는 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 핵심 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기(tokenizer)</strong> 와 <strong>필터(filter)</strong>라는 두 가지 핵심 요소로 구성됩니다. 이 두 요소는 함께 입력 텍스트를 토큰으로 변환하고, 토큰을 정제하며, 효율적인 색인 생성 및 검색을 위해 토큰을 준비합니다.</p>
+    </button></h1><p>텍스트 처리에서 <strong>분석기</strong> ( <strong>analyzer</strong> )는 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 핵심 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기(tokenizer)</strong> 와 <strong>필터(filter)</strong>라는 두 가지 핵심 요소로 구성됩니다. 이 두 요소는 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하여 효율적인 색인 생성 및 검색을 위해 준비합니다.</p>
 <p>Milvus에서는 컬렉션 스키마에 ` <code translate="no">VARCHAR</code> ` 필드를 추가할 때 컬렉션 생성 과정에서 분석기를 구성합니다. 분석기가 생성한 토큰은 키워드 일치를 위한 인덱스를 구축하는 데 사용되거나, 전체 텍스트 검색을 위해 스파스 임베딩으로 변환될 수 있습니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a>, <a href="/docs/ko/phrase-match.md">구문 일치</a> 또는 <a href="/docs/ko/keyword-match.md">텍스트 일치를</a> 참조하십시오.</p>
 <div class="alert note">
 <p>분석기를 사용하면 성능에 영향을 미칠 수 있습니다.</p>
@@ -47,8 +47,8 @@ summary: >-
       </svg>
     </button></h2><p>Milvus의 분석기는 정확히 하나의 <strong>토큰화기와</strong> <strong>0개 이상의</strong> 필터로 구성됩니다.</p>
 <ul>
-<li><p><strong>토큰화기</strong>(Tokenizer): 토큰화기는 입력 텍스트를 토큰이라고 하는 개별 단위로 분할합니다. 이러한 토큰은 토큰화기 유형에 따라 단어 또는 구가 될 수 있습니다.</p></li>
-<li><p><strong>필터</strong>: 필터를 토큰에 적용하여 토큰을 더욱 정제할 수 있습니다(예: 소문자로 변환하거나 빈어를 제거하는 등).</p></li>
+<li><p><strong>토큰화기</strong>(Tokenizer): 토큰화기는 입력 텍스트를 토큰이라고 하는 개별 단위로 분할합니다. 이러한 토큰은 토큰화기 유형에 따라 단어이거나 구일 수 있습니다.</p></li>
+<li><p><strong>필터</strong>: 필터를 토큰에 적용하여 토큰을 더욱 정제할 수 있습니다(예: 소문자로 변환하거나 흔한 단어를 제거하는 등).</p></li>
 </ul>
 <div class="alert note">
 <p>토큰화기는 UTF-8 형식만 지원합니다. 다른 형식에 대한 지원은 향후 릴리스에서 추가될 예정입니다.</p>
@@ -82,8 +82,8 @@ summary: >-
 </ul>
 <div class="alert note">
 <ul>
-<li>컬렉션 생성 시 분석기 구성을 생략하면, Milvus는 기본적으로 모든 텍스트 처리에 ‘ <code translate="no">standard</code> ’ 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 참조하십시오.</li>
-<li>최적의 검색 및 쿼리 성능을 얻으려면 텍스트 데이터의 언어에 맞는 분석기를 선택하십시오. 예를 들어, ‘ <code translate="no">standard</code> ’ 분석기는 다목적으로 사용할 수 있지만, 중국어, 아랍어, 태국어, 일본어 또는 한국어와 같이 고유한 문법 구조를 가진 언어의 경우 최선의 선택이 아닐 수 있습니다. 이러한 경우에는 다음과 같은 언어별 분석기를 사용하는 것이 좋습니다. <a href="/docs/ko/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/ko/arabic-analyzer.md"><code translate="no">arabic</code></a>, 또는 <a href="/docs/ko/thai-analyzer.md"><code translate="no">thai</code></a>, 또는 특수한 토큰화기를 갖춘 사용자 정의 분석기(예: <a href="/docs/ko/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a>) 및 필터를 갖춘 사용자 정의 분석기를 사용하는 것이 정확한 토큰화 및 더 나은 검색 결과를 보장하기 위해 적극 권장됩니다.</li>
+<li>컬렉션 생성 시 분석기 구성을 생략하면, Milvus는 기본적으로 모든 텍스트 처리에 <code translate="no">standard</code> 분석기를 사용합니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 참조하십시오.</li>
+<li>최적의 검색 및 쿼리 성능을 얻으려면 텍스트 데이터의 언어에 맞는 분석기를 선택하십시오. 예를 들어, ‘ <code translate="no">standard</code> ’ 분석기는 다목적으로 사용할 수 있지만, 중국어, 아랍어, 태국어, 일본어 또는 한국어와 같이 고유한 문법 구조를 가진 언어의 경우 최선의 선택이 아닐 수 있습니다. 이러한 경우에는 <a href="/docs/ko/chinese-analyzer.md"><code translate="no">chinese</code></a>, <a href="/docs/ko/arabic-analyzer.md"><code translate="no">arabic</code></a>, 또는 <a href="/docs/ko/thai-analyzer.md"><code translate="no">thai</code></a>, 또는 특수한 토큰화기를 갖춘 사용자 정의 분석기(예: <a href="/docs/ko/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/ko/icu-tokenizer.md"><code translate="no">icu</code></a>) 및 필터를 갖춘 사용자 정의 분석기를 사용하는 것이 정확한 토큰화 및 더 나은 검색 결과를 보장하기 위해 적극 권장됩니다.</li>
 </ul>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">내장 분석기<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
@@ -102,7 +102,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>Milvus의 내장 분석기는 특정 토큰화기 및 필터가 미리 구성되어 있으므로, 이러한 구성 요소를 직접 정의할 필요 없이 즉시 사용할 수 있습니다. 각 내장 분석기는 사전 설정된 토큰화기와 필터를 포함하는 템플릿 역할을 하며, 사용자 지정을 위한 선택적 매개변수를 제공합니다.</p>
-<p>예를 들어, ` <code translate="no">standard</code> ` 내장 분석기를 사용하려면 ` <code translate="no">type</code> `에 해당 이름 <code translate="no">standard</code> 을 지정하고, 선택적으로 ` <code translate="no">stop_words</code>`와 같이 이 분석기 유형에 특화된 추가 구성을 포함하면 됩니다:</p>
+<p>예를 들어, <code translate="no">standard</code> 내장 분석기를 사용하려면 <code translate="no">type</code> 에 해당 이름 <code translate="no">standard</code> 을 지정하고, 선택적으로 <code translate="no">stop_words</code> 와 같이 이 분석기 유형에 특화된 추가 구성을 포함하면 됩니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -174,21 +174,44 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
+
+ctx := context.Background()
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;type\&quot;: \&quot;standard\&quot;, \&quot;stop_words\&quot;: [\&quot;a\&quot;, \&quot;an\&quot;, \&quot;for\&quot;]}&quot;,
+    &quot;text&quot;: [&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>출력 결과는 다음과 같습니다:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
@@ -254,8 +277,8 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: 범용 텍스트 처리에 적합하며, 표준 토큰화 및 소문자 필터링을 적용합니다.</p></li>
 <li><p><code translate="no">english</code>: 영어 텍스트에 최적화되어 있으며, 영어 스톱워드를 지원합니다.</p></li>
-<li><p><code translate="no">chinese</code>: 중국어 텍스트 처리에 특화되어 있으며, 중국어 언어 구조에 맞춘 토큰화를 포함합니다.</p></li>
-<li><p><code translate="no">arabic</code>: 아랍어 텍스트 처리에 특화되어 있으며, 아랍어 정규화, 소수점 자리 수 정규화, 아랍어 어근 추출 및 아랍어 스톱워드 제거 기능을 제공합니다.</p></li>
+<li><p><code translate="no">chinese</code>: 중국어 텍스트 처리에 특화되어 있으며, 중국어 언어 구조에 맞춰 조정된 토큰화를 포함합니다.</p></li>
+<li><p><code translate="no">arabic</code>: 아랍어 텍스트 처리에 특화되어 있으며, 아랍어 정규화, 소수점 자리 정규화, 아랍어 어근 추출 및 아랍어 스톱워드 제거 기능을 제공합니다.</p></li>
 <li><p><code translate="no">thai</code>: 태국어 텍스트 처리에 특화되어 있으며, 태국어 단어 분할, 소수점 숫자 정규화 및 태국어 스톱워드 제거 기능을 제공합니다.</p></li>
 </ul>
 <h3 id="Custom-analyzer" class="common-anchor-header">사용자 정의 분석기<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
@@ -306,7 +329,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
 <h4 id="Filter" class="common-anchor-header">필터</h4><p><strong>필터는</strong> 토큰화기가 생성한 토큰을 처리하여 필요에 따라 변환하거나 정제하는 <strong>선택적</strong> 구성 요소입니다. 예를 들어, 토큰화된 용어 ` <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>`에 ` <code translate="no">lowercase</code> ` 필터를 적용하면 결과는 다음과 같을 수 있습니다:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p>사용자 정의 분석기의 필터는 구성 요구 사항에 따라 <strong>내장</strong> 필터이거나 <strong>사용자 정의</strong> 필터일 수 있습니다.</p>
+<p>사용자 정의 분석기의 필터는 구성 요구 사항에 따라 <strong>내장형</strong> 또는 <strong>사용자</strong> 정의형일 수 있습니다.</p>
 <ul>
 <li><p><strong>내장 필터</strong>: Milvus에서 미리 구성되어 있어 최소한의 설정만 필요합니다. 필터 이름을 지정하면 바로 사용할 수 있습니다. 다음 필터들은 바로 사용할 수 있도록 내장되어 있습니다:</p>
 <ul>
@@ -349,7 +372,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>, Collecti
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>사용자 정의 필터</strong>: 사용자 정의 필터를 사용하면 특수한 구성이 가능합니다. 유효한 필터 유형(<code translate="no">filter.type</code>)을 선택하고 각 필터 유형에 대한 구체적인 설정을 추가하여 사용자 정의 필터를 정의할 수 있습니다. 사용자 정의를 지원하는 필터 유형의 예:</p>
 <ul>
-<li><p><code translate="no">stop</code>: 중지어(stop word) 목록을 설정하여 지정된 일반 단어를 제거합니다(예: <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). 자세한 내용은 <a href="/docs/ko/stop-filter.md">중지어(Stop</a>)를 참조하십시오.</p></li>
+<li><p><code translate="no">stop</code>: 스톱워드 목록(예: <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>)을 설정하여 지정된 일반 단어를 제거합니다. 자세한 내용은 <a href="/docs/ko/stop-filter.md">스톱워드를</a> 참조하십시오.</p></li>
 <li><p><code translate="no">length</code>: 최대 토큰 길이 설정과 같은 길이 기준에 따라 토큰을 제외합니다. 자세한 내용은 <a href="/docs/ko/length-filter.md">‘길이(Length</a>)’를 참조하십시오.</p></li>
 <li><p><code translate="no">stemmer</code>: 보다 유연한 일치를 위해 단어를 어근 형태로 변환합니다. 자세한 내용은 <a href="/docs/ko/stemmer-filter.md">‘Stemmer’를</a> 참조하십시오.</p></li>
 </ul>
@@ -487,12 +510,12 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )  
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -502,14 +525,14 @@ cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
+    <span class="hljs-built_in">panic</span>(err)
 }
-<span class="hljs-keyword">defer</span> client.Close(ctx)
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
 
 schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">2단계: 분석기 구성 정의 및 검증<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -530,7 +553,7 @@ schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).
 <li><p><strong>내장 분석기(</strong><code translate="no">english</code><strong>)를 구성하고 검증합니다</strong><strong>:</strong></p>
 <ul>
 <li><p><strong>구성:</strong> 내장된 영어 분석기의 분석기 매개변수를 정의합니다.</p></li>
-<li><p><strong>검증:</strong> <code translate="no">run_analyzer</code> 를 사용하여 해당 구성이 예상된 토큰화를 생성하는지 확인합니다.</p></li>
+<li><p><strong>검증:</strong> <code translate="no">run_analyzer</code> 를 사용하여 해당 구성이 예상된 토큰화 결과를 산출하는지 확인합니다.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a>
@@ -584,17 +607,30 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
 
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;type\&quot;: \&quot;english\&quot;}&quot;,
+    &quot;text&quot;: [&quot;Milvus simplifies text analysis for search.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>사용자 정의 분석기를 구성하고 검증합니다:</strong></p>
 <ul>
@@ -679,11 +715,12 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     <span class="hljs-attr">analyzer_params</span>: analyzer_params_built_in
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>, 
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>,
     <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
         <span class="hljs-string">&quot;max&quot;</span>:  <span class="hljs-number">40</span>,
+    },
     <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,
         <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>},
@@ -691,16 +728,30 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;: \&quot;standard\&quot;, \&quot;filter\&quot;: [\&quot;lowercase\&quot;, {\&quot;type\&quot;: \&quot;length\&quot;, \&quot;max\&quot;: 40}, {\&quot;type\&quot;: \&quot;stop\&quot;, \&quot;stop_words\&quot;: [\&quot;of\&quot;, \&quot;for\&quot;]}]}&quot;,
+    &quot;text&quot;: [&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">3단계: 스키마에 필드 추가<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
@@ -826,7 +877,60 @@ schema.addField(AddFieldReq.builder()
     WithEnableMatch(<span class="hljs-literal">true</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: true,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;title_en&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true,
+                    &quot;enable_match&quot;: true,
+                    &quot;analyzer_params&quot;: {&quot;type&quot;: &quot;english&quot;}
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;title&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true,
+                    &quot;enable_match&quot;: true,
+                    &quot;analyzer_params&quot;: {
+                        &quot;tokenizer&quot;: &quot;standard&quot;,
+                        &quot;filter&quot;: [
+                            &quot;lowercase&quot;,
+                            {&quot;type&quot;: &quot;length&quot;, &quot;max&quot;: 40},
+                            {&quot;type&quot;: &quot;stop&quot;, &quot;stop_words&quot;: [&quot;of&quot;, &quot;for&quot;]}
+                        ]
+                    }
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;embedding&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {&quot;dim&quot;: 3}
+            },
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">4단계: 인덱스 매개변수 준비 및 컬렉션 생성<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -898,15 +1002,33 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go">idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
 indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>, idx)
 
-err = client.CreateCollection(ctx,
+err = cli.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexParams&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;indexName&quot;: &quot;embedding&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

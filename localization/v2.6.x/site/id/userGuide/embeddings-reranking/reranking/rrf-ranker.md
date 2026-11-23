@@ -5,8 +5,8 @@ summary: >-
   Reciprocal Rank Fusion (RRF) Ranker adalah strategi penentuan peringkat ulang
   untuk pencarian hibrida Milvus yang menyeimbangkan hasil dari berbagai jalur
   pencarian vektor berdasarkan posisi peringkatnya, bukan skor kesamaan
-  mentahnya. Seperti turnamen olahraga yang mempertimbangkan peringkat pemain
-  daripada statistik individu, RRF Ranker menggabungkan hasil pencarian
+  mentahnya. Sama seperti turnamen olahraga yang mempertimbangkan peringkat para
+  pemain daripada statistik individu, RRF Ranker menggabungkan hasil pencarian
   berdasarkan seberapa tinggi peringkat setiap item di jalur pencarian yang
   berbeda, sehingga menghasilkan peringkat akhir yang adil dan seimbang.
 ---
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRF Ranker dirancang khusus untuk skenario pencarian hibrida di mana Anda ingin menyeimbangkan hasil dari berbagai jalur pencarian vektor tanpa menetapkan bobot kepentingan yang eksplisit. Strategi ini sangat efektif untuk:</p>
+    </button></h2><p>RRF Ranker dirancang khusus untuk skenario pencarian hibrida di mana Anda ingin menyeimbangkan hasil dari beberapa jalur pencarian vektor tanpa menetapkan bobot kepentingan yang eksplisit. Strategi ini sangat efektif untuk:</p>
 <table>
    <tr>
      <th><p>Contoh Penggunaan</p></th>
@@ -70,6 +70,7 @@ summary: >-
    </tr>
 </table>
 <p>Jika aplikasi pencarian hibrida Anda memerlukan penyeimbangan beberapa jalur pencarian secara demokratis tanpa menetapkan bobot eksplisit, RRF Ranker adalah pilihan ideal Anda.</p>
+<p>Jika beberapa jalur pencarian lebih andal daripada yang lain tetapi skor mentahnya tidak dapat dibandingkan, Anda tetap dapat menggabungkan hasil berdasarkan peringkat dan memberikan bobot tersendiri pada setiap jalur. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/rrf-ranker.md#Assign-weights-to-search-paths">Menetapkan bobot ke jalur pencarian</a>. Untuk menggabungkan skor jalur alih-alih peringkatnya, gunakan <a href="/docs/id/v2.6.x/weighted-ranker.md">Weighted Ranker</a>.</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Mekanisme RRF Ranker<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,9 +88,9 @@ summary: >-
       </svg>
     </button></h2><p>Alur kerja utama strategi RRFRanker adalah sebagai berikut:</p>
 <ol>
-<li><p><strong>Mengumpulkan Peringkat Pencarian</strong>: Mengumpulkan peringkat hasil dari setiap jalur pencarian vektor (rank_1, rank_2).</p></li>
-<li><p><strong>Menggabungkan Peringkat</strong>: Mengonversi peringkat dari setiap jalur (rank_rrf_1, rank_rrf_2) sesuai dengan rumus.</p>
-<p>Rumus perhitungannya melibatkan <em>N</em>, yang mewakili jumlah pengambilan. <em>ranki</em>(<em>d</em>) adalah posisi peringkat dokumen <em>d</em> yang dihasilkan oleh pengambil <em>ke-i</em>. <em>k</em> adalah parameter perataan yang biasanya ditetapkan pada 60.</p></li>
+<li><p><strong>Kumpulkan Peringkat Pencarian</strong>: Kumpulkan peringkat hasil dari setiap jalur pencarian vektor (rank_1, rank_2).</p></li>
+<li><p><strong>Menggabungkan Peringkat</strong>: Konversikan peringkat dari setiap jalur (rank_rrf_1, rank_rrf_2) sesuai dengan rumus.</p>
+<p>Rumus perhitungannya melibatkan <em>N</em>, yang mewakili jumlah hasil pencarian. <em>ranki</em>(<em>d</em>) adalah posisi peringkat dokumen <em>d</em> yang dihasilkan oleh pencari <em>ke-i</em>. <em>k</em> adalah parameter perataan yang biasanya ditetapkan pada 60.</p></li>
 <li><p><strong>Agregasi Peringkat</strong>: Menyusun ulang peringkat hasil pencarian berdasarkan peringkat gabungan untuk menghasilkan hasil akhir.</p></li>
 </ol>
 <p><span class="img-wrapper">
@@ -274,7 +275,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat menggunakan strategi pengurutan ulang RRF, Anda perlu mengonfigurasi parameter <code translate="no">k</code>. Ini adalah parameter perataan yang dapat secara efektif mengubah bobot relatif antara pencarian teks lengkap dan pencarian vektor. Nilai default parameter ini adalah 60, dan dapat disesuaikan dalam rentang (0, 16384). Nilai tersebut harus berupa bilangan desimal. Nilai yang direkomendasikan berada di antara [10, 100]. Meskipun <code translate="no">k=60</code> merupakan pilihan umum, nilai optimal <code translate="no">k</code> dapat bervariasi tergantung pada aplikasi dan dataset spesifik Anda. Kami merekomendasikan untuk menguji dan menyesuaikan parameter ini berdasarkan kasus penggunaan spesifik Anda guna mencapai kinerja terbaik.</p>
+    </button></h2><p>Saat menggunakan strategi pengurutan ulang RRF, Anda perlu mengonfigurasi parameter <code translate="no">k</code>. Ini adalah parameter perataan yang dapat secara efektif mengubah bobot relatif antara pencarian teks lengkap dan pencarian vektor. Nilai default parameter ini adalah 60, dan dapat disesuaikan dalam rentang (0, 16384). Nilai tersebut harus berupa bilangan desimal. Nilai yang direkomendasikan adalah antara [10, 100]. Meskipun <code translate="no">k=60</code> merupakan pilihan umum, nilai <code translate="no">k</code> yang optimal dapat bervariasi tergantung pada aplikasi dan dataset spesifik Anda. Kami merekomendasikan untuk menguji dan menyesuaikan parameter ini berdasarkan kasus penggunaan spesifik Anda guna mencapai kinerja terbaik.</p>
 <h3 id="Create-an-RRF-Ranker" class="common-anchor-header">Buat RRF Ranker<button data-href="#Create-an-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -368,7 +369,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Menentukan metode penataan ulang peringkat yang akan digunakan.</p><p>Harus disetel ke <code translate="no">rrf</code> untuk menggunakan RRF Ranker.</p></td>
+     <td><p>Menentukan metode penentuan peringkat ulang yang akan digunakan.</p><p>Harus disetel ke <code translate="no">rrf</code> untuk menggunakan RRF Ranker.</p></td>
      <td><p><code translate="no">"rrf"</code></p></td>
    </tr>
    <tr>
@@ -378,6 +379,143 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
+<h3 id="Assign-weights-to-search-paths" class="common-anchor-header">Tetapkan bobot pada jalur pencarian<button data-href="#Assign-weights-to-search-paths" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tetap <code translate="no">params.weights</code> agar setiap jalur pencarian memiliki pengaruh yang berbeda pada peringkat gabungan. Skor setiap dokumen menjadi <code translate="no">score(d) = Σ weights[i] / (k + rank_i(d))</code>. Nilai pada posisi <em>i</em> berlaku untuk permintaan pencarian <em>ke-i</em> dalam panggilan pencarian hibrida Anda, sesuai urutan Anda mengirimkan permintaan. Setiap bobot harus berkisar antara 0 hingga 1 (termasuk), dan Anda harus menyediakan tepat satu bobot per permintaan pencarian; jika tidak, permintaan tersebut akan gagal dengan kesalahan parameter. Bobot tidak dinormalisasi dan tidak perlu dijumlahkan menjadi 1. Bobot sebesar <code translate="no">0</code> menghilangkan kontribusi jalur tersebut terhadap skor, tetapi hasilnya tetap dapat muncul dalam hasil gabungan. Jika Anda mengabaikan <code translate="no">weights</code>, setiap jalur memiliki bobot 1, yang merupakan RRF klasik.</p>
+<div class="alert note">
+<p>RRF Berbobot memerlukan Milvus 2.6.23 atau yang lebih baru. Versi sebelumnya mengabaikan parameter <code translate="no">weights</code> tanpa menampilkan kesalahan dan menyusun peringkat hasil menggunakan RRF klasik.</p>
+</div>
+<p>Sebagai contoh, terapkan bobot ` <code translate="no">[0.3, 0.7]</code> ` pada <a href="/docs/id/v2.6.x/rrf-ranker.md#Example-of-RRF-Ranker">contoh sparse-dense</a> di atas dengan ` <code translate="no">k</code> ` diatur ke 60. Permintaan sparse diproses terlebih dahulu, sehingga ` <code translate="no">0.3</code> ` berlaku untuk pencarian sparse dan ` <code translate="no">0.7</code> ` untuk pencarian dense:</p>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Peringkat (sparse)</strong></p></th>
+     <th><p><strong>Peringkat (padat)</strong></p></th>
+     <th><p><strong>Skor Akhir</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>0,3/(60+1)+0,7/(60+2) = 0,01620836</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>0,3/(60+4)+0,7/(60+1) = 0,01616291</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>0,3/(60+5)+0,7/(60+4) = 0,01555288</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>N/A</p></td>
+     <td><p>3</p></td>
+     <td><p>0,7/(60+3) = 0,01111111</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>N/A</p></td>
+     <td><p>5</p></td>
+     <td><p>0,7/(60+5) = 0,01076923</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0,3/(60+2) = 0,00483871</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0,3/(60+3) = 0,00476190</p></td>
+   </tr>
+</table>
+<p>Dengan topK=5, ID 110 dan 250, yang hanya muncul dalam hasil padat, menggantikan ID 203 dan 150 dalam hasil akhir.</p>
+<p>Untuk membuat RRF Ranker yang di-weight, tambahkan ` <code translate="no">weights</code> ` ke parameter ranker, lalu lewati ranker tersebut ke pencarian hibrida Anda seperti yang ditunjukkan pada bagian <a href="/docs/id/v2.6.x/rrf-ranker.md#Apply-to-hybrid-search">"Apply to hybrid search"</a>. Untuk cURL, gunakan objek tersebut sebagai nilai ` <code translate="no">rerank</code> ` dalam permintaan pencarian hibrida; untuk permintaan lengkap, lihat <a href="/docs/id/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a>:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
+
+ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]  <span class="hljs-comment"># One weight per search request, in request order</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+rerank := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-number">100</span>).
+    WithParam(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+<span class="hljs-comment">// Pass it with milvusclient.NewHybridSearchOption(...).WithFunctionRerankers(rerank)</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;rerank&quot;</span>: {
+    <span class="hljs-string">&quot;strategy&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;k&quot;</span>: 100,
+        <span class="hljs-string">&quot;weights&quot;</span>: [0.3, 0.7]
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Berikan bobot dalam bentuk yang ditunjukkan di atas. Kelas pembantu RRF pada SDK tidak memiliki opsi bobot, dan bobot yang ditambahkan melalui metode parameter generik akan diabaikan tanpa menimbulkan kesalahan.</p>
+</div>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Terapkan pada pencarian hibrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

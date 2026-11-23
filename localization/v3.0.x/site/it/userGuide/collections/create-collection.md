@@ -293,7 +293,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Optional-Set-Index-Parameters" class="common-anchor-header">(Facoltativo) Impostazione dei parametri di indicizzazione<button data-href="#Optional-Set-Index-Parameters" class="anchor-icon" translate="no">
+<h2 id="Optional-Set-Index-Parameters" class="common-anchor-header">(Facoltativo) Impostazione dei parametri dell’indice<button data-href="#Optional-Set-Index-Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -308,10 +308,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La creazione di un indice su un campo specifico accelera la ricerca su quel campo. Un indice registra l’ordine delle entità all’interno di una collezione. Come mostrato nei seguenti frammenti di codice, è possibile utilizzare <code translate="no">metric_type</code> e <code translate="no">index_type</code> per selezionare i metodi appropriati con cui Milvus indicizza un campo e misura le somiglianze tra le rappresentazioni vettoriali.</p>
-<p>Su Milvus, è possibile utilizzare <code translate="no">AUTOINDEX</code> come tipo di indice per tutti i campi vettoriali e uno tra <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> come tipo di metrica in base alle proprie esigenze.</p>
-<p>Come illustrato nel frammento di codice sopra riportato, è necessario impostare sia il tipo di indice che il tipo di metrica per i campi vettoriali, mentre per i campi scalari è sufficiente impostare solo il tipo di indice. Gli indici sono obbligatori per i campi vettoriali; si consiglia inoltre di creare indici sui campi scalari utilizzati frequentemente nelle condizioni di filtraggio.</p>
-<p>Per ulteriori dettagli, consultare <a href="/docs/it/index-vector-fields.md">Indice dei campi vettoriali</a> e <a href="/docs/it/index-scalar-fields.md">Indice dei campi scalari</a>.</p>
+    </button></h2><p>Gli esempi riportati di seguito preparano le definizioni degli indici per i campi dello schema. Scegliere un indice vettoriale e una metrica compatibili con il tipo di dati del campo vettoriale; consultare <a href="/docs/it/index-explained.md">la sezione Spiegazione degli indici</a> e <a href="/docs/it/metric.md">Metriche di similarità</a>.</p>
+<p>I campi vettoriali richiedono indici prima del caricamento. Gli indici scalari sono facoltativi; consultare <a href="/docs/it/scalar_index.md">Indice scalare</a> per la compatibilità dei campi e la selezione esplicita o automatica del tipo.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -432,7 +430,7 @@ indexOptions := []milvusclient.CreateIndexOption{
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se hai creato una collezione con parametri di indice, Milvus la carica automaticamente al momento della creazione. In questo caso, vengono indicizzati tutti i campi menzionati nei parametri di indice.</p>
+    </button></h2><p>Se è stata creata una raccolta con parametri di indice, Milvus la carica automaticamente al momento della creazione. In questo caso, tutti i campi menzionati nei parametri di indice vengono indicizzati.</p>
 <p>I seguenti frammenti di codice mostrano come creare una collezione con parametri di indicizzazione e verificarne lo stato di caricamento.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -952,7 +950,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus abilita mmap su tutte le collezioni per impostazione predefinita, consentendo a Milvus di mappare i dati grezzi dei campi in memoria invece di caricarli completamente. Ciò riduce l’impronta di memoria e aumenta la capacità della collezione. L’esempio seguente disabilita mmap per una singola collezione; per i dettagli su mmap, consultare <a href="/docs/it/mmap.md">Utilizzo di mmap</a>.</p>
+    </button></h3><p>Milvus abilita mmap su tutte le collezioni per impostazione predefinita, consentendo a Milvus di mappare i dati grezzi dei campi in memoria invece di caricarli completamente. Ciò riduce l’impronta di memoria e aumenta la capacità della collezione. L’esempio seguente disattiva mmap per una singola collezione; per i dettagli su mmap, fare riferimento a <a href="/docs/it/mmap.md">Utilizzo di mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1076,7 +1074,7 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>Se i dati in una collezione devono essere eliminati dopo un determinato periodo, si consiglia di impostare il Time-To-Live (TTL) in secondi. Una volta scaduto il TTL, Milvus elimina le entità presenti nella collezione. L'eliminazione è asincrona, il che significa che è ancora possibile effettuare ricerche e query prima che l'eliminazione sia completata.</p>
-<p>Il seguente frammento di codice imposta il TTL su un giorno (86400 secondi). Si consiglia di impostare il TTL su almeno un paio di giorni.</p>
+<p>Il seguente frammento di codice imposta il TTL su un giorno (86.400 secondi). Si consiglia di impostare il TTL su almeno un paio di giorni.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

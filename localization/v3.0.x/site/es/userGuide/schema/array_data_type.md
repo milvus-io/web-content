@@ -47,10 +47,11 @@ summary: >-
 <li><strong>Valores por defecto</strong>: Los campos ARRAY no admiten valores por defecto. Sin embargo, puedes establecer el atributo « <code translate="no">nullable</code> » en « <code translate="no">True</code> » para permitir valores nulos. Para más detalles, consulta <a href="/docs/es/nullable-and-default.md">«Nullable &amp; Default</a>».</li>
 </ul>
 <ul>
-<li><strong>Tipo de datos:</strong> Todos los elementos de un campo ARRAY deben compartir el mismo tipo de datos, que viene definido por el parámetro « <code translate="no">element_type</code> ». Cuando « <code translate="no">element_type</code> » se establece en « <code translate="no">VARCHAR</code> », también debe especificarse « <code translate="no">max_length</code> », que define el número máximo de bytes permitidos para cada elemento de la matriz. El campo « <code translate="no">element_type</code> » admite cualquier tipo de datos escalares compatible con Milvus, a excepción de « <code translate="no">JSON</code> ». Para « <code translate="no">element_type=STRUCT</code> », utilice un campo «StructArray» y proporcione un « <code translate="no">struct_schema</code> »; para más detalles, consulte <a href="/docs/es/create-structarray-field.md">«StructArray</a>». Un campo ARRAY de nivel superior no puede contener vectores ni matrices anidadas, y sus elementos no pueden ser nulos individualmente; estas formas solo están disponibles para subcampos dentro de un campo StructArray en Milvus 3.0.6 y versiones posteriores.</li>
+<li><strong>Tipo de datos:</strong> Todos los elementos de un campo ARRAY deben compartir el mismo tipo de datos, que viene definido por el parámetro « <code translate="no">element_type</code> ». Cuando « <code translate="no">element_type</code> » se establece en « <code translate="no">VARCHAR</code> », también debe especificarse « <code translate="no">max_length</code> », que define el número máximo de bytes permitidos para cada elemento de la matriz. El campo « <code translate="no">element_type</code> » admite cualquier tipo de datos escalares compatible con Milvus, a excepción de « <code translate="no">JSON</code> ». Para « <code translate="no">element_type=STRUCT</code> », utilice un campo «StructArray» y proporcione un « <code translate="no">struct_schema</code> »; para obtener más detalles, consulte <a href="/docs/es/create-structarray-field.md">«StructArray</a>». Un campo ARRAY de nivel superior no puede contener vectores ni matrices anidadas, y sus elementos no pueden ser nulos individualmente; estas formas solo están disponibles para subcampos dentro de un campo StructArray en Milvus 3.0.6 y versiones posteriores.</li>
 </ul>
 <ul>
-<li><p><strong>Capacidad de la matriz</strong>: El número de elementos de un campo ARRAY debe ser menor o igual que la capacidad máxima definida al crear la matriz, tal y como se especifica en <code translate="no">max_capacity</code>. El valor debe ser un número entero comprendido entre <strong>1</strong> y <strong>4096</strong>.</p></li>
+<li><p><strong>Capacidad de la matriz</strong>: El número de elementos de un campo ARRAY debe ser menor o igual que la capacidad máxima definida al crear la matriz, tal y como se especifica en <code translate="no">max_capacity</code>. El valor debe ser mayor que 0 y no debe superar <code translate="no">proxy.maxArrayCapacity</code>, cuyo valor por defecto es <strong>4096</strong>.</p></li>
+<li><p><strong>Coincidencia de texto</strong>: <code translate="no">TEXT_MATCH</code>, <code translate="no">TEXT_MATCH_FUZZY</code> y <code translate="no">PHRASE_MATCH</code> solo admiten los campos <code translate="no">VARCHAR</code> y <code translate="no">TEXT</code>; si se aplican a un campo ARRAY, se devuelve un error. <code translate="no">enable_analyzer</code> y <code translate="no">enable_match</code> no tienen ningún efecto en los campos ARRAY. Para obtener más detalles sobre la coincidencia de texto, consulte <a href="/docs/es/keyword-match.md">Coincidencia de texto</a>.</p></li>
 <li><p><strong>Manejo de cadenas</strong>: Los valores de cadena en los campos «Array» se almacenan tal cual, sin escape semántico ni conversión. Por ejemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> y <code translate="no">&quot;a\&quot;b&quot;</code> se almacenan tal y como se introducen, mientras que <code translate="no">'a'b'</code> y <code translate="no">&quot;a&quot;b&quot;</code> se consideran valores no válidos.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Añadir un campo ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -68,15 +69,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar campos ARRAY en clústeres de Milvus, defina el tipo de campo correspondiente al crear el esquema de la colección. Este proceso incluye:</p>
+    </button></h2><p>Para añadir un campo ARRAY al esquema de la colección, configure los siguientes parámetros:</p>
 <ol>
-<li><p>Establecer « <code translate="no">datatype</code> » en el tipo de datos «Array» compatible, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utilizar el parámetro ` <code translate="no">element_type</code> ` para especificar el tipo de datos de los elementos del array. Todos los elementos de un mismo array deben ser del mismo tipo de datos.</p></li>
-<li><p>Utilizar el parámetro ` <code translate="no">max_capacity</code> ` para definir la capacidad máxima de la matriz, es decir, el número máximo de elementos que puede contener.</p></li>
+<li><p>Establezca el tipo de datos del campo en « <code translate="no">ARRAY</code> ».</p></li>
+<li><p>Establezca « <code translate="no">element_type</code> » en el tipo de datos compartido de los elementos.</p></li>
+<li><p>Establece « <code translate="no">max_capacity</code> » en el número máximo de elementos.</p></li>
 </ol>
 <p>A continuación se explica cómo definir un esquema de colección que incluya campos ARRAY:</p>
 <div class="alert note">
-<p>Si se establece <code translate="no">enable_dynamic_field=True</code> al definir el esquema, Milvus permite insertar campos escalares que no se hayan definido previamente. Sin embargo, esto puede aumentar la complejidad de las consultas y la gestión, lo que podría afectar al rendimiento. Para obtener más información, consulta <a href="/docs/es/enable-dynamic-field.md">«Campo dinámico</a>».</p>
+<p>Para insertar campos no definidos en el esquema, habilita el <a href="/docs/es/enable-dynamic-field.md">campo dinámico</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -361,7 +362,7 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">Configurar parámetros de indexación<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">Configurar los parámetros de índice<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -376,8 +377,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La indexación ayuda a mejorar el rendimiento de las búsquedas y las consultas. En los clústeres de Milvus, la indexación es obligatoria para los campos vectoriales, pero opcional para los campos escalares.</p>
-<p>El siguiente ejemplo crea índices en el campo vectorial <code translate="no">embedding</code> y en el campo ARRAY <code translate="no">tags</code>, ambos utilizando el tipo de índice « <code translate="no">AUTOINDEX</code> ». Con este tipo, Milvus selecciona automáticamente el índice más adecuado en función del tipo de datos. También puedes personalizar el tipo de índice y los parámetros para cada campo. Para más detalles, consulta <a href="/docs/es/index-explained.md">«Explicación</a> de <a href="/docs/es/index-explained.md">los índices</a>».</p>
+    </button></h2><p>Los campos vectoriales requieren índices; los índices escalares son opcionales. Este ejemplo solicita <code translate="no">AUTOINDEX</code> en <code translate="no">embedding</code> y <code translate="no">tags</code>. Para conocer las opciones explícitas de índices ARRAY y la compatibilidad con filtros, consulta <a href="#Array-index-support">Compatibilidad con índices ARRAY</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Los índices escalares, incluido <code translate="no">AUTOINDEX</code>, no admiten campos ARRAY recursivos ni matrices con elementos nulos. Consulte <a href="/docs/es/array_data_type.md#Array-index-support">«Compatibilidad con índices de matriz»</a> para conocer los filtros de matrices ordinarias y <a href="/docs/es/index-structarray-fields.md#Create-scalar-indexes">«Índices de campos StructArray»</a> para conocer las reglas de subcampos.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -487,7 +492,34 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">Crear colección<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<p><details id="Array-index-support">
+<summary><strong>Compatibilidad con índices de matriz: tipos de índice y filtros acelerados</strong></summary></p>
+<p>Los índices escalares en un campo ARRAY ordinario indexan sus elementos. Elige entre los siguientes tipos de índice explícitos:</p>
+<table>
+<thead>
+<tr><th>Tipo de elemento</th><th>Tipos de índice explícitos</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>También puedes solicitar <code translate="no">AUTOINDEX</code>; consulta <a href="/docs/es/scalar_index.md#AUTOINDEX-behavior">«Índice escalar</a> » para ver las selecciones predeterminadas de ARRAY.</p>
+<p>Los siguientes filtros pueden utilizar índices de matriz válidos:</p>
+<table>
+<thead>
+<tr><th>Filtro</th><th>Comportamiento del índice</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code> o una selección automática válida pueden buscar elementos independientemente de su posición.</td></tr>
+<tr><td><code translate="no">==</code> de todo el array o <code translate="no">!=</code> en arrays booleanos, de enteros o VARCHAR</td><td><code translate="no">INVERTED</code> pueden encontrar candidatos; a continuación, se comprueba el orden y la longitud de las matrices originales. La « <code translate="no">BITMAP</code> » no sigue esta ruta de candidatos.</td></tr>
+<tr><td>Comparaciones de matriz completa en matrices de punto flotante</td><td>Recurren al escaneo.</td></tr>
+<tr><td>Acceso a elementos, como <code translate="no">tags[0]</code>, o longitud de la matriz</td><td>La indexación de pertenencia a elementos no proporciona búsqueda por índice para estas operaciones.</td></tr>
+</tbody>
+</table>
+<p>Para la sintaxis de las expresiones, véase <a href="/docs/es/array-operators.md">Operadores de ARRAY</a>.</p>
+<p></details></p>
+<h2 id="Create-collection" class="common-anchor-header">Crear una colección<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -653,7 +685,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tras crear la colección, puedes insertar datos que incluyan campos ARRAY.</p>
+    </button></h2><p>Tras crear la colección, puede insertar datos que incluyan campos ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -843,7 +875,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Además de insertar matrices completas, los campos « <code translate="no">ARRAY</code> » también admiten los operadores de actualización parcial « <code translate="no">ARRAY_APPEND</code> » y « <code translate="no">ARRAY_REMOVE</code> » en la API « <code translate="no">upsert</code> » de Milvus v2.6.17 y versiones posteriores. Estos te permiten añadir elementos a una matriz existente o eliminar elementos coincidentes de ella sin tener que recuperar primero su valor actual, lo que evita el patrón de lectura-modificación-escritura del lado del cliente. Para obtener más información, consulta <a href="/docs/es/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">«Upsert de campos ARRAY en modo de fusión</a>».</p>
+<p>Además de insertar matrices completas, los campos « <code translate="no">ARRAY</code> » también admiten los operadores de actualización parcial « <code translate="no">ARRAY_APPEND</code> » y « <code translate="no">ARRAY_REMOVE</code> » en la API « <code translate="no">upsert</code> » de Milvus v2.6.17 y versiones posteriores. Estos te permiten añadir elementos a una matriz existente o eliminar elementos coincidentes de la misma sin necesidad de recuperar primero su valor actual, lo que evita el patrón de lectura-modificación-escritura del lado del cliente. Para obtener más información, consulta <a href="/docs/es/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">«Upsert de campos ARRAY en modo de fusión</a>».</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Consulta con expresiones de filtro<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1108,7 +1140,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Además del filtrado básico por campos escalares, puedes combinar búsquedas de similitud vectorial con filtros de campos escalares. Por ejemplo, el siguiente código muestra cómo añadir un filtro de campo escalar a una búsqueda vectorial:</p>
+    </button></h2><p>Utiliza filtros ARRAY en la búsqueda vectorial para restringir las entidades elegibles:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1271,4 +1303,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Además, Milvus admite operadores avanzados de filtrado de matrices como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> y <code translate="no">ARRAY_LENGTH</code> para mejorar aún más las capacidades de consulta. Para obtener más detalles, consulta <a href="/docs/es/array-operators.md">Operadores</a> de <a href="/docs/es/array-operators.md">matrices</a>.</p>
+<p>Para los filtros de contención y longitud, consulta <a href="/docs/es/array-operators.md">Operadores ARRAY</a>.</p>

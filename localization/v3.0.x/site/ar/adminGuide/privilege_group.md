@@ -1,7 +1,7 @@
 ---
 id: privilege_group.md
 title: إنشاء مجموعة امتيازات
-summary: لتبسيط عملية منح الامتيازات، يوصى بدمج امتيازات متعددة في مجموعة امتيازات.
+summary: لتبسيط عملية منح الامتيازات، يُوصى بدمج عدة امتيازات في مجموعة امتيازات واحدة.
 ---
 <h1 id="Create-Privilege-Group" class="common-anchor-header">إنشاء مجموعة امتيازات<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>لتبسيط عملية منح الامتيازات، يوصى بدمج امتيازات متعددة في مجموعة امتيازات.</p>
+    </button></h1><p>لتبسيط عملية منح الامتيازات، يوصى بدمج عدة امتيازات في مجموعة امتيازات واحدة.</p>
 <h2 id="Privilege-group-vs-privileges" class="common-anchor-header">مجموعة الامتيازات مقابل الامتيازات<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,18 +34,20 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتكون مجموعة الامتيازات من امتيازات متعددة.</p>
-<p>
+    </button></h2><p>تتكون مجموعة الامتيازات من عدة امتيازات.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-   </span> <span class="img-wrapper"> <span>توضيح مجموعة الامتيازات</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" /> 
+   <span>توضيح مجموعة الامتيازات</span>
+  
+ </span></p>
 <p>كما هو موضح في الشكل أعلاه، لنفترض أنك بحاجة إلى منح ثلاثة امتيازات مختلفة لدور ما.</p>
 <ul>
-<li><p>إذا كنت لا تستخدم مجموعة امتيازات، فأنت بحاجة إلى منح الامتيازات ثلاث مرات.</p></li>
-<li><p>أما إذا كنت تستخدم مجموعة امتيازات، فأنت بحاجة فقط إلى إنشاء مجموعة امتيازات وإضافة الامتيازات الثلاثة إلى مجموعة الامتيازات هذه ومنح مجموعة الامتيازات للدور أ.</p></li>
+<li><p>إذا لم تستخدم مجموعة امتيازات، فستحتاج إلى منح الامتيازات ثلاث مرات.</p></li>
+<li><p>أما إذا استخدمت مجموعة امتيازات، فما عليك سوى إنشاء مجموعة امتيازات وإضافة الامتيازات الثلاثة إلى هذه المجموعة ومنح مجموعة الامتيازات هذه للدور "أ".</p></li>
 </ul>
-<p>باستخدام مجموعة امتيازات، يمكنك منح امتيازات متعددة بشكل مجمّع لدور ما.</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">مجموعات امتيازات مدمجة<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>باستخدام مجموعة الامتيازات، يمكنك منح امتيازات متعددة دفعة واحدة لدور ما.</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">مجموعات الامتيازات المدمجة<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,11 +62,11 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لسهولة الاستخدام، يوفر Milvus ما مجموعه 9 امتيازات مدمجة على مستوى المجموعة وقاعدة البيانات والمثيل: COLL_RO و COLL_RW و COLL_RW و COLL_ADMIN و DB_RO و DB_RW و DB_Admin و Cluster_RO و Cluster_RW و Cluster_Admin.</p>
+    </button></h2><p>لتسهيل الاستخدام، يوفر Milvus ما مجموعه 9 مجموعات امتيازات مدمجة على مستوى المجموعة وقاعدة البيانات والمثيل: CollectionReadOnly و CollectionReadWrite و CollectionAdmin و DatabaseReadOnly و DatabaseReadWrite و DatabaseAdmin و ClusterReadOnly و ClusterReadWrite و ClusterAdmin.</p>
 <div class="alert note">
-<p>لا توجد علاقة تعاقبية بين المستويات الثلاثة لمجموعات الامتيازات المضمنة. لا يؤدي تعيين مجموعة امتيازات على مستوى المثيل إلى تعيين الأذونات تلقائيًا لجميع قواعد البيانات والمجموعات ضمن هذا المثيل. يجب تعيين الامتيازات على مستوى قاعدة البيانات والمجموعات يدويًا.</p>
+<p>لا توجد علاقة تسلسلية بين المستويات الثلاثة لمجموعات الامتيازات المدمجة. لا يؤدي تعيين مجموعة امتيازات على مستوى المثيل إلى تعيين الأذونات تلقائيًا لجميع قواعد البيانات والمجموعات التابعة لهذا المثيل. يجب تعيين الامتيازات على مستويي قاعدة البيانات والمجموعة يدويًّا.</p>
 </div>
-<p>توضح الجداول التالية الامتيازات المتضمنة في كل مجموعة امتيازات مضمنة.</p>
+<p>توضح الجداول التالية الامتيازات المضمنة في كل مجموعة امتيازات مدمجة.</p>
 <h3 id="Collection-level" class="common-anchor-header">مستوى المجموعة<button data-href="#Collection-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,20 +83,20 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: يتضمن امتيازات لقراءة بيانات المجموعة</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: يتضمن امتيازات لقراءة بيانات المجموعة وكتابتها</p></li>
-<li><p><strong>CollectionAdmin (COLL_ADMIN</strong>): تتضمن امتيازات لقراءة بيانات المجموعة وكتابتها وإدارة المجموعات.</p></li>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: تتضمن امتيازات قراءة بيانات المجموعة</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: تتضمن امتيازات قراءة وكتابة بيانات المجموعات</p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: تتضمن امتيازات قراءة وكتابة بيانات المجموعات وإدارة المجموعات.</p></li>
 </ul>
-<p>يسرد الجدول أدناه الامتيازات المحددة المضمنة في مجموعات الامتيازات الثلاثة المضمنة على مستوى المجموعة:</p>
+<p>يسرد الجدول أدناه الامتيازات المحددة المضمنة في مجموعات الامتيازات المدمجة الثلاث على مستوى المجموعة:</p>
 <table>
    <tr>
-     <th><p><strong>الامتيازات</strong></p></th>
-     <th><p><strong>قراءة المجموعةReadOnly</strong></p></th>
-     <th><p><strong>مجموعة القراءة والكتابة للمجموعة</strong></p></th>
-     <th><p><strong>إدارة المجموعات</strong></p></th>
+     <th><p><strong>الامتياز</strong></p></th>
+     <th><p><strong>CollectionReadOnly</strong></p></th>
+     <th><p><strong>قراءة وكتابة المجموعة</strong></p></th>
+     <th><p><strong>CollectionAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>استعلام</p></td>
+     <td><p>الاستعلام</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -106,19 +108,19 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>فهرسالتفصيل</p></td>
+     <td><p>الفهرس التفاصيل</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>GetFlushState</p></td>
+     <td><p>الحصول على حالة التصفية</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>الحصول على حالة التحميل</p></td>
+     <td><p>GetLoadState</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -130,7 +132,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>لديه قسم</p></td>
+     <td><p>HasPartition</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -154,13 +156,13 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>وصف الخواص</p></td>
+     <td><p>وصف الاسم المستعار</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>الحصول على إحصائيات</p></td>
+     <td><p>الحصول على الإحصائيات</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -172,7 +174,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط الفهرس</p></td>
+     <td><p>إزالة الفهرس</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -184,7 +186,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط قسم</p></td>
+     <td><p>إزالة القسم</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -196,7 +198,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>الإصدار</p></td>
+     <td><p>إصدار</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -214,43 +216,103 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>حذف</p></td>
+     <td><p>إدراج أو تحديث</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>الاستيراد</p></td>
+     <td><p>استيراد</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>تدفق</p></td>
+     <td><p>التنظيف</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>الضغط</p></td>
+     <td><p>التكثيف</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>موازنة الأحمال</p></td>
+     <td><p>توزيع الحمل</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إنشاء تعريفا</p></td>
+     <td><p>إنشاء اسم مستعار</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط اسم مستعار</p></td>
+     <td><p>إزالة الاسم المستعار</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>GetImportProgress</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>استيراد القائمة</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>وصف اللقطة</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>قائمة اللقطات</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إضافة حقل مجموعة</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>تعديل مخطط المجموعة</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>تحديث المجموعة الخارجية</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إنشاء لقطة</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إسقاط لقطة</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>استعادة اللقطة</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -272,17 +334,17 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: يتضمن امتيازات لقراءة بيانات قاعدة البيانات</p></li>
-<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات قاعدة البيانات</p></li>
-<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات قاعدة البيانات وإدارة قواعد البيانات.</p></li>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: يتضمن امتيازات قراءة بيانات قاعدة البيانات</p></li>
+<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: تتضمن امتيازات قراءة وكتابة بيانات قاعدة البيانات</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: تتضمن امتيازات قراءة وكتابة بيانات قاعدة البيانات وإدارة قواعد البيانات.</p></li>
 </ul>
-<p>يسرد الجدول أدناه الامتيازات المحددة المضمنة في مجموعات الامتيازات الثلاثة المضمنة على مستوى قاعدة البيانات:</p>
+<p>يسرد الجدول أدناه الامتيازات المحددة المضمنة في مجموعات الامتيازات المدمجة الثلاث على مستوى قاعدة البيانات:</p>
 <table>
    <tr>
-     <th><p><strong>الامتيازات</strong></p></th>
-     <th><p><strong>قراءة قاعدة البيانات فقط</strong></p></th>
-     <th><p><strong>قراءة قاعدة البيانات وكتابة قاعدة البيانات</strong></p></th>
-     <th><p><strong>إدارة قاعدة البيانات</strong></p></th>
+     <th><p><strong>الامتياز</strong></p></th>
+     <th><p><strong>DatabaseReadOnly</strong></p></th>
+     <th><p><strong>DatabaseReadWrite</strong></p></th>
+     <th><p><strong>DatabaseAdmin</strong></p></th>
    </tr>
    <tr>
      <td><p>إظهار المجموعات</p></td>
@@ -298,20 +360,26 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
    </tr>
    <tr>
      <td><p>إنشاء مجموعة</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>دروبكولكشن</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>تغيير قاعدة البيانات</p></td>
+     <td><p>إسقاط المجموعة</p></td>
+     <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AlterDatabase</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إعادة تسمية المجموعة</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
@@ -331,32 +399,26 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: يتضمن امتيازات لقراءة بيانات المثيل</p></li>
-<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات المثيل</p></li>
-<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: يتضمن امتيازات لقراءة وكتابة بيانات المثيل وإدارة المثيلات.</p></li>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: يتضمن امتيازات قراءة بيانات المثيل</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: يتضمن امتيازات قراءة وكتابة بيانات المثيلات</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: يتضمن امتيازات قراءة وكتابة بيانات المثيلات وإدارة المثيلات.</p></li>
 </ul>
-<p>يسرد الجدول أدناه الامتيازات المحددة المضمنة في مجموعات الامتيازات المضمنة الثلاث على مستوى المثيل:</p>
+<p>يسرد الجدول أدناه الامتيازات المحددة المضمنة في مجموعات الامتيازات المدمجة الثلاث على مستوى المثيل:</p>
 <table>
    <tr>
-     <th><p><strong>الامتيازات</strong></p></th>
+     <th><p><strong>الامتياز</strong></p></th>
      <th><p><strong>ClusterReadOnly</strong></p></th>
      <th><p><strong>ClusterReadWrite</strong></p></th>
-     <th><p><strong>إدارة المجموعة</strong></p></th>
+     <th><p><strong>ClusterAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>سرد قواعد البيانات</p></td>
+     <td><p>ListDatabases</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>إعادة تسمية المجموعة</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إنشاء ملكية</p></td>
+     <td><p>إنشاء الملكية</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -368,13 +430,13 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط الملكية</p></td>
+     <td><p>إلغاء الملكية</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>حدد الملكية</p></td>
+     <td><p>تحديد الملكية</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -386,43 +448,43 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>حدد المستخدم</p></td>
+     <td><p>تحديد المستخدم</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>BackupRBAC</p></td>
+     <td><p>النسخ الاحتياطي لـ RBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>استعادةRRBAC</p></td>
+     <td><p>استعادة RBAC</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إنشاءResourceGroup</p></td>
+     <td><p>إنشاء مجموعة موارد</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط مجموعة الموارد</p></td>
+     <td><p>إزالة مجموعة الموارد</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>تحديثResourceResourceGroups</p></td>
+     <td><p>تحديث مجموعات الموارد</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>وصفمجموعات الموارد</p></td>
+     <td><p>وصف مجموعة الموارد</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -434,31 +496,31 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>TransferNode</p></td>
+     <td><p>نقل العقدة</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>نقل نسخة طبق الأصل</p></td>
+     <td><p>نسخة متماثلة للنقل</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إنشاء قاعدة بيانات</p></td>
+     <td><p>إنشاء قاعدة البيانات</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط قاعدة البيانات</p></td>
+     <td><p>حذف قاعدة البيانات</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>فلوش الكل</p></td>
+     <td><p>FlushAll</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -470,19 +532,79 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>إسقاط مجموعة الامتيازات</p></td>
+     <td><p>إزالة مجموعة الامتيازات</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ListPrivileGroups</p></td>
+     <td><p>ListPrivilegeGroups</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>تشغيل مجموعة الامتيازات</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>تشغيلPrivilePrivileGroup</p></td>
+     <td><p>GetReplicateConfiguration</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListFileResources</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إضافة مورد ملف</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إزالة مورد الملف</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>بيانات اللقطة المثبتة</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>إلغاء تثبيت بيانات اللقطة</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>تحديث تكوين النسخ المتماثل</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>استعادة لقطة خارجية</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>تصدير لقطة</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>استيراد سجلات البين</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -503,7 +625,7 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك إنشاء مجموعة امتيازات ثم إضافة امتيازات إلى مجموعة الامتيازات.</p>
+    </button></h2><p>يمكنك إنشاء مجموعة امتيازات ثم إضافة امتيازات إلى هذه المجموعة.</p>
 <h3 id="Create-a-privilege-group" class="common-anchor-header">إنشاء مجموعة امتيازات<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -521,11 +643,16 @@ summary: لتبسيط عملية منح الامتيازات، يوصى بدمج
       </svg>
     </button></h3><p>يوضح المثال التالي كيفية إنشاء مجموعة امتيازات باسم <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
+client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.CreatePrivilegeGroup(ctx, milvusclient.NewCreatePrivilegeGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -567,13 +694,18 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يوضح المثال التالي كيفية إضافة الامتيازات <code translate="no">PrivilegeBackupRBAC</code> و <code translate="no">PrivilegeRestoreRBAC</code> إلى مجموعة الامتيازات <code translate="no">privilege_group_1</code> التي تم إنشاؤها للتو.</p>
+    </button></h3><p>يوضح المثال التالي كيفية إضافة الامتيازات <code translate="no">Query</code> و <code translate="no">Search</code> إلى مجموعة الامتيازات <code translate="no">privilege_group_1</code> التي تم إنشاؤها للتو.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 privileges := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>}
 err = client.AddPrivilegesToGroup(ctx, milvusclient.NewAddPrivilegesToGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>, privileges...))
@@ -590,7 +722,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addPrivilegesToGroup</span>({
-  <span class="hljs-attr">group_name</span>: privilege_group_1,
+  <span class="hljs-attr">group_name</span>: <span class="hljs-string">&#x27;privilege_group_1&#x27;</span>,
   <span class="hljs-attr">privileges</span>: [<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>],
 });
 
@@ -620,13 +752,18 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يوضح المثال التالي كيفية إزالة الامتياز <code translate="no">PrivilegeRestoreRBAC</code> من مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
+    </button></h3><p>يوضح المثال التالي كيفية إزالة الامتياز <code translate="no">Search</code> من مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
+client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.RemovePrivilegesFromGroup(ctx, milvusclient.NewRemovePrivilegesFromGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Search&quot;</span>}...))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -673,11 +810,16 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
       </svg>
     </button></h3><p>يوضح المثال التالي كيفية سرد جميع مجموعات الامتيازات الموجودة.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 groups, err := client.ListPrivilegeGroups(ctx, milvusclient.NewListPrivilegeGroupsOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -702,10 +844,10 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>فيما يلي مثال على الإخراج.</p>
+<p>فيما يلي مثال على الناتج.</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">إسقاط مجموعة امتيازات<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">إزالة مجموعة امتيازات<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -720,13 +862,18 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يوضح المثال التالي كيفية إسقاط مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
+    </button></h3><p>يوضح المثال التالي كيفية حذف مجموعة الامتيازات <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
-   <a href="#python">بايثون</a> <a href="#go">جو</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.DropPrivilegeGroup(ctx, milvusclient.NewDropPrivilegeGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {

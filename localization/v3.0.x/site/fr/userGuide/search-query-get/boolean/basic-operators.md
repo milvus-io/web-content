@@ -22,10 +22,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus propose des opérateurs de comparaison, d'intervalle, arithmétiques, logiques et NULL pour filtrer les entités. Chaque opérateur prend en charge des types de champs spécifiques.</p>
+    </button></h1><p>Milvus fournit des opérateurs de comparaison, de plage, arithmétiques, logiques et NULL pour filtrer les entités. Chaque opérateur prend en charge des types de champs spécifiques.</p>
 <div class="alert note">
-<p>Le littéral situé à gauche d’une expression de filtrage peut être soit le nom d’un champ de collection, tel que <code translate="no">status</code>, <code translate="no">color</code>, etc., utilisés dans les exemples ci-dessous, soit le nom d’un sous-champ StructArray à un indice d’élément spécifique, comme dans <code translate="no">filter = 'struct[0][subfield] &gt; 10'</code>.</p>
-<p>Pour plus de détails sur le filtrage scalaire dans un champ StructArray, reportez-vous à la section <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p>
+<p>L'opérande de gauche peut être un champ de collection, tel que <code translate="no">status</code>, ou un sous-champ StructArray à un indice d'élément spécifique, tel que <code translate="no">struct[0][subfield] &gt; 10</code>. Voir <a href="/docs/fr/struct-array-operators.md">Opérateurs StructArray</a>.</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">Opérateurs de comparaison<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les opérateurs de comparaison permettent de filtrer les données en fonction de l’égalité, de l’inégalité ou de la taille. Ils s’appliquent aux champs numériques et textuels.</p>
+    </button></h2><p>Les opérateurs de comparaison permettent de filtrer les données en fonction de l'égalité, de l'inégalité ou de la taille. Ils s'appliquent aux champs numériques et textuels.</p>
 <h3 id="Supported-comparison-operators" class="common-anchor-header">Opérateurs de comparaison pris en charge<button data-href="#Supported-comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -361,7 +360,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Cette fonctionnalité est utile lorsque vous souhaitez vérifier l’appartenance à une liste de valeurs.</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">Opérateurs de correspondance de motifs<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -377,10 +375,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les opérateurs de correspondance de motifs permettent de filtrer des valeurs de chaîne en fonction de motifs avec caractères génériques ou d’expressions régulières.</p>
+    </button></h2><p>Les opérateurs de correspondance de motifs permettent de filtrer des valeurs de chaîne à l’aide de motifs génériques ou d’expressions régulières.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: Permet de faire correspondre des motifs simples avec des caractères génériques sur des valeurs de chaîne de caractères. Par exemple, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » correspond aux valeurs commençant par « <code translate="no">Prod</code> ».</p></li>
-<li><p><code translate="no">=~</code>: Permet de faire correspondre une valeur de chaîne à une expression régulière RE2. Par exemple, « <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> » correspond aux valeurs contenant un code d’erreur tel que « <code translate="no">E1001</code> ».</p></li>
+<li><p><code translate="no">LIKE</code>: Utilisé pour faire correspondre des motifs simples avec des caractères génériques sur des valeurs de chaîne. Par exemple, « <code translate="no">name LIKE &quot;Prod%&quot;</code> » correspond aux valeurs commençant par « <code translate="no">Prod</code> ».</p></li>
+<li><p><code translate="no">=~</code>: Permet de faire correspondre une valeur de chaîne à une expression régulière RE2. Par exemple, <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> correspond aux valeurs contenant un code d'erreur tel que <code translate="no">E1001</code>.</p></li>
 <li><p><code translate="no">!~</code>: Permet d’exclure les valeurs de chaîne qui correspondent à une expression régulière RE2. Cela équivaut à « <code translate="no">NOT (field =~ &quot;pattern&quot;)</code> ».</p></li>
 </ul>
 <p>Pour rechercher les entités dont la valeur de chaîne « <code translate="no">name</code> » commence par « <code translate="no">Prod</code> » :</p>
@@ -464,7 +462,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour plus de détails sur le choix entre les <code translate="no">LIKE</code> et les expressions régulières, les types de champs pris en charge, la syntaxe des expressions régulières, les règles d’échappement et les performances, consultez la section <a href="/docs/fr/pattern-matching.md">« Correspondance de motifs</a> ». Milvus vous permet également de créer un index d’ <code translate="no">NGRAM</code> s sur des champs de type « <code translate="no">VARCHAR</code> » ou des chemins de chaînes JSON afin d’accélérer les filtres de correspondance de motifs éligibles. Pour plus de détails, consultez la section « <a href="/docs/fr/ngram.md">NGRAM</a> ».</p>
+<p>Pour la syntaxe, l'échappement, la prise en charge des champs et les options d'accélération telles que l'<code translate="no">NGRAM</code>, consultez la section « <a href="/docs/fr/pattern-matching.md">Correspondance de motifs</a> ».</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">Opérateurs arithmétiques<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -561,7 +559,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour trouver les entités dont l'<code translate="no">price</code> e élevée à la puissance 2 est supérieure à 1 000 :</p>
+    </button></h3><p>Pour trouver les entités dont l'<code translate="no">price</code> e élevé à la puissance 2 est supérieur à 1 000 :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -630,7 +628,7 @@ summary: >-
 <tbody>
 <tr><td><code translate="no">&amp;</code></td><td>ET bit à bit</td><td>Vérifie si des bits spécifiques sont activés.</td></tr>
 <tr><td><code translate="no">|</code></td><td>OU binaire</td><td>Combiner des bits avant la comparaison.</td></tr>
-<tr><td><code translate="no">^</code></td><td>XOR binaire</td><td>Compare les différences de bits entre deux valeurs.</td></tr>
+<tr><td><code translate="no">^</code></td><td>XOR binaire</td><td>Compare les différences binaires entre deux valeurs.</td></tr>
 </tbody>
 </table>
 <h3 id="Example-Filtering-by-permission-bits" class="common-anchor-header">Exemple : filtrage par bits d'autorisation<button data-href="#Example-Filtering-by-permission-bits" class="anchor-icon" translate="no">
@@ -760,7 +758,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les opérateurs logiques permettent de combiner plusieurs conditions pour former une expression de filtrage plus complexe. Il s'agit notamment de <code translate="no">AND</code>, <code translate="no">OR</code> et <code translate="no">NOT</code>.</p>
+    </button></h2><p>Les opérateurs logiques permettent de combiner plusieurs conditions pour former une expression de filtrage plus complexe. Il s’agit notamment de <code translate="no">AND</code>, <code translate="no">OR</code> et <code translate="no">NOT</code>.</p>
+<div class="alert note">
+<p>Chaque condition peut utiliser son propre index ou chemin de balayage éligible ; un seul type d’index ne doit pas nécessairement couvrir l’intégralité de l’expression. Voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">Opérateurs logiques pris en charge<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -880,7 +881,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour trouver tous les produits pour lesquels la valeur de « <code translate="no">color</code> » n’est pas « green » :</p>
+    </button></h3><p>Pour trouver tous les produits pour lesquels <code translate="no">color</code> n’est pas « green » :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -950,7 +951,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Supposons qu’une collection nommée <code translate="no">products</code> soit indexée et chargée. Cette collection possède une clé primaire de type <code translate="no">INT64</code> nommée <code translate="no">id</code>, un champ de type <code translate="no">VARCHAR</code> pouvant prendre la valeur NULL nommé <code translate="no">category</code>, ainsi qu’un champ tridimensionnel de type <code translate="no">FLOAT_VECTOR</code> pouvant prendre la valeur NULL nommé <code translate="no">embedding</code>. Elle contient déjà les entités suivantes :</p>
+    </button></h3><p>Supposons qu’une collection nommée <code translate="no">products</code> soit indexée et chargée sur Milvus 3.0.3 ou une version ultérieure. La collection possède une clé primaire de type <code translate="no">INT64</code> nommée <code translate="no">id</code>, un champ de type <code translate="no">VARCHAR</code> pouvant prendre la valeur NULL nommé <code translate="no">category</code>, et un champ tridimensionnel de type <code translate="no">FLOAT_VECTOR</code> pouvant prendre la valeur NULL nommé <code translate="no">embedding</code>. Elle contient déjà les entités suivantes :</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1178,6 +1179,9 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 </tbody>
 </table>
 <p>Pour un champ pris en charge défini avec <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> ne correspond à aucune entité et <code translate="no">IS NOT NULL</code> correspond à toutes les entités visibles. Les autres conditions du filtre s’appliquent toujours.</p>
+<div class="alert note">
+<p>Les filtres scalaires NULL utilisent les informations de validité provenant d’un index éligible ou des données du champ ; ils ne nécessitent pas de type d’index scalaire particulier. Un champ non nul peut produire un résultat constant.</p>
+</div>
 <h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Utilisation des filtres NULL dans la recherche vectorielle<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1194,7 +1198,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
         ></path>
       </svg>
     </button></h3><p>Les mêmes opérateurs peuvent être utilisés dans les filtres de recherche, mais une entité doit également disposer d’un vecteur dans le champ recherché pour participer à la recherche par similarité.</p>
-<p>En reprenant l’exemple de données ci-dessus, considérons une recherche avec <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
+<p>En reprenant l’exemple de données ci-dessus, considérons une recherche avec l’ <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
 <table>
 <thead>
 <tr><th>Expression de filtre</th><th>Entités éligibles à la recherche par similarité</th><th>Raison</th></tr>
@@ -1202,11 +1206,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>L'entité « <code translate="no">2</code> » n'a pas de catégorie, mais possède un vecteur « <code translate="no">embedding</code> ».</td></tr>
 <tr><td><code translate="no">embedding IS NULL</code></td><td>Aucune</td><td>L'<code translate="no">3</code> d'entité correspond au filtre, mais ne dispose d'aucun vecteur d'<code translate="no">embedding</code> à comparer avec le vecteur de requête.</td></tr>
-<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td><code translate="no">embedding</code> Les deux entités possèdent un vecteur d' .</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td><code translate="no">embedding</code> Les deux entités possèdent un vecteur d’ .</td></tr>
 </tbody>
 </table>
-<p>Les trois filtres sont valides. Une recherche sur « <code translate="no">embedding</code> » avec « <code translate="no">embedding IS NULL</code> » ne renvoie aucun résultat, car aucune entité ne peut satisfaire ces deux exigences. Pour récupérer les entités dont les embeddings sont manquants, utilisez « <code translate="no">query()</code> » comme indiqué ci-dessus.</p>
-<p>La recherche vectorielle ignore déjà les entités dont le champ vectoriel recherché est NULL ; par conséquent, <code translate="no">embedding IS NOT NULL</code> ne restreint pas davantage les candidats pour une recherche sur <code translate="no">embedding</code>. Le classement, les autres filtres et la limite de recherche déterminent toujours quels candidats sont renvoyés.</p>
+<p>Pour récupérer les embeddings manquants, utilisez « <code translate="no">query()</code> » ; une recherche sur « <code translate="no">embedding</code> » avec « <code translate="no">embedding IS NULL</code> » est valide mais ne renvoie aucun résultat. La recherche vectorielle ignore déjà les embeddings NULL, donc « <code translate="no">embedding IS NOT NULL</code> » ne réduit pas davantage le nombre de candidats. Le classement, les autres filtres et la limite de recherche déterminent toujours les résultats renvoyés.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Conseils d’utilisation des opérateurs de base avec les champs JSON et ARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1222,8 +1225,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bien que les opérateurs de base de Milvus soient polyvalents et puissent être appliqués à des champs scalaires, ils peuvent également être utilisés efficacement avec les clés et les index des champs JSON et ARRAY.</p>
-<p>Par exemple, si vous disposez d’un champ « <code translate="no">product</code> » contenant plusieurs clés telles que <code translate="no">price</code>, <code translate="no">model</code> et <code translate="no">tags</code>, référencez toujours la clé directement :</p>
+    </button></h2><p>Faites référence directement à une clé JSON ou à un élément ARRAY dans l’expression. Par exemple, pour filtrer la clé « <code translate="no">price</code> » dans un champ JSON nommé « <code translate="no">product</code> » :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1277,22 +1279,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus propose une gamme d’opérateurs de base qui vous offrent une grande flexibilité pour filtrer et interroger vos données. En combinant des opérateurs de comparaison, de plage, arithmétiques et logiques, vous pouvez créer des expressions de filtrage puissantes pour affiner vos résultats de recherche et récupérer efficacement les données dont vous avez besoin.</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1309,5 +1296,5 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
         ></path>
       </svg>
     </button></h2><p><strong>Y a-t-il une limite à la longueur de la liste des valeurs de correspondance dans les conditions de filtrage (par exemple, filter=’color in ["red", "green", “blue”]') ? Que dois-je faire si la liste est trop longue ?</strong></p>
-<p>Milvus n’impose aucune limite de longueur à la liste des valeurs de correspondance dans les conditions de filtrage. Cependant, une liste excessivement longue peut avoir un impact significatif sur les performances des requêtes.
+<p>Milvus n’impose aucune limite de longueur à la liste des valeurs de correspondance dans les conditions de filtrage. Cependant, une liste trop longue peut avoir un impact significatif sur les performances des requêtes.
 Si votre condition de filtrage comprend une longue liste de valeurs de correspondance ou une expression complexe comportant de nombreux éléments, nous vous recommandons d’utiliser <a href="/docs/fr/filtering-templating.md">les modèles de filtrage (Filter Templating)</a> pour améliorer les performances des requêtes.</p>

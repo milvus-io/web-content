@@ -61,8 +61,8 @@ summary: >-
 <p>Для получения дополнительной информации см. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> в справочнике по SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -242,11 +242,11 @@ schema.verify()
 <li><p>Внутри каждого элемента Struct используйте имена подполей, а не пути, такие как <code translate="no">chunks[text]</code>. Плоские столбцы или ключи с именами типа <code translate="no">chunks[text]</code> отклоняются.</p></li>
 <li><p>Сам элемент Struct не может быть нулевым, например <code translate="no">[null, {...}]</code>. Все значение StructArray может быть нулевым только в том случае, если поле StructArray допускает нулевые значения. До версии Milvus 3.0.6 каждый элемент Struct должен содержать все подполя.</p></li>
 <li><p>Ключи или дочерние элементы Parquet, не являющиеся подполями коллекции, включая удалённые подполя, игнорируются.</p></li>
-<li><p>Начиная с Milvus 3.0.6, отсутствующий ключ или значение <code translate="no">null</code> для подполя, допускающего нулевое значение элемента, импортируется как нулевое значение для данного элемента Struct, поэтому файлы, записанные до добавления подполя, импортируются без него. Наличие значения « <code translate="no">null</code> » в любом другом месте приводит к сбою импорта. Для подполя типа массива значение « <code translate="no">null</code> » представляет собой внутренний массив с нулевым содержимым, а значение « <code translate="no">null</code> » внутри этого массива — внутреннее значение с нулевым содержимым, если подполе это допускает.</p></li>
-<li><p>Начиная с Milvus 3.0.6, импорт из бинарного журнала (например, при восстановлении резервной копии) и импорт из источника моментальных снимков отклоняются для коллекций, имеющих подполя с допустимыми нулевыми элементами или подполя типа скалярного массива.</p></li>
+<li><p>Начиная с Milvus 3.0.6, отсутствующий ключ или значение <code translate="no">null</code> для подполя, допускающего нулевое значение элемента, импортируется как нулевое значение для данного элемента Struct, поэтому файлы, записанные до добавления подполя, импортируются без него. Наличие значения « <code translate="no">null</code> » в любом другом месте приводит к сбою импорта. Для подполя типа массива значение « <code translate="no">null</code> » представляет собой внутренний массив с нулевым содержимым, а значение « <code translate="no">null</code> » внутри этого массива — внутреннее значение с нулевым содержимым, если это допускается для данного подполя.</p></li>
+<li><p>Начиная с Milvus 3.0.6, импорт из бинарного журнала (например, при восстановлении резервной копии) и импорт из источника моментального снимка отклоняются для коллекций, имеющих подполя с нулевыми элементами или подполя типа скалярного массива.</p></li>
 </ul>
 <p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> поддерживает вышеуказанные формы StructArray во всех поддерживаемых форматах, включая подполя, элементы которых могут принимать значение null, и значения StructArray, допускающие значение null. Используйте те же формы строк в вызовах <code translate="no">add_row()</code> записывающего модуля.</p>
-<p>О ограничениях на стороне схемы см. раздел <a href="/docs/ru/structarray-limits.md#Import-and-storage-limits">«Ограничения StructArray</a>».</p>
+<p>О ограничениях со стороны схемы см. раздел <a href="/docs/ru/structarray-limits.md#Import-and-storage-limits">«Ограничения StructArray</a>».</p>
 <h2 id="Set-up-BulkWriter" class="common-anchor-header">Настройка BulkWriter<button data-href="#Set-up-BulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,7 +267,7 @@ schema.verify()
 <li><strong>LocalBulkWriter</strong>: считывает указанный набор данных и преобразует его в удобный для использования формат.</li>
 <li><strong>RemoteBulkWriter</strong>: выполняет ту же задачу, что и LocalBulkWriter, но дополнительно передает преобразованные файлы данных в указанный удаленный корзину хранилища объектов.</li>
 </ul>
-<p><strong>RemoteBulkWriter</strong> отличается от <strong>LocalBulkWriter</strong> тем, что <strong>RemoteBulkWriter</strong> передаёт преобразованные файлы данных в целевой контейнер объектного хранилища.</p>
+<p><strong>RemoteBulkWriter</strong> отличается от <strong>LocalBulkWriter</strong> тем, что <strong>RemoteBulkWriter</strong> передает преобразованные файлы данных в целевой контейнер объектного хранилища.</p>
 <h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Настройка LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p><strong>LocalBulkWriter</strong> добавляет строки из исходного набора данных и записывает их в локальный файл указанного формата.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -315,9 +315,9 @@ writer = LocalBulkWriter(
 <div class="language-python">
 <p>При создании <strong>LocalBulkWriter</strong> необходимо:</p>
 <ul>
-<li>Ссылаться на созданную схему в <code translate="no">schema</code>.</li>
+<li>Ссылаться на созданную схему в ` <code translate="no">schema</code>`.</li>
 <li>Указать <code translate="no">local_path</code> в качестве каталога вывода.</li>
-<li>Установить для параметра ` <code translate="no">file_type</code> ` тип выходного файла.</li>
+<li>Указать в параметре ` <code translate="no">file_type</code> ` тип выходного файла.</li>
 <li>Если ваш набор данных содержит большое количество записей, рекомендуется сегментировать данные, установив для параметра ` <code translate="no">segment_size</code> ` соответствующее значение.</li>
 </ul>
 <p>Подробные сведения о настройках параметров см. в разделе <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">«LocalBulkWriter»</a> справочника по SDK.</p>
@@ -330,7 +330,7 @@ writer = LocalBulkWriter(
 <li>Указать тип выходного файла в параметре ` <code translate="no">withFileType()</code>`.</li>
 <li>Если ваш набор данных содержит большое количество записей, рекомендуется сегментировать данные, установив для параметра ` <code translate="no">withChunkSize()</code> ` подходящее значение.</li>
 </ul>
-<p>Подробные сведения о настройках параметров см. в разделе «LocalBulkWriter» справочника по SDK.</p>
+<p>Подробные сведения о настройках параметров см. в разделе «LocalBulkWriter» в справочнике по SDK.</p>
 </div>
 <h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Настройка RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -349,8 +349,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>Вместо фиксации добавленных данных в локальный файл <strong>RemoteBulkWriter</strong> фиксирует их в удалённом бакете. Поэтому перед созданием <strong>RemoteBulkWriter</strong> необходимо настроить объект <strong>ConnectParam</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -399,10 +399,10 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>После подготовки параметров подключения вы можете использовать их в <strong>RemoteBulkWriter</strong> следующим образом:</p>
+<p>Как только параметры подключения будут готовы, вы сможете использовать их в <strong>RemoteBulkWriter</strong> следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -432,7 +432,7 @@ writer = RemoteBulkWriter(
 <p>Параметры для создания <strong>RemoteBulkWriter</strong> практически не отличаются от параметров для <strong>LocalBulkWriter</strong>, за исключением параметра ` <code translate="no">connect_param</code>`. Подробные сведения о настройках параметров см. в <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">разделах «RemoteBulkWriter»</a> и <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">«ConnectParam»</a> в справочнике по SDK.</p>
 </div>
 <div class="language-java">
-<p>Параметры для создания <strong>RemoteBulkWriter</strong> практически не отличаются от параметров для <strong>LocalBulkWriter</strong>, за исключением параметра ` <code translate="no">StorageConnectParam</code>`. Подробности о настройках параметров см. в разделах «RemoteBulkWriter» и «StorageConnectParam» в справочнике по SDK.</p>
+<p>Параметры для создания объекта <strong>RemoteBulkWriter</strong> практически не отличаются от параметров для объекта <strong>LocalBulkWriter</strong>, за исключением параметра ` <code translate="no">StorageConnectParam</code>`. Подробные сведения о настройках параметров см. в разделах «RemoteBulkWriter» и «StorageConnectParam» в справочнике по SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Начало записи<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,8 +457,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>В демонстрационных целях в приведённом ниже коде добавляются случайно сгенерированные данные.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -672,14 +672,14 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Чтобы проверить результаты, можно получить фактический путь вывода, выведя на печать свойство <code translate="no">batch_files</code> записывающего модуля.</p>
+<p>Чтобы проверить результаты, можно получить фактический путь вывода, выведя на экран свойство <code translate="no">batch_files</code> объекта записи.</p>
 </div>
 <div class="language-java">
-<p>Чтобы проверить результаты, можно получить фактический путь вывода, выведя на печать метод <code translate="no">getBatchFiles()</code> записывающего модуля.</p>
+<p>Чтобы проверить результаты, можно получить фактический путь вывода, выведя на экран метод <code translate="no">getBatchFiles()</code> объекта записи.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
@@ -700,7 +700,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong> генерирует UUID, создает подпапку с использованием этого UUID в указанном каталоге вывода и помещает все сгенерированные файлы в эту подпапку. <a href="https://assets.zilliz.com/bulk_writer.zip">Нажмите здесь</a>, чтобы загрузить подготовленные примерные данные.</p>
+<p><strong>BulkWriter</strong> генерирует UUID, создает подпапку с использованием UUID в указанном каталоге вывода и помещает все сгенерированные файлы в эту подпапку. <a href="https://assets.zilliz.com/bulk_writer.zip">Нажмите здесь</a>, чтобы загрузить подготовленные примеры данных.</p>
 <p>Возможные структуры папок следующие:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

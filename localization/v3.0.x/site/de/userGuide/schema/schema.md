@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Milvus entspricht ein Sammlungsschema einer Tabelle in einer relationalen Datenbank, die festlegt, wie Milvus die Daten in der Sammlung organisiert. ​</p>
-<p>Ein gut konzipiertes Schema ist unerlässlich, da es das Datenmodell abstrahiert und darüber entscheidet, ob Sie die Geschäftsziele durch eine Suche erreichen können. Da zudem jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, trägt es zur Aufrechterhaltung der Datenkonsistenz und der langfristigen Datenqualität bei. Aus technischer Sicht führt ein klar definiertes Schema zu einer gut organisierten Speicherung der Spaltendaten und einer übersichtlicheren Indexstruktur, was die Suchleistung steigert.​</p>
+<p>Ein gut konzipiertes Schema ist unerlässlich, da es das Datenmodell abstrahiert und darüber entscheidet, ob Sie die Geschäftsziele durch eine Suche erreichen können. Da zudem jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, trägt es zur Aufrechterhaltung der Datenkonsistenz und der langfristigen Datenqualität bei. Aus technischer Sicht führt ein gut definiertes Schema zu einer gut organisierten Speicherung der Spaltendaten und einer übersichtlicheren Indexstruktur, was die Suchleistung steigert.​</p>
 <p>Ein Sammlungsschema verfügt über einen Primärschlüssel, maximal vier Vektorfelder und mehrere Skalarfelder. Das folgende Diagramm veranschaulicht, wie ein Artikel einer Liste von Schemafeldern zugeordnet wird.​</p>
 <p><span class="img-wrapper">
   
@@ -47,7 +47,7 @@ summary: >-
    <span>Schema-Entwurf</span>
   
  </span></p>
-<p>Das Design des Datenmodells eines Suchsystems umfasst die Analyse der geschäftlichen Anforderungen und die Abstraktion von Informationen in ein schemabasiertes Datenmodell. So muss beispielsweise die Suche nach einem Textabschnitt „indiziert“ werden, indem die literale Zeichenfolge durch „Einbettung“ in einen Vektor umgewandelt und die Vektorsuche ermöglicht wird. Über diese grundlegende Anforderung hinaus kann es erforderlich sein, weitere Eigenschaften wie den Veröffentlichungszeitstempel und den Autor zu speichern. Diese Metadaten ermöglichen es, semantische Suchen durch Filterung zu verfeinern, sodass nur Texte zurückgegeben werden, die nach einem bestimmten Datum oder von einem bestimmten Autor veröffentlicht wurden. Sie können diese Skalare auch zusammen mit dem Haupttext abrufen, um das Suchergebnis in der Anwendung darzustellen. Jedem sollte eine eindeutige Kennung zugewiesen werden, um diese Textteile zu organisieren; diese wird als Ganzzahl oder Zeichenkette ausgedrückt. Diese Elemente sind für die Realisierung einer ausgefeilten Suchlogik unerlässlich.​</p>
+<p>Das Design des Datenmodells eines Suchsystems umfasst die Analyse der geschäftlichen Anforderungen und die Abstraktion von Informationen in ein schemabasiertes Datenmodell. So muss beispielsweise die Suche nach einem Textabschnitt „indiziert“ werden, indem die literale Zeichenkette durch „Einbettung“ in einen Vektor umgewandelt und die Vektorsuche ermöglicht wird. Über diese grundlegende Anforderung hinaus kann es erforderlich sein, weitere Eigenschaften wie den Veröffentlichungszeitstempel und den Autor zu speichern. Diese Metadaten ermöglichen es, semantische Suchen durch Filterung zu verfeinern, sodass nur Texte zurückgegeben werden, die nach einem bestimmten Datum oder von einem bestimmten Autor veröffentlicht wurden. Sie können diese Skalare auch zusammen mit dem Haupttext abrufen, um das Suchergebnis in der Anwendung darzustellen. Jedem sollte eine eindeutige Kennung zugewiesen werden, um diese Textabschnitte zu organisieren; diese wird als Ganzzahl oder Zeichenkette ausgedrückt. Diese Elemente sind für die Umsetzung einer ausgefeilten Suchlogik unerlässlich.​</p>
 <p>Lesen Sie den Artikel <a href="/docs/de/schema-hands-on.md">„Schema Design Hands-On“</a>, um zu erfahren, wie Sie ein gut durchdachtes Schema erstellen.</p>
 <h2 id="Create-Schema​" class="common-anchor-header">Schema erstellen​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,11 +64,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der folgende Codeausschnitt veranschaulicht, wie ein Schema erstellt wird.​</p>
+    </button></h2><p>Der folgende Codeausschnitt veranschaulicht, wie man ein Schema erstellt.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -108,9 +108,9 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
       </svg>
     </button></h2><p>Das Primärfeld in einer Sammlung identifiziert eine Entität eindeutig. Es akzeptiert ausschließlich Werte <strong>vom Typ „Int64“</strong> oder <strong>„VARCHAR</strong> “. Die folgenden Codeausschnitte zeigen, wie Sie das Primärfeld hinzufügen.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -154,7 +154,7 @@ export schema='{​
 }'​
 
 </code></pre>
-<p>Beim Hinzufügen eines Feldes können Sie das Feld explizit als Primärfeld kennzeichnen, indem Sie dessen Eigenschaft „ <code translate="no">is_primary</code> “ auf „ <code translate="no">True</code> “ setzen. Ein Primärfeld akzeptiert standardmäßig <strong>Int64-Werte</strong>. In diesem Fall sollte der Wert des Primärfeldes aus Ganzzahlen bestehen, ähnlich wie in <code translate="no">12345</code>. Wenn Sie sich dafür entscheiden, <strong>VARCHAR-Werte</strong> im Primärfeld zu verwenden, sollte der Wert aus Zeichenketten bestehen, ähnlich wie in <code translate="no">my_entity_1234</code>.</p>
+<p>Beim Hinzufügen eines Feldes können Sie das Feld explizit als Primärfeld kennzeichnen, indem Sie dessen Eigenschaft „ <code translate="no">is_primary</code> “ auf „ <code translate="no">True</code> “ setzen. Ein Primärfeld akzeptiert standardmäßig <strong>Int64-Werte</strong>. In diesem Fall sollten die Werte des Primärfeldes Ganzzahlen sein, ähnlich wie in <code translate="no">12345</code>. Wenn Sie sich dafür entscheiden, <strong>VARCHAR-Werte</strong> im Primärfeld zu verwenden, sollten die Werte Zeichenketten sein, ähnlich wie in <code translate="no">my_entity_1234</code>.</p>
 <p>Sie können außerdem die Eigenschaften „ <code translate="no">autoId</code> “ auf <code translate="no">True</code> setzen, damit Milvus die Werte für das Primärfeld beim Einfügen von Daten automatisch zuweist.​</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/primary-field.md">„Primärfeld &amp; AutoID</a>“.​</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Vektorfelder hinzufügen​<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
@@ -172,11 +172,11 @@ export schema='{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vektorfelder akzeptieren verschiedene spärliche und dichte Vektor-Embeddings. In Milvus können Sie einer Sammlung vier Vektorfelder hinzufügen. Die folgenden Codeausschnitte veranschaulichen, wie ein Vektorfeld hinzugefügt wird.​</p>
+    </button></h2><p>Vektorfelder akzeptieren verschiedene spärliche und dichte Vektoreinbettungen. In Milvus können Sie einer Sammlung vier Vektorfelder hinzufügen. Die folgenden Codeausschnitte veranschaulichen, wie ein Vektorfeld hinzugefügt wird.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -217,16 +217,16 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>Der Parameter „ <code translate="no">dim</code> “ in den obigen Codeausschnitten gibt die Dimensionalität der Vektoreinbettungen an, die im Vektorfeld gespeichert werden sollen. Der Wert „ <code translate="no">FLOAT_VECTOR</code> “ gibt an, dass das Vektorfeld eine Liste von 32-Bit-Gleitkommazahlen enthält, die üblicherweise zur Darstellung von Antilogarithmen verwendet werden. Darüber hinaus unterstützt Milvus auch die folgenden Arten von Vektor-Einbettungen:​</p>
+<p>Der Parameter „ <code translate="no">dim</code> “ in den obigen Codeausschnitten gibt die Dimensionalität der Vektoreinbettungen an, die im Vektorfeld gespeichert werden sollen. Der Wert „ <code translate="no">FLOAT_VECTOR</code> “ gibt an, dass das Vektorfeld eine Liste von 32-Bit-Gleitkommazahlen enthält, die üblicherweise zur Darstellung von Antilogarithmen verwendet werden. Darüber hinaus unterstützt Milvus auch die folgenden Arten von Vektoreinbettungen:​</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code>​</p>
-<p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen mit halber Genauigkeit und wird in der Regel bei Deep-Learning- oder GPU-basierten Rechenszenarien eingesetzt, bei denen Speicher oder Bandbreite begrenzt sind.​</p></li>
+<p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen mit halber Genauigkeit und kommt in der Regel bei Deep-Learning- oder GPU-basierten Rechenszenarien zum Einsatz, bei denen Speicher- oder Bandbreitenbeschränkungen bestehen.​</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code>​</p>
-<p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen, die zwar eine reduzierte Genauigkeit, aber denselben Exponentenbereich wie Float32 aufweisen. Dieser Datentyp wird häufig in Deep-Learning-Szenarien verwendet, da er den Speicherbedarf senkt, ohne die Genauigkeit wesentlich zu beeinträchtigen.​</p></li>
+<p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen, die zwar eine reduzierte Genauigkeit, aber denselben Exponentenbereich wie Float32 aufweisen. Dieser Datentyp wird häufig in Deep-Learning-Szenarien verwendet, da er den Speicherbedarf reduziert, ohne die Genauigkeit wesentlich zu beeinträchtigen.​</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code>​</p>
 <p>Ein Vektorfeld dieses Typs enthält eine Liste aus Nullen und Einsen. Diese dienen als kompakte Merkmale zur Darstellung von Daten in Szenarien der Bildverarbeitung und der Informationsgewinnung.​</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code>​</p>
-<p>Ein Vektorfeld dieses Typs enthält eine Liste von Zahlen ungleich Null und deren Sequenznummern, um spärliche Vektoreinbettungen darzustellen.​</p></li>
+<p>Ein Vektorfeld dieses Typs enthält eine Liste von Zahlen ungleich Null und deren Sequenznummern zur Darstellung spärlicher Vektoreinbettungen.​</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields​" class="common-anchor-header">Skalarfelder hinzufügen​<button data-href="#Add-Scalar-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -259,11 +259,11 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>In Milvus können Sie „ <code translate="no">VARCHAR</code> “-Felder zum Speichern von Zeichenketten verwenden. Weitere Informationen zum Feld „ <code translate="no">VARCHAR</code> “ finden Sie unter <a href="/docs/de/string.md">„VarChar-Feld</a>“.​</p>
+    </button></h3><p>In Milvus können Sie „ <code translate="no">VARCHAR</code> “-Felder verwenden, um Zeichenfolgen zu speichern. Weitere Informationen zum Feld „ <code translate="no">VARCHAR</code> “ finden Sie unter <a href="/docs/de/string.md">„VarChar-Feld</a>“.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -320,7 +320,7 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ab Milvus 3.0 können Sie „ <code translate="no">TEXT</code> “-Felder verwenden, um Dokumenttext, Passagen, Protokolle und andere lange Textinhalte zu speichern. Im Gegensatz zu „ <code translate="no">VARCHAR</code> “ erfordert ein „ <code translate="no">TEXT</code> “-Feld keine „ <code translate="no">max_length</code> “. Weitere Informationen zum „ <code translate="no">TEXT</code> “-Feld finden Sie unter <a href="/docs/de/text.md">„Text-Feld</a>“.</p>
+    </button></h3><p>Ab Milvus 3.0 können Sie „ <code translate="no">TEXT</code> “-Felder verwenden, um Dokumenttext, Passagen, Protokolle und andere lange Textinhalte zu speichern. Im Gegensatz zu „ <code translate="no">VARCHAR</code> “ erfordert ein „ <code translate="no">TEXT</code> “-Feld keine „ <code translate="no">max_length</code> “. Weitere Informationen zum Feld „ <code translate="no">TEXT</code> “ finden Sie unter <a href="/docs/de/text.md">„Textfeld</a>“.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_text&quot;</span>,
     datatype=DataType.TEXT,
@@ -343,9 +343,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus unterstützt folgende Zahlentypen: „ <code translate="no">Int8</code> “, „ <code translate="no">Int16</code> “, „ <code translate="no">Int32</code> “, „ <code translate="no">Int64</code> “, „ <code translate="no">Float</code> “ und „ <code translate="no">Double</code> “. Weitere Informationen zu den Zahlenfeldern finden Sie unter <a href="/docs/de/number.md">„Zahlenfeld</a>“.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -399,9 +399,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus unterstützt boolesche Felder. Die folgenden Codeausschnitte veranschaulichen, wie ein boolesches Feld hinzugefügt wird.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -456,9 +456,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Ein JSON-Feld speichert in der Regel halbstrukturierte JSON-Daten. Weitere Informationen zu JSON-Feldern finden Sie unter <a href="/docs/de/use-json-fields.md">„JSON-Feld</a>“.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -512,11 +512,11 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Ein Array-Feld speichert eine Liste von Elementen. Die Datentypen aller Elemente in einem Array-Feld sollten identisch sein. Weitere Informationen zu Array-Feldern finden Sie unter <a href="/docs/de/array_data_type.md">„Array-Feld</a>“.​</p>
+    </button></h3><p>Ein Array-Feld speichert eine Liste von Elementen. Die Datentypen aller Elemente in einem Array-Feld sollten identisch sein. Weitere Informationen zu Array-Feldern finden Sie unter <a href="/docs/de/array_data_type.md">„Array-Feld</a>“.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

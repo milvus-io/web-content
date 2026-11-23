@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يتيح لك Milvus تخزين البيانات المنظمة وفهرستها داخل حقل واحد باستخدام نوع البيانات JSON ( <code translate="no">JSON</code> ). وهذا يتيح إنشاء مخططات مرنة ذات سمات متداخلة، مع السماح في الوقت نفسه بالتصفية الفعالة عبر فهرسة JSON.</p>
+    </button></h1><p>يتيح لك Milvus تخزين البيانات المنظمة وفهرستها داخل حقل واحد باستخدام نوع البيانات " <code translate="no">JSON</code> ". وهذا يتيح إنشاء مخططات مرنة ذات سمات متداخلة، مع السماح في الوقت نفسه بالتصفية الفعالة عبر فهرسة JSON.</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">ما هو حقل JSON؟<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>حقل JSON هو حقل محدد بمخطط في Milvus يخزن بيانات منظمة من نوع المفتاح والقيمة. ويمكن أن تتضمن القيم سلاسل نصية أو أرقامًا أو قيمًا منطقية أو مصفوفات أو كائنات متداخلة بعمق.</p>
+    </button></h2><p>حقل JSON هو حقل محدد بمخطط في Milvus يخزن بيانات منظمة من نوع المفتاح والقيمة. يمكن أن تتضمن القيم سلاسل نصية أو أرقامًا أو قيمًا منطقية أو مصفوفات أو كائنات متداخلة بعمق.</p>
 <p>فيما يلي مثال على الشكل الذي قد يبدو عليه حقل JSON في مستند ما:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">&quot;metadata&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -60,7 +60,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا المثال:</p>
 <ul>
-<li><p><code translate="no">metadata</code> هو حقل JSON المُعرَّف في المخطط.</p></li>
+<li><p><code translate="no">metadata</code> هو حقل JSON المحدد في المخطط.</p></li>
 <li><p>يمكنك تخزين القيم المسطحة (على سبيل المثال <code translate="no">category</code> ، <code translate="no">in_stock</code>)، والمصفوفات (<code translate="no">tags</code>)، والكائنات المتداخلة (<code translate="no">supplier</code>).</p></li>
 </ul>
 <h2 id="Define-a-JSON-field-in-the-schema" class="common-anchor-header">تحديد حقل JSON في المخطط<button data-href="#Define-a-JSON-field-in-the-schema" class="anchor-icon" translate="no">
@@ -490,7 +490,7 @@ curl --request POST \
 <li><p>للاطلاع على القائمة الكاملة، انظر <a href="/docs/ar/use-json-fields.md#Supported-JSON-cast-types">أدناه</a>.</p></li>
 </ul></li>
 </ul>
-<h4 id="Supported-JSON-cast-types" class="common-anchor-header">أنواع التحويل في JSON المدعومة</h4><p>أنواع التحويل لا تميز بين الأحرف الكبيرة والصغيرة. الأنواع التالية مدعومة:</p>
+<h4 id="Supported-JSON-cast-types" class="common-anchor-header">أنواع التحويل JSON المدعومة</h4><p>أنواع التحويل لا تميز بين الأحرف الكبيرة والصغيرة. الأنواع التالية مدعومة:</p>
 <table>
    <tr>
      <th><p>نوع التحويل</p></th>
@@ -719,7 +719,7 @@ indexOpt3 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>المعلمة <code translate="no">json_cast_type</code> إلزامية ويجب أن تكون مطابقة لنوع الإخراج الخاص بوظيفة التحويل.</p></li>
+<li><p>المعلمة <code translate="no">json_cast_type</code> إلزامية ويجب أن تكون مطابقة لنوع إخراج دالة التحويل.</p></li>
 <li><p>إذا فشل التحويل (على سبيل المثال، سلسلة غير رقمية)، يتم تخطي القيمة ولا يتم فهرستها.</p></li>
 </ul>
 </div>
@@ -842,7 +842,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <span class="hljs-built_in">export</span> filterPrice=<span class="hljs-string">&#x27;metadata[&quot;price&quot;] &gt; 50&#x27;</span>
 <span class="hljs-built_in">export</span> filterTags=<span class="hljs-string">&#x27;json_contains(metadata[&quot;tags&quot;], &quot;featured&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لاستخدام هذه التعبيرات في عملية بحث أو استعلام، تأكد مما يلي:</p>
+<p>لاستخدام هذه التعبيرات في عملية بحث أو استعلام، تأكد من:</p>
 <ul>
 <li><p>أنك قمت بإنشاء فهرس لكل حقل متجه.</p></li>
 <li><p>تم تحميل المجموعة في الذاكرة.</p></li>
@@ -907,7 +907,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <li><p>يتم تعريف<strong>حقل JSON</strong> في المخطط. يجب عليك الإعلان عن الحقل صراحةً في المخطط.</p></li>
 <li><p>أما<strong>الحقل الديناميكي</strong> فهو كائن JSON مخفي (<code translate="no">$meta</code>) يقوم تلقائيًا بتخزين أي حقل غير محدد في المخطط.</p></li>
 </ul>
-<p>يدعم كلاهما الهياكل المتداخلة وفهرسة مسار JSON، لكن الحقول الديناميكية أكثر ملاءمةً للهياكل البيانات الاختيارية أو المتطورة.</p>
+<p>يدعم كلاهما الهياكل المتداخلة وفهرسة مسار JSON، لكن الحقول الديناميكية أكثر ملاءمة لهياكل البيانات الاختيارية أو المتطورة.</p>
 <p>يرجى الرجوع إلى " <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a> " للحصول على التفاصيل.</p>
 <h3 id="Are-there-any-limitations-on-the-size-of-a-JSON-field" class="common-anchor-header">هل توجد أي قيود على حجم حقل JSON؟<button data-href="#Are-there-any-limitations-on-the-size-of-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1002,7 +1002,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><ul>
 <li><p><strong>الفهرسة الرقمية</strong>:</p>
-<p>إذا تم إنشاء فهرس باستخدام <code translate="no">json_cast_type=&quot;double&quot;</code> ، فلن تستفيد من هذا الفهرس سوى شروط التصفية الرقمية (على سبيل المثال، <code translate="no">&gt;</code> ، <code translate="no">&lt;</code> ، <code translate="no">== 42</code>). قد تلجأ الشروط غير الرقمية إلى المسح بالقوة الغاشمة.</p></li>
+<p>إذا تم إنشاء فهرس باستخدام <code translate="no">json_cast_type=&quot;double&quot;</code> ، فلن تستفيد من هذا الفهرس سوى شروط التصفية الرقمية (على سبيل المثال، <code translate="no">&gt;</code> ، <code translate="no">&lt;</code> ، <code translate="no">== 42</code>). قد يتم اللجوء إلى المسح بالقوة الغاشمة في حالة الشروط غير الرقمية.</p></li>
 <li><p><strong>فهرسة السلاسل</strong>:</p>
 <p>إذا كان الفهرس يستخدم <code translate="no">json_cast_type=&quot;varchar&quot;</code> ، فلن تستفيد من الفهرس سوى شروط التصفية التي تتضمن سلاسل نصية؛ وقد تلجأ الأنواع الأخرى إلى المسح الشامل.</p></li>
 <li><p><strong>فهرسة المنطقية</strong>:</p>
@@ -1072,4 +1072,4 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا كان تعبير التصفية الخاص بك يستخدم نوعًا مختلفًا عن نوع التحويل ( <code translate="no">json_cast_type</code>) الخاص بالفهرس، <strong>فلن يستخدم</strong> النظام <strong>الفهرس،</strong> وقد يلجأ إلى مسح قوي أبطأ — إذا سمحت البيانات بذلك. للحصول على أفضل أداء، قم دائمًا بمواءمة تعبير التصفية الخاص بك مع نوع التحويل الخاص بالفهرس.</p>
+    </button></h3><p>إذا كان تعبير التصفية الخاص بك يستخدم نوعًا مختلفًا عن نوع التحويل ( <code translate="no">json_cast_type</code>) الخاص بالفهرس، <strong>فلن يستخدم</strong> النظام <strong>الفهرس،</strong> وقد يلجأ إلى مسح قوي (brute-force) أبطأ — إذا سمحت البيانات بذلك. للحصول على أفضل أداء، قم دائمًا بمواءمة تعبير التصفية الخاص بك مع نوع التحويل الخاص بالفهرس.</p>

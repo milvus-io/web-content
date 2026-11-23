@@ -86,7 +86,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>À l’instar du champ primaire dans une base de données relationnelle, une collection dispose d’un champ primaire permettant de distinguer une entité des autres. Chaque valeur du champ primaire est unique au niveau global et correspond à une entité spécifique.</p>
-<p>Comme le montre le tableau ci-dessus, le champ nommé « <strong>id</strong> » sert de champ primaire, et le premier ID ( <strong>0</strong> ) correspond à une entité intitulée « <em>Le taux de mortalité du coronavirus n’est pas important</em> ». Aucune autre entité ne possédera un champ primaire égal à 0.</p>
+<p>Comme le montre le tableau ci-dessus, le champ nommé « <strong>id</strong> » sert de champ primaire, et le premier ID ( <strong>0</strong> ) correspond à une entité intitulée « <em>Le taux de mortalité du coronavirus n’est pas important</em> ». Aucune autre entité ne possédera la valeur 0 dans ce champ primaire.</p>
 <p>Un champ primaire n'accepte que des entiers ou des chaînes de caractères. Lors de l'insertion d'entités, vous devez inclure les valeurs du champ primaire par défaut. Toutefois, si vous avez activé <strong>l'AutoId</strong> lors de la création de la collection, Milvus générera ces valeurs lors de l'insertion des données. Dans ce cas, excluez les valeurs du champ primaire des entités à insérer.</p>
 <p>Pour plus d’informations, veuillez vous reporter à la section « <a href="/docs/fr/primary-field.md">Champ principal et AutoId</a> ».</p>
 <h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
@@ -175,7 +175,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/fr/use-partition-key.md">Utilisation de la clé de partition</a></p></li>
 <li><p><a href="/docs/fr/mmap.md">Utilisation de mmap</a></p></li>
-<li><p><a href="/docs/fr/clustering-compaction.md">Regroupement en grappes Compactage</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -244,7 +243,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vous pouvez définir des fonctions permettant à Milvus de dériver des champs lors de la création d’une collection. Par exemple, la fonction de recherche en texte intégral utilise une fonction définie par l’utilisateur pour dériver un champ vectoriel clairsemé à partir d’un champ varchar spécifique. Pour plus d’informations sur la recherche en texte intégral, consultez la section <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p>
+    </button></h2><p>Vous pouvez définir des fonctions permettant à Milvus de dériver des champs lors de la création d’une collection. Par exemple, la fonction de recherche en texte intégral utilise une fonction définie par l’utilisateur pour dériver un champ de vecteur clairsemé à partir d’un champ varchar spécifique. Pour plus d’informations sur la recherche en texte intégral, consultez la <a href="/docs/fr/full-text-search.md">section Recherche en texte intégral</a>.</p>
 <h2 id="Consistency-Level" class="common-anchor-header">Niveau de cohérence<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

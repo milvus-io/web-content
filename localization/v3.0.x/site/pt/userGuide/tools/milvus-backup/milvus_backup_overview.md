@@ -67,7 +67,7 @@ title: Milvus Backup
       </svg>
     </button></h2><ul>
 <li>Utilize um binário do Backup e exemplos de configuração da mesma versão. O <a href="/docs/pt/milvus_backup_cli.md#Obtain-Milvus-Backup">guia 0.5.x</a> refere a versão 0.5.16; o <a href="/docs/pt/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">guia atual</a> refere a versão 0.6.0.</li>
-<li>Assegure o acesso de rede ao Milvus, ao seu armazenamento e ao destino do backup. As operações de instantâneo também exigem que o servidor Milvus tenha acesso ao repositório de backup.</li>
+<li>Assegure o acesso de rede ao Milvus, ao seu armazenamento e ao destino do backup. As operações de instantâneo também exigem que o servidor Milvus consiga aceder ao repositório de backup.</li>
 <li>Verifique a compatibilidade do servidor abaixo. O Go só é necessário quando se compila a partir do código-fonte: versão 1.25 ou posterior para o Backup 0.5.16 e 1.26 ou posterior para a versão 0.6.0.</li>
 </ul>
 <h2 id="Architecture" class="common-anchor-header">Arquitetura<button data-href="#Architecture" class="anchor-icon" translate="no">
@@ -103,7 +103,7 @@ title: Milvus Backup
 </tbody>
 </table>
 <p>Um diretório de backup contém metadados e os ficheiros exigidos pelo seu formato. Preserve o diretório completo ao arquivá-lo ou movê-lo. Não presuma que um backup de instantâneo utilize o layout do diretório binlog.</p>
-<p>Na versão 0.6.0, as predefinições do « <code translate="no">create --for</code> » (Formato de backup) configuram opções específicas para cada finalidade: « <code translate="no">clone</code> » mantém o formato escolhido, enquanto « <code translate="no">archive</code> » e « <code translate="no">secondary</code> » requerem o binlog. Um servidor secundário também requer uma topologia de replicação configurada; a migração normal entre instâncias não requer um servidor secundário. Consulte <a href="/docs/pt/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Escolher um formato de backup ou finalidade</a>».</p>
+<p>Na versão 0.6.0, as predefinições do « <code translate="no">create --for</code> » (Replicação de dados) configuram opções específicas para cada finalidade: « <code translate="no">clone</code> » mantém o formato escolhido, enquanto « <code translate="no">archive</code> » e « <code translate="no">secondary</code> » requerem o binlog. Um servidor secundário também requer uma topologia de replicação configurada; a migração normal entre instâncias não requer um servidor secundário. Consulte <a href="/docs/pt/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Escolher um formato ou finalidade de cópia de segurança</a>».</p>
 <p>A versão 0.6.0 do Backup ignora as coleções externas durante o backup. O sucesso de uma tarefa não implica que os dados das coleções externas tenham sido incluídos.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Matriz de compatibilidade<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"

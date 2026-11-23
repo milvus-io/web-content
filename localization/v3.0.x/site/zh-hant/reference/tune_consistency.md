@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一個將儲存與運算分離的系統。<strong>串流節點會將</strong>所有寫入操作追加至預寫日誌（WAL），並保留<strong>不斷增長的資料</strong>——即仍位於 WAL 中且尚未持久化的<strong>資料</strong>。 恢復流程會將增長中的資料轉換為<strong>歷史資料</strong>（封存於 MinIO/S3 等物件儲存中的封存區段），並由<strong>查詢節點</strong>提供服務。 每項搜尋或查詢請求皆由託管該集合 WAL 的串流節點上的<strong>查詢委派器</strong>接收：該委派器會生成查詢計畫、在本地執行「增長中資料」部分、將「歷史資料」部分轉發至相關查詢節點，並在返回結果前進行合併。詳細資訊請參閱<a href="/docs/zh-hant/streaming_service.md">串流服務</a>。</p>
-<p>為了提供一致性保證，Milvus 會為每則訊息分配一個「時間戳記預言機」（TSO）時間戳記，用以決定其在 WAL 中的順序，並持續將同步時間戳記與資料訊息一同插入 WAL 中。 每當接收到同步時間戳（syncTs）時，系統會將其記錄為 ServiceTime，這表示該 ServiceTime 之前的所有資料皆可供查詢使用。基於 ServiceTime，Milvus 提供保證時間戳（GuaranteeTs），以滿足使用者對一致性與可用性的不同需求。 使用者可透過在搜尋請求中指定 GuaranteeTs，告知委派者需將特定時間點之前的数据納入搜尋範圍。</p>
+    </button></h2><p>Milvus 是一個將儲存與運算分離的系統。<strong>串流節點會將</strong>所有寫入操作追加至預寫日誌（WAL），並保留<strong>不斷增長的資料</strong>——即仍位於 WAL 中且尚未持久化的<strong>資料</strong>。 恢復流程會將增長中的資料轉換為<strong>歷史資料</strong>（封存於 MinIO/S3 等物件儲存中的封存區段），並由<strong>查詢節點</strong>提供服務。 每項搜尋或查詢請求皆由託管該集合 WAL 的串流節點上的<strong>查詢委派器</strong>接收：該委派器會生成查詢計畫、在本地執行「增長中資料」部分、將「歷史資料」部分轉發至相關的查詢節點，並在返回結果前進行合併。詳細資訊請參閱<a href="/docs/zh-hant/streaming_service.md">串流服務</a>。</p>
+<p>為了提供一致性保證，Milvus 會為每則訊息指派一個「時間戳記預言者」（TSO）時間戳記，用以決定其在 WAL 中的順序，並持續將同步時間戳記與資料訊息一同插入 WAL 中。 每當接收到同步時間戳（syncTs）時，系統會將其記錄為 ServiceTime，這表示該 ServiceTime 之前的所有資料皆可供查詢使用。基於 ServiceTime，Milvus 提供保證時間戳（GuaranteeTs），以滿足使用者對一致性與可用性的不同需求。 使用者可透過在搜尋請求中指定 GuaranteeTs，告知委派者需將特定時間點之前的数据納入搜尋範圍。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
@@ -79,7 +79,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在建立集合時，以及執行搜尋和查詢時，設定不同的一致性等級。</p>
+    </button></h2><p>您可以在建立集合時設定一致性等級，在集合建立後進行變更，或針對個別搜尋和查詢進行覆寫。</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">在建立集合時設定一致性等級<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -166,6 +166,57 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> 參數的可能值包括：<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 以及<code translate="no">Session</code> 。</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">變更集合的一致性層級<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以透過修改現有集合的<code translate="no">consistency_level</code> 屬性來變更其一致性層級。新的一致性層級將套用至後續針對該集合且未自行指定一致性層級的搜尋與查詢，且進行此變更無需釋放該集合。以下程式碼範例將一致性層級變更為「<strong>最終（Eventually）」</strong>。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">在搜尋中設定一致性層級<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,7 +232,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以隨時變更特定搜尋的一致性等級。以下程式碼範例將一致性等級重設為「<strong>Bounded</strong>」。此變更僅適用於當前的搜尋請求。</p>
+    </button></h3><p>您可以隨時變更特定搜尋的一致性層級。以下程式碼範例將一致性層級設回「<strong>Bounded</strong>」。此變更僅適用於當前的搜尋請求。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -231,7 +282,7 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此參數亦適用於混合搜尋及搜尋迭代器。<code translate="no">consistency_level</code> 參數的可能值包括<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 以及<code translate="no">Session</code> 。</p>
+<p>此參數亦適用於混合搜尋及搜尋迭代器。<code translate="no">consistency_level</code> 參數的可能值包括：<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 以及<code translate="no">Session</code> 。</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">在查詢中設定一致性層級<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -247,7 +298,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以隨時變更特定搜尋的一致性等級。以下程式碼範例將一致性等級設定為「<strong>eventually</strong> 」。此設定僅適用於當前的查詢請求。</p>
+    </button></h3><p>您可以隨時變更特定搜尋的一致性等級。以下程式碼範例將一致性等級設定為「<strong>Eventually</strong>」。此設定僅適用於當前的查詢請求。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

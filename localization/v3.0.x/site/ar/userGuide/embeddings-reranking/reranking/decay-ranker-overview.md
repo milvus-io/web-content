@@ -4,7 +4,7 @@ title: نظرة عامة على Decay RankerCompatible with Milvus 2.6.x
 summary: >-
   في البحث المتجهي التقليدي، يتم ترتيب النتائج بناءً على تشابه المتجهات فقط — أي
   مدى تطابق المتجهات في الفضاء الرياضي. لكن في التطبيقات العملية، غالبًا ما
-  يعتمد ما يجعل المحتوى ذا صلة حقيقية على عوامل تتجاوز مجرد التشابه الدلالي.
+  يعتمد ما يجعل المحتوى ذا صلة حقيقية على عوامل أخرى غير مجرد التشابه الدلالي.
 beta: Milvus 2.6.x
 ---
 <h1 id="Decay-Ranker-Overview" class="common-anchor-header">نظرة عامة على Decay Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Decay-Ranker-Overview" class="anchor-icon" translate="no">
@@ -26,11 +26,11 @@ beta: Milvus 2.6.x
 <p>تأمل هذه السيناريوهات اليومية:</p>
 <ul>
 <li><p>بحث إخباري حيث يجب أن يحتل مقال الأمس مرتبة أعلى من مقال مشابه نُشر قبل ثلاث سنوات</p></li>
-<li><p>أداة البحث عن المطاعم التي تعطي الأولوية للمطاعم التي تبعد 5 دقائق على تلك التي تتطلب 30 دقيقة بالسيارة</p></li>
+<li><p>أداة البحث عن المطاعم التي تعطي الأولوية للمطاعم التي تبعد 5 دقائق عنك على تلك التي تتطلب 30 دقيقة بالسيارة</p></li>
 <li><p>منصة للتجارة الإلكترونية تبرز المنتجات الشائعة حتى لو كانت أقل تشابهاً بقليل مع استعلام البحث</p></li>
 </ul>
 <p>تشترك جميع هذه السيناريوهات في حاجة مشتركة: تحقيق التوازن بين تشابه المتجهات وعوامل رقمية أخرى مثل الوقت أو المسافة أو الشعبية.</p>
-<p>تعالج أدوات ترتيب التناقص في Milvus هذه الحاجة من خلال تعديل تصنيفات البحث بناءً على قيم الحقول الرقمية. فهي تتيح لك تحقيق التوازن بين تشابه المتجهات و«حداثة» المعلومات أو «قربها» أو الخصائص الرقمية الأخرى لبياناتك، مما يخلق تجارب بحث أكثر بديهية وذات صلة بالسياق.</p>
+<p>تعالج أدوات ترتيب التناقص في Milvus هذه الحاجة من خلال تعديل تصنيفات البحث بناءً على قيم الحقول الرقمية. فهي تتيح لك تحقيق التوازن بين تشابه المتجهات و«حداثة» المعلومات أو «قربها» أو غير ذلك من الخصائص الرقمية لبياناتك، مما يخلق تجارب بحث أكثر بديهية وذات صلة بالسياق.</p>
 <h2 id="Usage-notes" class="common-anchor-header">ملاحظات حول الاستخدام<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ beta: Milvus 2.6.x
 <li><p>لا يمكن استخدام الترتيب التنازلي مع عمليات البحث المجمعة.</p></li>
 <li><p>يجب أن يكون الحقل المستخدم لترتيب التناقص رقميًا (<code translate="no">INT8</code> ، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code> ، <code translate="no">FLOAT</code> ، أو <code translate="no">DOUBLE</code>).</p></li>
 <li><p>لا يمكن لكل أداة تصنيف التضاؤل استخدام سوى حقل رقمي واحد.</p></li>
-<li><p><strong>اتساق وحدة الوقت</strong>: عند استخدام ترتيب التناقص القائم على الوقت، يجب أن تتطابق وحدات المعلمات <code translate="no">origin</code> و <code translate="no">scale</code> و <code translate="no">offset</code> مع الوحدات المستخدمة في بيانات المجموعة:</p>
+<li><p><strong>اتساق وحدة الوقت</strong>: عند استخدام ترتيب التناقص القائم على الوقت، يجب أن تتطابق وحدات المعلمات <code translate="no">origin</code> و <code translate="no">scale</code> و <code translate="no">offset</code> مع الوحدات المستخدمة في بيانات المجموعة الخاصة بك:</p>
 <ul>
 <li><p>إذا كانت المجموعة تخزن الطوابع الزمنية <strong>بالثواني</strong>، فاستخدم الثواني لجميع المعلمات</p></li>
 <li><p>إذا كانت المجموعة تخزن الطوابع الزمنية <strong>بالمللي ثانية</strong>، فاستخدم المللي ثانية لجميع المعلمات</p></li>
@@ -156,7 +156,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>دعونا نرى ترتيب التناقص في سيناريو عملي — البحث عن <strong>«أوراق بحثية في مجال الذكاء الاصطناعي»</strong> مع التناقص القائم على الوقت:</p>
 <div class="alert note">
-<p>في هذا المثال، تعكس درجات التناقص كيف تتضاءل الصلة بالموضوع بمرور الوقت — حيث تحصل الأوراق البحثية الأحدث على درجات أقرب إلى 1.0، بينما تحصل الأوراق الأقدم على درجات أقل. يتم حساب هذه القيم باستخدام أداة ترتيب تناقص محددة. لمزيد من التفاصيل، راجع <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">«اختيار أداة ترتيب التناقص المناسبة</a>».</p>
+<p>في هذا المثال، تعكس درجات التناقص كيف تتضاءل الصلة بالموضوع بمرور الوقت — حيث تحصل الأوراق البحثية الأحدث على درجات أقرب إلى 1.0، بينما تحصل الأوراق الأقدم على درجات أقل. يتم حساب هذه القيم باستخدام أداة ترتيب التناقص المحددة. لمزيد من التفاصيل، راجع <a href="/docs/ar/decay-ranker-overview.md#Choose-the-right-decay-ranker">«اختيار أداة ترتيب التناقص المناسبة</a>».</p>
 </div>
 <table>
    <tr>
@@ -187,7 +187,7 @@ beta: Milvus 2.6.x
      <td>4</td>
    </tr>
    <tr>
-     <td><p>الورقة C</p></td>
+     <td><p>الورقة ج</p></td>
      <td><p>متوسط</p></td>
      <td><p>0.75 (<code translate="no">COSINE</code>)</p></td>
      <td><p>قبل يوم واحد</p></td>
@@ -205,11 +205,11 @@ beta: Milvus 2.6.x
      <td>3</td>
    </tr>
 </table>
-<p>بدون إعادة الترتيب حسب التناقص، كانت الورقة ب ستحتل المرتبة الأعلى بناءً على التشابه المتجهي البحت (0.92). ومع ذلك، عند تطبيق إعادة الترتيب حسب التناقص:</p>
+<p>بدون إعادة الترتيب حسب التناقص، كانت الورقة "ب" ستحتل المرتبة الأعلى بناءً على التشابه المتجهي البحت (0.92). ومع ذلك، عند تطبيق إعادة الترتيب حسب التناقص:</p>
 <ul>
 <li><p>تقفز الورقة C إلى المرتبة الأولى على الرغم من تشابهها المتوسط لأنها حديثة جدًا (نُشرت أمس)</p></li>
 <li><p>تنخفض الورقة «ب» إلى المرتبة الرابعة على الرغم من تشابهها الممتاز لأنها قديمة نسبيًا</p></li>
-<li><p>تستخدم الورقة د تشابه COSINE، لذا تُستخدم درجتها البالغة 0.76 مباشرةً قبل تطبيق الترتيب التنازلي</p></li>
+<li><p>تستخدم الورقة د تشابه COSINE، لذا تُستخدم نتيجتها البالغة 0.76 مباشرةً قبل تطبيق الترتيب التنازلي</p></li>
 </ul>
 <h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">اختر أداة إعادة الترتيب بالتناقص المناسبة<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -253,7 +253,7 @@ beta: Milvus 2.6.x
      <td><p>في أداة البحث عن الأحداث، لا تظهر الأحداث التي تتجاوز فترة أسبوعين في المستقبل على الإطلاق</p></td>
    </tr>
 </table>
-<p>للحصول على معلومات تفصيلية حول كيفية حساب كل مصنف تضاؤل للنتائج وأنماط التضاؤل المحددة، يرجى الرجوع إلى الوثائق المخصصة:</p>
+<p>للحصول على معلومات تفصيلية حول كيفية حساب كل مصنف تضاؤل للدرجات وأنماط التضاؤل المحددة، يرجى الرجوع إلى الوثائق المخصصة:</p>
 <ul>
 <li><p><a href="/docs/ar/gaussian-decay.md">التناقص الغاوسي</a></p></li>
 <li><p><a href="/docs/ar/exponential-decay.md">التناقص الأسي</a></p></li>
@@ -406,7 +406,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -436,7 +475,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">params.reranker</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>يحدد طريقة إعادة الترتيب المطلوب استخدامها.</p><p>يجب ضبطه على " <code translate="no">"decay"</code> " لتمكين وظيفة ترتيب التناقص.</p></td>
+     <td><p>يحدد طريقة إعادة الترتيب المطلوب استخدامها.</p><p>يجب ضبطه على " <code translate="no">"decay"</code> " لتمكين وظيفة الترتيب التنازلي.</p></td>
      <td><p><code translate="no">"decay"</code></p></td>
    </tr>
    <tr>
@@ -454,13 +493,13 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">params.scale</code></p></td>
      <td><p>نعم</p></td>
-     <td><p>المسافة أو الوقت الذي تنخفض عنده الصلة إلى القيمة <code translate="no">decay</code>. يتحكم في مدى سرعة انخفاض الصلة.</p><p>بالنسبة للتناقص القائم على الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p><p>تؤدي القيم الأكبر إلى انخفاض تدريجي في الصلة؛ بينما تؤدي القيم الأصغر إلى انخفاض أكثر حدة.</p></td>
-     <td><ul><li><p>بالنسبة للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">7 * 24 * 60 * 60</code> لمدة 7 أيام)</p></li><li><p>بالنسبة للمسافة: بالمتر (على سبيل المثال، <code translate="no">5000</code> لمسافة 5 كم)</p></li></ul></td>
+     <td><p>المسافة أو الوقت الذي تنخفض عنده الصلة إلى القيمة <code translate="no">decay</code>. يتحكم في مدى سرعة انخفاض الصلة.</p><p>بالنسبة للتناقص القائم على الوقت، يجب أن تتطابق وحدة الوقت مع بيانات التجميع الخاصة بك.</p><p>تؤدي القيم الأكبر إلى انخفاض تدريجي في الصلة؛ بينما تؤدي القيم الأصغر إلى انخفاض أكثر حدة.</p></td>
+     <td><ul><li><p>بالنسبة للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">7 * 24 * 60 * 60</code> لمدة 7 أيام)</p></li><li><p>بالنسبة للمسافة: أمتار (على سبيل المثال، <code translate="no">5000</code> لمسافة 5 كم)</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">params.offset</code></p></td>
      <td><p>لا</p></td>
-     <td><p>يُنشئ "منطقة خالية من التناقص" حول <code translate="no">origin</code> حيث تحتفظ العناصر بدرجاتها الكاملة (درجة التناقص = 1.0).</p><p>بالنسبة للتناقص القائم على الوقت، يجب أن تتطابق وحدة الوقت مع بيانات المجموعة الخاصة بك.</p><p>تحتفظ العناصر الواقعة ضمن هذا النطاق من <code translate="no">origin</code> بأقصى درجة من الصلة.</p></td>
+     <td><p>يُنشئ "منطقة خالية من التناقص" حول <code translate="no">origin</code> حيث تحتفظ العناصر بدرجاتها الكاملة (درجة التناقص = 1.0).</p><p>بالنسبة للتناقص القائم على الوقت، يجب أن تتطابق وحدة الوقت مع بيانات مجموعتك.</p><p>تحتفظ العناصر الواقعة ضمن هذا النطاق من <code translate="no">origin</code> بأقصى درجة من الصلة.</p></td>
      <td><ul><li><p>بالنسبة للوقت: الفترة بالثواني (على سبيل المثال، <code translate="no">24 * 60 * 60</code> لمدة يوم واحد)</p></li><li><p>بالنسبة للمسافة: بالمتر (على سبيل المثال، <code translate="no">500</code> لمسافة 500 متر)</p></li></ul></td>
    </tr>
    <tr>
@@ -536,16 +575,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -616,5 +657,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

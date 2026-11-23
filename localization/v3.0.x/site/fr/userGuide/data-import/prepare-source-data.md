@@ -61,8 +61,8 @@ summary: >-
 <p>Pour plus d’informations, consultez <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> dans la documentation de référence du SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -232,7 +232,7 @@ schema.verify()
 </thead>
 <tbody>
 <tr><td>JSON, JSONL</td><td>La valeur du champ est une liste d’objets, à raison d’un par élément Struct, indexée par le nom du sous-champ : <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>La cellule contient le même texte JSON que le format JSON. La chaîne « <code translate="no">nullkey</code> » configurée pour la tâche d’importation ou une <code translate="no">null</code> JSON indique une valeur StructArray nulle.</td></tr>
+<tr><td>CSV</td><td>La cellule contient le même texte JSON que le format JSON. La chaîne « <code translate="no">nullkey</code> » configurée pour la tâche d’importation ou une chaîne JSON de type « <code translate="no">null</code> » indique une valeur StructArray nulle.</td></tr>
 <tr><td>Parquet</td><td>Une colonne par champ StructArray de type <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un enfant struct par sous-champ. Un sous-champ scalaire est un enfant scalaire, un sous-champ vectoriel est une liste de son type d’élément, tel que <code translate="no">list&lt;float32&gt;</code>, et un sous-champ de type tableau (Milvus 3.0.6 et versions ultérieures) est un enfant de type <code translate="no">list&lt;T&gt;</code>.</td></tr>
 <tr><td>NumPy</td><td>Non pris en charge. Les fichiers NumPy contiennent un fichier par champ de niveau supérieur et ne disposent d’aucune représentation pour un champ StructArray. Utilisez des fichiers JSON, CSV ou Parquet pour les collections comportant un champ StructArray.</td></tr>
 </tbody>
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p>Un <strong>LocalBulkWriter</strong> ajoute les lignes du jeu de données source et les enregistre dans un fichier local au format spécifié.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -316,9 +316,9 @@ writer = LocalBulkWriter(
 <p>Lors de la création d’un <strong>LocalBulkWriter</strong>, vous devez :</p>
 <ul>
 <li>Référencer le schéma créé dans ` <code translate="no">schema</code>`.</li>
-<li>Définir ` <code translate="no">local_path</code> ` sur le répertoire de sortie.</li>
-<li>Définir ` <code translate="no">file_type</code> ` sur le type de fichier de sortie.</li>
-<li>Si votre jeu de données contient un grand nombre d'enregistrements, il est recommandé de segmenter vos données en définissant <code translate="no">segment_size</code> sur une valeur appropriée.</li>
+<li>Définir <code translate="no">local_path</code> sur le répertoire de sortie.</li>
+<li>Définir <code translate="no">file_type</code> sur le type de fichier de sortie.</li>
+<li>Si votre jeu de données contient un grand nombre d'enregistrements, il est conseillé de segmenter vos données en définissant <code translate="no">segment_size</code> sur une valeur appropriée.</li>
 </ul>
 <p>Pour plus de détails sur les paramètres, reportez-vous à la section <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> dans la documentation de référence du SDK.</p>
 </div>
@@ -328,7 +328,7 @@ writer = LocalBulkWriter(
 <li>Référencer le schéma créé dans ` <code translate="no">CollectionSchema()</code>`.</li>
 <li>Définir le répertoire de sortie dans ` <code translate="no">withLocalPath()</code>`.</li>
 <li>Définir le type de fichier de sortie dans ` <code translate="no">withFileType()</code>`.</li>
-<li>Si votre jeu de données contient un grand nombre d'enregistrements, il est recommandé de segmenter vos données en définissant <code translate="no">withChunkSize()</code> sur une valeur appropriée.</li>
+<li>Si votre ensemble de données contient un grand nombre d'enregistrements, il est recommandé de segmenter vos données en définissant <code translate="no">withChunkSize()</code> sur une valeur appropriée.</li>
 </ul>
 <p>Pour plus de détails sur les paramètres, reportez-vous à la section LocalBulkWriter dans la documentation du SDK.</p>
 </div>
@@ -347,10 +347,10 @@ writer = LocalBulkWriter(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Au lieu d’enregistrer les données ajoutées dans un fichier local, un <strong>RemoteBulkWriter</strong> les enregistre dans un compartiment distant. Vous devez donc configurer un objet <strong>ConnectParam</strong> avant de créer un <strong>RemoteBulkWriter</strong>.</p>
+    </button></h3><p>Au lieu d'enregistrer les données ajoutées dans un fichier local, un <strong>RemoteBulkWriter</strong> les enregistre dans un compartiment distant. Vous devez donc configurer un objet <strong>ConnectParam</strong> avant de créer un <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -401,8 +401,8 @@ writer = RemoteBulkWriter(
 <button class="copy-code-btn"></button></code></pre>
 <p>Une fois les paramètres de connexion prêts, vous pouvez les référencer dans le <strong>RemoteBulkWriter</strong> comme suit :</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -432,7 +432,7 @@ writer = RemoteBulkWriter(
 <p>Les paramètres de création d’un <strong>RemoteBulkWriter</strong> sont pratiquement identiques à ceux d’un <strong>LocalBulkWriter</strong>, à l’exception de <code translate="no">connect_param</code>. Pour plus de détails sur la configuration des paramètres, reportez-vous aux sections <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> dans la documentation de référence du SDK.</p>
 </div>
 <div class="language-java">
-<p>Les paramètres de création d’un <strong>RemoteBulkWriter</strong> sont pratiquement identiques à ceux d’un <strong>LocalBulkWriter</strong>, à l’exception de <code translate="no">StorageConnectParam</code>. Pour plus de détails sur la configuration des paramètres, consultez les sections RemoteBulkWriter et StorageConnectParam dans la documentation de référence du SDK.</p>
+<p>Les paramètres de création d’un <strong>RemoteBulkWriter</strong> sont pratiquement identiques à ceux d’un <strong>LocalBulkWriter</strong>, à l’exception de <code translate="no">StorageConnectParam</code>. Pour plus de détails sur la configuration des paramètres, reportez-vous aux sections RemoteBulkWriter et StorageConnectParam dans la documentation de référence du SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Lancer l’écriture<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,8 +457,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>À des fins de démonstration, le code suivant ajoute des données générées aléatoirement.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -678,8 +678,8 @@ writer = RemoteBulkWriter(
 <p>Pour vérifier les résultats, vous pouvez obtenir le chemin de sortie réel en affichant la méthode ` <code translate="no">getBatchFiles()</code> ` de l'éditeur.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 

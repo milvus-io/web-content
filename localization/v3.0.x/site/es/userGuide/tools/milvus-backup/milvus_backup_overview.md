@@ -22,7 +22,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h1><p>Milvus Backup realiza copias de seguridad de las colecciones de Milvus y las restaura en la misma instancia o en otra. Ofrece una interfaz de línea de comandos (CLI) y una API HTTP.</p>
-<p>Milvus Backup <strong>0.6.0</strong> incorpora copias de seguridad de instantáneas para Milvus 3.0, un esquema de configuración v2 con versiones y ajustes preestablecidos específicos para crear copias de seguridad. La compatibilidad oficial con la copia de seguridad y la restauración para Milvus 3.0 comienza con <strong>la versión Milvus 3.0.1</strong>.</p>
+<p>Milvus Backup <strong>0.6.0</strong> incorpora copias de seguridad de instantáneas para Milvus 3.0, un esquema de configuración v2 con versiones y ajustes preestablecidos específicos para la creación de copias de seguridad. La compatibilidad oficial con la copia de seguridad y la restauración para Milvus 3.0 comienza con <strong>la versión Milvus 3.0.1</strong>.</p>
 <h2 id="Choose-your-guide" class="common-anchor-header">Elige tu guía<button data-href="#Choose-your-guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +67,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li>Utiliza un binario de Backup y ejemplos de configuración de la misma versión. La <a href="/docs/es/milvus_backup_cli.md#Obtain-Milvus-Backup">guía 0.5.x</a> se basa en la versión 0.5.16; la <a href="/docs/es/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">guía actual</a> se basa en la versión 0.6.0.</li>
+<li>Utilice un binario de Backup y ejemplos de configuración de la misma versión. La <a href="/docs/es/milvus_backup_cli.md#Obtain-Milvus-Backup">guía 0.5.x</a> se basa en la versión 0.5.16; la <a href="/docs/es/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">guía actual</a> se basa en la versión 0.6.0.</li>
 <li>Proporcione acceso de red a Milvus, a su almacenamiento y al destino de la copia de seguridad. Las operaciones de instantáneas también requieren que el servidor Milvus pueda acceder al almacén de copias de seguridad.</li>
 <li>Comprueba la compatibilidad del servidor a continuación. Go solo es necesario cuando se compila desde el código fuente: versión 1.25 o posterior para Backup 0.5.16, y 1.26 o posterior para 0.6.0.</li>
 </ul>
@@ -99,12 +99,12 @@ title: Milvus Backup
 </thead>
 <tbody>
 <tr><td><code translate="no">snapshot</code></td><td>Milvus exporta un paquete de instantáneas de la colección. Milvus Backup registra la información del paquete, y la restauración importa el paquete a través de Milvus. El servidor gestiona la estructura de datos resultante.</td></tr>
-<tr><td><code translate="no">binlog</code></td><td>Milvus Backup copia los archivos de datos y los metadatos de la colección; a continuación, recrea las colecciones e importa los datos de la copia de seguridad durante la restauración.</td></tr>
+<tr><td><code translate="no">binlog</code></td><td>Milvus Backup copia los archivos de datos y los metadatos de la colección; a continuación, vuelve a crear las colecciones e importa los datos de la copia de seguridad durante la restauración.</td></tr>
 <tr><td><code translate="no">auto</code></td><td>Selecciona el formato en función de las características compatibles con el servidor. En Milvus 3.0, selecciona «instantánea».</td></tr>
 </tbody>
 </table>
 <p>Un directorio de copia de seguridad contiene metadatos y los archivos requeridos por su formato. Conserva el directorio completo al archivarlo o moverlo. No des por sentado que una copia de seguridad de instantánea utiliza la estructura del directorio binlog.</p>
-<p>En la versión 0.6.0, los ajustes preestablecidos de « <code translate="no">create --for</code> » configuran opciones específicas para cada finalidad: « <code translate="no">clone</code> » mantiene el formato elegido, mientras que « <code translate="no">archive</code> » y « <code translate="no">secondary</code> » requieren binlog. Un servidor secundario también requiere una topología de replicación configurada; la migración ordinaria entre instancias no requiere un servidor secundario. Véase <a href="/docs/es/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Elegir un formato de copia de seguridad o una finalidad</a>».</p>
+<p>En la versión 0.6.0, los ajustes preestablecidos de « <code translate="no">create --for</code> » configuran opciones específicas para cada finalidad: « <code translate="no">clone</code> » mantiene el formato elegido, mientras que « <code translate="no">archive</code> » y « <code translate="no">secondary</code> » requieren el binlog. Un servidor secundario también requiere una topología de replicación configurada; la migración ordinaria entre instancias no requiere un servidor secundario. Véase <a href="/docs/es/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«Elegir un formato de copia de seguridad o una finalidad</a>».</p>
 <p>La versión 0.6.0 de Backup omite las colecciones externas durante la copia de seguridad. El hecho de que una tarea se haya completado con éxito no implica que se hayan incluido los datos de las colecciones externas.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Matriz de compatibilidad<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -136,7 +136,7 @@ title: Milvus Backup
 <tr><td>Milvus v2.6.x</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
 </tbody>
 </table>
-<p>Antes de realizar una migración entre versiones, comprueba la versión de origen, la versión de destino y el formato de copia de seguridad con la <a href="https://github.com/zilliztech/milvus-backup/tree/v0.6.0">documentación de la versión de Backup</a>. Estas guías no amplían la matriz heredada a combinaciones que no figuran en la lista.</p>
+<p>Antes de realizar una migración entre versiones, comprueba la versión de origen, la versión de destino y el formato de copia de seguridad consultando la <a href="https://github.com/zilliztech/milvus-backup/tree/v0.6.0">documentación de la versión de Backup</a>. Estas guías no amplían la matriz heredada a combinaciones que no figuran en la lista.</p>
 <h2 id="Release-notes" class="common-anchor-header">Notas de la versión<button data-href="#Release-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

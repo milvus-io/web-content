@@ -287,7 +287,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">ttl_field</code></p></td>
-     <td><p>اسم حقل " <code translate="no">TIMESTAMPTZ</code> " الذي يخزن الطابع الزمني المطلق لانتهاء صلاحية كل كيان (TTL على مستوى الكيان). تنتهي صلاحية كل كيان عندما يصل الوقت الفعلي إلى القيمة المخزنة في هذا الحقل؛ ويشير وجود قيمة " <code translate="no">NULL</code> " في الحقل إلى أن الكيان لا تنتهي صلاحيته أبدًا. يتعارض هذا الحقل مع حقل " <code translate="no">collection.ttl.seconds</code>".</p><p>للحصول على التفاصيل، راجع <a href="/docs/ar/set-collection-ttl.md">«تعيين TTL على مستوى الكيان</a>».</p></td>
+     <td><p>اسم حقل " <code translate="no">TIMESTAMPTZ</code> " الذي يخزن الطابع الزمني المطلق لانتهاء صلاحية كل كيان (TTL على مستوى الكيان). تنتهي صلاحية كل كيان عندما يصل الوقت الفعلي إلى القيمة المخزنة في هذا الحقل؛ ويعني وجود قيمة " <code translate="no">NULL</code> " في الحقل أن الكيان لا تنتهي صلاحيته أبدًا. يتعارض هذا الحقل مع حقل " <code translate="no">collection.ttl.seconds</code>".</p><p>للحصول على التفاصيل، راجع <a href="/docs/ar/set-collection-ttl.md">«تعيين TTL على مستوى الكيان</a>».</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">mmap.enabled</code></p></td>
@@ -299,7 +299,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
-     <td><p>يتيح الحقل الديناميكي للمجموعات التي تم إنشاؤها دون تمكينه. بمجرد تمكينه، يمكنك إدراج كيانات تحتوي على حقول غير محددة في المخطط الأصلي. لمزيد من التفاصيل، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p></td>
+     <td><p>يتيح الحقل الديناميكي للمجموعات التي تم إنشاؤها دون تمكينه. بمجرد تمكينه، يمكنك إدراج كيانات ذات حقول غير محددة في المخطط الأصلي. لمزيد من التفاصيل، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
@@ -309,8 +309,12 @@ curl --request POST \
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>يحدد المنطقة الزمنية الافتراضية لهذه المجموعة عند معالجة العمليات الحساسة للوقت، خاصةً حقول « <code translate="no">TIMESTAMPTZ</code> ». يتم تخزين الطوابع الزمنية داخليًّا بتوقيت UTC، ويقوم Milvus بتحويل القيم للعرض والمقارنة وفقًا لهذا الإعداد. إذا تم تعيينه، فإن المنطقة الزمنية للمجموعة تتجاوز المنطقة الزمنية الافتراضية لقاعدة البيانات؛ ويمكن لمعلمة المنطقة الزمنية للاستعلام تجاوز كليهما مؤقتًا. يجب أن تكون القيمة <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">معرّف منطقة زمنية</a> صالحًا <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">وفقًا لـ IANA</a> (على سبيل المثال، <strong>Asia/Shanghai</strong> أو <strong>America/Chicago</strong> أو <strong>UTC</strong>). للحصول على تفاصيل حول كيفية استخدام حقل <code translate="no">TIMESTAMPTZ</code> ، راجع <a href="/docs/ar/timestamptz-field.md">حقل TIMESTAMPTZ</a>.</p></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>يغير مستوى الاتساق للمجموعة. ينطبق المستوى الجديد على عمليات البحث والاستعلامات اللاحقة على هذه المجموعة التي لا تحدد مستوى اتساق خاص بها؛ ولا تزال الإعدادات لكل طلب لها الأسبقية. يجب أن تكون القيمة إحدى القيم التالية: <strong>Strong</strong> أو <strong>Session</strong> أو <strong>Bounded</strong> (الافتراضي) أو <strong>Eventually</strong>. لا يتطلب تغيير هذه الخاصية تحرير المجموعة. للحصول على التفاصيل، راجع <a href="/docs/ar/tune_consistency.md">«مستوى الاتساق</a>».</p></td>
+   </tr>
 </table>
-<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">المثال 1: تعيين TTL على مستوى التجميع<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">مثال 1: تعيين TTL على مستوى المجموعة<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -414,7 +418,7 @@ curl --request POST \
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-2-Set-entity-level-TTL" class="common-anchor-header">المثال 2: تعيين TTL على مستوى الكيان<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Example-2-Set-entity-level-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-2-Set-entity-level-TTL" class="common-anchor-header">المثال 2: تعيين مدة الصلاحية (TTL) على مستوى الكيان<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Example-2-Set-entity-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -429,7 +433,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يحدد المقتطف البرمجي التالي حقل " <code translate="no">TIMESTAMPTZ</code> " (<code translate="no">expire_at</code>) الموجود كحقل TTL لمستوى الكيان. يجب أن تحتوي المجموعة بالفعل على حقل " <code translate="no">TIMESTAMPTZ</code> " بهذا الاسم، ويجب ألا يتم تعيين " <code translate="no">collection.ttl.seconds</code> " — حيث إن وضعي TTL هذين متنافيان.</p>
+    </button></h3><p>يحدد المقتطف البرمجي التالي حقلًا موجودًا في " <code translate="no">TIMESTAMPTZ</code> " (<code translate="no">expire_at</code>) كحقل TTL لمستوى الكيان. يجب أن تحتوي المجموعة بالفعل على حقل " <code translate="no">TIMESTAMPTZ</code> " بهذا الاسم، ويجب ألا يتم تعيين " <code translate="no">collection.ttl.seconds</code> " — حيث إن وضعي TTL هذين متنافيان.</p>
 <p>للاطلاع على سير العمل الكامل لـ TTL على مستوى الكيان (إعداد المخطط، الإدراج، الاستعلام، التحديث، الحذف)، راجع <a href="/docs/ar/set-collection-ttl.md">تعيين TTL على مستوى الكيان</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -840,7 +844,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تسمح الخاصية <code translate="no">allow_insert_auto_id</code> للمجموعة التي تم تمكين ميزة AutoID فيها بقبول قيم المفتاح الأساسي التي يقدمها المستخدم أثناء عمليات الإدراج (insert) والتحديث مع الإدراج (upsert) والاستيراد المجمّع (bulk import). عند تعيينها على <strong>"true"</strong>، يستخدم Milvus قيمة المفتاح الأساسي التي يقدمها المستخدم إن وجدت؛ وإلا فإنه يقوم بإنشائها تلقائيًا. القيمة الافتراضية هي <strong>"false".</strong></p>
+    </button></h3><p>تسمح الخاصية <code translate="no">allow_insert_auto_id</code> للمجموعة التي تم تمكين ميزة AutoID فيها بقبول قيم المفتاح الأساسي التي يقدمها المستخدم أثناء عمليات الإدراج (insert) والتحديث مع الإدراج (upsert) والاستيراد المجمّع. عند تعيينها على <strong>"true"</strong>، يستخدم Milvus قيمة المفتاح الأساسي التي يقدمها المستخدم إن وجدت؛ وإلا فإنه يقوم بإنشائها تلقائيًا. القيمة الافتراضية هي <strong>"false".</strong></p>
 <p>يوضح المثال أدناه كيفية تمكين <code translate="no">allow_insert_auto_id</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1026,6 +1030,94 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
         &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-8-Alter-the-consistency-level" class="common-anchor-header">المثال 8: تغيير مستوى الاتساق<button data-href="#Example-8-Alter-the-consistency-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يعمل مقتطف الشفرة التالي على تغيير مستوى الاتساق لمجموعة موجودة إلى <strong>«في النهاية» (Eventually)</strong>. ينطبق المستوى الجديد على عمليات البحث والاستعلامات اللاحقة على هذه المجموعة التي لا تحدد مستوى اتساقًا بشكل صريح؛ ولا تزال الإعدادات الخاصة بكل طلب لها الأسبقية. لمزيد من التفاصيل، راجع <a href="/docs/ar/tune_consistency.md">«مستوى الاتساق</a>».</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">alter_collection_properties</span>(
+        AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                                   .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;consistency_level&quot;</span>] = <span class="hljs-string">&quot;Eventually&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

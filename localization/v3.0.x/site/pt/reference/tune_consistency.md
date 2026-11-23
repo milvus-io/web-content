@@ -6,7 +6,7 @@ summary: >-
   consistência para garantir que cada nó ou réplica possa aceder aos mesmos
   dados durante as operações de leitura e escrita. Atualmente, os níveis de
   consistência suportados incluem «Strong», «Bounded», «Eventually» e «Session»,
-  sendo «Bounded» o nível de consistência predefinido.
+  sendo «Bounded» o nível de consistência utilizado por predefinição.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Nível de consistência<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus é um sistema que separa o armazenamento da computação. <strong>Os nós de streaming</strong> anexam todas as operações de escrita ao Registo de Escrita Antecipada (WAL) e mantêm os <strong>dados em crescimento</strong> — dados que ainda se encontram no WAL e que ainda não foram persistidos. Um processo de recuperação converte os dados em crescimento em <strong>dados históricos</strong> (segmentos selados persistidos em armazenamento de objetos, como o MinIO/S3), que são servidos pelos <strong>Nós de Consulta</strong>. Cada pedido de pesquisa ou consulta é recebido por um <strong>Delegador de Consultas</strong> no nó de streaming que aloja o WAL da coleção: o delegador gera o plano de consulta, executa a parte dos dados em crescimento localmente, encaminha a parte dos dados históricos para os nós de consulta relevantes e funde os resultados antes de os devolver. Para mais detalhes, consulte <a href="/docs/pt/streaming_service.md">Serviço de Streaming</a>.</p>
+    </button></h2><p>O Milvus é um sistema que separa o armazenamento da computação. <strong>Os nós de streaming</strong> anexam todas as operações de gravação ao Registo de Gravação Antecipada (WAL) e mantêm os <strong>dados em crescimento</strong> — dados que ainda se encontram no WAL e que ainda não foram persistidos. Um processo de recuperação converte os dados em crescimento em <strong>dados históricos</strong> (segmentos selados persistidos em armazenamento de objetos, como o MinIO/S3), que são servidos pelos <strong>Nós de Consulta</strong>. Cada pedido de pesquisa ou consulta é recebido por um <strong>Delegador de Consultas</strong> no nó de streaming que aloja o WAL da coleção: o delegador gera o plano de consulta, executa a parte dos dados em crescimento localmente, encaminha a parte dos dados históricos para os nós de consulta relevantes e funde os resultados antes de os devolver. Para mais detalhes, consulte <a href="/docs/pt/streaming_service.md">Serviço de Streaming</a>.</p>
 <p>Para garantir a consistência, o Milvus atribui a cada mensagem um carimbo de data/hora do Timestamp Oracle (TSO), que determina a sua ordem no WAL, e insere continuamente carimbos de data/hora de sincronização no WAL juntamente com as mensagens de dados. Sempre que é recebido um carimbo de data e hora de sincronização (syncTs), este é registado como ServiceTime, o que significa que todos os dados anteriores a esse ServiceTime ficam visíveis para as consultas. Com base no ServiceTime, o Milvus fornece carimbos de data e hora de garantia (GuaranteeTs) para satisfazer os diferentes requisitos dos utilizadores em termos de consistência e disponibilidade. Os utilizadores podem informar o delegador da necessidade de incluir dados anteriores a um momento específico no âmbito da pesquisa, especificando GuaranteeTs nos seus pedidos de pesquisa.</p>
 <p><span class="img-wrapper">
   
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode definir diferentes níveis de consistência ao criar uma coleção, bem como ao realizar pesquisas e consultas.</p>
+    </button></h2><p>Pode definir o nível de consistência ao criar uma coleção, alterá-lo após a criação da coleção ou substituí-lo para pesquisas e consultas individuais.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Definir o nível de consistência ao criar uma coleção<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,6 +169,57 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Os valores possíveis para o parâmetro « <code translate="no">consistency_level</code> » são « <code translate="no">Strong</code> », « <code translate="no">Bounded</code> », « <code translate="no">Eventually</code> » e « <code translate="no">Session</code> ».</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Alterar o nível de consistência da coleção<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pode alterar o nível de consistência de uma coleção existente alterando a sua propriedade <code translate="no">consistency_level</code>. O novo nível aplica-se a pesquisas e consultas subsequentes na coleção que não especifiquem um nível de consistência próprio, e a alteração não requer a libertação da coleção. O exemplo de código seguinte altera o nível de consistência para <strong>«Eventually</strong>».</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Definir o nível de consistência na pesquisa<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

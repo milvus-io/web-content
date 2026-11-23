@@ -1,9 +1,7 @@
 ---
 id: bitmap.md
 title: BITMAP
-summary: >-
-  비트맵 인덱싱은 카디널리티가 낮은 스칼라 필드에 대한 쿼리 성능을 향상시키기 위해 고안된 효율적인 인덱싱 기법입니다. 카디널리티란 필드 내
-  고유 값의 수를 의미합니다. 고유 요소의 수가 적은 필드는 카디널리티가 낮은 필드로 간주됩니다.
+summary: '카드널리티가 낮은 스칼라 필터링에는 BITMAP을 사용하십시오. 지원되는 필터, 필드 제한 조건 및 인덱스 생성을 확인하십시오.'
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +18,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>비트맵 인덱싱은 낮은 카디널리티를 가진 스칼라 필드에 대한 쿼리 성능을 향상시키기 위해 고안된 효율적인 인덱싱 기법입니다. 카디널리티란 필드 내 고유 값의 수를 의미합니다. 고유 요소의 수가 적은 필드는 낮은 카디널리티를 가진 것으로 간주됩니다.</p>
-<p>이 인덱스 유형은 필드 값을 압축된 이진 형식으로 표현하고 이에 대해 효율적인 비트 단위 연산을 수행함으로써 스칼라 쿼리의 검색 시간을 단축하는 데 도움이 됩니다. 다른 유형의 인덱스와 비교할 때, 비트맵 인덱스는 일반적으로 낮은 카디널리티 필드를 처리할 때 공간 효율성이 더 높고 쿼리 속도가 더 빠릅니다.</p>
+    </button></h1><p><code translate="no">BITMAP</code> 는 상태 코드나 범주와 같이 고유 값이 적은 필드에 대한 스칼라 필터링 속도를 높여줍니다. 카디널리티란 필드 내 고유 값의 수를 의미합니다. 이 페이지에서는 지원되는 필터, 필드 제한 조건 및 인덱스 생성에 대해 설명합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,25 +34,108 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>'비트맵(Bitmap</strong> )'이라는 용어는 <strong>'비트</strong> ( <strong>Bit</strong> )'와 <strong>'맵</strong>( <strong>Map</strong>)'이라는 두 단어가 결합된 것입니다. 비트는 컴퓨터에서 데이터의 가장 작은 단위를 나타내며, <strong>0</strong> 또는 <strong>1의</strong> 값만 가질 수 있습니다. 이 맥락에서 맵은 0과 1에 어떤 값을 할당해야 하는지에 따라 데이터를 변환하고 구성하는 과정을 의미합니다.</p>
-<p>비트맵 인덱스는 비트맵과 키라는 두 가지 주요 구성 요소로 이루어져 있습니다. 키는 인덱싱된 필드의 고유 값을 나타냅니다. 각 고유 값마다 이에 대응하는 비트맵이 하나씩 존재합니다. 이러한 비트맵의 길이는 컬렉션 내 레코드 수와 같습니다. 비트맵의 각 비트는 컬렉션 내의 레코드와 대응됩니다. 레코드의 인덱싱된 필드 값이 키와 일치하면 해당 비트는 <strong>1로</strong> 설정되고, 그렇지 않으면 <strong>0으로</strong> 설정됩니다.</p>
-<p><strong>Category와</strong> <strong>Public</strong> 필드를 가진 문서 컬렉션을 생각해 봅시다. <strong>Tech</strong> 카테고리에 속하고 일반( <strong>Public</strong>)에게 공개된 문서를 검색하고자 합니다. 이 경우, 비트맵 인덱스의 키는 <strong>Tech와</strong> <strong>Public이</strong> 됩니다.</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">인덱스 대상 및 필터<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">BITMAP</code> 인덱스를 명시적으로 생성하려면 아래 표에서 기본 키가 아닌 대상을 선택하십시오. 각 행은 지원되는 대상과 해당 인덱스가 평가에 도움을 줄 수 있는 필터를 쌍으로 나열합니다:</p>
+<table>
+<thead>
+<tr><th>인덱스 대상</th><th>인덱스를 사용할 수 있는 필터</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> 필드</td><td>등가 조건(<code translate="no">==</code>, <code translate="no">!=</code>) 및 소속 조건(<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>정수 필드 (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</td><td>동등성, 소속, 범위 (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 필드</td><td>동등성, 멤버십, 범위 및 <a href="/docs/ko/pattern-matching.md">LIKE 또는 정규식 패턴</a>. 패턴 평가 시 여러 개의 서로 다른 인덱싱된 문자열을 참조할 수 있습니다.</td></tr>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code> 또는 <code translate="no">VARCHAR</code> 요소가 포함된 일반적인 <code translate="no">ARRAY</code> 필드</td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>. <a href="/docs/ko/array_data_type.md#Array-index-support">배열 인덱스 지원</a> 항목을 참조하십시오.</td></tr>
+<tr><td><code translate="no">BOOL</code> 로 형변환된 JSON 경로 또는 <code translate="no">VARCHAR</code></td><td>위의 해당 부울 또는 문자열 값에 대한 필터로 변환되며, <a href="/docs/ko/json-indexing.md#Index-requirements">JSON 인덱스 요구</a> 사항을 따릅니다.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p><code translate="no">AUTOINDEX</code> 를 포함한 스칼라 인덱스는 재귀적 ARRAY 필드나 null이 허용되는 요소를 가진 배열을 지원하지 않습니다. 일반 배열 필터에 대한 내용은 <a href="/docs/ko/array_data_type.md#Array-index-support">‘배열 인덱스 지원’을</a>, 하위 필드 규칙에 대한 내용은 <a href="/docs/ko/index-structarray-fields.md#Create-scalar-indexes">‘StructArray 필드 인덱스’를</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<p>ARRAY 대상의 경우, ` <code translate="no">BITMAP</code> `는 전체 배열의 동일성, 위치별 요소 액세스 또는 배열 길이가 아닌 요소 포함 여부에 대한 필터를 처리합니다. <a href="/docs/ko/array_data_type.md#Array-index-support">‘배열 인덱스 지원’을</a> 참조하십시오.</p>
+<p>이러한 명시적인 대상 이외의 자동 선택에 대해서는 <a href="/docs/ko/scalar_index.md#AUTOINDEX-behavior">'AUTOINDEX 동작'을</a> 참조하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p>이는 인덱스 기능일 뿐, 유효한 필터 표현식에 대한 제한 사항은 아닙니다. 공유 조회 제약 조건에 대해서는 <a href="/docs/ko/scalar_index.md#Filter-execution">‘스칼라 인덱스’를</a> 참조하십시오. <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 및 NULL 테스트(<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>)에 대해서는 <a href="/docs/ko/basic-operators.md">‘기본 연산자’를</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">메모리 고려 사항<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>메모리 및 쿼리 비용은 고유 값의 수와 그 분포에 따라 달라집니다. 고정된 카디널리티를 보편적인 성능 기준점으로 간주하기보다는, 대표적인 필터를 사용하여 인덱스를 비교하십시오.</p>
+<p>고밀도 비트맵의 경우, 대략적인 추정치(바이트 단위)는 <code translate="no">(D + 1) * N / 8</code> 입니다. 여기서 <code translate="no">N</code> 는 엔티티 수이고, <code translate="no">D</code> 는 고유 값의 수입니다. 여기에는 고유 값당 하나의 비트맵과 유효성 확인을 위한 비트맵 하나가 포함됩니다. 값 저장 및 기타 오버헤드가 이 추정치에 추가되며, 선택적 오프셋 캐시는 64비트 시스템에서 약 <code translate="no">8 * N</code> 바이트를 더 차지합니다. 압축된 비트맵 표현 방식은 메모리 사용량이 상당히 다를 수 있습니다.</p>
+<p>이러한 대략적인 추정치는 메모리 매핑이 비활성화된 상태에서 로드된 인덱스의 메모리 사용량을 다룹니다. 세그먼트별로 계산한 다음, 로드된 세그먼트와 복제본 전체에 걸쳐 합산하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p>로드된 필드 데이터, 벡터 인덱스, 컬렉션 및 인덱스 오버헤드, 임시 할당을 위해 추가 메모리를 확보하십시오. 대표적인 데이터와 쿼리를 사용하여 유효성을 검증하십시오. 배열, JSON, 구형 인덱스 형식 및 메모리 매핑의 경우 별도의 측정이 필요합니다.</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">BITMAP의 작동 원리<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>비트맵 필터링 예제 보기</strong></summary></p>
+<p>비트맵 인덱스는 각 고유한 필드 값을 비트맵과 연결합니다. 각 비트는 엔티티에 해당하며, <strong>1은</strong> 엔티티가 해당 값을 갖는 것을, <strong>0은</strong> 그렇지 않은 것을 의미합니다.</p>
+<p>예를 들어, <strong>‘Tech’</strong> 카테고리에 속한 공개 문서를 찾으려면 <strong>‘Category = Tech’</strong> 및 <strong>‘Public = true’에</strong> 해당하는 비트맵을 결합하면 됩니다:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
    <span>비트맵</span>
   
  </span></p>
-<p>그림에서 볼 수 있듯이, <strong>Category</strong> 와 <strong>Public</strong> 에 대한 비트맵 인덱스는 다음과 같습니다.</p>
+<p>그림에서 볼 수 있듯이, <strong>‘카테고리</strong> ’와 <strong>‘공개</strong> ’에 대한 비트맵 인덱스는 다음과 같습니다:</p>
 <ul>
-<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0] — 이는 1번째와 3번째 문서만 <strong>Tech</strong> 범주에 속함을 나타냅니다.</p></li>
-<li><p><strong>Public</strong>: [1, 0, 0, 1, 0]로, 1번째와 4번째 문서만 <strong>일반에</strong> 공개되어 있음을 나타냅니다.</p></li>
+<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], 이는 1번째와 3번째 문서만이 <strong>Tech</strong> 카테고리에 속함을 나타냅니다.</p></li>
+<li><p><strong>Public</strong>: [1, 0, 0, 1, 0]로, 1번째와 4번째 문서만 <strong>Public에게</strong> 공개되어 있음을 나타냅니다.</p></li>
 </ul>
 <p>두 조건 모두에 해당하는 문서를 찾기 위해, 이 두 비트맵에 대해 비트별 AND 연산을 수행합니다:</p>
 <ul>
-<li><strong>Tech</strong> AND <strong>Public</strong>: [1, 0, 0, 0, 0]</li>
+<li><strong>기술</strong> AND <strong>공개</strong>: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>결과 비트맵 [1, 0, 0, 0, 0]은 첫 번째 문서(<strong>ID</strong> <strong>1</strong>)만이 두 기준을 모두 충족함을 나타냅니다. 비트맵 인덱스와 효율적인 비트별 연산을 활용하면 검색 범위를 신속하게 좁힐 수 있어, 전체 데이터셋을 스캔할 필요가 없습니다.</p>
+<p>첫 번째 문서(<strong>ID 1</strong>)만이 두 기준을 모두 충족합니다.</p>
+<p></details></p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">비트맵 인덱스 생성<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,7 +151,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 비트맵 인덱스를 생성하려면 ` <code translate="no">create_index()</code> ` 메서드를 사용하고, ` <code translate="no">index_type</code> ` 매개변수를 ` <code translate="no">&quot;BITMAP&quot;</code>`로 설정합니다.</p>
+    </button></h2><p>Milvus에서 비트맵 인덱스를 생성하려면 ` <code translate="no">create_index()</code> ` 메서드를 사용하고, ` <code translate="no">index_type</code> ` 매개변수를 ` <code translate="no">&quot;BITMAP&quot;</code>`로 설정하십시오.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -239,8 +319,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예제에서는 ` <code translate="no">my_collection</code> ` 컬렉션의 ` <code translate="no">category</code> ` 필드에 비트맵 인덱스를 생성합니다. ` <code translate="no">add_index()</code> ` 메서드를 사용하여 필드 이름, 인덱스 유형 및 인덱스 이름을 지정합니다.</p>
-<p>비트맵 인덱스가 생성되면 쿼리 작업에서 <code translate="no">filter</code> 매개변수를 사용하여 인덱싱된 필드를 기반으로 스칼라 필터링을 수행할 수 있습니다. 이를 통해 비트맵 인덱스를 활용하여 검색 결과를 효율적으로 좁힐 수 있습니다. 자세한 내용은 <a href="/docs/ko/boolean.md">‘필터링 설명’을</a> 참조하십시오.</p>
+<p>이렇게 하면 ` <code translate="no">my_collection.category</code>`에 인덱스가 생성됩니다. 쿼리에서 이 필드를 사용하거나 ` <code translate="no">filter</code>`을 검색해 보세요. <a href="/docs/ko/boolean.md">자세한 내용은 ‘필터링 설명’을</a> 참조하십시오.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">인덱스 삭제<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,10 +337,9 @@ curl --request POST \
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> 메서드를 사용하여 컬렉션에서 기존 인덱스를 제거할 수 있습니다.</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong> 이하 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
-<li><p><strong>v2.6.4부터는</strong> 더 이상 필요하지 않은 스칼라 인덱스를 컬렉션을 먼저 해제할 필요 없이 직접 삭제할 수 있습니다.</p></li>
-</ul>
+<blockquote>
+<p>스칼라 인덱스를 삭제할 때의 릴리스 요구 사항에 대해서는 <a href="/docs/ko/scalar_index.md#Drop-index-compatibility">‘스칼라 인덱스’를</a> 참조하십시오.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -383,37 +461,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>비트맵 인덱스는 기본 키가 아닌 스칼라 필드에 대해서만 지원됩니다.</p></li>
-<li><p>필드의 데이터 유형은 다음 중 하나여야 합니다:</p>
-<ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (요소는 다음 중 하나여야 합니다: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
-</ul></li>
-<li><p>비트맵 인덱스는 다음 데이터 유형을 지원하지 않습니다:</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: 부동 소수점 데이터 유형은 비트맵 인덱스의 이진적 특성과 호환되지 않습니다.</p></li>
-<li><p><code translate="no">JSON</code>: JSON 데이터 유형은 복잡한 구조를 가지고 있어 비트맵 인덱스를 사용하여 효율적으로 표현할 수 없습니다.</p></li>
-</ul></li>
-<li><p>비트맵 인덱스는 카디널리티가 높은 필드(즉, 고유 값의 수가 많은 필드)에는 적합하지 않습니다.</p>
-<ul>
-<li><p>일반적인 지침으로, 비트맵 인덱스는 필드의 카디널리티가 500 미만일 때 가장 효과적입니다.</p></li>
-<li><p>카디널리티가 이 임계값을 초과하면 비트맵 인덱스의 성능 이점이 줄어들고 저장소 오버헤드가 커집니다.</p></li>
-<li><p>카디널리티가 높은 필드의 경우, 구체적인 사용 사례와 쿼리 요구 사항에 따라 역색인과 같은 대체 인덱싱 기법을 사용하는 것을 고려해 보십시오.</p></li>
-</ul></li>
-</ul>

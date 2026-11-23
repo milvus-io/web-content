@@ -22,8 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus 提供比較運算子、範圍運算子、算術運算子、邏輯運算子及 NULL 運算子，用於篩選實體。每個運算子皆支援特定的欄位類型。</p>
 <div class="alert note">
-<p>篩選表達式左側的字面量可以是集合欄位名稱（例如下文範例中的<code translate="no">status</code> 、<code translate="no">color</code> 等），或是 StructArray 子欄位在特定元素索引處的名稱（例如<code translate="no">filter = 'struct[0][subfield] &gt; 10'</code> ）。</p>
-<p>有關 StructArray 欄位中標量篩選的詳細資訊，請參閱《<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>》。</p>
+<p>左側操作數可以是集合欄位（例如<code translate="no">status</code> ），或是 StructArray 子欄位中特定元素索引處的值（例如<code translate="no">struct[0][subfield] &gt; 10</code> ）。請參閱「<a href="/docs/zh-hant/struct-array-operators.md">StructArray 運算子</a>」。</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">比較運算子<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -232,7 +231,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price &lt; 100&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-5-Filtering-with-greater-than-or-equal-to-" class="common-anchor-header">範例 5：使用「大於或等於」進行篩選 (<code translate="no">&gt;=</code>)<button data-href="#Example-5-Filtering-with-greater-than-or-equal-to-" class="anchor-icon" translate="no">
+<h3 id="Example-5-Filtering-with-greater-than-or-equal-to-" class="common-anchor-header">範例 5：使用「大於或等於」篩選 (<code translate="no">&gt;=</code>)<button data-href="#Example-5-Filtering-with-greater-than-or-equal-to-" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -359,7 +358,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>當您需要檢查實體是否屬於一組特定值時，此功能非常實用。</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">模式匹配運算子<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -375,10 +373,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>模式匹配運算子可協助根據萬用字元模式或正規表達式篩選字串值。</p>
+    </button></h2><p>模式匹配運算子可協助根據通配符模式或正規表達式篩選字串值。</p>
 <ul>
 <li><p><code translate="no">LIKE</code>: 用於根據字串值匹配簡單的萬用字元模式。例如，<code translate="no">name LIKE &quot;Prod%&quot;</code> 會匹配以<code translate="no">Prod</code> 開頭的值。</p></li>
-<li><p><code translate="no">=~</code>: 用於將字串值與 RE2 正規表達式進行比對。例如，<code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> 會比對包含錯誤代碼的值，例如<code translate="no">E1001</code> 。</p></li>
+<li><p><code translate="no">=~</code>: 用於根據 RE2 正規表達式匹配字串值。例如，<code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> 會匹配包含錯誤代碼的值，例如<code translate="no">E1001</code> 。</p></li>
 <li><p><code translate="no">!~</code>: 用於排除與 RE2 正規表達式相符的字串值。這等同於<code translate="no">NOT (field =~ &quot;pattern&quot;)</code> 。</p></li>
 </ul>
 <p>若要找出以<code translate="no">Prod</code> 開頭且符合<code translate="no">name</code> 的實體：</p>
@@ -462,7 +460,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有關如何在<code translate="no">LIKE</code> 與正規表達式之間進行選擇、支援的欄位類型、正規表達式語法、轉義規則及效能等詳細資訊，請參閱<a href="/docs/zh-hant/pattern-matching.md">《模式匹配</a>》。Milvus 亦允許您針對<code translate="no">VARCHAR</code> 欄位或 JSON 字串路徑建立<code translate="no">NGRAM</code> 索引，以加速符合條件的模式匹配篩選器。詳細資訊請參閱<a href="/docs/zh-hant/ngram.md">《NGRAM》</a>。</p>
+<p>有關語法、轉義、欄位支援以及<code translate="no">NGRAM</code> 等加速選項，請參閱「<a href="/docs/zh-hant/pattern-matching.md">模式匹配</a>」。</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">算術運算子<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -587,7 +585,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;price ** 2 &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>算術運算子僅支援涉及<strong>單一欄位與常數的</strong>運算式。目前不支援將兩個欄位進行算術運算的運算式（例如<code translate="no">price * quantity &gt; 100</code> ），此類運算式將返回錯誤。若需根據由多個欄位計算得出的衍生值進行篩選，請考慮在插入資料時，將預先計算好的值儲存為獨立的標量欄位。</p>
+<p>算術運算子僅支援涉及<strong>單一欄位與常數的</strong>運算式。目前不支援將兩個欄位進行算術運算的運算式（例如<code translate="no">price * quantity &gt; 100</code> ），此類運算式將引發錯誤。若需根據由多個欄位計算而成的衍生值進行篩選，請考慮在插入資料時，將預先計算好的值儲存為獨立的標量欄位。</p>
 </div>
 <h2 id="Bitwise-operators" class="common-anchor-header">位元運算子<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.0+</span><button data-href="#Bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -741,7 +739,7 @@ summary: >-
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions ^ 7) == 2&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>在比較結果（例如<code translate="no">(permissions &amp; 4) == 4</code> ）之前，請務必將位元運算用括號包起來。Milvus 在篩選表達式中支援<code translate="no">&amp;</code> 、<code translate="no">|</code> 以及<code translate="no">^</code> 。位元非（<code translate="no">~</code> ）與位移運算子（<code translate="no">&lt;&lt;</code> 和<code translate="no">&gt;&gt;</code> ）則不被支援。</p>
+<p>在比較結果（例如<code translate="no">(permissions &amp; 4) == 4</code> ）之前，請務必將位元運算用括號包起來。Milvus 在篩選表達式中支援<code translate="no">&amp;</code> 、<code translate="no">|</code> 以及<code translate="no">^</code> 。位元非（<code translate="no">~</code> ）和移位運算子（<code translate="no">&lt;&lt;</code> 及<code translate="no">&gt;&gt;</code> ）則不被支援。</p>
 </div>
 <h2 id="Logical-operators" class="common-anchor-header">邏輯運算子<button data-href="#Logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -759,6 +757,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>邏輯運算子用於將多個條件組合成更複雜的篩選表達式。這些運算子包括<code translate="no">AND</code> 、<code translate="no">OR</code> 以及<code translate="no">NOT</code> 。</p>
+<div class="alert note">
+<p>每個條件均可使用其專屬的合資格索引或掃描路徑；無需由單一索引類型來處理整個表達式。請參閱「<a href="/docs/zh-hant/scalar_index.md">標量索引</a>」。</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">受支援的邏輯運算子<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -775,11 +776,11 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><code translate="no">AND</code>: 將多個條件組合在一起，且所有條件都必須為真。</p></li>
-<li><p><code translate="no">OR</code>: 將多個條件組合，其中至少有一個必須為真。</p></li>
+<li><p><code translate="no">AND</code>: 將多個條件組合起來，且所有條件都必須為真。</p></li>
+<li><p><code translate="no">OR</code>: 組合多個條件，其中至少有一個必須為真。</p></li>
 <li><p><code translate="no">NOT</code>: 否定一個條件。</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">範例 1：使用<code translate="no">AND</code> 組合條件<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">範例 1：使用「<code translate="no">AND</code> 」組合條件<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -836,7 +837,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要找出所有<code translate="no">color</code> 為「red」或「blue」的商品：</p>
+    </button></h3><p>要找出所有<code translate="no">color</code> 為「red」或「blue」的產品：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -931,8 +932,8 @@ summary: >-
 </tbody>
 </table>
 <p>受支援的標量欄位包括布林型、數值型、<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> 以及<code translate="no">ARRAY</code> 欄位。這些運算子不支援<a href="/docs/zh-hant/text.md">TEXT 欄位</a>。</p>
-<p>自 Milvus 3.0.3 起，這些運算子亦支援一般向量欄位：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 以及<code translate="no">INT8_VECTOR</code> 。</p>
-<p>這些運算子不區分大小寫：<code translate="no">IS NULL</code> 與<code translate="no">is null</code> 效果相同，<code translate="no">IS NOT NULL</code> 與<code translate="no">is not null</code> 亦然。</p>
+<p>自 Milvus 3.0.3 起，這些運算子亦支援一般向量欄位：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 及<code translate="no">INT8_VECTOR</code> 。</p>
+<p>這些運算子不區分大小寫：<code translate="no">IS NULL</code> 與<code translate="no">is null</code> 是等效的，<code translate="no">IS NOT NULL</code> 與<code translate="no">is not null</code> 亦然。</p>
 <h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">範例：查找值缺失或可用的實體<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -948,7 +949,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>假設一個名為<code translate="no">products</code> 的集合已建立索引並載入。該集合具有一個名為<code translate="no">id</code> 的<code translate="no">INT64</code> 主鍵、一個名為<code translate="no">category</code> 的可為空<code translate="no">VARCHAR</code> 欄位，以及一個名為<code translate="no">embedding</code> 的可為空三維<code translate="no">FLOAT_VECTOR</code> 欄位。它已包含以下實體：</p>
+    </button></h3><p>假設一個名為<code translate="no">products</code> 的集合已在 Milvus 3.0.3 或更新版本上建立索引並載入。該集合具有一個名為<code translate="no">id</code> 的<code translate="no">INT64</code> 主鍵、一個名為<code translate="no">category</code> 的可為空<code translate="no">VARCHAR</code> 欄位，以及一個名為<code translate="no">embedding</code> 的可為空三維<code translate="no">FLOAT_VECTOR</code> 欄位。它已包含以下實體：</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -959,7 +960,7 @@ summary: >-
 <tr><td><code translate="no">3</code></td><td><code translate="no">&quot;book&quot;</code></td><td>NULL</td></tr>
 </tbody>
 </table>
-<p>此處省略集合的建立與資料插入步驟。有關這些步驟，請參閱《<a href="/docs/zh-hant/nullable-and-default.md">可為空欄位</a>》。</p>
+<p>此處省略集合建立與資料插入的步驟。有關這些步驟，請參閱《<a href="/docs/zh-hant/nullable-and-default.md">可為空欄位</a>》。</p>
 <p>若要找出仍需進行嵌入的實體，請查詢 `<code translate="no">embedding IS NULL</code>`。請根據您的伺服器調整連線設定。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1175,7 +1176,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td>一般向量類型</td><td>NULL 表示向量值不存在。其分量皆為零的向量不被視為 NULL。</td></tr>
 </tbody>
 </table>
-<p>對於以<code translate="no">nullable=False</code> 定義且受支援的欄位，<code translate="no">IS NULL</code> 將不匹配任何實體，而<code translate="no">IS NOT NULL</code> 則會匹配所有可見實體。篩選器中的其他條件仍會生效。</p>
+<p>對於以<code translate="no">nullable=False</code> 定義的受支援欄位，<code translate="no">IS NULL</code> 將不匹配任何實體，而<code translate="no">IS NOT NULL</code> 則會匹配所有可見實體。篩選器中的其他條件仍適用。</p>
+<div class="alert note">
+<p>標量 NULL 篩選器會使用來自合資格索引或欄位資料的有效性資訊；它們不需要特定的標量索引類型。一個不可為空的欄位可能會產生恆定結果。</p>
+</div>
 <h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">在向量搜尋中使用 NULL 篩選器<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1191,8 +1195,8 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>搜尋篩選器中可使用相同的運算子，但實體若要參與相似度搜尋，其被搜尋的欄位中也必須包含向量。</p>
-<p>以上述範例資料為例，考慮使用<code translate="no">anns_field=&quot;embedding&quot;</code> 進行搜尋：</p>
+    </button></h3><p>搜尋篩選器中可使用相同的運算子，但實體還需在被搜尋的欄位中具備向量，才能參與相似度搜尋。</p>
+<p>以上述範例資料為例，考慮使用 `<code translate="no">anns_field=&quot;embedding&quot;</code>` 進行搜尋：</p>
 <table>
 <thead>
 <tr><th>篩選表達式</th><th>符合相似度搜尋資格的實體</th><th>原因</th></tr>
@@ -1200,11 +1204,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>實體<code translate="no">2</code> 沒有類別，但擁有<code translate="no">embedding</code> 向量。</td></tr>
 <tr><td><code translate="no">embedding IS NULL</code></td><td>無</td><td>實體<code translate="no">3</code> 符合篩選條件，但沒有<code translate="no">embedding</code> 向量可用來與查詢向量進行比對。</td></tr>
-<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>兩個實體皆具備<code translate="no">embedding</code> 向量。</td></tr>
+<tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>兩個實體皆具有<code translate="no">embedding</code> 向量。</td></tr>
 </tbody>
 </table>
-<p>這三個篩選條件均有效。若使用<code translate="no">embedding</code> 搭配<code translate="no">embedding IS NULL</code> 進行搜尋，將不會有搜尋結果，因為沒有任何實體能同時滿足這兩項要求。若要擷取缺少嵌入向量的實體，請如上所述使用<code translate="no">query()</code> 。</p>
-<p>向量搜尋會自動跳過其搜尋向量欄位為 NULL 的實體，因此<code translate="no">embedding IS NOT NULL</code> 並不會進一步縮小<code translate="no">embedding</code> 搜尋的候選範圍。排名、其他篩選條件以及搜尋限制仍會決定最終回傳哪些候選結果。</p>
+<p>若要擷取缺失的嵌入向量，請使用 `<code translate="no">query()</code>`；在 `<code translate="no">embedding</code> ` 上使用 `<code translate="no">embedding IS NULL</code> ` 進行搜尋雖有效，但不會返回任何結果。向量搜尋已預先跳過 `NULL` 嵌入向量，因此 `<code translate="no">embedding IS NOT NULL</code> ` 不會進一步縮小候選範圍。排名、其他篩選條件以及搜尋限制仍會決定返回的結果。</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">關於在 JSON 和 ARRAY 欄位中使用基本運算子的提示<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1220,8 +1223,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>雖然 Milvus 中的基本運算子用途廣泛且可套用至標量欄位，但它們也能有效應用於 JSON 和 ARRAY 欄位中的鍵與索引。</p>
-<p>例如，若您有一個名為 `<code translate="no">product</code> ` 的欄位，其中包含多個鍵，例如 `<code translate="no">price</code>`、`<code translate="no">model</code>` 及 `<code translate="no">tags</code>`，請務必直接引用該鍵：</p>
+    </button></h2><p>可在表達式中直接引用 JSON 鍵或 ARRAY 元素。例如，若要篩選名為<code translate="no">product</code> 的 JSON 欄位中的<code translate="no">price</code> 鍵：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1248,7 +1250,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>若要找出記錄的溫度陣列中，第一個溫度超過特定數值的記錄，請使用：</p>
+<p>若要查找記錄溫度陣列中第一個溫度超過特定數值的記錄，請使用：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1275,22 +1277,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">結論<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus 提供一系列基本運算子，讓您能靈活地篩選和查詢資料。透過結合比較運算子、範圍運算子、算術運算子及邏輯運算子，您可以建立強大的篩選表達式，藉此縮小搜尋結果範圍，並高效地擷取所需資料。</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">常見問題<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1306,6 +1293,6 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>篩選條件中的匹配值清單長度是否有上限（例如：filter=’color in ["red", "green", “blue”]’）？若清單過長該如何處理？</strong></p>
+    </button></h2><p><strong>在篩選條件中，匹配值清單（例如 filter=’color in ["red", "green", “blue”]’）是否有長度限制？若清單過長該如何處理？</strong></p>
 <p>Milvus 並未對篩選條件中的匹配值清單長度設限。然而，過長的清單可能會顯著影響查詢效能。
-若您的篩選條件包含冗長的匹配值清單，或含有眾多元素的複雜表達式，我們建議使用<a href="/docs/zh-hant/filtering-templating.md">「篩選模板</a>」來提升查詢效能。</p>
+若您的篩選條件包含冗長的匹配值清單，或含有許多元素的複雜表達式，我們建議使用<a href="/docs/zh-hant/filtering-templating.md">「篩選模板」</a>來提升查詢效能。</p>

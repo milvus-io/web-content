@@ -2,11 +2,9 @@
 id: bitmap.md
 title: BITMAP
 summary: >-
-  Die Bitmap-Indizierung ist eine effiziente Indizierungstechnik, die darauf
-  ausgelegt ist, die Abfrageleistung bei skalaren Feldern mit geringer
-  Kardinalität zu verbessern. Die Kardinalität bezieht sich auf die Anzahl der
-  unterschiedlichen Werte in einem Feld. Felder mit wenigen unterschiedlichen
-  Elementen gelten als Felder mit geringer Kardinalität.
+  Verwenden Sie BITMAP für die skalare Filterung bei geringer Kardinalität.
+  Überprüfen Sie die unterstützten Filter, Feldbeschränkungen und die
+  Indexerstellung.
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Bitmap-Indizierung ist eine effiziente Indizierungstechnik, die darauf ausgelegt ist, die Abfrageleistung bei skalaren Feldern mit geringer Kardinalität zu verbessern. Die Kardinalität bezieht sich auf die Anzahl der unterschiedlichen Werte in einem Feld. Felder mit wenigen unterschiedlichen Elementen gelten als Felder mit geringer Kardinalität.</p>
-<p>Dieser Indextyp trägt dazu bei, die Abfragezeit bei skalaren Abfragen zu verkürzen, indem Feldwerte in einem kompakten binären Format dargestellt und effiziente bitweise Operationen darauf durchgeführt werden. Im Vergleich zu anderen Indextypen zeichnen sich Bitmap-Indizes bei Feldern mit niedriger Kardinalität in der Regel durch eine höhere Speichereffizienz und schnellere Abfragegeschwindigkeiten aus.</p>
+    </button></h1><p><code translate="no">BITMAP</code> beschleunigt die skalare Filterung bei Feldern mit wenigen unterschiedlichen Werten, wie beispielsweise Statuscodes und Kategorien. Die Kardinalität ist die Anzahl der unterschiedlichen Werte in einem Feld. Auf dieser Seite werden unterstützte Filter, Feldbeschränkungen und die Indexerstellung beschrieben.</p>
 <h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,26 +37,109 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Begriff <strong>„Bitmap“</strong> setzt sich aus den beiden Wörtern <strong>„Bit“</strong> und <strong>„Map“</strong> zusammen. Ein Bit stellt die kleinste Dateneinheit in einem Computer dar, die nur den Wert <strong>0</strong> oder <strong>1</strong> annehmen kann. Eine „Map“ bezieht sich in diesem Zusammenhang auf den Prozess der Transformation und Organisation von Daten entsprechend der Zuordnung von Werten zu 0 und 1.</p>
-<p>Ein Bitmap-Index besteht aus zwei Hauptkomponenten: Bitmaps und Schlüssel. Schlüssel stellen die eindeutigen Werte im indizierten Feld dar. Für jeden eindeutigen Wert gibt es eine entsprechende Bitmap. Die Länge dieser Bitmaps entspricht der Anzahl der Datensätze in der Sammlung. Jedes Bit in der Bitmap entspricht einem Datensatz in der Sammlung. Stimmt der Wert des indizierten Feldes in einem Datensatz mit dem Schlüssel überein, wird das entsprechende Bit auf <strong>1</strong> gesetzt; andernfalls wird es auf <strong>0</strong> gesetzt.</p>
-<p>Betrachten wir eine Sammlung von Dokumenten mit den Feldern <strong>„Kategorie“</strong> und <strong>„Öffentlich</strong>“. Wir möchten Dokumente abrufen, die zur Kategorie <strong>„Tech“</strong> gehören und für die <strong>Öffentlichkeit</strong> zugänglich sind. In diesem Fall lauten die Schlüssel für unsere Bitmap-Indizes <strong>„Tech“</strong> und <strong>„Öffentlich</strong>“.</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Indexziele und Filter<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Um einen „ <code translate="no">BITMAP</code> “-Index explizit zu erstellen, wählen Sie ein Ziel aus der folgenden Tabelle aus, das kein Primärschlüssel ist. In jeder Zeile wird ein unterstütztes Ziel mit den Filtern gepaart, zu deren Auswertung der Index beitragen kann:</p>
+<table>
+<thead>
+<tr><th>Indexziel</th><th>Filter, die den Index nutzen können</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> Feld</td><td>Gleichheit (<code translate="no">==</code>, <code translate="no">!=</code>) und Zugehörigkeit (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Ganzzahlfeld (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</td><td>Gleichheit, Zugehörigkeit und Bereiche (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> Feld</td><td>Gleichheit, Zugehörigkeit, Bereiche und <a href="/docs/de/pattern-matching.md">LIKE- oder Regex-Muster</a>. Bei der Musterauswertung können viele verschiedene indizierte Zeichenfolgen berücksichtigt werden.</td></tr>
+<tr><td>Gewöhnliches „ <code translate="no">ARRAY</code> “-Feld mit den Elementen „ <code translate="no">BOOL</code> “, „ <code translate="no">INT8</code> “, „ <code translate="no">INT16</code> “, „ <code translate="no">INT32</code> “, „ <code translate="no">INT64</code> “ oder „ <code translate="no">VARCHAR</code> “</td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>. Siehe <a href="/docs/de/array_data_type.md#Array-index-support">Unterstützung für Array-Indizes</a>.</td></tr>
+<tr><td>JSON-Pfad, umgewandelt in „ <code translate="no">BOOL</code> “ oder <code translate="no">VARCHAR</code></td><td>Filter für die entsprechenden oben genannten booleschen oder Zeichenfolgenwerte, vorbehaltlich <a href="/docs/de/json-indexing.md#Index-requirements">der Anforderungen</a> an <a href="/docs/de/json-indexing.md#Index-requirements">den JSON-Index</a>.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Skalarindizes, einschließlich „ <code translate="no">AUTOINDEX</code> “, unterstützen keine rekursiven ARRAY-Felder oder Arrays mit nullfähigen Elementen. Siehe <a href="/docs/de/array_data_type.md#Array-index-support">„Unterstützung von Array-Indizes“</a> für Filter für gewöhnliche Arrays und <a href="/docs/de/index-structarray-fields.md#Create-scalar-indexes">„Indizierung von StructArray-Feldern“</a> für Regeln zu Unterfeldern.</p>
+</blockquote>
+</div>
+<p>Bei ARRAY-Zielen dient „ <code translate="no">BITMAP</code> “ als Filter für die Elementinhalte und nicht für die Gleichheit des gesamten Arrays, den Elementzugriff nach Position oder die Array-Länge. Siehe <a href="/docs/de/array_data_type.md#Array-index-support">„Unterstützung von Array-Indizes</a>“.</p>
+<p>Informationen zur automatischen Auswahl über diese expliziten Ziele hinaus finden Sie unter <a href="/docs/de/scalar_index.md#AUTOINDEX-behavior">„Verhalten von AUTOINDEX</a>“.</p>
+<div class="alert note">
+<blockquote>
+<p>Hierbei handelt es sich um Indexfunktionen, nicht um Einschränkungen für gültige Filterausdrücke. Siehe <a href="/docs/de/scalar_index.md#Filter-execution">„Skalarer Index“</a> für gemeinsame Suchbeschränkungen. Informationen zu den Prüfungen „ <code translate="no">AND</code> “, „ <code translate="no">OR</code> “, „ <code translate="no">NOT</code> “ und „NULL“ (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>) finden Sie unter <a href="/docs/de/basic-operators.md">„Grundlegende Operatoren</a>“.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Überlegungen zum Speicherbedarf<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Der Speicherbedarf und der Abfragenaufwand hängen von der Anzahl der unterschiedlichen Werte und deren Verteilung ab. Vergleichen Sie Indizes mit repräsentativen Filtern, anstatt eine feste Kardinalität als universellen Leistungsgrenzwert zu betrachten.</p>
+<p>Für dichte Bitmaps gilt als grobe Schätzung in Byte: ` <code translate="no">(D + 1) * N / 8</code>`, wobei ` <code translate="no">N</code> ` die Anzahl der Entitäten und ` <code translate="no">D</code> ` die Anzahl der unterschiedlichen Werte ist. Dies umfasst eine Bitmap pro unterschiedlichem Wert und eine für die Gültigkeit. Die Speicherung der Werte und weiterer Overhead erhöhen den geschätzten Speicherbedarf; ein optionaler Offset-Cache fügt auf einem 64-Bit-System etwa <code translate="no">8 * N</code> Byte hinzu. Komprimierte Bitmap-Darstellungen können einen erheblich anderen Speicherbedarf aufweisen.</p>
+<p>Diese groben Schätzungen beziehen sich auf den Speicherbedarf geladener Indizes bei deaktiviertem Memory-Mapping. Berechnen Sie diese Werte pro Segment und summieren Sie sie anschließend über alle geladenen Segmente und Replikate.</p>
+<div class="alert note">
+<blockquote>
+<p>Planen Sie zusätzlichen Speicher für geladene Felddaten, Vektorindizes, Overhead für Sammlungen und Indizes sowie temporäre Zuweisungen ein. Überprüfen Sie die Werte anhand repräsentativer Daten und Abfragen; Arrays, JSON, ältere Indexformate und Memory-Mapping erfordern separate Messungen.</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">So funktioniert BITMAP<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Beispiel für die Bitmap-Filterung anzeigen</strong></summary></p>
+<p>Ein Bitmap-Index ordnet jedem eindeutigen Feldwert eine Bitmap zu. Jedes Bit entspricht einer Entität: <strong>1</strong> bedeutet, dass die Entität diesen Wert hat, und <strong>0</strong> bedeutet, dass sie ihn nicht hat.</p>
+<p>Um beispielsweise öffentliche Dokumente in der Kategorie <strong>„Tech“</strong> zu finden, kombinieren Sie die Bitmaps für <strong>„Kategorie = Tech</strong> “ und <strong>„Öffentlich = true</strong>“:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
    <span>Bitmap</span>
   
  </span></p>
-<p>Wie in der Abbildung dargestellt, lauten die Bitmap-Indizes für <strong>„Category“</strong> und <strong>„Public“</strong> wie folgt:</p>
+<p>Wie in der Abbildung dargestellt, lauten die Bitmap-Indizes für <strong>„Kategorie“</strong> und <strong>„Öffentlich“</strong> wie folgt:</p>
 <ul>
-<li><p><strong>„Tech</strong>“: [1, 0, 1, 0, 0], was zeigt, dass nur das erste und das dritte Dokument zur Kategorie <strong>„Tech“</strong> gehören.</p></li>
-<li><p><strong>„Public</strong>“: [1, 0, 0, 1, 0], was zeigt, dass nur das erste und das vierte Dokument für die <strong>Öffentlichkeit</strong> zugänglich sind.</p></li>
+<li><p><strong>„Tech</strong>“: [1, 0, 1, 0, 0], was zeigt, dass nur das erste und das dritte Dokument in die Kategorie <strong>„Tech“</strong> fallen.</p></li>
+<li><p><strong>„Public</strong>“: [1, 0, 0, 1, 0], was bedeutet, dass nur das erste und das vierte Dokument für die <strong>Öffentlichkeit</strong> zugänglich sind.</p></li>
 </ul>
 <p>Um die Dokumente zu finden, die beiden Kriterien entsprechen, führen wir eine bitweise UND-Operation mit diesen beiden Bitmaps durch:</p>
 <ul>
-<li><strong>„Tech“</strong> UND <strong>„Public</strong>“: [1, 0, 0, 0, 0]</li>
+<li><strong>„Tech“</strong> UND <strong>„Öffentlich</strong>“: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>Die resultierende Bitmap [1, 0, 0, 0, 0] zeigt an, dass nur das erste Dokument (<strong>ID</strong> <strong>1</strong>) beide Kriterien erfüllt. Durch die Verwendung von Bitmap-Indizes und effizienten bitweisen Operationen können wir den Suchbereich schnell eingrenzen, sodass es nicht notwendig ist, den gesamten Datensatz zu durchsuchen.</p>
-<h2 id="Create-a-bitmap-index" class="common-anchor-header">Erstellen eines Bitmap-Index<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+<p>Nur das erste Dokument (<strong>ID 1</strong>) erfüllt beide Kriterien.</p>
+<p></details></p>
+<h2 id="Create-a-bitmap-index" class="common-anchor-header">Bitmap-Index erstellen<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,8 +322,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In diesem Beispiel erstellen wir einen Bitmap-Index für das Feld „ <code translate="no">category</code> “ der Sammlung „ <code translate="no">my_collection</code> “. Mit der Methode „ <code translate="no">add_index()</code> “ werden der Feldname, der Indextyp und der Indexname festgelegt.</p>
-<p>Sobald der Bitmap-Index erstellt ist, können Sie den Parameter ` <code translate="no">filter</code> ` in Abfrageoperationen verwenden, um eine skalare Filterung basierend auf dem indizierten Feld durchzuführen. Auf diese Weise können Sie die Suchergebnisse mithilfe des Bitmap-Index effizient eingrenzen. Weitere Informationen finden Sie unter <a href="/docs/de/boolean.md">„Erläuterung zur Filterung</a>“.</p>
+<p>Dadurch wird ein Index für „ <code translate="no">my_collection.category</code> “ erstellt. Verwenden Sie das Feld in einer Abfrage oder suchen Sie nach „ <code translate="no">filter</code> “; siehe <a href="/docs/de/boolean.md">„Erläuterungen zum Filtern</a>“.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Index löschen<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,12 +338,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie die Methode „ <code translate="no">drop_index()</code> “, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
+    </button></h2><p>Verwenden Sie die Methode ` <code translate="no">drop_index()</code> `, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
 <div class="alert note">
-<ul>
-<li><p>In <strong>Version 2.6.3</strong> oder früher müssen Sie die Sammlung freigeben, bevor Sie einen skalaren Index löschen können.</p></li>
-<li><p>Ab <strong>Version 2.6.4</strong> können Sie einen skalaren Index direkt löschen, sobald er nicht mehr benötigt wird – es ist nicht erforderlich, die Sammlung zuvor freizugeben.</p></li>
-</ul>
+<blockquote>
+<p>Informationen zu den Versionsanforderungen beim Löschen eines skalaren Indexes finden Sie unter <a href="/docs/de/scalar_index.md#Drop-index-compatibility">„Skalare Indizes</a>“.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -386,37 +464,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Einschränkungen<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Bitmap-Indizes werden nur für skalare Felder unterstützt, die keine Primärschlüssel sind.</p></li>
-<li><p>Der Datentyp des Feldes muss einer der folgenden sein:</p>
-<ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (Elemente müssen einer der folgenden sein: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
-</ul></li>
-<li><p>Bitmap-Indizes unterstützen die folgenden Datentypen nicht:</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Gleitkommatypen sind nicht mit der binären Natur von Bitmap-Indizes kompatibel.</p></li>
-<li><p><code translate="no">JSON</code>: JSON-Datentypen weisen eine komplexe Struktur auf, die sich mit Bitmap-Indizes nicht effizient darstellen lässt.</p></li>
-</ul></li>
-<li><p>Bitmap-Indizes eignen sich nicht für Felder mit hoher Kardinalität (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
-<ul>
-<li><p>Als allgemeine Richtlinie gilt: Bitmap-Indizes sind am effektivsten, wenn die Kardinalität eines Feldes unter 500 liegt.</p></li>
-<li><p>Wenn die Kardinalität diesen Schwellenwert überschreitet, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicheraufwand wird erheblich.</p></li>
-<li><p>Für Felder mit hoher Kardinalität sollten Sie je nach Ihrem spezifischen Anwendungsfall und Ihren Abfrageanforderungen alternative Indizierungstechniken wie invertierte Indizes in Betracht ziehen.</p></li>
-</ul></li>
-</ul>

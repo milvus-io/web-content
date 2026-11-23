@@ -1,9 +1,7 @@
 ---
 id: trie.md
 title: TRIE
-summary: >-
-  TRIEインデックスは、VARCHARフィールドの値をツリー構造で整理し、文字列の等価比較や接頭辞一致の処理を高速化します。これは、完全一致の検索や「name
-  LIKE "abc%"」のような接頭辞フィルタにおいて、最も高速なスカラーインデックスです。
+summary: TRIE を使用して、VARCHAR フィールドに対する正確な文字列検索および接頭辞フィルタリングを高速化します。
 ---
 <h1 id="TRIE" class="common-anchor-header">TRIE<button data-href="#TRIE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusの<code translate="no">TRIE</code> インデックスは、<code translate="no">VARCHAR</code> フィールドの値をプレフィックス木（<em>トライ</em>）として整理します。文字列の各文字は木内の辺に対応し、共通するプレフィックスは1回だけ格納されます。この構造により、フィールド内のすべての値をスキャンすることなく、文字列の完全一致検索やプレフィックスマッチングを高速に行うことができます。</p>
-<p>次のようなクエリを頻繁に実行する場合は、<code translate="no">TRIE</code> インデックスを使用してください：</p>
-<ul>
-<li><p>文字列値の完全一致（例：<code translate="no">category == &quot;books&quot;</code></p></li>
-<li><p>次のような接頭辞フィルタリング<code translate="no">name LIKE &quot;abc%&quot;</code></p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">サポートされているデータ型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">TRIE</code> は、文字列をプレフィックス木に整理することで、<code translate="no">name LIKE &quot;abc%&quot;</code> などの正確な検索やプレフィックスフィルタ処理を高速化します。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,11 +34,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><code translate="no">VARCHAR</code> フィールド。詳細については、「<a href="/docs/ja/string.md">文字列フィールド</a>」を参照してください。</li>
-</ul>
-<p><code translate="no">TRIE</code> は、<code translate="no">VARCHAR</code> フィールドでのみサポートされています。<code translate="no">JSON</code> フィールド内の文字列値をインデックス登録するには、パスを<code translate="no">VARCHAR</code> にキャストし、代わりに<a href="/docs/ja/ngram.md">NGRAMインデックス</a>を使用してください。</p>
-<h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">サポートされるデータ型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,23 +49,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus は、<code translate="no">TRIE</code> を 2 つのフェーズで実装しています:</p>
-<ol>
-<li><p><strong>インデックスの構築</strong></p>
-<ul>
-<li><p>取り込み処理中、Milvusはインデックス化対象フィールドの各値を読み込みます。</p></li>
-<li><p>これらの値はトライに挿入されます。文字はエッジに沿って格納され、各末端ノードには、その文字列を共有するエンティティ ID が記録されます。</p></li>
-<li><p>完成したツリーはインデックスとして永続化されます。</p></li>
-</ul></li>
-<li><p><strong>クエリの高速化</strong></p>
-<ul>
-<li><p>等価性チェックの場合、Milvus はツリーを 1 文字ずつ順に辿り、正確な値に対応するノードに到達すると、そのエンティティ ID を返します。</p></li>
-<li><p>前置詞の検索では、Milvus は前置詞に一致するノードまでツリーを辿り、そのサブツリーにあるエンティティ ID を収集します。</p></li>
-<li><p>一致するエンティティ ID は、最終的な結果の組み立てのためにクエリ実行部に渡されます。</p></li>
-</ul></li>
-</ol>
-<p>等価およびプレフィックスフィルタの場合、検索コストはエンティティの数ではなく文字列の長さに比例するため、大規模なコレクションでもこれらのクエリを高速に実行できます。</p>
-<h2 id="Create-a-TRIE-index" class="common-anchor-header">TRIE インデックスの作成<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
+    </button></h3><p><a href="/docs/ja/string.md">VARCHAR フィールド</a>のみ。JSON 文字列パスについては、<a href="/docs/ja/json-indexing.md">JSON インデックス機能</a>で互換性のあるインデックスを選択してください。</p>
+<p><a id="Queries-accelerated-by-TRIE"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">フィルタ処理の高速化<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,8 +67,66 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">VARCHAR</code> フィールドに対して、<code translate="no">TRIE</code> インデックスを作成できます。追加のパラメータは必要ありません。</p>
-<p>以下の例は、<code translate="no">VARCHAR</code> フィールドに<code translate="no">TRIE</code> インデックスを作成する方法を示しています：</p>
+    </button></h3><p><code translate="no">TRIE</code> インデックスを使用すると、<code translate="no">VARCHAR</code> フィールドに対する以下の条件の評価を高速化できます。式は例です：</p>
+<table>
+<thead>
+<tr><th>インデックスを使用できるフィルタ</th><th>式例</th></tr>
+</thead>
+<tbody>
+<tr><td>等値 (<code translate="no">==</code>,<code translate="no">!=</code>)</td><td><code translate="no">category == &quot;books&quot;</code></td></tr>
+<tr><td>メンバーシップ (<code translate="no">in</code>,<code translate="no">not in</code>)</td><td><code translate="no">category in [&quot;books&quot;, &quot;electronics&quot;]</code></td></tr>
+<tr><td>プレフィックスマッチ</td><td><code translate="no">category LIKE &quot;elec%&quot;</code></td></tr>
+<tr><td>範囲 (<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>,<code translate="no">&gt;=</code>)</td><td><code translate="no">category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;</code></td></tr>
+</tbody>
+</table>
+<p>式の構文については、「<a href="/docs/ja/basic-operators.md">基本的な演算子</a>と<a href="/docs/ja/pattern-matching.md">パターンマッチング</a>」を参照してください。</p>
+<p>範囲の評価では、複数のインデックス付き文字列が参照される場合があります。接尾辞、部分文字列、一般的な<code translate="no">LIKE</code> 、および正規表現パターンも、インデックス付き文字列に対して評価できますが、多くの異なる値を参照する必要がある場合があります。部分文字列や正規表現のワークロードについては、<a href="/docs/ja/ngram.md">NGRAMの</a>パターン適格性ルールに基づいて比較してください。</p>
+<p><a id="Best-practices"></a></p>
+<p>代表的な文字列の長さ、接頭辞、および結果数を用いて、クエリのレイテンシを比較してください。</p>
+<p><a id="Usage-notes"></a></p>
+<div class="alert note">
+<blockquote>
+<p>これらはインデックスの機能であり、有効なフィルタ式に対する制限ではありません。共有ルックアップの制約については、<a href="/docs/ja/scalar_index.md#Filter-execution">「スカラーインデックス」を</a>参照してください。<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 、および NULL テスト（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ）については、<a href="/docs/ja/basic-operators.md">「基本演算子」</a>を参照してください。</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-TRIE-works" class="common-anchor-header">TRIEの仕組み<button data-href="#How-TRIE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>プレフィックスツリーの検索プロセスを確認する</strong></summary></p>
+<p>インデックス構築中、Milvusは文字列をプレフィックスツリーに挿入し、それを永続化します。文字はエッジに沿って格納され、共通のプレフィックスは1回だけ格納され、各末端ノードにはその文字列に対応するエンティティIDが記録されます。</p>
+<p>等価性チェックを行うには、ツリーをトラバースして、その文字列の末端ノードまで進みます。プレフィックスの場合は、プレフィックスノードを見つけ、そのサブツリーから ID を収集します。クエリ実行部は、一致したエンティティ ID を受け取ります。</p>
+<p>文字列ノードまたはプレフィックスノードへの探索はパターンの長さに依存し、一致結果の返却には関連するエンティティIDの収集も必要です。</p>
+<p></details></p>
+<h2 id="Create-a-TRIE-index" class="common-anchor-header">TRIEインデックスの作成<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">index_type</code> を<code translate="no">TRIE</code> に設定します。追加のインデックスパラメータは必要ありません：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -240,38 +274,6 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-accelerated-by-TRIE" class="common-anchor-header">TRIE によって高速化されるクエリ<button data-href="#Queries-accelerated-by-TRIE" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><code translate="no">TRIE</code> インデックスは、<code translate="no">VARCHAR</code> フィールドに対する以下のフィルタパターンを高速化します：</p>
-<ul>
-<li><p><strong>等価性</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category == &quot;books&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>メンバーシップ</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category in [&quot;books&quot;, &quot;electronics&quot;]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>プレフィックスマッチ</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category LIKE &quot;elec%&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>範囲</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>範囲評価では、複数のインデックス化された文字列が参照される場合があります。</p></li>
-</ul>
-<p>サフィックス、部分文字列、および一般的な<code translate="no">LIKE</code> パターンも、インデックス化された文字列に対して評価できますが、多くの異なる値を参照する必要がある場合があります。ワークロードが部分文字列や正規表現のマッチングが中心である場合は、<a href="/docs/ja/ngram.md">代わりにFMINDEXまたはNGRAMインデックスの</a>使用を検討してください。</p>
 <h2 id="Drop-an-index" class="common-anchor-header">インデックスの削除<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,10 +291,9 @@ curl --request POST \
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> メソッドを使用して、コレクションから既存のインデックスを削除します。</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong>以前では、スカラーインデックスを削除する前にコレクションを解放する必要があります。</p></li>
-<li><p><strong>v2.6.4以降</strong>では、スカラーインデックスが不要になった時点で直接削除できます。事前にコレクションを解放する必要はありません。</p></li>
-</ul>
+<blockquote>
+<p>スカラーインデックスを削除する際のリリース要件については、「<a href="/docs/ja/scalar_index.md#Drop-index-compatibility">スカラーインデックス</a>」を参照してください。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -405,42 +406,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">使用上の注意<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>フィールド型：</strong> <code translate="no">VARCHAR</code> フィールドでのみ使用可能です。データ型の詳細については、「<a href="/docs/ja/string.md">文字列フィールド</a>」を参照してください。</p></li>
-<li><p><strong>パラメータ：</strong>インデックス用のパラメータは不要です。</p></li>
-<li><p><strong>パターンマッチング：</strong> <code translate="no">TRIE</code> は、等価フィルタおよびプレフィックスフィルタにおいて最も高速です。範囲フィルタもサポートされていますが、複数のインデックス化された文字列を参照する場合があります。サフィックス、部分文字列、および一般的な<code translate="no">LIKE</code> パターンは評価可能ですが、多くのインデックス化された文字列をスキャンする必要がある場合があります。</p></li>
-</ul>
-<h2 id="Best-practices" class="common-anchor-header">ベストプラクティス<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>フィルタが完全一致検索や接頭辞マッチングが中心である場合は、<code translate="no">TRIE</code> を使用してください。</p></li>
-<li><p>ワークロードが部分文字列（<code translate="no">LIKE &quot;%abc%&quot;</code> ）や正規表現フィルターに依存している場合は、代わりに、アンカー付き完全一致には<a href="/docs/ja/fmindex.md">FMINDEX を</a>、候補の絞り込みには<a href="/docs/ja/ngram.md">NGRAM</a>を使用してください。</p></li>
-</ul>

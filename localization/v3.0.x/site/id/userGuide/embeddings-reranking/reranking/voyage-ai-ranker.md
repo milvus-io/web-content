@@ -2,10 +2,10 @@
 id: voyage-ai-ranker.md
 title: Voyage AI RankerCompatible with Milvus 2.6.x
 summary: >-
-  Voyage AI Ranker memanfaatkan pemeringkat khusus Voyage AI untuk meningkatkan
-  relevansi penelusuran melalui pemeringkatan ulang semantik. Ini memberikan
-  kemampuan pemeringkatan ulang berkinerja tinggi yang dioptimalkan untuk
-  retrieval-augmented generation (RAG) dan aplikasi pencarian.
+  Voyage AI Ranker memanfaatkan sistem pengurutan ulang khusus dari Voyage AI
+  untuk meningkatkan relevansi pencarian melalui pengurutan ulang semantik. Alat
+  ini menawarkan kemampuan pengurutan ulang berkinerja tinggi yang dioptimalkan
+  untuk aplikasi Retrieval-Augmented Generation (RAG) dan pencarian.
 beta: Milvus 2.6.x
 ---
 <h1 id="Voyage-AI-Ranker" class="common-anchor-header">Voyage AI Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Voyage-AI-Ranker" class="anchor-icon" translate="no">
@@ -23,13 +23,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Voyage AI Ranker memanfaatkan pemeringkat khusus <a href="https://www.voyageai.com/">Voyage AI</a> untuk meningkatkan relevansi penelusuran melalui pemeringkatan ulang semantik. Ini memberikan kemampuan perangkingan ulang berkinerja tinggi yang dioptimalkan untuk aplikasi pencarian dan retrieval-augmented generation (RAG).</p>
-<p>Voyage AI Ranker sangat berharga untuk aplikasi yang membutuhkan:</p>
+    </button></h1><p>Voyage AI Ranker memanfaatkan reranker khusus <a href="https://www.voyageai.com/">dari Voyage AI</a> untuk meningkatkan relevansi pencarian melalui reranking semantik. Alat ini menyediakan kemampuan reranking berkinerja tinggi yang dioptimalkan untuk aplikasi Retrieval-Augmented Generation (RAG) dan pencarian.</p>
+<p>Voyage AI Ranker sangat berguna untuk aplikasi yang membutuhkan:</p>
 <ul>
-<li><p>Pemahaman semantik tingkat lanjut dengan model yang secara khusus dilatih untuk tugas pemeringkatan ulang</p></li>
+<li><p>Pemahaman semantik tingkat lanjut dengan model yang dilatih secara khusus untuk tugas pengurutan ulang</p></li>
 <li><p>Pemrosesan berkinerja tinggi dengan inferensi yang dioptimalkan untuk beban kerja produksi</p></li>
 <li><p>Kontrol pemotongan yang fleksibel untuk menangani panjang dokumen yang beragam</p></li>
-<li><p>Performa yang disesuaikan dengan baik di berbagai varian model (rerank-2, rerank-lite, dll.)</p></li>
+<li><p>Kinerja yang disesuaikan secara mendetail di berbagai varian model (rerank-2, rerank-lite, dll.)</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,14 +48,14 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Sebelum mengimplementasikan Voyage AI Ranker di Milvus, pastikan Anda memiliki:</p>
 <ul>
-<li><p>Koleksi Milvus dengan bidang <code translate="no">VARCHAR</code> yang berisi teks yang akan diperingkat ulang</p></li>
-<li><p>Kunci API Voyage AI yang valid dengan akses ke pemeringkat. Mendaftarlah di <a href="https://www.voyageai.com/">platform Voyage AI</a> untuk mendapatkan kredensial API Anda. Anda dapat memilih salah satu:</p>
+<li><p>Sebuah koleksi Milvus dengan bidang " <code translate="no">VARCHAR</code> " yang berisi teks yang akan diurutkan ulang</p></li>
+<li><p>Kunci API Voyage AI yang valid dengan akses ke rerankers. Daftarkan diri Anda di <a href="https://www.voyageai.com/">platform Voyage AI</a> untuk mendapatkan kredensial API Anda. Anda dapat:</p>
 <ul>
-<li><p>Mengatur variabel lingkungan <code translate="no">VOYAGE_API_KEY</code>, atau</p></li>
-<li><p>Menentukan kunci API secara langsung dalam konfigurasi pemeringkat</p></li>
+<li><p>Menetapkan variabel lingkungan ` <code translate="no">VOYAGE_API_KEY</code> `, atau</p></li>
+<li><p>Menentukan kunci API secara langsung dalam konfigurasi ranker</p></li>
 </ul></li>
 </ul>
-<h2 id="Create-a-Voyage-AI-ranker-function" class="common-anchor-header">Membuat fungsi pemeringkat Voyage AI<button data-href="#Create-a-Voyage-AI-ranker-function" class="anchor-icon" translate="no">
+<h2 id="Create-a-Voyage-AI-ranker-function" class="common-anchor-header">Buat fungsi ranker Voyage AI<button data-href="#Create-a-Voyage-AI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,9 +70,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan Voyage AI Ranker di aplikasi Milvus Anda, buat objek Function yang menentukan bagaimana pemeringkatan harus beroperasi. Fungsi ini akan diteruskan ke operasi pencarian Milvus untuk meningkatkan peringkat hasil.</p>
+    </button></h2><p>Untuk menggunakan Voyage AI Ranker dalam aplikasi Milvus Anda, buat objek Function yang menentukan cara kerja pengurutan ulang. Fungsi ini akan diteruskan ke operasi pencarian Milvus untuk meningkatkan peringkat hasil.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -120,11 +125,87 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;voyageai_semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;voyageai&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;model_name&quot;</span>, <span class="hljs-string">&quot;rerank-2.5&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;renewable energy developments&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;max_client_batch_size&quot;</span>, <span class="hljs-number">128</span>).
+    WithParam(<span class="hljs-string">&quot;truncation&quot;</span>, <span class="hljs-literal">true</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Voyage-AI-ranker-specific-parameters" class="common-anchor-header">Parameter khusus pemeringkat Voyage AI<button data-href="#Voyage-AI-ranker-specific-parameters" class="anchor-icon" translate="no">
+<h3 id="Voyage-AI-ranker-specific-parameters" class="common-anchor-header">Parameter khusus Voyage AI Ranker<button data-href="#Voyage-AI-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,11 +220,11 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Parameter berikut ini khusus untuk pemeringkat Voyage AI:</p>
+    </button></h3><p>Parameter berikut ini khusus untuk Voyage AI Ranker:</p>
 <table>
    <tr>
      <th><p><strong>Parameter</strong></p></th>
-     <th><p><strong>Diperlukan?</strong></p></th>
+     <th><p><strong>Wajib?</strong></p></th>
      <th><p><strong>Deskripsi</strong></p></th>
      <th><p><strong>Nilai / Contoh</strong></p></th>
    </tr>
@@ -156,31 +237,31 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Penyedia layanan model yang akan digunakan untuk pemeringkatan ulang.</p></td>
+     <td><p>Penyedia layanan model yang akan digunakan untuk pengurutan ulang.</p></td>
      <td><p><code translate="no">"voyageai"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Pemeringkat ulang Voyage AI yang akan digunakan dari model yang didukung pada platform Voyage AI.</p><p>Untuk daftar pemeringkat ulang yang tersedia, lihat<a href="https://docs.voyageai.com/docs/reranker"> dokumentasi</a> <a href="https://docs.voyageai.com/docs/reranker">Voyage AI</a>.</p></td>
+     <td><p>Reranker Voyage AI yang akan digunakan dari model-model yang didukung di platform Voyage AI.</p><p>Untuk daftar alat pengurutan ulang yang tersedia, lihat<a href="https://docs.voyageai.com/docs/reranker"> dokumentasi</a> <a href="https://docs.voyageai.com/docs/reranker">Voyage AI</a>.</p></td>
      <td><p><code translate="no">"rerank-2.5"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Ya</p></td>
-     <td><p>Daftar string kueri yang digunakan oleh model pemeringkatan ulang untuk menghitung skor relevansi. Jumlah string kueri harus sama persis dengan jumlah kueri dalam operasi pencarian Anda (bahkan saat menggunakan vektor kueri, bukan teks), jika tidak, kesalahan akan dilaporkan.</p></td>
-     <td><p><em>["kueri penelusuran"]</em></p></td>
+     <td><p>Daftar string kueri yang digunakan oleh model pengurutan ulang untuk menghitung skor relevansi. Jumlah string kueri harus sama persis dengan jumlah kueri dalam operasi pencarian Anda (bahkan saat menggunakan vektor kueri alih-alih teks), jika tidak, akan dilaporkan adanya kesalahan.</p></td>
+     <td><p><em>["kueri pencarian"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Karena layanan model tidak dapat memproses semua data sekaligus, ini menetapkan ukuran batch untuk mengakses layanan model dalam beberapa permintaan.</p></td>
+     <td><p>Karena layanan model mungkin tidak memproses semua data sekaligus, pengaturan ini menentukan ukuran batch untuk mengakses layanan model dalam beberapa permintaan.</p></td>
      <td><p><code translate="no">128</code> (default)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">truncation</code></p></td>
      <td><p>Tidak</p></td>
-     <td><p>Apakah akan memotong input untuk memenuhi "batas panjang konteks" pada kueri dan dokumen.</p><ul><li><p>Jika <code translate="no">True</code>, kueri dan dokumen akan dipotong agar sesuai dengan batas panjang konteks, sebelum diproses oleh model perangking.</p></li><li><p>Jika <code translate="no">False</code>, kesalahan akan muncul ketika kueri melebihi 8.000 token untuk <code translate="no">rerank-2.5</code> dan <code translate="no">rerank-2.5-lite</code>; 4.000 token untuk <code translate="no">rerank-2</code>; 2.000 token <code translate="no">rerank-2-lite</code> dan <code translate="no">rerank-1</code>; dan 1.000 token untuk <code translate="no">rerank-lite-1</code>, atau jumlah jumlah token dalam kueri dan jumlah token dalam satu dokumen melebihi 16.000 untuk <code translate="no">rerank-2</code>; 8.000 untuk <code translate="no">rerank-2-lite</code> dan <code translate="no">rerank-1</code>; dan 4.000 untuk <code translate="no">rerank-lite-1</code>.</p></li></ul></td>
+     <td><p>Apakah masukan akan dipotong untuk memenuhi "batas panjang konteks" pada kueri dan dokumen.</p><ul><li><p>Jika <code translate="no">True</code>, kueri dan dokumen akan dipotong agar sesuai dengan batas panjang konteks, sebelum diproses oleh model reranker.</p></li><li><p>Jika " <code translate="no">False</code>", kesalahan akan muncul ketika kueri melebihi 8.000 token untuk <code translate="no">rerank-2.5</code> dan <code translate="no">rerank-2.5-lite</code>; 4.000 token untuk <code translate="no">rerank-2</code>; 2.000 token <code translate="no">rerank-2-lite</code> dan <code translate="no">rerank-1</code>; serta 1.000 token untuk <code translate="no">rerank-lite-1</code>, atau jika jumlah total token dalam kueri ditambah jumlah token dalam satu dokumen mana pun melebihi 16.000 untuk <code translate="no">rerank-2</code>; 8.000 untuk <code translate="no">rerank-2-lite</code> dan <code translate="no">rerank-1</code>; dan 4.000 untuk <code translate="no">rerank-lite-1</code>.</p></li></ul></td>
      <td><p><code translate="no">True</code> (default) atau <code translate="no">False</code></p></td>
    </tr>
    <tr>
@@ -208,9 +289,14 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menerapkan Voyage AI Ranker ke pencarian vektor standar:</p>
+    </button></h2><p>Untuk menerapkan Voyage AI Ranker pada pencarian vektor standar:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with Voyage AI reranker</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -242,7 +328,66 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">5</span>,           <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;voyageai_semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;voyageai&quot;,
+        &quot;model_name&quot;: &quot;rerank-2.5&quot;,
+        &quot;queries&quot;: [
+            &quot;renewable energy developments&quot;
+        ],
+        &quot;max_client_batch_size&quot;: 128,
+        &quot;truncation&quot;: true
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 5,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

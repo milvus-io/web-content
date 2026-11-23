@@ -933,6 +933,11 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(
      }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Existing entities have <code translate="no">NULL</code> for <code translate="no">embedding_v2</code> and are skipped when you search on this field. To make existing entities searchable through <code translate="no">embedding_v2</code>, write non-NULL vector values through upsert or a backfill workflow. New entities can include <code translate="no">embedding_v2</code> during insert.</p>
+<div class="alert note">
+<p>Starting in Milvus 3.0.3, you can use <code translate="no">IS NULL</code> and <code translate="no">IS NOT NULL</code> in query and search filters on ordinary vector fields to select entities whose vector field is NULL or non-NULL, respectively.</p>
+<p>To find entities whose <code translate="no">embedding</code> field is NULL, use <code translate="no">query()</code> with the filter <code translate="no">embedding IS NULL</code>. This filter is also valid in <code translate="no">search()</code>. However, searching on <code translate="no">embedding</code> with this filter returns no hits: entities without an <code translate="no">embedding</code> value have no vector to compare with the query vector.</p>
+<p>For supported types, syntax, and examples, see <a href="/docs/ko/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL and IS NOT NULL operators</a>.</p>
+</div>
 <p><a id="add-vector-fields-generated-by-functions--milvus-30x"></a></p>
 <h3 id="Add-a-Function-and-its-generated-vector-field" class="common-anchor-header">Add a Function and its generated vector field<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Add-a-Function-and-its-generated-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1363,7 +1368,7 @@ Bound index:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Starting in Milvus 3.0.6, you can drop an individual sub-field from a StructArray field with <code translate="no">drop_collection_field()</code> by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in <a href="#when-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
+    </button></h3><p>Starting in Milvus 3.0.6, you can drop an individual sub-field from a StructArray field with <code translate="no">drop_collection_field()</code> by passing the sub-field path. Milvus removes the sub-field from the schema together with its index; its data is reclaimed as described in <a href="#When-is-storage-space-reclaimed-after-dropping-a-field">When is storage space reclaimed after dropping a field?</a>.</p>
 <p>The following example assumes that <code translate="no">chunks</code> is a StructArray field in <code translate="no">my_collection</code> with a <code translate="no">lang</code> sub-field, and drops only that sub-field.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>

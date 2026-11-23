@@ -61,18 +61,18 @@ summary: En esta página se explica el procedimiento para importar los datos pre
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si su canalización puede reintentar una solicitud de importación que haya fallado o haya agotado el tiempo de espera, asigne al trabajo una clave de idempotencia; consulte <a href="/docs/es/idempotent-import.md">Importación masiva idempotente</a>.</p>
+    </button></h2><p>Si su canalización puede reintentar una solicitud de importación que haya fallado o haya agotado el tiempo de espera, asigne al trabajo una clave de idempotencia; consulte <a href="/docs/es/idempotent-import.md">«Importación masiva idempotente</a>».</p>
 <p>Para importar los datos preparados, debe crear un trabajo de importación de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> parámetros<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> es una sencilla envoltura en torno a <code translate="no">POST /v2/vectordb/jobs/import/create</code>. Además del
+ejemplo anterior, expone los siguientes parámetros (PyMilvus 2.6 y posteriores).</p>
+<table>
+<thead>
+<tr><th>Parámetro</th><th>Tipo</th><th>Descripción</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Dirección del servidor, por ejemplo, <code translate="no">http://127.0.0.1:19530</code> o <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Colección de destino.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Base de datos de destino. Se envía como el encabezado <code translate="no">DB-Name</code> para RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Archivos ya disponibles para la instancia de Milvus, por ejemplo, en MinIO. Se trata de <strong>rutas del lado del servidor, no de URL de objetos</strong>. Cada sublista corresponde a un archivo JSON o Parquet, o a un conjunto de archivos NumPy.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Partición de destino. Se pasa mediante argumentos clave adicionales en lugar de un parámetro declarado, por lo que es fácil pasarla por alto en la firma. Déjala vacía para colecciones que utilicen una clave de partición.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>URL de un único objeto en un almacenamiento de objetos en la nube. Sustituida por <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>URL de objetos en un almacenamiento de objetos en la nube, por ejemplo, <code translate="no">s3://bucket/prefix/1.parquet</code>. Cada sublista corresponde a un objeto o a un prefijo que termina en <code translate="no">/</code>. Utiliza esto <strong>en lugar de</strong> <code translate="no">files</code>; se trata de dos transportes diferentes, no de sinónimos.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>ID del clúster de Zilliz Cloud.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>ID del proyecto de Zilliz Cloud, para las bases de datos del proyecto.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Región de la base de datos del proyecto.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>Clave de API, o <code translate="no">username:password</code> para una instancia autohospedada.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Credenciales de almacenamiento de objetos para <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Token de sesión para las credenciales de almacenamiento de objetos a corto plazo.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Volumen de Zilliz Cloud desde el que realizar la importación. Requiere <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Rutas dentro de <code translate="no">volume_name</code>. Cada sublista corresponde a un archivo o a un prefijo que termina en <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> o <code translate="no">str</code></td><td>Verificar el certificado TLS del servidor; <code translate="no">True</code> por defecto. Una cadena se trata como una ruta de paquete de CA.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> o <code translate="no">tuple</code></td><td>Certificado de cliente para TLS mutuo: una ruta de archivo o un par <code translate="no">('cert', 'key')</code>.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>Encabezados HTTP adicionales fusionados en la solicitud; prevalecen los valores del solicitante. Úsalos para enviar una clave de idempotencia, por ejemplo, <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; consulta <a href="/docs/es/idempotent-import.md">«Importación masiva idempotente</a>».</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Opciones de importación adicionales reenviadas al servidor en el cuerpo de la solicitud.</td></tr>
+</tbody>
+</table>
+<p>Cualquier argumento de palabra clave restante se reenvía a <code translate="no">requests.post</code>, por lo que <code translate="no">timeout</code> y <code translate="no">proxies</code>
+funcionan igual que allí. El envoltorio envía un tiempo de espera de 20 segundos por defecto.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">Comprobar el progreso de la importación<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,8 +219,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
       </svg>
     </button></h2><p>Una vez obtenido el ID de la tarea de importación, puedes comprobar el progreso de la importación de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>Puedes listar todas las tareas de importación relacionadas con una colección específica de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -394,7 +439,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 </ul></li>
 <li><p>Restricciones relativas al comportamiento de eliminación:</p>
 <ul>
-<li><p>Antes de que el estado del trabajo de importación sea <strong>«Completado»</strong>, la eliminación no está garantizada y puede tener éxito o no.</p></li>
+<li><p>Antes de que el estado del trabajo de importación sea <strong>«Completado»</strong>, la eliminación no está garantizada y puede que se realice con éxito o no.</p></li>
 <li><p>La eliminación una vez que el estado de la tarea sea <strong>«Completado»</strong> tiene éxito garantizado.</p></li>
 </ul></li>
 </ul>

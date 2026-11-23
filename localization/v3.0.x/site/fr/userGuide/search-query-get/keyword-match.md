@@ -232,8 +232,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Les performances et la précision de la recherche par mot-clé dépendent de l’analyseur sélectionné. Différents analyseurs sont adaptés à divers langages et structures de texte ; le choix du bon analyseur peut donc avoir un impact significatif sur les résultats de recherche pour votre cas d’utilisation spécifique.</p>
-<p>Par défaut, Milvus utilise l’analyseur « <code translate="no">standard</code> », qui tokenise le texte en fonction des espaces et de la ponctuation, supprime les tokens de plus de 40 caractères et convertit le texte en minuscules. Aucun paramètre supplémentaire n’est nécessaire pour appliquer ce paramètre par défaut. Pour plus d’informations, consultez <a href="/docs/fr/standard-analyzer.md">la section Standard</a>.</p>
+    </button></h3><p>Les performances et la précision de la recherche par mots-clés dépendent de l’analyseur sélectionné. Différents analyseurs sont adaptés à divers langages et structures de texte ; le choix de l’analyseur approprié peut donc avoir un impact significatif sur les résultats de recherche pour votre cas d’utilisation spécifique.</p>
+<p>Par défaut, Milvus utilise l’analyseur « <code translate="no">standard</code> », qui tokenise le texte en fonction des espaces et de la ponctuation, supprime les tokens de plus de 40 caractères et convertit le texte en minuscules. Aucun paramètre supplémentaire n’est nécessaire pour appliquer ce paramètre par défaut. Pour plus d’informations, consultez la section « <a href="/docs/fr/standard-analyzer.md">Standard</a> ».</p>
 <p>Si un analyseur différent est nécessaire, vous pouvez en configurer un à l’aide du paramètre ` <code translate="no">analyzer_params</code> `. Par exemple, pour appliquer l’analyseur ` <code translate="no">english</code> ` au traitement d’un texte en anglais :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -351,7 +351,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
         ></path>
       </svg>
     </button></h2><p>Une fois que vous avez activé la correspondance de texte pour un champ de type « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » dans le schéma de votre collection, vous pouvez effectuer des correspondances de texte à l’aide de l’expression « <code translate="no">TEXT_MATCH</code> ».</p>
-<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Syntaxe de l'expression TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
+<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">Syntaxe de l’expression TEXT_MATCH<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -374,7 +374,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(field_name, text)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: Le nom du champ « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » activé pour la correspondance, dans lequel effectuer la recherche.</p></li>
+<li><p><code translate="no">field_name</code>: Le nom du champ « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » activé pour la recherche par correspondance.</p></li>
 <li><p><code translate="no">text</code>: Les termes à rechercher. Plusieurs termes peuvent être séparés par des espaces ou d’autres délimiteurs appropriés en fonction de la langue et de l’analyseur configuré.</p></li>
 </ul>
 <p>Par défaut, <code translate="no">TEXT_MATCH</code> utilise la logique de correspondance <strong>« OU »</strong>, ce qui signifie qu’il renverra les documents contenant l’un des termes spécifiés. Par exemple, pour rechercher des documents contenant le terme « <code translate="no">machine</code> » ou « <code translate="no">deep</code> » dans le champ « <code translate="no">text</code> », utilisez l’expression suivante :</p>
@@ -469,7 +469,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = 1)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: Le nom du champ « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » activé pour la recherche à effectuer.</p></li>
+<li><p><code translate="no">field_name</code>: Le nom du champ « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » activé pour la correspondance, dans lequel effectuer la recherche.</p></li>
 <li><p><code translate="no">text</code>: Le texte de la requête à analyser et à comparer aux tokens indexés.</p></li>
 <li><p><code translate="no">max_edit_distance</code>: La distance d’édition maximale autorisée pour chaque token de la requête. Le nom de l’option doit être exactement « <code translate="no">max_edit_distance</code> », et sa valeur doit être « <code translate="no">0</code> », « <code translate="no">1</code> » ou « <code translate="no">2</code> ». Une valeur de « <code translate="no">0</code> » effectue une correspondance exacte des tokens, équivalente à « <code translate="no">TEXT_MATCH</code> ».</p></li>
 </ul>
@@ -510,8 +510,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La correspondance textuelle peut être utilisée en combinaison avec la recherche par similarité vectorielle pour affiner le champ de recherche et améliorer les performances de recherche. En filtrant la collection à l’aide de la correspondance textuelle avant la recherche par similarité vectorielle, vous pouvez réduire le nombre de documents à analyser, ce qui accélère le temps de traitement des requêtes.</p>
-<p>Dans cet exemple, l’expression <code translate="no">filter</code> filtre les résultats de recherche pour n’inclure que les documents correspondant aux termes spécifiés <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. La recherche par similarité vectorielle est ensuite effectuée sur ce sous-ensemble filtré de documents.</p>
+    </button></h3><p>La correspondance textuelle peut être utilisée en combinaison avec la recherche par similarité vectorielle pour affiner le champ de recherche et améliorer les performances de recherche. En filtrant la collection à l’aide de la correspondance textuelle avant la recherche par similarité vectorielle, vous pouvez réduire le nombre de documents à parcourir, ce qui accélère le temps de réponse des requêtes.</p>
+<p>Dans cet exemple, l’expression <code translate="no">filter</code> filtre les résultats de recherche pour n’inclure que les documents correspondant au terme spécifié <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. La recherche par similarité vectorielle est ensuite effectuée sur ce sous-ensemble filtré de documents.</p>
 <div class="alert note">
 <p>Vous pouvez mettre en évidence les termes correspondants dans les résultats de recherche en configurant un surligneur de texte. Voir <a href="/docs/fr/text-highlighter.md">Surligneur de texte</a> pour plus de détails.</p>
 </div>
@@ -743,7 +743,7 @@ milvus::QueryResponse response;
 <li><p>Règles d'échappement dans les expressions d'<code translate="no">filter</code>:</p>
 <ul>
 <li><p>Les caractères placés entre guillemets doubles ou simples au sein d’expressions sont interprétés comme des constantes de chaîne. Si la constante de chaîne contient des caractères d’échappement, ceux-ci doivent être représentés à l’aide d’une séquence d’échappement. Par exemple, utilisez <code translate="no">\\</code> pour représenter <code translate="no">\</code>, <code translate="no">\\t</code> pour représenter une tabulation <code translate="no">\t</code>, et <code translate="no">\\n</code> pour représenter un saut de ligne.</p></li>
-<li><p>Si une constante de chaîne est placée entre guillemets simples, un guillemet simple à l'intérieur de la constante doit être représenté par <code translate="no">\\'</code>, tandis qu'un guillemet double peut être représenté soit par <code translate="no">&quot;</code>, soit par <code translate="no">\\&quot;</code>. Exemple : <code translate="no">'It\\'s milvus'</code>.</p></li>
+<li><p>Si une constante de chaîne est placée entre guillemets simples, un guillemet simple à l’intérieur de la constante doit être représenté par <code translate="no">\\'</code>, tandis qu’un guillemet double peut être représenté soit par <code translate="no">&quot;</code>, soit par <code translate="no">\\&quot;</code>. Exemple : <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Si une constante de chaîne est placée entre guillemets doubles, un guillemet double à l'intérieur de la constante doit être représenté par <code translate="no">\\&quot;</code>, tandis qu'un guillemet simple peut être représenté soit par <code translate="no">'</code>, soit par <code translate="no">\\'</code>. Exemple : <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</p></li>
 </ul></li>
 </ul>

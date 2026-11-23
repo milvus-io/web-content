@@ -34,7 +34,7 @@ title: 在本地运行 Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 是<a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a> 的轻量级本地后端。请通过可选的<code translate="no">milvus-lite</code> 附加组件进行安装；仅安装<code translate="no">pymilvus</code> 并不会在下面使用的 SDK 版本中安装此后端。</p>
+    </button></h2><p>Milvus Lite 是<a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a> 的轻量级本地后端。请通过可选的<code translate="no">milvus-lite</code> 扩展进行安装；仅安装<code translate="no">pymilvus</code> 并不会在下面使用的 SDK 版本中安装此后端。</p>
 <p>Milvus Lite 适用于以下环境中的本地开发和小规模工作负载：</p>
 <ul>
 <li>Jupyter Notebook 或 Google Colab</li>
@@ -63,7 +63,7 @@ title: 在本地运行 Milvus Lite
 <li>macOS、Linux 或 Windows 系统，并具备兼容的依赖项轮子（如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）。Milvus Lite 3.2.2 是一个纯 Python 包，因此操作系统和架构必须满足这些依赖项的要求，而非 Lite 包本身的要求。</li>
 <li>用于数据库存储的可写本地目录。</li>
 </ul>
-<p>在 Windows 系统上，由于其平台标记，pip 会跳过 PyMilvus 3.0.2 中的<code translate="no">milvus-lite</code> 附加项，因此必须显式指定<code translate="no">milvus-lite</code> 。下面的安装命令已包含此操作。对于其他软件包和平台的组合，请参阅<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite 发布要求</a>。</p>
+<p>在 Windows 系统上，由于其平台标记，pip 会跳过 Milvus 3.0.2 的<code translate="no">milvus-lite</code> 附加项，因此必须显式指定<code translate="no">milvus-lite</code> 。下面的安装命令已包含此操作。对于其他软件包和平台的组合，请参阅<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite 发布要求</a>。</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">设置 Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,7 +87,7 @@ python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0
 <p>请为 extras 表达式添加引号，以免 zsh 等 shell 解释其中的方括号。在 Windows PowerShell 中，请使用<code translate="no">.venv\Scripts\Activate.ps1</code> 而不是<code translate="no">source .venv/bin/activate</code> 来激活环境。明确指定版本号可确保 SDK 和本地后端与本指南保持一致。</p>
 <div class="alert note">
 <blockquote>
-<p>Milvus Lite 3.x 使用的存储引擎与原始 2.x 包不同。它无法就地打开现有的 2.x<code translate="no">.db</code> 文件。 请保留原始数据库及能够打开它的环境，将数据导出到该环境，然后将数据导入新数据库。安装新软件包不会迁移旧的存储格式。请参阅《<a href="#Migrating-data-from-Milvus-Lite">从 Milvus Lite 迁移数据</a>》。</p>
+<p>Milvus Lite 3.x 使用的存储引擎与原始 2.x 包不同。它无法就地打开现有的 2.x<code translate="no">.db</code> 文件。 请保留原始数据库及其可打开该数据库的环境，将数据导出至该环境，然后将数据导入新数据库。安装新软件包不会迁移旧的存储格式。请参阅《<a href="#Migrating-data-from-Milvus-Lite">从 Milvus Lite 迁移数据</a>》。</p>
 </blockquote>
 </div>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">连接到 Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
@@ -203,17 +203,17 @@ client.close()
 <tr><td>稠密和稀疏向量</td><td><code translate="no">FLOAT_VECTOR</code> 以及<code translate="no">SPARSE_FLOAT_VECTOR</code></td></tr>
 <tr><td>向量索引</td><td><code translate="no">FLAT</code>、<code translate="no">BRUTE_FORCE</code> 、<code translate="no">IVF_FLAT</code> 、<code translate="no">IVF_SQ8</code> 、<code translate="no">HNSW</code> 、<code translate="no">HNSW_SQ</code> ，以及<code translate="no">AUTOINDEX</code></td></tr>
 <tr><td>标量和稀疏索引</td><td><code translate="no">INVERTED</code> 标量索引和<code translate="no">SPARSE_INVERTED_INDEX</code></td></tr>
-<tr><td>数据操作</td><td>插入、更新或插入、获取、查询、向量搜索和删除</td></tr>
+<tr><td>数据操作</td><td>插入、更新或插入（upsert）、获取、查询、向量搜索和删除</td></tr>
 <tr><td>搜索</td><td>稠密和稀疏搜索、元数据过滤器、多个向量字段以及混合搜索</td></tr>
-<tr><td>Collection organization</td><td>Collections、命名数据库、别名和分区（在本地适配器支持的操作范围内）</td></tr>
+<tr><td>Collection organization</td><td>Collection、命名数据库、别名和分区（在本地适配器支持的操作范围内）</td></tr>
 </tbody>
 </table>
 <p>此版本不限于<code translate="no">FLAT</code> 索引。索引的可用性和行为取决于Lite版本；请勿将原始2.x后端的限制套用到3.x引擎上。</p>
 <p>在为应用程序选择 Lite 版本之前，请仔细阅读以下限制：</p>
 <ul>
 <li>每次仅有一个进程可以拥有数据库存储目录。引擎通过文件锁保护该目录。</li>
-<li>请对写入同一Collection的操作进行串行化处理。不支持安全地进行并发写入。</li>
-<li>本地适配器并未实现所有 Milvus RPC 接口。不支持的操作将返回<code translate="no">UNIMPLEMENTED</code> ；无法进行模式修改以及分区级别的加载或释放操作。</li>
+<li>请对写入同一Collection的操作进行串行化处理。系统无法安全地支持并发写入。</li>
+<li>本地适配器并未实现所有 Milvus RPC 接口。不支持的操作将返回<code translate="no">UNIMPLEMENTED</code> ；无法进行 Schema 修改以及分区级别的加载或释放操作。</li>
 <li>不支持身份验证、用户、角色、基于角色的访问控制（RBAC）和 TLS。请勿将本地服务器暴露在不可信的网络中。</li>
 <li>不支持二进制、float16、bfloat16 和 int8 向量字段，以及 Product Quantization 索引。</li>
 <li>Lite 专为本地工作负载设计。本地 API 兼容性无法提供分布式扩展能力，也无法提供远程部署所具备的生产环境隔离性和可用性。</li>
@@ -269,5 +269,5 @@ milvus-lite dump -h
 <li><a href="/docs/zh/quickstart.md">快速入门</a>：生成Embeddings并运行搜索工作流。</li>
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a>和<a href="/docs/zh/multi-vector-search.md">混合搜索</a>：为您的应用程序设计查询。</li>
 <li><a href="/docs/zh/install-overview.md">选择部署方式</a>：突破本地开发限制。</li>
-<li><a href="https://github.com/zilliztech/attu">Attu</a>：探索 Milvus 图形用户界面（GUI），进行远程部署。</li>
+<li><a href="https://github.com/zilliztech/attu">Attu</a>：探索 Milvus 图形用户界面（GUI），实现远程部署。</li>
 </ul>

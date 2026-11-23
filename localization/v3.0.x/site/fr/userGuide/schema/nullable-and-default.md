@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus prend en charge les champs pouvant accepter la valeur NULL, ce qui permet qu'une valeur de champ soit manquante ou explicitement définie sur NULL. La possibilité d'accepter la valeur NULL est définie au niveau du schéma et s'applique de manière cohérente lors des opérations d'ingestion, d'indexation, de recherche et de requête.</p>
+    </button></h1><p>Milvus prend en charge les champs pouvant accepter la valeur NULL, ce qui permet qu'une valeur de champ soit manquante ou explicitement définie sur NULL. La possibilité d'accepter la valeur NULL est définie au niveau du schéma et s'applique de manière cohérente lors des opérations d'ingestion de données, d'indexation, de recherche et de requête.</p>
 <p>Utilisez des champs pouvant accepter la valeur NULL lorsque :</p>
 <ul>
 <li>Les données sont ingérées à partir de systèmes externes autorisant des valeurs manquantes.</li>
@@ -44,10 +44,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Les champs vectoriels autorisant les valeurs NULL ne prennent pas en charge les expressions de filtrage de type « <code translate="no">IS NULL</code> » ou « <code translate="no">IS NOT NULL</code> ». Vous ne pouvez pas filtrer explicitement les entités en fonction du fait qu’une valeur de champ vectoriel soit NULL.</p></li>
-<li><p>À partir de Milvus 3.0.0, le champ <a href="/docs/fr/array-of-structs.md">StructArray</a> parent peut être nullable. Définissez l’ <code translate="no">nullable=True</code> sur le champ StructArray parent, et non sur les sous-champs individuels. La valeur NULL s’applique à l’ensemble du champ StructArray, et non à un élément Struct individuel, et Milvus propage en interne la nullabilité du parent à ses sous-champs. Un champ StructArray ajouté à une collection existante doit être « nullable » afin que les entités existantes puissent renvoyer la valeur NULL pour ce nouveau champ. À partir de Milvus 3.0.6, un sous-champ peut en outre autoriser une valeur NULL dans un élément Struct individuel : « <code translate="no">nullable=True</code> » sur un sous-champ scalaire ou vectoriel, « <code translate="no">element_nullable=True</code> » sur un sous-champ de type tableau ; un élément Struct lui-même ne peut toujours pas être NULL. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray Limits</a> ».</p></li>
+<li><p>À partir de Milvus 3.0.0, le champ <a href="/docs/fr/array-of-structs.md">StructArray</a> parent peut être nullable. Définissez l’ <code translate="no">nullable=True</code> e sur le champ StructArray parent, et non sur les sous-champs individuels. La valeur NULL s’applique à l’ensemble du champ StructArray, et non à un élément Struct individuel, et Milvus propage en interne la nullabilité du parent à ses sous-champs. Un champ StructArray ajouté à une collection existante doit être nullable afin que les entités existantes puissent renvoyer NULL pour le nouveau champ. À partir de Milvus 3.0.6, un sous-champ peut en outre autoriser une valeur NULL dans un élément Struct individuel : « <code translate="no">nullable=True</code> » sur un sous-champ scalaire ou vectoriel, « <code translate="no">element_nullable=True</code> » sur un sous-champ de type tableau ; un élément Struct lui-même ne peut toujours pas être NULL. Pour plus de détails, reportez-vous à la section « <a href="/docs/fr/structarray-limits.md#Nullable-and-dynamic-schema-limits">Limites de StructArray</a> ».</p></li>
 <li><p>L’attribut « nullable » est défini lors de la création d’un champ et ne peut pas être modifié par la suite. Vous ne pouvez pas activer ou désactiver la nullabilité pour un champ existant.</p></li>
-<li><p>Les champs marqués comme pouvant être nuls ne peuvent pas être utilisés comme clés de partition. Les champs de clé de partition doivent toujours contenir des valeurs valides et non nulles. Pour plus d’informations, reportez-vous à la section <a href="/docs/fr/use-partition-key.md">Utilisation d’une clé de partition</a>.</p></li>
+<li><p>Les champs marqués comme pouvant être nuls ne peuvent pas être utilisés comme clés de partition. Les champs de clé de partition doivent toujours contenir des valeurs valides et non nulles. Pour plus d’informations, consultez la section <a href="/docs/fr/use-partition-key.md">Utilisation d’une clé de partition</a>.</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">Qu’est-ce qu’un champ pouvant prendre la valeur NULL ?<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -330,7 +329,7 @@ curl --request POST \
 <li>Les entités peuvent omettre le champ « <code translate="no">embedding</code> » ou lui attribuer une valeur NULL lors de l’insertion.</li>
 <li>La décision d’autoriser les valeurs NULL est prise au moment de la création de la collection.</li>
 </ul>
-<p>Par souci de clarté, les exemples suivants se concentrent sur un champ vectoriel pouvant prendre la valeur NULL (<code translate="no">embedding</code>). La définition de champs scalaires pouvant prendre la valeur NULL est facultative et n’est pas requise pour suivre la suite de ce guide.</p>
+<p>Par souci de clarté, les exemples suivants se concentrent sur un champ vectoriel pouvant prendre la valeur NULL (<code translate="no">embedding</code>). La définition de champs scalaires pouvant prendre la valeur NULL est facultative et n’est pas requise pour suivre le reste de ce guide.</p>
 <p><details>
 <summary>Facultatif : définir un champ scalaire pouvant prendre la valeur NULL</summary></p>
 <p>Les champs scalaires peuvent également être définis comme pouvant prendre la valeur NULL à l’aide du même attribut ` <code translate="no">nullable</code> ` et suivent les mêmes règles lors de l’ingestion. Par exemple :</p>
@@ -584,7 +583,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après l'insertion des données, vous pouvez créer un index sur un champ pouvant prendre la valeur NULL comme d'habitude. La principale différence réside dans la manière dont Milvus gère les valeurs NULL lors de la création de l'index :</p>
+    </button></h2><p>Après l’insertion des données, vous pouvez créer un index sur un champ pouvant prendre la valeur NULL comme d’habitude. La principale différence réside dans la manière dont Milvus gère les valeurs NULL lors de la création de l’index :</p>
 <ul>
 <li>Seules les entités dont les valeurs ne sont pas NULL sont ajoutées à l’index.</li>
 <li>Les entités comportant des valeurs NULL sont ignorées et ne participent pas à la création de l’index.</li>
@@ -752,7 +751,7 @@ curl --request POST \
 <p>À ce stade :</p>
 <ul>
 <li>Les entités dont les valeurs d'embedding sont valides sont indexées et prêtes à être recherchées.</li>
-<li>Les entités dont l'embedding est NULL restent dans la collection, mais elles ne sont pas incluses dans l'index vectoriel.</li>
+<li>Les entités dont l’embedding est NULL restent dans la collection, mais elles ne sont pas incluses dans l’index vectoriel.</li>
 </ul>
 <h2 id="Search-behavior-with-nullable-fields" class="common-anchor-header">Comportement de recherche avec des champs pouvant prendre la valeur NULL<button data-href="#Search-behavior-with-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -769,12 +768,12 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lorsque vous effectuez des opérations de recherche sur un champ pouvant prendre la valeur NULL, Milvus n'évalue que les entités dont la valeur du champ utilisé dans la recherche n'est pas NULL. Les entités dont le champ vectoriel est NULL sont automatiquement ignorées.</p>
+    </button></h2><p>Lorsque vous effectuez des opérations de recherche sur un champ pouvant prendre la valeur NULL, Milvus n'évalue que les entités dont la valeur du champ utilisé dans la recherche est non nulle. Les entités dont le champ vectoriel est NULL sont automatiquement ignorées.</p>
 <p>Pour un champ vectoriel pouvant prendre la valeur NULL, tel que « <code translate="no">embedding</code> » dans cet exemple :</p>
 <ul>
 <li>Seules les entités présentant des valeurs vectorielles valides sont évaluées et classées.</li>
 <li>Les entités dont le vecteur est NULL ne provoquent pas d’erreurs.</li>
-<li>Si le nombre de vecteurs valides est inférieur au nombre d’ <code translate="no">topK</code> s demandées (<code translate="no">limit</code>), Milvus peut renvoyer moins de résultats que <code translate="no">limit</code>.</li>
+<li>Si le nombre de vecteurs valides est inférieur au nombre d'<code translate="no">topK</code> s demandées (<code translate="no">limit</code>), Milvus peut renvoyer moins de résultats que <code translate="no">limit</code>.</li>
 </ul>
 <p>L'exemple suivant effectue une recherche vectorielle sur le champ vectoriel pouvant contenir des valeurs NULL <code translate="no">embedding</code>:</p>
 <div class="multipleCode">
@@ -935,8 +934,12 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les exemples précédents se concentrent sur les champs vectoriels. Cette section décrit le comportement des valeurs NULL dans <strong>les expressions de filtrage scalaires</strong>.</p>
-<p>Les champs scalaires peuvent être définis avec <code translate="no">nullable=True</code> et suivent les mêmes règles d’ingestion que les champs vectoriels. Cependant, <strong>les valeurs scalaires NULL sont toujours évaluées comme fausses dans les expressions de filtrage</strong>. Utilisez <code translate="no">IS NULL</code> ou <code translate="no">IS NOT NULL</code> pour sélectionner des entités en fonction de la valeur d’un champ scalaire (NULL ou non).</p>
+    </button></h2><div class="alert note">
+<p>À partir de Milvus 3.0.3, vous pouvez utiliser les champs « <code translate="no">IS NULL</code> » et « <code translate="no">IS NOT NULL</code> » dans les filtres de requête et de recherche sur des champs vectoriels ordinaires afin de sélectionner respectivement les entités dont le champ vectoriel est NULL ou non NULL.</p>
+<p>Pour trouver les entités dont le champ « <code translate="no">embedding</code> » est NULL, utilisez « <code translate="no">query()</code> » avec le filtre « <code translate="no">embedding IS NULL</code> ». Ce filtre est également valable dans « <code translate="no">search()</code> ». Cependant, une recherche sur « <code translate="no">embedding</code> » avec ce filtre ne renvoie aucun résultat : les entités sans valeur « <code translate="no">embedding</code> » n’ont pas de vecteur à comparer avec le vecteur de requête.</p>
+<p>Pour connaître les types pris en charge, la syntaxe et des exemples, consultez <a href="/docs/fr/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">les opérateurs IS NULL et IS NOT NULL</a>.</p>
+</div>
+<p>Pour les champs scalaires définis avec <code translate="no">nullable=True</code>, les conditions de comparaison telles que <code translate="no">age &gt; 18</code> ou <code translate="no">status == &quot;active&quot;</code> ne correspondent pas aux entités pour lesquelles le champ comparé est NULL.</p>
 <p>Par exemple, pour un champ scalaire pouvant prendre la valeur NULL <code translate="no">age</code>, le filtre suivant sélectionne les entités dont l’âge est supérieur à 18 :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1040,7 +1043,7 @@ Console.WriteLine(res);
 <ul>
 <li>Lorsqu'un champ possède une valeur par défaut non NULL, cette valeur est utilisée, que l'option « <code translate="no">nullable</code> » soit activée ou non.</li>
 <li>Lorsque l'<code translate="no">nullable=True</code> est activée mais qu'aucune valeur par défaut n'est définie, le champ stocke la valeur NULL.</li>
-<li>Lorsqu'<code translate="no">nullable=False</code> est activé mais qu'aucune valeur par défaut n'est définie, l'insertion échoue et génère une erreur.</li>
+<li>Lorsqu’ <code translate="no">nullable=False</code> est activé mais qu’aucune valeur par défaut n’est définie, l’insertion échoue et génère une erreur.</li>
 <li>La définition d’une valeur par défaut NULL sur un champ non nul n’est pas valide et provoque une erreur.</li>
 </ul>
 <p>Pour des exemples complets et l’utilisation de l’API concernant les valeurs par défaut, consultez la section « <a href="/docs/fr/default-values.md">Valeurs par défaut</a> ».</p>

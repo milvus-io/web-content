@@ -66,7 +66,7 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li>Verwenden Sie eine Backup-Binärdatei und Konfigurationsbeispiele aus derselben Version. Das <a href="/docs/de/milvus_backup_cli.md#Obtain-Milvus-Backup">0.5.x-Handbuch</a> bezieht sich auf Version 0.5.16; das <a href="/docs/de/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">aktuelle Handbuch</a> bezieht sich auf Version 0.6.0.</li>
+<li>Verwenden Sie eine Backup-Binärdatei und Konfigurationsbeispiele aus derselben Version. Das <a href="/docs/de/milvus_backup_cli.md#Obtain-Milvus-Backup">Handbuch für 0.5.x</a> bezieht sich auf Version 0.5.16; das <a href="/docs/de/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">aktuelle Handbuch</a> bezieht sich auf Version 0.6.0.</li>
 <li>Stellen Sie Netzwerkzugriff auf Milvus, dessen Speicher und das Backup-Ziel bereit. Für Snapshot-Vorgänge muss der Milvus-Server zudem den Backup-Speicher erreichen können.</li>
 <li>Überprüfen Sie die Serverkompatibilität unten. Go ist nur erforderlich, wenn Sie aus dem Quellcode kompilieren: Version 1.25 oder höher für Backup 0.5.16 und 1.26 oder höher für 0.6.0.</li>
 </ul>

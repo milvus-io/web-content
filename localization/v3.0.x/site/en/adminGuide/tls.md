@@ -77,8 +77,8 @@ summary: Learn how to enable TLS proxy in Milvus.
     </button></h3><ol>
 <li>Create the <code translate="no">gen.sh</code> file.</li>
 </ol>
-<pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
-<span class="hljs-built_in">touch</span> gen.sh
+<pre><code translate="no" class="language-shell">mkdir cert &amp;&amp; cd cert
+touch gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
 <li>Copy the following script into the <code translate="no">gen.sh</code>.</li>
@@ -96,9 +96,9 @@ CommonName=&quot;localhost&quot;
 ExpireDays=3650 # 10 years
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">generate private key <span class="hljs-keyword">for</span> ca, server and client</span>
-openssl genpkey -quiet -algorithm rsa:2048 -out ca.key
-openssl genpkey -quiet -algorithm rsa:2048 -out server.key
-openssl genpkey -quiet -algorithm rsa:2048 -out client.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out ca.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out server.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out client.key
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">create a new ca certificate</span>
 openssl req -x509 -new -nodes -key ca.key -sha256 -days 36500 -out ca.pem \
@@ -109,6 +109,11 @@ echo &#x27;[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[v3_client]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
 subjectAltName = @alt_names
 [alt_names]
 DNS = &#x27;$CommonName &gt; openssl.cnf
@@ -123,7 +128,7 @@ openssl req -new -key server.key\
 openssl req -new -key client.key\
   -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;\
   | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
-    -extfile ./openssl.cnf -extensions v3_req
+    -extfile ./openssl.cnf -extensions v3_client
 
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
@@ -178,14 +183,19 @@ CommonName=&quot;localhost&quot;
 ExpireDays=3650 # 10 years
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">generate private key <span class="hljs-keyword">for</span> ca, server and client</span>
-openssl genpkey -quiet -algorithm rsa:2048 -out server.key
-openssl genpkey -quiet -algorithm rsa:2048 -out client.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out server.key
+openssl genpkey -quiet -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out client.key
 <span class="hljs-meta prompt_">
 # </span><span class="language-bash">prepare extension config <span class="hljs-keyword">for</span> signing certificates</span>
 echo &#x27;[v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[v3_client]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth
 subjectAltName = @alt_names
 [alt_names]
 DNS = &#x27;$CommonName &gt; openssl.cnf
@@ -200,7 +210,7 @@ openssl req -new -key server.key\
 openssl req -new -key client.key\
   -subj &quot;/C=$Country/ST=$State/L=$Location/O=$Organization/OU=$OrganizationUnit/CN=$CommonName&quot;\
   | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
-    -extfile ./openssl.cnf -extensions v3_req
+    -extfile ./openssl.cnf -extensions v3_client
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <p>Run the <code translate="no">renew.sh</code> file to create certificate.</p>
@@ -281,6 +291,11 @@ openssl req -new -key client.key\
 <li><code translate="no">caPemPath</code>: The path to the CA certificate file.</li>
 <li><code translate="no">internaltlsEnabled</code>: Whether to enable internal TLS. For now only one-way tls is supported.</li>
 </ul>
+<div class="alert note">
+<blockquote>
+<p>By default, the <code translate="no">tls</code> and <code translate="no">internaltls</code> paths in <code translate="no">milvus.yaml</code> point to the sample certificate and key files under <code translate="no">configs/cert</code>. These files, including their private keys, are published in the Milvus source repository. Do not use them in your deployment. Set <code translate="no">serverPemPath</code>, <code translate="no">serverKeyPath</code>, and <code translate="no">caPemPath</code> to the files that you generated.</p>
+</blockquote>
+</div>
 <h4 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Map certificate files to the container</h4><h5 id="Prepare-certificate-files" class="common-anchor-header">Prepare certificate files</h5><p>Create a new folder named <code translate="no">tls</code> in the same directory as your <code translate="no">docker-compose.yaml</code>. Copy the <code translate="no">server.pem</code>, <code translate="no">server.key</code>, and <code translate="no">ca.pem</code> into the <code translate="no">tls</code> folder. Place them in a directory structure as follows:</p>
 <pre><code translate="no">├── docker-compose.yml
 ├── milvus.yaml
@@ -471,9 +486,9 @@ openssl req -new -key client.key\
     <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Create the milvus release:</p>
-<pre><code translate="no" class="language-bash">helm repo add milvus https://zilliztech.github.io/milvus-helm/
-helm repo update milvus
-helm install my-release milvus/milvus -f values.yaml
+<pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
+helm repo update zilliztech
+helm install my-release zilliztech/milvus --version 5.0.22 -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-Internal-TLS-enabled" class="common-anchor-header">Verify Internal TLS enabled<button data-href="#Verify-Internal-TLS-enabled" class="anchor-icon" translate="no">
       <svg translate="no"

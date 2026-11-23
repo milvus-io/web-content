@@ -27,8 +27,8 @@ summary: >-
 <li>Configure object storage for Loki.</li>
 <li>Query logs using Grafana.</li>
 </ul>
-<p>For reference, <a href="https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent">Promtail</a> will be deprecated.
-So we introduce Alloy, which has been officially suggested by Grafana Labs as the new agent to collect Kubernetes logs and forward them to Loki.</p>
+<p>For reference, <a href="https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent">Promtail</a> reached end of life (EOL) on March 2, 2026.
+This guide uses Alloy, which Grafana Labs recommends as the agent to collect Kubernetes logs and forward them to Loki.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,11 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  L'indice RTREE è una struttura dati ad albero che accelera le query sui campi
-  GEOMETRY. Se la tua raccolta memorizza oggetti geometrici quali punti, linee o
-  poligoni in formato WKT (Well-known text) e desideri velocizzare il filtraggio
-  spaziale, RTREE è la scelta ideale.
+summary: Utilizza RTREE per velocizzare il filtraggio spaziale sui campi GEOMETRY.
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -23,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'indice " <code translate="no">RTREE</code> " è una struttura dati ad albero che accelera le query sui campi " <code translate="no">GEOMETRY</code> " in Milvus. Se la tua collezione memorizza oggetti geometrici quali punti, linee o poligoni in formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT (Well-known text)</a> e desideri accelerare il filtraggio spaziale, " <code translate="no">RTREE</code> " è la scelta ideale.</p>
-<h2 id="How-it-works" class="common-anchor-header">Come funziona<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> accelera il filtraggio spaziale su campi <code translate="no">GEOMETRY</code> contenenti punti, linee o poligoni in formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT (Well-known text)</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utilizza un indice « <code translate="no">RTREE</code> » per organizzare e filtrare in modo efficiente i dati geometrici, seguendo un processo in due fasi:</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">Fase 1: Creazione dell’indice<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Tipi di dati supportati<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,8 +50,58 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
-<li><p><strong>Creazione dei nodi foglia:</strong> per ogni oggetto geometrico, viene calcolato <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">il</a> suo <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">rettangolo di delimitazione minimo</a> (MBR), ovvero il rettangolo più piccolo che contiene interamente l’oggetto, e viene memorizzato come nodo foglia.</p></li>
+    </button></h3><p><code translate="no">GEOMETRY</code> campi. Per le definizioni dei campi, consultare <a href="/docs/it/geometry-field.md">Campo geometrico</a>.</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Accelerazione del filtro<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> individua i candidati utilizzando i riquadri di delimitazione, quindi Milvus verifica la relazione spaziale esatta. Supporta i seguenti <a href="/docs/it/geometry-operators.md">operatori geometrici</a>:</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code> e <code translate="no">ST_WITHIN</code>.</li>
+<li><code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code> e <code translate="no">ST_DWITHIN</code>.</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> non utilizza <code translate="no">RTREE</code>. In assenza di un indice idoneo, i filtri spaziali eseguono una scansione del campo.</p>
+<div class="alert note">
+<blockquote>
+<p>Si tratta di funzionalità dell’indice, non di limiti alle espressioni di filtro valide. Vedere <a href="/docs/it/scalar_index.md#Filter-execution">Indice scalare</a> per i vincoli di ricerca condivisi. Per i test su <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> e NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), vedere <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">Come funziona RTREE<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>Visualizza il processo di creazione e interrogazione</strong></summary></p>
+<p>Milvus utilizza un indice <code translate="no">RTREE</code> e per organizzare e filtrare in modo efficiente i dati geometrici, seguendo un processo in due fasi:</p>
+<p><strong>Fase 1: Creazione dell’indice</strong></p>
+<ol>
+<li><p><strong>Creazione dei nodi foglia:</strong> per ogni oggetto geometrico, si calcola <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">il</a> suo <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">rettangolo di delimitazione minimo</a> (MBR), ovvero il rettangolo più piccolo che contiene interamente l’oggetto, e lo si memorizza come nodo foglia.</p></li>
 <li><p><strong>Raggruppamento in riquadri più grandi:</strong> raggruppare i nodi foglia vicini e racchiudere ciascun gruppo in un nuovo MBR, formando nodi interni. Ad esempio, il gruppo <strong>B</strong> contiene <strong>D</strong> ed <strong>E</strong>; il gruppo <strong>C</strong> contiene <strong>F</strong> e <strong>G</strong>.</p></li>
 <li><p><strong>Aggiunta del nodo radice:</strong> si aggiunge un nodo radice il cui MBR copre tutti i gruppi interni, ottenendo una struttura ad albero bilanciata in altezza.</p></li>
 </ol>
@@ -66,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Come funziona Retree</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Fase 2: Accelerare le query<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>Fase 2: Accelerare le query</strong></p>
+<ol>
 <li><p><strong>Formare l’MBR della query:</strong> calcolare l’MBR per la geometria della query.</p></li>
 <li><p><strong>Potare i rami:</strong> partendo dalla radice, confrontare l’MBR della query con ciascun nodo interno. Saltare tutti i rami il cui MBR non si interseca con l’MBR della query.</p></li>
 <li><p><strong>Raccogli i candidati:</strong> scendi nei rami che si intersecano per raccogliere i nodi foglia candidati.</p></li>
 <li><p><strong>Corrispondenza esatta:</strong> per ciascun candidato, eseguire un predicato spaziale esatto per determinare le corrispondenze effettive.</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">Creare un indice RTREE<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,9 +326,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">RTREE</code> È possibile filtrare utilizzando gli operatori geometrici nell'espressione <code translate="no">filter</code>. Quando esiste un indice RTREE sul campo <code translate="no">GEOMETRY</code> di destinazione, Milvus lo utilizza per eliminare automaticamente i candidati. In assenza dell'indice, il filtro ricorre a una scansione completa.</p>
-<p>Per un elenco completo degli operatori specifici per la geometria disponibili, consultare <a href="/docs/it/geometry-operators.md">Operatori geometrici</a>.</p>
-<h3 id="Example-1-Filter-only" class="common-anchor-header">Esempio 1: Filtra solo<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
+    </button></h2><p>Gli esempi seguenti utilizzano un campo <code translate="no">GEOMETRY</code> indicizzato denominato <code translate="no">geo</code>.</p>
+<h3 id="Example-1-Filter-only" class="common-anchor-header">Esempio 1: Solo filtro<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -616,10 +647,9 @@ EOF
       </svg>
     </button></h2><p>Utilizzare il metodo ` <code translate="no">drop_index()</code> ` per rimuovere un indice esistente da una collezione.</p>
 <div class="alert note">
-<ul>
-<li><p>Nella <strong>versione 2.6.3</strong> o precedenti, è necessario liberare la collezione prima di eliminare un indice scalare.</p></li>
-<li><p>A partire <strong>dalla versione 2.6.4</strong> o successive, è possibile eliminare direttamente un indice scalare quando non è più necessario, senza dover prima liberare la collezione.</p></li>
-</ul>
+<blockquote>
+<p>Per i requisiti di rilascio relativi all'eliminazione di un indice scalare, consultare <a href="/docs/it/scalar_index.md#Drop-index-compatibility">Indice scalare</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

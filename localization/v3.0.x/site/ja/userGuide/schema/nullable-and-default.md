@@ -1,7 +1,7 @@
 ---
 id: nullable-and-default.md
 title: NULL許容フィールド
-summary: Null許容フィールドとデフォルト値を設定します。これには、スキーマ、挿入、インデックス、検索、およびフィルタリングの動作が含まれます。
+summary: Null許容フィールドとデフォルト値を設定します。これには、スキーマ、挿入、インデックス、検索、およびフィルタリングの挙動が含まれます。
 ---
 <h1 id="Nullable-Fields" class="common-anchor-header">NULL許容フィールド<button data-href="#Nullable-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,8 +41,7 @@ summary: Null許容フィールドとデフォルト値を設定します。こ�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>NULL値を許可するベクトルフィールドは、<code translate="no">IS NULL</code> または<code translate="no">IS NOT NULL</code> のフィルタ式をサポートしていません。ベクトルフィールドの値がNULLであるかどうかに基づいて、エンティティを明示的にフィルタリングすることはできません。</p></li>
-<li><p>Milvus 3.0.0 以降、親<a href="/docs/ja/array-of-structs.md">StructArray</a>フィールドは NULL 許容に設定できます。<code translate="no">nullable=True</code> は、個々のサブフィールドではなく、親 StructArray フィールドに設定してください。NULL は個々の Struct 要素ではなく StructArray フィールド全体に適用され、Milvus は親フィールドの NULL 許容性を内部的にそのサブフィールドに伝播します。 既存のコレクションに追加される StructArray フィールドは、既存のエンティティが新しいフィールドに対して NULL を返せるように、NULL 許容でなければなりません。 Milvus 3.0.6 以降では、サブフィールドにおいて個々の Struct 要素で NULL 値を許可できるようになりました。スカラーまたはベクトルのサブフィールドでは `<code translate="no">nullable=True</code> `、配列のサブフィールドでは `<code translate="no">element_nullable=True</code> ` を指定します。ただし、Struct 要素自体は依然として NULL にすることはできません。詳細については、<a href="/docs/ja/structarray-limits.md#Nullable-and-dynamic-schema-limits">「StructArray の制限</a>」を参照してください。</p></li>
+<li><p>Milvus 3.0.0 以降、親の<a href="/docs/ja/array-of-structs.md">StructArray</a>フィールドは null 許容に設定できます。<code translate="no">nullable=True</code> は、個々のサブフィールドではなく、親の StructArray フィールドに対して設定してください。NULL は個々の Struct 要素ではなく StructArray フィールド全体に適用され、Milvus は内部的に親の null 許容性をそのサブフィールドに伝播します。 既存のコレクションに追加される StructArray フィールドは、既存のエンティティが新しいフィールドに対して NULL を返せるように、NULL 許容でなければなりません。 Milvus 3.0.6 以降では、サブフィールドにおいて個々の Struct 要素で NULL 値を許可できるようになりました。スカラーまたはベクトルのサブフィールドでは `<code translate="no">nullable=True</code> `、配列のサブフィールドでは `<code translate="no">element_nullable=True</code> ` を指定します。ただし、Struct 要素自体は依然として NULL にすることはできません。詳細については、<a href="/docs/ja/structarray-limits.md#Nullable-and-dynamic-schema-limits">「StructArray の制限</a>」を参照してください。</p></li>
 <li><p>nullable属性はフィールドの作成時に定義され、事後の変更はできません。既存のフィールドに対してNULL許容性を有効または無効にすることはできません。</p></li>
 <li><p>nullable としてマークされたフィールドは、パーティションキーとして使用できません。パーティションキーとなるフィールドには、常に有効で null ではない値が含まれている必要があります。詳細については、「<a href="/docs/ja/use-partition-key.md">パーティションキーの使用</a>」を参照してください。</p></li>
 </ul>
@@ -564,7 +563,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 <ul>
 <li>エンティティ<strong>id = 1</strong>は有効なベクトル値を指定しています。</li>
 <li>エンティティ<strong>id = 2</strong>は、<code translate="no">embedding</code> フィールドに明示的にNULL値を割り当てています。</li>
-<li>エンティティ<strong>id = 3</strong>では、<code translate="no">embedding</code> フィールドを完全に省略しています。Milvus はこれを NULL として格納します。</li>
+<li>エンティティ<strong>id = 3</strong>では、<code translate="no">embedding</code> フィールドを完全に省略しています。Milvus はこのフィールドを NULL として保存します。</li>
 </ul>
 <h2 id="Index-behavior-on-nullable-fields" class="common-anchor-header">NULL許容フィールドにおけるインデックスの動作<button data-href="#Index-behavior-on-nullable-fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -932,8 +931,12 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>これまでの例はベクトルフィールドに焦点を当てていました。このセクションでは、<strong>スカラーフィルタ式</strong>におけるNULL値の挙動について説明します。</p>
-<p>スカラーフィールドは<code translate="no">nullable=True</code> を使用して定義でき、ベクトルフィールドと同じ取り込みルールに従います。ただし、<strong>フィルタ式では、NULL のスカラー値は常に false と評価されます</strong>。スカラーフィールドが NULL であるかどうかに基づいてエンティティを選択するには、<code translate="no">IS NULL</code> または<code translate="no">IS NOT NULL</code> を使用します。</p>
+    </button></h2><div class="alert note">
+<p>Milvus 3.0.3 以降では、通常のベクトルフィールドに対するクエリや検索フィルターで `<code translate="no">IS NULL</code> ` および `<code translate="no">IS NOT NULL</code> ` を使用し、それぞれベクトルフィールドが NULL であるエンティティ、または NULL ではないエンティティを選択できるようになりました。</p>
+<p><code translate="no">embedding</code> フィールドが NULL であるエンティティを検索するには、<code translate="no">query()</code> にフィルター<code translate="no">embedding IS NULL</code> を指定します。このフィルターは、<code translate="no">search()</code> でも有効です。ただし、このフィルターを使用して<code translate="no">embedding</code> を検索しても、ヒットは返されません。<code translate="no">embedding</code> の値がないエンティティには、クエリベクトルと比較するベクトルがないためです。</p>
+<p>サポートされている型、構文、および例については、「<a href="/docs/ja/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL」および「IS NOT NULL」演算子を</a>参照してください。</p>
+</div>
+<p><code translate="no">nullable=True</code> で定義されたスカラーフィールドの場合、<code translate="no">age &gt; 18</code> や<code translate="no">status == &quot;active&quot;</code> などの比較条件は、比較対象のフィールドが NULL のエンティティには一致しません。</p>
 <p>たとえば、NULL 許容のスカラーフィールド `<code translate="no">age</code>` がある場合、次のフィルターは年齢が 18 より大きいエンティティを選択します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1038,6 +1041,6 @@ Console.WriteLine(res);
 <li>フィールドにNULL以外のデフォルト値が設定されている場合、<code translate="no">nullable</code> が有効かどうかにかかわらず、その値が使用されます。</li>
 <li><code translate="no">nullable=True</code> が有効で、かつデフォルト値が設定されていない場合、そのフィールドにはNULLが格納されます。</li>
 <li><code translate="no">nullable=False</code> が有効で、かつデフォルト値が設定されていない場合、挿入はエラーで失敗します。</li>
-<li>NULL 以外の値を指定できるフィールドに NULL のデフォルト値を設定することは無効であり、エラーが発生します。</li>
+<li>NULL ではないフィールドに NULL のデフォルト値を設定することは無効であり、エラーが発生します。</li>
 </ul>
 <p>デフォルト値に関する完全な例および API の使用方法については、「<a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>

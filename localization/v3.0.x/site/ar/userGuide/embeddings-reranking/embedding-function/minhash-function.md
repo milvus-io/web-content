@@ -21,8 +21,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تقوم <strong>دالة MinHash</strong> بتحويل النص الخام إلى <strong>متجهات ثنائية</strong> تقارب <a href="https://en.wikipedia.org/wiki/Jaccard_index">تشابه جاكارد</a> بين المستندات. وهي تطبق تقنية تقسيم النص إلى أجزاء متداخلة (text shingling) ودوال تجزئة متعددة لإنتاج متجهات توقيع ذات طول ثابت، مما يتيح الكشف السريع عن النصوص شبه المكررة وإزالة التكرارات من المستندات على نطاق واسع.</p>
-<p>باعتبارها دالة مدمجة، تعمل MinHash داخل Milvus ولا تتطلب استدلال نماذج خارجية أو معالجة مسبقة. ما عليك سوى إدخال النص الخام، وسيقوم Milvus بإنشاء متجهات التوقيع MinHash تلقائيًا.</p>
+    </button></h1><p>تقوم <strong>دالة MinHash</strong> بتحويل النص الخام إلى <strong>متجهات ثنائية</strong> تقارب <a href="https://en.wikipedia.org/wiki/Jaccard_index">تشابه جاكارد</a> بين المستندات. وهي تطبق تقنية تقسيم النص إلى أجزاء متجاورة (text shingling) ودوال تجزئة متعددة لإنتاج متجهات توقيع ذات طول ثابت، مما يتيح الكشف السريع عن النصوص شبه المكررة وإزالة التكرارات من المستندات على نطاق واسع.</p>
+<p>باعتبارها دالة مدمجة، تعمل MinHash داخل Milvus ولا تتطلب استدلال نماذج خارجية أو معالجة مسبقة. ما عليك سوى إدخال النص الخام، وسيقوم Milvus بتوليد متجهات التوقيع MinHash تلقائيًا.</p>
 <h2 id="Limits" class="common-anchor-header">القيود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,11 +39,11 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>يجب أن يكون حقل الإخراج عبارة عن مصفوفة ذات أبعاد متساوية ( <code translate="no">BINARY_VECTOR</code> ) ذات أبعاد تستوفي الشرط التالي: <code translate="no">dim % 32 == 0</code> ، لأن كل توقيع MinHash يمثل قيمة تجزئة ذات 32 بت.</p></li>
-<li><p>يجب أن يساوي عدد العناصر في مصفوفة التوزيع ( <code translate="no">dim</code> ) لحقل المتجهات الثنائية <code translate="no">32 * num_hashes</code>. يؤدي عدم التطابق إلى حدوث خطأ.</p></li>
+<li><p>يجب أن يكون حقل الإخراج عبارة عن مصفوفة ذات أبعاد متساوية ( <code translate="no">BINARY_VECTOR</code> ) ذات أبعاد تستوفي الشرط <code translate="no">dim % 32 == 0</code> ، لأن كل توقيع MinHash يمثل قيمة تجزئة ذات 32 بت.</p></li>
+<li><p>يجب أن يساوي عدد العناصر ( <code translate="no">dim</code> ) لحقل المتجهات الثنائية <code translate="no">32 * num_hashes</code>. يؤدي عدم التطابق إلى حدوث خطأ.</p></li>
 <li><p>عند استخدام مؤشر <code translate="no">MINHASH_LSH</code> مع ناتج دالة MinHash، يجب تعيين <code translate="no">mh_element_bit_width</code> إلى <code translate="no">32</code>.</p></li>
 </ul>
-<h2 id="How-MinHash-works" class="common-anchor-header">كيف تعمل MinHash<button data-href="#How-MinHash-works" class="anchor-icon" translate="no">
+<h2 id="How-MinHash-works" class="common-anchor-header">كيفية عمل MinHash<button data-href="#How-MinHash-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +60,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><p><details></p>
 <p><summary>قم بالتوسيع لمعرفة كيفية عملها</summary></p>
-<p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> هي تقنية تجزئة حساسة للموقع (locality-sensitive) تُقدّر <a href="https://en.wikipedia.org/wiki/Jaccard_index">تشابه جاكارد (Jaccard)</a> بين المجموعات. في Milvus، تتبع دالة MinHash مسار العمل التالي: تقوم بتوفير النص الخام كمدخلات، ويقوم Milvus بإنتاج متجه ثنائي كمخرجات — مع معالجة جميع الخطوات الوسيطة داخليًا.</p>
+<p><a href="https://en.wikipedia.org/wiki/MinHash">MinHash</a> هي تقنية تجزئة حساسة للموقع تقدّر <a href="https://en.wikipedia.org/wiki/Jaccard_index">تشابه جاكارد</a> بين المجموعات. في Milvus، تتبع دالة MinHash مسار العمل التالي: تقوم بتوفير النص الخام كمدخلات، ويقوم Milvus بإنتاج متجه ثنائي كمخرجات — مع معالجة جميع الخطوات الوسيطة داخليًا.</p>
 <p>يتكون سير العمل الإجمالي من <strong>مسار معالجة نص مشترك</strong> يستخدمه كل من استيعاب المستندات ومعالجة الاستعلامات، تليه عمليات خاصة بكل مرحلة للتخزين والاسترجاع.</p>
 <p><span class="img-wrapper">
   
@@ -85,9 +85,9 @@ beta: Milvus 3.0.x
       </svg>
     </button></h3><p>يمر النص الخام في كل من عملية استيعاب المستندات ومعالجة الاستعلامات عبر نفس عملية التحويل المكونة من أربع مراحل:</p>
 <ol>
-<li><p><strong>تحليل النص</strong>: تتم معالجة النص بواسطة <a href="/docs/ar/analyzer-overview.md">محلل</a> (عندما تكون قيمة <code translate="no">token_level</code> هي <code translate="no">&quot;word&quot;</code>) أو يتم استخدامه مباشرةً (عندما تكون قيمة <code translate="no">token_level</code> هي <code translate="no">&quot;char&quot;</code>). تعمل عملية التقطيع على مستوى الكلمة على تطبيق المحلل المُهيأ في حقل الإدخال لتقسيم النص إلى مصطلحات — على سبيل المثال، يتحول النص <code translate="no">&quot;milvus is vector db&quot;</code> إلى <code translate="no">[&quot;milvus&quot;, &quot;is&quot;, &quot;vector&quot;, &quot;db&quot;]</code>.</p></li>
-<li><p><strong>التقسيم إلى شرائح (Shingling)</strong>: يتم تقسيم الرموز إلى n-grams متداخلة (شرائح) بحجم <code translate="no">shingle_size</code>. على سبيل المثال، مع وجود 3-grams على مستوى الكلمة، تصبح الرموز <code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> شرائح مثل <code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code>.</p></li>
-<li><p><strong>إنشاء توقيع MinHash</strong>: يتم تطبيق دوال تجزئة متعددة (H1، H2، …، Hn، حيث n = <code translate="no">num_hashes</code>) على مجموعة الشينغلز. بالنسبة لكل دالة تجزئة، يتم اختيار قيمة التجزئة الدنيا عبر جميع الشظايا. تشكل مجموعة هذه القيم الدنيا توقيع MinHash — وهو تمثيل ذو طول ثابت يقارب تشابه جاكارد (Jaccard) للوثيقة الأصلية.</p></li>
+<li><p><strong>تحليل النص</strong>: تتم معالجة النص بواسطة <a href="/docs/ar/analyzer-overview.md">محلل</a> (عندما يكون <code translate="no">token_level</code> هو <code translate="no">&quot;word&quot;</code>) أو يتم استخدامه مباشرة (عندما يكون <code translate="no">token_level</code> هو <code translate="no">&quot;char&quot;</code>). تطبق عملية التقطيع على مستوى الكلمة المحلل المُهيأ في حقل الإدخال لتقسيم النص إلى مصطلحات — على سبيل المثال، <code translate="no">&quot;milvus is vector db&quot;</code> يصبح <code translate="no">[&quot;milvus&quot;, &quot;is&quot;, &quot;vector&quot;, &quot;db&quot;]</code>.</p></li>
+<li><p><strong>التقسيم إلى شرائح (Shingling)</strong>: يتم تقسيم الرموز إلى مجموعات متداخلة من n-grams (شرائح) بحجم <code translate="no">shingle_size</code>. على سبيل المثال، مع استخدام مجموعات من 3-grams على مستوى الكلمة، تصبح الرموز <code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> شرائح مثل <code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code>.</p></li>
+<li><p><strong>إنشاء توقيع MinHash</strong>: يتم تطبيق دوال تجزئة متعددة (H1، H2، …، Hn، حيث n = <code translate="no">num_hashes</code>) على مجموعة الشينغلز. بالنسبة لكل دالة تجزئة، يتم اختيار قيمة التجزئة الدنيا عبر جميع الشظايا. وتشكل مجموعة هذه القيم الدنيا توقيع MinHash — وهو تمثيل ذو طول ثابت يقارب تشابه جاكارد (Jaccard) للوثيقة الأصلية.</p></li>
 <li><p><strong>ترميز المتجه الثنائي</strong>: كل قيمة توقيع هي تجزئة من 32 بت، ويتم تجميع التوقيع الكامل في متجه ثنائي ( <code translate="no">BINARY_VECTOR</code> ) بأبعاد <code translate="no">32 * num_hashes</code>.</p></li>
 </ol>
 <h3 id="Document-ingestion" class="common-anchor-header">استيعاب المستندات<button data-href="#Document-ingestion" class="anchor-icon" translate="no">
@@ -121,7 +121,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>أثناء البحث، يمر نص الاستعلام عبر نفس المسار المشترك لإنتاج متجه ثنائي. يُستخدم هذا المتجه لإجراء بحث LSH في فهرس <code translate="no">MINHASH_LSH</code> ، والذي يحدد بسرعة أزواج المرشحين التي من المحتمل أن تكون متشابهة. بدون تحسين Jaccard، يعرض Milvus مرشحي LSH غير المصنفين حسب تشابه Jaccard المقدر. عند تمكين تحسين جاكارد، يستخدم Milvus توقيعات MinHash الأولية المخزنة لترتيب المرشحات حسب تشابه جاكارد المقدر وإرجاع أفضل K نتائج.</p>
+    </button></h3><p>أثناء البحث، يمر نص الاستعلام عبر نفس خط الأنابيب المشترك لإنتاج متجه ثنائي. يُستخدم هذا المتجه لإجراء بحث LSH في فهرس <code translate="no">MINHASH_LSH</code> ، والذي يحدد بسرعة أزواج المرشحين التي من المحتمل أن تكون متشابهة. بدون تحسين Jaccard، يعرض Milvus مرشحي LSH غير المصنفين حسب تشابه Jaccard المقدر. عند تمكين تحسين جاكارد، يستخدم Milvus توقيعات MinHash الأولية المخزنة لترتيب المرشحات حسب تشابه جاكارد المقدر وإرجاع أفضل K نتائج.</p>
 <p>ونظرًا لأن كلا المسارين يشتركان في نفس منطق التحويل، فإن المستندين اللذين يتداخل محتواهما بشكل كبير ينتجان توقيعات MinHash متشابهة. وهذا يجعل الوظيفة فعالة في العثور على المستندات شبه المكررة حتى عندما تختلف المستندات في ترتيب الكلمات أو التنسيق أو الصياغة الطفيفة.</p>
 <p></details></p>
 <h2 id="Before-you-start" class="common-anchor-header">قبل البدء<button data-href="#Before-you-start" class="anchor-icon" translate="no">
@@ -139,7 +139,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>قبل استخدام وظيفة MinHash، قم بتخطيط مخطط مجموعتك بحيث يتضمن ما يلي:</p>
+    </button></h2><p>قبل استخدام وظيفة MinHash، قم بتخطيط مخطط المجموعة الخاص بك لتضمين ما يلي:</p>
 <ul>
 <li><p><strong>حقل نصي للمحتوى الخام</strong></p>
 <p>يجب أن تتضمن مجموعتك حقل « <code translate="no">VARCHAR</code> » لتخزين النص الخام. يعمل هذا الحقل كمدخل لدالة MinHash.</p></li>
@@ -182,7 +182,7 @@ beta: Milvus 3.0.x
     </button></h3><p>يجب أن يتضمن مخطط المجموعة ثلاثة حقول على الأقل:</p>
 <ul>
 <li><p><strong>الحقل الأساسي</strong>: يحدد بشكل فريد كل كيان في المجموعة.</p></li>
-<li><p><strong>الحقل النصي</strong> (<code translate="no">VARCHAR</code>): يخزن المستندات النصية الأولية. قم بتعيين " <code translate="no">enable_analyzer=True</code> " حتى يتمكن Milvus من معالجة النص لإنشاء توقيع MinHash. بشكل افتراضي، يستخدم Milvus محلل " <code translate="no">standard</code> " لتحليل النص. لتكوين محلل مختلف، راجع " <a href="/docs/ar/choose-the-right-analyzer-for-your-use-case.md">اختيار المحلل المناسب لحالة الاستخدام الخاصة بك</a>".</p></li>
+<li><p><strong>حقل النص</strong> (<code translate="no">VARCHAR</code>): يخزن مستندات النص الخام. قم بتعيين " <code translate="no">enable_analyzer=True</code> " حتى يتمكن Milvus من معالجة النص لإنشاء توقيع MinHash. بشكل افتراضي، يستخدم Milvus محلل " <code translate="no">standard</code> " لتحليل النص. لتكوين محلل مختلف، راجع " <a href="/docs/ar/choose-the-right-analyzer-for-your-use-case.md">اختيار المحلل المناسب لحالة الاستخدام الخاصة بك</a>".</p></li>
 <li><p><strong>حقل المتجهات الثنائية</strong> (<code translate="no">BINARY_VECTOR</code>): يخزن المتجهات الثنائية التي يتم إنشاؤها تلقائيًا بواسطة دالة MinHash. يجب أن يكون البعد مساويًا لـ <code translate="no">32 * num_hashes</code>.</p></li>
 </ul>
 <div class="multipleCode">
@@ -206,9 +206,61 @@ schema.add_field(field_name=<span class="hljs-string">&quot;binary_vector&quot;<
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;dedup_collection&quot;</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>).WithIsAutoID(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document_content&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">9000</span>).WithEnableAnalyzer(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;binary_vector&quot;</span>).WithDataType(entity.FieldTypeBinaryVector).WithDim(<span class="hljs-number">8192</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    &quot;autoID&quot;: true,
+    &quot;enableDynamicField&quot;: false,
+    &quot;fields&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;id&quot;,
+            &quot;dataType&quot;: &quot;Int64&quot;,
+            &quot;isPrimary&quot;: true,
+            &quot;autoID&quot;: true
+        },
+        {
+            &quot;fieldName&quot;: &quot;document_content&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: 9000,
+                &quot;enable_analyzer&quot;: true
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;binary_vector&quot;,
+            &quot;dataType&quot;: &quot;BinaryVector&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: 8192
+            }
+        }
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Define-the-MinHash-function" class="common-anchor-header">تحديد دالة MinHash<button data-href="#Define-the-MinHash-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,9 +303,35 @@ schema.add_function(minhash_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+
+minhashFunction := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;minhash_function&quot;</span>).
+    WithType(entity.FunctionTypeMinHash).
+    WithInputFields(<span class="hljs-string">&quot;document_content&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;binary_vector&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;num_hashes&quot;</span>, <span class="hljs-number">256</span>).
+    WithParam(<span class="hljs-string">&quot;shingle_size&quot;</span>, <span class="hljs-number">3</span>)
+
+schema.WithFunction(minhashFunction)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> minhashFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;minhash_function&quot;,
+    &quot;type&quot;: &quot;MinHash&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document_content&quot;
+    ],
+    &quot;outputFieldNames&quot;: [
+        &quot;binary_vector&quot;
+    ],
+    &quot;params&quot;: {
+        &quot;num_hashes&quot;: 256,
+        &quot;shingle_size&quot;: 3
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>خيارات التكوين</strong></p>
 <p>يقبل قاموس " <code translate="no">params</code> " الخاص بدالة MinHash المعلمات التالية. جميع أسماء المعلمات <strong>غير حساسة لحالة الأحرف</strong>.</p>
@@ -274,13 +352,13 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">shingle_size</code></p></td>
      <td><p>int</p></td>
      <td><p><code translate="no">3</code></p></td>
-     <td><p>حجم N-gram للتقسيم إلى شرائح. على مستوى الكلمة: 1-3 هو المعتاد. على مستوى الحرف: 2-6 هو المعتاد.</p></td>
+     <td><p>حجم N-gram للتقسيم المتداخل. على مستوى الكلمة: 1-3 هو المعتاد. على مستوى الحرف: 2-6 هو المعتاد.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">hash_function</code></p></td>
      <td><p>str</p></td>
      <td><p><code translate="no">"xxhash"</code></p></td>
-     <td><p>دالة التجزئة المراد استخدامها. الخيارات: </p><ul><li><p><code translate="no">"xxhash"</code> (سريع)</p></li><li><p><code translate="no">"sha1"</code> (أبطأ، مقاومة أعلى للتضارب).</p></li></ul></td>
+     <td><p>دالة التجزئة المطلوب استخدامها. الخيارات: </p><ul><li><p><code translate="no">"xxhash"</code> (سريع)</p></li><li><p><code translate="no">"sha1"</code> (أبطأ، مقاومة أعلى للتضارب).</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">token_level</code></p></td>
@@ -292,7 +370,7 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">seed</code></p></td>
      <td><p>int</p></td>
      <td><p><code translate="no">1234</code></p></td>
-     <td><p>البذرة العشوائية لتهيئة دالة MinHash.</p></td>
+     <td><p>بذرة عشوائية لتهيئة دالة MinHash.</p></td>
    </tr>
 </table>
 <h3 id="Configure-the-index" class="common-anchor-header">تكوين الفهرس<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
@@ -310,7 +388,7 @@ schema.add_function(minhash_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نوع الفهرس الموصى به للمتجهات الثنائية MinHash هو <code translate="no">MINHASH_LSH</code> ، مع نوع المقياس <code translate="no">MHJACCARD</code>.</p>
+    </button></h3><p>نوع الفهرس الموصى به لمتجهات MinHash الثنائية هو <code translate="no">MINHASH_LSH</code> ، مع نوع المقياس <code translate="no">MHJACCARD</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -335,9 +413,29 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>, <span class="hljs-string">&quot;binary_vector&quot;</span>,
+    index.NewMinHashLSHIndex(entity.MHJACCARD, <span class="hljs-number">128</span>).
+        WithElementBitWidth(<span class="hljs-number">32</span>).
+        WithRawData(<span class="hljs-literal">true</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+    {
+        &quot;fieldName&quot;: &quot;binary_vector&quot;,
+        &quot;indexName&quot;: &quot;binary_vector&quot;,
+        &quot;metricType&quot;: &quot;MHJACCARD&quot;,
+        &quot;indexType&quot;: &quot;MINHASH_LSH&quot;,
+        &quot;params&quot;: {
+            &quot;mh_lsh_band&quot;: 128,
+            &quot;mh_element_bit_width&quot;: 32,
+            &quot;with_raw_data&quot;: true
+        }
+    }
+]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>اضبط <code translate="no">with_raw_data</code> على <code translate="no">True</code> إذا كانت عمليات البحث ستستخدم تحسين Jaccard. التوقيعات الأولية لـ MinHash مطلوبة لحساب التشابه التقديري لـ Jaccard للمرشحين الذين تم إرجاعهم بواسطة بحث LSH.</p>
 <h3 id="Create-the-collection" class="common-anchor-header">إنشاء المجموعة<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
@@ -373,9 +471,45 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>, schema).
+    WithIndexOptions(indexOption))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+request=$(jq -n --argjson schema <span class="hljs-string">&quot;<span class="hljs-variable">$schema</span>&quot;</span> --argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$minhashFunction</span>&quot;</span> --argjson indexParams <span class="hljs-string">&quot;<span class="hljs-variable">$indexParams</span>&quot;</span> <span class="hljs-string">&#x27;{
+    collectionName: &quot;dedup_collection&quot;,
+    schema: ($schema + {functions: [$fn]}),
+    indexParams: $indexParams
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;dedup_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-2-Insert-documents" class="common-anchor-header">الخطوة 2: إدراج المستندات<button data-href="#Step-2-Insert-documents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -413,9 +547,39 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+)
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>).
+    WithColumns(column.NewColumnVarChar(<span class="hljs-string">&quot;document_content&quot;</span>, []<span class="hljs-type">string</span>{
+        <span class="hljs-string">&quot;information retrieval is a field of study that helps users find relevant information in large datasets&quot;</span>,
+        <span class="hljs-string">&quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;</span>,
+        <span class="hljs-string">&quot;information retrieval is a field of research helping users search for relevant information in large datasets&quot;</span>,
+    })))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;dedup_collection&quot;,
+    &quot;data&quot;: [
+        {&quot;document_content&quot;: &quot;information retrieval is a field of study that helps users find relevant information in large datasets&quot;},
+        {&quot;document_content&quot;: &quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;},
+        {&quot;document_content&quot;: &quot;information retrieval is a field of research helping users search for relevant information in large datasets&quot;}
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-3-Search-with-MinHash" class="common-anchor-header">الخطوة 3: البحث باستخدام MinHash<button data-href="#Step-3-Search-with-MinHash" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -466,11 +630,53 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+annParam := index.NewMinHashLSHAnnParam().
+    WithSearchWithJACCARD(<span class="hljs-literal">true</span>).
+    WithRefineK(<span class="hljs-number">3</span>)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;dedup_collection&quot;</span>,
+    <span class="hljs-number">3</span>,
+    []entity.Vector{entity.Text(<span class="hljs-string">&quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;</span>)},
+).WithANNSField(<span class="hljs-string">&quot;binary_vector&quot;</span>).
+    WithAnnParam(annParam).
+    WithOutputFields(<span class="hljs-string">&quot;document_content&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;dedup_collection&quot;,
+    &quot;data&quot;: [&quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;],
+    &quot;annsField&quot;: &quot;binary_vector&quot;,
+    &quot;limit&quot;: 3,
+    &quot;outputFields&quot;: [&quot;document_content&quot;],
+    &quot;searchParams&quot;: {
+        &quot;metric_type&quot;: &quot;MHJACCARD&quot;,
+        &quot;params&quot;: {
+            &quot;mh_search_with_jaccard&quot;: true,
+            &quot;refine_k&quot;: 3
+        }
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>اضبط <code translate="no">mh_search_with_jaccard</code> على <code translate="no">True</code> لتمكين تحسين Jaccard. يتحكم <code translate="no">refine_k</code> في سعة مجموعة المرشحين المستخدمة للتحسين. يستخدم Milvus <code translate="no">max(refine_k, limit)</code> كسعة، ولكنه قد يقوم بتحسين عدد أقل من المرشحين إذا عاد بحث LSH بعدد أقل من التطابقات. يمكن أن تؤدي زيادة <code translate="no">refine_k</code> إلى تحسين جودة النتائج على حساب حسابات إضافية.</p>
+<p>اضبط <code translate="no">mh_search_with_jaccard</code> على <code translate="no">True</code> لتمكين تحسين Jaccard. يتحكم <code translate="no">refine_k</code> في سعة مجموعة المرشحين المستخدمة للتحسين. يستخدم Milvus <code translate="no">max(refine_k, limit)</code> كسعة، ولكنه قد يحسن عددًا أقل من المرشحين إذا عاد البحث في LSH بعدد أقل من التطابقات. يمكن أن تؤدي زيادة <code translate="no">refine_k</code> إلى تحسين جودة النتائج على حساب حسابات إضافية.</p>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -489,5 +695,5 @@ results = client.search(
     </button></h2><ul>
 <li><p><a href="/docs/ar/full-text-search.md">البحث عن النص الكامل</a>: استخدم BM25 لترتيب الصلة المعجمية بدلاً من الكشف عن التكرارات شبه المتطابقة.</p></li>
 <li><p><a href="/docs/ar/analyzer-overview.md">نظرة عامة على أداة التحليل</a>: قم بتكوين أدوات تحليل مخصصة لتقطيع النص إلى رموز.</p></li>
-<li><p><a href="/docs/ar/minhash-lsh.md">فهرس MINHASH_LSH</a>: تعرف على كيفية ضبط معلمات LSH لتحسين معدل الاسترجاع والأداء.</p></li>
+<li><p><a href="/docs/ar/minhash-lsh.md">فهرس MINHASH_LSH</a>: تعرف على كيفية ضبط معلمات LSH لتحسين الاسترجاع والأداء.</p></li>
 </ul>

@@ -172,7 +172,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/zh/use-partition-key.md">使用Partition Key</a></p></li>
 <li><p><a href="/docs/zh/mmap.md">使用 mmap</a></p></li>
-<li><p><a href="/docs/zh/clustering-compaction.md">聚簇压缩</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">分区<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -190,7 +189,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>分区是Collection的子集，与父Collection共享相同的字段集，每个分区包含实体的子集。</p>
-<p>通过将实体分配到不同的分区中，您可以创建实体组。您可以在特定分区中进行搜索和查询，使 Milvus 忽略其他分区中的实体，从而提高搜索效率。</p>
+<p>通过将实体分配到不同的分区，您可以创建实体组。您可以在特定分区中进行搜索和查询，使 Milvus 忽略其他分区中的实体，从而提高搜索效率。</p>
 <p>有关详细信息，请参阅<a href="/docs/zh/manage-partitions.md">“管理分区</a>”。</p>
 <h2 id="Shard" class="common-anchor-header">分片<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +223,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以为 Collections 创建别名。 一个Collection可以拥有多个别名，但不同Collection不能共享同一个别名。当收到针对某个Collection的请求时，Milvus 会根据提供的名称定位该Collection。如果该名称对应的Collection不存在，Milvus 会继续将该名称作为别名进行定位。您可以使用Collection别名来适应不同的代码场景。</p>
+    </button></h2><p>您可以为 Collections 创建别名。 一个集合可以拥有多个别名，但不同集合不能共享同一个别名。当收到针对某个集合的请求时，Milvus 会根据提供的名称定位该集合。如果该名称对应的集合不存在，Milvus 会继续将该名称作为别名进行定位。您可以使用集合别名来适应不同的代码场景。</p>
 <p>有关更多详细信息，请参阅《<a href="/docs/zh/manage-aliases.md">管理别名</a>》。</p>
 <h2 id="Function" class="common-anchor-header">函数<button data-href="#Function" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -3,12 +3,12 @@ id: json-operators.md
 title: Operatori JSON
 summary: >-
   Milvus supporta operatori avanzati per l'interrogazione e il filtraggio dei
-  campi JSON, rendendoli ideali per la gestione di dati complessi e strutturati.
-  Questi operatori consentono un'interrogazione altamente efficace dei documenti
-  JSON, permettendo di recuperare entità in base a elementi, valori o condizioni
-  specifici all'interno dei campi JSON. Questa sezione ti guiderà nell’utilizzo
-  degli operatori specifici per JSON in Milvus, fornendo esempi pratici per
-  illustrarne le funzionalità.
+  campi JSON, rendendoli perfetti per la gestione di dati complessi e
+  strutturati. Questi operatori consentono un'interrogazione altamente efficace
+  dei documenti JSON, permettendo di recuperare entità in base a elementi,
+  valori o condizioni specifici all'interno dei campi JSON. Questa sezione ti
+  guiderà nell’utilizzo degli operatori specifici per JSON in Milvus, fornendo
+  esempi pratici per illustrarne il funzionamento.
 ---
 <h1 id="JSON-Operators" class="common-anchor-header">Operatori JSON<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -103,7 +103,7 @@ std::string filter = <span class="hljs-string">&quot;json_contains(product[\&quo
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 filter=<span class="hljs-string">&#x27;json_contains(product[&quot;tags&quot;], &quot;sale&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, Milvus restituirà tutti i prodotti in cui il campo <code translate="no">tags</code> contiene l’elemento <code translate="no">&quot;sale&quot;</code>.</p>
+<p>In questo esempio, Milvus restituirà tutti i prodotti in cui il campo ` <code translate="no">tags</code> ` contiene l’elemento ` <code translate="no">&quot;sale&quot;</code>`.</p>
 <h2 id="JSONCONTAINSALL" class="common-anchor-header">JSON_CONTAINS_ALL<button data-href="#JSONCONTAINSALL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,7 +156,7 @@ std::string filter = <span class="hljs-string">&quot;json_contains_all(product[\
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
 filter=<span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot;], [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Questa query restituirà tutti i prodotti in cui l'array ` <code translate="no">tags</code> ` contiene tutti e tre gli elementi specificati: <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> e <code translate="no">&quot;new&quot;</code>.</p>
+<p>Questa query restituirà tutti i prodotti in cui l'array ` <code translate="no">tags</code> ` contiene tutti e tre gli elementi specificati: ` <code translate="no">&quot;electronics&quot;</code>`, ` <code translate="no">&quot;sale&quot;</code>` e ` <code translate="no">&quot;new&quot;</code>`.</p>
 <h2 id="JSONCONTAINSANY" class="common-anchor-header">JSON_CONTAINS_ANY<button data-href="#JSONCONTAINSANY" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,7 +172,7 @@ filter=<span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'operatore <code translate="no">json_contains_any</code> filtra le entità in cui nel campo è presente almeno un membro dell'espressione JSON. Ciò è utile quando si desidera trovare entità corrispondenti in base a uno qualsiasi di diversi valori possibili.</p>
+    </button></h2><p>L'operatore <code translate="no">json_contains_any</code> filtra le entità in cui nel campo è presente almeno un membro dell'espressione JSON. Ciò è utile quando si desidera trovare corrispondenze tra entità in base a uno qualsiasi di diversi valori possibili.</p>
 <p><strong>Esempio</strong></p>
 <p>Supponiamo di voler filtrare i prodotti che presentano almeno uno dei tag <code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> o <code translate="no">&quot;new&quot;</code>. È possibile utilizzare l’operatore <code translate="no">json_contains_any</code> per ottenere questo risultato.</p>
 <div class="multipleCode">

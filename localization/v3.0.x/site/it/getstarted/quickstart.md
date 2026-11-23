@@ -57,7 +57,7 @@ title: Guida rapida
 <p>Utilizza Python 3.10 o versioni successive su macOS, Linux o Windows, con i file wheel binari disponibili per le dipendenze di Milvus Lite, quali <code translate="no">faiss-cpu</code> e <code translate="no">pyarrow</code>. Gli esempi utilizzano PyMilvus 3.0.2 e Milvus Lite 3.2.2. Installa entrambi i pacchetti in modo esplicito:</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Su Windows, pip ignora il pacchetto aggiuntivo <code translate="no">milvus-lite</code> di PyMilvus 3.0.2; il comando sopra riportato specifica esplicitamente <code translate="no">milvus-lite</code>, quindi il percorso locale funziona anche in questo caso. Per i requisiti di installazione relativi al solo SDK, consultare <a href="/docs/it/install-pymilvus.md">Installare l’SDK Python di Milvus</a>.</p>
+<p>Su Windows, pip ignora il pacchetto aggiuntivo <code translate="no">milvus-lite</code> di PyMilvus 3.0.2; il comando sopra riportato specifica esplicitamente <code translate="no">milvus-lite</code>, quindi il percorso locale funziona anche in questo caso. Per i requisiti di installazione relativi esclusivamente all’SDK, consultare <a href="/docs/it/install-pymilvus.md">Installare l’SDK Python di Milvus</a>.</p>
 <div class="alert note">
 <blockquote>
 <p>Se si utilizza Google Colab, per abilitare le dipendenze appena installate potrebbe essere necessario <strong>riavviare il runtime</strong>. (Fare clic sul menu “Runtime” nella parte superiore dello schermo e selezionare “Riavvia sessione” dal menu a discesa).</p>
@@ -155,7 +155,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, è necessaria una collezione per memorizzare i vettori e i metadati associati. È possibile considerarla come una tabella nei tradizionali database SQL. Durante la creazione di una collezione, è possibile definire i parametri dello schema e dell’indice per configurare le specifiche dei vettori, quali la dimensionalità, i tipi di indice e le metriche di distanza. Esistono anche concetti complessi per ottimizzare l’indice al fine di migliorare le prestazioni della ricerca vettoriale. Per ora, concentriamoci solo sulle nozioni di base e utilizziamo le impostazioni predefinite per tutto ciò che è possibile. Come minimo, è sufficiente impostare il nome della collezione e la dimensione del campo vettoriale della collezione.</p>
+    </button></h2><p>In Milvus, è necessaria una collezione per memorizzare i vettori e i metadati associati. È possibile considerarla come una tabella nei tradizionali database SQL. Quando si crea una collezione, è possibile definire i parametri dello schema e dell’indice per configurare le specifiche dei vettori, quali la dimensionalità, i tipi di indice e le metriche di distanza. Esistono anche concetti complessi per ottimizzare l’indice al fine di migliorare le prestazioni della ricerca vettoriale. Per ora, concentriamoci solo sulle nozioni di base e utilizziamo le impostazioni predefinite per tutto ciò che è possibile. Come minimo, è sufficiente impostare il nome della collezione e la dimensione del campo vettoriale della collezione.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -201,7 +201,7 @@ In alternativa, è possibile definire formalmente lo schema della collezione seg
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per prima cosa, installare la libreria dei modelli. Questo pacchetto include strumenti essenziali per il machine learning, come PyTorch. Il download del pacchetto potrebbe richiedere un po’ di tempo se PyTorch non è mai stato installato nell’ambiente locale.</p>
+    </button></h2><p>Per prima cosa, installare la libreria dei modelli. Questo pacchetto include strumenti essenziali per l’apprendimento automatico (ML) come PyTorch. Il download del pacchetto potrebbe richiedere un po’ di tempo se PyTorch non è mai stato installato nell’ambiente locale.</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Generare embedding vettoriali con il modello predefinito. Milvus richiede che i dati vengano inseriti organizzati come un elenco di dizionari, in cui ogni dizionario rappresenta un record di dati, denominato entità.</p>
@@ -467,7 +467,7 @@ res = client.delete(
 <pre><code translate="no">[<span class="hljs-meta">0, 2</span>]
 [<span class="hljs-meta">3, 4, 5</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Existing-Data" class="common-anchor-header">Caricare dati esistenti<button data-href="#Load-Existing-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Existing-Data" class="common-anchor-header">Caricamento dei dati esistenti<button data-href="#Load-Existing-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -551,4 +551,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
         ></path>
       </svg>
     </button></h2><p>Se si utilizzano assistenti di codifica basati sull’IA come Claude Code o Cursor, è possibile installare <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> per aiutare i propri strumenti di IA a scrivere codice Milvus corretto.</p>
-<p>Per ulteriori strumenti per gli agenti, inclusi i server MCP e i prompt curati, consultare <a href="/docs/it/milvus_for_agents.md">Milvus per agenti IA</a>.</p>
+<p>Per ulteriori strumenti per gli agenti, inclusi i server MCP e i prompt curati, consultare <a href="/docs/it/milvus_for_agents.md">Milvus per gli agenti IA</a>.</p>

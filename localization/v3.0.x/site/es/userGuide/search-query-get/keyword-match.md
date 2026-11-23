@@ -3,7 +3,7 @@ id: keyword-match.md
 title: Coincidencia de texto
 summary: >-
   La coincidencia de texto en Milvus permite la recuperación precisa de
-  documentos en función de términos específicos. Esta función se utiliza
+  documentos basada en términos específicos. Esta función se utiliza
   principalmente para realizar búsquedas filtradas que cumplan condiciones
   específicas y puede incorporar filtros escalares para refinar los resultados
   de la consulta, lo que permite realizar búsquedas por similitud dentro de
@@ -334,7 +334,7 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-cpp">nlohmann::json analyzer_params = {{<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;english&quot;</span>}};
 schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs-built_in">FieldSchema</span>(<span class="hljs-string">&quot;text&quot;</span>, milvus::DataType::VARCHAR).<span class="hljs-built_in">WithMaxLength</span>(<span class="hljs-number">200</span>).<span class="hljs-built_in">EnableAnalyzer</span>(<span class="hljs-literal">true</span>).<span class="hljs-built_in">WithAnalyzerParams</span>(analyzer_params).<span class="hljs-built_in">EnableMatch</span>(<span class="hljs-literal">true</span>));
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus también ofrece otros analizadores adaptados a diferentes lenguajes y escenarios. Para obtener más detalles, consulta <a href="/docs/es/analyzer-overview.md">la Descripción general de los analizadores</a>.</p>
+<p>Milvus también ofrece otros analizadores adaptados a diferentes lenguajes y escenarios. Para obtener más detalles, consulta <a href="/docs/es/analyzer-overview.md">la Descripción general</a> de <a href="/docs/es/analyzer-overview.md">los analizadores</a>.</p>
 <h2 id="Use-text-match" class="common-anchor-header">Utilizar la coincidencia de texto<button data-href="#Use-text-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -377,7 +377,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <li><p><code translate="no">field_name</code>: El nombre del campo « <code translate="no">VARCHAR</code> » o « <code translate="no">TEXT</code> » habilitado para la búsqueda que se va a consultar.</p></li>
 <li><p><code translate="no">text</code>: Los términos que se van a buscar. Se pueden introducir varios términos separados por espacios u otros delimitadores adecuados, en función del idioma y del analizador configurado.</p></li>
 </ul>
-<p>Por defecto, <code translate="no">TEXT_MATCH</code> utiliza la lógica de coincidencia <strong>«O»</strong>, lo que significa que devolverá documentos que contengan cualquiera de los términos especificados. Por ejemplo, para buscar documentos que contengan el término <code translate="no">machine</code> o <code translate="no">deep</code> en el campo <code translate="no">text</code>, utiliza la siguiente expresión:</p>
+<p>Por defecto, <code translate="no">TEXT_MATCH</code> utiliza la lógica de coincidencia <strong>«O»</strong>, lo que significa que devolverá documentos que contengan cualquiera de los términos especificados. Por ejemplo, para buscar documentos que contengan el término « <code translate="no">machine</code> » o « <code translate="no">deep</code> » en el campo « <code translate="no">text</code> », utiliza la siguiente expresión:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -640,7 +640,7 @@ milvus::SearchResponse response;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La coincidencia de texto también se puede utilizar para el filtrado escalar en operaciones de consulta. Al especificar una expresión <code translate="no">TEXT_MATCH</code> en el parámetro <code translate="no">expr</code> del método <code translate="no">query()</code>, se pueden recuperar documentos que coincidan con los términos indicados.</p>
+    </button></h3><p>La coincidencia de texto también se puede utilizar para el filtrado escalar en operaciones de consulta. Al especificar una expresión de « <code translate="no">TEXT_MATCH</code> » en el parámetro « <code translate="no">expr</code> » del método « <code translate="no">query()</code> », se pueden recuperar documentos que coincidan con los términos indicados.</p>
 <p>El ejemplo siguiente recupera documentos en los que el campo « <code translate="no">text</code> » contiene ambos términos: « <code translate="no">keyword1</code> » y « <code translate="no">keyword2</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

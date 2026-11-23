@@ -2,11 +2,8 @@
 id: inverted.md
 title: INVERSÉ
 summary: >-
-  Lorsque vous devez effectuer fréquemment des requêtes filtrées sur vos
-  données, les index inversés peuvent considérablement améliorer les
-  performances de ces requêtes. Au lieu de parcourir l'ensemble des documents,
-  un index inversé localise rapidement les enregistrements qui correspondent
-  exactement à vos critères de filtrage.
+  Utilisez les index INVERTED pour le filtrage par valeur sur les champs
+  scalaires, les tableaux et les chemins JSON typés.
 ---
 <h1 id="INVERTED" class="common-anchor-header">INVERSÉ<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Lorsque vous devez effectuer fréquemment des requêtes filtrées sur vos données, les index « <code translate="no">INVERTED</code> » peuvent considérablement améliorer les performances des requêtes. Au lieu de parcourir tous les documents, Milvus utilise des index inversés pour localiser rapidement les enregistrements exacts qui correspondent à vos critères de filtrage.</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">Quand utiliser les index INVERTED<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">INVERTED</code> associe les valeurs des champs aux entités qui les contiennent afin d'accélérer le filtrage scalaire.</p>
+<h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +36,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilisez les index INVERTED lorsque vous avez besoin de :</p>
-<ul>
-<li><p><strong>Filtrer selon des valeurs spécifiques</strong>: rechercher tous les enregistrements pour lesquels un champ est égal à une valeur spécifique (par exemple, <code translate="no">category == &quot;electronics&quot;</code>)</p></li>
-<li><p><strong>Filtrer du contenu textuel</strong>: effectuer des recherches efficaces sur des champs de type « <code translate="no">VARCHAR</code> »</p></li>
-<li><p><strong>Interroger les valeurs des champs JSON</strong>: filtrer sur des clés spécifiques au sein de structures JSON</p></li>
-</ul>
-<p><strong>Gain de performances</strong>: les index INVERTED peuvent réduire le temps d’exécution des requêtes de quelques secondes à quelques millisecondes sur des ensembles de données volumineux, en éliminant la nécessité d’un balayage complet de la collection.</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">Fonctionnement des index INVERTED<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+    </button></h2><p><a id="When-to-use-INVERTED-indexes"></a></p>
+<p>Utilisez « <code translate="no">INVERTED</code> » pour les filtres d’égalité, d’appartenance et de plage sur des champs compatibles ou des chemins JSON, tels que <code translate="no">category == &quot;electronics&quot;</code>.</p>
+<p><a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a></p>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Cibles d’index et filtres<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,21 +57,80 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, un <strong>index INVERTED</strong> associe chaque valeur de champ unique (terme) à l’ensemble des identifiants de documents dans lesquels cette valeur apparaît. Cette structure permet des recherches rapides sur les champs comportant des valeurs répétitives ou catégorielles.</p>
-<p>Comme le montre le schéma, le processus se déroule en deux étapes :</p>
-<ol>
-<li><p><strong>Mappage direct (ID → Terme) :</strong> chaque ID de document pointe vers la valeur de champ qu’il contient.</p></li>
-<li><p><strong>Mappage inversé (terme → identifiants) :</strong> Milvus collecte les termes uniques et établit un mappage inversé entre chaque terme et tous les identifiants qui le contiennent.</p></li>
-</ol>
-<p>Par exemple, la valeur <strong>« électronique »</strong> est associée aux identifiants <strong>1</strong> et <strong>3</strong>, tandis que <strong>« livres »</strong> est associée aux identifiants <strong>2</strong> et <strong>5</strong>.</p>
+    </button></h3><p>Le tableau suivant associe les cibles d’index « <code translate="no">INVERTED</code> » prises en charge aux filtres que l’index peut aider à évaluer :</p>
+<table>
+<thead>
+<tr><th>Cible d’index</th><th>Filtres pouvant utiliser l’index</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> champ</td><td>Égalité (<code translate="no">==</code>, <code translate="no">!=</code>) et appartenance (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Champ numérique (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</td><td>Égalité, appartenance et intervalles (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> champ</td><td>Égalité, appartenance, plages, correspondance de préfixe telle que <code translate="no">name LIKE &quot;abc%&quot;</code>, et opérateur LIKE général tel que <code translate="no">name LIKE &quot;a%b_c&quot;</code>.</td></tr>
+<tr><td>Champ « <code translate="no">ARRAY</code> » standard avec des éléments de type <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> ou <code translate="no">VARCHAR</code> </td><td>Contenance des éléments et comparaisons admissibles de tableaux entiers. Voir <a href="/docs/fr/array_data_type.md#Array-index-support">Prise en charge des index de tableaux</a>.</td></tr>
+<tr><td>Chemin JSON typé</td><td>Filtres adaptés au type de conversion indexé. Spécifiez les paramètres de chemin et de conversion ; consultez la section « <a href="/docs/fr/json-indexing.md#Understand-cast-types">Indexation JSON</a> » pour connaître la compatibilité des types de conversion et la section « <a href="/docs/fr/json-indexing.md#Supported-filters">Détails des filtres JSON</a> » pour le comportement des requêtes.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Les index scalaires, y compris <code translate="no">AUTOINDEX</code>, ne prennent pas en charge les champs ARRAY récursifs ni les tableaux comportant des éléments pouvant être nuls. Voir <a href="/docs/fr/array_data_type.md#Array-index-support">Prise en charge des index de tableaux</a> pour les filtres de tableaux ordinaires et <a href="/docs/fr/index-structarray-fields.md#Create-scalar-indexes">Indexation des champs StructArray</a> pour les règles relatives aux sous-champs.</p>
+</blockquote>
+</div>
+<p>Les filtres simples de suffixe (<code translate="no">LIKE &quot;%abc&quot;</code>) et de sous-chaîne (<code translate="no">LIKE &quot;%abc%&quot;</code>) utilisent un chemin de balayage, même si des motifs LIKE plus complexes peuvent utiliser cet index. Les filtres Regex n’utilisent pas la recherche directe de motifs INVERTED. Ces règles s’appliquent après <a href="/docs/fr/pattern-matching.md#Accelerate-pattern-matching-with-indexes">les simplifications de la planification de la requête</a>.</p>
+<p>Un index scalaire de type « <code translate="no">INVERTED</code> » ne prend pas en charge les expressions de type « <code translate="no">TEXT_MATCH</code> » ou « <code translate="no">PHRASE_MATCH</code> » basées sur des tokens ; voir « <a href="/docs/fr/keyword-match.md">Correspondance de texte</a> ».</p>
+<div class="alert note">
+<blockquote>
+<p>Il s’agit là de capacités des index, et non de limites imposées aux expressions de filtrage valides. Voir <a href="/docs/fr/scalar_index.md#Filter-execution">Index scalaire</a> pour les contraintes de recherche partagées. Pour les tests <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> et NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), voir <a href="/docs/fr/basic-operators.md">Opérateurs de base</a>.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Considérations relatives à la mémoire<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour obtenir une estimation approximative de la mémoire chargée, utilisez <code translate="no">S</code> octets, où <code translate="no">S</code> correspond à la taille de l’index créé avant compression de stockage. Créez un index sur des données représentatives pour obtenir <code translate="no">S</code>; la taille brute des données de champ ne peut pas servir de substitut.</p>
+<p>Ces estimations approximatives concernent la mémoire occupée par l’index chargé lorsque le mappage mémoire est désactivé. Calculez-les par segment, puis additionnez les résultats pour l’ensemble des segments chargés et des répliques.</p>
+<div class="alert note">
+<blockquote>
+<p>Prévoyez de la mémoire supplémentaire pour les données de champ chargées, les index vectoriels, la surcharge liée aux collections et aux index, ainsi que les allocations temporaires. Validez ces chiffres à l’aide de données et de requêtes représentatives ; les tableaux, le format JSON, les anciens formats d’index et le mappage mémoire nécessitent des mesures distinctes.</p>
+</blockquote>
+</div>
+<p><a id="How-INVERTED-indexes-work"></a></p>
+<h3 id="How-INVERTED-works" class="common-anchor-header">Fonctionnement d’INVERTED<button data-href="#How-INVERTED-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Voir un exemple de recherche de valeur</strong></summary></p>
+<p>Un index inversé inverse le mappage entre les identifiants d’entité et les valeurs de champ. Dans le schéma, <strong>« electronics »</strong> correspond aux identifiants <strong>1</strong> et <strong>3</strong>, tandis que <strong>« books »</strong> correspond aux identifiants <strong>2</strong> et <strong>5</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" /> 
    <span>Fonctionnement de l’index inversé</span>
   
  </span></p>
-<p>Lorsque vous filtrez une valeur spécifique (par exemple, <code translate="no">category == &quot;electronics&quot;</code>), Milvus recherche simplement le terme dans l’index et récupère directement les identifiants correspondants. Cela évite de parcourir l’intégralité du jeu de données et permet un filtrage rapide, en particulier pour les valeurs catégorielles ou répétées.</p>
-<p>Les index INVERSE prennent en charge tous les types de champs scalaires, tels que <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> et <strong>ARRAY</strong>. Cependant, les paramètres d’indexation d’un champ JSON diffèrent légèrement de ceux des champs scalaires classiques.</p>
+<p>Pour <code translate="no">category == &quot;electronics&quot;</code>, Milvus récupère les identifiants <strong>1</strong> et <strong>3</strong> dans l’index plutôt que de vérifier la catégorie de chaque entité.</p>
+<p></details></p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Créer des index sur des champs non JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -471,10 +526,9 @@ curl --request POST \
       </svg>
     </button></h2><p>Utilisez la méthode ` <code translate="no">drop_index()</code> ` pour supprimer un index existant d'une collection.</p>
 <div class="alert note">
-<ul>
-<li><p>Dans <strong>la version 2.6.3</strong> ou antérieure, vous devez libérer la collection avant de supprimer un index scalaire.</p></li>
-<li><p>À partir de <strong>la version 2.6.4</strong>, vous pouvez supprimer directement un index scalaire dès qu’il n’est plus nécessaire, sans avoir à libérer la collection au préalable.</p></li>
-</ul>
+<blockquote>
+<p>Pour connaître les exigences de version lors de la suppression d’un index scalaire, consultez la section « <a href="/docs/fr/scalar_index.md#Drop-index-compatibility">Index scalaire</a> ».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -571,27 +625,7 @@ curl --request POST \
     &quot;indexName&quot;: &quot;category_index&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Best-practices" class="common-anchor-header">Bonnes pratiques<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>Créez des index après le chargement des données</strong>: créez des index sur des collections contenant déjà des données pour de meilleures performances</p></li>
-<li><p><strong>Utilisez des noms d’index descriptifs</strong>: choisissez des noms qui indiquent clairement le champ et l’objectif</p></li>
-<li><p><strong>Surveillez les performances des index</strong>: vérifiez les performances des requêtes avant et après la création des index</p></li>
-<li><p><strong>Tenez compte de vos modèles de requêtes</strong>: créez des index sur les champs selon lesquels vous effectuez fréquemment des filtrages</p></li>
-</ul>
+<p><a id="Best-practices"></a></p>
 <h2 id="Next-steps" class="common-anchor-header">Étapes suivantes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -608,6 +642,6 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Découvrez <a href="/docs/fr/index-explained.md">d’autres types d’index</a></p></li>
-<li><p>Consultez la section « <a href="/docs/fr/json-indexing.md">Indexation JSON</a> » pour découvrir des scénarios avancés d'indexation JSON</p></li>
+<li><p>Comparez les index scalaires et planifiez vos ressources dans la section « <a href="/docs/fr/scalar_index.md#Whats-next">Index scalaire</a> ».</p></li>
+<li><p>Consultez la section « <a href="/docs/fr/json-indexing.md">Indexation JSON</a> » pour découvrir des scénarios avancés d'indexation JSON.</p></li>
 </ul>

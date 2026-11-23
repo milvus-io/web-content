@@ -64,15 +64,15 @@ summary: Questa pagina illustra la procedura per importare i dati preparati.
     </button></h2><p>Se la pipeline può riprovare a eseguire una richiesta di importazione fallita o scaduta, contrassegnare il processo con una chiave di idempotenza; vedere <a href="/docs/it/idempotent-import.md">Importazione in blocco idempotente</a>.</p>
 <p>Per importare i dati preparati, è necessario creare un processo di importazione come segue:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -135,7 +135,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <p>Un elenco di elenchi di percorsi di file relativi al percorso radice del bucket Milvus sull'istanza MioIO avviata insieme alla propria istanza Milvus. I possibili sottoelenchi sono i seguenti:</p>
 <ul>
 <li><p><strong>File JSON</strong></p>
-<p>Se il file preparato è in formato JSON, <strong>ogni sotto-elenco dovrebbe contenere il percorso di un singolo file JSON preparato</strong>.</p>
+<p>Se il file preparato è in formato JSON, <strong>ogni sotto-elenco deve contenere il percorso di un singolo file JSON preparato</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
@@ -157,7 +157,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-import-progress" class="common-anchor-header">Verifica dello stato di avanzamento dell'importazione<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> parameters<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,10 +172,55 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta ottenuto l'ID del processo di importazione, è possibile verificarne lo stato di avanzamento come segue:</p>
+    </button></h2><p><code translate="no">bulk_import()</code> è un wrapper leggero attorno a <code translate="no">POST /v2/vectordb/jobs/import/create</code>. Oltre all’
+esempio sopra riportato, espone i seguenti parametri (PyMilvus 2.6 e versioni successive).</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Tipo</th><th>Descrizione</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Indirizzo del server, ad esempio <code translate="no">http://127.0.0.1:19530</code> o <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Collezione di destinazione.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Database di destinazione. Inviato come intestazione <code translate="no">DB-Name</code> per RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>File già disponibili per l'istanza di Milvus, ad esempio su MinIO. Si tratta di <strong>percorsi lato server, non di URL degli oggetti</strong>. Ogni sottoelenco corrisponde a un file JSON o Parquet, oppure a un insieme di file NumPy.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Partizione di destinazione. Passata tramite argomenti chiave aggiuntivi anziché tramite un parametro dichiarato, quindi è facile non notarla nella firma. Lasciarla vuota per le raccolte che utilizzano una chiave di partizione.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>URL di un singolo oggetto su un archivio di oggetti cloud. Sostituito da <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>URL di oggetti su un archivio cloud, ad esempio <code translate="no">s3://bucket/prefix/1.parquet</code>. Ogni sottolista corrisponde a un oggetto o a un prefisso che termina con <code translate="no">/</code>. Utilizzarlo <strong>al posto di</strong> <code translate="no">files</code>; si tratta di due trasporti diversi, non di sinonimi.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>ID del cluster Zilliz Cloud.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>ID del progetto Zilliz Cloud, per i database di progetto.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Regione del database del progetto.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>Chiave API, oppure <code translate="no">username:password</code> per un'istanza self-hosted.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Credenziali di archiviazione oggetti per <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Token di sessione per le credenziali di archiviazione a oggetti a breve termine.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Volume Zilliz Cloud da cui effettuare l’importazione. Richiede <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Percorsi all’interno di <code translate="no">volume_name</code>. Ogni sottoelenco corrisponde a un file o a un prefisso che termina con <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> oppure <code translate="no">str</code></td><td>Verifica del certificato TLS del server; per impostazione predefinita <code translate="no">True</code>. Una stringa viene interpretata come percorso del bundle CA.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> oppure <code translate="no">tuple</code></td><td>Certificato client per TLS reciproco: un percorso di file o una coppia <code translate="no">('cert', 'key')</code>.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>Intestazioni HTTP aggiuntive unite alla richiesta; prevalgono i valori del chiamante. Utilizzarle per inviare una chiave di idempotenza, ad esempio <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; vedere <a href="/docs/it/idempotent-import.md">Importazione in blocco idempotente</a>.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Opzioni di importazione aggiuntive inoltrate al server nel corpo della richiesta.</td></tr>
+</tbody>
+</table>
+<p>Eventuali argomenti chiave rimanenti vengono inoltrati a ` <code translate="no">requests.post</code>`, quindi ` <code translate="no">timeout</code> ` e ` <code translate="no">proxies</code>` 
+funzionano come in quel contesto. Il wrapper invia un timeout di 20 secondi per impostazione predefinita.</p>
+<h2 id="Check-import-progress" class="common-anchor-header">Verifica dello stato di avanzamento dell’importazione<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Una volta ottenuto l’ID del processo di importazione, è possibile controllarne lo stato come segue:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -271,7 +316,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">Elenco dei processi di importazione<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">Elencare i processi di importazione<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>È possibile elencare tutti i processi di importazione relativi a una raccolta specifica come segue:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -388,7 +433,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 <li><p>Finché lo stato del processo di importazione non è <strong>"Completato</strong>", i dati appena importati non saranno visibili nelle query e nelle ricerche.</p></li>
 <li><p>Una volta che lo stato del processo è <strong>«Completato»</strong>,</p>
 <ul>
-<li><p>se la raccolta non è stata caricata, è possibile utilizzare la funzione ` <code translate="no">load</code> ` per caricare i dati appena importati.</p></li>
+<li><p>se la raccolta non è stata caricata, è possibile utilizzare la funzione <code translate="no">load</code> per caricare i dati appena importati.</p></li>
 <li><p>Se la raccolta è già caricata, è possibile chiamare <code translate="no">load(is_refresh=True)</code> per caricare i dati importati.</p></li>
 </ul></li>
 </ul></li>

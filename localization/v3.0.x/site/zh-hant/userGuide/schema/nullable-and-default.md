@@ -18,7 +18,7 @@ summary: 設定可為空的欄位及其預設值，包括模式、插入、索�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支援可為空欄位，這允許欄位值為空或明確設定為 NULL。可為空性是在資料結構層級定義的，並會一致地套用至資料匯入、建立索引、搜尋及查詢等操作中。</p>
+    </button></h1><p>Milvus 支援可為空欄位，這意味著欄位值可以為空，或明確設定為 NULL。可為空性是在資料結構層級定義的，並會一致地套用至資料匯入、建立索引、搜尋及查詢等各項操作中。</p>
 <p>在以下情況下應使用可為空欄位：</p>
 <ul>
 <li>從允許缺失值的外部系統匯入資料時。</li>
@@ -41,9 +41,8 @@ summary: 設定可為空的欄位及其預設值，包括模式、插入、索�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>允許 NULL 值的向量欄位不支援 `<code translate="no">IS NULL</code> ` 或 `<code translate="no">IS NOT NULL</code> ` 篩選表達式。您無法根據向量欄位值是否為 NULL 來明確篩選實體。</p></li>
-<li><p>自 Milvus 3.0.0 起，父級<a href="/docs/zh-hant/array-of-structs.md">StructArray</a>欄位可設定為可為 NULL。請在父級 StructArray 欄位上設定<code translate="no">nullable=True</code> ，而非在個別子欄位上設定。NULL 適用於整個 StructArray 欄位，而非個別的 Struct 元素，且 Milvus 會內部將父級的可為 NULL 屬性傳遞至其子欄位。 新增至現有集合的 StructArray 欄位必須為可為 NULL，以便現有實體能針對新欄位返回 NULL。 自 Milvus 3.0.6 起，子欄位可額外允許個別 Struct 元素具有 NULL 值：對標量或向量子欄位設定 `<code translate="no">nullable=True</code> `，對陣列子欄位設定 `<code translate="no">element_nullable=True</code> `；但 Struct 元素本身仍不可為 NULL。詳細資訊請參閱《<a href="/docs/zh-hant/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray 限制</a>》。</p></li>
-<li><p>可為空屬性是在建立欄位時定義的，之後無法修改。您無法針對現有欄位啟用或停用可為空功能。</p></li>
+<li><p>自 Milvus 3.0.0 起，父級<a href="/docs/zh-hant/array-of-structs.md">StructArray</a>欄位可設定為可為空。請將 `<code translate="no">nullable=True</code> ` 設定於父級 StructArray 欄位，而非個別子欄位。NULL 適用於整個 StructArray 欄位，而非單一 Struct 元素，且 Milvus 會於內部將父級的可為空性傳遞至其子欄位。 新增至現有集合的 StructArray 欄位必須為可為空，以便現有實體能針對新欄位返回 NULL。 自 Milvus 3.0.6 起，子欄位可額外允許個別 Struct 元素具有 NULL 值：對標量或向量子欄位設定 `<code translate="no">nullable=True</code> `，對陣列子欄位設定 `<code translate="no">element_nullable=True</code> `；但 Struct 元素本身仍不可為 NULL。詳細資訊請參閱《<a href="/docs/zh-hant/structarray-limits.md#Nullable-and-dynamic-schema-limits">StructArray 限制</a>》。</p></li>
+<li><p>可為空屬性是在建立欄位時定義的，事後無法修改。您無法針對現有欄位啟用或停用可為空功能。</p></li>
 <li><p>標記為可為空的欄位無法用作分區鍵。分區鍵欄位必須始終包含有效且非空的值。如需更多資訊，請參閱《<a href="/docs/zh-hant/use-partition-key.md">使用分區鍵</a>》。</p></li>
 </ul>
 <h2 id="What-is-a-nullable-field" class="common-anchor-header">什麼是可為空欄位？<button data-href="#What-is-a-nullable-field" class="anchor-icon" translate="no">
@@ -68,7 +67,7 @@ summary: 設定可為空的欄位及其預設值，包括模式、插入、索�
 <li>該欄位被明確設定為 NULL（例如，在 Python 中使用<code translate="no">None</code> ）。</li>
 </ul>
 <p>若未將欄位定義為可為空（預設行為），則每個實體都必須為該欄位提供有效值。省略該欄位或明確賦予 NULL 值，都會導致插入或匯入操作失敗。</p>
-<p>集合模式中的<strong>標量與向量欄位均</strong>支援 nullable 屬性。自 Milvus 3.0.0 起，此屬性亦支援於父級 StructArray 欄位。 請勿獨立將 Struct 子欄位設定為行層級可為 NULL；應在 StructArray 父欄位上定義行層級可為 NULL 設定，Milvus 會內部將該設定傳播至其子欄位。 若要允許個別 Struct 元素內的子欄位值為 NULL（元素層級的空值），請在 Milvus 3.0.6 及後續版本中，對標量或向量子欄位設定 `<code translate="no">nullable=True</code> `，或對陣列子欄位設定 `<code translate="no">element_nullable=True</code> `；請參閱「<a href="/docs/zh-hant/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">建立 StructArray 欄位」</a>。</p>
+<p>集合模式中的<strong>標量欄位和向量欄位均</strong>支援 nullable 屬性。自 Milvus 3.0.0 起，此屬性亦支援於父級 StructArray 欄位。 請勿獨立將 Struct 子欄位設定為行層級可為 NULL；應在 StructArray 父欄位上定義行層級可為 NULL 設定，Milvus 會將該設定內部傳遞至其子欄位。 若要允許個別 Struct 元素內的子欄位值為 NULL（元素層級的空值），請在 Milvus 3.0.6 及後續版本中，對標量或向量子欄位設定 `<code translate="no">nullable=True</code> `，或對陣列子欄位設定 `<code translate="no">element_nullable=True</code> `；請參閱「<a href="/docs/zh-hant/create-structarray-field.md#allow-null-values-in-struct-elements--milvus-306">建立 StructArray 欄位」</a>。</p>
 <div class="alert note">
 <p>可為空性決定欄位值是否可能缺失；它並未定義當欄位缺失時會使用何種值。</p>
 <ul>
@@ -327,7 +326,7 @@ curl --request POST \
 <li>實體在插入時可省略 `<code translate="no">embedding</code> ` 欄位，或將其設為 NULL 值。</li>
 <li>是否允許 NULL 值的決定是在建立集合時即已固定。</li>
 </ul>
-<p>為求清晰，以下範例將聚焦於可為空的向量欄位（<code translate="no">embedding</code> ）。定義可為空的標量欄位屬可選項目，且無需遵循本指南其餘內容。</p>
+<p>為求清晰，以下範例將聚焦於可為空的向量欄位（<code translate="no">embedding</code> ）。定義可為空的標量欄位屬可選操作，且無需遵循本指南其餘內容。</p>
 <p><details>
 <summary>可選：定義可為 NULL 的標量欄位</summary></p>
 <p>標量欄位亦可透過相同的 `<code translate="no">nullable</code> ` 屬性定義為可為 NULL，並在資料導入時遵循相同的規則。例如：</p>
@@ -401,7 +400,7 @@ schema.Fields.Add(<span class="hljs-keyword">new</span> FieldSchema(<span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦在集合模式中將欄位定義為可為空，Milvus 便允許該欄位在資料導入期間呈現缺失值或明確設定為 NULL。</p>
+    </button></h2><p>一旦在集合模式中將欄位定義為可為空，Milvus 便允許該欄位在資料導入期間呈現為缺失值或明確設定為 NULL。</p>
 <p>以下範例將三項實體插入至「<a href="#Define-a-nullable-field-in-the-collection-schema">在集合模式中定義可為 NULL 的欄位</a>」中建立的集合，以示範這些不同情況。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -915,7 +914,7 @@ Console.WriteLine(res);
 <ul>
 <li>僅將<code translate="no">embedding</code> 值不為空的實體視為候選對象。</li>
 <li><code translate="no">embedding</code> 值為 NULL 的實體將被排除在評估之外。</li>
-<li>回傳結果的數量取決於集合中存在多少個有效的向量。</li>
+<li>回傳的結果數量取決於集合中存在多少個有效的向量。</li>
 </ul>
 <h2 id="Query-and-filtering-implications" class="common-anchor-header">查詢與篩選的注意事項<button data-href="#Query-and-filtering-implications" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -932,8 +931,12 @@ Console.WriteLine(res);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>前面的範例著重於向量欄位。本節說明 NULL 值在<strong>標量篩選表達式中的</strong>行為。</p>
-<p>標量欄位可透過 `<code translate="no">nullable=True</code> ` 進行定義，並遵循與向量欄位相同的匯入規則。然而，<strong>在篩選表達式中，NULL 標量值始終會被評估為 false</strong>。請使用 `<code translate="no">IS NULL</code> ` 或 `<code translate="no">IS NOT NULL</code> `，根據標量欄位是否為 NULL 來選取實體。</p>
+    </button></h2><div class="alert note">
+<p>自 Milvus 3.0.3 起，您可在一般向量欄位的查詢與搜尋篩選條件中使用 `<code translate="no">IS NULL</code> ` 和 `<code translate="no">IS NOT NULL</code> `，分別選取向量欄位為 NULL 或非 NULL 的實體。</p>
+<p>若要查找<code translate="no">embedding</code> 欄位為 NULL 的實體，請使用<code translate="no">query()</code> 並搭配篩選條件<code translate="no">embedding IS NULL</code> 。此篩選條件在<code translate="no">search()</code> 中同樣有效。然而，若在<code translate="no">embedding</code> 上使用此篩選條件進行搜尋，將不會返回任何結果：沒有<code translate="no">embedding</code> 值的實體沒有向量可供與查詢向量進行比對。</p>
+<p>有關受支援的類型、語法及範例，請參閱<a href="/docs/zh-hant/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL 和 IS NOT NULL 運算子</a>。</p>
+</div>
+<p>對於使用 `<code translate="no">nullable=True</code>` 定義的標量欄位，諸如 `<code translate="no">age &gt; 18</code> ` 或 `<code translate="no">status == &quot;active&quot;</code> ` 之類的比較條件，不會匹配該比較欄位為 `NULL` 的實體。</p>
 <p>例如，假設有一個可為 NULL 的標量欄位<code translate="no">age</code> ，以下篩選條件會選取年齡大於 18 歲的實體：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -969,7 +972,7 @@ Console.WriteLine(res);
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Use in query/search filter parameter, for example:</span>
 <span class="hljs-comment"># &quot;filter&quot;: &quot;age &gt; 18&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">age</code> 為 NULL 的實體將被排除在結果之外，因為 NULL 值不符合篩選條件。</p>
+<p>由於 NULL 值不符合篩選條件，因此<code translate="no">age</code> 為 NULL 的實體將被排除在結果之外。</p>
 <p>同樣地，等值檢查也不會與 NULL 值匹配。例如：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1023,19 +1026,19 @@ Console.WriteLine(res);
     </button></h2><p>當某個欄位同時設定了 `<code translate="no">nullable</code> ` 與 `<code translate="no">default_value</code> ` 時，以下規則將決定 Milvus 在插入資料時如何處理 NULL 輸入或缺失的欄位值。</p>
 <table>
 <thead>
-<tr><th>啟用可為 NULL 設定</th><th>預設值</th><th>使用者輸入（NULL 或省略）</th><th>結果</th></tr>
+<tr><th>啟用可為 NULL 設定</th><th>預設值</th><th>使用者輸入（NULL 或未填寫）</th><th>結果</th></tr>
 </thead>
 <tbody>
 <tr><td>是</td><td>是（非 NULL）</td><td>NULL 或省略</td><td>使用預設值</td></tr>
 <tr><td>是</td><td>否</td><td>NULL 或省略</td><td>儲存為 NULL</td></tr>
 <tr><td>否</td><td>是（非 NULL）</td><td>NULL 或省略</td><td>使用預設值</td></tr>
 <tr><td>否</td><td>否</td><td>NULL 或省略</td><td>拋出錯誤</td></tr>
-<tr><td>否</td><td>是（預設為 NULL）</td><td>NULL 或省略</td><td>會拋出錯誤</td></tr>
+<tr><td>否</td><td>是（預設值為 NULL）</td><td>NULL 或省略</td><td>會拋出錯誤</td></tr>
 </tbody>
 </table>
 <p><strong>重點摘要：</strong></p>
 <ul>
-<li>當欄位具有非 NULL 預設值時，無論是否啟用「<code translate="no">nullable</code> 」，系統都會使用該值。</li>
+<li>當欄位具有非 NULL 的預設值時，無論是否啟用「<code translate="no">nullable</code> 」，系統都會使用該預設值。</li>
 <li>當啟用<code translate="no">nullable=True</code> 但未設定預設值時，該欄位將儲存NULL。</li>
 <li>當啟用「<code translate="no">nullable=False</code> 」但未設定預設值時，插入操作會因錯誤而失敗。</li>
 <li>在不可為 NULL 的欄位上設定 NULL 預設值是無效的，並會引發錯誤。</li>

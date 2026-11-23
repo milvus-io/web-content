@@ -49,7 +49,7 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
    </tr>
    <tr>
      <td rowspan="2"><p><strong>Collection</strong></p></td>
-     <td><p>Specific Collection</p></td>
+     <td><p>特定Collection</p></td>
      <td><pre><code translate="no" class="python language-python"> client.grant_privilege_v2(
      role_name="roleA", 
      privilege="CollectionAdmin",
@@ -103,11 +103,11 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
      db_name="*"
  )
 </code></pre></td>
-     <td><p>请输入<code translate="no">*</code> 作为数据库名称，并输入<code translate="no">*</code> 作为 Collection 名称。</p></td>
+     <td><p>将<code translate="no">*</code> 作为数据库名称，将<code translate="no">*</code> 作为 Collection 名称。</p></td>
    </tr>
 </table>
 <ul>
-<li><p><strong>权限</strong>：您需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。目前，Milvus 提供了 56 种可授予的权限。下表列出了 Milvus 中的权限。</p>
+<li><p><strong>权限</strong>：您需要授予角色的特定权限或<a href="/docs/zh/privilege_group.md">权限组</a>。下表列出了您可以授予的权限。</p>
 <p><div class="alert note"></p>
 <p>下表中的“类型”列仅供用户快速查找权限之用，仅用于分类目的。授予权限时，您无需了解这些类型，只需输入相应的权限即可。</p>
 <p></div></p>
@@ -148,17 +148,17 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
 <td rowspan="18"><p>Collection权限</p></td>
 <td><p>获取刷新状态</p></td>
 <td><p>检查Collection刷新操作的状态</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadState</p></td>
 <td><p>检查Collection的加载状态</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/restful/v3.0.x/v2/Collection%20(v2)/Get%20Load%20State.md">GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>GetLoadingProgress</p></td>
 <td><p>检查Collection的加载进度</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/loading_progress.md">GetLoadingProgress</a></p></td>
 </tr>
 <tr>
 <td><p>显示集合</p></td>
@@ -168,22 +168,22 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
 <tr>
 <td><p>ListAliases</p></td>
 <td><p>查看Collection的所有别名</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/list_aliases.md">ListAliases</a></p></td>
 </tr>
 <tr>
 <td><p>描述集合</p></td>
 <td><p>查看Collection的详细信息</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_collection.md">描述集合</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/describe_collection.md">描述集合</a></p></td>
 </tr>
 <tr>
 <td><p>描述别名</p></td>
 <td><p>查看别名的详细信息</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/describe_alias.md">描述别名</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/describe_alias.md">描述别名</a></p></td>
 </tr>
 <tr>
 <td><p>GetStatistics</p></td>
 <td><p>获取Collection的统计信息（例如：Collection中的实体数量）</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Collections/get_collection_stats.md">GetCollectionStatistics</a></p></td>
 </tr>
 <tr>
 <td><p>CreateCollection</p></td>
@@ -198,22 +198,22 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
 <tr>
 <td><p>加载</p></td>
 <td><p>加载Collection</p></td>
-<td><p><a href="https://milvus.io/api-reference/restful/v2.5.x/v2/Collection%20(v2)/Get%20Load%20State.md">LoadCollection/GetLoadingProgress/GetLoadState</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/restful/v3.0.x/v2/Collection%20(v2)/Get%20Load%20State.md">LoadCollection/GetLoadingProgress/GetLoadState</a></p></td>
 </tr>
 <tr>
 <td><p>释放</p></td>
-<td><p>Release a Collection</p></td>
+<td><p>释放Collection</p></td>
 <td><p><a href="/docs/zh/load-and-release.md">释放集合</a></p></td>
 </tr>
 <tr>
 <td><p>刷新</p></td>
-<td><p>将Collection中的所有实体持久化到一个密封的分段中。在刷新操作之后插入的任何实体都将存储在新的分段中。</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/Collection/flush.md">Flush/GetFlushState</a></p></td>
+<td><p>将Collection中的所有实体持久化到一个密封分段中。在刷新操作之后插入的任何实体都将存储在一个新的分段中。</p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/Collection/flush.md">Flush/GetFlushState</a></p></td>
 </tr>
 <tr>
 <td><p>压缩</p></td>
 <td><p>手动触发压缩</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/MilvusClient/Management/compact.md">压缩</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Management/compact.md">压缩</a></p></td>
 </tr>
 <tr>
 <td><p>重命名集合</p></td>
@@ -233,7 +233,7 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
 <tr>
 <td><p>FlushAll</p></td>
 <td><p>清空数据库中的所有 Collections</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/flush_all.md">FlushAll</a></p></td>
 </tr>
 <tr>
 <td rowspan="4"><p>分区权限</p></td>
@@ -281,7 +281,7 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
 <tr>
 <td><p>CreateResourceGroup</p></td>
 <td><p>创建资源组</p></td>
-<td><p><a href="https://milvus.io/api-reference/pymilvus/v2.5.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
+<td><p><a href="https://milvus.io/api-reference/pymilvus/v3.0.x/ORM/utility/create_resource_group.md">CreateResourceGroup</a></p></td>
 </tr>
 <tr>
 <td><p>DropResourceGroup</p></td>
@@ -407,7 +407,7 @@ summary: 创建角色后，您可以向该角色授予权限。本指南将介�
 </tr>
 </table></p></li>
 </ul>
-<p>以下示例演示了如何将<code translate="no">default</code> 数据库下的<code translate="no">collection_01</code> 对象的<code translate="no">PrivilegeSearch</code> 权限，以及名为<code translate="no">privilege_group_1</code> 的权限组授予角色<code translate="no">role_a</code> 。</p>
+<p>以下示例演示了如何将<code translate="no">default</code> 数据库下的<code translate="no">collection_01</code> 对象的“<code translate="no">PrivilegeSearch</code> ”权限，以及名为<code translate="no">privilege_group_1</code> 的权限组授予角色<code translate="no">role_a</code> 。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -443,7 +443,7 @@ client.grant_privilege_v2(
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.GrantPrivilegeReqV2;
 
 client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -470,7 +470,7 @@ client.grantPrivilegeV2(GrantPrivilegeReqV2.builder()
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -512,22 +512,22 @@ err = client.GrantV2(ctx, milvusclient.NewGrantV2Option(<span class="hljs-string
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">grantPrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;Search&quot;</span>
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;Search&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
 });
     
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">grantPrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;privilege_group_1&quot;</span>
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;privilege_group_1&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">grantPrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&quot;role_a&quot;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;*&#x27;</span>
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&quot;ClusterReadOnly&quot;</span>,
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;*&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;*&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
@@ -596,7 +596,7 @@ curl --request POST \
 client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.response.DescribeRoleResp;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq
+<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.DescribeRoleReq;
 
 <span class="hljs-type">DescribeRoleReq</span> <span class="hljs-variable">describeRoleReq</span> <span class="hljs-operator">=</span> DescribeRoleReq.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -604,7 +604,7 @@ client.describe_role(role_name=<span class="hljs-string">&quot;role_a&quot;</spa
 <span class="hljs-type">DescribeRoleResp</span> <span class="hljs-variable">resp</span> <span class="hljs-operator">=</span> client.describeRole(describeRoleReq);
 List&lt;DescribeRoleResp.GrantInfo&gt; infos = resp.getGrantInfos();
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 role, err := client.DescribeRole(ctx, milvusclient.NewDescribeRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -682,7 +682,7 @@ client.revoke_privilege_v2(
     db_name=<span class="hljs-string">&#x27;*&#x27;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.RevokePrivilegeReqV2;
 
 client.revokePrivilegeV2(RevokePrivilegeReqV2.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
@@ -736,7 +736,7 @@ err = client.RevokePrivilegeV2(ctx, milvusclient.NewRevokePrivilegeV2Option(<spa
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">revokePrivilegeV2</span>({
     <span class="hljs-attr">role</span>: <span class="hljs-string">&#x27;role_a&#x27;</span>,
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;collection_01&#x27;</span>,
-    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&#x27;Search&#x27;</span>,
+    <span class="hljs-attr">privilege</span>: <span class="hljs-string">&#x27;privilege_group_1&#x27;</span>,
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&#x27;default&#x27;</span>
 });
 
@@ -766,7 +766,7 @@ curl --request POST \
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{
     &quot;roleName&quot;: &quot;role_a&quot;,
-    &quot;privilege&quot;: &quot;Search&quot;,
+    &quot;privilege&quot;: &quot;privilege_group_1&quot;,
     &quot;collectionName&quot;: &quot;collection_01&quot;,
     &quot;dbName&quot;:&quot;default&quot;
 }&#x27;</span>

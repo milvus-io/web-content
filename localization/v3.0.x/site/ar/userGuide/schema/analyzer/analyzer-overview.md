@@ -85,7 +85,7 @@ summary: >-
 <div class="alert note">
 <ul>
 <li>إذا حذفت تكوينات المحلل أثناء إنشاء المجموعة، فسيستخدم Milvus محلل « <code translate="no">standard</code> » لجميع عمليات معالجة النصوص بشكل افتراضي. لمزيد من التفاصيل، راجع <a href="/docs/ar/standard-analyzer.md">«المحلل القياسي</a>».</li>
-<li>للحصول على أداء مثالي للبحث والاستعلام، اختر محللًا يتوافق مع لغة بياناتك النصية. على سبيل المثال، على الرغم من أن محلل « <code translate="no">standard</code> » متعدد الاستخدامات، إلا أنه قد لا يكون الخيار الأفضل للغات ذات التراكيب النحوية الفريدة، مثل الصينية أو العربية أو التايلاندية أو اليابانية أو الكورية. في مثل هذه الحالات، استخدم محللًا خاصًا باللغة مثل <a href="/docs/ar/chinese-analyzer.md"><code translate="no">chinese</code></a>، <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a>، أو <a href="/docs/ar/thai-analyzer.md"><code translate="no">thai</code></a>، أو محللات مخصصة مع أدوات تجزئة متخصصة (مثل <a href="/docs/ar/lindera-tokenizer.md"><code translate="no">lindera</code></a>، <a href="/docs/ar/icu-tokenizer.md"><code translate="no">icu</code></a>) ومرشحات يُوصى به بشدة لضمان تجزئة دقيقة ونتائج بحث أفضل.</li>
+<li>للحصول على أداء مثالي للبحث والاستعلام، اختر محللًا يتوافق مع لغة بياناتك النصية. على سبيل المثال، على الرغم من أن محلل « <code translate="no">standard</code> » متعدد الاستخدامات، فقد لا يكون الخيار الأفضل للغات ذات التراكيب النحوية الفريدة، مثل الصينية أو العربية أو التايلاندية أو اليابانية أو الكورية. في مثل هذه الحالات، استخدم محللًا خاصًا باللغة مثل <a href="/docs/ar/chinese-analyzer.md"><code translate="no">chinese</code></a>، <a href="/docs/ar/arabic-analyzer.md"><code translate="no">arabic</code></a>، أو <a href="/docs/ar/thai-analyzer.md"><code translate="no">thai</code></a>، أو محللات مخصصة مع أدوات تجزئة متخصصة (مثل <a href="/docs/ar/lindera-tokenizer.md"><code translate="no">lindera</code></a>، <a href="/docs/ar/icu-tokenizer.md"><code translate="no">icu</code></a>) ومرشحات، لضمان تجزئة دقيقة ونتائج بحث أفضل.</li>
 </ul>
 </div>
 <h3 id="Built-in-analyzer" class="common-anchor-header">المحلل المدمج<button data-href="#Built-in-analyzer" class="anchor-icon" translate="no">
@@ -103,8 +103,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يتم تهيئة المحللات المدمجة في Milvus مسبقًا باستخدام أدوات تجزئة وفلاتر محددة، مما يتيح لك استخدامها على الفور دون الحاجة إلى تعريف هذه المكونات بنفسك. يعمل كل محلل مدمج كقالب يتضمن أداة تجزئة وفلاتر محددة مسبقًا، مع معلمات اختيارية للتخصيص.</p>
-<p>على سبيل المثال، لاستخدام المحلل المدمج « <code translate="no">standard</code> »، ما عليك سوى تحديد اسمه « <code translate="no">standard</code> » كـ « <code translate="no">type</code> » (اسم المحلل)، وإدراج تكوينات إضافية اختيارية خاصة بنوع المحلل هذا، مثل « <code translate="no">stop_words</code> »:</p>
+    </button></h3><p>تم تكوين المحللات المدمجة في Milvus مسبقًا باستخدام أدوات تجزئة وفلاتر محددة، مما يتيح لك استخدامها على الفور دون الحاجة إلى تعريف هذه المكونات بنفسك. يعمل كل محلل مدمج كقالب يتضمن أداة تجزئة وفلاتر محددة مسبقًا، مع معلمات اختيارية للتخصيص.</p>
+<p>على سبيل المثال، لاستخدام المحلل المدمج « <code translate="no">standard</code> »، ما عليك سوى تحديد اسمه <code translate="no">standard</code> كـ « <code translate="no">type</code> » (اسم المحلل)، وإدراج تكوينات إضافية اختيارية خاصة بنوع المحلل هذا، مثل <code translate="no">stop_words</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -176,27 +176,50 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
+
+ctx := context.Background()
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;type\&quot;: \&quot;standard\&quot;, \&quot;stop_words\&quot;: [\&quot;a\&quot;, \&quot;an\&quot;, \&quot;for\&quot;]}&quot;,
+    &quot;text&quot;: [&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>وستكون النتيجة كما يلي:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
 <p>يوضح هذا أن المحلل يقوم بتجزئة النص المدخل بشكل صحيح عن طريق تصفية الكلمات الممنوعة <code translate="no">&quot;a&quot;</code> و <code translate="no">&quot;an&quot;</code> و <code translate="no">&quot;for&quot;</code> ، مع إرجاع الرموز ذات المعنى المتبقية.</p>
-<p>إن تكوين المحلل المدمج <code translate="no">standard</code> أعلاه يعادل إعداد <a href="/docs/ar/analyzer-overview.md#Custom-analyzer">محلل مخصص</a> بالمعلمات التالية، حيث تم تعريف الخيارين <code translate="no">tokenizer</code> و <code translate="no">filter</code> بشكل صريح لتحقيق وظيفة مماثلة:</p>
+<p>إن تكوين المحلل المدمج <code translate="no">standard</code> أعلاه يعادل إعداد <a href="/docs/ar/analyzer-overview.md#Custom-analyzer">محلل مخصص</a> بالمعلمات التالية، حيث يتم تعريف خياري <code translate="no">tokenizer</code> و <code translate="no">filter</code> بشكل صريح لتحقيق وظيفة مماثلة:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -252,15 +275,15 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
    ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يوفر Milvus المحللات المدمجة التالية، وقد صُمم كل منها لتلبية احتياجات معالجة نصية محددة:</p>
+<p>يوفر Milvus المحللات المدمجة التالية، وقد صُمم كل منها لتلبية احتياجات معينة في معالجة النصوص:</p>
 <ul>
 <li><p><code translate="no">standard</code>: مناسب لمعالجة النصوص للأغراض العامة، مع تطبيق التقطيع القياسي وتصفية الأحرف الصغيرة.</p></li>
-<li><p><code translate="no">english</code>: مُحسَّن للنصوص باللغة الإنجليزية، مع دعم الكلمات الممنوعة في اللغة الإنجليزية.</p></li>
-<li><p><code translate="no">chinese</code>: متخصص في معالجة النصوص الصينية، بما في ذلك التقطيع المكيف ليتناسب مع هياكل اللغة الصينية.</p></li>
-<li><p><code translate="no">arabic</code>: متخصص في النصوص العربية، مع توحيد النصوص العربية، وتوحيد الأرقام العشرية، واستخلاص الجذور العربية، وإزالة الكلمات الزائدة العربية.</p></li>
+<li><p><code translate="no">english</code>: مُحسّن للنصوص باللغة الإنجليزية، مع دعم الكلمات الممنوعة في اللغة الإنجليزية.</p></li>
+<li><p><code translate="no">chinese</code>: متخصص في معالجة النصوص الصينية، بما في ذلك تقطيع النص إلى رموز مكيّف مع هياكل اللغة الصينية.</p></li>
+<li><p><code translate="no">arabic</code>: متخصص في النصوص العربية، مع توحيد النصوص العربية، وتوحيد الأرقام العشرية، واستخلاص الجذور العربية، وإزالة الكلمات الممنوعة العربية.</p></li>
 <li><p><code translate="no">thai</code>: متخصص في النصوص التايلاندية، مع تقطيع الكلمات التايلاندية، وتوحيد الأرقام العشرية، وإزالة الكلمات الزائدة التايلاندية.</p></li>
 </ul>
-<h3 id="Custom-analyzer" class="common-anchor-header">المحلل المخصص<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
+<h3 id="Custom-analyzer" class="common-anchor-header">أداة التحليل المخصصة<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -280,7 +303,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <p>على سبيل المثال، يقوم أداة التقطيع بتحويل النص <code translate="no">&quot;Vector Database Built for Scale&quot;</code> إلى رموز منفصلة:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>مثال على تحديد أداة تقسيم النص إلى رموز</strong>:</p>
+<p><strong>مثال على تحديد أداة التقطيع</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -305,16 +328,16 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter" class="common-anchor-header">المرشح</h4><p>تعد<strong>المرشحات</strong> مكونات <strong>اختيارية</strong> تعمل على الرموز التي ينتجها أداة الترميز، حيث تقوم بتحويلها أو صقلها حسب الحاجة. على سبيل المثال، بعد تطبيق مرشح <code translate="no">lowercase</code> على المصطلحات التي تم ترميزها <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> ، قد تكون النتيجة:</p>
+<h4 id="Filter" class="common-anchor-header">المرشح</h4><p><strong>المرشحات</strong> هي مكونات <strong>اختيارية</strong> تعمل على الرموز التي ينتجها أداة الترميز، وتقوم بتحويلها أو صقلها حسب الحاجة. على سبيل المثال، بعد تطبيق مرشح <code translate="no">lowercase</code> على المصطلحات المرمزة <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> ، قد تكون النتيجة:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكن أن تكون المرشحات في المحلل المخصص إما <strong>مدمجة</strong> أو <strong>مخصصة</strong>، اعتمادًا على احتياجات التكوين.</p>
 <ul>
-<li><p><strong>المرشحات المدمجة</strong>: تم تكوينها مسبقًا بواسطة Milvus، ولا تتطلب سوى الحد الأدنى من الإعداد. يمكنك استخدام هذه المرشحات فورًا عن طريق تحديد أسمائها. المرشحات التالية مدمجة للاستخدام المباشر:</p>
+<li><p><strong>المرشحات المدمجة</strong>: تم تكوينها مسبقًا بواسطة Milvus، ولا تتطلب سوى الحد الأدنى من الإعداد. يمكنك استخدام هذه المرشحات فورًا بمجرد تحديد أسمائها. المرشحات التالية مدمجة للاستخدام المباشر:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: يحول النص إلى أحرف صغيرة، مما يضمن مطابقة غير حساسة لحالة الأحرف. لمزيد من التفاصيل، راجع <a href="/docs/ar/lowercase-filter.md">«الأحرف الصغيرة</a>».</p></li>
 <li><p><code translate="no">asciifolding</code>: يحول الأحرف غير التابعة لمعيار ASCII إلى ما يعادلها في معيار ASCII، مما يبسط معالجة النصوص متعددة اللغات. لمزيد من التفاصيل، راجع <a href="/docs/ar/ascii-folding-filter.md">ASCII folding</a>.</p></li>
-<li><p><code translate="no">alphanumonly</code>: يحتفظ بالأحرف الأبجدية الرقمية فقط عن طريق إزالة الأحرف الأخرى. لمزيد من التفاصيل، راجع <a href="/docs/ar/alphanumonly-filter.md">Alphanumonly</a>.</p></li>
+<li><p><code translate="no">alphanumonly</code>: يحتفظ بالأحرف الأبجدية الرقمية فقط عن طريق إزالة الأحرف الأخرى. لمزيد من التفاصيل، راجع <a href="/docs/ar/alphanumonly-filter.md">«Alphanumonly</a>».</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: يزيل الرموز التي تحتوي على أي أحرف بخلاف الأحرف الصينية أو الحروف الإنجليزية أو الأرقام. لمزيد من التفاصيل، راجع <a href="/docs/ar/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: يزيل الرموز التي تحتوي على أي أحرف غير صينية. لمزيد من التفاصيل، راجع <a href="/docs/ar/cncharonly-filter.md">Cncharonly</a>.</p></li>
 <li><p><code translate="no">pinyin</code>: يضيف أشكال الرموز الصوتية (Pinyin) للرموز الصينية، مما يتيح المطابقة القائمة على نظام Pinyin للنص الصيني. لمزيد من التفاصيل، راجع <a href="/docs/ar/pinyin-filter.md">Pinyin</a>.</p></li>
@@ -489,12 +512,12 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )  
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -504,14 +527,14 @@ cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
+    <span class="hljs-built_in">panic</span>(err)
 }
-<span class="hljs-keyword">defer</span> client.Close(ctx)
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
 
 schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">الخطوة 2: تعريف تكوينات المحلل والتحقق منها<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -586,17 +609,30 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
 
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;type\&quot;: \&quot;english\&quot;}&quot;,
+    &quot;text&quot;: [&quot;Milvus simplifies text analysis for search.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><strong>تكوين وتحقق من محلل مخصص:</strong></p>
 <ul>
@@ -681,11 +717,12 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     <span class="hljs-attr">analyzer_params</span>: analyzer_params_built_in
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>, 
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>,
     <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
         <span class="hljs-string">&quot;max&quot;</span>:  <span class="hljs-number">40</span>,
+    },
     <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,
         <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>},
@@ -693,16 +730,30 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;: \&quot;standard\&quot;, \&quot;filter\&quot;: [\&quot;lowercase\&quot;, {\&quot;type\&quot;: \&quot;length\&quot;, \&quot;max\&quot;: 40}, {\&quot;type\&quot;: \&quot;stop\&quot;, \&quot;stop_words\&quot;: [\&quot;of\&quot;, \&quot;for\&quot;]}]}&quot;,
+    &quot;text&quot;: [&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">الخطوة 3: إضافة حقول إلى المخطط<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
@@ -828,7 +879,60 @@ schema.addField(AddFieldReq.builder()
     WithEnableMatch(<span class="hljs-literal">true</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: true,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;title_en&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true,
+                    &quot;enable_match&quot;: true,
+                    &quot;analyzer_params&quot;: {&quot;type&quot;: &quot;english&quot;}
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;title&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true,
+                    &quot;enable_match&quot;: true,
+                    &quot;analyzer_params&quot;: {
+                        &quot;tokenizer&quot;: &quot;standard&quot;,
+                        &quot;filter&quot;: [
+                            &quot;lowercase&quot;,
+                            {&quot;type&quot;: &quot;length&quot;, &quot;max&quot;: 40},
+                            {&quot;type&quot;: &quot;stop&quot;, &quot;stop_words&quot;: [&quot;of&quot;, &quot;for&quot;]}
+                        ]
+                    }
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;embedding&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {&quot;dim&quot;: 3}
+            },
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">الخطوة 4: إعداد معلمات الفهرس وإنشاء المجموعة<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -900,15 +1004,33 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go">idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
 indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>, idx)
 
-err = client.CreateCollection(ctx,
+err = cli.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexParams&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;indexName&quot;: &quot;embedding&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

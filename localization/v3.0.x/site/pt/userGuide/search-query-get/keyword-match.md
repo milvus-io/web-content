@@ -26,7 +26,7 @@ summary: >-
       </svg>
     </button></h1><p>A correspondência de texto no Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisas filtradas que satisfaçam condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de similaridade dentro de vetores que cumpram critérios escalares.</p>
 <div class="alert note">
-<p><code translate="no">TEXT_MATCH</code> Encontra termos analisados exatos, enquanto a « <code translate="no">TEXT_MATCH_FUZZY</code> » (Correspondência de Tokens) pode tolerar uma pequena distância de edição entre os tokens da consulta e os tokens indexados. Ambas são operações de filtragem booleana e não atribuem uma pontuação à relevância dos documentos correspondentes. Se pretender recuperar os documentos mais relevantes com base no significado semântico e na importância dos termos da consulta, recomendamos que utilize <a href="/docs/pt/full-text-search.md">a «Pesquisa de Texto Completo</a>».</p>
+<p><code translate="no">TEXT_MATCH</code> Encontra termos analisados exatos, enquanto a « <code translate="no">TEXT_MATCH_FUZZY</code> » (Pesquisa de semelhança) pode tolerar uma pequena distância de edição entre os tokens da consulta e os tokens indexados. Ambas são operações de filtragem booleana e não atribuem uma pontuação à relevância dos documentos correspondentes. Se pretender recuperar os documentos mais relevantes com base no significado semântico e na importância dos termos da consulta, recomendamos que utilize <a href="/docs/pt/full-text-search.md">a «Pesquisa de texto completo</a>».</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -374,7 +374,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(field_name, text)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: O nome do campo « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » com a funcionalidade de correspondência ativada, no qual se pretende efetuar a pesquisa.</p></li>
+<li><p><code translate="no">field_name</code>: O nome do campo « <code translate="no">VARCHAR</code> » ou « <code translate="no">TEXT</code> » com a funcionalidade de correspondência ativada, a ser pesquisado.</p></li>
 <li><p><code translate="no">text</code>: Os termos a pesquisar. É possível utilizar vários termos, separados por espaços ou outros delimitadores adequados, consoante a língua e o analisador configurado.</p></li>
 </ul>
 <p>Por predefinição, o <code translate="no">TEXT_MATCH</code> utiliza a lógica de correspondência <strong>«OU»</strong>, o que significa que irá devolver documentos que contenham qualquer um dos termos especificados. Por exemplo, para pesquisar documentos que contenham o termo <code translate="no">machine</code> ou <code translate="no">deep</code> no campo <code translate="no">text</code>, utilize a seguinte expressão:</p>
@@ -513,7 +513,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
     </button></h3><p>A correspondência de texto pode ser utilizada em combinação com a pesquisa de similaridade vetorial para restringir o âmbito da pesquisa e melhorar o desempenho da mesma. Ao filtrar a coleção utilizando a correspondência de texto antes da pesquisa de similaridade vetorial, é possível reduzir o número de documentos que precisam de ser pesquisados, resultando em tempos de consulta mais rápidos.</p>
 <p>Neste exemplo, a expressão <code translate="no">filter</code> filtra os resultados da pesquisa para incluir apenas documentos que correspondam ao termo especificado <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. A pesquisa por semelhança vetorial é então realizada neste subconjunto filtrado de documentos.</p>
 <div class="alert note">
-<p>Pode destacar os termos correspondentes nos resultados da pesquisa, configurando um realçador de texto. Consulte <a href="/docs/pt/text-highlighter.md">Realçador de texto</a> para obter mais detalhes.</p>
+<p>Pode destacar os termos correspondentes nos resultados da pesquisa configurando um realçador de texto. Consulte <a href="/docs/pt/text-highlighter.md">Realçador de texto</a> para obter mais detalhes.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

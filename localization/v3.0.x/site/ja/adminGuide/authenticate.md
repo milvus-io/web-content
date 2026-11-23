@@ -22,7 +22,7 @@ title: ユーザーアクセスの認証
 <div class="alert note">
 <ul>
 <li><p>TLSとユーザー認証は、それぞれ異なるセキュリティ対策です。Milvusシステムでユーザー認証とTLSの両方を有効にしている場合は、ユーザー名、パスワード、および証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、「<a href="/docs/ja/tls.md">転送中の暗号化</a>」を参照してください。</p></li>
-<li><p>このページに掲載されているコードスニペットでは、Milvusとの通信に<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">新しいMilvusClient</a>（Python）を使用しています。他の言語向けの新しいMilvusClient SDKは、今後のアップデートでリリースされる予定です。</p></li>
+<li><p>このページに掲載されているコードスニペットでは、Milvusとの通信に `new<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient</a>(Python)` を使用しています。</p></li>
 </ul>
 </div>
 <h2 id="Enable-user-authentication" class="common-anchor-header">ユーザー認証を有効にする<button data-href="#Enable-user-authentication" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: ユーザーアクセスの認証
  <a href="#operator"> Milvus Operator</a>
 </div>
 <div class="filter-docker">
-<p>Milvus サーバーでユーザー認証を有効にするには、Milvus 設定ファイル `<code translate="no">milvus.yaml</code>` 内で `common.security.authorizationEnabled` を `true` に設定してください。設定の詳細については、「<a href="https://milvus.io/docs/configure-docker.md?tab=component">Docker Compose を使用した Milvus の設定</a>」を参照してください。</p>
+<p>Milvus サーバーでユーザー認証を有効にするには、Milvus 設定ファイル `<code translate="no">milvus.yaml</code>` 内で `common.security.authorizationEnabled` を `true` に設定します。設定の詳細については、「<a href="https://milvus.io/docs/configure-docker.md?tab=component">Docker Compose を使用した Milvus の設定</a>」を参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
@@ -110,6 +110,15 @@ client = MilvusClient(
 <div class="alert note">
 認証を有効にした状態でMilvusに接続する際、有効なトークンを指定できなかった場合、gRPCエラーが発生します。
 </div>
+<p>Milvusは、<code translate="no">root</code> ユーザーが存在しない場合にのみ、設定<code translate="no">common.security.defaultRootPassword</code> を使用して<code translate="no">root</code> ユーザーを作成します。後でこの設定を変更しても、既存の<code translate="no">root</code> ユーザーのパスワードは変更されません。<code translate="no">root</code> のパスワードを変更するには、<code translate="no">root</code> として接続した状態で<code translate="no">update_password()</code> を呼び出します：</p>
+<pre><code translate="no" class="language-python">client.update_password(
+    user_name=<span class="hljs-string">&quot;root&quot;</span>,
+    old_password=<span class="hljs-string">&quot;Milvus&quot;</span>,
+    new_password=<span class="hljs-string">&quot;&lt;your_new_password&gt;&quot;</span>,
+    reset_connection=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">reset_connection=True</code> を実行すると、クライアントは以降の要求で新しいパスワードを使用します。</p>
 <h2 id="Create-a-new-user" class="common-anchor-header">新しいユーザーの作成<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +134,7 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">root</code> として接続した状態で、<code translate="no">create_user()</code> を使用してユーザーを作成します。デプロイメントでカスタム<a href="/docs/ja/authenticate.md#Password-requirements">パスワード長制限が</a>設定されていない限り、6～72 UTF-8バイトのパスワードを選択してください。</p>
+    </button></h2><p><code translate="no">root</code> として接続した状態で、<code translate="no">create_user()</code> を使用してユーザーを作成します。デプロイメントでカスタムの<a href="/docs/ja/authenticate.md#Password-requirements">パスワード長制限が</a>設定されていない限り、6～72 UTF-8バイトのパスワードを選択してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># create a user</span>
 client.create_user(
     user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
@@ -139,8 +148,8 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>ユーザーの作成に関する詳細については、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a> を参照してください。</p>
-<h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">新しいユーザーでMilvusに接続する<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
+<p>ユーザーの作成に関する詳細については、<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md">create_user()</a> を参照してください。</p>
+<h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">新しいユーザーで Milvus に接続する<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,9 +196,9 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>ユーザーのパスワード更新に関する詳細については、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a> を参照してください。</p>
+<p>ユーザーのパスワード更新に関する詳細については、<a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md">update_password()</a> を参照してください。</p>
 <p>以前のパスワードを忘れた場合、Milvusには特定のユーザーをスーパーユーザーとして指定できる設定項目が用意されています。これにより、パスワードをリセットする際に以前のパスワードを入力する必要がなくなります。</p>
-<p>デフォルトでは、Milvus設定ファイル内の<code translate="no">common.security.superUsers</code> フィールドは空になっており、すべてのユーザーがパスワードをリセットする際に旧パスワードを入力する必要があります。ただし、特定のユーザーをスーパーユーザーとして指定することで、旧パスワードの入力を不要にすることができます。以下のスニペットでは、<code translate="no">root</code> と<code translate="no">foo</code> がスーパーユーザーとして指定されています。</p>
+<p>デフォルトでは、Milvus設定ファイルの<code translate="no">common.security.superUsers</code> フィールドは空になっており、すべてのユーザーがパスワードをリセットする際に旧パスワードを入力する必要があります。ただし、特定のユーザーをスーパーユーザーとして指定することで、旧パスワードの入力を不要にすることができます。以下のスニペットでは、<code translate="no">root</code> と<code translate="no">foo</code> がスーパーユーザーとして指定されています。</p>
 <p>Milvus インスタンスの実行を管理する Milvus 設定ファイルに、以下の設定項目を追加してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
     <span class="hljs-attr">security:</span>
@@ -236,6 +245,27 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Protect-the-metrics-port" class="common-anchor-header">メトリクスポートを保護する<button data-href="#Protect-the-metrics-port" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">9091</code> <code translate="no">/management/*</code> <code translate="no">/log/level</code>XML-PH-0002@deepl.internal）、<code translate="no">/eventlog</code> （XML-PH-0003@deepl.internal）、<code translate="no">/telemetry</code> （XML-PH-0004@deepl.internal）、<code translate="no">/debug/pprof/*</code> （XML-PH-0005@deepl.internal）、および Web コンソールにサービスを提供します。<code translate="no">common.security.adminAuthEnabled</code> 設定は、これらのエンドポイントで<code translate="no">root</code> HTTP 基本認証を必要とするかどうかを制御します。デフォルトは<code translate="no">false</code> です。これを有効にするには、Milvus の設定ファイルに以下を追加してください:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">adminAuthEnabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>この設定を有効にしても、ヘルスプローブとメトリクスの収集は引き続き利用可能です。<code translate="no">Origin</code> ヘッダーもFetch Metadataヘッダーも含まないリクエストには、<code translate="no">X-Milvus-Admin-Request: true</code> ヘッダーを含める必要があります。設定を有効にする前に、グレースフルシャットダウンやプロファイリングスクリプトなど、これらのエンドポイントを呼び出すクライアントを更新してください。 メトリクスポートは依然としてプレーンHTTPを使用しているため、信頼できるネットワーク上、またはTLSプロキシの背後で公開してください。この設定は、<code translate="no">/management/config/alter</code> を通じて変更することはできません。</p>
 <h2 id="Limitations" class="common-anchor-header">制限事項<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +296,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>ユーザー名は空にしてはならず、32 文字を超えてはなりません。ユーザー名はアルファベットで始まり、アルファベット、数字、またはアンダースコアのみを含んでいる必要があります。</p>
+    </button></h3><p>ユーザー名は空にしてはならず、32 文字を超えてはなりません。ユーザー名は文字またはアンダースコアで始まり、文字、数字、アンダースコア (<code translate="no">_</code>)、および<code translate="no">proxy.nameValidation.allowedChars</code> で設定された追加の文字（デフォルトは<code translate="no">$</code> ）のみを含める必要があります。</p>
 <h3 id="Password-requirements" class="common-anchor-header">パスワードの要件<button data-href="#Password-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -283,7 +313,7 @@ client.list_users()
         ></path>
       </svg>
     </button></h3><p>パスワードの長さは、デフォルトで 6 ～ 72 UTF-8 バイトでなければなりません。ASCII 文字は 1 文字につき 1 バイトを占有し、マルチバイト文字は 1 バイト以上を占有します。Milvus では、大文字、小文字、数字、特殊文字の特定の組み合わせは必須ではありません。</p>
-<p>長さの制限を変更するには、<code translate="no">proxy.minPasswordLength</code> および<code translate="no">proxy.maxPasswordLength</code> を設定してください。最大長は72バイトを超えてはなりません。<code translate="no">proxy.maxPasswordLength</code> の値が0以下、または72を超える場合は、72として扱われます。設定方法については、<a href="/docs/ja/dynamic_config.md">「Configure Milvus on the Fly</a>」を参照してください。</p>
+<p>長さの制限を変更するには、<code translate="no">proxy.minPasswordLength</code> および<code translate="no">proxy.maxPasswordLength</code> を設定してください。最大長は 72 バイトを超えてはなりません。<code translate="no">proxy.maxPasswordLength</code> の値が 0 以下、または 72 を超える場合は、72 として扱われます。設定手順については、<a href="/docs/ja/dynamic_config.md">「Configure Milvus on the Fly</a>」を参照してください。</p>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

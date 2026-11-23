@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 允許您使用 `<code translate="no">JSON</code> ` 資料型別，在單一欄位中儲存並建立結構化資料的索引。這不僅能支援包含嵌套屬性的彈性資料結構，同時仍可透過 JSON 索引進行高效篩選。</p>
+    </button></h1><p>Milvus 允許您使用 `<code translate="no">JSON</code> ` 資料型別，在單一欄位中儲存並建立結構化資料的索引。這不僅能支援包含嵌套屬性的彈性資料結構，同時仍可透過 JSON 索引進行高效的篩選。</p>
 <h2 id="What-is-a-JSON-field" class="common-anchor-header">什麼是 JSON 欄位？<button data-href="#What-is-a-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -453,9 +453,9 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>為加速對 JSON 欄位的標量篩選，Milvus 支援<strong>JSON 路徑索引，</strong>可針對已宣告標量類型的特定 JSON 路徑建立索引。</p>
+    </button></h2><p>為加速 JSON 欄位的標量篩選，Milvus 支援<strong>JSON 路徑索引，</strong>可針對已宣告標量類型的特定 JSON 路徑建立<strong>索引</strong>。</p>
 <div class="alert note">
-<p>對 JSON 欄位建立索引屬<strong>可選操作</strong>。即使未建立索引，您仍可依據 JSON 路徑進行查詢或篩選，但由於需進行暴力搜尋，可能會導致效能較慢。</p>
+<p>對 JSON 欄位建立索引屬<strong>可選操作</strong>。即使未建立索引，您仍可根據 JSON 路徑進行查詢或篩選，但由於需進行暴力搜尋，可能會導致效能下降。</p>
 </div>
 <h3 id="JSON-path-indexing" class="common-anchor-header">JSON 路徑索引<button data-href="#JSON-path-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -474,7 +474,7 @@ curl --request POST \
       </svg>
     </button></h3><p>要建立 JSON 路徑索引，請指定：</p>
 <ul>
-<li><p><strong>JSON 路徑</strong>(<code translate="no">json_path</code>)：您要建立索引的 JSON 物件中，該鍵或嵌套欄位的路徑。</p>
+<li><p><strong>JSON 路徑</strong>(<code translate="no">json_path</code>)：您要建立索引的 JSON 物件中，該金鑰或嵌套欄位的路徑。</p>
 <ul>
 <li><p>範例：</p>
 <ul>
@@ -530,7 +530,7 @@ curl --request POST \
 <div class="alert note">
 <p>為確保最佳索引效能，陣列應包含同類型元素。如需更多資訊，請參閱「<a href="/docs/zh-hant/array_data_type.md">陣列欄位</a>」。</p>
 </div>
-<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">範例：建立 JSON 路徑索引</h4><p>以下範例採用我們在簡介中提到的「<code translate="no">metadata</code> 」JSON 結構，展示如何針對不同的 JSON 路徑建立索引：</p>
+<h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">範例：建立 JSON 路徑索引</h4><p>以下範例採用我們在簡介中提到的 `<code translate="no">metadata</code> ` JSON 結構，展示如何針對不同的 JSON 路徑建立索引：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -641,7 +641,7 @@ indexOpt2 := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;p
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">使用 JSON 轉換函式進行類型轉換<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>若您的 JSON 欄位鍵所包含的值格式不正確（例如：以字串形式儲存的數字），您可以使用轉換函式在建立索引時轉換這些值。</p>
+<h4 id="Use-JSON-cast-functions-for-type-conversion" class="common-anchor-header">使用 JSON 轉換函式進行類型轉換<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.14+</span></h4><p>若您的 JSON 欄位鍵所包含的值格式不正確（例如：以字串形式儲存的數字），您可以使用轉換函式在建立索引時將值轉換為正確格式。</p>
 <h5 id="Supported-cast-functions" class="common-anchor-header">支援的轉換函式</h5><p>轉換函式不區分大小寫。支援以下類型：</p>
 <table>
    <tr>
@@ -941,7 +941,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><p>不，JSON 欄位不支援預設值。不過，您可以在定義欄位時設定 `<code translate="no">nullable=True</code> `，以允許空值。</p>
 <p>詳情請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>」。</p>
-<h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 欄位鍵名是否有命名規範？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
+<h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">JSON 欄位金鑰是否有命名規範？<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -958,7 +958,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><p>是的，為確保與查詢及索引的相容性：</p>
 <ul>
-<li><p>JSON 鍵名僅可使用字母、數字和底線。</p></li>
+<li><p>JSON 鍵名僅可使用字母、數字和下劃線。</p></li>
 <li><p>請避免使用特殊字元、空格或點號（例如<code translate="no">.</code> 、<code translate="no">/</code> 等）。</p></li>
 <li><p>不相容的鍵可能會在篩選表達式中引發解析問題。</p></li>
 </ul>
@@ -1001,7 +1001,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><ul>
 <li><p><strong>數值索引</strong>：</p>
-<p>若索引是透過 `<code translate="no">json_cast_type=&quot;double&quot;</code>` 建立的，則僅有數值篩選條件（例如：<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> 、<code translate="no">== 42</code> ）會利用該索引。非數值條件可能會回退至暴力掃描。</p></li>
+<p>若索引是透過 `<code translate="no">json_cast_type=&quot;double&quot;</code>` 建立的，則僅有數值篩選條件（例如：`<code translate="no">&gt;</code>`、`<code translate="no">&lt;</code>`、`<code translate="no">== 42</code>`）會利用該索引。非數值條件可能會退而採用暴力掃描。</p></li>
 <li><p><strong>字串索引</strong>：</p>
 <p>若索引使用<code translate="no">json_cast_type=&quot;varchar&quot;</code> ，則僅有字串篩選條件能從該索引中受益；其他類型可能會退而採用全量掃描。</p></li>
 <li><p><strong>布林索引</strong>：</p>
@@ -1040,7 +1040,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
         ></path>
       </svg>
     </button></h3><p>不可以，每個 JSON 路徑<strong>僅</strong>支援<strong>一個索引</strong>。您必須選擇一個與您的資料相符的「<code translate="no">json_cast_type</code> 」。系統不支援在同一路徑上建立多個具有不同轉換類型的索引。</p>
-<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">若 JSON 路徑上的值類型不一致該怎麼辦？<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
+<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">若 JSON 路徑上的值類型不一致，會如何？<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1056,7 +1056,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
         ></path>
       </svg>
     </button></h3><p>實體間的類型不一致可能會導致<strong>部分索引</strong>。例如，若<code translate="no">metadata[&quot;price&quot;]</code> 同時以數字（<code translate="no">99.99</code> ）和字串（<code translate="no">&quot;99.99&quot;</code> ）形式儲存，而索引定義為<code translate="no">json_cast_type=&quot;double&quot;</code> ，則僅會對數值進行索引。字串形式的條目將被跳過，且不會出現在篩選結果中。</p>
-<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">我能否使用與索引轉換類型不同的類型來建立篩選條件？<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
+<h3 id="Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="common-anchor-header">我能否使用與索引轉換類型不同的類型來設定篩選條件？<button data-href="#Can-I-use-filters-with-a-different-type-than-the-indexed-cast-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

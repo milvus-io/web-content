@@ -487,7 +487,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>Tipo di conversione JSON</strong> (<code translate="no">json_cast_type</code>): il tipo di dati che Milvus deve utilizzare per interpretare e indicizzare il valore nel percorso specificato.</p>
 <ul>
-<li><p>Questo tipo deve corrispondere al tipo di dati effettivo del campo da indicizzare. Se si desidera convertire il tipo di dati in un altro durante l’indicizzazione, si consiglia <a href="/docs/it/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">di utilizzare una funzione di conversione</a>.</p></li>
+<li><p>Questo tipo deve corrispondere al tipo di dati effettivo del campo che si sta indicizzando. Se si desidera convertire il tipo di dati in un altro durante l’indicizzazione, si consiglia <a href="/docs/it/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">di utilizzare una funzione di conversione</a>.</p></li>
 <li><p>Per un elenco completo, vedere <a href="/docs/it/use-json-fields.md#Supported-JSON-cast-types">di seguito</a>.</p></li>
 </ul></li>
 </ul>
@@ -530,7 +530,7 @@ curl --request POST \
    </tr>
 </table>
 <div class="alert note">
-<p>Per un'indicizzazione ottimale, gli array devono contenere elementi dello stesso tipo. Per ulteriori informazioni, consultare la <a href="/docs/it/array_data_type.md">sezione Campo array</a>.</p>
+<p>Per un'indicizzazione ottimale, gli array devono contenere elementi dello stesso tipo. Per ulteriori informazioni, consultare <a href="/docs/it/array_data_type.md">il campo Array</a>.</p>
 </div>
 <h4 id="Example-Create-JSON-path-indexes" class="common-anchor-header">Esempio: Creazione di indici su percorsi JSON</h4><p>Utilizzando la struttura JSON " <code translate="no">metadata</code> " della nostra introduzione, ecco alcuni esempi di come creare indici su diversi percorsi JSON:</p>
 <div class="multipleCode">
@@ -979,7 +979,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus memorizza i valori stringa esattamente come appaiono nell’input JSON, senza alcuna trasformazione semantica. Le stringhe non racchiuse correttamente tra virgolette potrebbero causare errori durante l’analisi.</p>
+    </button></h3><p>Milvus memorizza i valori stringa esattamente come appaiono nell’input JSON, senza alcuna trasformazione semantica. Le stringhe non racchiuse correttamente tra virgolette possono causare errori durante l’analisi sintattica.</p>
 <p><strong>Esempi di stringhe valide</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>

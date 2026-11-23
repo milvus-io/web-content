@@ -22,7 +22,7 @@ title: Autenticazione dell'accesso utente
 <div class="alert note">
 <ul>
 <li><p>TLS e l'autenticazione degli utenti sono due approcci di sicurezza distinti. Se nel sistema Milvus sono stati abilitati sia l'autenticazione degli utenti che il protocollo TLS, è necessario fornire un nome utente, una password e i percorsi dei file dei certificati. Per informazioni su come abilitare il protocollo TLS, consultare la sezione <a href="/docs/it/tls.md">Crittografia in transito</a>.</p></li>
-<li><p>I frammenti di codice presenti in questa pagina utilizzano <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">il</a> nuovo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) per interagire con Milvus. Nei futuri aggiornamenti verranno rilasciati nuovi SDK MilvusClient per altri linguaggi.</p></li>
+<li><p>I frammenti di codice presenti in questa pagina utilizzano new <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient</a> (Python) per interagire con Milvus.</p></li>
 </ul>
 </div>
 <h2 id="Enable-user-authentication" class="common-anchor-header">Abilitare l’autenticazione utente<button data-href="#Enable-user-authentication" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ title: Autenticazione dell'accesso utente
  <a href="#operator"> Milvus Operator</a>
 </div>
 <div class="filter-docker">
-<p>Per abilitare l’autenticazione utente per il proprio server Milvus, impostare `common.security.authorizationEnabled` su `true` nel file di configurazione di Milvus <code translate="no">milvus.yaml</code>. Per ulteriori informazioni sulle configurazioni, consultare <a href="https://milvus.io/docs/configure-docker.md?tab=component">Configurare Milvus con Docker Compose</a>.</p>
+<p>Per abilitare l’autenticazione utente per il proprio server Milvus, impostare `common.security.authorizationEnabled` su `true` nel file di configurazione di Milvus <code translate="no">milvus.yaml</code>. Per ulteriori informazioni sulle configurazioni, consultare la sezione <a href="https://milvus.io/docs/configure-docker.md?tab=component">“Configurare Milvus con Docker Compose</a>”.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
@@ -56,7 +56,7 @@ title: Autenticazione dell'accesso utente
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-helm">
-<p>Per abilitare l’autenticazione degli utenti sul proprio server Milvus, impostare `authorizationEnabled` su `true` nel file di configurazione di Milvus <code translate="no">values.yaml</code>. Per ulteriori informazioni sulle configurazioni, consultare la guida <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configurare Milvus con Helm Charts</a>.</p>
+<p>Per abilitare l’autenticazione utente sul proprio server Milvus, impostare authorizationEnabled su true nel file di configurazione di Milvus <code translate="no">values.yaml</code>. Per ulteriori informazioni sulle configurazioni, consultare la guida " <a href="https://milvus.io/docs/configure-helm.md?tab=component">Configurare Milvus con Helm Charts</a>".</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -110,6 +110,15 @@ client = MilvusClient(
 <div class="alert note">
 Se non si fornisce un token valido durante la connessione a Milvus con l’autenticazione abilitata, verrà visualizzato un errore gRPC.
 </div>
+<p>Milvus utilizza l’impostazione <code translate="no">common.security.defaultRootPassword</code> solo per creare l’utente <code translate="no">root</code> quando non esiste alcun utente <code translate="no">root</code>. La modifica successiva di questa impostazione non modifica la password di un utente <code translate="no">root</code> esistente. Per modificare la password di <code translate="no">root</code>, eseguire la chiamata <code translate="no">update_password()</code> mentre si è connessi come <code translate="no">root</code>:</p>
+<pre><code translate="no" class="language-python">client.update_password(
+    user_name=<span class="hljs-string">&quot;root&quot;</span>,
+    old_password=<span class="hljs-string">&quot;Milvus&quot;</span>,
+    new_password=<span class="hljs-string">&quot;&lt;your_new_password&gt;&quot;</span>,
+    reset_connection=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Con <code translate="no">reset_connection=True</code>, il client utilizzerà la nuova password per le richieste successive.</p>
 <h2 id="Create-a-new-user" class="common-anchor-header">Creare un nuovo utente<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +148,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sulla creazione di utenti, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
+<p>Per ulteriori informazioni sulla creazione di utenti, consultare <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Connettersi a Milvus con un nuovo utente<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -163,7 +172,7 @@ client = MilvusClient(
     token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Update-user-password" class="common-anchor-header">Aggiornare la password dell’utente<button data-href="#Update-user-password" class="anchor-icon" translate="no">
+<h2 id="Update-user-password" class="common-anchor-header">Aggiornare la password di un utente<button data-href="#Update-user-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,8 +196,8 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sull'aggiornamento delle password degli utenti, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
-<p>Se si dimentica la vecchia password, Milvus mette a disposizione un'opzione di configurazione che consente di designare determinati utenti come superutenti. Ciò elimina la necessità di inserire la vecchia password quando si reimposta la password.</p>
+<p>Per ulteriori informazioni sull'aggiornamento delle password degli utenti, consultare <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
+<p>Se si dimentica la vecchia password, Milvus mette a disposizione un'opzione di configurazione che consente di designare determinati utenti come superutenti. Ciò elimina la necessità di inserire la vecchia password durante il ripristino della password.</p>
 <p>Per impostazione predefinita, il campo ` <code translate="no">common.security.superUsers</code> ` nel file di configurazione di Milvus è vuoto, il che significa che tutti gli utenti devono fornire la vecchia password al momento della reimpostazione. Tuttavia, è possibile designare utenti specifici come superutenti che non devono fornire la vecchia password. Nel frammento di codice riportato di seguito, <code translate="no">root</code> e <code translate="no">foo</code> sono designati come superutenti.</p>
 <p>È necessario aggiungere la voce di configurazione riportata di seguito nel file di configurazione di Milvus che regola il funzionamento dell’istanza di Milvus.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
@@ -236,6 +245,27 @@ Per eliminare un utente, non è possibile essere l’utente stesso. In caso cont
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Protect-the-metrics-port" class="common-anchor-header">Proteggere la porta delle metriche<button data-href="#Protect-the-metrics-port" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>La porta delle metriche ( <code translate="no">9091</code> per impostazione predefinita) serve <code translate="no">/management/*</code>, <code translate="no">/log/level</code>, <code translate="no">/eventlog</code>, <code translate="no">/telemetry</code>, <code translate="no">/debug/pprof/*</code> e la console web. L'impostazione <code translate="no">common.security.adminAuthEnabled</code> controlla se questi endpoint richiedono l'autenticazione HTTP Basic <code translate="no">root</code>. Il valore predefinito è <code translate="no">false</code>. Per attivarla, aggiungi quanto segue al file di configurazione di Milvus:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">adminAuthEnabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Con questa impostazione, i test di integrità e l’acquisizione delle metriche rimangono accessibili. Le richieste che non contengono né l’intestazione <code translate="no">Origin</code> né le intestazioni Fetch Metadata devono includere l’intestazione <code translate="no">X-Milvus-Admin-Request: true</code>. Aggiornare i client che chiamano questi endpoint, come gli script di spegnimento graduale e di profilazione, prima di attivare l’impostazione. La porta delle metriche utilizza ancora HTTP standard, quindi esporla solo su una rete affidabile o dietro un proxy TLS. Questa impostazione non può essere modificata tramite <code translate="no">/management/config/alter</code>.</p>
 <h2 id="Limitations" class="common-anchor-header">Limitazioni<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +296,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>I nomi utente non devono essere vuoti né superare i 32 caratteri. Devono iniziare con una lettera e contenere solo lettere, numeri o trattini bassi.</p>
+    </button></h3><p>I nomi utente non devono essere vuoti né superare i 32 caratteri. Devono iniziare con una lettera o un trattino basso e contenere solo lettere, numeri, trattini bassi (<code translate="no">_</code>) ed eventuali caratteri aggiuntivi configurati in <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> per impostazione predefinita).</p>
 <h3 id="Password-requirements" class="common-anchor-header">Requisiti per le password<button data-href="#Password-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

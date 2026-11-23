@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>O HNSW_SQ</strong> combina grafos Hierarchical Navigable Small World (HNSW) com a Quantização Escalar (SQ), criando um método avançado de indexação vetorial que oferece um equilíbrio controlável entre tamanho e precisão. Em comparação com <a href="/docs/pt/hnsw.md">o HNSW</a> padrão, este tipo de índice mantém uma elevada velocidade de processamento de consultas, embora implique um ligeiro aumento no tempo de construção do índice.</p>
+    </button></h1><p><strong>O HNSW_SQ</strong> combina grafos Hierarchical Navigable Small World (HNSW) com a quantização escalar (SQ), criando um método avançado de indexação vetorial que oferece um equilíbrio controlável entre tamanho e precisão. Em comparação com <a href="/docs/pt/hnsw.md">o HNSW</a> padrão, este tipo de índice mantém uma elevada velocidade de processamento de consultas, embora implique um ligeiro aumento no tempo de construção do índice.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O HNSW_SQ combina duas técnicas de indexação: <strong>o HNSW</strong> para uma navegação rápida baseada em grafos e <strong>o SQ</strong> para uma compressão eficiente de vetores.</p>
+    </button></h2><p>O HNSW_SQ combina duas técnicas de indexação: <strong>o HNSW</strong> para uma navegação rápida baseada em grafos e <strong>o SQ</strong> para uma compressão vetorial eficiente.</p>
 <h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +103,7 @@ summary: >-
     </button></h3><p>Para cenários que exigem velocidade de consulta extrema e utilização mínima de memória, o Milvus apresenta o <code translate="no">SQ4U</code>, uma quantização escalar uniforme de 4 bits. Trata-se de uma forma agressiva de quantização escalar que comprime o valor de ponto flutuante de cada dimensão num inteiro sem sinal <strong>de 4 bits</strong>.</p>
 <p>O «U» em SQ4U significa «Uniforme». Ao contrário da quantização escalar não uniforme, que normalmente calcula os valores mínimo e máximo de forma independente para cada dimensão (quantização por dimensão), o SQ4U impõe uma estratégia <strong>de quantização uniforme global</strong>:</p>
 <ol>
-<li><p><strong>Estatísticas globais</strong>: o sistema calcula um <strong>único</strong> valor mínimo <code translate="no">vmin</code> e um <strong>único</strong> intervalo de valores <code translate="no">vdiff</code> que se aplica a <strong>todas as dimensões</strong> do vetor (ou a todo o segmento do vetor).</p></li>
+<li><p><strong>Estatísticas globais</strong>: O sistema calcula um <strong>único</strong> valor mínimo <code translate="no">vmin</code> e um <strong>único</strong> intervalo de valores <code translate="no">vdiff</code> que se aplica a <strong>todas as dimensões</strong> do vetor (ou a todo o segmento do vetor).</p></li>
 <li><p><strong>Mapeamento uniforme</strong>: O intervalo de valores global é dividido em 16 intervalos iguais. Cada valor de ponto flutuante no vetor, independentemente da dimensão a que pertença, é mapeado para um inteiro de 4 bits (0–15) utilizando estes parâmetros partilhados.</p></li>
 </ol>
 <p><strong>Vantagens de desempenho:</strong></p>
@@ -138,7 +138,7 @@ summary: >-
 <li><p><strong>(Opcional) Aperfeiçoamento dos resultados:</strong> Os resultados candidatos iniciais podem ser aperfeiçoados para uma maior precisão, com base nos seguintes parâmetros:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controla se esta etapa de refinamento está ativada. Quando definido como « <code translate="no">true</code> », o sistema recalcula as distâncias utilizando representações de maior precisão ou não comprimidas.</p></li>
-<li><p><code translate="no">refine_type</code>: Especifica o nível de precisão dos dados utilizados durante o refinamento (por exemplo, SQ6, SQ8, BF16). Uma opção de maior precisão, como « <code translate="no">FP32</code> », pode produzir resultados mais precisos, mas requer mais memória. Esta deve exceder a precisão do conjunto de dados comprimidos original definida por « <code translate="no">sq_type</code> ».</p></li>
+<li><p><code translate="no">refine_type</code>: Especifica o nível de precisão dos dados utilizados durante o refinamento (por exemplo, SQ6, SQ8, BF16). Uma opção de maior precisão, como « <code translate="no">FP32</code> », pode produzir resultados mais precisos, mas requer mais memória. Esta deve exceder a precisão do conjunto de dados comprimido original definida por « <code translate="no">sq_type</code> ».</p></li>
 <li><p><code translate="no">refine_k</code>: Funciona como um fator de ampliação. Por exemplo, se o seu <em>«</em> top <em>k»</em> for 100 e « <code translate="no">refine_k</code> » for 2, o sistema reclassifica os 200 melhores candidatos e devolve os 100 melhores, melhorando a precisão global.</p></li>
 </ul></li>
 </ol>
@@ -158,7 +158,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para criar um índice « <code translate="no">HNSW_SQ</code> » num campo vetorial no Milvus, utilize o método « <code translate="no">add_index()</code> », especificando « <code translate="no">index_type</code> », « <code translate="no">metric_type</code> » e parâmetros adicionais para o índice.</p>
+    </button></h2><p>Para criar um índice de « <code translate="no">HNSW_SQ</code> » num campo vetorial no Milvus, utilize o método « <code translate="no">add_index()</code> », especificando « <code translate="no">index_type</code> », « <code translate="no">metric_type</code> » e parâmetros adicionais para o índice.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -218,7 +218,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Nesta configuração:</p>
 <ul>
-<li><code translate="no">params</code>: Opções de configuração adicionais para a pesquisa no índice. Para mais detalhes, consulte <a href="/docs/pt/hnsw-sq.md#Index-specific-search-params">Parâmetros de pesquisa específicos do índice</a>.</li>
+<li><code translate="no">params</code>: Opções de configuração adicionais para a pesquisa no índice. Para mais detalhes, consulte <a href="/docs/pt/hnsw-sq.md#Index-specific-search-params">«Parâmetros de pesquisa específicos do índice</a>».</li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parâmetros do índice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -265,7 +265,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Número máximo de ligações (ou arestas) que cada nó pode ter no grafo, incluindo tanto as arestas de saída como as de entrada.</p><p>Este parâmetro afeta diretamente tanto a construção do índice como a pesquisa.</p></td>
      <td><p><strong>Tipo</strong>: Número inteiro</p><p><strong>Intervalo</strong>: [2, 2048]</p><p><strong>Valor predefinido</strong>: <code translate="no">30</code> (até 30 arestas de saída e 30 arestas de entrada por nó)</p></td>
-     <td><p>Um valor de <code translate="no">M</code> mais elevado conduz geralmente a <strong>uma maior precisão</strong>, mas <strong>aumenta a sobrecarga de memória</strong> e <strong>torna mais lentas tanto a construção do índice como a pesquisa</strong>.</p><p>Considere aumentar o <code translate="no">M</code> para conjuntos de dados com elevada dimensionalidade ou quando for crucial obter uma elevada taxa de recall.</p><p>Considere diminuir o <code translate="no">M</code> quando a utilização de memória e a velocidade de pesquisa forem as principais preocupações.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [5, 100].</p></td>
+     <td><p>Um valor de <code translate="no">M</code> mais elevado conduz geralmente a <strong>uma maior precisão</strong>, mas <strong>aumenta a sobrecarga de memória</strong> e <strong>torna mais lentas tanto a construção do índice como a pesquisa</strong>.</p><p>Considere aumentar o <code translate="no">M</code> para conjuntos de dados com elevada dimensionalidade ou quando for crucial obter uma elevada taxa de recuperação.</p><p>Considere diminuir o <code translate="no">M</code> quando a utilização de memória e a velocidade de pesquisa forem as principais preocupações.</p><p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -284,7 +284,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>Um indicador booleano que controla se é aplicada uma etapa de refinamento durante a pesquisa. O refinamento envolve reclassificar os resultados iniciais através do cálculo das distâncias exatas entre o vetor de consulta e os candidatos.</p></td>
+     <td><p>Um sinalizador booleano que controla se é aplicada uma etapa de refinamento durante a pesquisa. O refinamento envolve reclassificar os resultados iniciais através do cálculo das distâncias exatas entre o vetor de consulta e os candidatos.</p></td>
      <td><p><strong>Tipo</strong>: Booleano</p><p><strong>Intervalo</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p><p><strong>Valor predefinido</strong>: <code translate="no">false</code></p></td>
      <td><p>Defina como <code translate="no">true</code> se for essencial uma elevada precisão e se puder tolerar tempos de pesquisa ligeiramente mais lentos. Utilize <code translate="no">false</code> se a velocidade for uma prioridade e se for aceitável um pequeno compromisso em termos de precisão.</p></td>
    </tr>

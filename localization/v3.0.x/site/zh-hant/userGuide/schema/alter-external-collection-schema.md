@@ -19,8 +19,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>建立外部集合後，外部資料來源往往會隨時間演變。例如，一個已儲存嵌入向量的湖屋資料表，日後可能會新增一個標量欄位（例如分數、類別或時間戳記），而您可能希望在查詢結果中回傳該欄位，或將其用於篩選條件。</p>
-<p>與其重新建立外部集合或將來源資料複製到 Milvus，不如新增一個 Milvus 欄位，使其對應至外部資料來源中的現有欄位。新增欄位後，請刷新外部集合，以便在查詢和搜尋中使用該新欄位。</p>
+    </button></h1><p>建立外部集合後，外部資料來源往往會隨時間演變。例如，一個已儲存嵌入向量的湖屋資料表，日後可能會新增一個標量欄位（例如分數、類別或時間戳記），而您可能希望在查詢結果中返回該欄位，或將其用於篩選條件。</p>
+<p>與其重新建立外部集合或將來源資料複製到 Milvus，不如新增一個 Milvus 欄位，使其對應至外部資料來源中的現有欄位。新增欄位後，請刷新外部集合，以便在查詢和搜尋中使用新欄位。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -82,7 +82,7 @@ beta: Milvus 3.0.x
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -185,7 +185,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python

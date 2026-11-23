@@ -21,7 +21,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvusのテキストマッチ機能は、特定の用語に基づいて文書を正確に検索することを可能にします。この機能は主に、特定の条件を満たすためのフィルタリング検索に使用され、スカラーフィルタリングを組み合わせてクエリ結果を絞り込むことができます。これにより、スカラー基準を満たすベクトル内での類似度検索が可能になります。</p>
 <div class="alert note">
-<p><code translate="no">TEXT_MATCH</code> は分析済みの用語と完全に一致するものを検索しますが、<code translate="no">TEXT_MATCH_FUZZY</code> はクエリトークンとインデックス化されたトークンの間にわずかな編集距離がある場合でも許容します。どちらもブール演算によるフィルタリング操作であり、一致したドキュメントの関連性を評価するものではありません。クエリ用語の意味的意味や重要度に基づいて最も関連性の高いドキュメントを検索したい場合は、<a href="/docs/ja/full-text-search.md">全文検索</a>の使用をお勧めします。</p>
+<p><code translate="no">TEXT_MATCH</code> は分析済みの用語と完全に一致するものを検索しますが、<code translate="no">TEXT_MATCH_FUZZY</code> はクエリトークンとインデックス化されたトークンの間にわずかな編集距離がある場合でも許容します。どちらもブール演算によるフィルタリング操作であり、一致した文書の関連性を評価するものではありません。クエリ用語の意味的意味や重要度に基づいて最も関連性の高い文書を検索したい場合は、<a href="/docs/ja/full-text-search.md">全文検索</a>の使用をお勧めします。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -455,7 +455,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">TEXT_MATCH_FUZZY</code> を使用すると、クエリトークンとインデックス化されたトークン間のスペルの違いを許容できます。Milvus はフィールドのアナライザを使用してクエリテキストを解析し、結果として得られた各トークンにファジーマッチングを適用します。クエリによって複数のトークンが生成された場合、いずれかのトークンが設定された編集距離を満たせば、その式はエンティティと一致します。</p>
+    </button></h3><p><code translate="no">TEXT_MATCH_FUZZY</code> を使用すると、クエリトークンとインデックス化されたトークン間のスペルの違いを許容できます。Milvus はフィールドのアナライザーを使用してクエリテキストを解析し、結果として得られた各トークンにファジーマッチングを適用します。クエリによって複数のトークンが生成された場合、いずれかのトークンが設定された編集距離を満たせば、その式はエンティティと一致します。</p>
 <p>構文は次のとおりです:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH_FUZZY(field_name, text, max_edit_distance = <span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -506,7 +506,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
         ></path>
       </svg>
     </button></h3><p>テキスト一致は、ベクトル類似度検索と組み合わせて使用することで、検索範囲を絞り込み、検索パフォーマンスを向上させることができます。ベクトル類似度検索の前にテキスト一致を使用してコレクションをフィルタリングすることで、検索対象となるドキュメントの数を減らし、クエリ処理時間を短縮できます。</p>
-<p>この例では、<code translate="no">filter</code> 式によって、指定された用語「<code translate="no">keyword1</code> 」または「<code translate="no">keyword2</code> 」に一致するドキュメントのみが検索結果に含められるようにフィルタリングされます。その後、このフィルタリングされたドキュメントのサブセットに対してベクトル類似度検索が実行されます。</p>
+<p>この例では、<code translate="no">filter</code> 式によって、指定された用語「<code translate="no">keyword1</code> 」または「<code translate="no">keyword2</code> 」に一致するドキュメントのみが検索結果に含まれるようにフィルタリングされます。その後、このフィルタリングされたドキュメントのサブセットに対してベクトル類似度検索が実行されます。</p>
 <div class="alert note">
 <p>テキストハイライターを設定することで、検索結果内で一致した用語を強調表示できます。詳細については、「<a href="/docs/ja/text-highlighter.md">テキストハイライター</a>」を参照してください。</p>
 </div>

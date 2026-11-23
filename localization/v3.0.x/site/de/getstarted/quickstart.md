@@ -21,7 +21,7 @@ title: Schnellstart
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Vektoren, das Ausgabeformat von neuronalen Netzmodellen, können Informationen effektiv kodieren und spielen eine zentrale Rolle in KI-Anwendungen wie Wissensdatenbanken, semantischer Suche, Retrieval Augmented Generation (RAG) und vielem mehr.</p>
-<p>Milvus ist eine Open-Source-Vektordatenbank, die sich für KI-Anwendungen jeder Größenordnung eignet – vom Betrieb eines Demo-Chatbots in einem Jupyter-Notebook bis hin zur Entwicklung einer Suchfunktion im Web-Maßstab, die Milliarden von Nutzern bedient. In dieser Anleitung zeigen wir Ihnen, wie Sie Milvus innerhalb weniger Minuten lokal einrichten und mithilfe der Python-Client-Bibliothek Vektoren generieren, speichern und durchsuchen können.</p>
+<p>Milvus ist eine Open-Source-Vektordatenbank, die sich für KI-Anwendungen jeder Größenordnung eignet – vom Betrieb eines Demo-Chatbots in einem Jupyter-Notebook bis hin zur Entwicklung einer Web-Scale-Suchfunktion für Milliarden von Nutzern. In dieser Anleitung zeigen wir Ihnen, wie Sie Milvus innerhalb weniger Minuten lokal einrichten und mithilfe der Python-Client-Bibliothek Vektoren generieren, speichern und durchsuchen können.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus installieren<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +60,7 @@ title: Schnellstart
 <p>Unter Windows überspringt pip das Zusatzmodul „ <code translate="no">milvus-lite</code> “ von PyMilvus 3.0.2; der obige Befehl nennt „ <code translate="no">milvus-lite</code> “ explizit, sodass der lokale Pfad dort ebenfalls funktioniert. Informationen zu den Installationsanforderungen für das SDK allein finden Sie unter <a href="/docs/de/install-pymilvus.md">„Install Milvus Python SDK</a>“.</p>
 <div class="alert note">
 <blockquote>
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren. (Klicken Sie oben auf dem Bildschirm auf das Menü „Runtime“ und wählen Sie im Dropdown-Menü „Restart session“ aus).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Laufzeitumgebung neu starten</strong>, damit die soeben installierten Abhängigkeiten verfügbar sind. (Klicken Sie oben auf dem Bildschirm auf das Menü „Runtime“ und wählen Sie im Dropdown-Menü „Restart session“ aus).</p>
 </blockquote>
 </div>
 <h3 id="Use-an-existing-Milvus-server" class="common-anchor-header">Verwenden Sie einen vorhandenen Milvus-Server<button data-href="#Use-an-existing-Milvus-server" class="anchor-icon" translate="no">
@@ -185,7 +185,7 @@ Alternativ können Sie das Schema der Sammlung gemäß dieser <a href="https://m
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In dieser Anleitung verwenden wir Vektoren, um eine semantische Suche in Textdaten durchzuführen. Wir müssen Vektoren für Textdaten generieren, indem wir Einbettungsmodelle herunterladen. Dies lässt sich ganz einfach mithilfe der Hilfsfunktionen aus der Bibliothek „ <code translate="no">pymilvus[model]</code> “ bewerkstelligen.</p>
+    </button></h2><p>In dieser Anleitung verwenden wir Vektoren, um eine semantische Suche in Textdaten durchzuführen. Wir müssen Vektoren für Textdaten generieren, indem wir Einbettungsmodelle herunterladen. Dies lässt sich ganz einfach mit den Hilfsfunktionen aus der Bibliothek „ <code translate="no">pymilvus[model]</code> “ bewerkstelligen.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">Text durch Vektoren darstellen<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

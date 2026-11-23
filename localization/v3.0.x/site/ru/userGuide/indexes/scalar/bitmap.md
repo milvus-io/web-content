@@ -2,11 +2,8 @@
 id: bitmap.md
 title: BITMAP
 summary: >-
-  Индексирование растровых данных — это эффективный метод индексирования,
-  предназначенный для повышения производительности запросов по скалярным полям с
-  низкой кардинальностью. Кардинальность — это количество различных значений в
-  поле. Поля с небольшим количеством различных элементов считаются полями с
-  низкой кардинальностью.
+  Используйте BITMAP для скалярной фильтрации с низкой кардинальностью.
+  Проверьте поддерживаемые фильтры, ограничения по полям и создание индексов.
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Битовая индексация — это эффективный метод индексирования, предназначенный для повышения производительности запросов по скалярным полям с низкой кардинальностью. Кардинальность — это количество различных значений в поле. Поля с небольшим количеством различных элементов считаются полями с низкой кардинальностью.</p>
-<p>Этот тип индекса помогает сократить время выполнения скалярных запросов за счёт представления значений полей в компактном двоичном формате и выполнения над ними эффективных побитовых операций. По сравнению с другими типами индексов битовые индексы, как правило, обеспечивают более высокую эффективность использования пространства и более высокую скорость выполнения запросов при работе с полями с низкой кардинальностью.</p>
+    </button></h1><p><code translate="no">BITMAP</code> ускоряет скалярную фильтрацию по полям с небольшим количеством различных значений, таким как коды статуса и категории. Кардинальность — это количество различных значений в поле. На этой странице описаны поддерживаемые фильтры, ограничения по полям и создание индексов.</p>
 <h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,26 +36,109 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Термин <strong>«битовая карта» (Bitmap)</strong> объединяет два слова: <strong>«бит» (Bit)</strong> и <strong>«карта» (Map)</strong>. Бит представляет собой наименьшую единицу данных в компьютере, которая может принимать только значение <strong>0</strong> или <strong>1</strong>. Карта в данном контексте означает процесс преобразования и организации данных в соответствии с тем, какое значение следует присвоить 0 и 1.</p>
-<p>Битовый индекс состоит из двух основных компонентов: битовых карт и ключей. Ключи представляют собой уникальные значения в индексируемом поле. Для каждого уникального значения существует соответствующая битовая карта. Длина этих битовых карт равна количеству записей в коллекции. Каждый бит в растровой карте соответствует одной записи в коллекции. Если значение индексируемого поля в записи совпадает с ключом, соответствующий бит устанавливается в <strong>1</strong>; в противном случае — в <strong>0</strong>.</p>
-<p>Рассмотрим коллекцию документов с полями <strong>«Категория»</strong> и <strong>«Доступно для общественности</strong>». Нам нужно извлечь документы, относящиеся к категории <strong>«Технологии</strong> » и доступные для <strong>общественности</strong>. В этом случае ключами для наших растровых индексов являются <strong>«Технологии</strong> » и <strong>«Доступно для общественности</strong>».</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Целевые объекты и фильтры для индексов<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы явно создать индекс « <code translate="no">BITMAP</code> », выберите цель, не являющуюся первичным ключом, из приведенной ниже таблицы. В каждой строке указана пара из поддерживаемой цели и фильтров, оценке которых может помочь индекс:</p>
+<table>
+<thead>
+<tr><th>Цель индекса</th><th>Фильтры, в которых можно использовать индекс</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> поле</td><td>Равенство (<code translate="no">==</code>, <code translate="no">!=</code>) и принадлежность (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Целочисленное поле (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</td><td>Равенство, принадлежность и интервалы (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> поле</td><td>Равенство, принадлежность, диапазоны и <a href="/docs/ru/pattern-matching.md">шаблоны LIKE или регулярных выражений</a>. При оценке шаблона могут проверяться многие различные индексированные строки.</td></tr>
+<tr><td>Обычное поле <code translate="no">ARRAY</code> с элементами <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code> или <code translate="no">VARCHAR</code> </td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>. См. раздел <a href="/docs/ru/array_data_type.md#Array-index-support">«Поддержка индексов массива</a>».</td></tr>
+<tr><td>JSON-путь преобразуется в <code translate="no">BOOL</code> или <code translate="no">VARCHAR</code></td><td>фильтры для соответствующих вышеуказанных булевых значений или строк, с учётом <a href="/docs/ru/json-indexing.md#Index-requirements">требований</a> к <a href="/docs/ru/json-indexing.md#Index-requirements">индексам JSON</a>.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Скалярные индексы, включая <code translate="no">AUTOINDEX</code>, не поддерживают рекурсивные поля ARRAY или массивы с элементами, допускающими значение null. См. раздел <a href="/docs/ru/array_data_type.md#Array-index-support">«Поддержка индексов массивов»</a> для фильтров обычных массивов и раздел <a href="/docs/ru/index-structarray-fields.md#Create-scalar-indexes">«Индексирование полей StructArray»</a> для правил, касающихся подполей.</p>
+</blockquote>
+</div>
+<p>Для целей типа ARRAY оператор « <code translate="no">BITMAP</code> » используется для фильтров по наличию элементов, а не для равенства всего массива, доступа к элементам по позиции или длины массива. См. раздел <a href="/docs/ru/array_data_type.md#Array-index-support">«Поддержка индексов массивов</a>».</p>
+<p>Что касается автоматического выбора за пределами этих явных целей, см. раздел <a href="/docs/ru/scalar_index.md#AUTOINDEX-behavior">«Поведение AUTOINDEX</a>».</p>
+<div class="alert note">
+<blockquote>
+<p>Речь идет о возможностях индексации, а не об ограничениях на допустимые выражения фильтров. См. <a href="/docs/ru/scalar_index.md#Filter-execution">раздел «Скалярный индекс»</a> для ознакомления с ограничениями на совместный поиск. Информацию о тестах <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> и NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>) см. в разделе <a href="/docs/ru/basic-operators.md">«Основные операторы</a>».</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Вопросы, связанные с памятью<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Затраты памяти и время выполнения запросов зависят от количества уникальных значений и их распределения. Сравнивайте индексы с типичными фильтрами, а не рассматривайте фиксированную кардинальность как универсальный критерий производительности.</p>
+<p>Для плотных битовых карт приблизительная оценка в байтах равна <code translate="no">(D + 1) * N / 8</code>, где <code translate="no">N</code> — количество сущностей, а <code translate="no">D</code> — количество уникальных значений. Это включает одну битовую карту на каждое уникальное значение и одну для проверки достоверности. К этой оценке добавляются затраты на хранение значений и другие накладные расходы; опциональный кэш смещений добавляет примерно <code translate="no">8 * N</code> байт в 64-битной системе. Сжатые представления растровых карт могут значительно отличаться по объему занимаемой памяти.</p>
+<p>Эти приблизительные оценки относятся к памяти загруженного индекса с отключенным отображением в память. Рассчитайте их для каждого сегмента, а затем суммируйте по загруженным сегментам и репликам.</p>
+<div class="alert note">
+<blockquote>
+<p>Предусмотрите дополнительную память для загруженных данных полей, векторных индексов, накладных расходов коллекций и индексов, а также для временных выделений памяти. Проведите проверку с использованием репрезентативных данных и запросов; массивы, JSON, устаревшие форматы индексов и отображение памяти требуют отдельных измерений.</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">Как работает BITMAP<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Посмотреть пример фильтрации по растровому изображению</strong></summary></p>
+<p>Битовый индекс связывает каждое уникальное значение поля с битовой картой. Каждый бит соответствует сущности: <strong>1</strong> означает, что сущность имеет данное значение, а <strong>0</strong> — что нет.</p>
+<p>Например, чтобы найти общедоступные документы в категории <strong>«Технологии»</strong>, объедините битовые карты для условий <strong>«Категория = Технологии»</strong> и <strong>«Общедоступный = true</strong>»:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
-   <span>Битовая карта</span>
+   <span>Растровое изображение</span>
   
  </span></p>
-<p>Как показано на рисунке, битовые индексы для полей <strong>«Category»</strong> и <strong>«Public»</strong> имеют следующий вид:</p>
+<p>Как показано на рисунке, битовые индексы для полей <strong>«Категория»</strong> и <strong>«Общедоступный»</strong> выглядят следующим образом:</p>
 <ul>
 <li><p><strong>«Tech</strong>»: [1, 0, 1, 0, 0], что показывает, что только 1-й и 3-й документы относятся к категории <strong>«Tech</strong> ».</p></li>
 <li><p><strong>Public</strong>: [1, 0, 0, 1, 0], что показывает, что только первый и четвёртый документы доступны для <strong>общественности</strong>.</p></li>
 </ul>
-<p>Чтобы найти документы, соответствующие обоим критериям, мы выполняем побитовую операцию «И» над этими двумя битовыми картами:</p>
+<p>Чтобы найти документы, соответствующие обоим критериям, мы выполняем битовую операцию «И» над этими двумя битовыми картами:</p>
 <ul>
-<li><strong>«Tech»</strong> И <strong>«Public</strong>»: [1, 0, 0, 0, 0]</li>
+<li><strong>«Техника»</strong> И <strong>«Общедоступные</strong>»: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>Полученная битовая карта [1, 0, 0, 0, 0] указывает, что только первый документ (<strong>ID</strong> <strong>1</strong>) удовлетворяет обоим критериям. Используя битовые индексы и эффективные битовые операции, мы можем быстро сузить область поиска, избавившись от необходимости сканировать весь набор данных.</p>
-<h2 id="Create-a-bitmap-index" class="common-anchor-header">Создание битового индекса<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+<p>Только первый документ (<strong>ID 1</strong>) удовлетворяет обоим критериям.</p>
+<p></details></p>
+<h2 id="Create-a-bitmap-index" class="common-anchor-header">Создание растрового индекса<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,8 +321,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>В этом примере мы создаем битовый индекс для поля ` <code translate="no">category</code> ` коллекции ` <code translate="no">my_collection</code> `. Метод ` <code translate="no">add_index()</code> ` используется для указания имени поля, типа индекса и имени индекса.</p>
-<p>После создания растрового индекса можно использовать параметр ` <code translate="no">filter</code> ` в операциях запроса для выполнения скалярной фильтрации на основе индексированного поля. Это позволяет эффективно сужать результаты поиска с помощью растрового индекса. Дополнительные сведения см. в разделе <a href="/docs/ru/boolean.md">«Объяснение фильтрации</a>».</p>
+<p>Это создает индекс на <code translate="no">my_collection.category</code>. Используйте это поле в запросе или поиске <code translate="no">filter</code>; см. раздел <a href="/docs/ru/boolean.md">«Объяснение фильтрации</a>».</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Удаление индекса<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,12 +337,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте метод ` <code translate="no">drop_index()</code> ` для удаления существующего индекса из коллекции.</p>
+    </button></h2><p>Используйте метод ` <code translate="no">drop_index()</code> `, чтобы удалить существующий индекс из коллекции.</p>
 <div class="alert note">
-<ul>
-<li><p>В <strong>версии 2.6.3</strong> и более ранних версиях перед удалением скалярного индекса необходимо освободить коллекцию.</p></li>
-<li><p>Начиная с <strong>версии 2.6.4</strong> и более поздних, скалярный индекс можно удалить напрямую, как только он больше не нужен — нет необходимости сначала освобождать коллекцию.</p></li>
-</ul>
+<blockquote>
+<p>Требования к версии при удалении скалярного индекса см. в разделе <a href="/docs/ru/scalar_index.md#Drop-index-compatibility">«Скалярный индекс</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -386,37 +463,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Битовые индексы поддерживаются только для скалярных полей, не являющихся первичными ключами.</p></li>
-<li><p>Тип данных поля должен быть одним из следующих:</p>
-<ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (элементы должны быть одним из следующих: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
-</ul></li>
-<li><p>Растровые индексы не поддерживают следующие типы данных:</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Типы с плавающей запятой несовместимы с двоичной природой растровых индексов.</p></li>
-<li><p><code translate="no">JSON</code>: Типы данных JSON имеют сложную структуру, которую невозможно эффективно представить с помощью растровых индексов.</p></li>
-</ul></li>
-<li><p>Битовые индексы не подходят для полей с высокой кардинальностью (т. е. полей с большим количеством различных значений).</p>
-<ul>
-<li><p>Как правило, растровые индексы наиболее эффективны, когда кардинальность поля меньше 500.</p></li>
-<li><p>Когда кардинальность превышает этот порог, преимущества растровых индексов в плане производительности снижаются, а накладные расходы на хранение становятся значительными.</p></li>
-<li><p>Для полей с высокой кардинальностью рекомендуется рассмотреть возможность использования альтернативных методов индексирования, таких как инвертированные индексы, в зависимости от конкретного сценария использования и требований к запросам.</p></li>
-</ul></li>
-</ul>

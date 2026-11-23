@@ -3,12 +3,12 @@ id: json-operators.md
 title: Operator JSON
 summary: >-
   Milvus mendukung operator tingkat lanjut untuk melakukan kueri dan penyaringan
-  pada bidang JSON, sehingga sangat cocok untuk mengelola data terstruktur yang
-  kompleks. Operator-operator ini memungkinkan pelaksanaan kueri yang sangat
-  efektif terhadap dokumen JSON, sehingga Anda dapat mengambil entitas
-  berdasarkan elemen, nilai, atau kondisi tertentu di dalam bidang JSON. Bagian
-  ini akan memandu Anda dalam menggunakan operator khusus JSON di Milvus,
-  disertai contoh-contoh praktis untuk mengilustrasikan fungsinya.
+  bidang JSON, sehingga sangat cocok untuk mengelola data terstruktur yang
+  kompleks. Operator-operator ini memungkinkan kueri dokumen JSON yang sangat
+  efektif, sehingga Anda dapat mengambil entitas berdasarkan elemen, nilai, atau
+  kondisi tertentu di dalam bidang JSON. Bagian ini akan memandu Anda dalam
+  menggunakan operator khusus JSON di Milvus, disertai contoh-contoh praktis
+  untuk menggambarkan fungsinya.
 ---
 <h1 id="JSON-Operators" class="common-anchor-header">Operator JSON<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus menyediakan beberapa operator JSON yang kuat yang membantu menyaring dan menanyakan data JSON, dan operator-operator tersebut adalah:</p>
 <ul>
-<li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Menyaring entitas di mana ekspresi JSON yang ditentukan ditemukan di dalam bidang tersebut.</p></li>
+<li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: Menyaring entitas di mana ekspresi JSON yang ditentukan ditemukan di dalam bidang.</p></li>
 <li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: Memastikan bahwa semua elemen dari ekspresi JSON yang ditentukan terdapat di dalam bidang tersebut.</p></li>
 <li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: Menyaring entitas di mana setidaknya satu anggota dari ekspresi JSON tersebut terdapat di dalam bidang.</p></li>
 </ul>

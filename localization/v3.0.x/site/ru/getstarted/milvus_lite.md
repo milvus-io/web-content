@@ -43,7 +43,7 @@ title: Запуск Milvus Lite в локальной среде
 <li>Ноутбуки</li>
 <li>Пограничные устройства с совместимыми зависимостями Python</li>
 </ul>
-<p>Milvus Lite использует API <code translate="no">MilvusClient</code> для поддерживаемых операций, включая сохранение векторных данных, вставку и удаление, поиск по векторам и фильтрацию по метаданным. Чтобы перенести поддерживаемый рабочий процесс приложения в удаленное развертывание, измените URI подключения и учетные данные, а также ознакомьтесь с различиями в поддерживаемых функциях. Для крупномасштабных производственных рабочих нагрузок используйте <a href="/docs/ru/install-overview.md">Milvus Standalone или Distributed</a> либо полностью управляемый Milvus в <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
+<p>Milvus Lite использует API <code translate="no">MilvusClient</code> для поддерживаемых операций, включая сохранение векторных данных, вставку и удаление, поиск по векторам и фильтрацию по метаданным. Чтобы перенести поддерживаемый рабочий процесс приложения в удаленное развертывание, измените URI подключения и учетные данные, а также ознакомьтесь с различиями в поддерживаемых функциях. Для крупномасштабных производственных рабочих нагрузок используйте <a href="/docs/ru/install-overview.md">Milvus Standalone или Distributed</a>, либо полностью управляемый Milvus в <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -65,7 +65,7 @@ title: Запуск Milvus Lite в локальной среде
 <li>macOS, Linux или Windows с совместимыми пакетами wheel для зависимостей, таких как <code translate="no">faiss-cpu</code> и <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 представляет собой пакет, написанный исключительно на Python, поэтому операционная система и архитектура должны удовлетворять требованиям этих зависимостей, а не самого пакета Lite.</li>
 <li>Локальный каталог с правами на запись для хранения базы данных.</li>
 </ul>
-<p>В Windows pip пропускает дополнительный пакет <code translate="no">milvus-lite</code> из PyMilvus 3.0.2 из-за его платформенного маркера, поэтому необходимо явно указать <code translate="no">milvus-lite</code>. Приведенная ниже команда установки уже делает это. Для других комбинаций пакетов и платформ ознакомьтесь с <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">требованиями к версиям Milvus Lite</a>.</p>
+<p>В Windows pip пропускает дополнительный пакет <code translate="no">milvus-lite</code> из PyMilvus 3.0.2 из-за его платформенного маркера, поэтому <code translate="no">milvus-lite</code> необходимо указать явно. Приведенная ниже команда установки уже делает это. Для других комбинаций пакетов и платформ ознакомьтесь с <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">требованиями к версиям Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Настройка Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0
 <p>Введите выражение extras в кавычках, чтобы оболочки, такие как zsh, не интерпретировали скобки. В Windows PowerShell активируйте среду с помощью <code translate="no">.venv\Scripts\Activate.ps1</code> вместо <code translate="no">source .venv/bin/activate</code>. Явное указание версий позволяет согласовать SDK и локальный бэкенд с данным руководством.</p>
 <div class="alert note">
 <blockquote>
-<p>Milvus Lite 3.x использует другой механизм хранения данных, отличный от оригинального пакета версии 2.x. Он не может открыть существующий файл <code translate="no">.db</code> версии 2.x на месте. Сохраните исходную базу данных и среду, в которой она может быть открыта, экспортируйте данные в эту среду, а затем импортируйте их в новую базу данных. Установка нового пакета не предусматривает миграцию старого формата хранения. См. раздел <a href="#Migrating-data-from-Milvus-Lite">«Миграция данных из Milvus Lite</a>».</p>
+<p>Milvus Lite 3.x использует другой механизм хранения данных, отличный от оригинального пакета версии 2.x. Он не может открыть существующий файл <code translate="no">.db</code> версии 2.x на месте. Сохраните исходную базу данных и среду, в которой она открывается, экспортируйте данные из неё и импортируйте их в новую базу данных. Установка нового пакета не предусматривает миграцию старого формата хранения. См. раздел <a href="#Migrating-data-from-Milvus-Lite">«Миграция данных из Milvus Lite</a>».</p>
 </blockquote>
 </div>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Подключение к Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">

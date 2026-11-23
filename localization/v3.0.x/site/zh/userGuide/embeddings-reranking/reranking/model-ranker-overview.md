@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>模型排序器通过一个明确定义的工作流，将语言模型的理解能力集成到 Milvus 搜索过程中：</p>
+    </button></h2><p>模型排序器通过一个明确定义的工作流，将语言模型的理解能力整合到 Milvus 搜索过程中：</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" /> 
@@ -71,11 +71,11 @@ beta: Milvus 2.6.x
 <li><p><strong>模型评估</strong>：模型排序器函数处理查询-文档对：</p>
 <ul>
 <li><p>将原始查询和候选文档发送至外部模型服务</p></li>
-<li><p>语言模型评估查询与每篇文档之间的语义相关性</p></li>
+<li><p>语言模型评估查询与每份文档之间的语义相关性</p></li>
 <li><p>每份文档根据语义理解获得相关性评分</p></li>
 </ul></li>
 <li><p><strong>智能重新排序</strong>：根据模型生成的相关性评分对文档进行重新排序</p></li>
-<li><p><strong>增强的搜索结果</strong>：您的应用程序将获得按语义相关性排序的结果，而非仅基于向量相似性排序的结果</p></li>
+<li><p><strong>增强的搜索结果</strong>：您的应用程序将获得按语义相关性排序的结果，而不仅仅是基于向量相似性的排序</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">根据您的需求选择模型提供商<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 支持以下用于重新排序的模型服务提供商，各具特色：</p>
+    </button></h2><p>Milvus 支持以下用于重新排序的模型服务提供商，它们各具特色：</p>
 <table>
    <tr>
      <th><p>提供商</p></th>
@@ -114,8 +114,8 @@ beta: Milvus 2.6.x
    </tr>
    <tr>
      <td><p>Cohere</p></td>
-     <td><p>优先考虑可靠性和集成便捷性的企业级应用</p></td>
-     <td><ul><li><p>企业级可靠性和可扩展性</p></li><li><p>无需基础设施维护的托管服务</p></li><li><p>多语言重新排序功能</p></li><li><p>内置速率限制和错误处理</p></li></ul></td>
+     <td><p>优先考虑可靠性和易于集成的企业级应用</p></td>
+     <td><ul><li><p>企业级可靠性和可扩展性</p></li><li><p>托管服务，无需维护基础设施</p></li><li><p>多语言重新排序功能</p></li><li><p>内置速率限制和错误处理</p></li></ul></td>
      <td><p>需要高可用性搜索、稳定API性能及多语言产品目录的电子商务平台</p></td>
    </tr>
    <tr>
@@ -127,14 +127,14 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>优先考虑成本效益的長文档处理应用</p></td>
-     <td><ul><li><p>支持可配置重叠度的先进文档分块技术</p></li><li><p>基于片段的评分（得分最高的片段代表整个文档）</p></li><li><p>支持多种重新排序模型</p></li><li><p>提供标准版和专业版两种模型，性价比高</p></li></ul></td>
+     <td><ul><li><p>具有可配置重叠度的先进文档分块技术</p></li><li><p>基于片段的评分（得分最高的片段代表整个文档）</p></li><li><p>支持多种重新排序模型</p></li><li><p>提供标准版和专业版两种模型，性价比高</p></li></ul></td>
      <td><p>技术文档检索系统，用于处理需要智能分段和重叠控制的长篇手册及论文</p></td>
    </tr>
    <tr>
      <td><p>DashScope</p></td>
      <td><p>使用阿里云或Qwen重新排序模型的应用程序</p></td>
-     <td><ul><li><p>托管式 DashScope 重新排序 API</p></li><li><p>支持以下重新排序模型：<code translate="no">gte-rerank-v2</code></p></li><li><p>基于 API 密钥的身份验证</p></li></ul></td>
-     <td><p>希望使用阿里云托管的重新排序模型对候选结果进行重新排序的 RAG 应用</p></td>
+     <td><ul><li><p>托管式 DashScope 重新排序 API</p></li><li><p>支持以下重新排序模型：<code translate="no">gte-rerank-v2</code></p></li><li><p>基于API密钥的身份验证</p></li></ul></td>
+     <td><p>希望使用阿里云托管的重新排序模型对候选结果进行重新排序的RAG应用</p></td>
    </tr>
    <tr>
      <td><p>Hugging Face</p></td>
@@ -151,7 +151,7 @@ beta: Milvus 2.6.x
 <li><p><a href="/docs/zh/voyage-ai-ranker.md">Voyage AI Ranker</a></p></li>
 <li><p><a href="/docs/zh/siliconflow-ranker.md">SiliconFlow 排名器</a></p></li>
 <li><p><a href="/docs/zh/dashscope-ranker.md">DashScope 排名系统</a></p></li>
-<li><p><a href="/docs/zh/hugging-face-ranker.md">Hugging Face 排名器</a></p></li>
+<li><p><a href="/docs/zh/hugging-face-ranker.md">Hugging Face 排序器</a></p></li>
 </ul>
 <h2 id="Implementation" class="common-anchor-header">实现<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -170,8 +170,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>在实现模型排序器之前，请确保您拥有：</p>
 <ul>
-<li><p>一个 Milvus Collection，其中包含名为 `<code translate="no">VARCHAR</code> ` 的字段，该字段存储待重新排序的文本</p></li>
-<li><p>一个正在运行的外部模型服务，且您的 Milvus 实例可访问该服务</p></li>
+<li><p>一个 Milvus Collection，其中包含一个名为 `<code translate="no">VARCHAR</code> ` 的字段，该字段存储待重新排序的文本</p></li>
+<li><p>一个正在运行的外部模型服务，且该服务可被您的 Milvus 实例访问</p></li>
 <li><p>Milvus 与您选择的模型服务之间具备适当的网络连接</p></li>
 </ul>
 <p>模型排序器可与标准向量搜索和混合搜索操作无缝集成。实现过程涉及创建一个 Function 对象来定义您的重新排序配置，并将其传递给搜索操作。</p>
@@ -190,7 +190,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>要实现模型重新排序，首先需定义一个带有适当配置的 Function 对象。在此示例中，我们使用 TEI 作为服务提供商：</p>
+    </button></h3><p>要实现模型重新排序，首先需定义一个带有适当配置的 Function 对象。在本示例中，我们使用 TEI 作为服务提供商：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -237,9 +237,83 @@ model_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;tei&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;machine learning for time series&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -269,7 +343,7 @@ model_ranker = Function(
    <tr>
      <td><p><code translate="no">params</code></p></td>
      <td><p>是</p></td>
-     <td><p>一个包含基于模型的重新排序函数配置的字典。可用参数（键）因服务提供商而异。</p></td>
+     <td><p>一个包含基于模型的重新排序函数配置的字典。可用的参数（键）因服务提供商而异。</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
@@ -318,7 +392,7 @@ model_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>定义模型排序器后，您可以在搜索操作中通过将其传递给 `ranker` 参数来应用该排序器：</p>
+    </button></h3><p>定义模型排序器后，您可以在搜索操作中通过将其传递给 ranker 参数来应用该排序器：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -330,7 +404,7 @@ model_ranker = Function(
 results = client.search(
     collection_name,
     data=[your_query_vector], <span class="hljs-comment"># Number of query vectors must match that specified in model_ranker.params[&quot;queries&quot;] </span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
@@ -345,7 +419,7 @@ results = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(COLLECTION_NAME)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
-        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
         .outputFields(Collections.singletonList(document))
         .functionScore(FunctionScore.builder()
@@ -357,7 +431,67 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">10</span>,            <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;tei&quot;,
+        &quot;queries&quot;: [
+            &quot;machine learning for time series&quot;
+        ],
+        &quot;endpoint&quot;: &quot;http://model-service:8080&quot;
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

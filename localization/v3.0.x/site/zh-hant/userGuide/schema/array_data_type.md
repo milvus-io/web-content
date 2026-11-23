@@ -44,11 +44,12 @@ summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素�
 <li><strong>預設值</strong>：ARRAY 欄位不支援預設值。不過，您可以將 `<code translate="no">nullable</code> ` 屬性設定為 `<code translate="no">True</code> `，以允許空值。詳細資訊請參閱「<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>」。</li>
 </ul>
 <ul>
-<li><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須指定<code translate="no">max_length</code> ，該參數定義每個陣列元素允許的最大位元組數。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料類型，惟<code translate="no">JSON</code> 除外。若為<code translate="no">element_type=STRUCT</code> ，請使用 StructArray 欄位並提供<code translate="no">struct_schema</code> ；詳情請參閱<a href="/docs/zh-hant/create-structarray-field.md">StructArray</a>。 頂層的 ARRAY 欄位無法包含向量或嵌套陣列，且其各元素不得為 null；在 Milvus 3.0.6 及後續版本中，此類形式僅適用於 StructArray 欄位內的子欄位。</li>
+<li><strong>資料類型：</strong>ARRAY 欄位中的所有元素必須具有相同資料類型，該類型由<code translate="no">element_type</code> 參數定義。當<code translate="no">element_type</code> 設定為<code translate="no">VARCHAR</code> 時，您還必須指定<code translate="no">max_length</code> ，該參數定義每個陣列元素允許的最大位元組數。<code translate="no">element_type</code> 接受 Milvus 支援的任何標量資料型別，惟<code translate="no">JSON</code> 除外。若為<code translate="no">element_type=STRUCT</code> ，請使用 StructArray 欄位並提供<code translate="no">struct_schema</code> ；詳情請參閱<a href="/docs/zh-hant/create-structarray-field.md">StructArray</a>。 頂層的 ARRAY 欄位無法包含向量或嵌套陣列，且其各元素不得為 null；在 Milvus 3.0.6 及後續版本中，此類形式僅適用於 StructArray 欄位內的子欄位。</li>
 </ul>
 <ul>
-<li><p><strong>陣列容量</strong>：ARRAY 欄位的元素數量必須小於或等於建立陣列時所定義的最大容量，如<code translate="no">max_capacity</code> 所指定。該值應為<strong>1</strong>至<strong>4096</strong> 之間的整數。</p></li>
-<li><p><strong>字串處理</strong>：陣列欄位中的字串值將以原始形式儲存，不會進行語義轉義或轉換。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 以及<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入時的形式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則被視為無效值。</p></li>
+<li><p><strong>陣列容量</strong>：ARRAY 欄位中的元素數量必須小於或等於建立陣列時所定義的最大容量，如<code translate="no">max_capacity</code> 所規定。該值必須大於 0，且不得超過<code translate="no">proxy.maxArrayCapacity</code> ，其預設值為<strong>4096</strong>。</p></li>
+<li><p><strong>文字比對</strong>：<code translate="no">TEXT_MATCH</code> 、<code translate="no">TEXT_MATCH_FUZZY</code> 及<code translate="no">PHRASE_MATCH</code> 僅支援<code translate="no">VARCHAR</code> 與<code translate="no">TEXT</code> 字段；若將其套用至 ARRAY 字段，將產生錯誤。<code translate="no">enable_analyzer</code> 與<code translate="no">enable_match</code> 對 ARRAY 字段無效。有關文字比對的詳細資訊，請參閱<a href="/docs/zh-hant/keyword-match.md">「文字比對」</a>。</p></li>
+<li><p><strong>字串處理</strong>：陣列欄位中的字串值會以原始形式儲存，不會進行語義轉義或轉換。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 以及<code translate="no">&quot;a\&quot;b&quot;</code> 會以輸入時的形式儲存，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 則被視為無效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">新增 ARRAY 欄位<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,15 +66,15 @@ summary: ARRAY 欄位用於儲存一組具有相同資料類型的有序元素�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要在 Milvus 叢集中使用 ARRAY 欄位，請在建立集合架構時定義相關的欄位類型。此流程包含：</p>
+    </button></h2><p>若要將 ARRAY 欄位新增至集合架構，請設定以下參數：</p>
 <ol>
-<li><p>將 `<code translate="no">datatype</code> ` 設定為受支援的陣列資料型別，即 `<code translate="no">ARRAY</code>`。</p></li>
-<li><p>使用<code translate="no">element_type</code> 參數來指定陣列中元素的資料類型。同一陣列中的所有元素必須具有相同的資料類型。</p></li>
-<li><p>使用 `<code translate="no">max_capacity</code> ` 參數來定義陣列的最大容量，即其可容納的元素最大數量。</p></li>
+<li><p>將欄位資料型別設定為 `<code translate="no">ARRAY</code>`。</p></li>
+<li><p>將 `<code translate="no">element_type</code> ` 設定為元素的共用資料型別。</p></li>
+<li><p>將 `<code translate="no">max_capacity</code> ` 設定為元素的最大數量。</p></li>
 </ol>
-<p>以下是定義包含 ARRAY 欄位的集合模式的方法：</p>
+<p>以下是定義包含 ARRAY 欄位的集合架構的方法：</p>
 <div class="alert note">
-<p>若在定義架構時設定 `<code translate="no">enable_dynamic_field=True</code> `，Milvus 允許您插入未事先定義的標量欄位。然而，此舉可能會增加查詢與管理的複雜度，進而影響效能。如需更多資訊，請參閱「<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>」。</p>
+<p>若要插入未在模式中定義的欄位，請啟用<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -373,8 +374,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立索引有助於提升搜尋與查詢效能。在 Milvus 叢集中，向量欄位必須建立索引，但標量欄位則為選用。</p>
-<p>以下範例針對向量欄位 `<code translate="no">embedding</code> ` 及 ARRAY 欄位 `<code translate="no">tags</code>` 建立索引，兩者皆使用 `<code translate="no">AUTOINDEX</code> ` 索引類型。採用此類型時，Milvus 會根據資料類型自動選取最適合的索引。您亦可針對每個欄位自訂索引類型與參數。詳細資訊請參閱<a href="/docs/zh-hant/index-explained.md">《索引說明》</a>。</p>
+    </button></h2><p>向量欄位需要索引；標量索引則為選用。此範例針對<code translate="no">embedding</code> 及<code translate="no">tags</code> 請求 `<code translate="no">AUTOINDEX</code> `。有關顯式 ARRAY 索引選項及篩選支援，請參閱<a href="#Array-index-support">「陣列索引支援」</a>。</p>
+<div class="alert note">
+<blockquote>
+<p>標量索引（包括<code translate="no">AUTOINDEX</code> ）不支援遞迴的 ARRAY 欄位或包含可為 null 元素的陣列。有關一般陣列篩選器的資訊，請參閱<a href="/docs/zh-hant/array_data_type.md#Array-index-support">「陣列索引支援」</a>；關於子欄位規則，請參閱「<a href="/docs/zh-hant/index-structarray-fields.md#Create-scalar-indexes">索引 StructArray 欄位</a>」。</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -484,6 +489,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>陣列索引支援：索引類型與加速篩選器</strong></summary></p>
+<p>針對一般 ARRAY 欄位的標量索引會索引其元素。請從以下明確的索引類型中選擇：</p>
+<table>
+<thead>
+<tr><th>元素類型</th><th>顯式索引類型</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>,<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>您亦可請求<code translate="no">AUTOINDEX</code> ；有關預設的 ARRAY 選項，請參閱「<a href="/docs/zh-hant/scalar_index.md#AUTOINDEX-behavior">標量索引</a>」。</p>
+<p>以下篩選器可使用符合資格的陣列索引：</p>
+<table>
+<thead>
+<tr><th>篩選器</th><th>索引行為</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code> ，或符合資格的自動選取方式，皆可不依位置查詢元素。</td></tr>
+<tr><td>針對布林值、整數或 VARCHAR 陣列的「整陣列」<code translate="no">==</code> 或<code translate="no">!=</code> </td><td><code translate="no">INVERTED</code> 可找出候選項，隨後檢查原始陣列的順序與長度。<code translate="no">BITMAP</code> 不會處理此候選路徑。</td></tr>
+<tr><td>針對浮點數陣列的全陣列比較</td><td>將回退至掃描。</td></tr>
+<tr><td>元素存取（例如<code translate="no">tags[0]</code> ）或陣列長度</td><td>元素成員索引無法為這些操作提供索引查詢。</td></tr>
+</tbody>
+</table>
+<p>有關表達式語法，請參閱<a href="/docs/zh-hant/array-operators.md">ARRAY 運算子</a>。</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">建立集合<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -499,7 +531,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>定義完資料結構與索引後，請建立一個包含 ARRAY 欄位的集合。</p>
+    </button></h2><p>定義完模式和索引後，建立一個包含 ARRAY 欄位的集合。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1090,7 +1122,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">搭配篩選表達式的向量搜尋<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">使用篩選表達式的向量搜尋<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1105,7 +1137,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的標量欄位篩選外，您還可以將向量相似度搜尋與標量欄位篩選器結合使用。例如，以下程式碼展示了如何在向量搜尋中加入標量欄位篩選器：</p>
+    </button></h2><p>在向量搜尋中使用 ARRAY 篩選器來限制符合條件的實體：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1268,4 +1300,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 支援進階的陣列篩選運算子，例如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 以及<code translate="no">ARRAY_LENGTH</code> ，以進一步強化查詢能力。更多詳細資訊，請參閱「<a href="/docs/zh-hant/array-operators.md">陣列運算子</a>」。</p>
+<p>有關包含與長度篩選條件，請參閱<a href="/docs/zh-hant/array-operators.md">ARRAY 運算子</a>。</p>

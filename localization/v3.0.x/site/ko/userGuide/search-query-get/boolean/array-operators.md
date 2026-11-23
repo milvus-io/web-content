@@ -117,7 +117,7 @@ summary: Milvus는 ARRAY 필드를 필터링하고 ARRAY 필드 값을 부분적
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_CONTAINS_ALL</code> 연산자는 지정된 목록의 모든 요소가 배열 필드에 포함되어 있는지 확인합니다. 이 연산자는 배열에 여러 값을 포함하는 엔티티를 일치시키려는 경우에 유용합니다.</p>
+    </button></h2><p><code translate="no">ARRAY_CONTAINS_ALL</code> 연산자는 지정된 목록의 모든 요소가 배열 필드에 포함되어 있는지 확인합니다. 이 연산자는 배열에 여러 값을 포함하는 엔티티를 일치시키고자 할 때 유용합니다.</p>
 <p><strong>예시</strong></p>
 <p><code translate="no">history_temperatures</code> 배열에 <code translate="no">23</code> 과 <code translate="no">24</code> 이 모두 포함된 모든 엔티티를 찾으려면 다음을 사용할 수 있습니다:</p>
 <div class="multipleCode">
@@ -209,7 +209,7 @@ summary: Milvus는 ARRAY 필드를 필터링하고 ARRAY 필드 값을 부분적
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_LENGTH</code> 는 배열 필드의 길이(요소 수)를 반환합니다. 이 함수는 배열 필드 식별자라는 정확히 하나의 매개변수만 받아들입니다.</p>
+    </button></h2><p><code translate="no">ARRAY_LENGTH</code> 는 배열 필드의 길이(요소 수)를 반환합니다. 이 함수는 배열 필드 식별자라는 정확히 하나의 매개변수만 받습니다.</p>
 <p><strong>예시</strong></p>
 <p><code translate="no">history_temperatures</code> 배열의 요소 수가 10개 미만인 모든 엔티티를 찾으려면:</p>
 <div class="multipleCode">
@@ -255,7 +255,7 @@ summary: Milvus는 ARRAY 필드를 필터링하고 ARRAY 필드 값을 부분적
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_APPEND</code> 연산자는 ` <code translate="no">upsert</code> ` 요청 중에 기존 ARRAY 필드에 페이로드 요소를 추가합니다. 이는 필터 표현식이 아닙니다. 현재 배열 값을 먼저 조회하지 않고 배열에 값을 추가하려는 경우 이 연산자를 사용하십시오.</p>
+    </button></h2><p><code translate="no">ARRAY_APPEND</code> 연산자는 <code translate="no">upsert</code> 요청 중에 기존 ARRAY 필드에 페이로드 요소를 추가합니다. 이는 필터 표현식이 아닙니다. 현재 배열 값을 먼저 조회하지 않고 배열에 값을 추가하려는 경우 이 연산자를 사용하십시오.</p>
 <p>다음 예제는 기본 키가 <code translate="no">1</code> 인 엔티티의 <code translate="no">tags</code> ARRAY 필드에 <code translate="no">&quot;premium&quot;</code> 를 추가합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -376,7 +376,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_append&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">field_ops</code> 을 통해 필드에 <code translate="no">ARRAY_APPEND</code> 를 연결하면 해당 필드에 대해 부분 업데이트(partial-update) 세미언틱이 활성화됩니다. 전체 워크플로, 지원되는 요소 유형 및 제한 사항에 대해서는 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">병합 모드에서 ARRAY 필드 업서트(Upsert)</a>를 참조하십시오.</p>
+<p><code translate="no">field_ops</code> 을 통해 필드에 <code translate="no">ARRAY_APPEND</code> 을 연결하면 해당 필드에 대해 부분 업데이트(partial-update) 세미언틱이 활성화됩니다. 전체 워크플로, 지원되는 요소 유형 및 제한 사항에 대해서는 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">병합 모드에서 ARRAY 필드 업서트(Upsert)</a>를 참조하십시오.</p>
 <h2 id="ARRAYREMOVE" class="common-anchor-header">ARRAY_REMOVE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#ARRAYREMOVE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -392,7 +392,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_REMOVE</code> 연산자는 <code translate="no">upsert</code> 요청 시, 요청 페이로드의 값과 일치하는 기존 ARRAY 필드의 모든 요소를 제거합니다. 이는 필터 표현식이 아닙니다. 현재 배열 값을 먼저 조회하지 않고도 배열에서 일치하는 값을 제거하려는 경우에 사용하십시오.</p>
+    </button></h2><p><code translate="no">ARRAY_REMOVE</code> 연산자는 <code translate="no">upsert</code> 요청 시, 요청 페이로드의 값과 일치하는 기존 ARRAY 필드의 모든 요소를 제거합니다. 이는 필터 표현식이 아닙니다. 현재 배열 값을 먼저 조회하지 않고도 배열에서 일치하는 값을 제거하고자 할 때 사용하십시오.</p>
 <p>다음 예제는 기본 키가 <code translate="no">1</code> 인 엔티티의 <code translate="no">tags</code> ARRAY 필드에서 <code translate="no">&quot;trial&quot;</code> 를 제거합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -513,4 +513,4 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_remove&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">field_ops</code> 을 통해 필드에 <code translate="no">ARRAY_REMOVE</code> 를 연결하면 해당 필드에 대해 부분 업데이트(partial-update) 세미언틱이 활성화됩니다. 전체 워크플로, 지원되는 요소 유형 및 제한 사항에 대해서는 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">병합 모드에서 ARRAY 필드 업서트(Upsert)</a>를 참조하십시오.</p>
+<p><code translate="no">field_ops</code> 을 통해 필드에 <code translate="no">ARRAY_REMOVE</code> 을 연결하면 해당 필드에 대해 부분 업데이트(partial-update) 세미언틱이 활성화됩니다. 전체 워크플로, 지원되는 요소 유형 및 제한 사항에 대해서는 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">병합 모드에서 ARRAY 필드 업서트(Upsert)</a>를 참조하십시오.</p>

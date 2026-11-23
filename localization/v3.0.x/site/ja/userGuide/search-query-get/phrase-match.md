@@ -4,7 +4,7 @@ title: Phrase MatchCompatible with Milvus 2.5.17+
 summary: >-
   フレーズ一致では、検索クエリの用語がそのままのフレーズとして含まれるドキュメントを検索できます。デフォルトでは、単語は同じ順序で、かつ互いに隣接して出現している必要があります。
   たとえば、「robotics machine
-  learning」というクエリでは、「…典型的なロボティクス・機械学習モデル…」といったテキストが一致します。この場合、「robotics」、「machine」、「learning」という単語が、その間に他の単語を挟まずに連続して出現しています。
+  learning」というクエリでは、「…典型的なロボティクス・機械学習モデル…」といったテキストが一致します。この場合、「robotics」、「machine」、「learning」という単語が、その間に他の単語を挟むことなく連続して出現しています。
 beta: Milvus 2.5.17+
 ---
 <h1 id="Phrase-Match" class="common-anchor-header">Phrase Match<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">

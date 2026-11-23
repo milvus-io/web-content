@@ -58,11 +58,11 @@ summary: >-
 <p>Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> dan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> di referensi SDK.</p>
 </div>
 <div class="language-java">
-<p>Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> dalam referensi SDK.</p>
+<p>Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> di referensi SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -242,8 +242,8 @@ schema.verify()
 <li><p>Gunakan nama subbidang di dalam setiap elemen Struct, bukan jalur seperti <code translate="no">chunks[text]</code>. Kolom datar atau kunci bernama <code translate="no">chunks[text]</code> akan ditolak.</p></li>
 <li><p>Elemen Struct itu sendiri tidak boleh bernilai null, seperti <code translate="no">[null, {...}]</code>. Nilai StructArray secara keseluruhan hanya dapat bernilai null jika bidang StructArray tersebut dapat bernilai null. Sebelum Milvus 3.0.6, setiap elemen Struct harus menyediakan setiap subbidang.</p></li>
 <li><p>Kunci atau anak Parquet yang bukan subbidang dari koleksi, termasuk subbidang yang dihilangkan, akan diabaikan.</p></li>
-<li><p>Mulai Milvus 3.0.6, kunci yang hilang atau nilai ` <code translate="no">null</code> ` untuk subfield yang dapat bernilai `null` akan diimpor sebagai nilai `null` untuk elemen Struct tersebut, sehingga file yang ditulis sebelum subfield ditambahkan akan diimpor tanpa subfield tersebut. Sebuah ` <code translate="no">null</code> ` di tempat lain akan menyebabkan kegagalan impor. Untuk subfield array, ` <code translate="no">null</code> ` adalah array dalam yang bernilai null, dan ` <code translate="no">null</code> ` di dalam array tersebut adalah nilai dalam yang bernilai null jika subfield tersebut mengizinkannya.</p></li>
-<li><p>Mulai Milvus 3.0.6, impor binlog, seperti pemulihan cadangan, dan impor dari sumber snapshot akan ditolak untuk koleksi yang memiliki subfield dengan elemen nullable atau subfield array skalar.</p></li>
+<li><p>Mulai Milvus 3.0.6, kunci yang hilang atau nilai ` <code translate="no">null</code> ` untuk subfield yang dapat bernilai `null` akan diimpor sebagai nilai `null` untuk elemen Struct tersebut, sehingga file yang ditulis sebelum subfield ditambahkan akan diimpor tanpa subfield tersebut. Sebuah ` <code translate="no">null</code> ` di tempat lain akan menyebabkan kegagalan impor. Untuk subfield array, ` <code translate="no">null</code> ` merupakan array dalam yang bernilai null, dan ` <code translate="no">null</code> ` di dalam array tersebut merupakan nilai dalam yang bernilai null jika subfield tersebut mengizinkannya.</p></li>
+<li><p>Mulai dari Milvus 3.0.6, impor binlog, seperti pemulihan cadangan, dan impor dari sumber snapshot akan ditolak untuk koleksi yang memiliki subfield dengan elemen nullable atau subfield array skalar.</p></li>
 </ul>
 <p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> mendukung bentuk StructArray di atas dalam setiap format yang didukung, termasuk subfield dengan elemen nullable dan nilai StructArray yang nullable. Gunakan bentuk baris yang sama dalam panggilan ` <code translate="no">add_row()</code> ` pada writer.</p>
 <p>Untuk batasan di sisi skema, lihat <a href="/docs/id/structarray-limits.md#Import-and-storage-limits">Batasan StructArray</a>.</p>
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p><strong>LocalBulkWriter</strong> menambahkan baris dari dataset sumber dan menyimpannya ke file lokal dengan format yang ditentukan.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -328,7 +328,7 @@ writer = LocalBulkWriter(
 <li>Merujuk skema yang telah dibuat di ` <code translate="no">CollectionSchema()</code>`.</li>
 <li>Tentukan direktori keluaran di ` <code translate="no">withLocalPath()</code>`.</li>
 <li>Tentukan jenis file keluaran di ` <code translate="no">withFileType()</code>`.</li>
-<li>Jika dataset Anda berisi sejumlah besar catatan, disarankan untuk memecah data Anda dengan mengatur nilai ` <code translate="no">withChunkSize()</code> ` ke nilai yang sesuai.</li>
+<li>Jika dataset Anda berisi sejumlah besar catatan, disarankan untuk memecah data Anda dengan mengatur <code translate="no">withChunkSize()</code> ke nilai yang sesuai.</li>
 </ul>
 <p>Untuk detail mengenai pengaturan parameter, lihat LocalBulkWriter di referensi SDK.</p>
 </div>
@@ -349,8 +349,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>Alih-alih menyimpan data yang ditambahkan ke berkas lokal, <strong>RemoteBulkWriter</strong> menyimpannya ke bucket jarak jauh. Oleh karena itu, Anda harus menyiapkan objek <strong>ConnectParam</strong> sebelum membuat <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -401,8 +401,8 @@ writer = RemoteBulkWriter(
 <button class="copy-code-btn"></button></code></pre>
 <p>Setelah parameter koneksi siap, Anda dapat merujuknya di <strong>RemoteBulkWriter</strong> sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -457,8 +457,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>Untuk tujuan demonstrasi, kode berikut menambahkan data yang dihasilkan secara acak.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -656,7 +656,7 @@ writer = RemoteBulkWriter(
     List&lt;List&lt;String&gt;&gt; batchFiles = uploadData();
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-the-results" class="common-anchor-header">Verifikasi hasilnya<button data-href="#Verify-the-results" class="anchor-icon" translate="no">
+<h2 id="Verify-the-results" class="common-anchor-header">Verifikasi hasil<button data-href="#Verify-the-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -672,14 +672,14 @@ writer = RemoteBulkWriter(
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Untuk memeriksa hasilnya, Anda dapat mendapatkan jalur keluaran sebenarnya dengan mencetak properti ` <code translate="no">batch_files</code> ` dari writer.</p>
+<p>Untuk memeriksa hasilnya, Anda dapat mendapatkan jalur keluaran aktual dengan mencetak properti ` <code translate="no">batch_files</code> ` dari writer.</p>
 </div>
 <div class="language-java">
 <p>Untuk memeriksa hasilnya, Anda dapat memperoleh jalur keluaran sebenarnya dengan mencetak metode ` <code translate="no">getBatchFiles()</code> ` dari writer.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 

@@ -952,7 +952,7 @@
             ]
           },
           {
-            "label": "Skalarindizes",
+            "label": "Skalare Indizes",
             "id": "scalar-indexes",
             "order": 5,
             "isMenu": true,
@@ -991,12 +991,6 @@
                 "label": "NGRAM",
                 "id": "ngram.md",
                 "order": 5,
-                "children": []
-              },
-              {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
                 "children": []
               },
               {
@@ -1389,7 +1383,7 @@
                 "children": []
               },
               {
-                "label": "Verfall-Rangliste",
+                "label": "Verfalls-Ranking",
                 "id": "decay-ranker",
                 "isMenu": true,
                 "order": 3,
@@ -1419,7 +1413,7 @@
                     "children": []
                   },
                   {
-                    "label": "Anleitung: Implementierung eines zeitbasierten Rankings in Milvus",
+                    "label": "Anleitung: Implementierung einer zeitbasierten Rangfolge in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1469,7 +1463,7 @@
                     "children": []
                   },
                   {
-                    "label": "DashScope Ranker",
+                    "label": "DashScope-Ranker",
                     "id": "dashscope-ranker.md",
                     "order": 6,
                     "children": []
@@ -1499,13 +1493,7 @@
             "children": []
           },
           {
-            "label": "Cluster-Verdichtung",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Zusammenführung und Komprimierung erzwingen",
+            "label": "Zusammenführung und Verdichtung erzwingen",
             "id": "force-merge.md",
             "order": 2,
             "children": []
@@ -1517,7 +1505,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Übersicht über mehrstufige Speicherung",
+                "label": "Übersicht über die mehrstufige Speicherung",
                 "id": "tiered-storage-overview.md",
                 "order": 0,
                 "children": []
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "Node.js-SDK",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RESTful-API v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Schema-Entwurf",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "Suchmuster",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "Indexauswahl",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "RAG-Pipeline",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -2276,7 +2282,7 @@
                     "children": []
                   },
                   {
-                    "label": "Migration zwischen Instanzen über verschiedene S3-Umgebungen hinweg",
+                    "label": "Migration zwischen Instanzen über S3-Umgebungen hinweg",
                     "id": "multi-storage-backup-and-restore.md",
                     "order": 3,
                     "children": []
@@ -2653,7 +2659,7 @@
                 "children": []
               },
               {
-                "label": "Milvus Async-API",
+                "label": "Milvus-Async-API",
                 "id": "llamaindex_milvus_async.md",
                 "order": 1,
                 "children": []
@@ -2833,7 +2839,7 @@
         ]
       },
       {
-        "label": "Bewertung und Beobachtbarkeit",
+        "label": "Auswertung und Beobachtbarkeit",
         "id": "evaluation-observability",
         "order": 6,
         "children": [
@@ -3250,7 +3256,7 @@
         "children": []
       },
       {
-        "label": "Trichter-Suche mit Matroschka-Einbettungen",
+        "label": "Trichter-Suche mit Matryoshka-Embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

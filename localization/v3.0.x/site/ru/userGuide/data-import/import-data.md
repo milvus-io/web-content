@@ -64,15 +64,15 @@ summary: На этой странице показан порядок дейст
     </button></h2><p>Если ваш конвейер может повторить запрос на импорт, завершившийся сбоем или по истечении времени ожидания, пометьте задание ключом идемпотентности; см. раздел <a href="/docs/ru/idempotent-import.md">«Идемпотентный массовый импорт</a>».</p>
 <p>Чтобы импортировать подготовленные данные, необходимо создать задание импорта следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -149,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>Возможный результат выглядит следующим образом:</p>
+<p>Возможные значения:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> Параметры<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> — это «тонкий» обёртка для <code translate="no">POST /v2/vectordb/jobs/import/create</code>. Помимо
+приведённого выше примера, он предоставляет следующие параметры (PyMilvus 2.6 и более поздние версии).</p>
+<table>
+<thead>
+<tr><th>Параметр</th><th>Тип</th><th>Описание</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Адрес сервера, например <code translate="no">http://127.0.0.1:19530</code> или <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Целевая коллекция.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Целевая база данных. Отправляется в качестве заголовка <code translate="no">DB-Name</code> для RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Файлы, уже доступные экземпляру Milvus, например, в MinIO. Это <strong>пути на стороне сервера, а не URL-адреса объектов</strong>. Каждый подсписок представляет собой один файл в формате JSON или Parquet либо один набор файлов NumPy.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Целевой раздел. Передается через дополнительные ключевые аргументы, а не через объявленный параметр, поэтому его легко пропустить в сигнатуре. Оставьте поле пустым для коллекций, использующих ключ раздела.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>URL отдельного объекта в облачном хранилище объектов. Заменено на <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>URL-адреса объектов в облачном объектном хранилище, например <code translate="no">s3://bucket/prefix/1.parquet</code>. Каждый подсписок представляет собой один объект или один префикс, заканчивающийся на <code translate="no">/</code>. Используйте это <strong>вместо</strong> <code translate="no">files</code>; это два разных транспорта, а не синонимы.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>Идентификатор кластера Zilliz Cloud.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>Идентификатор проекта Zilliz Cloud для баз данных проекта.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Регион базы данных проекта.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>Ключ API или <code translate="no">username:password</code> для самостоятельно размещённого экземпляра.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Учетные данные хранилища объектов для <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Токен сеанса для краткосрочных учетных данных объектного хранилища.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Том Zilliz Cloud, из которого будет производиться импорт. Требуется <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Пути внутри <code translate="no">volume_name</code>. Каждый подсписок представляет собой один файл или один префикс, заканчивающийся на <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> или <code translate="no">str</code></td><td>Проверить сертификат TLS сервера; по умолчанию — <code translate="no">True</code>. Строка рассматривается как путь к набору сертификатов центра сертификации (CA).</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> или <code translate="no">tuple</code></td><td>Сертификат клиента для взаимного TLS: путь к файлу или пара <code translate="no">('cert', 'key')</code>.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>Дополнительные HTTP-заголовки, объединяемые в запрос; приоритет имеют значения вызывающей стороны. Используйте это для отправки ключа идемпотентности, например <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; см. <a href="/docs/ru/idempotent-import.md">«Идемпотентный массовый импорт</a>».</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Дополнительные параметры импорта передаются серверу в теле запроса.</td></tr>
+</tbody>
+</table>
+<p>Любые оставшиеся аргументы-ключевые слова передаются в ` <code translate="no">requests.post</code>`, поэтому ` <code translate="no">timeout</code> ` и ` <code translate="no">proxies</code>` 
+работают так же, как и там. Оболочка по умолчанию отправляет таймаут в 20 секунд.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">Проверка хода импорта<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,10 +217,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После получения идентификатора задания импорта вы можете проверить ход импорта следующим образом:</p>
+    </button></h2><p>Как только вы получите идентификатор задания импорта, вы можете проверить ход импорта следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>Вы можете отобразить список всех заданий импорта, относящихся к конкретной коллекции, следующим образом:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -394,7 +439,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
 </ul></li>
 <li><p>Ограничения, касающиеся удаления:</p>
 <ul>
-<li><p>До тех пор, пока статус задания импорта не станет <strong>«Завершено»</strong>, удаление не гарантируется и может как завершиться успешно, так и нет.</p></li>
+<li><p>До тех пор, пока статус задания импорта не станет <strong>«Завершено»</strong>, удаление не гарантируется и может как завершиться успешно, так и завершиться неудачно.</p></li>
 <li><p>Удаление после того, как статус задания станет <strong>«Завершено»</strong>, гарантированно завершится успешно.</p></li>
 </ul></li>
 </ul>
@@ -413,4 +458,4 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Мы настоятельно рекомендуем использовать функцию импорта нескольких файлов, которая позволяет загружать несколько файлов одним запросом. Этот метод не только упрощает процесс импорта, но и значительно повышает его производительность. Кроме того, объединяя загрузки, вы можете сократить время, затрачиваемое на управление данными, и сделать свой рабочий процесс более эффективным.</p>
+    </button></h2><p>Мы настоятельно рекомендуем использовать функцию импорта нескольких файлов, которая позволяет загружать несколько файлов одним запросом. Этот метод не только упрощает процесс импорта, но и значительно повышает его производительность. Кроме того, объединяя загрузки, вы можете сократить время, затрачиваемое на управление данными, и повысить эффективность рабочего процесса.</p>

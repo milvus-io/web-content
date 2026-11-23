@@ -3,7 +3,7 @@ id: schema_design.md
 title: 'Consigne : Conception du schéma Milvus'
 summary: >-
   Règles à l'intention des assistants de codage basés sur l'IA pour la
-  conception de schémas de collecte Milvus corrects.
+  conception de schémas de collection Milvus corrects.
 ---
 <h1 id="Schema-Design" class="common-anchor-header">Conception de schémas<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ summary: >-
 <li><strong>Enregistrez</strong> -la à l'emplacement prévu par votre outil d'IA — consultez le <a href="/docs/fr/milvus_for_agents.md">tableau des environnements</a> pour plus de détails sur l'emplacement.</li>
 <li>Votre assistant IA appliquera automatiquement ces règles lors de la génération ou de la révision du code Milvus.</li>
 </ol>
-<p>Pour les utilisateurs <strong>de Cursor</strong>: copiez la commande dans la section « <a href="#full-prompt">Commande complète</a> » et enregistrez-la dans le répertoire « <code translate="no">.cursor/rules/</code> » de votre projet.</p>
+<p>Pour les utilisateurs <strong>de Cursor</strong>: copiez la commande dans la section « <a href="#full-prompt">Commande complète</a> » et enregistrez-la dans le dossier « <code translate="no">.cursor/rules/</code> » de votre projet.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Prompt complet<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +149,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only). Before using `IS NULL` / `IS NOT NULL` on vector fields, check the supported types, version requirements, and query/search behavior in [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 

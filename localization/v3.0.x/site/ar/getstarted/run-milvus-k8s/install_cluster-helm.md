@@ -86,7 +86,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <pre><code translate="no" class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://github.com/milvus-io/milvus-helm</code>. نستخدم الآن المستودع الجديد على <code translate="no">https://github.com/zilliztech/milvus-helm</code>. لا يزال المستودع المؤرشف متاحًا للمخططات حتى الإصدار 4.0.31، ولكن استخدم المستودع الجديد للإصدارات الأحدث.</p>
+<p>تم أرشفة مستودع مخططات Helm الخاصة بـ Milvus الموجود على <code translate="no">https://github.com/milvus-io/milvus-helm</code>. نستخدم الآن المستودع الجديد الموجود على <code translate="no">https://github.com/zilliztech/milvus-helm</code>. لا يزال المستودع المؤرشف متاحًا للمخططات حتى الإصدار 4.0.31، ولكن استخدم المستودع الجديد للإصدارات الأحدث.</p>
 </div>
 <p>ثم قم بجلب مخططات Milvus من المستودع على النحو التالي:</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>helm repo update
@@ -194,7 +194,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>تأكد من نجاح عملية النشر عن طريق التحقق من حالة البودات:</p>
+    </button></h3><p>تحقق من نجاح عملية النشر عن طريق التحقق من حالة البودات:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>انتظر حتى تظهر حالة «قيد التشغيل» لجميع البودات.</strong> مع تكوين الإصدار v3.0.5، من المفترض أن ترى بودات مشابهة لما يلي:</p>
@@ -256,7 +256,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <p><strong>خيارات إعادة توجيه المنفذ:</strong></p>
 <ul>
 <li><strong>التعيين التلقائي للمنفذ المحلي</strong>: استخدم <code translate="no">:19530</code> بدلاً من <code translate="no">27017:19530</code> للسماح لـ kubectl باختيار منفذ متاح</li>
-<li><strong>الاستماع على جميع الواجهات</strong>: أضف <code translate="no">--address 0.0.0.0</code> للسماح بالاتصالات من أجهزة أخرى:
+<li><strong>الاستماع على جميع الواجهات</strong>: أضف <code translate="no">--address 0.0.0.0</code> للسماح بالاتصالات من الأجهزة الأخرى:
 <pre><code translate="no" class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 <button class="copy-code-btn"></button></code></pre></li>
 <li><strong>النشر المستقل</strong>: في حالة استخدام الوضع المستقل، يظل اسم الخدمة كما هو</li>
@@ -335,7 +335,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كنت في بيئة مقيدة الشبكة، فاتبع الإجراء الموضح في هذا القسم لبدء تشغيل مجموعة Milvus.</p>
+    </button></h2><p>إذا كنت في بيئة مقيدة الشبكة، فاتبع الإجراء الوارد في هذا القسم لبدء تشغيل مجموعة Milvus.</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. الحصول على ملف بيان Milvus<button data-href="#1-Get-Milvus-manifest" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

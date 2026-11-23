@@ -2,14 +2,15 @@
 id: rrf-ranker.md
 title: Ранкинг-алгоритм RRF
 summary: >-
-  Ранкинг-алгоритм Reciprocal Rank Fusion (RRF) — это стратегия переранжирования
-  для гибридного поиска Milvus, которая уравновешивает результаты, полученные по
-  нескольким векторным путям поиска, исходя из их позиций в рейтинге, а не из
-  исходных показателей схожести. Подобно спортивному турниру, в котором
-  учитываются рейтинги игроков, а не их индивидуальные статистические
-  показатели, RRF Ranker объединяет результаты поиска в зависимости от того,
-  насколько высоко каждый элемент занимает в рейтинге по различным путям поиска,
-  создавая справедливый и сбалансированный итоговый рейтинг.
+  Ранкинг-алгоритм Reciprocal Rank Fusion (RRF) представляет собой стратегию
+  переранжирования для гибридного поиска Milvus, которая уравновешивает
+  результаты, полученные по нескольким векторным путям поиска, исходя из их
+  позиций в рейтинге, а не из исходных показателей схожести. Подобно спортивному
+  турниру, в котором учитываются рейтинги игроков, а не их индивидуальные
+  статистические показатели, RRF Ranker объединяет результаты поиска в
+  зависимости от того, насколько высоко каждый элемент занимает место в
+  различных путях поиска, создавая справедливый и сбалансированный итоговый
+  рейтинг.
 ---
 <h1 id="RRF-Ranker" class="common-anchor-header">Ранкинг-алгоритм RRF<button data-href="#RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -70,8 +71,9 @@ summary: >-
      <td><p>Создание консенсусных рейтингов, когда разные системы используют несопоставимые методы оценки</p></td>
    </tr>
 </table>
-<p>Если вашему гибридному поисковому приложению требуется сбалансировать несколько путей поиска на демократической основе без присвоения явных весов, RRF Ranker станет для вас идеальным выбором.</p>
-<h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Механизм работы RRF Ranker<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
+<p>Если вашему гибридному поисковому приложению требуется сбалансировать несколько поисковых путей на равноправной основе без присвоения явных весов, RRF Ranker станет для вас идеальным выбором.</p>
+<p>Если некоторые пути поиска более надежны, чем другие, но их исходные оценки несопоставимы, вы все равно можете объединить результаты по ранжированию и присвоить каждому пути свой вес. Подробности см. в разделе <a href="/docs/ru/v2.6.x/rrf-ranker.md#Assign-weights-to-search-paths">«Присвоение весов путям поиска</a>». Чтобы объединить оценки путей вместо их рангов, используйте <a href="/docs/ru/v2.6.x/weighted-ranker.md">Weighted Ranker</a>.</p>
+<h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Принцип работы RRF Ranker<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -88,9 +90,9 @@ summary: >-
       </svg>
     </button></h2><p>Основной рабочий процесс стратегии RRFRanker выглядит следующим образом:</p>
 <ol>
-<li><p><strong>Сбор рейтингов результатов поиска</strong>: сбор рейтингов результатов по каждому пути векторного поиска (rank_1, rank_2).</p></li>
-<li><p><strong>Объединение рейтингов</strong>: преобразование рейтингов по каждому пути (rank_rrf_1, rank_rrf_2) в соответствии с формулой.</p>
-<p>В формуле расчёта используется <em>N</em>, которое обозначает количество поисковых систем. <em>ranki</em>(<em>d</em>) — это позиция в рейтинге документа <em>d</em>, сгенерированная <em>i-й</em> поисковой системой. <em>k</em> — параметр сглаживания, обычно установленный на 60.</p></li>
+<li><p><strong>Сбор рейтингов поиска</strong>: сбор рейтингов результатов по каждому пути векторного поиска (rank_1, rank_2).</p></li>
+<li><p><strong>Объединение ранжирований</strong>: преобразование ранжирований по каждому пути (rank_rrf_1, rank_rrf_2) в соответствии с формулой.</p>
+<p>В формуле вычисления используется <em>N</em>, которое представляет собой количество поисковых систем. <em>ranki</em>(<em>d</em>) — это позиция в рейтинге документа <em>d</em>, сгенерированная <em>i-й</em> поисковой системой. <em>k</em> — параметр сглаживания, обычно установленный на 60.</p></li>
 <li><p><strong>Агрегирование рейтингов</strong>: переранжировка результатов поиска на основе объединенных рейтингов для получения окончательных результатов.</p></li>
 </ol>
 <p><span class="img-wrapper">
@@ -170,7 +172,7 @@ summary: >-
 <td><p>5</p></td>
 </tr>
 </table></p></li>
-<li><p>Используйте RRF для переупорядочения рейтингов двух наборов результатов поиска. Предположим, что параметр сглаживания <code translate="no">k</code> установлен на 60.</p>
+<li><p>Используйте RRF для изменения порядка двух наборов результатов поиска. Предположим, что параметр сглаживания <code translate="no">k</code> установлен на 60.</p>
 <p><table>
 <tr>
 <th><p><strong>ID</strong></p></th>
@@ -375,10 +377,147 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Параметр сглаживания, контролирующий влияние рангов документов; более высокое значение <code translate="no">k</code> снижает чувствительность к высшим рангам. Диапазон: (0, 16384); по умолчанию: <code translate="no">60</code>.</p><p>Подробности см. в разделе <a href="/docs/ru/v2.6.x/rrf-ranker.md#Mechanism-of-RRF-Ranker">«Механизм работы RRF Ranker</a>».</p></td>
+     <td><p>Параметр сглаживания, контролирующий влияние рангов документов; более высокое значение параметра « <code translate="no">k</code> » снижает чувствительность к высшим рангам. Диапазон: (0, 16384); значение по умолчанию: <code translate="no">60</code>.</p><p>Подробности см. в разделе <a href="/docs/ru/v2.6.x/rrf-ranker.md#Mechanism-of-RRF-Ranker">«Механизм работы RRF Ranker</a>».</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
+<h3 id="Assign-weights-to-search-paths" class="common-anchor-header">Назначение весов путям поиска<button data-href="#Assign-weights-to-search-paths" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Установите значение <code translate="no">params.weights</code>, чтобы каждый путь поиска по-разному влиял на объединенный рейтинг. Оценка каждого документа будет рассчитываться по формуле <code translate="no">score(d) = Σ weights[i] / (k + rank_i(d))</code>. Значение на позиции <em>i</em> применяется к <em>i-му</em> поисковому запросу в вашем вызове гибридного поиска в том порядке, в котором вы передаете запросы. Каждый вес должен быть в диапазоне от 0 до 1 включительно, и вы должны указать ровно один вес на каждый поисковый запрос; в противном случае запрос завершится с ошибкой параметра. Веса не нормируются и их сумма не обязательно должна равняться 1. Вес <code translate="no">0</code> исключает вклад данного пути в оценку, но его результаты всё равно могут появляться в объединенных результатах. Если вы опустите <code translate="no">weights</code>, каждый путь будет иметь вес 1, что соответствует классическому RRF.</p>
+<div class="alert note">
+<p>Для взвешенного RRF требуется Milvus версии 2.6.23 или более поздней. Более ранние версии игнорируют параметр <code translate="no">weights</code> без выдачи ошибки и ранжируют результаты с помощью классического RRF.</p>
+</div>
+<p>Например, примените веса ` <code translate="no">[0.3, 0.7]</code> ` к приведённому выше <a href="/docs/ru/v2.6.x/rrf-ranker.md#Example-of-RRF-Ranker">примеру с разреженными и плотными данными</a>, установив значение ` <code translate="no">k</code> ` равным 60. Запрос по разреженным данным передаётся первым, поэтому ` <code translate="no">0.3</code> ` применяется к поиску по разреженным данным, а ` <code translate="no">0.7</code> ` — к поиску по плотным данным:</p>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Ранг (разреженный)</strong></p></th>
+     <th><p><strong>Ранг (плотный)</strong></p></th>
+     <th><p><strong>Итоговый балл</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>0,3/(60+1)+0,7/(60+2) = 0,01620836</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>0,3/(60+4)+0,7/(60+1) = 0,01616291</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>0,3/(60+5)+0,7/(60+4) = 0,01555288</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>Н/Д</p></td>
+     <td><p>3</p></td>
+     <td><p>0,7/(60+3) = 0,01111111</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>Н/Д</p></td>
+     <td><p>5</p></td>
+     <td><p>0,7/(60+5) = 0,01076923</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>Н/Д</p></td>
+     <td><p>0,3/(60+2) = 0,00483871</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>Н/Д</p></td>
+     <td><p>0,3/(60+3) = 0,00476190</p></td>
+   </tr>
+</table>
+<p>При topK=5 идентификаторы 110 и 250, которые появляются только в плотных результатах, заменяют идентификаторы 203 и 150 в окончательных результатах.</p>
+<p>Чтобы создать ранжировщик RRF с взвешенным ранжированием, добавьте параметр ` <code translate="no">weights</code> ` в параметры ранжировщика, а затем передайте ранжировщик в гибридный поиск, как показано в <a href="/docs/ru/v2.6.x/rrf-ranker.md#Apply-to-hybrid-search">разделе «Применение к гибридному поиску</a>». Для cURL используйте объект в качестве значения ` <code translate="no">rerank</code> ` в запросе гибридного поиска; полный текст запроса см. в разделе <a href="/docs/ru/v2.6.x/multi-vector-search.md">«Мультивекторный гибридный поиск</a>»:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
+
+ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]  <span class="hljs-comment"># One weight per search request, in request order</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+rerank := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-number">100</span>).
+    WithParam(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+<span class="hljs-comment">// Pass it with milvusclient.NewHybridSearchOption(...).WithFunctionRerankers(rerank)</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;rerank&quot;</span>: {
+    <span class="hljs-string">&quot;strategy&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;k&quot;</span>: 100,
+        <span class="hljs-string">&quot;weights&quot;</span>: [0.3, 0.7]
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Передавайте веса в формате, указанном выше. Вспомогательные классы RRF в SDK не имеют параметра весов, а веса, добавленные к ним с помощью метода общего параметра, игнорируются без выдачи ошибки.</p>
+</div>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Применение к гибридному поиску<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -394,7 +533,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>RRF Ranker разработан специально для гибридных поисковых операций, сочетающих несколько векторных полей. Вот как использовать его в гибридном поиске:</p>
+    </button></h3><p>RRF Ranker разработан специально для операций гибридного поиска, сочетающих несколько векторных полей. Вот как использовать его в гибридном поиске:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -516,4 +655,4 @@ searchRequests.add(AnnSearchReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Дополнительную информацию о гибридном поиске см. в разделе <a href="/docs/ru/v2.6.x/multi-vector-search.md">«Мультивекторный гибридный поиск</a>».</p>
+<p>Для получения дополнительной информации о гибридном поиске см. раздел <a href="/docs/ru/v2.6.x/multi-vector-search.md">«Гибридный поиск</a> по <a href="/docs/ru/v2.6.x/multi-vector-search.md">нескольким векторным полям</a>».</p>

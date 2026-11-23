@@ -64,15 +64,15 @@ summary: Cette page explique la procédure à suivre pour importer les données 
     </button></h2><p>Si votre pipeline est susceptible de réessayer une requête d’importation ayant échoué ou expirée, attribuez au job une clé d’idempotence ; voir <a href="/docs/fr/idempotent-import.md">Importation en masse idempotente</a>.</p>
 <p>Pour importer les données préparées, vous devez créer une tâche d’importation comme suit :</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -135,7 +135,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <p>Une liste de listes de chemins d’accès aux fichiers, relatifs au chemin racine du compartiment Milvus sur l’instance MioIO démarrée en même temps que votre instance Milvus. Les sous-listes possibles sont les suivantes :</p>
 <ul>
 <li><p><strong>Fichiers JSON</strong></p>
-<p>Si le fichier préparé est au format JSON, <strong>chaque sous-liste doit contenir le chemin d'accès à un seul fichier JSON préparé</strong>.</p>
+<p>Si le fichier préparé est au format JSON, <strong>chaque sous-liste doit contenir le chemin d’accès à un seul fichier JSON préparé</strong>.</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
@@ -149,7 +149,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>Le résultat possible est le suivant :</p>
+<p>La valeur de retour possible est la suivante :</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -157,7 +157,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-import-progress" class="common-anchor-header">Vérifier la progression de l'importation<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> paramètres<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,10 +172,55 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois que vous disposez d'un identifiant de tâche d'importation, vous pouvez vérifier la progression de l'importation comme suit :</p>
+    </button></h2><p><code translate="no">bulk_import()</code> est une fine couche d'encapsulation autour de <code translate="no">POST /v2/vectordb/jobs/import/create</code>. Outre l'
+exemple ci-dessus, il expose les paramètres suivants (PyMilvus 2.6 et versions ultérieures).</p>
+<table>
+<thead>
+<tr><th>Paramètre</th><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Adresse du serveur, par exemple <code translate="no">http://127.0.0.1:19530</code> ou <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Collection cible.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Base de données cible. Envoyée sous forme d’en-tête <code translate="no">DB-Name</code> pour le RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Fichiers déjà disponibles pour l’instance Milvus, par exemple sur MinIO. Il s’agit de <strong>chemins d’accès côté serveur, et non d’URL d’objets</strong>. Chaque sous-liste correspond à un fichier JSON ou Parquet, ou à un ensemble de fichiers NumPy.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Partition cible. Transmise via des arguments de mots-clés supplémentaires plutôt que via un paramètre déclaré ; elle peut donc facilement passer inaperçue dans la signature. Laissez ce champ vide pour les collections utilisant une clé de partition.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>URL d’objet unique sur un stockage d’objets dans le cloud. Remplacée par <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>URL d’objets sur un stockage d’objets dans le cloud, par exemple <code translate="no">s3://bucket/prefix/1.parquet</code>. Chaque sous-liste correspond à un objet ou à un préfixe se terminant par <code translate="no">/</code>. Utilisez cette option <strong>à la place de</strong> <code translate="no">files</code>; il s’agit de deux modes de transport différents, et non de synonymes.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>ID du cluster Zilliz Cloud.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>ID de projet Zilliz Cloud, pour les bases de données de projet.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Région de la base de données du projet.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>Clé API, ou <code translate="no">username:password</code> pour une instance auto-hébergée.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Identifiants de stockage d’objets pour <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Jeton de session pour les identifiants de stockage d'objets à court terme.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Volume Zilliz Cloud à partir duquel effectuer l’importation. Nécessite <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Chemins d'accès à l'intérieur de <code translate="no">volume_name</code>. Chaque sous-liste correspond à un fichier ou à un préfixe se terminant par <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> ou <code translate="no">str</code></td><td>Vérifier le certificat TLS du serveur ; <code translate="no">True</code> par défaut. Une chaîne de caractères est traitée comme un chemin d’accès au bundle CA.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> ou <code translate="no">tuple</code></td><td>Certificat client pour le TLS mutuel : un chemin d’accès à un fichier ou une paire <code translate="no">('cert', 'key')</code>.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>En-têtes HTTP supplémentaires fusionnés dans la requête ; les valeurs de l’appelant prévalent. À utiliser pour envoyer une clé d’idempotence, par exemple <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; voir <a href="/docs/fr/idempotent-import.md">Importation en masse idempotente</a>.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Options d’importation supplémentaires transmises au serveur dans le corps de la requête.</td></tr>
+</tbody>
+</table>
+<p>Tous les arguments clés restants sont transmis à <code translate="no">requests.post</code>; ainsi, <code translate="no">timeout</code> et <code translate="no">proxies</code>
+fonctionnent de la même manière que sur ce site. Le wrapper envoie par défaut un délai d’expiration de 20 secondes.</p>
+<h2 id="Check-import-progress" class="common-anchor-header">Vérifier la progression de l’importation<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Une fois que vous disposez d’un identifiant de tâche d’importation, vous pouvez vérifier la progression de l’importation comme suit :</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -271,7 +316,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">Lister les tâches d'importation<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">Lister les tâches d’importation<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>Vous pouvez lister toutes les tâches d'importation relatives à une collection spécifique comme suit :</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -357,10 +402,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
     </button></h2><ul>
 <li><p>La taille de chaque fichier d'importation ne doit pas dépasser <strong>16 Go</strong>.</p></li>
 <li><p>Le nombre maximal de fichiers par requête d'importation ne doit pas dépasser <strong>1 024</strong>. Chaque requête d'importation peut contenir au maximum 16 Go par fichier * 1 024 fichiers = 16 To de données.</p></li>
-<li><p>Le nombre maximal de requêtes d'importation simultanées est limité à <strong>1 024</strong>.</p></li>
+<li><p>Le nombre maximal de demandes d'importation simultanées est limité à <strong>1 024</strong>.</p></li>
 </ul>
 <ul>
-<li>Un seul nom de partition peut être spécifié dans une requête d'importation. Si aucun nom de partition n'est spécifié, les données seront insérées dans la partition par défaut. De plus, vous ne pouvez pas définir de nom de partition dans la requête d'importation si vous avez défini une clé de partition dans la collection cible.</li>
+<li>Un seul nom de partition peut être spécifié dans une requête d’importation. Si aucun nom de partition n’est spécifié, les données seront insérées dans la partition par défaut. De plus, vous ne pouvez pas définir de nom de partition dans la requête d’importation si vous avez défini une clé de partition dans la collection cible.</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">Contraintes<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"

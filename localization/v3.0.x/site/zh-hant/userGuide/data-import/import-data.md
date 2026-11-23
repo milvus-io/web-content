@@ -64,15 +64,15 @@ summary: 本頁面示範了匯入已準備好資料的步驟。
     </button></h2><p>若您的管線可能會重試失敗或超時的匯入請求，請為該工作標記一個冪等性金鑰；請參閱《<a href="/docs/zh-hant/idempotent-import.md">冪等性批次匯入</a>》。</p>
 <p>要匯入已準備好的資料，您必須依照以下方式建立匯入工作：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -132,10 +132,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <li><p><code translate="no">collectionName</code></p>
 <p>目標集合的名稱。</p></li>
 <li><p><code translate="no">files</code></p>
-<p>一組以清單形式表示的檔案路徑，這些路徑是相對於在您的 Milvus 實例啟動時一併啟動的 MioIO 實例上，該 Milvus 儲存桶的根目錄而言的相對路徑。可能的子清單如下：</p>
+<p>一組以清單形式表示的檔案路徑，這些路徑皆以您與 Milvus 實例一同啟動的 MioIO 實例上的 Milvus 儲存桶根目錄為基準。可能的子清單如下：</p>
 <ul>
 <li><p><strong>JSON 檔案</strong></p>
-<p>若已準備的檔案為 JSON 格式<strong>，每個子清單應包含單一已準備 JSON 檔案的路徑</strong>。</p>
+<p>若已準備好的檔案為 JSON 格式<strong>，每個子清單應包含單一已準備 JSON 檔案的路徑</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> 參數<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> 是對 `<code translate="no">POST /v2/vectordb/jobs/import/create</code>` 的輕量級封裝。除了
+上述範例外，它還提供以下參數（PyMilvus 2.6 及後續版本）。</p>
+<table>
+<thead>
+<tr><th>參數</th><th>類型</th><th>說明</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>伺服器位址，例如<code translate="no">http://127.0.0.1:19530</code> 或<code translate="no">https://api.cloud.zilliz.com</code> 。</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>目標集合。</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>目標資料庫。作為 RBAC 的<code translate="no">DB-Name</code> 標頭傳送。</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Milvus 實例已可存取的檔案，例如位於 MinIO 上的檔案。這些是<strong>伺服器端的路徑，而非物件 URL</strong>。每個子清單代表一個 JSON 或 Parquet 檔案，或一組 NumPy 檔案。</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>目標分區。此參數是透過額外的關鍵字引數傳遞，而非宣告的參數，因此在函式簽名中容易被忽略。若集合使用分區金鑰，請將此參數留空。</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>雲端物件儲存中的單一物件 URL。已由<code translate="no">object_urls</code> 取代。</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>雲端物件儲存上的物件 URL，例如<code translate="no">s3://bucket/prefix/1.parquet</code> 。每個子清單代表一個物件，或一個以<code translate="no">/</code> 結尾的前綴。請使用此參<strong>數取代</strong> <code translate="no">files</code> ；兩者屬於不同的傳輸方式，並非同義詞。</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud 叢集 ID。</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud 專案 ID，用於專案資料庫。</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>專案資料庫的區域。</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>API 金鑰，若為自行託管實例，則為<code translate="no">username:password</code> 。</td></tr>
+<tr><td><code translate="no">access_key</code> /<code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td><code translate="no">object_urls</code> 的物件儲存憑證。</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>用於短期物件儲存憑證的會話憑證。</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>要匯入的 Zilliz Cloud 儲存卷。需具備<code translate="no">data_paths</code> 權限。</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td><code translate="no">volume_name</code> 內的路徑。每個子清單代表一個檔案或以<code translate="no">/</code> 結尾的前綴。</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> 或<code translate="no">str</code></td><td>驗證伺服器 TLS 憑證；預設為<code translate="no">True</code> 。字串將被視為 CA 憑證束路徑。</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> 或<code translate="no">tuple</code></td><td>用於雙向 TLS 的客戶端憑證：一個檔案路徑，或一個<code translate="no">('cert', 'key')</code> 對。</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>併入請求中的額外 HTTP 標頭；若值相同，則以呼叫方設定的值為準。可用於傳送冪等性金鑰，例如<code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code> ；請參閱「<a href="/docs/zh-hant/idempotent-import.md">冪等性批量匯入</a>」。</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>額外的匯入選項將透過請求正文轉發至伺服器。</td></tr>
+</tbody>
+</table>
+<p>任何剩餘的關鍵字引數都會轉發至<code translate="no">requests.post</code> ，因此<code translate="no">timeout</code> 和<code translate="no">proxies</code>
+在此處的運作方式與該處相同。此封裝函式預設會傳送 20 秒的超時設定。</p>
 <h2 id="Check-import-progress" class="common-anchor-header">檢查匯入進度<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,8 +219,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
       </svg>
     </button></h2><p>取得匯入工作 ID 後，可透過以下方式檢查匯入進度：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -288,8 +333,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>您可以透過以下方式列出特定集合所對應的所有匯入工作：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json

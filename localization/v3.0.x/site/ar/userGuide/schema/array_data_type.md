@@ -49,7 +49,8 @@ summary: >-
 <li><strong>نوع البيانات:</strong> يجب أن تشترك جميع العناصر في حقل ARRAY في نفس نوع البيانات، والذي يتم تحديده بواسطة المعلمة <code translate="no">element_type</code>. عند تعيين <code translate="no">element_type</code> إلى <code translate="no">VARCHAR</code> ، يجب عليك أيضًا تحديد <code translate="no">max_length</code> ، الذي يحدد الحد الأقصى لعدد البايتات المسموح به لكل عنصر في المصفوفة. يقبل حقل « <code translate="no">element_type</code> » أي نوع بيانات قياسي يدعمه Milvus، باستثناء « <code translate="no">JSON</code> ». بالنسبة لـ « <code translate="no">element_type=STRUCT</code> »، استخدم حقل «StructArray» وقم بتوفير « <code translate="no">struct_schema</code> »؛ لمزيد من التفاصيل، راجع <a href="/docs/ar/create-structarray-field.md">StructArray</a>. لا يمكن لحقل ARRAY من المستوى الأعلى أن يحتوي على متجهات أو مصفوفات متداخلة، ولا يمكن أن تكون عناصره فرديةً ذات قيمة null؛ هذه الأشكال متاحة فقط للحقول الفرعية داخل حقل StructArray في Milvus 3.0.6 والإصدارات الأحدث.</li>
 </ul>
 <ul>
-<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة عددًا صحيحًا في النطاق من <strong>1</strong> إلى <strong>4096</strong>.</p></li>
+<li><p><strong>سعة المصفوفة</strong>: يجب أن يكون عدد العناصر في حقل ARRAY أقل من أو يساوي السعة القصوى المحددة عند إنشاء المصفوفة، كما هو محدد في <code translate="no">max_capacity</code>. يجب أن تكون القيمة أكبر من 0 وألا تتجاوز <code translate="no">proxy.maxArrayCapacity</code> ، والتي تبلغ قيمتها الافتراضية <strong>4096</strong>.</p></li>
+<li><p><strong>مطابقة النص</strong>: لا تدعم <code translate="no">TEXT_MATCH</code> و <code translate="no">TEXT_MATCH_FUZZY</code> و <code translate="no">PHRASE_MATCH</code> سوى حقول <code translate="no">VARCHAR</code> و <code translate="no">TEXT</code> ؛ ويؤدي تطبيقها على حقل ARRAY إلى ظهور خطأ. ولا تؤثر <code translate="no">enable_analyzer</code> و <code translate="no">enable_match</code> على حقول ARRAY. للحصول على تفاصيل حول مطابقة النص، راجع <a href="/docs/ar/keyword-match.md">مطابقة النص</a>.</p></li>
 <li><p><strong>معالجة السلاسل</strong>: يتم تخزين قيم السلاسل في حقول Array كما هي، دون أي تحويل أو هروب دلالي. على سبيل المثال، يتم تخزين <code translate="no">'a&quot;b'</code> و <code translate="no">&quot;a'b&quot;</code> و <code translate="no">'a\'b'</code> و <code translate="no">&quot;a\&quot;b&quot;</code> كما تم إدخالها، بينما يُعتبر كل من <code translate="no">'a'b'</code> و <code translate="no">&quot;a&quot;b&quot;</code> قيمتين غير صالحتين.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">إضافة حقل ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
@@ -67,15 +68,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لاستخدام حقول ARRAY في مجموعات Milvus، قم بتعريف نوع الحقل ذي الصلة عند إنشاء مخطط المجموعة. تتضمن هذه العملية ما يلي:</p>
+    </button></h2><p>لإضافة حقل ARRAY إلى مخطط المجموعة، قم بتعيين المعلمات التالية:</p>
 <ol>
-<li><p>تعيين المعلمة « <code translate="no">datatype</code> » إلى نوع بيانات المصفوفة المدعوم، <code translate="no">ARRAY</code>.</p></li>
-<li><p>استخدام المعلمة <code translate="no">element_type</code> لتحديد نوع بيانات العناصر في المصفوفة. يجب أن تكون جميع العناصر في نفس المصفوفة من نفس نوع البيانات.</p></li>
-<li><p>استخدام المعلمة <code translate="no">max_capacity</code> لتحديد السعة القصوى للمصفوفة، أي الحد الأقصى لعدد العناصر التي يمكن أن تحتوي عليها.</p></li>
+<li><p>اضبط نوع بيانات الحقل على « <code translate="no">ARRAY</code> ».</p></li>
+<li><p>اضبط " <code translate="no">element_type</code> " على نوع البيانات المشترك للعناصر.</p></li>
+<li><p>اضبط <code translate="no">max_capacity</code> على الحد الأقصى لعدد العناصر.</p></li>
 </ol>
 <p>فيما يلي كيفية تعريف مخطط مجموعة يتضمن حقول ARRAY:</p>
 <div class="alert note">
-<p>إذا قمت بتعيين <code translate="no">enable_dynamic_field=True</code> عند تعريف المخطط، فإن Milvus يسمح لك بإدراج حقول قياسية لم يتم تعريفها مسبقًا. ومع ذلك، قد يؤدي هذا إلى زيادة تعقيد الاستعلامات والإدارة، مما قد يؤثر على الأداء. لمزيد من المعلومات، راجع <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
+<p>لإدراج حقول غير محددة في المخطط، قم بتمكين <a href="/docs/ar/enable-dynamic-field.md">الحقل الديناميكي</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -360,7 +361,7 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
     ]
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-index-params" class="common-anchor-header">تعيين معلمات الفهرسة<button data-href="#Set-index-params" class="anchor-icon" translate="no">
+<h2 id="Set-index-params" class="common-anchor-header">تعيين معلمات الفهرس<button data-href="#Set-index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -375,8 +376,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تساعد الفهرسة في تحسين أداء البحث والاستعلام. في مجموعات Milvus، تكون الفهرسة إلزامية للحقول المتجهة، لكنها اختيارية للحقول القياسية.</p>
-<p>يُنشئ المثال التالي فهارس على الحقل المتجه <code translate="no">embedding</code> والحقل ARRAY <code translate="no">tags</code> ، وكلاهما يستخدم نوع الفهرس <code translate="no">AUTOINDEX</code>. باستخدام هذا النوع، يختار Milvus تلقائيًا الفهرس الأنسب بناءً على نوع البيانات. يمكنك أيضًا تخصيص نوع الفهرس والمعلمات لكل حقل. لمزيد من التفاصيل، راجع <a href="/docs/ar/index-explained.md">شرح الفهرس</a>.</p>
+    </button></h2><p>تتطلب الحقول المتجهة وجود فهارس؛ أما الفهارس القياسية فهي اختيارية. يطلب هذا المثال <code translate="no">AUTOINDEX</code> على <code translate="no">embedding</code> و <code translate="no">tags</code>. للاطلاع على خيارات فهرس ARRAY الصريحة ودعم التصفية، راجع <a href="#Array-index-support">دعم فهرس Array</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>لا تدعم الفهارس القياسية، بما في ذلك <code translate="no">AUTOINDEX</code> ، الحقول المتكررة من نوع ARRAY أو المصفوفات التي تحتوي على عناصر قابلة للقيمة null. راجع <a href="/docs/ar/array_data_type.md#Array-index-support">دعم فهرس المصفوفات</a> لمعرفة المزيد عن عوامل التصفية الخاصة بالمصفوفات العادية، و" <a href="/docs/ar/index-structarray-fields.md#Create-scalar-indexes">فهرسة حقول StructArray</a> " لمعرفة قواعد الحقول الفرعية.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -486,6 +491,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>دعم فهرسة المصفوفات: أنواع الفهارس والمرشحات المعجلة</strong></summary></p>
+<p>تقوم الفهارس القياسية في حقل ARRAY العادي بفهرسة عناصره. اختر من بين أنواع الفهارس الصريحة التالية:</p>
+<table>
+<thead>
+<tr><th>نوع العنصر</th><th>أنواع الفهرس الصريحة</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>، <code translate="no">INT8</code> ، <code translate="no">INT16</code> ، <code translate="no">INT32</code> ، <code translate="no">INT64</code> ، <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>، <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>، <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>يمكنك أيضًا طلب <code translate="no">AUTOINDEX</code> ؛ راجع " <a href="/docs/ar/scalar_index.md#AUTOINDEX-behavior">الفهرس القياسي</a> " للاطلاع على اختيارات ARRAY الافتراضية.</p>
+<p>يمكن للفلاتر التالية استخدام مؤشرات المصفوفات المؤهلة:</p>
+<table>
+<thead>
+<tr><th>المرشح</th><th>سلوك الفهرس</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>، <code translate="no">ARRAY_CONTAINS_ANY</code> ، <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>، أو <code translate="no">BITMAP</code> ، أو أي اختيار تلقائي مؤهل يمكنه البحث عن العناصر بغض النظر عن موضعها.</td></tr>
+<tr><td><code translate="no">==</code> للمصفوفة بأكملها أو <code translate="no">!=</code> على مصفوفات من نوع Boolean أو integer أو VARCHAR</td><td><code translate="no">INVERTED</code> يمكنها العثور على المرشحين، ثم التحقق من المصفوفات الأصلية للتأكد من الترتيب والطول. لا يستخدم الأمر <code translate="no">BITMAP</code> مسار المرشحين هذا.</td></tr>
+<tr><td>مقارنات المصفوفة بأكملها على مصفوفات الأرقام العائمة</td><td>يتم اللجوء إلى المسح.</td></tr>
+<tr><td>الوصول إلى العناصر، مثل <code translate="no">tags[0]</code> ، أو طول المصفوفة</td><td>لا توفر فهرسة عضوية العناصر البحث في الفهرس لهذه العمليات.</td></tr>
+</tbody>
+</table>
+<p>للاطلاع على صيغة التعبير، راجع " <a href="/docs/ar/array-operators.md">مشغلات ARRAY</a>".</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">إنشاء مجموعة<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -501,7 +533,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد تحديد المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول ARRAY.</p>
+    </button></h2><p>بمجرد تعريف المخطط والفهرس، قم بإنشاء مجموعة تتضمن حقول ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1107,7 +1139,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بالإضافة إلى التصفية الأساسية للحقول القياسية، يمكنك الجمع بين عمليات البحث عن التشابه المتجهي وفلاتر الحقول القياسية. على سبيل المثال، يوضح الكود التالي كيفية إضافة فلتر حقل قياسي إلى عملية بحث متجهي:</p>
+    </button></h2><p>استخدم مرشحات ARRAY في البحث المتجه لتقييد الكيانات المؤهلة:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1270,4 +1302,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>بالإضافة إلى ذلك، يدعم Milvus عوامل تصفية المصفوفات المتقدمة مثل <code translate="no">ARRAY_CONTAINS</code> و <code translate="no">ARRAY_CONTAINS_ALL</code> و <code translate="no">ARRAY_CONTAINS_ANY</code> و <code translate="no">ARRAY_LENGTH</code> لتعزيز قدرات الاستعلام بشكل أكبر. لمزيد من التفاصيل، راجع <a href="/docs/ar/array-operators.md">عوامل ARRAY</a>.</p>
+<p>بالنسبة لمرشحات الاحتواء والطول، راجع <a href="/docs/ar/array-operators.md">عوامل ARRAY</a>.</p>

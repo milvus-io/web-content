@@ -83,7 +83,7 @@ beta: Milvus Backup 0.6.x
 <p>Le port par défaut est le 8080. Pour choisir un autre port, utilisez <code translate="no">-p</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>N'exécutez qu'une seule de ces commandes pour un service donné. Les exemples ci-dessous utilisent le port 8080 ; modifiez leurs URL si vous avez sélectionné un autre port. L'interface Swagger UI est disponible à l'adresse <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
+<p>N'exécutez qu'une seule de ces commandes pour un service donné. Les exemples ci-dessous utilisent le port 8080 ; modifiez leurs URL si vous avez sélectionné un autre port. Swagger UI est accessible à l'adresse <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
 <p>Laissez le service en cours d’exécution pendant l’interrogation des tâches. Les identifiants de tâche et la progression en temps réel sont associés au processus du service ; la sauvegarde persistante reste dans le stockage d’objets une fois le processus arrêté.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Préparation des données<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -146,8 +146,8 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> renvoie des métadonnées au format JSON, y compris <code translate="no">collection_backups</code>; cette commande <strong>ne</strong> télécharge <strong>pas</strong> les fichiers de sauvegarde. Pour une sauvegarde créée par un autre processus, une requête par nom uniquement peut renvoyer des métadonnées sans afficher la progression en temps réel de la tâche. Utilisez l’ID de tâche issu de la réponse de création du service actuel lorsque vous surveillez une sauvegarde en cours.</p>
-<p>Le format par défaut est <code translate="no">auto</code>, qui sélectionne un instantané sur Milvus 3.0. Pour demander explicitement le journal binaire (binlog), ajoutez <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> au corps de la requête de création. Les préréglages de la CLI <code translate="no">--for</code> ne constituent pas un champ de requête HTTP.</p>
+<p><code translate="no">get_backup</code> renvoie des métadonnées au format JSON, y compris <code translate="no">collection_backups</code>; cette commande <strong>ne</strong> télécharge <strong>pas</strong> les fichiers de sauvegarde. Pour une sauvegarde créée par un autre processus, une requête portant uniquement sur le nom peut renvoyer des métadonnées sans indiquer la progression en temps réel de la tâche. Utilisez l’ID de la tâche issu de la réponse de création du service actuel lorsque vous surveillez une sauvegarde en cours.</p>
+<p>Le format par défaut est <code translate="no">auto</code>, qui sélectionne un instantané sur Milvus 3.0. Pour demander explicitement un journal binaire (binlog), ajoutez <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> au corps de la requête de création. Les préréglages de la CLI <code translate="no">--for</code> ne constituent pas un champ de requête HTTP.</p>
 <p>Pour conserver ou déplacer la sauvegarde, copiez l’intégralité du répertoire dans le stockage objet. Consultez le <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">guide de transfert de la version 0.6.0</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Restaurer les données<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -174,7 +174,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
     &quot;collection_suffix&quot;: &quot;_bak&quot;
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Le champ HTTP « <code translate="no">collection_names</code> » sélectionne les noms <strong>dans la sauvegarde</strong>, avant l’application du suffixe. Cette requête sélectionne « <code translate="no">coll</code> » et crée « <code translate="no">coll_bak</code> ». L’option « <code translate="no">--filter</code> » de l’interface CLI, en revanche, fait correspondre les noms cibles après le renommage ; ne remplacez pas « <code translate="no">coll_bak</code> » dans ce champ HTTP.</p>
+<p>Le champ HTTP « <code translate="no">collection_names</code> » sélectionne les noms <strong>dans la sauvegarde</strong>, avant l’application du suffixe. Cette requête sélectionne « <code translate="no">coll</code> » et crée « <code translate="no">coll_bak</code> ». L’option « <code translate="no">--filter</code> » de l’interface CLI, quant à elle, fait correspondre les noms cibles après le renommage ; ne remplacez pas « <code translate="no">coll_bak</code> » dans ce champ HTTP.</p>
 <p>Copiez <code translate="no">data.id</code> à partir de la réponse de restauration et interrogez la tâche :</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>

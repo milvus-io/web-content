@@ -3,9 +3,9 @@ id: tei-ranker.md
 title: TEI RankerCompatible with Milvus 2.6.x
 summary: >-
   TEI Ranker использует сервис Text Embedding Inference (TEI) от Hugging Face
-  для повышения релевантности поиска путем семантического ранжирования. Он
-  представляет собой продвинутый подход к упорядочиванию результатов поиска,
-  выходящий за рамки традиционного векторного сходства.
+  для повышения релевантности поиска за счет семантического переранжирования.
+  Это передовой подход к упорядочиванию результатов поиска, выходящий за рамки
+  традиционного сравнения векторного сходства.
 beta: Milvus 2.6.x
 ---
 <h1 id="TEI-Ranker" class="common-anchor-header">TEI Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#TEI-Ranker" class="anchor-icon" translate="no">
@@ -23,8 +23,8 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TEI Ranker использует сервис <a href="https://huggingface.co/docs/text-embeddings-inference/index">Text Embedding Inference (TEI)</a> от Hugging Face для повышения релевантности поиска путем семантического ранжирования. Он представляет собой продвинутый подход к упорядочиванию результатов поиска, выходящий за рамки традиционного векторного сходства.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>TEI Ranker использует сервис <a href="https://huggingface.co/docs/text-embeddings-inference/index">Text Embedding Inference (TEI)</a> от Hugging Face для повышения релевантности поиска за счет семантического переранжирования. Это передовой подход к упорядочиванию результатов поиска, выходящий за рамки традиционного сравнения векторного сходства.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,12 +39,12 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Прежде чем внедрять TEI Ranker в Milvus, убедитесь, что у вас есть:</p>
+    </button></h2><p>Перед внедрением TEI Ranker в Milvus убедитесь, что у вас есть:</p>
 <ul>
-<li><p>Коллекция Milvus с полем <code translate="no">VARCHAR</code>, содержащим текст, подлежащий повторному ранжированию.</p></li>
-<li><p>работающая служба TEI с возможностью ранжирования. Подробные инструкции по настройке службы TEI см. в <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">официальной документации TEI</a>.</p></li>
+<li><p>Коллекция Milvus с полем « <code translate="no">VARCHAR</code> », содержащим текст, подлежащий переранжированию</p></li>
+<li><p>Работающий сервис TEI с возможностью переранжирования. Подробные инструкции по настройке сервиса TEI см. в <a href="https://huggingface.co/docs/text-embeddings-inference/en/quick_tour">официальной документации TEI</a>.</p></li>
 </ul>
-<h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Создание функции ранжирования TEI<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
+<h2 id="Create-a-TEI-ranker-function" class="common-anchor-header">Создание функции TEI Ranker<button data-href="#Create-a-TEI-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,9 +59,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы использовать TEI Ranker в своем приложении Milvus, создайте объект Function, который определяет, как должно работать повторное ранжирование. Эта функция будет передаваться в поисковые операции Milvus для улучшения ранжирования результатов.</p>
+    </button></h2><p>Чтобы использовать TEI Ranker в вашем приложении Milvus, создайте объект Function, определяющий, как должна работать переранжировка. Эта функция будет передаваться в поисковые операции Milvus для улучшения ранжирования результатов.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -110,11 +115,88 @@ searchWithRanker(scientists, ranker);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;tei_semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;tei&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;renewable energy developments&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://localhost:8080&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;max_client_batch_size&quot;</span>, <span class="hljs-number">32</span>).
+    WithParam(<span class="hljs-string">&quot;truncate&quot;</span>, <span class="hljs-literal">true</span>).
+    WithParam(<span class="hljs-string">&quot;truncation_direction&quot;</span>, <span class="hljs-string">&quot;Right&quot;</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">Специфические параметры ранжировщика TEI<button data-href="#TEI-ranker-specific-parameters" class="anchor-icon" translate="no">
+<h3 id="TEI-ranker-specific-parameters" class="common-anchor-header">Параметры, специфичные для рангера TEI<button data-href="#TEI-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,59 +211,59 @@ searchWithRanker(scientists, ranker);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Следующие параметры специфичны для ранжировщика TEI:</p>
+    </button></h3><p>Следующие параметры являются специфическими для ранжера TEI:</p>
 <table>
    <tr>
      <th><p>Параметр</p></th>
-     <th><p>Требуемый?</p></th>
+     <th><p>Обязателен?</p></th>
      <th><p>Описание</p></th>
      <th><p>Значение / Пример</p></th>
    </tr>
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Должно быть установлено значение <code translate="no">"model"</code>, чтобы включить повторное ранжирование моделей.</p></td>
+     <td><p>Должно быть установлено в значение « <code translate="no">"model"</code> », чтобы включить переранжирование моделей.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Поставщик услуг модели, который будет использоваться для повторного ранжирования.</p></td>
+     <td><p>Поставщик услуг модели, который будет использоваться для переранжирования.</p></td>
      <td><p><code translate="no">"tei"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Да</p></td>
-     <td><p>Список строк запросов, используемых моделью ранжирования для расчета баллов релевантности. Количество строк запросов должно точно соответствовать количеству запросов в поисковой операции (даже при использовании векторов запросов вместо текста), иначе будет выдано сообщение об ошибке.</p></td>
-     <td><p><em>["поисковый запрос"].</em></p></td>
+     <td><p>Список строк запроса, используемых моделью переранжирования для расчёта оценок релевантности. Количество строк запроса должно точно соответствовать количеству запросов в вашей операции поиска (даже при использовании векторов запросов вместо текста), в противном случае будет выведено сообщение об ошибке.</p></td>
+     <td><p><em>["поисковый запрос"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">endpoint</code></p></td>
      <td><p>Да</p></td>
-     <td><p>URL-адрес вашего сервиса TEI.</p></td>
+     <td><p>URL вашего сервиса TEI.</p></td>
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Поскольку службы моделей могут обрабатывать не все данные сразу, здесь задается размер пакета для обращения к службе моделей при нескольких запросах.</p></td>
+     <td><p>Поскольку сервисы модели могут не обрабатывать все данные за один раз, этот параметр задаёт размер пакета для доступа к сервису модели в нескольких запросах.</p></td>
      <td><p><code translate="no">32</code> (по умолчанию)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">truncate</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Нужно ли усекать вводимые данные, превышающие максимальную длину последовательности. Если <code translate="no">False</code>, то длинные входы вызывают ошибки.</p></td>
+     <td><p>Укажите, следует ли усекать входные данные, превышающие максимальную длину последовательности. Если установлено значение « <code translate="no">False</code> », длинные входные данные приводят к возникновению ошибок.</p></td>
      <td><p><code translate="no">True</code> или <code translate="no">False</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">truncation_direction</code></p></td>
      <td><p>Нет</p></td>
-     <td><p>Направление усечения, если входные данные слишком длинные:</p><ul><li><p><code translate="no">"Right"</code> (по умолчанию):  Токены удаляются из конца последовательности до тех пор, пока не будет достигнут максимальный поддерживаемый размер.</p></li><li><p><code translate="no">"Left"</code>: Токены удаляются из начала последовательности.</p></li></ul></td>
+     <td><p>Направление усечения, если входные данные слишком длинные:</p><ul><li><p><code translate="no">"Right"</code> (по умолчанию):  Токены удаляются с конца последовательности до тех пор, пока не будет достигнут максимально поддерживаемый размер.</p></li><li><p><code translate="no">"Left"</code>: Токены удаляются с начала последовательности.</p></li></ul></td>
      <td><p><code translate="no">"Right"</code> или <code translate="no">"Left"</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Общие параметры, общие для всех ранжировщиков моделей (например, <code translate="no">provider</code>, <code translate="no">queries</code>), см. в разделе <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">Создание ранжировщика моделей</a>.</p>
+<p>Что касается общих параметров, общих для всех ранжеров моделей (например, <code translate="no">provider</code>, <code translate="no">queries</code>), см. раздел <a href="/docs/ru/model-ranker-overview.md#Create-a-model-ranker">«Создание ранжера моделей</a>».</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Применение к стандартному векторному поиску<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -200,7 +282,12 @@ searchWithRanker(scientists, ranker);
       </svg>
     </button></h2><p>Чтобы применить TEI Ranker к стандартному векторному поиску:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -232,7 +319,67 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">5</span>,           <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;tei_semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;tei&quot;,
+        &quot;queries&quot;: [
+            &quot;renewable energy developments&quot;
+        ],
+        &quot;endpoint&quot;: &quot;http://localhost:8080&quot;,
+        &quot;max_client_batch_size&quot;: 32,
+        &quot;truncate&quot;: true,
+        &quot;truncation_direction&quot;: &quot;Right&quot;
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 5,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

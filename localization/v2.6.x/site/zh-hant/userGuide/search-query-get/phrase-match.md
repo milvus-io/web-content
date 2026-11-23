@@ -22,7 +22,7 @@ beta: Milvus 2.5.17+
         ></path>
       </svg>
     </button></h1><p>短語匹配可讓您搜尋包含查詢詞彙作為精確短語的文件。預設情況下，這些詞彙必須以相同的順序出現，且彼此緊鄰。 例如，查詢<strong>「robotics machine learning」</strong>將匹配如<em>「…典型的機器人學機器學習模型…」</em>這類文字，其中<strong>「robotics」</strong>、<strong>「machine」</strong>和<strong>「learning」</strong>這三個詞依序出現，且之間沒有其他詞彙。</p>
-<p>然而，在實際情境中，嚴格的短語匹配可能過於僵化。您可能希望匹配類似<em>「…在機器人學中廣泛採用的機器學習模型…」</em>這類文字<em>。</em>在此情況下，雖然包含相同的關鍵字，但這些關鍵字並非緊鄰出現，亦非依原始順序排列。為解決此問題，短語匹配支援「<code translate="no">slop</code> 」參數，藉此增加靈活性。<code translate="no">slop</code> 的數值定義了短語中各詞語之間允許的位置偏移量。例如，當<code translate="no">slop</code> 設為 1 時，查詢<strong>「machine learning」</strong>即可匹配如<em>「…machine deep learning…」</em>這類文字，其中一個詞（<strong>「deep」</strong>）將原始詞語分隔開來。</p>
+<p>然而，在實際情境中，嚴格的短語匹配可能過於僵化。您可能希望匹配類似<em>「…在機器人學中廣泛採用的機器學習模型…」</em>這類文字<em>。</em>在此情況下，雖然包含相同的關鍵字，但這些關鍵字並非緊鄰出現，亦非按照原始順序排列。為解決此問題，短語匹配支援「<code translate="no">slop</code> 」參數，藉此增加靈活性。<code translate="no">slop</code> 的數值定義了短語中各詞語之間允許的位置偏移量。例如，當<code translate="no">slop</code> 設為 1 時，查詢<strong>「machine learning」</strong>即可匹配如<em>「…machine deep learning…」</em>這類文字，其中一個詞（<strong>「deep」</strong>）將原始詞語分隔開來。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +48,7 @@ beta: Milvus 2.5.17+
 <ol>
 <li><p><strong>文件分詞</strong>：當您將文件導入 Milvus 時，系統會使用分析器將文字分割為分詞（單一單字或詞彙），並為每個分詞記錄其位置資訊。 例如<strong>，doc_1</strong>被分詞為<strong>[“machine” (pos=0)、“learning” (pos=1)、“boosts” (pos=2)、“efficiency” (pos=3)]</strong>。有關分析器的更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器概覽》</a>。</p></li>
 <li><p><strong>倒排索引建立</strong>：Milvus 會建立一個倒排索引，將每個詞元映射至其出現的文件，以及該詞元在這些文件中的位置。</p></li>
-<li><p><strong>短語匹配</strong>：當執行短語查詢時，Milvus 會從倒排索引中查詢每個詞元，並檢查其位置，以確定它們是否以正確的順序和相鄰度出現。<code translate="no">slop</code> 參數控制匹配詞元之間允許的最大位置數：</p>
+<li><p><strong>短語匹配</strong>：當執行短語查詢時，Milvus 會從倒排索引中查找每個詞元，並檢查其位置，以確定它們是否以正確的順序和相鄰度出現。<code translate="no">slop</code> 參數控制匹配詞元之間允許的最大位置數：</p>
 <ul>
 <li><p><strong>slop = 0</strong>表示詞元必須<strong>以完全相同的順序</strong>出現<strong>，且緊鄰</strong>（即中間不得有額外單字）。</p>
 <ul>
@@ -134,7 +134,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>短語匹配的準確度在很大程度上取決於用於將文字資料分詞的分析器。不同的分析器適用於不同的語言和文字格式，並會影響分詞結果及位置準確度。針對您的特定使用情境選擇合適的分析器，將能優化短語匹配的結果。</p>
-<p>預設情況下，Milvus 會使用標準分析器，該分析器會根據空白字元和標點符號對文字進行分詞，移除長度超過 40 個字元的詞元，並將文字轉換為小寫。預設使用時無需額外參數。詳情請參閱「<a href="/docs/zh-hant/v2.6.x/standard-analyzer.md">標準分析器</a>」。</p>
+<p>預設情況下，Milvus 會使用標準分析器，該分析器會根據空白字元和標點符號將文字進行分詞，並將文字轉換為小寫。預設使用時無需額外參數。詳情請參閱「<a href="/docs/zh-hant/v2.6.x/standard-analyzer.md">標準分析器</a>」。</p>
 <p>若您的應用程式需要特定的分析器，請使用 `<code translate="no">analyzer_params</code> ` 參數進行設定。例如，以下說明如何為英文文本的短語比對設定 `<code translate="no">english</code> ` 分析器：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -151,7 +151,7 @@ schema.add_field(
     enable_match=<span class="hljs-literal">True</span>                  <span class="hljs-comment"># Enables inverted indexing for phrase matching</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 支援多種針對不同語言和用例量身打造的分析器。如需詳細資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器概覽</a>》。</p>
+<p>Milvus 支援多種針對不同語言及使用情境量身打造的分析器。如需詳細資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md">分析器概覽</a>》。</p>
 <h2 id="Use-phrase-match" class="common-anchor-header">使用短語匹配<button data-href="#Use-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -195,7 +195,7 @@ schema.add_field(
 <li><p><code translate="no">slop</code> (可選)<strong>：</strong>指定匹配標記中允許的最大位置數的整數。</p>
 <ul>
 <li><p><code translate="no">0</code> (預設)：僅匹配完全相符的短語。範例：針對<strong>「machine learning」</strong>的篩選器將精確匹配<strong>「machine learning」</strong>，但不會匹配<strong>「machine boosts learning」</strong>或<strong>「learning machine」。</strong></p></li>
-<li><p><code translate="no">1</code>: 允許輕微變體，例如多出一個詞彙或位置的輕微變動。範例：針對<strong>「machine learning」</strong>的篩選器將匹配<strong>「machine boosts learning」</strong>（<strong>「machine」</strong>與<strong>「learning」</strong>之間有一個詞彙），但不會匹配<strong>「learning machine」</strong>（詞彙順序顛倒）。</p></li>
+<li><p><code translate="no">1</code>: 允許輕微變體，例如多一個詞彙或位置的輕微變動。範例：搜尋<strong>「machine learning」</strong>的篩選器會匹配<strong>「machine boosts learning」</strong>（<strong>「machine」</strong>與<strong>「learning」</strong>之間有一個詞彙），但不會匹配<strong>「learning machine」</strong>（詞彙順序顛倒）。</p></li>
 <li><p><code translate="no">2</code>：允許更大的彈性，包括詞彙順序顛倒或中間最多有兩個詞元。範例：篩選條件<strong>「machine learning」</strong>將匹配<strong>「learning machine」</strong>（詞彙順序顛倒）或<strong>「machine quickly boosts learning」</strong>（<strong>「machine」</strong>與<strong>「learning」</strong>之間有兩個詞元）。</p></li>
 </ul></li>
 </ul>
@@ -226,7 +226,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>2</p></td>
-     <td><p>「學習基於機器的方法對於現代人工智慧的進展至關重要」</p></td>
+     <td><p>「學習基於機器的方法對現代人工智慧的進展至關重要」</p></td>
    </tr>
    <tr>
      <td><p>3</p></td>
@@ -294,8 +294,8 @@ result = client.query(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在搜尋操作中<strong>，PHRASE_MATCH</strong>用於在套用向量相似度排序之前篩選文件。此兩步驟方法首先透過文字比對縮小候選集範圍，然後根據向量嵌入重新對這些候選項目進行排序。</p>
-<h4 id="Example-slop--1" class="common-anchor-header">範例：slop = 1</h4><p>在此，我們允許 1 的容錯度。篩選器將應用於包含短語<strong>「learning machine」</strong>且具有輕微彈性的文件。</p>
+    </button></h3><p>在搜尋操作中<strong>，PHRASE_MATCH</strong>用於在套用向量相似度排序之前過濾文件。此兩步驟方法首先透過文字比對縮小候選集，然後根據向量嵌入重新對這些候選項目進行排序。</p>
+<h4 id="Example-slop--1" class="common-anchor-header">範例：slop = 1</h4><p>在此，我們允許 1 的容錯度。此篩選器會應用於包含短語<strong>「learning machine」</strong>且具有些微彈性的文件。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example: Filter documents containing &quot;learning machine&quot; with slop=1</span>
 filter_slop1 = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;learning machine&#x27;, 1)&quot;</span>
 
@@ -410,7 +410,7 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>為某個欄位啟用短語匹配功能會觸發建立倒排索引，這會消耗儲存資源。在決定是否啟用此功能時，請考量其對儲存空間的影響，因為此影響會因文字大小、唯一詞元以及所使用的分析器而異。</p></li>
+<li><p>為某個欄位啟用短語匹配功能會觸發建立倒排索引，這會消耗儲存資源。在決定是否啟用此功能時，請考量其對儲存空間的影響，因為此影響會因文字大小、獨特詞元以及所使用的分析器而異。</p></li>
 <li><p>一旦在資料結構中定義了分析器，其設定將對該集合永久生效。若您認為其他分析器更能滿足需求，可考慮刪除現有集合，並使用所需的分析器配置建立新的集合。</p></li>
 <li><p>短語匹配的效能取決於文字的分詞方式。在將分析器套用至整個集合之前，請使用 `<code translate="no">run_analyzer</code> ` 方法檢視分詞結果。如需更多資訊，請參閱《<a href="/docs/zh-hant/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">分析器概覽</a>》。</p></li>
 <li><p><code translate="no">filter</code> 表達式中的轉義規則：</p>

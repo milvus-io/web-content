@@ -20,7 +20,7 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h1><p>若要將<strong>Milvus Backup 工具</strong>從 0.5.x 升級至 0.6.x，請參閱本指南。以下程序以 0.6.0 作為已驗證的目標版本。此操作不會升級您的 Milvus 伺服器。 若您打算繼續使用 0.5.x 版本，請繼續參照<a href="/docs/zh-hant/milvus_backup_cli.md">0.5.x</a>的<a href="/docs/zh-hant/milvus_backup_cli.md">CLI</a>或<a href="/docs/zh-hant/milvus_backup_api.md">API</a>指南。若為新安裝，請使用<a href="/docs/zh-hant/milvus_backup_0_6_cli.md">CLI 指南</a>。</p>
-<p>V1 YAML 設定檔仍可透過自動轉換載入。然而，0.6.0 版本將拒絕已廢棄的 CLI 參數，且 Milvus 3.0 中的預設備份格式亦已變更。在切換排程工作或服務之前，請務必檢視設定檔與指令。</p>
+<p>V1 YAML 設定檔仍可透過自動轉換載入。然而，0.6.0 版本將拒絕已廢棄的 CLI 參數，且 Milvus 3.0 中的預設備份格式亦有所變更。在切換排程工作或服務之前，請務必檢視設定檔與指令。</p>
 <h2 id="Check-the-starting-point" class="common-anchor-header">檢查起始點<button data-href="#Check-the-starting-point" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>記錄您的備份版本、Milvus 來源與目標版本、配置檔案、環境變數覆寫設定、備份位置，以及腳本或 API 服務所使用的指令。請查閱這些伺服器版本的<a href="/docs/zh-hant/milvus_backup_overview.md#Compatibility-matrix">相容性資訊</a>。</p>
+    </button></h2><p>記錄您的備份版本、Milvus 來源與目標版本、設定檔、環境變數覆寫設定、備份位置，以及腳本或 API 服務所使用的指令。請查閱這些伺服器版本的<a href="/docs/zh-hant/milvus_backup_overview.md#Compatibility-matrix">相容性資訊</a>。</p>
 <p>在驗證新安裝時，請保留原始的二進位檔、設定檔及現有備份目錄。請透過<a href="/docs/zh-hant/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">「取得 Milvus Backup</a>」將 0.6.0 下載至獨立目錄。以下所有指令均從該目錄執行，並呼叫 0.6.0 二進位檔。請將您的 v1 設定檔副本放置於<code translate="no">configs/backup-v1.yaml</code> 目錄中。</p>
 <h2 id="Migrate-the-configuration" class="common-anchor-header">遷移設定<button data-href="#Migrate-the-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -58,7 +58,7 @@ beta: Milvus Backup 0.6.x
 ./milvus-backup config show --config configs/backup-v2.yaml
 ./milvus-backup check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">--strict</code> 會拒絕無效的遷移後設定檔。若未指定<code translate="no">--output</code> ，該指令會將 v2 YAML 寫入標準輸出。請務必先檢查新檔案中的設定是否已正確轉換，再進行審閱與使用。</p>
+<p><code translate="no">--strict</code> 會拒絕無效的遷移後設定檔。若未指定<code translate="no">--output</code> ，該指令會將 v2 YAML 寫入標準輸出。請務必先檢查新檔案中的設定是否已正確轉換，確認無誤後再進行檢視與使用。</p>
 <table>
 <thead>
 <tr><th>v1 設定</th><th>v2 設定</th></tr>
@@ -114,7 +114,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup create --filter coll -n my_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>若還原篩選器未匹配任何項目，系統仍可成功退出而不建立集合。請務必檢查目標集合及其資料。HTTP API 的<code translate="no">collection_names</code> 仍會根據備份中的來源名稱進行篩選；請參閱<a href="/docs/zh-hant/milvus_backup_0_6_api.md#Restore-data">HTTP API 指南</a>。</p>
+<p>若還原篩選器未匹配任何項目，系統仍可成功退出而不建立集合。請務必檢查目標集合及其資料。HTTP API 的<code translate="no">collection_names</code> 仍會選取備份中的來源名稱；請參閱<a href="/docs/zh-hant/milvus_backup_0_6_api.md#Restore-data">HTTP API 指南</a>。</p>
 <h2 id="Choose-the-backup-behavior" class="common-anchor-header">選擇備份行為<button data-href="#Choose-the-backup-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -132,7 +132,7 @@ beta: Milvus Backup 0.6.x
       </svg>
     </button></h2><ul>
 <li>在受支援的 Milvus 2.x 伺服器上，<code translate="no">auto</code> 格式使用二進位日誌 (binlog)。升級備份功能無需遷移至 Milvus 3.0。</li>
-<li>在 Milvus 3.0 上，<code translate="no">auto</code> 會選用快照。官方的備份與還原支援自 Milvus 3.0.1 起提供。若要在建立備份時保留二進位日誌行為，請傳入<code translate="no">--format binlog</code> 。</li>
+<li>在 Milvus 3.0 上，<code translate="no">auto</code> 會選用快照模式。官方的備份與還原支援自 Milvus 3.0.1 起提供。若要在建立備份時保留二進位日誌行為，請傳入<code translate="no">--format binlog</code> 參數。</li>
 <li>V1 配置的相容性不會保留已移除的命令標誌，也不會覆寫新格式的預設值。</li>
 <li>用途預設值可設定格式及其他選項。例如，<code translate="no">--for archive</code> 會強制使用二進位日誌，即使同時提供了<code translate="no">--format snapshot</code> 參數亦然。請檢視<a href="/docs/zh-hant/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">格式與用途的選擇</a>。</li>
 <li>備份過程中會跳過外部集合。請檢查備份元資料，而非僅憑任務成功就認定所有集合均已包含在內。</li>
@@ -159,7 +159,7 @@ beta: Milvus Backup 0.6.x
 ./milvus-backup restore --filter coll_upgrade_check -n upgrade_check -s _upgrade_check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>確認備份中列有<code translate="no">coll</code> ，且還原後<code translate="no">coll_upgrade_check</code> 確實存在。如有需要，請建立其向量索引、載入該索引，並將還原後的資料與搜尋結果與記錄的基準值進行比對。在此測試期間，請保持來源資料不變。</p>
-<p>在使用新工具依賴某個現有備份之前，也請先測試一個具代表性的現有備份。以名為<code translate="no">legacy_backup</code> 且包含<code translate="no">coll</code> 的 0.5.16 版本備份為例，請使用獨立的目標名稱：</p>
+<p>在使用新工具依賴某個現有備份之前，也請先測試一個具代表性的現有備份。以名為<code translate="no">legacy_backup</code> 的 0.5.16 版本備份（其中包含<code translate="no">coll</code> ）為例，請使用獨立的目標名稱：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup get -n legacy_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_legacy_check -n legacy_backup -s _legacy_check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>

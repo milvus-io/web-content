@@ -43,12 +43,12 @@ summary: 本页介绍了在开始向Collection中批量插入数据之前，您�
   
  </span></p>
 <p>您应仔细检查数据，并据此设计目标Collection的Schema。</p>
-<p>以上图中的 JSON 数据为例，行列表中有两个实体，每行包含六个字段。Collection 模式有选择地包含了其中的四个：<strong>id</strong>、<strong>向量</strong>、<strong>scalar_1</strong> 和<strong>scalar_2</strong>。</p>
+<p>以上图中的 JSON 数据为例，行列表中有两个实体，每行包含六个字段。Schema 有选择地包含了其中的四个：<strong>id</strong>、<strong>向量</strong>、<strong>scalar_1</strong> 和<strong>scalar_2</strong>。</p>
 <p>设计Schema时还需考虑以下两点：</p>
 <ul>
 <li><p><strong>是否启用 AutoID</strong></p>
-<p><strong>id</strong>字段作为 Collection 的主键字段。若要使主键字段自动递增，可在 Schema 中启用<strong>AutoID</strong>。此时，应将源数据中各行的<strong>id</strong>字段排除在外。</p></li>
-<li><p><strong>是否启用Dynamic Field</strong></p>
+<p><strong>id</strong>字段作为 Collection 的主键字段。若要使主键字段自动递增，可在 Schema 中启用<strong>AutoID</strong>。此时，应将源数据中各行中的<strong>id</strong>字段排除在外。</p></li>
+<li><p><strong>是否启用 Dynamic Field</strong></p>
 <p>如果Schema启用了Dynamic Field，目标Collection还可以存储其预定义Schema中未包含的字段。<strong>$meta</strong>字段是一个保留的 JSON 字段，用于以键值对的形式存储 Dynamic Field 字段及其值。在上图中，<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>字段及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
 </ul>
 <p>以下代码展示了如何为上图所示的Collection设置Schema。</p>
@@ -56,11 +56,11 @@ summary: 本页介绍了在开始向Collection中批量插入数据之前，您�
 <p>如需了解更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 以及 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> SDK 参考文档。</p>
 </div>
 <div class="language-java">
-<p>如需了解更多信息，请参阅SDK 参考文档中的 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> SDK 参考文档中的相关内容。</p>
+<p>如需了解更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> SDK 参考文档中的相关内容。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -231,16 +231,16 @@ schema.verify()
 <tbody>
 <tr><td>JSON、JSONL</td><td>字段值是一个对象列表，每个 Struct 元素对应一个对象，键名即为子字段名称：<code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code> 。</td></tr>
 <tr><td>CSV</td><td>该单元格包含与 JSON 格式相同的 JSON 文本。为导入作业配置的<code translate="no">nullkey</code> 或 JSON<code translate="no">null</code> 表示 StructArray 值为空。</td></tr>
-<tr><td>Parquet</td><td>每个 StructArray 字段对应一列，类型为<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ，每个子字段对应一个 struct 子节点。标量子字段对应标量子节点，向量子字段对应其元素类型的列表（例如<code translate="no">list&lt;float32&gt;</code> ），而数组子字段（Milvus 3.0.6 及更高版本）对应<code translate="no">list&lt;T&gt;</code> 子节点。</td></tr>
-<tr><td>NumPy</td><td>不支持。NumPy 文件按顶级字段存储，每个顶级字段对应一个文件，且无法表示 StructArray 字段。对于包含 StructArray 字段的 Collection，请使用 JSON、CSV 或 Parquet 文件。</td></tr>
+<tr><td>Parquet</td><td>每个 StructArray 字段对应一列，类型为<code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ，每个子字段对应一个 struct 子节点。标量子字段对应标量子节点，向量字段对应其元素类型的列表（例如<code translate="no">list&lt;float32&gt;</code> ），而数组子字段（Milvus 3.0.6 及更高版本）对应<code translate="no">list&lt;T&gt;</code> 子节点。</td></tr>
+<tr><td>NumPy</td><td>不支持。NumPy 文件按顶级字段存储，每个顶级字段对应一个文件，且无法表示 StructArray 字段。对于包含 StructArray 字段的 Collections，请使用 JSON、CSV 或 Parquet 文件。</td></tr>
 </tbody>
 </table>
 <p>以下规则适用于所有受支持格式中的 StructArray 值：</p>
 <ul>
 <li><p>在每个 Struct 元素内部应使用子字段名称，而非路径（例如<code translate="no">chunks[text]</code> ）。名称为<code translate="no">chunks[text]</code> 的扁平列或键将被拒绝。</p></li>
-<li><p>Struct 元素本身不能为空，例如<code translate="no">[null, {...}]</code> 。只有当 StructArray 字段允许为空时，整个 StructArray 值才可为空。在 Milvus 3.0.6 之前，每个 Struct 元素必须提供所有子字段。</p></li>
+<li><p>Struct 元素本身不能为空，例如<code translate="no">[null, {...}]</code> 。只有当 StructArray 字段允许为空时，整个 StructArray 值才可为空。在 Milvus 3.0.6 之前，每个 Struct 元素都必须提供所有子字段。</p></li>
 <li><p>不属于 Collection 子字段的键或 Parquet 子节点（包括已删除的子字段）将被忽略。</p></li>
-<li><p>从 Milvus 3.0.6 开始，对于元素可为空的子字段，缺失的键或<code translate="no">null</code> 值将作为该 Struct 元素的空值进行导入，因此子字段添加之前写入的文件在导入时将不包含该子字段。 在其他任何位置出现的 `<code translate="no">null</code> ` 都会导致导入失败。对于数组子字段，当子字段允许时，`<code translate="no">null</code> ` 是一个空的内部数组，而内部数组中的 `<code translate="no">null</code> ` 是一个空的内部值。</p></li>
+<li><p>从 Milvus 3.0.6 开始，对于元素可为空的子字段，缺失的键或<code translate="no">null</code> 值在导入时将作为该 Struct 元素的空值处理，因此子字段添加之前生成的文件在导入时将不包含该子字段。 在其他任何位置出现的 `<code translate="no">null</code> ` 都会导致导入失败。对于数组子字段，当子字段允许时，`<code translate="no">null</code> ` 是一个空的内部数组，而内部数组中的 `<code translate="no">null</code> ` 是一个空的内部值。</p></li>
 <li><p>从 Milvus 3.0.6 开始，对于包含元素可为空子字段或标量数组子字段的 Collection，二进制日志导入（如备份还原）和快照源导入将被拒绝。</p></li>
 </ul>
 <p>pymilvus<a href="#Set-up-BulkWriter">BulkWriter</a>在所有受支持的格式中均支持上述 StructArray 结构，包括元素可为空的子字段和可为空的 StructArray 值。请在写入器的<code translate="no">add_row()</code> 调用中使用相同的行结构。</p>
@@ -281,10 +281,10 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><strong>LocalBulkWriter</strong>会将源数据集中的行依次追加，并将其提交到指定格式的本地文件中。</p>
+    </button></h3><p><strong>LocalBulkWriter</strong>会将源数据集中的行追加到指定格式的本地文件中，并将其提交。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -325,7 +325,7 @@ writer = LocalBulkWriter(
 <ul>
 <li>在 `<code translate="no">CollectionSchema()</code>` 中引用已创建的 Schema。</li>
 <li>在<code translate="no">withLocalPath()</code> 中设置输出目录。</li>
-<li>在<code translate="no">withFileType()</code> 中设置输出文件类型。</li>
+<li>在 `<code translate="no">withFileType()</code>` 中设置输出文件类型。</li>
 <li>如果您的数据集包含大量记录，建议您通过将 `<code translate="no">withChunkSize()</code> ` 设置为适当的值来对数据进行分段。</li>
 </ul>
 <p>有关参数设置的详细信息，请参阅 SDK 参考中的 LocalBulkWriter。</p>
@@ -347,8 +347,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>与将追加的数据提交到本地文件不同，<strong>RemoteBulkWriter</strong>会将数据提交到远程存储桶。因此，在创建<strong>RemoteBulkWriter</strong> 之前，应先设置一个<strong>ConnectParam</strong>对象。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -397,10 +397,10 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>准备好连接参数后，可在<strong>RemoteBulkWriter</strong>中按以下方式引用它：</p>
+<p>准备好连接参数后，可在<strong>RemoteBulkWriter</strong>中按如下方式引用它：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -430,7 +430,7 @@ writer = RemoteBulkWriter(
 <p>创建<strong>RemoteBulkWriter</strong>的参数与<strong>LocalBulkWriter</strong> 几乎完全相同，唯一区别在于 `<code translate="no">connect_param</code>`。有关参数设置的详细信息，请参阅 SDK 参考文档中的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a>和<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a>。</p>
 </div>
 <div class="language-java">
-<p>创建<strong>RemoteBulkWriter</strong>的参数与<strong>LocalBulkWriter</strong> 的参数几乎完全相同，唯一区别在于 `<code translate="no">StorageConnectParam</code>`。有关参数设置的详细信息，请参阅 SDK 参考文档中的 RemoteBulkWriter 和 StorageConnectParam。</p>
+<p>创建<strong>RemoteBulkWriter</strong>的参数与<strong>LocalBulkWriter</strong> 的参数基本相同，唯一区别在于 `<code translate="no">StorageConnectParam</code>`。有关参数设置的详细信息，请参阅 SDK 参考文档中的 RemoteBulkWriter 和 StorageConnectParam。</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">开始写入<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -455,8 +455,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>为便于演示，以下代码将随机生成的数据追加到数据集后。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -676,8 +676,8 @@ writer = RemoteBulkWriter(
 <p>要检查结果，您可以通过打印写入器的<code translate="no">getBatchFiles()</code> 方法来获取实际输出路径。</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
@@ -698,7 +698,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>BulkWriter</strong>会生成一个 UUID，使用该 UUID 在指定的输出目录中创建一个子文件夹，并将所有生成的文件放置在该子文件夹中。<a href="https://assets.zilliz.com/bulk_writer.zip">点击此处</a>下载已准备好的示例数据。</p>
+<p><strong>BulkWriter</strong>会生成一个 UUID，使用该 UUID 在指定的输出目录中创建一个子文件夹，并将所有生成的文件放置到该子文件夹中。<a href="https://assets.zilliz.com/bulk_writer.zip">点击此处</a>下载已准备好的示例数据。</p>
 <p>可能的文件夹结构如下：</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

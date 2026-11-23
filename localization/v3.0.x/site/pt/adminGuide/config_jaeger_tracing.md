@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este guia fornece instruções sobre como configurar o Jaeger para recolher traços para o Milvus.</p>
+    </button></h1><p>Este guia fornece instruções sobre como configurar o Jaeger para recolher rastreios para o Milvus.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,10 +38,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li>Você instalou as ferramentas necessárias, incluindo <a href="https://helm.sh/docs/intro/install/">Helm</a> e <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
-<li>O Cert-manager versão 1.6.1 ou superior deve estar instalado. Um guia de instalação pode ser encontrado <a href="https://cert-manager.io/v1.6-docs/installation/#default-static-install">aqui</a>.</li>
+<li>Já instalou as ferramentas necessárias, incluindo <a href="https://helm.sh/docs/intro/install/">o Helm</a> e <a href="https://kubernetes.io/docs/tasks/tools/">o Kubectl</a>.</li>
 </ul>
-<h2 id="Deply-Jaeger" class="common-anchor-header">Implantar o Jaeger<button data-href="#Deply-Jaeger" class="anchor-icon" translate="no">
+<h2 id="Deploy-Jaeger" class="common-anchor-header">Implementar o Jaeger<button data-href="#Deploy-Jaeger" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,8 +55,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Jaeger é uma plataforma de rastreamento distribuída lançada como código aberto pela <a href="http://uber.github.io/">Uber Technologies</a>.</p>
-<h3 id="1-Installing-the-Jaeger-Operator-on-Kubernetes" class="common-anchor-header">1. Instalando o operador do Jaeger no Kubernetes<button data-href="#1-Installing-the-Jaeger-Operator-on-Kubernetes" class="anchor-icon" translate="no">
+    </button></h2><p>O Jaeger é uma plataforma de rastreio distribuído lançada como código aberto pela <a href="http://uber.github.io/">Uber Technologies</a>.</p>
+<p>Este guia implementa o Jaeger v2 com o <a href="https://github.com/jaegertracing/helm-charts">gráfico Helm do Jaeger</a>. Por predefinição, o gráfico implementa o Jaeger com o modelo «tudo-em-um» e armazenamento na memória, o que é adequado para testes. Para outras formas de executar o Jaeger no Kubernetes, consulte <a href="https://www.jaegertracing.io/docs/2.23/deployment/kubernetes/">Implementação no Kubernetes</a>.</p>
+<h3 id="1-Install-Jaeger" class="common-anchor-header">1. Instalar o Jaeger<button data-href="#1-Install-Jaeger" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,17 +72,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para instalar o operador, execute:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create namespace observability</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability</span>
+    </button></h3><p>Instale o Jaeger no namespace onde instalar o Milvus. As configurações do Milvus na secção seguinte referem-se ao serviço Jaeger pelo seu nome abreviado, <code translate="no">jaeger</code>, e o Kubernetes resolve um nome de serviço sem namespace apenas dentro do namespace do pod que efetua a consulta.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add jaegertracing https://jaegertracing.github.io/helm-charts</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install jaeger jaegertracing/jaeger --version 4.19.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste ponto, deve haver uma implantação <code translate="no">jaeger-operator</code> disponível. Você pode visualizá-la executando o seguinte comando:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get deployment jaeger-operator -n observability</span>
-
-NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-jaeger-operator   1         1         1            1           48s
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Implantar o Jaeger<button data-href="#2-Deploy-Jaeger" class="anchor-icon" translate="no">
+<p>O ficheiro README do gráfico identifica-o como experimental e indica que podem ocorrer alterações significativas nas versões secundárias; por isso, o comando fixa a versão do gráfico. A versão 4.19.0 do gráfico implementa o Jaeger 2.23.0.</p>
+<h3 id="2-Check-the-Jaeger-pod" class="common-anchor-header">2. Verificar o pod do Jaeger<button data-href="#2-Check-the-Jaeger-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,22 +93,10 @@ jaeger-operator   1         1         1            1           48s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A maneira mais simples possível de criar uma instância do Jaeger é criando um arquivo YAML como o exemplo a seguir. Isso instalará a estratégia AllInOne padrão, que implanta a imagem <strong>all-in-one</strong> (combinando <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) em um único pod, usando <strong>o armazenamento na memória</strong> por padrão.</p>
-<p>Se você quiser armazenar traços por um longo tempo, consulte <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">jaegertracing.io/v1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Jaeger</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">jaeger</span>
+    </button></h3><p>Para verificar se o pod do Jaeger está a funcionar, execute o seguinte comando:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -l app.kubernetes.io/instance=jaeger,app.kubernetes.io/component=all-in-one</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>O arquivo YAML pode então ser usado com <code translate="no">kubectl</code>:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f simplest.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Em alguns segundos, uma nova instância do Jaeger tudo-em-um na memória estará disponível, adequada para demonstrações rápidas e fins de desenvolvimento. Para verificar as instâncias que foram criadas, liste os objectos jaeger:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get jaegers</span>
-
-NAME     STATUS    VERSION   STRATEGY   STORAGE   AGE
-jaeger   Running   1.62.0    allinone   memory    13s
-<button class="copy-code-btn"></button></code></pre>
+<p>O gráfico cria um serviço denominado <code translate="no">jaeger</code>. O serviço expõe o recetor gRPC do OTLP na porta <code translate="no">4317</code> e a interface de utilizador do Jaeger na porta <code translate="no">16686</code>.</p>
 <h2 id="Install-Milvus-with-Helm-Chart" class="common-anchor-header">Instalar o Milvus com o Helm Chart<button data-href="#Install-Milvus-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,24 +112,30 @@ jaeger   Running   1.62.0    allinone   memory    13s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pode instalar ou atualizar o Milvus com o Helm Chart com as seguintes definições:</p>
+    </button></h2><p>Para enviar traços do Milvus para o Jaeger através do OTLP, guarde as seguintes configurações num ficheiro denominado <code translate="no">values.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     trace:
-      exporter: jaeger
+      exporter: otlp
       sampleFraction: 1
-      jaeger:
-        url: &quot;http://jaeger-collector:14268/api/traces&quot;
+      otlp:
+        endpoint: &quot;jaeger:4317&quot;
+        method: grpc
+        secure: false
 </span><button class="copy-code-btn"></button></code></pre>
-<p>Para aplicar as configurações acima a uma nova implantação do Milvus, você pode executar o seguinte comando:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm</span>
+<p>Com estas configurações, o Milvus recolhe amostras de todas as solicitações (<code translate="no">sampleFraction: 1</code>) e exporta os traços através do OTLP gRPC sem TLS (<code translate="no">secure: false</code>) para a porta <code translate="no">4317</code> do serviço <code translate="no">jaeger</code>.</p>
+<p>Para aplicar as configurações acima a uma nova implementação do Milvus, execute os seguintes comandos:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade --install -f values.yaml my-release milvus/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade --install my-release zilliztech/milvus --version 5.0.22 -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para aplicar as definições acima a uma implementação Milvus existente, pode executar o seguinte comando:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release -f values.yaml milvus/milvus</span>
+<p>Para aplicar as configurações acima a uma implementação existente do Milvus, execute o seguinte comando:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --version &lt;current-chart-version&gt; --reset-then-reuse-values -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="View-Traces" class="common-anchor-header">Ver traços<button data-href="#View-Traces" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Este comando utiliza <code translate="no">--reset-then-reuse-values</code>, o que requer o Helm 3.14 ou posterior. Com esta opção, o Helm redefine os valores para os predefinidos da versão do gráfico definida em <code translate="no">--version</code>, aplica os valores da sua versão atual e, em seguida, aplica os valores de <code translate="no">-f</code>. Todos os valores em <code translate="no">values.yaml</code> substituem, portanto, os valores da sua versão atual, e a entrada <code translate="no">user.yaml</code> em <code translate="no">extraConfigFiles</code> é substituída na íntegra. Para encontrar <code translate="no">&lt;current-chart-version&gt;</code>, execute <code translate="no">helm list</code> e remova o prefixo <code translate="no">milvus-</code> do valor na coluna <code translate="no">CHART</code>. Se executar <code translate="no">helm upgrade</code> com <code translate="no">-f</code> ou <code translate="no">--set</code>, mas sem <code translate="no">--reset-then-reuse-values</code> ou <code translate="no">--reuse-values</code>, o Helm não mantém os valores que definiu no momento da instalação.</p>
+</div>
+<h2 id="View-Traces" class="common-anchor-header">Ver rastros<button data-href="#View-Traces" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,19 +150,20 @@ jaeger   Running   1.62.0    allinone   memory    13s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de ter implementado o Jaeger e o Milvus com o Helm Chart, foi ativado um ingresso por dfault. Pode ver o ingresso executando o seguinte comando:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get ingress</span>
-
-NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
-jaeger-query   &lt;none&gt;   *       192.168.122.34  80      14m
+    </button></h2><p>O serviço <code translate="no">jaeger</code> é do tipo <code translate="no">ClusterIP</code> e o chart não cria um ingress por predefinição. Para abrir a interface do utilizador do Jaeger a partir do seu computador local, redirecione a porta da interface do utilizador:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward svc/jaeger 16686:16686</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Quando o ingresso estiver disponível, você poderá acessar a interface do usuário do Jaeger navegando até <code translate="no">http://${ADDRESS}</code>. Substitua <code translate="no">${ADDRESS}</code> pelo endereço IP real do ingress.</p>
-<p>A seguinte captura de ecrã mostra a interface do utilizador do Jaeger com os vestígios do Milvus durante uma operação de pesquisa e uma operação de recolha de carga:</p>
-<p>
+<p>Em seguida, abra <code translate="no">http://localhost:16686</code> num navegador.</p>
+<p>A captura de ecrã seguinte mostra a interface do utilizador do Jaeger com os traços do Milvus durante uma operação de pesquisa e uma operação de recolha de carga:</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
-   </span> <span class="img-wrapper"> <span>Pedido de pesquisa de traços</span> </span></p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" /> 
+   <span>Pedido de pesquisa de rastreio</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
-   </span> <span class="img-wrapper"> <span>Pedido de recolha de carga de traços</span> </span></p>
+ </span></p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" /> 
+   <span>Rastreio de um pedido de recolha de carga</span>
+  
+ </span></p>

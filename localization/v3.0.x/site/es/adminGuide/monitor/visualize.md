@@ -2,7 +2,7 @@
 id: visualize.md
 title: Visualizar métricas
 related_key: 'monitor, alert'
-summary: Aprenda a visualizar las métricas de Milvus en Grafana.
+summary: Descubre cómo visualizar las métricas de Milvus en Grafana.
 ---
 <h1 id="Visualize-Milvus-Metrics-in-Grafana" class="common-anchor-header">Visualizar las métricas de Milvus en Grafana<button data-href="#Visualize-Milvus-Metrics-in-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,10 +19,10 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tema describe cómo visualizar las métricas de Milvus usando Grafana.</p>
-<p>Como se describe en la <a href="/docs/es/monitor.md">guía de monitoreo</a>, las métricas contienen información útil como cuánta memoria utiliza un componente específico de Milvus. El monitoreo de las métricas le ayuda a comprender mejor el rendimiento de Milvus y su estado de ejecución para que pueda ajustar la asignación de recursos a tiempo.</p>
-<p>La visualización es un gráfico que muestra el cambio del uso de recursos a través del tiempo, lo que le facilita ver y notar rápidamente los cambios en el uso de recursos, especialmente cuando ocurre un evento.</p>
-<p>Este tutorial utiliza Grafana, una plataforma de código abierto para el análisis de series temporales, para visualizar varias métricas de rendimiento de un clúster Milvus desplegado en Kubernetes (K8s).</p>
+    </button></h1><p>En este tema se describe cómo visualizar las métricas de Milvus mediante Grafana.</p>
+<p>Tal y como se describe en la <a href="/docs/es/monitor.md">guía de supervisión</a>, las métricas contienen información útil, como la cantidad de memoria que utiliza un componente específico de Milvus. La supervisión de las métricas te ayuda a comprender mejor el rendimiento de Milvus y su estado de funcionamiento, de modo que puedas ajustar la asignación de recursos de forma oportuna.</p>
+<p>La visualización consiste en un gráfico que muestra la evolución del uso de recursos a lo largo del tiempo, lo que facilita ver y detectar rápidamente los cambios en dicho uso, especialmente cuando se produce un evento.</p>
+<p>Este tutorial utiliza Grafana, una plataforma de código abierto para el análisis de series temporales, con el fin de visualizar diversas métricas de rendimiento de un clúster de Milvus desplegado en Kubernetes (K8s).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,10 +39,10 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Ha <a href="/docs/es/install_cluster-helm.md">instalado un clúster Milvus en K8s)</a>.</li>
-<li>Debe <a href="/docs/es/monitor.md">configurar Prometheus</a> para supervisar y recopilar métricas antes de utilizar Grafana para visualizar las métricas. Si la configuración se realiza correctamente, puede acceder a Grafana en <code translate="no">http://localhost:3000</code>. O también puede acceder a Grafana utilizando la dirección predeterminada de Grafana <code translate="no">user:password</code> de <code translate="no">admin:admin</code>.</li>
+<li>Has <a href="/docs/es/install_cluster-helm.md">instalado un clúster de Milvus en K8s.</a></li>
+<li>Debe <a href="/docs/es/monitor.md">configurar Prometheus</a> para supervisar y recopilar métricas antes de utilizar Grafana para visualizarlas. Si la configuración se realiza correctamente, podrá acceder a Grafana en <code translate="no">http://localhost:3000</code>. También puede acceder a Grafana utilizando la URL predeterminada de Grafana: <code translate="no">user:password</code> o <code translate="no">admin:admin</code>.</li>
 </ul>
-<h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Visualización de métricas con Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
+<h2 id="Visualize-metrics-using-Grafana" class="common-anchor-header">Visualizar métricas con Grafana<button data-href="#Visualize-metrics-using-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +57,7 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Download-and-import-dashboard" class="common-anchor-header">1. Descargue e importe el panel de control<button data-href="#1-Download-and-import-dashboard" class="anchor-icon" translate="no">
+    </button></h2><h3 id="1-Download-and-import-dashboard" class="common-anchor-header">1. Descargar e importar el panel<button data-href="#1-Download-and-import-dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,13 +72,15 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Descargue e importe el cuadro de mandos de Milvus desde el archivo JSON.</p>
-<pre><code translate="no"><span class="hljs-attribute">wget</span> https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json
+    </button></h3><p>Descarga e importa el panel de control de Milvus desde el archivo JSON.</p>
+<pre><code translate="no" class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/deployments/monitor/grafana/milvus-dashboard.json
 <button class="copy-code-btn"></button></code></pre>
-<p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
-   </span> <span class="img-wrapper"> <span>Descargar_e_importar</span> </span></p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" /> 
+   <span>Descargar_e_importar</span>
+  
+ </span></p>
 <h3 id="2-View-metrics" class="common-anchor-header">2. Ver métricas<button data-href="#2-View-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,16 +96,20 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Seleccione la instancia de Milvus que desea supervisar. Entonces podrá ver el panel de componentes de Milvus.</p>
-<p>
+    </button></h3><p>Selecciona la instancia de Milvus que deseas supervisar. A continuación, podrás ver el panel de componentes de Milvus.</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
-   </span> <span class="img-wrapper"> <span>Seleccionar_instancia</span> </span></p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" /> 
+   <span>Seleccionar_instancia</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
-   </span> <span class="img-wrapper"> <span>Panel_Grafana</span> </span></p>
-<h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+ </span></p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" /> 
+   <span>Panel_de_Grafana</span>
+  
+ </span></p>
+<h2 id="Whats-next" class="common-anchor-header">Próximos pasos<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,12 +125,14 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Si ha configurado Grafana para visualizar las métricas de Milvus, es posible que también desee:<ul>
+<li>Si ha configurado Grafana para visualizar las métricas de Milvus, quizá también le interese:
+<ul>
 <li>Aprender a <a href="/docs/es/alert.md">crear una alerta para los servicios de Milvus</a></li>
-<li>Ajustar su <a href="/docs/es/allocate.md">asignación de recursos</a></li>
-<li><a href="/docs/es/scaleout.md">Reducir o ampliar un clúster Milvus</a></li>
+<li>Ajustar la <a href="/docs/es/allocate.md">asignación de recursos</a></li>
+<li><a href="/docs/es/scaleout.md">Ampliar o reducir un clúster de Milvus</a></li>
 </ul></li>
-<li>Si está interesado en actualizar la versión de Milvus,<ul>
-<li>Lea la <a href="/docs/es/upgrade_milvus_cluster-operator.md">guía para actualizar Milvus cluster</a> y <a href="/docs/es/upgrade_milvus_standalone-operator.md">la</a> <a href="/docs/es/upgrade_milvus_cluster-operator.md">guía</a> <a href="/docs/es/upgrade_milvus_standalone-operator.md">para actualizar Milvus standalone</a>.</li>
+<li>Si te interesa actualizar la versión de Milvus,
+<ul>
+<li>lee la <a href="/docs/es/upgrade_milvus_cluster-operator.md">guía para actualizar un clúster de Milvus</a> y <a href="/docs/es/upgrade_milvus_standalone-operator.md">la guía para actualizar Milvus en modo autónomo</a>.</li>
 </ul></li>
 </ul>

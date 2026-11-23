@@ -20,8 +20,8 @@ title: クイックスタート
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>ニューラルネットワークモデルの出力データ形式であるベクトルは、情報を効果的に符号化することができ、ナレッジベース、セマンティック検索、検索強化生成（RAG）などのAIアプリケーションにおいて極めて重要な役割を果たします。</p>
-<p>Milvusは、Jupyterノートブックでのデモ用チャットボットの実行から、数十億人のユーザーにサービスを提供するウェブスケールの検索システムの構築に至るまで、あらゆる規模のAIアプリケーションに適したオープンソースのベクトルデータベースです。このガイドでは、数分でMilvusをローカルにセットアップし、Pythonクライアントライブラリを使用してベクトルを生成、保存、検索する方法について解説します。</p>
+<p>ニューラルネットワークモデルの出力データ形式であるベクトルは、情報を効果的に符号化することができ、ナレッジベース、セマンティック検索、リトリーバル・オーグメンテッド・ジェネレーション（RAG）などのAIアプリケーションにおいて極めて重要な役割を果たします。</p>
+<p>Milvusは、Jupyterノートブックでのデモ用チャットボットの実行から、数十億人のユーザーにサービスを提供するウェブスケールの検索システムの構築に至るまで、あらゆる規模のAIアプリケーションに適したオープンソースのベクトルデータベースです。このガイドでは、Milvusを数分でローカルにセットアップし、Pythonクライアントライブラリを使用してベクトルを生成、保存、検索する方法について解説します。</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvusのインストール<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,10 +54,10 @@ title: クイックスタート
         ></path>
       </svg>
     </button></h3><p>このガイドでは、PyMilvus Python SDKのオプション依存関係であり、ローカルで実行されるMilvus Liteを使用します。サーバーへのデプロイについては、<a href="/docs/ja/install_standalone-docker.md">Dockerまたは</a> <a href="/docs/ja/install_cluster-milvusoperator.md">Kubernetesを</a>参照してください。</p>
-<p>macOS、Linux、またはWindowsでPython 3.10以降を使用し、<code translate="no">faiss-cpu</code> や<code translate="no">pyarrow</code> など、Milvus Liteの依存関係に対応するバイナリホイールが利用可能である必要があります。サンプルではPyMilvus 3.0.2とMilvus Lite 3.2.2を使用しています。両方のパッケージを明示的にインストールしてください：</p>
+<p>macOS、Linux、またはWindowsでPython 3.10以降を使用し、<code translate="no">faiss-cpu</code> や<code translate="no">pyarrow</code> などのMilvus Liteの依存関係に対応したバイナリホイールが利用可能である必要があります。サンプルではPyMilvus 3.0.2とMilvus Lite 3.2.2を使用しています。両方のパッケージを明示的にインストールしてください：</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Windows では、pip は PyMilvus 3.0.2 の<code translate="no">milvus-lite</code> をスキップします。上記のコマンドでは<code translate="no">milvus-lite</code> を明示的に指定しているため、ローカルパスでも正常に動作します。SDK のみのインストール要件については、<a href="/docs/ja/install-pymilvus.md">「Milvus Python SDK のインストール」を</a>参照してください。</p>
+<p>Windows では、pip は Milvus 3.0.2 の<code translate="no">milvus-lite</code> をスキップします。上記のコマンドでは<code translate="no">milvus-lite</code> を明示的に指定しているため、ローカルパスでも正常に動作します。SDK のみのインストール要件については、<a href="/docs/ja/install-pymilvus.md">「Milvus Python SDK のインストール」を</a>参照してください。</p>
 <div class="alert note">
 <blockquote>
 <p>Google Colab を使用している場合、インストールしたばかりの依存機能を有効にするには、<strong>ランタイムを再起動</strong>する必要がある場合があります。（画面上部の「Runtime」メニューをクリックし、ドロップダウンメニューから「Restart session」を選択してください）。</p>
@@ -139,7 +139,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>認証情報を変更している場合は、設定済みの認証情報を使用してください。以降の例では、選択した<code translate="no">client</code> を使用します。別途ローカルのLiteデータベースは必要ありません。</p>
+<p>認証情報を変更している場合は、設定済みの認証情報を使用してください。以下の例では、選択した<code translate="no">client</code> を使用します。別途ローカルのLiteデータベースを用意する必要はありません。</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus では、ベクトルとその関連メタデータを格納するためにコレクションが必要です。これは、従来の SQL データベースにおけるテーブルのようなものと考えることができます。コレクションを作成する際、スキーマやインデックスパラメータを定義して、次元数、インデックスタイプ、距離メトリックなどのベクトル仕様を設定できます。 また、ベクトル検索のパフォーマンスを最適化するためのインデックスに関する複雑な概念も存在します。ここでは、まずは基本に焦点を当て、可能な限りデフォルト設定を使用することにしましょう。最低限、コレクション名と、コレクションのベクトルフィールドの次元を設定するだけで十分です。</p>
+    </button></h2><p>Milvus では、ベクトルとその関連メタデータを格納するためにコレクションが必要です。これは、従来の SQL データベースにおけるテーブルのようなものと考えてください。コレクションを作成する際、スキーマやインデックスパラメータを定義して、次元数、インデックスタイプ、距離メトリックなどのベクトル仕様を設定できます。 また、ベクトル検索のパフォーマンスを最適化するためのインデックスに関する複雑な概念も存在します。ここでは、まずは基本に焦点を当て、可能な限りデフォルト設定を使用することにしましょう。最低限、コレクション名と、コレクションのベクトルフィールドの次元を設定するだけで十分です。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -403,7 +403,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>デフォルトでは、スカラーフィールドはインデックス化されません。大規模なデータセットでメタデータによるフィルタリング検索を実行する必要がある場合は、固定スキーマの使用を検討するとともに、<a href="https://milvus.io/docs/scalar_index.md">インデックス</a>を有効にして検索パフォーマンスを向上させることができます。</p>
+<p>デフォルトでは、スカラーフィールドはインデックス化されません。大規模なデータセットでメタデータによるフィルタリング検索を行う必要がある場合は、固定スキーマの使用を検討し、検索パフォーマンスを向上させるために<a href="https://milvus.io/docs/scalar_index.md">インデックス</a>を有効にすることをお勧めします。</p>
 <p>ベクトル検索に加え、以下の種類の検索も実行できます：</p>
 <h3 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -526,7 +526,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
     </button></h2><p>ローカルでのサンプルを完了したら、次のステップを選択してください：</p>
 <ul>
 <li><a href="/docs/ja/build-rag-with-milvus.md">Retrieval Augmented Generation (RAG)</a> を使用してアプリケーションを構築する。</li>
-<li>「<a href="/docs/ja/schema-hands-on.md">検索用データモデル設計</a>」を使用して、独自のデータ用のフィールドやフィルターを設計する。</li>
+<li>「<a href="/docs/ja/schema-hands-on.md">検索用データモデル設計</a>」を使用して、独自のデータ用のフィールドとフィルターを設計します。</li>
 <li>「<a href="/docs/ja/install-overview.md">Milvus デプロイメントオプション</a>」で、ローカル環境とサーバー環境の要件を比較してください。</li>
 </ul>
 <p>Milvus Liteは、ローカルのPythonプログラムで始めるのに最適です。大規模なデータをお持ちの場合や、本番環境でMilvusを使用したい場合は、<a href="https://milvus.io/docs/install_standalone-docker.md">Dockerや</a> <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>へのMilvusのデプロイについて学ぶことができます。 Milvusのすべてのデプロイモードは同じAPIを共有しているため、別のデプロイモードに移行する場合でも、クライアント側のコードを大幅に変更する必要はありません。どこにデプロイされたMilvusサーバーであっても、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">そのURIとトークンを</a>指定するだけで済みます：</p>

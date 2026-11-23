@@ -100,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk skenario yang menuntut kecepatan kueri yang sangat tinggi dan penggunaan memori yang minimal, Milvus memperkenalkan <code translate="no">SQ4U</code>, yaitu Kuantisasi Skalar Seragam 4-bit. Ini adalah bentuk kuantisasi skalar yang agresif yang mengompresi nilai floating-point setiap dimensi menjadi bilangan bulat tak bertanda <strong>4-bit</strong>.</p>
+    </button></h3><p>Untuk skenario yang menuntut kecepatan kueri ekstrim dan penggunaan memori minimal, Milvus memperkenalkan <code translate="no">SQ4U</code>, yaitu Kuantisasi Skalar Seragam 4-bit. Ini adalah bentuk kuantisasi skalar agresif yang mengompresi nilai floating-point setiap dimensi menjadi bilangan bulat tak bertanda <strong>4-bit</strong>.</p>
 <p>Huruf “U” dalam SQ4U merupakan singkatan dari Uniform (Seragam). Berbeda dengan Kuantisasi Skalar non-seragam, yang biasanya menghitung nilai minimum dan maksimum secara terpisah untuk setiap dimensi (Kuantisasi Per-Dimensi), SQ4U menerapkan strategi <strong>Kuantisasi Seragam Global</strong>:</p>
 <ol>
 <li><p><strong>Statistik Global</strong>: Sistem menghitung <strong>satu</strong> nilai minimum <code translate="no">vmin</code> dan <strong>satu</strong> rentang nilai <code translate="no">vdiff</code> yang berlaku untuk <strong>semua dimensi</strong> vektor (atau seluruh segmen vektor).</p></li>
@@ -113,7 +113,7 @@ summary: >-
 <li><p><strong>Efisiensi Cache:</strong> Ukuran vektor yang lebih kecil berarti lebih banyak data yang muat ke dalam cache CPU, sehingga mengurangi latensi yang disebabkan oleh akses memori.</p></li>
 </ul>
 <div class="alert note">
-<p>Berkat pembagian parameter globalnya, SQ4U memberikan kinerja terbaik pada data yang dinormalisasi atau kumpulan data dengan distribusi nilai yang konsisten di seluruh dimensi.</p>
+<p>Berkat pembagian parameter globalnya, SQ4U bekerja paling baik pada data yang dinormalisasi atau kumpulan data dengan distribusi nilai yang konsisten di seluruh dimensi.</p>
 </div>
 <h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,11 +130,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>HNSW_SQ menggabungkan keunggulan HNSW dan SQ untuk memungkinkan pencarian tetangga terdekat yang efisien. Berikut cara kerjanya:</p>
+    </button></h3><p>HNSW_SQ menggabungkan keunggulan HNSW dan SQ untuk memungkinkan pencarian tetangga terdekat yang efisien secara aproksimatif. Berikut cara kerjanya:</p>
 <ol>
-<li><p><strong>Kompresi Data:</strong> SQ mengompresi vektor menggunakan teknik " <code translate="no">sq_type</code> " (misalnya, SQ6 atau SQ8), yang mengurangi penggunaan memori. Kompresi ini mungkin menurunkan presisi, tetapi memungkinkan sistem menangani kumpulan data yang lebih besar.</p></li>
+<li><p><strong>Kompresi Data:</strong> SQ mengompresi vektor menggunakan faktor kompresi ( <code translate="no">sq_type</code> ) (misalnya, SQ6 atau SQ8), yang mengurangi penggunaan memori. Kompresi ini mungkin menurunkan presisi, tetapi memungkinkan sistem menangani kumpulan data yang lebih besar.</p></li>
 <li><p><strong>Pembuatan Grafik:</strong> Vektor yang telah dikompresi digunakan untuk membangun grafik HNSW. Karena data telah dikompresi, grafik yang dihasilkan menjadi lebih kecil dan lebih cepat untuk dicari.</p></li>
-<li><p><strong>Pencarian Kandidat:</strong> Saat vektor kueri diberikan, algoritma menggunakan data yang telah dikompresi untuk dengan cepat mengidentifikasi kumpulan kandidat tetangga dari graf HNSW.</p></li>
+<li><p><strong>Pencarian Kandidat:</strong> Saat vektor kueri diberikan, algoritme menggunakan data yang telah dikompresi untuk dengan cepat mengidentifikasi kumpulan kandidat tetangga dari graf HNSW.</p></li>
 <li><p><strong>(Opsional) Penyempurnaan Hasil:</strong> Hasil kandidat awal dapat disempurnakan untuk akurasi yang lebih baik, berdasarkan parameter berikut:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Mengontrol apakah langkah penyempurnaan ini diaktifkan. Jika disetel ke " <code translate="no">true</code>", sistem akan menghitung ulang jarak menggunakan representasi dengan presisi lebih tinggi atau yang tidak terkompresi.</p></li>
@@ -265,7 +265,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Jumlah maksimum koneksi (atau tepi) yang dapat dimiliki setiap simpul dalam grafik, termasuk tepi keluar dan masuk.</p><p>Parameter ini secara langsung memengaruhi proses pembuatan indeks dan pencarian.</p></td>
      <td><p><strong>Tipe</strong>: Bilangan bulat</p><p><strong>Rentang</strong>: [2, 2048]</p><p><strong>Nilai default</strong>: <code translate="no">30</code> (hingga 30 tepi keluar dan 30 tepi masuk per simpul)</p></td>
-     <td><p><code translate="no">M</code> yang lebih besar umumnya menghasilkan <strong>akurasi yang lebih tinggi</strong>, tetapi <strong>meningkatkan beban memori</strong> dan <strong>memperlambat proses pembuatan indeks serta pencarian</strong>.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">M</code> untuk dataset dengan dimensi tinggi atau ketika tingkat recall yang tinggi sangat penting.</p><p>Pertimbangkan untuk mengurangi nilai <code translate="no">M</code> jika penggunaan memori dan kecepatan pencarian menjadi prioritas utama.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam rentang ini: [5, 100].</p></td>
+     <td><p><code translate="no">M</code> yang lebih besar umumnya menghasilkan <strong>akurasi</strong> yang <strong>lebih tinggi</strong>, tetapi <strong>meningkatkan beban memori</strong> dan <strong>memperlambat proses pembuatan indeks serta pencarian</strong>.</p><p>Pertimbangkan untuk meningkatkan <code translate="no">M</code> untuk dataset dengan dimensi tinggi atau ketika tingkat recall yang tinggi sangat penting.</p><p>Pertimbangkan untuk mengurangi nilai <code translate="no">M</code> jika penggunaan memori dan kecepatan pencarian menjadi prioritas utama.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai dalam rentang ini: [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>

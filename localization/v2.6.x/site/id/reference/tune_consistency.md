@@ -39,8 +39,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus adalah sistem yang memisahkan penyimpanan dan komputasi. <strong>Node Streaming</strong> menambahkan semua operasi penulisan ke Write-Ahead Log (WAL) dan menyimpan <strong>data yang terus bertambah</strong> — data yang masih berada di WAL dan belum disimpan secara permanen. Proses pemulihan mengubah data yang terus bertambah menjadi <strong>data historis</strong> (segmen yang disegel dan disimpan secara permanen di penyimpanan objek seperti MinIO/S3), yang disajikan oleh <strong>Node Kueri</strong>. Setiap permintaan pencarian atau kueri diterima oleh <strong>Query Delegator</strong> di Streaming Node yang menghosting WAL koleksi tersebut: delegator tersebut menghasilkan rencana kueri, mengeksekusi bagian data yang terus bertambah secara lokal, meneruskan bagian data historis ke Query Node yang relevan, dan menggabungkan hasilnya sebelum mengembalikannya. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/streaming_service.md">Layanan Streaming</a>.</p>
-<p>Untuk menjamin konsistensi, Milvus menetapkan cap waktu Timestamp Oracle (TSO) pada setiap pesan yang menentukan urutannya dalam WAL, serta secara terus-menerus menyisipkan cap waktu sinkronisasi ke dalam WAL bersamaan dengan pesan-pesan data. Setiap kali cap waktu sinkronisasi (syncTs) diterima, cap waktu tersebut dicatat sebagai ServiceTime, yang berarti bahwa semua data sebelum ServiceTime tersebut dapat dilihat oleh kueri. Berdasarkan ServiceTime, Milvus menyediakan cap waktu jaminan (GuaranteeTs) untuk memenuhi berbagai persyaratan pengguna terkait konsistensi dan ketersediaan. Pengguna dapat memberi tahu delegator tentang kebutuhan untuk memasukkan data sebelum titik waktu tertentu ke dalam cakupan pencarian dengan menentukan GuaranteeTs dalam permintaan Search mereka.</p>
+    </button></h2><p>Milvus adalah sistem yang memisahkan penyimpanan dan komputasi. <strong>Node Streaming</strong> menambahkan semua operasi penulisan ke Write-Ahead Log (WAL) dan menyimpan <strong>data yang terus bertambah</strong> — data yang masih berada di WAL dan belum disimpan secara permanen. Proses pemulihan mengubah data yang terus bertambah menjadi <strong>data historis</strong> (segmen yang disegel dan disimpan secara permanen di penyimpanan objek seperti MinIO/S3), yang disajikan oleh <strong>Node Kueri</strong>. Setiap permintaan pencarian atau kueri diterima oleh <strong>Query Delegator</strong> di Streaming Node yang menghosting WAL koleksi tersebut: delegator tersebut menghasilkan rencana kueri, mengeksekusi bagian data yang terus bertambah secara lokal, meneruskan bagian data historis ke Query Nodes yang relevan, dan menggabungkan hasilnya sebelum mengembalikannya. Untuk detailnya, lihat <a href="/docs/id/v2.6.x/streaming_service.md">Layanan Streaming</a>.</p>
+<p>Untuk menjamin konsistensi, Milvus menetapkan cap waktu Timestamp Oracle (TSO) pada setiap pesan yang menentukan urutannya dalam WAL, serta terus-menerus menyisipkan cap waktu sinkronisasi ke dalam WAL bersamaan dengan pesan-pesan data. Setiap kali cap waktu sinkronisasi (syncTs) diterima, cap waktu tersebut dicatat sebagai ServiceTime, yang berarti bahwa semua data sebelum ServiceTime tersebut dapat dilihat oleh kueri. Berdasarkan ServiceTime, Milvus menyediakan cap waktu jaminan (GuaranteeTs) untuk memenuhi berbagai persyaratan pengguna terkait konsistensi dan ketersediaan. Pengguna dapat memberi tahu delegator tentang kebutuhan untuk memasukkan data sebelum titik waktu tertentu ke dalam cakupan pencarian dengan menentukan GuaranteeTs dalam permintaan Search mereka.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
@@ -48,14 +48,14 @@ summary: >-
   
  </span></p>
 <p>Seperti yang ditunjukkan pada gambar di atas, jika GuaranteeTs lebih kecil dari ServiceTime, artinya semua data sebelum titik waktu yang ditentukan sudah terlihat, sehingga pencarian dapat dieksekusi segera. Ketika GuaranteeTs lebih besar dari ServiceTime, pencarian harus menunggu hingga ServiceTime melebihi GuaranteeTs sebelum dapat dieksekusi.</p>
-<p>Pengguna perlu menyeimbangkan antara akurasi kueri dan latensi kueri. Jika pengguna memiliki persyaratan konsistensi yang tinggi dan tidak terlalu sensitif terhadap latensi kueri, mereka dapat menetapkan GuaranteeTs ke nilai sebesar mungkin; jika pengguna ingin menerima hasil pencarian dengan cepat dan lebih toleran terhadap akurasi kueri, maka GuaranteeTs dapat ditetapkan ke nilai yang lebih kecil.</p>
+<p>Pengguna perlu menyeimbangkan antara akurasi kueri dan latensi kueri. Jika pengguna memiliki persyaratan konsistensi yang tinggi dan tidak terlalu sensitif terhadap latensi kueri, mereka dapat mengatur GuaranteeTs ke nilai sebesar mungkin; jika pengguna ingin menerima hasil pencarian dengan cepat dan lebih toleran terhadap akurasi kueri, maka GuaranteeTs dapat diatur ke nilai yang lebih kecil.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" /> 
    <span>Ilustrasi Tingkat Konsistensi</span>
   
  </span></p>
-<p>Milvus menyediakan empat jenis tingkat konsistensi dengan GuaranteeTs yang berbeda-beda.</p>
+<p>Milvus menyediakan empat jenis tingkat konsistensi dengan nilai GuaranteeTs yang berbeda-beda.</p>
 <ul>
 <li><p><strong>Kuat</strong></p>
 <p>Stempel waktu terbaru digunakan sebagai GuaranteeTs, dan pencarian harus menunggu hingga ServiceTime memenuhi GuaranteeTs sebelum dieksekusi.</p></li>
@@ -67,7 +67,7 @@ summary: >-
 <p>Titik waktu terbaru saat klien menyisipkan data digunakan sebagai GuaranteeTs sehingga pencarian dapat mencakup semua data yang disisipkan oleh klien.</p></li>
 </ul>
 <p>Milvus menggunakan Bounded Staleness sebagai tingkat konsistensi default. Jika GuaranteeTs tidak ditentukan, ServiceTime terbaru digunakan sebagai GuaranteeTs.</p>
-<h2 id="Set-Consistency-Level" class="common-anchor-header">Tetapkan Tingkat Konsistensi<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
+<h2 id="Set-Consistency-Level" class="common-anchor-header">Menetapkan Tingkat Konsistensi<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda dapat mengatur tingkat konsistensi yang berbeda saat membuat koleksi serta saat melakukan pencarian dan kueri.</p>
+    </button></h2><p>Anda dapat mengatur tingkat konsistensi saat membuat koleksi, mengubahnya setelah koleksi dibuat, atau menggantinya untuk pencarian dan kueri individual.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Menetapkan Tingkat Konsistensi saat Membuat Koleksi<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Saat membuat koleksi, Anda dapat mengatur tingkat konsistensi untuk pencarian dan kueri di dalam koleksi tersebut. Contoh kode berikut mengatur tingkat konsistensi menjadi <strong>Bounded</strong>.</p>
+    </button></h3><p>Saat membuat koleksi, Anda dapat mengatur tingkat konsistensi untuk pencarian dan kueri di dalam koleksi tersebut. Contoh kode berikut mengatur tingkat konsistensi ke <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -169,6 +169,64 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Nilai yang mungkin untuk parameter ` <code translate="no">consistency_level</code> ` adalah ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>`, dan ` <code translate="no">Session</code>`.</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Mengubah Tingkat Konsistensi Koleksi<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat mengubah tingkat konsistensi koleksi yang sudah ada dengan mengubah properti ` <code translate="no">consistency_level</code> `-nya. Tingkat konsistensi baru ini berlaku untuk pencarian dan kueri selanjutnya pada koleksi tersebut yang tidak menentukan tingkat konsistensi sendiri, dan mengubahnya tidak memerlukan pelepasan koleksi. Contoh kode berikut mengubah tingkat konsistensi menjadi <strong>`Eventually`</strong>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<span class="highlighted-wrapper-line">properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);</span>
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Menetapkan Tingkat Konsistensi dalam Pencarian<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +242,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Anda selalu dapat mengubah tingkat konsistensi untuk pencarian tertentu. Contoh kode berikut mengatur tingkat konsistensi kembali ke ` <strong>Bounded</strong>`. Perubahan ini hanya berlaku untuk permintaan pencarian saat ini.</p>
+    </button></h3><p>Anda selalu dapat mengubah tingkat konsistensi untuk pencarian tertentu. Contoh kode berikut mengatur tingkat konsistensi kembali ke " <strong>Bounded"</strong>. Perubahan ini hanya berlaku untuk permintaan pencarian saat ini.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -234,7 +292,7 @@ curl --request POST \
     &quot;consistencyLevel&quot;: &quot;Bounded&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameter ini juga tersedia dalam pencarian hybrid dan iterator pencarian. Nilai yang mungkin untuk parameter ` <code translate="no">consistency_level</code> ` adalah ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>`, dan ` <code translate="no">Session</code>`.</p>
+<p>Parameter ini juga tersedia dalam pencarian hibrida dan iterator pencarian. Nilai yang mungkin untuk parameter ` <code translate="no">consistency_level</code> ` adalah ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>`, dan ` <code translate="no">Session</code>`.</p>
 <h3 id="Set-Consistency-Level-in-Query" class="common-anchor-header">Menetapkan Tingkat Konsistensi dalam Kueri<button data-href="#Set-Consistency-Level-in-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

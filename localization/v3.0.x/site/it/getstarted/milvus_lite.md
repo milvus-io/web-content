@@ -20,7 +20,7 @@ title: Eseguire Milvus Lite in locale
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa pagina illustra come eseguire una ricerca vettoriale locale con Milvus Lite. Tratta argomenti quali l'installazione, la persistenza dei dati, il filtraggio e l'esportazione dei dati verso un'altra istanza di Milvus.</p>
+    </button></h1><p>Questa pagina illustra come eseguire una ricerca vettoriale locale con Milvus Lite. Tratta l'installazione, la persistenza dei dati, il filtraggio e l'esportazione dei dati verso un'altra istanza di Milvus.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ title: Eseguire Milvus Lite in locale
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite è un backend locale leggero per <a href="https://github.com/milvus-io/pymilvus">l'SDK Python di Milvus</a>. Installarlo con l'extra opzionale " <code translate="no">milvus-lite</code> "; l'installazione del solo " <code translate="no">pymilvus</code> " non installa questo backend nella versione dell'SDK utilizzata di seguito.</p>
+    </button></h2><p>Milvus Lite è un backend locale leggero per <a href="https://github.com/milvus-io/pymilvus">l’SDK Python di Milvus</a>. Installatelo con l’extra opzionale “ <code translate="no">milvus-lite</code> ”; l’installazione del solo “ <code translate="no">pymilvus</code> ” non installa questo backend nella versione dell’SDK utilizzata di seguito.</p>
 <p>Milvus Lite è adatto allo sviluppo locale e a carichi di lavoro su piccola scala in ambienti quali:</p>
 <ul>
 <li>Jupyter Notebook o Google Colab</li>
@@ -86,7 +86,7 @@ title: Eseguire Milvus Lite in locale
 <span class="hljs-built_in">source</span> .venv/bin/activate
 python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Metti tra virgolette l'espressione degli extra in modo che le shell come zsh non interpretino le parentesi. Su Windows PowerShell, attiva l'ambiente con ` <code translate="no">.venv\Scripts\Activate.ps1</code> ` invece che con ` <code translate="no">source .venv/bin/activate</code>`. Le versioni esplicite mantengono l'SDK e il backend locale allineati con questa guida.</p>
+<p>Metti tra virgolette l’espressione degli extra in modo che le shell come zsh non interpretino le parentesi. Su Windows PowerShell, attiva l’ambiente con ` <code translate="no">.venv\Scripts\Activate.ps1</code> ` invece che con ` <code translate="no">source .venv/bin/activate</code>`. Le versioni esplicite mantengono l’SDK e il backend locale allineati con questa guida.</p>
 <div class="alert note">
 <blockquote>
 <p>Milvus Lite 3.x utilizza un motore di archiviazione diverso rispetto al pacchetto originale 2.x. Non è in grado di aprire direttamente un file <code translate="no">.db</code> esistente della versione 2.x. Conservare il database originale e un ambiente in grado di aprirlo, esportare i dati in tale ambiente e importarli in un nuovo database. L’installazione di un nuovo pacchetto non comporta la migrazione del vecchio formato di archiviazione. Vedere <a href="#Migrating-data-from-Milvus-Lite">Migrazione dei dati da Milvus Lite</a>.</p>
@@ -214,7 +214,7 @@ client.close()
 <p>Esaminare questi limiti prima di scegliere Lite per un'applicazione:</p>
 <ul>
 <li>Solo un processo alla volta può possedere una directory di archiviazione del database. Il motore protegge la directory con un blocco del file.</li>
-<li>Serializzare le operazioni di scrittura sulla stessa collezione. Le scritture concorrenti non sono supportate in modo sicuro.</li>
+<li>Serializzare le operazioni di scrittura sulla stessa collezione. Le operazioni di scrittura simultanee non sono supportate in modo sicuro.</li>
 <li>L'adattatore locale non implementa tutti gli RPC di Milvus. Le operazioni non supportate restituiscono un errore " <code translate="no">UNIMPLEMENTED</code>"; la modifica dello schema e il caricamento o il rilascio a livello di partizione non sono disponibili.</li>
 <li>L'autenticazione, gli utenti, i ruoli, RBAC e TLS non sono supportati. Non esporre il server locale a una rete non attendibile.</li>
 <li>I campi vettoriali di tipo binary, float16, bfloat16 e int8, nonché gli indici con quantizzazione del prodotto, non sono supportati.</li>

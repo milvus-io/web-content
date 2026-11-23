@@ -293,7 +293,7 @@
     ]
   },
   {
-    "label": "Guide d'utilisation",
+    "label": "Guide de l'utilisateur",
     "id": "userguide",
     "isMenu": true,
     "order": 3,
@@ -473,7 +473,7 @@
                 "children": []
               },
               {
-                "label": "Créer un champ StructArray",
+                "label": "Créer un champ de type StructArray",
                 "id": "create-structarray-field.md",
                 "order": 1,
                 "children": []
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1395,7 +1389,7 @@
                 "order": 3,
                 "children": [
                   {
-                    "label": "Présentation du « Decay Ranker »",
+                    "label": "Présentation de Decay Ranker",
                     "id": "decay-ranker-overview.md",
                     "order": 0,
                     "children": []
@@ -1496,12 +1490,6 @@
             "label": "Utiliser mmap",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "Regroupement et compactage",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "SDK Node.js",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "SDK Go",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "API RESTful v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Conception de schémas",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "Modèles de recherche",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "Sélection d'indices",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "Pipeline RAG",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]

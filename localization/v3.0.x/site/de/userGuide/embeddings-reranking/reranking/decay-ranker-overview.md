@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Bei der herkömmlichen Vektorsuche werden die Ergebnisse ausschließlich nach der Vektorähnlichkeit gereiht – also danach, wie gut die Vektoren im mathematischen Raum übereinstimmen. In praktischen Anwendungen hängt die tatsächliche Relevanz von Inhalten jedoch oft von mehr als nur der semantischen Ähnlichkeit ab.</p>
+    </button></h1><p>Bei der herkömmlichen Vektorsuche werden die Ergebnisse ausschließlich nach der Vektorähnlichkeit sortiert – also danach, wie gut die Vektoren im mathematischen Raum übereinstimmen. In praktischen Anwendungen hängt die tatsächliche Relevanz von Inhalten jedoch oft von mehr als nur der semantischen Ähnlichkeit ab.</p>
 <p>Betrachten Sie folgende alltägliche Szenarien:</p>
 <ul>
 <li><p>Eine Nachrichtensuche, bei der der Artikel von gestern höher eingestuft werden sollte als ein ähnlicher Artikel von vor drei Jahren</p></li>
@@ -52,7 +52,7 @@ beta: Milvus 2.6.x
 <li><p>Das Decay-Ranking kann nicht bei gruppierten Suchanfragen verwendet werden.</p></li>
 <li><p>Das für das Decay-Ranking verwendete Feld muss numerisch sein (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code> oder <code translate="no">DOUBLE</code>).</p></li>
 <li><p>Jeder Abkling-Ranker kann nur ein numerisches Feld verwenden.</p></li>
-<li><p><strong>Konsistenz der Zeiteinheiten</strong>: Bei Verwendung eines zeitbasierten Verfalls-Rankings müssen die Einheiten für die Parameter „ <code translate="no">origin</code> “, „ <code translate="no">scale</code> “ und „ <code translate="no">offset</code> “ mit den in Ihren Sammlungsdaten verwendeten Einheiten übereinstimmen:</p>
+<li><p><strong>Konsistenz der Zeiteinheiten</strong>: Bei Verwendung eines zeitbasierten Abkling-Rankings müssen die Einheiten für die Parameter „ <code translate="no">origin</code> “, „ <code translate="no">scale</code> “ und „ <code translate="no">offset</code> “ mit den in Ihren Sammlungsdaten verwendeten Einheiten übereinstimmen:</p>
 <ul>
 <li><p>Wenn Ihre Sammlung Zeitstempel in <strong>Sekunden</strong> speichert, verwenden Sie für alle Parameter Sekunden</p></li>
 <li><p>Wenn Ihre Sammlung Zeitstempel in <strong>Millisekunden</strong> speichert, verwenden Sie für alle Parameter Millisekunden</p></li>
@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Decay-Ranking erweitert die herkömmliche Vektorsuche, indem es numerische Faktoren wie Zeit oder geografische Entfernung in den Ranking-Prozess einbezieht. Der gesamte Prozess durchläuft folgende Phasen:</p>
+    </button></h2><p>Das Decay-Ranking verbessert die herkömmliche Vektorsuche, indem es numerische Faktoren wie Zeit oder geografische Entfernung in den Ranking-Prozess einbezieht. Der gesamte Prozess durchläuft folgende Phasen:</p>
 <h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Schritt 1: Berechnung normalisierter Ähnlichkeitswerte<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -137,7 +137,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Schließlich kombiniert Milvus den normalisierten Ähnlichkeitswert und den Abklingwert, um den endgültigen Rangwert zu ermitteln:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einer hybriden Suche (Kombination mehrerer Vektorfelder) wählt Milvus den höchsten normalisierten Ähnlichkeitswert aus den Suchanfragen aus:</p>
+<p>Bei einer hybriden Suche (Kombination mehrerer Vektorfelder) wählt Milvus den höchsten normalisierten Ähnlichkeitswert unter den Suchanfragen aus:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Wenn beispielsweise eine wissenschaftliche Arbeit bei einer hybriden Suche einen Wert von 0,82 bei der Vektorähnlichkeit und einen Wert von 0,91 bei der BM25-basierten Textsuche erzielt, verwendet Milvus 0,91 als Basisähnlichkeitswert, bevor der Abklingfaktor angewendet wird.</p>
@@ -210,7 +210,7 @@ beta: Milvus 2.6.x
 <p>Ohne Decay-Reranking würde Artikel B aufgrund der reinen Vektorähnlichkeit (0,92) den höchsten Rang einnehmen. Bei Anwendung des Decay-Rerankings jedoch:</p>
 <ul>
 <li><p>springt Artikel C trotz mittlerer Ähnlichkeit auf Platz 1, da er sehr aktuell ist (wurde gestern veröffentlicht)</p></li>
-<li><p>Artikel B fällt trotz ausgezeichneter Ähnlichkeit auf Platz 4 zurück, da er relativ alt ist</p></li>
+<li><p>Artikel B fällt trotz hervorragender Ähnlichkeit auf Platz 4 zurück, da er relativ alt ist</p></li>
 <li><p>Artikel D verwendet die COSINE-Ähnlichkeit, daher wird sein Wert von 0,76 direkt vor der Anwendung des „Decay“ herangezogen</p></li>
 </ul>
 <h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">Wählen Sie den richtigen Decay-Ranker<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
@@ -239,7 +239,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Gauß (<code translate="no">gauss</code>)</p></td>
      <td><p>Ein natürlich wirkender, allmählicher Rückgang, der sich moderat fortsetzt</p></td>
-     <td><ul><li><p>Allgemeine Suchanfragen, die ausgewogene Ergebnisse erfordern</p></li><li><p>Anwendungen, bei denen Nutzer ein intuitives Gespür für Entfernungen haben</p></li><li><p>Wenn eine moderate Entfernung die Ergebnisse nicht zu stark benachteiligen sollte</p></li></ul></td>
+     <td><ul><li><p>Allgemeine Suchanfragen, die ausgewogene Ergebnisse erfordern</p></li><li><p>Anwendungen, bei denen Nutzer ein intuitives Gespür für Entfernungen haben</p></li><li><p>Wenn eine moderate Entfernung die Ergebnisse nicht stark beeinträchtigen sollte</p></li></ul></td>
      <td><p>Bei der Suche nach einem Restaurant bleiben hochwertige Lokale in 3 km Entfernung weiterhin auffindbar, werden jedoch niedriger eingestuft als Optionen in der näheren Umgebung</p></td>
    </tr>
    <tr>
@@ -278,7 +278,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Abkling-Ranker können in Milvus sowohl bei der Standard-Vektorsuche als auch bei hybriden Suchvorgängen angewendet werden. Nachfolgend finden Sie die wichtigsten Codeausschnitte zur Implementierung dieser Funktion.</p>
 <div class="alert note">
-<p>Bevor Sie Abklingfunktionen verwenden können, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempeln, Entfernungen usw.) erstellen, die für die Abklingberechnungen verwendet werden sollen. Vollständige, funktionierende Beispiele einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneingabe finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implementierung eines zeitbasierten Rankings in Milvus</a>.</p>
+<p>Bevor Sie Abklingfunktionen verwenden können, müssen Sie zunächst eine Sammlung mit geeigneten numerischen Feldern (wie Zeitstempeln, Entfernungen usw.) erstellen, die für die Abklingberechnungen verwendet werden sollen. Ausführliche, funktionierende Beispiele einschließlich der Einrichtung der Sammlung, der Schemadefinition und der Dateneingabe finden Sie im <a href="/docs/de/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implementierung eines zeitbasierten Rankings in Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Erstellen eines Decay-Rankers<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -408,7 +408,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -450,7 +489,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">params.origin</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Bezugspunkt, von dem aus der Abklingwert berechnet wird. Elemente mit diesem Wert erhalten maximale Relevanzwerte.</p><p>Bei zeitbasiertem Abklingen muss die Zeiteinheit mit Ihren Erfassungsdaten übereinstimmen.</p></td>
+     <td><p>Bezugspunkt, von dem aus der Abklingwert berechnet wird. Einträge mit diesem Wert erhalten die maximale Relevanzbewertung.</p><p>Bei zeitbasiertem Abklingen muss die Zeiteinheit mit Ihren Sammlungsdaten übereinstimmen.</p></td>
      <td><ul><li><p>Für Zeitstempel: aktuelle Uhrzeit (z. B. <code translate="no">int(time.time())</code>)</p></li><li><p>Bei der Geolokalisierung: aktuelle Koordinaten des Nutzers</p></li></ul></td>
    </tr>
    <tr>
@@ -538,16 +577,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -618,5 +659,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

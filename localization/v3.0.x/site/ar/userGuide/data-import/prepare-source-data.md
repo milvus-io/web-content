@@ -4,7 +4,7 @@ order: 0
 title: تحضير البيانات المصدرية
 summary: >-
   تتناول هذه الصفحة بعض الأمور التي يجب أن تضعها في اعتبارك قبل البدء في إدراج
-  البيانات بشكل جماعي في مجموعتك.
+  البيانات بشكل مجمّع في مجموعتك.
 ---
 <h1 id="Prepare-Source-Data" class="common-anchor-header">تحضير البيانات المصدرية<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتطلب المجموعة الهدف تعيين بيانات المصدر إلى مخططها. يوضح الرسم البياني أدناه كيفية تعيين بيانات المصدر المقبولة إلى مخطط المجموعة الهدف.</p>
+    </button></h2><p>تتطلب المجموعة الهدف تعيين البيانات المصدر إلى مخططها. يوضح الرسم البياني أدناه كيفية تعيين البيانات المصدر المقبولة إلى مخطط المجموعة الهدف.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" /> 
@@ -61,8 +61,8 @@ summary: >-
 <p>للحصول على مزيد من المعلومات، راجع <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> في مرجع SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -233,7 +233,7 @@ schema.verify()
 <tbody>
 <tr><td>JSON، JSONL</td><td>قيمة الحقل عبارة عن قائمة من الكائنات، كائن واحد لكل عنصر Struct، مرتبة حسب اسم الحقل الفرعي: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
 <tr><td>CSV</td><td>تحتوي الخلية على نفس نص JSON الموجود في تنسيق JSON. ويُشير <code translate="no">nullkey</code> المُعد لمهمة الاستيراد أو JSON <code translate="no">null</code> إلى قيمة StructArray فارغة.</td></tr>
-<tr><td>Parquet</td><td>عمود واحد لكل حقل في StructArray من النوع <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ، وعنصر فرعي واحد لكل حقل فرعي. الحقل الفرعي القياسي هو عنصر فرعي قياسي، والحقل الفرعي المتجه هو قائمة من نوع عناصره، مثل <code translate="no">list&lt;float32&gt;</code> ، أما الحقل الفرعي المصفوفة (Milvus 3.0.6 والإصدارات الأحدث) فهو عنصر فرعي من نوع <code translate="no">list&lt;T&gt;</code>.</td></tr>
+<tr><td>Parquet</td><td>عمود واحد لكل حقل StructArray من النوع <code translate="no">list&lt;struct&lt;...&gt;&gt;</code> ، وعنصر فرعي واحد لكل حقل فرعي. الحقل الفرعي القياسي هو عنصر فرعي قياسي، والحقل الفرعي المتجه هو قائمة من نوع عناصره، مثل <code translate="no">list&lt;float32&gt;</code> ، والحقل الفرعي المصفوف (Milvus 3.0.6 والإصدارات الأحدث) هو عنصر فرعي من نوع <code translate="no">list&lt;T&gt;</code>.</td></tr>
 <tr><td>NumPy</td><td>غير مدعوم. تحتوي ملفات NumPy على ملف واحد لكل حقل من المستوى الأعلى ولا تحتوي على تمثيل لحقل StructArray. استخدم ملفات JSON أو CSV أو Parquet للمجموعات التي تحتوي على حقل StructArray.</td></tr>
 </tbody>
 </table>
@@ -242,7 +242,7 @@ schema.verify()
 <li><p>استخدم أسماء الحقول الفرعية داخل كل عنصر Struct، وليس المسارات مثل <code translate="no">chunks[text]</code>. يتم رفض الأعمدة المسطحة أو المفاتيح المسماة <code translate="no">chunks[text]</code>.</p></li>
 <li><p>لا يمكن أن يكون عنصر Struct نفسه فارغًا، مثل <code translate="no">[null, {...}]</code>. لا يمكن أن تكون قيمة StructArray بأكملها فارغة إلا عندما يكون حقل StructArray قابلاً للفراغ. قبل الإصدار Milvus 3.0.6، يجب أن يوفر كل عنصر Struct كل حقل فرعي.</p></li>
 <li><p>يتم تجاهل المفاتيح أو العناصر التابعة لـ Parquet التي ليست حقولًا فرعية للمجموعة، بما في ذلك الحقول الفرعية التي تم حذفها.</p></li>
-<li><p>بدءًا من Milvus 3.0.6، يتم استيراد المفتاح المفقود أو قيمة <code translate="no">null</code> لحقل فرعي قابل للقيمة null كقيمة null لعنصر Struct هذا، لذا يتم استيراد الملفات التي تمت كتابتها قبل إضافة الحقل الفرعي بدونه. يؤدي وجود قيمة « <code translate="no">null</code> » في أي مكان آخر إلى فشل عملية الاستيراد. بالنسبة لحقل فرعي من نوع المصفوفة، فإن « <code translate="no">null</code> » يمثل مصفوفة داخلية فارغة، و« <code translate="no">null</code> » داخل المصفوفة الداخلية يمثل قيمة داخلية فارغة عندما يسمح الحقل الفرعي بذلك.</p></li>
+<li><p>بدءًا من Milvus 3.0.6، يتم استيراد المفتاح المفقود أو قيمة <code translate="no">null</code> لحقل فرعي قابل للقيمة null كقيمة null لعنصر Struct هذا، لذا يتم استيراد الملفات التي تمت كتابتها قبل إضافة الحقل الفرعي بدونه. يؤدي وجود قيمة « <code translate="no">null</code> » في أي مكان آخر إلى فشل الاستيراد. بالنسبة لحقل فرعي من نوع المصفوفة، فإن « <code translate="no">null</code> » يمثل مصفوفة داخلية فارغة، و« <code translate="no">null</code> » داخل المصفوفة الداخلية يمثل قيمة داخلية فارغة عندما يسمح الحقل الفرعي بذلك.</p></li>
 <li><p>بدءًا من Milvus 3.0.6، يتم رفض استيراد سجلات binlog، مثل استعادة النسخ الاحتياطي، واستيراد مصدر اللقطات للمجموعات التي تحتوي على حقول فرعية ذات عناصر قابلة للكون فارغة أو حقول فرعية من المصفوفات القياسية.</p></li>
 </ul>
 <p>يدعم pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> أشكال StructArray المذكورة أعلاه في كل تنسيق مدعوم، بما في ذلك الحقول الفرعية التي يمكن أن تكون عناصرها null وقيم StructArray التي يمكن أن تكون null. استخدم نفس أشكال الصفوف في استدعاءات <code translate="no">add_row()</code> الخاصة بالكاتب.</p>
@@ -262,7 +262,7 @@ schema.verify()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>BulkWriter</strong> هي أداة مصممة لتحويل مجموعات البيانات الأولية إلى تنسيق مناسب للاستيراد عبر واجهة برمجة تطبيقات الاستيراد RESTful. وهي توفر نوعين من الكُتّاب:</p>
+    </button></h2><p><strong>BulkWriter</strong> هي أداة مصممة لتحويل مجموعات البيانات الأولية إلى تنسيق مناسب للاستيراد عبر واجهة برمجة تطبيقات الاستيراد RESTful. وهي توفر نوعين من أدوات الكتابة:</p>
 <ul>
 <li><strong>LocalBulkWriter</strong>: يقرأ مجموعة البيانات المحددة ويحولها إلى تنسيق سهل الاستخدام.</li>
 <li><strong>RemoteBulkWriter</strong>: يؤدي نفس المهمة التي يؤديها LocalBulkWriter، ولكنه ينقل أيضًا ملفات البيانات المحولة إلى دلو تخزين كائنات بعيد محدد.</li>
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p>يقوم <strong>LocalBulkWriter</strong> بإلحاق الصفوف من مجموعة البيانات المصدر وتسجيلها في ملف محلي بالتنسيق المحدد.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -349,8 +349,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>بدلاً من تسجيل البيانات المضافة في ملف محلي، يقوم <strong>RemoteBulkWriter</strong> بتسجيلها في دلو بعيد. لذلك، يجب عليك إعداد كائن <strong>ConnectParam</strong> قبل إنشاء <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -401,8 +401,8 @@ writer = RemoteBulkWriter(
 <button class="copy-code-btn"></button></code></pre>
 <p>بمجرد أن تصبح معلمات الاتصال جاهزة، يمكنك الإشارة إليها في <strong>RemoteBulkWriter</strong> على النحو التالي:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -457,8 +457,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>لأغراض التوضيح، يقوم الكود التالي بإلحاق بيانات تم إنشاؤها عشوائيًا.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -678,8 +678,8 @@ writer = RemoteBulkWriter(
 <p>للتحقق من النتائج، يمكنك الحصول على مسار الإخراج الفعلي عن طريق طباعة طريقة <code translate="no">getBatchFiles()</code> الخاصة بالكاتب.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">بايثون</a>
+ <a href="#java"> جافا</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
@@ -700,7 +700,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>يقوم<strong>BulkWriter</strong> بإنشاء معرّف UUID، وإنشاء مجلد فرعي باستخدام معرّف UUID في دليل الإخراج المحدد، ووضع جميع الملفات التي تم إنشاؤها في المجلد الفرعي. <a href="https://assets.zilliz.com/bulk_writer.zip">انقر هنا</a> لتنزيل البيانات النموذجية المعدة مسبقًا.</p>
+<p>يقوم<strong>BulkWriter</strong> بإنشاء معرّف فريد (UUID)، وإنشاء مجلد فرعي باستخدام هذا المعرّف في دليل الإخراج المحدد، ووضع جميع الملفات التي تم إنشاؤها في المجلد الفرعي. <a href="https://assets.zilliz.com/bulk_writer.zip">انقر هنا</a> لتنزيل البيانات النموذجية المعدة مسبقًا.</p>
 <p>فيما يلي هياكل المجلدات المحتملة:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

@@ -1,9 +1,9 @@
 ---
 id: inverted.md
-title: 反向索引
-summary: 當您需要對資料進行頻繁的篩選查詢時，反向索引能顯著提升查詢效能。反向索引無需掃描所有文件，而是能迅速定位出完全符合篩選條件的記錄。
+title: 反轉
+summary: 對於標量欄位、陣列及具型別的 JSON 路徑，請使用「反向索引」進行值篩選。
 ---
-<h1 id="INVERTED" class="common-anchor-header">反向索引<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">反轉<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ summary: 當您需要對資料進行頻繁的篩選查詢時，反向索引能�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>當您需要對資料進行頻繁的篩選查詢時，<code translate="no">INVERTED</code> 索引可大幅提升查詢效能。Milvus 不會逐一掃描所有文件，而是透過倒排索引快速定位完全符合篩選條件的記錄。</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">何時應使用「倒排索引」<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">INVERTED</code> 將字段值映射至包含該值的實體，以加速標量篩選。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,14 +34,13 @@ summary: 當您需要對資料進行頻繁的篩選查詢時，反向索引能�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>當您需要以下情況時，請使用「倒排索引」：</p>
-<ul>
-<li><p><strong>根據特定值進行篩選</strong>：找出所有某個欄位等於特定值的記錄（例如：<code translate="no">category == &quot;electronics&quot;</code> ）</p></li>
-<li><p><strong>篩選文字內容</strong>：對<code translate="no">VARCHAR</code> 欄位進行高效搜尋</p></li>
-<li><p><strong>查詢 JSON 欄位值</strong>：根據 JSON 結構中的特定金鑰進行篩選</p></li>
-</ul>
-<p><strong>效能優勢</strong>：透過避免需要對整個集合進行全量掃描，倒排索引可在大型資料集上將查詢時間從秒級縮短至毫秒級。</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">反向索引的運作原理<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+    </button></h2><p><a id="When-to-use-INVERTED-indexes"></a></p>
+<p>請使用 `<code translate="no">INVERTED</code> ` 對相容的欄位或 JSON 路徑（例如 `<code translate="no">category == &quot;electronics&quot;</code>`）進行等值、成員資格及範圍篩選。</p>
+<p><a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a></p>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">索引目標與篩選器<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,21 +55,80 @@ summary: 當您需要對資料進行頻繁的篩選查詢時，反向索引能�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus<strong>中，反向索引會</strong>將每個唯一的欄位值（術語）映射至包含該值的文件 ID 集合。此結構可針對具有重複或分類型值的欄位進行快速查詢。</p>
-<p>如圖所示，此過程分為兩個步驟：</p>
-<ol>
-<li><p><strong>正向映射（ID → 術語）：</strong>每個文件 ID 指向其所包含的欄位值。</p></li>
-<li><p><strong>反向映射（術語 → ID）：</strong>Milvus 收集唯一術語，並建立從每個術語到所有包含該術語的 ID 的反向映射。</p></li>
-</ol>
-<p>例如，值<strong>「電子產品」</strong>對應於 ID<strong>1</strong>和<strong>3</strong>，而<strong>「書籍」</strong>則對應於 ID<strong>2</strong>和<strong>5</strong>。</p>
+    </button></h3><p>下表列出了受支援的<code translate="no">INVERTED</code> 索引目標，以及該索引可協助評估的篩選條件：</p>
+<table>
+<thead>
+<tr><th>索引目標</th><th>可使用該索引的篩選條件</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> 欄位</td><td>相等 (<code translate="no">==</code>,<code translate="no">!=</code>) 及隸屬關係 (<code translate="no">in</code>,<code translate="no">not in</code>)。</td></tr>
+<tr><td>數值欄位（<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> ）</td><td>相等性、成員關係與區間 (<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>,<code translate="no">&gt;=</code>)。</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 欄位</td><td>相等、成員關係、範圍、前綴匹配（例如<code translate="no">name LIKE &quot;abc%&quot;</code> ）以及一般 LIKE 運算（例如<code translate="no">name LIKE &quot;a%b_c&quot;</code> ）。</td></tr>
+<tr><td>帶有<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code> 元素的普通<code translate="no">ARRAY</code> 欄位</td><td>元素包含關係及符合資格的整組陣列比較。請參閱「<a href="/docs/zh-hant/array_data_type.md#Array-index-support">陣列索引支援</a>」。</td></tr>
+<tr><td>帶型別的 JSON 路徑</td><td>適用於索引轉換的篩選條件。請指定路徑與轉換參數；有關轉換相容性，請參閱「<a href="/docs/zh-hant/json-indexing.md#Understand-cast-types">JSON 索引</a>」；關於查詢行為，請參閱「<a href="/docs/zh-hant/json-indexing.md#Supported-filters">JSON 篩選條件」詳情</a>。</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>標量索引（包括<code translate="no">AUTOINDEX</code> ）不支援遞迴的 ARRAY 欄位或包含可為 null 元素的陣列。請參閱<a href="/docs/zh-hant/array_data_type.md#Array-index-support">「陣列索引支援</a>」以了解一般陣列篩選器，以及「<a href="/docs/zh-hant/index-structarray-fields.md#Create-scalar-indexes">索引 StructArray 欄位</a>」以了解子欄位規則。</p>
+</blockquote>
+</div>
+<p>簡單的後綴（<code translate="no">LIKE &quot;%abc&quot;</code> ）和子字串（<code translate="no">LIKE &quot;%abc%&quot;</code> ）篩選器會使用掃描路徑，儘管較複雜的 LIKE 模式亦可使用此索引。正規表達式篩選器不會直接使用 INVERTED 模式查詢。這些規則在<a href="/docs/zh-hant/pattern-matching.md#Accelerate-pattern-matching-with-indexes">查詢規劃簡化後才</a>適用。</p>
+<p>標量<code translate="no">INVERTED</code> 索引不支援基於標記的<code translate="no">TEXT_MATCH</code> 或<code translate="no">PHRASE_MATCH</code> ；請參閱「<a href="/docs/zh-hant/keyword-match.md">文字比對</a>」。</p>
+<div class="alert note">
+<blockquote>
+<p>這些是索引功能，而非對有效篩選表達式的限制。有關共用查詢約束，請參閱<a href="/docs/zh-hant/scalar_index.md#Filter-execution">「標量索引」</a>。關於<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及 NULL 測試（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），請參閱「<a href="/docs/zh-hant/basic-operators.md">基本運算子</a>」。</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">記憶體考量<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要粗略估算已載入記憶體的大小，請使用<code translate="no">S</code> 位元組，其中<code translate="no">S</code> 為儲存壓縮前所建立索引的大小。請針對具代表性的資料建立索引以取得<code translate="no">S</code> ；原始欄位資料大小不能作為替代參考。</p>
+<p>這些粗略估算值涵蓋了在停用記憶體映射情況下，已載入索引所需的記憶體。請針對每個區段分別計算，然後將所有已載入區段及其複本的數值相加。</p>
+<div class="alert note">
+<blockquote>
+<p>請預留額外記憶體以因應已載入的欄位資料、向量索引、集合與索引的開銷，以及臨時分配。請使用具代表性的資料和查詢進行驗證；陣列、JSON、舊版索引格式以及記憶體映射均需另行測量。</p>
+</blockquote>
+</div>
+<p><a id="How-INVERTED-indexes-work"></a></p>
+<h3 id="How-INVERTED-works" class="common-anchor-header">INVERTED 的運作原理<button data-href="#How-INVERTED-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>查看值查詢範例</strong></summary></p>
+<p>反向索引將實體 ID 到欄位值的映射關係顛倒。在圖中，<strong>「electronics」</strong>映射至 ID<strong>1</strong>和<strong>3，而</strong> <strong>「books」</strong>則映射至 ID<strong>2</strong>和<strong>5</strong>。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" /> 
    <span>反向索引的運作原理</span>
   
  </span></p>
-<p>當您篩選特定值（例如：<code translate="no">category == &quot;electronics&quot;</code> ）時，Milvus 會直接在索引中查詢該術語，並直接擷取相符的 ID。此舉可避免掃描整個資料集，並能實現快速篩選，對於分類型或重複值尤為有效。</p>
-<p>反向索引支援所有標量欄位類型，例如<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong> 及<strong>ARRAY</strong>。不過，為 JSON 欄位建立索引時的參數設定，與一般標量欄位略有不同。</p>
+<p>對於查詢 `<code translate="no">category == &quot;electronics&quot;</code>`，Milvus 會從索引中檢索 ID<strong>1</strong>和<strong>3，</strong>而非檢查每個實體的類別。</p>
+<p></details></p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">在非 JSON 欄位上建立索引<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -86,7 +144,7 @@ summary: 當您需要對資料進行頻繁的篩選查詢時，反向索引能�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若要在非 JSON 欄位上建立索引，請依照以下步驟操作：</p>
+    </button></h2><p>若要針對非 JSON 欄位建立索引，請依照以下步驟操作：</p>
 <ol>
 <li><p>準備您的索引參數：</p>
 <p><div class="multipleCode">
@@ -466,10 +524,9 @@ curl --request POST \
       </svg>
     </button></h2><p>請使用 `<code translate="no">drop_index()</code> ` 方法從集合中移除現有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
-<li><p>自<strong>v2.6.4</strong>或更新版本起，當標量索引不再需要時，可直接刪除該索引，無需先釋放集合。</p></li>
-</ul>
+<blockquote>
+<p>有關刪除標量索引的發佈要求，請參閱《<a href="/docs/zh-hant/scalar_index.md#Drop-index-compatibility">標量索引》</a>。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -566,27 +623,7 @@ curl --request POST \
     &quot;indexName&quot;: &quot;category_index&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Best-practices" class="common-anchor-header">最佳實務<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>在載入資料後建立索引</strong>：針對已包含資料的集合建立索引，以獲得更好的效能</p></li>
-<li><p><strong>使用描述性索引名稱</strong>：選擇能清楚標示欄位與用途的名稱</p></li>
-<li><p><strong>監控索引效能</strong>：在建立索引前後檢查查詢效能</p></li>
-<li><p><strong>考量查詢模式</strong>：針對您經常用來篩選的欄位建立索引</p></li>
-</ul>
+<p><a id="Best-practices"></a></p>
 <h2 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -603,6 +640,6 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>瞭解<a href="/docs/zh-hant/index-explained.md">其他索引類型</a></p></li>
-<li><p>請參閱「<a href="/docs/zh-hant/json-indexing.md">JSON 索引</a>」以了解進階的 JSON 索引情境</p></li>
+<li><p>請參閱《<a href="/docs/zh-hant/scalar_index.md#Whats-next">標量索引》</a>以比較標量索引並規劃資源。</p></li>
+<li><p>有關進階的 JSON 索引情境，請參閱「<a href="/docs/zh-hant/json-indexing.md">JSON 索引</a>」。</p></li>
 </ul>

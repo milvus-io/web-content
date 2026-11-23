@@ -37,7 +37,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在 Milvus 中，Collection Schema 相当于关系型数据库中的表，它定义了 Milvus 如何组织 Collection 中的数据。​</p>
-<p>设计良好的Schema至关重要，因为它抽象了数据模型，并决定了您能否通过搜索实现业务目标。此外，由于插入Collection的每一行数据都必须遵循Schema，这有助于维护数据的一致性和长期质量。 从技术角度来看，定义明确的Schema能实现井然有序的列数据存储和更简洁的索引结构，从而提升搜索性能。​</p>
+<p>设计良好的Schema至关重要，因为它抽象了数据模型，并决定了您能否通过搜索实现业务目标。此外，由于插入Collection的每一行数据都必须遵循Schema，因此它有助于维护数据的一致性和长期质量。 从技术角度来看，定义明确的Schema能带来井然有序的列数据存储和更简洁的索引结构，从而提升搜索性能。​</p>
 <p>Collection模式包含一个主键、最多四个向量字段以及若干标量字段。下图展示了如何将一篇文章映射到一组Schema字段中。​</p>
 <p><span class="img-wrapper">
   
@@ -45,7 +45,7 @@ summary: >-
    <span>模式设计</span>
   
  </span></p>
-<p>搜索系统的数据模型设计涉及分析业务需求，并将信息抽象为以Schema表达的数据模型。例如，对一段文本进行搜索时，必须通过“嵌入”将字符串转换为向量，从而实现“索引”，进而支持向量搜索。 除了这一基本要求外，可能还需要存储其他属性，例如发布时间戳和作者。这些元数据允许通过过滤来优化语义搜索，仅返回特定日期之后发布的文本或特定作者的文本。 您还可以将这些标量与正文一起检索，以便在应用程序中呈现搜索结果。应为每个元素分配一个唯一的标识符（以整数或字符串形式表示）来组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。​</p>
+<p>搜索系统的数据模型设计涉及分析业务需求，并将信息抽象为以Schema表达的数据模型。例如，对一段文本进行搜索时，必须通过“嵌入”将字符串转换为向量，从而实现向量搜索。 除了这一基本要求外，可能还需要存储其他属性，例如发布时间戳和作者。这些元数据允许通过过滤来优化语义搜索，仅返回特定日期之后发布或由特定作者撰写的文本。 您还可以将这些标量与正文一起检索，以便在应用程序中呈现搜索结果。应为每个元素分配一个唯一的标识符（以整数或字符串形式表示）来组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。​</p>
 <p>请参阅<a href="/docs/zh/schema-hands-on.md">《Schema设计实践指南》</a>，了解如何设计出结构合理的Schema。​</p>
 <h2 id="Create-Schema​" class="common-anchor-header">创建Schema​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,9 +64,9 @@ summary: >-
       </svg>
     </button></h2><p>以下代码片段演示了如何创建Schema。​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -106,9 +106,9 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
       </svg>
     </button></h2><p>Collection 中的主键字段用于唯一标识一个实体。它仅接受<strong>Int64</strong>或<strong>VARCHAR</strong>类型的值。以下代码片段演示了如何添加主键字段。​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -152,9 +152,9 @@ export schema='{​
 }'​
 
 </code></pre>
-<p>添加字段时，您可以通过将字段的 `<code translate="no">is_primary</code> ` 属性设置为 `<code translate="no">True</code>` 来显式指定该字段为主键字段。主键字段默认接受<strong>`Int64`</strong>值。在此情况下，主键字段的值应为类似于 `<code translate="no">12345</code>` 的整数。如果您选择在主键字段中使用<strong>`VARCHAR`</strong>值，则该值应为类似于 `<code translate="no">my_entity_1234</code>` 的字符串。​</p>
+<p>在添加字段时，您可以通过将字段的 `<code translate="no">is_primary</code> ` 属性设置为 `<code translate="no">True</code>` 来显式指定该字段为主键字段。主键字段默认接受<strong>Int64</strong>值。在此情况下，主键字段的值应为类似于 `<code translate="no">12345</code>` 的整数。如果您选择在主键字段中使用<strong>VARCHAR</strong>值，则该值应为类似于 `<code translate="no">my_entity_1234</code>` 的字符串。​</p>
 <p>您还可以将<code translate="no">autoId</code> 属性设置为<code translate="no">True</code> ，以便 Milvus 在插入数据时自动分配主字段值。​</p>
-<p>有关详细信息，请参阅<a href="/docs/zh/primary-field.md">​主字段与AutoID</a>。​</p>
+<p>有关详细信息，请参阅<a href="/docs/zh/primary-field.md">​主字段与 AutoID​</a>。</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">添加向量字段​<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,11 +170,11 @@ export schema='{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>向量字段支持各种稀疏和稠密向量嵌入。在 Milvus 中，您可以向 Collection 添加四个向量字段。以下代码片段演示了如何添加向量字段。​</p>
+    </button></h2><p>向量字段支持各种稀疏和稠密向量 Embeddings。在 Milvus 中，您可以向 Collection 添加四个向量字段。以下代码片段演示了如何添加向量字段。​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -215,10 +215,10 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>上述代码片段中的<code translate="no">dim</code> 参数表示向量字段中将存储的向量Embeddings的维度。<code translate="no">FLOAT_VECTOR</code> 的值表示该向量字段包含一个32位浮点数列表，这些数值通常用于表示反对数。此外，Milvus还支持以下类型的向量Embeddings：​</p>
+<p>上述代码片段中的<code translate="no">dim</code> 参数表示向量字段中将存储的向量嵌入的维度。<code translate="no">FLOAT_VECTOR</code> 的值表示该向量字段包含一个32位浮点数列表，这些数值通常用于表示反对数。此外，Milvus还支持以下类型的向量嵌入：​</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code>​</p>
-<p>此类向量字段包含一个 16 位半精度浮点数列表，通常适用于内存或带宽受限的深度学习或基于 GPU 的计算场景。​</p></li>
+<p>此类向量字段包含一个 16 位半精度浮点数的列表，通常适用于内存或带宽受限的深度学习或基于 GPU 的计算场景。​</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code>​</p>
 <p>此类向量字段包含一组 16 位浮点数，其精度虽有所降低，但指数范围与 Float32 相同。此类数据常用于深度学习场景，因为它能在不显著影响精度的同时减少内存占用。​</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code>​</p>
@@ -257,11 +257,11 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Milvus 中，您可以使用<code translate="no">VARCHAR</code> 字段来存储字符串。有关<code translate="no">VARCHAR</code> 字段的更多信息，请参阅<a href="/docs/zh/string.md">​VARCHAR 字段</a>。​</p>
+    </button></h3><p>在 Milvus 中，您可以使用<code translate="no">VARCHAR</code> 字段来存储字符串。有关<code translate="no">VARCHAR</code> 字段的更多信息，请参阅<a href="/docs/zh/string.md">​VarChar 字段​</a>。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -318,7 +318,7 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在 Milvus 3.0 及更高版本中，您可以使用<code translate="no">TEXT</code> 字段来存储文档文本、段落、日志和其他长文本内容。与<code translate="no">VARCHAR</code> 不同，<code translate="no">TEXT</code> 字段不需要<code translate="no">max_length</code> 。有关<code translate="no">TEXT</code> 字段的更多信息，请参阅<a href="/docs/zh/text.md">“文本字段”</a>。</p>
+    </button></h3><p>在 Milvus 3.0 及更高版本中，您可以使用<code translate="no">TEXT</code> 字段来存储文档文本、段落、日志及其他长文本内容。与<code translate="no">VARCHAR</code> 不同，<code translate="no">TEXT</code> 字段不需要<code translate="no">max_length</code> 。有关<code translate="no">TEXT</code> 字段的更多信息，请参阅<a href="/docs/zh/text.md">“文本字段”</a>。</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_text&quot;</span>,
     datatype=DataType.TEXT,
@@ -341,9 +341,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus 支持的数字类型包括<code translate="no">Int8</code> 、<code translate="no">Int16</code> 、<code translate="no">Int32</code> 、<code translate="no">Int64</code> 、<code translate="no">Float</code> 和<code translate="no">Double</code> 。有关数字字段的更多信息，请参阅<a href="/docs/zh/number.md">“数字字段”</a>。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -397,9 +397,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus 支持布尔字段。以下代码片段演示了如何添加布尔字段。​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -454,9 +454,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>JSON 字段通常用于存储半结构化 JSON 数据。有关 JSON 字段的更多信息，请参阅<a href="/docs/zh/use-json-fields.md">​JSON 字段​</a>。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -512,9 +512,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>数组字段用于存储一组元素。数组字段中所有元素的数据类型应保持一致。有关数组字段的更多信息，请<a href="/docs/zh/array_data_type.md">参阅​数组字段​</a>。</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

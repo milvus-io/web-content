@@ -46,11 +46,12 @@ summary: >-
 <li><strong>Значения по умолчанию</strong>: поля ARRAY не поддерживают значения по умолчанию. Однако можно установить атрибут « <code translate="no">nullable</code> » в значение « <code translate="no">True</code> », чтобы разрешить нулевые значения. Подробности см. в разделе <a href="/docs/ru/nullable-and-default.md">«Nullable &amp; Default</a>».</li>
 </ul>
 <ul>
-<li><strong>Тип данных:</strong> Все элементы в поле ARRAY должны иметь одинаковый тип данных, который определяется параметром <code translate="no">element_type</code>. Если для параметра <code translate="no">element_type</code> установлено значение <code translate="no">VARCHAR</code>, необходимо также указать параметр <code translate="no">max_length</code>, который определяет максимальное количество байтов, допустимое для каждого элемента массива. Поле « <code translate="no">element_type</code> » принимает любой скалярный тип данных, поддерживаемый Milvus, за исключением « <code translate="no">JSON</code> ». Для « <code translate="no">element_type=STRUCT</code> » используйте поле StructArray и укажите « <code translate="no">struct_schema</code> »; подробности см. в разделе <a href="/docs/ru/create-structarray-field.md">«StructArray</a>». Поле ARRAY верхнего уровня не может содержать векторы или вложенные массивы, а его элементы не могут быть отдельно равны null; такие формы доступны только для подполей внутри поля StructArray в Milvus 3.0.6 и более поздних версиях.</li>
+<li><strong>Тип данных:</strong> Все элементы в поле ARRAY должны иметь одинаковый тип данных, который определяется параметром <code translate="no">element_type</code>. Если для параметра <code translate="no">element_type</code> установлено значение <code translate="no">VARCHAR</code>, необходимо также указать параметр <code translate="no">max_length</code>, который определяет максимальное количество байтов, допустимое для каждого элемента массива. Поле « <code translate="no">element_type</code> » принимает любой скалярный тип данных, поддерживаемый Milvus, за исключением « <code translate="no">JSON</code> ». Для « <code translate="no">element_type=STRUCT</code> » используйте поле StructArray и укажите « <code translate="no">struct_schema</code> »; подробности см. в разделе <a href="/docs/ru/create-structarray-field.md">«StructArray</a>». Поле ARRAY верхнего уровня не может содержать векторы или вложенные массивы, и его элементы не могут быть нулевыми по отдельности; такие формы доступны только для подполей внутри поля StructArray в Milvus 3.0.6 и более поздних версиях.</li>
 </ul>
 <ul>
-<li><p><strong>Емкость массива</strong>: количество элементов в поле ARRAY должно быть меньше или равно максимальной емкости, заданной при создании массива, как указано в <code translate="no">max_capacity</code>. Значение должно быть целым числом в диапазоне от <strong>1</strong> до <strong>4096</strong>.</p></li>
-<li><p><strong>Обработка строк</strong>: Строковые значения в полях Array хранятся без изменений, без семантической экранировки или преобразования. Например, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> и <code translate="no">&quot;a\&quot;b&quot;</code> хранятся в том виде, в каком они введены, тогда как <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недопустимыми значениями.</p></li>
+<li><p><strong>Емкость массива</strong>: количество элементов в поле ARRAY должно быть меньше или равно максимальной емкости, заданной при создании массива, как указано в <code translate="no">max_capacity</code>. Значение должно быть больше 0 и не должно превышать <code translate="no">proxy.maxArrayCapacity</code>, значение по умолчанию которого равно <strong>4096</strong>.</p></li>
+<li><p><strong>Сопоставление текста</strong>: <code translate="no">TEXT_MATCH</code>, <code translate="no">TEXT_MATCH_FUZZY</code> и <code translate="no">PHRASE_MATCH</code> поддерживают только поля типа « <code translate="no">VARCHAR</code> » и « <code translate="no">TEXT</code> »; применение их к полю типа ARRAY приводит к ошибке. <code translate="no">enable_analyzer</code> и <code translate="no">enable_match</code> не оказывают влияния на поля типа ARRAY. Подробности о сопоставлении текста см. в разделе <a href="/docs/ru/keyword-match.md">«Сопоставление текста</a>».</p></li>
+<li><p><strong>Обработка строк</strong>: Строковые значения в полях типа «Массив» хранятся без изменений, без семантической экранировки или преобразования. Например, значения <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> и <code translate="no">&quot;a\&quot;b&quot;</code> хранятся в том виде, в котором они введены, тогда как <code translate="no">'a'b'</code> и <code translate="no">&quot;a&quot;b&quot;</code> считаются недопустимыми значениями.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Добавление поля ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,15 +68,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы использовать поля типа ARRAY в кластерах Milvus, необходимо определить соответствующий тип поля при создании схемы коллекции. Этот процесс включает:</p>
+    </button></h2><p>Чтобы добавить поле ARRAY в схему коллекции, установите следующие параметры:</p>
 <ol>
-<li><p>Установку параметра ` <code translate="no">datatype</code> ` в значение поддерживаемого типа данных массива: ` <code translate="no">ARRAY</code>`.</p></li>
-<li><p>Использование параметра <code translate="no">element_type</code> для указания типа данных элементов в массиве. Все элементы в одном массиве должны иметь одинаковый тип данных.</p></li>
-<li><p>Использование параметра ` <code translate="no">max_capacity</code> ` для определения максимальной емкости массива, т. е. максимального количества элементов, которое он может содержать.</p></li>
+<li><p>Установите тип данных поля равным « <code translate="no">ARRAY</code> ».</p></li>
+<li><p>Укажите для параметра « <code translate="no">element_type</code> » общий тип данных элементов.</p></li>
+<li><p>Укажите для параметра « <code translate="no">max_capacity</code> » максимальное количество элементов.</p></li>
 </ol>
 <p>Вот как определить схему коллекции, включающую поля ARRAY:</p>
 <div class="alert note">
-<p>Если при определении схемы установить параметр ` <code translate="no">enable_dynamic_field=True</code> `, Milvus позволит вставлять скалярные поля, которые не были определены заранее. Однако это может увеличить сложность запросов и управления, что потенциально может повлиять на производительность. Дополнительную информацию см. в разделе <a href="/docs/ru/enable-dynamic-field.md">«Динамическое поле</a>».</p>
+<p>Чтобы вставить поля, не определённые в схеме, включите <a href="/docs/ru/enable-dynamic-field.md">динамическое поле</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -375,8 +376,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Индексирование помогает повысить производительность поиска и запросов. В кластерах Milvus индексирование является обязательным для векторных полей, но необязательным для скалярных полей.</p>
-<p>В следующем примере создаются индексы для векторного поля <code translate="no">embedding</code> и поля ARRAY <code translate="no">tags</code>, причём для обоих используется тип индекса « <code translate="no">AUTOINDEX</code> ». При использовании этого типа Milvus автоматически выбирает наиболее подходящий индекс в зависимости от типа данных. Вы также можете настроить тип индекса и параметры для каждого поля. Подробности см. в разделе <a href="/docs/ru/index-explained.md">«Объяснение индекса</a>».</p>
+    </button></h2><p>Векторные поля требуют индексов; скалярные индексы не являются обязательными. В этом примере запрашивается <code translate="no">AUTOINDEX</code> по адресам <code translate="no">embedding</code> и <code translate="no">tags</code>. Информацию о явных вариантах выбора индексов ARRAY и поддержке фильтров см. в разделе <a href="#Array-index-support">«Поддержка индексов массивов</a>».</p>
+<div class="alert note">
+<blockquote>
+<p>Скалярные индексы, включая <code translate="no">AUTOINDEX</code>, не поддерживают рекурсивные поля ARRAY или массивы с элементами, допускающими значение null. См. раздел <a href="/docs/ru/array_data_type.md#Array-index-support">«Поддержка индексов массивов»</a> для фильтров обычных массивов и раздел <a href="/docs/ru/index-structarray-fields.md#Create-scalar-indexes">«Индексирование полей StructArray»</a> для правил подполей.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -486,6 +491,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>Поддержка индексации массивов: типы индексов и ускоренные фильтры</strong></summary></p>
+<p>Скалярные индексы для обычного поля ARRAY индексируют его элементы. Выберите один из следующих явных типов индексов:</p>
+<table>
+<thead>
+<tr><th>Тип элемента</th><th>Явные типы индексов</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>Также можно запросить <code translate="no">AUTOINDEX</code>; см. <a href="/docs/ru/scalar_index.md#AUTOINDEX-behavior">раздел «Скалярный индекс»</a> для ознакомления с выбором ARRAY по умолчанию.</p>
+<p>Следующие фильтры могут использовать подходящие индексы массива:</p>
+<table>
+<thead>
+<tr><th>Фильтр</th><th>Поведение индекса</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code> или подходящий автоматический выбор могут выполнять поиск элементов независимо от их позиции.</td></tr>
+<tr><td><code translate="no">==</code> для всего массива или <code translate="no">!=</code> для массивов булевых значений, целых чисел или VARCHAR</td><td><code translate="no">INVERTED</code> могут найти кандидатов, после чего проверяют исходные массивы на порядок и длину. Сравнение « <code translate="no">BITMAP</code> » не используется для этого пути выбора кандидатов.</td></tr>
+<tr><td>Сравнения всего массива для массивов с плавающей запятой</td><td>Переходят к сканированию.</td></tr>
+<tr><td>Доступ к элементам, например <code translate="no">tags[0]</code>, или длина массива</td><td>Индексирование по принадлежности элемента не обеспечивает поиск по индексу для этих операций.</td></tr>
+</tbody>
+</table>
+<p>Синтаксис выражений см. в разделе <a href="/docs/ru/array-operators.md">«Операторы ARRAY</a>».</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">Создание коллекции<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -501,7 +533,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После определения схемы и индекса создайте коллекцию, содержащую поля типа ARRAY.</p>
+    </button></h2><p>После определения схемы и индекса создайте коллекцию, включающую поля ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -652,7 +684,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После создания коллекции можно вставлять данные, содержащие поля типа ARRAY.</p>
+    </button></h2><p>После создания коллекции можно вставлять данные, содержащие поля ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1107,7 +1139,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Помимо базовой фильтрации по скалярным полям, можно комбинировать векторный поиск по схожести с фильтрами по скалярным полям. Например, в следующем коде показано, как добавить фильтр по скалярному полю к векторному поиску:</p>
+    </button></h2><p>Используйте фильтры ARRAY при векторном поиске, чтобы ограничить круг подходящих сущностей:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1270,4 +1302,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Кроме того, Milvus поддерживает расширенные операторы фильтрации массивов, такие как <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> и <code translate="no">ARRAY_LENGTH</code>, что позволяет ещё больше расширить возможности запросов. Подробнее см. в разделе <a href="/docs/ru/array-operators.md">«Операторы ARRAY</a>».</p>
+<p>Информацию о фильтрах по содержанию и длине см. в разделе <a href="/docs/ru/array-operators.md">«Операторы ARRAY</a>».</p>

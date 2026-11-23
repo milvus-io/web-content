@@ -20,8 +20,8 @@ title: البدء السريع
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>يمكن للمتجهات، وهي تنسيق البيانات الناتجة عن نماذج الشبكات العصبية، ترميز المعلومات بفعالية وتلعب دورًا محوريًا في تطبيقات الذكاء الاصطناعي مثل قاعدة المعرفة، والبحث الدلالي، والتوليد المعزز بالاسترجاع (RAG)، وغيرها.</p>
-<p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من جميع الأحجام، بدءًا من تشغيل روبوت دردشة تجريبي في Jupyter Notebook وصولًا إلى إنشاء محرك بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك خطوة بخطوة إلى كيفية إعداد Milvus محليًّا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
+<p>يمكن للمتجهات، وهي تنسيق البيانات الناتجة عن نماذج الشبكات العصبية، ترميز المعلومات بفعالية وتلعب دورًا محوريًا في تطبيقات الذكاء الاصطناعي مثل قاعدة المعرفة، والبحث الدلالي، والتوليد المعزز بالاسترجاع (RAG)، وغير ذلك.</p>
+<p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من جميع الأحجام، بدءًا من تشغيل روبوت دردشة تجريبي في Jupyter Notebook وصولًا إلى بناء نظام بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك خطوة بخطوة إلى كيفية إعداد Milvus محليًا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">تثبيت Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +78,7 @@ title: البدء السريع
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا كنت قد قمت بالفعل بتثبيت Milvus باستخدام Docker أو Kubernetes، أو لديك نقطة نهاية Zilliz Cloud، فقم بتثبيت SDK فقط. يتطلب PyMilvus 3.0.2 Python 3.9 أو إصدارًا أحدث؛ ولا تحتاج إلى التبعية المحلية Lite في هذا المسار:</p>
+    </button></h3><p>إذا كنت قد قمت بالفعل بتثبيت Milvus باستخدام Docker أو Kubernetes، أو لديك نقطة نهاية Zilliz Cloud، فقم بتثبيت SDK فقط. يتطلب PyMilvus 3.0.2 Python 3.9 أو أحدث؛ ولا تحتاج إلى التبعية المحلية Lite في هذا المسار:</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>استخدم كتلة اتصال الخادم في القسم التالي بدلاً من فتح مسار <code translate="no">.db</code>. تأكد من أن إصدار SDK متوافق مع الخادم الخاص بك؛ راجع <a href="/docs/ar/release_notes.md">ملاحظات الإصدار</a>.</p>
@@ -155,7 +155,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في Milvus، نحتاج إلى مجموعة لتخزين المتجهات والبيانات الوصفية المرتبطة بها. يمكنك اعتبارها بمثابة جدول في قواعد البيانات SQL التقليدية. عند إنشاء مجموعة، يمكنك تحديد معلمات المخطط والفهرس لتكوين مواصفات المتجهات مثل الأبعاد وأنواع الفهارس ومقاييس المسافة. هناك أيضًا مفاهيم معقدة لتحسين الفهرس من أجل أداء البحث عن المتجهات. في الوقت الحالي، دعونا نركز فقط على الأساسيات ونستخدم الإعدادات الافتراضية لكل ما هو ممكن. كحد أدنى، ما عليك سوى تعيين اسم المجموعة وبُعد حقل المتجهات الخاص بالمجموعة.</p>
+    </button></h2><p>في Milvus، نحتاج إلى مجموعة لتخزين المتجهات والبيانات الوصفية المرتبطة بها. يمكنك التفكير فيها على أنها جدول في قواعد البيانات SQL التقليدية. عند إنشاء مجموعة، يمكنك تحديد معلمات المخطط والفهرس لتكوين مواصفات المتجهات مثل الأبعاد وأنواع الفهارس ومقاييس المسافة. هناك أيضًا مفاهيم معقدة لتحسين الفهرس من أجل أداء البحث عن المتجهات. في الوقت الحالي، دعنا نركز فقط على الأساسيات ونستخدم الإعدادات الافتراضية لكل ما يمكن. كحد أدنى، ما عليك سوى تعيين اسم المجموعة وأبعاد حقل المتجهات الخاص بالمجموعة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -165,7 +165,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <p>في الإعداد أعلاه،</p>
 <ul>
-<li>يستخدم كل من المفتاح الأساسي وحقول المتجهات أسمائها الافتراضية («id» و«vector»).</li>
+<li>يستخدم كل من المفتاح الأساسي وحقول المتجهات أسماءها الافتراضية («id» و«vector»).</li>
 <li>يتم تعيين نوع المقياس (تعريف مسافة المتجهات) على قيمته الافتراضية (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
 <li>يقبل حقل المفتاح الأساسي الأعداد الصحيحة ولا يتم تزايده تلقائيًا (أي لا يستخدم <a href="https://milvus.io/docs/schema.md">ميزة auto-id</a>).
 بدلاً من ذلك، يمكنك تعريف مخطط المجموعة رسميًا باتباع هذه <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">التعليمات</a>.</li>
@@ -185,7 +185,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا الدليل، نستخدم المتجهات لإجراء بحث دلالي على النص. نحتاج إلى إنشاء متجهات للنص عن طريق تنزيل نماذج التضمين. يمكن القيام بذلك بسهولة باستخدام وظائف المساعدة من مكتبة <code translate="no">pymilvus[model]</code>.</p>
+    </button></h2><p>في هذا الدليل، نستخدم المتجهات لإجراء بحث دلالي على النص. نحتاج إلى إنشاء متجهات للنص عن طريق تنزيل نماذج التضمين. يمكن القيام بذلك بسهولة باستخدام وظائف الأدوات المساعدة من مكتبة <code translate="no">pymilvus[model]</code>.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">تمثيل النص بالمتجهات<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

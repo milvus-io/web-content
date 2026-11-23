@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus è un sistema che separa l’archiviazione dall’elaborazione. <strong>I nodi di streaming</strong> aggiungono tutte le operazioni di scrittura al Write-Ahead Log (WAL) e conservano i <strong>dati in crescita</strong> — ovvero i dati che si trovano ancora nel WAL e non sono ancora stati salvati in modo permanente. Un processo di ripristino converte i dati in crescita in <strong>dati storici</strong> (segmenti sigillati salvati in un sistema di archiviazione a oggetti come MinIO/S3), che vengono forniti dai <strong>nodi di query</strong>. Ogni richiesta di ricerca o query viene ricevuta da un <strong>delegatore di query (Query Delegator</strong> ) sul nodo di streaming che ospita il WAL della collezione: il delegatore genera il piano di query, esegue localmente la parte relativa ai dati in crescita, inoltra la parte relativa ai dati storici ai nodi di query pertinenti e unisce i risultati prima di restituirli. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/streaming_service.md">Servizio di streaming</a>.</p>
+    </button></h2><p>Milvus è un sistema che separa l’archiviazione dall’elaborazione. <strong>I nodi di streaming</strong> aggiungono tutte le operazioni di scrittura al Write-Ahead Log (WAL) e conservano i <strong>dati in crescita</strong> — ovvero i dati che si trovano ancora nel WAL e non sono ancora stati salvati in modo permanente. Un processo di ripristino converte i dati in crescita in <strong>dati storici</strong> (segmenti sigillati salvati in un sistema di archiviazione a oggetti come MinIO/S3), che vengono poi forniti dai <strong>nodi di query</strong>. Ogni richiesta di ricerca o query viene ricevuta da un <strong>delegatore di query (Query Delegator</strong> ) sul nodo di streaming che ospita il WAL della collezione: il delegatore genera il piano di query, esegue localmente la parte relativa ai dati in crescita, inoltra la parte relativa ai dati storici ai nodi di query pertinenti e unisce i risultati prima di restituirli. Per ulteriori dettagli, consultare la sezione <a href="/docs/it/v2.6.x/streaming_service.md">Servizio di streaming</a>.</p>
 <p>Per garantire la coerenza, Milvus assegna a ogni messaggio un timestamp TSO (Timestamp Oracle) che ne determina l’ordine nel WAL e inserisce continuamente timestamp di sincronizzazione nel WAL insieme ai messaggi di dati. Ogni volta che viene ricevuto un timestamp di sincronizzazione (syncTs), questo viene registrato come ServiceTime; ciò significa che tutti i dati precedenti a tale ServiceTime sono visibili alle query. Sulla base del ServiceTime, Milvus fornisce timestamp di garanzia (GuaranteeTs) per soddisfare le diverse esigenze degli utenti in termini di coerenza e disponibilità. Gli utenti possono comunicare al delegatore la necessità di includere nell’ambito di ricerca i dati precedenti a un determinato momento, specificando i GuaranteeT nelle proprie richieste di ricerca.</p>
 <p><span class="img-wrapper">
   
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile impostare diversi livelli di coerenza sia durante la creazione di una raccolta, sia durante l’esecuzione di ricerche e query.</p>
+    </button></h2><p>È possibile impostare il livello di coerenza al momento della creazione di una raccolta, modificarlo dopo la creazione della raccolta oppure sovrascriverlo per singole ricerche e query.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Impostazione del livello di coerenza al momento della creazione della raccolta<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Durante la creazione di una raccolta, è possibile impostare il livello di coerenza per le ricerche e le query all’interno della raccolta. Il seguente esempio di codice imposta il livello di coerenza su <strong>«Bounded</strong>».</p>
+    </button></h3><p>Quando si crea una raccolta, è possibile impostare il livello di coerenza per le ricerche e le query all’interno della raccolta. Il seguente esempio di codice imposta il livello di coerenza su <strong>Bounded</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -169,6 +169,64 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>I valori possibili per il parametro ` <code translate="no">consistency_level</code> ` sono ` <code translate="no">Strong</code>`, ` <code translate="no">Bounded</code>`, ` <code translate="no">Eventually</code>` e ` <code translate="no">Session</code>`.</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Modifica del livello di coerenza della raccolta<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile modificare il livello di coerenza di una raccolta esistente modificandone la proprietà <code translate="no">consistency_level</code>. Il nuovo livello si applica alle ricerche e alle query successive sulla raccolta che non specificano un proprio livello di coerenza e la modifica non richiede il rilascio della raccolta. L'esempio di codice seguente modifica il livello di coerenza in <strong>Eventually</strong>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<span class="highlighted-wrapper-line">properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);</span>
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Impostazione del livello di coerenza nella ricerca<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,7 +242,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L'esempio di codice seguente riporta il livello di coerenza al valore <strong>"Bounded"</strong>. La modifica si applica solo alla richiesta di ricerca corrente.</p>
+    </button></h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L’esempio di codice seguente riporta il livello di coerenza a <strong>“Bounded</strong>”. La modifica si applica solo alla richiesta di ricerca corrente.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

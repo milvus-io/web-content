@@ -37,7 +37,7 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h2><p>记录您的备份版本、Milvus 源版本和目标版本、配置文件、环境变量覆盖设置、备份位置，以及脚本或 API 服务使用的命令。请查阅这些服务器版本的<a href="/docs/zh/milvus_backup_overview.md#Compatibility-matrix">兼容性信息</a>。</p>
-<p>在验证新安装时，请保留原始二进制文件、配置文件和现有备份目录。请<a href="/docs/zh/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">通过“获取 Milvus Backup”</a>将 0.6.0 下载到一个单独的目录中。以下所有命令均从该目录运行，并调用 0.6.0 二进制文件。请将您的 v1 配置文件副本放置在<code translate="no">configs/backup-v1.yaml</code> 路径下。</p>
+<p>在验证新安装时，请保留原始二进制文件、配置文件以及现有的备份目录。请<a href="/docs/zh/milvus_backup_0_6_cli.md#Obtain-Milvus-Backup">通过“获取 Milvus Backup”</a>将 0.6.0 下载到一个单独的目录中。以下所有命令均从该目录运行，并调用 0.6.0 二进制文件。请将您的 v1 配置文件副本放置在<code translate="no">configs/backup-v1.yaml</code> 路径下。</p>
 <h2 id="Migrate-the-configuration" class="common-anchor-header">迁移配置<button data-href="#Migrate-the-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,7 +152,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下示例保留二进制日志格式，并将数据还原到一个新的 Collection 中。请将 `<code translate="no">coll</code> ` 替换为一个您已记录其 Schema、数量、标量和向量值以及搜索结果的 Collection。使用新的备份名称，并确保目标名称<code translate="no">coll_upgrade_check</code> 不存在。</p>
+    </button></h2><p>以下示例保留二进制日志格式，并将数据恢复到一个新的 Collection 中。请将 `<code translate="no">coll</code> ` 替换为一个您已记录其 Schema、数量、标量和向量值以及搜索结果的 Collection。使用新的备份名称，并确保目标名称<code translate="no">coll_upgrade_check</code> 不存在。</p>
 <pre><code translate="no" class="language-shell">./milvus-backup check --config configs/backup-v2.yaml
 ./milvus-backup create --filter coll --format binlog -n upgrade_check --config configs/backup-v2.yaml
 ./milvus-backup get -n upgrade_check --config configs/backup-v2.yaml

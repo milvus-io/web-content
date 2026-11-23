@@ -49,8 +49,9 @@ summary: >-
 <li><strong>데이터 유형:</strong> ARRAY 필드의 모든 요소는 <code translate="no">element_type</code> 매개변수로 정의된 동일한 데이터 유형을 가져야 합니다. <code translate="no">element_type</code> 가 <code translate="no">VARCHAR</code> 로 설정된 경우, 각 배열 요소에 허용되는 최대 바이트 수를 정의하는 <code translate="no">max_length</code> 도 함께 지정해야 합니다. <code translate="no">element_type</code> 는 <code translate="no">JSON</code> 을 제외하고 Milvus에서 지원하는 모든 스칼라 데이터 유형을 허용합니다. <code translate="no">element_type=STRUCT</code> 의 경우 StructArray 필드를 사용하고 <code translate="no">struct_schema</code> 를 지정해야 합니다. 자세한 내용은 <a href="/docs/ko/create-structarray-field.md">StructArray를</a> 참조하십시오. 최상위 ARRAY 필드는 벡터나 중첩된 배열을 포함할 수 없으며, 각 요소가 개별적으로 null일 수 없습니다. 이러한 형식은 Milvus 3.0.6 이상 버전에서 StructArray 필드 내부의 하위 필드에서만 사용할 수 있습니다.</li>
 </ul>
 <ul>
-<li><p><strong>배열 용량</strong>: ARRAY 필드의 요소 수는 <code translate="no">max_capacity</code> 에 명시된 대로, 배열 생성 시 정의된 최대 용량 이하여야 합니다. 이 값은 <strong>1에서</strong> <strong>4096</strong> 사이의 정수여야 합니다.</p></li>
-<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 의미론적 이스케이프 처리나 변환 없이 있는 그대로 저장됩니다. 예를 들어, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> 및 <code translate="no">&quot;a\&quot;b&quot;</code> 는 입력된 그대로 저장되는 반면, <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 값으로 간주됩니다.</p></li>
+<li><p><strong>배열 용량</strong>: ARRAY 필드의 요소 수는 <code translate="no">max_capacity</code> 에 명시된 대로, 배열 생성 시 정의된 최대 용량 이하여야 합니다. 이 값은 0보다 커야 하며, <code translate="no">proxy.maxArrayCapacity</code>(기본값은 <strong>4096</strong>)을 초과해서는 안 됩니다.</p></li>
+<li><p><strong>텍스트 일치</strong>: <code translate="no">TEXT_MATCH</code>, <code translate="no">TEXT_MATCH_FUZZY</code> 및 <code translate="no">PHRASE_MATCH</code> 는 <code translate="no">VARCHAR</code> 및 <code translate="no">TEXT</code> 필드만 지원하며, 이를 ARRAY 필드에 적용하면 오류가 발생합니다. <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 는 ARRAY 필드에 아무런 영향을 미치지 않습니다. 텍스트 일치에 대한 자세한 내용은 <a href="/docs/ko/keyword-match.md">‘텍스트 일치’를</a> 참조하십시오.</p></li>
+<li><p><strong>문자열 처리</strong>: 배열 필드의 문자열 값은 의미적 이스케이프 처리나 변환 없이 있는 그대로 저장됩니다. 예를 들어, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> 및 <code translate="no">&quot;a\&quot;b&quot;</code> 는 입력된 그대로 저장되는 반면, <code translate="no">'a'b'</code> 및 <code translate="no">&quot;a&quot;b&quot;</code> 는 유효하지 않은 값으로 간주됩니다.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY 필드 추가<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,15 +68,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 클러스터에서 ARRAY 필드를 사용하려면 컬렉션 스키마를 생성할 때 관련 필드 유형을 정의해야 합니다. 이 과정은 다음을 포함합니다:</p>
+    </button></h2><p>컬렉션 스키마에 ARRAY 필드를 추가하려면 다음 매개변수를 설정하십시오.</p>
 <ol>
-<li><p><code translate="no">datatype</code> 를 지원되는 배열 데이터 유형인 <code translate="no">ARRAY</code> 로 설정합니다.</p></li>
-<li><p><code translate="no">element_type</code> 매개변수를 사용하여 배열 내 요소의 데이터 유형을 지정합니다. 동일한 배열에 포함된 모든 요소는 동일한 데이터 유형이어야 합니다.</p></li>
-<li><p><code translate="no">max_capacity</code> 매개변수를 사용하여 배열의 최대 용량, 즉 배열이 포함할 수 있는 요소의 최대 개수를 정의합니다.</p></li>
+<li><p>필드 데이터 유형을 ‘ <code translate="no">ARRAY</code> ’로 설정합니다.</p></li>
+<li><p><code translate="no">element_type</code> 을 요소들의 공통 데이터 유형으로 설정합니다.</p></li>
+<li><p><code translate="no">max_capacity</code> 를 요소의 최대 개수로 설정합니다.</p></li>
 </ol>
-<p>ARRAY 필드를 포함하는 컬렉션 스키마를 정의하는 방법은 다음과 같습니다:</p>
+<p>ARRAY 필드가 포함된 컬렉션 스키마를 정의하는 방법은 다음과 같습니다:</p>
 <div class="alert note">
-<p>스키마를 정의할 때 ` <code translate="no">enable_dynamic_field=True</code> `를 설정하면, Milvus는 사전에 정의되지 않은 스칼라 필드를 삽입할 수 있도록 허용합니다. 그러나 이로 인해 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드(Dynamic Field</a>)를 참조하십시오.</p>
+<p>스키마에 정의되지 않은 필드를 삽입하려면 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 활성화하십시오.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -375,8 +376,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱싱은 검색 및 쿼리 성능을 향상시키는 데 도움이 됩니다. Milvus 클러스터에서 인덱싱은 벡터 필드의 경우 필수이지만, 스칼라 필드의 경우 선택 사항입니다.</p>
-<p>다음 예제는 벡터 필드 ` <code translate="no">embedding</code> `과 ARRAY 필드 ` <code translate="no">tags</code>`에 대해 모두 ` <code translate="no">AUTOINDEX</code> ` 인덱스 유형을 사용하여 인덱스를 생성합니다. 이 유형을 사용하면 Milvus가 데이터 유형에 따라 가장 적합한 인덱스를 자동으로 선택합니다. 또한 각 필드에 대해 인덱스 유형과 매개변수를 사용자 정의할 수도 있습니다. 자세한 내용은 <a href="/docs/ko/index-explained.md">‘인덱스 설명’을</a> 참조하십시오.</p>
+    </button></h2><p>벡터 필드에는 인덱스가 필수이며, 스칼라 인덱스는 선택 사항입니다. 이 예제는 <code translate="no">embedding</code> 및 <code translate="no">tags</code> 에 대해 <code translate="no">AUTOINDEX</code> 를 요청합니다. 명시적인 ARRAY 인덱스 선택 및 필터 지원에 대해서는 <a href="#Array-index-support">배열 인덱스 지원을</a> 참조하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p><code translate="no">AUTOINDEX</code> 을 포함한 스칼라 인덱스는 재귀적 ARRAY 필드나 null이 허용되는 요소를 가진 배열을 지원하지 않습니다. 일반 배열 필터에 대해서는 <a href="/docs/ko/array_data_type.md#Array-index-support">'배열 인덱스 지원'을</a>, 하위 필드 규칙에 대해서는 <a href="/docs/ko/index-structarray-fields.md#Create-scalar-indexes">'StructArray 필드 인덱스'를</a> 참조하십시오.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -486,6 +491,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>배열 인덱스 지원: 인덱스 유형 및 가속화된 필터</strong></summary></p>
+<p>일반 ARRAY 필드에 대한 스칼라 인덱스는 해당 필드의 요소를 인덱싱합니다. 다음의 명시적 인덱스 유형 중에서 선택하십시오:</p>
+<table>
+<thead>
+<tr><th>요소 유형</th><th>명시적 인덱스 유형</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p><code translate="no">AUTOINDEX</code> 도 요청할 수 있습니다. 기본 ARRAY 선택 항목에 대해서는 <a href="/docs/ko/scalar_index.md#AUTOINDEX-behavior">스칼라 인덱스를</a> 참조하십시오.</p>
+<p>다음 필터에서는 유효한 배열 인덱스를 사용할 수 있습니다:</p>
+<table>
+<thead>
+<tr><th>필터</th><th>인덱스 동작</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code> 또는 유효한 자동 선택은 위치에 관계없이 요소를 조회할 수 있습니다.</td></tr>
+<tr><td>부울, 정수 또는 VARCHAR 배열에 대한 전체 배열 <code translate="no">==</code> 또는 <code translate="no">!=</code> </td><td><code translate="no">INVERTED</code> 을 통해 후보를 찾은 후, 원본 배열의 순서와 길이를 확인합니다. ` <code translate="no">BITMAP</code> `은 이 후보 경로를 처리하지 않습니다.</td></tr>
+<tr><td>부동 소수점 배열에 대한 전체 배열 비교</td><td>스캔으로 대체됩니다.</td></tr>
+<tr><td><code translate="no">tags[0]</code> 와 같은 요소 액세스 또는 배열 길이</td><td>요소 멤버십 인덱싱은 이러한 연산에 대한 인덱스 조회를 제공하지 않습니다.</td></tr>
+</tbody>
+</table>
+<p>식 구문에 대해서는 <a href="/docs/ko/array-operators.md">ARRAY 연산자를</a> 참조하십시오.</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">컬렉션 생성<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -501,7 +533,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>스키마와 인덱스가 정의되면, ARRAY 필드를 포함하는 컬렉션을 생성합니다.</p>
+    </button></h2><p>스키마와 인덱스가 정의되면 ARRAY 필드를 포함하는 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -842,7 +874,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>전체 배열 삽입 외에도, Milvus v2.6.17 및 이후 버전의 <code translate="no">upsert</code> API에서 ` <code translate="no">ARRAY</code> ` 필드는 ` <code translate="no">ARRAY_APPEND</code> ` 및 ` <code translate="no">ARRAY_REMOVE</code> ` 부분 업데이트 연산자를 지원합니다. 이를 통해 기존 배열의 현재 값을 먼저 조회하지 않고도 요소를 추가하거나 일치하는 요소를 제거할 수 있어, 클라이언트 측의 읽기-수정-쓰기(read-modify-write) 패턴을 피할 수 있습니다. 자세한 내용은 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">병합 모드에서 ARRAY 필드의 업서트(Upsert</a>)를 참조하십시오.</p>
+<p>전체 배열 삽입 외에도, Milvus v2.6.17 이상 버전의 <code translate="no">upsert</code> API에서 ` <code translate="no">ARRAY</code> ` 필드는 ` <code translate="no">ARRAY_APPEND</code> ` 및 ` <code translate="no">ARRAY_REMOVE</code> ` 부분 업데이트 연산자를 지원합니다. 이를 통해 기존 배열의 현재 값을 먼저 가져오지 않고도 요소를 추가하거나 일치하는 요소를 제거할 수 있어, 클라이언트 측의 읽기-수정-쓰기(read-modify-write) 패턴을 피할 수 있습니다. 자세한 내용은 <a href="/docs/ko/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">병합 모드에서 ARRAY 필드의 업서트(Upsert</a>)를 참조하십시오.</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">필터 표현식을 사용한 쿼리<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1107,7 +1139,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>기본 스칼라 필드 필터링 외에도, 벡터 유사도 검색을 스칼라 필드 필터와 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다:</p>
+    </button></h2><p>벡터 검색에서 ARRAY 필터를 사용하여 대상 엔티티를 제한합니다:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1270,4 +1302,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>또한 Milvus는 쿼리 기능을 더욱 강화하기 위해 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 고급 배열 필터링 연산자를 지원합니다. 자세한 내용은 <a href="/docs/ko/array-operators.md">ARRAY 연산자를</a> 참조하십시오.</p>
+<p>포함 및 길이 필터에 대해서는 <a href="/docs/ko/array-operators.md">ARRAY 연산자를</a> 참조하십시오.</p>

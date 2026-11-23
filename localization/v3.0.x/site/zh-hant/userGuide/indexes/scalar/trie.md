@@ -1,9 +1,7 @@
 ---
 id: trie.md
 title: TRIE
-summary: >-
-  TRIE 索引將 VARCHAR 欄位的值以樹狀結構進行組織，藉此加速字串相等性比對與前綴比對。對於精確查詢及前綴篩選（例如 name LIKE
-  "abc%"），這是最快的標量索引選擇。
+summary: 使用 TRIE 來加速 VARCHAR 欄位上的精確字串查詢與前綴篩選。
 ---
 <h1 id="TRIE" class="common-anchor-header">TRIE<button data-href="#TRIE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,13 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 中的「<code translate="no">TRIE</code> 」索引會將 `<code translate="no">VARCHAR</code> ` 欄位的值組織成一個前綴樹（<em>Trie</em>）。字串中的每個字元都對應樹中的一條邊，而相同的前綴僅儲存一次。此結構能快速執行精確的字串查詢與前綴比對，無需掃描該欄位中的每個值。</p>
-<p>若您經常執行以下類型的查詢，請使用<code translate="no">TRIE</code> 索引：</p>
-<ul>
-<li><p>對字串值進行精確相等比對，例如<code translate="no">category == &quot;books&quot;</code></p></li>
-<li><p>前綴篩選，例如<code translate="no">name LIKE &quot;abc%&quot;</code></p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">支援的資料類型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">TRIE</code> 將字串組織成前綴樹，以加速精確查詢及前綴篩選操作，例如<code translate="no">name LIKE &quot;abc%&quot;</code> 。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,11 +34,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><code translate="no">VARCHAR</code> 字段。詳細資訊請參閱「<a href="/docs/zh-hant/string.md">字串字段</a>」。</li>
-</ul>
-<p><code translate="no">TRIE</code> 此功能僅支援<code translate="no">VARCHAR</code> 欄位。若要為<code translate="no">JSON</code> 欄位中的字串值建立索引，請將路徑轉換為<code translate="no">VARCHAR</code> ，並改用<a href="/docs/zh-hant/ngram.md">NGRAM</a>索引。</p>
-<h2 id="How-it-works" class="common-anchor-header">運作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">支援的資料類型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,22 +49,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 分兩個階段實作「<code translate="no">TRIE</code> 」：</p>
-<ol>
-<li><p><strong>建立索引</strong></p>
-<ul>
-<li><p>在資料導入過程中，Milvus 會讀取每個已建立索引欄位的值。</p></li>
-<li><p>這些值會被插入到一個三叉樹（trie）中：字元儲存在邊上，而每個終端節點則記錄共享該字串的實體 ID。</p></li>
-<li><p>建構完成的樹狀結構將作為索引儲存下來。</p></li>
-</ul></li>
-<li><p><strong>加速查詢</strong></p>
-<ul>
-<li><p>對於相等查詢，Milvus 會逐個字元遍歷樹，直到找到與精確值相符的節點，並返回其實體 ID。</p></li>
-<li><p>對於前綴查詢，Milvus 會逐個字元遍歷樹，直到找到與該前綴完全匹配的節點，並返回其實體 ID。</p></li>
-<li><p>匹配的實體 ID 會傳遞給查詢執行器，以進行最終結果的彙整。</p></li>
-</ul></li>
-</ol>
-<p>對於等值和前綴篩選，查詢成本與字串長度成正比，而非實體數量，這使得這些查詢在大型集合中仍能保持高速。</p>
+    </button></h3><p>僅限<a href="/docs/zh-hant/string.md">VARCHAR 欄位</a>。對於 JSON 字串路徑，請在<a href="/docs/zh-hant/json-indexing.md">JSON 索引中</a>選擇相容的索引。</p>
+<p><a id="Queries-accelerated-by-TRIE"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">篩選加速<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">TRIE</code> 索引可協助評估<code translate="no">VARCHAR</code> 欄位上的以下條件。以下表達式僅供參考：</p>
+<table>
+<thead>
+<tr><th>可使用此索引的篩選條件</th><th>範例表達式</th></tr>
+</thead>
+<tbody>
+<tr><td>等值 (<code translate="no">==</code>,<code translate="no">!=</code>)</td><td><code translate="no">category == &quot;books&quot;</code></td></tr>
+<tr><td>成員關係 (<code translate="no">in</code>,<code translate="no">not in</code>)</td><td><code translate="no">category in [&quot;books&quot;, &quot;electronics&quot;]</code></td></tr>
+<tr><td>前綴匹配</td><td><code translate="no">category LIKE &quot;elec%&quot;</code></td></tr>
+<tr><td>範圍 (<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>,<code translate="no">&gt;=</code>)</td><td><code translate="no">category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;</code></td></tr>
+</tbody>
+</table>
+<p>有關表達式語法，請參閱《<a href="/docs/zh-hant/basic-operators.md">基本運算子</a>與<a href="/docs/zh-hant/pattern-matching.md">模式匹配</a>》。</p>
+<p>範圍評估可能會遍歷多個索引字串。後綴、子字串、一般<code translate="no">LIKE</code> 以及正規表達式模式亦可針對索引字串進行評估，但這些操作可能需要遍歷許多不同的值。對於子字串或正規表達式工作負載，請根據其模式適用性規則比較<a href="/docs/zh-hant/ngram.md">NGRAM</a>。</p>
+<p><a id="Best-practices"></a></p>
+<p>請以具代表性的字串長度、前綴及結果計數來比較查詢延遲。</p>
+<p><a id="Usage-notes"></a></p>
+<div class="alert note">
+<blockquote>
+<p>這些是索引功能，並非對有效篩選表達式的限制。有關共用查詢的限制，請參閱「<a href="/docs/zh-hant/scalar_index.md#Filter-execution">標量索引」</a>。關於<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及 NULL 測試（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），請參閱「<a href="/docs/zh-hant/basic-operators.md">基本運算子</a>」。</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-TRIE-works" class="common-anchor-header">TRIE 的運作原理<button data-href="#How-TRIE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>檢視前綴樹的查詢流程</strong></summary></p>
+<p>在建立索引時，Milvus 會將字串插入前綴樹並將其儲存。字元沿邊緣儲存，共用前綴僅儲存一次，而每個終端節點則記錄與該字串對應的實體 ID。</p>
+<p>若進行等值比對，則遍歷樹結構至該字串的終端節點；若為前綴比對，則尋找前綴節點並從其子樹中收集 ID。查詢執行器會接收匹配的實體 ID。</p>
+<p>是否遍歷至字串或前綴節點取決於模式長度；返回匹配結果時，亦需收集相關的實體 ID。</p>
+<p></details></p>
 <h2 id="Create-a-TRIE-index" class="common-anchor-header">建立 TRIE 索引<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,8 +126,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在<code translate="no">VARCHAR</code> 欄位上建立<code translate="no">TRIE</code> 索引。無需任何額外參數。</p>
-<p>以下範例展示如何在<code translate="no">VARCHAR</code> 欄位上建立<code translate="no">TRIE</code> 索引：</p>
+    </button></h2><p>將 `<code translate="no">index_type</code> ` 設定為 `<code translate="no">TRIE</code>`；無需額外的索引參數：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -240,38 +274,6 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-accelerated-by-TRIE" class="common-anchor-header">由 TRIE 加速的查詢<button data-href="#Queries-accelerated-by-TRIE" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p><code translate="no">TRIE</code> 索引可加速針對<code translate="no">VARCHAR</code> 欄位的以下篩選模式：</p>
-<ul>
-<li><p><strong>等值</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category == &quot;books&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>成員關係</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category in [&quot;books&quot;, &quot;electronics&quot;]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>前綴匹配</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category LIKE &quot;elec%&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>範圍</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>範圍評估可能會遍歷多個已建立索引的字串。</p></li>
-</ul>
-<p>後綴、子字串以及一般的<code translate="no">LIKE</code> 模式亦可針對索引字串進行評估，但可能需要遍歷許多不同的值。若您的工作負載主要以子字串或正規表達式比對為主，請考慮改用<a href="/docs/zh-hant/fmindex.md">FMINDEX</a>或<a href="/docs/zh-hant/ngram.md">NGRAM</a>索引。</p>
 <h2 id="Drop-an-index" class="common-anchor-header">刪除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -287,12 +289,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用 `<code translate="no">drop_index()</code> ` 方法從集合中移除現有索引。</p>
+    </button></h2><p>使用 `<code translate="no">drop_index()</code> ` 方法從集合中移除現有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
-<li><p>自<strong>v2.6.4</strong>或更新版本起，當標量索引不再需要時，可直接刪除該索引——無需先釋放集合。</p></li>
-</ul>
+<blockquote>
+<p>有關刪除標量索引的發行版本要求，請參閱《<a href="/docs/zh-hant/scalar_index.md#Drop-index-compatibility">標量索引</a>》。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -405,42 +406,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">使用說明<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>欄位類型：</strong>僅適用於<code translate="no">VARCHAR</code> 欄位。有關資料類型的更多資訊，請參閱「<a href="/docs/zh-hant/string.md">字串欄位</a>」。</p></li>
-<li><p><strong>參數：</strong>無需任何索引參數。</p></li>
-<li><p><strong>模式匹配：</strong>對於相等性與前綴篩選，<code translate="no">TRIE</code> 的執行速度最快。範圍篩選雖受支援，但可能會遍歷多個已建立索引的字串。後綴、子字串以及一般<code translate="no">LIKE</code> 模式皆可進行評估，但可能需要掃描大量已建立索引的字串。</p></li>
-</ul>
-<h2 id="Best-practices" class="common-anchor-header">最佳實務<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>當您的篩選條件主要以精確查詢或前綴匹配為主時，請使用<code translate="no">TRIE</code> 。</p></li>
-<li><p>若您的工作負載主要依賴子字串（<code translate="no">LIKE &quot;%abc%&quot;</code> ）或正規表達式篩選器，請改用<a href="/docs/zh-hant/fmindex.md">FMINDEX</a>進行精確錨點匹配，或使用<a href="/docs/zh-hant/ngram.md">NGRAM</a>來縮小候選範圍。</p></li>
-</ul>

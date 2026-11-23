@@ -2,7 +2,7 @@
 id: bitmap.md
 title: BITMAP
 summary: >-
-  ビットマップインデックスは、カーディナリティの低いスカラーフィールドにおけるクエリのパフォーマンスを向上させるために設計された、効率的なインデックス手法です。カーディナリティとは、フィールドに含まれる異なる値の数を指します。異なる要素の数が少ないフィールドは、カーディナリティが低いと見なされます。
+  カーディナリティの低いスカラーフィルタリングにはBITMAPを使用してください。サポートされているフィルタ、フィールド制限、およびインデックスの作成について確認してください。
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>ビットマップインデックスは、カーディナリティの低いスカラーフィールドに対するクエリのパフォーマンスを向上させるために設計された、効率的なインデックス手法です。カーディナリティとは、フィールド内の異なる値の数を指します。異なる要素の数が少ないフィールドは、カーディナリティが低いと見なされます。</p>
-<p>このインデックス型は、フィールドの値をコンパクトなバイナリ形式で表現し、それらに対して効率的なビット演算を実行することで、スカラークエリの検索時間を短縮します。他の種類のインデックスと比較して、ビットマップインデックスは、低カーディナリティのフィールドを扱う場合、一般的にスペース効率が高く、クエリ速度も速くなります。</p>
+    </button></h1><p><code translate="no">BITMAP</code> は、ステータスコードやカテゴリなど、固有値の数が少ないフィールドにおけるスカラーフィルタリングを高速化します。カーディナリティとは、フィールド内の固有値の数を指します。このページでは、サポートされているフィルタ、フィールドの制限、およびインデックスの作成について説明します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,25 +35,108 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>「ビットマップ</strong>（Bitmap）」という用語は、「<strong>ビット</strong>（<strong>Bit</strong>）」と<strong>「マップ（Map</strong>）」という2つの単語を組み合わせたものです。ビットはコンピュータにおけるデータの最小単位を表し、<strong>0または1のいずれかの値しか</strong>保持できません。この文脈におけるマップとは、0と1にどの値を割り当てるべきかに基づいて、データを変換・整理するプロセスを指します。</p>
-<p>ビットマップインデックスは、ビットマップとキーという2つの主要な構成要素から成ります。キーは、インデックスが設定されたフィールド内の一意の値を表します。各一意の値に対して、対応するビットマップが存在します。これらのビットマップの長さは、コレクション内のレコード数と等しくなります。 ビットマップの各ビットは、コレクション内の1つのレコードに対応しています。レコードのインデックス付きフィールドの値がキーと一致する場合、対応するビットは<strong>1</strong>に設定され、一致しない場合は<strong>0</strong>に設定されます。</p>
-<p><strong>「Category</strong>」と<strong>「Public」</strong>というフィールドを持つドキュメントのコレクションを考えてみましょう。<strong>「Tech</strong>」カテゴリに属し、かつ「<strong>Public</strong>」に公開されているドキュメントを取得したいとします。この場合、ビットマップインデックスのキーは<strong>「Tech」</strong>と<strong>「Public」</strong>となります。</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">インデックスの対象とフィルタ<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">BITMAP</code> インデックスを明示的に作成するには、以下の表から主キー以外のターゲットを選択してください。各行には、サポートされているターゲットと、そのインデックスが評価を支援できるフィルターがペアで記載されています。</p>
+<table>
+<thead>
+<tr><th>インデックスの対象</th><th>インデックスを使用できるフィルター</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> フィールド</td><td>等値 (<code translate="no">==</code>,<code translate="no">!=</code>) およびメンバーシップ (<code translate="no">in</code>,<code translate="no">not in</code>)。</td></tr>
+<tr><td>整数フィールド (<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>)</td><td>等価性、所属、および範囲 (<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>,<code translate="no">&gt;=</code>)。</td></tr>
+<tr><td><code translate="no">VARCHAR</code> フィールド</td><td>等価性、メンバーシップ、範囲、および<a href="/docs/ja/pattern-matching.md">LIKE または正規表現パターン</a>。パターンの評価では、インデックス化された多くの異なる文字列を参照できます。</td></tr>
+<tr><td><code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、または<code translate="no">VARCHAR</code> 要素を持つ通常の<code translate="no">ARRAY</code> フィールド</td><td><code translate="no">ARRAY_CONTAINS</code>、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 。<a href="/docs/ja/array_data_type.md#Array-index-support">配列インデックスのサポートを</a>参照してください。</td></tr>
+<tr><td>JSONパスは、<code translate="no">BOOL</code> または<code translate="no">VARCHAR</code></td><td>上記の対応するブール値または文字列値に対するフィルターに変換されます。ただし、<a href="/docs/ja/json-indexing.md#Index-requirements">JSONインデックスの要件</a>に従う必要があります。</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p><code translate="no">AUTOINDEX</code> を含むスカラーインデックスは、再帰的な ARRAY フィールドや、null 許容要素を持つ配列をサポートしていません。通常の配列フィルターについては<a href="/docs/ja/array_data_type.md#Array-index-support">「配列インデックスのサポート」を</a>、サブフィールドのルールについては「<a href="/docs/ja/index-structarray-fields.md#Create-scalar-indexes">StructArray フィールドのインデックス」を</a>参照してください。</p>
+</blockquote>
+</div>
+<p>ARRAY ターゲットの場合、<code translate="no">BITMAP</code> は要素の包含フィルタに対応しており、配列全体の等価性、位置による要素へのアクセス、または配列の長さには対応していません。「<a href="/docs/ja/array_data_type.md#Array-index-support">配列インデックスのサポート</a>」を参照してください。</p>
+<p>これらの明示的なターゲット以外の自動選択については、「<a href="/docs/ja/scalar_index.md#AUTOINDEX-behavior">AUTOINDEX の動作</a>」を参照してください。</p>
+<div class="alert note">
+<blockquote>
+<p>これらはインデックスの機能であり、有効なフィルタ式の制限ではありません。共有ルックアップの制約については、<a href="/docs/ja/scalar_index.md#Filter-execution">「スカラーインデックス」を</a>参照してください。<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 、およびNULLテスト（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ）については、<a href="/docs/ja/basic-operators.md">「基本演算子</a>」を参照してください。</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">メモリに関する考慮事項<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>メモリとクエリのコストは、異なる値の数とその分布によって異なります。固定のカーディナリティを普遍的なパフォーマンスの基準として扱うのではなく、代表的なフィルターを用いてインデックスを比較してください。</p>
+<p>高密度のビットマップの場合、バイト単位での大まかな見積もりは `<code translate="no">(D + 1) * N / 8</code>` となります。ここで、`<code translate="no">N</code> ` はエンティティ数、`<code translate="no">D</code> ` は固有値の数です。これには、固有値ごとに 1 つのビットマップと、有効性確認用の 1 つのビットマップが含まれます。 値の格納やその他のオーバーヘッドがこの推定値に加算されます。オプションのオフセットキャッシュは、64ビットシステムで約<code translate="no">8 * N</code> バイトを追加します。圧縮されたビットマップ表現では、メモリ使用量が大幅に異なる場合があります。</p>
+<p>これらの概算値は、メモリマッピングが無効な状態でのロード済みインデックスのメモリ使用量を対象としています。セグメントごとに計算し、ロードされたセグメントとレプリカ全体で合計してください。</p>
+<div class="alert note">
+<blockquote>
+<p>ロードされたフィールドデータ、ベクトルインデックス、コレクションおよびインデックスのオーバーヘッド、一時的な割り当て用に、追加のメモリを確保してください。代表的なデータとクエリを用いて検証を行ってください。配列、JSON、古いインデックス形式、およびメモリマッピングについては、別途測定が必要です。</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">BITMAPの仕組み<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>ビットマップフィルタリングの例を見る</strong></summary></p>
+<p>ビットマップインデックスは、各異なるフィールド値をビットマップに関連付けます。各ビットはエンティティに対応しており、<strong>1</strong>はそのエンティティがその値を持つことを意味し、<strong>0</strong>はその値を持たないことを意味します。</p>
+<p>たとえば、<strong>「Tech</strong>」カテゴリの公開文書を検索するには、「<strong>Category = Tech</strong>」および「<strong>Public = true</strong>」のビットマップを組み合わせます。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
    <span>ビットマップ</span>
   
  </span></p>
-<p>図に示すように、「<strong>Category</strong>」および「<strong>Public</strong>」のビットマップインデックスは次のようになります。</p>
+<p>図に示すように、「<strong>Category</strong>」および「<strong>Public</strong>」のビットマップインデックスは次のとおりです：</p>
 <ul>
-<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0]。これは、1番目と3番目のドキュメントのみが「<strong>Tech」</strong>カテゴリに属していることを示しています。</p></li>
+<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0]。これは、1番目と3番目のドキュメントのみが「<strong>Tech」</strong>カテゴリに該当することを示しています。</p></li>
 <li><p><strong>Public</strong>: [1, 0, 0, 1, 0]。これは、1番目と4番目のドキュメントのみが<strong>一般</strong>公開されていることを示しています。</p></li>
 </ul>
-<p>両方の条件に一致するドキュメントを見つけるために、これら2つのビットマップに対してビット単位のAND演算を行います：</p>
+<p>両方の条件に一致するドキュメントを見つけるには、これら2つのビットマップに対してビット単位のAND演算を行います：</p>
 <ul>
 <li><strong>Tech</strong>AND<strong>Public</strong>: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>結果として得られるビットマップ [1, 0, 0, 0, 0] は、最初のドキュメント（<strong>ID</strong> <strong>1</strong>）のみが両方の条件を満たしていることを示しています。ビットマップインデックスと効率的なビット演算を使用することで、検索範囲を迅速に絞り込むことができ、データセット全体をスキャンする必要がなくなります。</p>
+<p>最初のドキュメント（<strong>ID 1</strong>）のみが、両方の条件を満たしています。</p>
+<p></details></p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">ビットマップインデックスの作成<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,8 +320,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">my_collection</code> コレクションの<code translate="no">category</code> フィールドに対してビットマップインデックスを作成します。<code translate="no">add_index()</code> メソッドを使用して、フィールド名、インデックスタイプ、およびインデックス名を指定します。</p>
-<p>ビットマップインデックスが作成されると、クエリ操作で<code translate="no">filter</code> パラメータを使用して、インデックス化されたフィールドに基づくスカラーフィルタリングを実行できます。これにより、ビットマップインデックスを使用して検索結果を効率的に絞り込むことができます。詳細については、「<a href="/docs/ja/boolean.md">フィルタリングの解説</a>」を参照してください。</p>
+<p>これにより、<code translate="no">my_collection.category</code> にインデックスが作成されます。クエリでこのフィールドを使用するか、<code translate="no">filter</code> を検索してください。「<a href="/docs/ja/boolean.md">フィルタリングの解説</a>」を参照してください。</p>
 <h2 id="Drop-an-index" class="common-anchor-header">インデックスの削除<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,10 +338,9 @@ curl --request POST \
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> メソッドを使用して、コレクションから既存のインデックスを削除します。</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong>以前では、スカラーインデックスを削除する前にコレクションを解放する必要があります。</p></li>
-<li><p><strong>v2.6.4以降</strong>では、スカラーインデックスが不要になった時点で、コレクションを解放することなく直接削除できます。</p></li>
-</ul>
+<blockquote>
+<p>スカラーインデックスの削除に関するリリース要件については、「<a href="/docs/ja/scalar_index.md#Drop-index-compatibility">スカラーインデックス</a>」を参照してください。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -382,37 +462,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>ビットマップインデックスは、主キーではないスカラーフィールドでのみサポートされています。</p></li>
-<li><p>フィールドのデータ型は、以下のいずれかでなければなりません：</p>
-<ul>
-<li><p><code translate="no">BOOL</code>,<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> （要素は、<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> のいずれかでなければなりません）</p></li>
-</ul></li>
-<li><p>ビットマップインデックスは、以下のデータ型をサポートしていません：</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code>: 浮動小数点型は、ビットマップインデックスのバイナリ特性と互換性がありません。</p></li>
-<li><p><code translate="no">JSON</code>: JSON データ型は構造が複雑であり、ビットマップインデックスを使用して効率的に表現することはできません。</p></li>
-</ul></li>
-<li><p>ビットマップインデックスは、カーディナリティが高いフィールド（つまり、異なる値の数が非常に多いフィールド）には適していません。</p>
-<ul>
-<li><p>一般的なガイドラインとして、ビットマップインデックスは、フィールドのカーディナリティが 500 未満の場合に最も効果的です。</p></li>
-<li><p>カーディナリティがこのしきい値を超えると、ビットマップインデックスのパフォーマンス上の利点は薄れ、ストレージのオーバーヘッドが顕著になります。</p></li>
-<li><p>カーディナリティの高いフィールドについては、具体的なユースケースやクエリの要件に応じて、逆インデックスなどの代替インデックス手法の使用を検討してください。</p></li>
-</ul></li>
-</ul>

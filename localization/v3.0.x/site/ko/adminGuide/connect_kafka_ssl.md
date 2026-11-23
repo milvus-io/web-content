@@ -1,12 +1,12 @@
 ---
 id: connect_kafka_ssl.md
-title: SASL/SSL로 Kafka에 연결하기
+title: SASL/SSL을 사용하여 Kafka에 연결하기
 related_key: 'kafka, sasl, tls'
 summary: >-
-  이 가이드에서는 SASL/SSL을 사용하지 않는 가장 간단한 방법부터 SASL/SSL을 사용하여 완전히 보안된 방법까지 Milvus를
-  Kafka에 연결하는 여러 가지 방법을 소개합니다.
+  이 가이드에서는 SASL/SSL을 사용하지 않는 가장 간단한 방법부터 SASL/SSL을 사용하여 완전히 보안이 적용된 방법까지,
+  Milvus를 Kafka에 연결하는 여러 가지 방법을 소개합니다.
 ---
-<h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">SASL/SSL로 Kafka에 연결하기<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
+<h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">SASL/SSL을 사용하여 Kafka에 연결하기<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 SASL/SSL을 사용하지 않는 가장 간단한 방법부터 SASL/SSL을 사용하여 완전히 보안된 방법까지 Milvus를 Kafka에 연결하는 여러 가지 방법을 나열합니다.</p>
-<h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">SASL/SSL 없이 Milvus와 Kafka 연결하기<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h1><p>이 가이드에서는 SASL/SSL을 사용하지 않는 가장 간단한 방법부터 SASL/SSL을 사용하여 완벽하게 보안이 적용된 방법까지, Milvus를 Kafka에 연결하는 여러 가지 방법을 소개합니다.</p>
+<h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">SASL/SSL 없이 Milvus를 Kafka에 연결하기<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>SASL/SSL 없이 Milvus와 Kafka를 시작하려면 Kafka와 Milvus 모두에 대한 인증 및 암호화를 비활성화하면 됩니다. 신뢰할 수 있는 환경에서만 사용하세요.</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. SASL/SSL 없이 Kafka 서비스 시작하기<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h2><p>SASL/SSL 없이 Milvus와 Kafka를 시작하려면 Kafka와 Milvus 모두에 대한 인증 및 암호화를 비활성화해야 합니다. 신뢰할 수 있는 환경에서만 사용하십시오.</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. SASL/SSL 없이 Kafka 서비스 시작<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SASL/SSL 없이 Kafka 서비스를 시작할 수 있습니다:</p>
+    </button></h3><p>다음과 같은 ` <code translate="no">docker-compose.yaml</code> ` 파일을 사용하여 SASL/SSL 없이 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -64,7 +64,7 @@ summary: >-
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
   <span class="hljs-attr">kafka:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:2.13-2.8.1</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
     <span class="hljs-attr">ports:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
@@ -72,14 +72,12 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령으로 Kafka 서비스를 시작할 수 있습니다:</p>
+<p>그런 다음 다음 명령을 사용하여 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/SSL 없이 Kafka에 연결할 수 있습니다:</p>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 Kafka에 연결할 수 있습니다. SASL/SSL 없이 Milvus를 시작하고 Kafka에 연결하려면 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -109,12 +107,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>다음 명령을 사용하여 Milvus 구성 파일 템플릿을 다운로드합니다:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>그리고 다음 파라미터를 설정합니다:</p>
+<p><code translate="no">docker-compose.yaml</code> 파일과 동일한 디렉터리에 <code translate="no">user.yaml</code> 파일을 생성하고, 그 안에 다음 매개변수를 설정하십시오. Milvus는 <code translate="no">configs/milvus.yaml</code> 다음으로 <code translate="no">configs/user.yaml</code> 를 불러오므로, <code translate="no">user.yaml</code> 의 값이 기본값보다 우선 적용됩니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -132,10 +127,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span>
     <span class="hljs-attr">tlsKeyPassword:</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령으로 Milvus를 시작할 수 있습니다:</p>
+<p>그런 다음 다음 명령을 사용하여 Milvus를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">SASL/PLAIN 단독으로 Milus를 Kafka에 연결하기<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">SASL/PLAIN만 사용하여 Milvus를 Kafka에 연결하기<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,8 +145,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>SASL/PLAIN 인증으로 Kafka를 시작하려면 <code translate="no">kafka_server_jass.conf</code> 파일을 적절한 설정으로 추가해야 합니다.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. SASL/PLAIN으로 Kafka 서비스 시작하기<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+    </button></h2><p>SASL/PLAIN 인증을 사용하여 Kafka를 시작하려면, 적절한 설정이 포함된 <code translate="no">kafka_server_jaas.conf</code> 파일을 추가해야 합니다.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. SASL/PLAIN을 사용하여 Kafka 서비스 시작<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +161,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일과 <code translate="no">kafka_server_jaas.conf</code> 파일을 같은 디렉터리에 넣습니다.</p>
+    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일과 <code translate="no">kafka_server_jaas.conf</code> 파일을 동일한 디렉터리에 배치합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -199,11 +194,11 @@ summary: >-
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">kafka_server_jass.conf</code> 파일에서 다음 파라미터를 설정합니다:</p>
+<p><code translate="no">kafka_server_jaas.conf</code> 파일에서 다음 매개변수를 설정합니다.</p>
 <pre><code translate="no" class="language-conf">KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username=&quot;kafka&quot;
@@ -211,10 +206,10 @@ summary: >-
     user_kafka=&quot;pass123&quot;;
 };
 </code></pre>
-<p>그런 다음 다음 명령어로 Kafka 서비스를 시작할 수 있습니다:</p>
+<p>그런 다음 다음 명령을 사용하여 Kafka 서비스를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결하기<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvus 시작 및 Kafka에 연결<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,7 +224,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN으로 Kafka에 연결합니다:</p>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 Kafka에 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN을 통해 Kafka에 연결하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -244,12 +239,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>다음 명령을 사용하여 Milvus 구성 파일 템플릿을 다운로드합니다:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>그리고 다음 매개변수를 설정합니다:</p>
+<p><code translate="no">docker-compose.yaml</code> 파일과 동일한 디렉터리에 <code translate="no">user.yaml</code> 파일을 생성하고, 그 안에 다음 매개변수를 설정하십시오. Milvus는 <code translate="no">configs/milvus.yaml</code> 다음으로 <code translate="no">configs/user.yaml</code> 를 불러오므로, <code translate="no">user.yaml</code> 의 값이 기본값보다 우선 적용됩니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -267,10 +259,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령으로 Milvus를 시작할 수 있습니다:</p>
+<p>그런 다음 다음 명령어를 사용하여 Milvus를 시작할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">SSL 단독으로 Milvus를 Kafka에 연결하기<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">SSL만 사용하여 Milvus를 Kafka에 연결하기<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -285,8 +277,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>SSL 인증으로 Kafka를 시작하려면 일부 인증서 파일을 가져오거나 자체 서명된 인증서를 생성해야 합니다. 이 예에서는 자체 서명된 인증서를 사용합니다.</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. 자체 서명 인증서 생성하기<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
+    </button></h2><p>SSL 인증을 사용하여 Kafka를 시작하려면 인증서 파일을 확보하거나 자체 서명된 인증서를 생성해야 합니다. 이 예제에서는 자체 서명된 인증서를 사용합니다.</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. 자체 서명 인증서 생성<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -301,7 +293,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">my_secrets</code> 라는 폴더를 만들고 <code translate="no">gen-ssl-certs.sh</code> 이라는 이름의 bash 스크립트를 추가한 다음 다음 내용을 붙여넣습니다:</p>
+    </button></h3><p><code translate="no">my_secrets</code> 라는 폴더를 생성하고, 그 안에 <code translate="no">gen-ssl-certs.sh</code> 라는 bash 스크립트를 추가한 다음, 다음 내용을 붙여넣습니다:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -467,23 +459,23 @@ EOF</span>
     <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위 스크립트에서는 기본 비밀번호 <code translate="no">abcdefgh</code> 가 적용됩니다. 비밀번호를 변경하려면 <code translate="no">cert_creds</code> 이라는 이름의 텍스트 파일을 만들고 첫 줄에 비밀번호를 입력합니다.</p>
-<p>그런 다음 다음 명령을 실행하여 인증서를 생성합니다:</p>
+<p>위의 스크립트에서는 기본 비밀번호로 <code translate="no">abcdefgh</code> 가 적용됩니다. 비밀번호를 변경하려면 <code translate="no">cert_creds</code> 라는 텍스트 파일을 생성하고 첫 번째 줄에 비밀번호를 입력하십시오.</p>
+<p>그런 다음 다음 명령을 실행하여 인증서를 생성하십시오:</p>
 <ul>
 <li><p>CA 인증서 생성:</p>
-<p>다음은 CA 인증서 파일의 이름이 <code translate="no">ca-cert</code> 이고 브로커의 호스트 이름이 <code translate="no">kafka-ssl</code> 이라고 가정합니다:</p>
+<p>다음은 CA 인증서 파일 이름이 <code translate="no">ca-cert</code> 이고 브로커의 호스트명이 <code translate="no">kafka-ssl</code> 인 경우를 가정합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh ca ca-cert kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>서버 인증서 및 키 저장소 생성:</p>
-<p>다음은 CA 인증서 파일의 이름이 <code translate="no">ca-cert</code> 이고 모든 출력 파일의 접두사는 <code translate="no">kafka_</code> 이며 브로커의 호스트 이름은 <code translate="no">kafka-ssl</code> 이라고 가정합니다:</p>
+<li><p>서버 인증서 및 키스토어 생성:</p>
+<p>다음은 CA 인증서 파일 이름이 <code translate="no">ca-cert</code> 이고, 모든 출력 파일의 접두사가 <code translate="no">kafka_</code> 이며, 브로커의 호스트명이 <code translate="no">kafka-ssl</code> 인 경우를 가정합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>클라이언트 키를 생성합니다:</p>
-<p>다음은 CA 인증서 파일의 이름은 <code translate="no">ca-cert</code>, 모든 출력 파일의 접두사는 <code translate="no">kafka_</code>, 클라이언트 이름은 <code translate="no">kafka-client</code> 이라고 가정합니다:</p>
+<li><p>클라이언트 키 생성:</p>
+<p>다음은 CA 인증서 파일 이름이 <code translate="no">ca-cert</code> 이고, 모든 출력 파일의 접두사가 <code translate="no">kafka_</code> 이며, 클라이언트 이름이 <code translate="no">kafka-client</code> 라고 가정합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh client ca-cert kafka_ kafka-client</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>필요한 모든 인증서가 생성되면 <code translate="no">my_secrets</code> 폴더에서 다음 파일을 볼 수 있습니다:</p>
+<p>필요한 모든 인증서가 생성되면 <code translate="no">my_secrets</code> 폴더에서 다음 파일들을 확인할 수 있습니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l my_secrets</span>
 total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:53 ca-cert
@@ -499,7 +491,7 @@ total 12
 -rw-rw-r-- 1 5.6K Feb 26 11:54 kafka_server.keystore.jks
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. SSL로 Kafka 서비스 시작하기<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. SSL을 사용하여 Kafka 서비스 시작<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -514,7 +506,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SSL로 Kafka 서비스를 시작합니다:</p>
+    </button></h3><p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SSL을 지원하는 Kafka 서비스를 시작합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -553,10 +545,10 @@ total 12
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령어로 Kafka 서비스를 시작합니다:</p>
+<p>그런 다음 다음 명령어를 사용하여 Kafka 서비스를 시작합니다:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Milvus를 시작하고 SSL로 Kafka에 연결하기<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Milvus 시작 및 SSL을 사용하여 Kafka에 연결<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -571,7 +563,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SSL로 Kafka에 연결합니다:</p>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 Kafka에 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SSL을 통해 Kafka에 연결하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -586,13 +578,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>다음 명령을 사용하여 Milvus 구성 파일 템플릿을 다운로드합니다:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>그리고 다음 파라미터를 설정합니다:</p>
+<p><code translate="no">docker-compose.yaml</code> 파일과 동일한 디렉터리에 <code translate="no">user.yaml</code> 파일을 생성하고, 그 안에 다음 매개변수를 설정하십시오. Milvus는 <code translate="no">configs/milvus.yaml</code> 파일 다음으로 <code translate="no">configs/user.yaml</code> 파일을 불러오므로, <code translate="no">user.yaml</code> 파일의 값이 기본값보다 우선 적용됩니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -610,10 +599,10 @@ total 12
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-string">/milvus/secrets/ca-cert</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-string">abcdefgh</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령으로 Milvus를 시작합니다:</p>
+<p>그런 다음 다음 명령어로 Milvus를 시작하십시오:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">SASL/PLAIN 및 SSL로 Milvus를 Kafka에 연결하기<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">SASL/PLAIN 및 SSL을 사용하여 Milvus를 Kafka에 연결하기<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -628,8 +617,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus를 SASL/PLAIN 및 SSL로 Kafka에 연결하려면 <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAIN만으로 Mil</a> us를 Kafka에 연결하기 및 <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">SSL만으로 Milus를 Kafka에 연결</a>하기의 단계를 반복해야 합니다.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. SASL/PLAIN 및 SSL로 Kafka 서비스 시작하기 1.<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+    </button></h2><p>SASL/PLAIN 및 SSL을 사용하여 Milvus를 Kafka에 연결하려면, <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">‘SASL/PLAIN만 사용하여 Milvus를 Kafka에 연결하기’</a> 및 <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">‘SSL만 사용하여 Milvus를 Kafka에 연결하기’</a>에 설명된 단계를 반복해야 합니다.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. SASL/PLAIN 및 SSL을 사용하여 Kafka 서비스 시작<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -644,8 +633,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAIN만으로 Milus와 Kafka</a> 연결하기에서 설명한 <code translate="no">kafka_server_jass.conf</code> 파일과 <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">SSL만으로 Milus와 Kafka 연결하기에서</a> 생성한 <code translate="no">my_secrets</code> 폴더를 사용하여 SASL/PLAIN 및 SSL로 Kafka 서비스를 시작합니다.</p>
-<p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SASL/PLAIN 및 SSL로 Kafka 서비스를 시작할 수 있습니다:</p>
+    </button></h3><p><a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">'SASL/PLAIN만 사용하여 Milvus를 Kafka에 연결하기</a> '에 언급된 <code translate="no">kafka_server_jaas.conf</code> 파일과 <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">'SSL만 사용하여 Milvus를 Kafka에 연결하기</a> '에서 생성된 <code translate="no">my_secrets</code> 폴더를 사용하여 SASL/PLAIN 및 SSL을 지원하는 Kafka 서비스를 시작합니다.</p>
+<p>다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 SASL/PLAIN 및 SSL을 지원하는 Kafka 서비스를 시작할 수 있습니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -689,16 +678,16 @@ total 12
       <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
 
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>그런 다음 다음 명령어로 Kafka 서비스를 시작합니다:</p>
+<p>그런 다음 다음 명령을 사용하여 Kafka 서비스를 시작하십시오:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Milvus를 시작하고 SASL/PLAIN 및 SSL로 Kafka에 연결하기<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Milvus를 시작하고 SASL/PLAIN 및 SSL을 사용하여 Kafka에 연결<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -713,7 +702,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN 및 SSL로 Kafka에 연결합니다:</p>
+    </button></h3><p>Kafka 서비스가 시작되면 Milvus를 시작하고 Kafka에 연결할 수 있습니다. 다음 <code translate="no">docker-compose.yaml</code> 파일을 사용하여 Milvus를 시작하고 SASL/PLAIN 및 SSL을 사용하여 Kafka에 연결하십시오:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -728,13 +717,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>다음 명령어를 사용하여 Milvus 구성 파일 템플릿을 다운로드합니다:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>그리고 다음 파라미터를 설정합니다:</p>
+<p><code translate="no">docker-compose.yaml</code> 파일과 동일한 디렉터리에 <code translate="no">user.yaml</code> 파일을 생성하고, 그 안에 다음 매개변수를 설정하십시오. Milvus는 <code translate="no">configs/milvus.yaml</code> 다음으로 <code translate="no">configs/user.yaml</code> 를 불러오므로, <code translate="no">user.yaml</code> 의 값이 기본값보다 우선 적용됩니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 

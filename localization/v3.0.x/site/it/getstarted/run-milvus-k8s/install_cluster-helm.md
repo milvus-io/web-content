@@ -65,7 +65,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <li><p>Prima di installare Milvus, si consiglia di utilizzare lo <a href="https://milvus.io/tools/sizing">strumento di dimensionamento Milvus</a> per stimare i requisiti hardware in base alla dimensione dei dati. Ciò contribuisce a garantire prestazioni ottimali e un'allocazione ottimale delle risorse per l'installazione di Milvus.</p></li>
 </ul>
 <div class="alert note">
-<p>Se si riscontrano problemi durante il download dell’immagine, contattarci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e forniremo il supporto necessario.</p>
+<p>Se si riscontrano problemi durante il download dell’immagine, contattarci all’indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> fornendo i dettagli del problema e forniremo l’assistenza necessaria.</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Installare il Helm Chart di Milvus<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -224,7 +224,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <div class="alert note">
 <p>Con <code translate="no">streaming.woodpecker.embedded=false</code>, Woodpecker viene eseguito come uno <strong>StatefulSet dedicato</strong> (<code translate="no">my-release-milvus-woodpecker</code>, 4 repliche per impostazione predefinita — un quorum di 3 nodi più uno di riserva per la tolleranza ai guasti; non impostare <code translate="no">woodpecker.replicaCount</code> su un valore inferiore a 3) supportato da un servizio headless, che utilizza MinIO come backend di archiviazione — pertanto il cluster dispone di un set di pod <code translate="no">woodpecker</code> separato, distinto dal nodo di streaming.</p>
 </div>
-<p>È inoltre possibile accedere alla <strong>WebUI di Milvus</strong> all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta configurato il port forwarding (vedere il passaggio successivo). Per i dettagli, consultare <a href="/docs/it/milvus-webui.md">la WebUI di Milvus</a>.</p>
+<p>È inoltre possibile accedere <strong>all’interfaccia utente web di Milvus</strong> all’indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> una volta configurato il reindirizzamento delle porte (vedere il passaggio successivo). Per i dettagli, consultare <a href="/docs/it/milvus-webui.md">l’interfaccia utente web di Milvus</a>.</p>
 <h3 id="3-Connect-to-Milvus" class="common-anchor-header">3. Connettersi a Milvus<button data-href="#3-Connect-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -314,7 +314,7 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus include uno strumento GUI integrato denominato Milvus WebUI, a cui è possibile accedere tramite il browser. Milvus WebUI migliora l’osservabilità del sistema grazie a un’interfaccia semplice e intuitiva. È possibile utilizzare Milvus WebUI per monitorare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, verificare i dettagli relativi al database e alle raccolte ed elencare le configurazioni dettagliate di Milvus. Per ulteriori dettagli su Milvus WebUI, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a></p>
+    </button></h2><p>Milvus include uno strumento GUI integrato denominato Milvus WebUI, a cui è possibile accedere tramite il browser. Milvus WebUI migliora l'osservabilità del sistema grazie a un'interfaccia semplice e intuitiva. È possibile utilizzare Milvus WebUI per monitorare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, verificare i dettagli relativi al database e alle raccolte ed elencare le configurazioni dettagliate di Milvus. Per ulteriori dettagli su Milvus WebUI, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a></p>
 <p>Per abilitare l’accesso a Milvus WebUI, è necessario effettuare il port forwarding del pod proxy su una porta locale.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091</span>
 Forwarding from 0.0.0.0:27018 -&gt; 9091
@@ -495,7 +495,7 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li>Metadati: <a href="/docs/it/deploy_etcd.md">etcd</a></li>
 </ul>
 <div class="alert note">
-<p>Storage V3 è disabilitato per impostazione predefinita. Abilitalo prima di utilizzare le funzionalità che ne dipendono. Per i requisiti e le considerazioni sulla compatibilità, consulta <a href="/docs/it/storage-v3.md">Storage V3</a>.</p>
+<p>Storage V3 è disabilitato per impostazione predefinita. Abilitalo prima di utilizzare le funzionalità che dipendono da esso. Per i requisiti e le considerazioni sulla compatibilità, consulta <a href="/docs/it/storage-v3.md">Storage V3</a>.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Prossimi passi<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

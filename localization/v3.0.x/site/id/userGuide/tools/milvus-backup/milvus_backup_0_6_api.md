@@ -55,7 +55,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Buat berk <code translate="no">configs/backup.yaml</code> menggunakan contoh v2 di <a href="/docs/id/milvus_backup_0_6_cli.md#Prepare-configuration-file">Siapkan berkas konfigurasi</a>. Konfigurasikan akses ke Milvus, penyimpanan instance, dan tujuan pencadangan. Server Milvus juga harus dapat mengakses penyimpanan pencadangan untuk operasi snapshot.</p>
+    </button></h2><p>Buat berk <code translate="no">configs/backup.yaml</code> menggunakan contoh v2 di <a href="/docs/id/milvus_backup_0_6_cli.md#Prepare-configuration-file">Siapkan berkas konfigurasi</a>. Konfigurasikan akses ke Milvus, penyimpanan instance, dan tujuan cadangan. Server Milvus juga harus dapat mengakses penyimpanan cadangan untuk operasi snapshot.</p>
 <p>Jika Anda memiliki berkas v1, berkas tersebut masih dapat dimuat. Lihat " <a href="/docs/id/milvus_backup_upgrade.md#Migrate-the-configuration">Migrasi Konfigurasi</a> " sebelum mengubah skema atau variabel lingkungannya.</p>
 <p>Dari direktori yang berisi file biner, periksa konfigurasi dan uji konektivitas:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
@@ -100,7 +100,7 @@ beta: Milvus Backup 0.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan koleksi yang sudah ada bernama <code translate="no">coll</code>, atau buat koleksi uji dengan 256 entitas dari <a href="/docs/id/snapshot-backup-and-restore.md#Prepare-sample-data">Siapkan data sampel</a>. Ubah nama koleksi dalam permintaan jika Anda menggunakan data Anda sendiri. Pertahankan data uji tetap tidak berubah saat memverifikasi hasilnya.</p>
+    </button></h2><p>Gunakan koleksi yang sudah ada bernama <code translate="no">coll</code>, atau buat koleksi uji dengan 256 entitas dari <a href="/docs/id/snapshot-backup-and-restore.md#Prepare-sample-data">Siapkan data sampel</a>. Ubah nama koleksi dalam permintaan jika Anda menggunakan data Anda sendiri. Pertahankan data uji tetap tidak berubah saat memverifikasi hasil.</p>
 <h2 id="Back-up-data" class="common-anchor-header">Cadangkan data<button data-href="#Back-up-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +125,7 @@ beta: Milvus Backup 0.6.x
     &quot;collection_names&quot;: [&quot;coll&quot;]
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Responsnya mencakup nilai ` <code translate="no">requestId</code>`. Pengiriman permintaan tidak berarti bahwa pencadangan telah selesai. Salin nilai tersebut ke ` <code translate="no">backup_id</code> ` dan lakukan polling:</p>
+<p>Responsnya mencakup <code translate="no">requestId</code>. Pengiriman tidak berarti bahwa pencadangan telah selesai. Salin nilai tersebut ke <code translate="no">backup_id</code> dan lakukan polling:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_backup?backup_id=BACKUP_REQUEST_ID&amp;backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p>Tunggu hingga <code translate="no">data.state_code</code> berubah menjadi <code translate="no">2</code>. API ini menggunakan status tugas berikut:</p>
@@ -146,7 +146,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> mengembalikan metadata JSON, termasuk <code translate="no">collection_backups</code>; perintah ini <strong>tidak</strong> mengunduh berkas cadangan. Untuk cadangan yang dibuat oleh proses lain, kueri berdasarkan nama saja dapat mengembalikan metadata tanpa menampilkan kemajuan tugas yang sedang berjalan. Gunakan ID tugas dari respons create layanan saat ini saat memantau cadangan yang aktif.</p>
+<p><code translate="no">get_backup</code> mengembalikan metadata JSON, termasuk <code translate="no">collection_backups</code>; perintah ini <strong>tidak</strong> mengunduh berkas cadangan. Untuk cadangan yang dibuat oleh proses lain, kueri berdasarkan nama saja dapat mengembalikan metadata tanpa menunjukkan kemajuan tugas yang sedang berjalan. Gunakan ID tugas dari respons create layanan saat ini saat memantau cadangan yang aktif.</p>
 <p>Format defaultnya adalah <code translate="no">auto</code>, yang memilih snapshot pada Milvus 3.0. Untuk secara eksplisit meminta binlog, tambahkan <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> ke badan permintaan create. Preset <code translate="no">--for</code> pada CLI bukanlah bidang permintaan HTTP.</p>
 <p>Untuk menyimpan atau memindahkan cadangan, salin seluruh direktori ke penyimpanan objek. Lihat <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">panduan transfer versi 0.6.0</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Memulihkan data<button data-href="#Restore-data" class="anchor-icon" translate="no">

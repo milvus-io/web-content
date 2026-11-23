@@ -7,7 +7,7 @@ summary: >-
   derselben Reihenfolge und direkt nebeneinander stehen. Beispielsweise liefert
   eine Suche nach „Robotik maschinelles Lernen“ Treffer wie „…typische
   Robotik-Modelle für maschinelles Lernen…“, bei denen die Wörter „Robotik“,
-  „maschinelles“ und „Lernen“ nacheinander ohne dazwischenliegende Wörter
+  „maschinelles“ und „Lernen“ nacheinander und ohne weitere Wörter dazwischen
   vorkommen.
 beta: Milvus 2.5.17+
 ---
@@ -138,9 +138,9 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die Genauigkeit des Phrasenabgleichs hängt maßgeblich von dem Analysator ab, der zur Tokenisierung Ihrer Textdaten verwendet wird. Verschiedene Analysatoren eignen sich für unterschiedliche Sprachen und Textformate und beeinflussen die Tokenisierung sowie die Positionsgenauigkeit. Die Auswahl eines geeigneten Analysators für Ihren spezifischen Anwendungsfall optimiert Ihre Ergebnisse beim Phrasenabgleich.</p>
-<p>Standardmäßig verwendet Milvus den Standard-Analysator, der Text anhand von Leerzeichen und Satzzeichen in Token zerlegt, Token entfernt, die länger als 40 Zeichen sind, und den Text in Kleinbuchstaben umwandelt. Für die Standardnutzung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/standard-analyzer.md">„Standard-Analysator</a> “.</p>
-<p>Wenn Ihre Anwendung einen bestimmten Analysator erfordert, konfigurieren Sie diesen mithilfe des Parameters „ <code translate="no">analyzer_params</code> “. So konfigurieren Sie beispielsweise den Analysator „ <code translate="no">english</code> “ für den Phrasenabgleich in englischem Text:</p>
+    </button></h3><p>Die Genauigkeit des Phrasenabgleichs hängt maßgeblich von dem Analysator ab, der zur Tokenisierung Ihrer Textdaten verwendet wird. Verschiedene Analysatoren eignen sich für unterschiedliche Sprachen und Textformate, was sich auf die Tokenisierung und die Positionsgenauigkeit auswirkt. Die Auswahl eines geeigneten Analysators für Ihren spezifischen Anwendungsfall optimiert Ihre Ergebnisse beim Phrasenabgleich.</p>
+<p>Standardmäßig verwendet Milvus den Standard-Analysator, der Text anhand von Leerzeichen und Satzzeichen in Token zerlegt und den Text in Kleinbuchstaben umwandelt. Für die Standardnutzung sind keine zusätzlichen Parameter erforderlich. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/standard-analyzer.md">„Standard-Analysator</a> “.</p>
+<p>Wenn Ihre Anwendung einen bestimmten Analysator erfordert, konfigurieren Sie diesen mithilfe des Parameters „ <code translate="no">analyzer_params</code> “. So konfigurieren Sie beispielsweise den Analysator „ <code translate="no">english</code> “ für den Phrasenabgleich in englischen Texten:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -415,13 +415,13 @@ result_slop2 = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Das Aktivieren des Phrasenabgleichs für ein Feld löst die Erstellung eines invertierten Index aus, der Speicherressourcen beansprucht. Berücksichtigen Sie die Auswirkungen auf den Speicherplatz, wenn Sie sich entscheiden, diese Funktion zu aktivieren, da diese je nach Textgröße, eindeutigen Tokens und dem verwendeten Analysator variieren.</p></li>
+<li><p>Das Aktivieren des Phrasenabgleichs für ein Feld löst die Erstellung eines invertierten Index aus, der Speicherressourcen beansprucht. Berücksichtigen Sie die Auswirkungen auf den Speicherplatz, wenn Sie sich für die Aktivierung dieser Funktion entscheiden, da diese je nach Textgröße, eindeutigen Tokens und dem verwendeten Analysator variieren.</p></li>
 <li><p>Sobald Sie einen Analysator in Ihrem Schema definiert haben, sind dessen Einstellungen für diese Sammlung dauerhaft festgelegt. Wenn Sie zu dem Schluss kommen, dass ein anderer Analysator Ihren Anforderungen besser entspricht, können Sie die bestehende Sammlung löschen und eine neue mit der gewünschten Analysatorkonfiguration erstellen.</p></li>
 <li><p>Die Leistung des Phrasenabgleichs hängt davon ab, wie der Text tokenisiert wird. Bevor Sie einen Analysator auf Ihre gesamte Sammlung anwenden, sollten Sie die Tokenisierungsergebnisse mit der Methode „ <code translate="no">run_analyzer</code> “ überprüfen. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/analyzer-overview.md#share-DYZvdQ2vUowWEwx1MEHcdjNNnqT">„Übersicht über Analysatoren</a>“.</p></li>
 <li><p>Escape-Regeln in „ <code translate="no">filter</code> “-Ausdrücken:</p>
 <ul>
-<li><p>Zeichen, die in Ausdrücken in doppelte oder einfache Anführungszeichen gesetzt sind, werden als Zeichenfolgenkonstanten interpretiert. Wenn die Zeichenfolgenkonstante Escape-Zeichen enthält, müssen diese mit einer Escape-Sequenz dargestellt werden. Verwenden Sie beispielsweise „ <code translate="no">\\</code> “, um „ <code translate="no">\</code> “ darzustellen, „ <code translate="no">\\t</code> “, um ein Tabulatorzeichen darzustellen („ <code translate="no">\t</code> “), und „ <code translate="no">\\n</code> “, um einen Zeilenumbruch darzustellen.</p></li>
-<li><p>Wenn eine Zeichenfolgenkonstante in einfache Anführungszeichen gesetzt ist, sollte ein einfaches Anführungszeichen innerhalb der Konstante als „ <code translate="no">\\'</code> “ dargestellt werden, während ein doppeltes Anführungszeichen entweder als „ <code translate="no">&quot;</code> “ oder als „ <code translate="no">\\&quot;</code> “ dargestellt werden kann. Beispiel: „ <code translate="no">'It\\'s milvus'</code> “.</p></li>
+<li><p>Zeichen, die in Ausdrücken in doppelte oder einfache Anführungszeichen gesetzt sind, werden als Zeichenfolgenkonstanten interpretiert. Wenn die Zeichenfolgenkonstante Escape-Zeichen enthält, müssen diese mit einer Escape-Sequenz dargestellt werden. Verwenden Sie beispielsweise „ <code translate="no">\\</code> “, um „ <code translate="no">\</code> “ darzustellen, „ <code translate="no">\\t</code> “, um ein Tabulatorzeichen „ <code translate="no">\t</code> “ darzustellen, und „ <code translate="no">\\n</code> “, um einen Zeilenumbruch darzustellen.</p></li>
+<li><p>Wenn eine Zeichenfolgenkonstante in einfache Anführungszeichen gesetzt ist, sollte ein einfaches Anführungszeichen innerhalb der Konstante als <code translate="no">\\'</code> dargestellt werden, während ein doppeltes Anführungszeichen entweder als <code translate="no">&quot;</code> oder als <code translate="no">\\&quot;</code> dargestellt werden kann. Beispiel: <code translate="no">'It\\'s milvus'</code>.</p></li>
 <li><p>Wenn eine Zeichenfolgenkonstante in doppelte Anführungszeichen gesetzt ist, sollte ein doppeltes Anführungszeichen innerhalb der Konstante als „ <code translate="no">\\&quot;</code> “ dargestellt werden, während ein einfaches Anführungszeichen entweder als „ <code translate="no">'</code> “ oder „ <code translate="no">\\'</code> “ dargestellt werden kann. Beispiel: „ <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> “.</p></li>
 </ul></li>
 </ul>

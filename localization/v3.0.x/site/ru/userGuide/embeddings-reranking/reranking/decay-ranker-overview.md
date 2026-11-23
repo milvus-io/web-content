@@ -23,7 +23,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В традиционном векторном поиске результаты ранжируются исключительно по схожести векторов — то есть по тому, насколько близко они совпадают в математическом пространстве. Однако в реальных приложениях релевантность контента часто зависит не только от семантической схожести.</p>
+    </button></h1><p>В традиционном векторном поиске результаты ранжируются исключительно по сходству векторов — то есть по тому, насколько близко они совпадают в математическом пространстве. Однако в реальных приложениях релевантность контента часто зависит не только от семантического сходства.</p>
 <p>Рассмотрим следующие повседневные сценарии:</p>
 <ul>
 <li><p>Поиск новостей, при котором вчерашняя статья должна занимать более высокое место в рейтинге, чем похожая статья трехлетней давности</p></li>
@@ -31,7 +31,7 @@ beta: Milvus 2.6.x
 <li><p>Платформа электронной коммерции, которая продвигает популярные товары, даже если они чуть менее похожи на поисковый запрос</p></li>
 </ul>
 <p>Все эти сценарии объединяет одна общая потребность: необходимость балансировать сходство векторов с другими числовыми факторами, такими как время, расстояние или популярность.</p>
-<p>Ранжировщики с убывающим весом в Milvus решают эту задачу, корректируя поисковый рейтинг на основе значений числовых полей. Они позволяют уравновесить векторное сходство с «свежестью», «близостью» или другими числовыми свойствами ваших данных, создавая более интуитивный и контекстуально релевантный поиск.</p>
+<p>Ранжировщики с убывающим весом в Milvus решают эту задачу, корректируя поисковый рейтинг на основе значений числовых полей. Они позволяют уравновесить сходство векторов с «свежестью», «близостью» или другими числовыми свойствами ваших данных, создавая более интуитивный и контекстуально релевантный поиск.</p>
 <h2 id="Usage-notes" class="common-anchor-header">Примечания по использованию<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +74,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Рейтинг с учетом затухания улучшает традиционный векторный поиск за счет включения в процесс ранжирования таких числовых факторов, как время или географическое расстояние. Весь процесс проходит следующие этапы:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Этап 1: Расчет нормализованных оценок схожести<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Этап 1: Расчет нормализованных оценок сходства<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +94,7 @@ beta: Milvus 2.6.x
 <li><p>Для метрик расстояния <strong>L2</strong> и <strong>JACCARD</strong> (где более низкие значения указывают на более высокое сходство):</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
-<p>Это преобразует расстояния в показатели сходства в диапазоне от 0 до 1, где более высокое значение означает большее сходство.</p></li>
+<p>Это преобразует расстояния в показатели сходства в диапазоне от 0 до 1, где более высокое значение означает лучшее сходство.</p></li>
 <li><p>Для метрик <strong>IP</strong>, <strong>COSINE</strong> и <strong>BM25</strong> (где более высокие значения уже указывают на лучшее совпадение): показатели используются напрямую, без нормализации.</p></li>
 </ul>
 <h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">Этап 2: Расчет показателей затухания<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
@@ -112,12 +112,12 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Далее Milvus вычисляет показатель затухания на основе числового значения поля (например, временной метки или расстояния) с использованием выбранного вами ранжера затухания:</p>
+    </button></h3><p>Далее Milvus вычисляет показатель затухания на основе числового значения поля (например, временной метки или расстояния) с использованием выбранного вами рангера затухания:</p>
 <ul>
 <li><p>Каждый алгоритм ранжирования по коэффициенту затухания преобразует исходные числовые значения в нормализованные показатели релевантности в диапазоне от 0 до 1</p></li>
-<li><p>Показатель затухания отражает степень релевантности элемента на основе его «расстояния» от идеальной точки</p></li>
+<li><p>Показатель затухания отражает релевантность элемента на основе его «расстояния» от идеальной точки</p></li>
 </ul>
-<p>Конкретная формула расчёта зависит от типа алгоритма ранжирования с затуханием. Подробности о том, как рассчитывается оценка затухания, см. на страницах, посвящённых <a href="/docs/ru/gaussian-decay.md#Formula">гауссовому затуханию</a>, <a href="/docs/ru/exponential-decay.md#Formula">экспоненциальному затуханию</a> и <a href="/docs/ru/linear-decay.md#Formula">линейному затуханию</a>.</p>
+<p>Конкретная формула расчёта зависит от типа алгоритма затухания. Подробную информацию о том, как рассчитывается оценка затухания, см. на страницах, посвящённых <a href="/docs/ru/gaussian-decay.md#Formula">гауссовому затуханию</a>, <a href="/docs/ru/exponential-decay.md#Formula">экспоненциальному затуханию</a> и <a href="/docs/ru/linear-decay.md#Formula">линейному затуханию</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Этап 3: Вычисление окончательных оценок<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -136,7 +136,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Наконец, Milvus объединяет нормализованный показатель сходства и показатель затухания для получения итогового рейтингового показателя:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>В случае гибридного поиска (объединяющего несколько векторных полей) Milvus берет максимальный нормализованный показатель сходства среди поисковых запросов:</p>
+<p>В случае гибридного поиска (объединяющего несколько векторных полей) Milvus берет максимальный нормализованный показатель схожести среди поисковых запросов:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Например, если в ходе гибридного поиска научная статья получает оценку 0,82 по векторному сходству и 0,91 по текстовому поиску на основе алгоритма BM25, Milvus использует 0,91 в качестве базовой оценки сходства перед применением коэффициента затухания.</p>
@@ -155,15 +155,15 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Рассмотрим ранжирование с учетом затухания на практическом примере — поиске <strong>«научных статей по ИИ»</strong> с временным затуханием:</p>
+    </button></h3><p>Рассмотрим ранжирование с учетом затухания на практическом примере — поиске <strong>«научных статей по ИИ»</strong> с затуханием во времени:</p>
 <div class="alert note">
-<p>В этом примере оценки с учетом временного затухания отражают, как релевантность снижается со временем — более новые статьи получают оценки, ближе к 1,0, а более старые — более низкие. Эти значения рассчитываются с помощью специального алгоритма ранжирования с учетом временного затухания. Подробности см. в разделе <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">«Выбор подходящего алгоритма ранжирования с учетом временного затухания</a>».</p>
+<p>В этом примере оценки с учетом временного затухания отражают, как релевантность снижается со временем: более новые статьи получают оценки, ближе к 1,0, а более старые — более низкие. Эти значения рассчитываются с помощью специального алгоритма ранжирования с учетом временного затухания. Подробности см. в разделе <a href="/docs/ru/decay-ranker-overview.md#Choose-the-right-decay-ranker">«Выбор подходящего алгоритма ранжирования с учетом временного затухания</a>».</p>
 </div>
 <table>
    <tr>
      <th><p>Статья</p></th>
      <th><p>Вектор схожести</p></th>
-     <th><p>Нормализованный показатель схожести</p></th>
+     <th><p>Нормированный показатель схожести</p></th>
      <th><p>Дата публикации</p></th>
      <th><p>Показатель снижения значимости</p></th>
      <th><p>Итоговый балл</p></th>
@@ -227,7 +227,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus предлагает несколько различных алгоритмов ранжирования с убыванием значимости — <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, каждый из которых предназначен для конкретных случаев использования:</p>
+    </button></h2><p>Milvus предлагает несколько различных алгоритмов ранжирования с убыванием значимости — <code translate="no">gauss</code>, <code translate="no">exp</code>, <code translate="no">linear</code>, каждый из которых предназначен для конкретных сценариев использования:</p>
 <table>
    <tr>
      <th><p>Ранжировщик с затуханием</p></th>
@@ -254,7 +254,7 @@ beta: Milvus 2.6.x
      <td><p>В поисковике событий события, выходящие за пределы двухнедельного окна в будущем, просто не отображаются</p></td>
    </tr>
 </table>
-<p>Подробную информацию о том, как каждый алгоритм ранжирования по спаданию рассчитывает оценки и о конкретных моделях спада, см. в соответствующей документации:</p>
+<p>Подробную информацию о том, как каждый алгоритм ранжирования по снижению актуальности рассчитывает оценки и о конкретных моделях снижения, см. в соответствующей документации:</p>
 <ul>
 <li><p><a href="/docs/ru/gaussian-decay.md">Гауссово затухание</a></p></li>
 <li><p><a href="/docs/ru/exponential-decay.md">Экспоненциальный спад</a></p></li>
@@ -407,7 +407,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -486,7 +525,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После определения рангера затухания его можно применять во время операций поиска, передавая его в параметр ` <code translate="no">ranker</code> `:</p>
+    </button></h3><p>После определения ранжера затухания его можно применять во время операций поиска, передавая его в параметр ` <code translate="no">ranker</code> `:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -537,16 +576,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -617,5 +658,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

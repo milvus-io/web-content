@@ -2,10 +2,10 @@
 id: cohere-ranker.md
 title: Cohere RankerCompatible with Milvus 2.6.x
 summary: >-
-  Der Cohere Ranker nutzt die leistungsstarken Rerank-Modelle von Cohere zur
-  Verbesserung der Suchrelevanz durch semantisches Reranking. Er bietet
-  Reranking-Funktionen auf Unternehmensniveau mit robuster API-Infrastruktur und
-  optimierter Leistung für Produktionsumgebungen.
+  Der Cohere Ranker nutzt die leistungsstarken Reranking-Modelle von Cohere, um
+  die Relevanz der Suchergebnisse durch semantisches Reranking zu verbessern. Er
+  bietet Reranking-Funktionen auf Unternehmensniveau mit einer robusten
+  API-Infrastruktur und optimierter Leistung für Produktionsumgebungen.
 beta: Milvus 2.6.x
 ---
 <h1 id="Cohere-Ranker" class="common-anchor-header">Cohere Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Cohere-Ranker" class="anchor-icon" translate="no">
@@ -23,11 +23,11 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der Cohere Ranker nutzt die leistungsstarken Rerank-Modelle <a href="https://cohere.com/">von Cohere</a> zur Verbesserung der Suchrelevanz durch semantisches Reranking. Er bietet Reranking-Funktionen auf Unternehmensniveau mit einer robusten API-Infrastruktur und optimierter Leistung für Produktionsumgebungen.</p>
-<p>Cohere Ranker ist besonders wertvoll für Anwendungen, die Folgendes erfordern</p>
+    </button></h1><p>Der Cohere Ranker nutzt die leistungsstarken Reranking-Modelle <a href="https://cohere.com/">von Cohere</a>, um die Suchrelevanz durch semantisches Reranking zu verbessern. Er bietet Reranking-Funktionen auf Unternehmensniveau mit einer robusten API-Infrastruktur und optimierter Leistung für Produktionsumgebungen.</p>
+<p>Der Cohere Ranker ist besonders wertvoll für Anwendungen, die Folgendes erfordern:</p>
 <ul>
-<li><p>Hochwertiges semantisches Verständnis mit modernsten Rerank-Modellen</p></li>
-<li><p>Zuverlässigkeit und Skalierbarkeit auf Unternehmensebene für Produktionsworkloads</p></li>
+<li><p>Hochwertiges semantisches Verständnis mit modernsten Reranking-Modellen</p></li>
+<li><p>Zuverlässigkeit und Skalierbarkeit auf Unternehmensniveau für Produktions-Workloads</p></li>
 <li><p>Mehrsprachige Reranking-Funktionen für verschiedene Inhaltstypen</p></li>
 <li><p>Konsistente API-Leistung mit integrierter Ratenbegrenzung und Fehlerbehandlung</p></li>
 </ul>
@@ -46,16 +46,16 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie Cohere Ranker in Milvus implementieren, müssen Sie sicherstellen, dass Sie über Folgendes verfügen:</p>
+    </button></h2><p>Bevor Sie Cohere Ranker in Milvus implementieren, stellen Sie sicher, dass Sie über Folgendes verfügen:</p>
 <ul>
-<li><p>Eine Milvus-Sammlung mit einem <code translate="no">VARCHAR</code> -Feld, das den neu zu bewertenden Text enthält</p></li>
-<li><p>Einen gültigen Cohere-API-Schlüssel mit Zugriff auf die Ranglistenmodelle. Melden Sie sich auf der <a href="https://dashboard.cohere.com/">Plattform von Cohere</a> an, um Ihre API-Zugangsdaten zu erhalten. Sie können entweder:</p>
+<li><p>Eine Milvus-Sammlung mit einem Feld „ <code translate="no">VARCHAR</code> “, das den neu zu bewertenden Text enthält</p></li>
+<li><p>Einen gültigen Cohere-API-Schlüssel mit Zugriff auf die Modelle zur Neurangfolge. Registrieren Sie sich auf <a href="https://dashboard.cohere.com/">der Cohere-Plattform</a>, um Ihre API-Zugangsdaten zu erhalten. Sie haben folgende Möglichkeiten:</p>
 <ul>
-<li><p>Setzen Sie die Umgebungsvariable <code translate="no">COHERE_API_KEY</code>, oder</p></li>
-<li><p>Geben Sie den API-Schlüssel direkt in der <code translate="no">credential</code> der <a href="/docs/de/cohere-ranker.md#Create-a-Cohere-ranker-function">Ranker-Konfiguration</a> an.</p></li>
+<li><p>die Umgebungsvariable „ <code translate="no">COHERE_API_KEY</code> “ setzen oder</p></li>
+<li><p>den API-Schlüssel direkt im Feld „ <code translate="no">credential</code> “ der <a href="/docs/de/cohere-ranker.md#Create-a-Cohere-ranker-function">Ranker-Konfiguration</a> angeben</p></li>
 </ul></li>
 </ul>
-<h2 id="Create-a-Cohere-ranker-function" class="common-anchor-header">Erstellen Sie eine Cohere Ranker-Funktion<button data-href="#Create-a-Cohere-ranker-function" class="anchor-icon" translate="no">
+<h2 id="Create-a-Cohere-ranker-function" class="common-anchor-header">Erstellen Sie eine Cohere-Ranker-Funktion<button data-href="#Create-a-Cohere-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,9 +70,14 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um Cohere Ranker in Ihrer Milvus-Anwendung zu verwenden, erstellen Sie ein Function-Objekt, das angibt, wie das Ranking funktionieren soll. Diese Funktion wird an Milvus-Suchoperationen übergeben, um das Ranking der Ergebnisse zu verbessern.</p>
+    </button></h2><p>Um den Cohere Ranker in Ihrer Milvus-Anwendung zu verwenden, erstellen Sie ein Function-Objekt, das festlegt, wie das Reranking ablaufen soll. Diese Funktion wird an Milvus-Suchvorgänge übergeben, um die Rangfolge der Ergebnisse zu verbessern.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -120,11 +125,87 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;cohere_semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;cohere&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;model_name&quot;</span>, <span class="hljs-string">&quot;rerank-english-v3.0&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;renewable energy developments&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;max_client_batch_size&quot;</span>, <span class="hljs-number">128</span>).
+    WithParam(<span class="hljs-string">&quot;max_tokens_per_doc&quot;</span>, <span class="hljs-number">4096</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Cohere-ranker-specific-parameters" class="common-anchor-header">Cohere Ranker-spezifische Parameter<button data-href="#Cohere-ranker-specific-parameters" class="anchor-icon" translate="no">
+<h3 id="Cohere-ranker-specific-parameters" class="common-anchor-header">Cohere-Ranker-spezifische Parameter<button data-href="#Cohere-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -139,7 +220,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die folgenden Parameter sind spezifisch für den Cohere Ranker:</p>
+    </button></h3><p>Die folgenden Parameter sind spezifisch für den Cohere-Ranker:</p>
 <table>
    <tr>
      <th><p><strong>Parameter</strong></p></th>
@@ -150,50 +231,50 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Muss auf <code translate="no">"model"</code> gesetzt werden, um das Modell-Reranking zu aktivieren.</p></td>
+     <td><p>Muss auf „ <code translate="no">"model"</code> “ gesetzt werden, um die Neureihung des Modells zu aktivieren.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der Modelldienstanbieter, der für das Reranking verwendet werden soll.</p></td>
+     <td><p>Der für die Neubewertung zu verwendende Modelldienstanbieter.</p></td>
      <td><p><code translate="no">"cohere"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">model_name</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Das zu verwendende Cohere-Rerank-Modell aus den unterstützten Modellen der Cohere-Plattform.</p><p>Eine Liste der verfügbaren Rerank-Modelle finden Sie in der <a href="https://docs.cohere.com/docs/rerank">Cohere-Dokumentation</a>.</p></td>
+     <td><p>Das Cohere-Neubewertungsmodell, das aus den auf der Cohere-Plattform unterstützten Modellen verwendet werden soll.</p><p>Eine Liste der verfügbaren Reranking-Modelle finden Sie in <a href="https://docs.cohere.com/docs/rerank">der Cohere-Dokumentation</a>.</p></td>
      <td><p><code translate="no">"rerank-english-v3.0"</code>, <code translate="no">"rerank-multilingual-v3.0"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Liste der Abfrage-Strings, die vom Rerank-Modell zur Berechnung der Relevanzwerte verwendet werden. Die Anzahl der Abfragezeichenfolgen muss genau mit der Anzahl der Abfragen in Ihrem Suchvorgang übereinstimmen (auch bei Verwendung von Abfragevektoren anstelle von Text), andernfalls wird ein Fehler gemeldet.</p></td>
+     <td><p>Liste der Suchbegriffe, die vom Rerank-Modell zur Berechnung der Relevanzwerte verwendet werden. Die Anzahl der Suchbegriffe muss exakt mit der Anzahl der Suchanfragen in Ihrem Suchvorgang übereinstimmen (auch wenn Sie Suchvektoren anstelle von Text verwenden), andernfalls wird ein Fehler gemeldet.</p></td>
      <td><p><em>["Suchanfrage"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Da Modelldienste möglicherweise nicht alle Daten auf einmal verarbeiten, wird hier die Stapelgröße für den Zugriff auf den Modelldienst in mehreren Anfragen festgelegt.</p></td>
-     <td><p><code translate="no">128</code> (Voreinstellung)</p></td>
+     <td><p>Da Modelldienste möglicherweise nicht alle Daten auf einmal verarbeiten können, wird hier die Batchgröße für den Zugriff auf den Modelldienst in mehreren Anfragen festgelegt.</p></td>
+     <td><p><code translate="no">128</code> (Standard)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">max_tokens_per_doc</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Maximale Anzahl von Token pro Dokument. Lange Dokumente werden automatisch auf die angegebene Anzahl von Token gekürzt.</p></td>
-     <td><p><code translate="no">4096</code> (Voreinstellung)</p></td>
+     <td><p>Maximale Anzahl von Tokens pro Dokument. Lange Dokumente werden automatisch auf die angegebene Anzahl von Tokens gekürzt.</p></td>
+     <td><p><code translate="no">4096</code> (Standard)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Authentifizierungsnachweis für den Zugriff auf Cohere-API-Dienste. Wenn nicht angegeben, sucht das System nach der Umgebungsvariablen <code translate="no">COHERE_API_KEY</code>.</p></td>
-     <td><p><em>"ihr-cohere-api-schlüssel"</em></p></td>
+     <td><p>Authentifizierungsdaten für den Zugriff auf Cohere-API-Dienste. Wenn keine Angaben gemacht werden, sucht das System nach der Umgebungsvariablen „ <code translate="no">COHERE_API_KEY</code> “.</p></td>
+     <td><p><em>„your-cohere-api-key“</em></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Für allgemeine Parameter, die von allen Model Rankern verwendet werden (z.B. <code translate="no">provider</code>, <code translate="no">queries</code>), siehe <a href="/docs/de/model-ranker-overview.md#Create-a-model-ranker">Erstellen eines Model Rankers</a>.</p>
+<p>Allgemeine Parameter, die für alle Modell-Ranker gelten (z. B. „ <code translate="no">provider</code> “, „ <code translate="no">queries</code> “), finden Sie unter <a href="/docs/de/model-ranker-overview.md#Create-a-model-ranker">„Modell-Ranker erstellen</a>“.</p>
 </div>
-<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf Standard-Vektorsuche anwenden<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf die Standard-Vektorsuche anwenden<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,9 +289,14 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>So wenden Sie Cohere Ranker auf eine Standard-Vektorsuche an:</p>
+    </button></h2><p>So wenden Sie den Cohere Ranker auf eine Standard-Vektorsuche an:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with Cohere reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -242,7 +328,66 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">5</span>,           <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;cohere_semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;cohere&quot;,
+        &quot;model_name&quot;: &quot;rerank-english-v3.0&quot;,
+        &quot;queries&quot;: [
+            &quot;renewable energy developments&quot;
+        ],
+        &quot;max_client_batch_size&quot;: 128,
+        &quot;max_tokens_per_doc&quot;: 4096
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 5,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -4,7 +4,7 @@ title: Penjelasan Skema
 summary: >-
   Skema mendefinisikan struktur data suatu koleksi. Sebelum membuat koleksi,
   Anda perlu merancang skema koleksi tersebut. Halaman ini membantu Anda
-  memahami skema koleksi dan merancang contoh skema sendiri.​
+  memahami skema koleksi dan merancang skema contoh sendiri.​
 ---
 <h1 id="Schema-Explained​" class="common-anchor-header">Penjelasan tentang Skema​<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Di Milvus, skema koleksi berfungsi seperti tabel dalam basis data relasional, yang menentukan cara Milvus mengatur data dalam koleksi tersebut. ​</p>
+    </button></h2><p>Di Milvus, skema koleksi menyusun tabel dalam basis data relasional, yang menentukan cara Milvus mengatur data dalam koleksi tersebut. ​</p>
 <p>Skema yang dirancang dengan baik sangat penting karena mengabstraksikan model data dan menentukan apakah Anda dapat mencapai tujuan bisnis melalui pencarian. Selain itu, karena setiap baris data yang dimasukkan ke dalam koleksi harus mengikuti skema, hal ini membantu menjaga konsistensi data dan kualitas jangka panjang. Dari sudut pandang teknis, skema yang didefinisikan dengan baik menghasilkan penyimpanan data kolom yang terorganisir dengan baik dan struktur indeks yang lebih rapi, sehingga meningkatkan kinerja pencarian.​</p>
 <p>Skema koleksi memiliki kunci utama, maksimal empat bidang vektor, dan beberapa bidang skalar. Diagram berikut menggambarkan cara memetakan sebuah artikel ke daftar bidang skema.​</p>
 <p><span class="img-wrapper">
@@ -65,9 +65,9 @@ summary: >-
       </svg>
     </button></h2><p>Potongan kode berikut menunjukkan cara membuat skema.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -107,9 +107,9 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
       </svg>
     </button></h2><p>Kolom utama dalam sebuah koleksi mengidentifikasi suatu entitas secara unik. Kolom ini hanya menerima nilai <strong>Int64</strong> atau <strong>VARCHAR</strong>. Potongan kode berikut ini menunjukkan cara menambahkan kolom utama.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -153,7 +153,7 @@ export schema='{​
 }'​
 
 </code></pre>
-<p>Saat menambahkan bidang, Anda dapat secara eksplisit menetapkan bidang tersebut sebagai bidang utama dengan mengatur properti ` <code translate="no">is_primary</code> `-nya menjadi ` <code translate="no">True</code>`. Bidang utama secara default menerima nilai <strong>`Int64`</strong>. Dalam hal ini, nilai bidang utama harus berupa bilangan bulat seperti ` <code translate="no">12345</code>`. Jika Anda memilih menggunakan nilai <strong>`VARCHAR`</strong> pada bidang utama, nilainya harus berupa string seperti ` <code translate="no">my_entity_1234</code>`.​</p>
+<p>Saat menambahkan bidang, Anda dapat secara eksplisit menetapkan bidang tersebut sebagai bidang utama dengan mengatur properti ` <code translate="no">is_primary</code> `-nya menjadi ` <code translate="no">True</code>`. Bidang utama secara default menerima nilai <strong>Int64</strong>. Dalam hal ini, nilai bidang utama harus berupa bilangan bulat seperti ` <code translate="no">12345</code>`. Jika Anda memilih menggunakan nilai <strong>VARCHAR</strong> pada bidang utama, nilainya harus berupa string seperti ` <code translate="no">my_entity_1234</code>`.​</p>
 <p>Anda juga dapat mengatur properti ` <code translate="no">autoId</code> ` ke ` <code translate="no">True</code> ` agar Milvus secara otomatis mengalokasikan nilai bidang utama saat penyisipan data.​</p>
 <p>Untuk detailnya, lihat <a href="/docs/id/primary-field.md">​Primary Field &amp; AutoID</a>.​</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Menambahkan Bidang Vektor​<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
@@ -171,11 +171,11 @@ export schema='{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bidang vektor menerima berbagai embedding vektor yang jarang dan padat. Di Milvus, Anda dapat menambahkan empat bidang vektor ke sebuah koleksi. Potongan kode berikut menunjukkan cara menambahkan bidang vektor.​</p>
+    </button></h2><p>Bidang vektor mendukung berbagai embedding vektor yang jarang (sparse) dan padat (dense). Di Milvus, Anda dapat menambahkan empat bidang vektor ke dalam sebuah koleksi. Potongan kode berikut menunjukkan cara menambahkan bidang vektor.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -216,16 +216,16 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<p>Parameter ` <code translate="no">dim</code> ` dalam potongan kode di atas menunjukkan dimensi embedding vektor yang akan disimpan dalam bidang vektor. Nilai ` <code translate="no">FLOAT_VECTOR</code> ` menunjukkan bahwa bidang vektor menyimpan daftar bilangan floating-point 32-bit, yang biasanya digunakan untuk mewakili antilogaritma. Selain itu, Milvus juga mendukung jenis-jenis embedding vektor berikut:​</p>
+<p>Parameter ` <code translate="no">dim</code> ` dalam potongan kode di atas menunjukkan dimensi embedding vektor yang akan disimpan dalam bidang vektor. Nilai ` <code translate="no">FLOAT_VECTOR</code> ` menunjukkan bahwa bidang vektor menyimpan daftar bilangan floating-point 32-bit, yang biasanya digunakan untuk mewakili antilogaritma. Selain itu, Milvus juga mendukung jenis embedding vektor berikut:​</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code>​</p>
 <p>Bidang vektor jenis ini menyimpan daftar bilangan floating-point presisi setengah 16-bit dan biasanya diterapkan pada skenario pembelajaran mendalam yang dibatasi oleh memori atau bandwidth, atau komputasi berbasis GPU.​</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code>​</p>
 <p>Vektor bidang jenis ini berisi daftar bilangan floating-point 16-bit yang memiliki presisi lebih rendah tetapi rentang eksponen yang sama dengan Float32. Jenis data ini umumnya digunakan dalam skenario deep learning, karena dapat mengurangi penggunaan memori tanpa secara signifikan memengaruhi akurasi.​</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code>​</p>
-<p>Vektor jenis ini menyimpan daftar angka 0 dan 1. Angka-angka ini berfungsi sebagai fitur ringkas untuk merepresentasikan data dalam skenario pemrosesan gambar dan pencarian informasi.​</p></li>
+<p>Bidang vektor jenis ini menyimpan daftar angka 0 dan 1. Angka-angka ini berfungsi sebagai fitur ringkas untuk merepresentasikan data dalam skenario pemrosesan gambar dan pencarian informasi.​</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code>​</p>
-<p>Bidang vektor jenis ini menyimpan daftar bilangan non-nol beserta nomor urutnya untuk merepresentasikan embedding vektor spars. ​</p></li>
+<p>Bidang vektor jenis ini menyimpan daftar bilangan non-nol beserta nomor urutnya untuk merepresentasikan embedding vektor yang jarang.​</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields​" class="common-anchor-header">Tambahkan Bidang Skalar​<button data-href="#Add-Scalar-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -258,11 +258,11 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Di Milvus, Anda dapat menggunakan bidang <code translate="no">VARCHAR</code> untuk menyimpan string. Untuk informasi lebih lanjut mengenai bidang <code translate="no">VARCHAR</code>, lihat <a href="/docs/id/string.md">​Bidang VarChar</a>.​</p>
+    </button></h3><p>Di Milvus, Anda dapat menggunakan bidang <code translate="no">VARCHAR</code> untuk menyimpan string. Untuk informasi lebih lanjut tentang bidang <code translate="no">VARCHAR</code>, lihat <a href="/docs/id/string.md">​Bidang VarChar</a>.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -304,7 +304,7 @@ export schema=&quot;{​
 }&quot;​
 
 </code></pre>
-<h3 id="Add-TEXT-Fields" class="common-anchor-header">Menambahkan Kolom TEXT<button data-href="#Add-TEXT-Fields" class="anchor-icon" translate="no">
+<h3 id="Add-TEXT-Fields" class="common-anchor-header">Menambahkan Bidang TEXT<button data-href="#Add-TEXT-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -319,7 +319,7 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Di Milvus 3.0 dan versi selanjutnya, Anda dapat menggunakan kolom <code translate="no">TEXT</code> untuk menyimpan teks dokumen, kutipan, log, dan konten teks panjang lainnya. Berbeda dengan <code translate="no">VARCHAR</code>, kolom <code translate="no">TEXT</code> tidak memerlukan <code translate="no">max_length</code>. Untuk informasi lebih lanjut tentang kolom <code translate="no">TEXT</code>, lihat <a href="/docs/id/text.md">Kolom TEXT</a>.</p>
+    </button></h3><p>Di Milvus 3.0 dan versi selanjutnya, Anda dapat menggunakan kolom <code translate="no">TEXT</code> untuk menyimpan teks dokumen, kutipan, log, dan konten teks panjang lainnya. Berbeda dengan kolom <code translate="no">VARCHAR</code>, kolom <code translate="no">TEXT</code> tidak memerlukan <code translate="no">max_length</code>. Untuk informasi lebih lanjut tentang kolom <code translate="no">TEXT</code>, lihat <a href="/docs/id/text.md">Kolom TEXT</a>.</p>
 <pre><code translate="no" class="language-python">schema.add_field(
     field_name=<span class="hljs-string">&quot;my_text&quot;</span>,
     datatype=DataType.TEXT,
@@ -342,9 +342,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Jenis bilangan yang didukung oleh Milvus adalah <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, dan <code translate="no">Double</code>. Untuk informasi lebih lanjut mengenai bidang bilangan, lihat <a href="/docs/id/number.md">​Bidang Bilangan</a>.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -398,9 +398,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus mendukung bidang boolean. Potongan kode berikut menunjukkan cara menambahkan bidang boolean.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -455,9 +455,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Sebuah bidang JSON biasanya menyimpan data JSON semi-terstruktur. Untuk informasi lebih lanjut mengenai bidang JSON, lihat <a href="/docs/id/use-json-fields.md">​Bidang JSON</a>.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -513,9 +513,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Bidang array menyimpan daftar elemen. Tipe data semua elemen dalam bidang array harus sama. Untuk informasi lebih lanjut tentang bidang array, lihat <a href="/docs/id/array_data_type.md">​Bidang Array</a>.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

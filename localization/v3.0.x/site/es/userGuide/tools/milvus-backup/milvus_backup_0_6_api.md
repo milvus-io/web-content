@@ -83,7 +83,7 @@ beta: Milvus Backup 0.6.x
 <p>El puerto predeterminado es el 8080. Para elegir otro puerto, utiliza <code translate="no">-p</code>:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Ejecute solo uno de estos comandos para un servicio determinado. Los ejemplos siguientes utilizan el puerto 8080; modifique sus URL si ha seleccionado otro puerto. Swagger UI está disponible en <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
+<p>Ejecuta solo uno de estos comandos para un servicio determinado. Los ejemplos siguientes utilizan el puerto 8080; cambia sus URL si has seleccionado otro puerto. Swagger UI está disponible en <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
 <p>Mantén el servicio en ejecución mientras se realizan las tareas de sondeo. Los ID de las tareas y el progreso en tiempo real pertenecen al proceso del servicio; la copia de seguridad persistente permanece en el almacenamiento de objetos una vez que el proceso se detiene.</p>
 <h2 id="Prepare-data" class="common-anchor-header">Prepara los datos<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,7 +141,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">4</code></td><td>Tiempo de espera agotado</td></tr>
 </tbody>
 </table>
-<p>Comprueba tanto la respuesta como el estado de la tarea. Un código HTTP 200 por sí solo no es suficiente: un código de respuesta distinto de cero <code translate="no">code</code> indica un error. Una respuesta correcta puede omitir <code translate="no">code</code>, ya que su valor es cero. Si una tarea falla o se agota el tiempo de espera, revisa los detalles de la respuesta y el registro del servidor antes de restaurar desde esa copia de seguridad.</p>
+<p>Comprueba tanto la respuesta como el estado de la tarea. Un código HTTP 200 por sí solo no es suficiente: un valor distinto de cero en « <code translate="no">code</code> » indica un error. Una respuesta correcta puede omitir « <code translate="no">code</code> », ya que su valor es cero. Si una tarea falla o se agota el tiempo de espera, revisa los detalles de la respuesta y el registro del servidor antes de restaurar desde esa copia de seguridad.</p>
 <p>Muestra una lista de las copias de seguridad almacenadas y revisa la copia de seguridad completada por su nombre:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
@@ -221,4 +221,4 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
         ></path>
       </svg>
     </button></h2><p>Una vez que la tarea de restauración se haya completado con éxito, conéctese a la instancia de Milvus de destino y compruebe que la colección y los datos esperados existen. Para la colección de prueba de 256 entidades, utilice las comprobaciones completas de escalares, vectores y búsquedas descritas en <a href="/docs/es/snapshot-backup-and-restore.md#Verify-the-result">«Verificar el resultado</a>».</p>
-<p>Cambia <code translate="no">coll_bak</code> por <code translate="no">coll</code> cuando restaures con el nombre original. El código de verificación lee los datos restaurados sin eliminarlos. Para los datos de producción, compáralos con una línea de base capturada en el momento de la copia de seguridad.</p>
+<p>Cambia <code translate="no">coll_bak</code> por <code translate="no">coll</code> cuando restaures con el nombre original. El código de verificación lee los datos restaurados sin eliminarlos. En el caso de los datos de producción, compáralos con una referencia capturada en el momento de la copia de seguridad.</p>

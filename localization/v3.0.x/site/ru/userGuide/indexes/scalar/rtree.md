@@ -1,12 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  Индекс RTREE — это древовидная структура данных, которая ускоряет выполнение
-  запросов по полям типа GEOMETRY. Если в вашей коллекции хранятся
-  геометрические объекты, такие как точки, линии или многоугольники, в формате
-  Well-known text (WKT), и вы хотите ускорить пространственную фильтрацию, RTREE
-  станет идеальным выбором.
+summary: Используйте RTREE для ускорения пространственной фильтрации по полям GEOMETRY.
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -24,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс « <code translate="no">RTREE</code> » представляет собой древовидную структуру данных, которая ускоряет выполнение запросов по полям « <code translate="no">GEOMETRY</code> » в Milvus. Если в вашей коллекции хранятся геометрические объекты, такие как точки, линии или многоугольники, в формате <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)</a>, и вы хотите ускорить пространственную фильтрацию, индекс « <code translate="no">RTREE</code> » станет идеальным выбором.</p>
-<h2 id="How-it-works" class="common-anchor-header">Как это работает<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> ускоряет пространственную фильтрацию по полям <code translate="no">GEOMETRY</code>, содержащим точки, линии или многоугольники в формате <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus использует индекс « <code translate="no">RTREE</code> » для эффективной организации и фильтрации геометрических данных, следуя двухэтапному процессу:</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">Этап 1: Построение индекса<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,9 +50,59 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
-<li><p><strong>Создание листьевых узлов:</strong> для каждого геометрического объекта вычисляется его <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">минимальный ограничивающий прямоугольник</a> (MBR) — это наименьший прямоугольник, полностью содержащий объект, — и сохраняется в виде листьевого узла.</p></li>
-<li><p><strong>Группировка в более крупные прямоугольники:</strong> сгруппируйте близлежащие листьевые узлы и оберните каждую группу новым MBR, формируя внутренние узлы. Например, группа <strong>B</strong> содержит <strong>D</strong> и <strong>E</strong>; группа <strong>C</strong> содержит <strong>F</strong> и <strong>G</strong>.</p></li>
+    </button></h3><p><code translate="no">GEOMETRY</code>. Определения полей см. в разделе <a href="/docs/ru/geometry-field.md">«Поле геометрии</a> ».</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Ускорение фильтрации<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> находит кандидаты с помощью ограничивающих прямоугольников, после чего Milvus проверяет точное пространственное соотношение. Поддерживаются следующие <a href="/docs/ru/geometry-operators.md">геометрические операторы</a>:</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code> и <code translate="no">ST_WITHIN</code>.</li>
+<li><code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code> и <code translate="no">ST_DWITHIN</code>.</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> не использует <code translate="no">RTREE</code>. При отсутствии подходящего индекса пространственные фильтры выполняют сканирование поля.</p>
+<div class="alert note">
+<blockquote>
+<p>Это возможности индекса, а не ограничения на допустимые выражения фильтров. См. <a href="/docs/ru/scalar_index.md#Filter-execution">раздел «Скалярный индекс»</a> для информации об общих ограничениях поиска. Информацию о проверках <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> и NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>) см. в разделе <a href="/docs/ru/basic-operators.md">«Основные операторы</a>».</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">Как работает RTREE<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>Просмотр процесса построения и запросов</strong></summary></p>
+<p>Milvus использует индекс « <code translate="no">RTREE</code> » для эффективной организации и фильтрации геометрических данных, следуя двухэтапному процессу:</p>
+<p><strong>Этап 1: Построение индекса</strong></p>
+<ol>
+<li><p><strong>Создание листьевых узлов:</strong> для каждого геометрического объекта вычисляется его <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">минимальный ограничивающий прямоугольник</a> (MBR) — наименьший прямоугольник, полностью содержащий объект, — и сохраняется в виде листьевого узла.</p></li>
+<li><p><strong>Группировка в более крупные блоки:</strong> сгруппируйте близко расположенные листьевые узлы и оберните каждую группу новым MBR, формируя внутренние узлы. Например, группа <strong>B</strong> содержит <strong>D</strong> и <strong>E</strong>; группа <strong>C</strong> содержит <strong>F</strong> и <strong>G</strong>.</p></li>
 <li><p><strong>Добавление корневого узла:</strong> добавьте корневой узел, чей MBR охватывает все внутренние группы, в результате чего получается сбалансированная по высоте древовидная структура.</p></li>
 </ol>
 <p><span class="img-wrapper">
@@ -67,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Как работает Retree</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Этап 2: Ускорение запросов<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>Этап 2: Ускорение запросов</strong></p>
+<ol>
 <li><p><strong>Формирование MBR запроса:</strong> вычислите MBR для геометрии вашего запроса.</p></li>
 <li><p><strong>Обрезание ветвей:</strong> начиная с корня, сравнивайте MBR запроса с каждым внутренним узлом. Пропускайте все ветви, MBR которых не пересекается с MBR запроса.</p></li>
 <li><p><strong>Сбор кандидатов:</strong> спускайтесь по пересекающимся ветвям, чтобы собрать кандидатов в листья.</p></li>
 <li><p><strong>Точное совпадение:</strong> для каждого кандидата выполните проверку на точное пространственное предикат, чтобы определить истинные совпадения.</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">Создание индекса RTREE<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -295,8 +326,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Фильтрация осуществляется с помощью геометрических операторов в выражении <code translate="no">filter</code>. Если для целевого поля <code translate="no">GEOMETRY</code> существует индекс <code translate="no">RTREE</code>, Milvus использует его для автоматического отсеивания кандидатов. Без индекса фильтр переходит к полному сканированию.</p>
-<p>Полный список доступных операторов, специфичных для геометрии, см. в разделе <a href="/docs/ru/geometry-operators.md">«Операторы геометрии</a>».</p>
+    </button></h2><p>В следующих примерах используется индексированное поле <code translate="no">GEOMETRY</code> с именем <code translate="no">geo</code>.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">Пример 1: Только фильтрация<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -617,10 +647,9 @@ EOF
       </svg>
     </button></h2><p>Используйте метод ` <code translate="no">drop_index()</code> ` для удаления существующего индекса из коллекции.</p>
 <div class="alert note">
-<ul>
-<li><p>В <strong>версии 2.6.3</strong> и более ранних версиях перед удалением скалярного индекса необходимо освободить коллекцию.</p></li>
-<li><p>Начиная с <strong>версии 2.6.4</strong> и более поздних версий, скалярный индекс можно удалить напрямую, как только он больше не нужен — предварительное освобождение коллекции не требуется.</p></li>
-</ul>
+<blockquote>
+<p>Требования к версии при удалении скалярного индекса см. в разделе <a href="/docs/ru/scalar_index.md#Drop-index-compatibility">«Скалярный индекс</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

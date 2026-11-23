@@ -1,9 +1,10 @@
 ---
 id: python_sdk.md
-title: 'Prompt: SDK Milvus Python'
+title: 'Prompt: SDK Python di Milvus'
 summary: >-
-  Regole per gli assistenti di codifica AI per scrivere codice Milvus Python
-  corretto usando MilvusClient.
+  Regole per gli assistenti di programmazione basati sull'intelligenza
+  artificiale per scrivere codice Python corretto per Milvus utilizzando
+  MilvusClient.
 ---
 <h1 id="Python-SDK" class="common-anchor-header">SDK Python<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Regole per scrivere codice Milvus Python corretto utilizzando l'interfaccia MilvusClient, compresa la migrazione ORM, i modelli di connessione e le operazioni comuni. Copiare il prompt completo qui sotto nel proprio strumento di IA per applicare queste regole automaticamente. Per una panoramica di tutti i prompt, vedere i <a href="/docs/it/milvus_for_agents.md">prompt dell'IA</a>.</p>
+    </button></h1><p>Regole per scrivere codice Python corretto per Milvus utilizzando l'interfaccia MilvusClient, tra cui la migrazione ORM, i modelli di connessione e le operazioni comuni. Copia il prompt completo riportato di seguito nel tuo strumento di IA per applicare automaticamente queste regole. Per una panoramica di tutti i prompt, consulta <a href="/docs/it/milvus_for_agents.md">Prompt IA</a>.</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Come utilizzare questo prompt<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,12 +38,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Copiare</strong> il prompt completo dalla sezione <a href="#full-prompt">prompt completo</a> qui sotto.</li>
-<li><strong>Salvarlo</strong> nella posizione prevista dallo strumento di IA (vedere la <a href="/docs/it/milvus_for_agents.md">tabella degli ambienti per</a> i dettagli sul posizionamento).</li>
-<li>L'assistente AI applicherà automaticamente queste regole durante la generazione o la revisione del codice Milvus.</li>
+<li><strong>Copia</strong> il prompt completo dalla sezione " <a href="#full-prompt">Prompt completo</a> " qui sotto.</li>
+<li><strong>Salvalo</strong> nella posizione prevista dal tuo strumento di IA — consulta la <a href="/docs/it/milvus_for_agents.md">tabella dell’ambiente</a> per i dettagli sul posizionamento.</li>
+<li>Il tuo assistente AI applicherà automaticamente queste regole durante la generazione o la revisione del codice Milvus.</li>
 </ol>
-<p>Per gli utenti di <strong>Cursor</strong>: copiare il prompt dalla sezione <a href="#full-prompt">prompt completo</a> e salvarlo in <code translate="no">.cursor/rules/</code> nel progetto.</p>
-<h2 id="Full-prompt" class="common-anchor-header">Richiesta completa<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>Per gli utenti <strong>di Cursor</strong>: copia il prompt dalla sezione " <a href="#full-prompt">Prompt completo</a> " e salvalo in " <code translate="no">.cursor/rules/</code> " nel tuo progetto.</p>
+<h2 id="Full-prompt" class="common-anchor-header">Prompt completo<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +232,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

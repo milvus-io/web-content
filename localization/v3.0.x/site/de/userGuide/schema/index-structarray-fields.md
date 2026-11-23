@@ -39,10 +39,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Stellen Sie sicher, dass das Sammlungsschema bereits das StructArray-Feld „ <code translate="no">chunks</code> “ enthält. Verwenden Sie den initialisierten Client aus <a href="/docs/de/create-structarray-field.md">„Create a StructArray Field“</a> für die von Ihnen gewählte Sprache (<code translate="no">cli</code> und <code translate="no">ctx</code> für Go, <code translate="no">client</code> für die anderen SDKs). Sie können Indizes erstellen, bevor Sie Daten einfügen.</p>
+    </button></h2><p>Stellen Sie sicher, dass das Sammlungsschema bereits das StructArray-Feld „ <code translate="no">chunks</code> “ enthält. Verwenden Sie den initialisierten Client aus <a href="/docs/de/create-structarray-field.md">„Create a StructArray Field“</a> für die von Ihnen gewählte Sprache (<code translate="no">cli</code> und <code translate="no">ctx</code> für Go, <code translate="no">client</code> für die anderen SDKs). Sie können Indizes erstellen, bevor Sie Daten einfügen. Überprüfen Sie unter <a href="/docs/de/structarray-limits.md">„StructArray Limits“</a> die kombinierte Obergrenze für Vektorfelder und Vektorunterfelder, bevor Sie diese hinzufügen.</p>
+<p>Geben Sie den vollständigen Unterfeldpfad an, z. B. <code translate="no">chunks[emb]</code>; bloße Unterfeldnamen und die Punktnotation sind ungültige Indexziele.</p>
 <table>
 <thead>
-<tr><th>Pfad zum Unterfeld</th><th>Typ</th><th>Zweck des Index</th></tr>
+<tr><th>Teilfeldpfad</th><th>Typ</th><th>Zweck des Index</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">chunks[emb_list_vector]</code></td><td><code translate="no">FLOAT_VECTOR</code></td><td>Suche in „EmbeddingList“ mit „ <code translate="no">MAX_SIM*</code> “-Metriken.</td></tr>
@@ -55,6 +56,7 @@ summary: >-
 <div class="alert note">
 <p>Ein Vektorfeld oder Vektorunterfeld akzeptiert nur einen Index. Wenn Sie sowohl die „EmbeddingList“-Suche als auch die Suche auf Elementebene benötigen, erstellen Sie zwei separate Vektorunterfelder und indizieren Sie diese separat. Auf dieser Seite wird „ <code translate="no">chunks[emb_list_vector]</code> “ für die „EmbeddingList“-Suche indiziert und „ <code translate="no">chunks[emb]</code> “ für die Suche auf Elementebene.</p>
 </div>
+<p><a id="Index-rules"></a></p>
 <h2 id="Choose-indexes" class="common-anchor-header">Indizes auswählen<button data-href="#Choose-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,20 +72,114 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verwenden Sie den Suchmodus, um die Vektormetrikfamilie auszuwählen.</p>
+    </button></h2><p>Wählen Sie die Vektormetrikfamilie je nach Suchmodus aus:</p>
 <table>
 <thead>
-<tr><th>Such- oder Filterziel</th><th>Zielpfad</th><th>Was Sie auswählen sollten</th></tr>
+<tr><th>Suchmodus</th><th>Zielpfad</th><th>Metrikfamilie</th></tr>
 </thead>
 <tbody>
-<tr><td>Suche in der EmbeddingList</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>Eine „ <code translate="no">MAX_SIM*</code> “-Metrikfamilie.</td></tr>
+<tr><td>Suche in der Einbettungsliste</td><td><code translate="no">chunks[emb_list_vector]</code></td><td>Eine „ <code translate="no">MAX_SIM*</code> “-Metrikfamilie.</td></tr>
 <tr><td>Vektorsuche auf Elementebene</td><td><code translate="no">chunks[emb]</code></td><td>Eine reguläre Vektormetrikfamilie, wie z. B. „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
-<tr><td>Nach Zeichenfolge oder Kategorie filtern</td><td><code translate="no">chunks[section]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
-<tr><td>Nach numerischem Bereich filtern</td><td><code translate="no">chunks[quality_score]</code>, <code translate="no">chunks[page]</code></td><td>Ein von Ihrem Ziel unterstützter skalarer Index.</td></tr>
-<tr><td>Nach boolescher Wert filtern</td><td><code translate="no">chunks[has_code]</code></td><td>Ein von Ihrem Zielobjekt unterstützter Skalarindex.</td></tr>
 </tbody>
 </table>
 <p>Die „EmbeddingList“-Suche behandelt die Vektoren in einem StructArray-Vektor-Unterfeld als Einbettungsliste und gibt Ergebnisse auf Entitätsebene zurück. Die Suche auf Elementebene durchsucht jedes Struct-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben.</p>
+<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Indizierung von Elementen mit Null-Werten und hinzugefügten Vektor-Unterfeldern<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Ab Milvus 3.0.6 kann ein Vektor-Unterfeld mit Nullwerten auf Elementebene (<code translate="no">nullable=True</code>) erstellt und ein Vektor-Unterfeld zu einem bestehenden StructArray-Feld hinzugefügt werden. In beiden Fällen ändert sich die Art und Weise, wie das Unterfeld indiziert wird:</p>
+<ul>
+<li>Ein Vektor-Unterfeld mit nullfähigen Elementen unterstützt ausschließlich die Suche auf Elementebene. Indizieren Sie es mit einer regulären Vektormetrik wie <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>. Metriken vom Typ „ <code translate="no">MAX_SIM*</code> “ und „EmbeddingList“-Indizes werden dabei abgelehnt, und „ <code translate="no">AUTOINDEX</code> “ wählt hierfür keine Metrik vom Typ „ <code translate="no">MAX_SIM*</code> “ aus. Null-Vektoren werden beim Erstellen des Indexes und während der Suche übersprungen.</li>
+</ul>
+<ul>
+<li><p>Ein Vektor-Unterfeld, das einem bestehenden StructArray-Feld hinzugefügt wird, ist immer element-nullfähig, sodass dieselbe Metrikregel gilt. Sie können einen Index nicht in der Hinzufügungsanforderung binden; erstellen Sie den Index separat, nachdem das Unterfeld existiert.</p></li>
+<li><p>Ein Ladevorgang, der ein Vektor-Unterfeld enthält, erfordert einen Index darauf, wie bei jedem Vektorfeld. Erstellen Sie den Index für ein hinzugefügtes Vektor-Unterfeld, bevor Sie die Sammlung mit diesem Unterfeld laden. Abfragen können das neue Unterfeld bereits zurückgeben, bevor der Index existiert.</p></li>
+<li><p>Verlaufssegmente erhalten ein hinzugefügtes Unterfeld und dessen Index durch die Schema-Versionskomprimierung. Setzen Sie „ <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> “ auf „ <code translate="no">true</code> “ (standardmäßig ist „ <code translate="no">false</code> “ eingestellt); andernfalls deckt der Index des hinzugefügten Unterfelds die Verlaufssegmente nicht ab.</p></li>
+<li><p>Milvus erstellt den Vektorindex für ein Segment eines Vektor-Unterfelds, dessen Elemente null-fähig sind, nur dann, wenn das Segment mindestens 1.024 gültige (nicht-null) Elemente enthält. Für ein Segment unterhalb dieses Schwellenwerts wird kein Index erstellt, und Abfragen darauf werden als Brute-Force-Suche ausgeführt.</p></li>
+</ul>
+<p><a id="Applicable-metric-types"></a></p>
+<h2 id="Index-metric-compatibility" class="common-anchor-header">Kompatibilität der Indexmetrik<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Wählen Sie einen Index und eine Metrik, die mit dem Typ des Vektor-Unterfelds und dem Suchmodus kompatibel sind:</p>
+<h3 id="EmbeddingList-search" class="common-anchor-header">„EmbeddingList“-Suche<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die „EmbeddingList“-Suche verwendet die Metrik „ <code translate="no">MAX_SIM*</code> “; „ <code translate="no">MAX_SIM</code> “ ist ein Alias für „ <code translate="no">MAX_SIM_COSINE</code> “:</p>
+<table>
+<thead>
+<tr><th>Datentyp des Vektor-Unterfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code></td></tr>
+<tr><td><code translate="no">INT8_VECTOR</code></td><td><code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code></td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code></td></tr>
+<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HNSW</code></td><td><code translate="no">MAX_SIM_HAMMING</code>, <code translate="no">MAX_SIM_JACCARD</code></td></tr>
+</tbody>
+</table>
+<h3 id="Element-level-search" class="common-anchor-header">Suche auf Elementebene<button data-href="#Element-level-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Die Suche auf Elementebene verwendet reguläre Vektormetriken:</p>
+<table>
+<thead>
+<tr><th>Datentyp des Vektor-Teilfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">IVF_SQ_CC</code>, <code translate="no">IVF_PQ</code>, <code translate="no">SCANN</code>, <code translate="no">IVF_RABITQ</code>, <code translate="no">IVF_RABITQ_FASTSCAN</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
+<tr><td><code translate="no">INT8_VECTOR</code></td><td><code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
+<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HNSW</code></td><td><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></td></tr>
+<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">BIN_FLAT</code></td><td><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">SUBSTRUCTURE</code>, <code translate="no">SUPERSTRUCTURE</code>, <code translate="no">MHJACCARD</code></td></tr>
+<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">BIN_IVF_FLAT</code></td><td><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></td></tr>
+</tbody>
+</table>
+<p>Informationen zu versionsspezifischem Support und weiteren Einschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Einschränkungen</a>“.</p>
 <h2 id="Create-vector-indexes" class="common-anchor-header">Vektorindizes erstellen<button data-href="#Create-vector-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +195,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Im folgenden Beispiel werden zwei Vektorindizes erstellt. Der erste Index verwendet eine „ <code translate="no">MAX_SIM*</code> “-Metrik für die „EmbeddingList“-Suche. Der zweite Index verwendet eine reguläre Vektormetrik für die Suche auf Elementebene.</p>
+    </button></h2><p>Erstellen Sie für jedes Vektor-Unterfeld einen Index unter Verwendung der ausgewählten Metrikfamilie:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -279,11 +375,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(vector_reques
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>Warnung
-Erstellen Sie keinen „ <code translate="no">MAX_SIM*</code> “-Index und keinen regulären Vektor-Metrik-Index für dasselbe Vektor-Teilfeld. Wenn beide Suchmodi erforderlich sind, schreiben Sie die Vektoren in zwei separate Vektor-Teilfelder und erstellen Sie für jedes Teilfeld einen eigenen Index.</p>
-</div>
-<h2 id="Create-scalar-indexes" class="common-anchor-header">Erstellen Sie Skalarindizes<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
+<h2 id="Create-scalar-indexes" class="common-anchor-header">Skalarindizes erstellen<button data-href="#Create-scalar-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -298,7 +390,9 @@ Erstellen Sie keinen „ <code translate="no">MAX_SIM*</code> “-Index und kein
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Erstellen Sie skalare Indizes für skalare StructArray-Unterfelder, wenn Sie diese in Filtern verwenden. Verwenden Sie dabei dieselbe Syntax für den Pfad „ <code translate="no">structArray[subfield]</code> “.</p>
+    </button></h2><p>Erstellen Sie skalare Indizes für skalare Unterfelder von StructArray, wenn Sie diese in Filtern verwenden. Verwenden Sie dabei dieselbe Syntax für den Pfad „ <code translate="no">structArray[subfield]</code> “. Indizieren Sie jedes Unterfeld einzeln statt des gesamten StructArray-Feldes.</p>
+<p>Unterfeldindizes verwenden Array-Darstellungen, ihre Kompatibilität kann sich jedoch von gewöhnlichen ARRAY-Feldern unterscheiden. Insbesondere unterstützt ein boolesches StructArray-Unterfeld „ <code translate="no">INVERTED</code> “ und „ <code translate="no">BITMAP</code> “, jedoch nicht „ <code translate="no">STL_SORT</code> “. Informationen zu anderen Nicht-Vektor-Unterfeldern finden Sie unter <a href="/docs/de/scalar_index.md#Supported-field-types">„Skalare Indizes“</a>; wenden Sie die unterfeldspezifischen Regeln dieser Seite an, sofern diese abweichen.</p>
+<p>Ab Milvus 3.0.6 werden skalare Indizes bei Unterfeldern mit nullfähigen Elementen oder bei skalaren „ <code translate="no">ARRAY</code> “-Unterfeldern nicht mehr unterstützt. Filter auf diese Unterfelder werden ohne Index ausgeführt.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -481,140 +575,7 @@ status = client-&gt;<span class="hljs-built_in">CreateIndex</span>(scalar_reques
     ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Skalare Indizes sind optional, aber nützlich, wenn skalare StructArray-Teilfelder häufig in Filtern vorkommen, wie z. B. bei „ <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> “ oder „ <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> “.</p>
-<h2 id="Applicable-metric-types" class="common-anchor-header">Geeignete Metriktypen<button data-href="#Applicable-metric-types" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Für die Suche in „EmbeddingList“ wählen Sie die Metrik „ <code translate="no">MAX_SIM*</code> “, die dem Vergleich auf Vektorebene entspricht: „ <code translate="no">MAX_SIM_COSINE</code> “ (auch „ <code translate="no">MAX_SIM</code> “ genannt), „ <code translate="no">MAX_SIM_IP</code> “ oder „ <code translate="no">MAX_SIM_L2</code> “ für dichte Vektoren sowie „ <code translate="no">MAX_SIM_HAMMING</code> “ oder „ <code translate="no">MAX_SIM_JACCARD</code> “ für binäre Vektoren. Diese Metriken vergleichen Einbettungslisten und liefern Ergebnisse auf Entitätsebene. Für die Suche auf Elementebene verwenden Sie die entsprechende reguläre Metrik, die unten aufgeführt ist.</p>
-<p>Ab Milvus 3.0.6 werden skalare Indizes für element-nullfähige Unterfelder oder für skalare „ <code translate="no">ARRAY</code> “-Unterfelder nicht mehr unterstützt. Filter auf diesen Unterfeldern werden ohne Index ausgeführt.</p>
-<h2 id="Index-element-nullable-and-added-vector-subfields" class="common-anchor-header">Indizieren von element-nullfähigen und hinzugefügten Vektor-Unterfeldern<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.6</span><button data-href="#Index-element-nullable-and-added-vector-subfields" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Ab Milvus 3.0.6 kann ein Vektor-Unterfeld mit Null auf Elementebene (`<code translate="no">nullable=True</code>`) erstellt und ein Vektor-Unterfeld zu einem bestehenden `StructArray`-Feld hinzugefügt werden. In beiden Fällen ändert sich die Art und Weise, wie Sie das Unterfeld indizieren:</p>
-<ul>
-<li>Ein Vektor-Unterfeld mit nullfähigen Elementen unterstützt ausschließlich die Suche auf Elementebene. Indizieren Sie es mit einer regulären Vektormetrik wie <code translate="no">COSINE</code>, <code translate="no">IP</code> oder <code translate="no">L2</code>. Metriken vom Typ „ <code translate="no">MAX_SIM*</code> “ und „EmbeddingList“-Indizes werden dabei abgelehnt, und „ <code translate="no">AUTOINDEX</code> “ wählt hierfür keine Metrik vom Typ „ <code translate="no">MAX_SIM*</code> “ aus. Null-Vektoren werden beim Aufbau des Indexes und während der Suche übersprungen.</li>
-</ul>
-<ul>
-<li><p>Ein Vektor-Unterfeld, das einem bestehenden StructArray-Feld hinzugefügt wird, ist immer element-nullfähig, sodass dieselbe Metrikregel gilt. Sie können in der Hinzufügungsanfrage keinen Index binden; erstellen Sie den Index separat, nachdem das Unterfeld existiert.</p></li>
-<li><p>Ein Ladevorgang, der ein Vektor-Unterfeld enthält, erfordert einen Index darauf, wie bei jedem Vektorfeld. Erstellen Sie den Index für ein hinzugefügtes Vektor-Unterfeld, bevor Sie die Sammlung mit diesem Unterfeld laden. Abfragen können das neue Unterfeld bereits zurückgeben, bevor der Index existiert.</p></li>
-<li><p>Verlaufssegmente erhalten ein hinzugefügtes Unterfeld und dessen Index durch die Schema-Versionskomprimierung. Setzen Sie „ <code translate="no">dataCoord.compaction.bumpSchemaVersion.enabled</code> “ auf „ <code translate="no">true</code> “ (standardmäßig ist „ <code translate="no">false</code> “ eingestellt); andernfalls deckt der Index des hinzugefügten Unterfelds die Verlaufssegmente nicht ab.</p></li>
-<li><p>Milvus erstellt den Vektorindex für ein Segment eines Vektor-Unterfelds, dessen Elemente null-fähig sind, nur dann, wenn das Segment mindestens 1.024 gültige (nicht-null) Elemente enthält. Für ein Segment unterhalb dieses Schwellenwerts wird kein Index erstellt, und Abfragen darauf werden als Brute-Force-Suche ausgeführt.</p></li>
-</ul>
-<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
-
-<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
-    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
-    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
-    params={
-        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
-        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
-    },
-)
-
-client.create_index(
-    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
-    index_params=index_params,
-)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-metric-compatibility" class="common-anchor-header">Kompatibilität der Indexmetriken<button data-href="#Index-metric-compatibility" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Verwenden Sie die folgenden Tabellen, um einen Indextyp und einen Metriktyp für ein StructArray-Vektor-Unterfeld auszuwählen. Beginnen Sie mit dem Ziel und wählen Sie dann die Metrikfamilie nach Suchmodus aus.</p>
-<p>Wählen Sie einen Milvus-Indextyp und einen Metriktyp aus den folgenden Kompatibilitätstabellen aus.</p>
-<h3 id="EmbeddingList-search" class="common-anchor-header">EmbeddingList-Suche<button data-href="#EmbeddingList-search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Die „EmbeddingList“-Suche verwendet „ <code translate="no">MAX_SIM*</code> “-Metriken. Sie behandelt die Vektoren in einem StructArray-Vektor-Unterfeld als Einbettungsliste und liefert Ergebnisse auf Entitätsebene.</p>
-<table>
-<thead>
-<tr><th>Datentyp des Vektor-Unterfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code></td></tr>
-<tr><td><code translate="no">INT8_VECTOR</code></td><td><code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code></td><td><code translate="no">MAX_SIM</code>, <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, <code translate="no">MAX_SIM_L2</code></td></tr>
-<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HNSW</code></td><td><code translate="no">MAX_SIM_HAMMING</code>, <code translate="no">MAX_SIM_JACCARD</code></td></tr>
-</tbody>
-</table>
-<h3 id="Element-level-search" class="common-anchor-header">Suche auf Elementebene<button data-href="#Element-level-search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Die Suche auf Elementebene verwendet reguläre Vektormetriken. Sie durchsucht jedes Struct-Element unabhängig und kann den Offset des übereinstimmenden Elements zurückgeben.</p>
-<table>
-<thead>
-<tr><th>Datentyp des Vektor-Teilfelds</th><th>Indextyp</th><th>Metriktyp</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code></td><td><code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_FLAT_CC</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">IVF_SQ_CC</code>, <code translate="no">IVF_PQ</code>, <code translate="no">SCANN</code>, <code translate="no">IVF_RABITQ</code>, <code translate="no">IVF_RABITQ_FASTSCAN</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, <code translate="no">DISKANN</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
-<tr><td><code translate="no">INT8_VECTOR</code></td><td><code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code></td><td><code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">COSINE</code></td></tr>
-<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">HNSW</code></td><td><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></td></tr>
-<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">BIN_FLAT</code></td><td><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code>, <code translate="no">SUBSTRUCTURE</code>, <code translate="no">SUPERSTRUCTURE</code>, <code translate="no">MHJACCARD</code></td></tr>
-<tr><td><code translate="no">BINARY_VECTOR</code></td><td><code translate="no">BIN_IVF_FLAT</code></td><td><code translate="no">HAMMING</code>, <code translate="no">JACCARD</code></td></tr>
-</tbody>
-</table>
-<p>Informationen zu versionsspezifischem Support und weiteren Einschränkungen finden Sie unter <a href="/docs/de/structarray-limits.md">„StructArray-Einschränkungen</a>“.</p>
+<p>Skalare Indizes sind optional. Verwenden Sie sie für häufig verwendete Filter auf Unterfeldern wie „ <code translate="no">section</code> “, „ <code translate="no">quality_score</code> “, „ <code translate="no">page</code> “ oder „ <code translate="no">has_code</code> “. Beispiele hierfür sind „ <code translate="no">element_filter(chunks, $[quality_score] &gt; 0.9)</code> “ und „ <code translate="no">MATCH_ANY(chunks, $[section] == &quot;index&quot;)</code> “.</p>
 <h2 id="Verify-indexes" class="common-anchor-header">Indizes überprüfen<button data-href="#Verify-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -630,7 +591,7 @@ client.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Beschreiben Sie nach dem Erstellen der Indizes die Indizes der Sammlung oder Liste, um sicherzustellen, dass die erwarteten Unterfeldpfade indiziert sind.</p>
+    </button></h2><p>Beschreiben Sie nach dem Erstellen der Indizes die Sammlung oder listen Sie die Indizes auf, um sicherzustellen, dass die erwarteten Unterfeldpfade indiziert sind.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -712,7 +673,7 @@ Console.WriteLine(<span class="hljs-built_in">string</span>.Join(<span class="hl
     &quot;collectionName&quot;: &quot;tech_articles&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachdem Sie sowohl den Vektor- als auch den Skalarindex wie oben beschrieben erstellt haben, sollte die Liste der Rückmeldungen die folgenden Namen in beliebiger Reihenfolge enthalten. Die Formatierung hängt vom jeweiligen SDK ab:</p>
+<p>Nachdem Sie sowohl den Vektor- als auch den Skalarindex wie oben beschrieben erstellt haben, sollte die Antwortliste die folgenden Namen in beliebiger Reihenfolge enthalten. Die Formatierung hängt vom jeweiligen SDK ab:</p>
 <pre><code translate="no" class="language-plaintext">chunks_emb_list_max_sim
 chunks_emb_cosine
 chunks_section_inverted
@@ -813,36 +774,29 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
     &quot;indexName&quot;: &quot;chunks_emb_cosine&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Die Listenantwort enthält die Indexnamen; die „describe“-Antwort identifiziert „ <code translate="no">chunks[emb]</code> “ und die Indexkonfiguration. Überprüfen Sie die Antwort oder den Status auf Fehler, bevor Sie sie verwenden.</p>
-<h2 id="Index-rules" class="common-anchor-header">Indexregeln<button data-href="#Index-rules" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><table>
-<thead>
-<tr><th>Regel</th><th>Erläuterung</th></tr>
-</thead>
-<tbody>
-<tr><td>Verwenden Sie die Pfadsyntax für Unterfeld-Indizes.</td><td>Indizieren Sie „ <code translate="no">chunks[emb]</code> “, nicht „ <code translate="no">emb</code> “ oder „ <code translate="no">chunks.emb</code> “.</td></tr>
-<tr><td>Ein Vektor-Unterfeld akzeptiert einen Index.</td><td>Verwenden Sie separate Vektor-Teilfelder, wenn Sie unterschiedliche Metrikfamilien benötigen.</td></tr>
-<tr><td>Verwenden Sie „ <code translate="no">MAX_SIM*</code> “-Metriken für die EmbeddingList-Suche.</td><td>Für Abfragen in der „EmbeddingList“ sind Daten aus einem Index erforderlich, der mit einer „ <code translate="no">MAX_SIM*</code> “-Metrik erstellt wurde.</td></tr>
-<tr><td>Verwenden Sie reguläre Vektormetriken für die Suche auf Elementebene.</td><td>Die Suche auf Elementebene verwendet reguläre Vektorabfragedaten und Metriken wie „ <code translate="no">COSINE</code> “, „ <code translate="no">IP</code> “ oder „ <code translate="no">L2</code> “.</td></tr>
-<tr><td>Indizieren Sie skalare Unterfelder, die in Filtern vorkommen.</td><td>Verwenden Sie skalare Indizierungstypen, die von Ihrem Ziel unterstützt werden. Element-nullfähige Unterfelder und skalare „ <code translate="no">ARRAY</code> “-Unterfelder können nicht indiziert werden.</td></tr>
-<tr><td>Verwenden Sie Metriken auf Elementebene für element-nullfähige Vektor-Unterfelder.</td><td>Ein Vektor-Unterfeld mit nullfähigen Elementen (<code translate="no">nullable=True</code>), einschließlich aller Vektor-Unterfelder, die einem bestehenden StructArray-Feld hinzugefügt wurden, lehnt „ <code translate="no">MAX_SIM*</code> “-Metriken ab.</td></tr>
-<tr><td>Beachten Sie die Beschränkungen für Vektorfelder.</td><td>Die Gesamtzahl der Vektorfelder und Vektor-Teilfelder ist begrenzt. Lesen Sie den Abschnitt „StructArray-Grenzwerte“, bevor Sie viele Vektor-Teilfelder hinzufügen.</td></tr>
-</tbody>
-</table>
+<p>Überprüfen Sie, ob die „describe“-Antwort „ <code translate="no">chunks[emb]</code> “ und die erwartete Konfiguration identifiziert, ohne dass Fehler gemeldet werden.</p>
+<p><details>
+<summary><strong>Beispiel: Indizieren eines hinzugefügten Vektor-Unterfelds</strong></summary></p>
+<pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
+
+<span class="hljs-comment"># Element-level index on an added, element-nullable vector subfield.</span>
+index_params.add_index(
+    field_name=<span class="hljs-string">&quot;chunks[summary_emb]&quot;</span>,
+    index_name=<span class="hljs-string">&quot;chunks_summary_emb_cosine&quot;</span>,
+    index_type=<span class="hljs-string">&quot;HNSW&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+    params={
+        <span class="hljs-string">&quot;M&quot;</span>: <span class="hljs-number">16</span>,
+        <span class="hljs-string">&quot;efConstruction&quot;</span>: <span class="hljs-number">200</span>,
+    },
+)
+
+client.create_index(
+    collection_name=<span class="hljs-string">&quot;tech_articles&quot;</span>,
+    index_params=index_params,
+)
+<button class="copy-code-btn"></button></code></pre>
+<p></details></p>
 <h2 id="Common-mistakes" class="common-anchor-header">Häufige Fehler<button data-href="#Common-mistakes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -858,14 +812,7 @@ status = client-&gt;<span class="hljs-built_in">DescribeIndex</span>(milvus::<sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><p>Erstellen eines Index auf „ <code translate="no">chunks.emb</code> “ anstelle von „ <code translate="no">chunks[emb]</code> “.</p></li>
-<li><p>Erstellen Sie nur einen „ <code translate="no">MAX_SIM*</code> “-Index und versuchen Sie dann, eine Suche auf Elementebene für dasselbe Unterfeld durchzuführen.</p></li>
-<li><p>Nur einen regulären Vektorindex erstellen und anschließend versuchen, eine „EmbeddingList“-Suche auf demselben Unterfeld durchzuführen.</p></li>
-<li><p>Wiederverwendung eines Vektor-Unterfelds sowohl für „ <code translate="no">MAX_SIM*</code> “- als auch für reguläre Vektormetriken.</p></li>
-<li><p>Das Versäumen, skalare Indizes für häufig verwendete „StructArray“-Filter zu erstellen.</p></li>
-<li><p>Indizierung eines StructArray-Unterfelds, das im Struct-Schema nicht vorhanden ist.</p></li>
-</ul>
+    </button></h2><p>Wenn die Indexerstellung oder die Suche fehlschlägt, überprüfen Sie die oben genannte Pfadsyntax und die Metrikregeln und vergewissern Sie sich, dass das Zielunterfeld im Struct-Schema vorhanden ist.</p>
 <h2 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

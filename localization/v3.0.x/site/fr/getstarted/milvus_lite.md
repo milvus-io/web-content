@@ -180,7 +180,7 @@ res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collect
 <span class="hljs-built_in">print</span>(res)
 client.close()
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour une application générant des plongées à partir de texte, passez à <a href="/docs/fr/quickstart.md">la section « Démarrage rapide</a> ». Vous pouvez également explorer les <a href="https://github.com/milvus-io/bootcamp">exemples du Bootcamp Milvus</a> consacrés au RAG, à la recherche d’images et aux intégrations de frameworks.</p>
+<p>Pour une application générant des représentations à partir de texte, passez à <a href="/docs/fr/quickstart.md">la section « Démarrage rapide</a> ». Vous pouvez également explorer les <a href="https://github.com/milvus-io/bootcamp">exemples du Bootcamp Milvus</a> consacrés au RAG, à la recherche d’images et aux intégrations de frameworks.</p>
 <h2 id="Supported-features-and-limits" class="common-anchor-header">Fonctionnalités prises en charge et limites<button data-href="#Supported-features-and-limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

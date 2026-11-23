@@ -66,15 +66,15 @@ summary: >-
     </button></h2><p>Jika pipa Anda dapat mencoba kembali permintaan impor yang gagal atau habis waktunya, beri tanda pada pekerjaan tersebut dengan kunci idempotensi; lihat <a href="/docs/id/idempotent-import.md">Impor Massal Idempoten</a>.</p>
 <p>Untuk mengimpor data yang telah disiapkan, Anda harus membuat pekerjaan impor sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -151,7 +151,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>Hasil yang mungkin diperoleh adalah sebagai berikut:</p>
+<p>Hasil yang mungkin adalah sebagai berikut:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;code&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
     <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -159,6 +159,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> parameter<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> adalah pembungkus sederhana untuk ` <code translate="no">POST /v2/vectordb/jobs/import/create</code>`. Selain
+contoh di atas, fungsi ini menyediakan parameter-parameter berikut (PyMilvus 2.6 dan versi selanjutnya).</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Tipe</th><th>Deskripsi</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>Alamat server, misalnya <code translate="no">http://127.0.0.1:19530</code> atau <code translate="no">https://api.cloud.zilliz.com</code>.</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Koleksi tujuan.</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>Database tujuan. Dikirim sebagai header <code translate="no">DB-Name</code> untuk RBAC.</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>File yang sudah tersedia di instance Milvus, misalnya di MinIO. Ini adalah <strong>jalur di sisi server, bukan URL objek</strong>. Setiap sub-daftar adalah satu file JSON atau Parquet, atau satu set file NumPy.</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>Partisi target. Diteruskan melalui argumen kata kunci tambahan, bukan parameter yang dideklarasikan, sehingga mudah terlewatkan dalam tanda tangan. Biarkan kosong untuk koleksi yang menggunakan kunci partisi.</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>URL objek tunggal di penyimpanan objek cloud. Digantikan oleh <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>URL objek di penyimpanan objek cloud, misalnya <code translate="no">s3://bucket/prefix/1.parquet</code>. Setiap sub-daftar merupakan satu objek atau satu awalan yang diakhiri dengan <code translate="no">/</code>. Gunakan ini <strong>sebagai pengganti</strong> <code translate="no">files</code>; keduanya merupakan transportasi yang berbeda, bukan sinonim.</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>ID kluster Zilliz Cloud.</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>ID proyek Zilliz Cloud, untuk basis data proyek.</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>Wilayah basis data proyek.</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>Kunci API, atau <code translate="no">username:password</code> untuk instans yang dihosting sendiri.</td></tr>
+<tr><td><code translate="no">access_key</code> / <code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td>Kredensial penyimpanan objek untuk <code translate="no">object_urls</code>.</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>Token sesi untuk kredensial penyimpanan objek jangka pendek.</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>Volume Zilliz Cloud yang akan diimpor. Membutuhkan <code translate="no">data_paths</code>.</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td>Jalur di dalam <code translate="no">volume_name</code>. Setiap subdaftar adalah satu berkas atau satu awalan yang diakhiri dengan <code translate="no">/</code>.</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> atau <code translate="no">str</code></td><td>Verifikasi sertifikat TLS server; <code translate="no">True</code> secara default. Sebuah string diperlakukan sebagai jalur bundel CA.</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> atau <code translate="no">tuple</code></td><td>Sertifikat klien untuk TLS timbal balik: jalur berkas, atau pasangan <code translate="no">('cert', 'key')</code>.</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>Header HTTP tambahan yang digabungkan ke dalam permintaan; nilai dari pemanggil yang berlaku. Gunakan ini untuk mengirim kunci idempotensi, misalnya <code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code>; lihat <a href="/docs/id/idempotent-import.md">Impor Massal Idempotent</a>.</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>Opsi impor tambahan diteruskan ke server dalam badan permintaan.</td></tr>
+</tbody>
+</table>
+<p>Argumen kata kunci yang tersisa diteruskan ke ` <code translate="no">requests.post</code>`, sehingga ` <code translate="no">timeout</code> ` dan ` <code translate="no">proxies</code>` 
+berfungsi seperti di sana. Pembungkus ini mengirimkan batas waktu 20 detik secara default.</p>
 <h2 id="Check-import-progress" class="common-anchor-header">Periksa kemajuan impor<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -174,10 +219,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah Anda mendapatkan ID pekerjaan impor, Anda dapat memeriksa kemajuan impor sebagai berikut:</p>
+    </button></h2><p>Setelah Anda mendapatkan ID tugas impor, Anda dapat memeriksa kemajuan impor sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -238,7 +283,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Respons yang mungkin diterima adalah sebagai berikut:</p>
+<p>Respons yang mungkin adalah sebagai berikut:</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -273,7 +318,7 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">Daftar Pekerjaan Impor<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">Daftar Tugas Impor<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -290,8 +335,8 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
       </svg>
     </button></h2><p>Anda dapat menampilkan daftar semua tugas impor yang terkait dengan koleksi tertentu sebagai berikut:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json

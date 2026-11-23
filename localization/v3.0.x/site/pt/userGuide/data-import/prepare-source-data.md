@@ -61,8 +61,8 @@ summary: >-
 <p>Para obter mais informações, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> na referência do SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -233,16 +233,16 @@ schema.verify()
 <tbody>
 <tr><td>JSON, JSONL</td><td>O valor do campo é uma lista de objetos, um por elemento Struct, indexada pelo nome do subcampo: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
 <tr><td>CSV</td><td>A célula contém o mesmo texto JSON que o formato JSON. O <code translate="no">nullkey</code> configurado para a tarefa de importação ou um JSON <code translate="no">null</code> marca um valor StructArray nulo.</td></tr>
-<tr><td>Parquet</td><td>Uma coluna por campo do StructArray com o tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, um elemento filho «struct» por subcampo. Um subcampo escalar é um elemento filho escalar, um subcampo vetorial é uma lista do seu tipo de elemento, como <code translate="no">list&lt;float32&gt;</code>, e um subcampo de matriz (Milvus 3.0.6 e versões posteriores) é um elemento filho « <code translate="no">list&lt;T&gt;</code> ».</td></tr>
+<tr><td>Parquet</td><td>Uma coluna por campo do StructArray com o tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, um elemento filho «struct» por subcampo. Um subcampo escalar é um elemento filho escalar, um subcampo vetorial é uma lista do seu tipo de elemento, como <code translate="no">list&lt;float32&gt;</code>, e um subcampo de matriz (Milvus 3.0.6 e versões posteriores) é um elemento filho <code translate="no">list&lt;T&gt;</code>.</td></tr>
 <tr><td>NumPy</td><td>Não suportado. Os ficheiros NumPy contêm um ficheiro por campo de nível superior e não têm representação para um campo StructArray. Utilize ficheiros JSON, CSV ou Parquet para coleções que tenham um campo StructArray.</td></tr>
 </tbody>
 </table>
 <p>As seguintes regras aplicam-se aos valores StructArray em todos os formatos suportados:</p>
 <ul>
 <li><p>Utilize nomes de subcampos dentro de cada elemento Struct, e não percursos como <code translate="no">chunks[text]</code>. Colunas planas ou chaves com nomes como <code translate="no">chunks[text]</code> são rejeitadas.</p></li>
-<li><p>Um elemento Struct, por si só, não pode ser nulo, como, por exemplo, <code translate="no">[null, {...}]</code>. Um valor StructArray completo só pode ser nulo quando o campo StructArray for nulo. Antes do Milvus 3.0.6, cada elemento Struct tinha de fornecer todos os subcampos.</p></li>
+<li><p>Um elemento Struct, por si só, não pode ser nulo, como por exemplo <code translate="no">[null, {...}]</code>. Um valor StructArray completo só pode ser nulo quando o campo StructArray for nulo. Antes do Milvus 3.0.6, cada elemento Struct tinha de fornecer todos os subcampos.</p></li>
 <li><p>Chaves ou elementos filhos do Parquet que não sejam subcampos da coleção, incluindo subcampos omitidos, são ignorados.</p></li>
-<li><p>A partir do Milvus 3.0.6, uma chave em falta ou um valor « <code translate="no">null</code> » para um subcampo em que o elemento pode ser nulo é importado como um valor nulo para esse elemento Struct; assim, os ficheiros criados antes da adição de um subcampo são importados sem ele. Um ` <code translate="no">null</code> ` em qualquer outro local faz com que a importação falhe. Para um subcampo de matriz, ` <code translate="no">null</code> ` é uma matriz interna nula e ` <code translate="no">null</code> ` dentro da matriz interna é um valor interno nulo, quando o subcampo o permite.</p></li>
+<li><p>A partir do Milvus 3.0.6, uma chave em falta ou um valor « <code translate="no">null</code> » para um subcampo com elementos nulos é importado como um valor nulo para esse elemento Struct, pelo que os ficheiros criados antes da adição de um subcampo são importados sem o mesmo. Um ` <code translate="no">null</code> ` em qualquer outro local faz com que a importação falhe. Para um subcampo de matriz, ` <code translate="no">null</code> ` é uma matriz interna nula, e ` <code translate="no">null</code> ` dentro da matriz interna é um valor interno nulo quando o subcampo o permite.</p></li>
 <li><p>A partir do Milvus 3.0.6, a importação de binlog, como a restauração de uma cópia de segurança, e a importação a partir de uma fonte de instantâneo são rejeitadas para coleções que tenham subcampos com elementos nulos ou subcampos de matriz escalar.</p></li>
 </ul>
 <p><a href="#Set-up-BulkWriter">O</a> pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> suporta as formas de StructArray acima em todos os formatos suportados, incluindo subcampos com elementos nulos e valores de StructArray nulos. Utilize as mesmas formas de linha nas chamadas <code translate="no">add_row()</code> do gravador.</p>
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p>Um <strong>LocalBulkWriter</strong> acrescenta linhas do conjunto de dados de origem e grava-as num ficheiro local com o formato especificado.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -318,14 +318,14 @@ writer = LocalBulkWriter(
 <li>Referenciar o esquema criado em <code translate="no">schema</code>.</li>
 <li>Definir ` <code translate="no">local_path</code> ` como o diretório de saída.</li>
 <li>Definir ` <code translate="no">file_type</code> ` para o tipo de ficheiro de saída.</li>
-<li>Se o seu conjunto de dados contiver um grande número de registos, recomenda-se que segmente os seus dados definindo ` <code translate="no">segment_size</code> ` para um valor adequado.</li>
+<li>Se o seu conjunto de dados contiver um grande número de registos, recomenda-se que segmente os seus dados, definindo ` <code translate="no">segment_size</code> ` para um valor adequado.</li>
 </ul>
 <p>Para obter detalhes sobre as definições dos parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">LocalBulkWriter</a> na referência do SDK.</p>
 </div>
 <div class="language-java">
 <p>Ao criar um <strong>LocalBulkWriter</strong>, deve:</p>
 <ul>
-<li>Referenciar o esquema criado em ` <code translate="no">CollectionSchema()</code>`.</li>
+<li>Referenciar o esquema criado em « <code translate="no">CollectionSchema()</code> ».</li>
 <li>Definir o diretório de saída em ` <code translate="no">withLocalPath()</code>`.</li>
 <li>Definir o tipo de ficheiro de saída em ` <code translate="no">withFileType()</code>`.</li>
 <li>Se o seu conjunto de dados contiver um grande número de registos, recomenda-se que segmente os seus dados definindo <code translate="no">withChunkSize()</code> para um valor adequado.</li>
@@ -349,8 +349,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>Em vez de gravar os dados acrescentados num ficheiro local, um <strong>RemoteBulkWriter</strong> grava-os num bucket remoto. Por isso, deve configurar um objeto <strong>ConnectParam</strong> antes de criar um <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -399,10 +399,10 @@ writer = RemoteBulkWriter(
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteBulkWriter</span>(bulkWriterParam);
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Assim que os parâmetros de ligação estiverem prontos, pode referenciá-los no <strong>RemoteBulkWriter</strong> da seguinte forma:</p>
+<p>Assim que os parâmetros de ligação estiverem prontos, pode referenciá-los no ` <strong>RemoteBulkWriter</strong> ` da seguinte forma:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -432,7 +432,7 @@ writer = RemoteBulkWriter(
 <p>Os parâmetros para criar um <strong>RemoteBulkWriter</strong> são praticamente os mesmos que os de um <strong>LocalBulkWriter</strong>, exceto <code translate="no">connect_param</code>. Para mais detalhes sobre as definições dos parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> na referência do SDK.</p>
 </div>
 <div class="language-java">
-<p>Os parâmetros para criar um <strong>`RemoteBulkWriter`</strong> são praticamente os mesmos que os de um <strong>`LocalBulkWriter`</strong>, exceto ` <code translate="no">StorageConnectParam</code>`. Para mais detalhes sobre as configurações dos parâmetros, consulte `RemoteBulkWriter` e `StorageConnectParam` na referência do SDK.</p>
+<p>Os parâmetros para criar um <strong>`RemoteBulkWriter`</strong> são praticamente os mesmos que os de um <strong>`LocalBulkWriter`</strong>, exceto ` <code translate="no">StorageConnectParam</code>`. Para mais detalhes sobre as definições dos parâmetros, consulte `RemoteBulkWriter` e `StorageConnectParam` na referência do SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Iniciar a gravação<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -457,8 +457,8 @@ writer = RemoteBulkWriter(
 </div>
 <p>Para fins de demonstração, o código seguinte acrescenta dados gerados aleatoriamente.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -678,8 +678,8 @@ writer = RemoteBulkWriter(
 <p>Para verificar os resultados, pode obter o caminho de saída real imprimindo o método ` <code translate="no">getBatchFiles()</code> ` do escritor.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 
@@ -700,7 +700,7 @@ remoteBulkWriter.getBatchFiles();
     e.printStackTrace();
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>O `BulkWriter`</strong> gera um UUID, cria uma subpasta utilizando o UUID no diretório de saída fornecido e coloca todos os ficheiros gerados nessa subpasta. <a href="https://assets.zilliz.com/bulk_writer.zip">Clique aqui</a> para descarregar os dados de exemplo preparados.</p>
+<p><strong>O BulkWriter</strong> gera um UUID, cria uma subpasta utilizando o UUID no diretório de saída fornecido e coloca todos os ficheiros gerados nessa subpasta. <a href="https://assets.zilliz.com/bulk_writer.zip">Clique aqui</a> para descarregar os dados de exemplo preparados.</p>
 <p>As estruturas de pastas possíveis são as seguintes:</p>
 <pre><code translate="no"><span class="hljs-comment"># JSON</span>
 ├── folder

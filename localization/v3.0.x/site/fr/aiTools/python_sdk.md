@@ -1,9 +1,9 @@
 ---
 id: python_sdk.md
-title: 'Prompt : Milvus Python SDK'
+title: 'Invite : SDK Python de Milvus'
 summary: >-
-  Règles permettant aux assistants de codage IA d'écrire un code Python Milvus
-  correct à l'aide de MilvusClient.
+  Règles à l'intention des assistants de programmation IA pour rédiger du code
+  Python Milvus correct à l'aide de MilvusClient.
 ---
 <h1 id="Python-SDK" class="common-anchor-header">SDK Python<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Règles pour l'écriture d'un code Milvus Python correct à l'aide de l'interface MilvusClient, y compris la migration ORM, les modèles de connexion et les opérations courantes. Copiez l'invite complète ci-dessous dans votre outil d'IA pour appliquer ces règles automatiquement. Pour une vue d'ensemble de toutes les invites, voir <a href="/docs/fr/milvus_for_agents.md">Invites AI</a>.</p>
+    </button></h1><p>Règles à respecter pour écrire du code Python Milvus correct à l'aide de l'interface MilvusClient, notamment concernant la migration ORM, les modèles de connexion et les opérations courantes. Copiez l'intégralité de l'invite ci-dessous dans votre outil d'IA pour appliquer automatiquement ces règles. Pour un aperçu de toutes les invites, consultez la section « <a href="/docs/fr/milvus_for_agents.md">Invites d'IA</a> ».</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Comment utiliser cette invite<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,12 +37,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Copiez</strong> l'invite complète de la section Invite <a href="#full-prompt">complète</a> ci-dessous.</li>
-<li><strong>Enregistrez-la</strong> à l'emplacement prévu par votre outil d'IA (voir le <a href="/docs/fr/milvus_for_agents.md">tableau des environnements</a> pour plus de détails sur l'emplacement).</li>
+<li><strong>Copiez</strong> l'invite complète à partir de la section « <a href="#full-prompt">Invite complète</a> » ci-dessous.</li>
+<li><strong>Enregistrez</strong> -la à l'emplacement prévu par votre outil d'IA — consultez le <a href="/docs/fr/milvus_for_agents.md">tableau des environnements</a> pour plus de détails sur l'emplacement.</li>
 <li>Votre assistant IA appliquera automatiquement ces règles lors de la génération ou de la révision du code Milvus.</li>
 </ol>
-<p>Pour les utilisateurs de <strong>Cursor</strong>: copiez l'invite de la section Invite <a href="#full-prompt">complète</a> et enregistrez-la sous <code translate="no">.cursor/rules/</code> dans votre projet.</p>
-<h2 id="Full-prompt" class="common-anchor-header">Invite complète<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>Pour les utilisateurs <strong>de Cursor</strong>: copiez la commande dans la section « <a href="#full-prompt">Commande complète</a> » et enregistrez-la dans le répertoire « <code translate="no">.cursor/rules/</code> » de votre projet.</p>
+<h2 id="Full-prompt" class="common-anchor-header">Prompt complet<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +231,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

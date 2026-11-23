@@ -2,13 +2,9 @@
 id: users_and_roles.md
 title: Benutzer und Rollen erstellen
 summary: >-
-  Milvus ermöglicht eine fein abgestufte Zugriffskontrolle mittels RBAC.
-  Zunächst können Sie Benutzer und Rollen anlegen, anschließend den Rollen
-  Berechtigungen oder Berechtigungsgruppen zuweisen und schließlich die
-  Zugriffskontrolle verwalten, indem Sie Benutzern Rollen zuweisen. Diese
-  Vorgehensweise gewährleistet die Effizienz und Sicherheit der
-  Zugriffsverwaltung. Auf dieser Seite wird erläutert, wie Sie in Milvus
-  Benutzer und Rollen anlegen.
+  Milvus steuert den Zugriff über RBAC: Berechtigungen werden Rollen zugewiesen,
+  und Rollen wiederum Benutzern. Auf dieser Seite wird erläutert, wie man
+  Benutzer und Rollen anlegt.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Benutzer und Rollen erstellen<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ermöglicht eine fein abgestufte Zugriffskontrolle durch RBAC. Sie können zunächst Benutzer und Rollen anlegen, dann den Rollen Berechtigungen oder Berechtigungsgruppen zuweisen und schließlich die Zugriffskontrolle verwalten, indem Sie den Benutzern Rollen zuweisen. Diese Methode gewährleistet die Effizienz und Sicherheit der Zugriffsverwaltung. Auf dieser Seite wird erläutert, wie Sie in Milvus Benutzer und Rollen anlegen.</p>
+    </button></h1><p>Milvus ermöglicht eine fein abgestufte Zugriffskontrolle durch RBAC. Sie können zunächst Benutzer und Rollen anlegen, anschließend den Rollen Berechtigungen oder Berechtigungsgruppen zuweisen und schließlich die Zugriffskontrolle verwalten, indem Sie den Benutzern Rollen zuweisen. Diese Methode gewährleistet die Effizienz und Sicherheit der Zugriffsverwaltung. Auf dieser Seite wird erläutert, wie Sie in Milvus Benutzer und Rollen anlegen.</p>
 <h2 id="User" class="common-anchor-header">Benutzer<button data-href="#User" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nach der Initialisierung einer Milvus-Instanz wird automatisch ein Root-Benutzer für die Authentifizierung generiert, wenn Sie sich zum ersten Mal bei Milvus anmelden. Der Benutzername des Root-Benutzers lautet <code translate="no">root</code> und das Passwort ist <code translate="no">Milvus</code>. Die Standardrolle des Root-Benutzers ist „ <code translate="no">admin</code> “, die Zugriff auf alle Ressourcen gewährt. Um die Datensicherheit zu gewährleisten, bewahren Sie die Anmeldedaten Ihres Root-Benutzers bitte sicher auf, um unbefugten Zugriff zu verhindern.</p>
-<p>Für den täglichen Betrieb empfehlen wir, eigene Benutzer anzulegen, anstatt den Root-Benutzer zu verwenden.</p>
+    </button></h2><p>Nach der Initialisierung einer Milvus-Instanz wird automatisch ein Root-Benutzer für die Authentifizierung bei der ersten Verbindung mit Milvus generiert. Der Benutzername des Root-Benutzers lautet „ <code translate="no">root</code> “ und das Passwort „ <code translate="no">Milvus</code> “. Standardmäßig ist der Root-Benutzer an keine Rolle gebunden und umgeht die Berechtigungsprüfungen, sodass er Zugriff auf alle Ressourcen hat. Die Einstellung „ <code translate="no">common.security.rootShouldBindRole</code> “, deren Standardwert „ <code translate="no">false</code> “ ist, steuert dieses Verhalten. Um die Datensicherheit zu gewährleisten, bewahren Sie bitte die Anmeldedaten Ihres Root-Benutzers sicher auf, um unbefugten Zugriff zu verhindern.</p>
+<p>Für den täglichen Betrieb empfehlen wir, Benutzer anzulegen, anstatt den Root-Benutzer zu verwenden.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Benutzer anlegen<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,10 +54,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Melden Sie sich als „ <code translate="no">root</code> “ an und erstellen Sie einen Benutzer mit dem Benutzernamen „ <code translate="no">user_1</code> “ und dem Passwort „ <code translate="no">P@ssw0rd</code> “. Beachten Sie bei der Wahl der Anmeldedaten folgende Regeln:</p>
+    </button></h3><p>Melden Sie sich als <code translate="no">root</code> an und erstellen Sie einen Benutzer mit dem Benutzernamen <code translate="no">user_1</code> und dem Passwort <code translate="no">P@ssw0rd</code>. Beachten Sie bei der Wahl der Anmeldedaten folgende Regeln:</p>
 <ul>
-<li><p>Benutzername: Muss mit einem Buchstaben beginnen und darf nur Groß- oder Kleinbuchstaben, Ziffern und Unterstriche enthalten.</p></li>
-<li><p>Passwort: Muss standardmäßig 6–72 UTF-8-Bytes lang sein. In Ihrer Bereitstellung können andere <a href="/docs/de/authenticate.md#Password-requirements">Grenzwerte für die Passwortlänge</a> konfiguriert sein.</p></li>
+<li><p>Benutzername: Muss mit einem Buchstaben oder einem Unterstrich beginnen und darf nur Groß- oder Kleinbuchstaben, Ziffern, Unterstriche (<code translate="no">_</code>) sowie alle in <code translate="no">proxy.nameValidation.allowedChars</code> konfigurierten zusätzlichen Zeichen enthalten (standardmäßig<code translate="no">$</code> ).</p></li>
+<li><p>Passwort: Muss standardmäßig 6–72 UTF-8-Bytes lang sein. In Ihrer Bereitstellung können andere <a href="/docs/de/authenticate.md#Password-requirements">Längenbeschränkungen für Passwörter</a> konfiguriert sein.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -101,7 +97,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -294,7 +290,7 @@ client.list_users()
     </button></h3><p>Das folgende Beispiel zeigt, wie Sie eine Rolle mit dem Namen „ <code translate="no">role_a</code> “ erstellen.</p>
 <p>Der Rollenname muss der folgenden Regel entsprechen:</p>
 <ul>
-<li>Er muss mit einem Buchstaben beginnen und darf nur Groß- oder Kleinbuchstaben, Ziffern und Unterstriche enthalten.</li>
+<li>Er muss mit einem Buchstaben oder einem Unterstrich beginnen und darf nur Groß- oder Kleinbuchstaben, Zahlen, Unterstriche sowie die Zeichen aus „ <code translate="no">proxy.roleNameValidation.allowedChars</code> “ (standardmäßig „<code translate="no">$</code> “) enthalten.</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -313,6 +309,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -379,6 +376,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Nachfolgend finden Sie ein Beispiel für die Ausgabe. „ <code translate="no">admin</code> “ ist die Standardrolle in Milvus. „ <code translate="no">role_a</code> “ ist die neue Rolle, die gerade erstellt wurde.</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>Nachfolgend finden Sie ein Beispiel für die Ausgabe. „ <code translate="no">admin</code> “ und „ <code translate="no">public</code> “ sind die Standardrollen, die Milvus erstellt. „ <code translate="no">role_a</code> “ ist die neue Rolle, die gerade erstellt wurde.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

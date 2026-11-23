@@ -3,11 +3,11 @@ id: keyword-match.md
 title: Corrispondenza testuale
 summary: >-
   La funzione di corrispondenza testuale in Milvus consente il recupero preciso
-  di documenti in base a termini specifici. Questa funzionalità viene utilizzata
-  principalmente per effettuare ricerche filtrate che soddisfino condizioni
-  specifiche e può integrare il filtraggio scalare per affinare i risultati
-  della query, consentendo ricerche di similarità all’interno di vettori che
-  soddisfano criteri scalari.
+  di documenti sulla base di termini specifici. Questa funzionalità viene
+  utilizzata principalmente per effettuare ricerche filtrate in base a
+  condizioni specifiche e può integrare il filtraggio scalare per affinare i
+  risultati della query, consentendo ricerche di similarità all’interno di
+  vettori che soddisfano criteri scalari.
 ---
 <h1 id="Text-Match" class="common-anchor-header">Corrispondenza testuale<button data-href="#Text-Match" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +52,7 @@ summary: >-
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" /> 
-   <span>Corrispondenza per parole chiave</span>
+   <span>Corrispondenza per parola chiave</span>
   
  </span></p>
 <h2 id="Enable-text-match" class="common-anchor-header">Abilita la ricerca testuale<button data-href="#Enable-text-match" class="anchor-icon" translate="no">
@@ -473,7 +473,7 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
 <li><p><code translate="no">text</code>: Il testo della query da analizzare e da confrontare con i token indicizzati.</p></li>
 <li><p><code translate="no">max_edit_distance</code>: La distanza di modifica massima consentita per ciascun token della query. Il nome dell’opzione deve essere esattamente <code translate="no">max_edit_distance</code> e il suo valore deve essere <code translate="no">0</code>, <code translate="no">1</code> o <code translate="no">2</code>. Un valore pari a <code translate="no">0</code> esegue la corrispondenza esatta dei token, equivalente a <code translate="no">TEXT_MATCH</code>.</p></li>
 </ul>
-<p>Ad esempio, l’espressione seguente trova i token che differiscono di una sola modifica da <code translate="no">machne</code>, incluso <code translate="no">machine</code>:</p>
+<p>Ad esempio, l’espressione seguente trova i token che differiscono di un solo carattere da <code translate="no">machne</code>, incluso <code translate="no">machine</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

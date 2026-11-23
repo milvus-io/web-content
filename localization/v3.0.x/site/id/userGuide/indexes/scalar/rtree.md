@@ -2,10 +2,8 @@
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
 summary: >-
-  Indeks RTREE adalah struktur data berbasis pohon yang mempercepat proses kueri
-  pada kolom GEOMETRY. Jika koleksi Anda menyimpan objek geometris seperti
-  titik, garis, atau poligon dalam format Well-known text (WKT) dan Anda ingin
-  mempercepat penyaringan spasial, RTREE merupakan pilihan yang ideal.
+  Gunakan RTREE untuk mempercepat proses penyaringan spasial pada kolom
+  GEOMETRY.
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -23,8 +21,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Indeks Pohon Pohon ( <code translate="no">RTREE</code> ) adalah struktur data berbasis pohon yang mempercepat kueri pada bidang yang mendukung pemotongan ( <code translate="no">GEOMETRY</code> ) di Milvus. Jika koleksi Anda menyimpan objek geometris seperti titik, garis, atau poligon dalam format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)</a> dan Anda ingin mempercepat penyaringan spasial, Indeks Pohon Pohon ( <code translate="no">RTREE</code> ) merupakan pilihan yang ideal.</p>
-<h2 id="How-it-works" class="common-anchor-header">Cara kerjanya<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> mempercepat penyaringan spasial pada bidang <code translate="no">GEOMETRY</code> yang berisi titik, garis, atau poligon dalam format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,8 +37,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus menggunakan indeks " <code translate="no">RTREE</code> " untuk mengatur dan menyaring data geometri secara efisien, melalui proses dua fase:</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">Tahap 1: Membuat indeks<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Jenis data yang didukung<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,8 +52,58 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
-<li><p><strong>Membuat simpul daun:</strong> Untuk setiap objek geometri, hitung <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">Minimum Bounding Rectangle</a> (MBR)-nya, yaitu persegi panjang terkecil yang sepenuhnya mencakup objek tersebut, dan simpan sebagai simpul daun.</p></li>
+    </button></h3><p><code translate="no">GEOMETRY</code> bidang. Lihat <a href="/docs/id/geometry-field.md">Bidang Geometri</a> untuk definisi bidang.</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Peningkatan kinerja penyaringan<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> mencari kandidat menggunakan kotak pembatas, kemudian Milvus memeriksa hubungan spasial yang tepat. Milvus mendukung <a href="/docs/id/geometry-operators.md">operator geometri</a> berikut:</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code>, dan <code translate="no">ST_WITHIN</code>.</li>
+<li><code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code>, dan <code translate="no">ST_DWITHIN</code>.</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> tidak menggunakan <code translate="no">RTREE</code>. Tanpa indeks yang memenuhi syarat, filter spasial akan memindai bidang tersebut.</p>
+<div class="alert note">
+<blockquote>
+<p>Ini adalah kemampuan indeks, bukan batasan pada ekspresi filter yang valid. Lihat <a href="/docs/id/scalar_index.md#Filter-execution">Indeks Skalar</a> untuk batasan pencarian bersama. Untuk <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code>, dan pengujian NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">Cara Kerja RTREE<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>Lihat proses pembuatan dan kueri</strong></summary></p>
+<p>Milvus menggunakan indeks <code translate="no">RTREE</code> untuk mengatur dan menyaring data geometri secara efisien, mengikuti proses dua fase:</p>
+<p><strong>Tahap 1: Membangun indeks</strong></p>
+<ol>
+<li><p><strong>Buat node daun:</strong> Untuk setiap objek geometri, hitung <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">Minimum Bounding Rectangle</a> (MBR)-nya, yaitu persegi panjang terkecil yang sepenuhnya mencakup objek tersebut, dan simpan sebagai node daun.</p></li>
 <li><p><strong>Kelompokkan ke dalam kotak yang lebih besar:</strong> Kelompokkan simpul daun yang berdekatan dan bungkus setiap kelompok dengan MBR baru, sehingga membentuk simpul internal. Misalnya, kelompok <strong>B</strong> berisi <strong>D</strong> dan <strong>E</strong>; kelompok <strong>C</strong> berisi <strong>F</strong> dan <strong>G</strong>.</p></li>
 <li><p><strong>Tambahkan simpul akar:</strong> Tambahkan simpul akar yang MBR-nya mencakup semua kelompok internal, sehingga menghasilkan struktur pohon yang seimbang secara tinggi.</p></li>
 </ol>
@@ -66,27 +113,14 @@ beta: Milvus 2.6.4+
    <span>Cara Kerja Retree</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Fase 2: Mempercepat kueri<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>Fase 2: Mempercepat kueri</strong></p>
+<ol>
 <li><p><strong>Bentuk MBR kueri:</strong> Hitung MBR untuk geometri kueri Anda.</p></li>
 <li><p><strong>Pangkas cabang:</strong> Mulai dari akar, bandingkan MBR kueri dengan setiap simpul internal. Lewati cabang mana pun yang MBR-nya tidak berpotongan dengan MBR kueri.</p></li>
 <li><p><strong>Kumpulkan kandidat:</strong> Telusuri ke bawah ke cabang-cabang yang berpotongan untuk mengumpulkan kandidat simpul daun.</p></li>
 <li><p><strong>Kecocokan tepat:</strong> Untuk setiap kandidat, lakukan predikat spasial tepat untuk menentukan kecocokan yang benar.</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">Buat indeks RTREE<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,8 +328,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Anda menyaring data menggunakan operator geometri dalam ekspresi <code translate="no">filter</code>. Jika terdapat indeks <code translate="no">RTREE</code> pada bidang <code translate="no">GEOMETRY</code> target, Milvus akan menggunakannya untuk menyaring kandidat secara otomatis. Tanpa indeks tersebut, penyaringan akan beralih ke pemindaian penuh.</p>
-<p>Untuk daftar lengkap operator khusus geometri yang tersedia, lihat <a href="/docs/id/geometry-operators.md">Operator Geometri</a>.</p>
+    </button></h2><p>Contoh berikut menggunakan bidang <code translate="no">GEOMETRY</code> yang diindeks bernama <code translate="no">geo</code>.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">Contoh 1: Hanya menyaring<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -311,7 +344,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Temukan semua objek geometri di dalam poligon tertentu:</p>
+    </button></h3><p>Temukan semua objek geometris di dalam poligon tertentu:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -616,10 +649,9 @@ EOF
       </svg>
     </button></h2><p>Gunakan metode ` <code translate="no">drop_index()</code> ` untuk menghapus indeks yang sudah ada dari sebuah koleksi.</p>
 <div class="alert note">
-<ul>
-<li><p>Pada <strong>v2.6.3</strong> atau sebelumnya, Anda harus melepaskan koleksi terlebih dahulu sebelum menghapus indeks skalar.</p></li>
-<li><p>Mulai <strong>versi 2.6.4</strong> atau yang lebih baru, Anda dapat menghapus indeks skalar secara langsung begitu indeks tersebut tidak lagi diperlukan—tidak perlu melepaskan koleksi terlebih dahulu.</p></li>
-</ul>
+<blockquote>
+<p>Untuk persyaratan rilis saat menghapus indeks skalar, lihat <a href="/docs/id/scalar_index.md#Drop-index-compatibility">Indeks Skalar</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

@@ -60,7 +60,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>在描述一個物件時，我們通常會提及其屬性，例如尺寸、重量和位置。您可以將這些屬性用作集合中的欄位。每個欄位都有各種限制性屬性，例如資料類型以及向量欄位的維度。您可以透過建立欄位並定義其順序來建立集合模式。 有關可適用的資料類型，請參閱「<a href="/docs/zh-hant/schema.md">架構說明</a>」。</p>
-<p>您應將所有模式定義的欄位包含在待插入的實體中。若要將其中部分欄位設為可選，請考慮啟用「動態欄位」。詳情請參閱《<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>》。</p>
+<p>您應將所有模式定義的欄位包含在待插入的實體中。若要將其中部分欄位設為可選，請考慮啟用「動態欄位」功能。詳情請參閱《<a href="/docs/zh-hant/enable-dynamic-field.md">動態欄位</a>》。</p>
 <ul>
 <li><p><strong>設定為可為空或設定預設值</strong></p>
 <p>有關如何將欄位設為可為空或設定預設值的詳細資訊，請參閱《<a href="/docs/zh-hant/nullable-and-default.md">可為空與預設值</a>》。</p></li>
@@ -84,7 +84,7 @@ summary: >-
       </svg>
     </button></h2><p>與關聯式資料庫中的主欄位類似，集合也具有一個主欄位，用以區分實體與其他實體。主欄位中的每個值在全球範圍內皆為唯一，並對應於一個特定的實體。</p>
 <p>如上圖所示，名為<strong>id 的</strong>欄位即為主欄位，而第一個 ID<strong>0</strong>對應於標題為<em>《冠狀病毒的死亡率並不重要》</em>的實體。不會有其他實體的主欄位值為 0。</p>
-<p>主欄位僅接受整數或字串。插入實體時，預設應包含主欄位值。然而，若您在建立集合時已啟用<strong>AutoId</strong>，Milvus 將在插入資料時自動產生這些值。在此情況下，請勿在待插入的實體中包含主欄位值。</p>
+<p>主鍵僅接受整數或字串。插入實體時，預設應包含主鍵值。然而，若您在建立集合時已啟用<strong>AutoId</strong>，Milvus 將在插入資料時自動產生這些值。在此情況下，請勿在待插入的實體中包含主鍵值。</p>
 <p>如需更多資訊，請參閱《<a href="/docs/zh-hant/primary-field.md">主欄位與 AutoId</a>》。</p>
 <h2 id="Index" class="common-anchor-header">索引<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -117,7 +117,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>實體是指在集合中擁有相同欄位集的資料記錄。同一行中所有欄位的值共同構成一個實體。</p>
+    </button></h2><p>實體是指在集合中具有相同欄位集的資料記錄。同一行中所有欄位的值共同構成一個實體。</p>
 <p>您可以根據需要將任意數量的實體插入集合中。然而，隨著實體數量增加，其佔用的記憶體大小也會隨之增加，進而影響搜尋效能。</p>
 <p>如需更多資訊，請參閱《<a href="/docs/zh-hant/schema.md">架構說明</a>》。</p>
 <h2 id="Load-and-Release" class="common-anchor-header">載入與釋放<button data-href="#Load-and-Release" class="anchor-icon" translate="no">
@@ -172,7 +172,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/zh-hant/use-partition-key.md">使用分區鍵</a></p></li>
 <li><p><a href="/docs/zh-hant/mmap.md">使用 mmap</a></p></li>
-<li><p><a href="/docs/zh-hant/clustering-compaction.md">叢集化壓縮</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">分區<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -191,7 +190,7 @@ summary: >-
       </svg>
     </button></h2><p>分區是集合的子集，與其父集合共享相同的欄位集，每個分區都包含實體的子集。</p>
 <p>透過將實體分配至不同的分區，您可以建立實體群組。您可以在特定分區中進行搜尋和查詢，讓 Milvus 忽略其他分區中的實體，從而提升搜尋效率。</p>
-<p>詳情請參閱《<a href="/docs/zh-hant/manage-partitions.md">管理分區</a>》。</p>
+<p>詳細資訊請參閱「<a href="/docs/zh-hant/manage-partitions.md">管理分區</a>」。</p>
 <h2 id="Shard" class="common-anchor-header">分片<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -257,5 +256,5 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>分散式資料庫系統通常會使用一致性等級來定義資料節點與副本間的資料一致性。您可以在建立集合時，或在集合內進行相似度搜尋時，分別設定不同的一致性等級。適用的一致性等級包括<strong>「強一致性」</strong>、<strong>「有限過時</strong>」、「<strong>會話一致性</strong>」和<strong>「最終一致性</strong>」。</p>
+    </button></h2><p>分散式資料庫系統通常會使用一致性層級來定義資料節點與副本間的資料一致性。您可以在建立集合時，或在集合內進行相似度搜尋時，分別設定不同的一致性層級。適用的一致性層級包括<strong>「強一致性」</strong>、<strong>「有限過時</strong>」、「<strong>會話一致性</strong>」及「<strong>最終一致性</strong>」。</p>
 <p>有關這些一致性層級的詳細資訊，請參閱《<a href="/docs/zh-hant/tune_consistency.md">一致性層級</a>》。</p>

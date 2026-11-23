@@ -22,7 +22,7 @@ title: Benutzerzugriff authentifizieren
 <div class="alert note">
 <ul>
 <li><p>TLS und die Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie in Ihrem Milvus-System sowohl die Benutzerauthentifizierung als auch TLS aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und die Pfade zu den Zertifikatsdateien angeben. Informationen zum Aktivieren von TLS finden Sie unter <a href="/docs/de/tls.md">„Verschlüsselung während der Übertragung</a>“.</p></li>
-<li><p>Die Codeausschnitte auf dieser Seite verwenden „new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient“</a> (Python) für die Interaktion mit Milvus. Neue MilvusClient-SDKs für andere Sprachen werden in zukünftigen Updates veröffentlicht.</p></li>
+<li><p>Die Codeausschnitte auf dieser Seite verwenden „new <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient“</a> (Python) für die Interaktion mit Milvus.</p></li>
 </ul>
 </div>
 <h2 id="Enable-user-authentication" class="common-anchor-header">Benutzerauthentifizierung aktivieren<button data-href="#Enable-user-authentication" class="anchor-icon" translate="no">
@@ -97,7 +97,7 @@ title: Benutzerzugriff authentifizieren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem Sie die Authentifizierung aktiviert haben, müssen Sie sich mit einem Benutzernamen und einem Passwort bei Milvus anmelden. Standardmäßig wird beim Start von Milvus der Benutzer „ <code translate="no">root</code> “ mit dem Passwort „ <code translate="no">Milvus</code> “ angelegt. Hier ist ein Beispiel dafür, wie Sie sich bei aktivierter Authentifizierung mit dem Standardbenutzer „ <code translate="no">root</code> “ bei Milvus anmelden:</p>
+    </button></h2><p>Nachdem Sie die Authentifizierung aktiviert haben, müssen Sie sich mit einem Benutzernamen und einem Passwort bei Milvus anmelden. Standardmäßig wird beim Start von Milvus der Benutzer „ <code translate="no">root</code> “ mit dem Passwort „ <code translate="no">Milvus</code> “ angelegt. Hier ist ein Beispiel dafür, wie Sie sich mit aktiviertem Authentifizierungsmodus unter Verwendung des Standardbenutzers „ <code translate="no">root</code> “ bei Milvus anmelden:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># use default `root` user to connect to Milvus</span>
 
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -108,8 +108,17 @@ client = MilvusClient(
 ) 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Wenn Sie bei der Verbindung zu Milvus mit aktivierter Authentifizierung kein gültiges Token angeben, erhalten Sie einen gRPC-Fehler.
+Wenn Sie bei der Verbindung mit Milvus bei aktivierter Authentifizierung kein gültiges Token angeben, erhalten Sie einen gRPC-Fehler.
 </div>
+<p>Milvus verwendet die Einstellung „ <code translate="no">common.security.defaultRootPassword</code> “ ausschließlich dazu, den Benutzer „ <code translate="no">root</code> “ anzulegen, wenn noch kein Benutzer „ <code translate="no">root</code> “ existiert. Eine spätere Änderung dieser Einstellung hat keinen Einfluss auf das Passwort eines bereits vorhandenen Benutzers „ <code translate="no">root</code> “. Um das Passwort für „ <code translate="no">root</code> “ zu ändern, rufen Sie „ <code translate="no">update_password()</code> “ auf, während Sie als „ <code translate="no">root</code> “ verbunden sind:</p>
+<pre><code translate="no" class="language-python">client.update_password(
+    user_name=<span class="hljs-string">&quot;root&quot;</span>,
+    old_password=<span class="hljs-string">&quot;Milvus&quot;</span>,
+    new_password=<span class="hljs-string">&quot;&lt;your_new_password&gt;&quot;</span>,
+    reset_connection=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Mit „ <code translate="no">reset_connection=True</code> “ verwendet der Client das neue Passwort für nachfolgende Anfragen.</p>
 <h2 id="Create-a-new-user" class="common-anchor-header">Neuen Benutzer anlegen<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +134,7 @@ Wenn Sie bei der Verbindung zu Milvus mit aktivierter Authentifizierung kein gü
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Erstellen Sie, während Sie als „ <code translate="no">root</code> “ angemeldet sind, einen Benutzer mit dem Namen „ <code translate="no">create_user()</code> “. Wählen Sie ein Passwort mit einer Länge von 6–72 UTF-8-Bytes, sofern Ihre Bereitstellung keine benutzerdefinierten <a href="/docs/de/authenticate.md#Password-requirements">Beschränkungen für die Passwortlänge</a> vorsieht.</p>
+    </button></h2><p>Erstellen Sie, während Sie als <code translate="no">root</code> angemeldet sind, einen Benutzer mit <code translate="no">create_user()</code>. Wählen Sie ein Passwort mit einer Länge von 6–72 UTF-8-Bytes, sofern Ihre Bereitstellung keine benutzerdefinierten <a href="/docs/de/authenticate.md#Password-requirements">Beschränkungen für die Passwortlänge</a> vorsieht.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># create a user</span>
 client.create_user(
     user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
@@ -139,8 +148,8 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zum Erstellen von Benutzern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
-<h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Stellen Sie mit einem neuen Benutzer eine Verbindung zu Milvus her<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
+<p>Weitere Informationen zum Anlegen von Benutzern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
+<h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">Verbindung zu Milvus mit einem neuen Benutzer herstellen<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -187,7 +196,7 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Weitere Informationen zum Aktualisieren von Benutzerkennwörtern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
+<p>Weitere Informationen zum Aktualisieren von Benutzerkennwörtern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>Falls Sie Ihr altes Passwort vergessen haben, bietet Milvus eine Konfigurationsoption, mit der Sie bestimmte Benutzer als Superuser festlegen können. Dadurch entfällt die Notwendigkeit, das alte Passwort anzugeben, wenn Sie das Passwort zurücksetzen.</p>
 <p>Standardmäßig ist das Feld „ <code translate="no">common.security.superUsers</code> “ in der Milvus-Konfigurationsdatei leer, was bedeutet, dass alle Benutzer beim Zurücksetzen ihres Passworts das alte Passwort angeben müssen. Sie können jedoch bestimmte Benutzer als Superuser festlegen, die das alte Passwort nicht angeben müssen. Im folgenden Codeausschnitt werden „ <code translate="no">root</code> “ und „ <code translate="no">foo</code> “ als Superuser festgelegt.</p>
 <p>Sie sollten den folgenden Konfigurations Eintrag in die Milvus-Konfigurationsdatei einfügen, die den Betrieb Ihrer Milvus-Instanz regelt.</p>
@@ -236,6 +245,27 @@ Sie dürfen nicht der Benutzer sein, der gelöscht werden soll. Andernfalls wird
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Protect-the-metrics-port" class="common-anchor-header">Den Metrik-Port schützen<button data-href="#Protect-the-metrics-port" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Der Metrik-Port (Standard: <code translate="no">9091</code>) bedient <code translate="no">/management/*</code>, <code translate="no">/log/level</code>, <code translate="no">/eventlog</code>, <code translate="no">/telemetry</code>, <code translate="no">/debug/pprof/*</code> sowie die Webkonsole. Die Einstellung „ <code translate="no">common.security.adminAuthEnabled</code> “ legt fest, ob für diese Endpunkte eine HTTP-Basic-Authentifizierung ( <code translate="no">root</code> ) erforderlich ist. Die Standardeinstellung ist „ <code translate="no">false</code> “. Um diese Funktion zu aktivieren, fügen Sie Folgendes zur Milvus-Konfigurationsdatei hinzu:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">adminAuthEnabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Mit dieser Einstellung bleiben Zustandsprüfungen und Metrik-Abrufe weiterhin offen. Anfragen, die weder einen „ <code translate="no">Origin</code> “-Header noch „Fetch Metadata“-Header enthalten, müssen den Header „ <code translate="no">X-Milvus-Admin-Request: true</code> “ enthalten. Aktualisieren Sie die Clients, die diese Endpunkte aufrufen – wie z. B. Skripte für das ordnungsgemäße Herunterfahren und Profiling –, bevor Sie die Einstellung aktivieren. Der Metrik-Port verwendet weiterhin einfaches HTTP; stellen Sie ihn daher nur in einem vertrauenswürdigen Netzwerk oder hinter einem TLS-Proxy bereit. Diese Einstellung kann nicht über <code translate="no">/management/config/alter</code> geändert werden.</p>
 <h2 id="Limitations" class="common-anchor-header">Einschränkungen<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +296,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Benutzernamen dürfen nicht leer sein und nicht mehr als 32 Zeichen umfassen. Sie müssen mit einem Buchstaben beginnen und dürfen nur Buchstaben, Zahlen oder Unterstriche enthalten.</p>
+    </button></h3><p>Benutzernamen dürfen nicht leer sein und nicht mehr als 32 Zeichen umfassen. Sie müssen mit einem Buchstaben oder einem Unterstrich beginnen und dürfen nur Buchstaben, Zahlen, Unterstriche (<code translate="no">_</code>) sowie alle in „ <code translate="no">proxy.nameValidation.allowedChars</code> “ konfigurierten zusätzlichen Zeichen enthalten (standardmäßig<code translate="no">$</code> ).</p>
 <h3 id="Password-requirements" class="common-anchor-header">Anforderungen an Passwörter<button data-href="#Password-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -282,7 +312,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Passwörter müssen standardmäßig 6–72 UTF-8-Bytes lang sein. ASCII-Zeichen belegen jeweils ein Byte; Multibyte-Zeichen belegen mehr als ein Byte. Milvus schreibt keine bestimmte Kombination aus Großbuchstaben, Kleinbuchstaben, Zahlen oder Sonderzeichen vor.</p>
+    </button></h3><p>Passwörter müssen standardmäßig 6–72 UTF-8-Bytes lang sein. ASCII-Zeichen belegen jeweils ein Byte; Multibyte-Zeichen belegen mehr als ein Byte. Milvus verlangt keine bestimmte Kombination aus Großbuchstaben, Kleinbuchstaben, Zahlen oder Sonderzeichen.</p>
 <p>Um die Längenbeschränkungen zu ändern, konfigurieren Sie „ <code translate="no">proxy.minPasswordLength</code> “ und „ <code translate="no">proxy.maxPasswordLength</code> “. Der Maximalwert darf 72 Bytes nicht überschreiten. Ein Wert von „ <code translate="no">proxy.maxPasswordLength</code> “ von null oder weniger bzw. über 72 wird als 72 behandelt. Anweisungen zur Konfiguration finden Sie unter <a href="/docs/de/dynamic_config.md">„Milvus on the Fly konfigurieren</a>“.</p>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

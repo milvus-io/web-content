@@ -2,7 +2,7 @@
 id: users_and_roles.md
 title: ユーザーとロールの作成
 summary: >-
-  Milvusでは、RBAC（役割ベースのアクセス制御）を通じてきめ細かなアクセス制御を実現しています。まずユーザーとロールを作成し、次にロールに権限または権限グループを割り当て、最後にユーザーにロールを付与することでアクセス制御を管理します。この方法により、アクセス管理の効率性とセキュリティが確保されます。このページでは、Milvusでのユーザーとロールの作成方法について紹介します。
+  Milvusでは、RBAC（ロールベースのアクセス制御）によってアクセス権限を管理しています。権限はロールに付与され、ロールはユーザーに割り当てられます。このページでは、ユーザーとロールの作成方法について説明します。
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">ユーザーとロールの作成<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -35,7 +35,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusインスタンスを初期化すると、Milvusに初めて接続する際の認証用にrootユーザーが自動的に生成されます。rootユーザーのユーザー名は<code translate="no">root</code> 、パスワードは<code translate="no">Milvus</code> です。rootユーザーのデフォルトのロールは<code translate="no">admin</code> であり、すべてのリソースにアクセスできます。データのセキュリティを確保するため、不正アクセスを防ぐべく、rootユーザーの認証情報を安全に保管してください。</p>
+    </button></h2><p>Milvusインスタンスを初期化すると、Milvusに初めて接続する際の認証用に、rootユーザーが自動的に生成されます。 rootユーザーのユーザー名は<code translate="no">root</code> 、パスワードは<code translate="no">Milvus</code> です。デフォルトでは、rootユーザーはどのロールにも紐付けられておらず、権限チェックもスキップされるため、すべてのリソースにアクセスできます。この動作は、デフォルトで<code translate="no">false</code> に設定されている<code translate="no">common.security.rootShouldBindRole</code> によって制御されます。データのセキュリティを確保するため、不正アクセスを防ぐべく、rootユーザーの認証情報を安全に保管してください。</p>
 <p>日常の運用においては、root ユーザーを使用するのではなく、ユーザーを作成することをお勧めします。</p>
 <h3 id="Create-a-user" class="common-anchor-header">ユーザーの作成<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,10 +52,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">root</code> として接続し、ユーザー名「<code translate="no">user_1</code> 」、パスワード「<code translate="no">P@ssw0rd</code> 」のユーザーを作成してください。認証情報を選択する際は、以下のルールに従ってください：</p>
+    </button></h3><p><code translate="no">root</code> として接続し、ユーザー名<code translate="no">user_1</code> 、パスワード<code translate="no">P@ssw0rd</code> でユーザーを作成してください。認証情報を選択する際は、以下のルールに従ってください：</p>
 <ul>
-<li><p>ユーザー名：文字で始まり、大文字または小文字のアルファベット、数字、アンダースコアのみを含めることができます。</p></li>
-<li><p>パスワード：デフォルトでは、6～72 UTF-8 バイトの長さでなければなりません。デプロイ環境によっては、<a href="/docs/ja/authenticate.md#Password-requirements">パスワードの長さの制限が</a>異なる場合があります。</p></li>
+<li><p>ユーザー名：文字またはアンダースコアで始まり、大文字または小文字のアルファベット、数字、アンダースコア（<code translate="no">_</code> ）、および<code translate="no">proxy.nameValidation.allowedChars</code> で設定された追加の文字（デフォルトは<code translate="no">$</code> ）のみを含めることができます。</p></li>
+<li><p>パスワード：デフォルトでは、6～72 UTF-8 バイトの長さでなければなりません。デプロイメントによっては、異なる<a href="/docs/ja/authenticate.md#Password-requirements">パスワードの長さ制限が</a>設定されている場合があります。</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -95,7 +95,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -269,7 +269,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusには「<code translate="no">admin</code> 」という組み込みロールが用意されています。これは、すべてのインスタンス下のリソースにアクセスでき、すべての操作に対する権限を持つ管理者ロールです。よりきめ細かなアクセス管理とデータセキュリティの強化のためには、ニーズに応じてカスタムロールを作成することをお勧めします。</p>
+    </button></h2><p>Milvusには「<code translate="no">admin</code> 」という組み込みのロールが用意されています。これは、すべてのインスタンス下のリソースにアクセスでき、すべての操作に対する権限を持つ管理者ロールです。よりきめ細かなアクセス管理とデータセキュリティの強化のためには、ニーズに応じてカスタムロールを作成することをお勧めします。</p>
 <h3 id="Create-a-role" class="common-anchor-header">ロールの作成<button data-href="#Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -288,7 +288,7 @@ client.list_users()
     </button></h3><p>次の例は、「<code translate="no">role_a</code> 」という名前のロールを作成する方法を示しています。</p>
 <p>ロール名は以下の規則に従う必要があります。</p>
 <ul>
-<li>先頭がアルファベットで始まり、大文字または小文字のアルファベット、数字、アンダースコアのみを含めることができます。</li>
+<li>文字またはアンダースコアで始まり、大文字または小文字のアルファベット、数字、アンダースコア、および「<code translate="no">proxy.roleNameValidation.allowedChars</code> 」に含まれる文字（デフォルトでは「<code translate="no">$</code> 」）のみを含めることができます。</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -307,6 +307,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -342,7 +343,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>いくつかのロールを作成した後、既存のすべてのロールを一覧表示して確認できます。</p>
+    </button></h3><p>いくつかのロールを作成した後、既存のすべてのロールの一覧を表示して確認できます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -373,6 +374,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下は出力例です。「<code translate="no">admin</code> 」はMilvusのデフォルトのロールです。「<code translate="no">role_a</code> 」は、先ほど作成した新しいロールです。</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>以下は出力例です。<code translate="no">admin</code> および<code translate="no">public</code> は、Milvus が作成するデフォルトのロールです。<code translate="no">role_a</code> は、先ほど作成された新しいロールです。</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

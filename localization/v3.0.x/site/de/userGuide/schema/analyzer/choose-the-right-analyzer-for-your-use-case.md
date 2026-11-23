@@ -19,7 +19,7 @@ summary: Anmerkungen
         ></path>
       </svg>
     </button></h1><div class="alert note">
-<p>Dieser Leitfaden konzentriert sich auf die praktische Entscheidungsfindung bei der Auswahl eines Analysators. Technische Details zu den Komponenten eines Analysators und zum Hinzufügen von Analysatorparametern finden Sie unter <a href="/docs/de/analyzer-overview.md">„Analysator-Übersicht</a>“.</p>
+<p>Dieser Leitfaden konzentriert sich auf die praktische Entscheidungsfindung bei der Auswahl eines Analysators. Technische Details zu den Komponenten des Analysators und zum Hinzufügen von Analysatorparametern finden Sie unter <a href="/docs/de/analyzer-overview.md">„Analysator-Übersicht</a>“.</p>
 </div>
 <h2 id="Understand-analyzers-in-2-minutes" class="common-anchor-header">Analysatoren in 2 Minuten verstehen<button data-href="#Understand-analyzers-in-2-minutes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,8 +45,8 @@ summary: Anmerkungen
   
  </span></p>
 <ol>
-<li><p><strong>Tokenisierung (erforderlich):</strong> In dieser ersten Stufe wird ein <strong>Tokenizer</strong> angewendet, um eine fortlaufende Textzeichenfolge in diskrete, aussagekräftige Einheiten, sogenannte Token, aufzuteilen. Die Tokenisierungsmethode kann je nach Sprache und Inhaltstyp erheblich variieren.</p></li>
-<li><p><strong>Token-Filterung (optional):</strong> Nach der Tokenisierung werden <strong>Filter</strong> angewendet, um die Token zu modifizieren, zu entfernen oder zu verfeinern. Zu diesen Vorgängen gehören beispielsweise die Umwandlung aller Token in Kleinbuchstaben, das Entfernen häufiger, bedeutungsloser Wörter (sogenannter Stoppwörter) oder die Reduzierung von Wörtern auf ihre Stammform (Stemming).</p></li>
+<li><p><strong>Tokenisierung (erforderlich):</strong> In dieser ersten Stufe wird ein <strong>Tokenizer</strong> angewendet, um eine fortlaufende Textzeichenfolge in einzelne, aussagekräftige Einheiten, sogenannte Token, aufzuteilen. Die Tokenisierungsmethode kann je nach Sprache und Inhaltstyp erheblich variieren.</p></li>
+<li><p><strong>Token-Filterung (optional):</strong> Nach der Tokenisierung werden <strong>Filter</strong> angewendet, um die Token zu modifizieren, zu entfernen oder zu verfeinern. Zu diesen Vorgängen gehören beispielsweise die Umwandlung aller Token in Kleinbuchstaben, das Entfernen häufiger, bedeutungsloser Wörter (sogenannter Stoppwörter) oder die Reduzierung von Wörtern auf ihre Wortstammform (Stemming).</p></li>
 </ol>
 <p><strong>Beispiel</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -82,7 +82,7 @@ summary: Anmerkungen
      <td><p>Übermäßige Tokenisierung</p></td>
      <td><p>Textabfragen nach Fachbegriffen, Bezeichnern oder URLs finden keine relevanten Dokumente.</p></td>
      <td><ul><li><p><code translate="no">"user_id"</code> → <code translate="no">['user', 'id']</code></p></li><li><p><code translate="no">"C++"</code> → <code translate="no">['c']</code></p></li></ul></td>
-     <td><p><a href="/docs/de/standard-analyzer.md"><code translate="no">standard</code></a> Analysator</p></td>
+     <td><p><a href="/docs/de/standard-analyzer.md"><code translate="no">standard</code></a> Analyzer</p></td>
      <td><p>Verwenden Sie einen <a href="/docs/de/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> Tokenizer; kombinieren Sie diesen mit einem <a href="/docs/de/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> Filter.</p></td>
    </tr>
    <tr>
@@ -123,7 +123,7 @@ summary: Anmerkungen
         ></path>
       </svg>
     </button></h2><p>In vielen Anwendungsfällen müssen Sie nichts Besonderes tun. Lassen Sie uns klären, ob dies auch auf Sie zutrifft.</p>
-<h3 id="Default-behavior-standard-analyzer" class="common-anchor-header">Standardverhalten: „ <code translate="no">standard</code> “-Analysator<button data-href="#Default-behavior-standard-analyzer" class="anchor-icon" translate="no">
+<h3 id="Default-behavior-standard-analyzer" class="common-anchor-header">Standardverhalten: Analysator „ <code translate="no">standard</code> “<button data-href="#Default-behavior-standard-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,7 +143,7 @@ summary: Anmerkungen
 <ul>
 <li><p>Teilt den Text anhand von Leerzeichen und Satzzeichen auf</p></li>
 <li><p>Wandelt alle Token in Kleinbuchstaben um</p></li>
-<li><p>Entfernt eine integrierte Liste gängiger englischer Stoppwörter sowie den Großteil der Satzzeichen</p></li>
+<li><p>Entfernt eine integrierte Liste gängiger englischer Stoppwörter und die meisten Satzzeichen</p></li>
 </ul>
 <p><strong>Beispiel für eine Transformation</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input:  &quot;The Milvus vector database is built for scale!&quot;
@@ -203,7 +203,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>Erstellen Sie einen benutzerdefinierten Analysator mit einem <a href="/docs/de/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> Tokenizer und einem <a href="/docs/de/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> Filter.</p></td>
    </tr>
    <tr>
-     <td><p>Sprachen mit durch Leerzeichen getrennten Wörtern, wie z. B. Französisch oder Spanisch</p></td>
+     <td><p>Sprachen mit Leerzeichen als Trennzeichen, wie z. B. Französisch oder Spanisch</p></td>
      <td><p>⚠️ Möglicherweise</p></td>
      <td><p>werden Zeichen mit Akzenten (<code translate="no">café</code> vs. <code translate="no">cafe</code>) möglicherweise nicht abgeglichen.</p></td>
      <td><p>Ein benutzerdefinierter Analysator mit dem <a href="/docs/de/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> wird für bessere Ergebnisse empfohlen.</p></td>
@@ -211,7 +211,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>Mehrsprachige oder unbekannte Sprachen</p></td>
      <td><p>❌ Nein</p></td>
-     <td><p>Dem Analyzer „ <code translate="no">standard</code> “ fehlt die sprachspezifische Logik, die für die Verarbeitung unterschiedlicher Zeichensätze und Tokenisierungsregeln erforderlich ist.</p></td>
+     <td><p>Dem „ <code translate="no">standard</code> “-Analysator fehlt die sprachspezifische Logik, die für die Verarbeitung unterschiedlicher Zeichensätze und Tokenisierungsregeln erforderlich ist.</p></td>
      <td><p>Verwenden Sie einen benutzerdefinierten Analysator mit dem <a href="/docs/de/icu-tokenizer.md"><code translate="no">icu</code></a> Tokenizer für eine Unicode-fähige Tokenisierung. </p><p>Alternativ sollten Sie die Konfiguration <a href="/docs/de/multi-language-analyzers.md">mehrsprachiger Analysatoren</a> oder eines <a href="/docs/de/language-identifier.md">Sprachidentifikators</a> in Betracht ziehen, um mehrsprachige Inhalte präziser zu verarbeiten.</p></td>
    </tr>
 </table>
@@ -235,7 +235,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Integrierte Analysatoren sind vorkonfigurierte Lösungen für gängige Sprachen. Sie sind der einfachste Einstieg, wenn der Standard-Analysator nicht optimal passt.</p>
+    </button></h2><p>Integrierte Analysatoren sind vorkonfigurierte Lösungen für gängige Sprachen. Sie sind der einfachste Einstieg, wenn der Standard-Analysator nicht perfekt passt.</p>
 <h3 id="Available-built-in-analyzers" class="common-anchor-header">Verfügbare integrierte Analysatoren<button data-href="#Available-built-in-analyzers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +266,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p><a href="/docs/de/english-analyzer.md"><code translate="no">english</code></a></p></td>
-     <td><p>Speziell für Englisch entwickelt, wendet Stemming und das Entfernen von Stoppwörtern an, um eine bessere semantische Übereinstimmung im Englischen zu erzielen</p></td>
+     <td><p>Speziell für Englisch entwickelt, wendet Stemming und die Entfernung von Stoppwörtern an, um eine bessere semantische Übereinstimmung im Englischen zu erzielen</p></td>
      <td><ul><li><p>Tokenizer: <code translate="no">standard</code></p></li><li><p>Filter: <code translate="no">lowercase</code>, <code translate="no">stemmer</code>, <code translate="no">stop</code></p></li></ul></td>
      <td><p>Empfohlen für rein englischsprachige Inhalte anstelle von <code translate="no">standard</code>.</p></td>
    </tr>
@@ -304,7 +304,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Um einen integrierten Analysator zu verwenden, geben Sie bei der Definition Ihres Feldschemas einfach dessen Typ im Feld „ <code translate="no">analyzer_params</code> “ an.</p>
+    </button></h3><p>Um einen integrierten Analysator zu verwenden, geben Sie bei der Definition Ihres Feldschemas einfach dessen Typ im Parameter „ <code translate="no">analyzer_params</code> “ an.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Using built-in English analyzer</span>
 analyzer_params = {
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>
@@ -371,7 +371,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/de/whitespace-tokenizer.md"><code translate="no">whitespace</code></a></p></td>
      <td><p>Teilt nur an Leerzeichen</p></td>
-     <td><p>Vorverarbeiteter Inhalt, vom Benutzer formatierter Text</p></td>
+     <td><p>Vorverarbeitete Inhalte, vom Benutzer formatierter Text</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">"user_id = get_user_data()"</code></p></li><li><p>Ausgabe: <code translate="no">['user_id', '=', 'get_user_data()']</code></p></li></ul></td>
    </tr>
 </table>
@@ -392,7 +392,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/de/lindera-tokenizer.md"><code translate="no">lindera</code></a></p></td>
      <td><p>Reine, auf einem Wörterbuch basierende morphologische Analyse mit chinesischem Wörterbuch (<a href="https://cc-cedict.org/wiki/">cc-cedict</a>)</p></td>
-     <td><p>Im Vergleich zu <code translate="no">jieba</code> verarbeitet diese Methode chinesischen Text auf allgemeinere Weise</p></td>
+     <td><p>Im Vergleich zu „ <code translate="no">jieba</code> “ verarbeitet diese Methode chinesischen Text auf allgemeinere Weise</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">"机器学习算法"</code></p></li><li><p>Ausgabe: <code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
    </tr>
 </table>
@@ -453,10 +453,10 @@ schema.add_field(
 <ul>
 <li><p>Bei gemischten Sprachen, bei denen eine Sprachidentifizierung nicht praktikabel ist.</p></li>
 <li><p>Sie möchten den Mehraufwand durch <a href="/docs/de/multi-language-analyzers.md">mehrsprachige Analysatoren</a> oder den <a href="/docs/de/language-identifier.md">Sprachidentifikator</a> vermeiden.</p></li>
-<li><p>Der Inhalt hat eine Hauptsprache mit vereinzelten Fremdwörtern, die kaum zur Gesamtbedeutung beitragen (z. B. englischer Text mit vereinzelten Markennamen oder Fachbegriffen auf Japanisch oder Französisch).</p></li>
+<li><p>Der Inhalt hat eine Hauptsprache mit gelegentlichen Fremdwörtern, die wenig zur Gesamtbedeutung beitragen (z. B. englischer Text mit vereinzelten Markennamen oder Fachbegriffen auf Japanisch oder Französisch).</p></li>
 </ul>
 <p><strong>Alternative Ansätze</strong>: Für eine präzisere Verarbeitung mehrsprachiger Inhalte sollten Sie den Einsatz von Mehrsprachenanalysatoren oder des Sprachidentifikators in Betracht ziehen. Weitere Informationen finden Sie unter <a href="/docs/de/multi-language-analyzers.md">„Mehrsprachenanalysatoren</a> “ oder <a href="/docs/de/language-identifier.md">„Sprachidentifikator</a>“.</p>
-<h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">Schritt 2: Fügen Sie Filter für eine höhere Präzision hinzu<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
+<h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">Schritt 2: Filter für eine höhere Präzision hinzufügen<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -502,7 +502,7 @@ schema.add_field(
 <div class="alert note">
 <p>Bei ostasiatischen Sprachen (Chinesisch, Japanisch, Koreanisch usw.) sollten Sie sich stattdessen auf <a href="/docs/de/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">sprachspezifische Filter</a> konzentrieren. Diese Sprachen verwenden in der Regel andere Ansätze zur Textverarbeitung und profitieren möglicherweise nicht wesentlich vom Stemming.</p>
 </div>
-<h4 id="Text-normalization-filters" class="common-anchor-header">Filter zur Textnormalisierung</h4><p>Diese Filter standardisieren Textvariationen, um die Konsistenz beim Abgleich zu verbessern:</p>
+<h4 id="Text-normalization-filters" class="common-anchor-header">Filter zur Textnormalisierung</h4><p>Diese Filter vereinheitlichen Textvarianten, um die Konsistenz beim Abgleich zu verbessern:</p>
 <table>
    <tr>
      <th><p>Filter</p></th>
@@ -527,25 +527,25 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/de/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>Einzelne Interpunktionszeichen entfernen</p></td>
-     <td><p>Bereinigt die Ausgabe der Tokenizer <code translate="no">jieba</code>, <code translate="no">lindera</code> und <code translate="no">icu</code>, die Satzzeichen als einzelne Token zurückgeben</p></td>
-     <td><ul><li><p>Eingabe: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>Ausgabe: <code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>Entfernen Sie Token, die Satzzeichen enthalten</p></td>
+     <td><p>Bereinigen Sie die Ausgabe der Tokenizer von <code translate="no">jieba</code>, <code translate="no">lindera</code> und <code translate="no">icu</code>, die Satzzeichen als eigenständige Token zurückgeben. Token mit wortinternen Satzzeichen, wie beispielsweise <code translate="no">don't</code> oder <code translate="no">3.5kg</code>, werden vollständig entfernt; verwenden Sie den <a href="/docs/de/regex-filter.md"><code translate="no">regex</code></a> Filter, um sie beizubehalten</p></td>
+     <td><ul><li><p>Eingabe: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>Ausgabe: <code translate="no">[['Hello'], ['world']]</code></p></li><li><p>Eingabe: <code translate="no">["don't", "buy"]</code></p></li><li><p>Ausgabe: <code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/de/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
-     <td><p>Nur Buchstaben und Zahlen beibehalten</p></td>
-     <td><p>Technische Inhalte, bereinigte Textverarbeitung</p></td>
+     <td><p>Nur Buchstaben und Zahlen behalten</p></td>
+     <td><p>Technischer Inhalt, saubere Textverarbeitung</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">["user123", "test@email.com"]</code></p></li><li><p>Ausgabe: <code translate="no">[['user123'], ['test', 'email', 'com']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/de/length-filter.md"><code translate="no">length</code></a></p></td>
-     <td><p>Entferne Token außerhalb des angegebenen Längenbereichs</p></td>
+     <td><p>Entferne Tokens außerhalb des angegebenen Längenbereichs</p></td>
      <td><p>Rauschen filtern (übermäßig lange Token)</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">["a", "very", "extraordinarily"]</code></p></li><li><p>Ausgabe: <code translate="no">[['a'], ['very'], []]</code> (wenn <strong>max=10</strong>)</p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/de/regex-filter.md"><code translate="no">regex</code></a></p></td>
-     <td><p>Benutzerdefinierte, musterbasierte Filterung</p></td>
+     <td><p>Benutzerdefinierte musterbasierte Filterung</p></td>
      <td><p>Domänenspezifische Anforderungen an Token</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">["test123", "prod456"]</code></p></li><li><p>Ausgabe: <code translate="no">[[], ['prod456']]</code> (wenn <strong>expr="^prod"</strong>)</p></li></ul></td>
    </tr>
@@ -579,7 +579,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/de/pinyin-filter.md"><code translate="no">pinyin</code></a></p></td>
      <td><p>Chinesisch</p></td>
-     <td><p>Gibt Pinyin-Tokenformen für chinesische Token aus</p></td>
+     <td><p>Erzeugt Pinyin-Tokenformen für chinesische Token</p></td>
      <td><ul><li><p>Eingabe: <code translate="no">["中文"]</code></p></li><li><p>Ausgabe: <code translate="no">[['中文', 'zhong', 'wen']]</code></p></li></ul></td>
    </tr>
 </table>
@@ -659,7 +659,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt enthält empfohlene Konfigurationen für Tokenizer und Filter für gängige Anwendungsfälle bei der Arbeit mit Analysatoren in Milvus. Wählen Sie die Kombination, die am besten zu Ihrem Inhaltstyp und Ihren Suchanforderungen passt.</p>
+    </button></h2><p>Dieser Abschnitt enthält empfohlene Konfigurationen für Tokenizer und Filter für gängige Anwendungsfälle bei der Arbeit mit Analyzern in Milvus. Wählen Sie die Kombination, die am besten zu Ihrem Inhaltstyp und Ihren Suchanforderungen passt.</p>
 <div class="alert note">
 <p>Bevor Sie einen Analysator auf Ihre Sammlung anwenden, empfehlen wir Ihnen, <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> , um die Leistung der Textanalyse zu testen und zu überprüfen.</p>
 </div>
@@ -794,7 +794,7 @@ analyzer_params = {
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
@@ -849,7 +849,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn Sie mit Inhalten arbeiten, die mehrere Sprachen umfassen oder unvorhersehbare Schriftsysteme verwenden, beginnen Sie mit dem „ <code translate="no">icu</code> “-Analysator. Dieser Unicode-fähige Analysator verarbeitet gemischte Schriftsysteme und Symbole effektiv.</p>
+    </button></h3><p>Wenn Sie mit Inhalten arbeiten, die mehrere Sprachen umfassen oder unvorhersehbare Schriftzeichen enthalten, beginnen Sie mit dem „ <code translate="no">icu</code> “-Analysator. Dieser Unicode-fähige Analysator verarbeitet gemischte Schriftzeichen und Symbole effektiv.</p>
 <p><strong>Grundlegende mehrsprachige Konfiguration (ohne Stemming)</strong>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
@@ -882,7 +882,7 @@ analyzer_params = {
 <li><p><strong>Volltextsuche</strong></p>
 <p>Analysatoren wirken sich durch die Erzeugung spärlicher Vektoren direkt auf die BM25-basierte Volltextsuche aus. Verwenden Sie denselben Analysator sowohl für die Indizierung als auch für die Abfrage, um eine konsistente Tokenisierung sicherzustellen. Sprachspezifische Analysatoren liefern im Allgemeinen bessere BM25-Bewertungen als generische. Details zur Implementierung finden Sie unter <a href="/docs/de/full-text-search.md">„Volltextsuche</a>“.</p></li>
 <li><p><strong>Textabgleich</strong></p>
-<p>Textabgleich-Operationen führen auf der Grundlage der Ausgabe Ihres Analysators einen exakten Token-Abgleich zwischen Abfragen und indiziertem Inhalt durch. Details zur Implementierung finden Sie unter <a href="/docs/de/keyword-match.md">„Textabgleich</a>“.</p></li>
+<p>Textabgleich-Operationen führen auf der Grundlage der Ausgabe Ihres Analysators einen exakten Token-Abgleich zwischen Abfragen und indizierten Inhalten durch. Einzelheiten zur Implementierung finden Sie unter <a href="/docs/de/keyword-match.md">„Textabgleich</a>“.</p></li>
 <li><p><strong>Phrasenabgleich</strong></p>
 <p>Der Phrasenabgleich erfordert eine konsistente Tokenisierung über mehrwortige Ausdrücke hinweg, um Phrasengrenzen und Bedeutung zu bewahren. Details zur Implementierung finden Sie unter <a href="/docs/de/phrase-match.md">„Phrasenabgleich</a>“.</p></li>
 </ul>

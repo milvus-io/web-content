@@ -1,10 +1,7 @@
 ---
 id: users_and_roles.md
 title: 建立使用者與角色
-summary: >-
-  Milvus 透過 RBAC
-  實現細粒度的存取控制。您可以先建立使用者和角色，接著將權限或權限群組指派給角色，最後透過將角色授予使用者來管理存取控制。此方法可確保存取管理的效率與安全性。本頁面將介紹如何在
-  Milvus 中建立使用者和角色。
+summary: Milvus 透過 RBAC 控制存取權限：權限會授予角色，而角色則分配給使用者。本頁將介紹如何建立使用者與角色。
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">建立使用者與角色<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,8 +34,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>初始化 Milvus 實例後，系統會自動產生一個 root 使用者，供首次連線至 Milvus 時進行身分驗證。root 使用者的使用者名稱為<code translate="no">root</code> ，密碼為<code translate="no">Milvus</code> 。root 使用者的預設角色為<code translate="no">admin</code> ，該角色可存取所有資源。為確保資料安全，請妥善保管 root 使用者的憑證，以防止未經授權的存取。</p>
-<p>在日常操作中，我們建議您建立使用者，而非直接使用 root 使用者。</p>
+    </button></h2><p>初始化 Milvus 實例後，系統會自動產生一個 root 使用者，供首次連線至 Milvus 時進行身分驗證。 root 用戶的名稱為<code translate="no">root</code> ，密碼為<code translate="no">Milvus</code> 。預設情況下，root 用戶未綁定任何角色且會跳過權限檢查，因此可存取所有資源。此行為由<code translate="no">common.security.rootShouldBindRole</code> 設定控制，其預設值為<code translate="no">false</code> 。為確保資料安全，請妥善保管 root 用戶的憑證，以防止未經授權的存取。</p>
+<p>在日常操作中，我們建議建立使用者，而非直接使用 root 使用者。</p>
 <h3 id="Create-a-user" class="common-anchor-header">建立使用者<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,9 +51,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以<code translate="no">root</code> 身分連線，並建立一名使用者，使用者名為<code translate="no">user_1</code> ，密碼為<code translate="no">P@ssw0rd</code> 。選擇憑證時，請遵循以下規則：</p>
+    </button></h3><p>以<code translate="no">root</code> 身分連線，並建立一名使用者，其使用者名為<code translate="no">user_1</code> ，密碼為<code translate="no">P@ssw0rd</code> 。選擇憑證時，請遵循以下規則：</p>
 <ul>
-<li><p>使用者名稱：必須以字母開頭，且僅能包含大寫或小寫字母、數字及底線。</p></li>
+<li><p>使用者名稱：必須以字母或底線開頭，且僅能包含大寫或小寫字母、數字、底線（<code translate="no">_</code> ），以及在<code translate="no">proxy.nameValidation.allowedChars</code> 中設定的任何額外字元（預設為<code translate="no">$</code> ）。</p></li>
 <li><p>密碼：預設長度必須為 6 至 72 個 UTF-8 位元組。您的部署環境可能會設定<a href="/docs/zh-hant/authenticate.md#Password-requirements">不同的密碼長度限制</a>。</p></li>
 </ul>
 <div class="multipleCode">
@@ -97,7 +94,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -271,7 +268,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供一個名為<code translate="no">admin</code> 的內建角色，此為管理員角色，可存取所有實例下的資源，並具備所有操作的權限。若要進行更細緻的存取管理並強化資料安全性，建議您根據需求建立自訂角色。</p>
+    </button></h2><p>Milvus 提供一個名為<code translate="no">admin</code> 的內建角色，此為管理員角色，可存取所有執行個體下的資源，並具備所有操作的權限。若要進行更細緻的存取管理並強化資料安全性，建議您根據需求建立自訂角色。</p>
 <h3 id="Create-a-role" class="common-anchor-header">建立角色<button data-href="#Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -290,7 +287,7 @@ client.list_users()
     </button></h3><p>以下範例示範如何建立名為<code translate="no">role_a</code> 的角色。</p>
 <p>角色名稱必須遵循以下規則：</p>
 <ul>
-<li>必須以字母開頭，且僅能包含大寫或小寫字母、數字及底線。</li>
+<li>必須以字母或下劃線開頭，且僅可包含大寫或小寫字母、數字、下劃線，以及<code translate="no">proxy.roleNameValidation.allowedChars</code> 中的字元（預設為<code translate="no">$</code> ）。</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -309,6 +306,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -344,7 +342,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>建立幾個角色後，您可以列出並檢視所有現有的角色。</p>
+    </button></h3><p>建立多個角色後，您可以列出並檢視所有現有角色。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -375,6 +373,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下為輸出範例。「<code translate="no">admin</code> 」是 Milvus 中的預設角色。「<code translate="no">role_a</code> 」則是剛建立的新角色。</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>以下為輸出範例。<code translate="no">admin</code> 和<code translate="no">public</code> 是 Milvus 預設建立的角色。<code translate="no">role_a</code> 則是剛建立的新角色。</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

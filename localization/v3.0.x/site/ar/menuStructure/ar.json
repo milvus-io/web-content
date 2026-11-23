@@ -38,7 +38,7 @@
     ]
   },
   {
-    "label": "ابدأ",
+    "label": "ابدأ الآن",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,
@@ -235,7 +235,7 @@
             "children": []
           },
           {
-            "label": "طائر النقار",
+            "label": "الطائر النقار",
             "id": "woodpecker_architecture.md",
             "order": 5,
             "children": []
@@ -723,7 +723,7 @@
                 ]
               },
               {
-                "label": "أدوات التحليل متعددة اللغات",
+                "label": "أجهزة التحليل متعددة اللغات",
                 "id": "multi-language-analyzers.md",
                 "order": 4,
                 "children": []
@@ -994,12 +994,6 @@
                 "children": []
               },
               {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
-                "children": []
-              },
-              {
                 "label": "RTREE",
                 "id": "rtree.md",
                 "order": 7,
@@ -1112,7 +1106,7 @@
                 "children": []
               },
               {
-                "label": "العمليات الحسابية الأساسية",
+                "label": "العمليات الأساسية",
                 "id": "basic-operators.md",
                 "order": 1,
                 "children": []
@@ -1309,7 +1303,7 @@
                 "children": []
               },
               {
-                "label": "فيرتكس إيه آي",
+                "label": "Vertex AI",
                 "id": "vertex-ai.md",
                 "order": 5,
                 "children": []
@@ -1377,7 +1371,7 @@
                 "children": []
               },
               {
-                "label": "مصنف RRF",
+                "label": "مُصنِّف RRF",
                 "id": "rrf-ranker.md",
                 "order": 1,
                 "children": []
@@ -1457,7 +1451,7 @@
                     "children": []
                   },
                   {
-                    "label": "مُصنِّف Voyage AI",
+                    "label": "مصنف Voyage AI",
                     "id": "voyage-ai-ranker.md",
                     "order": 4,
                     "children": []
@@ -1496,12 +1490,6 @@
             "label": "استخدام mmap",
             "id": "mmap.md",
             "order": 0,
-            "children": []
-          },
-          {
-            "label": "التكتل والضغط",
-            "id": "clustering-compaction.md",
-            "order": 1,
             "children": []
           },
           {
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "حزمة تطوير التطبيقات (SDK) لـ Node.js",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "واجهة برمجة التطبيقات RESTful الإصدار 2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "تصميم المخطط",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "أنماط البحث",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "اختيار المؤشر",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "خط أنابيب RAG",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -2005,7 +2011,7 @@
             "children": []
           },
           {
-            "label": "ترقية Milvus المستقل",
+            "label": "ترقية إصدار Milvus المستقل",
             "id": "upgrade_milvus_standalone-operator.md",
             "order": 1,
             "children": []
@@ -2348,7 +2354,7 @@
             "children": []
           },
           {
-            "label": "الاستيراد الجماعي في عملية النسخ المتماثل في CDC",
+            "label": "الاستيراد الجماعي في عملية النسخ المتماثل لـ CDC",
             "id": "bulk_import_in_cdc_replication.md",
             "order": 4,
             "children": []
@@ -2576,7 +2582,7 @@
     ]
   },
   {
-    "label": "عمليات التكامل",
+    "label": "عمليات الدمج",
     "id": "integrations",
     "isMenu": true,
     "order": 8,

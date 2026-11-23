@@ -139,7 +139,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
 
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Gunakan kredensial yang telah Anda konfigurasikan jika Anda telah mengubahnya. Contoh-contoh selanjutnya menggunakan " <code translate="no">client</code> " yang Anda pilih; contoh-contoh tersebut tidak memerlukan database Lite lokal terpisah.</p>
+<p>Gunakan kredensial yang telah Anda konfigurasikan jika Anda telah mengubahnya. Contoh-contoh selanjutnya menggunakan " <code translate="no">client</code> " yang Anda pilih; contoh-contoh tersebut tidak memerlukan basis data Lite lokal terpisah.</p>
 <h2 id="Create-a-Collection" class="common-anchor-header">Buat Koleksi<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -155,7 +155,7 @@ client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Di Milvus, kita memerlukan koleksi untuk menyimpan vektor dan metadata terkaitnya. Anda dapat menganggapnya sebagai tabel dalam basis data SQL tradisional. Saat membuat koleksi, Anda dapat mendefinisikan parameter skema dan indeks untuk mengonfigurasi spesifikasi vektor seperti dimensi, jenis indeks, dan metrik jarak. Ada juga konsep-konsep kompleks untuk mengoptimalkan indeks demi kinerja pencarian vektor. Untuk saat ini, mari kita fokus pada dasar-dasarnya saja dan gunakan pengaturan default untuk semua yang memungkinkan. Setidaknya, Anda hanya perlu menetapkan nama koleksi dan dimensi bidang vektor koleksi tersebut.</p>
+    </button></h2><p>Di Milvus, kita memerlukan koleksi untuk menyimpan vektor dan metadata terkaitnya. Anda dapat menganggapnya sebagai tabel dalam basis data SQL tradisional. Saat membuat koleksi, Anda dapat mendefinisikan parameter skema dan indeks untuk mengonfigurasi spesifikasi vektor seperti dimensi, jenis indeks, dan metrik jarak. Ada juga konsep-konsep kompleks untuk mengoptimalkan indeks demi kinerja pencarian vektor. Untuk saat ini, mari kita fokus pada dasar-dasarnya saja dan gunakan pengaturan default untuk semua yang memungkinkan. Setidaknya, Anda hanya perlu menetapkan nama koleksi dan dimensi bidang vektor dari koleksi tersebut.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -166,7 +166,7 @@ client.create_collection(
 <p>Dalam pengaturan di atas,</p>
 <ul>
 <li>Kunci utama dan bidang vektor menggunakan nama defaultnya (“id” dan “vector”).</li>
-<li>Jenis metrik (definisi jarak vektor) diatur ke nilai defaultnya (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
+<li>Jenis metrik (definisi jarak vektor) disetel ke nilai defaultnya (<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>).</li>
 <li>Bidang kunci utama menerima bilangan bulat dan tidak bertambah secara otomatis (yaitu, tidak menggunakan <a href="https://milvus.io/docs/schema.md">fitur auto-id</a>).
 Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">petunjuk</a> ini.</li>
 </ul>
@@ -185,7 +185,7 @@ Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam panduan ini, kami menggunakan vektor untuk melakukan pencarian semantik pada teks. Kami perlu menghasilkan vektor untuk teks dengan mengunduh model embedding. Hal ini dapat dilakukan dengan mudah menggunakan fungsi utilitas dari perpustaka <code translate="no">pymilvus[model]</code>.</p>
+    </button></h2><p>Dalam panduan ini, kami menggunakan vektor untuk melakukan pencarian semantik pada teks. Kami perlu menghasilkan vektor untuk teks dengan mengunduh model embedding. Hal ini dapat dilakukan dengan mudah menggunakan fungsi utilitas dari pustak <code translate="no">pymilvus[model]</code>.</p>
 <h2 id="Represent-text-with-vectors" class="common-anchor-header">Mewakili teks dengan vektor<button data-href="#Represent-text-with-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

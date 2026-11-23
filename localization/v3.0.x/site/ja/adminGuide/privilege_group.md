@@ -1,9 +1,9 @@
 ---
 id: privilege_group.md
-title: 特権グループの作成
-summary: 権限付与のプロセスを効率化するために、複数の権限を権限グループにまとめることをお勧めします。
+title: 権限グループの作成
+summary: 権限の付与プロセスを効率化するため、複数の権限を1つの権限グループにまとめることをお勧めします。
 ---
-<h1 id="Create-Privilege-Group" class="common-anchor-header">特権グループの作成<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
+<h1 id="Create-Privilege-Group" class="common-anchor-header">権限グループの作成<button data-href="#Create-Privilege-Group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>特権の付与プロセスを効率化するために、複数の特権を特権グループにまとめることをお勧めします。</p>
-<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">特権グループと特権の比較<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
+    </button></h1><p>権限の付与プロセスを効率化するため、複数の権限を1つの権限グループにまとめることをお勧めします。</p>
+<h2 id="Privilege-group-vs-privileges" class="common-anchor-header">権限グループと個々の権限<button data-href="#Privilege-group-vs-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,18 +34,20 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>特権グループは複数の特権で構成されます。</p>
-<p>
+    </button></h2><p>権限グループは、複数の権限で構成されます。</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" />
-   </span> <span class="img-wrapper"> <span>特権グループの図解</span> </span></p>
-<p>上図のように、あるロールに3つの異なる権限を付与する必要があるとします。</p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/privilege-group-illustrated.png" alt="Privilege Group Illustrated" class="doc-image" id="privilege-group-illustrated" /> 
+   <span>権限グループの図解</span>
+  
+ </span></p>
+<p>上の図に示すように、あるロールに 3 つの異なる権限を付与する必要があるとします。</p>
 <ul>
-<li><p>特権グループを使用しない場合、権限を3回付与する必要があります。</p></li>
-<li><p>特権グループを使用する場合は、特権グループを作成し、この特権グループに3つの特権を追加して、ロールAに特権グループを付与するだけです。</p></li>
+<li><p>権限グループを使用しない場合、権限を 3 回付与する必要があります。</p></li>
+<li><p>権限グループを使用する場合は、権限グループを作成し、その権限グループに 3 つの権限を追加して、その権限グループをロール A に付与するだけで済みます。</p></li>
 </ul>
-<p>特権グループを使用すると、ロールに対して複数の特権を一括して付与することができます。</p>
-<h2 id="Built-in-privilege-groups" class="common-anchor-header">組み込みの特権グループ<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
+<p>権限グループを使用することで、1 つのロールに複数の権限を一括して付与することができます。</p>
+<h2 id="Built-in-privilege-groups" class="common-anchor-header">組み込みの権限グループ<button data-href="#Built-in-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,12 +62,12 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、使いやすさを考慮し、コレクション、データベース、インスタンスレベルで合計9つの組み込み権限を提供しています：COLL_RO、COLL_RW、COLL_ADMIN、DB_RO、DB_RW、DB_Admin、Cluster_RO、Cluster_RW、Cluster_Adminです。</p>
+    </button></h2><p>使いやすさを考慮し、Milvus では、コレクション、データベース、およびインスタンスレベルで、合計 9 つの組み込み権限グループ（CollectionReadOnly、CollectionReadWrite、CollectionAdmin、DatabaseReadOnly、DatabaseReadWrite、DatabaseAdmin、ClusterReadOnly、ClusterReadWrite、ClusterAdmin）が用意されています。</p>
 <div class="alert note">
-<p>3つのレベルの組み込み特権グループにはカスケード関係はありません。インスタンス・レベルで権限グループを設定しても、そのインスタンス配下のすべてのデータベースとコレクションに自動的に権限が設定されるわけではありません。データベース・レベルとコレクション・レベルの権限は手動で設定する必要があります。</p>
+<p>これら3つのレベルの組み込み権限グループ間には、カスケード関係はありません。インスタンスレベルで権限グループを設定しても、そのインスタンス下のすべてのデータベースおよびコレクションに対して自動的に権限が設定されるわけではありません。データベースおよびコレクションレベルの権限は、手動で設定する必要があります。</p>
 </div>
-<p>以下の表では、組み込みの各特権グループに含まれる権限について説明します。</p>
-<h3 id="Collection-level" class="common-anchor-header">コレクション・レベル<button data-href="#Collection-level" class="anchor-icon" translate="no">
+<p>以下の表は、各組み込み権限グループに含まれる権限について説明しています。</p>
+<h3 id="Collection-level" class="common-anchor-header">コレクションレベル<button data-href="#Collection-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,17 +83,17 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: コレクション・データの読み取り権限が含まれます。</p></li>
-<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: コレクションデータの読み取りと書き込みの権限が含まれます。</p></li>
-<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>: コレクションデータの読み取りと書き込み、およびコレクションを管理する権限が含まれます。</p></li>
+<li><p><strong>CollectionReadOnly (COLL_RO)</strong>: コレクションデータの読み取り権限を含みます</p></li>
+<li><p><strong>CollectionReadWrite (COLL_RW)</strong>: コレクションデータの読み取りおよび書き込み権限を含みます</p></li>
+<li><p><strong>CollectionAdmin (COLL_ADMIN)</strong>：コレクションデータの読み取りおよび書き込み、ならびにコレクションの管理を行う権限を含みます。</p></li>
 </ul>
-<p>下の表は、コレクションレベルの3つの組み込み特権グループに含まれる特定の特権の一覧です：</p>
+<p>以下の表は、コレクションレベルにおける 3 つの組み込み権限グループに含まれる具体的な権限の一覧です。</p>
 <table>
    <tr>
-     <th><p><strong>特権</strong></p></th>
-     <th><p><strong>コレクション読み取り専用</strong></p></th>
-     <th><p><strong>コレクションReadWrite</strong></p></th>
-     <th><p><strong>コレクション管理</strong></p></th>
+     <th><p><strong>権限</strong></p></th>
+     <th><p><strong>CollectionReadOnly</strong></p></th>
+     <th><p><strong>CollectionReadWrite</strong></p></th>
+     <th><p><strong>CollectionAdmin</strong></p></th>
    </tr>
    <tr>
      <td><p>クエリ</p></td>
@@ -112,7 +114,7 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>フラッシュ状態</p></td>
+     <td><p>フラッシュ状態の取得</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -130,31 +132,31 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>パーティション</p></td>
+     <td><p>HasPartition</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>パーティションの表示</p></td>
+     <td><p>パーティションを表示</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>エイリアス一覧</p></td>
+     <td><p>エイリアスの一覧表示</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>コレクションを記述する</p></td>
+     <td><p>コレクションの説明</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>エイリアス</p></td>
+     <td><p>エイリアスの説明</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -166,19 +168,19 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>インデックス作成</p></td>
+     <td><p>CreateIndex</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ドロップインデックス</p></td>
+     <td><p>DropIndex</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>パーティション作成</p></td>
+     <td><p>CreatePartition</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -190,13 +192,13 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ロード</p></td>
+     <td><p>読み込み</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>リリース</p></td>
+     <td><p>解放</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -214,7 +216,7 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>アップサート</p></td>
+     <td><p>Upsert</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
@@ -232,25 +234,85 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>圧縮</p></td>
+     <td><p>締固め</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ロードバランス</p></td>
+     <td><p>負荷分散</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>エイリアス作成</p></td>
+     <td><p>エイリアスの作成</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>エイリアスの削除</p></td>
+     <td><p>DropAlias</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>GetImportProgress</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListImport</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>スナップショットの説明</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>スナップショットのリスト表示</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>コレクションフィールドの追加</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AlterCollectionSchema</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>外部コレクションの更新</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>CreateSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>スナップショットの削除</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>スナップショットの復元</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -272,17 +334,17 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>DatabaseReadOnly (DB_RO)</strong>: データベースデータの読み取り権限を含む</p></li>
-<li><p><strong>DatabaseReadWrite (DB_RW)</strong> ： デー タ ベース デー タ の読み書 き 権限が含まれます。</p></li>
-<li><p><strong>DatabaseAdmin (DB_Admin)</strong>: データベース・データの読み取りと書き込み、およびデータベースの管理を行う権限が含まれます。</p></li>
+<li><p><strong>DatabaseReadOnly (DB_RO)</strong>：データベースデータの読み取り権限を含みます</p></li>
+<li><p><strong>DatabaseReadWrite (DB_RW)</strong>: データベースデータの読み取りおよび書き込み権限を含みます</p></li>
+<li><p><strong>DatabaseAdmin (DB_Admin)</strong>：データベースデータの読み取りおよび書き込み、ならびにデータベースの管理を行う権限を含みます。</p></li>
 </ul>
-<p>以下の表は、データベース・レベルの 3 つの組み込み特権グループに含まれる具体的な特権の一覧です：</p>
+<p>以下の表は、データベースレベルにおける3つの組み込み権限グループに含まれる具体的な権限の一覧です：</p>
 <table>
    <tr>
-     <th><p><strong>特権</strong></p></th>
-     <th><p><strong>データベース読み取り専用</strong></p></th>
-     <th><p><strong>データベースReadWrite</strong></p></th>
-     <th><p><strong>データベース管理</strong></p></th>
+     <th><p><strong>権限</strong></p></th>
+     <th><p><strong>DatabaseReadOnly</strong></p></th>
+     <th><p><strong>DatabaseReadWrite</strong></p></th>
+     <th><p><strong>DatabaseAdmin</strong></p></th>
    </tr>
    <tr>
      <td><p>コレクションの表示</p></td>
@@ -291,31 +353,37 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>データベース</p></td>
+     <td><p>データベースの説明</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
      <td><p>コレクションの作成</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>ドロップコレクション</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>アルターデータベース</p></td>
+     <td><p>コレクションの削除</p></td>
+     <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AlterDatabase</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>コレクション名の変更</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
-<h3 id="Cluster-level" class="common-anchor-header">クラスタ・レベル<button data-href="#Cluster-level" class="anchor-icon" translate="no">
+<h3 id="Cluster-level" class="common-anchor-header">クラスタレベル<button data-href="#Cluster-level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -331,74 +399,68 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: インスタンス・データの読み取り権限が含まれます。</p></li>
-<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: インスタンス・データを読み書きする権限が含まれます。</p></li>
-<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: インスタンス・データの読み取りと書き込み、およびインスタンスの管理を行う権限が含まれます。</p></li>
+<li><p><strong>ClusterReadOnly (Cluster_RO)</strong>: インスタンスデータの読み取り権限を含みます</p></li>
+<li><p><strong>ClusterReadWrite (Cluster_RW)</strong>: インスタンスデータの読み取りおよび書き込み権限を含みます</p></li>
+<li><p><strong>ClusterAdmin (Cluster_Admin)</strong>: インスタンスデータの読み取りおよび書き込み、ならびにインスタンスの管理権限を含みます。</p></li>
 </ul>
-<p>以下の表は、インスタンス・レベルの3つの組み込み特権グループに含まれる具体的な特権の一覧です：</p>
+<p>以下の表は、インスタンスレベルにおける3つの組み込み権限グループに含まれる具体的な権限の一覧です：</p>
 <table>
    <tr>
-     <th><p><strong>特権</strong></p></th>
-     <th><p><strong>クラスタ読み取り専用</strong></p></th>
-     <th><p><strong>クラスタ読み取り専用</strong></p></th>
-     <th><p><strong>クラスタ管理</strong></p></th>
+     <th><p><strong>権限</strong></p></th>
+     <th><p><strong>ClusterReadOnly</strong></p></th>
+     <th><p><strong>ClusterReadWrite</strong></p></th>
+     <th><p><strong>ClusterAdmin</strong></p></th>
    </tr>
    <tr>
-     <td><p>データベース一覧</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>名前の変更</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>オーナーシップの作成</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>ユーザーの更新</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>ドロップオーナーシップ</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>セレクトオーナーシップ</p></td>
+     <td><p>ListDatabases</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>オーナーシップの管理</p></td>
+     <td><p>所有権の作成</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>ユーザー選択</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>バックアップRBAC</p></td>
+     <td><p>UpdateUser</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>リストアRBAC</p></td>
+     <td><p>所有権の解除</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>所有権の選択</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>所有権の管理</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ユーザーの選択</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RBACのバックアップ</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RBACの復元</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -422,49 +484,49 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>DescribeResourceGroup</p></td>
+     <td><p>リソースグループの説明</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>リソースグループの一覧</p></td>
+     <td><p>リソースグループのリスト取得</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>転送ノード</p></td>
+     <td><p>ノードの転送</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>トランスファーレプリカ</p></td>
+     <td><p>転送レプリカ</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>データベースの作成</p></td>
+     <td><p>CreateDatabase</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>データベースの削除</p></td>
+     <td><p>DropDatabase</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>フラッシュオール</p></td>
+     <td><p>FlushAll</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>特権グループの作成</p></td>
+     <td><p>CreatePrivilegeGroup</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -476,13 +538,73 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>特権グループのリスト</p></td>
+     <td><p>ListPrivilegeGroups</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>特権グループの操作</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>特権グループの操作</p></td>
+     <td><p>GetReplicateConfiguration</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListFileResources</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ファイルリソースの追加</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ファイルリソースの削除</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>PinSnapshotData</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>スナップショットデータの固定解除</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>レプリケーション構成の更新</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>外部スナップショットの復元</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>スナップショットのエクスポート</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>Binlogのインポート</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -503,8 +625,8 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>特権グループを作成し、その特権グループに特権を追加します。</p>
-<h3 id="Create-a-privilege-group" class="common-anchor-header">特権グループの作成<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
+    </button></h2><p>権限グループを作成し、その権限グループに権限を追加することができます。</p>
+<h3 id="Create-a-privilege-group" class="common-anchor-header">権限グループの作成<button data-href="#Create-a-privilege-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -519,13 +641,18 @@ summary: 権限付与のプロセスを効率化するために、複数の権�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>次の例では、<code translate="no">privilege_group_1</code> という名前の特権グループを作成する方法を示します。</p>
+    </button></h3><p>以下の例は、<code translate="no">privilege_group_1</code> という名前の権限グループを作成する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
+client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.CreatePrivilegeGroup(ctx, milvusclient.NewCreatePrivilegeGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -552,7 +679,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
     &quot;privilegeGroupName&quot;:&quot;privilege_group_1&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">特権グループへの特権の追加<button data-href="#Add-privileges-to-a-privilege-group" class="anchor-icon" translate="no">
+<h3 id="Add-privileges-to-a-privilege-group" class="common-anchor-header">権限グループへの権限の追加<button data-href="#Add-privileges-to-a-privilege-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -567,13 +694,18 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>次の例では、作成したばかりの特権グループ<code translate="no">privilege_group_1</code> に特権<code translate="no">PrivilegeBackupRBAC</code> と<code translate="no">PrivilegeRestoreRBAC</code> を追加する方法を示します。</p>
+    </button></h3><p>次の例は、先ほど作成した権限グループ `<code translate="no">privilege_group_1</code> ` に、権限 `<code translate="no">Query</code> ` および `<code translate="no">Search</code> ` を追加する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 privileges := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>}
 err = client.AddPrivilegesToGroup(ctx, milvusclient.NewAddPrivilegesToGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>, privileges...))
@@ -590,7 +722,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addPrivilegesToGroup</span>({
-  <span class="hljs-attr">group_name</span>: privilege_group_1,
+  <span class="hljs-attr">group_name</span>: <span class="hljs-string">&#x27;privilege_group_1&#x27;</span>,
   <span class="hljs-attr">privileges</span>: [<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>],
 });
 
@@ -605,7 +737,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     &quot;privileges&quot;:[&quot;Query&quot;, &quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">特権グループからの特権の削除<button data-href="#Remove-privileges-from-a-privilege-group" class="anchor-icon" translate="no">
+<h3 id="Remove-privileges-from-a-privilege-group" class="common-anchor-header">権限グループから権限を削除する<button data-href="#Remove-privileges-from-a-privilege-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -620,13 +752,18 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>次の例では、特権グループ<code translate="no">privilege_group_1</code> から特権<code translate="no">PrivilegeRestoreRBAC</code> を削除する方法を示します。</p>
+    </button></h3><p>次の例は、権限グループ<code translate="no">privilege_group_1</code> から権限<code translate="no">Search</code> を削除する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
+client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.RemovePrivilegesFromGroup(ctx, milvusclient.NewRemovePrivilegesFromGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Search&quot;</span>}...))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -656,7 +793,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
     &quot;privileges&quot;:[&quot;Search&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-privilege-groups" class="common-anchor-header">特権グループの一覧表示<button data-href="#List-privilege-groups" class="anchor-icon" translate="no">
+<h3 id="List-privilege-groups" class="common-anchor-header">権限グループの一覧表示<button data-href="#List-privilege-groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -671,13 +808,18 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の例では、既存の特権グループをすべて一覧表示する方法を示します。</p>
+    </button></h3><p>次の例は、既存のすべての権限グループを一覧表示する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 groups, err := client.ListPrivilegeGroups(ctx, milvusclient.NewListPrivilegeGroupsOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -705,7 +847,7 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 <p>以下は出力例です。</p>
 <pre><code translate="no" class="language-bash">PrivilegeGroupItem: &lt;privilege_group:privilege_group_1&gt;, &lt;privileges:(<span class="hljs-string">&#x27;Search&#x27;</span>, <span class="hljs-string">&#x27;Query&#x27;</span>)&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-a-privilege-group" class="common-anchor-header">特権グループの削除<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
+<h3 id="Drop-a-privilege-group" class="common-anchor-header">権限グループの削除<button data-href="#Drop-a-privilege-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -720,13 +862,18 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>次の例は、特権グループ<code translate="no">privilege_group_1</code> を削除する方法を示しています。</p>
+    </button></h3><p>以下の例は、権限グループ「<code translate="no">privilege_group_1</code> 」を削除する方法を示しています。</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#go">Go</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#go">   Go</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.DropPrivilegeGroup(ctx, milvusclient.NewDropPrivilegeGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {

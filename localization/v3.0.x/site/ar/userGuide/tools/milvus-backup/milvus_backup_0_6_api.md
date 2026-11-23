@@ -5,10 +5,10 @@ summary: >-
   HTTP الخاصة بـ Milvus Backup.
 title: >-
   النسخ الاحتياطي واستعادة البيانات باستخدام واجهات برمجة التطبيقات
-  (APIs)Compatible with Milvus Backup 0.6.x
+  (API)Compatible with Milvus Backup 0.6.x
 beta: Milvus Backup 0.6.x
 ---
-<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">النسخ الاحتياطي واستعادة البيانات باستخدام واجهات برمجة التطبيقات (APIs)<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
+<h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">النسخ الاحتياطي واستعادة البيانات باستخدام واجهات برمجة التطبيقات (API)<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus Backup 0.6.x</span><button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,7 +128,7 @@ beta: Milvus Backup 0.6.x
 <p>يتضمن الرد قيمة <code translate="no">requestId</code>. لا يعني الإرسال أن النسخ الاحتياطي قد اكتمل. انسخ تلك القيمة إلى <code translate="no">backup_id</code> وقم بالاستعلام:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_backup?backup_id=BACKUP_REQUEST_ID&amp;backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>انتظر حتى تتحول القيمة <code translate="no">data.state_code</code> إلى <code translate="no">2</code>. تستخدم واجهة برمجة التطبيقات (API) حالات المهام التالية:</p>
+<p>انتظر حتى يتحول <code translate="no">data.state_code</code> إلى <code translate="no">2</code>. تستخدم واجهة برمجة التطبيقات (API) حالات المهام التالية:</p>
 <table>
 <thead>
 <tr><th><code translate="no">state_code</code></th><th>المعنى</th></tr>
@@ -141,7 +141,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">4</code></td><td>انتهت المهلة</td></tr>
 </tbody>
 </table>
-<p>تحقق من كل من الاستجابة وحالة المهمة. لا يكفي وجود HTTP 200 وحده: فوجود استجابة غير صفرية <code translate="no">code</code> يشير إلى وجود خطأ. يمكن أن تتجاهل الاستجابة الناجحة <code translate="no">code</code> لأن قيمتها صفر. إذا فشلت المهمة أو انتهت مهلة الانتظار، فافحص تفاصيل الاستجابة وسجل الخادم قبل الاستعادة من تلك النسخة الاحتياطية.</p>
+<p>تحقق من كل من الاستجابة وحالة المهمة. لا يكفي وجود HTTP 200 وحده: فوجود استجابة غير صفرية <code translate="no">code</code> يشير إلى وجود خطأ. يمكن أن تتجاهل الاستجابة الناجحة <code translate="no">code</code> لأن قيمتها تساوي صفرًا. إذا فشلت المهمة أو انتهت مهلة الانتظار، فافحص تفاصيل الاستجابة وسجل الخادم قبل الاستعادة من تلك النسخة الاحتياطية.</p>
 <p>أدرج النسخ الاحتياطية المخزنة وافحص النسخة الاحتياطية المكتملة حسب الاسم:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;

@@ -139,7 +139,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Das Laden einer Sammlung ist die Voraussetzung für die Durchführung von Ähnlichkeitssuchen und Abfragen in Sammlungen. Wenn Sie eine Sammlung laden, lädt Milvus alle Indexdateien und die Rohdaten in jedem Feld in den Arbeitsspeicher, um eine schnelle Reaktion auf Suchanfragen und Abfragen zu gewährleisten.</p>
-<p>Suchvorgänge und Abfragen sind speicherintensive Vorgänge. Um Ressourcen zu schonen, wird empfohlen, derzeit nicht verwendete Sammlungen freizugeben.</p>
+<p>Suchen und Abfragen sind speicherintensive Vorgänge. Um Ressourcen zu sparen, wird empfohlen, derzeit nicht verwendete Sammlungen freizugeben.</p>
 <p>Weitere Details finden Sie unter <a href="/docs/de/load-and-release.md">„Laden und Freigeben</a>“.</p>
 <h2 id="Search-and-Query" class="common-anchor-header">Suche und Abfrage<button data-href="#Search-and-Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -157,7 +157,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Sobald Sie Indizes erstellt und die Sammlung geladen haben, können Sie eine Ähnlichkeitssuche starten, indem Sie einen oder mehrere Abfragevektoren eingeben. Wenn Milvus beispielsweise die Vektordarstellung Ihrer Abfrage in einer Suchanfrage erhält, verwendet es den angegebenen Metriktyp, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Zielsammlung zu messen, bevor es diejenigen zurückgibt, die semantisch der Abfrage ähnlich sind.</p>
-<p>Sie können auch Metadatenfilterung in Suchvorgänge und Abfragen einbeziehen, um die Relevanz der Ergebnisse zu verbessern. Beachten Sie, dass Metadatenfilterbedingungen in Abfragen obligatorisch, in Suchvorgängen jedoch optional sind.</p>
+<p>Sie können auch Metadatenfilter in Suchvorgänge und Abfragen einbeziehen, um die Relevanz der Ergebnisse zu verbessern. Beachten Sie, dass Metadatenfilterbedingungen in Abfragen obligatorisch, in Suchvorgängen jedoch optional sind.</p>
 <p>Einzelheiten zu den anwendbaren Metriktypen finden Sie unter <a href="/docs/de/metric.md">„Metriktypen</a>“.</p>
 <p>Weitere Informationen zu Suchvorgängen und Abfragen finden Sie in den Artikeln im Kapitel „Suche und Neurangierung“, zu deren grundlegenden Funktionen unter anderem gehören:</p>
 <ul>
@@ -175,7 +175,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a></p></li>
 <li><p><a href="/docs/de/mmap.md">mmap verwenden</a></p></li>
-<li><p><a href="/docs/de/clustering-compaction.md">Clustering-Kompaktierung</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,7 +192,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Partitionen sind Teilmengen einer Sammlung, die denselben Feldsatz wie ihre übergeordnete Sammlung teilen und jeweils eine Teilmenge von Entitäten enthalten.</p>
-<p>Durch die Zuordnung von Entitäten zu verschiedenen Partitionen können Sie Entitätsgruppen bilden. Sie können Suchvorgänge und Abfragen in bestimmten Partitionen durchführen, damit Milvus Entitäten in anderen Partitionen ignoriert und so die Sucheffizienz verbessert.</p>
+<p>Durch die Zuordnung von Entitäten zu verschiedenen Partitionen können Sie Entitätsgruppen bilden. Sie können Suchvorgänge und Abfragen in bestimmten Partitionen durchführen, sodass Milvus Entitäten in anderen Partitionen ignoriert und die Sucheffizienz verbessert wird.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/manage-partitions.md">„Partitionen verwalten</a>“.</p>
 <h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -210,7 +209,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung verfügt standardmäßig über einen Shard. Sie können beim Erstellen einer Sammlung die geeignete Anzahl von Shards festlegen, basierend auf dem erwarteten Durchsatz und dem Volumen der in die Sammlung einzufügenden Daten.</p>
+    </button></h2><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung verfügt standardmäßig über einen Shard. Sie können bei der Erstellung einer Sammlung die geeignete Anzahl von Shards festlegen, basierend auf dem erwarteten Durchsatz und dem Volumen der in die Sammlung einzufügenden Daten.</p>
 <p>Weitere Informationen zum Festlegen der Shard-Anzahl finden Sie unter <a href="/docs/de/create-collection.md">„Sammlung erstellen</a>“.</p>
 <h2 id="Alias" class="common-anchor-header">Alias<button data-href="#Alias" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -260,5 +259,5 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Verteilte Datenbanksysteme verwenden in der Regel die Konsistenzstufe, um die Datenübereinstimmung zwischen Datenknoten und Replikaten zu definieren. Sie können separate Konsistenzstufen festlegen, wenn Sie eine Sammlung erstellen oder Ähnlichkeitssuchen innerhalb der Sammlung durchführen. Die verfügbaren Konsistenzstufen sind <strong>„Strong“</strong>, <strong>„Bounded Staleness“</strong>, <strong>„Session“</strong> und <strong>„Eventually</strong>“.</p>
+    </button></h2><p>Verteilte Datenbanksysteme verwenden in der Regel die Konsistenzstufe, um die Datenübereinstimmung zwischen Datenknoten und Replikaten zu definieren. Sie können beim Erstellen einer Sammlung oder bei der Durchführung von Ähnlichkeitssuchen innerhalb der Sammlung separate Konsistenzstufen festlegen. Die verfügbaren Konsistenzstufen sind <strong>„Strong“</strong>, <strong>„Bounded Staleness“</strong>, <strong>„Session“</strong> und <strong>„Eventually</strong>“.</p>
 <p>Einzelheiten zu diesen Konsistenzstufen finden Sie unter <a href="/docs/de/tune_consistency.md">„Konsistenzstufe</a>“.</p>

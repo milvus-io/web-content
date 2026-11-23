@@ -308,10 +308,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Membuat indeks pada bidang tertentu akan mempercepat pencarian terhadap bidang tersebut. Indeks mencatat urutan entitas dalam suatu koleksi. Seperti yang ditunjukkan dalam potongan kode berikut, Anda dapat menggunakan <code translate="no">metric_type</code> dan <code translate="no">index_type</code> untuk memilih metode yang sesuai agar Milvus mengindeks suatu bidang dan mengukur kemiripan antara embedding vektor.</p>
-<p>Di Milvus, Anda dapat menggunakan <code translate="no">AUTOINDEX</code> sebagai jenis indeks untuk semua bidang vektor, dan salah satu dari <code translate="no">COSINE</code>, <code translate="no">L2</code>, dan <code translate="no">IP</code> sebagai jenis metrik sesuai kebutuhan Anda.</p>
-<p>Sebagaimana ditunjukkan dalam potongan kode di atas, Anda perlu menetapkan baik tipe indeks maupun tipe metrik untuk bidang vektor, sedangkan untuk bidang skalar cukup menetapkan tipe indeks saja. Indeks wajib ada untuk bidang vektor, dan disarankan untuk membuat indeks pada bidang skalar yang sering digunakan dalam kondisi penyaringan.</p>
-<p>Untuk detailnya, lihat <a href="/docs/id/index-vector-fields.md">Membuat Indeks</a> pada <a href="/docs/id/index-vector-fields.md">Bidang Vektor</a> dan <a href="/docs/id/index-scalar-fields.md">Membuat Indeks pada Bidang Skalar</a>.</p>
+    </button></h2><p>Contoh di bawah ini menyiapkan definisi indeks untuk bidang-bidang skema. Pilih indeks vektor dan metrik yang kompatibel dengan tipe data bidang vektor; lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a> dan <a href="/docs/id/metric.md">Metrik Kesamaan</a>.</p>
+<p>Bidang vektor memerlukan indeks sebelum dimuat. Indeks skalar bersifat opsional; lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a> untuk kompatibilitas bidang dan pemilihan tipe secara eksplisit atau otomatis.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -836,7 +834,7 @@ curl --request POST \
 <p>Sebagai pedoman umum, pertimbangkan hal-hal berikut saat mengatur jumlah shard:</p>
 <ul>
 <li><strong>Ukuran data:</strong> Praktik umum adalah memiliki satu shard untuk setiap 200 juta entitas. Anda juga dapat memperkirakan berdasarkan ukuran data total, misalnya, menambahkan satu shard untuk setiap 100 GB data yang akan Anda masukkan.</li>
-<li><strong>Pemanfaatan node stream:</strong> Jika instance Milvus Anda memiliki beberapa node stream, disarankan untuk menggunakan beberapa shard. Hal ini memastikan bahwa beban kerja penyisipan data didistribusikan ke seluruh node stream yang tersedia, sehingga mencegah beberapa node menjadi menganggur sementara yang lain kelebihan beban.</li>
+<li><strong>Pemanfaatan node stream:</strong> Jika instance Milvus Anda memiliki beberapa node stream, disarankan untuk menggunakan beberapa shard. Hal ini memastikan bahwa beban kerja penyisipan data didistribusikan ke seluruh node stream yang tersedia, sehingga mencegah beberapa node menjadi tidak aktif sementara yang lain kelebihan beban.</li>
 </ul>
 <p>Potongan kode berikut menunjukkan cara mengatur jumlah shard saat Anda membuat koleksi.</p>
 <div class="multipleCode">
@@ -952,7 +950,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus mengaktifkan mmap pada semua koleksi secara default, sehingga Milvus dapat memetakan data bidang mentah ke dalam memori alih-alih memuatnya sepenuhnya. Hal ini mengurangi penggunaan memori dan meningkatkan kapasitas koleksi. Contoh berikut menonaktifkan mmap untuk satu koleksi; untuk detail mengenai mmap, lihat <a href="/docs/id/mmap.md">Menggunakan mmap</a>.</p>
+    </button></h3><p>Milvus mengaktifkan mmap pada semua koleksi secara default, sehingga Milvus dapat memetakan data bidang mentah ke dalam memori alih-alih memuatnya sepenuhnya. Hal ini mengurangi penggunaan memori dan meningkatkan kapasitas koleksi. Contoh berikut menonaktifkan mmap untuk satu koleksi; untuk detail mengenai mmap, lihat <a href="/docs/id/mmap.md">Gunakan mmap</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1322,4 +1320,4 @@ curl --request POST \
         ></path>
       </svg>
     </button></h3><p>Bidang dinamis dalam sebuah koleksi adalah bidang JavaScript Object Notation (JSON) yang dicadangkan bernama <strong>$meta</strong>. Setelah Anda mengaktifkan bidang ini, Milvus akan menyimpan semua bidang yang tidak didefinisikan dalam skema yang terdapat dalam setiap entitas beserta nilainya sebagai pasangan kunci-nilai di bidang yang dicadangkan tersebut.</p>
-<p>Untuk detail mengenai cara menggunakan bidang dinamis, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Untuk detail tentang cara menggunakan bidang dinamis, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>

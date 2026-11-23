@@ -2,10 +2,8 @@
 id: users_and_roles.md
 title: إنشاء المستخدمين والأدوار
 summary: >-
-  يحقق Milvus تحكمًا دقيقًا في الوصول من خلال نموذج RBAC. يمكنك البدء بإنشاء
-  مستخدمين وأدوار، ثم تعيين امتيازات أو مجموعات امتيازات للأدوار، وأخيرًا إدارة
-  التحكم في الوصول من خلال منح الأدوار للمستخدمين. تضمن هذه الطريقة كفاءة وأمان
-  إدارة الوصول. تشرح هذه الصفحة كيفية إنشاء المستخدمين والأدوار في Milvus.
+  يتحكم Milvus في الوصول من خلال نموذج RBAC: حيث تُمنح الامتيازات للأدوار،
+  وتُمنح الأدوار للمستخدمين. تشرح هذه الصفحة كيفية إنشاء المستخدمين والأدوار.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">إنشاء المستخدمين والأدوار<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد تهيئة مثيل Milvus، يتم إنشاء مستخدم جذر تلقائيًا للمصادقة عند الاتصال بـ Milvus لأول مرة. اسم المستخدم للمستخدم الجذر هو <code translate="no">root</code> وكلمة المرور هي <code translate="no">Milvus</code>. الدور الافتراضي للمستخدم الجذر هو <code translate="no">admin</code> ، والذي يتمتع بحق الوصول إلى جميع الموارد. لضمان أمن البيانات، يرجى الحفاظ على بيانات اعتماد المستخدم الجذر في مكان آمن لمنع الوصول غير المصرح به.</p>
+    </button></h2><p>بعد تهيئة مثيل Milvus، يتم إنشاء مستخدم جذر تلقائيًا للمصادقة عند الاتصال بـ Milvus لأول مرة. اسم المستخدم للمستخدم الجذر هو <code translate="no">root</code> وكلمة المرور هي <code translate="no">Milvus</code>. بشكل افتراضي، لا يرتبط المستخدم الجذر بأي دور ويتخطى عمليات التحقق من الامتيازات، لذا فإنه يتمتع بحق الوصول إلى جميع الموارد. يتحكم الإعداد <code translate="no">common.security.rootShouldBindRole</code> ، الذي يكون افتراضيًا <code translate="no">false</code> ، في هذا السلوك. لضمان أمن البيانات، يرجى الحفاظ على بيانات اعتماد المستخدم الجذر في مكان آمن لمنع الوصول غير المصرح به.</p>
 <p>بالنسبة للعمليات اليومية، نوصي بإنشاء مستخدمين بدلاً من استخدام المستخدم الجذر.</p>
 <h3 id="Create-a-user" class="common-anchor-header">إنشاء مستخدم<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +55,7 @@ summary: >-
       </svg>
     </button></h3><p>قم بتسجيل الدخول باستخدام <code translate="no">root</code> وأنشئ مستخدمًا باسم المستخدم <code translate="no">user_1</code> وكلمة المرور <code translate="no">P@ssw0rd</code>. عند اختيار بيانات الاعتماد، اتبع القواعد التالية:</p>
 <ul>
-<li><p>اسم المستخدم: يجب أن يبدأ بحرف، ولا يمكن أن يتضمن سوى الأحرف الكبيرة أو الصغيرة والأرقام وعلامات التسطير السفلية.</p></li>
+<li><p>اسم المستخدم: يجب أن يبدأ بحرف أو شرطة سفلية، ولا يمكن أن يتضمن سوى الأحرف الكبيرة أو الصغيرة، والأرقام، والشرطات السفلية (<code translate="no">_</code>)، وأي أحرف إضافية تم تكوينها في <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> بشكل افتراضي).</p></li>
 <li><p>كلمة المرور: يجب أن يتراوح طولها بين 6 و72 بايت UTF-8 بشكل افتراضي. قد يتم تكوين <a href="/docs/ar/authenticate.md#Password-requirements">حدود</a> مختلفة <a href="/docs/ar/authenticate.md#Password-requirements">لطول كلمة المرور</a> في عملية النشر الخاصة بك.</p></li>
 </ul>
 <div class="multipleCode">
@@ -98,7 +96,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -159,7 +157,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>أعد استخدام الاتصال من مثال create-user لتحديث كلمة مرور <code translate="no">user_1</code> من <code translate="no">P@ssw0rd</code> إلى <code translate="no">NewP@ssw0rd</code>. أدخل كلمة المرور الحالية واختر كلمة مرور جديدة تستوفي نفس <a href="/docs/ar/authenticate.md#Password-requirements">متطلبات كلمة المرور</a>.</p>
+    </button></h3><p>أعد استخدام الاتصال من مثال إنشاء المستخدم لتحديث كلمة مرور <code translate="no">user_1</code> من <code translate="no">P@ssw0rd</code> إلى <code translate="no">NewP@ssw0rd</code>. أدخل كلمة المرور الحالية واختر كلمة مرور جديدة تستوفي نفس <a href="/docs/ar/authenticate.md#Password-requirements">متطلبات كلمة المرور</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -210,7 +208,7 @@ client.updatePassword(updatePasswordReq);
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>إذا نسيت كلمة المرور الحالية، يمكن للمستخدم المتميز الذي تم تكوينه إعادة تعيينها. راجع <a href="/docs/ar/authenticate.md#Update-user-password">تحديث كلمة مرور المستخدم</a>.</p>
-<h3 id="List-users" class="common-anchor-header">سرد المستخدمين<button data-href="#List-users" class="anchor-icon" translate="no">
+<h3 id="List-users" class="common-anchor-header">قائمة المستخدمين<button data-href="#List-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -272,7 +270,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يوفر Milvus دورًا مدمجًا يسمى <code translate="no">admin</code> ، وهو دور إداري يمكنه الوصول إلى الموارد الموجودة ضمن جميع المثيلات ويتمتع بامتيازات لجميع العمليات. من أجل إدارة وصول أكثر دقة وأمانًا محسّنًا للبيانات، يُوصى بإنشاء أدوار مخصصة بناءً على احتياجاتك.</p>
+    </button></h2><p>يوفر Milvus دورًا مدمجًا يسمى <code translate="no">admin</code> ، وهو دور إداري يمكنه الوصول إلى الموارد الموجودة ضمن جميع المثيلات ويتمتع بامتيازات لجميع العمليات. لإدارة الوصول بشكل أكثر دقة وتعزيز أمان البيانات، يُنصح بإنشاء أدوار مخصصة بناءً على احتياجاتك.</p>
 <h3 id="Create-a-role" class="common-anchor-header">إنشاء دور<button data-href="#Create-a-role" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,7 +289,7 @@ client.list_users()
     </button></h3><p>يوضح المثال التالي كيفية إنشاء دور باسم <code translate="no">role_a</code>.</p>
 <p>يجب أن يتبع اسم الدور القاعدة التالية:</p>
 <ul>
-<li>يجب أن يبدأ بحرف، ولا يمكن أن يتضمن سوى الأحرف الكبيرة أو الصغيرة والأرقام وعلامات التسطير السفلية.</li>
+<li>يجب أن يبدأ بحرف أو شرطة سفلية، ولا يمكن أن يتضمن سوى الأحرف الكبيرة أو الصغيرة، والأرقام، والشرطات السفلية، والأحرف الموجودة في <code translate="no">proxy.roleNameValidation.allowedChars</code> (<code translate="no">$</code> بشكل افتراضي).</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -310,6 +308,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -330,7 +329,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">سرد الأدوار<button data-href="#List-roles" class="anchor-icon" translate="no">
+<h3 id="List-roles" class="common-anchor-header">قائمة الأدوار<button data-href="#List-roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -345,7 +344,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>بعد إنشاء عدة أدوار، يمكنك سرد جميع الأدوار الموجودة وعرضها.</p>
+    </button></h3><p>بعد إنشاء عدة أدوار، يمكنك سرد وعرض جميع الأدوار الموجودة.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -376,6 +375,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>فيما يلي مثال على الناتج. <code translate="no">admin</code> هو الدور الافتراضي في Milvus. <code translate="no">role_a</code> هو الدور الجديد الذي تم إنشاؤه للتو.</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>فيما يلي مثال على الناتج. <code translate="no">admin</code> و <code translate="no">public</code> هما الأدوار الافتراضية التي ينشئها Milvus. <code translate="no">role_a</code> هو الدور الجديد الذي تم إنشاؤه للتو.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

@@ -37,7 +37,7 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Backup ha una propria versione di rilascio, separata dalla versione del server Milvus. Le guide attuali coprono la serie 0.6.x; la sezione Backup 0.5.x conserva i flussi di lavoro precedenti. Le etichette nei titoli delle pagine identificano la serie di Backup applicabile. Le istruzioni di installazione e gli esempi utilizzano una versione specifica convalidata. Verifica separatamente la compatibilità tra il server Milvus di origine e quello di destinazione.</p>
+    </button></h2><p>Milvus Backup ha una propria versione di rilascio, separata dalla versione del server Milvus. Le guide attuali coprono la serie 0.6.x; la sezione Backup 0.5.x conserva i flussi di lavoro precedenti. Le etichette nei titoli delle pagine identificano la serie di Backup applicabile. Le istruzioni di installazione e gli esempi utilizzano una versione specifica e convalidata. Verifica separatamente la compatibilità tra il server Milvus di origine e quello di destinazione.</p>
 <table>
 <thead>
 <tr><th>Il tuo compito</th><th>Guida</th></tr>
@@ -99,12 +99,12 @@ title: Milvus Backup
 <tbody>
 <tr><td><code translate="no">snapshot</code></td><td>Milvus esporta un pacchetto di snapshot della collezione. Milvus Backup registra le informazioni del pacchetto e, durante il ripristino, importa il pacchetto tramite Milvus. Il server gestisce la struttura dei dati risultante.</td></tr>
 <tr><td><code translate="no">binlog</code></td><td>Milvus Backup copia i file di dati e i metadati delle collezioni, quindi ricrea le collezioni e importa i dati di backup durante il ripristino.</td></tr>
-<tr><td><code translate="no">auto</code></td><td>Selezionare il formato in base alle funzionalità supportate dal server. Su Milvus 3.0, viene selezionato lo snapshot.</td></tr>
+<tr><td><code translate="no">auto</code></td><td>Seleziona il formato in base alle funzionalità supportate dal server. Su Milvus 3.0, seleziona lo snapshot.</td></tr>
 </tbody>
 </table>
-<p>Una directory di backup contiene i metadati e i file richiesti dal proprio formato. Conservare la directory completa durante l’archiviazione o lo spostamento. Non dare per scontato che un backup di snapshot utilizzi la struttura della directory binlog.</p>
+<p>Una directory di backup contiene i metadati e i file richiesti dal relativo formato. Conservare la directory completa durante l’archiviazione o lo spostamento. Non dare per scontato che un backup di snapshot utilizzi la struttura della directory binlog.</p>
 <p>Nella versione 0.6.0, le impostazioni predefinite di " <code translate="no">create --for</code> " configurano opzioni specifiche per lo scopo: " <code translate="no">clone</code> " mantiene il formato scelto, mentre " <code translate="no">archive</code> " e " <code translate="no">secondary</code> " richiedono il binlog. Un server secondario richiede inoltre una topologia di replica configurata; la normale migrazione tra istanze non richiede un server secondario. Vedere <a href="/docs/it/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">"Scegliere un formato di backup o uno scopo</a>".</p>
-<p>La versione 0.6.0 di Backup ignora le raccolte esterne durante il backup. Il completamento con successo di un'attività non implica che i dati delle raccolte esterne siano stati inclusi.</p>
+<p>Backup 0.6.0 ignora le raccolte esterne durante il backup. Il completamento con esito positivo di un'attività non implica che siano stati inclusi i dati delle raccolte esterne.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">Matrice di compatibilità<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -122,7 +122,7 @@ title: Milvus Backup
       </svg>
     </button></h2><p><strong>Backup 0.6.0 non richiede l’aggiornamento di ogni installazione di Milvus alla versione 3.0.</strong> Supporta i flussi di lavoro basati su binlog sulle versioni supportate di Milvus 2.x. Il supporto ufficiale per il backup e il ripristino della linea Milvus 3.0 inizia con <strong>Milvus 3.0.1</strong>; l’esempio di snapshot utilizza tale linea.</p>
 <p><a href="/docs/it/milvus_backup_upgrade.md">La guida all’aggiornamento</a> è stata verificata con Backup 0.5.16 e 0.6.0 su Milvus 2.6.11, compreso il ripristino di un backup 0.5.16 tramite la versione 0.6.0. Questa combinazione testata non amplia la matrice riportata di seguito.</p>
-<p>Le versioni di Milvus di origine e di destinazione devono formare una coppia supportata. Una versione di destinazione più recente, di per sé, non garantisce la compatibilità. La seguente matrice di compatibilità storica copre Milvus 2.x, come documentato a partire da Milvus Backup 0.5.7; non garantisce la compatibilità per la migrazione da 2.x a 3.0.</p>
+<p>Le versioni di Milvus di origine e di destinazione devono formare una coppia supportata. Una versione di destinazione più recente, di per sé, non garantisce la compatibilità. La seguente matrice di compatibilità storica copre Milvus 2.x, come documentato a partire da Milvus Backup 0.5.7; non stabilisce la compatibilità per la migrazione da 2.x a 3.0.</p>
 <table>
 <thead>
 <tr><th>Backup da ↓ / Ripristino su →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>

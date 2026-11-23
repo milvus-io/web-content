@@ -64,7 +64,7 @@ summary: >-
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
   <span class="hljs-attr">kafka:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:2.13-2.8.1</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
     <span class="hljs-attr">ports:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
@@ -72,8 +72,6 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then you can start the Kafka service with the following command:</p>
@@ -109,12 +107,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>And set the following parameters:</p>
+<p>Create a <code translate="no">user.yaml</code> file in the same directory as your <code translate="no">docker-compose.yaml</code> file and set the following parameters in it. Milvus loads <code translate="no">configs/user.yaml</code> after <code translate="no">configs/milvus.yaml</code>, so the values in <code translate="no">user.yaml</code> override the defaults:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -135,7 +130,7 @@ summary: >-
 <p>Then you can start Milvus with the following command:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Connect Milus to Kafka with SASL/PLAIN Alone<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Connect Milvus to Kafka with SASL/PLAIN Alone<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,7 +145,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To start Kafka with SASL/PLAIN authentication, you need to add the <code translate="no">kafka_server_jass.conf</code> file with proper settings.</p>
+    </button></h2><p>To start Kafka with SASL/PLAIN authentication, you need to add the <code translate="no">kafka_server_jaas.conf</code> file with proper settings.</p>
 <h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. Start a Kafka service with SASL/PLAIN<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -199,11 +194,11 @@ summary: >-
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the <code translate="no">kafka_server_jass.conf</code> file, set the following parameters:</p>
+<p>In the <code translate="no">kafka_server_jaas.conf</code> file, set the following parameters:</p>
 <pre><code translate="no" class="language-conf">KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username=&quot;kafka&quot;
@@ -244,12 +239,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>And set the following parameters:</p>
+<p>Create a <code translate="no">user.yaml</code> file in the same directory as your <code translate="no">docker-compose.yaml</code> file and set the following parameters in it. Milvus loads <code translate="no">configs/user.yaml</code> after <code translate="no">configs/milvus.yaml</code>, so the values in <code translate="no">user.yaml</code> override the defaults:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -586,13 +578,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>And set the following parameters:</p>
+<p>Create a <code translate="no">user.yaml</code> file in the same directory as your <code translate="no">docker-compose.yaml</code> file and set the following parameters in it. Milvus loads <code translate="no">configs/user.yaml</code> after <code translate="no">configs/milvus.yaml</code>, so the values in <code translate="no">user.yaml</code> override the defaults:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -628,7 +617,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To connect Milvus to Kafka with SASL/PLAIN and SSL, you need to repeat the steps in <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus to Kafka with SASL/PLAIN Alone</a> and <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Alone</a>.</p>
+    </button></h2><p>To connect Milvus to Kafka with SASL/PLAIN and SSL, you need to repeat the steps in <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">Connect Milvus to Kafka with SASL/PLAIN Alone</a> and <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">Connect Milvus to Kafka with SSL Alone</a>.</p>
 <h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. Start a Kafka service with SASL/PLAIN and SSL<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -644,7 +633,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Use the <code translate="no">kafka_server_jass.conf</code> file mentioned in <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus to Kafka with SASL/PLAIN Alone</a> and the <code translate="no">my_secrets</code> folder generated in <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Alone</a> to start a Kafka service with SASL/PLAIN and SSL.</p>
+    </button></h3><p>Use the <code translate="no">kafka_server_jaas.conf</code> file mentioned in <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">Connect Milvus to Kafka with SASL/PLAIN Alone</a> and the <code translate="no">my_secrets</code> folder generated in <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">Connect Milvus to Kafka with SSL Alone</a> to start a Kafka service with SASL/PLAIN and SSL.</p>
 <p>The following <code translate="no">docker-compose.yaml</code> file can be used to start a Kafka service with SASL/PLAIN and SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
@@ -689,11 +678,11 @@ total 12
       <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
 
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then start the Kafka service with the following command:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
@@ -728,13 +717,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the following command to download a Milvus configuration file template:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>And set the following parameters:</p>
+<p>Create a <code translate="no">user.yaml</code> file in the same directory as your <code translate="no">docker-compose.yaml</code> file and set the following parameters in it. Milvus loads <code translate="no">configs/user.yaml</code> after <code translate="no">configs/milvus.yaml</code>, so the values in <code translate="no">user.yaml</code> override the defaults:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 

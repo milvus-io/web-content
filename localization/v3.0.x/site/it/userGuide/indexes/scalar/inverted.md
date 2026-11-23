@@ -1,14 +1,11 @@
 ---
 id: inverted.md
-title: INVERTITI
+title: INVERTITO
 summary: >-
-  Quando è necessario eseguire frequenti query con filtri sui propri dati, gli
-  indici INVERTITI possono migliorare notevolmente le prestazioni delle query.
-  Anziché eseguire una scansione di tutti i documenti, un indice invertito
-  individua rapidamente i record esatti che corrispondono alle condizioni di
-  filtro specificate.
+  Utilizzare gli indici INVERTED per il filtraggio in base al valore su campi
+  scalari, array e percorsi JSON tipizzati.
 ---
-<h1 id="INVERTED" class="common-anchor-header">INVERTITI<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">INVERTITO<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Quando è necessario eseguire frequenti query di filtraggio sui dati, gli indici " <code translate="no">INVERTED</code> " possono migliorare notevolmente le prestazioni delle query. Anziché eseguire la scansione di tutti i documenti, Milvus utilizza gli indici invertiti per individuare rapidamente i record esatti che corrispondono alle condizioni di filtro specificate.</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">Quando utilizzare gli indici INVERTITI<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">INVERTED</code> associa i valori dei campi alle entità che li contengono per accelerare il filtraggio scalare.</p>
+<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,14 +36,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizza gli indici INVERTITI quando devi:</p>
-<ul>
-<li><p><strong>Filtrare in base a valori specifici</strong>: trovare tutti i record in cui un campo è uguale a un valore specifico (ad es., <code translate="no">category == &quot;electronics&quot;</code>)</p></li>
-<li><p><strong>Filtrare contenuti testuali</strong>: eseguire ricerche efficienti su campi <code translate="no">VARCHAR</code> </p></li>
-<li><p><strong>Interrogare i valori dei campi JSON</strong>: filtrare in base a chiavi specifiche all’interno delle strutture JSON</p></li>
-</ul>
-<p><strong>Vantaggi in termini di prestazioni</strong>: gli indici INVERTED possono ridurre il tempo di esecuzione delle query da secondi a millisecondi su set di dati di grandi dimensioni, eliminando la necessità di eseguire scansioni complete delle raccolte.</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">Come funzionano gli indici INVERTED<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+    </button></h2><p><a id="When-to-use-INVERTED-indexes"></a></p>
+<p>Utilizzare <code translate="no">INVERTED</code> per filtri di uguaglianza, appartenenza e intervallo su campi compatibili o percorsi JSON, come ad esempio <code translate="no">category == &quot;electronics&quot;</code>.</p>
+<p><a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a></p>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Obiettivi dell’indice e filtri<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,21 +57,80 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un <strong>indice INVERTED</strong> in Milvus associa ogni valore univoco di un campo (termine) all’insieme di ID dei documenti in cui tale valore compare. Questa struttura consente ricerche veloci per campi con valori ripetuti o categorici.</p>
-<p>Come mostrato nel diagramma, il processo si svolge in due fasi:</p>
-<ol>
-<li><p><strong>Mappatura diretta (ID → Termine):</strong> ogni ID documento punta al valore di campo che contiene.</p></li>
-<li><p><strong>Mappatura inversa (Term → ID):</strong> Milvus raccoglie i termini univoci e costruisce una mappatura inversa da ciascun termine a tutti gli ID che lo contengono.</p></li>
-</ol>
-<p>Ad esempio, il valore <strong>“elettronica”</strong> è associato agli ID <strong>1</strong> e <strong>3</strong>, mentre <strong>“libri”</strong> è associato agli ID <strong>2</strong> e <strong>5</strong>.</p>
+    </button></h3><p>La tabella seguente abbina le destinazioni di indice supportate da " <code translate="no">INVERTED</code> " ai filtri che l’indice può aiutare a valutare:</p>
+<table>
+<thead>
+<tr><th>Destinazione dell’indice</th><th>Filtri che possono utilizzare l’indice</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> campo</td><td>Uguaglianza (<code translate="no">==</code>, <code translate="no">!=</code>) e appartenenza (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Campo numerico (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</td><td>Uguaglianza, appartenenza e intervalli (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> campo</td><td>Uguaglianza, appartenenza, intervalli, corrispondenza con prefissi come <code translate="no">name LIKE &quot;abc%&quot;</code> e LIKE generico come <code translate="no">name LIKE &quot;a%b_c&quot;</code>.</td></tr>
+<tr><td>Campo <code translate="no">ARRAY</code> ordinario con elementi <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> o <code translate="no">VARCHAR</code> </td><td>Contenimento degli elementi e confronti ammissibili tra interi array. Vedere <a href="/docs/it/array_data_type.md#Array-index-support">Supporto degli indici degli array</a>.</td></tr>
+<tr><td>Percorso JSON tipizzato</td><td>Filtri appropriati per il cast indicizzato. Specificare i parametri del percorso e del cast; vedere <a href="/docs/it/json-indexing.md#Understand-cast-types">Indicizzazione JSON</a> per la compatibilità dei cast e <a href="/docs/it/json-indexing.md#Supported-filters">i dettagli sui filtri JSON</a> per il comportamento delle query.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Gli indici scalari, incluso <code translate="no">AUTOINDEX</code>, non supportano campi ARRAY ricorsivi o array con elementi nullabili. Vedere <a href="/docs/it/array_data_type.md#Array-index-support">Supporto</a> per <a href="/docs/it/array_data_type.md#Array-index-support">gli indici di array</a> per i filtri di array ordinari e <a href="/docs/it/index-structarray-fields.md#Create-scalar-indexes">Indicizzazione dei campi StructArray</a> per le regole relative ai sottocampi.</p>
+</blockquote>
+</div>
+<p>I filtri semplici di suffisso (<code translate="no">LIKE &quot;%abc&quot;</code>) e di sottostringa (<code translate="no">LIKE &quot;%abc%&quot;</code>) utilizzano un percorso di scansione, anche se modelli LIKE più complessi possono utilizzare questo indice. I filtri Regex non utilizzano la ricerca diretta del modello INVERTED. Queste regole si applicano dopo <a href="/docs/it/pattern-matching.md#Accelerate-pattern-matching-with-indexes">le semplificazioni della pianificazione della query</a>.</p>
+<p>Un indice scalare <code translate="no">INVERTED</code> non abilita la ricerca <code translate="no">TEXT_MATCH</code> o <code translate="no">PHRASE_MATCH</code> basata sui token; si veda <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Si tratta di funzionalità dell’indice, non di limiti alle espressioni di filtro valide. Vedere <a href="/docs/it/scalar_index.md#Filter-execution">Indice scalare</a> per i vincoli di ricerca condivisa. Per i test <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> e NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), vedere <a href="/docs/it/basic-operators.md">Operatori di base</a>.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Considerazioni sulla memoria<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per una stima approssimativa della memoria caricata, utilizzare <code translate="no">S</code> byte, dove <code translate="no">S</code> è la dimensione dell’indice creato prima della compressione in memoria. Creare un indice su dati rappresentativi per ottenere <code translate="no">S</code>; la dimensione grezza dei dati dei campi non è un sostituto.</p>
+<p>Queste stime approssimative riguardano la memoria dell’indice caricato con la mappatura della memoria disabilitata. Calcolarle per segmento, quindi sommarle tra i segmenti caricati e le repliche.</p>
+<div class="alert note">
+<blockquote>
+<p>Prevedere memoria aggiuntiva per i dati dei campi caricati, gli indici vettoriali, l’overhead delle collezioni e degli indici e le allocazioni temporanee. Verificare con dati e query rappresentativi; gli array, i JSON, i formati di indice meno recenti e la mappatura di memoria richiedono misurazioni separate.</p>
+</blockquote>
+</div>
+<p><a id="How-INVERTED-indexes-work"></a></p>
+<h3 id="How-INVERTED-works" class="common-anchor-header">Come funziona INVERTED<button data-href="#How-INVERTED-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Visualizza un esempio di ricerca di un valore</strong></summary></p>
+<p>Un indice invertito inverte la mappatura dagli ID delle entità ai valori dei campi. Nel diagramma, <strong>“elettronica”</strong> è mappato agli ID <strong>1</strong> e <strong>3</strong>, mentre <strong>“libri”</strong> è mappato agli ID <strong>2</strong> e <strong>5</strong>.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" /> 
    <span>Come funziona l’indice invertito</span>
   
  </span></p>
-<p>Quando si filtra in base a un valore specifico (ad es., <code translate="no">category == &quot;electronics&quot;</code>), Milvus cerca semplicemente il termine nell’indice e recupera direttamente gli ID corrispondenti. Ciò evita di scansionare l’intero set di dati e consente un filtraggio veloce, specialmente per valori categoriali o ripetuti.</p>
-<p>Gli indici INVERTED supportano tutti i tipi di campi scalari, quali <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong> e <strong>ARRAY</strong>. Tuttavia, i parametri di indicizzazione per un campo JSON sono leggermente diversi rispetto a quelli dei normali campi scalari.</p>
+<p>Per <code translate="no">category == &quot;electronics&quot;</code>, Milvus recupera gli ID <strong>1</strong> e <strong>3</strong> dall’indice anziché verificare la categoria di ogni entità.</p>
+<p></details></p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">Creazione di indici su campi non JSON<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +146,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per creare un indice su un campo non JSON, procedere come segue:</p>
+    </button></h2><p>Per creare un indice su un campo non JSON, segui questi passaggi:</p>
 <ol>
 <li><p>Preparare i parametri dell’indice:</p>
 <p><div class="multipleCode">
@@ -162,7 +217,7 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Aggiungere l’indice <code translate="no">INVERTED</code>:</p>
+<li><p>Aggiungi l’indice ` <code translate="no">INVERTED</code> `:</p>
 <p><div class="multipleCode">
 <a href="#python">Python</a>
 <a href="#java">Java</a>
@@ -469,12 +524,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizzare il metodo ` <code translate="no">drop_index()</code> ` per rimuovere un indice esistente da una collezione.</p>
+    </button></h2><p>Utilizzare il metodo ` <code translate="no">drop_index()</code> ` per rimuovere un indice esistente da una raccolta.</p>
 <div class="alert note">
-<ul>
-<li><p>Nella <strong>versione 2.6.3</strong> o precedenti, è necessario liberare la collezione prima di eliminare un indice scalare.</p></li>
-<li><p>A partire <strong>dalla versione 2.6.4</strong> o successive, è possibile eliminare direttamente un indice scalare una volta che non è più necessario, senza dover prima liberare la collezione.</p></li>
-</ul>
+<blockquote>
+<p>Per i requisiti di rilascio relativi all’eliminazione di un indice scalare, consultare <a href="/docs/it/scalar_index.md#Drop-index-compatibility">Indice scalare</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -571,7 +625,8 @@ curl --request POST \
     &quot;indexName&quot;: &quot;category_index&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Best-practices" class="common-anchor-header">Migliori pratiche<button data-href="#Best-practices" class="anchor-icon" translate="no">
+<p><a id="Best-practices"></a></p>
+<h2 id="Next-steps" class="common-anchor-header">Passi successivi<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -587,27 +642,6 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Creare gli indici dopo aver caricato i dati</strong>: creare indici su collezioni che contengono già dati per ottenere prestazioni migliori</p></li>
-<li><p><strong>Utilizzare nomi descrittivi per gli indici</strong>: scegliere nomi che indichino chiaramente il campo e lo scopo</p></li>
-<li><p><strong>Monitorare le prestazioni degli indici</strong>: verificare le prestazioni delle query prima e dopo la creazione degli indici</p></li>
-<li><p><strong>Considerare i modelli di query</strong>: creare indici sui campi in base ai quali si effettuano frequentemente i filtri</p></li>
-</ul>
-<h2 id="Next-steps" class="common-anchor-header">Prossimi passi<button data-href="#Next-steps" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Scopri <a href="/docs/it/index-explained.md">altri tipi</a> di <a href="/docs/it/index-explained.md">indici</a></p></li>
-<li><p>Consulta la sezione " <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a> " per scenari avanzati di indicizzazione JSON</p></li>
+<li><p>Confronta gli indici scalari e pianifica le risorse in <a href="/docs/it/scalar_index.md#Whats-next">Indice scalare</a>.</p></li>
+<li><p>Vedere <a href="/docs/it/json-indexing.md">Indicizzazione JSON</a> per scenari avanzati di indicizzazione JSON</p></li>
 </ul>

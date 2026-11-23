@@ -27,8 +27,8 @@ beta: Milvus 2.5.17+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La recherche par expression exacte vous permet de rechercher des documents contenant les termes de votre requête sous la forme d'une expression exacte. Par défaut, les mots doivent apparaître dans le même ordre et être directement adjacents les uns aux autres. Par exemple, une requête sur <strong>« robotique apprentissage automatique »</strong> correspond à un texte tel que <em>« …modèles typiques d’apprentissage automatique en robotique… »</em>, où les mots <strong>« robotique »</strong>, <strong>« apprentissage »</strong> et <strong>« automatique »</strong> apparaissent dans cet ordre, sans aucun autre mot entre eux.</p>
-<p>Cependant, dans la pratique, la correspondance exacte d’expressions peut s’avérer trop rigide. Vous pourriez souhaiter trouver des textes tels que <em>« …modèles d’apprentissage automatique largement adoptés en robotique… ».</em> Ici, les mêmes mots-clés sont présents, mais ils ne sont ni côte à côte ni dans l’ordre d’origine. Pour remédier à cela, la correspondance d’expressions prend en charge un paramètre « <code translate="no">slop</code> », qui apporte une certaine flexibilité. La valeur « <code translate="no">slop</code> » définit le nombre de décalages positionnels autorisés entre les termes de l’expression. Par exemple, avec une valeur « <code translate="no">slop</code> » de 1, une requête sur <strong>« machine learning »</strong> peut correspondre à un texte tel que <em>« …machine deep learning… »</em>, où un mot (<strong>« deep »</strong>) sépare les termes d’origine.</p>
+    </button></h1><p>La recherche d'expressions vous permet de rechercher des documents contenant les termes de votre requête sous forme d'expression exacte. Par défaut, les mots doivent apparaître dans le même ordre et être directement adjacents les uns aux autres. Par exemple, une requête sur <strong>« robotique apprentissage automatique »</strong> correspond à un texte tel que <em>« …modèles typiques d’apprentissage automatique en robotique… »</em>, où les mots <strong>« robotique »</strong>, <strong>« apprentissage »</strong> et <strong>« automatique »</strong> apparaissent dans cet ordre, sans aucun autre mot entre eux.</p>
+<p>Cependant, dans la pratique, la correspondance exacte d’expressions peut s’avérer trop rigide. Vous pourriez souhaiter trouver des textes tels que <em>« …modèles d’apprentissage automatique largement adoptés en robotique… ».</em> Ici, les mêmes mots-clés sont présents, mais ils ne sont pas côte à côte ni dans l’ordre d’origine. Pour remédier à cela, la correspondance d’expressions prend en charge un paramètre « <code translate="no">slop</code> », qui apporte une certaine flexibilité. La valeur « <code translate="no">slop</code> » définit le nombre de décalages positionnels autorisés entre les termes de l’expression. Par exemple, avec une valeur « <code translate="no">slop</code> » égale à 1, une requête sur <strong>« machine learning »</strong> peut correspondre à un texte tel que <em>« …machine deep learning… »</em>, où un mot (<strong>« deep »</strong>) sépare les termes d’origine.</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +53,7 @@ beta: Milvus 2.5.17+
  </span></p>
 <ol>
 <li><p><strong>Tokenisation du document</strong>: lorsque vous importez des documents dans Milvus, le texte est divisé en tokens (mots ou termes individuels) à l’aide d’un analyseur, et les informations de position sont enregistrées pour chaque token. Par exemple, <strong>doc_1</strong> est tokenisé en <strong>[« machine » (pos=0), « learning » (pos=1), « boosts » (pos=2), « efficiency » (pos=3)]</strong>. Pour plus d’informations sur les analyseurs, consultez <a href="/docs/fr/v2.6.x/analyzer-overview.md">la section Présentation des analyseurs</a>.</p></li>
-<li><p><strong>Création d’un index inversé</strong>: Milvus construit un index inversé, en associant chaque token au(x) document(s) dans lequel (lesquels) il apparaît ainsi qu’aux positions de ce token dans ces documents.</p></li>
+<li><p><strong>Création d’un index inversé</strong>: Milvus construit un index inversé, en associant chaque token au ou aux documents dans lesquels il apparaît, ainsi qu’aux positions de ce token dans ces documents.</p></li>
 <li><p><strong>Correspondance de phrases</strong>: Lorsqu’une requête par phrase est exécutée, Milvus recherche chaque token dans l’index inversé et vérifie leurs positions afin de déterminer s’ils apparaissent dans le bon ordre et à la bonne proximité. Le paramètre ` <code translate="no">slop</code> ` contrôle le nombre maximal de positions autorisées entre les tokens correspondants :</p>
 <ul>
 <li><p><strong>slop = 0</strong> signifie que les tokens doivent apparaître <strong>dans l’ordre exact et être immédiatement adjacents</strong> (c’est-à-dire sans mot supplémentaire entre eux).</p>
@@ -139,8 +139,8 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La précision de la correspondance de phrases dépend fortement de l’analyseur utilisé pour tokeniser vos données textuelles. Différents analyseurs conviennent à différentes langues et différents formats de texte, ce qui influe sur la tokenisation et la précision positionnelle. Le choix d’un analyseur adapté à votre cas d’utilisation spécifique optimisera vos résultats de correspondance de phrases.</p>
-<p>Par défaut, Milvus utilise l’analyseur standard, qui tokenise le texte en fonction des espaces et de la ponctuation, supprime les tokens de plus de 40 caractères et convertit le texte en minuscules. Aucun paramètre supplémentaire n’est requis pour une utilisation par défaut. Reportez-vous à <a href="/docs/fr/v2.6.x/standard-analyzer.md">la section Analyseur standard</a> pour plus de détails.</p>
+    </button></h3><p>La précision de la correspondance de phrases dépend fortement de l’analyseur utilisé pour tokeniser vos données textuelles. Différents analyseurs conviennent à différentes langues et à différents formats de texte, ce qui influe sur la tokenisation et la précision positionnelle. Le choix d’un analyseur adapté à votre cas d’utilisation spécifique optimisera vos résultats de correspondance de phrases.</p>
+<p>Par défaut, Milvus utilise l’analyseur standard, qui tokenise le texte en fonction des espaces et de la ponctuation et convertit le texte en minuscules. Aucun paramètre supplémentaire n’est requis pour une utilisation par défaut. Reportez-vous à <a href="/docs/fr/v2.6.x/standard-analyzer.md">la section Analyseur standard</a> pour plus de détails.</p>
 <p>Si votre application nécessite un analyseur spécifique, configurez-le à l’aide du paramètre ` <code translate="no">analyzer_params</code> `. Par exemple, voici comment configurer l’analyseur ` <code translate="no">english</code> ` pour la correspondance de phrases dans un texte en anglais :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define analyzer parameters for English-language tokenization</span>
 analyzer_params = {
@@ -202,7 +202,7 @@ schema.add_field(
 <ul>
 <li><p><code translate="no">0</code> (par défaut) : ne correspond qu’aux expressions exactes. Exemple : un filtre pour <strong>« machine learning »</strong> correspondra exactement à <strong>« machine learning »</strong>, mais pas à <strong>« machine boosts learning »</strong> ni à <strong>« learning machine ».</strong></p></li>
 <li><p><code translate="no">1</code>: Autorise des variations mineures, telles qu’un terme supplémentaire ou un léger décalage de position. Exemple : un filtre pour <strong>« machine learning »</strong> trouvera <strong>« machine boosts learning »</strong> (un token entre <strong>« machine »</strong> et <strong>« learning »</strong>), mais pas <strong>« learning machine »</strong> (termes inversés).</p></li>
-<li><p><code translate="no">2</code>: Autorise davantage de flexibilité, y compris l’inversion de l’ordre des termes ou jusqu’à deux tokens entre eux. Exemple : un filtre pour <strong>« machine learning »</strong> correspondra à <strong>« learning machine »</strong> (termes inversés) ou à <strong>« machine quickly boosts learning »</strong> (deux tokens entre <strong>« machine »</strong> et <strong>« learning »</strong>).</p></li>
+<li><p><code translate="no">2</code>: Autorise davantage de flexibilité, y compris l’inversion de l’ordre des termes ou jusqu’à deux tokens entre eux. Exemple : un filtre pour <strong>« machine learning »</strong> correspondra à <strong>« learning machine »</strong> (ordres des termes inversés) ou à <strong>« machine quickly boosts learning »</strong> (deux tokens entre <strong>« machine »</strong> et <strong>« learning »</strong>).</p></li>
 </ul></li>
 </ul>
 <h3 id="Example-dataset" class="common-anchor-header">Exemple de jeu de données<button data-href="#Example-dataset" class="anchor-icon" translate="no">
@@ -236,7 +236,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p>3</p></td>
-     <td><p>« Les architectures d'apprentissage profond optimisent les charges de calcul »</p></td>
+     <td><p>« Les architectures d’apprentissage profond optimisent les charges de calcul »</p></td>
    </tr>
    <tr>
      <td><p>4</p></td>
@@ -262,8 +262,8 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Lorsqu’on utilise la méthode ` <code translate="no">query()</code> `, ` <strong>PHRASE_MATCH</strong> ` agit comme un filtre scalaire. Seuls les documents contenant la phrase spécifiée (dans les limites de la tolérance autorisée) sont renvoyés.</p>
-<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Exemple : slop = 0 (correspondance exacte)</h4><p>Cet exemple renvoie les documents contenant l’expression exacte <strong>« machine learning »</strong> sans aucun token supplémentaire entre les deux.</p>
+    </button></h3><p>Lorsqu’on utilise la méthode ` <code translate="no">query()</code> `, ` <strong>PHRASE_MATCH</strong> ` agit comme un filtre scalaire. Seuls les documents contenant l’expression spécifiée (dans les limites de la tolérance autorisée) sont renvoyés.</p>
+<h4 id="Example-slop--0-exact-match" class="common-anchor-header">Exemple : slop = 0 (correspondance exacte)</h4><p>Cet exemple renvoie les documents contenant l’expression exacte <strong>« machine learning »</strong> sans aucun token supplémentaire entre les deux mots.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match documents containing exactly &quot;machine learning&quot;</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;PHRASE_MATCH(text, &#x27;machine learning&#x27;)&quot;</span>
 
@@ -285,7 +285,7 @@ result = client.query(
    </tr>
 </table>
 <p>Seul le document 1 contient l'expression exacte <strong>« machine learning »</strong> dans l'ordre spécifié, sans aucun token supplémentaire.</p>
-<h3 id="Search-with-phrase-match" class="common-anchor-header">Recherche avec correspondance de phrase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
+<h3 id="Search-with-phrase-match" class="common-anchor-header">Recherche par correspondance de phrase<button data-href="#Search-with-phrase-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -331,7 +331,7 @@ result_slop1 = client.search(
    </tr>
    <tr>
      <td><p>5</p></td>
-     <td><p>« L'apprentissage d'algorithmes avancés pour les machines élargit les capacités de l'IA »</p></td>
+     <td><p>« L'apprentissage d'algorithmes avancés étend les capacités de l'IA »</p></td>
    </tr>
 </table>
 <h4 id="Example-slop--2" class="common-anchor-header">Exemple : tolérance = 2</h4><p>Cet exemple autorise un slop de 2, ce qui signifie que jusqu’à deux tokens supplémentaires (ou termes inversés) sont autorisés entre les mots « <strong>machine »</strong> et « <strong>learning ».</strong></p>

@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li>Externe Sammlungen unterstützen derzeit das Hinzufügen von Feldern nach ihrer Erstellung. Andere Schemaänderungen, wie das Löschen von Feldern, das Umbenennen von Feldern, das Ändern von Felddatentypen, das Ändern von Vektordimensionen oder das Neuzuordnen von „ <code translate="no">external_field</code> “, werden nicht unterstützt.</li>
-<li>Sie können nur ein Feld hinzufügen, das bereits in der externen Datenquelle vorhanden ist. Dieser Vorgang ordnet ein vorhandenes externes Feld einem Milvus-Feld zu. Es wird dabei kein neues Feld in der externen Datenquelle erstellt und es erfolgt keine Nachvervollständigung der Quelldaten.</li>
+<li>Sie können nur ein Feld hinzufügen, das bereits in der externen Datenquelle vorhanden ist. Dieser Vorgang ordnet ein vorhandenes externes Feld einem Milvus-Feld zu. Es wird dabei kein neues Feld in der externen Datenquelle erstellt und es erfolgt keine nachträgliche Befüllung mit Quelldaten.</li>
 <li>Das Hinzufügen von „ <code translate="no">SPARSE_FLOAT_VECTOR</code> “-Feldern zu einer bestehenden externen Sammlung wird nicht unterstützt.</li>
 <li>Das Hinzufügen von „StructArray“-Feldern zu einer bestehenden externen Sammlung wird nicht unterstützt. Wenn Ihre externe Sammlung ein „StructArray“-Feld benötigt, definieren Sie dieses beim Erstellen der Sammlung im Sammlungsschema.</li>
 </ul>
@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -187,7 +187,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -246,7 +246,7 @@ client.add_collection_field(
 <span class="hljs-comment"># collection (POST /v2/vectordb/collections/fields/add routes through</span>
 <span class="hljs-comment"># AlterCollectionSchema, which rejects external collections).</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Wenn Sie eine Vektorsuche für das hinzugefügte Vektorfeld durchführen möchten, erstellen Sie vor dem Aktualisieren der externen Sammlung einen Index für das Feld.</p>
+<p>Wenn Sie eine Vektorsuche für das hinzugefügte Vektorfeld durchführen möchten, erstellen Sie einen Index für das Feld, bevor Sie die externe Sammlung aktualisieren.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

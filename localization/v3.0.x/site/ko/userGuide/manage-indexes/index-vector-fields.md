@@ -1,10 +1,10 @@
 ---
 id: index-vector-fields.md
 order: 1
-summary: 이 가이드에서는 컬렉션의 벡터 필드에서 인덱스를 만들고 관리하는 기본 작업을 안내합니다.
-title: 벡터 필드 색인 생성
+summary: 이 가이드에서는 컬렉션 내 벡터 필드에 대한 인덱스를 생성하고 관리하는 기본 조작 방법을 단계별로 안내합니다.
+title: 벡터 필드 인덱스
 ---
-<h1 id="Index-Vector-Fields" class="common-anchor-header">벡터 필드 색인 생성<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Vector-Fields" class="common-anchor-header">벡터 필드 인덱스<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +19,9 @@ title: 벡터 필드 색인 생성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 컬렉션의 벡터 필드에 인덱스를 만들고 관리하는 기본 작업에 대해 안내합니다.</p>
+    </button></h1><p>이 가이드에서는 컬렉션 내 벡터 필드에 대한 인덱스를 생성하고 관리하는 기본 작업에 대해 설명합니다.</p>
 <div class="alert warning">
-<p>이 페이지는 더 이상 사용되지 않습니다. 최신 구현에 대해서는 <a href="/docs/ko/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/ko/hnsw.md">HNSW</a> 등을 참조하세요.</p>
+<p>이 페이지는 더 이상 사용되지 않습니다. 최신 구현 내용은 <a href="/docs/ko/ivf-flat.md">IVF_FLAT</a>, <a href="/docs/ko/hnsw.md">HNSW</a> 등을 참조하십시오.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,10 +38,13 @@ title: 벡터 필드 색인 생성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 인덱스 파일에 저장된 메타데이터를 활용하여 데이터를 특수한 구조로 구성하여 검색 또는 쿼리 중에 요청된 정보를 빠르게 검색할 수 있도록 합니다.</p>
-<p>Milvus는 효율적인 유사도 검색을 위해 필드 값을 정렬하는 여러 가지 인덱스 유형과 메트릭을 제공합니다. 다음 표에는 다양한 벡터 필드 유형에 대해 지원되는 인덱스 유형과 메트릭이 나와 있습니다. 현재 Milvus는 부동 소수점 임베딩(부동 소수점 벡터 또는 고밀도 벡터라고도 함), 이진 임베딩(이진 벡터라고도 함), 스파스 임베딩(스파스 벡터라고도 함)을 포함한 다양한 유형의 벡터 데이터를 지원합니다. 자세한 내용은 <a href="/docs/ko/index.md">인메모리 인덱스</a> 및 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</p>
+    </button></h2><p>Milvus는 인덱스 파일에 저장된 메타데이터를 활용하여 데이터를 특수한 구조로 정리함으로써, 검색이나 쿼리 시 요청된 정보를 신속하게 검색할 수 있도록 지원합니다.</p>
+<p>Milvus는 효율적인 유사도 검색을 위해 필드 값을 정렬하는 여러 인덱스 유형과 메트릭을 제공합니다. 다음 표에는 다양한 벡터 필드 유형에 대해 지원되는 인덱스 유형과 메트릭이 나열되어 있습니다. 현재 Milvus는 부동 소수점 임베딩(일반적으로 부동 소수점 벡터 또는 밀집 벡터라고 함), 이진 임베딩(이진 벡터라고도 함), 스파스 임베딩(스파스 벡터라고도 함)을 포함한 다양한 유형의 벡터 데이터를 지원합니다. 자세한 내용은 <a href="/docs/ko/index.md">‘메모리 내 인덱스</a> 및 <a href="/docs/ko/metric.md">유사도 메트릭’을</a> 참조하십시오.</p>
 <div class="filter">
- <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
+ <a href="#floating">부동 소수점 임베딩</a>
+ <a href="#binary"> 이진 임베딩</a>
+ <a href="#sparse"> 스파스 임베딩</a>
+</div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -52,7 +55,7 @@ title: 벡터 필드 색인 생성
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>유클리드 거리(L2)</li><li>내적 곱(IP)</li><li>코사인 유사도(COSINE)</li></td>
+    <td class="tg-0pky"><ul><li>유클리드 거리(L2)</li><li>내적(IP)</li><li>코사인 유사도 (COSINE)</li></td>
     <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
@@ -68,7 +71,7 @@ title: 벡터 필드 색인 생성
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Jaccard (JACCARD)</li><li>해밍(HAMMING)</li></ul></td>
+    <td class="tg-0pky"><ul><li>자카드 (JACCARD)</li><li>해밍 (HAMMING)</li></ul></td>
     <td class="tg-0pky"><ul><li>BIN_FLAT</li><li>BIN_IVF_FLAT</li></ul></td>
   </tr>
 </tbody>
@@ -96,11 +99,11 @@ title: 벡터 필드 색인 생성
 </tbody>
 </table>
 <div class="alert note">
-<p>Milvus 2.5.4 이후부터 <code translate="no">SPARSE_WAND</code> 은 더 이상 사용되지 않습니다. 대신 호환성을 유지하면서 동등성을 위해 <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 을 사용하는 것이 좋습니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">스파스 벡터를</a> 참조하세요.</p>
+<p>Milvus 2.5.4부터 ` <code translate="no">SPARSE_WAND</code> `는 더 이상 사용되지 않습니다. 대신, 호환성을 유지하면서 동등한 기능을 얻으려면 ` <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> `를 사용하는 것이 권장됩니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md#Set-index-params-for-vector-field">‘Sparse Vector’를</a> 참조하십시오.</p>
 </div>
 </div>
-<p>자주 액세스하는 벡터 필드와 스칼라 필드 모두에 대한 인덱스를 만드는 것이 좋습니다.</p>
-<h2 id="Preparations" class="common-anchor-header">준비<button data-href="#Preparations" class="anchor-icon" translate="no">
+<p>자주 액세스되는 벡터 필드와 스칼라 필드 모두에 대해 인덱스를 생성하는 것이 권장됩니다.</p>
+<h2 id="Preparations" class="common-anchor-header">준비 사항<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,23 +118,26 @@ title: 벡터 필드 색인 생성
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ko/manage-collections.md">컬렉션 관리에서</a> 설명한 대로 컬렉션 생성 요청에 다음 조건 중 하나라도 지정되면 Milvus는 컬렉션을 생성할 때 자동으로 인덱스를 생성하여 메모리에 로드합니다:</p>
+    </button></h2><p><a href="/docs/ko/manage-collections.md">'컬렉션 관리</a>'에서 설명한 바와 같이, 컬렉션 생성 요청에 다음 조건 중 하나라도 지정된 경우 Milvus는 컬렉션을 생성할 때 자동으로 인덱스를 생성하고 메모리에 로드합니다:</p>
 <ul>
-<li><p>벡터 필드의 차원 및 메트릭 유형, 또는</p></li>
-<li><p>스키마 및 인덱스 매개변수.</p></li>
+<li><p>벡터 필드의 차원과 메트릭 유형, 또는</p></li>
+<li><p>스키마와 인덱스 매개변수.</p></li>
 </ul>
-<p>아래 코드 조각은 기존 코드의 용도를 변경하여 Milvus 인스턴스에 대한 연결을 설정하고 인덱스 매개변수를 지정하지 않고 컬렉션을 생성합니다. 이 경우 컬렉션에는 인덱스가 없으며 언로드된 상태로 유지됩니다.</p>
+<p>아래 코드 스니펫은 기존 코드를 재사용하여 Milvus 인스턴스에 연결하고, 인덱스 매개변수를 지정하지 않은 채 컬렉션을 생성합니다. 이 경우 컬렉션에는 인덱스가 없으며 메모리에 로드되지 않은 상태로 유지됩니다.</p>
 <div class="language-python">
-<p>인덱싱을 준비하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 를 사용하여 Milvus 서버에 연결하고 컬렉션을 설정합니다. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>및 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
+<p>인덱싱을 준비하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 를 사용하여 Milvus 서버에 연결하고, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, 그리고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>를 사용하여 컬렉션을 설정하십시오.</p>
 </div>
 <div class="language-java">
-<p>인덱싱을 준비하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 를 사용하여 Milvus 서버에 연결하고 다음을 사용하여 컬렉션을 설정합니다. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>및 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>색인 생성을 준비하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 를 사용하여 Milvus 서버에 연결하고 다음을 사용하여 컬렉션을 설정하십시오 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, 그리고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>를 사용하여 컬렉션을 설정하십시오.</p>
 </div>
 <div class="language-javascript">
-<p>인덱싱을 준비하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 를 사용하여 Milvus 서버에 연결하고 다음을 사용하여 컬렉션을 설정합니다. <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>색인 생성을 준비하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 를 사용하여 Milvus 서버에 연결하고 다음을 사용하여 컬렉션을 설정하십시오 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -234,16 +240,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>컬렉션에 대한 인덱스를 생성하거나 컬렉션을 색인하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> 를 사용하여 인덱스 파라미터를 준비하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> 를 사용하여 인덱스를 생성합니다.</p>
+<p>컬렉션에 대한 인덱스를 생성하거나 컬렉션을 인덱싱하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> 를 사용하여 인덱스 매개변수를 준비하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> 를 사용하여 인덱스를 생성합니다.</p>
 </div>
 <div class="language-java">
-<p>컬렉션에 대한 인덱스를 만들거나 컬렉션을 색인하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> 를 사용하여 인덱스 매개변수를 준비하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> 를 사용하여 색인을 만듭니다.</p>
+<p>컬렉션에 대한 인덱스를 생성하거나 컬렉션을 인덱싱하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> 를 사용하여 인덱스 매개변수를 준비하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> 를 사용하여 인덱스를 생성하십시오.</p>
 </div>
 <div class="language-javascript">
-<p>컬렉션에 대한 인덱스를 만들거나 컬렉션을 색인하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>컬렉션에 대한 인덱스를 생성하거나 컬렉션에 인덱스를 적용하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>를 사용합니다.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4.1. Set up the index parameters</span>
 index_params = MilvusClient.prepare_index_params()
 
@@ -309,30 +318,30 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>파라미터</th>
+      <th>매개변수</th>
       <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>이 객체를 적용할 대상 파일의 이름입니다.</td>
+      <td>이 객체가 적용될 대상 파일의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>벡터 간의 유사성을 측정하는 데 사용되는 알고리즘입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>. 지정된 필드가 벡터 필드인 경우에만 사용할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</td>
+      <td>벡터 간의 유사도를 측정하는 데 사용되는 알고리즘입니다. 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>. 이 옵션은 지정된 필드가 벡터 필드일 때만 사용할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus에서 지원하는 인덱스를</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
+      <td>특정 필드의 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘에 대해서는 <a href="https://milvus.io/docs/index.md">메모리 내 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">디스크 기반 인덱스를</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>이 개체가 적용된 후 생성된 인덱스 파일의 이름입니다.</td>
+      <td>이 객체가 적용된 후 생성되는 인덱스 파일의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>지정된 인덱스 유형에 대한 미세 조정 매개변수입니다. 사용 가능한 키 및 값 범위에 대한 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스를</a> 참조하세요.</td>
+      <td>지정된 인덱스 유형에 대한 미세 조정 매개변수입니다. 사용 가능한 키 및 값 범위에 대한 자세한 내용은 <a href="https://milvus.io/docs/index.md">‘메모리 내 인덱스’를</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>
@@ -340,48 +349,48 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td><strong>IndexParams</strong> 객체 목록이 포함된 <strong>IndexParams</strong> 객체입니다.</td>
+      <td><strong>IndexParam</strong> 객체 목록을 포함하는 <strong>IndexParams</strong> 객체입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>클라이언트의 요청과 관련하여 인덱스가 빌드되는 방식을 제어합니다. 유효한 값은 다음과 같습니다:<br><ul><li><code translate="no">True</code> (기본값): 클라이언트는 인덱스가 완전히 빌드될 때까지 기다렸다가 반환합니다. 즉, 프로세스가 완료될 때까지 응답을 받지 못합니다.</li><li><code translate="no">False</code>: 클라이언트는 요청이 수신되고 인덱스가 백그라운드에서 빌드되는 즉시 반환합니다. 인덱스 생성이 완료되었는지 확인하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> 메서드를 사용합니다.</li></ul></td>
+      <td>클라이언트의 요청과 관련하여 인덱스가 구축되는 방식을 제어합니다. 유효한 값:<br><ul><li><code translate="no">True</code> (기본값): 클라이언트는 인덱스가 완전히 구축될 때까지 기다린 후 반환합니다. 즉, 프로세스가 완료될 때까지 응답을 받을 수 없습니다.</li><li><code translate="no">False</code>: 클라이언트는 요청을 수신하자마자 즉시 응답을 반환하며, 인덱스는 백그라운드에서 구축됩니다. 인덱스 생성이 완료되었는지 확인하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> 메서드를 사용하십시오.</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>파라미터</th>
+      <th>매개변수</th>
       <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>이 IndexParam 객체를 적용할 대상 필드의 이름입니다.</td>
+      <td>이 IndexParam 객체가 적용될 대상 필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>이 객체가 적용된 후 생성된 인덱스 파일의 이름입니다.</td>
+      <td>이 객체가 적용된 후 생성되는 인덱스 파일의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘에 대해서는 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
+      <td>특정 필드의 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘에 대해서는 <a href="https://milvus.io/docs/index.md">메모리 내 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">디스크 기반 인덱스를</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>인덱스에 사용할 거리 메트릭입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>.</td>
+      <td>인덱스에 사용할 거리 측정 기준입니다. 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>추가 인덱스 매개변수. 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
+      <td>추가 인덱스 매개변수. 자세한 <a href="https://milvus.io/docs/index.md">내용은 메모리 내 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">디스크 기반 인덱스를</a> 참조하십시오.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>파라미터</th>
+      <th>매개변수</th>
       <th>설명</th>
     </tr>
   </thead>
@@ -404,17 +413,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>생성할 인덱스의 이름입니다.</td>
+      <td>생성할 인덱스의 이름.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>기타 인덱스 관련 매개 변수입니다.</td>
+      <td>기타 인덱스별 매개변수.</td>
     </tr>
   </tbody>
 </table>
 <div class="admonition note">
 <p><strong>참고</strong></p>
-<p>현재 컬렉션의 각 필드에 대해 하나의 인덱스 파일만 만들 수 있습니다.</p>
+<p>현재 컬렉션의 각 필드당 하나의 인덱스 파일만 생성할 수 있습니다.</p>
 </div>
 <h2 id="Check-Index-Details" class="common-anchor-header">인덱스 세부 정보 확인<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -431,18 +440,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱스를 만든 후에는 인덱스 세부 정보를 확인할 수 있습니다.</p>
+    </button></h2><p>인덱스를 생성한 후에는 해당 인덱스의 세부 정보를 확인할 수 있습니다.</p>
 <div class="language-python">
-<p>인덱스 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> 을 사용하여 인덱스 이름을 나열하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> 을 사용하여 인덱스 세부 정보를 가져옵니다.</p>
+<p>인덱스 세부 정보를 확인하려면 다음을 사용하십시오. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> 를 사용하여 인덱스 이름을 나열하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> 를 사용하여 인덱스 세부 정보를 가져옵니다.</p>
 </div>
 <div class="language-java">
-<p>인덱스 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> 를 사용하여 인덱스 세부 정보를 가져옵니다.</p>
+<p>인덱스 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> 명령어를 사용하여 인덱스 세부 정보를 확인하십시오.</p>
 </div>
 <div class="language-javascript">
-<p>인덱스 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> 를 사용하여 인덱스 세부 정보를 가져옵니다.</p>
+<p>인덱스 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> 를 사용하여 인덱스 세부 정보를 확인합니다.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Describe index</span>
 res = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>
@@ -558,21 +570,24 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>인덱스가 더 이상 필요하지 않은 경우 간단히 삭제할 수 있습니다.</p>
+    </button></h2><p>더 이상 필요하지 않은 인덱스는 간단히 삭제할 수 있습니다.</p>
 <div class="alert note">
-<p>인덱스를 삭제하기 전에 먼저 인덱스가 해제되었는지 확인하세요.</p>
+<p>인덱스를 삭제하기 전에 먼저 인덱스가 해제되었는지 확인하십시오.</p>
 </div>
 <div class="language-python">
-<p>인덱스를 삭제하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
+<p>인덱스를 삭제하려면 다음을 사용하십시오. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>를 사용합니다.</p>
 </div>
 <div class="language-java">
-<p>인덱스를 삭제하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>인덱스를 삭제하려면 다음을 사용하십시오 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>를 사용하십시오.</p>
 </div>
 <div class="language-javascript">
-<p>인덱스를 삭제하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>인덱스를 삭제하려면 다음을 사용하십시오. <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Drop index</span>
 client.drop_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,

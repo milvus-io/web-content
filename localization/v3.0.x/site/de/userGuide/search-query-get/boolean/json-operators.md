@@ -2,14 +2,14 @@
 id: json-operators.md
 title: JSON-Operatoren
 summary: >-
-  Milvus unterstützt erweiterte Operatoren zum Abfragen und Filtern von
+  Milvus unterstützt erweiterte Operatoren für die Abfrage und Filterung von
   JSON-Feldern, wodurch sich die Plattform ideal für die Verwaltung komplexer,
   strukturierter Daten eignet. Diese Operatoren ermöglichen eine äußerst
   effektive Abfrage von JSON-Dokumenten, sodass Sie Entitäten anhand bestimmter
   Elemente, Werte oder Bedingungen innerhalb der JSON-Felder abrufen können.
-  Dieser Abschnitt führt Sie durch die Verwendung von JSON-spezifischen
-  Operatoren in Milvus und veranschaulicht deren Funktionsweise anhand
-  praktischer Beispiele.
+  Dieser Abschnitt führt Sie durch die Verwendung JSON-spezifischer Operatoren
+  in Milvus und veranschaulicht deren Funktionsweise anhand praktischer
+  Beispiele.
 ---
 <h1 id="JSON-Operators" class="common-anchor-header">JSON-Operatoren<button data-href="#JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,9 +26,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus unterstützt erweiterte Operatoren zum Abfragen und Filtern von JSON-Feldern, wodurch sich das System ideal für die Verwaltung komplexer, strukturierter Daten eignet. Diese Operatoren ermöglichen eine äußerst effektive Abfrage von JSON-Dokumenten, sodass Sie Entitäten anhand bestimmter Elemente, Werte oder Bedingungen innerhalb der JSON-Felder abrufen können. Dieser Abschnitt führt Sie durch die Verwendung JSON-spezifischer Operatoren in Milvus und veranschaulicht deren Funktionsweise anhand praktischer Beispiele.</p>
+    </button></h1><p>Milvus unterstützt erweiterte Operatoren zum Abfragen und Filtern von JSON-Feldern, wodurch sich das System ideal für die Verwaltung komplexer, strukturierter Daten eignet. Diese Operatoren ermöglichen eine äußerst effektive Abfrage von JSON-Dokumenten, sodass Sie Entitäten anhand bestimmter Elemente, Werte oder Bedingungen innerhalb der JSON-Felder abrufen können. Dieser Abschnitt führt Sie durch die Verwendung von JSON-spezifischen Operatoren in Milvus und veranschaulicht deren Funktionsweise anhand praktischer Beispiele.</p>
 <div class="alert note">
-<p>JSON-Felder können keine komplexen, verschachtelten Strukturen verarbeiten und behandeln alle verschachtelten Strukturen als einfache Zeichenfolgen. Daher ist es bei der Arbeit mit JSON-Feldern ratsam, eine zu tiefe Verschachtelung zu vermeiden und sicherzustellen, dass Ihre Datenstrukturen so flach wie möglich sind, um eine optimale Leistung zu erzielen.</p>
+<p>JSON-Felder können keine komplexen, verschachtelten Strukturen verarbeiten und behandeln alle verschachtelten Strukturen als einfache Zeichenfolgen. Daher ist es bei der Arbeit mit JSON-Feldern ratsam, übermäßig tiefe Verschachtelungen zu vermeiden und sicherzustellen, dass Ihre Datenstrukturen so flach wie möglich sind, um eine optimale Leistung zu erzielen.</p>
 </div>
 <h2 id="Available-JSON-Operators" class="common-anchor-header">Verfügbare JSON-Operatoren<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"

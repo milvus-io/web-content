@@ -2,10 +2,8 @@
 id: trie.md
 title: TRIE
 summary: >-
-  Индекс TRIE организует значения полей типа VARCHAR в виде древовидной
-  структуры, что ускоряет сравнение равенства строк и поиск префиксов. Это самый
-  быстрый скалярный индекс для точного поиска и фильтрации по префиксам,
-  например, name LIKE "abc%".
+  Используйте TRIE для ускорения точного поиска строк и фильтрации по префиксам
+  в полях типа VARCHAR.
 ---
 <h1 id="TRIE" class="common-anchor-header">TRIE<button data-href="#TRIE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,13 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Индекс « <code translate="no">TRIE</code> » в Milvus организует значения поля « <code translate="no">VARCHAR</code> » в виде префиксного дерева ( <em>trie</em>). Каждый символ в строке соответствует ребру в дереве, а общие префиксы хранятся только один раз. Такая структура позволяет быстро выполнять точный поиск строк и сопоставление префиксов без необходимости сканирования всех значений в поле.</p>
-<p>Используйте индекс « <code translate="no">TRIE</code> », если вы часто выполняете запросы с:</p>
-<ul>
-<li><p>Точное равенство строковых значений, например <code translate="no">category == &quot;books&quot;</code></p></li>
-<li><p>фильтрация по префиксам, например <code translate="no">name LIKE &quot;abc%&quot;</code></p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">TRIE</code> организует строки в префиксном дереве для ускорения точного поиска и фильтрации по префиксам, например <code translate="no">name LIKE &quot;abc%&quot;</code>.</p>
+<h2 id="Overview" class="common-anchor-header">Обзор<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,11 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><code translate="no">VARCHAR</code> поля. Подробности см. в разделе <a href="/docs/ru/string.md">«Строковое поле</a>».</li>
-</ul>
-<p><code translate="no">TRIE</code> поддерживается только для полей типа « <code translate="no">VARCHAR</code> ». Чтобы проиндексировать строковое значение внутри поля типа « <code translate="no">JSON</code> », преобразуйте путь в тип « <code translate="no">VARCHAR</code> » и вместо этого используйте индекс <a href="/docs/ru/ngram.md">NGRAM</a>.</p>
-<h2 id="How-it-works" class="common-anchor-header">Принцип работы<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Поддерживаемые типы данных<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,22 +51,68 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus реализует фильтрацию по префиксам ( <code translate="no">TRIE</code> ) в два этапа:</p>
-<ol>
-<li><p><strong>Создание индекса</strong></p>
-<ul>
-<li><p>Во время загрузки Milvus считывает каждое значение индексируемого поля.</p></li>
-<li><p>Значения вставляются в трие: символы хранятся вдоль ребер, а каждый конечный узел фиксирует идентификаторы сущностей, у которых эта строка совпадает.</p></li>
-<li><p>Готовое дерево сохраняется в качестве индекса.</p></li>
-</ul></li>
-<li><p><strong>Ускорение запросов</strong></p>
-<ul>
-<li><p>При проверке на равенство Milvus проходит по дереву символ за символом, чтобы добраться до узла с точным значением, и возвращает его идентификаторы сущностей.</p></li>
-<li><p>При поиске по префиксу Milvus проходит до узла, соответствующего префиксу, и собирает идентификаторы сущностей в его поддереве.</p></li>
-<li><p>Соответствующие идентификаторы сущностей передаются исполнителю запроса для окончательной сборки результата.</p></li>
-</ul></li>
-</ol>
-<p>Для фильтров равенства и префикса затраты на поиск пропорциональны длине строки, а не количеству сущностей, что обеспечивает высокую скорость выполнения этих запросов в больших коллекциях.</p>
+    </button></h3><p>Только <a href="/docs/ru/string.md">поля типа VARCHAR</a>. Для путей к строкам в формате JSON выберите совместимый индекс в разделе <a href="/docs/ru/json-indexing.md">«Индексирование JSON</a>».</p>
+<p><a id="Queries-accelerated-by-TRIE"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Ускорение фильтрации<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Индекс « <code translate="no">TRIE</code> » может помочь в оценке следующих условий для поля типа « <code translate="no">VARCHAR</code> ». Приведенные выражения являются примерами:</p>
+<table>
+<thead>
+<tr><th>Фильтры, которые могут использовать индекс</th><th>Пример выражения</th></tr>
+</thead>
+<tbody>
+<tr><td>Равенство (<code translate="no">==</code>, <code translate="no">!=</code>)</td><td><code translate="no">category == &quot;books&quot;</code></td></tr>
+<tr><td>Принадлежность (<code translate="no">in</code>, <code translate="no">not in</code>)</td><td><code translate="no">category in [&quot;books&quot;, &quot;electronics&quot;]</code></td></tr>
+<tr><td>Совпадение префикса</td><td><code translate="no">category LIKE &quot;elec%&quot;</code></td></tr>
+<tr><td>Диапазон (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>)</td><td><code translate="no">category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;</code></td></tr>
+</tbody>
+</table>
+<p>Синтаксис выражений см. в разделах <a href="/docs/ru/basic-operators.md">«Основные операторы</a> » и <a href="/docs/ru/pattern-matching.md">«Сопоставление шаблонов</a>».</p>
+<p>При вычислении диапазона может выполняться обращение к нескольким индексированным строкам. Шаблоны суффиксов, подстрок, общие шаблоны <code translate="no">LIKE</code> и шаблоны регулярных выражений также могут оцениваться по индексированным строкам, но для этого может потребоваться обращение к множеству различных значений. Для рабочих нагрузок с подстроками или регулярными выражениями сравните <a href="/docs/ru/ngram.md">NGRAM</a>, используя его правила допустимости шаблонов.</p>
+<p><a id="Best-practices"></a></p>
+<p>Сравните задержку запроса с типичными длинами строк, префиксами и количеством результатов.</p>
+<p><a id="Usage-notes"></a></p>
+<div class="alert note">
+<blockquote>
+<p>Это возможности индекса, а не ограничения на допустимые выражения фильтра. См. <a href="/docs/ru/scalar_index.md#Filter-execution">раздел «Скалярный индекс»</a> для ознакомления с ограничениями на совместный поиск. Информацию о тестах на <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> и NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>) см. в разделе <a href="/docs/ru/basic-operators.md">«Основные операторы</a>».</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-TRIE-works" class="common-anchor-header">Как работает TRIE<button data-href="#How-TRIE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Процесс поиска в префиксном дереве</strong></summary></p>
+<p>Во время построения индекса Milvus вставляет строки в префиксное дерево и сохраняет его. Символы хранятся вдоль ребер, общие префиксы хранятся один раз, а каждый терминальный узел фиксирует идентификаторы сущностей, связанных с данной строкой.</p>
+<p>Для проверки равенства выполняется обход дерева до конечного узла, соответствующего точной строке. Для префикса необходимо найти узел префикса и собрать идентификаторы из его поддерева. Исполнитель запроса получает идентификаторы соответствующих сущностей.</p>
+<p>Обход до узла строки или префикса зависит от длины шаблона; для возврата совпадений также требуется сбор связанных идентификаторов сущностей.</p>
+<p></details></p>
 <h2 id="Create-a-TRIE-index" class="common-anchor-header">Создание индекса TRIE<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,8 +128,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете создать индекс TRIE ( <code translate="no">TRIE</code> ) для поля типа « <code translate="no">VARCHAR</code> ». Никаких дополнительных параметров не требуется.</p>
-<p>В примере ниже показано, как создать индекс TRIE ( <code translate="no">TRIE</code> ) для поля типа « <code translate="no">VARCHAR</code> »:</p>
+    </button></h2><p>Установите ` <code translate="no">index_type</code> ` равным ` <code translate="no">TRIE</code>`; дополнительные параметры индекса не требуются:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -242,38 +276,6 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-accelerated-by-TRIE" class="common-anchor-header">Запросы, ускоряемые с помощью TRIE<button data-href="#Queries-accelerated-by-TRIE" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Индекс <code translate="no">TRIE</code> ускоряет выполнение следующих шаблонов фильтрации по полю <code translate="no">VARCHAR</code>:</p>
-<ul>
-<li><p><strong>Равенство</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category == &quot;books&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Принадлежность</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category in [&quot;books&quot;, &quot;electronics&quot;]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Совпадение префикса</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category LIKE &quot;elec%&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Диапазон</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>При оценке диапазона может произойти обращение к нескольким индексированным строкам.</p></li>
-</ul>
-<p>Сопоставление суффиксов, подстрок и общих шаблонов регулярных выражений ( <code translate="no">LIKE</code> ) также может выполняться по индексированным строкам, но для этого может потребоваться обращение к множеству различных значений. Если в вашей рабочей нагрузке преобладает сопоставление подстрок или регулярных выражений, рассмотрите возможность использования индекса <a href="/docs/ru/fmindex.md">FMINDEX</a> или <a href="/docs/ru/ngram.md">NGRAM</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Удаление индекса<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -289,12 +291,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Используйте метод <code translate="no">drop_index()</code> для удаления существующего индекса из коллекции.</p>
+    </button></h2><p>Используйте метод ` <code translate="no">drop_index()</code> ` для удаления существующего индекса из коллекции.</p>
 <div class="alert note">
-<ul>
-<li><p>В <strong>версии 2.6.3</strong> или более ранних перед удалением скалярного индекса необходимо освободить коллекцию.</p></li>
-<li><p>Начиная с <strong>версии 2.6.4</strong> и более поздних, скалярный индекс можно удалить напрямую, как только он больше не нужен — предварительное освобождение коллекции не требуется.</p></li>
-</ul>
+<blockquote>
+<p>Требования к версии при удалении скалярного индекса см. в разделе <a href="/docs/ru/scalar_index.md#Drop-index-compatibility">«Скалярный индекс</a>».</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -407,42 +408,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">Примечания по использованию<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>Типы полей:</strong> Работает только с полями типа « <code translate="no">VARCHAR</code> ». Дополнительную информацию о типах данных см. в разделе <a href="/docs/ru/string.md">«Строковое поле</a>».</p></li>
-<li><p><strong>Параметры:</strong> Параметры индекса не требуются.</p></li>
-<li><p><strong>Сопоставление шаблонов:</strong> « <code translate="no">TRIE</code> » работает быстрее всего при фильтрации по равенству и префиксу. Фильтры по диапазону поддерживаются, но могут затрагивать несколько индексированных строк. Шаблоны суффиксов, подстрок и общие шаблоны « <code translate="no">LIKE</code> » могут оцениваться, но для этого может потребоваться сканирование множества индексированных строк.</p></li>
-</ul>
-<h2 id="Best-practices" class="common-anchor-header">Рекомендации<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Используйте « <code translate="no">TRIE</code> », если в ваших фильтрах преобладают точные поиски или сопоставления по префиксу.</p></li>
-<li><p>Если ваша рабочая нагрузка основана на фильтрах подстрок (<code translate="no">LIKE &quot;%abc%&quot;</code>) или фильтрах с регулярными выражениями, используйте вместо этого <a href="/docs/ru/fmindex.md">FMINDEX</a> для точного закреплённого сопоставления или <a href="/docs/ru/ngram.md">NGRAM</a> для сужения круга кандидатов.</p></li>
-</ul>

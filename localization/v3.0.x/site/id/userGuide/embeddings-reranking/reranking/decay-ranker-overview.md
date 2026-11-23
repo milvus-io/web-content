@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Peringkat peluruhan meningkatkan pencarian vektor tradisional dengan memasukkan faktor numerik seperti waktu atau jarak geografis ke dalam proses peringkat. Seluruh proses mengikuti tahapan berikut:</p>
-<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Tahap 1: Menghitung skor kemiripan yang dinormalisasi<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
+<h3 id="Stage-1-Calculate-normalized-similarity-scores" class="common-anchor-header">Tahap 1: Menghitung skor kesamaan yang dinormalisasi<button data-href="#Stage-1-Calculate-normalized-similarity-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -137,7 +137,7 @@ beta: Milvus 2.6.x
     </button></h3><p>Terakhir, Milvus menggabungkan skor kesamaan yang dinormalisasi dan skor peluruhan untuk menghasilkan skor peringkat akhir:</p>
 <pre><code translate="no" class="language-plaintext">final_score = normalized_similarity_score × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam kasus pencarian hibrida (menggabungkan beberapa bidang vektor), Milvus mengambil skor kesamaan ternormalisasi maksimum di antara permintaan pencarian:</p>
+<p>Dalam kasus pencarian hibrida (menggabungkan beberapa bidang vektor), Milvus mengambil skor kesamaan yang dinormalisasi tertinggi di antara permintaan pencarian:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
 <p>Misalnya, jika sebuah makalah penelitian memperoleh skor 0,82 dari kesamaan vektor dan 0,91 dari pencarian teks berbasis BM25 dalam pencarian hibrida, Milvus menggunakan 0,91 sebagai skor kesamaan dasar sebelum menerapkan faktor pelemahan.</p>
@@ -158,7 +158,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>Mari kita lihat penerapan peringkat peluruhan dalam skenario praktis—mencari <strong>“makalah penelitian AI”</strong> dengan peluruhan berbasis waktu:</p>
 <div class="alert note">
-<p>Dalam contoh ini, skor peluruhan mencerminkan bagaimana relevansi berkurang seiring waktu—makalah yang lebih baru mendapatkan skor yang mendekati 1,0, sedangkan makalah yang lebih lama mendapatkan skor yang lebih rendah. Nilai-nilai ini dihitung menggunakan pengurut peluruhan tertentu. Untuk detailnya, lihat <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pengurut peluruhan yang tepat</a>.</p>
+<p>Dalam contoh ini, skor pelemahan mencerminkan bagaimana relevansi berkurang seiring waktu—makalah yang lebih baru mendapatkan skor yang mendekati 1,0, sedangkan makalah yang lebih lama mendapatkan skor yang lebih rendah. Nilai-nilai ini dihitung menggunakan pengurut pelemahan tertentu. Untuk detailnya, lihat <a href="/docs/id/decay-ranker-overview.md#Choose-the-right-decay-ranker">Memilih pengurut pelemahan yang tepat</a>.</p>
 </div>
 <table>
    <tr>
@@ -408,12 +408,51 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Parameter</p></th>
-     <th><p>Diperlukan?</p></th>
+     <th><p>Wajib?</p></th>
      <th><p>Deskripsi</p></th>
      <th><p>Nilai/Contoh</p></th>
    </tr>
@@ -538,16 +577,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -618,5 +659,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

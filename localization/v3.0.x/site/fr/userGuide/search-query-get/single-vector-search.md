@@ -1459,7 +1459,22 @@ milvus::SearchResponse searchResponse;
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_catalog&quot;,
+    &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 20,
+    &quot;outputFields&quot;: [&quot;id&quot;, &quot;price&quot;, &quot;rating&quot;, &quot;category&quot;],
+    &quot;orderByFields&quot;: [&quot;price:asc&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>You can also sort by multiple scalar fields. Milvus applies the fields in the order that you specify. In the following example, Milvus sorts results by <code translate="no">price</code> in ascending order. For entities with the same <code translate="no">price</code>, Milvus then sorts by <code translate="no">rating</code> in descending order.</p>
 <div class="multipleCode">
@@ -1624,7 +1639,22 @@ milvus::SearchResponse searchResponse;
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;product_catalog&quot;,
+    &quot;data&quot;: [[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
+    &quot;annsField&quot;: &quot;embedding&quot;,
+    &quot;limit&quot;: 20,
+    &quot;outputFields&quot;: [&quot;id&quot;, &quot;price&quot;, &quot;rating&quot;, &quot;category&quot;],
+    &quot;orderByFields&quot;: [&quot;price:asc&quot;, &quot;rating:desc&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>For entities with the same values in all specified order-by fields, Milvus keeps the original similarity-score order.</p>
 <h2 id="Use-Limit-and-Offset" class="common-anchor-header">Use Limit and Offset<button data-href="#Use-Limit-and-Offset" class="anchor-icon" translate="no">
@@ -2040,8 +2070,6 @@ curl -X POST <span class="hljs-string">&quot;http://localhost:19530/v2/vectordb/
 <p>For details on the partition key, refer to <a href="/docs/fr/use-partition-key.md">Use Partition Key</a>.</p></li>
 <li><p>Use mmap</p>
 <p>For details on mmap-settings, refer to <a href="/docs/fr/mmap.md">Use mmap</a>.</p></li>
-<li><p>Clustering Compaction</p>
-<p>For details on clustering compactions, refer to <a href="/docs/fr/clustering-compaction.md">Clustering Compaction</a>.</p></li>
 <li><p>Use reranking</p>
 <p>For details on using rankers to enhance search result relevance, refer to <a href="/docs/fr/decay-ranker-overview.md">Decay Ranker Overview</a> and <a href="/docs/fr/model-ranker-overview.md">Model Ranker Overview</a>.</p></li>
 </ul>

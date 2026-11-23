@@ -1,18 +1,18 @@
 ---
 id: model-ranker-overview.md
-title: Descripción general de Model RankerCompatible with Milvus 2.6.x
+title: Descripción general del clasificador de modelosCompatible with Milvus 2.6.x
 summary: >-
   La búsqueda vectorial tradicional clasifica los resultados basándose
   únicamente en la similitud matemática, es decir, en el grado de coincidencia
   entre los vectores en un espacio de alta dimensión. Aunque es un método
-  eficaz, a menudo pasa por alto la verdadera relevancia semántica. Imaginemos
-  que buscamos «mejores prácticas para la optimización de bases de datos»: es
-  posible que obtengamos documentos con una alta similitud vectorial que
-  mencionen estos términos con frecuencia, pero que en realidad no ofrezcan
-  estrategias de optimización prácticas.
+  eficaz, este enfoque suele pasar por alto la verdadera relevancia semántica.
+  Imaginemos que buscamos «mejores prácticas para la optimización de bases de
+  datos»: es posible que obtengamos documentos con una alta similitud vectorial
+  que mencionen estos términos con frecuencia, pero que en realidad no ofrezcan
+  estrategias de optimización aplicables.
 beta: Milvus 2.6.x
 ---
-<h1 id="Model-Ranker-Overview" class="common-anchor-header">Descripción general de Model Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
+<h1 id="Model-Ranker-Overview" class="common-anchor-header">Descripción general del clasificador de modelos<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -27,7 +27,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La búsqueda vectorial tradicional clasifica los resultados basándose exclusivamente en la similitud matemática, es decir, en el grado de coincidencia entre los vectores en un espacio de alta dimensión. Aunque es un método eficaz, a menudo pasa por alto la verdadera relevancia semántica. Imaginemos que buscamos <strong>«mejores prácticas para la optimización de bases de datos»:</strong> es posible que obtengamos documentos con una alta similitud vectorial que mencionen estos términos con frecuencia, pero que en realidad no ofrezcan estrategias de optimización prácticas.</p>
+    </button></h1><p>La búsqueda vectorial tradicional clasifica los resultados basándose únicamente en la similitud matemática, es decir, en el grado de coincidencia entre los vectores en un espacio de alta dimensión. Aunque es un método eficaz, a menudo pasa por alto la verdadera relevancia semántica. Imaginemos que buscamos <strong>«mejores prácticas para la optimización de bases de datos»:</strong> es posible que obtengamos documentos con una alta similitud vectorial que mencionen estos términos con frecuencia, pero que en realidad no ofrezcan estrategias de optimización aplicables.</p>
 <p>Model Ranker transforma la búsqueda de Milvus al integrar modelos lingüísticos avanzados que comprenden las relaciones semánticas entre las consultas y los documentos. En lugar de basarse únicamente en la similitud vectorial, evalúa el significado y el contexto del contenido para ofrecer resultados más inteligentes y relevantes.</p>
 <h2 id="Limits" class="common-anchor-header">Limitaciones<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -110,31 +110,31 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>vLLM</p></td>
      <td><p>Aplicaciones complejas que requieren una comprensión semántica profunda y personalización</p></td>
-     <td><ul><li><p>Compatible con diversos modelos de lenguaje a gran escala</p></li><li><p>Opciones de implementación flexibles</p></li><li><p>Mayores requisitos computacionales</p></li><li><p>Mayor potencial de personalización</p></li></ul></td>
+     <td><ul><li><p>Admite diversos modelos de lenguaje de gran tamaño</p></li><li><p>Opciones de implementación flexibles</p></li><li><p>Mayores requisitos computacionales</p></li><li><p>Mayor potencial de personalización</p></li></ul></td>
      <td><p>Plataforma de investigación jurídica que utiliza modelos específicos del ámbito jurídico capaces de comprender la terminología jurídica y las relaciones entre la jurisprudencia</p></td>
    </tr>
    <tr>
      <td><p>TEI</p></td>
      <td><p>Rápida implementación con un uso eficiente de los recursos</p></td>
      <td><ul><li><p>Servicio ligero optimizado para operaciones con texto</p></li><li><p>Implementación más sencilla con menores requisitos de recursos</p></li><li><p>Modelos de reordenación preoptimizados</p></li><li><p>Carga mínima de infraestructura</p></li></ul></td>
-     <td><p>Sistema de gestión de contenidos que requiere capacidades de reordenación eficientes con requisitos estándar</p></td>
+     <td><p>Sistema de gestión de contenidos que requiere capacidades eficientes de reordenación con requisitos estándar</p></td>
    </tr>
    <tr>
      <td><p>Cohere</p></td>
      <td><p>Aplicaciones empresariales que dan prioridad a la fiabilidad y la facilidad de integración</p></td>
-     <td><ul><li><p>Fiabilidad y escalabilidad de nivel empresarial</p></li><li><p>Servicio gestionado sin mantenimiento de infraestructura</p></li><li><p>Funciones multilingües de reordenación</p></li><li><p>Limitación de tasa y gestión de errores integradas</p></li></ul></td>
+     <td><ul><li><p>Fiabilidad y escalabilidad de nivel empresarial</p></li><li><p>Servicio gestionado sin mantenimiento de infraestructura</p></li><li><p>Capacidades de reordenación multilingües</p></li><li><p>Limitación de tasa y gestión de errores integradas</p></li></ul></td>
      <td><p>Plataforma de comercio electrónico que requiere una búsqueda de alta disponibilidad con un rendimiento constante de la API y catálogos de productos multilingües</p></td>
    </tr>
    <tr>
      <td><p>Voyage AI</p></td>
      <td><p>Aplicaciones RAG con requisitos específicos de rendimiento y contexto</p></td>
-     <td><ul><li><p>Modelos entrenados específicamente para tareas de reordenación</p></li><li><p>Controles de truncamiento granulares para documentos de diversa longitud</p></li><li><p>Inferencia optimizada para cargas de trabajo en producción</p></li><li><p>Múltiples variantes de modelos (rerank-2, rerank-lite, etc.)</p></li></ul></td>
+     <td><ul><li><p>Modelos entrenados específicamente para tareas de reordenación</p></li><li><p>Controles de truncamiento granulares para documentos de diversa longitud</p></li><li><p>Inferencia optimizada para cargas de trabajo en producción</p></li><li><p>Múltiples variantes de modelo (rerank-2, rerank-lite, etc.)</p></li></ul></td>
      <td><p>Base de datos de investigación con documentos de longitudes variables que requieren un control de rendimiento ajustado y una comprensión semántica especializada</p></td>
    </tr>
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>Aplicaciones que procesan documentos largos con prioridades de rentabilidad</p></td>
-     <td><ul><li><p>División avanzada de documentos en fragmentos con solapamiento configurable</p></li><li><p>Puntuación basada en fragmentos (el fragmento con mayor puntuación representa el documento)</p></li><li><p>Compatibilidad con diversos modelos de reordenación</p></li><li><p>Rentable, con variantes de modelo estándar y pro</p></li></ul></td>
+     <td><ul><li><p>Segmentación avanzada de documentos con solapamiento configurable</p></li><li><p>Puntuación basada en fragmentos (el fragmento con mayor puntuación representa el documento)</p></li><li><p>Compatibilidad con diversos modelos de reordenación</p></li><li><p>Rentable, con variantes de modelo estándar y pro</p></li></ul></td>
      <td><p>Sistema de búsqueda de documentación técnica que procesa manuales y documentos extensos que requieren una segmentación inteligente y un control de solapamiento</p></td>
    </tr>
    <tr>
@@ -147,7 +147,7 @@ beta: Milvus 2.6.x
      <td><p>Hugging Face</p></td>
      <td><p>Aplicaciones que utilizan modelos de similitud de frases de Hugging Face alojados</p></td>
      <td><ul><li><p>Utiliza el proveedor « <code translate="no">hf-inference</code> » alojado</p></li><li><p>Selecciona modelos del Hugging Face Hub</p></li><li><p>Calcula una puntuación de similitud entre frases por cada candidato</p></li><li><p>Utiliza autenticación mediante clave de API</p></li></ul></td>
-     <td><p>Aplicaciones de búsqueda semántica que desean reordenar los textos candidatos con un modelo de Hugging Face sin tener que gestionar un servicio de inferencia independiente</p></td>
+     <td><p>Aplicaciones de búsqueda semántica que desean reordenar los textos candidatos con un modelo de Hugging Face sin necesidad de gestionar un servicio de inferencia independiente</p></td>
    </tr>
 </table>
 <p>Para obtener información detallada sobre la implementación de cada servicio de modelo, consulta la documentación específica:</p>
@@ -197,7 +197,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Para implementar la reclasificación mediante modelos, primero defina un objeto Function con la configuración adecuada. En este ejemplo, utilizamos TEI como proveedor de servicios:</p>
+    </button></h3><p>Para implementar la reclasificación mediante modelos, primero define un objeto Function con la configuración adecuada. En este ejemplo, utilizamos TEI como proveedor de servicios:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -244,14 +244,88 @@ model_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;tei&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;machine learning for time series&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
      <th><p>Parámetro</p></th>
-     <th><p>¿Es obligatorio?</p></th>
+     <th><p>¿Obligatorio?</p></th>
      <th><p>Descripción</p></th>
      <th><p>Valor / Ejemplo</p></th>
    </tr>
@@ -337,7 +411,7 @@ model_ranker = Function(
 results = client.search(
     collection_name,
     data=[your_query_vector], <span class="hljs-comment"># Number of query vectors must match that specified in model_ranker.params[&quot;queries&quot;] </span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
@@ -352,7 +426,7 @@ results = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(COLLECTION_NAME)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
-        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
         .outputFields(Collections.singletonList(document))
         .functionScore(FunctionScore.builder()
@@ -364,7 +438,67 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">10</span>,            <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;tei&quot;,
+        &quot;queries&quot;: [
+            &quot;machine learning for time series&quot;
+        ],
+        &quot;endpoint&quot;: &quot;http://model-service:8080&quot;
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

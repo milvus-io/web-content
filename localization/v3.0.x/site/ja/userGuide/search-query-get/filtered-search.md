@@ -64,6 +64,11 @@ summary: >-
 <li><p>フィルタリングされたエンティティ内でANN検索を実行します。</p></li>
 <li><p>上位K件のエンティティを返します。</p></li>
 </ul>
+<div class="alert note">
+<p>Milvus 3.0.3 以降では、通常のベクトルフィールドに対するクエリおよび検索フィルターで `<code translate="no">IS NULL</code> ` および `<code translate="no">IS NOT NULL</code> ` を使用し、それぞれベクトルフィールドが NULL であるエンティティ、または NULL ではないエンティティを選択できるようになりました。</p>
+<p><code translate="no">embedding</code> フィールドが NULL のエンティティを検索するには、<code translate="no">query()</code> にフィルター<code translate="no">embedding IS NULL</code> を指定します。このフィルターは、<code translate="no">search()</code> でも有効です。ただし、このフィルターを使用して<code translate="no">embedding</code> を検索しても、ヒットは返されません。<code translate="no">embedding</code> の値がないエンティティには、クエリベクトルと比較するベクトルがないためです。</p>
+<p>サポートされている型、構文、および例については、「<a href="/docs/ja/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL」および「IS NOT NULL」演算子を</a>参照してください。</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">反復フィルタリング<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,14 +84,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>標準的なフィルタリング処理により、検索範囲は効果的に狭い範囲に絞り込まれます。しかし、フィルタリング式が過度に複雑になると、検索のレイテンシが著しく高くなる可能性があります。そのような場合、反復フィルタリングを代替手段として用いることで、スカラーフィルタリングの負荷を軽減することができます。</p>
+    </button></h3><p>標準的なフィルタリング処理は、検索範囲を効果的に狭い範囲に絞り込みます。しかし、フィルタリング式が過度に複雑になると、検索のレイテンシが著しく高くなる可能性があります。そのような場合、反復フィルタリングを代替手段として利用することで、スカラーフィルタリングの負荷を軽減することができます。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>反復フィルタリング</span>
   
  </span></p>
-<p>上の図に示されているように、反復フィルタリングを用いた検索では、ベクトル検索が反復的に実行されます。イテレータによって返される各エンティティに対してスカラーフィルタリングが行われ、指定された上位K件の結果が得られるまでこの処理が続きます。</p>
+<p>上の図に示されているように、反復フィルタリングを用いた検索では、ベクトル検索が反復的に実行されます。イテレータによって返される各エンティティに対してスカラーフィルタリングが行われ、指定された topK の結果が得られるまでこのプロセスが続きます。</p>
 <p>この方法により、スカラーフィルタリングの対象となるエンティティの数が大幅に削減されるため、特に高度に複雑なフィルタリング式を処理する際に有効です。</p>
 <p>ただし、イテレータはエンティティを1つずつ処理するという点に留意する必要があります。この逐次的なアプローチは、特に多数のエンティティがスカラーフィルタリングの対象となる場合、処理時間の長期化や潜在的なパフォーマンスの問題につながる可能性があります。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -104,7 +109,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、フィルタリング検索の実行方法を説明します。このセクションのコードスニペットは、コレクションに以下のエンティティがすでに存在していることを前提としています。各エンティティには、<strong>id</strong>、<strong>vector</strong>、<strong>color</strong>、<strong>likes</strong> の 4 つのフィールドがあります。例では、<code translate="no">COSINE</code> メトリックでインデックスが作成された 5 次元の<code translate="no">vector</code> フィールドを持つ、<code translate="no">my_collection</code> という名前のロード済みコレクションを使用しています。</p>
+    </button></h2><p>このセクションでは、フィルタリング検索の実行方法を説明します。このセクションのコードスニペットは、コレクションに以下のエンティティがすでに存在していることを前提としています。各エンティティには、<strong>id</strong>、<strong>vector</strong>、<strong>color</strong>、<strong>likes</strong> の 4 つのフィールドがあります。例では、<code translate="no">COSINE</code> メトリックでインデックスが作成された 5 次元の<code translate="no">vector</code> フィールドを持つ、<code translate="no">my_collection</code> という名前の読み込まれたコレクションを使用しています。</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">165</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">25</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -137,7 +142,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下のコードスニペットは、標準フィルタリングを用いた検索を示しています。また、以下のコードスニペットのリクエストには、フィルタリング条件と複数の出力フィールドが含まれています。</p>
+    </button></h3><p>以下のコードスニペットは、標準フィルタリングを用いた検索を示しています。また、次のコードスニペットのリクエストには、フィルタリング条件と複数の出力フィールドが含まれています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

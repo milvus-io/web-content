@@ -2,9 +2,8 @@
 id: search-aggregation.md
 title: Search AggregationCompatible with Milvus 3.0.x
 summary: >-
-  Agrupar os resultados da pesquisa vetorial em compartimentos, calcular
-  métricas por compartimento, ordenar os compartimentos e devolver resultados
-  representativos.
+  Agrupar os resultados da pesquisa vetorial em categorias, calcular métricas
+  por categoria, ordenar as categorias e devolver resultados representativos.
 beta: Milvus 3.0.x
 ---
 <h1 id="Search-Aggregation" class="common-anchor-header">Search Aggregation<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#Search-Aggregation" class="anchor-icon" translate="no">
@@ -124,7 +123,7 @@ beta: Milvus 3.0.x
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, MilvusClient, SearchAggregation, TopHits
@@ -415,7 +414,7 @@ curl --request POST --url <span class="hljs-string">&quot;<span class="hljs-vari
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
@@ -490,7 +489,7 @@ search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</spa
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">result = client.search(
@@ -671,7 +670,7 @@ List&lt;AggregationBucket&gt; buckets = result.getAggregationBuckets().get(<span
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
@@ -714,7 +713,7 @@ search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</spa
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
@@ -769,7 +768,7 @@ search <span class="hljs-string">&quot;<span class="hljs-variable">$payload</spa
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(
@@ -903,7 +902,7 @@ Child bucket keys:
   <a href="#python">Python</a>
   <a href="#java">Java</a>
   <a href="#go">Go</a>
-  <a href="#javascript">Node.js</a>
+  <a href="#javascript">NodeJS</a>
   <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python">aggregation = SearchAggregation(

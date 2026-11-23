@@ -1,9 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  RTREE 索引是一种基于树的数据结构，可加速对 GEOMETRY 字段的查询。如果您的 Collection
-  以“通用几何描述语言”（WKT）格式存储点、线或多边形等几何对象，并且您希望加快空间过滤的速度，那么 RTREE 是一个理想的选择。
+summary: 使用 RTREE 来加速对 GEOMETRY 字段的空间过滤。
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -21,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">RTREE</code> 索引是一种基于树的数据结构，可加速Milvus中<code translate="no">GEOMETRY</code> 字段的查询。如果您的集合以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">“通用文本”（WKT）</a>格式存储点、线或多边形等几何对象，并且您希望加速空间过滤，那么<code translate="no">RTREE</code> 是理想的选择。</p>
-<h2 id="How-it-works" class="common-anchor-header">工作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> 可加速对<code translate="no">GEOMETRY</code> 字段中以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">“通用文本”（WKT）</a>格式存储的点、线或多边形进行空间过滤。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 使用<code translate="no">RTREE</code> 索引高效组织和过滤几何数据，该过程分为两个阶段：</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">第一阶段：构建索引<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">支持的数据类型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,7 +50,57 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
+    </button></h3><p><code translate="no">GEOMETRY</code> 字段。有关字段定义，请参阅<a href="/docs/zh/geometry-field.md">“几何字段</a>”。</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">过滤加速<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> 通过边界框查找候选对象，然后 Milvus 会检查精确的空间关系。它支持<a href="/docs/zh/geometry-operators.md">以下几何操作符</a>：</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code> <code translate="no">ST_INTERSECTS</code> 、 以及 。<code translate="no">ST_CONTAINS</code> <code translate="no">ST_WITHIN</code></li>
+<li><code translate="no">ST_TOUCHES</code>,<code translate="no">ST_OVERLAPS</code>,<code translate="no">ST_CROSSES</code> 以及<code translate="no">ST_DWITHIN</code> 。</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> 不使用<code translate="no">RTREE</code> 。如果没有符合条件的索引，空间过滤器将扫描该字段。</p>
+<div class="alert note">
+<blockquote>
+<p>这些是索引功能，而非对有效过滤表达式的限制。有关共享查找约束，请<a href="/docs/zh/scalar_index.md#Filter-execution">参阅“标量索引”</a>。关于<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及 NULL 测试（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），请<a href="/docs/zh/basic-operators.md">参阅“基本操作符”</a>。</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">RTREE 的工作原理<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>查看构建和查询过程</strong></summary></p>
+<p>Milvus 使用<code translate="no">RTREE</code> 索引来高效组织和过滤几何数据，遵循一个两阶段的过程：</p>
+<p><strong>第一阶段：构建索引</strong></p>
+<ol>
 <li><p><strong>创建叶节点：</strong>对于每个几何对象，计算其<a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">最小包围矩形</a>（MBR）——即完全包含该对象的最小矩形，并将其存储为叶节点。</p></li>
 <li><p><strong>聚合为更大矩形：</strong>将相邻的叶节点聚类，并用新的最小包围矩形（MBR）包裹每个组，从而形成内部节点。例如，组<strong>B</strong>包含<strong>D</strong>和<strong>E</strong>；组<strong>C</strong>包含<strong>F</strong>和<strong>G</strong>。</p></li>
 <li><p><strong>添加根节点：</strong>添加一个其最小包围矩形（MBR）覆盖所有内部组的根节点，从而形成高度平衡的树结构。</p></li>
@@ -64,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Retree 的工作原理</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">第二阶段：加速查询<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>第二阶段：加速查询</strong></p>
+<ol>
 <li><p><strong>构建查询 MBR：</strong>计算查询几何体的 MBR。</p></li>
 <li><p><strong>修剪分支：</strong>从根节点开始，将查询 MBR 与每个内部节点进行比较。跳过任何 MBR 与查询 MBR 不相交的分支。</p></li>
 <li><p><strong>收集候选节点：</strong>沿相交的分支向下遍历，以收集候选叶节点。</p></li>
 <li><p><strong>精确匹配：</strong>对每个候选节点，执行精确空间谓词以确定真正的匹配项。</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">创建 RTREE 索引<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,7 +134,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以在Schema中定义的<code translate="no">GEOMETRY</code> 字段上创建<code translate="no">RTREE</code> 索引。</p>
+    </button></h2><p>您可以在Collection模式中定义的<code translate="no">GEOMETRY</code> 字段上创建<code translate="no">RTREE</code> 索引。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -292,8 +326,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可在<code translate="no">filter</code> 表达式中使用几何操作符进行过滤。当目标<code translate="no">GEOMETRY</code> 字段上存在<code translate="no">RTREE</code> 时，Milvus会自动利用该索引对候选结果进行筛选。若未创建该索引，过滤操作将回退为全表扫描。</p>
-<p>有关可用几何特定操作符的完整列表，请参阅《<a href="/docs/zh/geometry-operators.md">几何操作符</a>》。</p>
+    </button></h2><p>以下示例使用名为<code translate="no">geo</code> 的已建立索引的<code translate="no">GEOMETRY</code> 字段。</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">示例 1：仅筛选<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -447,7 +480,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>查找同时与某条直线相交的最近向量：</p>
+    </button></h3><p>查找同时与一条直线相交的最近向量：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -614,10 +647,9 @@ EOF
       </svg>
     </button></h2><p>使用 `<code translate="no">drop_index()</code> ` 方法从 Collection 中删除现有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>及更早版本中，删除标量索引前必须先释放 Collection。</p></li>
-<li><p>从<strong>v2.6.4</strong>及更高版本开始，一旦不再需要标量索引，即可直接删除，无需先释放 Collection。</p></li>
-</ul>
+<blockquote>
+<p>有关删除标量索引的版本要求，请参阅《<a href="/docs/zh/scalar_index.md#Drop-index-compatibility">标量索引</a>》。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

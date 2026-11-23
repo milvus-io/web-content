@@ -1,11 +1,11 @@
 ---
 id: array-operators.md
-title: Operadores ARRAY
+title: Operadores de ARRAY
 summary: >-
   O Milvus disponibiliza operadores ARRAY para filtrar campos ARRAY e atualizar
   parcialmente os valores dos campos ARRAY.
 ---
-<h1 id="ARRAY-Operators" class="common-anchor-header">Operadores ARRAY<button data-href="#ARRAY-Operators" class="anchor-icon" translate="no">
+<h1 id="ARRAY-Operators" class="common-anchor-header">Operadores de ARRAY<button data-href="#ARRAY-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,7 +75,7 @@ summary: >-
       </svg>
     </button></h2><p>O operador « <code translate="no">ARRAY_CONTAINS</code> » verifica se um elemento específico existe num campo «array». É útil quando se pretende encontrar entidades em que um determinado elemento esteja presente no «array».</p>
 <p><strong>Exemplo</strong></p>
-<p>Suponha que tenha um campo de matriz <code translate="no">history_temperatures</code>, que contém as temperaturas mínimas registadas para diferentes anos. Para encontrar todas as entidades em que a matriz contenha o valor <code translate="no">23</code>, pode utilizar a seguinte expressão de filtro:</p>
+<p>Suponha que tenha um campo de matriz <code translate="no">history_temperatures</code>, que contém as temperaturas mínimas registadas em diferentes anos. Para encontrar todas as entidades em que a matriz contenha o valor <code translate="no">23</code>, pode utilizar a seguinte expressão de filtro:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O operador « <code translate="no">ARRAY_CONTAINS_ALL</code> » garante que todos os elementos da lista especificada estão presentes no campo «array». Este operador é útil quando pretende encontrar entidades que contenham vários valores no «array».</p>
+    </button></h2><p>O operador « <code translate="no">ARRAY_CONTAINS_ALL</code> » garante que todos os elementos da lista especificada estejam presentes no campo «array». Este operador é útil quando pretende encontrar entidades que contenham vários valores no «array».</p>
 <p><strong>Exemplo</strong></p>
 <p>Se pretender encontrar todas as entidades em que a matriz ` <code translate="no">history_temperatures</code> ` contenha tanto ` <code translate="no">23</code> ` como ` <code translate="no">24</code>`, pode utilizar:</p>
 <div class="multipleCode">

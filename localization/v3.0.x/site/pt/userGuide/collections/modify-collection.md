@@ -3,7 +3,7 @@ id: modify-collection.md
 title: Modificar coleção
 summary: >-
   Pode renomear uma coleção ou alterar as suas definições. Esta página centra-se
-  na forma de modificar uma coleção.
+  em como modificar uma coleção.
 ---
 <h1 id="Modify-Collection" class="common-anchor-header">Modificar coleção<button data-href="#Modify-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pode renomear uma coleção ou alterar as suas definições. Esta página centra-se em como modificar uma coleção.</p>
+    </button></h1><p>Pode renomear uma coleção ou alterar as suas definições. Esta página centra-se na forma de modificar uma coleção.</p>
 <h2 id="Rename-Collection" class="common-anchor-header">Renomear coleção<button data-href="#Rename-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -295,7 +295,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">partitionkey.isolation</code></p></td>
-     <td><p>Com o «Isolamento da chave de partição» ativado, o Milvus agrupa as entidades com base no valor da chave de partição e cria um índice separado para cada um desses grupos. Ao receber um pedido de pesquisa, o Milvus localiza o índice com base no valor da Chave de Partição especificado na condição de filtragem e restringe o âmbito da pesquisa às entidades incluídas no índice, evitando assim a análise de entidades irrelevantes durante a pesquisa e melhorando significativamente o desempenho da pesquisa.</p><p>Para mais detalhes, consulte <a href="/docs/pt/use-partition-key.md#Use-Partition-Key-Isolation">«Utilizar o isolamento da chave de partição</a>».</p></td>
+     <td><p>Com o «Isolamento da chave de partição» ativado, o Milvus agrupa as entidades com base no valor da «Chave de partição» e cria um índice separado para cada um desses grupos. Ao receber um pedido de pesquisa, o Milvus localiza o índice com base no valor da chave de partição especificado na condição de filtragem e restringe o âmbito da pesquisa às entidades incluídas no índice, evitando assim a análise de entidades irrelevantes durante a pesquisa e melhorando significativamente o desempenho da pesquisa.</p><p>Para mais detalhes, consulte <a href="/docs/pt/use-partition-key.md#Use-Partition-Key-Isolation">«Utilizar o Isolamento da Chave de Partição</a>».</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dynamicfield.enabled</code></p></td>
@@ -303,14 +303,18 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">allow_insert_auto_id</code></p></td>
-     <td><p>Determina se uma coleção pode aceitar valores de chave primária fornecidos pelo utilizador quando a opção AutoID estiver ativada para a coleção.</p><ul><li><p>Quando definido como <strong> «true</strong>»: as inserções, as atualizações com inserção (upserts) e as importações em massa utilizam a chave primária fornecida pelo utilizador, se esta existir; caso contrário, os valores da chave primária são gerados automaticamente.</p></li><li><p>Quando definido como <strong> «false</strong>»: os valores de chave primária fornecidos pelo utilizador são rejeitados ou ignorados e os valores de chave primária são sempre gerados automaticamente. O valor predefinido é <strong> «false</strong>».</p></li></ul></td>
+     <td><p>Determina se uma coleção pode aceitar valores de chave primária fornecidos pelo utilizador quando a opção AutoID estiver ativada para a coleção.</p><ul><li><p>Quando definido como <strong> «true</strong>»: as inserções, as atualizações com inserção (upserts) e as importações em massa utilizam a chave primária fornecida pelo utilizador, se estiver presente; caso contrário, os valores da chave primária são gerados automaticamente.</p></li><li><p>Quando definido como <strong> «false</strong>»: os valores de chave primária fornecidos pelo utilizador são rejeitados ou ignorados e os valores de chave primária são sempre gerados automaticamente. O valor predefinido é <strong> «false</strong>».</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">timezone</code></p></td>
      <td><p>Especifica o fuso horário predefinido para esta coleção ao lidar com operações sensíveis ao tempo, especialmente campos « <code translate="no">TIMESTAMPTZ</code> ». Os carimbos de data/hora são armazenados internamente em UTC, e o Milvus converte os valores para exibição e comparação de acordo com esta configuração. Se definido, o fuso horário da coleção substitui o fuso horário predefinido da base de dados; o parâmetro de fuso horário de uma consulta pode substituir temporariamente ambos. O valor deve ser um <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">identificador de fuso horário IANA</a> válido (por exemplo, <strong>Asia/Shanghai</strong>, <strong>America/Chicago</strong> ou <strong>UTC</strong>). Para obter detalhes sobre como utilizar um campo « <code translate="no">TIMESTAMPTZ</code> », consulte <a href="/docs/pt/timestamptz-field.md">o campo TIMESTAMPTZ</a>.</p></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">consistency_level</code></p></td>
+     <td><p>Altera o nível de consistência da coleção. O novo nível aplica-se a pesquisas e consultas subsequentes nesta coleção que não especifiquem um nível de consistência próprio; as definições por pedido continuam a ter precedência. O valor deve ser um dos seguintes: <strong>«Strong»</strong>, <strong>«Session»</strong>, <strong>«Bounded»</strong> (predefinição) ou <strong>«Eventually</strong>». A alteração desta propriedade não requer a libertação da coleção. Para mais detalhes, consulte <a href="/docs/pt/tune_consistency.md">«Nível</a> de <a href="/docs/pt/tune_consistency.md">consistência</a>».</p></td>
+   </tr>
 </table>
-<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">Exemplo 1: Definir o TTL ao nível da recolha<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
+<h3 id="Example-1-Set-collection-level-TTL" class="common-anchor-header">Exemplo 1: Definir o TTL ao nível da coleção<button data-href="#Example-1-Set-collection-level-TTL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -429,7 +433,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O seguinte fragmento de código designa um campo « <code translate="no">TIMESTAMPTZ</code> » (<code translate="no">expire_at</code>) já existente como o campo TTL para o TTL ao nível da entidade. A coleção já deve conter um campo « <code translate="no">TIMESTAMPTZ</code> » com esse nome, e « <code translate="no">collection.ttl.seconds</code> » não deve estar definido — os dois modos de TTL são mutuamente exclusivos.</p>
+    </button></h3><p>O trecho de código a seguir designa um campo existente do tipo « <code translate="no">TIMESTAMPTZ</code> » (<code translate="no">expire_at</code>) como o campo de TTL para o TTL ao nível da entidade. A coleção já deve conter um campo do tipo « <code translate="no">TIMESTAMPTZ</code> » com esse nome, e a opção « <code translate="no">collection.ttl.seconds</code> » não deve estar definida — os dois modos de TTL são mutuamente exclusivos.</p>
 <p>Para conhecer o fluxo de trabalho completo do TTL ao nível da entidade (configuração do esquema, inserção, consulta, atualização, eliminação), consulte <a href="/docs/pt/set-collection-ttl.md">Definir o TTL ao nível da entidade</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -840,7 +844,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>A propriedade ` <code translate="no">allow_insert_auto_id</code> ` permite que uma coleção com o AutoID ativado aceite valores de chave primária fornecidos pelo utilizador durante as operações de inserção, atualização com inserção (upsert) e importação em massa. Quando definida como <strong>«true»</strong>, o Milvus utiliza o valor da chave primária fornecido pelo utilizador, se estiver presente; caso contrário, gera-o automaticamente. O valor predefinido é <strong>«false».</strong></p>
+    </button></h3><p>A propriedade ` <code translate="no">allow_insert_auto_id</code> ` permite que uma coleção com o AutoID ativado aceite valores de chave primária fornecidos pelo utilizador durante as operações de inserção, atualização com inserção (upsert) e importação em massa. Quando definida como <strong>«true»</strong>, o Milvus utiliza o valor da chave primária fornecido pelo utilizador, se este estiver presente; caso contrário, gera-o automaticamente. O valor predefinido é <strong>«false».</strong></p>
 <p>O exemplo abaixo mostra como ativar a propriedade ` <code translate="no">allow_insert_auto_id</code>`:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1026,6 +1030,94 @@ curl --request POST \
     &quot;collectionName&quot;: &quot;my_collection&quot;,
     &quot;properties&quot;: {
         &quot;timezone&quot;: &quot;Asia/Shanghai&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Example-8-Alter-the-consistency-level" class="common-anchor-header">Exemplo 8: Alterar o nível de consistência<button data-href="#Example-8-Alter-the-consistency-level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O seguinte fragmento de código altera o nível de consistência de uma coleção existente para <strong>«Eventually</strong>». O novo nível aplica-se a pesquisas e consultas subsequentes nesta coleção que não definam explicitamente um nível de consistência; as definições por pedido continuam a ter precedência. Para mais detalhes, consulte <a href="/docs/pt/tune_consistency.md">Nível de consistência</a>.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#rust">   Rust</a>
+ <a href="#cpp">   C++</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#csharp">   C#</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+        .build();
+
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-rust">client
+    .<span class="hljs-title function_ invoke__">alter_collection_properties</span>(
+        AlterCollectionPropertiesRequest::<span class="hljs-title function_ invoke__">builder</span>()
+            .<span class="hljs-title function_ invoke__">collection_name</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+            .<span class="hljs-title function_ invoke__">property</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)
+            .<span class="hljs-title function_ invoke__">build</span>()?,
+    )
+    .<span class="hljs-keyword">await</span>?;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-cpp"><span class="hljs-keyword">auto</span> status = client-&gt;<span class="hljs-built_in">AlterCollectionProperties</span>(milvus::<span class="hljs-built_in">AlterCollectionPropertiesRequest</span>()
+                                                   .<span class="hljs-built_in">WithCollectionName</span>(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                                                   .<span class="hljs-built_in">AddProperty</span>(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>));
+<span class="hljs-keyword">if</span> (!status.<span class="hljs-built_in">IsOk</span>()) {
+    std::cout &lt;&lt; status.<span class="hljs-built_in">Message</span>() &lt;&lt; std::endl;
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">alterCollectionProperties</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
+    <span class="hljs-attr">properties</span>: {
+        <span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>
+    }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-csharp"><span class="hljs-keyword">await</span> client.AlterCollectionPropertiesAsync(<span class="hljs-keyword">new</span> AlterCollectionPropertiesReq
+{
+    CollectionName = <span class="hljs-string">&quot;my_collection&quot;</span>,
+    Properties = { [<span class="hljs-string">&quot;consistency_level&quot;</span>] = <span class="hljs-string">&quot;Eventually&quot;</span> }
+});
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>

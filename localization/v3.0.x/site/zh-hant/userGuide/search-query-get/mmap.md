@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>記憶體映射 (mmap) 能讓系統直接存取磁碟上的大型檔案，使 Milvus 得以同時將索引和資料儲存於記憶體與硬碟中。此方法有助於根據存取頻率優化資料配置策略，在不會顯著影響搜尋效能的前提下，擴充集合的儲存容量。 本頁面將協助您了解 Milvus 如何運用 mmap 來實現快速且高效的数据儲存與檢索。</p>
+    </button></h1><p>記憶體映射 (mmap) 能讓系統直接存取磁碟上的大型檔案，使 Milvus 得以將索引和資料同時儲存於記憶體與硬碟中。此方法有助於根據存取頻率優化資料配置策略，在不會顯著影響搜尋效能的前提下，擴充集合的儲存容量。 本頁面將協助您了解 Milvus 如何運用 mmap 來實現快速且高效的数据儲存與檢索。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,7 +46,7 @@ summary: >-
  </span></p>
 <p>Milvus 是一個高度依賴記憶體的資料庫系統，可用的記憶體大小決定了集合的容量。若資料大小超過記憶體容量，便無法將包含大量資料的欄位載入記憶體中，而這在 AI 驅動的應用程式中是常見的情況。</p>
 <p>為解決此類問題，Milvus 引入 mmap 機制，以平衡集合中熱數據與冷數據的載入。如上圖右側所示，您可以配置 Milvus，使其將特定欄位的原始資料進行記憶體映射，而非將其完全載入記憶體中。 如此一來，您即可直接存取這些欄位的記憶體內容，無需擔心記憶體問題，同時還能擴展集合的容量。</p>
-<p>透過比較左、右圖中的資料配置流程，您會發現左圖的記憶體使用量遠高於右圖。 啟用 mmap 後，原本應載入記憶體的資料會被卸載至硬碟，並緩存於作業系統的頁面快取中，從而減少記憶體佔用量。然而，快取未命中可能會導致效能下降。詳情請參閱<a href="https://en.wikipedia.org/wiki/Mmap">這篇文章</a>。</p>
+<p>透過比較左圖與右圖中的資料配置流程，您會發現左圖的記憶體使用量遠高於右圖。 啟用 mmap 後，原本應載入記憶體的資料會被卸載至硬碟，並緩存於作業系統的頁面快取中，從而減少記憶體佔用量。然而，快取未命中可能會導致效能下降。詳細資訊請參閱<a href="https://en.wikipedia.org/wiki/Mmap">這篇文章</a>。</p>
 <p>在 Milvus 上配置 mmap 時，請務必遵循以下原則：始終將頻繁存取的資料和索引完全載入記憶體中，並僅對其餘欄位使用 mmap。</p>
 <h2 id="Use-mmap-in-Milvus" class="common-anchor-header">在 Milvus 中使用 mmap<button data-href="#Use-mmap-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 提供分層式的 mmap 設定，涵蓋全域、欄位、索引及集合層級，其中索引與欄位層級的設定優先於集合層級，而集合層級的設定則優先於全域層級。</p>
+    </button></h2><p>Milvus 提供分層式的 mmap 設定，涵蓋全域、欄位、索引及集合等層級，其中索引與欄位層級的設定優先於集合層級，而集合層級的設定則優先於全域層級。</p>
 <h3 id="Global-mmap-settings" class="common-anchor-header">全域 mmap 設定<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,12 +114,12 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.vectorIndex</code></p></td>
-     <td><p>指定是否將所有向量欄位索引映射至記憶體中。將此參數設定為<code translate="no">true</code> 時，Milvus 會將集合的向量欄位索引映射至記憶體中，而非在收到針對此集合的載入請求時才將其完全載入。</p><p>目前僅支援使用以下索引類型的向量場：</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>稀疏_反向索引</p></li><li><p>SPARSE_WAND</p></li></ul></td>
+     <td><p>指定是否將所有向量欄位索引映射至記憶體中。將此參數設定為<code translate="no">true</code> 時，Milvus會將集合的向量欄位索引映射至記憶體中，而非在收到針對此集合的載入請求時才將其完全載入。</p><p>目前僅支援使用以下索引類型的向量場：</p><ul><li><p>FLAT</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>HNSW</p></li><li><p>SCANN</p></li><li><p>稀疏_反向索引</p></li><li><p>SPARSE_WAND</p></li></ul></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>指定記憶體映射檔案的路徑。若未指定此參數，則採用預設值。 </p><p>預設值中的「<code translate="no">localStorage.path</code> 」佔位符代表 Milvus QueryNodes 的硬碟。請確保您的 QueryNodes 配備高效能硬碟，以充分發揮記憶體映射（mmap）的優勢。</p></td>
+     <td><p>指定記憶體映射檔案的路徑。若未指定此參數，則採用預設值。 </p><p>預設值中的「<code translate="no">localStorage.path</code> 」佔位符代表 Milvus 查詢節點（QueryNodes）的硬碟。請確保您的查詢節點配備高效能硬碟，以充分發揮記憶體映射（mmap）的優勢。</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
@@ -140,7 +140,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要配置針對特定欄位的 mmap，您在新增欄位時需包含 `<code translate="no">mmap_enabled</code> ` 參數。您可以將此參數設定為 `<code translate="no">True</code>`，以啟用該特定欄位的 mmap。</p>
+    </button></h3><p>若要配置針對特定欄位的 mmap，您在新增欄位時需包含 `<code translate="no">mmap_enabled</code> ` 參數。您可以將此參數設定為 `<code translate="no">True</code>`，以在此特定欄位上啟用 mmap。</p>
 <p>以下範例示範如何在新增欄位時設定針對特定欄位的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -267,7 +267,46 @@ client.alterCollectionField(AlterCollectionFieldReq.builder()
     <span class="hljs-attr">properties</span>: {<span class="hljs-string">&quot;mmap_enable&quot;</span>: <span class="hljs-literal">true</span>}
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to connect to Milvus: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema().
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>).WithIsAutoID(<span class="hljs-literal">false</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">5</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;doc_chunk&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">512</span>).
+        WithTypeParams(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;false&quot;</span>))
+
+err = client.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to create collection: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+err = client.AlterCollectionFieldProperty(ctx,
+    milvusclient.NewAlterCollectionFieldPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;doc_chunk&quot;</span>).
+        WithProperty(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to alter field properties: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment">#restful</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -337,7 +376,7 @@ curl --request POST \
 <p>建議針對儲存大量資料的欄位啟用 mmap。此功能同時支援標量欄位與向量欄位。</p>
 </div>
 <p>接著，您可以使用上述建立的模式來建立一個集合。當收到載入該集合的請求時，Milvus 會將<strong>doc_chunk</strong>欄位的原始資料透過記憶體映射（mmap）載入至記憶體中。</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">索引專屬的 mmap 設定<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">索引專用的 mmap 設定<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -352,7 +391,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>若要配置索引專用的 mmap，您在新增索引時，需在索引參數中包含 `<code translate="no">mmap.enable</code> ` 屬性。您可以將該屬性設定為 `<code translate="no">true</code>`，以在該特定索引上啟用 mmap。</p>
+    </button></h3><p>若要設定索引專用的 mmap，您需在新增索引時，於索引參數中加入 `<code translate="no">mmap.enable</code> ` 屬性。您可以將該屬性設定為 `<code translate="no">true</code>`，以在該特定索引上啟用 mmap。</p>
 <p>以下範例示範如何在新增索引時配置針對特定索引的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -422,7 +461,42 @@ client.alterIndexProperties(AlterIndexPropertiesReq.builder()
     <span class="hljs-attr">properties</span>:{<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">true</span>}
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to connect to Milvus: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>, index.NewInvertedIndex())
+indexOption.WithExtraParam(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-literal">false</span>)
+
+_, err = client.CreateIndex(ctx, indexOption)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to create index: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+err = client.AlterIndexProperties(ctx,
+    milvusclient.NewAlterIndexPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;title&quot;</span>).
+        WithProperty(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-literal">true</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to alter index properties: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
@@ -459,10 +533,10 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>此設定適用於向量欄位與標量欄位的索引。</p>
+<p>此設定適用於向量欄位和標量欄位的索引。</p>
 </div>
 <p>之後，您可以在集合中參照索引參數。當收到載入集合的請求時，Milvus 會將<strong>標題</strong>欄位的索引記憶體映射至記憶體中。</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">集合專用的 mmap 設定<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">集合專屬的 mmap 設定<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -506,7 +580,38 @@ client.createCollection(req);
     <span class="hljs-attr">properties</span>: { <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">false</span> }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to connect to Milvus: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+schema := entity.NewSchema().
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>).WithIsAutoID(<span class="hljs-literal">false</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">5</span>))
+
+err = client.CreateCollection(ctx,
+    milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
+        WithProperty(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to create collection: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
 --url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
@@ -577,7 +682,44 @@ client.loadCollection(LoadCollectionReq.builder()
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    APIKey:  <span class="hljs-string">&quot;root:Milvus&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to connect to Milvus: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<span class="hljs-keyword">defer</span> client.Close(ctx)
+
+err = client.ReleaseCollection(ctx, milvusclient.NewReleaseCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to release collection: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+err = client.AlterCollectionProperties(ctx,
+    milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).
+        WithProperty(<span class="hljs-string">&quot;mmap.enabled&quot;</span>, <span class="hljs-literal">false</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to alter collection properties: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+_, err = client.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Printf(<span class="hljs-string">&quot;Failed to load collection: %s\n&quot;</span>, err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>

@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
         ></path>
       </svg>
     </button></h1><p>Les sources de données externes évoluent souvent après la création d’une collection externe. Par exemple, une table « lakehouse » qui stocke déjà des embeddings peut par la suite inclure un nouveau champ scalaire, tel qu’un score, une catégorie ou un horodatage, que vous souhaitez faire apparaître dans les résultats de requête ou utiliser dans des filtres.</p>
-<p>Au lieu de recréer la collection externe ou de copier les données source dans Milvus, ajoutez un champ Milvus qui correspond au champ existant dans la source de données externe. Après avoir ajouté le champ, actualisez la collection externe afin que le nouveau champ puisse être utilisé dans les requêtes et les recherches.</p>
+<p>Au lieu de recréer la collection externe ou de copier les données sources dans Milvus, ajoutez un champ Milvus qui correspond au champ existant dans la source de données externe. Après avoir ajouté le champ, actualisez la collection externe afin que le nouveau champ puisse être utilisé dans les requêtes et les recherches.</p>
 <h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ beta: Milvus 3.0.x
       </svg>
     </button></h2><ul>
 <li>Les collections externes prennent actuellement en charge l’ajout de champs après leur création. Les autres modifications de schéma, telles que la suppression de champs, le renommage de champs, la modification des types de données des champs, la modification des dimensions des vecteurs ou le remappage d’ <code translate="no">external_field</code>, ne sont pas prises en charge.</li>
-<li>Vous ne pouvez ajouter qu’un champ qui existe déjà dans la source de données externe. Cette opération mappe un champ externe existant à un champ Milvus. Elle ne crée pas de nouveau champ dans la source de données externe et ne remplit pas les données de la source a posteriori.</li>
+<li>Vous ne pouvez ajouter qu’un champ qui existe déjà dans la source de données externe. Cette opération mappe un champ externe existant à un champ Milvus. Elle ne crée pas de nouveau champ dans la source de données externe et ne remplit pas rétrospectivement les données source.</li>
 <li>L’ajout de champs de type « <code translate="no">SPARSE_FLOAT_VECTOR</code> » à une collection externe existante n’est pas pris en charge.</li>
 <li>L’ajout de champs StructArray à une collection externe existante n’est pas pris en charge. Si votre collection externe nécessite un champ StructArray, définissez-le dans le schéma de la collection lors de sa création.</li>
 </ul>
@@ -84,7 +84,7 @@ beta: Milvus 3.0.x
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python
@@ -187,7 +187,7 @@ client.<span class="hljs-title function_ invoke__">add_collection_field</span>(
  <a href="#rust">   Rust</a>
  <a href="#cpp">   C++</a>
  <a href="#javascript">   NodeJS</a>
- <a href="#csharp">   CSharp</a>
+ <a href="#csharp">   C#</a>
  <a href="#bash">   cURL</a>
 </div>
 ```python

@@ -2,11 +2,11 @@
 id: index-vector-fields.md
 order: 1
 summary: >-
-  يرشدك هذا الدليل إلى العمليات الأساسية لإنشاء الفهارس وإدارتها على الحقول
-  المتجهة في مجموعة.
-title: فهرسة الحقول المتجهة
+  يوضح لك هذا الدليل الخطوات الأساسية لإنشاء الفهارس وإدارتها على الحقول المتجهة
+  في مجموعة ما.
+title: مفهرس الحقول المتجهة
 ---
-<h1 id="Index-Vector-Fields" class="common-anchor-header">فهرسة الحقول المتجهة<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Vector-Fields" class="common-anchor-header">مفهرس الحقول المتجهة<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ title: فهرسة الحقول المتجهة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يرشدك هذا الدليل إلى العمليات الأساسية لإنشاء وإدارة الفهارس على الحقول المتجهة في مجموعة.</p>
+    </button></h1><p>يرشدك هذا الدليل إلى العمليات الأساسية المتعلقة بإنشاء وإدارة الفهارس على الحقول المتجهة في مجموعة.</p>
 <div class="alert warning">
-<p>تم إهمال هذه الصفحة. للحصول على أحدث تطبيق، راجع <a href="/docs/ar/ivf-flat.md">IVF_FLAT</a> و <a href="/docs/ar/hnsw.md">HNSW</a> والمزيد.</p>
+<p>هذه الصفحة لم تعد مستخدمة. للاطلاع على أحدث تطبيقات، راجع <a href="/docs/ar/ivf-flat.md">IVF_FLAT</a> و <a href="/docs/ar/hnsw.md">HNSW</a> وغيرها.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,22 +40,25 @@ title: فهرسة الحقول المتجهة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>من خلال الاستفادة من البيانات الوصفية المخزنة في ملف الفهرس، يقوم Milvus بتنظيم بياناتك في بنية متخصصة، مما يسهل الاسترجاع السريع للمعلومات المطلوبة أثناء عمليات البحث أو الاستعلامات.</p>
-<p>يوفر Milvus العديد من أنواع الفهارس والمقاييس لفرز قيم الحقول لإجراء عمليات بحث فعالة للتشابه. يسرد الجدول التالي أنواع الفهارس والمقاييس المدعومة لأنواع الحقول المتجهة المختلفة. يدعم Milvus حاليًا أنواعًا مختلفة من بيانات المتجهات، بما في ذلك التضمينات ذات النقطة العائمة (المعروفة غالبًا باسم متجهات النقطة العائمة أو المتجهات الكثيفة)، والتضمينات الثنائية (المعروفة أيضًا باسم المتجهات الثنائية)، والتضمينات المتفرقة (المعروفة أيضًا باسم المتجهات المتفرقة). لمزيد من التفاصيل، راجع <a href="/docs/ar/index.md">الفهرس داخل الذاكرة</a> <a href="/docs/ar/metric.md">ومقاييس التشابه</a>.</p>
+    </button></h2><p>من خلال الاستفادة من البيانات الوصفية المخزنة في ملف الفهرس، ينظم Milvus بياناتك في بنية متخصصة، مما يسهل الاسترجاع السريع للمعلومات المطلوبة أثناء عمليات البحث أو الاستعلامات.</p>
+<p>يوفر Milvus عدة أنواع من الفهارس والمقاييس لفرز قيم الحقول من أجل إجراء عمليات بحث فعالة عن التشابه. يسرد الجدول التالي أنواع الفهارس والمقاييس المدعومة لأنواع مختلفة من الحقول المتجهة. حاليًا، يدعم Milvus أنواعًا متنوعة من البيانات المتجهة، بما في ذلك التضمينات ذات العلامة العائمة (المعروفة غالبًا باسم المتجهات ذات العلامة العائمة أو المتجهات الكثيفة)، والتضمينات الثنائية (المعروفة أيضًا باسم المتجهات الثنائية)، والتضمينات المتفرقة (المعروفة أيضًا باسم المتجهات المتفرقة). لمزيد من التفاصيل، راجع <a href="/docs/ar/index.md">«الفهرس في الذاكرة</a> » <a href="/docs/ar/metric.md">و«مقاييس التشابه</a>».</p>
 <div class="filter">
- <a href="#floating">تضمينات النقطة العائمة</a> <a href="#binary">التضمينات الثنائية التضمينات الثنائية</a> <a href="#sparse">التضمينات المتفرقة</a></div>
+ <a href="#floating">التضمينات ذات النقاط العائمة</a>
+ <a href="#binary"> التضمينات الثنائية</a>
+ <a href="#sparse"> التضمينات المتفرقة</a>
+</div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">أنواع المقاييس</th>
-    <th class="tg-0pky">أنواع الفهرس</th>
+    <th class="tg-0pky">أنواع الفهارس</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0pky"><ul><li>المسافة الإقليدية (L2)</li><li>الضرب الداخلي (IP)</li><li>تشابه جيب التمام (COSINE)</li></td>
-    <td class="tg-0pky" rowspan="2"><ul><li>مسطح</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
+    <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -65,7 +68,7 @@ title: فهرسة الحقول المتجهة
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">أنواع المقاييس</th>
-    <th class="tg-0pky">أنواع الفهرس</th>
+    <th class="tg-0pky">أنواع الفهارس</th>
   </tr>
 </thead>
 <tbody>
@@ -80,29 +83,29 @@ title: فهرسة الحقول المتجهة
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">الأنواع المترية</th>
-    <th class="tg-0pky">أنواع الفهرس</th>
+    <th class="tg-0pky" style="width: 204px;">أنواع المقاييس</th>
+    <th class="tg-0pky">أنواع الفهارس</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">الفهرس_المتفرق_المقلوب_الفهرس</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 <tbody>
   <tr>
     <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">الفهرس_المتفرق_المقلوب_الفهرس</td>
+    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
   </tr>
 </tbody>
 </table>
 <div class="alert note">
-<p>بدءًا من الإصدار Milvus 2.5.4 فصاعدًا، تم إهمال <code translate="no">SPARSE_WAND</code>. بدلاً من ذلك، يوصى باستخدام <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> للمعادلة مع الحفاظ على التوافق. لمزيد من المعلومات، ارجع إلى <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
+<p>اعتبارًا من الإصدار Milvus 2.5.4 فصاعدًا، تم إيقاف استخدام " <code translate="no">SPARSE_WAND</code> ". وبدلاً من ذلك، يُنصح باستخدام " <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> " لتحقيق التكافؤ مع الحفاظ على التوافق. لمزيد من المعلومات، راجع " <a href="/docs/ar/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>".</p>
 </div>
 </div>
-<p>يوصى بإنشاء فهارس لكل من الحقل المتجه والحقول القياسية التي يتم الوصول إليها بشكل متكرر.</p>
-<h2 id="Preparations" class="common-anchor-header">الإعدادات<button data-href="#Preparations" class="anchor-icon" translate="no">
+<p>يُنصح بإنشاء فهارس لكل من الحقول المتجهة والحقول القياسية التي يتم الوصول إليها بشكل متكرر.</p>
+<h2 id="Preparations" class="common-anchor-header">التحضيرات<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -117,23 +120,26 @@ title: فهرسة الحقول المتجهة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>كما هو موضح في <a href="/docs/ar/manage-collections.md">إدارة</a> المجموعات، يقوم ميلفوس تلقائيًا بإنشاء فهرس وتحميله في الذاكرة عند إنشاء مجموعة إذا تم تحديد أي من الشروط التالية في طلب إنشاء المجموعة</p>
+    </button></h2><p>كما هو موضح في <a href="/docs/ar/manage-collections.md">إدارة المجموعات</a>، يقوم Milvus تلقائيًا بإنشاء فهرس وتحميله في الذاكرة عند إنشاء مجموعة إذا تم تحديد أي من الشروط التالية في طلب إنشاء المجموعة:</p>
 <ul>
-<li><p>بُعد الحقل المتجه ونوع المقياس، أو</p></li>
+<li><p>أبعاد الحقل المتجه ونوع المقياس، أو</p></li>
 <li><p>المخطط ومعلمات الفهرس.</p></li>
 </ul>
-<p>يقوم مقتطف التعليمات البرمجية أدناه بإعادة استخدام التعليمات البرمجية الحالية لإنشاء اتصال بمثيل Milvus وإنشاء مجموعة دون تحديد معلمات الفهرس الخاصة بها. في هذه الحالة، تفتقر المجموعة إلى فهرس وتبقى غير محملة.</p>
+<p>يعيد مقتطف الشفرة أدناه توظيف الشفرة الحالية لإنشاء اتصال بمثيل Milvus وإنشاء مجموعة دون تحديد معلمات الفهرس الخاصة بها. في هذه الحالة، تفتقر المجموعة إلى فهرس وتظل غير محملة.</p>
 <div class="language-python">
-<p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> للاتصال بخادم Milvus وإنشاء مجموعة باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
+<p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> للاتصال بخادم Milvus وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>، <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>، و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> للاتصال بخادم ميلفوس وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>و <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>للتحضير لعملية الفهرسة، استخدم <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> للاتصال بخادم Milvus وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>، <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>، و <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> للاتصال بخادم ميلفوس وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>للتحضير لعملية الفهرسة، استخدم <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> للاتصال بخادم Milvus وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -236,7 +242,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>لإنشاء فهرس لمجموعة أو فهرسة مجموعة، استخدم . <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> لإعداد معلمات الفهرس و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> لإنشاء الفهرس.</p>
+<p>لإنشاء فهرس لمجموعة أو فهرسة مجموعة، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> لإعداد معلمات الفهرسة و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> لإنشاء الفهرس.</p>
 </div>
 <div class="language-java">
 <p>لإنشاء فهرس لمجموعة أو فهرسة مجموعة، استخدم <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> لإعداد معلمات الفهرس و <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> لإنشاء الفهرس.</p>
@@ -245,7 +251,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>لإنشاء فهرس لمجموعة أو فهرسة مجموعة، استخدم <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4.1. Set up the index parameters</span>
 index_params = MilvusClient.prepare_index_params()
 
@@ -318,15 +327,15 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>اسم الملف الهدف لتطبيق هذا الكائن.</td>
+      <td>اسم الملف المستهدف الذي ينطبق عليه هذا الكائن.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>الخوارزمية المستخدمة لقياس التشابه بين المتجهات. القيم الممكنة هي <strong>IP</strong> و <strong>L2</strong> و <strong>COSINE</strong> و <strong>JACCARD</strong> و <strong>HAMMING</strong>. يتوفر هذا فقط عندما يكون الحقل المحدد هو حقل متجه. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">الفهارس المدعومة في ميلفوس</a>.</td>
+      <td>الخوارزمية المستخدمة لقياس التشابه بين المتجهات. القيم الممكنة هي <strong>IP،</strong> <strong>L2،</strong> <strong>COSINE،</strong> <strong>JACCARD،</strong> <strong>HAMMING</strong>. يتوفر هذا الخيار فقط عندما يكون الحقل المحدد حقل متجه. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">الفهارس المدعومة في Milvus</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>اسم الخوارزمية المستخدمة لترتيب البيانات في الحقل المحدد. لمعرفة الخوارزميات القابلة للتطبيق، راجع <a href="https://milvus.io/docs/index.md">الفهرس داخل الذاكرة</a> <a href="https://milvus.io/docs/disk_index.md">والفهرس على القرص</a>.</td>
+      <td>اسم الخوارزمية المستخدمة لترتيب البيانات في الحقل المحدد. للاطلاع على الخوارزميات القابلة للتطبيق، راجع " <a href="https://milvus.io/docs/index.md">الفهرس في الذاكرة</a> " و" <a href="https://milvus.io/docs/disk_index.md">الفهرس على القرص</a>".</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
@@ -334,7 +343,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>معلمات الضبط الدقيق لنوع الفهرس المحدد. للحصول على تفاصيل حول المفاتيح الممكنة ونطاقات القيم، راجع الفهرس <a href="https://milvus.io/docs/index.md">داخل الذاكرة</a>.</td>
+      <td>معلمات الضبط الدقيق لنوع الفهرس المحدد. للحصول على تفاصيل حول المفاتيح ونطاقات القيم الممكنة، راجع <a href="https://milvus.io/docs/index.md">«الفهرس في الذاكرة</a>».</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>
@@ -342,11 +351,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>كائن <strong>IndexParams</strong> يحتوي على قائمة من كائنات <strong>IndexParam</strong>.</td>
+      <td>كائن <strong>IndexParams</strong> يحتوي على قائمة بكائنات <strong>IndexParam</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>يتحكم في كيفية بناء الفهرس فيما يتعلق بطلب العميل. قيم صالحة:<br><ul><li><code translate="no">True</code> (افتراضي): ينتظر العميل حتى يتم بناء الفهرس بالكامل قبل إرجاعه. هذا يعني أنك لن تحصل على استجابة حتى تكتمل العملية.</li><li><code translate="no">False</code>: يعود العميل فور استلام الطلب ويتم إنشاء الفهرس في الخلفية. لمعرفة ما إذا كان إنشاء الفهرس قد اكتمل، استخدم طريقة <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>يتحكم في كيفية إنشاء الفهرس فيما يتعلق بطلب العميل. القيم الصالحة:<br><ul><li><code translate="no">True</code> (الافتراضي): ينتظر العميل حتى يتم إنشاء الفهرس بالكامل قبل أن يعود. وهذا يعني أنك لن تحصل على استجابة حتى تكتمل العملية.</li><li><code translate="no">False</code>: يعود العميل فور استلام الطلب، ويتم إنشاء الفهرس في الخلفية. لمعرفة ما إذا كان إنشاء الفهرس قد اكتمل، استخدم الأسلوب <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -360,7 +369,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>اسم الحقل المستهدف لتطبيق كائن IndexParam هذا.</td>
+      <td>اسم الحقل المستهدف الذي ينطبق عليه كائن IndexParam هذا.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
@@ -368,15 +377,15 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>اسم الخوارزمية المستخدمة لترتيب البيانات في الحقل المحدد. لمعرفة الخوارزميات القابلة للتطبيق، راجع <a href="https://milvus.io/docs/index.md">الفهرس داخل الذاكرة</a> <a href="https://milvus.io/docs/disk_index.md">والفهرس على القرص</a>.</td>
+      <td>اسم الخوارزمية المستخدمة لترتيب البيانات في الحقل المحدد. للاطلاع على الخوارزميات القابلة للتطبيق، راجع <a href="https://milvus.io/docs/index.md">«الفهرس في الذاكرة</a> » <a href="https://milvus.io/docs/disk_index.md">و«الفهرس على القرص</a>».</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>مقياس المسافة المراد استخدامه للفهرس. القيم الممكنة هي <strong>IP</strong> <strong>وL2</strong> <strong>وCOSINE</strong> <strong>وJACCARD</strong> <strong>وHAMMING</strong>.</td>
+      <td>مقياس المسافة الذي سيتم استخدامه للفهرس. القيم الممكنة هي <strong>IP</strong> و <strong>L2</strong> و <strong>COSINE</strong> و <strong>JACCARD</strong> و <strong>HAMMING</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>معلمات الفهرس الإضافية. لمزيد من التفاصيل، راجع الفهرس <a href="https://milvus.io/docs/index.md">داخل الذاكرة</a> والفهرس <a href="https://milvus.io/docs/disk_index.md">على القرص</a>.</td>
+      <td>معلمات الفهرس الإضافية. لمزيد من التفاصيل، راجع <a href="https://milvus.io/docs/index.md">«الفهرس في الذاكرة</a> » <a href="https://milvus.io/docs/disk_index.md">و«الفهرس على القرص</a>».</td>
     </tr>
   </tbody>
 </table>
@@ -390,11 +399,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>اسم المجموعة الموجودة.</td>
+      <td>اسم مجموعة موجودة.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>اسم الحقل المراد إنشاء فهرس فيه.</td>
+      <td>اسم الحقل الذي سيتم إنشاء الفهرس فيه.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
@@ -402,7 +411,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>نوع المقياس المستخدم لقياس المسافة المتجهة.</td>
+      <td>نوع المقياس المستخدم لقياس مسافة المتجه.</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
@@ -416,7 +425,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </table>
 <div class="admonition note">
 <p><strong>ملاحظات</strong></p>
-<p>يمكنك حالياً إنشاء ملف فهرس واحد فقط لكل حقل في مجموعة.</p>
+<p>حاليًا، لا يمكنك إنشاء سوى ملف فهرس واحد لكل حقل في المجموعة.</p>
 </div>
 <h2 id="Check-Index-Details" class="common-anchor-header">التحقق من تفاصيل الفهرس<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -433,9 +442,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بمجرد إنشاء فهرس، يمكنك التحقق من تفاصيله.</p>
+    </button></h2><p>بمجرد إنشاء الفهرس، يمكنك التحقق من تفاصيله.</p>
 <div class="language-python">
-<p>للتحقق من تفاصيل الفهرس، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> لسرد أسماء الفهرس و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> للحصول على تفاصيل الفهرس.</p>
+<p>للتحقق من تفاصيل الفهرس، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> لسرد أسماء الفهارس و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> للحصول على تفاصيل الفهرس.</p>
 </div>
 <div class="language-java">
 <p>للتحقق من تفاصيل الفهرس، استخدم <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> للحصول على تفاصيل الفهرس.</p>
@@ -444,7 +453,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>للتحقق من تفاصيل الفهرس، استخدم <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> للحصول على تفاصيل الفهرس.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Describe index</span>
 res = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>
@@ -544,8 +556,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يمكنك التحقق من ملف الفهرس الذي تم إنشاؤه على حقل معين، وجمع إحصائيات عدد الصفوف المفهرسة باستخدام ملف الفهرس هذا.</p>
-<h2 id="Drop-an-Index" class="common-anchor-header">إسقاط فهرس<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
+<p>يمكنك التحقق من ملف الفهرس الذي تم إنشاؤه لحقل معين، وجمع الإحصائيات حول عدد الصفوف التي تم فهرستها باستخدام ملف الفهرس هذا.</p>
+<h2 id="Drop-an-Index" class="common-anchor-header">إزالة فهرس<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -560,21 +572,24 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك ببساطة إسقاط فهرس إذا لم تعد هناك حاجة إليه.</p>
+    </button></h2><p>يمكنك ببساطة حذف الفهرس إذا لم تعد هناك حاجة إليه.</p>
 <div class="alert note">
-<p>قبل إسقاط فهرس، تأكد أولاً من إصداره.</p>
+<p>قبل حذف الفهرس، تأكد أولاً من أنه قد تم تحريره.</p>
 </div>
 <div class="language-python">
-<p>لإسقاط فهرس، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
+<p>لإلغاء فهرس، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>لإسقاط فهرس، استخدم . <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>لحذف فهرس، استخدم <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>لإسقاط فهرس، استخدم . <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>لحذف فهرس، استخدم <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">بايثون </a> <a href="#java">جافا</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">بايثون</a>
+ <a href="#java">   جافا</a>
+ <a href="#javascript">   NodeJS</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Drop index</span>
 client.drop_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,

@@ -1,7 +1,7 @@
 ---
 id: array_data_type.md
 title: 配列フィールド
-summary: ARRAYフィールドは、同じデータ型の要素からなる順序付き集合を格納します。以下に、ARRAYフィールドによるデータの格納例を示します。
+summary: ARRAYフィールドには、同じデータ型の要素が順序付きで格納されます。以下に、ARRAYフィールドによるデータの格納例を示します。
 ---
 <h1 id="Array-Field" class="common-anchor-header">配列フィールド<button data-href="#Array-Field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,11 +44,12 @@ summary: ARRAYフィールドは、同じデータ型の要素からなる順序
 <li><strong>デフォルト値</strong>：ARRAYフィールドはデフォルト値をサポートしていません。ただし、<code translate="no">nullable</code> 属性を<code translate="no">True</code> に設定することで、NULL値を許可することができます。詳細については、「<a href="/docs/ja/nullable-and-default.md">Nullable &amp; Default</a>」を参照してください。</li>
 </ul>
 <ul>
-<li><code translate="no">VARCHAR</code>データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義される同一のデータ型でなければなりません。 が「<code translate="no">element_type</code> 」に設定されている場合は、各配列要素に許可される最大バイト数を定義する<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除き、Milvusがサポートするあらゆるスカラーデータ型を受け入れます。<code translate="no">element_type=STRUCT</code> の場合は、StructArrayフィールドを使用し、<code translate="no">struct_schema</code> を指定してください。詳細については、<a href="/docs/ja/create-structarray-field.md">StructArray</a>を参照してください。 最上位の ARRAY フィールドには、ベクトルやネストされた配列を格納することはできず、その要素を個別に null に設定することもできません。これらの形式は、Milvus 3.0.6 以降の StructArray フィールド内のサブフィールドでのみ利用可能です。</li>
+<li><code translate="no">element_type</code> データ型：<strong></strong>ARRAYフィールド内のすべての要素は、<code translate="no">element_type</code> パラメータで定義される同一のデータ型でなければなりません。 が<code translate="no">VARCHAR</code> に設定されている場合は、各配列要素に許可される最大バイト数を定義する<code translate="no">max_length</code> も指定する必要があります。<code translate="no">element_type</code> は、<code translate="no">JSON</code> を除き、Milvusがサポートするあらゆるスカラーデータ型を受け入れます。<code translate="no">element_type=STRUCT</code> の場合は、StructArrayフィールドを使用し、<code translate="no">struct_schema</code> を指定してください。詳細については、<a href="/docs/ja/create-structarray-field.md">StructArray</a>を参照してください。 最上位の ARRAY フィールドには、ベクトルやネストされた配列を格納することはできず、その要素を個別に null に設定することもできません。これらの形式は、Milvus 3.0.6 以降の StructArray フィールド内のサブフィールドでのみ利用可能です。</li>
 </ul>
 <ul>
-<li><p><strong>配列の容量</strong>: ARRAY フィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければなりません。この値は<strong>1</strong>から<strong>4096</strong> までの整数である必要があります。</p></li>
-<li><p><strong>文字列の取り扱い</strong>：Arrayフィールド内の文字列値は、意味的なエスケープや変換を行わずに、そのままの形で格納されます。たとえば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
+<li><p><strong>配列の容量</strong>：ARRAY フィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければなりません。この値は 0 より大きく、<code translate="no">proxy.maxArrayCapacity</code> （デフォルトは<strong>4096</strong>）を超えてはなりません。</p></li>
+<li><p><strong>テキストマッチ</strong>：<code translate="no">TEXT_MATCH</code> 、<code translate="no">TEXT_MATCH_FUZZY</code> 、および<code translate="no">PHRASE_MATCH</code> は、<code translate="no">VARCHAR</code> および<code translate="no">TEXT</code> フィールドのみをサポートしています。これらを ARRAY フィールドに適用すると、エラーが返されます。<code translate="no">enable_analyzer</code> および<code translate="no">enable_match</code> は、ARRAY フィールドには影響しません。テキストマッチの詳細については、<a href="/docs/ja/keyword-match.md">「テキストマッチ」</a>を参照してください。</p></li>
+<li><p><strong>文字列の取り扱い</strong>：配列フィールド内の文字列値は、意味的なエスケープや変換を行わずに、そのままの形で格納されます。たとえば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、および<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納されますが、<code translate="no">'a'b'</code> および<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされます。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAYフィールドの追加<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,15 +66,15 @@ summary: ARRAYフィールドは、同じデータ型の要素からなる順序
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusクラスタでARRAYフィールドを使用するには、コレクションスキーマの作成時に該当するフィールド型を定義します。このプロセスには以下が含まれます：</p>
+    </button></h2><p>コレクションスキーマに ARRAY フィールドを追加するには、以下のパラメータを設定します。</p>
 <ol>
-<li><p><code translate="no">datatype</code> を、サポートされている配列データ型である<code translate="no">ARRAY</code> に設定します。</p></li>
-<li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。同じ配列内のすべての要素は、同じデータ型でなければなりません。</p></li>
-<li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量（つまり、配列が格納できる要素の最大数）を定義します。</p></li>
+<li><p>フィールドのデータ型を<code translate="no">ARRAY</code> に設定します。</p></li>
+<li><p><code translate="no">element_type</code> を、要素の共通データ型に設定します。</p></li>
+<li><p><code translate="no">max_capacity</code> を要素の最大数に設定します。</p></li>
 </ol>
-<p>ARRAYフィールドを含むコレクションスキーマを定義する方法は次のとおりです。</p>
+<p>ARRAYフィールドを含むコレクションスキーマを定義する方法は次のとおりです:</p>
 <div class="alert note">
-<p>スキーマ定義時に `<code translate="no">enable_dynamic_field=True</code> ` を設定すると、Milvus では事前に定義されていないスカラーフィールドの挿入が可能になります。ただし、これによりクエリや管理の複雑さが増し、パフォーマンスに影響を与える可能性があります。詳細については、<a href="/docs/ja/enable-dynamic-field.md">「動的フィールド」</a>を参照してください。</p>
+<p>スキーマで定義されていないフィールドを挿入するには、<a href="/docs/ja/enable-dynamic-field.md">動的フィールド</a>を有効にします。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -373,8 +374,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックス作成は、検索およびクエリのパフォーマンス向上に役立ちます。Milvusクラスタでは、ベクトルフィールドに対してインデックス作成は必須ですが、スカラーフィールドに対してはオプションです。</p>
-<p>次の例では、ベクトルフィールド `<code translate="no">embedding</code> ` および ARRAY フィールド `<code translate="no">tags</code>` に対して、いずれも `<code translate="no">AUTOINDEX</code> ` インデックス型を使用してインデックスを作成しています。この型を使用すると、Milvus はデータ型に基づいて最適なインデックスを自動的に選択します。また、フィールドごとにインデックス型やパラメータをカスタマイズすることも可能です。詳細については、<a href="/docs/ja/index-explained.md">「インデックスの解説</a>」を参照してください。</p>
+    </button></h2><p>ベクトルフィールドにはインデックスが必要ですが、スカラーインデックスはオプションです。この例では、<code translate="no">embedding</code> および<code translate="no">tags</code> に対して `<code translate="no">AUTOINDEX</code> ` を指定しています。ARRAY インデックスの明示的な指定やフィルタリングのサポートについては、「<a href="#Array-index-support">Array index support</a>」を参照してください。</p>
+<div class="alert note">
+<blockquote>
+<p><code translate="no">AUTOINDEX</code> を含むスカラーインデックスは、再帰的な ARRAY フィールドや、null 許容要素を持つ配列をサポートしていません。通常の配列フィルターについては<a href="/docs/ja/array_data_type.md#Array-index-support">「配列インデックスのサポート」を</a>、サブフィールドのルールについては「<a href="/docs/ja/index-structarray-fields.md#Create-scalar-indexes">StructArray フィールドのインデックス」を</a>参照してください。</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -484,6 +489,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>配列インデックスのサポート：インデックス型と高速化されたフィルター</strong></summary></p>
+<p>通常のARRAYフィールドに対するスカラーインデックスは、その要素をインデックス付けします。以下の明示的なインデックス型から選択してください：</p>
+<table>
+<thead>
+<tr><th>要素型</th><th>明示的なインデックス型</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>,<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p><code translate="no">AUTOINDEX</code> を指定することも可能です。デフォルトの ARRAY 選択については、「<a href="/docs/ja/scalar_index.md#AUTOINDEX-behavior">スカラーインデックス</a>」を参照してください。</p>
+<p>以下のフィルターでは、対象となる配列インデックスを使用できます：</p>
+<table>
+<thead>
+<tr><th>フィルタ</th><th>インデックスの動作</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code> 、または対象となる自動選択は、位置に関係なく要素を検索できます。</td></tr>
+<tr><td>ブール型、整数型、またはVARCHAR配列に対する「配列全体」の<code translate="no">==</code> または<code translate="no">!=</code> </td><td><code translate="no">INVERTED</code> で候補が見つかった場合、元の配列の順序と長さを確認します。<code translate="no">BITMAP</code> では、この候補パスは処理されません。</td></tr>
+<tr><td>浮動小数点配列に対する配列全体のxml-ph-0000@deepl.internalまたはxml-ph-0001@deepl.internal</td><td>スキャンにフォールバックします。</td></tr>
+<tr><td><code translate="no">tags[0]</code> などの要素アクセス、または配列の長さ</td><td>要素メンバーシップによるインデックス指定では、これらの操作に対するインデックス検索は提供されません。</td></tr>
+</tbody>
+</table>
+<p>式の構文については、「<a href="/docs/ja/array-operators.md">ARRAY 演算子</a>」を参照してください。</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -499,7 +531,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>スキーマとインデックスを定義したら、ARRAYフィールドを含むコレクションを作成します。</p>
+    </button></h2><p>スキーマとインデックスを定義したら、ARRAY フィールドを含むコレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -650,7 +682,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションを作成したら、ARRAYフィールドを含むデータを挿入できます。</p>
+    </button></h2><p>コレクションの作成後、ARRAYフィールドを含むデータを挿入できます。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1105,7 +1137,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的なスカラーフィールドによるフィルタリングに加え、ベクトル類似度検索とスカラーフィールドのフィルタを組み合わせることができます。たとえば、次のコードは、ベクトル検索にスカラーフィールドのフィルタを追加する方法を示しています:</p>
+    </button></h2><p>ベクトル検索で ARRAY フィルターを使用して、対象となるエンティティを絞り込むには：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1268,4 +1300,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、Milvusでは、<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> などの高度な配列フィルタ演算子をサポートしており、クエリ機能をさらに強化できます。詳細については、「<a href="/docs/ja/array-operators.md">ARRAY演算子</a>」を参照してください。</p>
+<p>包含条件および長さ条件については、「<a href="/docs/ja/array-operators.md">ARRAY演算子</a>」を参照してください。</p>

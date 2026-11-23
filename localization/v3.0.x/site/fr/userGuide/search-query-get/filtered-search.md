@@ -2,13 +2,13 @@
 id: filtered-search.md
 title: Recherche filtrée
 summary: >-
-  Une recherche par réseau neuronal artificiel (ANN) permet de trouver les
+  Une recherche par réseau neuronal artificiel (RNA) permet de trouver les
   représentations vectorielles les plus proches de celles spécifiées. Cependant,
   les résultats de la recherche ne sont pas toujours corrects. Vous pouvez
   inclure des conditions de filtrage dans une requête de recherche afin que
   Milvus effectue un filtrage des métadonnées avant de lancer les recherches par
-  ANN, ce qui réduit le champ de recherche de l'ensemble de la collection aux
-  seules entités correspondant aux conditions de filtrage spécifiées.
+  RNA, ce qui réduit le champ de recherche de l'ensemble de la collection aux
+  seules entités répondant aux conditions de filtrage spécifiées.
 ---
 <h1 id="Filtered-Search" class="common-anchor-header">Recherche filtrée<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +25,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Une recherche par réseau neuronal artificiel (RNA) identifie les représentations vectorielles les plus similaires à celles spécifiées. Cependant, les résultats de recherche ne sont pas toujours corrects. Vous pouvez inclure des conditions de filtrage dans une requête de recherche afin que Milvus effectue un filtrage des métadonnées avant de lancer les recherches par RNA, ce qui réduit le champ de recherche de l’ensemble de la collection aux seules entités correspondant aux conditions de filtrage spécifiées.</p>
+    </button></h1><p>Une recherche par réseau neuronal artificiel (ANN) identifie les représentations vectorielles les plus similaires à celles spécifiées. Cependant, les résultats de recherche ne sont pas toujours corrects. Vous pouvez inclure des conditions de filtrage dans une requête de recherche afin que Milvus effectue un filtrage des métadonnées avant de lancer les recherches par ANN, ce qui réduit le champ de recherche de l’ensemble de la collection aux seules entités correspondant aux conditions de filtrage spécifiées.</p>
 <h2 id="Overview" class="common-anchor-header">Présentation<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,6 +70,11 @@ summary: >-
 <li><p>Effectue la recherche ANN parmi les entités filtrées.</p></li>
 <li><p>Renvoie les K premières entités.</p></li>
 </ul>
+<div class="alert note">
+<p>À partir de Milvus 3.0.3, vous pouvez utiliser « <code translate="no">IS NULL</code> » et « <code translate="no">IS NOT NULL</code> » dans les filtres de requête et de recherche sur les champs vectoriels ordinaires pour sélectionner respectivement les entités dont le champ vectoriel est NULL ou non NULL.</p>
+<p>Pour trouver les entités dont le champ « <code translate="no">embedding</code> » est NULL, utilisez « <code translate="no">query()</code> » avec le filtre « <code translate="no">embedding IS NULL</code> ». Ce filtre est également valable dans « <code translate="no">search()</code> ». Cependant, une recherche sur « <code translate="no">embedding</code> » avec ce filtre ne renvoie aucun résultat : les entités sans valeur « <code translate="no">embedding</code> » n’ont pas de vecteur à comparer avec le vecteur de la requête.</p>
+<p>Pour connaître les types pris en charge, la syntaxe et des exemples, consultez <a href="/docs/fr/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">les opérateurs IS NULL et IS NOT NULL</a>.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">Filtrage itératif<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,7 +97,7 @@ summary: >-
    <span>Filtrage itératif</span>
   
  </span></p>
-<p>Comme l’illustre le schéma ci-dessus, une recherche avec filtrage itératif effectue la recherche vectorielle par itérations. Chaque entité renvoyée par l’itérateur est soumise à un filtrage scalaire, et ce processus se poursuit jusqu’à ce que les K premiers résultats spécifiés soient obtenus.</p>
+<p>Comme l’illustre le schéma ci-dessus, une recherche avec filtrage itératif effectue la recherche vectorielle par itérations. Chaque entité renvoyée par l’itérateur est soumise à un filtrage scalaire, et ce processus se poursuit jusqu’à ce que les topK résultats spécifiés soient obtenus.</p>
 <p>Cette méthode réduit considérablement le nombre d’entités soumises au filtrage scalaire, ce qui la rend particulièrement avantageuse pour traiter des expressions de filtrage très complexes.</p>
 <p>Il est toutefois important de noter que l’itérateur traite les entités une par une. Cette approche séquentielle peut entraîner des temps de traitement plus longs ou des problèmes de performances potentiels, en particulier lorsqu’un grand nombre d’entités est soumis au filtrage scalaire.</p>
 <h2 id="Examples" class="common-anchor-header">Exemples<button data-href="#Examples" class="anchor-icon" translate="no">

@@ -2,11 +2,8 @@
 id: bitmap.md
 title: BITMAP
 summary: >-
-  Pengindeksan bitmap adalah teknik pengindeksan yang efisien yang dirancang
-  untuk meningkatkan kinerja kueri pada bidang skalar dengan kardinalitas
-  rendah. Kardinalitas mengacu pada jumlah nilai unik dalam suatu bidang. Bidang
-  dengan jumlah elemen unik yang lebih sedikit dianggap memiliki kardinalitas
-  rendah.
+  Gunakan BITMAP untuk penyaringan skalar dengan kardinalitas rendah. Periksa
+  filter yang didukung, pembatasan kolom, dan pembuatan indeks.
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Pengindeksan bitmap adalah teknik pengindeksan yang efisien yang dirancang untuk meningkatkan kinerja kueri pada bidang skalar dengan kardinalitas rendah. Kardinalitas mengacu pada jumlah nilai unik dalam suatu bidang. Bidang dengan jumlah elemen unik yang lebih sedikit dianggap memiliki kardinalitas rendah.</p>
-<p>Jenis indeks ini membantu mengurangi waktu pengambilan data pada kueri skalar dengan merepresentasikan nilai-nilai bidang dalam format biner yang ringkas dan melakukan operasi bitwise yang efisien terhadap nilai-nilai tersebut. Dibandingkan dengan jenis indeks lainnya, indeks bitmap umumnya memiliki efisiensi ruang yang lebih tinggi dan kecepatan kueri yang lebih cepat saat menangani bidang dengan kardinalitas rendah.</p>
+    </button></h1><p><code translate="no">BITMAP</code> mempercepat penyaringan skalar pada bidang dengan sedikit nilai unik, seperti kode status dan kategori. Kardinalitas adalah jumlah nilai unik dalam suatu bidang. Halaman ini menjelaskan filter yang didukung, pembatasan bidang, dan pembuatan indeks.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,9 +36,91 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Istilah <strong>Bitmap</strong> merupakan gabungan dari dua kata: <strong>Bit</strong> dan <strong>Map</strong>. Bit mewakili unit data terkecil dalam komputer, yang hanya dapat menyimpan nilai <strong>0</strong> atau <strong>1</strong>. Map, dalam konteks ini, merujuk pada proses transformasi dan pengorganisasian data sesuai dengan nilai apa yang harus ditetapkan untuk 0 dan 1.</p>
-<p>Indeks bitmap terdiri dari dua komponen utama: bitmap dan kunci. Kunci mewakili nilai-nilai unik dalam bidang yang diindeks. Untuk setiap nilai unik, terdapat bitmap yang sesuai. Panjang bitmap-bitmap ini sama dengan jumlah rekaman dalam koleksi. Setiap bit dalam bitmap sesuai dengan satu catatan dalam koleksi. Jika nilai bidang yang diindeks dalam suatu catatan cocok dengan kunci, bit yang sesuai akan ditetapkan ke <strong>1</strong>; sebaliknya, bit tersebut ditetapkan ke <strong>0</strong>.</p>
-<p>Bayangkan sebuah koleksi dokumen dengan bidang <strong>Kategori</strong> dan <strong>Publik</strong>. Kita ingin mengambil dokumen yang termasuk dalam kategori <strong>Tech</strong> dan terbuka untuk <strong>Publik</strong>. Dalam hal ini, kunci untuk indeks bitmap kita adalah <strong>Tech</strong> dan <strong>Publik</strong>.</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Target indeks dan filter<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk membuat indeks " <code translate="no">BITMAP</code> " secara eksplisit, pilih target non-kunci utama dari tabel di bawah ini. Setiap baris mencocokkan target yang didukung dengan filter yang dapat dievaluasi oleh indeks tersebut:</p>
+<table>
+<thead>
+<tr><th>Target indeks</th><th>Filter yang dapat menggunakan indeks</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> bidang</td><td>Kesetaraan (<code translate="no">==</code>, <code translate="no">!=</code>) dan keanggotaan (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Bidang bilangan bulat (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</td><td>Kesetaraan, keanggotaan, dan rentang (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> bidang</td><td>Kesetaraan, keanggotaan, rentang, dan <a href="/docs/id/pattern-matching.md">pola LIKE atau regex</a>. Evaluasi pola dapat mencakup banyak string terindeks yang berbeda.</td></tr>
+<tr><td>Bidang <code translate="no">ARRAY</code> biasa dengan elemen <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, atau <code translate="no">VARCHAR</code> </td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>. Lihat <a href="/docs/id/array_data_type.md#Array-index-support">Dukungan indeks Array</a>.</td></tr>
+<tr><td>JSON path yang dikonversi menjadi <code translate="no">BOOL</code> atau <code translate="no">VARCHAR</code></td><td>Filter untuk nilai Boolean atau string yang sesuai di atas, sesuai dengan <a href="/docs/id/json-indexing.md#Index-requirements">persyaratan indeks JSON</a>.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Indeks skalar, termasuk <code translate="no">AUTOINDEX</code>, tidak mendukung bidang ARRAY rekursif atau array dengan elemen yang dapat bernilai null. Lihat <a href="/docs/id/array_data_type.md#Array-index-support">Dukungan indeks array</a> untuk filter array biasa dan <a href="/docs/id/index-structarray-fields.md#Create-scalar-indexes">Indeks Bidang StructArray</a> untuk aturan subbidang.</p>
+</blockquote>
+</div>
+<p>Untuk target ARRAY, <code translate="no">BITMAP</code> berfungsi sebagai filter keberadaan elemen, bukan kesetaraan seluruh array, akses elemen berdasarkan posisi, atau panjang array. Lihat <a href="/docs/id/array_data_type.md#Array-index-support">Dukungan indeks array</a>.</p>
+<p>Untuk pemilihan otomatis di luar target eksplisit ini, lihat <a href="/docs/id/scalar_index.md#AUTOINDEX-behavior">perilaku AUTOINDEX</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Ini adalah kemampuan pengindeksan, bukan batasan pada ekspresi filter yang valid. Lihat <a href="/docs/id/scalar_index.md#Filter-execution">Indeks Skalar</a> untuk batasan pencarian bersama. Untuk tes <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code>, dan NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), lihat <a href="/docs/id/basic-operators.md">Operator Dasar</a>.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Pertimbangan memori<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Biaya memori dan kueri bergantung pada jumlah nilai unik dan distribusinya. Bandingkan indeks dengan filter yang representatif daripada menganggap kardinalitas tetap sebagai batas kinerja universal.</p>
+<p>Untuk bitmap padat, perkiraan kasar dalam byte adalah <code translate="no">(D + 1) * N / 8</code>, di mana <code translate="no">N</code> adalah jumlah entitas dan <code translate="no">D</code> adalah jumlah nilai unik. Ini mencakup satu bitmap per nilai unik dan satu untuk validitas. Penyimpanan nilai dan overhead lainnya menambah perkiraan tersebut; cache offset opsional menambah sekitar <code translate="no">8 * N</code> byte pada sistem 64-bit. Representasi bitmap terkompresi dapat memiliki penggunaan memori yang sangat berbeda.</p>
+<p>Perkiraan kasar ini mencakup memori indeks yang dimuat dengan pemetaan memori dinonaktifkan. Hitunglah per segmen, lalu jumlahkan di seluruh segmen yang dimuat dan replikanya.</p>
+<div class="alert note">
+<blockquote>
+<p>Sediakan memori tambahan untuk data bidang yang dimuat, indeks vektor, beban kerja koleksi dan indeks, serta alokasi sementara. Validasi dengan data dan kueri yang representatif; array, JSON, format indeks lama, dan pemetaan memori memerlukan pengukuran terpisah.</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">Cara Kerja BITMAP<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Lihat contoh penyaringan bitmap</strong></summary></p>
+<p>Indeks bitmap mengaitkan setiap nilai bidang yang berbeda dengan sebuah bitmap. Setiap bit mewakili sebuah entitas: <strong>1</strong> berarti entitas tersebut memiliki nilai tersebut, dan <strong>0</strong> berarti tidak.</p>
+<p>Misalnya, untuk menemukan dokumen publik dalam kategori <strong>Tech</strong>, gabungkan bitmap untuk <strong>Category = Tech</strong> dan <strong>Public = true</strong>:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
@@ -52,14 +130,15 @@ summary: >-
 <p>Seperti yang ditunjukkan pada gambar, indeks bitmap untuk <strong>Kategori</strong> dan <strong>Publik</strong> adalah:</p>
 <ul>
 <li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], yang menunjukkan bahwa hanya dokumen ke-1 dan ke-3 yang termasuk dalam kategori <strong>Tech</strong>.</p></li>
-<li><p><strong>Public</strong>: [1, 0, 0, 1, 0], yang menunjukkan bahwa hanya dokumen ke-1 dan ke-4 yang terbuka untuk <strong>Publik</strong>.</p></li>
+<li><p><strong>Public</strong>: [1, 0, 0, 1, 0], yang menunjukkan bahwa hanya dokumen ke-1 dan ke-4 yang terbuka untuk <strong>umum</strong>.</p></li>
 </ul>
 <p>Untuk menemukan dokumen yang memenuhi kedua kriteria tersebut, kita melakukan operasi AND bitwise pada kedua bitmap ini:</p>
 <ul>
-<li><strong>Teknologi</strong> AND <strong>Publik</strong>: [1, 0, 0, 0, 0]</li>
+<li><strong>Teknologi</strong> DAN <strong>Publik</strong>: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>Bitmap yang dihasilkan [1, 0, 0, 0, 0] menunjukkan bahwa hanya dokumen pertama (<strong>ID</strong> <strong>1</strong>) yang memenuhi kedua kriteria tersebut. Dengan menggunakan indeks bitmap dan operasi bitwise yang efisien, kita dapat dengan cepat mempersempit cakupan pencarian, sehingga tidak perlu memindai seluruh kumpulan data.</p>
-<h2 id="Create-a-bitmap-index" class="common-anchor-header">Membuat indeks bitmap<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
+<p>Hanya dokumen pertama (<strong>ID 1</strong>) yang memenuhi kedua kriteria tersebut.</p>
+<p></details></p>
+<h2 id="Create-a-bitmap-index" class="common-anchor-header">Buat indeks bitmap<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -242,8 +321,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam contoh ini, kami membuat indeks bitmap pada bidang ` <code translate="no">category</code> ` dari koleksi ` <code translate="no">my_collection</code> `. Metode ` <code translate="no">add_index()</code> ` digunakan untuk menentukan nama bidang, jenis indeks, dan nama indeks.</p>
-<p>Setelah indeks bitmap dibuat, Anda dapat menggunakan parameter ` <code translate="no">filter</code> ` dalam operasi kueri untuk melakukan penyaringan skalar berdasarkan bidang yang diindeks. Hal ini memungkinkan Anda mempersempit hasil pencarian secara efisien menggunakan indeks bitmap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/boolean.md">Penjelasan</a> tentang <a href="/docs/id/boolean.md">Penyaringan</a>.</p>
+<p>Ini akan membuat indeks pada <code translate="no">my_collection.category</code>. Gunakan bidang tersebut dalam kueri atau pencarian <code translate="no">filter</code>; lihat <a href="/docs/id/boolean.md">Penjelasan tentang Penyaringan</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Menghapus indeks<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,12 +337,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan metode ` <code translate="no">drop_index()</code> ` untuk menghapus indeks yang ada dari sebuah koleksi.</p>
+    </button></h2><p>Gunakan metode ` <code translate="no">drop_index()</code> ` untuk menghapus indeks yang sudah ada dari sebuah koleksi.</p>
 <div class="alert note">
-<ul>
-<li><p>Pada <strong>v2.6.3</strong> atau sebelumnya, Anda harus melepaskan koleksi terlebih dahulu sebelum menghapus indeks skalar.</p></li>
-<li><p>Mulai <strong>v2.6.4</strong> atau yang lebih baru, Anda dapat menghapus indeks skalar secara langsung begitu indeks tersebut tidak lagi diperlukan—tidak perlu melepaskan koleksi terlebih dahulu.</p></li>
-</ul>
+<blockquote>
+<p>Untuk persyaratan rilis saat menghapus indeks skalar, lihat <a href="/docs/id/scalar_index.md#Drop-index-compatibility">Indeks Skalar</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -386,37 +463,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Batasan<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Indeks bitmap hanya didukung untuk bidang skalar yang bukan merupakan kunci utama.</p></li>
-<li><p>Tipe data bidang tersebut harus salah satu dari berikut ini:</p>
-<ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (elemen harus salah satu dari: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
-</ul></li>
-<li><p>Indeks bitmap tidak mendukung tipe data berikut:</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Tipe bilangan floating-point tidak kompatibel dengan sifat biner indeks bitmap.</p></li>
-<li><p><code translate="no">JSON</code>: Tipe data JSON memiliki struktur yang kompleks sehingga tidak dapat direpresentasikan secara efisien menggunakan indeks bitmap.</p></li>
-</ul></li>
-<li><p>Indeks bitmap tidak cocok untuk kolom dengan kardinalitas tinggi (yaitu, kolom dengan jumlah nilai unik yang besar).</p>
-<ul>
-<li><p>Sebagai pedoman umum, indeks bitmap paling efektif ketika kardinalitas suatu kolom kurang dari 500.</p></li>
-<li><p>Ketika kardinalitas melebihi ambang batas ini, manfaat kinerja indeks bitmap berkurang, dan beban penyimpanan menjadi signifikan.</p></li>
-<li><p>Untuk kolom dengan kardinalitas tinggi, pertimbangkan untuk menggunakan teknik pengindeksan alternatif seperti indeks terbalik, tergantung pada kasus penggunaan dan persyaratan kueri Anda.</p></li>
-</ul></li>
-</ul>

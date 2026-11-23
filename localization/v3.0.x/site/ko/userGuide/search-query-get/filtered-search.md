@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>컬렉션에 벡터 임베딩과 해당 메타데이터가 모두 포함된 경우, ANN 검색 전에 메타데이터를 필터링하여 검색 결과의 관련성을 높일 수 있습니다. Milvus는 필터링 조건이 포함된 검색 요청을 수신하면, 지정된 필터링 조건에 부합하는 엔티티 내에서만 검색 범위를 제한합니다.</p>
+    </button></h3><p>컬렉션에 벡터 임베딩과 해당 메타데이터가 모두 포함되어 있는 경우, ANN 검색 전에 메타데이터를 필터링하여 검색 결과의 관련성을 높일 수 있습니다. Milvus는 필터링 조건이 포함된 검색 요청을 수신하면, 지정된 필터링 조건에 부합하는 엔티티 내에서만 검색 범위를 제한합니다.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" /> 
@@ -66,6 +66,11 @@ summary: >-
 <li><p>필터링된 엔티티 내에서 ANN 검색을 수행합니다.</p></li>
 <li><p>상위 K개 엔티티를 반환합니다.</p></li>
 </ul>
+<div class="alert note">
+<p>Milvus 3.0.3부터는 일반 벡터 필드의 쿼리 및 검색 필터에서 ` <code translate="no">IS NULL</code> `과 ` <code translate="no">IS NOT NULL</code> `을 사용하여, 각각 벡터 필드가 NULL이거나 NULL이 아닌 엔티티를 선택할 수 있습니다.</p>
+<p><code translate="no">embedding</code> 필드가 NULL인 엔티티를 찾으려면, <code translate="no">query()</code> 를 필터 <code translate="no">embedding IS NULL</code> 와 함께 사용하십시오. 이 필터는 <code translate="no">search()</code> 에서도 유효합니다. 그러나 이 필터를 사용하여 <code translate="no">embedding</code> 에서 검색하면 결과가 반환되지 않습니다. <code translate="no">embedding</code> 값이 없는 엔티티는 쿼리 벡터와 비교할 벡터가 없기 때문입니다.</p>
+<p>지원되는 유형, 구문 및 예제는 <a href="/docs/ko/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">IS NULL 및 IS NOT NULL 연산자를</a> 참조하십시오.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">반복 필터링<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -81,14 +86,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>표준 필터링 프로세스는 검색 범위를 효과적으로 좁혀줍니다. 그러나 지나치게 복잡한 필터링 표현식은 검색 지연 시간을 매우 길게 만들 수 있습니다. 이러한 경우, 반복적 필터링을 대안으로 활용하면 스칼라 필터링의 처리 부하를 줄이는 데 도움이 됩니다.</p>
+    </button></h3><p>표준 필터링 프로세스는 검색 범위를 효과적으로 좁혀줍니다. 그러나 지나치게 복잡한 필터링 표현식은 검색 지연 시간을 매우 길게 만들 수 있습니다. 이러한 경우, 반복적 필터링을 대안으로 사용할 수 있으며, 이는 스칼라 필터링의 작업 부하를 줄이는 데 도움이 됩니다.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>반복 필터링</span>
   
  </span></p>
-<p>위 다이어그램에서 볼 수 있듯이, 반복적 필터링을 사용하는 검색은 벡터 검색을 반복적으로 수행합니다. 반복자가 반환하는 각 엔티티는 스칼라 필터링을 거치며, 이 과정은 지정된 상위 K개 결과가 나올 때까지 계속됩니다.</p>
+<p>위 다이어그램에서 볼 수 있듯이, 반복 필터링을 사용하는 검색은 벡터 검색을 반복적으로 수행합니다. 반복자가 반환하는 각 엔티티는 스칼라 필터링을 거치며, 이 과정은 지정된 topK 결과가 달성될 때까지 계속됩니다.</p>
 <p>이 방법은 스칼라 필터링을 적용받는 엔티티의 수를 대폭 줄여주므로, 특히 매우 복잡한 필터링 표현식을 처리할 때 유용합니다.</p>
 <p>그러나 이터레이터가 엔티티를 한 번에 하나씩 처리한다는 점에 유의해야 합니다. 이러한 순차적 접근 방식은 특히 많은 수의 엔티티가 스칼라 필터링을 거칠 때 처리 시간이 길어지거나 잠재적인 성능 문제가 발생할 수 있습니다.</p>
 <h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -106,7 +111,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 섹션에서는 필터링된 검색을 수행하는 방법을 보여줍니다. 이 섹션의 코드 예제는 컬렉션에 이미 다음 엔티티들이 존재한다고 가정합니다. 각 엔티티는 <strong>id</strong>, <strong>vector</strong>, <strong>color</strong>, <strong>likes라는</strong> 네 개의 필드를 가지고 있습니다. 예제에서는 <code translate="no">COSINE</code> 메트릭으로 인덱싱된 5차원 <code translate="no">vector</code> 필드를 가진 ' <code translate="no">my_collection</code> '라는 로드된 컬렉션을 사용합니다.</p>
+    </button></h2><p>이 섹션에서는 필터링된 검색을 수행하는 방법을 보여줍니다. 이 섹션의 코드 예제는 컬렉션에 이미 다음 엔티티들이 존재한다고 가정합니다. 각 엔티티는 <strong>id</strong>, <strong>vector</strong>, <strong>color</strong>, <strong>likes라는</strong> 네 개의 필드를 가지고 있습니다. 예제에서는 <code translate="no">COSINE</code> 메트릭으로 인덱싱된 5차원 <code translate="no">vector</code> 필드를 가진 ' <code translate="no">my_collection</code> '라는 이름의 로드된 컬렉션을 사용합니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.3580376395471989</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6023495712049978</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.18414012509913835</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.26286205330961354</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9029438446296592</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;pink_8682&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">165</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.19886812562848388</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.06023560599112088</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.6976963061752597</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.2614474506242501</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.838729485096104</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;red_7025&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">25</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
@@ -393,7 +398,7 @@ curl --request POST \
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975796,&quot;id&quot;:4,&quot;likes&quot;:122},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.2499619,&quot;id&quot;:6,&quot;likes&quot;:58}],&quot;topks&quot;:[2]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>검색 요청에 포함된 필터링 조건은 <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 입니다. 이 조건은 'and' 연산자를 사용하여 두 가지 조건을 포함합니다. 첫 번째 조건은 <code translate="no">color</code> 필드의 값이 <code translate="no">red</code> 로 시작하는 엔티티를, 두 번째 조건은 <code translate="no">likes</code> 필드의 값이 <code translate="no">50</code> 보다 큰 엔티티를 찾습니다. 이 조건을 충족하는 엔티티는 단 두 개뿐입니다. top-K를 <code translate="no">5</code> 로 설정하면, Milvus는 이 두 엔티티와 쿼리 벡터 간의 거리를 계산하여 검색 결과로 반환합니다.</p>
-<p>다음 예제는 코사인 점수를 예시로 든 Python 결과의 형식을 보여줍니다. 점수는 부동 소수점 정밀도에 따라 달라질 수 있습니다. <code translate="no">entity</code> 에는 요청된 출력 필드만 표시되며, REST 예제에서는 각 검색 결과의 최상위 수준에서 해당 필드를 반환합니다.</p>
+<p>다음 예제는 코사인 점수를 예시로 든 Python 결과의 형식을 보여줍니다. 점수는 부동 소수점 정밀도에 따라 달라질 수 있습니다. <code translate="no">entity</code> 에는 요청된 출력 필드만 표시되며, REST 예제에서는 각 검색 결과의 최상위 레벨에서 해당 필드를 반환합니다.</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">[</span>
     <span class="hljs-punctuation">{</span>
         <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4</span><span class="hljs-punctuation">,</span>

@@ -309,10 +309,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das Erstellen eines Index für ein bestimmtes Feld beschleunigt die Suche in diesem Feld. Ein Index erfasst die Reihenfolge der Entitäten innerhalb einer Sammlung. Wie in den folgenden Codeausschnitten gezeigt, können Sie „ <code translate="no">metric_type</code> “ und „ <code translate="no">index_type</code> “ verwenden, um geeignete Methoden auszuwählen, mit denen Milvus ein Feld indiziert und Ähnlichkeiten zwischen Vektor-Embeddings misst.</p>
-<p>In Milvus können Sie „ <code translate="no">AUTOINDEX</code> “ als Indextyp für alle Vektorfelder und je nach Bedarf einen der folgenden Metriktypen verwenden: „ <code translate="no">COSINE</code> “, „ <code translate="no">L2</code> “ oder „ <code translate="no">IP</code> “.</p>
-<p>Wie im obigen Codeausschnitt gezeigt, müssen Sie für Vektorfelder sowohl den Indextyp als auch den Metriktyp festlegen, während für Skalarfelder nur der Indextyp festgelegt werden muss. Indizes sind für Vektorfelder obligatorisch, und es wird empfohlen, Indizes für Skalarfelder zu erstellen, die häufig in Filterbedingungen verwendet werden.</p>
-<p>Weitere Informationen finden Sie unter <a href="/docs/de/index-vector-fields.md">„Vektorfelder indizieren</a> “ und <a href="/docs/de/index-scalar-fields.md">„Skalarfelder indizieren</a>“.</p>
+    </button></h2><p>In den folgenden Beispielen werden Indexdefinitionen für die Felder des Schemas vorbereitet. Wählen Sie einen Vektorindex und eine Metrik, die mit dem Datentyp des Vektorfeldes kompatibel sind; siehe <a href="/docs/de/index-explained.md">„Index erklärt</a> “ und <a href="/docs/de/metric.md">„Ähnlichkeitsmetriken</a>“.</p>
+<p>Vektorfelder erfordern vor dem Laden Indizes. Skalare Indizes sind optional; siehe <a href="/docs/de/scalar_index.md">„Skalare Indizes“</a> für Informationen zur Feldkompatibilität sowie zur expliziten oder automatischen Typauswahl.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -418,7 +416,7 @@ indexOptions := []milvusclient.CreateIndexOption{
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-Collection" class="common-anchor-header">Eine Sammlung erstellen<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-Collection" class="common-anchor-header">Erstellen einer Sammlung<button data-href="#Create-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -434,7 +432,7 @@ indexOptions := []milvusclient.CreateIndexOption{
         ></path>
       </svg>
     </button></h2><p>Wenn Sie eine Sammlung mit Indexparametern erstellt haben, lädt Milvus die Sammlung automatisch bei ihrer Erstellung. In diesem Fall werden alle in den Indexparametern genannten Felder indiziert.</p>
-<p>Die folgenden Codeausschnitte zeigen, wie man eine Sammlung mit Indexparametern erstellt und deren Ladestatus überprüft.</p>
+<p>Die folgenden Codeausschnitte veranschaulichen, wie man eine Sammlung mit Indexparametern erstellt und deren Ladestatus überprüft.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -833,11 +831,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Shards sind horizontale Teilbereiche einer Sammlung, und jeder Shard entspricht einem Dateneingangskanal. Standardmäßig verfügt jede Sammlung über einen Shard. Sie können die Anzahl der Shards beim Erstellen einer Sammlung festlegen, um sie besser an Ihr Datenvolumen und Ihre Arbeitslast anzupassen.</p>
+    </button></h3><p>Shards sind horizontale Unterteilungen einer Sammlung, wobei jeder Shard einem Dateneingangskanal entspricht. Standardmäßig verfügt jede Sammlung über einen Shard. Sie können die Anzahl der Shards beim Erstellen einer Sammlung festlegen, um sie besser an Ihr Datenvolumen und Ihre Arbeitslast anzupassen.</p>
 <p>Als allgemeine Richtlinie sollten Sie bei der Festlegung der Shard-Anzahl Folgendes berücksichtigen:</p>
 <ul>
 <li><strong>Datenumfang:</strong> Es hat sich bewährt, einen Shard pro 200 Millionen Entitäten vorzusehen. Sie können die Anzahl auch anhand des gesamten Datenumfangs schätzen, indem Sie beispielsweise pro 100 GB Daten, die Sie einfügen möchten, einen Shard hinzufügen.</li>
-<li><strong>Auslastung der Stream-Knoten:</strong> Wenn Ihre Milvus-Instanz über mehrere Stream-Knoten verfügt, wird die Verwendung mehrerer Shards empfohlen. Dadurch wird sichergestellt, dass die Arbeitslast beim Einfügen von Daten auf alle verfügbaren Stream-Knoten verteilt wird, wodurch verhindert wird, dass einige Knoten im Leerlauf sind, während andere überlastet sind.</li>
+<li><strong>Auslastung der Stream-Knoten:</strong> Wenn Ihre Milvus-Instanz über mehrere Stream-Knoten verfügt, wird die Verwendung mehrerer Shards empfohlen. Dadurch wird sichergestellt, dass die Arbeitslast beim Einfügen von Daten auf alle verfügbaren Stream-Knoten verteilt wird, wodurch verhindert wird, dass einige Knoten untätig sind, während andere überlastet sind.</li>
 </ul>
 <p>Der folgende Codeausschnitt zeigt, wie Sie die Anzahl der Shards beim Erstellen einer Sammlung festlegen.</p>
 <div class="multipleCode">
@@ -1076,7 +1074,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wenn die Daten in einer Sammlung nach einem bestimmten Zeitraum gelöscht werden sollen, sollten Sie deren Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus die Entitäten in der Sammlung. Die Löschung erfolgt asynchron, was bedeutet, dass Suchvorgänge und Abfragen auch vor Abschluss der Löschung weiterhin möglich sind.</p>
+    </button></h3><p>Wenn die Daten in einer Sammlung nach einem bestimmten Zeitraum gelöscht werden sollen, sollten Sie deren Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Milvus die Entitäten in der Sammlung. Die Löschung erfolgt asynchron, was bedeutet, dass Suchvorgänge und Abfragen weiterhin möglich sind, bevor der Löschvorgang abgeschlossen ist.</p>
 <p>Der folgende Codeausschnitt legt die TTL auf einen Tag (86.400 Sekunden) fest. Es wird empfohlen, die TTL auf mindestens einige Tage festzulegen.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1322,5 +1320,5 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Das dynamische Feld in einer Sammlung ist ein reserviertes Feld im JavaScript Object Notation (JSON)-Format mit dem Namen <strong>$meta</strong>. Sobald Sie dieses Feld aktiviert haben, speichert Milvus alle nicht im Schema definierten Felder, die in jeder Entität enthalten sind, sowie deren Werte als Schlüssel-Wert-Paare in diesem reservierten Feld.</p>
+    </button></h3><p>Das dynamische Feld in einer Sammlung ist ein reserviertes JSON-Feld (JavaScript Object Notation) mit dem Namen <strong>$meta</strong>. Sobald Sie dieses Feld aktiviert haben, speichert Milvus alle nicht im Schema definierten Felder, die in jeder Entität enthalten sind, sowie deren Werte als Schlüssel-Wert-Paare in diesem reservierten Feld.</p>
 <p>Einzelheiten zur Verwendung des dynamischen Feldes finden Sie unter <a href="/docs/de/enable-dynamic-field.md">„Dynamisches Feld</a>“.</p>

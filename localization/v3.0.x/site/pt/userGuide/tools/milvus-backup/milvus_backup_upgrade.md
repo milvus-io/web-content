@@ -72,7 +72,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">milvus.address</code>, <code translate="no">milvus.port</code></td><td><code translate="no">milvus.grpc.address</code>, <code translate="no">milvus.grpc.port</code></td></tr>
 <tr><td>Armazenamento de origem em <code translate="no">minio.*</code></td><td><code translate="no">milvus.storage.*</code></td></tr>
 <tr><td>Armazenamento de cópias de segurança em <code translate="no">minio.backup*</code></td><td><code translate="no">backup.storage.*</code></td></tr>
-<tr><td>Credenciais de armazenamento</td><td><code translate="no">milvus.storage.auth.*</code> / <code translate="no">backup.storage.auth.*</code>, com uma variável de ambiente explícita <code translate="no">auth.type</code></td></tr>
+<tr><td>Credenciais de armazenamento</td><td><code translate="no">milvus.storage.auth.*</code> / <code translate="no">backup.storage.auth.*</code>, com um <code translate="no">auth.type</code></td></tr>
 <tr><td><code translate="no">minio.crossStorage</code></td><td><code translate="no">transfer.mode</code></td></tr>
 <tr><td><code translate="no">backup.gcPause.address</code></td><td><code translate="no">milvus.management.endpoint</code></td></tr>
 </tbody>

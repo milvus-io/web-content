@@ -70,6 +70,11 @@ summary: >-
 <li><p>Führt die ANN-Suche innerhalb der gefilterten Entitäten durch.</p></li>
 <li><p>Gibt die Top-K-Entitäten zurück.</p></li>
 </ul>
+<div class="alert note">
+<p>Ab Milvus 3.0.3 können Sie „ <code translate="no">IS NULL</code> “ und „ <code translate="no">IS NOT NULL</code> “ in Abfrage- und Suchfiltern für gewöhnliche Vektorfelder verwenden, um Entitäten auszuwählen, deren Vektorfeld jeweils NULL oder nicht NULL ist.</p>
+<p>Um Entitäten zu finden, deren Feld „ <code translate="no">embedding</code> “ NULL ist, verwenden Sie „ <code translate="no">query()</code> “ mit dem Filter „ <code translate="no">embedding IS NULL</code> “. Dieser Filter ist auch in „ <code translate="no">search()</code> “ gültig. Die Suche nach „ <code translate="no">embedding</code> “ mit diesem Filter liefert jedoch keine Treffer: Entitäten ohne einen Wert für „ <code translate="no">embedding</code> “ haben keinen Vektor, der mit dem Abfragevektor verglichen werden könnte.</p>
+<p>Informationen zu unterstützten Typen, Syntax und Beispielen finden Sie unter <a href="/docs/de/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">den Operatoren „IS NULL“ und „IS NOT NULL</a>“.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">Iterative Filterung<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,14 +90,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Der Standardfilterprozess schränkt den Suchbereich effektiv auf einen kleinen Bereich ein. Allerdings können übermäßig komplexe Filterausdrücke zu einer sehr hohen Suchlatenz führen. In solchen Fällen kann die iterative Filterung als Alternative dienen und dazu beitragen, die Arbeitslast der skalaren Filterung zu reduzieren.</p>
+    </button></h3><p>Der Standardfilterprozess schränkt den Suchbereich effektiv auf einen kleinen Bereich ein. Übermäßig komplexe Filterausdrücke können jedoch zu einer sehr hohen Suchlatenz führen. In solchen Fällen kann die iterative Filterung als Alternative dienen und dazu beitragen, die Arbeitslast der skalaren Filterung zu reduzieren.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>Iterative Filterung</span>
   
  </span></p>
-<p>Wie in der obigen Abbildung dargestellt, führt eine Suche mit iterativer Filterung die Vektorsuche in Iterationen durch. Jede vom Iterator zurückgegebene Entität durchläuft eine skalare Filterung, und dieser Vorgang wird fortgesetzt, bis die angegebenen Top-K-Ergebnisse erreicht sind.</p>
+<p>Wie in der obigen Abbildung dargestellt, führt eine Suche mit iterativer Filterung die Vektorsuche in Iterationen durch. Jede vom Iterator zurückgegebene Entität durchläuft eine skalare Filterung, und dieser Vorgang wird fortgesetzt, bis die angegebenen „topK“-Ergebnisse erreicht sind.</p>
 <p>Diese Methode reduziert die Anzahl der Entitäten, die einer skalaren Filterung unterzogen werden, erheblich, was sie besonders vorteilhaft für die Verarbeitung hochkomplexer Filterausdrücke macht.</p>
 <p>Es ist jedoch zu beachten, dass der Iterator Entitäten einzeln verarbeitet. Dieser sequenzielle Ansatz kann zu längeren Verarbeitungszeiten oder potenziellen Leistungsproblemen führen, insbesondere wenn eine große Anzahl von Entitäten einer skalaren Filterung unterzogen wird.</p>
 <h2 id="Examples" class="common-anchor-header">Beispiele<button data-href="#Examples" class="anchor-icon" translate="no">

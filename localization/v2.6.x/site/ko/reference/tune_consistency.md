@@ -2,9 +2,9 @@
 id: tune_consistency.md
 title: 일관성 수준
 summary: >-
-  분산 벡터 데이터베이스인 Milvus는 읽기 및 쓰기 작업 시 각 노드나 복제본이 동일한 데이터에 접근할 수 있도록 보장하기 위해 여러
-  수준의 일관성을 제공합니다. 현재 지원되는 일관성 수준으로는 Strong, Bounded, Eventually, Session이 있으며,
-  Bounded가 기본 일관성 수준으로 사용됩니다.
+  분산 벡터 데이터베이스인 Milvus는 읽기 및 쓰기 작업 시 각 노드나 복제본이 동일한 데이터에 접근할 수 있도록 여러 수준의 일관성을
+  제공합니다. 현재 지원되는 일관성 수준으로는 Strong, Bounded, Eventually, Session이 있으며, Bounded가
+  기본 일관성 수준으로 사용됩니다.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">일관성 수준<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,11 +60,11 @@ summary: >-
 <li><p><strong>Eventual</strong></p>
 <p>GuaranteeTs는 1과 같이 매우 작은 값으로 설정되어 일관성 검사를 피함으로써, 검색이 현재 표시된 데이터를 기반으로 즉시 실행됩니다.</p></li>
 <li><p><strong>제한된 오래된 데이터 허용</strong></p>
-<p>GuaranteeTs를 최신 타임스탬프보다 이전 시점으로 설정하여, 일부 최근 데이터가 아직 표시되지 않을 수 있다는 점을 허용 범위 내에서 검색이 실행되도록 합니다.</p></li>
+<p>GuaranteeTs는 최신 타임스탬프보다 이전 시점으로 설정되어, 일부 최근 데이터가 아직 표시되지 않을 수 있다는 점을 허용하면서 검색이 실행됩니다.</p></li>
 <li><p><strong>세션</strong></p>
 <p>클라이언트가 데이터를 삽입한 가장 최근 시점을 GuaranteeTs로 사용하여, 검색이 클라이언트가 삽입한 모든 데이터를 포함할 수 있도록 합니다.</p></li>
 </ul>
-<p>Milvus는 Bounded Staleness를 기본 일관성 수준으로 사용합니다. GuaranteeTs가 지정되지 않은 경우, 최신 ServiceTime이 GuaranteeTs로 사용됩니다.</p>
+<p>Milvus는 Bounded Staleness를 기본 일관성 수준으로 사용합니다. GuaranteeTs가 지정되지 않은 경우, 가장 최근의 ServiceTime이 GuaranteeTs로 사용됩니다.</p>
 <h2 id="Set-Consistency-Level" class="common-anchor-header">일관성 수준 설정<button data-href="#Set-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션을 생성할 때뿐만 아니라 검색 및 쿼리를 수행할 때도 다양한 일관성 수준을 설정할 수 있습니다.</p>
+    </button></h2><p>컬렉션을 생성할 때 일관성 수준을 설정하거나, 컬렉션 생성 후 변경하거나, 개별 검색 및 쿼리에 대해 재정의할 수 있습니다.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">컬렉션 생성 시 일관성 수준 설정<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -167,6 +167,64 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> 매개변수의 가능한 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> 및 <code translate="no">Session</code> 입니다.</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">컬렉션 일관성 수준 변경<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">consistency_level</code> 속성을 변경하여 기존 컬렉션의 일관성 수준을 변경할 수 있습니다. 새로운 수준은 일관성 수준을 별도로 지정하지 않은 컬렉션에 대한 후속 검색 및 쿼리에 적용되며, 이를 변경할 때 컬렉션을 해제할 필요는 없습니다. 다음 코드 예제는 일관성 수준을 <strong>Eventually로</strong> 변경합니다.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<span class="highlighted-wrapper-line">properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);</span>
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">검색에서 일관성 수준 설정<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,7 +240,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>특정 검색에 대한 일관성 수준은 언제든지 변경할 수 있습니다. 다음 코드 예제는 일관성 수준을 다시 <strong>‘Bounded’로</strong> 설정합니다. 이 변경 사항은 현재 검색 요청에만 적용됩니다.</p>
+    </button></h3><p>특정 검색의 일관성 수준은 언제든지 변경할 수 있습니다. 다음 코드 예제는 일관성 수준을 다시 <strong>‘Bounded’로</strong> 설정합니다. 이 변경 사항은 현재 검색 요청에만 적용됩니다.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_SQ</strong> combina i grafi Hierarchical Navigable Small World (HNSW) con la quantizzazione scalare (SQ), creando un metodo avanzato di indicizzazione vettoriale che offre un compromesso controllabile tra dimensioni e precisione. Rispetto <a href="/docs/it/hnsw.md">all’HNSW</a> standard, questo tipo di indice mantiene un’elevata velocità di elaborazione delle query, pur comportando un leggero aumento dei tempi di costruzione dell’indice.</p>
+    </button></h1><p><strong>HNSW_SQ</strong> combina i grafi Hierarchical Navigable Small World (HNSW) con la quantizzazione scalare (SQ), creando un metodo avanzato di indicizzazione vettoriale che offre un compromesso controllabile tra dimensioni e accuratezza. Rispetto <a href="/docs/it/hnsw.md">all’HNSW</a> standard, questo tipo di indice mantiene un’elevata velocità di elaborazione delle query, pur comportando un leggero aumento dei tempi di costruzione dell’indice.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ summary: >-
    <span>Hnsw Sq</span>
   
  </span></p>
-<p>Questa riduzione della precisione diminuisce drasticamente l’impronta di memoria e accelera il calcolo, pur conservando la struttura essenziale dei dati.</p>
+<p>Questa riduzione della precisione riduce drasticamente l’ingombro in memoria e accelera il calcolo, pur mantenendo la struttura essenziale dei dati.</p>
 <h3 id="SQ4U" class="common-anchor-header">SQ4U<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.8+</span><button data-href="#SQ4U" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -108,7 +108,7 @@ summary: >-
 </ol>
 <p><strong>Vantaggi in termini di prestazioni:</strong></p>
 <ul>
-<li><p><strong>Rapporto di compressione 8x:</strong> riduce le dimensioni di 8 volte rispetto a <code translate="no">FP32</code> e di 2 volte rispetto a <code translate="no">SQ8</code>, riducendo significativamente la pressione sulla larghezza di banda della memoria — spesso il collo di bottiglia nella ricerca vettoriale.</p></li>
+<li><p><strong>Rapporto di compressione 8x:</strong> riduce le dimensioni di 8 volte rispetto a <code translate="no">FP32</code> e di 2 volte rispetto a <code translate="no">SQ8</code>, alleggerendo significativamente la pressione sulla larghezza di banda della memoria — spesso il collo di bottiglia nella ricerca vettoriale.</p></li>
 <li><p><strong>Ottimizzazione SIMD:</strong> la struttura compatta consente alle moderne CPU (AVX2/AVX-512) di elaborare più dimensioni per ciclo. Fondamentalmente, l’uso di parametri globali elimina la necessità di caricare valori variabili di scala/offset durante il calcolo della distanza, mantenendo la pipeline di istruzioni completamente saturata.</p></li>
 <li><p><strong>Efficienza della cache:</strong> dimensioni dei vettori più ridotte consentono di inserire una maggiore quantità di dati nella cache della CPU, riducendo la latenza causata dall’accesso alla memoria.</p></li>
 </ul>
@@ -138,7 +138,7 @@ summary: >-
 <li><p><strong>(Opzionale) Affinamento dei risultati:</strong> i risultati iniziali dei candidati possono essere affinati per una maggiore accuratezza, in base ai seguenti parametri:</p>
 <ul>
 <li><p><code translate="no">refine</code>: Controlla se questa fase di affinamento è attivata. Se impostato su <code translate="no">true</code>, il sistema ricalcola le distanze utilizzando rappresentazioni a maggiore precisione o non compresse.</p></li>
-<li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il perfezionamento (ad es. SQ6, SQ8, BF16). Una scelta di precisione più elevata, come <code translate="no">FP32</code>, può fornire risultati più accurati ma richiede maggiore memoria. Questa deve superare la precisione del set di dati compressi originale di <code translate="no">sq_type</code>.</p></li>
+<li><p><code translate="no">refine_type</code>: Specifica il livello di precisione dei dati utilizzati durante il perfezionamento (ad es. SQ6, SQ8, BF16). Una scelta con maggiore precisione, come <code translate="no">FP32</code>, può fornire risultati più accurati ma richiede più memoria. Questa deve superare la precisione del set di dati compressi originale di <code translate="no">sq_type</code>.</p></li>
 <li><p><code translate="no">refine_k</code>: Funge da fattore di ingrandimento. Ad esempio, se il valore di top <em>k</em> è 100 e quello di <code translate="no">refine_k</code> è 2, il sistema riclassifica i primi 200 candidati e restituisce i 100 migliori, migliorando l’accuratezza complessiva.</p></li>
 </ul></li>
 </ol>
@@ -236,7 +236,7 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la creazione di un indice e per l'esecuzione di ricerche sull'indice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parametri di creazione dell'indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+<h3 id="Index-building-params" class="common-anchor-header">Parametri di creazione dell’indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -264,7 +264,7 @@ res = MilvusClient.search(
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
      <td><p>Numero massimo di connessioni (o archi) che ogni nodo può avere nel grafo, inclusi sia gli archi in uscita che quelli in entrata.</p><p>Questo parametro influisce direttamente sia sulla costruzione dell'indice che sulla ricerca.</p></td>
-     <td><p><strong>Tipo</strong>: Intero</p><p><strong>Intervallo</strong>: [2, 2048]</p><p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 spigoli in uscita e 30 in entrata per nodo)</p></td>
+     <td><p><strong>Tipo</strong>: numero intero</p><p><strong>Intervallo</strong>: [2, 2048]</p><p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 spigoli in uscita e 30 in entrata per nodo)</p></td>
      <td><p>Un valore di <code translate="no">M</code> più elevato comporta generalmente <strong>una maggiore precisione</strong>, ma <strong>aumenta il carico di memoria</strong> e <strong>rallenta sia la creazione dell’indice che la ricerca</strong>.</p><p>Si consiglia di aumentare il valore di <code translate="no">M</code> per i set di dati ad alta dimensionalità o quando è fondamentale ottenere un recall elevato.</p><p>Si consiglia di ridurre l’ <code translate="no">M</code> quando l’utilizzo della memoria e la velocità di ricerca sono le priorità principali.</p><p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [5, 100].</p></td>
    </tr>
    <tr>

@@ -4,8 +4,8 @@ title: Konsistenzstufe
 summary: >-
   Als verteilte Vektordatenbank bietet Milvus mehrere Konsistenzstufen, um
   sicherzustellen, dass jeder Knoten oder jede Replik bei Lese- und
-  Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden folgende
-  Konsistenzstufen unterstützt: „Strong“, „Bounded“, „Eventually“ und „Session“,
+  Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden die
+  Konsistenzstufen „Strong“, „Bounded“, „Eventually“ und „Session“ unterstützt,
   wobei „Bounded“ die standardmäßig verwendete Konsistenzstufe ist.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Konsistenzstufe<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
@@ -47,7 +47,7 @@ summary: >-
    <span>Service-Zeit und Garantiezeit</span>
   
  </span></p>
-<p>Wie in der obigen Abbildung dargestellt, bedeutet ein GuaranteeT-Wert, der kleiner als die ServiceTime ist, dass alle Daten vor dem angegebenen Zeitpunkt bereits sichtbar sind, sodass die Suche sofort ausgeführt werden kann. Ist der GuaranteeT-Wert größer als die ServiceTime, muss die Suche warten, bis die ServiceTime den GuaranteeT-Wert überschreitet, bevor sie ausgeführt werden kann.</p>
+<p>Wie in der obigen Abbildung dargestellt, bedeutet ein GuaranteeTs-Wert, der kleiner als die ServiceTime ist, dass alle Daten vor dem angegebenen Zeitpunkt bereits sichtbar sind, sodass die Suche sofort ausgeführt werden kann. Ist der GuaranteeTs-Wert größer als die ServiceTime, muss die Suche warten, bis die ServiceTime den GuaranteeTs-Wert überschreitet, bevor sie ausgeführt werden kann.</p>
 <p>Benutzer müssen einen Kompromiss zwischen Abfragegenauigkeit und Abfragelatenz finden. Wenn Benutzer hohe Konsistenzanforderungen haben und nicht empfindlich auf Abfragelatenz reagieren, können sie „GuaranteeTs“ auf einen möglichst großen Wert setzen; wenn Benutzer Suchergebnisse schnell erhalten möchten und bei der Abfragegenauigkeit toleranter sind, kann „GuaranteeTs“ auf einen kleineren Wert gesetzt werden.</p>
 <p><span class="img-wrapper">
   
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können beim Erstellen einer Sammlung sowie bei der Durchführung von Suchvorgängen und Abfragen verschiedene Konsistenzstufen festlegen.</p>
+    </button></h2><p>Sie können die Konsistenzstufe beim Erstellen einer Sammlung festlegen, sie nach der Erstellung der Sammlung ändern oder sie für einzelne Suchvorgänge und Abfragen überschreiben.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Konsistenzstufe beim Erstellen einer Sammlung festlegen<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mögliche Werte für den Parameter „ <code translate="no">consistency_level</code> “ sind „ <code translate="no">Strong</code> “, „ <code translate="no">Bounded</code> “, „ <code translate="no">Eventually</code> “ und „ <code translate="no">Session</code> “.</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Suche<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Ändern der Konsistenzstufe einer Sammlung<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,7 +184,58 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können die Konsistenzstufe für eine bestimmte Suche jederzeit ändern. Das folgende Codebeispiel setzt die Konsistenzstufe wieder auf <strong>„Bounded“</strong> zurück. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
+    </button></h3><p>Sie können die Konsistenzstufe einer bestehenden Sammlung ändern, indem Sie deren Eigenschaft „ <code translate="no">consistency_level</code> “ anpassen. Die neue Stufe gilt für nachfolgende Suchvorgänge und Abfragen in der Sammlung, für die keine eigene Konsistenzstufe angegeben wird. Für diese Änderung ist es nicht erforderlich, die Sammlung freizugeben. Das folgende Codebeispiel ändert die Konsistenzstufe auf <strong>„Eventually</strong>“.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Konsistenzstufe bei der Suche festlegen<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können die Konsistenzstufe für eine bestimmte Suche jederzeit ändern. Das folgende Code-Beispiel setzt die Konsistenzstufe wieder auf <strong>„Bounded“</strong> zurück. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -43,7 +43,7 @@ title: Milvus Lite lokal ausführen
 <li>Laptops</li>
 <li>Edge-Geräte mit kompatiblen Python-Abhängigkeiten</li>
 </ul>
-<p>Milvus Lite nutzt die „ <code translate="no">MilvusClient</code> “-API für unterstützte Operationen, darunter die Persistenz von Vektordaten, Einfügen und Löschen, Vektorsuche sowie Metadatenfilterung. Um einen unterstützten Anwendungs-Workflow auf eine Remote-Bereitstellung zu verlagern, ändern Sie die Verbindungs-URI und die Anmeldedaten und prüfen Sie die Unterschiede bei den unterstützten Funktionen. Für groß angelegte Produktions-Workloads verwenden Sie <a href="/docs/de/install-overview.md">Milvus Standalone oder Distributed</a> oder das vollständig verwaltete Milvus auf <a href="https://zilliz.com/cloud">der Zilliz Cloud</a>.</p>
+<p>Milvus Lite nutzt die „ <code translate="no">MilvusClient</code> “-API für unterstützte Operationen, darunter die Persistenz von Vektordaten, Einfügen und Löschen, Vektorsuche sowie Metadatenfilterung. Um einen unterstützten Anwendungsworkflow auf eine Remote-Bereitstellung zu verlagern, ändern Sie die Verbindungs-URI und die Anmeldedaten und prüfen Sie die Unterschiede bei den unterstützten Funktionen. Für groß angelegte Produktions-Workloads verwenden Sie <a href="/docs/de/install-overview.md">Milvus Standalone oder Distributed</a> oder das vollständig verwaltete Milvus auf <a href="https://zilliz.com/cloud">der Zilliz Cloud</a>.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

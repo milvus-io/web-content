@@ -43,8 +43,8 @@ summary: >-
    <span>ServiceTime と GuaranteeTime</span>
   
  </span></p>
-<p>上の図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点以前のすべてのデータはすでに可視化されていることを意味し、検索は直ちに実行されます。GuaranteeTsがServiceTimeより大きい場合、検索はServiceTimeがGuaranteeTsを超えるまで待機してから実行されます。</p>
-<p>ユーザーは、クエリの精度とクエリのレイテンシの間でトレードオフを行う必要があります。一貫性に対する要件が高く、クエリのレイテンシを気にしない場合は、GuaranteeTsを可能な限り大きな値に設定できます。一方、検索結果を迅速に取得したい場合で、クエリの精度に対する許容度が高い場合は、GuaranteeTsを小さい値に設定できます。</p>
+<p>上の図に示すように、GuaranteeTsがServiceTimeより小さい場合、指定された時点以前のすべてのデータがすでに可視化されていることを意味し、検索は直ちに実行されます。GuaranteeTsがServiceTimeより大きい場合、検索はServiceTimeがGuaranteeTsを超えるまで待機してから実行されます。</p>
+<p>ユーザーは、クエリの精度とクエリのレイテンシの間でトレードオフを行う必要があります。一貫性に対する要件が高く、クエリのレイテンシに敏感でない場合は、GuaranteeTsを可能な限り大きな値に設定できます。一方、検索結果を迅速に取得したい場合や、クエリの精度に対する許容度が高い場合は、GuaranteeTsを小さい値に設定できます。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/consistency-level-illustrated.png" alt="Consistency Level Illustrated" class="doc-image" id="consistency-level-illustrated" /> 
@@ -78,7 +78,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションの作成時、および検索やクエリの実行時に、さまざまな一貫性レベルを設定できます。</p>
+    </button></h2><p>一貫性レベルは、コレクションの作成時に設定したり、コレクション作成後に変更したり、個々の検索やクエリに対して上書きしたりすることができます。</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">コレクション作成時の整合性レベルの設定<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +94,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>コレクションを作成する際、そのコレクション内での検索やクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを「<strong>Bounded</strong>」に設定しています。</p>
+    </button></h3><p>コレクションを作成する際、そのコレクション内の検索やクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを「<strong>Bounded</strong>」に設定しています。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -165,7 +165,65 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> パラメータに指定可能な値は、<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 、および<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索における一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">コレクションの一貫性レベルの変更<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>既存のコレクションの一貫性レベルは、その<code translate="no">consistency_level</code> プロパティを変更することで変更できます。新しいレベルは、独自の一貫性レベルを指定していない、そのコレクションに対する以降の検索およびクエリに適用されます。また、この変更を行う際にコレクションを解放する必要はありません。次のコード例では、一貫性レベルを「<strong>Eventually</strong>」に変更しています。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<span class="highlighted-wrapper-line">properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);</span>
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">検索での一貫性レベルの設定<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

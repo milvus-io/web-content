@@ -2,7 +2,7 @@
 id: model-ranker-overview.md
 title: モデルランカーの概要Compatible with Milvus 2.6.x
 summary: >-
-  従来のベクトル検索では、高次元空間におけるベクトルの一致度、つまり数学的な類似性のみに基づいて検索結果の順位付けが行われます。このアプローチは効率的ですが、真の意味でのセマンティックな関連性を見逃してしまうことがよくあります。例えば、「データベース最適化のベストプラクティス」を検索する場合を考えてみましょう。ベクトルの類似度が高く、これらの用語が頻繁に言及されている文書が検索結果に表示されるかもしれませんが、実際には実用的な最適化戦略が提示されていない可能性があります。
+  従来のベクトル検索では、結果の順位付けは純粋に数学的な類似性、つまり高次元空間におけるベクトルの一致度に基づいて行われます。このアプローチは効率的ですが、真の意味でのセマンティックな関連性を見逃してしまうことがよくあります。例えば、「データベース最適化のベストプラクティス」を検索する場合を考えてみましょう。ベクトルの類似度が高く、これらの用語が頻繁に言及されている文書が検索結果に表示されるかもしれませんが、実際には実用的な最適化戦略が提示されていない可能性があります。
 beta: Milvus 2.6.x
 ---
 <h1 id="Model-Ranker-Overview" class="common-anchor-header">モデルランカーの概要<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Model-Ranker-Overview" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>従来のベクトル検索は、高次元空間におけるベクトルの一致度、つまり純粋に数学的な類似性に基づいて検索結果をランク付けします。このアプローチは効率的ですが、真の意味でのセマンティックな関連性を見逃してしまうことがよくあります。例えば<strong>、「データベース最適化のベストプラクティス」を</strong>検索する場合を考えてみましょう<strong>。</strong>ベクトルの類似度が高く、これらの用語が頻繁に言及されているドキュメントが検索結果に表示されるかもしれませんが、実際には実用的な最適化戦略が提供されていない可能性があります。</p>
+    </button></h1><p>従来のベクトル検索は、高次元空間におけるベクトルの一致度、つまり数学的な類似性のみに基づいて検索結果をランク付けします。このアプローチは効率的ですが、真の意味でのセマンティックな関連性を見逃してしまうことがよくあります。例えば<strong>、「データベース最適化のベストプラクティス」</strong>を検索する場合を考えてみましょう<strong>。</strong>ベクトルの類似度が高く、これらの用語が頻繁に言及されている文書が検索結果に表示されるかもしれませんが、実際には実用的な最適化戦略が提供されていない可能性があります。</p>
 <p>Model Rankerは、クエリとドキュメント間の意味的な関係を理解する高度な言語モデルを統合することで、Milvusの検索機能を一新します。ベクトル類似性のみに依存するのではなく、コンテンツの意味や文脈を評価することで、より知的で関連性の高い検索結果を提供します。</p>
 <h2 id="Limits" class="common-anchor-header">制限事項<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>モデルランカーは、グループ化検索では使用できません。</p></li>
-<li><p>モデルによる再ランク付けに使用されるフィールドは、テキスト型（<code translate="no">VARCHAR</code> ）である必要があります。</p></li>
+<li><p>モデルによる再ランク付けに使用されるフィールドは、テキスト型（<code translate="no">VARCHAR</code> ）でなければなりません。</p></li>
 <li><p>各モデルランカーは、評価に一度に 1 つの<code translate="no">VARCHAR</code> フィールドのみを使用できます。</p></li>
 </ul>
 <h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>モデルランカーは、明確に定義されたワークフローを通じて、言語モデルの理解機能をMilvusの検索プロセスに統合します：</p>
+    </button></h2><p>モデルランカーは、明確に定義されたワークフローを通じて、言語モデルの理解機能を Milvus の検索プロセスに統合します。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/model-ranker-overview.png" alt="Model Ranker Overview" class="doc-image" id="model-ranker-overview" /> 
@@ -75,7 +75,7 @@ beta: Milvus 2.6.x
 <li><p>各文書には、意味的理解に基づいて関連性スコアが割り当てられる</p></li>
 </ul></li>
 <li><p><strong>インテリジェントな再ランク付け</strong>：モデルによって生成された関連性スコアに基づいて、文書の順序が再編成されます</p></li>
-<li><p><strong>検索結果の向上</strong>：アプリケーションには、単なるベクトル類似度ではなく、意味的関連性に基づいてランク付けされた検索結果が提供されます</p></li>
+<li><p><strong>検索結果の向上</strong>：アプリケーションは、単なるベクトル類似度ではなく、意味的関連性に基づいてランク付けされた検索結果を受け取ります</p></li>
 </ol>
 <h2 id="Choose-a-model-provider-for-your-needs" class="common-anchor-header">ニーズに合ったモデルプロバイダーを選択<button data-href="#Choose-a-model-provider-for-your-needs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -115,7 +115,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>Cohere</p></td>
      <td><p>信頼性と統合の容易さを優先するエンタープライズアプリケーション</p></td>
-     <td><ul><li><p>エンタープライズレベルの信頼性とスケーラビリティ</p></li><li><p>インフラのメンテナンスが不要なマネージドサービス</p></li><li><p>多言語対応の再ランク付け機能</p></li><li><p>組み込みのレート制限およびエラー処理</p></li></ul></td>
+     <td><ul><li><p>エンタープライズレベルの信頼性とスケーラビリティ</p></li><li><p>インフラの保守が不要なマネージドサービス</p></li><li><p>多言語対応の再ランク付け機能</p></li><li><p>組み込みのレート制限およびエラー処理</p></li></ul></td>
      <td><p>一貫したAPIパフォーマンスと多言語商品カタログを備えた、高可用性の検索機能を必要とするEコマースプラットフォーム</p></td>
    </tr>
    <tr>
@@ -127,7 +127,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>SiliconFlow</p></td>
      <td><p>費用対効果を優先した長文ドキュメントの処理アプリケーション</p></td>
-     <td><ul><li><p>オーバーラップを構成可能な高度なドキュメントチャンキング</p></li><li><p>チャンクベースのスコアリング（最高スコアのチャンクが文書を代表する）</p></li><li><p>多様な再ランク付けモデルのサポート</p></li><li><p>スタンダード版とプロ版のモデルバリエーションにより、コスト効率に優れる</p></li></ul></td>
+     <td><ul><li><p>オーバーラップを構成可能な高度なドキュメントチャンキング</p></li><li><p>チャンクベースのスコアリング（最高スコアのチャンクが文書を代表する）</p></li><li><p>多様な再ランク付けモデルのサポート</p></li><li><p>スタンダード版およびプロ版モデルによるコスト効率の良さ</p></li></ul></td>
      <td><p>インテリジェントなセグメンテーションとオーバーラップ制御を必要とする、長文のマニュアルや論文を処理する技術文書検索システム</p></td>
    </tr>
    <tr>
@@ -140,7 +140,7 @@ beta: Milvus 2.6.x
      <td><p>Hugging Face</p></td>
      <td><p>ホスト型Hugging Face文類似度モデルを利用するアプリケーション</p></td>
      <td><ul><li><p>ホスト型<code translate="no">hf-inference</code> プロバイダーを使用</p></li><li><p>Hugging Face Hubからモデルを選択</p></li><li><p>候補ごとに1つの文類似度スコアを算出する</p></li><li><p>APIキーによる認証を使用</p></li></ul></td>
-     <td><p>別途推論サービスを運用することなく、Hugging Faceモデルを使用して候補テキストの再ランク付けを行いたいセマンティック検索アプリケーション</p></td>
+     <td><p>別途推論サービスを運用することなく、Hugging Faceモデルを用いて候補テキストの再ランク付けを行いたいセマンティック検索アプリケーション</p></td>
    </tr>
 </table>
 <p>各モデルサービスの実装に関する詳細については、専用のドキュメントを参照してください：</p>
@@ -174,7 +174,7 @@ beta: Milvus 2.6.x
 <li><p>Milvusインスタンスからアクセス可能な、稼働中の外部モデルサービス</p></li>
 <li><p>Milvusと選択したモデルサービス間の適切なネットワーク接続</p></li>
 </ul>
-<p>モデルランカーは、標準のベクトル検索およびハイブリッド検索操作の両方にシームレスに統合されます。実装には、再ランク付けの設定を定義するFunctionオブジェクトを作成し、それを検索操作に渡す手順が含まれます。</p>
+<p>モデルランカーは、標準のベクトル検索およびハイブリッド検索操作の両方にシームレスに統合されます。実装には、再ランク付けの設定を定義するFunctionオブジェクトを作成し、それを検索操作に渡す作業が含まれます。</p>
 <h3 id="Create-a-model-ranker" class="common-anchor-header">モデルランカーの作成<button data-href="#Create-a-model-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,9 +237,83 @@ model_ranker = Function(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;tei&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;machine learning for time series&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://model-service:8080&quot;</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -303,7 +377,7 @@ model_ranker = Function(
      <td><p><code translate="no">32</code> (デフォルト)</p></td>
    </tr>
 </table>
-<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準ベクトル検索に適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
+<h3 id="Apply-to-standard-vector-search" class="common-anchor-header">標準のベクトル検索に適用<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -318,7 +392,7 @@ model_ranker = Function(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>モデルランカーを定義したら、検索操作の際に `ranker` パラメータに指定することで適用できます：</p>
+    </button></h3><p>モデルランカーを定義したら、検索操作の際に `ranker` パラメータとして渡すことで適用できます:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -330,7 +404,7 @@ model_ranker = Function(
 results = client.search(
     collection_name,
     data=[your_query_vector], <span class="hljs-comment"># Number of query vectors must match that specified in model_ranker.params[&quot;queries&quot;] </span>
-    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
     limit=<span class="hljs-number">10</span>,
     output_fields=[<span class="hljs-string">&quot;document&quot;</span>],  <span class="hljs-comment"># Include the text field in outputs</span>
 <span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Apply the model ranker here</span></span>
@@ -345,7 +419,7 @@ results = client.search(
 <span class="hljs-type">SearchReq</span> <span class="hljs-variable">searchReq</span> <span class="hljs-operator">=</span> SearchReq.builder()
         .collectionName(COLLECTION_NAME)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
-        .annsField(<span class="hljs-string">&quot;vector_field&quot;</span>)
+        .annsField(<span class="hljs-string">&quot;dense_vector&quot;</span>)
         .limit(<span class="hljs-number">10</span>)
         .outputFields(Collections.singletonList(document))
         .functionScore(FunctionScore.builder()
@@ -357,7 +431,67 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">10</span>,            <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;tei&quot;,
+        &quot;queries&quot;: [
+            &quot;machine learning for time series&quot;
+        ],
+        &quot;endpoint&quot;: &quot;http://model-service:8080&quot;
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

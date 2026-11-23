@@ -3,8 +3,8 @@ id: removepunct-filter.md
 title: إزالة علامات الترقيمCompatible with Milvus 2.5.11+
 summary: >-
   يقوم مرشح «removepunct» بإزالة الرموز التي تحتوي على علامات الترقيم أو
-  المسافات البيضاء. وفي حالة أدوات تقطيع النص التي تحتفظ بعلامات الترقيم داخل
-  الكلمات، فإنه يزيل الرمز المتأثر بالكامل.
+  المسافات. وفي حالة أدوات تقطيع النص التي تحتفظ بعلامات الترقيم داخل الكلمات،
+  فإنه يزيل الرمز المتأثر بالكامل.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">إزالة علامات الترقيم<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -24,7 +24,8 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h1><p>يقوم مرشح " <code translate="no">removepunct</code> " بإزالة الرموز التي تحتوي على علامات الترقيم أو المسافات من تدفق الرموز. استخدمه عندما تريد معالجة نصية أنظف تركز على الكلمات ذات المعنى بدلاً من علامات الترقيم.</p>
 <div class="alert note">
-<p>يكون هذا المرشح أكثر فعالية مع أدوات تجزئة الرموز " <code translate="no">jieba</code>" و" <code translate="no">lindera</code>" و" <code translate="no">icu</code> "، التي تحتفظ بعلامات الترقيم كرموز منفصلة (على سبيل المثال، <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). يقوم أداة تجزئة <code translate="no">standard</code> بإهمال علامات الترقيم أثناء عملية التجزئة. أما أداة تجزئة <code translate="no">whitespace</code> فتحافظ على علامات الترقيم، بما في ذلك علامات الترقيم الموجودة داخل الرمز. عند دمجها مع <code translate="no">whitespace</code> ، تقوم <code translate="no">removepunct</code> بإزالة الرمز بالكامل إذا كان يحتوي على علامات ترقيم أو مسافات بيضاء؛ ولا تقوم بإزالة أحرف فردية من الرمز.</p>
+<p>يكون هذا المرشح أكثر فعالية مع أدوات تجزئة الرموز " <code translate="no">jieba</code>" و" <code translate="no">lindera</code>" و" <code translate="no">icu</code> "، التي تحتفظ بعلامات الترقيم كرموز منفصلة (على سبيل المثال، <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). يقوم أداة تجزئة <code translate="no">standard</code> بإزالة علامات الترقيم أثناء عملية التجزئة. أما أداة تجزئة <code translate="no">whitespace</code> فتحافظ على علامات الترقيم، بما في ذلك علامات الترقيم الموجودة داخل الرمز. عند دمجها مع <code translate="no">whitespace</code> ، تقوم <code translate="no">removepunct</code> بإزالة الرمز بالكامل إذا كان يحتوي على علامات ترقيم أو مسافات بيضاء؛ ولا تقوم بإزالة أحرف فردية من الرمز.</p>
+<p>تحتفظ بعض أدوات التقطيع بعلامات الترقيم داخل الرمز الفردي. على سبيل المثال، تقوم أداة التقطيع <code translate="no">icu</code> بتقطيع <code translate="no">don't</code> و <code translate="no">3.5kg</code> و <code translate="no">u.s.a</code> إلى رموز فردية تحتوي على علامات الترقيم، بينما تقوم أداة التقطيع <code translate="no">removepunct</code> بإزالتها بالكامل، مما يجعل المصطلحات المقابلة غير قابلة للبحث. لإزالة الرموز المكونة بالكامل من علامات الترقيم والمسافات البيضاء فقط مع الاحتفاظ بالرموز الأخرى، استخدم مرشح <a href="/docs/ar/regex-filter.md">التعبيرات النمطية (regex)</a> مع تعبير يتطلب حرفًا واحدًا على الأقل غير من علامات الترقيم أو المسافات البيضاء، مثل <code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code>.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">التكوين<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +42,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>مرشح « <code translate="no">removepunct</code> » مدمج في Milvus. لاستخدامه، ما عليك سوى تحديد اسمه في قسم « <code translate="no">filter</code> » داخل « <code translate="no">analyzer_params</code> ».</p>
+    </button></h2><p>مرشح « <code translate="no">removepunct</code> » مدمج في Milvus. لاستخدامه، ما عليك سوى تحديد اسمه في قسم « <code translate="no">filter</code> » ضمن « <code translate="no">analyzer_params</code> ».</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

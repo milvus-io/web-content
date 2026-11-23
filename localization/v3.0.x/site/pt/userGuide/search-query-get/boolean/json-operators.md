@@ -2,9 +2,9 @@
 id: json-operators.md
 title: Operadores JSON
 summary: >-
-  O Milvus suporta operadores avançados para consultar e filtrar campos JSON,
-  tornando-os ideais para a gestão de dados complexos e estruturados. Estes
-  operadores permitem uma consulta altamente eficaz de documentos JSON,
+  O Milvus suporta operadores avançados para a consulta e filtragem de campos
+  JSON, tornando-os ideais para a gestão de dados complexos e estruturados.
+  Estes operadores permitem uma consulta altamente eficaz de documentos JSON,
   permitindo-lhe recuperar entidades com base em elementos, valores ou condições
   específicos dentro dos campos JSON. Esta secção irá orientá-lo na utilização
   de operadores específicos para JSON no Milvus, fornecendo exemplos práticos
@@ -27,9 +27,9 @@ summary: >-
       </svg>
     </button></h1><p>O Milvus suporta operadores avançados para consultar e filtrar campos JSON, tornando-os perfeitos para a gestão de dados complexos e estruturados. Estes operadores permitem uma consulta altamente eficaz de documentos JSON, permitindo-lhe recuperar entidades com base em elementos, valores ou condições específicos dentro dos campos JSON. Esta secção irá guiá-lo na utilização de operadores específicos para JSON no Milvus, fornecendo exemplos práticos para ilustrar a sua funcionalidade.</p>
 <div class="alert note">
-<p>Os campos JSON não suportam estruturas complexas e aninhadas, tratando todas as estruturas aninhadas como cadeias de caracteres simples. Por conseguinte, ao trabalhar com campos JSON, é aconselhável evitar aninhamentos excessivamente profundos e garantir que as suas estruturas de dados sejam o mais planas possível, para um desempenho ideal.</p>
+<p>Os campos JSON não conseguem lidar com estruturas complexas e aninhadas, tratando todas as estruturas aninhadas como cadeias de caracteres simples. Por isso, ao trabalhar com campos JSON, é aconselhável evitar aninhamentos excessivamente profundos e garantir que as suas estruturas de dados sejam o mais planas possível, para um desempenho ideal.</p>
 </div>
-<h2 id="Available-JSON-Operators" class="common-anchor-header">Operadores JSON disponíveis<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
+<h2 id="Available-JSON-Operators" class="common-anchor-header">Operadores JSON Disponíveis<button data-href="#Available-JSON-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

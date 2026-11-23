@@ -2,11 +2,8 @@
 id: bitmap.md
 title: BITMAP
 summary: >-
-  L'indicizzazione bitmap è una tecnica di indicizzazione efficiente progettata
-  per migliorare le prestazioni delle query su campi scalari a bassa
-  cardinalità. Per cardinalità si intende il numero di valori distinti presenti
-  in un campo. I campi con un numero ridotto di elementi distinti sono
-  considerati a bassa cardinalità.
+  Utilizzare BITMAP per il filtraggio scalare a bassa cardinalità. Verificare i
+  filtri supportati, le restrizioni sui campi e la creazione degli indici.
 ---
 <h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -23,8 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>L'indicizzazione bitmap è una tecnica efficiente progettata per migliorare le prestazioni delle query su campi scalari a bassa cardinalità. La cardinalità si riferisce al numero di valori distinti presenti in un campo. I campi con un numero ridotto di elementi distinti sono considerati a bassa cardinalità.</p>
-<p>Questo tipo di indice contribuisce a ridurre i tempi di recupero delle query scalari rappresentando i valori dei campi in un formato binario compatto ed eseguendo su di essi efficienti operazioni bit a bit. Rispetto ad altri tipi di indici, gli indici bitmap presentano in genere una maggiore efficienza in termini di spazio e velocità di query più elevate quando si tratta di campi a bassa cardinalità.</p>
+    </button></h1><p><code translate="no">BITMAP</code> accelera il filtraggio scalare su campi con pochi valori distinti, come i codici di stato e le categorie. La cardinalità è il numero di valori distinti presenti in un campo. Questa pagina descrive i filtri supportati, le restrizioni sui campi e la creazione di indici.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,9 +36,91 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il termine <strong>«bitmap»</strong> combina due parole: <strong>«bit»</strong> e <strong>«map</strong>». Un bit rappresenta l’unità più piccola di dati in un computer, che può contenere solo un valore pari a <strong>0</strong> o <strong>1</strong>. Una «map», in questo contesto, si riferisce al processo di trasformazione e organizzazione dei dati in base al valore che deve essere assegnato a 0 e 1.</p>
-<p>Un indice bitmap è costituito da due componenti principali: bitmap e chiavi. Le chiavi rappresentano i valori univoci nel campo indicizzato. Per ogni valore univoco esiste una bitmap corrispondente. La lunghezza di queste bitmap è pari al numero di record presenti nella raccolta. Ogni bit nella bitmap corrisponde a un record della collezione. Se il valore del campo indicizzato in un record corrisponde alla chiave, il bit corrispondente viene impostato a <strong>1</strong>; in caso contrario, viene impostato a <strong>0</strong>.</p>
-<p>Si consideri una raccolta di documenti con i campi <strong>Categoria</strong> e <strong>Pubblico</strong>. Si desidera recuperare i documenti che rientrano nella categoria <strong>Tech</strong> e sono accessibili al <strong>pubblico</strong>. In questo caso, le chiavi per i nostri indici bitmap sono <strong>Tech</strong> e <strong>Pubblico</strong>.</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">Obiettivi e filtri degli indici<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per creare esplicitamente un indice <code translate="no">BITMAP</code>, selezionare una destinazione diversa dalla chiave primaria dalla tabella sottostante. Ogni riga associa una destinazione supportata ai filtri che l’indice può aiutare a valutare:</p>
+<table>
+<thead>
+<tr><th>Obiettivo dell’indice</th><th>Filtri che possono utilizzare l’indice</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> campo</td><td>Uguaglianza (<code translate="no">==</code>, <code translate="no">!=</code>) e appartenenza (<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>Campo intero (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>)</td><td>Uguaglianza, appartenenza e intervalli (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> campo</td><td>Uguaglianza, appartenenza, intervalli e <a href="/docs/it/pattern-matching.md">pattern LIKE o regex</a>. La valutazione del pattern può riguardare molte stringhe indicizzate distinte.</td></tr>
+<tr><td>Campo <code translate="no">ARRAY</code> standard con elementi <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code> o <code translate="no">VARCHAR</code> </td><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>. Vedi <a href="/docs/it/array_data_type.md#Array-index-support">Supporto per gli indici degli array</a>.</td></tr>
+<tr><td>Percorso JSON convertito in <code translate="no">BOOL</code> o <code translate="no">VARCHAR</code></td><td>filtri per i corrispondenti valori booleani o stringa sopra indicati, nel rispetto dei <a href="/docs/it/json-indexing.md#Index-requirements">requisiti relativi agli indici JSON</a>.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>Gli indici scalari, compreso <code translate="no">AUTOINDEX</code>, non supportano campi ARRAY ricorsivi o array con elementi nullabili. Vedere <a href="/docs/it/array_data_type.md#Array-index-support">Supporto degli indici array</a> per i filtri relativi agli array ordinari e <a href="/docs/it/index-structarray-fields.md#Create-scalar-indexes">Indici dei campi StructArray</a> per le regole relative ai sottocampi.</p>
+</blockquote>
+</div>
+<p>Per le destinazioni ARRAY, l’ <code translate="no">BITMAP</code> gestisce filtri di contenimento degli elementi, non l’uguaglianza dell’intero array, l’accesso agli elementi in base alla posizione o la lunghezza dell’array. Vedere <a href="/docs/it/array_data_type.md#Array-index-support">Supporto degli indici per gli array</a>.</p>
+<p>Per la selezione automatica al di là di questi target espliciti, consultare <a href="/docs/it/scalar_index.md#AUTOINDEX-behavior">il comportamento di AUTOINDEX</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Si tratta di funzionalità di indicizzazione, non di limiti alle espressioni di filtro valide. Vedere <a href="/docs/it/scalar_index.md#Filter-execution">"Indice scalare</a> " per i vincoli di ricerca condivisa. Per i test <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> e NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), vedere <a href="/docs/it/basic-operators.md">"Operatori di base</a>".</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">Considerazioni sulla memoria<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I costi di memoria e di query dipendono dal numero di valori distinti e dalla loro distribuzione. Confrontare gli indici con filtri rappresentativi anziché considerare una cardinalità fissa come un limite universale di prestazioni.</p>
+<p>Per le bitmap dense, una stima approssimativa in byte è <code translate="no">(D + 1) * N / 8</code>, dove <code translate="no">N</code> è il numero di entità e <code translate="no">D</code> il numero di valori distinti. Ciò include una bitmap per ogni valore distinto e una per la validità. L’archiviazione dei valori e altri costi aggiuntivi si sommano alla stima; una cache di offset opzionale aggiunge circa <code translate="no">8 * N</code> byte su un sistema a 64 bit. Le rappresentazioni bitmap compresse possono avere un utilizzo di memoria sostanzialmente diverso.</p>
+<p>Queste stime approssimative riguardano la memoria dell’indice caricato con la mappatura di memoria disabilitata. Calcolarle per segmento, quindi sommarle tra i segmenti caricati e le repliche.</p>
+<div class="alert note">
+<blockquote>
+<p>Prevedere memoria aggiuntiva per i dati dei campi caricati, gli indici vettoriali, l’overhead delle collezioni e degli indici e le allocazioni temporanee. Verificare con dati e query rappresentativi; gli array, i dati JSON, i formati di indice meno recenti e il memory mapping richiedono misurazioni separate.</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">Come funziona BITMAP<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Visualizza un esempio di filtraggio bitmap</strong></summary></p>
+<p>Un indice bitmap associa ogni valore di campo distinto a una bitmap. Ogni bit corrisponde a un’entità: <strong>1</strong> indica che l’entità possiede quel valore, mentre <strong>0</strong> indica che non lo possiede.</p>
+<p>Ad esempio, per trovare i documenti pubblici nella categoria <strong>Tech</strong>, combina le bitmap per <strong>Categoria = Tech</strong> e <strong>Pubblico = vero</strong>:</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
@@ -51,14 +129,15 @@ summary: >-
  </span></p>
 <p>Come mostrato nella figura, gli indici bitmap per " <strong>Categoria</strong> " e " <strong>Pubblico</strong> " sono:</p>
 <ul>
-<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], il che indica che solo il primo e il terzo documento rientrano nella categoria <strong>"Tech</strong> ".</p></li>
+<li><p><strong>Tech</strong>: [1, 0, 1, 0, 0], il che indica che solo il primo e il terzo documento rientrano nella categoria <strong>Tech</strong>.</p></li>
 <li><p><strong>Public</strong>: [1, 0, 0, 1, 0], il che indica che solo il primo e il quarto documento sono accessibili al <strong>pubblico</strong>.</p></li>
 </ul>
-<p>Per individuare i documenti che soddisfano entrambi i criteri, eseguiamo un’operazione AND bit a bit su queste due bitmap:</p>
+<p>Per individuare i documenti che soddisfano entrambi i criteri, eseguiamo un'operazione AND bit a bit su queste due mappe di bit:</p>
 <ul>
-<li><strong>"Tech</strong> " AND <strong>"Pubblico</strong>": [1, 0, 0, 0, 0]</li>
+<li><strong>Tecnologia</strong> AND <strong>Pubblico</strong>: [1, 0, 0, 0, 0]</li>
 </ul>
-<p>La bitmap risultante [1, 0, 0, 0, 0] indica che solo il primo documento (<strong>ID</strong> <strong>1</strong>) soddisfa entrambi i criteri. Utilizzando gli indici bitmap e operazioni bit a bit efficienti, possiamo restringere rapidamente l’ambito di ricerca, eliminando la necessità di scansionare l’intero set di dati.</p>
+<p>Solo il primo documento (<strong>ID 1</strong>) soddisfa entrambi i criteri.</p>
+<p></details></p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">Creazione di un indice bitmap<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -242,9 +321,8 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, creiamo un indice bitmap sul campo ` <code translate="no">category</code> ` della collezione ` <code translate="no">my_collection</code> `. Il metodo ` <code translate="no">add_index()</code> ` viene utilizzato per specificare il nome del campo, il tipo di indice e il nome dell'indice.</p>
-<p>Una volta creato l'indice bitmap, è possibile utilizzare il parametro ` <code translate="no">filter</code> ` nelle operazioni di query per eseguire il filtraggio scalare in base al campo indicizzato. Ciò consente di restringere in modo efficiente i risultati della ricerca utilizzando l'indice bitmap. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/boolean.md">"Spiegazione del filtraggio"</a>.</p>
-<h2 id="Drop-an-index" class="common-anchor-header">Eliminazione di un indice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
+<p>Questo crea un indice su <code translate="no">my_collection.category</code>. Utilizza il campo in una query o cerca <code translate="no">filter</code>; consulta la sezione " <a href="/docs/it/boolean.md">Spiegazione del filtraggio</a>".</p>
+<h2 id="Drop-an-index" class="common-anchor-header">Eliminare un indice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -259,12 +337,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizzare il metodo ` <code translate="no">drop_index()</code> ` per rimuovere un indice esistente da una raccolta.</p>
+    </button></h2><p>Utilizza il metodo <code translate="no">drop_index()</code> per rimuovere un indice esistente da una collezione.</p>
 <div class="alert note">
-<ul>
-<li><p>Nella <strong>versione 2.6.3</strong> o precedenti, è necessario liberare la collezione prima di eliminare un indice scalare.</p></li>
-<li><p>A partire <strong>dalla v2.6.4</strong> o successive, è possibile eliminare direttamente un indice scalare una volta che non è più necessario, senza dover prima rilasciare la collezione.</p></li>
-</ul>
+<blockquote>
+<p>Per i requisiti di versione relativi all'eliminazione di un indice scalare, consultare la sezione " <a href="/docs/it/scalar_index.md#Drop-index-compatibility">Indice scalare</a>".</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -386,37 +463,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limiti<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Gli indici bitmap sono supportati solo per i campi scalari che non sono chiavi primarie.</p></li>
-<li><p>Il tipo di dati del campo deve essere uno dei seguenti:</p>
-<ul>
-<li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (gli elementi devono essere uno dei seguenti: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
-</ul></li>
-<li><p>Gli indici bitmap non supportano i seguenti tipi di dati:</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: i tipi a virgola mobile non sono compatibili con la natura binaria degli indici bitmap.</p></li>
-<li><p><code translate="no">JSON</code>: I tipi di dati JSON hanno una struttura complessa che non può essere rappresentata in modo efficiente utilizzando gli indici bitmap.</p></li>
-</ul></li>
-<li><p>Gli indici bitmap non sono adatti a campi con elevata cardinalità (ovvero campi con un numero elevato di valori distinti).</p>
-<ul>
-<li><p>Come linea guida generale, gli indici bitmap sono più efficaci quando la cardinalità di un campo è inferiore a 500.</p></li>
-<li><p>Quando la cardinalità supera questa soglia, i vantaggi in termini di prestazioni degli indici bitmap diminuiscono e il sovraccarico di archiviazione diventa significativo.</p></li>
-<li><p>Per i campi ad alta cardinalità, si consiglia di prendere in considerazione l’utilizzo di tecniche di indicizzazione alternative, come gli indici invertiti, a seconda del caso d’uso specifico e dei requisiti di query.</p></li>
-</ul></li>
-</ul>

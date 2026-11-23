@@ -257,7 +257,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L'opérateur ` <code translate="no">ARRAY_APPEND</code> ` ajoute des éléments de charge utile à un champ `ARRAY` existant lors d'une requête ` <code translate="no">upsert</code> `. Il ne s'agit pas d'une expression de filtrage. Utilisez-le lorsque vous souhaitez ajouter des valeurs à un tableau sans interroger au préalable la valeur actuelle du tableau.</p>
+    </button></h2><p>L'opérateur ` <code translate="no">ARRAY_APPEND</code> ` ajoute des éléments de charge utile à un champ `ARRAY` existant lors d'une requête ` <code translate="no">upsert</code> `. Il ne s'agit pas d'une expression de filtrage. Utilisez-le lorsque vous souhaitez ajouter des valeurs à un tableau sans interroger au préalable la valeur actuelle de ce dernier.</p>
 <p>L’exemple suivant ajoute <code translate="no">&quot;premium&quot;</code> au champ ARRAY de la requête <code translate="no">tags</code> de l’entité dont la clé primaire est <code translate="no">1</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -394,7 +394,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>L’opérateur « <code translate="no">ARRAY_REMOVE</code> » supprime tous les éléments d’un champ ARRAY existant qui correspondent à une valeur présente dans la charge utile de la requête lors d’une requête « <code translate="no">upsert</code> ». Il ne s’agit pas d’une expression de filtrage. Utilisez-le lorsque vous souhaitez supprimer les valeurs correspondantes d’un tableau sans interroger au préalable la valeur actuelle du tableau.</p>
+    </button></h2><p>L’opérateur « <code translate="no">ARRAY_REMOVE</code> » supprime tous les éléments d’un champ ARRAY existant qui correspondent à une valeur du payload de la requête lors d’une requête « <code translate="no">upsert</code> ». Il ne s’agit pas d’une expression de filtrage. Utilisez-le lorsque vous souhaitez supprimer les valeurs correspondantes d’un tableau sans interroger au préalable la valeur actuelle du tableau.</p>
 <p>L’exemple suivant supprime les éléments « <code translate="no">&quot;trial&quot;</code> » du champ ARRAY « <code translate="no">tags</code> » de l’entité dont la clé primaire est « <code translate="no">1</code> » :</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -515,4 +515,4 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_remove&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'ajout d'<code translate="no">ARRAY_REMOVE</code> s à un champ via <code translate="no">field_ops</code> active la sémantique de mise à jour partielle pour ce champ. Pour connaître le workflow complet, les types d'éléments pris en charge et les limites, consultez <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">la section Champs ARRAY en mode « merge</a> » (mise à jour <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">part</a>ielle).</p>
+<p>L'ajout d'<code translate="no">ARRAY_REMOVE</code> s à un champ via <code translate="no">field_ops</code> active la sémantique de mise à jour partielle pour ce champ. Pour connaître le workflow complet, les types d'éléments pris en charge et les limites, consultez <a href="/docs/fr/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">la section Champs ARRAY « Upsert » en mode fusion</a>.</p>

@@ -2,11 +2,11 @@
 id: manage-collections.md
 title: Guida alle collezioni
 summary: >-
-  Su Milvus è possibile creare più raccolte per gestire i propri dati e inserire
-  tali dati come entità all’interno delle raccolte. Le raccolte e le entità sono
-  simili alle tabelle e ai record presenti nei database relazionali. Questa
-  pagina ti aiuta a comprendere meglio il concetto di raccolta e i concetti
-  correlati.
+  Su Milvus è possibile creare più collezioni per gestire i propri dati e
+  inserire tali dati come entità all’interno delle collezioni. Le collezioni e
+  le entità sono simili alle tabelle e ai record presenti nei database
+  relazionali. Questa pagina ti aiuta a comprendere meglio il concetto di
+  collezione e i concetti correlati.
 ---
 <h1 id="Collection-Explained" class="common-anchor-header">Guida alle collezioni<button data-href="#Collection-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Quando si descrive un oggetto, solitamente se ne menzionano gli attributi, quali dimensioni, peso e posizione. È possibile utilizzare questi attributi come campi in una collezione. Ogni campo presenta diverse proprietà vincolanti, quali il tipo di dati e la dimensionalità di un campo vettoriale. È possibile creare uno schema di collezione creando i campi e definendone l’ordine. Per i possibili tipi di dati applicabili, consultare la sezione <a href="/docs/it/schema.md">Spiegazione dello schema</a>.</p>
-<p>È necessario includere tutti i campi definiti dallo schema nelle entità da inserire. Per rendere alcuni di essi facoltativi, si consiglia di abilitare il campo dinamico. Per i dettagli, consultare la sezione "Spieg <a href="/docs/it/enable-dynamic-field.md">azione dei campi dinamici</a>".</p>
+<p>È necessario includere tutti i campi definiti nello schema nelle entità da inserire. Per rendere alcuni di essi opzionali, si consiglia di abilitare il campo dinamico. Per i dettagli, consultare la sezione "Spiegazione <a href="/docs/it/enable-dynamic-field.md">del campo dinamico</a>".</p>
 <ul>
 <li><p><strong>Renderli nullabili o impostare valori predefiniti</strong></p>
 <p>Per i dettagli su come rendere un campo nullabile o impostare il valore predefinito, consultare la sezione " <a href="/docs/it/nullable-and-default.md">Nullabile e predefinito</a>".</p></li>
@@ -175,7 +175,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/it/use-partition-key.md">Utilizzo della chiave di partizione</a></p></li>
 <li><p><a href="/docs/it/mmap.md">Utilizza mmap</a></p></li>
-<li><p><a href="/docs/it/clustering-compaction.md">Compattazione del clustering</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">Partizione<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,8 +192,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Le partizioni sono sottoinsiemi di una collezione, che condividono lo stesso insieme di campi con la collezione padre, ciascuna contenente un sottoinsieme di entità.</p>
-<p>Assegnando le entità a partizioni diverse, è possibile creare gruppi di entità. È possibile eseguire ricerche e query in partizioni specifiche in modo che Milvus ignori le entità presenti in altre partizioni, migliorando così l'efficienza della ricerca.</p>
-<p>Per ulteriori dettagli, consultare <a href="/docs/it/manage-partitions.md">Gestione delle partizioni</a>.</p>
+<p>Allocando le entità in partizioni diverse, è possibile creare gruppi di entità. È possibile effettuare ricerche e query in partizioni specifiche in modo che Milvus ignori le entità presenti in altre partizioni, migliorando così l’efficienza della ricerca.</p>
+<p>Per ulteriori dettagli, consultare <a href="/docs/it/manage-partitions.md">Gestione</a> delle <a href="/docs/it/manage-partitions.md">partizioni</a>.</p>
 <h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

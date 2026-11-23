@@ -62,10 +62,10 @@ title: Ejecutar Milvus Lite de forma local
     </button></h2><p>Esta guía utiliza PyMilvus <strong>3.0.2</strong> y Milvus Lite <strong>3.2.2</strong>. Prepara el siguiente entorno:</p>
 <ul>
 <li>Python 3.10 o posterior. El backend local de Lite requiere una versión mínima de Python superior a la del cliente remoto de PyMilvus.</li>
-<li>macOS, Linux o Windows, con paquetes «wheels» compatibles para dependencias como <code translate="no">faiss-cpu</code> y <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 es un paquete escrito íntegramente en Python, por lo que el sistema operativo y la arquitectura deben cumplir con dichas dependencias, y no el propio paquete Lite.</li>
+<li>macOS, Linux o Windows, con paquetes «wheels» compatibles para dependencias como <code translate="no">faiss-cpu</code> y <code translate="no">pyarrow</code>. Milvus Lite 3.2.2 es un paquete escrito íntegramente en Python, por lo que el sistema operativo y la arquitectura deben cumplir con esas dependencias, y no el propio paquete Lite.</li>
 <li>Un directorio local con permisos de escritura para el almacenamiento de la base de datos.</li>
 </ul>
-<p>En Windows, pip omite el extra <code translate="no">milvus-lite</code> de PyMilvus 3.0.2 debido a su marcador de plataforma, por lo que <code translate="no">milvus-lite</code> debe indicarse explícitamente. El comando de instalación que figura a continuación ya lo hace. Para otras combinaciones de paquetes y plataformas, consulta los <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">requisitos de la versión de Milvus Lite</a>.</p>
+<p>En Windows, pip omite el extra « <code translate="no">milvus-lite</code> » de PyMilvus 3.0.2 debido a su marcador de plataforma, por lo que « <code translate="no">milvus-lite</code> » debe indicarse explícitamente. El comando de instalación que figura a continuación ya lo hace. Para otras combinaciones de paquetes y plataformas, consulta los <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">requisitos de la versión de Milvus Lite</a>.</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">Configuración de Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +89,7 @@ python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0
 <p>Pon entre comillas la expresión «extras» para que los shells como zsh no interpreten los corchetes. En Windows PowerShell, activa el entorno con ` <code translate="no">.venv\Scripts\Activate.ps1</code> ` en lugar de ` <code translate="no">source .venv/bin/activate</code>`. Las versiones explícitas mantienen el SDK y el backend local alineados con esta guía.</p>
 <div class="alert note">
 <blockquote>
-<p>Milvus Lite 3.x utiliza un motor de almacenamiento diferente al del paquete 2.x original. No puede abrir directamente un archivo <code translate="no">.db</code> existente de la versión 2.x. Conserva la base de datos original y un entorno que pueda abrirla, exporta los datos a ese entorno e impórtalos a una nueva base de datos. La instalación de un nuevo paquete no migra el formato de almacenamiento antiguo. Consulta <a href="#Migrating-data-from-Milvus-Lite">Migración de datos desde Milvus Lite</a>.</p>
+<p>Milvus Lite 3.x utiliza un motor de almacenamiento diferente al del paquete original 2.x. No puede abrir directamente un archivo <code translate="no">.db</code> existente de la versión 2.x. Conserva la base de datos original y un entorno que pueda abrirla, exporta los datos a ese entorno e impórtalos a una nueva base de datos. La instalación de un nuevo paquete no migra el formato de almacenamiento antiguo. Consulta <a href="#Migrating-data-from-Milvus-Lite">Migración de datos desde Milvus Lite</a>.</p>
 </blockquote>
 </div>
 <h2 id="Connect-to-Milvus-Lite" class="common-anchor-header">Conectarse a Milvus Lite<button data-href="#Connect-to-Milvus-Lite" class="anchor-icon" translate="no">
@@ -113,7 +113,7 @@ python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>En Milvus Lite 3.2.2, esto crea un <strong>directorio milvus_demo.db</strong> en el directorio de trabajo. El directorio contiene los archivos de almacenamiento de la base de datos; el sufijo <code translate="no">.db</code> no significa que se trate de un único archivo portátil. Reutiliza la misma ruta para volver a abrir la base de datos tras cerrar el cliente o reiniciar la aplicación.</p>
-<p>Utiliza una ruta diferente para una nueva base de datos. Para conectarte a un servidor Milvus remoto, introduce su punto final y tus credenciales:</p>
+<p>Utiliza una ruta diferente para una nueva base de datos. Para conectarte a un servidor Milvus remoto, indica su punto de conexión y tus credenciales:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;username:password&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Run-a-local-search-example" class="common-anchor-header">Ejecuta un ejemplo de búsqueda local<button data-href="#Run-a-local-search-example" class="anchor-icon" translate="no">
@@ -207,7 +207,7 @@ client.close()
 <tr><td>Índices escalares y dispersos</td><td><code translate="no">INVERTED</code> índices escalares y <code translate="no">SPARSE_INVERTED_INDEX</code></td></tr>
 <tr><td>Operaciones con datos</td><td>Insertar, actualizar o insertar, recuperar, consultar, búsqueda vectorial y eliminar</td></tr>
 <tr><td>Búsqueda</td><td>Búsqueda densa y dispersa, filtros de metadatos, múltiples campos vectoriales y búsqueda híbrida</td></tr>
-<tr><td>Organización de colecciones</td><td>Colecciones, bases de datos con nombre, alias y particiones, dentro de las operaciones compatibles con el adaptador local</td></tr>
+<tr><td>Organización de colecciones</td><td>Colecciones, bases de datos con nombre, alias y particiones, dentro de las operaciones admitidas por el adaptador local</td></tr>
 </tbody>
 </table>
 <p>Esta versión no se limita a los índices « <code translate="no">FLAT</code> ». La disponibilidad y el comportamiento de los índices dependen de la versión Lite; no apliques los límites del backend original 2.x al motor 3.x.</p>
@@ -218,7 +218,7 @@ client.close()
 <li>El adaptador local no implementa todas las RPC de Milvus. Las operaciones no compatibles devuelven un error « <code translate="no">UNIMPLEMENTED</code> »; no están disponibles la modificación del esquema ni la carga o liberación a nivel de partición.</li>
 <li>No se admiten la autenticación, los usuarios, los roles, el RBAC ni el TLS. No expongas el servidor local a una red no fiable.</li>
 <li>No se admiten los campos vectoriales «binary», «float16», «bfloat16» e «int8», ni los índices de cuantificación de producto.</li>
-<li>Lite está diseñado para cargas de trabajo locales. La compatibilidad con la API local no ofrece escalabilidad distribuida ni el aislamiento y la disponibilidad de producción que proporciona una implementación remota.</li>
+<li>Lite está diseñado para cargas de trabajo locales. La compatibilidad con la API local no ofrece escalabilidad distribuida ni el aislamiento y la disponibilidad de producción que ofrece una implementación remota.</li>
 </ul>
 <p>Consulte las <a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#known-limitations">limitaciones conocidas por versión</a> antes de confiar en una función del servidor que el ejemplo local no utilice.</p>
 <h2 id="Migrating-data-from-Milvus-Lite" class="common-anchor-header">Migración de datos desde Milvus Lite<button data-href="#Migrating-data-from-Milvus-Lite" class="anchor-icon" translate="no">

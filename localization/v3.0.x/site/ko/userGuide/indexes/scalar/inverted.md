@@ -1,11 +1,9 @@
 ---
 id: inverted.md
-title: 인버티드
-summary: >-
-  데이터에 대해 필터 쿼리를 자주 수행해야 할 경우, 인버티드 인덱스를 사용하면 쿼리 성능을 획기적으로 향상시킬 수 있습니다. 인버티드
-  인덱스는 모든 문서를 일일이 스캔하는 대신, 필터 조건에 정확히 일치하는 레코드를 신속하게 찾아냅니다.
+title: INVERTED
+summary: '스칼라 필드, 배열 및 유형 지정된 JSON 경로에 대한 값 필터링에는 INVERTED 인덱스를 사용하십시오.'
 ---
-<h1 id="INVERTED" class="common-anchor-header">인버티드<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">INVERTED<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>데이터에 대해 빈번한 필터 쿼리를 수행해야 할 경우, 역색인( <code translate="no">INVERTED</code> )을 활용하면 쿼리 성능을 획기적으로 향상시킬 수 있습니다. Milvus는 모든 문서를 일일이 스캔하는 대신, 역색인을 사용하여 필터 조건에 정확히 일치하는 레코드를 신속하게 찾아냅니다.</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">INVERTED 인덱스를 사용할 때<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">INVERTED</code> 스칼라 필터링 속도를 높이기 위해 필드 값을 해당 값을 포함하는 엔티티에 매핑합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +34,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음과 같은 경우 INVERTED 인덱스를 사용하십시오:</p>
-<ul>
-<li><p><strong>특정 값으로 필터링</strong>: 필드 값이 특정 값(예: <code translate="no">category == &quot;electronics&quot;</code>)과 일치하는 모든 레코드를 찾으려는 경우</p></li>
-<li><p><strong>텍스트 콘텐츠 필터링</strong>: <code translate="no">VARCHAR</code> 필드에 대한 효율적인 검색 수행</p></li>
-<li><p><strong>JSON 필드 값 쿼리</strong>: JSON 구조 내의 특정 키를 기준으로 필터링</p></li>
-</ul>
-<p><strong>성능 이점</strong>: 인버티드 인덱스는 전체 컬렉션 스캔을 수행할 필요가 없으므로, 대규모 데이터 세트에서 쿼리 시간을 초 단위에서 밀리초 단위로 단축할 수 있습니다.</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">INVERTED 인덱스의 작동 원리<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+    </button></h2><p><a id="When-to-use-INVERTED-indexes"></a></p>
+<p><code translate="no">INVERTED</code> 를 사용하여 <code translate="no">category == &quot;electronics&quot;</code> 와 같이 호환되는 필드나 JSON 경로에 대한 등가, 소속 및 범위 필터를 적용할 수 있습니다.</p>
+<p><a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a></p>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">인덱스 대상 및 필터<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,21 +55,80 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus의 <strong>INVERTED 인덱스는</strong> 각 고유 필드 값(텀)을 해당 값이 나타나는 문서 ID 집합에 매핑합니다. 이 구조를 통해 반복되거나 범주형 값을 가진 필드에 대한 빠른 조회가 가능합니다.</p>
-<p>도표에서 볼 수 있듯이, 이 과정은 두 단계로 진행됩니다:</p>
-<ol>
-<li><p><strong>정방향 매핑(ID → 용어):</strong> 각 문서 ID는 해당 문서에 포함된 필드 값을 가리킵니다.</p></li>
-<li><p><strong>역 매핑(Term → ID):</strong> Milvus는 고유한 용어를 수집하고, 각 용어에서 해당 용어가 포함된 모든 ID로 연결되는 역 매핑을 구축합니다.</p></li>
-</ol>
-<p>예를 들어, <strong>“electronics”라는</strong> 값은 ID <strong>1과</strong> <strong>3에</strong> 매핑되고, <strong>“books”는</strong> ID <strong>2와</strong> <strong>5</strong>에 매핑됩니다.</p>
+    </button></h3><p>다음 표는 지원되는 <code translate="no">INVERTED</code> 인덱스 대상과 해당 인덱스가 평가에 도움을 줄 수 있는 필터를 대응시켜 보여줍니다:</p>
+<table>
+<thead>
+<tr><th>인덱스 대상</th><th>인덱스를 사용할 수 있는 필터</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> 필드</td><td>동등성(<code translate="no">==</code>, <code translate="no">!=</code>) 및 소속(<code translate="no">in</code>, <code translate="no">not in</code>).</td></tr>
+<tr><td>숫자 필드 (<code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>)</td><td>등식, 집합 원소, 및 구간 (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>).</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 필드</td><td>동등성, 멤버십, 범위, <code translate="no">name LIKE &quot;abc%&quot;</code> 와 같은 접두사 일치, <code translate="no">name LIKE &quot;a%b_c&quot;</code> 와 같은 일반적인 LIKE.</td></tr>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code> 또는 <code translate="no">VARCHAR</code> 요소가 포함된 일반적인 <code translate="no">ARRAY</code> 필드</td><td>요소 포함 관계 및 허용되는 전체 배열 비교. <a href="/docs/ko/array_data_type.md#Array-index-support">'배열 인덱스 지원'을</a> 참조하십시오.</td></tr>
+<tr><td>유형이 지정된 JSON 경로</td><td>인덱싱된 캐스트에 적합한 필터. 경로 및 캐스트 매개변수를 지정하십시오. 캐스트 호환성에 대해서는 <a href="/docs/ko/json-indexing.md#Understand-cast-types">JSON 인덱싱을</a>, 쿼리 동작에 대한 <a href="/docs/ko/json-indexing.md#Supported-filters">자세한</a> 내용은 <a href="/docs/ko/json-indexing.md#Supported-filters">JSON 필터 세부 정보를</a> 참조하십시오.</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p><code translate="no">AUTOINDEX</code> 를 포함한 스칼라 인덱스는 재귀적 ARRAY 필드나 null 허용 요소가 포함된 배열을 지원하지 않습니다. 일반 배열 필터에 대해서는 <a href="/docs/ko/array_data_type.md#Array-index-support">‘배열 인덱스 지원’을</a>, 하위 필드 규칙에 대해서는 <a href="/docs/ko/index-structarray-fields.md#Create-scalar-indexes">‘StructArray 필드 인덱싱’을</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<p>단순 접미사(<code translate="no">LIKE &quot;%abc&quot;</code>) 및 부분 문자열(<code translate="no">LIKE &quot;%abc%&quot;</code>) 필터는 스캔 경로를 사용하지만, 더 복잡한 LIKE 패턴도 이 인덱스를 사용할 수 있습니다. 정규식 필터는 직접적인 INVERTED 패턴 조회를 사용하지 않습니다. 이러한 규칙은 <a href="/docs/ko/pattern-matching.md#Accelerate-pattern-matching-with-indexes">쿼리 계획 단순화 단계</a> 이후에 적용됩니다.</p>
+<p>스칼라 <code translate="no">INVERTED</code> 인덱스는 토큰 기반 <code translate="no">TEXT_MATCH</code> 또는 <code translate="no">PHRASE_MATCH</code> 을 지원하지 않습니다. <a href="/docs/ko/keyword-match.md">‘텍스트 일치’를</a> 참조하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p>이는 인덱스의 기능일 뿐, 유효한 필터 표현식에 대한 제한 사항은 아닙니다. 공유 조회 제약 조건에 대해서는 <a href="/docs/ko/scalar_index.md#Filter-execution">스칼라 인덱스를</a> 참조하십시오. <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 및 NULL 테스트(<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>)에 대해서는 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">메모리 고려 사항<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>대략적인 로드된 메모리 양을 추정하려면 <code translate="no">S</code> 바이트를 사용하십시오. 여기서 <code translate="no">S</code> 는 저장 압축 전 구축된 인덱스의 크기입니다. <code translate="no">S</code> 값을 얻으려면 대표적인 데이터에 대해 인덱스를 구축하십시오. 원시 필드 데이터 크기는 이를 대체할 수 없습니다.</p>
+<p>이러한 대략적인 추정치는 메모리 매핑이 비활성화된 상태에서 로드된 인덱스의 메모리 사용량을 다룹니다. 세그먼트별로 계산한 후, 로드된 세그먼트와 복제본 전체에 대해 합산하십시오.</p>
+<div class="alert note">
+<blockquote>
+<p>로드된 필드 데이터, 벡터 인덱스, 컬렉션 및 인덱스 오버헤드, 임시 할당을 위해 추가 메모리를 확보하십시오. 대표적인 데이터와 쿼리를 사용하여 검증하십시오. 배열, JSON, 구형 인덱스 형식 및 메모리 매핑의 경우 별도의 측정이 필요합니다.</p>
+</blockquote>
+</div>
+<p><a id="How-INVERTED-indexes-work"></a></p>
+<h3 id="How-INVERTED-works" class="common-anchor-header">INVERTED의 작동 방식<button data-href="#How-INVERTED-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>값 조회 예시 보기</strong></summary></p>
+<p>역색인은 엔티티 ID와 필드 값 간의 매핑을 반대로 바꿉니다. 다이어그램에서 <strong>“electronics”는</strong> ID <strong>1과</strong> <strong>3에</strong> 매핑되고, <strong>“books”는</strong> ID <strong>2와</strong> <strong>5에</strong> 매핑됩니다.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" /> 
-   <span>역색인의 작동 원리</span>
+   <span>인버티드 인덱스의 작동 방식</span>
   
  </span></p>
-<p>특정 값(예: <code translate="no">category == &quot;electronics&quot;</code>)으로 필터링할 때, Milvus는 인덱스에서 해당 용어를 조회하여 일치하는 ID를 직접 가져옵니다. 이를 통해 전체 데이터셋을 스캔할 필요가 없어지며, 특히 범주형 또는 반복되는 값의 경우 빠른 필터링이 가능합니다.</p>
-<p>INVERTED 인덱스는 <strong>BOOL</strong>, <strong>INT8</strong>, <strong>INT16</strong>, <strong>INT32</strong>, <strong>INT64</strong>, <strong>FLOAT</strong>, <strong>DOUBLE</strong>, <strong>VARCHAR</strong>, <strong>JSON</strong>, <strong>ARRAY와</strong> 같은 모든 스칼라 필드 유형을 지원합니다. 다만, JSON 필드를 인덱싱할 때의 인덱스 매개변수는 일반 스칼라 필드와 약간 다릅니다.</p>
+<p><code translate="no">category == &quot;electronics&quot;</code> 의 경우, Milvus는 모든 엔티티의 카테고리를 일일이 확인하는 대신 인덱스에서 ID <strong>1과</strong> <strong>3을</strong> 검색합니다.</p>
+<p></details></p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">JSON이 아닌 필드에 인덱스 생성<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,7 +144,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>비 JSON 필드에 인덱스를 생성하려면 다음 단계를 따르십시오.</p>
+    </button></h2><p>비 JSON 필드에 인덱스를 생성하려면 다음 단계를 따르십시오:</p>
 <ol>
 <li><p>인덱스 매개변수 준비:</p>
 <p><div class="multipleCode">
@@ -159,7 +215,7 @@ client, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 <span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">INVERTED</code> 인덱스 추가:</p>
+<li><p><code translate="no">INVERTED</code> 인덱스를 추가합니다:</p>
 <p><div class="multipleCode">
 <a href="#python">Python</a>
 <a href="#java">Java</a>
@@ -468,10 +524,9 @@ curl --request POST \
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> 메서드를 사용하여 컬렉션에서 기존 인덱스를 제거할 수 있습니다.</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong> 이하 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
-<li><p><strong>v2.6.4부터는</strong> 스칼라 인덱스가 더 이상 필요하지 않으면 컬렉션을 먼저 해제할 필요 없이 직접 삭제할 수 있습니다.</p></li>
-</ul>
+<blockquote>
+<p>스칼라 인덱스를 삭제할 때의 릴리스 요구 사항에 대해서는 <a href="/docs/ko/scalar_index.md#Drop-index-compatibility">스칼라 인덱스를</a> 참조하십시오.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -568,27 +623,7 @@ curl --request POST \
     &quot;indexName&quot;: &quot;category_index&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Best-practices" class="common-anchor-header">모범 사례<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>데이터 로드 후 인덱스 생성</strong>: 성능 향상을 위해 이미 데이터가 포함된 컬렉션에 인덱스를 생성하십시오</p></li>
-<li><p><strong>설명적인 인덱스 이름 사용</strong>: 필드와 용도를 명확히 나타내는 이름을 선택하십시오</p></li>
-<li><p><strong>인덱스 성능 모니터링</strong>: 인덱스 생성 전후의 쿼리 성능을 확인하세요</p></li>
-<li><p><strong>쿼리 패턴을 고려하세요</strong>: 자주 필터링하는 필드에 인덱스를 생성하세요</p></li>
-</ul>
+<p><a id="Best-practices"></a></p>
 <h2 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -605,6 +640,6 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/ko/index-explained.md">다른 인덱스 유형</a>에 대해 알아보기</p></li>
-<li><p>고급 <a href="/docs/ko/json-indexing.md">JSON 인덱싱</a> 시나리오에 대해서는 JSON 인덱싱을 참조하십시오</p></li>
+<li><p><a href="/docs/ko/scalar_index.md#Whats-next">'스칼라</a> 인덱스'에서 스칼라 인덱스를 비교하고 리소스를 계획하세요.</p></li>
+<li><p>고급 <a href="/docs/ko/json-indexing.md">JSON 인덱싱</a> 시나리오에 대해서는 JSON 인덱싱을 참조하십시오.</p></li>
 </ul>

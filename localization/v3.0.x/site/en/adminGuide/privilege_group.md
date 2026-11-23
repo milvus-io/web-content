@@ -64,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privileges on the collection, database, and instance level: COLL_RO, COLL_RW, COLL_ADMIN, DB_RO, DB_RW, DB_Admin, Cluster_RO, Cluster_RW and Cluster_Admin.</p>
+    </button></h2><p>For ease-of-use, Milvus provides a total of 9 built-in privilege groups on the collection, database, and instance level: CollectionReadOnly, CollectionReadWrite, CollectionAdmin, DatabaseReadOnly, DatabaseReadWrite, DatabaseAdmin, ClusterReadOnly, ClusterReadWrite and ClusterAdmin.</p>
 <div class="alert note">
 <p>The three levels of built-in privilege groups do not have a cascading relationship. Setting a privilege group at the instance level does not automatically set permissions for all databases and collections under that instance. Privileges at the database and collection levels need to be set manually.</p>
 </div>
@@ -259,6 +259,66 @@ summary: >-
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
+   <tr>
+     <td><p>GetImportProgress</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListImport</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>DescribeSnapshot</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListSnapshots</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AddCollectionField</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AlterCollectionSchema</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RefreshExternalCollection</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>CreateSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>DropSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RestoreSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
 </table>
 <h3 id="Database-level" class="common-anchor-header">Database level<button data-href="#Database-level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -302,8 +362,8 @@ summary: >-
    </tr>
    <tr>
      <td><p>CreateCollection</p></td>
-     <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -316,6 +376,12 @@ summary: >-
      <td><p>AlterDatabase</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RenameCollection</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
 </table>
@@ -351,12 +417,6 @@ summary: >-
      <td><p>ListDatabases</p></td>
      <td><p>✔️</p></td>
      <td><p>✔️</p></td>
-     <td><p>✔️</p></td>
-   </tr>
-   <tr>
-     <td><p>RenameCollection</p></td>
-     <td><p>❌</p></td>
-     <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
@@ -481,12 +541,72 @@ summary: >-
    </tr>
    <tr>
      <td><p>ListPrivilegeGroups</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>OperatePrivilegeGroup</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
    </tr>
    <tr>
-     <td><p>OperatePrivilegeGroup</p></td>
+     <td><p>GetReplicateConfiguration</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ListFileResources</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>AddFileResource</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RemoveFileResource</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>PinSnapshotData</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>UnpinSnapshotData</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>UpdateReplicateConfiguration</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>RestoreExternalSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ExportSnapshot</p></td>
+     <td><p>❌</p></td>
+     <td><p>❌</p></td>
+     <td><p>✔️</p></td>
+   </tr>
+   <tr>
+     <td><p>ImportBinlog</p></td>
      <td><p>❌</p></td>
      <td><p>❌</p></td>
      <td><p>✔️</p></td>
@@ -532,9 +652,9 @@ summary: >-
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>）
+client.create_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.CreatePrivilegeGroup(ctx, milvusclient.NewCreatePrivilegeGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -576,7 +696,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following example demonstrates how to add privileges <code translate="no">PrivilegeBackupRBAC</code> and <code translate="no">PrivilegeRestoreRBAC</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
+    </button></h3><p>The following example demonstrates how to add privileges <code translate="no">Query</code> and <code translate="no">Search</code> to the privilege group <code translate="no">privilege_group_1</code> that is just created.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#go">Go</a>
@@ -587,7 +707,7 @@ client.createPrivilegeGroup(CreatePrivilegeGroupReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.add_privileges_to_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 privileges := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Query&quot;</span>, <span class="hljs-string">&quot;Search&quot;</span>}
 err = client.AddPrivilegesToGroup(ctx, milvusclient.NewAddPrivilegesToGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>, privileges...))
@@ -604,7 +724,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">addPrivilegesToGroup</span>({
-  <span class="hljs-attr">group_name</span>: privilege_group_1,
+  <span class="hljs-attr">group_name</span>: <span class="hljs-string">&#x27;privilege_group_1&#x27;</span>,
   <span class="hljs-attr">privileges</span>: [<span class="hljs-string">&#x27;Query&#x27;</span>, <span class="hljs-string">&#x27;Search&#x27;</span>],
 });
 
@@ -634,7 +754,7 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following example demonstrates how to remove the privilege <code translate="no">PrivilegeRestoreRBAC</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
+    </button></h3><p>The following example demonstrates how to remove the privilege <code translate="no">Search</code> from the privilege group <code translate="no">privilege_group_1</code>.</p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#go">Go</a>
@@ -643,9 +763,9 @@ client.addPrivilegesToGroup(AddPrivilegesToGroupReq.builder()
     <a href="#bash">cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=<span class="hljs-string">&#x27;Search&#x27;</span>)
+client.remove_privileges_from_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>, privileges=[<span class="hljs-string">&#x27;Search&#x27;</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.RemovePrivilegesFromGroup(ctx, milvusclient.NewRemovePrivilegesFromGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Search&quot;</span>}...))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -701,7 +821,7 @@ client.removePrivilegesFromGroup(RemovePrivilegesFromGroupReq.builder()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.list_privilege_groups()
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 groups, err := client.ListPrivilegeGroups(ctx, milvusclient.NewListPrivilegeGroupsOption())
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -755,7 +875,7 @@ List&lt;PrivilegeGroup&gt; groups = resp.getPrivilegeGroups();
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 client.drop_privilege_group(group_name=<span class="hljs-string">&#x27;privilege_group_1&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 
 err = client.DropPrivilegeGroup(ctx, milvusclient.NewDropPrivilegeGroupOption(<span class="hljs-string">&quot;privilege_group_1&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {

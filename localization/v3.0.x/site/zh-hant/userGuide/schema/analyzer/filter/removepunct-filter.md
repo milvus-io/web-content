@@ -21,7 +21,8 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h1><p><code translate="no">removepunct</code> 過濾器會從標記流中移除包含標點符號或空白字元的標記。當您希望進行更乾淨的文字處理，並將重點放在有意義的內容詞彙而非標點符號上時，請使用此過濾器。</p>
 <div class="alert note">
-<p>此濾波器與<code translate="no">jieba</code> 、<code translate="no">lindera</code> 及<code translate="no">icu</code> 詞元化器搭配使用時效果最佳，這些詞元化器會將標點符號保留為獨立的詞元（例如：<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> 分詞器會在分詞過程中捨棄標點符號。<code translate="no">whitespace</code> 分詞器則會保留標點符號，包括標點符號出現在詞元內部的情況。當與<code translate="no">whitespace</code> 結合使用時，<code translate="no">removepunct</code> 會移除整個詞元（若該詞元包含標點符號或空白字元）；它不會從詞元中刪除個別字元。</p>
+<p>此濾波器與<code translate="no">jieba</code> 、<code translate="no">lindera</code> 及<code translate="no">icu</code> 詞元化器搭配使用時效果最佳，這些詞元化器會將標點符號保留為獨立的詞元（例如：<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> 分詞器在分詞過程中會捨棄標點符號。<code translate="no">whitespace</code> 分詞器則會保留標點符號，包括標點符號位於單一詞元內的情況。當與<code translate="no">whitespace</code> 結合使用時，<code translate="no">removepunct</code> 會移除整個詞元（若該詞元包含標點符號或空白字元）；它不會從詞元中刪除個別字元。</p>
+<p>某些分詞器會將標點符號保留在單一詞元內。例如，<code translate="no">icu</code> 會將<code translate="no">don't</code> 、<code translate="no">3.5kg</code> 及<code translate="no">u.s.a</code> 分別分詞為包含標點符號的單一詞元，而<code translate="no">removepunct</code> 則會將這些詞元完全移除，導致對應的詞彙無法被搜尋。 若要僅移除完全由標點符號和空白字元組成的詞元，同時保留此類詞元，請使用<a href="/docs/zh-hant/regex-filter.md">正則表達式</a>篩選器，並設定至少包含一個非標點符號且非空白字元的表達式，例如<code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code> 。</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +39,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">removepunct</code> 過濾器已內建於 Milvus 中。若要使用它，只需在<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 區段中指定其名稱即可。</p>
+    </button></h2><p><code translate="no">removepunct</code> 篩選器已內建於 Milvus 中。若要使用它，只需在<code translate="no">analyzer_params</code> 中的<code translate="no">filter</code> 區段中指定其名稱即可。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

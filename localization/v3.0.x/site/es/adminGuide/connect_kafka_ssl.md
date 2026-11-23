@@ -3,8 +3,8 @@ id: connect_kafka_ssl.md
 title: Conexión a Kafka con SASL/SSL
 related_key: 'kafka, sasl, tls'
 summary: >-
-  Esta guía enumera varias formas de conectar Milvus a Kafka, desde la más
-  sencilla sin SASL/SSL hasta la totalmente segura con SASL/SSL.
+  En esta guía se enumeran varias formas de conectar Milvus a Kafka, desde la
+  más sencilla, sin SASL/SSL, hasta la totalmente segura, con SASL/SSL.
 ---
 <h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">Conexión a Kafka con SASL/SSL<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Esta guía enumera varias formas de conectar Milvus a Kafka, desde la más sencilla sin SASL/SSL hasta la totalmente segura con SASL/SSL.</p>
+    </button></h1><p>Esta guía enumera varias formas de conectar Milvus a Kafka, desde la más sencilla, sin SASL/SSL, hasta la totalmente segura, con SASL/SSL.</p>
 <h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">Conectar Milvus a Kafka sin SASL/SSL<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para iniciar Milvus y Kafka sin SASL/SSL, deshabilite la autenticación y el cifrado tanto para Kafka como para Milvus. Utilícelos sólo en un entorno de confianza.</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. Iniciar un servicio Kafka sin SASL/SSL<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h2><p>Para iniciar Milvus y Kafka sin SASL/SSL, debes desactivar la autenticación y el cifrado tanto en Kafka como en Milvus. Utilízalos únicamente en un entorno de confianza.</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. Iniciar un servicio de Kafka sin SASL/SSL<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Puede utilizar el siguiente archivo <code translate="no">docker-compose.yaml</code> para iniciar un servicio Kafka sin SASL/SSL:</p>
+    </button></h3><p>Puede utilizar el siguiente archivo « <code translate="no">docker-compose.yaml</code> » para iniciar un servicio de Kafka sin SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -64,7 +64,7 @@ summary: >-
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
   <span class="hljs-attr">kafka:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:2.13-2.8.1</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
     <span class="hljs-attr">ports:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
@@ -72,14 +72,12 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, puede iniciar el servicio Kafka con el siguiente comando:</p>
+<p>A continuación, puede iniciar el servicio de Kafka con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Inicie Milvus y conéctese a Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar Milvus y conectarse a Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,7 +92,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una vez iniciado el servicio Kafka, puede iniciar Milvus y conectarse a él. Utilice el siguiente archivo <code translate="no">docker-compose.yaml</code> para iniciar Milvus y conectarse a Kafka sin SASL/SSL:</p>
+    </button></h3><p>Una vez iniciado el servicio de Kafka, puede iniciar Milvus y conectarse a él. Utilice el siguiente archivo ` <code translate="no">docker-compose.yaml</code> ` para iniciar Milvus y conectarse a Kafka sin SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -109,12 +107,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice el siguiente comando para descargar una plantilla de archivo de configuración de Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Y configure los siguientes parámetros:</p>
+<p>Crea un archivo « <code translate="no">user.yaml</code> » en el mismo directorio que tu archivo « <code translate="no">docker-compose.yaml</code> » y configura en él los siguientes parámetros. Milvus carga « <code translate="no">configs/user.yaml</code> » después de « <code translate="no">configs/milvus.yaml</code> », por lo que los valores de « <code translate="no">user.yaml</code> » anulan los valores predeterminados:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -132,10 +127,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span>
     <span class="hljs-attr">tlsKeyPassword:</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, puede iniciar Milvus con el siguiente comando:</p>
+<p>A continuación, puedes iniciar Milvus con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Conectar Milus a Kafka con SASL/PLAIN Solo<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Conectar Milvus a Kafka solo con SASL/PLAIN<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,8 +145,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para iniciar Kafka con autenticación SASL/PLAIN, debe añadir el archivo <code translate="no">kafka_server_jass.conf</code> con la configuración adecuada.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. Inicie un servicio Kafka con SASL/PLAIN<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+    </button></h2><p>Para iniciar Kafka con autenticación SASL/PLAIN, es necesario añadir el archivo <code translate="no">kafka_server_jaas.conf</code> con la configuración adecuada.</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. Iniciar un servicio de Kafka con SASL/PLAIN<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +161,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Coloque los siguientes archivos <code translate="no">docker-compose.yaml</code> y <code translate="no">kafka_server_jaas.conf</code> en el mismo directorio.</p>
+    </button></h3><p>Coloca los siguientes archivos « <code translate="no">docker-compose.yaml</code> » y « <code translate="no">kafka_server_jaas.conf</code> » en el mismo directorio.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -199,11 +194,11 @@ summary: >-
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En el archivo <code translate="no">kafka_server_jass.conf</code>, establezca los siguientes parámetros:</p>
+<p>En el archivo <code translate="no">kafka_server_jaas.conf</code>, configura los siguientes parámetros:</p>
 <pre><code translate="no" class="language-conf">KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username=&quot;kafka&quot;
@@ -211,10 +206,10 @@ summary: >-
     user_kafka=&quot;pass123&quot;;
 };
 </code></pre>
-<p>A continuación, puede iniciar el servicio Kafka con el siguiente comando:</p>
+<p>A continuación, puede iniciar el servicio de Kafka con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Inicie Milvus y conéctese a Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar Milvus y conectarse a Kafka<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -229,7 +224,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una vez iniciado el servicio Kafka, puede iniciar Milvus y conectarse a él. Utilice el siguiente archivo <code translate="no">docker-compose.yaml</code> para iniciar Milvus y conectarse a Kafka con SASL/PLAIN:</p>
+    </button></h3><p>Una vez iniciado el servicio de Kafka, puedes iniciar Milvus y conectarte a él. Utiliza el siguiente archivo « <code translate="no">docker-compose.yaml</code> » para iniciar Milvus y conectarte a Kafka con SASL/PLAIN:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -244,12 +239,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice el siguiente comando para descargar una plantilla de archivo de configuración de Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Y configure los siguientes parámetros:</p>
+<p>Crea un archivo « <code translate="no">user.yaml</code> » en el mismo directorio que tu archivo « <code translate="no">docker-compose.yaml</code> » y configura en él los siguientes parámetros. Milvus carga « <code translate="no">configs/user.yaml</code> » después de « <code translate="no">configs/milvus.yaml</code> », por lo que los valores de « <code translate="no">user.yaml</code> » anulan los valores predeterminados:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -267,10 +259,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, puede iniciar Milvus con el siguiente comando:</p>
+<p>A continuación, puedes iniciar Milvus con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">Conectar Milvus a Kafka con SSL Solo<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">Conectar Milvus a Kafka solo con SSL<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -285,7 +277,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para iniciar Kafka con autenticación SSL, necesita obtener algunos archivos de certificados o generar unos autofirmados. En este ejemplo, utilizamos certificados autofirmados.</p>
+    </button></h2><p>Para iniciar Kafka con autenticación SSL, es necesario obtener algunos archivos de certificados o generar certificados autofirmados. En este ejemplo, utilizamos certificados autofirmados.</p>
 <h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. Generar certificados autofirmados<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +293,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Crea una carpeta llamada <code translate="no">my_secrets</code>, añade un script bash llamado <code translate="no">gen-ssl-certs.sh</code> en ella, y pega el siguiente contenido en ella:</p>
+    </button></h3><p>Crea una carpeta llamada « <code translate="no">my_secrets</code> », añade en ella un script de bash llamado « <code translate="no">gen-ssl-certs.sh</code> » y pega en él el siguiente contenido:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -467,23 +459,23 @@ EOF</span>
     <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>En el script anterior, se aplica una contraseña por defecto <code translate="no">abcdefgh</code>. Para cambiar la contraseña, crea un archivo de texto llamado <code translate="no">cert_creds</code> e introduce la contraseña en la primera línea.</p>
-<p>A continuación, ejecute el siguiente comando para generar los certificados:</p>
+<p>En el script anterior, se aplica una contraseña predeterminada: « <code translate="no">abcdefgh</code> ». Para cambiar la contraseña, crea un archivo de texto llamado « <code translate="no">cert_creds</code> » e introduce la contraseña en la primera línea.</p>
+<p>A continuación, ejecuta el siguiente comando para generar los certificados:</p>
 <ul>
-<li><p>Generar certificado CA:</p>
-<p>A continuación se asume que el archivo del certificado CA se llama <code translate="no">ca-cert</code> y el nombre de host del broker es <code translate="no">kafka-ssl</code>:</p>
+<li><p>Generar certificado de CA:</p>
+<p>En lo siguiente se da por hecho que el archivo del certificado de CA se llama <code translate="no">ca-cert</code> y que el nombre de host del broker es <code translate="no">kafka-ssl</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh ca ca-cert kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Generar certificado de servidor y almacén de claves:</p>
-<p>A continuación, se asume que el archivo de certificado de CA se denomina <code translate="no">ca-cert</code>, el prefijo de todos los archivos de salida es <code translate="no">kafka_</code> y el nombre de host del intermediario es <code translate="no">kafka-ssl</code>:</p>
+<li><p>Generar el certificado del servidor y el almacén de claves:</p>
+<p>En lo que sigue se da por hecho que el archivo del certificado de CA se llama <code translate="no">ca-cert</code>, que el prefijo de todos los archivos de salida es <code translate="no">kafka_</code> y que el nombre de host del broker es <code translate="no">kafka-ssl</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Generar claves de cliente:</p>
-<p>A continuación se asume que el archivo de certificado de CA se llama <code translate="no">ca-cert</code>, el prefijo para todos los archivos de salida es <code translate="no">kafka_</code>, y el nombre del cliente es <code translate="no">kafka-client</code>:</p>
+<p>En lo que sigue se da por hecho que el archivo del certificado de la CA se llama <code translate="no">ca-cert</code>, que el prefijo de todos los archivos de salida es <code translate="no">kafka_</code> y que el nombre del cliente es <code translate="no">kafka-client</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh client ca-cert kafka_ kafka-client</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>Una vez generados todos los certificados necesarios, podrá ver los siguientes archivos en la carpeta <code translate="no">my_secrets</code>:</p>
+<p>Una vez generados todos los certificados necesarios, podrás ver los siguientes archivos en la carpeta <code translate="no">my_secrets</code>:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l my_secrets</span>
 total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:53 ca-cert
@@ -499,7 +491,7 @@ total 12
 -rw-rw-r-- 1 5.6K Feb 26 11:54 kafka_server.keystore.jks
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. Iniciar un servicio Kafka con SSL<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. Iniciar un servicio de Kafka con SSL<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -514,7 +506,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilice el siguiente archivo <code translate="no">docker-compose.yaml</code> para iniciar un servicio Kafka con SSL:</p>
+    </button></h3><p>Utilice el siguiente archivo « <code translate="no">docker-compose.yaml</code> » para iniciar un servicio de Kafka con SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -553,10 +545,10 @@ total 12
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, inicie el servicio Kafka con el siguiente comando:</p>
+<p>A continuación, inicia el servicio de Kafka con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. 3. Inicie Milvus y conéctese a Kafka con SSL<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Iniciar Milvus y conectarse a Kafka con SSL<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -571,7 +563,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una vez iniciado el servicio Kafka, puede iniciar Milvus y conectarse a él. Utilice el siguiente archivo <code translate="no">docker-compose.yaml</code> para iniciar Milvus y conectarse a Kafka con SSL:</p>
+    </button></h3><p>Una vez iniciado el servicio de Kafka, puedes iniciar Milvus y conectarte a él. Utiliza el siguiente archivo « <code translate="no">docker-compose.yaml</code> » para iniciar Milvus y conectarte a Kafka con SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -586,13 +578,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice el siguiente comando para descargar una plantilla de archivo de configuración de Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Y configure los siguientes parámetros:</p>
+<p>Crea un archivo ` <code translate="no">user.yaml</code> ` en el mismo directorio que tu archivo ` <code translate="no">docker-compose.yaml</code> ` y configura en él los siguientes parámetros. Milvus carga ` <code translate="no">configs/user.yaml</code> ` después de ` <code translate="no">configs/milvus.yaml</code>`, por lo que los valores de ` <code translate="no">user.yaml</code> ` anulan los valores predeterminados:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -610,7 +599,7 @@ total 12
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-string">/milvus/secrets/ca-cert</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-string">abcdefgh</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, inicie Milvus con el siguiente comando:</p>
+<p>A continuación, inicia Milvus con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">Conectar Milvus a Kafka con SASL/PLAIN y SSL<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
@@ -628,8 +617,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para conectar Milvus a Kafka con SASL/PLAIN y SSL, debe repetir los pasos en <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Conectar Milus a Kafka con SASL/PLAIN solo</a> y <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Conectar Milus a Kafka con SSL solo</a>.</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. Inicie un servicio Kafka con SASL/PLAIN y SSL<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+    </button></h2><p>Para conectar Milvus a Kafka con SASL/PLAIN y SSL, debes repetir los pasos descritos en <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">«Conectar Milvus a Kafka solo con SASL/PLAIN</a> » y <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">«Conectar Milvus a Kafka solo con SSL</a>».</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. Inicia un servicio de Kafka con SASL/PLAIN y SSL<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -644,8 +633,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilice el archivo <code translate="no">kafka_server_jass.conf</code> mencionado en <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to</a> <a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Kafka with SASL/PLAIN Alone</a> y la carpeta <code translate="no">my_secrets</code> generada en <a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Alone</a> para iniciar un servicio Kafka con SASL/PLAIN y SSL.</p>
-<p>El siguiente archivo <code translate="no">docker-compose.yaml</code> puede utilizarse para iniciar un servicio Kafka con SASL/PLAIN y SSL:</p>
+    </button></h3><p>Utilice el archivo « <code translate="no">kafka_server_jaas.conf</code> » mencionado en <a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">«Conectar Milvus a Kafka solo con SASL/PLAIN»</a> y la carpeta « <code translate="no">my_secrets</code> » generada en <a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">«Conectar Milvus a Kafka solo con SSL»</a> para iniciar un servicio de Kafka con SASL/PLAIN y SSL.</p>
+<p>Se puede utilizar el siguiente archivo « <code translate="no">docker-compose.yaml</code> » para iniciar un servicio de Kafka con SASL/PLAIN y SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -689,16 +678,16 @@ total 12
       <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
 
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>A continuación, inicie el servicio Kafka con el siguiente comando:</p>
+<p>A continuación, inicie el servicio de Kafka con el siguiente comando:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Inicie Milvus y conéctese a Kafka con SASL/PLAIN y SSL<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Iniciar Milvus y conectarse a Kafka con SASL/PLAIN y SSL<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -713,7 +702,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Una vez iniciado el servicio Kafka, puede iniciar Milvus y conectarse a él. Utilice el siguiente archivo <code translate="no">docker-compose.yaml</code> para iniciar Milvus y conectarse a Kafka con SASL/PLAIN y SSL:</p>
+    </button></h3><p>Una vez iniciado el servicio de Kafka, puede iniciar Milvus y conectarse a él. Utilice el siguiente archivo « <code translate="no">docker-compose.yaml</code> » para iniciar Milvus y conectarse a Kafka con SASL/PLAIN y SSL:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -728,13 +717,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilice el siguiente comando para descargar una plantilla de archivo de configuración de Milvus:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Y configure los siguientes parámetros:</p>
+<p>Crea un archivo « <code translate="no">user.yaml</code> » en el mismo directorio que tu archivo « <code translate="no">docker-compose.yaml</code> » y configura en él los siguientes parámetros. Milvus carga « <code translate="no">configs/user.yaml</code> » después de « <code translate="no">configs/milvus.yaml</code> », por lo que los valores de « <code translate="no">user.yaml</code> » sustituyen a los valores predeterminados:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 

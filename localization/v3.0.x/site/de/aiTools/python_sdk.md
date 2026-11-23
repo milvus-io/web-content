@@ -2,8 +2,8 @@
 id: python_sdk.md
 title: 'Eingabeaufforderung: Milvus Python SDK'
 summary: >-
-  Regeln für KI-Codierassistenten zum Schreiben von korrektem Milvus-Python-Code
-  mit dem MilvusClient.
+  Regeln für KI-Programmierassistenten zum Verfassen korrekten
+  Milvus-Python-Codes unter Verwendung von MilvusClient.
 ---
 <h1 id="Python-SDK" class="common-anchor-header">Python-SDK<button data-href="#Python-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Regeln für das Schreiben von korrektem Milvus-Python-Code unter Verwendung der MilvusClient-Schnittstelle, einschließlich ORM-Migration, Verbindungsmuster und allgemeine Operationen. Kopieren Sie die vollständige Aufforderung unten in Ihr AI-Tool, um diese Regeln automatisch anzuwenden. Einen Überblick über alle Prompts finden Sie unter <a href="/docs/de/milvus_for_agents.md">AI Prompts</a>.</p>
-<h2 id="How-to-use-this-prompt" class="common-anchor-header">So verwenden Sie diese Eingabeaufforderung<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
+    </button></h1><p>Regeln für das Schreiben korrekten Milvus-Python-Codes unter Verwendung der MilvusClient-Schnittstelle, einschließlich ORM-Migration, Verbindungsmustern und gängigen Operationen. Kopieren Sie den vollständigen Befehl unten in Ihr KI-Tool, um diese Regeln automatisch anzuwenden. Eine Übersicht über alle Befehle finden Sie unter <a href="/docs/de/milvus_for_agents.md">KI-Befehle</a>.</p>
+<h2 id="How-to-use-this-prompt" class="common-anchor-header">So verwenden Sie diesen Befehl<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,11 +37,11 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Kopieren Sie</strong> die vollständige Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> unten.</li>
-<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - Details zur Platzierung finden Sie in der <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a>.</li>
-<li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code erzeugt oder überprüft.</li>
+<li><strong>Kopieren Sie</strong> den vollständigen Befehl aus dem Abschnitt <a href="#full-prompt">„Vollständiger Befehl</a> “ weiter unten.</li>
+<li><strong>Speichern Sie</strong> ihn an dem Ort, den Ihr KI-Tool erwartet – Details zur Platzierung finden Sie in der <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a>.</li>
+<li>Ihr KI-Assistent wendet diese Regeln automatisch an, wenn er Milvus-Code generiert oder überprüft.</li>
 </ol>
-<p>Für <strong>Cursor-Benutzer</strong>: Kopieren Sie den Prompt aus dem Abschnitt <a href="#full-prompt">Vollständiger Prompt</a> und speichern Sie ihn unter <code translate="no">.cursor/rules/</code> in Ihrem Projekt.</p>
+<p>Für <strong>Cursor</strong> -Nutzer: Kopieren Sie die Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">„Vollständige Eingabeaufforderung</a> “ und speichern Sie sie in Ihrem Projekt unter „ <code translate="no">.cursor/rules/</code> “.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Vollständige Eingabeaufforderung<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -231,7 +231,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

@@ -1,9 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  RTREE 索引是一種基於樹的資料結構，可加速對 GEOMETRY
-  欄位的查詢。若您的集合以「已知文字」（WKT）格式儲存幾何物件（例如點、線或多邊形），且您希望加速空間篩選，那麼 RTREE 便是理想的選擇。
+summary: 使用 RTREE 來加速對 GEOMETRY 欄位的空間篩選。
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -21,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">RTREE</code> 索引是一種基於樹狀結構的資料結構，可加速 Milvus 中對「<code translate="no">GEOMETRY</code> 」欄位的查詢。若您的集合以「<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)」</a>格式儲存點、線或多邊形等幾何物件，且您希望加速空間篩選，<code translate="no">RTREE</code> 便是理想的選擇。</p>
-<h2 id="How-it-works" class="common-anchor-header">運作原理<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> 可加速對採用「<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">通用圖形描述語言</a>」（<code translate="no">GEOMETRY</code> ）且包含以<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">「通用圖形描述語言」（WKT）</a>格式儲存之點、線或多邊形之場進行空間篩選。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 透過<code translate="no">RTREE</code> 索引來高效組織與篩選幾何資料，其流程分為兩個階段：</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">第一階段：建立索引<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">支援的資料類型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,10 +50,60 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
+    </button></h3><p><code translate="no">GEOMETRY</code> 欄位。有關欄位定義，請參閱「<a href="/docs/zh-hant/geometry-field.md">幾何欄位</a>」。</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">篩選加速<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> 會先透過邊界框尋找候選項目，然後由 Milvus 檢查確切的空間關係。它支援以下<a href="/docs/zh-hant/geometry-operators.md">幾何運算子</a>：</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>、<code translate="no">ST_INTERSECTS</code> 、<code translate="no">ST_CONTAINS</code> 以及<code translate="no">ST_WITHIN</code> 。</li>
+<li><code translate="no">ST_TOUCHES</code>、<code translate="no">ST_OVERLAPS</code> 、<code translate="no">ST_CROSSES</code> 以及<code translate="no">ST_DWITHIN</code> 。</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> 不使用<code translate="no">RTREE</code> 。若無合資格的索引，空間篩選器將掃描該欄位。</p>
+<div class="alert note">
+<blockquote>
+<p>這些是索引功能，而非對有效篩選表達式的限制。有關共用查詢限制，請參閱「<a href="/docs/zh-hant/scalar_index.md#Filter-execution">標量索引」</a>。關於<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及 NULL 測試（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），請參閱「<a href="/docs/zh-hant/basic-operators.md">基本運算子</a>」。</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">RTREE 的運作原理<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>檢視建置與查詢流程</strong></summary></p>
+<p>Milvus 採用<code translate="no">RTREE</code> 索引來高效組織與篩選幾何資料，其流程分為兩個階段：</p>
+<p><strong>第一階段：建立索引</strong></p>
+<ol>
 <li><p><strong>建立葉節點：</strong>針對每個幾何物件，計算其<a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">最小包圍矩形</a>（MBR）——即能完全包含該物件的最小矩形——並將其儲存為葉節點。</p></li>
-<li><p><strong>分組為較大的矩形：</strong>將鄰近的葉節點聚類，並以新的最小包圍矩形（MBR）包圍每個群組，形成內部節點。例如，群組<strong>B</strong>包含<strong>D</strong>和<strong>E</strong>；群組<strong>C</strong>包含<strong>F</strong>和<strong>G</strong>。</p></li>
-<li><p><strong>新增根節點：</strong>新增一個其最小包圍矩形（MBR）涵蓋所有內部群組的根節點，從而形成高度平衡的樹狀結構。</p></li>
+<li><p><strong>分組為較大的矩形：</strong>將鄰近的葉節點聚類在一起，並以新的最小包圍矩形（MBR）包圍每個群組，形成內部節點。例如，群組<strong>B</strong>包含<strong>D</strong>和<strong>E</strong>；群組<strong>C</strong>包含<strong>F</strong>和<strong>G</strong>。</p></li>
+<li><p><strong>新增根節點：</strong>新增一個<strong>根</strong>節點，其最小包圍矩形（MBR）涵蓋所有內部群組，從而形成高度平衡的樹狀結構。</p></li>
 </ol>
 <p><span class="img-wrapper">
   
@@ -64,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Retree 的運作原理</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">第二階段：加速查詢<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>第二階段：加速查詢</strong></p>
+<ol>
 <li><p><strong>建立查詢 MBR：</strong>計算查詢幾何圖形的 MBR。</p></li>
 <li><p><strong>修剪分支：</strong>從根節點開始，將查詢 MBR 與每個內部節點進行比對。跳過任何 MBR 與查詢 MBR 沒有交集的分支。</p></li>
 <li><p><strong>收集候選節點：</strong>沿著相交的分支向下遍歷，以收集候選葉節點。</p></li>
 <li><p><strong>精確比對：</strong>針對每個候選節點，執行精確的空間謂詞運算，以確定真正的匹配結果。</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">建立 RTREE 索引<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -292,8 +326,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可在<code translate="no">filter</code> 表達式中使用幾何運算子進行篩選。當目標<code translate="no">GEOMETRY</code> 欄位上存在<code translate="no">RTREE</code> 時，Milvus會自動利用該索引來修剪候選項。若未建立索引，篩選操作將回退至全表掃描。</p>
-<p>有關可用幾何專用運算子的完整清單，請參閱《<a href="/docs/zh-hant/geometry-operators.md">幾何運算子》</a>。</p>
+    </button></h2><p>以下範例使用名為<code translate="no">geo</code> 的已建立索引的<code translate="no">GEOMETRY</code> 欄位。</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">範例 1：僅篩選<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -614,10 +647,9 @@ EOF
       </svg>
     </button></h2><p>使用 `<code translate="no">drop_index()</code> ` 方法從集合中移除現有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
-<li><p>自<strong>v2.6.4</strong>或更新版本起，當標量索引不再需要時，可直接刪除該索引，無需先釋放集合。</p></li>
-</ul>
+<blockquote>
+<p>有關刪除標量索引的發佈要求，請參閱《<a href="/docs/zh-hant/scalar_index.md#Drop-index-compatibility">標量索引》</a>。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

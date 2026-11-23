@@ -3,7 +3,7 @@ id: tune_consistency.md
 title: 一致性级别
 summary: >-
   作为一款分布式向量数据库，Milvus
-  提供了多级一致性，以确保每个节点或副本在读写操作期间都能访问相同的数据。目前，支持的一致性级别包括“强一致性”、“有限一致性”、“最终一致性”和“会话一致性”，其中“有限一致性”是默认的一致性级别。
+  提供了多级一致性，以确保每个节点或副本在读写操作期间都能访问相同的数据。目前，支持的一致性级别包括“强一致性”、“有界一致性”、“最终一致性”和“会话一致性”，其中“有界一致性”是默认的一致性级别。
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">一致性级别<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 是一个将存储与计算分离的系统。<strong>流式节点将</strong>所有写入操作追加到写入前日志（WAL）中，并保存<strong>不断增长的数据</strong>——即仍处于 WAL 中且尚未持久化的数据。 恢复过程将增长数据转换为<strong>历史数据</strong>（封装在 MinIO/S3 等对象存储中的已封装分段），这些数据由<strong>查询节点</strong>提供服务。 每个搜索或查询请求都会由托管该 Collection WAL 的流式处理节点上的<strong>查询委托器</strong>接收：该委托器会生成查询计划，在本地执行“增长数据”部分，将“历史数据”部分转发至相关的查询节点，并在返回结果前合并结果。详情请参阅<a href="/docs/zh/streaming_service.md">流式服务</a>。</p>
-<p>为了提供一致性保证，Milvus 为每条消息分配一个时间戳预言机（TSO）时间戳，该时间戳决定了其在 WAL 中的顺序，并会持续将同步时间戳与数据消息一同插入 WAL。 每当接收到同步时间戳（syncTs）时，系统会将其记录为 ServiceTime，这意味着该 ServiceTime 之前的所有数据均可被查询访问。基于 ServiceTime，Milvus 提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同需求。 用户可通过在搜索请求中指定 GuaranteeTs，告知委托方需要在搜索范围内包含特定时间点之前的数据。</p>
+    </button></h2><p>Milvus 是一个将存储与计算分离的系统。<strong>流式节点将</strong>所有写入操作追加到写前日志（WAL）中，并保存<strong>不断增长的数据</strong>——即仍处于 WAL 中且尚未持久化的数据。 恢复过程将增长数据转换为<strong>历史数据</strong>（封装在 MinIO/S3 等对象存储中的已封装分段），这些数据由<strong>查询节点</strong>提供服务。 每个搜索或查询请求都会由托管该 Collection WAL 的流式处理节点上的<strong>查询委托器</strong>接收：该委托器会生成查询计划，在本地执行“增长数据”部分，将“历史数据”部分转发至相关的查询节点，并在返回结果前合并结果。详情请参阅<a href="/docs/zh/streaming_service.md">流式服务</a>。</p>
+<p>为了提供一致性保证，Milvus 为每条消息分配一个时间戳预言机（TSO）时间戳，该时间戳决定了其在 WAL 中的顺序，并会持续将同步时间戳与数据消息一同插入 WAL 中。 每当接收到同步时间戳（syncTs）时，系统会将其记录为 ServiceTime，这意味着该 ServiceTime 之前的所有数据均可被查询访问。基于 ServiceTime，Milvus 提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同需求。 用户可通过在搜索请求中指定 GuaranteeTs，告知委托方需要在搜索范围内包含特定时间点之前的数据。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
@@ -79,7 +79,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在创建Collection以及执行搜索和查询时，您可以设置不同的一致性级别。</p>
+    </button></h2><p>您可以在创建Collection时设置一致性级别，在Collection创建后进行修改，或者针对单个搜索和查询进行覆盖。</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">在创建Collection时设置一致性级别<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -166,6 +166,57 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> 参数的可能取值为<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 和<code translate="no">Session</code> 。</p>
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">更改Collection的一致性级别<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您可以通过修改现有 Collection 的<code translate="no">consistency_level</code> 属性来更改其一致性级别。新级别将适用于后续对该 Collection 且未自行指定一致性级别的搜索和查询，且修改时无需释放该 Collection。以下代码示例将一致性级别修改为<strong>Eventually</strong>。</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-type">AlterCollectionPropertiesReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionPropertiesReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+<span class="highlighted-wrapper-line">        .property(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>)</span>
+        .build();
+client.alterCollectionProperties(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">在搜索中设置一致性级别<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -247,7 +298,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>您可以随时更改特定搜索的一致性级别。以下代码示例将一致性级别设置为<strong>“Eventually”</strong>。该设置仅适用于当前的查询请求。</p>
+    </button></h3><p>您可以随时更改特定搜索的一致性级别。以下代码示例将一致性级别设置为<strong>“最终（Eventually）</strong>”。该设置仅适用于当前的查询请求。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

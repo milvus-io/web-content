@@ -3,13 +3,13 @@ id: rrf-ranker.md
 title: RRF Ranker
 summary: >-
   O Reciprocal Rank Fusion (RRF) Ranker é uma estratégia de reclassificação para
-  a pesquisa híbrida do Milvus que equilibra os resultados de vários percursos
-  de pesquisa vetorial com base nas suas posições na classificação, em vez das
-  suas pontuações brutas de similaridade. Tal como um torneio desportivo que tem
-  em conta as classificações dos jogadores em vez das estatísticas individuais,
-  o RRF Ranker combina os resultados da pesquisa com base na posição de cada
-  item em diferentes percursos de pesquisa, criando uma classificação final
-  justa e equilibrada.
+  a pesquisa híbrida Milvus que equilibra os resultados de vários percursos de
+  pesquisa vetorial com base nas suas posições na classificação, em vez das suas
+  pontuações brutas de similaridade. Tal como um torneio desportivo que tem em
+  conta as classificações dos jogadores em vez das estatísticas individuais, o
+  RRF Ranker combina os resultados da pesquisa com base na posição de cada item
+  em diferentes percursos de pesquisa, criando uma classificação final justa e
+  equilibrada.
 ---
 <h1 id="RRF-Ranker" class="common-anchor-header">RRF Ranker<button data-href="#RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ summary: >-
      <td><p>Equilibra os resultados sem exigir atribuições arbitrárias de ponderação</p></td>
    </tr>
    <tr>
-     <td><p>Pesquisa vetorial em conjunto</p></td>
+     <td><p>Pesquisa por vetores em conjunto</p></td>
      <td><p>Combinação de resultados de diferentes modelos de incorporação</p></td>
      <td><p>Combina as classificações de forma democrática, sem favorecer a distribuição de pontuação de nenhum modelo em particular</p></td>
    </tr>
@@ -70,7 +70,8 @@ summary: >-
      <td><p>Cria classificações consensuais quando diferentes sistemas utilizam métodos de pontuação incompatíveis</p></td>
    </tr>
 </table>
-<p>Se a sua aplicação de pesquisa híbrida requerer o equilíbrio de vários caminhos de pesquisa de forma democrática, sem atribuir pesos explícitos, o RRF Ranker é a sua escolha ideal.</p>
+<p>Se a sua aplicação de pesquisa híbrida exigir o equilíbrio de vários caminhos de pesquisa de forma democrática, sem atribuir pesos explícitos, o RRF Ranker é a sua escolha ideal.</p>
+<p>Se alguns percursos de pesquisa forem mais fiáveis do que outros, mas as suas pontuações brutas não forem comparáveis, ainda assim pode fundir os resultados por classificação e atribuir a cada percurso o seu próprio peso. Para mais detalhes, consulte <a href="/docs/pt/v2.6.x/rrf-ranker.md#Assign-weights-to-search-paths">«Atribuir pesos aos percursos de pesquisa</a>». Para combinar as pontuações dos percursos em vez das suas classificações, utilize <a href="/docs/pt/v2.6.x/weighted-ranker.md">o Weighted Ranker</a>.</p>
 <h2 id="Mechanism-of-RRF-Ranker" class="common-anchor-header">Mecanismo do RRF Ranker<button data-href="#Mechanism-of-RRF-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,9 +89,9 @@ summary: >-
       </svg>
     </button></h2><p>O fluxo de trabalho principal da estratégia do RRFRanker é o seguinte:</p>
 <ol>
-<li><p><strong>Recolher classificações de pesquisa</strong>: Recolher as classificações dos resultados de cada caminho de pesquisa vetorial (rank_1, rank_2).</p></li>
-<li><p><strong>Fusão de classificações</strong>: Converta as classificações de cada caminho (rank_rrf_1, rank_rrf_2) de acordo com uma fórmula.</p>
-<p>A fórmula de cálculo envolve <em>N</em>, que representa o número de recuperações. <em>ranki</em>(<em>d</em>) é a posição na classificação do documento <em>d</em> gerada pelo <em>i-ésimo</em> recuperador. <em>k</em> é um parâmetro de suavização normalmente definido em 60.</p></li>
+<li><p><strong>Recolher classificações de pesquisa</strong>: Recolher as classificações dos resultados de cada caminho da pesquisa vetorial (rank_1, rank_2).</p></li>
+<li><p><strong>Fundir classificações</strong>: Converta as classificações de cada caminho (rank_rrf_1, rank_rrf_2) de acordo com uma fórmula.</p>
+<p>A fórmula de cálculo envolve <em>N</em>, que representa o número de resultados recuperados. <em>ranki</em>(<em>d</em>) é a posição na classificação do documento <em>d</em> gerada pelo <em>i-ésimo</em> recuperador. <em>k</em> é um parâmetro de suavização normalmente definido em 60.</p></li>
 <li><p><strong>Agregar classificações</strong>: Reordenar os resultados da pesquisa com base nas classificações combinadas para produzir os resultados finais.</p></li>
 </ol>
 <p><span class="img-wrapper">
@@ -375,10 +376,147 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>Não</p></td>
-     <td><p>Parâmetro de suavização que controla o impacto das classificações dos documentos; um valor mais elevado de « <code translate="no">k</code> » reduz a sensibilidade às classificações mais elevadas. Intervalo: (0, 16384); valor predefinido: « <code translate="no">60</code> ».</p><p>Para mais detalhes, consulte o <a href="/docs/pt/v2.6.x/rrf-ranker.md#Mechanism-of-RRF-Ranker">Mecanismo do RRF Ranker</a>.</p></td>
+     <td><p>Parâmetro de suavização que controla o impacto das classificações dos documentos; um valor mais elevado de « <code translate="no">k</code> » reduz a sensibilidade às classificações mais elevadas. Intervalo: (0, 16384); valor predefinido: « <code translate="no">60</code> ».</p><p>Para mais detalhes, consulte <a href="/docs/pt/v2.6.x/rrf-ranker.md#Mechanism-of-RRF-Ranker">«Mecanismo do RRF Ranker</a>».</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
+<h3 id="Assign-weights-to-search-paths" class="common-anchor-header">Atribuir pesos aos caminhos de pesquisa<button data-href="#Assign-weights-to-search-paths" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Defina <code translate="no">params.weights</code> para atribuir a cada caminho de pesquisa uma influência diferente na classificação combinada. A pontuação de cada documento passa a ser <code translate="no">score(d) = Σ weights[i] / (k + rank_i(d))</code>. O valor na posição <em>i</em> aplica-se ao <em>i-ésimo</em> pedido de pesquisa na sua chamada de pesquisa híbrida, na ordem em que os pedidos são transmitidos. Cada peso deve estar compreendido entre 0 e 1, inclusive, e deve fornecer exatamente um peso por pedido de pesquisa; caso contrário, o pedido falha com um erro de parâmetro. Os pesos não são normalizados e não precisam de somar 1. Um peso de <code translate="no">0</code> elimina a contribuição desse caminho para a pontuação, mas os seus resultados podem ainda assim aparecer nos resultados combinados. Se omitir <code translate="no">weights</code>, todos os caminhos terão um peso de 1, o que corresponde ao RRF clássico.</p>
+<div class="alert note">
+<p>O RRF ponderado requer o Milvus 2.6.23 ou posterior. As versões anteriores ignoram o parâmetro <code translate="no">weights</code> sem devolver um erro e classificam os resultados com o RRF clássico.</p>
+</div>
+<p>Por exemplo, aplique pesos <code translate="no">[0.3, 0.7]</code> ao <a href="/docs/pt/v2.6.x/rrf-ranker.md#Example-of-RRF-Ranker">exemplo esparso-denso</a> acima, com <code translate="no">k</code> definido para 60. O pedido esparso é processado primeiro, pelo que <code translate="no">0.3</code> se aplica à pesquisa esparsa e <code translate="no">0.7</code> à pesquisa densa:</p>
+<table>
+   <tr>
+     <th><p><strong>ID</strong></p></th>
+     <th><p><strong>Classificação (esparsa)</strong></p></th>
+     <th><p><strong>Classificação (densa)</strong></p></th>
+     <th><p><strong>Pontuação final</strong></p></th>
+   </tr>
+   <tr>
+     <td><p>101</p></td>
+     <td><p>1</p></td>
+     <td><p>2</p></td>
+     <td><p>0,3/(60+1)+0,7/(60+2) = 0,01620836</p></td>
+   </tr>
+   <tr>
+     <td><p>198</p></td>
+     <td><p>4</p></td>
+     <td><p>1</p></td>
+     <td><p>0,3/(60+4)+0,7/(60+1) = 0,01616291</p></td>
+   </tr>
+   <tr>
+     <td><p>175</p></td>
+     <td><p>5</p></td>
+     <td><p>4</p></td>
+     <td><p>0,3/(60+5)+0,7/(60+4) = 0,01555288</p></td>
+   </tr>
+   <tr>
+     <td><p>110</p></td>
+     <td><p>N/A</p></td>
+     <td><p>3</p></td>
+     <td><p>0,7/(60+3) = 0,01111111</p></td>
+   </tr>
+   <tr>
+     <td><p>250</p></td>
+     <td><p>N/A</p></td>
+     <td><p>5</p></td>
+     <td><p>0,7/(60+5) = 0,01076923</p></td>
+   </tr>
+   <tr>
+     <td><p>203</p></td>
+     <td><p>2</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0,3/(60+2) = 0,00483871</p></td>
+   </tr>
+   <tr>
+     <td><p>150</p></td>
+     <td><p>3</p></td>
+     <td><p>N/A</p></td>
+     <td><p>0,3/(60+3) = 0,00476190</p></td>
+   </tr>
+</table>
+<p>Com topK=5, os IDs 110 e 250, que aparecem apenas nos resultados densos, substituem os IDs 203 e 150 nos resultados finais.</p>
+<p>Para criar um classificador RRF ponderado, adicione ` <code translate="no">weights</code> ` aos parâmetros do classificador e, em seguida, passe o classificador para a sua pesquisa híbrida, conforme mostrado em <a href="/docs/pt/v2.6.x/rrf-ranker.md#Apply-to-hybrid-search">«Aplicar à pesquisa híbrida</a>». Para o cURL, utilize o objeto como o valor ` <code translate="no">rerank</code> ` de um pedido de pesquisa híbrida; para um pedido completo, consulte <a href="/docs/pt/v2.6.x/multi-vector-search.md">«Pesquisa híbrida multivetorial</a>»:</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Function, FunctionType
+
+ranker = Function(
+    name=<span class="hljs-string">&quot;rrf&quot;</span>,
+    input_field_names=[], <span class="hljs-comment"># Must be an empty list</span>
+    function_type=FunctionType.RERANK,
+    params={
+        <span class="hljs-string">&quot;reranker&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+        <span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">100</span>,
+        <span class="hljs-string">&quot;weights&quot;</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>]  <span class="hljs-comment"># One weight per search request, in request order</span>
+    }
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-variable">rerank</span> <span class="hljs-operator">=</span> CreateCollectionReq.Function.builder()
+        .name(<span class="hljs-string">&quot;rrf&quot;</span>)
+        .functionType(FunctionType.RERANK)
+        .param(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>)
+        .param(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-string">&quot;100&quot;</span>)
+        .param(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+        .build();
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-keyword">const</span> ranker = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+  <span class="hljs-attr">input_field_names</span>: [],
+  <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">RERANK</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">reranker</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-attr">k</span>: <span class="hljs-number">100</span>,
+    <span class="hljs-attr">weights</span>: [<span class="hljs-number">0.3</span>, <span class="hljs-number">0.7</span>],
+  },
+};
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
+
+rerank := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;rrf&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;rrf&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;k&quot;</span>, <span class="hljs-number">100</span>).
+    WithParam(<span class="hljs-string">&quot;weights&quot;</span>, <span class="hljs-string">&quot;[0.3, 0.7]&quot;</span>)
+<span class="hljs-comment">// Pass it with milvusclient.NewHybridSearchOption(...).WithFunctionRerankers(rerank)</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-string">&quot;rerank&quot;</span>: {
+    <span class="hljs-string">&quot;strategy&quot;</span>: <span class="hljs-string">&quot;rrf&quot;</span>,
+    <span class="hljs-string">&quot;params&quot;</span>: {
+        <span class="hljs-string">&quot;k&quot;</span>: 100,
+        <span class="hljs-string">&quot;weights&quot;</span>: [0.3, 0.7]
+    }
+}
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Passe os pesos nos formatos apresentados acima. As classes auxiliares RRF dos SDKs não têm a opção de pesos, e os pesos que lhes forem adicionados através de um método de parâmetro genérico são ignorados sem gerar erro.</p>
+</div>
 <h3 id="Apply-to-hybrid-search" class="common-anchor-header">Aplicar à pesquisa híbrida<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -516,4 +654,4 @@ searchRequests.add(AnnSearchReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Para mais informações sobre a pesquisa híbrida, consulte <a href="/docs/pt/v2.6.x/multi-vector-search.md">«Pesquisa híbrida multivetorial</a>».</p>
+<p>Para mais informações sobre a pesquisa híbrida, consulte <a href="/docs/pt/v2.6.x/multi-vector-search.md">Pesquisa Híbrida Multiveatorial</a>.</p>

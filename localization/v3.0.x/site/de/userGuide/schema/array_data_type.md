@@ -49,8 +49,9 @@ summary: >-
 <li><strong>Datentyp:</strong> Alle Elemente in einem ARRAY-Feld müssen denselben Datentyp aufweisen, der durch den Parameter „ <code translate="no">element_type</code> “ definiert wird. Wenn „ <code translate="no">element_type</code> “ auf „ <code translate="no">VARCHAR</code> “ gesetzt ist, müssen Sie zusätzlich „ <code translate="no">max_length</code> “ angeben, wodurch die maximal zulässige Byteanzahl für jedes Array-Element festgelegt wird. Das Feld „ <code translate="no">element_type</code> “ akzeptiert jeden von Milvus unterstützten skalaren Datentyp, mit Ausnahme von „ <code translate="no">JSON</code> “. Verwenden Sie für „ <code translate="no">element_type=STRUCT</code> “ ein „StructArray“-Feld und geben Sie „ <code translate="no">struct_schema</code> “ an; Einzelheiten finden Sie unter <a href="/docs/de/create-structarray-field.md">„StructArray</a>“. Ein ARRAY-Feld auf oberster Ebene kann keine Vektoren oder verschachtelte Arrays enthalten, und seine Elemente dürfen einzeln nicht null sein; diese Formen sind in Milvus 3.0.6 und höher nur für Unterfelder innerhalb eines StructArray-Feldes verfügbar.</li>
 </ul>
 <ul>
-<li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem ARRAY-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays definiert wurde, wie unter <code translate="no">max_capacity</code> angegeben. Der Wert sollte eine ganze Zahl im Bereich von <strong>1</strong> bis <strong>4096</strong> sein.</p></li>
-<li><p><strong>Behandlung von Zeichenketten</strong>: Zeichenkettenwerte in Array-Feldern werden unverändert gespeichert, ohne semantische Escaping-Zeichen oder Konvertierung. Beispielsweise werden <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> und <code translate="no">&quot;a\&quot;b&quot;</code> so gespeichert, wie sie eingegeben wurden, während <code translate="no">'a'b'</code> und <code translate="no">&quot;a&quot;b&quot;</code> als ungültige Werte betrachtet werden.</p></li>
+<li><p><strong>Array-Kapazität</strong>: Die Anzahl der Elemente in einem ARRAY-Feld muss kleiner oder gleich der maximalen Kapazität sein, die bei der Erstellung des Arrays definiert wurde, wie unter <code translate="no">max_capacity</code> angegeben. Der Wert muss größer als 0 sein und darf <code translate="no">proxy.maxArrayCapacity</code> nicht überschreiten, dessen Standardwert <strong>4096</strong> ist.</p></li>
+<li><p><strong>Textabgleich</strong>: <code translate="no">TEXT_MATCH</code>, <code translate="no">TEXT_MATCH_FUZZY</code> und <code translate="no">PHRASE_MATCH</code> unterstützen nur Felder vom Typ „ <code translate="no">VARCHAR</code> “ und „ <code translate="no">TEXT</code> “; die Anwendung auf ein ARRAY-Feld führt zu einer Fehlermeldung. <code translate="no">enable_analyzer</code> und <code translate="no">enable_match</code> haben keine Auswirkung auf ARRAY-Felder. Weitere Informationen zum Textabgleich finden Sie unter <a href="/docs/de/keyword-match.md">„Textabgleich</a>“.</p></li>
+<li><p><strong>Zeichenfolgenverarbeitung: Zeichenfolgen</strong>werte in Array-Feldern werden unverändert gespeichert, ohne semantische Escaping-Zeichen oder Konvertierung. Beispielsweise werden „ <code translate="no">'a&quot;b'</code> “, „ <code translate="no">&quot;a'b&quot;</code> “, „ <code translate="no">'a\'b'</code> “ und „ <code translate="no">&quot;a\&quot;b&quot;</code> “ so gespeichert, wie sie eingegeben wurden, während „ <code translate="no">'a'b'</code> “ und „ <code translate="no">&quot;a&quot;b&quot;</code> “ als ungültige Werte betrachtet werden.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">ARRAY-Feld hinzufügen<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,15 +68,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um ARRAY-Felder in Milvus-Clustern zu verwenden, definieren Sie den entsprechenden Feldtyp beim Erstellen des Sammlungsschemas. Dieser Vorgang umfasst:</p>
+    </button></h2><p>Um ein ARRAY-Feld zum Sammlungsschema hinzuzufügen, legen Sie die folgenden Parameter fest:</p>
 <ol>
-<li><p>Setzen Sie „ <code translate="no">datatype</code> “ auf den unterstützten Array-Datentyp „ <code translate="no">ARRAY</code> “.</p></li>
-<li><p>Verwenden Sie den Parameter „ <code translate="no">element_type</code> “, um den Datentyp der Elemente im Array anzugeben. Alle Elemente im selben Array müssen denselben Datentyp haben.</p></li>
-<li><p>Verwenden des Parameters „ <code translate="no">max_capacity</code> “, um die maximale Kapazität des Arrays zu definieren, d. h. die maximale Anzahl an Elementen, die es enthalten kann.</p></li>
+<li><p>Legen Sie den Datentyp des Feldes auf „ <code translate="no">ARRAY</code> “ fest.</p></li>
+<li><p>Legen Sie „ <code translate="no">element_type</code> “ auf den gemeinsamen Datentyp der Elemente fest.</p></li>
+<li><p>Legen Sie „ <code translate="no">max_capacity</code> “ auf die maximale Anzahl von Elementen fest.</p></li>
 </ol>
 <p>So definieren Sie ein Sammlungsschema, das ARRAY-Felder enthält:</p>
 <div class="alert note">
-<p>Wenn Sie bei der Definition des Schemas „ <code translate="no">enable_dynamic_field=True</code> “ festlegen, erlaubt Milvus das Einfügen von Skalarfeldern, die nicht im Voraus definiert wurden. Dies kann jedoch die Komplexität von Abfragen und der Verwaltung erhöhen und sich möglicherweise auf die Leistung auswirken. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">„Dynamisches Feld</a>“.</p>
+<p>Um Felder einzufügen, die nicht im Schema definiert sind, aktivieren Sie das <a href="/docs/de/enable-dynamic-field.md">dynamische Feld</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -375,8 +376,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Indizierung trägt zur Verbesserung der Such- und Abfrageleistung bei. In Milvus-Clustern ist die Indizierung für Vektorfelder obligatorisch, für Skalarfelder jedoch optional.</p>
-<p>Das folgende Beispiel erstellt Indizes für das Vektorfeld „ <code translate="no">embedding</code> “ und das ARRAY-Feld „ <code translate="no">tags</code> “, beide unter Verwendung des Indextyps „ <code translate="no">AUTOINDEX</code> “. Bei diesem Typ wählt Milvus automatisch den am besten geeigneten Index basierend auf dem Datentyp aus. Sie können den Indextyp und die Parameter auch für jedes Feld individuell anpassen. Weitere Informationen finden Sie unter <a href="/docs/de/index-explained.md">„Index erklärt</a>“.</p>
+    </button></h2><p>Vektorfelder erfordern Indizes; skalare Indizes sind optional. In diesem Beispiel wird „ <code translate="no">AUTOINDEX</code> “ für „ <code translate="no">embedding</code> “ und „ <code translate="no">tags</code> “ angefordert. Informationen zu expliziten ARRAY-Indexauswahlen und Filterunterstützung finden Sie unter <a href="#Array-index-support">„Unterstützung für Array-Indizes</a>“.</p>
+<div class="alert note">
+<blockquote>
+<p>Skalarindizes, einschließlich <code translate="no">AUTOINDEX</code>, unterstützen keine rekursiven ARRAY-Felder oder Arrays mit nullfähigen Elementen. Informationen zu Filtern für gewöhnliche Arrays finden Sie unter <a href="/docs/de/array_data_type.md#Array-index-support">„Unterstützung</a> für <a href="/docs/de/array_data_type.md#Array-index-support">Array-Indizes</a> “, Informationen zu Regeln für Unterfelder unter <a href="/docs/de/index-structarray-fields.md#Create-scalar-indexes">„Indizierung von StructArray-Feldern</a> “.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -486,6 +491,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>Unterstützung von Array-Indizes: Indextypen und beschleunigte Filter</strong></summary></p>
+<p>Skalare Indizes auf einem gewöhnlichen ARRAY-Feld indizieren dessen Elemente. Wählen Sie aus den folgenden expliziten Indextypen:</p>
+<table>
+<thead>
+<tr><th>Elementtyp</th><th>Explizite Indextypen</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>Sie können auch „ <code translate="no">AUTOINDEX</code> “ anfordern; siehe <a href="/docs/de/scalar_index.md#AUTOINDEX-behavior">„Skalare Indizes“</a> für die Standardauswahl bei ARRAY.</p>
+<p>Die folgenden Filter können zulässige Array-Indizes verwenden:</p>
+<table>
+<thead>
+<tr><th>Filter</th><th>Verhalten des Index</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, „ <code translate="no">ARRAY_CONTAINS_ANY</code> “, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, „ <code translate="no">BITMAP</code> “ oder eine zulässige automatische Auswahl können Elemente unabhängig von ihrer Position abrufen.</td></tr>
+<tr><td>„Whole-array“ ( <code translate="no">==</code> ) oder „ <code translate="no">!=</code> “ bei booleschen, ganzzahligen oder VARCHAR-Arrays</td><td><code translate="no">INVERTED</code> können Kandidaten ermitteln; anschließend werden die ursprünglichen Arrays auf Reihenfolge und Länge überprüft. „ <code translate="no">BITMAP</code> “ unterstützt diesen Kandidatenpfad nicht.</td></tr>
+<tr><td>Array-weite Vergleiche bei Gleitkomma-Arrays</td><td>Weichen auf das Durchsuchen aus.</td></tr>
+<tr><td>Elementzugriff, wie z. B. „ <code translate="no">tags[0]</code> “ oder Array-Länge</td><td>Die Indizierung der Elementzugehörigkeit bietet für diese Operationen keine Indexsuche.</td></tr>
+</tbody>
+</table>
+<p>Informationen zur Ausdruckssyntax finden Sie unter <a href="/docs/de/array-operators.md">ARRAY-Operatoren</a>.</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">Sammlung erstellen<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1107,7 +1139,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zusätzlich zur grundlegenden Filterung nach skalaren Feldern können Sie Vektorähnlichkeitssuchen mit Filtern für skalare Felder kombinieren. Der folgende Code zeigt beispielsweise, wie Sie einen Filter für ein skalares Feld zu einer Vektorsuche hinzufügen:</p>
+    </button></h2><p>Verwenden Sie ARRAY-Filter bei der Vektorsuche, um die in Frage kommenden Entitäten einzugrenzen:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1270,4 +1302,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Darüber hinaus unterstützt Milvus erweiterte Array-Filteroperatoren wie „ <code translate="no">ARRAY_CONTAINS</code> “, „ <code translate="no">ARRAY_CONTAINS_ALL</code> “, „ <code translate="no">ARRAY_CONTAINS_ANY</code> “ und „ <code translate="no">ARRAY_LENGTH</code> “, um die Abfragefunktionen weiter zu verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/array-operators.md">„ARRAY-Operatoren</a>“.</p>
+<p>Informationen zu Inklusions- und Längenfiltern finden Sie unter <a href="/docs/de/array-operators.md">„ARRAY-Operatoren</a>“.</p>

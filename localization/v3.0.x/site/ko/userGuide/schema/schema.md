@@ -45,8 +45,8 @@ summary: >-
    <span>스키마 설계</span>
   
  </span></p>
-<p>검색 시스템의 데이터 모델 설계는 비즈니스 요구 사항을 분석하고 정보를 스키마로 표현된 데이터 모델로 추상화하는 과정을 포함합니다. 예를 들어, 텍스트를 검색하려면 리터럴 문자열을 “임베딩”을 통해 벡터로 변환하고 벡터 검색을 가능하게 하여 “인덱싱”해야 합니다. 이러한 필수 요건 외에도, 게시 타임스탬프나 저자와 같은 다른 속성을 저장해야 할 수도 있습니다. 이러한 메타데이터를 활용하면 필터링을 통해 의미 기반 검색을 정교화하여, 특정 날짜 이후에 게시된 텍스트나 특정 저자가 작성한 텍스트만 반환할 수 있습니다. 또한 애플리케이션에서 검색 결과를 표시하기 위해 본문 텍스트와 함께 이러한 스칼라 값을 가져올 수도 있습니다. 각 텍스트 조각을 체계적으로 정리하기 위해 정수나 문자열 형태로 표현되는 고유 식별자를 할당해야 합니다. 이러한 요소들은 정교한 검색 논리를 구현하는 데 필수적입니다.​</p>
-<p>잘 설계된 스키마를 만드는 방법은 <a href="/docs/ko/schema-hands-on.md">‘스키마 설계 실습’을</a> 참조하십시오.</p>
+<p>검색 시스템의 데이터 모델 설계는 비즈니스 요구 사항을 분석하고 정보를 스키마로 표현된 데이터 모델로 추상화하는 과정을 포함합니다. 예를 들어, 텍스트를 검색하려면 리터럴 문자열을 “임베딩”을 통해 벡터로 변환하고 벡터 검색을 가능하게 하여 “색인”을 생성해야 합니다. 이러한 필수 요건 외에도, 게시 타임스탬프나 저자와 같은 다른 속성을 저장해야 할 수도 있습니다. 이러한 메타데이터를 활용하면 필터링을 통해 의미 기반 검색을 정교화하여, 특정 날짜 이후에 게시된 텍스트나 특정 저자가 작성한 텍스트만 반환할 수 있습니다. 또한 애플리케이션에서 검색 결과를 표시하기 위해 본문 텍스트와 함께 이러한 스칼라 값을 가져올 수도 있습니다. 각 텍스트 조각을 체계적으로 정리하기 위해 정수나 문자열 형태로 표현되는 고유 식별자를 할당해야 합니다. 이러한 요소들은 정교한 검색 로직을 구현하는 데 필수적입니다.​</p>
+<p>잘 설계된 스키마를 만드는 방법은 <a href="/docs/ko/schema-hands-on.md">‘스키마 설계 실습’을</a> 참조하십시오.​</p>
 <h2 id="Create-Schema​" class="common-anchor-header">스키마 생성​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,11 +62,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 코드 예제는 스키마를 생성하는 방법을 보여줍니다.​</p>
+    </button></h2><p>다음 코드 스니펫은 스키마를 생성하는 방법을 보여줍니다.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -89,7 +89,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 }'​
 
 </code></pre>
-<h2 id="Add-Primary-Field​" class="common-anchor-header">주 키 필드 추가​<button data-href="#Add-Primary-Field​" class="anchor-icon" translate="no">
+<h2 id="Add-Primary-Field​" class="common-anchor-header">기본 필드 추가​<button data-href="#Add-Primary-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,11 +104,11 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션의 기본 필드는 엔티티를 고유하게 식별합니다. 이 필드는 <strong>Int64</strong> 또는 <strong>VARCHAR</strong> 값만 허용합니다. 다음 코드 예제는 기본 필드를 추가하는 방법을 보여줍니다.​</p>
+    </button></h2><p>컬렉션의 기본 키는 엔티티를 고유하게 식별합니다. 기본 키는 <strong>Int64</strong> 또는 <strong>VARCHAR</strong> 값만 허용합니다. 다음 코드 예제는 기본 키를 추가하는 방법을 보여줍니다.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -170,11 +170,11 @@ export schema='{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>벡터 필드는 다양한 스파스 및 덴스 벡터 임베딩을 지원합니다. Milvus에서는 컬렉션에 최대 4개의 벡터 필드를 추가할 수 있습니다. 다음 코드 예제는 벡터 필드를 추가하는 방법을 보여줍니다.​</p>
+    </button></h2><p>벡터 필드는 다양한 스파스 및 덴스 벡터 임베딩을 지원합니다. Milvus에서는 컬렉션에 4개의 벡터 필드를 추가할 수 있습니다. 다음 코드 예제는 벡터 필드를 추가하는 방법을 보여줍니다.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -222,7 +222,7 @@ export schema=&quot;{​
 <li><p><code translate="no">BFLOAT16_VECTOR</code>​</p>
 <p>이 유형의 벡터 필드는 정밀도는 낮아졌지만 Float32와 동일한 지수 범위를 갖는 16비트 부동소수점 숫자의 리스트를 포함합니다. 이 유형의 데이터는 정확도에 큰 영향을 주지 않으면서 메모리 사용량을 줄여주기 때문에 딥러닝 시나리오에서 흔히 사용됩니다.​</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code>​</p>
-<p>이 유형의 벡터 필드는 0과 1로 구성된 목록을 저장합니다. 이는 이미지 처리 및 정보 검색 시나리오에서 데이터를 표현하기 위한 간결한 특징으로 사용됩니다.​</p></li>
+<p>이 유형의 벡터 필드는 0과 1로 구성된 목록을 포함합니다. 이는 이미지 처리 및 정보 검색 시나리오에서 데이터를 표현하기 위한 간결한 특징으로 사용됩니다.​</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code>​</p>
 <p>이 유형의 벡터 필드는 희소 벡터 임베딩을 표현하기 위해 0이 아닌 숫자와 해당 순서 번호의 목록을 저장합니다.​</p></li>
 </ul>
@@ -241,7 +241,7 @@ export schema=&quot;{​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>일반적인 경우, 스칼라 필드를 사용하여 Milvus에 저장된 벡터 임베딩의 메타데이터를 저장하고, 메타데이터 필터링을 통해 ANN 검색을 수행함으로써 검색 결과의 정확도를 높일 수 있습니다. Milvus는 <strong>VARCHAR</strong>, <strong>TEXT</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> 및 JSON을 포함한 다양한 스칼라 필드 유형을 지원합니다.​</p>
+    </button></h2><p>일반적인 경우, 스칼라 필드를 사용하여 Milvus에 저장된 벡터 임베딩의 메타데이터를 저장하고, 메타데이터 필터링을 적용한 ANN 검색을 수행하여 검색 결과의 정확도를 높일 수 있습니다. Milvus는 <strong>VARCHAR</strong>, <strong>TEXT</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> 및 JSON을 포함한 다양한 스칼라 필드 유형을 지원합니다.​</p>
 <h3 id="Add-VARCHAR-Fields​" class="common-anchor-header">VARCHAR 필드 추가​<button data-href="#Add-VARCHAR-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -259,9 +259,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus에서는 <code translate="no">VARCHAR</code> 필드를 사용하여 문자열을 저장할 수 있습니다. <code translate="no">VARCHAR</code> 필드에 대한 자세한 내용은 <a href="/docs/ko/string.md">​VarChar 필드​를</a> 참조하십시오.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -341,9 +341,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus가 지원하는 숫자 유형은 <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code> 및 <code translate="no">Double</code> 입니다. 숫자 필드에 대한 자세한 내용은 <a href="/docs/ko/number.md">​숫자 필드​를</a> 참조하십시오.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -397,9 +397,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>Milvus는 부울 필드를 지원합니다. 다음 코드 예제는 부울 필드를 추가하는 방법을 보여줍니다.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -454,9 +454,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>JSON 필드는 일반적으로 반구조화된 JSON 데이터를 저장합니다. JSON 필드에 대한 자세한 내용은 <a href="/docs/ko/use-json-fields.md">​JSON 필드​를</a> 참조하십시오.​</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -512,9 +512,9 @@ export schema=&quot;{​
       </svg>
     </button></h3><p>배열 필드는 요소 목록을 저장합니다. 배열 필드 내 모든 요소의 데이터 유형은 동일해야 합니다. 배열 필드에 대한 자세한 내용은 <a href="/docs/ko/array_data_type.md">​배열 필드​를</a> 참조하십시오.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
- <a href="#javascript"> Node.js</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
+ <a href="#javascript"> NodeJS</a>
  <a href="#curl"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python">schema.add_field(​

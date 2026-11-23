@@ -213,7 +213,7 @@ summary: >-
       </svg>
     </button></h2><p><code translate="no">ARRAY_LENGTH</code> возвращает длину (количество элементов) поля-массива. Он принимает ровно один параметр: идентификатор поля-массива.</p>
 <p><strong>Пример</strong></p>
-<p>Чтобы найти все сущности, у которых массив <code translate="no">history_temperatures</code> содержит менее 10 элементов:</p>
+<p>Чтобы найти все сущности, в которых массив <code translate="no">history_temperatures</code> содержит менее 10 элементов:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -258,7 +258,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Оператор ` <code translate="no">ARRAY_APPEND</code> ` добавляет элементы полезных данных к существующему полю `ARRAY` во время запроса ` <code translate="no">upsert</code> `. Это не выражение фильтра. Используйте его, если хотите добавить значения в массив, не запрашивая сначала текущее значение массива.</p>
-<p>В следующем примере к полю ARRAY запроса <code translate="no">tags</code> сущности, первичный ключ которой равен <code translate="no">1</code>, добавляется <code translate="no">&quot;premium&quot;</code>:</p>
+<p>В следующем примере к полю ARRAY запроса <code translate="no">tags</code> сущности, первичный ключ которой — <code translate="no">1</code>, добавляется <code translate="no">&quot;premium&quot;</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -378,7 +378,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
       &quot;fieldOps&quot;: [{&quot;fieldName&quot;: &quot;tags&quot;, &quot;op&quot;: &quot;array_append&quot;}]
   }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Присоединение <code translate="no">ARRAY_APPEND</code> к полю с помощью <code translate="no">field_ops</code> включает семантику частичного обновления для этого поля. Полную информацию о рабочем процессе, поддерживаемых типах элементов и ограничениях см. в разделе <a href="/docs/ru/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">«Поля ARRAY с оператором Upsert в режиме слияния</a>».</p>
+<p>Присоединение <code translate="no">ARRAY_APPEND</code> к полю с помощью <code translate="no">field_ops</code> включает семантику частичного обновления для этого поля. Полную информацию о рабочем процессе, поддерживаемых типах элементов и ограничениях см. в разделе <a href="/docs/ru/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode--Milvus-2617">«Поля ARRAY с операцией Upsert в режиме слияния</a>».</p>
 <h2 id="ARRAYREMOVE" class="common-anchor-header">ARRAY_REMOVE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#ARRAYREMOVE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -395,7 +395,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
         ></path>
       </svg>
     </button></h2><p>Оператор <code translate="no">ARRAY_REMOVE</code> удаляет из существующего поля ARRAY все элементы, которые соответствуют значению в полезной нагрузке запроса, во время выполнения запроса <code translate="no">upsert</code>. Это не выражение фильтра. Используйте его, если необходимо удалить соответствующие значения из массива без предварительного запроса текущего значения массива.</p>
-<p>В следующем примере удаляются элементы, соответствующие <code translate="no">&quot;trial&quot;</code>, из поля ARRAY « <code translate="no">tags</code> » сущности, первичный ключ которой — <code translate="no">1</code>:</p>
+<p>В следующем примере удаляются элементы, соответствующие выражению <code translate="no">&quot;trial&quot;</code>, из поля ARRAY запроса <code translate="no">tags</code> сущности, первичный ключ которой равен <code translate="no">1</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

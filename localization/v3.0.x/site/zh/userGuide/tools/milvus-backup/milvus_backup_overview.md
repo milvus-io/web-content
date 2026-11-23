@@ -101,7 +101,7 @@ title: Milvus Backup
 </tbody>
 </table>
 <p>备份目录包含元数据及其格式所需的文件。归档或移动该目录时，请保留完整目录。请勿假设快照备份使用二进制日志（binlog）目录布局。</p>
-<p>在 0.6.0 版本中，<code translate="no">create --for</code> 的预设配置了针对特定用途的选项：<code translate="no">clone</code> 保留所选格式，而<code translate="no">archive</code> 和<code translate="no">secondary</code> 则需要 binlog。辅助节点还需配置复制拓扑；实例之间的常规迁移则不需要辅助节点。请参阅<a href="/docs/zh/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">“选择备份格式或用途”</a>。</p>
+<p>在 0.6.0 版本中，<code translate="no">create --for</code> 的预设配置了针对特定用途的选项：<code translate="no">clone</code> 保留所选格式，而<code translate="no">archive</code> 和<code translate="no">secondary</code> 则需要二进制日志。辅助节点还需配置复制拓扑；实例之间的常规迁移则无需辅助节点。请参阅<a href="/docs/zh/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">“选择备份格式或用途”</a>。</p>
 <p>Backup 0.6.0 在备份过程中会跳过外部 Collections。任务成功并不意味着已包含外部 Collections 数据。</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">兼容性对照表<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,8 +118,8 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Backup 0.6.0 并不要求将每个 Milvus 安装都升级到 3.0 版本。</strong>它支持在受支持的 Milvus 2.x 版本上运行二进制日志工作流<strong>。</strong>对 Milvus 3.0 系列的官方备份和还原支持从<strong>Milvus 3.0.1</strong> 开始；快照示例即基于该系列。</p>
-<p><a href="/docs/zh/milvus_backup_upgrade.md">本升级指南</a>已在 Milvus 2.6.11 环境中使用 Backup 0.5.16 和 0.6.0 进行了验证，包括使用 0.6.0 还原 0.5.16 的备份。此测试组合并未扩展下方的兼容性矩阵。</p>
+    </button></h2><p><strong>Backup 0.6.0 并不要求将每个 Milvus 安装都升级到 3.0 版本。</strong>它支持在受支持的 Milvus 2.x 版本上运行二进制日志工作流<strong>。</strong>针对 Milvus 3.0 系列的官方备份和还原支持从<strong>Milvus 3.0.1</strong> 开始；快照示例即基于该系列。</p>
+<p><a href="/docs/zh/milvus_backup_upgrade.md">本升级指南</a>已在 Milvus 2.6.11 环境中使用 Backup 0.5.16 和 0.6.0 进行了验证，包括使用 0.6.0 还原 0.5.16 备份。此测试组合并未扩展下方的兼容性矩阵。</p>
 <p>源端和目标端的 Milvus 版本必须构成受支持的组合。仅目标版本较新并不能保证兼容性。以下兼容性矩阵涵盖 Milvus 2.x 版本，该矩阵自 Milvus Backup 0.5.7 起有相关文档记录；但该矩阵并不保证 2.x 到 3.0 的迁移兼容性。</p>
 <table>
 <thead>
@@ -134,7 +134,7 @@ title: Milvus Backup
 </tbody>
 </table>
 <p>在进行跨版本迁移之前，请对照《<a href="https://github.com/zilliztech/milvus-backup/tree/v0.6.0">备份发布文档</a>》核对源版本、目标版本和备份格式。这些指南并未将旧版兼容性矩阵扩展至未列出的组合。</p>
-<h2 id="Release-notes" class="common-anchor-header">发行说明<button data-href="#Release-notes" class="anchor-icon" translate="no">
+<h2 id="Release-notes" class="common-anchor-header">版本说明<button data-href="#Release-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

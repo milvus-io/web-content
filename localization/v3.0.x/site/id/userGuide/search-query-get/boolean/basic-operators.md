@@ -23,8 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus menyediakan operator perbandingan, rentang, aritmatika, logika, dan NULL untuk menyaring entitas. Setiap operator mendukung tipe bidang tertentu.</p>
 <div class="alert note">
-<p>Literal di sisi kiri ekspresi penyaringan dapat berupa nama bidang koleksi, seperti <code translate="no">status</code>, <code translate="no">color</code>, dan sebagainya, yang digunakan dalam contoh di bawah ini, atau nama subbidang StructArray pada indeks elemen tertentu, seperti <code translate="no">filter = 'struct[0][subfield] &gt; 10'</code>.</p>
-<p>Untuk detail mengenai penyaringan skalar dalam bidang StructArray, lihat <a href="/docs/id/struct-array-operators.md">Operator StructArray</a>.</p>
+<p>Operand kiri dapat berupa bidang koleksi, seperti <code translate="no">status</code>, atau subbidang StructArray pada indeks elemen tertentu, seperti <code translate="no">struct[0][subfield] &gt; 10</code>. Lihat <a href="/docs/id/struct-array-operators.md">Operator StructArray</a>.</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">Operator perbandingan<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -206,7 +205,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menemukan entitas yang <code translate="no">price</code> -nya kurang dari 100:</p>
+    </button></h3><p>Untuk menemukan entitas di mana <code translate="no">price</code> kurang dari 100:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -360,7 +359,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini berguna saat Anda ingin memeriksa keanggotaan dalam daftar nilai.</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">Operator pencocokan pola<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -463,7 +461,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk detail lebih lanjut tentang memilih antara <code translate="no">LIKE</code> dan regex, jenis bidang yang didukung, sintaks regex, aturan escaping, dan kinerja, lihat <a href="/docs/id/pattern-matching.md">Pattern Matching</a>. Milvus juga memungkinkan Anda membuat indeks <code translate="no">NGRAM</code> pada bidang <code translate="no">VARCHAR</code> atau jalur string JSON untuk mempercepat filter pencocokan pola yang memenuhi syarat. Untuk detailnya, lihat <a href="/docs/id/ngram.md">NGRAM</a>.</p>
+<p>Untuk sintaks, escaping, dukungan bidang, dan opsi akselerasi seperti <code translate="no">NGRAM</code>, lihat <a href="/docs/id/pattern-matching.md">Pencocokan Pola</a>.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">Operator aritmatika<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -518,7 +516,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk mencari entitas di mana <code translate="no">id</code> adalah bilangan genap (yaitu, dapat dibagi 2):</p>
+    </button></h3><p>Untuk mencari entitas di mana <code translate="no">id</code> adalah bilangan genap (yaitu, habis dibagi 2):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -760,6 +758,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Operator logika digunakan untuk menggabungkan beberapa kondisi menjadi ekspresi filter yang lebih kompleks. Operator ini meliputi <code translate="no">AND</code>, <code translate="no">OR</code>, dan <code translate="no">NOT</code>.</p>
+<div class="alert note">
+<p>Setiap kondisi dapat menggunakan indeks atau jalur pemindaian yang memenuhi syarat masing-masing; satu jenis indeks tidak perlu melayani seluruh ekspresi. Lihat <a href="/docs/id/scalar_index.md">Indeks Skalar</a>.</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">Operator logika yang didukung<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -780,7 +781,7 @@ summary: >-
 <li><p><code translate="no">OR</code>: Menggabungkan kondisi di mana setidaknya satu di antaranya harus benar.</p></li>
 <li><p><code translate="no">NOT</code>: Menegasikan suatu kondisi.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Contoh 1: Menggunakan <code translate="no">AND</code> untuk menggabungkan kondisi<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">Contoh 1: Menggunakan " <code translate="no">AND</code> " untuk menggabungkan kondisi<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -921,19 +922,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gunakan ` <code translate="no">IS NULL</code> ` dan ` <code translate="no">IS NOT NULL</code> ` untuk menemukan entitas dengan nilai bidang yang hilang atau tersedia. Misalnya, Anda dapat menemukan produk tanpa kategori atau entitas yang embedding-nya siap untuk pencarian. Kedua operator ini berfungsi pada bidang skalar dan vektor yang didukung, dengan arti yang sama:</p>
+    </button></h2><p>Gunakan ` <code translate="no">IS NULL</code> ` dan ` <code translate="no">IS NOT NULL</code> ` untuk menemukan entitas dengan nilai bidang yang hilang atau tersedia. Misalnya, Anda dapat menemukan produk tanpa kategori atau entitas yang embedding-nya siap untuk dicari. Kedua operator ini berfungsi pada bidang skalar dan vektor yang didukung, dengan arti yang sama:</p>
 <table>
 <thead>
 <tr><th>Operator</th><th>Mencocokkan</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">&lt;field&gt; IS NULL</code></td><td>Entitas yang bidang yang ditentukan memiliki nilai NULL</td></tr>
-<tr><td><code translate="no">&lt;field&gt; IS NOT NULL</code></td><td>Entitas yang memiliki nilai non-NULL pada bidang yang ditentukan</td></tr>
+<tr><td><code translate="no">&lt;field&gt; IS NOT NULL</code></td><td>Entitas yang bidang yang ditentukan memiliki nilai non-NULL</td></tr>
 </tbody>
 </table>
 <p>Bidang skalar yang didukung meliputi bidang Boolean, numerik, <code translate="no">VARCHAR</code>, <code translate="no">JSON</code>, dan <code translate="no">ARRAY</code>. Operator-operator ini tidak mendukung <a href="/docs/id/text.md">bidang TEXT</a>.</p>
 <p>Mulai dari Milvus 3.0.3, operator-operator ini juga mendukung bidang vektor biasa: <code translate="no">FLOAT_VECTOR</code>, <code translate="no">BINARY_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, <code translate="no">SPARSE_FLOAT_VECTOR</code>, dan <code translate="no">INT8_VECTOR</code>.</p>
-<p>Operator-operator ini tidak membedakan huruf besar-kecil: <code translate="no">IS NULL</code> dan <code translate="no">is null</code> setara, begitu pula <code translate="no">IS NOT NULL</code> dan <code translate="no">is not null</code>.</p>
+<p>Operator-operator ini tidak membedakan huruf besar dan kecil: <code translate="no">IS NULL</code> dan <code translate="no">is null</code> setara, begitu pula <code translate="no">IS NOT NULL</code> dan <code translate="no">is not null</code>.</p>
 <h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">Contoh: Mencari entitas dengan nilai yang hilang atau tersedia<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -949,7 +950,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Asumsikan sebuah koleksi bernama <code translate="no">products</code> telah diindeks dan dimuat. Koleksi tersebut memiliki kunci utama <code translate="no">INT64</code> bernama <code translate="no">id</code>, bidang <code translate="no">VARCHAR</code> yang dapat bernilai null bernama <code translate="no">category</code>, dan bidang <code translate="no">FLOAT_VECTOR</code> tiga dimensi yang dapat bernilai null bernama <code translate="no">embedding</code>. Koleksi tersebut sudah berisi entitas-entitas berikut:</p>
+    </button></h3><p>Asumsikan sebuah koleksi bernama <code translate="no">products</code> telah diindeks dan dimuat di Milvus 3.0.3 atau versi yang lebih baru. Koleksi tersebut memiliki kunci utama <code translate="no">INT64</code> bernama <code translate="no">id</code>, bidang <code translate="no">VARCHAR</code> yang dapat bernilai null bernama <code translate="no">category</code>, dan bidang <code translate="no">FLOAT_VECTOR</code> tiga dimensi yang dapat bernilai null bernama <code translate="no">embedding</code>. Koleksi tersebut sudah berisi entitas-entitas berikut:</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1176,7 +1177,10 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td>Tipe vektor biasa</td><td>NULL berarti nilai vektor tidak ada. Vektor yang komponennya bernilai nol bukanlah NULL.</td></tr>
 </tbody>
 </table>
-<p>Untuk bidang yang didukung yang didefinisikan dengan <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> tidak akan menemukan entitas apa pun, sedangkan <code translate="no">IS NOT NULL</code> akan menemukan semua entitas yang terlihat. Kondisi lain dalam filter tetap berlaku.</p>
+<p>Untuk bidang yang didukung yang didefinisikan dengan <code translate="no">nullable=False</code>, <code translate="no">IS NULL</code> tidak cocok dengan entitas apa pun dan <code translate="no">IS NOT NULL</code> cocok dengan semua entitas yang terlihat. Kondisi lain dalam filter tetap berlaku.</p>
+<div class="alert note">
+<p>Filter NULL skalar menggunakan informasi validitas dari indeks atau data bidang yang memenuhi syarat; filter ini tidak memerlukan tipe indeks skalar tertentu. Bidang yang tidak boleh bernilai NULL dapat menghasilkan hasil yang konstan.</p>
+</div>
 <h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">Gunakan filter NULL dalam pencarian vektor<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1193,7 +1197,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
         ></path>
       </svg>
     </button></h3><p>Operator yang sama dapat digunakan dalam filter pencarian, tetapi suatu entitas juga memerlukan vektor di bidang yang dicari agar dapat berpartisipasi dalam pencarian kesamaan.</p>
-<p>Menggunakan data contoh di atas, pertimbangkan pencarian dengan <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
+<p>Menggunakan data contoh di atas, pertimbangkan pencarian deng <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
 <table>
 <thead>
 <tr><th>Ekspresi filter</th><th>Entitas yang memenuhi syarat untuk pencarian kesamaan</th><th>Alasan</th></tr>
@@ -1204,8 +1208,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>, <code translate="no">2</code></td><td>Kedua entitas memiliki vektor <code translate="no">embedding</code>.</td></tr>
 </tbody>
 </table>
-<p>Ketiga filter tersebut valid. Pencarian pada ` <code translate="no">embedding</code> ` dengan ` <code translate="no">embedding IS NULL</code> ` tidak menghasilkan hasil karena tidak ada entitas yang dapat memenuhi kedua persyaratan tersebut. Untuk mengambil entitas dengan embedding yang hilang, gunakan ` <code translate="no">query()</code> ` seperti yang ditunjukkan di atas.</p>
-<p>Pencarian vektor sudah mengabaikan entitas yang bidang vektornya NULL, sehingga <code translate="no">embedding IS NOT NULL</code> tidak mempersempit kandidat lebih lanjut untuk pencarian pada <code translate="no">embedding</code>. Peringkat, filter lain, dan batas pencarian tetap menentukan kandidat mana yang akan ditampilkan.</p>
+<p>Untuk mengambil embedding yang hilang, gunakan ` <code translate="no">query()</code>`; pencarian pada ` <code translate="no">embedding</code> ` dengan ` <code translate="no">embedding IS NULL</code> ` sah, tetapi tidak menghasilkan hasil apa pun. Pencarian vektor sudah melewati embedding `NULL`, sehingga ` <code translate="no">embedding IS NOT NULL</code> ` tidak mempersempit kandidat lebih lanjut. Peringkat, filter lain, dan batas pencarian tetap menentukan hasil yang dikembalikan.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">Tips menggunakan operator dasar dengan bidang JSON dan ARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1221,8 +1224,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Meskipun operator dasar di Milvus serbaguna dan dapat diterapkan pada bidang skalar, operator tersebut juga dapat digunakan secara efektif dengan kunci dan indeks di bidang JSON dan ARRAY.</p>
-<p>Misalnya, jika Anda memiliki bidang <code translate="no">product</code> yang berisi beberapa kunci seperti <code translate="no">price</code>, <code translate="no">model</code>, dan <code translate="no">tags</code>, selalu rujuk kunci tersebut secara langsung:</p>
+    </button></h2><p>Rujuk kunci JSON atau elemen ARRAY secara langsung dalam ekspresi. Misalnya, untuk menyaring kunci <code translate="no">price</code> dalam bidang JSON bernama <code translate="no">product</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1249,7 +1251,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk mencari catatan di mana suhu pertama dalam array suhu yang tercatat melebihi nilai tertentu, gunakan:</p>
+<p>Untuk menemukan catatan di mana suhu pertama dalam array suhu yang tercatat melebihi nilai tertentu, gunakan:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1276,22 +1278,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Kesimpulan<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus menawarkan berbagai operator dasar yang memberi Anda fleksibilitas dalam memfilter dan menanyakan data Anda. Dengan menggabungkan operator perbandingan, rentang, aritmatika, dan logika, Anda dapat membuat ekspresi filter yang kuat untuk mempersempit hasil pencarian dan mengambil data yang Anda butuhkan secara efisien.</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">Pertanyaan Umum<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1307,6 +1294,6 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Apakah ada batasan panjang daftar nilai pencocokan dalam kondisi filter (misalnya, filter=’color in ["red", "green", “blue”]')? Apa yang harus saya lakukan jika daftar tersebut terlalu panjang?</strong></p>
+    </button></h2><p><strong>Apakah ada batasan panjang daftar nilai pencocokan dalam kondisi filter (misalnya, filter='color in ["red", "green", “blue”]')? Apa yang harus saya lakukan jika daftar tersebut terlalu panjang?</strong></p>
 <p>Milvus tidak memberlakukan batasan panjang pada daftar nilai pencocokan dalam kondisi filter. Namun, daftar yang terlalu panjang dapat berdampak signifikan terhadap kinerja kueri.
 Jika kondisi filter Anda mencakup daftar nilai pencocokan yang panjang atau ekspresi kompleks dengan banyak elemen, kami menyarankan penggunaan <a href="/docs/id/filtering-templating.md">Filter Templating</a> untuk meningkatkan kinerja kueri.</p>

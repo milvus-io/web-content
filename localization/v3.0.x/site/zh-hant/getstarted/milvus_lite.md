@@ -41,7 +41,7 @@ title: 在本地執行 Milvus Lite
 <li>筆記型電腦</li>
 <li>具備相容 Python 依賴項的邊緣裝置</li>
 </ul>
-<p>Milvus Lite 採用<code translate="no">MilvusClient</code> API 執行受支援的操作，包括向量資料持久化、插入與刪除、向量搜尋，以及元資料篩選。若要將受支援的應用程式工作流程移轉至遠端部署環境，請變更連線 URI 與憑證，並檢視受支援功能的差異。 針對大規模生產工作負載，請使用<a href="/docs/zh-hant/install-overview.md">Milvus Standalone 或 Distributed，</a>或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全託管 Milvus 服務。</p>
+<p>Milvus Lite 採用<code translate="no">MilvusClient</code> API 執行受支援的操作，包括向量資料持久化、插入與刪除、向量搜尋，以及元資料篩選。若要將受支援的應用程式工作流程移轉至遠端部署，請變更連線 URI 與憑證，並檢視受支援功能的差異。 針對大規模生產工作負載，請使用<a href="/docs/zh-hant/install-overview.md">Milvus Standalone 或 Distributed，</a>或<a href="https://zilliz.com/cloud">Zilliz Cloud</a> 上的全託管 Milvus 服務。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +63,7 @@ title: 在本地執行 Milvus Lite
 <li>macOS、Linux 或 Windows，並具備相容的依賴項輪子（wheels），例如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> 。Milvus Lite 3.2.2 是一個純 Python 套件，因此作業系統和架構必須滿足這些依賴項，而非 Lite 套件本身。</li>
 <li>用於儲存資料庫的可寫入本機目錄。</li>
 </ul>
-<p>在 Windows 系統上，由於 PyMilvus 3.0.2 具有平台標記，pip 會跳過其<code translate="no">milvus-lite</code> 附加元件，因此必須明確指定<code translate="no">milvus-lite</code> 。下方的安裝指令已包含此設定。若需其他套件與平台的組合，請參閱<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite 發行版需求</a>。</p>
+<p>在 Windows 系統上，由於 PyMilvus 3.0.2 具有平台標記，pip 會跳過其<code translate="no">milvus-lite</code> 附加元件，因此必須明確指定<code translate="no">milvus-lite</code> 。下方的安裝指令已包含此設定。關於其他套件與平台的組合，請參閱<a href="https://github.com/milvus-io/milvus-lite/blob/v3.2.2/README.md#requirements">Milvus Lite 發行版需求</a>。</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">設定 Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -84,7 +84,7 @@ title: 在本地執行 Milvus Lite
 <span class="hljs-built_in">source</span> .venv/bin/activate
 python -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>請為 extras 表達式加上引號，以免 zsh 等殼層將括號視為語法。在 Windows PowerShell 上，請使用<code translate="no">.venv\Scripts\Activate.ps1</code> 而非<code translate="no">source .venv/bin/activate</code> 來啟動環境。明確指定版本可確保 SDK 與本指南所對應的本地後端保持一致。</p>
+<p>請為 extras 表達式加上引號，以免 zsh 等殼層將括號視為語法。在 Windows PowerShell 上，請使用<code translate="no">.venv\Scripts\Activate.ps1</code> 而非<code translate="no">source .venv/bin/activate</code> 來啟用環境。明確指定版本可確保 SDK 與本指南所用的本地後端保持一致。</p>
 <div class="alert note">
 <blockquote>
 <p>Milvus Lite 3.x 使用的儲存引擎與原始 2.x 套件不同。它無法直接開啟現有的 2.x<code translate="no">.db</code> 檔案。 請保留原始資料庫及其可開啟該資料庫的環境，將資料匯出至該環境，再將資料匯入新資料庫。安裝新套件並不會遷移舊的儲存格式。請參閱《<a href="#Migrating-data-from-Milvus-Lite">從 Milvus Lite 遷移資料</a>》。</p>
@@ -129,7 +129,7 @@ client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</sp
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下範例展示使用生成的向量進行 API 工作流程。這些向量並未編碼文字的含義；在建構語義搜尋時，請使用嵌入模型。請針對新的資料庫路徑執行此範例，或在再次執行前移除現有的<code translate="no">demo_collection</code> 。</p>
+    </button></h2><p>以下範例展示使用生成的向量進行 API 工作流程。這些向量並未編碼文字的含義；在建構語義搜尋時，請使用嵌入模型。請針對新的資料庫路徑執行此範例，或在重新執行前先移除現有的<code translate="no">demo_collection</code> 檔案。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -234,7 +234,7 @@ client.close()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用 `<code translate="no">milvus-lite dump</code> ` 將集合匯出為 Milvus BulkWriter JSON 檔案。這些檔案可匯入至自建的 Milvus 部署環境或 Zilliz Cloud。</p>
+    </button></h2><p>請使用<code translate="no">milvus-lite dump</code> 將集合匯出為 Milvus BulkWriter JSON 檔案。這些檔案可匯入至自建的 Milvus 部署環境或 Zilliz Cloud。</p>
 <p>在開啟來源資料庫的環境中安裝 SDK 的批量寫入器依賴項：</p>
 <pre><code translate="no" class="language-bash">python -m pip install <span class="hljs-string">&quot;pymilvus[bulk_writer]==3.0.2&quot;</span>
 milvus-lite dump -h
@@ -242,7 +242,7 @@ milvus-lite dump -h
 <p>在另一個進程中執行該命令之前，請先關閉擁有本地資料庫的 Python 應用程式。將前一個範例中的集合匯出：</p>
 <pre><code translate="no" class="language-bash">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
 <button class="copy-code-btn"></button></code></pre>
-<p>此指令會從<strong>milvus_demo.db 儲存目錄</strong>讀取 `<code translate="no">demo_collection</code> `，並將匯出檔案寫入<strong>data_dir</strong> 目錄下。請透過<a href="/docs/zh-hant/import-data.md">Bulk Insert</a>或<a href="https://docs.zilliz.com/docs/data-import">Zilliz Cloud 資料匯入功能</a>匯入這些檔案。</p>
+<p>此指令會從<strong>milvus_demo.db 儲存目錄</strong>讀取 `<code translate="no">demo_collection</code> `，並將匯出檔案寫入<strong>data_dir</strong> 目錄下。請透過<a href="/docs/zh-hant/import-data.md">Bulk Insert</a>或<a href="https://docs.zilliz.com/docs/data-import">Zilliz Cloud Data Import</a> 匯入這些檔案。</p>
 <div class="alert note">
 <blockquote>
 <p>若要匯出原始的 2.x 資料庫檔案，請在具備原始 Lite 版本且能開啟該檔案的環境中執行 dump 工具。3.x 版的 dump 工具不會透過直接開啟檔案來轉換舊的儲存格式。請保留來源資料庫，直到您確認已匯入的列數及搜尋結果無誤為止。</p>
@@ -268,6 +268,6 @@ milvus-lite dump -h
 <ul>
 <li><a href="/docs/zh-hant/quickstart.md">快速入門</a>：產生嵌入向量並執行搜尋工作流程。</li>
 <li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a>與<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a>：為您的應用程式設計查詢。</li>
-<li><a href="/docs/zh-hant/install-overview.md">選擇部署方式</a>：超越本地開發階段。</li>
+<li><a href="/docs/zh-hant/install-overview.md">選擇部署方式</a>：突破本地開發的限制。</li>
 <li><a href="https://github.com/zilliztech/attu">Attu</a>：探索 Milvus 圖形使用者介面（GUI），進行遠端部署。</li>
 </ul>

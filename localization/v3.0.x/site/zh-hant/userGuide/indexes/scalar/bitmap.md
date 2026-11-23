@@ -1,9 +1,9 @@
 ---
 id: bitmap.md
-title: 位圖
-summary: 位圖索引是一種高效的索引技術，旨在提升低基數標量欄位的查詢效能。所謂基數，是指欄位中不同值的數量。不同元素數量較少的欄位被視為低基數欄位。
+title: BITMAP
+summary: 對於低基數的標量篩選，請使用 BITMAP。請確認支援的篩選條件、欄位限制及索引建立。
 ---
-<h1 id="BITMAP" class="common-anchor-header">位圖<button data-href="#BITMAP" class="anchor-icon" translate="no">
+<h1 id="BITMAP" class="common-anchor-header">BITMAP<button data-href="#BITMAP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,7 @@ summary: 位圖索引是一種高效的索引技術，旨在提升低基數標�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>位圖索引是一種高效的索引技術，旨在提升低基數標量欄位的查詢效能。基數指的是欄位中不同值的數量。不同元素較少的欄位被視為低基數欄位。</p>
-<p>此索引類型透過將欄位值以緊湊的二進位格式表示，並對其執行高效的位元運算，有助於縮短標量查詢的檢索時間。相較於其他類型的索引，在處理低基數欄位時，位圖索引通常具有更高的空間效率與更快的查詢速度。</p>
+    </button></h1><p><code translate="no">BITMAP</code> 可加速對具有少量不同值的欄位（例如狀態碼和類別）進行標量篩選。基數是指欄位中不同值的數量。本頁說明受支援的篩選條件、欄位限制以及索引建立。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,25 +34,108 @@ summary: 位圖索引是一種高效的索引技術，旨在提升低基數標�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>「<strong>位圖」（Bitmap）</strong>一詞由「<strong>位元</strong>」（<strong>Bit</strong>）和<strong>「地圖</strong>」<strong>（Map）</strong>兩個詞彙組合而成。位元代表電腦中資料的最小單位，僅能儲存<strong>0</strong>或<strong>1</strong> 其中一個值；在此語境下，「地圖」則指根據應將何種值指派給 0 與 1，來轉換與組織資料的過程。</p>
-<p>位圖索引由兩個主要組成部分構成：位圖和鍵。鍵代表索引欄位中的唯一值。每個唯一值都對應一個位圖。這些位圖的長度等於集合中的記錄數。 位圖中的每個位元對應集合中的一筆記錄。若某筆記錄中索引欄位的值與金鑰相符，則對應的位元會被設為<strong>1</strong>；否則，則設為<strong>0</strong>。</p>
-<p>假設有一個包含<strong>「Category」</strong>和<strong>「Public」</strong>兩個欄位的文件集合。我們希望檢索屬於<strong>「Tech」</strong>類別且對「<strong>Public」</strong>開放的文件。在此情況下，位圖索引的鍵即為<strong>「Tech」</strong>和<strong>「Public」</strong>。</p>
+    </button></h2><!-- Preserve the published #Limits link and the filter link used by related pages. These anchors are not headings. -->
+<a id="Limits"></a>
+<a id="Queries-accelerated-by-BITMAP"></a>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">索引目標與篩選條件<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>若要明確建立<code translate="no">BITMAP</code> 索引，請從下表中選擇一個非主鍵目標。每行皆將受支援的目標與該索引可協助評估的篩選條件配對：</p>
+<table>
+<thead>
+<tr><th>索引目標</th><th>可使用該索引的篩選條件</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> 欄位</td><td>相等 (<code translate="no">==</code>,<code translate="no">!=</code>) 及成員關係 (<code translate="no">in</code>,<code translate="no">not in</code>)。</td></tr>
+<tr><td>整數欄位（<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> ）</td><td>相等性、成員關係與範圍 (<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>,<code translate="no">&gt;=</code>)</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 欄位</td><td>相等性、成員關係、範圍，以及<a href="/docs/zh-hant/pattern-matching.md">LIKE 或正規表達式模式</a>。模式評估可遍歷許多不同的索引字串。</td></tr>
+<tr><td>帶有<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 或<code translate="no">VARCHAR</code> 元素的普通<code translate="no">ARRAY</code> 欄位</td><td><code translate="no">ARRAY_CONTAINS</code>、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 。請參閱「<a href="/docs/zh-hant/array_data_type.md#Array-index-support">陣列索引支援」</a>。</td></tr>
+<tr><td>將 JSON 路徑轉換為<code translate="no">BOOL</code> 或<code translate="no">VARCHAR</code></td><td>篩選器，以取得上述對應的布林值或字串值，並須符合<a href="/docs/zh-hant/json-indexing.md#Index-requirements">JSON 索引要求</a>。</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>標量索引（包括<code translate="no">AUTOINDEX</code> ）不支援遞迴的 ARRAY 欄位或包含可為 null 元素的陣列。請參閱<a href="/docs/zh-hant/array_data_type.md#Array-index-support">「陣列索引支援」</a>以了解一般陣列篩選器的相關資訊，以及「<a href="/docs/zh-hant/index-structarray-fields.md#Create-scalar-indexes">StructArray 欄位索引</a>」以了解子欄位規則。</p>
+</blockquote>
+</div>
+<p>對於 ARRAY 目標，<code translate="no">BITMAP</code> 僅支援元素包含篩選條件，不支援整個陣列的相等性、依位置存取元素，或陣列長度。請參閱「<a href="/docs/zh-hant/array_data_type.md#Array-index-support">陣列索引支援</a>」。</p>
+<p>若需了解超出這些明確目標範圍的自動選取機制，請參閱「<a href="/docs/zh-hant/scalar_index.md#AUTOINDEX-behavior">AUTOINDEX 行為</a>」。</p>
+<div class="alert note">
+<blockquote>
+<p>這些是索引功能，並非對有效篩選表達式的限制。有關共用查閱限制，請參閱「<a href="/docs/zh-hant/scalar_index.md#Filter-execution">標量索引」</a>。關於<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及 NULL 測試（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），請參閱「<a href="/docs/zh-hant/basic-operators.md">基本運算子</a>」。</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">記憶體考量<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>記憶體與查詢成本取決於不同值（distinct values）的數量及其分佈。應使用具代表性的篩選條件來比較索引，而非將固定的基數視為通用的效能分界點。</p>
+<p>對於密集位圖，以位元組為單位的粗略估算公式為<code translate="no">(D + 1) * N / 8</code> ，其中<code translate="no">N</code> 為實體數量，<code translate="no">D</code> 為不同值數量。此估算包含每個不同值對應的一張位圖，以及一張用於有效性檢查的位圖。 值儲存及其他開銷會增加此估算值；在 64 位元系統上，可選的偏移量快取會增加約<code translate="no">8 * N</code> 位元組。壓縮的位圖表示形式，其記憶體使用量可能有顯著差異。</p>
+<p>這些粗略估算涵蓋了在停用記憶體映射情況下已載入索引的記憶體用量。應針對每個區段分別計算，然後將已載入區段與複本的數值相加。</p>
+<div class="alert note">
+<blockquote>
+<p>請預留額外記憶體以因應載入的欄位資料、向量索引、集合與索引的開銷，以及臨時分配。請使用具代表性的資料和查詢進行驗證；陣列、JSON、舊版索引格式以及記憶體映射均需分別進行量測。</p>
+</blockquote>
+</div>
+<h3 id="How-BITMAP-works" class="common-anchor-header">BITMAP 的運作原理<button data-href="#How-BITMAP-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>查看位圖篩選範例</strong></summary></p>
+<p>位圖索引會將每個不同的欄位值與一個位圖關聯起來。每個位元對應一個實體：<strong>1</strong>表示該實體具有該值，<strong>0</strong>則表示沒有。</p>
+<p>例如，若要查找「<strong>科技</strong>」類別中的公開文件，請將「<strong>類別 = 科技</strong>」與「<strong>公開 = true</strong>」的位圖進行組合：</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitmap.png" alt="Bitmap" class="doc-image" id="bitmap" /> 
    <span>位圖</span>
   
  </span></p>
-<p>如圖所示，<strong>Category</strong>和<strong>Public</strong>的位圖索引如下：</p>
+<p>如圖所示，「<strong>類別</strong>」和「<strong>公開</strong>」的位圖索引如下：</p>
 <ul>
 <li><p><strong>Tech</strong>：[1, 0, 1, 0, 0]，這表示只有第 1 份和第 3 份文件屬於<strong>Tech</strong>類別。</p></li>
-<li><p><strong>Public</strong>：[1, 0, 0, 1, 0]，表示僅第 1 份和第 4 份文件對<strong>Public</strong> 開放。</p></li>
+<li><p><strong>Public</strong>：[1, 0, 0, 1, 0]，這表示只有第 1 份和第 4 份文件對<strong>Public</strong> 開放。</p></li>
 </ul>
-<p>為了找出同時符合這兩項條件的文件，我們對這兩個位圖執行位元與（AND）運算：</p>
+<p>要找出同時符合這兩項條件的文件，我們會對這兩個位圖執行位元與（AND）運算：</p>
 <ul>
-<li><strong>「技術」</strong>與「<strong>公開」</strong>：[1, 0, 0, 0, 0]</li>
+<li><strong>科技</strong>AND<strong>公開</strong>：[1, 0, 0, 0, 0]</li>
 </ul>
-<p>所得的位圖 [1, 0, 0, 0, 0] 表示僅有第一份文件（<strong>ID</strong> <strong>1</strong>）同時滿足這兩項條件。透過使用位圖索引與高效的位元運算，我們能迅速縮小搜尋範圍，無需掃描整個資料集。</p>
+<p>只有第一份文件（<strong>ID 1</strong>）同時滿足這兩項條件。</p>
+<p></details></p>
 <h2 id="Create-a-bitmap-index" class="common-anchor-header">建立位圖索引<button data-href="#Create-a-bitmap-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -237,8 +319,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在此範例中，我們針對 `<code translate="no">my_collection</code> ` 集合的 `<code translate="no">category</code> ` 欄位建立位圖索引。透過 `<code translate="no">add_index()</code> ` 方法指定欄位名稱、索引類型及索引名稱。</p>
-<p>建立位圖索引後，您可以在查詢操作中使用 `<code translate="no">filter</code> ` 參數，根據已建立索引的欄位執行標量篩選。這讓您能夠透過位圖索引有效率地縮小搜尋結果範圍。如需更多資訊，請參閱<a href="/docs/zh-hant/boolean.md">《篩選說明</a>》。</p>
+<p>這會在 `<code translate="no">my_collection.category</code>` 上建立一個索引。請在查詢中使用該欄位，或搜尋 `<code translate="no">filter</code>`；詳見<a href="/docs/zh-hant/boolean.md">《篩選功能說明</a>》。</p>
 <h2 id="Drop-an-index" class="common-anchor-header">刪除索引<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -254,12 +335,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>請使用 `<code translate="no">drop_index()</code> ` 方法從集合中移除現有索引。</p>
+    </button></h2><p>使用<code translate="no">drop_index()</code> 方法，可從集合中移除現有的索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，您必須先釋放集合，才能刪除標量索引。</p></li>
-<li><p>自<strong>v2.6.4</strong>或更新版本起，一旦不再需要標量索引，即可直接刪除該索引——無需先釋放集合。</p></li>
-</ul>
+<blockquote>
+<p>有關刪除標量索引的版本要求，請參閱《<a href="/docs/zh-hant/scalar_index.md#Drop-index-compatibility">標量索引</a>》。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -381,37 +461,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>位圖索引僅支援非主鍵的標量欄位。</p></li>
-<li><p>該欄位的資料型別必須為以下其中一種：</p>
-<ul>
-<li><p><code translate="no">BOOL</code>,<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> （元素必須為以下其中一種：<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">VARCHAR</code> ）</p></li>
-</ul></li>
-<li><p>位圖索引不支援以下資料類型：</p>
-<ul>
-<li><p><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code> ：浮點數類型與位圖索引的二進位特性不相容。</p></li>
-<li><p><code translate="no">JSON</code>：JSON 資料型別具有複雜的結構，無法透過位圖索引有效率地表示。</p></li>
-</ul></li>
-<li><p>位圖索引不適用於高基數的欄位（即具有大量不同值的欄位）。</p>
-<ul>
-<li><p>一般而言，當欄位的基數小於 500 時，位圖索引的效果最佳。</p></li>
-<li><p>當基數超過此閾值時，位圖索引的效能優勢便會減弱，且儲存開銷也會變得相當可觀。</p></li>
-<li><p>對於高基數欄位，請根據您的具體使用情境和查詢需求，考慮使用其他索引技術（例如倒排索引）。</p></li>
-</ul></li>
-</ul>

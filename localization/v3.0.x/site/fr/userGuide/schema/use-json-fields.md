@@ -3,7 +3,7 @@ id: use-json-fields.md
 title: Champ JSON
 summary: >-
   Milvus vous permet de stocker et d'indexer des données structurées au sein
-  d'un même champ à l'aide du type de données JSON. Cela permet de créer des
+  d'un seul champ à l'aide du type de données JSON. Cela permet de créer des
   schémas flexibles comportant des attributs imbriqués, tout en garantissant un
   filtrage efficace grâce à l'indexation JSON.
 ---
@@ -487,7 +487,7 @@ curl --request POST \
 </ul></li>
 <li><p><strong>Type de conversion JSON</strong> (<code translate="no">json_cast_type</code>) : type de données que Milvus doit utiliser pour interpréter et indexer la valeur située au chemin spécifié.</p>
 <ul>
-<li><p>Ce type doit correspondre au type de données réel du champ indexé. Si vous souhaitez convertir le type de données en un autre lors de l’indexation, envisagez <a href="/docs/fr/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">d’utiliser une fonction de conversion</a>.</p></li>
+<li><p>Ce type doit correspondre au type de données réel du champ en cours d’indexation. Si vous souhaitez convertir le type de données en un autre lors de l’indexation, envisagez <a href="/docs/fr/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">d’utiliser une fonction de conversion</a>.</p></li>
 <li><p>Pour une liste complète, voir <a href="/docs/fr/use-json-fields.md#Supported-JSON-cast-types">ci-dessous</a>.</p></li>
 </ul></li>
 </ul>
@@ -941,7 +941,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non, les champs JSON ne prennent pas en charge les valeurs par défaut. Cependant, vous pouvez définir l'<code translate="no">nullable=True</code> lors de la définition du champ pour autoriser les entrées vides.</p>
+    </button></h3><p>Non, les champs JSON ne prennent pas en charge les valeurs par défaut. Cependant, vous pouvez définir l’option « <code translate="no">nullable=True</code> » lors de la définition du champ pour autoriser les entrées vides.</p>
 <p>Pour plus d'informations, consultez la section « <a href="/docs/fr/nullable-and-default.md">Valeurs nulles et valeurs par défaut</a> ».</p>
 <h3 id="Are-there-any-naming-conventions-for-JSON-field-keys" class="common-anchor-header">Existe-t-il des conventions de nommage pour les clés des champs JSON ?<button data-href="#Are-there-any-naming-conventions-for-JSON-field-keys" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1005,11 +1005,11 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <li><p><strong>Indexation numérique</strong>:</p>
 <p>Si un index est créé avec l'option « <code translate="no">json_cast_type=&quot;double&quot;</code> », seules les conditions de filtrage numériques (par exemple, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">== 42</code>) exploiteront cet index. Les conditions non numériques peuvent recourir à un balayage par force brute.</p></li>
 <li><p><strong>Indexation de chaînes</strong>:</p>
-<p>Si un index utilise <code translate="no">json_cast_type=&quot;varchar&quot;</code>, seules les conditions de filtrage de chaînes de caractères bénéficieront de l’index ; les autres types peuvent recourir à une analyse par force brute.</p></li>
+<p>Si un index utilise <code translate="no">json_cast_type=&quot;varchar&quot;</code>, seules les conditions de filtrage de chaînes de caractères bénéficieront de l’index ; les autres types de données peuvent recourir à une analyse par force brute.</p></li>
 <li><p><strong>Indexation booléenne</strong>:</p>
 <p>L'indexation booléenne se comporte de manière similaire à l'indexation de chaînes de caractères : l'index n'est utilisé que lorsque la condition correspond strictement à « vrai » ou « faux ».</p></li>
 </ul>
-<h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Qu’en est-il de la précision numérique lors de l’indexation des champs JSON ?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
+<h3 id="What-about-numeric-precision-when-indexing-JSON-fields" class="common-anchor-header">Qu'en est-il de la précision numérique lors de l'indexation des champs JSON ?<button data-href="#What-about-numeric-precision-when-indexing-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1041,7 +1041,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non, chaque chemin JSON <strong>ne</strong> prend en charge <strong>qu’un seul index</strong>. Vous devez choisir un seul type de conversion ( <code translate="no">json_cast_type</code> ) correspondant à vos données. La création de plusieurs index sur un même chemin avec des types de conversion différents n’est pas prise en charge.</p>
+    </button></h3><p>Non, chaque chemin JSON <strong>ne</strong> prend en charge <strong>qu’un seul index</strong>. Vous devez choisir un seul type de conversion ( <code translate="no">json_cast_type</code> ) correspondant à vos données. La création de plusieurs index sur le même chemin avec des types de conversion différents n’est pas prise en charge.</p>
 <h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Que se passe-t-il si les valeurs d’un chemin JSON ont des types incohérents ?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1073,4 +1073,4 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Si votre expression de filtrage utilise un type différent de celui de l’ <code translate="no">json_cast_type</code> de l’index, le système <strong>n’utilisera pas l’index</strong> et pourra recourir à un balayage par force brute, plus lent, si les données le permettent. Pour des performances optimales, veillez à toujours aligner votre expression de filtrage sur le type de conversion de l’index.</p>
+    </button></h3><p>Si votre expression de filtrage utilise un type différent de celui de l’ <code translate="no">json_cast_type</code> de l’index, le système <strong>n’utilisera pas l’index</strong> et pourra recourir à un balayage par force brute plus lent, si les données le permettent. Pour des performances optimales, veillez à toujours aligner votre expression de filtrage sur le type de conversion de l’index.</p>

@@ -44,11 +44,12 @@ summary: ARRAY 字段用于存储一组具有相同数据类型的有序元素�
 <li><strong>默认值</strong>：ARRAY字段不支持默认值。不过，您可以将<code translate="no">nullable</code> 属性设置为<code translate="no">True</code> ，以允许空值。详情请参阅<a href="/docs/zh/nullable-and-default.md">“可为空与默认值</a>”。</li>
 </ul>
 <ul>
-<li><strong>数据类型：</strong>ARRAY字段中的所有元素必须具有相同的数据类型，该类型由<code translate="no">element_type</code> 参数定义。当<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> 时，您还必须指定<code translate="no">max_length</code> ，该参数定义了每个数组元素允许的最大字节数。<code translate="no">element_type</code> 接受Milvus支持的任何标量数据类型，但<code translate="no">JSON</code> 除外。对于<code translate="no">element_type=STRUCT</code> ，请使用StructArray字段并提供<code translate="no">struct_schema</code> ；详情请参阅<a href="/docs/zh/create-structarray-field.md">StructArray</a>。 顶级 ARRAY 字段不能包含向量或嵌套数组，且其各个元素不能为空；在 Milvus 3.0.6 及更高版本中，这些形式仅适用于 StructArray 字段内的子字段。</li>
+<li><strong>数据类型：</strong>ARRAY字段中的所有元素必须具有相同的数据类型，该类型由<code translate="no">element_type</code> 参数定义。当<code translate="no">element_type</code> 设置为<code translate="no">VARCHAR</code> 时，您还必须指定<code translate="no">max_length</code> ，该参数定义了每个数组元素允许的最大字节数。<code translate="no">element_type</code> 支持Milvus支持的任何标量数据类型，但<code translate="no">JSON</code> 除外。对于<code translate="no">element_type=STRUCT</code> ，请使用StructArray字段并提供<code translate="no">struct_schema</code> ；详情请<a href="/docs/zh/create-structarray-field.md">参阅StructArray</a>。 顶级 ARRAY 字段不能包含向量或嵌套数组，且其各个元素不能为空；在 Milvus 3.0.6 及更高版本中，这些形式仅适用于 StructArray 字段内的子字段。</li>
 </ul>
 <ul>
-<li><p><strong>数组容量</strong>：ARRAY 字段中的元素数量必须小于或等于创建数组时定义的最大容量，该容量由<code translate="no">max_capacity</code> 指定。该值应为<strong>1</strong>到<strong>4096</strong> 范围内的整数。</p></li>
-<li><p><strong>字符串处理</strong>：数组字段中的字符串值按原样存储，不进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 将按输入形式存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
+<li><p><strong>数组容量</strong>：ARRAY 字段中的元素数量必须小于或等于创建数组时定义的最大容量，该容量由<code translate="no">max_capacity</code> 指定。该值必须大于 0，且不得超过<code translate="no">proxy.maxArrayCapacity</code> （默认值为<strong>4096</strong>）。</p></li>
+<li><p><strong>文本匹配</strong>：<code translate="no">TEXT_MATCH</code> 、<code translate="no">TEXT_MATCH_FUZZY</code> 和<code translate="no">PHRASE_MATCH</code> 仅支持<code translate="no">VARCHAR</code> 和<code translate="no">TEXT</code> 字段；若将其应用于 ARRAY 字段，将返回错误。<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 对 ARRAY 字段无效。有关文本匹配的详细信息，请参阅<a href="/docs/zh/keyword-match.md">“文本匹配”</a>。</p></li>
+<li><p><strong>字符串处理</strong>：数组字段中的字符串值将按原样存储，不会进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 将按输入形式存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">添加 ARRAY 字段<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,15 +66,15 @@ summary: ARRAY 字段用于存储一组具有相同数据类型的有序元素�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要在 Milvus 集群中使用 ARRAY 字段，请在创建 Collection Schema 时定义相应的字段类型。该过程包括：</p>
+    </button></h2><p>要向 Collection Schema 中添加 ARRAY 字段，请设置以下参数：</p>
 <ol>
-<li><p>将 `<code translate="no">datatype</code> ` 设置为受支持的数组数据类型，即 `<code translate="no">ARRAY</code>`。</p></li>
-<li><p>使用<code translate="no">element_type</code> 参数指定数组中元素的数据类型。同一数组中的所有元素必须具有相同的数据类型。</p></li>
-<li><p>使用 `<code translate="no">max_capacity</code> ` 参数定义数组的最大容量，即它所能包含的元素最大数量。</p></li>
+<li><p>将字段数据类型设置为<code translate="no">ARRAY</code> 。</p></li>
+<li><p>将<code translate="no">element_type</code> 设置为元素的共享数据类型。</p></li>
+<li><p>将 `<code translate="no">max_capacity</code> ` 设置为元素的最大数量。</p></li>
 </ol>
-<p>以下是定义包含 ARRAY 字段的 Collection Schema 的方法：</p>
+<p>以下是如何定义包含 ARRAY 字段的 Collection Schema：</p>
 <div class="alert note">
-<p>如果在定义 Schema 时设置了 `<code translate="no">enable_dynamic_field=True</code> `，Milvus 允许您插入未预先定义的标量字段。但这可能会增加查询和管理的复杂性，从而可能影响性能。有关更多信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field”</a>。</p>
+<p>若要插入未在Schema中定义的字段，请启用<a href="/docs/zh/enable-dynamic-field.md">Dynamic Field</a>。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -373,8 +374,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>建立索引有助于提升搜索和查询性能。在 Milvus 集群中，向量字段必须建立索引，而标量字段则可选。</p>
-<p>以下示例在向量字段<code translate="no">embedding</code> 和ARRAY字段<code translate="no">tags</code> 上创建索引，两者均使用<code translate="no">AUTOINDEX</code> 索引类型。使用此类型时，Milvus会根据数据类型自动选择最合适的索引。您也可以为每个字段自定义索引类型和参数。详情请参阅《<a href="/docs/zh/index-explained.md">索引详解》</a>。</p>
+    </button></h2><p>向量字段需要索引；标量索引则是可选的。此示例请求<code translate="no">AUTOINDEX</code> 上的<code translate="no">embedding</code> 和<code translate="no">tags</code> 。有关显式 ARRAY 索引选择和过滤器支持，请参阅<a href="#Array-index-support">“数组索引支持”</a>。</p>
+<div class="alert note">
+<blockquote>
+<p>标量索引（包括<code translate="no">AUTOINDEX</code> ）不支持递归 ARRAY 字段或包含可为空元素的数组。有关普通数组过滤器的<a href="/docs/zh/array_data_type.md#Array-index-support">信息</a>，请参阅<a href="/docs/zh/array_data_type.md#Array-index-support">“数组索引支持”</a>；有关子字段规则的信息，<a href="/docs/zh/index-structarray-fields.md#Create-scalar-indexes">请参阅“索引 StructArray 字段”</a>。</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -484,7 +489,34 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection" class="common-anchor-header">创建 Collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
+<p><details id="Array-index-support">
+<summary><strong>数组索引支持：索引类型和加速过滤器</strong></summary></p>
+<p>普通 ARRAY 字段上的标量索引用于索引其元素。可从以下显式索引类型中选择：</p>
+<table>
+<thead>
+<tr><th>元素类型</th><th>显式索引类型</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>,<code translate="no">INT8</code>,<code translate="no">INT16</code>,<code translate="no">INT32</code>,<code translate="no">INT64</code>,<code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>,<code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>您还可以请求<code translate="no">AUTOINDEX</code> ；有关默认的 ARRAY 选项，请参阅<a href="/docs/zh/scalar_index.md#AUTOINDEX-behavior">“标量索引”</a>。</p>
+<p>以下过滤器可以使用符合条件的数组索引：</p>
+<table>
+<thead>
+<tr><th>过滤器</th><th>索引行为</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>,<code translate="no">BITMAP</code> ，或符合条件的自动选择，均可不考虑位置地查找元素。</td></tr>
+<tr><td>对布尔型、整数型或 VARCHAR 数组使用全数组<code translate="no">==</code> 或<code translate="no">!=</code> </td><td><code translate="no">INVERTED</code> 可查找候选项，随后检查原始数组的顺序和长度。<code translate="no">BITMAP</code> 不支持此候选路径。</td></tr>
+<tr><td>对浮点数数组进行全数组比较</td><td>将回退到扫描。</td></tr>
+<tr><td>元素访问（例如<code translate="no">tags[0]</code> ）或数组长度</td><td>对于这些操作，元素成员索引不提供索引查找功能。</td></tr>
+</tbody>
+</table>
+<p>有关表达式语法，请参阅<a href="/docs/zh/array-operators.md">ARRAY 操作符</a>。</p>
+<p></details></p>
+<h2 id="Create-collection" class="common-anchor-header">创建Collection<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1090,7 +1122,7 @@ curl --request POST \
   &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">带过滤表达式的向量搜索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
+<h2 id="Vector-search-with-filter-expressions" class="common-anchor-header">使用过滤表达式进行向量搜索<button data-href="#Vector-search-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1105,7 +1137,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除了基本的标量字段过滤外，您还可以将向量相似度搜索与标量字段过滤器结合使用。例如，以下代码演示了如何在向量搜索中添加标量字段过滤器：</p>
+    </button></h2><p>在向量搜索中使用 ARRAY 过滤器来限制符合条件的实体：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1268,4 +1300,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，Milvus 还支持诸如<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> 等高级数组过滤运算符，以进一步增强查询能力。更多详细信息，请参阅<a href="/docs/zh/array-operators.md">“ARRAY 运算符”</a>。</p>
+<p>有关包含和长度过滤器，请参阅<a href="/docs/zh/array-operators.md">ARRAY 操作符</a>。</p>

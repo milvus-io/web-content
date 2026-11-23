@@ -1,9 +1,9 @@
 ---
 id: inverted.md
-title: 倒排索引
-summary: 当您需要对数据频繁执行过滤查询时，反向索引可以显著提升查询性能。反向索引无需扫描所有文档，而是能快速定位出完全符合过滤条件的记录。
+title: 反转
+summary: 对标量字段、数组和类型化 JSON 路径进行值过滤时，请使用反向索引。
 ---
-<h1 id="INVERTED" class="common-anchor-header">倒排索引<button data-href="#INVERTED" class="anchor-icon" translate="no">
+<h1 id="INVERTED" class="common-anchor-header">反转<button data-href="#INVERTED" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ summary: 当您需要对数据频繁执行过滤查询时，反向索引可以�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>当您需要对数据频繁执行过滤查询时，<code translate="no">INVERTED</code> 索引可以显著提升查询性能。Milvus无需扫描所有文档，而是利用倒排索引快速定位完全符合过滤条件的记录。</p>
-<h2 id="When-to-use-INVERTED-indexes" class="common-anchor-header">何时使用倒排索引<button data-href="#When-to-use-INVERTED-indexes" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">INVERTED</code> 将字段值映射到包含这些值的实体，以加速标量过滤。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,14 +34,13 @@ summary: 当您需要对数据频繁执行过滤查询时，反向索引可以�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在以下情况下请使用倒排索引：</p>
-<ul>
-<li><p><strong>按特定值过滤</strong>：查找某个字段值等于特定值的所有记录（例如，<code translate="no">category == &quot;electronics&quot;</code> ）</p></li>
-<li><p><strong>按文本内容筛选</strong>：对<code translate="no">VARCHAR</code> 字段进行高效搜索</p></li>
-<li><p><strong>查询 JSON 字段值</strong>：根据 JSON 结构中的特定键进行筛选</p></li>
-</ul>
-<p><strong>性能优势</strong>：反向索引可避免对整个Collection进行全量扫描，从而在处理大型数据集时将查询时间从秒级缩短至毫秒级。</p>
-<h2 id="How-INVERTED-indexes-work" class="common-anchor-header">反向索引的工作原理<button data-href="#How-INVERTED-indexes-work" class="anchor-icon" translate="no">
+    </button></h2><p><a id="When-to-use-INVERTED-indexes"></a></p>
+<p>使用<code translate="no">INVERTED</code> 对兼容字段或JSON路径（例如<code translate="no">category == &quot;electronics&quot;</code> ）应用相等、成员关系和范围过滤器。</p>
+<p><a id="Supported-data-types"></a>
+<a id="Queries-accelerated-by-INVERTED"></a>
+<a id="Supported-filters"></a>
+<a id="Filter-acceleration"></a></p>
+<h3 id="Index-targets-and-filters" class="common-anchor-header">索引目标与过滤器<button data-href="#Index-targets-and-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,21 +55,80 @@ summary: 当您需要对数据频繁执行过滤查询时，反向索引可以�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus<strong>中的反向索引</strong>将每个唯一的字段值（术语）映射到包含该值的文档 ID 集合。这种结构使得对具有重复值或分类值的字段进行快速查找成为可能。</p>
-<p>如图所示，该过程分为两个步骤：</p>
-<ol>
-<li><p><strong>正向映射（ID → 术语）：</strong>每个文档 ID 指向其包含的字段值。</p></li>
-<li><p><strong>反向映射（术语 → ID）：</strong>Milvus 收集唯一术语，并构建从每个术语到包含该术语的所有 ID 的反向映射。</p></li>
-</ol>
-<p>例如，值<strong>“electronics”</strong>映射到 ID<strong>1</strong>和<strong>3</strong>，而<strong>“books”</strong>映射到 ID<strong>2</strong>和<strong>5</strong>。</p>
+    </button></h3><p>下表列出了受支持的<code translate="no">INVERTED</code> 索引目标及其可协助评估的过滤器：</p>
+<table>
+<thead>
+<tr><th>索引目标</th><th>可使用该索引的筛选条件</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code> 字段</td><td>相等（<code translate="no">==</code> 、<code translate="no">!=</code> ）和隶属关系（<code translate="no">in</code> 、<code translate="no">not in</code> ）。</td></tr>
+<tr><td>数值字段（<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> ）</td><td>相等性、成员关系和区间 (<code translate="no">&lt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;</code>,<code translate="no">&gt;=</code>)。</td></tr>
+<tr><td><code translate="no">VARCHAR</code> 字段</td><td>相等、成员关系、范围、前缀匹配（例如<code translate="no">name LIKE &quot;abc%&quot;</code> ）以及通用的 LIKE 操作（例如<code translate="no">name LIKE &quot;a%b_c&quot;</code> ）。</td></tr>
+<tr><td>带有<code translate="no">BOOL</code> 、<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 、<code translate="no">DOUBLE</code> 或<code translate="no">VARCHAR</code> 元素的普通<code translate="no">ARRAY</code> 字段</td><td>元素包含关系及符合条件的全数组比较。参见<a href="/docs/zh/array_data_type.md#Array-index-support">“数组索引支持”</a>。</td></tr>
+<tr><td>带类型的 JSON 路径</td><td>适用于索引转换的过滤器。请指定路径和转换参数；有关转换兼容性，请参阅<a href="/docs/zh/json-indexing.md#Understand-cast-types">“JSON 索引”</a>；有关查询行为的<a href="/docs/zh/json-indexing.md#Supported-filters">详细信息</a>，请<a href="/docs/zh/json-indexing.md#Supported-filters">参阅“JSON 过滤器”</a>。</td></tr>
+</tbody>
+</table>
+<div class="alert note">
+<blockquote>
+<p>标量索引（包括<code translate="no">AUTOINDEX</code> ）不支持递归的 ARRAY 字段或包含可为空元素的数组。有关普通数组过滤器的<a href="/docs/zh/array_data_type.md#Array-index-support">信息</a>，请参阅<a href="/docs/zh/array_data_type.md#Array-index-support">“数组索引支持”</a>；有关子字段规则，<a href="/docs/zh/index-structarray-fields.md#Create-scalar-indexes">请参阅“索引 StructArray 字段”</a>。</p>
+</blockquote>
+</div>
+<p>简单的后缀（<code translate="no">LIKE &quot;%abc&quot;</code> ）和子字符串（<code translate="no">LIKE &quot;%abc%&quot;</code> ）过滤器使用扫描路径，尽管更复杂的LIKE模式也可以使用此索引。正则表达式过滤器不使用直接的INVERTED模式查找。这些规则<a href="/docs/zh/pattern-matching.md#Accelerate-pattern-matching-with-indexes">在查询规划简化</a>之后生效。</p>
+<p>标量<code translate="no">INVERTED</code> 索引不支持基于令牌的<code translate="no">TEXT_MATCH</code> 或<code translate="no">PHRASE_MATCH</code> ；请参阅<a href="/docs/zh/keyword-match.md">“文本匹配”</a>。</p>
+<div class="alert note">
+<blockquote>
+<p>这些是索引功能，而非对有效过滤表达式的限制。有关共享查找约束，请参阅<a href="/docs/zh/scalar_index.md#Filter-execution">“标量索引”</a>。关于<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 以及NULL测试（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ），请参阅<a href="/docs/zh/basic-operators.md">“基本操作符”</a>。</p>
+</blockquote>
+</div>
+<h3 id="Memory-considerations" class="common-anchor-header">内存注意事项<button data-href="#Memory-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要粗略估算加载内存，请使用<code translate="no">S</code> 字节，其中<code translate="no">S</code> 是存储压缩前已构建索引的大小。请在具有代表性的数据上构建索引以获得<code translate="no">S</code> ；原始字段数据大小不能作为替代参考。</p>
+<p>这些粗略估计值适用于禁用内存映射时的加载索引内存。请按分段分别计算，然后将所有加载分段和副本的数值相加。</p>
+<div class="alert note">
+<blockquote>
+<p>请为加载的字段数据、向量索引、Collection和索引开销以及临时分配预留额外内存。使用具有代表性的数据和查询进行验证；数组、JSON、旧版索引格式以及内存映射需要单独测量。</p>
+</blockquote>
+</div>
+<p><a id="How-INVERTED-indexes-work"></a></p>
+<h3 id="How-INVERTED-works" class="common-anchor-header">INVERTED 的工作原理<button data-href="#How-INVERTED-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>查看值查找示例</strong></summary></p>
+<p>倒排索引将实体 ID 到字段值的映射关系反转。在图中<strong>，“electronics”</strong>映射到 ID<strong>1</strong>和<strong>3</strong>，而<strong>“books”</strong>映射到 ID<strong>2</strong>和<strong>5</strong>。</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/how-inverted-index-works.png" alt="How Inverted Index Works" class="doc-image" id="how-inverted-index-works" /> 
    <span>倒排索引的工作原理</span>
   
  </span></p>
-<p>当您按特定值进行过滤（例如，<code translate="no">category == &quot;electronics&quot;</code> ）时，Milvus 只需在索引中查找该术语，并直接检索匹配的 ID。这避免了扫描整个数据集，从而实现了快速过滤，对于分类型或重复值而言尤为如此。</p>
-<p>倒排索引支持所有标量字段类型，例如<strong>BOOL</strong>、<strong>INT8</strong>、<strong>INT16</strong>、<strong>INT32</strong>、<strong>INT64</strong>、<strong>FLOAT</strong>、<strong>DOUBLE</strong>、<strong>VARCHAR</strong>、<strong>JSON</strong> 和<strong>ARRAY</strong>。不过，对 JSON 字段进行索引时的参数设置与常规标量字段略有不同。</p>
+<p>对于<code translate="no">category == &quot;electronics&quot;</code> ，Milvus会从索引中检索ID<strong>1和3，</strong>而非检查每个实体的类别。</p>
+<p></details></p>
 <h2 id="Create-indexes-on-non-JSON-fields" class="common-anchor-header">在非 JSON 字段上创建索引<button data-href="#Create-indexes-on-non-JSON-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -466,10 +524,9 @@ curl --request POST \
       </svg>
     </button></h2><p>使用 `<code translate="no">drop_index()</code> ` 方法从 Collection 中删除现有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>及更早版本中，删除标量索引前必须先释放 Collection。</p></li>
-<li><p>从<strong>v2.6.4</strong>及更高版本开始，一旦不再需要标量索引，即可直接删除，无需先释放 Collection。</p></li>
-</ul>
+<blockquote>
+<p>有关删除标量索引的版本要求，请参阅《<a href="/docs/zh/scalar_index.md#Drop-index-compatibility">标量索引</a>》。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -566,27 +623,7 @@ curl --request POST \
     &quot;indexName&quot;: &quot;category_index&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Best-practices" class="common-anchor-header">最佳实践<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>在加载数据后创建索引</strong>：为已包含数据的 Collections 构建索引，以获得更好的性能</p></li>
-<li><p><strong>使用描述性索引名称</strong>：选择能清晰表明字段和用途的名称</p></li>
-<li><p><strong>监控索引性能</strong>：在创建索引前后检查查询性能</p></li>
-<li><p><strong>考虑查询模式</strong>：针对经常用于筛选的字段创建索引</p></li>
-</ul>
+<p><a id="Best-practices"></a></p>
 <h2 id="Next-steps" class="common-anchor-header">后续步骤<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -603,6 +640,6 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>了解<a href="/docs/zh/index-explained.md">其他索引类型</a></p></li>
-<li><p>参阅<a href="/docs/zh/json-indexing.md">“JSON 索引</a>”以了解高级 JSON 索引场景</p></li>
+<li><p>请参阅“<a href="/docs/zh/scalar_index.md#Whats-next">标量索引”部分，了解标量索引</a>的比较及资源规划。</p></li>
+<li><p>有关高级 JSON<a href="/docs/zh/json-indexing.md">索引</a>场景，请参阅<a href="/docs/zh/json-indexing.md">“JSON</a>索引<a href="/docs/zh/json-indexing.md">”</a>。</p></li>
 </ul>

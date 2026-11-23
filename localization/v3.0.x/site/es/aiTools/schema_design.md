@@ -1,6 +1,6 @@
 ---
 id: schema_design.md
-title: 'Consigna: Diseño del esquema de Milvus'
+title: 'Tema: Diseño del esquema de Milvus'
 summary: >-
   Normas para que los asistentes de programación basados en IA diseñen esquemas
   de colección correctos en Milvus.
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Normas y guías de decisión para diseñar esquemas de colección correctos en Milvus, incluyendo tipos de campos, claves primarias, configuración de BM25 y restricciones de inmutabilidad del esquema. Copia el mensaje completo que aparece a continuación en tu herramienta de IA para aplicar estas normas automáticamente. Para obtener una visión general de todos los mensajes, consulta <a href="/docs/es/milvus_for_agents.md">«Mensajes de IA</a>».</p>
+    </button></h1><p>Normas y guías de decisión para diseñar esquemas de colección de Milvus correctos, incluyendo tipos de campos, claves primarias, configuración de BM25 y restricciones de inmutabilidad del esquema. Copia el mensaje completo que aparece a continuación en tu herramienta de IA para aplicar estas normas automáticamente. Para obtener una visión general de todos los mensajes, consulta <a href="/docs/es/milvus_for_agents.md">Mensajes de IA</a>.</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Cómo utilizar esta indicación<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +149,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only). Before using `IS NULL` / `IS NOT NULL` on vector fields, check the supported types, version requirements, and query/search behavior in [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 

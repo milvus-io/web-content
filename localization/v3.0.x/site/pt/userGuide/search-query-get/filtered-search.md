@@ -7,7 +7,7 @@ summary: >-
   pesquisa podem nem sempre estar corretos. É possível incluir condições de
   filtragem num pedido de pesquisa para que o Milvus efetue a filtragem de
   metadados antes de realizar as pesquisas com ANN, reduzindo o âmbito da
-  pesquisa de toda a coleção apenas às entidades que correspondam às condições
+  pesquisa de toda a coleção apenas às entidades que correspondem às condições
   de filtragem especificadas.
 ---
 <h1 id="Filtered-Search" class="common-anchor-header">Pesquisa filtrada<button data-href="#Filtered-Search" class="anchor-icon" translate="no">
@@ -68,8 +68,13 @@ summary: >-
 <ul>
 <li><p>Filtra as entidades que correspondem às condições de filtragem incluídas na solicitação de pesquisa.</p></li>
 <li><p>Realiza a pesquisa ANN entre as entidades filtradas.</p></li>
-<li><p>Devolve as K entidades principais.</p></li>
+<li><p>Retorna as K entidades principais.</p></li>
 </ul>
+<div class="alert note">
+<p>A partir do Milvus 3.0.3, pode utilizar « <code translate="no">IS NULL</code> » e « <code translate="no">IS NOT NULL</code> » em filtros de consulta e pesquisa em campos vetoriais comuns para selecionar entidades cujo campo vetorial seja NULL ou não NULL, respetivamente.</p>
+<p>Para encontrar entidades cujo campo « <code translate="no">embedding</code> » seja NULL, utilize « <code translate="no">query()</code> » com o filtro « <code translate="no">embedding IS NULL</code> ». Este filtro também é válido em « <code translate="no">search()</code> ». No entanto, a pesquisa em « <code translate="no">embedding</code> » com este filtro não devolve resultados: as entidades sem um valor « <code translate="no">embedding</code> » não têm um vetor para comparar com o vetor da consulta.</p>
+<p>Para conhecer os tipos suportados, a sintaxe e os exemplos, consulte <a href="/docs/pt/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">os operadores IS NULL e IS NOT NULL</a>.</p>
+</div>
 <h3 id="Iterative-filtering" class="common-anchor-header">Filtragem iterativa<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,14 +90,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>O processo de filtragem padrão restringe eficazmente o âmbito da pesquisa a um intervalo reduzido. No entanto, expressões de filtragem excessivamente complexas podem resultar numa latência de pesquisa muito elevada. Nesses casos, a filtragem iterativa pode servir como alternativa, ajudando a reduzir a carga de trabalho da filtragem escalar.</p>
+    </button></h3><p>O processo de filtragem padrão restringe efetivamente o âmbito da pesquisa a um intervalo reduzido. No entanto, expressões de filtragem excessivamente complexas podem resultar numa latência de pesquisa muito elevada. Nesses casos, a filtragem iterativa pode servir como alternativa, ajudando a reduzir a carga de trabalho da filtragem escalar.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" /> 
    <span>Filtragem iterativa</span>
   
  </span></p>
-<p>Conforme ilustrado no diagrama acima, uma pesquisa com filtragem iterativa realiza a pesquisa vetorial em iterações. Cada entidade devolvida pelo iterador é submetida a filtragem escalar, e este processo continua até que os resultados top-K especificados sejam alcançados.</p>
+<p>Conforme ilustrado no diagrama acima, uma pesquisa com filtragem iterativa realiza a pesquisa de vetores em iterações. Cada entidade devolvida pelo iterador é submetida a filtragem escalar, e este processo continua até que os resultados topK especificados sejam alcançados.</p>
 <p>Este método reduz significativamente o número de entidades sujeitas à filtragem escalar, tornando-o especialmente benéfico para lidar com expressões de filtragem altamente complexas.</p>
 <p>No entanto, é importante notar que o iterador processa as entidades uma de cada vez. Esta abordagem sequencial pode levar a tempos de processamento mais longos ou a potenciais problemas de desempenho, especialmente quando um grande número de entidades é submetido à filtragem escalar.</p>
 <h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -143,7 +148,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Os trechos de código a seguir demonstram uma pesquisa com filtragem padrão, e a solicitação no trecho de código a seguir inclui uma condição de filtragem e vários campos de saída.</p>
+    </button></h3><p>Os trechos de código a seguir demonstram uma pesquisa com filtragem padrão, e o pedido no trecho de código a seguir inclui uma condição de filtragem e vários campos de saída.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

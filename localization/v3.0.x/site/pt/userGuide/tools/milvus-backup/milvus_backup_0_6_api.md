@@ -84,8 +84,8 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Execute apenas um destes comandos para um determinado serviço. Os exemplos abaixo utilizam a porta 8080; altere os respetivos URLs se tiver selecionado outra porta. A Swagger UI está disponível em <code translate="no">http://localhost:8080/api/v1/docs/index.html</code>.</p>
-<p>Mantenha o serviço em execução enquanto faz o polling das tarefas. Os IDs das tarefas e o progresso em tempo real pertencem ao processo do serviço; a cópia de segurança persistida permanece no armazenamento de objetos após o processo ser interrompido.</p>
-<h2 id="Prepare-data" class="common-anchor-header">Preparar os dados<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<p>Mantenha o serviço em execução enquanto faz a recolha de tarefas. Os IDs das tarefas e o progresso em tempo real pertencem ao processo do serviço; a cópia de segurança persistente permanece no armazenamento de objetos após o processo ser interrompido.</p>
+<h2 id="Prepare-data" class="common-anchor-header">Preparar dados<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -146,7 +146,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">get_backup</code> retorna metadados JSON, incluindo <code translate="no">collection_backups</code>; <strong>não</strong> descarrega ficheiros de cópia de segurança. Para uma cópia de segurança criada por outro processo, uma consulta apenas pelo nome pode devolver metadados sem o progresso atual da tarefa. Utilize o ID da tarefa da resposta de criação do serviço atual ao monitorizar uma cópia de segurança ativa.</p>
+<p><code translate="no">get_backup</code> retorna metadados em JSON, incluindo <code translate="no">collection_backups</code>; <strong>não</strong> descarrega ficheiros de cópia de segurança. Para uma cópia de segurança criada por outro processo, uma consulta apenas pelo nome pode retornar metadados sem o progresso da tarefa em tempo real. Utilize o ID da tarefa da resposta de criação do serviço atual ao monitorizar uma cópia de segurança ativa.</p>
 <p>O formato predefinido é <code translate="no">auto</code>, que seleciona o instantâneo no Milvus 3.0. Para solicitar explicitamente o binlog, adicione <code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> ao corpo da solicitação de criação. As predefinições « <code translate="no">--for</code> » da CLI não constituem um campo de solicitação HTTP.</p>
 <p>Para preservar ou mover o backup, copie o diretório inteiro para o armazenamento de objetos. Consulte o <a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">guia de transferência da versão 0.6.0</a>.</p>
 <h2 id="Restore-data" class="common-anchor-header">Restaurar dados<button data-href="#Restore-data" class="anchor-icon" translate="no">
@@ -178,7 +178,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <p>Copie <code translate="no">data.id</code> da resposta de restauração e verifique o estado da tarefa:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>Aguarde por <code translate="no">data.state_code: 2</code> e verifique <code translate="no">collection_restore_tasks</code> para ver se a coleção de destinos está conforme o esperado. Uma tarefa submetida ainda não constitui uma restauração verificada.</p>
+<p>Aguarde por <code translate="no">data.state_code: 2</code> e verifique em <code translate="no">collection_restore_tasks</code> se a coleção de destinos esperada está presente. Uma tarefa submetida ainda não constitui uma restauração verificada.</p>
 <h3 id="Restore-with-the-original-name" class="common-anchor-header">Restaurar com o nome original<button data-href="#Restore-with-the-original-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -194,7 +194,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Utilize uma instância de destino onde <code translate="no">coll</code> não exista. Inicie um serviço de API de cópia de segurança separado, configurado para esse destino e para a localização da cópia de segurança concluída, e, em seguida, envie este pedido ao serviço de destino:</p>
+    </button></h3><p>Utilize uma instância de destino onde <code translate="no">coll</code> não exista. Inicie um serviço de API de cópia de segurança separado, configurado para esse destino e para a localização da cópia de segurança concluída; em seguida, envie este pedido ao serviço de destino:</p>
 <pre><code translate="no" class="language-shell">curl --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
   --header &#x27;Content-Type: application/json&#x27; \
   --data &#x27;{

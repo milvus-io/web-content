@@ -61,8 +61,8 @@ summary: >-
 <p>Para obtener más información, consulta <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/CollectionSchema.md"><code translate="no">CollectionSchema</code></a> en la referencia del SDK.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
@@ -231,8 +231,8 @@ schema.verify()
 <tr><th>Formato</th><th>Forma del campo StructArray</th></tr>
 </thead>
 <tbody>
-<tr><td>JSON, JSONL</td><td>El valor del campo es una lista de objetos, uno por cada elemento de Struct, con claves que corresponden a los nombres de los subcampos: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
-<tr><td>CSV</td><td>La celda contiene el mismo texto JSON que el formato JSON. El <code translate="no">nullkey</code> configurado para el trabajo de importación o un JSON <code translate="no">null</code> marca un valor nulo de StructArray.</td></tr>
+<tr><td>JSON, JSONL</td><td>El valor del campo es una lista de objetos, uno por cada elemento de Struct, con el nombre del subcampo como clave: <code translate="no">&quot;chunks&quot;: [{&quot;text&quot;: &quot;...&quot;, &quot;section&quot;: &quot;index&quot;, &quot;emb&quot;: [0.1, 0.2]}, ...]</code>.</td></tr>
+<tr><td>CSV</td><td>La celda contiene el mismo texto JSON que el formato JSON. El <code translate="no">nullkey</code> configurado para el trabajo de importación o un JSON <code translate="no">null</code> marca un valor StructArray nulo.</td></tr>
 <tr><td>Parquet</td><td>Una columna por cada campo de StructArray con el tipo <code translate="no">list&lt;struct&lt;...&gt;&gt;</code>, un elemento secundario struct por cada subcampo. Un subcampo escalar es un elemento secundario escalar, un subcampo vectorial es una lista del tipo de sus elementos, como <code translate="no">list&lt;float32&gt;</code>, y un subcampo de matriz (Milvus 3.0.6 y posteriores) es un elemento secundario de tipo <code translate="no">list&lt;T&gt;</code>.</td></tr>
 <tr><td>NumPy</td><td>No es compatible. Los archivos NumPy contienen un archivo por cada campo de nivel superior y no admiten la representación de un campo StructArray. Utiliza archivos JSON, CSV o Parquet para las colecciones que tengan un campo StructArray.</td></tr>
 </tbody>
@@ -242,8 +242,8 @@ schema.verify()
 <li><p>Utilice nombres de subcampos dentro de cada elemento Struct, no rutas como <code translate="no">chunks[text]</code>. Se rechazan las columnas planas o las claves denominadas <code translate="no">chunks[text]</code>.</p></li>
 <li><p>Un elemento Struct en sí mismo no puede ser nulo, como por ejemplo <code translate="no">[null, {...}]</code>. Un valor StructArray completo solo puede ser nulo cuando el campo StructArray sea nulo. Antes de Milvus 3.0.6, cada elemento Struct debía proporcionar todos los subcampos.</p></li>
 <li><p>Se ignoran las claves o los elementos secundarios de Parquet que no sean subcampos de la colección, incluidos los subcampos omitidos.</p></li>
-<li><p>A partir de Milvus 3.0.6, una clave que falte o un valor ` <code translate="no">null</code> ` para un subcampo en el que el elemento pueda ser nulo se importa como un valor nulo para ese elemento `Struct`, por lo que los archivos escritos antes de que se añadiera un subcampo se importan sin él. Un « <code translate="no">null</code> » en cualquier otro lugar provoca el fallo de la importación. Para un subcampo de tipo matriz, « <code translate="no">null</code> » es una matriz interna nula, y « <code translate="no">null</code> » dentro de la matriz interna es un valor interno nulo cuando el subcampo lo permite.</p></li>
-<li><p>A partir de Milvus 3.0.6, se rechazan las importaciones de binlog —como la restauración de copias de seguridad— y las importaciones desde fuentes de instantáneas para colecciones que tengan subcampos con elementos nulos o subcampos de matrices escalares.</p></li>
+<li><p>A partir de Milvus 3.0.6, una clave que falte o un valor de tipo « <code translate="no">null</code> » para un subcampo en el que el elemento pueda ser nulo se importa como un valor nulo para ese elemento de Struct, por lo que los archivos escritos antes de que se añadiera un subcampo se importan sin él. Un « <code translate="no">null</code> » en cualquier otro lugar provoca el fallo de la importación. Para un subcampo de tipo matriz, « <code translate="no">null</code> » es una matriz interna nula, y « <code translate="no">null</code> » dentro de la matriz interna es un valor interno nulo cuando el subcampo lo permite.</p></li>
+<li><p>A partir de Milvus 3.0.6, se rechazan las importaciones de binlog —como la restauración de copias de seguridad— y las importaciones desde fuentes de instantáneas para aquellas colecciones que tengan subcampos con elementos nulos o subcampos de matrices escalares.</p></li>
 </ul>
 <p>pymilvus <a href="#Set-up-BulkWriter">BulkWriter</a> admite las estructuras de StructArray anteriores en todos los formatos compatibles, incluidos los subcampos con elementos nulos y los valores de StructArray nulos. Utiliza las mismas estructuras de fila en las llamadas ` <code translate="no">add_row()</code> ` del escritor.</p>
 <p>Para conocer los límites del esquema, consulta <a href="/docs/es/structarray-limits.md#Import-and-storage-limits">«Límites de StructArray</a>».</p>
@@ -285,8 +285,8 @@ schema.verify()
       </svg>
     </button></h3><p>Un <strong>LocalBulkWriter</strong> añade filas del conjunto de datos de origen y las graba en un archivo local con el formato especificado.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import LocalBulkWriter, BulkFileType` </span>
@@ -349,8 +349,8 @@ writer = LocalBulkWriter(
       </svg>
     </button></h3><p>En lugar de guardar los datos añadidos en un archivo local, un <strong>RemoteBulkWriter</strong> los guarda en un bucket remoto. Por lo tanto, debe configurar un objeto <strong>ConnectParam</strong> antes de crear un <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter
 <span class="hljs-comment"># Use `from pymilvus import RemoteBulkWriter` </span>
@@ -401,8 +401,8 @@ writer = RemoteBulkWriter(
 <button class="copy-code-btn"></button></code></pre>
 <p>Una vez que los parámetros de conexión estén listos, puede hacer referencia a ellos en el ` <strong>RemoteBulkWriter`</strong> de la siguiente manera:</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> BulkFileType
 <span class="hljs-comment"># Use `from pymilvus import BulkFileType` </span>
@@ -432,7 +432,7 @@ writer = RemoteBulkWriter(
 <p>Los parámetros para crear un <strong>RemoteBulkWriter</strong> son prácticamente los mismos que los de un <strong>LocalBulkWriter</strong>, salvo <code translate="no">connect_param</code>. Para obtener más información sobre la configuración de los parámetros, consulta <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/RemoteBulkWriter.md">RemoteBulkWriter</a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/RemoteBulkWriter/S3ConnectParam.md">ConnectParam</a> en la referencia del SDK.</p>
 </div>
 <div class="language-java">
-<p>Los parámetros para crear un <strong>RemoteBulkWriter</strong> son prácticamente los mismos que los de un <strong>LocalBulkWriter</strong>, salvo <code translate="no">StorageConnectParam</code>. Para obtener más información sobre la configuración de los parámetros, consulta RemoteBulkWriter y StorageConnectParam en la referencia del SDK.</p>
+<p>Los parámetros para crear un <strong>`RemoteBulkWriter`</strong> son prácticamente los mismos que los de un <strong>`LocalBulkWriter`</strong>, salvo <code translate="no">StorageConnectParam</code>. Para obtener más información sobre la configuración de los parámetros, consulta `RemoteBulkWriter` y `StorageConnectParam` en la referencia del SDK.</p>
 </div>
 <h2 id="Start-writing" class="common-anchor-header">Empezar a escribir<button data-href="#Start-writing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -453,12 +453,12 @@ writer = RemoteBulkWriter(
 <p>Un <strong>BulkWriter</strong> dispone de dos métodos: ` <code translate="no">append_row()</code> `, que añade una fila procedente de un conjunto de datos de origen, y ` <code translate="no">commit()</code> `, que confirma las filas añadidas en un archivo local o en un bucket remoto.</p>
 </div>
 <div class="language-java">
-<p>Un <strong>BulkWriter</strong> dispone de dos métodos: « <code translate="no">appendRow()</code> », que añade una fila procedente de un conjunto de datos de origen, y « <code translate="no">commit()</code> », que graba las filas añadidas en un archivo local o en un bucket remoto.</p>
+<p>Un <strong>BulkWriter</strong> dispone de dos métodos: « <code translate="no">appendRow()</code> », que añade una fila procedente de un conjunto de datos de origen, y « <code translate="no">commit()</code> », que graba las filas añadidas en un archivo local o en un depósito remoto.</p>
 </div>
 <p>A modo de demostración, el siguiente código añade datos generados aleatoriamente.</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, string, json
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
@@ -678,8 +678,8 @@ writer = RemoteBulkWriter(
 <p>Para comprobar los resultados, puede obtener la ruta de salida real imprimiendo el método ` <code translate="no">getBatchFiles()</code> ` del escritor.</p>
 </div>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(writer.batch_files)
 

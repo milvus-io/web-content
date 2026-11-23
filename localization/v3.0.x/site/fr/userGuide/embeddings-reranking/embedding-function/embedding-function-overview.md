@@ -3,17 +3,16 @@ id: embedding-function-overview.md
 title: Présentation de la fonction d'intégrationCompatible with Milvus 2.6.x
 summary: >-
   Le module « Function » de Milvus vous permet de transformer des données
-  textuelles brutes en représentations vectorielles en faisant appel
-  automatiquement à des fournisseurs de services d’embedding externes (tels que
-  OpenAI, AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function »,
-  vous n’avez plus besoin d’interagir manuellement avec les API de vecteurs de
-  représentation : Milvus gère l’intégralité du processus, depuis l’envoi des
-  requêtes aux fournisseurs jusqu’à la réception des vecteurs de représentation
-  et leur stockage dans vos collections. Pour la recherche sémantique, il vous
-  suffit de fournir les données brutes de la requête, et non un vecteur de
-  requête. Milvus génère le vecteur de requête à l'aide du même modèle que celui
-  utilisé pour l'ingestion, le compare aux vecteurs stockés et renvoie les
-  résultats les plus pertinents.
+  textuelles brutes en représentations vectorielles en faisant automatiquement
+  appel à des fournisseurs de services d’embedding externes (tels que OpenAI,
+  AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function », vous
+  n’avez plus besoin d’interagir manuellement avec les API d’encodage : Milvus
+  gère l’intégralité du processus, depuis l’envoi des requêtes aux fournisseurs
+  jusqu’à la réception des vecteurs d’encodage et leur stockage dans vos
+  collections. Pour la recherche sémantique, il vous suffit de fournir les
+  données brutes de la requête, et non un vecteur de requête. Milvus génère le
+  vecteur de requête à l'aide du même modèle que celui utilisé pour l'ingestion,
+  le compare aux vecteurs stockés et renvoie les résultats les plus pertinents.
 beta: Milvus 2.6.x
 ---
 <h1 id="Embedding-Function-Overview" class="common-anchor-header">Présentation de la fonction d'intégration<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#Embedding-Function-Overview" class="anchor-icon" translate="no">
@@ -31,7 +30,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Le module « Function » de Milvus vous permet de transformer des données textuelles brutes en représentations vectorielles en appelant automatiquement des fournisseurs de services d’embedding externes (tels que OpenAI, AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function », vous n’avez plus besoin d’interagir manuellement avec les API d’embedding : Milvus gère l’intégralité du processus, depuis l’envoi des requêtes aux fournisseurs jusqu’à la réception des embeddings et leur stockage dans vos collections. Pour la recherche sémantique, il vous suffit de fournir les données brutes de la requête, et non un vecteur de requête. Milvus génère le vecteur de requête à l’aide du même modèle que celui utilisé pour l’ingestion, le compare aux vecteurs stockés et renvoie les résultats les plus pertinents.</p>
+    </button></h1><p>Le module « Function » de Milvus vous permet de transformer des données textuelles brutes en représentations vectorielles en appelant automatiquement des fournisseurs de services d’embedding externes (tels que OpenAI, AWS Bedrock, Google Vertex AI, etc.). Grâce au module « Function », vous n’avez plus besoin d’interagir manuellement avec les API d’encodage : Milvus gère l’intégralité du processus, depuis l’envoi des requêtes aux fournisseurs jusqu’à la réception des vecteurs d’encodage et leur stockage dans vos collections. Pour la recherche sémantique, il vous suffit de fournir les données brutes de la requête, et non un vecteur de requête. Milvus génère le vecteur de requête à l’aide du même modèle que celui utilisé pour l’ingestion, le compare aux vecteurs stockés et renvoie les résultats les plus pertinents.</p>
 <h2 id="Limits" class="common-anchor-header">Contraintes<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +48,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>Tout champ d’entrée que le module Function intègre doit toujours contenir une valeur ; si une valeur nulle est fournie, le module génère une erreur.</p></li>
-<li><p>Le module Function traite uniquement les champs explicitement définis dans le schéma de la collection ; il ne génère pas d’embeddings pour les champs dynamiques.</p></li>
+<li><p>Le module Function traite uniquement les champs explicitement définis dans le schéma de la collection ; il ne génère pas de représentations pour les champs dynamiques.</p></li>
 <li><p>Les champs d’entrée à encoder doivent être de type « <code translate="no">VARCHAR</code> ».</p></li>
 <li><p>Le module « Function » peut intégrer un champ d’entrée pour :</p>
 <ul>
@@ -162,10 +161,10 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le diagramme suivant illustre le fonctionnement de la fonction dans Milvus.</p>
+    </button></h2><p>Le schéma suivant illustre le fonctionnement de la fonction dans Milvus.</p>
 <ol>
 <li><p><strong>Texte d'entrée</strong>: les utilisateurs insèrent des données brutes (par exemple, des documents) dans Milvus.</p></li>
-<li><p><strong>Génération d’embeddings</strong>: le module « Function » de Milvus appelle automatiquement le fournisseur de modèles configuré pour convertir les données brutes en embeddings vectoriels.</p></li>
+<li><p><strong>Génération d’embeddings</strong>: le module de la fonction au sein de Milvus appelle automatiquement le fournisseur de modèles configuré pour convertir les données brutes en embeddings vectoriels.</p></li>
 <li><p><strong>Stockage des représentations</strong>: les représentations obtenues sont stockées dans des champs vectoriels explicitement définis au sein des collections Milvus.</p></li>
 <li><p><strong>Texte de requête</strong>: les utilisateurs soumettent des requêtes textuelles à Milvus.</p></li>
 <li><p><strong>Recherche sémantique</strong>: Milvus convertit en interne les requêtes en représentations vectorielles, effectue des recherches de similarité par rapport aux représentations stockées et récupère les résultats pertinents.</p></li>
@@ -174,7 +173,7 @@ beta: Milvus 2.6.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/embedding-function-overview.png" alt="Embedding Function Overview" class="doc-image" id="embedding-function-overview" /> 
-   <span>Présentation de la fonction d’embedding</span>
+   <span>Présentation de la fonction d’encodage</span>
   
  </span></p>
 <h2 id="Configure-credentials" class="common-anchor-header">Configurer les identifiants<button data-href="#Configure-credentials" class="anchor-icon" translate="no">
@@ -193,7 +192,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h2><p>Avant d'utiliser une fonction d'encodage avec Milvus, configurez les identifiants du service d'encodage pour permettre l'accès à Milvus.</p>
-<p>Milvus vous permet de fournir les identifiants du service de représentation de deux manières :</p>
+<p>Milvus vous permet de fournir les identifiants du service de représentation vectorielle de deux manières :</p>
 <ul>
 <li><p><strong>Fichier de configuration</strong> (<code translate="no">milvus.yaml</code>) :</p>
 <p>L'exemple présenté dans cette rubrique illustre la <strong>configuration recommandée</strong> à l'aide du fichier <code translate="no">milvus.yaml</code>.</p></li>
@@ -204,10 +203,10 @@ beta: Milvus 2.6.x
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/credential-config-overflow.png" alt="Credential Config Overflow" class="doc-image" id="credential-config-overflow" /> 
-   <span>Configuration des identifiants dans Overflow</span>
+   <span>Configuration des identifiants Overflow</span>
   
  </span></p>
-<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Étape 1 : Ajouter les informations d’authentification au fichier de configuration de Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
+<h3 id="Step-1-Add-credentials-to-Milvus-configuration-file" class="common-anchor-header">Étape 1 : Ajouter les identifiants au fichier de configuration de Milvus<button data-href="#Step-1-Add-credentials-to-Milvus-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,7 +314,7 @@ beta: Milvus 2.6.x
 <li><p><strong>Un champ scalaire</strong> qui stocke les données brutes à intégrer.</p></li>
 <li><p>Un <strong>champ vectoriel</strong> réservé au stockage des représentations vectorielles que la fonction générera pour le champ scalaire.</p></li>
 </ul>
-<p>L'exemple suivant définit un schéma comportant un champ scalaire <code translate="no">&quot;document&quot;</code> destiné à stocker des données textuelles et un champ vectoriel <code translate="no">&quot;dense&quot;</code> destiné à stocker les représentations qui seront générées par le module Function. N'oubliez pas de définir la dimension vectorielle (<code translate="no">dim</code>) afin qu'elle corresponde à la sortie du modèle de représentation que vous avez choisi.</p>
+<p>L'exemple suivant définit un schéma comportant un champ scalaire <code translate="no">&quot;document&quot;</code> destiné à stocker des données textuelles et un champ vectoriel <code translate="no">&quot;dense&quot;</code> destiné à stocker les représentations vectorielles qui seront générées par le module Function. N'oubliez pas de définir la dimension vectorielle (<code translate="no">dim</code>) afin qu'elle corresponde à la sortie du modèle de représentation que vous avez choisi.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -345,15 +344,133 @@ schema.add_field(<span class="hljs-string">&quot;document&quot;</span>, DataType
 <span class="hljs-comment"># For dense vector, data type can be FLOAT_VECTOR or INT8_VECTOR</span>
 schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FLOAT_VECTOR, dim=<span class="hljs-number">1536</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+<span class="hljs-comment">// Initialize Milvus client</span>
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+
+<span class="hljs-comment">// Create a new schema for the collection</span>
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
+
+<span class="hljs-comment">// Add primary field &quot;id&quot;</span>
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .build());
+
+<span class="hljs-comment">// Add scalar field &quot;document&quot; for storing textual data</span>
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;document&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">9000</span>)
+        .build());
+
+<span class="hljs-comment">// Add vector field &quot;dense&quot; for storing embeddings.</span>
+<span class="hljs-comment">// IMPORTANT: Set dimension to match the exact output dimension of the embedding model.</span>
+<span class="hljs-comment">// For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
+<span class="hljs-comment">// For dense vector, data type can be FloatVector or Int8Vector</span>
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;dense&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">1536</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Initialize Milvus client</span>
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+});
+
+<span class="hljs-comment">// Define the fields of the collection schema</span>
+<span class="hljs-keyword">const</span> schema = [
+    <span class="hljs-comment">// Primary field &quot;id&quot;</span>
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;id&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">Int64</span>,
+        <span class="hljs-attr">is_primary_key</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">autoID</span>: <span class="hljs-literal">false</span>,
+    },
+    <span class="hljs-comment">// Scalar field &quot;document&quot; for storing textual data</span>
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;document&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
+        <span class="hljs-attr">max_length</span>: <span class="hljs-number">9000</span>,
+    },
+    <span class="hljs-comment">// Vector field &quot;dense&quot; for storing embeddings.</span>
+    <span class="hljs-comment">// IMPORTANT: Set dim to match the exact output dimension of the embedding model.</span>
+    <span class="hljs-comment">// For instance, OpenAI&#x27;s text-embedding-3-small model outputs 1536-dimensional vectors.</span>
+    <span class="hljs-comment">// For dense vector, data type can be FloatVector or Int8Vector</span>
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+        <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">FloatVector</span>,
+        <span class="hljs-attr">dim</span>: <span class="hljs-number">1536</span>,
+    },
+];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;demo&quot;</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">9000</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">1536</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    &quot;autoID&quot;: false,
+    &quot;enableDynamicField&quot;: false,
+    &quot;fields&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;id&quot;,
+            &quot;dataType&quot;: &quot;Int64&quot;,
+            &quot;isPrimary&quot;: true
+        },
+        {
+            &quot;fieldName&quot;: &quot;document&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: 9000
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;dense&quot;,
+            &quot;dataType&quot;: &quot;FloatVector&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: 1536
+            }
+        }
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter la fonction d’embedding au schéma<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
+<h3 id="Step-2-Add-embedding-function-to-schema" class="common-anchor-header">Étape 2 : Ajouter une fonction d’embedding au schéma<button data-href="#Step-2-Add-embedding-function-to-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,7 +486,7 @@ schema.add_field(<span class="hljs-string">&quot;dense&quot;</span>, DataType.FL
         ></path>
       </svg>
     </button></h3><p>Le module « Function » de Milvus convertit automatiquement les données brutes stockées dans un champ scalaire en représentations et les stocke dans le champ vectoriel explicitement défini.</p>
-<p>L'exemple ci-dessous ajoute un module « Function » (<code translate="no">openai_embedding</code>) qui convertit le champ scalaire « <code translate="no">&quot;document&quot;</code> » en représentations, en stockant les vecteurs résultants dans le champ vectoriel « <code translate="no">&quot;dense&quot;</code> » défini précédemment.</p>
+<p>L’exemple ci-dessous ajoute un module « Function » (<code translate="no">openai_embedding</code>) qui convertit le champ scalaire « <code translate="no">&quot;document&quot;</code> » en représentations, puis stocke les vecteurs résultants dans le champ vectoriel « <code translate="no">&quot;dense&quot;</code> » défini précédemment.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -396,13 +513,79 @@ text_embedding_function = Function(
 <span class="hljs-comment"># Add the embedding function to your schema</span>
 schema.add_function(text_embedding_function)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-keyword">import</span> io.milvus.common.clientenum.FunctionType;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+<span class="hljs-comment">// Define embedding function (example: OpenAI provider)</span>
+<span class="hljs-type">Function</span> <span class="hljs-variable">textEmbeddingFunction</span> <span class="hljs-operator">=</span> Function.builder()
+        .name(<span class="hljs-string">&quot;openai_embedding&quot;</span>)                                <span class="hljs-comment">// Unique identifier for this embedding function</span>
+        .functionType(FunctionType.TEXTEMBEDDING)                <span class="hljs-comment">// Type of embedding function</span>
+        .inputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))  <span class="hljs-comment">// Scalar field to embed</span>
+        .outputFieldNames(Collections.singletonList(<span class="hljs-string">&quot;dense&quot;</span>))    <span class="hljs-comment">// Vector field to store embeddings</span>
+        <span class="hljs-comment">// Provider-specific configuration (highest priority)</span>
+        .param(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;openai&quot;</span>)                             <span class="hljs-comment">// Embedding model provider</span>
+        .param(<span class="hljs-string">&quot;model_name&quot;</span>, <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)           <span class="hljs-comment">// Embedding model</span>
+        <span class="hljs-comment">// .param(&quot;credential&quot;, &quot;apikey1&quot;)                       // Optional: Credential label</span>
+        <span class="hljs-comment">// Optional parameters:</span>
+        <span class="hljs-comment">// .param(&quot;dim&quot;, &quot;1536&quot;)                                 // Optionally shorten the vector dimension</span>
+        <span class="hljs-comment">// .param(&quot;user&quot;, &quot;user123&quot;)                             // Optional: identifier for API tracking</span>
+        .build();
+
+<span class="hljs-comment">// Add the embedding function to your schema</span>
+schema.addFunction(textEmbeddingFunction);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FunctionType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Define embedding function (example: OpenAI provider)</span>
+<span class="hljs-comment">// Pass these functions to createCollection() together with the schema fields</span>
+<span class="hljs-keyword">const</span> functions = [
+    {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;openai_embedding&quot;</span>,                 <span class="hljs-comment">// Unique identifier for this embedding function</span>
+        <span class="hljs-attr">type</span>: <span class="hljs-title class_">FunctionType</span>.<span class="hljs-property">TEXTEMBEDDING</span>,         <span class="hljs-comment">// Type of embedding function</span>
+        <span class="hljs-attr">input_field_names</span>: [<span class="hljs-string">&quot;document&quot;</span>],          <span class="hljs-comment">// Scalar field to embed</span>
+        <span class="hljs-attr">output_field_names</span>: [<span class="hljs-string">&quot;dense&quot;</span>],            <span class="hljs-comment">// Vector field to store embeddings</span>
+        <span class="hljs-attr">params</span>: {                                 <span class="hljs-comment">// Provider-specific configuration (highest priority)</span>
+            <span class="hljs-attr">provider</span>: <span class="hljs-string">&quot;openai&quot;</span>,                   <span class="hljs-comment">// Embedding model provider</span>
+            <span class="hljs-attr">model_name</span>: <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>, <span class="hljs-comment">// Embedding model</span>
+            <span class="hljs-comment">// credential: &quot;apikey1&quot;,             // Optional: Credential label</span>
+            <span class="hljs-comment">// Optional parameters:</span>
+            <span class="hljs-comment">// dim: &quot;1536&quot;,                       // Optionally shorten the vector dimension</span>
+            <span class="hljs-comment">// user: &quot;user123&quot;,                   // Optional: identifier for API tracking</span>
+        },
+    },
+];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+
+embeddingFunction := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;openai_embedding&quot;</span>).
+    WithType(entity.FunctionTypeTextEmbedding).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;dense&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;openai&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;model_name&quot;</span>, <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)
+
+schema.WithFunction(embeddingFunction)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> embeddingFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;openai_embedding&quot;,
+    &quot;type&quot;: &quot;TextEmbedding&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [
+        &quot;dense&quot;
+    ],
+    &quot;params&quot;: {
+        &quot;provider&quot;: &quot;openai&quot;,
+        &quot;model_name&quot;: &quot;text-embedding-3-small&quot;
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -417,22 +600,22 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>Type de fonction utilisé. Pour l'embedding de texte, définissez la valeur sur <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Remarque</strong>: Milvus accepte les valeurs « <code translate="no">FunctionType.BM25</code> » (pour la transformation par plongement clairsemé) et « <code translate="no">FunctionType.RERANK</code> » (pour le reclassement) pour ce paramètre. Reportez-vous aux sections « <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a> » et « <a href="/docs/fr/decay-ranker-overview.md">Présentation du Decay Ranker</a> » pour plus de détails.</p></td>
+     <td><p>Type de fonction utilisé. Pour l'intégration de texte, définissez la valeur sur <code translate="no">FunctionType.TEXTEMBEDDING</code>.</p><p><strong>Remarque</strong>: Milvus accepte les valeurs « <code translate="no">FunctionType.BM25</code> » (pour la transformation par plongement clairsemé) et « <code translate="no">FunctionType.RERANK</code> » (pour le reclassement) pour ce paramètre. Reportez-vous aux sections « <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a> » et « <a href="/docs/fr/decay-ranker-overview.md">Présentation du Decay Ranker</a> » pour plus de détails.</p></td>
      <td><p><code translate="no">FunctionType.TEXTEMBEDDING</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>Champ scalaire contenant les données brutes à vectoriser. Actuellement, ce paramètre n’accepte qu’un seul nom de champ.</p></td>
+     <td><p>Champ scalaire contenant les données brutes à vectoriser. Actuellement, ce paramètre n'accepte qu'un seul nom de champ.</p></td>
      <td><p><code translate="no">["document"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
-     <td><p>Champ vectoriel destiné au stockage des représentations générées. Actuellement, ce paramètre n’accepte qu’un seul nom de champ.</p></td>
+     <td><p>Champ vectoriel destiné au stockage des représentations générées. Actuellement, ce paramètre n'accepte qu'un seul nom de champ.</p></td>
      <td><p><code translate="no">["dense"]</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">params</code></p></td>
-     <td><p>Dictionnaire contenant les configurations d’encodage. Remarque : les paramètres de « <code translate="no">params</code> » varient en fonction des fournisseurs de modèles d’encodage.</p></td>
+     <td><p>Dictionnaire contenant les configurations d’embedding. Remarque : les paramètres de « <code translate="no">params</code> » varient en fonction des fournisseurs de modèles d’embedding.</p></td>
      <td><p><code translate="no">{...}</code></p></td>
    </tr>
    <tr>
@@ -447,12 +630,12 @@ schema.add_function(text_embedding_function)
    </tr>
    <tr>
      <td><p><code translate="no">credential</code></p></td>
-     <td><p>L'étiquette d'un identifiant défini dans la section de niveau supérieur « <code translate="no">credential:</code> » de <code translate="no">milvus.yaml</code>. </p><ul><li><p>Lorsqu’il est fourni, Milvus récupère la paire de clés ou le jeton API correspondant et signe la requête côté serveur.</p></li><li><p>Si ce paramètre est omis (<code translate="no">None</code>), Milvus utilise par défaut les informations d’authentification explicitement configurées pour le fournisseur de modèle cible dans <code translate="no">milvus.yaml</code>.</p></li><li><p>Si l'étiquette est inconnue ou si la clé référencée est manquante, l'appel échoue.</p></li></ul></td>
+     <td><p>L'étiquette d'un identifiant défini dans la section de niveau supérieur « <code translate="no">credential:</code> » de <code translate="no">milvus.yaml</code>. </p><ul><li><p>Lorsqu’il est fourni, Milvus récupère la paire de clés ou le jeton API correspondant et signe la requête côté serveur.</p></li><li><p>Lorsqu’elle est omise (<code translate="no">None</code>), Milvus utilise par défaut les informations d’authentification explicitement configurées pour le fournisseur de modèle cible dans <code translate="no">milvus.yaml</code>.</p></li><li><p>Si l'étiquette est inconnue ou si la clé référencée est manquante, l'appel échoue.</p></li></ul></td>
      <td><p><code translate="no">"apikey1"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">dim</code></p></td>
-     <td><p>Nombre de dimensions des représentations de sortie. Pour les modèles de troisième génération d’OpenAI, vous pouvez raccourcir le vecteur complet afin de réduire les coûts et la latence sans perte significative d’informations sémantiques. Pour plus d’informations, consultez <a href="https://openai.com/blog/new-embedding-models-and-api-updates">l’article de blog d’OpenAI annonçant cette fonctionnalité</a>.</p><p><strong>Remarque :</strong> si vous réduisez la dimension du vecteur, assurez-vous que la valeur « <code translate="no">dim</code> » spécifiée dans la méthode ` <code translate="no">add_field</code> ` du schéma pour le champ vectoriel correspond à la dimension de sortie finale de votre fonction d’embedding.</p></td>
+     <td><p>Nombre de dimensions des représentations de sortie. Pour les modèles de troisième génération d’OpenAI, vous pouvez raccourcir le vecteur complet afin de réduire les coûts et la latence sans perte significative d’informations sémantiques. Pour plus d’informations, consultez <a href="https://openai.com/blog/new-embedding-models-and-api-updates">l’article de blog d’OpenAI</a>.</p><p><strong>Remarque :</strong> si vous réduisez la dimension du vecteur, assurez-vous que la valeur « <code translate="no">dim</code> » spécifiée dans la méthode ` <code translate="no">add_field</code> ` du schéma pour le champ vectoriel corresponde à la dimension de sortie finale de votre fonction d’embedding.</p></td>
      <td><p><code translate="no">"1536"</code></p></td>
    </tr>
    <tr>
@@ -479,7 +662,7 @@ schema.add_function(text_embedding_function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l’index de votre collection. Pour simplifier ce processus, utilisez l’option « <code translate="no">AUTOINDEX</code> » comme <code translate="no">index_type</code>, ce qui permet à Milvus de choisir et de configurer le type d’index le plus adapté en fonction de la structure de vos données.</p>
+    </button></h3><p>Après avoir défini le schéma avec les champs nécessaires et la fonction intégrée, configurez l’index de votre collection. Pour simplifier ce processus, utilisez l’ <code translate="no">AUTOINDEX</code> comme <code translate="no">index_type</code>, une option qui permet à Milvus de choisir et de configurer le type d’index le plus adapté en fonction de la structure de vos données.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -497,13 +680,48 @@ index_params.add_index(
     metric_type=<span class="hljs-string">&quot;COSINE&quot;</span> 
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+
+<span class="hljs-comment">// Prepare index parameters</span>
+List&lt;IndexParam&gt; indexes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
+<span class="hljs-comment">// Add AUTOINDEX to automatically select optimal indexing method</span>
+indexes.add(IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;dense&quot;</span>)
+        .indexType(IndexParam.IndexType.AUTOINDEX)
+        .metricType(IndexParam.MetricType.COSINE)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">IndexType</span>, <span class="hljs-title class_">MetricType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
+
+<span class="hljs-comment">// Prepare index parameters</span>
+<span class="hljs-comment">// Add AUTOINDEX to automatically select optimal indexing method</span>
+<span class="hljs-keyword">const</span> index_params = [
+    {
+        <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+        <span class="hljs-attr">index_type</span>: <span class="hljs-title class_">IndexType</span>.<span class="hljs-property">AUTOINDEX</span>,
+        <span class="hljs-attr">metric_type</span>: <span class="hljs-title class_">MetricType</span>.<span class="hljs-property">COSINE</span>,
+    },
+];
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;demo&quot;</span>, <span class="hljs-string">&quot;dense&quot;</span>, index.NewAutoIndex(entity.COSINE))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+    {
+        &quot;fieldName&quot;: &quot;dense&quot;,
+        &quot;indexName&quot;: &quot;dense&quot;,
+        &quot;metricType&quot;: &quot;COSINE&quot;,
+        &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+    }
+]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Create-collection" class="common-anchor-header">Étape 4 : Créer une collection<button data-href="#Step-4-Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -535,13 +753,60 @@ client.create_collection(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// Create collection named &quot;demo&quot;</span>
+client.createCollection(CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Create collection named &quot;demo&quot;</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-attr">schema</span>: schema,
+    <span class="hljs-attr">functions</span>: functions,
+    <span class="hljs-attr">index_params</span>: index_params,
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;demo&quot;</span>, schema).
+    WithIndexOptions(indexOption))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;demo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+request=$(jq -n --argjson schema <span class="hljs-string">&quot;<span class="hljs-variable">$schema</span>&quot;</span> --argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$embeddingFunction</span>&quot;</span> --argjson indexParams <span class="hljs-string">&quot;<span class="hljs-variable">$indexParams</span>&quot;</span> <span class="hljs-string">&#x27;{
+    collectionName: &quot;demo&quot;,
+    schema: ($schema + {functions: [$fn]}),
+    indexParams: $indexParams
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;demo&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-5-Insert-data" class="common-anchor-header">Étape 5 : Insérer les données<button data-href="#Step-5-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -573,13 +838,68 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
     {<span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;document&#x27;</span>: <span class="hljs-string">&#x27;Semantic search helps users find relevant information quickly.&#x27;</span>},
 ])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+
+<span class="hljs-comment">// Insert sample documents</span>
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+List&lt;JsonObject&gt; rows = Arrays.asList(
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 1, \&quot;document\&quot;: \&quot;Milvus simplifies semantic search through embeddings.\&quot;}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 2, \&quot;document\&quot;: \&quot;Vector embeddings convert text into searchable numeric data.\&quot;}&quot;</span>, JsonObject.class),
+        gson.fromJson(<span class="hljs-string">&quot;{\&quot;id\&quot;: 3, \&quot;document\&quot;: \&quot;Semantic search helps users find relevant information quickly.\&quot;}&quot;</span>, JsonObject.class)
+);
+
+client.insert(InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo&quot;</span>)
+        .data(rows)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Insert sample documents</span>
+<span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-attr">data</span>: [
+        { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">document</span>: <span class="hljs-string">&quot;Milvus simplifies semantic search through embeddings.&quot;</span> },
+        { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">document</span>: <span class="hljs-string">&quot;Vector embeddings convert text into searchable numeric data.&quot;</span> },
+        { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">document</span>: <span class="hljs-string">&quot;Semantic search helps users find relevant information quickly.&quot;</span> },
+    ],
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;demo&quot;</span>).
+    WithColumns(
+        column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>}),
+        column.NewColumnVarChar(<span class="hljs-string">&quot;document&quot;</span>, []<span class="hljs-type">string</span>{
+            <span class="hljs-string">&quot;Milvus simplifies semantic search through embeddings.&quot;</span>,
+            <span class="hljs-string">&quot;Vector embeddings convert text into searchable numeric data.&quot;</span>,
+            <span class="hljs-string">&quot;Semantic search helps users find relevant information quickly.&quot;</span>,
+        }),
+    ))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;demo&quot;,
+    &quot;data&quot;: [
+        {&quot;id&quot;: 1, &quot;document&quot;: &quot;Milvus simplifies semantic search through embeddings.&quot;},
+        {&quot;id&quot;: 2, &quot;document&quot;: &quot;Vector embeddings convert text into searchable numeric data.&quot;},
+        {&quot;id&quot;: 3, &quot;document&quot;: &quot;Semantic search helps users find relevant information quickly.&quot;}
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-6-Perform-vector-search" class="common-anchor-header">Étape 6 : Effectuer une recherche vectorielle<button data-href="#Step-6-Perform-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -596,7 +916,7 @@ client.insert(<span class="hljs-string">&#x27;demo&#x27;</span>, [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Une fois les données insérées, effectuez une recherche sémantique à l’aide du texte brut de votre requête. Milvus convertit automatiquement votre requête en vecteur d’encodage, récupère les documents pertinents en fonction de leur similarité et renvoie les résultats les plus pertinents.</p>
+    </button></h3><p>Une fois les données insérées, effectuez une recherche sémantique à l’aide du texte brut de votre requête. Milvus convertit automatiquement votre requête en un vecteur d’encodage, récupère les documents pertinents en fonction de leur similarité et renvoie les résultats les plus pertinents.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -618,13 +938,65 @@ results = client.search(
 <span class="hljs-comment"># Example output:</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.8821347951889038, &#x27;entity&#x27;: {&#x27;document&#x27;: &#x27;Milvus simplifies semantic search through embeddings.&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+
+<span class="hljs-comment">// Perform semantic search</span>
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">results</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;How does Milvus handle semantic search?&quot;</span>))) <span class="hljs-comment">// Use text query rather than query vector</span>
+        .annsField(<span class="hljs-string">&quot;dense&quot;</span>)   <span class="hljs-comment">// Use the vector field that stores embeddings</span>
+        .limit(<span class="hljs-number">1</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;document&quot;</span>))
+        .build());
+
+System.out.println(results.getSearchResults());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Perform semantic search</span>
+<span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;How does Milvus handle semantic search?&quot;</span>], <span class="hljs-comment">// Use text query rather than query vector</span>
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,   <span class="hljs-comment">// Use the vector field that stores embeddings</span>
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;document&quot;</span>],
+});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(results.<span class="hljs-property">results</span>);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-number">1</span>,
+    []entity.Vector{entity.Text(<span class="hljs-string">&quot;How does Milvus handle semantic search?&quot;</span>)},
+).WithANNSField(<span class="hljs-string">&quot;dense&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;demo&quot;,
+    &quot;data&quot;: [&quot;How does Milvus handle semantic search?&quot;],
+    &quot;annsField&quot;: &quot;dense&quot;,
+    &quot;limit&quot;: 1,
+    &quot;outputFields&quot;: [&quot;document&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour plus d’informations sur les opérations de recherche et de requête, consultez la section « <a href="/docs/fr/single-vector-search.md">Recherche vectorielle</a> et <a href="/docs/fr/get-and-scalar-query.md">requêtes</a> <a href="/docs/fr/single-vector-search.md">de base</a> ».</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -700,7 +1072,7 @@ results = client.search(
 <li>Vérifier que la longueur du champ vectoriel correspond aux dimensions attendues</li>
 <li>Effectuant une simple recherche de similarité pour vérifier que les représentations produisent des résultats pertinents</li>
 </ol>
-<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Lorsque j'effectue une recherche par similarité, puis-je utiliser un vecteur de requête plutôt que du texte brut ?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
+<h3 id="When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="common-anchor-header">Lorsque j'effectue une recherche de similarité, puis-je utiliser un vecteur de requête plutôt que du texte brut ?<button data-href="#When-I-perform-a-similarity-search-can-I-use-a-query-vector-rather-than-raw-text" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -715,7 +1087,7 @@ results = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui, vous pouvez utiliser des vecteurs de requête précalculés à la place du texte brut pour la recherche par similarité. Bien que le module de fonction convertisse automatiquement les requêtes en texte brut en représentations vectorielles, vous pouvez également fournir directement des données vectorielles au paramètre « <code translate="no">data</code> » de votre opération de recherche. <strong>Remarque</strong>: la taille des dimensions de votre vecteur de requête fourni doit correspondre à celle des vecteurs d’embeddings générés par votre module de fonction.</p>
+    </button></h3><p>Oui, vous pouvez utiliser des vecteurs de requête précalculés à la place du texte brut pour la recherche de similarité. Bien que le module de fonction convertisse automatiquement les requêtes en texte brut en représentations vectorielles, vous pouvez également fournir directement des données vectorielles au paramètre « <code translate="no">data</code> » de votre opération de recherche. <strong>Remarque</strong>: la taille des dimensions de votre vecteur de requête doit correspondre à celle des vecteurs d’embeddings générés par votre module de fonction.</p>
 <p><strong>Exemple</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -741,11 +1113,99 @@ results = client.search(
     limit=<span class="hljs-number">1</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.Collections;
+
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
+
+<span class="hljs-comment">// Using raw text (Function module converts automatically)</span>
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">textResults</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;How does Milvus handle semantic search?&quot;</span>)))
+        .annsField(<span class="hljs-string">&quot;dense&quot;</span>)
+        .limit(<span class="hljs-number">1</span>)
+        .build());
+
+<span class="hljs-comment">// Using pre-computed query vector (must match stored vector dimensions)</span>
+<span class="hljs-type">float</span>[] queryVector = <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span> <span class="hljs-comment">/* ... */</span>};  <span class="hljs-comment">// Must be same dimension as stored embeddings</span>
+<span class="hljs-type">SearchResp</span> <span class="hljs-variable">vectorResults</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo&quot;</span>)
+        .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(queryVector)))
+        .annsField(<span class="hljs-string">&quot;dense&quot;</span>)
+        .limit(<span class="hljs-number">1</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// Using raw text (Function module converts automatically)</span>
+<span class="hljs-keyword">const</span> textResults = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;How does Milvus handle semantic search?&quot;</span>],
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">1</span>,
+});
+
+<span class="hljs-comment">// Using pre-computed query vector (must match stored vector dimensions)</span>
+<span class="hljs-keyword">const</span> query_vector = [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span> <span class="hljs-comment">/* ... */</span>];  <span class="hljs-comment">// Must be same dimension as stored embeddings</span>
+<span class="hljs-keyword">const</span> vectorResults = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-attr">data</span>: [query_vector],
+    <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;dense&quot;</span>,
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">1</span>,
+});
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// Raw text: the embedding function converts the query automatically</span>
+textResults, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-number">1</span>,
+    []entity.Vector{entity.Text(<span class="hljs-string">&quot;How does Milvus handle semantic search?&quot;</span>)},
+).WithANNSField(<span class="hljs-string">&quot;dense&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-comment">// Pre-computed vector: yourQueryVector must have the same dimension as the stored embeddings</span>
+vectorResults, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;demo&quot;</span>,
+    <span class="hljs-number">1</span>,
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(textResults, vectorResults)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Raw text: the embedding function converts the query automatically</span>
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;demo&quot;,
+    &quot;data&quot;: [&quot;How does Milvus handle semantic search?&quot;],
+    &quot;annsField&quot;: &quot;dense&quot;,
+    &quot;limit&quot;: 1
+}&#x27;</span>
+
+<span class="hljs-comment"># Pre-computed vector: QUERY_VECTOR is a JSON array with the same dimension as the stored embeddings</span>
+request=$(jq -n --argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> <span class="hljs-string">&#x27;{
+    collectionName: &quot;demo&quot;,
+    data: [$vec],
+    annsField: &quot;dense&quot;,
+    limit: 1
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

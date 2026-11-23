@@ -72,10 +72,10 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">backup.gcPause.address</code></td><td><code translate="no">milvus.management.endpoint</code></td></tr>
 </tbody>
 </table>
-<p>設定ファイルと同じ変更で環境変数を確認してください。V2では、<code translate="no">MILVUS_STORAGE_AUTH_SECRET_ACCESS_KEY</code> など、サポートされている認証情報関連の環境変数のみを受け付けます。旧バージョンのv1の名称はv2ファイルには適用されません。バケット名やエンドポイントなどの認証情報以外の設定については、YAMLまたは設定キーによる上書きを使用してください：</p>
+<p>設定ファイルと同じ変更内で環境変数を確認してください。V2では、<code translate="no">MILVUS_STORAGE_AUTH_SECRET_ACCESS_KEY</code> など、サポートされている認証情報関連の環境変数のみを受け付けます。旧バージョンのv1の名称はv2ファイルには適用されません。バケット名やエンドポイントなどの認証情報以外の設定については、YAMLまたは設定キーによる上書きを使用してください：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup-v2.yaml --set milvus.storage.bucketName=my-bucket
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">config migrate</code> 影響を受ける環境変数を報告しますが、そのシークレット値を出力ファイルにはコピーしません。<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">サポートされている v2 環境変数を</a>参照してください。<code translate="no">config show</code> は、非推奨となった<code translate="no">check config</code> コマンドに代わるものです。</p>
+<p><code translate="no">config migrate</code> 影響を受ける環境変数を報告しますが、そのシークレット値を出力ファイルにコピーすることはありません。<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/env_variables.md">サポートされている v2 環境変数を</a>参照してください。<code translate="no">config show</code> は、非推奨となった<code translate="no">check config</code> コマンドに代わるものです。</p>
 <h2 id="Update-CLI-commands" class="common-anchor-header">CLI コマンドの更新<button data-href="#Update-CLI-commands" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,7 +114,7 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup create --filter coll -n my_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_bak -n my_backup -s _bak --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>何も一致しない復元フィルターは、コレクションを作成せずに正常に終了することがあります。常にターゲットコレクションとそのデータを確認してください。HTTP APIの<code translate="no">collection_names</code> は、バックアップ内のソース名を依然として選択します。<a href="/docs/ja/milvus_backup_0_6_api.md#Restore-data">詳細はHTTP APIガイドを</a>参照してください。</p>
+<p>何も一致しない復元フィルターは、コレクションを作成せずに正常に終了することがあります。必ずターゲットコレクションとそのデータを確認してください。HTTP APIの<code translate="no">collection_names</code> は、バックアップ内のソース名を依然として選択します。<a href="/docs/ja/milvus_backup_0_6_api.md#Restore-data">詳細はHTTP APIガイドを</a>参照してください。</p>
 <h2 id="Choose-the-backup-behavior" class="common-anchor-header">バックアップの動作を選択する<button data-href="#Choose-the-backup-behavior" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,10 +131,10 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h2><ul>
-<li>サポートされている Milvus 2.x サーバーでは、<code translate="no">auto</code> 形式は binlog を使用します。バックアップのアップグレードには、Milvus 3.0 への移行は必要ありません。</li>
+<li>サポートされている Milvus 2.x サーバーでは、<code translate="no">auto</code> 形式は binlog を使用します。バックアップのアップグレードに、Milvus 3.0 への移行は必要ありません。</li>
 <li>Milvus 3.0 では、<code translate="no">auto</code> はスナップショットを選択します。バックアップおよび復元の公式サポートは Milvus 3.0.1 から開始されます。バックアップ作成時に binlog の動作を維持するには、<code translate="no">--format binlog</code> を指定してください。</li>
 <li>V1の設定との互換性では、削除されたコマンドフラグは保持されず、新しいフォーマットのデフォルト設定も上書きされません。</li>
-<li>「目的」プリセットでは、フォーマットやその他のオプションを設定できます。たとえば、<code translate="no">--for archive</code> を指定すると、<code translate="no">--format snapshot</code> も指定されている場合でも、binlog が強制的に使用されます。<a href="/docs/ja/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">フォーマットと目的の選択内容</a>を確認してください。</li>
+<li>「目的」プリセットでは、フォーマットやその他のオプションを設定できます。たとえば、<code translate="no">--for archive</code> を指定すると、<code translate="no">--format snapshot</code> も指定されている場合でも、binlogが強制的に使用されます。<a href="/docs/ja/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">フォーマットと目的の選択内容</a>を確認してください。</li>
 <li>バックアップ中は外部コレクションはスキップされます。タスクが成功したからといってすべてのコレクションが含まれたとみなすのではなく、バックアップのメタデータを確認してください。</li>
 </ul>
 <h2 id="Validate-before-switching-jobs" class="common-anchor-header">ジョブを切り替える前に検証を行う<button data-href="#Validate-before-switching-jobs" class="anchor-icon" translate="no">
@@ -163,5 +163,5 @@ beta: Milvus Backup 0.6.x
 <pre><code translate="no" class="language-shell">./milvus-backup get -n legacy_backup --config configs/backup-v2.yaml
 ./milvus-backup restore --filter coll_legacy_check -n legacy_backup -s _legacy_check --config configs/backup-v2.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>これらのアップグレードパスは、<strong>Milvus 2.6.11</strong>、バックアップ<strong>0.5.16 → 0.6.0</strong>、および MinIO 内の binlog バックアップを使用して検証されました。新規に作成されたバックアップと既存のバックアップのいずれも、エンティティ値およびベクトル検索結果が一致して復元されました。 ただし、これはすべての過去のバックアップや、Milvus 2.x から 3.0 への復元における互換性を保証するものではありません。また、0.5.x が 0.6.0 で作成されたバックアップを読み込めることを保証するものでもありません。</p>
+<p>これらのアップグレードパスは、<strong>Milvus 2.6.11</strong>、バックアップ<strong>0.5.16 → 0.6.0</strong>、および MinIO 内の binlog バックアップを使用して検証されました。新規に作成されたバックアップと既存のバックアップの両方について、エンティティ値およびベクトル検索結果が一致して復元されました。 ただし、これはすべての過去のバックアップや、Milvus 2.x から 3.0 への復元における互換性を保証するものではありません。また、0.5.x が 0.6.0 で作成されたバックアップを読み取れることを保証するものでもありません。</p>
 <p>検証に成功したら、新しいバイナリ、確認済みの構成、環境設定、および置換フラグを組み合わせて使用するようにジョブを更新してください。API デプロイメントの場合は、確認済みの構成で新しいサービスを起動し、<a href="/docs/ja/milvus_backup_0_6_api.md">HTTP API</a> を通じてタスクの完了を確認してください。Milvus 3.0.1 以降でスナップショットを採用するには、「<a href="/docs/ja/snapshot-backup-and-restore.md">1 つのインスタンスでのスナップショットのバックアップと復元</a>」の手順に従ってください。</p>

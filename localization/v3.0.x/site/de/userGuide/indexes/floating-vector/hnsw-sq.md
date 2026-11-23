@@ -56,7 +56,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>HNSW erstellt einen mehrschichtigen Graphen, in dem jeder Knoten einem Vektor im Datensatz entspricht. In diesem Graphen sind die Knoten anhand ihrer Ähnlichkeit miteinander verbunden, was eine schnelle Durchquerung des Datenraums ermöglicht. Die hierarchische Struktur ermöglicht es dem Suchalgorithmus, die Anzahl der in Frage kommenden Nachbarn einzugrenzen, was den Suchprozess in hochdimensionalen Räumen erheblich beschleunigt.</p>
+    </button></h3><p>HNSW erstellt einen mehrschichtigen Graphen, in dem jeder Knoten einem Vektor im Datensatz entspricht. In diesem Graphen sind die Knoten entsprechend ihrer Ähnlichkeit miteinander verbunden, was eine schnelle Durchquerung des Datenraums ermöglicht. Die hierarchische Struktur ermöglicht es dem Suchalgorithmus, die Anzahl der in Frage kommenden Nachbarn einzugrenzen, was den Suchprozess in hochdimensionalen Räumen erheblich beschleunigt.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/hnsw.md">HNSW</a>.</p>
 <h3 id="SQ" class="common-anchor-header">SQ<button data-href="#SQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +104,7 @@ summary: >-
 <p>Das „U“ in SQ4U steht für „Uniform“ (gleichmäßig). Im Gegensatz zur nicht-gleichmäßigen Skalarquantisierung, bei der Minimal- und Maximalwerte typischerweise für jede Dimension unabhängig voneinander berechnet werden (dimensionale Quantisierung), wendet SQ4U eine <strong>globale gleichmäßige Quantisierungsstrategie</strong> an:</p>
 <ol>
 <li><p><strong>Globale Statistik</strong>: Das System berechnet einen <strong>einzigen</strong> Minimalwert <code translate="no">vmin</code> und einen <strong>einzigen</strong> Wertebereich <code translate="no">vdiff</code>, der für <strong>alle Dimensionen</strong> des Vektors (oder des gesamten Vektorsegments) gilt.</p></li>
-<li><p><strong>Einheitliche Zuordnung</strong>: Der globale Wertebereich wird in 16 gleiche Intervalle unterteilt. Jeder Gleitkommawert im Vektor wird – unabhängig davon, zu welcher Dimension er gehört – mithilfe dieser gemeinsamen Parameter auf eine 4-Bit-Ganzzahl (0–15) abgebildet.</p></li>
+<li><p><strong>Einheitliche Zuordnung</strong>: Der globale Wertebereich wird in 16 gleich große Intervalle unterteilt. Jeder Gleitkommawert im Vektor wird – unabhängig davon, zu welcher Dimension er gehört – mithilfe dieser gemeinsamen Parameter auf eine 4-Bit-Ganzzahl (0–15) abgebildet.</p></li>
 </ol>
 <p><strong>Leistungsvorteile:</strong></p>
 <ul>
@@ -182,7 +182,7 @@ index_params.add_index(
 <ul>
 <li><p><code translate="no">index_type</code>: Der Typ des zu erstellenden Index. Setzen Sie den Wert in diesem Beispiel auf „ <code translate="no">HNSW_SQ</code> “.</p></li>
 <li><p><code translate="no">metric_type</code>: Die Methode zur Berechnung des Abstands zwischen Vektoren. Zu den unterstützten Werten gehören „ <code translate="no">COSINE</code> “, „ <code translate="no">L2</code> “ und „ <code translate="no">IP</code> “. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">„Metriktypen</a>“.</p></li>
-<li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Erstellung des Index. Weitere Informationen finden Sie unter <a href="/docs/de/hnsw-sq.md#Index-building-params">„Parameter für die Indexerstellung</a>“.</p></li>
+<li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Indexerstellung. Weitere Informationen finden Sie unter <a href="/docs/de/hnsw-sq.md#Index-building-params">„Parameter für die Indexerstellung</a>“.</p></li>
 </ul>
 <p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode „ <code translate="no">create_index()</code> “ direkt aufrufen oder die Indexparameter an die Methode „ <code translate="no">create_collection</code> “ übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">„Sammlung erstellen</a>“.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
@@ -279,7 +279,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">sq_type</code></p></td>
      <td><p>Legt die skalare Quantisierungsmethode für die Komprimierung von Vektoren fest. Jede Option bietet ein anderes Gleichgewicht zwischen Komprimierung und Genauigkeit:</p><ul><li><p><code translate="no">SQ4U</code>: Kodiert Vektoren mithilfe einer einheitlichen 4-Bit-Quantisierung. Dieser Modus bietet die höchste Geschwindigkeit und Komprimierung.</p></li><li><p><code translate="no">SQ6</code>: Kodiert Vektoren mit 6-Bit-Ganzzahlen.</p></li><li><p><code translate="no">SQ8</code>: Kodiert Vektoren mit 8-Bit-Ganzzahlen.</p></li><li><p><code translate="no">BF16</code>: Verwendet das Bfloat16-Format.</p></li><li><p><code translate="no">FP16</code>: Verwendet das standardmäßige 16-Bit-Gleitkommaformat.</p></li></ul></td>
      <td><p><strong>Typ</strong>: Zeichenfolge</p><p><strong>Bereich</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>Standardwert</strong>: <code translate="no">SQ8</code></p></td>
-     <td><p>Die Wahl von <code translate="no">sq_type</code> hängt von den spezifischen Anforderungen der Anwendung ab. <code translate="no">SQ4U</code> wird für maximale Geschwindigkeit und Speichereffizienz gewählt. <code translate="no">SQ6</code> oder <code translate="no">SQ8</code> könnten für eine ausgewogene Leistung geeignet sein. Ist hingegen Genauigkeit von größter Bedeutung, könnten <code translate="no">BF16</code> oder <code translate="no">FP16</code> vorzuziehen sein.</p></td>
+     <td><p>Die Wahl von <code translate="no">sq_type</code> hängt von den spezifischen Anforderungen der Anwendung ab. <code translate="no">SQ4U</code> wird für maximale Geschwindigkeit und Speichereffizienz gewählt. <code translate="no">SQ6</code> oder <code translate="no">SQ8</code> könnten für eine ausgewogene Leistung geeignet sein. Ist hingegen Genauigkeit von größter Bedeutung, könnten <code translate="no">BF16</code> oder <code translate="no">FP16</code> bevorzugt werden.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -291,7 +291,7 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>Legt die Genauigkeit der für die Verfeinerung verwendeten Daten fest.</p><p>Diese Genauigkeit muss höher sein als die der komprimierten Vektoren (wie durch ` <code translate="no">sq_type</code>` festgelegt) und wirkt sich sowohl auf die Genauigkeit der neu sortierten Vektoren als auch auf deren Speicherbedarf aus.</p></td>
+     <td><p>Legt die Genauigkeit der für die Verfeinerung verwendeten Daten fest.</p><p>Diese Genauigkeit muss höher sein als die der komprimierten Vektoren (wie durch „ <code translate="no">sq_type</code> “ festgelegt) und wirkt sich sowohl auf die Genauigkeit der neu sortierten Vektoren als auch auf deren Speicherbedarf aus.</p></td>
      <td><p><strong>Typ</strong>: Zeichenfolge</p><p><strong>Bereich</strong>: [ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]</p><p><strong>Standardwert</strong>: Keine</p></td>
      <td><p>Verwenden Sie „ <code translate="no">FP32</code> “ für maximale Genauigkeit bei höherem Speicherbedarf oder „ <code translate="no">SQ6</code> “ bzw. „<code translate="no">SQ8</code> “ für eine bessere Komprimierung. „ <code translate="no">BF16</code> “ und „ <code translate="no">FP16</code> “ bieten eine ausgewogene Alternative.</p></td>
    </tr>
@@ -332,6 +332,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine_k</code></p></td>
      <td><p>Der Vergrößerungsfaktor, der steuert, wie viele zusätzliche Kandidaten während der Verfeinerungsphase im Verhältnis zu den angeforderten Top-K-Ergebnissen geprüft werden.</p></td>
      <td><p><strong>Typ</strong>: Float</p><p><strong>Bereich</strong>: [1, <em>float_max</em>)</p><p><strong>Standardwert</strong>: 1</p></td>
-     <td><p>Höhere Werte für „ <code translate="no">refine_k</code> “ können den Recall und die Genauigkeit verbessern, erhöhen jedoch auch die Suchzeit und den Ressourcenverbrauch. Ein Wert von 1 bedeutet, dass der Verfeinerungsprozess nur die ursprünglichen Top-K-Ergebnisse berücksichtigt.</p></td>
+     <td><p>Höhere Werte für „ <code translate="no">refine_k</code> “ können den Recall und die Genauigkeit verbessern, erhöhen jedoch auch die Suchzeit und den Ressourcenverbrauch. Ein Wert von 1 bedeutet, dass der Verfeinerungsprozess nur die anfänglichen Top-K-Ergebnisse berücksichtigt.</p></td>
    </tr>
 </table>

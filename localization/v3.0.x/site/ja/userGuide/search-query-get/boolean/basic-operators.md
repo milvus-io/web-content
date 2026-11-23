@@ -2,8 +2,8 @@
 id: basic-operators.md
 title: 基本的な演算子
 summary: >-
-  比較演算子、範囲演算子、算術演算子、論理演算子、およびNULL演算子を使用して、エンティティをフィルタリングします。Milvus 3.0.3以降では、IS
-  NULLおよびIS NOT NULLも通常のベクトルフィールドに対応しています。
+  比較演算子、範囲演算子、算術演算子、論理演算子、およびNULL演算子を使用して、エンティティをフィルタリングします。Milvus 3.0.3以降では、「IS
+  NULL」および「IS NOT NULL」も通常のベクトルフィールドに対応しています。
 ---
 <h1 id="Basic-Operators" class="common-anchor-header">基本的な演算子<button data-href="#Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,10 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus では、エンティティのフィルタリングのために、比較演算子、範囲演算子、算術演算子、論理演算子、および NULL 演算子が提供されています。各演算子は、特定のフィールド型に対応しています。</p>
+    </button></h1><p>Milvus では、エンティティをフィルタリングするための比較演算子、範囲演算子、算術演算子、論理演算子、および NULL 演算子が提供されています。各演算子は、特定のフィールド型に対応しています。</p>
 <div class="alert note">
-<p>フィルタリング式の左辺にあるリテラルは、以下の例で使用されている<code translate="no">status</code> や<code translate="no">color</code> などのコレクションフィールド名、あるいは<code translate="no">filter = 'struct[0][subfield] &gt; 10'</code> のように特定の要素インデックスにあるStructArrayサブフィールド名のいずれかです。</p>
-<p>StructArray フィールドにおけるスカラーフィルタリングの詳細については、「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p>
+<p>左辺のオペランドは、<code translate="no">status</code> のようなコレクションフィールド、または<code translate="no">struct[0][subfield] &gt; 10</code> のような特定の要素インデックスにある StructArray のサブフィールドにすることができます。「<a href="/docs/ja/struct-array-operators.md">StructArray 演算子</a>」を参照してください。</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">比較演算子<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -121,7 +120,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">status</code> が「inactive」でないエンティティを検索するには：</p>
+    </button></h3><p><code translate="no">status</code> が「inactive」ではないエンティティを検索するには：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -359,7 +358,6 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>これは、値のリストへの所属を確認したい場合に役立ちます。</p>
 <h2 id="Pattern-matching-operators" class="common-anchor-header">パターンマッチング演算子<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -379,7 +377,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">LIKE</code>: 文字列値に対する単純なワイルドカードパターンに一致させるために使用されます。たとえば、<code translate="no">name LIKE &quot;Prod%&quot;</code> は、<code translate="no">Prod</code> で始まる値に一致します。</p></li>
 <li><p><code translate="no">=~</code>: 文字列値を RE2 正規表現と照合するために使用します。たとえば、<code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> は、<code translate="no">E1001</code> のようなエラーコードを含む値に一致します。</p></li>
-<li><p><code translate="no">!~</code>: RE2正規表現に一致する文字列値を除外するために使用します。これは、<code translate="no">NOT (field =~ &quot;pattern&quot;)</code> と同等です。</p></li>
+<li><p><code translate="no">!~</code>: RE2正規表現に一致する文字列値を除外するために使用します。これは `<code translate="no">NOT (field =~ &quot;pattern&quot;)</code>` と同等です。</p></li>
 </ul>
 <p><code translate="no">name</code> の先頭が<code translate="no">Prod</code> で始まるエンティティを検索するには：</p>
 <div class="multipleCode">
@@ -462,7 +460,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">LIKE</code> と正規表現の選択、サポートされているフィールドタイプ、正規表現の構文、エスケープ規則、およびパフォーマンスに関する詳細については、<a href="/docs/ja/pattern-matching.md">「パターンマッチング</a>」を参照してください。Milvusでは、<code translate="no">VARCHAR</code> フィールドまたはJSON文字列パスに対して<code translate="no">NGRAM</code> インデックスを構築し、対象となるパターンマッチングフィルターを高速化することも可能です。詳細については、<a href="/docs/ja/ngram.md">「NGRAM」</a>を参照してください。</p>
+<p>構文、エスケープ、フィールドのサポート、および<code translate="no">NGRAM</code> などの高速化オプションについては、「<a href="/docs/ja/pattern-matching.md">パターンマッチング</a>」を参照してください。</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">算術演算子<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -759,6 +757,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>論理演算子は、複数の条件をより複雑なフィルタ式に組み合わせるために使用されます。これには、<code translate="no">AND</code> 、<code translate="no">OR</code> 、および<code translate="no">NOT</code> が含まれます。</p>
+<div class="alert note">
+<p>各条件では、それぞれに適したインデックスまたはスキャンパスを使用できます。1つのインデックスタイプで式全体を処理する必要はありません。「<a href="/docs/ja/scalar_index.md">スカラーインデックス</a>」を参照してください。</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">サポートされている論理演算子<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -775,11 +776,11 @@ summary: >-
         ></path>
       </svg>
     </button></h3><ul>
-<li><p><code translate="no">AND</code>: 複数の条件を組み合わせ、それらすべてが真でなければならない。</p></li>
+<li><p><code translate="no">AND</code>: 複数の条件を組み合わせ、それらがすべて真でなければならない。</p></li>
 <li><p><code translate="no">OR</code>: 少なくとも1つが真である必要がある条件を組み合わせます。</p></li>
 <li><p><code translate="no">NOT</code>: 条件を否定します。</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">例 1: `<code translate="no">AND</code> ` を使用して条件を組み合わせる<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">例 1: `<code translate="no">AND</code> ` を使用して条件を結合する<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -920,7 +921,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">IS NULL</code> および<code translate="no">IS NOT NULL</code> を使用すると、フィールド値が欠落している、または利用可能なエンティティを検索できます。たとえば、カテゴリがない商品や、検索可能な状態の埋め込みデータを持つエンティティを検索できます。どちらの演算子も、サポートされているスカラーおよびベクトルフィールドで動作し、意味は同じです:</p>
+    </button></h2><p><code translate="no">IS NULL</code> および<code translate="no">IS NOT NULL</code> を使用すると、フィールド値が欠落している、または利用可能なエンティティを検索できます。たとえば、カテゴリがない商品や、検索可能な状態の埋め込みデータを持つエンティティを検索できます。両方の演算子は、サポートされているスカラーおよびベクトルフィールドで機能し、意味は同じです:</p>
 <table>
 <thead>
 <tr><th>演算子</th><th>一致条件</th></tr>
@@ -931,7 +932,7 @@ summary: >-
 </tbody>
 </table>
 <p>サポートされているスカラーフィールドには、Boolean、numeric、<code translate="no">VARCHAR</code> 、<code translate="no">JSON</code> 、および<code translate="no">ARRAY</code> フィールドが含まれます。<a href="/docs/ja/text.md">これらの演算子はTEXTフィールドをサポート</a>していません。</p>
-<p>Milvus 3.0.3 以降、これらの演算子は通常のベクトルフィールドもサポートするようになりました：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 、および<code translate="no">INT8_VECTOR</code> 。</p>
+<p>Milvus 3.0.3 以降、これらの演算子は通常のベクトル型フィールドもサポートするようになりました：<code translate="no">FLOAT_VECTOR</code> 、<code translate="no">BINARY_VECTOR</code> 、<code translate="no">FLOAT16_VECTOR</code> 、<code translate="no">BFLOAT16_VECTOR</code> 、<code translate="no">SPARSE_FLOAT_VECTOR</code> 、および<code translate="no">INT8_VECTOR</code> 。</p>
 <p>演算子は大文字小文字を区別しません。つまり、<code translate="no">IS NULL</code> と<code translate="no">is null</code> は同等であり、<code translate="no">IS NOT NULL</code> と<code translate="no">is not null</code> も同様です。</p>
 <h3 id="Example-Find-entities-with-missing-or-available-values" class="common-anchor-header">例：値が欠落している、または利用可能なエンティティを検索する<button data-href="#Example-Find-entities-with-missing-or-available-values" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -948,7 +949,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">products</code> という名前のコレクションがインデックス化され、読み込まれていると仮定します。このコレクションには、<code translate="no">INT64</code> 型の主キー<code translate="no">id</code> 、NULL 許容の<code translate="no">VARCHAR</code> フィールド<code translate="no">category</code> 、および NULL 許容の 3 次元<code translate="no">FLOAT_VECTOR</code> フィールド<code translate="no">embedding</code> があります。このコレクションには、すでに以下のエンティティが含まれています：</p>
+    </button></h3><p><code translate="no">products</code> という名前のコレクションが、Milvus 3.0.3 以降でインデックス化され、読み込まれているものと仮定します。このコレクションには、<code translate="no">id</code> という名前の<code translate="no">INT64</code> プライマリキー、<code translate="no">category</code> という名前の null 許容の<code translate="no">VARCHAR</code> フィールド、および<code translate="no">embedding</code> という名前の null 許容の 3 次元<code translate="no">FLOAT_VECTOR</code> フィールドがあります。このコレクションには、すでに以下のエンティティが含まれています：</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1163,7 +1164,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>演算子は、保存されたフィールド値をチェックします。デフォルト値のないNULL許容フィールドの場合、挿入時にそのフィールドを省略するか、明示的にNULLに設定すると、NULLが保存されます。設定されたデフォルト値によって、保存される値が変わる場合があります。詳細については、「<a href="/docs/ja/default-values.md">NULL</a> <a href="/docs/ja/nullable-and-default.md">許容フィールドと</a> <a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>
+    </button></h3><p>演算子は、保存されたフィールド値を確認します。デフォルト値のないNULL許容フィールドの場合、挿入時にそのフィールドを省略するか、明示的にNULLに設定すると、NULLが保存されます。設定されたデフォルト値によって、保存される値が変わる場合があります。詳細については、「<a href="/docs/ja/default-values.md">NULL許容</a> <a href="/docs/ja/nullable-and-default.md">フィールドと</a> <a href="/docs/ja/default-values.md">デフォルト値</a>」を参照してください。</p>
 <table>
 <thead>
 <tr><th>フィールド型</th><th>NULL の挙動</th></tr>
@@ -1171,12 +1172,15 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tbody>
 <tr><td><code translate="no">VARCHAR</code></td><td>空の文字列 `<code translate="no">&quot;&quot;</code> ` は NULL 以外の値です。</td></tr>
 <tr><td><code translate="no">JSON</code></td><td>フィールド全体がNULL値の場合、<code translate="no">IS NULL</code> と一致します。<code translate="no">{&quot;category&quot;: null}</code> のようなJSONオブジェクトは、内部の値がNULLであっても非NULLです。</td></tr>
-<tr><td><code translate="no">ARRAY</code></td><td>フィールド全体の値が NULL の場合、<code translate="no">IS NULL</code> と一致します。個々の要素は NULL にできません。また、<code translate="no">IS NULL</code> や<code translate="no">IS NOT NULL</code> では、<code translate="no">tags[0]</code> のような配列要素へのアクセスはサポートされていません。「<a href="/docs/ja/array_data_type.md">配列フィールド</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>フィールド全体の値が NULL の場合、<code translate="no">IS NULL</code> と一致します。個々の要素は NULL にできず、<code translate="no">IS NULL</code> /<code translate="no">IS NOT NULL</code> は、<code translate="no">tags[0]</code> のような配列要素へのアクセスをサポートしていません。「<a href="/docs/ja/array_data_type.md">配列フィールド</a>」を参照してください。</td></tr>
 <tr><td>通常のベクトル型</td><td>NULLは、ベクトルの値が存在しないことを意味します。成分がすべてゼロのベクトルはNULLではありません。</td></tr>
 </tbody>
 </table>
 <p><code translate="no">nullable=False</code> で定義されたサポート対象のフィールドの場合、<code translate="no">IS NULL</code> はどのエンティティにも一致せず、<code translate="no">IS NOT NULL</code> はすべての可視エンティティに一致します。フィルタ内のその他の条件は引き続き適用されます。</p>
-<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">ベクトル検索でのNULLフィルターの使用<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>スカラーNULLフィルタは、適格なインデックスまたはフィールドデータからの有効性情報を使用します。特定のスカラーインデックス型を必要としません。NULL不可のフィールドは、定数の結果を生成することがあります。</p>
+</div>
+<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">ベクトル検索でのNULLフィルタの使用<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1191,11 +1195,11 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>検索フィルターでも同じ演算子を使用できますが、類似性検索の対象となるには、エンティティが検索対象のフィールドにベクトルを持っている必要があります。</p>
-<p>上記のサンプルデータを用いて、<code translate="no">anns_field=&quot;embedding&quot;</code> を使用した検索について考えてみましょう：</p>
+    </button></h3><p>検索フィルターでは同じ演算子を使用できますが、類似度検索に参加するには、エンティティが検索対象のフィールドにベクトルを持っている必要があります。</p>
+<p>上記のサンプルデータを用いて、<code translate="no">anns_field=&quot;embedding&quot;</code> による検索を考えてみましょう：</p>
 <table>
 <thead>
-<tr><th>フィルタ式</th><th>類似度検索の対象となるエンティティ</th><th>理由</th></tr>
+<tr><th>フィルタ式</th><th>類似性検索の対象となるエンティティ</th><th>理由</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>エンティティ「<code translate="no">2</code> 」にはカテゴリがありませんが、「<code translate="no">embedding</code> 」というベクトルがあります。</td></tr>
@@ -1203,8 +1207,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>,<code translate="no">2</code></td><td>両方のエンティティに<code translate="no">embedding</code> ベクトルがあります。</td></tr>
 </tbody>
 </table>
-<p>3つのフィルタはすべて有効です。<code translate="no">embedding</code> と<code translate="no">embedding IS NULL</code> による検索では、両方の要件を満たすエンティティが存在しないため、ヒットは返されません。埋め込みデータが欠落しているエンティティを取得するには、前述のように<code translate="no">query()</code> を使用してください。</p>
-<p>ベクトル検索では、検索対象のベクトルフィールドがNULLであるエンティティはすでに除外されるため、<code translate="no">embedding IS NOT NULL</code> を指定しても、<code translate="no">embedding</code> での検索候補がさらに絞り込まれることはありません。どの候補が返されるかは、ランキング、その他のフィルター、および検索制限によって決定されます。</p>
+<p>欠落している埋め込みを取得するには、<code translate="no">query()</code> を使用してください。<code translate="no">embedding</code> での<code translate="no">embedding IS NULL</code> による検索は有効ですが、ヒットは返されません。ベクトル検索ではすでに NULL の埋め込みがスキップされるため、<code translate="no">embedding IS NOT NULL</code> を使用しても候補はさらに絞り込まれません。ランキング、その他のフィルター、および検索制限によって、返されるヒットが決定されます。</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">JSONおよびARRAYフィールドでの基本演算子の使用に関するヒント<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1220,8 +1223,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusの基本演算子は汎用性が高く、スカラーフィールドに適用できるだけでなく、JSONフィールドやARRAYフィールドのキーやインデックスに対しても効果的に使用できます。</p>
-<p>たとえば、<code translate="no">price</code> 、<code translate="no">model</code> 、<code translate="no">tags</code> といった複数のキーを含む<code translate="no">product</code> フィールドがある場合、常にキーを直接参照してください：</p>
+    </button></h2><p>式内でJSONキーまたはARRAY要素を直接参照します。たとえば、<code translate="no">product</code> という名前のJSONフィールド内の<code translate="no">price</code> キーをフィルタリングするには：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1248,7 +1250,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;product[&quot;price&quot;] &gt; 1000&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>記録された温度の配列のうち、最初の温度が特定の値を超えるレコードを検索するには、次のようにします:</p>
+<p>記録された温度の配列のうち、最初の温度が特定の値を超えるレコードを検索するには、次のようにします：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1275,22 +1277,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">まとめ<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvusは、データのフィルタリングやクエリ実行において柔軟性を提供する、さまざまな基本演算子を備えています。比較演算子、範囲演算子、算術演算子、論理演算子を組み合わせることで、強力なフィルタ式を作成し、検索結果を絞り込み、必要なデータを効率的に取得することができます。</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1306,6 +1293,6 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>フィルタ条件における一致値リストの長さに制限はありますか（例：filter=’color in ["red", "green", “blue”]’）？リストが長すぎる場合はどうすればよいですか？</strong></p>
-<p>Milvus では、フィルタ条件における一致値リストの長さに制限を設けていません。ただし、リストが過度に長いと、クエリのパフォーマンスに大きな影響を与える可能性があります。
+    </button></h2><p><strong>フィルタ条件（例: filter='color in ["red", "green", "blue"]'）における一致値リストの長さに制限はありますか？リストが長すぎる場合はどうすればよいですか？</strong></p>
+<p>Milvusでは、フィルタ条件における一致値リストの長さに制限を設けていません。ただし、リストが過度に長いと、クエリのパフォーマンスに大きな影響を与える可能性があります。
 フィルタ条件に長い一致値リストや、多くの要素を含む複雑な式が含まれている場合は、クエリのパフォーマンスを向上させるために、<a href="/docs/ja/filtering-templating.md">フィルタテンプレートの</a>使用をお勧めします。</p>

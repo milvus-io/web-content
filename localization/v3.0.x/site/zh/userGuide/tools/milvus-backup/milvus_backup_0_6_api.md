@@ -53,7 +53,7 @@ beta: Milvus Backup 0.6.x
       </svg>
     </button></h2><p>请参考<a href="/docs/zh/milvus_backup_0_6_cli.md#Prepare-configuration-file">“准备配置文件</a>”中的 v2 示例创建 `<code translate="no">configs/backup.yaml</code> `<a href="/docs/zh/milvus_backup_0_6_cli.md#Prepare-configuration-file">文件</a>。配置对 Milvus、实例存储以及备份目标的访问权限。此外，Milvus 服务器还必须能够访问备份存储以执行快照操作。</p>
 <p>如果您已有 v1 配置文件，该文件仍可加载。在更改其 Schema 或环境变量之前，请参阅<a href="/docs/zh/milvus_backup_upgrade.md#Migrate-the-configuration">《迁移配置》</a>。</p>
-<p>在包含二进制文件的目录下，检查配置并验证连接性：</p>
+<p>在包含二进制文件的目录下，检查配置并验证连接状态：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
 ./milvus-backup check --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -137,13 +137,13 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">4</code></td><td>超时</td></tr>
 </tbody>
 </table>
-<p>请同时检查响应和任务状态。仅凭 HTTP 200 状态码是不够的：非零的响应<code translate="no">code</code> 表示出现错误。成功的响应可以省略<code translate="no">code</code> ，因为其值为零。如果任务失败或超时，请在从该备份恢复之前检查响应详细信息和服务器日志。</p>
+<p>请同时检查响应和任务状态。仅凭 HTTP 200 状态码是不够的：非零的响应<code translate="no">code</code> 表示发生错误。成功的响应可以省略<code translate="no">code</code> ，因为其值为零。如果任务失败或超时，请在从该备份恢复之前检查响应详细信息和服务器日志。</p>
 <p>列出已存储的备份，并按名称检查已完成的备份：</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">get_backup</code> 该命令返回包含<code translate="no">collection_backups</code> 的 JSON 元数据；它<strong>不会</strong>下载备份文件。对于由其他进程创建的备份，仅按名称查询会返回元数据，但不包含实时任务进度。监控正在进行的备份时，请使用当前服务创建响应中的任务 ID。</p>
-<p>默认格式为<code translate="no">auto</code> ，这在 Milvus 3.0 上会选择快照。若要显式请求二进制日志，请在 create 请求主体中添加<code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> 。CLI 中的<code translate="no">--for</code> 预设值并非 HTTP 请求字段。</p>
+<p>默认格式为<code translate="no">auto</code> ，这在 Milvus 3.0 上会选择快照。若要显式请求二进制日志，请在 create 请求主体中添加<code translate="no">&quot;format&quot;: &quot;binlog&quot;</code> 。CLI 中的<code translate="no">--for</code> 预设并非 HTTP 请求字段。</p>
 <p>若要保留或迁移备份，请将整个目录复制到对象存储中。请参阅<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">0.6.0</a> 版本的<a href="https://github.com/zilliztech/milvus-backup/blob/v0.6.0/docs/user_guide/transfer.md">传输指南</a>。</p>
 <h2 id="Restore-data" class="common-anchor-header">恢复数据<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -174,7 +174,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <p>从恢复响应中复制<code translate="no">data.id</code> ，并轮询该任务：</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>等待<code translate="no">data.state_code: 2</code> 状态更新，并访问<code translate="no">collection_restore_tasks</code> 检查目标 Collection 是否符合预期。已提交的任务并不代表恢复操作已通过验证。</p>
+<p>等待<code translate="no">data.state_code: 2</code> 出现，并访问<code translate="no">collection_restore_tasks</code> 检查预期目标集合。已提交的任务并不代表恢复操作已通过验证。</p>
 <h3 id="Restore-with-the-original-name" class="common-anchor-header">使用原始名称进行恢复<button data-href="#Restore-with-the-original-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -190,7 +190,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>请选择一个不存在<code translate="no">coll</code> 的目标实例。启动一个单独的备份 API 服务（该服务需针对该目标及已完成的备份位置进行配置），然后向该目标服务发送以下请求：</p>
+    </button></h3><p>请使用一个不存在<code translate="no">coll</code> 的目标实例。启动一个单独的备份 API 服务（该服务已针对该目标和已完成的备份位置进行配置），然后向该目标服务发送以下请求：</p>
 <pre><code translate="no" class="language-shell">curl --request POST &#x27;http://localhost:8080/api/v1/restore&#x27; \
   --header &#x27;Content-Type: application/json&#x27; \
   --data &#x27;{

@@ -3,8 +3,8 @@ id: config_jaeger_tracing.md
 title: Настройка трассировки
 related_key: 'Jaeger, Milvus, Trace'
 summary: >-
-  В этом руководстве приведены инструкции по настройке Jaeger для сбора трасс
-  для Milvus.
+  В данном руководстве приведены инструкции по настройке Jaeger для сбора
+  трассировок для Milvus.
 ---
 <h1 id="Configure-Trace" class="common-anchor-header">Настройка трассировки<button data-href="#Configure-Trace" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>В этом руководстве приведены инструкции по настройке Jaeger для сбора трасс для Milvus.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Предварительные условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>В данном руководстве приведены инструкции по настройке Jaeger для сбора трассировок для Milvus.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,9 +39,8 @@ summary: >-
       </svg>
     </button></h2><ul>
 <li>У вас установлены необходимые инструменты, включая <a href="https://helm.sh/docs/intro/install/">Helm</a> и <a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>.</li>
-<li>Должен быть установлен Cert-manager версии 1.6.1 или выше. Руководство по установке можно найти <a href="https://cert-manager.io/v1.6-docs/installation/#default-static-install">здесь</a>.</li>
 </ul>
-<h2 id="Deply-Jaeger" class="common-anchor-header">Деплой Jaeger<button data-href="#Deply-Jaeger" class="anchor-icon" translate="no">
+<h2 id="Deploy-Jaeger" class="common-anchor-header">Развертывание Jaeger<button data-href="#Deploy-Jaeger" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,8 +55,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Jaeger - это платформа распределенной трассировки, выпущенная с открытым исходным кодом компанией <a href="http://uber.github.io/">Uber Technologies</a>.</p>
-<h3 id="1-Installing-the-Jaeger-Operator-on-Kubernetes" class="common-anchor-header">1. Установка оператора Jaeger на Kubernetes<button data-href="#1-Installing-the-Jaeger-Operator-on-Kubernetes" class="anchor-icon" translate="no">
+    </button></h2><p>Jaeger — это платформа распределенного трассирования, выпущенная компанией <a href="http://uber.github.io/">Uber Technologies</a> в виде открытого исходного кода.</p>
+<p>В данном руководстве описывается развертывание Jaeger v2 с помощью <a href="https://github.com/jaegertracing/helm-charts">диаграммы Helm для Jaeger</a>. По умолчанию диаграмма развертывает Jaeger по модели «все в одном» с хранением данных в оперативной памяти, что подходит для тестирования. О других способах запуска Jaeger в Kubernetes см. в разделе <a href="https://www.jaegertracing.io/docs/2.23/deployment/kubernetes/">«Развертывание в Kubernetes</a>».</p>
+<h3 id="1-Install-Jaeger" class="common-anchor-header">1. Установка Jaeger<button data-href="#1-Install-Jaeger" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,17 +72,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Чтобы установить оператор, выполните команду :</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create namespace observability</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability</span>
+    </button></h3><p>Установите Jaeger в том же пространстве имён, где установлен Milvus. Настройки Milvus, описанные в следующем разделе, ссылаются на сервис Jaeger по его краткому имени — <code translate="no">jaeger</code> — а Kubernetes разрешает имя сервиса без указания пространства имён только в пределах пространства имён того под, который выполняет запрос.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add jaegertracing https://jaegertracing.github.io/helm-charts</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm install jaeger jaegertracing/jaeger --version 4.19.0</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>На этом этапе должно быть доступно развертывание <code translate="no">jaeger-operator</code>. Вы можете просмотреть его, выполнив следующую команду:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get deployment jaeger-operator -n observability</span>
-
-NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-jaeger-operator   1         1         1            1           48s
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Развертывание Jaeger<button data-href="#2-Deploy-Jaeger" class="anchor-icon" translate="no">
+<p>В файле README чарта указано, что чарт является экспериментальным и что в второстепенных версиях могут происходить изменения, нарушающие совместимость, поэтому команда фиксирует версию чарта. Версия чарта 4.19.0 развертывает Jaeger 2.23.0.</p>
+<h3 id="2-Check-the-Jaeger-pod" class="common-anchor-header">2. Проверка работы пода Jaeger<button data-href="#2-Check-the-Jaeger-pod" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -97,23 +93,11 @@ jaeger-operator   1         1         1            1           48s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Самый простой способ создать экземпляр Jaeger - это создать YAML-файл, как показано в следующем примере. Это позволит установить стратегию AllInOne по умолчанию, которая развертывает образ <strong>"все в одном"</strong> (объединяющий <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> и Jaeger UI) в одной капсуле, по умолчанию использующей <strong>хранилище in-memory</strong>.</p>
-<p>Если вы хотите хранить трассы в течение длительного времени, обратитесь к <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">jaegertracing.io/v1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Jaeger</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">jaeger</span>
+    </button></h3><p>Чтобы убедиться, что под Jaeger работает, выполните следующую команду:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get pods -l app.kubernetes.io/instance=jaeger,app.kubernetes.io/component=all-in-one</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Затем YAML-файл можно использовать с помощью <code translate="no">kubectl</code>:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f simplest.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Через несколько секунд будет доступен новый in-memory all-in-one экземпляр Jaeger, подходящий для быстрых демонстраций и целей разработки. Чтобы проверить, какие экземпляры были созданы, перечислите объекты jaeger:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get jaegers</span>
-
-NAME     STATUS    VERSION   STRATEGY   STORAGE   AGE
-jaeger   Running   1.62.0    allinone   memory    13s
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Install-Milvus-with-Helm-Chart" class="common-anchor-header">Установите Milvus с помощью Helm Chart<button data-href="#Install-Milvus-with-Helm-Chart" class="anchor-icon" translate="no">
+<p>Чарт создаёт сервис с именем <code translate="no">jaeger</code>. Сервис предоставляет доступ к gRPC-приёмнику OTLP на порту <code translate="no">4317</code> и к пользовательскому интерфейсу Jaeger на порту <code translate="no">16686</code>.</p>
+<h2 id="Install-Milvus-with-Helm-Chart" class="common-anchor-header">Установка Milvus с помощью диаграммы Helm<button data-href="#Install-Milvus-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,24 +112,30 @@ jaeger   Running   1.62.0    allinone   memory    13s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Вы можете установить или обновить Milvus с Helm Chart с помощью следующих настроек:</p>
+    </button></h2><p>Чтобы отправлять трассировки из Milvus в Jaeger по OTLP, сохраните следующие настройки в файле с именем <code translate="no">values.yaml</code>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
     trace:
-      exporter: jaeger
+      exporter: otlp
       sampleFraction: 1
-      jaeger:
-        url: &quot;http://jaeger-collector:14268/api/traces&quot;
+      otlp:
+        endpoint: &quot;jaeger:4317&quot;
+        method: grpc
+        secure: false
 </span><button class="copy-code-btn"></button></code></pre>
-<p>Чтобы применить вышеуказанные настройки к новому развертыванию Milvus, можно выполнить следующую команду:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm</span>
+<p>С этими настройками Milvus отбирает образцы каждого запроса (<code translate="no">sampleFraction: 1</code>) и экспортирует трасы через OTLP gRPC без TLS (<code translate="no">secure: false</code>) на порт <code translate="no">4317</code> службы <code translate="no">jaeger</code>.</p>
+<p>Чтобы применить вышеуказанные настройки к новому развертыванию Milvus, выполните следующие команды:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm repo update</span>
-<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade --install -f values.yaml my-release milvus/milvus</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade --install my-release zilliztech/milvus --version 5.0.22 -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Чтобы применить вышеуказанные настройки к существующему развертыванию Milvus, можно выполнить следующую команду:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release -f values.yaml milvus/milvus</span>
+<p>Чтобы применить вышеуказанные настройки к существующему развертыванию Milvus, выполните следующую команду:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release zilliztech/milvus --version &lt;current-chart-version&gt; --reset-then-reuse-values -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="View-Traces" class="common-anchor-header">Просмотр трасс<button data-href="#View-Traces" class="anchor-icon" translate="no">
+<div class="alert note">
+<p>Эта команда использует параметр ` <code translate="no">--reset-then-reuse-values</code>`, для которого требуется Helm версии 3.14 или более поздней. С этим параметром Helm сбрасывает значения до значений по умолчанию для версии диаграммы, заданных в файле ` <code translate="no">--version</code>`, применяет значения вашего текущего релиза, а затем применяет значения из файла ` <code translate="no">-f</code>`. Таким образом, каждое значение в файле ` <code translate="no">values.yaml</code> ` переопределяет значение вашего текущего релиза, а запись ` <code translate="no">user.yaml</code> ` в файле ` <code translate="no">extraConfigFiles</code> ` заменяется целиком. Чтобы найти <code translate="no">&lt;current-chart-version&gt;</code>, запустите <code translate="no">helm list</code> и удалите префикс <code translate="no">milvus-</code> из значения в столбце <code translate="no">CHART</code>. Если вы запустите <code translate="no">helm upgrade</code> с <code translate="no">-f</code> или <code translate="no">--set</code>, но без <code translate="no">--reset-then-reuse-values</code> или <code translate="no">--reuse-values</code>, Helm не сохранит значения, которые вы установили во время установки.</p>
+</div>
+<h2 id="View-Traces" class="common-anchor-header">Просмотр трассировок<button data-href="#View-Traces" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,19 +150,20 @@ jaeger   Running   1.62.0    allinone   memory    13s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После развертывания Jaeger и Milvus с помощью Helm Chart вход в систему был включен с помощью dfault. Вы можете просмотреть ингресс, выполнив следующую команду:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get ingress</span>
-
-NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
-jaeger-query   &lt;none&gt;   *       192.168.122.34  80      14m
+    </button></h2><p>Служба <code translate="no">jaeger</code> имеет тип <code translate="no">ClusterIP</code>, и по умолчанию диаграмма не создает вход (ingress). Чтобы открыть интерфейс Jaeger с локального компьютера, перенаправьте порт интерфейса:</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward svc/jaeger 16686:16686</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>После того как ингресс доступен, вы можете получить доступ к пользовательскому интерфейсу Jaeger, перейдя по адресу <code translate="no">http://${ADDRESS}</code>. Замените <code translate="no">${ADDRESS}</code> на фактический IP-адрес ингресса.</p>
-<p>На следующем снимке экрана показан пользовательский интерфейс Jaeger с трассировками Milvus во время операции поиска и операции сбора нагрузки:</p>
-<p>
+<p>Затем откройте <code translate="no">http://localhost:16686</code> в браузере.</p>
+<p>На следующем снимке экрана показан интерфейс Jaeger с трассировками Milvus во время операции поиска и операции сбора нагрузки:</p>
+<p><span class="img-wrapper">
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" />
-   </span> <span class="img-wrapper"> <span>Трассировка запроса на поиск</span> </span></p>
-<p>
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG" alt="Trace Search Request" class="doc-image" id="trace-search-request" /> 
+   <span>Запрос на поиск трассировки</span>
   
-   <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
-   </span> <span class="img-wrapper"> <span>Трассировка запроса на сбор нагрузки</span> </span></p>
+ </span></p>
+<p><span class="img-wrapper">
+  
+   <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" /> 
+   <span>Трассировка запроса на сбор данных</span>
+  
+ </span></p>

@@ -2,12 +2,9 @@
 id: users_and_roles.md
 title: Membuat Pengguna & Peran
 summary: >-
-  Milvus menerapkan kontrol akses yang terperinci melalui RBAC. Anda dapat
-  memulainya dengan membuat pengguna dan peran, kemudian menetapkan hak akses
-  atau kelompok hak akses ke peran-peran tersebut, dan akhirnya mengelola
-  kontrol akses dengan memberikan peran kepada pengguna. Metode ini menjamin
-  efisiensi dan keamanan pengelolaan akses. Halaman ini menjelaskan cara membuat
-  pengguna dan peran di Milvus.
+  Milvus mengontrol akses melalui RBAC: hak akses diberikan kepada peran, dan
+  peran tersebut diberikan kepada pengguna. Halaman ini menjelaskan cara membuat
+  pengguna dan peran.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Membuat Pengguna &amp; Peran<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,8 +37,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah menginisialisasi instance Milvus, pengguna root akan dibuat secara otomatis untuk otentikasi saat terhubung ke Milvus untuk pertama kalinya. Nama pengguna root adalah <code translate="no">root</code> dan kata sandinya adalah <code translate="no">Milvus</code>. Peran default pengguna root adalah <code translate="no">admin</code>, yang memiliki akses ke semua sumber daya. Untuk memastikan keamanan data, harap simpan kredensial pengguna root Anda dengan aman untuk mencegah akses yang tidak sah.</p>
-<p>Untuk operasi sehari-hari, kami menyarankan Anda membuat pengguna baru daripada menggunakan pengguna root.</p>
+    </button></h2><p>Setelah menginisialisasi instance Milvus, pengguna root akan dibuat secara otomatis untuk otentikasi saat terhubung ke Milvus untuk pertama kalinya. Nama pengguna root adalah <code translate="no">root</code> dan kata sandinya adalah <code translate="no">Milvus</code>. Secara default, pengguna root tidak terikat pada peran apa pun dan melewati pemeriksaan hak akses, sehingga memiliki akses ke semua sumber daya. Pengaturan " <code translate="no">common.security.rootShouldBindRole</code> ", yang secara default bernilai " <code translate="no">false</code>", mengontrol perilaku ini. Untuk memastikan keamanan data, harap simpan kredensial pengguna root Anda dengan aman untuk mencegah akses yang tidak sah.</p>
+<p>Untuk operasi sehari-hari, kami menyarankan untuk membuat pengguna baru daripada menggunakan pengguna root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Buat pengguna<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,8 +56,8 @@ summary: >-
       </svg>
     </button></h3><p>Masuk sebagai <code translate="no">root</code> dan buat pengguna dengan nama pengguna <code translate="no">user_1</code> dan kata sandi <code translate="no">P@ssw0rd</code>. Saat memilih kredensial, ikuti aturan berikut:</p>
 <ul>
-<li><p>Nama pengguna: Harus dimulai dengan huruf dan hanya boleh berisi huruf besar atau kecil, angka, dan garis bawah.</p></li>
-<li><p>Kata sandi: Secara default, panjangnya harus 6–72 byte UTF-8. Deployment Anda mungkin mengonfigurasi <a href="/docs/id/authenticate.md#Password-requirements">batasan panjang kata sandi</a> yang berbeda.</p></li>
+<li><p>Nama pengguna: Harus dimulai dengan huruf atau garis bawah dan hanya boleh berisi huruf besar atau kecil, angka, garis bawah (<code translate="no">_</code>), serta karakter tambahan apa pun yang dikonfigurasi di <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> secara default).</p></li>
+<li><p>Kata sandi: Secara default, panjangnya harus 6–72 byte UTF-8. Penyebaran Anda mungkin mengonfigurasi <a href="/docs/id/authenticate.md#Password-requirements">batasan panjang kata sandi</a> yang berbeda.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -100,7 +97,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -293,7 +290,7 @@ client.list_users()
     </button></h3><p>Contoh berikut menunjukkan cara membuat peran bernama <code translate="no">role_a</code>.</p>
 <p>Nama peran harus mengikuti aturan berikut:</p>
 <ul>
-<li>Harus dimulai dengan huruf dan hanya boleh berisi huruf besar atau kecil, angka, dan garis bawah.</li>
+<li>Harus dimulai dengan huruf atau garis bawah dan hanya boleh berisi huruf besar atau kecil, angka, garis bawah, serta karakter-karakter dalam <code translate="no">proxy.roleNameValidation.allowedChars</code> (<code translate="no">$</code> secara default).</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -312,6 +309,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -347,7 +345,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Setelah membuat beberapa peran, Anda dapat menampilkan daftar dan melihat semua peran yang ada.</p>
+    </button></h3><p>Setelah membuat beberapa peran, Anda dapat menampilkan dan melihat semua peran yang ada.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -378,6 +376,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Di bawah ini adalah contoh hasilnya. ` <code translate="no">admin</code> ` adalah peran default di Milvus. ` <code translate="no">role_a</code> ` adalah peran baru yang baru saja dibuat.</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>Berikut adalah contoh hasilnya. <code translate="no">admin</code> dan <code translate="no">public</code> adalah peran default yang dibuat oleh Milvus. <code translate="no">role_a</code> adalah peran baru yang baru saja dibuat.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

@@ -4,7 +4,7 @@ title: Fonction MinHashCompatible with Milvus 3.0.x
 summary: >-
   Utilisez MinHash pour convertir du texte en vecteurs binaires en vue d'une
   recherche de similarité basée sur l'indice de Jaccard et de la détection de
-  quasi-duplicatas.
+  quasi-doublons.
 beta: Milvus 3.0.x
 ---
 <h1 id="MinHash-Function" class="common-anchor-header">Fonction MinHash<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 3.0.x</span><button data-href="#MinHash-Function" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>La fonction MinHash</strong> convertit du texte brut en <strong>vecteurs binaires</strong> qui fournissent une approximation de <a href="https://en.wikipedia.org/wiki/Jaccard_index">la similarité de Jaccard</a> entre les documents. Elle applique le découpage de texte (text shingling) et plusieurs fonctions de hachage pour produire des vecteurs de signature de longueur fixe, ce qui permet une détection rapide des quasi-doublons et une déduplication des documents à grande échelle.</p>
+    </button></h1><p><strong>La fonction MinHash</strong> convertit du texte brut en <strong>vecteurs binaires</strong> qui approximent <a href="https://en.wikipedia.org/wiki/Jaccard_index">la similarité de Jaccard</a> entre les documents. Elle applique le découpage de texte (text shingling) et plusieurs fonctions de hachage pour produire des vecteurs de signature de longueur fixe, ce qui permet une détection rapide des quasi-duplicatas et une déduplication des documents à grande échelle.</p>
 <p>En tant que fonction intégrée, MinHash s'exécute au sein de Milvus et ne nécessite ni inférence de modèle externe ni prétraitement. Il vous suffit d'insérer du texte brut pour que Milvus génère automatiquement les vecteurs de signature MinHash.</p>
 <h2 id="Limits" class="common-anchor-header">Contraintes<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ beta: Milvus 3.0.x
    <span>Iaqkbfeh8oqggsx6nsocfosondo</span>
   
  </span></p>
-<h3 id="Shared-text-processing-pipeline" class="common-anchor-header">Pipeline de traitement de texte partagé<button data-href="#Shared-text-processing-pipeline" class="anchor-icon" translate="no">
+<h3 id="Shared-text-processing-pipeline" class="common-anchor-header">Pipeline commun de traitement de texte<button data-href="#Shared-text-processing-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,7 +89,7 @@ beta: Milvus 3.0.x
 <li><p><strong>Analyse du texte</strong>: le texte est traité par un <a href="/docs/fr/analyzer-overview.md">analyseur</a> (lorsque <code translate="no">token_level</code> est <code translate="no">&quot;word&quot;</code>) ou utilisé directement (lorsque <code translate="no">token_level</code> est <code translate="no">&quot;char&quot;</code>). La tokenisation au niveau des mots applique l’analyseur configuré sur le champ d’entrée pour segmenter le texte en termes — par exemple, <code translate="no">&quot;milvus is vector db&quot;</code> devient <code translate="no">[&quot;milvus&quot;, &quot;is&quot;, &quot;vector&quot;, &quot;db&quot;]</code>.</p></li>
 <li><p><strong>Segmentation en « shingles »</strong>: les tokens sont divisés en n-grammes (shingles) qui se chevauchent, de taille <code translate="no">shingle_size</code>. Par exemple, avec des 3-grammes au niveau des mots, les tokens <code translate="no">[&quot;information&quot;, &quot;retrieval&quot;, &quot;is&quot;, &quot;a&quot;, &quot;field&quot;]</code> deviennent des shingles tels que <code translate="no">[&quot;information retrieval is&quot;, &quot;retrieval is a&quot;, &quot;is a field&quot;]</code>.</p></li>
 <li><p><strong>Génération de la signature MinHash</strong>: plusieurs fonctions de hachage (H1, H2, …, Hn, où n = <code translate="no">num_hashes</code>) sont appliquées à l’ensemble des shingles. Pour chaque fonction de hachage, la valeur de hachage minimale parmi tous les « shingles » est sélectionnée. L’ensemble de ces valeurs minimales forme la signature MinHash — une représentation de longueur fixe qui approxime la similarité de Jaccard du document d’origine.</p></li>
-<li><p><strong>Codage en vecteur binaire</strong>: chaque valeur de signature est un hachage de 32 bits, et la signature complète est compressée dans un <code translate="no">BINARY_VECTOR</code> de dimension <code translate="no">32 * num_hashes</code>.</p></li>
+<li><p><strong>Encodage en vecteur binaire</strong>: chaque valeur de signature est un hachage de 32 bits, et la signature complète est compressée dans un <code translate="no">BINARY_VECTOR</code> de dimension <code translate="no">32 * num_hashes</code>.</p></li>
 </ol>
 <h3 id="Document-ingestion" class="common-anchor-header">Ingestion de documents<button data-href="#Document-ingestion" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,8 +122,8 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Lors de la recherche, le texte de la requête passe par le même pipeline partagé pour produire un vecteur binaire. Ce vecteur est utilisé pour effectuer une recherche LSH dans l’index <code translate="no">MINHASH_LSH</code>, ce qui identifie rapidement les paires de candidats susceptibles d’être similaires. Sans raffinement de Jaccard, Milvus renvoie des candidats LSH qui ne sont pas classés selon la similarité de Jaccard estimée. Lorsque le raffinement Jaccard est activé, Milvus utilise les signatures MinHash brutes stockées pour classer les candidats en fonction de la similarité Jaccard estimée et renvoie les K meilleurs résultats.</p>
-<p>Comme les deux méthodes partagent la même logique de transformation, deux documents dont le contenu se recoupe fortement produisent des signatures MinHash similaires. Cela rend cette fonction efficace pour détecter les quasi-doublons, même lorsque les documents diffèrent par l’ordre des mots, la mise en forme ou des nuances de formulation.</p>
+    </button></h3><p>Lors de la recherche, le texte de la requête passe par le même pipeline partagé pour produire un vecteur binaire. Ce vecteur est utilisé pour effectuer une recherche LSH dans l’index <code translate="no">MINHASH_LSH</code>, ce qui identifie rapidement les paires de candidats susceptibles d’être similaires. Sans raffinement de Jaccard, Milvus renvoie des candidats LSH qui ne sont pas classés selon la similarité de Jaccard estimée. Lorsque le raffinement Jaccard est activé, Milvus utilise les signatures MinHash brutes stockées pour classer les candidats en fonction de la similarité Jaccard estimée et renvoie les K premiers résultats.</p>
+<p>Comme les deux voies partagent la même logique de transformation, deux documents dont le contenu se recoupe fortement produisent des signatures MinHash similaires. Cela rend la fonction efficace pour trouver des quasi-doublons, même lorsque les documents diffèrent par l’ordre des mots, la mise en forme ou des nuances de formulation.</p>
 <p></details></p>
 <h2 id="Before-you-start" class="common-anchor-header">Avant de commencer<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -145,9 +145,9 @@ beta: Milvus 3.0.x
 <li><p><strong>Un champ de texte pour le contenu brut</strong></p>
 <p>Votre collection doit inclure un champ « <code translate="no">VARCHAR</code> » pour stocker le texte brut. Ce champ sert d’entrée à la fonction MinHash.</p></li>
 <li><p><strong>Un analyseur pour le champ de texte</strong> (en cas d’utilisation de la tokenisation au niveau des mots)</p>
-<p>Si « <code translate="no">token_level</code> » est défini sur « <code translate="no">&quot;word&quot;</code> » (par défaut), l’analyseur du champ de texte doit être activé. L’analyseur définit la manière dont le texte est tokenisé avant le shingling. Par défaut, Milvus utilise l’analyseur « <code translate="no">standard</code> ». Pour configurer un autre analyseur, consultez la section « <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md">Choisir l’analyseur adapté à votre cas d’utilisation</a> ».</p></li>
+<p>Si « <code translate="no">token_level</code> » est défini sur « <code translate="no">&quot;word&quot;</code> » (par défaut), le champ de texte doit disposer d’un analyseur activé. L’analyseur définit la manière dont le texte est tokenisé avant le shingling. Par défaut, Milvus utilise l’analyseur « <code translate="no">standard</code> ». Pour configurer un autre analyseur, consultez la section « <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md">Choisir l’analyseur adapté à votre cas d’utilisation</a> ».</p></li>
 <li><p><strong>Un champ de vecteurs binaires pour la sortie MinHash</strong></p>
-<p>Votre collection doit inclure un champ de type « <code translate="no">BINARY_VECTOR</code> » pour stocker les vecteurs binaires générés par la fonction MinHash. La dimension doit être égale à « <code translate="no">32 * num_hashes</code> ».</p></li>
+<p>Votre collection doit inclure un champ « <code translate="no">BINARY_VECTOR</code> » pour stocker les vecteurs binaires générés par la fonction MinHash. La dimension doit être égale à « <code translate="no">32 * num_hashes</code> ».</p></li>
 </ul>
 <h2 id="Step-1-Create-a-collection-with-a-MinHash-function" class="common-anchor-header">Étape 1 : Créer une collection avec une fonction MinHash<button data-href="#Step-1-Create-a-collection-with-a-MinHash-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -164,7 +164,7 @@ beta: Milvus 3.0.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser la fonction MinHash, définissez-la lors de la création de la collection. La fonction est alors intégrée au schéma de la collection et s’applique automatiquement lors de l’insertion et de la recherche de données.</p>
+    </button></h2><p>Pour utiliser la fonction MinHash, définissez-la lors de la création de la collection. La fonction fait alors partie du schéma de la collection et s’applique automatiquement lors de l’insertion et de la recherche de données.</p>
 <h3 id="Define-schema-fields" class="common-anchor-header">Définir les champs du schéma<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,7 +183,7 @@ beta: Milvus 3.0.x
     </button></h3><p>Le schéma de votre collection doit inclure au moins trois champs :</p>
 <ul>
 <li><p><strong>Champ principal</strong>: identifie de manière unique chaque entité de la collection.</p></li>
-<li><p><strong>Champ texte</strong> (<code translate="no">VARCHAR</code>) : stocke les documents texte bruts. Définissez l’ <code translate="no">enable_analyzer=True</code> e afin que Milvus puisse traiter le texte pour la génération de la signature MinHash. Par défaut, Milvus utilise l’analyseur <code translate="no">standard</code> pour l’analyse de texte. Pour configurer un autre analyseur, reportez-vous à la section « <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md">Choisir l’analyseur adapté à votre cas d’utilisation</a> ».</p></li>
+<li><p><strong>Champ de texte</strong> (<code translate="no">VARCHAR</code>) : stocke les documents texte bruts. Définissez l’ <code translate="no">enable_analyzer=True</code> e afin que Milvus puisse traiter le texte pour la génération de la signature MinHash. Par défaut, Milvus utilise l’analyseur <code translate="no">standard</code> pour l’analyse de texte. Pour configurer un autre analyseur, reportez-vous à la section « <a href="/docs/fr/choose-the-right-analyzer-for-your-use-case.md">Choisir l’analyseur adapté à votre cas d’utilisation</a> ».</p></li>
 <li><p><strong>Champ de vecteurs binaires</strong> (<code translate="no">BINARY_VECTOR</code>) : stocke les vecteurs binaires générés automatiquement par la fonction MinHash. La dimension doit être égale à <code translate="no">32 * num_hashes</code>.</p></li>
 </ul>
 <div class="multipleCode">
@@ -207,9 +207,61 @@ schema.add_field(field_name=<span class="hljs-string">&quot;binary_vector&quot;<
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;dedup_collection&quot;</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>).WithIsAutoID(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document_content&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">9000</span>).WithEnableAnalyzer(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;binary_vector&quot;</span>).WithDataType(entity.FieldTypeBinaryVector).WithDim(<span class="hljs-number">8192</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> schema=<span class="hljs-string">&#x27;{
+    &quot;autoID&quot;: true,
+    &quot;enableDynamicField&quot;: false,
+    &quot;fields&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;id&quot;,
+            &quot;dataType&quot;: &quot;Int64&quot;,
+            &quot;isPrimary&quot;: true,
+            &quot;autoID&quot;: true
+        },
+        {
+            &quot;fieldName&quot;: &quot;document_content&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: 9000,
+                &quot;enable_analyzer&quot;: true
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;binary_vector&quot;,
+            &quot;dataType&quot;: &quot;BinaryVector&quot;,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: 8192
+            }
+        }
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Define-the-MinHash-function" class="common-anchor-header">Définir la fonction MinHash<button data-href="#Define-the-MinHash-function" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -252,9 +304,35 @@ schema.add_function(minhash_function)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+
+minhashFunction := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;minhash_function&quot;</span>).
+    WithType(entity.FunctionTypeMinHash).
+    WithInputFields(<span class="hljs-string">&quot;document_content&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;binary_vector&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;num_hashes&quot;</span>, <span class="hljs-number">256</span>).
+    WithParam(<span class="hljs-string">&quot;shingle_size&quot;</span>, <span class="hljs-number">3</span>)
+
+schema.WithFunction(minhashFunction)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> minhashFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;minhash_function&quot;,
+    &quot;type&quot;: &quot;MinHash&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document_content&quot;
+    ],
+    &quot;outputFieldNames&quot;: [
+        &quot;binary_vector&quot;
+    ],
+    &quot;params&quot;: {
+        &quot;num_hashes&quot;: 256,
+        &quot;shingle_size&quot;: 3
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Options de configuration</strong></p>
 <p>Le dictionnaire « <code translate="no">params</code> » de la fonction MinHash accepte les paramètres suivants. Les noms de paramètres <strong>ne</strong> sont <strong>pas sensibles à la casse</strong>.</p>
@@ -269,7 +347,7 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">num_hashes</code></p></td>
      <td><p>int</p></td>
      <td><p>Dérivé de <code translate="no">dim / 32</code></p></td>
-     <td><p>Nombre de fonctions de hachage utilisées pour la génération de la signature. La dimension du vecteur binaire de sortie est égale à <code translate="no">32 &ast; num_hashes</code>. Des valeurs plus élevées réduisent la variance dans l'estimation de la similarité mais augmentent la charge de calcul. Recommandé : <code translate="no">256</code> (dim = 8192).</p></td>
+     <td><p>Nombre de fonctions de hachage utilisées pour la génération de signatures. La dimension du vecteur binaire de sortie est égale à <code translate="no">32 &ast; num_hashes</code>. Des valeurs plus élevées réduisent la variance dans l'estimation de la similarité mais augmentent la charge de calcul. Recommandé : <code translate="no">256</code> (dim = 8192).</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">shingle_size</code></p></td>
@@ -287,7 +365,7 @@ schema.add_function(minhash_function)
      <td><p><code translate="no">token_level</code></p></td>
      <td><p>str</p></td>
      <td><p><code translate="no">"word"</code></p></td>
-     <td><p>Niveau de tokenisation. Options :</p><ul><li><p><code translate="no">"word"</code>: utilise l'analyseur du champ pour la tokenisation, puis applique le découpage en n-grammes.</p></li><li><p><code translate="no">"char"</code> / <code translate="no">"character"</code>: applique le découpage en n-grammes directement sur les caractères bruts (sans analyseur).</p><p>Le niveau « mot » offre une sémantique plus forte et une meilleure efficacité, mais dépend de la tokenisation spécifique à la langue. Le niveau « caractère » est indépendant de la langue, mais produit des segments de dimension plus élevée avec une sémantique plus faible.</p></li></ul></td>
+     <td><p>Niveau de tokenisation. Options :</p><ul><li><p><code translate="no">"word"</code>: utilise l'analyseur du champ pour la tokenisation, puis applique le shingling par n-grammes.</p></li><li><p><code translate="no">"char"</code> / <code translate="no">"character"</code>: applique le découpage en n-grammes directement sur les caractères bruts (sans analyseur).</p><p>Le niveau « mot » offre une sémantique plus forte et une meilleure efficacité, mais dépend d’une tokenisation spécifique à la langue. Le niveau « caractère » est indépendant de la langue, mais produit des segments de dimension plus élevée avec une sémantique plus faible.</p></li></ul></td>
    </tr>
    <tr>
      <td><p><code translate="no">seed</code></p></td>
@@ -336,9 +414,29 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>, <span class="hljs-string">&quot;binary_vector&quot;</span>,
+    index.NewMinHashLSHIndex(entity.MHJACCARD, <span class="hljs-number">128</span>).
+        WithElementBitWidth(<span class="hljs-number">32</span>).
+        WithRawData(<span class="hljs-literal">true</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-built_in">export</span> indexParams=<span class="hljs-string">&#x27;[
+    {
+        &quot;fieldName&quot;: &quot;binary_vector&quot;,
+        &quot;indexName&quot;: &quot;binary_vector&quot;,
+        &quot;metricType&quot;: &quot;MHJACCARD&quot;,
+        &quot;indexType&quot;: &quot;MINHASH_LSH&quot;,
+        &quot;params&quot;: {
+            &quot;mh_lsh_band&quot;: 128,
+            &quot;mh_element_bit_width&quot;: 32,
+            &quot;with_raw_data&quot;: true
+        }
+    }
+]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Définissez ` <code translate="no">with_raw_data</code> ` sur ` <code translate="no">True</code> ` si les recherches utilisent le raffinement de Jaccard. Les signatures MinHash brutes sont nécessaires pour calculer la similarité de Jaccard estimée pour les candidats renvoyés par la recherche LSH.</p>
 <h3 id="Create-the-collection" class="common-anchor-header">Créer la collection<button data-href="#Create-the-collection" class="anchor-icon" translate="no">
@@ -374,9 +472,45 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>, schema).
+    WithIndexOptions(indexOption))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+request=$(jq -n --argjson schema <span class="hljs-string">&quot;<span class="hljs-variable">$schema</span>&quot;</span> --argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$minhashFunction</span>&quot;</span> --argjson indexParams <span class="hljs-string">&quot;<span class="hljs-variable">$indexParams</span>&quot;</span> <span class="hljs-string">&#x27;{
+    collectionName: &quot;dedup_collection&quot;,
+    schema: ($schema + {functions: [$fn]}),
+    indexParams: $indexParams
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;dedup_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-2-Insert-documents" class="common-anchor-header">Étape 2 : Insérer des documents<button data-href="#Step-2-Insert-documents" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -414,9 +548,39 @@ index_params.add_index(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+)
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;dedup_collection&quot;</span>).
+    WithColumns(column.NewColumnVarChar(<span class="hljs-string">&quot;document_content&quot;</span>, []<span class="hljs-type">string</span>{
+        <span class="hljs-string">&quot;information retrieval is a field of study that helps users find relevant information in large datasets&quot;</span>,
+        <span class="hljs-string">&quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;</span>,
+        <span class="hljs-string">&quot;information retrieval is a field of research helping users search for relevant information in large datasets&quot;</span>,
+    })))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;dedup_collection&quot;,
+    &quot;data&quot;: [
+        {&quot;document_content&quot;: &quot;information retrieval is a field of study that helps users find relevant information in large datasets&quot;},
+        {&quot;document_content&quot;: &quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;},
+        {&quot;document_content&quot;: &quot;information retrieval is a field of research helping users search for relevant information in large datasets&quot;}
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Step-3-Search-with-MinHash" class="common-anchor-header">Étape 3 : Effectuer une recherche avec MinHash<button data-href="#Step-3-Search-with-MinHash" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -467,9 +631,51 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+annParam := index.NewMinHashLSHAnnParam().
+    WithSearchWithJACCARD(<span class="hljs-literal">true</span>).
+    WithRefineK(<span class="hljs-number">3</span>)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;dedup_collection&quot;</span>,
+    <span class="hljs-number">3</span>,
+    []entity.Vector{entity.Text(<span class="hljs-string">&quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;</span>)},
+).WithANNSField(<span class="hljs-string">&quot;binary_vector&quot;</span>).
+    WithAnnParam(annParam).
+    WithOutputFields(<span class="hljs-string">&quot;document_content&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;dedup_collection&quot;,
+    &quot;data&quot;: [&quot;information retrieval is a research field focused on helping users find relevant data in large collections&quot;],
+    &quot;annsField&quot;: &quot;binary_vector&quot;,
+    &quot;limit&quot;: 3,
+    &quot;outputFields&quot;: [&quot;document_content&quot;],
+    &quot;searchParams&quot;: {
+        &quot;metric_type&quot;: &quot;MHJACCARD&quot;,
+        &quot;params&quot;: {
+            &quot;mh_search_with_jaccard&quot;: true,
+            &quot;refine_k&quot;: 3
+        }
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Définissez ` <code translate="no">mh_search_with_jaccard</code> ` sur ` <code translate="no">True</code> ` pour activer le raffinement Jaccard. ` <code translate="no">refine_k</code> ` contrôle la capacité du pool de candidats utilisée pour le raffinement. Milvus utilise ` <code translate="no">max(refine_k, limit)</code> ` comme capacité, mais peut raffiner moins de candidats si la recherche LSH renvoie moins de correspondances. Augmenter ` <code translate="no">refine_k</code> ` peut améliorer la qualité des résultats au prix d’un surcroît de calcul.</p>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
@@ -488,7 +694,7 @@ results = client.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>: utilisez BM25 pour le classement par pertinence lexicale au lieu de la détection des quasi-duplicatas.</p></li>
-<li><p><a href="/docs/fr/analyzer-overview.md">Présentation des analyseurs</a>: configurez des analyseurs personnalisés pour la tokenisation du texte.</p></li>
+<li><p><a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>: utilisez BM25 pour le classement par pertinence lexicale au lieu de la détection de quasi-duplicatas.</p></li>
+<li><p><a href="/docs/fr/analyzer-overview.md">Présentation de l’analyseur</a>: configurez des analyseurs personnalisés pour la tokenisation du texte.</p></li>
 <li><p><a href="/docs/fr/minhash-lsh.md">Index MINHASH_LSH</a>: découvrez comment ajuster les paramètres LSH pour optimiser le rappel et les performances.</p></li>
 </ul>

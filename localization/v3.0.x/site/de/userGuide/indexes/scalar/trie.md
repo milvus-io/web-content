@@ -2,10 +2,8 @@
 id: trie.md
 title: TRIE
 summary: >-
-  Der TRIE-Index ordnet die Werte von VARCHAR-Feldern in einer Baumstruktur an,
-  um den Vergleich von Zeichenfolgen auf Gleichheit und die Präfixsuche zu
-  beschleunigen. Er ist die schnellste Wahl unter den skalaren Indizes für
-  exakte Suchvorgänge und Präfixfilter wie beispielsweise „name LIKE ‚abc%‘“.
+  Verwenden Sie TRIE, um die exakte Suche nach Zeichenfolgen und Präfixfilter in
+  VARCHAR-Feldern zu beschleunigen.
 ---
 <h1 id="TRIE" class="common-anchor-header">TRIE<button data-href="#TRIE" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,13 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der „ <code translate="no">TRIE</code> “-Index in Milvus organisiert die Feldwerte von „ <code translate="no">VARCHAR</code> “ in einem Präfixbaum (einem <em>Trie</em>). Jedes Zeichen in einer Zeichenkette entspricht einer Kante im Baum, und gemeinsame Präfixe werden nur einmal gespeichert. Diese Struktur ermöglicht eine schnelle exakte Suche nach Zeichenketten und Präfixabgleich, ohne jeden Wert im Feld durchsuchen zu müssen.</p>
-<p>Verwenden Sie den „ <code translate="no">TRIE</code> “-Index, wenn Sie häufig Abfragen mit folgenden Kriterien ausführen:</p>
-<ul>
-<li><p>Exakter Gleichheit bei Zeichenfolgenwerten, wie z. B. <code translate="no">category == &quot;books&quot;</code></p></li>
-<li><p>Präfixfilterung, wie z. B. <code translate="no">name LIKE &quot;abc%&quot;</code></p></li>
-</ul>
-<h2 id="Supported-data-types" class="common-anchor-header">Unterstützte Datentypen<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">TRIE</code> ordnet Zeichenfolgen in einem Präfixbaum an, um exakte Suchvorgänge und Präfixfilter wie <code translate="no">name LIKE &quot;abc%&quot;</code> zu beschleunigen.</p>
+<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,11 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><code translate="no">VARCHAR</code> Felder. Weitere Informationen finden Sie unter <a href="/docs/de/string.md">„Zeichenfolgenfeld</a>“.</li>
-</ul>
-<p><code translate="no">TRIE</code> wird nur für „ <code translate="no">VARCHAR</code> “-Felder unterstützt. Um einen Zeichenfolgenwert in einem „ <code translate="no">JSON</code> “-Feld zu indizieren, wandeln Sie den Pfad in „ <code translate="no">VARCHAR</code> “ um und verwenden Sie stattdessen den <a href="/docs/de/ngram.md">NGRAM-Index</a>.</p>
-<h2 id="How-it-works" class="common-anchor-header">So funktioniert es<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Unterstützte Datentypen<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,23 +51,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus implementiert „ <code translate="no">TRIE</code> “ in zwei Phasen:</p>
-<ol>
-<li><p><strong>Index erstellen</strong></p>
-<ul>
-<li><p>Während der Datenaufnahme liest Milvus jeden Wert des indizierten Feldes ein.</p></li>
-<li><p>Die Werte werden in einen Trie eingefügt: Zeichen werden entlang der Kanten gespeichert, und jeder Endknoten erfasst die Entitäts-IDs, die diese Zeichenfolge gemeinsam haben.</p></li>
-<li><p>Der fertige Baum wird als Index gespeichert.</p></li>
-</ul></li>
-<li><p><strong>Abfragen beschleunigen</strong></p>
-<ul>
-<li><p>Bei Gleichheitsabfragen durchläuft Milvus den Baum Zeichen für Zeichen, um den Knoten für den exakten Wert zu erreichen, und gibt dessen Entitäts-IDs zurück.</p></li>
-<li><p>Bei einer Präxissuche durchläuft Milvus den Baum bis zu dem Knoten, der dem Präfix entspricht, und sammelt die Entitäts-IDs in dessen Teilbaum.</p></li>
-<li><p>Die übereinstimmenden Entitäts-IDs werden an den Abfrage-Executor zur endgültigen Ergebniszusammenstellung weitergeleitet.</p></li>
-</ul></li>
-</ol>
-<p>Bei Gleichheits- und Präfixfiltern sind die Suchkosten proportional zur Zeichenfolgenlänge und nicht zur Anzahl der Entitäten, wodurch diese Abfragen auch bei großen Sammlungen schnell bleiben.</p>
-<h2 id="Create-a-TRIE-index" class="common-anchor-header">Erstellen eines TRIE-Index<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
+    </button></h3><p>Nur <a href="/docs/de/string.md">VARCHAR-Felder</a>. Wählen Sie für JSON-Zeichenfolgenpfade einen kompatiblen Index in <a href="/docs/de/json-indexing.md">der JSON-Indizierung</a> aus.</p>
+<p><a id="Queries-accelerated-by-TRIE"></a></p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Filterbeschleunigung<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,8 +69,66 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können einen „ <code translate="no">TRIE</code> “-Index für ein „ <code translate="no">VARCHAR</code> “-Feld erstellen. Es sind keine zusätzlichen Parameter erforderlich.</p>
-<p>Das folgende Beispiel zeigt, wie ein „ <code translate="no">TRIE</code> “-Index für ein „ <code translate="no">VARCHAR</code> “-Feld erstellt wird:</p>
+    </button></h3><p>Ein „ <code translate="no">TRIE</code> “-Index kann dabei helfen, die folgenden Bedingungen für ein „ <code translate="no">VARCHAR</code> “-Feld auszuwerten. Die Ausdrücke dienen als Beispiele:</p>
+<table>
+<thead>
+<tr><th>Filter, die den Index nutzen können</th><th>Beispielausdruck</th></tr>
+</thead>
+<tbody>
+<tr><td>Gleichheit (<code translate="no">==</code>, <code translate="no">!=</code>)</td><td><code translate="no">category == &quot;books&quot;</code></td></tr>
+<tr><td>Zugehörigkeit (<code translate="no">in</code>, <code translate="no">not in</code>)</td><td><code translate="no">category in [&quot;books&quot;, &quot;electronics&quot;]</code></td></tr>
+<tr><td>Präfixübereinstimmung</td><td><code translate="no">category LIKE &quot;elec%&quot;</code></td></tr>
+<tr><td>Bereich (<code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code>)</td><td><code translate="no">category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;</code></td></tr>
+</tbody>
+</table>
+<p>Informationen zur Ausdruckssyntax finden Sie unter <a href="/docs/de/basic-operators.md">„Grundlegende Operatoren</a> und <a href="/docs/de/pattern-matching.md">Musterabgleich</a>“.</p>
+<p>Bei der Auswertung von Bereichen können mehrere indizierte Zeichenfolgen durchlaufen werden. Suffix-, Teilzeichenfolgen-, allgemeine „ <code translate="no">LIKE</code> “- und Regex-Muster können ebenfalls anhand der indizierten Zeichenfolgen ausgewertet werden, erfordern jedoch möglicherweise das Durchlaufen vieler verschiedener Werte. Vergleichen Sie bei Teilzeichenfolgen- oder Regex-Workloads <a href="/docs/de/ngram.md">NGRAM</a> anhand seiner Regeln zur Musterzulässigkeit.</p>
+<p><a id="Best-practices"></a></p>
+<p>Vergleichen Sie die Abfragelatenz mit repräsentativen Zeichenfolgenlängen, Präfixen und Ergebnisanzahlen.</p>
+<p><a id="Usage-notes"></a></p>
+<div class="alert note">
+<blockquote>
+<p>Hierbei handelt es sich um Indexfunktionen, nicht um Einschränkungen für gültige Filterausdrücke. Informationen zu Einschränkungen bei der gemeinsamen Suche finden Sie unter <a href="/docs/de/scalar_index.md#Filter-execution">„Skalarer Index</a> “. Informationen zu den Tests „ <code translate="no">AND</code> “, „ <code translate="no">OR</code> “, „ <code translate="no">NOT</code> “ und „NULL“ (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>) finden Sie unter <a href="/docs/de/basic-operators.md">„Grundlegende Operatoren</a>“.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-TRIE-works" class="common-anchor-header">So funktioniert TRIE<button data-href="#How-TRIE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><details>
+<summary><strong>Den Suchvorgang im Präfixbaum anzeigen</strong></summary></p>
+<p>Während der Indexerstellung fügt Milvus Zeichenfolgen in einen Präfixbaum ein und speichert diesen dauerhaft. Zeichen werden entlang der Kanten gespeichert, gemeinsame Präfixe werden nur einmal gespeichert, und jeder Endknoten vermerkt die Entitäts-IDs, die zu dieser Zeichenfolge gehören.</p>
+<p>Zur Gleichheitsprüfung wird der Baum bis zum Endknoten der exakten Zeichenkette durchlaufen. Bei einem Präfix wird der Präfixknoten gesucht und die IDs aus dessen Teilbaum gesammelt. Der Abfrage-Executor erhält die übereinstimmenden Entitäts-IDs.</p>
+<p>Das Durchlaufen zum Zeichenfolgen- oder Präfixknoten hängt von der Musterlänge ab; die Rückgabe von Übereinstimmungen erfordert zudem das Sammeln der zugehörigen Entitäts-IDs.</p>
+<p></details></p>
+<h2 id="Create-a-TRIE-index" class="common-anchor-header">Erstellen Sie einen TRIE-Index<button data-href="#Create-a-TRIE-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Setzen Sie „ <code translate="no">index_type</code> “ auf „ <code translate="no">TRIE</code> “; es sind keine zusätzlichen Indexparameter erforderlich:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -242,7 +276,7 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-accelerated-by-TRIE" class="common-anchor-header">Durch TRIE beschleunigte Abfragen<button data-href="#Queries-accelerated-by-TRIE" class="anchor-icon" translate="no">
+<h2 id="Drop-an-index" class="common-anchor-header">Einen Index löschen<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,44 +291,11 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der „ <code translate="no">TRIE</code> “-Index beschleunigt die folgenden Filtermuster für ein „ <code translate="no">VARCHAR</code> “-Feld:</p>
-<ul>
-<li><p><strong>Gleichheit</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category == &quot;books&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Mitgliedschaft</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category in [&quot;books&quot;, &quot;electronics&quot;]&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Präfixübereinstimmung</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category LIKE &quot;elec%&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Bereich</strong></p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;category &gt;= &quot;a&quot; and category &lt; &quot;m&quot;&#x27;</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>Bei der Bereichsauswertung können mehrere indizierte Zeichenfolgen durchlaufen werden.</p></li>
-</ul>
-<p>Auch Muster für Suffixe, Teilzeichenfolgen und allgemeine reguläre Ausdrücke ( <code translate="no">LIKE</code> ) können anhand der indizierten Zeichenfolgen ausgewertet werden, erfordern jedoch möglicherweise die Durchsuche vieler verschiedener Werte. Wenn Ihr Workload überwiegend aus dem Abgleich von Teilzeichenfolgen oder regulären Ausdrücken besteht, sollten Sie stattdessen den <a href="/docs/de/fmindex.md">FMINDEX-</a> oder <a href="/docs/de/ngram.md">NGRAM-Index</a> in Betracht ziehen.</p>
-<h2 id="Drop-an-index" class="common-anchor-header">Index löschen<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Verwenden Sie die Methode „ <code translate="no">drop_index()</code> “, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
+    </button></h2><p>Verwenden Sie die Methode ` <code translate="no">drop_index()</code> `, um einen vorhandenen Index aus einer Sammlung zu entfernen.</p>
 <div class="alert note">
-<ul>
-<li><p>In <strong>Version 2.6.3</strong> oder früher müssen Sie die Sammlung freigeben, bevor Sie einen skalaren Index löschen können.</p></li>
-<li><p>Ab <strong>Version 2.6.4</strong> können Sie einen skalaren Index direkt löschen, sobald er nicht mehr benötigt wird – es ist nicht erforderlich, die Sammlung zuvor freizugeben.</p></li>
-</ul>
+<blockquote>
+<p>Informationen zu den Versionsanforderungen beim Löschen eines skalaren Indexes finden Sie unter <a href="/docs/de/scalar_index.md#Drop-index-compatibility">„Skalare Indizes</a>“.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -407,42 +408,3 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Usage-notes" class="common-anchor-header">Hinweise zur Verwendung<button data-href="#Usage-notes" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p><strong>Feldtypen:</strong> Funktioniert nur mit Feldern vom Typ „ <code translate="no">VARCHAR</code> “. Weitere Informationen zu Datentypen finden Sie unter <a href="/docs/de/string.md">„String-Feld</a>“.</p></li>
-<li><p><strong>Parameter:</strong> Es sind keine Indexparameter erforderlich.</p></li>
-<li><p><strong>Musterabgleich:</strong> „ <code translate="no">TRIE</code> “ ist am schnellsten für Gleichheits- und Präfixfilter. Bereichsfilter werden unterstützt, können jedoch mehrere indizierte Zeichenfolgen durchlaufen. Suffix-, Teilzeichenfolgen- und allgemeine „ <code translate="no">LIKE</code> “-Muster können ausgewertet werden, erfordern jedoch möglicherweise das Durchsuchen vieler indizierter Zeichenfolgen.</p></li>
-</ul>
-<h2 id="Best-practices" class="common-anchor-header">Bewährte Vorgehensweisen<button data-href="#Best-practices" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Verwenden Sie „ <code translate="no">TRIE</code> “, wenn Ihre Filter überwiegend aus exakten Suchvorgängen oder Präfixabgleichen bestehen.</p></li>
-<li><p>Wenn Ihre Arbeitslast auf Teilzeichenfolgen- (<code translate="no">LIKE &quot;%abc%&quot;</code>) oder Regex-Filtern basiert, verwenden Sie stattdessen <a href="/docs/de/fmindex.md">FMINDEX</a> für exakte verankerte Übereinstimmungen oder <a href="/docs/de/ngram.md">NGRAM</a> zur Eingrenzung der Kandidaten.</p></li>
-</ul>

@@ -37,7 +37,7 @@ title: 快速入门
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>请选择一种方式：使用 Milvus Lite 进行本地演示，或连接您已部署的 Milvus 服务器。两种方式均可使用下文中的 Collection 和查询示例。</p>
+    </button></h2><p>请选择一种方式：使用 Milvus Lite 进行本地演示，或连接到您已部署的 Milvus 服务器。两种方式均可使用下文中的数据收集和查询示例。</p>
 <h3 id="Use-a-local-database" class="common-anchor-header">使用本地数据库<button data-href="#Use-a-local-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,7 +54,7 @@ title: 快速入门
         ></path>
       </svg>
     </button></h3><p>本指南使用 Milvus Lite，这是 PyMilvus Python SDK 的可选依赖项，可在本地运行。如需进行服务器部署，请参阅<a href="/docs/zh/install_standalone-docker.md">Docker</a>或<a href="/docs/zh/install_cluster-milvusoperator.md">Kubernetes</a>。</p>
-<p>在 macOS、Linux 或 Windows 系统上使用 Python 3.10 或更高版本，并确保 Milvus Lite 的依赖项（如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）有可用的二进制 wheel 包。示例中使用的是 PyMilvus 3.0.2 和 Milvus Lite 3.2.2。请显式安装这两个包：</p>
+<p>在 macOS、Linux 或 Windows 系统上使用 Python 3.10 或更高版本，并确保 Milvus Lite 的依赖项（如<code translate="no">faiss-cpu</code> 和<code translate="no">pyarrow</code> ）的二进制 wheel 包已安装。示例中使用 PyMilvus 3.0.2 和 Milvus Lite 3.2.2。请显式安装这两个包：</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>在 Windows 上，pip 会跳过 Milvus 3.0.2 的<code translate="no">milvus-lite</code> 附加组件；上述命令明确指明了<code translate="no">milvus-lite</code> ，因此该本地路径在此处同样有效。有关仅安装 SDK 的要求，请参阅<a href="/docs/zh/install-pymilvus.md">《安装 Milvus Python SDK》</a>。</p>
@@ -119,7 +119,7 @@ title: 快速入门
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Existing-Milvus-server" class="common-anchor-header">现有的 Milvus 服务器<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
+<h3 id="Existing-Milvus-server" class="common-anchor-header">现有 Milvus 服务器<button data-href="#Existing-Milvus-server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,7 +165,7 @@ client.create_collection(
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述配置中，</p>
 <ul>
-<li>主键和向量字段均使用其默认名称（“id”和“向量”）。</li>
+<li>主键和向量字段使用其默认名称（“id”和“向量”）。</li>
 <li>度量类型（向量距离定义）设置为默认值（<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">COSINE</a>）。</li>
 <li>主键字段接受整数，且不自动递增（即不使用<a href="https://milvus.io/docs/schema.md">auto-id 功能</a>）。
 此外，您还可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">说明</a>正式定义 Collection 的 Schema。</li>
@@ -204,7 +204,7 @@ client.create_collection(
     </button></h2><p>首先，安装模型库。该包包含 PyTorch 等必要的机器学习工具。如果您的本地环境从未安装过 PyTorch，则下载该包可能需要一些时间。</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[model]==3.0.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>使用默认模型生成向量Embeddings。Milvus 要求数据以字典列表的形式输入，其中每个字典代表一条数据记录，称为实体。</p>
+<p>使用默认模型生成向量嵌入。Milvus 要求数据以字典列表的形式输入，其中每个字典代表一条数据记录，称为实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># If connection to https://huggingface.co/ failed, uncomment the following path</span>
@@ -450,7 +450,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>若需清除数据，您可以指定主键删除实体，或删除所有符合特定过滤表达式的实体。</p>
+    </button></h2><p>若需清理数据，您可以指定主键删除实体，或删除所有符合特定过滤表达式的实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete entities by primary key</span>
 res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>])
 

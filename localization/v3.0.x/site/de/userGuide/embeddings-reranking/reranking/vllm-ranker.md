@@ -1,14 +1,14 @@
 ---
 id: vllm-ranker.md
-title: vLLM-RangiererCompatible with Milvus 2.6.x
+title: vLLM-RankerCompatible with Milvus 2.6.x
 summary: >-
-  Der vLLM Ranker nutzt den vLLM-Inferenzrahmen zur Verbesserung der
-  Suchrelevanz durch semantisches Reranking. Er stellt einen fortschrittlichen
-  Ansatz für die Ordnung der Suchergebnisse dar, der über die traditionelle
-  Vektorähnlichkeit hinausgeht.
+  Der vLLM Ranker nutzt das vLLM-Inferenz-Framework, um die Relevanz der
+  Suchergebnisse durch semantisches Reranking zu verbessern. Er stellt einen
+  fortschrittlichen Ansatz zur Sortierung von Suchergebnissen dar, der über die
+  herkömmliche Vektorähnlichkeit hinausgeht.
 beta: Milvus 2.6.x
 ---
-<h1 id="vLLM-Ranker" class="common-anchor-header">vLLM-Rangierer<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#vLLM-Ranker" class="anchor-icon" translate="no">
+<h1 id="vLLM-Ranker" class="common-anchor-header">vLLM-Ranker<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span><button data-href="#vLLM-Ranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,13 +23,13 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Der vLLM Ranker nutzt den <a href="https://docs.vllm.ai/en/latest/index.html">vLLM-Inferenzrahmen</a> zur Verbesserung der Suchrelevanz durch semantisches Reranking. Er stellt einen fortschrittlichen Ansatz für die Ordnung von Suchergebnissen dar, der über die traditionelle Vektorähnlichkeit hinausgeht.</p>
-<p>Der vLLM Ranker ist besonders wertvoll für Anwendungen, bei denen Präzision und Kontext entscheidend sind, z. B:</p>
+    </button></h1><p>Der vLLM Ranker nutzt das <a href="https://docs.vllm.ai/en/latest/index.html">vLLM-Inferenz</a> -Framework, um die Relevanz der Suchergebnisse durch semantisches Reranking zu verbessern. Er stellt einen fortschrittlichen Ansatz zur Sortierung von Suchergebnissen dar, der über die herkömmliche Vektorähnlichkeit hinausgeht.</p>
+<p>Der vLLM Ranker ist besonders wertvoll für Anwendungen, bei denen Präzision und Kontext entscheidend sind, wie zum Beispiel:</p>
 <ul>
 <li><p>Suche in technischer Dokumentation, die ein tiefes Verständnis der Konzepte erfordert</p></li>
-<li><p>Forschungsdatenbanken, bei denen semantische Beziehungen wichtiger sind als der Abgleich von Schlüsselwörtern</p></li>
-<li><p>Kundensupportsysteme, die Benutzerprobleme mit relevanten Lösungen abgleichen müssen</p></li>
-<li><p>E-Commerce-Suche, die Produktattribute und die Absicht des Benutzers verstehen muss</p></li>
+<li><p>Forschungsdatenbanken, in denen semantische Beziehungen wichtiger sind als die Übereinstimmung von Schlüsselwörtern</p></li>
+<li><p>Kundensupport-Systeme, die Nutzerprobleme mit relevanten Lösungen abgleichen müssen</p></li>
+<li><p>E-Commerce-Suche, die Produktattribute und die Absicht des Nutzers verstehen muss</p></li>
 </ul>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,10 +46,10 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie vLLM Ranker in Milvus implementieren, müssen Sie sicherstellen, dass Sie über Folgendes verfügen</p>
+    </button></h2><p>Bevor Sie den vLLM Ranker in Milvus implementieren, stellen Sie sicher, dass Sie über Folgendes verfügen:</p>
 <ul>
-<li><p>Eine Milvus-Sammlung mit einem <code translate="no">VARCHAR</code> -Feld, das den Text enthält, der neu bewertet werden soll</p></li>
-<li><p>Einen laufenden vLLM-Dienst mit Ranglistenfunktionen. Detaillierte Anweisungen zum Einrichten eines vLLM-Dienstes finden Sie in der <a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">offiziellen vLLM-Dokumentation</a>. Um die Verfügbarkeit des vLLM-Dienstes zu überprüfen:</p>
+<li><p>Eine Milvus-Sammlung mit einem Feld „ <code translate="no">VARCHAR</code> “, das den neu zu ordnenden Text enthält</p></li>
+<li><p>Ein laufender vLLM-Dienst mit Funktionen zur Neureihung. Detaillierte Anweisungen zur Einrichtung eines vLLM-Dienstes finden Sie in der <a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">offiziellen vLLM-Dokumentation</a>. So überprüfen Sie die Verfügbarkeit des vLLM-Dienstes:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Replace YOUR_VLLM_ENDPOINT_URL with the actual URL (e.g., http://&lt;service-ip&gt;:&lt;port&gt;/v1/rerank)</span>
 <span class="hljs-comment"># Replace &#x27;BAAI/bge-reranker-base&#x27; if you deployed a different model</span>
 
@@ -67,10 +67,10 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Bei einer erfolgreichen Antwort sollten die Dokumente nach Relevanzwerten geordnet zurückgegeben werden, ähnlich wie bei der OpenAI rerank API-Antwort.</p>
-<p>Weitere Server-Argumente und -Optionen finden Sie in der <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">vLLM-Dokumentation für OpenAI-kompatible Server</a>.</p></li>
+<p>Eine erfolgreiche Antwort sollte die Dokumente zurückgeben, die nach Relevanzwerten sortiert sind, ähnlich wie bei der Antwort der OpenAI-Reranking-API.</p>
+<p>Weitere Serverargumente und -optionen finden Sie in der <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">Dokumentation</a> zum <a href="https://docs.vllm.ai/en/latest/serving/openai_compatible_server.html#re-rank-api">vLLM OpenAI-kompatiblen Server</a>.</p></li>
 </ul>
-<h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">Erstellen einer vLLM Ranker-Funktion<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
+<h2 id="Create-a-vLLM-ranker-function" class="common-anchor-header">Erstellen Sie eine vLLM-Ranker-Funktion<button data-href="#Create-a-vLLM-ranker-function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,9 +85,14 @@ curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um den vLLM Ranker in Ihrer Milvus-Anwendung zu verwenden, erstellen Sie ein Function-Objekt, das angibt, wie das Reranking funktionieren soll. Diese Funktion wird an Milvus-Suchoperationen übergeben, um das Ranking der Ergebnisse zu verbessern.</p>
+    </button></h2><p>Um den vLLM-Ranker in Ihrer Milvus-Anwendung zu verwenden, erstellen Sie ein Function-Objekt, das festlegt, wie die Neureihung ablaufen soll. Diese Funktion wird an Milvus-Suchvorgänge übergeben, um die Rangfolge der Ergebnisse zu verbessern.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, Function, FunctionType
 
 <span class="hljs-comment"># Connect to your Milvus server</span>
@@ -133,11 +138,87 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
+
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+ranker := entity.NewFunction().
+    WithName(<span class="hljs-string">&quot;vllm_semantic_ranker&quot;</span>).
+    WithType(entity.FunctionTypeRerank).
+    WithInputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;reranker&quot;</span>, <span class="hljs-string">&quot;model&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;provider&quot;</span>, <span class="hljs-string">&quot;vllm&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;queries&quot;</span>, []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;renewable energy developments&quot;</span>}).
+    WithParam(<span class="hljs-string">&quot;endpoint&quot;</span>, <span class="hljs-string">&quot;http://localhost:8080&quot;</span>).
+    WithParam(<span class="hljs-string">&quot;max_client_batch_size&quot;</span>, <span class="hljs-number">32</span>).
+    WithParam(<span class="hljs-string">&quot;truncate_prompt_tokens&quot;</span>, <span class="hljs-number">256</span>)
+
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;your_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">false</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;document&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">65535</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;dense_vector&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(<span class="hljs-number">768</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;your_collection&quot;</span>, schema))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;dense_vector&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLM-Ranking-spezifische Parameter<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
+<h3 id="vLLM-ranker-specific-parameters" class="common-anchor-header">vLLM-Ranker-spezifische Parameter<button data-href="#vLLM-ranker-specific-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -152,7 +233,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Die folgenden Parameter sind spezifisch für den vLLM Ranker:</p>
+    </button></h3><p>Die folgenden Parameter sind spezifisch für den vLLM-Ranker:</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -163,42 +244,42 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">reranker</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Muss auf <code translate="no">"model"</code> gesetzt werden, um das Modell-Reranking zu aktivieren.</p></td>
+     <td><p>Muss auf „ <code translate="no">"model"</code> “ gesetzt werden, um die Neureihung des Modells zu aktivieren.</p></td>
      <td><p><code translate="no">"model"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">provider</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Der Modelldienstanbieter, der für das Reranking verwendet werden soll.</p></td>
+     <td><p>Der für die Neubewertung zu verwendende Modelldienstanbieter.</p></td>
      <td><p><code translate="no">"vllm"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">queries</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Liste der Abfrage-Strings, die vom Rerank-Modell zur Berechnung der Relevanzwerte verwendet werden. Die Anzahl der Abfragezeichenfolgen muss genau mit der Anzahl der Abfragen in Ihrem Suchvorgang übereinstimmen (auch bei Verwendung von Abfragevektoren anstelle von Text), andernfalls wird ein Fehler gemeldet.</p></td>
+     <td><p>Liste der Suchbegriffe, die vom Reranking-Modell zur Berechnung der Relevanzwerte verwendet werden. Die Anzahl der Suchbegriffe muss genau mit der Anzahl der Suchanfragen in Ihrem Suchvorgang übereinstimmen (auch wenn Suchvektoren anstelle von Text verwendet werden), andernfalls wird ein Fehler gemeldet.</p></td>
      <td><p><em>["Suchanfrage"]</em></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">endpoint</code></p></td>
      <td><p>Ja</p></td>
-     <td><p>Ihre vLLM-Dienstadresse.</p></td>
+     <td><p>Die Adresse Ihres vLLM-Dienstes.</p></td>
      <td><p><code translate="no">"http://localhost:8080"</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">max_client_batch_size</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Da Modelldienste möglicherweise nicht alle Daten auf einmal verarbeiten, wird hier die Stapelgröße für den Zugriff auf den Modelldienst in mehreren Anfragen festgelegt.</p></td>
-     <td><p><code translate="no">32</code> (Voreinstellung)</p></td>
+     <td><p>Da Modelldienste möglicherweise nicht alle Daten auf einmal verarbeiten können, legt diese Einstellung die Batchgröße für den Zugriff auf den Modelldienst in mehreren Anfragen fest.</p></td>
+     <td><p><code translate="no">32</code> (Standard)</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">truncate_prompt_tokens</code></p></td>
      <td><p>Nein</p></td>
-     <td><p>Wenn diese Option auf eine ganze Zahl <em>k</em> gesetzt ist, werden nur die letzten <em>k</em> Zeichen der Eingabeaufforderung verwendet (d. h. linke Trunkierung). Der Standardwert ist None (d. h. keine Abschneidung).</p></td>
+     <td><p>Wenn auf eine ganze Zahl <em>k</em> gesetzt, werden nur die letzten <em>k</em> Token aus der Eingabe verwendet (d. h. linksseitige Kürzung). Standardmäßig ist der Wert „None“ (d. h. keine Kürzung).</p></td>
      <td><p><code translate="no">256</code></p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Allgemeine Parameter, die für alle Model Ranker gelten (z. B. <code translate="no">provider</code>, <code translate="no">queries</code>), finden Sie unter <a href="/docs/de/model-ranker-overview.md#Create-a-model-ranker">Erstellen eines Model Rankers</a>.</p>
+<p>Informationen zu allgemeinen Parametern, die allen Modell-Rankern gemeinsam sind (z. B. „ <code translate="no">provider</code> “, „ <code translate="no">queries</code> “), finden Sie unter <a href="/docs/de/model-ranker-overview.md#Create-a-model-ranker">„Create a model ranker</a>“.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Auf die Standard-Vektorsuche anwenden<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -215,9 +296,14 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>So wenden Sie vLLM Ranker auf eine Standard-Vektorsuche an:</p>
+    </button></h2><p>So wenden Sie den vLLM-Ranker auf eine Standard-Vektorsuche an:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Execute search with vLLM reranking</span>
 results = client.search(
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
@@ -249,7 +335,66 @@ results = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">functionScore := entity.NewFunctionScore().AddFunction(ranker)
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;your_collection&quot;</span>, <span class="hljs-comment">// collection name</span>
+    <span class="hljs-number">5</span>,           <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)},
+).WithANNSField(<span class="hljs-string">&quot;dense_vector&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>).
+    WithFunctionScore(functionScore).
+    WithConsistencyLevel(entity.ClBounded))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;vllm_semantic_ranker&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;document&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;model&quot;,
+        &quot;provider&quot;: &quot;vllm&quot;,
+        &quot;queries&quot;: [
+            &quot;renewable energy developments&quot;
+        ],
+        &quot;endpoint&quot;: &quot;http://localhost:8080&quot;,
+        &quot;max_client_batch_size&quot;: 32,
+        &quot;truncate_prompt_tokens&quot;: 256
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;dense_vector&quot;,
+    limit: 5,
+    outputFields: [&quot;document&quot;],
+    consistencyLevel: &quot;Bounded&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

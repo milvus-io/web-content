@@ -52,7 +52,7 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h2><p><a href="/docs/ko/milvus_backup_0_6_cli.md#Prepare-configuration-file">'구성 파일 준비'의</a> v2 예제를 사용하여 ` <code translate="no">configs/backup.yaml</code> ` <a href="/docs/ko/milvus_backup_0_6_cli.md#Prepare-configuration-file">파일을</a> 생성하십시오. Milvus, 인스턴스의 스토리지 및 백업 대상에 대한 액세스를 구성하십시오. 또한 Milvus 서버는 스냅샷 작업을 위해 백업 스토리지에 액세스할 수 있어야 합니다.</p>
-<p>v1 파일이 있는 경우, 해당 파일은 계속 불러올 수 있습니다. 스키마나 환경 변수를 변경하기 전에 <a href="/docs/ko/milvus_backup_upgrade.md#Migrate-the-configuration">'구성 마이그레이션'을</a> 참조하십시오.</p>
+<p>v1 파일이 있는 경우, 해당 파일은 계속 불러올 수 있습니다. 스키마나 환경 변수를 변경하기 전에 <a href="/docs/ko/milvus_backup_upgrade.md#Migrate-the-configuration">‘구성 마이그레이션’을</a> 참조하십시오.</p>
 <p>바이너리가 있는 디렉터리에서 구성을 확인하고 연결 상태를 점검하십시오:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup config show --config configs/backup.yaml
 ./milvus-backup check --config configs/backup.yaml
@@ -76,7 +76,7 @@ beta: Milvus Backup 0.6.x
     </button></h2><p>확인한 구성으로 서비스를 시작하십시오:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>기본 포트는 8080입니다. 다른 포트를 선택하려면 <code translate="no">-p</code> 를 사용하십시오:</p>
+<p>기본 포트는 8080입니다. 다른 포트를 선택하려면 ` <code translate="no">-p</code>`을 사용하십시오:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 18080 --config configs/backup.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>특정 서비스에 대해서는 이 명령어 중 하나만 실행하십시오. 아래 예제에서는 포트 8080을 사용합니다. 다른 포트를 선택한 경우 URL을 변경하십시오. Swagger UI는 <code translate="no">http://localhost:8080/api/v1/docs/index.html</code> 에서 이용할 수 있습니다.</p>
@@ -121,7 +121,7 @@ beta: Milvus Backup 0.6.x
     &quot;collection_names&quot;: [&quot;coll&quot;]
   }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>응답에는 <code translate="no">requestId</code> 값이 포함됩니다. 요청을 제출했다고 해서 백업이 완료된 것은 아닙니다. 해당 값을 <code translate="no">backup_id</code> 에 복사하고 주기적으로 확인하십시오:</p>
+<p>응답에는 ` <code translate="no">requestId</code>` 값이 포함됩니다. 요청이 제출되었다고 해서 백업이 완료된 것은 아닙니다. 해당 값을 ` <code translate="no">backup_id</code> `에 복사한 후 주기적으로 확인하십시오:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_backup?backup_id=BACKUP_REQUEST_ID&amp;backup_name=my_backup&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">data.state_code</code> 가 <code translate="no">2</code> 로 변경될 때까지 기다리십시오. API는 다음과 같은 작업 상태를 사용합니다:</p>
@@ -137,7 +137,7 @@ beta: Milvus Backup 0.6.x
 <tr><td><code translate="no">4</code></td><td>시간 초과</td></tr>
 </tbody>
 </table>
-<p>응답과 작업 상태를 모두 확인하십시오. HTTP 200 상태 코드만으로는 충분하지 않습니다. 0이 아닌 응답 <code translate="no">code</code> 는 오류를 나타냅니다. 성공적인 응답의 경우 <code translate="no">code</code> 값이 0이므로 생략될 수 있습니다. 작업이 실패하거나 시간 초과된 경우, 해당 백업에서 복원하기 전에 응답 세부 정보와 서버 로그를 확인하십시오.</p>
+<p>응답과 작업 상태를 모두 확인하십시오. HTTP 200 상태 코드만으로는 충분하지 않습니다. 0이 아닌 응답 <code translate="no">code</code> 는 오류를 나타냅니다. 성공적인 응답의 경우 <code translate="no">code</code> 값은 0이므로 생략될 수 있습니다. 작업이 실패하거나 시간 초과된 경우, 해당 백업에서 복원하기 전에 응답 세부 정보와 서버 로그를 확인하십시오.</p>
 <p>저장된 백업 목록을 확인하고 이름으로 완료된 백업을 조사하십시오:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/list&#x27;
 curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
@@ -174,7 +174,7 @@ curl &#x27;http://localhost:8080/api/v1/get_backup?backup_name=my_backup&#x27;
 <p>복원 응답에서 <code translate="no">data.id</code> 을 복사한 후 작업을 확인하십시오:</p>
 <pre><code translate="no" class="language-shell">curl &#x27;http://localhost:8080/api/v1/get_restore?id=RESTORE_TASK_ID&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">data.state_code: 2</code> 가 표시될 때까지 기다린 후, <code translate="no">collection_restore_tasks</code> 에서 예상되는 대상 컬렉션을 확인하십시오. 제출된 작업이 아직 검증된 복원이 아닙니다.</p>
+<p><code translate="no">data.state_code: 2</code> 가 표시될 때까지 기다린 후, <code translate="no">collection_restore_tasks</code> 에서 예상되는 대상 컬렉션을 확인하십시오. 제출된 작업이 아직 검증된 복원 작업은 아닙니다.</p>
 <h3 id="Restore-with-the-original-name" class="common-anchor-header">원본 이름으로 복원<button data-href="#Restore-with-the-original-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

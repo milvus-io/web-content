@@ -60,7 +60,7 @@ summary: >-
         ></path>
       </svg>
     </button></h3><p>A valid metric name in Prometheus contains three elements: namespace, subsystem, and name. These three elements are connected with "_".</p>
-<p>The namespace of Milvus metrics monitored by Prometheus is "milvus". Depending on the role that a metric belongs to, its subsystem should be one of the following eight roles: "rootcoord", "proxy", "querycoord", "querynode", "indexcoord", "indexnode", "datacoord", "datanode".</p>
+<p>The namespace of Milvus metrics monitored by Prometheus is "milvus". The subsystem of a metric is one of the following: "cdc", "cgo", "datacoord", "datanode", "indexnode", "logging", "meta", "msg_queue", "msgstream", "proxy", "querycoord", "querynode", "rootcoord", "storage", "streaming", "streamingcoord", "streamingnode", and "wal". A few metrics, such as <code translate="no">milvus_build_info</code> and <code translate="no">milvus_num_node</code>, have no subsystem.</p>
 <p>For instance, the Milvus metric that calculates the total number of vectors queried is named <code translate="no">milvus_proxy_search_vectors_count</code>.</p>
 <h3 id="Metric-types" class="common-anchor-header">Metric types<button data-href="#Metric-types" class="anchor-icon" translate="no">
       <svg translate="no"

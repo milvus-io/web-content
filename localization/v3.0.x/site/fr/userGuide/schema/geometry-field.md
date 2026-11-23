@@ -1,16 +1,16 @@
 ---
 id: geometry-field.md
-title: Champ géométriqueCompatible with Milvus 2.6.4+
+title: Domaine de la géométrieCompatible with Milvus 2.6.4+
 summary: >-
-  Lors de la création d'applications telles que les systèmes d'information
-  géographique (SIG), les outils de cartographie ou les services basés sur la
+  Lors du développement d'applications telles que les systèmes d'information
+  géographique (SIG), les outils de cartographie ou les services de
   localisation, il est souvent nécessaire de stocker et d'interroger des données
-  géométriques. Le type de données GEOMETRY de Milvus résout ce problème en
-  fournissant un moyen natif de stocker et d'interroger des données géométriques
+  géométriques. Le type de données GEOMETRY de Milvus répond à ce besoin en
+  offrant un moyen natif de stocker et d'interroger des données géométriques
   flexibles.
 beta: Milvus 2.6.4+
 ---
-<h1 id="Geometry-Field" class="common-anchor-header">Champ géométrique<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Field" class="anchor-icon" translate="no">
+<h1 id="Geometry-Field" class="common-anchor-header">Domaine de la géométrie<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#Geometry-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,17 +25,17 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Lors de la création d'applications telles que les systèmes d'information géographique (SIG), les outils de cartographie ou les services basés sur la localisation, il est souvent nécessaire de stocker et d'interroger des données géométriques. Le type de données <code translate="no">GEOMETRY</code> de Milvus résout ce problème en fournissant un moyen natif de stocker et d'interroger des données géométriques flexibles.</p>
+    </button></h1><p>Lors du développement d’applications telles que les systèmes d’information géographique (SIG), les outils de cartographie ou les services de localisation, il est souvent nécessaire de stocker et d’interroger des données géométriques. Le type de données « <code translate="no">GEOMETRY</code> » de Milvus répond à ce besoin en offrant un moyen natif de stocker et d’interroger des données géométriques flexibles.</p>
 <p>Utilisez un champ GEOMETRY lorsque vous devez combiner la similarité vectorielle avec des contraintes spatiales, par exemple :</p>
 <ul>
-<li><p>Service de localisation (LBS) : "trouver des points d'intérêt similaires à <strong>l'intérieur de</strong> ce pâté de maisons".</p></li>
-<li><p>Recherche multimodale : recherche multimodale : "trouver des photos similaires <strong>dans un rayon de 1 km</strong> autour de ce point".</p></li>
-<li><p>Cartes et logistique : "actifs <strong>à l'intérieur d'</strong> une région" ou "itinéraires <strong>croisant</strong> un chemin".</p></li>
+<li><p>Service de localisation (LBS) : « trouver des points d’intérêt similaires <strong>dans</strong> ce pâté de maisons »</p></li>
+<li><p>Recherche multimodale : « récupérer des photos similaires <strong>dans un rayon de 1 km</strong> autour de ce point »</p></li>
+<li><p>Cartes et logistique : « actifs <strong>situés dans</strong> une région » ou « itinéraires <strong>croisant</strong> un tracé »</p></li>
 </ul>
 <div class="alert note">
-<p>Pour utiliser le champ GEOMETRY, mettez à jour votre SDK avec la dernière version.</p>
+<p>Pour utiliser le champ GEOMETRY, mettez à jour votre SDK vers la dernière version.</p>
 </div>
-<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Qu'est-ce qu'un champ GEOMETRIE ?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
+<h2 id="What-is-a-GEOMETRY-field" class="common-anchor-header">Qu’est-ce qu’un champ GEOMETRY ?<button data-href="#What-is-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -50,12 +50,12 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un champ GEOMETRIE est un type de données défini par le schéma (<code translate="no">DataType.GEOMETRY</code>) dans Milvus qui stocke des données géométriques. Lorsque vous travaillez avec des champs géométriques, vous interagissez avec les données à l'aide du format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, une représentation lisible par l'homme utilisée à la fois pour l'insertion de données et l'interrogation. En interne, Milvus convertit WKT en <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB</a> ) pour un stockage et un traitement efficaces, mais vous n'avez pas besoin de gérer WKB directement.</p>
-<p>Le type de données <code translate="no">GEOMETRY</code> prend en charge les objets géométriques suivants :</p>
+    </button></h2><p>Un champ GEOMETRY est un type de données défini par le schéma (<code translate="no">DataType.GEOMETRY</code>) dans Milvus qui stocke des données géométriques. Lorsque vous travaillez avec des champs géométriques, vous interagissez avec les données à l’aide du format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-Known Text (WKT)</a>, une représentation lisible par l’utilisateur utilisée à la fois pour l’insertion de données et pour les requêtes. En interne, Milvus convertit le format WKT en <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary">Well-Known Binary (WKB)</a> pour un stockage et un traitement efficaces, mais vous n’avez pas besoin de gérer le format WKB directement.</p>
+<p>Le type de données ` <code translate="no">GEOMETRY</code> ` prend en charge les objets géométriques suivants :</p>
 <ul>
 <li><p><strong>POINT</strong>: <code translate="no">POINT (x y)</code>; par exemple, <code translate="no">POINT (13.403683 52.520711)</code> où <code translate="no">x</code> = longitude et <code translate="no">y</code> = latitude</p></li>
 <li><p><strong>LINESTRING</strong>: <code translate="no">LINESTRING (x1 y1, x2 y2, …)</code>; par exemple, <code translate="no">LINESTRING (13.40 52.52, 13.41 52.51)</code></p></li>
-<li><p><strong>POLYGONE</strong>: <code translate="no">POLYGON ((x1 y1, x2 y2, x3 y3, x1 y1))</code>; par exemple, <code translate="no">POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))</code></p></li>
+<li><p><strong>POLYGON</strong>: <code translate="no">POLYGON ((x1 y1, x2 y2, x3 y3, x1 y1))</code>; par exemple, <code translate="no">POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))</code></p></li>
 <li><p><strong>MULTIPOINT</strong>: <code translate="no">MULTIPOINT ((x1 y1), (x2 y2), …)</code>, par exemple, <code translate="no">MULTIPOINT ((10 40), (40 30), (20 20), (30 10))</code></p></li>
 <li><p><strong>MULTILINESTRING</strong>: <code translate="no">MULTILINESTRING ((x1 y1, …), (xk yk, …))</code>, par exemple, <code translate="no">MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))</code></p></li>
 <li><p><strong>MULTIPOLYGON</strong>: <code translate="no">MULTIPOLYGON (((outer ring ...)), ((outer ring ...)))</code>, par exemple, <code translate="no">MULTIPOLYGON (((30 20, 45 40, 10 40, 30 20)), ((15 5, 40 10, 10 20, 5 10, 15 5)))</code></p></li>
@@ -76,8 +76,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser un champ <code translate="no">GEOMETRY</code>, il faut le définir dans le schéma de la collection, insérer des données géométriques, puis interroger les données à l'aide d'expressions de filtrage spécifiques.</p>
-<h3 id="Step-1-Define-a-GEOMETRY-field" class="common-anchor-header">Étape 1 : Définition d'un champ GEOMETRY<button data-href="#Step-1-Define-a-GEOMETRY-field" class="anchor-icon" translate="no">
+    </button></h2><p>Le processus d'utilisation d'un champ <code translate="no">GEOMETRY</code> consiste à le définir dans votre schéma de collection, à y insérer des données géométriques, puis à interroger ces données à l'aide d'expressions de filtrage spécifiques.</p>
+<h3 id="Step-1-Define-a-GEOMETRY-field" class="common-anchor-header">Étape 1 : Définir un champ GEOMETRY<button data-href="#Step-1-Define-a-GEOMETRY-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,9 +92,14 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour utiliser un champ <code translate="no">GEOMETRY</code>, définissez-le explicitement dans votre schéma de collection lors de la création de la collection. L'exemple suivant montre comment créer une collection avec un champ <code translate="no">geo</code> de type <code translate="no">DataType.GEOMETRY</code>.</p>
+    </button></h3><p>Pour utiliser un champ <code translate="no">GEOMETRY</code>, définissez-le explicitement dans le schéma de votre collection lors de la création de celle-ci. L’exemple suivant montre comment créer une collection avec un champ <code translate="no">geo</code> de type <code translate="no">DataType.GEOMETRY</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 
@@ -170,13 +175,66 @@ client.createCollection(requestCreate);
   <span class="hljs-attr">consistency_level</span>: <span class="hljs-string">&#x27;Strong&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
+    <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;fmt&quot;</span>
 
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+<span class="hljs-keyword">defer</span> cancel()
+
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
+
+dim := <span class="hljs-type">int64</span>(<span class="hljs-number">8</span>)
+schema := entity.NewSchema().
+    WithName(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithDynamicFieldEnabled(<span class="hljs-literal">true</span>).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;id&quot;</span>).WithDataType(entity.FieldTypeInt64).WithIsPrimaryKey(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;embeddings&quot;</span>).WithDataType(entity.FieldTypeFloatVector).WithDim(dim)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;geo&quot;</span>).WithDataType(entity.FieldTypeGeometry).WithNullable(<span class="hljs-literal">true</span>)).
+    WithField(entity.NewField().WithName(<span class="hljs-string">&quot;name&quot;</span>).WithDataType(entity.FieldTypeVarChar).WithMaxLength(<span class="hljs-number">128</span>))
+
+err = cli.CreateCollection(ctx, milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;geo_collection&quot;</span>, schema).
+    WithConsistencyLevel(entity.ClStrong))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: true,
+        &quot;fields&quot;: [
+            {&quot;fieldName&quot;: &quot;id&quot;, &quot;dataType&quot;: &quot;Int64&quot;, &quot;isPrimary&quot;: true},
+            {&quot;fieldName&quot;: &quot;embeddings&quot;, &quot;dataType&quot;: &quot;FloatVector&quot;, &quot;elementTypeParams&quot;: {&quot;dim&quot;: 8}},
+            {&quot;fieldName&quot;: &quot;geo&quot;, &quot;dataType&quot;: &quot;Geometry&quot;, &quot;nullable&quot;: true},
+            {&quot;fieldName&quot;: &quot;name&quot;, &quot;dataType&quot;: &quot;VarChar&quot;, &quot;elementTypeParams&quot;: {&quot;max_length&quot;: 128}}
+        ]
+    },
+    &quot;consistencyLevel&quot;: &quot;Strong&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Dans cet exemple, le champ <code translate="no">GEOMETRY</code> défini dans le schéma de la collection autorise les valeurs nulles avec <code translate="no">nullable=True</code>. Pour plus de détails, voir <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+<p>Dans cet exemple, le champ « <code translate="no">GEOMETRY</code> » défini dans le schéma de la collection autorise les valeurs nulles avec « <code translate="no">nullable=True</code> ». Pour plus de détails, reportez-vous à <a href="/docs/fr/nullable-and-default.md">la section</a> « <a href="/docs/fr/nullable-and-default.md">Valeurs nulles et valeurs par défaut</a> ».</p>
 </div>
 <h3 id="Step-2-Insert-data" class="common-anchor-header">Étape 2 : Insérer des données<button data-href="#Step-2-Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,9 +251,14 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Insérez des entités avec des données géométriques au format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>. Voici un exemple avec plusieurs points géo :</p>
+    </button></h3><p>Insérez des entités avec des données géométriques au format <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT</a>. Voici un exemple avec plusieurs points géographiques :</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">rng = np.random.default_rng(seed=<span class="hljs-number">19530</span>)
 geo_points = [
     <span class="hljs-string">&#x27;POINT(13.399710 52.518010)&#x27;</span>,
@@ -279,11 +342,60 @@ client.insert(InsertReq.builder()
 });
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(insert_result);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/column&quot;</span>
+
+geoPoints := []<span class="hljs-type">string</span>{
+    <span class="hljs-string">&quot;POINT(13.399710 52.518010)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.403934 52.522877)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.405088 52.521124)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.408223 52.516876)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.400092 52.521507)&quot;</span>,
+    <span class="hljs-string">&quot;POINT(13.408529 52.519274)&quot;</span>,
+}
+names := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Shop A&quot;</span>, <span class="hljs-string">&quot;Shop B&quot;</span>, <span class="hljs-string">&quot;Shop C&quot;</span>, <span class="hljs-string">&quot;Shop D&quot;</span>, <span class="hljs-string">&quot;Shop E&quot;</span>, <span class="hljs-string">&quot;Shop F&quot;</span>}
+ids := []<span class="hljs-type">int64</span>{<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>}
+embeddings := [][]<span class="hljs-type">float32</span>{
+    {<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>},
+    {<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>},
+    {<span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>},
+    {<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.1</span>},
+    {<span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>},
+    {<span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.9</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>, <span class="hljs-number">1.3</span>},
+}
+
+_, err = cli.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithColumns(
+        column.NewColumnInt64(<span class="hljs-string">&quot;id&quot;</span>, ids),
+        column.NewColumnVarChar(<span class="hljs-string">&quot;name&quot;</span>, names),
+        column.NewColumnFloatVector(<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-number">8</span>, embeddings),
+        column.NewColumnGeometryWKT(<span class="hljs-string">&quot;geo&quot;</span>, geoPoints),
+    ))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/insert&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;data&quot;: [
+        {&quot;id&quot;: 1, &quot;name&quot;: &quot;Shop A&quot;, &quot;embeddings&quot;: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], &quot;geo&quot;: &quot;POINT(13.399710 52.518010)&quot;},
+        {&quot;id&quot;: 2, &quot;name&quot;: &quot;Shop B&quot;, &quot;embeddings&quot;: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9], &quot;geo&quot;: &quot;POINT(13.403934 52.522877)&quot;},
+        {&quot;id&quot;: 3, &quot;name&quot;: &quot;Shop C&quot;, &quot;embeddings&quot;: [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], &quot;geo&quot;: &quot;POINT(13.405088 52.521124)&quot;},
+        {&quot;id&quot;: 4, &quot;name&quot;: &quot;Shop D&quot;, &quot;embeddings&quot;: [0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1], &quot;geo&quot;: &quot;POINT(13.408223 52.516876)&quot;},
+        {&quot;id&quot;: 5, &quot;name&quot;: &quot;Shop E&quot;, &quot;embeddings&quot;: [0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2], &quot;geo&quot;: &quot;POINT(13.400092 52.521507)&quot;},
+        {&quot;id&quot;: 6, &quot;name&quot;: &quot;Shop F&quot;, &quot;embeddings&quot;: [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3], &quot;geo&quot;: &quot;POINT(13.408529 52.519274)&quot;}
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Filtering-operations" class="common-anchor-header">Etape 3 : Opérations de filtrage<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
+<h3 id="Step-3-Filtering-operations" class="common-anchor-header">Étape 3 : Opérations de filtrage<button data-href="#Step-3-Filtering-operations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -298,7 +410,7 @@ client.insert(InsertReq.builder()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Avant de pouvoir effectuer des opérations de filtrage sur les champs <code translate="no">GEOMETRY</code>, il faut s'assurer que</p>
+    </button></h3><p>Avant de pouvoir effectuer des opérations de filtrage sur les champs d’ <code translate="no">GEOMETRY</code>, assurez-vous que :</p>
 <ul>
 <li><p>Vous avez créé un index sur chaque champ vectoriel.</p></li>
 <li><p>La collection est chargée en mémoire.</p></li>
@@ -306,7 +418,12 @@ client.insert(InsertReq.builder()
 <p><details></p>
 <p><summary>Afficher le code</summary></p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = milvus_client.prepare_index_params()
 index_params.add_index(field_name=<span class="hljs-string">&quot;embeddings&quot;</span>, metric_type=<span class="hljs-string">&quot;L2&quot;</span>)
 
@@ -345,27 +462,69 @@ client.createIndex(CreateIndexReq.builder()
   <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;geo_collection&#x27;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+
+idxOpt := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;geo_collection&quot;</span>, <span class="hljs-string">&quot;embeddings&quot;</span>, index.NewAutoIndex(entity.L2))
+indexTask, err := cli.CreateIndex(ctx, idxOpt)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = indexTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+
+loadTask, err := cli.LoadCollection(ctx, milvusclient.NewLoadCollectionOption(<span class="hljs-string">&quot;geo_collection&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">if</span> err = loadTask.Await(ctx); err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;indexParams&quot;: [{&quot;fieldName&quot;: &quot;embeddings&quot;, &quot;indexName&quot;: &quot;embeddings&quot;, &quot;metricType&quot;: &quot;L2&quot;, &quot;indexType&quot;: &quot;AUTOINDEX&quot;}]
+}&#x27;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/load&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>Une fois ces conditions remplies, vous pouvez utiliser des expressions avec des opérateurs géométriques dédiés pour filtrer votre collection sur la base des valeurs géométriques.</p>
-<h4 id="Define-filter-expressions" class="common-anchor-header">Définir les expressions de filtrage</h4><p>Pour filtrer sur un champ <code translate="no">GEOMETRY</code>, utilisez un opérateur géométrique dans une expression :</p>
+<p>Une fois ces conditions remplies, vous pouvez utiliser des expressions comportant des opérateurs géométriques dédiés pour filtrer votre collection en fonction des valeurs géométriques.</p>
+<h4 id="Define-filter-expressions" class="common-anchor-header">Définir des expressions de filtrage</h4><p>Pour filtrer sur un champ « <code translate="no">GEOMETRY</code> », utilisez un opérateur géométrique dans une expression :</p>
 <ul>
 <li><p>Général : <code translate="no">{operator}(geo_field, '{wkt}')</code></p></li>
 <li><p>Basé sur la distance : <code translate="no">ST_DWITHIN(geo_field, '{wkt}', distance)</code></p></li>
 </ul>
 <p>Où :</p>
 <ul>
-<li><p><code translate="no">operator</code> est l'un des opérateurs géométriques pris en charge (par exemple, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Les noms des opérateurs doivent être en majuscules ou en minuscules. Pour obtenir la liste des opérateurs pris en charge, reportez-vous à la section <a href="/docs/fr/geometry-operators.md#Supported-geometry-operators">Opérateurs géométriques pris en charge</a>.</p></li>
-<li><p><code translate="no">geo_field</code> est le nom de votre champ <code translate="no">GEOMETRY</code>.</p></li>
+<li><p><code translate="no">operator</code> est l’un des opérateurs géométriques pris en charge (par exemple, <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Les noms d’opérateurs doivent être entièrement en majuscules ou entièrement en minuscules. Pour obtenir la liste des opérateurs pris en charge, consultez la section <a href="/docs/fr/geometry-operators.md#Supported-geometry-operators">Opérateurs géométriques pris en charge</a>.</p></li>
+<li><p><code translate="no">geo_field</code> est le nom de votre champ « <code translate="no">GEOMETRY</code> ».</p></li>
 <li><p><code translate="no">'{wkt}'</code> est la représentation WKT de la géométrie à interroger.</p></li>
 <li><p><code translate="no">distance</code> est le seuil spécifique à <code translate="no">ST_DWITHIN</code>.</p></li>
 </ul>
-<p>Les exemples suivants montrent comment utiliser différents opérateurs spécifiques à la géométrie dans une expression de filtre :</p>
-<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Exemple 1 : Trouver des entités à l'intérieur d'une zone rectangulaire</h4><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<p>Les exemples suivants illustrent comment utiliser différents opérateurs spécifiques à la géométrie dans une expression de filtre :</p>
+<h4 id="Example-1-Find-entities-within-a-rectangular-area" class="common-anchor-header">Exemple 1 : rechercher des entités dans une zone rectangulaire</h4><div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">top_left_lon, top_left_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 bottom_right_lon, bottom_right_lat = <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
 bounding_box_wkt = <span class="hljs-string">f&quot;POLYGON((<span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{top_left_lat}</span>, <span class="hljs-subst">{bottom_right_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{bottom_right_lat}</span>, <span class="hljs-subst">{top_left_lon}</span> <span class="hljs-subst">{top_left_lat}</span>))&quot;</span>
@@ -426,12 +585,44 @@ System.out.println(<span class="hljs-string">&quot;Query results:&quot;</span>);
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">topLeftLon, topLeftLat := <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+bottomRightLon, bottomRightLat := <span class="hljs-number">13.455868</span>, <span class="hljs-number">52.495862</span>
+boundingBoxWKT := fmt.Sprintf(<span class="hljs-string">&quot;POLYGON((%f %f, %f %f, %f %f, %f %f, %f %f))&quot;</span>,
+    topLeftLon, topLeftLat, bottomRightLon, topLeftLat, bottomRightLon, bottomRightLat,
+    topLeftLon, bottomRightLat, topLeftLon, topLeftLat)
+
+resultSet, err := cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithFilter(fmt.Sprintf(<span class="hljs-string">&quot;st_within(geo, &#x27;%s&#x27;)&quot;</span>, boundingBoxWKT)).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;geo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+fmt.Println(resultSet.GetColumn(<span class="hljs-string">&quot;name&quot;</span>))
+fmt.Println(resultSet.GetColumn(<span class="hljs-string">&quot;geo&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;filter&quot;: &quot;st_within(geo, &#x27;</span>\&#x27;<span class="hljs-string">&#x27;POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))&#x27;</span>\&#x27;<span class="hljs-string">&#x27;)&quot;,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;geo&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Exemple 2 : Trouver des entités dans un rayon de 1 km autour d'un point central</h4><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<h4 id="Example-2-Find-entities-within-1km-of-a-central-point" class="common-anchor-header">Exemple 2 : rechercher des entités situées à moins de 1 km d’un point central</h4><div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">center_point_lon, center_point_lat = <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
 radius_meters = <span class="hljs-number">1000.0</span>
 central_point_wkt = <span class="hljs-string">f&quot;POINT(<span class="hljs-subst">{center_point_lon}</span> <span class="hljs-subst">{center_point_lat}</span>)&quot;</span>
@@ -480,12 +671,40 @@ System.out.println(<span class="hljs-string">&quot;Query results:&quot;</span>);
     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ret);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">centerPointLon, centerPointLat := <span class="hljs-number">13.403683</span>, <span class="hljs-number">52.520711</span>
+radiusMeters := <span class="hljs-number">1000.0</span>
+centralPointWKT := fmt.Sprintf(<span class="hljs-string">&quot;POINT(%f %f)&quot;</span>, centerPointLon, centerPointLat)
+
+filterExpr := fmt.Sprintf(<span class="hljs-string">&quot;st_dwithin(geo, &#x27;%s&#x27;, %f)&quot;</span>, centralPointWKT, radiusMeters)
+_, err = cli.Query(ctx, milvusclient.NewQueryOption(<span class="hljs-string">&quot;geo_collection&quot;</span>).
+    WithFilter(filterExpr).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;geo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/query&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;filter&quot;: &quot;st_dwithin(geo, &#x27;</span>\&#x27;<span class="hljs-string">&#x27;POINT(13.403683 52.520711)&#x27;</span>\&#x27;<span class="hljs-string">&#x27;, 1000.0)&quot;,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;geo&quot;]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Exemple 3 : Combiner la similarité vectorielle avec un filtre spatial</h4><div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<h4 id="Example-3-Combine-vector-similarity-with-a-spatial-filter" class="common-anchor-header">Exemple 3 : combiner la similarité vectorielle avec un filtre spatial</h4><div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#javascript">   NodeJS</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
 <pre><code translate="no" class="language-python">vectors_to_search = rng.random((<span class="hljs-number">1</span>, dim))
 result = milvus_client.search(
     collection_name,
@@ -540,9 +759,41 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<pre><code translate="no" class="language-go">queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>, <span class="hljs-number">0.7</span>, <span class="hljs-number">0.8</span>}
+
+resultSets, err := cli.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;geo_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">3</span>,                <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithANNSField(<span class="hljs-string">&quot;embeddings&quot;</span>).
+    WithFilter(filterExpr).
+    WithOutputFields(<span class="hljs-string">&quot;name&quot;</span>, <span class="hljs-string">&quot;geo&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-keyword">return</span>
+}
+
+<span class="hljs-keyword">for</span> _, rs := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, rs.IDs)
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, rs.Scores)
+}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;geo_collection&quot;,
+    &quot;data&quot;: [[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]],
+    &quot;limit&quot;: 3,
+    &quot;filter&quot;: &quot;st_within(geo, &#x27;</span>\&#x27;<span class="hljs-string">&#x27;POLYGON((13.403683 52.520711, 13.455868 52.520711, 13.455868 52.495862, 13.403683 52.495862, 13.403683 52.520711))&#x27;</span>\&#x27;<span class="hljs-string">&#x27;)&quot;,
+    &quot;outputFields&quot;: [&quot;name&quot;, &quot;geo&quot;],
+    &quot;searchParams&quot;: {&quot;metricType&quot;: &quot;L2&quot;}
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Next-Accelerate-queries" class="common-anchor-header">Suivant : Accélérer les requêtes<button data-href="#Next-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -559,8 +810,8 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Par défaut, les requêtes sur les champs <code translate="no">GEOMETRY</code> sans index effectueront un balayage complet de toutes les lignes, ce qui peut être lent sur les grands ensembles de données. Pour accélérer les requêtes géométriques, créez un index <code translate="no">RTREE</code> sur votre champ GEOMETRY.</p>
-<p>Pour plus d'informations, reportez-vous à <a href="/docs/fr/rtree.md">RTREE</a>.</p>
+    </button></h2><p>Par défaut, les requêtes sur les champs de type « <code translate="no">GEOMETRY</code> » sans index effectuent un balayage complet de toutes les lignes, ce qui peut être lent sur des ensembles de données volumineux. Pour accélérer les requêtes géométriques, créez un index « <code translate="no">RTREE</code> » sur votre champ GEOMETRY.</p>
+<p>Pour plus de détails, consultez la section <a href="/docs/fr/rtree.md">RTREE</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -576,7 +827,7 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="common-anchor-header">Si j'ai activé la fonctionnalité de champ dynamique pour ma collection, puis-je insérer des données géométriques dans une clé de champ dynamique ?<button data-href="#If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="anchor-icon" translate="no">
+    </button></h2><h3 id="If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="common-anchor-header">Si j’ai activé la fonctionnalité de champ dynamique pour ma collection, puis-je insérer des données géométriques dans une clé de champ dynamique ?<button data-href="#If-Ive-enabled-the-dynamic-field-feature-for-my-collection-can-I-insert-geometric-data-into-a-dynamic-field-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -591,8 +842,8 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Non, les données géométriques ne peuvent pas être insérées dans un champ dynamique. Avant d'insérer des données géométriques, assurez-vous que le champ <code translate="no">GEOMETRY</code> a été explicitement défini dans le schéma de votre collection.</p>
-<h3 id="Does-the-GEOMETRY-field-support-the-mmap-feature" class="common-anchor-header">Le champ GEOMETRY prend-il en charge la fonction mmap ?<button data-href="#Does-the-GEOMETRY-field-support-the-mmap-feature" class="anchor-icon" translate="no">
+    </button></h3><p>Non, les données géométriques ne peuvent pas être insérées dans un champ dynamique. Avant d’insérer des données géométriques, assurez-vous que le champ « <code translate="no">GEOMETRY</code> » a été explicitement défini dans le schéma de votre collection.</p>
+<h3 id="Does-the-GEOMETRY-field-support-the-mmap-feature" class="common-anchor-header">Le champ GEOMETRY prend-il en charge la fonctionnalité mmap ?<button data-href="#Does-the-GEOMETRY-field-support-the-mmap-feature" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -607,8 +858,8 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui, le champ <code translate="no">GEOMETRY</code> prend en charge la fonction mmap. Pour plus d'informations, reportez-vous à la section <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Utiliser mmap.</a></p>
-<h3 id="Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="common-anchor-header">Puis-je définir la rubrique GEOMETRY comme nullable ou lui attribuer une valeur par défaut ?<button data-href="#Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="anchor-icon" translate="no">
+    </button></h3><p>Oui, le champ « <code translate="no">GEOMETRY</code> » prend en charge mmap. Pour plus d’informations, consultez la section « <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">Utilisation de mmap</a> ».</p>
+<h3 id="Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="common-anchor-header">Puis-je définir le champ GEOMETRY comme pouvant accepter des valeurs nulles ou lui attribuer une valeur par défaut ?<button data-href="#Can-I-define-the-GEOMETRY-field-as-nullable-or-set-a-default-value" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -623,4 +874,4 @@ List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = statusR.getSearc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Oui, le champ GEOMETRY prend en charge l'attribut <code translate="no">nullable</code> et une valeur par défaut au format WKT. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/nullable-and-default.md">Nullable &amp; Default</a>.</p>
+    </button></h3><p>Oui, le champ GEOMETRY prend en charge l’attribut « <code translate="no">nullable</code> » et une valeur par défaut au format WKT. Pour plus d’informations, consultez la section <a href="/docs/fr/nullable-and-default.md">«Nullable &amp; Default</a>».</p>

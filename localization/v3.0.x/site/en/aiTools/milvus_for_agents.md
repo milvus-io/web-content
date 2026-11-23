@@ -133,6 +133,26 @@ summary: >-
   </a>
 </div>
 </div>
+<div class="card-wrapper">
+<div class="start_card_container">
+  <a href="/docs/nodejs_sdk.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Node.js SDK</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">MilvusClient method calls, field definitions, response status checks, and search result shapes.</p>
+  </a>
+</div>
+<div class="start_card_container">
+  <a href="/docs/go_sdk.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Go SDK</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Go SDK v3 module paths, connection timeouts, collection loading, and search result sets.</p>
+  </a>
+</div>
+<div class="start_card_container">
+  <a href="/docs/restful_api.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RESTful API v2</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">v2 endpoints, camelCase request fields, response code checks, and load state polling.</p>
+  </a>
+</div>
+</div>
 <h3 id="Use-in-different-environments" class="common-anchor-header">Use in different environments<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

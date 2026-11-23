@@ -19,7 +19,7 @@ summary: Note
         ></path>
       </svg>
     </button></h1><div class="alert note">
-<p>Questa guida si concentra sugli aspetti pratici della scelta dell'analizzatore. Per i dettagli tecnici sui componenti dell'analizzatore e su come aggiungere i parametri, consulta <a href="/docs/it/analyzer-overview.md">la Panoramica sull'analizzatore</a>.</p>
+<p>Questa guida si concentra sugli aspetti pratici del processo decisionale per la scelta dell'analizzatore. Per i dettagli tecnici sui componenti dell'analizzatore e su come aggiungere i parametri dell'analizzatore, consultare <a href="/docs/it/analyzer-overview.md">la Panoramica sull'analizzatore</a>.</p>
 </div>
 <h2 id="Understand-analyzers-in-2-minutes" class="common-anchor-header">Comprendere gli analizzatori in 2 minuti<button data-href="#Understand-analyzers-in-2-minutes" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,7 +46,7 @@ summary: Note
  </span></p>
 <ol>
 <li><p><strong>Tokenizzazione (obbligatoria):</strong> questa fase iniziale applica un <strong>tokenizzatore</strong> per suddividere una stringa continua di testo in unità discrete e significative chiamate token. Il metodo di tokenizzazione può variare in modo significativo a seconda della lingua e del tipo di contenuto.</p></li>
-<li><p><strong>Filtraggio dei token (facoltativo):</strong> dopo la tokenizzazione, vengono applicati <strong>dei filtri</strong> per modificare, rimuovere o perfezionare i token. Queste operazioni possono includere la conversione di tutti i token in minuscolo, la rimozione di parole comuni prive di significato (come le stopword) o la riduzione delle parole alla loro forma radice (stemming).</p></li>
+<li><p><strong>Filtraggio dei token (opzionale):</strong> dopo la tokenizzazione, vengono applicati <strong>dei filtri</strong> per modificare, rimuovere o perfezionare i token. Queste operazioni possono includere la conversione di tutti i token in minuscolo, la rimozione di parole comuni prive di significato (come le parole vuote) o la riduzione delle parole alla loro forma radice (stemming).</p></li>
 </ol>
 <p><strong>Esempio</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -69,7 +69,7 @@ summary: Note
         ></path>
       </svg>
     </button></h2><p>La scelta di un analizzatore errato può rendere i documenti rilevanti non ricercabili o restituire risultati irrilevanti.</p>
-<p>La tabella seguente riassume i problemi comuni causati da una selezione impropria dell’analizzatore e fornisce soluzioni concrete per diagnosticare i problemi di ricerca.</p>
+<p>La tabella seguente riassume i problemi più comuni causati da una selezione errata dell’analizzatore e fornisce soluzioni pratiche per diagnosticare i problemi di ricerca.</p>
 <table>
    <tr>
      <th><p>Problema</p></th>
@@ -80,7 +80,7 @@ summary: Note
    </tr>
    <tr>
      <td><p>Tokenizzazione eccessiva</p></td>
-     <td><p>Le ricerche testuali di termini tecnici, identificatori o URL non riescono a individuare documenti pertinenti.</p></td>
+     <td><p>Le ricerche testuali di termini tecnici, identificatori o URL non individuano documenti pertinenti.</p></td>
      <td><ul><li><p><code translate="no">"user_id"</code> → <code translate="no">['user', 'id']</code></p></li><li><p><code translate="no">"C++"</code> → <code translate="no">['c']</code></p></li></ul></td>
      <td><p><a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a> analizzatore</p></td>
      <td><p>Utilizzare un <a href="/docs/it/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> tokenizer; combinarlo con un <a href="/docs/it/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> filtro.</p></td>
@@ -93,14 +93,14 @@ summary: Note
      <td><p>Utilizzare un <a href="/docs/it/standard-tokenizer.md"><code translate="no">standard</code></a> tokenizer per effettuare la suddivisione in base alla punteggiatura e agli spazi; utilizzare un filtro <a href="/docs/it/regex-filter.md">regex</a> personalizzato.</p></td>
    </tr>
    <tr>
-     <td><p>Discrepanze linguistiche</p></td>
+     <td><p>Incompatibilità linguistiche</p></td>
      <td><p>I risultati della ricerca per una lingua specifica non hanno senso o sono inesistenti.</p></td>
      <td><p>Testo in cinese: <code translate="no">"机器学习"</code> → <code translate="no">['机器学习']</code> (un unico token)</p></td>
      <td><p><a href="/docs/it/english-analyzer.md"><code translate="no">english</code></a> analizzatore</p></td>
      <td><p>Utilizzare un analizzatore specifico per la lingua, come <a href="/docs/it/chinese-analyzer.md"><code translate="no">chinese</code></a>.</p></td>
    </tr>
    <tr>
-     <td><p>Incompatibilità del metodo di immissione</p></td>
+     <td><p>Incompatibilità del metodo di input</p></td>
      <td><p>Gli utenti digitano in pinyin, ma il testo indicizzato utilizza caratteri cinesi.</p></td>
      <td><p>Testo cinese: <code translate="no">"足球"</code>; testo della query: <code translate="no">"zuqiu"</code></p></td>
      <td><p>Analizzatore che genera solo token di caratteri cinesi</p></td>
@@ -122,7 +122,7 @@ summary: Note
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per molti casi d'uso, non è necessario fare nulla di particolare. Verifichiamo se il tuo caso rientra tra questi.</p>
+    </button></h2><p>In molti casi d'uso non è necessario fare nulla di particolare. Verifichiamo se il tuo caso rientra tra questi.</p>
 <h3 id="Default-behavior-standard-analyzer" class="common-anchor-header">Comportamento predefinito: analizzatore " <code translate="no">standard</code> "<button data-href="#Default-behavior-standard-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -143,7 +143,7 @@ summary: Note
 <ul>
 <li><p>Suddivide il testo in base agli spazi e ai segni di punteggiatura</p></li>
 <li><p>Converte tutti i token in minuscolo</p></li>
-<li><p>Rimuove un insieme predefinito di stop word comuni in inglese e la maggior parte dei segni di punteggiatura</p></li>
+<li><p>Rimuove un insieme predefinito di stop word comuni della lingua inglese e la maggior parte dei segni di punteggiatura</p></li>
 </ul>
 <p><strong>Esempio di trasformazione</strong>:</p>
 <pre><code translate="no" class="language-plaintext">Input:  &quot;The Milvus vector database is built for scale!&quot;
@@ -176,7 +176,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>Post di blog in inglese</p></td>
      <td><p>✅ Sì</p></td>
      <td><p>Il comportamento predefinito è sufficiente.</p></td>
-     <td><p>Utilizza l'impostazione predefinita (non è necessaria alcuna configurazione).</p></td>
+     <td><p>Utilizza le impostazioni predefinite (non è necessaria alcuna configurazione).</p></td>
    </tr>
    <tr>
      <td><p>Documenti in cinese</p></td>
@@ -193,14 +193,14 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>Documenti in thailandese</p></td>
      <td><p>❌ No</p></td>
-     <td><p>Il testo in thailandese di solito non utilizza spazi tra le parole, pertanto richiede una segmentazione delle parole specifica per la lingua.</p></td>
+     <td><p>Il testo in thailandese solitamente non utilizza spazi tra le parole, pertanto richiede una segmentazione delle parole specifica per la lingua.</p></td>
      <td><p>Utilizza un <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> .</p></td>
    </tr>
    <tr>
      <td><p>Documentazione tecnica</p></td>
      <td><p>❌ No</p></td>
      <td><p>La punteggiatura viene rimossa da termini come <code translate="no">C++</code>.</p></td>
-     <td><p>Crea un analizzatore personalizzato con un <a href="/docs/it/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> tokenizer e un <a href="/docs/it/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> filtro.</p></td>
+     <td><p>Creare un analizzatore personalizzato con un <a href="/docs/it/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> tokenizer e un <a href="/docs/it/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> filtro.</p></td>
    </tr>
    <tr>
      <td><p>Lingue con testi separati da spazi, come il francese o lo spagnolo</p></td>
@@ -211,13 +211,13 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p>Lingue multilingue o sconosciute</p></td>
      <td><p>❌ No</p></td>
-     <td><p>L'analizzatore <code translate="no">standard</code> non dispone della logica specifica per la lingua necessaria per gestire diversi set di caratteri e regole di tokenizzazione.</p></td>
+     <td><p>L’analizzatore <code translate="no">standard</code> non dispone della logica specifica per la lingua necessaria per gestire diversi set di caratteri e regole di tokenizzazione.</p></td>
      <td><p>Utilizzare un analizzatore personalizzato con il <a href="/docs/it/icu-tokenizer.md"><code translate="no">icu</code></a> tokenizer per una tokenizzazione compatibile con Unicode. </p><p>In alternativa, si consiglia di configurare <a href="/docs/it/multi-language-analyzers.md">analizzatori multilingue</a> o un <a href="/docs/it/language-identifier.md">identificatore di lingua</a> per una gestione più precisa dei contenuti multilingue.</p></td>
    </tr>
 </table>
-<p>Se l'analizzatore predefinito " <code translate="no">standard</code> " non soddisfa le vostre esigenze, è necessario implementarne uno diverso. Sono disponibili due opzioni:</p>
+<p>Se l'analizzatore predefinito " <code translate="no">standard</code> " non soddisfa le vostre esigenze, è necessario implementarne uno diverso. Avete due opzioni:</p>
 <ul>
-<li><p><a href="/docs/it/choose-the-right-analyzer-for-your-use-case.md#Path-A-Use-built-in-analyzers">Utilizzare un analizzatore integrato</a> oppure</p></li>
+<li><p><a href="/docs/it/choose-the-right-analyzer-for-your-use-case.md#Path-A-Use-built-in-analyzers">utilizzare un analizzatore integrato</a> oppure</p></li>
 <li><p><a href="/docs/it/choose-the-right-analyzer-for-your-use-case.md#Path-B-Create-a-custom-analyzer">crearne uno personalizzato</a></p></li>
 </ul>
 <h2 id="Path-A-Use-built-in-analyzers" class="common-anchor-header">Opzione A: Utilizzare gli analizzatori integrati<button data-href="#Path-A-Use-built-in-analyzers" class="anchor-icon" translate="no">
@@ -260,7 +260,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p><a href="/docs/it/standard-analyzer.md"><code translate="no">standard</code></a></p></td>
-     <td><p>La maggior parte delle lingue in cui le parole sono separate da spazi (inglese, francese, tedesco, spagnolo, ecc.)</p></td>
+     <td><p>La maggior parte delle lingue con spazi come separatori (inglese, francese, tedesco, spagnolo, ecc.)</p></td>
      <td><ul><li><p>Tokenizzatore: <code translate="no">standard</code></p></li><li><p>Filtri: <code translate="no">lowercase</code></p></li></ul></td>
      <td><p>Analizzatore generico per l'elaborazione iniziale del testo. Per scenari monolingui, gli analizzatori specifici per lingua (come <code translate="no">english</code>) offrono prestazioni migliori.</p></td>
    </tr>
@@ -273,7 +273,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    <tr>
      <td><p><a href="/docs/it/chinese-analyzer.md"><code translate="no">chinese</code></a></p></td>
      <td><p>Cinese</p></td>
-     <td><ul><li><p>Tokenizzatore: <code translate="no">jieba</code></p></li><li><p>Filtri: <code translate="no">cnalphanumonly</code></p></li></ul></td>
+     <td><ul><li><p>Tokenizer: <code translate="no">jieba</code></p></li><li><p>Filtri: <code translate="no">cnalphanumonly</code></p></li></ul></td>
      <td><p>Attualmente utilizza per impostazione predefinita il dizionario del cinese semplificato.</p></td>
    </tr>
    <tr>
@@ -320,9 +320,9 @@ schema.add_field(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Per informazioni dettagliate sull'utilizzo, consultare <a href="/docs/it/full-text-search.md">Ricerca full-text</a>, <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a> o <a href="/docs/it/phrase-match.md">Corrispondenza di frase</a>.</p>
+<p>Per informazioni dettagliate sull'utilizzo, consultare <a href="/docs/it/full-text-search.md">Ricerca full-text</a>, <a href="/docs/it/keyword-match.md">Corrispondenza di testo</a> o <a href="/docs/it/phrase-match.md">Corrispondenza di frasi</a>.</p>
 </div>
-<h2 id="Path-B-Create-a-custom-analyzer" class="common-anchor-header">Percorso B: Creazione di un analizzatore personalizzato<button data-href="#Path-B-Create-a-custom-analyzer" class="anchor-icon" translate="no">
+<h2 id="Path-B-Create-a-custom-analyzer" class="common-anchor-header">Percorso B: Creare un analizzatore personalizzato<button data-href="#Path-B-Create-a-custom-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -396,7 +396,7 @@ schema.add_field(
      <td><ul><li><p>Input: <code translate="no">"机器学习算法"</code></p></li><li><p>Output: <code translate="no">["机器", "学习", "算法"]</code></p></li></ul></td>
    </tr>
 </table>
-<h5 id="Thai" class="common-anchor-header">Thailandese</h5><p>Per la maggior parte dei testi in thailandese, utilizzare l' <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> . Utilizzare il <a href="/docs/it/thai-tokenizer.md"><code translate="no">thai</code></a> solo quando è necessario creare una pipeline di analizzatori personalizzata.</p>
+<h5 id="Thai" class="common-anchor-header">Tailandese</h5><p>Per la maggior parte dei testi in thailandese, utilizzare l' <a href="/docs/it/thai-analyzer.md"><code translate="no">thai</code></a> . Utilizzare il <a href="/docs/it/thai-tokenizer.md"><code translate="no">thai</code></a> solo quando è necessario creare una pipeline di analizzatori personalizzata.</p>
 <table>
    <tr>
      <th><p>Tokenizzatore</p></th>
@@ -422,7 +422,7 @@ schema.add_field(
    <tr>
      <td><p>Giapponese</p></td>
      <td><p><a href="/docs/it/lindera-tokenizer.md"><code translate="no">lindera</code></a></p></td>
-     <td><p><a href="https://taku910.github.io/mecab/">ipadic</a> (uso generale), <a href="https://github.com/neologd/mecab-ipadic-neologd">ipadic-neologd</a> (termini moderni), <a href="https://clrd.ninjal.ac.jp/unidic/">unidic</a> (accademico)</p></td>
+     <td><p><a href="https://taku910.github.io/mecab/">ipadic</a> (uso generico), <a href="https://github.com/neologd/mecab-ipadic-neologd">ipadic-neologd</a> (termini moderni), <a href="https://clrd.ninjal.ac.jp/unidic/">unidic</a> (accademico)</p></td>
      <td><p>Analisi morfologica con gestione dei nomi propri</p></td>
      <td><ul><li><p>Input: <code translate="no">"東京都渋谷区"</code></p></li><li><p>Output: <code translate="no">["東京", "都", "渋谷", "区"]</code></p></li></ul></td>
    </tr>
@@ -453,9 +453,9 @@ schema.add_field(
 <ul>
 <li><p>Lingue miste in cui l'identificazione della lingua è impraticabile.</p></li>
 <li><p>Non si desidera l'overhead degli <a href="/docs/it/multi-language-analyzers.md">analizzatori multilingue</a> o <a href="/docs/it/language-identifier.md">dell'identificatore di lingua</a>.</p></li>
-<li><p>Il contenuto presenta una lingua principale con sporadiche parole straniere che incidono in misura minima sul significato complessivo (ad esempio, un testo in inglese con sporadici nomi di marchi o termini tecnici in giapponese o francese).</p></li>
+<li><p>Il contenuto presenta una lingua principale con parole straniere occasionali che contribuiscono in misura minima al significato complessivo (ad esempio, un testo in inglese con nomi di marchi o termini tecnici sporadici in giapponese o francese).</p></li>
 </ul>
-<p><strong>Approcci alternativi</strong>: per una gestione più precisa dei contenuti multilingue, si consiglia di utilizzare analizzatori multilingue o l’identificatore di lingua. Per ulteriori dettagli, consultare <a href="/docs/it/multi-language-analyzers.md">Analizzatori multilingue</a> o <a href="/docs/it/language-identifier.md">Identificatore di lingua</a>.</p>
+<p><strong>Approcci alternativi</strong>: Per una gestione più precisa dei contenuti multilingue, si consiglia di utilizzare analizzatori multilingue o l’identificatore di lingua. Per ulteriori dettagli, consultare <a href="/docs/it/multi-language-analyzers.md">Analizzatori multilingue</a> o <a href="/docs/it/language-identifier.md">Identificatore di lingua</a>.</p>
 <h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">Fase 2: Aggiungere filtri per la precisione<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -472,7 +472,7 @@ schema.add_field(
         ></path>
       </svg>
     </button></h3><p>Dopo <a href="/docs/it/choose-the-right-analyzer-for-your-use-case.md#Step-1-Select-the-tokenizer-based-on-language">aver selezionato il tokenizer</a>, applicare i filtri in base alle specifiche esigenze di ricerca e alle caratteristiche dei contenuti.</p>
-<h4 id="Commonly-used-filters" class="common-anchor-header">Filtri di uso comune</h4><p>Questi filtri sono essenziali per la maggior parte delle configurazioni linguistiche con separazione tramite spazio (inglese, francese, tedesco, spagnolo, ecc.) e migliorano significativamente la qualità della ricerca:</p>
+<h4 id="Commonly-used-filters" class="common-anchor-header">Filtri di uso comune</h4><p>Questi filtri sono essenziali per la maggior parte delle configurazioni linguistiche con separazione tramite spazi (inglese, francese, tedesco, spagnolo, ecc.) e migliorano significativamente la qualità della ricerca:</p>
 <table>
    <tr>
      <th><p>Filtro</p></th>
@@ -482,7 +482,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/it/lowercase-filter.md"><code translate="no">lowercase</code></a></p></td>
-     <td><p>Converti tutti i token in minuscolo</p></td>
+     <td><p>Converte tutti i token in minuscolo</p></td>
      <td><p>Universale: si applica a tutte le lingue che distinguono tra maiuscole e minuscole</p></td>
      <td><ul><li><p>Input: <code translate="no">["Apple", "iPhone"]</code></p></li><li><p>Risultato: <code translate="no">[['apple'], ['iphone']]</code></p></li></ul></td>
    </tr>
@@ -495,12 +495,12 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/it/stop-filter.md"><code translate="no">stop</code></a></p></td>
      <td><p>Rimuovere le parole comuni prive di significato</p></td>
-     <td><p>La maggior parte delle lingue - particolarmente efficace per le lingue in cui le parole sono separate da spazi</p></td>
+     <td><p>La maggior parte delle lingue - particolarmente efficace per le lingue con separazione spaziale</p></td>
      <td><ul><li><p>Input: <code translate="no">["the", "quick", "brown", "fox"]</code></p></li><li><p>Risultato: <code translate="no">[[], ['quick'], ['brown'], ['fox']]</code></p></li></ul></td>
    </tr>
 </table>
 <div class="alert note">
-<p>Per le lingue dell'Asia orientale (cinese, giapponese, coreano, ecc.), concentrarsi invece su <a href="/docs/it/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtri specifici per ciascuna lingua</a>. Queste lingue utilizzano in genere approcci diversi per l'elaborazione del testo e potrebbero non trarre benefici significativi dallo stemming.</p>
+<p>Per le lingue dell'Asia orientale (cinese, giapponese, coreano, ecc.), concentrarsi invece su <a href="/docs/it/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">filtri specifici per la lingua</a>. Queste lingue utilizzano in genere approcci diversi per l'elaborazione del testo e potrebbero non trarre benefici significativi dallo stemming.</p>
 </div>
 <h4 id="Text-normalization-filters" class="common-anchor-header">Filtri di normalizzazione del testo</h4><p>Questi filtri standardizzano le variazioni del testo per migliorare la coerenza delle corrispondenze:</p>
 <table>
@@ -527,13 +527,13 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/it/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>Rimuovi i token di punteggiatura isolati</p></td>
-     <td><p>Pulizia dell'output generato dai tokenizzatori <code translate="no">jieba</code>, <code translate="no">lindera</code> e <code translate="no">icu</code>, che restituiscono i segni di punteggiatura come singoli token</p></td>
-     <td><ul><li><p>Input: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>Output: <code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>Rimuovi i token che contengono segni di punteggiatura</p></td>
+     <td><p>Pulisci l'output dei tokenizzatori <code translate="no">jieba</code>, <code translate="no">lindera</code> e <code translate="no">icu</code>, che restituiscono i segni di punteggiatura come token a sé stanti. I token con segni di punteggiatura all'interno delle parole, come <code translate="no">don't</code> o <code translate="no">3.5kg</code>, vengono rimossi completamente; usa il <a href="/docs/it/regex-filter.md"><code translate="no">regex</code></a> filtro per mantenerli</p></td>
+     <td><ul><li><p>Input: <code translate="no">["Hello", "!", "world"]</code></p></li><li><p>Output: <code translate="no">[['Hello'], ['world']]</code></p></li><li><p>Input: <code translate="no">["don't", "buy"]</code></p></li><li><p>Output: <code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/it/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
-     <td><p>Mantenere solo lettere e numeri</p></td>
+     <td><p>Conserva solo lettere e numeri</p></td>
      <td><p>Contenuti tecnici, elaborazione del testo pulito</p></td>
      <td><ul><li><p>Input: <code translate="no">["user123", "test@email.com"]</code></p></li><li><p>Risultato: <code translate="no">[['user123'], ['test', 'email', 'com']]</code></p></li></ul></td>
    </tr>
@@ -546,11 +546,11 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/it/regex-filter.md"><code translate="no">regex</code></a></p></td>
      <td><p>Filtraggio personalizzato basato su modelli</p></td>
-     <td><p>Requisiti specifici per i token in base al dominio</p></td>
+     <td><p>Requisiti specifici per i token a seconda del dominio</p></td>
      <td><ul><li><p>Input: <code translate="no">["test123", "prod456"]</code></p></li><li><p>Output: <code translate="no">[[], ['prod456']]</code> (se <strong>expr="^prod"</strong>)</p></li></ul></td>
    </tr>
 </table>
-<h4 id="Language-specific-filters" class="common-anchor-header">Filtri specifici per lingua</h4><p>Questi filtri gestiscono caratteristiche specifiche della lingua:</p>
+<h4 id="Language-specific-filters" class="common-anchor-header">Filtri specifici per lingua</h4><p>Questi filtri gestiscono caratteristiche linguistiche specifiche:</p>
 <table>
    <tr>
      <th><p>Filtro</p></th>
@@ -614,7 +614,7 @@ schema.add_field(
 <span class="highlighted-wrapper-line">    analyzer_params=analyzer_params,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Final-Test-with-runanalyzer" class="common-anchor-header">Conclusione: Testare con <code translate="no">run_analyzer</code><button data-href="#Final-Test-with-runanalyzer" class="anchor-icon" translate="no">
+<h3 id="Final-Test-with-runanalyzer" class="common-anchor-header">Finale: Testare con <code translate="no">run_analyzer</code><button data-href="#Final-Test-with-runanalyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -659,9 +659,9 @@ result = client.run_analyzer(sample_text, analyzer_params)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa sezione fornisce le configurazioni consigliate per il tokenizzatore e il filtro nei casi d'uso più comuni quando si lavora con gli analizzatori in Milvus. Scegli la combinazione che meglio si adatta al tuo tipo di contenuto e alle tue esigenze di ricerca.</p>
+    </button></h2><p>Questa sezione fornisce le configurazioni consigliate per il tokenizzatore e il filtro relative ai casi d’uso più comuni quando si lavora con gli analizzatori in Milvus. Scegli la combinazione che meglio si adatta al tuo tipo di contenuto e alle tue esigenze di ricerca.</p>
 <div class="alert note">
-<p>Prima di applicare un analizzatore alla propria raccolta, si consiglia di utilizzare <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> per testare e verificare le prestazioni dell’analisi del testo.</p>
+<p>Prima di applicare un analizzatore alla propria collezione, si consiglia di utilizzare <a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md"><code translate="no">run_analyzer</code></a> per testare e verificare le prestazioni dell’analisi del testo.</p>
 </div>
 <h3 id="Languages-with-accent-marks-French-Spanish-German-etc" class="common-anchor-header">Lingue con accenti (francese, spagnolo, tedesco, ecc.)<button data-href="#Languages-with-accent-marks-French-Spanish-German-etc" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -766,7 +766,7 @@ analyzer_params = {
 <div class="alert note">
 <p>Per il cinese semplificato, <code translate="no">cnalphanumonly</code> rimuove tutti i token tranne i caratteri cinesi, il testo alfanumerico e le cifre. Ciò impedisce che la punteggiatura influisca sulla qualità della ricerca.</p>
 </div>
-<p>Se gli utenti possono effettuare ricerche nel testo cinese digitando il pinyin, utilizzare un analizzatore personalizzato con il tokenizzatore <code translate="no">jieba</code> e il <a href="/docs/it/pinyin-filter.md"><code translate="no">pinyin</code></a> filtro al posto dell’analizzatore <code translate="no">chinese</code> integrato.</p>
+<p>Se gli utenti possono effettuare ricerche nel testo cinese digitando il pinyin, utilizzare un analizzatore personalizzato con il tokenizzatore <code translate="no">jieba</code> e il <a href="/docs/it/pinyin-filter.md"><code translate="no">pinyin</code></a> filtro invece dell’analizzatore <code translate="no">chinese</code> integrato.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;pinyin&quot;</span>]
@@ -794,7 +794,7 @@ analyzer_params = {
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
@@ -849,7 +849,7 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Quando si lavora con contenuti che abbracciano più lingue o utilizzano sistemi di scrittura in modo imprevedibile, iniziare con l’analizzatore <code translate="no">icu</code>. Questo analizzatore, compatibile con Unicode, gestisce efficacemente sistemi di scrittura e simboli misti.</p>
+    </button></h3><p>Quando si lavora con contenuti che abbracciano più lingue o utilizzano sistemi di scrittura in modo imprevedibile, iniziare con l’analizzatore <code translate="no">icu</code>. Questo analizzatore compatibile con Unicode gestisce efficacemente sistemi di scrittura e simboli misti.</p>
 <p><strong>Configurazione multilingue di base (senza stemming)</strong>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
@@ -857,10 +857,10 @@ analyzer_params = {
 }
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Elaborazione multilingue avanzata</strong>:</p>
-<p>Per un controllo migliore sul comportamento dei token nelle diverse lingue:</p>
+<p>Per un migliore controllo sul comportamento dei token nelle diverse lingue:</p>
 <ul>
 <li><p>Utilizza una configurazione <strong>dell'analizzatore multilingue</strong>. Per ulteriori dettagli, consulta <a href="/docs/it/multi-language-analyzers.md">Analizzatori multilingue</a>.</p></li>
-<li><p>Implementa un <strong>identificatore di lingua</strong> nei tuoi contenuti. Per ulteriori dettagli, consulta <a href="/docs/it/language-identifier.md">Identificatore di lingua</a>.</p></li>
+<li><p>Implementare un <strong>identificatore di lingua</strong> nei propri contenuti. Per ulteriori dettagli, consultare <a href="/docs/it/language-identifier.md">Identificatore di lingua</a>.</p></li>
 </ul>
 <h2 id="Integrate-with-text-retrieval-features" class="common-anchor-header">Integrazione con le funzionalità di recupero del testo<button data-href="#Integrate-with-text-retrieval-features" class="anchor-icon" translate="no">
       <svg translate="no"

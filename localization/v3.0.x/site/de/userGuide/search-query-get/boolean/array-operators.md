@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus bietet ARRAY-Operatoren zum Filtern von ARRAY-Feldern und zum teilweisen Aktualisieren von ARRAY-Feldwerten.</p>
 <div class="alert note">
-<p>Alle Elemente innerhalb eines Arrays müssen denselben Typ haben, und verschachtelte Strukturen innerhalb von Arrays werden als einfache Zeichenfolgen behandelt. Daher ist es bei der Arbeit mit ARRAY-Feldern ratsam, eine zu tiefe Verschachtelung zu vermeiden und sicherzustellen, dass Ihre Datenstrukturen so flach wie möglich sind, um eine optimale Leistung zu erzielen.</p>
+<p>Alle Elemente innerhalb eines Arrays müssen vom gleichen Typ sein, und verschachtelte Strukturen innerhalb von Arrays werden als einfache Zeichenfolgen behandelt. Daher ist es bei der Arbeit mit ARRAY-Feldern ratsam, eine zu tiefe Verschachtelung zu vermeiden und sicherzustellen, dass Ihre Datenstrukturen so flach wie möglich sind, um eine optimale Leistung zu erzielen.</p>
 </div>
 <p>ARRAY-Operatoren in Milvus decken zwei Anwendungsszenarien ab:</p>
 <ul>
@@ -54,8 +54,8 @@ summary: >-
 <tr><td><a href="#ARRAYCONTAINSALL">ARRAY_CONTAINS_ALL(Bezeichner, Ausdruck)</a></td><td>Filterausdruck</td><td>Prüft, ob alle Elemente einer angegebenen Liste in einem ARRAY-Feld vorhanden sind.</td></tr>
 <tr><td><a href="#ARRAYCONTAINSANY">ARRAY_CONTAINS_ANY(Bezeichner, Ausdruck)</a></td><td>Filterausdruck</td><td>Prüft, ob mindestens ein Element einer angegebenen Liste in einem ARRAY-Feld vorhanden ist.</td></tr>
 <tr><td><a href="#ARRAYLENGTH">ARRAY_LENGTH(Bezeichner)</a></td><td>Filterausdruck</td><td>Gibt die Anzahl der Elemente in einem ARRAY-Feld zurück und kann zur Filterung mit Vergleichsoperatoren kombiniert werden.</td></tr>
-<tr><td><a href="#ARRAYAPPEND">ARRAY_APPEND</a></td><td><code translate="no">upsert</code> mit <code translate="no">field_ops</code></td><td>Fügt Payload-Elemente an ein bestehendes ARRAY-Feld an. Verfügbar ab Milvus v2.6.17.</td></tr>
-<tr><td><a href="#ARRAYREMOVE">ARRAY_REMOVE</a></td><td><code translate="no">upsert</code> mit <code translate="no">field_ops</code></td><td>Entfernt alle Elemente aus einem bestehenden ARRAY-Feld, die mit einem Wert in der Anfrage-Nutzlast übereinstimmen. Verfügbar ab Milvus v2.6.17.</td></tr>
+<tr><td><a href="#ARRAYAPPEND">ARRAY_APPEND</a></td><td><code translate="no">upsert</code> mit <code translate="no">field_ops</code></td><td>Fügt Payload-Elemente an ein bestehendes ARRAY-Feld an. Verfügbar in Milvus v2.6.17 und höher.</td></tr>
+<tr><td><a href="#ARRAYREMOVE">ARRAY_REMOVE</a></td><td><code translate="no">upsert</code> mit <code translate="no">field_ops</code></td><td>Entfernt alle Elemente aus einem bestehenden ARRAY-Feld, die mit einem Wert in der Request-Payload übereinstimmen. Verfügbar ab Milvus v2.6.17.</td></tr>
 </tbody>
 </table>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Der Operator „ <code translate="no">ARRAY_CONTAINS_ALL</code> “ stellt sicher, dass alle Elemente der angegebenen Liste im Array-Feld vorhanden sind. Dieser Operator ist nützlich, wenn Sie Entitäten finden möchten, die mehrere Werte im Array enthalten.</p>
+    </button></h2><p>Der Operator „ <code translate="no">ARRAY_CONTAINS_ALL</code> “ stellt sicher, dass alle Elemente der angegebenen Liste im Array-Feld vorhanden sind. Dieser Operator ist nützlich, wenn Sie Entitäten finden möchten, deren Array mehrere Werte enthält.</p>
 <p><strong>Beispiel</strong></p>
 <p>Wenn Sie alle Entitäten finden möchten, bei denen das Array „ <code translate="no">history_temperatures</code> “ sowohl „ <code translate="no">23</code> “ als auch „ <code translate="no">24</code> “ enthält, können Sie Folgendes verwenden:</p>
 <div class="multipleCode">

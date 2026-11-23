@@ -23,8 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>يوفر Milvus عوامل مقارنة، وعوامل نطاق، وعوامل حسابية، وعوامل منطقية، وعوامل NULL لتصفية الكيانات. يدعم كل عامل أنواع حقول محددة.</p>
 <div class="alert note">
-<p>يمكن أن يكون القيمة الثابتة الموجودة على الجانب الأيسر من تعبير التصفية إما اسم حقل مجموعة، مثل <code translate="no">status</code> و <code translate="no">color</code> ، وما إلى ذلك، المستخدمة في الأمثلة أدناه، أو اسم حقل فرعي لـ StructArray عند مؤشر عنصر محدد، كما في <code translate="no">filter = 'struct[0][subfield] &gt; 10'</code>.</p>
-<p>للحصول على تفاصيل حول التصفية القياسية في حقل StructArray، راجع <a href="/docs/ar/struct-array-operators.md">«عوامل StructArray</a>».</p>
+<p>يمكن أن يكون المعامل الأيسر حقل مجموعة، مثل <code translate="no">status</code> ، أو حقل فرعي لـ StructArray عند مؤشر عنصر محدد، مثل <code translate="no">struct[0][subfield] &gt; 10</code>. انظر " <a href="/docs/ar/struct-array-operators.md">عوامل StructArray</a>".</p>
 </div>
 <h2 id="Comparison-operators" class="common-anchor-header">عوامل المقارنة<button data-href="#Comparison-operators" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -360,8 +359,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>يُعد هذا مفيدًا عندما تريد التحقق من الانتماء إلى قائمة من القيم.</p>
-<h2 id="Pattern-matching-operators" class="common-anchor-header">عمليات مطابقة الأنماط<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
+<h2 id="Pattern-matching-operators" class="common-anchor-header">عوامل مطابقة الأنماط<button data-href="#Pattern-matching-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -378,7 +376,7 @@ summary: >-
       </svg>
     </button></h2><p>تساعد عوامل مطابقة الأنماط في تصفية قيم السلاسل بناءً على أنماط أحرف البدل أو التعبيرات العادية.</p>
 <ul>
-<li><p><code translate="no">LIKE</code>: تُستخدم لمطابقة أنماط أحرف البدل البسيطة على قيم السلاسل. على سبيل المثال، تتطابق <code translate="no">name LIKE &quot;Prod%&quot;</code> مع القيم التي تبدأ بـ <code translate="no">Prod</code>.</p></li>
+<li><p><code translate="no">LIKE</code>: تُستخدم لمطابقة أنماط أحرف البدل البسيطة على قيم السلاسل. على سبيل المثال، يطابق <code translate="no">name LIKE &quot;Prod%&quot;</code> القيم التي تبدأ بـ <code translate="no">Prod</code>.</p></li>
 <li><p><code translate="no">=~</code>: تُستخدم لمطابقة قيمة سلسلة مع تعبير عادي RE2. على سبيل المثال، <code translate="no">code =~ &quot;E[0-9]{4}&quot;</code> تتطابق مع القيم التي تحتوي على رمز خطأ مثل <code translate="no">E1001</code>.</p></li>
 <li><p><code translate="no">!~</code>: يُستخدم لاستبعاد قيم السلاسل التي تتطابق مع تعبير عادي RE2. وهذا يعادل <code translate="no">NOT (field =~ &quot;pattern&quot;)</code>.</p></li>
 </ul>
@@ -463,7 +461,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;message !~ &quot;^DEBUG&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من التفاصيل حول الاختيار بين <code translate="no">LIKE</code> و regex، وأنواع الحقول المدعومة، وصيغة regex، وقواعد الهروب، والأداء، راجع <a href="/docs/ar/pattern-matching.md">مطابقة الأنماط</a>. يتيح لك Milvus أيضًا إنشاء فهرس <code translate="no">NGRAM</code> على حقول <code translate="no">VARCHAR</code> أو مسارات سلاسل JSON لتسريع مرشحات مطابقة الأنماط المؤهلة. لمزيد من التفاصيل، راجع <a href="/docs/ar/ngram.md">NGRAM</a>.</p>
+<p>للاطلاع على خيارات بناء الجملة، والهروب، ودعم الحقول، وخيارات التسريع مثل <code translate="no">NGRAM</code> ، انظر <a href="/docs/ar/pattern-matching.md">مطابقة الأنماط</a>.</p>
 <h2 id="Arithmetic-operators" class="common-anchor-header">المُشغِّلات الحسابية<button data-href="#Arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -479,7 +477,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تتيح لك العوامل الحسابية إنشاء شروط تستند إلى حسابات تتضمن حقولًا رقمية.</p>
+    </button></h2><p>تتيح لك العوامل الحسابية إنشاء شروط بناءً على حسابات تتضمن الحقول الرقمية.</p>
 <h3 id="Supported-arithmetic-operators" class="common-anchor-header">المُشغِّلات الحسابية المدعومة<button data-href="#Supported-arithmetic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -605,8 +603,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>تُعد العوامل البتية مفيدة عندما يقوم حقل عدد صحيح بترميز علامات متعددة، مثل الأذونات أو علامات الميزات أو بتات الحالة. يمكنك استخدام هذه العوامل في تعبيرات التصفية للتحقق من البتات الفردية في قيمة عدد صحيح أو دمجها أو مقارنتها.</p>
-<p>بالنسبة للحقول القياسية، تنطبق عوامل التشغيل البتية على أنواع الحقول الصحيحة، مثل <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code>.</p>
+    </button></h2><p>تُعد العوامل البتية مفيدة عندما يشفر حقل عدد صحيح عدة علامات، مثل الأذونات أو علامات الميزات أو بتات الحالة. يمكنك استخدام هذه العوامل في تعبيرات التصفية للتحقق من البتات الفردية في قيمة عدد صحيح أو دمجها أو مقارنتها.</p>
+<p>بالنسبة للحقول العددية، تنطبق عوامل التشغيل البتية على أنواع الحقول الصحيحة، مثل <code translate="no">INT8</code> و <code translate="no">INT16</code> و <code translate="no">INT32</code> و <code translate="no">INT64</code>.</p>
 <h3 id="Supported-bitwise-operators" class="common-anchor-header">المشغلات البتية المدعومة<button data-href="#Supported-bitwise-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -714,7 +712,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;(permissions | 2) == 7&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>للعثور على الكيانات التي تختلف بتات أذوناتها عن <code translate="no">READ + WRITE + SHARE</code> فقط في بت <code translate="no">WRITE</code> ، استخدم عملية XOR على مستوى البتات (<code translate="no">^</code>):</p>
+<p>للعثور على الكيانات التي تختلف بتات أذوناتها عن <code translate="no">READ + WRITE + SHARE</code> في بت <code translate="no">WRITE</code> فقط، استخدم عملية XOR على مستوى البتات (<code translate="no">^</code>):</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -760,6 +758,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>تُستخدم العوامل المنطقية لدمج شروط متعددة في تعبير تصفية أكثر تعقيدًا. وتشمل هذه العوامل <code translate="no">AND</code> ، و <code translate="no">OR</code> ، و <code translate="no">NOT</code>.</p>
+<div class="alert note">
+<p>يمكن لكل شرط استخدام الفهرس أو مسار المسح المؤهل الخاص به؛ ولا يلزم أن يخدم نوع واحد من الفهارس التعبير بأكمله. انظر <a href="/docs/ar/scalar_index.md">«الفهرس القياسي</a>».</p>
+</div>
 <h3 id="Supported-logical-operators" class="common-anchor-header">المشغلات المنطقية المدعومة<button data-href="#Supported-logical-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -780,7 +781,7 @@ summary: >-
 <li><p><code translate="no">OR</code>: يجمع بين الشروط بحيث يجب أن يكون واحد منها على الأقل صحيحًا.</p></li>
 <li><p><code translate="no">NOT</code>: ينفي شرطًا.</p></li>
 </ul>
-<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">المثال 1: استخدام <code translate="no">AND</code> لدمج الشروط<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
+<h3 id="Example-1-Using-AND-to-combine-conditions" class="common-anchor-header">المثال 1: استخدام " <code translate="no">AND</code> " لدمج الشروط<button data-href="#Example-1-Using-AND-to-combine-conditions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -949,7 +950,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لنفترض أن مجموعة باسم <code translate="no">products</code> قد تم فهرستها وتحميلها. تحتوي المجموعة على مفتاح أساسي <code translate="no">INT64</code> باسم <code translate="no">id</code> ، وحقل قابل للقيمة الفارغة <code translate="no">VARCHAR</code> باسم <code translate="no">category</code> ، وحقل ثلاثي الأبعاد قابل للقيمة الفارغة <code translate="no">FLOAT_VECTOR</code> باسم <code translate="no">embedding</code>. وهي تحتوي بالفعل على الكيانات التالية:</p>
+    </button></h3><p>لنفترض أن مجموعة باسم <code translate="no">products</code> قد تم فهرستها وتحميلها على Milvus 3.0.3 أو إصدار أحدث. تحتوي المجموعة على مفتاح أساسي <code translate="no">INT64</code> باسم <code translate="no">id</code> ، وحقل <code translate="no">VARCHAR</code> قابل للقيمة الفارغة باسم <code translate="no">category</code> ، وحقل <code translate="no">FLOAT_VECTOR</code> ثلاثي الأبعاد قابل للقيمة الفارغة باسم <code translate="no">embedding</code>. وهي تحتوي بالفعل على الكيانات التالية:</p>
 <table>
 <thead>
 <tr><th><code translate="no">id</code></th><th><code translate="no">category</code></th><th><code translate="no">embedding</code></th></tr>
@@ -1170,14 +1171,17 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><th>نوع الحقل</th><th>سلوك NULL</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">VARCHAR</code></td><td>تُعتبر السلسلة الفارغة <code translate="no">&quot;&quot;</code> قيمة غير NULL.</td></tr>
+<tr><td><code translate="no">VARCHAR</code></td><td>تعتبر السلسلة الفارغة <code translate="no">&quot;&quot;</code> قيمة غير NULL.</td></tr>
 <tr><td><code translate="no">JSON</code></td><td>تتطابق القيمة NULL للحقل بأكمله مع <code translate="no">IS NULL</code>. يُعد كائن JSON مثل <code translate="no">{&quot;category&quot;: null}</code> غير NULL، حتى لو كانت إحدى القيم بداخله NULL.</td></tr>
-<tr><td><code translate="no">ARRAY</code></td><td>تتطابق القيمة NULL للحقل بأكمله مع <code translate="no">IS NULL</code>. لا يمكن أن تكون العناصر الفردية NULL، ولا يدعم كل من <code translate="no">IS NULL</code> و <code translate="no">IS NOT NULL</code> الوصول إلى عناصر المصفوفة مثل <code translate="no">tags[0]</code>. انظر <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</td></tr>
+<tr><td><code translate="no">ARRAY</code></td><td>تتطابق القيمة NULL للحقل بأكمله مع <code translate="no">IS NULL</code>. لا يمكن أن تكون العناصر الفردية NULL، ولا يدعم <code translate="no">IS NULL</code> / <code translate="no">IS NOT NULL</code> الوصول إلى عناصر المصفوفة مثل <code translate="no">tags[0]</code>. انظر <a href="/docs/ar/array_data_type.md">حقل المصفوفة</a>.</td></tr>
 <tr><td>أنواع المتجهات العادية</td><td>تعني القيمة NULL أن قيمة المتجه غير موجودة. المتجه الذي تكون مكوناته صفرًا ليس NULL.</td></tr>
 </tbody>
 </table>
-<p>بالنسبة للحقل المدعوم المُعرَّف باستخدام <code translate="no">nullable=False</code> ، فإن <code translate="no">IS NULL</code> لا يطابق أي كيانات، بينما يطابق <code translate="no">IS NOT NULL</code> جميع الكيانات المرئية. ولا تزال الشروط الأخرى في عامل التصفية سارية.</p>
-<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">استخدام عوامل تصفية NULL في البحث المتجهي<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
+<p>بالنسبة للحقل المدعوم المُعرَّف باستخدام <code translate="no">nullable=False</code> ، فإن <code translate="no">IS NULL</code> لا يطابق أي كيانات، بينما يطابق <code translate="no">IS NOT NULL</code> جميع الكيانات المرئية. ولا تزال الشروط الأخرى في المرشح سارية.</p>
+<div class="alert note">
+<p>تستخدم عوامل تصفية القيم العددية NULL معلومات الصلاحية من فهرس مؤهل أو بيانات الحقل؛ ولا تتطلب نوعًا معينًا من الفهارس العددية. يمكن أن ينتج عن الحقل غير القابل للقيمة NULL نتيجة ثابتة.</p>
+</div>
+<h3 id="Use-NULL-filters-in-vector-search" class="common-anchor-header">استخدام مرشحات NULL في البحث المتجهي<button data-href="#Use-NULL-filters-in-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1192,11 +1196,11 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يمكن استخدام نفس العوامل في عوامل تصفية البحث، ولكن الكيان يحتاج أيضًا إلى متجه في الحقل الذي يتم البحث فيه للمشاركة في البحث عن التشابه.</p>
+    </button></h3><p>يمكن استخدام نفس العوامل في عوامل تصفية البحث، لكن الكيان يحتاج أيضًا إلى متجه في الحقل الذي يتم البحث فيه للمشاركة في البحث عن التشابه.</p>
 <p>باستخدام البيانات المثال أعلاه، لنفترض إجراء بحث باستخدام <code translate="no">anns_field=&quot;embedding&quot;</code>:</p>
 <table>
 <thead>
-<tr><th>تعبير المرشح</th><th>الكيانات المؤهلة للبحث عن التشابه</th><th>السبب</th></tr>
+<tr><th>تعبير التصفية</th><th>الكيانات المؤهلة للبحث عن التشابه</th><th>السبب</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">category IS NULL</code></td><td><code translate="no">2</code></td><td>الكيان <code translate="no">2</code> ليس له فئة، ولكنه يحتوي على متجه <code translate="no">embedding</code>.</td></tr>
@@ -1204,8 +1208,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <tr><td><code translate="no">embedding IS NOT NULL</code></td><td><code translate="no">1</code>، <code translate="no">2</code></td><td>يحتوي كلا الكيانين على متجه <code translate="no">embedding</code>.</td></tr>
 </tbody>
 </table>
-<p>جميع المرشحات الثلاثة صالحة. لا يُسفر البحث عن " <code translate="no">embedding</code> " باستخدام " <code translate="no">embedding IS NULL</code> " عن أي نتائج لأن لا يوجد كيان يستوفي كلا الشرطين. لاسترداد الكيانات التي تفتقد إلى التضمينات، استخدم " <code translate="no">query()</code> " كما هو موضح أعلاه.</p>
-<p>يتخطى البحث المتجه بالفعل الكيانات التي يكون حقل المتجه الذي يتم البحث عنه فيها NULL، لذا فإن <code translate="no">embedding IS NOT NULL</code> لا يضيق نطاق المرشحين للبحث على <code translate="no">embedding</code> بشكل إضافي. ولا يزال الترتيب، والمرشحات الأخرى، وحد البحث هي التي تحدد المرشحين الذين يتم إرجاعهم.</p>
+<p>لاسترداد التضمينات المفقودة، استخدم <code translate="no">query()</code> ؛ ويُعد البحث في <code translate="no">embedding</code> باستخدام <code translate="no">embedding IS NULL</code> صحيحًا، لكنه لا يُرجع أي نتائج. يتخطى البحث المتجهي بالفعل التضمينات ذات القيمة NULL، لذا فإن <code translate="no">embedding IS NOT NULL</code> لا يضيق نطاق المرشحين أكثر من ذلك. ولا يزال الترتيب، والمرشحات الأخرى، وحد البحث يحددون النتائج المُرجعة.</p>
 <h2 id="Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="common-anchor-header">نصائح حول استخدام العوامل الأساسية مع حقول JSON وARRAY<button data-href="#Tips-on-using-basic-operators-with-JSON-and-ARRAY-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1221,8 +1224,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>على الرغم من أن العوامل الأساسية في Milvus متعددة الاستخدامات ويمكن تطبيقها على الحقول القياسية، إلا أنه يمكن أيضًا استخدامها بفعالية مع المفاتيح والفهارس في حقول JSON وARRAY.</p>
-<p>على سبيل المثال، إذا كان لديك حقل <code translate="no">product</code> يحتوي على مفاتيح متعددة مثل <code translate="no">price</code> و <code translate="no">model</code> و <code translate="no">tags</code> ، فاحرص دائمًا على الإشارة إلى المفتاح مباشرةً:</p>
+    </button></h2><p>قم بالإشارة إلى مفتاح JSON أو عنصر ARRAY مباشرةً في التعبير. على سبيل المثال، لتصفية المفتاح <code translate="no">price</code> في حقل JSON باسم <code translate="no">product</code>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1276,22 +1278,7 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;history_temperatures[0] &gt; 30&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Conclusion" class="common-anchor-header">الخلاصة<button data-href="#Conclusion" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يوفر Milvus مجموعة من العوامل الأساسية التي تمنحك المرونة في تصفية بياناتك والاستعلام عنها. من خلال الجمع بين عوامل المقارنة والنطاق والحسابية والمنطقية، يمكنك إنشاء تعبيرات تصفية قوية لتضييق نطاق نتائج البحث واسترداد البيانات التي تحتاجها بكفاءة.</p>
+<p><a id="Conclusion"></a></p>
 <h2 id="FAQ" class="common-anchor-header">الأسئلة الشائعة<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1309,4 +1296,4 @@ QueryResp results = <span class="hljs-keyword">await</span> client.QueryAsync(<s
       </svg>
     </button></h2><p><strong>هل هناك حد لطول قائمة قيم المطابقة في شروط التصفية (على سبيل المثال، filter=’color in ["red", "green", “blue”]')؟ ماذا أفعل إذا كانت القائمة طويلة جدًا؟</strong></p>
 <p>لا يفرض Milvus حدًا أقصى لطول قائمة قيم المطابقة في شروط التصفية. ومع ذلك، يمكن أن تؤثر القائمة الطويلة جدًّا بشكل كبير على أداء الاستعلام.
-إذا كانت شروط التصفية الخاصة بك تتضمن قائمة طويلة من قيم المطابقة أو تعبيرًا معقدًا يحتوي على العديد من العناصر، نوصي باستخدام <a href="/docs/ar/filtering-templating.md">«قوالب التصفية»</a> لتحسين أداء الاستعلام.</p>
+إذا كانت شروط التصفية الخاصة بك تتضمن قائمة طويلة من قيم المطابقة أو تعبيرًا معقدًا يحتوي على العديد من العناصر، نوصي باستخدام <a href="/docs/ar/filtering-templating.md">قوالب التصفية (Filter Templating)</a> لتحسين أداء الاستعلام.</p>

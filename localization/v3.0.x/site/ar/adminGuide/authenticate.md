@@ -22,7 +22,7 @@ title: المصادقة على وصول المستخدم
 <div class="alert note">
 <ul>
 <li><p>يُعد كل من TLS ومصادقة المستخدم نهجين أمنيين متميزين. إذا قمت بتمكين كل من مصادقة المستخدم وTLS في نظام Milvus الخاص بك، فيجب عليك توفير اسم المستخدم وكلمة المرور ومسارات ملفات الشهادات. للحصول على معلومات حول كيفية تمكين TLS، راجع <a href="/docs/ar/tls.md">«التشفير أثناء النقل</a>».</p></li>
-<li><p>تستخدم مقتطفات الكود في هذه الصفحة <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) الجديد للتفاعل مع Milvus. وسيتم إصدار حزم SDK الجديدة لـ MilvusClient للغات الأخرى في التحديثات المستقبلية.</p></li>
+<li><p>تستخدم مقتطفات الكود في هذه الصفحة new <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/About.md">MilvusClient</a> (Python) للتفاعل مع Milvus.</p></li>
 </ul>
 </div>
 <h2 id="Enable-user-authentication" class="common-anchor-header">تمكين مصادقة المستخدم<button data-href="#Enable-user-authentication" class="anchor-icon" translate="no">
@@ -56,7 +56,7 @@ title: المصادقة على وصول المستخدم
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-helm">
-<p>لتفعيل مصادقة المستخدم لخادم Milvus الخاص بك، اضبط authorizationEnabled على true في ملف تكوين Milvus <code translate="no">values.yaml</code>. لمزيد من المعلومات حول ملفات التكوين، راجع <a href="https://milvus.io/docs/configure-helm.md?tab=component">«تكوين Milvus باستخدام مخططات Helm</a>».</p>
+<p>لتمكين مصادقة المستخدم لخادم Milvus الخاص بك، اضبط authorizationEnabled على true في ملف تكوين Milvus <code translate="no">values.yaml</code>. لمزيد من المعلومات حول ملفات التكوين، راجع <a href="https://milvus.io/docs/configure-helm.md?tab=component">«تكوين Milvus باستخدام Helm Charts</a>».</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -110,6 +110,15 @@ client = MilvusClient(
 <div class="alert note">
 إذا فشلت في تقديم رمز مصادقة صالح عند الاتصال بـ Milvus مع تمكين المصادقة، فستتلقى خطأ gRPC.
 </div>
+<p>يستخدم Milvus الإعداد <code translate="no">common.security.defaultRootPassword</code> فقط لإنشاء المستخدم <code translate="no">root</code> في حالة عدم وجود مستخدم <code translate="no">root</code>. ولا يؤدي تغيير هذا الإعداد لاحقًا إلى تغيير كلمة مرور المستخدم <code translate="no">root</code> الموجود بالفعل. لتغيير كلمة مرور <code translate="no">root</code> ، قم باستدعاء <code translate="no">update_password()</code> أثناء الاتصال بـ <code translate="no">root</code>:</p>
+<pre><code translate="no" class="language-python">client.update_password(
+    user_name=<span class="hljs-string">&quot;root&quot;</span>,
+    old_password=<span class="hljs-string">&quot;Milvus&quot;</span>,
+    new_password=<span class="hljs-string">&quot;&lt;your_new_password&gt;&quot;</span>,
+    reset_connection=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>باستخدام <code translate="no">reset_connection=True</code> ، يستخدم العميل كلمة المرور الجديدة للطلبات اللاحقة.</p>
 <h2 id="Create-a-new-user" class="common-anchor-header">إنشاء مستخدم جديد<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +148,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول إنشاء المستخدمين، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
+<p>لمزيد من المعلومات حول إنشاء المستخدمين، راجع <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/create_user.md">create_user()</a>.</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">الاتصال بـ Milvus باستخدام مستخدم جديد<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -187,7 +196,7 @@ client.update_password(
     new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من المعلومات حول تحديث كلمات مرور المستخدمين، راجع <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
+<p>لمزيد من المعلومات حول تحديث كلمات مرور المستخدمين، راجع <a href="https://milvus.io/api-reference/pymilvus/v3.0.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>إذا نسيت كلمة مرورك القديمة، يوفر Milvus عنصر تكوين يسمح لك بتعيين مستخدمين معينين كمستخدمين متميزين. وهذا يلغي الحاجة إلى كلمة المرور القديمة عند إعادة تعيين كلمة المرور.</p>
 <p>بشكل افتراضي، يكون حقل « <code translate="no">common.security.superUsers</code> » في ملف تكوين Milvus فارغًا، مما يعني أن جميع المستخدمين يجب أن يدخلوا كلمة المرور القديمة عند إعادة تعيين كلمة مرورهم. ومع ذلك، يمكنك تعيين مستخدمين محددين كمستخدمين متميزين لا يحتاجون إلى إدخال كلمة المرور القديمة. في المقتطف أدناه، تم تعيين <code translate="no">root</code> و <code translate="no">foo</code> كمستخدمين متميزين.</p>
 <p>يجب عليك إضافة عنصر التكوين التالي إلى ملف تكوين Milvus الذي يتحكم في تشغيل مثيل Milvus الخاص بك.</p>
@@ -236,6 +245,27 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Protect-the-metrics-port" class="common-anchor-header">حماية منفذ المقاييس<button data-href="#Protect-the-metrics-port" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يخدم منفذ المقاييس (الافتراضي <code translate="no">9091</code>) <code translate="no">/management/*</code> و <code translate="no">/log/level</code> و <code translate="no">/eventlog</code> و <code translate="no">/telemetry</code> و <code translate="no">/debug/pprof/*</code> ووحدة التحكم على الويب. يتحكم الإعداد <code translate="no">common.security.adminAuthEnabled</code> في ما إذا كانت نقاط النهاية هذه تتطلب مصادقة HTTP الأساسية <code translate="no">root</code>. ويكون الإعداد الافتراضي هو <code translate="no">false</code>. لتشغيله، أضف ما يلي إلى ملف تكوين Milvus:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>
+  <span class="hljs-attr">security:</span>
+    <span class="hljs-attr">adminAuthEnabled:</span> <span class="hljs-literal">true</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>مع هذا الإعداد، تظل اختبارات الصحة وعمليات استخراج المقاييس مفتوحة. يجب أن تتضمن الطلبات التي لا تحمل رأس « <code translate="no">Origin</code> » ولا رؤوس «Fetch Metadata» رأس « <code translate="no">X-Milvus-Admin-Request: true</code> ». قم بتحديث العملاء الذين يستدعون نقاط النهاية هذه، مثل نصوص الإغلاق السلس ونصوص تحليل الأداء، قبل تشغيل الإعداد. لا يزال منفذ المقاييس يستخدم بروتوكول HTTP العادي، لذا لا تكشف عنه إلا على شبكة موثوقة أو خلف وكيل TLS. لا يمكن تغيير هذا الإعداد من خلال <code translate="no">/management/config/alter</code>.</p>
 <h2 id="Limitations" class="common-anchor-header">القيود<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +296,7 @@ client.list_users()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يجب ألا تكون أسماء المستخدمين فارغة أو تتجاوز 32 حرفًا. ويجب أن تبدأ بحرف وأن تحتوي فقط على أحرف أو أرقام أو خطوط سفلية.</p>
+    </button></h3><p>يجب ألا تكون أسماء المستخدمين فارغة أو تتجاوز 32 حرفًا. يجب أن تبدأ بحرف أو شرطة سفلية وأن تحتوي فقط على أحرف وأرقام وشرطات سفلية (<code translate="no">_</code>) وأي أحرف إضافية تم تكوينها في <code translate="no">proxy.nameValidation.allowedChars</code> (<code translate="no">$</code> افتراضيًا).</p>
 <h3 id="Password-requirements" class="common-anchor-header">متطلبات كلمة المرور<button data-href="#Password-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

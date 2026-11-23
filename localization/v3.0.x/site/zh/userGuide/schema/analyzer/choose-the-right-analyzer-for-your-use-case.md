@@ -1,9 +1,9 @@
 ---
 id: choose-the-right-analyzer-for-your-use-case.md
-title: 根据您的使用场景选择合适的分析器
+title: 根据您的应用场景选择合适的分析器
 summary: 注释
 ---
-<h1 id="Choose-the-Right-Analyzer-for-Your-Use-Case" class="common-anchor-header">根据您的使用场景选择合适的分析器<button data-href="#Choose-the-Right-Analyzer-for-Your-Use-Case" class="anchor-icon" translate="no">
+<h1 id="Choose-the-Right-Analyzer-for-Your-Use-Case" class="common-anchor-header">根据您的应用场景选择合适的分析器<button data-href="#Choose-the-Right-Analyzer-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,7 +46,7 @@ summary: 注释
  </span></p>
 <ol>
 <li><p><strong>分词（必选）：</strong>此初始阶段应用<strong>分词器</strong>，将连续的文本字符串拆分为离散且有意义的单元，即分词。分词方法会因语言和内容类型而存在显著差异。</p></li>
-<li><p><strong>词元过滤（可选）：</strong>词元化完成后，会应用<strong>过滤器</strong>来修改、删除或优化词元。这些操作可能包括将所有词元转换为小写、移除常见的无意义词（如停用词），或将单词还原为词干形式（词干化）。</p></li>
+<li><p><strong>词素过滤（可选）：</strong>词素化完成后，会应用<strong>过滤器</strong>来修改、删除或优化词素。这些操作可能包括将所有词素转换为小写、移除常见的无意义词（如停用词），或将单词还原为词干形式（词干化）。</p></li>
 </ol>
 <p><strong>示例</strong>：</p>
 <pre><code translate="no" class="language-plaintext">Input: &quot;Hello World!&quot; 
@@ -83,13 +83,13 @@ summary: 注释
      <td><p>针对技术术语、标识符或URL的文本查询无法找到相关文档。</p></td>
      <td><ul><li><p><code translate="no">"user_id"</code> →<code translate="no">['user', 'id']</code></p></li><li><p><code translate="no">"C++"</code> →<code translate="no">['c']</code></p></li></ul></td>
      <td><p><a href="/docs/zh/standard-analyzer.md"><code translate="no">standard</code></a> 分析器</p></td>
-     <td><p>使用 <a href="/docs/zh/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分词器；并配合使用 <a href="/docs/zh/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 过滤器。</p></td>
+     <td><p>使用 <a href="/docs/zh/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分词器；并配合使用一个 <a href="/docs/zh/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 过滤器。</p></td>
    </tr>
    <tr>
      <td><p>分词不足</p></td>
      <td><p>搜索多词短语中的某个组成部分时，无法返回包含该完整短语的文档。</p></td>
      <td><p><code translate="no">"state-of-the-art"</code> →<code translate="no">['state-of-the-art']</code></p></td>
-     <td><p>使用 <a href="/docs/zh/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分词器</p></td>
+     <td><p>带 <a href="/docs/zh/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分词器</p></td>
      <td><p>使用一个 <a href="/docs/zh/standard-tokenizer.md"><code translate="no">standard</code></a> 分词器按标点符号和空格进行分割；使用自定义<a href="/docs/zh/regex-filter.md">正则表达式</a>过滤器。</p></td>
    </tr>
    <tr>
@@ -103,7 +103,7 @@ summary: 注释
      <td><p>输入法不匹配</p></td>
      <td><p>用户输入拼音，但索引文本使用汉字。</p></td>
      <td><p>中文文本：<code translate="no">"足球"</code> ；查询文本：<code translate="no">"zuqiu"</code></p></td>
-     <td><p>仅输出汉字分词的分析器</p></td>
+     <td><p>仅输出汉字词元的分析器</p></td>
      <td><p>使用自定义分析器，并配置 <a href="/docs/zh/jieba-tokenizer.md"><code translate="no">jieba</code></a> 分词器和 <a href="/docs/zh/pinyin-filter.md"><code translate="no">pinyin</code></a> 过滤器。</p></td>
    </tr>
 </table>
@@ -122,7 +122,7 @@ summary: 注释
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>对于许多用例，您无需进行任何特殊操作。让我们确定您的情况是否属于其中之一。</p>
+    </button></h2><p>对于许多用例，您无需进行任何特殊操作。让我们来确定您的情况是否属于其中之一。</p>
 <h3 id="Default-behavior-standard-analyzer" class="common-anchor-header">默认行为：<code translate="no">standard</code> 分析器<button data-href="#Default-behavior-standard-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -182,17 +182,17 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>中文文档</p></td>
      <td><p>❌ 否</p></td>
      <td><p>中文单词没有空格，将被视为一个词元。</p></td>
-     <td><p>使用内置的 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a> 词法分析器。</p></td>
+     <td><p>使用内置的 <a href="/docs/zh/chinese-analyzer.md"><code translate="no">chinese</code></a> 分析器。</p></td>
    </tr>
    <tr>
      <td><p>阿拉伯语文档</p></td>
-     <td><p>❌ 不</p></td>
-     <td><p>阿拉伯语文本可能包含字母变体、发音符号、Tatweel、阿拉伯-印度数字以及常见的阿拉伯语停用词，这些都需要针对该语言进行特殊处理。</p></td>
+     <td><p>❌ 否</p></td>
+     <td><p>阿拉伯语文本可能包含字母变体、标点符号、Tatweel、阿拉伯-印度数字以及常见的阿拉伯语停用词，这些都需要针对该语言进行特殊处理。</p></td>
      <td><p>使用内置的 <a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a> 分析器。</p></td>
    </tr>
    <tr>
      <td><p>泰语文档</p></td>
-     <td><p>❌ 不</p></td>
+     <td><p>❌ 否</p></td>
      <td><p>泰语文本通常不在单词之间使用空格，因此需要针对该语言的词分词处理。</p></td>
      <td><p>使用内置的 <a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a> 分析器。</p></td>
    </tr>
@@ -200,19 +200,19 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p>技术文档</p></td>
      <td><p>❌ 否</p></td>
      <td><p>诸如<code translate="no">C++</code> 之类的术语中的标点符号会被去除。</p></td>
-     <td><p>使用 <a href="/docs/zh/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分词器和 <a href="/docs/zh/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 过滤器。</p></td>
+     <td><p>使用 <a href="/docs/zh/whitespace-tokenizer.md"><code translate="no">whitespace</code></a> 分词器和一个 <a href="/docs/zh/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a> 过滤器。</p></td>
    </tr>
    <tr>
      <td><p>以空格分隔的语言，例如法语/西班牙语文本</p></td>
      <td><p>⚠️ 可能</p></td>
      <td><p>带重音的字符（<code translate="no">café</code> 与<code translate="no">cafe</code> ）可能无法匹配。</p></td>
-     <td><p>建议使用带有 <a href="/docs/zh/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> 的自定义分析器可获得更佳效果。</p></td>
+     <td><p>建议使用带有 <a href="/docs/zh/ascii-folding-filter.md"><code translate="no">asciifolding</code></a> 可获得更佳效果。</p></td>
    </tr>
    <tr>
      <td><p>多语言或未知语言</p></td>
      <td><p>❌ 不支持</p></td>
-     <td><p><code translate="no">standard</code> 分析器缺乏处理不同字符集和分词规则所需的特定于语言的逻辑。</p></td>
-     <td><p>请使用带有 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a> 令牌化器配合使用，以实现支持 Unicode 的令牌化。 </p><p>或者，可考虑配置<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>，以更精确地处理多语言内容。</p></td>
+     <td><p><code translate="no">standard</code> 分析器缺乏处理不同字符集和分词规则所需的特定语言逻辑。</p></td>
+     <td><p>请使用带有 <a href="/docs/zh/icu-tokenizer.md"><code translate="no">icu</code></a> 实现支持 Unicode 的分词。 </p><p>或者，可考虑配置<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>，以更精确地处理多语言内容。</p></td>
    </tr>
 </table>
 <p>如果默认的<code translate="no">standard</code> 分析器无法满足您的需求，则需要实现一个不同的分析器。您有两种途径：</p>
@@ -266,7 +266,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
    </tr>
    <tr>
      <td><p><a href="/docs/zh/english-analyzer.md"><code translate="no">english</code></a></p></td>
-     <td><p>专为英语设计，通过词干提取和停用词过滤，以实现更精准的英语语义匹配</p></td>
+     <td><p>专为英语设计，通过词干化处理和停用词过滤，以实现更精准的英语语义匹配</p></td>
      <td><ul><li><p>分词器：<code translate="no">standard</code></p></li><li><p>过滤器：<code translate="no">lowercase</code> 、<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
      <td><p>对于纯英语内容，建议优先使用此分析器而非<code translate="no">standard</code> 。</p></td>
    </tr>
@@ -280,7 +280,7 @@ Output: [&#x27;the&#x27;, &#x27;milvus&#x27;, &#x27;vector&#x27;, &#x27;database
      <td><p><a href="/docs/zh/arabic-analyzer.md"><code translate="no">arabic</code></a></p></td>
      <td><p>阿拉伯语</p></td>
      <td><ul><li><p>分词器：<code translate="no">standard</code></p></li><li><p>过滤器：<code translate="no">lowercase</code> 、<code translate="no">decimaldigit</code> 、<code translate="no">arabic_normalization</code> 、<code translate="no">stemmer</code> 、<code translate="no">stop</code></p></li></ul></td>
-     <td><p>对于阿拉伯语文本，建议优先使用<code translate="no">standard</code> 。</p></td>
+     <td><p>对于阿拉伯语文本，建议优先使用<code translate="no">standard</code> 而非 。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh/thai-analyzer.md"><code translate="no">thai</code></a></p></td>
@@ -365,7 +365,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/zh/standard-tokenizer.md"><code translate="no">standard</code></a></p></td>
      <td><p>根据空格和标点符号分割文本</p></td>
-     <td><p>普通文本、混合标点</p></td>
+     <td><p>普通文本、混合标点符号</p></td>
      <td><ul><li><p>输入：<code translate="no">"Hello, world! Visit example.com"</code></p></li><li><p>输出：<code translate="no">['Hello', 'world', 'Visit', 'example', 'com']</code></p></li></ul></td>
    </tr>
    <tr>
@@ -385,7 +385,7 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/zh/jieba-tokenizer.md"><code translate="no">jieba</code></a></p></td>
-     <td><p>基于中文词典并结合智能算法的分词</p></td>
+     <td><p>基于中文词典且采用智能算法的分词</p></td>
      <td><p><strong>推荐用于中文内容</strong>——结合词典与智能算法，专为中文设计</p></td>
      <td><ul><li><p>输入：<code translate="no">"机器学习是人工智能的一个分支"</code></p></li><li><p>输出：<code translate="no">['机器', '学习', '是', '人工', '智能', '人工智能', '的', '一个', '分支']</code></p></li></ul></td>
    </tr>
@@ -423,7 +423,7 @@ schema.add_field(
      <td><p>日语</p></td>
      <td><p><a href="/docs/zh/lindera-tokenizer.md"><code translate="no">lindera</code></a></p></td>
      <td><p><a href="https://taku910.github.io/mecab/">ipadic</a>（通用型）、<a href="https://github.com/neologd/mecab-ipadic-neologd">ipadic-neologd</a>（现代术语）、<a href="https://clrd.ninjal.ac.jp/unidic/">unidic</a>（学术型）</p></td>
-     <td><p>支持专有名词处理的形态分析</p></td>
+     <td><p>带专有名词处理的形态分析</p></td>
      <td><ul><li><p>输入：<code translate="no">"東京都渋谷区"</code></p></li><li><p>输出：<code translate="no">["東京", "都", "渋谷", "区"]</code></p></li></ul></td>
    </tr>
    <tr>
@@ -453,9 +453,9 @@ schema.add_field(
 <ul>
 <li><p>在无法进行语言识别的混合语言场景中。</p></li>
 <li><p>您希望避免<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>或<a href="/docs/zh/language-identifier.md">语言标识符</a>带来的额外开销。</p></li>
-<li><p>内容以某种主要语言为主，其中偶尔出现对整体含义影响较小的外来词（例如，英文文本中零星出现日语或法语的品牌名称或技术术语）。</p></li>
+<li><p>内容以一种主要语言为主，其中偶尔出现对整体含义影响较小的外来词（例如，英文文本中零星出现日语或法语的品牌名称或技术术语）。</p></li>
 </ul>
-<p><strong>替代方案</strong>：若需更精确地处理多语言内容，请考虑使用多语言分析器或语言标识符。详情请参阅《<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>》或《<a href="/docs/zh/language-identifier.md">语言标识符</a>》。</p>
+<p><strong>替代方案</strong>：若需更精确地处理多语言内容，请考虑使用多语言分析器或语言标识符。详情请参阅《<a href="/docs/zh/multi-language-analyzers.md">多语言分析器</a>》或《<a href="/docs/zh/language-identifier.md">语言标识符》</a>。</p>
 <h3 id="Step-2-Add-filters-for-precision" class="common-anchor-header">步骤 2：添加过滤器以提高精确度<button data-href="#Step-2-Add-filters-for-precision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -476,7 +476,7 @@ schema.add_field(
 <table>
    <tr>
      <th><p>过滤器</p></th>
-     <th><p>作用原理</p></th>
+     <th><p>工作原理</p></th>
      <th><p>适用场景</p></th>
      <th><p>示例</p></th>
    </tr>
@@ -489,7 +489,7 @@ schema.add_field(
    <tr>
      <td><p><a href="/docs/zh/stemmer-filter.md"><code translate="no">stemmer</code></a></p></td>
      <td><p>将单词还原为词根形式</p></td>
-     <td><p>具有词形变格的语言（英语、法语、德语等）</p></td>
+     <td><p>具有词形变化的语言（英语、法语、德语等）</p></td>
      <td><p>以英语为例：</p><ul><li><p>输入：<code translate="no">["running", "runs", "ran"]</code></p></li><li><p>输出：<code translate="no">[['run'], ['run'], ['ran']]</code></p></li></ul></td>
    </tr>
    <tr>
@@ -500,14 +500,14 @@ schema.add_field(
    </tr>
 </table>
 <div class="alert note">
-<p>对于东亚语言（中文、日语、韩语等），应重点采用<a href="/docs/zh/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">针对该语言的特定过滤器</a>。这些语言通常采用不同的文本处理方法，词干提取可能无法带来显著效果。</p>
+<p>对于东亚语言（中文、日语、韩语等），应重点采用<a href="/docs/zh/choose-the-right-analyzer-for-your-use-case.md#Language-specific-filters">针对该语言的专用过滤器</a>。这些语言通常采用不同的文本处理方法，词干提取对其可能收效甚微。</p>
 </div>
 <h4 id="Text-normalization-filters" class="common-anchor-header">文本规范化过滤器</h4><p>这些过滤器通过规范化文本变体来提高匹配的一致性：</p>
 <table>
    <tr>
      <th><p>过滤器</p></th>
      <th><p>工作原理</p></th>
-     <th><p>适用场景</p></th>
+     <th><p>何时使用</p></th>
      <th><p>示例</p></th>
    </tr>
    <tr>
@@ -517,7 +517,7 @@ schema.add_field(
      <td><ul><li><p>输入：<code translate="no">["café", "naïve", "résumé"]</code></p></li><li><p>输出：<code translate="no">[['cafe'], ['naive'], ['resume']]</code></p></li></ul></td>
    </tr>
 </table>
-<h4 id="Token-filtering" class="common-anchor-header">令牌过滤</h4><p>根据字符内容或长度控制保留哪些词元：</p>
+<h4 id="Token-filtering" class="common-anchor-header">词素过滤</h4><p>根据字符内容或长度控制保留哪些词素：</p>
 <table>
    <tr>
      <th><p>过滤</p></th>
@@ -527,20 +527,20 @@ schema.add_field(
    </tr>
    <tr>
      <td><p><a href="/docs/zh/removepunct-filter.md"><code translate="no">removepunct</code></a></p></td>
-     <td><p>移除孤立的标点符号词</p></td>
-     <td><p>清理由<code translate="no">jieba</code> 、<code translate="no">lindera</code> 、<code translate="no">icu</code> 这些分词器生成的输出结果，这些分词器会将标点符号作为单个词元返回</p></td>
-     <td><ul><li><p>输入：<code translate="no">["Hello", "!", "world"]</code></p></li><li><p>输出：<code translate="no">[['Hello'], ['world']]</code></p></li></ul></td>
+     <td><p>移除包含标点符号的令牌</p></td>
+     <td><p>清理由<code translate="no">jieba</code> 、<code translate="no">lindera</code> 和<code translate="no">icu</code> 词素化器生成的输出，这些词素化器会将标点符号作为独立词素返回。包含单词内部标点符号的词素（例如<code translate="no">don't</code> 或<code translate="no">3.5kg</code> ）将被完全移除；请使用 <a href="/docs/zh/regex-filter.md"><code translate="no">regex</code></a> 过滤器来保留它们</p></td>
+     <td><ul><li><p>输入：<code translate="no">["Hello", "!", "world"]</code></p></li><li><p>输出：<code translate="no">[['Hello'], ['world']]</code></p></li><li><p>输入：<code translate="no">["don't", "buy"]</code></p></li><li><p>输出：<code translate="no">[['buy']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh/alphanumonly-filter.md"><code translate="no">alphanumonly</code></a></p></td>
      <td><p>仅保留字母和数字</p></td>
-     <td><p>技术内容，文本清理处理</p></td>
+     <td><p>技术内容，纯文本处理</p></td>
      <td><ul><li><p>输入：<code translate="no">["user123", "test@email.com"]</code></p></li><li><p>输出：<code translate="no">[['user123'], ['test', 'email', 'com']]</code></p></li></ul></td>
    </tr>
    <tr>
      <td><p><a href="/docs/zh/length-filter.md"><code translate="no">length</code></a></p></td>
      <td><p>移除超出指定长度范围的令牌</p></td>
-     <td><p>过滤噪声（过长的令牌）</p></td>
+     <td><p>过滤噪声（过长的词元）</p></td>
      <td><ul><li><p>输入：<code translate="no">["a", "very", "extraordinarily"]</code></p></li><li><p>输出：<code translate="no">[['a'], ['very'], []]</code> （若<strong>max=10</strong>）</p></li></ul></td>
    </tr>
    <tr>
@@ -629,7 +629,7 @@ schema.add_field(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在将配置应用于 Collection 之前，请务必验证配置：</p>
+    </button></h3><p>在将配置应用于 Collection 之前，请务必进行验证：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Sample text to analyze</span>
 sample_text = <span class="hljs-string">&quot;The Milvus vector database is built for scale!&quot;</span>
 
@@ -644,7 +644,7 @@ result = client.run_analyzer(sample_text, analyzer_params)
 <li><p><strong>缺失分词</strong>：重要术语被过滤掉</p></li>
 </ul>
 <p>有关详细用法，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.6.x/MilvusClient/CollectionSchema/run_analyzer.md">run_analyzer</a>。</p>
-<h2 id="Recommended-configurations-by-use-case" class="common-anchor-header">按使用场景推荐的配置<button data-href="#Recommended-configurations-by-use-case" class="anchor-icon" translate="no">
+<h2 id="Recommended-configurations-by-use-case" class="common-anchor-header">按用例推荐的配置<button data-href="#Recommended-configurations-by-use-case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -794,7 +794,7 @@ analyzer_params = {
         <span class="hljs-string">&quot;dict&quot;</span>: <span class="hljs-string">&quot;ipadic&quot;</span>  <span class="hljs-comment"># Options: ipadic, ipadic-neologd, unidic</span>
     },
     <span class="hljs-string">&quot;filter&quot;</span>: [
-        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove standalone punctuation</span>
+        <span class="hljs-string">&quot;removepunct&quot;</span>,  <span class="hljs-comment"># Remove tokens containing punctuation</span>
         {
             <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
             <span class="hljs-string">&quot;min&quot;</span>: <span class="hljs-number">1</span>,
@@ -849,8 +849,8 @@ analyzer_params = {
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>处理涉及多种语言或使用方式难以预料的字符集的内容时，请优先使用<code translate="no">icu</code> 分析器。该分析器支持Unicode，可有效处理混合字符集和符号。</p>
-<p><strong>基本多语言配置（不进行词干提取）</strong>：</p>
+    </button></h3><p>处理涉及多种语言或使用方式难以预测的字符集的内容时，请首先使用<code translate="no">icu</code> 分析器。该分析器支持Unicode，可有效处理混合字符集和符号。</p>
+<p><strong>基本多语言配置（不进行词干化）</strong>：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>,
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>, <span class="hljs-string">&quot;asciifolding&quot;</span>]

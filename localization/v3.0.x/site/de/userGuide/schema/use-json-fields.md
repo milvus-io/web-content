@@ -84,7 +84,7 @@ summary: >-
 <ul>
 <li><p>Der Primärschlüssel (<code translate="no">product_id</code>)</p></li>
 <li><p>Ein Feld „ <code translate="no">vector</code> “ (für jede Sammlung obligatorisch)</p></li>
-<li><p>Ein Feld „ <code translate="no">metadata</code> “ vom Typ „ <code translate="no">JSON</code> “, das strukturierte Daten wie einfache Werte, Arrays oder verschachtelte Objekte speichern kann</p></li>
+<li><p>Ein Feld „ <code translate="no">metadata</code> “ vom Typ „ <code translate="no">JSON</code> “, in dem strukturierte Daten wie einfache Werte, Arrays oder verschachtelte Objekte gespeichert werden können</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -440,7 +440,7 @@ curl --request POST \
 }&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-values-inside-the-JSON-field" class="common-anchor-header">Werte im JSON-Feld indizieren<button data-href="#Index-values-inside-the-JSON-field" class="anchor-icon" translate="no">
+<h2 id="Index-values-inside-the-JSON-field" class="common-anchor-header">Indizieren von Werten innerhalb des JSON-Feldes<button data-href="#Index-values-inside-the-JSON-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -505,7 +505,7 @@ curl --request POST \
    </tr>
    <tr>
      <td><p><code translate="no">double</code></p></td>
-     <td><p>Numerischer Wert (Ganzzahl oder Gleitkomma)</p></td>
+     <td><p>Numerischer Wert (Ganzzahl oder Gleitkommazahl)</p></td>
      <td><p><code translate="no">42</code>, <code translate="no">99.99</code>, <code translate="no">-15.5</code></p></td>
    </tr>
    <tr>
@@ -813,7 +813,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nach dem Einfügen und Indizieren von JSON-Feldern können Sie diese mithilfe von Standard-Filterausdrücken mit JSON-Path-Syntax filtern.</p>
+    </button></h2><p>Nach dem Einfügen und Indizieren von JSON-Feldern können Sie diese mithilfe von Standardfilterausdrücken mit JSON-Path-Syntax filtern.</p>
 <p>Beispiel:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -979,7 +979,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus speichert Zeichenfolgenwerte genau so, wie sie in der JSON-Eingabe erscheinen – ohne semantische Transformation. Falsch in Anführungszeichen gesetzte Zeichenfolgen können zu Fehlern beim Parsen führen.</p>
+    </button></h3><p>Milvus speichert Zeichenfolgenwerte genau so, wie sie in der JSON-Eingabe erscheinen – ohne semantische Umwandlung. Unsachgemäß in Anführungszeichen gesetzte Zeichenfolgen können zu Fehlern beim Parsen führen.</p>
 <p><strong>Beispiele für gültige Zeichenfolgen</strong>:</p>
 <pre><code translate="no" class="language-plaintext">&quot;a\&quot;b&quot;, &quot;a&#x27;b&quot;, &quot;a\\b&quot;
 <button class="copy-code-btn"></button></code></pre>
@@ -1042,7 +1042,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
         ></path>
       </svg>
     </button></h3><p>Nein, jeder JSON-Pfad unterstützt <strong>nur einen Index</strong>. Sie müssen einen einzigen „ <code translate="no">json_cast_type</code> “ wählen, der zu Ihren Daten passt. Das Erstellen mehrerer Indizes auf demselben Pfad mit unterschiedlichen Datentypen wird nicht unterstützt.</p>
-<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Was passiert, wenn Werte in einem JSON-Pfad inkonsistente Typen aufweisen?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
+<h3 id="What-if-values-on-a-JSON-path-have-inconsistent-types" class="common-anchor-header">Was passiert, wenn Werte auf einem JSON-Pfad inkonsistente Typen aufweisen?<button data-href="#What-if-values-on-a-JSON-path-have-inconsistent-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -1,10 +1,10 @@
 ---
 id: create-collection.md
-title: Create Collection
+title: 创建Collection
 summary: >-
-  您可以通过定义Collection的Schema、索引参数、指标类型以及是否在创建时加载Collection来创建一个Collection。本页面介绍了如何从头开始创建一个Collection。
+  您可以通过定义Collection的Schema、索引参数、指标类型以及是否在创建时加载该Collection来创建一个Collection。本页面介绍了如何从头开始创建一个Collection。
 ---
-<h1 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+<h1 id="Create-Collection" class="common-anchor-header">创建Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Collection是一个具有固定列和可变行的二维表。每列代表一个字段，每行代表一个实体。要实现此类结构化数据管理，必须定义Schema。要插入的每个实体都必须满足Schema中定义的约束条件。</p>
+    </button></h2><p>Collection是一个具有固定列和可变行的二维表。每列代表一个字段，每行代表一个实体。要实现此类结构化数据管理，必须定义Schema。要插入的每个实体都必须符合Schema中定义的约束条件。</p>
 <p>您可以确定Collection的各个方面，包括其Schema、索引参数、指标类型以及是否在创建时加载，以确保该Collection完全满足您的需求。</p>
 <p>要创建Collection，您需要</p>
 <ul>
@@ -306,10 +306,8 @@ schema-&gt;<span class="hljs-built_in">AddField</span>(milvus::<span class="hljs
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在特定字段上创建索引可加速针对该字段的搜索。索引记录了 Collection 中实体的顺序。如下面的代码片段所示，您可以使用<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 来选择合适的方式，让 Milvus 对字段进行索引并衡量向量嵌入之间的相似度。</p>
-<p>在 Milvus 上，您可以将<code translate="no">AUTOINDEX</code> 作为所有向量字段的索引类型，并根据需求选择<code translate="no">COSINE</code> 、<code translate="no">L2</code> 或<code translate="no">IP</code> 作为度量类型。</p>
-<p>如上文代码片段所示，对于向量字段，您需要同时设置索引类型和度量类型；而对于标量字段，仅需设置索引类型。向量字段必须设置索引，建议您为在过滤条件中频繁使用的标量字段创建索引。</p>
-<p>有关详细信息，请参阅《<a href="/docs/zh/index-vector-fields.md">为向量字段建立索引</a>》和《<a href="/docs/zh/index-scalar-fields.md">为标量字段建立索引</a>》。</p>
+    </button></h2><p>下面的示例为Schema的字段准备了索引定义。请选择与向量字段数据类型兼容的向量索引和度量；请参阅《<a href="/docs/zh/index-explained.md">索引说明</a>》和《<a href="/docs/zh/metric.md">相似度度量</a>》。</p>
+<p>向量字段在加载前必须配置索引。标量索引为可选；有关字段兼容性以及显式或自动类型选择，请参阅《<a href="/docs/zh/scalar_index.md">标量索引》</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -431,7 +429,7 @@ indexOptions := []milvusclient.CreateIndexOption{
         ></path>
       </svg>
     </button></h2><p>如果您创建的 Collection 包含索引参数，Milvus 会在 Collection 创建时自动加载该 Collection。在此情况下，索引参数中提到的所有字段都会被建立索引。</p>
-<p>以下代码片段演示了如何创建带有索引参数的Collection以及如何检查其加载状态。</p>
+<p>以下代码片段演示了如何使用索引参数创建Collection并检查其加载状态。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -834,7 +832,7 @@ curl --request POST \
 <p>作为一般准则，在设置分片数量时请考虑以下因素：</p>
 <ul>
 <li><strong>数据规模：</strong>通常的做法是每 2 亿个实体设置一个分片。您也可以根据总数据规模进行估算，例如，计划插入的每 100 GB 数据增加一个分片。</li>
-<li><strong>流节点利用率：</strong>如果您的 Milvus 实例拥有多个流节点，建议使用多个分片。这可确保数据插入工作负载在所有可用流节点之间进行分布，避免部分节点处于空闲状态而其他节点却过载。</li>
+<li><strong>流节点利用率：</strong>如果您的 Milvus 实例拥有多个流节点，建议使用多个分片。这可确保数据插入工作负载在所有可用流节点之间分布，避免部分节点闲置而其他节点过载。</li>
 </ul>
 <p>以下代码片段演示了在创建Collection时如何设置分片数。</p>
 <div class="multipleCode">
@@ -950,7 +948,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 默认在所有 Collections 上启用 mmap，这使得 Milvus 能够将原始字段数据映射到内存中，而非将其完全加载。这可减少内存占用并提高 Collections 容量。以下示例为单个 Collection 禁用 mmap；有关 mmap 的详细信息，请参阅<a href="/docs/zh/mmap.md">《使用 mmap</a>》。</p>
+    </button></h3><p>Milvus 默认在所有 Collections 上启用 mmap，这使得 Milvus 能够将原始字段数据映射到内存中，而非将其完全加载。这可减少内存占用并提高 Collection 容量。以下示例为单个 Collection 禁用 mmap；有关 mmap 的详细信息，请参阅<a href="/docs/zh/mmap.md">《使用 mmap</a>》。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1073,7 +1071,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>如果 Collection 中的数据需要在特定时间段内被删除，请考虑以秒为单位设置其生存时间（TTL）。一旦 TTL 超时，Milvus 将删除 Collection 中的实体。删除操作是异步进行的，这意味着在删除完成之前，仍可进行搜索和查询。</p>
+    </button></h3><p>如果 Collection 中的数据需要在特定时间段内被删除，请考虑以秒为单位设置其生存时间（TTL）。一旦 TTL 超时，Milvus 将删除该 Collection 中的实体。删除操作是异步进行的，这意味着在删除完成之前，搜索和查询仍然可以进行。</p>
 <p>以下代码片段将 TTL 设置为一天（86400 秒）。建议您将 TTL 至少设置为几天。</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -1319,5 +1317,5 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Collection中的Dynamic Field是一个名为<strong>$meta</strong> 的预留 JavaScript 对象表示法（JSON）字段。启用该字段后，Milvus 会将每个实体中包含的所有非Schema定义字段及其值作为键值对保存在该预留字段中。</p>
-<p>有关如何使用动态字段的详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">“Dynamic Field”</a>。</p>
+    </button></h3><p>Collection 中 Dynamic Field 是一个名为<strong>$meta</strong> 的预留 JavaScript 对象表示法（JSON）字段。启用该字段后，Milvus 会将每个实体中包含的所有非 Schema 定义字段及其值作为键值对保存在该预留字段中。</p>
+<p>有关如何使用动态字段的详细信息，请参阅《<a href="/docs/zh/enable-dynamic-field.md">Dynamic Field</a>》。</p>

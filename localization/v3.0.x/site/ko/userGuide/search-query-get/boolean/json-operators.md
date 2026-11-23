@@ -45,7 +45,7 @@ summary: >-
 <ul>
 <li><p><a href="#JSONCONTAINS"><code translate="no">JSON_CONTAINS(identifier, expr)</code></a>: 필드 내에서 지정된 JSON 표현식이 발견되는 엔티티를 필터링합니다.</p></li>
 <li><p><a href="#JSONCONTAINSALL"><code translate="no">JSON_CONTAINS_ALL(identifier, expr)</code></a>: 지정된 JSON 표현식의 모든 요소가 필드에 포함되어 있는지 확인합니다.</p></li>
-<li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: 필드 내에 JSON 표현식의 구성 요소 중 적어도 하나가 존재하는 엔티티를 필터링합니다.</p></li>
+<li><p><a href="#JSONCONTAINSANY"><code translate="no">JSON_CONTAINS_ANY(identifier, expr)</code></a>: 필드 내에 JSON 표현식의 구성원 중 적어도 하나가 존재하는 엔티티를 필터링합니다.</p></li>
 </ul>
 <p>실제 상황에서 이러한 연산자가 어떻게 적용되는지 예제를 통해 살펴보겠습니다.</p>
 <h2 id="JSONCONTAINS" class="common-anchor-header">JSON_CONTAINS<button data-href="#JSONCONTAINS" class="anchor-icon" translate="no">
@@ -169,7 +169,7 @@ filter=<span class="hljs-string">&#x27;json_contains_all(product[&quot;tags&quot
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">json_contains_any</code> 연산자는 JSON 표현식의 구성원 중 적어도 하나가 해당 필드 내에 존재하는 엔티티를 필터링합니다. 이는 여러 가능한 값 중 하나에 기반하여 엔티티를 일치시키고자 할 때 유용합니다.</p>
+    </button></h2><p><code translate="no">json_contains_any</code> 연산자는 JSON 표현식의 구성 요소 중 적어도 하나가 필드 내에 존재하는 엔티티를 필터링합니다. 이는 여러 가능한 값 중 어느 하나에 기반하여 엔티티를 일치시키고자 할 때 유용합니다.</p>
 <p><strong>예시</strong></p>
 <p><code translate="no">&quot;electronics&quot;</code>, <code translate="no">&quot;sale&quot;</code> 또는 <code translate="no">&quot;new&quot;</code> 태그 중 적어도 하나를 가진 제품을 필터링한다고 가정해 봅시다. 이를 위해 <code translate="no">json_contains_any</code> 연산자를 사용할 수 있습니다.</p>
 <div class="multipleCode">

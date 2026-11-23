@@ -96,8 +96,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>極めて高速なクエリと最小限のメモリ使用量が求められるシナリオ向けに、Milvus は 4 ビットの均一スカラー量子化である<code translate="no">SQ4U</code> を導入しました。これは、各次元の浮動小数点値を<strong>4 ビットの</strong>符号なし整数に圧縮する、積極的なスカラー量子化の一種です。</p>
-<p>SQ4U の「U」は「Uniform（均一）」を表しています。通常、各次元ごとに最小値と最大値を個別に計算する非均一スカラー量子化（次元ごとの量子化）とは異なり、SQ4U<strong>はグローバルな均一量子化戦略</strong>を採用しています。</p>
+    </button></h3><p>極めて高速なクエリと最小限のメモリ使用量が求められるシナリオに対応するため、Milvus は 4 ビットの均一スカラー量子化である<code translate="no">SQ4U</code> を導入しました。これは、各次元の浮動小数点値を<strong>4 ビットの</strong>符号なし整数に圧縮する、積極的なスカラー量子化の一種です。</p>
+<p>SQ4U の「U」は「Uniform（均一）」を表します。通常、各次元ごとに最小値と最大値を個別に計算する非均一スカラー量子化（次元ごとの量子化）とは異なり、SQ4U<strong>はグローバルな均一量子化戦略</strong>を採用しています。</p>
 <ol>
 <li><p><strong>グローバル統計</strong>：システムは、ベクトル（またはベクトルセグメント全体）<strong>のすべての次元に</strong>適用される<strong>単一の</strong>最小値<code translate="no">vmin</code> と<strong>単一の</strong>値の範囲<code translate="no">vdiff</code> を算出します。</p></li>
 <li><p><strong>均一マッピング</strong>：グローバルな値の範囲は、16の等間隔に分割されます。ベクトル内のすべての浮動小数点値は、どの次元に属するかに関係なく、これらの共有パラメータを使用して4ビットの整数（0～15）にマッピングされます。</p></li>
@@ -105,7 +105,7 @@ summary: >-
 <p><strong>パフォーマンス上の利点：</strong></p>
 <ul>
 <li><p><strong>8倍の圧縮率：</strong> <code translate="no">FP32</code> と比較してサイズを8倍、<code translate="no">SQ8</code> と比較して2倍に縮小し、ベクトル検索におけるボトルネックとなりがちなメモリ帯域幅への負荷を大幅に軽減します。</p></li>
-<li><p><strong>SIMD最適化：</strong>このコンパクトな構造により、最新のCPU（AVX2/AVX-512）は1サイクルあたりにより多くの次元を処理できるようになります。特に重要なのは、グローバルパラメータを使用することで、距離計算中に変動するスケール値やオフセット値をロードする必要がなくなり、命令パイプラインを完全に飽和状態に保てる点です。</p></li>
+<li><p><strong>SIMD最適化：</strong>このコンパクトな構造により、最新のCPU（AVX2/AVX-512）は1サイクルあたりにより多くの次元を処理できます。特に重要なのは、グローバルパラメータを使用することで、距離計算中に変動するスケール値やオフセット値をロードする必要がなくなり、命令パイプラインを常にフル稼働させられる点です。</p></li>
 <li><p><strong>キャッシュ効率：</strong>ベクトルサイズが小さくなることで、CPUキャッシュにより多くのデータが収まり、メモリアクセスによるレイテンシが低減されます。</p></li>
 </ul>
 <div class="alert note">
@@ -133,7 +133,7 @@ summary: >-
 <li><p><strong>候補の抽出：</strong>クエリベクトルが指定されると、アルゴリズムは圧縮されたデータを使用して、HNSWグラフから候補となる近傍のプールを迅速に特定します。</p></li>
 <li><p><strong>（オプション）結果の精緻化：</strong>精度を高めるために、以下のパラメータに基づいて初期の候補結果を精緻化することができます：</p>
 <ul>
-<li><p><code translate="no">refine</code>: この絞り込みステップを有効にするかどうかを制御します。「<code translate="no">true</code> 」に設定すると、システムはより高精度な表現または非圧縮表現を使用して距離を再計算します。</p></li>
+<li><p><code translate="no">refine</code>: この絞り込みステップを有効にするかどうかを制御します。「<code translate="no">true</code> 」に設定すると、システムはより高精度または非圧縮の表現を使用して距離を再計算します。</p></li>
 <li><p><code translate="no">refine_type</code>: 精緻化中に使用されるデータの精度レベルを指定します（例：SQ6、SQ8、BF16）。<code translate="no">FP32</code> のような高精度な選択肢は、より正確な結果をもたらしますが、より多くのメモリを必要とします。この値は、<code translate="no">sq_type</code> によって設定された元の圧縮データセットの精度を上回っている必要があります。</p></li>
 <li><p><code translate="no">refine_k</code>: 拡大倍率として機能します。例えば、トップ<em>k</em>が 100 で、<code translate="no">refine_k</code> が 2 の場合、システムは上位 200 件の候補を再ランク付けし、その中から最良の 100 件を返すことで、全体的な精度を向上させます。</p></li>
 </ul></li>
@@ -154,7 +154,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusのベクトルフィールド上に<code translate="no">HNSW_SQ</code> インデックスを構築するには、<code translate="no">add_index()</code> メソッドを使用し、<code translate="no">index_type</code> 、<code translate="no">metric_type</code> 、およびインデックスの追加パラメータを指定します。</p>
+    </button></h2><p>Milvusのベクトルフィールドに<code translate="no">HNSW_SQ</code> インデックスを構築するには、<code translate="no">add_index()</code> メソッドを使用し、<code translate="no">index_type</code> 、<code translate="no">metric_type</code> 、およびインデックスの追加パラメータを指定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -177,7 +177,7 @@ index_params.add_index(
 <p>この設定では：</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 構築するインデックスのタイプ。この例では、値を<code translate="no">HNSW_SQ</code> に設定します。</p></li>
-<li><p><code translate="no">metric_type</code>: ベクトル間の距離を計算するために使用されるメソッド。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> などがあります。詳細については、<a href="/docs/ja/metric.md">「メトリックタイプ</a>」を参照してください。</p></li>
+<li><p><code translate="no">metric_type</code>: ベクトル間の距離を計算するために使用されるメソッド。サポートされている値には、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> があります。詳細については、「<a href="/docs/ja/metric.md">メトリックタイプ</a>」を参照してください。</p></li>
 <li><p><code translate="no">params</code>: インデックスの構築に関する追加の設定オプション。詳細については、「<a href="/docs/ja/hnsw-sq.md#Index-building-params">インデックス構築パラメータ</a>」を参照してください。</p></li>
 </ul>
 <p>インデックスパラメータの設定が完了したら、<code translate="no">create_index()</code> メソッドを直接使用するか、<code translate="no">create_collection</code> メソッドにインデックスパラメータを渡すことで、インデックスを作成できます。詳細については、「<a href="/docs/ja/create-collection.md">コレクションの作成</a>」を参照してください。</p>
@@ -231,7 +231,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、インデックスの構築およびインデックスに対する検索に使用されるパラメータの概要を説明します。</p>
+    </button></h2><p>このセクションでは、インデックスの構築およびインデックスでの検索に使用されるパラメータの概要を説明します。</p>
 <h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,16 +266,16 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">efConstruction</code></p></td>
-     <td><p>インデックス構築時に、接続の対象として検討される候補の近傍の数。</p><p>新しい要素ごとに評価される候補のプールは大きくなりますが、実際に確立される接続の最大数は、<code translate="no">M</code> によって制限されます。</p></td>
+     <td><p>インデックス構築時に、接続の対象として検討される候補の近傍の数。</p><p>新しい要素ごとに、より多くの候補が評価されますが、実際に確立される接続の最大数は、<code translate="no">M</code> によって制限されます。</p></td>
      <td><p><strong>タイプ</strong>：整数</p><p><strong>範囲</strong>：[1,<em>int_max</em>]</p><p><strong>デフォルト値</strong>：<code translate="no">360</code></p></td>
-     <td><p><code translate="no">efConstruction</code> の値を大きくすると、探索される潜在的な接続が増えるため、通常<strong>はより正確なインデックス</strong>が生成されます。ただし、これにより<strong>インデックス作成時間が長くなり、</strong>作成中の<strong>メモリ使用量も増加します</strong>。</p><p>特にインデックス作成時間がそれほど重要ではないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> の値を大きくすることを検討してください。</p><p>リソースの制約が懸念される場合は、インデックスの構築を高速化するために<code translate="no">efConstruction</code> の値を小さくすることを検討してください。</p><p>ほとんどの場合、[50, 500] の範囲内の値を設定することをお勧めします。</p></td>
+     <td><p><code translate="no">efConstruction</code> の値を大きくすると、探索される潜在的な接続が増えるため、通常、<strong>より正確なインデックス</strong>が生成されます。ただし、これにより<strong>インデックス作成時間が長くなり、</strong>作成中の<strong>メモリ使用量も増加します</strong>。</p><p>特にインデックス作成時間がそれほど重要ではないシナリオでは、精度を向上させるために<code translate="no">efConstruction</code> の値を大きくすることを検討してください。</p><p>リソースの制約が懸念される場合は、インデックスの構築を高速化するために<code translate="no">efConstruction</code> の値を小さくすることを検討してください。</p><p>ほとんどの場合、[50, 500] の範囲内の値を設定することをお勧めします。</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>ベクトルを圧縮するためのスカラー量子化方式を指定します。各オプションは、圧縮率と精度のバランスが異なります。</p><ul><li><p><code translate="no">SQ4U</code>: 4 ビットの均一量子化を使用してベクトルをエンコードします。このモードは、最高の速度と圧縮率を実現します。</p></li><li><p><code translate="no">SQ6</code>: 6 ビットの整数を使用してベクトルをエンコードします。</p></li><li><p><code translate="no">SQ8</code>: 8 ビットの整数を使用してベクトルをエンコードします。</p></li><li><p><code translate="no">BF16</code>: Bfloat16 形式を使用します。</p></li><li><p><code translate="no">FP16</code>: 標準の 16 ビット浮動小数点形式を使用します。</p></li></ul></td>
+     <td><p>ベクトルを圧縮するためのスカラー量子化方式を指定します。各オプションは、圧縮率と精度のバランスが異なります。</p><ul><li><p><code translate="no">SQ4U</code>: 4 ビットの均一量子化を使用してベクトルをエンコードします。このモードは、最高の速度と圧縮率を実現します。</p></li><li><p><code translate="no">SQ6</code>: 6 ビットの整数を使用してベクトルをエンコードします。</p></li><li><p><code translate="no">SQ8</code>: 8ビット整数を用いてベクトルをエンコードします。</p></li><li><p><code translate="no">BF16</code>: Bfloat16 形式を使用します。</p></li><li><p><code translate="no">FP16</code>: 標準の 16 ビット浮動小数点形式を使用します。</p></li></ul></td>
      <td><p><strong>型</strong>: 文字列</p><p><strong>範囲</strong>：[<code translate="no">SQ4U</code>,<code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> ]</p><p><strong>デフォルト値</strong>：<code translate="no">SQ8</code></p></td>
-     <td><p><code translate="no">sq_type</code> の選択は、具体的なアプリケーションの要件によって異なります。<code translate="no">SQ4U</code> は、速度とメモリ効率を最大化するために選択されます。<code translate="no">SQ6</code> または<code translate="no">SQ8</code> は、パフォーマンスのバランスを重視する場合に適しています。一方、精度が最優先される場合は、<code translate="no">BF16</code> または<code translate="no">FP16</code> が適している可能性があります。</p></td>
+     <td><p><code translate="no">sq_type</code> の選択は、具体的なアプリケーションの要件によって異なります。<code translate="no">SQ4U</code> は、速度とメモリ効率を最大化するために選択されます。<code translate="no">SQ6</code> または<code translate="no">SQ8</code> は、パフォーマンスのバランスを取る場合に適している可能性があります。一方、精度が最優先される場合は、<code translate="no">BF16</code> または<code translate="no">FP16</code> が好まれる場合があります。</p></td>
    </tr>
    <tr>
      <td></td>
@@ -288,7 +288,7 @@ res = MilvusClient.search(
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
      <td><p>再ランク付けに使用されるデータの精度を決定します。</p><p>この精度は、圧縮ベクトルの精度（<code translate="no">sq_type</code> で設定された値）よりも高く設定する必要があり、再ランク付けされたベクトルの精度とメモリ使用量の両方に影響を与えます。</p></td>
-     <td><p><strong>型</strong>：文字列</p><p><strong>範囲</strong>：[<code translate="no">SQ6</code> 、<code translate="no">SQ8</code> 、<code translate="no">BF16</code> 、<code translate="no">FP16</code> 、<code translate="no">FP32</code> ]</p><p><strong>デフォルト値</strong>：なし</p></td>
+     <td><p><strong>型</strong>: 文字列</p><p><strong>範囲</strong>：[<code translate="no">SQ6</code> 、<code translate="no">SQ8</code> 、<code translate="no">BF16</code> 、<code translate="no">FP16</code> 、<code translate="no">FP32</code> ]</p><p><strong>デフォルト値</strong>：なし</p></td>
      <td><p>メモリ消費量は増えますが、最高の精度を求める場合は `<code translate="no">FP32</code> ` を、圧縮率を重視する場合は `<code translate="no">SQ6</code>` または `<code translate="no">SQ8</code> ` を使用してください。`<code translate="no">BF16</code> ` および `<code translate="no">FP16</code> ` は、両者のバランスが取れた選択肢となります。</p></td>
    </tr>
 </table>
@@ -320,13 +320,13 @@ res = MilvusClient.search(
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
      <td><p>最近傍検索時の検索範囲を制御します。これにより、潜在的な最近傍として訪問・評価されるノードの数が決定されます。 </p><p>このパラメータは検索プロセスにのみ影響し、グラフの最下層にのみ適用されます。</p></td>
-     <td><p><strong>型</strong>: 整数</p><p><strong>範囲</strong>：[1,<em>int_max</em>]</p><p><strong>デフォルト値</strong>：通常の kNN 検索の場合は<code translate="no">max(limit, 16)</code> 、範囲検索の場合は<code translate="no">512</code> 。</p><p>通常の kNN 検索の場合、明示的に指定する<code translate="no">ef</code> は、<code translate="no">limit</code> （返す最近傍の数）以上である必要があります。</p></td>
+     <td><p><strong>型</strong>：整数</p><p><strong>範囲</strong>：[1,<em>int_max</em>]</p><p><strong>デフォルト値</strong>：通常の kNN 検索の場合は<code translate="no">max(limit, 16)</code> 、範囲検索の場合は<code translate="no">512</code> 。</p><p>通常の kNN 検索の場合、明示的に指定する<code translate="no">ef</code> は、<code translate="no">limit</code> （返す最近傍の数）以上である必要があります。</p></td>
      <td><p><code translate="no">ef</code> を大きくすると、より多くの潜在的な近傍が考慮されるため、一般的に<strong>検索精度が向上</strong>します。ただし、これにより<strong>検索時間も長くなります</strong>。</p><p>高いリコール率の達成が重要であり、検索速度はそれほど問題にならない場合は、<code translate="no">ef</code> の値を大きくすることを検討してください。</p><p>特に、精度のわずかな低下が許容できるシナリオでは、検索速度を優先するために<code translate="no">ef</code> を小さくすることを検討してください。</p><p>ほとんどの場合、[K, 10K] の範囲内の値を設定することをお勧めします。</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>リファインメント段階で、要求された上位 K 件の結果に対して、さらにいくつの候補を調査するかを制御する拡大率。</p></td>
+     <td><p>リファインメント段階で、要求された上位 K 件の結果に対して、追加で検討される候補の数を制御する拡大率。</p></td>
      <td><p><strong>タイプ</strong>：浮動小数点</p><p><strong>範囲</strong>：[1,<em>float_max</em>)</p><p><strong>デフォルト値</strong>: 1</p></td>
      <td><p><code translate="no">refine_k</code> の値を大きくすると、リコール率と精度が向上する可能性がありますが、検索時間とリソースの使用量も増加します。値が 1 の場合、絞り込み処理では最初のトップ K 件の結果のみが考慮されます。</p></td>
    </tr>

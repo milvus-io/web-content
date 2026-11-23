@@ -28,7 +28,7 @@ beta: Milvus 2.6.x
 <li><p>検索クエリとの類似度がわずかに低い場合でも、トレンドの商品を優先表示するECプラットフォーム</p></li>
 </ul>
 <p>これらのシナリオにはすべて、ベクトル類似性と、時間、距離、人気度といった他の数値的要因とのバランスを取るという共通のニーズがあります。</p>
-<p>Milvusの「Decay rankers」は、数値フィールドの値に基づいて検索順位を調整することで、このニーズに対応します。これにより、ベクトル類似度と「鮮度」、「近さ」、あるいはデータのその他の数値的特性とのバランスを取ることができ、より直感的で文脈に即した検索体験を実現します。</p>
+<p>Milvusの「Decay rankers」は、数値フィールドの値に基づいて検索順位を調整することで、このニーズに対応します。これにより、ベクトル類似度と「鮮度」、「近さ」、あるいはデータのその他の数値的特性とのバランスを取り、より直感的で文脈に即した検索体験を実現できます。</p>
 <h2 id="Usage-notes" class="common-anchor-header">使用上の注意<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,8 +111,8 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>次に、Milvusは、選択したディケイ・ランカーを使用して、数値フィールド値（タイムスタンプや距離など）に基づいてディケイスコアを算出します：</p>
 <ul>
-<li><p>各ディケイ・ランカーは、生の数値を0～1の範囲の正規化された関連性スコアに変換します。</p></li>
-<li><p>減衰スコアは、理想点からの「距離」に基づいて、そのアイテムがどれほど関連性が高いかを表します。</p></li>
+<li><p>各ディケイ・ランカーは、生の数値を0～1の範囲の正規化された関連性スコアに変換します</p></li>
+<li><p>減衰スコアは、理想点からの「距離」に基づいて、そのアイテムがどれほど関連性が高いかを表します</p></li>
 </ul>
 <p>具体的な計算式は、減衰ランカーの種類によって異なります。減衰スコアの計算方法の詳細については、<a href="/docs/ja/gaussian-decay.md#Formula">ガウス減衰</a>、<a href="/docs/ja/exponential-decay.md#Formula">指数減衰</a>、<a href="/docs/ja/linear-decay.md#Formula">線形減衰の</a>各専用ページを参照してください。</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">ステージ3：最終スコアの算出<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
@@ -154,7 +154,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>時間ベースの減衰を適用して<strong>「AI 研究論文」</strong>を検索するという実用的なシナリオで、減衰ランキングを見てみましょう：</p>
 <div class="alert note">
-<p>この例では、減衰スコアは関連性が時間の経過とともに低下する様子を反映しています。つまり、新しい論文ほど1.0に近いスコアが与えられ、古い論文ほど低いスコアが与えられます。これらの値は、特定の減衰ランカーを使用して計算されます。詳細については、<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">「適切な減衰ランカーの選択</a>」を参照してください。</p>
+<p>この例では、減衰スコアは関連性が時間の経過とともに低下する様子を反映しています。つまり、新しい論文ほど1.0に近いスコアが割り当てられ、古い論文ほど低いスコアが割り当てられます。これらの値は、特定の減衰ランカーを使用して計算されます。詳細については、<a href="/docs/ja/decay-ranker-overview.md#Choose-the-right-decay-ranker">「適切な減衰ランカーの選択</a>」を参照してください。</p>
 </div>
 <table>
    <tr>
@@ -205,7 +205,7 @@ beta: Milvus 2.6.x
 </table>
 <p>減衰再ランク付けを行わなければ、純粋なベクトル類似度（0.92）に基づいて論文Bが最高位となる。しかし、減衰再ランク付けを適用すると：</p>
 <ul>
-<li><p>論文Cは、類似度が中程度であるにもかかわらず、ごく最近（昨日）発表されたため、1位に躍り出ます</p></li>
+<li><p>論文Cは、類似度は中程度であるにもかかわらず、ごく最近（昨日発表された）ものであるため、1位に躍り出ます</p></li>
 <li><p>論文Bは、類似度が非常に高いにもかかわらず、比較的古いという理由で4位に順位を下げた</p></li>
 <li><p>論文DはCOSINE類似度を使用しているため、減衰を適用する前にそのスコア0.76が直接使用される</p></li>
 </ul>
@@ -236,7 +236,7 @@ beta: Milvus 2.6.x
      <td><p>ガウス型 (<code translate="no">gauss</code>)</p></td>
      <td><p>適度に長く続く、自然な感じの緩やかな減少</p></td>
      <td><ul><li><p>バランスの取れた結果が求められる一般的な検索</p></li><li><p>ユーザーが距離を直感的に把握できる用途</p></li><li><p>適度な距離であっても、検索結果に過度なペナルティが課されるべきではない場合</p></li></ul></td>
-     <td><p>レストラン検索において、3 km 離れた質の高い店舗も、近隣の選択肢よりは順位が低くなるものの、検索結果に表示される</p></td>
+     <td><p>レストラン検索において、3 km 離れた質の高い店舗も、近隣の選択肢よりは順位が低くなるものの、検索対象として表示される</p></td>
    </tr>
    <tr>
      <td><p>指数関数的（<code translate="no">exp</code> ）</p></td>
@@ -404,7 +404,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -422,7 +461,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
      <td><p>はい</p></td>
-     <td><p>減衰スコアの計算に使用する数値フィールド。減衰の計算にどのデータ属性を使用するかを決定します（例：時間ベースの減衰の場合はタイムスタンプ、位置情報ベースの減衰の場合は座標）。 </p><p>コレクション内のフィールドであり、関連する数値値を含む必要があります。INT8/16/32/64、FLOAT、DOUBLEをサポートしています。</p></td>
+     <td><p>減衰スコアの計算に使用する数値フィールド。減衰の計算にどのデータ属性を使用するかを決定します（例：時間ベースの減衰にはタイムスタンプ、位置ベースの減衰には座標）。 </p><p>コレクション内のフィールドであり、関連する数値値を含む必要があります。INT8/16/32/64、FLOAT、DOUBLEをサポートしています。</p></td>
      <td><p><code translate="no">["timestamp"]</code></p></td>
    </tr>
    <tr>
@@ -534,16 +573,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -614,5 +655,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

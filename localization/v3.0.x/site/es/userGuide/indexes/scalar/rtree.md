@@ -1,11 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  El índice RTREE es una estructura de datos basada en árboles que acelera las
-  consultas en campos GEOMETRY. Si tu colección almacena objetos geométricos,
-  como puntos, líneas o polígonos, en formato WKT (Well-known text) y deseas
-  acelerar el filtrado espacial, RTREE es la opción ideal.
+summary: Utiliza RTREE para acelerar el filtrado espacial en campos GEOMETRY.
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -23,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>El índice « <code translate="no">RTREE</code> » es una estructura de datos basada en árboles que acelera las consultas en campos de tipo « <code translate="no">GEOMETRY</code> » en Milvus. Si tu colección almacena objetos geométricos, como puntos, líneas o polígonos, en formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT (Well-known text)</a> y deseas acelerar el filtrado espacial, « <code translate="no">RTREE</code> » es la opción ideal.</p>
-<h2 id="How-it-works" class="common-anchor-header">Cómo funciona<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> acelera el filtrado espacial en campos « <code translate="no">GEOMETRY</code> » que contienen puntos, líneas o polígonos en formato <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT (Well-known text)</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Descripción general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utiliza un índice « <code translate="no">RTREE</code> » para organizar y filtrar de forma eficiente los datos geométricos, siguiendo un proceso de dos fases:</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">Fase 1: Creación del índice<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">Tipos de datos admitidos<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +50,57 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
+    </button></h3><p><code translate="no">GEOMETRY</code> campos. Consulte <a href="/docs/es/geometry-field.md">«Campo de geometría</a> » para ver las definiciones de los campos.</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">Aceleración del filtrado<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> busca candidatos utilizando cuadros delimitadores; a continuación, Milvus comprueba la relación espacial exacta. Admite los siguientes <a href="/docs/es/geometry-operators.md">operadores geométricos</a>:</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code> y <code translate="no">ST_WITHIN</code>.</li>
+<li><code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code> y <code translate="no">ST_DWITHIN</code>.</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> no utiliza <code translate="no">RTREE</code>. Sin un índice válido, los filtros espaciales exploran el campo.</p>
+<div class="alert note">
+<blockquote>
+<p>Se trata de capacidades de los índices, no de limitaciones en las expresiones de filtro válidas. Consulte <a href="/docs/es/scalar_index.md#Filter-execution">«Índice escalar»</a> para conocer las restricciones de búsqueda compartidas. Para las comprobaciones de <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> y NULL (<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>), consulte <a href="/docs/es/basic-operators.md">«Operadores básicos</a>».</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">Cómo funciona RTREE<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>Ver el proceso de creación y consulta</strong></summary></p>
+<p>Milvus utiliza un índice « <code translate="no">RTREE</code> » para organizar y filtrar de forma eficiente los datos geométricos, siguiendo un proceso en dos fases:</p>
+<p><strong>Fase 1: Creación del índice</strong></p>
+<ol>
 <li><p><strong>Crear nodos hoja:</strong> para cada objeto geométrico, se calcula su <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">rectángulo delimitador mínimo</a> (MBR), que es el rectángulo más pequeño que contiene por completo el objeto, y se almacena como un nodo hoja.</p></li>
 <li><p><strong>Agrupación en recuadros más grandes:</strong> se agrupan los nodos hoja cercanos y se envuelve cada grupo con un nuevo MBR, formando así nodos internos. Por ejemplo, el grupo <strong>B</strong> contiene <strong>D</strong> y <strong>E</strong>; el grupo <strong>C</strong> contiene <strong>F</strong> y <strong>G</strong>.</p></li>
 <li><p><strong>Añadir el nodo raíz:</strong> añadir un nodo raíz cuyo MBR abarque todos los grupos internos, lo que da como resultado una estructura de árbol equilibrada en altura.</p></li>
@@ -66,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Cómo funciona Retree</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Fase 2: Acelerar las consultas<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>Fase 2: Acelerar las consultas</strong></p>
+<ol>
 <li><p><strong>Formar el MBR de la consulta:</strong> Calcular el MBR para la geometría de la consulta.</p></li>
 <li><p><strong>Poda de ramas:</strong> Empezando por la raíz, compara el MBR de la consulta con cada nodo interno. Omite cualquier rama cuyo MBR no se cruce con el MBR de la consulta.</p></li>
 <li><p><strong>Recopilar candidatos:</strong> Descender por las ramas que se cruzan para recopilar los nodos hoja candidatos.</p></li>
 <li><p><strong>Coincidencia exacta:</strong> para cada candidato, aplica un predicado espacial exacto para determinar las coincidencias verdaderas.</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">Crear un índice RTREE<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -294,9 +326,8 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">RTREE</code> Se filtra mediante operadores geométricos en la expresión « <code translate="no">filter</code> ». Cuando existe un índice RTREE en el campo de destino « <code translate="no">GEOMETRY</code> », Milvus lo utiliza para descartar candidatos automáticamente. Sin el índice, el filtro recurre a un escaneo completo.</p>
-<p>Para obtener una lista completa de los operadores específicos de geometría disponibles, consulta <a href="/docs/es/geometry-operators.md">Operadores</a> de <a href="/docs/es/geometry-operators.md">geometría</a>.</p>
-<h3 id="Example-1-Filter-only" class="common-anchor-header">Ejemplo 1: Filtrar únicamente<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
+    </button></h2><p>Los siguientes ejemplos utilizan un campo « <code translate="no">GEOMETRY</code> » indexado denominado « <code translate="no">geo</code> ».</p>
+<h3 id="Example-1-Filter-only" class="common-anchor-header">Ejemplo 1: Solo filtrar<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -311,7 +342,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Buscar todos los objetos geométricos dentro de un polígono dado:</p>
+    </button></h3><p>Busca todos los objetos geométricos dentro de un polígono dado:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -449,7 +480,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Busca los vectores más cercanos que también corten una línea:</p>
+    </button></h3><p>Buscar los vectores más cercanos que también se crucen con una línea:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -598,7 +629,7 @@ curl --request POST \
 }
 EOF
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información sobre cómo utilizar un campo « <code translate="no">GEOMETRY</code> », consulta <a href="/docs/es/geometry-field.md">Campo</a> de <a href="/docs/es/geometry-field.md">geometría</a>.</p>
+<p>Para obtener más información sobre cómo utilizar un campo « <code translate="no">GEOMETRY</code> », consulta <a href="/docs/es/geometry-field.md">«Campo de geometría</a>».</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Eliminar un índice<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -616,10 +647,9 @@ EOF
       </svg>
     </button></h2><p>Utiliza el método ` <code translate="no">drop_index()</code> ` para eliminar un índice existente de una colección.</p>
 <div class="alert note">
-<ul>
-<li><p>En <strong>la versión 2.6.3</strong> o anteriores, debes liberar la colección antes de eliminar un índice escalar.</p></li>
-<li><p>A partir de <strong>la versión 2.6.4</strong> o posteriores, puedes eliminar un índice escalar directamente una vez que ya no sea necesario, sin necesidad de liberar primero la colección.</p></li>
-</ul>
+<blockquote>
+<p>Para conocer los requisitos de la versión a la hora de eliminar un índice escalar, consulta <a href="/docs/es/scalar_index.md#Drop-index-compatibility">Índice escalar</a>.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

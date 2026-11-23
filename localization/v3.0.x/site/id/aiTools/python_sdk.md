@@ -1,8 +1,8 @@
 ---
 id: python_sdk.md
-title: 'Cepat: Milvus Python SDK'
+title: 'Prompt: Milvus Python SDK'
 summary: >-
-  Aturan untuk asisten pengkodean AI untuk menulis kode Milvus Python yang benar
+  Aturan bagi asisten pemrograman AI untuk menulis kode Python Milvus yang benar
   menggunakan MilvusClient.
 ---
 <h1 id="Python-SDK" class="common-anchor-header">Python SDK<button data-href="#Python-SDK" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Aturan untuk menulis kode Milvus Python yang benar menggunakan antarmuka MilvusClient, termasuk migrasi ORM, pola koneksi, dan operasi umum. Salin perintah lengkap di bawah ini ke dalam alat AI Anda untuk menerapkan aturan-aturan ini secara otomatis. Untuk ikhtisar semua prompt, lihat <a href="/docs/id/milvus_for_agents.md">Prompt AI</a>.</p>
+    </button></h1><p>Aturan untuk menulis kode Python Milvus yang benar menggunakan antarmuka MilvusClient, termasuk migrasi ORM, pola koneksi, dan operasi umum. Salin prompt lengkap di bawah ini ke alat AI Anda untuk menerapkan aturan ini secara otomatis. Untuk gambaran umum tentang semua prompt, lihat <a href="/docs/id/milvus_for_agents.md">AI Prompts</a>.</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Cara menggunakan prompt ini<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,12 +37,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ol>
-<li><strong>Salin</strong> perintah lengkap dari bagian Perintah <a href="#full-prompt">lengkap</a> di bawah ini.</li>
-<li><strong>Simpan</strong> di lokasi yang diharapkan oleh alat AI Anda - lihat <a href="/docs/id/milvus_for_agents.md">tabel lingkungan</a> untuk detail penempatan.</li>
-<li>Asisten AI Anda akan secara otomatis menerapkan aturan ini saat membuat atau meninjau kode Milvus.</li>
+<li><strong>Salin</strong> prompt lengkap dari bagian " <a href="#full-prompt">Prompt Lengkap</a> " di bawah ini.</li>
+<li><strong>Simpan</strong> ke lokasi yang diharapkan oleh alat AI Anda — lihat <a href="/docs/id/milvus_for_agents.md">tabel lingkungan</a> untuk detail penempatan.</li>
+<li>Asisten AI Anda akan secara otomatis menerapkan aturan-aturan ini saat menghasilkan atau meninjau kode Milvus.</li>
 </ol>
-<p>Untuk pengguna <strong>kursor</strong>: salin perintah dari bagian Perintah <a href="#full-prompt">lengkap</a> dan simpan di bawah <code translate="no">.cursor/rules/</code> dalam proyek Anda.</p>
-<h2 id="Full-prompt" class="common-anchor-header">Perintah lengkap<button data-href="#Full-prompt" class="anchor-icon" translate="no">
+<p>Untuk pengguna <strong>Cursor</strong>: salin prompt dari bagian " <a href="#full-prompt">Full prompt</a> " dan simpan di bawah " <code translate="no">.cursor/rules/</code> " dalam proyek Anda.</p>
+<h2 id="Full-prompt" class="common-anchor-header">Prompt lengkap<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +231,7 @@ except MilvusException as e:
 
 ## SDK feature notes
 
-- **Go SDK:** Does not support query iterators or search iterators.
+- **Go SDK:** Provides `SearchIterator()` and `QueryIterator()`. `SearchIterator()` needs a server that supports search iterator V2.
 - **Node.js SDK:** Does not support built-in OpenAI embedding functions.
 - **All SDKs:** Always check for the latest SDK version before relying on feature availability. Features may differ across Python, Java, Go, and Node.js SDKs.
 

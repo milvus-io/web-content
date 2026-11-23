@@ -2,12 +2,9 @@
 id: users_and_roles.md
 title: Создание пользователей и ролей
 summary: >-
-  Milvus обеспечивает тонкое управление доступом с помощью модели RBAC. Для
-  начала необходимо создать пользователей и роли, затем назначить ролям права
-  доступа или группы прав, а в заключение — управлять доступом, присваивая роли
-  пользователям. Такой подход гарантирует эффективность и безопасность
-  управления доступом. На этой странице рассказывается, как создавать
-  пользователей и роли в Milvus.
+  Milvus управляет доступом с помощью модели RBAC: привилегии присваиваются
+  ролям, а роли — пользователям. На этой странице рассказывается, как создавать
+  пользователей и роли.
 ---
 <h1 id="Create-Users--Roles" class="common-anchor-header">Создание пользователей и ролей<button data-href="#Create-Users--Roles" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -40,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>После инициализации экземпляра Milvus автоматически создаётся пользователь root для аутентификации при первом подключении к Milvus. Имя пользователя root — <code translate="no">root</code>, а пароль — <code translate="no">Milvus</code>. По умолчанию пользователю root присваивается роль <code translate="no">admin</code>, которая предоставляет доступ ко всем ресурсам. Для обеспечения безопасности данных храните учетные данные пользователя root в надёжном месте, чтобы предотвратить несанкционированный доступ.</p>
+    </button></h2><p>После инициализации экземпляра Milvus автоматически создаётся пользователь root, который используется для аутентификации при первом подключении к Milvus. Имя пользователя root — <code translate="no">root</code>, а пароль — <code translate="no">Milvus</code>. По умолчанию пользователь root не привязан ни к одной роли и не проходит проверку привилегий, поэтому он имеет доступ ко всем ресурсам. Это поведение регулируется настройкой « <code translate="no">common.security.rootShouldBindRole</code> », значение которой по умолчанию — <code translate="no">false</code>. Для обеспечения безопасности данных храните учетные данные пользователя root в надежном месте, чтобы предотвратить несанкционированный доступ.</p>
 <p>Для повседневной работы мы рекомендуем создавать пользователей вместо использования пользователя root.</p>
 <h3 id="Create-a-user" class="common-anchor-header">Создание пользователя<button data-href="#Create-a-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,10 +54,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Войдите под именем <code translate="no">root</code> и создайте пользователя с именем <code translate="no">user_1</code> и паролем <code translate="no">P@ssw0rd</code>. При выборе учетных данных соблюдайте следующие правила:</p>
+    </button></h3><p>Войдите в систему как <code translate="no">root</code> и создайте пользователя с именем <code translate="no">user_1</code> и паролем <code translate="no">P@ssw0rd</code>. При выборе учетных данных следуйте следующим правилам:</p>
 <ul>
-<li><p>Имя пользователя: должно начинаться с буквы и может содержать только заглавные или строчные буквы, цифры и символы подчеркивания.</p></li>
-<li><p>Пароль: по умолчанию должен иметь длину от 6 до 72 байтов в кодировке UTF-8. В вашей среде развертывания могут быть установлены другие <a href="/docs/ru/authenticate.md#Password-requirements">ограничения на длину пароля</a>.</p></li>
+<li><p>Имя пользователя: должно начинаться с буквы или подчеркивания и может содержать только заглавные или строчные буквы, цифры, подчеркивания (<code translate="no">_</code>) и любые дополнительные символы, настроенные в <code translate="no">proxy.nameValidation.allowedChars</code> (по умолчанию —<code translate="no">$</code> ).</p></li>
+<li><p>Пароль: по умолчанию должен иметь длину от 6 до 72 байтов в кодировке UTF-8. В вашей среде развертывания могут быть настроены другие <a href="/docs/ru/authenticate.md#Password-requirements">ограничения на длину пароля</a>.</p></li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -100,7 +97,7 @@ client.createUser(createUserReq);
     <span class="hljs-string">&quot;context&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -161,7 +158,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Используйте соединение из примера create-user, чтобы изменить пароль пользователя <code translate="no">user_1</code> с <code translate="no">P@ssw0rd</code> на <code translate="no">NewP@ssw0rd</code>. Укажите текущий пароль и выберите новый пароль, соответствующий тем же <a href="/docs/ru/authenticate.md#Password-requirements">требованиям</a>.</p>
+    </button></h3><p>Используйте соединение из примера create-user, чтобы обновить пароль пользователя <code translate="no">user_1</code> с <code translate="no">P@ssw0rd</code> на <code translate="no">NewP@ssw0rd</code>. Укажите текущий пароль и выберите новый пароль, соответствующий тем же <a href="/docs/ru/authenticate.md#Password-requirements">требованиям к паролю</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -293,7 +290,7 @@ client.list_users()
     </button></h3><p>В следующем примере показано, как создать роль с именем « <code translate="no">role_a</code> ».</p>
 <p>Имя роли должно соответствовать следующему правилу:</p>
 <ul>
-<li>Должно начинаться с буквы и может содержать только заглавные или строчные буквы, цифры и символы подчеркивания.</li>
+<li>Должно начинаться с буквы или символа подчеркивания и может содержать только заглавные или строчные буквы, цифры, символы подчеркивания и символы, указанные в <code translate="no">proxy.roleNameValidation.allowedChars</code> (по умолчанию —<code translate="no">$</code> ).</li>
 </ul>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -312,6 +309,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
+client.createRole(createRoleReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">err = client.CreateRole(ctx, milvusclient.NewCreateRoleOption(<span class="hljs-string">&quot;role_a&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
@@ -347,7 +345,7 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>После создания нескольких ролей можно отобразить список и просмотреть все существующие роли.</p>
+    </button></h3><p>После создания нескольких ролей вы можете отобразить список и просмотреть все существующие роли.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -378,6 +376,6 @@ client.list_roles()
 --header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Ниже приведён пример вывода. « <code translate="no">admin</code> » — это роль по умолчанию в Milvus. « <code translate="no">role_a</code> » — это только что созданная новая роль.</p>
-<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
+<p>Ниже приведён пример вывода. <code translate="no">admin</code> и <code translate="no">public</code> — это роли по умолчанию, создаваемые Milvus. <code translate="no">role_a</code> — это новая роль, которая только что была создана.</p>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;public&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

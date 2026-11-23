@@ -64,15 +64,15 @@ summary: 本页面演示了导入已准备好的数据的步骤。
     </button></h2><p>如果您的管道可能会重试失败或超时的导入请求，请为该作业添加一个幂等键；请参阅<a href="/docs/zh/idempotent-import.md">“幂等批量导入”</a>。</p>
 <p>要导入已准备好的数据，您需要按以下方式创建一个导入作业：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
 
-<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+<span class="hljs-comment"># Bulk-insert data from a set of Parquet files already uploaded to the MinIO server</span>
 resp = bulk_import(
     url=url,
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
@@ -157,6 +157,51 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
     <span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">}</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="bulkimport-parameters" class="common-anchor-header"><code translate="no">bulk_import</code> 参数<button data-href="#bulkimport-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p><code translate="no">bulk_import()</code> 是<code translate="no">POST /v2/vectordb/jobs/import/create</code> 的轻量级封装。除
+上述示例外，它还提供了以下参数（PyMilvus 2.6及更高版本）。</p>
+<table>
+<thead>
+<tr><th>参数</th><th>类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">url</code></td><td><code translate="no">str</code></td><td>服务器地址，例如<code translate="no">http://127.0.0.1:19530</code> 或<code translate="no">https://api.cloud.zilliz.com</code> 。</td></tr>
+<tr><td><code translate="no">collection_name</code></td><td><code translate="no">str</code></td><td>Target Collection。</td></tr>
+<tr><td><code translate="no">db_name</code></td><td><code translate="no">str</code></td><td>目标数据库。作为 RBAC 的<code translate="no">DB-Name</code> 标头发送。</td></tr>
+<tr><td><code translate="no">files</code></td><td><code translate="no">list[list[str]]</code></td><td>Milvus 实例已可访问的文件，例如位于 MinIO 上的文件。这些是<strong>服务器端的路径，而非对象 URL</strong>。每个子列表代表一个 JSON 或 Parquet 文件，或一组 NumPy 文件。</td></tr>
+<tr><td><code translate="no">partition_name</code></td><td><code translate="no">str</code></td><td>目标分区。通过额外的关键字参数传递，而非声明的参数，因此在函数签名中容易被忽略。对于使用Partition Key的Collection，请留空。</td></tr>
+<tr><td><code translate="no">object_url</code></td><td><code translate="no">str</code></td><td>云对象存储上的单个对象 URL。已被<code translate="no">object_urls</code> 取代。</td></tr>
+<tr><td><code translate="no">object_urls</code></td><td><code translate="no">list[list[str]]</code></td><td>云对象存储上的对象 URL，例如<code translate="no">s3://bucket/prefix/1.parquet</code> 。每个子列表代表一个对象或一个以<code translate="no">/</code> 结尾的前缀。请使用此<strong>参数代替</strong> <code translate="no">files</code> ；二者属于不同的传输方式，并非同义词。</td></tr>
+<tr><td><code translate="no">cluster_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud 集群 ID。</td></tr>
+<tr><td><code translate="no">project_id</code></td><td><code translate="no">str</code></td><td>Zilliz Cloud 项目 ID，用于项目数据库。</td></tr>
+<tr><td><code translate="no">region_id</code></td><td><code translate="no">str</code></td><td>项目数据库所在的区域。</td></tr>
+<tr><td><code translate="no">api_key</code></td><td><code translate="no">str</code></td><td>API密钥，如果是自托管实例，则为<code translate="no">username:password</code> 。</td></tr>
+<tr><td><code translate="no">access_key</code> /<code translate="no">secret_key</code></td><td><code translate="no">str</code></td><td><code translate="no">object_urls</code> 的对象存储凭据。</td></tr>
+<tr><td><code translate="no">token</code></td><td><code translate="no">str</code></td><td>用于短期对象存储凭据的会话令牌。</td></tr>
+<tr><td><code translate="no">volume_name</code></td><td><code translate="no">str</code></td><td>要导入数据的 Zilliz Cloud 卷。需要<code translate="no">data_paths</code> 。</td></tr>
+<tr><td><code translate="no">data_paths</code></td><td><code translate="no">list[list[str]]</code></td><td><code translate="no">volume_name</code> 内的路径。每个子列表代表一个文件或一个以<code translate="no">/</code> 结尾的前缀。</td></tr>
+<tr><td><code translate="no">verify</code></td><td><code translate="no">bool</code> 或<code translate="no">str</code></td><td>验证服务器 TLS 证书；默认位于<code translate="no">True</code> 。字符串将被视为 CA 证书包路径。</td></tr>
+<tr><td><code translate="no">cert</code></td><td><code translate="no">str</code> 或<code translate="no">tuple</code></td><td>用于双向 TLS 的客户端证书：文件路径，或<code translate="no">('cert', 'key')</code> 配对。</td></tr>
+<tr><td><code translate="no">headers</code></td><td><code translate="no">dict[str, str]</code></td><td>合并到请求中的额外 HTTP 头；调用方的值优先。可用于发送幂等性密钥，例如<code translate="no">{IDEMPOTENCY_KEY_HEADER: &quot;nightly-2026-09-07-batch-3&quot;}</code> ；参见<a href="/docs/zh/idempotent-import.md">“幂等批量导入”</a>。</td></tr>
+<tr><td><code translate="no">options</code></td><td><code translate="no">dict</code></td><td>其他导入选项将作为请求正文转发至服务器。</td></tr>
+</tbody>
+</table>
+<p>任何剩余的关键词参数都会转发给<code translate="no">requests.post</code> ，因此<code translate="no">timeout</code> 和<code translate="no">proxies</code>
+在此处的行为与该处一致。该封装函数默认发送 20 秒超时请求。</p>
 <h2 id="Check-import-progress" class="common-anchor-header">检查导入进度<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -172,10 +217,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/create&qu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>获取导入任务 ID 后，可通过以下方式查看导入进度：</p>
+    </button></h2><p>获取导入任务 ID 后，可通过以下方式检查导入进度：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -286,10 +331,10 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/describe&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以按以下方式列出特定Collection下的所有导入任务：</p>
+    </button></h2><p>您可以按以下方式列出与特定Collection相关的所有导入任务：</p>
 <div class="multipleCode">
- <a href="#python">Python 
- </a> <a href="#java"> Java</a>
+ <a href="#python">Python</a>
+ <a href="#java"> Java</a>
  <a href="#shell"> cURL</a>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
@@ -356,11 +401,11 @@ curl --request POST &quot;http://${MILVUS_URI}/v2/vectordb/jobs/import/list&quot
       </svg>
     </button></h2><ul>
 <li><p>每个导入文件的大小不应超过<strong>16 GB</strong>。</p></li>
-<li><p>每次导入请求的文件数量上限为<strong>1024</strong> 个。每次导入请求的数据总量上限为：16 GB/文件 × 1024 个文件 = 16 TB。</p></li>
+<li><p>每个导入请求的文件数量上限为<strong>1024</strong> 个。每个导入请求的数据总量上限为：16 GB/文件 × 1024 个文件 = 16 TB。</p></li>
 <li><p>并发导入请求的最大数量限制为<strong>1024</strong> 个。</p></li>
 </ul>
 <ul>
-<li>每个导入请求中只能指定一个分区名称。如果未指定分区名称，数据将被插入到默认分区中。此外，如果您已在目标Collection中设置了Partition Key，则无法在导入请求中设置分区名称。</li>
+<li>每个导入请求中只能指定一个分区名称。如果未指定分区名称，数据将被插入到默认分区中。此外，如果您已在目标 Collection 中设置了 Partition Key，则无法在导入请求中设置分区名称。</li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">限制条件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"

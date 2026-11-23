@@ -3,7 +3,7 @@ id: manage-collections.md
 title: 컬렉션 설명
 summary: >-
   Milvus에서는 데이터를 관리하기 위해 여러 컬렉션을 생성할 수 있으며, 데이터를 엔티티 형태로 컬렉션에 삽입할 수 있습니다. 컬렉션과
-  엔티티는 관계형 데이터베이스의 테이블과 레코드와 유사합니다. 이 페이지는 컬렉션 및 관련 개념에 대해 알아보는 데 도움이 됩니다.
+  엔티티는 관계형 데이터베이스의 테이블과 레코드와 유사합니다. 이 페이지에서는 컬렉션 및 관련 개념에 대해 알아볼 수 있습니다.
 ---
 <h1 id="Collection-Explained" class="common-anchor-header">컬렉션 설명<button data-href="#Collection-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -84,7 +84,7 @@ summary: >-
       </svg>
     </button></h2><p>관계형 데이터베이스의 기본 필드와 마찬가지로, 컬렉션에도 엔티티를 다른 엔티티와 구별하기 위한 기본 필드가 있습니다. 기본 필드의 각 값은 전역적으로 고유하며 하나의 특정 엔티티에 대응합니다.</p>
 <p>위 차트에서 볼 수 있듯이, <strong>id라는</strong> 필드가 기본 필드 역할을 하며, 첫 번째 ID인 <strong>0은</strong> <em>‘코로나바이러스의 사망률은 중요하지 않다’라는</em> 제목의 엔티티에 해당합니다. 기본 필드 값이 0인 다른 엔티티는 존재하지 않습니다.</p>
-<p>주 키 필드는 정수 또는 문자열만 허용합니다. 엔티티를 삽입할 때는 기본적으로 주 키 필드 값을 포함해야 합니다. 그러나 컬렉션 생성 시 <strong>AutoId를</strong> 활성화한 경우, Milvus는 데이터 삽입 시 해당 값을 자동으로 생성합니다. 이 경우, 삽입할 엔티티에서 주 키 필드 값을 제외하십시오.</p>
+<p>주 키 필드는 정수 또는 문자열만 허용합니다. 엔티티를 삽입할 때는 기본적으로 주 키 필드 값을 포함해야 합니다. 그러나 컬렉션 생성 시 <strong>AutoId를</strong> 활성화한 경우, Milvus는 데이터 삽입 시 해당 값을 자동으로 생성합니다. 이 경우, 삽입할 엔티티에서 주 키 필드 값을 제외해야 합니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/primary-field.md">‘주키장 및 AutoId</a>’를 참조하십시오.</p>
 <h2 id="Index" class="common-anchor-header">인덱스<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -172,7 +172,6 @@ summary: >-
 <ul>
 <li><p><a href="/docs/ko/use-partition-key.md">파티션 키 사용</a></p></li>
 <li><p><a href="/docs/ko/mmap.md">mmap 사용</a></p></li>
-<li><p><a href="/docs/ko/clustering-compaction.md">클러스터링 압축</a></p></li>
 </ul>
 <h2 id="Partition" class="common-anchor-header">파티션<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -190,7 +189,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>파티션은 컬렉션의 하위 집합으로, 상위 컬렉션과 동일한 필드 세트를 공유하며 각각 엔티티의 하위 집합을 포함합니다.</p>
-<p>엔티티를 서로 다른 파티션에 할당하여 엔티티 그룹을 생성할 수 있습니다. 특정 파티션에서 검색 및 쿼리를 수행하여 Milvus가 다른 파티션의 엔티티를 무시하도록 하고, 검색 효율을 높일 수 있습니다.</p>
+<p>엔티티를 서로 다른 파티션에 할당함으로써 엔티티 그룹을 생성할 수 있습니다. 특정 파티션에서 검색 및 쿼리를 수행하여 Milvus가 다른 파티션의 엔티티를 무시하도록 하고, 검색 효율성을 높일 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/manage-partitions.md">파티션 관리를</a> 참조하십시오.</p>
 <h2 id="Shard" class="common-anchor-header">샤드<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"

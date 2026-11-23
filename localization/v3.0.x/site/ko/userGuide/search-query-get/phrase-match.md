@@ -2,10 +2,10 @@
 id: phrase-match.md
 title: Phrase MatchCompatible with Milvus 2.5.17+
 summary: >-
-  구문 일치 기능을 사용하면 검색어들이 정확한 구문 그대로 포함된 문서를 검색할 수 있습니다. 기본적으로 단어들은 동일한 순서로, 서로 바로
-  인접한 위치에 나타나야 합니다. 예를 들어, "robotics machine learning"을 검색어로 입력하면 "…전형적인 로봇공학
-  머신러닝 모델…"과 같은 텍스트가 일치합니다. 이 경우 "robotics", "machine", "learning"이라는 단어가 다른 단어
-  없이 순서대로 나열되어 있어야 합니다.
+  구문 일치 기능을 사용하면 검색어 용어가 정확한 구문 그대로 포함된 문서를 검색할 수 있습니다. 기본적으로 단어들은 동일한 순서로, 서로
+  바로 인접한 위치에 나타나야 합니다. 예를 들어, "robotics machine learning"을 검색어로 입력하면 "…typical
+  robotics machine learning models…"과 같은 텍스트가 일치합니다. 이 경우 "robotics", "machine",
+  "learning"이라는 단어가 다른 단어 없이 순서대로 나열되어 있습니다.
 beta: Milvus 2.5.17+
 ---
 <h1 id="Phrase-Match" class="common-anchor-header">Phrase Match<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.17+</span><button data-href="#Phrase-Match" class="anchor-icon" translate="no">

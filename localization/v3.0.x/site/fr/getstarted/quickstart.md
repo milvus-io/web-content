@@ -57,7 +57,7 @@ title: Guide de démarrage rapide
 <p>Utilisez Python 3.10 ou une version ultérieure sous macOS, Linux ou Windows, avec les paquets binaires « wheels » disponibles pour les dépendances de Milvus Lite, telles que <code translate="no">faiss-cpu</code> et <code translate="no">pyarrow</code>. Les exemples utilisent PyMilvus 3.0.2 et Milvus Lite 3.2.2. Installez explicitement les deux paquets :</p>
 <pre><code translate="no" class="language-bash">python3 -m pip install <span class="hljs-string">&quot;pymilvus[milvus-lite]==3.0.2&quot;</span> <span class="hljs-string">&quot;milvus-lite==3.2.2&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sous Windows, pip ignore le fichier « <code translate="no">milvus-lite</code> » supplémentaire de PyMilvus 3.0.2 ; la commande ci-dessus spécifie explicitement « <code translate="no">milvus-lite</code> », ce qui permet d’utiliser le chemin d’accès local dans ce cas également. Pour connaître les conditions d’installation du SDK seul, consultez la section « <a href="/docs/fr/install-pymilvus.md">Installer le SDK Python de Milvus</a> ».</p>
+<p>Sous Windows, pip ignore le fichier « extra » <code translate="no">milvus-lite</code> de PyMilvus 3.0.2 ; la commande ci-dessus spécifie explicitement <code translate="no">milvus-lite</code>, ce qui permet d’utiliser le chemin d’accès local dans ce cas également. Pour connaître les conditions d’installation du SDK seul, consultez la section « <a href="/docs/fr/install-pymilvus.md">Installer le SDK Python de Milvus</a> ».</p>
 <div class="alert note">
 <blockquote>
 <p>Si vous utilisez Google Colab, pour activer les dépendances que vous venez d’installer, vous devrez peut-être <strong>redémarrer le runtime</strong>. (Cliquez sur le menu « Runtime » en haut de l’écran, puis sélectionnez « Redémarrer la session » dans le menu déroulant).</p>
@@ -113,7 +113,7 @@ title: Guide de démarrage rapide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Pour créer une base de données vectorielle Milvus locale, instanciez un objet ` <code translate="no">MilvusClient</code> ` avec un chemin de stockage, tel que ` <code translate="no">milvus_demo.db</code>`. Milvus Lite 3.x crée un répertoire à cet emplacement, même si son nom se termine par ` <code translate="no">.db</code>`.</p>
+    </button></h3><p>Pour créer une base de données vectorielle Milvus locale, instanciez un objet ` <code translate="no">MilvusClient</code> ` avec un chemin de stockage, tel que ` <code translate="no">milvus_demo.db</code>`. Milvus Lite 3.x crée un répertoire à ce chemin, même si son nom se termine par ` <code translate="no">.db</code>`.</p>
 <p>Si vous disposez d’un fichier de base de données créé par Milvus Lite 2.x, exportez-le avec l’ancienne version avant de procéder à la migration. N’ouvrez pas ce fichier directement avec Milvus Lite 3.x. Voir <a href="/docs/fr/milvus_lite.md#Migrating-data-from-Milvus-Lite">Migration des données depuis Milvus Lite</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -551,4 +551,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
         ></path>
       </svg>
     </button></h2><p>Si vous utilisez des assistants de codage IA tels que Claude Code ou Cursor, vous pouvez installer <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> pour aider vos outils IA à écrire du code Milvus correct.</p>
-<p>Pour découvrir d’autres outils destinés aux agents, notamment les serveurs MCP et les invites sélectionnées, consultez la page <a href="/docs/fr/milvus_for_agents.md">Milvus pour les agents IA</a>.</p>
+<p>Pour découvrir d’autres outils destinés aux agents, notamment les serveurs MCP et les invites sélectionnées, consultez la section « <a href="/docs/fr/milvus_for_agents.md">Milvus pour les agents IA</a> ».</p>

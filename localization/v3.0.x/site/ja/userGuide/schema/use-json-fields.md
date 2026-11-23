@@ -484,7 +484,7 @@ curl --request POST \
 </ul>
 <p>これにより、インデックスエンジンがJSON構造内のどこを調べるべきかが定義されます。</p></li>
 </ul></li>
-<li><p><strong>JSON キャスト型</strong>(<code translate="no">json_cast_type</code>): 指定されたパスにある値を解釈およびインデックス登録する際に、Milvus が使用するデータ型。</p>
+<li><p><strong>JSON キャスト型</strong>(<code translate="no">json_cast_type</code>): 指定されたパスにある値を解釈およびインデックス作成する際に、Milvus が使用するデータ型。</p>
 <ul>
 <li><p>この型は、インデックス登録対象のフィールドの実際のデータ型と一致している必要があります。インデックス登録中にデータ型を別の型に変換したい場合は、<a href="/docs/ja/use-json-fields.md#Use-JSON-cast-functions-for-type-conversion--Milvus-2514">キャスト関数の使用</a>を検討してください。</p></li>
 <li><p>完全なリストについては、<a href="/docs/ja/use-json-fields.md#Supported-JSON-cast-types">以下を</a>参照してください。</p></li>
@@ -863,7 +863,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ここまでで、JSONフィールド内で構造化された値を定義、挿入し、必要に応じてインデックスを作成する方法について学びました。</p>
+    </button></h2><p>ここまでで、JSONフィールド内で構造化された値を定義、挿入し、必要に応じてインデックスを付与する方法について学びました。</p>
 <p>実際のアプリケーションでワークフローを完了するには、さらに次の操作も行う必要があります。</p>
 <ul>
 <li><p><strong>ベクトルフィールドにインデックスを作成する</strong>（コレクション内の各ベクトルフィールドに対して必須）</p>
@@ -959,7 +959,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
       </svg>
     </button></h3><p>はい。クエリやインデックス作成との互換性を確保するため、以下のルールに従ってください：</p>
 <ul>
-<li><p>JSONキーには、英字、数字、アンダースコアのみを使用してください。</p></li>
+<li><p>JSONキーには、英字、数字、およびアンダースコアのみを使用してください。</p></li>
 <li><p>特殊文字、スペース、ドット（<code translate="no">.</code> 、<code translate="no">/</code> など）の使用は避けてください。</p></li>
 <li><p>互換性のないキーを使用すると、フィルター式で解析エラーが発生する可能性があります。</p></li>
 </ul>
@@ -985,7 +985,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <p><strong>無効な文字列の例</strong>：</p>
 <pre><code translate="no" class="language-plaintext">&#x27;a&quot;b&#x27;, &#x27;a\&#x27;b&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="common-anchor-header">Milvusは、インデックス化されたJSONパスに対してどのようなフィルタリングロジックを使用していますか？<button data-href="#What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="anchor-icon" translate="no">
+<h3 id="What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="common-anchor-header">Milvusは、インデックス化されたJSONパスに対してどのようなフィルタリングロジックを使用しますか？<button data-href="#What-filtering-logic-does-Milvus-use-for-indexed-JSON-paths" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1004,7 +1004,7 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
 <li><p><strong>数値インデックス</strong>:</p>
 <p><code translate="no">json_cast_type=&quot;double&quot;</code> でインデックスが作成された場合、数値フィルタ条件（例：<code translate="no">&gt;</code> 、<code translate="no">&lt;</code> 、<code translate="no">== 42</code> ）のみが当該インデックスを活用します。数値以外の条件では、総当たりスキャンに切り替わる可能性があります。</p></li>
 <li><p><strong>文字列インデックス</strong>:</p>
-<p>インデックスが<code translate="no">json_cast_type=&quot;varchar&quot;</code> を使用している場合、文字列のフィルタ条件のみがそのインデックスの恩恵を受けます。その他の型については、総当たりスキャンに切り替わる可能性があります。</p></li>
+<p>インデックスが<code translate="no">json_cast_type=&quot;varchar&quot;</code> を使用している場合、文字列のフィルタ条件のみがそのインデックスの恩恵を受けます。その他のタイプの条件では、総当たりスキャンに切り替わる可能性があります。</p></li>
 <li><p><strong>ブールインデックス</strong>:</p>
 <p>ブールインデックスは文字列インデックスと同様に動作し、条件が厳密に true または false に一致する場合にのみインデックスが使用されます。</p></li>
 </ul>
@@ -1072,4 +1072,4 @@ filterTags := <span class="hljs-string">`json_contains(metadata[&quot;tags&quot;
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>フィルタ式で、インデックスの<code translate="no">json_cast_type</code> とは異なる型が使用されている場合、システムは<strong>インデックスを使用せず</strong>、データが許す限り、処理速度の遅い総当たりスキャンに切り替わる可能性があります。最高のパフォーマンスを得るためには、常にフィルタ式をインデックスのキャスト型に合わせるようにしてください。</p>
+    </button></h3><p>フィルタ式で、インデックスの<code translate="no">json_cast_type</code> とは異なる型が使用されている場合、システムは<strong>インデックスを使用せず</strong>、データが許す限り、より低速な総当たりスキャンに切り替わる可能性があります。最高のパフォーマンスを得るためには、常にフィルタ式をインデックスのキャスト型に合わせるようにしてください。</p>

@@ -163,7 +163,7 @@ summary: Milvus 提供了用于过滤 ARRAY 字段以及部分更新 ARRAY 字�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_CONTAINS_ANY</code> 操作符用于检查数组字段中是否包含指定列表中的任意一个元素。当您需要匹配数组中至少包含一个指定值的实体时，此操作符非常有用。</p>
+    </button></h2><p><code translate="no">ARRAY_CONTAINS_ANY</code> 操作符用于检查数组字段中是否包含指定列表中的任意一个元素。当您希望匹配数组中至少包含一个指定值的实体时，此操作符非常有用。</p>
 <p><strong>示例</strong></p>
 <p>若要查找<code translate="no">history_temperatures</code> 数组中包含<code translate="no">23</code> 或<code translate="no">24</code> 任一值的实体，可使用以下代码：</p>
 <div class="multipleCode">
@@ -392,7 +392,7 @@ client-&gt;<span class="hljs-built_in">Upsert</span>(upsertRequest, upsertRespon
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">ARRAY_REMOVE</code> 操作符会在<code translate="no">upsert</code> 请求期间，从现有 ARRAY 字段中移除所有与请求负载中某个值匹配的元素。它并非过滤表达式。当您希望从数组中移除匹配值，且无需先查询当前数组值时，请使用此操作符。</p>
+    </button></h2><p><code translate="no">ARRAY_REMOVE</code> 操作符会在执行<code translate="no">upsert</code> 请求时，从现有 ARRAY 字段中移除所有与请求负载中某个值匹配的元素。它并非过滤表达式。当您希望从数组中移除匹配值，且无需先查询当前数组值时，请使用此操作符。</p>
 <p>以下示例从主键为<code translate="no">1</code> 的实体的<code translate="no">tags</code> ARRAY 字段中移除<code translate="no">&quot;trial&quot;</code> ：</p>
 <div class="multipleCode">
    <a href="#python">Python</a>

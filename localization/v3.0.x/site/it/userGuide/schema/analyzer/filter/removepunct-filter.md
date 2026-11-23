@@ -3,8 +3,8 @@ id: removepunct-filter.md
 title: Rimuovi segni di punteggiaturaCompatible with Milvus 2.5.11+
 summary: >-
   Il filtro `removepunct` rimuove i token che contengono segni di punteggiatura
-  o spazi. Con i tokenizzatori che mantengono i segni di punteggiatura
-  all'interno delle parole, rimuove l'intero token interessato.
+  o spazi. Con i tokenizzatori che mantengono la punteggiatura all'interno delle
+  parole, rimuove l'intero token interessato.
 beta: Milvus 2.5.11+
 ---
 <h1 id="Remove-Punct" class="common-anchor-header">Rimuovi segni di punteggiatura<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.5.11+</span><button data-href="#Remove-Punct" class="anchor-icon" translate="no">
@@ -25,6 +25,7 @@ beta: Milvus 2.5.11+
     </button></h1><p>Il filtro <code translate="no">removepunct</code> rimuove i token contenenti segni di punteggiatura o spazi bianchi dal flusso di token. Utilizzalo quando desideri un'elaborazione del testo più pulita, incentrata sulle parole significative del contenuto piuttosto che sui segni di punteggiatura.</p>
 <div class="alert note">
 <p>Questo filtro è particolarmente efficace con i tokenizzatori <code translate="no">jieba</code>, <code translate="no">lindera</code> e <code translate="no">icu</code>, che conservano i segni di punteggiatura come token separati (ad esempio, <code translate="no">&quot;Hello!&quot;</code> → <code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code>). Il tokenizzatore <code translate="no">standard</code> elimina la punteggiatura durante la tokenizzazione. Il tokenizzatore <code translate="no">whitespace</code> conserva la punteggiatura, compresa quella all’interno di un token. Se combinato con <code translate="no">whitespace</code>, <code translate="no">removepunct</code> rimuove l’intero token se contiene punteggiatura o spazi bianchi; non elimina singoli caratteri dal token.</p>
+<p>Alcuni tokenizzatori mantengono la punteggiatura all’interno di un singolo token. Ad esempio, <code translate="no">icu</code> tokenizza <code translate="no">don't</code>, <code translate="no">3.5kg</code> e <code translate="no">u.s.a</code> in singoli token che contengono punteggiatura, mentre <code translate="no">removepunct</code> li rimuove completamente, rendendo i termini corrispondenti non ricercabili. Per rimuovere solo i token composti interamente da segni di punteggiatura e spazi bianchi, mantenendo al contempo tali token, utilizzare il filtro <a href="/docs/it/regex-filter.md">regex</a> con un’espressione che richieda almeno un carattere diverso dai segni di punteggiatura e dagli spazi bianchi, come ad esempio <code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code>.</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">Configurazione<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +42,7 @@ beta: Milvus 2.5.11+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il filtro ` <code translate="no">removepunct</code> ` è integrato in Milvus. Per utilizzarlo, è sufficiente specificarne il nome nella sezione ` <code translate="no">filter</code> ` all’interno di ` <code translate="no">analyzer_params</code>`.</p>
+    </button></h2><p>Il filtro « <code translate="no">removepunct</code> » è integrato in Milvus. Per utilizzarlo, è sufficiente specificarne il nome nella sezione « <code translate="no">filter</code> » all’interno di <code translate="no">analyzer_params</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

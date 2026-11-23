@@ -36,7 +36,7 @@ summary: AI 코딩 도우미가 올바른 Milvus 컬렉션 스키마를 설계�
       </svg>
     </button></h2><ol>
 <li>아래 <a href="#full-prompt">‘전체 프롬프트’</a> 섹션에서 전체 프롬프트를<strong>복사하세요</strong>.</li>
-<li>AI 도구가 요구하는 위치에<strong>저장하십시오</strong>. 배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하십시오.</li>
+<li>AI 도구가 인식할 수 있는 위치에<strong>저장하십시오</strong>. 배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하십시오.</li>
 <li>AI 어시스턴트는 Milvus 코드를 생성하거나 검토할 때 이러한 규칙을 자동으로 적용합니다.</li>
 </ol>
 <p><strong>Cursor</strong> 사용자의 경우: <a href="#full-prompt">‘전체 프롬프트’</a> 섹션에서 프롬프트를 복사하여 프로젝트 내 ` <code translate="no">.cursor/rules/</code> ` 경로에 저장하십시오.</p>
@@ -147,7 +147,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only). Before using `IS NULL` / `IS NOT NULL` on vector fields, check the supported types, version requirements, and query/search behavior in [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 

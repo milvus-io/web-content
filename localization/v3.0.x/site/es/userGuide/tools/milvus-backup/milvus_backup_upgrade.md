@@ -2,8 +2,8 @@
 id: milvus_backup_upgrade.md
 summary: >-
   Actualizar Milvus Backup de la versión 0.5.x a la 0.6.x, actualizar la
-  configuración y los comandos, y comprobar que la copia de seguridad y la
-  restauración funcionan correctamente.
+  configuración y los comandos, y comprobar que las copias de seguridad y las
+  restauraciones funcionan correctamente.
 title: >-
   Actualización de Milvus Backup a la versión 0.6.xCompatible with Milvus Backup
   0.6.x
@@ -25,7 +25,7 @@ beta: Milvus Backup 0.6.x
         ></path>
       </svg>
     </button></h1><p>Utiliza esta guía para actualizar la <strong>herramienta Milvus Backup</strong> de la versión 0.5.x a la 0.6.x. El procedimiento que se describe a continuación utiliza la versión 0.6.0 como versión de destino validada. No actualiza tu servidor Milvus. Si vas a seguir con la versión 0.5.x, sigue utilizando la guía <a href="/docs/es/milvus_backup_cli.md">de la CLI</a> o <a href="/docs/es/milvus_backup_api.md">la API</a> de la <a href="/docs/es/milvus_backup_cli.md">versión 0.5.x</a>. Para una nueva instalación, utiliza la <a href="/docs/es/milvus_backup_0_6_cli.md">guía de la CLI</a>.</p>
-<p>Las configuraciones YAML de la versión 1 siguen cargándose mediante traducción automática. Sin embargo, en la versión 0.6.0 se rechazan los indicadores de la CLI obsoletos y el formato de copia de seguridad predeterminado cambia en Milvus 3.0. Revisa tanto la configuración como los comandos antes de modificar las tareas programadas o los servicios.</p>
+<p>Las configuraciones YAML de la versión 1 siguen cargándose mediante traducción automática. Sin embargo, en la versión 0.6.0 se rechazan los indicadores de la CLI obsoletos y el formato de copia de seguridad predeterminado cambia en Milvus 3.0. Revisa tanto la configuración como los comandos antes de cambiar las tareas programadas o los servicios.</p>
 <h2 id="Check-the-starting-point" class="common-anchor-header">Comprueba el punto de partida<button data-href="#Check-the-starting-point" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,7 @@ beta: Milvus Backup 0.6.x
 <p><code translate="no">--strict</code> rechaza una configuración migrada no válida. Sin <code translate="no">--output</code>, el comando escribe el YAML de la v2 en la salida estándar. Revisa y utiliza el nuevo archivo solo después de comprobar que los ajustes se han resuelto correctamente.</p>
 <table>
 <thead>
-<tr><th>Configuración de la v1</th><th>Configuración de la v2</th></tr>
+<tr><th>Configuración de la v1</th><th>Configuración v2</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">milvus.address</code>, <code translate="no">milvus.port</code></td><td><code translate="no">milvus.grpc.address</code>, <code translate="no">milvus.grpc.port</code></td></tr>

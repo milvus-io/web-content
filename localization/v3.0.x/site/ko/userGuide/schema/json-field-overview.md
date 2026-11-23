@@ -2,7 +2,7 @@
 id: json-field-overview.md
 title: JSON Field Overview
 summary: >-
-  제품 카탈로그, 콘텐츠 관리 시스템, 사용자 선호도 엔진과 같은 애플리케이션을 구축할 때는 벡터 임베딩과 함께 유연한 메타데이터를 저장해야
+  제품 카탈로그, 콘텐츠 관리 시스템, 사용자 선호도 엔진과 같은 애플리케이션을 구축할 때, 벡터 임베딩과 함께 유연한 메타데이터를 저장해야
   하는 경우가 많습니다. 제품 속성은 카테고리에 따라 다르며, 사용자 선호도는 시간이 지남에 따라 변화하고, 문서 속성은 복잡한 중첩 구조를
   가지고 있습니다. Milvus의 JSON 필드는 성능 저하 없이 유연한 구조화 데이터를 저장하고 쿼리할 수 있도록 지원함으로써 이러한 과제를
   해결합니다.
@@ -701,7 +701,7 @@ milvus::InsertResponse insert_resp;
 <li><p>The collection is loaded into memory.</p></li>
 </ul>
 <p><details></p>
-<p><summary>Show code</summary></p>
+<p><summary><strong>Show code</strong></summary></p>
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -1494,44 +1494,17 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>By default, queries on JSON fields without acceleration will perform a full scan of all rows, which can be slow on large datasets. To speed up JSON queries, Milvus provides advanced indexing and storage optimization features.</p>
-<div class="alert warning">
-<p>Whole-object JSON indexing (<code translate="no">json_cast_type=&quot;JSON&quot;</code>), also known as JSON flat indexing, is deprecated. Index-creation requests for it succeed for compatibility, but Milvus retains only the logical index definition and does not build a physical index. Use JSON path indexing for known query paths, or consider <a href="/docs/ko/json-shredding.md">JSON Shredding</a> for broad query acceleration.</p>
-</div>
-<p>The table below summarizes their differences and best-use scenarios:</p>
+    </button></h2><p>Without acceleration, JSON filters can require a scan of the data. Choose an approach according to the paths your application queries:</p>
 <table>
-   <tr>
-     <th><p>Technique</p></th>
-     <th><p>Best For</p></th>
-     <th><p>Arrays Acceleration</p></th>
-     <th><p>Notes</p></th>
-   </tr>
-   <tr>
-     <td><p>JSON Indexing</p></td>
-     <td><p>Small set of frequently accessed keys, arrays on a specific array key</p></td>
-     <td><p>Yes (on indexed array key)</p></td>
-     <td><p>Must preselect keys, maintenance needed if schema evolves</p></td>
-   </tr>
-   <tr>
-     <td><p>JSON Shredding</p></td>
-     <td><p>General speed-up across many keys, flexible for varied queries</p></td>
-     <td><p>No (does not accelerate values inside arrays)</p></td>
-     <td><p>Extra storage config, arrays still need per-key index</p></td>
-   </tr>
-   <tr>
-     <td><p>NGRAM Index</p></td>
-     <td><p>Wildcard searches, substring matching in text fields</p></td>
-     <td><p>N/A</p></td>
-     <td><p>Not for numeric/range filters</p></td>
-   </tr>
+<thead>
+<tr><th>Query needs</th><th>Guide</th><th>Array values</th></tr>
+</thead>
+<tbody>
+<tr><td>A known set of frequently filtered paths</td><td><a href="/docs/ko/json-indexing.md">JSON Indexing</a> covers selecting paths and casts, checking compatibility, and creating indexes.</td><td>Can accelerate elements at an indexed array path.</td></tr>
+<tr><td>Broad acceleration across many or varying paths</td><td><a href="/docs/ko/json-shredding.md">JSON Shredding</a> covers the required storage configuration.</td><td>Does not accelerate values inside arrays; use path indexes for those keys.</td></tr>
+</tbody>
 </table>
-<p><strong>Tip:</strong> You can combine these approaches—for example, use JSON shredding for broad query acceleration, JSON indexing for high-frequency array keys, and NGRAM indexing for flexible text search.</p>
-<p>For implementation details, refer to:</p>
-<ul>
-<li><p><a href="/docs/ko/json-indexing.md">JSON Indexing</a></p></li>
-<li><p><a href="/docs/ko/json-shredding.md">JSON Shredding</a></p></li>
-<li><p><a href="/docs/ko/ngram.md">NGRAM</a></p></li>
-</ul>
+<p>You can combine shredding with path indexes for frequently queried keys. For string-pattern filters on JSON paths, see the <a href="/docs/ko/json-indexing.md#Compatibility-reference">JSON index combinations</a> and the <a href="/docs/ko/ngram.md#Example-2-Create-on-a-JSON-path">NGRAM JSON-path example</a>.</p>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dalam pemrosesan teks, <strong>penganalisis</strong> merupakan komponen penting yang mengubah teks mentah menjadi format yang terstruktur dan dapat dicari. Setiap penganalisis biasanya terdiri dari dua elemen inti: <strong>tokenizer</strong> dan <strong>filter</strong>. Bersama-sama, keduanya mengubah teks masukan menjadi token, menyempurnakan token tersebut, dan mempersiapkannya untuk pengindeksan serta pencarian yang efisien.</p>
+    </button></h1><p>Dalam pemrosesan teks, <strong>penganalisis</strong> merupakan komponen penting yang mengubah teks mentah menjadi format yang terstruktur dan dapat dicari. Setiap penganalisis biasanya terdiri dari dua elemen inti: <strong>tokenizer</strong> dan <strong>filter</strong>. Bersama-sama, keduanya mengubah teks masukan menjadi token, menyempurnakan token tersebut, dan mempersiapkannya untuk pengindeksan dan pencarian yang efisien.</p>
 <p>Di Milvus, penganalisis dikonfigurasi selama pembuatan koleksi saat Anda menambahkan bidang <code translate="no">VARCHAR</code> ke skema koleksi. Token yang dihasilkan oleh penganalisis dapat digunakan untuk membangun indeks untuk pencocokan kata kunci atau dikonversi menjadi embedding jarang untuk pencarian teks lengkap. Untuk informasi lebih lanjut, lihat <a href="/docs/id/full-text-search.md"> Pencarian Teks Lengkap</a>, <a href="/docs/id/phrase-match.md">Pencocokan Frasa</a>, atau <a href="/docs/id/keyword-match.md">Pencocokan Teks</a>.</p>
 <div class="alert note">
 <p>Penggunaan penganalisis dapat memengaruhi kinerja:</p>
@@ -33,7 +33,7 @@ summary: >-
 <li><p><strong>Pencocokan kata kunci:</strong> Untuk pencocokan kata kunci, pembuatan indeks juga lebih lambat karena tokenisasi harus selesai terlebih dahulu sebelum indeks dapat dibuat.</p></li>
 </ul>
 </div>
-<h2 id="Anatomy-of-an-analyzer" class="common-anchor-header">Anatomi sebuah penganalisis<button data-href="#Anatomy-of-an-analyzer" class="anchor-icon" translate="no">
+<h2 id="Anatomy-of-an-analyzer" class="common-anchor-header">Anatomi penganalisis<button data-href="#Anatomy-of-an-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,10 +60,10 @@ summary: >-
 <p><span class="img-wrapper">
   
    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/analyzer-process-workflow.png" alt="Analyzer Process Workflow" class="doc-image" id="analyzer-process-workflow" /> 
-   <span>Alur Kerja Proses Penganalisis</span>
+   <span>Alur Kerja Proses Analisis</span>
   
  </span></p>
-<h2 id="Analyzer-types" class="common-anchor-header">Jenis-jenis Analyzer<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
+<h2 id="Analyzer-types" class="common-anchor-header">Jenis-jenis penganalisis<button data-href="#Analyzer-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,7 +81,7 @@ summary: >-
     </button></h2><p>Milvus menyediakan dua jenis penganalisis untuk memenuhi berbagai kebutuhan pemrosesan teks:</p>
 <ul>
 <li><p><strong>Penganalisis bawaan</strong>: Ini adalah konfigurasi yang telah ditentukan sebelumnya yang mencakup tugas-tugas pemrosesan teks umum dengan pengaturan minimal. Penganalisis bawaan sangat ideal untuk pencarian tujuan umum, karena tidak memerlukan konfigurasi yang rumit.</p></li>
-<li><p><strong>Penganalisis khusus</strong>: Untuk kebutuhan yang lebih canggih, penganalisis khusus memungkinkan Anda menentukan konfigurasi sendiri dengan menentukan tokenizer dan nol atau lebih filter. Tingkat penyesuaian ini sangat berguna untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat atas pemrosesan teks.</p></li>
+<li><p><strong>Analizer khusus</strong>: Untuk kebutuhan yang lebih canggih, analizer khusus memungkinkan Anda menentukan konfigurasi sendiri dengan menentukan tokenizer dan nol atau lebih filter. Tingkat penyesuaian ini sangat berguna untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat atas pemrosesan teks.</p></li>
 </ul>
 <div class="alert note">
 <ul>
@@ -177,27 +177,50 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )
+
+ctx := context.Background()
+cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
+    Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
+})
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    <span class="hljs-built_in">panic</span>(err)
+}
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;type\&quot;: \&quot;standard\&quot;, \&quot;stop_words\&quot;: [\&quot;a\&quot;, \&quot;an\&quot;, \&quot;for\&quot;]}&quot;,
+    &quot;text&quot;: [&quot;An efficient system relies on a robust analyzer to correctly process text for various applications.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Hasilnya akan menjadi:</p>
 <pre><code translate="no" class="language-plaintext">[&#x27;efficient&#x27;, &#x27;system&#x27;, &#x27;relies&#x27;, &#x27;on&#x27;, &#x27;robust&#x27;, &#x27;analyzer&#x27;, &#x27;to&#x27;, &#x27;correctly&#x27;, &#x27;process&#x27;, &#x27;text&#x27;, &#x27;various&#x27;, &#x27;applications&#x27;]
 <button class="copy-code-btn"></button></code></pre>
-<p>Ini menunjukkan bahwa penganalisis tersebut berhasil menokenisasi teks masukan dengan menyaring kata-kata penghalang (stop words) <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, dan <code translate="no">&quot;for&quot;</code>, sekaligus mengembalikan token-token bermakna yang tersisa.</p>
-<p>Konfigurasi penganalisis bawaan <code translate="no">standard</code> di atas setara dengan menyiapkan <a href="/docs/id/analyzer-overview.md#Custom-analyzer">penganalisis khusus</a> dengan parameter berikut, di mana opsi <code translate="no">tokenizer</code> dan <code translate="no">filter</code> didefinisikan secara eksplisit untuk mencapai fungsionalitas serupa:</p>
+<p>Ini menunjukkan bahwa penganalisis tersebut menokenisasi teks masukan dengan benar dengan menyaring kata-kata penghalang (stop words) <code translate="no">&quot;a&quot;</code>, <code translate="no">&quot;an&quot;</code>, dan <code translate="no">&quot;for&quot;</code>, sambil mengembalikan token-token bermakna yang tersisa.</p>
+<p>Konfigurasi penganalisis bawaan <code translate="no">standard</code> di atas setara dengan menyiapkan <a href="/docs/id/analyzer-overview.md#Custom-analyzer">penganalisis khusus</a> dengan parameter berikut, di mana opsi <code translate="no">tokenizer</code> dan <code translate="no">filter</code> didefinisikan secara eksplisit untuk mencapai fungsionalitas yang serupa:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -257,9 +280,9 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
 <ul>
 <li><p><code translate="no">standard</code>: Cocok untuk pemrosesan teks umum, menerapkan tokenisasi standar dan penyaringan huruf kecil.</p></li>
 <li><p><code translate="no">english</code>: Dioptimalkan untuk teks berbahasa Inggris, dengan dukungan untuk kata-kata pengisi (stop words) dalam bahasa Inggris.</p></li>
-<li><p><code translate="no">chinese</code>: Khusus untuk pemrosesan teks bahasa Mandarin, termasuk tokenisasi yang disesuaikan dengan struktur bahasa Mandarin.</p></li>
-<li><p><code translate="no">arabic</code>: Didesain khusus untuk teks bahasa Arab, dengan normalisasi bahasa Arab, normalisasi angka desimal, stemming bahasa Arab, dan penghapusan kata-kata pengisi bahasa Arab.</p></li>
-<li><p><code translate="no">thai</code>: Dikhususkan untuk teks bahasa Thailand, dengan segmentasi kata bahasa Thailand, normalisasi angka desimal, dan penghapusan kata penghubung bahasa Thailand.</p></li>
+<li><p><code translate="no">chinese</code>: Dikhususkan untuk pemrosesan teks bahasa Mandarin, termasuk tokenisasi yang disesuaikan dengan struktur bahasa Mandarin.</p></li>
+<li><p><code translate="no">arabic</code>: Dirancang khusus untuk teks bahasa Arab, dengan normalisasi bahasa Arab, normalisasi angka desimal, stemming bahasa Arab, dan penghapusan kata-kata pengisi bahasa Arab.</p></li>
+<li><p><code translate="no">thai</code>: Dikhususkan untuk teks bahasa Thailand, dengan segmentasi kata bahasa Thailand, normalisasi angka desimal, dan penghapusan kata-kata pengisi bahasa Thailand.</p></li>
 </ul>
 <h3 id="Custom-analyzer" class="common-anchor-header">Penganalisis khusus<button data-href="#Custom-analyzer" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +300,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
         ></path>
       </svg>
     </button></h3><p>Untuk pemrosesan teks yang lebih canggih, penganalisis khusus di Milvus memungkinkan Anda membangun alur kerja penanganan teks yang disesuaikan dengan menentukan <strong>tokenizer</strong> dan <strong>filter</strong>. Pengaturan ini ideal untuk kasus penggunaan khusus yang memerlukan kontrol yang tepat.</p>
-<h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p><strong>Tokenizer</strong> adalah komponen <strong>wajib</strong> untuk penganalisis khusus, yang memulai alur kerja penganalisis dengan memecah teks masukan menjadi unit-unit terpisah atau <strong>token</strong>. Tokenisasi mengikuti aturan tertentu, seperti pemisahan berdasarkan spasi kosong atau tanda baca, tergantung pada jenis tokenizer. Proses ini memungkinkan penanganan yang lebih tepat dan independen terhadap setiap kata atau frasa.</p>
+<h4 id="Tokenizer" class="common-anchor-header">Tokenizer</h4><p><strong>Tokenizer</strong> adalah komponen <strong>wajib</strong> untuk penganalisis khusus, yang memulai alur kerja penganalisis dengan memecah teks masukan menjadi unit-unit terpisah atau <strong>token</strong>. Tokenisasi mengikuti aturan tertentu, seperti pemisahan berdasarkan spasi atau tanda baca, tergantung pada jenis tokenizer. Proses ini memungkinkan penanganan yang lebih tepat dan independen terhadap setiap kata atau frasa.</p>
 <p>Misalnya, tokenizer akan mengubah teks <code translate="no">&quot;Vector Database Built for Scale&quot;</code> menjadi token-token terpisah:</p>
 <pre><code translate="no" class="language-plaintext">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
@@ -306,15 +329,15 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>, <span
        &quot;type&quot;: &quot;whitespace&quot;
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> adalah komponen <strong>opsional</strong> yang bekerja pada token yang dihasilkan oleh tokenizer, mengubah atau menyempurnakannya sesuai kebutuhan. Misalnya, setelah menerapkan filter " <code translate="no">lowercase</code> " pada istilah yang telah ditokenisasi " <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>", hasilnya mungkin adalah:</p>
+<h4 id="Filter" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> adalah komponen <strong>opsional</strong> yang bekerja pada token yang dihasilkan oleh tokenizer, mengubah atau menyempurnakannya sesuai kebutuhan. Misalnya, setelah menerapkan filter " <code translate="no">lowercase</code> " pada istilah yang telah ditokenisasi <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, hasilnya mungkin adalah:</p>
 <pre><code translate="no" class="language-sql">[&quot;vector&quot;, &quot;database&quot;, &quot;built&quot;, &quot;for&quot;, &quot;scale&quot;]
 <button class="copy-code-btn"></button></code></pre>
 <p>Filter dalam penganalisis khusus dapat berupa <strong>filter bawaan</strong> atau <strong>khusus</strong>, tergantung pada kebutuhan konfigurasi.</p>
 <ul>
-<li><p><strong>Filter bawaan</strong>: Telah dikonfigurasi sebelumnya oleh Milvus, sehingga hanya memerlukan pengaturan minimal. Anda dapat menggunakan filter ini secara langsung dengan menentukan namanya. Filter di bawah ini sudah terintegrasi dan siap digunakan:</p>
+<li><p><strong>Filter bawaan</strong>: Telah dikonfigurasi sebelumnya oleh Milvus, sehingga hanya memerlukan sedikit pengaturan. Anda dapat menggunakan filter ini secara langsung dengan menentukan namanya. Filter di bawah ini sudah terintegrasi dan siap digunakan:</p>
 <ul>
 <li><p><code translate="no">lowercase</code>: Mengubah teks menjadi huruf kecil, memastikan pencocokan yang tidak peka huruf besar-kecil. Untuk detailnya, lihat <a href="/docs/id/lowercase-filter.md">Lowercase</a>.</p></li>
-<li><p><code translate="no">asciifolding</code>: Mengubah karakter non-ASCII menjadi setara ASCII, sehingga memudahkan penanganan teks multibahasa. Untuk detailnya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding</a>.</p></li>
+<li><p><code translate="no">asciifolding</code>: Mengonversi karakter non-ASCII menjadi setara ASCII, sehingga memudahkan penanganan teks multibahasa. Untuk detailnya, lihat <a href="/docs/id/ascii-folding-filter.md">ASCII folding</a>.</p></li>
 <li><p><code translate="no">alphanumonly</code>: Hanya mempertahankan karakter alfanumerik dengan menghapus karakter lainnya. Untuk detailnya, lihat <a href="/docs/id/alphanumonly-filter.md">Alphanumonly</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Menghapus token yang mengandung karakter apa pun selain karakter Tionghoa, huruf Inggris, atau angka. Untuk detailnya, lihat <a href="/docs/id/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 <li><p><code translate="no">cncharonly</code>: Menghapus token yang mengandung karakter apa pun selain karakter Tionghoa. Untuk detailnya, lihat <a href="/docs/id/cncharonly-filter.md">Cncharonly</a>.</p></li>
@@ -426,7 +449,7 @@ analyzerParams.put(<span class="hljs-string">&quot;filter&quot;</span>,
       </svg>
     </button></h2><p>Dalam contoh ini, Anda akan membuat skema koleksi yang mencakup:</p>
 <ul>
-<li><p>Sebuah bidang vektor untuk embedding.</p></li>
+<li><p>Bidang vektor untuk embedding.</p></li>
 <li><p>Dua bidang " <code translate="no">VARCHAR</code> " untuk pemrosesan teks:</p>
 <ul>
 <li><p>Satu bidang menggunakan penganalisis bawaan.</p></li>
@@ -490,12 +513,12 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
     <span class="hljs-string">&quot;context&quot;</span>
+    <span class="hljs-string">&quot;encoding/json&quot;</span>
     <span class="hljs-string">&quot;fmt&quot;</span>
 
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/column&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/entity&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/index&quot;</span>
-    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v2/milvusclient&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/entity&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/index&quot;</span>
+    <span class="hljs-string">&quot;github.com/milvus-io/milvus/client/v3/milvusclient&quot;</span>
 )  
 
 ctx, cancel := context.WithCancel(context.Background())
@@ -505,14 +528,14 @@ cli, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-    fmt.Println(err.Error())
-    <span class="hljs-comment">// handle err</span>
+    <span class="hljs-built_in">panic</span>(err)
 }
-<span class="hljs-keyword">defer</span> client.Close(ctx)
+<span class="hljs-keyword">defer</span> cli.Close(ctx)
 
 schema := entity.NewSchema().WithAutoID(<span class="hljs-literal">true</span>).WithDynamicFieldEnabled(<span class="hljs-literal">false</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Define-and-verify-analyzer-configurations" class="common-anchor-header">Langkah 2: Menentukan dan memverifikasi konfigurasi penganalisis<button data-href="#Step-2-Define-and-verify-analyzer-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -587,22 +610,35 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
 
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus simplifies text analysis for search.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
 
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;type\&quot;: \&quot;english\&quot;}&quot;,
+    &quot;text&quot;: [&quot;Milvus simplifies text analysis for search.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Konfigurasikan dan verifikasi penganalisis khusus:</strong></p>
+<li><p><strong>Konfigurasikan dan verifikasi penganalisis kustom:</strong></p>
 <ul>
 <li><p><strong>Konfigurasi:</strong> Tentukan penganalisis khusus yang menggunakan tokenizer standar bersama dengan filter huruf kecil bawaan serta filter khusus untuk panjang token dan kata-kata penghubung.</p></li>
-<li><p><strong>Verifikasi:</strong> Gunakan <code translate="no">run_analyzer</code> untuk memastikan konfigurasi kustom tersebut memproses teks sesuai yang diharapkan.</p></li>
+<li><p><strong>Verifikasi:</strong> Gunakan <code translate="no">run_analyzer</code> untuk memastikan konfigurasi kustom memproses teks sesuai yang diharapkan.</p></li>
 </ul>
 <p><div class="multipleCode">
 <a href="#python">Python</a>
@@ -682,11 +718,12 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     <span class="hljs-attr">analyzer_params</span>: analyzer_params_built_in
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go">analyzerParams = <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
-    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>, 
+<pre><code translate="no" class="language-go">analyzerParams := <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: []any{<span class="hljs-string">&quot;lowercase&quot;</span>,
     <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
         <span class="hljs-string">&quot;max&quot;</span>:  <span class="hljs-number">40</span>,
+    },
     <span class="hljs-keyword">map</span>[<span class="hljs-type">string</span>]any{
         <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,
         <span class="hljs-string">&quot;stop_words&quot;</span>: []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>},
@@ -694,16 +731,30 @@ List&lt;RunAnalyzerResp.AnalyzerResult&gt; results = resp.getResults();
     
 bs, _ := json.Marshal(analyzerParams)
 texts := []<span class="hljs-type">string</span>{<span class="hljs-string">&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;</span>}
-option := milvusclient.NewRunAnalyzerOption(texts).
-    WithAnalyzerParams(<span class="hljs-type">string</span>(bs))
+option := milvusclient.NewRunAnalyzerOption(texts...).
+    WithAnalyzerParamsStr(<span class="hljs-type">string</span>(bs))
 
-result, err := client.RunAnalyzer(ctx, option)
+result, err := cli.RunAnalyzer(ctx, option)
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(result)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># curl</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/common/run_analyzer&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;analyzerParams&quot;: &quot;{\&quot;tokenizer\&quot;: \&quot;standard\&quot;, \&quot;filter\&quot;: [\&quot;lowercase\&quot;, {\&quot;type\&quot;: \&quot;length\&quot;, \&quot;max\&quot;: 40}, {\&quot;type\&quot;: \&quot;stop\&quot;, \&quot;stop_words\&quot;: [\&quot;of\&quot;, \&quot;for\&quot;]}]}&quot;,
+    &quot;text&quot;: [&quot;Milvus provides flexible, customizable analyzers for robust text processing.&quot;],
+    &quot;withDetail&quot;: true
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
 <h3 id="Step-3-Add-fields-to-the-schema" class="common-anchor-header">Langkah 3: Tambahkan bidang ke skema<button data-href="#Step-3-Add-fields-to-the-schema" class="anchor-icon" translate="no">
@@ -829,7 +880,60 @@ schema.addField(AddFieldReq.builder()
     WithEnableMatch(<span class="hljs-literal">true</span>),
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: true,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;title_en&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true,
+                    &quot;enable_match&quot;: true,
+                    &quot;analyzer_params&quot;: {&quot;type&quot;: &quot;english&quot;}
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;title&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 1000,
+                    &quot;enable_analyzer&quot;: true,
+                    &quot;enable_match&quot;: true,
+                    &quot;analyzer_params&quot;: {
+                        &quot;tokenizer&quot;: &quot;standard&quot;,
+                        &quot;filter&quot;: [
+                            &quot;lowercase&quot;,
+                            {&quot;type&quot;: &quot;length&quot;, &quot;max&quot;: 40},
+                            {&quot;type&quot;: &quot;stop&quot;, &quot;stop_words&quot;: [&quot;of&quot;, &quot;for&quot;]}
+                        ]
+                    }
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;embedding&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {&quot;dim&quot;: 3}
+            },
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-4-Prepare-index-parameters-and-create-the-collection" class="common-anchor-header">Langkah 4: Siapkan parameter indeks dan buat koleksi<button data-href="#Step-4-Prepare-index-parameters-and-create-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -901,15 +1005,33 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-go">idx := index.NewAutoIndex(index.MetricType(entity.COSINE))
 indexOption := milvusclient.NewCreateIndexOption(<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>, idx)
 
-err = client.CreateCollection(ctx,
+err = cli.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/indexes/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;indexParams&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;indexName&quot;: &quot;embedding&quot;,
+            &quot;metricType&quot;: &quot;COSINE&quot;,
+            &quot;indexType&quot;: &quot;AUTOINDEX&quot;
+        }
+    ]
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Langkah selanjutnya<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

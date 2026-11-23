@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Na pesquisa vetorial tradicional, os resultados são classificados exclusivamente com base na semelhança vetorial — ou seja, no grau de correspondência entre os vetores no espaço matemático. No entanto, em aplicações do mundo real, o que torna um conteúdo verdadeiramente relevante depende frequentemente de mais do que apenas a semelhança semântica.</p>
+    </button></h1><p>Na pesquisa vetorial tradicional, os resultados são classificados exclusivamente com base na semelhança vetorial — ou seja, no grau de correspondência entre os vetores no espaço matemático. No entanto, nas aplicações do mundo real, o que torna um conteúdo verdadeiramente relevante depende frequentemente de mais do que apenas a semelhança semântica.</p>
 <p>Considere estes cenários do dia a dia:</p>
 <ul>
 <li><p>Uma pesquisa de notícias em que o artigo de ontem deve ter uma classificação mais elevada do que um artigo semelhante de há três anos</p></li>
@@ -32,7 +32,7 @@ beta: Milvus 2.6.x
 <li><p>Uma plataforma de comércio eletrónico que destaca produtos em destaque, mesmo quando estes são ligeiramente menos semelhantes à consulta de pesquisa</p></li>
 </ul>
 <p>Todos estes cenários partilham uma necessidade comum: equilibrar a semelhança vetorial com outros fatores numéricos, como o tempo, a distância ou a popularidade.</p>
-<p>Os «decay rankers» do Milvus respondem a esta necessidade, ajustando as classificações de pesquisa com base em valores numéricos dos campos. Permitem-lhe equilibrar a semelhança vetorial com a «atualidade», a «proximidade» ou outras propriedades numéricas dos seus dados, criando experiências de pesquisa mais intuitivas e contextualmente relevantes.</p>
+<p>Os «decay rankers» do Milvus respondem a esta necessidade, ajustando as classificações de pesquisa com base em valores de campos numéricos. Permitem-lhe equilibrar a semelhança vetorial com a «atualidade», a «proximidade» ou outras propriedades numéricas dos seus dados, criando experiências de pesquisa mais intuitivas e contextualmente relevantes.</p>
 <h2 id="Usage-notes" class="common-anchor-header">Notas de utilização<button data-href="#Usage-notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -118,7 +118,7 @@ beta: Milvus 2.6.x
 <li><p>Cada classificador de decaimento transforma valores numéricos brutos em pontuações de relevância normalizadas entre 0 e 1</p></li>
 <li><p>A pontuação de decaimento representa a relevância de um item com base na sua «distância» em relação ao ponto ideal</p></li>
 </ul>
-<p>A fórmula de cálculo específica varia consoante o tipo de classificador de decaimento. Para mais detalhes sobre como calcular uma pontuação de decaimento, consulte as páginas dedicadas ao <a href="/docs/pt/gaussian-decay.md#Formula">Decaimento Gaussiano</a>, ao <a href="/docs/pt/exponential-decay.md#Formula">Decaimento Exponencial</a> e ao <a href="/docs/pt/linear-decay.md#Formula">Decaimento Linear</a>.</p>
+<p>A fórmula de cálculo específica varia consoante o tipo de classificador de decaimento. Para mais detalhes sobre como calcular uma pontuação de decaimento, consulte as páginas dedicadas ao <a href="/docs/pt/gaussian-decay.md#Formula">Decaimento Gaussiano</a>, ao <a href="/docs/pt/exponential-decay.md#Formula">Decaimento Exponencial</a> e <a href="/docs/pt/linear-decay.md#Formula">ao Decaimento Linear</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Fase 3: Calcular as pontuações finais<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -140,7 +140,7 @@ beta: Milvus 2.6.x
 <p>Nos casos de pesquisa híbrida (que combina vários campos vetoriais), o Milvus considera a pontuação de similaridade normalizada máxima entre os pedidos de pesquisa:</p>
 <pre><code translate="no" class="language-plaintext">final_score = max([normalized_score₁, normalized_score₂, ..., normalized_scoreₙ]) × decay_score
 <button class="copy-code-btn"></button></code></pre>
-<p>Por exemplo, se um artigo de investigação obtiver uma pontuação de 0,82 na semelhança vetorial e de 0,91 na recuperação de texto baseada em BM25 numa pesquisa híbrida, o Milvus utiliza 0,91 como pontuação de semelhança de base antes de aplicar o fator de decaimento.</p>
+<p>Por exemplo, se um artigo de investigação obtiver uma pontuação de 0,82 na semelhança vetorial e de 0,91 na recuperação de texto baseada no BM25 numa pesquisa híbrida, o Milvus utiliza 0,91 como pontuação de semelhança de base antes de aplicar o fator de decaimento.</p>
 <h3 id="Decay-ranking-in-action" class="common-anchor-header">A classificação com decaimento em ação<button data-href="#Decay-ranking-in-action" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -278,7 +278,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Os classificadores de decaimento podem ser aplicados tanto a operações de pesquisa vetorial padrão como a operações de pesquisa híbrida no Milvus. Seguem-se os principais trechos de código para implementar esta funcionalidade.</p>
 <div class="alert note">
-<p>Antes de utilizar funções de decaimento, deve primeiro criar uma coleção com campos numéricos adequados (como carimbos de data/hora, distâncias, etc.) que serão utilizados para os cálculos de decaimento. Para exemplos práticos completos, incluindo a configuração da coleção, a definição do esquema e a inserção de dados, consulte <a href="/docs/pt/tutorial-implement-a-time-based-ranking-in-milvus.md">o Tutorial: Implementar uma classificação baseada no tempo no Milvus</a>.</p>
+<p>Antes de utilizar funções de decaimento, deve primeiro criar uma coleção com campos numéricos adequados (como carimbos de data/hora, distâncias, etc.) que serão utilizados para os cálculos de decaimento. Para exemplos práticos completos, incluindo a configuração da coleção, a definição do esquema e a inserção de dados, consulte <a href="/docs/pt/tutorial-implement-a-time-based-ranking-in-milvus.md">o Tutorial: Implementar classificação baseada no tempo no Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Criar um classificador de decaimento<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -408,7 +408,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -538,16 +577,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -618,5 +659,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

@@ -73,7 +73,7 @@ summary: Learn how to visualize Milvus metrics in Grafana.
         ></path>
       </svg>
     </button></h3><p>Download and import Milvus dashboard from the JSON file.</p>
-<pre><code translate="no"><span class="hljs-attribute">wget</span> https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json
+<pre><code translate="no" class="language-bash">wget https://raw.githubusercontent.com/milvus-io/milvus/v3.0.5/deployments/monitor/grafana/milvus-dashboard.json
 <button class="copy-code-btn"></button></code></pre>
 <p>
   <span class="img-wrapper">

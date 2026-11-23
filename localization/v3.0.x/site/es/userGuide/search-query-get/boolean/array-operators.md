@@ -119,7 +119,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El operador « <code translate="no">ARRAY_CONTAINS_ALL</code> » garantiza que todos los elementos de la lista especificada estén presentes en el campo de matriz. Este operador resulta útil cuando se desea buscar entidades que contengan varios valores en la matriz.</p>
+    </button></h2><p>El operador « <code translate="no">ARRAY_CONTAINS_ALL</code> » garantiza que todos los elementos de la lista especificada estén presentes en el campo de matriz. Este operador resulta útil cuando se desea encontrar entidades que contengan varios valores en la matriz.</p>
 <p><strong>Ejemplo</strong></p>
 <p>Si quieres encontrar todas las entidades en las que el array ` <code translate="no">history_temperatures</code> ` contenga tanto ` <code translate="no">23</code> ` como ` <code translate="no">24</code>`, puedes utilizar:</p>
 <div class="multipleCode">
@@ -241,7 +241,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">filter=<span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Esto devolverá todas las entidades en las que el array <code translate="no">history_temperatures</code> tenga menos de 10 elementos.</p>
+<p>Esto devolverá todas las entidades en las que el array ` <code translate="no">history_temperatures</code> ` tenga menos de 10 elementos.</p>
 <h2 id="ARRAYAPPEND" class="common-anchor-header">ARRAY_APPEND<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.17+</span><button data-href="#ARRAYAPPEND" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,7 +258,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>El operador ` <code translate="no">ARRAY_APPEND</code> ` añade elementos de carga útil a un campo `ARRAY` existente durante una solicitud ` <code translate="no">upsert</code> `. No es una expresión de filtro. Úsalo cuando quieras añadir valores a un array sin consultar primero el valor actual del mismo.</p>
-<p>El siguiente ejemplo añade « <code translate="no">&quot;premium&quot;</code> » al campo ARRAY de la solicitud <code translate="no">tags</code> de la entidad cuya clave principal es « <code translate="no">1</code> »:</p>
+<p>El siguiente ejemplo añade « <code translate="no">&quot;premium&quot;</code> » al campo ARRAY de la solicitud <code translate="no">tags</code> de la entidad cuya clave primaria es « <code translate="no">1</code> »:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

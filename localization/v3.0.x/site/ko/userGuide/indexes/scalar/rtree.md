@@ -1,10 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  RTREE 인덱스는 GEOMETRY 필드에 대한 쿼리 성능을 향상시키는 트리 기반 데이터 구조입니다. 컬렉션에 점, 선, 다각형과 같은
-  기하학적 객체를 WKT(Well-known text) 형식으로 저장하고 있으며, 공간 필터링 성능을 높이고자 한다면 RTREE가 이상적인
-  선택입니다.
+summary: RTREE를 사용하여 GEOMETRY 필드에 대한 공간 필터링 속도를 높이십시오.
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -22,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">RTREE</code> 인덱스는 Milvus에서 <code translate="no">GEOMETRY</code> 필드에 대한 쿼리 속도를 높여주는 트리 기반 데이터 구조입니다. 컬렉션에 점, 선, 다각형과 같은 기하학적 객체를 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT(Well-known text)</a> 형식으로 저장하고 있으며, 공간 필터링 속도를 높이고자 한다면 <code translate="no">RTREE</code> 가 이상적인 선택입니다.</p>
-<h2 id="How-it-works" class="common-anchor-header">작동 원리<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> <code translate="no">GEOMETRY</code> 필드에서 <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">WKT(Well-known text)</a> 형식의 점, 선 또는 다각형을 포함한 공간 필터링 속도를 높여줍니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 <code translate="no">RTREE</code> 인덱스를 사용하여 다음의 두 단계 과정을 거쳐 기하 데이터를 효율적으로 구성하고 필터링합니다.</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">1단계: 인덱스 구축<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,8 +50,58 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
-<li><p><strong>리프 노드 생성:</strong> 각 기하 객체에 대해 해당 객체를 완전히 포함하는 가장 작은 직사각형인 <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">최소 경계 사각형</a> (MBR)을 계산하고, 이를 리프 노드로 저장합니다.</p></li>
+    </button></h3><p><code translate="no">GEOMETRY</code> 필드. 필드 정의에 대해서는 <a href="/docs/ko/geometry-field.md">‘기하 필드’를</a> 참조하십시오.</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">필터 가속<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> 바운딩 박스를 사용하여 후보를 찾은 다음, Milvus가 정확한 공간적 관계를 확인합니다. 다음 <a href="/docs/ko/geometry-operators.md">기하 연산자를</a> 지원합니다:</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>, <code translate="no">ST_INTERSECTS</code>, <code translate="no">ST_CONTAINS</code> 및 <code translate="no">ST_WITHIN</code>.</li>
+<li><code translate="no">ST_TOUCHES</code>, <code translate="no">ST_OVERLAPS</code>, <code translate="no">ST_CROSSES</code> 및 <code translate="no">ST_DWITHIN</code>.</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> <code translate="no">RTREE</code> 는 사용하지 않습니다. 적합한 인덱스가 없는 경우, 공간 필터는 해당 필드를 스캔합니다.</p>
+<div class="alert note">
+<blockquote>
+<p>이는 인덱스 기능일 뿐, 유효한 필터 표현식에 대한 제한 사항은 아닙니다. 공유 조회 제약 조건에 대해서는 <a href="/docs/ko/scalar_index.md#Filter-execution">스칼라 인덱스를</a> 참조하십시오. <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 및 NULL 테스트(<code translate="no">IS NULL</code>, <code translate="no">IS NOT NULL</code>)에 대해서는 <a href="/docs/ko/basic-operators.md">기본 연산자를</a> 참조하십시오.</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">RTREE의 작동 원리<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>빌드 및 쿼리 프로세스 살펴보기</strong></summary></p>
+<p>Milvus는 <code translate="no">RTREE</code> 인덱스를 사용하여 기하 데이터를 효율적으로 구성하고 필터링하며, 이 과정은 두 단계로 진행됩니다:</p>
+<p><strong>1단계: 인덱스 구축</strong></p>
+<ol>
+<li><p><strong>리프 노드 생성:</strong> 각 지오메트리 객체에 대해, 해당 객체를 완전히 포함하는 가장 작은 직사각형인 <a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">최소 경계 사각형</a> (MBR)을 계산하고, 이를 리프 노드로 저장합니다.</p></li>
 <li><p><strong>더 큰 상자로 그룹화:</strong> 인접한 리프 노드를 함께 묶고, 각 그룹을 새로운 MBR로 감싸 내부 노드를 형성합니다. 예를 들어, 그룹 <strong>B에는</strong> <strong>D와</strong> <strong>E가</strong> 포함되고, 그룹 <strong>C에는</strong> <strong>F와</strong> <strong>G가</strong> 포함됩니다.</p></li>
 <li><p><strong>루트 노드 추가:</strong> 모든 내부 그룹을 포함하는 MBR을 가진 루트 노드를 추가하여, 높이가 균형 잡힌 트리 구조를 만듭니다.</p></li>
 </ol>
@@ -65,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Retree의 작동 원리</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">2단계: 쿼리 가속화<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>2단계: 쿼리 가속화</strong></p>
+<ol>
 <li><p><strong>쿼리 MBR 형성:</strong> 쿼리 지오메트리에 대한 MBR을 계산합니다.</p></li>
 <li><p><strong>분기 가지치기:</strong> 루트에서 시작하여 쿼리 MBR을 각 내부 노드와 비교합니다. MBR이 쿼리 MBR과 교차하지 않는 분기는 건너뜁니다.</p></li>
 <li><p><strong>후보 수집:</strong> 교차하는 분기로 내려가 후보 리프 노드를 수집합니다.</p></li>
 <li><p><strong>정확한 일치:</strong> 각 후보에 대해 정확한 공간 술어를 수행하여 진정한 일치 항목을 결정합니다.</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">RTREE 인덱스 생성<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,8 +326,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">filter</code> 표현식에서 기하 연산자를 사용하여 필터링합니다. 대상 <code translate="no">GEOMETRY</code> 필드에 <code translate="no">RTREE</code> 가 존재하면 Milvus는 이를 사용하여 후보를 자동으로 제거합니다. 인덱스가 없는 경우 필터링은 전체 스캔으로 대체됩니다.</p>
-<p>사용 가능한 기하형 연산자의 전체 목록은 <a href="/docs/ko/geometry-operators.md">‘기하형 연산자’를</a> 참조하십시오.</p>
+    </button></h2><p>다음 예제에서는 <code translate="no">geo</code> 라는 이름의 인덱싱된 <code translate="no">GEOMETRY</code> 필드를 사용합니다.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">예제 1: 필터링만 수행<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -615,10 +647,9 @@ EOF
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> 메서드를 사용하여 컬렉션에서 기존 인덱스를 제거합니다.</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong> 이하 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
-<li><p><strong>v2.6.4부터는</strong> 스칼라 인덱스가 더 이상 필요하지 않으면 컬렉션을 먼저 해제할 필요 없이 직접 삭제할 수 있습니다.</p></li>
-</ul>
+<blockquote>
+<p>스칼라 인덱스를 삭제할 때의 릴리스 요구 사항에 대해서는 <a href="/docs/ko/scalar_index.md#Drop-index-compatibility">‘스칼라 인덱스’를</a> 참조하십시오.</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

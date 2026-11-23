@@ -45,7 +45,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><ul>
 <li><p>衰减排序不能与分组搜索结合使用。</p></li>
-<li><p>用于衰减排名的字段必须为数值型（<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 或<code translate="no">DOUBLE</code> ）。</p></li>
+<li><p>用于衰减排名的字段必须是数值型（<code translate="no">INT8</code> 、<code translate="no">INT16</code> 、<code translate="no">INT32</code> 、<code translate="no">INT64</code> 、<code translate="no">FLOAT</code> 或<code translate="no">DOUBLE</code> ）。</p></li>
 <li><p>每个衰减排序器只能使用一个数值字段。</p></li>
 <li><p><strong>时间单位一致性</strong>：使用基于时间的衰减排序时，<code translate="no">origin</code> 、<code translate="no">scale</code> 和<code translate="no">offset</code> 参数的单位必须与您的 Collection 数据中使用的单位一致：</p>
 <ul>
@@ -90,7 +90,7 @@ beta: Milvus 2.6.x
 <li><p>对于<strong>L2</strong>和<strong>JACCARD</strong>距离度量（其中数值越低表示相似度越高）：</p>
 <pre><code translate="no" class="language-plaintext">normalized_score = 1.0 - (2 × arctan(score))/π
 <button class="copy-code-btn"></button></code></pre>
-<p>这将距离转换为 0-1 之间的相似度得分，数值越高越好。</p></li>
+<p>这将距离转换为 0-1 范围内的相似度得分，数值越高越好。</p></li>
 <li><p>对于<strong>IP</strong>、<strong>COSINE</strong> 和<strong>BM25</strong>度量（其中分数越高已表示匹配度越好）：直接使用分数，无需归一化。</p></li>
 </ul>
 <h3 id="Stage-2-Calculate-decay-scores" class="common-anchor-header">第二阶段：计算衰减分数<button data-href="#Stage-2-Calculate-decay-scores" class="anchor-icon" translate="no">
@@ -111,7 +111,7 @@ beta: Milvus 2.6.x
     </button></h3><p>接下来，Milvus 将根据您选择的衰减排序器，基于数值字段值（如时间戳或距离）计算衰减分数：</p>
 <ul>
 <li><p>每个衰减排序器都会将原始数值转换为 0-1 之间的归一化相关性分数</p></li>
-<li><p>衰减分数代表了项目与其理想点的“距离”所反映的相关性</p></li>
+<li><p>衰减分数代表了项目基于其与理想点的“距离”所具有的相关性</p></li>
 </ul>
 <p>具体的计算公式因衰减排序器类型而异。有关衰减分数计算方法的详细信息，请参阅<a href="/docs/zh/gaussian-decay.md#Formula">高斯衰减</a>、<a href="/docs/zh/exponential-decay.md#Formula">指数衰减</a> <a href="/docs/zh/linear-decay.md#Formula">和线性衰减</a>的专门页面。</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">第三阶段：计算最终分数<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
@@ -206,7 +206,7 @@ beta: Milvus 2.6.x
 <ul>
 <li><p>论文C尽管相似度中等，但因其非常新（昨天刚发表），排名跃升至第1位</p></li>
 <li><p>尽管相似度极高，但论文 B 因发表时间较早而跌至第 4 位</p></li>
-<li><p>论文 D 使用余弦相似度，因此在应用衰减算法前，其 0.76 的得分被直接采用</p></li>
+<li><p>论文D采用余弦相似度，因此在应用衰减算法前，其0.76的得分被直接采用</p></li>
 </ul>
 <h2 id="Choose-the-right-decay-ranker" class="common-anchor-header">选择合适的衰减排序器<button data-href="#Choose-the-right-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -241,13 +241,13 @@ beta: Milvus 2.6.x
      <td><p>指数型（<code translate="no">exp</code> ）</p></td>
      <td><p>起初快速下降，但保持长尾效应</p></td>
      <td><ul><li><p>时效性至关重要的新闻推送</p></li><li><p>社交媒体中，最新内容应占据主导地位</p></li><li><p>当用户强烈偏好就近选项，但特别优质的远距离内容仍应保持可见时</p></li></ul></td>
-     <td><p>在新闻应用中，昨天的新闻排名远高于一周前的内容，但高度相关的旧文章仍可能出现</p></td>
+     <td><p>在新闻应用中，昨天的新闻排名远高于一周前的内容，但相关性极高的旧文章仍可能出现</p></td>
    </tr>
    <tr>
      <td><p>线性（<code translate="no">linear</code> ）</p></td>
      <td><p>呈现一致且可预测的衰减趋势，并设有明确的截止点</p></td>
-     <td><ul><li><p>具有自然边界的应用</p></li><li><p>具有距离限制的服务</p></li><li><p>带有有效期或明确阈值的内容</p></li></ul></td>
-     <td><p>在活动搜索工具中，超出未来两周时间范围的活动将完全不会显示</p></td>
+     <td><ul><li><p>具有自然边界限制的应用程序</p></li><li><p>设有距离限制的服务</p></li><li><p>带有有效期或明确阈值的内容</p></li></ul></td>
+     <td><p>在活动搜索工具中，超出两周未来时间范围的活动将完全不会显示</p></td>
    </tr>
 </table>
 <p>有关各衰减排序器如何计算分数及具体衰减模式的详细信息，请参阅专门的文档：</p>
@@ -403,7 +403,46 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
     .WithOffset(<span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>)                    <span class="hljs-comment">// 1 day no-decay zone (must match collection data unit)</span>
     .WithDecay(<span class="hljs-number">0.5f</span>);                            <span class="hljs-comment">// Half score at scale distance</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/create&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;your_collection&quot;,
+    &quot;schema&quot;: {
+        &quot;autoID&quot;: false,
+        &quot;enableDynamicField&quot;: false,
+        &quot;fields&quot;: [
+            {
+                &quot;fieldName&quot;: &quot;id&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;,
+                &quot;isPrimary&quot;: true
+            },
+            {
+                &quot;fieldName&quot;: &quot;document&quot;,
+                &quot;dataType&quot;: &quot;VarChar&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;max_length&quot;: 65535
+                }
+            },
+            {
+                &quot;fieldName&quot;: &quot;timestamp&quot;,
+                &quot;dataType&quot;: &quot;Int64&quot;
+            },
+            {
+                &quot;fieldName&quot;: &quot;vector_field&quot;,
+                &quot;dataType&quot;: &quot;FloatVector&quot;,
+                &quot;elementTypeParams&quot;: {
+                    &quot;dim&quot;: 768
+                }
+            }
+        ]
+    }
+}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <table>
    <tr>
@@ -415,7 +454,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">name</code></p></td>
      <td><p>是</p></td>
-     <td><p>执行搜索时用于标识您的函数的标识符。请选择一个与您的用例相关的、具有描述性的名称。</p></td>
+     <td><p>执行搜索时用于标识您的函数。请选择一个与您的用例相关的、具有描述性的名称。</p></td>
      <td><p><code translate="no">"time_decay"</code></p></td>
    </tr>
    <tr>
@@ -463,7 +502,7 @@ rerank-&gt;<span class="hljs-built_in">SetDecay</span>(<span class="hljs-number"
    <tr>
      <td><p><code translate="no">params.decay</code></p></td>
      <td><p>否</p></td>
-     <td><p><code translate="no">scale</code> 距离处的得分值，用于控制曲线的陡峭程度。数值越低，下降曲线越陡；数值越高，下降曲线越平缓。</p><p>必须介于 0 到 1 之间。</p></td>
+     <td><p><code translate="no">scale</code> 距离处的得分值，用于控制曲线的陡峭程度。数值越低，下降曲线越陡；数值越高，下降曲线越平缓。</p><p>必须在 0 到 1 之间。</p></td>
      <td><p><code translate="no">0.5</code> （默认）</p></td>
    </tr>
 </table>
@@ -533,16 +572,18 @@ results = milvus_client.search(
 functionScore := entity.NewFunctionScore().AddFunction(rerank)
 
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-    collection_name, <span class="hljs-comment">// collection name</span>
+    collectionName, <span class="hljs-comment">// collection name</span>
     <span class="hljs-number">10</span>,              <span class="hljs-comment">// limit</span>
-    []entity.Vector{your_query_vector}, <span class="hljs-comment">// query vector</span>
+    []entity.Vector{entity.FloatVector(yourQueryVector)}, <span class="hljs-comment">// query vector</span>
 ).WithANNSField(<span class="hljs-string">&quot;vector_field&quot;</span>).
     WithFunctionScore(functionScore).
     WithOutputFields(<span class="hljs-string">&quot;document&quot;</span>, <span class="hljs-string">&quot;timestamp&quot;</span>))
 <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
     fmt.Println(err.Error())
-    <span class="hljs-comment">// handle error</span>
+    <span class="hljs-keyword">return</span>
 }
+
+fmt.Println(resultSets)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-rust"><span class="hljs-keyword">use</span> milvus::v2::prelude::*;
 
@@ -613,5 +654,47 @@ SearchResp results = <span class="hljs-keyword">await</span> client.SearchAsync(
     }
 });
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># The ranker configuration is passed with the search request</span>
+<span class="hljs-built_in">export</span> rankerFunction=<span class="hljs-string">&#x27;{
+    &quot;name&quot;: &quot;time_decay&quot;,
+    &quot;type&quot;: &quot;Rerank&quot;,
+    &quot;inputFieldNames&quot;: [
+        &quot;timestamp&quot;
+    ],
+    &quot;outputFieldNames&quot;: [],
+    &quot;params&quot;: {
+        &quot;reranker&quot;: &quot;decay&quot;,
+        &quot;function&quot;: &quot;gauss&quot;,
+        &quot;origin&quot;: 1735689600,
+        &quot;scale&quot;: 604800,
+        &quot;offset&quot;: 86400,
+        &quot;decay&quot;: 0.5
+    }
+}&#x27;</span>
+
+<span class="hljs-comment"># A query vector matching the collection dimension</span>
+<span class="hljs-built_in">export</span> QUERY_VECTOR=$(jq -n <span class="hljs-string">&#x27;[range(768) | 0.01]&#x27;</span>)
+
+request=$(jq -n \
+--argjson vec <span class="hljs-string">&quot;<span class="hljs-variable">$QUERY_VECTOR</span>&quot;</span> \
+--argjson fn <span class="hljs-string">&quot;<span class="hljs-variable">$rankerFunction</span>&quot;</span> \
+<span class="hljs-string">&#x27;{
+    collectionName: &quot;your_collection&quot;,
+    data: [$vec],
+    annsField: &quot;vector_field&quot;,
+    limit: 10,
+    outputFields: [&quot;document&quot;, &quot;timestamp&quot;],
+    consistencyLevel: &quot;Strong&quot;,
+    functionScore: {functions: [$fn]}
+}&#x27;</span>)
+
+curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/entities/search&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&quot;<span class="hljs-variable">$request</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

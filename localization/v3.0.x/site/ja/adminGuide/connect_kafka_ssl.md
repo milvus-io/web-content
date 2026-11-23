@@ -1,11 +1,11 @@
 ---
 id: connect_kafka_ssl.md
-title: SASL/SSLによるKafkaへの接続
+title: SASL/SSL を使用した Kafka への接続
 related_key: 'kafka, sasl, tls'
 summary: >-
-  本ガイドでは、MilvusとKafkaの接続方法について、SASL/SSLを使用しない最もシンプルな方法から、SASL/SSLを使用した完全にセキュアな方法まで、いくつかご紹介します。
+  このガイドでは、SASL/SSLを使用しない最もシンプルな方法から、SASL/SSLを使用した完全にセキュリティが確保された方法まで、MilvusをKafkaに接続するいくつかの方法について解説します。
 ---
-<h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">SASL/SSLによるKafkaへの接続<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
+<h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">SASL/SSL を使用した Kafka への接続<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本ガイドでは、SASL/SSLを使用しない最もシンプルな方法から、SASL/SSLを使用した完全にセキュアな方法まで、MilvusをKafkaに接続するためのいくつかの方法を示します。</p>
-<h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">SASL/SSLなしでMilvusとKafkaを接続する<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h1><p>このガイドでは、SASL/SSLを使用しない最もシンプルな方法から、SASL/SSLを使用した完全にセキュリティが確保された方法まで、MilvusをKafkaに接続するいくつかの方法について説明します。</p>
+<h2 id="Connect-Milvus-to-Kafka-Without-SASLSSL" class="common-anchor-header">SASL/SSLを使用せずにMilvusをKafkaに接続する<button data-href="#Connect-Milvus-to-Kafka-Without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +36,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>SASL/SSLなしでMilvusとKafkaを起動するには、KafkaとMilvusの両方で認証と暗号化を無効にします。信頼できる環境でのみ使用してください。</p>
-<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1.SASL/SSLなしでKafkaサービスを開始する<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
+    </button></h2><p>SASL/SSLを使用せずにMilvusとKafkaを起動するには、KafkaとMilvusの両方で認証と暗号化を無効にします。これらは信頼できる環境でのみ使用してください。</p>
+<h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. SASL/SSL を使用せずに Kafka サービスを起動する<button data-href="#1-Start-a-Kafka-service-without-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,7 +52,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、SASL/SSLなしでKafkaサービスを起動できます：</p>
+    </button></h3><p>以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、SASL/SSLを使用せずにKafkaサービスを起動できます:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -63,7 +63,7 @@ summary: >-
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 
   <span class="hljs-attr">kafka:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:latest</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">wurstmeister/kafka:2.13-2.8.1</span>
     <span class="hljs-attr">container_name:</span> <span class="hljs-string">kafka</span>
     <span class="hljs-attr">ports:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-number">9092</span><span class="hljs-string">:9092</span>
@@ -71,14 +71,12 @@ summary: >-
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">KAFKA_LISTENERS=PLAINTEXT://:9092</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">/var/run/docker.sock:/var/run/docker.sock</span>
     <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次のコマンドでKafkaサービスを起動できます：</p>
+<p>その後、次のコマンドでKafkaサービスを起動できます：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2.Milvusの起動とKafkaへの接続<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvusの起動とKafkaへの接続<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,7 +91,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafkaサービスが起動したら、Milvusを起動してKafkaに接続します。SASL/SSLなしでMilvusを起動し、Kafkaに接続するには、以下の<code translate="no">docker-compose.yaml</code> ：</p>
+    </button></h3><p>Kafka サービスの起動が完了したら、Milvus を起動して Kafka に接続できます。SASL/SSL を使用せずに Milvus を起動し、Kafka に接続するには、次の `<code translate="no">docker-compose.yaml</code> ` ファイルを使用してください:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -108,12 +106,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のコマンドを使用して、Milvus設定ファイルテンプレートをダウンロードします：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>そして、以下のパラメータを設定する：</p>
+<p><code translate="no">user.yaml</code> <code translate="no">docker-compose.yaml</code> ファイルと同じディレクトリに ファイルを作成し、そこに以下のパラメータを設定します。Milvusは の後に を読み込むため、 内の値がデフォルト値よりも優先されます:<code translate="no">configs/milvus.yaml</code> <code translate="no">configs/user.yaml</code> <code translate="no">user.yaml</code> </p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -131,10 +126,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span>
     <span class="hljs-attr">tlsKeyPassword:</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>その後、以下のコマンドでMilvusを起動します：</p>
+<p>その後、次のコマンドで Milvus を起動できます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">SASL/PLAIN単独でKafkaにMilusを接続する<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">SASL/PLAINのみを使用してMilvusをKafkaに接続する<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -149,8 +144,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>SASL/PLAIN認証でKafkaを起動するには、適切な設定で<code translate="no">kafka_server_jass.conf</code> 。</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1.SASL/PLAINでKafkaサービスを起動する<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
+    </button></h2><p>SASL/PLAIN 認証で Kafka を起動するには、適切な設定が記述された<code translate="no">kafka_server_jaas.conf</code> ファイルを追加する必要があります。</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN" class="common-anchor-header">1. SASL/PLAIN を使用して Kafka サービスを起動する<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -198,11 +193,11 @@ summary: >-
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
     <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">kafka_server_jass.conf</code> 、以下のパラメータを設定する：</p>
+<p><code translate="no">kafka_server_jaas.conf</code> ファイルで、以下のパラメータを設定します。</p>
 <pre><code translate="no" class="language-conf">KafkaServer {
     org.apache.kafka.common.security.plain.PlainLoginModule required
     username=&quot;kafka&quot;
@@ -210,10 +205,10 @@ summary: >-
     user_kafka=&quot;pass123&quot;;
 };
 </code></pre>
-<p>その後、以下のコマンドでKafkaサービスを起動します：</p>
+<p>その後、次のコマンドで Kafka サービスを起動できます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2.Milvusの起動とKafkaへの接続<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Milvusを起動し、Kafkaに接続する<button data-href="#2-Start-Milvus-and-Connect-to-Kafka" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,7 +223,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafkaサービスが起動したら、Milvusを起動してKafkaに接続します。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SASL/PLAIN で Kafka に接続します：</p>
+    </button></h3><p>Kafka サービスの起動が完了したら、Milvus を起動して Kafka に接続できます。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SASL/PLAIN を使用して Kafka に接続します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -243,12 +238,9 @@ summary: >-
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のコマンドを使用して、Milvus設定ファイルテンプレートをダウンロードします：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>そして、以下のパラメータを設定する：</p>
+<p><code translate="no">docker-compose.yaml</code> ファイルと同じディレクトリに<code translate="no">user.yaml</code> ファイルを作成し、そこに以下のパラメータを設定します。Milvusは<code translate="no">configs/milvus.yaml</code> の後に<code translate="no">configs/user.yaml</code> を読み込むため、<code translate="no">user.yaml</code> 内の値がデフォルト値よりも優先されます:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -266,10 +258,10 @@ summary: >-
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、以下のコマンドでMilvusを起動します：</p>
+<p>その後、次のコマンドで Milvus を起動できます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">SSL認証でKafkaにMilvusを接続する<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">SSLのみを使用してMilvusをKafkaに接続する<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,8 +276,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>SSL認証でKafkaを起動するには、証明書ファイルを取得するか、自己署名証明書を生成する必要があります。この例では、自己署名証明書を使用します。</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1.自己署名証明書の生成<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
+    </button></h2><p>SSL 認証を使用して Kafka を起動するには、証明書ファイルを入手するか、自己署名証明書を生成する必要があります。この例では、自己署名証明書を使用します。</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1. 自己署名証明書の生成<button data-href="#1-Generate-Self-Signed-Certificates" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -300,7 +292,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">my_secrets</code> 」というフォルダを作成し、その中に「<code translate="no">gen-ssl-certs.sh</code> 」というbashスクリプトを追加し、以下の内容を貼り付けます：</p>
+    </button></h3><p><code translate="no">my_secrets</code> という名前のフォルダを作成し、その中に<code translate="no">gen-ssl-certs.sh</code> という名前の bash スクリプトを追加して、以下の内容を貼り付けます:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -466,23 +458,23 @@ EOF</span>
     <span class="hljs-built_in">exit</span> 1
 <span class="hljs-keyword">fi</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のスクリプトでは、デフォルトのパスワード<code translate="no">abcdefgh</code> 。パスワードを変更するには、<code translate="no">cert_creds</code> という名前のテキスト・ファイルを作成し、最初の行にパスワードを入力する。</p>
-<p>次に、以下のコマンドを実行して証明書を生成する：</p>
+<p>上記のスクリプトでは、デフォルトのパスワードとして「<code translate="no">abcdefgh</code> 」が設定されています。パスワードを変更するには、「<code translate="no">cert_creds</code> 」という名前のテキストファイルを作成し、1行目に新しいパスワードを入力してください。</p>
+<p>その後、以下のコマンドを実行して証明書を生成します:</p>
 <ul>
-<li><p>CA証明書を生成する：</p>
-<p>以下では、CA 証明書ファイルの名前を<code translate="no">ca-cert</code> とし、ブローカのホスト名を<code translate="no">kafka-ssl</code> とします：</p>
+<li><p>CA証明書の生成:</p>
+<p>以下では、CA証明書ファイルの名前が<code translate="no">ca-cert</code> で、ブローカーのホスト名が<code translate="no">kafka-ssl</code> であることを前提としています：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh ca ca-cert kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>サーバー証明書とキーストアを生成する：</p>
-<p>サーバー証明書とキーストアの生成：以下は、CA 証明書ファイルの名前が<code translate="no">ca-cert</code> であり、すべての出力ファイルのプレフィックスが<code translate="no">kafka_</code> であり、ブローカーのホスト名が<code translate="no">kafka-ssl</code> であると仮定しています：</p>
+<li><p>サーバー証明書とキーストアの生成:</p>
+<p>以下では、CA証明書ファイルの名前が `<code translate="no">ca-cert</code>`、すべての出力ファイルのプレフィックスが `<code translate="no">kafka_</code>`、ブローカーのホスト名が `<code translate="no">kafka-ssl</code>` であると仮定します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh -k server ca-cert kafka_ kafka-ssl</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>クライアント鍵の生成：</p>
-<p>以下では、CA 証明書ファイルの名前を<code translate="no">ca-cert</code> 、すべての出力ファイルのプレフィックスを<code translate="no">kafka_</code> 、クライアント名を<code translate="no">kafka-client</code> とする：</p>
+<li><p>クライアントキーの生成:</p>
+<p>以下では、CA 証明書ファイルの名前が<code translate="no">ca-cert</code> 、すべての出力ファイルのプレフィックスが<code translate="no">kafka_</code> 、クライアント名が<code translate="no">kafka-client</code> であると仮定します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./gen-ssl-certs.sh client ca-cert kafka_ kafka-client</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>必要な証明書がすべて生成されると、<code translate="no">my_secrets</code> フォルダに以下のファイルが表示される：</p>
+<p>必要な証明書がすべて生成されると、<code translate="no">my_secrets</code> フォルダ内に以下のファイルが表示されます:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">ls</span> -l my_secrets</span>
 total 12
 -rw-rw-r-- 1 1.4K Feb 26 11:53 ca-cert
@@ -498,7 +490,7 @@ total 12
 -rw-rw-r-- 1 5.6K Feb 26 11:54 kafka_server.keystore.jks
 -rw-rw-r-- 1 1.4K Feb 26 11:54 kafka_server.truststore.jks
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2.SSLを使用したKafkaサービスの開始<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-a-Kafka-service-with-SSL" class="common-anchor-header">2. SSL を使用した Kafka サービスの起動<button data-href="#2-Start-a-Kafka-service-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -513,7 +505,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>KafkaサービスをSSLで起動するには、次の<code translate="no">docker-compose.yaml</code> ：</p>
+    </button></h3><p>以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、SSL対応のKafkaサービスを起動します：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -552,10 +544,10 @@ total 12
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、以下のコマンドでKafkaサービスを開始します：</p>
+<p>次に、次のコマンドで Kafka サービスを起動します:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3.Milvusの起動とSSLによるKafkaへの接続<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
+<h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Milvus を起動し、SSL を使用して Kafka に接続する<button data-href="#3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -570,7 +562,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafkaサービスが起動したら、Milvusを起動してKafkaに接続します。Milvusの起動とKafkaへのSSL接続は、以下の<code translate="no">docker-compose.yaml</code> ：</p>
+    </button></h3><p>Kafka サービスの起動が完了したら、Milvus を起動して Kafka に接続できます。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SSL 経由で Kafka に接続します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -585,13 +577,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のコマンドを使用して、Milvus設定ファイルテンプレートをダウンロードします：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>そして、以下のパラメータを設定します：</p>
+<p><code translate="no">user.yaml</code> <code translate="no">docker-compose.yaml</code> ファイルと同じディレクトリに ファイルを作成し、そこに以下のパラメータを設定します。Milvusは の後に を読み込むため、 内の値がデフォルト値よりも優先されます:<code translate="no">configs/milvus.yaml</code> <code translate="no">configs/user.yaml</code> <code translate="no">user.yaml</code> </p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 
@@ -609,10 +598,10 @@ total 12
     <span class="hljs-attr">tlsCACert:</span> <span class="hljs-string">/milvus/secrets/ca-cert</span> <span class="hljs-comment"># file or directory path to CA certificate</span>
     <span class="hljs-attr">tlsKeyPassword:</span> <span class="hljs-string">abcdefgh</span> <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、以下のコマンドでMilvusを起動します：</p>
+<p>その後、次のコマンドで Milvus を起動します:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">SASL/PLAINとSSLでMilvusをKafkaに接続する<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">SASL/PLAIN および SSL を使用して Milvus を Kafka に接続する<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -627,8 +616,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusをSASL/PLAINおよびSSLでKafkaに接続するには、「<a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">MilvusをSASL/PLAINのみでKafkaに接続する</a>」および「<a href="#Connect-Milus-to-Kafka-with-SSL-Alone">MilvusをSSLのみでKafkaに接続する</a>」の手順を繰り返す必要があります。</p>
-<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1.SASL/PLAINおよびSSLを使用したKafkaサービスの開始<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+    </button></h2><p>SASL/PLAIN および SSL を使用して Milvus を Kafka に接続するには、「<a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAIN のみを使用して Milvus を Kafka に接続する</a>」および「<a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">SSL のみを使用して Milvus を Kafka に接続する</a>」の手順を繰り返す必要があります。</p>
+<h3 id="1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="common-anchor-header">1. SASL/PLAIN および SSL を使用して Kafka サービスを起動する<button data-href="#1-Start-a-Kafka-service-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -643,8 +632,8 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><a href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone">Connect Milus to Kafka with SASL/PLAIN Aloneで</a>紹介した<code translate="no">kafka_server_jass.conf</code> ファイルと、<a href="#Connect-Milus-to-Kafka-with-SSL-Alone">Connect Milus to Kafka with SSL Aloneで</a>生成した<code translate="no">my_secrets</code> フォルダを使用して、SASL/PLAINとSSLを使用したKafkaサービスを開始します。</p>
-<p>以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、SASL/PLAINとSSLでKafkaサービスを開始できます：</p>
+    </button></h3><p>「<a href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-Alone">SASL/PLAINのみを使用してMilvusをKafkaに接続する</a>」で言及されている<code translate="no">kafka_server_jaas.conf</code> ファイルと、「<a href="#Connect-Milvus-to-Kafka-with-SSL-Alone">SSLのみを使用してMilvusをKafkaに接続する</a>」で生成された<code translate="no">my_secrets</code> フォルダを使用して、SASL/PLAINとSSLを使用したKafkaサービスを起動します。</p>
+<p>以下の<code translate="no">docker-compose.yaml</code> ファイルを使用すると、SASL/PLAINとSSLを使用したKafkaサービスを起動できます:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span>
 <span class="hljs-attr">services:</span>
   <span class="hljs-attr">zookeeper:</span>
@@ -688,16 +677,16 @@ total 12
       <span class="hljs-attr">KAFKA_CONFLUENT_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
       <span class="hljs-attr">KAFKA_DEFAULT_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span>
-      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jass.conf&quot;</span>
+      <span class="hljs-attr">KAFKA_OPTS:</span> <span class="hljs-string">&quot;-Djava.security.auth.login.config=/etc/kafka/configs/kafka_server_jaas.conf&quot;</span>
 
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/etc/kafka/secrets</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/kafka_server_jaas.conf:/etc/kafka/configs/kafka_server_jaas.conf</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、次のコマンドでKafkaサービスを開始します：</p>
+<p>次に、次のコマンドでKafkaサービスを起動します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker compose up -d</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2.Milvus を起動し、SASL/PLAIN および SSL で Kafka に接続する。<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Milvusを起動し、SASL/PLAINおよびSSLを使用してKafkaに接続する<button data-href="#2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -712,7 +701,7 @@ total 12
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Kafkaサービスが起動したら、Milvusを起動して接続します。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SASL/PLAIN および SSL を使用して Kafka に接続します：</p>
+    </button></h3><p>Kafka サービスの起動が完了したら、Milvus を起動して Kafka に接続できます。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SASL/PLAIN および SSL を使用して Kafka に接続します:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 <span class="hljs-attr">services:</span>
@@ -727,13 +716,10 @@ total 12
     <span class="hljs-string">......</span>
     <span class="hljs-attr">volumes:</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/milvus.yaml:/milvus/configs/milvus.yaml</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/user.yaml:/milvus/configs/user.yaml</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">${DOCKER_VOLUME_DIRECTORY:-.}/my_secrets:/milvus/secrets</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>以下のコマンドを使用して、Milvus設定ファイルテンプレートをダウンロードします：</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml -O milvus.yaml</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>そして、以下のパラメータを設定します：</p>
+<p><code translate="no">docker-compose.yaml</code> ファイルと同じディレクトリに<code translate="no">user.yaml</code> ファイルを作成し、そこに以下のパラメータを設定します。Milvusは<code translate="no">configs/milvus.yaml</code> の後に<code translate="no">configs/user.yaml</code> を読み込むため、<code translate="no">user.yaml</code> 内の値がデフォルト値よりも優先されます:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">mq:</span>
   <span class="hljs-attr">type:</span> <span class="hljs-string">kafka</span>
 

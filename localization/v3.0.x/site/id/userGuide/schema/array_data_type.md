@@ -49,8 +49,9 @@ summary: >-
 <li><strong>Tipe Data:</strong> Semua elemen dalam bidang ARRAY harus memiliki tipe data yang sama, yang ditentukan oleh parameter ` <code translate="no">element_type</code> `. Ketika ` <code translate="no">element_type</code> ` diatur ke ` <code translate="no">VARCHAR</code>`, Anda juga harus menentukan ` <code translate="no">max_length</code>`, yang menentukan jumlah byte maksimum yang diperbolehkan untuk setiap elemen array. <code translate="no">element_type</code> menerima tipe data skalar apa pun yang didukung oleh Milvus, kecuali <code translate="no">JSON</code>. Untuk <code translate="no">element_type=STRUCT</code>, gunakan bidang StructArray dan berikan <code translate="no">struct_schema</code>; untuk detailnya, lihat <a href="/docs/id/create-structarray-field.md">StructArray</a>. Bidang ARRAY tingkat atas tidak dapat menampung vektor atau array bersarang, dan elemen-elemennya tidak boleh bernilai null secara individual; bentuk-bentuk ini hanya tersedia untuk subbidang di dalam bidang StructArray pada Milvus 3.0.6 dan versi selanjutnya.</li>
 </ul>
 <ul>
-<li><p><strong>Kapasitas Array</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, sebagaimana ditentukan oleh <code translate="no">max_capacity</code>. Nilai tersebut harus berupa bilangan bulat dalam rentang <strong>1</strong> hingga <strong>4096</strong>.</p></li>
-<li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian semantik atau konversi. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan sebagaimana dimasukkan, sedangkan <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
+<li><p><strong>Kapasitas Array</strong>: Jumlah elemen dalam bidang ARRAY harus kurang dari atau sama dengan kapasitas maksimum yang ditentukan saat Array dibuat, sebagaimana ditentukan oleh <code translate="no">max_capacity</code>. Nilai tersebut harus lebih besar dari 0 dan tidak boleh melebihi <code translate="no">proxy.maxArrayCapacity</code>, yang secara default bernilai <strong>4096</strong>.</p></li>
+<li><p><strong>Pencocokan Teks</strong>: <code translate="no">TEXT_MATCH</code>, <code translate="no">TEXT_MATCH_FUZZY</code>, dan <code translate="no">PHRASE_MATCH</code> hanya mendukung bidang <code translate="no">VARCHAR</code> dan <code translate="no">TEXT</code>; menerapkannya pada bidang ARRAY akan menghasilkan kesalahan. <code translate="no">enable_analyzer</code> dan <code translate="no">enable_match</code> tidak berpengaruh pada bidang ARRAY. Untuk detail mengenai pencocokan teks, lihat <a href="/docs/id/keyword-match.md">Pencocokan Teks</a>.</p></li>
+<li><p><strong>Penanganan String</strong>: Nilai string dalam bidang Array disimpan apa adanya, tanpa pelarian semantik atau konversi. Misalnya, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, dan <code translate="no">&quot;a\&quot;b&quot;</code> disimpan sesuai yang dimasukkan, sedangkan <code translate="no">'a'b'</code> dan <code translate="no">&quot;a&quot;b&quot;</code> dianggap sebagai nilai yang tidak valid.</p></li>
 </ul>
 <h2 id="Add-ARRAY-field" class="common-anchor-header">Menambahkan bidang ARRAY<button data-href="#Add-ARRAY-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -67,15 +68,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Untuk menggunakan bidang ARRAY di kluster Milvus, tentukan tipe bidang yang relevan saat membuat skema koleksi. Proses ini meliputi:</p>
+    </button></h2><p>Untuk menambahkan bidang ARRAY ke skema koleksi, atur parameter berikut:</p>
 <ol>
-<li><p>Menetapkan ` <code translate="no">datatype</code> ` ke tipe data Array yang didukung, ` <code translate="no">ARRAY</code>`.</p></li>
-<li><p>Gunakan parameter ` <code translate="no">element_type</code> ` untuk menentukan tipe data elemen dalam array. Semua elemen dalam array yang sama harus memiliki tipe data yang sama.</p></li>
-<li><p>Menggunakan parameter ` <code translate="no">max_capacity</code> ` untuk menentukan kapasitas maksimum array, yaitu jumlah elemen maksimum yang dapat ditampungnya.</p></li>
+<li><p>Tetapkan tipe data bidang menjadi " <code translate="no">ARRAY</code>".</p></li>
+<li><p>Tetapkan ` <code translate="no">element_type</code> ` ke tipe data bersama dari elemen-elemen tersebut.</p></li>
+<li><p>Atur ` <code translate="no">max_capacity</code> ` menjadi jumlah elemen maksimum.</p></li>
 </ol>
 <p>Berikut cara mendefinisikan skema koleksi yang mencakup bidang ARRAY:</p>
 <div class="alert note">
-<p>Jika Anda menetapkan ` <code translate="no">enable_dynamic_field=True</code> ` saat mendefinisikan skema, Milvus memungkinkan Anda menyisipkan bidang skalar yang tidak didefinisikan sebelumnya. Namun, hal ini dapat meningkatkan kompleksitas kueri dan pengelolaan, yang berpotensi memengaruhi kinerja. Untuk informasi lebih lanjut, lihat <a href="/docs/id/enable-dynamic-field.md">Bidang Dinamis</a>.</p>
+<p>Untuk menyisipkan bidang yang tidak didefinisikan dalam skema, aktifkan <a href="/docs/id/enable-dynamic-field.md">bidang dinamis</a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>
@@ -375,8 +376,12 @@ CollectionSchema schema = <span class="hljs-keyword">new</span>()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pengindeksan membantu meningkatkan kinerja pencarian dan kueri. Di klaster Milvus, pengindeksan wajib untuk bidang vektor tetapi opsional untuk bidang skalar.</p>
-<p>Contoh berikut membuat indeks pada bidang vektor ` <code translate="no">embedding</code> ` dan bidang ARRAY ` <code translate="no">tags</code>`, keduanya menggunakan tipe indeks ` <code translate="no">AUTOINDEX</code> `. Dengan tipe ini, Milvus secara otomatis memilih indeks yang paling sesuai berdasarkan tipe data. Anda juga dapat menyesuaikan tipe indeks dan parameternya untuk setiap bidang. Untuk detailnya, lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks</a>.</p>
+    </button></h2><p>Bidang vektor memerlukan indeks; indeks skalar bersifat opsional. Contoh ini meminta ` <code translate="no">AUTOINDEX</code> ` pada ` <code translate="no">embedding</code> ` dan ` <code translate="no">tags</code>`. Untuk pilihan indeks ARRAY eksplisit dan dukungan filter, lihat <a href="#Array-index-support">Dukungan indeks ARRAY</a>.</p>
+<div class="alert note">
+<blockquote>
+<p>Indeks skalar, termasuk <code translate="no">AUTOINDEX</code>, tidak mendukung bidang ARRAY rekursif atau array dengan elemen yang dapat bernilai null. Lihat <a href="/docs/id/array_data_type.md#Array-index-support">Dukungan indeks array</a> untuk filter array biasa dan <a href="/docs/id/index-structarray-fields.md#Create-scalar-indexes">Indeks Bidang StructArray</a> untuk aturan subbidang.</p>
+</blockquote>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -486,6 +491,33 @@ IndexParam[] indexes =
         }
     ]&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+<p><details id="Array-index-support">
+<summary><strong>Dukungan indeks array: tipe indeks dan filter yang dipercepat</strong></summary></p>
+<p>Indeks skalar pada bidang ARRAY biasa mengindeks elemen-elemennya. Pilih dari jenis indeks eksplisit berikut:</p>
+<table>
+<thead>
+<tr><th>Jenis elemen</th><th>Jenis indeks eksplisit</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code></td></tr>
+<tr><td><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code></td><td><code translate="no">INVERTED</code></td></tr>
+</tbody>
+</table>
+<p>Anda juga dapat meminta <code translate="no">AUTOINDEX</code>; lihat <a href="/docs/id/scalar_index.md#AUTOINDEX-behavior">Indeks Skalar</a> untuk pilihan ARRAY default.</p>
+<p>Filter berikut dapat menggunakan indeks array yang memenuhi syarat:</p>
+<table>
+<thead>
+<tr><th>Filter</th><th>Perilaku indeks</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_CONTAINS_ALL</code></td><td><code translate="no">INVERTED</code>, <code translate="no">BITMAP</code>, atau pilihan otomatis yang memenuhi syarat dapat mencari elemen tanpa memandang posisinya.</td></tr>
+<tr><td><code translate="no">==</code> seluruh array atau <code translate="no">!=</code> pada array Boolean, integer, atau VARCHAR</td><td><code translate="no">INVERTED</code> dapat menemukan kandidat, kemudian memeriksa array asli untuk urutan dan panjangnya. <code translate="no">BITMAP</code> tidak melayani jalur kandidat ini.</td></tr>
+<tr><td>Perbandingan seluruh array pada array bilangan floating-point</td><td>Kembali ke pemindaian.</td></tr>
+<tr><td>Akses elemen, seperti <code translate="no">tags[0]</code>, atau panjang array</td><td>Pengindeksan keanggotaan elemen tidak menyediakan pencarian indeks untuk operasi-operasi ini.</td></tr>
+</tbody>
+</table>
+<p>Untuk sintaks ekspresi, lihat <a href="/docs/id/array-operators.md">Operator ARRAY</a>.</p>
+<p></details></p>
 <h2 id="Create-collection" class="common-anchor-header">Buat koleksi<button data-href="#Create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -501,7 +533,7 @@ IndexParam[] indexes =
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setelah skema dan indeks ditentukan, buat koleksi yang mencakup bidang ARRAY.</p>
+    </button></h2><p>Setelah skema dan indeks didefinisikan, buat koleksi yang mencakup bidang ARRAY.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -842,7 +874,7 @@ status = client-&gt;<span class="hljs-built_in">Insert</span>(milvus::<span clas
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Selain menyisipkan array lengkap, bidang <code translate="no">ARRAY</code> juga mendukung operator pembaruan parsial <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code> pada API <code translate="no">upsert</code> di Milvus v2.6.17 dan versi selanjutnya. Operator ini memungkinkan Anda menambahkan elemen ke atau menghapus elemen yang cocok dari array yang sudah ada tanpa harus mengambil nilainya terlebih dahulu, sehingga menghindari pola baca-modifikasi-tulis di sisi klien. Untuk detailnya, lihat <a href="/docs/id/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert bidang ARRAY dalam mode penggabungan</a>.</p>
+<p>Selain menyisipkan array lengkap, bidang <code translate="no">ARRAY</code> juga mendukung operator pembaruan parsial <code translate="no">ARRAY_APPEND</code> dan <code translate="no">ARRAY_REMOVE</code> pada API <code translate="no">upsert</code> di Milvus v2.6.17 dan versi selanjutnya. Operator ini memungkinkan Anda menambahkan elemen ke atau menghapus elemen yang cocok dari array yang sudah ada tanpa harus mengambil nilai saat ini terlebih dahulu, sehingga menghindari pola baca-modifikasi-tulis di sisi klien. Untuk detailnya, lihat <a href="/docs/id/upsert-entities.md#Upsert-ARRAY-fields-in-merge-mode">Upsert bidang ARRAY dalam mode penggabungan</a>.</p>
 </div>
 <h2 id="Query-with-filter-expressions" class="common-anchor-header">Kueri dengan ekspresi filter<button data-href="#Query-with-filter-expressions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1107,7 +1139,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Selain penyaringan bidang skalar dasar, Anda dapat menggabungkan pencarian kesamaan vektor dengan filter bidang skalar. Misalnya, kode berikut menunjukkan cara menambahkan filter bidang skalar ke pencarian vektor:</p>
+    </button></h2><p>Gunakan filter ARRAY dalam pencarian vektor untuk membatasi entitas yang memenuhi syarat:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -1270,4 +1302,4 @@ SearchResp searchResp = <span class="hljs-keyword">await</span> client.SearchAsy
     &quot;outputFields&quot;: [&quot;tags&quot;, &quot;ratings&quot;, &quot;embedding&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Selain itu, Milvus mendukung operator penyaringan Array tingkat lanjut seperti <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, dan <code translate="no">ARRAY_LENGTH</code> untuk lebih meningkatkan kemampuan kueri. Untuk detail lebih lanjut, lihat <a href="/docs/id/array-operators.md">Operator ARRAY</a>.</p>
+<p>Untuk filter containment dan length, lihat <a href="/docs/id/array-operators.md">Operator ARRAY</a>.</p>

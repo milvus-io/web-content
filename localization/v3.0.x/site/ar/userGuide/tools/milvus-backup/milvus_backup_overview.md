@@ -43,13 +43,13 @@ title: Milvus Backup
 <tr><th>مهمتك</th><th>الدليل</th></tr>
 </thead>
 <tbody>
-<tr><td>استمر في استخدام النسخة الاحتياطية 0.5.x</td><td><a href="/docs/ar/milvus_backup_cli.md">أوامر الإصدار 0.5.x</a> <a href="/docs/ar/milvus_backup_api.md">وواجهة برمجة التطبيقات HTTP</a>، مع أمثلة مرتبطة بالإصدار 0.5.16</td></tr>
+<tr><td>استمر في استخدام النسخة الاحتياطية 0.5.x</td><td><a href="/docs/ar/milvus_backup_cli.md">أوامر 0.5.x</a> <a href="/docs/ar/milvus_backup_api.md">وواجهة برمجة تطبيقات HTTP</a>، مع أمثلة مرفقة بالإصدار 0.5.16</td></tr>
 <tr><td>ترقية تثبيت Backup موجود</td><td><a href="/docs/ar/milvus_backup_upgrade.md">الترقية من الإصدار 0.5.x إلى الإصدار 0.6.x</a></td></tr>
-<tr><td>تثبيت واستخدام Backup 0.6.x</td><td><a href="/docs/ar/milvus_backup_0_6_cli.md">الأوامر والتكوين،</a> أو <a href="/docs/ar/milvus_backup_0_6_api.md">واجهة برمجة التطبيقات HTTP</a></td></tr>
+<tr><td>تثبيت واستخدام Backup 0.6.x</td><td><a href="/docs/ar/milvus_backup_0_6_cli.md">الأوامر والتكوين،</a> أو <a href="/docs/ar/milvus_backup_0_6_api.md">واجهة برمجة تطبيقات HTTP</a></td></tr>
 <tr><td>النسخ الاحتياطي واستعادة لقطة على Milvus 3.0.1 أو أحدث</td><td><a href="/docs/ar/snapshot-backup-and-restore.md">النسخ الاحتياطي للقطعة اللحظية واستعادتها في مثيل واحد</a></td></tr>
 </tbody>
 </table>
-<p>تحتفظ الأدلة الحالية <a href="/docs/ar/single-instance-backup-and-restore.md">الخاصة بنفس المثيل،</a> <a href="/docs/ar/shared-bucket-backup-and-restore.md">والحاوية المشتركة</a>، <a href="/docs/ar/cross-bucket-backup-and-restore.md">وعبر الحاويات</a>، <a href="/docs/ar/multi-storage-backup-and-restore.md">وعبر التخزين</a> بتكوين وأوامر الإصدار 0.5.16. ولا تتغير الأمثلة الواردة فيها عند نشر إصدار جديد من Backup.</p>
+<p>تحتفظ الأدلة الحالية <a href="/docs/ar/single-instance-backup-and-restore.md">الخاصة بنفس المثيل،</a> <a href="/docs/ar/shared-bucket-backup-and-restore.md">والحاوية المشتركة</a>، <a href="/docs/ar/cross-bucket-backup-and-restore.md">وعبر الحاويات،</a> <a href="/docs/ar/multi-storage-backup-and-restore.md">وعبر التخزين</a> بتكوين وأوامر الإصدار 0.5.16. ولا تتغير الأمثلة الواردة فيها مع إصدار نسخة جديدة من Backup.</p>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -104,7 +104,7 @@ title: Milvus Backup
 </table>
 <p>يحتوي دليل النسخ الاحتياطي على البيانات الوصفية والملفات المطلوبة حسب تنسيقه. احتفظ بالدليل بالكامل عند أرشفته أو نقله. لا تفترض أن النسخ الاحتياطي للقطعة يستخدم تخطيط دليل binlog.</p>
 <p>في الإصدار 0.6.0، تقوم الإعدادات المسبقة لـ « <code translate="no">create --for</code> » بتكوين خيارات مخصصة للأغراض: « <code translate="no">clone</code> » تحتفظ بالتنسيق المختار، بينما تتطلب « <code translate="no">archive</code> » و« <code translate="no">secondary</code> » وجود binlog. يتطلب الخادم الثانوي أيضًا تكوين طوبولوجيا النسخ المتماثل؛ ولا تتطلب الترحيل العادي بين المثيلات وجود خادم ثانوي. انظر <a href="/docs/ar/milvus_backup_0_6_cli.md#Choose-a-backup-format-or-purpose">«اختيار تنسيق النسخ الاحتياطي أو الغرض</a>».</p>
-<p>يتخطى الإصدار 0.6.0 من النسخ الاحتياطي المجموعات الخارجية أثناء عملية النسخ الاحتياطي. ولا تعني نجاح المهمة بالضرورة أن بيانات المجموعات الخارجية قد تم تضمينها.</p>
+<p>يتخطى الإصدار 0.6.0 من النسخ الاحتياطي المجموعات الخارجية أثناء عملية النسخ الاحتياطي. ولا تعني نجاح المهمة أن بيانات المجموعات الخارجية قد تم تضمينها.</p>
 <h2 id="Compatibility-matrix" class="common-anchor-header">مصفوفة التوافق<button data-href="#Compatibility-matrix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,7 +120,7 @@ title: Milvus Backup
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>لا يتطلب Backup 0.6.0 ترقية كل تثبيت لـ Milvus إلى</strong> <strong>الإصدار</strong><strong>3.0.</strong> فهو يدعم سير عمل سجلات الثنائيات (binlog) على إصدارات Milvus 2.x المدعومة. يبدأ الدعم الرسمي للنسخ الاحتياطي والاستعادة لسلسلة Milvus 3.0 مع <strong>الإصدار Milvus 3.0.1؛</strong> ويستخدم مثال اللقطة تلك السلسلة.</p>
+    </button></h2><p><strong>لا يتطلب Backup 0.6.0 ترقية كل تثبيت لـ Milvus إلى</strong> <strong>الإصدار</strong><strong>3.0.</strong> فهو يدعم سير عمل سجلات الثنائيات (binlog) على إصدارات Milvus 2.x المدعومة. يبدأ الدعم الرسمي للنسخ الاحتياطي والاستعادة لسلسلة Milvus 3.0 مع <strong>الإصدار Milvus 3.0.1؛</strong> ويستخدم مثال اللقطة (snapshot) تلك السلسلة.</p>
 <p>تم التحقق من صحة <a href="/docs/ar/milvus_backup_upgrade.md">دليل الترقية</a> باستخدام Backup 0.5.16 و0.6.0 على Milvus 2.6.11، بما في ذلك استعادة نسخة احتياطية من الإصدار 0.5.16 باستخدام الإصدار 0.6.0. لا توسع هذه المجموعة التي تم اختبارها نطاق المصفوفة أدناه.</p>
 <p>يجب أن تشكل إصدارات Milvus المصدر والهدف زوجًا مدعومًا. لا يكفي وجود إصدار هدف أحدث وحده لإثبات التوافق. تغطي المصفوفة القديمة التالية إصدارات Milvus 2.x، كما هو موثق منذ إصدار Milvus Backup 0.5.7؛ وهي لا تثبت توافق الترحيل من الإصدارات 2.x إلى 3.0.</p>
 <table>

@@ -1,9 +1,7 @@
 ---
 id: rtree.md
 title: RTREECompatible with Milvus 2.6.4+
-summary: >-
-  RTREEインデックスは、GEOMETRYフィールドに対するクエリを高速化する、ツリーベースのデータ構造です。コレクションに点、線、ポリゴンなどの幾何オブジェクトがWell-known
-  text（WKT）形式で格納されており、空間フィルタリングを高速化したい場合、RTREEは理想的な選択肢となります。
+summary: RTREE を使用して、GEOMETRY フィールドに対する空間フィルタリングを高速化します。
 beta: Milvus 2.6.4+
 ---
 <h1 id="RTREE" class="common-anchor-header">RTREE<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.4+</span><button data-href="#RTREE" class="anchor-icon" translate="no">
@@ -21,8 +19,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><code translate="no">RTREE</code> インデックスは、Milvusにおける<code translate="no">GEOMETRY</code> フィールドへのクエリを高速化する、ツリーベースのデータ構造です。コレクションに点、線、ポリゴンなどの幾何オブジェクト<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">がWell-known text（WKT）</a>形式で格納されており、空間フィルタリングを高速化したい場合、<code translate="no">RTREE</code> は理想的な選択肢となります。</p>
-<h2 id="How-it-works" class="common-anchor-header">仕組み<button data-href="#How-it-works" class="anchor-icon" translate="no">
+    </button></h1><p><code translate="no">RTREE</code> は、<a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known text (WKT)</a>形式の点、線、またはポリゴンを含む<code translate="no">GEOMETRY</code> フィールドに対する空間フィルタリングを高速化します。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,8 +35,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは、<code translate="no">RTREE</code> インデックスを使用して、2段階のプロセスに従ってジオメトリデータを効率的に整理およびフィルタリングします。</p>
-<h3 id="Phase-1-Build-the-index" class="common-anchor-header">フェーズ 1: インデックスの構築<button data-href="#Phase-1-Build-the-index" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Supported-data-types" class="common-anchor-header">サポートされているデータ型<button data-href="#Supported-data-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,8 +50,58 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><ol>
-<li><p><strong>リーフノードの作成：</strong>各ジオメトリオブジェクトについて、そのオブジェクトを完全に包含する最小の長方形（<a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">Minimum Bounding Rectangle</a>：MBR）を計算し、それをリーフノードとして格納します。</p></li>
+    </button></h3><p><code translate="no">GEOMETRY</code> フィールド。フィールドの定義については、「<a href="/docs/ja/geometry-field.md">Geometry フィールド</a>」を参照してください。</p>
+<p><a id="Supported-filters"></a></p>
+<h3 id="Filter-acceleration" class="common-anchor-header">フィルタ処理の高速化<button data-href="#Filter-acceleration" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">RTREE</code> は、バウンディングボックスを使用して候補を検索し、その後 Milvus が正確な空間関係を検証します。<a href="/docs/ja/geometry-operators.md">以下のジオメトリ演算子を</a>サポートしています：</p>
+<ul>
+<li><code translate="no">ST_EQUALS</code>、<code translate="no">ST_INTERSECTS</code> 、<code translate="no">ST_CONTAINS</code> 、および<code translate="no">ST_WITHIN</code> 。</li>
+<li><code translate="no">ST_TOUCHES</code>、<code translate="no">ST_OVERLAPS</code> 、<code translate="no">ST_CROSSES</code> 、および<code translate="no">ST_DWITHIN</code> 。</li>
+</ul>
+<p><code translate="no">ST_ISVALID</code> <code translate="no">RTREE</code> は使用されません。適格なインデックスがない場合、空間フィルタはフィールドをスキャンします。</p>
+<div class="alert note">
+<blockquote>
+<p>これらはインデックスの機能であり、有効なフィルタ式の制限ではありません。共有ルックアップ制約については、「<a href="/docs/ja/scalar_index.md#Filter-execution">スカラーインデックス」を</a>参照してください。<code translate="no">AND</code> 、<code translate="no">OR</code> 、<code translate="no">NOT</code> 、およびNULLのテスト（<code translate="no">IS NULL</code> 、<code translate="no">IS NOT NULL</code> ）については、<a href="/docs/ja/basic-operators.md">「基本演算子」</a>を参照してください。</p>
+</blockquote>
+</div>
+<p><a id="How-it-works"></a></p>
+<h3 id="How-RTREE-works" class="common-anchor-header">RTREEの仕組み<button data-href="#How-RTREE-works" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a id="Phase-1-Build-the-index"></a>
+<a id="Phase-2-Accelerate-queries"></a></p>
+<p><details>
+<summary><strong>構築およびクエリ処理のプロセスを確認する</strong></summary></p>
+<p>Milvusは、<code translate="no">RTREE</code> インデックスを使用して、2段階のプロセスに従ってジオメトリデータを効率的に整理およびフィルタリングします。</p>
+<p><strong>フェーズ1：インデックスの構築</strong></p>
+<ol>
+<li><p><strong>リーフノードの作成：</strong>各ジオメトリオブジェクトについて、そのオブジェクトを完全に包含する最小の長方形である<a href="https://en.wikipedia.org/wiki/Minimum_bounding_rectangle">最小境界矩形</a>（MBR）を計算し、それをリーフノードとして格納します。</p></li>
 <li><p><strong>より大きなボックスへのグループ化：</strong>近接するリーフノードをクラスタ化し、各グループを新しいMBRで囲むことで、内部ノードを形成します。例えば、<strong>グループBには</strong> <strong>Dと</strong> <strong>E</strong>が含まれ、<strong>グループCには</strong> <strong>FとG</strong>が含まれます。</p></li>
 <li><p><strong>ルートノードの追加：</strong>すべての内部グループを覆うMBRを持つルートノードを追加し、高さが均等なツリー構造を形成します。</p></li>
 </ol>
@@ -64,27 +111,14 @@ beta: Milvus 2.6.4+
    <span>Retreeの仕組み</span>
   
  </span></p>
-<h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">フェーズ2：クエリの高速化<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><ol>
+<p><strong>フェーズ2：クエリの高速化</strong></p>
+<ol>
 <li><p><strong>クエリ MBR の形成：</strong>クエリのジオメトリに対する MBR を計算します。</p></li>
 <li><p><strong>ブランチの剪定：</strong>ルートから開始し、クエリの MBR と各内部ノードを比較します。MBR がクエリの MBR と交差しないブランチはすべてスキップします。</p></li>
 <li><p><strong>候補の収集：</strong>交差する分岐を順にたどって、候補となる葉ノードを収集します。</p></li>
 <li><p><strong>完全一致：</strong>各候補について、完全な空間述語を実行し、真の一致を判定します。</p></li>
 </ol>
+<p></details></p>
 <h2 id="Create-an-RTREE-index" class="common-anchor-header">RTREEインデックスの作成<button data-href="#Create-an-RTREE-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -292,8 +326,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">filter</code> 式内でジオメトリ演算子を使用してフィルタリングを行います。対象の<code translate="no">GEOMETRY</code> フィールドに<code translate="no">RTREE</code> が存在する場合、Milvusはそれを使用して候補を自動的に絞り込みます。インデックスがない場合、フィルタリングはフルスキャンに切り替わります。</p>
-<p>利用可能なジオメトリ固有の演算子の完全な一覧については、「<a href="/docs/ja/geometry-operators.md">ジオメトリ演算子</a>」を参照してください。</p>
+    </button></h2><p>以下の例では、<code translate="no">geo</code> という名前のインデックス付き<code translate="no">GEOMETRY</code> フィールドを使用しています。</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">例 1: フィルタリングのみ<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -309,7 +342,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>指定されたポリゴン内のすべてのジオメトリオブジェクトを検索します：</p>
+    </button></h3><p>指定されたポリゴン内のすべての幾何オブジェクトを検索します:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -447,7 +480,7 @@ EOF
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>直線と交差する最も近いベクトルを検索します：</p>
+    </button></h3><p>直線と交差する最も近いベクトルを検索する:</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>
@@ -614,10 +647,9 @@ EOF
       </svg>
     </button></h2><p><code translate="no">drop_index()</code> メソッドを使用して、コレクションから既存のインデックスを削除します。</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong>以前では、スカラーインデックスを削除する前にコレクションを解放する必要があります。</p></li>
-<li><p><strong>v2.6.4以降</strong>では、スカラーインデックスが不要になった時点で、コレクションを解放することなく直接削除できます。</p></li>
-</ul>
+<blockquote>
+<p>スカラーインデックスの削除に関するリリース要件については、「<a href="/docs/ja/scalar_index.md#Drop-index-compatibility">スカラーインデックス</a>」を参照してください。</p>
+</blockquote>
 </div>
 <div class="multipleCode">
    <a href="#python">Python</a>

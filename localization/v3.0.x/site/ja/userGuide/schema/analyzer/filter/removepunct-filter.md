@@ -24,6 +24,7 @@ beta: Milvus 2.5.11+
     </button></h1><p><code translate="no">removepunct</code> フィルターは、トークンストリームから句読点や空白を含むトークンを除去します。句読点ではなく、意味のある内容語に焦点を当てた、よりクリーンなテキスト処理を行いたい場合に使用します。</p>
 <div class="alert note">
 <p>このフィルターは、句読点を個別のトークンとして保持する `<code translate="no">jieba</code>`、`<code translate="no">lindera</code>`、および `<code translate="no">icu</code> ` トークナイザーと併用すると最も効果的です（例：<code translate="no">&quot;Hello!&quot;</code> →<code translate="no">[&quot;Hello&quot;, &quot;!&quot;]</code> ）。<code translate="no">standard</code> トークナイザーは、トークナイゼーション中に句読点を削除します。<code translate="no">whitespace</code> トークナイザーは、トークン内の句読点を含め、句読点を保持します。<code translate="no">whitespace</code> と組み合わせた場合、<code translate="no">removepunct</code> は、トークンに句読点や空白が含まれていると、そのトークン全体を削除します。トークンから個々の文字を削除することはありません。</p>
+<p>一部のトークナイザーは、単一のトークン内に句読点を保持します。たとえば、<code translate="no">icu</code> は、<code translate="no">don't</code> 、<code translate="no">3.5kg</code> 、および<code translate="no">u.s.a</code> を、句読点を含む単一のトークンとしてトークナイズしますが、<code translate="no">removepunct</code> はそれらを完全に削除するため、対応する用語は検索対象外となります。 句読点と空白のみで構成されるトークンのみを削除し、それ以外のトークンは保持するには、<code translate="no">{&quot;type&quot;: &quot;regex&quot;, &quot;expr&quot;: &quot;[^\\s\\p{P}]&quot;}</code> のように、句読点や空白以外の文字が少なくとも1つ含まれる正規表現を指定して、<a href="/docs/ja/regex-filter.md">正規表現</a>フィルターを使用します。</p>
 </div>
 <h2 id="Configuration" class="common-anchor-header">設定<button data-href="#Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,7 +98,7 @@ analyzerParams=<span class="hljs-string">&#x27;{
   ]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">removepunct</code> フィルターは、トークナイザーによって生成された用語に対して処理を行うため、トークナイザーと組み合わせて使用する必要があります。</p>
+<p><code translate="no">removepunct</code> フィルターは、トークナイザーによって生成された用語に対して動作するため、トークナイザーと組み合わせて使用する必要があります。</p>
 <p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義する際に、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusはそのフィールド内のテキストを指定されたアナライザーを使用して処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">「使用例」</a>を参照してください。</p>
 <h2 id="Examples" class="common-anchor-header">例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"

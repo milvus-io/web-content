@@ -4,8 +4,8 @@ title: Konsistenzstufe
 summary: >-
   Als verteilte Vektordatenbank bietet Milvus mehrere Konsistenzstufen, um
   sicherzustellen, dass jeder Knoten oder jede Replik bei Lese- und
-  Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden die
-  Konsistenzstufen „Strong“, „Bounded“, „Eventually“ und „Session“ unterstützt,
+  Schreibvorgängen auf dieselben Daten zugreifen kann. Derzeit werden folgende
+  Konsistenzstufen unterstützt: „Strong“, „Bounded“, „Eventually“ und „Session“,
   wobei „Bounded“ die standardmäßig verwendete Konsistenzstufe ist.
 ---
 <h1 id="Consistency-Level" class="common-anchor-header">Konsistenzstufe<button data-href="#Consistency-Level" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus ist ein System, das Speicherung und Berechnung voneinander trennt. <strong>Streaming-Knoten</strong> fügen alle Schreibvorgänge dem Write-Ahead-Log (WAL) hinzu und speichern die <strong>wachsenden Daten</strong> – also Daten, die sich noch im WAL befinden und noch nicht dauerhaft gespeichert wurden. Ein Wiederherstellungsprozess wandelt die wachsenden Daten in <strong>historische Daten</strong> um (versiegelte Segmente, die in Objektspeichern wie MinIO/S3 dauerhaft gespeichert werden), die von <strong>Abfrageknoten</strong> bereitgestellt werden. Jede Such- oder Abfrageanforderung wird von einem <strong>Abfrage-Delegator</strong> auf dem Streaming-Knoten empfangen, der das WAL der Sammlung hostet: Der Delegator generiert den Abfrageplan, führt den Teil mit den wachsenden Daten lokal aus, leitet den Teil mit den historischen Daten an die entsprechenden Abfrageknoten weiter und führt die Ergebnisse zusammen, bevor er sie zurückgibt. Weitere Informationen finden Sie unter <a href="/docs/de/v2.6.x/streaming_service.md">„Streaming-Dienst</a>“.</p>
-<p>Um Konsistenz zu gewährleisten, weist Milvus jeder Nachricht einen Timestamp-Oracle-Zeitstempel (TSO) zu, der ihre Reihenfolge im WAL bestimmt, und fügt neben den Datennachrichten kontinuierlich Synchronisationszeitstempel in das WAL ein. Sobald ein Synchronisationszeitstempel (syncTs) empfangen wird, wird dieser als „ServiceTime“ erfasst, was bedeutet, dass alle Daten vor dieser „ServiceTime“ für Abfragen sichtbar sind. Basierend auf der „ServiceTime“ stellt Milvus Garantiezeitstempel (GuaranteeTs) bereit, um unterschiedliche Anforderungen der Benutzer an Konsistenz und Verfügbarkeit zu erfüllen. Benutzer können dem Delegator mitteilen, dass Daten vor einem bestimmten Zeitpunkt in den Suchbereich einbezogen werden sollen, indem sie in ihren Suchanfragen GuaranteeTs angeben.</p>
+<p>Um Konsistenz zu gewährleisten, weist Milvus jeder Nachricht einen Timestamp-Oracle-Zeitstempel (TSO) zu, der ihre Reihenfolge im WAL bestimmt, und fügt neben den Datennachrichten kontinuierlich Synchronisationszeitstempel in das WAL ein. Sobald ein Synchronisationszeitstempel (syncTs) empfangen wird, wird dieser als „ServiceTime“ erfasst, was bedeutet, dass alle Daten vor dieser „ServiceTime“ für Abfragen sichtbar sind. Basierend auf der „ServiceTime“ stellt Milvus Garantiezeitstempel (GuaranteeTs) bereit, um unterschiedliche Anforderungen der Benutzer hinsichtlich Konsistenz und Verfügbarkeit zu erfüllen. Benutzer können dem Delegator mitteilen, dass Daten vor einem bestimmten Zeitpunkt in den Suchbereich einbezogen werden sollen, indem sie in ihren Suchanfragen GuaranteeTs angeben.</p>
 <p><span class="img-wrapper">
   
    <img translate="no" src="/docs/v2.6.x/assets/service-time-and-guarantee-time.png" alt="Service Time And Guarantee Time" class="doc-image" id="service-time-and-guarantee-time" /> 
@@ -82,7 +82,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können beim Erstellen einer Sammlung sowie bei der Durchführung von Suchvorgängen und Abfragen verschiedene Konsistenzstufen festlegen.</p>
+    </button></h2><p>Sie können die Konsistenzstufe beim Erstellen einer Sammlung festlegen, sie nach der Erstellung der Sammlung ändern oder sie für einzelne Suchvorgänge und Abfragen überschreiben.</p>
 <h3 id="Set-Consistency-Level-upon-Creating-Collection" class="common-anchor-header">Konsistenzstufe beim Erstellen einer Sammlung festlegen<button data-href="#Set-Consistency-Level-upon-Creating-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -169,7 +169,7 @@ curl --request POST \
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Mögliche Werte für den Parameter „ <code translate="no">consistency_level</code> “ sind „ <code translate="no">Strong</code> “, „ <code translate="no">Bounded</code> “, „ <code translate="no">Eventually</code> “ und „ <code translate="no">Session</code> “.</p>
-<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Festlegen der Konsistenzstufe bei der Suche<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+<h3 id="Alter-the-Collection-Consistency-Level" class="common-anchor-header">Ändern der Konsistenzstufe einer Sammlung<button data-href="#Alter-the-Collection-Consistency-Level" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,7 +184,65 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Sie können die Konsistenzstufe für eine bestimmte Suche jederzeit ändern. Das folgende Codebeispiel setzt die Konsistenzstufe wieder auf <strong>„Bounded“</strong> zurück. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
+    </button></h3><p>Sie können die Konsistenzstufe einer bestehenden Sammlung ändern, indem Sie deren Eigenschaft „ <code translate="no">consistency_level</code> “ anpassen. Die neue Stufe gilt für nachfolgende Suchvorgänge und Abfragen in der Sammlung, für die keine eigene Konsistenzstufe angegeben wird. Für diese Änderung ist es nicht erforderlich, die Sammlung freizugeben. Das folgende Codebeispiel ändert die Konsistenzstufe auf <strong>„Eventually</strong>“.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a>
+ <a href="#java">   Java</a>
+ <a href="#go">   Go</a>
+ <a href="#bash">   cURL</a>
+</div>
+<pre><code translate="no" class="language-python">client.alter_collection_properties(
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;consistency_level&quot;</span>: <span class="hljs-string">&quot;Eventually&quot;</span>}</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;
+<span class="hljs-keyword">import</span> java.util.HashMap;
+<span class="hljs-keyword">import</span> java.util.Map;
+
+Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+<span class="highlighted-wrapper-line">properties.put(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>);</span>
+
+<span class="hljs-type">AlterCollectionReq</span> <span class="hljs-variable">alterCollectionReq</span> <span class="hljs-operator">=</span> AlterCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .properties(properties)
+        .build();
+client.alterCollection(alterCollectionReq);
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go">err = client.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption(<span class="hljs-string">&quot;my_collection&quot;</span>).WithProperty(<span class="hljs-string">&quot;consistency_level&quot;</span>, <span class="hljs-string">&quot;Eventually&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash">curl --request POST \
+--url <span class="hljs-string">&quot;<span class="hljs-variable">${CLUSTER_ENDPOINT}</span>/v2/vectordb/collections/alter_properties&quot;</span> \
+--header <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+--header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+--header <span class="hljs-string">&quot;Request-Timeout: 10&quot;</span> \
+-d <span class="hljs-string">&#x27;{
+    &quot;collectionName&quot;: &quot;my_collection&quot;,
+    &quot;properties&quot;: {
+        &quot;consistency_level&quot;: &quot;Eventually&quot;
+    }
+}&#x27;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Set-Consistency-Level-in-Search" class="common-anchor-header">Konsistenzstufe bei der Suche festlegen<button data-href="#Set-Consistency-Level-in-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können die Konsistenzstufe für eine bestimmte Suche jederzeit ändern. Das folgende Code-Beispiel setzt die Konsistenzstufe wieder auf <strong>„Bounded“</strong> zurück. Die Änderung gilt nur für die aktuelle Suchanfrage.</p>
 <div class="multipleCode">
    <a href="#python">Python</a>
  <a href="#java">   Java</a>

@@ -241,7 +241,7 @@
             "children": []
           },
           {
-            "label": "諾瓦爾",
+            "label": "諾瓦",
             "id": "knowhere.md",
             "order": 6,
             "children": []
@@ -249,13 +249,13 @@
         ]
       },
       {
-        "label": "位集",
+        "label": "Bitset",
         "id": "bitset.md",
         "order": 1,
         "children": []
       },
       {
-        "label": "多租戶",
+        "label": "多租戶架構",
         "id": "multi_tenancy.md",
         "order": 3,
         "children": []
@@ -340,7 +340,7 @@
             "children": []
           },
           {
-            "label": "裝載與釋放",
+            "label": "裝填與釋放",
             "id": "load-and-release.md",
             "order": 5,
             "children": []
@@ -370,7 +370,7 @@
             "children": []
           },
           {
-            "label": "取件服務",
+            "label": "Drop 系列",
             "id": "drop-collection.md",
             "order": 10,
             "children": []
@@ -485,7 +485,7 @@
                 "children": []
               },
               {
-                "label": "索引、結構體、陣列與欄位",
+                "label": "索引 StructArray 欄位",
                 "id": "index-structarray-fields.md",
                 "order": 3,
                 "children": []
@@ -655,7 +655,7 @@
                     "children": []
                   },
                   {
-                    "label": "僅限字母數字",
+                    "label": "僅限英數字",
                     "id": "alphanumonly-filter.md",
                     "order": 4,
                     "children": []
@@ -755,7 +755,7 @@
             "children": []
           },
           {
-            "label": "變更外部集合模式",
+            "label": "變更外部集合結構",
             "id": "alter-external-collection-schema.md",
             "order": 18,
             "children": []
@@ -991,12 +991,6 @@
                 "label": "NGRAM",
                 "id": "ngram.md",
                 "order": 5,
-                "children": []
-              },
-              {
-                "label": "FMINDEX",
-                "id": "fmindex.md",
-                "order": 6,
                 "children": []
               },
               {
@@ -1499,12 +1493,6 @@
             "children": []
           },
           {
-            "label": "叢集式壓縮",
-            "id": "clustering-compaction.md",
-            "order": 1,
-            "children": []
-          },
-          {
             "label": "強制合併壓縮",
             "id": "force-merge.md",
             "order": 2,
@@ -1623,27 +1611,45 @@
             "children": []
           },
           {
+            "label": "Node.js SDK",
+            "id": "nodejs_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "go_sdk.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "RESTful API v2",
+            "id": "restful_api.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "資料庫結構設計",
             "id": "schema_design.md",
-            "order": 2,
+            "order": 5,
             "children": []
           },
           {
             "label": "搜尋模式",
             "id": "search_patterns.md",
-            "order": 3,
+            "order": 6,
             "children": []
           },
           {
             "label": "指數選擇",
             "id": "index_selection.md",
-            "order": 4,
+            "order": 7,
             "children": []
           },
           {
             "label": "RAG 處理流程",
             "id": "rag_pipeline.md",
-            "order": 5,
+            "order": 8,
             "children": []
           }
         ]
@@ -2170,7 +2176,7 @@
             ]
           },
           {
-            "label": "傳輸過程中的加密",
+            "label": "傳輸中的加密",
             "id": "tls.md",
             "order": 2,
             "children": []
@@ -3064,7 +3070,7 @@
             "children": []
           },
           {
-            "label": "個人識別資訊（PII）遮罩",
+            "label": "個人識別資訊遮罩",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
             "children": []
@@ -3189,7 +3195,7 @@
         "children": []
       },
       {
-        "label": "使用 Milvus 進行全文檢索",
+        "label": "使用 Milvus 進行全文搜尋",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -3238,7 +3244,7 @@
         "children": []
       },
       {
-        "label": "向量可視化",
+        "label": "向量視覺化",
         "id": "vector_visualization.md",
         "order": 11,
         "children": []

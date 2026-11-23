@@ -110,10 +110,10 @@ summary: >-
 <ul>
 <li><p><strong>Taux de compression de 8 :</strong> réduit la taille de 8 fois par rapport à <code translate="no">FP32</code> et de 2 fois par rapport à <code translate="no">SQ8</code>, ce qui allège considérablement la pression sur la bande passante mémoire — souvent le goulot d’étranglement dans la recherche vectorielle.</p></li>
 <li><p><strong>Optimisation SIMD :</strong> la structure compacte permet aux processeurs modernes (AVX2/AVX-512) de traiter davantage de dimensions par cycle. Surtout, l’utilisation de paramètres globaux élimine la nécessité de charger des valeurs d’échelle et de décalage variables lors du calcul de la distance, ce qui permet de maintenir le pipeline d’instructions pleinement saturé.</p></li>
-<li><p><strong>Efficacité du cache :</strong> des vecteurs de plus petite taille permettent de stocker davantage de données dans le cache du processeur, ce qui réduit la latence liée aux accès mémoire.</p></li>
+<li><p><strong>Efficacité du cache :</strong> des vecteurs de plus petite taille permettent de stocker davantage de données dans le cache du processeur, ce qui réduit la latence liée à l’accès à la mémoire.</p></li>
 </ul>
 <div class="alert note">
-<p>Grâce au partage de ses paramètres globaux, SQ4U offre des performances optimales sur des données normalisées ou des ensembles de données présentant des distributions de valeurs homogènes entre les dimensions.</p>
+<p>Grâce au partage de ses paramètres globaux, SQ4U offre des performances optimales sur des données normalisées ou des ensembles de données présentant des distributions de valeurs homogènes sur toutes les dimensions.</p>
 </div>
 <h3 id="HNSW-+-SQ" class="common-anchor-header">HNSW + SQ<button data-href="#HNSW-+-SQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,9 +137,9 @@ summary: >-
 <li><p><strong>Récupération des candidats :</strong> lorsqu’un vecteur de requête est fourni, l’algorithme utilise les données compressées pour identifier rapidement un ensemble de voisins candidats à partir du graphe HNSW.</p></li>
 <li><p><strong>(Facultatif) Affinement des résultats :</strong> les résultats initiaux peuvent être affinés pour une meilleure précision, en fonction des paramètres suivants :</p>
 <ul>
-<li><p><code translate="no">refine</code>: Détermine si cette étape d’affinage est activée. Lorsqu’elle est définie sur « <code translate="no">true</code> », le système recalcule les distances à l’aide de représentations de plus haute précision ou non compressées.</p></li>
-<li><p><code translate="no">refine_type</code>: Spécifie le niveau de précision des données utilisées lors du raffinement (par exemple, SQ6, SQ8, BF16). Un choix de précision plus élevée, tel que « <code translate="no">FP32</code> », peut donner des résultats plus précis mais nécessite davantage de mémoire. Ce niveau doit dépasser la précision de l’ensemble de données compressé d’origine définie par « <code translate="no">sq_type</code> ».</p></li>
-<li><p><code translate="no">refine_k</code>: Agit comme un facteur d’agrandissement. Par exemple, si votre « top <em>k »</em> est égal à 100 et que « <code translate="no">refine_k</code> » est égal à 2, le système reclassifie les 200 meilleurs candidats et renvoie les 100 meilleurs, améliorant ainsi la précision globale.</p></li>
+<li><p><code translate="no">refine</code>: Détermine si cette étape d’affinage est activée. Lorsqu’elle est définie sur « <code translate="no">true</code> », le système recalcule les distances à l’aide de représentations à plus haute précision ou non compressées.</p></li>
+<li><p><code translate="no">refine_type</code>: Spécifie le niveau de précision des données utilisées lors du raffinement (par exemple, SQ6, SQ8, BF16). Un choix de précision plus élevée, tel que « <code translate="no">FP32</code> », peut donner des résultats plus précis mais nécessite davantage de mémoire. Ce niveau doit dépasser la précision de l’ensemble de données compressé d’origine de <code translate="no">sq_type</code>.</p></li>
+<li><p><code translate="no">refine_k</code>: Agit comme un facteur d’agrandissement. Par exemple, si votre « top <em>k »</em> est égal à 100 et que « <code translate="no">refine_k</code> » est égal à 2, le système reclasse les 200 meilleurs candidats et renvoie les 100 meilleurs, améliorant ainsi la précision globale.</p></li>
 </ul></li>
 </ol>
 <p>Pour obtenir la liste complète des paramètres et des valeurs valides, consultez la section « <a href="/docs/fr/hnsw-sq.md#Index-params">Paramètres d’index</a> ».</p>
@@ -200,7 +200,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois l’index créé et les entités insérées, vous pouvez effectuer des recherches de similarité sur l’index.</p>
+    </button></h2><p>Une fois l’index créé et les entités insérées, vous pouvez effectuer des recherches par similarité sur l’index.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -265,7 +265,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">M</code></p></td>
      <td><p>Nombre maximal de connexions (ou arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes.</p><p>Ce paramètre a une incidence directe sur la construction de l'index et sur la recherche.</p></td>
      <td><p><strong>Type</strong>: entier</p><p><strong>Plage</strong>: [2, 2048]</p><p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu’à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Un <code translate="no">M</code> plus élevé conduit généralement à <strong>une meilleure précision</strong>, mais <strong>augmente la consommation de mémoire</strong> et <strong>ralentit à la fois la construction de l’index et la recherche</strong>.</p><p>Envisagez d’augmenter la valeur de « <code translate="no">M</code> » pour les ensembles de données à haute dimensionnalité ou lorsqu’un rappel élevé est crucial.</p><p>Envisagez de réduire l’ <code translate="no">M</code> lorsque l’utilisation de la mémoire et la vitesse de recherche sont des priorités.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [5, 100].</p></td>
+     <td><p>Un <code translate="no">M</code> plus élevé conduit généralement à <strong>une meilleure précision</strong>, mais <strong>augmente la consommation de mémoire</strong> et <strong>ralentit à la fois la construction de l’index et la recherche</strong>.</p><p>Envisagez d’augmenter la valeur de « <code translate="no">M</code> » pour les ensembles de données de grande dimension ou lorsqu’un rappel élevé est crucial.</p><p>Envisagez de réduire l’ <code translate="no">M</code> lorsque l’utilisation de la mémoire et la vitesse de recherche sont des priorités.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [5, 100].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -277,7 +277,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">sq_type</code></p></td>
-     <td><p>Spécifie la méthode de quantification scalaire utilisée pour compresser les vecteurs. Chaque option offre un compromis différent entre compression et précision :</p><ul><li><p><code translate="no">SQ4U</code>: Code les vecteurs à l’aide d’une quantification uniforme sur 4 bits. Ce mode offre la vitesse et la compression les plus élevées.</p></li><li><p><code translate="no">SQ6</code>: Encode les vecteurs à l’aide d’entiers de 6 bits.</p></li><li><p><code translate="no">SQ8</code>: Encode les vecteurs à l'aide d'entiers de 8 bits.</p></li><li><p><code translate="no">BF16</code>: Utilise le format Bfloat16.</p></li><li><p><code translate="no">FP16</code>: Utilise le format standard à virgule flottante 16 bits.</p></li></ul></td>
+     <td><p>Spécifie la méthode de quantification scalaire utilisée pour compresser les vecteurs. Chaque option offre un compromis différent entre compression et précision :</p><ul><li><p><code translate="no">SQ4U</code>: Code les vecteurs à l’aide d’une quantification uniforme sur 4 bits. Ce mode offre la vitesse et le taux de compression les plus élevés.</p></li><li><p><code translate="no">SQ6</code>: Encode les vecteurs à l’aide d’entiers de 6 bits.</p></li><li><p><code translate="no">SQ8</code>: Encode les vecteurs à l'aide d'entiers de 8 bits.</p></li><li><p><code translate="no">BF16</code>: Utilise le format Bfloat16.</p></li><li><p><code translate="no">FP16</code>: Utilise le format standard à virgule flottante 16 bits.</p></li></ul></td>
      <td><p><strong>Type</strong>: Chaîne de caractères</p><p><strong>Plage</strong>: [ <code translate="no">SQ4U</code>, <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code> ]</p><p><strong>Valeur par défaut</strong>: <code translate="no">SQ8</code></p></td>
      <td><p>Le choix de <code translate="no">sq_type</code> dépend des besoins spécifiques de l’application. <code translate="no">SQ4U</code> est choisi pour une vitesse et une efficacité mémoire maximales. <code translate="no">SQ6</code> ou <code translate="no">SQ8</code> peuvent convenir pour des performances équilibrées. En revanche, si la précision est primordiale, <code translate="no">BF16</code> ou <code translate="no">FP16</code> pourraient être préférés.</p></td>
    </tr>
@@ -286,7 +286,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">refine</code></p></td>
      <td><p>Un indicateur booléen qui détermine si une étape d’affinement est appliquée pendant la recherche. L’affinement consiste à reclasser les résultats initiaux en calculant les distances exactes entre le vecteur de requête et les candidats.</p></td>
      <td><p><strong>Type</strong>: Booléen</p><p><strong>Plage</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p><p><strong>Valeur par défaut</strong>: <code translate="no">false</code></p></td>
-     <td><p>Définissez-le sur <code translate="no">true</code> si une grande précision est essentielle et que vous pouvez tolérer des temps de recherche légèrement plus longs. Utilisez <code translate="no">false</code> si la vitesse est une priorité et qu’un léger compromis en termes de précision est acceptable.</p></td>
+     <td><p>Définissez-le sur <code translate="no">true</code> si une grande précision est essentielle et que vous pouvez tolérer des temps de recherche légèrement plus longs. Utilisez <code translate="no">false</code> si la vitesse est une priorité et qu’un léger compromis en matière de précision est acceptable.</p></td>
    </tr>
    <tr>
      <td></td>
@@ -318,19 +318,19 @@ res = MilvusClient.search(
      <th><p>Paramètre</p></th>
      <th><p>Description</p></th>
      <th><p>Plage de valeurs</p></th>
-     <th><p>Suggestion d'optimisation</p></th>
+     <th><p>Suggestion de réglage</p></th>
    </tr>
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">ef</code></p></td>
      <td><p>Contrôle l'étendue de la recherche lors de la récupération du plus proche voisin. Il détermine le nombre de nœuds visités et évalués en tant que plus proches voisins potentiels. </p><p>Ce paramètre n'affecte que le processus de recherche et s'applique exclusivement à la couche inférieure du graphe.</p></td>
-     <td><p><strong>Type</strong>: Entier</p><p><strong>Plage</strong>: [1, <em>int_max</em>]</p><p><strong>Valeur par défaut</strong>: <code translate="no">max(limit, 16)</code> pour une recherche kNN classique ; <code translate="no">512</code> pour une recherche par plage.</p><p>Pour la recherche kNN classique, la valeur explicite de ` <code translate="no">ef</code> ` doit être supérieure ou égale à ` <code translate="no">limit</code> ` (le nombre de voisins les plus proches à renvoyer).</p></td>
-     <td><p>Une valeur <code translate="no">ef</code> plus élevée conduit généralement à <strong>une meilleure précision de recherche</strong>, car un plus grand nombre de voisins potentiels est pris en compte. Cependant, cela <strong>augmente</strong> également <strong>le temps de recherche</strong>.</p><p>Envisagez d’augmenter la valeur de ` <code translate="no">ef</code> ` lorsque l’obtention d’un rappel élevé est essentielle et que la vitesse de recherche est moins importante.</p><p>Envisagez de réduire l’ <code translate="no">ef</code> pour privilégier des recherches plus rapides, en particulier dans les cas où une légère perte de précision est acceptable.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [K, 10K].</p></td>
+     <td><p><strong>Type</strong>: Entier</p><p><strong>Plage</strong>: [1, <em>int_max</em>]</p><p><strong>Valeur par défaut</strong>: <code translate="no">max(limit, 16)</code> pour une recherche kNN classique ; <code translate="no">512</code> pour une recherche par plage.</p><p>Pour la recherche kNN classique, la valeur explicite de « <code translate="no">ef</code> » doit être supérieure ou égale à « <code translate="no">limit</code> » (le nombre de voisins les plus proches à renvoyer).</p></td>
+     <td><p>Une valeur <code translate="no">ef</code> plus élevée conduit généralement à <strong>une meilleure précision de recherche</strong>, car un plus grand nombre de voisins potentiels est pris en compte. Cependant, cela <strong>augmente</strong> également <strong>le temps de recherche</strong>.</p><p>Envisagez d’augmenter la valeur de « <code translate="no">ef</code> » lorsque l’obtention d’un rappel élevé est essentielle et que la vitesse de recherche est moins importante.</p><p>Envisagez de réduire l’ <code translate="no">ef</code> pour privilégier des recherches plus rapides, en particulier dans les cas où une légère perte de précision est acceptable.</p><p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette plage : [K, 10K].</p></td>
    </tr>
    <tr>
      <td><p>SQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>Facteur d’amplification qui détermine le nombre de candidats supplémentaires examinés lors de la phase d’affinement, par rapport aux K premiers résultats demandés.</p></td>
+     <td><p>Facteur d’amplification qui détermine le nombre de candidats supplémentaires examinés lors de la phase d’affinage, par rapport aux K premiers résultats demandés.</p></td>
      <td><p><strong>Type</strong>: nombre à virgule flottante</p><p><strong>Plage</strong>: [1, <em>float_max</em>)</p><p><strong>Valeur par défaut</strong>: 1</p></td>
      <td><p>Des valeurs plus élevées de « <code translate="no">refine_k</code> » peuvent améliorer le rappel et la précision, mais augmentent également la durée de la recherche et la consommation de ressources. Une valeur de 1 signifie que le processus d'affinage ne prend en compte que les K premiers résultats initiaux.</p></td>
    </tr>

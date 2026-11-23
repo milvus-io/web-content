@@ -2,13 +2,9 @@
 id: boolean.md
 title: Penjelasan tentang Penyaringan
 summary: >-
-  Milvus menyediakan kemampuan penyaringan yang canggih yang memungkinkan Anda
-  melakukan kueri data secara tepat. Ekspresi penyaringan memungkinkan Anda
-  menargetkan bidang skalar tertentu dan menyempurnakan hasil pencarian dengan
-  berbagai kondisi. Panduan ini menjelaskan cara menggunakan ekspresi
-  penyaringan di Milvus, dengan contoh-contoh yang berfokus pada operasi kueri.
-  Anda juga dapat menerapkan filter-filter ini dalam permintaan pencarian dan
-  penghapusan.
+  Ekspresi filter memilih entitas berdasarkan kondisi pada kolom yang didukung.
+  Panduan ini memperkenalkan operator filter Milvus serta menyertakan tautan ke
+  jenis yang didukung, persyaratan versi, dan contoh penggunaannya.
 ---
 <h1 id="Filtering-Explained" class="common-anchor-header">Penjelasan tentang Penyaringan<button data-href="#Filtering-Explained" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus menyediakan kemampuan penyaringan yang kuat yang memungkinkan Anda melakukan kueri data secara tepat. Ekspresi filter memungkinkan Anda menargetkan bidang skalar tertentu dan menyempurnakan hasil pencarian dengan berbagai kondisi. Panduan ini menjelaskan cara menggunakan ekspresi filter di Milvus, dengan contoh-contoh yang berfokus pada operasi kueri. Anda juga dapat menerapkan filter ini dalam permintaan pencarian dan penghapusan.</p>
+    </button></h1><p>Ekspresi filter memilih entitas menggunakan kondisi pada bidang yang didukung. Panduan ini memperkenalkan ekspresi filter, dengan contoh-contoh yang berfokus pada operasi kueri. Untuk mengetahui jenis yang didukung, persyaratan versi, dan penggunaan setiap operator, ikuti tautan di bawah ini.</p>
 <h2 id="Basic-operators" class="common-anchor-header">Operator dasar<button data-href="#Basic-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,7 +44,7 @@ summary: >-
 <li><p><strong>Operator Aritmatika</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, dan <code translate="no">**</code> digunakan untuk perhitungan yang melibatkan bidang numerik.</p></li>
 <li><p><strong>Operator Bitwise</strong>: Pada Milvus 3.0.0 dan versi selanjutnya, <code translate="no">&amp;</code>, <code translate="no">|</code>, dan <code translate="no">^</code> menyaring bidang bilangan bulat yang mengkodekan beberapa bendera (flag), seperti izin atau bit status. Untuk detailnya, lihat <a href="/docs/id/basic-operators.md#Bitwise-operators">Operator Dasar</a>.</p></li>
 <li><p><strong>Operator Logika</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, dan <code translate="no">NOT</code> menggabungkan beberapa kondisi menjadi ekspresi kompleks.</p></li>
-<li><p><strong>Operator IS NULL dan IS NOT NULL</strong>: Operator <code translate="no">IS NULL</code> dan <code translate="no">IS NOT NULL</code> digunakan untuk menyaring bidang berdasarkan apakah bidang tersebut berisi nilai null (tidak ada data). Untuk detailnya, lihat <a href="/docs/id/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">Operator Dasar</a>.</p></li>
+<li><p><strong>Operator IS NULL dan IS NOT NULL</strong>: Memilih entitas berdasarkan apakah suatu bidang bernilai NULL atau bukan NULL. Untuk dukungan bidang skalar dan vektor, persyaratan versi, dan contoh, lihat <a href="/docs/id/basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators">Operator Dasar</a>.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color" class="common-anchor-header">Contoh: Penyaringan berdasarkan Warna<button data-href="#Example-Filtering-by-Color" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,7 +79,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Untuk menemukan entitas yang bidang integer- <code translate="no">permissions</code> -nya memiliki bit " <code translate="no">SHARE</code> " yang disetel, gunakan operator bitwise AND (<code translate="no">&amp;</code>):</p>
+    </button></h3><p>Untuk menemukan entitas yang bidang integer- <code translate="no">permissions</code> -nya memiliki bit " <code translate="no">SHARE</code> " yang diaktifkan, gunakan operator bitwise AND (<code translate="no">&amp;</code>):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;(permissions &amp; 4) == 4&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-by-Regex-Pattern" class="common-anchor-header">Contoh: Penyaringan berdasarkan Pola Regex<button data-href="#Example-Filtering-by-Regex-Pattern" class="anchor-icon" translate="no">
@@ -157,7 +153,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Saat menyaring menggunakan karakter CJK, pemrosesan bisa jadi lebih rumit karena kumpulan karakternya yang lebih besar dan perbedaan pengkodean. Hal ini dapat mengakibatkan kinerja yang lebih lambat, terutama dengan operator ` <code translate="no">IN</code> `.</p>
+    </button></h2><p>Saat menyaring menggunakan karakter CJK, pemrosesan bisa jadi lebih rumit karena kumpulan karakternya yang lebih besar dan perbedaan pengkodean. Hal ini dapat mengakibatkan kinerja yang lebih lambat, terutama dengan operator <code translate="no">IN</code>.</p>
 <p>Milvus memperkenalkan templat ekspresi filter untuk mengoptimalkan kinerja saat bekerja dengan karakter CJK. Dengan memisahkan nilai dinamis dari ekspresi filter, mesin kueri menangani penyisipan parameter secara lebih efisien.</p>
 <h3 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -214,7 +210,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
         ></path>
       </svg>
     </button></h3><p>Milvus menawarkan operator lanjutan untuk melakukan kueri pada kolom JSON, yang memungkinkan penyaringan yang tepat di dalam struktur JSON yang kompleks:</p>
-<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Memeriksa apakah ekspresi JSON ada di dalam kolom.</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Memeriksa apakah ekspresi JSON terdapat dalam kolom tersebut.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -222,7 +218,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;, &quot;discount&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: Memfilter entitas yang setidaknya memiliki satu elemen dalam ekspresi JSON tersebut.</p>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: Memfilter entitas di mana setidaknya satu elemen terdapat dalam ekspresi JSON.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># JSON data: {&quot;tags&quot;: [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;]}</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -246,7 +242,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <p><code translate="no">ARRAY_CONTAINS</code>: Menyaring entitas yang mengandung elemen tertentu.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">ARRAY_CONTAINS_ALL</code>: Menyaring entitas yang memiliki semua elemen dalam daftar tersebut.</p>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>: Menyaring entitas di mana semua elemen dalam daftar tersebut terdapat di dalamnya.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">ARRAY_CONTAINS_ANY</code>: Menyaring entitas yang mengandung salah satu elemen dari daftar tersebut.</p>
@@ -277,9 +273,9 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
 <h4 id="TEXTMATCH-operator" class="common-anchor-header"><code translate="no">TEXT_MATCH</code> operator</h4><p>Operator " <code translate="no">TEXT_MATCH</code> " memungkinkan pengambilan dokumen yang tepat berdasarkan istilah kueri tertentu. Operator ini sangat berguna untuk pencarian yang difilter yang menggabungkan filter skalar dengan pencarian kesamaan vektor. Berbeda dengan pencarian semantik, "Text Match" berfokus pada kemunculan istilah yang persis sama.</p>
 <p>Milvus menggunakan Tantivy untuk mendukung pengindeksan terbalik dan pencarian teks berbasis istilah. Prosesnya meliputi:</p>
 <ol>
-<li><p><strong>Analyzer</strong>: Melakukan tokenisasi dan memproses teks masukan.</p></li>
+<li><p><strong>Analyzer</strong>: Menokenisasi dan memproses teks masukan.</p></li>
 <li><p><strong>Pengindeksan</strong>: Membuat indeks terbalik yang memetakan token unik ke dokumen.</p></li>
 </ol>
 <p>Untuk detail lebih lanjut, lihat <a href="/docs/id/keyword-match.md">Text Match</a>.</p>
-<h4 id="PHRASEMATCH-operator--Milvus-26x" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>Operator <strong>PHRASE_MATCH</strong> memungkinkan pencarian dokumen yang tepat berdasarkan kecocokan frasa yang persis, dengan mempertimbangkan urutan dan kedekatan istilah kueri.</p>
+<h4 id="PHRASEMATCH-operator" class="common-anchor-header"><code translate="no">PHRASE_MATCH</code> operator<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.x</span></h4><p>Operator <strong>PHRASE_MATCH</strong> memungkinkan pencarian dokumen yang tepat berdasarkan kecocokan frasa yang persis, dengan mempertimbangkan urutan dan kedekatan istilah kueri.</p>
 <p>Untuk detail lebih lanjut, lihat <a href="/docs/id/phrase-match.md">Phrase Match</a>.</p>

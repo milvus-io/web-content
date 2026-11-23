@@ -3,7 +3,7 @@ id: schema_design.md
 title: 'Задание: Проектирование схемы Milvus'
 summary: >-
   Правила для помощников по программированию на базе ИИ, предназначенные для
-  разработки корректных схем коллекций в Milvus.
+  разработки корректных схем коллекций Milvus.
 ---
 <h1 id="Schema-Design" class="common-anchor-header">Проектирование схем<button data-href="#Schema-Design" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Правила и рекомендации по проектированию корректных схем коллекций Milvus, включая типы полей, первичные ключи, настройку BM25 и ограничения неизменяемости схемы. Скопируйте полный текст подсказки ниже в свой инструмент искусственного интеллекта, чтобы эти правила применялись автоматически. Обзор всех подсказок см. в разделе <a href="/docs/ru/milvus_for_agents.md">«Подсказки для ИИ</a>».</p>
+    </button></h1><p>Правила и рекомендации по проектированию корректных схем коллекций Milvus, включая типы полей, первичные ключи, настройку BM25 и ограничения на неизменяемость схемы. Скопируйте полный текст подсказки ниже в свой инструмент искусственного интеллекта, чтобы эти правила применялись автоматически. Обзор всех подсказок см. в разделе <a href="/docs/ru/milvus_for_agents.md">«Подсказки для ИИ</a>».</p>
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Как использовать эту команду<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +149,7 @@ bm25_function = Function(
 schema.add_function(bm25_function)
 ```
 
-6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only); vector fields that allow NULL do not support `IS NULL` / `IS NOT NULL` filters.
+6. **Nullable fields:** `nullable=True` is supported on scalar fields (including JSON and Array), on vector fields, and on the parent Array of Structs (StructArray) field. Exceptions: primary keys can never be nullable, and individual Struct subfields cannot be nullable independently — set `nullable=True` on the parent Array of Structs field instead, which makes the whole field value NULL. Note: vector field and Array of Structs field nullable require Milvus v3.0.x or later (v2.6.x supports scalar fields only). Before using `IS NULL` / `IS NOT NULL` on vector fields, check the supported types, version requirements, and query/search behavior in [IS NULL and IS NOT NULL operators](basic-operators.md#IS-NULL-and-IS-NOT-NULL-operators).
 
 7. ALWAYS use `DataType.FLOAT_VECTOR`, `DataType.INT64`, etc. from the `DataType` enum. NEVER pass field types as strings.
 
