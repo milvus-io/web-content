@@ -36,43 +36,7 @@ A **ListRefreshExternalCollectionJobsResp** object that wraps `List<RefreshExter
 
 - `getJobs()` (*List\<RefreshExternalCollectionJobInfo\>*) -
 
-    The refresh jobs that match the request filter. Each **RefreshExternalCollectionJobInfo** has the same shape as the entry returned by `getRefreshExternalCollectionProgress()`. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md):
-
-    - `getJobId()` (*long*) -
-
-        The job identifier.
-
-    - `getCollectionName()` (*String*) -
-
-        The target collection name.
-
-    - `getState()` (*String*) -
-
-        The current job state. Possible values are `RefreshPending`, `RefreshInProgress`, `RefreshCompleted`, and `RefreshFailed`. A refresh job transitions from `RefreshInProgress` to `RefreshCompleted` or `RefreshFailed`.
-
-    - `getProgress()` (*int*) -
-
-        The completion percentage (0-100).
-
-    - `getReason()` (*String*) -
-
-        The failure reason if `state` is `RefreshFailed`; empty otherwise.
-
-    - `getExternalSource()` (*String*) -
-
-        The external source used by the job.
-
-    - `getExternalSpec()` (*String*) -
-
-        The external source specification used by the job.
-
-    - `getStartTime()` (*long*) -
-
-        The job start timestamp (epoch milliseconds).
-
-    - `getEndTime()` (*long*) -
-
-        The job end timestamp (epoch milliseconds), or 0 if still running.
+    The refresh jobs that match the request filter. Each **RefreshExternalCollectionJobInfo** has the same shape as the entry returned by `getRefreshExternalCollectionProgress()`. See [RefreshExternalCollectionJobInfo](RefreshExternalCollectionJobInfo.md).
 
 **EXCEPTIONS:**
 
