@@ -33,7 +33,7 @@ public MilvusException(MilvusErrorCode errorCode, string reason, Grpc.Core.Statu
 
 - `errorCode` (*MilvusErrorCode*) -
 
-    The error code.
+    The error code. See [MilvusErrorCode](MilvusErrorCode.md).
 
 - `reason` (*string*) -
 
@@ -47,7 +47,7 @@ public MilvusException(MilvusErrorCode errorCode, string reason, Grpc.Core.Statu
 
 - `ErrorCode` (*MilvusErrorCode*) -
 
-    The error code.
+    The error code. See [MilvusErrorCode](MilvusErrorCode.md).
 
 - `GrpcStatusCode` (*Grpc.Core.StatusCode?*) -
 
