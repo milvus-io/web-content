@@ -30,7 +30,7 @@ await milvusClient.dummy({
 
 - **client_request_id** (*string*) -
 
-    A trace ID for request tracking. Optional.
+    An optional, caller-supplied ID for request tracking and log or trace correlation. The SDK sends it as the `client-request-id` gRPC metadata header and never generates one. Use a unique value per request, such as a UUID. A value in OpenTelemetry trace-ID form (32 lowercase hexadecimal characters) is also used by client telemetry as a trace ID.
 
 **RETURNS:**
 

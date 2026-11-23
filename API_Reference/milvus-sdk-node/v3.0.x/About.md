@@ -80,6 +80,10 @@ await client.dropCollection({
 client.closeConnection();
 ```
 
+## Client Telemetry
+
+Since v3.0.9, the SDK collects per-operation client telemetry and reports it to the server through periodic heartbeats. For configuration options (including stable client IDs) and usage details, see the [client telemetry guide](https://milvus-io.github.io/milvus-sdk-node/advanced/client-telemetry/) in the SDK documentation and the `getClientTelemetry()`, `pushClientCommand()`, and `deleteClientCommand()` pages under [Client](Client/getClientTelemetry.md).
+
 ## Compatibility
 
 The following table shows the recommended @zilliz/milvus2-sdk-node versions for each Milvus version. Milvus proto is backward compatible, so a later SDK version can work with an earlier Milvus server.
