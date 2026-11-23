@@ -425,6 +425,14 @@ local directory via this table before editing. Current latest version line is
   runnable examples and `## Request Syntax` blocks, and `typescript` for
   type-declaration blocks (enum/interface/type declarations), never an
   `interface`/`enum` inside a `javascript` fence.
+- **Blacklist**: `dummy()` (runs the legacy JSON `Dummy` RPC) is a debug-only
+  diagnostic backdoor and is **blacklisted** — it must NEVER be documented,
+  backfilled, or surfaced in reconciliation; if a page documents it, remove it
+  (confirm with the user first). It is intentionally not part of the documented
+  API surface. Other proxy/telemetry administration RPCs (`allocTimestamp`,
+  `getComponentStates`, `registerLink`, `getClientTelemetry`,
+  `pushClientCommand`, `deleteClientCommand`) ARE real, documented features;
+  keep them.
 - **Tags**: plain `vX.Y.Z` (line `v3.0.x`; resolve the latest tag dynamically
   rather than hard-coding a patch number here).
 - **Version pins**: NONE — `About.md` uses `v3.0.0+` → `**latest**` rows and
