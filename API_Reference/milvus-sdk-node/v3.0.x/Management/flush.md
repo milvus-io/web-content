@@ -49,6 +49,7 @@ This method returns a promise that resolves to a **FlushResult** object.
 ```javascript
 {
     coll_segIDs: Record<string, { data: number[] }>,
+    coll_flush_ts?: Record<string, string>,
     status:  ResStatus
 }
 ```
@@ -57,6 +58,9 @@ This method returns a promise that resolves to a **FlushResult** object.
 
 - **coll_segIDs** (*Record<string, { data: number[] }>*) -
 A mapping from collection name to the segment IDs that were sealed by this flush. Use the returned IDs with `getFlushState()` to confirm persistence.
+
+- **coll_flush_ts** (*Record<string, string>*) -
+Optional. A mapping from collection name to the flush timestamp of the sealed segments, returned as decimal strings.
 
 - **ResStatus**
 A **ResStatus** object.

@@ -17,7 +17,7 @@ Milvus automatically flushes data into persistent storage at intervals. You are 
 ```javascript
 await milvusClient.getFlushState({
     segmentIDs?: number[],
-    flush_ts?: number,
+    flush_ts?: number | string,
     db_name?: string,
     collection_name?: string,
     timeout?: number
@@ -30,9 +30,9 @@ await milvusClient.getFlushState({
 
     A list of the target segment IDs.
 
-- **flush_ts** (*number*) -
+- **flush_ts** (*number* | *string*) -
 
-    The flush timestamp to check against.
+    The flush timestamp to check against. Pass int64 values as decimal strings for full precision.
 
 - **db_name** (*string*) -
 
