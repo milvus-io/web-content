@@ -1773,6 +1773,9 @@
             "x-deprecated-since": null
           },
           {
+            "$ref": "#/components/parameters/FloatVectorEncodingHeader"
+          },
+          {
             "name": "clusterId",
             "in": "query",
             "description": "The ID of the on-demand cluster that this operation will be performed on. This parameter applies only when you use an on-demand compute endpoint.",
@@ -2447,6 +2450,9 @@
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
+          },
+          {
+            "$ref": "#/components/parameters/FloatVectorEncodingHeader"
           },
           {
             "name": "clusterId",
@@ -3917,6 +3923,9 @@
             "x-deprecated-since": null
           },
           {
+            "$ref": "#/components/parameters/FloatVectorEncodingHeader"
+          },
+          {
             "name": "clusterId",
             "in": "query",
             "description": "The ID of the on-demand cluster that this operation will be performed on. This parameter applies only when you use an on-demand compute endpoint.",
@@ -5353,7 +5362,7 @@
         },
         "security": [],
         "x-added-at": "2.6.x",
-        "x-last-modified": "2.6.x",
+        "x-last-modified": "3.0.x",
         "x-deprecated-since": null,
         "x-admonition": [
           {
@@ -5422,6 +5431,9 @@
             "x-added-at": "2.6.x",
             "x-last-modified": "2.6.x",
             "x-deprecated-since": null
+          },
+          {
+            "$ref": "#/components/parameters/FloatVectorEncodingHeader"
           },
           {
             "name": "clusterId",
@@ -6008,7 +6020,7 @@
         },
         "security": [],
         "x-added-at": "2.6.x",
-        "x-last-modified": "2.6.x",
+        "x-last-modified": "3.0.x",
         "x-deprecated-since": null
       }
     }
@@ -6043,6 +6055,38 @@
         },
         "x-added-at": "2.6.x",
         "x-last-modified": "2.6.x",
+        "x-deprecated-since": null
+      },
+      "FloatVectorEncodingHeader": {
+        "name": "Accept-Type-Float-Vector-Encoding",
+        "in": "header",
+        "description": "Controls the response encoding of returned `FLOAT_VECTOR` fields in non-aggregation results, including those nested in struct arrays. Use `array` (default) for JSON arrays of numbers or `base64` for Base64 strings. Other vector types, scalar fields, and dynamic-field arrays keep their existing representation. This header does not change the encoding of request data.\n\nThe header does not apply to `searchAggregation` results. In aggregation `topHits`, `FLOAT_VECTOR` fields retain their existing string representation, such as `\"[0.1 0.2]\"`, even when the header is `base64`.\n\nWith `base64`, each string contains the standard padded Base64 encoding of the vector coordinates as little-endian IEEE 754 float32 bytes, in their original order. Decode the string to bytes, then interpret each group of four bytes as a little-endian float32 value. Base64 mode rejects NaN and positive or negative infinity in returned coordinates.\n\nNull vector values remain JSON `null` in both modes. If a non-null, zero-length vector reaches serialization, it encodes as `[]` in `array` mode and `\"\"` in `base64` mode. Milvus still requires positive vector dimensions. Fields not returned by the query remain absent from the response entity.\n\nValues are case-sensitive. An omitted or empty value uses `array`; leading and trailing spaces or tabs are ignored. Supply the header only once. Unsupported values, comma-separated value lists, or repeated header fields (even with identical values) return HTTP 200 with response body `code: 1100` (invalid parameter).",
+        "required": false,
+        "example": "base64",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "array",
+            "base64",
+            ""
+          ],
+          "default": "array",
+          "x-added-at": "3.0.x",
+          "x-last-modified": "3.0.x",
+          "x-deprecated-since": null
+        },
+        "x-admonition": [
+          {
+            "type": "info",
+            "title": "Decode a Base64 float vector",
+            "content": "<p>Include the <code>FLOAT_VECTOR</code> field in <code>outputFields</code> and add this header to your request:</p><pre><code>Accept-Type-Float-Vector-Encoding: base64</code></pre><p>For a field named <code>vector</code> containing <code>[1.0, -2.0]</code>, the response entity contains:</p><pre><code>{\"vector\": \"AACAPwAAAMA=\"}</code></pre><p>Decode the value in Python:</p><pre><code class=\"language-python\">import base64\nimport struct\n\nraw = base64.b64decode(\"AACAPwAAAMA=\")\nvector = list(struct.unpack(f\"&lt;{len(raw) // 4}f\", raw))\n# [1.0, -2.0]</code></pre>"
+          }
+        ],
+        "x-include-target": [
+          "milvus"
+        ],
+        "x-added-at": "3.0.x",
+        "x-last-modified": "3.0.x",
         "x-deprecated-since": null
       }
     },
