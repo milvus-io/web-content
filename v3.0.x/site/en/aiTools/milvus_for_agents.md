@@ -97,6 +97,31 @@ Curated prompts that help AI coding assistants write correct Milvus code. Each p
 
 </div>
 
+<div class="card-wrapper">
+
+<div class="start_card_container">
+  <a href="nodejs_sdk.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Node.js SDK</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">MilvusClient method calls, field definitions, response status checks, and search result shapes.</p>
+  </a>
+</div>
+
+<div class="start_card_container">
+  <a href="go_sdk.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Go SDK</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Go SDK v3 module paths, connection timeouts, collection loading, and search result sets.</p>
+  </a>
+</div>
+
+<div class="start_card_container">
+  <a href="restful_api.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RESTful API v2</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">v2 endpoints, camelCase request fields, response code checks, and load state polling.</p>
+  </a>
+</div>
+
+</div>
+
 ### Use in different environments
 
 | Environment    | Where to put prompt                            | Instructions                                                                                                            |
